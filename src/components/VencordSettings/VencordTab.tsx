@@ -109,13 +109,13 @@ function VencordSettings() {
         ];
 
     return (
-        <SettingsTab title="Vencord Settings">
+        <SettingsTab title="Plexcord Settings">
             {isDonor(user?.id)
                 ? (
                     <SpecialCard
                         title="Donations"
                         subtitle="Thank you for donating!"
-                        description="All Vencord users can see your badge! You can change it at any time by messaging @vending.machine."
+                        description="All Plexcord users can see your badge! You can change it at any time by messaging @mutanplex."
                         cardImage={VENNIE_DONATOR_IMAGE}
                         backgroundImage={DONOR_BACKGROUND_IMAGE}
                         backgroundColor="#ED87A9"

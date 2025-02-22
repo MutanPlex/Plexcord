@@ -90,7 +90,7 @@ export interface Command {
     type?: ApplicationCommandType;
     inputType?: ApplicationCommandInputType;
     plugin?: string;
-    isVencordCommand?: boolean;
+    isPlexcordCommand?: boolean;
 
     name: string;
     untranslatedName?: string;
