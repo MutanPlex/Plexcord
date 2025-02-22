@@ -31,6 +31,12 @@ export interface Dev {
     badge?: boolean;
 }
 
+export interface PcDev {
+    name: string;
+    id: bigint;
+    badge?: boolean;
+}
+
 /**
  * If you made a plugin or substantial contribution, add yourself here.
  * This object is used for the plugin author list, as well as to add a contributor badge to your profile.
@@ -598,3 +604,22 @@ export const DevsById = /* #__PURE__*/ (() =>
             .map(([_, v]) => [v.id, v] as const)
     ))
 )() as Record<string, Dev>;
+
+export const PcDevs = /* #__PURE__*/ Object.freeze({
+    MutanPlex: {
+        name: "MutanPlex",
+        id: 506074187014602752n
+    },
+    Ven: {
+        name: "Vee",
+        id: 343383572805058560n
+    },
+} satisfies Record<string, PcDev>);
+
+export const PcDevsById = /* #__PURE__*/ (() =>
+    Object.freeze(Object.fromEntries(
+        Object.entries(PcDevs)
+            .filter(d => d[1].id !== 0n)
+            .map(([_, v]) => [v.id, v] as const)
+    ))
+)() as Record<string, PcDev>;

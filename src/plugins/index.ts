@@ -132,6 +132,7 @@ for (const p of pluginsValues) if (isPluginEnabled(p.name)) {
     if (p.renderMessageDecoration) neededApiPlugins.add("MessageDecorationsAPI");
     if (p.renderMessagePopoverButton) neededApiPlugins.add("MessagePopoverAPI");
     if (p.userProfileBadge) neededApiPlugins.add("BadgeAPI");
+    if (p.userProfileContributorBadge) neededApiPlugins.add("BadgeAPI");
 
     for (const key of pluginKeysToBind) {
         p[key] &&= p[key].bind(p) as any;
@@ -258,7 +259,7 @@ export function subscribeAllPluginsFluxEvents(fluxDispatcher: typeof FluxDispatc
 
 export const startPlugin = traceFunction("startPlugin", function startPlugin(p: Plugin) {
     const {
-        name, commands, contextMenus, managedStyle, userProfileBadge,
+        name, commands, contextMenus, managedStyle, userProfileBadge, userProfileContributorBadge,
         onBeforeMessageEdit, onBeforeMessageSend, onMessageClick,
         renderChatBarButton, renderMemberListDecorator, renderMessageAccessory, renderMessageDecoration, renderMessagePopoverButton
     } = p;
@@ -305,6 +306,7 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
     if (managedStyle) enableStyle(managedStyle);
 
     if (userProfileBadge) addProfileBadge(userProfileBadge);
+    if (userProfileContributorBadge) addProfileBadge(userProfileContributorBadge);
 
     if (onBeforeMessageEdit) addMessagePreEditListener(onBeforeMessageEdit);
     if (onBeforeMessageSend) addMessagePreSendListener(onBeforeMessageSend);
@@ -321,7 +323,7 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
 
 export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plugin) {
     const {
-        name, commands, contextMenus, managedStyle, userProfileBadge,
+        name, commands, contextMenus, managedStyle, userProfileBadge, userProfileContributorBadge,
         onBeforeMessageEdit, onBeforeMessageSend, onMessageClick,
         renderChatBarButton, renderMemberListDecorator, renderMessageAccessory, renderMessageDecoration, renderMessagePopoverButton
     } = p;
@@ -366,6 +368,7 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
     if (managedStyle) disableStyle(managedStyle);
 
     if (userProfileBadge) removeProfileBadge(userProfileBadge);
+    if (userProfileContributorBadge) removeProfileBadge(userProfileContributorBadge);
 
     if (onBeforeMessageEdit) removeMessagePreEditListener(onBeforeMessageEdit);
     if (onBeforeMessageSend) removeMessagePreSendListener(onBeforeMessageSend);

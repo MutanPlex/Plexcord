@@ -18,7 +18,7 @@
 
 import { Clipboard, Toasts } from "@webpack/common";
 
-import { DevsById } from "./constants";
+import { DevsById, PcDevsById } from "./constants";
 
 /**
  * Calls .join(" ") on the arguments
@@ -95,6 +95,7 @@ export function identity<T>(value: T): T {
 export const isMobile = navigator.userAgent.includes("Mobi");
 
 export const isPluginDev = (id: string) => Object.hasOwn(DevsById, id);
+export const isPcPluginDev = (id: string) => Object.hasOwn(PcDevsById, id);
 
 export function pluralise(amount: number, singular: string, plural = singular + "s") {
     return amount === 1 ? `${amount} ${singular}` : `${amount} ${plural}`;

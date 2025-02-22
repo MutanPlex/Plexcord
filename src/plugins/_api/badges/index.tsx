@@ -27,13 +27,14 @@ import { openContributorModal } from "@components/PluginSettings/ContributorModa
 import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
-import { isPluginDev } from "@utils/misc";
+import { isPcPluginDev, isPluginDev } from "@utils/misc";
 import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalRoot, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
 import { Forms, Toasts, UserStore } from "@webpack/common";
 import { User } from "discord-types/general";
 
 const CONTRIBUTOR_BADGE = "https://vencord.dev/assets/favicon.png";
+const PLEXCORD_BADGE = "https://plexcord.mutanplex.com/assets/favicon.png";
 
 const ContributorBadge: ProfileBadge = {
     description: "Vencord Contributor",
@@ -42,11 +43,20 @@ const ContributorBadge: ProfileBadge = {
     shouldShow: ({ userId }) => isPluginDev(userId),
     onClick: (_, { userId }) => openContributorModal(UserStore.getUser(userId))
 };
+const PlexcordBadge: ProfileBadge = {
+    description: "Plexcord Contributor",
+    image: PLEXCORD_BADGE,
+    position: BadgePosition.START,
+    shouldShow: ({ userId }) => isPcPluginDev(userId),
+    onClick: (_, { userId }) => openContributorModal(UserStore.getUser(userId))
+};
 
 let DonorBadges = {} as Record<string, Array<Record<"tooltip" | "badge", string>>>;
+let MutanBadges = {} as Record<string, Array<Record<"tooltip" | "badge", string>>>;
 
 async function loadBadges(noCache = false) {
     DonorBadges = {};
+    MutanBadges = {};
 
     const init = {} as RequestInit;
     if (noCache)
@@ -54,6 +64,13 @@ async function loadBadges(noCache = false) {
 
     DonorBadges = await fetch("https://badges.vencord.dev/badges.json", init)
         .then(r => r.json());
+    MutanBadges = await fetch("https://api.mutanplex.com/badges.json", init)
+        .then(r => r.json());
+
+    DonorBadges = {
+        ...DonorBadges,
+        ...MutanBadges,
+    };
 }
 
 export default definePlugin({
@@ -103,6 +120,7 @@ export default definePlugin({
     },
 
     userProfileBadge: ContributorBadge,
+    userProfileContributorBadge: PlexcordBadge,
 
     async start() {
         await loadBadges();
@@ -142,7 +160,7 @@ export default definePlugin({
                 const modalKey = openModal(props => (
                     <ErrorBoundary noop onError={() => {
                         closeModal(modalKey);
-                        VencordNative.native.openExternal("https://github.com/sponsors/Vendicated");
+                        VencordNative.native.openExternal("https://github.com/sponsors/MutanPlex");
                     }}>
                         <ModalRoot {...props}>
                             <ModalHeader>
@@ -156,7 +174,7 @@ export default definePlugin({
                                         }}
                                     >
                                         <Heart />
-                                        Vencord Donor
+                                        Plexcord Donor
                                     </Forms.FormTitle>
                                 </Flex>
                             </ModalHeader>
@@ -177,10 +195,10 @@ export default definePlugin({
                                 </Flex>
                                 <div style={{ padding: "1em" }}>
                                     <Forms.FormText>
-                                        This Badge is a special perk for Vencord Donors
+                                        This Badge is a special perk for Plexcord Donors
                                     </Forms.FormText>
                                     <Forms.FormText className={Margins.top20}>
-                                        Please consider supporting the development of Vencord by becoming a donor. It would mean a lot!!
+                                        Please consider supporting the development of Plexcord by becoming a donor. It would mean a lot!!
                                     </Forms.FormText>
                                 </div>
                             </ModalContent>
