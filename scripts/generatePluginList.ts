@@ -1,6 +1,7 @@
 /*
  * Vencord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
+ * Copyright (c) 2025 MutanPlex
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,16 +25,19 @@ import { BigIntLiteral, createSourceFile, Identifier, isArrayLiteralExpression, 
 
 import { getPluginTarget } from "./utils.mjs";
 
-interface Dev {
+interface BaseDev {
     name: string;
     id: string;
 }
+
+interface Dev extends BaseDev { }
+interface PcDev extends BaseDev { }
 
 interface PluginData {
     name: string;
     description: string;
     tags: string[];
-    authors: Dev[];
+    authors: BaseDev[];
     dependencies: string[];
     hasPatches: boolean;
     hasCommands: boolean;
@@ -44,6 +48,7 @@ interface PluginData {
 }
 
 const devs = {} as Record<string, Dev>;
+const pcDevs = {} as Record<string, PcDev>;
 
 function getName(node: NamedDeclaration) {
     return node.name && isIdentifier(node.name) ? node.name.text : undefined;
@@ -66,29 +71,49 @@ function parseDevs() {
         if (!isVariableStatement(child)) continue;
 
         const devsDeclaration = child.declarationList.declarations.find(d => hasName(d, "Devs"));
-        if (!devsDeclaration?.initializer || !isCallExpression(devsDeclaration.initializer)) continue;
+        if (devsDeclaration?.initializer && isCallExpression(devsDeclaration.initializer)) {
+            const value = devsDeclaration.initializer.arguments[0];
 
-        const value = devsDeclaration.initializer.arguments[0];
+            if (isSatisfiesExpression(value) && isObjectLiteralExpression(value.expression)) {
+                for (const prop of value.expression.properties) {
+                    const name = (prop.name as Identifier).text;
+                    const value = isPropertyAssignment(prop) ? prop.initializer : prop;
 
-        if (!isSatisfiesExpression(value) || !isObjectLiteralExpression(value.expression)) throw new Error("Failed to parse devs: not an object literal");
-
-        for (const prop of value.expression.properties) {
-            const name = (prop.name as Identifier).text;
-            const value = isPropertyAssignment(prop) ? prop.initializer : prop;
-
-            if (!isObjectLiteralExpression(value)) throw new Error(`Failed to parse devs: ${name} is not an object literal`);
-
-            devs[name] = {
-                name: (getObjectProp(value, "name") as StringLiteral).text,
-                id: (getObjectProp(value, "id") as BigIntLiteral).text.slice(0, -1)
-            };
+                    if (isObjectLiteralExpression(value)) {
+                        devs[name] = {
+                            name: (getObjectProp(value, "name") as StringLiteral).text,
+                            id: (getObjectProp(value, "id") as BigIntLiteral).text.slice(0, -1)
+                        };
+                    }
+                }
+            }
         }
 
-        return;
+        const pcDevsDeclaration = child.declarationList.declarations.find(d => hasName(d, "PcDevs"));
+        if (pcDevsDeclaration?.initializer && isCallExpression(pcDevsDeclaration.initializer)) {
+            const value = pcDevsDeclaration.initializer.arguments[0];
+
+            if (isSatisfiesExpression(value) && isObjectLiteralExpression(value.expression)) {
+                for (const prop of value.expression.properties) {
+                    const name = (prop.name as Identifier).text;
+                    const value = isPropertyAssignment(prop) ? prop.initializer : prop;
+
+                    if (isObjectLiteralExpression(value)) {
+                        pcDevs[name] = {
+                            name: (getObjectProp(value, "name") as StringLiteral).text,
+                            id: (getObjectProp(value, "id") as BigIntLiteral).text.slice(0, -1)
+                        };
+                    }
+                }
+            }
+        }
     }
 
-    throw new Error("Could not find Devs constant");
+    if (!Object.keys(devs).length && !Object.keys(pcDevs).length) {
+        throw new Error("Could not find Devs or PcDevs constants");
+    }
 }
+
 
 async function parseFile(fileName: string) {
     const file = createSourceFile(fileName, await readFile(fileName, "utf8"), ScriptTarget.Latest);
@@ -134,9 +159,11 @@ async function parseFile(fileName: string) {
                     if (!isArrayLiteralExpression(value)) throw fail("authors is not an array literal");
                     data.authors = value.elements.map(e => {
                         if (!isPropertyAccessExpression(e)) throw fail("authors array contains non-property access expressions");
-                        const d = devs[getName(e)!];
-                        if (!d) throw fail(`couldn't look up author ${getName(e)}`);
-                        return d;
+                        const authorName = getName(e)!;
+                        const author = devs[authorName] || pcDevs[authorName];
+
+                        if (!author) throw fail(`couldn't look up author ${authorName}`);
+                        return author;
                     });
                     break;
                 case "tags":
