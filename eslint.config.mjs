@@ -59,18 +59,6 @@ export default tseslint.config(
             }
         },
         rules: {
-            /*
-             * Since it's only been a month and Vencord has already been stolen
-             * by random skids who rebranded it to "AlphaCord" and erased all license
-             * information
-             */
-            "simple-header/header": [
-                "error",
-                {
-                    "files": ["scripts/header-new.txt", "scripts/header-old.txt"],
-                    "templates": { "author": [".*", "Vendicated and contributors"] }
-                }
-            ],
 
             // Style Rules
             "@stylistic/jsx-quotes": ["error", "prefer-double"],
