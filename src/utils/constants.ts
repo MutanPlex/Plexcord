@@ -614,6 +614,10 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "Vee",
         id: 343383572805058560n
     },
+    Max: {
+        name: "Max",
+        id: 0n
+    }
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>

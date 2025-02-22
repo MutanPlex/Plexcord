@@ -1,6 +1,7 @@
 /*
  * Vencord, a Discord client mod
  * Copyright (c) 2024 Vendicated and contributors
+ * Copyright (c) 2025 MutanPlex
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
@@ -9,7 +10,19 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { FluxDispatcher, GuildStore, Tooltip, useEffect, UserStore, useState } from "@webpack/common";
+
 interface FixedTimerOpts { interval?: number; initialTime?: number; }
+
+interface VoiceState {
+    userId: string;
+    channelId?: string;
+    oldChannelId?: string;
+    guildId: string;
+    deaf: boolean;
+    mute: boolean;
+    selfDeaf: boolean;
+    selfMute: boolean;
+}
 
 type userJoinData = { channelId: string; time: number; guildId: string; };
 const userJoinTimes = new Map<string, userJoinData>();
@@ -66,7 +79,7 @@ export const settings = definePluginSettings({
 export default definePlugin({
     name: "AllCallTimers",
     description: "Add call timer to all users in a server voice channel.",
-    authors: [{ name: "Max", id: 0n }, Devs.D3SOX, PcDevs.MutanPlex],
+    authors: [Devs.D3SOX, PcDevs.MutanPlex, PcDevs.Max],
     settings,
 
     patches: [
@@ -85,7 +98,7 @@ export default definePlugin({
         },
     ],
     flux: {
-        VOICE_STATE_UPDATES({ voiceStates }: { voiceStates: []; }) {
+        VOICE_STATE_UPDATES({ voiceStates }: { voiceStates: VoiceState[]; }) {
             const myId = UserStore.getCurrentUser().id;
             for (const state of voiceStates) {
                 const { userId, channelId, guildId } = state;
