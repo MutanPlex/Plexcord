@@ -610,6 +610,10 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "MutanPlex",
         id: 506074187014602752n
     },
+    PicklePlex: {
+        name: "seliinneren",
+        id: 600818938582007828n
+    },
     Ven: {
         name: "Vee",
         id: 343383572805058560n
@@ -617,6 +621,14 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     Max: {
         name: "Max",
         id: 0n
+    },
+    MisleadingName: {
+        name: "MisleadingName",
+        id: 892072557988151347n
+    },
+    Exotic: {
+        name: "Exotic",
+        id: 287667540178501634n
     }
 } satisfies Record<string, PcDev>);
 
