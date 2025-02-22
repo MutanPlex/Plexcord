@@ -28,7 +28,7 @@
         "inject": "node scripts/runInstaller.mjs",
         "uninject": "node scripts/runInstaller.mjs",
         "lint": "eslint",
-        "lint-styles": "stylelint \"src/**/*.css\" --ignore-pattern src/userplugins",
+        "lint-styles": "stylelint \"src/**/*.css\" --ignore-pattern src/plexcordplugins",
         "lint:fix": "pnpm lint --fix",
         "test": "pnpm buildStandalone && pnpm testTsc && pnpm lint && pnpm lint-styles && pnpm generatePluginJson",
         "testWeb": "pnpm lint && pnpm buildWeb && pnpm testTsc",

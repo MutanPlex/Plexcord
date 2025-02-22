@@ -24,7 +24,7 @@ readdirSync(join(__dirname, "src"))
 
 const VencordSrc = join(__dirname, "..", "..", "src");
 
-for (const file of ["preload.d.ts", "userplugins", "main", "debug", "src", "browser", "scripts"]) {
+for (const file of ["preload.d.ts", "plexcordplugins", "main", "debug", "src", "browser", "scripts"]) {
     rmSync(join(__dirname, file), { recursive: true, force: true });
 }
 

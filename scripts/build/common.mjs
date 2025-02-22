@@ -143,14 +143,14 @@ export const globPlugins = kind => ({
         });
 
         build.onLoad({ filter, namespace: "import-plugins" }, async () => {
-            const pluginDirs = ["plugins/_api", "plugins/_core", "plugins", "userplugins"];
+            const pluginDirs = ["plugins/_api", "plugins/_core", "plugins", "plexcordplugins"];
             let code = "";
             let pluginsCode = "\n";
             let metaCode = "\n";
             let excludedCode = "\n";
             let i = 0;
             for (const dir of pluginDirs) {
-                const userPlugin = dir === "userplugins";
+                const userPlugin = dir === "plexcordplugins";
 
                 const fullDir = `./src/${dir}`;
                 if (!await exists(fullDir)) continue;

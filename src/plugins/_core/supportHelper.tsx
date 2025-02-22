@@ -97,7 +97,7 @@ async function generateDebugInfoMessage() {
         "NoRPC enabled": Vencord.Plugins.isPluginEnabled("NoRPC"),
         "Activity Sharing disabled": tryOrElse(() => !ShowCurrentGame.getSetting(), false),
         "Vencord DevBuild": !IS_STANDALONE,
-        "Has UserPlugins": Object.values(PluginMeta).some(m => m.userPlugin),
+        "Has PlexcordPlugins": Object.values(PluginMeta).some(m => m.userPlugin),
         "More than two weeks out of date": BUILD_TIMESTAMP < Date.now() - 12096e5,
     };
 
@@ -116,13 +116,13 @@ function generatePluginList() {
         .filter(p => Vencord.Plugins.isPluginEnabled(p) && !isApiPlugin(p));
 
     const enabledStockPlugins = enabledPlugins.filter(p => !PluginMeta[p].userPlugin);
-    const enabledUserPlugins = enabledPlugins.filter(p => PluginMeta[p].userPlugin);
+    const enabledPlexCordPlugins = enabledPlugins.filter(p => PluginMeta[p].userPlugin);
 
 
     let content = `**Enabled Plugins (${enabledStockPlugins.length}):**\n${makeCodeblock(enabledStockPlugins.join(", "))}`;
 
-    if (enabledUserPlugins.length) {
-        content += `**Enabled UserPlugins (${enabledUserPlugins.length}):**\n${makeCodeblock(enabledUserPlugins.join(", "))}`;
+    if (enabledPlexCordPlugins.length) {
+        content += `**Enabled PlexcordPlugins (${enabledPlexCordPlugins.length}):**\n${makeCodeblock(enabledPlexCordPlugins.join(", "))}`;
     }
 
     return content;
