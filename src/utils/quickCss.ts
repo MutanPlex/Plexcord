@@ -81,7 +81,7 @@ async function initThemes() {
             links.push(URL.createObjectURL(blob));
         }
     } else {
-        const localThemes = enabledThemes.map(theme => `vencord:///themes/${theme}?v=${Date.now()}`);
+        const localThemes = enabledThemes.map(theme => `plexcord:///themes/${theme}?v=${Date.now()}`);
         links.push(...localThemes);
     }
 

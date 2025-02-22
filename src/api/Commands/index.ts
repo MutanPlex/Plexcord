@@ -56,7 +56,7 @@ export const _init = function (cmds: Command[]) {
 } as never;
 
 export const _handleCommand = function (cmd: Command, args: Argument[], ctx: CommandContext) {
-    if (!cmd.isVencordCommand)
+    if (!cmd.isPlexcordCommand)
         return cmd.execute(args, ctx);
 
     const handleError = (err: any) => {
@@ -68,7 +68,7 @@ export const _handleCommand = function (cmd: Command, args: Argument[], ctx: Com
         sendBotMessage(ctx.channel.id, {
             content: `${msg}:\n${makeCodeblock(reason)}`,
             author: {
-                username: "Vencord"
+                username: "Plexcord"
             }
         });
     };
@@ -139,7 +139,7 @@ export function registerCommand<C extends Command>(command: C, plugin: string) {
     if (BUILT_IN.some(c => c.name === command.name))
         throw new Error(`Command '${command.name}' already exists.`);
 
-    command.isVencordCommand = true;
+    command.isPlexcordCommand = true;
     command.untranslatedName ??= command.name;
     command.untranslatedDescription ??= command.description;
     command.id ??= `-${BUILT_IN.length + 1}`;
