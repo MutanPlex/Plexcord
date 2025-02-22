@@ -2,7 +2,7 @@
 
 Plexcord is a community project and welcomes any kind of contribution from anyone!
 
-We have development documentation for new contributors, which can be found at <https://plexcord.mutanplex.com/docs>.
+We have development documentation for new contributors, which can be found at <https://docs.plexcord.club>.
 
 All contributions should be made in accordance with our [Code of Conduct](./CODE_OF_CONDUCT.md).
 
@@ -53,5 +53,5 @@ If you think a new page should be added, feel free to suggest it via an issue an
 
 ## Help out users in our Discord community
 
-We have an open support channel in our [Discord community](https://plexcord.mutanplex.com/discord).
+We have an open support channel in our [Discord community](https://plexcord.club/discord).
 Helping out users there is always appreciated! The more, the merrier.

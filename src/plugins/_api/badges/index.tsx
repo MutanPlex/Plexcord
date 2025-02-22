@@ -34,7 +34,7 @@ import { Forms, Toasts, UserStore } from "@webpack/common";
 import { User } from "discord-types/general";
 
 const CONTRIBUTOR_BADGE = "https://vencord.dev/assets/favicon.png";
-const PLEXCORD_BADGE = "https://plexcord.mutanplex.com/assets/favicon.png";
+const PLEXCORD_BADGE = "https://plexcord.club/assets/favicon.png";
 
 const ContributorBadge: ProfileBadge = {
     description: "Vencord Contributor",
@@ -64,7 +64,7 @@ async function loadBadges(noCache = false) {
 
     DonorBadges = await fetch("https://badges.vencord.dev/badges.json", init)
         .then(r => r.json());
-    MutanBadges = await fetch("https://api.mutanplex.com/badges.json", init)
+    MutanBadges = await fetch("https://badges.plexcord.club/badges.json", init)
         .then(r => r.json());
 
     DonorBadges = {
