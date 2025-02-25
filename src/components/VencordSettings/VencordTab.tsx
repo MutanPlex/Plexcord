@@ -23,7 +23,7 @@ import DonateButton from "@components/DonateButton";
 import { openContributorModal } from "@components/PluginSettings/ContributorModal";
 import { openPluginModal } from "@components/PluginSettings/PluginModal";
 import { gitRemote } from "@shared/plexcordUserAgent";
-import { DONOR_ROLE_ID, VENCORD_GUILD_ID } from "@utils/constants";
+import { DONOR_ROLE_ID, PLEXCORD_GUILD_ID } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import { identity, isPluginDev } from "@utils/misc";
 import { relaunch, showItemInFolder } from "@utils/native";
@@ -299,7 +299,7 @@ function DonateButtonComponent() {
 
 function isDonor(userId: string): boolean {
     const donorBadges = BadgeAPI.getDonorBadges(userId);
-    return GuildMemberStore.getMember(VENCORD_GUILD_ID, userId)?.roles.includes(DONOR_ROLE_ID) || !!donorBadges;
+    return GuildMemberStore.getMember(PLEXCORD_GUILD_ID, userId)?.roles.includes(DONOR_ROLE_ID) || !!donorBadges;
 }
 
 export default wrapTab(VencordSettings, "Vencord Settings");

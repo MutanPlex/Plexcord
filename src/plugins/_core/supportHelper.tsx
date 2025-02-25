@@ -22,7 +22,7 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
 import { openUpdaterModal } from "@components/VencordSettings/UpdaterTab";
-import { CONTRIB_ROLE_ID, Devs, DONOR_ROLE_ID, KNOWN_ISSUES_CHANNEL_ID, REGULAR_ROLE_ID, SUPPORT_CHANNEL_ID, VENBOT_USER_ID, VENCORD_GUILD_ID } from "@utils/constants";
+import { BOT_COMMANDS_CHANNEL_ID, CONTRIB_ROLE_ID, Devs, DONOR_ROLE_ID, KNOWN_ISSUES_CHANNEL_ID, PLEXBOT_USER_ID, PLEXCORD_GUILD_ID, REGULAR_ROLE_ID, SUPPORT_CHANNEL_ID } from "@utils/constants";
 import { sendMessage } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
@@ -44,7 +44,7 @@ const CodeBlockRe = /```js\n(.+?)```/s;
 
 const AllowedChannelIds = [
     SUPPORT_CHANNEL_ID,
-    "1024286218801926184", // Vencord > #bot-spam
+    BOT_COMMANDS_CHANNEL_ID, // Vencord > #bot-spam
     "1033680203433660458", // Vencord > #v
 ];
 
@@ -96,7 +96,7 @@ async function generateDebugInfoMessage() {
     const commonIssues = {
         "NoRPC enabled": Vencord.Plugins.isPluginEnabled("NoRPC"),
         "Activity Sharing disabled": tryOrElse(() => !ShowCurrentGame.getSetting(), false),
-        "Vencord DevBuild": !IS_STANDALONE,
+        "Plexcord DevBuild": !IS_STANDALONE,
         "Has PlexcordPlugins": Object.values(PluginMeta).some(m => m.userPlugin),
         "More than two weeks out of date": BUILD_TIMESTAMP < Date.now() - 12096e5,
     };
@@ -153,14 +153,14 @@ export default definePlugin({
 
     commands: [
         {
-            name: "vencord-debug",
-            description: "Send Vencord debug info",
+            name: "plexcord-debug",
+            description: "Send Plexcord debug info",
             predicate: ctx => isPluginDev(UserStore.getCurrentUser()?.id) || AllowedChannelIds.includes(ctx.channel.id),
             execute: async () => ({ content: await generateDebugInfoMessage() })
         },
         {
-            name: "vencord-plugins",
-            description: "Send Vencord plugin list",
+            name: "plexcord-plugins",
+            description: "Send Plexcord plugin list",
             predicate: ctx => isPluginDev(UserStore.getCurrentUser()?.id) || AllowedChannelIds.includes(ctx.channel.id),
             execute: () => ({ content: generatePluginList() })
         }
@@ -180,7 +180,7 @@ export default definePlugin({
                     return Alerts.show({
                         title: "Hold on!",
                         body: <div>
-                            <Forms.FormText>You are using an outdated version of Vencord! Chances are, your issue is already fixed.</Forms.FormText>
+                            <Forms.FormText>You are using an outdated version of Plexcord! Chances are, your issue is already fixed.</Forms.FormText>
                             <Forms.FormText className={Margins.top8}>
                                 Please first update before asking for support!
                             </Forms.FormText>
@@ -195,16 +195,16 @@ export default definePlugin({
             }
 
             // @ts-ignore outdated type
-            const roles = GuildMemberStore.getSelfMember(VENCORD_GUILD_ID)?.roles;
+            const roles = GuildMemberStore.getSelfMember(PLEXCORD_GUILD_ID)?.roles;
             if (!roles || TrustedRolesIds.some(id => roles.includes(id))) return;
 
             if (!IS_WEB && IS_UPDATER_DISABLED) {
                 return Alerts.show({
                     title: "Hold on!",
                     body: <div>
-                        <Forms.FormText>You are using an externally updated Vencord version, which we do not provide support for!</Forms.FormText>
+                        <Forms.FormText>You are using an externally updated Plexcord version, which we do not provide support for!</Forms.FormText>
                         <Forms.FormText className={Margins.top8}>
-                            Please either switch to an <Link href="https://vencord.dev/download">officially supported version of Vencord</Link>, or
+                            Please either switch to an <Link href="https://plexcord.club/download">officially supported version of Plexcord</Link>, or
                             contact your package maintainer for support instead.
                         </Forms.FormText>
                     </div>
@@ -215,11 +215,11 @@ export default definePlugin({
                 return Alerts.show({
                     title: "Hold on!",
                     body: <div>
-                        <Forms.FormText>You are using a custom build of Vencord, which we do not provide support for!</Forms.FormText>
+                        <Forms.FormText>You are using a custom build of Plexcord, which we do not provide support for!</Forms.FormText>
 
                         <Forms.FormText className={Margins.top8}>
-                            We only provide support for <Link href="https://vencord.dev/download">official builds</Link>.
-                            Either <Link href="https://vencord.dev/download">switch to an official build</Link> or figure your issue out yourself.
+                            We only provide support for <Link href="https://plexcord.club/download">official builds</Link>.
+                            Either <Link href="https://plexcord.club/download">switch to an official build</Link> or figure your issue out yourself.
                         </Forms.FormText>
 
                         <Text variant="text-md/bold" className={Margins.top8}>You will be banned from receiving support if you ignore this rule.</Text>
@@ -239,7 +239,7 @@ export default definePlugin({
             !IS_UPDATER_DISABLED
             && (
                 (props.channel.id === KNOWN_ISSUES_CHANNEL_ID) ||
-                (props.channel.id === SUPPORT_CHANNEL_ID && props.message.author.id === VENBOT_USER_ID)
+                (props.channel.id === SUPPORT_CHANNEL_ID && props.message.author.id === PLEXBOT_USER_ID)
             )
             && props.message.content?.includes("update");
 
@@ -266,24 +266,24 @@ export default definePlugin({
         }
 
         if (props.channel.id === SUPPORT_CHANNEL_ID) {
-            if (props.message.content.includes("/vencord-debug") || props.message.content.includes("/vencord-plugins")) {
+            if (props.message.content.includes("/plexcord-debug") || props.message.content.includes("/plexcord-plugins")) {
                 buttons.push(
                     <Button
                         key="vc-dbg"
                         onClick={async () => sendMessage(props.channel.id, { content: await generateDebugInfoMessage() })}
                     >
-                        Run /vencord-debug
+                        Run /plexcord-debug
                     </Button>,
                     <Button
                         key="vc-plg-list"
                         onClick={async () => sendMessage(props.channel.id, { content: generatePluginList() })}
                     >
-                        Run /vencord-plugins
+                        Run /plexcord-plugins
                     </Button>
                 );
             }
 
-            if (props.message.author.id === VENBOT_USER_ID) {
+            if (props.message.author.id === PLEXBOT_USER_ID) {
                 const match = CodeBlockRe.exec(props.message.content || props.message.embeds[0]?.rawDescription || "");
                 if (match) {
                     buttons.push(
@@ -318,9 +318,9 @@ export default definePlugin({
 
         return (
             <Card className={`vc-plugins-restart-card ${Margins.top8}`}>
-                Please do not private message Vencord plugin developers for support!
+                Please do not private message Plexcord plugin developers for support!
                 <br />
-                Instead, use the Vencord support channel: {Parser.parse("https://discord.com/channels/1015060230222131221/1026515880080842772")}
+                Instead, use the Plexcord support channel: {Parser.parse("https://discord.com/channels/1342668210331324476/1344043206286905364")}
                 {!ChannelStore.getChannel(SUPPORT_CHANNEL_ID) && " (Click the link to join)"}
             </Card>
         );
