@@ -2,10 +2,10 @@
     "manifest_version": 2,
     "minimum_chrome_version": "91",
 
-    "name": "Vencord Web",
+    "name": "Plexcord Web",
     "description": "The cutest Discord mod now in your browser",
-    "author": "Vendicated",
-    "homepage_url": "https://github.com/Vendicated/Vencord",
+    "author": "MutanPlex",
+    "homepage_url": "https://github.com/MutanPlex/Plexcord",
     "icons": {
         "128": "icon.png"
     },

@@ -1,11 +1,11 @@
 // ==UserScript==
-// @name            Vencord
+// @name            Plexcord
 // @description     A Discord client mod - Web version
 // @version         %version%
-// @author          Vendicated (https://github.com/Vendicated)
-// @namespace       https://github.com/Vendicated/Vencord
-// @supportURL      https://github.com/Vendicated/Vencord
-// @icon            https://raw.githubusercontent.com/Vendicated/Vencord/refs/heads/main/browser/icon.png
+// @author          MutanPlex (https://github.com/MutanPlex)
+// @namespace       https://github.com/MutanPlex/Plexcord
+// @supportURL      https://github.com/MutanPlex/Plexcord
+// @icon            https://raw.githubusercontent.com/MutanPlex/Plexcord/refs/heads/main/browser/icon.png
 // @license         GPL-3.0
 // @match           *://*.discord.com/*
 // @grant           GM_xmlhttpRequest
