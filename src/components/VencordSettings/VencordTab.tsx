@@ -22,7 +22,7 @@ import { classNameFactory } from "@api/Styles";
 import DonateButton from "@components/DonateButton";
 import { openContributorModal } from "@components/PluginSettings/ContributorModal";
 import { openPluginModal } from "@components/PluginSettings/PluginModal";
-import { gitRemote } from "@shared/vencordUserAgent";
+import { gitRemote } from "@shared/plexcordUserAgent";
 import { DONOR_ROLE_ID, VENCORD_GUILD_ID } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import { identity, isPluginDev } from "@utils/misc";

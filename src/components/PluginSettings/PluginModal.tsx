@@ -23,7 +23,7 @@ import { useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
-import { gitRemote } from "@shared/vencordUserAgent";
+import { gitRemote } from "@shared/plexcordUserAgent";
 import { proxyLazy } from "@utils/lazy";
 import { Margins } from "@utils/margins";
 import { classes, isObjectEmpty } from "@utils/misc";

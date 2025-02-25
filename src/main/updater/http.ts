@@ -18,7 +18,7 @@
 
 import { get } from "@main/utils/simpleGet";
 import { IpcEvents } from "@shared/IpcEvents";
-import { VENCORD_USER_AGENT } from "@shared/vencordUserAgent";
+import { PLEXCORD_USER_AGENT } from "@shared/plexcordUserAgent";
 import { ipcMain } from "electron";
 import { writeFile } from "fs/promises";
 import { join } from "path";
@@ -37,7 +37,7 @@ async function githubGet(endpoint: string) {
             Accept: "application/vnd.github+json",
             // "All API requests MUST include a valid User-Agent header.
             // Requests with no User-Agent header will be rejected."
-            "User-Agent": VENCORD_USER_AGENT
+            "User-Agent": PLEXCORD_USER_AGENT
         }
     });
 }
