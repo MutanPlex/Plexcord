@@ -91,8 +91,12 @@ export default definePlugin({
                     replace: "$1.userId, $2), CallTimerId = $1, $3=",
                 },
                 {
+                    match: /=\s*([a-zA-Z_$]\w*)\.useRef\(\s*([a-zA-Z_$]\w*)\s*\);/g,
+                    replace: "=$1.useRef($2), DcReact = $1; ",
+                },
+                {
                     match: /(className:\s*\w+\.usernameContainer,\s*children:\s*)(\w+)/g,
-                    replace: "$1React.cloneElement($2, { children: [...$2.props.children, $self.showClockInjection(CallTimerId), $self.showTextInjection(CallTimerId)] })",
+                    replace: "$1DcReact.cloneElement($2, { children: [...$2.props.children, $self.showClockInjection(CallTimerId), $self.showTextInjection(CallTimerId)] })",
                 },
             ],
         },
