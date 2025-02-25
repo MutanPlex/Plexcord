@@ -112,7 +112,7 @@ const buildConfigs = ([
         ...nodeCommonOpts,
         entryPoints: ["src/main/index.ts"],
         outfile: "dist/patcher.js",
-        footer: { js: "//# sourceURL=VencordPatcher\n" + sourceMapFooter("patcher") },
+        footer: { js: "//# sourceURL=PlexcordPatcher\n" + sourceMapFooter("patcher") },
         sourcemap,
         plugins: [
             // @ts-ignore this is never undefined
@@ -131,7 +131,7 @@ const buildConfigs = ([
         outfile: "dist/renderer.js",
         format: "iife",
         target: ["esnext"],
-        footer: { js: "//# sourceURL=VencordRenderer\n" + sourceMapFooter("renderer") },
+        footer: { js: "//# sourceURL=PlexcordRenderer\n" + sourceMapFooter("renderer") },
         globalName: "Vencord",
         sourcemap,
         plugins: [
@@ -148,7 +148,7 @@ const buildConfigs = ([
         ...nodeCommonOpts,
         entryPoints: ["src/preload.ts"],
         outfile: "dist/preload.js",
-        footer: { js: "//# sourceURL=VencordPreload\n" + sourceMapFooter("preload") },
+        footer: { js: "//# sourceURL=PlexcordPreload\n" + sourceMapFooter("preload") },
         sourcemap,
         define: {
             ...defines,
@@ -162,7 +162,7 @@ const buildConfigs = ([
         ...nodeCommonOpts,
         entryPoints: ["src/main/index.ts"],
         outfile: "dist/vencordDesktopMain.js",
-        footer: { js: "//# sourceURL=VencordDesktopMain\n" + sourceMapFooter("vencordDesktopMain") },
+        footer: { js: "//# sourceURL=PlexcordDesktopMain\n" + sourceMapFooter("vencordDesktopMain") },
         sourcemap,
         plugins: [
             ...nodeCommonOpts.plugins,
@@ -180,7 +180,7 @@ const buildConfigs = ([
         outfile: "dist/vencordDesktopRenderer.js",
         format: "iife",
         target: ["esnext"],
-        footer: { js: "//# sourceURL=VencordDesktopRenderer\n" + sourceMapFooter("vencordDesktopRenderer") },
+        footer: { js: "//# sourceURL=PlexcordDesktopRenderer\n" + sourceMapFooter("vencordDesktopRenderer") },
         globalName: "Vencord",
         sourcemap,
         plugins: [
@@ -197,7 +197,7 @@ const buildConfigs = ([
         ...nodeCommonOpts,
         entryPoints: ["src/preload.ts"],
         outfile: "dist/vencordDesktopPreload.js",
-        footer: { js: "//# sourceURL=VencordPreload\n" + sourceMapFooter("vencordDesktopPreload") },
+        footer: { js: "//# sourceURL=PlexcordPreload\n" + sourceMapFooter("vencordDesktopPreload") },
         sourcemap,
         define: {
             ...defines,
