@@ -72,12 +72,12 @@ export async function installExt(id: string) {
             // v4.27 is broken in Electron, see https://github.com/facebook/react/issues/25843
             // Unfortunately, Google does not serve old versions, so this is the only way
             // This zip file is pinned to long commit hash so it cannot be changed remotely
-            ? "https://raw.githubusercontent.com/Vendicated/random-files/f6f550e4c58ac5f2012095a130406c2ab25b984d/fmkadmapgofadopljbjfkapdkoienihi.zip"
+            ? "https://raw.githubusercontent.com/MutanPlex/random-files/5159afb6d3d9dfae4f0669399f0756580ffa371d/fmkadmapgofadopljbjfkapdkoienihi.zip"
             : `https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3D${id}%26uc&prodversion=${process.versions.chrome}`;
 
         const buf = await get(url, {
             headers: {
-                "User-Agent": `Electron ${process.versions.electron} ~ Vencord (https://github.com/Vendicated/Vencord)`
+                "User-Agent": `Electron ${process.versions.electron} ~ Plexcord (https://github.com/MutanPlex/Plexcord)`
             }
         });
 

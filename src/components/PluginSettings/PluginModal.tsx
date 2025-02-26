@@ -231,7 +231,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                             <div className="vc-settings-modal-links">
                                 <WebsiteButton
                                     text="View more info"
-                                    href={`https://vencord.dev/plugins/${plugin.name}`}
+                                    href={`https://plexcord.club/plugins/${plugin.name}`}
                                 />
                                 <GithubButton
                                     text="View source code"
