@@ -45,11 +45,11 @@ export const IS_REPORTER = process.argv.includes("--reporter");
 export const IS_STANDALONE = process.argv.includes("--standalone");
 
 export const IS_UPDATER_DISABLED = process.argv.includes("--disable-updater");
-export const gitHash = process.env.VENCORD_HASH || execSync("git rev-parse --short HEAD", { encoding: "utf-8" }).trim();
+export const gitHash = process.env.PLEXCORD_HASH || execSync("git rev-parse --short HEAD", { encoding: "utf-8" }).trim();
 
 export const banner = {
     js: `
-// Vencord ${gitHash}
+// Plexcord ${gitHash}
 // Standalone: ${IS_STANDALONE}
 // Platform: ${IS_STANDALONE === false ? process.platform : "Universal"}
 // Updater Disabled: ${IS_UPDATER_DISABLED}

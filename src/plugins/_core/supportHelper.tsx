@@ -26,7 +26,7 @@ import { BOT_COMMANDS_CHANNEL_ID, CONTRIB_ROLE_ID, Devs, DONOR_ROLE_ID, KNOWN_IS
 import { sendMessage } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
-import { isPluginDev, tryOrElse } from "@utils/misc";
+import { isPcPluginDev, isPluginDev, tryOrElse } from "@utils/misc";
 import { relaunch } from "@utils/native";
 import { onlyOnce } from "@utils/onlyOnce";
 import { makeCodeblock } from "@utils/text";
@@ -171,7 +171,7 @@ export default definePlugin({
             if (channelId !== SUPPORT_CHANNEL_ID) return;
 
             const selfId = UserStore.getCurrentUser()?.id;
-            if (!selfId || isPluginDev(selfId)) return;
+            if (!selfId || (isPluginDev(selfId) && isPcPluginDev(selfId))) return;
 
             if (!IS_UPDATER_DISABLED) {
                 await checkForUpdatesOnce().catch(() => { });
@@ -313,8 +313,8 @@ export default definePlugin({
 
     renderContributorDmWarningCard: ErrorBoundary.wrap(({ channel }) => {
         const userId = channel.getRecipientId();
-        if (!isPluginDev(userId)) return null;
-        if (RelationshipStore.isFriend(userId) || isPluginDev(UserStore.getCurrentUser()?.id)) return null;
+        if (!isPluginDev(userId) && !isPcPluginDev(userId)) return null;
+        if (RelationshipStore.isFriend(userId) || (isPluginDev(UserStore.getCurrentUser()?.id) && isPcPluginDev(UserStore.getCurrentUser()?.id))) return null;
 
         return (
             <Card className={`vc-plugins-restart-card ${Margins.top8}`}>
