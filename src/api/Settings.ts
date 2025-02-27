@@ -102,7 +102,7 @@ const DefaultSettings: Settings = {
 
     cloud: {
         authenticated: false,
-        url: "https://plexcord.club/api/v1",
+        url: "https://api.plexcord.club/",
         settingsSync: false,
         settingsSyncVersion: 0
     }
