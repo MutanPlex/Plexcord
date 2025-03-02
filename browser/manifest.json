@@ -28,7 +28,7 @@
         {
             "run_at": "document_start",
             "matches": ["*://*.discord.com/*"],
-            "js": ["dist/Vencord.js"],
+            "js": ["dist/Plexcord.js"],
             "all_frames": true,
             "world": "MAIN"
         }

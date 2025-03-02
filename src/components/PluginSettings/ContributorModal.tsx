@@ -10,7 +10,7 @@ import { useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Link } from "@components/Link";
-import { DevsById } from "@utils/constants";
+import { DevsById, PcDevsById } from "@utils/constants";
 import { fetchUserProfile } from "@utils/discord";
 import { classes, pluralise } from "@utils/misc";
 import { ModalContent, ModalRoot, openModal } from "@utils/modal";
@@ -50,10 +50,19 @@ function ContributorModal({ user }: { user: User; }) {
     const website = profile?.connectedAccounts?.find(a => a.type === "domain")?.name;
 
     const plugins = useMemo(() => {
+
+        /* const allPlugins = Object.values(Plugins);
+        const pluginsByAuthor = DevsById[user.id] ? allPlugins.filter(p => p.authors.includes(DevsById[user.id])) : allPlugins.filter(p => p.authors.some(a => a.name === user.username));
+
+        return pluginsByAuthor
+            .filter(p => !p.name.endsWith("API"))
+            .sort((a, b) => Number(a.required ?? false) - Number(b.required ?? false)); */
         const allPlugins = Object.values(Plugins);
-        const pluginsByAuthor = DevsById[user.id]
-            ? allPlugins.filter(p => p.authors.includes(DevsById[user.id]))
-            : allPlugins.filter(p => p.authors.some(a => a.name === user.username));
+        const pluginsByAuthor = PcDevsById[user.id]
+            ? allPlugins.filter(p => p.authors.includes(PcDevsById[user.id]))
+            : DevsById[user.id]
+                ? allPlugins.filter(p => p.authors.includes(DevsById[user.id]))
+                : allPlugins.filter(p => p.authors.some(a => a.name === user.username));
 
         return pluginsByAuthor
             .filter(p => !p.name.endsWith("API"))
