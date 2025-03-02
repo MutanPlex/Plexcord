@@ -132,7 +132,7 @@ const buildConfigs = ([
         format: "iife",
         target: ["esnext"],
         footer: { js: "//# sourceURL=PlexcordRenderer\n" + sourceMapFooter("renderer") },
-        globalName: "Vencord",
+        globalName: "Plexcord",
         sourcemap,
         plugins: [
             globPlugins("discordDesktop"),
