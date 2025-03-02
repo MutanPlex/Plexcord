@@ -171,7 +171,7 @@ async function buildExtension(target, files) {
     console.info("Unpacked Extension written to dist/" + target);
 }
 
-const appendCssRuntime = readFile("dist/Vencord.user.css", "utf-8").then(content => {
+const appendCssRuntime = readFile("dist/Plexcord.user.css", "utf-8").then(content => {
     const cssRuntime = `
 ;document.addEventListener("DOMContentLoaded", () => document.documentElement.appendChild(
     Object.assign(document.createElement("style"), {
