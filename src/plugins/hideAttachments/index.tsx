@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -78,7 +78,7 @@ export default definePlugin({
         if (!this.shouldHide(message.id)) return null;
 
         return (
-            <span className={classes("vc-hideAttachments-accessory", !message.content && "vc-hideAttachments-no-content")}>
+            <span className={classes("pc-hideAttachments-accessory", !message.content && "pc-hideAttachments-no-content")}>
                 Media Hidden
             </span>
         );

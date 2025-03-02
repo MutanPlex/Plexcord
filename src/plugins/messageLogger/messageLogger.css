@@ -2,15 +2,12 @@
     display: none;
 }
 
-.messagelogger-deleted
-:is(
-    .messagelogger-deleted-attachment,
+.messagelogger-deleted:is(.messagelogger-deleted-attachment,
     .emoji,
     [data-type="sticker"],
     [class*="embedIframe"],
     [class*="embedSpotify"],
-    [class*="imageContainer"]
-) {
+    [class*="imageContainer"]) {
     filter: grayscale(1) !important;
     transition: 150ms filter ease-in-out;
 
@@ -39,12 +36,12 @@
     cursor: pointer;
 }
 
-.vc-ml-modal-timestamp {
+.pc-ml-modal-timestamp {
     cursor: unset;
     height: unset;
 }
 
-.vc-ml-modal-tab-bar {
+.pc-ml-modal-tab-bar {
     flex-wrap: wrap;
     gap: 16px;
 }

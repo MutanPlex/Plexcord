@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,7 @@ export const Margins: Record<`${"top" | "bottom" | "left" | "right"}${8 | 16 | 2
 
 for (const dir of ["top", "bottom", "left", "right"] as const) {
     for (const size of [8, 16, 20] as const) {
-        const cl = `vc-m-${dir}-${size}`;
+        const cl = `pc-m-${dir}-${size}`;
         Margins[`${dir}${size}`] = cl;
         styleStr += `.${cl}{margin-${dir}:${size}px;}`;
     }
@@ -31,5 +31,5 @@ for (const dir of ["top", "bottom", "left", "right"] as const) {
 document.addEventListener("DOMContentLoaded", () =>
     document.head.append(Object.assign(document.createElement("style"), {
         textContent: styleStr,
-        id: "vencord-margins"
+        id: "plexcord-margins"
     })), { once: true });

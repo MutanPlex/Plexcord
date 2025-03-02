@@ -1,11 +1,11 @@
-# Vencord Types
+# Plexcord Types
 
-Typings for Vencord's api, published to npm
+Typings for Plexcord's api, published to npm
 
 ```sh
-npm i @vencord/types
+npm i @plexcord/types
 
-yarn add @vencord/types
+yarn add @plexcord/types
 
-pnpm add @vencord/types
+pnpm add @plexcord/types
 ```

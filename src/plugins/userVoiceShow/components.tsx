@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2024 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -11,7 +11,7 @@ import { filters, findByCodeLazy, findByPropsLazy, findComponentByCodeLazy, find
 import { ChannelRouter, ChannelStore, GuildStore, IconUtils, match, P, PermissionsBits, PermissionStore, React, showToast, Text, Toasts, Tooltip, useMemo, UserStore, useStateFromStores } from "@webpack/common";
 import { Channel } from "discord-types/general";
 
-const cl = classNameFactory("vc-uvs-");
+const cl = classNameFactory("pc-uvs-");
 
 const { selectVoiceChannel } = findByPropsLazy("selectVoiceChannel", "selectChannel");
 const { useChannelName } = mapMangledModuleLazy("#{intl::GROUP_DM_ALONE}", {
@@ -115,7 +115,7 @@ function VoiceChannelTooltip({ channel, isLocked }: VoiceChannelTooltipProps) {
                 {channelIcon}
                 <Text variant="text-sm/semibold">{channelName}</Text>
             </div>
-            <div className={cl("vc-members")}>
+            <div className={cl("pc-members")}>
                 {isLocked ? <LockedSpeakerIcon size={18} /> : <SpeakerIcon size={18} />}
                 <UserSummaryItem
                     users={users}
@@ -143,7 +143,7 @@ export const VoiceChannelIndicator = ErrorBoundary.wrap(({ userId, isActionButto
     if (channel == null) return null;
 
     const isDM = channel.isDM() || channel.isMultiUserDM();
-    if (!isDM && !PermissionStore.can(PermissionsBits.VIEW_CHANNEL, channel) && !Vencord.Plugins.isPluginEnabled("ShowHiddenChannels")) return null;
+    if (!isDM && !PermissionStore.can(PermissionsBits.VIEW_CHANNEL, channel) && !Plexcord.Plugins.isPluginEnabled("ShowHiddenChannels")) return null;
 
     const isLocked = !isDM && (!PermissionStore.can(PermissionsBits.VIEW_CHANNEL, channel) || !PermissionStore.can(PermissionsBits.CONNECT, channel));
 

@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2024 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -23,7 +23,7 @@ function createPinMenuItem(channelId: string) {
             {!pinned && (
                 <>
                     <Menu.MenuItem
-                        id="vc-add-category"
+                        id="pc-add-category"
                         label="Add Category"
                         color="brand"
                         action={() => openCategoryModal(null, channelId)}

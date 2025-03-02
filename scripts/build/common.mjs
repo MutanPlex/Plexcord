@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -129,7 +129,7 @@ export const makeAllPackagesExternalPlugin = {
 };
 
 /**
- * @type {(kind: "web" | "discordDesktop" | "vencordDesktop") => import("esbuild").Plugin}
+ * @type {(kind: "web" | "discordDesktop" | "plexcordDesktop") => import("esbuild").Plugin}
  */
 export const globPlugins = kind => ({
     name: "glob-plugins",
@@ -168,7 +168,7 @@ export const globPlugins = kind => ({
                             (target === "web" && kind === "discordDesktop") ||
                             (target === "desktop" && kind === "web") ||
                             (target === "discordDesktop" && kind !== "discordDesktop") ||
-                            (target === "vencordDesktop" && kind !== "vencordDesktop");
+                            (target === "plexcordDesktop" && kind !== "plexcordDesktop");
 
                         if (excluded) {
                             const name = await resolvePluginName(fullDir, file);
@@ -222,7 +222,7 @@ export const gitRemotePlugin = {
             namespace: "git-remote", path: args.path
         }));
         build.onLoad({ filter, namespace: "git-remote" }, async () => {
-            let remote = process.env.VENCORD_REMOTE;
+            let remote = process.env.PLEXCORD_REMOTE;
             if (!remote) {
                 const res = await promisify(exec)("git remote get-url origin", { encoding: "utf-8" });
                 remote = res.stdout.trim()
@@ -349,8 +349,8 @@ export const commonOpts = {
     external: ["~plugins", "~git-hash", "~git-remote", "/assets/*"],
     inject: ["./scripts/build/inject/react.mjs"],
     jsx: "transform",
-    jsxFactory: "VencordCreateElement",
-    jsxFragment: "VencordFragment"
+    jsxFactory: "PlexcordCreateElement",
+    jsxFragment: "PlexcordFragment"
 };
 
 const escapedBuiltinModules = builtinModules

@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -54,7 +54,7 @@ export function authorize(callback?: any) {
             callback={async (response: any) => {
                 try {
                     const url = new URL(response.location);
-                    url.searchParams.append("clientMod", "vencord");
+                    url.searchParams.append("clientMod", "plexcord");
                     const res = await fetch(url, {
                         headers: { Accept: "application/json" }
                     });

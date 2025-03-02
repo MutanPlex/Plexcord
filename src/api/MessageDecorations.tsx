@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -69,7 +69,7 @@ export function __addDecorationsToMessage(props: MessageDecorationProps): JSX.El
     );
 
     return (
-        <div className="vc-message-decorations-wrapper">
+        <div className="pc-message-decorations-wrapper">
             {decorations}
         </div>
     );

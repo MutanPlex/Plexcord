@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,7 @@ import { getUserSettingLazy } from "@api/UserSettings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
-import { openUpdaterModal } from "@components/VencordSettings/UpdaterTab";
+import { openUpdaterModal } from "@components/PlexcordSettings/UpdaterTab";
 import { BOT_COMMANDS_CHANNEL_ID, CONTRIB_ROLE_ID, Devs, DONOR_ROLE_ID, KNOWN_ISSUES_CHANNEL_ID, PLEXBOT_USER_ID, PLEXCORD_GUILD_ID, REGULAR_ROLE_ID, SUPPORT_CHANNEL_ID } from "@utils/constants";
 import { sendMessage } from "@utils/discord";
 import { Logger } from "@utils/Logger";
@@ -44,8 +44,8 @@ const CodeBlockRe = /```js\n(.+?)```/s;
 
 const AllowedChannelIds = [
     SUPPORT_CHANNEL_ID,
-    BOT_COMMANDS_CHANNEL_ID, // Vencord > #bot-spam
-    "1033680203433660458", // Vencord > #v
+    BOT_COMMANDS_CHANNEL_ID, // Plexcord > #bot-spam
+    "1345725658482999448", // Plexcord > #mp
 ];
 
 const TrustedRolesIds = [
@@ -82,7 +82,7 @@ async function generateDebugInfoMessage() {
     })();
 
     const info = {
-        Vencord:
+        Plexcord:
             `v${VERSION} • [${gitHash}](<https://github.com/MutanPlex/Plexcord/commit/${gitHash}>)` +
             `${SettingsPlugin.additionalInfo} - ${Intl.DateTimeFormat("en-GB", { dateStyle: "medium" }).format(BUILD_TIMESTAMP)}`,
         Client: `${RELEASE_CHANNEL} ~ ${client}`,
@@ -94,7 +94,7 @@ async function generateDebugInfoMessage() {
     }
 
     const commonIssues = {
-        "NoRPC enabled": Vencord.Plugins.isPluginEnabled("NoRPC"),
+        "NoRPC enabled": Plexcord.Plugins.isPluginEnabled("NoRPC"),
         "Activity Sharing disabled": tryOrElse(() => !ShowCurrentGame.getSetting(), false),
         "Plexcord DevBuild": !IS_STANDALONE,
         "Has PlexcordPlugins": Object.values(PluginMeta).some(m => m.userPlugin),
@@ -113,7 +113,7 @@ function generatePluginList() {
     const isApiPlugin = (plugin: string) => plugin.endsWith("API") || plugins[plugin].required;
 
     const enabledPlugins = Object.keys(plugins)
-        .filter(p => Vencord.Plugins.isPluginEnabled(p) && !isApiPlugin(p));
+        .filter(p => Plexcord.Plugins.isPluginEnabled(p) && !isApiPlugin(p));
 
     const enabledStockPlugins = enabledPlugins.filter(p => !PluginMeta[p].userPlugin);
     const enabledPlexCordPlugins = enabledPlugins.filter(p => PluginMeta[p].userPlugin);
@@ -246,7 +246,7 @@ export default definePlugin({
         if (shouldAddUpdateButton) {
             buttons.push(
                 <Button
-                    key="vc-update"
+                    key="pc-update"
                     color={Button.Colors.GREEN}
                     onClick={async () => {
                         try {
@@ -269,13 +269,13 @@ export default definePlugin({
             if (props.message.content.includes("/plexcord-debug") || props.message.content.includes("/plexcord-plugins")) {
                 buttons.push(
                     <Button
-                        key="vc-dbg"
+                        key="pc-dbg"
                         onClick={async () => sendMessage(props.channel.id, { content: await generateDebugInfoMessage() })}
                     >
                         Run /plexcord-debug
                     </Button>,
                     <Button
-                        key="vc-plg-list"
+                        key="pc-plg-list"
                         onClick={async () => sendMessage(props.channel.id, { content: generatePluginList() })}
                     >
                         Run /plexcord-plugins
@@ -288,7 +288,7 @@ export default definePlugin({
                 if (match) {
                     buttons.push(
                         <Button
-                            key="vc-run-snippet"
+                            key="pc-run-snippet"
                             onClick={async () => {
                                 try {
                                     await AsyncFunction(match[1])();
@@ -317,7 +317,7 @@ export default definePlugin({
         if (RelationshipStore.isFriend(userId) || (isPluginDev(UserStore.getCurrentUser()?.id) && isPcPluginDev(UserStore.getCurrentUser()?.id))) return null;
 
         return (
-            <Card className={`vc-plugins-restart-card ${Margins.top8}`}>
+            <Card className={`pc-plugins-restart-card ${Margins.top8}`}>
                 Please do not private message Plexcord plugin developers for support!
                 <br />
                 Instead, use the Plexcord support channel: {Parser.parse("https://discord.com/channels/1342668210331324476/1344043206286905364")}

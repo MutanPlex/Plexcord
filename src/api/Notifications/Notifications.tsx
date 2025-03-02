@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -33,7 +33,7 @@ let id = 42;
 function getRoot() {
     if (!reactRoot) {
         const container = document.createElement("div");
-        container.id = "vc-notification-container";
+        container.id = "pc-notification-container";
         document.body.append(container);
         reactRoot = ReactDOM.createRoot(container);
     }

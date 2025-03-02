@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2024 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -41,7 +41,7 @@ export default definePlugin({
                 {tooltipProps => (
                     <div
                         {...tooltipProps}
-                        className="vc-cfc-button"
+                        className="pc-cfc-button"
                         role="button"
                         onClick={() => {
                             if (!recentlyCopied && bytesLeft <= 0) {

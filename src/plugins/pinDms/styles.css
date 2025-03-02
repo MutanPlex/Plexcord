@@ -1,4 +1,4 @@
-.vc-pindms-section-container {
+.pc-pindms-section-container {
     box-sizing: border-box;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -14,24 +14,24 @@
     cursor: pointer;
 }
 
-.vc-pindms-modal-content {
+.pc-pindms-modal-content {
     display: grid;
     justify-content: center;
     padding: 1rem;
     gap: 1.5rem;
 }
 
-.vc-pindms-modal-content [class^="defaultContainer"] {
+.pc-pindms-modal-content [class^="defaultContainer"] {
     display: none;
 }
 
-.vc-pindms-collapse-icon {
+.pc-pindms-collapse-icon {
     width: 16px;
     height: 16px;
     color: var(--interactive-normal);
     transform: rotate(90deg)
 }
 
-.vc-pindms-collapsed .vc-pindms-collapse-icon {
+.pc-pindms-collapsed .pc-pindms-collapse-icon {
     transform: rotate(0deg);
 }

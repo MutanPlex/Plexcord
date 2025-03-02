@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2024 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -13,12 +13,12 @@ import { GithubIcon, WebsiteIcon } from "..";
 
 export function GithubLinkIcon() {
     const theme = getTheme() === Theme.Light ? "#000000" : "#FFFFFF";
-    return <GithubIcon aria-hidden fill={theme} className={"vc-settings-modal-link-icon"} />;
+    return <GithubIcon aria-hidden fill={theme} className={"pc-settings-modal-link-icon"} />;
 }
 
 export function WebsiteLinkIcon() {
     const theme = getTheme() === Theme.Light ? "#000000" : "#FFFFFF";
-    return <WebsiteIcon aria-hidden fill={theme} className={"vc-settings-modal-link-icon"} />;
+    return <WebsiteIcon aria-hidden fill={theme} className={"pc-settings-modal-link-icon"} />;
 }
 
 interface Props {

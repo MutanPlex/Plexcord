@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -211,7 +211,7 @@ export default definePlugin({
                         className={classes(Margins.top8, Margins.bottom8)}
                     />
                     <Forms.FormTitle tag="h3">Preview</Forms.FormTitle>
-                    <div className="vc-fpt-preview">
+                    <div className="pc-fpt-preview">
                         <ProfileModal
                             user={UserStore.getCurrentUser()}
                             pendingThemeColors={[color1, color2]}

@@ -1,11 +1,11 @@
-.vc-smyn-suffix {
+.pc-smyn-suffix {
     color: var(--text-muted);
 }
 
-.vc-smyn-suffix::before {
+.pc-smyn-suffix::before {
     content: "(";
 }
 
-.vc-smyn-suffix::after {
+.pc-smyn-suffix::after {
     content: ")";
 }

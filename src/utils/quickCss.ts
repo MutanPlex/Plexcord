@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -31,32 +31,32 @@ function createStyle(id: string) {
 }
 
 async function initSystemValues() {
-    const values = await VencordNative.themes.getSystemValues();
+    const values = await PlexcordNative.themes.getSystemValues();
     const variables = Object.entries(values)
         .filter(([, v]) => v !== "#")
         .map(([k, v]) => `--${k}: ${v};`)
         .join("");
 
-    createStyle("vencord-os-theme-values").textContent = `:root{${variables}}`;
+    createStyle("plexcord-os-theme-values").textContent = `:root{${variables}}`;
 }
 
 export async function toggle(isEnabled: boolean) {
     if (!style) {
         if (isEnabled) {
-            style = createStyle("vencord-custom-css");
-            VencordNative.quickCss.addChangeListener(css => {
+            style = createStyle("plexcord-custom-css");
+            PlexcordNative.quickCss.addChangeListener(css => {
                 style.textContent = css;
                 // At the time of writing this, changing textContent resets the disabled state
                 style.disabled = !Settings.useQuickCss;
             });
-            style.textContent = await VencordNative.quickCss.get();
+            style.textContent = await PlexcordNative.quickCss.get();
         }
     } else
         style.disabled = !isEnabled;
 }
 
 async function initThemes() {
-    themesStyle ??= createStyle("vencord-themes");
+    themesStyle ??= createStyle("plexcord-themes");
 
     const { themeLinks, enabledThemes } = Settings;
 
@@ -75,7 +75,7 @@ async function initThemes() {
 
     if (IS_WEB) {
         for (const theme of enabledThemes) {
-            const themeData = await VencordNative.themes.getThemeData(theme);
+            const themeData = await PlexcordNative.themes.getThemeData(theme);
             if (!themeData) continue;
             const blob = new Blob([themeData], { type: "text/css" });
             links.push(URL.createObjectURL(blob));
@@ -100,5 +100,5 @@ document.addEventListener("DOMContentLoaded", () => {
     ThemeStore.addChangeListener(initThemes);
 
     if (!IS_WEB)
-        VencordNative.quickCss.addThemeChangeListener(initThemes);
+        PlexcordNative.quickCss.addThemeChangeListener(initThemes);
 });

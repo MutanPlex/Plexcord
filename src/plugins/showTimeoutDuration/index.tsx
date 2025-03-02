@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2024 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -88,7 +88,7 @@ export default definePlugin({
             return <Tooltip text={renderTimeout(message, false)}>{children}</Tooltip>;
 
         return (
-            <div className="vc-std-wrapper">
+            <div className="pc-std-wrapper">
                 <Tooltip text={text}>{children}</Tooltip>
                 <Text variant="text-md/normal" color="status-danger">
                     {renderTimeout(message, true)} timeout remaining

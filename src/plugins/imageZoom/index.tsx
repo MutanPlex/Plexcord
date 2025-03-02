@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -91,7 +91,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
     children.push(
         <Menu.MenuGroup id="image-zoom">
             <Menu.MenuCheckboxItem
-                id="vc-square"
+                id="pc-square"
                 label="Square Lens"
                 checked={square}
                 action={() => {
@@ -99,7 +99,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
                 }}
             />
             <Menu.MenuCheckboxItem
-                id="vc-nearest-neighbour"
+                id="pc-nearest-neighbour"
                 label="Nearest Neighbour"
                 checked={nearestNeighbour}
                 action={() => {
@@ -107,7 +107,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
                 }}
             />
             <Menu.MenuControlItem
-                id="vc-zoom"
+                id="pc-zoom"
                 label="Zoom"
                 control={(props, ref) => (
                     <Menu.MenuSliderControl
@@ -121,7 +121,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
                 )}
             />
             <Menu.MenuControlItem
-                id="vc-size"
+                id="pc-size"
                 label="Lens Size"
                 control={(props, ref) => (
                     <Menu.MenuSliderControl
@@ -135,7 +135,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
                 )}
             />
             <Menu.MenuControlItem
-                id="vc-zoom-speed"
+                id="pc-zoom-speed"
                 label="Zoom Speed"
                 control={(props, ref) => (
                     <Menu.MenuSliderControl

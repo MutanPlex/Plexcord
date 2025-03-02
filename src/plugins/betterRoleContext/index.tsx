@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2024 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -85,7 +85,7 @@ export default definePlugin({
             if (role.colorString) {
                 children.unshift(
                     <Menu.MenuItem
-                        id="vc-copy-role-color"
+                        id="pc-copy-role-color"
                         label="Copy Role Color"
                         action={() => Clipboard.copy(role.colorString!)}
                         icon={AppearanceIcon}
@@ -96,7 +96,7 @@ export default definePlugin({
             if (PermissionStore.getGuildPermissionProps(guild).canManageRoles) {
                 children.unshift(
                     <Menu.MenuItem
-                        id="vc-edit-role"
+                        id="pc-edit-role"
                         label="Edit Role"
                         action={async () => {
                             await GuildSettingsActions.open(guild.id, "ROLES");
@@ -110,7 +110,7 @@ export default definePlugin({
             if (role.icon) {
                 children.push(
                     <Menu.MenuItem
-                        id="vc-view-role-icon"
+                        id="pc-view-role-icon"
                         label="View Role Icon"
                         action={() => {
                             openImageModal({

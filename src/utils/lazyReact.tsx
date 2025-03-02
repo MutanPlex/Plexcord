@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -23,7 +23,7 @@ export function LazyComponent<T extends object = any>(factory: () => React.Compo
         return <Component {...props} />;
     };
 
-    LazyComponent.$$vencordInternal = get;
+    LazyComponent.$$plexcordInternal = get;
 
     return LazyComponent as ComponentType<T>;
 }

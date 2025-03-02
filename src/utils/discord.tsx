@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -143,8 +143,8 @@ export function sendMessage(
  */
 export function openImageModal(item: Except<MediaModalItem, "type">, mediaModalProps?: Omit<MediaModalProps, "items">) {
     return openMediaModal({
-        className: "vc-image-modal",
-        fit: "vc-position-inherit",
+        className: "pc-image-modal",
+        fit: "pc-position-inherit",
         shouldAnimateCarousel: true,
         items: [{
             type: "IMAGE",

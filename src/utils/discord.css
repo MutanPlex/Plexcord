@@ -1,4 +1,4 @@
-.vc-position-inherit {
+.pc-position-inherit {
     position: inherit;
 }
 
@@ -6,7 +6,7 @@
  * copy pasted from discord css. not really webpack-findable since it's the only class in the module
 **/
 
-.vc-image-modal {
+.pc-image-modal {
     background: transparent !important;
     box-shadow: none !important;
     display: flex;
@@ -15,8 +15,8 @@
     border-radius: 0;
 }
 
-@media(width <= 485px) {
-    .vc-image-modal {
+@media(width <=485px) {
+    .pc-image-modal {
         overflow: visible;
         overflow: initial;
     }

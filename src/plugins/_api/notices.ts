@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -30,11 +30,11 @@ export default definePlugin({
             replacement: [
                 {
                     match: /(?<=!1;)\i=null;(?=.{0,80}getPremiumSubscription\(\))/g,
-                    replace: "if(Vencord.Api.Notices.currentNotice)return false;$&"
+                    replace: "if(Plexcord.Api.Notices.currentNotice)return false;$&"
                 },
                 {
                     match: /(?<=,NOTICE_DISMISS:function\(\i\){)return null!=(\i)/,
-                    replace: "if($1?.id==\"VencordNotice\")return($1=null,Vencord.Api.Notices.nextNotice(),true);$&"
+                    replace: "if($1?.id==\"PlexcordNotice\")return($1=null,Plexcord.Api.Notices.nextNotice(),true);$&"
                 }
             ]
         }

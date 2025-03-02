@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,4 +20,4 @@ import { classNameFactory } from "@api/Styles";
 import { findStoreLazy } from "@webpack";
 
 export const MediaEngineStore = findStoreLazy("MediaEngineStore");
-export const cl = classNameFactory("vc-vmsg-");
+export const cl = classNameFactory("pc-vmsg-");

@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -36,7 +36,7 @@ const messageCtxPatch: NavContextMenuPatchCallback = (children, { message }) => 
 
     group.splice(group.findIndex(c => c?.props?.id === "copy-text") + 1, 0, (
         <Menu.MenuItem
-            id="vc-trans"
+            id="pc-trans"
             label="Translate"
             icon={TranslateIcon}
             action={async () => {

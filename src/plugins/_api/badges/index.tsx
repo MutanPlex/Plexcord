@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -158,7 +158,7 @@ export default definePlugin({
                 const modalKey = openModal(props => (
                     <ErrorBoundary noop onError={() => {
                         closeModal(modalKey);
-                        VencordNative.native.openExternal("https://github.com/sponsors/MutanPlex");
+                        PlexcordNative.native.openExternal("https://github.com/sponsors/MutanPlex");
                     }}>
                         <ModalRoot {...props}>
                             <ModalHeader>

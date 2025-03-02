@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -22,7 +22,7 @@ import Plugins from "~plugins";
 import { PluginCard } from ".";
 import { GithubButton, WebsiteButton } from "./LinkIconButton";
 
-const cl = classNameFactory("vc-author-modal-");
+const cl = classNameFactory("pc-author-modal-");
 
 export function openContributorModal(user: User) {
     openModal(modalProps =>
@@ -72,7 +72,7 @@ function ContributorModal({ user }: { user: User; }) {
                 />
                 <Forms.FormTitle tag="h2" className={cl("name")}>{user.username}</Forms.FormTitle>
 
-                <div className={classes("vc-settings-modal-links", cl("links"))}>
+                <div className={classes("pc-settings-modal-links", cl("links"))}>
                     {website && (
                         <WebsiteButton
                             text={website}
@@ -94,7 +94,7 @@ function ContributorModal({ user }: { user: User; }) {
                 </Forms.FormText>
             ) : (
                 <Forms.FormText>
-                    This person has not made any plugins. They likely {ContributedHyperLink} to Vencord in other ways!
+                    This person has not made any plugins. They likely {ContributedHyperLink} to Plexcord in other ways!
                 </Forms.FormText>
             )}
 

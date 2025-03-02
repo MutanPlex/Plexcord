@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2024 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -60,7 +60,7 @@ export default definePlugin({
 
             children.push(
                 <Menu.MenuItem
-                    id="vc-copy-emoji-markdown"
+                    id="pc-copy-emoji-markdown"
                     label="Copy Emoji Markdown"
                     action={() => {
                         copyWithToast(

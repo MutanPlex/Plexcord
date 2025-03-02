@@ -1,6 +1,6 @@
 #!/usr/bin/node
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -127,7 +127,7 @@ const buildConfigs = ([
     },
     {
         ...commonOpts,
-        entryPoints: ["src/Vencord.ts"],
+        entryPoints: ["src/Plexcord.ts"],
         outfile: "dist/renderer.js",
         format: "iife",
         target: ["esnext"],
@@ -157,7 +157,7 @@ const buildConfigs = ([
         }
     },
 
-    // Vencord Desktop main & renderer & preload
+    // Plexcord Desktop main & renderer & preload
     {
         ...nodeCommonOpts,
         entryPoints: ["src/main/index.ts"],
@@ -176,15 +176,15 @@ const buildConfigs = ([
     },
     {
         ...commonOpts,
-        entryPoints: ["src/Vencord.ts"],
+        entryPoints: ["src/Plexcord.ts"],
         outfile: "dist/plexcordDesktopRenderer.js",
         format: "iife",
         target: ["esnext"],
         footer: { js: "//# sourceURL=PlexcordDesktopRenderer\n" + sourceMapFooter("plexcordDesktopRenderer") },
-        globalName: "Vencord",
+        globalName: "Plexcord",
         sourcemap,
         plugins: [
-            globPlugins("vencordDesktop"),
+            globPlugins("plexcordDesktop"),
             ...commonRendererPlugins
         ],
         define: {

@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -18,7 +18,7 @@ import { Guild, User } from "discord-types/general";
 const IconClasses = findByPropsLazy("icon", "acronym", "childWrapper");
 const FriendRow = findComponentByCodeLazy(".listName,discriminatorClass");
 
-const cl = classNameFactory("vc-gp-");
+const cl = classNameFactory("pc-gp-");
 
 export function openGuildInfoModal(guild: Guild) {
     openModal(props =>

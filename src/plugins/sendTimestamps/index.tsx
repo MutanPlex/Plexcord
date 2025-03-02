@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -51,7 +51,7 @@ function parseTime(time: string) {
 const Formats = ["", "t", "T", "d", "D", "f", "F", "R"] as const;
 type Format = typeof Formats[number];
 
-const cl = classNameFactory("vc-st-");
+const cl = classNameFactory("pc-st-");
 
 function PickerModal({ rootProps, close }: { rootProps: ModalProps, close(): void; }) {
     const [value, setValue] = useState<string>();

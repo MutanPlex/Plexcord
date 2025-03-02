@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2024 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -128,7 +128,7 @@ export default definePlugin({
                 },
                 {
                     match: /case \i\.\i\.DEVELOPER_OPTIONS:return \i;/,
-                    replace: "$&case 'VencordPlugins':return $self.PluginsSubmenu();"
+                    replace: "$&case 'PlexcordPlugins':return $self.PluginsSubmenu();"
                 }
             ]
         },

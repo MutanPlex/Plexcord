@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -300,7 +300,7 @@ export default definePlugin({
         }, []);
 
         const types = useMemo(
-            () => Object.keys(Vencord.Plugins.plugins.VcNarrator.options!).filter(k => k.endsWith("Message")).map(k => k.slice(0, -7)),
+            () => Object.keys(Plexcord.Plugins.plugins.VcNarrator.options!).filter(k => k.endsWith("Message")).map(k => k.slice(0, -7)),
             [],
         );
 
@@ -333,7 +333,7 @@ export default definePlugin({
                                 gridTemplateColumns: "repeat(4, 1fr)",
                                 gap: "1rem",
                             }}
-                            className={"vc-narrator-buttons"}
+                            className={"pc-narrator-buttons"}
                         >
                             {types.map(t => (
                                 <Button key={t} onClick={() => playSample(s, t)}>

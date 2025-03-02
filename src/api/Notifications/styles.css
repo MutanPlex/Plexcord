@@ -1,4 +1,4 @@
-.vc-notification-root {
+.pc-notification-root {
     /* clear default button styles */
     all: unset;
     display: flex;
@@ -11,7 +11,7 @@
     width: 100%;
 }
 
-.vc-notification-root:not(.vc-notification-log-wrapper > .vc-notification-root) {
+.pc-notification-root:not(.pc-notification-log-wrapper > .pc-notification-root) {
     position: absolute;
     z-index: 2147483647;
     right: 1rem;
@@ -19,23 +19,23 @@
     min-height: 10vh;
 }
 
-.vc-notification {
+.pc-notification {
     display: flex;
     flex-direction: row;
     padding: 1.25rem;
     gap: 1.25rem;
 }
 
-.vc-notification-content {
+.pc-notification-content {
     width: 100%;
 }
 
-.vc-notification-header {
+.pc-notification-header {
     display: flex;
     justify-content: space-between;
 }
 
-.vc-notification-title {
+.pc-notification-title {
     color: var(--header-primary);
     font-size: 1rem;
     font-weight: 600;
@@ -43,7 +43,7 @@
     text-transform: uppercase;
 }
 
-.vc-notification-close-btn {
+.pc-notification-close-btn {
     all: unset;
     cursor: pointer;
     color: var(--interactive-normal);
@@ -51,72 +51,72 @@
     transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-.vc-notification-close-btn:hover {
+.pc-notification-close-btn:hover {
     color: var(--interactive-hover);
     opacity: 1;
 }
 
-.vc-notification-icon {
+.pc-notification-icon {
     height: 4rem;
     width: 4rem;
     border-radius: 6px;
 }
 
-.vc-notification-progressbar {
+.pc-notification-progressbar {
     height: 0.25rem;
     border-radius: 5px;
     margin-top: auto;
 }
 
-.vc-notification-p {
+.pc-notification-p {
     margin: 0.5rem 0 0;
     line-height: 140%;
 }
 
-.vc-notification-img {
+.pc-notification-img {
     width: 100%;
 }
 
-.vc-notification-log-empty {
+.pc-notification-log-empty {
     height: 218px;
     background: url("/assets/b36de980b174d7b798c89f35c116e5c6.svg") center no-repeat;
     margin-bottom: 40px;
 }
 
-.vc-notification-log-container {
+.pc-notification-log-container {
     display: flex;
     flex-direction: column;
     padding: 1em;
     overflow: hidden;
 }
 
-.vc-notification-log-wrapper {
+.pc-notification-log-wrapper {
     transition: 200ms ease;
     transition-property: height, opacity;
 }
 
-.vc-notification-log-wrapper:not(:last-child) {
+.pc-notification-log-wrapper:not(:last-child) {
     margin-bottom: 1em;
 }
 
-.vc-notification-log-removing {
+.pc-notification-log-removing {
     height: 0 !important;
     opacity: 0;
     margin-bottom: 1em;
 }
 
-.vc-notification-log-body {
+.pc-notification-log-body {
     display: flex;
     flex-direction: column;
 }
 
-.vc-notification-log-timestamp {
+.pc-notification-log-timestamp {
     margin-left: auto;
     font-size: 0.8em;
     font-weight: lighter;
 }
 
-.vc-notification-log-danger-btn {
+.pc-notification-log-danger-btn {
     color: var(--white-500);
     background-color: var(--button-danger-background);
 }

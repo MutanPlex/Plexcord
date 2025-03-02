@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -205,19 +205,19 @@ function Updater() {
     };
 
     return (
-        <SettingsTab title="Vencord Updater">
+        <SettingsTab title="Plexcord Updater">
             <Forms.FormTitle tag="h5">Updater Settings</Forms.FormTitle>
             <Switch
                 value={settings.autoUpdate}
                 onChange={(v: boolean) => settings.autoUpdate = v}
-                note="Automatically update Vencord without confirmation prompt"
+                note="Automatically update Plexcord without confirmation prompt"
             >
                 Automatically update
             </Switch>
             <Switch
                 value={settings.autoUpdateNotification}
                 onChange={(v: boolean) => settings.autoUpdateNotification = v}
-                note="Shows a notification when Vencord automatically updates"
+                note="Shows a notification when Plexcord automatically updates"
                 disabled={!settings.autoUpdate}
             >
                 Get notified when an automatic update completes
@@ -225,7 +225,7 @@ function Updater() {
 
             <Forms.FormTitle tag="h5">Repo</Forms.FormTitle>
 
-            <Forms.FormText className="vc-text-selectable">
+            <Forms.FormText className="pc-text-selectable">
                 {repoPending
                     ? repo
                     : err
@@ -256,8 +256,8 @@ export const openUpdaterModal = IS_UPDATER_DISABLED ? null : function () {
     try {
         openModal(wrapTab((modalProps: ModalProps) => (
             <ModalRoot {...modalProps} size={ModalSize.MEDIUM}>
-                <ModalContent className="vc-updater-modal">
-                    <ModalCloseButton onClick={modalProps.onClose} className="vc-updater-modal-close-button" />
+                <ModalContent className="pc-updater-modal">
+                    <ModalCloseButton onClick={modalProps.onClose} className="pc-updater-modal-close-button" />
                     <UpdaterTab />
                 </ModalContent>
             </ModalRoot>

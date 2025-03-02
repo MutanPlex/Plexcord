@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -31,8 +31,8 @@ export default function DonateButton({
             {...props}
             look={look}
             color={color}
-            onClick={() => VencordNative.native.openExternal("https://github.com/sponsors/MutanPlex")}
-            innerClassName="vc-donate-button"
+            onClick={() => PlexcordNative.native.openExternal("https://github.com/sponsors/MutanPlex")}
+            innerClassName="pc-donate-button"
         >
             <Heart />
             Donate

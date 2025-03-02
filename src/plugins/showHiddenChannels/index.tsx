@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -33,7 +33,7 @@ import HiddenChannelLockScreen from "./components/HiddenChannelLockScreen";
 
 const ChannelListClasses = findByPropsLazy("modeMuted", "modeSelected", "unread", "icon");
 
-export const cl = classNameFactory("vc-shc-");
+export const cl = classNameFactory("pc-shc-");
 
 const enum ShowMode {
     LockIcon,
@@ -293,12 +293,12 @@ export default definePlugin({
                 {
                     // Change the role permission check to CONNECT if the channel is locked
                     match: /ADMINISTRATOR\)\|\|(?<=context:(\i)}.+?)(?=(.+?)VIEW_CHANNEL)/,
-                    replace: (m, channel, permCheck) => `${m}!Vencord.Webpack.Common.PermissionStore.can(${CONNECT}n,${channel})?${permCheck}CONNECT):`
+                    replace: (m, channel, permCheck) => `${m}!Plexcord.Webpack.Common.PermissionStore.can(${CONNECT}n,${channel})?${permCheck}CONNECT):`
                 },
                 {
                     // Change the permissionOverwrite check to CONNECT if the channel is locked
                     match: /permissionOverwrites\[.+?\i=(?<=context:(\i)}.+?)(?=(.+?)VIEW_CHANNEL)/,
-                    replace: (m, channel, permCheck) => `${m}!Vencord.Webpack.Common.PermissionStore.can(${CONNECT}n,${channel})?${permCheck}CONNECT):`
+                    replace: (m, channel, permCheck) => `${m}!Plexcord.Webpack.Common.PermissionStore.can(${CONNECT}n,${channel})?${permCheck}CONNECT):`
                 },
                 {
                     // Include the @everyone role in the allowed roles list for Hidden Channels

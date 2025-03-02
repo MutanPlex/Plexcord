@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-export const REACT_GLOBAL = "Vencord.Webpack.Common.React";
+export const REACT_GLOBAL = "Plexcord.Webpack.Common.React";
 export const PLEXBOT_USER_ID = "772640437789523978";
 export const PLEXCORD_GUILD_ID = "1342668210331324476";
 export const DONOR_ROLE_ID = "1344056188374880346";

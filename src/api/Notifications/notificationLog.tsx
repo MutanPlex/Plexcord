@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@ import * as DataStore from "@api/DataStore";
 import { Settings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Flex } from "@components/Flex";
-import { openNotificationSettingsModal } from "@components/VencordSettings/NotificationSettings";
+import { openNotificationSettingsModal } from "@components/PlexcordSettings/NotificationSettings";
 import { closeModal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { useAwaiter } from "@utils/react";
 import { Alerts, Button, Forms, React, Text, Timestamp, useEffect, useReducer, useState } from "@webpack/common";
@@ -42,7 +42,7 @@ const getLog = async () => {
     return log ?? [];
 };
 
-const cl = classNameFactory("vc-notification-log-");
+const cl = classNameFactory("pc-notification-log-");
 const signals = new Set<DispatchWithoutAction>();
 
 export async function persistNotification(notification: NotificationData) {
@@ -189,7 +189,7 @@ function LogModal({ modalProps, close }: { modalProps: ModalProps; close(): void
                                     signals.forEach(x => x());
                                 },
                                 confirmText: "Do it!",
-                                confirmColor: "vc-notification-log-danger-btn",
+                                confirmColor: "pc-notification-log-danger-btn",
                                 cancelText: "Nevermind"
                             });
                         }}

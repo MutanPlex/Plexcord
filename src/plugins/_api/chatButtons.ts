@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2024 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -19,8 +19,8 @@ export default definePlugin({
                 // FIXME(Bundler change related): Remove old compatiblity once enough time has passed
                 match: /return\((!)?\i\.\i(?:\|\||&&)(?=\(\i\.isDM.+?(\i)\.push)/,
                 replace: (m, not, children) => not
-                    ? `${m}(Vencord.Api.ChatButtons._injectButtons(${children},arguments[0]),true)&&`
-                    : `${m}(Vencord.Api.ChatButtons._injectButtons(${children},arguments[0]),false)||`
+                    ? `${m}(Plexcord.Api.ChatButtons._injectButtons(${children},arguments[0]),true)&&`
+                    : `${m}(Plexcord.Api.ChatButtons._injectButtons(${children},arguments[0]),false)||`
             }
         }
     ]

@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,7 @@ import { classNameFactory } from "@api/Styles";
 import { Card, Clickable, Forms, React } from "@webpack/common";
 import type { PropsWithChildren } from "react";
 
-const cl = classNameFactory("vc-special-");
+const cl = classNameFactory("pc-special-");
 
 interface StyledCardProps {
     title: string;

@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -98,7 +98,7 @@ function Modal({ modalProps, modalKey, discordId, name, type }: { modalProps: an
 }
 
 export function openReviewsModal(discordId: string, name: string, type: ReviewType) {
-    const modalKey = "vc-rdb-modal-" + Date.now();
+    const modalKey = "pc-rdb-modal-" + Date.now();
 
     openModal(props => (
         <Modal

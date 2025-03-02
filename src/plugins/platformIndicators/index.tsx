@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -120,7 +120,7 @@ function getBadges({ userId }: BadgeUserArgs): ProfileBadge[] {
 
     return Object.entries(status).map(([platform, status]) => ({
         component: () => (
-            <span className="vc-platform-indicator">
+            <span className="pc-platform-indicator">
                 <PlatformIcon
                     key={platform}
                     platform={platform as Platform}
@@ -129,7 +129,7 @@ function getBadges({ userId }: BadgeUserArgs): ProfileBadge[] {
                 />
             </span>
         ),
-        key: `vc-platform-indicator-${platform}`
+        key: `pc-platform-indicator-${platform}`
     }));
 }
 
@@ -154,7 +154,7 @@ const PlatformIndicator = ({ user, small = false }: { user: User; small?: boolea
 
     return (
         <span
-            className="vc-platform-indicator"
+            className="pc-platform-indicator"
             style={{ gap: "2px" }}
         >
             {icons}

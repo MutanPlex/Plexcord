@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,29 +17,29 @@
 */
 
 export const enum IpcEvents {
-    QUICK_CSS_UPDATE = "VencordQuickCssUpdate",
-    THEME_UPDATE = "VencordThemeUpdate",
-    GET_QUICK_CSS = "VencordGetQuickCss",
-    SET_QUICK_CSS = "VencordSetQuickCss",
-    UPLOAD_THEME = "VencordUploadTheme",
-    DELETE_THEME = "VencordDeleteTheme",
-    GET_THEMES_DIR = "VencordGetThemesDir",
-    GET_THEMES_LIST = "VencordGetThemesList",
-    GET_THEME_DATA = "VencordGetThemeData",
-    GET_THEME_SYSTEM_VALUES = "VencordGetThemeSystemValues",
-    GET_SETTINGS_DIR = "VencordGetSettingsDir",
-    GET_SETTINGS = "VencordGetSettings",
-    SET_SETTINGS = "VencordSetSettings",
-    OPEN_EXTERNAL = "VencordOpenExternal",
-    OPEN_QUICKCSS = "VencordOpenQuickCss",
-    GET_UPDATES = "VencordGetUpdates",
-    GET_REPO = "VencordGetRepo",
-    UPDATE = "VencordUpdate",
-    BUILD = "VencordBuild",
-    OPEN_MONACO_EDITOR = "VencordOpenMonacoEditor",
+    QUICK_CSS_UPDATE = "PlexcordQuickCssUpdate",
+    THEME_UPDATE = "PlexcordThemeUpdate",
+    GET_QUICK_CSS = "PlexcordGetQuickCss",
+    SET_QUICK_CSS = "PlexcordSetQuickCss",
+    UPLOAD_THEME = "PlexcordUploadTheme",
+    DELETE_THEME = "PlexcordDeleteTheme",
+    GET_THEMES_DIR = "PlexcordGetThemesDir",
+    GET_THEMES_LIST = "PlexcordGetThemesList",
+    GET_THEME_DATA = "PlexcordGetThemeData",
+    GET_THEME_SYSTEM_VALUES = "PlexcordGetThemeSystemValues",
+    GET_SETTINGS_DIR = "PlexcordGetSettingsDir",
+    GET_SETTINGS = "PlexcordGetSettings",
+    SET_SETTINGS = "PlexcordSetSettings",
+    OPEN_EXTERNAL = "PlexcordOpenExternal",
+    OPEN_QUICKCSS = "PlexcordOpenQuickCss",
+    GET_UPDATES = "PlexcordGetUpdates",
+    GET_REPO = "PlexcordGetRepo",
+    UPDATE = "PlexcordUpdate",
+    BUILD = "PlexcordBuild",
+    OPEN_MONACO_EDITOR = "PlexcordOpenMonacoEditor",
 
-    GET_PLUGIN_IPC_METHOD_MAP = "VencordGetPluginIpcMethodMap",
+    GET_PLUGIN_IPC_METHOD_MAP = "PlexcordGetPluginIpcMethodMap",
 
-    OPEN_IN_APP__RESOLVE_REDIRECT = "VencordOIAResolveRedirect",
-    VOICE_MESSAGES_READ_RECORDING = "VencordVMReadRecording",
+    OPEN_IN_APP__RESOLVE_REDIRECT = "PlexcordOIAResolveRedirect",
+    VOICE_MESSAGES_READ_RECORDING = "PlexcordVMReadRecording",
 }

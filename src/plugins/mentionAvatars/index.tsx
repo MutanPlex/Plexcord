@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2024 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -24,7 +24,7 @@ const settings = definePluginSettings({
 function DefaultRoleIcon() {
     return (
         <svg
-            className="vc-mentionAvatars-icon vc-mentionAvatars-role-icon"
+            className="pc-mentionAvatars-icon pc-mentionAvatars-role-icon"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
@@ -77,7 +77,7 @@ export default definePlugin({
             >
                 <img
                     src={user.getAvatarURL(SelectedGuildStore.getGuildId(), 16, isHovering)}
-                    className="vc-mentionAvatars-icon"
+                    className="pc-mentionAvatars-icon"
                     style={{ borderRadius: "50%" }}
                 />
                 {getUsernameString(username)}
@@ -95,7 +95,7 @@ export default definePlugin({
 
         return (
             <img
-                className="vc-mentionAvatars-icon vc-mentionAvatars-role-icon"
+                className="pc-mentionAvatars-icon pc-mentionAvatars-role-icon"
                 src={`${location.protocol}//${window.GLOBAL_ENV.CDN_HOST}/role-icons/${roleId}/${role.icon}.webp?size=24&quality=lossless`}
             />
         );

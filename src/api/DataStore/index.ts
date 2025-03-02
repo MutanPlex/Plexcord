@@ -47,7 +47,7 @@ let defaultGetStoreFunc: UseStore | undefined;
 
 function defaultGetStore() {
     if (!defaultGetStoreFunc) {
-        defaultGetStoreFunc = createStore(!IS_REPORTER ? "VencordData" : "VencordDataReporter", "VencordStore");
+        defaultGetStoreFunc = createStore(!IS_REPORTER ? "PlexcordData" : "PlexcordDataReporter", "PlexcordStore");
     }
     return defaultGetStoreFunc;
 }

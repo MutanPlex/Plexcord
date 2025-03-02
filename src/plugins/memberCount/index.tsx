@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -54,7 +54,7 @@ const settings = definePluginSettings({
 
 const sharedIntlNumberFormat = new Intl.NumberFormat();
 export const numberFormat = (value: number) => sharedIntlNumberFormat.format(value);
-export const cl = classNameFactory("vc-membercount-");
+export const cl = classNameFactory("pc-membercount-");
 
 export default definePlugin({
     name: "MemberCount",

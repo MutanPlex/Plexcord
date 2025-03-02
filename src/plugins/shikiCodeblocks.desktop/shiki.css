@@ -1,13 +1,13 @@
-.vc-shiki-container {
+.pc-shiki-container {
     border: 4px;
     background-color: var(--background-secondary);
 }
 
-.vc-shiki-root {
+.pc-shiki-root {
     border-radius: 4px;
 }
 
-.vc-shiki-root .vc-shiki-code {
+.pc-shiki-root .pc-shiki-code {
     display: block;
     overflow-x: auto;
     padding: 0.5em;
@@ -20,16 +20,16 @@
     border: none;
 }
 
-.vc-shiki-devicon {
+.pc-shiki-devicon {
     margin-right: 8px;
     user-select: none;
 }
 
-.vc-shiki-plain .vc-shiki-code {
+.pc-shiki-plain .pc-shiki-code {
     padding-top: 8px;
 }
 
-.vc-shiki-btns {
+.pc-shiki-btns {
     font-size: 1em;
     position: absolute;
     right: 0;
@@ -37,25 +37,25 @@
     opacity: 0;
 }
 
-.vc-shiki-root:hover .vc-shiki-btns {
+.pc-shiki-root:hover .pc-shiki-btns {
     opacity: 1;
 }
 
-.vc-shiki-btn {
+.pc-shiki-btn {
     border-radius: 4px 4px 0 0;
     padding: 4px 8px;
     user-select: none;
 }
 
-.vc-shiki-btn ~ .vc-shiki-btn {
+.pc-shiki-btn~.pc-shiki-btn {
     margin-left: 4px;
 }
 
-.vc-shiki-btn:last-child {
+.pc-shiki-btn:last-child {
     border-radius: 4px 0;
 }
 
-.vc-shiki-spinner-container {
+.pc-shiki-spinner-container {
     align-items: center;
     background-color: rgb(0 0 0 / 60%);
     display: flex;
@@ -64,11 +64,11 @@
     inset: 0;
 }
 
-.vc-shiki-preview {
+.pc-shiki-preview {
     margin-bottom: 2em;
 }
 
-.vc-shiki-lang {
+.pc-shiki-lang {
     padding: 0 5px;
     margin-bottom: 6px;
     font-weight: bold;
@@ -77,24 +77,24 @@
     align-items: center;
 }
 
-.vc-shiki-table {
+.pc-shiki-table {
     border-collapse: collapse;
     width: 100%;
 }
 
-.vc-shiki-table-row {
+.pc-shiki-table-row {
     height: 19px;
     width: 100%;
 }
 
-.vc-shiki-root .vc-shiki-table-cell:first-child {
+.pc-shiki-root .pc-shiki-table-cell:first-child {
     border-right: 1px solid transparent;
     padding-left: 5px;
     padding-right: 8px;
     user-select: none;
 }
 
-.vc-shiki-root .vc-shiki-table-cell:last-child {
+.pc-shiki-root .pc-shiki-table-cell:last-child {
     padding-left: 8px;
     overflow-wrap: break-word;
     width: 100%;

@@ -1,14 +1,14 @@
-.vc-author-modal-root {
+.pc-author-modal-root {
     padding: 1em;
 }
 
-.vc-author-modal-header {
+.pc-author-modal-header {
     display: flex;
     align-items: center;
     margin-bottom: 1em;
 }
 
-.vc-author-modal-name {
+.pc-author-modal-name {
     text-transform: none;
     flex-grow: 0;
     background: var(--background-tertiary);
@@ -20,7 +20,7 @@
     text-wrap: nowrap;
 }
 
-.vc-author-modal-name::before {
+.pc-author-modal-name::before {
     content: "";
     display: block;
     position: absolute;
@@ -34,17 +34,17 @@
     border-bottom-left-radius: 9999px;
 }
 
-.vc-author-modal-avatar {
+.pc-author-modal-avatar {
     height: 32px;
     width: 32px;
     border-radius: 50%;
 }
 
-.vc-author-modal-links {
+.pc-author-modal-links {
     margin-left: auto;
 }
 
-.vc-author-modal-plugins {
+.pc-author-modal-plugins {
     display: grid;
     gap: 0.5em;
     margin-top: 0.75em;

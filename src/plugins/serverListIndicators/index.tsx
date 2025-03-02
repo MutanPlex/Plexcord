@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Sofia Lima
  *
  * This program is free software: you can redistribute it and/or modify
@@ -50,7 +50,7 @@ function FriendsIndicator() {
     });
 
     return (
-        <span id="vc-friendcount" style={{
+        <span id="pc-friendcount" style={{
             display: "inline-block",
             width: "100%",
             fontSize: "12px",
@@ -74,7 +74,7 @@ function ServersIndicator() {
     });
 
     return (
-        <span id="vc-guildcount" style={{
+        <span id="pc-guildcount" style={{
             display: "inline-block",
             width: "100%",
             fontSize: "12px",

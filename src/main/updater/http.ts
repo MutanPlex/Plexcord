@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -26,7 +26,7 @@ import { join } from "path";
 import gitHash from "~git-hash";
 import gitRemote from "~git-remote";
 
-import { serializeErrors, VENCORD_FILES } from "./common";
+import { PLEXCORD_FILES, serializeErrors } from "./common";
 
 const API_BASE = `https://api.github.com/repos/${gitRemote}`;
 let PendingUpdates = [] as [string, string][];
@@ -66,7 +66,7 @@ async function fetchUpdates() {
         return false;
 
     data.assets.forEach(({ name, browser_download_url }) => {
-        if (VENCORD_FILES.some(s => name.startsWith(s))) {
+        if (PLEXCORD_FILES.some(s => name.startsWith(s))) {
             PendingUpdates.push([name, browser_download_url]);
         }
     });

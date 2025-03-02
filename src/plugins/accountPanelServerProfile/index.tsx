@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2024 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -30,11 +30,11 @@ const AccountPanelContextMenu = ErrorBoundary.wrap(() => {
 
     return (
         <Menu.Menu
-            navId="vc-ap-server-profile"
+            navId="pc-ap-server-profile"
             onClose={ContextMenuApi.closeContextMenu}
         >
             <Menu.MenuItem
-                id="vc-ap-view-alternate-popout"
+                id="pc-ap-view-alternate-popout"
                 label={prioritizeServerProfile ? "View Account Profile" : "View Server Profile"}
                 disabled={getCurrentChannel()?.getGuildId() == null}
                 action={e => {
@@ -44,7 +44,7 @@ const AccountPanelContextMenu = ErrorBoundary.wrap(() => {
                 }}
             />
             <Menu.MenuCheckboxItem
-                id="vc-ap-prioritize-server-profile"
+                id="pc-ap-prioritize-server-profile"
                 label="Prioritize Server Profile"
                 checked={prioritizeServerProfile}
                 action={() => settings.store.prioritizeServerProfile = !prioritizeServerProfile}

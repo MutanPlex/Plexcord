@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -34,7 +34,7 @@ const UserContextMenuPatch: NavContextMenuPatchCallback = (children, { user }: U
 
     children.push(
         <Menu.MenuItem
-            id="vc-copy-user-url"
+            id="pc-copy-user-url"
             label="Copy User URL"
             action={() => Clipboard.copy(`<https://discord.com/users/${user.id}>`)}
             icon={LinkIcon}

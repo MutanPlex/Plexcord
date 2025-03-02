@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -24,8 +24,8 @@ let style: HTMLStyleElement;
 
 function setCss() {
     style.textContent = `
-        .vc-nsfw-img [class^=imageContainer],
-        .vc-nsfw-img [class^=wrapperPaused] {
+        .pc-nsfw-img [class^=imageContainer],
+        .pc-nsfw-img [class^=wrapperPaused] {
             filter: blur(${Settings.plugins.BlurNSFW.blurAmount}px);
             transition: filter 0.2s;
 
@@ -46,7 +46,7 @@ export default definePlugin({
             find: ".embedWrapper,embed",
             replacement: [{
                 match: /\.container/,
-                replace: "$&+(this.props.channel.nsfw? ' vc-nsfw-img': '')"
+                replace: "$&+(this.props.channel.nsfw? ' pc-nsfw-img': '')"
             }]
         }
     ],

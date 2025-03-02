@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -46,7 +46,7 @@ type FileInput = ComponentType<{
 
 const FileInput: FileInput = findLazy(m => m.prototype?.activateUploadDialogue && m.prototype.setRef);
 
-const cl = classNameFactory("vc-settings-theme-");
+const cl = classNameFactory("pc-settings-theme-");
 
 function Validator({ link }: { link: string; }) {
     const [res, err, pending] = useAwaiter(() => fetch(link).then(res => {
@@ -159,14 +159,14 @@ function ThemesTab() {
     const [currentTab, setCurrentTab] = useState(ThemeTab.LOCAL);
     const [themeText, setThemeText] = useState(settings.themeLinks.join("\n"));
     const [userThemes, setUserThemes] = useState<UserThemeHeader[] | null>(null);
-    const [themeDir, , themeDirPending] = useAwaiter(VencordNative.themes.getThemesDir);
+    const [themeDir, , themeDirPending] = useAwaiter(PlexcordNative.themes.getThemesDir);
 
     useEffect(() => {
         refreshLocalThemes();
     }, []);
 
     async function refreshLocalThemes() {
-        const themes = await VencordNative.themes.getThemesList();
+        const themes = await PlexcordNative.themes.getThemesList();
         setUserThemes(themes);
     }
 
@@ -193,7 +193,7 @@ function ThemesTab() {
             return new Promise<void>((resolve, reject) => {
                 const reader = new FileReader();
                 reader.onload = () => {
-                    VencordNative.themes.uploadTheme(name, reader.result as string)
+                    PlexcordNative.themes.uploadTheme(name, reader.result as string)
                         .then(resolve)
                         .catch(reject);
                 };
@@ -208,7 +208,7 @@ function ThemesTab() {
     function renderLocalThemes() {
         return (
             <>
-                <Card className="vc-settings-card">
+                <Card className="pc-settings-card">
                     <Forms.FormTitle tag="h5">Find Themes:</Forms.FormTitle>
                     <div style={{ marginBottom: ".5em", display: "flex", flexDirection: "column" }}>
                         <Link style={{ marginRight: ".5em" }} href="https://betterdiscord.app/themes">
@@ -253,7 +253,7 @@ function ThemesTab() {
                             />
                             <QuickAction
                                 text="Edit QuickCSS"
-                                action={() => VencordNative.quickCss.openEditor()}
+                                action={() => PlexcordNative.quickCss.openEditor()}
                                 Icon={PaintbrushIcon}
                             />
 
@@ -275,7 +275,7 @@ function ThemesTab() {
                                 onChange={enabled => onLocalThemeChange(theme.fileName, enabled)}
                                 onDelete={async () => {
                                     onLocalThemeChange(theme.fileName, false);
-                                    await VencordNative.themes.deleteTheme(theme.fileName);
+                                    await PlexcordNative.themes.deleteTheme(theme.fileName);
                                     refreshLocalThemes();
                                 }}
                                 theme={theme}
@@ -301,7 +301,7 @@ function ThemesTab() {
     function renderOnlineThemes() {
         return (
             <>
-                <Card className="vc-settings-card vc-text-selectable">
+                <Card className="pc-settings-card pc-text-selectable">
                     <Forms.FormTitle tag="h5">Paste links to css files here</Forms.FormTitle>
                     <Forms.FormText>One link per line</Forms.FormText>
                     <Forms.FormText>You can prefix lines with @light or @dark to toggle them based on your Discord theme</Forms.FormText>
@@ -312,7 +312,7 @@ function ThemesTab() {
                     <TextArea
                         value={themeText}
                         onChange={setThemeText}
-                        className={"vc-settings-theme-links"}
+                        className={"pc-settings-theme-links"}
                         placeholder="Theme Links"
                         spellCheck={false}
                         onBlur={onBlur}
@@ -329,18 +329,18 @@ function ThemesTab() {
             <TabBar
                 type="top"
                 look="brand"
-                className="vc-settings-tab-bar"
+                className="pc-settings-tab-bar"
                 selectedItem={currentTab}
                 onItemSelect={setCurrentTab}
             >
                 <TabBar.Item
-                    className="vc-settings-tab-bar-item"
+                    className="pc-settings-tab-bar-item"
                     id={ThemeTab.LOCAL}
                 >
                     Local Themes
                 </TabBar.Item>
                 <TabBar.Item
-                    className="vc-settings-tab-bar-item"
+                    className="pc-settings-tab-bar-item"
                     id={ThemeTab.ONLINE}
                 >
                     Online Themes

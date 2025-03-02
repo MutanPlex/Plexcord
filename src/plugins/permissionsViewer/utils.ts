@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -26,7 +26,7 @@ import { PermissionType } from "./components/RolesAndUsersPermissions";
 
 export const { getGuildPermissionSpecMap } = findByPropsLazy("getGuildPermissionSpecMap");
 
-export const cl = classNameFactory("vc-permviewer-");
+export const cl = classNameFactory("pc-permviewer-");
 
 export function getSortedRoles({ id }: Guild, member: GuildMember) {
     const roles = GuildStore.getRoles(id);

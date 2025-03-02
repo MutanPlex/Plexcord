@@ -1,4 +1,4 @@
-.vc-st-date-picker {
+.pc-st-date-picker {
     background-color: var(--input-background);
     color: var(--text-normal);
     width: 95%;
@@ -12,28 +12,28 @@
     font-size: 100%;
 }
 
-.vc-st-format-select {
+.pc-st-format-select {
     margin-bottom: 1em;
 
     --background-modifier-accent: transparent;
 }
 
-.vc-st-format-label {
+.pc-st-format-label {
     --background-modifier-accent: transparent;
 }
 
-.vc-st-modal-header {
+.pc-st-modal-header {
     place-content: center space-between;
 }
 
-.vc-st-modal-title {
+.pc-st-modal-title {
     margin: 0;
 }
 
-.vc-st-modal-close-button {
+.pc-st-modal-close-button {
     padding: 0;
 }
 
-.vc-st-preview-text {
+.pc-st-preview-text {
     margin-bottom: 1em;
 }

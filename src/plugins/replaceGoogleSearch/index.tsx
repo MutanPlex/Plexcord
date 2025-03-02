@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2024 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -52,10 +52,10 @@ function makeSearchItem(src: string) {
         <Menu.MenuItem
             label="Search Text"
             key="search-text"
-            id="vc-search-text"
+            id="pc-search-text"
         >
             {Object.keys(Engines).map(engine => {
-                const key = "vc-search-content-" + engine;
+                const key = "pc-search-content-" + engine;
                 return (
                     <Menu.MenuItem
                         key={key}

@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -97,7 +97,7 @@ function DearrowButton({ component }: { component: Component<Props>; }) {
                 <button
                     onMouseEnter={onMouseEnter}
                     onMouseLeave={onMouseLeave}
-                    className={"vc-dearrow-toggle-" + (embed.dearrow.enabled ? "on" : "off")}
+                    className={"pc-dearrow-toggle-" + (embed.dearrow.enabled ? "on" : "off")}
                     onClick={() => {
                         const { enabled, oldThumb, oldTitle } = embed.dearrow;
                         settings.store.dearrowByDefault = !enabled;
@@ -121,7 +121,7 @@ function DearrowButton({ component }: { component: Component<Props>; }) {
                         height="24px"
                         viewBox="0 0 36 36"
                         aria-label="Toggle Dearrow"
-                        className="vc-dearrow-icon"
+                        className="pc-dearrow-icon"
                     >
                         <path
                             fill="#1213BD"

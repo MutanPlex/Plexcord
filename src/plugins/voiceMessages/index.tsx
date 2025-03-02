@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -53,7 +53,7 @@ const ctxMenuPatch: NavContextMenuPatchCallback = (children, props) => {
 
     children.push(
         <Menu.MenuItem
-            id="vc-send-vmsg"
+            id="pc-send-vmsg"
             label={
                 <div className={OptionClasses.optionLabel}>
                     <Microphone className={OptionClasses.optionIcon} height={24} width={24} />
@@ -219,7 +219,7 @@ function Modal({ modalProps }: { modalProps: ModalProps; }) {
                 />
 
                 {isUnsupportedFormat && (
-                    <Card className={`vc-plugins-restart-card ${Margins.top16}`}>
+                    <Card className={`pc-plugins-restart-card ${Margins.top16}`}>
                         <Forms.FormText>Voice Messages have to be OggOpus to be playable on iOS. This file is <code>{blob.type}</code> so it will not be playable on iOS.</Forms.FormText>
 
                         <Forms.FormText className={Margins.top8}>

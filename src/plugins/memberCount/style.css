@@ -1,4 +1,4 @@
-.vc-membercount-widget {
+.pc-membercount-widget {
     display: flex;
     align-content: center;
 
@@ -6,26 +6,26 @@
     --color-total: var(--primary-400);
 }
 
-.vc-membercount-tooltip {
+.pc-membercount-tooltip {
     margin-top: 0.25em;
     margin-left: 2px;
 }
 
-.vc-membercount-member-list {
+.pc-membercount-member-list {
     justify-content: center;
     margin-top: 1em;
     padding-inline: 1em;
 }
 
-.vc-membercount-online {
+.pc-membercount-online {
     color: var(--color-online);
 }
 
-.vc-membercount-total {
+.pc-membercount-total {
     color: var(--color-total);
 }
 
-.vc-membercount-online-dot {
+.pc-membercount-online-dot {
     background-color: var(--color-online);
     display: inline-block;
     width: 12px;
@@ -34,7 +34,7 @@
     margin-right: 0.5em;
 }
 
-.vc-membercount-total-dot {
+.pc-membercount-total-dot {
     display: inline-block;
     width: 6px;
     height: 6px;

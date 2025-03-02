@@ -1,67 +1,67 @@
-.vc-donate-button {
+.pc-donate-button {
     overflow: visible !important;
 }
 
-.vc-donate-button .vc-heart-icon {
+.pc-donate-button .pc-heart-icon {
     transition: transform 0.3s;
 }
 
-.vc-donate-button:hover .vc-heart-icon {
+.pc-donate-button:hover .pc-heart-icon {
     transform: scale(1.1);
     z-index: 10;
     position: relative;
 }
 
-.vc-settings-card {
+.pc-settings-card {
     padding: 1em;
     margin-bottom: 1em;
 }
 
-.vc-special-card-special {
+.pc-special-card-special {
     padding: 1em 1.5em;
     margin-bottom: 1em;
     background-size: cover;
     background-position: center;
 }
 
-.vc-special-card-flex {
+.pc-special-card-flex {
     display: flex;
     flex-direction: row;
 }
 
-.vc-special-card-flex-main {
+.pc-special-card-flex-main {
     width: 100%;
 }
 
-.vc-special-title {
+.pc-special-title {
     color: black;
 }
 
-.vc-special-subtitle {
+.pc-special-subtitle {
     color: black;
     font-size: 1.2em;
     font-weight: bold;
     margin-top: 0.5em;
 }
 
-.vc-special-text {
+.pc-special-text {
     color: black;
     font-size: 1em;
     margin-top: .75em;
     white-space: pre-line;
 }
 
-.vc-special-seperator {
+.pc-special-seperator {
     margin-top: .75em;
     border-top: 1px solid white;
     opacity: 0.4;
 }
 
-.vc-special-hyperlink {
+.pc-special-hyperlink {
     margin-top: 1em;
     cursor: pointer;
 
-    .vc-special-hyperlink-text {
+    .pc-special-hyperlink-text {
         color: black;
         font-size: 1em;
         font-weight: bold;
@@ -70,12 +70,12 @@
         cursor: pointer;
     }
 
-    &:hover .vc-special-hyperlink-text {
+    &:hover .pc-special-hyperlink-text {
         text-decoration: underline;
     }
 }
 
-.vc-special-image-container {
+.pc-special-image-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,6 +87,6 @@
     background-color: white;
 }
 
-.vc-special-image {
+.pc-special-image {
     width: 65%;
 }

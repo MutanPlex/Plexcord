@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -92,7 +92,7 @@ export default definePlugin({
                 <span>{title}</span>
                 {(savedSession == null || savedSession.isNew) && (
                     <div
-                        className="vc-plugins-badge"
+                        className="pc-plugins-badge"
                         style={{
                             backgroundColor: "#ED4245",
                             marginLeft: "2px"

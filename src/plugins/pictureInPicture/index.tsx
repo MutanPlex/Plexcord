@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -42,7 +42,7 @@ export default definePlugin({
                 {tooltipProps => (
                     <div
                         {...tooltipProps}
-                        className="vc-pip-button"
+                        className="pc-pip-button"
                         role="button"
                         style={{
                             cursor: "pointer",

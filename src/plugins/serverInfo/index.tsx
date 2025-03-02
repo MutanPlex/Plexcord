@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -17,7 +17,7 @@ const Patch: NavContextMenuPatchCallback = (children, { guild }: { guild: Guild;
 
     group?.push(
         <Menu.MenuItem
-            id="vc-server-info"
+            id="pc-server-info"
             label="Server Info"
             action={() => openGuildInfoModal(guild)}
         />

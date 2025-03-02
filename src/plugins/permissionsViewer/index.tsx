@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -191,7 +191,7 @@ export default definePlugin({
                         look={Button.Looks.FILLED}
                         size={Button.Sizes.NONE}
                         innerClassName={classes(RoleButtonClasses.buttonInner, RoleButtonClasses.icon)}
-                        className={classes(RoleButtonClasses.button, RoleButtonClasses.icon, "vc-permviewer-role-button")}
+                        className={classes(RoleButtonClasses.button, RoleButtonClasses.icon, "pc-permviewer-role-button")}
                     >
                         <SafetyIcon height="16" width="16" />
                     </Button>

@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 rini
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -71,10 +71,10 @@ export default definePlugin({
                 return <>{prefix}{nick}</>;
 
             if (settings.store.mode === "user-nick")
-                return <>{prefix}{username} <span className="vc-smyn-suffix">{nick}</span></>;
+                return <>{prefix}{username} <span className="pc-smyn-suffix">{nick}</span></>;
 
             if (settings.store.mode === "nick-user")
-                return <>{prefix}{nick} <span className="vc-smyn-suffix">{username}</span></>;
+                return <>{prefix}{nick} <span className="pc-smyn-suffix">{username}</span></>;
 
             return <>{prefix}{username}</>;
         } catch {

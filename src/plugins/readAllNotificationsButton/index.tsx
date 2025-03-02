@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -73,7 +73,7 @@ const ReadAllButton = () => (
         onClick={onClick}
         size={Button.Sizes.MIN}
         color={Button.Colors.CUSTOM}
-        className="vc-ranb-button"
+        className="pc-ranb-button"
     >
         Read All
     </Button>

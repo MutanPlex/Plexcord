@@ -1,5 +1,5 @@
 /*!
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -29,7 +29,7 @@ export { PlainSettings, Settings };
 import "./utils/quickCss";
 import "./webpack/patchWebpack";
 
-import { openUpdaterModal } from "@components/VencordSettings/UpdaterTab";
+import { openUpdaterModal } from "@components/PlexcordSettings/UpdaterTab";
 import { StartAt } from "@utils/types";
 
 import { get as dsGet } from "./api/DataStore";
@@ -51,7 +51,7 @@ async function syncSettings() {
     // pre-check for local shared settings
     if (
         Settings.cloud.authenticated &&
-        !await dsGet("Vencord_cloudSecret") // this has been enabled due to local settings share or some other bug
+        !await dsGet("Plexcord_cloudSecret") // this has been enabled due to local settings share or some other bug
     ) {
         // show a notification letting them know and tell them how to fix it
         showNotification({
@@ -59,7 +59,7 @@ async function syncSettings() {
             body: "We've noticed you have cloud integrations enabled in another client! Due to limitations, you will " +
                 "need to re-authenticate to continue using them. Click here to go to the settings page to do so!",
             color: "var(--yellow-360)",
-            onClick: () => SettingsRouter.open("VencordCloud")
+            onClick: () => SettingsRouter.open("PlexcordCloud")
         });
         return;
     }
@@ -68,9 +68,9 @@ async function syncSettings() {
         Settings.cloud.settingsSync && // if it's enabled
         Settings.cloud.authenticated // if cloud integrations are enabled
     ) {
-        if (localStorage.Vencord_settingsDirty) {
+        if (localStorage.Plexcord_settingsDirty) {
             await putCloudSettings();
-            delete localStorage.Vencord_settingsDirty;
+            delete localStorage.Plexcord_settingsDirty;
         } else if (await getCloudSettings(false)) { // if we synchronized something (false means no sync)
             // we show a notification here instead of allowing getCloudSettings() to show one to declutter the amount of
             // potential notifications that might occur. getCloudSettings() will always send a notification regardless if
@@ -101,7 +101,7 @@ async function init() {
                 await update();
                 if (Settings.autoUpdateNotification)
                     setTimeout(() => showNotification({
-                        title: "Vencord has been updated!",
+                        title: "Plexcord has been updated!",
                         body: "Click here to restart",
                         permanent: true,
                         noPersist: true,
@@ -111,7 +111,7 @@ async function init() {
             }
 
             setTimeout(() => showNotification({
-                title: "A Vencord update is available!",
+                title: "A Plexcord update is available!",
                 body: "Click here to view the update",
                 permanent: true,
                 noPersist: true,
@@ -129,7 +129,7 @@ async function init() {
                 "Webpack has finished initialising, but some patches haven't been applied yet.",
                 "This might be expected since some Modules are lazy loaded, but please verify",
                 "that all plugins are working as intended.",
-                "You are seeing this warning because this is a Development build of Vencord.",
+                "You are seeing this warning because this is a Development build of Plexcord.",
                 "\nThe following patches have not been applied:",
                 "\n\n" + pendingPatches.map(p => `${p.plugin}: ${p.find}`).join("\n")
             );
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (IS_DISCORD_DESKTOP && Settings.winNativeTitleBar && navigator.platform.toLowerCase().startsWith("win")) {
         document.head.append(Object.assign(document.createElement("style"), {
-            id: "vencord-native-titlebar-style",
+            id: "plexcord-native-titlebar-style",
             textContent: "[class*=titleBar]{display: none!important}"
         }));
     }

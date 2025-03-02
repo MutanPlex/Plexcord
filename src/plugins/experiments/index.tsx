@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -126,7 +126,7 @@ export default definePlugin({
     },
 
     WarningCard: ErrorBoundary.wrap(() => (
-        <ErrorCard id="vc-experiments-warning-card" className={Margins.bottom16}>
+        <ErrorCard id="pc-experiments-warning-card" className={Margins.bottom16}>
             <Forms.FormTitle tag="h2">Hold on!!</Forms.FormTitle>
 
             <Forms.FormText>

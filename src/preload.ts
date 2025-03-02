@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,9 +21,9 @@ import { contextBridge, webFrame } from "electron";
 import { readFileSync, watch } from "fs";
 import { join } from "path";
 
-import VencordNative from "./VencordNative";
+import PlexcordNative from "./PlexcordNative";
 
-contextBridge.exposeInMainWorld("VencordNative", VencordNative);
+contextBridge.exposeInMainWorld("PlexcordNative", PlexcordNative);
 
 // Discord
 if (location.protocol !== "data:") {
@@ -31,7 +31,7 @@ if (location.protocol !== "data:") {
     const rendererCss = join(__dirname, IS_VESKTOP ? "plexcordDesktopRenderer.css" : "renderer.css");
 
     const style = document.createElement("style");
-    style.id = "vencord-css-core";
+    style.id = "plexcord-css-core";
     style.textContent = readFileSync(rendererCss, "utf-8");
 
     if (document.readyState === "complete") {
@@ -46,7 +46,7 @@ if (location.protocol !== "data:") {
         // persistent means keep process running if watcher is the only thing still running
         // which we obviously don't want
         watch(rendererCss, { persistent: false }, () => {
-            document.getElementById("vencord-css-core")!.textContent = readFileSync(rendererCss, "utf-8");
+            document.getElementById("plexcord-css-core")!.textContent = readFileSync(rendererCss, "utf-8");
         });
     }
     // #endregion
@@ -57,8 +57,8 @@ if (location.protocol !== "data:") {
     }
 } // Monaco popout
 else {
-    contextBridge.exposeInMainWorld("setCss", debounce(VencordNative.quickCss.set));
-    contextBridge.exposeInMainWorld("getCurrentCss", VencordNative.quickCss.get);
+    contextBridge.exposeInMainWorld("setCss", debounce(PlexcordNative.quickCss.set));
+    contextBridge.exposeInMainWorld("getCurrentCss", PlexcordNative.quickCss.get);
     // shrug
     contextBridge.exposeInMainWorld("getTheme", () => "vs-dark");
 }

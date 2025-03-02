@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -15,7 +15,7 @@ import definePlugin, { OptionType, StartAt } from "@utils/types";
 import { findByCodeLazy, findComponentByCodeLazy, findStoreLazy } from "@webpack";
 import { Button, Forms, ThemeStore, useStateFromStores } from "@webpack/common";
 
-const cl = classNameFactory("vc-clientTheme-");
+const cl = classNameFactory("pc-clientTheme-");
 
 const ColorPicker = findComponentByCodeLazy("#{intl::USER_SETTINGS_PROFILE_COLOR_SELECT_COLOR}", ".BACKGROUND_PRIMARY)");
 

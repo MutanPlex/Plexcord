@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -37,7 +37,7 @@ import { QuickAction, QuickActionCard } from "./quickActions";
 import { SettingsTab, wrapTab } from "./shared";
 import { SpecialCard } from "./SpecialCard";
 
-const cl = classNameFactory("vc-settings-");
+const cl = classNameFactory("pc-settings-");
 
 const DEFAULT_DONATE_IMAGE = "https://cdn.discordapp.com/emojis/1026533090627174460.png";
 const SHIGGY_DONATE_IMAGE = "https://media.discordapp.net/stickers/1039992459209490513.png";
@@ -52,8 +52,8 @@ type KeysOfType<Object, Type> = {
     [K in keyof Object]: Object[K] extends Type ? K : never;
 }[keyof Object];
 
-function VencordSettings() {
-    const [settingsDir, , settingsDirPending] = useAwaiter(VencordNative.settings.getSettingsDir, {
+function PlexcordSettings() {
+    const [settingsDir, , settingsDirPending] = useAwaiter(PlexcordNative.settings.getSettingsDir, {
         fallbackValue: "Loading..."
     });
     const settings = useSettings();
@@ -139,7 +139,7 @@ function VencordSettings() {
                 <SpecialCard
                     title="Contributions"
                     subtitle="Thank you for contributing!"
-                    description="Since you've contributed to Vencord you now have a cool new badge!"
+                    description="Since you've contributed to Plexcord you now have a cool new badge!"
                     cardImage={COZY_CONTRIB_IMAGE}
                     backgroundImage={CONTRIB_BACKGROUND_IMAGE}
                     backgroundColor="#EDCC87"
@@ -170,7 +170,7 @@ function VencordSettings() {
                     <QuickAction
                         Icon={PaintbrushIcon}
                         text="Edit QuickCSS"
-                        action={() => VencordNative.quickCss.openEditor()}
+                        action={() => PlexcordNative.quickCss.openEditor()}
                     />
                     {!IS_WEB && (
                         <QuickAction
@@ -189,7 +189,7 @@ function VencordSettings() {
                     <QuickAction
                         Icon={GithubIcon}
                         text="View Source Code"
-                        action={() => VencordNative.native.openExternal("https://github.com/" + gitRemote)}
+                        action={() => PlexcordNative.native.openExternal("https://github.com/" + gitRemote)}
                     />
                 </QuickActionCard>
             </Forms.FormSection>
@@ -202,7 +202,7 @@ function VencordSettings() {
                     {" "}<Button
                         look={Button.Looks.BLANK}
                         style={{ color: "var(--text-link)", display: "inline-block" }}
-                        onClick={() => openPluginModal(Vencord.Plugins.plugins.Settings)}
+                        onClick={() => openPluginModal(Plexcord.Plugins.plugins.Settings)}
                     >
                         settings of the Settings plugin
                     </Button>!
@@ -285,7 +285,7 @@ function VencordSettings() {
                     serialize={identity} />
             </>}
 
-            <Forms.FormSection className={Margins.top16} title="Vencord Notifications" tag="h5">
+            <Forms.FormSection className={Margins.top16} title="Plexcord Notifications" tag="h5">
                 <Flex>
                     <Button onClick={openNotificationSettingsModal}>
                         Notification Settings
@@ -314,4 +314,4 @@ function isDonor(userId: string): boolean {
     return GuildMemberStore.getMember(PLEXCORD_GUILD_ID, userId)?.roles.includes(DONOR_ROLE_ID) || !!donorBadges;
 }
 
-export default wrapTab(VencordSettings, "Vencord Settings");
+export default wrapTab(PlexcordSettings, "Plexcord Settings");

@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -122,10 +122,10 @@ function CompactConnectionComponent({ connection, theme }: { connection: Connect
     return (
         <Tooltip
             text={
-                <span className="vc-sc-tooltip">
-                    <span className="vc-sc-connection-name">{connection.name}</span>
+                <span className="pc-sc-tooltip">
+                    <span className="pc-sc-connection-name">{connection.name}</span>
                     {connection.verified && <VerifiedIcon />}
-                    <TooltipIcon height={16} width={16} className="vc-sc-tooltip-icon" />
+                    <TooltipIcon height={16} width={16} className="pc-sc-tooltip-icon" />
                 </span>
             }
             key={connection.id}
@@ -134,13 +134,13 @@ function CompactConnectionComponent({ connection, theme }: { connection: Connect
                 url
                     ? <a
                         {...tooltipProps}
-                        className="vc-user-connection"
+                        className="pc-user-connection"
                         href={url}
                         target="_blank"
                         rel="noreferrer"
                         onClick={e => {
-                            if (Vencord.Plugins.isPluginEnabled("OpenInApp")) {
-                                const OpenInApp = Vencord.Plugins.plugins.OpenInApp as any as typeof import("../openInApp").default;
+                            if (Plexcord.Plugins.isPluginEnabled("OpenInApp")) {
+                                const OpenInApp = Plexcord.Plugins.plugins.OpenInApp as any as typeof import("../openInApp").default;
                                 // handleLink will .preventDefault() if applicable
                                 OpenInApp.handleLink(e.currentTarget, e);
                             }
@@ -150,7 +150,7 @@ function CompactConnectionComponent({ connection, theme }: { connection: Connect
                     </a>
                     : <button
                         {...tooltipProps}
-                        className="vc-user-connection"
+                        className="pc-user-connection"
                         onClick={() => copyWithToast(connection.name)}
                     >
                         {img}

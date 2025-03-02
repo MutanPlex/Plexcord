@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2023 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -39,7 +39,7 @@ export function Switch({ checked, onChange, disabled }: SwitchProps) {
                 opacity: disabled ? 0.3 : 1
             }}>
                 <svg
-                    className={SwitchClasses.slider + " vc-switch-slider"}
+                    className={SwitchClasses.slider + " pc-switch-slider"}
                     viewBox="0 0 28 20"
                     preserveAspectRatio="xMinYMid meet"
                     aria-hidden="true"

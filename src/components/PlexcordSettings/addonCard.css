@@ -1,4 +1,4 @@
-.vc-addon-card {
+.pc-addon-card {
     background-color: var(--background-secondary-alt);
     color: var(--interactive-active);
     border-radius: 8px;
@@ -11,17 +11,17 @@
     box-sizing: border-box;
 }
 
-.vc-addon-card-disabled {
+.pc-addon-card-disabled {
     opacity: 0.6;
 }
 
-.vc-addon-card:hover {
+.pc-addon-card:hover {
     background-color: var(--background-tertiary);
     transform: translateY(-1px);
     box-shadow: var(--elevation-high);
 }
 
-.vc-addon-header {
+.pc-addon-header {
     margin-top: auto;
     display: flex;
     width: 100%;
@@ -31,7 +31,7 @@
     margin-bottom: 0.5em;
 }
 
-.vc-addon-note {
+.pc-addon-note {
     height: 36px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -43,11 +43,11 @@
     box-orient: vertical;
 }
 
-.vc-addon-name-author {
+.pc-addon-name-author {
     width: 100%;
 }
 
-.vc-addon-name {
+.pc-addon-name {
     display: flex;
     width: 100%;
     align-items: center;
@@ -55,29 +55,29 @@
     gap: 8px;
 }
 
-.vc-addon-author {
+.pc-addon-author {
     font-size: 0.8em;
 }
 
-.vc-addon-author::before {
+.pc-addon-author::before {
     content: "by ";
 }
 
-.vc-addon-title-container {
+.pc-addon-title-container {
     width: 100%;
     overflow: hidden;
     height: 1.25em;
     position: relative;
 }
 
-.vc-addon-title {
+.pc-addon-title {
     position: absolute;
     inset: 0;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-@keyframes vc-addon-title {
+@keyframes pc-addon-title {
     0% {
         transform: translateX(0);
     }
@@ -91,7 +91,7 @@
     }
 }
 
-.vc-addon-title:hover {
+.pc-addon-title:hover {
     overflow: visible;
-    animation: vc-addon-title var(--duration) linear infinite;
+    animation: pc-addon-title var(--duration) linear infinite;
 }

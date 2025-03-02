@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -65,7 +65,7 @@ function ReplacementComponent({ module, match, replacement, setReplacementError 
         }
         const canonicalMatch = canonicalizeMatch(new RegExp(match));
         try {
-            const canonicalReplace = canonicalizeReplace(replacement, 'Vencord.Plugins.plugins["YourPlugin"]');
+            const canonicalReplace = canonicalizeReplace(replacement, 'Plexcord.Plugins.plugins["YourPlugin"]');
             var patched = src.replace(canonicalMatch, canonicalReplace as string);
             setReplacementError(void 0);
         } catch (e) {
@@ -193,7 +193,7 @@ function ReplacementInput({ replacement, setReplacement, replacementError }) {
                 error={error ?? replacementError}
             />
             {!isFunc && (
-                <div className="vc-text-selectable">
+                <div className="pc-text-selectable">
                     <Forms.FormTitle className={Margins.top8}>Cheat Sheet</Forms.FormTitle>
                     {Object.entries({
                         "\\i": "Special regex escape sequence that matches identifiers (varnames, classnames, etc.)",

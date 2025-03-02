@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -29,7 +29,7 @@ import { ContextMenuApi, FluxDispatcher, Forms, Menu, React, useEffect, useState
 
 import { SpotifyStore, Track } from "./SpotifyStore";
 
-const cl = classNameFactory("vc-spotify-");
+const cl = classNameFactory("pc-spotify-");
 
 function msToHuman(ms: number) {
     const minutes = ms / 1000 / 60;
@@ -375,7 +375,7 @@ export function Player() {
         return null;
 
     const exportTrackImageStyle = {
-        "--vc-spotify-track-image": `url(${track?.album?.image?.url || ""})`,
+        "--pc-spotify-track-image": `url(${track?.album?.image?.url || ""})`,
     } as React.CSSProperties;
 
     return (

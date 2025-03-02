@@ -1,6 +1,6 @@
 #!/usr/bin/node
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -31,9 +31,9 @@ import { BUILD_TIMESTAMP, commonOpts, globPlugins, IS_DEV, IS_REPORTER, VERSION,
  */
 const commonOptions = {
     ...commonOpts,
-    entryPoints: ["browser/Vencord.ts"],
+    entryPoints: ["browser/Plexcord.ts"],
     format: "iife",
-    globalName: "Vencord",
+    globalName: "Plexcord",
     external: ["~plugins", "~git-hash", "/assets/*"],
     target: ["esnext"],
     plugins: [
@@ -105,7 +105,7 @@ const buildConfigs = [
             js: readFileSync("browser/userscript.meta.js", "utf-8").replace("%version%", `${VERSION}.${new Date().getTime()}`)
         },
         footer: {
-            js: "Object.defineProperty(unsafeWindow,'Vencord',{get:()=>Vencord});"
+            js: "Object.defineProperty(unsafeWindow,'Plexcord',{get:()=>Plexcord});"
         }
     }
 ];
@@ -142,8 +142,8 @@ async function loadDir(dir, basePath = "") {
  */
 async function buildExtension(target, files) {
     const entries = {
-        "dist/Vencord.js": await readFile("dist/extension.js"),
-        "dist/Vencord.css": await readFile("dist/extension.css"),
+        "dist/Plexcord.js": await readFile("dist/extension.js"),
+        "dist/Plexcord.css": await readFile("dist/extension.css"),
         ...await loadDir("dist/vendor/monaco", "dist/"),
         ...Object.fromEntries(await Promise.all(files.map(async f => {
             let content = await readFile(join("browser", f));
@@ -176,7 +176,7 @@ const appendCssRuntime = readFile("dist/Plexcord.user.css", "utf-8").then(conten
 ;document.addEventListener("DOMContentLoaded", () => document.documentElement.appendChild(
     Object.assign(document.createElement("style"), {
         textContent: \`${content.replaceAll("`", "\\`")}\`,
-        id: "vencord-css-core"
+        id: "plexcord-css-core"
     })
 ), { once: true });
 `;

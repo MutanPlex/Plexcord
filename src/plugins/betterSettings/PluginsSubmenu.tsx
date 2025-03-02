@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2024 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -28,7 +28,7 @@ export default function PluginsSubmenu() {
 
     const search = query.toLowerCase();
     const include = (p: typeof Plugins[keyof typeof Plugins]) => (
-        Vencord.Plugins.isPluginEnabled(p.name)
+        Plexcord.Plugins.isPluginEnabled(p.name)
         && p.options && !isObjectEmpty(p.options)
         && (
             p.name.toLowerCase().includes(search)
@@ -42,7 +42,7 @@ export default function PluginsSubmenu() {
     return (
         <>
             <Menu.MenuControlItem
-                id="vc-plugins-search"
+                id="pc-plugins-search"
                 control={(props, ref) => (
                     <Menu.MenuSearchControl
                         {...props}

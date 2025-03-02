@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -135,7 +135,7 @@ function MakeContextCallback(name: "Guild" | "Role" | "User" | "Channel"): NavCo
 
         children.splice(-1, 0,
             <Menu.MenuItem
-                id={`vc-view-${name.toLowerCase()}-raw`}
+                id={`pc-view-${name.toLowerCase()}-raw`}
                 label="View Raw"
                 action={() => openViewRawModal(JSON.stringify(value, null, 4), name)}
                 icon={CopyIcon}
@@ -153,7 +153,7 @@ const devContextCallback: NavContextMenuPatchCallback = (children, { id }: { id:
 
     children.push(
         <Menu.MenuItem
-            id={"vc-view-role-raw"}
+            id={"pc-view-role-raw"}
             label="View Raw"
             action={() => openViewRawModal(JSON.stringify(role, null, 4), "Role")}
             icon={CopyIcon}

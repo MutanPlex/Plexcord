@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-export const VENCORD_FILES = [
+export const PLEXCORD_FILES = [
     IS_DISCORD_DESKTOP ? "patcher.js" : "plexcordDesktopMain.js",
     IS_DISCORD_DESKTOP ? "preload.js" : "plexcordDesktopPreload.js",
     IS_DISCORD_DESKTOP ? "renderer.js" : "plexcordDesktopRenderer.js",

@@ -1,5 +1,5 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2024 Vendicated and contributors
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
@@ -34,7 +34,7 @@ const ColorPickerWithSwatches = findComponentByCodeLazy<ColorPickerWithSwatchesP
 
 export const requireSettingsMenu = extractAndLoadChunksLazy(['name:"UserSettings"'], /createPromise:.{0,20}(\i\.\i\("?.+?"?\).*?).then\(\i\.bind\(\i,"?(.+?)"?\)\).{0,50}"UserSettings"/);
 
-const cl = classNameFactory("vc-pindms-modal-");
+const cl = classNameFactory("pc-pindms-modal-");
 
 interface Props {
     categoryId: string | null;

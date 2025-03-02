@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and Megumin
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,13 +17,13 @@
 */
 
 import { Settings } from "@api/Settings";
-import BackupAndRestoreTab from "@components/VencordSettings/BackupAndRestoreTab";
-import CloudTab from "@components/VencordSettings/CloudTab";
-import PatchHelperTab from "@components/VencordSettings/PatchHelperTab";
-import PluginsTab from "@components/VencordSettings/PluginsTab";
-import ThemesTab from "@components/VencordSettings/ThemesTab";
-import UpdaterTab from "@components/VencordSettings/UpdaterTab";
-import VencordTab from "@components/VencordSettings/VencordTab";
+import BackupAndRestoreTab from "@components/PlexcordSettings/BackupAndRestoreTab";
+import CloudTab from "@components/PlexcordSettings/CloudTab";
+import PatchHelperTab from "@components/PlexcordSettings/PatchHelperTab";
+import PlexcordTab from "@components/PlexcordSettings/PlexcordTab";
+import PluginsTab from "@components/PlexcordSettings/PluginsTab";
+import ThemesTab from "@components/PlexcordSettings/ThemesTab";
+import UpdaterTab from "@components/PlexcordSettings/UpdaterTab";
 import { Devs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
@@ -87,49 +87,49 @@ export default definePlugin({
             {
                 section: SectionTypes.HEADER,
                 label: "Plexcord",
-                className: "vc-settings-header"
+                className: "pc-settings-header"
             },
             {
-                section: "VencordSettings",
+                section: "PlexcordSettings",
                 label: "Plexcord",
-                element: VencordTab,
-                className: "vc-settings"
+                element: PlexcordTab,
+                className: "pc-settings"
             },
             {
-                section: "VencordPlugins",
+                section: "PlexcordPlugins",
                 label: "Plugins",
                 element: PluginsTab,
-                className: "vc-plugins"
+                className: "pc-plugins"
             },
             {
-                section: "VencordThemes",
+                section: "PlexcordThemes",
                 label: "Themes",
                 element: ThemesTab,
-                className: "vc-themes"
+                className: "pc-themes"
             },
             !IS_UPDATER_DISABLED && {
-                section: "VencordUpdater",
+                section: "PlexcordUpdater",
                 label: "Updater",
                 element: UpdaterTab,
-                className: "vc-updater"
+                className: "pc-updater"
             },
             {
-                section: "VencordCloud",
+                section: "PlexcordCloud",
                 label: "Cloud",
                 element: CloudTab,
-                className: "vc-cloud"
+                className: "pc-cloud"
             },
             {
-                section: "VencordSettingsSync",
+                section: "PlexcordSettingsSync",
                 label: "Backup & Restore",
                 element: BackupAndRestoreTab,
-                className: "vc-backup-restore"
+                className: "pc-backup-restore"
             },
             IS_DEV && {
-                section: "VencordPatchHelper",
+                section: "PlexcordPatchHelper",
                 label: "Patch Helper",
                 element: PatchHelperTab,
-                className: "vc-patch-helper"
+                className: "pc-patch-helper"
             },
             ...this.customSections.map(func => func(SectionTypes)),
             {
@@ -207,12 +207,12 @@ export default definePlugin({
     },
 
     get electronVersion() {
-        return VencordNative.native.getVersions().electron || window.legcord?.electron || null;
+        return PlexcordNative.native.getVersions().electron || window.legcord?.electron || null;
     },
 
     get chromiumVersion() {
         try {
-            return VencordNative.native.getVersions().chrome
+            return PlexcordNative.native.getVersions().chrome
                 // @ts-ignore Typescript will add userAgentData IMMEDIATELY
                 || navigator.userAgentData?.brands?.find(b => b.brand === "Chromium" || b.brand === "Google Chrome")?.version
                 || null;

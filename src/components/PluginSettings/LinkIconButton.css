@@ -1,4 +1,4 @@
-.vc-settings-modal-link-icon {
+.pc-settings-modal-link-icon {
     height: 32px;
     width: 32px;
     border-radius: 50%;
@@ -6,7 +6,7 @@
     box-sizing: border-box
 }
 
-.vc-settings-modal-links {
+.pc-settings-modal-links {
     display: flex;
     gap: 0.2em;
 }

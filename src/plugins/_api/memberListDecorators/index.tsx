@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -34,10 +34,10 @@ export default definePlugin({
             replacement: [
                 {
                     match: /let\{[^}]*lostPermissionTooltipText:\i[^}]*\}=(\i),/,
-                    replace: "$&vencordProps=$1,"
+                    replace: "$&plexcordProps=$1,"
                 }, {
                     match: /#{intl::GUILD_OWNER}(?=.+?decorators:(\i)\(\)).+?\1=?\(\)=>.+?children:\[/,
-                    replace: "$&(typeof vencordProps=='undefined'?null:Vencord.Api.MemberListDecorators.__getDecorators(vencordProps)),"
+                    replace: "$&(typeof plexcordProps=='undefined'?null:Plexcord.Api.MemberListDecorators.__getDecorators(plexcordProps)),"
                 }
             ]
         },
@@ -45,7 +45,7 @@ export default definePlugin({
             find: "PrivateChannel.renderAvatar",
             replacement: {
                 match: /decorators:(\i\.isSystemDM\(\))\?(.+?):null/,
-                replace: "decorators:[Vencord.Api.MemberListDecorators.__getDecorators(arguments[0]),$1?$2:null]"
+                replace: "decorators:[Plexcord.Api.MemberListDecorators.__getDecorators(arguments[0]),$1?$2:null]"
             }
         }
     ]

@@ -1,5 +1,5 @@
 /*
- * Vencord, a modification for Discord's desktop app
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2022 Vendicated and contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@ import { resolveLang } from "../api/languages";
 import { HighlighterProps } from "../components/Highlighter";
 import { HljsSetting } from "../types";
 
-export const cl = classNameFactory("vc-shiki-");
+export const cl = classNameFactory("pc-shiki-");
 
 export const shouldUseHljs = ({
     lang,
