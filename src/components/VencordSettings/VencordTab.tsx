@@ -25,7 +25,7 @@ import { openPluginModal } from "@components/PluginSettings/PluginModal";
 import { gitRemote } from "@shared/plexcordUserAgent";
 import { DONOR_ROLE_ID, PLEXCORD_GUILD_ID } from "@utils/constants";
 import { Margins } from "@utils/margins";
-import { identity, isPluginDev } from "@utils/misc";
+import { identity, isPcPluginDev, isPluginDev } from "@utils/misc";
 import { relaunch, showItemInFolder } from "@utils/native";
 import { useAwaiter } from "@utils/react";
 import { Button, Forms, GuildMemberStore, React, Select, Switch, UserStore } from "@webpack/common";
@@ -126,7 +126,7 @@ function VencordSettings() {
                 : (
                     <SpecialCard
                         title="Support the Project"
-                        description="Please consider supporting the development of Vencord by donating!"
+                        description="Please consider supporting the development of Plexcord by donating!"
                         cardImage={donateImage}
                         backgroundImage={DONOR_BACKGROUND_IMAGE}
                         backgroundColor="#c3a3ce"
@@ -140,6 +140,18 @@ function VencordSettings() {
                     title="Contributions"
                     subtitle="Thank you for contributing!"
                     description="Since you've contributed to Vencord you now have a cool new badge!"
+                    cardImage={COZY_CONTRIB_IMAGE}
+                    backgroundImage={CONTRIB_BACKGROUND_IMAGE}
+                    backgroundColor="#EDCC87"
+                    buttonTitle="See what you've contributed to"
+                    buttonOnClick={() => openContributorModal(user)}
+                />
+            )}
+            {isPcPluginDev(user?.id) && (
+                <SpecialCard
+                    title="Contributions"
+                    subtitle="Thank you for contributing!"
+                    description="Since you've contributed to Plexcord you now have a cool new badge!"
                     cardImage={COZY_CONTRIB_IMAGE}
                     backgroundImage={CONTRIB_BACKGROUND_IMAGE}
                     backgroundColor="#EDCC87"
