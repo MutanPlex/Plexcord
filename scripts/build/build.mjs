@@ -161,8 +161,8 @@ const buildConfigs = ([
     {
         ...nodeCommonOpts,
         entryPoints: ["src/main/index.ts"],
-        outfile: "dist/vencordDesktopMain.js",
-        footer: { js: "//# sourceURL=PlexcordDesktopMain\n" + sourceMapFooter("vencordDesktopMain") },
+        outfile: "dist/plexcordDesktopMain.js",
+        footer: { js: "//# sourceURL=PlexcordDesktopMain\n" + sourceMapFooter("plexcordDesktopMain") },
         sourcemap,
         plugins: [
             ...nodeCommonOpts.plugins,
@@ -196,8 +196,8 @@ const buildConfigs = ([
     {
         ...nodeCommonOpts,
         entryPoints: ["src/preload.ts"],
-        outfile: "dist/vencordDesktopPreload.js",
-        footer: { js: "//# sourceURL=PlexcordPreload\n" + sourceMapFooter("vencordDesktopPreload") },
+        outfile: "dist/plexcordDesktopPreload.js",
+        footer: { js: "//# sourceURL=PlexcordPreload\n" + sourceMapFooter("plexcordDesktopPreload") },
         sourcemap,
         define: {
             ...defines,

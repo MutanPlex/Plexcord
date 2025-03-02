@@ -17,8 +17,8 @@
 */
 
 export const VENCORD_FILES = [
-    IS_DISCORD_DESKTOP ? "patcher.js" : "vencordDesktopMain.js",
-    IS_DISCORD_DESKTOP ? "preload.js" : "vencordDesktopPreload.js",
+    IS_DISCORD_DESKTOP ? "patcher.js" : "plexcordDesktopMain.js",
+    IS_DISCORD_DESKTOP ? "preload.js" : "plexcordDesktopPreload.js",
     IS_DISCORD_DESKTOP ? "renderer.js" : "plexcordDesktopRenderer.js",
     IS_DISCORD_DESKTOP ? "renderer.css" : "plexcordDesktopRenderer.css",
 ];

@@ -45,9 +45,9 @@ if (IS_VESKTOP || !IS_VANILLA) {
                 case "renderer.js.map":
                 case "plexcordDesktopRenderer.js.map":
                 case "preload.js.map":
-                case "vencordDesktopPreload.js.map":
+                case "plexcordDesktopPreload.js.map":
                 case "patcher.js.map":
-                case "vencordDesktopMain.js.map":
+                case "plexcordDesktopMain.js.map":
                     cb(join(__dirname, url));
                     break;
                 default:
