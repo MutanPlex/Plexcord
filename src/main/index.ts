@@ -43,7 +43,7 @@ if (IS_VESKTOP || !IS_VANILLA) {
             }
             switch (url) {
                 case "renderer.js.map":
-                case "vencordDesktopRenderer.js.map":
+                case "plexcordDesktopRenderer.js.map":
                 case "preload.js.map":
                 case "vencordDesktopPreload.js.map":
                 case "patcher.js.map":

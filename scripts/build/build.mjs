@@ -177,10 +177,10 @@ const buildConfigs = ([
     {
         ...commonOpts,
         entryPoints: ["src/Vencord.ts"],
-        outfile: "dist/vencordDesktopRenderer.js",
+        outfile: "dist/plexcordDesktopRenderer.js",
         format: "iife",
         target: ["esnext"],
-        footer: { js: "//# sourceURL=PlexcordDesktopRenderer\n" + sourceMapFooter("vencordDesktopRenderer") },
+        footer: { js: "//# sourceURL=PlexcordDesktopRenderer\n" + sourceMapFooter("plexcordDesktopRenderer") },
         globalName: "Vencord",
         sourcemap,
         plugins: [
