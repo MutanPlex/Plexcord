@@ -100,12 +100,11 @@ const buildConfigs = [
             ...commonOptions.define,
             window: "unsafeWindow",
         },
-        outfile: "dist/Vencord.user.js",
+        outfile: "dist/Plexcord.user.js",
         banner: {
             js: readFileSync("browser/userscript.meta.js", "utf-8").replace("%version%", `${VERSION}.${new Date().getTime()}`)
         },
         footer: {
-            // UserScripts get wrapped in an iife, so define Vencord prop on window that returns our local
             js: "Object.defineProperty(unsafeWindow,'Vencord',{get:()=>Vencord});"
         }
     }
@@ -182,7 +181,7 @@ const appendCssRuntime = readFile("dist/Vencord.user.css", "utf-8").then(content
 ), { once: true });
 `;
 
-    return appendFile("dist/Vencord.user.js", cssRuntime);
+    return appendFile("dist/Plexcord.user.js", cssRuntime);
 });
 
 if (!process.argv.includes("--skip-extension")) {
