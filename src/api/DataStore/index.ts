@@ -2,6 +2,7 @@
  * idb-keyval v6.2.0
  * Copyright 2016, Jake Archibald
  * Copyright 2022, Vendicated
+ * Copyright (c) 2025 MutanPlex
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
