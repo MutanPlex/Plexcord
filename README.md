@@ -1,6 +1,6 @@
 # Plexcord
 
-The cutest Discord client mod
+Taking Discord to the Next Level!
 
 ## Features
 
