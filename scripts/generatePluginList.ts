@@ -45,6 +45,7 @@ interface PluginData {
     enabledByDefault: boolean;
     target: "discordDesktop" | "plexcordDesktop" | "desktop" | "web" | "dev";
     filePath: string;
+    readme?: string;
 }
 
 const devs = {} as Record<string, Dev>;
@@ -246,6 +247,12 @@ function isPluginFile({ name }: { name: string; }) {
             })
     ));
 
+    plugins.forEach(plugin => {
+        if (readmes[plugin.name]) {
+            plugin.readme = readmes[plugin.name];
+        }
+    });
+
     const data = JSON.stringify(plugins);
 
     if (process.argv.length > 3) {
@@ -253,5 +260,6 @@ function isPluginFile({ name }: { name: string; }) {
         writeFileSync(process.argv[3], JSON.stringify(readmes));
     } else {
         console.log(data);
+        writeFileSync("dist/plugins.json", data);
     }
 })();
