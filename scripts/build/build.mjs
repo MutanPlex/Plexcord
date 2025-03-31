@@ -73,7 +73,7 @@ const globNativesPlugin = {
         });
 
         build.onLoad({ filter, namespace: "import-natives" }, async () => {
-            const pluginDirs = ["plugins", "plexcordplugins"];
+            const pluginDirs = ["plugins", "userplugins"];
             let code = "";
             let natives = "\n";
             let i = 0;

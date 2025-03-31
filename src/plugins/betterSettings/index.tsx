@@ -129,7 +129,7 @@ export default definePlugin({
                 },
                 {
                     match: /case \i\.\i\.DEVELOPER_OPTIONS:return \i;/,
-                    replace: "$&case 'PlexcordPlugins':return $self.PluginsSubmenu();"
+                    replace: "$&case 'UserPlugins':return $self.PluginsSubmenu();"
                 }
             ]
         },

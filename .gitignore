@@ -19,7 +19,7 @@ lerna-debug.log*
 .pnpm-debug.log*
 *.tsbuildinfo
 
-src/plexcordplugins
+src/userplugins
 
 ExtensionCache/
 settings/
