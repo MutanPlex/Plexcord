@@ -42,7 +42,7 @@
 
     "browser_specific_settings": {
         "gecko": {
-            "id": "vencord-firefox@vendicated.dev",
+            "id": "contact@plexcord.club",
             "strict_min_version": "128.0"
         }
     }
