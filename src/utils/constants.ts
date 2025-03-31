@@ -640,6 +640,10 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "MrDiamond",
         id: 523338295644782592n
     },
+    ThePirateStoner: {
+        name: "ThePirateStoner",
+        id: 1196220620376121381n
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>
