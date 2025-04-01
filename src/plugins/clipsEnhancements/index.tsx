@@ -12,7 +12,7 @@ import { Devs } from "@utils/constants";
 import { ModalAPI } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
 import { findStoreLazy } from "@webpack";
-import { PresenceStore, UserStore } from "@webpack/common";
+import { PresenceStore, SettingsRouter, UserStore } from "@webpack/common";
 import { SelectOption } from "@webpack/types";
 
 interface Activity {
@@ -38,7 +38,7 @@ const settings = definePluginSettings({
             return (
                 <>
                     <Link
-                        href={findStoreLazy("ExperimentStore").getUserExperimentBucket("2024-04_game_settings_merge") === 1 ? "discord://-/settings/games/clips" : "discord://-/settings/clips"}
+                        href={findStoreLazy("ExperimentStore").getUserExperimentBucket("2024-04_game_settings_merge") === 1 ? SettingsRouter.open("Settings Clips") : SettingsRouter.open("Settings Clips")}
                         onClick={() => {
                             ModalAPI.closeAllModals();
                         }}
