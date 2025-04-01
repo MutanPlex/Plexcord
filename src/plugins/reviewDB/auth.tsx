@@ -55,7 +55,7 @@ export function authorize(callback?: any) {
             callback={async (response: any) => {
                 try {
                     const url = new URL(response.location);
-                    url.searchParams.append("clientMod", "plexcord");
+                    url.searchParams.append("clientMod", "vencord");
                     const res = await fetch(url, {
                         headers: { Accept: "application/json" }
                     });
