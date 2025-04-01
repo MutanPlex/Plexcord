@@ -1,0 +1,28 @@
+.pc-char-counter {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: right;
+    position: absolute;
+    right: 0;
+    pointer-events: none;
+    z-index: 1;
+    margin: 0;
+    padding: 6px;
+    background-color: var(--background-tertiary);
+    border-radius: var(--radius-sm);
+    transition: opacity 0.3s ease;
+}
+
+.pc-char-counter.left {
+    text-align: left;
+    right: auto;
+    left: 0;
+}
+
+.pc-char-counter .pc-char-count {
+    transition: color 0.3s ease;
+}
+
+.pc-char-counter .pc-char-max {
+    color: var(--primary-330);
+}
