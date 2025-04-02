@@ -11,6 +11,11 @@
     box-sizing: border-box;
 }
 
+.visual-refresh .pc-addon-card {
+    background-color: var(--card-primary-bg);
+    border: 1px solid var(--border-subtle);
+}
+
 .pc-addon-card-disabled {
     opacity: 0.6;
 }
@@ -19,6 +24,11 @@
     background-color: var(--background-tertiary);
     transform: translateY(-1px);
     box-shadow: var(--elevation-high);
+}
+
+.visual-refresh .pc-addon-card:hover {
+    /* same as non-hover, here to overwrite the non-refresh hover background */
+    background-color: var(--card-primary-bg);
 }
 
 .pc-addon-header {
