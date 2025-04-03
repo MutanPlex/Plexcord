@@ -1,0 +1,289 @@
+.pc-github-repos-container {
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--background-modifier-accent);
+    background-color: transparent;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pc-github-repos-header {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--header-primary);
+    display: flex;
+    align-items: center;
+}
+
+.pc-github-repos-count {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-left: 4px;
+}
+
+.pc-github-repos-list {
+    gap: 8px;
+    overflow-y: auto;
+    max-height: 400px;
+    padding-right: 8px;
+    margin-right: -8px;
+    scrollbar-width: thin;
+    flex: 1;
+}
+
+.pc-github-repos-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.pc-github-repos-list::-webkit-scrollbar-track {
+    background: var(--scrollbar-thin-track);
+    border-radius: 10px;
+}
+
+.pc-github-repos-list::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thin-thumb);
+    border-radius: 10px;
+}
+
+.pc-github-repos-list::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thin-thumb-hover);
+}
+
+.pc-github-repos-footer {
+    margin-top: 12px;
+    text-align: center;
+    padding-top: 8px;
+    border-top: 1px solid var(--background-modifier-accent);
+}
+
+.pc-github-repos-view-all {
+    color: var(--text-link);
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.pc-github-repos-view-all:hover {
+    text-decoration: underline;
+}
+
+.pc-github-button,
+.pc-github-repos-show-more {
+    background-color: transparent;
+    color: var(--text-normal);
+    border: 1px solid var(--background-modifier-accent);
+    border-radius: 3px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.pc-github-button:hover,
+.pc-github-repos-show-more:hover {
+    background-color: var(--background-modifier-hover);
+    border-color: var(--background-modifier-selected);
+}
+
+.pc-github-repos-loading,
+.pc-github-repos-error {
+    color: var(--text-normal);
+    font-size: 14px;
+    margin: 8px 0;
+}
+
+.pc-github-repos-error {
+    color: var(--text-danger);
+}
+
+.pc-github-repo-card {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid var(--background-modifier-accent);
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.pc-github-repo-card:hover {
+    background-color: var(--background-modifier-hover);
+    border-color: var(--background-modifier-selected);
+}
+
+.pc-github-repo-header {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.pc-github-repo-name {
+    font-weight: 600;
+    color: var(--header-primary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.pc-github-repo-fork-icon {
+    color: var(--text-muted);
+}
+
+.pc-github-repo-stars {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.pc-github-repo-star-icon {
+    color: var(--text-warning);
+}
+
+.pc-github-repo-description {
+    color: var(--text-normal);
+    font-size: 14px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.pc-github-repo-language {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.pc-github-repo-language-color {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.pc-github-repos-modal {
+    width: 90%;
+    max-width: 900px;
+}
+
+.pc-github-repos-modal-title {
+    color: var(--header-primary);
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.pc-github-repos-modal-content {
+    padding: 16px 0;
+    overflow: hidden;
+}
+
+.pc-github-repos-table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.pc-github-repos-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-normal);
+    font-size: 14px;
+    table-layout: fixed;
+}
+
+.pc-github-repos-table colgroup {
+    display: table-column-group;
+}
+
+.pc-github-repos-table col {
+    display: table-column;
+}
+
+.pc-github-repos-table thead {
+    border-bottom: 2px solid var(--background-modifier-accent);
+}
+
+.pc-github-repos-table th {
+    text-align: left;
+    padding: 10px 16px;
+    font-weight: 600;
+    color: var(--header-primary);
+    border-bottom: 2px solid var(--background-modifier-accent);
+}
+
+.pc-github-repos-table th:last-child {
+    text-align: center;
+}
+
+.pc-github-repos-table tbody tr {
+    border-bottom: 1px solid var(--background-modifier-accent);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.pc-github-repos-table tbody tr:hover {
+    background-color: var(--background-modifier-hover);
+}
+
+.pc-github-repos-table td {
+    padding: 12px 16px;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--background-modifier-accent);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pc-github-repos-table-name {
+    font-weight: 500;
+    color: var(--header-primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pc-github-repos-table-fork-icon {
+    color: var(--text-muted);
+}
+
+.pc-github-repos-table-description {
+    color: var(--text-normal);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pc-github-repos-table-language {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.pc-github-repos-table-language-color {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.pc-github-repos-table-stars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.pc-github-repos-table-star-icon {
+    color: var(--text-warning);
+}
