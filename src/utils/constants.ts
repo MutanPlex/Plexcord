@@ -705,6 +705,18 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "vMohammad",
         id: 921098159348924457n
     },
+    nyx: {
+        name: "verticalsync.",
+        id: 1207087393929171095n
+    },
+    talhakf: {
+        name: "talhakf",
+        id: 1140716160560676976n
+    },
+    Wolfie: {
+        name: "wolfieeeeeeee",
+        id: 347096063569559553n
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>
