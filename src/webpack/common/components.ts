@@ -26,7 +26,7 @@ import * as t from "./types/components";
 
 const FormTitle = waitForComponent<t.FormTitle>("FormTitle", filters.componentByCode('["defaultMargin".concat', '="h5"'));
 const FormText = waitForComponent<t.FormText>("FormText", filters.componentByCode(".SELECTABLE),", ".DISABLED:"));
-const FormSection = waitForComponent<t.FormSection>("FormSection", filters.componentByCode(".titleId)"));
+const FormSection = waitForComponent<t.FormSection>("FormSection", filters.componentByCode(".titleId)?"));
 const FormDivider = waitForComponent<t.FormDivider>("FormDivider", filters.componentByCode(".divider,", ",style:", '"div"', /\.divider,\i\),style:/));
 
 export const Forms = {
@@ -75,7 +75,7 @@ export const ScrollerNone = LazyComponent(() => createScroller(scrollerClasses.n
 export const ScrollerThin = LazyComponent(() => createScroller(scrollerClasses.thin, scrollerClasses.fade, scrollerClasses.customTheme));
 export const ScrollerAuto = LazyComponent(() => createScroller(scrollerClasses.auto, scrollerClasses.fade, scrollerClasses.customTheme));
 
-const { FocusLock_ } = mapMangledModuleLazy('document.getElementById("app-mount"))', {
+const { FocusLock_ } = mapMangledModuleLazy("attachTo:null!=", {
     FocusLock_: filters.componentByCode(".containerRef")
 }) as {
     FocusLock_: t.FocusLock;
