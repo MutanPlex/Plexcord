@@ -29,11 +29,11 @@ export default definePlugin({
             find: ".nsfwAllowed=null",
             replacement: [
                 {
-                    match: /(?<=\.nsfwAllowed=)null!==.+?(?=[,;])/,
+                    match: /(?<=\.nsfwAllowed=)null!=.+?(?=[,;])/,
                     replace: "true",
                 },
                 {
-                    match: /(?<=\.ageVerificationStatus=)null!==.+?(?=[,;])/,
+                    match: /(?<=\.ageVerificationStatus=)null!=.+?(?=[,;])/,
                     replace: "3", // VERIFIED_ADULT
                 }
             ],
