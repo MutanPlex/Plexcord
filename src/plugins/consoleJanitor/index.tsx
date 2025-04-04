@@ -7,7 +7,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { ErrorBoundary, Flex } from "@components/index";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import definePlugin, { defineDefault, OptionType, StartAt } from "@utils/types";
 import { Checkbox, Forms, Text } from "@webpack/common";
@@ -109,7 +109,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "ConsoleJanitor",
     description: "Disables annoying console messages/errors",
-    authors: [Devs.Nuckyz, Devs.sadan],
+    authors: [Devs.Nuckyz, Devs.sadan, PcDevs.MutanPlex],
     settings,
 
     startAt: StartAt.Init,
@@ -149,14 +149,14 @@ export default definePlugin({
         {
             find: "is not a valid locale.",
             replacement: {
-                match: /\i\.error\(""\.concat\(\i," is not a valid locale."\)\);/,
+                match: /void console\.log\("AppCrashedFatalReport: getLastCrash not supported\."\)/,
                 replace: ""
             }
         },
         {
             find: '"AppCrashedFatalReport: getLastCrash not supported."',
             replacement: {
-                match: /console\.log\("AppCrashedFatalReport: getLastCrash not supported\."\);/,
+                match: /void console\.log\("AppCrashedFatalReport: getLastCrash not supported\."\)/,
                 replace: ""
             }
         },
