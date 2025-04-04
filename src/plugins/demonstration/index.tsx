@@ -81,7 +81,7 @@ function handleToggle() {
     }
     else {
         if (settings.store.showConfirmationModal) {
-            const cl = classNameFactory("vc-demonstration-modal");
+            const cl = classNameFactory("pc-demonstration-modal");
 
             const key = openModal(props => (
                 <ModalRoot {...props}>
