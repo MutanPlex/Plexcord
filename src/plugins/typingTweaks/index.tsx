@@ -63,7 +63,7 @@ interface Props {
 const TypingUser = ErrorBoundary.wrap(function ({ user, guildId }: Props) {
     return (
         <strong
-            className="vc-typing-user"
+            className="pc-typing-user"
             role="button"
             onClick={() => {
                 openUserProfile(user.id);
