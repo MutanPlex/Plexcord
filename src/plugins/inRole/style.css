@@ -1,0 +1,29 @@
+.pc-inrole-member-list {
+    max-height: 400px;
+    margin-top: 10px;
+    margin-bottom: 13px;
+    overflow-x: hidden;
+}
+
+.pc-inrole-member-list::-webkit-scrollbar {
+    background-color: #fff1;
+    border-radius: 100px;
+    width: 10px;
+}
+
+.pc-inrole-member-list::-webkit-scrollbar-thumb {
+    background-color: #fff3;
+    border-radius: 100px;
+}
+
+.pc-inrole-modal-member {
+    margin: 11px 0;
+}
+
+.pc-inrole-header {
+    padding-top: 15px;
+}
+
+.pc-inrole-close {
+    margin-left: auto;
+}
