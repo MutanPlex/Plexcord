@@ -729,6 +729,14 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "zyqunix",
         id: 1201415921802170388n
     },
+    nobody: {
+        name: "nobody",
+        id: 0n
+    },
+    nexpid: {
+        name: "Nexpid",
+        id: 853550207039832084n
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>
