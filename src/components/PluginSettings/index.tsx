@@ -178,11 +178,11 @@ function ExcludedPluginsList({ search }: { search: string; }) {
     const matchingExcludedPlugins = Object.entries(ExcludedPlugins)
         .filter(([name]) => name.toLowerCase().includes(search));
 
-    const ExcludedReasons: Record<"web" | "discordDesktop" | "plexcordDesktop" | "desktop" | "dev", string> = {
-        desktop: "Discord Desktop app or Vesktop",
+    const ExcludedReasons: Record<"web" | "discordDesktop" | "plextron" | "desktop" | "dev", string> = {
+        desktop: "Discord Desktop app or Plextron",
         discordDesktop: "Discord Desktop app",
-        plexcordDesktop: "Vesktop app",
-        web: "Vesktop app and the Web version of Discord",
+        plextron: "Plextron app",
+        web: "Plextron app and the Web version of Discord",
         dev: "Developer version of Plexcord"
     };
 

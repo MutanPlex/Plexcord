@@ -70,6 +70,7 @@ function GameActivityToggleButton() {
             icon={makeIcon(showCurrentGame)}
             role="switch"
             aria-checked={!showCurrentGame}
+            redGlow={!showCurrentGame}
             onClick={() => ShowCurrentGame.updateSetting(old => !old)}
         />
     );

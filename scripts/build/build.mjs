@@ -185,7 +185,7 @@ const buildConfigs = ([
         globalName: "Plexcord",
         sourcemap,
         plugins: [
-            globPlugins("plexcordDesktop"),
+            globPlugins("plextron"),
             ...commonRendererPlugins
         ],
         define: {

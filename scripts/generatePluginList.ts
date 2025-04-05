@@ -43,7 +43,7 @@ interface PluginData {
     hasCommands: boolean;
     required: boolean;
     enabledByDefault: boolean;
-    target: "discordDesktop" | "plexcordDesktop" | "desktop" | "web" | "dev";
+    target: "discordDesktop" | "plextron" | "desktop" | "web" | "dev";
     filePath: string;
     readme?: string;
 }
@@ -191,7 +191,7 @@ async function parseFile(fileName: string) {
 
         const target = getPluginTarget(fileName);
         if (target) {
-            if (!["web", "discordDesktop", "plexcordDesktop", "desktop", "dev"].includes(target)) throw fail(`invalid target ${target}`);
+            if (!["web", "discordDesktop", "plextron", "desktop", "dev"].includes(target)) throw fail(`invalid target ${target}`);
             data.target = target as any;
         }
 

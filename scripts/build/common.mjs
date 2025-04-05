@@ -130,7 +130,7 @@ export const makeAllPackagesExternalPlugin = {
 };
 
 /**
- * @type {(kind: "web" | "discordDesktop" | "plexcordDesktop") => import("esbuild").Plugin}
+ * @type {(kind: "web" | "discordDesktop" | "plextron") => import("esbuild").Plugin}
  */
 export const globPlugins = kind => ({
     name: "glob-plugins",
@@ -169,7 +169,7 @@ export const globPlugins = kind => ({
                             (target === "web" && kind === "discordDesktop") ||
                             (target === "desktop" && kind === "web") ||
                             (target === "discordDesktop" && kind !== "discordDesktop") ||
-                            (target === "plexcordDesktop" && kind !== "plexcordDesktop");
+                            (target === "plextron" && kind !== "plextron");
 
                         if (excluded) {
                             const name = await resolvePluginName(fullDir, file);
