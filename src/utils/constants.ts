@@ -737,6 +737,18 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "Nexpid",
         id: 853550207039832084n
     },
+    Colorman: {
+        name: "colorman",
+        id: 298842558610800650n
+    },
+    port22exposed: {
+        name: "port",
+        id: 1318383159645311009n,
+    },
+    Hen: {
+        name: "Hen",
+        id: 279266228151779329n
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>
