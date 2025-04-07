@@ -741,17 +741,29 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "colorman",
         id: 298842558610800650n
     },
-    port22exposed: {
-        name: "port",
-        id: 1318383159645311009n,
-    },
     Hen: {
         name: "Hen",
         id: 279266228151779329n
     },
-    vappstar: {
-        name: "vappstar",
-        id: 747192967311261748n
+    smuki: {
+        name: "smuki",
+        id: 691517398523576331n
+    },
+    Drag: {
+        name: "dragalt_",
+        id: 1189903210564038697n
+    },
+    bhop: {
+        name: "femeie",
+        id: 442626774841556992n
+    },
+    xijexo: {
+        name: "xijexo",
+        id: 1284113557201620995n
+    },
+    omaw: {
+        name: "omaw",
+        id: 1155026301791514655n
     },
 } satisfies Record<string, PcDev>);
 
