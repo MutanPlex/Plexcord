@@ -617,10 +617,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "seliinneren",
         id: 600818938582007828n
     },
-    Ven: {
-        name: "Vee",
-        id: 343383572805058560n
-    },
     Max: {
         name: "Max",
         id: 0n
@@ -661,10 +657,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "Creation's",
         id: 209830981060788225n
     },
-    keifufu: {
-        name: "keifufu",
-        id: 469588398110146590n
-    },
     Panniku: {
         name: "Panniku",
         id: 703634705152606318n
@@ -688,14 +680,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     mochienya: {
         name: "mochie",
         id: 1043599230247374869n,
-    },
-    ShadyGoat: {
-        name: "Shady Goat",
-        id: 376079696489742338n
-    },
-    dat_insanity: {
-        name: "dat_insanity",
-        id: 0n
     },
     ryan: {
         name: "ryan",
@@ -757,14 +741,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "femeie",
         id: 442626774841556992n
     },
-    xijexo: {
-        name: "xijexo",
-        id: 1284113557201620995n
-    },
-    omaw: {
-        name: "omaw",
-        id: 1155026301791514655n
-    },
     kvba: {
         name: "kvba",
         id: 105170831130234880n
@@ -788,18 +764,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     Fres: {
         name: "fres",
         id: 843448897737064448n
-    },
-    Fafa: {
-        name: "Fafa",
-        id: 428188716641812481n
-    },
-    Prince527: {
-        name: "Prince527",
-        id: 364105797162237952n
-    },
-    coolesding: {
-        name: "cooles",
-        id: 406084422308331522n
     },
 } satisfies Record<string, PcDev>);
 
