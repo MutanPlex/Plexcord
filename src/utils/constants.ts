@@ -765,6 +765,42 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "omaw",
         id: 1155026301791514655n
     },
+    kvba: {
+        name: "kvba",
+        id: 105170831130234880n
+    },
+    Tolgchu: {
+        name: "✨Tolgchu✨",
+        id: 329671025312923648n
+    },
+    Jaxx: {
+        name: "Jaxx",
+        id: 901016640253227059n
+    },
+    camila314: {
+        name: "camila314",
+        id: 738592270617542716n
+    },
+    KrystalSkull: {
+        name: "krystalskullofficial",
+        id: 929208515883569182n
+    },
+    Fres: {
+        name: "fres",
+        id: 843448897737064448n
+    },
+    Fafa: {
+        name: "Fafa",
+        id: 428188716641812481n
+    },
+    Prince527: {
+        name: "Prince527",
+        id: 364105797162237952n
+    },
+    coolesding: {
+        name: "cooles",
+        id: 406084422308331522n
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>
