@@ -84,22 +84,12 @@ export default definePlugin({
 
     patches: [
         {
-            find: "usernameContainer,children:",
-            replacement: [
-                {
-                    match: /(\w+)\.userId,\s*(\w+)\s*\),\s*(\w+)\s*=/g,
-                    replace: "$1.userId, $2), CallTimerId = $1, $3=",
-                },
-                {
-                    match: /=\s*([a-zA-Z_$]\w*)\.useRef\(\s*([a-zA-Z_$]\w*)\s*\);/g,
-                    replace: "=$1.useRef($2), DcReact = $1; ",
-                },
-                {
-                    match: /(className:\s*\w+\.usernameContainer,\s*children:\s*)(\w+)/g,
-                    replace: "$1DcReact.cloneElement($2, { children: [...$2.props.children, $self.showClockInjection(CallTimerId), $self.showTextInjection(CallTimerId)] })",
-                },
-            ],
-        },
+            find: ".usernameSpeaking]:",
+            replacement: {
+                match: /\i\.getName\((\i)\),/,
+                replace: "$&$self.showInjection($1.id),"
+            }
+        }
     ],
     flux: {
         VOICE_STATE_UPDATES({ voiceStates }: { voiceStates: VoiceState[]; }) {
