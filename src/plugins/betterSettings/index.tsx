@@ -143,8 +143,7 @@ export default definePlugin({
     // Thus, we sanity check webpack modules
     Layer(props: LayerProps) {
         try {
-            // @ts-ignore
-            [FocusLock.$$plexcordInternal(), ComponentDispatch, Classes].forEach(e => e.test);
+            [FocusLock.$$plexcordGetWrappedComponent(), ComponentDispatch, Classes].forEach(e => e.test);
         } catch {
             new Logger("BetterSettings").error("Failed to find some components");
             return props.children;

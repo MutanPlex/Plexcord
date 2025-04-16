@@ -88,7 +88,7 @@ async function runReporter() {
                     result = Webpack[method](...args);
                 }
 
-                if (result == null || (result.$$plexcordInternal != null && result.$$plexcordInternal() == null)) throw new Error("Webpack Find Fail");
+                if (result == null || (result.$$plexcordGetWrappedComponent != null && result.$$plexcordGetWrappedComponent() == null)) throw new Error("Webpack Find Fail");
             } catch (e) {
                 let logMessage = searchType;
                 if (method === "find" || method === "proxyLazyWebpack" || method === "LazyComponentWebpack") {

@@ -36,9 +36,10 @@ export default definePlugin({
                 {
                     match: /let\{[^}]*lostPermissionTooltipText:\i[^}]*\}=(\i),/,
                     replace: "$&plexcordProps=$1,"
-                }, {
-                    match: /#{intl::GUILD_OWNER}(?=.+?decorators:(\i)\(\)).+?\1=?\(\)=>.+?children:\[/,
-                    replace: "$&(typeof plexcordProps=='undefined'?null:Plexcord.Api.MemberListDecorators.__getDecorators(plexcordProps)),"
+                },
+                {
+                    match: /children:\[(?=.{0,300},lostPermissionTooltipText:)/,
+                    replace: "children:[(typeof plexcordProps!=='undefined'&&Plexcord.Api.MemberListDecorators.__getDecorators(plexcordProps)),"
                 }
             ]
         },

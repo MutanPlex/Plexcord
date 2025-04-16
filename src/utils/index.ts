@@ -20,6 +20,7 @@
 export * from "../shared/debounce";
 export * from "../shared/onceDefined";
 export * from "./ChangeList";
+export * from "./clipboard";
 export * from "./constants";
 export * from "./discord";
 export * from "./guards";
