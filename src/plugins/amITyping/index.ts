@@ -15,11 +15,11 @@ export default definePlugin({
 
     patches: [
         {
-            find: '"handleDismissInviteEducation"',
+            find: "\"handleDismissInviteEducation\"",
             replacement: {
                 match: /\i\.default\.getCurrentUser\(\)/,
-                replace: '""',
-            },
-        },
+                replace: "\"\""
+            }
+        }
     ],
 });
