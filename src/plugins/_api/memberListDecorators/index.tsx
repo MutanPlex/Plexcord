@@ -34,20 +34,16 @@ export default definePlugin({
             find: ".lostPermission)",
             replacement: [
                 {
-                    match: /let\{[^}]*lostPermissionTooltipText:\i[^}]*\}=(\i),/,
-                    replace: "$&plexcordProps=$1,"
-                },
-                {
                     match: /children:\[(?=.{0,300},lostPermissionTooltipText:)/,
-                    replace: "children:[(typeof plexcordProps!=='undefined'&&Plexcord.Api.MemberListDecorators.__getDecorators(plexcordProps)),"
+                    replace: "children:[Plexcord.Api.MemberListDecorators.__getDecorators(arguments[0],'guild'),"
                 }
             ]
         },
         {
             find: "PrivateChannel.renderAvatar",
             replacement: {
-                match: /decorators:(\i\.isSystemDM\(\))\?(.+?):null/,
-                replace: "decorators:[Plexcord.Api.MemberListDecorators.__getDecorators(arguments[0]),$1?$2:null]"
+                match: /decorators:(\i\.isSystemDM\(\)\?.+?:null)/,
+                replace: "decorators:[Plexcord.Api.MemberListDecorators.__getDecorators(arguments[0],'dm'),$1]"
             }
         }
     ]
