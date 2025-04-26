@@ -11,7 +11,7 @@ import { openUserProfile } from "@utils/discord";
 import { openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy, findByPropsLazy, findComponentByCodeLazy } from "@webpack";
-import { Button, FluxDispatcher, React, RelationshipStore, Text, TextInput, UserStore } from "@webpack/common";
+import { Button, FluxDispatcher, React, RelationshipStore, showToast, Text, TextInput, UserStore } from "@webpack/common";
 import { ButtonProps } from "@webpack/types";
 import { User } from "discord-types/general";
 
@@ -27,12 +27,6 @@ const settings = definePluginSettings({
         default: true,
         type: OptionType.BOOLEAN,
         description: "Adds a 'View DMs' button to the users in the blocked/ignored list.",
-    },
-    hideBlockedWarning: {
-        default: false,
-        type: OptionType.BOOLEAN,
-        description: "Skip the warning about blocked/ignored users when opening any profile anywhere on discord outside of the blocklist.",
-        restartNeeded: true,
     },
     showUnblockConfirmation: {
         default: true,
@@ -50,6 +44,11 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         description: "Color the unblock button in the blocklist red instead of gray.",
     },
+    allowShiftUnblock: {
+        default: true,
+        type: OptionType.BOOLEAN,
+        description: "Unblock a user without confirmation prompting when holding shift.",
+    }
 });
 
 export default definePlugin({
@@ -84,7 +83,8 @@ export default definePlugin({
             ]
         },
         {
-            find: "UserProfileModalHeaderActionButtons",
+            find: "#{intl::OUTGOING_FRIEND_REQUEST}",
+            group: true,
             replacement: [
                 {
                     match: /(?<=return \i)\|\|(\i)===.*?.FRIEND/,
@@ -96,26 +96,6 @@ export default definePlugin({
                 }
             ],
         },
-        {
-            find: ',["user"])',
-            replacement: {
-                match: /(?<=isIgnored:.*?,\[\i,\i]=\i.useState\()\i\|\|\i\|\|\i.*?]\);/,
-                replace: "false);"
-            },
-        },
-
-        // If the users wishes to, they can disable the warning in all other places as well.
-        ...[
-            "UserProfilePanelWrapper: currentUser cannot be undefined",
-            "UserProfilePopoutWrapper: currentUser cannot be undefined",
-        ].map(x => ({
-            find: x,
-            replacement: {
-                match: /(?<=isIgnored:.*?,\[\i,\i]=\i.useState\()\i\|\|\i\|\|\i\)(?:;\i.useEffect.*?]\))?/,
-                replace: "false)",
-            },
-            predicate: () => settings.store.hideBlockedWarning,
-        })),
 
         {
             find: ".BLOCKED:return",
@@ -186,8 +166,6 @@ export default definePlugin({
 
         if (settings.store.unblockButtonDanger) originalProps.color = Button.Colors.RED;
 
-        // TODO add extra unblock confirmation after the click + setting.
-
         if (settings.store.showUnblockConfirmation || settings.store.showUnblockConfirmationEverywhere) {
             const originalOnClick = originalProps.onClick!;
             originalProps.onClick = e => {
@@ -209,12 +187,19 @@ export default definePlugin({
     },
 
     openDMChannel(user: User) {
-        ChannelActions.openPrivateChannel(user.id);
+        try {
+            ChannelActions.openPrivateChannel(user.id);
+        }
+        catch (e) {
+            showToast("Failed to open DMs for user '" + user.username + "'! Check the console for more info");
+            return console.error(e);
+        }
+        // only close the settings window if we actually opened a DM channel behind it.
         this.closeSettingsWindow();
-        return null;
     },
+
     openConfirmationModal(event: MouseEvent, callback: () => any, user: User | string, isSettingsOrigin: boolean = false) {
-        if (event.shiftKey) return callback();
+        if (event.shiftKey && settings.store.allowShiftUnblock) return callback();
 
         if (typeof user === "string") {
             user = UserStore.getUser(user);
@@ -223,7 +208,7 @@ export default definePlugin({
         return openModal(m => <ConfirmationModal
             {...m}
             className="pc-bbc-confirmation-modal"
-            header={`Unblock ${user?.username ?? "?"}?`}
+            header={`Unblock ${user?.username ?? "unknown user"}?`}
             cancelText="Cancel"
             confirmText="Unblock"
             onConfirm={() => {
