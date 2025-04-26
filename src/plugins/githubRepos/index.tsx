@@ -13,7 +13,7 @@ import { PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy } from "@webpack";
-import { React } from "@webpack/common";
+import { React, Text } from "@webpack/common";
 import { User } from "discord-types/general";
 
 import { GitHubReposComponent } from "./components/GitHubReposComponent";
@@ -56,7 +56,8 @@ const ProfilePopoutComponent = ErrorBoundary.wrap(
         noop: true,
         onError: err => {
             logger.error("Error in profile popout component", err);
-            return null;
+            return <Text variant="text-xs/semibold" className="pc-github-repos-error" style={{ color: "var(--text-danger)" }}>
+                Error, Failed to render GithubRepos</Text>;
         }
     }
 );
@@ -64,7 +65,7 @@ const ProfilePopoutComponent = ErrorBoundary.wrap(
 export default definePlugin({
     name: "GitHubRepos",
     description: "Displays a user's public GitHub repositories in their profile",
-    authors: [PcDevs.talhakf, PcDevs.MutanPlex],
+    authors: [PcDevs.talhakf, PcDevs.Panniku, PcDevs.MutanPlex],
     settings,
 
     patches: [
