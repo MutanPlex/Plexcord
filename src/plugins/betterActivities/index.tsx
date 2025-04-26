@@ -469,7 +469,7 @@ export default definePlugin({
     patches: [
         {
             // Patch activity icons
-            find: '"activity-status-web"',
+            find: "isBlockedOrIgnored(null",
             replacement: {
                 match: /(?<=hideTooltip:.{0,4}}=(\i).*?{}\))\]/,
                 replace: ",$self.patchActivityList($1)]"
