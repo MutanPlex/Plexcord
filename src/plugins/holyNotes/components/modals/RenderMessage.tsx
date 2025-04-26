@@ -51,7 +51,7 @@ export const RenderMessage = ({
 
     return (
         <div
-            className="pc-holy-note"
+            className="vc-holy-note"
             style={{
                 marginBottom: "8px",
                 marginTop: "8px",
@@ -80,7 +80,7 @@ export const RenderMessage = ({
             }}
         >
             <ChannelMessage
-                className={classes("pc-holy-render", message, groupStart, cozyMessage)}
+                className={classes("vc-holy-render", message, groupStart, cozyMessage)}
                 key={note.id}
                 groupId={note.id}
                 id={note.id}
