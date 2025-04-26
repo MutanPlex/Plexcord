@@ -18,7 +18,7 @@
 */
 
 import { definePluginSettings } from "@api/Settings";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
@@ -33,11 +33,11 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "BANger",
     description: "Replaces the GIF in the ban dialogue with a custom one.",
-    authors: [Devs.Xinto, Devs.Glitch],
+    authors: [Devs.Xinto, Devs.Glitch, PcDevs.MutanPlex],
     settings,
     patches: [
         {
-            find: "#{intl::jeKpoq::raw}", // BAN_CONFIRM_TITLE
+            find: "#{intl::BAN_REASON_OPTION_SPAM_ACCOUNT}",
             replacement: {
                 match: /src:\i\("?\d+"?\)/g,
                 replace: "src:$self.source"
