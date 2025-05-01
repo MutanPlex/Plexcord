@@ -17,7 +17,7 @@ import { FluxDispatcher, Forms, GuildChannelStore, GuildMemberStore, GuildStore,
 import { Guild, User } from "discord-types/general";
 
 const IconClasses = findByPropsLazy("icon", "acronym", "childWrapper");
-const FriendRow = findComponentByCodeLazy(".listName,discriminatorClass");
+const FriendRow = findComponentByCodeLazy("discriminatorClass:", ".isMobileOnline", "getAvatarURL");
 
 const cl = classNameFactory("pc-gp-");
 
