@@ -23,6 +23,14 @@ const settings = definePluginSettings(
             description: "The signature that will be added to the end of your messages",
             default: "a chronic discord user"
         },
+        textHeader: {
+            description: "What header to preface text with",
+            type: OptionType.SELECT,
+            options: [
+                { label: ">", value: ">", default: true },
+                { label: "-#", value: "-#" }
+            ]
+        },
         showIcon: {
             type: OptionType.BOOLEAN,
             default: true,
@@ -86,7 +94,7 @@ const ChatBarContextCheckbox: NavContextMenuPatchCallback = children => {
 
     group.splice(idx + 1, 0,
         <Menu.MenuCheckboxItem
-            id="pc-Signature"
+            id="vc-Signature"
             label="Enable Signature"
             checked={isEnabled}
             action={() => settings.store.isEnabled = !settings.store.isEnabled}
@@ -142,7 +150,5 @@ export default definePlugin({
 
 // text processing injection processor
 function textProcessing(input: string) {
-    return `${input}\n> ${settings.store.name}`;
+    return `${input}\n${settings.store.textHeader} ${settings.store.name}`;
 }
-
-
