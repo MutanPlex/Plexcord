@@ -32,6 +32,10 @@ import hideBugReport from "./hideBugReport.css?managed";
 const KbdStyles = findByPropsLazy("key", "combo");
 const BugReporterExperiment = findLazy(m => m?.definition?.id === "2024-09_bug_reporter");
 
+const isMacOS = navigator.platform.includes("Mac");
+const modKey = isMacOS ? "cmd" : "ctrl";
+const altKey = isMacOS ? "opt" : "alt";
+
 const settings = definePluginSettings({
     toolbarDevMenu: {
         type: OptionType.BOOLEAN,
@@ -49,7 +53,7 @@ export default definePlugin({
         Devs.Ven,
         Devs.Nickyux,
         Devs.BanTheNons,
-        Devs.Nuckyz
+        Devs.Nuckyz,
     ],
 
     settings,
@@ -76,9 +80,9 @@ export default definePlugin({
                 replace: "$&$self.WarningCard(),"
             }
         },
-        // change top right chat toolbar button from the help one to the dev one
+        // Change top right chat toolbar button from the help one to the dev one
         {
-            find: "toolbar:function",
+            find: ".CONTEXTLESS,isActivityPanelMode:",
             replacement: {
                 match: /hasBugReporterAccess:(\i)/,
                 replace: "_hasBugReporterAccess:$1=true"
@@ -86,7 +90,7 @@ export default definePlugin({
             predicate: () => settings.store.toolbarDevMenu
         },
 
-        // makes the Favourites Server experiment allow favouriting DMs and threads
+        // Make the Favourites Server experiment allow favouriting DMs and threads
         {
             find: "useCanFavoriteChannel",
             replacement: {
@@ -94,23 +98,36 @@ export default definePlugin({
                 replace: "false",
             }
         },
-        // enable option to always record clips even if you are not streaming
+        // Enable option to always record clips even if you are not streaming
         {
             find: "isDecoupledGameClippingEnabled(){",
             replacement: {
                 match: /\i\.isStaff\(\)/,
                 replace: "true"
             }
-        }
+        },
+
+        // Enable experiment embed on sent experiment links
+        {
+            find: "dev://experiment/",
+            replacement: [
+                {
+                    match: /\i\.isStaff\(\)/,
+                    replace: "true"
+                },
+                // Fix some tricky experiments name causing a client crash
+                {
+                    match: /.getRegisteredExperiments\(\)(?<=(\i)=.+?).+?if\(null==(\i)(?=\)return null;)/,
+                    replace: "$&||!Object.hasOwn($1,$2)"
+                }
+            ]
+        },
     ],
 
     start: () => !BugReporterExperiment.getCurrentConfig().hasBugReporterAccess && enableStyle(hideBugReport),
     stop: () => disableStyle(hideBugReport),
 
     settingsAboutComponent: () => {
-        const isMacOS = navigator.platform.includes("Mac");
-        const modKey = isMacOS ? "cmd" : "ctrl";
-        const altKey = isMacOS ? "opt" : "alt";
         return (
             <React.Fragment>
                 <Forms.FormTitle tag="h3">More Information</Forms.FormTitle>
