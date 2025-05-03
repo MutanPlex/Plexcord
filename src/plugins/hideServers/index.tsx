@@ -65,7 +65,7 @@ export function removeIndicator() {
 export default definePlugin({
     name: "HideServers",
     description: "Allows you to hide servers from the guild list and quick switcher by right clicking them",
-    authors: [PcDevs.MutanPlex],
+    authors: [PcDevs.bep, PcDevs.MutanPlex],
     tags: ["guild", "server", "hide"],
 
     dependencies: ["ServerListAPI"],
