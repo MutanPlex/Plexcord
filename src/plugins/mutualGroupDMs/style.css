@@ -1,3 +1,7 @@
-.pc-mutual-gdms-tab-bar {
+.pc-mutual-gdms-modal-tab-bar {
     gap: 0;
+}
+
+.pc-mutual-gdms-modal-v2-tab-bar {
+    gap: 12px;
 }

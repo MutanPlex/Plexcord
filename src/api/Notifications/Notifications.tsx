@@ -19,7 +19,7 @@
 
 import { Settings } from "@api/Settings";
 import { Queue } from "@utils/Queue";
-import { ReactDOM } from "@webpack/common";
+import { createRoot } from "@webpack/common";
 import type { ReactNode } from "react";
 import type { Root } from "react-dom/client";
 
@@ -36,7 +36,7 @@ function getRoot() {
         const container = document.createElement("div");
         container.id = "pc-notification-container";
         document.body.append(container);
-        reactRoot = ReactDOM.createRoot(container);
+        reactRoot = createRoot(container);
     }
     return reactRoot;
 }

@@ -19,16 +19,8 @@
     border: thin solid var(--background-modifier-accent) !important;
 }
 
-.pc-clientTheme-warning-text {
-    color: var(--text-danger);
-}
-
-.pc-clientTheme-contrast-warning {
-    background-color: var(--background-primary);
-    padding: 0.5rem;
-    border-radius: .5rem;
+.pc-clientTheme-buttons-container {
+    margin-top: 16px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    gap: 4px;
 }
