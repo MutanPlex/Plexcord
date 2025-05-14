@@ -10,11 +10,11 @@
     color: var(--text-muted);
 }
 
-.vc-bbr-remove-button:hover {
+.pc-bbr-remove-button:hover {
     color: var(--button-danger-background-hover);
 }
 
-.vc-bbr-add-button {
+.pc-bbr-add-button {
     justify-content: start !important;
     border: 0;
     padding: 2px 12px;
@@ -22,7 +22,7 @@
     font-size: 16px;
 }
 
-.vc-bbr-add-button div {
+.pc-bbr-add-button div {
     display: flex;
     justify-content: start;
     align-items: center;

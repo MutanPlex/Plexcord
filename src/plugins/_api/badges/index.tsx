@@ -74,6 +74,8 @@ async function loadBadges(noCache = false) {
     };
 }
 
+let intervalId: any;
+
 export default definePlugin({
     name: "BadgeAPI",
     description: "API to add badges to users.",
@@ -107,6 +109,11 @@ export default definePlugin({
         }
     ],
 
+    // for access from the console or other plugins
+    get DonorBadges() {
+        return DonorBadges;
+    },
+
     toolboxActions: {
         async "Refetch Badges"() {
             await loadBadges(true);
@@ -123,6 +130,13 @@ export default definePlugin({
 
     async start() {
         await loadBadges();
+
+        clearInterval(intervalId);
+        intervalId = setInterval(loadBadges, 1000 * 60 * 30); // 30 minutes
+    },
+
+    async stop() {
+        clearInterval(intervalId);
     },
 
     getBadges(props: { userId: string; user?: User; guildId: string; }) {

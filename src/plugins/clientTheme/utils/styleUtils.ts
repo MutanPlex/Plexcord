@@ -1,13 +1,14 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2025 Vendicated and contributors
+ * Copyright (c) 2025 MutanPlex
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 import { hexToHSL } from "./colorUtils";
 
-const VARS_STYLE_ID = "vc-clientTheme-vars";
-const OVERRIDES_STYLE_ID = "vc-clientTheme-overrides";
+const VARS_STYLE_ID = "pc-clientTheme-vars";
+const OVERRIDES_STYLE_ID = "pc-clientTheme-overrides";
 
 export function createOrUpdateThemeColorVars(color: string) {
     const { hue, saturation, lightness } = hexToHSL(color);

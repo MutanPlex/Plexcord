@@ -48,7 +48,7 @@ export function OpenLogsIcon() {
 export function OpenLogsButton() {
     return (
         <HeaderBarIcon
-            className="vc-log-toolbox-btn"
+            className="pc-log-toolbox-btn"
             onClick={() => openLogModal()}
             tooltip={"Open Logs"}
             icon={OpenLogsIcon}

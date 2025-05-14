@@ -67,7 +67,7 @@ export default definePlugin({
             replacement: [{
                 // Adds POST and a Marker to the SpotifyAPI (so we can easily find it)
                 match: /get:(\i)\.bind\(null,(\i\.\i)\.get\)/,
-                replace: "post:$1.bind(null,$2.post),vcSpotifyMarker:1,$&"
+                replace: "post:$1.bind(null,$2.post),pcSpotifyMarker:1,$&"
             },
             {
                 // Spotify Connect API returns status 202 instead of 204 when skipping tracks.

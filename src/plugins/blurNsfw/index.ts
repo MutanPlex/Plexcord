@@ -63,7 +63,7 @@ export default definePlugin({
 
     start() {
         style = document.createElement("style");
-        style.id = "VcBlurNsfw";
+        style.id = "PcBlurNsfw";
         document.head.appendChild(style);
 
         setCss();

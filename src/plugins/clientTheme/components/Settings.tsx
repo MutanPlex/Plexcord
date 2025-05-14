@@ -1,6 +1,7 @@
 /*
- * Vencord, a Discord client mod
+ * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2025 Vendicated and contributors
+ * Copyright (c) 2025 MutanPlex
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
@@ -18,7 +19,7 @@ const ColorPicker = findComponentByCodeLazy("#{intl::USER_SETTINGS_PROFILE_COLOR
 const saveClientTheme = findByCodeLazy('type:"UNSYNCED_USER_SETTINGS_UPDATE', '"system"===');
 const NitroThemeStore = findStoreLazy("ClientThemesBackgroundStore");
 
-const cl = classNameFactory("vc-clientTheme-");
+const cl = classNameFactory("pc-clientTheme-");
 
 const colorPresets = [
     "#1E1514", "#172019", "#13171B", "#1C1C28", "#402D2D",

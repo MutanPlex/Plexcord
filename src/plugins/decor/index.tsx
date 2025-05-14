@@ -84,17 +84,17 @@ export default definePlugin({
                 // Add Decor avatar decoration hook to avatar decoration hook
                 {
                     match: /(?<=TryItOut:\i,guildId:\i}\),)(?<=user:(\i).+?)/,
-                    replace: "vcDecorAvatarDecoration=$self.useUserDecorAvatarDecoration($1),"
+                    replace: "pcDecorAvatarDecoration=$self.useUserDecorAvatarDecoration($1),"
                 },
                 // Use added hook
                 {
                     match: /(?<={avatarDecoration:).{1,20}?(?=,)(?<=avatarDecorationOverride:(\i).+?)/,
-                    replace: "$1??vcDecorAvatarDecoration??($&)"
+                    replace: "$1??pcDecorAvatarDecoration??($&)"
                 },
                 // Make memo depend on added hook
                 {
                     match: /(?<=size:\i}\),\[)/,
-                    replace: "vcDecorAvatarDecoration,"
+                    replace: "pcDecorAvatarDecoration,"
                 }
             ]
         },

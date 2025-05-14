@@ -72,7 +72,7 @@ export const SpotifyStore = proxyLazyWebpack(() => {
     const { Store } = Flux;
 
     const SpotifySocket = findByProps("getActiveSocketAndDevice");
-    const SpotifyAPI = findByPropsLazy("vcSpotifyMarker");
+    const SpotifyAPI = findByPropsLazy("pcSpotifyMarker");
 
     const API_BASE = "https://api.spotify.com/v1/me/player";
 

@@ -68,13 +68,7 @@ export async function installExt(id: string) {
     try {
         await access(extDir, fsConstants.F_OK);
     } catch (err) {
-        const url = id === "fmkadmapgofadopljbjfkapdkoienihi"
-            // React Devtools v4.25
-            // v4.27 is broken in Electron, see https://github.com/facebook/react/issues/25843
-            // Unfortunately, Google does not serve old versions, so this is the only way
-            // This zip file is pinned to long commit hash so it cannot be changed remotely
-            ? "https://raw.githubusercontent.com/MutanPlex/random-files/5159afb6d3d9dfae4f0669399f0756580ffa371d/fmkadmapgofadopljbjfkapdkoienihi.zip"
-            : `https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3D${id}%26uc&prodversion=${process.versions.chrome}`;
+        const url = `https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&x=id%3D${id}%26uc&prodversion=${process.versions.chrome}`;
 
         const buf = await get(url, {
             headers: {

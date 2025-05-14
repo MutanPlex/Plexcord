@@ -32,7 +32,7 @@ export default definePlugin({
             find: "React has blocked a javascript: URL as a security precaution.",
             replacement: {
                 match: /"https:\/\/react.dev\/errors\/"\+\i;/,
-                replace: "$&const vcDecodedError=$self.decodeError(...arguments);if(vcDecodedError)return vcDecodedError;"
+                replace: "$&const pcDecodedError=$self.decodeError(...arguments);if(pcDecodedError)return pcDecodedError;"
             }
         }
     ],
