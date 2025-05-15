@@ -184,6 +184,17 @@ export interface DraftObject {
     draft: string;
 }
 
+export class StickersStore extends FluxStore {
+    getStickerById(id: string): Sticker | undefined;
+    getStickerPack(id: string): StickerPack | undefined;
+    getPremiumPacks(): StickerPack[];
+    isPremiumPack(id: string): boolean;
+    getRawStickersByGuild(): Map<string, Sticker[]>;
+    getAllStickersIterator(): IterableIterator<Sticker>;
+    getAllGuildStickers(): Map<string, Sticker[]>;
+    getStickersByGuildId(id: string): Sticker[] | undefined;
+}
+
 interface DraftState {
     [userId: string]: {
         [channelId: string]: {

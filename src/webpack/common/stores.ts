@@ -58,7 +58,7 @@ export let EmojiStore: t.EmojiStore;
 export let ThemeStore: t.ThemeStore;
 export let WindowStore: t.WindowStore;
 export let DraftStore: t.DraftStore;
-
+export let StickersStore: t.StickersStore;
 /**
  * React hook that returns stateful data for one or more stores
  * You might need a custom comparator (4th argument) if your store data is an object
@@ -88,3 +88,4 @@ waitForStore("MessageStore", m => MessageStore = m);
 waitForStore("WindowStore", m => WindowStore = m);
 waitForStore("EmojiStore", m => EmojiStore = m);
 waitForStore("ThemeStore", m => ThemeStore = m);
+waitForStore("StickersStore", m => StickersStore = m);
