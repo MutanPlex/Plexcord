@@ -94,7 +94,7 @@ const ChatBarContextCheckbox: NavContextMenuPatchCallback = children => {
 
     group.splice(idx + 1, 0,
         <Menu.MenuCheckboxItem
-            id="pc-Signature"
+            id="vc-Signature"
             label="Enable Signature"
             checked={isEnabled}
             action={() => settings.store.isEnabled = !settings.store.isEnabled}
