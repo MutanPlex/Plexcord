@@ -17,10 +17,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { _resolveReady, filters, findByCodeLazy, findByPropsLazy, findLazy, mapMangledModuleLazy, waitFor } from "@webpack";
 import type { Channel } from "discord-types/general";
 
-// eslint-disable-next-line path-alias/no-relative
-import { _resolveReady, filters, findByCodeLazy, findByPropsLazy, findLazy, mapMangledModuleLazy, waitFor } from "../webpack";
 import type * as t from "./types/utils";
 
 export let FluxDispatcher: t.FluxDispatcher;
@@ -36,7 +35,7 @@ waitFor(["dispatch", "subscribe"], m => {
     m.subscribe("CONNECTION_OPEN", cb);
 });
 
-export let ComponentDispatch;
+export let ComponentDispatch: any;
 waitFor(["dispatchToLastSubscribed"], m => ComponentDispatch = m);
 
 export const Constants: t.Constants = mapMangledModuleLazy('ME:"/users/@me"', {
@@ -178,6 +177,7 @@ export const MessageActions = findByPropsLazy("editMessage", "sendMessage");
 export const MessageCache = findByPropsLazy("clearCache", "_channelMessages");
 export const UserProfileActions = findByPropsLazy("openUserProfileModal", "closeUserProfileModal");
 export const InviteActions = findByPropsLazy("resolveInvite");
+export const ChannelActionCreators = findByPropsLazy("openPrivateChannel");
 
 export const IconUtils: t.IconUtils = findByPropsLazy("getGuildBannerURL", "getUserAvatarURL");
 

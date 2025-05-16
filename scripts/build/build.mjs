@@ -113,7 +113,7 @@ const buildConfigs = ([
         ...nodeCommonOpts,
         entryPoints: ["src/main/index.ts"],
         outfile: "dist/patcher.js",
-        footer: { js: "//# sourceURL=PlexcordPatcher\n" + sourceMapFooter("patcher") },
+        footer: { js: "//# sourceURL=file:///PlexcordPatcher\n" + sourceMapFooter("patcher") },
         sourcemap,
         plugins: [
             // @ts-ignore this is never undefined
@@ -132,7 +132,7 @@ const buildConfigs = ([
         outfile: "dist/renderer.js",
         format: "iife",
         target: ["esnext"],
-        footer: { js: "//# sourceURL=PlexcordRenderer\n" + sourceMapFooter("renderer") },
+        footer: { js: "//# sourceURL=file:///PlexcordRenderer\n" + sourceMapFooter("renderer") },
         globalName: "Plexcord",
         sourcemap,
         plugins: [
@@ -149,7 +149,7 @@ const buildConfigs = ([
         ...nodeCommonOpts,
         entryPoints: ["src/preload.ts"],
         outfile: "dist/preload.js",
-        footer: { js: "//# sourceURL=PlexcordPreload\n" + sourceMapFooter("preload") },
+        footer: { js: "//# sourceURL=file:///PlexcordPreload\n" + sourceMapFooter("preload") },
         sourcemap,
         define: {
             ...defines,
@@ -163,7 +163,7 @@ const buildConfigs = ([
         ...nodeCommonOpts,
         entryPoints: ["src/main/index.ts"],
         outfile: "dist/plexcordDesktopMain.js",
-        footer: { js: "//# sourceURL=PlexcordDesktopMain\n" + sourceMapFooter("plexcordDesktopMain") },
+        footer: { js: "//# sourceURL=file:///PlexcordDesktopMain\n" + sourceMapFooter("plexcordDesktopMain") },
         sourcemap,
         plugins: [
             ...nodeCommonOpts.plugins,
@@ -181,7 +181,7 @@ const buildConfigs = ([
         outfile: "dist/plexcordDesktopRenderer.js",
         format: "iife",
         target: ["esnext"],
-        footer: { js: "//# sourceURL=PlexcordDesktopRenderer\n" + sourceMapFooter("plexcordDesktopRenderer") },
+        footer: { js: "//# sourceURL=file:///PlexcordDesktopRenderer\n" + sourceMapFooter("plexcordDesktopRenderer") },
         globalName: "Plexcord",
         sourcemap,
         plugins: [
@@ -198,7 +198,7 @@ const buildConfigs = ([
         ...nodeCommonOpts,
         entryPoints: ["src/preload.ts"],
         outfile: "dist/plexcordDesktopPreload.js",
-        footer: { js: "//# sourceURL=PlexcordPreload\n" + sourceMapFooter("plexcordDesktopPreload") },
+        footer: { js: "//# sourceURL=file:///PlexcordPreload\n" + sourceMapFooter("plexcordDesktopPreload") },
         sourcemap,
         define: {
             ...defines,

@@ -73,7 +73,7 @@ export default definePlugin({
             group: true,
             replacement: [
                 {
-                    match: /let{speaking:\i/,
+                    match: /let{ref:\i,speaking:\i/,
                     replace: "$self.useAccountPanelRef();$&"
                 },
                 {
