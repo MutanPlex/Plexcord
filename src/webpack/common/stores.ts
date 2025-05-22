@@ -91,4 +91,3 @@ waitForStore("ThemeStore", m => {
     // Importing this directly can easily cause circular imports. For this reason, use a non import access here.
     Plexcord.QuickCss.initQuickCssThemeStore();
 });
-waitForStore("StickersStore", m => StickersStore = m);

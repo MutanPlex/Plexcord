@@ -25,7 +25,7 @@ import type * as t from "./types/utils";
 export let FluxDispatcher: t.FluxDispatcher;
 waitFor(["dispatch", "subscribe"], m => {
     FluxDispatcher = m;
-    // Non import call to avoid circular dependency
+    // Non import access to avoid circular dependency
     Plexcord.Plugins.subscribeAllPluginsFluxEvents(m);
 
     const cb = () => {

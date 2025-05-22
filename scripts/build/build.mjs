@@ -117,7 +117,7 @@ const buildConfigs = ([
         sourcemap,
         plugins: [
             // @ts-ignore this is never undefined
-            ...nodeCommonOpts.plugins,
+            ...(nodeCommonOpts.plugins ?? []),
             globNativesPlugin
         ],
         define: {
@@ -166,7 +166,7 @@ const buildConfigs = ([
         footer: { js: "//# sourceURL=file:///PlexcordDesktopMain\n" + sourceMapFooter("plexcordDesktopMain") },
         sourcemap,
         plugins: [
-            ...nodeCommonOpts.plugins,
+            ...(nodeCommonOpts.plugins ?? []),
             globNativesPlugin
         ],
         define: {

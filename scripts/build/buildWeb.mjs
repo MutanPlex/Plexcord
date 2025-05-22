@@ -83,7 +83,7 @@ const buildConfigs = [
     {
         ...commonOptions,
         outfile: "dist/browser.js",
-        footer: { js: "//# sourceURL=PlexcordWeb" }
+        footer: { js: "//# sourceURL=file:///PlexcordWeb" }
     },
     {
         ...commonOptions,
@@ -92,7 +92,7 @@ const buildConfigs = [
             ...commonOptions.define,
             IS_EXTENSION: "true"
         },
-        footer: { js: "//# sourceURL=PlexcordWeb" }
+        footer: { js: "//# sourceURL=file:///PlexcordWeb" }
     },
     {
         ...commonOptions,

@@ -103,8 +103,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!IS_WEB) {
         PlexcordNative.quickCss.addThemeChangeListener(initThemes);
     }
-
-    initThemes();
 });
 
 export function initQuickCssThemeStore() {
