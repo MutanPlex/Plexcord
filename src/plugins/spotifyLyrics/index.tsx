@@ -40,7 +40,7 @@ export default definePlugin({
             <>
                 <ErrorBoundary
                     fallback={() => (
-                        <div className="vc-spotify-fallback">
+                        <div className="pc-spotify-fallback">
                             <p>Failed to render Spotify Lyrics Modal :(</p>
                             <p>Check the console for errors</p>
                         </div>

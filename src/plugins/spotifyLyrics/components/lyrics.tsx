@@ -33,7 +33,7 @@ function LyricsDisplay() {
 
     if (!lyricsInfo) {
         return ShowMusicNoteOnNoLyrics && (
-            <div className="vc-spotify-lyrics"
+            <div className="pc-spotify-lyrics"
                 onContextMenu={e => ContextMenuApi.openContextMenu(e, () => <LyricsContextMenu />)}
             >
                 <TooltipContainer text="No synced lyrics found">
@@ -45,7 +45,7 @@ function LyricsDisplay() {
 
     return (
         <div
-            className="vc-spotify-lyrics"
+            className="pc-spotify-lyrics"
             onClick={() => openModal(props => <LyricsModal rootProps={props} />)}
             onContextMenu={e => ContextMenuApi.openContextMenu(e, () => <LyricsContextMenu />)}
         >

@@ -27,7 +27,7 @@ const messagePatch: NavContextMenuPatchCallback = (children, { message }) => {
 
     const buttonElement =
         <Menu.MenuItem
-            id="vc-quote"
+            id="pc-quote"
             label="Quote"
             icon={QuoteIcon}
             action={async () => {

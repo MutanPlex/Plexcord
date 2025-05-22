@@ -68,7 +68,7 @@ export function NoteBookTabs({ tabs, selectedTabId, onSelectTab }: { tabs: strin
     const TabItem = React.forwardRef(function ({ id, selected, onClick, children }: { id: string, selected: boolean, onClick: () => void, children: React.ReactNode; }, ref) {
         return (
             <Clickable
-                className={classes("vc-notebook-tabbar-item", selected ? "vc-notebook-selected" : "")}
+                className={classes("pc-notebook-tabbar-item", selected ? "pc-notebook-selected" : "")}
                 data-tab-id={id}
                 // @ts-expect-error
                 innerRef={ref}
@@ -106,7 +106,7 @@ export function NoteBookTabs({ tabs, selectedTabId, onSelectTab }: { tabs: strin
 
     return (
         <div
-            className={classes("vc-notebook-tabbar")}
+            className={classes("pc-notebook-tabbar")}
             ref={tabBarRef}
         >
 
@@ -146,7 +146,7 @@ export function NoteBookTabs({ tabs, selectedTabId, onSelectTab }: { tabs: strin
                         <Button
                             ref={buttonRef}
                             {...props}
-                            className={"vc-notebook-overflow-chevron"}
+                            className={"pc-notebook-overflow-chevron"}
                             size={Button.Sizes.ICON}
                             look={Button.Looks.BLANK}
                             onClick={() => setShow(v => !v)}

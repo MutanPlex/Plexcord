@@ -15,7 +15,7 @@ import settings from "../settings";
 
 export const scrollClasses = findByPropsLazy("auto", "customTheme");
 
-export const cl = classNameFactory("vc-spotify-lyrics-");
+export const cl = classNameFactory("pc-spotify-lyrics-");
 
 export function NoteSvg(className: string) {
     return (
