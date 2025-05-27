@@ -18,13 +18,13 @@
 */
 
 import { findOption, OptionalMessageOption } from "@api/Commands";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "MoreKaomoji",
     description: "Adds more Kaomoji to discord. ヽ(´▽`)/",
-    authors: [Devs.JacobTm],
+    authors: [Devs.JacobTm, PcDevs.MutanPlex],
     commands: [
         { name: "dissatisfaction", description: " ＞﹏＜" },
         { name: "smug", description: "ಠ_ಠ" },
@@ -37,7 +37,18 @@ export default definePlugin({
         { name: "confused", description: "(•ิ_•ิ)?" },
         { name: "sleeping", description: "(ᴗ_ᴗ)" },
         { name: "laughing", description: "o(≧▽≦)o" },
-
+        { name: "giving", description: "(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧" },
+        { name: "peace", description: "✌(◕‿-)✌" },
+        { name: "ending1", description: "Ꮺ ָ࣪ ۰ ͙⊹" },
+        { name: "uwu", description: "(>⩊<)" },
+        { name: "comfy", description: "(─‿‿─)♡" },
+        { name: "lovehappy", description: "(*≧ω≦*)" },
+        { name: "loveee", description: "(⁄ ⁄>⁄ ▽ ⁄<⁄ ⁄)" },
+        { name: "give", description: "(ノ= ⩊ = )ノ" },
+        { name: "lovegive", description: "ღゝ◡╹)ノ♡" },
+        { name: "music", description: "(￣▽￣)/♫•¨•.¸¸♪" },
+        { name: "stars", description: ".𖥔 ݁ ˖๋ ࣭ ⭑" },
+        { name: "lovegiving", description: "⸜(｡˃ ᵕ ˂ )⸝♡" }
     ].map(data => ({
         ...data,
         options: [OptionalMessageOption],
