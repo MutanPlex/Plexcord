@@ -94,6 +94,8 @@ export const isMobile = navigator.userAgent.includes("Mobi");
 
 export const isPluginDev = (id: string) => Object.hasOwn(DevsById, id);
 export const isPcPluginDev = (id: string) => Object.hasOwn(PcDevsById, id);
+export const shouldShowContributorBadge = (id: string) => isPluginDev(id) && DevsById[id].badge !== false;
+export const shouldShowPcContributorBadge = (id: string) => isPcPluginDev(id) && DevsById[id].badge !== false;
 
 export function pluralise(amount: number, singular: string, plural = singular + "s") {
     return amount === 1 ? `${amount} ${singular}` : `${amount} ${plural}`;
