@@ -36,20 +36,17 @@ export default definePlugin({
     patches: [
         // Taken from AnonymiseFileNames
         {
-            find: 'type:"UPLOAD_START"',
-            replacement: {
-                match: /await \i\.uploadFiles\((\i),/,
-                replace: "$1.forEach($self.fixExt),$&"
-            },
-            predicate: () => !Settings.plugins.AnonymiseFileNames.enabled,
-        },
-        // Also taken from AnonymiseFileNames
-        {
-            find: 'addFilesTo:"message.attachments"',
-            replacement: {
-                match: /(\i.uploadFiles\((\i),)/,
-                replace: "$2.forEach(f=>f.filename=$self.fixExt(f)),$1",
-            },
+            find: "async uploadFiles(",
+            replacement: [
+                {
+                    match: /async uploadFiles\((\i),\i\){/,
+                    replace: "$&$1.forEach($self.fixExt);"
+                },
+                {
+                    match: /async uploadFilesSimple\((\i)\){/,
+                    replace: "$&$1.forEach($self.fixExt);"
+                }
+            ],
             predicate: () => !Settings.plugins.AnonymiseFileNames.enabled,
         }
     ],
