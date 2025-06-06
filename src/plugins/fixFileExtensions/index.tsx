@@ -5,7 +5,6 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { Upload } from "@api/MessageEvents";
 import { Settings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { ReporterTestable } from "@utils/types";
@@ -25,8 +24,6 @@ export const reverseExtensionMap = Object.entries(extensionMap).reduce((acc, [ta
     exts.forEach(ext => acc[ext] = `.${target}`);
     return acc;
 }, {} as Record<string, string>);
-
-type ExtUpload = Upload & { fixExtension?: boolean; };
 
 export default definePlugin({
     name: "FixFileExtensions",
@@ -50,7 +47,7 @@ export default definePlugin({
             predicate: () => !Settings.plugins.AnonymiseFileNames.enabled,
         }
     ],
-    fixExt(upload: ExtUpload) {
+    fixExt(upload) {
         const file = upload.filename;
         const tarMatch = tarExtMatcher.exec(file);
         const extIdx = tarMatch?.index ?? file.lastIndexOf(".");
