@@ -44,6 +44,7 @@ const commonOptions = {
     define: stringifyValues({
         IS_WEB: true,
         IS_EXTENSION: false,
+        IS_USERSCRIPT: false,
         IS_STANDALONE: true,
         IS_DEV,
         IS_REPORTER,
@@ -99,6 +100,7 @@ const buildConfigs = [
         inject: ["browser/GMPolyfill.js", ...(commonOptions?.inject || [])],
         define: {
             ...commonOptions.define,
+            IS_USERSCRIPT: "true",
             window: "unsafeWindow",
         },
         outfile: "dist/Plexcord.user.js",

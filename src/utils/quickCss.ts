@@ -40,7 +40,7 @@ async function initSystemValues() {
     createStyle("plexcord-os-theme-values").textContent = `:root{${variables}}`;
 }
 
-export async function toggle(isEnabled: boolean) {
+async function toggle(isEnabled: boolean) {
     if (!style) {
         if (isEnabled) {
             style = createStyle("plexcord-custom-css");
@@ -92,6 +92,8 @@ async function initThemes() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    if (IS_USERSCRIPT) return;
+
     initSystemValues();
 
     toggle(Settings.useQuickCss);
@@ -103,9 +105,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!IS_WEB) {
         PlexcordNative.quickCss.addThemeChangeListener(initThemes);
     }
-});
+}, { once: true });
 
 export function initQuickCssThemeStore() {
+    if (IS_USERSCRIPT) return;
+
     initThemes();
 
     let currentTheme = ThemeStore.theme;

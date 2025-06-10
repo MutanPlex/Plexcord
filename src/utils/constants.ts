@@ -48,7 +48,7 @@ export interface PcDev {
  */
 export const Devs = /* #__PURE__*/ Object.freeze({
     Ven: {
-        name: "Vee",
+        name: "V",
         id: 343383572805058560n
     },
     Arjix: {
@@ -202,7 +202,7 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     axyie: {
         name: "'ax",
-        id: 273562710745284628n,
+        id: 929877747151548487n,
     },
     pointy: {
         name: "pointy",
@@ -595,7 +595,7 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     samsam: {
         name: "samsam",
-        id: 836452332387565589n,
+        id: 400482410279469056n,
     },
     Cootshk: {
         name: "Cootshk",

@@ -87,5 +87,5 @@ export default definePlugin({
                 </TooltipContainer>
             )}
         </div>;
-    })
+    }, { noop: true })
 });

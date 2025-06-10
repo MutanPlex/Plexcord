@@ -12,7 +12,7 @@
 }
 
 .visual-refresh .pc-notification-root {
-    background-color: var(--bg-overlay-floating, var(--background-base-low));
+    background-color: var(--background-base-low);
 }
 
 .pc-notification-root:not(.pc-notification-log-wrapper > .pc-notification-root) {
