@@ -17,8 +17,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { app, protocol } from "electron";
+import { app, net, protocol } from "electron";
 import { join } from "path";
+import { pathToFileURL } from "url";
 
 import { initCsp } from "./csp";
 import { ensureSafePath } from "./ipcMain";
@@ -31,17 +32,17 @@ if (IS_VESKTOP || !IS_VANILLA) {
         // Source Maps! Maybe there's a better way but since the renderer is executed
         // from a string I don't think any other form of sourcemaps would work
         protocol.registerFileProtocol("plexcord", ({ url: unsafeUrl }, cb) => {
-            let url = unsafeUrl.slice("plexcord://".length);
+            let url = decodeURI(unsafeUrl).slice("plexcord://".length).replace(/\?v=\d+$/, "");
             if (url.endsWith("/")) url = url.slice(0, -1);
             if (url.startsWith("/themes/")) {
                 const theme = url.slice("/themes/".length);
                 const safeUrl = ensureSafePath(THEMES_DIR, theme);
                 if (!safeUrl) {
-                    cb({ statusCode: 403 });
-                    return;
+                    return new Response(null, {
+                        status: 404
+                    });
                 }
-                cb(safeUrl.replace(/\?v=\d+$/, ""));
-                return;
+                return net.fetch(pathToFileURL(safeUrl).toString());
             }
             switch (url) {
                 case "renderer.js.map":
@@ -50,10 +51,11 @@ if (IS_VESKTOP || !IS_VANILLA) {
                 case "plexcordDesktopPreload.js.map":
                 case "patcher.js.map":
                 case "plexcordDesktopMain.js.map":
-                    cb(join(__dirname, url));
-                    break;
+                    return net.fetch(pathToFileURL(join(__dirname, url)).toString());
                 default:
-                    cb({ statusCode: 403 });
+                    return new Response(null, {
+                        status: 404
+                    });
             }
         });
 
