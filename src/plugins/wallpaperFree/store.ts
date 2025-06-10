@@ -57,7 +57,7 @@ export const WallpaperFreeStore = proxyLazy(() => {
 
     const store = new WallpaperFreeStore(FluxDispatcher, {
         // @ts-ignore
-        VC_WALLPAPER_FREE_CHANGE({ guildId, channelId, url }: { guildId: string | undefined, channelId: string | undefined, url: string; }) {
+        PC_WALLPAPER_FREE_CHANGE({ guildId, channelId, url }: { guildId: string | undefined, channelId: string | undefined, url: string; }) {
             if (guildId) {
                 wallpaperGuildMap.set(guildId, url);
             } else if (channelId) {
@@ -66,12 +66,12 @@ export const WallpaperFreeStore = proxyLazy(() => {
             store.emitChange();
         },
 
-        VC_WALLPAPER_FREE_CHANGE_GLOBAL({ url }: { url: string | undefined; }) {
+        PC_WALLPAPER_FREE_CHANGE_GLOBAL({ url }: { url: string | undefined; }) {
             globalDefault = url;
             store.emitChange();
         },
 
-        VC_WALLPAPER_FREE_RESET() {
+        PC_WALLPAPER_FREE_RESET() {
             wallpaperChannelMap.clear();
             wallpaperGuildMap.clear();
             globalDefault = void 0;
