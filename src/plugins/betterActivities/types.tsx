@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-
+import { User } from "discord-types/general";
 import { CSSProperties, ImgHTMLAttributes, JSX } from "react";
 
 export interface Timestamp {
@@ -81,4 +81,37 @@ export interface ActivityListIcon {
 
 export interface IconCSSProperties extends CSSProperties {
     "--icon-size": string;
+}
+
+export interface ActivityListProps {
+    activities: Activity[];
+    user: User;
+    hideTooltip: boolean;
+}
+
+export interface ActivityTooltipProps {
+    activity: Activity;
+    application?: Application;
+    user: User;
+}
+
+export interface AllActivitiesProps {
+    activity: Activity;
+    user: User;
+    application: Application;
+    type: string;
+    [key: string]: any;
+}
+
+export interface CarouselControlsProps {
+    activities: Activity[];
+    currentActivity: Activity;
+    onActivityChange: (activity: Activity) => void;
+}
+
+export interface ActivityViewProps {
+    activity: Activity | null;
+    user: User;
+    application?: Application;
+    currentUser: User;
 }
