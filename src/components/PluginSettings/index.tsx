@@ -207,7 +207,7 @@ function ExcludedPluginsList({ search }: { search: string; }) {
 
 export default function PluginSettings() {
     const settings = useSettings();
-    const changes = React.useMemo(() => new ChangeList<string>(), []);
+    const changes = useMemo(() => new ChangeList<string>(), []);
 
     React.useEffect(() => {
         return () => void (changes.hasChanges && Alerts.show({
@@ -229,7 +229,7 @@ export default function PluginSettings() {
         }));
     }, []);
 
-    const depMap = React.useMemo(() => {
+    const depMap = useMemo(() => {
         const o = {} as Record<string, string[]>;
         for (const plugin in Plugins) {
             const deps = Plugins[plugin].dependencies;
