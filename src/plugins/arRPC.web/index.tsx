@@ -43,7 +43,7 @@ export default definePlugin({
     description: "Client plugin for arRPC to enable RPC on Discord Web (experimental)",
     authors: [Devs.Ducko],
     reporterTestable: ReporterTestable.None,
-    hidden: IS_VESKTOP || "legcord" in window,
+    hidden: IS_PLEXTRON || "legcord" in window,
 
     settingsAboutComponent: () => (
         <>

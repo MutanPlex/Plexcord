@@ -21,12 +21,12 @@ export function relaunch() {
     if (IS_DISCORD_DESKTOP)
         window.DiscordNative.app.relaunch();
     else
-        window.VesktopNative.app.relaunch();
+        window.PlextronNative.app.relaunch();
 }
 
 export function showItemInFolder(path: string) {
     if (IS_DISCORD_DESKTOP)
         window.DiscordNative.fileManager.showItemInFolder(path);
     else
-        window.VesktopNative.fileManager.showItemInFolder(path);
+        window.PlextronNative.fileManager.showItemInFolder(path);
 }

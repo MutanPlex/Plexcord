@@ -41,7 +41,7 @@ declare global {
     export var IS_DEV: boolean;
     export var IS_REPORTER: boolean;
     export var IS_DISCORD_DESKTOP: boolean;
-    export var IS_VESKTOP: boolean;
+    export var IS_PLEXTRON: boolean;
     export var VERSION: string;
     export var BUILD_TIMESTAMP: number;
 
@@ -63,8 +63,8 @@ declare global {
      * If you really must use it, mark your plugin as Desktop App only by naming it Foo.desktop.ts(x)
      */
     export var DiscordNative: any;
-    export var Vesktop: any;
-    export var VesktopNative: any;
+    export var Plextron: any;
+    export var PlextronNative: any;
 
     interface Window extends Record<PropertyKey, any> {
         _: LoDashStatic;

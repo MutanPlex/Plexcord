@@ -29,7 +29,7 @@ contextBridge.exposeInMainWorld("PlexcordNative", PlexcordNative);
 // Discord
 if (location.protocol !== "data:") {
     // #region cssInsert
-    const rendererCss = join(__dirname, IS_VESKTOP ? "plexcordDesktopRenderer.css" : "renderer.css");
+    const rendererCss = join(__dirname, IS_PLEXTRON ? "plexcordDesktopRenderer.css" : "renderer.css");
 
     const style = document.createElement("style");
     style.id = "plexcord-css-core";

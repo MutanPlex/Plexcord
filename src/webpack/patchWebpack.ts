@@ -551,8 +551,8 @@ function patchFactory(moduleId: PropertyKey, originalFactory: AnyModuleFactory):
                 continue;
             }
 
-            // TODO: remove once Vesktop has been updated to use addPatch
-            if (patch.plugin === "Vesktop") {
+            // TODO: remove once Plextron has been updated to use addPatch
+            if (patch.plugin === "Plextron") {
                 canonicalizeReplacement(replacement, "VCDP");
             }
 

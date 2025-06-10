@@ -49,7 +49,7 @@ const commonOptions = {
         IS_DEV,
         IS_REPORTER,
         IS_DISCORD_DESKTOP: false,
-        IS_VESKTOP: false,
+        IS_PLEXTRON: false,
         IS_UPDATER_DISABLED: true,
         VERSION,
         BUILD_TIMESTAMP
