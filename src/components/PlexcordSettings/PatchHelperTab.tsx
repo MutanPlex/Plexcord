@@ -25,7 +25,7 @@ import { canonicalizeMatch, canonicalizeReplace } from "@utils/patches";
 import { makeCodeblock } from "@utils/text";
 import { Patch, ReplaceFn } from "@utils/types";
 import { search } from "@webpack";
-import { Button, Forms, Parser, React, Switch, TextArea, TextInput } from "@webpack/common";
+import { Button, Forms, Parser, React, Switch, TextArea, TextInput, useMemo } from "@webpack/common";
 
 import { SettingsTab, wrapTab } from "./shared";
 
@@ -57,7 +57,7 @@ function ReplacementComponent({ module, match, replacement, setReplacementError 
     const [id, fact] = module;
     const [compileResult, setCompileResult] = React.useState<[boolean, string]>();
 
-    const [patchedCode, matchResult, diff] = React.useMemo(() => {
+    const [patchedCode, matchResult, diff] = useMemo(() => {
         const src: string = fact.toString().replaceAll("\n", "");
 
         try {
@@ -295,7 +295,7 @@ function PatchHelper() {
     const [findError, setFindError] = React.useState<string>();
     const [matchError, setMatchError] = React.useState<string>();
 
-    const code = React.useMemo(() => {
+    const code = useMemo(() => {
         return `
 {
     find: ${parsedFind instanceof RegExp ? parsedFind.toString() : JSON.stringify(parsedFind)},

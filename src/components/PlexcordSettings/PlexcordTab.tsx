@@ -29,7 +29,7 @@ import { Margins } from "@utils/margins";
 import { identity, isPcPluginDev, isPluginDev } from "@utils/misc";
 import { relaunch, showItemInFolder } from "@utils/native";
 import { useAwaiter } from "@utils/react";
-import { Button, Forms, GuildMemberStore, React, Select, Switch, UserStore } from "@webpack/common";
+import { Button, Forms, GuildMemberStore, React, Select, Switch, useMemo, UserStore } from "@webpack/common";
 
 import BadgeAPI from "../../plugins/_api/badges";
 import { Flex, FolderIcon, GithubIcon, LogIcon, PaintbrushIcon, RestartIcon } from "..";
@@ -59,7 +59,7 @@ function PlexcordSettings() {
     });
     const settings = useSettings();
 
-    const donateImage = React.useMemo(() => Math.random() > 0.5 ? DEFAULT_DONATE_IMAGE : SHIGGY_DONATE_IMAGE, []);
+    const donateImage = useMemo(() => Math.random() > 0.5 ? DEFAULT_DONATE_IMAGE : SHIGGY_DONATE_IMAGE, []);
 
     const isWindows = navigator.platform.toLowerCase().startsWith("win");
     const isMac = navigator.platform.toLowerCase().startsWith("mac");

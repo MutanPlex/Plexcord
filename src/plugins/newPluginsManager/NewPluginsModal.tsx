@@ -25,7 +25,7 @@ let hasSeen = false;
 
 export function NewPluginsModal({ modalProps, newPlugins }: { modalProps: ModalProps; newPlugins: Set<string>; }) {
     const settings = useSettings();
-    const changes = React.useMemo(() => new ChangeList<string>(), []);
+    const changes = useMemo(() => new ChangeList<string>(), []);
 
     React.useEffect(() => {
         return () => void (changes.hasChanges && Alerts.show({
@@ -47,7 +47,7 @@ export function NewPluginsModal({ modalProps, newPlugins }: { modalProps: ModalP
         }));
     }, []);
 
-    const depMap = React.useMemo(() => {
+    const depMap = useMemo(() => {
         const o = {} as Record<string, string[]>;
         for (const plugin in Plugins) {
             const deps = Plugins[plugin].dependencies;
