@@ -21,7 +21,6 @@ import "./style.css";
 
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
-import { getIntlMessage } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy, findLazy, findStoreLazy } from "@webpack";
 import { FluxDispatcher } from "@webpack/common";
@@ -107,6 +106,11 @@ export const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         description: "Close other folders when opening a folder",
         default: false
+    },
+    closeServerFolder: {
+        type: OptionType.BOOLEAN,
+        description: "Close folder when selecting a server in that folder",
+        default: false,
     },
     forceOpen: {
         type: OptionType.BOOLEAN,
@@ -277,7 +281,7 @@ export default definePlugin({
 
     flux: {
         CHANNEL_SELECT(data) {
-            if (!settings.store.closeAllFolders && !settings.store.forceOpen)
+            if (!settings.store.closeAllFolders && !settings.store.forceOpen && !settings.store.closeServerFolder)
                 return;
 
             if (lastGuildId !== data.guildId) {
@@ -286,6 +290,9 @@ export default definePlugin({
 
                 if (guildFolder?.folderId) {
                     if (settings.store.forceOpen && !ExpandedGuildFolderStore.isFolderExpanded(guildFolder.folderId)) {
+                        FolderUtils.toggleGuildFolderExpand(guildFolder.folderId);
+                    }
+                    if (settings.store.closeServerFolder && ExpandedGuildFolderStore.isFolderExpanded(guildFolder.folderId)) {
                         FolderUtils.toggleGuildFolderExpand(guildFolder.folderId);
                     }
                 } else if (settings.store.closeAllFolders) {
@@ -343,7 +350,7 @@ export default definePlugin({
             }
 
             try {
-                return child?.props?.["aria-label"] === getIntlMessage("SERVERS");
+                return child?.props?.renderTreeNode !== null;
             } catch (e) {
                 console.error(e);
                 return true;
