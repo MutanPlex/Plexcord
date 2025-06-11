@@ -50,7 +50,9 @@ export const CspPolicies: PolicyMap = {
     "api.github.com": ConnectSrc, // used for updating Plexcord itself
     "ws.audioscrobbler.com": ConnectSrc, // Last.fm API
     "translate-pa.googleapis.com": ConnectSrc, // Google Translate API
-    "*.plexcord.club": MediaSrc, // VenCloud (api.plexcord.club) and Badges (badges.plexcord.club)
+    "*.vencord.dev": MediaSrc, // VenCloud (api.vencord.dev) and Badges (badges.vencord.dev)
+    "*.plexcord.club": MediaSrc, // PlexCloud (api.plexcord.club) and Badges (badges.plexcord.club)
+    "*.vercel.app": MediaSrc, // Vercel CDN, used by some themes
     "manti.vendicated.dev": MediaSrc, // ReviewDB API
     "decor.fieryflames.dev": ConnectSrc, // Decor API
     "ugc.decor.fieryflames.dev": MediaSrc, // Decor CDN
