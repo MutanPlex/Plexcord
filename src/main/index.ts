@@ -29,13 +29,14 @@ import { installExt } from "./utils/extensions";
 
 if (IS_PLEXTRON || !IS_VANILLA) {
     app.whenReady().then(() => {
-        // Source Maps! Maybe there's a better way but since the renderer is executed
-        // from a string I don't think any other form of sourcemaps would work
-        protocol.registerFileProtocol("plexcord", ({ url: unsafeUrl }, cb) => {
+        protocol.handle("vencord", ({ url: unsafeUrl }) => {
             let url = decodeURI(unsafeUrl).slice("plexcord://".length).replace(/\?v=\d+$/, "");
+
             if (url.endsWith("/")) url = url.slice(0, -1);
+
             if (url.startsWith("/themes/")) {
                 const theme = url.slice("/themes/".length);
+
                 const safeUrl = ensureSafePath(THEMES_DIR, theme);
                 if (!safeUrl) {
                     return new Response(null, {
@@ -44,6 +45,10 @@ if (IS_PLEXTRON || !IS_VANILLA) {
                 }
                 return net.fetch(pathToFileURL(safeUrl).toString());
             }
+
+            // Source Maps! Maybe there's a better way but since the renderer is executed
+            // from a string I don't think any other form of sourcemaps would work
+
             switch (url) {
                 case "renderer.js.map":
                 case "plexcordDesktopRenderer.js.map":

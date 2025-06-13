@@ -20,15 +20,40 @@
 import * as DataStore from "@api/DataStore";
 import { showNotification } from "@api/Notifications";
 import { Settings } from "@api/Settings";
-import { OAuth2AuthorizeModal, UserStore } from "@webpack/common";
+import { Alerts, OAuth2AuthorizeModal, UserStore } from "@webpack/common";
 
 import { Logger } from "./Logger";
 import { openModal } from "./modal";
+import { relaunch } from "./native";
 
 export const cloudLogger = new Logger("Cloud", "#39b7e0");
-export const getCloudUrl = () => new URL(Settings.cloud.url);
 
-const cloudUrlOrigin = () => getCloudUrl().origin;
+export const getCloudUrl = () => new URL(Settings.cloud.url);
+const getCloudUrlOrigin = () => getCloudUrl().origin;
+
+export async function checkCloudUrlCsp() {
+    if (IS_WEB) return true;
+
+    const { host } = getCloudUrl();
+    if (host === "api.plexcord.club") return true;
+
+    if (await PlexcordNative.csp.isDomainAllowed(Settings.cloud.url, ["connect-src"])) {
+        return true;
+    }
+
+    const res = await PlexcordNative.csp.requestAddOverride(Settings.cloud.url, ["connect-src"], "Cloud Sync");
+    if (res === "ok") {
+        Alerts.show({
+            title: "Cloud Integration enabled",
+            body: `${host} has been added to the whitelist. Please restart the app for the changes to take effect.`,
+            confirmText: "Restart now",
+            cancelText: "Later!",
+            onConfirm: relaunch
+        });
+    }
+    return false;
+}
+
 const getUserId = () => {
     const id = UserStore.getCurrentUser()?.id;
     if (!id) throw new Error("User not yet logged in");
@@ -38,7 +63,7 @@ const getUserId = () => {
 export async function getAuthorization() {
     const secrets = await DataStore.get<Record<string, string>>("Plexcord_cloudSecret") ?? {};
 
-    const origin = cloudUrlOrigin();
+    const origin = getCloudUrlOrigin();
 
     // we need to migrate from the old format here
     if (secrets[origin]) {
@@ -60,7 +85,7 @@ export async function getAuthorization() {
 async function setAuthorization(secret: string) {
     await DataStore.update<Record<string, string>>("Plexcord_cloudSecret", secrets => {
         secrets ??= {};
-        secrets[`${cloudUrlOrigin()}:${getUserId()}`] = secret;
+        secrets[`${getCloudUrlOrigin()}:${getUserId()}`] = secret;
         return secrets;
     });
 }
@@ -68,7 +93,7 @@ async function setAuthorization(secret: string) {
 export async function deauthorizeCloud() {
     await DataStore.update<Record<string, string>>("Plexcord_cloudSecret", secrets => {
         secrets ??= {};
-        delete secrets[`${cloudUrlOrigin()}:${getUserId()}`];
+        delete secrets[`${getCloudUrlOrigin()}:${getUserId()}`];
         return secrets;
     });
 }
@@ -78,6 +103,8 @@ export async function authorizeCloud() {
         Settings.cloud.authenticated = true;
         return;
     }
+
+    if (!await checkCloudUrlCsp()) return;
 
     try {
         const oauthConfiguration = await fetch(new URL("/v1/oauth/settings", getCloudUrl()));

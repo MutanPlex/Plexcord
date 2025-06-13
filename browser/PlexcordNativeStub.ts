@@ -116,4 +116,5 @@ window.PlexcordNative = {
     },
 
     pluginHelpers: {} as any,
+    csp: {} as any,
 };

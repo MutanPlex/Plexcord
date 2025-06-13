@@ -43,4 +43,8 @@ export const enum IpcEvents {
 
     OPEN_IN_APP__RESOLVE_REDIRECT = "PlexcordOIAResolveRedirect",
     VOICE_MESSAGES_READ_RECORDING = "PlexcordVMReadRecording",
+
+    CSP_IS_DOMAIN_ALLOWED = "PlexcordCspIsDomainAllowed",
+    CSP_REMOVE_OVERRIDE = "PlexcordCspRemoveOverride",
+    CSP_REQUEST_ADD_OVERRIDE = "PlexcordCspRequestAddOverride",
 }
