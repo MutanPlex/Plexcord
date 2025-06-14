@@ -801,6 +801,10 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "byeoon",
         id: 1167275288036655133n
     },
+    Suffocate: {
+        name: "Suffocate",
+        id: 772601756776923187n
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>
