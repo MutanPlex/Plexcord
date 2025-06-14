@@ -24,7 +24,7 @@ import { findStoreLazy } from "@webpack";
 import { Constants, FluxDispatcher, GuildStore, RelationshipStore, RestAPI, SnowflakeUtils, UserStore } from "@webpack/common";
 import { Settings } from "Plexcord";
 
-const UserAffinitiesStore = findStoreLazy("UserAffinitiesStore");
+const UserAffinitiesStore = findStoreLazy("UserAffinitiesV2Store");
 
 export default definePlugin({
     name: "ImplicitRelationships",
