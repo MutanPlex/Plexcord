@@ -667,7 +667,7 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     },
     Cortex: {
         name: "Cortex",
-        id: 400111022901559298n
+        id: 913205935319691335n
     },
     Woosh: {
         name: "w00shh.",
@@ -741,8 +741,8 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "femeie",
         id: 442626774841556992n
     },
-    kvba: {
-        name: "kvba",
+    meowabyte: {
+        name: "meowabyte",
         id: 105170831130234880n
     },
     Tolgchu: {
