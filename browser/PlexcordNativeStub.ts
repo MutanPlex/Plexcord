@@ -43,6 +43,7 @@ window.PlexcordNative = {
     themes: {
         uploadTheme: (fileName: string, fileData: string) => DataStore.set(fileName, fileData, themeStore),
         deleteTheme: (fileName: string) => DataStore.del(fileName, themeStore),
+        getThemesDir: async () => "",
         getThemesList: () => DataStore.entries(themeStore).then(entries =>
             entries.map(([name, css]) => getThemeInfo(css, name.toString()))
         ),
@@ -113,6 +114,7 @@ window.PlexcordNative = {
             }
         },
         set: async (s: Settings) => localStorage.setItem("PlexcordSettings", JSON.stringify(s)),
+        getSettingsDir: async () => "LocalStorage",
         openFolder: async () => Promise.reject("settings:openFolder is not supported on web"),
     },
 
