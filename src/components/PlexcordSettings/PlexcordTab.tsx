@@ -27,8 +27,7 @@ import { gitRemote } from "@shared/plexcordUserAgent";
 import { DONOR_ROLE_ID, PLEXCORD_GUILD_ID } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import { identity, isPcPluginDev, isPluginDev } from "@utils/misc";
-import { relaunch, showItemInFolder } from "@utils/native";
-import { useAwaiter } from "@utils/react";
+import { relaunch } from "@utils/native";
 import { Button, Forms, GuildMemberStore, React, Select, Switch, useMemo, UserStore } from "@webpack/common";
 
 import BadgeAPI from "../../plugins/_api/badges";
@@ -54,9 +53,6 @@ type KeysOfType<Object, Type> = {
 }[keyof Object];
 
 function PlexcordSettings() {
-    const [settingsDir, , settingsDirPending] = useAwaiter(PlexcordNative.settings.getSettingsDir, {
-        fallbackValue: "Loading..."
-    });
     const settings = useSettings();
 
     const donateImage = useMemo(() => Math.random() > 0.5 ? DEFAULT_DONATE_IMAGE : SHIGGY_DONATE_IMAGE, []);
@@ -184,7 +180,7 @@ function PlexcordSettings() {
                         <QuickAction
                             Icon={FolderIcon}
                             text="Open Settings Folder"
-                            action={() => showItemInFolder(settingsDir)}
+                            action={() => PlexcordNative.settings.openFolder()}
                         />
                     )}
                     <QuickAction

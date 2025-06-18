@@ -29,7 +29,7 @@ import { CspBlockedUrls, useCspErrors } from "@utils/cspViolations";
 import { openInviteModal } from "@utils/discord";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
-import { relaunch, showItemInFolder } from "@utils/native";
+import { relaunch } from "@utils/native";
 import { useAwaiter, useForceUpdater } from "@utils/react";
 import { getStylusWebStoreUrl } from "@utils/web";
 import { findLazy } from "@webpack";
@@ -164,7 +164,6 @@ function ThemesTab() {
     const [currentTab, setCurrentTab] = useState(ThemeTab.LOCAL);
     const [themeText, setThemeText] = useState(settings.themeLinks.join("\n"));
     const [userThemes, setUserThemes] = useState<UserThemeHeader[] | null>(null);
-    const [themeDir, , themeDirPending] = useAwaiter(PlexcordNative.themes.getThemesDir);
 
     useEffect(() => {
         refreshLocalThemes();
@@ -252,8 +251,7 @@ function ThemesTab() {
                                 ) : (
                                     <QuickAction
                                         text="Open Themes Folder"
-                                        action={() => showItemInFolder(themeDir!)}
-                                        disabled={themeDirPending}
+                                        action={() => PlexcordNative.themes.openFolder()}
                                         Icon={FolderIcon}
                                     />
                                 )}
@@ -376,13 +374,13 @@ export function CspErrorCard() {
     const isImgurHtmlDomain = (url: string) => url.startsWith("https://imgur.com/");
 
     const allowUrl = async (url: string) => {
-        const { origin: baseUrl, hostname } = new URL(url);
+        const { origin: baseUrl, host } = new URL(url);
 
         const result = await PlexcordNative.csp.requestAddOverride(baseUrl, ["connect-src", "img-src", "style-src", "font-src"], "Plexcord Themes");
         if (result !== "ok") return;
 
         CspBlockedUrls.forEach(url => {
-            if (new URL(url).hostname === hostname) {
+            if (new URL(url).host === host) {
                 CspBlockedUrls.delete(url);
             }
         });
