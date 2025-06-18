@@ -5,16 +5,20 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { addMessagePreSendListener, MessageExtra, MessageObject, removeMessagePreSendListener } from "@api/MessageEvents";
+import { addMessagePreSendListener, MessageSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
-const handleMessage = (channelID: string, message: MessageObject, messageEx: MessageExtra) => messageEx.uploads && messageEx.uploads.forEach(att => (att as any).isRemix = true);
+const handleMessage: MessageSendListener = (_, __, ex) => ex.uploads && ex.uploads.forEach(att => att.isRemix = true);
 
 export default definePlugin({
     name: "RemixMe",
     description: "Turns every single message with attachment to have remix tag",
-    authors: [PcDevs.kvba, PcDevs.MutanPlex],
-    start: () => addMessagePreSendListener(handleMessage),
-    stop: () => removeMessagePreSendListener(handleMessage)
+    authors: [PcDevs.meowabyte, PcDevs.MutanPlex],
+    start() {
+        addMessagePreSendListener(handleMessage);
+    },
+    stop() {
+        removeMessagePreSendListener(handleMessage);
+    }
 });
