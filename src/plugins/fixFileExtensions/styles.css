@@ -1,0 +1,16 @@
+.pc-smyn-suffix {
+    color: var(--text-muted);
+}
+
+.pc-smyn-suffix::before {
+    content: "(";
+}
+
+.pc-smyn-suffix::after {
+    content: ")";
+}
+
+.pc-smyn-hide-gradient {
+    -webkit-text-fill-color: initial;
+    isolation: isolate;
+}

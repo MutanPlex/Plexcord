@@ -5,11 +5,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { Upload } from "@api/MessageEvents";
 import { Settings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { ReporterTestable } from "@utils/types";
-
-const tarExtMatcher = /\.tar\.\w+$/;
+import { tarExtMatcher } from "plugins/anonymiseFileNames";
 
 const extensionMap = {
     "ogg": [".ogv", ".oga", ".ogx", ".ogm", ".spx", ".opus"],
@@ -36,18 +36,14 @@ export default definePlugin({
             find: "async uploadFiles(",
             replacement: [
                 {
-                    match: /async uploadFiles\((\i),\i\){/,
-                    replace: "$&$1.forEach($self.fixExt);"
-                },
-                {
-                    match: /async uploadFilesSimple\((\i)\){/,
+                    match: /async uploadFiles\((\i)\){/,
                     replace: "$&$1.forEach($self.fixExt);"
                 }
             ],
             predicate: () => !Settings.plugins.AnonymiseFileNames.enabled,
-        }
+        },
     ],
-    fixExt(upload) {
+    fixExt(upload: Upload) {
         const file = upload.filename;
         const tarMatch = tarExtMatcher.exec(file);
         const extIdx = tarMatch?.index ?? file.lastIndexOf(".");
