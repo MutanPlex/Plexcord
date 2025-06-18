@@ -34,7 +34,7 @@ const enum Methods {
 }
 
 const ANONYMISE_UPLOAD_SYMBOL = Symbol("vcAnonymise");
-const tarExtMatcher = /\.tar\.\w+$/;
+export const tarExtMatcher = /\.tar\.\w+$/;
 
 const settings = definePluginSettings({
     anonymiseByDefault: {
