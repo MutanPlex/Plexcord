@@ -29,7 +29,7 @@ import { installExt } from "./utils/extensions";
 
 if (IS_PLEXTRON || !IS_VANILLA) {
     app.whenReady().then(() => {
-        protocol.handle("vencord", ({ url: unsafeUrl }) => {
+        protocol.handle("plexcord", ({ url: unsafeUrl }) => {
             let url = decodeURI(unsafeUrl).slice("plexcord://".length).replace(/\?v=\d+$/, "");
 
             if (url.endsWith("/")) url = url.slice(0, -1);
