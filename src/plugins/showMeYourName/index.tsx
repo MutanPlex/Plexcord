@@ -11,6 +11,7 @@ import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
+import { GuildMemberStore, RelationshipStore } from "@webpack/common";
 import { Message, User } from "discord-types/general";
 
 interface UsernameProps {
@@ -19,6 +20,7 @@ interface UsernameProps {
     withMentionPrefix?: boolean;
     isRepliedMessage: boolean;
     userOverride?: User;
+    guildId: string;
 }
 
 const settings = definePluginSettings({
@@ -28,6 +30,7 @@ const settings = definePluginSettings({
         options: [
             { label: "Username then nickname", value: "user-nick", default: true },
             { label: "Nickname then username", value: "nick-user" },
+            { label: "Nickname only", value: "nick" },
             { label: "Username only", value: "user" },
         ],
     },
@@ -41,42 +44,108 @@ const settings = definePluginSettings({
         default: false,
         description: "Also apply functionality to reply previews",
     },
+    preferFriend: {
+        type: OptionType.BOOLEAN,
+        default: false,
+        description: "Use friend names in place of usernames (overrides Display Names option if applicable)"
+    },
+    memberList: {
+        type: OptionType.BOOLEAN,
+        default: false,
+        description: "Show usernames in member list",
+        restartNeeded: true
+    },
+    voiceChannelList: {
+        type: OptionType.BOOLEAN,
+        default: false,
+        description: "Show usernames in voice channel list",
+        restartNeeded: true
+    },
+    emojiReactions: {
+        type: OptionType.BOOLEAN,
+        default: false,
+        description: "Show usernames in emoji reactions",
+        restartNeeded: true
+    },
+    showGradient: {
+        type: OptionType.BOOLEAN,
+        default: false,
+        description: "Whether to show gradient for suffix",
+    },
 });
+
+function getUsername(user: any, guildId: string): string {
+    const friendName = RelationshipStore.getNickname(user.id);
+    const guildNick = GuildMemberStore.getNick(guildId, user.id);
+
+    if (settings.store.preferFriend && friendName) return friendName;
+    if (settings.store.mode === "nick" && guildNick) return guildNick;
+    if (settings.store.displayNames) return user.globalName || user.username;
+    return user.username;
+}
 
 export default definePlugin({
     name: "ShowMeYourName",
     description: "Display usernames next to nicks, or no nicks at all",
-    authors: [Devs.Rini, Devs.TheKodeToad],
+    authors: [Devs.Rini, Devs.TheKodeToad, Devs.nyx],
     patches: [
         {
             find: '"BaseUsername"',
             replacement: {
                 /* TODO: remove \i+\i once change makes it to stable */
-                match: /(?<=onContextMenu:\i,children:)(?:\i\+\i|\i)/,
-                replace: "$self.renderUsername(arguments[0])"
+                match: /(?<=onContextMenu:\i,children:)(?:\i\+\i|\i)(?=.*?contextGuildId:(\i))/,
+                replace: "$self.renderUsername({ ...arguments[0], guildId: $1 })",
             }
+        },
+        {
+            find: "._areActivitiesExperimentallyHidden=(",
+            predicate: () => settings.store.memberList,
+            replacement: {
+                match: /(?<=user:(\i),currentUser:\i,nick:)\i(?=.*?guildId:(\i))/,
+                replace: "$self.getUsername($1,$2)"
+            },
+        },
+        {
+            find: ".usernameSpeaking]",
+            predicate: () => settings.store.voiceChannelList,
+            replacement: [
+                {
+                    match: /(?<=children:\[)null!=\i\?\i:\i\.\i\.getName\((\i)\)(?=.*?contextGuildId:(\i))/,
+                    replace: "$self.getUsername($1,$2)"
+                },
+            ]
+        },
+        {
+            find: "#{intl::REACTION_TOOLTIP_1}",
+            predicate: () => settings.store.emojiReactions,
+            replacement: [
+                {
+                    match: /\i\.\i\.getName\((\i),null==.{0,15},(\i)\)/g,
+                    replace: "$self.getUsername($2,$1)"
+                },
+            ]
         },
     ],
     settings,
-
-    renderUsername: ErrorBoundary.wrap(({ author, message, isRepliedMessage, withMentionPrefix, userOverride }: UsernameProps) => {
+    getUsername,
+    renderUsername: ErrorBoundary.wrap(({ author, message, isRepliedMessage, withMentionPrefix, userOverride, guildId }: UsernameProps) => {
         try {
             const user = userOverride ?? message.author;
-            let { username } = user;
-            if (settings.store.displayNames)
-                username = (user as any).globalName || username;
+            const username = getUsername(user, guildId);
 
             const { nick } = author;
             const prefix = withMentionPrefix ? "@" : "";
+
+            const classes = settings.store.showGradient ? "pc-smyn-suffix" : "pc-smyn-suffix pc-smyn-hide-gradient";
 
             if (isRepliedMessage && !settings.store.inReplies || username.toLowerCase() === nick.toLowerCase())
                 return <>{prefix}{nick}</>;
 
             if (settings.store.mode === "user-nick")
-                return <>{prefix}{username} <span className="pc-smyn-suffix">{nick}</span></>;
+                return <>{prefix}{username} <span className={classes}>{nick}</span></>;
 
             if (settings.store.mode === "nick-user")
-                return <>{prefix}{nick} <span className="pc-smyn-suffix">{username}</span></>;
+                return <>{prefix}{nick} <span className={classes}>{username}</span></>;
 
             return <>{prefix}{username}</>;
         } catch {
