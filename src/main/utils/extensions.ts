@@ -81,4 +81,6 @@ export async function installExt(id: string) {
     }
 
     session.defaultSession.loadExtension(extDir);
+    // @ts-expect-error Electron 36 Deprecates session.defaultSession.loadExtension()
+    session.defaultSession.extensions ? session.defaultSession.extensions.loadExtension(extDir) : session.defaultSession.loadExtension(extDir);
 }
