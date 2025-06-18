@@ -19,7 +19,7 @@ import { User } from "discord-types/general";
 
 import { SetColorModal } from "./SetColorModal";
 
-export const DATASTORE_KEY = "plexcord-customcolors";
+export const DATASTORE_KEY = "equicord-customcolors";
 export let colors: Record<string, string> = {};
 
 
@@ -62,10 +62,10 @@ const userContextMenuPatch: NavContextMenuPatchCallback = (children, { user }: {
 
 };
 
-export function getCustomColorString(userId: string, withHash?: boolean): string | undefined {
+export function getCustomColorString(userId: string | undefined, withHash?: boolean): string | undefined {
+    if (!userId) return;
     if (!colors[userId] || !Settings.plugins.CustomUserColors.enabled) return;
     if (withHash) return `#${colors[userId]}`;
-
     return colors[userId];
 }
 
@@ -96,9 +96,9 @@ export default definePlugin({
             // this also affects name headers in chats outside of servers
             find: '="SYSTEM_TAG"',
             replacement: {
-                match: /&&null!=\i\.secondaryColor,(?<=colorString:(\i).+?(\i)=.+?)/,
-                replace: (m, colorString, hasGradientColors) => `${m}` +
-                    `vcCustomUserColorsDummy=[${colorString},${hasGradientColors}]=$self.getMessageColorsVariables(arguments[0],${hasGradientColors}),`
+                // Override colorString with our custom color and disable gradients if applying the custom color.
+                match: /(?<=colorString:\i,colorStrings:\i,colorRoleName:\i}=)(\i),/,
+                replace: "$self.wrapMessageColorProps($1, arguments[0]),"
             },
             predicate: () => !Settings.plugins.IrcColors.enabled
         },
@@ -133,11 +133,26 @@ export default definePlugin({
         },
     ],
 
-    getMessageColorsVariables(context: any, hasGradientColors: boolean) {
-        const colorString = this.colorIfServer(context);
-        const originalColorString = context?.author?.colorString;
+    wrapMessageColorProps(colorProps: { colorString: string, colorStrings?: Record<"primaryColor" | "secondaryColor" | "tertiaryColor", string>; }, context: any) {
+        try {
+            const colorString = this.colorIfServer(context);
+            if (colorString === colorProps.colorString) {
+                return colorProps;
+            }
 
-        return [colorString, hasGradientColors && colorString === originalColorString];
+            return {
+                ...colorProps,
+                colorString,
+                colorStrings: colorProps.colorStrings && {
+                    primaryColor: colorString,
+                    secondaryColor: undefined,
+                    tertiaryColor: undefined
+                }
+            };
+        } catch (e) {
+            console.error("Failed to calculate message color strings:", e);
+            return colorProps;
+        }
     },
 
     colorDMList(context: any): string | undefined {
@@ -149,6 +164,8 @@ export default definePlugin({
     colorIfServer(context: any): string | undefined {
         const userId = context?.message?.author?.id;
         const colorString = context?.author?.colorString;
+
+        if (context?.message?.channel_id === "1337" && userId === "313337") return colorString;
 
         if (context?.channel?.guild_id && !settings.store.colorInServers) return colorString;
 
