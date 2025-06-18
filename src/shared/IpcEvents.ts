@@ -47,4 +47,6 @@ export const enum IpcEvents {
     CSP_IS_DOMAIN_ALLOWED = "PlexcordCspIsDomainAllowed",
     CSP_REMOVE_OVERRIDE = "PlexcordCspRemoveOverride",
     CSP_REQUEST_ADD_OVERRIDE = "PlexcordCspRequestAddOverride",
+    OPEN_THEMES_FOLDER = "PlexcordOpenThemesFolder",
+    OPEN_SETTINGS_FOLDER = "PlexcordOpenSettingsFolder",
 }
