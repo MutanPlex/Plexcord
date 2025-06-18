@@ -8,7 +8,7 @@
 import { showNotification } from "@api/Notifications";
 import { Settings } from "@api/Settings";
 import { copyToClipboard } from "@utils/clipboard";
-import { relaunch, showItemInFolder } from "@utils/native";
+import { relaunch } from "@utils/native";
 import { checkForUpdates, getRepo } from "@utils/updater";
 import { GuildStore, NavigationRouter, SettingsRouter, Toasts } from "@webpack/common";
 
@@ -35,7 +35,7 @@ export const actions: ButtonAction[] = [
     { id: "openBackupSettings", label: "Open Backup & Restore tab", callback: () => SettingsRouter.open("PlexcordSettingsSync"), registrar: "Plexcord" },
     { id: "restartClient", label: "Restart Client", callback: () => relaunch(), registrar: "Plexcord" },
     { id: "openQuickCSSFile", label: "Open Quick CSS File", callback: () => PlexcordNative.quickCss.openEditor(), registrar: "Plexcord" },
-    { id: "openSettingsFolder", label: "Open Settings Folder", callback: async () => showItemInFolder(await PlexcordNative.settings.getSettingsDir()), registrar: "Plexcord" },
+    { id: "openSettingsFolder", label: "Open Settings Folder", callback: async () => await PlexcordNative.settings.openFolder(), registrar: "Plexcord" },
     { id: "openInGithub", label: "Open in Github", callback: async () => PlexcordNative.native.openExternal(await getRepo()), registrar: "Plexcord" },
 
     {
