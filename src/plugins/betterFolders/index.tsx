@@ -22,7 +22,7 @@ import "./style.css";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import { findByPropsLazy, findLazy, findStoreLazy } from "@webpack";
+import { findByPropsLazy, findStoreLazy } from "@webpack";
 import { FluxDispatcher } from "@webpack/common";
 import { ReactNode } from "react";
 
@@ -36,7 +36,6 @@ enum FolderIconDisplay {
 
 export const ExpandedGuildFolderStore = findStoreLazy("ExpandedGuildFolderStore");
 const SortedGuildStore = findStoreLazy("SortedGuildStore");
-const GuildsTree = findLazy(m => m.prototype?.moveNextTo);
 const FolderUtils = findByPropsLazy("move", "toggleGuildFolderExpand");
 
 let lastGuildId = null as string | null;
@@ -184,7 +183,7 @@ export default definePlugin({
                 },
                 // If we are rendering the Better Folders sidebar, we filter out everything but the Guild List from the Sidebar children
                 {
-                    match: /unreadMentionsFixedFooter\].+?\}\)\]/,
+                    match: /unreadMentionsFixedFooter\].+?unreadMentionsBar\}\)\]/,
                     replace: "$&.filter($self.makeGuildsBarSidebarFilter(!!arguments[0]?.isBetterFolders))"
                 }
             ]
