@@ -22,11 +22,11 @@
 }
 
 .pc-shc-heading-nsfw-icon {
-    color: var(--text-normal);
+    color: var(--text-default);
 }
 
 .pc-shc-topic-container {
-    color: var(--text-normal);
+    color: var(--text-default);
     background: var(--bg-overlay-3, var(--background-secondary));
     border-radius: 5px;
     padding: 10px;
@@ -83,7 +83,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    color: var(--text-normal);
+    color: var(--text-default);
 }
 
 .pc-shc-allowed-users-and-roles-container-permdetails-btn {
@@ -91,7 +91,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    color: var(--text-normal);
+    color: var(--text-default);
 }
 
 .pc-shc-allowed-users-and-roles-container>[class^="members"] {

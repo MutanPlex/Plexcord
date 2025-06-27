@@ -68,7 +68,7 @@
 }
 
 .pc-gp-server-info-pair {
-    color: var(--text-normal);
+    color: var(--text-default);
 }
 
 .pc-gp-server-info-pair [class^="timestamp"] {

@@ -21,15 +21,15 @@
 }
 
 .pc-backup-restore-card {
-    background-color: var(--info-warning-background);
+    background-color: var(--background-feedback-warning);
     border-color: var(--info-warning-foreground);
-    color: var(--info-warning-text);
+    color: var(--text-feedback-warning);
 }
 
 .pc-settings-theme-links {
     /* Needed to fix bad themes that hide certain textarea elements for whatever eldritch reason */
     display: inline-block !important;
-    color: var(--text-normal) !important;
+    color: var(--text-default) !important;
     padding: 0.5em;
     border: 1px solid var(--background-modifier-accent);
     max-height: unset;

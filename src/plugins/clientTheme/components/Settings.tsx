@@ -14,7 +14,6 @@ import { Button, ColorPicker, Forms, ThemeStore, useStateFromStores } from "@web
 import { settings } from "..";
 import { relativeLuminance } from "../utils/colorUtils";
 import { createOrUpdateThemeColorVars } from "../utils/styleUtils";
-
 const saveClientTheme = findByCodeLazy('type:"UNSYNCED_USER_SETTINGS_UPDATE', '"system"===');
 const NitroThemeStore = findStoreLazy("ClientThemesBackgroundStore");
 

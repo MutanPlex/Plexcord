@@ -19,7 +19,7 @@
 }
 
 #pc-searchbutton-icon {
-    color: var(--text-normal);
+    color: var(--text-default);
 }
 
 #pc-searchbutton:hover {

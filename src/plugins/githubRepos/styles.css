@@ -89,7 +89,7 @@
 .pc-github-repos-table {
     width: 100%;
     border-collapse: collapse;
-    color: var(--text-normal);
+    color: var(--text-default);
     font-size: 14px;
     table-layout: fixed;
 }
@@ -149,7 +149,7 @@
 }
 
 .pc-github-repos-table-description {
-    color: var(--text-normal);
+    color: var(--text-default);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

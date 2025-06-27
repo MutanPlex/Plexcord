@@ -69,9 +69,9 @@
 
 .pc-plugins-restart-card {
     padding: 1em;
-    background: var(--info-warning-background);
+    background: var(--background-feedback-warning);
     border: 1px solid var(--info-warning-foreground);
-    color: var(--info-warning-text);
+    color: var(--text-feedback-warning);
 }
 
 .pc-plugins-restart-button {
