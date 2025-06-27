@@ -6,9 +6,25 @@
  */
 
 import { classNameFactory } from "@api/Styles";
-import { ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, openModalLazy } from "@utils/modal";
+import {
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalProps,
+    ModalRoot,
+    openModalLazy,
+} from "@utils/modal";
 import { extractAndLoadChunksLazy, findComponentByCodeLazy } from "@webpack";
-import { Button, ColorPicker, Forms, Text, TextInput, Toasts, useMemo, useState } from "@webpack/common";
+import {
+    Button,
+    ColorPicker,
+    Forms,
+    Text,
+    TextInput,
+    Toasts,
+    useMemo,
+    useState,
+} from "@webpack/common";
 
 import { DEFAULT_COLOR, SWATCHES } from "../constants";
 import { categoryLen, createCategory, getCategory } from "../data";
@@ -23,9 +39,13 @@ interface ColorPickerWithSwatchesProps {
     renderCustomButton?: () => React.ReactNode;
 }
 
-const ColorPickerWithSwatches = findComponentByCodeLazy<ColorPickerWithSwatchesProps>('id:"color-picker"');
+const ColorPickerWithSwatches =
+    findComponentByCodeLazy<ColorPickerWithSwatchesProps>('id:"color-picker"');
 
-export const requireSettingsMenu = extractAndLoadChunksLazy(['name:"UserSettings"'], /createPromise:.{0,20}(\i\.\i\("?.+?"?\).*?).then\(\i\.bind\(\i,"?(.+?)"?\)\).{0,50}"UserSettings"/);
+export const requireSettingsMenu = extractAndLoadChunksLazy(
+    ['name:"UserSettings"'],
+    /createPromise:.{0,20}(\i\.\i\("?.+?"?\).*?).then\(\i\.bind\(\i,"?(.+?)"?\)\).{0,50}"UserSettings"/
+);
 
 const cl = classNameFactory("pc-pindms-modal-");
 
@@ -35,7 +55,10 @@ interface Props {
     modalProps: ModalProps;
 }
 
-function useCategory(categoryId: string | null, initalChannelId: string | null) {
+function useCategory(
+    categoryId: string | null,
+    initalChannelId: string | null
+) {
     const category = useMemo(() => {
         if (categoryId) {
             return getCategory(categoryId);
@@ -45,7 +68,7 @@ function useCategory(categoryId: string | null, initalChannelId: string | null) 
                 name: `Pin Category ${categoryLen() + 1}`,
                 color: DEFAULT_COLOR,
                 collapsed: false,
-                channels: [initalChannelId]
+                channels: [initalChannelId],
             };
         }
     }, [categoryId, initalChannelId]);
@@ -53,14 +76,22 @@ function useCategory(categoryId: string | null, initalChannelId: string | null) 
     return category;
 }
 
-export function NewCategoryModal({ categoryId, modalProps, initialChannelId }: Props) {
+export function NewCategoryModal({
+    categoryId,
+    modalProps,
+    initialChannelId,
+}: Props) {
     const category = useCategory(categoryId, initialChannelId);
     if (!category) return null;
 
     const [name, setName] = useState(category.name);
     const [color, setColor] = useState(category.color);
 
-    const onSave = (e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const onSave = (
+        e:
+            | React.FormEvent<HTMLFormElement>
+            | React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
         e.preventDefault();
 
         category.name = name;
@@ -76,7 +107,9 @@ export function NewCategoryModal({ categoryId, modalProps, initialChannelId }: P
     return (
         <ModalRoot {...modalProps}>
             <ModalHeader>
-                <Text variant="heading-lg/semibold" style={{ flexGrow: 1 }}>{categoryId ? "Edit" : "New"} Category</Text>
+                <Text variant="heading-lg/semibold" style={{ flexGrow: 1 }}>
+                    {categoryId ? "Edit" : "New"} Category
+                </Text>
             </ModalHeader>
 
             {/* form is here so when you press enter while in the text input it submits */}
@@ -84,10 +117,7 @@ export function NewCategoryModal({ categoryId, modalProps, initialChannelId }: P
                 <ModalContent className={cl("content")}>
                     <Forms.FormSection>
                         <Forms.FormTitle>Name</Forms.FormTitle>
-                        <TextInput
-                            value={name}
-                            onChange={e => setName(e)}
-                        />
+                        <TextInput value={name} onChange={e => setName(e)} />
                     </Forms.FormSection>
                     <Forms.FormDivider />
                     <Forms.FormSection>
@@ -111,16 +141,26 @@ export function NewCategoryModal({ categoryId, modalProps, initialChannelId }: P
                     </Forms.FormSection>
                 </ModalContent>
                 <ModalFooter>
-                    <Button type="submit" onClick={onSave} disabled={!name}>{categoryId ? "Save" : "Create"}</Button>
+                    <Button type="submit" onClick={onSave} disabled={!name}>
+                        {categoryId ? "Save" : "Create"}
+                    </Button>
                 </ModalFooter>
             </form>
         </ModalRoot>
     );
 }
 
-export const openCategoryModal = (categoryId: string | null, channelId: string | null) =>
+export const openCategoryModal = (
+    categoryId: string | null,
+    channelId: string | null
+) =>
     openModalLazy(async () => {
         await requireSettingsMenu();
-        return modalProps => <NewCategoryModal categoryId={categoryId} modalProps={modalProps} initialChannelId={channelId} />;
+        return modalProps => (
+            <NewCategoryModal
+                categoryId={categoryId}
+                modalProps={modalProps}
+                initialChannelId={channelId}
+            />
+        );
     });
-
