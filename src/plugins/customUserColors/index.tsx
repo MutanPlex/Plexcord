@@ -85,7 +85,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "CustomUserColors",
     description: "Lets you add a custom color to any user, anywhere! Highly recommend to use with typingTweaks and roleColorEverywhere",
-    authors: [PcDevs.mochienya],
+    authors: [PcDevs.mochienya, PcDevs.MutanPlex],
     contextMenus: { "user-context": userContextMenuPatch },
     settings,
     requireSettingsMenu,
@@ -100,7 +100,8 @@ export default definePlugin({
                 match: /(?<=colorString:\i,colorStrings:\i,colorRoleName:\i}=)(\i),/,
                 replace: "$self.wrapMessageColorProps($1, arguments[0]),"
             },
-            predicate: () => !Settings.plugins.IrcColors.enabled
+            predicate: () => !Settings.plugins.IrcColors.enabled,
+            noWarn: true
         },
         {
             find: "PrivateChannel.renderAvatar",
