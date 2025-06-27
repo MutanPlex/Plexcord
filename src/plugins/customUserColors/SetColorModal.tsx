@@ -9,18 +9,9 @@ import { set } from "@api/DataStore";
 import { classNameFactory } from "@api/Styles";
 import { Margins } from "@utils/margins";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
-import { findComponentByCodeLazy } from "@webpack";
-import { Button, Forms, useState } from "@webpack/common";
+import { Button, ColorPicker, Forms, useState } from "@webpack/common";
 
 import { colors, DATASTORE_KEY } from "./index";
-
-interface ColorPickerProps {
-    color: number;
-    showEyeDropper?: boolean;
-    suggestedColors?: string[];
-    onChange(value: number | null): void;
-}
-const ColorPicker = findComponentByCodeLazy<ColorPickerProps>("#{intl::USER_SETTINGS_PROFILE_COLOR_SELECT_COLOR}", ".BACKGROUND_PRIMARY)");
 
 const cl = classNameFactory("pc-customColors-");
 
@@ -64,7 +55,7 @@ export function SetColorModal({ userId, modalProps }: { userId: string, modalPro
             <ModalContent className={cl("modal-content")} onKeyDown={handleKey}>
                 <section className={Margins.bottom16}>
                     <Forms.FormTitle tag="h3">
-                        Pick a color
+                        Pick a Color
                     </Forms.FormTitle>
                     <ColorPicker
                         color={colorPickerColor}
