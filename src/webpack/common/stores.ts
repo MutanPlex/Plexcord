@@ -53,7 +53,7 @@ export let EmojiStore: t.EmojiStore;
 export let ThemeStore: t.ThemeStore;
 export let WindowStore: t.WindowStore;
 export let DraftStore: t.DraftStore;
-export let StickersStore: t.StickersStore;
+export let StickerStore: t.StickerStore;
 /**
  * React hook that returns stateful data for one or more stores
  * You might need a custom comparator (4th argument) if your store data is an object
@@ -82,6 +82,7 @@ waitForStore("GuildChannelStore", m => GuildChannelStore = m);
 waitForStore("MessageStore", m => MessageStore = m);
 waitForStore("WindowStore", m => WindowStore = m);
 waitForStore("EmojiStore", m => EmojiStore = m);
+waitForStore("StickersStore", m => StickerStore = m);
 waitForStore("ThemeStore", m => {
     ThemeStore = m;
     // Importing this directly can easily cause circular imports. For this reason, use a non import access here.

@@ -25,7 +25,7 @@ import { getCurrentGuild, getEmojiURL } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType, Patch } from "@utils/types";
 import { findByCodeLazy, findByPropsLazy, findStoreLazy, proxyLazyWebpack } from "@webpack";
-import { Alerts, ChannelStore, DraftType, EmojiStore, FluxDispatcher, Forms, GuildMemberStore, lodash, Parser, PermissionsBits, PermissionStore, StickersStore, UploadHandler, UserSettingsActionCreators, UserStore } from "@webpack/common";
+import { Alerts, ChannelStore, DraftType, EmojiStore, FluxDispatcher, Forms, GuildMemberStore, lodash, Parser, PermissionsBits, PermissionStore, StickerStore, UploadHandler, UserSettingsActionCreators, UserStore } from "@webpack/common";
 import type { Emoji } from "@webpack/types";
 import type { Message } from "discord-types/general";
 import { applyPalette, GIFEncoder, quantize } from "gifenc";
@@ -554,7 +554,7 @@ export default definePlugin({
                 const gifMatch = child.props.href.match(fakeNitroGifStickerRegex);
                 if (gifMatch) {
                     // There is no way to differentiate a regular gif attachment from a fake nitro animated sticker, so we check if the StickersStore contains the id of the fake sticker
-                    if (StickersStore.getStickerById(gifMatch[1])) return null;
+                    if (StickerStore.getStickerById(gifMatch[1])) return null;
                 }
             }
 
@@ -642,7 +642,7 @@ export default definePlugin({
                     url = new URL(item);
                 } catch { }
 
-                const stickerName = StickersStore.getStickerById(imgMatch[1])?.name ?? url?.searchParams.get("name") ?? "FakeNitroSticker";
+                const stickerName = StickerStore.getStickerById(imgMatch[1])?.name ?? url?.searchParams.get("name") ?? "FakeNitroSticker";
                 stickers.push({
                     format_type: 1,
                     id: imgMatch[1],
@@ -655,9 +655,9 @@ export default definePlugin({
 
             const gifMatch = item.match(fakeNitroGifStickerRegex);
             if (gifMatch) {
-                if (!StickersStore.getStickerById(gifMatch[1])) continue;
+                if (!StickerStore.getStickerById(gifMatch[1])) continue;
 
-                const stickerName = StickersStore.getStickerById(gifMatch[1])?.name ?? "FakeNitroSticker";
+                const stickerName = StickerStore.getStickerById(gifMatch[1])?.name ?? "FakeNitroSticker";
                 stickers.push({
                     format_type: 2,
                     id: gifMatch[1],
@@ -694,7 +694,7 @@ export default definePlugin({
                         const gifMatch = url.match(fakeNitroGifStickerRegex);
                         if (gifMatch) {
                             // There is no way to differentiate a regular gif attachment from a fake nitro animated sticker, so we check if the StickerStore contains the id of the fake sticker
-                            if (StickersStore.getStickerById(gifMatch[1])) return true;
+                            if (StickerStore.getStickerById(gifMatch[1])) return true;
                         }
                     }
 
@@ -715,7 +715,7 @@ export default definePlugin({
             const match = attachment.url.match(fakeNitroGifStickerRegex);
             if (match) {
                 // There is no way to differentiate a regular gif attachment from a fake nitro animated sticker, so we check if the StickersStore contains the id of the fake sticker
-                if (StickersStore.getStickerById(match[1])) return false;
+                if (StickerStore.getStickerById(match[1])) return false;
             }
 
             return true;
@@ -871,7 +871,7 @@ export default definePlugin({
                 if (!s.enableStickerBypass)
                     break stickerBypass;
 
-                const sticker = StickersStore.getStickerById(extra.stickers?.[0]!);
+                const sticker = StickerStore.getStickerById(extra.stickers?.[0]!);
                 if (!sticker)
                     break stickerBypass;
 

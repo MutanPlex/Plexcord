@@ -184,7 +184,7 @@ export interface DraftObject {
     draft: string;
 }
 
-export class StickersStore extends FluxStore {
+export class StickerStore extends FluxStore {
     getStickerById(id: string): Sticker | undefined;
     getStickerPack(id: string): StickerPack | undefined;
     getPremiumPacks(): StickerPack[];
