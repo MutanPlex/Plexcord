@@ -94,6 +94,27 @@ export function formatDuration(time: number, unit: Units, short: boolean = false
     return res.length ? res : `0 ${getUnitStr(unit, false, short)}`;
 }
 
+export function formatDurationMs(ms: number, human: boolean = false, seconds: boolean = true) {
+    const format = (n: number) => human ? n : n.toString().padStart(2, "0");
+    const unit = (s: string) => human ? s : "";
+    const delim = human ? " " : ":";
+
+    // thx copilot
+    const d = Math.floor(ms / 86400000);
+    const h = Math.floor((ms % 86400000) / 3600000);
+    const m = Math.floor(((ms % 86400000) % 3600000) / 60000);
+    const s = Math.floor((((ms % 86400000) % 3600000) % 60000) / 1000);
+
+    let res = "";
+    if (d) res += `${d}${unit("d")}${delim}`;
+    if (h || res || !seconds) res += `${format(h)}${unit("h")}${delim}`;
+    if (m || res || !human || !seconds) res += `${format(m)}${unit("m")}`;
+    if (seconds && (m || res || !human)) res += `${delim}`;
+    if (seconds) res += `${format(s)}${unit("s")}`;
+
+    return res;
+}
+
 /**
  * Join an array of strings in a human readable way (1, 2 and 3)
  * @param elements Elements
