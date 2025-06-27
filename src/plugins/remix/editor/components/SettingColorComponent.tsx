@@ -11,16 +11,13 @@
 import "./colorStyles.css";
 
 import { classNameFactory } from "@api/Styles";
-import { findComponentByCodeLazy } from "@webpack";
-import { Forms } from "@webpack/common";
+import { ColorPicker, Forms } from "@webpack/common";
 
 interface ColorPickerProps {
     color: number | null;
     showEyeDropper?: boolean;
     onChange(value: number | null): void;
 }
-
-const ColorPicker = findComponentByCodeLazy<ColorPickerProps>(".BACKGROUND_PRIMARY).hex");
 
 const cl = classNameFactory("pc-remix-settings-color-");
 
