@@ -9,10 +9,9 @@ import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { definePluginSettings, useSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs, PcDevs } from "@utils/constants";
-import { LazyComponent } from "@utils/lazyReact";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
-import { filters, find, findByPropsLazy, findStoreLazy } from "@webpack";
+import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
 import {
     ChannelStore,
     Menu,
@@ -21,15 +20,14 @@ import {
     React,
     SelectedChannelStore,
     Toasts,
-    UserStore
+    UserStore,
+    VoiceStateStore
 } from "@webpack/common";
+import type { VoiceState } from "@webpack/types";
 import type { Channel, User } from "discord-types/general";
 import type { PropsWithChildren, SVGProps } from "react";
 
-const HeaderBarIcon = LazyComponent(() => {
-    const filter = filters.byCode(".HEADER_BAR_BADGE");
-    return find(m => m.Icon && filter(m.Icon)).Icon;
-});
+const HeaderBarIcon = findComponentByCodeLazy(".HEADER_BAR_BADGE_TOP:", '.iconBadge,"top"');
 
 interface BaseIconProps extends IconProps {
     viewBox: string;
@@ -93,21 +91,6 @@ function UnfollowIcon(props: IconProps) {
     );
 }
 
-interface VoiceState {
-    userId: string;
-    channelId?: string;
-    oldChannelId?: string;
-    deaf: boolean;
-    mute: boolean;
-    selfDeaf: boolean;
-    selfMute: boolean;
-    selfStream: boolean;
-    selfVideo: boolean;
-    sessionId: string;
-    suppress: boolean;
-    requestToSpeakTimestamp: string | null;
-}
-
 export const settings = definePluginSettings({
     executeOnFollow: {
         type: OptionType.BOOLEAN,
@@ -153,13 +136,7 @@ const ChannelActions: {
     selectVoiceChannel: (channelId: string) => void;
 } = findByPropsLazy("disconnect", "selectVoiceChannel");
 
-const VoiceStateStore: VoiceStateStore = findStoreLazy("VoiceStateStore");
 const CONNECT = 1n << 20n;
-
-interface VoiceStateStore {
-    getAllVoiceStates(): VoiceStateEntry;
-    getVoiceStatesForChannel(channelId: string): VoiceStateMember;
-}
 
 interface VoiceStateEntry {
     [guildIdOrMe: string]: VoiceStateMember;
@@ -174,7 +151,7 @@ function getChannelId(userId: string) {
         return null;
     }
     try {
-        const states = VoiceStateStore.getAllVoiceStates();
+        const states = VoiceStateStore.getAllVoiceStates() as VoiceStateEntry;
         for (const users of Object.values(states)) {
             if (users[userId]) {
                 return users[userId].channelId ?? null;
@@ -191,7 +168,7 @@ function triggerFollow(userChannelId: string | null = getChannelId(settings.stor
             // join when not already in the same channel
             if (userChannelId !== myChanId) {
                 const channel = ChannelStore.getChannel(userChannelId);
-                const voiceStates = VoiceStateStore.getVoiceStatesForChannel(userChannelId);
+                const voiceStates = VoiceStateStore.getVoiceStatesForChannel(userChannelId) as VoiceStateMember;
                 const memberCount = voiceStates ? Object.keys(voiceStates).length : null;
                 if (channel.type === 1 || PermissionStore.can(CONNECT, channel)) {
                     if (channel.userLimit !== 0 && memberCount !== null && memberCount >= channel.userLimit && !PermissionStore.can(PermissionsBits.MOVE_MEMBERS, channel)) {
@@ -321,7 +298,7 @@ export default definePlugin({
                     // if you're not in the channel of the followed user and it is no longer full, join
                     if (settings.store.channelFull && !isMe && !channelId && oldChannelId && oldChannelId !== SelectedChannelStore.getVoiceChannelId()) {
                         const channel = ChannelStore.getChannel(oldChannelId);
-                        const channelVoiceStates = VoiceStateStore.getVoiceStatesForChannel(oldChannelId);
+                        const channelVoiceStates = VoiceStateStore.getVoiceStatesForChannel(oldChannelId) as VoiceStateMember;
                         const memberCount = channelVoiceStates ? Object.keys(channelVoiceStates).length : null;
                         if (channel.userLimit !== 0 && memberCount !== null && memberCount === (channel.userLimit - 1) && !PermissionStore.can(PermissionsBits.MOVE_MEMBERS, channel)) {
                             const users = Object.values(channelVoiceStates).map(x => x.userId);
