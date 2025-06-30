@@ -55,6 +55,7 @@ export let ThemeStore: t.ThemeStore;
 export let WindowStore: t.WindowStore;
 export let DraftStore: t.DraftStore;
 export let StickerStore: t.StickerStore;
+export let VoiceStateStore: GenericStore;
 /**
  * React hook that returns stateful data for one or more stores
  * You might need a custom comparator (4th argument) if your store data is an object
@@ -89,6 +90,7 @@ waitForStore("ThemeStore", m => {
     // Importing this directly can easily cause circular imports. For this reason, use a non import access here.
     Plexcord.QuickCss.initQuickCssThemeStore();
 });
+waitForStore("VoiceStateStore", m => VoiceStateStore = m);
 
 // GuildRoleStore is new, this code is for stable + canary compatibility
 // TODO: Change to waitForStore once GuildRoleStore is on stable
