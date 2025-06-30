@@ -23,7 +23,7 @@
 .pc-backup-restore-card {
     background-color: var(--background-feedback-warning);
     border-color: var(--info-warning-foreground);
-    color: var(--text-feedback-warning);
+    color: var(--info-warning-foreground);
 }
 
 .pc-settings-theme-links {

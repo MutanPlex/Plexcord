@@ -139,7 +139,7 @@ export default definePlugin({
 
                             borderRadius: "50%",
                             backgroundColor: "var(--interactive-normal)",
-                            color: "var(--background-secondary)",
+                            color: "var(--background-base-lower)",
                         }}
                     >
                         <PlatformIcon width={14} height={14} />

@@ -19,7 +19,7 @@
 
 import { classNameFactory } from "@api/Styles";
 import { findByPropsLazy } from "@webpack";
-import { GuildStore } from "@webpack/common";
+import { GuildRoleStore } from "@webpack/common";
 import { Guild, GuildMember, Role } from "discord-types/general";
 
 import { PermissionsSortOrder, settings } from ".";
@@ -30,7 +30,7 @@ export const { getGuildPermissionSpecMap } = findByPropsLazy("getGuildPermission
 export const cl = classNameFactory("pc-permviewer-");
 
 export function getSortedRoles({ id }: Guild, member: GuildMember) {
-    const roles = GuildStore.getRoles(id);
+    const roles = GuildRoleStore.getRoles(id);
 
     return [...member.roles, id]
         .map(id => roles[id])
@@ -49,7 +49,7 @@ export function sortUserRoles(roles: Role[]) {
 }
 
 export function sortPermissionOverwrites<T extends { id: string; type: number; }>(overwrites: T[], guildId: string) {
-    const roles = GuildStore.getRoles(guildId);
+    const roles = GuildRoleStore.getRoles(guildId);
 
     return overwrites.sort((a, b) => {
         if (a.type !== PermissionType.Role || b.type !== PermissionType.Role) return 0;

@@ -71,7 +71,7 @@
     padding: 1em;
     background: var(--background-feedback-warning);
     border: 1px solid var(--info-warning-foreground);
-    color: var(--text-feedback-warning);
+    color: var(--info-warning-foreground);
 }
 
 .pc-plugins-restart-button {
