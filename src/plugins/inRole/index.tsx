@@ -13,7 +13,7 @@ import { InfoIcon } from "@components/Icons";
 import { Devs } from "@utils/constants";
 import { getCurrentChannel, getCurrentGuild } from "@utils/discord";
 import definePlugin from "@utils/types";
-import { Forms, GuildMemberStore, GuildStore, Menu, Parser } from "@webpack/common";
+import { Forms, GuildMemberStore, GuildRoleStore, Menu, Parser } from "@webpack/common";
 import { GuildMember } from "discord-types/general";
 
 import { showInRoleModal } from "./RoleMembersModal";
@@ -83,7 +83,7 @@ export default definePlugin({
             const channel = getCurrentChannel();
             if (!channel) return;
 
-            const role = GuildStore.getRole(guild.id, id);
+            const role = GuildRoleStore.getRole(guild.id, id);
             if (!role) return;
 
             children.push(
@@ -109,7 +109,7 @@ export default definePlugin({
 
             const roleIds = roleMentions.map(mention => mention.match(/<@&(\d+)>/)![1]);
 
-            const role = GuildStore.getRole(guild.id, roleIds);
+            const role = GuildRoleStore.getRole(guild.id, roleIds);
             if (!role) return;
 
             children.push(
