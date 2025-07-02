@@ -1,6 +1,6 @@
 :root {
     /* Body */
-    --toastnotifications-background-color: var(--background-base-lower-alt);
+    --toastnotifications-background-color: var(--background-base-low);
     --toastnotifications-text-color: var(--text-default);
     --toastnotifications-border-radius: 6px;
     --toastnotifications-width: 25vw;
