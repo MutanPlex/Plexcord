@@ -46,13 +46,31 @@ import { SettingsRouter } from "./webpack/common";
 
 if (IS_REPORTER) {
     require("./debug/runReporter");
+    Settings.plugins.CharacterCounter.enabled = false;
 }
 
 async function syncSettings() {
+    // Check if cloud auth exists for current user before attempting sync
+    const hasCloudAuth = await dsGet("Plexcord_cloudSecret");
+    if (!hasCloudAuth) {
+        if (Settings.cloud.authenticated) {
+            // User switched to an account that isn't connected to cloud
+            showNotification({
+                title: "Cloud Settings",
+                body: "Cloud sync was disabled because this account isn't connected to the Plexcord Cloud App. You can enable it again by connecting this account in Cloud Settings. (note: it will store your preferences separately)",
+                color: "var(--yellow-360)",
+                onClick: () => SettingsRouter.open("PlexcordCloud")
+            });
+            // Disable cloud sync globally
+            Settings.cloud.authenticated = false;
+        }
+        return;
+    }
+
     // pre-check for local shared settings
     if (
         Settings.cloud.authenticated &&
-        !await dsGet("Plexcord_cloudSecret") // this has been enabled due to local settings share or some other bug
+        !hasCloudAuth // this has been enabled due to local settings share or some other bug
     ) {
         // show a notification letting them know and tell them how to fix it
         showNotification({
@@ -72,7 +90,8 @@ async function syncSettings() {
         if (localStorage.Plexcord_settingsDirty) {
             await putCloudSettings();
             delete localStorage.Plexcord_settingsDirty;
-        } else if (await getCloudSettings(false)) { // if we synchronized something (false means no sync)
+        } else if (await getCloudSettings(false)) {
+            // if we synchronized something (false means no sync)
             // we show a notification here instead of allowing getCloudSettings() to show one to declutter the amount of
             // potential notifications that might occur. getCloudSettings() will always send a notification regardless if
             // there was an error to notify the user, but besides that we only want to show one notification instead of all
