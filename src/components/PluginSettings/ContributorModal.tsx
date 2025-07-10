@@ -51,19 +51,10 @@ function ContributorModal({ user }: { user: User; }) {
     const website = profile?.connectedAccounts?.find(a => a.type === "domain")?.name;
 
     const plugins = useMemo(() => {
-
-        /* const allPlugins = Object.values(Plugins);
-        const pluginsByAuthor = DevsById[user.id] ? allPlugins.filter(p => p.authors.includes(DevsById[user.id])) : allPlugins.filter(p => p.authors.some(a => a.name === user.username));
-
-        return pluginsByAuthor
-            .filter(p => !p.name.endsWith("API"))
-            .sort((a, b) => Number(a.required ?? false) - Number(b.required ?? false)); */
         const allPlugins = Object.values(Plugins);
-        const pluginsByAuthor = PcDevsById[user.id]
-            ? allPlugins.filter(p => p.authors.includes(PcDevsById[user.id]))
-            : DevsById[user.id]
-                ? allPlugins.filter(p => p.authors.includes(DevsById[user.id]))
-                : allPlugins.filter(p => p.authors.some(a => a.name === user.username));
+        const pluginsByAuthor = DevsById[user.id] || PcDevsById[user.id]
+            ? allPlugins.filter(p => p.authors.includes(DevsById[user.id] || PcDevsById[user.id]))
+            : allPlugins.filter(p => p.authors.some(a => a.name === user.username));
 
         return pluginsByAuthor
             .filter(p => !p.name.endsWith("API"))
@@ -100,11 +91,11 @@ function ContributorModal({ user }: { user: User; }) {
 
             {plugins.length ? (
                 <Forms.FormText>
-                    This person has {ContributedHyperLink} to {pluralise(plugins.length, "plugin")}!
+                    {user.username} has {ContributedHyperLink} to {pluralise(plugins.length, "plugin")}!
                 </Forms.FormText>
             ) : (
                 <Forms.FormText>
-                    This person has not made any plugins. They likely {ContributedHyperLink} to Plexcord in other ways!
+                    {user.username} has not made any plugins. They likely {ContributedHyperLink} in other ways!
                 </Forms.FormText>
             )}
 
