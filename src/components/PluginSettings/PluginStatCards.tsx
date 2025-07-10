@@ -2,31 +2,28 @@ import "./styles.css";
 
 import { Text, Tooltip } from "@webpack/common";
 
-export function StockPluginsCard({ totalStockPlugins, enabledStockPlugins }) {
+export function StockPluginsCard({ totalStockPlugins, enabledStockPlugins, totalUserPlugins, enabledUserPlugins }) {
     return (
         <div className="pc-plugin-stats pc-stockplugins-stats-card">
             <div className="pc-plugin-stats-card-container">
                 <div className="pc-plugin-stats-card-section">
-                    <Text variant="text-md/semibold">Enabled Plugins</Text>
+                    <Text variant="text-md/bold">Enabled Stock Plugins</Text>
                     <Text variant="heading-xl/bold">{enabledStockPlugins}</Text>
                 </div>
                 <div className="pc-plugin-stats-card-divider"></div>
                 <div className="pc-plugin-stats-card-section">
-                    <Text variant="text-md/semibold">Total Plugins</Text>
+                    <Text variant="text-md/bold">Total Stock Plugins</Text>
                     <Text variant="heading-xl/bold">{totalStockPlugins}</Text>
                 </div>
-            </div>
-        </div>
-    );
-}
-
-export function UserPluginsCard({ totalUserPlugins, enabledUserPlugins }) {
-    if (totalUserPlugins === 0)
-        return (
-            <div className="pc-plugin-stats pc-stockplugins-stats-card">
-                <div className="pc-plugin-stats-card-container ">
-                    <div className="pc-plugin-stats-card-section">
-                        <Text variant="text-md/semibold">Total Userplugins</Text>
+                <div className="pc-plugin-stats-card-divider"></div>
+                <div className="pc-plugin-stats-card-section">
+                    <Text variant="text-md/bold">Enabled User Plugins</Text>
+                    <Text variant="heading-xl/bold">{enabledUserPlugins}</Text>
+                </div>
+                <div className="pc-plugin-stats-card-divider"></div>
+                <div className="pc-plugin-stats-card-section">
+                    <Text variant="text-md/bold">Total User Plugins</Text>
+                    {totalUserPlugins === 0 ? (
                         <Tooltip
                             text={
                                 <img
@@ -43,24 +40,11 @@ export function UserPluginsCard({ totalUserPlugins, enabledUserPlugins }) {
                                 </span>
                             )}
                         </Tooltip>
-                    </div>
-                </div>
-            </div>
-        );
-    else
-        return (
-            <div className="pc-plugin-stats pc-stockplugins-stats-card">
-                <div className="pc-plugin-stats-card-container">
-                    <div className="pc-plugin-stats-card-section">
-                        <Text variant="text-md/semibold">Enabled Userplugins</Text>
-                        <Text variant="heading-xl/bold">{enabledUserPlugins}</Text>
-                    </div>
-                    <div className="pc-plugin-stats-card-divider"></div>
-                    <div className="pc-plugin-stats-card-section">
-                        <Text variant="text-md/semibold">Total Userplugins</Text>
+                    ) : (
                         <Text variant="heading-xl/bold">{totalUserPlugins}</Text>
-                    </div>
+                    )}
                 </div>
             </div>
-        );
+        </div >
+    );
 }
