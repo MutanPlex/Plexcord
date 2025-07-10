@@ -41,7 +41,8 @@ import { JSX } from "react";
 
 import Plugins, { ExcludedPlugins, PluginMeta } from "~plugins";
 
-import { StockPluginsCard, UserPluginsCard } from "./PluginStatCards";
+import { StockPluginsCard } from "./PluginStatCards";
+
 
 // Avoid circular dependency
 const { startDependenciesRecursive, startPlugin, stopPlugin } = proxyLazy(() => require("../../plugins"));
@@ -63,7 +64,7 @@ function showErrorToast(message: string) {
     });
 }
 
-function ReloadRequiredCard({ required, enabledPlugins, openDisablePluginsModal, resetCheckAndDo }) {
+function ReloadRequiredCard({ required, enabledPlugins, openDisablePluginsModal, resetCheckAndDo, enabledStockPlugins, totalStockPlugins, enabledUserPlugins, totalUserPlugins }) {
     return (
         <Card className={cl("info-card", { "restart-card": required })}>
             {required ? (
@@ -78,11 +79,23 @@ function ReloadRequiredCard({ required, enabledPlugins, openDisablePluginsModal,
                 </>
             ) : (
                 <>
-                    <Forms.FormTitle tag="h5">Plugin Management</Forms.FormTitle>
-                    <Forms.FormText>Press the cog wheel or info icon to get more info on a plugin</Forms.FormText>
-                    <Forms.FormText>Plugins with a cog wheel have settings you can modify!</Forms.FormText>
+                    <Forms.FormText className={cl("dep-text")}>
+                        Manage your plugins here. You can enable, disable, and configure them.
+                    </Forms.FormText>
+                    <Forms.FormText className={cl("dep-text")}>
+                        <b>Note:</b> Some plugins may require a restart to apply changes.
+                    </Forms.FormText>
+                    <Forms.FormDivider className={`${Margins.top8} ${Margins.bottom8}`} />
+
+                    <StockPluginsCard
+                        enabledStockPlugins={enabledStockPlugins}
+                        totalStockPlugins={totalStockPlugins}
+                        enabledUserPlugins={enabledUserPlugins}
+                        totalUserPlugins={totalUserPlugins}
+                    />
                 </>
             )}
+
             {enabledPlugins.length > 0 && !required && (
                 <Button
                     size={Button.Sizes.SMALL}
@@ -473,24 +486,7 @@ export default function PluginSettings() {
     return (
         <SettingsTab title="Plugins">
 
-            <ReloadRequiredCard required={changes.hasChanges} enabledPlugins={enabledPlugins} openDisablePluginsModal={openDisablePluginsModal} resetCheckAndDo={resetCheckAndDo} />
-
-            <div className={cl("stats-container")} style={{
-                marginTop: "16px",
-                gap: "16px",
-                display: "flex",
-                flexDirection: "row",
-                width: "100%"
-            }}>
-                <StockPluginsCard
-                    totalStockPlugins={totalStockPlugins}
-                    enabledStockPlugins={enabledStockPlugins}
-                />
-                <UserPluginsCard
-                    totalUserPlugins={totalUserPlugins}
-                    enabledUserPlugins={enabledUserPlugins}
-                />
-            </div>
+            <ReloadRequiredCard required={changes.hasChanges} enabledPlugins={enabledPlugins} openDisablePluginsModal={openDisablePluginsModal} resetCheckAndDo={resetCheckAndDo} enabledStockPlugins={enabledStockPlugins} totalStockPlugins={totalStockPlugins} enabledUserPlugins={enabledUserPlugins} totalUserPlugins={totalUserPlugins} />
 
             <Forms.FormTitle tag="h5" className={classes(Margins.top20, Margins.bottom8)}>
                 Filters
