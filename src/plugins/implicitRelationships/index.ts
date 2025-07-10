@@ -126,7 +126,6 @@ export default definePlugin({
         // Implicit relationships are defined as users that you:
         // 1. Have an affinity for
         // 2. Do not have a relationship with
-        await this.refreshUserAffinities();
         const userAffinities: Record<string, any>[] = UserAffinitiesStore.getUserAffinities();
         const relationships = RelationshipStore.getMutableRelationships();
         const nonFriendAffinities = userAffinities.filter(a => !RelationshipStore.getRelationshipType(a.otherUserId));
