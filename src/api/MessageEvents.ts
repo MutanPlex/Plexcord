@@ -62,6 +62,8 @@ export interface MessageReplyOptions {
     messageReference: Message["messageReference"];
     allowedMentions?: {
         parse: Array<string>;
+        users?: Array<string>;
+        roles?: Array<string>;
         repliedUser: boolean;
     };
 }
