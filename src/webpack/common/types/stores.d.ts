@@ -178,12 +178,6 @@ export class EmojiStore extends FluxStore {
     };
 }
 
-export interface DraftObject {
-    channelId: string;
-    timestamp: number;
-    draft: string;
-}
-
 export class StickerStore extends FluxStore {
     getStickerById(id: string): Sticker | undefined;
     getStickerPack(id: string): StickerPack | undefined;
@@ -210,7 +204,7 @@ export class RelationshipStore extends FluxStore {
     getOutgoingCount(): number;
     getFriendCount(): number;
     getRelationshipCount(): number;
-    getMutableRelationships(): Record<number, number>;
+    getMutableRelationships(): Map<string, number>;
     getVersion(): number;
     isSpam(userId): boolean;
     getRelationshipType(userId: string): number;
@@ -221,6 +215,12 @@ export class RelationshipStore extends FluxStore {
     getBlockedIDs(): string[];
     getIgnoredIDs(): string[];
     getBlockedOrIgnoredIDs(): string[];
+}
+
+export interface DraftObject {
+    channelId: string;
+    timestamp: number;
+    draft: string;
 }
 
 interface DraftState {
