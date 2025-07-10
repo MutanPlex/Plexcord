@@ -26,6 +26,7 @@ import { MessageAccessoryFactory } from "@api/MessageAccessories";
 import { MessageDecorationFactory } from "@api/MessageDecorations";
 import { MessageClickListener, MessageEditListener, MessageSendListener } from "@api/MessageEvents";
 import { MessagePopoverButtonFactory } from "@api/MessagePopover";
+import { NicknameIconFactory } from "@api/NicknameIcons";
 import { FluxEvents } from "@webpack/types";
 import { ReactNode } from "react";
 import { Promisable } from "type-fest";
@@ -143,6 +144,11 @@ export interface PluginDef {
      */
     beforeSave?(options: Record<string, any>): Promisable<true | string>;
     /**
+     * Check that this returns true after allowing a save to complete.
+     * If a string is returned, show the error to the user.
+     */
+    afterSave?(): void;
+    /**
      * Allows you to specify a custom Component that will be rendered in your
      * plugin's settings page
      */
@@ -184,6 +190,7 @@ export interface PluginDef {
     renderMessageDecoration?: MessageDecorationFactory;
 
     renderMemberListDecorator?: MemberListDecoratorFactory;
+    renderNicknameIcon?: NicknameIconFactory;
 
     renderChatBarButton?: ChatBarButtonFactory;
 }
@@ -226,7 +233,7 @@ export type SettingsChecks<D extends SettingsDefinition> = {
 };
 
 export type PluginSettingDef =
-    (PluginSettingCustomDef & Pick<PluginSettingCommon, "onChange">) |
+    (PluginSettingCommon & PluginSettingCustomDef & Pick<PluginSettingCommon, "onChange">) |
     (PluginSettingComponentDef & Omit<PluginSettingCommon, "description" | "placeholder">) | ((
         | PluginSettingStringDef
         | PluginSettingNumberDef

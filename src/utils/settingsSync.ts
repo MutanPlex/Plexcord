@@ -17,9 +17,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { DataStore } from "@api/index";
 import { showNotification } from "@api/Notifications";
 import { PlainSettings, Settings } from "@api/Settings";
-import { moment, Toasts } from "@webpack/common";
+import { moment, SettingsRouter, Toasts } from "@webpack/common";
 import { deflateSync, inflateSync } from "fflate";
 
 import { checkCloudUrlCsp, getCloudAuth, getCloudUrl } from "./cloud";
@@ -39,6 +40,7 @@ export async function importSettings(data: string) {
         Object.assign(PlainSettings, parsed.settings);
         await PlexcordNative.settings.set(parsed.settings);
         await PlexcordNative.quickCss.set(parsed.quickCss);
+        if (parsed.dataStore) await DataStore.setMany(parsed.dataStore);
     } else
         throw new Error("Invalid Settings. Is this even a Plexcord Settings file?");
 }
@@ -46,7 +48,8 @@ export async function importSettings(data: string) {
 export async function exportSettings({ minify }: { minify?: boolean; } = {}) {
     const settings = PlexcordNative.settings.get();
     const quickCss = await PlexcordNative.quickCss.get();
-    return JSON.stringify({ settings, quickCss }, null, minify ? undefined : 4);
+    const dataStore = await DataStore.entries();
+    return JSON.stringify({ settings, quickCss, dataStore }, null, minify ? undefined : 4);
 }
 
 export async function downloadSettingsBackup() {
@@ -173,6 +176,19 @@ export async function getCloudSettings(shouldNotify = true, force = false) {
                 "If-None-Match": Settings.cloud.settingsSyncVersion.toString()
             },
         });
+
+        if (res.status === 401) {
+            // User switched to an account that isn't connected to cloud
+            showNotification({
+                title: "Cloud Settings",
+                body: "Cloud sync was disabled because this account isn't connected to the Plexcord Cloud App. You can enable it again by connecting this account in Cloud Settings. (note: it will store your preferences separately)",
+                color: "var(--yellow-360)",
+                onClick: () => SettingsRouter.open("PlexcordCloud")
+            });
+            // Disable cloud sync globally
+            Settings.cloud.authenticated = false;
+            return false;
+        }
 
         if (res.status === 404) {
             cloudSettingsLogger.info("No settings on the cloud");
