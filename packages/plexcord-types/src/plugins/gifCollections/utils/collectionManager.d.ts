@@ -1,0 +1,16 @@
+import { Collection, Gif } from "../types";
+export declare const DATA_COLLECTION_NAME = "gif-collections-collections";
+export declare let cache_collections: Collection[];
+export declare const getCollections: () => Promise<Collection[]>;
+export declare const getCollection: (name: string) => Promise<Collection | undefined>;
+export declare const getCachedCollection: (name: string) => Collection | undefined;
+export declare const createCollection: (name: string, gifs: Gif[]) => Promise<void>;
+export declare const addToCollection: (name: string, gif: Gif) => Promise<void>;
+export declare const renameCollection: (oldName: string, newName: string) => Promise<void>;
+export declare const removeFromCollection: (id: string) => Promise<void>;
+export declare const deleteCollection: (name: string) => Promise<void>;
+export declare const refreshCacheCollection: () => Promise<void>;
+export declare const fixPrefix: (newPrefix: string) => Promise<void>;
+export declare const getItemCollectionNameFromId: (id: string) => string | undefined;
+export declare const getGifById: (id: string) => Gif | undefined;
+export declare const moveGifToCollection: (gifId: string, fromCollection: string, toCollection: string) => Promise<void>;

@@ -1,0 +1,11 @@
+import type { ProfileEffectConfig } from "./profileEffects";
+declare let primaryColor: number | null;
+export declare function usePrimaryColor(initialState: typeof primaryColor): readonly [number | null, (color: typeof primaryColor) => void];
+declare let accentColor: number | null;
+export declare function useAccentColor(initialState: typeof accentColor): readonly [number | null, (color: typeof accentColor) => void];
+declare let profileEffect: ProfileEffectConfig | null;
+export declare function useProfileEffect(initialState: typeof profileEffect): readonly [ProfileEffectConfig | null, (effect: typeof profileEffect) => void];
+declare let showPreview: boolean;
+export declare function useShowPreview(initialState: typeof showPreview): readonly [boolean, (preview: typeof showPreview) => void];
+export declare function profilePreviewHook(props: Record<string, any>): void;
+export {};

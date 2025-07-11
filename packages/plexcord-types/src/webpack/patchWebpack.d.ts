@@ -1,0 +1,12 @@
+import { Patch, PatchReplacement } from "../utils/types";
+import { AnyWebpackRequire } from "./wreq.d";
+export declare const patches: Patch[];
+export declare const SYM_IS_PROXIED_FACTORY: unique symbol;
+export declare const SYM_ORIGINAL_FACTORY: unique symbol;
+export declare const SYM_PATCHED_SOURCE: unique symbol;
+export declare const SYM_PATCHED_BY: unique symbol;
+export declare const allWebpackInstances: Set<AnyWebpackRequire>;
+export declare const patchTimings: Array<[plugin: string, moduleId: PropertyKey, match: PatchReplacement["match"], totalTime: number]>;
+export declare const getBuildNumber: () => number;
+export declare function getFactoryPatchedSource(moduleId: PropertyKey, webpackRequire?: AnyWebpackRequire): string | undefined;
+export declare function getFactoryPatchedBy(moduleId: PropertyKey, webpackRequire?: AnyWebpackRequire): Set<string> | undefined;

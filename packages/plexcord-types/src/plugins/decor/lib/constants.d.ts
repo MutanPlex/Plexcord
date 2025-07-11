@@ -1,0 +1,11 @@
+export declare let BASE_URL: string;
+export declare let API_URL: string;
+export declare let AUTHORIZE_URL: string;
+export declare let CDN_URL: string;
+export declare let CLIENT_ID: string;
+export declare const SKU_ID = "100101099111114";
+export declare const RAW_SKU_ID = "11497119";
+export declare const GUILD_ID = "1096357702931841148";
+export declare const INVITE_KEY = "dXp2SdxDcP";
+export declare const DECORATION_FETCH_COOLDOWN: number;
+export declare function setBaseUrl(baseUrl: string): Promise<void>;

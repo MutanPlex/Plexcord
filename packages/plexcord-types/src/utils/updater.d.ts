@@ -1,0 +1,10 @@
+import { Logger } from "./Logger";
+export declare const UpdateLogger: Logger;
+export declare let isOutdated: boolean;
+export declare let isNewer: boolean;
+export declare let updateError: any;
+export declare let changes: Record<"hash" | "author" | "message", string>[];
+export declare function checkForUpdates(): Promise<boolean>;
+export declare function update(): Promise<boolean>;
+export declare const getRepo: () => Promise<string>;
+export declare function maybePromptToUpdate(confirmMessage: string, checkForDev?: boolean): Promise<void>;
