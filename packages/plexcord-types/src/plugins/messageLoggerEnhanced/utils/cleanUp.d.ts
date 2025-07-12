@@ -9,5 +9,5 @@ export declare function cleanupUserObject(user: User): {
     avatar: string;
     id: string;
     bot: boolean;
-    public_flags: any;
+    public_flags: number;
 };
