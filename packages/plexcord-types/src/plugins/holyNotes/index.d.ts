@@ -1,9 +1,6 @@
 import "./style.css";
 import { NavContextMenuPatchCallback } from "../../api/ContextMenu";
-export declare const User: any;
-export declare const message: any, groupStart: any, cozyMessage: any;
 export declare const MessageType: any;
-export declare const Channel: any;
 declare const _default: {
     name: string;
     description: string;
