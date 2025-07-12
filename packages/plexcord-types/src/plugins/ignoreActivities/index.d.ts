@@ -79,9 +79,9 @@ declare const _default: {
         };
         ignoredActivities: {
             type: OptionType.CUSTOM;
-            description: string;
             default: IgnoredActivity[];
             onChange: typeof recalculateActivities;
+            description: string;
         };
     }, import("../../utils/types").SettingsChecks<{
         importCustomRPC: {
@@ -140,9 +140,9 @@ declare const _default: {
         };
         ignoredActivities: {
             type: OptionType.CUSTOM;
-            description: string;
             default: IgnoredActivity[];
             onChange: typeof recalculateActivities;
+            description: string;
         };
     }>, {}>;
     patches: ({
