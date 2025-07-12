@@ -41,7 +41,7 @@ export default definePlugin({
 
         if (Settings.plugins.USRBG.enabled && Settings.plugins.USRBG.voiceBackground) {
             const USRBG = (Plexcord.Plugins.plugins.USRBG as unknown as iUSRBG);
-            if (USRBG.userHasBackground(participantUserId)) {
+            if (USRBG && USRBG.userHasBackground?.(participantUserId)) {
                 document.querySelectorAll('[class*="background_"]').forEach(element => {
                     (element as HTMLElement).style.backgroundColor = "transparent";
                 });
