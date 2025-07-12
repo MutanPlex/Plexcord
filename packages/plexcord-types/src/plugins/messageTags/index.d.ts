@@ -13,25 +13,27 @@ declare const _default: {
     }[];
     settings: import("../../utils/types").DefinedSettings<{
         clyde: {
+            name: string;
             description: string;
             type: OptionType.BOOLEAN;
             default: true;
         };
         tagsList: {
             type: OptionType.CUSTOM;
-            description: string;
             default: Record<string, Tag>;
+            description: string;
         };
     }, import("../../utils/types").SettingsChecks<{
         clyde: {
+            name: string;
             description: string;
             type: OptionType.BOOLEAN;
             default: true;
         };
         tagsList: {
             type: OptionType.CUSTOM;
-            description: string;
             default: Record<string, Tag>;
+            description: string;
         };
     }>, {}>;
     start(): Promise<void>;
