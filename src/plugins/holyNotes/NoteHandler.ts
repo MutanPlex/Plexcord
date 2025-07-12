@@ -5,17 +5,17 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { makeDummyUser } from "@components/PluginSettings/PluginModal";
 import { ChannelStore, lodash, Toasts, UserStore } from "@webpack/common";
 import { Channel, Message } from "discord-types/general";
 
-import { User } from ".";
 import { Discord, HolyNotes } from "./types";
 import { deleteCacheFromDataStore, DeleteEntireStore, saveCacheToDataStore } from "./utils";
 
 export const noteHandlerCache = new Map();
 
 export default new (class NoteHandler {
-    private _formatNote(channel: Channel, message: Message): HolyNotes.Note {
+    public _formatNote(channel: Channel, message: Message): HolyNotes.Note {
         return {
             id: message.id,
             channel_id: message.channel_id,
@@ -146,7 +146,7 @@ export default new (class NoteHandler {
         for (const notebook in notebooks)
             for (const noteId in notebooks[notebook]) {
                 const note = notebooks[notebook][noteId];
-                const user = UserStore.getUser(note.author.id) ?? new User({ ...note.author });
+                const user = UserStore.getUser(note.author.id) ?? makeDummyUser(note.author);
 
                 Object.assign(notebooks[notebook][noteId].author, {
                     avatar: user.avatar,
