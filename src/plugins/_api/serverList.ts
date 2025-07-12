@@ -34,10 +34,16 @@ export default definePlugin({
         },
         {
             find: ".setGuildsTree(",
-            replacement: {
-                match: /(?<=#{intl::SERVERS}\),gap:"xs",children:)\i\.map\(.{0,50}\.length\)/,
-                replace: "Plexcord.Api.ServerList.renderAll(Plexcord.Api.ServerList.ServerListRenderPosition.In).concat($&)"
-            }
+            replacement: [
+                {
+                    match: /(?<=#{intl::SERVERS}\),gap:"xs",children:)\i\.map\(.{0,50}\.length\)/,
+                    replace: "Plexcord.Api.ServerList.renderAll(Plexcord.Api.ServerList.ServerListRenderPosition.In).concat($&)"
+                },
+                {
+                    match: /lastTargetNode.{0,50}\{\}\)\]/,
+                    replace: "$&.concat(Plexcord.Api.ServerList.renderAll(Plexcord.Api.ServerList.ServerListRenderPosition.Below))"
+                }
+            ]
         }
     ]
 });
