@@ -106,7 +106,6 @@ export default definePlugin({
                 replace: "true"
             }
         },
-
         // Enable experiment embed on sent experiment links
         {
             find: "dev://experiment/",
