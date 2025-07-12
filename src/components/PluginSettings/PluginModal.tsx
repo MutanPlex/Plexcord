@@ -67,7 +67,7 @@ export function makeDummyUser(user: { username: string; id?: string; avatar?: st
         id: user.id ?? generateId(),
         avatar: user.avatar,
         /** To stop discord making unwanted requests... */
-        bot: true,
+        bot: false,
     });
     FluxDispatcher.dispatch({
         type: "USER_UPDATE",
