@@ -426,8 +426,8 @@ export default definePlugin({
         if (m == null || keywordLog.some(e => e.id === m.id))
             return;
 
-        DataStore.get(KEYWORD_LOG_KEY).then(log => {
-            DataStore.set(KEYWORD_LOG_KEY, [...log, JSON.stringify(m)]);
+        DataStore.update(KEYWORD_LOG_KEY, (log: string[] = []) => {
+            return [...log, JSON.stringify(m)];
         });
 
         const thing = createMessageRecord(m);
@@ -443,6 +443,18 @@ export default definePlugin({
 
     deleteKeyword(id) {
         keywordLog = keywordLog.filter(e => e.id !== id);
+
+        DataStore.update(KEYWORD_LOG_KEY, (log: string[] = []) => {
+            return log.filter(entry => {
+                try {
+                    const parsed = JSON.parse(entry);
+                    return parsed.id !== id;
+                } catch {
+                    return true; // Keep invalid entries to avoid data loss
+                }
+            });
+        });
+
         this.onUpdate();
     },
 
