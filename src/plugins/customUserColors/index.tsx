@@ -19,7 +19,7 @@ import { User } from "discord-types/general";
 
 import { SetColorModal } from "./SetColorModal";
 
-export const DATASTORE_KEY = "equicord-customcolors";
+export const DATASTORE_KEY = "plexcord-customcolors";
 export let colors: Record<string, string> = {};
 
 
