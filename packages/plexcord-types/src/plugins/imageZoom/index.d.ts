@@ -45,6 +45,11 @@ export declare const settings: import("../../utils/types").DefinedSettings<{
         default: number;
         stickToMarkers: false;
     };
+    showMetadata: {
+        type: OptionType.BOOLEAN;
+        description: string;
+        default: true;
+    };
 }, import("../../utils/types").SettingsChecks<{
     saveZoomValues: {
         type: OptionType.BOOLEAN;
@@ -86,6 +91,11 @@ export declare const settings: import("../../utils/types").DefinedSettings<{
         markers: number[];
         default: number;
         stickToMarkers: false;
+    };
+    showMetadata: {
+        type: OptionType.BOOLEAN;
+        description: string;
+        default: true;
     };
 }>, {}>;
 declare const _default: {
@@ -152,6 +162,11 @@ declare const _default: {
             default: number;
             stickToMarkers: false;
         };
+        showMetadata: {
+            type: OptionType.BOOLEAN;
+            description: string;
+            default: true;
+        };
     }, import("../../utils/types").SettingsChecks<{
         saveZoomValues: {
             type: OptionType.BOOLEAN;
@@ -194,6 +209,11 @@ declare const _default: {
             default: number;
             stickToMarkers: false;
         };
+        showMetadata: {
+            type: OptionType.BOOLEAN;
+            description: string;
+            default: true;
+        };
     }>, {}>;
     contextMenus: {
         "image-context": NavContextMenuPatchCallback;
@@ -207,8 +227,10 @@ declare const _default: {
         onMouseOut: () => void;
         onMouseDown: (e: React.MouseEvent) => void;
         onMouseUp: () => void;
+        onClick: (e: React.MouseEvent) => void;
         id: any;
     };
+    handleImageClick(e: React.MouseEvent | MouseEvent, instance: any): void;
     renderMagnifier(instance: any): void;
     updateMagnifier(instance: any): void;
     unMountMagnifier(): void;
