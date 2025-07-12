@@ -27,11 +27,7 @@ export default function ReplyNavigator({ replies }: { replies: Message[]; }) {
     React.useEffect(() => {
         // https://stackoverflow.com/a/42234988
         function onMouseDown(event: MouseEvent) {
-            if (
-                ref.current &&
-                event.target instanceof Element &&
-                !ref.current.contains(event.target)
-            ) {
+            if (ref.current && event.target instanceof Element && !ref.current.contains(event.target)) {
                 setVisible(false);
             }
         }
@@ -43,35 +39,25 @@ export default function ReplyNavigator({ replies }: { replies: Message[]; }) {
     }, [ref]);
     return (
         <ErrorBoundary>
-            <div
-                ref={ref}
-                className={
-                    containerStyles.containerBottom + " pc-findreply-div"
-                }
-                style={{
-                    display: visible ? "flex" : "none",
-                    backgroundColor: "var(--background-primary)",
-                    borderRadius: "3vmin",
-                    zIndex: 0,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    paddingLeft: "1em",
-                    paddingRight: "1em",
-                }}
-            >
-                <div className="pc-findreply-content">
-                    <Paginator
-                        currentPage={page}
-                        maxVisiblePages={5}
-                        pageSize={1}
-                        totalCount={replies.length}
-                        onPageChange={processPageChange}
-                    />
-                </div>
-                <ModalCloseButton
-                    className={"pc-findreply-close"}
-                    onClick={() => setVisible(false)}
+            <div ref={ref} className={containerStyles.containerBottom + " pc-findreply-div"} style={{
+                display: visible ? "flex" : "none",
+                backgroundColor: "var(--background-primary)",
+                borderRadius: "3vmin",
+                zIndex: 0,
+                flexDirection: "row",
+                alignItems: "center",
+                paddingLeft: "1em",
+                paddingRight: "1em"
+            }}>
+                <Paginator
+                    className={"pc-findreply-paginator"}
+                    currentPage={page}
+                    maxVisiblePages={5}
+                    pageSize={1}
+                    totalCount={replies.length}
+                    onPageChange={processPageChange}
                 />
+                <ModalCloseButton className={"pc-findreply-close"} onClick={() => setVisible(false)} />
             </div>
         </ErrorBoundary>
     );
@@ -82,7 +68,7 @@ export default function ReplyNavigator({ replies }: { replies: Message[]; }) {
             channelId: replies[page - 1].channel_id,
             messageId: replies[page - 1].id,
             flash: true,
-            jumpType: "INSTANT",
+            jumpType: "INSTANT"
         });
     }
 }
