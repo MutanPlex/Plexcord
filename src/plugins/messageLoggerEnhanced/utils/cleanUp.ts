@@ -112,6 +112,6 @@ export function cleanupUserObject(user: User) {
         avatar: user.avatar,
         id: user.id,
         bot: user.bot,
-        public_flags: typeof user.publicFlags !== "undefined" ? user.publicFlags : (user as any).public_flags
+        public_flags: typeof user.publicFlags !== "undefined" ? user.publicFlags : user.publicFlags
     };
 }
