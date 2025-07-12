@@ -10,8 +10,17 @@ import { findStoreLazy, proxyLazyWebpack } from "@webpack";
 import { Flux, FluxDispatcher, GuildStore } from "@webpack/common";
 import { Guild } from "discord-types/general";
 
+interface IHiddenServersStore {
+    hiddenGuilds: Set<string>;
+    load(): Promise<void>;
+    unload(): void;
+    addHidden(guild: Guild): void;
+    removeHidden(id: string): void;
+    clearHidden(): void;
+    hiddenGuildsDetail(): Guild[];
+}
 
-export const HiddenServersStore = proxyLazyWebpack(() => {
+export const HiddenServersStore: IHiddenServersStore = proxyLazyWebpack(() => {
     const { Store } = Flux;
 
     const SortedGuildStore = findStoreLazy("SortedGuildStore");
