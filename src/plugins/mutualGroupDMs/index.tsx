@@ -25,7 +25,7 @@ import { isNonNullish } from "@utils/guards";
 import { Logger } from "@utils/Logger";
 import definePlugin from "@utils/types";
 import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
-import { Avatar, ChannelStore, Clickable, IconUtils, RelationshipStore, ScrollerThin, useMemo, UserStore } from "@webpack/common";
+import { Avatar, ChannelStore, Clickable, IconUtils, RelationshipStore, ScrollerThin, Text, useMemo, UserStore } from "@webpack/common";
 import { Channel, User } from "discord-types/general";
 import { JSX } from "react";
 
@@ -74,7 +74,7 @@ function renderClickableGDMs(mutualDms: Channel[], onClose: () => void) {
             </Avatar>
             <div className={MutualsListClasses.details}>
                 <div className={MutualsListClasses.name}>{getGroupDMName(c)}</div>
-                <div className={MutualsListClasses.nick}>{c.recipients.length + 1} Members</div>
+                <Text variant="text-xs/medium">{c.recipients.length + 1} Members</Text>
             </div>
         </Clickable>
     ));
@@ -122,7 +122,7 @@ export default definePlugin({
                 },
                 // Make the gap between each item smaller so our tab can fit.
                 {
-                    match: /className:\i\.tabBar/,
+                    match: /type:"top",/,
                     replace: '$&className:"pc-mutual-gdms-modal-v2-tab-bar",'
                 },
             ]
