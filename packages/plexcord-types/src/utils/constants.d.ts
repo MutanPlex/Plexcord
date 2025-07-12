@@ -778,5 +778,13 @@ export declare const PcDevs: Readonly<{
         name: string;
         id: bigint;
     };
+    Campfire: {
+        name: string;
+        id: bigint;
+    };
+    GroupXyz: {
+        name: string;
+        id: bigint;
+    };
 }>;
 export declare const PcDevsById: Record<string, PcDev>;
