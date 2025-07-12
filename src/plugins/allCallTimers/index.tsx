@@ -69,7 +69,7 @@ export const settings = definePluginSettings({
     showWithoutHover: {
         type: OptionType.BOOLEAN,
         description: "Always show the timer without needing to hover",
-        restartNeeded: false,
+        restartNeeded: true,
         default: true
     },
     showRoleColor: {
@@ -154,16 +154,27 @@ export default definePlugin({
     name: "AllCallTimers",
     description: "Add call timer to all users in a server voice channel.",
     authors: [Devs.D3SOX, PcDevs.Max, PcDevs.MutanPlex],
-
     settings,
-
     patches: [
         {
-            find: ".usernameSpeaking]:",
-            replacement: {
-                match: /\i\.getName\((\i)\),/,
-                replace: "$&$self.showInjection($1.id),"
-            }
+            find: ".usernameSpeaking]",
+            predicate: () => !settings.store.showWithoutHover,
+            replacement: [
+                {
+                    match: /(?<=user:(\i).*?)iconGroup,children:\[/,
+                    replace: "$&$self.renderTimer($1.id),"
+                },
+            ]
+        },
+        {
+            find: ".usernameSpeaking]",
+            predicate: () => settings.store.showWithoutHover,
+            replacement: [
+                {
+                    match: /function\(\)\{.+:""(?=.*?userId:(\i))/,
+                    replace: "$&,$self.renderTimer($1.id),"
+                }
+            ]
         }
     ],
 
@@ -266,13 +277,6 @@ export default definePlugin({
         if (settings.store.watchLargeGuilds) {
             this.subscribeToAllGuilds();
         }
-    },
-
-    showInjection(userId: string) {
-        if (!settings.store.showWithoutHover) {
-            return "";
-        }
-        return this.renderTimer(userId);
     },
 
     renderTimer(userId: string) {
