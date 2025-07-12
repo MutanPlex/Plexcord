@@ -19,18 +19,18 @@ export default definePlugin({
             find: '"UserProfilePopout"',
             replacement: {
                 match: /(?<=user:(\i).*?"PRESS_VIEW_PROFILE".{0,50})return/,
-                replace: "return $self.openUserProfile($1);",
-            },
+                replace: "return $self.openUserProfile($1);"
+            }
         },
         {
             find: '"BotUserProfilePopout"',
             replacement: {
                 match: /(?<=user:(\i).*?"PRESS_VIEW_PROFILE".{0,50})return/,
-                replace: "return $self.openUserProfile($1);",
-            },
+                replace: "return $self.openUserProfile($1);"
+            }
         },
     ],
     openUserProfile(user: User) {
         openUserProfile(user.id);
-    },
+    }
 });
