@@ -67,11 +67,6 @@ export declare const settings: import("../../utils/types").DefinedSettings<{
         type: OptionType.BOOLEAN;
         description: string;
     };
-    hideMessageFromMessageLoggers: {
-        default: false;
-        type: OptionType.BOOLEAN;
-        description: string;
-    };
     ShowLogsButton: {
         default: true;
         type: OptionType.BOOLEAN;
@@ -81,11 +76,6 @@ export declare const settings: import("../../utils/types").DefinedSettings<{
     messagesToDisplayAtOnceInLogs: {
         default: number;
         type: OptionType.NUMBER;
-        description: string;
-    };
-    hideMessageFromMessageLoggersDeletedMessage: {
-        default: string;
-        type: OptionType.STRING;
         description: string;
     };
     messageLimit: {
@@ -221,11 +211,6 @@ export declare const settings: import("../../utils/types").DefinedSettings<{
         type: OptionType.BOOLEAN;
         description: string;
     };
-    hideMessageFromMessageLoggers: {
-        default: false;
-        type: OptionType.BOOLEAN;
-        description: string;
-    };
     ShowLogsButton: {
         default: true;
         type: OptionType.BOOLEAN;
@@ -235,11 +220,6 @@ export declare const settings: import("../../utils/types").DefinedSettings<{
     messagesToDisplayAtOnceInLogs: {
         default: number;
         type: OptionType.NUMBER;
-        description: string;
-    };
-    hideMessageFromMessageLoggersDeletedMessage: {
-        default: string;
-        type: OptionType.STRING;
         description: string;
     };
     messageLimit: {
