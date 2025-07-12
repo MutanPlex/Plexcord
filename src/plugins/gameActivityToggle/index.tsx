@@ -66,6 +66,7 @@ function GameActivityToggleButton() {
 
     return (
         <Button
+            className="pc-game-activity"
             tooltipText={showCurrentGame ? "Disable Game Activity" : "Enable Game Activity"}
             icon={makeIcon(showCurrentGame)}
             role="switch"
