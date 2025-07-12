@@ -14,7 +14,7 @@ declare const _default: {
         }[];
     }[];
     renderSearchInput(): import("react").JSX.Element;
-    renderUser(userId: string, rest: any): import("react").JSX.Element;
+    renderUser(userId: string, buttonElement: any): import("react").JSX.Element;
     getSearchResults(): boolean;
     setUpdateFunc(e: any, setResults: any): true | undefined;
     getFilteredUsers(search: string): string[];
