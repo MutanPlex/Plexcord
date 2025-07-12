@@ -805,6 +805,22 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "Suffocate",
         id: 772601756776923187n
     },
+    seth: {
+        name: "S€th",
+        id: 1273447359417942128n
+    },
+    Campfire: {
+        name: "Campfire",
+        id: 376414446840578081n,
+    },
+    GroupXyz: {
+        name: "GroupXyz",
+        id: 950033410229944331n
+    },
+    omaw: {
+        name: "omaw",
+        id: 1155026301791514655n
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>
