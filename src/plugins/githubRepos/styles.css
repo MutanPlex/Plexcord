@@ -180,5 +180,5 @@
 }
 
 .pc-github-repos-table-star-icon {
-    color: var(--text-warning);
+    color: var(--status-warning);
 }
