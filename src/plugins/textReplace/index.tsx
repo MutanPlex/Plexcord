@@ -66,10 +66,12 @@ const settings = definePluginSettings({
     },
     stringRules: {
         type: OptionType.CUSTOM,
+        description: "Text replacement rules using string matching",
         default: makeEmptyRuleArray(),
     },
     regexRules: {
         type: OptionType.CUSTOM,
+        description: "Text replacement rules using regular expressions",
         default: makeEmptyRuleArray(),
     }
 });
