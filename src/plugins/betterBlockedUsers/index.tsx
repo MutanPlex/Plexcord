@@ -31,8 +31,8 @@ export default definePlugin({
                     replace: ",$1.listType==='blocked'?$self.renderSearchInput():null"
                 },
                 {
-                    match: /(?<=userId:(\i).*?\}\)\]\}\),)(\(.*?\)\}\))/,
-                    replace: "$self.renderUser($1,$2),",
+                    match: /(\}\)\]\}\),)(\(0,i\.jsx\)\(o\.zxk,\{[^}]+\}\))/,
+                    replace: "$1$self.renderUser(n,$2)",
                 },
                 {
                     match: /(?<=\}=(\i).{0,10}(\i).useState\(.{0,1}\);)/,
@@ -65,13 +65,16 @@ export default definePlugin({
             }} value={value}
         ></TextInput>;
     },
-    renderUser(userId: string, rest: any) {
+    renderUser(userId: string, buttonElement: any) {
         return (
-            <div style={{ display: "flex", gap: "8px" }}>
-                <Button color={Button.Colors.PRIMARY} onClick={() => openUserProfile(userId)}>
+            <div style={{ display: "flex", gap: "8px", marginLeft: "auto" }}>
+                <Button
+                    color={Button.Colors.PRIMARY}
+                    onClick={() => openUserProfile(userId)}
+                >
                     {getIntlMessage("SHOW_USER_PROFILE")}
                 </Button>
-                {rest}
+                {buttonElement}
             </div>
         );
     },
