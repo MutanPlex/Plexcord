@@ -1,4 +1,3 @@
-export declare const VERSION = "4.0.0";
 export declare const Native: import("../../utils/types").PluginNative<typeof import("./native")>;
 import "./styles.css";
 import { Logger } from "../../utils/Logger";
@@ -115,11 +114,6 @@ declare const _default: {
             type: import("../../utils/types").OptionType.BOOLEAN;
             description: string;
         };
-        hideMessageFromMessageLoggers: {
-            default: false;
-            type: import("../../utils/types").OptionType.BOOLEAN;
-            description: string;
-        };
         ShowLogsButton: {
             default: true;
             type: import("../../utils/types").OptionType.BOOLEAN;
@@ -129,11 +123,6 @@ declare const _default: {
         messagesToDisplayAtOnceInLogs: {
             default: number;
             type: import("../../utils/types").OptionType.NUMBER;
-            description: string;
-        };
-        hideMessageFromMessageLoggersDeletedMessage: {
-            default: string;
-            type: import("../../utils/types").OptionType.STRING;
             description: string;
         };
         messageLimit: {
@@ -269,11 +258,6 @@ declare const _default: {
             type: import("../../utils/types").OptionType.BOOLEAN;
             description: string;
         };
-        hideMessageFromMessageLoggers: {
-            default: false;
-            type: import("../../utils/types").OptionType.BOOLEAN;
-            description: string;
-        };
         ShowLogsButton: {
             default: true;
             type: import("../../utils/types").OptionType.BOOLEAN;
@@ -283,11 +267,6 @@ declare const _default: {
         messagesToDisplayAtOnceInLogs: {
             default: number;
             type: import("../../utils/types").OptionType.NUMBER;
-            description: string;
-        };
-        hideMessageFromMessageLoggersDeletedMessage: {
-            default: string;
-            type: import("../../utils/types").OptionType.STRING;
             description: string;
         };
         messageLimit: {
