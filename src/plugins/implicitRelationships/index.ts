@@ -130,7 +130,7 @@ export default definePlugin({
         const relationships = RelationshipStore.getMutableRelationships();
         const nonFriendAffinities = userAffinities.filter(a => !RelationshipStore.getRelationshipType(a.otherUserId));
         nonFriendAffinities.forEach(a => {
-            relationships[a.otherUserId] = 5;
+            relationships.set(a.otherUserId, 5);
         });
         RelationshipStore.emitChange();
 
