@@ -58,15 +58,10 @@ declare const _default: {
     }>, {}>;
     patches: ({
         find: string;
-        replacement: ({
+        replacement: {
             match: RegExp;
             replace: string;
-            noWarn: true;
-        } | {
-            match: RegExp;
-            replace: string;
-            noWarn?: undefined;
-        })[];
+        }[];
         predicate: () => boolean;
     } | {
         find: string;
