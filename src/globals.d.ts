@@ -42,6 +42,7 @@ declare global {
     export var IS_REPORTER: boolean;
     export var IS_DISCORD_DESKTOP: boolean;
     export var IS_PLEXTRON: boolean;
+    export var IS_COMPANION_TEST: boolean;
     export var VERSION: string;
     export var BUILD_TIMESTAMP: number;
 
