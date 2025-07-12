@@ -27,6 +27,16 @@ interface Device {
     is_active: boolean;
 }
 
+interface ISpotifyLrcStore {
+    mPosition: number;
+    track: Track | null;
+    device: Device | null;
+    isPlaying: boolean;
+    lyricsInfo: LyricsData | null;
+    fetchingsTracks: string[];
+    position: number;
+}
+
 function showNotif(title: string, body: string) {
     if (settings.store.ShowFailedToasts) {
         showNotification({
@@ -39,7 +49,7 @@ function showNotif(title: string, body: string) {
 }
 
 // steal from spotifycontrols
-export const SpotifyLrcStore = proxyLazyWebpack(() => {
+export const SpotifyLrcStore: ISpotifyLrcStore = proxyLazyWebpack(() => {
     class SpotifyLrcStore extends Flux.Store {
         public mPosition = 0;
         private start = 0;
