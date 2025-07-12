@@ -78,6 +78,11 @@ const settings = definePluginSettings({
         description: "Show all channels automatically",
         type: OptionType.BOOLEAN,
         default: true
+    },
+    mobilePush: {
+        description: "Mute Mobile Push Notifications automatically",
+        type: OptionType.BOOLEAN,
+        default: true
     }
 });
 
@@ -100,6 +105,7 @@ function applyDefaultSettings(guildId: string | null) {
     updateGuildNotificationSettings(guildId,
         {
             muted: settings.store.guild,
+            mobile_push: !settings.store.mobilePush,
             suppress_everyone: settings.store.everyone,
             suppress_roles: settings.store.role,
             mute_scheduled_events: settings.store.events,
