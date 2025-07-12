@@ -7,10 +7,12 @@
 
 import { Logger } from "@utils/Logger";
 import * as Webpack from "@webpack";
-import { getBuildNumber, patchTimings } from "@webpack/patcher";
+import { initWs } from "plugins/devCompanion.dev/initWs";
+import { getBuildNumber, patchTimings } from "webpack/patchWebpack";
 
 import { addPatch, patches } from "../plugins";
 import { loadLazyChunks } from "./loadLazyChunks";
+import { reporterData } from "./reporterData";
 
 async function runReporter() {
     const ReporterLogger = new Logger("Reporter");
@@ -48,6 +50,8 @@ async function runReporter() {
         for (const patch of patches) {
             if (!patch.all) {
                 new Logger("WebpackPatcher").warn(`Patch by ${patch.plugin} found no module (Module id is -): ${patch.find}`);
+                if (IS_COMPANION_TEST)
+                    reporterData.failedPatches.foundNoModule.push(patch);
             }
         }
 
@@ -67,6 +71,7 @@ async function runReporter() {
                 else method = "find";
             }
             if (searchType === "waitForStore") method = "findStore";
+            if (searchType === "waitForStore" && args[0] === "PermissionStore") continue;
 
             let result: any;
             try {
@@ -106,17 +111,23 @@ async function runReporter() {
                 } else {
                     logMessage += `(${args.map(arg => `"${arg}"`).join(", ")})`;
                 }
-
+                if (IS_COMPANION_TEST)
+                    reporterData.failedWebpack[method].push(args.map(a => String(a)));
                 ReporterLogger.log("Webpack Find Fail:", logMessage);
             }
         }
 
+        // if we are running the reporter with companion integration, send the list to vscode as soon as we can
+        if (IS_COMPANION_TEST)
+            initWs();
         ReporterLogger.log("Finished test");
     } catch (e) {
         ReporterLogger.log("A fatal error occurred:", e);
     }
 }
 
+// Imported in webpack for reporterData, wrap to avoid running reporter
 // Run after the Plexcord object has been created.
 // We need to add extra properties to it, and it is only created after all of Plexcord code has ran
-setTimeout(runReporter, 0);
+if (IS_REPORTER)
+    setTimeout(runReporter, 0);
