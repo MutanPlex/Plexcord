@@ -5,16 +5,16 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { makeDummyUser } from "@components/PluginSettings/PluginModal";
 import { copyToClipboard } from "@utils/clipboard";
 import { classes } from "@utils/misc";
 import { ModalProps } from "@utils/modal";
-import { findComponentByCodeLazy } from "@webpack";
+import { findByCodeLazy, findByProps, findComponentByCodeLazy } from "@webpack";
 import { ContextMenuApi, FluxDispatcher, Menu, NavigationRouter, React } from "@webpack/common";
-import { Channel, cozyMessage, groupStart, message, MessageType, User } from "plugins/holyNotes";
+import { MessageType } from "plugins/holyNotes";
 
 import noteHandler from "../../NoteHandler";
 import { HolyNotes } from "../../types";
-
 
 export const RenderMessage = ({
     note,
@@ -29,6 +29,8 @@ export const RenderMessage = ({
     fromDeleteModal: boolean;
     closeModal?: () => void;
 }) => {
+    const { message, groupStart, cozyMessage } = findByProps("cozyMessage");
+    const Channel = findByCodeLazy("computeLurkerPermissionsAllowList(){");
     const ChannelMessage = findComponentByCodeLazy("Message must not be a thread");
 
     const [isHoldingDelete, setHoldingDelete] = React.useState(false);
@@ -92,7 +94,7 @@ export const RenderMessage = ({
                         Object.assign(
                             { ...note },
                             {
-                                author: new User({ ...note?.author }),
+                                author: makeDummyUser(note?.author),
                                 timestamp: new Date(note?.timestamp),
                                 // @ts-ignore
                                 embeds: note?.embeds?.map((embed: { timestamp: string | number | Date; }) =>
