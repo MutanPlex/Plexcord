@@ -387,7 +387,6 @@ export default definePlugin({
             );
         }, 4 /* just above rich embeds */);
     },
-
     stop() {
         removeMessageAccessory("MessageLinkEmbeds");
     }
