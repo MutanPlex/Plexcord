@@ -60,6 +60,7 @@ export const settings = definePluginSettings({
     },
     userBasedCategoryList: {
         type: OptionType.CUSTOM,
+        description: "User-based category list for pinned DMs",
         default: {} as Record<string, Category[]>
     }
 });
