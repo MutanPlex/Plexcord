@@ -106,4 +106,3 @@ export async function exportLogs() {
         DiscordNative.fileManager.saveWithDialog(data, filename);
     }
 }
-
