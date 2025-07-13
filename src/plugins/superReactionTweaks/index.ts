@@ -65,6 +65,7 @@ export default definePlugin({
     },
 
     get shouldSuperReactByDefault() {
-        return settings.store.superReactByDefault && UserStore.getCurrentUser().premiumType != null;
+        // @ts-ignore
+        return settings.store.superReactByDefault && (UserStore.getCurrentUser()?._realPremiumType ?? UserStore.getCurrentUser().premiumType != null);
     }
 });
