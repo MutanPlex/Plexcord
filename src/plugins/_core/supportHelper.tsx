@@ -321,7 +321,7 @@ export default definePlugin({
 
         return (
             <Card className={`pc-warning-card ${Margins.top8}`}>
-                Please do not private message Vencord plugin developers for support!
+                Please do not private message Plexcord plugin developers for support!
                 <br />
                 Instead, use the Plexcord support channel: {Parser.parse("https://discord.com/channels/1342668210331324476/1344043206286905364")}
                 {!ChannelStore.getChannel(SUPPORT_CHANNEL_ID) && " (Click the link to join)"}
