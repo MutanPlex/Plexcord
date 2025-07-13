@@ -8,12 +8,12 @@
 import { type NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { Notifications } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
+import type { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { getCurrentChannel } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { ChannelActionCreators, ChannelStore, Menu, MessageStore, NavigationRouter, PresenceStore, UserStore, WindowStore } from "@webpack/common";
-import type { Message } from "discord-types/general";
 import { JSX } from "react";
 
 interface IMessageCreate {
