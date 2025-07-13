@@ -5,8 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { Message } from "@plexcord/discord-types";
 import { MessageStore, SnowflakeUtils } from "@webpack/common";
-import { Message } from "discord-types/general";
 
 import { settings } from "../index";
 import { Gif } from "../types";
