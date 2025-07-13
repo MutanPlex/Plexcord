@@ -9,10 +9,10 @@
 import * as DataStore from "@api/DataStore";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
+import { User } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType, Plugin } from "@utils/types";
 import { findStoreLazy } from "@webpack";
-import { User } from "discord-types/general";
 
 import style from "./style.css?managed";
 
