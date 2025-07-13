@@ -1,0 +1,13 @@
+.pc-sp-disabled {
+    opacity: 0.5;
+}
+
+.pc-sp-item:hover {
+    background-color: var(--menu-item-default-hover-bg) !important;
+    color: var(--white) !important;
+}
+
+.pc-sp-icon {
+    transform: rotate(45deg);
+    margin-top: 4px;
+}
