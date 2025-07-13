@@ -94,7 +94,7 @@ function getTypeAndChannelId({ channelId, oldChannelId }: VoiceState, isMe: bool
 function playSample(tempSettings: any, type: string) {
     const s = Object.assign({}, settings.plain, tempSettings);
     const currentUser = UserStore.getCurrentUser();
-    const myGuildId = SelectedGuildStore.getGuildId();
+    const myGuildId = SelectedGuildStore.getGuildId()!;
 
     speak(formatText(
         s[type + "Message"],
@@ -116,7 +116,7 @@ export default definePlugin({
 
     flux: {
         VOICE_STATE_UPDATES({ voiceStates }: { voiceStates: VoiceState[]; }) {
-            const myGuildId = SelectedGuildStore.getGuildId();
+            const myGuildId = SelectedGuildStore.getGuildId()!;
             const myChanId = SelectedChannelStore.getVoiceChannelId();
             const myId = UserStore.getCurrentUser().id;
 
