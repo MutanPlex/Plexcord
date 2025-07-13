@@ -18,7 +18,7 @@
 */
 
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Channel, User } from "discord-types/general/index.js";
+import { Channel, User } from "@plexcord/discord-types/";
 import { JSX } from "react";
 
 export interface DecoratorProps {
