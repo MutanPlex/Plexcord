@@ -26,13 +26,19 @@ import { React, useEffect, useState } from "@webpack/common";
 
 let lastState = false;
 
+export { lastState };
+
 const settings = definePluginSettings({
     persistState: {
-        type: OptionType.BOOLEAN,
-        description: "Whether to persist the state of the silent message toggle when changing channels",
-        default: false,
-        onChange(newValue: boolean) {
-            if (newValue === false) lastState = false;
+        type: OptionType.SELECT,
+        description: "How to persist the silent message toggle state",
+        options: [
+            { label: "Don't persist (reset on channel change)", value: "none", default: true },
+            { label: "Persist between channels", value: "channels" },
+            { label: "Persist between channels and restarts", value: "restarts" }
+        ],
+        onChange(newValue: string) {
+            lastState = newValue !== "none" && lastState;
         }
     },
     autoDisable: {
@@ -43,10 +49,10 @@ const settings = definePluginSettings({
 });
 
 const SilentMessageToggle: ChatBarButtonFactory = ({ isMainChat }) => {
-    const [enabled, setEnabled] = useState(lastState);
+    const [enabled, setEnabled] = useState(settings.store.persistState === "restarts" || lastState);
 
     function setEnabledValue(value: boolean) {
-        if (settings.store.persistState) lastState = value;
+        if (settings.store.persistState !== "none") lastState = value;
         setEnabled(value);
     }
 
