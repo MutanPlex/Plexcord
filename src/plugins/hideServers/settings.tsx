@@ -31,7 +31,7 @@ export default definePluginSettings({
         description: "Remove hidden servers",
         component: () => {
             const detail = useStateFromStores([HiddenServersStore], () => HiddenServersStore.hiddenGuildsDetail());
-            return <HiddenServersMenu servers={detail} />;
+            return <HiddenServersMenu guilds={detail} />;
         }
     },
     resetHidden: {
