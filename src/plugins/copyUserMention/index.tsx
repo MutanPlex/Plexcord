@@ -6,11 +6,11 @@
  */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import type { Channel, User } from "@plexcord/discord-types";
 import { copyToClipboard } from "@utils/clipboard";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { Menu } from "@webpack/common";
-import type { Channel, User } from "discord-types/general";
 
 const MentionIcon = () => (
     <svg
