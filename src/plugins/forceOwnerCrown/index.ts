@@ -17,10 +17,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { Channel, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { GuildStore } from "@webpack/common";
-import { Channel, User } from "discord-types/general";
 
 export default definePlugin({
     name: "ForceOwnerCrown",
