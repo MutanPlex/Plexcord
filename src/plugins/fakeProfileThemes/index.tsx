@@ -22,13 +22,13 @@ import "./style.css";
 
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import { classes, copyWithToast } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
 import { Button, ColorPicker, Flex, Forms, React, Text, UserProfileStore, UserStore, useState } from "@webpack/common";
-import { User } from "discord-types/general";
 import { ReactElement } from "react";
 import virtualMerge from "virtual-merge";
 
