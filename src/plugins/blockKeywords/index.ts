@@ -7,9 +7,9 @@
 
 
 import { definePluginSettings, Settings } from "@api/Settings";
+import { MessageJSON } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import { MessageJSON } from "discord-types/general";
 
 let blockedKeywords: Array<RegExp>;
 
