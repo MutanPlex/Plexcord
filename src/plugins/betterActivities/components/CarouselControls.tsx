@@ -5,9 +5,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { CarouselControlsProps } from "@plexcord/discord-types";
 import { React, Tooltip } from "@webpack/common";
 
-import { CarouselControlsProps } from "../types";
 import { cl } from "../utils";
 import { Caret } from "./Caret";
 

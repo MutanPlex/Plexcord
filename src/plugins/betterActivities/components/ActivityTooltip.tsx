@@ -6,9 +6,9 @@
  */
 
 import ErrorBoundary from "@components/ErrorBoundary";
+import { ActivityTooltipProps } from "@plexcord/discord-types";
 import { UserStore } from "@webpack/common";
 
-import { ActivityTooltipProps } from "../types";
 import { ActivityView, cl } from "../utils";
 
 export function ActivityTooltip({ activity, application, user }: Readonly<ActivityTooltipProps>) {

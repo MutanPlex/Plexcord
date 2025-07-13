@@ -6,10 +6,10 @@
  */
 
 import { classNameFactory } from "@api/Styles";
+import { Activity, ActivityViewProps, Application, ApplicationIcon } from "@plexcord/discord-types";
 import { findByPropsLazy, findComponentByCodeLazy, findStoreLazy } from "@webpack";
 
 import { settings } from "./settings";
-import { Activity, ActivityViewProps, Application, ApplicationIcon } from "./types";
 
 const ApplicationStore: {
     getApplication: (id: string) => Application | null;

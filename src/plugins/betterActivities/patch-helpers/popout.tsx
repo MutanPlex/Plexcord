@@ -6,12 +6,12 @@
  */
 
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Activity, AllActivitiesProps } from "@plexcord/discord-types";
 import { PresenceStore, React, useEffect, useMemo, UserStore, useState, useStateFromStores } from "@webpack/common";
 import { JSX } from "react";
 
 import { CarouselControls } from "../components/CarouselControls";
 import { settings } from "../settings";
-import { Activity, AllActivitiesProps } from "../types";
 import { ActivityView, getActivityApplication } from "../utils";
 
 export function showAllActivitiesComponent({ activity, user, ...props }: Readonly<AllActivitiesProps>): JSX.Element | null {
