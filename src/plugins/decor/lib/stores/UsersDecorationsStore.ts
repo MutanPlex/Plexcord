@@ -5,10 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { User } from "@plexcord/discord-types";
 import { debounce } from "@shared/debounce";
 import { proxyLazy } from "@utils/lazy";
 import { useEffect, useState, zustandCreate } from "@webpack/common";
-import { User } from "discord-types/general";
 
 import { AvatarDecoration } from "../../";
 import { getUsersDecorations } from "../api";
