@@ -19,11 +19,11 @@
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { ScreenshareIcon } from "@components/Icons";
+import { Channel, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { openImageModal } from "@utils/discord";
 import definePlugin from "@utils/types";
 import { Menu } from "@webpack/common";
-import { Channel, User } from "discord-types/general";
 
 import { ApplicationStreamingStore, ApplicationStreamPreviewStore } from "./webpack/stores";
 import { ApplicationStream, Stream } from "./webpack/types/stores";
