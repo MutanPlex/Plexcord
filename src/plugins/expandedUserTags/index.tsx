@@ -9,11 +9,11 @@ import "./styles.css";
 
 import { migratePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { Channel, Message, User } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { getCurrentChannel, getIntlMessage } from "@utils/discord";
 import definePlugin from "@utils/types";
 import { ChannelStore, GuildStore, PermissionsBits, SelectedChannelStore, UserStore } from "@webpack/common";
-import { Channel, Message, User } from "discord-types/general";
 
 import { computePermissions, Tag, tags } from "./consts";
 import { settings } from "./settings";
