@@ -17,10 +17,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import type { Channel, Message } from "@plexcord/discord-types";
 import { Logger } from "@utils/Logger";
 import { MessageStore } from "@webpack/common";
 import { CustomEmoji } from "@webpack/types";
-import type { Channel, Message } from "discord-types/general";
 import type { Promisable } from "type-fest";
 
 const MessageEventsLogger = new Logger("MessageEvents", "#e5c890");
