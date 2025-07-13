@@ -179,7 +179,7 @@ function SettingsAboutComponent() {
                     className={classes(Margins.top8, Margins.bottom8)}
                 />
                 <Forms.FormTitle tag="h3">Preview</Forms.FormTitle>
-                <div className="vc-fpt-preview">
+                <div className="pc-fpt-preview">
                     <ProfileModal
                         user={UserStore.getCurrentUser()}
                         pendingThemeColors={[color1, color2]}
