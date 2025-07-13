@@ -8,6 +8,7 @@
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { definePluginSettings, useSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
+import type { Channel, User } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
@@ -24,7 +25,6 @@ import {
     VoiceStateStore
 } from "@webpack/common";
 import type { VoiceState } from "@webpack/types";
-import type { Channel, User } from "discord-types/general";
 import type { PropsWithChildren, SVGProps } from "react";
 
 const HeaderBarIcon = findComponentByCodeLazy(".HEADER_BAR_BADGE_TOP:", '.iconBadge,"top"');
