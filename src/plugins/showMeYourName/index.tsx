@@ -9,10 +9,10 @@ import "./styles.css";
 
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Message, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { GuildMemberStore, RelationshipStore } from "@webpack/common";
-import { Message, User } from "discord-types/general";
 
 interface UsernameProps {
     author: { nick: string; };
@@ -49,6 +49,11 @@ const settings = definePluginSettings({
         default: false,
         description: "Use friend names in place of usernames (overrides Display Names option if applicable)"
     },
+    showGradient: {
+        type: OptionType.BOOLEAN,
+        default: false,
+        description: "Whether to show gradient for suffix",
+    },
     memberList: {
         type: OptionType.BOOLEAN,
         default: false,
@@ -67,10 +72,11 @@ const settings = definePluginSettings({
         description: "Show usernames in emoji reactions",
         restartNeeded: true
     },
-    showGradient: {
+    userProfilePopout: {
         type: OptionType.BOOLEAN,
         default: false,
-        description: "Whether to show gradient for suffix",
+        description: "Show usernames in user profile popout",
+        restartNeeded: true
     },
 });
 
@@ -97,6 +103,16 @@ export default definePlugin({
             }
         },
         {
+            find: "#{intl::REACTION_TOOLTIP_1}",
+            predicate: () => settings.store.emojiReactions,
+            replacement: [
+                {
+                    match: /\i\.\i\.getName\((\i),null==.{0,15},(\i)\)/,
+                    replace: "$self.getUsername($2,$1)"
+                },
+            ]
+        },
+        {
             find: "._areActivitiesExperimentallyHidden=(",
             predicate: () => settings.store.memberList,
             replacement: {
@@ -109,21 +125,27 @@ export default definePlugin({
             predicate: () => settings.store.voiceChannelList,
             replacement: [
                 {
-                    match: /(?<=children:\[)null!=\i\?\i:\i\.\i\.getName\((\i)\)(?=.*?contextGuildId:(\i))/,
+                    match: /null!=\i\?\i:\i\.\i\.getName\((\i)\)(?=.*?contextGuildId:(\i))/,
                     replace: "$self.getUsername($1,$2)"
                 },
             ]
         },
         {
-            find: "#{intl::REACTION_TOOLTIP_1}",
-            predicate: () => settings.store.emojiReactions,
-            replacement: [
-                {
-                    match: /\i\.\i\.getName\((\i),null==.{0,15},(\i)\)/g,
-                    replace: "$self.getUsername($2,$1)"
-                },
-            ]
+            find: ".hasAvatarForGuild(null==",
+            predicate: () => settings.store.userProfilePopout,
+            replacement: {
+                match: /(?<=user:(\i).{0,15}\}\),nickname:)\i(?=.*?guildId:(null==\i\?void 0:\i\.id))/,
+                replace: "$self.getUsername($1,$2)"
+            }
         },
+        {
+            find: "friendRequestBanner})",
+            predicate: () => settings.store.userProfilePopout,
+            replacement: {
+                match: /(?<=user:(\i).{0,15}guildId:(\i).*?nickname:)\i/,
+                replace: "$self.getUsername($1,$2)"
+            }
+        }
     ],
     settings,
     getUsername,
