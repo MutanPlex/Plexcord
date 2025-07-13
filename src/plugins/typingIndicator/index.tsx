@@ -31,7 +31,6 @@ import { buildSeveralUsers } from "../typingTweaks";
 
 const ThreeDots = findComponentByCodeLazy(".dots,", "dotRadius:");
 const UserSummaryItem = findComponentByCodeLazy("defaultRenderUser", "showDefaultAvatarsForNullUsers");
-
 const TypingStore = findStoreLazy("TypingStore");
 const UserGuildSettingsStore = findStoreLazy("UserGuildSettingsStore");
 
@@ -39,6 +38,7 @@ const enum IndicatorMode {
     Dots = 1 << 0,
     Avatars = 1 << 1
 }
+
 
 function getDisplayName(guildId: string, userId: string) {
     const user = UserStore.getUser(userId);
@@ -57,7 +57,7 @@ function TypingIndicator({ channelId, guildId }: { channelId: string; guildId: s
             return oldKeys.length === currentKeys.length && currentKeys.every(key => old[key] != null);
         }
     );
-    const currentChannelId: string = useStateFromStores([SelectedChannelStore], () => SelectedChannelStore.getChannelId());
+    const currentChannelId = useStateFromStores([SelectedChannelStore], () => SelectedChannelStore.getChannelId());
 
     if (!settings.store.includeMutedChannels) {
         const isChannelMuted = UserGuildSettingsStore.isChannelMuted(guildId, channelId);
