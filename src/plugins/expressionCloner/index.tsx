@@ -20,6 +20,7 @@
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { migratePluginSettings } from "@api/Settings";
 import { CheckedTextInput } from "@components/CheckedTextInput";
+import { Guild } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { getGuildAcronym } from "@utils/discord";
 import { Logger } from "@utils/Logger";
@@ -28,7 +29,6 @@ import { ModalContent, ModalHeader, ModalRoot, openModalLazy } from "@utils/moda
 import definePlugin from "@utils/types";
 import { findByCodeLazy } from "@webpack";
 import { Constants, EmojiStore, FluxDispatcher, Forms, GuildStore, IconUtils, Menu, PermissionsBits, PermissionStore, React, RestAPI, StickerStore, Toasts, Tooltip, UserStore } from "@webpack/common";
-import { Guild } from "discord-types/general";
 import { Promisable } from "type-fest";
 
 const uploadEmoji = findByCodeLazy(".GUILD_EMOJIS(", "EMOJI_UPLOAD_START");
