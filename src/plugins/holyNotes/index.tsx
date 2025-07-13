@@ -1,6 +1,6 @@
 /*
  * Plexcord, a modification for Discord's desktop app
- * Copyright (c) 2024 Vendicated and contributors
+ * Copyright (c) 2022 Vendicated and contributors
  * Copyright (c) 2025 MutanPlex
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-
 
 import "./style.css";
 
@@ -101,7 +100,7 @@ export default definePlugin({
 
     toolbarAction(e) {
         if (Array.isArray(e.toolbar))
-            return e.toolbar.push(
+            return e.toolbar.unshift(
                 <ErrorBoundary noop={true}>
                     <ToolBarHeader />
                 </ErrorBoundary>
