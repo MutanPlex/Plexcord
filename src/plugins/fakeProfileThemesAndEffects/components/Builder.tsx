@@ -5,9 +5,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import type { Guild } from "@plexcord/discord-types";
 import { copyWithToast } from "@utils/misc";
 import { Button, showToast, Switch, UserStore, useState, useToken } from "@webpack/common";
-import type { Guild } from "discord-types/general";
 
 import { buildFPTE } from "../lib/fpte";
 import { useAccentColor, usePrimaryColor, useProfileEffect, useShowPreview } from "../lib/profilePreview";
