@@ -15,11 +15,11 @@
 .pc-st-format-select {
     margin-bottom: 1em;
 
-    --background-modifier-accent: transparent;
+    --border-subtle: transparent;
 }
 
 .pc-st-format-label {
-    --background-modifier-accent: transparent;
+    --border-subtle: transparent;
 }
 
 .pc-st-modal-header {
