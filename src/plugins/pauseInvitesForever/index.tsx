@@ -28,7 +28,7 @@ function showDisableInvites(guildId: string) {
     if (!guild) return false;
 
     return (
-        // @ts-expect-error
+        // @ts-ignore this is never undefined
         !hasGuildFeature(guild, "INVITES_DISABLED") &&
         PermissionStore.getGuildPermissionProps(guild).canManageRoles
     );
