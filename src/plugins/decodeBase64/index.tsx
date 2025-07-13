@@ -112,8 +112,6 @@ export default definePlugin({
     authors: [PcDevs.ThePirateStoner, PcDevs.MutanPlex],
     dependencies: ["MessagePopoverAPI"],
     settings,
-    contextMenus: {
-    },
 
     start() {
         addMessagePopoverButton("DecodeBase64", msg => {
