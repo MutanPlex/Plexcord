@@ -5,9 +5,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { Channel } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
-import { Channel } from "discord-types/general";
 
 export default definePlugin({
     name: "CleanChannelName",
