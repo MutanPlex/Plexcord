@@ -5,10 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { User } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import { openUserProfile } from "@utils/discord";
 import definePlugin from "@utils/types";
-import { User } from "discord-types/general";
 
 export default definePlugin({
     name: "AlwaysExpandProfile",
