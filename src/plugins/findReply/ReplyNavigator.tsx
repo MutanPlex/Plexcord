@@ -6,10 +6,10 @@
  */
 
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Message } from "@plexcord/discord-types";
 import { ModalCloseButton } from "@utils/modal";
 import { findByPropsLazy } from "@webpack";
 import { Paginator, React, useRef, useState } from "@webpack/common";
-import { Message } from "discord-types/general";
 import { MutableRefObject } from "react";
 
 import { jumper } from "./index";
