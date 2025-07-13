@@ -6,11 +6,11 @@
 
 import { showNotification } from "@api/Notifications";
 import { definePluginSettings } from "@api/Settings";
+import { Message } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { saveFile } from "@utils/web";
 import { ChannelStore, Menu, MessageStore, SelectedChannelStore, UserStore } from "@webpack/common";
-import { Message } from "discord-types/general";
 
 const settings = definePluginSettings({
     maxMessages: {
