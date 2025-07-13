@@ -8,18 +8,12 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Link } from "@components/Link";
-import { SelectOption } from "@plexcord/discord-types";
+import { Activity, SelectOption } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { ModalAPI } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
 import { findStoreLazy } from "@webpack";
 import { PresenceStore, SettingsRouter, UserStore } from "@webpack/common";
-
-interface Activity {
-    name: string;
-    application_id?: string;
-    type: number;
-}
 
 const settings = definePluginSettings({
     richPresenceTagging: {
