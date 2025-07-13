@@ -24,6 +24,7 @@ import { Settings, useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
+import { User } from "@plexcord/discord-types";
 import { gitRemote } from "@shared/plexcordUserAgent";
 import { proxyLazy } from "@utils/lazy";
 import { Margins } from "@utils/margins";
@@ -32,7 +33,6 @@ import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, M
 import { OptionType, Plugin } from "@utils/types";
 import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
 import { Button, Clickable, FluxDispatcher, Forms, React, Text, Toasts, Tooltip, UserStore, UserUtils } from "@webpack/common";
-import { User } from "discord-types/general";
 import { Constructor } from "type-fest";
 
 import { PluginMeta } from "~plugins";
