@@ -1,5 +1,7 @@
 .pc-smyn-suffix {
     color: var(--text-muted);
+    -webkit-text-fill-color: initial;
+    isolation: isolate;
 }
 
 .pc-smyn-suffix::before {
