@@ -23,11 +23,11 @@ import { get, set } from "@api/DataStore";
 import { updateMessage } from "@api/MessageUpdater";
 import { migratePluginSettings } from "@api/Settings";
 import { ImageInvisible, ImageVisible } from "@components/Icons";
+import { MessageSnapshot } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { classes } from "@utils/misc";
 import definePlugin from "@utils/types";
 import { ChannelStore } from "@webpack/common";
-import { MessageSnapshot } from "@webpack/types";
 
 const KEY = "HideAttachments_HiddenIds";
 
@@ -57,7 +57,7 @@ export default definePlugin({
     }],
 
     renderMessagePopoverButton(msg) {
-        // @ts-ignore - discord-types lags behind discord.
+        // @ts-expect-error - discord-types lags behind discord.
         const hasAttachmentsInShapshots = msg.messageSnapshots.some(
             (snapshot: MessageSnapshot) => snapshot?.message.attachments.length
         );

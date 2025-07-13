@@ -6,16 +6,16 @@
  */
 
 import { Settings } from "@api/Settings";
+import { WebpackRequire } from "@plexcord/discord-types/webpack";
 import { makeLazy } from "@utils/lazy";
 import { Logger } from "@utils/Logger";
 import { interpolateIfDefined } from "@utils/misc";
-import { canonicalizeReplacement } from "@utils/patches";
 import { Patch, PatchReplacement } from "@utils/types";
 import { reporterData } from "debug/reporterData";
 
 import { traceFunctionWithResults } from "../debug/Tracer";
+import { AnyModuleFactory, AnyWebpackRequire, MaybePatchedModuleFactory, PatchedModuleFactory } from "./types";
 import { _blacklistBadModules, _initWebpack, factoryListeners, findModuleFactory, moduleListeners, waitForSubscriptions, wreq } from "./webpack";
-import { AnyModuleFactory, AnyWebpackRequire, MaybePatchedModuleFactory, PatchedModuleFactory, WebpackRequire } from "./wreq.d";
 
 export const patches = [] as Patch[];
 
@@ -107,9 +107,6 @@ define(Function.prototype, "m", {
         }
 
         const fileName = stack.match(/\/assets\/(.+?\.js)/)?.[1];
-        if (fileName?.includes("libdiscore")) {
-            return;
-        }
 
         // Currently, sentry and libdiscore Webpack instances are not meant to be patched.
         // As an extra measure, take advatange of the fact their files include the names and return early if it's one of them.
@@ -550,11 +547,6 @@ function patchFactory(moduleId: PropertyKey, originalFactory: AnyModuleFactory):
                 (replacement.toBuild != null && buildNumber > replacement.toBuild)
             ) {
                 continue;
-            }
-
-            // TODO: remove once Plextron has been updated to use addPatch
-            if (patch.plugin === "Plextron") {
-                canonicalizeReplacement(replacement, "VCDP");
             }
 
             const lastCode = code;

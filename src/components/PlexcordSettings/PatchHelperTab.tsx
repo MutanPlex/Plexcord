@@ -195,7 +195,7 @@ function ReplacementInput({ replacement, setReplacement, replacementError }) {
                 error={error ?? replacementError}
             />
             {!isFunc && (
-                <div className="pc-text-selectable">
+                <div>
                     <Forms.FormTitle className={Margins.top8}>Cheat Sheet</Forms.FormTitle>
                     {Object.entries({
                         "\\i": "Special regex escape sequence that matches identifiers (varnames, classnames, etc.)",

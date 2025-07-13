@@ -70,21 +70,15 @@
     gap: 0.25em;
 }
 
-.pc-plugins-restart-card {
-    padding: 1em;
-    background: var(--info-warning-background);
-    border: 1px solid var(--info-warning-foreground);
-    color: var(--info-warning-foreground);
+.pc-plugins-restart-button {
+    margin-top: 0.5em;
+    background: var(--info-warning-foreground) !important;
+    background-color: var(--background-color) !important;
+    border: 1px solid var(--info-warning-foreground) !important;
 }
 
 .pc-plugins-info-icon:not(:hover, :focus) {
     color: var(--text-muted);
-}
-
-.pc-plugins-restart-button {
-    background-color: var(--background-color) !important;
-    border: 1px solid var(--info-warning-foreground) !important;
-    margin-top: 0.5em;
 }
 
 .pc-plugins-restart-button:hover {

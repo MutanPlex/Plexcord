@@ -5,11 +5,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { ModuleFactory } from "@plexcord/discord-types/webpack";
 import { Logger } from "@utils/Logger";
 import { canonicalizeMatch } from "@utils/patches";
 import * as Webpack from "@webpack";
 import { wreq } from "@webpack";
-import { AnyModuleFactory, ModuleFactory } from "@webpack/wreq.d";
+import { AnyModuleFactory } from "webpack";
 
 export async function loadLazyChunks() {
     const LazyChunkLoaderLogger = new Logger("LazyChunkLoader");

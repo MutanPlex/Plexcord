@@ -17,40 +17,41 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { CommandArgument, CommandContext, CommandOption } from "@plexcord/discord-types";
 import { Logger } from "@utils/Logger";
 import { makeCodeblock } from "@utils/text";
 
 import { sendBotMessage } from "./commandHelpers";
-import { ApplicationCommandInputType, ApplicationCommandOptionType, ApplicationCommandType, Argument, Command, CommandContext, Option } from "./types";
+import { ApplicationCommandInputType, ApplicationCommandOptionType, ApplicationCommandType, PlexcordCommand } from "./types";
 
 export * from "./commandHelpers";
 export * from "./types";
 
-export let BUILT_IN: Command[];
-export const commands = {} as Record<string, Command>;
+export let BUILT_IN: PlexcordCommand[];
+export const commands = {} as Record<string, PlexcordCommand>;
 
 // hack for plugins being evaluated before we can grab these from webpack
-const OptPlaceholder = Symbol("OptionalMessageOption") as any as Option;
-const ReqPlaceholder = Symbol("RequiredMessageOption") as any as Option;
+const OptPlaceholder = Symbol("OptionalMessageOption") as any as CommandOption;
+const ReqPlaceholder = Symbol("RequiredMessageOption") as any as CommandOption;
 
 /**
  * Optional message option named "message" you can use in commands.
  * Used in "tableflip" or "shrug"
  * @see {@link RequiredMessageOption}
  */
-export let OptionalMessageOption: Option = OptPlaceholder;
+export let OptionalMessageOption: CommandOption = OptPlaceholder;
 /**
  * Required message option named "message" you can use in commands.
  * Used in "me"
  * @see {@link OptionalMessageOption}
  */
-export let RequiredMessageOption: Option = ReqPlaceholder;
+export let RequiredMessageOption: CommandOption = ReqPlaceholder;
 
 // Discord's command list has random gaps for some reason, which can cause issues while rendering the commands
 // Add this offset to every added command to keep them unique
 let commandIdOffset: number;
 
-export const _init = function (cmds: Command[]) {
+export const _init = function (cmds: PlexcordCommand[]) {
     try {
         BUILT_IN = cmds;
         OptionalMessageOption = cmds.find(c => (c.untranslatedName || c.displayName) === "shrug")!.options![0];
@@ -62,7 +63,7 @@ export const _init = function (cmds: Command[]) {
     return cmds;
 } as never;
 
-export const _handleCommand = function (cmd: Command, args: Argument[], ctx: CommandContext) {
+export const _handleCommand = function (cmd: PlexcordCommand, args: CommandArgument[], ctx: CommandContext) {
     if (!cmd.isPlexcordCommand)
         return cmd.execute(args, ctx);
 
@@ -93,7 +94,7 @@ export const _handleCommand = function (cmd: Command, args: Argument[], ctx: Com
  * Prepare a Command Option for Discord by filling missing fields
  * @param opt
  */
-export function prepareOption<O extends Option | Command>(opt: O): O {
+export function prepareOption<O extends CommandOption | PlexcordCommand>(opt: O): O {
     opt.displayName ||= opt.name;
     opt.displayDescription ||= opt.description;
     opt.options?.forEach((opt, i, opts) => {
@@ -110,7 +111,7 @@ export function prepareOption<O extends Option | Command>(opt: O): O {
 // Yes, Discord registers individual commands for each subcommand
 // TODO: This probably doesn't support nested subcommands. If that is ever needed,
 // investigate
-function registerSubCommands(cmd: Command, plugin: string) {
+function registerSubCommands(cmd: PlexcordCommand, plugin: string) {
     cmd.options?.forEach(o => {
         if (o.type !== ApplicationCommandOptionType.SUB_COMMAND)
             throw new Error("When specifying sub-command options, all options must be sub-commands.");
@@ -133,7 +134,7 @@ function registerSubCommands(cmd: Command, plugin: string) {
     });
 }
 
-export function registerCommand<C extends Command>(command: C, plugin: string) {
+export function registerCommand<C extends PlexcordCommand>(command: C, plugin: string) {
     if (!BUILT_IN) {
         console.warn(
             "[CommandsAPI]",

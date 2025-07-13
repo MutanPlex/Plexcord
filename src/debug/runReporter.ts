@@ -31,8 +31,8 @@ async function runReporter() {
             }
         }, "Plexcord Reporter");
 
-        // @ts-ignore
-        Plexcord.Webpack._initReporter = function () {
+        // @ts-expect-error
+        Vencord.Webpack._initReporter = function () {
             // initReporter is called in the patched entry point of Discord
             // setImmediate to only start searching for lazy chunks after Discord initialized the app
             setTimeout(() => loadLazyChunks().then(loadLazyChunksResolve), 0);
@@ -89,7 +89,6 @@ async function runReporter() {
                     result = Webpack.mapMangledModule(code, mapper, includeBlacklistedExports);
                     if (Object.keys(result).length !== Object.keys(mapper).length) throw new Error("Webpack Find Fail");
                 } else {
-                    // @ts-ignore
                     result = Webpack[method](...args);
                 }
 

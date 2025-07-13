@@ -5,10 +5,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import type { Guild } from "@plexcord/discord-types";
+import type { Guild, useToken } from "@plexcord/discord-types";
 import { type ModalProps, openModal } from "@utils/modal";
 import { extractAndLoadChunksLazy, findByCodeLazy, findByPropsLazy, findComponentByCodeLazy } from "@webpack";
-import type { useToken } from "@webpack/types";
 import type { ComponentType, FunctionComponent, PropsWithChildren, ReactNode } from "react";
 
 import type { ProfileEffectConfig } from "../lib/profileEffects";

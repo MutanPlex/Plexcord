@@ -66,7 +66,7 @@ function showErrorToast(message: string) {
 
 function ReloadRequiredCard({ required, enabledPlugins, openDisablePluginsModal, resetCheckAndDo, enabledStockPlugins, totalStockPlugins, enabledUserPlugins, totalUserPlugins }) {
     return (
-        <Card className={cl("info-card", { "restart-card": required })}>
+        <Card className={classes(cl("info-card"), required && "vc-warning-card")}>
             {required ? (
                 <>
                     <Forms.FormTitle tag="h5">Restart required!</Forms.FormTitle>

@@ -1,50 +1,17 @@
 /*
  * Plexcord, a modification for Discord's desktop app
- * Copyright (c) 2022 Vendicated and contributors
+ * Copyright (c) 2025 Vendicated and contributors
  * Copyright (c) 2025 MutanPlex
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
-import { Channel, Guild } from "@plexcord/discord-types";
-import { Promisable } from "type-fest";
+import { Channel, Command, Guild } from "@plexcord/discord-types";
+import { ApplicationCommandOptionType } from "@plexcord/discord-types/enums";
+export { ApplicationCommandInputType, ApplicationCommandOptionType, ApplicationCommandType } from "@plexcord/discord-types/enums";
 
 export interface CommandContext {
     channel: Channel;
     guild?: Guild;
-}
-
-export const enum ApplicationCommandOptionType {
-    SUB_COMMAND = 1,
-    SUB_COMMAND_GROUP = 2,
-    STRING = 3,
-    INTEGER = 4,
-    BOOLEAN = 5,
-    USER = 6,
-    CHANNEL = 7,
-    ROLE = 8,
-    MENTIONABLE = 9,
-    NUMBER = 10,
-    ATTACHMENT = 11,
-}
-
-export const enum ApplicationCommandInputType {
-    BUILT_IN = 0,
-    BUILT_IN_TEXT = 1,
-    BUILT_IN_INTEGRATION = 2,
-    BOT = 3,
-    PLACEHOLDER = 4,
 }
 
 export interface Option {
@@ -65,12 +32,6 @@ export interface ChoicesOption {
     displayName?: string;
 }
 
-export const enum ApplicationCommandType {
-    CHAT_INPUT = 1,
-    USER = 2,
-    MESSAGE = 3,
-}
-
 export interface CommandReturnValue {
     content: string;
     /** TODO: implement */
@@ -85,23 +46,7 @@ export interface Argument {
     options: Argument[];
 }
 
-export interface Command {
-    id?: string;
-    applicationId?: string;
-    type?: ApplicationCommandType;
-    inputType?: ApplicationCommandInputType;
-    plugin?: string;
+
+export interface PlexcordCommand extends Command {
     isPlexcordCommand?: boolean;
-
-    name: string;
-    untranslatedName?: string;
-    displayName?: string;
-    description: string;
-    untranslatedDescription?: string;
-    displayDescription?: string;
-
-    options?: Option[];
-    predicate?(ctx: CommandContext): boolean;
-
-    execute(args: Argument[], ctx: CommandContext): Promisable<void | CommandReturnValue>;
 }

@@ -5,9 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { Message } from "@plexcord/discord-types";
+import { FluxStore, Message } from "@plexcord/discord-types";
 import { MessageCache, MessageStore } from "@webpack/common";
-import { FluxStore } from "@webpack/types";
 
 /**
  * Update and re-render a message

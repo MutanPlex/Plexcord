@@ -152,7 +152,9 @@ export default definePlugin({
     renderUsername: ErrorBoundary.wrap(({ author, message, isRepliedMessage, withMentionPrefix, userOverride, guildId }: UsernameProps) => {
         try {
             const user = userOverride ?? message.author;
-            const username = getUsername(user, guildId);
+            let { username } = user;
+            if (settings.store.displayNames)
+                username = user.globalName || username;
 
             const { nick } = author;
             const prefix = withMentionPrefix ? "@" : "";

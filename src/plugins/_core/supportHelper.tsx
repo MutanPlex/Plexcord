@@ -320,8 +320,8 @@ export default definePlugin({
         if (RelationshipStore.isFriend(userId) || (isPluginDev(UserStore.getCurrentUser()?.id) && isPcPluginDev(UserStore.getCurrentUser()?.id))) return null;
 
         return (
-            <Card className={`pc-plugins-restart-card ${Margins.top8}`}>
-                Please do not private message Plexcord plugin developers for support!
+            <Card className={`pc-warning-card ${Margins.top8}`}>
+                Please do not private message Vencord plugin developers for support!
                 <br />
                 Instead, use the Plexcord support channel: {Parser.parse("https://discord.com/channels/1342668210331324476/1344043206286905364")}
                 {!ChannelStore.getChannel(SUPPORT_CHANNEL_ID) && " (Click the link to join)"}

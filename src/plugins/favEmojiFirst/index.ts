@@ -17,10 +17,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { Emoji } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { EmojiStore } from "@webpack/common";
-import { Emoji } from "@webpack/types";
 
 interface EmojiAutocompleteState {
     query?: {

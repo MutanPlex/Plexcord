@@ -5,8 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import type { FluxStore } from "@plexcord/discord-types";
 import { findByCodeLazy, findStoreLazy } from "@webpack";
-import type { FluxStore } from "@webpack/types";
 import type { SnakeCasedProperties } from "type-fest";
 
 export const ProfileEffectStore: FluxStore & {
