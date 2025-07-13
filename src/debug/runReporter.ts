@@ -32,7 +32,7 @@ async function runReporter() {
         }, "Plexcord Reporter");
 
         // @ts-expect-error
-        Vencord.Webpack._initReporter = function () {
+        Plexcord.Webpack._initReporter = function () {
             // initReporter is called in the patched entry point of Discord
             // setImmediate to only start searching for lazy chunks after Discord initialized the app
             setTimeout(() => loadLazyChunks().then(loadLazyChunksResolve), 0);
