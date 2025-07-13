@@ -10,12 +10,12 @@ import "./styles.css";
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { get } from "@api/DataStore";
 import { definePluginSettings, Settings } from "@api/Settings";
+import { User } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import { openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
 import { extractAndLoadChunksLazy } from "@webpack";
 import { Menu } from "@webpack/common";
-import { User } from "discord-types/general";
 
 import { SetColorModal } from "./SetColorModal";
 
