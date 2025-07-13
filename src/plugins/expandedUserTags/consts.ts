@@ -5,10 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { Channel, Guild, Message, User } from "@plexcord/discord-types";
 import { findByCodeLazy, findLazy } from "@webpack";
 import { GuildStore } from "@webpack/common";
 import { RC } from "@webpack/types";
-import { Channel, Guild, Message, User } from "discord-types/general";
 
 import { settings } from "./settings";
 import type { ITag } from "./types";
