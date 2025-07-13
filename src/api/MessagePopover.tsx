@@ -18,8 +18,8 @@
 */
 
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Channel, Message } from "@plexcord/discord-types";
 import { Logger } from "@utils/Logger";
-import { Channel, Message } from "discord-types/general";
 import type { ComponentType, MouseEventHandler } from "react";
 
 const logger = new Logger("MessagePopover");
