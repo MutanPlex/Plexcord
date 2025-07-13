@@ -13,6 +13,7 @@ import {
 } from "@api/Commands";
 import * as DataStore from "@api/DataStore";
 import { addMessagePreSendListener, MessageSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
+import { Message } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { sleep } from "@utils/misc";
 import definePlugin from "@utils/types";
@@ -23,7 +24,6 @@ import {
     useEffect, UserStore,
     UserUtils, useState,
 } from "@webpack/common";
-import { Message } from "discord-types/general";
 const CloudUpload = findLazy(m => m.prototype?.trackUploadFinished);
 
 import { getCurrentChannel } from "@utils/discord";
