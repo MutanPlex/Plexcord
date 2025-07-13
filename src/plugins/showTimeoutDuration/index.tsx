@@ -9,13 +9,13 @@ import "./styles.css";
 
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import { canonicalizeMatch } from "@utils/patches";
 import definePlugin, { OptionType } from "@utils/types";
 import { findComponentLazy } from "@webpack";
 import { ChannelStore, GuildMemberStore, Text, Tooltip } from "@webpack/common";
-import { Message } from "discord-types/general";
 import { FunctionComponent, ReactNode } from "react";
 
 const countDownFilter = canonicalizeMatch("#{intl::MAX_AGE_NEVER}");

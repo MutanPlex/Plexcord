@@ -8,10 +8,10 @@
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { definePluginSettings } from "@api/Settings";
 import { ErrorBoundary } from "@components/index";
+import { Channel } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { FluxDispatcher, Menu, React, UserStore } from "@webpack/common";
-import { Channel } from "discord-types/general";
 
 const ignoredChannelIds = new Set<string>();
 

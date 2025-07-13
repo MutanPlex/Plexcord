@@ -18,10 +18,10 @@
 */
 
 
+import { Message } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
-import { Message } from "discord-types/general";
 
 const PinIcon = findComponentByCodeLazy("1-.06-.63L6.16");
 export default definePlugin({

@@ -18,10 +18,10 @@
 */
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, sendBotMessage } from "@api/Commands";
+import { Channel, Message } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { Forms, MessageActions, MessageStore, UserStore } from "@webpack/common";
-import { Channel, Message } from "discord-types/general";
 
 async function deleteMessages(amount: number, channel: Channel, delay: number = 1500): Promise<number> {
     let deleted = 0;

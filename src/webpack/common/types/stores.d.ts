@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Channel, Guild, Role } from "discord-types/general";
+import { Channel, Guild, Role } from "@plexcord/discord-types";
 
 import { FluxDispatcher, FluxEvents } from "./utils";
 

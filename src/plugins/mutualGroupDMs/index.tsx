@@ -20,13 +20,13 @@
 import "./style.css";
 
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Channel, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { isNonNullish } from "@utils/guards";
 import { Logger } from "@utils/Logger";
 import definePlugin from "@utils/types";
 import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
 import { Avatar, ChannelStore, Clickable, IconUtils, RelationshipStore, ScrollerThin, Text, useMemo, UserStore } from "@webpack/common";
-import { Channel, User } from "discord-types/general";
 import { JSX } from "react";
 
 const SelectedChannelActionCreators = findByPropsLazy("selectPrivateChannel");

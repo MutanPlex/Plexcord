@@ -18,11 +18,11 @@
 */
 
 import ErrorBoundary from "@components/ErrorBoundary";
+import type { Guild, GuildMember } from "@plexcord/discord-types";
 import { getIntlMessage } from "@utils/discord";
 import { classes } from "@utils/misc";
 import { filters, findBulk, proxyLazyWebpack } from "@webpack";
 import { PermissionsBits, Text, Tooltip, useMemo, UserStore } from "@webpack/common";
-import type { Guild, GuildMember } from "discord-types/general";
 
 import { PermissionsSortOrder, settings } from "..";
 import { cl, getGuildPermissionSpecMap, getSortedRoles, sortUserRoles } from "../utils";

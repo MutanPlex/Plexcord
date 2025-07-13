@@ -7,12 +7,12 @@
 
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
+import { User } from "@plexcord/discord-types";
 import { Margins } from "@utils/margins";
 import { classes, copyWithToast } from "@utils/misc";
 import { closeModal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { findComponentByCodeLazy } from "@webpack";
 import { Button, Clickable, Forms, Text, Tooltip, useEffect, UserUtils, useState } from "@webpack/common";
-import { User } from "discord-types/general";
 
 import settings from "../settings";
 import { clearLoggedSounds, getLoggedSounds } from "../store";

@@ -10,12 +10,12 @@ import "styles.css?managed";
 import { DataStore } from "@api/index";
 import { addMessagePreSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { Heart } from "@components/Heart";
+import { Guild, User } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import { openUserProfile } from "@utils/discord";
 import * as Modal from "@utils/modal";
 import definePlugin from "@utils/types";
 import { Avatar, Button, ChannelStore, Clickable, Flex, GuildMemberStore, GuildStore, MessageStore, React, Text, TextArea, TextInput, Tooltip, UserStore, } from "@webpack/common";
-import { Guild, User } from "discord-types/general";
 
 interface IUserExtra {
     isOwner?: boolean;

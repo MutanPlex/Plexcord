@@ -6,8 +6,8 @@
  */
 
 import { makeDummyUser } from "@components/PluginSettings/PluginModal";
+import { Channel, Message } from "@plexcord/discord-types";
 import { ChannelStore, lodash, Toasts, UserStore } from "@webpack/common";
-import { Channel, Message } from "discord-types/general";
 
 import { Discord, HolyNotes } from "./types";
 import { deleteCacheFromDataStore, DeleteEntireStore, saveCacheToDataStore } from "./utils";

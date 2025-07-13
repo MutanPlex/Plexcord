@@ -19,11 +19,11 @@
 
 import { definePluginSettings, Settings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { openUserProfile } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
 import { Avatar, GuildMemberStore, React, RelationshipStore } from "@webpack/common";
-import { User } from "discord-types/general";
 import { getCustomColorString } from "plugins/customUserColors";
 import { PropsWithChildren } from "react";
 

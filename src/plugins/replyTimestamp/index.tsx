@@ -8,11 +8,11 @@
 import "./style.css";
 
 import ErrorBoundary from "@components/ErrorBoundary";
+import type { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findByPropsLazy } from "@webpack";
 import { DateUtils, Timestamp } from "@webpack/common";
-import type { Message } from "discord-types/general";
 import type { HTMLAttributes } from "react";
 
 const MessageClasses = findByPropsLazy("separator", "latin24CompactTimeStamp");

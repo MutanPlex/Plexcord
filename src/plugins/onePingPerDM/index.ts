@@ -6,10 +6,10 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
+import { MessageJSON } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { ChannelStore, ReadStateStore, UserStore } from "@webpack/common";
-import { MessageJSON } from "discord-types/general";
 
 const enum ChannelType {
     DM = 1,

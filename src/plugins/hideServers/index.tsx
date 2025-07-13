@@ -16,10 +16,10 @@ import {
     removeServerListElement,
     ServerListRenderPosition,
 } from "@api/ServerList";
+import { Guild } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { Menu, React, useStateFromStores } from "@webpack/common";
-import { Guild } from "discord-types/general";
 
 import hiddenServersButton from "./components/HiddenServersButton";
 import { HiddenServersStore } from "./HiddenServersStore";

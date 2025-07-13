@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Channel } from "discord-types/general";
+import { Channel } from "@plexcord/discord-types";
 
 export interface ChannelDelete {
     type: "CHANNEL_DELETE";

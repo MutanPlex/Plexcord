@@ -10,11 +10,11 @@ import "./style.css";
 import { ApplicationCommandInputType, ApplicationCommandOptionType, sendBotMessage } from "@api/Commands";
 import { getUserSettingLazy } from "@api/UserSettings";
 import { InfoIcon } from "@components/Icons";
+import { GuildMember } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { getCurrentChannel, getCurrentGuild } from "@utils/discord";
 import definePlugin from "@utils/types";
 import { Forms, GuildMemberStore, GuildRoleStore, Menu, Parser } from "@webpack/common";
-import { GuildMember } from "discord-types/general";
 
 import { showInRoleModal } from "./RoleMembersModal";
 

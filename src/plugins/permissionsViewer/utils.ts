@@ -18,9 +18,9 @@
 */
 
 import { classNameFactory } from "@api/Styles";
+import { Guild, GuildMember, Role } from "@plexcord/discord-types";
 import { findByPropsLazy } from "@webpack";
 import { GuildRoleStore } from "@webpack/common";
-import { Guild, GuildMember, Role } from "discord-types/general";
 
 import { PermissionsSortOrder, settings } from ".";
 import { PermissionType } from "./components/RolesAndUsersPermissions";

@@ -9,10 +9,10 @@ import "./styles.css";
 
 import { definePluginSettings } from "@api/Settings";
 import { ErrorBoundary } from "@components/index";
+import { Channel } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { useStateFromStores } from "@webpack/common";
-import { Channel } from "discord-types/general";
 
 import { ChannelContextPatch, GuildContextPatch, UserContextPatch } from "./components/ctxmenu";
 import { GlobalDefaultComponent, TipsComponent } from "./components/util";

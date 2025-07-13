@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Message, MessageAttachment, MessageJSON, User } from "discord-types/general";
+import { Message, MessageAttachment, MessageJSON, User } from "@plexcord/discord-types";
 
 export interface LoggedAttachment extends MessageAttachment {
     fileExtension?: string | null;

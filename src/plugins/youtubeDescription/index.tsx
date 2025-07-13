@@ -6,10 +6,10 @@
  */
 
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Embed } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { useState } from "@webpack/common";
-import { Embed } from "discord-types/general";
 
 interface ToggleableDescriptionProps { embed: Embed, original: () => any; }
 

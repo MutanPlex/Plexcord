@@ -17,8 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import type * as Stores from "@plexcord/discord-types";
 import { findByCodeLazy, findByPropsLazy, waitFor } from "@webpack";
-import type * as Stores from "discord-types/stores";
 
 import { waitForStore } from "./internal";
 import * as t from "./types/stores";

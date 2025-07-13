@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Channel, Guild, GuildMember, Message, User } from "discord-types/general";
+import { Channel, Guild, GuildMember, Message, User } from "@plexcord/discord-types";
 import type { ReactNode } from "react";
 import { LiteralUnion } from "type-fest";
 

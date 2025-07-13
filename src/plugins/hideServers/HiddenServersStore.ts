@@ -6,9 +6,9 @@
  */
 
 import * as DataStore from "@api/DataStore";
+import { Guild } from "@plexcord/discord-types";
 import { findStoreLazy, proxyLazyWebpack } from "@webpack";
 import { Flux, FluxDispatcher, GuildStore } from "@webpack/common";
-import { Guild } from "discord-types/general";
 
 interface IHiddenServersStore {
     hiddenGuilds: Set<string>;

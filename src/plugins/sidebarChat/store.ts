@@ -5,10 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { Channel, Guild } from "@plexcord/discord-types";
 import { proxyLazy } from "@utils/lazy";
 import { findByPropsLazy } from "@webpack";
 import { ChannelStore, Flux, FluxDispatcher, GuildStore } from "@webpack/common";
-import { Channel, Guild } from "discord-types/general";
 
 // cant destructure, otherwise context is lost
 const DMChannelHandler = findByPropsLazy("getOrEnsurePrivateChannel");

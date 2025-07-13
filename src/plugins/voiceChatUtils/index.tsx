@@ -8,11 +8,10 @@
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { definePluginSettings } from "@api/Settings";
 import { makeRange } from "@components/PluginSettings/components";
+import type { Channel } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { GuildChannelStore, Menu, React, RestAPI, UserStore, VoiceStateStore } from "@webpack/common";
-import type { Channel } from "discord-types/general";
-
 
 async function runSequential<T>(promises: Promise<T>[]): Promise<T[]> {
     const results: T[] = [];

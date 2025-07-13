@@ -18,12 +18,12 @@
 */
 
 import { definePluginSettings, migratePluginSetting } from "@api/Settings";
+import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { runtimeHashMessageKey } from "@utils/intlHash";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { i18n, MessageStore, RelationshipStore } from "@webpack/common";
-import { Message } from "discord-types/general";
 
 interface MessageDeleteProps {
     // Internal intl message for BLOCKED_MESSAGE_COUNT

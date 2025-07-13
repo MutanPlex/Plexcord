@@ -9,12 +9,12 @@ import "./styles.css";
 
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { User } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy } from "@webpack";
 import { React, Text } from "@webpack/common";
-import { User } from "discord-types/general";
 
 import { GitHubReposComponent } from "./components/GitHubReposComponent";
 

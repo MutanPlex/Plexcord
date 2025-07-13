@@ -18,9 +18,9 @@
 */
 
 import { definePluginSettings } from "@api/Settings";
+import type { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import type { Message } from "discord-types/general";
 
 const settings = definePluginSettings({
     userList: {

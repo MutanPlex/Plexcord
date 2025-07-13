@@ -5,9 +5,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { Channel } from "@plexcord/discord-types";
 import { classes } from "@utils/misc";
 import { React } from "@webpack/common";
-import { Channel } from "discord-types/general";
 
 import { cl } from "..";
 import { VoiceChannelLogEntry } from "../logs";
