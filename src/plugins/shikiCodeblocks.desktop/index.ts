@@ -76,7 +76,7 @@ export default definePlugin({
     createHighlighter,
     renderHighlighter: ({ lang, content }: { lang: string; content: string; }) => {
         return createHighlighter({
-            lang: lang?.toLowerCase(),
+            lang,
             content,
             isPreview: false,
         });
