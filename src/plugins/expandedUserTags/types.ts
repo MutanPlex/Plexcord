@@ -5,8 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import type { Channel, Message, User } from "@plexcord/discord-types";
 import type { Permissions } from "@webpack/types";
-import type { Channel, Message, User } from "discord-types/general";
 
 import { tags } from "./consts";
 
