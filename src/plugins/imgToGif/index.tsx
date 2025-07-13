@@ -17,7 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { ApplicationCommandInputType, ApplicationCommandOptionType, Argument, CommandContext, sendBotMessage } from "@api/Commands";
+import { ApplicationCommandInputType, ApplicationCommandOptionType, sendBotMessage } from "@api/Commands";
+import { CommandArgument, CommandContext } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findByPropsLazy } from "@webpack";
@@ -45,7 +46,7 @@ function loadImage(source: File | string) {
     });
 }
 
-async function resolveImage(options: Argument[], ctx: CommandContext): Promise<{ image: File | null; width: number | null; height: number | null; }> {
+async function resolveImage(options: CommandArgument[], ctx: CommandContext): Promise<{ image: File | null; width: number | null; height: number | null; }> {
     let image: File | null = null;
     let width: number | null = null;
     let height: number | null = null;
