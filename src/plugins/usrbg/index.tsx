@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { definePluginSettings } from "@api/Settings";
+import { definePluginSettings, Settings } from "@api/Settings";
 import { Link } from "@components/Link";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -64,7 +64,7 @@ export default definePlugin({
         },
         {
             find: "\"data-selenium-video-tile\":",
-            predicate: () => settings.store.voiceBackground,
+            predicate: () => !Settings.plugins.FullVCPFP.enabled && settings.store.voiceBackground,
             replacement: [
                 {
                     match: /(?<=function\((\i),\i\)\{)(?=let.{20,40},style:)/,
@@ -85,6 +85,9 @@ export default definePlugin({
     getVoiceBackgroundStyles({ className, participantUserId }: any) {
         if (className.includes("tile_")) {
             if (this.userHasBackground(participantUserId)) {
+                document.querySelectorAll('[class*="background_"]').forEach(element => {
+                    (element as HTMLElement).style.backgroundColor = "transparent";
+                });
                 return {
                     backgroundImage: `url(${this.getImageUrl(participantUserId)})`,
                     backgroundSize: "cover",
