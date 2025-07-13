@@ -19,11 +19,11 @@
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { LinkIcon } from "@components/Icons";
+import type { Channel, User } from "@plexcord/discord-types";
 import { copyToClipboard } from "@utils/clipboard";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { Menu } from "@webpack/common";
-import type { Channel, User } from "discord-types/general";
 
 interface UserContextProps {
     channel: Channel;
