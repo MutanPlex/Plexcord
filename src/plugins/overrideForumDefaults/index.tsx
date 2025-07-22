@@ -37,11 +37,11 @@ export default definePlugin({
             find: "getDefaultLayout(){",
             replacement: [
                 {
-                    match: /getDefaultLayout\(\){/,
+                    match: /}getDefaultLayout\(\){/,
                     replace: "$&return $self.getLayout();"
                 },
                 {
-                    match: /getDefaultSortOrder\(\){/,
+                    match: /}getDefaultSortOrder\(\){/,
                     replace: "$&return $self.getSortOrder();"
                 }
             ]
