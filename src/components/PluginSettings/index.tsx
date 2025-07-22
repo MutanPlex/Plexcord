@@ -50,7 +50,7 @@ const { startDependenciesRecursive, startPlugin, stopPlugin } = proxyLazy(() => 
 const cl = classNameFactory("pc-plugins-");
 const logger = new Logger("PluginSettings", "#a6d189");
 
-const InputStyles = findByPropsLazy("inputWrapper", "inputDefault", "error");
+const InputStyles = findByPropsLazy("inputWrapper", "inputError", "error");
 const ButtonClasses = findByPropsLazy("button", "disabled", "enabled");
 
 function showErrorToast(message: string) {
@@ -506,7 +506,7 @@ export default function PluginSettings() {
                         select={onStatusChange}
                         isSelected={v => v === searchValue.status}
                         closeOnSelect={true}
-                        className={InputStyles.inputDefault}
+                        className={InputStyles.input}
                     />
                 </div>
             </div>
