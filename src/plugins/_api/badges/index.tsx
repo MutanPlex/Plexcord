@@ -20,11 +20,11 @@
 import "./fixDiscordBadgePadding.css";
 
 import { _getBadges, BadgePosition, BadgeUserArgs, ProfileBadge } from "@api/Badges";
-import DonateButton from "@components/DonateButton";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Heart } from "@components/Heart";
-import { openContributorModal } from "@components/PluginSettings/ContributorModal";
+import DonateButton from "@components/settings/DonateButton";
+import { openContributorModal } from "@components/settings/tabs/plugins/ContributorModal";
 import { User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
@@ -105,6 +105,13 @@ export default definePlugin({
                     replace: "...($1.onClick&&{onClick:vcE=>$1.onClick(vcE,$1)}),$&"
                 }
             ]
+        },
+        {
+            find: "profileCardUsernameRow,children",
+            replacement: {
+                match: /(?<=accountProfileCard.{0,50}displayProfile:(\i).*?badges:)(\i)/,
+                replace: "[...$self.getBadges($1),...$2]"
+            }
         }
     ],
 
