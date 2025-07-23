@@ -5,10 +5,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import noteHandler from "@plugins/holyNotes/NoteHandler";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
 import { Button, React, Text, TextInput } from "@webpack/common";
-
-import noteHandler from "../../NoteHandler";
 
 export default (props: ModalProps & { onClose: () => void; }) => {
     const [notebookName, setNotebookName] = React.useState("");
