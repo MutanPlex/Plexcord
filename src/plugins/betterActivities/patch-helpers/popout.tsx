@@ -7,12 +7,11 @@
 
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Activity, AllActivitiesProps } from "@plexcord/discord-types";
+import { CarouselControls } from "@plugins/betterActivities/components/CarouselControls";
+import { settings } from "@plugins/betterActivities/settings";
+import { ActivityView, getActivityApplication } from "@plugins/betterActivities/utils";
 import { PresenceStore, React, useEffect, useMemo, UserStore, useState, useStateFromStores } from "@webpack/common";
 import { JSX } from "react";
-
-import { CarouselControls } from "../components/CarouselControls";
-import { settings } from "../settings";
-import { ActivityView, getActivityApplication } from "../utils";
 
 export function showAllActivitiesComponent({ activity, user, ...props }: Readonly<AllActivitiesProps>): JSX.Element | null {
     const currentUser = UserStore.getCurrentUser();
