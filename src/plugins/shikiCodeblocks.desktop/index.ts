@@ -64,11 +64,10 @@ export default definePlugin({
         shiki.destroy();
         clearStyles();
     },
-    settingsAboutComponent: ({ tempSettings }) => createHighlighter({
+    settingsAboutComponent: () => createHighlighter({
         lang: "tsx",
         content: previewExampleText,
-        isPreview: true,
-        tempSettings,
+        isPreview: true
     }),
 
     // exports
