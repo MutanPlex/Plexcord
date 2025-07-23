@@ -6,13 +6,12 @@
  */
 
 import { User } from "@plexcord/discord-types";
+import { AvatarDecoration } from "@plugins/decor";
+import { getUsersDecorations } from "@plugins/decor/lib/api";
+import { DECORATION_FETCH_COOLDOWN, SKU_ID } from "@plugins/decor/lib/constants";
 import { debounce } from "@shared/debounce";
 import { proxyLazy } from "@utils/lazy";
 import { useEffect, useState, zustandCreate } from "@webpack/common";
-
-import { AvatarDecoration } from "../../";
-import { getUsersDecorations } from "../api";
-import { DECORATION_FETCH_COOLDOWN, SKU_ID } from "../constants";
 
 interface UserDecorationData {
     asset: string | null;
