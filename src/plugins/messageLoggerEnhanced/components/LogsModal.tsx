@@ -9,6 +9,11 @@ import { classNameFactory } from "@api/Styles";
 import { Flex } from "@components/Flex";
 import { InfoIcon } from "@components/Icons";
 import { User } from "@plexcord/discord-types";
+import { clearMessagesIDB, DBMessageRecord, deleteMessageIDB, deleteMessagesBulkIDB } from "@plugins/messageLoggerEnhanced/db";
+import { settings } from "@plugins/messageLoggerEnhanced/index";
+import { LoggedMessage, LoggedMessageJSON } from "@plugins/messageLoggerEnhanced/types";
+import { messageJsonToMessageClass } from "@plugins/messageLoggerEnhanced/utils";
+import { importLogs } from "@plugins/messageLoggerEnhanced/utils/settingsUtils";
 import { openUserProfile } from "@utils/discord";
 import { copyWithToast } from "@utils/misc";
 import { closeAllModals, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
@@ -16,11 +21,6 @@ import { LazyComponent } from "@utils/react";
 import { find, findByCode, findByCodeLazy } from "@webpack";
 import { Alerts, Button, ChannelStore, ContextMenuApi, FluxDispatcher, Menu, NavigationRouter, React, TabBar, Text, TextInput, Tooltip, useMemo, useRef, useState } from "@webpack/common";
 
-import { clearMessagesIDB, DBMessageRecord, deleteMessageIDB, deleteMessagesBulkIDB } from "../db";
-import { settings } from "../index";
-import { LoggedMessage, LoggedMessageJSON } from "../types";
-import { messageJsonToMessageClass } from "../utils";
-import { importLogs } from "../utils/settingsUtils";
 import { useMessages } from "./hooks";
 
 export interface MessagePreviewProps {
