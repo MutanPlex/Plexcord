@@ -18,10 +18,10 @@
 */
 
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Channel, User } from "@plexcord/discord-types/";
+import { Channel, User } from "@plexcord/discord-types";
 import { JSX } from "react";
 
-export interface DecoratorProps {
+interface DecoratorProps {
     type: "guild" | "dm";
     user: User;
     /** only present when this is a DM list item */
