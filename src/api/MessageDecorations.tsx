@@ -18,7 +18,7 @@
 */
 
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Channel, Message } from "@plexcord/discord-types/";
+import { Channel, Message } from "@plexcord/discord-types";
 import { JSX } from "react";
 
 export interface MessageDecorationProps {
