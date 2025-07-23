@@ -28,6 +28,11 @@ export const SUPPORT_CATEGORY_ID = "1344043098581504062";
 export const KNOWN_ISSUES_CHANNEL_ID = "1344056436795379824";
 export const BOT_COMMANDS_CHANNEL_ID = "1342669379669594254";
 
+const platform = navigator.platform.toLowerCase();
+export const IS_WINDOWS = platform.startsWith("win");
+export const IS_MAC = platform.startsWith("mac");
+export const IS_LINUX = platform.startsWith("linux");
+
 export interface Dev {
     name: string;
     id: bigint;
@@ -837,6 +842,10 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "davidkra230",
         id: 652699312631054356n,
     },
+    secp192k1: {
+        name: "secp192k1",
+        id: 477497542205243392n
+    }
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>
