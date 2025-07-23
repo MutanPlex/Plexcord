@@ -6,10 +6,10 @@
  */
 
 import ErrorBoundary from "@components/ErrorBoundary";
+import noteHandler from "@plugins/holyNotes/NoteHandler";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
 import { Button, React, Text } from "@webpack/common";
 
-import noteHandler from "../../NoteHandler";
 import Error from "./Error";
 import { RenderMessage } from "./RenderMessage";
 
