@@ -93,7 +93,7 @@ export default definePlugin({
                 <span>{title}</span>
                 {(savedSession == null || savedSession.isNew) && (
                     <div
-                        className="pc-plugins-badge"
+                        className="pc-addon-badge"
                         style={{
                             backgroundColor: "#ED4245",
                             marginLeft: "2px"
