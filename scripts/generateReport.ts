@@ -43,7 +43,7 @@ let metaData = {
 const browser = await pup.launch({
     headless: true,
     executablePath: process.env.CHROMIUM_BIN,
-    args: ["--no-sandbox"]
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
 });
 
 const page = await browser.newPage();
