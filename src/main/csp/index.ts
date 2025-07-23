@@ -15,7 +15,6 @@ export const ImageSrc = [...ConnectSrc, "img-src"];
 export const CssSrc = ["style-src", "font-src"];
 export const ImageAndCssSrc = [...ImageSrc, ...CssSrc];
 export const ImageScriptsAndCssSrc = [...ImageAndCssSrc, "script-src", "worker-src"];
-export const CSPSrc = ["style-src", "connect-src", "img-src", "frame-src", "font-src", "media-src", "worker-src"];
 
 // Plugins can whitelist their own domains by importing this object in their native.ts
 // script and just adding to it. But generally, you should just edit this file instead
@@ -25,7 +24,6 @@ export const CspPolicies: PolicyMap = {
     "http://127.0.0.1:*": ImageAndCssSrc,
     "localhost:*": ImageAndCssSrc,
     "127.0.0.1:*": ImageAndCssSrc,
-    "*": CSPSrc,
 
     "*.github.io": ImageAndCssSrc, // GitHub pages, used by most themes
     "github.com": ImageAndCssSrc, // GitHub content (stuff uploaded to markdown forms), used by most themes
@@ -68,6 +66,7 @@ export const CspPolicies: PolicyMap = {
     "dearrow-thumb.ajay.app": ImageSrc, // Dearrow Thumbnail CDN
     "usrbg.is-hardly.online": ImageSrc, // USRBG API
     "icons.duckduckgo.com": ImageSrc, // DuckDuckGo Favicon API (Reverse Image Search)
+    "timezone.creations.works": ConnectSrc, // Timezone API
 };
 
 const findHeader = (headers: PolicyMap, headerName: Lowercase<string>) => {
