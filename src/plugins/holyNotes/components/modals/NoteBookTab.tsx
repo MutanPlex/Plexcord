@@ -5,11 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { SvgOverFlowIcon } from "@plugins/holyNotes/components/icons/overFlowIcon";
 import { classes } from "@utils/misc";
 import { findByCode } from "@webpack";
 import { Button, Clickable, Menu, Popout, React, useRef } from "@webpack/common";
-
-import { SvgOverFlowIcon } from "../icons/overFlowIcon";
 
 
 
