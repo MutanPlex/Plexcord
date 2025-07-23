@@ -8,11 +8,11 @@
 import "./style.css";
 
 import { classNameFactory } from "@api/Styles";
+import { ButtonAction } from "@plugins/commandPalette/commands";
 import { closeAllModals, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { React, TextInput, useEffect, useState } from "@webpack/common";
 
 import { settings } from "..";
-import { ButtonAction } from "../commands";
 
 interface MultipleChoiceProps {
     modalProps: ModalProps;
