@@ -18,11 +18,11 @@
 */
 
 import { Settings } from "@api/Settings";
+import { settings } from "@plugins/messageLoggerEnhanced/index";
+import { LoggedMessageJSON } from "@plugins/messageLoggerEnhanced/types";
 import { findStoreLazy } from "@webpack";
 import { ChannelStore, SelectedChannelStore, UserStore } from "@webpack/common";
 
-import { settings } from "../index";
-import { LoggedMessageJSON } from "../types";
 import { findLastIndex, getGuildIdByChannel } from "./misc";
 
 export * from "./cleanUp";

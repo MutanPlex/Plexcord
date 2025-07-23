@@ -18,9 +18,9 @@
 */
 
 import { User } from "@plexcord/discord-types";
+import { LoggedMessageJSON, RefrencedMessage } from "@plugins/messageLoggerEnhanced/types";
 import { MessageStore } from "@webpack/common";
 
-import { LoggedMessageJSON, RefrencedMessage } from "../types";
 import { getGuildIdByChannel, isGhostPinged } from "./index";
 
 export function cleanupMessage(message: any, removeDetails: boolean = true): LoggedMessageJSON {
