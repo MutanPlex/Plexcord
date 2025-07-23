@@ -109,6 +109,7 @@ const buildConfigs = [
             js: readFileSync("browser/userscript.meta.js", "utf-8").replace("%version%", `${VERSION}.${new Date().getTime()}`)
         },
         footer: {
+            // UserScripts get wrapped in an iife, so define Plexcord prop on window that returns our local
             js: "Object.defineProperty(unsafeWindow,'Plexcord',{get:()=>Plexcord});"
         }
     }
