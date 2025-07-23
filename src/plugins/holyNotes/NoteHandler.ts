@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { makeDummyUser } from "@components/PluginSettings/PluginModal";
+import { makeDummyUser } from "@components/settings/tabs/plugins/PluginModal";
 import { Channel, Message } from "@plexcord/discord-types";
 import { ChannelStore, lodash, Toasts, UserStore } from "@webpack/common";
 
