@@ -5,16 +5,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { makeDummyUser } from "@components/PluginSettings/PluginModal";
+import { makeDummyUser } from "@components/settings/tabs/plugins/PluginModal";
+import noteHandler from "@plugins/holyNotes/NoteHandler";
+import { HolyNotes } from "@plugins/holyNotes/types";
 import { copyToClipboard } from "@utils/clipboard";
 import { classes } from "@utils/misc";
 import { ModalProps } from "@utils/modal";
 import { findByCodeLazy, findByProps, findComponentByCodeLazy } from "@webpack";
 import { ContextMenuApi, FluxDispatcher, Menu, NavigationRouter, React } from "@webpack/common";
 import { MessageType } from "plugins/holyNotes";
-
-import noteHandler from "../../NoteHandler";
-import { HolyNotes } from "../../types";
 
 export const RenderMessage = ({
     note,
