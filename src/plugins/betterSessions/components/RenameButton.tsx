@@ -5,10 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { SessionInfo } from "@plugins/betterSessions/types";
 import { openModal } from "@utils/modal";
 import { Button } from "@webpack/common";
 
-import { SessionInfo } from "../types";
 import { RenameModal } from "./RenameModal";
 
 export function RenameButton({ session, state }: { session: SessionInfo["session"], state: [string, React.Dispatch<React.SetStateAction<string>>]; }) {
