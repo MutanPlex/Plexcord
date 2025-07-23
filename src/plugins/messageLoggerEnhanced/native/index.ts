@@ -14,8 +14,9 @@ import { dialog, IpcMainInvokeEvent, shell } from "electron";
 import { getSettings, saveSettings } from "./settings";
 export * from "./updater";
 
-import { LoggedAttachment } from "../types";
-import { LOGS_DATA_FILENAME } from "../utils/constants";
+import { LoggedAttachment } from "@plugins/messageLoggerEnhanced/types";
+import { LOGS_DATA_FILENAME } from "@plugins/messageLoggerEnhanced/utils/constants";
+
 import { ensureDirectoryExists, getAttachmentIdFromFilename, sleep } from "./utils";
 
 export { getSettings };
