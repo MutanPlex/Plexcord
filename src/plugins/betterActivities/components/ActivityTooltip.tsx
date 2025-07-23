@@ -7,9 +7,8 @@
 
 import ErrorBoundary from "@components/ErrorBoundary";
 import { ActivityTooltipProps } from "@plexcord/discord-types";
+import { ActivityView, cl } from "@plugins/betterActivities/utils";
 import { UserStore } from "@webpack/common";
-
-import { ActivityView, cl } from "../utils";
 
 export function ActivityTooltip({ activity, application, user }: Readonly<ActivityTooltipProps>) {
     const currentUser = UserStore.getCurrentUser();
