@@ -13,6 +13,11 @@
     color: var(--interactive-hover);
 }
 
+.pc-uvs-profile-speaker {
+    width: var(--custom-nickname-icon-size);
+    height: var(--custom-nickname-icon-size);
+}
+
 .pc-uvs-tooltip-container {
     max-width: 300px;
 }

@@ -10,7 +10,7 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { Channel } from "@plexcord/discord-types";
 import { classes } from "@utils/misc";
 import { filters, findByCodeLazy, findByPropsLazy, findComponentByCodeLazy, mapMangledModuleLazy } from "@webpack";
-import { ChannelRouter, ChannelStore, GuildStore, IconUtils, match, P, PermissionsBits, PermissionStore, React, showToast, Text, Toasts, Tooltip, useMemo, UserStore, useStateFromStores, VoiceStateStore } from "@webpack/common";
+import { ChannelRouter, ChannelStore, GuildStore, IconUtils, match, P, PermissionsBits, PermissionStore, React, showToast, Text, Toasts, Tooltip, useMemo, UserStore, UserSummaryItem, useStateFromStores, VoiceStateStore } from "@webpack/common";
 
 const cl = classNameFactory("pc-uvs-");
 
@@ -20,7 +20,6 @@ const { useChannelName } = mapMangledModuleLazy("#{intl::GROUP_DM_ALONE}", {
 });
 const getDMChannelIcon = findByCodeLazy(".getChannelIconURL({");
 
-const UserSummaryItem = findComponentByCodeLazy("defaultRenderUser", "showDefaultAvatarsForNullUsers");
 const Avatar = findComponentByCodeLazy(".status)/2):0");
 const GroupDMAvatars = findComponentByCodeLazy("frontSrc:", "getAvatarURL");
 
@@ -28,6 +27,7 @@ const ActionButtonClasses = findByPropsLazy("actionButton", "highlight");
 
 interface IconProps extends React.ComponentPropsWithoutRef<"div"> {
     size?: number;
+    iconClassName?: string;
 }
 
 function SpeakerIcon(props: IconProps) {
@@ -40,6 +40,7 @@ function SpeakerIcon(props: IconProps) {
             className={classes(cl("speaker"), props.onClick != null ? cl("clickable") : undefined, props.className)}
         >
             <svg
+                className={props.iconClassName}
                 width={props.size}
                 height={props.size}
                 viewBox="0 0 24 24"
@@ -166,7 +167,7 @@ interface VoiceChannelIndicatorProps {
 
 const clickTimers = {} as Record<string, any>;
 
-export const VoiceChannelIndicator = ErrorBoundary.wrap(({ userId, isActionButton, shouldHighlight }: VoiceChannelIndicatorProps) => {
+export const VoiceChannelIndicator = ErrorBoundary.wrap(({ userId, isProfile, isActionButton, shouldHighlight }: VoiceChannelIndicatorProps) => {
     const channelId = useStateFromStores([VoiceStateStore], () => VoiceStateStore.getVoiceStateForUser(userId)?.channelId as string | undefined);
 
     const channel = channelId == null ? undefined : ChannelStore.getChannel(channelId);
@@ -210,8 +211,9 @@ export const VoiceChannelIndicator = ErrorBoundary.wrap(({ userId, isActionButto
             {props => {
                 const iconProps: IconProps = {
                     ...props,
-                    className: classes(isActionButton && ActionButtonClasses.actionButton, shouldHighlight && ActionButtonClasses.highlight),
-                    size: isActionButton ? 20 : undefined,
+                    className: classes(isActionButton && ActionButtonClasses.actionButton, isActionButton && shouldHighlight && ActionButtonClasses.highlight),
+                    iconClassName: classes(isProfile && cl("profile-speaker")),
+                    size: isActionButton ? 20 : 16,
                     onClick
                 };
 
