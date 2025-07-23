@@ -8,9 +8,9 @@
 import "./style.css";
 
 import { classNameFactory } from "@api/Styles";
+import { HiddenServersStore } from "@plugins/hideServers/HiddenServersStore";
 import { Button, GuildStore, useStateFromStores } from "@webpack/common";
 
-import { HiddenServersStore } from "../HiddenServersStore";
 import { openHiddenServersModal } from "./HiddenServersMenu";
 
 const cl = classNameFactory("pc-hideservers-");
