@@ -6,11 +6,11 @@
  */
 
 import type { Guild } from "@plexcord/discord-types";
+import { buildFPTE } from "@plugins/fakeProfileThemesAndEffects/lib/fpte";
+import { useAccentColor, usePrimaryColor, useProfileEffect, useShowPreview } from "@plugins/fakeProfileThemesAndEffects/lib/profilePreview";
 import { copyWithToast } from "@utils/misc";
 import { Button, showToast, Switch, UserStore, useState, useToken } from "@webpack/common";
 
-import { buildFPTE } from "../lib/fpte";
-import { useAccentColor, usePrimaryColor, useProfileEffect, useShowPreview } from "../lib/profilePreview";
 import { BuilderButton, BuilderColorButton, CustomizationSection, openProfileEffectModal, tokens, useAvatarColors } from ".";
 
 export interface BuilderProps {
