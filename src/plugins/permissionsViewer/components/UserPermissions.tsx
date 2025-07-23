@@ -19,13 +19,13 @@
 
 import ErrorBoundary from "@components/ErrorBoundary";
 import type { Guild, GuildMember } from "@plexcord/discord-types";
+import { cl, getGuildPermissionSpecMap, getSortedRoles, sortUserRoles } from "@plugins/permissionsViewer/utils";
 import { getIntlMessage } from "@utils/discord";
 import { classes } from "@utils/misc";
 import { filters, findBulk, proxyLazyWebpack } from "@webpack";
 import { PermissionsBits, Text, Tooltip, useMemo, UserStore } from "@webpack/common";
 
 import { PermissionsSortOrder, settings } from "..";
-import { cl, getGuildPermissionSpecMap, getSortedRoles, sortUserRoles } from "../utils";
 import openRolesAndUsersPermissionsModal, { PermissionType, type RoleOrUserPermission } from "./RolesAndUsersPermissions";
 
 interface UserPermission {
