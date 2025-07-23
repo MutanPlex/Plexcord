@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { images } from "@plugins/loginWithQR/images";
 import { getIntlMessage } from "@utils/discord";
 import {
     ModalContent,
@@ -24,7 +25,6 @@ import {
     useState,
 } from "@webpack/common";
 
-import { images } from "../../images";
 import { cl } from "..";
 
 const { Controller } = findByPropsLazy("Controller");
