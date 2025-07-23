@@ -15,12 +15,11 @@ import definePlugin, { OptionType } from "@utils/types";
 import { GuildMemberStore, RelationshipStore } from "@webpack/common";
 
 interface UsernameProps {
-    author: { nick: string; };
+    author: { nick: string; guildId: string; };
     message: Message;
     withMentionPrefix?: boolean;
     isRepliedMessage: boolean;
     userOverride?: User;
-    guildId: string;
 }
 
 const settings = definePluginSettings({
@@ -98,8 +97,9 @@ export default definePlugin({
         {
             find: '="SYSTEM_TAG"',
             replacement: {
-                match: /(?<=onContextMenu:\i,children:)\i/,
-                replace: "$self.renderUsername(arguments[0])"
+                // The field is named "userName", but as this is unusual casing, the regex also matches username, in case they change it
+                match: /(?<=onContextMenu:\i,children:)\i\?(?=.{0,100}?user[Nn]ame:)/,
+                replace: "$self.renderUsername(arguments[0]),_oldChildren:$&"
             }
         },
         {
@@ -149,17 +149,15 @@ export default definePlugin({
     ],
     settings,
     getUsername,
-    renderUsername: ErrorBoundary.wrap(({ author, message, isRepliedMessage, withMentionPrefix, userOverride, guildId }: UsernameProps) => {
+    renderUsername: ErrorBoundary.wrap(({ author, message, isRepliedMessage, withMentionPrefix, userOverride }: UsernameProps) => {
         try {
             const user = userOverride ?? message.author;
-            let { username } = user;
-            if (settings.store.displayNames)
-                username = user.globalName || username;
+            const username = getUsername(user, author.guildId);
 
             const { nick } = author;
             const prefix = withMentionPrefix ? "@" : "";
 
-            const classes = settings.store.showGradient ? "pc-smyn-suffix" : "pc-smyn-suffix pc-smyn-hide-gradient";
+            const classes = settings.store.showGradient ? "vc-smyn-suffix" : "vc-smyn-suffix vc-smyn-hide-gradient";
 
             if (isRepliedMessage && !settings.store.inReplies || username.toLowerCase() === nick.toLowerCase())
                 return <>{prefix}{nick}</>;
