@@ -6,11 +6,10 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
-import { makeRange } from "@components/PluginSettings/components";
 import type { Channel, Embed, GuildMember, MessageAttachment, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
-import definePlugin, { OptionType, PluginNative, ReporterTestable } from "@utils/types";
+import definePlugin, { makeRange, OptionType, PluginNative, ReporterTestable } from "@utils/types";
 import { findByCodeLazy, findLazy } from "@webpack";
 import { Button, ChannelStore, GuildRoleStore, GuildStore, UserStore } from "@webpack/common";
 
