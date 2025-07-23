@@ -5,11 +5,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { getLanguageColor } from "@plugins/githubRepos/colors";
+import { GitHubRepo } from "@plugins/githubRepos/types";
 import { ModalContent, ModalFooter, ModalHeader, ModalRoot } from "@utils/modal";
 import { Button, Forms, React } from "@webpack/common";
 
-import { getLanguageColor } from "../colors";
-import { GitHubRepo } from "../types";
 import { Star } from "./Star";
 
 interface ReposModalProps {
