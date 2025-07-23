@@ -7,6 +7,7 @@
 
 import { Flex } from "@components/Flex";
 import { CopyIcon } from "@components/Icons";
+import { AvatarStyles, cl, downloadAudio, getEmojiUrl, playSound, SoundLogEntry, User, UserSummaryItem } from "@plugins/soundBoardLogger/utils";
 import { openUserProfile } from "@utils/discord";
 import { Margins } from "@utils/margins";
 import { classes, copyWithToast } from "@utils/misc";
@@ -14,7 +15,6 @@ import { closeModal, ModalContent, ModalRoot, openModal } from "@utils/modal";
 import { Clickable, Forms, Text, Timestamp } from "@webpack/common";
 import moment from "moment";
 
-import { AvatarStyles, cl, downloadAudio, getEmojiUrl, playSound, SoundLogEntry, User, UserSummaryItem } from "../utils";
 import { DownloadIcon, IconWithTooltip, PlayIcon } from "./Icons";
 
 export function openUserModal(item, user, sounds) {
