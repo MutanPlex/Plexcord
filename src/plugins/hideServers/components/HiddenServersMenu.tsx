@@ -7,6 +7,7 @@
 
 import { classNameFactory } from "@api/Styles";
 import { Guild } from "@plexcord/discord-types";
+import { HiddenServersStore } from "@plugins/hideServers/HiddenServersStore";
 import { getGuildAcronym } from "@utils/discord";
 import { classes } from "@utils/misc";
 import {
@@ -21,8 +22,6 @@ import {
 } from "@utils/modal";
 import { findByPropsLazy } from "@webpack";
 import { Button, Forms, IconUtils, Text, useStateFromStores } from "@webpack/common";
-
-import { HiddenServersStore } from "../HiddenServersStore";
 
 const cl = classNameFactory("pc-hideservers-");
 const IconClasses = findByPropsLazy("icon", "acronym", "childWrapper");
