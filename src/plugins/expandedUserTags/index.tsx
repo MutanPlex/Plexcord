@@ -7,7 +7,6 @@
 
 import "./styles.css";
 
-import { migratePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Channel, Message, User } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
@@ -33,7 +32,6 @@ const genTagTypes = () => {
     return obj;
 };
 
-migratePluginSettings("ExpandedUserTags", "MoreUserTags");
 export default definePlugin({
     name: "ExpandedUserTags",
     description: "Adds tags for webhooks and moderative roles (owner, admin, etc.)",
