@@ -6,14 +6,14 @@
  */
 
 import ErrorBoundary from "@components/ErrorBoundary";
+import HelpIcon from "@plugins/holyNotes/components/icons/HelpIcon";
+import noteHandler from "@plugins/holyNotes/NoteHandler";
+import { HolyNotes } from "@plugins/holyNotes/types";
 import { classes } from "@utils/misc";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { findByProps } from "@webpack";
 import { ContextMenuApi, Flex, FluxDispatcher, Menu, React, Text, TextInput } from "@webpack/common";
 
-import noteHandler from "../../NoteHandler";
-import { HolyNotes } from "../../types";
-import HelpIcon from "../icons/HelpIcon";
 import Errors from "./Error";
 import HelpModal from "./HelpModal";
 import ManageNotebookButton from "./ManageNotebookButton";
