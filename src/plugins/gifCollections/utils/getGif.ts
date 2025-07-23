@@ -6,10 +6,10 @@
  */
 
 import { Message } from "@plexcord/discord-types";
+import { settings } from "@plugins/gifCollections/index";
+import { Gif } from "@plugins/gifCollections/types";
 import { MessageStore, SnowflakeUtils } from "@webpack/common";
 
-import { settings } from "../index";
-import { Gif } from "../types";
 import { cleanUrl } from "./cleanUrl";
 import { isAudio } from "./isAudio";
 import { uuidv4 } from "./uuidv4";
