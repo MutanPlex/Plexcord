@@ -1,0 +1,107 @@
+.pc-addon-card {
+    background-color: var(--background-base-lower-alt);
+    color: var(--interactive-active);
+    border-radius: 8px;
+    display: block;
+    height: 100%;
+    padding: 12px;
+    width: 100%;
+    transition: 0.1s ease-out;
+    transition-property: box-shadow, transform, background, opacity;
+    box-sizing: border-box;
+}
+
+.visual-refresh .pc-addon-card {
+    background-color: var(--card-primary-bg);
+    border: 1px solid var(--border-subtle);
+}
+
+.pc-addon-card-disabled {
+    opacity: 0.6;
+}
+
+.pc-addon-card:hover {
+    background-color: var(--background-tertiary);
+    transform: translateY(-1px);
+    box-shadow: var(--elevation-high);
+}
+
+.visual-refresh .pc-addon-card:hover {
+    /* same as non-hover, here to overwrite the non-refresh hover background */
+    background-color: var(--card-primary-bg);
+}
+
+.pc-addon-header {
+    margin-top: auto;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0.5em;
+}
+
+.pc-addon-note {
+    height: 36px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    /* stylelint-disable-next-line property-no-unknown */
+    box-orient: vertical;
+}
+
+.pc-addon-name-author {
+    width: 100%;
+}
+
+.pc-addon-name {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-grow: 1;
+    gap: 8px;
+}
+
+.pc-addon-author {
+    font-size: 0.8em;
+}
+
+.pc-addon-author::before {
+    content: "by ";
+}
+
+.pc-addon-title-container {
+    width: 100%;
+    overflow: hidden;
+    height: 1.25em;
+    position: relative;
+}
+
+.pc-addon-title {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@keyframes pc-addon-title {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(var(--offset));
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.pc-addon-title:hover {
+    overflow: visible;
+    animation: pc-addon-title var(--duration) linear infinite;
+}
