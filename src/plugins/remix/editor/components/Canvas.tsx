@@ -5,11 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { initInput } from "@plugins/remix/editor/input";
+import { bounds } from "@plugins/remix/editor/tools/crop";
+import { heightFromBounds, widthFromBounds } from "@plugins/remix/editor/utils/canvas";
 import { useEffect, useRef } from "@webpack/common";
-
-import { initInput } from "../input";
-import { bounds } from "../tools/crop";
-import { heightFromBounds, widthFromBounds } from "../utils/canvas";
 
 export let canvas: HTMLCanvasElement | null = null;
 export let ctx: CanvasRenderingContext2D | null = null;

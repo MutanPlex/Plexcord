@@ -5,9 +5,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { brushCanvas, render } from "../components/Canvas";
-import { currentSize, ToolDefinition } from "../components/Toolbar";
-import { Mouse } from "../input";
+import { brushCanvas, render } from "@plugins/remix/editor/components/Canvas";
+import { currentSize, ToolDefinition } from "@plugins/remix/editor/components/Toolbar";
+import { Mouse } from "@plugins/remix/editor/input";
 
 export const EraseTool: ToolDefinition = {
     onMouseMove() {

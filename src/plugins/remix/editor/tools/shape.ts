@@ -5,10 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { brushCanvas, render, shapeCanvas } from "../components/Canvas";
-import { ToolDefinition } from "../components/Toolbar";
-import { Mouse } from "../input";
-import { line } from "../utils/canvas";
+import { brushCanvas, render, shapeCanvas } from "@plugins/remix/editor/components/Canvas";
+import { ToolDefinition } from "@plugins/remix/editor/components/Toolbar";
+import { Mouse } from "@plugins/remix/editor/input";
+import { line } from "@plugins/remix/editor/utils/canvas";
 
 export type Shape = "rectangle" | "ellipse" | "line" | "arrow";
 

@@ -5,10 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { brushCanvas, ctx, render } from "../components/Canvas";
-import { currentSize, ToolDefinition } from "../components/Toolbar";
-import { Mouse } from "../input";
-import { line } from "../utils/canvas";
+import { brushCanvas, ctx, render } from "@plugins/remix/editor/components/Canvas";
+import { currentSize, ToolDefinition } from "@plugins/remix/editor/components/Toolbar";
+import { Mouse } from "@plugins/remix/editor/input";
+import { line } from "@plugins/remix/editor/utils/canvas";
 
 export const BrushTool: ToolDefinition = {
     onMouseMove() {
