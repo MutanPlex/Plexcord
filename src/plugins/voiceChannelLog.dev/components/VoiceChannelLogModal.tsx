@@ -6,13 +6,13 @@
  */
 
 import { Channel } from "@plexcord/discord-types";
+import { getVcLogs, vcLogSubscribe } from "@plugins/voiceChannelLog.dev/logs";
 import { classes } from "@utils/misc";
 import { ModalCloseButton, ModalContent, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { findStoreLazy } from "@webpack";
 import { React, ScrollerThin, Text } from "@webpack/common";
 
 import { cl } from "..";
-import { getVcLogs, vcLogSubscribe } from "../logs";
 import { VoiceChannelLogEntryComponent } from "./VoiceChannelLogEntryComponent";
 
 const AccessibilityStore = findStoreLazy("AccessibilityStore");

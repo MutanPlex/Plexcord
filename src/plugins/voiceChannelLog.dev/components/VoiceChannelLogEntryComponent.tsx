@@ -8,12 +8,12 @@
 import "./VoiceChannelLogEntryComponent.css";
 
 import { Channel } from "@plexcord/discord-types";
+import { VoiceChannelLogEntry } from "@plugins/voiceChannelLog.dev/logs";
 import { classes } from "@utils/misc";
 import { React, Timestamp, Tooltip, UserStore } from "@webpack/common";
 import { Util } from "Plexcord";
 
 import { cl } from "..";
-import { VoiceChannelLogEntry } from "../logs";
 import Icon from "./VoiceChannelLogEntryIcons";
 
 export function VoiceChannelLogEntryComponent({ logEntry, channel }: { logEntry: VoiceChannelLogEntry; channel: Channel; }) {

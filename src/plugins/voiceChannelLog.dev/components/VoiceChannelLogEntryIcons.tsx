@@ -6,11 +6,11 @@
  */
 
 import { Channel } from "@plexcord/discord-types";
+import { VoiceChannelLogEntry } from "@plugins/voiceChannelLog.dev/logs";
 import { classes } from "@utils/misc";
 import { React } from "@webpack/common";
 
 import { cl } from "..";
-import { VoiceChannelLogEntry } from "../logs";
 
 export default function Icon({ logEntry, channel, className }: { logEntry: VoiceChannelLogEntry; channel: Channel; className: string; }) {
     // Taken from /assets/7378a83d74ce97d83380.svg
