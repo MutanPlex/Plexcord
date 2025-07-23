@@ -20,13 +20,13 @@
 import { Settings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import type { Channel } from "@plexcord/discord-types";
+import openRolesAndUsersPermissionsModal, { PermissionType, RoleOrUserPermission } from "@plugins/permissionsViewer/components/RolesAndUsersPermissions";
+import { sortPermissionOverwrites } from "@plugins/permissionsViewer/utils";
 import { classes } from "@utils/misc";
 import { formatDuration } from "@utils/text";
 import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
 import { EmojiStore, FluxDispatcher, GuildMemberStore, GuildStore, Parser, PermissionsBits, PermissionStore, SnowflakeUtils, Text, Timestamp, Tooltip, useEffect, useState } from "@webpack/common";
 
-import openRolesAndUsersPermissionsModal, { PermissionType, RoleOrUserPermission } from "../../permissionsViewer/components/RolesAndUsersPermissions";
-import { sortPermissionOverwrites } from "../../permissionsViewer/utils";
 import { cl, settings } from "..";
 
 const enum SortOrderTypes {
