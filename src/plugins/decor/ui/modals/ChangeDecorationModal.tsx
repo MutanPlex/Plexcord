@@ -8,30 +8,27 @@
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { User } from "@plexcord/discord-types";
+import { Decoration, getPresets, Preset } from "@plugins/decor/lib/api";
+import { GUILD_ID, INVITE_KEY } from "@plugins/decor/lib/constants";
+import { useAuthorizationStore } from "@plugins/decor/lib/stores/AuthorizationStore";
+import { useCurrentUserDecorationsStore } from "@plugins/decor/lib/stores/CurrentUserDecorationsStore";
+import { decorationToAvatarDecoration } from "@plugins/decor/lib/utils/decoration";
+import { settings } from "@plugins/decor/settings";
+import { cl, DecorationModalStyles, requireAvatarDecorationModal } from "@plugins/decor/ui";
+import { AvatarDecorationModalPreview } from "@plugins/decor/ui/components";
+import DecorationGridCreate from "@plugins/decor/ui/components/DecorationGridCreate";
+import DecorationGridNone from "@plugins/decor/ui/components/DecorationGridNone";
+import DecorDecorationGridDecoration from "@plugins/decor/ui/components/DecorDecorationGridDecoration";
+import SectionedGridList from "@plugins/decor/ui/components/SectionedGridList";
 import { openInviteModal } from "@utils/discord";
 import { Margins } from "@utils/margins";
 import { classes, copyWithToast } from "@utils/misc";
 import { closeAllModals, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { Queue } from "@utils/Queue";
-import { findComponentByCodeLazy } from "@webpack";
-import { Alerts, Button, FluxDispatcher, Forms, GuildStore, NavigationRouter, Parser, Text, Tooltip, useEffect, UserStore, UserUtils, useState } from "@webpack/common";
+import { Alerts, Button, FluxDispatcher, Forms, GuildStore, NavigationRouter, Parser, Text, Tooltip, useEffect, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
 
-import { Decoration, getPresets, Preset } from "../../lib/api";
-import { GUILD_ID, INVITE_KEY } from "../../lib/constants";
-import { useAuthorizationStore } from "../../lib/stores/AuthorizationStore";
-import { useCurrentUserDecorationsStore } from "../../lib/stores/CurrentUserDecorationsStore";
-import { decorationToAvatarDecoration } from "../../lib/utils/decoration";
-import { settings } from "../../settings";
-import { cl, DecorationModalStyles, requireAvatarDecorationModal } from "../";
-import { AvatarDecorationModalPreview } from "../components";
-import DecorationGridCreate from "../components/DecorationGridCreate";
-import DecorationGridNone from "../components/DecorationGridNone";
-import DecorDecorationGridDecoration from "../components/DecorDecorationGridDecoration";
-import SectionedGridList from "../components/SectionedGridList";
 import { openCreateDecorationModal } from "./CreateDecorationModal";
 import { openGuidelinesModal } from "./GuidelinesModal";
-
-const UserSummaryItem = findComponentByCodeLazy("defaultRenderUser", "showDefaultAvatarsForNullUsers");
 
 function usePresets() {
     const [presets, setPresets] = useState<Preset[]>([]);
