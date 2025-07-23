@@ -7,12 +7,11 @@
 
 import { execFile as cpExecFile, ExecFileOptions } from "node:child_process";
 
+import type { GitResult } from "@plugins/messageLoggerEnhanced/types";
+import { memoize } from "@plugins/messageLoggerEnhanced/utils/memoize";
 import { readdir } from "fs/promises";
 import { join } from "path";
 import { promisify } from "util";
-
-import type { GitResult } from "../types";
-import { memoize } from "../utils/memoize";
 
 const execFile = promisify(cpExecFile);
 
