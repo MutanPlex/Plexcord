@@ -18,10 +18,9 @@
 */
 
 import { definePluginSettings } from "@api/Settings";
-import { makeRange } from "@components/PluginSettings/components";
 import { Channel, Message, User } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
-import definePlugin, { OptionType } from "@utils/types";
+import definePlugin, { makeRange, OptionType } from "@utils/types";
 import { findByPropsLazy, findStore } from "@webpack";
 import { Button, ChannelStore, GuildRoleStore, NavigationRouter, RelationshipStore, SelectedChannelStore, UserStore } from "@webpack/common";
 import { ReactNode } from "react";
