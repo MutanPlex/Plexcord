@@ -1,0 +1,35 @@
+.pc-plugins-setting-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.pc-plugins-setting-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.pc-plugins-setting-inline {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pc-plugins-setting-label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+}
+
+.pc-plugins-setting-title {
+    color: var(--header-primary);
+}
+
+.pc-plugins-setting-description {
+    color: var(--header-secondary);
+}
+
+.pc-plugins-setting-error {
+    color: var(--text-danger);
+}
