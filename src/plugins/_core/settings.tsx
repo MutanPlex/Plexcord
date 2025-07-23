@@ -18,13 +18,7 @@
 */
 
 import { Settings } from "@api/Settings";
-import BackupAndRestoreTab from "@components/PlexcordSettings/BackupAndRestoreTab";
-import CloudTab from "@components/PlexcordSettings/CloudTab";
-import PatchHelperTab from "@components/PlexcordSettings/PatchHelperTab";
-import PlexcordTab from "@components/PlexcordSettings/PlexcordTab";
-import PluginsTab from "@components/PlexcordSettings/PluginsTab";
-import ThemesTab from "@components/PlexcordSettings/ThemesTab";
-import UpdaterTab from "@components/PlexcordSettings/UpdaterTab";
+import { BackupAndRestoreTab, CloudTab, PatchHelperTab, PlexcordTab, PluginsTab, ThemesTab, UpdaterTab } from "@components/settings/tabs";
 import { Devs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
@@ -93,42 +87,49 @@ export default definePlugin({
             {
                 section: "PlexcordSettings",
                 label: "Plexcord",
+                searchableTitles: ["Plexcord"],
                 element: PlexcordTab,
                 className: "pc-settings"
             },
             {
                 section: "PlexcordPlugins",
                 label: "Plugins",
+                searchableTitles: ["Plugins"],
                 element: PluginsTab,
                 className: "pc-plugins"
             },
             {
                 section: "PlexcordThemes",
                 label: "Themes",
+                searchableTitles: ["Themes"],
                 element: ThemesTab,
                 className: "pc-themes"
             },
             !IS_UPDATER_DISABLED && {
                 section: "PlexcordUpdater",
                 label: "Updater",
+                searchableTitles: ["Updater"],
                 element: UpdaterTab,
                 className: "pc-updater"
             },
             {
                 section: "PlexcordCloud",
                 label: "Cloud",
+                searchableTitles: ["Cloud"],
                 element: CloudTab,
                 className: "pc-cloud"
             },
             {
-                section: "PlexcordSettingsSync",
+                section: "settings/tabsSync",
                 label: "Backup & Restore",
+                searchableTitles: ["Backup & Restore"],
                 element: BackupAndRestoreTab,
                 className: "pc-backup-restore"
             },
             IS_DEV && {
                 section: "PlexcordPatchHelper",
                 label: "Patch Helper",
+                searchableTitles: ["Patch Helper"],
                 element: PatchHelperTab,
                 className: "pc-patch-helper"
             },
@@ -214,7 +215,7 @@ export default definePlugin({
     get chromiumVersion() {
         try {
             return PlexcordNative.native.getVersions().chrome
-                // @ts-ignore Typescript will add userAgentData IMMEDIATELY
+                // @ts-expect-error Typescript will add userAgentData IMMEDIATELY
                 || navigator.userAgentData?.brands?.find(b => b.brand === "Chromium" || b.brand === "Google Chrome")?.version
                 || null;
         } catch { // inb4 some stupid browser throws unsupported error for navigator.userAgentData, it's only in chromium
