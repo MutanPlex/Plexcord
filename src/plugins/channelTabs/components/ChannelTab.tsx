@@ -7,12 +7,12 @@
 
 import { classNameFactory } from "@api/Styles";
 import { Channel, Guild, User } from "@plexcord/discord-types";
+import { ChannelTabsProps, CircleQuestionIcon, closeTab, isTabSelected, moveDraggedTabs, moveToTab, openedTabs, settings } from "@plugins/channelTabs/util";
 import { getGuildAcronym, getIntlMessage, getUniqueUsername } from "@utils/discord";
 import { classes } from "@utils/misc";
 import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
 import { Avatar, ChannelStore, ContextMenuApi, GuildStore, PresenceStore, ReadStateStore, Text, TypingStore, useDrag, useDrop, useRef, UserStore, useStateFromStores } from "@webpack/common";
 
-import { ChannelTabsProps, CircleQuestionIcon, closeTab, isTabSelected, moveDraggedTabs, moveToTab, openedTabs, settings } from "../util";
 import { TabContextMenu } from "./ContextMenus";
 
 const ThreeDots = findComponentByCodeLazy(".dots,", "dotRadius:");
