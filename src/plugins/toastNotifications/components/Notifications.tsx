@@ -17,11 +17,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { settings as PluginSettings } from "@plugins/toastNotifications/index";
 import { createRoot, React } from "@webpack/common";
 import type { JSX, ReactNode } from "react";
 import type { Root } from "react-dom/client";
 
-import { settings as PluginSettings } from "../index";
 import NotificationComponent from "./NotificationComponent";
 
 let NotificationQueue: JSX.Element[] = [];
