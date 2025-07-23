@@ -6,14 +6,13 @@
  */
 
 import { classNameFactory } from "@api/Styles";
+import { SoundOverride, SoundPlayer, SoundType } from "@plugins/customSounds/types";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { useForceUpdater } from "@utils/react";
 import { findByCodeLazy, findLazy } from "@webpack";
 import { Button, Card, Forms, Slider, Switch, Tooltip, useRef } from "@webpack/common";
 import { ComponentType, Ref, SyntheticEvent } from "react";
-
-import { SoundOverride, SoundPlayer, SoundType } from "../types";
 
 type FileInput = ComponentType<{
     ref: Ref<HTMLInputElement>;
