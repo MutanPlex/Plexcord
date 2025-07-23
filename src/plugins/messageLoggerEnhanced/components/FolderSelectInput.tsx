@@ -18,11 +18,11 @@
 */
 
 import { classNameFactory } from "@api/Styles";
+import { DEFAULT_IMAGE_CACHE_DIR } from "@plugins/messageLoggerEnhanced/utils/constants";
 import { copyWithToast } from "@utils/misc";
 import { Button, Forms, Toasts } from "@webpack/common";
 
 import { Native, settings } from "..";
-import { DEFAULT_IMAGE_CACHE_DIR } from "../utils/constants";
 
 const cl = classNameFactory("folder-upload");
 
