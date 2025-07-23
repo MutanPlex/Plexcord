@@ -6,11 +6,10 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
+import { ChannelTabsPreview } from "@plugins/channelTabs/components/ChannelTabsContainer";
 import { Logger } from "@utils/Logger";
 import { OptionType } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
-
-import { ChannelTabsPreview } from "../components/ChannelTabsContainer";
 
 export const logger = new Logger("ChannelTabs");
 
