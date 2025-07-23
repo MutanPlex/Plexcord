@@ -165,3 +165,10 @@ export function useFixedTimer({ interval = 1000, initialTime = Date.now() }: Fix
 
     return time;
 }
+
+export function useCleanupEffect(
+    effect: () => void,
+    deps?: React.DependencyList
+): void {
+    useEffect(() => effect, deps);
+}
