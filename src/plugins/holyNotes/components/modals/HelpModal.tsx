@@ -5,12 +5,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import noteHandler from "@plugins/holyNotes/NoteHandler";
+import { downloadNotes, uploadNotes } from "@plugins/holyNotes/utils";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
 import { findByProps } from "@webpack";
 import { Button, Forms, Text } from "@webpack/common";
-
-import noteHandler from "../../NoteHandler";
-import { downloadNotes, uploadNotes } from "../../utils";
 
 export default ({ onClose, ...modalProps }: ModalProps & { onClose: () => void; }) => {
     const { colorStatusGreen } = findByProps("colorStatusGreen");
