@@ -5,13 +5,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { bookmarkFolderColors, bookmarkPlaceholderName, closeOtherTabs, closeTab, closeTabsToTheLeft, closeTabsToTheRight, createTab, hasClosedTabs, isBookmarkFolder, openedTabs, reopenClosedTab, settings, toggleCompactTab } from "@plugins/channelTabs/util";
+import { Bookmark, BookmarkFolder, Bookmarks, ChannelTabsProps, UseBookmarkMethods } from "@plugins/channelTabs/util/types";
 import { getIntlMessage } from "@utils/discord";
 import { Margins } from "@utils/margins";
 import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, openModal } from "@utils/modal";
 import { Button, ChannelStore, FluxDispatcher, Forms, Menu, ReadStateStore, ReadStateUtils, Select, Text, TextInput, useState } from "@webpack/common";
-
-import { bookmarkFolderColors, bookmarkPlaceholderName, closeOtherTabs, closeTab, closeTabsToTheLeft, closeTabsToTheRight, createTab, hasClosedTabs, isBookmarkFolder, openedTabs, reopenClosedTab, settings, toggleCompactTab } from "../util";
-import { Bookmark, BookmarkFolder, Bookmarks, ChannelTabsProps, UseBookmarkMethods } from "../util/types";
 
 export function BasicContextMenu() {
     const { showBookmarkBar } = settings.use(["showBookmarkBar"]);
