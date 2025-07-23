@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { images } from "@plugins/loginWithQR/images";
 import { getIntlMessage } from "@utils/discord";
 import {
     ModalContent,
@@ -26,7 +27,6 @@ import {
 import jsQR, { QRCode } from "jsqr";
 import { MutableRefObject, ReactElement } from "react";
 
-import { images } from "../../images";
 import { cl, QrCodeIcon, Spinner, SpinnerTypes } from "..";
 import openVerifyModal from "./VerifyModal";
 
