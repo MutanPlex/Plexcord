@@ -6,9 +6,9 @@
  */
 
 import { CarouselControlsProps } from "@plexcord/discord-types";
+import { cl } from "@plugins/betterActivities/utils";
 import { React, Tooltip } from "@webpack/common";
 
-import { cl } from "../utils";
 import { Caret } from "./Caret";
 
 export function CarouselControls({ activities, currentActivity, onActivityChange }: CarouselControlsProps) {
