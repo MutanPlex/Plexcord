@@ -6,11 +6,10 @@
  */
 
 import type { Guild, useToken } from "@plexcord/discord-types";
+import type { ProfileEffectConfig } from "@plugins/fakeProfileThemesAndEffects/lib/profileEffects";
 import { type ModalProps, openModal } from "@utils/modal";
 import { extractAndLoadChunksLazy, findByCodeLazy, findByPropsLazy, findComponentByCodeLazy } from "@webpack";
 import type { ComponentType, FunctionComponent, PropsWithChildren, ReactNode } from "react";
-
-import type { ProfileEffectConfig } from "../lib/profileEffects";
 
 export * from "./Builder";
 export * from "./BuilderButton";
