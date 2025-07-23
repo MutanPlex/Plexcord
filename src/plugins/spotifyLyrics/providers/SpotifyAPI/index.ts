@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { LyricsData, Provider } from "../types";
+import { LyricsData, Provider } from "@plugins/spotifyLyrics/providers/types";
 
 interface LyricsAPIResp {
     error: boolean;

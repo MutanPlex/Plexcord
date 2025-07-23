@@ -5,14 +5,13 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { LyricsContextMenu } from "@plugins/spotifyLyrics/components/ctxMenu";
+import { LyricsModal } from "@plugins/spotifyLyrics/components/modal";
+import { cl, NoteSvg, useLyrics } from "@plugins/spotifyLyrics/components/util";
+import { SpotifyLrcStore } from "@plugins/spotifyLyrics/providers/store";
+import settings from "@plugins/spotifyLyrics/settings";
 import { openModal } from "@utils/modal";
 import { ContextMenuApi, React, Text, TooltipContainer, useEffect, useState, useStateFromStores } from "@webpack/common";
-
-import { SpotifyLrcStore } from "../providers/store";
-import settings from "../settings";
-import { LyricsContextMenu } from "./ctxMenu";
-import { LyricsModal } from "./modal";
-import { cl, NoteSvg, useLyrics } from "./util";
 
 function LyricsDisplay() {
     const { ShowMusicNoteOnNoLyrics } = settings.use(["ShowMusicNoteOnNoLyrics"]);

@@ -5,9 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { LyricsData, Provider } from "@plugins/spotifyLyrics/providers/types";
 import { Track } from "plugins/spotifyControls/SpotifyStore";
-
-import { LyricsData, Provider } from "../types";
 
 const baseUrlLrclib = "https://lrclib.net/api/get";
 

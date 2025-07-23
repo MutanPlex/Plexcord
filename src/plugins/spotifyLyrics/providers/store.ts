@@ -6,12 +6,12 @@
  */
 
 import { showNotification } from "@api/Notifications";
+import { getLyrics, lyricFetchers, updateLyrics } from "@plugins/spotifyLyrics/api";
+import settings from "@plugins/spotifyLyrics/settings";
 import { proxyLazyWebpack } from "@webpack";
 import { Flux, FluxDispatcher } from "@webpack/common";
 import { Track } from "plugins/spotifyControls/SpotifyStore";
 
-import { getLyrics, lyricFetchers, updateLyrics } from "../api";
-import settings from "../settings";
 import { romanizeLyrics, translateLyrics } from "./translator";
 import { LyricsData, Provider } from "./types";
 

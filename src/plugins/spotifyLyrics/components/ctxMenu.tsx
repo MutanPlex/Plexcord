@@ -5,11 +5,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { Provider } from "@plugins/spotifyLyrics/providers/types";
 import { copyWithToast } from "@utils/misc";
 import { findComponentByCodeLazy } from "@webpack";
 import { FluxDispatcher, Menu } from "@webpack/common";
 
-import { Provider } from "../providers/types";
 import { useLyrics } from "./util";
 
 const CopyIcon = findComponentByCodeLazy(" 1-.5.5H10a6");
