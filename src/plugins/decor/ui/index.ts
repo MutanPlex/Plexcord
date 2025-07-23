@@ -9,7 +9,7 @@ import { classNameFactory } from "@api/Styles";
 import { extractAndLoadChunksLazy, findByPropsLazy } from "@webpack";
 
 export const cl = classNameFactory("pc-decor-");
-export const DecorationModalStyles = findByPropsLazy("modalFooterShopButton");
+export const DecorationModalStyles = findByPropsLazy("modalPreview", "modalCloseButton", "spinner", "modal");
 
 export const requireAvatarDecorationModal = extractAndLoadChunksLazy([".COLLECTIBLES_SHOP_FULLSCREEN&&"]);
 export const requireCreateStickerModal = extractAndLoadChunksLazy(["stickerInspected]:"]);
