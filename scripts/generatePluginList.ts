@@ -75,44 +75,43 @@ function parseDevs() {
         if (devsDeclaration?.initializer && isCallExpression(devsDeclaration.initializer)) {
             const value = devsDeclaration.initializer.arguments[0];
 
-            if (isSatisfiesExpression(value) && isObjectLiteralExpression(value.expression)) {
-                for (const prop of value.expression.properties) {
-                    const name = (prop.name as Identifier).text;
-                    const value = isPropertyAssignment(prop) ? prop.initializer : prop;
+            if (!isSatisfiesExpression(value) || !isObjectLiteralExpression(value.expression)) throw new Error("Failed to parse devs: not an object literal");
 
-                    if (isObjectLiteralExpression(value)) {
-                        devs[name] = {
-                            name: (getObjectProp(value, "name") as StringLiteral).text,
-                            id: (getObjectProp(value, "id") as BigIntLiteral).text.slice(0, -1)
-                        };
-                    }
-                }
+            for (const prop of value.expression.properties) {
+                const name = (prop.name as Identifier).text;
+                const value = isPropertyAssignment(prop) ? prop.initializer : prop;
+
+                if (!isObjectLiteralExpression(value)) throw new Error(`Failed to parse devs: ${name} is not an object literal`);
+
+                devs[name] = {
+                    name: (getObjectProp(value, "name") as StringLiteral).text,
+                    id: (getObjectProp(value, "id") as BigIntLiteral).text.slice(0, -1)
+                };
             }
         }
 
         const pcDevsDeclaration = child.declarationList.declarations.find(d => hasName(d, "PcDevs"));
         if (pcDevsDeclaration?.initializer && isCallExpression(pcDevsDeclaration.initializer)) {
-            const value = pcDevsDeclaration.initializer.arguments[0];
+            const pcValue = pcDevsDeclaration.initializer.arguments[0];
 
-            if (isSatisfiesExpression(value) && isObjectLiteralExpression(value.expression)) {
-                for (const prop of value.expression.properties) {
-                    const name = (prop.name as Identifier).text;
-                    const value = isPropertyAssignment(prop) ? prop.initializer : prop;
+            if (!isSatisfiesExpression(pcValue) || !isObjectLiteralExpression(pcValue.expression)) throw new Error("Failed to parse Plexcord devs: not an object literal");
 
-                    if (isObjectLiteralExpression(value)) {
-                        pcDevs[name] = {
-                            name: (getObjectProp(value, "name") as StringLiteral).text,
-                            id: (getObjectProp(value, "id") as BigIntLiteral).text.slice(0, -1)
-                        };
-                    }
-                }
+            for (const prop of pcValue.expression.properties) {
+                const name = (prop.name as Identifier).text;
+                const value = isPropertyAssignment(prop) ? prop.initializer : prop;
+
+                if (!isObjectLiteralExpression(value)) throw new Error(`Failed to parse Plexcord devs: ${name} is not an object literal`);
+
+                pcDevs[name] = {
+                    name: (getObjectProp(value, "name") as StringLiteral).text,
+                    id: (getObjectProp(value, "id") as BigIntLiteral).text.slice(0, -1)
+                };
             }
         }
     }
 
-    if (!Object.keys(devs).length && !Object.keys(pcDevs).length) {
-        throw new Error("Could not find Devs or PcDevs constants");
-    }
+    if (Object.keys(devs).length === 0) throw new Error("Failed to parse devs: no devs found");
+    if (Object.keys(pcDevs).length === 0) throw new Error("Failed to parse Plexcord devs: no devs found");
 }
 
 
@@ -160,11 +159,9 @@ async function parseFile(fileName: string) {
                     if (!isArrayLiteralExpression(value)) throw fail("authors is not an array literal");
                     data.authors = value.elements.map(e => {
                         if (!isPropertyAccessExpression(e)) throw fail("authors array contains non-property access expressions");
-                        const authorName = getName(e)!;
-                        const author = devs[authorName] || pcDevs[authorName];
-
-                        if (!author) throw fail(`couldn't look up author ${authorName}`);
-                        return author;
+                        const d = devs[getName(e)!] || pcDevs[getName(e)!];
+                        if (!d) throw fail(`couldn't look up author ${getName(e)!}`);
+                        return d;
                     });
                     break;
                 case "tags":
@@ -201,11 +198,7 @@ async function parseFile(fileName: string) {
             .replace(/\/index\.([jt]sx?)$/, "")
             .replace(/^src\/plugins\//, "");
 
-        let readme = "";
-        try {
-            readme = readFileSync(join(fileName, "..", "README.md"), "utf-8");
-        } catch { }
-        return [data, readme] as const;
+        return [data] as const;
     }
 
     throw fail("no default export called 'definePlugin' found");
@@ -235,29 +228,20 @@ function isPluginFile({ name }: { name: string; }) {
     parseDevs();
 
     const plugins = [] as PluginData[];
-    const readmes = {} as Record<string, string>;
 
     await Promise.all(["src/plugins", "src/plugins/_core"].flatMap(dir =>
         readdirSync(dir, { withFileTypes: true })
             .filter(isPluginFile)
             .map(async dirent => {
-                const [data, readme] = await parseFile(await getEntryPoint(dir, dirent));
-                plugins.push(data);
-                if (readme) readmes[data.name] = readme;
+                const [data] = await parseFile(await getEntryPoint(dir, dirent));
+                plugins.sort().push(data);
             })
     ));
 
-    plugins.forEach(plugin => {
-        if (readmes[plugin.name]) {
-            plugin.readme = readmes[plugin.name];
-        }
-    });
-
     const data = JSON.stringify(plugins);
 
-    if (process.argv.length > 3) {
+    if (process.argv.length > 2) {
         writeFileSync(process.argv[2], data);
-        writeFileSync(process.argv[3], JSON.stringify(readmes));
     } else {
         console.log(data);
         writeFileSync("dist/plugins.json", data);
