@@ -1,0 +1,44 @@
+.pc-sbic-badge-settings {
+    display: flex;
+    gap: 5px;
+    flex-direction: row;
+}
+
+.pc-sbic-image-container {
+    position: relative;
+    transition: 0.15s;
+}
+
+.pc-sbic-image-container img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.pc-sbic-disabled {
+    opacity: 0.5;
+    scale: 0.95;
+}
+
+.pc-sbic-settings-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.pc-sbic-settings-username {
+    font-size: 22px;
+    color: white;
+    margin-right: 5px;
+}
+
+.pc-sbic-badge-row {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: top;
+    position: relative;
+    margin-top: 6px !important;
+    margin-left: -3px !important;
+}
