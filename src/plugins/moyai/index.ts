@@ -52,10 +52,8 @@ interface IVoiceChannelEffectSendEvent {
 }
 
 const MOYAI = "🗿";
-const MOYAI_URL =
-    "https://raw.githubusercontent.com/MeguminSama/VencordPlugins/main/plugins/moyai/moyai.mp3";
-const MOYAI_URL_HD =
-    "https://raw.githubusercontent.com/MeguminSama/VencordPlugins/main/plugins/moyai/moyai_hd.wav";
+const MOYAI_URL = "https://github.com/MutanPlex/random-files/raw/main/sounds/moyai.mp3";
+const MOYAI_URL_HD = "https://github.com/MutanPlex/random-files/raw/main/sounds/moyai.wav";
 
 const settings = definePluginSettings({
     volume: {
