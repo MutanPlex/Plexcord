@@ -107,6 +107,8 @@ export default definePlugin({
     description: "Automated fingerprint/end text",
     authors: [Devs.Ven, Devs.Rini, Devs.ImBanana, PcDevs.KrystalSkull, PcDevs.MutanPlex],
     dependencies: ["MessageEventsAPI", "ChatInputButtonAPI"],
+    renderChatBarButton: SignatureToggle,
+
     start: () => {
         if (settings.store.isEnabled) true;
         addMessagePreSendListener(handleMessage);
@@ -118,7 +120,6 @@ export default definePlugin({
     },
 
     settings,
-    renderChatBarButton: SignatureToggle,
 
     contextMenus: {
         "textarea-context": ChatBarContextCheckbox
