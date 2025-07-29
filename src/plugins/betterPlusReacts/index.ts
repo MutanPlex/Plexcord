@@ -57,6 +57,11 @@ export default definePlugin({
         return message;
     },
     setMsgReference(plusses: string, channelId: string) {
-        this.message = getMessages(channelId).getByIndex(getMessages(channelId).length - plusses.split("+").length + 1);
+        const messages = getMessages(channelId);
+        if (!messages) {
+            this.message = null;
+            return;
+        }
+        this.message = messages.getByIndex(messages.length - plusses.split("+").length + 1);
     }
 });
