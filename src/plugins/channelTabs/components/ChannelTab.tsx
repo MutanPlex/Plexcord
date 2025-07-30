@@ -143,7 +143,7 @@ function ChannelTabContent(props: ChannelTabsProps & {
 
     if (channel && recipients?.length) {
         if (recipients.length === 1) {
-            const user = UserStore.getUser(recipients[0]) as User & { globalName: string, isPomelo(): boolean; };
+            const user = UserStore.getUser(recipients[0]) as User & { globalName: string; };
             const username = noPomeloNames
                 ? user.globalName || user.username
                 : getUniqueUsername(user);
@@ -157,7 +157,7 @@ function ChannelTabContent(props: ChannelTabsProps & {
                         isTyping={isTyping}
                         isMobile={isMobile}
                     />
-                    {!compact && <Text className={cl("name-text")} data-pomelo={user.isPomelo()}>
+                    {!compact && <Text className={cl("name-text")}>
                         {username}
                     </Text>}
                     <NotificationDot channelIds={[channel.id]} />
