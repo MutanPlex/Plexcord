@@ -213,7 +213,7 @@ async function openCompleteQuestUI() {
                 icon: icon,
             });
         } else if (taskName === "PLAY_ACTIVITY") {
-            const channelId = ChannelStore.getSortedPrivateChannels()[0]?.id ?? Object.values(GuildChannelStore.getAllGuilds() as any[]).find(x => x != null && x.VOCAL.length > 0).VOCAL[0].channel.id;
+            const channelId = ChannelStore.getSortedPrivateChannels()[0]?.id ?? (Object.values(GuildChannelStore.getAllGuilds()) as unknown as any[]).find(x => x != null && x.VOCAL.length > 0).VOCAL[0].channel.id;
             const streamKey = `call:${channelId}:1`;
 
             const fn = async () => {
