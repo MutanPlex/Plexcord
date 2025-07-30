@@ -18,7 +18,7 @@
 */
 
 import * as t from "@plexcord/discord-types";
-import { findByCodeLazy, findByPropsLazy, waitFor } from "@webpack";
+import { findByCodeLazy, findByPropsLazy } from "@webpack";
 
 import { waitForStore } from "./internal";
 
@@ -35,7 +35,7 @@ export let MessageStore: Omit<t.MessageStore, "getMessages"> & GenericStore & {
 // TODO: The correct name for this is ChannelActionCreators and it has already been exported again from utils. Remove this export once enough time has passed
 export const PrivateChannelsStore = findByPropsLazy("openPrivateChannel");
 export let PermissionStore: GenericStore;
-export let GuildChannelStore: GenericStore;
+export let GuildChannelStore: t.GuildChannelStore;
 export let ReadStateStore: GenericStore;
 export let PresenceStore: GenericStore;
 export let VoiceStateStore: GenericStore;
@@ -87,7 +87,3 @@ waitForStore("ThemeStore", m => {
     Plexcord.QuickCss.initQuickCssThemeStore();
 });
 waitForStore("VoiceStateStore", m => VoiceStateStore = m);
-
-// GuildRoleStore is new, this code is for stable + canary compatibility
-// TODO: Change to waitForStore once GuildRoleStore is on stable
-waitFor(["getRole", "getRoles"], m => GuildRoleStore = m);
