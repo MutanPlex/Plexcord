@@ -27,7 +27,7 @@ export default definePlugin({
         {
             find: "this.isCopiedStreakGodlike",
             replacement: {
-                match: /Plexcord.Plugins.plugins\["SpotifyControls"\].PanelWrapper/,
+                match: /Plexcord\.Plugins\.plugins\["SpotifyControls"\]\.PanelWrapper/,
                 replace: "$self.FakePanelWrapper",
             },
             predicate: () => Settings.plugins.SpotifyControls.enabled,

@@ -32,6 +32,7 @@ export const providers = Object.keys(lyricFetchers) as Provider[];
 
 export async function getLyrics(track: Track | null): Promise<LyricsData | null> {
     if (!track) return null;
+    if (!track.id) return null;
 
     const cacheKey = track.id;
     const cached = await DataStore.get(LyricsCacheKey) as Record<string, LyricsData | null>;
@@ -47,7 +48,8 @@ export async function getLyrics(track: Track | null): Promise<LyricsData | null>
         if (!settings.store.FallbackProvider && nullCacheEntry[provider]) {
             return null;
         }
-        if (nullCacheEntry[Provider.Spotify] && nullCacheEntry[Provider.Lrclib]) {
+
+        if (providers.every(p => nullCacheEntry[p])) {
             return null;
         }
     }

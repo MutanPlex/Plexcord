@@ -32,10 +32,10 @@ export async function getLyricsLrclib(track: Track): Promise<LyricsData | null> 
         track_name: track.name,
         artist_name: track.artists[0].name,
         album_name: track.album.name,
-        duration: track.duration / 1000
+        duration: String(track.duration / 1000)
     };
 
-    const params = new URLSearchParams(info as any);
+    const params = new URLSearchParams(info);
     const url = `${baseUrlLrclib}?${params.toString()}`;
     const response = await fetch(url, {
         headers: {
