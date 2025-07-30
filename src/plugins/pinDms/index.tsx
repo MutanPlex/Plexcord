@@ -219,7 +219,7 @@ export default definePlugin({
     },
 
     isChannelIndex(sectionIndex: number, channelIndex: number) {
-        if (settings.store.canCollapseDmSection && settings.store.dmSectionCollapsed && sectionIndex !== 0) {
+        if (settings.store.canCollapseDmSection && settings.store.dmSectionCollapsed && sectionIndex === this.getSections().length + 1) {
             return true;
         }
 
@@ -234,7 +234,7 @@ export default definePlugin({
     isChannelHidden(categoryIndex: number, channelIndex: number) {
         if (categoryIndex === 0) return false;
 
-        if (settings.store.canCollapseDmSection && settings.store.dmSectionCollapsed && this.getSections().length + 1 === categoryIndex)
+        if (settings.store.canCollapseDmSection && settings.store.dmSectionCollapsed && categoryIndex === this.getSections().length + 1)
             return true;
 
         if (!this.instance || !this.isChannelIndex(categoryIndex, channelIndex)) return false;
