@@ -19,7 +19,7 @@
 
 import ErrorBoundary from "@components/ErrorBoundary";
 import type { Guild, GuildMember } from "@plexcord/discord-types";
-import { cl, getGuildPermissionSpecMap, getSortedRoles, sortUserRoles } from "@plugins/permissionsViewer/utils";
+import { cl, getGuildPermissionSpecMap, getSortedRolesForMember, sortUserRoles } from "@plugins/permissionsViewer/utils";
 import { getIntlMessage } from "@utils/discord";
 import { classes } from "@utils/misc";
 import { filters, findBulk, proxyLazyWebpack } from "@webpack";
@@ -95,7 +95,7 @@ function UserPermissionsComponent({ guild, guildMember, closePopout }: { guild: 
     const [rolePermissions, userPermissions] = useMemo(() => {
         const userPermissions: UserPermissions = [];
 
-        const userRoles = getSortedRoles(guild, guildMember);
+        const userRoles = getSortedRolesForMember(guild, guildMember);
 
         const rolePermissions: Array<RoleOrUserPermission> = userRoles.map(role => ({
             type: PermissionType.Role,
