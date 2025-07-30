@@ -11,10 +11,11 @@ import { Button, Text, TextInput, useState } from "@webpack/common";
 interface Props {
     props: ModalProps;
     onSelect: (url: string) => void;
+    initialUrl: string | undefined;
 }
 
-export function SetWallpaperModal({ props, onSelect }: Props) {
-    const [url, setUrl] = useState("");
+export function SetWallpaperModal({ props, onSelect, initialUrl }: Props) {
+    const [url, setUrl] = useState(initialUrl ?? "");
 
     return (
         <ModalRoot {...props} size={ModalSize.SMALL}>
@@ -42,7 +43,6 @@ export function SetWallpaperModal({ props, onSelect }: Props) {
                                 width: "100%",
                                 height: "auto",
                                 objectFit: "cover",
-                                border: "1px solid var(--background-modifier-accent)",
                                 borderRadius: 8
                             }}
                         />

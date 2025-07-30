@@ -5,9 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { WallpaperFreeStore } from "@plugins/wallpaperFree/store";
 import { openModal } from "@utils/modal";
 import { makeCodeblock } from "@utils/text";
-import { Button, FluxDispatcher, Parser } from "@webpack/common";
+import { Button, FluxDispatcher, Parser, Text } from "@webpack/common";
 
 import { SetWallpaperModal } from "./modal";
 
@@ -23,7 +24,7 @@ export function GlobalDefaultComponent() {
     return (
         <>
             <Button onClick={() => {
-                openModal(props => <SetWallpaperModal props={props} onSelect={setGlobal} />);
+                openModal(props => <SetWallpaperModal props={props} onSelect={setGlobal} initialUrl={WallpaperFreeStore.globalDefault} />);
             }}>Set a global wallpaper</Button>
 
             <Button
@@ -48,6 +49,35 @@ export function TipsComponent() {
         transform: scaleX(-1); /* flip it horizontally */
         filter: blur(4px); /* apply a blur */
         opacity: 0.7; /* self-explanatory */
+    }
+
+    /* If you don't like embeds being transparent */
+
+    [class*=embedFull__] {
+        background: var(--background-surface-high) !important;
+    }
+
+    /* the same for codeblocks (or use ShikiCodeblocks) */
+
+    .hljs {
+        background-color: var(--background-base-lowest) !important;
     }`;
-    return Parser.parse(makeCodeblock(tipText, "css"));
+    return (
+        <div style={{ userSelect: "text" }}>
+            {!IS_WEB && (
+                <>
+                    <Text>
+                        you can use local files by having them in the plexcord theme directory, and using the url <code>plexcord:///themes/filename.ext</code>
+                    </Text>
+                    <Button onClick={() => PlexcordNative.themes.openFolder()}>
+                        Open Theme Directory
+                    </Button>
+                </>
+            )}
+            {Parser.parse(makeCodeblock(tipText, "css"))}
+            <Button onClick={() => PlexcordNative.quickCss.openEditor()}>
+                Open QuickCSS
+            </Button>
+        </div>
+    );
 }
