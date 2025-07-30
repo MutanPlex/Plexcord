@@ -95,12 +95,13 @@
 
 #pc-spotify-album-image:hover {
     filter: brightness(1.2);
-    cursor: pointer;
+    cursor: zoom-in;
 }
 
 #pc-spotify-album-expanded-wrapper #pc-spotify-album-image {
     width: 100%;
     object-fit: contain;
+    cursor: zoom-out;
 }
 
 #pc-spotify-titles {
