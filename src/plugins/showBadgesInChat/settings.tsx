@@ -34,12 +34,6 @@ const settings = definePluginSettings({
         hidden: true,
         default: 1
     },
-    showVencordDonor: {
-        type: OptionType.BOOLEAN,
-        description: "Enable to show Vencord donor badges in chat.",
-        hidden: true,
-        default: true
-    },
     showDiscordProfile: {
         type: OptionType.BOOLEAN,
         description: "Enable to show Discord profile badges in chat.",

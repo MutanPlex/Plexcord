@@ -157,7 +157,7 @@ export default definePlugin({
             const { nick } = author;
             const prefix = withMentionPrefix ? "@" : "";
 
-            const classes = settings.store.showGradient ? "vc-smyn-suffix" : "vc-smyn-suffix vc-smyn-hide-gradient";
+            const classes = settings.store.showGradient ? "pc-smyn-suffix" : "pc-smyn-suffix pc-smyn-hide-gradient";
 
             if (isRepliedMessage && !settings.store.inReplies || username.toLowerCase() === nick.toLowerCase())
                 return <>{prefix}{nick}</>;

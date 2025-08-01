@@ -20,7 +20,7 @@
 import "./styles.css";
 
 import { Link } from "@components/Link";
-import { SettingsTab, wrapTab } from "@components/settings";
+import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { getStylusWebStoreUrl } from "@utils/web";
 import { Card, Forms, React, TabBar, useState } from "@webpack/common";
 

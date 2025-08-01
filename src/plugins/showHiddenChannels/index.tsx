@@ -209,6 +209,11 @@ export default definePlugin({
                     match: /\.subtitle,.+?;(?=return\(0,\i\.jsxs?\))(?<={channel:(\i),name:\i,muted:(\i).+?;)/,
                     replace: (m, channel, muted) => `${m}${muted}=$self.isHiddenChannel(${channel})?true:${muted};`
                 },
+                // Add the hidden eye icon if the channel is hidden
+                {
+                    match: /\.Children\.count.+?:null(?<=,channel:(\i).+?)/,
+                    replace: (m, channel) => `${m},$self.isHiddenChannel(${channel})?$self.HiddenChannelIcon():null`
+                },
                 // Make voice channels also appear as muted if they are muted
                 {
                     // FIXME(Bundler change related): Remove old compatiblity once enough time has passed

@@ -20,9 +20,9 @@
 import { openNotificationLogModal } from "@api/Notifications/notificationLog";
 import { useSettings } from "@api/Settings";
 import { FolderIcon, GithubIcon, LogIcon, PaintbrushIcon, RestartIcon } from "@components/index";
-import { SettingsTab, wrapTab } from "@components/settings";
 import { QuickAction, QuickActionCard } from "@components/settings/QuickAction";
 import { SpecialCard } from "@components/settings/SpecialCard";
+import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { openContributorModal } from "@components/settings/tabs/plugins/ContributorModal";
 import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
 import { gitRemote } from "@shared/plexcordUserAgent";

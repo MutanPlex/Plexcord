@@ -29,6 +29,7 @@ import { findComponentByCodeLazy, findStoreLazy } from "@webpack";
 import { GuildMemberStore, RelationshipStore, SelectedChannelStore, Tooltip, UserStore, UserSummaryItem, useStateFromStores } from "@webpack/common";
 
 const ThreeDots = findComponentByCodeLazy(".dots,", "dotRadius:");
+
 const TypingStore = findStoreLazy("TypingStore");
 const UserGuildSettingsStore = findStoreLazy("UserGuildSettingsStore");
 
@@ -173,7 +174,7 @@ export default definePlugin({
         {
             find: "UNREAD_IMPORTANT:",
             replacement: {
-                match: /\.name,{.{0,140}\.children.+?:null(?<=,channel:(\i).+?)/,
+                match: /\.Children\.count.+?:null(?<=,channel:(\i).+?)/,
                 replace: "$&,$self.TypingIndicator($1.id,$1.getGuildId())"
             }
         },

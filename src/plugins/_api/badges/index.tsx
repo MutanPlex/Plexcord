@@ -24,7 +24,7 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Heart } from "@components/Heart";
 import DonateButton from "@components/settings/DonateButton";
-import { openContributorModal } from "@components/settings/tabs/plugins/ContributorModal";
+import { openContributorModal } from "@components/settings/tabs";
 import { User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";

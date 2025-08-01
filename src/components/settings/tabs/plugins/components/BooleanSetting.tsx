@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Switch } from "@components/settings";
+import { Switch } from "@components/settings/Switch";
 import { PluginOptionBoolean } from "@utils/types";
 import { React, useState } from "@webpack/common";
 

@@ -19,7 +19,7 @@
 
 import { CodeBlock } from "@components/CodeBlock";
 import { Flex } from "@components/Flex";
-import { SettingsTab, wrapTab } from "@components/settings";
+import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { debounce } from "@shared/debounce";
 import { Margins } from "@utils/margins";
 import { copyWithToast } from "@utils/misc";

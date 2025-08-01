@@ -35,7 +35,7 @@ import { Alerts, Button, Card, Flex, Forms, lodash, Parser, React, Select, Text,
 import { JSX } from "react";
 
 import Plugins, { ExcludedPlugins, PluginMeta } from "~plugins";// Avoid circular dependency
-const { startDependenciesRecursive, startPlugin, stopPlugin } = proxyLazy(() => require("plugins"));
+const { stopPlugin } = proxyLazy(() => require("plugins"));
 
 import { PluginCard } from "./PluginCard";
 import { StockPluginsCard } from "./PluginStatCards";

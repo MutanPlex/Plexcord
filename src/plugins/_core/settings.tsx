@@ -85,9 +85,8 @@ export default definePlugin({
                 className: "pc-settings-header"
             },
             {
-                section: "PlexcordSettings",
+                section: "settings/tabs",
                 label: "Plexcord",
-                searchableTitles: ["Plexcord"],
                 element: PlexcordTab,
                 className: "pc-settings"
             },

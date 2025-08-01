@@ -18,7 +18,7 @@
 */
 
 import { Flex } from "@components/Flex";
-import { SettingsTab, wrapTab } from "@components/settings";
+import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { downloadSettingsBackup, uploadSettingsBackup } from "@utils/settingsSync";

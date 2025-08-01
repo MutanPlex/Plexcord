@@ -22,7 +22,7 @@ import { Settings, useSettings } from "@api/Settings";
 import { CheckedTextInput } from "@components/CheckedTextInput";
 import { Grid } from "@components/Grid";
 import { Link } from "@components/Link";
-import { SettingsTab, wrapTab } from "@components/settings";
+import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { authorizeCloud, checkCloudUrlCsp, cloudLogger, deauthorizeCloud, getCloudAuth, getCloudUrl } from "@utils/cloud";
 import { Margins } from "@utils/margins";
 import { deleteCloudSettings, getCloudSettings, putCloudSettings } from "@utils/settingsSync";
