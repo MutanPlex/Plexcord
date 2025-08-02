@@ -85,7 +85,7 @@ function RolesAndUsersPermissionsComponent({ permissions, guild, modalProps, hea
     const [selectedItemIndex, selectItem] = useState(0);
     const selectedItem = permissions[selectedItemIndex];
 
-    const roles = GuildRoleStore.getRolesSnapshot(guild.id);
+    const roles = GuildRoleStore.getSortedRoles(guild.id);
 
     return (
         <ModalRoot
