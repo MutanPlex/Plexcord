@@ -59,6 +59,13 @@ function scanObjects(element: Element) {
         element.querySelectorAll('[data-role="img"]:not([data-processed="true"])').forEach(img => {
             const messageParent = img.closest("[class^='messageListItem_']");
             if (messageParent) {
+                // Fix accessibility issues before adding hover listener
+                if (img.hasAttribute("aria-hidden")) {
+                    img.removeAttribute("aria-hidden");
+                }
+                if (img.getAttribute("tabindex") === "-1") {
+                    img.removeAttribute("tabindex");
+                }
                 addHoverListener(img);
             }
         });
@@ -75,6 +82,13 @@ function scanObjects(element: Element) {
         element.querySelectorAll(jointSelector).forEach(avatar => {
             const messageParent = avatar.closest("[class^='messageListItem_']");
             if (messageParent) {
+                // Fix accessibility issues before adding hover listener
+                if (avatar.hasAttribute("aria-hidden")) {
+                    avatar.removeAttribute("aria-hidden");
+                }
+                if (avatar.getAttribute("tabindex") === "-1") {
+                    avatar.removeAttribute("tabindex");
+                }
                 addHoverListener(avatar);
             }
         });
@@ -86,6 +100,13 @@ function scanObjects(element: Element) {
             if (url && (url.startsWith("http://") || url.startsWith("https://")) && isLinkAnImage(url)) {
                 const messageParent = span.closest("[class^='messageListItem_']");
                 if (messageParent) {
+                    // Fix accessibility issues before adding hover listener
+                    if (span.hasAttribute("aria-hidden")) {
+                        span.removeAttribute("aria-hidden");
+                    }
+                    if (span.getAttribute("tabindex") === "-1") {
+                        span.removeAttribute("tabindex");
+                    }
                     addHoverListener(span);
                 }
             }
@@ -96,6 +117,13 @@ function scanObjects(element: Element) {
         element.querySelectorAll('img[data-type="sticker"]:not([data-processed="true"])').forEach(sticker => {
             const messageParent = sticker.closest("[class^='messageListItem_']");
             if (messageParent) {
+                // Fix accessibility issues before adding hover listener
+                if (sticker.hasAttribute("aria-hidden")) {
+                    sticker.removeAttribute("aria-hidden");
+                }
+                if (sticker.getAttribute("tabindex") === "-1") {
+                    sticker.removeAttribute("tabindex");
+                }
                 addHoverListener(sticker, true);
             }
         });
@@ -157,9 +185,14 @@ function loadImagePreview(url: string, sticker: boolean) {
 
     const preview = document.createElement("div");
     preview.className = "image-preview";
+    preview.setAttribute("role", "dialog");
+    preview.setAttribute("aria-label", "Image preview");
+    preview.setAttribute("tabindex", "0");
 
     loadingSpinner = document.createElement("div");
     loadingSpinner.className = "loading-spinner";
+    loadingSpinner.setAttribute("aria-label", "Loading image");
+    loadingSpinner.setAttribute("role", "status");
 
     preview.appendChild(loadingSpinner);
     document.body.appendChild(preview);
@@ -212,6 +245,7 @@ function loadImagePreview(url: string, sticker: boolean) {
         video.autoplay = true;
         video.muted = true;
         video.loop = true;
+        video.setAttribute("aria-label", `Video preview: ${url.split("/").pop()?.split("?")[0] || ""}`);
 
         video.onplay = () => {
             video.removeAttribute("controls");
@@ -247,6 +281,8 @@ function loadImagePreview(url: string, sticker: boolean) {
         const img = new Image();
         img.src = url;
         img.className = "preview-media";
+        img.setAttribute("aria-label", `Image preview: ${url.split("/").pop()?.split("?")[0] || ""}`);
+        img.setAttribute("alt", `Preview of ${url.split("/").pop()?.split("?")[0] || ""}`);
         img.onload = () => {
             currentPreviewFileSize = [img.naturalWidth, img.naturalHeight];
             fileSizeSpan.textContent = `${currentPreviewFileSize[0]}x${currentPreviewFileSize[1]}`;
@@ -410,6 +446,10 @@ function addHoverListener(element: Element, sticker: boolean = false) {
             if (lastMouseEvent) {
                 updatePreviewPosition(lastMouseEvent, element as HTMLElement);
             }
+            // Focus the preview for keyboard accessibility
+            if (currentPreview) {
+                currentPreview.focus();
+            }
         }, settings.store.hoverDelay * 1000);
     });
 
@@ -448,6 +488,10 @@ function handleKeydown(event: KeyboardEvent) {
         isCtrlHeld = true;
         currentPreview.classList.add("allow-zoom-and-drag");
     }
+
+    if (event.key === "Escape" && currentPreview) {
+        deleteCurrentPreview();
+    }
 }
 
 function handleKeyup(event: KeyboardEvent) {
@@ -479,9 +523,23 @@ function removeHoverListeners() {
     const processedElements = document.querySelectorAll('[data-processed="true"]');
 
     processedElements.forEach(element => {
-        const clone = element.cloneNode(true);
+        const clone = element.cloneNode(true) as Element;
+        clone.removeAttribute("data-processed");
         element.replaceWith(clone);
-        element.removeAttribute("data-processed");
+    });
+}
+
+function fixExistingAccessibilityIssues() {
+    // Fix existing problematic elements
+    const problematicElements = document.querySelectorAll("[aria-hidden=\"true\"][tabindex=\"-1\"]");
+    problematicElements.forEach(element => {
+        // Only fix elements that might be processed by our plugin
+        if (element.hasAttribute("data-role") ||
+            element.tagName === "IMG" ||
+            element.tagName === "A") {
+            element.removeAttribute("aria-hidden");
+            element.removeAttribute("tabindex");
+        }
     });
 }
 
@@ -495,6 +553,9 @@ export default definePlugin({
         const targetNode = document.body;
 
         if (targetNode) {
+            // Fix existing accessibility issues first
+            fixExistingAccessibilityIssues();
+
             scanObjects(targetNode);
             document.addEventListener("keydown", handleKeydown);
             document.addEventListener("keyup", handleKeyup);
