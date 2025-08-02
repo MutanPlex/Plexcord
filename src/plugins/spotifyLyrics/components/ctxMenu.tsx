@@ -47,7 +47,7 @@ export function LyricsContextMenu() {
                     <Menu.MenuRadioItem
                         key={`lyrics-provider-${provider}`}
                         id={`switch-provider-${provider.toLowerCase()}`}
-                        group="vc-spotify-lyrics-switch-provider"
+                        group="pc-spotify-lyrics-switch-provider"
                         label={`${provider}${lyricsInfo?.lyricsVersions[provider] ? " (saved)" : ""}`}
                         checked={provider === lyricsInfo?.useLyric}
                         disabled={lyricsAlternative.includes(provider) && !hasLyrics}
