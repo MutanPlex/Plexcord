@@ -622,10 +622,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "MutanPlex",
         id: 506074187014602752n
     },
-    PicklePlex: {
-        name: "seliinneren",
-        id: 600818938582007828n
-    },
     Max: {
         name: "Max",
         id: 0n
@@ -673,10 +669,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     Cortex: {
         name: "Cortex",
         id: 913205935319691335n
-    },
-    Woosh: {
-        name: "w00shh.",
-        id: 919239894327521361n
     },
     SpikeHD: {
         name: "SpikeHD",
@@ -790,10 +782,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "Buzzy",
         id: 1273353654644117585n
     },
-    Ethan: {
-        name: "Ethan",
-        id: 721717126523781240n
-    },
     Synth: {
         name: "synthxcx",
         id: 934393331562205195n
@@ -849,6 +837,10 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     VillainsRule: {
         name: "VillainsRule",
         id: 0n
+    },
+    Etorix: {
+        name: "Etorix",
+        id: 94597845868355584n,
     }
 } satisfies Record<string, PcDev>);
 
