@@ -19,7 +19,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { Channel, Message, User } from "@plexcord/discord-types";
-import { PcDevs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 import { findByPropsLazy, findStore } from "@webpack";
 import { Button, ChannelStore, GuildRoleStore, NavigationRouter, RelationshipStore, SelectedChannelStore, UserStore } from "@webpack/common";
@@ -209,7 +209,7 @@ const addMention = (id: string, type: string, guildId?: string): ReactNode => {
 export default definePlugin({
     name: "ToastNotifications",
     description: "Show a toast notification whenever you receive a direct message.",
-    authors: [PcDevs.Skully, PcDevs.Ethan, PcDevs.Buzzy],
+    authors: [PcDevs.Skully, Devs.Ethan, PcDevs.Buzzy],
     settings,
     flux: {
         async MESSAGE_CREATE({ message }: { message: Message; }) {
