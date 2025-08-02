@@ -1,7 +1,7 @@
 {
     "name": "plexcord",
     "private": "true",
-    "version": "1.13.9",
+    "version": "1.14.0",
     "description": "Taking Discord to the Next Level!",
     "homepage": "https://github.com/MutanPlex/Plexcord#readme",
     "bugs": {
@@ -47,6 +47,7 @@
         "virtual-merge": "^1.0.2"
     },
     "devDependencies": {
+        "@plexcord/discord-types": "link:packages/discord-types",
         "@stylistic/eslint-plugin": "^4.4.1",
         "@types/chrome": "^0.0.312",
         "@types/diff": "^7.0.2",
@@ -56,7 +57,6 @@
         "@types/react-dom": "^19.1.6",
         "@types/yazl": "^2.4.6",
         "diff": "^7.0.0",
-        "@plexcord/discord-types": "link:packages/discord-types",
         "esbuild": "^0.25.6",
         "eslint": "9.20.1",
         "eslint-import-resolver-alias": "^1.1.2",
@@ -81,7 +81,7 @@
         "typescript-transform-paths": "^3.5.5",
         "zip-local": "^0.3.5"
     },
-    "packageManager": "pnpm@10.13.1",
+    "packageManager": "pnpm@10.14.0",
     "pnpm": {
         "patchedDependencies": {
             "eslint@9.20.1": "patches/eslint@9.20.1.patch",
