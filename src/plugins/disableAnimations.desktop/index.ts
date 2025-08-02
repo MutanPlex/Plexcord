@@ -19,24 +19,75 @@
 
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
-import { findAll } from "@webpack";
 
 export default definePlugin({
     name: "DisableAnimations",
     description: "Disables most of Discord's animations.",
-    authors: [PcDevs.seth],
-    start() {
-        this.springs = findAll(mod => {
-            if (!mod.Globals) return false;
-            return true;
-        });
+    authors: [PcDevs.seth, PcDevs.MutanPlex],
 
-        for (const spring of this.springs) {
-            spring.Globals.assign({
-                skipAnimation: true,
-            });
+    patches: [
+        {
+            find: "canAnimate:",
+            all: true,
+            noWarn: true,
+            replacement: {
+                match: /canAnimate:.+?([,}].*?\))/g,
+                replace: (m, rest) => {
+                    const destructuringMatch = rest.match(/}=.+/);
+                    if (destructuringMatch == null) return `canAnimate:!1${rest}`;
+                    return m;
+                }
+            }
+        },
+        {
+            // Status emojis
+            find: "#{intl::GUILD_OWNER}),children:",
+            replacement: {
+                match: /(\.CUSTOM_STATUS.+?animateEmoji:)\i/,
+                replace: "$1!1"
+            }
+        },
+        {
+            // Guild Banner
+            find: ".animatedBannerHoverLayer,onMouseEnter:",
+            replacement: {
+                match: /(\.headerContent.+?guildBanner:\i,animate:)\i/,
+                replace: "$1!1"
+            }
+        },
+        {
+            // Gradient roles in chat
+            find: "=!1,contentOnly:",
+            replacement: {
+                match: /animate:\i/,
+                replace: "animate:!1"
+            }
+        },
+        {
+            // Gradient roles in member list
+            find: '="left",className:',
+            replacement: {
+                match: /,animateGradient:[^)]+\)/,
+                replace: ",animateGradient:!1"
+            }
+        },
+        {
+            // Role Gradients
+            find: "animateGradient:",
+            all: true,
+            noWarn: true,
+            replacement: {
+                match: /animateGradient:.+?([,}].*?\))/g,
+                replace: (m, rest) => {
+                    const destructuringMatch = rest.match(/}=.+/);
+                    if (destructuringMatch == null) return `animateGradient:!1${rest}`;
+                    return m;
+                }
+            }
         }
+    ],
 
+    start() {
         this.css = document.createElement("style");
         this.css.innerText = `
             * {
@@ -47,16 +98,10 @@ export default definePlugin({
                 opacity: 1 !important;
             }
         `;
-
         document.head.appendChild(this.css);
     },
-    stop() {
-        for (const spring of this.springs) {
-            spring.Globals.assign({
-                skipAnimation: false,
-            });
-        }
 
+    stop() {
         if (this.css) this.css.remove();
     }
 });
