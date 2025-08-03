@@ -28,7 +28,7 @@ import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
 import { gitRemote } from "@shared/plexcordUserAgent";
 import { IS_MAC, IS_WINDOWS } from "@utils/constants";
 import { Margins } from "@utils/margins";
-import { isPluginDev } from "@utils/misc";
+import { isPcPluginDev, isPluginDev } from "@utils/misc";
 import { relaunch } from "@utils/native";
 import { Forms, React, Switch, useMemo, UserStore } from "@webpack/common";
 
@@ -141,7 +141,7 @@ function PlexcordSettings() {
                 )
             }
 
-            {isPluginDev(user?.id) && (
+            {isPluginDev(user?.id) || isPcPluginDev(user?.id) && (
                 <SpecialCard
                     title="Contributions"
                     subtitle="Thank you for contributing!"

@@ -134,7 +134,7 @@ async function createQuoteImage(avatarUrl: string, quoteOld: string, grayScale: 
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             const avatarBlob = await fetchImageAsBlob(avatarUrl);
-            const fadeBlob = await fetchImageAsBlob("https://raw.githubusercontent.com/Equicord/Equibored/refs/heads/main/icons/quoter/quoter.png");
+            const fadeBlob = await fetchImageAsBlob("https://raw.githubusercontent.com/MutanPlex/random-files/refs/heads/main/quoter.png");
 
             const avatar = new Image();
             const fade = new Image();

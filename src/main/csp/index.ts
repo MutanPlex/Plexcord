@@ -58,6 +58,7 @@ export const CspPolicies: PolicyMap = {
     "translate-pa.googleapis.com": ConnectSrc, // Google Translate API
     "*.vencord.dev": ImageSrc, // VenCloud (api.vencord.dev) and Badges (badges.vencord.dev)
     "*.plexcord.club": ImageSrc, // PlexCloud (api.plexcord.club) and Badges (badges.plexcord.club)
+    "plexcord.club": ImageSrc, // Icons and other stuff
     "*.vercel.app": ImageSrc, // Vercel CDN, used by some themes
     "manti.vendicated.dev": ImageSrc, // ReviewDB API
     "decor.fieryflames.dev": ConnectSrc, // Decor API
