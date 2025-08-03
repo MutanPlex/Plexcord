@@ -5,20 +5,85 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { addMessageDecoration, removeMessageDecoration } from "@api/MessageDecorations";
-import { Devs, PcDevs } from "@utils/constants";
-import definePlugin from "@utils/types";
-import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
-import badges from "plugins/_api/badges";
-const roleIconClassName = findByPropsLazy("roleIcon", "separator").roleIcon;
-const RoleIconComponent = findComponentByCodeLazy("#{intl::ROLE_ICON_ALT_TEXT}");
 import "./styles.css";
 
+import { addMessageDecoration, removeMessageDecoration } from "@api/MessageDecorations";
+import ErrorBoundary from "@components/ErrorBoundary";
+import { Flex } from "@components/Flex";
+import { Heart } from "@components/Heart";
+import DonateButton from "@components/settings/DonateButton";
+import { openContributorModal } from "@components/settings/tabs";
 import { User } from "@plexcord/discord-types";
+import { Devs, PcDevs } from "@utils/constants";
+import { Margins } from "@utils/margins";
 import { isPcPluginDev } from "@utils/misc";
+import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalRoot, openModal } from "@utils/modal";
+import definePlugin from "@utils/types";
+import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
+import { Forms } from "@webpack/common";
+import badges from "plugins/_api/badges";
 import { JSX } from "react";
 
 import settings from "./settings";
+
+const roleIconClassName = findByPropsLazy("roleIcon", "separator").roleIcon;
+const RoleIconComponent = findComponentByCodeLazy("#{intl::ROLE_ICON_ALT_TEXT}");
+
+function openDonorModal() {
+    const modalKey = openModal(props => (
+        <ErrorBoundary noop onError={() => {
+            closeModal(modalKey);
+            PlexcordNative.native.openExternal("https://github.com/sponsors/MutanPlex");
+        }}>
+            <ModalRoot {...props}>
+                <ModalHeader>
+                    <Flex style={{ width: "100%", justifyContent: "center" }}>
+                        <Forms.FormTitle
+                            tag="h2"
+                            style={{
+                                width: "100%",
+                                textAlign: "center",
+                                margin: 0
+                            }}
+                        >
+                            <Heart />
+                            Plexcord Donor
+                        </Forms.FormTitle>
+                    </Flex>
+                </ModalHeader>
+                <ModalContent>
+                    <Flex>
+                        <img
+                            role="presentation"
+                            src="https://cdn.discordapp.com/emojis/1026533070955872337.png"
+                            alt=""
+                            style={{ margin: "auto" }}
+                        />
+                        <img
+                            role="presentation"
+                            src="https://cdn.discordapp.com/emojis/1026533090627174460.png"
+                            alt=""
+                            style={{ margin: "auto" }}
+                        />
+                    </Flex>
+                    <div style={{ padding: "1em" }}>
+                        <Forms.FormText>
+                            This Badge is a special perk for Plexcord Donors
+                        </Forms.FormText>
+                        <Forms.FormText className={Margins.top20}>
+                            Please consider supporting the development of Plexcord by becoming a donor. It would mean a lot!!
+                        </Forms.FormText>
+                    </div>
+                </ModalContent>
+                <ModalFooter>
+                    <Flex style={{ width: "100%", justifyContent: "center" }}>
+                        <DonateButton />
+                    </Flex>
+                </ModalFooter>
+            </ModalRoot>
+        </ErrorBoundary>
+    ));
+}
 
 const discordBadges: readonly [number, string, string][] = Object.freeze([
     [0, "Discord Staff", "5e74e9b61934fc1f67c65515d1f7e60d"],
@@ -43,14 +108,16 @@ function CheckBadge({ badge, author }: { badge: string; author: User; }): JSX.El
             if (!plexcordDonorBadges || plexcordDonorBadges.length === 0) return null;
 
             return (
-                <span style={{ order: settings.store.PlexcordDonorPosition }}>
-                    {plexcordDonorBadges.map((badge: any) => (
+                <span style={{ order: settings.store.PlexcordDonorPosition, display: "flex", gap: "4px" }}>
+                    {plexcordDonorBadges.map((badge: any, index: number) => (
                         <RoleIconComponent
-                            key={author.id}
+                            key={`${author.id}-${index}`}
                             className={roleIconClassName}
                             name={badge.description}
                             size={20}
                             src={badge.image}
+                            onClick={openDonorModal}
+                            style={{ cursor: "pointer" }}
                         />
                     ))}
                 </span>
@@ -64,6 +131,8 @@ function CheckBadge({ badge, author }: { badge: string; author: User; }): JSX.El
                         name="Plexcord Contributor"
                         size={20}
                         src={"https://plexcord.club/favicon.png"}
+                        onClick={() => openContributorModal(author)}
+                        style={{ cursor: "pointer" }}
                     />
                 </span>
             ) : null;
@@ -106,7 +175,7 @@ function CheckBadge({ badge, author }: { badge: string; author: User; }): JSX.El
 
 function ChatBadges({ author }: { author: User; }) {
     return (
-        <span className="pc-sbic-badge-row" style={{ margin: "2px" }}>
+        <span className="pc-sbic-badge-row">
             {settings.store.showPlexcordDonor && <CheckBadge badge={"PlexcordDonor"} author={author} />}
             {settings.store.showPlexcordContributor && <CheckBadge badge={"PlexcordContributor"} author={author} />}
             {settings.store.showDiscordProfile && <CheckBadge badge={"DiscordProfile"} author={author} />}

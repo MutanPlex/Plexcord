@@ -40,5 +40,10 @@
     vertical-align: top;
     position: relative;
     margin-top: 6px !important;
+    gap: 2px;
     margin-left: -3px !important;
+}
+
+.pc-sbic-badge-row img {
+    border-radius: 50%;
 }
