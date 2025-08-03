@@ -17,8 +17,9 @@ export default definePlugin({
         {
             find: ".dimensionlessImage,",
             replacement: {
-                match: /(?<="IMAGE"===\i&&\(\i=)\i(?=\?)/,
-                replace: "true"
+                // widthAndHeightPassed = w != null && w !== 0 && h == null || h === 0
+                match: /(?<=\i=)(null!=\i&&0!==\i)&&(null!=\i&&0!==\i)/,
+                replace: "($1)||($2)"
             }
         }
     ]

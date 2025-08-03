@@ -132,6 +132,7 @@ export default definePlugin({
 
         return (
             <BlobMask
+                isFolder
                 style={{ cursor: "unset" }}
                 size={48}
                 selected={false}
