@@ -101,7 +101,7 @@ export const settings = definePluginSettings({
     permanentlyRemoveLogByDefault: {
         default: false,
         type: OptionType.BOOLEAN,
-        description: "Plexcord's base MessageLogger remove log button wiil delete logs permanently",
+        description: "Plexcord's base MessageLogger remove log button will delete logs permanently",
     },
 
     ShowLogsButton: {

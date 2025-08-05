@@ -83,3 +83,12 @@
     margin: 6px;
     padding: 4px 8px;
 }
+
+.pc-message-logger-icon {
+    bottom: -2px;
+    padding: 0;
+    width: var(--space-32);
+    min-width: 0;
+    height: var(--space-32);
+    color: var(--interactive-normal) !important;
+}
