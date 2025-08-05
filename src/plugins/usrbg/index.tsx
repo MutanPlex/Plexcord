@@ -67,7 +67,7 @@ export default definePlugin({
             predicate: () => !Settings.plugins.FullVCPFP.enabled && settings.store.voiceBackground,
             replacement: [
                 {
-                    match: /(?<=function\((\i),\i,\i\)\{[^}]*?)(?=let\{)/,
+                    match: /(?<=function\((\i),\i,\i\){"use strict";)/,
                     replace: "$1.style=$self.getVoiceBackgroundStyles($1);"
                 }
             ]
