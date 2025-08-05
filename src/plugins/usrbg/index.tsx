@@ -19,7 +19,7 @@
 
 import { definePluginSettings, Settings } from "@api/Settings";
 import { Link } from "@components/Link";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const API_URL = "https://usrbg.is-hardly.online/users";
@@ -51,7 +51,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "USRBG",
     description: "Displays user banners from USRBG, allowing anyone to get a banner without Nitro",
-    authors: [Devs.AutumnVN, Devs.katlyn, Devs.pylix, Devs.TheKodeToad],
+    authors: [Devs.AutumnVN, Devs.katlyn, Devs.pylix, Devs.TheKodeToad, PcDevs.MutanPlex],
     settings,
     patches: [
         {
@@ -63,7 +63,7 @@ export default definePlugin({
             }
         },
         {
-            find: "\"data-selenium-video-tile\":",
+            find: "data-selenium-video-tile",
             predicate: () => !Settings.plugins.FullVCPFP.enabled && settings.store.voiceBackground,
             replacement: [
                 {
