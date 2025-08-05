@@ -32,6 +32,7 @@
 
 .pc-notification-content {
     width: 100%;
+    overflow: hidden;
 }
 
 .pc-notification-header {
@@ -81,6 +82,11 @@
     width: 100%;
 }
 
+.pc-notification-log-modal {
+    max-width: 962px;
+    width: clamp(var(--modal-width-large, 800px), 962px, 85vw);
+}
+
 .pc-notification-log-empty {
     height: 218px;
     background: url("/assets/b36de980b174d7b798c89f35c116e5c6.svg") center no-repeat;
@@ -88,19 +94,23 @@
 }
 
 .pc-notification-log-container {
-    display: flex;
-    flex-direction: column;
     padding: 1em;
-    overflow: hidden;
+    max-height: min(750px, 75vh);
+    width: 100%;
 }
 
 .pc-notification-log-wrapper {
+    height: 120px;
+    width: 100%;
+    padding-bottom: 16px;
+    box-sizing: border-box;
     transition: 200ms ease;
     transition-property: height, opacity;
-}
 
-.pc-notification-log-wrapper:not(:last-child) {
-    margin-bottom: 1em;
+    /* stylelint-disable-next-line no-descending-specificity */
+    .pc-notification-root {
+        height: 104px;
+    }
 }
 
 .pc-notification-log-removing {
@@ -109,9 +119,18 @@
     margin-bottom: 1em;
 }
 
-.pc-notification-log-body {
+.pc-notification-log-body-wrapper {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.pc-notification-log-body {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 1.2em;
 }
 
 .pc-notification-log-timestamp {
