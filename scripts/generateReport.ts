@@ -193,7 +193,7 @@ async function printReport() {
         if (embeds.length === 1) {
             embeds.push({
                 title: "No issues found",
-                description: "Seems like everything is working fine (for now) <:blob_pwease:1402403381900742737>",
+                description: "Seems like everything is working fine (for now) <a:wooww:1402405432852742164>",
                 color: 0x00ff00
             });
         }
