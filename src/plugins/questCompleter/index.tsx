@@ -20,7 +20,7 @@
 import "./style.css";
 
 import { showNotification } from "@api/Notifications";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import { getTheme, Theme } from "@utils/discord";
 import definePlugin from "@utils/types";
 import { findByProps, findComponentByCodeLazy } from "@webpack";
@@ -231,7 +231,7 @@ async function openCompleteQuestUI() {
 export default definePlugin({
     name: "QuestCompleter",
     description: "A plugin to complete quests without having the game installed.",
-    authors: [Devs.amia],
+    authors: [Devs.amia, PcDevs.MutanPlex],
     patches: [
         {
             find: "BkZhUF)}",
