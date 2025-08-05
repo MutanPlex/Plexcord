@@ -1,7 +1,8 @@
 .pc-addon-card {
-    background-color: var(--background-base-lower-alt);
+    background-color: var(--card-primary-bg);
     color: var(--interactive-active);
     border-radius: 8px;
+    border: 1px solid var(--border-subtle);
     display: block;
     height: 100%;
     padding: 12px;
@@ -11,24 +12,13 @@
     box-sizing: border-box;
 }
 
-.visual-refresh .pc-addon-card {
-    background-color: var(--card-primary-bg);
-    border: 1px solid var(--border-subtle);
-}
-
 .pc-addon-card-disabled {
     opacity: 0.6;
 }
 
 .pc-addon-card:hover {
-    background-color: var(--background-tertiary);
     transform: translateY(-1px);
     box-shadow: var(--elevation-high);
-}
-
-.visual-refresh .pc-addon-card:hover {
-    /* same as non-hover, here to overwrite the non-refresh hover background */
-    background-color: var(--card-primary-bg);
 }
 
 .pc-addon-header {

@@ -17,11 +17,8 @@ export default definePlugin({
         {
             find: '"sticker")',
             replacement: {
-                // FIXME(Bundler change related): Remove old compatiblity once enough time has passed
-                match: /return\((!)?\i\.\i(?:\|\||&&)(?=\(.+?(\i)\.push)/,
-                replace: (m, not, children) => not
-                    ? `${m}(Plexcord.Api.ChatButtons._injectButtons(${children},arguments[0]),true)&&`
-                    : `${m}(Plexcord.Api.ChatButtons._injectButtons(${children},arguments[0]),false)||`
+                match: /return\(\i\.\i\|\|(?=\(.+?(\i)\.push)/,
+                replace: "$&(Plexcord.Api.ChatButtons._injectButtons($1,arguments[0]),false)||"
             }
         }
     ]

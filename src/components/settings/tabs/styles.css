@@ -65,7 +65,7 @@
 }
 
 .pc-settings-theme-links:focus {
-    background-color: var(--background-tertiary);
+    background-color: var(--background-base-lowest);
 }
 
 .pc-cloud-settings-sync-grid {

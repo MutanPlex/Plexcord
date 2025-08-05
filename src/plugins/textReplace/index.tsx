@@ -17,7 +17,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { DataStore } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
 import { Flex } from "@components/Flex";
 import { DeleteIcon } from "@components/Icons";
@@ -25,9 +24,6 @@ import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { Button, Forms, React, TextInput, useState } from "@webpack/common";
-
-const STRING_RULES_KEY = "TextReplace_rulesString";
-const REGEX_RULES_KEY = "TextReplace_rulesRegex";
 
 type Rule = Record<"find" | "replace" | "onlyIfIncludes", string>;
 
@@ -66,12 +62,12 @@ const settings = definePluginSettings({
     },
     stringRules: {
         type: OptionType.CUSTOM,
-        description: "Text replacement rules using string matching",
+        description: "String replacement rules",
         default: makeEmptyRuleArray(),
     },
     regexRules: {
         type: OptionType.CUSTOM,
-        description: "Text replacement rules using regular expressions",
+        description: "Regex replacement rules",
         default: makeEmptyRuleArray(),
     }
 });
@@ -231,7 +227,7 @@ function applyRules(content: string): string {
     return content;
 }
 
-const TEXT_REPLACE_RULES_CHANNEL_ID = "1102784112584040479";
+const TEXT_REPLACE_RULES_CHANNEL_ID = "1402434043345113280";
 
 export default definePlugin({
     name: "TextReplace",
@@ -244,20 +240,5 @@ export default definePlugin({
         // Channel used for sharing rules, applying rules here would be messy
         if (channelId === TEXT_REPLACE_RULES_CHANNEL_ID) return;
         msg.content = applyRules(msg.content);
-    },
-
-    async start() {
-        // TODO(OptionType.CUSTOM Related): Remove DataStore rules migrations once enough time has passed
-        const oldStringRules = await DataStore.get<Rule[]>(STRING_RULES_KEY);
-        if (oldStringRules != null) {
-            settings.store.stringRules = oldStringRules;
-            await DataStore.del(STRING_RULES_KEY);
-        }
-
-        const oldRegexRules = await DataStore.get<Rule[]>(REGEX_RULES_KEY);
-        if (oldRegexRules != null) {
-            settings.store.regexRules = oldRegexRules;
-            await DataStore.del(REGEX_RULES_KEY);
-        }
     }
 });

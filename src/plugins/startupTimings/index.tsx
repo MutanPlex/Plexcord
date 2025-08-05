@@ -37,5 +37,6 @@ export default definePlugin({
             },
         ]
     }],
+
     StartupTimingPage
 });

@@ -30,7 +30,7 @@ export const { getGuildPermissionSpecMap } = findByPropsLazy("getGuildPermission
 export const cl = classNameFactory("pc-permviewer-");
 
 export function getSortedRolesForMember({ id: guildId }: Guild, member: GuildMember) {
-    // the guild id is the @everyone role
+    // The guild id is the @everyone role
     return GuildRoleStore
         .getSortedRoles(guildId)
         .filter(role => role.id === guildId || member.roles.includes(role.id));
