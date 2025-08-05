@@ -7,7 +7,6 @@
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { definePluginSettings, useSettings } from "@api/Settings";
-import ErrorBoundary from "@components/ErrorBoundary";
 import type { Channel, User, VoiceState } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { classes } from "@utils/misc";
@@ -268,12 +267,12 @@ export default definePlugin({
 
     patches: [
         {
-            find: "toolbar:function",
+            find: "AppTitleBar",
             replacement: {
-                match: /(function \i\(\i\){)(.{1,200}toolbar.{1,100}mobileToolbar)/,
-                replace: "$1$self.addIconToToolBar(arguments[0]);$2"
+                match: /(?<=trailing:.{0,70}\(\i\.Fragment,{children:\[)/,
+                replace: "$self.FollowIndicator(),"
             }
-        },
+        }
     ],
 
     contextMenus: {
@@ -343,22 +342,5 @@ export default definePlugin({
         }
 
         return null;
-    },
-
-    addIconToToolBar(e: { toolbar: React.ReactNode[] | React.ReactNode; }) {
-        if (Array.isArray(e.toolbar)) {
-            return e.toolbar.unshift(
-                <ErrorBoundary noop={true} key="follow-indicator">
-                    <this.FollowIndicator />
-                </ErrorBoundary>
-            );
-        }
-
-        e.toolbar = [
-            <ErrorBoundary noop={true} key="follow-indicator">
-                <this.FollowIndicator />
-            </ErrorBoundary>,
-            e.toolbar,
-        ];
     },
 });
