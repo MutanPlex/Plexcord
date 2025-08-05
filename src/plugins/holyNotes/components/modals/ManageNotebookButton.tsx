@@ -11,7 +11,7 @@ import { Button, React } from "@webpack/common";
 import NotebookCreateModal from "./NotebookCreateModal";
 import NotebookDeleteModal from "./NotebookDeleteModal";
 
-export default ({ notebook, setNotebook }: { notebook: string, setNotebook: React.Dispatch<React.SetStateAction<string>>; }) => {
+export default ({ notebook, setNotebook }: { notebook: string, setNotebook: (notebook: string) => void; }) => {
     const isNotMain = notebook !== "Main";
 
     return (

@@ -33,7 +33,6 @@ $modifier: var(--background-modifier-accent);
     transform: scale(1);
 }
 
-
 .pc-notebook-flex {
     overflow: hidden;
 }
@@ -85,12 +84,6 @@ $modifier: var(--background-modifier-accent);
     flex-shrink: 0;
 }
 
-
-/* .pc-notebook-tabbar-bar {
-    margin: 0;
-    padding: 10px 20px 0;
-} */
-
 .pc-notebook-overflow-chevron {
     display: inline-block;
     padding: 0 6px 2px;
@@ -133,4 +126,13 @@ $modifier: var(--background-modifier-accent);
 .pc-notebook-top-section {
     margin-bottom: calc(-8px + .15*(var(--custom-user-profile-modal-header-avatar-size) + var(--custom-user-profile-modal-header-total-avatar-border-size)));
     z-index: 1;
+}
+
+.pc-holy-notes-icon {
+    bottom: -2px;
+    padding: 0;
+    width: var(--space-32);
+    min-width: 0;
+    height: var(--space-32);
+    color: var(--interactive-normal) !important;
 }

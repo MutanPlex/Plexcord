@@ -33,7 +33,7 @@ const renderNotebook = ({
 }) => {
     const messageArray = Object.values(notes).map(note => (
         <RenderMessage
-            key={notebook}
+            key={`${notebook}-${note.id}`}
             note={note}
             notebook={notebook}
             updateParent={updateParent}
@@ -69,10 +69,19 @@ export const NoteModal = (props: ModalProps & { onClose: () => void; }) => {
 
     const forceUpdate = React.useReducer(() => ({}), {})[1] as () => void;
 
+    // Tab değiştirme fonksiyonu - state'leri sıfırla
+    const handleTabChange = React.useCallback((newNotebook: string) => {
+        setCurrentNotebook(newNotebook);
+        setSearch(""); // Arama inputunu sıfırla
+        setSortType(true); // Sort type'ı varsayılana döndür
+        setSortDirection(true); // Sort direction'ı varsayılana döndür
+        forceUpdate(); // Component'i yeniden render et
+    }, [forceUpdate]);
+
     const notes = noteHandler.getNotes(currentNotebook);
     if (!notes) return <></>;
 
-    const { TabBar, selectedTab } = CreateTabBar({ tabs: noteHandler.getAllNotes(), firstSelectedTab: currentNotebook, onChangeTab: setCurrentNotebook });
+    const { TabBar, selectedTab } = CreateTabBar({ tabs: noteHandler.getAllNotes(), firstSelectedTab: currentNotebook, onChangeTab: handleTabChange });
 
     return (
         <ErrorBoundary>
@@ -117,7 +126,7 @@ export const NoteModal = (props: ModalProps & { onClose: () => void; }) => {
                     </ModalContent>
                 </Flex>
                 <ModalFooter>
-                    <ManageNotebookButton notebook={currentNotebook} setNotebook={setCurrentNotebook} />
+                    <ManageNotebookButton notebook={currentNotebook} setNotebook={handleTabChange} />
                     <div className={classes("sort-button-container", "pc-notebook-display-left")}>
                         <Flex
                             align={Flex.Align.CENTER}

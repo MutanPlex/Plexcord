@@ -13,7 +13,7 @@ import { Button, React, Text } from "@webpack/common";
 import Error from "./Error";
 import { RenderMessage } from "./RenderMessage";
 
-export default ({ onClose, notebook, onChangeTab, ...props }: ModalProps & { onClose: () => void; notebook: string; onChangeTab: React.Dispatch<React.SetStateAction<string>>; }) => {
+export default ({ onClose, notebook, onChangeTab, ...props }: ModalProps & { onClose: () => void; notebook: string; onChangeTab: (notebook: string) => void; }) => {
     const notes = noteHandler.getNotes(notebook);
 
     const handleDelete = () => {
