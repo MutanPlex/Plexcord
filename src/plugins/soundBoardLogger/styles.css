@@ -108,18 +108,11 @@
     margin-top: 20px;
 }
 
-/* input style from https://github.com/Vendicated/Vencord/blob/ea11f2244fde469ce308f8a4e7224430be62f8f1/src/plugins/sendTimestamps/styles.css#L1-L13 */
-.pc-soundlog-clone-input {
-    background-color: var(--input-background);
-    color: var(--text-default);
-    width: 100%;
-    padding: 8px 8px 8px 12px;
-    outline: none;
-    border: 1px solid var(--input-background);
-    border-radius: 4px;
-    font-weight: 500;
-    font-style: inherit;
-    font-size: 100%;
-    box-sizing: border-box;
-    height: 40px;
+.pc-soundboard-log-icon {
+    bottom: -2px;
+    padding: 0;
+    width: var(--space-32);
+    min-width: 0;
+    height: var(--space-32);
+    color: var(--interactive-normal) !important;
 }

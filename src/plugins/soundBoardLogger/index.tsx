@@ -7,13 +7,12 @@
 
 import { addChatBarButton, removeChatBarButton } from "@api/ChatButtons";
 import { disableStyle, enableStyle } from "@api/Styles";
-import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
-import { FluxDispatcher } from "@webpack/common";
+import { Button, FluxDispatcher, Tooltip } from "@webpack/common";
 
-import { ChatBarIcon } from "./components/Icons";
-import { OpenSBLogsButton } from "./components/SoundBoardLog";
+import { ChatBarIcon, LogIcon } from "./components/Icons";
+import { openSoundBoardLog } from "./components/SoundBoardLog";
 import settings from "./settings";
 import { updateLoggedSounds } from "./store";
 import styles from "./styles.css?managed";
@@ -27,28 +26,29 @@ export default definePlugin({
     patches: [
         {
             predicate: () => settings.store.IconLocation === "toolbar",
-            find: "toolbar:function",
+            find: "AppTitleBar",
             replacement: {
-                match: /(function \i\(\i\){)(.{1,500}toolbar.{1,500}mobileToolbar)/,
-                replace: "$1$self.addSBIconToToolBar(arguments[0]);$2"
-            }
-        }
+                match: /(?<=trailing:.{0,70}\(\i\.Fragment,{children:\[)/,
+                replace: "$self.renderSoundBoardLoggerButton(),"
+            },
+        },
     ],
     settings,
-    addSBIconToToolBar(e: { toolbar: React.ReactNode[] | React.ReactNode; }) {
-        if (Array.isArray(e.toolbar))
-            return e.toolbar.unshift(
-                <ErrorBoundary noop={true}>
-                    <OpenSBLogsButton />
-                </ErrorBoundary>
-            );
-
-        e.toolbar = [
-            <ErrorBoundary noop={true} key={"SoundBoardLogger"} >
-                <OpenSBLogsButton />
-            </ErrorBoundary>,
-            e.toolbar,
-        ];
+    renderSoundBoardLoggerButton() {
+        return (
+            <Tooltip text="SoundBoardLogger">
+                {tooltipProps => (
+                    <Button style={{ backgroundColor: "transparent", border: "none" }}
+                        {...tooltipProps}
+                        size={Button.Sizes.SMALL}
+                        className={"pc-soundboard-log-icon"}
+                        onClick={() => openSoundBoardLog()}
+                    >
+                        <LogIcon />
+                    </Button>
+                )}
+            </Tooltip>
+        );
     },
     start() {
         enableStyle(styles);
