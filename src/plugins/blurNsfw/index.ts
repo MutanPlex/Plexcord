@@ -47,7 +47,7 @@ export default definePlugin({
             find: "}renderEmbeds(",
             replacement: [{
                 match: /\.container/,
-                replace: "$&+(this.props.channel.nsfw? ' pc-nsfw-img': '')"
+                replace: "$&+(this.props.channel.nsfw || Plexcord.Settings.plugins.BlurNSFW.blurAllChannels ? ' pc-nsfw-img': '')"
             }]
         }
     ],
@@ -58,6 +58,11 @@ export default definePlugin({
             description: "Blur Amount (in pixels)",
             default: 10,
             onChange: setCss
+        },
+        blurAllChannels: {
+            type: OptionType.BOOLEAN,
+            description: "Blur attachments in all channels (not just NSFW)",
+            default: false
         }
     },
 
