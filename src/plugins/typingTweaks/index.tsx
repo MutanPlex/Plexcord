@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { definePluginSettings } from "@api/Settings";
+import { definePluginSettings, Settings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Channel, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -26,6 +26,7 @@ import { isNonNullish } from "@utils/guards";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { AuthenticationStore, Avatar, GuildMemberStore, React, RelationshipStore, TypingStore, UserStore, useStateFromStores } from "@webpack/common";
+import { getCustomColorString } from "plugins/customUserColors";
 import { PropsWithChildren } from "react";
 
 import managedStyle from "./style.css?managed";
@@ -67,6 +68,17 @@ interface TypingUserProps {
     guildId: string;
 }
 
+function typingUserColor(guildId: string, userId: string): string | undefined {
+    if (!settings.store.showRoleColors) return;
+
+    if (Settings.plugins.CustomUserColors.enabled) {
+        const customColor = getCustomColorString(userId, true);
+        if (customColor) return customColor;
+    }
+
+    return GuildMemberStore.getMember(guildId, userId)?.colorString;
+}
+
 const TypingUser = ErrorBoundary.wrap(function TypingUser({ user, guildId }: TypingUserProps) {
     return (
         <strong
@@ -76,7 +88,7 @@ const TypingUser = ErrorBoundary.wrap(function TypingUser({ user, guildId }: Typ
                 openUserProfile(user.id);
             }}
             style={{
-                color: settings.store.showRoleColors ? GuildMemberStore.getMember(guildId, user.id)?.colorString : undefined,
+                color: settings.store.showRoleColors ? typingUserColor(guildId, user.id) : undefined,
             }}
         >
             {settings.store.showAvatars && (
