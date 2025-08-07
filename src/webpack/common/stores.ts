@@ -44,12 +44,13 @@ export let GuildStore: t.GuildStore;
 export let GuildRoleStore: t.GuildRoleStore;
 export let GuildMemberStore: t.GuildMemberStore;
 export let UserStore: t.UserStore;
+export let AuthenticationStore: t.AuthenticationStore;
 export let UserProfileStore: t.UserProfileStore;
+export let TypingStore: t.TypingStore;
 export let SelectedChannelStore: t.SelectedChannelStore;
 export let SelectedGuildStore: t.SelectedGuildStore;
 export let ChannelStore: t.ChannelStore;
 export let RelationshipStore: t.RelationshipStore;
-export let TypingStore: GenericStore;
 
 export let EmojiStore: t.EmojiStore;
 export let StickerStore: t.StickerStore;
@@ -62,24 +63,21 @@ export let DraftStore: t.DraftStore;
  */
 export const useStateFromStores: t.useStateFromStores = findByCodeLazy("useStateFromStores");
 
-waitForStore("DraftStore", s => DraftStore = s);
-waitForStore("UserStore", s => UserStore = s);
-waitForStore("UserProfileStore", m => UserProfileStore = m);
+waitForStore("AuthenticationStore", s => AuthenticationStore = s);
 waitForStore("ChannelStore", m => ChannelStore = m);
-waitForStore("SelectedChannelStore", m => SelectedChannelStore = m);
-waitForStore("SelectedGuildStore", m => SelectedGuildStore = m);
-waitForStore("GuildStore", m => GuildStore = m);
-waitForStore("GuildRoleStore", m => GuildRoleStore = m);
+waitForStore("DraftStore", s => DraftStore = s);
+waitForStore("EmojiStore", m => EmojiStore = m);
+waitForStore("GuildChannelStore", m => GuildChannelStore = m);
 waitForStore("GuildMemberStore", m => GuildMemberStore = m);
-waitForStore("RelationshipStore", m => RelationshipStore = m);
+waitForStore("GuildRoleStore", m => GuildRoleStore = m);
+waitForStore("GuildStore", m => GuildStore = m);
+waitForStore("MessageStore", m => MessageStore = m);
 waitForStore("PermissionStore", m => PermissionStore = m);
 waitForStore("PresenceStore", m => PresenceStore = m);
+waitForStore("RelationshipStore", m => RelationshipStore = m);
 waitForStore("ReadStateStore", m => ReadStateStore = m);
-waitForStore("GuildChannelStore", m => GuildChannelStore = m);
-waitForStore("GuildRoleStore", m => GuildRoleStore = m);
-waitForStore("MessageStore", m => MessageStore = m);
-waitForStore("WindowStore", m => WindowStore = m);
-waitForStore("EmojiStore", m => EmojiStore = m);
+waitForStore("SelectedChannelStore", m => SelectedChannelStore = m);
+waitForStore("SelectedGuildStore", m => SelectedGuildStore = m);
 waitForStore("StickersStore", m => StickerStore = m);
 waitForStore("TypingStore", m => TypingStore = m);
 waitForStore("ThemeStore", m => {
@@ -87,4 +85,7 @@ waitForStore("ThemeStore", m => {
     // Importing this directly can easily cause circular imports. For this reason, use a non import access here.
     Plexcord.QuickCss.initQuickCssThemeStore();
 });
+waitForStore("UserStore", s => UserStore = s);
+waitForStore("UserProfileStore", m => UserProfileStore = m);
 waitForStore("VoiceStateStore", m => VoiceStateStore = m);
+waitForStore("WindowStore", m => WindowStore = m);

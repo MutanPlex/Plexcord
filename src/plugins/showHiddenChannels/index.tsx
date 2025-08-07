@@ -23,9 +23,8 @@ import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
 import type { Channel, Role } from "@plexcord/discord-types";
-import { Devs, PcDevs } from "@utils/constants";
+import { Devs } from "@utils/constants";
 import { classes } from "@utils/misc";
-import { canonicalizeMatch } from "@utils/patches";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
 import { ChannelStore, PermissionsBits, PermissionStore, Tooltip } from "@webpack/common";
@@ -73,7 +72,7 @@ function isUncategorized(objChannel: { channel: Channel; comparator: number; }) 
 export default definePlugin({
     name: "ShowHiddenChannels",
     description: "Show channels that you do not have access to view.",
-    authors: [Devs.BigDuck, Devs.AverageReactEnjoyer, Devs.D3SOX, Devs.Ven, Devs.Nuckyz, Devs.Nickyux, Devs.dzshn, PcDevs.Oggetto],
+    authors: [Devs.BigDuck, Devs.AverageReactEnjoyer, Devs.D3SOX, Devs.Ven, Devs.Nuckyz, Devs.Nickyux, Devs.dzshn],
     settings,
 
     patches: [
@@ -303,15 +302,18 @@ export default definePlugin({
                 },
                 {
                     // Patch the header to only return allowed users and roles if it's a hidden channel or locked channel (Like when it's used on the HiddenChannelLockScreen)
-                    match: /MANAGE_ROLES.{0,90}?return(?=\(.+?(\(0,\i\.jsxs\)\("div",{className:\i\.members.+?guildId:(\i)\.guild_id.+?roleColor.+?\]}\)))/,
-                    replace: (m, component, channel) => {
-                        // Export the channel for the users allowed component patch
-                        component = component.replace(canonicalizeMatch(/(?<=users:\i)/), `,shcChannel:${channel}`);
-                        // Always render the component for multiple allowed users
-                        component = component.replace(canonicalizeMatch(/1!==\i\.length/), "true");
-
-                        return `${m} $self.isHiddenChannel(${channel},true)?${component}:`;
-                    }
+                    match: /\.members.+?\]}\),(?<=channel:(\i).+?)/,
+                    replace: (m, channel) => `${m}$self.isHiddenChannel(${channel},true)?null:`
+                },
+                {
+                    // Export the channel for the users allowed component patch
+                    match: /maxUsers:\i,users:\i(?<=channel:(\i).+?)/,
+                    replace: (m, channel) => `${m},shcChannel:${channel}`
+                },
+                {
+                    // Always render the component for multiple allowed users
+                    match: /1!==\i\.length(?=\|\|)/,
+                    replace: "true"
                 }
             ]
         },
@@ -320,8 +322,8 @@ export default definePlugin({
             replacement: [
                 {
                     // Create a variable for the channel prop
-                    match: /(function \i\(\i\)\{)([^}]+?hideOverflowCount)/,
-                    replace: "$1let {shcChannel}=arguments[0];$2"
+                    match: /let{users:\i,maxUsers:\i,/,
+                    replace: "let{shcChannel}=arguments[0];$&"
                 },
                 {
                     // Make Discord always render the plus button if the component is used inside the HiddenChannelLockScreen

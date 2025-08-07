@@ -17,14 +17,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { definePluginSettings, Settings } from "@api/Settings";
+import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { User } from "@plexcord/discord-types";
+import { Channel, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { openUserProfile } from "@utils/discord";
+import { isNonNullish } from "@utils/guards";
+import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
-import { Avatar, GuildMemberStore, React, RelationshipStore } from "@webpack/common";
-import { getCustomColorString } from "plugins/customUserColors";
+import { AuthenticationStore, Avatar, GuildMemberStore, React, RelationshipStore, TypingStore, UserStore, useStateFromStores } from "@webpack/common";
 import { PropsWithChildren } from "react";
 
 import managedStyle from "./style.css?managed";
@@ -47,35 +48,26 @@ const settings = definePluginSettings({
     }
 });
 
-export const buildSeveralUsers = ErrorBoundary.wrap(({ a, b, count, guildId }: { a: User, b: User, count: number; guildId: string; }) => {
+export const buildSeveralUsers = ErrorBoundary.wrap(function buildSeveralUsers({ users, count, guildId }: { users: User[], count: number; guildId: string; }) {
     return (
         <>
-            <TypingUser user={a} guildId={guildId} />
-            {", "}
-            <TypingUser user={b} guildId={guildId} />
-            {", "}
+            {users.slice(0, count).map(user => (
+                <React.Fragment key={user.id}>
+                    <TypingUser user={user} guildId={guildId} />
+                    {", "}
+                </React.Fragment>
+            ))}
             and {count} others are typing...
         </>
     );
 }, { noop: true });
 
-interface Props {
+interface TypingUserProps {
     user: User;
     guildId: string;
 }
 
-function typingUserColor(guildId: string, userId: string): string | undefined {
-    if (!settings.store.showRoleColors) return;
-
-    if (Settings.plugins.CustomUserColors.enabled) {
-        const customColor = getCustomColorString(userId, true);
-        if (customColor) return customColor;
-    }
-
-    return GuildMemberStore.getMember(guildId, userId)?.colorString;
-}
-
-const TypingUser = ErrorBoundary.wrap(function ({ user, guildId }: Props) {
+const TypingUser = ErrorBoundary.wrap(function TypingUser({ user, guildId }: TypingUserProps) {
     return (
         <strong
             className="pc-typing-user"
@@ -84,7 +76,7 @@ const TypingUser = ErrorBoundary.wrap(function ({ user, guildId }: Props) {
                 openUserProfile(user.id);
             }}
             style={{
-                color: settings.store.showRoleColors ? typingUserColor(guildId, user.id) : undefined,
+                color: settings.store.showRoleColors ? GuildMemberStore.getMember(guildId, user.id)?.colorString : undefined,
             }}
         >
             {settings.store.showAvatars && (
@@ -104,7 +96,7 @@ const TypingUser = ErrorBoundary.wrap(function ({ user, guildId }: Props) {
 export default definePlugin({
     name: "TypingTweaks",
     description: "Show avatars and role colours in the typing indicator",
-    authors: [Devs.zt],
+    authors: [Devs.zt, Devs.sadan],
     settings,
 
     managedStyle,
@@ -116,24 +108,49 @@ export default definePlugin({
             replacement: [
                 {
                     // Style the indicator and add function call to modify the children before rendering
-                    match: /(?<=\[(\i)\.length>0.{0,300}?"aria-atomic":!0,children:)\i/,
-                    replace: "$self.renderTypingUsers({ users: $1, guildId: arguments[0]?.channel?.guild_id, children: $& })"
+                    match: /(?<="aria-atomic":!0,children:)\i/,
+                    replace: "$self.renderTypingUsers({ users: arguments[0]?.typingUserObjects, guildId: arguments[0]?.channel?.guild_id, children: $& })"
                 },
                 {
-                    // Changes the indicator to keep the user object when creating the list of typing users
-                    match: /\.map\((\i)=>\i\.\i\.getName\(\i(?:\.guild_id)?,\i\.id,\1\)\)/,
-                    replace: ""
+                    match: /(?<=function \i\(\i\)\{)(?=[^}]+?\{channel:\i,isThreadCreation:\i=!1\})/,
+                    replace: "let typingUserObjects = $self.useTypingUsers(arguments[0]?.channel);"
+                },
+                {
+                    // Get the typing users as user objects instead of names
+                    match: /typingUsers:(\i)\?\[\]:\i,/,
+                    // check by typeof so if the variable is not defined due to other patch failing, it won't throw a ReferenceError
+                    replace: "$&typingUserObjects: $1 || typeof typingUserObjects === 'undefined' ? [] : typingUserObjects,"
                 },
                 {
                     // Adds the alternative formatting for several users typing
-                    match: /(,{a:(\i),b:(\i),c:\i}\):\i\.length>3&&\(\i=)\i\.\i\.string\(\i\.\i#{intl::SEVERAL_USERS_TYPING}\)(?<=(\i)\.length.+?)/,
-                    replace: (_, rest, a, b, users) =>
-                        `${rest}$self.buildSeveralUsers({ a: ${a}, b: ${b}, count: ${users}.length - 2, guildId: arguments[0]?.channel?.guild_id })`,
+                    // users.length > 3 && (component = intl(key))
+                    match: /(&&\(\i=)\i\.\i\.format\(\i\.\i#{intl::SEVERAL_USERS_TYPING_STRONG},\{\}\)/,
+                    replace: "$1$self.buildSeveralUsers({ users: arguments[0]?.typingUserObjects, count: arguments[0]?.typingUserObjects?.length - 2, guildId: arguments[0]?.channel?.guild_id })",
                     predicate: () => settings.store.alternativeFormatting
                 }
             ]
         }
     ],
+
+    useTypingUsers(channel: Channel | undefined): User[] {
+        try {
+            if (!channel) {
+                throw new Error("No channel");
+            }
+
+            const typingUsers = useStateFromStores([TypingStore], () => TypingStore.getTypingUsers(channel.id));
+            const myId = useStateFromStores([AuthenticationStore], () => AuthenticationStore.getId());
+
+            return Object.keys(typingUsers)
+                .filter(id => id && id !== myId && !RelationshipStore.isBlockedOrIgnored(id))
+                .map(id => UserStore.getUser(id))
+                .filter(isNonNullish);
+        } catch (e) {
+            new Logger("TypingTweaks").error("Failed to get typing users:", e);
+            return [];
+        }
+    },
+
 
     buildSeveralUsers,
 
@@ -153,7 +170,7 @@ export default definePlugin({
                 return <TypingUser key={user.id} guildId={guildId} user={user} />;
             });
         } catch (e) {
-            console.error(e);
+            new Logger("TypingTweaks").error("Failed to render typing users:", e);
         }
 
         return children;

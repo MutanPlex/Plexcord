@@ -34,8 +34,8 @@ export default definePlugin({
                     replace: "if(Plexcord.Api.Notices.currentNotice)return false;$&"
                 },
                 {
-                    match: /(?<=,NOTICE_DISMISS:function\(\i\){)return null!=(\i)/,
-                    replace: "if($1?.id==\"PlexcordNotice\")return($1=null,Plexcord.Api.Notices.nextNotice(),true);$&"
+                    match: /(?<=function (\i)\(\i\){)return null!=(\i)(?=.+?NOTICE_DISMISS:\1)/,
+                    replace: (m, _, notice) => `if(${notice}?.id=="PlexcordNotice")return(${notice}=null,Plexcord.Api.Notices.nextNotice(),true);${m}`
                 }
             ]
         }
