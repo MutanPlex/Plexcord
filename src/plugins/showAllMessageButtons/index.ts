@@ -21,7 +21,6 @@ import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { MessageActions } from "@webpack/common";
 
 const settings = definePluginSettings({
     noShiftDelete: {
@@ -48,33 +47,11 @@ export default definePlugin({
     patches: [
         {
             find: "#{intl::MESSAGE_UTILITIES_A11Y_LABEL}",
-            replacement: [
-                {
-                    match: /(?<=(\i)=)\i(?=&&.+?isExpanded:\1)/,
-                    replace: "true"
-                },
-                {
-                    predicate: () => settings.store.noShiftDelete,
-                    match: /onClick:.{10,20}(?=,dangerous:!0)/,
-                    replace:
-                        "onClick:() => $self.deleteMessage(arguments[0].message)",
-                },
-                {
-                    predicate: () => settings.store.noShiftPin,
-                    match: /onClick:.{10,30}(?=\},"pin")/,
-                    replace:
-                        "onClick:() => $self.toggleMessagePin(arguments[0]),",
-                },
-            ],
-        },
-    ],
-
-    deleteMessage({ channel_id, id }) {
-        MessageActions.deleteMessage(channel_id, id);
-    },
-    toggleMessagePin({ channel, message }) {
-        if (message.pinned) return PinActions.unpinMessage(channel, message.id);
-
-        PinActions.pinMessage(channel, message.id);
-    },
+            replacement: {
+                // isExpanded = isShiftPressed && other conditions...
+                match: /(?<=(\i)=)\i(?=&&.+?isExpanded:\1)/,
+                replace: "true"
+            }
+        }
+    ]
 });

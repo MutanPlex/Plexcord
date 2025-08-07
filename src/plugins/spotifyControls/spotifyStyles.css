@@ -143,10 +143,6 @@
     color: var(--header-primary);
 }
 
-.pc-spotify-comma {
-    color: var(--header-secondary);
-}
-
 .pc-spotify-artist[role="link"]:hover,
 #pc-spotify-album-title[role="link"]:hover,
 #pc-spotify-song-title[role="link"]:hover {
