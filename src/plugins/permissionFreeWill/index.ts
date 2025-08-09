@@ -48,7 +48,7 @@ export default definePlugin({
             replacement: [
                 {
                     match: /{(?:\i:\(\)=>\i,?){2}}/,
-                    replace: m => m.replaceAll(canonicalizeMatch(/\(\)=>\i/g), "()=>Promise.resolve(true)")
+                    replace: m => m.replaceAll(canonicalizeMatch(/\(\)=>\i/g), "()=>()=>Promise.resolve(true)")
                 }
             ],
             predicate: () => settings.store.onboarding

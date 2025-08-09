@@ -51,10 +51,13 @@ export let ChannelStore: t.ChannelStore;
 export let RelationshipStore: t.RelationshipStore;
 
 export let EmojiStore: t.EmojiStore;
-export let StickerStore: t.StickerStore;
+export let StickersStore: t.StickersStore;
 export let ThemeStore: t.ThemeStore;
 export let WindowStore: t.WindowStore;
 export let DraftStore: t.DraftStore;
+export let MediaEngineStore: t.MediaEngineStore;
+export let StreamerModeStore: t.StreamerModeStore;
+export let SpellCheckStore: t.SpellCheckStore;
 
 /**
  * @see jsdoc of {@link t.useStateFromStores}
@@ -69,6 +72,7 @@ waitForStore("GuildChannelStore", m => GuildChannelStore = m);
 waitForStore("GuildMemberStore", m => GuildMemberStore = m);
 waitForStore("GuildRoleStore", m => GuildRoleStore = m);
 waitForStore("GuildStore", m => GuildStore = m);
+waitForStore("MediaEngineStore", m => MediaEngineStore = m);
 waitForStore("MessageStore", m => MessageStore = m);
 waitForStore("PermissionStore", m => PermissionStore = m);
 waitForStore("PresenceStore", m => PresenceStore = m);
@@ -76,7 +80,9 @@ waitForStore("RelationshipStore", m => RelationshipStore = m);
 waitForStore("ReadStateStore", m => ReadStateStore = m);
 waitForStore("SelectedChannelStore", m => SelectedChannelStore = m);
 waitForStore("SelectedGuildStore", m => SelectedGuildStore = m);
-waitForStore("StickersStore", m => StickerStore = m);
+waitForStore("SpellcheckStore", m => SpellCheckStore = m);
+waitForStore("StickersStore", m => StickersStore = m);
+waitForStore("StreamerModeStore", m => StreamerModeStore = m);
 waitForStore("TypingStore", m => TypingStore = m);
 waitForStore("ThemeStore", m => {
     ThemeStore = m;

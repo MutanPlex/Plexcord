@@ -6,97 +6,76 @@
  */
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { PcDevs } from "@utils/constants";
+import { Message, Sticker } from "@plexcord/discord-types";
+import { Devs, PcDevs } from "@utils/constants";
 import { copyWithToast } from "@utils/misc";
 import definePlugin from "@utils/types";
-import { Menu, React, StickerStore } from "@webpack/common";
-import { Promisable } from "type-fest";
+import { Menu, React, StickersStore } from "@webpack/common";
+import ExpressionClonerPlugin from "plugins/expressionCloner";
 
-interface Sticker {
-    t: "Sticker";
-    format_type: number;
-    id: string;
-    type: number;
-}
+const StickerExt = [, "png", "png", "json", "gif"] as const;
 
-const StickerExt = ["png", "png", "json", "gif"] as const;
+type PartialSticker = Pick<Sticker, "id" | "format_type">;
 
-function getUrl(data: Sticker) {
+function getUrl(data: PartialSticker): string {
     if (data.format_type === 4)
-        return `https:${window.GLOBAL_ENV.MEDIA_PROXY_ENDPOINT}/stickers/${data.id}.gif?size=4096&lossless=true`;
+        return `https:${window.GLOBAL_ENV.MEDIA_PROXY_ENDPOINT}/stickers/${data.id}.gif?size=512&lossless=true`;
 
-    return `https://${window.GLOBAL_ENV.CDN_HOST}/stickers/${data.id}.${StickerExt[data.format_type]}?size=4096&lossless=true`;
+    return `https://${window.GLOBAL_ENV.CDN_HOST}/stickers/${data.id}.${StickerExt[data.format_type]}?size=512&lossless=true`;
 }
 
-function buildMenuItem(Sticker, fetchData: () => Promisable<Omit<Sticker, "t">>) {
+function buildMenuItem(sticker: PartialSticker, addBottomSeparator: boolean) {
     return (
         <>
-            <Menu.MenuSeparator></Menu.MenuSeparator>
-            <Menu.MenuItem
-                id="copystickerurl"
-                key="copystickerurl"
-                label={"Copy URL"}
-                action={async () => {
-                    const res = await fetchData();
-                    const data = { t: Sticker, ...res } as Sticker;
-                    const url = getUrl(data);
-                    copyWithToast(url, "Link copied!");
-                }
-                }
-            />
-            <Menu.MenuItem
-                id="openstickerlink"
-                key="openstickerlink"
-                label={"Open URL"}
-                action={async () => {
-                    const res = await fetchData();
-                    const data = { t: Sticker, ...res } as Sticker;
-                    const url = getUrl(data);
-                    PlexcordNative.native.openExternal(url);
-                }
-                }
-            />
+            <Menu.MenuGroup>
+                <Menu.MenuItem
+                    id="pc-copy-sticker-link"
+                    key="pc-copy-sticker-link"
+                    label="Copy Link"
+                    action={() => copyWithToast(getUrl(sticker), "Link copied!")}
+                />
+
+                <Menu.MenuItem
+                    id="pc-open-sticker-link"
+                    key="pc-open-sticker-link"
+                    label="Open Link"
+                    action={() => PlexcordNative.native.openExternal(getUrl(sticker))}
+                />
+            </Menu.MenuGroup>
+            {addBottomSeparator && <Menu.MenuSeparator />}
         </>
     );
 }
 
-const messageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => {
-    const { favoriteableId, favoriteableType } = props ?? {};
-    if (!favoriteableId) return;
-    const menuItem = (() => {
-        switch (favoriteableType) {
-            case "sticker":
-                const sticker = props.message.stickerItems.find(s => s.id === favoriteableId);
-                if (!sticker?.format_type) return;
-                return buildMenuItem("Sticker", () => props.message.stickerItems[0]);
-        }
-    })();
+const messageContextMenuPatch: NavContextMenuPatchCallback = (
+    children,
+    { favoriteableId, favoriteableType, message }: { favoriteableId: string; favoriteableType: string; message: Message; }
+) => {
+    if (!favoriteableId || favoriteableType !== "sticker") return;
 
-    if (menuItem)
-        findGroupChildrenByChildId("devmode-copy-id", children, true)?.push(menuItem);
+    const sticker = message.stickerItems.find(s => s.id === favoriteableId);
+    if (!sticker?.format_type) return;
+
+    const idx = children.findIndex(c => Array.isArray(c) && findGroupChildrenByChildId("pc-copy-sticker-url", c) != null);
+
+    children.splice(idx, 0, buildMenuItem(sticker, idx !== -1));
 };
 
 const expressionPickerPatch: NavContextMenuPatchCallback = (children, props: { target: HTMLElement; }) => {
-    const { id } = props?.target?.dataset ?? {};
+    const id = props?.target?.dataset?.id;
     if (!id) return;
+    if (props.target.className?.includes("lottieCanvas")) return;
 
-    if (!props.target.className?.includes("lottieCanvas")) {
-        const stickerCache = StickerStore.getStickerById(id);
-        if (stickerCache) {
-            const stickerInfo = {
-                format_type: stickerCache.format_type,
-                id: stickerCache.id,
-                type: stickerCache.type
-            };
-            children.push(buildMenuItem("Sticker", () => stickerInfo));
-        }
+    const sticker = StickersStore.getStickerById(id);
+    if (sticker) {
+        children.push(buildMenuItem(sticker, Plexcord.Plugins.isPluginEnabled(ExpressionClonerPlugin.name)));
     }
 };
 
 export default definePlugin({
     name: "CopyStickerLinks",
-    description: "Adds the ability to copy and open sticker links to your browser",
-    authors: [PcDevs.Byeoon],
+    description: "Adds the ability to copy & open Sticker links",
+    authors: [Devs.Ven, PcDevs.Byeoon],
     contextMenus: {
         "message": messageContextMenuPatch,
         "expression-picker": expressionPickerPatch

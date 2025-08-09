@@ -76,7 +76,6 @@
     flex-direction: row;
     align-items: center;
     gap: 1em;
-    margin-bottom: -16px;
 }
 
 .pc-shc-allowed-users-and-roles-container-toggle-btn {
@@ -99,10 +98,6 @@
     margin-left: 12px;
     flex-wrap: wrap;
     justify-content: center;
-}
-
-.pc-shc-allowed-users-and-roles-container > [class^="container"] {
-    align-items: center;
 }
 
 .pc-shc-hidden-channel-icon {

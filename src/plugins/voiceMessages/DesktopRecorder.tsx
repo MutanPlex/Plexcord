@@ -18,11 +18,10 @@
 */
 
 import { PluginNative } from "@utils/types";
-import { Button, showToast, Toasts, useState } from "@webpack/common";
+import { Button, MediaEngineStore, showToast, Toasts, useState } from "@webpack/common";
 
 import type { VoiceRecorder } from ".";
 import { settings } from "./settings";
-import { MediaEngineStore } from "./utils";
 
 const Native = PlexcordNative.pluginHelpers.VoiceMessages as PluginNative<typeof import("./native")>;
 
@@ -57,7 +56,7 @@ export const VoiceRecorderDesktop: VoiceRecorder = ({ setAudioBlob, onRecordingC
                 if (filePath) {
                     const buf = await Native.readRecording(filePath);
                     if (buf)
-                        setAudioBlob(new Blob([buf], { type: "audio/ogg; codecs=opus" }));
+                        setAudioBlob(new Blob([new Uint8Array(buf)], { type: "audio/ogg; codecs=opus" }));
                     else
                         showToast("Failed to finish recording", Toasts.Type.FAILURE);
                 }

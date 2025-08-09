@@ -7,10 +7,11 @@
 
 import "./styles.css";
 
+import { StickerFormatType } from "@plexcord/discord-types/enums";
 import { PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin from "@utils/types";
-import { StickerStore } from "@webpack/common";
+import { StickersStore } from "@webpack/common";
 
 import { getMimeType, isLinkAnImage, settings, stripDiscordParams } from "./settings";
 
@@ -150,20 +151,20 @@ function loadImagePreview(url: string, sticker: boolean) {
 
     if (sticker) {
         const stickerId = url.split("/").pop()?.split(".")[0] ?? null;
-        const stickerData = stickerId ? StickerStore.getStickerById(stickerId) : null;
+        const stickerData = stickerId ? StickersStore.getStickerById(stickerId) : null;
 
         if (stickerData) {
-            switch (stickerData.type) {
-                case 1:
+            switch (stickerData.format_type) {
+                case StickerFormatType.PNG:
                     stickerType = "png";
                     break;
-                case 2:
+                case StickerFormatType.APNG:
                     stickerType = "apng";
                     break;
-                case 3:
+                case StickerFormatType.LOTTIE:
                     stickerType = "lottie";
                     break;
-                case 4:
+                case StickerFormatType.GIF:
                     stickerType = "gif";
                     break;
                 default:

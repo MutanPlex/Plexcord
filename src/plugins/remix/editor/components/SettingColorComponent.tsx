@@ -13,12 +13,6 @@ import "./colorStyles.css";
 import { classNameFactory } from "@api/Styles";
 import { ColorPicker, Forms } from "@webpack/common";
 
-interface ColorPickerProps {
-    color: number | null;
-    showEyeDropper?: boolean;
-    onChange(value: number | null): void;
-}
-
 const cl = classNameFactory("pc-remix-settings-color-");
 
 interface Props {

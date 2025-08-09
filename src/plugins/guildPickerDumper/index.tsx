@@ -10,7 +10,7 @@ import { migratePluginSettings } from "@api/Settings";
 import type { Guild } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
-import { EmojiStore, Menu, StickerStore } from "@webpack/common";
+import { EmojiStore, Menu, StickersStore } from "@webpack/common";
 import { zipSync } from "fflate";
 
 const Patch: NavContextMenuPatchCallback = (children, { guild }: { guild: Guild; }) => {
@@ -31,7 +31,7 @@ async function zipGuildAssets(guild: Guild, type: "emojis" | "stickers") {
     const isEmojis = type === "emojis";
     const items = isEmojis
         ? EmojiStore.getGuilds()[guild.id]?.emojis
-        : StickerStore.getStickersByGuildId(guild.id);
+        : StickersStore.getStickersByGuildId(guild.id);
 
     if (!items) {
         return console.log("Server not found!");
@@ -54,7 +54,7 @@ async function zipGuildAssets(guild: Guild, type: "emojis" | "stickers") {
     Promise.all(assetPromises)
         .then(results => {
             const zipped = zipSync(Object.fromEntries(results.map(({ file, filename }) => [filename, file])));
-            const blob = new Blob([zipped], { type: "application/zip" });
+            const blob = new Blob([new Uint8Array(zipped)], { type: "application/zip" });
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
             link.download = `${guild.name}-${type}.zip`;

@@ -8,9 +8,9 @@
 import { definePluginSettings, Settings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import { findStoreLazy } from "@webpack";
+import { MediaEngineStore } from "@webpack/common";
 
-let mediaEngine = findStoreLazy("MediaEngineStore");
+let mediaEngine = MediaEngineStore;
 
 const originalCodecStatuses: {
     AV1: boolean,

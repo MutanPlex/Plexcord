@@ -8,16 +8,19 @@ export * from "./GuildChannelStore";
 export * from "./GuildMemberStore";
 export * from "./GuildRoleStore";
 export * from "./GuildStore";
+export * from "./MediaEngineStore";
 export * from "./MessageStore";
 export * from "./RelationshipStore";
 export * from "./SelectedChannelStore";
 export * from "./SelectedGuildStore";
+export * from "./SpellCheckStore";
+export * from "./StickersStore";
+export * from "./StreamerModeStore";
 export * from "./ThemeStore";
 export * from "./TypingStore";
 export * from "./UserProfileStore";
 export * from "./UserStore";
 export * from "./WindowStore";
-export * from "./StickerStore";
 
 /**
  * React hook that returns stateful data for one or more stores
