@@ -2,6 +2,9 @@ import { CSSProperties, ImgHTMLAttributes, JSX } from "react";
 import { Application } from "./Application";
 import { User } from "./User";
 
+export type { User } from "./User";
+export type { Application } from "./Application";
+
 export interface ActivityTimestamp {
     start?: number;
     end?: number;
@@ -49,10 +52,11 @@ export interface ActivityViewProps {
 }
 
 export interface ApplicationIcon {
-    image: ImgHTMLAttributes<HTMLImageElement> & {
+    image?: ImgHTMLAttributes<HTMLImageElement> & {
         src: string;
         alt: string;
     };
+    element?: JSX.Element;
     activity: Activity;
     application?: Application;
 }

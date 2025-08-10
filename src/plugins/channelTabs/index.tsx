@@ -10,7 +10,7 @@ import "./style.css";
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Channel, Message } from "@plexcord/discord-types";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { ChannelStore, Menu } from "@webpack/common";
 import { JSX } from "react";
@@ -38,7 +38,7 @@ const contextMenuPatch: NavContextMenuPatchCallback = (children, props: { channe
 export default definePlugin({
     name: "ChannelTabs",
     description: "Group your commonly visited channels in tabs, like a browser",
-    authors: [Devs.TheSun, Devs.TheKodeToad, Devs.Nickyux],
+    authors: [Devs.TheSun, Devs.TheKodeToad, PcDevs.keifufu, Devs.Nickyux, PcDevs.DiabeloDEV],
     dependencies: ["ContextMenuAPI"],
     contextMenus: {
         "channel-mention-context": contextMenuPatch,
@@ -103,12 +103,25 @@ export default definePlugin({
         currentChannel: BasicChannelTabsProps,
         children: JSX.Element;
     }) {
+        const tabsContainer = (
+            <ErrorBoundary>
+                <ChannelsTabsContainer {...currentChannel} />
+            </ErrorBoundary>
+        );
+
+        if (settings.store.tabBarPosition === "top") {
+            return (
+                <>
+                    {tabsContainer}
+                    {children}
+                </>
+            );
+        }
+
         return (
             <>
-                <ErrorBoundary>
-                    <ChannelsTabsContainer {...currentChannel} />
-                </ErrorBoundary>
                 {children}
+                {tabsContainer}
             </>
         );
     },

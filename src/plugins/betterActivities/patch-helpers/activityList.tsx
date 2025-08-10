@@ -12,7 +12,7 @@ import { TwitchIcon } from "@plugins/betterActivities/components/TwitchIcon";
 import { settings } from "@plugins/betterActivities/settings";
 import { cl, getApplicationIcons } from "@plugins/betterActivities/utils";
 import { findComponentByCodeLazy } from "@webpack";
-import { React, Tooltip } from "@webpack/common";
+import { Tooltip } from "@webpack/common";
 import { JSX } from "react";
 
 // Discord no longer shows an icon here by default but we use the one from the popout now here
@@ -26,7 +26,7 @@ export function patchActivityList({ activities, user, hideTooltip }: ActivityLis
     const applicationIcons = getApplicationIcons(activities);
     if (applicationIcons.length) {
         const compareImageSource = (a: ApplicationIcon, b: ApplicationIcon) => {
-            return a.image.src === b.image.src;
+            return a.image?.src === b.image?.src;
         };
         const uniqueIcons = applicationIcons.filter((element, index, array) => {
             return array.findIndex(el => compareImageSource(el, element)) === index;
