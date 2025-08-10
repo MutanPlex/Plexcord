@@ -10,35 +10,50 @@ import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { MediaEngineStore } from "@webpack/common";
 
-let mediaEngine = MediaEngineStore;
+interface CodecCapability {
+    codec: string;
+    decode: boolean;
+    encode: boolean;
+}
 
-const originalCodecStatuses: {
-    AV1: boolean,
-    H265: boolean,
-    H264: boolean;
-} = {
-    AV1: true,
-    H265: true,
-    H264: true
-};
+type CodecType = "AV1" | "H265" | "H264";
 
-const settings = definePluginSettings({
-    disableAv1Codec: {
+const CODEC_CONFIGS = {
+    AV1: {
+        settingKey: "disableAv1Codec" as const,
         description: "Make Discord not consider using AV1 for streaming.",
-        type: OptionType.BOOLEAN,
-        default: false
+        method: "setAv1Enabled" as const,
     },
-    disableH265Codec: {
+    H265: {
+        settingKey: "disableH265Codec" as const,
         description: "Make Discord not consider using H265 for streaming.",
-        type: OptionType.BOOLEAN,
-        default: false
+        method: "setH265Enabled" as const,
     },
-    disableH264Codec: {
+    H264: {
+        settingKey: "disableH264Codec" as const,
         description: "Make Discord not consider using H264 for streaming.",
-        type: OptionType.BOOLEAN,
-        default: false
+        method: "setH264Enabled" as const,
     },
-});
+} as const;
+
+const originalCodecStatuses = new Map<CodecType, boolean>([
+    ["AV1", true],
+    ["H265", true],
+    ["H264", true],
+]);
+
+const settings = definePluginSettings(
+    Object.fromEntries(
+        Object.entries(CODEC_CONFIGS).map(([codec, config]) => [
+            config.settingKey,
+            {
+                description: config.description,
+                type: OptionType.BOOLEAN,
+                default: false,
+            },
+        ])
+    )
+);
 
 export default definePlugin({
     name: "StreamingCodecDisabler",
@@ -56,27 +71,51 @@ export default definePlugin({
         }
     ],
 
-    async updateDisabledCodecs() {
-        mediaEngine.setAv1Enabled(originalCodecStatuses.AV1 && !Settings.plugins.StreamingCodecDisabler.disableAv1Codec);
-        mediaEngine.setH265Enabled(originalCodecStatuses.H265 && !Settings.plugins.StreamingCodecDisabler.disableH265Codec);
-        mediaEngine.setH264Enabled(originalCodecStatuses.H264 && !Settings.plugins.StreamingCodecDisabler.disableH264Codec);
+    getMediaEngineInstance() {
+        return MediaEngineStore.getMediaEngine();
+    },
+
+    updateDisabledCodecs() {
+        const mediaEngineInstance = this.getMediaEngineInstance();
+        const pluginSettings = Settings.plugins.StreamingCodecDisabler;
+
+        for (const [codec, config] of Object.entries(CODEC_CONFIGS)) {
+            const codecType = codec as CodecType;
+            const originalStatus = originalCodecStatuses.get(codecType) ?? true;
+            const isDisabled = pluginSettings[config.settingKey];
+            const shouldEnable = originalStatus && !isDisabled;
+
+            mediaEngineInstance[config.method](shouldEnable);
+        }
     },
 
     async start() {
-        mediaEngine = mediaEngine.getMediaEngine();
-        const options = Object.keys(originalCodecStatuses);
-        // [{"codec":"","decode":false,"encode":false}]
-        const CodecCapabilities = JSON.parse(await new Promise(res => mediaEngine.getCodecCapabilities(res)));
-        CodecCapabilities.forEach((codec: { codec: string; encode: boolean; }) => {
-            if (options.includes(codec.codec)) {
-                originalCodecStatuses[codec.codec] = codec.encode;
-            }
-        });
+        try {
+            const mediaEngineInstance = this.getMediaEngineInstance();
+            const capabilities: CodecCapability[] = JSON.parse(
+                await new Promise<string>(resolve =>
+                    mediaEngineInstance.getCodecCapabilities(resolve)
+                )
+            );
+
+            capabilities.forEach(({ codec, encode }) => {
+                const codecType = codec as CodecType;
+                if (originalCodecStatuses.has(codecType)) {
+                    originalCodecStatuses.set(codecType, encode);
+                }
+            });
+        } catch (error) {
+            console.error("Failed to initialize codec capabilities:", error);
+        }
     },
 
-    async stop() {
-        mediaEngine.setAv1Enabled(originalCodecStatuses.AV1);
-        mediaEngine.setH265Enabled(originalCodecStatuses.H265);
-        mediaEngine.setH264Enabled(originalCodecStatuses.H264);
+    stop() {
+        const mediaEngineInstance = this.getMediaEngineInstance();
+
+        for (const [codec, config] of Object.entries(CODEC_CONFIGS)) {
+            const codecType = codec as CodecType;
+            const originalStatus = originalCodecStatuses.get(codecType) ?? true;
+            mediaEngineInstance[config.method](originalStatus);
+        }
     }
 });

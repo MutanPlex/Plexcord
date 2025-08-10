@@ -20,14 +20,14 @@ import { useForceUpdater } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy, findByPropsLazy } from "@webpack";
 import { Button, ChannelStore, FluxDispatcher, Forms, Select, SelectedChannelStore, Switch, TabBar, TextInput, Tooltip, UserStore, useState } from "@webpack/common";
-import type { JSX, PropsWithChildren } from "react";
+import type { JSX } from "react";
 
 type IconProps = JSX.IntrinsicElements["svg"];
-type KeywordEntry = { regex: string, listIds: Array<string>, listType: ListType, ignoreCase: boolean; };
+type KeywordEntry = { regex: string, listIds: string[], listType: ListType, ignoreCase: boolean; };
 
-let keywordEntries: Array<KeywordEntry> = [];
+let keywordEntries: KeywordEntry[] = [];
 let currentUser: User;
-let keywordLog: Array<any> = [];
+let keywordLog: any[] = [];
 let interceptor: (e: any) => void;
 
 const recentMentionsPopoutClass = findByPropsLazy("recentMentionsPopout");
@@ -70,25 +70,24 @@ interface BaseIconProps extends IconProps {
     viewBox: string;
 }
 
-function highlightKeywords(str: string, entries: Array<KeywordEntry>) {
-    let regexes: Array<RegExp>;
-    try {
-        regexes = entries.map(e => new RegExp(e.regex, "g" + (e.ignoreCase ? "i" : "")));
-    } catch (err) {
-        return [str];
-    }
+function highlightKeywords(str: string, entries: KeywordEntry[]) {
+    const regexes = entries.map(e => {
+        try {
+            return new RegExp(e.regex, "g" + (e.ignoreCase ? "i" : ""));
+        } catch {
+            return null;
+        }
+    }).filter(Boolean) as RegExp[];
 
-    const matches = regexes.map(r => str.match(r)).flat().filter(e => e != null) as Array<string>;
-    if (matches.length === 0) {
-        return [str];
-    }
+    const matches = regexes.flatMap(r => str.match(r) || []);
+    if (!matches.length) return [str];
 
-    const idx = str.indexOf(matches[0]);
-
+    const match = matches[0];
+    const idx = str.indexOf(match);
     return [
-        <span key={idx}>{str.substring(0, idx)}</span>,
-        <span className="highlight" key={idx}>{matches[0]}</span>,
-        <span key={idx}>{str.substring(idx + matches[0].length)}</span>
+        str.substring(0, idx),
+        <span className="highlight" key={match}>{match}</span>,
+        str.substring(idx + match.length)
     ];
 }
 
@@ -114,43 +113,36 @@ function Collapsible({ title, children }) {
 
 function ListedIds({ listIds, setListIds }) {
     const update = useForceUpdater();
-    const [values] = useState(listIds);
-
-    async function onChange(e: string, index: number) {
-        values[index] = e;
-        setListIds(values);
-        update();
-    }
-
-    const elements = values.map((currentValue: string, index: number) => {
-        return (
-            <Flex flexDirection="row" style={{ marginBottom: "5px" }} key={index}>
-                <div style={{ flexGrow: 1 }}>
-                    <TextInput
-                        placeholder="ID"
-                        spellCheck={false}
-                        value={currentValue}
-                        onChange={e => onChange(e, index)}
-                    />
-                </div>
-                <Button
-                    onClick={() => {
-                        values.splice(index, 1);
-                        setListIds(values);
-                        update();
-                    }}
-                    look={Button.Looks.BLANK}
-                    size={Button.Sizes.ICON}
-                    className={cl("delete")}>
-                    <DeleteIcon />
-                </Button>
-            </Flex>
-        );
-    });
 
     return (
         <>
-            {elements}
+            {listIds.map((value: string, index: number) => (
+                <Flex flexDirection="row" style={{ marginBottom: "5px" }} key={index}>
+                    <div style={{ flexGrow: 1 }}>
+                        <TextInput
+                            placeholder="ID"
+                            spellCheck={false}
+                            value={value}
+                            onChange={e => {
+                                listIds[index] = e;
+                                setListIds(listIds);
+                                update();
+                            }}
+                        />
+                    </div>
+                    <Button
+                        onClick={() => {
+                            listIds.splice(index, 1);
+                            setListIds(listIds);
+                            update();
+                        }}
+                        look={Button.Looks.BLANK}
+                        size={Button.Sizes.ICON}
+                        className={cl("delete")}>
+                        <DeleteIcon />
+                    </Button>
+                </Flex>
+            ))}
         </>
     );
 }
@@ -173,37 +165,24 @@ function ListTypeSelector({ listType, setListType }: { listType: ListType, setLi
 
 function KeywordEntries() {
     const update = useForceUpdater();
-    const [values] = useState(keywordEntries);
 
-    async function setRegex(index: number, value: string) {
-        keywordEntries[index].regex = value;
+    const updateEntry = async (index: number, updates: Partial<KeywordEntry>) => {
+        Object.assign(keywordEntries[index], updates);
         await DataStore.set(KEYWORD_ENTRIES_KEY, keywordEntries);
         update();
-    }
+    };
 
-    async function setListType(index: number, value: ListType) {
-        keywordEntries[index].listType = value;
-        await DataStore.set(KEYWORD_ENTRIES_KEY, keywordEntries);
-        update();
-    }
-
-    async function setListIds(index: number, value: Array<string>) {
-        keywordEntries[index].listIds = value ?? [];
-        await DataStore.set(KEYWORD_ENTRIES_KEY, keywordEntries);
-        update();
-    }
-
-    const elements = keywordEntries.map((entry, i) => {
-        return (
-            <>
-                <Collapsible title={`Keyword Entry ${i + 1}`}>
+    return (
+        <>
+            {keywordEntries.map((entry, i) => (
+                <Collapsible title={`Keyword Entry ${i + 1}`} key={i}>
                     <Flex flexDirection="row">
                         <div style={{ flexGrow: 1 }}>
                             <TextInput
                                 placeholder="example|regex"
                                 spellCheck={false}
-                                value={values[i].regex}
-                                onChange={e => setRegex(i, e)}
+                                value={entry.regex}
+                                onChange={e => updateEntry(i, { regex: e })}
                             />
                         </div>
                         <Button
@@ -215,11 +194,8 @@ function KeywordEntries() {
                         </Button>
                     </Flex>
                     <Switch
-                        value={values[i].ignoreCase}
-                        onChange={() => {
-                            values[i].ignoreCase = !values[i].ignoreCase;
-                            update();
-                        }}
+                        value={entry.ignoreCase}
+                        onChange={() => updateEntry(i, { ignoreCase: !entry.ignoreCase })}
                         style={{ marginTop: "0.5em", marginRight: "40px" }}
                     >
                         Ignore Case
@@ -227,57 +203,35 @@ function KeywordEntries() {
                     <Forms.FormTitle tag="h5">Whitelist/Blacklist</Forms.FormTitle>
                     <Flex flexDirection="row">
                         <div style={{ flexGrow: 1 }}>
-                            <ListedIds listIds={values[i].listIds} setListIds={e => setListIds(i, e)} />
+                            <ListedIds listIds={entry.listIds} setListIds={e => updateEntry(i, { listIds: e })} />
                         </div>
                     </Flex>
                     <div className={[Margins.top8, Margins.bottom8].join(" ")} />
                     <Flex flexDirection="row">
                         <Button onClick={() => {
-                            values[i].listIds.push("");
+                            entry.listIds.push("");
                             update();
                         }}>Add ID</Button>
                         <div style={{ flexGrow: 1 }}>
-                            <ListTypeSelector listType={values[i].listType} setListType={e => setListType(i, e)} />
+                            <ListTypeSelector listType={entry.listType} setListType={e => updateEntry(i, { listType: e })} />
                         </div>
                     </Flex>
                 </Collapsible>
-            </>
-        );
-    });
-
-    return (
-        <>
-            {elements}
+            ))}
             <div><Button onClick={() => addKeywordEntry(update)}>Add Keyword Entry</Button></div>
         </>
     );
 }
 
-function Icon({ height = 24, width = 24, className, children, viewBox, ...svgProps }: PropsWithChildren<BaseIconProps>) {
+function DoubleCheckmarkIcon(props: IconProps) {
     return (
         <svg
-            className={classes(className, "pc-icon")}
-            role="img"
-            width={width}
-            height={height}
-            viewBox={viewBox}
-            {...svgProps}
-        >
-            {children}
-        </svg>
-    );
-}
-
-// Ideally I would just add this to Icons.tsx, but I cannot as this is a user-plugin :/
-function DoubleCheckmarkIcon(props: IconProps) {
-    // noinspection TypeScriptValidateTypes
-    return (
-        <Icon
             {...props}
-            className={classes(props.className, "pc-double-checkmark-icon")}
-            viewBox="0 0 24 24"
+            className={classes(props.className, "pc-double-checkmark-icon", "pc-icon")}
+            role="img"
             width={16}
             height={16}
+            viewBox="0 0 24 24"
         >
             <path fill="currentColor"
                 d="M16.7 8.7a1 1 0 0 0-1.4-1.4l-3.26 3.24a1 1 0 0 0 1.42 1.42L16.7 8.7ZM3.7 11.3a1 1 0 0 0-1.4 1.4l4.5 4.5a1 1 0 0 0 1.4-1.4l-4.5-4.5Z"
@@ -285,7 +239,7 @@ function DoubleCheckmarkIcon(props: IconProps) {
             <path fill="currentColor"
                 d="M21.7 9.7a1 1 0 0 0-1.4-1.4L13 15.58l-3.3-3.3a1 1 0 0 0-1.4 1.42l4 4a1 1 0 0 0 1.4 0l8-8Z"
             />
-        </Icon>
+        </svg>
     );
 }
 
@@ -347,21 +301,17 @@ export default definePlugin({
         currentUser = UserStore.getCurrentUser();
         keywordEntries = await DataStore.get(KEYWORD_ENTRIES_KEY) ?? [];
         await DataStore.set(KEYWORD_ENTRIES_KEY, keywordEntries);
-        (await DataStore.get(KEYWORD_LOG_KEY) ?? []).map(e => JSON.parse(e)).forEach(e => {
-            this.addToLog(e);
-        });
 
-        interceptor = (e: any) => {
-            return this.modify(e);
-        };
+        const savedLogs = await DataStore.get(KEYWORD_LOG_KEY) ?? [];
+        savedLogs.map(e => JSON.parse(e)).forEach(e => this.addToLog(e));
+
+        interceptor = e => this.modify(e);
         FluxDispatcher.addInterceptor(interceptor);
     },
 
     stop() {
         const index = FluxDispatcher._interceptors.indexOf(interceptor);
-        if (index > -1) {
-            FluxDispatcher._interceptors.splice(index, 1);
-        }
+        if (index > -1) FluxDispatcher._interceptors.splice(index, 1);
     },
 
     applyKeywordEntries(m: Message) {
@@ -443,18 +393,12 @@ export default definePlugin({
 
     deleteKeyword(id) {
         keywordLog = keywordLog.filter(e => e.id !== id);
-
-        DataStore.update(KEYWORD_LOG_KEY, (log: string[] = []) => {
-            return log.filter(entry => {
-                try {
-                    const parsed = JSON.parse(entry);
-                    return parsed.id !== id;
-                } catch {
-                    return true; // Keep invalid entries to avoid data loss
-                }
-            });
-        });
-
+        DataStore.update(KEYWORD_LOG_KEY, (log: string[] = []) =>
+            log.filter(entry => {
+                try { return JSON.parse(entry).id !== id; }
+                catch { return true; }
+            })
+        );
         this.onUpdate();
     },
 
@@ -467,50 +411,40 @@ export default definePlugin({
     },
 
     tryKeywordMenu(setTab, onJump, closePopout) {
+        const clearAll = () => {
+            keywordLog = [];
+            DataStore.set(KEYWORD_LOG_KEY, []);
+            this.onUpdate();
+        };
+
         const header = (
-            <><MenuHeader tab={8} setTab={setTab} closePopout={closePopout} badgeState={{ badgeForYou: false }} />
-                <span>
-                    <Tooltip text="Clear All">
-                        {({ onMouseLeave, onMouseEnter }) => (
-                            <div className={classes(tabClass.controlButton, buttonClass.button, buttonClass.tertiary, buttonClass.size32)}
-                                onMouseLeave={onMouseLeave}
-                                onMouseEnter={onMouseEnter}
-                                onClick={() => {
-                                    keywordLog = [];
-                                    DataStore.set(KEYWORD_LOG_KEY, []);
-                                    this.onUpdate();
-                                }}>
-                                <DoubleCheckmarkIcon />
-                            </div>
-                        )}
-                    </Tooltip>
-                </span>
+            <>
+                <MenuHeader tab={8} setTab={setTab} closePopout={closePopout} badgeState={{ badgeForYou: false }} />
+                <Tooltip text="Clear All">
+                    {({ onMouseLeave, onMouseEnter }) => (
+                        <div className={classes(tabClass.controlButton, buttonClass.button, buttonClass.tertiary, buttonClass.size32)}
+                            onMouseLeave={onMouseLeave}
+                            onMouseEnter={onMouseEnter}
+                            onClick={clearAll}>
+                            <DoubleCheckmarkIcon />
+                        </div>
+                    )}
+                </Tooltip>
             </>
         );
 
-        const channel = ChannelStore.getChannel(SelectedChannelStore.getChannelId());
-
         const [tempLogs, setKeywordLog] = useState(keywordLog);
-        this.onUpdate = () => {
-            const newLog = Array.from(keywordLog);
-            setKeywordLog(newLog);
-        };
+        this.onUpdate = () => setKeywordLog([...keywordLog]);
 
         const messageRender = (e, t) => {
             e._keyword = true;
-
             e.customRenderedContent = {
                 content: highlightKeywords(e.content, keywordEntries)
             };
-
-            const msg = this.renderMsg({
-                message: e,
-                gotoMessage: t,
-                dismissible: true
-            });
-
-            return [msg];
+            return [this.renderMsg({ message: e, gotoMessage: t, dismissible: true })];
         };
+
+        const channel = ChannelStore.getChannel(SelectedChannelStore.getChannelId());
 
         return (
             <>
