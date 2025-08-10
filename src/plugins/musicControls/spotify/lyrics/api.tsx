@@ -6,13 +6,12 @@
  */
 
 import { DataStore } from "@api/index";
-import { Track } from "plugins/spotifyControls/SpotifyStore";
+import { settings } from "@plugins/musicControls/settings";
+import { Track } from "@plugins/musicControls/spotify/SpotifyStore";
 
 import { getLyricsLrclib } from "./providers/lrclibAPI";
 import { getLyricsSpotify } from "./providers/SpotifyAPI";
 import { LyricsData, Provider, SyncedLyric } from "./providers/types";
-import settings from "./settings";
-
 
 const LyricsCacheKey = "SpotifyLyricsCacheNew";
 

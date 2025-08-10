@@ -5,8 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { LyricsData, Provider } from "@plugins/spotifyLyrics/providers/types";
-import { Track } from "plugins/spotifyControls/SpotifyStore";
+import { LyricsData, Provider } from "@plugins/musicControls/spotify/lyrics/providers/types";
+import { Track } from "@plugins/musicControls/spotify/SpotifyStore";
 
 const baseUrlLrclib = "https://lrclib.net/api/get";
 
@@ -39,7 +39,7 @@ export async function getLyricsLrclib(track: Track): Promise<LyricsData | null> 
     const url = `${baseUrlLrclib}?${params.toString()}`;
     const response = await fetch(url, {
         headers: {
-            "User-Agent": "https://github.com/Masterjoona/vc-spotifylyrics"
+            "User-Agent": "SpotifyLyrics for Plexcord (https://github.com/Masterjoona/pc-spotifylyrics)"
         }
     });
 

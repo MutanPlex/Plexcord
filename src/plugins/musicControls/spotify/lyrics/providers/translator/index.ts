@@ -5,10 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { LyricsData, Provider, SyncedLyric } from "@plugins/spotifyLyrics/providers/types";
-import settings from "@plugins/spotifyLyrics/settings";
+import settings from "@plugins/musicControls";
+import { LyricsData, Provider, SyncedLyric } from "@plugins/musicControls/spotify/lyrics/providers/types";
 
-// stolen from src\plugins\translate\utils.ts
+// stolen from src/plugins/translate/utils.ts
 
 interface GoogleData {
     src: string;

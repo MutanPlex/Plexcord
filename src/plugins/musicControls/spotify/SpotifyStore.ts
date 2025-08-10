@@ -72,7 +72,7 @@ export const SpotifyStore = proxyLazyWebpack(() => {
     const { Store } = Flux;
 
     const SpotifySocket = findByProps("getActiveSocketAndDevice");
-    const SpotifyAPI = findByPropsLazy("pcSpotifyMarker");
+    const SpotifyAPI = findByPropsLazy("vcSpotifyMarker");
 
     const API_BASE = "https://api.spotify.com/v1/me/player";
 
@@ -90,7 +90,7 @@ export const SpotifyStore = proxyLazyWebpack(() => {
         public isSettingPosition = false;
 
         public openExternal(path: string) {
-            const url = Settings.plugins.SpotifyControls.useSpotifyUris || Plexcord.Plugins.isPluginEnabled("OpenInApp")
+            const url = Settings.plugins.MusicControls.useSpotifyUris || Plexcord.Plugins.isPluginEnabled("OpenInApp")
                 ? "spotify:" + path.replaceAll("/", (_, idx) => idx === 0 ? "" : ":")
                 : "https://open.spotify.com" + path;
 

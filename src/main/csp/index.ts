@@ -24,6 +24,7 @@ export const CspPolicies: PolicyMap = {
     "http://127.0.0.1:*": ImageAndCssSrc,
     "localhost:*": ImageAndCssSrc,
     "127.0.0.1:*": ImageAndCssSrc,
+    "localhost:24123": ImageAndCssSrc,
 
     "*.github.io": ImageAndCssSrc, // GitHub pages, used by most themes
     "github.com": ImageAndCssSrc, // GitHub content (stuff uploaded to markdown forms), used by most themes
@@ -32,7 +33,6 @@ export const CspPolicies: PolicyMap = {
     "gitlab.com": ImageAndCssSrc, // GitLab raw, used by some themes
     "*.codeberg.page": ImageAndCssSrc, // Codeberg pages, used by some themes
     "codeberg.org": ImageAndCssSrc, // Codeberg raw, used by some themes
-
     "*.githack.com": ImageAndCssSrc, // githack (namely raw.githack.com), used by some themes
     "jsdelivr.net": ImageAndCssSrc, // jsDelivr, used by very few themes
 
@@ -68,6 +68,7 @@ export const CspPolicies: PolicyMap = {
     "usrbg.is-hardly.online": ImageSrc, // USRBG API
     "icons.duckduckgo.com": ImageSrc, // DuckDuckGo Favicon API (Reverse Image Search)
     "timezone.creations.works": ConnectSrc, // Timezone API
+    "api.vmohammad.dev": ConnectSrc, // Custom API
 };
 
 const findHeader = (headers: PolicyMap, headerName: Lowercase<string>) => {

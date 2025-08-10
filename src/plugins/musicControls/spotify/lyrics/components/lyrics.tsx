@@ -5,14 +5,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { LyricsContextMenu } from "@plugins/spotifyLyrics/components/ctxMenu";
-import { LyricsModal } from "@plugins/spotifyLyrics/components/modal";
-import { cl, NoteSvg, useLyrics } from "@plugins/spotifyLyrics/components/util";
-import { SpotifyLrcStore } from "@plugins/spotifyLyrics/providers/store";
-import settings from "@plugins/spotifyLyrics/settings";
+import { settings } from "@plugins/musicControls/settings";
+import { SpotifyLrcStore } from "@plugins/musicControls/spotify/lyrics/providers/store";
+import { SpotifyStore } from "@plugins/musicControls/spotify/SpotifyStore";
 import { openModal } from "@utils/modal";
 import { ContextMenuApi, React, Text, TooltipContainer, useEffect, useState, useStateFromStores } from "@webpack/common";
-import { SpotifyStore } from "plugins/spotifyControls/SpotifyStore";
+
+import { LyricsContextMenu } from "./ctxMenu";
+import { LyricsModal } from "./modal";
+import { cl, NoteSvg, useLyrics } from "./util";
 
 function LyricsDisplay({ scroll = true }: { scroll?: boolean; }) {
     const { ShowMusicNoteOnNoLyrics } = settings.use(["ShowMusicNoteOnNoLyrics"]);
@@ -63,7 +64,7 @@ function LyricsDisplay({ scroll = true }: { scroll?: boolean; }) {
     );
 }
 
-export function Lyrics({ scroll = true }: { scroll?: boolean; } = {}) {
+export function SpotifyLyrics({ scroll = true }: { scroll?: boolean; } = {}) {
     SpotifyLrcStore.init();
     const track = useStateFromStores(
         [SpotifyStore],

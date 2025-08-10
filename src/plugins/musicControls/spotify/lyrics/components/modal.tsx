@@ -5,10 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { SpotifyStore, Track } from "@plugins/musicControls/spotify/SpotifyStore";
 import { openImageModal } from "@utils/discord";
 import { ModalContent, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
 import { React, Text } from "@webpack/common";
-import { SpotifyStore, Track } from "plugins/spotifyControls/SpotifyStore";
 
 import { cl, NoteSvg, scrollClasses, useLyrics } from "./util";
 

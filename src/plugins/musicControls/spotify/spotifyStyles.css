@@ -59,6 +59,12 @@
     background-color: var(--pc-spotify-green-90);
 }
 
+.pc-spotify-repeat-context:hover,
+.pc-spotify-repeat-track:hover,
+.pc-spotify-shuffle-on:hover {
+    background-color: var(--pc-spotify-green-80);
+}
+
 .pc-spotify-tooltip-text {
     overflow: hidden;
     white-space: nowrap;
@@ -105,13 +111,12 @@
 
 #pc-spotify-album-image:hover {
     filter: brightness(1.2);
-    cursor: zoom-in;
+    cursor: pointer;
 }
 
 #pc-spotify-album-expanded-wrapper #pc-spotify-album-image {
     width: 100%;
     object-fit: contain;
-    cursor: zoom-out;
 }
 
 #pc-spotify-titles {
@@ -141,6 +146,10 @@
     font-size: 12px;
     text-decoration: none;
     color: var(--header-primary);
+}
+
+.pc-spotify-comma {
+    color: var(--header-secondary);
 }
 
 .pc-spotify-artist[role="link"]:hover,

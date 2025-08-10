@@ -6,16 +6,16 @@
  */
 
 import { classNameFactory } from "@api/Styles";
-import { SpotifyLrcStore } from "@plugins/spotifyLyrics/providers/store";
-import { SyncedLyric } from "@plugins/spotifyLyrics/providers/types";
-import settings from "@plugins/spotifyLyrics/settings";
+import { settings } from "@plugins/musicControls/settings";
+import { TidalLrcStore } from "@plugins/musicControls/tidal/lyrics/providers/store";
+import { EnhancedLyric } from "@plugins/musicControls/tidal/lyrics/types";
+import { TidalStore } from "@plugins/musicControls/tidal/TidalStore";
 import { findByPropsLazy } from "@webpack";
 import { React, useEffect, useState, useStateFromStores } from "@webpack/common";
-import { SpotifyStore } from "plugins/spotifyControls/SpotifyStore";
 
 export const scrollClasses = findByPropsLazy("auto", "customTheme");
 
-export const cl = classNameFactory("pc-spotify-lyrics-");
+export const cl = classNameFactory("eq-tidal-lyrics-");
 
 export function NoteSvg(className: string) {
     return (
@@ -25,7 +25,7 @@ export function NoteSvg(className: string) {
     );
 }
 
-const calculateIndexes = (lyrics: SyncedLyric[], position: number, delay: number) => {
+const calculateIndexes = (lyrics: EnhancedLyric[], position: number, delay: number) => {
     const posInSec = position / 1000;
     const currentIndex = lyrics.findIndex(l => l.time - (delay / 1000) > posInSec && l.time < posInSec + 8) - 1;
     const nextLyric = lyrics.findIndex(l => l.time >= posInSec);
@@ -34,12 +34,12 @@ const calculateIndexes = (lyrics: SyncedLyric[], position: number, delay: number
 
 export function useLyrics({ scroll = true }: { scroll?: boolean; } = {}) {
     const [track, storePosition, isPlaying] = useStateFromStores(
-        [SpotifyStore], () => [
-            SpotifyStore.track,
-            SpotifyStore.mPosition,
-            SpotifyStore.isPlaying,
+        [TidalStore], () => [
+            TidalStore.track,
+            TidalStore.mPosition,
+            TidalStore.isPlaying,
         ]);
-    const lyricsInfo = useStateFromStores([SpotifyLrcStore], () => SpotifyLrcStore.lyricsInfo);
+    const lyrics = useStateFromStores([TidalLrcStore], () => TidalLrcStore.lyrics);
 
     const { LyricDelay } = settings.use(["LyricDelay"]);
 
@@ -48,14 +48,13 @@ export function useLyrics({ scroll = true }: { scroll?: boolean; } = {}) {
     const [position, setPosition] = useState(storePosition);
     const [lyricRefs, setLyricRefs] = useState<React.RefObject<HTMLDivElement | null>[]>([]);
 
-    const currentLyrics = lyricsInfo?.lyricsVersions[lyricsInfo.useLyric] || null;
+    const currentLyrics = lyrics || null;
 
     useEffect(() => {
         if (currentLyrics) {
             setLyricRefs(currentLyrics.map(() => React.createRef()));
         }
     }, [currentLyrics]);
-
 
     useEffect(() => {
         if (currentLyrics && position) {
@@ -78,7 +77,7 @@ export function useLyrics({ scroll = true }: { scroll?: boolean; } = {}) {
 
     useEffect(() => {
         if (isPlaying) {
-            setPosition(SpotifyStore.position);
+            setPosition(TidalStore.position);
             const interval = setInterval(() => {
                 setPosition(p => p + 1000);
             }, 1000);
@@ -87,5 +86,5 @@ export function useLyrics({ scroll = true }: { scroll?: boolean; } = {}) {
         }
     }, [storePosition, isPlaying]);
 
-    return { track, lyricsInfo, lyricRefs, currLrcIndex, nextLyric };
+    return { track, lyrics, lyricRefs, currLrcIndex, nextLyric };
 }

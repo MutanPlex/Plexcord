@@ -1,0 +1,161 @@
+/* stylelint-disable rule-empty-line-before */
+.pc-spotify-lyrics {
+    padding: 0.375rem 0.5rem;
+    text-align: center;
+    overflow: hidden;
+    max-height: 60px;
+    cursor: pointer;
+}
+
+.pc-spotify-lyrics-music-note {
+    font-size: 16px;
+    text-align: center;
+    animation: side-to-side 2s ease-in-out infinite;
+    color: var(--text-muted);
+    height: 18px;
+    margin: 3px;
+}
+
+.pc-spotify-lyrics-next,
+.pc-spotify-lyrics-prev {
+    color: var(--text-muted);
+    margin-bottom: 1%;
+}
+
+@keyframes side-to-side {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-10px);
+    }
+}
+
+.pc-spotify-lyrics-header-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.pc-spotify-lyrics-album-image {
+    width: 100px;
+    height: 100px;
+    margin-right: 5%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pc-spotify-lyrics-modal-line-current,
+.pc-spotify-lyrics-modal-line {
+    margin: 4px 0;
+    padding: 4px 8px;
+    position: relative;
+}
+
+.pc-spotify-lyrics-modal-line-current {
+    font-weight: bold;
+}
+
+.pc-spotify-lyrics-modal-note {
+    height: 1lh;
+}
+
+.pc-spotify-lyrics-modal-timestamp {
+    color: var(--text-muted);
+    margin-right: 0.5em;
+    cursor: pointer;
+}
+
+.pc-spotify-lyrics-modal-timestamp:hover {
+    text-decoration: underline;
+}
+
+.pc-spotify-lyrics-modal-no-lyrics {
+    text-align: center;
+    padding: 1rem;
+}
+
+.eq-tidal-lyrics {
+    padding: 0.375rem 0.5rem;
+    text-align: center;
+    overflow: hidden;
+    max-height: 60px;
+    cursor: pointer;
+
+    /* fade edges a touch to suggest scroll without harsh clipping */
+    mask-image: linear-gradient(90deg, transparent 0, #000 12px, #000 calc(100% - 12px), transparent 100%);
+    user-select: none;
+}
+
+.eq-tidal-lyrics-music-note {
+    font-size: 16px;
+    text-align: center;
+    animation: side-to-side 2s ease-in-out infinite;
+    color: var(--text-muted);
+    height: 18px;
+    margin: 3px;
+    filter: drop-shadow(0 0 4px rgb(0 0 0 / 15%));
+}
+
+.eq-tidal-lyrics-next,
+.eq-tidal-lyrics-prev {
+    color: var(--text-muted);
+    margin-bottom: 1%;
+}
+
+@keyframes side-to-side {
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-10px);
+    }
+}
+
+.eq-tidal-lyrics-header-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.eq-tidal-lyrics-album-image {
+    width: 100px;
+    height: 100px;
+    margin-right: 5%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.eq-tidal-lyrics-modal-line-current,
+.eq-tidal-lyrics-modal-line {
+    margin: 4px 0;
+    padding: 4px 8px;
+    position: relative;
+}
+
+.eq-tidal-lyrics-modal-line-current {
+    font-weight: bold;
+}
+
+.eq-tidal-lyrics-modal-note {
+    height: 1lh;
+}
+
+.eq-tidal-lyrics-modal-timestamp {
+    color: var(--text-muted);
+    margin-right: 0.5em;
+    cursor: pointer;
+}
+
+.eq-tidal-lyrics-modal-timestamp:hover {
+    text-decoration: underline;
+}
+
+.eq-tidal-lyrics-modal-no-lyrics {
+    text-align: center;
+    padding: 1rem;
+}

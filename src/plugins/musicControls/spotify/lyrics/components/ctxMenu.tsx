@@ -5,8 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { providers } from "@plugins/spotifyLyrics/api";
-import { lyricsAlternative } from "@plugins/spotifyLyrics/providers/store";
+import { providers } from "@plugins/musicControls/spotify/lyrics/api";
+import { lyricsAlternative } from "@plugins/musicControls/spotify/lyrics/providers/store";
 import { copyWithToast } from "@utils/misc";
 import { findComponentByCodeLazy } from "@webpack";
 import { FluxDispatcher, Menu } from "@webpack/common";
@@ -14,8 +14,6 @@ import { FluxDispatcher, Menu } from "@webpack/common";
 import { useLyrics } from "./util";
 
 const CopyIcon = findComponentByCodeLazy(" 1-.5.5H10a6");
-
-
 
 export function LyricsContextMenu() {
     const { lyricsInfo, currLrcIndex } = useLyrics({ scroll: false });
@@ -29,6 +27,7 @@ export function LyricsContextMenu() {
             onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
             aria-label="Spotify Lyrics Menu"
         >
+
             <Menu.MenuItem
                 key="copy-lyric"
                 id="copy-lyric"

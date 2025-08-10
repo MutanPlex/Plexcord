@@ -6,11 +6,11 @@
  */
 
 import { showNotification } from "@api/Notifications";
-import { getLyrics, lyricFetchers, providers, updateLyrics } from "@plugins/spotifyLyrics/api";
-import settings from "@plugins/spotifyLyrics/settings";
+import { settings } from "@plugins/musicControls/settings";
+import { getLyrics, lyricFetchers, providers, updateLyrics } from "@plugins/musicControls/spotify/lyrics/api";
+import { SpotifyStore, type Track } from "@plugins/musicControls/spotify/SpotifyStore";
 import { proxyLazyWebpack } from "@webpack";
 import { Flux, FluxDispatcher } from "@webpack/common";
-import { SpotifyStore, type Track } from "plugins/spotifyControls/SpotifyStore";
 
 import { lyricsAlternativeFetchers } from "./translator";
 import { LyricsData, Provider } from "./types";

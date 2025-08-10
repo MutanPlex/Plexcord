@@ -17,41 +17,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import "./styles.css";
+
 import { Settings } from "@api/Settings";
-import { disableStyle, enableStyle } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Devs } from "@utils/constants";
-import definePlugin, { OptionType } from "@utils/types";
+import { Devs, PcDevs } from "@utils/constants";
+import definePlugin from "@utils/types";
 
-import hoverOnlyStyle from "./hoverOnly.css?managed";
-import { Player } from "./PlayerComponent";
-
-function toggleHoverControls(value: boolean) {
-    (value ? enableStyle : disableStyle)(hoverOnlyStyle);
-}
+import { settings, toggleHoverControls } from "./settings";
+import { migrateOldLyrics } from "./spotify/lyrics/api";
+import { SpotifyLyrics } from "./spotify/lyrics/components/lyrics";
+import { SpotifyPlayer } from "./spotify/PlayerComponent";
+import { TidalLyrics } from "./tidal/lyrics/components/lyrics";
+import { TidalPlayer } from "./tidal/TidalPlayer";
 
 export default definePlugin({
-    name: "SpotifyControls",
-    description: "Adds a Spotify player above the account panel",
-    authors: [Devs.Ven, Devs.afn, Devs.KraXen72, Devs.Av32000, Devs.nin0dev],
-    options: {
-        hoverControls: {
-            description: "Show controls on hover",
-            type: OptionType.BOOLEAN,
-            default: false,
-            onChange: v => toggleHoverControls(v)
-        },
-        useSpotifyUris: {
-            type: OptionType.BOOLEAN,
-            description: "Open Spotify URIs instead of Spotify URLs. Will only work if you have Spotify installed and might not work on all platforms",
-            default: false
-        },
-        previousButtonRestartsTrack: {
-            type: OptionType.BOOLEAN,
-            description: "Restart currently playing track when pressing the previous button if playtime is >3s",
-            default: true
-        }
-    },
+    name: "MusicControls",
+    description: "Music Controls and Lyrics for multiple services ",
+    authors: [PcDevs.thororen, PcDevs.vmohammad, Devs.Joona],
+    settings,
     patches: [
         {
             find: "this.isCopiedStreakGodlike",
@@ -60,14 +44,14 @@ export default definePlugin({
                 match: /(?<=\i\.jsxs?\)\()(\i),{(?=[^}]*?userTag:\i,hidePrivateData:)/,
                 // react.jsx(WrapperComponent, { PlexcordOriginal: AccountPanel, ...
                 replace: "$self.PanelWrapper,{PlexcordOriginal:$1,"
-            }
+            },
         },
         {
             find: ".PLAYER_DEVICES",
             replacement: [{
                 // Adds POST and a Marker to the SpotifyAPI (so we can easily find it)
                 match: /get:(\i)\.bind\(null,(\i\.\i)\.get\)/,
-                replace: "post:$1.bind(null,$2.post),pcSpotifyMarker:1,$&"
+                replace: "post:$1.bind(null,$2.post),vcSpotifyMarker:1,$&"
             },
             {
                 // Spotify Connect API returns status 202 instead of 204 when skipping tracks.
@@ -92,24 +76,34 @@ export default definePlugin({
         },
     ],
 
-    start: () => toggleHoverControls(Settings.plugins.SpotifyControls.hoverControls),
 
     PanelWrapper({ PlexcordOriginal, ...props }) {
+        const { showTidalControls, showTidalLyrics, showSpotifyLyrics, showSpotifyControls, LyricsPosition } = settings.store;
         return (
             <>
                 <ErrorBoundary
                     fallback={() => (
-                        <div className="pc-spotify-fallback">
-                            <p>Failed to render Spotify Modal :(</p>
-                            <p >Check the console for errors</p>
+                        <div className="pc-tidal-fallback">
+                            <p>Failed to render Modal :(</p>
+                            <p>Check the console for errors</p>
                         </div>
                     )}
                 >
-                    <Player />
+                    {showTidalLyrics && LyricsPosition === "above" && <TidalLyrics />}
+                    {showTidalControls && <TidalPlayer />}
+                    {showTidalLyrics && LyricsPosition === "below" && <TidalLyrics />}
+                    {showSpotifyLyrics && LyricsPosition === "above" && <SpotifyLyrics />}
+                    {showSpotifyControls && <SpotifyPlayer />}
+                    {showSpotifyLyrics && LyricsPosition === "below" && <SpotifyLyrics />}
                 </ErrorBoundary>
 
                 <PlexcordOriginal {...props} />
             </>
         );
-    }
+    },
+
+    async start() {
+        await migrateOldLyrics();
+        toggleHoverControls(Settings.plugins.MusicControls.hoverControls);
+    },
 });
