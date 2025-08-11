@@ -37,12 +37,17 @@ jobs:
             - name: Build
               run: pnpm build --standalone
 
+            - name: Move files to dist
+              run: |
+                  mv dist/plextron/* dist/
+                  mv dist/desktop/* dist/
+
             - name: Generate plugin list
-              run: pnpm generatePluginJson dist/plugins.json dist/plugin-readmes.json
+              run: pnpm generatePluginJson dist/plugins.json
 
             - name: Clean up obsolete files
               run: |
-                  rm -rf dist/*-unpacked dist/vendor Plexcord.user.css plexcordDesktopRenderer.css plexcordDesktopRenderer.css.map
+                  rm -rf dist/*-unpacked dist/vendor dist/desktop dist/plextron Plexcord.user.css plexcordDesktopRenderer.css plexcordDesktopRenderer.css.map
 
             - name: Get some values needed for the release
               id: release_values
