@@ -19,8 +19,8 @@
 */
 
 // @ts-check
-
-import { readdir } from "fs/promises";
+import { createPackage } from "@electron/asar";
+import { readdir, writeFile } from "fs/promises";
 import { join } from "path";
 
 import { BUILD_TIMESTAMP, commonOpts, exists, globPlugins, IS_DEV, IS_COMPANION_TEST, IS_REPORTER, IS_STANDALONE, IS_UPDATER_DISABLED, resolvePluginName, VERSION, commonRendererPlugins, watch, buildOrWatchAll, stringifyValues } from "./common.mjs";
@@ -114,7 +114,7 @@ const buildConfigs = ([
     {
         ...nodeCommonOpts,
         entryPoints: ["src/main/index.ts"],
-        outfile: "dist/patcher.js",
+        outfile: "dist/desktop/patcher.js",
         footer: { js: "//# sourceURL=file:///PlexcordPatcher\n" + sourceMapFooter("patcher") },
         sourcemap,
         plugins: [
@@ -131,7 +131,7 @@ const buildConfigs = ([
     {
         ...commonOpts,
         entryPoints: ["src/Plexcord.ts"],
-        outfile: "dist/renderer.js",
+        outfile: "dist/desktop/renderer.js",
         format: "iife",
         target: ["esnext"],
         footer: { js: "//# sourceURL=file:///PlexcordRenderer\n" + sourceMapFooter("renderer") },
@@ -150,7 +150,7 @@ const buildConfigs = ([
     {
         ...nodeCommonOpts,
         entryPoints: ["src/preload.ts"],
-        outfile: "dist/preload.js",
+        outfile: "dist/desktop/preload.js",
         footer: { js: "//# sourceURL=file:///PlexcordPreload\n" + sourceMapFooter("preload") },
         sourcemap,
         define: {
@@ -164,8 +164,8 @@ const buildConfigs = ([
     {
         ...nodeCommonOpts,
         entryPoints: ["src/main/index.ts"],
-        outfile: "dist/plexcordDesktopMain.js",
-        footer: { js: "//# sourceURL=file:///PlexcordDesktopMain\n" + sourceMapFooter("plexcordDesktopMain") },
+        outfile: "dist/plextron/plextronMain.js",
+        footer: { js: "//# sourceURL=file:///PlextronMain\n" + sourceMapFooter("plextronMain") },
         sourcemap,
         plugins: [
             ...nodeCommonOpts.plugins,
@@ -180,10 +180,10 @@ const buildConfigs = ([
     {
         ...commonOpts,
         entryPoints: ["src/Plexcord.ts"],
-        outfile: "dist/plexcordDesktopRenderer.js",
+        outfile: "dist/plextron/plextronRenderer.js",
         format: "iife",
         target: ["esnext"],
-        footer: { js: "//# sourceURL=file:///PlexcordDesktopRenderer\n" + sourceMapFooter("plexcordDesktopRenderer") },
+        footer: { js: "//# sourceURL=file:///PlextronRenderer\n" + sourceMapFooter("plextronRenderer") },
         globalName: "Plexcord",
         sourcemap,
         plugins: [
@@ -199,8 +199,8 @@ const buildConfigs = ([
     {
         ...nodeCommonOpts,
         entryPoints: ["src/preload.ts"],
-        outfile: "dist/plexcordDesktopPreload.js",
-        footer: { js: "//# sourceURL=file:///PlexcordPreload\n" + sourceMapFooter("plexcordDesktopPreload") },
+        outfile: "dist/plextron/plextronPreload.js",
+        footer: { js: "//# sourceURL=file:///PlextronPreload\n" + sourceMapFooter("plextronPreload") },
         sourcemap,
         define: {
             ...defines,
@@ -211,3 +211,19 @@ const buildConfigs = ([
 ]);
 
 await buildOrWatchAll(buildConfigs);
+
+await Promise.all([
+    writeFile("dist/desktop/package.json", JSON.stringify({
+        name: "plexcord",
+        main: "patcher.js"
+    })),
+    writeFile("dist/plextron/package.json", JSON.stringify({
+        name: "plextron",
+        main: "plextronMain.js"
+    }))
+]);
+
+await Promise.all([
+    createPackage("dist/desktop/", "dist/desktop.asar"),
+    createPackage("dist/plextron/", "dist/plextron.asar")
+]);

@@ -135,7 +135,7 @@ export default definePlugin({
                     }
 
                     gif.finish();
-                    const file = new File([gif.bytesView()], "converted.gif", { type: "image/gif" });
+                    const file = new File([new Uint8Array(gif.bytesView())], "converted.gif", { type: "image/gif" });
                     setTimeout(() => UploadHandler.promptToUpload([file], cmdCtx.channel, DraftType.ChannelMessage), 10);
                 } catch (err) {
                     UploadManager.clearAll(cmdCtx.channel.id, DraftType.SlashCommand);

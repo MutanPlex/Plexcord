@@ -332,7 +332,7 @@ async function download(channel: Channel, {
 
     const { buffer, title } = data;
     UploadManager.clearAll(channel.id, DraftType.SlashCommand);
-    const file = new File([buffer], title, { type: mimetype(title.split(".")[1]) });
+    const file = new File([new Uint8Array(buffer)], title, { type: mimetype(title.split(".")[1]) });
     // See petpet
     setTimeout(() => UploadHandler.promptToUpload([file], channel, DraftType.ChannelMessage), 10);
 }

@@ -101,7 +101,7 @@ export interface ChatBarButtonProps {
     onClick: MouseEventHandler<HTMLButtonElement>;
     onContextMenu?: MouseEventHandler<HTMLButtonElement>;
     onAuxClick?: MouseEventHandler<HTMLButtonElement>;
-    buttonProps?: Omit<HTMLProps<HTMLButtonElement>, "size" | "onClick" | "onContextMenu" | "onAuxClick">;
+    buttonProps?: Omit<HTMLProps<HTMLButtonElement>, "size" | "onClick" | "onContextMenu" | "onAuxClick" | "ref">;
 }
 export const ChatBarButton = ErrorBoundary.wrap((props: ChatBarButtonProps) => {
     return (

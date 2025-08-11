@@ -128,6 +128,7 @@ try {
         env: {
             ...process.env,
             PLEXCORD_USER_DATA_DIR: BASE_DIR,
+            PLEXCORD_DIRECTORY: join(BASE_DIR, "dist/desktop"),
             PLEXCORD_DEV_INSTALL: "1"
         }
     });
