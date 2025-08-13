@@ -56,16 +56,17 @@ export default definePlugin({
             // Show all activities in the user popout/sidebar
             find: '"UserProfilePopoutBody"',
             replacement: {
-                match: /(?<=(\i)\.id\)\}\)\),(\i).*?,)\i\?.{0,250}onClose:\i\}\)/,
-                replace: "$self.showAllActivitiesComponent({ activity: $2, user: $1 })"
+                match: /((\i)=.{0,10}(\i)\.id\).*?,)\i\?.{0,250}onClose:\i\}\)/,
+                replace: "$1$self.showAllActivitiesComponent({ activity: $2, user: $3 })"
             },
             predicate: () => settings.store.userPopout
         },
+        // User Panel
         {
-            find: ".SIDEBAR}),nicknameIcons",
+            find: "#{intl::STATUS_MENU_LABEL}",
             replacement: {
-                match: /(?<=(\i)\.id\)\}\)\),(\i).*?,)\i\?.{0,250}\i\.card\}\)/,
-                replace: "$self.showAllActivitiesComponent({ activity: $2, user: $1 })"
+                match: /((\i)=.{0,10}(\i)\.id\).*?,)\i\?.{0,250}onClose:\i\}\)/,
+                replace: "$1$self.showAllActivitiesComponent({ activity: $2, user: $3 })"
             },
             predicate: () => settings.store.userPopout
         }
