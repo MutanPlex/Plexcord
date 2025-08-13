@@ -2,7 +2,7 @@
 /* stylelint-disable length-zero-no-unit */
 
 /*
-$modifier: var(--background-modifier-accent);
+$modifier: var(--input-border);
 */
 
 .pc-notebook-search {
@@ -64,7 +64,7 @@ $modifier: var(--background-modifier-accent);
     border: 0;
     height: 2px;
     margin: 12px 0px 16px 0px;
-    background-color: var(--background-modifier-accent);
+    background-color: var(--input-border);
 }
 
 .pc-holy-note [class*="buttonContainer"] {
