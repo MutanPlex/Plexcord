@@ -9,6 +9,7 @@
 }
 
 .pc-rdb-input {
+    padding-left: 12px;
     margin-top: 6px;
     margin-bottom: 12px;
     resize: none;
@@ -169,10 +170,10 @@
     opacity: 0;
 }
 
-.pc-rdb-reply:hover>.pc-rdb-buttons {
+.pc-rdb-reply:hover > .pc-rdb-buttons {
     opacity: 1;
 }
 
-.pc-rdb-review:hover>.pc-rdb-buttons {
+.pc-rdb-review:hover > .pc-rdb-buttons {
     opacity: 1;
 }
