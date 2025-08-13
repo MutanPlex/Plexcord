@@ -12,7 +12,7 @@ import { Devs } from "@utils/constants";
 import { getCurrentChannel } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
-import { ContextMenuApi, Menu, useEffect, useRef } from "@webpack/common";
+import { ContextMenuApi, Menu } from "@webpack/common";
 
 interface UserProfileProps {
     popoutProps: Record<string, any>;
@@ -23,7 +23,7 @@ interface UserProfileProps {
 const UserProfile = findComponentByCodeLazy(".POPOUT,user");
 
 let openAlternatePopout = false;
-let accountPanelRef: React.RefObject<Record<PropertyKey, any> | null> = { current: null };
+let accountPanelRef: React.RefObject<HTMLDivElement | null> = { current: null };
 
 const AccountPanelContextMenu = ErrorBoundary.wrap(() => {
     const { prioritizeServerProfile } = settings.use(["prioritizeServerProfile"]);
@@ -39,8 +39,7 @@ const AccountPanelContextMenu = ErrorBoundary.wrap(() => {
                 disabled={getCurrentChannel()?.getGuildId() == null}
                 action={e => {
                     openAlternatePopout = true;
-                    accountPanelRef.current?.props.onMouseDown();
-                    accountPanelRef.current?.props.onClick(e);
+                    accountPanelRef.current?.click();
                 }}
             />
             <Menu.MenuCheckboxItem
@@ -73,10 +72,6 @@ export default definePlugin({
             group: true,
             replacement: [
                 {
-                    match: /let{ref:\i,speaking:\i/,
-                    replace: "$self.useAccountPanelRef();$&"
-                },
-                {
                     match: /(\.AVATAR,children:.+?renderPopout:\((\i),\i\)=>){(.+?)}(?=,position)(?<=currentUser:(\i).+?)/,
                     replace: (_, rest, popoutProps, originalPopout, currentUser) => `${rest}$self.UserProfile({popoutProps:${popoutProps},currentUser:${currentUser},originalRenderPopout:()=>{${originalPopout}}})`
                 },
@@ -85,8 +80,8 @@ export default definePlugin({
                     replace: "$&$self.onPopoutClose();"
                 },
                 {
-                    match: /(?<=#{intl::SET_STATUS}\),)/,
-                    replace: "ref:$self.accountPanelRef,onContextMenu:$self.openAccountPanelContextMenu,"
+                    match: /#{intl::SET_STATUS}\)(?<=innerRef:(\i),style:.+?)/,
+                    replace: "$&,onContextMenu:($self.grabRef($1),$self.openAccountPanelContextMenu)"
                 }
             ]
         }
@@ -96,12 +91,9 @@ export default definePlugin({
         return accountPanelRef;
     },
 
-    useAccountPanelRef() {
-        useEffect(() => () => {
-            accountPanelRef.current = null;
-        }, []);
-
-        return (accountPanelRef = useRef(null));
+    grabRef(ref: React.RefObject<HTMLDivElement>) {
+        accountPanelRef = ref;
+        return ref;
     },
 
     openAccountPanelContextMenu(event: React.UIEvent) {
