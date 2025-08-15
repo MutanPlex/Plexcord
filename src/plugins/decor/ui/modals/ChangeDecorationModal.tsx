@@ -84,7 +84,7 @@ function SectionHeader({ section }: SectionHeaderProps) {
             />}
         </Flex>
         {hasSubtitle &&
-            <Forms.FormText type="description" className={Margins.bottom8}>
+            <Forms.FormText className={Margins.bottom8}>
                 {section.subtitle}
             </Forms.FormText>
         }

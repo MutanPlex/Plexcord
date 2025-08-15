@@ -21,11 +21,11 @@ import * as t from "@plexcord/discord-types";
 import { LazyComponent } from "@utils/lazyReact";
 import { filters, mapMangledModuleLazy, waitFor } from "@webpack";
 
+import { FormText } from "./FormText";
 import { waitForComponent } from "./internal";
 
 
 const FormTitle = waitForComponent<t.FormTitle>("FormTitle", filters.componentByCode('["defaultMargin".concat', '="h5"'));
-const FormText = waitForComponent<t.FormText>("FormText", filters.componentByCode(".SELECTABLE),", ".DISABLED:"));
 const FormSection = waitForComponent<t.FormSection>("FormSection", filters.componentByCode(".titleId)"));
 const FormDivider = waitForComponent<t.FormDivider>("FormDivider", filters.componentByCode(".divider,", ",style:", '"div"', /\.divider,\i\),style:/));
 
