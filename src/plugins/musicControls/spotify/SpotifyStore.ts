@@ -160,7 +160,7 @@ export const SpotifyStore = proxyLazyWebpack(() => {
                     position_ms: Math.round(ms)
                 }
             }).catch((e: any) => {
-                console.error("[PlexcordSpotifyControls] Failed to seek", e);
+                console.error("[VencordSpotifyControls] Failed to seek", e);
                 this.isSettingPosition = false;
             });
         }

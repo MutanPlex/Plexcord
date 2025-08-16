@@ -15,7 +15,7 @@ import { React, useEffect, useState, useStateFromStores } from "@webpack/common"
 
 export const scrollClasses = findByPropsLazy("auto", "customTheme");
 
-export const cl = classNameFactory("eq-tidal-lyrics-");
+export const cl = classNameFactory("pc-tidal-lyrics-");
 
 export function NoteSvg(className: string) {
     return (

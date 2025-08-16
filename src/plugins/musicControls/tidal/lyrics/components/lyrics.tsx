@@ -30,7 +30,7 @@ function LyricsDisplay({ scroll = true }: { scroll?: boolean; }) {
 
     if (!currentLyrics) {
         return ShowMusicNoteOnNoLyrics ? (
-            <div className="eq-tidal-lyrics"
+            <div className="pc-tidal-lyrics"
                 onContextMenu={e => ContextMenuApi.openContextMenu(e, () => <LyricsContextMenu />)}
             >
                 <TooltipContainer text="No synced lyrics found">
@@ -42,7 +42,7 @@ function LyricsDisplay({ scroll = true }: { scroll?: boolean; }) {
 
     return (
         <div
-            className="eq-tidal-lyrics"
+            className="pc-tidal-lyrics"
             onClick={() => openModal(props => <LyricsModal rootProps={props} />)}
             onContextMenu={e => ContextMenuApi.openContextMenu(e, () => <LyricsContextMenu />)}
         >
@@ -60,7 +60,7 @@ function LyricsDisplay({ scroll = true }: { scroll?: boolean; }) {
                                         return (
                                             <span
                                                 key={j}
-                                                className={charActive ? "eq-tidal-lyrics-char-active" : "eq-tidal-lyrics-char"}
+                                                className={charActive ? "pc-tidal-lyrics-char-active" : "pc-tidal-lyrics-char"}
                                                 style={{ opacity: charActive ? 1 : 0.5 }}
                                             >
                                                 {char.char}
@@ -76,7 +76,7 @@ function LyricsDisplay({ scroll = true }: { scroll?: boolean; }) {
                                 return (
                                     <span
                                         key={j}
-                                        className={charActive ? "eq-tidal-lyrics-char-active" : "eq-tidal-lyrics-char"}
+                                        className={charActive ? "pc-tidal-lyrics-char-active" : "pc-tidal-lyrics-char"}
                                         style={{ opacity: charActive ? 1 : 0.5 }}
                                     >
                                         {char.char}
@@ -89,7 +89,7 @@ function LyricsDisplay({ scroll = true }: { scroll?: boolean; }) {
                                 return (
                                     <span
                                         key={j}
-                                        className={wordActive ? "eq-tidal-lyrics-word-active" : "eq-tidal-lyrics-word"}
+                                        className={wordActive ? "pc-tidal-lyrics-word-active" : "pc-tidal-lyrics-word"}
                                         style={{ opacity: wordActive ? 1 : 0.5 }}
                                     >
                                         {word.word}

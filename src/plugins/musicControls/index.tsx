@@ -34,16 +34,33 @@ import { TidalPlayer } from "./tidal/TidalPlayer";
 export default definePlugin({
     name: "MusicControls",
     description: "Music Controls and Lyrics for multiple services ",
-    authors: [PcDevs.thororen, PcDevs.vmohammad, Devs.Joona],
+    authors: [Devs.Ven, Devs.afn, Devs.KraXen72, Devs.Av32000, Devs.nin0dev, PcDevs.thororen, PcDevs.vmohammad, Devs.Joona],
     settings,
+    tags: [
+        // Spotify
+        "Spotify",
+        "SpotifyControls",
+        "SpotifyLyrics",
+        // Tidal
+        "Tidal",
+        "TidalControls",
+        "TidalLyrics",
+        // Youtube
+        /* Deprecated RN
+        "Youtube",
+        "YoutubeMusic",
+        "YoutubeMusicControls"
+        */
+    ],
+
     patches: [
         {
             find: "this.isCopiedStreakGodlike",
             replacement: {
                 // react.jsx)(AccountPanel, { ..., showTaglessAccountPanel: blah })
                 match: /(?<=\i\.jsxs?\)\()(\i),{(?=[^}]*?userTag:\i,hidePrivateData:)/,
-                // react.jsx(WrapperComponent, { PlexcordOriginal: AccountPanel, ...
-                replace: "$self.PanelWrapper,{PlexcordOriginal:$1,"
+                // react.jsx(WrapperComponent, { VencordOriginal: AccountPanel, ...
+                replace: "$self.PanelWrapper,{VencordOriginal:$1,"
             },
         },
         {
@@ -77,7 +94,7 @@ export default definePlugin({
     ],
 
 
-    PanelWrapper({ PlexcordOriginal, ...props }) {
+    PanelWrapper({ VencordOriginal, ...props }) {
         const { showTidalControls, showTidalLyrics, showSpotifyLyrics, showSpotifyControls, LyricsPosition } = settings.store;
         return (
             <>
@@ -97,13 +114,21 @@ export default definePlugin({
                     {showSpotifyLyrics && LyricsPosition === "below" && <SpotifyLyrics />}
                 </ErrorBoundary>
 
-                <PlexcordOriginal {...props} />
+                <VencordOriginal {...props} />
             </>
         );
     },
 
     async start() {
+        if (Settings.plugins?.SpotifyControls?.enabled) {
+            settings.store.showSpotifyControls = true;
+            Settings.plugins.SpotifyControls.enabled = false;
+        }
+        if (Settings.plugins?.SpotifyLyrics?.enabled) {
+            settings.store.showSpotifyLyrics = true;
+            Settings.plugins.SpotifyLyrics.enabled = false;
+        }
         await migrateOldLyrics();
-        toggleHoverControls(Settings.plugins.MusicControls.hoverControls);
+        toggleHoverControls(settings.store.hoverControls);
     },
 });

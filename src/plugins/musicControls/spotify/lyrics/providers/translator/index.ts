@@ -6,7 +6,7 @@
  */
 
 import settings from "@plugins/musicControls";
-import { LyricsData, Provider, SyncedLyric } from "@plugins/musicControls/spotify/lyrics/providers/types";
+import { Provider, SyncedLyric } from "@plugins/musicControls/spotify/lyrics/providers/types";
 
 // stolen from src/plugins/translate/utils.ts
 
@@ -46,7 +46,7 @@ async function googleTranslate(text: string, targetLang: string, romanize: boole
 }
 
 async function processLyrics(
-    lyrics: LyricsData["lyricsVersions"][Provider],
+    lyrics: SyncedLyric[],
     targetLang: string,
     romanize: boolean
 ): Promise<SyncedLyric[] | null> {
@@ -68,7 +68,7 @@ async function processLyrics(
         })
     );
 
-    if (processedLyricsResp[0][1] === null) return null;
+    if (processedLyricsResp.every(mapping => mapping[1] === null)) return null;
 
     return lyrics.map(lyric => ({
         ...lyric,
@@ -76,13 +76,12 @@ async function processLyrics(
     }));
 }
 
-async function translateLyrics(lyrics: LyricsData["lyricsVersions"][Provider]): Promise<SyncedLyric[] | null> {
-    const language = settings.store.TranslateTo;
-    return processLyrics(lyrics, language, false);
+async function translateLyrics(lyrics: SyncedLyric[]) {
+    return await processLyrics(lyrics, settings.store.TranslateTo, false);
 }
 
-async function romanizeLyrics(lyrics: LyricsData["lyricsVersions"][Provider]): Promise<SyncedLyric[] | null> {
-    return processLyrics(lyrics, "", true);
+async function romanizeLyrics(lyrics: SyncedLyric[]) {
+    return await processLyrics(lyrics, "", true);
 }
 
 export const lyricsAlternativeFetchers = {
