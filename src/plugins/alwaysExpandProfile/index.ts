@@ -12,7 +12,7 @@ import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "AlwaysExpandProfile",
-    description: "Always display a user's full popout",
+    description: "Always expands profile popouts to the full modal",
     authors: [PcDevs.MutanPlex, PcDevs.thororen],
     patches: [
         {

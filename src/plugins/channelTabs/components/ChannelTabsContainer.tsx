@@ -9,8 +9,8 @@ import { classNameFactory } from "@api/Styles";
 import { BasicChannelTabsProps, ChannelTabsProps, createTab, handleChannelSwitch, moveToTab, openedTabs, openStartupTabs, saveTabs, settings, setUpdaterFunction, useGhostTabs } from "@plugins/channelTabs/util";
 import { classes } from "@utils/misc";
 import { useForceUpdater } from "@utils/react";
-import { findComponentByCodeLazy } from "@webpack";
-import { Button, ContextMenuApi, Flex, FluxDispatcher, Forms, useCallback, useEffect, useRef, UserStore, useState } from "@webpack/common";
+import { findComponentByCodeLazy, findStoreLazy } from "@webpack";
+import { Button, ContextMenuApi, Flex, FluxDispatcher, Forms, useCallback, useEffect, useRef, UserStore, useState, useStateFromStores } from "@webpack/common";
 
 import BookmarkContainer from "./BookmarkContainer";
 import ChannelTab, { PreviewTab } from "./ChannelTab";
@@ -19,6 +19,7 @@ import { BasicContextMenu } from "./ContextMenus";
 type TabSet = Record<string, ChannelTabsProps[]>;
 
 const PlusSmallIcon = findComponentByCodeLazy("0v-5h5a1");
+const ChannelRTCStore = findStoreLazy("ChannelRTCStore");
 
 const cl = classNameFactory("pc-channeltabs-");
 
@@ -26,6 +27,7 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
     const [userId, setUserId] = useState("");
     const { showBookmarkBar, widerTabsAndBookmarks, enableHotkeys, hotkeyCount, tabBarPosition } = settings.use(["showBookmarkBar", "widerTabsAndBookmarks", "enableHotkeys", "hotkeyCount", "tabBarPosition"]);
     const GhostTabs = useGhostTabs();
+    const isFullscreen = useStateFromStores([ChannelRTCStore], () => ChannelRTCStore.isFullscreenInContext() ?? false);
 
     const _update = useForceUpdater();
     const update = useCallback((save = true) => {
@@ -102,6 +104,7 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
     }, [userId, props.channelId, props.guildId]);
 
     if (!userId) return null;
+    if (isFullscreen) return null;
 
     return (
         <div
