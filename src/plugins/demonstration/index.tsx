@@ -77,7 +77,7 @@ function handleToggle() {
     const style = document.getElementById("DemonstrationStyle");
     if (style != null) {
         style.remove();
-        playSound("https://github.com/MutanPlex/random-files/raw/main/sounds/demonstration.wav");
+        playSound("https://github.com/MutanPlex/random-files/raw/main/sounds/demonstration/off.wav");
     }
     else {
         if (settings.store.showConfirmationModal) {
@@ -102,14 +102,14 @@ function handleToggle() {
                         onClick={() => {
                             closeModal(key);
                             injectCSS();
-                            playSound("https://github.com/Equicord/Equibored/raw/main/sounds/demonstration/ckz46t.wav");
+                            playSound("https://github.com/MutanPlex/random-files/raw/main/sounds/demonstration/on.wav");
                         }}
                     >Okay!</Button>
                 </ModalRoot>
             ));
         } else {
             injectCSS();
-            playSound("https://github.com/Equicord/Equibored/raw/main/sounds/demonstration/ckz46t.wav");
+            playSound("https://github.com/MutanPlex/random-files/raw/main/sounds/demonstration/on.wav");
         }
     }
 }

@@ -11,7 +11,7 @@ import { session } from "electron";
 type PolicyMap = Record<string, string[]>;
 
 export const ConnectSrc = ["connect-src"];
-export const ImageSrc = [...ConnectSrc, "img-src"];
+export const ImageSrc = [...ConnectSrc, "img-src", "media-src"];
 export const CssSrc = ["style-src", "font-src"];
 export const ImageAndCssSrc = [...ImageSrc, ...CssSrc];
 export const ImageScriptsAndCssSrc = [...ImageAndCssSrc, "script-src", "worker-src"];
