@@ -9,7 +9,7 @@ import { Flex } from "@components/Flex";
 import { DeleteIcon } from "@components/Icons";
 import { Link } from "@components/Link";
 import { AddonCard } from "@components/settings/AddonCard";
-import { UserThemeHeader } from "@main/themes";
+import { getThemeInfo, UserThemeHeader } from "@main/themes";
 import { openInviteModal } from "@utils/discord";
 import { showToast } from "@webpack/common";
 
@@ -21,11 +21,14 @@ interface ThemeCardProps {
 }
 
 export function ThemeCard({ theme, enabled, onChange, onDelete }: ThemeCardProps) {
+    // @ts-ignore
+    const themeInfo = getThemeInfo(theme.content, theme.fileName);
     return (
+        console.log("Rendering theme:", themeInfo),
         <AddonCard
-            name={theme.name}
-            description={theme.description}
-            author={theme.author}
+            name={themeInfo.name}
+            description={themeInfo.description}
+            author={themeInfo.author}
             enabled={enabled}
             setEnabled={onChange}
             infoButton={
@@ -36,15 +39,15 @@ export function ThemeCard({ theme, enabled, onChange, onDelete }: ThemeCardProps
                 )
             }
             footer={
-                <Flex flexDirection="row" style={{ gap: "0.2em" }}>
-                    {!!theme.website && <Link href={theme.website}>Website</Link>}
-                    {!!(theme.website && theme.invite) && " • "}
-                    {!!theme.invite && (
+                <Flex flexDirection="row" style={{ gap: "0.2em", marginTop: "0.5em" }}>
+                    {!!themeInfo.website && <Link href={themeInfo.website}>Website</Link>}
+                    {!!(themeInfo.website && themeInfo.invite) && " • "}
+                    {!!themeInfo.invite && (
                         <Link
-                            href={`https://discord.gg/${theme.invite}`}
+                            href={`https://discord.gg/${themeInfo.invite}`}
                             onClick={async e => {
                                 e.preventDefault();
-                                theme.invite != null && openInviteModal(theme.invite).catch(() => showToast("Invalid or expired invite"));
+                                themeInfo.invite != null && openInviteModal(themeInfo.invite).catch(() => showToast("Invalid or expired invite"));
                             }}
                         >
                             Discord Server
