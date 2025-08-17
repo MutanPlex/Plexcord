@@ -12,7 +12,7 @@ import definePlugin from "@utils/types";
 import { DraftType, UploadHandler } from "@webpack/common";
 
 async function handleButtonClick() {
-    const audioUrl = "https://raw.githubusercontent.com/MutanPlex/random-files/2172fb518bcc1f82a9d5d8e845510520d41bf38b/meow.mp3";
+    const audioUrl = "https://raw.githubusercontent.com/MutanPlex/random-files/54f50dcc9e9233cabc58c21c487f38475fab5d93/sounds/meow.mp3";
     try {
         const response = await fetch(audioUrl);
         if (!response.ok) throw new Error("Failed to fetch the audio file");
