@@ -23,13 +23,40 @@ import { Button, ChannelStore, FluxDispatcher, Forms, Select, SelectedChannelSto
 import type { JSX } from "react";
 
 type IconProps = JSX.IntrinsicElements["svg"];
-type KeywordEntry = { regex: string, listIds: string[], listType: ListType, ignoreCase: boolean; };
+
+interface KeywordEntry {
+    regex: string;
+    listIds: string[];
+    listType: ListType;
+    ignoreCase: boolean;
+}
+
+interface MessageEmbed {
+    description?: string;
+    title?: string;
+    fields?: Array<{ name?: string; value?: string; } | any>;
+}
+
+interface KeywordMessageExtensions {
+    _keyword?: boolean;
+    customRenderedContent?: { content: any; };
+}
+
+interface MentionUser {
+    id: string;
+    [key: string]: any;
+}
+
+type SafeMessage = Message & KeywordMessageExtensions & {
+    embeds: MessageEmbed[];
+    mentions: (MentionUser | any)[];
+};
 
 let keywordEntries: KeywordEntry[] = [];
-let compiledRegexes: RegExp[] = [];
 let currentUser: User;
 let keywordLog: any[] = [];
 let interceptor: (e: any) => void;
+const regexCache = new Map<string, RegExp>();
 
 const recentMentionsPopoutClass = findByPropsLazy("recentMentionsPopout");
 const tabClass = findByPropsLazy("inboxTitle", "tab");
@@ -41,37 +68,113 @@ const KEYWORD_LOG_KEY = "KeywordNotify_log";
 
 const cl = classNameFactory("pc-keywordnotify-");
 
-function compileRegexes() {
-    compiledRegexes = keywordEntries.map(e => {
-        try {
-            return new RegExp(e.regex, (e.ignoreCase ? "i" : ""));
-        } catch {
-            return null;
-        }
-    }).filter(Boolean) as RegExp[];
-}
-
-async function addKeywordEntry(forceUpdate: () => void) {
-    keywordEntries.push({ regex: "", listIds: [], listType: ListType.BlackList, ignoreCase: false });
-    await DataStore.set(KEYWORD_ENTRIES_KEY, keywordEntries);
-    compileRegexes();
-    forceUpdate();
-}
-
-async function removeKeywordEntry(idx: number, forceUpdate: () => void) {
-    keywordEntries.splice(idx, 1);
-    await DataStore.set(KEYWORD_ENTRIES_KEY, keywordEntries);
-    compileRegexes();
-    forceUpdate();
-}
-
 enum ListType {
     BlackList = "BlackList",
     Whitelist = "Whitelist"
 }
 
-function highlightKeywords(str: string) {
-    const matches = compiledRegexes.flatMap(r => str.match(r) || []);
+interface BaseIconProps extends IconProps {
+    viewBox: string;
+}
+
+function getCachedRegex(pattern: string, flags: string): RegExp | null {
+    const key = `${pattern}|||${flags}`;
+
+    if (regexCache.has(key)) {
+        return regexCache.get(key) || null;
+    }
+
+    try {
+        const regex = new RegExp(pattern, flags);
+        regexCache.set(key, regex);
+        return regex;
+    } catch (error) {
+        console.warn(`Invalid regex pattern: ${pattern}`, error);
+        return null;
+    }
+}
+
+function clearRegexCache() {
+    regexCache.clear();
+}
+
+async function addKeywordEntry(forceUpdate: () => void) {
+    try {
+        keywordEntries.push({
+            regex: "",
+            listIds: [],
+            listType: ListType.BlackList,
+            ignoreCase: false
+        });
+
+        await DataStore.set(KEYWORD_ENTRIES_KEY, keywordEntries);
+        clearRegexCache();
+        forceUpdate();
+    } catch (error) {
+        console.error("Failed to add keyword entry:", error);
+    }
+}
+
+async function removeKeywordEntry(idx: number, forceUpdate: () => void) {
+    try {
+        if (idx >= 0 && idx < keywordEntries.length) {
+            keywordEntries.splice(idx, 1);
+            await DataStore.set(KEYWORD_ENTRIES_KEY, keywordEntries);
+            clearRegexCache();
+            forceUpdate();
+        }
+    } catch (error) {
+        console.error("Failed to remove keyword entry:", error);
+    }
+}
+
+function safeMatchesRegex(str: string | null | undefined, pattern: string, flags: string): boolean {
+    if (!str || typeof str !== "string" || !pattern) {
+        return false;
+    }
+
+    const regex = getCachedRegex(pattern, flags);
+    if (!regex) {
+        return false;
+    }
+
+    try {
+        return regex.test(str);
+    } catch (error) {
+        console.warn("Regex test failed:", error);
+        return false;
+    }
+}
+
+function highlightKeywords(str: string, entries: KeywordEntry[]) {
+    if (!str || typeof str !== "string") {
+        return [str || ""];
+    }
+
+    const validRegexes: RegExp[] = [];
+
+    for (const entry of entries) {
+        if (entry.regex) {
+            const flags = "g" + (entry.ignoreCase ? "i" : "");
+            const regex = getCachedRegex(entry.regex, flags);
+            if (regex) {
+                validRegexes.push(regex);
+            }
+        }
+    }
+
+    if (validRegexes.length === 0) {
+        return [str];
+    }
+
+    const matches = validRegexes.flatMap(r => {
+        try {
+            return str.match(r) || [];
+        } catch {
+            return [];
+        }
+    });
+
     if (!matches.length) return [str];
 
     const match = matches[0];
@@ -83,7 +186,7 @@ function highlightKeywords(str: string) {
     ];
 }
 
-function Collapsible({ title, children }) {
+function Collapsible({ title, children }: { title: string; children: React.ReactNode; }) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -94,7 +197,9 @@ function Collapsible({ title, children }) {
                 size={Button.Sizes.ICON}
                 className={cl("collapsible")}>
                 <div style={{ display: "flex", alignItems: "center" }}>
-                    <div style={{ marginLeft: "auto", color: "var(--text-muted)", paddingRight: "5px" }}>{isOpen ? "▼" : "▶"}</div>
+                    <div style={{ marginLeft: "auto", color: "var(--text-muted)", paddingRight: "5px" }}>
+                        {isOpen ? "▼" : "▶"}
+                    </div>
                     <Forms.FormTitle tag="h4">{title}</Forms.FormTitle>
                 </div>
             </Button>
@@ -103,7 +208,7 @@ function Collapsible({ title, children }) {
     );
 }
 
-function ListedIds({ listIds, setListIds }) {
+function ListedIds({ listIds, setListIds }: { listIds: string[]; setListIds: (ids: string[]) => void; }) {
     const update = useForceUpdater();
 
     return (
@@ -116,16 +221,18 @@ function ListedIds({ listIds, setListIds }) {
                             spellCheck={false}
                             value={value}
                             onChange={e => {
-                                listIds[index] = e;
-                                setListIds(listIds);
+                                const newListIds = [...listIds];
+                                newListIds[index] = e;
+                                setListIds(newListIds);
                                 update();
                             }}
                         />
                     </div>
                     <Button
                         onClick={() => {
-                            listIds.splice(index, 1);
-                            setListIds(listIds);
+                            const newListIds = [...listIds];
+                            newListIds.splice(index, 1);
+                            setListIds(newListIds);
                             update();
                         }}
                         look={Button.Looks.BLANK}
@@ -139,7 +246,7 @@ function ListedIds({ listIds, setListIds }) {
     );
 }
 
-function ListTypeSelector({ listType, setListType }: { listType: ListType, setListType: (v: ListType) => void; }) {
+function ListTypeSelector({ listType, setListType }: { listType: ListType; setListType: (v: ListType) => void; }) {
     return (
         <Select
             options={[
@@ -159,10 +266,16 @@ function KeywordEntries() {
     const update = useForceUpdater();
 
     const updateEntry = async (index: number, updates: Partial<KeywordEntry>) => {
-        Object.assign(keywordEntries[index], updates);
-        await DataStore.set(KEYWORD_ENTRIES_KEY, keywordEntries);
-        compileRegexes();
-        update();
+        try {
+            if (index >= 0 && index < keywordEntries.length) {
+                Object.assign(keywordEntries[index], updates);
+                await DataStore.set(KEYWORD_ENTRIES_KEY, keywordEntries);
+                clearRegexCache();
+                update();
+            }
+        } catch (error) {
+            console.error("Failed to update keyword entry:", error);
+        }
     };
 
     return (
@@ -196,17 +309,23 @@ function KeywordEntries() {
                     <Forms.FormTitle tag="h5">Whitelist/Blacklist</Forms.FormTitle>
                     <Flex flexDirection="row">
                         <div style={{ flexGrow: 1 }}>
-                            <ListedIds listIds={entry.listIds} setListIds={e => updateEntry(i, { listIds: e })} />
+                            <ListedIds
+                                listIds={entry.listIds}
+                                setListIds={newIds => updateEntry(i, { listIds: newIds })}
+                            />
                         </div>
                     </Flex>
                     <div className={[Margins.top8, Margins.bottom8].join(" ")} />
                     <Flex flexDirection="row">
                         <Button onClick={() => {
-                            entry.listIds.push("");
-                            update();
+                            const newIds = [...entry.listIds, ""];
+                            updateEntry(i, { listIds: newIds });
                         }}>Add ID</Button>
                         <div style={{ flexGrow: 1 }}>
-                            <ListTypeSelector listType={entry.listType} setListType={e => updateEntry(i, { listType: e })} />
+                            <ListTypeSelector
+                                listType={entry.listType}
+                                setListType={e => updateEntry(i, { listType: e })}
+                            />
                         </div>
                     </Flex>
                 </Collapsible>
@@ -256,7 +375,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "KeywordNotify",
-    authors: [PcDevs.camila314, PcDevs.x3rt],
+    authors: [PcDevs.camila314, PcDevs.x3rt, PcDevs.MutanPlex],
     description: "Sends a notification if a given message matches certain keywords or regexes",
     settings,
     patches: [
@@ -290,37 +409,70 @@ export default definePlugin({
     ],
 
     async start() {
-        this.onUpdate = () => null;
-        currentUser = UserStore.getCurrentUser();
-        keywordEntries = await DataStore.get(KEYWORD_ENTRIES_KEY) ?? [];
-        await DataStore.set(KEYWORD_ENTRIES_KEY, keywordEntries);
-        compileRegexes();
+        try {
+            this.onUpdate = () => null;
+            currentUser = UserStore.getCurrentUser();
 
-        const savedLogs = await DataStore.get(KEYWORD_LOG_KEY) ?? [];
-        savedLogs.map(e => JSON.parse(e)).forEach(e => this.addToLog(e));
+            keywordEntries = await DataStore.get(KEYWORD_ENTRIES_KEY) ?? [];
+            await DataStore.set(KEYWORD_ENTRIES_KEY, keywordEntries);
 
-        interceptor = e => this.modify(e);
-        FluxDispatcher.addInterceptor(interceptor);
+            const savedLogs = await DataStore.get(KEYWORD_LOG_KEY) ?? [];
+            keywordLog = [];
+
+            for (const logEntry of savedLogs) {
+                try {
+                    const parsed = JSON.parse(logEntry);
+                    this.addToLog(parsed);
+                } catch (error) {
+                    console.warn("Failed to parse log entry:", error);
+                }
+            }
+
+            interceptor = e => this.modify(e);
+            FluxDispatcher.addInterceptor(interceptor);
+        } catch (error) {
+            console.error("Failed to start KeywordNotify plugin:", error);
+        }
     },
 
     stop() {
-        const index = FluxDispatcher._interceptors.indexOf(interceptor);
-        if (index > -1) FluxDispatcher._interceptors.splice(index, 1);
+        try {
+            const index = FluxDispatcher._interceptors?.indexOf(interceptor);
+            if (index !== undefined && index > -1) {
+                FluxDispatcher._interceptors.splice(index, 1);
+            }
+
+            keywordLog = [];
+            clearRegexCache();
+
+            if (this.onUpdate) {
+                this.onUpdate = () => null;
+            }
+        } catch (error) {
+            console.error("Failed to stop KeywordNotify plugin:", error);
+        }
     },
 
-    applyKeywordEntries(m: Message) {
+    applyKeywordEntries(m: SafeMessage) {
+        if (!m || !m.content && (!m.embeds || m.embeds.length === 0)) {
+            return;
+        }
+
         let matches = false;
 
-        for (let i = 0; i < keywordEntries.length; ++i) {
-            const entry = keywordEntries[i];
-            if (entry.regex === "" || !compiledRegexes[i]) {
+        for (const entry of keywordEntries) {
+            if (!entry.regex) {
                 continue;
             }
 
-            let listed = entry.listIds.some(id => id === m.channel_id || id === m.author.id);
+            let listed = entry.listIds.some(id =>
+                id === m.channel_id ||
+                id === m.author?.id
+            );
+
             if (!listed) {
                 const channel = ChannelStore.getChannel(m.channel_id);
-                if (channel != null) {
+                if (channel?.guild_id) {
                     listed = entry.listIds.some(id => id === channel.guild_id);
                 }
             }
@@ -330,65 +482,129 @@ export default definePlugin({
             if (!whitelistMode && listed) {
                 continue;
             }
+
             if (whitelistMode && !listed) {
                 continue;
             }
 
-            if (settings.store.ignoreBots && m.author.bot && (!whitelistMode || !entry.listIds.includes(m.author.id))) {
+            if (settings.store.ignoreBots &&
+                m.author?.bot &&
+                (!whitelistMode || !entry.listIds.includes(m.author.id))) {
                 continue;
             }
 
-            if (compiledRegexes[i].test(m.content)) {
+            const flags = entry.ignoreCase ? "i" : "";
+
+            if (safeMatchesRegex(m.content, entry.regex, flags)) {
                 matches = true;
-            } else {
-                for (const embed of m.embeds as any) {
-                    if ((embed.description && compiledRegexes[i].test(embed.description)) ||
-                        (embed.title && compiledRegexes[i].test(embed.title))) {
+                break;
+            }
+
+            if (m.embeds && m.embeds.length > 0) {
+                for (const embed of m.embeds) {
+                    if (safeMatchesRegex(embed.description, entry.regex, flags) ||
+                        safeMatchesRegex(embed.title, entry.regex, flags)) {
                         matches = true;
                         break;
-                    } else if (embed.fields != null) {
-                        for (const field of embed.fields as Array<{ name: string, value: string; }>) {
-                            if ((field.value && compiledRegexes[i].test(field.value)) ||
-                                (field.name && compiledRegexes[i].test(field.name))) {
-                                matches = true;
-                                break;
+                    }
+
+                    if (embed.fields && Array.isArray(embed.fields)) {
+                        for (const field of embed.fields) {
+                            if (field && typeof field === "object" && field !== null) {
+                                const typedField = field as { name?: string; value?: string; };
+                                if (safeMatchesRegex(typedField.value, entry.regex, flags) ||
+                                    safeMatchesRegex(typedField.name, entry.regex, flags)) {
+                                    matches = true;
+                                    break;
+                                }
                             }
                         }
                     }
+
+                    if (matches) break;
                 }
             }
+
+            if (matches) break;
         }
 
         if (matches) {
-            // @ts-ignore
-            m.mentions.push({ id: currentUser.id });
+            try {
+                if (!m.mentions) {
+                    m.mentions = [];
+                }
 
-            if (m.author.id !== currentUser.id)
-                this.addToLog(m);
+                if (!m.mentions) {
+                    m.mentions = [];
+                }
+
+                if (!m.mentions.some(mention => {
+                    if (mention && typeof mention === "object" && mention !== null) {
+                        const typedMention = mention as { id?: string; };
+                        return typedMention.id === currentUser.id;
+                    }
+                    return false;
+                })) {
+                    m.mentions.push({ id: currentUser.id } as any);
+                }
+
+                if (m.author?.id !== currentUser.id) {
+                    this.addToLog(m);
+                }
+            } catch (error) {
+                console.error("Failed to process keyword match:", error);
+            }
         }
     },
 
     addToLog(m: Message) {
-        if (!m || keywordLog.some(e => e.id === m.id)) return;
-        const thing = createMessageRecord(m);
-        keywordLog.push(thing);
-        keywordLog.sort((a, b) => (b.timestamp ?? 0) - (a.timestamp ?? 0));
-        if (keywordLog.length > settings.store.amountToKeep) {
-            keywordLog.length = settings.store.amountToKeep;
+        if (!m || keywordLog.some(e => e.id === m.id)) {
+            return;
         }
-        DataStore.set(KEYWORD_LOG_KEY, keywordLog.map(e => JSON.stringify(e)));
-        if (typeof this.onUpdate === "function") this.onUpdate();
+
+        try {
+            DataStore.update(KEYWORD_LOG_KEY, (log: string[] = []) => {
+                const newLog = [...log, JSON.stringify(m)];
+                return newLog.slice(-settings.store.amountToKeep);
+            });
+
+            const thing = createMessageRecord(m);
+            keywordLog.push(thing);
+            keywordLog.sort((a, b) => b.timestamp - a.timestamp);
+
+            while (keywordLog.length > settings.store.amountToKeep) {
+                keywordLog.pop();
+            }
+
+            if (this.onUpdate) {
+                this.onUpdate();
+            }
+        } catch (error) {
+            console.error("Failed to add message to keyword log:", error);
+        }
     },
 
-    deleteKeyword(id) {
-        keywordLog = keywordLog.filter(e => e.id !== id);
-        DataStore.update(KEYWORD_LOG_KEY, (log: string[] = []) =>
-            log.filter(entry => {
-                try { return JSON.parse(entry).id !== id; }
-                catch { return true; }
-            })
-        );
-        this.onUpdate();
+    deleteKeyword(id: string) {
+        try {
+            keywordLog = keywordLog.filter(e => e && e.id !== id);
+
+            DataStore.update(KEYWORD_LOG_KEY, (log: string[] = []) =>
+                log.filter(entry => {
+                    try {
+                        const parsed = JSON.parse(entry);
+                        return parsed && parsed.id !== id;
+                    } catch {
+                        return true;
+                    }
+                })
+            );
+
+            if (this.onUpdate) {
+                this.onUpdate();
+            }
+        } catch (error) {
+            console.error("Failed to delete keyword:", error);
+        }
     },
 
     keywordTabBar() {
@@ -399,33 +615,41 @@ export default definePlugin({
         );
     },
 
-    tryKeywordMenu(setTab, onJump, closePopout) {
-        const clearAll = () => {
-            keywordLog = [];
-            DataStore.set(KEYWORD_LOG_KEY, []);
-            if (typeof this.onUpdate === "function") this.onUpdate();
+    tryKeywordMenu(setTab: (tab: number) => void, onJump: Function, closePopout: Function) {
+        const clearAll = async () => {
+            try {
+                keywordLog = [];
+                await DataStore.set(KEYWORD_LOG_KEY, []);
+                if (this.onUpdate) {
+                    this.onUpdate();
+                }
+            } catch (error) {
+                console.error("Failed to clear keyword log:", error);
+            }
         };
 
         const header = (
-            <Tooltip text="Clear All">
-                {({ onMouseLeave, onMouseEnter }) => (
-                    <div className={classes(tabClass.controlButton, buttonClass.button, buttonClass.tertiary, buttonClass.size32, Margins.left16)}
-                        onMouseLeave={onMouseLeave}
-                        onMouseEnter={onMouseEnter}
-                        onClick={clearAll}>
-                        <DoubleCheckmarkIcon />
-                    </div>
-                )}
-            </Tooltip>
+            <>
+                <Tooltip text="Clear All">
+                    {({ onMouseLeave, onMouseEnter }) => (
+                        <div className={classes(tabClass.controlButton, buttonClass.button, buttonClass.tertiary, buttonClass.size32, Margins.left16)}
+                            onMouseLeave={onMouseLeave}
+                            onMouseEnter={onMouseEnter}
+                            onClick={clearAll}>
+                            <DoubleCheckmarkIcon />
+                        </div>
+                    )}
+                </Tooltip>
+            </>
         );
 
         const [tempLogs, setKeywordLog] = useState([...keywordLog]);
         this.onUpdate = () => setKeywordLog([...keywordLog]);
 
-        const messageRender = (e, t) => {
+        const messageRender = (e: SafeMessage, t: Function) => {
             e._keyword = true;
             e.customRenderedContent = {
-                content: highlightKeywords(e.content)
+                content: highlightKeywords(e.content || "", keywordEntries)
             };
             return [this.renderMsg({ message: e, gotoMessage: t, dismissible: true })];
         };
@@ -433,29 +657,37 @@ export default definePlugin({
         const channel = ChannelStore.getChannel(SelectedChannelStore.getChannelId());
 
         return (
-            <Popout
-                className={classes(recentMentionsPopoutClass.recentMentionsPopout)}
-                renderHeader={() => header}
-                renderMessage={messageRender}
-                channel={channel}
-                onJump={onJump}
-                onFetch={() => null}
-                onCloseMessage={this.deleteKeyword}
-                loadMore={() => null}
-                messages={tempLogs}
-                renderEmptyState={() => null}
-                canCloseAllMessages={true}
-            />
+            <>
+                <Popout
+                    className={classes(recentMentionsPopoutClass.recentMentionsPopout)}
+                    renderHeader={() => header}
+                    renderMessage={messageRender}
+                    channel={channel}
+                    onJump={onJump}
+                    onFetch={() => null}
+                    onCloseMessage={this.deleteKeyword}
+                    loadMore={() => null}
+                    messages={tempLogs}
+                    renderEmptyState={() => null}
+                    canCloseAllMessages={true}
+                />
+            </>
         );
     },
 
-    modify(e) {
-        if (e.type === "MESSAGE_CREATE" || e.type === "MESSAGE_UPDATE") {
-            this.applyKeywordEntries(e.message);
-        } else if (e.type === "LOAD_MESSAGES_SUCCESS") {
-            for (let msg = 0; msg < e.messages.length; ++msg) {
-                this.applyKeywordEntries(e.messages[msg]);
+    modify(e: any) {
+        try {
+            if (e.type === "MESSAGE_CREATE" || e.type === "MESSAGE_UPDATE") {
+                this.applyKeywordEntries(e.message);
+            } else if (e.type === "LOAD_MESSAGES_SUCCESS") {
+                if (e.messages && Array.isArray(e.messages)) {
+                    for (const msg of e.messages) {
+                        this.applyKeywordEntries(msg);
+                    }
+                }
             }
+        } catch (error) {
+            console.error("Failed to process message event:", error);
         }
     }
 });
