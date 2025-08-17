@@ -48,10 +48,10 @@ export default definePlugin({
     description: "Adds the Opera GX Keyboard Sounds to Discord",
     authors: [Devs.HypedDomi, PcDevs.MutanPlex],
     start: () => {
-        click1 = new Audio("https://raw.githubusercontent.com/MutanPlex/random-files/51ed29d6b7548846ab4c9ba6ff84bbfe02f4d03b/keyboard-sounds/sounds_keyboard_click1.wav");
-        click2 = new Audio("https://raw.githubusercontent.com/MutanPlex/random-files/51ed29d6b7548846ab4c9ba6ff84bbfe02f4d03b/keyboard-sounds/sounds_keyboard_click2.wav");
-        click3 = new Audio("https://raw.githubusercontent.com/MutanPlex/random-files/51ed29d6b7548846ab4c9ba6ff84bbfe02f4d03b/keyboard-sounds/sounds_keyboard_click3.wav");
-        backspace = new Audio("https://raw.githubusercontent.com/MutanPlex/random-files/51ed29d6b7548846ab4c9ba6ff84bbfe02f4d03b/keyboard-sounds/sounds_keyboard_backspace.wav");
+        click1 = new Audio("https://raw.githubusercontent.com/MutanPlex/random-files/1046243ce11dc59cc13f7f3b18072df5011a6a92//sounds/keyboard/click1.wav");
+        click2 = new Audio("https://raw.githubusercontent.com/MutanPlex/random-files/1046243ce11dc59cc13f7f3b18072df5011a6a92/sounds/keyboard/click2.wav");
+        click3 = new Audio("https://raw.githubusercontent.com/MutanPlex/random-files/1046243ce11dc59cc13f7f3b18072df5011a6a92/sounds/keyboard/click3.wav");
+        backspace = new Audio("https://raw.githubusercontent.com/MutanPlex/random-files/1046243ce11dc59cc13f7f3b18072df5011a6a92/sounds/keyboard/backspace.wav");
         sounds = {
             click1,
             click2,
