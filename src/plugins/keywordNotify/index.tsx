@@ -26,6 +26,7 @@ type IconProps = JSX.IntrinsicElements["svg"];
 type KeywordEntry = { regex: string, listIds: string[], listType: ListType, ignoreCase: boolean; };
 
 let keywordEntries: KeywordEntry[] = [];
+let compiledRegexes: RegExp[] = [];
 let currentUser: User;
 let keywordLog: any[] = [];
 let interceptor: (e: any) => void;
@@ -40,15 +41,27 @@ const KEYWORD_LOG_KEY = "KeywordNotify_log";
 
 const cl = classNameFactory("pc-keywordnotify-");
 
+function compileRegexes() {
+    compiledRegexes = keywordEntries.map(e => {
+        try {
+            return new RegExp(e.regex, (e.ignoreCase ? "i" : ""));
+        } catch {
+            return null;
+        }
+    }).filter(Boolean) as RegExp[];
+}
+
 async function addKeywordEntry(forceUpdate: () => void) {
     keywordEntries.push({ regex: "", listIds: [], listType: ListType.BlackList, ignoreCase: false });
     await DataStore.set(KEYWORD_ENTRIES_KEY, keywordEntries);
+    compileRegexes();
     forceUpdate();
 }
 
 async function removeKeywordEntry(idx: number, forceUpdate: () => void) {
     keywordEntries.splice(idx, 1);
     await DataStore.set(KEYWORD_ENTRIES_KEY, keywordEntries);
+    compileRegexes();
     forceUpdate();
 }
 
@@ -69,16 +82,8 @@ interface BaseIconProps extends IconProps {
     viewBox: string;
 }
 
-function highlightKeywords(str: string, entries: KeywordEntry[]) {
-    const regexes = entries.map(e => {
-        try {
-            return new RegExp(e.regex, "g" + (e.ignoreCase ? "i" : ""));
-        } catch {
-            return null;
-        }
-    }).filter(Boolean) as RegExp[];
-
-    const matches = regexes.flatMap(r => str.match(r) || []);
+function highlightKeywords(str: string) {
+    const matches = compiledRegexes.flatMap(r => str.match(r) || []);
     if (!matches.length) return [str];
 
     const match = matches[0];
@@ -168,6 +173,7 @@ function KeywordEntries() {
     const updateEntry = async (index: number, updates: Partial<KeywordEntry>) => {
         Object.assign(keywordEntries[index], updates);
         await DataStore.set(KEYWORD_ENTRIES_KEY, keywordEntries);
+        compileRegexes();
         update();
     };
 
@@ -300,6 +306,7 @@ export default definePlugin({
         currentUser = UserStore.getCurrentUser();
         keywordEntries = await DataStore.get(KEYWORD_ENTRIES_KEY) ?? [];
         await DataStore.set(KEYWORD_ENTRIES_KEY, keywordEntries);
+        compileRegexes();
 
         const savedLogs = await DataStore.get(KEYWORD_LOG_KEY) ?? [];
         savedLogs.map(e => JSON.parse(e)).forEach(e => this.addToLog(e));
@@ -316,8 +323,9 @@ export default definePlugin({
     applyKeywordEntries(m: Message) {
         let matches = false;
 
-        for (const entry of keywordEntries) {
-            if (entry.regex === "") {
+        for (let i = 0; i < keywordEntries.length; ++i) {
+            const entry = keywordEntries[i];
+            if (entry.regex === "" || !compiledRegexes[i]) {
                 continue;
             }
 
@@ -342,17 +350,18 @@ export default definePlugin({
                 continue;
             }
 
-            const flags = entry.ignoreCase ? "i" : "";
-            if (safeMatchesRegex(m.content, entry.regex, flags)) {
+            if (compiledRegexes[i].test(m.content)) {
                 matches = true;
             } else {
                 for (const embed of m.embeds as any) {
-                    if (safeMatchesRegex(embed.description, entry.regex, flags) || safeMatchesRegex(embed.title, entry.regex, flags)) {
+                    if ((embed.description && compiledRegexes[i].test(embed.description)) ||
+                        (embed.title && compiledRegexes[i].test(embed.title))) {
                         matches = true;
                         break;
                     } else if (embed.fields != null) {
                         for (const field of embed.fields as Array<{ name: string, value: string; }>) {
-                            if (safeMatchesRegex(field.value, entry.regex, flags) || safeMatchesRegex(field.name, entry.regex, flags)) {
+                            if ((field.value && compiledRegexes[i].test(field.value)) ||
+                                (field.name && compiledRegexes[i].test(field.name))) {
                                 matches = true;
                                 break;
                             }
@@ -372,22 +381,14 @@ export default definePlugin({
     },
 
     addToLog(m: Message) {
-        if (m == null || keywordLog.some(e => e.id === m.id))
-            return;
-
-        DataStore.update(KEYWORD_LOG_KEY, (log: string[] = []) => {
-            return [...log, JSON.stringify(m)];
-        });
-
+        if (!m || keywordLog.some(e => e.id === m.id)) return;
         const thing = createMessageRecord(m);
-        keywordLog.push(thing);
-        keywordLog.sort((a, b) => b.timestamp - a.timestamp);
-
-        while (keywordLog.length > settings.store.amountToKeep) {
-            keywordLog.pop();
+        keywordLog.unshift(thing);
+        if (keywordLog.length > settings.store.amountToKeep) {
+            keywordLog.length = settings.store.amountToKeep;
         }
-
-        this.onUpdate();
+        DataStore.set(KEYWORD_LOG_KEY, keywordLog.map(e => JSON.stringify(e)));
+        if (typeof this.onUpdate === "function") this.onUpdate();
     },
 
     deleteKeyword(id) {
@@ -413,31 +414,29 @@ export default definePlugin({
         const clearAll = () => {
             keywordLog = [];
             DataStore.set(KEYWORD_LOG_KEY, []);
-            this.onUpdate();
+            if (typeof this.onUpdate === "function") this.onUpdate();
         };
 
         const header = (
-            <>
-                <Tooltip text="Clear All">
-                    {({ onMouseLeave, onMouseEnter }) => (
-                        <div className={classes(tabClass.controlButton, buttonClass.button, buttonClass.tertiary, buttonClass.size32, Margins.left16)}
-                            onMouseLeave={onMouseLeave}
-                            onMouseEnter={onMouseEnter}
-                            onClick={clearAll}>
-                            <DoubleCheckmarkIcon />
-                        </div>
-                    )}
-                </Tooltip>
-            </>
+            <Tooltip text="Clear All">
+                {({ onMouseLeave, onMouseEnter }) => (
+                    <div className={classes(tabClass.controlButton, buttonClass.button, buttonClass.tertiary, buttonClass.size32, Margins.left16)}
+                        onMouseLeave={onMouseLeave}
+                        onMouseEnter={onMouseEnter}
+                        onClick={clearAll}>
+                        <DoubleCheckmarkIcon />
+                    </div>
+                )}
+            </Tooltip>
         );
 
-        const [tempLogs, setKeywordLog] = useState(keywordLog);
+        const [tempLogs, setKeywordLog] = useState([...keywordLog]);
         this.onUpdate = () => setKeywordLog([...keywordLog]);
 
         const messageRender = (e, t) => {
             e._keyword = true;
             e.customRenderedContent = {
-                content: highlightKeywords(e.content, keywordEntries)
+                content: highlightKeywords(e.content)
             };
             return [this.renderMsg({ message: e, gotoMessage: t, dismissible: true })];
         };
@@ -445,21 +444,19 @@ export default definePlugin({
         const channel = ChannelStore.getChannel(SelectedChannelStore.getChannelId());
 
         return (
-            <>
-                <Popout
-                    className={classes(recentMentionsPopoutClass.recentMentionsPopout)}
-                    renderHeader={() => header}
-                    renderMessage={messageRender}
-                    channel={channel}
-                    onJump={onJump}
-                    onFetch={() => null}
-                    onCloseMessage={this.deleteKeyword}
-                    loadMore={() => null}
-                    messages={tempLogs}
-                    renderEmptyState={() => null}
-                    canCloseAllMessages={true}
-                />
-            </>
+            <Popout
+                className={classes(recentMentionsPopoutClass.recentMentionsPopout)}
+                renderHeader={() => header}
+                renderMessage={messageRender}
+                channel={channel}
+                onJump={onJump}
+                onFetch={() => null}
+                onCloseMessage={this.deleteKeyword}
+                loadMore={() => null}
+                messages={tempLogs}
+                renderEmptyState={() => null}
+                canCloseAllMessages={true}
+            />
         );
     },
 
