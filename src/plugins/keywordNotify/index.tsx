@@ -33,7 +33,6 @@ let interceptor: (e: any) => void;
 const recentMentionsPopoutClass = findByPropsLazy("recentMentionsPopout");
 const tabClass = findByPropsLazy("inboxTitle", "tab");
 const buttonClass = findByPropsLazy("size36");
-const MenuHeader = findByCodeLazy(".getUnseenInviteCount())");
 const Popout = findByCodeLazy("getProTip", "canCloseAllMessages:");
 const createMessageRecord = findByCodeLazy(".createFromServer(", ".isBlockedForMessage", "messageReference:");
 const KEYWORD_ENTRIES_KEY = "KeywordNotify_keywordEntries";
@@ -278,7 +277,7 @@ export default definePlugin({
             find: "location:\"RecentsPopout\"});",
             replacement: {
                 match: /(?<=setTab:(\i),badgeState:\i,closePopout:(\i).{0,50}):(\i)===\i\.\i\.MENTIONS\?\(0,.+?onJump:(\i)/,
-                replace: ": $3 === 8 ? $self.tryKeywordMenu($1, $2, $4) $&"
+                replace: ": $3 === 8 ? $self.tryKeywordMenu($1, $4, $2) $&"
             }
         },
         {
@@ -419,10 +418,9 @@ export default definePlugin({
 
         const header = (
             <>
-                <MenuHeader tab={8} setTab={setTab} closePopout={closePopout} badgeState={{ badgeForYou: false }} />
                 <Tooltip text="Clear All">
                     {({ onMouseLeave, onMouseEnter }) => (
-                        <div className={classes(tabClass.controlButton, buttonClass.button, buttonClass.tertiary, buttonClass.size32)}
+                        <div className={classes(tabClass.controlButton, buttonClass.button, buttonClass.tertiary, buttonClass.size32, Margins.left16)}
                             onMouseLeave={onMouseLeave}
                             onMouseEnter={onMouseEnter}
                             onClick={clearAll}>
