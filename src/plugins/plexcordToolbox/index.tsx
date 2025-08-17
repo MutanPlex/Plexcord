@@ -22,7 +22,7 @@ import "./index.css";
 import { openNotificationLogModal } from "@api/Notifications/notificationLog";
 import { Settings, useSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
 import { Menu, Popout, useRef, useState } from "@webpack/common";
@@ -123,33 +123,27 @@ function PlexcordPopoutButton() {
     );
 }
 
-function ToolboxFragmentWrapper({ children }: { children: ReactNode[]; }) {
-    children.splice(
-        children.length - 1, 0,
+function renderPlexcordToolboxButton() {
+    return (
         <ErrorBoundary noop>
             <PlexcordPopoutButton />
         </ErrorBoundary>
     );
-
-    return <>{children}</>;
 }
 
 export default definePlugin({
     name: "PlexcordToolbox",
-    description: "Adds a button next to the inbox button in the channel header that houses Plexcord quick actions",
-    authors: [Devs.Ven, Devs.AutumnVN],
+    description: "Adds a button to the AppBar that houses Plexcord quick actions",
+    authors: [Devs.Ven, Devs.AutumnVN, PcDevs.MutanPlex],
 
     patches: [
         {
-            find: ".controlButtonWrapper,",
+            find: "AppTitleBar",
             replacement: {
-                match: /(?<=function (\i).{0,100}\()\i.Fragment,(?=.+?toolbar:\1\(\))/,
-                replace: "$self.ToolboxFragmentWrapper,"
-            }
-        }
+                match: /(?<=trailing:.{0,70}\(\i\.Fragment,{children:\[)/,
+                replace: "$self.renderPlexcordToolboxButton(),"
+            },
+        },
     ],
-
-    ToolboxFragmentWrapper: ErrorBoundary.wrap(ToolboxFragmentWrapper, {
-        fallback: () => <p style={{ color: "red" }}>Failed to render :(</p>
-    })
+    renderPlexcordToolboxButton,
 });
