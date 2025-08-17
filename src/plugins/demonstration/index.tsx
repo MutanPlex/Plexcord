@@ -21,7 +21,7 @@ async function injectCSS() {
     }
     const styleElement = document.createElement("style");
     styleElement.id = "DemonstrationStyle";
-    const content = await fetch("https://minidiscordthemes.github.io/Demonstration/Demonstration.theme.css").then(e => e.text());
+    const content = await fetch("https://raw.githubusercontent.com/MutanPlex/random-files/refs/heads/main/plexcord-themes/demonstration/Demonstration.theme.css").then(e => e.text());
     styleElement.textContent = content;
     document.documentElement.appendChild(styleElement);
 }
@@ -77,7 +77,7 @@ function handleToggle() {
     const style = document.getElementById("DemonstrationStyle");
     if (style != null) {
         style.remove();
-        playSound("https://github.com/Equicord/Equibored/raw/main/sounds/demonstration/wp5rpz.wav");
+        playSound("https://github.com/MutanPlex/random-files/raw/main/sounds/demonstration.wav");
     }
     else {
         if (settings.store.showConfirmationModal) {
