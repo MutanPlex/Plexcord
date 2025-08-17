@@ -65,21 +65,9 @@ async function removeKeywordEntry(idx: number, forceUpdate: () => void) {
     forceUpdate();
 }
 
-function safeMatchesRegex(str: string, regex: string, flags: string) {
-    try {
-        return str.match(new RegExp(regex, flags));
-    } catch {
-        return false;
-    }
-}
-
 enum ListType {
     BlackList = "BlackList",
     Whitelist = "Whitelist"
-}
-
-interface BaseIconProps extends IconProps {
-    viewBox: string;
 }
 
 function highlightKeywords(str: string) {
@@ -383,7 +371,8 @@ export default definePlugin({
     addToLog(m: Message) {
         if (!m || keywordLog.some(e => e.id === m.id)) return;
         const thing = createMessageRecord(m);
-        keywordLog.unshift(thing);
+        keywordLog.push(thing);
+        keywordLog.sort((a, b) => (b.timestamp ?? 0) - (a.timestamp ?? 0));
         if (keywordLog.length > settings.store.amountToKeep) {
             keywordLog.length = settings.store.amountToKeep;
         }
