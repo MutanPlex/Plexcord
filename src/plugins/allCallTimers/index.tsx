@@ -13,10 +13,16 @@ import { useFixedTimer } from "@utils/react";
 import { formatDurationMs } from "@utils/text";
 import definePlugin, { OptionType } from "@utils/types";
 import { FluxDispatcher, GuildStore, Tooltip, UserStore } from "@webpack/common";
-interface FixedTimerOpts {
-    interval?: number;
-    initialTime?: number;
-}
+
+const fixCss = `
+    .voiceUser__07f91 .container__394db .chipletParent__394db {
+        top: -5px;
+    }
+
+    .voiceUser__07f91 .content__07f91 {
+        padding: 0px var(--space-xs);
+    }
+`;
 export interface VoiceState {
     userId: string;
     channelId?: string;
@@ -113,6 +119,12 @@ export const settings = definePluginSettings({
         description: "Track users in large guilds. This may cause lag if you're in a lot of large guilds with active voice users. Tested with up to 2000 active voice users with no issues.",
         restartNeeded: true,
         default: false
+    },
+    fixUI: {
+        type: OptionType.BOOLEAN,
+        description: "Fix UI issues",
+        restartNeeded: true,
+        default: true
     }
 });
 
@@ -152,6 +164,21 @@ let myLastChannelId: string | undefined;
 
 // Allow user updates on discord first load
 let runOneTime = true;
+
+function injectCSS() {
+    if (document.getElementById("allCallTimers-css")) return;
+    const style = document.createElement("style");
+    style.id = "allCallTimers-css";
+    style.textContent = fixCss;
+    document.head.appendChild(style);
+}
+
+function removeCss() {
+    const style = document.getElementById("allCallTimers-css");
+    if (style) {
+        style.remove();
+    }
+}
 
 export default definePlugin({
     name: "AllCallTimers",
@@ -279,6 +306,15 @@ export default definePlugin({
     start() {
         if (settings.store.watchLargeGuilds) {
             this.subscribeToAllGuilds();
+        }
+        if (settings.store.fixUI) {
+            injectCSS();
+        }
+    },
+
+    stop() {
+        if (settings.store.fixUI) {
+            removeCss();
         }
     },
 
