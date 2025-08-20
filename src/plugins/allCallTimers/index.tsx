@@ -394,12 +394,10 @@ export function TimerIcon({ height = 16, width = 16, className }: Readonly<{
 }
 export function TimerText({ text, className, style }: Readonly<{ text: string; className: string; style?: React.CSSProperties; }>) {
     return <div className={`timeCounter ${className}`} style={{
-        // this margin value doesn't change the default size of the user container
-        marginTop: -6,
         fontWeight: "bold",
         fontFamily: "monospace",
-        // good size that doesn't touch username
         fontSize: 11,
+        lineHeight: "7px",
         position: "relative",
         ...style
     }}>{text}</div>;

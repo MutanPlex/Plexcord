@@ -31,7 +31,6 @@ function lurk(id: string) {
         .catch(() => { throw new Error("Guild is not lurkable"); });
 }
 
-
 export default definePlugin({
     name: "BetterInvites",
     description: "See invites expiration date, view inviter profile and preview discoverable servers before joining by clicking their name",
