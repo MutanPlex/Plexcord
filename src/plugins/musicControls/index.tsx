@@ -59,8 +59,8 @@ export default definePlugin({
             replacement: {
                 // react.jsx)(AccountPanel, { ..., showTaglessAccountPanel: blah })
                 match: /(?<=\i\.jsxs?\)\()(\i),{(?=[^}]*?userTag:\i,hidePrivateData:)/,
-                // react.jsx(WrapperComponent, { VencordOriginal: AccountPanel, ...
-                replace: "$self.PanelWrapper,{VencordOriginal:$1,"
+                // react.jsx(WrapperComponent, { PlexcordOriginal: AccountPanel, ...
+                replace: "$self.PanelWrapper,{PlexcordOriginal:$1,"
             },
         },
         {
@@ -94,7 +94,7 @@ export default definePlugin({
     ],
 
 
-    PanelWrapper({ VencordOriginal, ...props }) {
+    PanelWrapper({ PlexcordOriginal, ...props }) {
         const { showTidalControls, showTidalLyrics, showSpotifyLyrics, showSpotifyControls, LyricsPosition } = settings.store;
         return (
             <>
@@ -114,7 +114,7 @@ export default definePlugin({
                     {showSpotifyLyrics && LyricsPosition === "below" && <SpotifyLyrics />}
                 </ErrorBoundary>
 
-                <VencordOriginal {...props} />
+                <PlexcordOriginal {...props} />
             </>
         );
     },

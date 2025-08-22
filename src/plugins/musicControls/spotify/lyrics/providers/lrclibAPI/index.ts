@@ -39,7 +39,7 @@ export async function getLyricsLrclib(track: Track): Promise<LyricsData | null> 
     const url = `${baseUrlLrclib}?${params.toString()}`;
     const response = await fetch(url, {
         headers: {
-            "User-Agent": "SpotifyLyrics for Vencord (https://github.com/Masterjoona/pc-spotifylyrics)"
+            "User-Agent": "SpotifyLyrics for Plexcord (https://github.com/Masterjoona/vc-spotifylyrics)"
         }
     });
 
