@@ -104,7 +104,7 @@ function PatchHelper() {
 
     return (
         <SettingsTab title="Patch Helper">
-            <Forms.FormTitle>full patch</Forms.FormTitle>
+            <Forms.FormTitle>Full Patch</Forms.FormTitle>
             <FullPatchInput
                 setFind={onFindChange}
                 setParsedFind={setParsedFind}
@@ -112,7 +112,7 @@ function PatchHelper() {
                 setReplacement={setReplacement}
             />
 
-            <Forms.FormTitle className={Margins.top8}>find</Forms.FormTitle>
+            <Forms.FormTitle className={Margins.top8}>Find</Forms.FormTitle>
             <TextInput
                 type="text"
                 value={find}
@@ -120,7 +120,7 @@ function PatchHelper() {
                 error={findError}
             />
 
-            <Forms.FormTitle className={Margins.top8}>match</Forms.FormTitle>
+            <Forms.FormTitle className={Margins.top8}>Match</Forms.FormTitle>
             <TextInput
                 type="text"
                 value={match}
