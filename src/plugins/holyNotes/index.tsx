@@ -59,11 +59,11 @@ export default definePlugin({
 
     patches: [
         {
-            find: "AppTitleBar",
+            find: '"M9 3v18"',
             replacement: {
-                match: /(?<=trailing:.{0,70}\(\i\.Fragment,{children:\[)/,
-                replace: "$self.renderHolyNotesButton(),"
-            },
+                match: /focusSectionProps:"HELP".{0,20},className:(\i\.button)\}\),/,
+                replace: "$& $self.renderHolyNotesButton(),"
+            }
         },
     ],
     renderHolyNotesButton() {

@@ -241,10 +241,10 @@ export default definePlugin({
             },
         },
         {
-            find: '"BACK_FORWARD_NAVIGATION"',
+            find: '"M9 3v18"',
             replacement: {
-                match: /(?<=trailing:.{0,70}\(\i\.Fragment,{children:\[)/,
-                replace: "$self.renderQuestButton(),"
+                match: /focusSectionProps:"HELP".{0,20},className:(\i\.button)\}\),/,
+                replace: "$& $self.renderQuestButton(),"
             }
         }
     ],

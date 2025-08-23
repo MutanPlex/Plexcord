@@ -283,11 +283,11 @@ export default definePlugin({
             }
         },
         {
-            find: "AppTitleBar",
+            find: '"M9 3v18"',
             replacement: {
-                match: /(?<=trailing:.{0,70}\(\i\.Fragment,{children:\[)/,
-                replace: "$self.renderMessageLogButton(),"
-            },
+                match: /focusSectionProps:"HELP".{0,20},className:(\i\.button)\}\),/,
+                replace: "$& $self.renderMessageLogButton(),"
+            }
         },
 
         {
