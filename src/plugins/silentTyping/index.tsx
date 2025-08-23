@@ -260,16 +260,16 @@ const ChatBarContextCheckbox: NavContextMenuPatchCallback = children => {
     const idx = group.findIndex(c => c?.props?.id === "submit-button");
 
     group.splice(idx >= 0 ? idx : 0, 0,
-        <Menu.MenuItem id="vc-silent-typing" label="Silent Typing">
-            <Menu.MenuCheckboxItem id="vc-silent-typing-enabled" label="Enabled" checked={enabledGlobally}
+        <Menu.MenuItem id="pc-silent-typing" label="Silent Typing">
+            <Menu.MenuCheckboxItem id="pc-silent-typing-enabled" label="Enabled" checked={enabledGlobally}
                 action={() => settings.store.enabledGlobally = !settings.store.enabledGlobally} />
-            <Menu.MenuCheckboxItem id="vc-silent-typing-chat-bar-indicators" label="Chat Bar Indicators" checked={settings.store.hideChatBoxTypingIndicators}
+            <Menu.MenuCheckboxItem id="pc-silent-typing-chat-bar-indicators" label="Chat Bar Indicators" checked={settings.store.hideChatBoxTypingIndicators}
                 action={() => settings.store.hideChatBoxTypingIndicators = !settings.store.hideChatBoxTypingIndicators} />
-            <Menu.MenuCheckboxItem id="vc-silent-typing-members-list-indicators" label="Members List Indicators" checked={settings.store.hideMembersListTypingIndicators}
+            <Menu.MenuCheckboxItem id="pc-silent-typing-members-list-indicators" label="Members List Indicators" checked={settings.store.hideMembersListTypingIndicators}
                 action={() => settings.store.hideMembersListTypingIndicators = !settings.store.hideMembersListTypingIndicators} />
-            <Menu.MenuCheckboxItem id="vc-silent-typing-chat-icon" label="Chat Icon" checked={chatIcon}
+            <Menu.MenuCheckboxItem id="pc-silent-typing-chat-icon" label="Chat Icon" checked={chatIcon}
                 action={() => settings.store.chatIcon = !settings.store.chatIcon} />
-            <Menu.MenuCheckboxItem id="vc-silent-typing-default" label="Default Hidden" checked={defaultHidden}
+            <Menu.MenuCheckboxItem id="pc-silent-typing-default" label="Default Hidden" checked={defaultHidden}
                 action={() => settings.store.defaultHidden = !settings.store.defaultHidden} />
         </Menu.MenuItem>
     );
