@@ -65,7 +65,7 @@ function ToggleActivityComponent(activity: IgnoredActivity, isPlaying = false) {
     const { ignoredActivities } = s;
 
     if (ignoredActivities.some(act => act.id === activity.id)) return ToggleIconOff(activity, "var(--status-danger)");
-    return ToggleIconOn(activity, isPlaying ? "var(--green-300)" : "var(--primary-400)");
+    return ToggleIconOn(activity, isPlaying ? "var(--green-300)" : "var(--interactive-normal)");
 }
 
 function handleActivityToggle(e: React.MouseEvent<HTMLButtonElement, MouseEvent>, activity: IgnoredActivity) {
@@ -258,8 +258,6 @@ export default definePlugin({
         {
             find: "#{intl::SETTINGS_GAMES_TOGGLE_OVERLAY}",
             replacement: {
-                // let { ... nowPlaying: a = !1 ...
-                // let { overlay: b ... } = Props
                 match: /null:.{0,10}\i\(\),(?<=nowPlaying:(\i)=!1,.+?overlay:\i,[^}]+?\}=(\i).+?)/,
                 replace: (m, nowPlaying, props) => `${m}$self.renderToggleGameActivityButton(${props},${nowPlaying}),`
             }
