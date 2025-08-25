@@ -76,15 +76,6 @@ export default definePlugin({
             }
         },
         {
-            // Forces the hover download button to always be visible on supported media.
-            // Also overwrites the onClick function to use the custom download handling.
-            find: "downloadHoverButtonIcon,focusProps:{",
-            replacement: {
-                match: /((\i)=>{)(.{0,60}?)showDownload:(\i),(.{0,1250}?)href:\i,/,
-                replace: "$1const downloadifyHoverItem=$2;$3downloadifyShowDownload:$4=!0,$5onClick:()=>{$self.handleHoverDownloadButtonClicked(downloadifyHoverItem);},"
-            },
-        },
-        {
             // Overwrites the default download button behavior for expanded image & video modals.
             // This patch is lazy loaded. You must open an image or video modal for it to resolve.
             find: "SAVE_MEDIA_PRESSED),",
