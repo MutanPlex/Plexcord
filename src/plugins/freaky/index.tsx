@@ -6,9 +6,10 @@
  */
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption } from "@api/Commands";
+import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import { sendMessage } from "@utils/discord";
-import definePlugin from "@utils/types";
+import definePlugin, { OptionType } from "@utils/types";
 
 const charMap: Record<string, string> = {
     q: "𝓺", w: "𝔀", e: "𝓮", r: "𝓻", t: "𝓽", y: "𝔂", u: "𝓾", i: "𝓲", o: "𝓸", p: "𝓹",
@@ -24,14 +25,23 @@ const mapCharacters = (text: string, map: Record<string, string>) =>
 
 function makeFreaky(text: string) {
     text = mapCharacters(text.trim() || "freaky", charMap);
-    text += Math.random() < 0.25 ? " 👅" : " ❤️";
+    if (settings.store.addFreakyEnding) text += Math.random() < 0.25 ? " 👅" : " ❤️";
     return text;
 }
+
+const settings = definePluginSettings({
+    addFreakyEnding: {
+        type: OptionType.BOOLEAN,
+        description: "Add 👅 or ❤️ at the end",
+        default: true
+    }
+});
 
 export default definePlugin({
     name: "Freaky",
     description: "freaky.",
     authors: [PcDevs.nyx, PcDevs.MutanPlex],
+    settings,
     commands: [
         {
             name: "freaky",

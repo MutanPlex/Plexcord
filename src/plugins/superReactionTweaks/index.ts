@@ -43,7 +43,6 @@ export default definePlugin({
         {
             find: ",BURST_REACTION_EFFECT_PLAY",
             replacement: [
-                // FIXME(Bundler minifier change related): Remove the non used compability once enough time has passed
                 {
                     match: /(BURST_REACTION_EFFECT_PLAY:\i=>{.+?if\()(\(\(\i,\i\)=>.+?\(\i,\i\))>=5+?(?=\))/,
                     replace: (_, rest, playingCount) => `${rest}!$self.shouldPlayBurstReaction(${playingCount})`,
@@ -67,8 +66,7 @@ export default definePlugin({
 
     shouldPlayBurstReaction(playingCount: number) {
         if (settings.store.unlimitedSuperReactionPlaying) return true;
-        if (settings.store.superReactionPlayingLimit === 0) return false;
-        if (playingCount <= settings.store.superReactionPlayingLimit) return true;
+        if (settings.store.superReactionPlayingLimit > playingCount) return true;
         return false;
     },
 
