@@ -173,6 +173,8 @@ export interface PluginDef {
     managedStyle?: string;
 
     userProfileBadge?: ProfileBadge;
+    userProfileBadges?: ProfileBadge[];
+
     userProfileContributorBadge?: ProfileBadge;
 
     onMessageClick?: MessageClickListener;

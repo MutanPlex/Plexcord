@@ -20,12 +20,13 @@
 import { DataStore, Notices } from "@api/index";
 import { showNotification } from "@api/Notifications";
 import { FluxStore } from "@plexcord/discord-types";
+import { ChannelType } from "@plexcord/discord-types/enums";
 import { getUniqueUsername, openUserProfile } from "@utils/discord";
 import { findStoreLazy } from "@webpack";
 import { ChannelStore, GuildMemberStore, GuildStore, RelationshipStore, UserStore, UserUtils } from "@webpack/common";
 
 import settings from "./settings";
-import { ChannelType, RelationshipType, SimpleGroupChannel, SimpleGuild } from "./types";
+import { RelationshipType, SimpleGroupChannel, SimpleGuild } from "./types";
 
 export const GuildAvailabilityStore = findStoreLazy("GuildAvailabilityStore") as FluxStore & {
     totalGuilds: number;

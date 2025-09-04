@@ -25,10 +25,13 @@ import { formatDurationMs } from "@utils/text";
 import definePlugin, { OptionType } from "@utils/types";
 import { React } from "@webpack/common";
 
+import alignedChatInputFix from "./alignedChatInputFix.css?managed";
+
 export default definePlugin({
     name: "CallTimer",
     description: "Adds a timer to vcs",
     authors: [Devs.Ven],
+    managedStyle: alignedChatInputFix,
 
     startTime: 0,
     interval: void 0 as NodeJS.Timeout | undefined,

@@ -17,7 +17,6 @@ export default definePlugin({
     name: "Downloadify",
     description: "Download various assets directly in Discord without having to open a browser or dig through HTML.",
     authors: [PcDevs.Etorix],
-    hidden: IS_WEB,
     settings,
 
     VoiceMessageDownloadButton,

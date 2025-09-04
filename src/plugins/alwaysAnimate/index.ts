@@ -57,6 +57,14 @@ export default definePlugin({
             }
         },
         {
+            // Nameplates
+            find: ".MINI_PREVIEW,[",
+            replacement: {
+                match: /animate:\i,loop:/,
+                replace: "animate:true,loop:true,_loop:"
+            }
+        },
+        {
             // Gradient roles in chat
             find: "=!1,contentOnly:",
             replacement: {
