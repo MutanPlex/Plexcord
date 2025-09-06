@@ -267,9 +267,9 @@ export default definePlugin({
 
     patches: [
         {
-            find: '"M9 3v18"',
+            find: '?"BACK_FORWARD_NAVIGATION":',
             replacement: {
-                match: /focusSectionProps:"HELP".{0,20},className:(\i\.button)\}\),/,
+                match: /focusSectionProps:"HELP".{0,20},className:(\i(?:\.button)?)\}\),/,
                 replace: "$& $self.FollowIndicator(),"
             }
         }
@@ -284,7 +284,9 @@ export default definePlugin({
             if (settings.store.onlyManualTrigger || !settings.store.followUserId) {
                 return;
             }
-            for (const { userId, channelId, oldChannelId } of voiceStates) {
+            for (const state of voiceStates) {
+                const { userId, channelId } = state;
+                const oldChannelId = ("oldChannelId" in state ? state.oldChannelId : undefined) as string | undefined;
                 if (channelId !== oldChannelId) {
                     const isMe = userId === UserStore.getCurrentUser().id;
                     // move back if the setting is on and you were moved

@@ -36,7 +36,7 @@ export let PermissionStore: GenericStore;
 export let GuildChannelStore: t.GuildChannelStore;
 export let ReadStateStore: GenericStore;
 export let PresenceStore: GenericStore;
-export let VoiceStateStore: GenericStore;
+export let VoiceStateStore: t.VoiceStateStore;
 
 export let GuildStore: t.GuildStore;
 export let GuildRoleStore: t.GuildRoleStore;

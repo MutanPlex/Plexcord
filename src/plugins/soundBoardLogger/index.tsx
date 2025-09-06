@@ -26,9 +26,9 @@ export default definePlugin({
     patches: [
         {
             predicate: () => settings.store.IconLocation === "toolbar",
-            find: '"M9 3v18"',
+            find: '?"BACK_FORWARD_NAVIGATION":',
             replacement: {
-                match: /focusSectionProps:"HELP".{0,20},className:(\i\.button)\}\),/,
+                match: /focusSectionProps:"HELP".{0,20},className:(\i(?:\.button)?)\}\),/,
                 replace: "$& $self.renderSoundBoardLoggerButton(),"
             },
         },
