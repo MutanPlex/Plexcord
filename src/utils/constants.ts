@@ -626,6 +626,10 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "MutanPlex",
         id: 506074187014602752n
     },
+    KiyiciKedy: {
+        name: "KiyiciKedy",
+        id: 1193695842167689379n
+    },
     Max: {
         name: "Max",
         id: 0n
