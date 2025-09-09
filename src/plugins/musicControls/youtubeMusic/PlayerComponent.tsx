@@ -17,21 +17,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import "./spotifyStyles.css";
+import "./ytmStyles.css";
 
-import { Settings } from "@api/Settings";
-import { classNameFactory } from "@api/Styles";
-import { Flex } from "@components/Flex";
-import { CopyIcon, ImageIcon, LinkIcon, OpenExternalIcon } from "@components/Icons";
+import { ImageIcon, LinkIcon, OpenExternalIcon } from "@components/Icons";
+import { SeekBar } from "@plugins/musicControls/spotify/SeekBar";
 import { debounce } from "@shared/debounce";
 import { openImageModal } from "@utils/discord";
 import { classes, copyWithToast } from "@utils/misc";
-import { ContextMenuApi, FluxDispatcher, Forms, Menu, React, useEffect, useState, useStateFromStores } from "@webpack/common";
+import { ContextMenuApi, Flex, FluxDispatcher, Forms, Menu, React, useEffect, useState, useStateFromStores } from "@webpack/common";
 
-import { SeekBar } from "./SeekBar";
-import { SpotifyStore, Track } from "./SpotifyStore";
+import { type Repeat, type Song, YoutubeMusicStore } from "./YtmStore";
 
-const cl = classNameFactory("pc-spotify-");
+const cl = (className: string) => `pc-ytm-${className}`;
 
 function msToHuman(ms: number) {
     const minutes = ms / 1000 / 60;
@@ -43,7 +40,8 @@ function msToHuman(ms: number) {
 function Svg(path: string, label: string) {
     return () => (
         <svg
-            className={cl("button-icon", label)}
+            className={classes(cl("button-icon"), cl(label))}
+            aria-labelledby="title"
             height="24"
             width="24"
             viewBox="0 0 24 24"
@@ -51,6 +49,7 @@ function Svg(path: string, label: string) {
             aria-label={label}
             focusable={false}
         >
+            <title id="title">{label}</title>
             <path d={path} />
         </svg>
     );
@@ -77,46 +76,50 @@ function Button(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
     );
 }
 
-function CopyContextMenu({ name, type, path }: { type: string; name: string; path: string; }) {
+function CopyContextMenu({ name, path }: { name: string; path: string; }) {
+    const copyId = `ytm-copy-${name}`;
+    const openId = `ytm-open-${name}`;
+
     return (
         <Menu.Menu
-            navId="pc-spotify-menu"
-            onClose={ContextMenuApi.closeContextMenu}
-            aria-label={`Spotify ${type} Menu`}
+            navId={`ytm-${name}-menu`}
+            onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
+            aria-label={`YouTube Music ${name} Menu`}
         >
             <Menu.MenuItem
-                id="pc-spotify-copy-name"
-                label={`Copy ${type} Name`}
-                action={() => copyWithToast(name)}
-                icon={CopyIcon}
-            />
-            <Menu.MenuItem
-                id="pc-spotify-copy-link"
-                label={`Copy ${type} Link`}
-                action={() => copyWithToast("https://open.spotify.com" + path)}
+                key={copyId}
+                id={copyId}
+                label={`Copy ${name} Link`}
+                action={() => copyWithToast(`https://music.youtube.com${path}`)}
                 icon={LinkIcon}
             />
             <Menu.MenuItem
-                id="pc-spotify-open"
-                label={`Open ${type} in Spotify`}
-                action={() => SpotifyStore.openExternal(path)}
+                key={openId}
+                id={openId}
+                label={`Open ${name} in YouTube Music`}
+                action={() => YoutubeMusicStore.openExternal(path)}
                 icon={OpenExternalIcon}
             />
         </Menu.Menu>
     );
 }
 
+function makeContextMenu(name: string, path: string) {
+    return (e: React.MouseEvent<HTMLElement, MouseEvent>) =>
+        ContextMenuApi.openContextMenu(e, () => <CopyContextMenu name={name} path={path} />);
+}
+
 function Controls() {
-    const [isPlaying, shuffle, repeat] = useStateFromStores(
-        [SpotifyStore],
-        () => [SpotifyStore.isPlaying, SpotifyStore.shuffle, SpotifyStore.repeat]
+    const [isPlaying, isShuffled, repeat] = useStateFromStores<[boolean, boolean, Repeat]>(
+        [YoutubeMusicStore],
+        () => [YoutubeMusicStore.isPlaying, YoutubeMusicStore.isShuffled, YoutubeMusicStore.repeat]
     );
 
     const [nextRepeat, repeatClassName] = (() => {
         switch (repeat) {
-            case "off": return ["context", "repeat-off"] as const;
-            case "context": return ["track", "repeat-context"] as const;
-            case "track": return ["off", "repeat-track"] as const;
+            case "NONE": return ["context", "repeat-off"] as const;
+            case "ALL": return ["track", "repeat-context"] as const;
+            case "ONE": return ["off", "repeat-track"] as const;
             default: throw new Error(`Invalid repeat state ${repeat}`);
         }
     })();
@@ -125,28 +128,26 @@ function Controls() {
     return (
         <Flex className={cl("button-row")} style={{ gap: 0 }}>
             <Button
-                className={classes(cl("button"), cl("shuffle"), cl(shuffle ? "shuffle-on" : "shuffle-off"))}
-                onClick={() => SpotifyStore.setShuffle(!shuffle)}
+                className={classes(cl("button"), isShuffled ? cl("shuffle-on") : cl("shuffle-off"))}
+                onClick={() => YoutubeMusicStore.shuffle()}
             >
                 <Shuffle />
             </Button>
-            <Button onClick={() => {
-                Settings.plugins.MusicControls.previousButtonRestartsTrack && SpotifyStore.position > 3000 ? SpotifyStore.seek(0) : SpotifyStore.prev();
-            }}>
+            <Button onClick={() => YoutubeMusicStore.prev()}>
                 <SkipPrev />
             </Button>
-            <Button onClick={() => SpotifyStore.setPlaying(!isPlaying)}>
+            <Button onClick={() => YoutubeMusicStore.setPlaying(!isPlaying)}>
                 {isPlaying ? <PauseButton /> : <PlayButton />}
             </Button>
-            <Button onClick={() => SpotifyStore.next()}>
+            <Button onClick={() => YoutubeMusicStore.next()}>
                 <SkipNext />
             </Button>
             <Button
-                className={classes(cl("button"), cl("repeat"), cl(repeatClassName))}
-                onClick={() => SpotifyStore.setRepeat(nextRepeat)}
+                className={classes(cl("button"), cl(repeatClassName))}
+                onClick={() => YoutubeMusicStore.switchRepeat()}
                 style={{ position: "relative" }}
             >
-                {repeat === "track" && <span className={cl("repeat-1")}>1</span>}
+                {repeat === "ONE" && <span className={cl("repeat-1")}>1</span>}
                 <Repeat />
             </Button>
         </Flex>
@@ -154,29 +155,22 @@ function Controls() {
 }
 
 const seek = debounce((v: number) => {
-    SpotifyStore.seek(v);
+    YoutubeMusicStore.seek(v);
 });
 
-function SpotifySeekBar() {
-    const { duration } = SpotifyStore.track!;
+function YtmSeekBar() {
+    const { songDuration } = YoutubeMusicStore.song!;
 
     const [storePosition, isSettingPosition, isPlaying] = useStateFromStores(
-        [SpotifyStore],
-        () => [SpotifyStore.mPosition, SpotifyStore.isSettingPosition, SpotifyStore.isPlaying]
+        [YoutubeMusicStore],
+        () => [YoutubeMusicStore.mPosition, YoutubeMusicStore.isSettingPosition, YoutubeMusicStore.isPlaying]
     );
 
-    const [position, setPosition] = useState(storePosition);
+    const [position, setPosition] = useState<number>(storePosition);
 
     useEffect(() => {
-        if (isPlaying && !isSettingPosition) {
-            setPosition(SpotifyStore.position);
-            const interval = setInterval(() => {
-                setPosition(p => p + 1000);
-            }, 1000);
-
-            return () => clearInterval(interval);
-        }
-    }, [storePosition, isSettingPosition, isPlaying]);
+        setPosition(YoutubeMusicStore.position);
+    }, [storePosition]);
 
     const onChange = (v: number) => {
         if (isSettingPosition) return;
@@ -188,7 +182,7 @@ function SpotifySeekBar() {
         <div id={cl("progress-bar")}>
             <Forms.FormText
                 variant="text-xs/medium"
-                className={cl("progress-time") + " " + cl("time-left")}
+                className={`${cl("progress-time")} ${cl("time-left")}`}
                 aria-label="Progress"
             >
                 {msToHuman(position)}
@@ -196,50 +190,49 @@ function SpotifySeekBar() {
             <SeekBar
                 initialValue={position}
                 minValue={0}
-                maxValue={duration}
+                maxValue={songDuration * 1000}
                 onValueChange={onChange}
                 asValueChanges={onChange}
                 onValueRender={msToHuman}
             />
             <Forms.FormText
                 variant="text-xs/medium"
-                className={cl("progress-time") + " " + cl("time-right")}
+                className={`${cl("progress-time")} ${cl("time-right")}`}
                 aria-label="Total Duration"
             >
-                {msToHuman(duration)}
+                {msToHuman(songDuration * 1000)}
             </Forms.FormText>
         </div>
     );
 }
 
-
-function AlbumContextMenu({ track }: { track: Track; }) {
-    const volume = useStateFromStores([SpotifyStore], () => SpotifyStore.volume);
+function AlbumContextMenu({ track }: { track: Song; }) {
+    const [volume, muted] = useStateFromStores([YoutubeMusicStore], () => [YoutubeMusicStore.volume, YoutubeMusicStore.muted]);
 
     return (
         <Menu.Menu
-            navId="spotify-album-menu"
+            navId="ytm-album-menu"
             onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-            aria-label="Spotify Album Menu"
+            aria-label="YouTube Music Album Menu"
         >
-            <Menu.MenuItem
+            {/* <Menu.MenuItem
                 key="open-album"
                 id="open-album"
                 label="Open Album"
-                action={() => SpotifyStore.openExternal(`/album/${track.album.id}`)}
+                action={() => YoutubeMusicStore.openExternal(`/album/${track?.album}`)}
                 icon={OpenExternalIcon}
-            />
+            /> */}
             <Menu.MenuItem
                 key="view-cover"
                 id="view-cover"
                 label="View Album Cover"
                 // trolley
-                action={() => openImageModal(track.album.image)}
+                action={() => track?.imageSrc && openImageModal({ url: track.imageSrc })}
                 icon={ImageIcon}
             />
             <Menu.MenuControlItem
-                id="spotify-volume"
-                key="spotify-volume"
+                id="ytm-volume"
+                key="ytm-volume"
                 label="Volume"
                 control={(props, ref) => (
                     <Menu.MenuSliderControl
@@ -248,27 +241,33 @@ function AlbumContextMenu({ track }: { track: Track; }) {
                         value={volume}
                         minValue={0}
                         maxValue={100}
-                        onChange={debounce((v: number) => SpotifyStore.setVolume(v))}
+                        onChange={debounce((v: number) => YoutubeMusicStore.setVolume(v))}
                     />
                 )}
+            />
+            <Menu.MenuCheckboxItem
+                id="ytm-muted"
+                key="ytm-muted"
+                label="Muted"
+                checked={muted}
+                action={() => YoutubeMusicStore.toggleMute()}
             />
         </Menu.Menu>
     );
 }
 
-function makeLinkProps(type: "Song" | "Artist" | "Album", condition: unknown, name: string, path: string) {
+function makeLinkProps(name: string, condition: unknown, path: string) {
     if (!condition) return {};
 
     return {
         role: "link",
-        onClick: () => SpotifyStore.openExternal(path),
-        onContextMenu: e =>
-            ContextMenuApi.openContextMenu(e, () => <CopyContextMenu type={type} name={name} path={path} />)
+        onClick: () => YoutubeMusicStore.openExternal(path),
+        onContextMenu: makeContextMenu(name, path)
     } satisfies React.HTMLAttributes<HTMLElement>;
 }
 
-function Info({ track }: { track: Track; }) {
-    const img = track?.album?.image;
+function Info({ track }: { track: NonNullable<Song>; }) {
+    const img = track?.imageSrc;
 
     const [coverExpanded, setCoverExpanded] = useState(false);
 
@@ -277,7 +276,7 @@ function Info({ track }: { track: Track; }) {
             {img && (
                 <img
                     id={cl("album-image")}
-                    src={img.url}
+                    src={img}
                     alt="Album Image"
                     onClick={() => setCoverExpanded(!coverExpanded)}
                     onContextMenu={e => {
@@ -288,12 +287,11 @@ function Info({ track }: { track: Track; }) {
         </>
     );
 
-    if (coverExpanded && img)
-        return (
-            <div id={cl("album-expanded-wrapper")}>
-                {i}
-            </div>
-        );
+    if (coverExpanded && img) return (
+        <div id={cl("album-expanded-wrapper")}>
+            {i}
+        </div>
+    );
 
     return (
         <div id={cl("info-wrapper")}>
@@ -303,40 +301,29 @@ function Info({ track }: { track: Track; }) {
                     variant="text-sm/semibold"
                     id={cl("song-title")}
                     className={cl("ellipoverflow")}
-                    title={track.name}
-                    {...makeLinkProps("Song", track.id, track.name, `/track/${track.id}`)}
+                    title={track?.title}
+                    {...makeLinkProps("Song", track?.videoId, `/watch?v=${track?.videoId}`)}
                 >
-                    {track.name}
+                    {track?.title}
                 </Forms.FormText>
-                {track.artists.some(a => a.name) && (
-                    <Forms.FormText variant="text-sm/normal" className={cl(["ellipoverflow", "secondary-song-info"])}>
-                        <span className={cl("song-info-prefix")}>by&nbsp;</span>
-                        {track.artists.map((a, i) => (
-                            <React.Fragment key={a.name}>
-                                <span
-                                    className={cl("artist")}
-                                    style={{ fontSize: "inherit" }}
-                                    title={a.name}
-                                    {...makeLinkProps("Artist", a.id, a.name, `/artist/${a.id}`)}
-                                >
-                                    {a.name}
-                                </span>
-                                {i !== track.artists.length - 1 && <span className={cl("comma")}>{", "}</span>}
-                            </React.Fragment>
-                        ))}
+                {track.artist && (
+                    <Forms.FormText variant="text-sm/normal" className={cl("ellipoverflow")}>
+                        by&nbsp;
+                        <span className={cl("artist")} style={{ fontSize: "inherit" }} title={track.artist}>
+                            {track.artist}
+                        </span>
                     </Forms.FormText>
                 )}
-                {track.album.name && (
-                    <Forms.FormText variant="text-sm/normal" className={cl(["ellipoverflow", "secondary-song-info"])}>
-                        <span className={cl("song-info-prefix")}>on&nbsp;</span>
+                {track.album && (
+                    <Forms.FormText variant="text-sm/normal" className={cl("ellipoverflow")}>
+                        on&nbsp;
                         <span
                             id={cl("album-title")}
                             className={cl("album")}
                             style={{ fontSize: "inherit" }}
-                            title={track.album.name}
-                            {...makeLinkProps("Album", track.album.id, track.album.name, `/album/${track.album.id}`)}
+                            title={track.album}
                         >
-                            {track.album.name}
+                            {track.album}
                         </span>
                     </Forms.FormText>
                 )}
@@ -345,25 +332,17 @@ function Info({ track }: { track: Track; }) {
     );
 }
 
-export function SpotifyPlayer() {
+export function YtmPlayer() {
     const track = useStateFromStores(
-        [SpotifyStore],
-        () => SpotifyStore.track,
+        [YoutubeMusicStore],
+        () => YoutubeMusicStore.song,
         null,
-        (prev, next) => prev?.id ? (prev.id === next?.id) : prev?.name === next?.name
+        (prev, next) => prev?.videoId ? (prev.videoId === next?.videoId) : prev?.title === next?.title
     );
 
-    const device = useStateFromStores(
-        [SpotifyStore],
-        () => SpotifyStore.device,
-        null,
-        (prev, next) => prev?.id === next?.id
-    );
-
-    const isPlaying = useStateFromStores([SpotifyStore], () => SpotifyStore.isPlaying);
+    const isPlaying = useStateFromStores([YoutubeMusicStore], () => YoutubeMusicStore.isPlaying);
     const [shouldHide, setShouldHide] = useState(false);
 
-    // Hide player after 5 minutes of inactivity
 
     React.useEffect(() => {
         setShouldHide(false);
@@ -373,17 +352,16 @@ export function SpotifyPlayer() {
         }
     }, [isPlaying]);
 
-    if (!track || !device?.is_active || shouldHide)
-        return null;
+    if (!track || shouldHide) return;
 
     const exportTrackImageStyle = {
-        "--pc-spotify-track-image": `url(${track?.album?.image?.url || ""})`,
+        "--pc-ytm-track-image": `url(${track?.imageSrc || ""})`,
     } as React.CSSProperties;
 
     return (
         <div id={cl("player")} style={exportTrackImageStyle}>
             <Info track={track} />
-            <SpotifySeekBar />
+            <YtmSeekBar />
             <Controls />
         </div>
     );
