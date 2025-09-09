@@ -1,4 +1,4 @@
-import { FluxStore } from "..";
+import { FluxStore } from "@plexcord/discord-types";
 
 export class StreamerModeStore extends FluxStore {
     get autoToggle(): boolean;

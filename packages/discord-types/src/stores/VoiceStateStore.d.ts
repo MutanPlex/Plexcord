@@ -8,8 +8,8 @@ export interface VoiceState extends DiscordRecord {
     userId: string;
     channelId: string | null | undefined;
     sessionId: string | null | undefined;
-    oldChannelId: string | null | undefined;
-    guildId: string | null | undefined;
+    oldChannelId?: string | null | undefined;
+    guildId?: string | null | undefined;
     mute: boolean;
     deaf: boolean;
     selfMute: boolean;
