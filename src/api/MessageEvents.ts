@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import type { Channel, CustomEmoji, Message } from "@plexcord/discord-types";
+import type { Channel, CloudUpload, CustomEmoji, Message } from "@plexcord/discord-types";
 import { Logger } from "@utils/Logger";
 import { MessageStore } from "@webpack/common";
 import type { Promisable } from "type-fest";
@@ -29,32 +29,6 @@ export interface MessageObject {
     validNonShortcutEmojis: CustomEmoji[];
     invalidEmojis: any[];
     tts: boolean;
-}
-
-export interface Upload {
-    classification: string;
-    currentSize: number;
-    description: string | null;
-    filename: string;
-    id: string;
-    isImage: boolean;
-    isRemix?: boolean;
-    isThumbnail: boolean;
-    isVideo: boolean;
-    item: {
-        file: File;
-        platform: number;
-    };
-    loaded: number;
-    mimeType: string;
-    preCompressionSize: number;
-    responseUrl: string;
-    sensitive: boolean;
-    showLargeMessageDialog: boolean;
-    spoiler: boolean;
-    status: "NOT_STARTED" | "STARTED" | "UPLOADING" | "ERROR" | "COMPLETED" | "CANCELLED";
-    uniqueId: string;
-    uploadedFilename: string;
 }
 
 export interface MessageReplyOptions {
@@ -69,7 +43,7 @@ export interface MessageReplyOptions {
 
 export interface MessageOptions {
     stickers?: string[];
-    uploads?: Upload[];
+    uploads?: CloudUpload[];
     replyOptions: MessageReplyOptions;
     content: string;
     channel: Channel;
