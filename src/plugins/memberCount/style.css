@@ -18,6 +18,7 @@
     flex-wrap: wrap;
     margin-top: 1em;
     padding-inline: 1em;
+    line-height: 1.2em;
 }
 
 .pc-membercount-container {
@@ -38,20 +39,18 @@
     color: var(--color-voice);
 }
 
-.pc-membercount-online-dot {
-    background-color: var(--color-online);
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
+.pc-membercount-online-count {
+    fill: var(--status-online);
+    width: 18px;
+    height: 18px;
 }
 
-.pc-membercount-total-dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    border: 3px solid var(--color-total);
+.pc-membercount-total-count {
+    fill: none;
+    stroke: var(--status-offline);
+    stroke-width: 4px;
+    width: 15px;
+    height: 15px;
 }
 
 .pc-membercount-voice-icon {
