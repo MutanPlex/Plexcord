@@ -1,7 +1,7 @@
 {
     "name": "plexcord",
     "private": "true",
-    "version": "1.15.9",
+    "version": "1.16.0",
     "description": "Taking Discord to the Next Level!",
     "homepage": "https://github.com/MutanPlex/Plexcord#readme",
     "bugs": {
@@ -53,7 +53,7 @@
         "@types/chrome": "^0.0.312",
         "@types/diff": "^7.0.2",
         "@types/lodash": "^4.17.20",
-        "@types/node": "^22.18.0",
+        "@types/node": "^22.18.1",
         "@types/react": "^19.1.12",
         "@types/react-dom": "^19.1.9",
         "@types/yazl": "^2.4.6",
@@ -69,20 +69,20 @@
         "highlight.js": "11.11.1",
         "html-minifier-terser": "^7.2.0",
         "moment": "^2.30.1",
-        "puppeteer-core": "^24.17.1",
+        "puppeteer-core": "^24.19.0",
         "standalone-electron-types": "^34.2.0",
-        "stylelint": "^16.23.1",
+        "stylelint": "^16.24.0",
         "stylelint-config-standard": "^37.0.0",
         "ts-patch": "^3.3.0",
         "ts-pattern": "^5.8.0",
         "tsx": "^4.20.5",
         "type-fest": "^4.41.0",
         "typescript": "^5.9.2",
-        "typescript-eslint": "^8.41.0",
+        "typescript-eslint": "^8.43.0",
         "typescript-transform-paths": "^3.5.5",
         "zip-local": "^0.3.5"
     },
-    "packageManager": "pnpm@10.14.0",
+    "packageManager": "pnpm@10.15.1",
     "pnpm": {
         "patchedDependencies": {
             "eslint@9.20.1": "patches/eslint@9.20.1.patch",
