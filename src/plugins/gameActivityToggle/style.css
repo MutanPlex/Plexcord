@@ -1,5 +1,5 @@
-[class^="panels"] [class^="avatarWrapper"] {
-    min-width: 88px;
+[class^="panels"] [class^="buttons"] {
+    gap: 4px;
 }
 
 .pc-game-activity {
