@@ -5,10 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { initWs } from "@plugins/devCompanion.dev/initWs";
 import { Logger } from "@utils/Logger";
 import * as Webpack from "@webpack";
 import { addPatch, patches } from "plugins";
-import { initWs } from "plugins/devCompanion.dev/initWs";
 import { getBuildNumber, patchTimings } from "webpack/patchWebpack";
 
 import { loadLazyChunks } from "./loadLazyChunks";
