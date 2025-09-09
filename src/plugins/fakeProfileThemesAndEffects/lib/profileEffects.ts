@@ -10,13 +10,10 @@ import { findByCodeLazy, findStoreLazy } from "@webpack";
 import type { SnakeCasedProperties } from "type-fest";
 
 export const ProfileEffectStore: FluxStore & {
-    canFetch: () => boolean;
+    canFetchAll: () => boolean;
     getProfileEffectById: (effectId: string) => ProfileEffect | undefined;
-    hasFetched: () => boolean;
-    readonly fetchError: Error | undefined;
-    readonly isFetching: boolean;
-    readonly profileEffects: ProfileEffect[];
-    readonly tryItOutId: string | null;
+    isFetchingAll: () => boolean;
+    getAllProfileEffects: () => ProfileEffect[];
 } = findStoreLazy("ProfileEffectStore");
 
 export const ProfileEffectRecord: {
@@ -43,7 +40,7 @@ export interface ProfileEffectConfig {
     animationType: number;
     description: string;
     effects: {
-        duartion: number;
+        duration: number;
         height: number;
         loop: boolean;
         loopDelay: number;
@@ -58,7 +55,7 @@ export interface ProfileEffectConfig {
     }[];
     id: string;
     reducedMotionSrc: string;
-    sku_id: string;
+    skuId: string;
     staticFrameSrc?: string;
     thumbnailPreviewSrc: string;
     title: string;
