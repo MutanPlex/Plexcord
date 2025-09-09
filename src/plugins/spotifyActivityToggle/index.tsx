@@ -6,7 +6,7 @@
  */
 
 import ErrorBoundary from "@components/ErrorBoundary";
-import { PcDevs } from "@utils/constants";
+import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
 import { Constants, React, RestAPI, useEffect, useState } from "@webpack/common";
@@ -80,7 +80,7 @@ function SpotifyActivityToggleButton() {
 export default definePlugin({
     name: "SpotifyActivityToggle",
     description: "Adds a toggle button for Spotify activity visibility.",
-    authors: [PcDevs.thororen],
+    authors: [Devs.thororen],
     patches: [
         {
             find: "#{intl::ACCOUNT_SPEAKING_WHILE_MUTED}",

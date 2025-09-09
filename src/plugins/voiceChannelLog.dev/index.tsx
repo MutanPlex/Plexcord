@@ -109,7 +109,7 @@ let clientOldChannelId: string | undefined;
 export default definePlugin({
     name: "VoiceChannelLog",
     description: "Logs who joins and leaves voice channels",
-    authors: [Devs.Sqaaakoi, PcDevs.thororen, PcDevs.nyx],
+    authors: [Devs.Sqaaakoi, Devs.thororen, PcDevs.nyx],
     contextMenus: {
         "channel-context": patchChannelContextMenu
     },

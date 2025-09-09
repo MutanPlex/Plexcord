@@ -18,7 +18,7 @@
 */
 
 import { definePluginSettings } from "@api/Settings";
-import { PcDevs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
@@ -33,7 +33,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "UnlimitedAccounts",
     description: "Increases the amount of accounts you can add.",
-    authors: [PcDevs.thororen, PcDevs.MutanPlex],
+    authors: [Devs.thororen, PcDevs.MutanPlex],
     settings,
     patches: [
         {

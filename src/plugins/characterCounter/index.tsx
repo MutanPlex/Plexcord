@@ -8,7 +8,7 @@
 import "./style.css";
 
 import { definePluginSettings } from "@api/Settings";
-import { PcDevs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { UserStore } from "@webpack/common";
 
@@ -23,7 +23,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "CharacterCounter",
     description: "Adds a character counter to the chat input",
-    authors: [PcDevs.creations, PcDevs.Panniku, PcDevs.thororen],
+    authors: [PcDevs.creations, PcDevs.Panniku, Devs.thororen],
     settings,
     patches: [
         {

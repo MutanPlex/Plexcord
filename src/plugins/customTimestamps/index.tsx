@@ -152,7 +152,7 @@ const DemoMessage = (props: { msgId, compact, message, date: Date | undefined, i
     ) : <div className="pc-cmt-demo-message">
         <Forms.FormText>
             {/* @ts-ignore */}
-            <b>Preview:</b> {Vencord.Plugins.plugins.CustomTimestamps.renderTimestamp(date, "cozy")}
+            <b>Preview:</b> {Plexcord.Plugins.plugins.CustomTimestamps.renderTimestamp(date, "cozy")}
         </Forms.FormText>
     </div>;
 };

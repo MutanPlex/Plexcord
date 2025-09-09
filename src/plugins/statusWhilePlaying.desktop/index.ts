@@ -7,7 +7,7 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
-import { PcDevs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { PresenceStore, UserStore } from "@webpack/common";
 
@@ -42,7 +42,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "StatusWhilePlaying",
     description: "Automatically updates your online status (online, idle, dnd) when launching games",
-    authors: [PcDevs.thororen, PcDevs.MutanPlex],
+    authors: [Devs.thororen, PcDevs.MutanPlex],
     settings,
     flux: {
         RUNNING_GAMES_CHANGE(event) {
