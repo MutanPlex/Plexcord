@@ -23,28 +23,24 @@ import {
     UserStore,
     VoiceStateStore
 } from "@webpack/common";
-import type { PropsWithChildren, SVGProps } from "react";
+import type { PropsWithChildren } from "react";
 
 const HeaderBarIcon = findComponentByCodeLazy(".HEADER_BAR_BADGE_TOP:", '.iconBadge,"top"');
 
-interface BaseIconProps extends IconProps {
+interface BaseIconProps {
     viewBox: string;
-}
-
-interface IconProps extends SVGProps<SVGSVGElement> {
     className?: string;
     height?: string | number;
     width?: string | number;
 }
 
-function Icon({
-    height = 24,
-    width = 24,
-    className,
-    children,
-    viewBox,
-    ...svgProps
-}: PropsWithChildren<BaseIconProps>) {
+interface IconProps {
+    className?: string;
+    height?: string | number;
+    width?: string | number;
+}
+
+function Icon({ height = 24, width = 24, className, children, viewBox }: PropsWithChildren<BaseIconProps>) {
     return (
         <svg
             className={classes(className, "pc-icon")}
@@ -52,7 +48,6 @@ function Icon({
             width={width}
             height={height}
             viewBox={viewBox}
-            {...svgProps}
         >
             {children}
         </svg>
@@ -329,9 +324,11 @@ export default definePlugin({
     FollowIndicator() {
         const { plugins: { FollowUser: { followUserId } } } = useSettings(["plugins.FollowUser.followUserId"]);
         if (followUserId) {
+            const followedUser = UserStore.getUser(followUserId);
+            const username = followedUser?.username || "Unknown User";
             return (
                 <HeaderBarIcon
-                    tooltip={`Following ${UserStore.getUser(followUserId).username} (click to trigger manually, right-click to unfollow)`}
+                    tooltip={`Following ${username} (click to trigger manually, right-click to unfollow)`}
                     icon={UnfollowIcon}
                     onClick={() => {
                         triggerFollow();
