@@ -58,16 +58,15 @@ async function toggle(isEnabled: boolean) {
 async function initThemes() {
     themesStyle ??= createStyle("plexcord-themes");
 
-    const { enabledThemeLinks, enabledThemes } = Settings;
+    const { themeLinks, enabledThemes } = Settings;
 
-    const enabledlinks: string[] = [...enabledThemeLinks];
     // "darker" and "midnight" both count as dark
     // This function is first called on DOMContentLoaded, so ThemeStore may not have been loaded yet
     const activeTheme = ThemeStore == null
         ? undefined
         : ThemeStore.theme === "light" ? "light" : "dark";
 
-    const links = enabledlinks
+    const links = themeLinks
         .map(rawLink => {
             const match = /^@(light|dark) (.*)/.exec(rawLink);
             if (!match) return rawLink;
@@ -101,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
     toggle(Settings.useQuickCss);
     SettingsStore.addChangeListener("useQuickCss", toggle);
 
-    SettingsStore.addChangeListener("enabledThemeLinks", initThemes);
+    SettingsStore.addChangeListener("themeLinks", initThemes);
     SettingsStore.addChangeListener("enabledThemes", initThemes);
 
     if (!IS_WEB) {
