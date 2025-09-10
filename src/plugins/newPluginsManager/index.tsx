@@ -5,21 +5,25 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { Devs, PcDevs } from "@utils/constants";
+import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
-import { KNOWN_PLUGINS_DATA_KEY } from "./knownPlugins";
+import { KNOWN_PLUGINS_LEGACY_DATA_KEY, KNOWN_SETTINGS_DATA_KEY } from "./knownSettings";
+import * as KnownSettings from "./knownSettings";
 import { openNewPluginsModal } from "./NewPluginsModal";
 
 export default definePlugin({
     name: "NewPluginsManager",
-    description: "Utility that notifies you when new plugins are added to Plexcord.",
-    authors: [Devs.Sqaaakoi, PcDevs.MutanPlex],
+    description: "Utility that notifies you when new plugins are added to Plexcord",
+    authors: [Devs.Sqaaakoi],
+    enabledByDefault: true,
     flux: {
         async POST_CONNECTION_OPEN() {
             openNewPluginsModal();
         }
     },
     openNewPluginsModal,
-    KNOWN_PLUGINS_DATA_KEY
+    KNOWN_PLUGINS_LEGACY_DATA_KEY,
+    KNOWN_SETTINGS_DATA_KEY,
+    KnownSettings
 });
