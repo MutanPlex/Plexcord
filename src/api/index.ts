@@ -22,6 +22,7 @@ import * as $ChatButtons from "./ChatButtons";
 import * as $Commands from "./Commands";
 import * as $ContextMenu from "./ContextMenu";
 import * as $DataStore from "./DataStore";
+import * as $i18n from "./i18n";
 import * as $MemberListDecorators from "./MemberListDecorators";
 import * as $MessageAccessories from "./MessageAccessories";
 import * as $MessageDecorations from "./MessageDecorations";
@@ -106,6 +107,12 @@ export const Styles = $Styles;
 export const Notifications = $Notifications;
 
 /**
+ * An API for internationalization (i18n) support
+ * Provides translation management for core and plugins
+ */
+export const i18n = $i18n;
+
+/**
  * An api allowing you to patch and add/remove items to/from context menus
  */
 export const ContextMenu = $ContextMenu;
@@ -129,4 +136,9 @@ export const UserSettings = $UserSettings;
  * An API allowing you to add icons to the nickname, in profiles
  */
 export const NicknameIcons = $NicknameIcons;
+
+/**
+ * LocaleLoader for managing plugin translations
+ */
+export { definePluginLocales, LocaleLoader } from "./LocaleLoader";
 

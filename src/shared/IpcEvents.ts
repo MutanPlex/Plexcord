@@ -49,4 +49,6 @@ export const enum IpcEvents {
     CSP_REQUEST_ADD_OVERRIDE = "PlexcordCspRequestAddOverride",
     OPEN_THEMES_FOLDER = "PlexcordOpenThemesFolder",
     OPEN_SETTINGS_FOLDER = "PlexcordOpenSettingsFolder",
+
+    UPDATE_MAIN_LOCALE = "PlexcordUpdateMainLocale",
 }

@@ -32,6 +32,7 @@ import { join, normalize } from "path";
 import { registerCspIpcHandlers } from "./csp/manager";
 import { ALLOWED_PROTOCOLS, QUICKCSS_PATH, SETTINGS_DIR, THEMES_DIR } from "./utils/constants";
 import { makeLinksOpenExternally } from "./utils/externalLinks";
+import { mainI18n } from "./utils/i18n";
 
 mkdirSync(THEMES_DIR, { recursive: true });
 
@@ -135,4 +136,9 @@ ipcMain.handle(IpcEvents.OPEN_MONACO_EDITOR, async () => {
     makeLinksOpenExternally(win);
 
     await win.loadURL(`data:text/html;base64,${monacoHtml}`);
+});
+
+ipcMain.handle(IpcEvents.UPDATE_MAIN_LOCALE, (_, locale?: string) => {
+    mainI18n.updateLocale(locale);
+    return true;
 });

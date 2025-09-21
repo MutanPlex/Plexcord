@@ -163,7 +163,10 @@ for (const p of pluginsValues) {
         for (const name in p.settings.def) {
             const def = p.settings.def[name];
             const checks = p.settings.checks?.[name];
-            p.options[name] = { ...def, ...checks };
+            p.options[name] = Object.defineProperties({}, {
+                ...Object.getOwnPropertyDescriptors(def),
+                ...Object.getOwnPropertyDescriptors(checks || {})
+            }) as any;
         }
     }
 

@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -24,6 +25,11 @@ export default definePlugin({
     name: "CommandsAPI",
     authors: [Devs.Arjix],
     description: "Api required by anything that uses commands",
+
+    get displayDescription() {
+        return t("plugins.metadata.api.description.commands");
+    },
+
     patches: [
         // obtain BUILT_IN_COMMANDS instance
         {

@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Settings, useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { FolderIcon, PaintbrushIcon, PencilIcon, PlusIcon, RestartIcon } from "@components/Icons";
@@ -84,23 +85,23 @@ export function LocalThemesTab() {
     return (
         <>
             <Card className="pc-settings-card">
-                <Forms.FormTitle tag="h5">Find Themes:</Forms.FormTitle>
+                <Forms.FormTitle tag="h5">{t("themes.find")}:</Forms.FormTitle>
                 <div style={{ marginBottom: ".5em", display: "flex", flexDirection: "column" }}>
                     <Link style={{ marginRight: ".5em" }} href="https://betterdiscord.app/themes">
-                        BetterDiscord Themes
+                        {t("themes.bd")}
                     </Link>
-                    <Link href="https://github.com/search?q=discord+theme">GitHub</Link>
+                    <Link href="https://github.com/search?q=discord+theme">{t("github")}</Link>
                 </div>
-                <Forms.FormText>If using the BD site, click on "Download" and place the downloaded .theme.css file into your themes folder.</Forms.FormText>
+                <Forms.FormText>{t("themes.download")}</Forms.FormText>
             </Card>
 
             <Card className="pc-settings-card">
-                <Forms.FormTitle tag="h5">External Resources</Forms.FormTitle>
-                <Forms.FormText>For security reasons, loading resources (styles, fonts, images, ...) from most sites is blocked.</Forms.FormText>
-                <Forms.FormText>Make sure all your assets are hosted on GitHub, GitLab, Codeberg, Imgur, Discord or Google Fonts.</Forms.FormText>
+                <Forms.FormTitle tag="h5">{t("themes.external.title")}</Forms.FormTitle>
+                <Forms.FormText>{t("themes.external.security")}</Forms.FormText>
+                <Forms.FormText>{t("themes.external.host")}</Forms.FormText>
             </Card>
 
-            <Forms.FormSection title="Local Themes">
+            <Forms.FormSection title={t("themes.local")}>
                 <QuickActionCard>
                     <>
                         {IS_WEB ?
@@ -108,7 +109,7 @@ export function LocalThemesTab() {
                                 <QuickAction
                                     text={
                                         <span style={{ position: "relative" }}>
-                                            Upload Theme
+                                            {t("themes.upload")}
                                             <FileInput
                                                 ref={fileInputRef}
                                                 onChange={async e => {
@@ -124,25 +125,25 @@ export function LocalThemesTab() {
                                 />
                             ) : (
                                 <QuickAction
-                                    text="Open Themes Folder"
+                                    text={t("themes.openFolder")}
                                     action={() => PlexcordNative.themes.openFolder()}
                                     Icon={FolderIcon}
                                 />
                             )}
                         <QuickAction
-                            text="Load missing Themes"
+                            text={t("themes.loadMissing")}
                             action={refreshLocalThemes}
                             Icon={RestartIcon}
                         />
                         <QuickAction
-                            text="Edit QuickCSS"
+                            text={t("themes.editQuickCSS")}
                             action={() => PlexcordNative.quickCss.openEditor()}
                             Icon={PaintbrushIcon}
                         />
 
                         {Plexcord.Plugins.isPluginEnabled(ClientThemePlugin.name) && (
                             <QuickAction
-                                text="Edit ClientTheme"
+                                text={t("themes.editClient")}
                                 action={() => openPluginModal(ClientThemePlugin)}
                                 Icon={PencilIcon}
                             />

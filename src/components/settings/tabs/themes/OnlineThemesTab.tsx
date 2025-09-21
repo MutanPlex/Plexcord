@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
@@ -30,23 +31,22 @@ export function OnlineThemesTab() {
         <>
             <Card className={classes("pc-warning-card", Margins.bottom16)}>
                 <Forms.FormText>
-                    This section is for advanced users. If you are having difficulties using it, use the
-                    Local Themes tab instead.
+                    {t("themes.advanced.warning")}
                 </Forms.FormText>
             </Card>
             <Card className="pc-settings-card">
-                <Forms.FormTitle tag="h5">Paste links to css files here</Forms.FormTitle>
-                <Forms.FormText>One link per line</Forms.FormText>
-                <Forms.FormText>You can prefix lines with @light or @dark to toggle them based on your Discord theme</Forms.FormText>
-                <Forms.FormText>Make sure to use direct links to files (raw or github.io)!</Forms.FormText>
+                <Forms.FormTitle tag="h5">{t("themes.advanced.paste")}</Forms.FormTitle>
+                <Forms.FormText>{t("themes.advanced.line")}</Forms.FormText>
+                <Forms.FormText>{t("themes.advanced.prefix")}</Forms.FormText>
+                <Forms.FormText>{t("themes.advanced.direct")}</Forms.FormText>
             </Card>
 
-            <Forms.FormSection title="Online Themes" tag="h5">
+            <Forms.FormSection title={t("themes.online")} tag="h5">
                 <TextArea
                     value={themeText}
                     onChange={setThemeText}
                     className={"pc-settings-theme-links"}
-                    placeholder="Enter Theme Links..."
+                    placeholder={t("themes.links")}
                     spellCheck={false}
                     onBlur={onBlur}
                     rows={10}

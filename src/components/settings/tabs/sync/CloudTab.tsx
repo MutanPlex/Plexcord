@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t, tJsx } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { Settings, useSettings } from "@api/Settings";
 import { CheckedTextInput } from "@components/CheckedTextInput";
@@ -33,7 +34,7 @@ function validateUrl(url: string) {
         new URL(url);
         return true;
     } catch {
-        return "Invalid URL";
+        return t("cloud.backend.invalid");
     }
 }
 
@@ -48,8 +49,8 @@ async function eraseAllData() {
     if (!res.ok) {
         cloudLogger.error(`Failed to erase data, API returned ${res.status}`);
         showNotification({
-            title: "Cloud Integrations",
-            body: `Could not erase all data (API returned ${res.status}), please contact support.`,
+            title: t("cloud.notifications.title"),
+            body: t("cloud.notifications.erase.failed", { status: res.status }),
             color: "var(--red-360)"
         });
         return;
@@ -59,8 +60,8 @@ async function eraseAllData() {
     await deauthorizeCloud();
 
     showNotification({
-        title: "Cloud Integrations",
-        body: "Successfully erased all data.",
+        title: t("cloud.notifications.title"),
+        body: t("cloud.notifications.erase.successful"),
         color: "var(--green-360)"
     });
 }
@@ -70,10 +71,9 @@ function SettingsSyncSection() {
     const sectionEnabled = cloud.authenticated && cloud.settingsSync;
 
     return (
-        <Forms.FormSection title="Settings Sync" className={Margins.top16}>
+        <Forms.FormSection title={t("cloud.title")} className={Margins.top16}>
             <Forms.FormText variant="text-md/normal" className={Margins.bottom20}>
-                Synchronize your settings to the cloud. This allows easy synchronization across multiple devices with
-                minimal effort.
+                {t("cloud.description")}
             </Forms.FormText>
             <Switch
                 key="cloud-sync"
@@ -81,7 +81,7 @@ function SettingsSyncSection() {
                 value={cloud.settingsSync}
                 onChange={v => { cloud.settingsSync = v; }}
             >
-                Settings Sync
+                {t("cloud.title")}
             </Switch>
             <div className="pc-cloud-settings-sync-grid">
                 <Button
@@ -89,9 +89,9 @@ function SettingsSyncSection() {
                     disabled={!sectionEnabled}
                     onClick={() => putCloudSettings(true)}
                 >
-                    Sync to Cloud
+                    {t("cloud.button.to")}
                 </Button>
-                <Tooltip text="This will overwrite your local settings with the ones on the cloud. Use wisely!">
+                <Tooltip text={t("cloud.button.fromDescription")}>
                     {({ onMouseLeave, onMouseEnter }) => (
                         <Button
                             onMouseLeave={onMouseLeave}
@@ -101,7 +101,7 @@ function SettingsSyncSection() {
                             disabled={!sectionEnabled}
                             onClick={() => getCloudSettings(true, true)}
                         >
-                            Sync from Cloud
+                            {t("cloud.button.from")}
                         </Button>
                     )}
                 </Tooltip>
@@ -111,7 +111,7 @@ function SettingsSyncSection() {
                     disabled={!sectionEnabled}
                     onClick={() => deleteCloudSettings()}
                 >
-                    Delete Cloud Settings
+                    {t("cloud.button.delete")}
                 </Button>
             </div>
         </Forms.FormSection>
@@ -122,13 +122,13 @@ function CloudTab() {
     const settings = useSettings(["cloud.authenticated", "cloud.url"]);
 
     return (
-        <SettingsTab title="Plexcord Cloud">
-            <Forms.FormSection title="Cloud Settings" className={Margins.top16}>
+        <SettingsTab title={"Plexcord " + t("cloud.text")}>
+            <Forms.FormSection title={t("cloud.settings")} className={Margins.top16}>
                 <Forms.FormText variant="text-md/normal" className={Margins.bottom20}>
-                    Plexcord comes with a cloud integration that adds goodies like settings sync across devices.
-                    It <Link href="https://api.plexcord.club/privacy">respects your privacy</Link>, and
-                    the <Link href="https://github.com/Plexcord/Backend">source code</Link> is AGPL 3.0 licensed so you
-                    can host it yourself.
+                    {tJsx("cloud.overview", {
+                        privacy: <Link href="https://api.plexcord.club/privacy">{t("cloud.privacy")}</Link>,
+                        source: <Link href="https://github.com/Plexcord/Backend">{t("cloud.source")}</Link>
+                    })}
                 </Forms.FormText>
                 <Switch
                     key="backend"
@@ -139,13 +139,13 @@ function CloudTab() {
                         else
                             settings.cloud.authenticated = v;
                     }}
-                    note="This will request authorization if you have not yet set up cloud integrations."
+                    note={t("cloud.authorization")}
                 >
-                    Enable Cloud Integrations
+                    {t("cloud.button.enable")}
                 </Switch>
-                <Forms.FormTitle tag="h5">Backend URL</Forms.FormTitle>
+                <Forms.FormTitle tag="h5">{t("cloud.backend.title")}</Forms.FormTitle>
                 <Forms.FormText className={Margins.bottom8}>
-                    Which backend to use when using cloud integrations.
+                    {t("cloud.backend.description")}
                 </Forms.FormText>
                 <CheckedTextInput
                     key="backendUrl"
@@ -168,22 +168,22 @@ function CloudTab() {
                             await authorizeCloud();
                         }}
                     >
-                        Reauthorise
+                        {t("cloud.button.reauthorize")}
                     </Button>
                     <Button
                         size={Button.Sizes.MEDIUM}
                         color={Button.Colors.RED}
                         disabled={!settings.cloud.authenticated}
                         onClick={() => Alerts.show({
-                            title: "Are you sure?",
-                            body: "Once your data is erased, we cannot recover it. There's no going back!",
+                            title: t("cloud.button.erase.title"),
+                            body: t("cloud.button.erase.body"),
                             onConfirm: eraseAllData,
-                            confirmText: "Erase it!",
+                            confirmText: t("cloud.button.erase.confirm"),
                             confirmColor: "pc-cloud-erase-data-danger-btn",
-                            cancelText: "Nevermind"
+                            cancelText: t("cloud.button.erase.cancel")
                         })}
                     >
-                        Erase All Data
+                        {t("cloud.button.erase")}
                     </Button>
                 </Grid>
 
@@ -194,4 +194,4 @@ function CloudTab() {
     );
 }
 
-export default wrapTab(CloudTab, "Cloud");
+export default wrapTab(CloudTab, t("cloud.text"));

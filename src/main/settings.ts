@@ -13,6 +13,7 @@ import { ipcMain } from "electron";
 import { mkdirSync, readFileSync, writeFileSync } from "fs";
 
 import { NATIVE_SETTINGS_FILE, SETTINGS_DIR, SETTINGS_FILE } from "./utils/constants";
+import { mainI18n } from "./utils/i18n";
 
 mkdirSync(SETTINGS_DIR, { recursive: true });
 
@@ -29,9 +30,15 @@ function readSettings<T = object>(name: string, file: string): Partial<T> {
 
 export const RendererSettings = new SettingsStore(readSettings<Settings>("renderer", SETTINGS_FILE));
 
-RendererSettings.addGlobalChangeListener(() => {
+mainI18n.initialize();
+
+RendererSettings.addGlobalChangeListener((data, path) => {
     try {
         writeFileSync(SETTINGS_FILE, JSON.stringify(RendererSettings.plain, null, 4));
+
+        if (path?.startsWith("language.")) {
+            mainI18n.updateLocale();
+        }
     } catch (e) {
         console.error("Failed to write renderer settings", e);
     }

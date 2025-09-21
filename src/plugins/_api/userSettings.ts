@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -24,6 +25,10 @@ export default definePlugin({
     name: "UserSettingsAPI",
     description: "Patches Discord's UserSettings to expose their group and name.",
     authors: [Devs.Nuckyz],
+
+    get displayDescription() {
+        return t("plugins.metadata.api.description.userSettings");
+    },
 
     patches: [
         {

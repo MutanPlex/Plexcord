@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Margins } from "@utils/margins";
 import { Patch, ReplaceFn } from "@utils/types";
 import { Forms, TextArea, useEffect, useRef, useState } from "@webpack/common";
@@ -36,18 +37,18 @@ export function FullPatchInput({ setFind, setParsedFind, setMatch, setReplacemen
         try {
             let { find, replacement } = (0, eval)(`([${patch}][0])`) as Patch;
 
-            if (!find) throw new Error("No 'find' field");
-            if (!replacement) throw new Error("No 'replacement' field");
+            if (!find) throw new Error(t("patchHelper.error.noFind"));
+            if (!replacement) throw new Error(t("patchHelper.error.noReplacement"));
 
             if (replacement instanceof Array) {
-                if (replacement.length === 0) throw new Error("Invalid replacement");
+                if (replacement.length === 0) throw new Error(t("patchHelper.error.invalidReplacement"));
 
                 // Only test the first replacement
                 replacement = replacement[0];
             }
 
-            if (!replacement.match) throw new Error("No 'replacement.match' field");
-            if (!replacement.replace) throw new Error("No 'replacement.replace' field");
+            if (!replacement.match) throw new Error(t("patchHelper.error.replacementMatch"));
+            if (!replacement.replace) throw new Error(t("patchHelper.error.replacementReplace"));
 
             setFind(find instanceof RegExp ? `/${find.source}/` : find);
             setParsedFind(find);
@@ -70,7 +71,7 @@ export function FullPatchInput({ setFind, setParsedFind, setMatch, setReplacemen
     return (
         <>
             <Forms.FormText className={Margins.bottom8}>
-                Paste your full JSON patch here to fill out the fields
+                {t("patchHelper.fullPatch.description")}
             </Forms.FormText>
             <TextArea
                 inputRef={textAreaRef}

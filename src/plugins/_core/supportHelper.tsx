@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t, tJsx } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -24,7 +25,7 @@ import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
 import { openUpdaterModal } from "@components/settings/tabs/updater";
 import { Channel } from "@plexcord/discord-types";
-import { BOT_COMMANDS_CHANNEL_ID, CONTRIB_ROLE_ID, Devs, DONOR_ROLE_ID, KNOWN_ISSUES_CHANNEL_ID, PLEXBOT_USER_ID, PLEXCORD_GUILD_ID, REGULAR_ROLE_ID, SUPPORT_CATEGORY_ID, SUPPORT_CHANNEL_ID } from "@utils/constants";
+import { BOT_COMMANDS_CHANNEL_ID, CONTRIB_ROLE_ID, Devs, DONOR_ROLE_ID, KNOWN_ISSUES_CHANNEL_ID, PcDevs, PLEXBOT_USER_ID, PLEXCORD_GUILD_ID, REGULAR_ROLE_ID, SUPPORT_CATEGORY_ID, SUPPORT_CHANNEL_ID } from "@utils/constants";
 import { sendMessage } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
@@ -168,8 +169,16 @@ export default definePlugin({
     name: "SupportHelper",
     required: true,
     description: "Helps us provide support to you",
-    authors: [Devs.Ven],
+    authors: [Devs.Ven, PcDevs.MutanPlex],
     dependencies: ["UserSettingsAPI"],
+
+    get displayName() {
+        return t("plugins.metadata.supportHelper.name");
+    },
+
+    get displayDescription() {
+        return t("plugins.metadata.supportHelper.description");
+    },
 
     settings,
 
@@ -185,12 +194,18 @@ export default definePlugin({
         {
             name: "plexcord-debug",
             description: "Send Plexcord debug info",
+            get displayDescription() {
+                return t("plugins.metadata.supportHelper.commands.description.debug");
+            },
             predicate: ctx => (isPluginDev(UserStore.getCurrentUser()?.id) && isPcPluginDev(UserStore.getCurrentUser()?.id)) || isSupportAllowedChannel(ctx.channel),
             execute: async () => ({ content: await generateDebugInfoMessage() })
         },
         {
             name: "plexcord-plugins",
             description: "Send Plexcord plugin list",
+            get displayDescription() {
+                return t("plugins.metadata.supportHelper.commands.description.plugins");
+            },
             predicate: ctx => (isPluginDev(UserStore.getCurrentUser()?.id) && isPcPluginDev(UserStore.getCurrentUser()?.id)) || isSupportAllowedChannel(ctx.channel),
             execute: () => ({ content: generatePluginList() })
         }
@@ -209,18 +224,18 @@ export default definePlugin({
 
                 if (isOutdated) {
                     return Alerts.show({
-                        title: "Hold on!",
+                        title: t("plugins.metadata.supportHelper.modals.outdated.title"),
                         body: <div>
-                            <Forms.FormText>You are using an outdated version of Plexcord! Chances are, your issue is already fixed.</Forms.FormText>
+                            <Forms.FormText>{t("plugins.metadata.supportHelper.modals.outdated.body")}</Forms.FormText>
                             <Forms.FormText className={Margins.top8}>
-                                Please first update before asking for support!
+                                {t("plugins.metadata.supportHelper.modals.outdated.footer")}
                             </Forms.FormText>
                         </div>,
                         onCancel: () => openUpdaterModal!(),
-                        cancelText: "View Updates",
-                        confirmText: "Update & Restart Now",
+                        cancelText: t("plugins.metadata.supportHelper.modals.outdated.button.cancel"),
+                        confirmText: t("plugins.metadata.supportHelper.modals.outdated.button.confirm"),
                         onConfirm: forceUpdate,
-                        secondaryConfirmText: "I know what I'm doing or I can't update"
+                        secondaryConfirmText: t("plugins.metadata.supportHelper.modals.outdated.button.secondaryConfirm")
                     });
                 }
             }
@@ -230,12 +245,13 @@ export default definePlugin({
 
             if (!IS_WEB && IS_UPDATER_DISABLED) {
                 return Alerts.show({
-                    title: "Hold on!",
+                    title: t("plugins.metadata.supportHelper.modals.updater.title"),
                     body: <div>
-                        <Forms.FormText>You are using an externally updated Plexcord version, which we do not provide support for!</Forms.FormText>
+                        <Forms.FormText>{t("plugins.metadata.supportHelper.modals.updater.body")}</Forms.FormText>
                         <Forms.FormText className={Margins.top8}>
-                            Please either switch to an <Link href="https://plexcord.club/download">officially supported version of Plexcord</Link>, or
-                            contact your package maintainer for support instead.
+                            {tJsx("plugins.metadata.supportHelper.modals.updater.footer", {
+                                officially: <Link href="https://plexcord.club/download">{t("plugins.metadata.supportHelper.modals.updater.officially")}</Link>
+                            })}
                         </Forms.FormText>
                     </div>
                 });
@@ -243,19 +259,21 @@ export default definePlugin({
 
             if (!IS_STANDALONE && !settings.store.dismissedDevBuildWarning) {
                 return Alerts.show({
-                    title: "Hold on!",
+                    title: t("plugins.metadata.supportHelper.modals.custom.title"),
                     body: <div>
-                        <Forms.FormText>You are using a custom build of Plexcord, which we do not provide support for!</Forms.FormText>
+                        <Forms.FormText>{t("plugins.metadata.supportHelper.modals.custom.header")}</Forms.FormText>
 
                         <Forms.FormText className={Margins.top8}>
-                            We only provide support for <Link href="https://plexcord.club/download">official builds</Link>.
-                            Either <Link href="https://plexcord.club/download">switch to an official build</Link> or figure your issue out yourself.
+                            {tJsx("plugins.metadata.supportHelper.modals.custom.body", {
+                                officialBuild: <Link href="https://plexcord.club/download">{t("plugins.metadata.supportHelper.modals.custom.official")}</Link>,
+                                switch: <Link href="https://plexcord.club/download">{t("plugins.metadata.supportHelper.modals.custom.switch")}</Link>
+                            })}
                         </Forms.FormText>
 
-                        <Text variant="text-md/bold" className={Margins.top8}>You will be banned from receiving support if you ignore this rule.</Text>
+                        <Text variant="text-md/bold" className={Margins.top8}>{t("plugins.metadata.supportHelper.modals.custom.footer")}</Text>
                     </div>,
-                    confirmText: "Understood",
-                    secondaryConfirmText: "Don't show again",
+                    confirmText: t("plugins.metadata.supportHelper.modals.custom.button.confirm"),
+                    secondaryConfirmText: t("plugins.metadata.supportHelper.modals.custom.button.secondaryConfirm"),
                     onConfirmSecondary: () => settings.store.dismissedDevBuildWarning = true
                 });
             }
@@ -281,16 +299,16 @@ export default definePlugin({
                     onClick={async () => {
                         try {
                             if (await forceUpdate())
-                                showToast("Success! Restarting...", Toasts.Type.SUCCESS);
+                                showToast(t("plugins.metadata.supportHelper.modals.updater.toast.success"), Toasts.Type.SUCCESS);
                             else
-                                showToast("Already up to date!", Toasts.Type.MESSAGE);
+                                showToast(t("plugins.metadata.supportHelper.modals.updater.toast.already"), Toasts.Type.MESSAGE);
                         } catch (e) {
                             new Logger(this.name).error("Error while updating:", e);
-                            showToast("Failed to update :(", Toasts.Type.FAILURE);
+                            showToast(t("plugins.metadata.supportHelper.modals.updater.toast.failed"), Toasts.Type.FAILURE);
                         }
                     }}
                 >
-                    Update Now
+                    {t("plugins.metadata.supportHelper.modals.updater.button.now")}
                 </Button>
             );
         }
@@ -302,13 +320,13 @@ export default definePlugin({
                         key="pc-dbg"
                         onClick={async () => sendMessage(props.channel.id, { content: await generateDebugInfoMessage() })}
                     >
-                        Run /plexcord-debug
+                        {t("plugins.metadata.supportHelper.button.debug")}
                     </Button>,
                     <Button
                         key="pc-plg-list"
                         onClick={async () => sendMessage(props.channel.id, { content: generatePluginList() })}
                     >
-                        Run /plexcord-plugins
+                        {t("plugins.metadata.supportHelper.button.plugins")}
                     </Button>
                 );
             }
@@ -322,14 +340,14 @@ export default definePlugin({
                             onClick={async () => {
                                 try {
                                     await AsyncFunction(match[1])();
-                                    showToast("Success!", Toasts.Type.SUCCESS);
+                                    showToast(t("plugins.metadata.supportHelper.toast.success"), Toasts.Type.SUCCESS);
                                 } catch (e) {
                                     new Logger(this.name).error("Error while running snippet:", e);
-                                    showToast("Failed to run snippet :(", Toasts.Type.FAILURE);
+                                    showToast(t("plugins.metadata.supportHelper.toast.failed"), Toasts.Type.FAILURE);
                                 }
                             }}
                         >
-                            Run Snippet
+                            {t("plugins.metadata.supportHelper.button.snippet")}
                         </Button>
                     );
                 }
@@ -348,10 +366,11 @@ export default definePlugin({
 
         return (
             <Card className={`pc-warning-card ${Margins.top8}`}>
-                Please do not private message Plexcord plugin developers for support!
-                <br />
-                Instead, use the Plexcord support channel: {Parser.parse("https://discord.com/channels/1342668210331324476/1344043206286905364")}
-                {!ChannelStore.getChannel(SUPPORT_CHANNEL_ID) && " (Click the link to join)"}
+                {tJsx("plugins.metadata.supportHelper.dm.warning", {
+                    br: <br />,
+                    channel: Parser.parse("https://discord.com/channels/1342668210331324476/1344043206286905364"),
+                    support: <Link href="https://discord.gg/5backnRhY9" target="_blank" rel="noreferrer">Plexcord</Link>
+                })}
             </Card>
         );
     }, { noop: true }),

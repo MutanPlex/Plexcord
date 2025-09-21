@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import { canonicalizeMatch } from "@utils/patches";
 import definePlugin from "@utils/types";
@@ -28,6 +29,11 @@ export default definePlugin({
     description: "Demangles Discord's Menu Item module",
     authors: [Devs.Ven],
     required: true,
+
+    get displayDescription() {
+        return t("plugins.metadata.api.description.menuItemDemangler");
+    },
+
     patches: [
         {
             find: '"Menu API',

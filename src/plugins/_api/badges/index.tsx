@@ -20,13 +20,14 @@
 import "./fixDiscordBadgePadding.css";
 
 import { _getBadges, BadgePosition, BadgeUserArgs, ProfileBadge } from "@api/Badges";
+import { t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Heart } from "@components/Heart";
 import DonateButton from "@components/settings/DonateButton";
 import { openContributorModal } from "@components/settings/tabs";
 import { User } from "@plexcord/discord-types";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import { copyWithToast, shouldShowContributorBadge, shouldShowPcContributorBadge } from "@utils/misc";
@@ -37,14 +38,18 @@ import { ContextMenuApi, Forms, Menu, Toasts, UserStore } from "@webpack/common"
 const CONTRIBUTOR_BADGE = "https://cdn.discordapp.com/emojis/1092089799109775453.png?size=64";
 const PLEXCORD_BADGE = "https://cdn.discordapp.com/emojis/1357527217332031508.webp?size=64";
 const ContributorBadge: ProfileBadge = {
-    description: "Vencord Contributor",
+    get description() {
+        return t("plugins.metadata.badges.contributor.vencord");
+    },
     image: CONTRIBUTOR_BADGE,
     position: BadgePosition.START,
     shouldShow: ({ userId }) => shouldShowContributorBadge(userId),
     onClick: (_, { userId }) => openContributorModal(UserStore.getUser(userId))
 };
 const PlexcordBadge: ProfileBadge = {
-    description: "Plexcord Contributor",
+    get description() {
+        return t("plugins.metadata.badges.contributor.plexcord");
+    },
     image: PLEXCORD_BADGE,
     position: BadgePosition.START,
     shouldShow: ({ userId }) => shouldShowPcContributorBadge(userId),
@@ -77,19 +82,19 @@ function BadgeContextMenu({ badge }: { badge: ProfileBadge & BadgeUserArgs; }) {
         <Menu.Menu
             navId="pc-badge-context"
             onClose={ContextMenuApi.closeContextMenu}
-            aria-label="Badge Options"
+            aria-label={t("plugins.metadata.badges.context.title")}
         >
             {badge.description && (
                 <Menu.MenuItem
                     id="pc-badge-copy-name"
-                    label="Copy Badge Name"
+                    label={t("plugins.metadata.badges.context.copy.name")}
                     action={() => copyWithToast(badge.description!)}
                 />
             )}
             {badge.image && (
                 <Menu.MenuItem
                     id="pc-badge-copy-link"
-                    label="Copy Badge Image Link"
+                    label={t("plugins.metadata.badges.context.copy.link")}
                     action={() => copyWithToast(badge.image!)}
                 />
             )}
@@ -101,8 +106,13 @@ let intervalId: any;
 export default definePlugin({
     name: "BadgeAPI",
     description: "API to add badges to users",
-    authors: [Devs.Megu, Devs.Ven, Devs.TheSun],
+    authors: [Devs.Megu, Devs.Ven, Devs.TheSun, PcDevs.MutanPlex],
     required: true,
+
+    get displayDescription() {
+        return t("plugins.metadata.badges.description");
+    },
+
     patches: [
         {
             find: ".MODAL]:26",
@@ -143,15 +153,17 @@ export default definePlugin({
         return DonorBadges;
     },
 
-    toolboxActions: {
-        async "Refetch Badges"() {
-            await loadBadges(true);
-            Toasts.show({
-                id: Toasts.genId(),
-                message: "Successfully refetched badges!",
-                type: Toasts.Type.SUCCESS
-            });
-        }
+    get toolboxActions() {
+        return {
+            [t("plugins.metadata.badges.context.refetch.button")]: async function () {
+                await loadBadges(true);
+                Toasts.show({
+                    id: Toasts.genId(),
+                    message: t("plugins.metadata.badges.context.refetch.success"),
+                    type: Toasts.Type.SUCCESS
+                });
+            }
+        };
     },
 
     userProfileBadge: ContributorBadge,
@@ -231,7 +243,7 @@ export default definePlugin({
                                         }}
                                     >
                                         <Heart />
-                                        Plexcord Donor
+                                        {t("plugins.metadata.badges.modal.title")}
                                     </Forms.FormTitle>
                                 </Flex>
                             </ModalHeader>
@@ -252,10 +264,10 @@ export default definePlugin({
                                 </Flex>
                                 <div style={{ padding: "1em" }}>
                                     <Forms.FormText>
-                                        This Badge is a special perk for Plexcord Donors
+                                        {t("plugins.metadata.badges.modal.special")}
                                     </Forms.FormText>
                                     <Forms.FormText className={Margins.top20}>
-                                        Please consider supporting the development of Plexcord by becoming a donor. It would mean a lot!!
+                                        {t("plugins.metadata.badges.modal.description")}
                                     </Forms.FormText>
                                 </div>
                             </ModalContent>

@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
 import { Margins } from "@utils/margins";
 import { identity } from "@utils/misc";
@@ -15,61 +16,61 @@ export function VibrancySettings() {
 
     return (
         <>
-            <Forms.FormTitle tag="h5">Window vibrancy style (requires restart)</Forms.FormTitle>
+            <Forms.FormTitle tag="h5">{t("settings.macVibrancy.title")}</Forms.FormTitle>
             <Select
                 className={Margins.bottom20}
-                placeholder="Window vibrancy style"
+                placeholder={t("settings.macVibrancy.placeholder")}
                 options={[
                     // Sorted from most opaque to most transparent
                     {
-                        label: "No vibrancy", value: undefined
+                        label: t("settings.macVibrancy.style.no"), value: undefined
                     },
                     {
-                        label: "Under Page (window tinting)",
+                        label: t("settings.macVibrancy.style.underPage"),
                         value: "under-page"
                     },
                     {
-                        label: "Content",
+                        label: t("settings.macVibrancy.style.content"),
                         value: "content"
                     },
                     {
-                        label: "Window",
+                        label: t("settings.macVibrancy.style.window"),
                         value: "window"
                     },
                     {
-                        label: "Selection",
+                        label: t("settings.macVibrancy.style.selection"),
                         value: "selection"
                     },
                     {
-                        label: "Titlebar",
+                        label: t("settings.macVibrancy.style.titlebar"),
                         value: "titlebar"
                     },
                     {
-                        label: "Header",
+                        label: t("settings.macVibrancy.style.header"),
                         value: "header"
                     },
                     {
-                        label: "Sidebar",
+                        label: t("settings.macVibrancy.style.sidebar"),
                         value: "sidebar"
                     },
                     {
-                        label: "Tooltip",
+                        label: t("settings.macVibrancy.style.tooltip"),
                         value: "tooltip"
                     },
                     {
-                        label: "Menu",
+                        label: t("settings.macVibrancy.style.menu"),
                         value: "menu"
                     },
                     {
-                        label: "Popover",
+                        label: t("settings.macVibrancy.style.popover"),
                         value: "popover"
                     },
                     {
-                        label: "Fullscreen UI (transparent but slightly muted)",
+                        label: t("settings.macVibrancy.style.fullscreenUI"),
                         value: "fullscreen-ui"
                     },
                     {
-                        label: "HUD (Most transparent)",
+                        label: t("settings.macVibrancy.style.hud"),
                         value: "hud"
                     },
                 ]}

@@ -5,17 +5,18 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Margins } from "@utils/margins";
 import { Forms, Parser, Switch, TextInput, useEffect, useState } from "@webpack/common";
 
 const RegexGuide = {
-    "\\i": "Special regex escape sequence that matches identifiers (varnames, classnames, etc.)",
-    "$$": "Insert a $",
-    "$&": "Insert the entire match",
-    "$`\u200b": "Insert the substring before the match",
-    "$'": "Insert the substring after the match",
-    "$n": "Insert the nth capturing group ($1, $2...)",
-    "$self": "Insert the plugin instance",
+    "\\i": "patchHelper.cheatSheet.identifiers",
+    "$$": "patchHelper.cheatSheet.dollar",
+    "$&": "patchHelper.cheatSheet.entireMatch",
+    "$`\u200b": "patchHelper.cheatSheet.beforeMatch",
+    "$'": "patchHelper.cheatSheet.afterMatch",
+    "$n": "patchHelper.cheatSheet.nthGroup",
+    "$self": "patchHelper.cheatSheet.pluginInstance",
 } as const;
 
 export function ReplacementInput({ replacement, setReplacement, replacementError }) {
@@ -32,7 +33,7 @@ export function ReplacementInput({ replacement, setReplacement, replacementError
                     setReplacement(() => func);
 
                 else
-                    setError("Replacement must be a function");
+                    setError(t("patchHelper.error.replacementMustFunction"));
             } catch (e) {
                 setReplacement(v);
                 setError((e as Error).message);
@@ -52,7 +53,7 @@ export function ReplacementInput({ replacement, setReplacement, replacementError
     return (
         <>
             {/* FormTitle adds a class if className is not set, so we set it to an empty string to prevent that */}
-            <Forms.FormTitle className="">Replacement</Forms.FormTitle>
+            <Forms.FormTitle className="">{t("patchHelper.replacement")}</Forms.FormTitle>
             <TextInput
                 value={replacement?.toString()}
                 onChange={onChange}
@@ -60,11 +61,11 @@ export function ReplacementInput({ replacement, setReplacement, replacementError
             />
             {!isFunc && (
                 <div>
-                    <Forms.FormTitle className={Margins.top8}>Cheat Sheet</Forms.FormTitle>
+                    <Forms.FormTitle className={Margins.top8}>{t("patchHelper.cheatSheet.title")}</Forms.FormTitle>
 
                     {Object.entries(RegexGuide).map(([placeholder, desc]) => (
                         <Forms.FormText key={placeholder}>
-                            {Parser.parse("`" + placeholder + "`")}: {desc}
+                            {Parser.parse("`" + placeholder + "`")}: {t(desc)}
                         </Forms.FormText>
                     ))}
                 </div>
@@ -74,10 +75,10 @@ export function ReplacementInput({ replacement, setReplacement, replacementError
                 className={Margins.top16}
                 value={isFunc}
                 onChange={setIsFunc}
-                note="'replacement' will be evaled if this is toggled"
+                note={t("patchHelper.replacementEval.description")}
                 hideBorder
             >
-                Treat as Function
+                {t("patchHelper.replacementEval.label")}
             </Switch>
         </>
     );

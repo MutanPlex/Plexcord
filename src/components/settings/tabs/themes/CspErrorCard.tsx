@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t, tJsx } from "@api/i18n";
 import { ErrorCard } from "@components/ErrorCard";
 import { Link } from "@components/Link";
 import { CspBlockedUrls, useCspErrors } from "@utils/cspViolations";
@@ -27,7 +28,7 @@ export function CspErrorCard() {
     const allowUrl = async (url: string) => {
         const { origin: baseUrl, host } = new URL(url);
 
-        const result = await PlexcordNative.csp.requestAddOverride(baseUrl, ["connect-src", "img-src", "style-src", "font-src"], "Plexcord Themes");
+        const result = await PlexcordNative.csp.requestAddOverride(baseUrl, ["connect-src", "img-src", "style-src", "font-src"], "Plexcord " + t("themes.title"));
         if (result !== "ok") return;
 
         CspBlockedUrls.forEach(url => {
@@ -39,10 +40,10 @@ export function CspErrorCard() {
         forceUpdate();
 
         Alerts.show({
-            title: "Restart Required",
-            body: "A restart is required to apply this change",
-            confirmText: "Restart now",
-            cancelText: "Later!",
+            title: t("plugins.restart.required"),
+            body: t("csp.restart"),
+            confirmText: t("plugins.restart.button.now"),
+            cancelText: t("plugins.restart.button.later"),
             onConfirm: relaunch
         });
     };
@@ -51,14 +52,16 @@ export function CspErrorCard() {
 
     return (
         <ErrorCard className="pc-settings-card">
-            <Forms.FormTitle tag="h5">Blocked Resources</Forms.FormTitle>
-            <Forms.FormText>Some images, styles, or fonts were blocked because they come from disallowed domains.</Forms.FormText>
-            <Forms.FormText>It is highly recommended to move them to GitHub or Imgur. But you may also allow domains if you fully trust them.</Forms.FormText>
+            <Forms.FormTitle tag="h5">{t("csp.blocked.resources")}</Forms.FormTitle>
+            <Forms.FormText>{t("csp.blocked.disallowed")}</Forms.FormText>
+            <Forms.FormText>{t("csp.blocked.recommended")}</Forms.FormText>
             <Forms.FormText>
-                After allowing a domain, you have to fully close (from tray / task manager) and restart {IS_DISCORD_DESKTOP ? "Discord" : "Vesktop"} to apply the change.
+                {tJsx("csp.blocked.afterAllow", {
+                    platform: IS_DISCORD_DESKTOP ? "Discord" : "Plextron"
+                })}
             </Forms.FormText>
 
-            <Forms.FormTitle tag="h5" className={classes(Margins.top16, Margins.bottom8)}>Blocked URLs</Forms.FormTitle>
+            <Forms.FormTitle tag="h5" className={classes(Margins.top16, Margins.bottom8)}>{t("csp.blocked.url")}</Forms.FormTitle>
             <div className="pc-settings-csp-list">
                 {errors.map((url, i) => (
                     <div key={url}>
@@ -66,7 +69,7 @@ export function CspErrorCard() {
                         <div className="pc-settings-csp-row">
                             <Link href={url}>{url}</Link>
                             <Button color={Button.Colors.PRIMARY} onClick={() => allowUrl(url)} disabled={isImgurHtmlDomain(url)}>
-                                Allow
+                                {t("csp.blocked.allow")}
                             </Button>
                         </div>
                     </div>
@@ -77,9 +80,9 @@ export function CspErrorCard() {
                 <>
                     <Forms.FormDivider className={classes(Margins.top8, Margins.bottom16)} />
                     <Forms.FormText>
-                        Imgur links should be direct links in the form of <code>https://i.imgur.com/...</code>
+                        {tJsx("csp.imgur.direct", { etc: <code>https://i.imgur.com/...</code> })}
                     </Forms.FormText>
-                    <Forms.FormText>To obtain a direct link, right-click the image and select "Copy image address".</Forms.FormText>
+                    <Forms.FormText>{t("csp.imgur.copy")}</Forms.FormText>
                 </>
             )}
         </ErrorCard>

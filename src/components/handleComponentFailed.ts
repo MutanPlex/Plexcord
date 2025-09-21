@@ -19,10 +19,23 @@
 
 import { maybePromptToUpdate } from "@utils/updater";
 
+// Safe translation function that won't crash if i18n isn't ready
+const safeT = (key: string, fallback: string): string => {
+    try {
+        const { t } = require("@api/i18n");
+        return t(key) || fallback;
+    } catch {
+        return fallback;
+    }
+};
+
 export function handleComponentFailed() {
-    maybePromptToUpdate(
+    const message = safeT(
+        "components.componentFailed.message",
         "Uh Oh! Failed to render this Page." +
         " However, there is an update available that might fix it." +
         " Would you like to update and restart now?"
     );
+
+    maybePromptToUpdate(message);
 }

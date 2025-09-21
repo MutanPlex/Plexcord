@@ -58,6 +58,10 @@ window.PlexcordNative = {
         openExternal: async (url) => void open(url, "_blank")
     },
 
+    i18n: {
+        updateMainLocale: async () => true
+    },
+
     updater: {
         getRepo: async () => ({ ok: true, value: "https://github.com/MutanPlex/Plexcord" }),
         getUpdates: async () => ({ ok: true, value: [] }),

@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Heart } from "@components/Heart";
 import { ButtonProps } from "@plexcord/discord-types";
 import { Button } from "@webpack/common";
@@ -35,7 +36,7 @@ export default function DonateButton({
             innerClassName="pc-donate-button"
         >
             <Heart />
-            Donate
+            {t("settings.specialCards.donations.button")}
         </Button>
     );
 }

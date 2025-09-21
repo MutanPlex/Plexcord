@@ -28,6 +28,8 @@ import { React, useEffect } from "@webpack/common";
 
 import plugins from "~plugins";
 
+import i18n from "./i18n";
+
 const logger = new Logger("Settings");
 export interface Settings {
     autoUpdate: boolean;
@@ -57,6 +59,13 @@ export interface Settings {
     | undefined;
     disableMinSize: boolean;
     winNativeTitleBar: boolean;
+
+    language: {
+        locale: string;
+        autoDetect: boolean;
+        fallbackLocale: string;
+    };
+
     plugins: {
         [plugin: string]: {
             enabled: boolean;
@@ -102,6 +111,13 @@ const DefaultSettings: Settings = {
     macosVibrancyStyle: undefined,
     disableMinSize: false,
     winNativeTitleBar: false,
+
+    language: {
+        locale: "en-US",
+        autoDetect: true,
+        fallbackLocale: "en-US"
+    },
+
     plugins: {},
 
     notifications: {
@@ -179,6 +195,19 @@ if (!IS_REPORTER) {
         localStorage.Plexcord_settingsDirty = true;
         saveSettingsOnFrequentAction();
         PlexcordNative.settings.set(SettingsStore.plain, path);
+
+        if (path.startsWith("language.")) {
+            const settings = SettingsStore.plain.language;
+            if (path === "language.locale") {
+                i18n.setLocale(settings.locale, true);
+                PlexcordNative.i18n.updateMainLocale(settings.locale);
+            } else if (path === "language.autoDetect") {
+                i18n.setAutoDetect(settings.autoDetect);
+            } else if (path === "language.fallbackLocale") {
+                i18n.setFallbackLocale(settings.fallbackLocale);
+                PlexcordNative.i18n.updateMainLocale();
+            }
+        }
     });
 }
 

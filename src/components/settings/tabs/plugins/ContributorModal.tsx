@@ -7,6 +7,7 @@
 
 import "./ContributorModal.css";
 
+import { t, tJsx } from "@api/i18n";
 import { useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -15,7 +16,7 @@ import { GithubButton, WebsiteButton } from "@components/settings/tabs/plugins/L
 import { User } from "@plexcord/discord-types";
 import { DevsById, PcDevsById } from "@utils/constants";
 import { fetchUserProfile } from "@utils/discord";
-import { classes, pluralise } from "@utils/misc";
+import { classes } from "@utils/misc";
 import { ModalContent, ModalRoot, openModal } from "@utils/modal";
 import { Forms, showToast, useEffect, useMemo, UserProfileStore, useStateFromStores } from "@webpack/common";
 
@@ -61,7 +62,7 @@ function ContributorModal({ user }: { user: User; }) {
             .sort((a, b) => Number(a.required ?? false) - Number(b.required ?? false));
     }, [user.id, user.username]);
 
-    const ContributedHyperLink = <Link href="https://plexcord.club/source">contributed</Link>;
+    const ContributedHyperLink = <Link href="https://plexcord.club/source">{t("plugins.contributor.contributed")}</Link>;
 
     return (
         <>
@@ -91,11 +92,19 @@ function ContributorModal({ user }: { user: User; }) {
 
             {plugins.length ? (
                 <Forms.FormText>
-                    {user.username} has {ContributedHyperLink} to {pluralise(plugins.length, "plugin")}!
+                    {tJsx("plugins.contributor.modal.contributionsInfo", {
+                        userName: user.username,
+                        contributionCount: plugins.length,
+                        continuedLink: ContributedHyperLink,
+                        s: plugins.length === 1 ? "" : "s"
+                    })}
                 </Forms.FormText>
             ) : (
                 <Forms.FormText>
-                    {user.username} has not made any plugins. They likely {ContributedHyperLink} in other ways!
+                    {tJsx("plugins.contributor.modal.noContributions", {
+                        userName: user.username,
+                        contributedLink: ContributedHyperLink
+                    })}
                 </Forms.FormText>
             )}
 
@@ -106,7 +115,7 @@ function ContributorModal({ user }: { user: User; }) {
                             key={p.name}
                             plugin={p}
                             disabled={p.required ?? false}
-                            onRestartNeeded={() => showToast("Restart to apply changes!")}
+                            onRestartNeeded={() => showToast(t("plugins.restart.apply"))}
                         />
                     )}
                 </div>

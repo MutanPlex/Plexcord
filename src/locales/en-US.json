@@ -1,0 +1,728 @@
+{
+    "settings": {
+        "title": "Settings",
+        "language": {
+            "selector": {
+                "label": "Language",
+                "description": "Select your preferred language for the Plexcord.",
+                "placeholder": "Select Language"
+            }
+        },
+        "location": {
+            "label": "Settings Location",
+            "description": "Where to put the Plexcord settings section",
+            "top": "At the very top",
+            "nitro": {
+                "above": "Above the Nitro section",
+                "below": "Below the Nitro section"
+            },
+            "activity": {
+                "above": "Above Activity Settings",
+                "below": "Below Activity Settings"
+            },
+            "bottom": "At the very bottom"
+        },
+        "switches": {
+            "useQuickCss": {
+                "label": "Enable Custom CSS",
+                "description": "Loads your Custom CSS"
+            },
+            "enableReactDevtools": {
+                "label": "Enable React Developer Tools",
+                "description": "Requires a full restart"
+            },
+            "frameless": {
+                "label": "Disable the window frame",
+                "description": "Requires a full restart"
+            },
+            "winNativeTitleBar": {
+                "label": "Use Windows' native title bar instead of Discord's custom one",
+                "description": "Requires a full restart"
+            },
+            "transparent": {
+                "label": "Enable window transparency",
+                "description": "You need a theme that supports transparency or this will do nothing. WILL STOP THE WINDOW FROM BEING RESIZABLE!! Requires a full restart"
+            },
+            "winCtrlQ": {
+                "label": "Register Ctrl+Q as shortcut to close Discord (Alternative to Alt+F4)",
+                "description": "Requires a full restart"
+            },
+            "disableMinSize": {
+                "label": "Disable minimum window size",
+                "description": "Requires a full restart"
+            }
+        },
+        "quickActions": {
+            "title": "Quick Actions",
+            "notificationLog": "Notification Log",
+            "editQuickCSS": "Edit QuickCSS",
+            "relaunchDiscord": "Relaunch Discord",
+            "openSettingsFolder": "Open Settings Folder",
+            "viewSourceCode": "View Source Code"
+        },
+        "specialCards": {
+            "donations": {
+                "title": "Donations",
+                "subtitle": "Thank you for donating!",
+                "description": "You can manage your perks at any time by messaging @mutanplex.",
+                "button": "Donate"
+            },
+            "supportProject": {
+                "title": "Support the Project",
+                "description": "Please consider supporting the development of Plexcord by donating!"
+            },
+            "contributions": {
+                "title": "Contributions",
+                "subtitle": "Thank you for contributing!",
+                "description": "Since you've contributed to Plexcord you now have a cool new badge!",
+                "buttonTitle": "See what you've contributed to"
+            }
+        },
+        "settingsSection": {
+            "title": "Settings",
+            "hint": "Hint: You can change the position of this settings section in the <link>settings of the Settings plugin</link>!",
+            "hintParts": {
+                "prefix": "Hint: You can change the position of this settings section in the ",
+                "linkText": "settings of the Settings plugin",
+                "suffix": "!"
+            }
+        },
+        "notifications": {
+            "title": "Notifications",
+            "settings": "Notification Settings",
+            "viewLog": "View Notification Log",
+            "permissions": {
+                "denied": {
+                    "title": "Desktop Notification Permission Denied",
+                    "label": "You have denied notification permissions. Desktop notifications will not work!"
+                }
+            },
+            "style": {
+                "label": "Notifications Style",
+                "description": "Some plugins may show notifications to you. These come in two styles:",
+                "plexcord": "Plexcord Notifications",
+                "plexcordDesc": "These are in-app notifications",
+                "desktop": "Desktop Notifications",
+                "desktopDesc": "Native Desktop notifications (like when you get a ping)",
+                "onlyWhenNotFocused": "Only use Desktop notifications when Discord is not focused",
+                "always": {
+                    "desktop": "Always use Desktop notifications",
+                    "plexcord": "Always use Plexcord notifications"
+                }
+            },
+            "positions": {
+                "label": "Notification Position",
+                "right": {
+                    "bottom": "Bottom Right",
+                    "top": "Top Right"
+                }
+            },
+            "timeout": {
+                "label": "Notification Timeout",
+                "description": "The amount of time (in seconds) that notifications will stay on screen before automatically disappearing"
+            },
+            "logLimit": {
+                "label": "Notification Log Limit",
+                "description": "The maximum number of notifications to keep in the log before old ones are removed. Set to {{disable}} to disable the notification log and {{unlimited}} to never automatically remove old notifications"
+            }
+        },
+        "macVibrancy": {
+            "title": "Window Vibrancy Style (Requires Restart)",
+            "placeholder": "Window vibrancy style",
+            "style": {
+                "no": "No Vibrancy",
+                "underPage": "Under Page (Window tinting)",
+                "content": "Content",
+                "window": "Window",
+                "selection": "Selection",
+                "titlebar": "Title Bar",
+                "header": "Header",
+                "sidebar": "Sidebar",
+                "tooltip": "Tooltip",
+                "menu": "Menu",
+                "popover": "Popover",
+                "fullscreen-ui": "Fullscreen UI (Transparent but slightly blurred)",
+                "hud": "HUD (Most Transparent)"
+            }
+        }
+    },
+    "plugins": {
+        "title": "Plugins",
+        "new": "NEW",
+        "restart": {
+            "apply": "Restart to apply changes!",
+            "required": "Restart required!",
+            "description": "Restart now to apply new plugins and their settings",
+            "following": "The following plugins require a restart:",
+            "fully": "Some plugins require a restart to fully disable",
+            "would": "Would you like to restart now?",
+            "button": {
+                "restart": "Restart",
+                "later": "Later!",
+                "now": "Restart Now",
+                "cancel": "Cancel",
+                "disableWarning": "Disable Warning Forever",
+                "disableAll": "Disable All",
+                "reset": "Reset"
+            }
+        },
+        "contributor": {
+            "contributed": "contributed",
+            "modal": {
+                "contributionsInfo": "{{userName}} has {{continuedLink}} to {{contributionCount}} plugin{{s}}.",
+                "noContributions": "{{userName}} has not made any plugins. They likely {{contributedLink}} in other ways!"
+            }
+        },
+        "infoModal": {
+            "description": "Press the cog wheel or info icon to get more info on a plugin",
+            "settingsInfo": "Plugins with a cog wheel have settings you can modify!",
+            "disableAll": "Disable All Plugins"
+        },
+        "error": {
+            "invalidInput": "Invalid input provided",
+            "stopping": "Error while stopping plugin {{plugin}}",
+            "starting": "Error while starting plugin {{plugin}}",
+            "startDependency": "Error while starting dependencies: {{failures}}",
+            "infoRender": "An error occured while rendering this plugin's custom Info Component"
+        },
+        "placeholder": {
+            "number": "Enter a number",
+            "select": "Select an option",
+            "text": "Enter a value"
+        },
+        "excluded": {
+            "desktop": "Discord Desktop app or Plextron",
+            "discordDesktop": "Discord Desktop app",
+            "plextron": "Plextron app",
+            "web": "Plextron app and the Web version of Discord",
+            "dev": "Developer version of Plexcord"
+        },
+        "search": {
+            "looking": "Are you looking for",
+            "onlyAvailable": "Only available on the",
+            "noCriteria": "No plugins meet the search criteria."
+        },
+        "required": {
+            "title": "Required Plugins",
+            "this": "This plugin is required for Plexcord to function.",
+            "by": "This plugin is required by:"
+        },
+        "dangerModal": {
+            "title": "DANGEROUS ACTION",
+            "disablePlugins": "WARNING: You are about to disable {{pluginCount}} plugins!",
+            "irreversible": "THIS ACTION IS IRREVERSIBLE!",
+            "enableBack": "Are you absolutely sure you want to proceed? You can always enable them back later.",
+            "undone": "This action cannet be undone. Are you sure?",
+            "resetDescription": "You are about to reset all settings for {{pluginName}} to their default values.",
+            "confirmReset": "Confirm Reset",
+            "cancel": "Cancel",
+            "resetText": "If you are certain you want to proceed, click <strong>Confirm Reset</strong>. Otherwise, click <strong>Cancel</strong>."
+        },
+        "filters": {
+            "label": "Filters",
+            "placeholder": "Search for a plugin...",
+            "option": {
+                "all": "Show All",
+                "enabled": "Show Enabled",
+                "disabled": "Show Disabled",
+                "new": "Show New"
+            }
+        },
+        "pluginModal": {
+            "noSettings": "There are no settings for this plugin.",
+            "authors": "Authors",
+            "settings": "Settings",
+            "successfulReset": "Settings for {{plugin}} have been reset.",
+            "enabledStock": "Enabled Stock Plugins",
+            "totalStock": "Total Stock Plugins",
+            "enabledUser": "Enabled User Plugins",
+            "totalUser": "Total User Plugins"
+        },
+        "metadata": {
+            "api": {
+                "description": {
+                    "memberListDecorators": "API to add decorators to member list (both in servers and DMs)",
+                    "messageAccessories": "API to add accessories to messages",
+                    "messageDecorations": "API to add decorations to messages",
+                    "chatInputButtons": "API to add buttons to the chat input",
+                    "commands": "API required by anything that uses commands",
+                    "contextMenu": "API for adding/removing items to/from context menus.",
+                    "dynamicImageModal": "Allows you to omit either width or height when opening an image modal",
+                    "menuItemDemangler": "Demangles Discord's Menu Item module",
+                    "messageEvents": "API required by anything using message events",
+                    "messagePopover": "API to add buttons to message popovers",
+                    "messageUpdater": "API for updating and re-rendering messages",
+                    "nicknameIcons": "API to add icons to the nickname, in profiles",
+                    "notices": "Fixes notices being automatically dismissed",
+                    "serverList": "API required for plugins that modify the server list",
+                    "userSettings": "Patches Discord's UserSettings to expose their group and name."
+                }
+            },
+            "badges": {
+                "description": "API to add badges to users",
+                "contributor": {
+                    "plexcord": "Plexcord Contributor",
+                    "vencord": "Vencord Contributor"
+                },
+                "context": {
+                    "title": "Badges Options",
+                    "copy": {
+                        "name": "Copy Badge Name",
+                        "link": "Copy Badge Image Link"
+                    },
+                    "refetch": {
+                        "button": "Refetch Badges",
+                        "success": "Badges successfully refetched!"
+                    }
+                },
+                "modal": {
+                    "title": "Plexcord Donor",
+                    "special": "This Badge is a special perk for Plexcord Donors",
+                    "description": "Please consider supporting the development of Plexcord by becoming a donor. It would mean a lot!"
+                }
+            },
+            "settings": {
+                "name": "Settings",
+                "description": "Adds Settings UI and debug info",
+                "option": {
+                    "language": {
+                        "label": "Language",
+                        "description": "Select your preferred language for Plexcord."
+                    },
+                    "settingsLocation": {
+                        "label": "Settings Location",
+                        "description": "Determines where the Plexcord settings section will be located."
+                    }
+                }
+            },
+            "noTrack": {
+                "name": "NoTrack",
+                "description": "Disable Discord's tracking (analytics/'science'), metrics and Sentry crash reporting",
+                "option": {
+                    "disableAnalytics": {
+                        "label": "Disable Analytics",
+                        "description": "Disable Discord's tracking (analytics/'science'), metrics and Sentry crash reporting"
+                    }
+                }
+            },
+            "supportHelper": {
+                "name": "Support Helper",
+                "description": "Helps us provide support to you",
+                "commands": {
+                    "description": {
+                        "debug": "Send Plexcord debug info",
+                        "plugins": "Send Plexcord plugin list"
+                    }
+                },
+                "modals": {
+                    "outdated": {
+                        "title": "Hold on!",
+                        "body": "You are using an outdated version of Plexcord! Chances are, your issue is already fixed.",
+                        "footer": "Please first update before asking for support!",
+                        "button": {
+                            "cancel": "View Updates",
+                            "confirm": "Update & Restart Now",
+                            "secondaryConfirm": "I know what I'm doing or I can't update"
+                        }
+                    },
+                    "updater": {
+                        "title": "Hold on!",
+                        "body": "You are using an externally updated Plexcord version, which we do not provide support for!",
+                        "footer": "Please either switch to an {{officially}}, or contact your package maintainer for support instead.",
+                        "officially": "officially supported version of Plexcord",
+                        "button": {
+                            "cancel": "Cancel",
+                            "confirm": "View Download Page",
+                            "now": "Update Now"
+                        },
+                        "toast": {
+                            "success": "Success! Restarting...",
+                            "already": "Already up to date!",
+                            "failed": "Failed to update :("
+                        }
+                    },
+                    "custom": {
+                        "title": "Hold on!",
+                        "header": "You are using a custom build of Plexcord, which we do not provide support for!",
+                        "body": "We only provide support for {{officialBuild}}. Either {{switch}} or figure your issue out yourself.",
+                        "footer": "You will be banned from receiving support if you ignore this rule.",
+                        "official": "official builds",
+                        "switch": "switch to an official build",
+                        "button": {
+                            "confirm": "Understood",
+                            "secondaryConfirm": "Don't show again"
+                        }
+                    }
+                },
+                "button": {
+                    "debug": "Run /plexcord-debug",
+                    "plugins": "Run /plexcord-plugins",
+                    "snippet": "Run Snippet"
+                },
+                "toast": {
+                    "success": "Success!",
+                    "failed": "Failed to run snippet :("
+                },
+                "dm": {
+                    "warning": "Please do not private message Plexcord plugin developers for support!{{br}}Instead, you can join the {{support}} server and use the Plexcord support channel: {{channel}}"
+                }
+            }
+        }
+    },
+    "patchHelper": {
+        "title": "Patch Helper",
+        "fullPatch": {
+            "label": "Full Patch",
+            "description": "Paste your full JSON patch here to fill in the fields"
+        },
+        "find": "Find",
+        "match": "Match",
+        "replacement": "Replacement",
+        "code": "Code",
+        "group": "Group",
+        "diff": "Diff",
+        "module": "Module",
+        "compile": "Compile",
+        "compiled": "Compilation Successful",
+        "copy": {
+            "clipboard": "Copy to Clipboard",
+            "codeblock": "Copy as Code Block"
+        },
+        "error": {
+            "noMatch": "No match found. This module may be lazy loaded?",
+            "multipleMatch": "Multiple matches found. Please use a more specific search pattern.",
+            "noFind": "'Find' field is missing.",
+            "noReplacement": "'Replacement' field is missing.",
+            "invalidReplacement": "'Replacement' field is invalid",
+            "replacementMatch": "'replacement.match' field is missing",
+            "replacementReplace": "'replacement.replace' field is missing",
+            "replacementMustFunction": "'Replacement' must be a function"
+        },
+        "cheatSheet": {
+            "title": "Cheat Sheet",
+            "identifiers": "Special regex escape sequence that matches identifiers (varnames, classnames, etc.)",
+            "dollar": "Insert a $",
+            "entireMatch": "Insert the entire match",
+            "beforeMatch": "Insert the substring before the match",
+            "afterMatch": "Insert the substring after the match",
+            "nthGroup": "Insert the nth capturing group ($1, $2...)",
+            "pluginInstance": "Insert the plugin instance"
+        },
+        "replacementEval": {
+            "label": "Treat as Function",
+            "description": "'replacement' will be evaled if this is toggled"
+        }
+    },
+    "sync": {
+        "title": "Backup & Restore",
+        "warning": "Warning",
+        "warningText": "Importing a settings file will overwrite your current settings.",
+        "description": "You can import and export your Plexcord settings as a JSON file. This allows you to easily transfer your settings to another device, or recover your settings after reinstalling Plexcord or Discord.",
+        "successful": "Settings successfully imported. Restart to apply changes!",
+        "error": {
+            "failure": "Failed to import settings: {{error}}"
+        },
+        "settings": {
+            "text": "Settings Export contains:",
+            "quickcss": "Custom QuickCSS",
+            "theme": "Theme Links",
+            "plugins": "Plugin Settings",
+            "datastores": "Plugin DataStores (e.g Timezones or IRememberYou)"
+        },
+        "button": {
+            "import": "Import Settings",
+            "export": "Export Settings"
+        }
+    },
+    "cloud": {
+        "text": "Cloud",
+        "title": "Settings Sync",
+        "override": "Cloud Sync",
+        "description": "Sync your settings with the cloud. This allows for easy synchronization across multiple devices with minimal effort.",
+        "settings": "Cloud Settings",
+        "successful": "Synchronized settings to the cloud!",
+        "updated": "Your settings have been updated! Click here to restart to fully apply changes!",
+        "deleted": "Settings deleted from cloud!",
+        "reauth": "We've noticed you have cloud integrations enabled in another client! Due to limitations, you will need to re-authenticate to continue using them. Click here to go to the settings page to do so!",
+        "error": {
+            "setup": "Setup failed (couldn't retrieve OAuth configuration).",
+            "secret": "Setup failed (no secret returned).",
+            "string": "Setup failed ({{error}}).",
+            "connect": "Cloud sync was disabled because this account isn't connected to the Plexcord Cloud App. You can enable it again by connecting this account in Cloud Settings. (note: it will store your preferences separately)",
+            "noSettings": "There are no settings in the cloud.",
+            "uptodate": "Your settings are up to date.",
+            "localNewer": "Your local settings are newer than the cloud ones.",
+            "delete": "Could not delete settings ({{error}}).",
+            "api": {
+                "returned": {
+                    "delete": "Could not delete settings (API returned {{status}}).",
+                    "to": "Could not synchronize settings to cloud (API returned {{status}}).",
+                    "from": "Could not synchronize settings from the cloud (API returned {{status}})."
+                }
+            },
+            "synchronize": {
+                "to": "Could not synchronize settings to cloud ({{error}}).",
+                "from": "Could not synchronize settings from the cloud ({{error}})."
+            }
+        },
+        "notification": {
+            "title": "Cloud Integration",
+            "enabled": "Cloud integration Enabled",
+            "host": "{{host}} has been added to the whitelist. Please restart the app for the changes to take effect.",
+            "erase": {
+                "successful": "Cloud data successfully erased",
+                "failed": "Failed to erase all data (API {{status}} returned), please contact support."
+            }
+        },
+        "button": {
+            "to": "Sync to Cloud",
+            "from": "Sync from Cloud",
+            "fromDescription": "This will overwrite your local settings with the ones on the cloud. Use wisely!",
+            "delete": "Delete Cloud Data",
+            "enable": "Enable Cloud Integrations",
+            "reauthorize": "Reauthorize",
+            "erase": {
+                "title": "Are you sure?",
+                "body": "Once your data is erased, we cannot recover it. There's no going back!",
+                "confirm": "Erase it!",
+                "cancel": "Nevermind",
+                "erase": "Erase All Data"
+            },
+            "confirm": "Restart now",
+            "later": "Later!"
+        },
+        "privacy": "respects your privacy",
+        "source": "source code",
+        "overview": "Plexcord comes with a cloud integration that adds goodies like settings sync across devices. It {{privacy}}, and the {{source}} is AGPL 3.0 licensed so you can host it yourself.",
+        "authorization": "This will request authorization if you have not yet set up cloud integrations.",
+        "backend": {
+            "title": "Backend URL",
+            "description": "Which backend to use when using cloud integrations.",
+            "invalid": "Invalid URL"
+        }
+    },
+    "csp": {
+        "restart": "A restart is required to apply this change",
+        "blocked": {
+            "resources": "Blocked Resources",
+            "disallowed": "Some images, styles, or fonts were blocked because they come from disallowed domains.",
+            "recommended": "It is highly recommended to move them to GitHub or Imgur. But you may also allow domains if you fully trust them.",
+            "afterAllow": "After allowing a domain, you have to fully close (from tray / task manager) and restart {{platform}} to apply the change.",
+            "allow": "Allow",
+            "url": "Blocked URLs"
+        },
+        "imgur": {
+            "direct": "Imgur links should be direct links in the form of {{etc}}",
+            "copy": "To obtain a direct link, right-click the image and select 'Copy image address'."
+        },
+        "wants": {
+            "caller": "{{callerName}} wants to allow connections to {{domain}}",
+            "detail": "Unless you recognise and fully trust {{domain}}, you should cancel this request!",
+            "restart": "You will have to fully close and restart {{appName}} for the changes to take effect.",
+            "type": {
+                "images": "Images",
+                "styles": "CSS & Themes",
+                "fonts": "Fonts"
+            },
+            "content": "The following types of content will be allowed to load from {{domain}}:",
+            "understand": "I fully trust {{domain}} and understand the risks of allowing connections to it.",
+            "button": {
+                "cancel": "Cancel",
+                "allow": "Allow"
+            },
+            "title": "Host Permissions"
+        }
+    },
+    "themes": {
+        "title": "Themes",
+        "local": "Local Themes",
+        "online": "Online Themes",
+        "stylus": "Stylus extension",
+        "links": "Enter Theme Links...",
+        "error": {
+            "userscript": "Themes are not supported on the Userscript!",
+            "stylus": "You can istead install themes with the {{stylus}}!",
+            "expired": "Invalid or expired link"
+        },
+        "find": "Find Themes",
+        "bd": "BetterDiscord Themes",
+        "github": "Github",
+        "download": "If using the BD site, click on 'Download' and place the downloaded .theme.css file into your themes folder.",
+        "external": {
+            "title": "External Themes",
+            "security": "For security reasons, loading resources (styles, fonts, images, ...) from most sites is blocked.",
+            "host": "Make sure all your assets are hosted on GitHub, GitLab, Codeberg, Imgur, Discord or Google Fonts."
+        },
+        "upload": "Upload Theme",
+        "openFolder": "Open Themes Folder",
+        "loadMissing": "Load Missing Themes",
+        "editQuickCSS": "Edit QuickCSS",
+        "editClient": "Edit ClientTheme",
+        "advanced": {
+            "warning": "This section is for advanced users. If you are having difficulties using it, use the Local Themes tab instead.",
+            "paste": "Paste links to css files here",
+            "line": "One link per line",
+            "prefix": "You can prefix lines with @light or @dark to toggle them based on your Discord theme",
+            "direct": "Make sure to use direct links to files (raw or github.io)!"
+        },
+        "website": "Website",
+        "discord": "Discord Server",
+        "unknown": {
+            "author": "Unknown Author",
+            "description": "A Discord Theme."
+        }
+    },
+    "updater": {
+        "title": "Updater",
+        "settings": "Updater Settings",
+        "updates": "Updates",
+        "updated": "has been updated!",
+        "restart": "Click here to restart",
+        "github": {
+            "local": "Your local copy has more recent commits. Please stash or reset them."
+        },
+        "error": {
+            "check": "Failed to check updates. Check the console for more info",
+            "occurred": "An unknown error occurred",
+            "retrieve": "Failed to retrieve - check console",
+            "title": "Oops!",
+            "tryAgain": "An unknown error occurred. Please try again or see the console for more info.",
+            "command": "Command {{path}} not found. Please install it and try again.",
+            "code": "Code {{code}}. See the console for more info.",
+            "running": "An error occurred while running {{cmd}}: {{error}}",
+            "render": "Failed to render the {{tab}} tab. If this issue persists, try using the installer to reinstall!",
+            "failed": "That also failed :( Try updating or re-installing with the installer!"
+        },
+        "available": "There is 1 update",
+        "updateAvailable": "A Plexcord update is available!",
+        "click": "Click here to view the update",
+        "available_plural": "There are {{count}} updates",
+        "current": "Up to Date!",
+        "successful": {
+            "title": "Update Success!",
+            "body": "Successfully updated. Restart now to apply the changes?",
+            "button": {
+                "confirm": "Restart",
+                "cancel": "Not now!",
+                "update": "Update Now",
+                "check": "Check for Updates"
+            },
+            "noFound": "No updates found"
+        },
+        "automatically": {
+            "label": "Automatically update",
+            "description": "Automatically update Plexcord without confirmation prompt"
+        },
+        "notify": {
+            "label": "Get notified when an automatic update completes",
+            "description": "Shows a notification when Plexcord automatically updates"
+        },
+        "repo": "Repo"
+    },
+    "components": {
+        "error": {
+            "title": "Oh no!",
+            "render": "An error occurred while rendering this Component. More info can be found below and in your console."
+        },
+        "componentFailed": {
+            "message": "Uh Oh! Failed to render this Page. However, there is an update available that might fix it. Would you like to update and restart now?"
+        }
+    },
+    "commands": {
+        "error": {
+            "execute": "An Error occurred while executing command '{{command}}'"
+        }
+    },
+    "notifications": {
+        "dismiss": "Dismiss Notification",
+        "noYet": "No notifications yet",
+        "settings": "Notification Settings",
+        "log": {
+            "title": "Notification Log",
+            "clear": "Clear Notification Log",
+            "sure": "Are you sure?",
+            "permamently": "This will permamently remove {{count}} notification{{s}}. This action cannot be undone.",
+            "button": {
+                "confirm": "Do it!",
+                "cancel": "Nevermind"
+            }
+        }
+    },
+    "memberlist": {
+        "error": {
+            "render": "Failed to render {{key}} Member List Decorator"
+        }
+    },
+    "message": {
+        "accesory": {
+            "error": {
+                "render": "Failed to render {{key}} Message Accessory"
+            }
+        },
+        "decoration": {
+            "error": {
+                "render": "Failed to render {{key}} Message Decoration"
+            }
+        }
+    },
+    "plugin": {
+        "accountPanelServerProfile": {
+            "name": "AccountPanelServerProfile",
+            "description": "Right click your account panel in the bottom left to view your profile in the current server",
+            "option": {
+                "prioritize": {
+                    "label": "Prioritize Server Profile",
+                    "description": "Prioritize Server Profile when left clicking your account panel"
+                }
+            },
+            "context": {
+                "account": "View Account Profile",
+                "server": "View Server Profile",
+                "prioritize": "Prioritize Server Profile"
+            }
+        },
+        "allCallTimers": {
+            "name": "AllCallTimers",
+            "description": "Shows call timers in all voice calls",
+            "option": {
+                "showWithoutHover": {
+                    "label": "Show Without Hover",
+                    "description": "Always show the timer without needing to hover"
+                },
+                "showRoleColor": {
+                    "label": "Show Role Color",
+                    "description": "Display in the user’s role color (if the ShowRoleColor plugin is enabled)"
+                },
+                "trackSelf": {
+                    "label": "Track Yourself",
+                    "description": "Also show your own timer"
+                },
+                "showSeconds": {
+                    "label": "Show Seconds",
+                    "description": "Display seconds in the timer"
+                },
+                "format": {
+                    "label": "Format",
+                    "description": "Compact or human-readable format",
+                    "human": "30d 23h 00m 42s"
+                },
+                "watchLargeGuilds": {
+                    "label": "Watch Large Guilds",
+                    "description": "Track users in large guilds. This may cause lag if you're in a lot of large guilds with active voice users. Tested with up to 2000 active voice users with no issues."
+                },
+                "fixUI": {
+                    "label": "UI Fix",
+                    "description": "In some cases the timer may break the user interface. Enable this option to fix it."
+                }
+            }
+        },
+        "altKrispSwitch": {
+            "name": "AltKrispSwitch",
+            "description": "Makes the Noise Suppression Popout switch between None and Krisp instead of Krisp and Standard"
+        },
+        "alwaysAnimate": {
+            "name": "AlwaysAnimate",
+            "description": "Animates anything that can be animated"
+        }
+    }
+}

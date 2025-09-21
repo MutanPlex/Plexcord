@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -24,6 +25,11 @@ export default definePlugin({
     name: "MessageEventsAPI",
     description: "Api required by anything using message events.",
     authors: [Devs.Arjix, Devs.hunt, Devs.Ven],
+
+    get displayDescription() {
+        return t("plugins.metadata.api.description.messageEvents");
+    },
+
     patches: [
         {
             find: "#{intl::EDIT_TEXTAREA_HELP}",

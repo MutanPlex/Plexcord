@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Flex } from "@components/Flex";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { Margins } from "@utils/margins";
@@ -26,25 +27,23 @@ import { Button, Card, Text } from "@webpack/common";
 
 function BackupAndRestoreTab() {
     return (
-        <SettingsTab title="Backup & Restore">
+        <SettingsTab title={t("sync.title")}>
             <Card className={classes("pc-settings-card", "pc-backup-restore-card")}>
                 <Flex flexDirection="column">
-                    <strong>Warning</strong>
-                    <span>Importing a settings file will overwrite your current settings.</span>
+                    <strong>{t("sync.warning")}</strong>
+                    <span>{t("sync.warningText")}</span>
                 </Flex>
             </Card>
             <Text variant="text-md/normal" className={Margins.bottom8}>
-                You can import and export your Plexcord settings as a JSON file.
-                This allows you to easily transfer your settings to another device,
-                or recover your settings after reinstalling Plexcord or Discord.
+                {t("sync.description")}
             </Text>
             <Text variant="text-md/normal" className={Margins.bottom8}>
-                Settings Export contains:
+                {t("sync.settings.text")}
                 <ul>
-                    <li>&mdash; Custom QuickCSS</li>
-                    <li>&mdash; Theme Links</li>
-                    <li>&mdash; Plugin Settings</li>
-                    <li>&mdash; Plugin DataStores (e.g. Timezones or IRememberYou)</li>
+                    <li>&mdash; {t("sync.settings.quickcss")}</li>
+                    <li>&mdash; {t("sync.settings.theme")}</li>
+                    <li>&mdash; {t("sync.settings.plugins")}</li>
+                    <li>&mdash; {t("sync.settings.datastores")}</li>
                 </ul>
             </Text>
             <Flex>
@@ -52,17 +51,17 @@ function BackupAndRestoreTab() {
                     onClick={() => uploadSettingsBackup()}
                     size={Button.Sizes.SMALL}
                 >
-                    Import Settings
+                    {t("sync.button.import")}
                 </Button>
                 <Button
                     onClick={downloadSettingsBackup}
                     size={Button.Sizes.SMALL}
                 >
-                    Export Settings
+                    {t("sync.button.export")}
                 </Button>
             </Flex>
         </SettingsTab>
     );
 }
 
-export default wrapTab(BackupAndRestoreTab, "Backup & Restore");
+export default wrapTab(BackupAndRestoreTab, t("sync.title"));

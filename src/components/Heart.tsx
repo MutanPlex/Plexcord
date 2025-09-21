@@ -18,9 +18,9 @@
 */
 
 import { classes } from "@utils/misc";
-import { SVGProps } from "react";
+import { SVGAttributes } from "react";
 
-export function Heart(props: SVGProps<SVGSVGElement>) {
+export function Heart(props: SVGAttributes<SVGSVGElement>) {
     return (
         <svg
             aria-hidden="true"

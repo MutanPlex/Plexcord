@@ -5,22 +5,23 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { ErrorCard } from "@components/ErrorCard";
 import { UpdateLogger } from "@utils/updater";
 import { Alerts, Parser } from "@webpack/common";
 
 function getErrorMessage(e: any) {
     if (!e?.code || !e.cmd)
-        return "An unknown error occurred.\nPlease try again or see the console for more info.";
+        return t("updater.error.tryAgain");
 
     const { code, path, cmd, stderr } = e;
 
     if (code === "ENOENT")
-        return `Command \`${path}\` not found.\nPlease install it and try again.`;
+        return t("updater.error.command", { path });
 
-    const extra = stderr || `Code \`${code}\`. See the console for more info.`;
+    const extra = stderr || t("updater.error.code", { code });
 
-    return `An error occurred while running \`${cmd}\`:\n${extra}`;
+    return t("updater.error.running", { cmd, error: extra });
 }
 
 export function runWithDispatch(dispatch: React.Dispatch<React.SetStateAction<boolean>>, action: () => any) {
@@ -35,7 +36,7 @@ export function runWithDispatch(dispatch: React.Dispatch<React.SetStateAction<bo
             const err = getErrorMessage(e);
 
             Alerts.show({
-                title: "Oops!",
+                title: t("updater.error.title"),
                 body: (
                     <ErrorCard>
                         {err.split("\n").map((line, idx) =>

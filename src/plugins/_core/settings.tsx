@@ -17,9 +17,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import i18n, { SUPPORTED_LANGUAGES, t } from "@api/i18n";
 import { Settings } from "@api/Settings";
 import { BackupAndRestoreTab, CloudTab, PatchHelperTab, PlexcordTab, PluginsTab, ThemesTab, UpdaterTab } from "@components/settings/tabs";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
 import { React } from "@webpack/common";
@@ -32,8 +33,15 @@ type SectionTypes = Record<SectionType, SectionType>;
 export default definePlugin({
     name: "Settings",
     description: "Adds Settings UI and debug info",
-    authors: [Devs.Ven, Devs.Megu],
+    authors: [Devs.Ven, Devs.Megu, PcDevs.MutanPlex],
     required: true,
+
+    get displayName() {
+        return t("plugins.metadata.settings.name");
+    },
+    get displayDescription() {
+        return t("plugins.metadata.settings.description");
+    },
 
     patches: [
         {
@@ -91,43 +99,43 @@ export default definePlugin({
             },
             {
                 section: "PlexcordPlugins",
-                label: "Plugins",
-                searchableTitles: ["Plugins"],
+                label: t("plugins.title"),
+                searchableTitles: [t("plugins.title")],
                 element: PluginsTab,
                 className: "pc-plugins"
             },
             {
                 section: "PlexcordThemes",
-                label: "Themes",
-                searchableTitles: ["Themes"],
+                label: t("themes.title"),
+                searchableTitles: [t("themes.title")],
                 element: ThemesTab,
                 className: "pc-themes"
             },
             !IS_UPDATER_DISABLED && {
                 section: "PlexcordUpdater",
-                label: "Updater",
-                searchableTitles: ["Updater"],
+                label: t("updater.title"),
+                searchableTitles: [t("updater.title")],
                 element: UpdaterTab,
                 className: "pc-updater"
             },
             {
                 section: "PlexcordCloud",
-                label: "Cloud",
-                searchableTitles: ["Cloud"],
+                label: t("cloud.text"),
+                searchableTitles: [t("cloud.text")],
                 element: CloudTab,
                 className: "pc-cloud"
             },
             {
                 section: "settings/tabsSync",
-                label: "Backup & Restore",
-                searchableTitles: ["Backup & Restore"],
+                label: t("sync.title"),
+                searchableTitles: [t("sync.title")],
                 element: BackupAndRestoreTab,
                 className: "pc-backup-restore"
             },
             IS_DEV && {
                 section: "PlexcordPatchHelper",
-                label: "Patch Helper",
-                searchableTitles: ["Patch Helper"],
+                label: t("patchHelper.title"),
+                searchableTitles: [t("patchHelper.title")],
                 element: PatchHelperTab,
                 className: "pc-patch-helper"
             },
@@ -192,17 +200,43 @@ export default definePlugin({
     },
 
     options: {
-        settingsLocation: {
+        language: {
+            get label() {
+                return t("plugins.metadata.settings.option.language.label");
+            },
             type: OptionType.SELECT,
-            description: "Where to put the Plexcord settings section",
-            options: [
-                { label: "At the very top", value: "top" },
-                { label: "Above the Nitro section", value: "aboveNitro", default: true },
-                { label: "Below the Nitro section", value: "belowNitro" },
-                { label: "Above Activity Settings", value: "aboveActivity" },
-                { label: "Below Activity Settings", value: "belowActivity" },
-                { label: "At the very bottom", value: "bottom" },
-            ]
+            get description() {
+                return t("plugins.metadata.settings.option.language.description");
+            },
+            get options() {
+                return Object.entries(SUPPORTED_LANGUAGES).map(([code, info]) => ({
+                    label: info.nativeName,
+                    value: code,
+                    default: code === i18n.getLocale()
+                }));
+            },
+            onChange: (locale: string) => {
+                Settings.language.locale = locale;
+            },
+        },
+        settingsLocation: {
+            get label() {
+                return t("plugins.metadata.settings.option.settingsLocation.label");
+            },
+            type: OptionType.SELECT,
+            get description() {
+                return t("plugins.metadata.settings.option.settingsLocation.description");
+            },
+            get options() {
+                return [
+                    { label: t("settings.location.top"), value: "top" },
+                    { label: t("settings.location.nitro.above"), value: "aboveNitro", default: true },
+                    { label: t("settings.location.nitro.below"), value: "belowNitro" },
+                    { label: t("settings.location.activity.above"), value: "aboveActivity" },
+                    { label: t("settings.location.activity.below"), value: "belowActivity" },
+                    { label: t("settings.location.bottom"), value: "bottom" },
+                ];
+            }
         },
     },
 

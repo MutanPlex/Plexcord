@@ -1,5 +1,6 @@
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { Text, Tooltip } from "@webpack/common";
 
 export function StockPluginsCard({ totalStockPlugins, enabledStockPlugins, totalUserPlugins, enabledUserPlugins }) {
@@ -7,22 +8,22 @@ export function StockPluginsCard({ totalStockPlugins, enabledStockPlugins, total
         <div className="pc-plugin-stats pc-stockplugins-stats-card">
             <div className="pc-plugin-stats-card-container">
                 <div className="pc-plugin-stats-card-section">
-                    <Text variant="text-md/bold">Enabled Stock Plugins</Text>
+                    <Text variant="text-md/bold">{t("plugins.pluginModal.enabledStock")}</Text>
                     <Text variant="heading-xl/bold">{enabledStockPlugins}</Text>
                 </div>
                 <div className="pc-plugin-stats-card-divider"></div>
                 <div className="pc-plugin-stats-card-section">
-                    <Text variant="text-md/bold">Total Stock Plugins</Text>
+                    <Text variant="text-md/bold">{t("plugins.pluginModal.totalStock")}</Text>
                     <Text variant="heading-xl/bold">{totalStockPlugins}</Text>
                 </div>
                 <div className="pc-plugin-stats-card-divider"></div>
                 <div className="pc-plugin-stats-card-section">
-                    <Text variant="text-md/bold">Enabled User Plugins</Text>
+                    <Text variant="text-md/bold">{t("plugins.pluginModal.enabledUser")}</Text>
                     <Text variant="heading-xl/bold">{enabledUserPlugins}</Text>
                 </div>
                 <div className="pc-plugin-stats-card-divider"></div>
                 <div className="pc-plugin-stats-card-section">
-                    <Text variant="text-md/bold">Total User Plugins</Text>
+                    <Text variant="text-md/bold">{t("plugins.pluginModal.totalUser")}</Text>
                     {totalUserPlugins === 0 ? (
                         <Tooltip
                             text={

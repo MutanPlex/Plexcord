@@ -20,9 +20,9 @@ import { useForceUpdater } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy, findByPropsLazy } from "@webpack";
 import { Button, ChannelStore, FluxDispatcher, Forms, Select, SelectedChannelStore, Switch, TabBar, TextInput, Tooltip, UserStore, useState } from "@webpack/common";
-import type { JSX } from "react";
+import type { SVGAttributes } from "react";
 
-type IconProps = JSX.IntrinsicElements["svg"];
+type IconProps = SVGAttributes<SVGSVGElement>;
 
 interface KeywordEntry {
     regex: string;

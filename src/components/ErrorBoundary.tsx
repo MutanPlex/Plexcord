@@ -42,6 +42,15 @@ const color = "#e78284";
 
 const logger = new Logger("React ErrorBoundary", color);
 
+const safeT = (key: string, fallback: string): string => {
+    try {
+        const { t } = require("@api/i18n");
+        return t(key) || fallback;
+    } catch {
+        return fallback;
+    }
+};
+
 const NO_ERROR = {};
 
 // We might want to import this in a place where React isn't ready yet.
@@ -96,11 +105,11 @@ const ErrorBoundary = LazyComponent(() => {
                     </this.props.fallback>
                 );
 
-            const msg = this.props.message || "An error occurred while rendering this Component. More info can be found below and in your console.";
+            const msg = this.props.message || safeT("components.error.render", "An error occurred while rendering this Component. More info can be found below and in your console.");
 
             return (
                 <ErrorCard style={{ overflow: "hidden" }}>
-                    <h1>Oh no!</h1>
+                    <h1>{safeT("components.error.title", "Oh no!")}</h1>
                     <p>{msg}</p>
                     <code>
                         {this.state.message}

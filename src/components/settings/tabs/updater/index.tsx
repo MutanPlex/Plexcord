@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
 import { Link } from "@components/Link";
 import { handleSettingsTabError, SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
@@ -44,31 +45,31 @@ function Updater() {
     };
 
     return (
-        <SettingsTab title="Plexcord Updater">
-            <Forms.FormTitle tag="h5">Updater Settings</Forms.FormTitle>
+        <SettingsTab title={"Plexcord " + t("updater.title")}>
+            <Forms.FormTitle tag="h5">{t("updater.settings")}</Forms.FormTitle>
             <Switch
                 value={settings.autoUpdate}
                 onChange={(v: boolean) => settings.autoUpdate = v}
-                note="Automatically update Plexcord without confirmation prompt"
+                note={t("updater.automatically.description")}
             >
-                Automatically update
+                {t("updater.automatically.label")}
             </Switch>
             <Switch
                 value={settings.autoUpdateNotification}
                 onChange={(v: boolean) => settings.autoUpdateNotification = v}
-                note="Shows a notification when Plexcord automatically updates"
+                note={t("updater.notify.description")}
                 disabled={!settings.autoUpdate}
             >
-                Get notified when an automatic update completes
+                {t("updater.notify.label")}
             </Switch>
 
-            <Forms.FormTitle tag="h5">Repo</Forms.FormTitle>
+            <Forms.FormTitle tag="h5">{t("updater.repo")}</Forms.FormTitle>
 
             <Forms.FormText>
                 {repoPending
                     ? repo
                     : err
-                        ? "Failed to retrieve - check console"
+                        ? t("updater.error.retrieve")
                         : (
                             <Link href={repo}>
                                 {repo.split("/").slice(-2).join("/")}
@@ -81,7 +82,7 @@ function Updater() {
 
             <Forms.FormDivider className={Margins.top8 + " " + Margins.bottom8} />
 
-            <Forms.FormTitle tag="h5">Updates</Forms.FormTitle>
+            <Forms.FormTitle tag="h5">{t("updater.updates")}</Forms.FormTitle>
 
             {isNewer
                 ? <Newer {...commonProps} />
@@ -93,12 +94,12 @@ function Updater() {
 
 export default IS_UPDATER_DISABLED
     ? null
-    : wrapTab(Updater, "Updater");
+    : wrapTab(Updater, t("updater.title"));
 
 export const openUpdaterModal = IS_UPDATER_DISABLED
     ? null
     : function () {
-        const UpdaterTab = wrapTab(Updater, "Updater");
+        const UpdaterTab = wrapTab(Updater, t("updater.title"));
 
         try {
             openModal(wrapTab((modalProps: ModalProps) => (

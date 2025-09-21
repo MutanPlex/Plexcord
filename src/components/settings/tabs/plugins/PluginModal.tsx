@@ -20,6 +20,7 @@
 import "./PluginModal.css";
 
 import { generateId } from "@api/Commands";
+import { t, tJsx, useForceUpdateOnLocaleChange } from "@api/i18n";
 import { Settings, useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -70,6 +71,10 @@ export function makeDummyUser(user: { username: string; id?: string; avatar?: st
 export default function PluginModal({ plugin, onRestartNeeded, onClose, transitionState }: PluginModalProps) {
 
     const pluginSettings = useSettings().plugins[plugin.name];
+    useForceUpdateOnLocaleChange();
+
+    const displayName = (plugin as any).displayName || plugin.name;
+    const displayDescription = (plugin as any).displayDescription || plugin.description;
 
     const hasSettings = Boolean(pluginSettings && plugin.options && !isObjectEmpty(plugin.options));
     const [authors, setAuthors] = useState<Partial<User>[]>([]);
@@ -94,7 +99,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
 
     function renderSettings() {
         if (!hasSettings || !plugin.options)
-            return <Forms.FormText>There are no settings for this plugin.</Forms.FormText>;
+            return <Forms.FormText>{t("plugins.pluginModal.noSettings")}</Forms.FormText>;
 
         const options = Object.entries(plugin.options).map(([key, setting]) => {
             if (setting.type === OptionType.CUSTOM || setting.hidden) return null;
@@ -151,13 +156,13 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
     return (
         <ModalRoot transitionState={transitionState} size={ModalSize.MEDIUM}>
             <ModalHeader separator={false} className={Margins.bottom8}>
-                <Text variant="heading-xl/bold" style={{ flexGrow: 1 }}>{plugin.name}</Text>
+                <Text variant="heading-xl/bold" style={{ flexGrow: 1 }}>{displayName}</Text>
                 <ModalCloseButton onClick={onClose} />
             </ModalHeader>
             <ModalContent className={Margins.bottom16}>
                 <Forms.FormSection>
                     <Flex className={cl("info")}>
-                        <Forms.FormText className={cl("description")}>{plugin.description}</Forms.FormText>
+                        <Forms.FormText className={cl("description")}>{displayDescription}</Forms.FormText>
                         {!pluginMeta.userPlugin && (
                             <div className="pc-settings-modal-links">
                                 <WebsiteButton
@@ -171,7 +176,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                             </div>
                         )}
                     </Flex>
-                    <Text variant="heading-lg/semibold" className={classes(Margins.top8, Margins.bottom8)}>Authors</Text>
+                    <Text variant="heading-lg/semibold" className={classes(Margins.top8, Margins.bottom8)}>{t("plugins.pluginModal.authors")}</Text>
                     <div style={{ width: "fit-content" }}>
                         <UserSummaryItem
                             users={authors}
@@ -198,14 +203,14 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                 {!!plugin.settingsAboutComponent && (
                     <div className={Margins.top16}>
                         <Forms.FormSection>
-                            <ErrorBoundary message="An error occurred while rendering this plugin's custom Info Component">
+                            <ErrorBoundary message={t("plugins.error.infoRender")}>
                                 <plugin.settingsAboutComponent />
                             </ErrorBoundary>
                         </Forms.FormSection>
                     </div>
                 )}
                 <Forms.FormSection>
-                    <Text variant="heading-lg/semibold" className={classes(Margins.top16, Margins.bottom8)}>Settings</Text>
+                    <Text variant="heading-lg/semibold" className={classes(Margins.top16, Margins.bottom8)}>{t("plugins.pluginModal.settings")}</Text>
                     {renderSettings()}
                 </Forms.FormSection>
             </ModalContent>;
@@ -222,7 +227,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                                         onMouseEnter={onMouseEnter}
                                         onMouseLeave={onMouseLeave}
                                     >
-                                        Reset
+                                        {t("plugins.restart.button.reset")}
                                     </Button>
                                 )}
                             </Tooltip>
@@ -284,7 +289,7 @@ function resetSettings(plugin: Plugin, warningModalProps?: ModalProps, pluginMod
     }
 
     Toasts.show({
-        message: `Settings for ${pluginName} have been reset.`,
+        message: t("plugins.pluginModal.successfulReset", { plugin: pluginName }),
         id: Toasts.genId(),
         type: Toasts.Type.SUCCESS,
         options: {
@@ -307,7 +312,7 @@ export function openWarningModal(plugin: Plugin, pluginModalProps: ModalProps, o
             transitionState={warningModalProps.transitionState}
         >
             <ModalHeader separator={false}>
-                <Text className="text-danger">Dangerous Action</Text>
+                <Text className="text-danger">{t("plugins.dangerModal.title")}</Text>
                 <ModalCloseButton onClick={warningModalProps.onClose} className="pc-modal-close-button" />
             </ModalHeader>
             <ModalContent>
@@ -318,13 +323,16 @@ export function openWarningModal(plugin: Plugin, pluginModalProps: ModalProps, o
                             alt="Warning"
                         />
                         <Text className="text-normal">
-                            You are about to reset all settings for <strong>{plugin.name}</strong> to their default values.
+                            {tJsx("plugins.dangerModal.resetDescription", { pluginName: <strong>{plugin.name}</strong> })}
                         </Text>
                         <Text className="warning-text">
-                            THIS ACTION IS IRREVERSIBLE!
+                            {t("plugins.dangerModal.irreversible")}
                         </Text>
                         <Text className="text-normal margin-bottom">
-                            If you are certain you want to proceed, click <strong>Confirm Reset</strong>. Otherwise, click <strong>Cancel</strong>.
+                            {tJsx("plugins.dangerModal.resetText", {
+                                confirmReset: <strong>{t("plugins.dangerModal.confirmReset")}</strong>,
+                                cancel: <strong>{t("plugins.dangerModal.cancel")}</strong>,
+                            })}
                         </Text>
                     </Flex>
                 </Forms.FormSection>
@@ -337,7 +345,7 @@ export function openWarningModal(plugin: Plugin, pluginModalProps: ModalProps, o
                         onClick={warningModalProps.onClose}
                         look={Button.Looks.LINK}
                     >
-                        Cancel
+                        {t("plugins.restart.button.disableWarning")}
                     </Button>
                     <Flex className="button-group">
                         {!Settings.ignoreResetWarning && (
@@ -348,10 +356,10 @@ export function openWarningModal(plugin: Plugin, pluginModalProps: ModalProps, o
                                     Settings.ignoreResetWarning = true;
                                 }}
                             >
-                                Disable Warning Forever
+                                {t("plugins.restart.button.disableWarning")}
                             </Button>
                         )}
-                        <Tooltip text="This action cannot be undone. Are you sure?" shouldShow={true}>
+                        <Tooltip text={t("plugins.dangerModal.undone")} shouldShow={true}>
                             {({ onMouseEnter, onMouseLeave }) => (
                                 <Button
                                     size={Button.Sizes.SMALL}
@@ -362,7 +370,7 @@ export function openWarningModal(plugin: Plugin, pluginModalProps: ModalProps, o
                                     onMouseLeave={onMouseLeave}
                                     className="button-danger-background-no-margin"
                                 >
-                                    Confirm Reset
+                                    {t("plugins.dangerModal.confirmReset")}
                                 </Button>
                             )}
                         </Tooltip>

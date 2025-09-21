@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { PluginOptionSelect } from "@utils/types";
 import { React, Select, useState } from "@webpack/common";
 
@@ -40,9 +41,9 @@ export function SelectSetting({ option, pluginSettings, definedSettings, onChang
     }
 
     return (
-        <SettingsSection name={id} description={option.description} error={error}>
+        <SettingsSection name={id} description={option.description} label={option.label} error={error}>
             <Select
-                placeholder={option.placeholder ?? "Select an option"}
+                placeholder={option.placeholder ?? t("plugins.placeholder.select")}
                 options={option.options}
                 maxVisibleItems={5}
                 closeOnSelect={true}

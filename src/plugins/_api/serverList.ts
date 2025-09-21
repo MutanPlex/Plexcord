@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -24,6 +25,11 @@ export default definePlugin({
     name: "ServerListAPI",
     authors: [Devs.kemo],
     description: "Api required for plugins that modify the server list",
+
+    get displayDescription() {
+        return t("plugins.metadata.api.description.serverList");
+    },
+
     patches: [
         {
             find: "#{intl::DISCODO_DISABLED}",

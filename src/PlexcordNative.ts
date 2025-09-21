@@ -79,6 +79,10 @@ export default {
         openExternal: (url: string) => invoke<void>(IpcEvents.OPEN_EXTERNAL, url)
     },
 
+    i18n: {
+        updateMainLocale: (locale?: string) => invoke<boolean>(IpcEvents.UPDATE_MAIN_LOCALE, locale)
+    },
+
     csp: {
         /**
          * Note: Only supports full explicit matches, not wildcards.

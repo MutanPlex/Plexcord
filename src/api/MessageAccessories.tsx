@@ -20,6 +20,8 @@
 import ErrorBoundary from "@components/ErrorBoundary";
 import { JSX, ReactNode } from "react";
 
+import { t } from "./i18n";
+
 export type MessageAccessoryFactory = (props: Record<string, any>) => ReactNode;
 export type MessageAccessory = {
     render: MessageAccessoryFactory;
@@ -49,7 +51,7 @@ export function _modifyAccessories(
 ) {
     for (const [key, accessory] of accessories.entries()) {
         const res = (
-            <ErrorBoundary noop message={`Failed to render ${key} Message Accessory`} key={key}>
+            <ErrorBoundary noop message={t("message.accessory.error.render", { key })} key={key}>
                 <accessory.render {...props} />
             </ErrorBoundary>
         );

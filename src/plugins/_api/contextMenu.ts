@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -25,6 +26,10 @@ export default definePlugin({
     description: "API for adding/removing items to/from context menus.",
     authors: [Devs.Nuckyz, Devs.Ven, Devs.Kyuuhachi],
     required: true,
+
+    get displayDescription() {
+        return t("plugins.metadata.api.description.contextMenu");
+    },
 
     patches: [
         {

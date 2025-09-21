@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { CodeBlock } from "@components/CodeBlock";
 import { Flex } from "@components/Flex";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
@@ -38,9 +39,9 @@ const findCandidates = debounce(function ({ find, setModule, setError }) {
     const len = keys.length;
 
     if (len === 0)
-        setError("No match. Perhaps that module is lazy loaded?");
+        setError(t("patchHelper.error.noMatch"));
     else if (len !== 1)
-        setError("Multiple matches. Please refine your filter");
+        setError(t("patchHelper.error.multipleMatch"));
     else
         setModule([keys[0], candidates[keys[0]]]);
 });
@@ -103,8 +104,8 @@ function PatchHelper() {
     }
 
     return (
-        <SettingsTab title="Patch Helper">
-            <Forms.FormTitle>Full Patch</Forms.FormTitle>
+        <SettingsTab title={t("patchHelper.title")}>
+            <Forms.FormTitle>{t("patchHelper.fullPatch.label")}</Forms.FormTitle>
             <FullPatchInput
                 setFind={onFindChange}
                 setParsedFind={setParsedFind}
@@ -112,7 +113,7 @@ function PatchHelper() {
                 setReplacement={setReplacement}
             />
 
-            <Forms.FormTitle className={Margins.top8}>Find</Forms.FormTitle>
+            <Forms.FormTitle className={Margins.top8}>{t("patchHelper.find")}</Forms.FormTitle>
             <TextInput
                 type="text"
                 value={find}
@@ -120,7 +121,7 @@ function PatchHelper() {
                 error={findError}
             />
 
-            <Forms.FormTitle className={Margins.top8}>Match</Forms.FormTitle>
+            <Forms.FormTitle className={Margins.top8}>{t("patchHelper.match")}</Forms.FormTitle>
             <TextInput
                 type="text"
                 value={match}
@@ -147,14 +148,14 @@ function PatchHelper() {
 
             {!!(find && match && replacement) && (
                 <>
-                    <Forms.FormTitle className={Margins.top20}>Code</Forms.FormTitle>
+                    <Forms.FormTitle className={Margins.top20}>{t("patchHelper.code")}</Forms.FormTitle>
                     <CodeBlock lang="js" content={code} />
                     <Flex className={Margins.top16}>
                         <Button onClick={() => copyWithToast(code)}>
-                            Copy to Clipboard
+                            {t("patchHelper.copy.clipboard")}
                         </Button>
                         <Button onClick={() => copyWithToast("```ts\n" + code + "\n```")}>
-                            Copy as Codeblock
+                            {t("patchHelper.copy.codeblock")}
                         </Button>
                     </Flex>
                 </>
@@ -163,4 +164,4 @@ function PatchHelper() {
     );
 }
 
-export default IS_DEV ? wrapTab(PatchHelper, "PatchHelper") : null;
+export default IS_DEV ? wrapTab(PatchHelper, t("patchHelper.title")) : null;

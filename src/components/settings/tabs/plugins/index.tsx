@@ -37,6 +37,8 @@ import { JSX } from "react";
 import Plugins, { ExcludedPlugins, PluginMeta } from "~plugins";// Avoid circular dependency
 const { stopPlugin } = proxyLazy(() => require("plugins"));
 
+import { t, tJsx } from "@api/i18n";
+
 import { PluginCard } from "./PluginCard";
 import { StockPluginsCard } from "./PluginStatCards";
 
@@ -62,19 +64,19 @@ function ReloadRequiredCard({ required, enabledPlugins, openDisablePluginsModal,
             {required
                 ? (
                     <>
-                        <Forms.FormTitle tag="h5">Restart required!</Forms.FormTitle>
+                        <Forms.FormTitle tag="h5">{t("plugins.restart.required")}</Forms.FormTitle>
                         <Forms.FormText className={cl("dep-text")}>
-                            Restart now to apply new plugins and their settings
+                            {t("plugins.restart.description")}
                         </Forms.FormText>
                         <Button onClick={() => location.reload()} className={cl("restart-button")}>
-                            Restart
+                            {t("plugins.restart.button.restart")}
                         </Button>
                     </>
                 )
                 : (
                     <>
-                        <Forms.FormText>Press the cog wheel or info icon to get more info on a plugin</Forms.FormText>
-                        <Forms.FormText>Plugins with a cog wheel have settings you can modify!</Forms.FormText>
+                        <Forms.FormText>{t("plugins.infoModal.description")}</Forms.FormText>
+                        <Forms.FormText>{t("plugins.infoModal.settingsInfo")}</Forms.FormText>
                         <Forms.FormDivider className={`${Margins.top8} ${Margins.bottom8}`} />
 
                         <StockPluginsCard
@@ -96,7 +98,7 @@ function ReloadRequiredCard({ required, enabledPlugins, openDisablePluginsModal,
                         return openDisablePluginsModal(enabledPlugins, resetCheckAndDo);
                     }}
                 >
-                    Disable All Plugins
+                    {t("plugins.restart.button.disableAll")}
                 </Button>
             )}
         </Card>
@@ -115,27 +117,27 @@ function ExcludedPluginsList({ search }: { search: string; }) {
         .filter(([name]) => name.toLowerCase().includes(search));
 
     const ExcludedReasons: Record<"web" | "discordDesktop" | "plextron" | "desktop" | "dev", string> = {
-        desktop: "Discord Desktop app or Plextron",
-        discordDesktop: "Discord Desktop app",
-        plextron: "Plextron app",
-        web: "Plextron app and the Web version of Discord",
-        dev: "Developer version of Plexcord"
+        desktop: t("plugins.excluded.desktop"),
+        discordDesktop: t("plugins.excluded.discordDesktop"),
+        plextron: t("plugins.excluded.plextron"),
+        web: t("plugins.excluded.web"),
+        dev: t("plugins.excluded.dev")
     };
 
     return (
         <Text variant="text-md/normal" className={Margins.top16}>
             {matchingExcludedPlugins.length
                 ? <>
-                    <Forms.FormText>Are you looking for:</Forms.FormText>
+                    <Forms.FormText>{t("plugins.search.looking")}:</Forms.FormText>
                     <ul>
                         {matchingExcludedPlugins.map(([name, reason]) => (
                             <li key={name}>
-                                <b>{name}</b>: Only available on the {ExcludedReasons[reason]}
+                                <b>{name}</b>: {t("plugins.search.onlyAvailable")} {ExcludedReasons[reason]}
                             </li>
                         ))}
                     </ul>
                 </>
-                : "No plugins meet the search criteria."
+                : t("plugins.search.noCriteria")
             }
         </Text>
     );
@@ -148,10 +150,10 @@ function PluginSettings() {
     useCleanupEffect(() => {
         if (changes.hasChanges)
             Alerts.show({
-                title: "Restart required",
+                title: t("plugins.restart.required"),
                 body: (
                     <>
-                        <p>The following plugins require a restart:</p>
+                        <p>{t("plugins.restart.following")}</p>
                         <div>{changes.map((s, i) => (
                             <>
                                 {i > 0 && ", "}
@@ -160,8 +162,8 @@ function PluginSettings() {
                         ))}</div>
                     </>
                 ),
-                confirmText: "Restart now",
-                cancelText: "Later!",
+                confirmText: t("plugins.restart.button.now"),
+                cancelText: t("plugins.restart.button.later"),
                 onConfirm: () => location.reload()
             });
     }, []);
@@ -247,7 +249,7 @@ function PluginSettings() {
 
         if (isRequired) {
             const tooltipText = p.required || !depMap[p.name]
-                ? "This plugin is required for Plexcord to function."
+                ? t("plugins.required.this")
                 : makeDependencyList(depMap[p.name]?.filter(d => settings.plugins[d].enabled));
 
             requiredPlugins.push(
@@ -294,7 +296,7 @@ function PluginSettings() {
 
             if (!result) {
                 logger.error(`Error while stopping plugin ${plugin}`);
-                showErrorToast(`Error while stopping plugin ${plugin}`);
+                showErrorToast(t("plugins.error.stopping", { plugin }));
                 continue;
             }
 
@@ -303,15 +305,15 @@ function PluginSettings() {
 
         if (restartNeeded) {
             Alerts.show({
-                title: "Restart Required",
+                title: t("plugins.restart.required"),
                 body: (
                     <>
-                        <p style={{ textAlign: "center" }}>Some plugins require a restart to fully disable.</p>
-                        <p style={{ textAlign: "center" }}>Would you like to restart now?</p>
+                        <p style={{ textAlign: "center" }}>{t("plugins.restart.fully")}</p>
+                        <p style={{ textAlign: "center" }}>{t("plugins.restart.would")}</p>
                     </>
                 ),
-                confirmText: "Restart Now",
-                cancelText: "Later",
+                confirmText: t("plugins.restart.button.now"),
+                cancelText: t("plugins.restart.button.later"),
                 onConfirm: () => location.reload()
             });
         }
@@ -328,7 +330,7 @@ function PluginSettings() {
                 transitionState={warningModalProps.transitionState}
             >
                 <ModalHeader separator={false}>
-                    <Text className="text-danger">Dangerous Action</Text>
+                    <Text className="text-danger">{t("plugins.dangerModal.title")}</Text>
                     <ModalCloseButton onClick={warningModalProps.onClose} className="pc-modal-close-button" />
                 </ModalHeader>
                 <ModalContent>
@@ -339,13 +341,13 @@ function PluginSettings() {
                                 alt="Warning"
                             />
                             <Text className="warning-text">
-                                WARNING: You are about to disable <span>{enabledPlugins.length}</span> plugins!
+                                {tJsx("plugins.dangerModal.disablePlugins", { pluginCount: <span>{enabledPlugins.length}</span> })}
                             </Text>
                             <Text className="warning-text">
-                                THIS ACTION IS IRREVERSIBLE!
+                                {t("plugins.dangerModal.irreversible")}
                             </Text>
                             <Text className="text-normal margin-bottom">
-                                Are you absolutely sure you want to proceed? You can always enable them back later.
+                                {t("plugins.dangerModal.enableBack")}
                             </Text>
                         </Flex>
                     </Forms.FormSection>
@@ -358,7 +360,7 @@ function PluginSettings() {
                             onClick={warningModalProps.onClose}
                             look={Button.Looks.LINK}
                         >
-                            Cancel
+                            {t("plugins.restart.button.cancel")}
                         </Button>
                         <Flex className="button-group">
                             {!Settings.ignoreResetWarning && (
@@ -369,10 +371,10 @@ function PluginSettings() {
                                         Settings.ignoreResetWarning = true;
                                     }}
                                 >
-                                    Disable Warning Forever
+                                    {t("plugins.restart.button.disableWarning")}
                                 </Button>
                             )}
-                            <Tooltip text="This action cannot be undone. Are you sure?" shouldShow={true}>
+                            <Tooltip text={t("plugins.dangerModal.undone")} shouldShow={true}>
                                 {({ onMouseEnter, onMouseLeave }) => (
                                     <Button
                                         size={Button.Sizes.SMALL}
@@ -381,7 +383,7 @@ function PluginSettings() {
                                         onMouseEnter={onMouseEnter}
                                         onMouseLeave={onMouseLeave}
                                     >
-                                        Disable All
+                                        {t("plugins.restart.button.disableAll")}
                                     </Button>
                                 )}
                             </Tooltip>
@@ -405,23 +407,23 @@ function PluginSettings() {
     const enabledUserPlugins = enabledPlugins.filter(p => PluginMeta[p].userPlugin).length;
 
     return (
-        <SettingsTab title="Plugins">
+        <SettingsTab title={t("plugins.title")}>
 
             <ReloadRequiredCard required={changes.hasChanges} enabledPlugins={enabledPlugins} openDisablePluginsModal={openDisablePluginsModal} resetCheckAndDo={resetCheckAndDo} enabledStockPlugins={enabledStockPlugins} totalStockPlugins={totalStockPlugins} enabledUserPlugins={enabledUserPlugins} totalUserPlugins={totalUserPlugins} />
 
             <Forms.FormTitle tag="h5" className={classes(Margins.top20, Margins.bottom8)}>
-                Filters
+                {t("plugins.filters.label")}
             </Forms.FormTitle>
 
             <div className={classes(Margins.bottom20, cl("filter-controls"))}>
-                <TextInput autoFocus value={searchValue.value} placeholder="Search for a plugin..." onChange={onSearch} />
+                <TextInput autoFocus value={searchValue.value} placeholder={t("plugins.filters.placeholder")} onChange={onSearch} />
                 <div className={InputStyles.inputWrapper}>
                     <Select
                         options={[
-                            { label: "Show All", value: SearchStatus.ALL, default: true },
-                            { label: "Show Enabled", value: SearchStatus.ENABLED },
-                            { label: "Show Disabled", value: SearchStatus.DISABLED },
-                            { label: "Show New", value: SearchStatus.NEW }
+                            { label: t("plugins.filters.option.all"), value: SearchStatus.ALL, default: true },
+                            { label: t("plugins.filters.option.enabled"), value: SearchStatus.ENABLED },
+                            { label: t("plugins.filters.option.disabled"), value: SearchStatus.DISABLED },
+                            { label: t("plugins.filters.option.new"), value: SearchStatus.NEW }
                         ]}
                         serialize={String}
                         select={onStatusChange}
@@ -431,14 +433,14 @@ function PluginSettings() {
                 </div>
             </div>
 
-            <Forms.FormTitle className={Margins.top20}>Plugins</Forms.FormTitle>
+            <Forms.FormTitle className={Margins.top20}>{t("plugins.title")}</Forms.FormTitle>
 
             {plugins.length || requiredPlugins.length
                 ? (
                     <div className={cl("grid")}>
                         {plugins.length
                             ? plugins
-                            : <Text variant="text-md/normal">No plugins meet the search criteria.</Text>
+                            : <Text variant="text-md/normal">{t("plugins.search.noCriteria")}</Text>
                         }
                     </div>
                 )
@@ -449,12 +451,12 @@ function PluginSettings() {
             <Forms.FormDivider className={Margins.top20} />
 
             <Forms.FormTitle tag="h5" className={classes(Margins.top20, Margins.bottom8)}>
-                Required Plugins
+                {t("plugins.required.title")}
             </Forms.FormTitle>
             <div className={cl("grid")}>
                 {requiredPlugins.length
                     ? requiredPlugins
-                    : <Text variant="text-md/normal">No plugins meet the search criteria.</Text>
+                    : <Text variant="text-md/normal">{t("plugins.search.noCriteria")}</Text>
                 }
             </div>
         </SettingsTab >
@@ -464,9 +466,9 @@ function PluginSettings() {
 function makeDependencyList(deps: string[]) {
     return (
         <>
-            <Forms.FormText>This plugin is required by:</Forms.FormText>
+            <Forms.FormText>{t("plugins.required.by")}</Forms.FormText>
             {deps.map((dep: string) => <Forms.FormText key={dep} className={cl("dep-text")}>{dep}</Forms.FormText>)}
         </>
     );
 }
-export default wrapTab(PluginSettings, "Plugins");
+export default wrapTab(PluginSettings, t("plugins.title"));

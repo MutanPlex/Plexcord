@@ -18,6 +18,7 @@
 */
 
 import * as DataStore from "@api/DataStore";
+import { t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { Settings } from "@api/Settings";
 import { Alerts, OAuth2AuthorizeModal, UserStore } from "@webpack/common";
@@ -41,13 +42,13 @@ export async function checkCloudUrlCsp() {
         return true;
     }
 
-    const res = await PlexcordNative.csp.requestAddOverride(Settings.cloud.url, ["connect-src"], "Cloud Sync");
+    const res = await PlexcordNative.csp.requestAddOverride(Settings.cloud.url, ["connect-src"], t("cloud.override"));
     if (res === "ok") {
         Alerts.show({
-            title: "Cloud Integration enabled",
-            body: `${host} has been added to the whitelist. Please restart the app for the changes to take effect.`,
-            confirmText: "Restart now",
-            cancelText: "Later!",
+            title: t("cloud.notification.enabled"),
+            body: t("cloud.notification.host", { host }),
+            confirmText: t("cloud.button.confirm"),
+            cancelText: t("cloud.button.later"),
             onConfirm: relaunch
         });
     }
@@ -111,8 +112,8 @@ export async function authorizeCloud() {
         var { clientId, redirectUri } = await oauthConfiguration.json();
     } catch {
         showNotification({
-            title: "Cloud Integration",
-            body: "Setup failed (couldn't retrieve OAuth configuration)."
+            title: t("cloud.notification.title"),
+            body: t("cloud.error.setup")
         });
         Settings.cloud.authenticated = false;
         return;
@@ -141,22 +142,22 @@ export async function authorizeCloud() {
                     cloudLogger.info("Authorized with secret");
                     await setAuthorization(secret);
                     showNotification({
-                        title: "Cloud Integration",
-                        body: "Cloud integrations enabled!"
+                        title: t("cloud.notification.title"),
+                        body: t("cloud.notification.enabled")
                     });
                     Settings.cloud.authenticated = true;
                 } else {
                     showNotification({
-                        title: "Cloud Integration",
-                        body: "Setup failed (no secret returned?)."
+                        title: t("cloud.notification.title"),
+                        body: t("cloud.error.secret")
                     });
                     Settings.cloud.authenticated = false;
                 }
             } catch (e: any) {
                 cloudLogger.error("Failed to authorize", e);
                 showNotification({
-                    title: "Cloud Integration",
-                    body: `Setup failed (${e.toString()}).`
+                    title: t("cloud.notification.title"),
+                    body: t("cloud.error.string", { error: e.toString() })
                 });
                 Settings.cloud.authenticated = false;
             }

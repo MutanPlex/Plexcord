@@ -18,6 +18,7 @@
 */
 
 import * as DataStore from "@api/DataStore";
+import { t, tJsx } from "@api/i18n";
 import { Settings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Flex } from "@components/Flex";
@@ -134,7 +135,7 @@ export function NotificationLog({ log, pending }: { log: PersistentNotificationD
             <div className={cl("container")}>
                 <div className={cl("empty")} />
                 <Forms.FormText style={{ textAlign: "center" }}>
-                    No notifications yet
+                    {t("notifications.noYet")}
                 </Forms.FormText>
             </div>
         );
@@ -157,7 +158,7 @@ function LogModal({ modalProps, close }: { modalProps: ModalProps; close(): void
     return (
         <ModalRoot {...modalProps} size={ModalSize.LARGE} className={cl("modal")}>
             <ModalHeader>
-                <Text variant="heading-lg/semibold" style={{ flexGrow: 1 }}>Notification Log</Text>
+                <Text variant="heading-lg/semibold" style={{ flexGrow: 1 }}>{t("notifications.log.title")}</Text>
                 <ModalCloseButton onClick={close} />
             </ModalHeader>
 
@@ -168,7 +169,7 @@ function LogModal({ modalProps, close }: { modalProps: ModalProps; close(): void
             <ModalFooter>
                 <Flex>
                     <Button onClick={openNotificationSettingsModal}>
-                        Notification Settings
+                        {t("notifications.settings")}
                     </Button>
 
                     <Button
@@ -176,19 +177,22 @@ function LogModal({ modalProps, close }: { modalProps: ModalProps; close(): void
                         color={Button.Colors.RED}
                         onClick={() => {
                             Alerts.show({
-                                title: "Are you sure?",
-                                body: `This will permanently remove ${log.length} notification${log.length === 1 ? "" : "s"}. This action cannot be undone.`,
+                                title: t("notifications.log.sure"),
+                                body: tJsx("notifications.log.permamently", {
+                                    count: log.length,
+                                    s: log.length !== 1 ? "s" : ""
+                                }),
                                 async onConfirm() {
                                     await DataStore.set(KEY, []);
                                     signals.forEach(x => x());
                                 },
-                                confirmText: "Do it!",
+                                confirmText: t("notifications.log.clear"),
                                 confirmColor: "pc-notification-log-danger-btn",
-                                cancelText: "Nevermind"
+                                cancelText: t("notifications.log.cancel")
                             });
                         }}
                     >
-                        Clear Notification Log
+                        {t("notifications.log.clear")}
                     </Button>
                 </Flex>
             </ModalFooter>

@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { User } from "@plexcord/discord-types";
@@ -35,7 +36,7 @@ const AccountPanelContextMenu = ErrorBoundary.wrap(() => {
         >
             <Menu.MenuItem
                 id="pc-ap-view-alternate-popout"
-                label={prioritizeServerProfile ? "View Account Profile" : "View Server Profile"}
+                label={prioritizeServerProfile ? t("plugin.accountPanelServerProfile.context.account") : t("plugin.accountPanelServerProfile.context.server")}
                 disabled={getCurrentChannel()?.getGuildId() == null}
                 action={e => {
                     openAlternatePopout = true;
@@ -44,7 +45,7 @@ const AccountPanelContextMenu = ErrorBoundary.wrap(() => {
             />
             <Menu.MenuCheckboxItem
                 id="pc-ap-prioritize-server-profile"
-                label="Prioritize Server Profile"
+                label={t("plugin.accountPanelServerProfile.context.prioritize")}
                 checked={prioritizeServerProfile}
                 action={() => settings.store.prioritizeServerProfile = !prioritizeServerProfile}
             />
@@ -55,8 +56,13 @@ const AccountPanelContextMenu = ErrorBoundary.wrap(() => {
 const settings = definePluginSettings({
     prioritizeServerProfile: {
         type: OptionType.BOOLEAN,
-        description: "Prioritize Server Profile when left clicking your account panel",
-        default: false
+        default: false,
+        get label() {
+            return t("plugin.accountPanelServerProfile.option.prioritize.label");
+        },
+        get description() {
+            return t("plugin.accountPanelServerProfile.option.prioritize.description");
+        }
     }
 });
 
@@ -65,6 +71,10 @@ export default definePlugin({
     description: "Right click your account panel in the bottom left to view your profile in the current server",
     authors: [Devs.Nuckyz, Devs.relitrix],
     settings,
+
+    get displayDescription() {
+        return t("plugin.accountPanelServerProfile.description");
+    },
 
     patches: [
         {

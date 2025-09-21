@@ -6,8 +6,9 @@
  */
 
 import { NativeSettings } from "@main/settings";
+import { t } from "@main/utils/i18n";
 import { IpcEvents } from "@shared/IpcEvents";
-import { dialog, ipcMain, IpcMainInvokeEvent } from "electron";
+import { app, dialog, ipcMain, IpcMainInvokeEvent } from "electron";
 
 import { CspPolicies, ImageAndCssSrc } from ".";
 
@@ -37,11 +38,13 @@ function validate(url: string, directives: string[]) {
 function getMessage(url: string, directives: string[], callerName: string) {
     const domain = new URL(url).host;
 
-    const message = `${callerName} wants to allow connections to ${domain}`;
+    const message = t("csp.wants.caller", { callerName, domain });
+
+    const appName = app.getName().toLowerCase().includes("discord") ? "Discord" : "Plextron";
 
     let detail =
-        `Unless you recognise and fully trust ${domain}, you should cancel this request!\n\n` +
-        `You will have to fully close and restart ${IS_DISCORD_DESKTOP ? "Discord" : "Vesktop"} for the changes to take effect.`;
+        `${t("csp.wants.detail", { domain })}\n\n` +
+        t("csp.wants.restart", { appName });
 
     if (directives.length === 1 && directives[0] === "connect-src") {
         return { message, detail };
@@ -52,11 +55,11 @@ function getMessage(url: string, directives: string[], callerName: string) {
         .map(type => {
             switch (type) {
                 case "img-src":
-                    return "Images";
+                    return t("csp.wants.type.images");
                 case "style-src":
-                    return "CSS & Themes";
+                    return t("csp.wants.type.styles");
                 case "font-src":
-                    return "Fonts";
+                    return t("csp.wants.type.fonts");
                 default:
                     throw new Error(`Illegal CSP directive: ${type}`);
             }
@@ -64,7 +67,7 @@ function getMessage(url: string, directives: string[], callerName: string) {
         .sort()
         .join(", ");
 
-    detail = `The following types of content will be allowed to load from ${domain}:\n${contentTypes}\n\n${detail}`;
+    detail = `${t("csp.wants.content", { domain })}:\n${contentTypes}\n\n${detail}`;
 
     return { message, detail };
 }
@@ -83,11 +86,11 @@ async function addCspRule(_: IpcMainInvokeEvent, url: string, directives: string
     const { checkboxChecked, response } = await dialog.showMessageBox({
         ...getMessage(url, directives, callerName),
         type: callerName ? "info" : "warning",
-        title: "Plexcord Host Permissions",
-        buttons: ["Cancel", "Allow"],
+        title: "Plexcord " + t("csp.wants.title"),
+        buttons: [t("csp.wants.button.cancel"), t("csp.wants.button.allow")],
         defaultId: 0,
         cancelId: 0,
-        checkboxLabel: `I fully trust ${domain} and understand the risks of allowing connections to it.`,
+        checkboxLabel: t("csp.wants.understand", { domain }),
         checkboxChecked: false,
     });
 

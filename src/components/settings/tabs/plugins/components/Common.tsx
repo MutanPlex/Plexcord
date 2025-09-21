@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { classes } from "@utils/misc";
 import { wordsFromCamel, wordsToTitle } from "@utils/text";
@@ -31,22 +32,23 @@ export type ComponentSettingProps<T extends Omit<PluginOptionBase, "description"
 export function resolveError(isValidResult: boolean | string) {
     if (typeof isValidResult === "string") return isValidResult;
 
-    return isValidResult ? null : "Invalid input provided";
+    return isValidResult ? null : t("plugins.error.invalidInput");
 }
 
 interface SettingsSectionProps extends PropsWithChildren {
     name: string;
     description: string;
+    label?: string;
     error?: string | null;
     inlineSetting?: boolean;
 }
 
-export function SettingsSection({ name, description, error, inlineSetting, children }: SettingsSectionProps) {
+export function SettingsSection({ name, description, label, error, inlineSetting, children }: SettingsSectionProps) {
     return (
         <div className={cl("section")}>
             <div className={classes(cl("content"), inlineSetting && cl("inline"))}>
                 <div className={cl("label")}>
-                    {name && <Text className={cl("title")} variant="text-md/medium">{wordsToTitle(wordsFromCamel(name))}</Text>}
+                    {name && <Text className={cl("title")} variant="text-md/medium">{label || wordsToTitle(wordsFromCamel(name))}</Text>}
                     {description && <Text className={cl("description")} variant="text-sm/normal">{description}</Text>}
                 </div>
                 {children}

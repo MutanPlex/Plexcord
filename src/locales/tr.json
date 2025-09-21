@@ -1,0 +1,728 @@
+{
+    "settings": {
+        "title": "Ayarları",
+        "language": {
+            "selector": {
+                "label": "Dil",
+                "description": "Plexcord için tercih ettiğiniz dili seçin.",
+                "placeholder": "Dil Seç"
+            }
+        },
+        "location": {
+            "label": "Ayarlar Konumu",
+            "description": "Plexcord ayarlar bölümünün nereye konulacağını belirler",
+            "top": "En üste",
+            "nitro": {
+                "above": "Nitro bölümünün üstüne",
+                "below": "Nitro bölümünün altına"
+            },
+            "activity": {
+                "above": "Etkinlik Ayarlarının üstüne",
+                "below": "Etkinlik Ayarlarının altına"
+            },
+            "bottom": "En alta"
+        },
+        "switches": {
+            "useQuickCss": {
+                "label": "Özel CSS'yi Etkinleştir",
+                "description": "Özel CSS dosyanızı yükler"
+            },
+            "enableReactDevtools": {
+                "label": "React Geliştirici Araçlarını Etkinleştir",
+                "description": "Tamamen yeniden başlatma gerektirir"
+            },
+            "frameless": {
+                "label": "Pencere çerçevesini devre dışı bırak",
+                "description": "Tamamen yeniden başlatma gerektirir"
+            },
+            "winNativeTitleBar": {
+                "label": "Discord'un özel başlık çubuğu yerine Windows'un yerel başlık çubuğunu kullan",
+                "description": "Tamamen yeniden başlatma gerektirir"
+            },
+            "transparent": {
+                "label": "Pencere şeffaflığını etkinleştir",
+                "description": "Şeffaflığı destekleyen bir temaya ihtiyacınız var, aksi takdirde hiçbir şey yapmaz. PENCEREYİ YENİDEN BOYUTLANDIRILAMAZ HALE GETİRECEK!! Tamamen yeniden başlatma gerektirir"
+            },
+            "winCtrlQ": {
+                "label": "Discord'u kapatmak için Ctrl+Q kısayolunu kaydet (Alt+F4'e alternatif)",
+                "description": "Tamamen yeniden başlatma gerektirir"
+            },
+            "disableMinSize": {
+                "label": "Minimum pencere boyutunu devre dışı bırak",
+                "description": "Tamamen yeniden başlatma gerektirir"
+            }
+        },
+        "quickActions": {
+            "title": "Hızlı İşlemler",
+            "notificationLog": "Bildirim Günlüğü",
+            "editQuickCSS": "QuickCSS Düzenle",
+            "relaunchDiscord": "Discord'u Yeniden Başlat",
+            "openSettingsFolder": "Ayarlar Klasörünü Aç",
+            "viewSourceCode": "Kaynak Kodunu Görüntüle"
+        },
+        "specialCards": {
+            "donations": {
+                "title": "Bağışlar",
+                "subtitle": "Bağışınız için teşekkürler!",
+                "description": "@mutanplex ile mesajlaşarak ayrıcalıklarınızı istediğiniz zaman yönetebilirsiniz.",
+                "button": "Bağış"
+            },
+            "supportProject": {
+                "title": "Projeyi Destekle",
+                "description": "Lütfen bağış yaparak Plexcord'un geliştirilmesini desteklemeyi düşünün!"
+            },
+            "contributions": {
+                "title": "Katkılar",
+                "subtitle": "Katkınız için teşekkürler!",
+                "description": "Plexcord'a katkıda bulunduğunuz için artık havalı bir rozetiniz var!",
+                "buttonTitle": "Katkıda bulunduklarınızı görün"
+            }
+        },
+        "settingsSection": {
+            "title": "Ayarlar",
+            "hint": "İpucu: Bu ayarlar bölümünün konumunu <link>Ayarlar eklentisinin ayarlarından</link> değiştirebilirsiniz!",
+            "hintParts": {
+                "prefix": "İpucu: Bu ayarlar bölümünün konumunu ",
+                "linkText": "Ayarlar eklentisinin ayarlarından",
+                "suffix": " değiştirebilirsiniz!"
+            }
+        },
+        "notifications": {
+            "title": "Bildirimleri",
+            "settings": "Bildirim Ayarları",
+            "viewLog": "Bildirim Geçmişini Görüntüle",
+            "permissions": {
+                "denied": {
+                    "title": "Masaüstü Bildirim İzni reddedildi",
+                    "label": "Bildirim İzinlerini reddettiniz. Masaüstü bildirimleri çalışmayacak!"
+                }
+            },
+            "style": {
+                "label": "Bildirim Stili",
+                "description": "Bazı eklentiler size bildirimler gösterebilir. Bunlar iki tarzda gelir:",
+                "plexcord": "Plexcord Bildirimleri",
+                "plexcordDesc": "Bunlar uygulama içi bildirimlerdir",
+                "desktop": "Masaüstü Bildirimleri",
+                "desktopDesc": "Yerel Masaüstü bildirimleri (ping aldığınızda olduğu gibi)",
+                "onlyWhenNotFocused": "Sadece Discord odaklanmadığında Masaüstü bildirimlerini kullan",
+                "always": {
+                    "desktop": "Her zaman Masaüstü bildirimlerini kullan",
+                    "plexcord": "Her zaman Plexcord bildirimlerini kullan"
+                }
+            },
+            "positions": {
+                "label": "Bildirim Pozisyonu",
+                "right": {
+                    "bottom": "Aşağı Sağ",
+                    "top": "Yukarı Sağ"
+                }
+            },
+            "timeout": {
+                "label": "Bildirim Zaman Aşımı",
+                "description": "Bildirimlerin otomatik olarak kaybolmadan önce ekranda kalma süresi (saniye cinsinden)"
+            },
+            "logLimit": {
+                "label": "Bildirim Günlüğü Limiti",
+                "description": "Bildirim günlüğünde saklanacak maksimum bildirim sayısı. Bildirim günlüğünü devre dışı bırakmak için {{disable}} olarak ayarlayın ve eski bildirimleri otomatik olarak kaldırmamak için {{unlimited}} olarak ayarlayın"
+            }
+        },
+        "macVibrancy": {
+            "title": "Pencere Titreme Stili (Yeniden başlatma gerekli)",
+            "placeholder": "Pencere titreme stili",
+            "style": {
+                "no": "Titreme yok",
+                "underPage": "Sayfa Altında (Pencere tonlama)",
+                "content": "İçerik",
+                "window": "Pencere",
+                "selection": "Seçim",
+                "titlebar": "Başlık çubuğu",
+                "header": "Başlık",
+                "sidebar": "Kenar çubuğu",
+                "tooltip": "Araç ipucu",
+                "menu": "Menü",
+                "popover": "Açılır pencere",
+                "fullscreen-ui": "Tam ekran UI (şeffaf ama biraz mat)",
+                "hud": "HUD (En şeffaf)"
+            }
+        }
+    },
+    "plugins": {
+        "title": "Eklentiler",
+        "new": "Yeni",
+        "restart": {
+            "apply": "Değişiklikleri uygulamak için yeniden başlatın!",
+            "required": "Yeniden başlatma gerekli!",
+            "description": "Yeni eklentileri ve ayarları uygulamak için şimdi yeniden başlatın",
+            "following": "Aşağıdaki eklentiler yeniden başlatma gerektiriyor:",
+            "fully": "Bazı eklentilerin tamamen devre dışı bırakılması için yeniden başlatma gerekir.",
+            "would": "Yeniden başlatmak ister misiniz?",
+            "button": {
+                "restart": "Yeniden Başlat",
+                "later": "Sonra!",
+                "now": "Şimdi Yeniden Başlat",
+                "cancel": "İptal",
+                "disableWarning": "Uyarıları Devre Dışı Bırak",
+                "disableAll": "Tümünü Devre Dışı Bırak",
+                "reset": "Sıfırla"
+            }
+        },
+        "contributor": {
+            "contributed": "katkıda bulundu",
+            "modal": {
+                "contributionsInfo": "{{userName}} {{contributionCount}} eklenti geliştirerek {{continuedLink}}.",
+                "noContributions": "{{userName}} henüz eklenti geliştirmedi. Büyük olasılıkla farklı şekillerde {{contributedLink}}!"
+            }
+        },
+        "infoModal": {
+            "description": "Dişli çarkı veya bilgi simgesine basarak bir eklenti hakkında daha fazla bilgi edinebilirsiniz",
+            "settingsInfo": "Dişli çarkı olan eklentilerin değiştirebileceğiniz ayarları vardır!",
+            "disableAll": "Tüm Eklentileri Devre Dışı Bırak"
+        },
+        "error": {
+            "invalidInput": "Geçersiz girdi sağlandı",
+            "stopping": "{{plugin}} eklentisi durdurulurken bir sorun oluştu",
+            "starting": "{{plugin}} eklentisi başlatılırken bir sorun oluştu",
+            "startDependency": "Bağımlılıklar başlatılırken bir sorun oluştu: {{failures}}",
+            "infoRender": "Bu eklentinin özel Bilgi Bileşeni render edilirken bir hata oluştu"
+        },
+        "placeholder": {
+            "number": "Bir sayı girin",
+            "select": "Bir seçenek seçin",
+            "text": "Bir değer girin"
+        },
+        "excluded": {
+            "desktop": "Discord Masaüstü uygulaması veya Plextron",
+            "discordDesktop": "Discord Masaüstü uygulaması",
+            "plextron": "Plextron uygulaması",
+            "web": "Plextron uygulaması ve Discord'un Web sürümü",
+            "dev": "Plexcord'un Geliştirici sürümü"
+        },
+        "search": {
+            "looking": "Aradığın şey bu mu",
+            "onlyAvailable": "Sadece şurada mevcut ->",
+            "noCriteria": "Arama kriterlerine uygun eklenti bulunamadı"
+        },
+        "required": {
+            "title": "Gerekli Eklentiler",
+            "this": "Bu eklenti Plexcord'un çalışması için gereklidir.",
+            "by": "Bu eklenti şunun çalışması için gerekli:"
+        },
+        "dangerModal": {
+            "title": "Tehlikeli Eylem",
+            "disablePlugins": "DİKKAT: {{pluginCount}} eklentiyi devre dışı bırakmak üzeresiniz!",
+            "irreversible": "BU EYLEM GERİ ALINAMAZ!",
+            "enableBack": "Devam etmek istediğinizden kesinlikle emin misiniz? Daha sonra tekrardan aktifleştirebilirsiniz.",
+            "undone": "Bu eylem geri alınamaz. Emin misin?",
+            "resetDescription": "{{pluginName}} eklenti ayarlarını varsayılan değerlerine sıfırlamak üzeresiniz.",
+            "confirmReset": "Onayla ve Sıfırla",
+            "cancel": "İptal",
+            "resetText": "Eğer devam etmek istediğinizden eminseniz, {{confirmReset}} butonuna tıklayın. Aksi takdirde, {{cancel}} butonuna tıklayın."
+        },
+        "filters": {
+            "label": "Filtreler",
+            "placeholder": "Eklenti ara...",
+            "option": {
+                "all": "Hepsi",
+                "enabled": "Aktif Olanlar",
+                "disabled": "Devre Dışı Olanlar",
+                "new": "Yeniler"
+            }
+        },
+        "pluginModal": {
+            "noSettings": "Bu eklenti değiştirebileceğiniz ayarlara sahip değil.",
+            "authors": "Yazarlar",
+            "settings": "Ayarlar",
+            "successfulReset": "{{plugin}} eklentisinin ayarları başarıyla sıfırlandı.",
+            "enabledStock": "Aktif Stok Eklentiler",
+            "totalStock": "Toplam Stok Eklentiler",
+            "enabledUser": "Aktif Kullanıcı Eklentileri",
+            "totalUser": "Toplam Kullanıcı Eklentileri"
+        },
+        "metadata": {
+            "api": {
+                "description": {
+                    "memberListDecorators": "Üye listesine dekoratör eklemek için API (hem sunucularda hem DM’lerde)",
+                    "messageAccessories": "Mesajlara aksesuar eklemek için API",
+                    "messageDecorations": "Mesajlara dekoratör eklemek için API",
+                    "chatInputButtons": "Sohbet girişine buton eklemek için API",
+                    "commands": "Komut kullanan herhangi bir şeyin ihtiyaç duyduğu API",
+                    "contextMenu": "Bağlam menüsüne öğe eklemek/kaldırmak için API",
+                    "dynamicImageModal": "Resim modalini açarken genişlik veya yüksekliği atlamanıza olanak tanır",
+                    "menuItemDemangler": "Discord Menü Öğesini daha okunabilir yapar",
+                    "messageEvents": "Mesaj olaylarını kullanan herhangi bir şeyin ihtiyaç duyduğu API",
+                    "messagePopover": "Mesaj açılır penceresine buton eklemek için API",
+                    "messageUpdater": "Mesajları güncellemek ve yeniden işlemek için API",
+                    "nicknameIcons": "Profillerde kullanıcı adlarına simge eklemek için API",
+                    "notices": "Bildirimlerin otomatik olarak kapatılmasını düzeltir",
+                    "serverList": "Sunucu listesini değiştiren eklentiler için gerekli API",
+                    "userSettings": "Discord'un kullanıcı ayarlarını, grupları ve isimleri ortaya çıkarmak için yamalar"
+                }
+            },
+            "badges": {
+                "description": "Kullanıcılara rozet eklemek için API",
+                "contributor": {
+                    "plexcord": "Plexcord Katılımcısı",
+                    "vencord": "Vencord Katılımcısı"
+                },
+                "context": {
+                    "title": "Rozet Seçenekleri",
+                    "copy": {
+                        "name": "Rozetin Adını Kopyala",
+                        "link": "Rozetin Resim Bağlantısını Kopyala"
+                    },
+                    "refetch": {
+                        "button": "Rozetleri Yenile",
+                        "success": "Rozetler başarıyla yenilendi!"
+                    }
+                },
+                "modal": {
+                    "title": "Plexcord Destekçisi",
+                    "special": "Bu rozet, Plexcord bağışçıları için özel bir ayrıcalıktır.",
+                    "description": "Lütfen bağışçı olarak Plexcord’un geliştirilmesini desteklemeyi düşünün. Bu bizim için çok değerli olur!!"
+                }
+            },
+            "settings": {
+                "name": "Ayarlar",
+                "description": "Ayarlar arayüzünü ve hata ayıklama bilgisi ekler",
+                "option": {
+                    "language": {
+                        "label": "Dil",
+                        "description": "Plexcord için tercih ettiğiniz dili seçin."
+                    },
+                    "settingsLocation": {
+                        "label": "Ayarlar Konumu",
+                        "description": "Plexcord ayarlar bölümünün nereye konulacağını belirler"
+                    }
+                }
+            },
+            "noTrack": {
+                "name": "NoTrack",
+                "description": "Discord'un takip sistemini (analitik/'science'), metriklerini ve Sentry çökme raporlamasını devre dışı bırakır",
+                "option": {
+                    "disableAnalytics": {
+                        "label": "Analizi Kapat",
+                        "description": "Discord'un takip sistemini (analitik/'science') metriklerini ve Sentry çökme raporlamasını devre dışı bırak"
+                    }
+                }
+            },
+            "supportHelper": {
+                "name": "Destek Yardımcısı",
+                "description": "Sana destek sağlamamıza yardımcı olur",
+                "commands": {
+                    "description": {
+                        "debug": "Plexcord hata ayıklama bilgilerini gönder",
+                        "plugins": "Plexcord eklenti listesini gönder"
+                    }
+                },
+                "modals": {
+                    "outdated": {
+                        "title": "Bekle!",
+                        "body": "Eski bir Plexcord sürümü kullanıyorsun! Büyük ihtimalle sorunların zaten çözülmüştür.",
+                        "footer": "Lütfen destek istemeden önce güncelleme yap!",
+                        "button": {
+                            "cancel": "Güncellemeleri Gör",
+                            "confirm": "Şimdi Güncelle ve Yeniden Başlat",
+                            "secondaryConfirm": "Ne yaptığımı biliyorum veya güncelleyemem"
+                        }
+                    },
+                    "updater": {
+                        "title": "Bekle!",
+                        "body": "Harici olarak güncellenmiş bir Plexcord sürümü kullanıyorsun, bu sürüm için destek sağlamıyoruz!",
+                        "footer": "Lütfen ya {{officially}} geç ya da destek için paket sağlayıcına başvur.",
+                        "officially": "resmi olarak desteklenen Plexcord sürümüne",
+                        "button": {
+                            "cancel": "İptal",
+                            "confirm": "İndirme Sayfasını Görüntüle",
+                            "now": "Şimdi Güncelle"
+                        },
+                        "toast": {
+                            "success": "Başarılı! Yeniden başlatılıyor...",
+                            "already": "Zaten güncel!",
+                            "failed": "Güncelleme başarısız oldu :("
+                        }
+                    },
+                    "custom": {
+                        "title": "Bekle!",
+                        "header": "Plexcord'un özel bir sürümünü kullanıyorsun, bu sürüm için destek sağlamıyoruz!",
+                        "body": "Sadece {{officialBuild}} için destek sağlıyoruz. Ya {{switch}} ya da sorununla kendin ilgilen.",
+                        "footer": "Bu kuralı görmezden gelirsen destek alma hakkın iptal edilecektir.",
+                        "official": "resmi sürümler",
+                        "switch": "resmi bir sürüme geç",
+                        "button": {
+                            "confirm": "Anladım",
+                            "secondaryConfirm": "Bir daha gösterme"
+                        }
+                    }
+                },
+                "button": {
+                    "debug": "/plexcord-debug komutunu çalıştır",
+                    "plugins": "/plexcord-plugins komutunu çalıştır",
+                    "snippet": "Kod parçasını çalıştır"
+                },
+                "toast": {
+                    "success": "Başarılı!",
+                    "failed": "Kod parçası çalıştırılamadı :("
+                },
+                "dm": {
+                    "warning": "Lütfen destek için Plexcord eklenti geliştiricilerine özel mesaj göndermeyin!{{br}}Bunun yerine {{support}} sunucusuna katılarak Plexcord destek kanalını kullanabilirsiniz: {{channel}}"
+                }
+            }
+        }
+    },
+    "patchHelper": {
+        "title": "Yama Yardımcısı",
+        "fullPatch": {
+            "label": "Tam Yama",
+            "description": "Alanları doldurmak için tam JSON yamanızı buraya yapıştırın"
+        },
+        "find": "Bul",
+        "match": "Eşleşme",
+        "replacement": "Değiştir",
+        "code": "Kod",
+        "group": "Grup",
+        "diff": "Fark",
+        "module": "Modül",
+        "compile": "Derle",
+        "compiled": "Derleme başarılı",
+        "copy": {
+            "clipboard": "Panoya Kopyala",
+            "codeblock": "Kod Bloğu Olarak Kopyala"
+        },
+        "error": {
+            "noMatch": "Eşleşme bulunamadı. Belki de o modül tembel (lazy) yükleniyordur.",
+            "multipleMatch": "Birden fazla eşleşme bulundu. Lütfen daha spesifik bir arama deseni kullanın.",
+            "noFind": "'Bul' alanı yok.",
+            "noReplacement": "'Değiştir' alanı yok.",
+            "invalidReplacement": "Değiştir alanı geçersiz",
+            "replacementMatch": "'replacement.match' alanı yok",
+            "replacementReplace": "'replacement.replace' alanı yok",
+            "replacementMustFunction": "Değiştirme bir fonksiyon olmalıdır"
+        },
+        "cheatSheet": {
+            "title": "Kopya Kağıdı",
+            "identifiers": "Tanımlayıcılarla (değişken adları, sınıf adları vb.) eşleşen özel regex kaçış dizisi",
+            "dollar": "$ ekler",
+            "entireMatch": "Tüm eşleşmeyi ekler",
+            "beforeMatch": "Eşleşmeden önceki alt dizeyi ekler",
+            "afterMatch": "Eşleşmeden sonraki alt dizeyi ekler",
+            "nthGroup": "n'inci yakalama grubunu ekler ($1, $2...)",
+            "pluginInstance": "Eklenti örneğini ekler"
+        },
+        "replacementEval": {
+            "label": "Fonksiyon olarak işle",
+            "description": "İşaretlenirse 'Değiştir' alanı eval edilip bir fonksiyon olarak kullanılacaktır."
+        }
+    },
+    "sync": {
+        "title": "Yedekle ve Geri Yükle",
+        "warning": "Uyarı",
+        "warningText": "Bir ayar dosyasını içe aktarmak mevcut ayarlarınızı geçersiz kılacaktır.",
+        "description": "Plexcord ayarlarınızı bir JSON dosyası olarak içe ve dışa aktarabilirsiniz. Bu sayede ayarlarınızı kolayca başka bir cihaza taşıyabilir veya Plexcord ya da Discord’u yeniden yükledikten sonra ayarlarınızı geri yükleyebilirsiniz.",
+        "successful": "Ayarlar başarıyla içeri aktarıldı. Değişikliklerin etkili olması için uygulamayı yeniden başlatın!",
+        "error": {
+            "failure": "Ayarları içe aktarma başarısız oldu: {{error}}"
+        },
+        "settings": {
+            "text": "Dışarı aktarma şu ayarları içerir:",
+            "quickcss": "Özel QuickCSS",
+            "theme": "Tema Bağlantıları",
+            "plugins": "Eklenti Ayarları",
+            "datastores": "Eklenti Veri Depoları (örn. Timezones veya IRememberYou)"
+        },
+        "button": {
+            "import": "İçe Aktar",
+            "export": "Dışa Aktar"
+        }
+    },
+    "cloud": {
+        "text": "Cloud",
+        "title": "Ayar Senkronizasyonu",
+        "override": "Bulut Senkronizasyonu",
+        "description": "Ayarlarınızı bulutla senkronize edin. Bu, birden fazla cihaz arasında minimum çabayla kolay senkronizasyon sağlar.",
+        "settings": "Bulut Ayarları",
+        "successful": "Ayarlarınız başarıyla buluta senkronize edildi.",
+        "updated": "Ayarlarınız güncellendi! Değişikliklerin tam olarak uygulanması için buraya tıklayarak yeniden başlatın!",
+        "deleted": "Ayarlar buluttan silindi!",
+        "reauth": "Başka bir istemcide bulut entegrasyonlarının etkin olduğunu fark ettik! Sınırlamalar nedeniyle, devam etmek için yeniden kimlik doğrulaması yapmanız gerekecek. Devam etmek için ayarlar sayfasına gitmek üzere buraya tıklayın!",
+        "error": {
+            "setup": "Kurulum başarısız oldu (OAuth yapılandırması alınamadı).",
+            "secret": "Kurulum başarısız oldu (hiçbir gizli anahtar döndürülmedi).",
+            "string": "Kurulum başarısız oldu ({{error}}).",
+            "connect": "Bulut senkronizasyonu, bu hesabın Plexcord Cloud Uygulamasına bağlı olmaması nedeniyle devre dışı bırakıldı. Bu hesabı Bulut Ayarları'nda bağlayarak tekrar etkinleştirebilirsiniz. (not: tercihlerinizi ayrı olarak saklayacaktır)",
+            "noSettings": "Bulutta ayar bulunamadı.",
+            "uptodate": "Ayarlarınız güncel.",
+            "localNewer": "Yerel ayarlarınız bulut ayarlarından daha yenidir.",
+            "delete": "Ayarlar silinemedi ({{error}}).",
+            "api": {
+                "returned": {
+                    "delete": "Ayarlar silinemedi (API {{status}} döndü).",
+                    "to": "Ayarlar buluta senkronize edilemedi (API {{status}} döndü).",
+                    "from": "Ayarlar buluttan senkronize edilemedi (API {{status}} döndü)."
+                }
+            },
+            "synchronize": {
+                "to": "Ayarlar buluta senkronize edilemedi ({{error}}).",
+                "from": "Ayarlar buluttan senkronize edilemedi ({{error}})."
+            }
+        },
+        "notification": {
+            "title": "Bulut Entegrasyonu",
+            "enabled": "Bulut Entegrasyonu Etkinleştirildi",
+            "host": "{{host}} alan adı izin listesine eklendi. Değişikliklerin etkili olması için uygulamayı yeniden başlatın.",
+            "erase": {
+                "successful": "Bulut verileri başarıyla silindi",
+                "failed": "Tüm veriler silinemedi (API {{status}} döndü), lütfen destek ile iletişime geçin."
+            }
+        },
+        "button": {
+            "to": "Buluta Senkronize Et",
+            "from": "Buluttan Senkronize Et",
+            "fromDesc": "Bu, mevcut ayarlarınızı buluttan gelenlerle üzerine yazacaktır. Akıllıca kullanın!",
+            "delete": "Bulut Verilerini Sil",
+            "enable": "Bulut Entegrasyonlarını Aktifleştir",
+            "reauthorize": "Yeniden Yetkilendir",
+            "erase": {
+                "title": "Emin misiniz?",
+                "body": "Verileriniz silindikten sonra, geri yüklenemez. Geri dönüş yok!",
+                "confirm": "Sil!",
+                "cancel": "Vazgeç",
+                "erase": "Tüm Verileri Sil"
+            },
+            "confirm": "Şimdi Yeniden Başlat",
+            "later": "Sonra!"
+        },
+        "privacy": "gizliliğinizi korur",
+        "source": "kaynak kodu",
+        "overview": "Plexcord, cihazlar arasında ayar senkronizasyonu gibi avantajlar sağlayan bulut entegrasyonu ile birlikte gelir. Bu {{privacy}} ve {{source}}, AGPL 3.0 lisansı ile sunulduğu için kendi sunucunuzda barındırabilirsiniz.",
+        "authorization": "Bu, bulut entegrasyonlarını henüz ayarlamadıysanız yetkilendirme isteyecektir.",
+        "backend": {
+            "title": "Backend URL",
+            "description": "Bulut entegrasyonlarını kullanırken hangi backend'i kullanacaksınız.",
+            "invalid": "Geçersiz URL"
+        }
+    },
+    "csp": {
+        "restart": "Bu değişikliği uygulamak için bir yeniden başlatma gerekiyor",
+        "blocked": {
+            "resources": "Engellenen Kaynaklar",
+            "disallowed": "Bazı resimler, stiller veya yazı tipleri, izin verilmeyen alanlardan geldikleri için engellendi.",
+            "recommended": "Bunları GitHub veya Imgur'a taşımanız şiddetle önerilir. Ancak, onlara tamamen güvendiğiniz takdirde alanları da izin verebilirsiniz.",
+            "afterAllow": "Bir alanı izin verdikten sonra, değişikliği uygulamak için {{platform}}'ı tamamen kapatıp (sistem tepsisinden / görev yöneticisinden) yeniden başlatmalısınız.",
+            "allow": "İzin Ver",
+            "url": "Engellenen URL'ler"
+        },
+        "imgur": {
+            "direct": "Imgur bağlantıları {{etc}} biçiminde doğrudan bağlantılar olmalıdır.",
+            "copy": "Doğrudan bir bağlantı elde etmek için, resme sağ tıklayın ve 'Resim adresini kopyala' seçeneğini belirleyin."
+        },
+        "wants": {
+            "caller": "{{callerName}} {{domain}} alanına bağlantılara izin vermek istiyor",
+            "detail": "{{domain}} alanını tanımıyor ve tamamen güvenmiyorsanız, bu isteği iptal etmelisiniz!",
+            "restart": "Değişikliklerin etkili olması için {{appName}}'ı tamamen kapatıp yeniden başlatmanız gerekir.",
+            "type": {
+                "images": "Resimler",
+                "styles": "CSS ve Temalar",
+                "fonts": "Yazı Tipleri"
+            },
+            "content": "{{domain}} alanından aşağıdaki içerik türlerinin yüklenmesine izin verilecek:",
+            "understand": "{{domain}} alanına tamamen güveniyorum ve bağlantılara izin vermenin risklerini anlıyorum.",
+            "button": {
+                "cancel": "Vazgeç",
+                "allow": "İzin Ver"
+            },
+            "title": "Alan Adı İzinleri"
+        }
+    },
+    "themes": {
+        "title": "Temalar",
+        "local": "Yerel Temalar",
+        "online": "Çevrimiçi Temalar",
+        "stylus": "Stylus eklentisi",
+        "links": "Tema linkleri giriniz...",
+        "error": {
+            "userscript": "Temalar Userscript'te desteklenmiyor!",
+            "stylus": "Bunun yerine {{stylus}} ile temaları yükleyebilirsiniz!",
+            "expired": "Geçersiz veya süresi dolmuş davet"
+        },
+        "find": "Tema Bul",
+        "bd": "BetterDiscord Temaları",
+        "github": "Github",
+        "download": "BD sitesini kullanıyorsanız, ‘Download’ butonuna tıklayın ve indirilen .theme.css dosyasını themes klasörünüze yerleştirin.",
+        "external": {
+            "title": "Harici Kaynaklar",
+            "security": "Güvenlik nedeniyle, çoğu siteden kaynakların (stil, font, resim vb.) yüklenmesi engellenmiştir.",
+            "host": "Tüm kaynakların GitHub, GitLab, Codeberg, Imgur, Discord veya Google Fonts üzerinde barındırıldığından emin olun.."
+        },
+        "upload": "Tema Yükle",
+        "openFolder": "Tema Klasörünü Aç",
+        "loadMissing": "Kayıp Temaları Yükle",
+        "editQuickCSS": "QuickCSS'i Düzenle",
+        "editClient": "ClientTheme'i Düzenle",
+        "advanced": {
+            "warning": "Bu alan gelişmiş kullanıcılar içindir. Bunu kullanmakta zorluk yaşıyorsanız, bunun yerine Yerel Temalar sekmesini kullanın.",
+            "paste": "CSS dosyalarının bağlantılarını buraya yapıştırın",
+            "line": "Her satıra bir url yerleştirin",
+            "prefix": "Satırların başına @light veya @dark ekleyerek, Discord temanıza göre otomatik olarak açıp kapatabilirsiniz",
+            "direct": "Dosyalara doğrudan bağlantılar (raw veya github.io) kullandığınızdan emin olun!"
+        },
+        "website": "Website",
+        "discord": "Discord Sunucusu",
+        "unknown": {
+            "author": "Bilinmeyen Yazar",
+            "description": "Bir Discord Teması."
+        }
+    },
+    "updater": {
+        "title": "Güncelleyici",
+        "settings": "Güncelleyici Ayarları",
+        "updates": "Güncellemeler",
+        "updated": "güncellendi!",
+        "restart": "Buraya tıklayarak yeniden başlatın",
+        "github": {
+            "local": "Yerel kopyanızda daha yeni commitler var. Lütfen bunları stash edin veya reset yapın."
+        },
+        "error": {
+            "check": "Güncelleme kontrol edilirken sorun oluştu. Daha fazla bilgi için console'a bakın.",
+            "occurred": "Bir hata oluştu",
+            "retrieve": "Güncelleme bilgileri alınırken sorun oluştu - Console'u kontrol edin",
+            "title": "Hayıırr!",
+            "tryAgain": "Bir hata oluştu. Lütfen tekrar deneyin veya daha fazla bilgi için console'a bakın.",
+            "command": "{{path}} komutu bulunamadı. Bunu indirin veya tekrar deneyin.",
+            "code": "Kod {{code}}. Daha fazla bilgi için console'a bakın.",
+            "running": "{{cmd}} yürütülürken bir sorun oluştu: {{error}}",
+            "render": "{{tab}} sekmesi yüklenemedi. Bu sorun devam ederse, yükleyiciyi kullanarak yeniden yüklemeyi deneyin!",
+            "failed": "Bu da başarısız oldu :( Lütfen güncellemeyi deneyin veya yükleyici ile yeniden yükleyin!"
+        },
+        "available": "1 güncelleme mevcut",
+        "updateAvailable": "Plexcord güncellemesi mevcut!",
+        "click": "Güncellemeyi görüntülemek için buraya tıklayın",
+        "available_plural": "{{count}} güncelleme mevcut",
+        "current": "Güncel!",
+        "successful": {
+            "title": "Güncelleme Başarılı!",
+            "body": "Başarıyla güncellendi. Değişiklikleri kaydetmek için yeniden başlat!",
+            "button": {
+                "confirm": "Yeniden Başlat",
+                "cancel": "Şimdi Değil!",
+                "update": "Şimdi Güncelle",
+                "check": "Güncellemeleri Kontrol Et"
+            },
+            "noFound": "Güncelleme bulunamadı"
+        },
+        "automatically": {
+            "label": "Otomatik Güncelleme",
+            "description": "Plexcord güncellemeleri otomatik olarak onaylamadan indirir ve yükler"
+        },
+        "notify": {
+            "label": "Otomatik güncelleme bildirimi göster",
+            "description": "Plexcord otomatik olarak güncellendiğinde bir bildirim göster"
+        },
+        "repo": "Repo"
+    },
+    "components": {
+        "error": {
+            "title": "Ah hayır!",
+            "render": "Bu bileşen render edilirken bir hata oluştu. Daha fazla bilgiyi aşağıda ve konsolunuzda bulabilirsiniz."
+        },
+        "componentFailed": {
+            "message": "Ah! Bu sayfa render edilemedi. Ancak, bunu düzeltebilecek bir güncelleme mevcut. Şimdi güncellemek ve yeniden başlatmak ister misiniz?"
+        }
+    },
+    "commands": {
+        "error": {
+            "execute": "'{{command}}' komutu yürütülürken bir hata oluştu"
+        }
+    },
+    "notifications": {
+        "dismiss": "Bildirimi Kapat",
+        "noYet": "Henüz bildirim yok",
+        "settings": "Bildirim Ayarları",
+        "log": {
+            "title": "Bildirim Günlüğü",
+            "clear": "Bildirim Günlüğünü Temizle",
+            "sure": "Emin misiniz?",
+            "permamently": "{{count}} bildirim kalıcı olarak kaldırılacak. Bu işlem geri alınamaz.",
+            "button": {
+                "confirm": "Tamam",
+                "cancel": "Vazgeç"
+            }
+        }
+    },
+    "memberlist": {
+        "error": {
+            "render": "{{key}} Üye Listesi Dekoratörü render edilirken bir hata oluştu"
+        }
+    },
+    "message": {
+        "accesory": {
+            "error": {
+                "render": "{{key}} Mesaj Aksesuarı render edilirken bir hata oluştu"
+            }
+        },
+        "decoration": {
+            "error": {
+                "render": "{{key}} Mesaj Dekorasyonu render edilirken bir hata oluştu"
+            }
+        }
+    },
+    "plugin": {
+        "accountPanelServerProfile": {
+            "name": "AccountPanelServerProfile",
+            "description": "Hesap panelinize sol tıkladığınızda sunucu profilinizi görüntülemek için sağ tıklayın",
+            "option": {
+                "prioritize": {
+                    "label": "Sunucu Profilini Önceliklendir",
+                    "description": "Hesap panelinize sol tıkladığınızda sunucu profilini önceliklendir"
+                }
+            },
+            "context": {
+                "account": "Hesap Profilini Göster",
+                "server": "Sunucu Profilini Göster",
+                "prioritize": "Sunucu Profilini Önceliklendir"
+            }
+        },
+        "allCallTimers": {
+            "name": "AllCallTimers",
+            "description": "Tüm sesli aramalarda çağrı zamanlayıcılarını gösterir",
+            "option": {
+                "showWithoutHover":{
+                    "label": "Üzerine Gelmeden Göster",
+                    "description": "Üzerine gelmeye gerek kalmadan her zaman zamanlayıcıyı göster"
+                },
+                "showRoleColor": {
+                    "label": "Rol Rengini Göster",
+                    "description": "Kullanıcının rol renginde göster (ShowRoleColor eklentisi etkinse)"
+                },
+                "trackSelf": {
+                    "label": "Kendini Takip Et",
+                    "description": "Kendi zamanlayıcını da göster"
+                },
+                "showSeconds":{
+                    "label": "Saniyeleri Göster",
+                    "description": "Zamanlayıcıda saniyeleri de göster"
+                },
+                "format":{
+                    "label": "Format",
+                    "description": "Kompakt veya insan tarafından okunabilir format",
+                    "human": "30g 23s 00d 42s"
+                },
+                "watchLargeGuilds":{
+                    "label": "Büyük Sunucuları İzle",
+                    "description": "Büyük sunuculardaki kullanıcıları takip et. Çok sayıda aktif sesli kullanıcıya sahip büyük sunucularda bulunuyorsan bu gecikmeye neden olabilir. 2000’e kadar aktif sesli kullanıcıyla test edildi ve herhangi bir sorun yaşanmadı."
+                },
+                "fixUI":{
+                    "label": "Kullanıcı Arayüzü Düzeltmesi",
+                    "description": "Bazı durumlarda zamanlayıcı kullanıcı arayüzünü bozabilir. Bu seçeneği etkinleştirerek bunu düzeltebilirsiniz."
+                }
+            }
+        },
+        "altKrispSwitch": {
+            "name": "AltKrispSwitch",
+            "description": "Gürültü Önleme Açılır Penceresinin, Krisp ve Standart yerine Hiçbiri ve Krisp arasında geçiş yapmasını sağlar."
+        },
+        "alwaysAnimate": {
+            "name": "AlwaysAnimate",
+            "description": "Animasyon yapılabilen her şeyi animasyonlu yapar"
+        }
+    }
+}

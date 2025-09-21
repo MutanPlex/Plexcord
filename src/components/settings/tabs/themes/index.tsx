@@ -19,6 +19,7 @@
 
 import "./styles.css";
 
+import { t, tJsx } from "@api/i18n";
 import { Link } from "@components/Link";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { getStylusWebStoreUrl } from "@utils/web";
@@ -37,7 +38,7 @@ function ThemesTab() {
     const [currentTab, setCurrentTab] = useState(ThemeTab.LOCAL);
 
     return (
-        <SettingsTab title="Themes">
+        <SettingsTab title={t("themes.title")}>
             <TabBar
                 type="top"
                 look="brand"
@@ -49,13 +50,13 @@ function ThemesTab() {
                     className="pc-settings-tab-bar-item"
                     id={ThemeTab.LOCAL}
                 >
-                    Local Themes
+                    {t("themes.local")}
                 </TabBar.Item>
                 <TabBar.Item
                     className="pc-settings-tab-bar-item"
                     id={ThemeTab.ONLINE}
                 >
-                    Online Themes
+                    {t("themes.online")}
                 </TabBar.Item>
             </TabBar>
 
@@ -71,10 +72,12 @@ function UserscriptThemesTab() {
     return (
         <SettingsTab title="Themes">
             <Card className="pc-settings-card">
-                <Forms.FormTitle tag="h5">Themes are not supported on the Userscript!</Forms.FormTitle>
+                <Forms.FormTitle tag="h5">{t("themes.error.userscript")}</Forms.FormTitle>
 
                 <Forms.FormText>
-                    You can instead install themes with the <Link href={getStylusWebStoreUrl()}>Stylus extension</Link>!
+                    {tJsx("themes.error.stylus", {
+                        stylus: <Link href={getStylusWebStoreUrl()}>{t("themes.stylus")}</Link>
+                    })}
                 </Forms.FormText>
             </Card>
         </SettingsTab>
@@ -82,5 +85,5 @@ function UserscriptThemesTab() {
 }
 
 export default IS_USERSCRIPT
-    ? wrapTab(UserscriptThemesTab, "Themes")
-    : wrapTab(ThemesTab, "Themes");
+    ? wrapTab(UserscriptThemesTab, t("themes.title"))
+    : wrapTab(ThemesTab, t("themes.title"));

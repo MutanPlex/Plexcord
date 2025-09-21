@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { CSSProperties, JSX } from "react";
+import { CSSProperties, HTMLAttributes } from "react";
 
 interface Props {
     columns: number;
@@ -13,7 +13,7 @@ interface Props {
     inline?: boolean;
 }
 
-export function Grid(props: Props & JSX.IntrinsicElements["div"]) {
+export function Grid(props: Props & HTMLAttributes<HTMLDivElement>) {
     const style: CSSProperties = {
         display: props.inline ? "inline-grid" : "grid",
         gridTemplateColumns: `repeat(${props.columns}, 1fr)`,

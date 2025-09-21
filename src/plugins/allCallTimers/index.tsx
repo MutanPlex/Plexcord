@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import roleColorEverywhere from "@plugins/roleColorEverywhere";
@@ -76,32 +77,57 @@ export interface PassiveUpdateState {
 
 export const settings = definePluginSettings({
     showWithoutHover: {
+        get label() {
+            return t("plugin.allCallTimers.option.showWithoutHover.label");
+        },
+        get description() {
+            return t("plugin.allCallTimers.option.showWithoutHover.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Always show the timer without needing to hover",
         restartNeeded: true,
         default: true
     },
     showRoleColor: {
+        get label() {
+            return t("plugin.allCallTimers.option.showRoleColor.label");
+        },
+        get description() {
+            return t("plugin.allCallTimers.option.showRoleColor.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show the user's role color (if this plugin in enabled)",
         restartNeeded: false,
         default: true
     },
     trackSelf: {
+        get label() {
+            return t("plugin.allCallTimers.option.trackSelf.label");
+        },
+        get description() {
+            return t("plugin.allCallTimers.option.trackSelf.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Also track yourself",
         restartNeeded: false,
         default: true
     },
     showSeconds: {
+        get label() {
+            return t("plugin.allCallTimers.option.showSeconds.label");
+        },
+        get description() {
+            return t("plugin.allCallTimers.option.showSeconds.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show seconds in the timer",
         restartNeeded: false,
         default: true
     },
     format: {
+        get label() {
+            return t("plugin.allCallTimers.option.format.label");
+        },
+        get description() {
+            return t("plugin.allCallTimers.option.format.description");
+        },
         type: OptionType.SELECT,
-        description: "Compact or human readable format:",
         options: [
             {
                 label: "30:23:00:42",
@@ -109,20 +135,32 @@ export const settings = definePluginSettings({
                 default: true
             },
             {
-                label: "30d 23h 00m 42s",
+                get label() {
+                    return t("plugin.allCallTimers.option.format.human");
+                },
                 value: "human"
             }
         ]
     },
     watchLargeGuilds: {
+        get label() {
+            return t("plugin.allCallTimers.option.watchLargeGuilds.label");
+        },
+        get description() {
+            return t("plugin.allCallTimers.option.watchLargeGuilds.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Track users in large guilds. This may cause lag if you're in a lot of large guilds with active voice users. Tested with up to 2000 active voice users with no issues.",
         restartNeeded: true,
         default: false
     },
     fixUI: {
+        get label() {
+            return t("plugin.allCallTimers.option.fixUI.label");
+        },
+        get description() {
+            return t("plugin.allCallTimers.option.fixUI.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Fix UI issues",
         restartNeeded: true,
         default: true
     }
@@ -185,6 +223,11 @@ export default definePlugin({
     description: "Add call timer to all users in a server voice channel.",
     authors: [Devs.D3SOX, PcDevs.Max, PcDevs.MutanPlex],
     settings,
+
+    get displayDescription() {
+        return t("plugin.allCallTimers.description");
+    },
+
     patches: [
         {
             find: ".usernameSpeaking]",

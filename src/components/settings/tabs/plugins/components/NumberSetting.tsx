@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { OptionType, PluginOptionNumber } from "@utils/types";
 import { React, TextInput, useState } from "@webpack/common";
 
@@ -50,11 +51,11 @@ export function NumberSetting({ option, pluginSettings, definedSettings, id, onC
     }
 
     return (
-        <SettingsSection name={id} description={option.description} error={error}>
+        <SettingsSection name={id} description={option.description} label={option.label} error={error}>
             <TextInput
                 type="number"
                 pattern="-?[0-9]+"
-                placeholder={option.placeholder ?? "Enter a number"}
+                placeholder={option.placeholder ?? t("plugins.placeholder.number")}
                 value={state}
                 onChange={handleChange}
                 disabled={option.disabled?.call(definedSettings) ?? false}

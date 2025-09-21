@@ -20,6 +20,8 @@
 // DO NOT REMOVE UNLESS YOU WISH TO FACE THE WRATH OF THE CIRCULAR DEPENDENCY DEMON!!!!!!!
 import "~plugins";
 
+import { i18n, t } from "./api/i18n";
+
 export * as Api from "./api";
 export * as Components from "./components";
 export * as Plugins from "./plugins";
@@ -38,6 +40,7 @@ import { IS_WINDOWS } from "@utils/constants";
 import { StartAt } from "@utils/types";
 
 import { get as dsGet } from "./api/DataStore";
+import { LocaleLoader } from "./api/LocaleLoader";
 import { NotificationData, showNotification } from "./api/Notifications";
 import { PlainSettings, Settings } from "./api/Settings";
 import { patches, PMLogger, startAllPlugins } from "./plugins";
@@ -60,8 +63,8 @@ async function syncSettings() {
         if (Settings.cloud.authenticated) {
             // User switched to an account that isn't connected to cloud
             showNotification({
-                title: "Cloud Settings",
-                body: "Cloud sync was disabled because this account isn't connected to the Plexcord Cloud App. You can enable it again by connecting this account in Cloud Settings. (note: it will store your preferences separately)",
+                title: t("cloud.settings"),
+                body: t("cloud.error.connect"),
                 color: "var(--yellow-360)",
                 onClick: () => SettingsRouter.open("PlexcordCloud")
             });
@@ -78,9 +81,8 @@ async function syncSettings() {
     ) {
         // show a notification letting them know and tell them how to fix it
         showNotification({
-            title: "Cloud Integrations",
-            body: "We've noticed you have cloud integrations enabled in another client! Due to limitations, you will " +
-                "need to re-authenticate to continue using them. Click here to go to the settings page to do so!",
+            title: t("cloud.notification.title"),
+            body: t("cloud.reauth"),
             color: "var(--yellow-360)",
             onClick: () => SettingsRouter.open("PlexcordCloud")
         });
@@ -101,8 +103,8 @@ async function syncSettings() {
             // there was an error to notify the user, but besides that we only want to show one notification instead of all
             // of the possible ones it has (such as when your settings are newer).
             showNotification({
-                title: "Cloud Settings",
-                body: "Your settings have been updated! Click here to restart to fully apply changes!",
+                title: t("cloud.settings"),
+                body: t("cloud.updated"),
                 color: "var(--green-360)",
                 onClick: relaunch
             });
@@ -132,8 +134,8 @@ async function runUpdateCheck() {
             await update();
             if (Settings.autoUpdateNotification) {
                 notify({
-                    title: "Plexcord has been updated!",
-                    body: "Click here to restart",
+                    title: "Plexcord " + t("updater.updated"),
+                    body: t("updater.restart"),
                     onClick: relaunch
                 });
             }
@@ -141,8 +143,8 @@ async function runUpdateCheck() {
         }
 
         notify({
-            title: "A Plexcord update is available!",
-            body: "Click here to view the update",
+            title: t("updater.updateAvailable"),
+            body: t("updater.click"),
             onClick: openUpdaterModal!
         });
     } catch (err) {
@@ -153,6 +155,12 @@ async function runUpdateCheck() {
 async function init() {
     await onceReady;
     startAllPlugins(StartAt.WebpackReady);
+
+    try {
+        await LocaleLoader.initialize();
+    } catch (error) {
+        console.error("Failed to initialize i18n system:", error);
+    }
 
     syncSettings();
 
@@ -181,6 +189,14 @@ async function init() {
 
 startAllPlugins(StartAt.Init);
 init();
+
+(async () => {
+    try {
+        await i18n.initializeDiscordFeatures();
+    } catch (error) {
+        console.error("Failed to initialize Discord i18n features:", error);
+    }
+})();
 
 document.addEventListener("DOMContentLoaded", () => {
     startAllPlugins(StartAt.DOMContentLoaded);

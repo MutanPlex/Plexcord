@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { i18n, t } from "@api/i18n";
 import { CommandArgument, CommandContext, CommandOption } from "@plexcord/discord-types";
 import { Logger } from "@utils/Logger";
 import { makeCodeblock } from "@utils/text";
@@ -57,6 +58,15 @@ export const _init = function (cmds: PlexcordCommand[]) {
         OptionalMessageOption = cmds.find(c => (c.untranslatedName || c.displayName) === "shrug")!.options![0];
         RequiredMessageOption = cmds.find(c => (c.untranslatedName || c.displayName) === "me")!.options![0];
         commandIdOffset = Math.abs(BUILT_IN.map(x => Number(x.id)).sort((x, y) => x - y)[0]) - BUILT_IN.length;
+
+        try {
+            i18n.addListener(() => {
+                updateCommandTranslations();
+            });
+        } catch (e) {
+            new Logger("CommandsAPI").warn("Failed to set up i18n listener:", e);
+        }
+
     } catch (e) {
         new Logger("CommandsAPI").error("Failed to load CommandsApi", e, " - cmds is", cmds);
     }
@@ -71,10 +81,10 @@ export const _handleCommand = function (cmd: PlexcordCommand, args: CommandArgum
         // TODO: cancel send if cmd.inputType === BUILT_IN_TEXT
         const msg = `An Error occurred while executing command "${cmd.name}"`;
         const reason = err instanceof Error ? err.stack || err.message : String(err);
-
+        const msgErr = t("commands.error.execute", { command: cmd.name });
         console.error(msg, err);
         sendBotMessage(ctx.channel.id, {
-            content: `${msg}:\n${makeCodeblock(reason)}`,
+            content: `${msgErr}:\n${makeCodeblock(reason)}`,
             author: {
                 username: "Plexcord"
             }
@@ -106,6 +116,36 @@ export function prepareOption<O extends CommandOption | PlexcordCommand>(opt: O)
         prepareOption(opts[i]);
     });
     return opt;
+}
+
+export function updateCommandTranslations() {
+    if (!BUILT_IN) return;
+
+    BUILT_IN.forEach(cmd => {
+        if (cmd.isPlexcordCommand) {
+            if (typeof cmd.displayDescription === "undefined" && cmd.untranslatedDescription) {
+                try {
+                    const translatedDescription = t(cmd.untranslatedDescription);
+                    if (translatedDescription !== cmd.untranslatedDescription) {
+                        cmd.displayDescription = translatedDescription;
+                    }
+                } catch {
+                    // If translation fails, keep the original
+                }
+            }
+
+            if (typeof cmd.displayName === "undefined" && cmd.untranslatedName) {
+                try {
+                    const translatedName = t(cmd.untranslatedName);
+                    if (translatedName !== cmd.untranslatedName) {
+                        cmd.displayName = translatedName;
+                    }
+                } catch {
+                    // If translation fails, keep the original
+                }
+            }
+        }
+    });
 }
 
 // Yes, Discord registers individual commands for each subcommand

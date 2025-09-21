@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -25,6 +26,11 @@ export default definePlugin({
     description: "Fixes notices being automatically dismissed",
     authors: [Devs.Ven],
     required: true,
+
+    get displayDescription() {
+        return t("plugins.metadata.api.description.notices");
+    },
+
     patches: [
         {
             find: '"NoticeStore"',

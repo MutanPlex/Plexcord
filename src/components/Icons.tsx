@@ -21,13 +21,13 @@ import "./iconStyles.css";
 
 import { getIntlMessage } from "@utils/discord";
 import { classes } from "@utils/misc";
-import type { JSX, PropsWithChildren } from "react";
+import type { PropsWithChildren, SVGAttributes } from "react";
 
 interface BaseIconProps extends IconProps {
     viewBox: string;
 }
 
-type IconProps = JSX.IntrinsicElements["svg"];
+type IconProps = SVGAttributes<SVGSVGElement>;
 
 function Icon({ height = 24, width = 24, className, children, viewBox, ...svgProps }: PropsWithChildren<BaseIconProps>) {
     return (

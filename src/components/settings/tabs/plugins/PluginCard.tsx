@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t, tJsx } from "@api/i18n";
 import { showNotice } from "@api/Notices";
 import { CogWheel, InfoIcon } from "@components/Icons";
 import { AddonCard } from "@components/settings/AddonCard";
@@ -35,6 +36,10 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
 
     const isEnabled = () => isPluginEnabled(plugin.name);
 
+    // Use translated metadata if available, fallback to original
+    const displayName = (plugin as any).displayName || plugin.name;
+    const displayDescription = (plugin as any).displayDescription || plugin.description;
+
     function toggleEnabled() {
         const wasEnabled = isEnabled();
 
@@ -44,7 +49,7 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
 
             if (failures.length) {
                 logger.error(`Failed to start dependencies for ${plugin.name}: ${failures.join(", ")}`);
-                showNotice("Failed to start dependencies: " + failures.join(", "), "Close", () => null);
+                showNotice(tJsx("plugins.error.startDependency", { failures: failures.join(", ") }), "Close", () => null);
                 return;
             }
 
@@ -74,7 +79,7 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
         if (!result) {
             settings.enabled = false;
 
-            const msg = `Error while ${wasEnabled ? "stopping" : "starting"} plugin ${plugin.name}`;
+            const msg = wasEnabled ? t("plugins.error.stopping", { plugin: plugin.name }) : t("plugins.error.starting", { plugin: plugin.name });
             showToast(msg, Toasts.Type.FAILURE, {
                 position: Toasts.Position.BOTTOM,
             });
@@ -87,8 +92,8 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
 
     return (
         <AddonCard
-            name={plugin.name}
-            description={plugin.description}
+            name={displayName}
+            description={displayDescription}
             isNew={isNew}
             enabled={isEnabled()}
             setEnabled={toggleEnabled}

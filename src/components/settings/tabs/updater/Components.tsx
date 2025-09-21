@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t, tJsx } from "@api/i18n";
 import { ErrorCard } from "@components/ErrorCard";
 import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
@@ -60,7 +61,7 @@ export function Newer(props: CommonProps) {
     return (
         <>
             <Forms.FormText className={Margins.bottom8}>
-                Your local copy has more recent commits. Please stash or reset them.
+                {t("updater.github.local")}
             </Forms.FormText>
             <Changes {...props} updates={changes} />
         </>
@@ -78,14 +79,16 @@ export function Updatable(props: CommonProps) {
         <>
             {!updates && updateError ? (
                 <>
-                    <Forms.FormText>Failed to check updates. Check the console for more info</Forms.FormText>
+                    <Forms.FormText>{t("updater.error.check")}</Forms.FormText>
                     <ErrorCard style={{ padding: "1em" }}>
-                        <p>{updateError.stderr || updateError.stdout || "An unknown error occurred"}</p>
+                        <p>{updateError.stderr || updateError.stdout || t("updater.error.occurred")}</p>
                     </ErrorCard>
                 </>
             ) : (
                 <Forms.FormText className={Margins.bottom8}>
-                    {isOutdated ? (updates.length === 1 ? "There is 1 Update" : `There are ${updates.length} Updates`) : "Up to Date!"}
+                    {isOutdated ? (updates.length === 1 ? t("updater.available") : tJsx("updater.available_plural", {
+                        count: updates.length
+                    })) : t("updater.current")}
                 </Forms.FormText>
             )}
 
@@ -102,10 +105,10 @@ export function Updatable(props: CommonProps) {
 
                                 await new Promise<void>(r => {
                                     Alerts.show({
-                                        title: "Update Success!",
-                                        body: "Successfully updated. Restart now to apply the changes?",
-                                        confirmText: "Restart",
-                                        cancelText: "Not now!",
+                                        title: t("updater.successful.title"),
+                                        body: t("updater.successful.body"),
+                                        confirmText: t("updater.successful.button.confirm"),
+                                        cancelText: t("updater.successful.button.cancel"),
                                         onConfirm() {
                                             relaunch();
                                             r();
@@ -116,7 +119,7 @@ export function Updatable(props: CommonProps) {
                             }
                         })}
                     >
-                        Update Now
+                        {t("updater.successful.button.update")}
                     </Button>
                 )}
                 <Button
@@ -131,7 +134,7 @@ export function Updatable(props: CommonProps) {
                             setUpdates([]);
 
                             Toasts.show({
-                                message: "No updates found!",
+                                message: t("updater.successful.noFound"),
                                 id: Toasts.genId(),
                                 type: Toasts.Type.MESSAGE,
                                 options: {
@@ -141,7 +144,7 @@ export function Updatable(props: CommonProps) {
                         }
                     })}
                 >
-                    Check for Updates
+                    {t("updater.successful.button.check")}
                 </Button>
             </Flex>
         </>

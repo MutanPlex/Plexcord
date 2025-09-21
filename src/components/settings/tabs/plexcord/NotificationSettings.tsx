@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t, tJsx } from "@api/i18n";
 import { openNotificationLogModal } from "@api/Notifications/notificationLog";
 import { useSettings } from "@api/Settings";
 import { ErrorCard } from "@components/ErrorCard";
@@ -16,13 +17,13 @@ import { Button, Forms, Select, Slider, Text } from "@webpack/common";
 
 export function NotificationSection() {
     return (
-        <Forms.FormSection className={Margins.top16} title="Plexcord Notifications" tag="h5">
+        <Forms.FormSection className={Margins.top16} title={"Plexcord " + t("settings.notifications.title")} tag="h5">
             <Flex>
                 <Button onClick={openNotificationSettingsModal}>
-                    Notification Settings
+                    {t("settings.notifications.settings")}
                 </Button>
                 <Button onClick={openNotificationLogModal}>
-                    View Notification Log
+                    {t("settings.notifications.viewLog")}
                 </Button>
             </Flex>
         </Forms.FormSection>
@@ -33,7 +34,7 @@ export function openNotificationSettingsModal() {
     openModal(props => (
         <ModalRoot {...props} size={ModalSize.MEDIUM}>
             <ModalHeader>
-                <Text variant="heading-lg/semibold" style={{ flexGrow: 1 }}>Notification Settings</Text>
+                <Text variant="heading-lg/semibold" style={{ flexGrow: 1 }}>{t("settings.notifications.settings")}</Text>
                 <ModalCloseButton onClick={props.onClose} />
             </ModalHeader>
 
@@ -49,26 +50,26 @@ function NotificationSettings() {
 
     return (
         <div style={{ padding: "1em 0" }}>
-            <Forms.FormTitle tag="h5">Notification Style</Forms.FormTitle>
+            <Forms.FormTitle tag="h5">{t("settings.notifications.style.label")}</Forms.FormTitle>
             {settings.useNative !== "never" && Notification?.permission === "denied" && (
                 <ErrorCard style={{ padding: "1em" }} className={Margins.bottom8}>
-                    <Forms.FormTitle tag="h5">Desktop Notification Permission denied</Forms.FormTitle>
-                    <Forms.FormText>You have denied Notification Permissions. Thus, Desktop notifications will not work!</Forms.FormText>
+                    <Forms.FormTitle tag="h5">{t("settings.notifications.permissions.denied.title")}</Forms.FormTitle>
+                    <Forms.FormText>{t("settings.notifications.permissions.denied.label")}</Forms.FormText>
                 </ErrorCard>
             )}
             <Forms.FormText className={Margins.bottom8}>
-                Some plugins may show you notifications. These come in two styles:
+                {t("settings.notifications.style.description")}
                 <ul>
-                    <li><strong>Plexcord Notifications</strong>: These are in-app notifications</li>
-                    <li><strong>Desktop Notifications</strong>: Native Desktop notifications (like when you get a ping)</li>
+                    <li><strong>{t("settings.notifications.style.plexcord")}</strong>: {t("settings.notifications.style.plexcordDesc")}</li>
+                    <li><strong>{t("settings.notifications.style.desktop")}</strong>: {t("settings.notifications.style.desktopDesc")}</li>
                 </ul>
             </Forms.FormText>
             <Select
-                placeholder="Notification Style"
+                placeholder={t("settings.notifications.style.label")}
                 options={[
-                    { label: "Only use Desktop notifications when Discord is not focused", value: "not-focused", default: true },
-                    { label: "Always use Desktop notifications", value: "always" },
-                    { label: "Always use Plexcord notifications", value: "never" },
+                    { label: t("settings.notifications.style.onlyWhenNotFocused"), value: "not-focused", default: true },
+                    { label: t("settings.notifications.style.always.desktop"), value: "always" },
+                    { label: t("settings.notifications.style.always.plexcord"), value: "never" },
                 ] satisfies Array<{ value: typeof settings["useNative"]; } & Record<string, any>>}
                 closeOnSelect={true}
                 select={v => settings.useNative = v}
@@ -76,21 +77,21 @@ function NotificationSettings() {
                 serialize={identity}
             />
 
-            <Forms.FormTitle tag="h5" className={Margins.top16 + " " + Margins.bottom8}>Notification Position</Forms.FormTitle>
+            <Forms.FormTitle tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t("settings.notifications.positions.label")}</Forms.FormTitle>
             <Select
                 isDisabled={settings.useNative === "always"}
-                placeholder="Notification Position"
+                placeholder={t("settings.notifications.positions.label")}
                 options={[
-                    { label: "Bottom Right", value: "bottom-right", default: true },
-                    { label: "Top Right", value: "top-right" },
+                    { label: t("settings.notifications.positions.right.bottom"), value: "bottom-right", default: true },
+                    { label: t("settings.notifications.positions.right.top"), value: "top-right" },
                 ] satisfies Array<{ value: typeof settings["position"]; } & Record<string, any>>}
                 select={v => settings.position = v}
                 isSelected={v => v === settings.position}
                 serialize={identity}
             />
 
-            <Forms.FormTitle tag="h5" className={Margins.top16 + " " + Margins.bottom8}>Notification Timeout</Forms.FormTitle>
-            <Forms.FormText className={Margins.bottom16}>Set to 0s to never automatically time out</Forms.FormText>
+            <Forms.FormTitle tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t("settings.notifications.timeout.label")}</Forms.FormTitle>
+            <Forms.FormText className={Margins.bottom16}>{t("settings.notifications.timeout.description")}</Forms.FormText>
             <Slider
                 disabled={settings.useNative === "always"}
                 markers={[0, 1000, 2500, 5000, 10_000, 20_000]}
@@ -103,10 +104,9 @@ function NotificationSettings() {
                 stickToMarkers={false}
             />
 
-            <Forms.FormTitle tag="h5" className={Margins.top16 + " " + Margins.bottom8}>Notification Log Limit</Forms.FormTitle>
+            <Forms.FormTitle tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t("settings.notifications.logLimit.label")}</Forms.FormTitle>
             <Forms.FormText className={Margins.bottom16}>
-                The amount of notifications to save in the log until old ones are removed.
-                Set to <code>0</code> to disable Notification log and <code>∞</code> to never automatically remove old Notifications
+                {tJsx("settings.notifications.logLimit.description", { unlimited: <code>∞</code>, disable: <code>0</code> })}.
             </Forms.FormText>
             <Slider
                 markers={[0, 25, 50, 75, 100, 200]}
