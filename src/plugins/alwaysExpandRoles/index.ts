@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings, migratePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { Devs } from "@utils/constants";
@@ -26,9 +27,14 @@ import style from "./style.css?managed";
 
 const settings = definePluginSettings({
     hideArrow: {
+        get label() {
+            return t("plugin.alwaysExpandRoles.option.hideArrow.label");
+        },
+        get description() {
+            return t("plugin.alwaysExpandRoles.option.hideArrow.description");
+        },
         type: OptionType.BOOLEAN,
         default: false,
-        description: "Hide Arrow",
         restartNeeded: true
     },
 });
@@ -38,6 +44,11 @@ export default definePlugin({
     name: "AlwaysExpandRoles",
     description: "Always expands the role list in profile popouts",
     authors: [Devs.surgedevs],
+
+    get displayDescription() {
+        return t("plugin.alwaysExpandRoles.description");
+    },
+
     patches: [
         {
             find: 'action:"EXPAND_ROLES"',

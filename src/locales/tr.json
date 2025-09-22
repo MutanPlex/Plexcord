@@ -665,6 +665,11 @@
             }
         }
     },
+    "utils": {
+        "toast": {
+            "copied": "Panoya kopyalandı!"
+        }
+    },
     "plugin": {
         "accountPanelServerProfile": {
             "name": "AccountPanelServerProfile",
@@ -685,7 +690,7 @@
             "name": "AllCallTimers",
             "description": "Tüm sesli aramalarda çağrı zamanlayıcılarını gösterir",
             "option": {
-                "showWithoutHover":{
+                "showWithoutHover": {
                     "label": "Üzerine Gelmeden Göster",
                     "description": "Üzerine gelmeye gerek kalmadan her zaman zamanlayıcıyı göster"
                 },
@@ -697,20 +702,20 @@
                     "label": "Kendini Takip Et",
                     "description": "Kendi zamanlayıcını da göster"
                 },
-                "showSeconds":{
+                "showSeconds": {
                     "label": "Saniyeleri Göster",
                     "description": "Zamanlayıcıda saniyeleri de göster"
                 },
-                "format":{
+                "format": {
                     "label": "Format",
                     "description": "Kompakt veya insan tarafından okunabilir format",
                     "human": "30g 23s 00d 42s"
                 },
-                "watchLargeGuilds":{
+                "watchLargeGuilds": {
                     "label": "Büyük Sunucuları İzle",
                     "description": "Büyük sunuculardaki kullanıcıları takip et. Çok sayıda aktif sesli kullanıcıya sahip büyük sunucularda bulunuyorsan bu gecikmeye neden olabilir. 2000’e kadar aktif sesli kullanıcıyla test edildi ve herhangi bir sorun yaşanmadı."
                 },
-                "fixUI":{
+                "fixUI": {
                     "label": "Kullanıcı Arayüzü Düzeltmesi",
                     "description": "Bazı durumlarda zamanlayıcı kullanıcı arayüzünü bozabilir. Bu seçeneği etkinleştirerek bunu düzeltebilirsiniz."
                 }
@@ -723,6 +728,973 @@
         "alwaysAnimate": {
             "name": "AlwaysAnimate",
             "description": "Animasyon yapılabilen her şeyi animasyonlu yapar"
+        },
+        "alwaysExpandProfile": {
+            "name": "AlwaysExpandProfile",
+            "description": "Kullanıcı profillerini her zaman genişletilmiş olarak açar"
+        },
+        "alwaysExpandRoles": {
+            "name": "AlwaysExpandRoles",
+            "description": "Her zaman profil açılır pencerelerinde rol listesini genişletir",
+            "option": {
+                "hideArrow": {
+                    "label": "Okları Gizle",
+                    "description": "Okları gizle"
+                }
+            }
+        },
+        "alwaysTrust": {
+            "name": "AlwaysTrust",
+            "description": "Kötü niyetli alan ve şüpheli dosya açılır penceresini kaldırır",
+            "option": {
+                "domain": {
+                    "label": "Alan adı",
+                    "description": "'Kötü niyetli alan adı' açılır penceresini kaldırır"
+                },
+                "file": {
+                    "label": "Dosya",
+                    "description": "'Potansiyel olarak tehlikeli' indirme açılır penceresini kaldırır"
+                }
+            }
+        },
+        "amITyping": {
+            "name": "AmITyping",
+            "description": "Diğer insanların yazdığınızı görüp görmediğini gösterir."
+        },
+        "anonymiseFileNames": {
+            "name": "AnonymiseFileNames",
+            "description": "Yüklenen dosya adlarını anonimleştirir.",
+            "option": {
+                "anonymiseByDefault": {
+                    "label": "Varsayılan olarak anonimleştir",
+                    "description": "Dosya adlarını varsayılan olarak anonimleştirir. İsterseniz dosya yükleme açılır penceresinde devre dışı bırakabilirsiniz."
+                },
+                "spoilerMessages": {
+                    "label": "Spoiler Mesajları",
+                    "description": "Spoiler olarak işaretlenmiş dosyaların adlarını anonimleştirir."
+                },
+                "method": {
+                    "label": "Yöntem",
+                    "description": "Anonimleştirme yöntemi",
+                    "random": "Rastgele Karakterler",
+                    "consistent": "Tutarlı",
+                    "timestamp": "Zaman Damgası"
+                },
+                "randomisedLength": {
+                    "label": "Rastgeleleştirme uzunluğu",
+                    "description": "Rastgele karakter uzunluğu"
+                },
+                "consistent": {
+                    "label": "Tutarlı anonimleştirme",
+                    "description": "Tutarlı anonimleştirme için gizli anahtar"
+                }
+            },
+            "using": {
+                "anonymous": "Anonim dosya adı kullanılıyor",
+                "spoiler": "Normal dosya adı kullanılıyor"
+            },
+            "spoiler": {
+                "description": "Dosyalarınız için Spoiler'ınızı açıp kapatın",
+                "toggle": "Dosyalarınız için Spoiler'ınızı açıp kapatın (varsayılan açık)",
+                "enabled": "Spoiler aktif edildi!",
+                "disabled": "Spoiler devre dışı bırakıldı!"
+            }
+        },
+        "appleMusic": {
+            "name": "Apple Music Rich Presence",
+            "description": "Apple Music dinleme durumunu Discord Rich Presence olarak gösterir",
+            "about": "Özelleştirilebilir etkinlik formatı dizeleri için, etkinliklere parça verilerini eklemek amacıyla birkaç özel dize kullanabilirsin! {{name}} parça adıyla, {{artist}} sanatçı adı(ları)yla, {{album}} ise albüm adıyla değiştirilir.",
+            "button": {
+                "listen": "Apple Music'te Dinle",
+                "songLink": "SongLink'te Görüntüle"
+            },
+            "option": {
+                "activityType": {
+                    "label": "Aktivite Türü",
+                    "description": "Hangi tür aktivite gösterilecek",
+                    "listening": "Dinliyor",
+                    "playing": "Oynuyor"
+                },
+                "refreshInterval": {
+                    "label": "Yenileme Aralığı",
+                    "description": "Etkinlik yenileme aralığı (saniye)"
+                },
+                "enableTimestamps": {
+                    "label": "Zaman Damgalarını Etkinleştir",
+                    "description": "Zaman damgalarını etkinleştirip etkinleştirmeyeceğiniz"
+                },
+                "enableButtons": {
+                    "label": "Butonları Etkinleştir",
+                    "description": "Butonları etkinleştirip etkinleştirmeyeceğiniz"
+                },
+                "nameString": {
+                    "label": "İsim Dizesi",
+                    "description": "Etkinlik ismi format dizesi"
+                },
+                "detailsString": {
+                    "label": "Detaylar Dizesi",
+                    "description": "Etkinlik detayları format dizesi"
+                },
+                "stateString": {
+                    "label": "Durum Dizesi",
+                    "description": "Etkinlik durumu format dizesi"
+                },
+                "largeImageType": {
+                    "label": "Büyük Resim Türü",
+                    "description": "Etkinlik varlıkları büyük resim türü",
+                    "album": "Albüm kapak resmi",
+                    "artist": "Sanatçı resmi",
+                    "disabled": "Devre dışı"
+                },
+                "largeTextString": {
+                    "label": "Büyük Metin Dizesi",
+                    "description": "Etkinlik varlıkları büyük metin format dizesi"
+                },
+                "smallImageType": {
+                    "label": "Küçük Resim Türü",
+                    "description": "Etkinlik varlıkları küçük resim türü",
+                    "apple": "Apple Music logosu",
+                    "artist": "Sanatçı resmi",
+                    "disabled": "Devre dışı"
+                },
+                "smallTextString": {
+                    "label": "Küçük Metin Dizesi",
+                    "description": "Etkinlik varlıkları küçük metin format dizesi"
+                }
+            }
+        },
+        "arRpc": {
+            "name": "WebRichPresence (arRPC)",
+            "description": "Discord Web’de RPC’yi etkinleştirmek için arRPC istemci eklentisi (deneysel)",
+            "use": {
+                "title": "arRPC nasıl kullanılır",
+                "enable": "Sunucuyu çalıştırmak için {{link}} ve ardından eklentiyi etkinleştir.",
+                "link": "GitHub deposundaki talimatları izle"
+            },
+            "toast": {
+                "connected": "arRPC'ye bağlandı",
+                "failed": "arRPC'ye bağlanılamadı, çalışıyor mu?",
+                "retry": "Tekrar Dene"
+            }
+        },
+        "atSomeone": {
+            "name": "AtSomeone",
+            "description": "@someone ile rastgele birini etiketlemeni sağlar"
+        },
+        "bannersEverywhere": {
+            "name": "Banners Everywhere",
+            "description": "Üye listesinde afişleri görüntüler",
+            "option": {
+                "animate": {
+                    "label": "Animasyon",
+                    "description": "Afişi animasyonlu yap"
+                },
+                "preferNameplate": {
+                    "label": "İsim Plakası Tercih Et",
+                    "description": "Afiş yerine isim plakası tercih et"
+                }
+            }
+        },
+        "betterActivities": {
+            "name": "BetterActivities",
+            "description": "Üye listesinde etkinlik simgelerini gösterir ve tüm etkinlikleri gösterme olanağı tanır",
+            "option": {
+                "memberList": {
+                    "label": "Üye Listesi",
+                    "description": "Üye listesinde etkinlik simgelerini göster"
+                },
+                "iconSize": {
+                    "label": "Simge Boyutu",
+                    "description": "Etkinlik simgelerinin boyutu"
+                },
+                "specialFirst": {
+                    "label": "Önce Özeller",
+                    "description": "Özel etkinlikleri önce göster (Şu anda Spotify ve Twitch)"
+                },
+                "renderGifs": {
+                    "label": "GIF'leri Renderla",
+                    "description": "GIF'lerin renderlanmasına izin ver"
+                },
+                "removeGameActivityStatus": {
+                    "label": "Oyun Durumu'nu Kaldır",
+                    "description": "Oyun durumu simgesini ve durumunu kaldır"
+                },
+                "userPopout": {
+                    "label": "Kullanıcı Açılır Penceresi",
+                    "description": "Profil açılır penceresi/kenar çubuğunda tüm etkinlikleri göster"
+                },
+                "allActivitiesStyle": {
+                    "label": "Tüm Etkinlikler Stili",
+                    "description": "Tüm etkinlikleri gösterme stili",
+                    "list": "Liste",
+                    "carousel": "Kaydırıcı",
+                    "left": "Sol",
+                    "right": "Sağ"
+                }
+            }
+        },
+        "betterBanReasons": {
+            "name": "BetterBanReasons",
+            "description": "Discord yasaklama penceresinde kullanılacak özel nedenler oluştur ve/veya varsayılan olarak seçenekler yerine bir metin girişi göster.",
+            "option": {
+                "reasons": {
+                    "label": "Nedenler",
+                    "description": "Senin özel nedenlerin"
+                },
+                "isTextInputDefault": {
+                    "label": "Varsayılan Metin Girişi",
+                    "description": "Varsayılan olarak seçim menüsü yerine bir metin girişi gösterir. (Diğer seçeneğine tıklamakla eşdeğer)"
+                }
+            },
+            "title": "Nedenler",
+            "placeholder": "Neden",
+            "add": "Başka bir neden ekle"
+        },
+        "betterBlockedUsers": {
+            "name": "BetterBlockedUsers",
+            "description": "Engellenen kullanıcılar listesini aramanıza ve ayarlarda isimleri seçilebilir hale getirmenize olanak tanır.",
+            "placeholder": "Kullanıcı ara..."
+        },
+        "betterCommands": {
+            "name": "BetterCommands",
+            "description": "Komut sistemini çeşitli iyileştirmelerle geliştirir.",
+            "option": {
+                "autoFillArguments": {
+                    "label": "Argümanları Otomatik Doldur",
+                    "description": "Komutu yalnızca gerekli argümanlarla değil, tüm argümanlarla otomatik olarak doldurur"
+                }
+            }
+        },
+        "betterFolders": {
+            "name": "BetterFolders",
+            "description": "Sunucu klasörlerini özel bir kenar çubuğunda gösterir ve klasörlerle ilgili geliştirmeler ekler",
+            "option": {
+                "sidebar": {
+                    "label": "Kenar Çubuğu",
+                    "description": "Klasördeki sunucuları özel kenar çubuğunda göster"
+                },
+                "sidebarAnim": {
+                    "label": "Kenar Çubuğu Animasyonu",
+                    "description": "Klasör kenar çubuğunu açarken animasyon kullan"
+                },
+                "closeAllFolders": {
+                    "label": "Tüm Klasörleri Kapat",
+                    "description": "Klasörde olmayan bir sunucu seçildiğinde tüm klasörleri kapat"
+                },
+                "closeAllHomeButton": {
+                    "label": "Ana Sayfa Butonunda Tümünü Kapat",
+                    "description": "Ana sayfa butonuna tıklandığında tüm klasörleri kapat"
+                },
+                "closeOthers": {
+                    "label": "Diğerlerini Kapat",
+                    "description": "Bir klasör açıldığında diğer klasörleri kapat"
+                },
+                "closeServerFolder": {
+                    "label": "Sunucu Klasörünü Kapat",
+                    "description": "Klasördeki bir sunucu seçildiğinde klasörü kapat"
+                },
+                "forceOpen": {
+                    "label": "Zorla Aç",
+                    "description": "Bir klasörün sunucusuna geçildiğinde klasörü açmaya zorla"
+                },
+                "keepIcons": {
+                    "label": "Simgeleri Koru",
+                    "description": "Klasör BetterFolders kenar çubuğunda açıkken ana sunucu çubuğu klasöründeki sunucu simgelerini göstermeye devam et"
+                },
+                "showFolderIcon": {
+                    "label": "Klasör Simgesini Göster",
+                    "description": "BetterFolders kenar çubuğunda klasör sunucularının üzerinde klasör simgesini göster",
+                    "never": "Asla",
+                    "always": "Her zaman",
+                    "moreThanOne": "Birden fazla klasör genişletildiğinde"
+                }
+            }
+        },
+        "betterGifAltText": {
+            "name": "BetterGifAltText",
+            "description": "GIF alt metnini yalnızca 'GIF' olmaktan çıkarıp gif etiketlerini / dosya adını içerecek şekilde değiştirir"
+        },
+        "betterGifPicker": {
+            "name": "BetterGifPicker",
+            "description": "GIF seçicisinin varsayılan olarak favori kategorisini açmasını sağlar"
+        },
+        "betterInvites": {
+            "name": "BetterInvites",
+            "description": "Davetlerin bitiş tarihini gör, davet edenin profilini görüntüle ve adına tıklayarak keşfedilebilir sunucuları katılmadan önce önizle.",
+            "render": {
+                "tip": "Bu davet {{time}} sonra sona erecek",
+                "header": "SENİ KATILMAYA DAVET ETTİ"
+            }
+        },
+        "betterNotesBox": {
+            "name": "BetterNotesBox",
+            "description": "Notları gizle veya yazım denetimini devre dışı bırak (Ayarlar kısmından yapılandır!!) ",
+            "option": {
+                "hide": {
+                    "label": "Notları Gizle",
+                    "description": "Kullanıcı açılır pencerelerinde not kutusunu gizle"
+                },
+                "noSpellCheck": {
+                    "label": "Yazım Denetimini Kapat",
+                    "description": "Notlarda yazım denetimini devre dışı bırak"
+                }
+            }
+        },
+        "betterPlusReacts": {
+            "name": "BetterPlusReacts",
+            "description": ":emoji: öncesindeki artı işareti sayısı, emojinin ekleneceği mesajı belirtir"
+        },
+        "betterQuickReact": {
+            "name": "BetterQuickReact",
+            "description": "Mesaj bağlam menüsündeki hızlı tepki butonlarını geliştirir.",
+            "option": {
+                "frequentEmojis": {
+                    "label": "Sık Kullanılan Emojiler",
+                    "description": "Favori emojiler yerine sık kullanılan emojileri kullan"
+                },
+                "rows": {
+                    "label": "Satırlar",
+                    "description": "Gösterilecek hızlı tepkilerin satır sayısı"
+                },
+                "columns": {
+                    "label": "Sütunlar",
+                    "description": "Gösterilecek hızlı tepkilerin sütun sayısı"
+                },
+                "compactMode": {
+                    "label": "Kompakt Mod",
+                    "description": "Butonları orijinal boyutlarının %75’ine ölçeklerken içteki emojiyi %125’e büyütür. Emojiler orijinal boyutun %93.75’i olacaktır. En az 5 sütun kullanmanız önerilir"
+                },
+                "scroll": {
+                    "label": "Kaydırma",
+                    "description": "Emoji listesini kaydırmayı etkinleştir"
+                }
+            }
+        },
+        "betterRoleContext": {
+            "name": "BetterRoleContext",
+            "description": "Kullanıcı profillerinde rollere sağ tıklandığında rol rengini kopyalama / rolü düzenleme / rol simgesini görüntüleme seçeneklerini ekler",
+            "option": {
+                "roleIconFileFormat": {
+                    "label": "Rol Simge Dosya Formatı",
+                    "description": "Rol simgelerini görüntülerken kullanılacak dosya formatı"
+                }
+            },
+            "context": {
+                "copyColor": "Rol Rengini Kopyala",
+                "editRole": "Rolü Düzenle",
+                "viewIcon": "Rol Simgesini Görüntüle"
+            }
+        },
+        "betterRoleDot": {
+            "name": "BetterRoleDot",
+            "description": "RoleDot (erişilebilirlik ayarı) tıklandığında rol rengini kopyalar. Ayrıca RoleDot ve renkli isimlerin aynı anda kullanılmasına izin verir.",
+            "option": {
+                "bothStyles": {
+                    "label": "Her İki Stil",
+                    "description": "Hem rol noktasını hem de renkli isimleri göster"
+                },
+                "copyRoleColorInProfilePopout": {
+                    "label": "Profil Açılır Penceresinde Rol Rengini Kopyala",
+                    "description": "Profil açılır penceresindeki rol noktasına tıklayarak rol rengini kopyalamaya izin ver"
+                }
+            }
+        },
+        "betterSessions": {
+            "name": "BetterSessions",
+            "description": "Oturumlar (cihazlar) menüsünü geliştirir. Tam zaman damgalarını görmeni, her oturuma özel bir ad vermeni ve yeni oturumlar hakkında bildirim almanı sağlar.",
+            "new": "YENİ",
+            "newSessions": "Yeni Oturum:",
+            "rename": "Yeniden Adlandır",
+            "newDevice": "Yeni Cihaz Adı",
+            "resetName": "İsmi Sıfırla",
+            "save": "Kaydet",
+            "cancel": "İptal",
+            "option": {
+                "backgroundCheck": {
+                    "label": "Arka Plan Kontrolü",
+                    "description": "Yeni oturumları arka planda kontrol et ve tespit edildiğinde bildirim göster"
+                },
+                "checkInterval": {
+                    "label": "Kontrol Aralığı",
+                    "description": "Arka planda (etkinleştirildiyse) yeni oturumların ne sıklıkla kontrol edileceği, dakika cinsinden"
+                }
+            }
+        },
+        "betterSettings": {
+            "name": "BetterSettings",
+            "description": "Ayarlar menüsünü açma deneyimini geliştirir",
+            "option": {
+                "disableFade": {
+                    "label": "Geçiş Efektini Devre Dışı Bırak",
+                    "description": "Crossfade animasyonunu devre dışı bırak"
+                },
+                "organizeMenu": {
+                    "label": "Menüyü Düzenle",
+                    "description": "Ayarlar dişli simgesi menüsünü kategorilere ayırır"
+                },
+                "eagerLoad": {
+                    "label": "Hızlı Yükleme",
+                    "description": "Menü ilk kez açıldığında yükleme gecikmesini kaldırır"
+                }
+            },
+            "alert": {
+                "title": "Yeniden başlatma gerekli",
+                "restart": "Yeniden başlatma gerektiren ayarları değiştirdiniz.",
+                "confirm": "Şimdi yeniden başlat",
+                "cancel": "Daha sonra!"
+            }
+        },
+        "betterUploadButton": {
+            "name": "BetterUploadButton",
+            "description": "Tek tıklama ile yükleme yapın, sağ tıklama ile menüyü açın"
+        },
+        "bigFileUpload": {
+            "name": "BigFileUpload",
+            "description": "'Büyük Dosya Yükle' butonu veya /fileupload komutunu kullanarak Discord'un yükleme limitini aşın ve dosyalar, dosya yükleyiciler aracılığıyla sohbette link olarak paylaşılır.",
+            "commands": {
+                "description": "Bir dosya yükle",
+                "upload": "Yüklenecek dosya",
+                "noFile": "Dosya belirtilmedi!",
+                "noUploader": "Hata: Yükleyici seçilmedi."
+            },
+            "context": {
+                "upload": "Büyük Dosya Yükle"
+            },
+            "toast": {
+                "noFile": "Dosya seçilmedi!",
+                "failed": "Dosya yükleme başarısız!",
+                "success": "Dosya başarıyla yüklendi!",
+                "unable": "**Dosya yüklenemedi.** Daha fazla bilgi için konsolu kontrol edin. -# Bu muhtemelen ağ bağlantınız, güvenlik duvarınız veya VPN ile ilgili bir sorundur.",
+                "sharex": {
+                    "import": {
+                        "success": "ShareX yapılandırması başarıyla içe aktarıldı!",
+                        "error": "ShareX yapılandırması içe aktarılırken hata oluştu. Detaylar için konsolu kontrol edin."
+                    }
+                },
+                "required": {
+                    "url": "Özel yükleyici isteği URL'si gereklidir.",
+                    "fileForm": "Özel yükleyici dosya form adı gereklidir.",
+                    "json": "Özel yükleyici URL'si (JSON yolu) gereklidir."
+                }
+            },
+            "form": {
+                "limit": {
+                    "title": "Yükleme Limiti Aşımı",
+                    "description": "Yükleme limitini aşmak için kullanılacak harici dosya yükleyici servisini seçin.",
+                    "option": {
+                        "custom": "Özel Yükleyici",
+                        "catbox": "Catbox (200MB'a kadar)",
+                        "litterBox": "Litterbox (Geçici | 1GB'a kadar)",
+                        "goFile": "GoFile (Geçici | Limitsiz | Embed yok)",
+                        "placeholder": "Dosya yükleyici servisi seçin"
+                    }
+                },
+                "autoSend": {
+                    "label": "Yüklemeleri Sohbete Otomatik Gönder",
+                    "description": "Yüklenen dosyaların bağlantılarını yalnızca sohbet kutusuna yapıştırmak yerine otomatik olarak sohbete gönder."
+                },
+                "autoMask": {
+                    "label": "Linkleri Otomatik Maskele",
+                    "description": "Linki, orijinal dosya adıyla eşleşecek şekilde maskele."
+                },
+                "goFile": {
+                    "title": "GoFile Token (isteğe bağlı)",
+                    "description": "Tüm yüklemeleri GoFile hesabınıza kaydetmek için kişisel GoFile tokeninizi girin.",
+                    "placeholder": "GoFile Token Girin"
+                },
+                "catbox": {
+                    "title": "Catbox Kullanıcı Hash (isteğe bağlı)",
+                    "description": "Tüm yüklemeleri Catbox hesabınıza kaydetmek için kişisel kullanıcı hash’inizi girin.",
+                    "placeholder": "Kullanıcı Hash’i Girin"
+                },
+                "litterBox": {
+                    "title": "Dosya Sonlanma Süresi",
+                    "description": "Yüklemelerinizin ne kadar sürede silineceğini seçin.",
+                    "option": {
+                        "1hour": "1 Saat",
+                        "12hour": "12 Saat",
+                        "24hour": "24 Saat",
+                        "72hour": "72 Saat"
+                    },
+                    "placeholder": "Süre Seçin"
+                },
+                "custom": {
+                    "uploader": "Özel Yükleyici Adı",
+                    "name": "Ad",
+                    "url": "İstek URL'si",
+                    "urlholder": "URL",
+                    "formName": "Dosya Form Adı",
+                    "nameholder": "Ad",
+                    "responseType": "Yanıt Tipi",
+                    "typeholder": "Yanıt Tipi Seçin",
+                    "json": "URL (JSON yolu)",
+                    "jsonholder": "URL",
+                    "thumbnail": "Küçük Resim URL'si (JSON yolu)",
+                    "thumbholder": "Küçük Resim URL'si",
+                    "arguments": "Özel Yükleyici Argümanları",
+                    "argKey": "Argüman Anahtarı",
+                    "argValue": "Argüman Değeri",
+                    "headers": "Başlıklar",
+                    "headKey": "Başlık Anahtarı",
+                    "headValue": "Başlık Değeri",
+                    "importShareX": "ShareX Yapılandırmasını İçe Aktar",
+                    "import": "İçe Aktar"
+                }
+            },
+            "option": {
+                "fileUploader": {
+                    "label": "Dosya Yükleyici",
+                    "description": "Dosya yükleyici servisini seçin",
+                    "custom": "Özel Yükleyici",
+                    "catbox": "Catbox",
+                    "litterBox": "LitterBox",
+                    "goFile": "GoFile"
+                },
+                "goFileToken": {
+                    "label": "GoFile Token",
+                    "description": "GoFile Token (isteğe bağlı)"
+                },
+                "autoSend": {
+                    "label": "Otomatik Gönder",
+                    "description": "Yüklenen dosya linklerini otomatik olarak sohbete gönder.",
+                    "yes": "Evet",
+                    "no": "Hayır"
+                },
+                "autoFormat": {
+                    "label": "Otomatik Format",
+                    "description": "Yüklenen dosya linklerini otomatik olarak formatla.",
+                    "yes": "Evet",
+                    "no": "Hayır"
+                },
+                "catboxUserHash": {
+                    "label": "Catbox Kullanıcı Hash",
+                    "description": "Catbox yükleyici için kullanıcı hash’i (isteğe bağlı)"
+                },
+                "litterboxTime": {
+                    "label": "Litterbox Süresi",
+                    "description": "Dosyaların Litterbox'ta silinmeden önceki süresi",
+                    "1h": "1 saat",
+                    "12h": "12 saat",
+                    "24h": "24 saat",
+                    "72h": "72 saat"
+                },
+                "customUploaderName": {
+                    "label": "Özel Yükleyici Adı",
+                    "description": "Özel yükleyicinizin adı"
+                },
+                "customUploaderRequestURL": {
+                    "label": "Özel Yükleyici İstek URL'si",
+                    "description": "Özel yükleyicinizin istek URL'si"
+                },
+                "customUploaderFileFormName": {
+                    "label": "Özel Yükleyici Dosya Form Adı",
+                    "description": "Özel yükleyicinizin dosya form adı"
+                },
+                "customUploaderResponseType": {
+                    "label": "Özel Yükleyici Yanıt Tipi",
+                    "description": "Özel yükleyicinizin yanıt tipi"
+                },
+                "customUploaderURL": {
+                    "label": "Özel Yükleyici URL",
+                    "description": "Özel yükleyici için URL (JSON yolu)"
+                },
+                "customUploaderThumbnail": {
+                    "label": "Özel Yükleyici Küçük Resim URL",
+                    "description": "Özel yükleyici için küçük resim URL'si (JSON yolu)"
+                },
+                "customUploaderHeaders": {
+                    "label": "Özel Yükleyici Başlıkları",
+                    "description": "Özel yükleyici için başlıklar (JSON string)"
+                },
+                "customUploaderArgs": {
+                    "label": "Özel Yükleyici Argümanları",
+                    "description": "Özel yükleyici için argümanlar (JSON string)"
+                },
+                "customSettings": {
+                    "label": "Ayarları Göster",
+                    "description": "Özel yükleyici ayarlarını yapılandır"
+                }
+            }
+        },
+        "biggerStreamPreview": {
+            "name": "BiggerStreamPreview",
+            "description": "Bu eklenti, yayın önizlemelerini büyütmenizi sağlar",
+            "context": {
+                "viewPreview": "Yayın Önizlemesini Gör"
+            }
+        },
+        "blockKeywords": {
+            "name": "BlockKeywords",
+            "description": "Belirli kullanıcı tanımlı anahtar kelimeleri içeren mesajları, gönderen kullanıcı engellenmiş gibi engeller.",
+            "option": {
+                "blockedWords": {
+                    "label": "Engellenen Kelimeler",
+                    "description": "Virgülle ayrılmış engellenecek kelimeler listesi"
+                },
+                "useRegex": {
+                    "label": "Regex Kullan",
+                    "description": "Mesaj içeriğini kontrol ederken her değeri düzenli ifade olarak kullan (gelişmiş)"
+                },
+                "caseSensitive": {
+                    "label": "Büyük/Küçük Harf Duyarlı",
+                    "description": "Büyük/küçük harf duyarlı arama kullanılsın mı"
+                },
+                "ignoreBlockedMessages": {
+                    "label": "Engellenen Mesajları Yoksay",
+                    "description": "Yeni mesaj çubuğunu tamamen yoksayar (son mesajlar)"
+                }
+            }
+        },
+        "blockKrisp": {
+            "name": "BlockKrisp",
+            "description": "Krisp’in yüklenmesini engeller"
+        },
+        "blurNSFW": {
+            "name": "BlurNSFW",
+            "description": "NSFW kanallarındaki ekleri üzerine gelinene kadar bulanıklaştırır",
+            "option": {
+                "blurAmount": {
+                    "label": "Bulanıklık Miktarı",
+                    "description": "Bulanıklık miktarı (piksel cinsinden)"
+                },
+                "blurAllChannels": {
+                    "label": "Tüm Kanalları Bulanıklaştır",
+                    "description": "Tüm kanallardaki ekleri bulanıklaştır (sadece NSFW değil)"
+                }
+            }
+        },
+        "bypassStatus": {
+            "name": "BypassStatus",
+            "description": "Rahatsız Etmeyin modundayken belirli kaynaklardan bildirim almaya devam edin. Kullanıcılara/kanallara/sunuculara sağ tıklayarak Rahatsız Etmeyin modunu atlamalarını sağlayabilirsiniz.",
+            "context": {
+                "remove": "Durum Atlamayı Kaldır",
+                "add": "Durum Atlamayı Ekle"
+            },
+            "option": {
+                "guilds": {
+                    "label": "Sunucular",
+                    "description": "Atlamaya izin verilen sunucular (sunucuda herhangi bir yerde pinglendiğinde bildirim alır)",
+                    "placeholder": "Virgülle ayırın"
+                },
+                "channels": {
+                    "label": "Kanallar",
+                    "description": "Atlamaya izin verilen kanallar (o kanalda pinglendiğinde bildirim alır)",
+                    "placeholder": "Virgülle ayırın"
+                },
+                "users": {
+                    "label": "Kullanıcılar",
+                    "description": "Atlamaya izin verilen kullanıcılar (DM’lerde gönderilen tüm mesajlar için bildirim alır)",
+                    "placeholder": "Virgülle ayırın"
+                },
+                "allowOutsideOfDms": {
+                    "label": "DM Dışında İzin Ver",
+                    "description": "Seçilen kullanıcıların, DM dışındaki durumları da atlamasına izin ver (kanal/sunucu atlaması gibi davranır, ancak seçilen kullanıcıların gönderdiği tüm mesajlar için geçerlidir)"
+                },
+                "notificationSound": {
+                    "label": "Bildirim Sesi",
+                    "description": "Bildirim sesinin çalınıp çalınmayacağını belirler"
+                },
+                "statusToUse": {
+                    "label": "Kullanılacak Durum",
+                    "description": "Beyaz liste için kullanılacak durum",
+                    "online": "Çevrimiçi",
+                    "idle": "Boşta",
+                    "dnd": "Rahatsız Etmeyin",
+                    "invisible": "Görünmez"
+                }
+            }
+        },
+        "cakeDay": {
+            "name": "CakeDay",
+            "description": "Kullanıcı doğum günlerini pasta ikonlarıyla takip edin ve görüntüleyin",
+            "context": {
+                "label": "Doğum Günü",
+                "setBirthday": "Doğum Günü Ayarla",
+                "clearBirthday": "Doğum Gününü Sil",
+                "current": "Şu anki:"
+            },
+            "option": {
+                "chat": {
+                    "label": "Sohbet",
+                    "description": "Sohbette kullanıcı adlarının yanında pasta ikonlarını göster"
+                },
+                "memberList": {
+                    "label": "Üye Listesi",
+                    "description": "Üye listesinde pasta ikonlarını göster"
+                },
+                "profileBadge": {
+                    "label": "Profil Rozeti",
+                    "description": "Kullanıcı profilinde pasta rozetini göster"
+                }
+            },
+            "locations": {
+                "chat": {
+                    "label": "Sohbet",
+                    "description": "Sohbette kullanıcı adlarının yanında"
+                },
+                "memberList": {
+                    "label": "Üye Listesi",
+                    "description": "Üye listesinde"
+                }
+            },
+            "toast": {
+                "success": "Doğum günü başarıyla ayarlandı!",
+                "invalid": "Geçersiz doğum günü formatı! Sadece GG/AA kabul edilir.",
+                "cleared": "Doğum günü başarıyla silindi!"
+            },
+            "modal": {
+                "title": "{{username}} için Doğum Günü Ayarla",
+                "description": "Doğum gününü GG/AA formatında gir (örn. 25/12)",
+                "placeholder": "örn. 25/12",
+                "current": "Şu anki doğum günü:",
+                "set": "Doğum Günü Ayarla",
+                "cancel": "İptal",
+                "birthday": "Bugün benim doğum günüm! 🎂",
+                "saved": "Kaydedilen Doğum Günleri",
+                "savedDesc": "Henüz kaydedilmiş doğum günü yok. Doğum günlerini eklemek için kullanıcıya sağ tıklayın!",
+                "today": "Bugün",
+                "remove": "Kaldır"
+            }
+        },
+        "callTimer": {
+            "name": "CallTimer",
+            "description": "Sesli aramalara bir sayaç ekler",
+            "option": {
+                "format": {
+                    "label": "Biçim",
+                    "description": "Zamanlayıcı biçimi. Bu, geçerli herhangi bir moment.js formatı olabilir",
+                    "stopwatch": "30g 23:00:42",
+                    "human": "30g 23s 00d 42sn"
+                }
+            },
+            "connected": "{{time}} süredir bağlı"
+        },
+        "channelBadges": {
+            "name": "ChannelBadges",
+            "description": "Kanallara türlerine göre rozetler ekler",
+            "badge": {
+                "private": "Bu kanal kilitli.",
+                "nsfw": "Bu kanal NSFW olarak işaretlenmiş.",
+                "rules": "Bu kanal, sunucu kuralları kanalıdır."
+            },
+            "option": {
+                "oneBadgePerChannel": {
+                    "label": "Kanal Başına Bir Rozet",
+                    "description": "Her kanal için yalnızca bir rozet göster"
+                },
+                "showTextBadge": {
+                    "label": "Metin Rozetini Göster",
+                    "description": "Metin rozetini göster"
+                },
+                "showVoiceBadge": {
+                    "label": "Ses Rozetini Göster",
+                    "description": "Ses rozetini göster"
+                },
+                "showCategoryBadge": {
+                    "label": "Kategori Rozetini Göster",
+                    "description": "Kategori rozetini göster"
+                },
+                "showDirectoryBadge": {
+                    "label": "Dizin Rozetini Göster",
+                    "description": "Dizin rozetini göster"
+                },
+                "showAnnouncementThreadBadge": {
+                    "label": "Duyuru Konu Rozetini Göster",
+                    "description": "Duyuru konu rozetini göster"
+                },
+                "showPublicThreadBadge": {
+                    "label": "Genel Konu Rozetini Göster",
+                    "description": "Genel konu rozetini göster"
+                },
+                "showPrivateThreadBadge": {
+                    "label": "Özel Konu Rozetini Göster",
+                    "description": "Özel konu rozetini göster"
+                },
+                "showStageBadge": {
+                    "label": "Sahne Rozetini Göster",
+                    "description": "Sahne rozetini göster"
+                },
+                "showForumBadge": {
+                    "label": "Forum Rozetini Göster",
+                    "description": "Forum rozetini göster"
+                },
+                "showMediaBadge": {
+                    "label": "Medya Rozetini Göster",
+                    "description": "Medya rozetini göster"
+                },
+                "showNSFWBadge": {
+                    "label": "NSFW Rozetini Göster",
+                    "description": "NSFW rozetini göster"
+                },
+                "showLockedBadge": {
+                    "label": "Kilitli Rozeti Göster",
+                    "description": "Kilitli rozetini göster"
+                },
+                "showRulesBadge": {
+                    "label": "Kurallar Rozetini Göster",
+                    "description": "Kurallar rozetini göster"
+                },
+                "showUnknownBadge": {
+                    "label": "Bilinmeyen Rozeti Göster",
+                    "description": "Bilinmeyen rozetini göster"
+                },
+                "textBadgeLabel": {
+                    "label": "Metin Rozeti Etiketi",
+                    "description": "Metin rozeti etiketi",
+                    "default": "Metin"
+                },
+                "voiceBadgeLabel": {
+                    "label": "Ses Rozeti Etiketi",
+                    "description": "Ses rozeti etiketi",
+                    "default": "Ses"
+                },
+                "categoryBadgeLabel": {
+                    "label": "Kategori Rozeti Etiketi",
+                    "description": "Kategori rozeti etiketi",
+                    "default": "Kategori"
+                },
+                "announcementBadgeLabel": {
+                    "label": "Duyuru Rozeti Etiketi",
+                    "description": "Duyuru rozeti etiketi",
+                    "default": "Haber"
+                },
+                "announcementThreadBadgeLabel": {
+                    "label": "Duyuru Konu Rozeti Etiketi",
+                    "description": "Duyuru konu rozeti etiketi",
+                    "default": "Haber Konusu"
+                },
+                "publicThreadBadgeLabel": {
+                    "label": "Genel Konu Rozeti Etiketi",
+                    "description": "Genel konu rozeti etiketi",
+                    "default": "Konu"
+                },
+                "privateThreadBadgeLabel": {
+                    "label": "Özel Konu Rozeti Etiketi",
+                    "description": "Özel konu rozeti etiketi",
+                    "default": "Özel Konu"
+                },
+                "stageBadgeLabel": {
+                    "label": "Sahne Rozeti Etiketi",
+                    "description": "Sahne rozeti etiketi",
+                    "default": "Sahne"
+                },
+                "directoryBadgeLabel": {
+                    "label": "Dizin Rozeti Etiketi",
+                    "description": "Dizin rozeti etiketi",
+                    "default": "Dizin"
+                },
+                "forumBadgeLabel": {
+                    "label": "Forum Rozeti Etiketi",
+                    "description": "Forum rozeti etiketi",
+                    "default": "Forum"
+                },
+                "mediaBadgeLabel": {
+                    "label": "Medya Rozeti Etiketi",
+                    "description": "Medya rozeti etiketi",
+                    "default": "Medya"
+                },
+                "nsfwBadgeLabel": {
+                    "label": "NSFW Rozeti Etiketi",
+                    "description": "NSFW rozeti etiketi",
+                    "default": "NSFW"
+                },
+                "lockedBadgeLabel": {
+                    "label": "Kilitli Rozeti Etiketi",
+                    "description": "Kilitli rozeti etiketi",
+                    "default": "Kilitli"
+                },
+                "rulesBadgeLabel": {
+                    "label": "Kurallar Rozeti Etiketi",
+                    "description": "Kurallar rozeti etiketi",
+                    "default": "Kurallar"
+                },
+                "unknownBadgeLabel": {
+                    "label": "Bilinmeyen Rozeti Etiketi",
+                    "description": "Bilinmeyen rozeti etiketi",
+                    "default": "Bilinmeyen"
+                },
+                "textBadgeColor": {
+                    "label": "Metin Rozeti Rengi",
+                    "description": "Metin rozeti rengi"
+                },
+                "voiceBadgeColor": {
+                    "label": "Ses Rozeti Rengi",
+                    "description": "Ses rozeti rengi"
+                },
+                "categoryBadgeColor": {
+                    "label": "Kategori Rozeti Rengi",
+                    "description": "Kategori rozeti rengi"
+                },
+                "announcementBadgeColor": {
+                    "label": "Duyuru Rozeti Rengi",
+                    "description": "Duyuru rozeti rengi"
+                },
+                "announcementThreadBadgeColor": {
+                    "label": "Duyuru Konu Rozeti Rengi",
+                    "description": "Duyuru konu rozeti rengi"
+                },
+                "publicThreadBadgeColor": {
+                    "label": "Genel Konu Rozeti Rengi",
+                    "description": "Genel konu rozeti rengi"
+                },
+                "privateThreadBadgeColor": {
+                    "label": "Özel Konu Rozeti Rengi",
+                    "description": "Özel konu rozeti rengi"
+                },
+                "stageBadgeColor": {
+                    "label": "Sahne Rozeti Rengi",
+                    "description": "Sahne rozeti rengi"
+                },
+                "directoryBadgeColor": {
+                    "label": "Dizin Rozeti Rengi",
+                    "description": "Dizin rozeti rengi"
+                },
+                "forumBadgeColor": {
+                    "label": "Forum Rozeti Rengi",
+                    "description": "Forum rozeti rengi"
+                },
+                "mediaBadgeColor": {
+                    "label": "Medya Rozeti Rengi",
+                    "description": "Medya rozeti rengi"
+                },
+                "nsfwBadgeColor": {
+                    "label": "NSFW Rozeti Rengi",
+                    "description": "NSFW rozeti rengi"
+                },
+                "lockedBadgeColor": {
+                    "label": "Kilitli Rozeti Rengi",
+                    "description": "Kilitli rozeti rengi"
+                },
+                "rulesBadgeColor": {
+                    "label": "Kurallar Rozeti Rengi",
+                    "description": "Kurallar rozeti rengi"
+                },
+                "unknownBadgeColor": {
+                    "label": "Bilinmeyen Rozeti Rengi",
+                    "description": "Bilinmeyen rozeti rengi"
+                }
+            },
+            "badges": {
+                "text": "Metin",
+                "voice": "Ses",
+                "category": "Kategori",
+                "announcement": "Haber",
+                "announcementThread": "Haber Konusu",
+                "publicThread": "Konu",
+                "privateThread": "Özel Konu",
+                "stage": "Sahne",
+                "directory": "Dizin",
+                "forum": "Forum",
+                "media": "Medya",
+                "nsfw": "NSFW",
+                "locked": "Kilitli",
+                "rules": "Kurallar",
+                "unknown": "Bilinmeyen"
+            },
+            "tooltip": {
+                "locked": "Bu kanal kilitli.",
+                "nsfw": "Bu kanal NSFW olarak işaretlenmiş."
+            }
         }
     }
 }

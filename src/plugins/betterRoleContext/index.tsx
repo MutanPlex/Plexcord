@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import { ImageIcon } from "@components/Icons";
@@ -43,8 +44,13 @@ function AppearanceIcon() {
 
 const settings = definePluginSettings({
     roleIconFileFormat: {
+        get label() {
+            return t("plugin.betterRoleContext.option.roleIconFileFormat.label");
+        },
+        get description() {
+            return t("plugin.betterRoleContext.option.roleIconFileFormat.description");
+        },
         type: OptionType.SELECT,
-        description: "File format to use when viewing role icons",
         options: [
             {
                 label: "png",
@@ -69,6 +75,10 @@ export default definePlugin({
     authors: [Devs.Ven, Devs.goodbee],
     dependencies: ["UserSettingsAPI"],
 
+    get displayDescription() {
+        return t("plugin.betterRoleContext.description");
+    },
+
     settings,
 
     start() {
@@ -88,7 +98,7 @@ export default definePlugin({
                 children.unshift(
                     <Menu.MenuItem
                         id="pc-copy-role-color"
-                        label="Copy Role Color"
+                        label={t("plugin.betterRoleContext.context.copyColor")}
                         action={() => copyToClipboard(role.colorString!)}
                         icon={AppearanceIcon}
                     />
@@ -99,7 +109,7 @@ export default definePlugin({
                 children.unshift(
                     <Menu.MenuItem
                         id="pc-edit-role"
-                        label="Edit Role"
+                        label={t("plugin.betterRoleContext.context.editRole")}
                         action={async () => {
                             await GuildSettingsActions.open(guild.id, "ROLES");
                             GuildSettingsActions.selectRole(id);
@@ -113,7 +123,7 @@ export default definePlugin({
                 children.push(
                     <Menu.MenuItem
                         id="pc-view-role-icon"
-                        label="View Role Icon"
+                        label={t("plugin.betterRoleContext.context.viewIcon")}
                         action={() => {
                             openImageModal({
                                 url: `${location.protocol}//${window.GLOBAL_ENV.CDN_HOST}/role-icons/${role.id}/${role.icon}.${settings.store.roleIconFileFormat}`,

@@ -5,13 +5,19 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     autoFillArguments: {
-        description: "Automatically fill command with all arguements instead of just required ones",
+        get label() {
+            return t("plugin.betterCommands.option.autoFillArguments.label");
+        },
+        get description() {
+            return t("plugin.betterCommands.option.autoFillArguments.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
     }
@@ -22,6 +28,11 @@ export default definePlugin({
     description: "Enhances the command system with miscellaneous improvements.",
     authors: [Devs.thororen],
     settings,
+
+    get displayDescription() {
+        return t("plugin.betterCommands.description");
+    },
+
     patches: [
         {
             find: 'applicationCommand",',

@@ -665,6 +665,11 @@
             }
         }
     },
+    "utils": {
+        "toast": {
+            "copied": "Copied to clipboard!"
+        }
+    },
     "plugin": {
         "accountPanelServerProfile": {
             "name": "AccountPanelServerProfile",
@@ -723,6 +728,973 @@
         "alwaysAnimate": {
             "name": "AlwaysAnimate",
             "description": "Animates anything that can be animated"
+        },
+        "alwaysExpandProfile": {
+            "name": "AlwaysExpandProfile",
+            "description": "Always expands profile popouts to the full modal"
+        },
+        "alwaysExpandRoles": {
+            "name": "AlwaysExpandRoles",
+            "description": "Always expands role lists in profile popouts",
+            "option": {
+                "hideArrow": {
+                    "label": "Hide Arrow",
+                    "description": "Hide arrow"
+                }
+            }
+        },
+        "alwaysTrust": {
+            "name": "AlwaysTrust",
+            "description": "Removes the annoying untrusted domain and suspicious file popup",
+            "option": {
+                "domain": {
+                    "label": "Domain",
+                    "description": "Remove the untrusted domain popup when opening links"
+                },
+                "file": {
+                    "label": "File",
+                    "description": "Remove the 'Potentially Dangerous Download' popup when opening links"
+                }
+            }
+        },
+        "amITyping": {
+            "name": "AmITyping",
+            "description": "Shows you if other people can see you typing."
+        },
+        "anonymiseFileNames": {
+            "name": "AnonymiseFileNames",
+            "description": "Anonymise uploaded file names",
+            "option": {
+                "anonymiseByDefault": {
+                    "label": "Anonymise by default",
+                    "description": "Anonymise file names by default. You can disable this in the upload popup if needed."
+                },
+                "spoilerMessages": {
+                    "label": "Spoiler Messages",
+                    "description": "Anonymise file names that are marked as spoilers."
+                },
+                "method": {
+                    "label": "Method",
+                    "description": "Anonymisation method",
+                    "random": "Random Characters",
+                    "consistent": "Consistent",
+                    "timestamp": "Timestamp"
+                },
+                "randomisedLength": {
+                    "label": "Rastgeleleştirme uzunluğu",
+                    "description": "Rastgele karakter uzunluğu"
+                },
+                "consistent": {
+                    "label": "Consistent",
+                    "description": "Consistent anonymisation secret"
+                }
+            },
+            "using": {
+                "anonymous": "Using anonymous file name",
+                "spoiler": "Using normal file name"
+            },
+            "spoiler": {
+                "description": "Dosyalarınız için Spoiler'ınızı açıp kapatın",
+                "toggle": "Dosyalarınız için Spoiler'ınızı açıp kapatın (varsayılan açık)",
+                "enabled": "Spoiler aktif edildi!",
+                "disabled": "Spoiler devre dışı bırakıldı!"
+            }
+        },
+        "appleMusic": {
+            "name": "AppleMusicRichPresence",
+            "description": "Discord rich presence for your Apple Music!",
+            "about": "For the customizable activity format strings, you can use several special strings to include track data in activities! {{name}} is replaced with the track name; {{artist}} is replaced with the artist(s)' name(s); and {{album}} is replaced with the album name.",
+            "button":{
+                "listen": "Listen on Apple Music",
+                "songLink": "View on SongLink"
+            },
+            "option": {
+                "activityType": {
+                    "label": "Activity Type",
+                    "description": "Which type of activity",
+                    "listening": "Listening",
+                    "playing": "Playing"
+                },
+                "refreshInterval": {
+                    "label": "Refresh Interval",
+                    "description": "The interval between activity refreshes (seconds)"
+                },
+                "enableTimestamps": {
+                    "label": "Enable Timestamps",
+                    "description": "Whether or not to enable timestamps"
+                },
+                "enableButtons": {
+                    "label": "Enable Buttons",
+                    "description": "Whether or not to enable buttons"
+                },
+                "nameString": {
+                    "label": "Name String",
+                    "description": "Activity name format string"
+                },
+                "detailsString": {
+                    "label": "Details String",
+                    "description": "Activity details format string"
+                },
+                "stateString": {
+                    "label": "State String",
+                    "description": "Activity state format string"
+                },
+                "largeImageType": {
+                    "label": "Large Image Type",
+                    "description": "Activity assets large image type",
+                    "album": "Album artwork",
+                    "artist": "Artist artwork",
+                    "disabled": "Disabled"
+                },
+                "largeTextString": {
+                    "label": "Large Text String",
+                    "description": "Activity assets large text format string"
+                },
+                "smallImageType": {
+                    "label": "Small Image Type",
+                    "description": "Activity assets small image type",
+                    "apple": "Apple Music logo",
+                    "artist": "Artist artwork",
+                    "disabled": "Disabled"
+                },
+                "smallTextString": {
+                    "label": "Small Text String",
+                    "description": "Activity assets small text format string"
+                }
+            }
+        },
+        "arRpc": {
+            "name": "WebRichPresence(arRPC)",
+            "description": "Client plugin for arRPC to enable RPC on Discord Web (experimental)",
+            "use": {
+                "title": "How to use arRPC",
+                "enable": "{{link}} to get the server running, and then enable the plugin.",
+                "link": "Follow the instructions in the GitHub repo"
+            },
+            "toast": {
+                "connected": "Connected to arRPC",
+                "failed": "Failed to connect to arRPC, is it running?",
+                "retry": "Retry"
+            }
+        },
+        "atSomeone": {
+            "name": "AtSomeone",
+            "description": "With @someone you can mention someone randomly"
+        },
+        "bannersEverywhere": {
+            "name": "BannersEverywhere",
+            "description": "Displays banners in the member list",
+            "option": {
+                "animate": {
+                    "label": "Animate",
+                    "description": "Animate banner"
+                },
+                "preferNameplate": {
+                    "label": "Prefer Nameplate",
+                    "description": "Prefer nameplate over banner"
+                }
+            }
+        },
+        "betterActivities": {
+            "name": "BetterActivities",
+            "description": "Shows activity icons in the member list and allows showing all activities",
+            "option": {
+                "memberList": {
+                    "label": "Member List",
+                    "description": "Show activity icons in the member list"
+                },
+                "iconSize": {
+                    "label": "Icon Size",
+                    "description": "Size of the activity icons"
+                },
+                "specialFirst": {
+                    "label": "Special First",
+                    "description": "Show special activities first (Currently Spotify and Twitch)"
+                },
+                "renderGifs": {
+                    "label": "Render GIFs",
+                    "description": "Allow rendering GIFs"
+                },
+                "removeGameActivityStatus": {
+                    "label": "Remove 'Game Activity' Status",
+                    "description": "Remove game activity icon and status"
+                },
+                "userPopout": {
+                    "label": "User Popout",
+                    "description": "Show all activities in the profile popout/sidebar"
+                },
+                "allActivitiesStyle": {
+                    "label": "All Activities Style",
+                    "description": "Style for showing all activities",
+                    "list": "List",
+                    "carousel": "Carousel",
+                    "left": "Left",
+                    "right": "Right"
+                }
+            }
+        },
+        "betterBanReasons": {
+            "name": "BetterBanReasons",
+            "description": "Create custom reasons to use in the Discord ban modal, and/or show a text input by default instead of the options.",
+            "option": {
+                "reasons": {
+                    "label": "Reasons",
+                    "description": "Your custom reasons"
+                },
+                "isTextInputDefault": {
+                    "label": "Is Text Input Default",
+                    "description": "Shows a text input instead of a select menu by default. (Equivalent to clicking the 'Other' option)"
+                }
+            },
+            "title": "Reasons",
+            "placeholder": "Reason",
+            "add": "Add another reason"
+        },
+        "betterBlockedUsers": {
+            "name": "BetterBlockedUsers",
+            "description": "Allows you to search in blocked users list and makes names selectable in settings.",
+            "placeholder": "Search users..."
+        },
+        "betterCommands": {
+            "name": "BetterCommands",
+            "description": "Enhances the command system with miscellaneous improvements.",
+            "option": {
+                "autoFillArguments": {
+                    "label": "Auto Fill Arguments",
+                    "description": "Automatically fill command with all arguments instead of just required ones"
+                }
+            }
+        },
+        "betterFolders": {
+            "name": "BetterFolders",
+            "description": "Shows server folders on dedicated sidebar and adds folder related improvements",
+            "option": {
+                "sidebar": {
+                    "label": "Sidebar",
+                    "description": "Display servers from folder on dedicated sidebar"
+                },
+                "sidebarAnim": {
+                    "label": "Sidebar Animation",
+                    "description": "Animate opening the folder sidebar"
+                },
+                "closeAllFolders": {
+                    "label": "Close All Folders",
+                    "description": "Close all folders when selecting a server not in a folder"
+                },
+                "closeAllHomeButton": {
+                    "label": "Close All Home Button",
+                    "description": "Close all folders when clicking on the home button"
+                },
+                "closeOthers": {
+                    "label": "Close Others",
+                    "description": "Close other folders when opening a folder"
+                },
+                "closeServerFolder": {
+                    "label": "Close Server Folder",
+                    "description": "Close folder when selecting a server in that folder"
+                },
+                "forceOpen": {
+                    "label": "Force Open",
+                    "description": "Force a folder to open when switching to a server of that folder"
+                },
+                "keepIcons": {
+                    "label": "Keep Icons",
+                    "description": "Keep showing guild icons in the primary guild bar folder when it's open in the BetterFolders sidebar"
+                },
+                "showFolderIcon": {
+                    "label": "Show Folder Icon",
+                    "description": "Show the folder icon above the folder guilds in the BetterFolders sidebar",
+                    "never": "Never",
+                    "always": "Always",
+                    "moreThanOne": "When more than one folder is expanded"
+                }
+            }
+        },
+        "betterGifAltText": {
+            "name": "BetterGifAltText",
+            "description": "Change GIF alt text from simply being 'GIF' to containing the gif tags / filename"
+        },
+        "betterGifPicker": {
+            "name": "BetterGifPicker",
+            "description": "Makes the gif picker open the favourite category by default"
+        },
+        "betterInvites": {
+            "name": "BetterInvites",
+            "description": "See invites expiration date, view inviter profile and preview discoverable servers before joining by clicking their name",
+            "render": {
+                "tip": "This invite will expire {{time}}",
+                "header": "HAS INVITED YOU TO JOIN"
+            }
+        },
+        "betterNotesBox": {
+            "name": "BetterNotesBox",
+            "description": "Hide notes or disable spellcheck (Configure in settings!!)",
+            "option": {
+                "hide": {
+                    "label": "Hide notes",
+                    "description": "Hide the notes box in user popouts"
+                },
+                "noSpellCheck": {
+                    "label": "No Spell Check",
+                    "description": "Disable spellcheck in notes"
+                }
+            }
+        },
+        "betterPlusReacts": {
+            "name": "BetterPlusReacts",
+            "description": "The amount of plus before :emoji: is the message to add it to"
+        },
+        "betterQuickReact": {
+            "name": "BetterQuickReact",
+            "description": "Improves the quick react buttons in the message context menu.",
+            "option": {
+                "frequentEmojis": {
+                    "label": "Frequent Emojis",
+                    "description": "Use frequently used emojis instead of favourite emojis"
+                },
+                "rows": {
+                    "label": "Rows",
+                    "description": "Rows of quick reactions to display"
+                },
+                "columns": {
+                    "label": "Columns",
+                    "description": "Columns of quick reactions to display"
+                },
+                "compactMode": {
+                    "label": "Compact Mode",
+                    "description": "Scales the buttons to 75% of their original scale, whilst increasing the inner emoji to 125% scale. Emojis will be 93.75% of the original size. Recommended to have a minimum of 5 columns"
+                },
+                "scroll": {
+                    "label": "Scroll",
+                    "description": "Enable scrolling the list of emojis"
+                }
+            }
+        },
+        "betterRoleContext": {
+            "name": "BetterRoleContext",
+            "description": "Adds options to copy role color / edit role / view role icon when right clicking roles in the user profile",
+            "option": {
+                "roleIconFileFormat": {
+                    "label": "Role Icon File Format",
+                    "description": "File format to use when viewing role icons"
+                }
+            },
+            "context": {
+                "copyColor": "Copy Role Color",
+                "editRole": "Edit Role",
+                "viewIcon": "View Role Icon"
+            }
+        },
+        "betterRoleDot": {
+            "name": "BetterRoleDot",
+            "description": "Copy role colour on RoleDot (accessibility setting) click. Also allows using both RoleDot and coloured names simultaneously.",
+            "option": {
+                "bothStyles": {
+                    "label": "Both Styles",
+                    "description": "Show both role dot and coloured names"
+                },
+                "copyRoleColorInProfilePopout": {
+                    "label": "Copy Role Color in Profile Popout",
+                    "description": "Allow click on role dot in profile popout to copy role color"
+                }
+            }
+        },
+        "betterSessions": {
+            "name": "BetterSessions",
+            "description": "Enhances the sessions (devices) menu. Allows you to view exact timestamps, give each session a custom name, and receive notifications about new sessions.",
+            "new": "NEW",
+            "newSessions": "New Sessions:",
+            "rename": "Rename",
+            "newDevice": "New Device Name",
+            "resetName": "Reset Name",
+            "save": "Save",
+            "cancel": "Cancel",
+            "option": {
+                "backgroundCheck": {
+                    "label": "Background Check",
+                    "description": "Check for new sessions in the background, and display notifications when they are detected"
+                },
+                "checkInterval": {
+                    "label": "Check Interval",
+                    "description": "How often to check for new sessions in the background (if enabled), in minutes"
+                }
+            }
+        },
+        "betterSettings": {
+            "name": "BetterSettings",
+            "description": "Enhances your settings-menu-opening experience",
+            "option": {
+                "disableFade": {
+                    "label": "Disable Fade",
+                    "description": "Disable the crossfade animation"
+                },
+                "organizeMenu": {
+                    "label": "Organize Menu",
+                    "description": "Organizes the settings cog context menu into categories"
+                },
+                "eagerLoad": {
+                    "label": "Eager Load",
+                    "description": "Removes the loading delay when opening the menu for the first time"
+                }
+            },
+            "alert": {
+                "title": "Restart required",
+                "restart": "You have changed settings that require a restart.",
+                "confirm": "Restart now",
+                "cancel": "Later!"
+            }
+        },
+        "betterUploadButton": {
+            "name": "BetterUploadButton",
+            "description": "Upload with a single click, open menu with right click"
+        },
+        "bigFileUpload": {
+            "name": "BigFileUpload",
+            "description": "Bypass Discord's upload limit by uploading files using the 'Upload a Big File' button or /fileupload and they'll get uploaded as links into chat via file uploaders.",
+            "commands": {
+                "description": "Upload a file",
+                "upload": "The file to upload",
+                "noFile": "No file specified!",
+                "noUploader": "Error: No uploader selected."
+            },
+            "context": {
+                "upload": "Upload a Big File"
+            },
+            "toast": {
+                "noFile": "No file selected!",
+                "failed": "File upload failed!",
+                "success": "File uploaded successfully!",
+                "unable": "**Unable to upload file.** Check the console for more info. -# This is likely an issue with your network connection, firewall, or VPN.",
+                "sharex": {
+                    "import": {
+                        "success": "ShareX config imported successfully!",
+                        "error": "Error importing ShareX config. Check console for details."
+                    }
+                },
+                "required": {
+                    "url": "Custom uploader request URL is required.",
+                    "fileForm": "Custom uploader file form name is required.",
+                    "json": "Custom uploader URL (JSON path) is required."
+                }
+            },
+            "form": {
+                "limit": {
+                    "title": "Upload Limit Bypass",
+                    "description": "Select the external file uploader service to be used to bypass the upload limit.",
+                    "option": {
+                        "custom": "Custom Uploader",
+                        "catbox": "Catbox (Up to 200MB)",
+                        "litterBox": "Litterbox (Temporary | Up to 1GB)",
+                        "goFile": "GoFile (Temporary | Unlimited | No Embeds)",
+                        "placeholder": "Select the file uploader service"
+                    }
+                },
+                "autoSend": {
+                    "label": "Auto-Send Uploads To Chat",
+                    "description": "Whether to automatically send the links with the uploaded files to chat instead of just pasting them into the chatbox."
+                },
+                "autoMask": {
+                    "label": "Auto-Mask Links",
+                    "description": "Whether to mask the link to match the original filename."
+                },
+                "goFile": {
+                    "title": "GoFile Token (optional)",
+                    "description": "Insert your personal GoFile account's token to save all uploads to your GoFile account.",
+                    "placeholder": "Insert GoFile Token"
+                },
+                "catbox": {
+                    "title": "Catbox User hash (optional)",
+                    "description": "Insert your personal Catbox account's hash to save all uploads to your Catbox account.",
+                    "placeholder": "Insert User Hash"
+                },
+                "litterBox": {
+                    "title": "File Expiration Time",
+                    "description": "Select how long it should take for your uploads to expire and get deleted.",
+                    "option": {
+                        "1hour": "1 Hour",
+                        "12hour": "12 Hours",
+                        "24hour": "24 Hours",
+                        "72hour": "72 Hours"
+                    },
+                    "placeholder": "Select Duration"
+                },
+                "custom": {
+                    "uploader": "Custom Uploader Name",
+                    "name": "Name",
+                    "url": "Request URL",
+                    "urlholder": "URL",
+                    "formName": "File Form Name",
+                    "nameholder": "Name",
+                    "responseType": "Response Type",
+                    "typeholder": "Select Response Type",
+                    "json": "URL (JSON path)",
+                    "jsonholder": "URL",
+                    "thumbnail": "Thumbnail URL (JSON path)",
+                    "thumbholder": "Thumbnail URL",
+                    "arguments": "Custom Uploader Arguments",
+                    "argKey": "Argument Key",
+                    "argValue": "Argument Value",
+                    "headers": "Headers",
+                    "headKey": "Header Key",
+                    "headValue": "Header Value",
+                    "importShareX": "Import ShareX Config",
+                    "import": "Import"
+                }
+            },
+            "option": {
+                "fileUploader": {
+                    "label": "File Uploader",
+                    "description": "Select the file uploader service",
+                    "custom": "Custom Uploader",
+                    "catbox": "Catbox",
+                    "litterBox": "LitterBox",
+                    "goFile": "GoFile"
+                },
+                "goFileToken": {
+                    "label": "GoFile Token",
+                    "description": "GoFile Token (optional)"
+                },
+                "autoSend": {
+                    "label": "Auto-Send",
+                    "description": "Automatically send uploaded file links to chat.",
+                    "yes": "Yes",
+                    "no": "No"
+                },
+                "autoFormat": {
+                    "label": "Auto Format",
+                    "description": "Automatically format uploaded file links.",
+                    "yes": "Yes",
+                    "no": "No"
+                },
+                "catboxUserHash": {
+                    "label": "Catbox User Hash",
+                    "description": "User hash for Catbox uploader (optional)"
+                },
+                "litterboxTime": {
+                    "label": "Litterbox Time",
+                    "description": "Duration for files on Litterbox before they are deleted",
+                    "1h": "1 hour",
+                    "12h": "12 hours",
+                    "24h": "24 hours",
+                    "72h": "72 hours"
+                },
+                "customUploaderName": {
+                    "label": "Custom Uploader Name",
+                    "description": "Name of your custom uploader"
+                },
+                "customUploaderRequestURL": {
+                    "label": "Custom Uploader Request URL",
+                    "description": "Request URL of your custom uploader"
+                },
+                "customUploaderFileFormName": {
+                    "label": "Custom Uploader File Form Name",
+                    "description": "File form name of your custom uploader"
+                },
+                "customUploaderResponseType": {
+                    "label": "Custom Uploader Response Type",
+                    "description": "Response type of your custom uploader"
+                },
+                "customUploaderURL": {
+                    "label": "Custom Uploader URL",
+                    "description": "URL (JSON path) for the custom uploader"
+                },
+                "customUploaderThumbnail": {
+                    "label": "Custom Uploader Thumbnail URL",
+                    "description": "Thumbnail URL (JSON path) for the custom uploader"
+                },
+                "customUploaderHeaders": {
+                    "label": "Custom Uploader Headers",
+                    "description": "Headers for the custom uploader (JSON string)"
+                },
+                "customUploaderArgs": {
+                    "label": "Custom Uploader Arguments",
+                    "description": "Arguments for the custom uploader (JSON string)"
+                },
+                "customSettings": {
+                    "label": "Show Settings",
+                    "description": "Configure custom uploader settings"
+                }
+            }
+        },
+        "biggerStreamPreview": {
+            "name": "BiggerStreamPreview",
+            "description": "This plugin allows you to enlarge stream previews",
+            "context": {
+                "viewPreview": "View Stream Preview"
+            }
+        },
+        "blockKeywords": {
+            "name": "BlockKeywords",
+            "description": "Blocks messages containing specific user-defined keywords, as if the user sending them was blocked.",
+            "option": {
+                "blockedWords": {
+                    "label": "Blocked Words",
+                    "description": "Comma-separated list of words to block"
+                },
+                "useRegex": {
+                    "label": "Use Regex",
+                    "description": "Use each value as a regular expression when checking message content (advanced)"
+                },
+                "caseSensitive": {
+                    "label": "Case Sensitive",
+                    "description": "Whether to use a case sensitive search or not"
+                },
+                "ignoreBlockedMessages": {
+                    "label": "Ignore Blocked Messages",
+                    "description": "Completely ignores (recent) new messages bar"
+                }
+            }
+        },
+        "blockKrisp": {
+            "name": "BlockKrisp",
+            "description": "Prevent Krisp from loading"
+        },
+        "blurNSFW": {
+            "name": "BlurNSFW",
+            "description": "Blur attachments in NSFW channels until hovered",
+            "option": {
+                "blurAmount": {
+                    "label": "Blur Amount",
+                    "description": "Blur Amount (in pixels)"
+                },
+                "blurAllChannels": {
+                    "label": "Blur All Channels",
+                    "description": "Blur attachments in all channels (not just NSFW)"
+                }
+            }
+        },
+        "bypassStatus": {
+            "name": "BypassStatus",
+            "description": "Still get notifications from specific sources when in do not disturb mode. Right-click on users/channels/guilds to set them to bypass do not disturb mode.",
+            "context": {
+                "remove": "Remove Status Bypass",
+                "add": "Add Status Bypass"
+            },
+            "option": {
+                "guilds": {
+                    "label": "Guilds",
+                    "description": "Guilds to let bypass (notified when pinged anywhere in guild)",
+                    "placeholder": "Separate with commas"
+                },
+                "channels": {
+                    "label": "Channels",
+                    "description": "Channels to let bypass (notified when pinged in that channel)",
+                    "placeholder": "Separate with commas"
+                },
+                "users": {
+                    "label": "Users",
+                    "description": "Users to let bypass (notified for all messages sent in DMs)",
+                    "placeholder": "Separate with commas"
+                },
+                "allowOutsideOfDms": {
+                    "label": "Allow Outside of DMs",
+                    "description": "Allow selected users to bypass status outside of DMs too (acts like a channel/guild bypass, but it's for all messages sent by the selected users)"
+                },
+                "notificationSound": {
+                    "label": "Notification Sound",
+                    "description": "Whether the notification sound should be played"
+                },
+                "statusToUse": {
+                    "label": "Status to Use",
+                    "description": "Status to use for whitelist",
+                    "online": "Online",
+                    "idle": "Idle",
+                    "dnd": "Do Not Disturb",
+                    "invisible": "Invisible"
+                }
+            }
+        },
+        "cakeDay": {
+            "name": "CakeDay",
+            "description": "Track and display user birthdays with cake icons",
+            "context": {
+                "label": "Birthday",
+                "setBirthday": "Set Birthday",
+                "clearBirthday": "Clear Birthday",
+                "current": "Current:"
+            },
+            "option": {
+                "chat": {
+                    "label": "Chat",
+                    "description": "Show cake icons next to usernames in chat"
+                },
+                "memberList": {
+                    "label": "Member List",
+                    "description": "Show cake icons in member list"
+                },
+                "profileBadge": {
+                    "label": "Profile Badge",
+                    "description": "Show cake badge in user profile"
+                }
+            },
+            "locations": {
+                "chat": {
+                    "label": "Chat",
+                    "description": "next to usernames in chat"
+                },
+                "memberList": {
+                    "label": "Member List",
+                    "description": "in member list"
+                }
+            },
+            "toast": {
+                "success": "Birthday set successfully!",
+                "invalid": "Invalid birthday format! Only DD/MM is accepted.",
+                "cleared": "Birthday cleared successfully!"
+            },
+            "modal": {
+                "title": "Set Birthday for {{username}}",
+                "description": "Enter the birthday in DD/MM format (e.g. 25/12)",
+                "placeholder": "e.g. 25/12",
+                "current": "Current birthday:",
+                "set": "Set Birthday",
+                "cancel": "Cancel",
+                "birthday": "It's my birthday! 🎂",
+                "saved": "Saved Birthdays",
+                "savedDesc": "No birthdays saved yet. Right-click on users to add their birthdays!",
+                "today": "Today",
+                "remove": "Remove"
+            }
+        },
+        "callTimer": {
+            "name": "CallTimer",
+            "description": "Adds a timer to vcs",
+            "option": {
+                "format": {
+                    "label": "Format",
+                    "description": "The timer format. This can be any valid moment.js format",
+                    "stopwatch": "30d 23:00:42",
+                    "human": "30d 23h 00m 42s"
+                }
+            },
+            "connected": "Connected for {{time}}"
+        },
+        "channelBadges": {
+            "name": "ChannelBadges",
+            "description": "Adds badges to channels based on their type",
+            "badge": {
+                "private": "This channel is locked.",
+                "nsfw": "This channel is marked as NSFW.",
+                "rules": "This channel is the server rules channel."
+            },
+            "option": {
+                "oneBadgePerChannel": {
+                    "label": "One Badge Per Channel",
+                    "description": "Show only one badge per channel"
+                },
+                "showTextBadge": {
+                    "label": "Show Text Badge",
+                    "description": "Show Text badge"
+                },
+                "showVoiceBadge": {
+                    "label": "Show Voice Badge",
+                    "description": "Show Voice badge"
+                },
+                "showCategoryBadge": {
+                    "label": "Show Category Badge",
+                    "description": "Show Category badge"
+                },
+                "showDirectoryBadge": {
+                    "label": "Show Directory Badge",
+                    "description": "Show Directory badge"
+                },
+                "showAnnouncementThreadBadge": {
+                    "label": "Show Announcement Thread Badge",
+                    "description": "Show Announcement Thread badge"
+                },
+                "showPublicThreadBadge": {
+                    "label": "Show Public Thread Badge",
+                    "description": "Show Public Thread badge"
+                },
+                "showPrivateThreadBadge": {
+                    "label": "Show Private Thread Badge",
+                    "description": "Show Private Thread badge"
+                },
+                "showStageBadge": {
+                    "label": "Show Stage Badge",
+                    "description": "Show Stage badge"
+                },
+                "showForumBadge": {
+                    "label": "Show Forum Badge",
+                    "description": "Show Forum badge"
+                },
+                "showMediaBadge": {
+                    "label": "Show Media Badge",
+                    "description": "Show Media badge"
+                },
+                "showNSFWBadge": {
+                    "label": "Show NSFW Badge",
+                    "description": "Show NSFW badge"
+                },
+                "showLockedBadge": {
+                    "label": "Show Locked Badge",
+                    "description": "Show Locked badge"
+                },
+                "showRulesBadge": {
+                    "label": "Show Rules Badge",
+                    "description": "Show Rules badge"
+                },
+                "showUnknownBadge": {
+                    "label": "Show Unknown Badge",
+                    "description": "Show Unknown badge"
+                },
+                "textBadgeLabel": {
+                    "label": "Text Badge Label",
+                    "description": "Text badge label",
+                    "default": "Text"
+                },
+                "voiceBadgeLabel": {
+                    "label": "Voice Badge Label",
+                    "description": "Voice badge label",
+                    "default": "Voice"
+                },
+                "categoryBadgeLabel": {
+                    "label": "Category Badge Label",
+                    "description": "Category badge label",
+                    "default": "Category"
+                },
+                "announcementBadgeLabel": {
+                    "label": "Announcement Thread Badge Label",
+                    "description": "Announcement Thread badge label",
+                    "default": "News"
+                },
+                "announcementThreadBadgeLabel": {
+                    "label": "Announcement Thread Badge Label",
+                    "description": "Announcement Thread badge label",
+                    "default": "News Thread"
+                },
+                "publicThreadBadgeLabel": {
+                    "label": "Public Thread Badge Label",
+                    "description": "Public Thread badge label",
+                    "default": "Thread"
+                },
+                "privateThreadBadgeLabel": {
+                    "label": "Private Thread Badge Label",
+                    "description": "Private Thread badge label",
+                    "default": "Private Thread"
+                },
+                "stageBadgeLabel": {
+                    "label": "Stage Badge Label",
+                    "description": "Stage badge label",
+                    "default": "Stage"
+                },
+                "directoryBadgeLabel": {
+                    "label": "Directory Badge Label",
+                    "description": "Directory badge label",
+                    "default": "Directory"
+                },
+                "forumBadgeLabel": {
+                    "label": "Forum Badge Label",
+                    "description": "Forum badge label",
+                    "default": "Forum"
+                },
+                "mediaBadgeLabel": {
+                    "label": "Media Badge Label",
+                    "description": "Media badge label",
+                    "default": "Media"
+                },
+                "nsfwBadgeLabel": {
+                    "label": "NSFW Badge Label",
+                    "description": "NSFW badge label",
+                    "default": "NSFW"
+                },
+                "lockedBadgeLabel": {
+                    "label": "Locked Badge Label",
+                    "description": "Locked badge label",
+                    "default": "Locked"
+                },
+                "rulesBadgeLabel": {
+                    "label": "Rules Badge Label",
+                    "description": "Rules badge label",
+                    "default": "Rules"
+                },
+                "unknownBadgeLabel": {
+                    "label": "Unknown Badge Label",
+                    "description": "Unknown badge label",
+                    "default": "Unknown"
+                },
+                "textBadgeColor": {
+                    "label": "Text Badge Color",
+                    "description": "Text badge color"
+                },
+                "voiceBadgeColor": {
+                    "label": "Voice Badge Color",
+                    "description": "Voice badge color"
+                },
+                "categoryBadgeColor": {
+                    "label": "Category Badge Color",
+                    "description": "Category badge color"
+                },
+                "announcementBadgeColor": {
+                    "label": "Announcement Thread Badge Color",
+                    "description": "Announcement Thread badge color"
+                },
+                "announcementThreadBadgeColor": {
+                    "label": "Announcement Thread Badge Color",
+                    "description": "Announcement Thread badge color"
+                },
+                "publicThreadBadgeColor": {
+                    "label": "Public Thread Badge Color",
+                    "description": "Public Thread badge color"
+                },
+                "privateThreadBadgeColor": {
+                    "label": "Private Thread Badge Color",
+                    "description": "Private Thread badge color"
+                },
+                "stageBadgeColor": {
+                    "label": "Stage Badge Color",
+                    "description": "Stage badge color"
+                },
+                "directoryBadgeColor": {
+                    "label": "Directory Badge Color",
+                    "description": "Directory badge color"
+                },
+                "forumBadgeColor": {
+                    "label": "Forum Badge Color",
+                    "description": "Forum badge color"
+                },
+                "mediaBadgeColor": {
+                    "label": "Media Badge Color",
+                    "description": "Media badge color"
+                },
+                "nsfwBadgeColor": {
+                    "label": "NSFW Badge Color",
+                    "description": "NSFW badge color"
+                },
+                "lockedBadgeColor": {
+                    "label": "Locked Badge Color",
+                    "description": "Locked badge color"
+                },
+                "rulesBadgeColor": {
+                    "label": "Rules Badge Color",
+                    "description": "Rules badge color"
+                },
+                "unknownBadgeColor": {
+                    "label": "Unknown Badge Color",
+                    "description": "Unknown badge color"
+                }
+            },
+            "badges": {
+                "text": "Text",
+                "voice": "Voice",
+                "category": "Category",
+                "announcement": "News",
+                "announcementThread": "News Thread",
+                "publicThread": "Thread",
+                "privateThread": "Private Thread",
+                "stage": "Stage",
+                "directory": "Directory",
+                "forum": "Forum",
+                "media": "Media",
+                "nsfw": "NSFW",
+                "locked": "Locked",
+                "rules": "Rules",
+                "unknown": "Unknown"
+            },
+            "tooltip": {
+                "locked": "This channel is locked.",
+                "nsfw": "This channel is marked as NSFW."
+            }
         }
     }
 }

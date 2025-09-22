@@ -17,14 +17,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "BetterGifAltText",
     authors: [Devs.Ven],
-    description:
-        "Change GIF alt text from simply being 'GIF' to containing the gif tags / filename",
+    description: "Change GIF alt text from simply being 'GIF' to containing the gif tags / filename",
+
+    get displayDescription() {
+        return t("plugin.betterGifAltText.description");
+    },
+
     patches: [
         {
             find: '"onCloseImage",',

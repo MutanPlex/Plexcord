@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { openPluginModal } from "@components/settings/tabs";
 import { getIntlMessage } from "@utils/discord";
 import { isObjectEmpty } from "@utils/misc";
@@ -14,10 +15,10 @@ import Plugins from "~plugins";
 
 function onRestartNeeded() {
     Alerts.show({
-        title: "Restart required",
-        body: <p>You have changed settings that require a restart.</p>,
-        confirmText: "Restart now",
-        cancelText: "Later!",
+        title: t("plugins.betterSettings.alert.title"),
+        body: <p>{t("plugins.betterSettings.alert.restart")}</p>,
+        confirmText: t("plugins.betterSettings.alert.confirm"),
+        cancelText: t("plugins.betterSettings.alert.cancel"),
         onConfirm: () => location.reload()
     });
 }

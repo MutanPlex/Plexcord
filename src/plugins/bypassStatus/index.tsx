@@ -6,6 +6,7 @@
  */
 
 import { type NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { Notifications } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
 import type { Message } from "@plexcord/discord-types";
@@ -77,7 +78,7 @@ function ContextCallback(name: "guild" | "user" | "channel"): NavContextMenuPatc
             <Menu.MenuGroup>
                 <Menu.MenuItem
                     id={`status-${name}-bypass`}
-                    label={`${enabled ? "Remove" : "Add"} Status Bypass`}
+                    label={`${enabled ? t("plugin.bypassStatus.context.remove") : t("plugin.bypassStatus.context.add")}`}
                     icon={() => Icon(enabled)}
                     action={() => {
                         let bypasses: string[] = settings.store[`${name}s`].split(", ");
@@ -93,57 +94,95 @@ function ContextCallback(name: "guild" | "user" | "channel"): NavContextMenuPatc
 
 const settings = definePluginSettings({
     guilds: {
+        get label() {
+            return t("plugin.bypassStatus.option.guilds.label");
+        },
+        get description() {
+            return t("plugin.bypassStatus.option.guilds.description");
+        },
         type: OptionType.STRING,
-        description: "Guilds to let bypass (notified when pinged anywhere in guild)",
         default: "",
-        placeholder: "Separate with commas",
+        get placeholder() {
+            return t("plugin.bypassStatus.option.guilds.placeholder");
+        },
         onChange: value => settings.store.guilds = processIds(value)
     },
     channels: {
+        get label() {
+            return t("plugin.bypassStatus.option.channels.label");
+        },
+        get description() {
+            return t("plugin.bypassStatus.option.channels.description");
+        },
         type: OptionType.STRING,
-        description: "Channels to let bypass (notified when pinged in that channel)",
         default: "",
-        placeholder: "Separate with commas",
+        get placeholder() {
+            return t("plugin.bypassStatus.option.channels.placeholder");
+        },
         onChange: value => settings.store.channels = processIds(value)
     },
     users: {
+        get label() {
+            return t("plugin.bypassStatus.option.users.label");
+        },
+        get description() {
+            return t("plugin.bypassStatus.option.users.description");
+        },
         type: OptionType.STRING,
-        description: "Users to let bypass (notified for all messages sent in DMs)",
         default: "",
-        placeholder: "Separate with commas",
+        get placeholder() {
+            return t("plugin.bypassStatus.option.users.placeholder");
+        },
         onChange: value => settings.store.users = processIds(value)
     },
     allowOutsideOfDms: {
+        get label() {
+            return t("plugin.bypassStatus.option.allowOutsideOfDms.label");
+        },
+        get description() {
+            return t("plugin.bypassStatus.option.allowOutsideOfDms.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Allow selected users to bypass status outside of DMs too (acts like a channel/guild bypass, but it's for all messages sent by the selected users)"
     },
     notificationSound: {
+        get label() {
+            return t("plugin.bypassStatus.option.notificationSound.label");
+        },
+        get description() {
+            return t("plugin.bypassStatus.option.notificationSound.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether the notification sound should be played",
         default: true,
     },
     statusToUse: {
+        get label() {
+            return t("plugin.bypassStatus.option.statusToUse.label");
+        },
+        get description() {
+            return t("plugin.bypassStatus.option.statusToUse.description");
+        },
         type: OptionType.SELECT,
-        description: "Status to use for whitelist",
-        options: [
-            {
-                label: "Online",
-                value: "online",
-            },
-            {
-                label: "Idle",
-                value: "idle",
-            },
-            {
-                label: "Do Not Disturb",
-                value: "dnd",
-                default: true
-            },
-            {
-                label: "Invisible",
-                value: "invisible",
-            }
-        ]
+        get options() {
+            return [
+                {
+                    label: t("plugin.bypassStatus.option.statusToUse.online"),
+                    value: "online",
+                },
+                {
+                    label: t("plugin.bypassStatus.option.statusToUse.idle"),
+                    value: "idle",
+                },
+                {
+                    label: t("plugin.bypassStatus.option.statusToUse.dnd"),
+                    value: "dnd",
+                    default: true
+                },
+                {
+                    label: t("plugin.bypassStatus.option.statusToUse.invisible"),
+                    value: "invisible",
+                }
+            ];
+        }
     }
 });
 
@@ -151,6 +190,11 @@ export default definePlugin({
     name: "BypassStatus",
     description: "Still get notifications from specific sources when in do not disturb mode. Right-click on users/channels/guilds to set them to bypass do not disturb mode.",
     authors: [Devs.Inbestigator],
+
+    get displayDescription() {
+        return t("plugin.bypassStatus.description");
+    },
+
     flux: {
         async MESSAGE_CREATE({ message, guildId, channelId }: IMessageCreate): Promise<void> {
             try {

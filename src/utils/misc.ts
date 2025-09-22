@@ -37,10 +37,11 @@ export function sleep(ms: number): Promise<void> {
     return new Promise(r => setTimeout(r, ms));
 }
 
-export async function copyWithToast(text: string, toastMessage = "Copied to clipboard!") {
+export async function copyWithToast(text: string, toastMessage?: string) {
+    const { t } = await import("@api/i18n");
     await copyToClipboard(text);
     Toasts.show({
-        message: toastMessage,
+        message: toastMessage ?? t("utils.toast.copied"),
         id: Toasts.genId(),
         type: Toasts.Type.SUCCESS
     });

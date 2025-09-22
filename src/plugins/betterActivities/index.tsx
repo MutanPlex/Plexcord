@@ -7,6 +7,7 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { migratePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -28,6 +29,9 @@ export default definePlugin({
     tags: ["activity"],
 
     settings,
+    get displayDescription() {
+        return t("plugin.betterActivities.description");
+    },
 
     patchActivityList,
 

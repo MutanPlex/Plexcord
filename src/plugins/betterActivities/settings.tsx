@@ -5,39 +5,65 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { OptionType } from "@utils/types";
 import { React } from "@webpack/common";
 
 export const settings = definePluginSettings({
     memberList: {
+        get label() {
+            return t("plugin.betterActivities.option.memberList.label");
+        },
+        get description() {
+            return t("plugin.betterActivities.option.memberList.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show activity icons in the member list",
         default: true,
         restartNeeded: true,
     },
     iconSize: {
+        get label() {
+            return t("plugin.betterActivities.option.iconSize.label");
+        },
+        get description() {
+            return t("plugin.betterActivities.option.iconSize.description");
+        },
         type: OptionType.SLIDER,
-        description: "Size of the activity icons",
         markers: [10, 15, 20],
         default: 15,
         stickToMarkers: false,
     },
     specialFirst: {
+        get label() {
+            return t("plugin.betterActivities.option.specialFirst.label");
+        },
+        get description() {
+            return t("plugin.betterActivities.option.specialFirst.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show special activities first (Currently Spotify and Twitch)",
         default: true,
         restartNeeded: false,
     },
     renderGifs: {
+        get label() {
+            return t("plugin.betterActivities.option.renderGifs.label");
+        },
+        get description() {
+            return t("plugin.betterActivities.option.renderGifs.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Allow rendering GIFs",
         default: true,
         restartNeeded: false,
     },
     removeGameActivityStatus: {
+        get label() {
+            return t("plugin.betterActivities.option.removeGameActivityStatus.label");
+        },
+        get description() {
+            return t("plugin.betterActivities.option.removeGameActivityStatus.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Remove game activity icon and status",
         default: false,
         restartNeeded: true,
     },
@@ -55,24 +81,36 @@ export const settings = definePluginSettings({
         ),
     },
     userPopout: {
+        get label() {
+            return t("plugin.betterActivities.option.userPopout.label");
+        },
+        get description() {
+            return t("plugin.betterActivities.option.userPopout.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show all activities in the profile popout/sidebar",
         default: true,
         restartNeeded: true,
     },
     allActivitiesStyle: {
+        get label() {
+            return t("plugin.betterActivities.option.allActivitiesStyle.label");
+        },
+        get description() {
+            return t("plugin.betterActivities.option.allActivitiesStyle.description");
+        },
         type: OptionType.SELECT,
-        description: "Style for showing all activities",
-        options: [
-            {
-                default: true,
-                label: "Carousel",
-                value: "carousel",
-            },
-            {
-                label: "List",
-                value: "list",
-            },
-        ]
+        get options() {
+            return [
+                {
+                    default: true,
+                    label: t("plugin.betterActivities.option.allActivitiesStyle.carousel"),
+                    value: "carousel",
+                },
+                {
+                    label: t("plugin.betterActivities.option.allActivitiesStyle.list"),
+                    value: "list",
+                },
+            ];
+        }
     }
 });

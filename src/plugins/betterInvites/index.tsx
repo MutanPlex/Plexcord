@@ -7,6 +7,7 @@
 
 import "./style.css";
 
+import { t, tJsx } from "@api/i18n";
 import { PcDevs } from "@utils/constants";
 import { openUserProfile } from "@utils/discord";
 import { classes } from "@utils/misc";
@@ -35,6 +36,11 @@ export default definePlugin({
     name: "BetterInvites",
     description: "See invites expiration date, view inviter profile and preview discoverable servers before joining by clicking their name",
     authors: [PcDevs.iamme, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.betterInvites.description");
+    },
+
     patches: [
         {
             find: "#{intl::HUB_INVITE_ANOTHER_SCHOOL_LINK}",
@@ -55,7 +61,7 @@ export default definePlugin({
         }
     ],
     RenderTip(isGuest: boolean, message: string, expires_at: string) {
-        return <>This invite will expire {Parser.parse(`<t:${Math.round(new Date(expires_at).getTime() / 1000)}:R>`)}{isGuest ? ". " + message : ""}</>;
+        return <> {tJsx("plugin.betterInvites.render.tip", { time: Parser.parse(`<t:${Math.round(new Date(expires_at).getTime() / 1000)}:R>`) })} {isGuest ? ". " + message : ""}</>;
     },
     Header(currentUserId: string, inviter: User | undefined, defaultMessage: string) {
         return <div className="pc-bi-header-inner">
@@ -65,7 +71,7 @@ export default definePlugin({
                     className={classes(AvatarStyles.avatar, AvatarStyles.clickable) + " pc-bi-inviter-avatar"}
                     onClick={() => openUserProfile(inviter.id)}
                     src={inviter.avatar ? `https://cdn.discordapp.com/avatars/${inviter.id}/${inviter.avatar}.webp?size=80` : "/assets/1f0bfc0865d324c2587920a7d80c609b.png?size=128"}
-                /> {inviter.global_name ? inviter.global_name.toUpperCase() : inviter.username.toUpperCase()} HAS INVITED YOU TO JOIN
+                /> {inviter.global_name ? inviter.global_name.toUpperCase() : inviter.username.toUpperCase()} {t("plugin.betterInvites.render.header")}
             </> : defaultMessage}</div>;
     },
     Lurkable: (id: string, features: Iterable<string> | undefined) => {

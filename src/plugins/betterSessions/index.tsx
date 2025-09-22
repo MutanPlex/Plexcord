@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -39,13 +40,23 @@ const BlobMask = findComponentByCodeLazy("!1,lowerBadgeSize:");
 
 const settings = definePluginSettings({
     backgroundCheck: {
+        get label() {
+            return t("plugin.betterSessions.option.backgroundCheck.label");
+        },
+        get description() {
+            return t("plugin.betterSessions.option.backgroundCheck.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Check for new sessions in the background, and display notifications when they are detected",
         default: false,
         restartNeeded: true
     },
     checkInterval: {
-        description: "How often to check for new sessions in the background (if enabled), in minutes",
+        get label() {
+            return t("plugin.betterSessions.option.checkInterval.label");
+        },
+        get description() {
+            return t("plugin.betterSessions.option.checkInterval.description");
+        },
         type: OptionType.NUMBER,
         default: 20,
         restartNeeded: true
@@ -58,6 +69,10 @@ export default definePlugin({
     authors: [Devs.amia],
 
     settings: settings,
+
+    get displayDescription() {
+        return t("plugin.betterSessions.description");
+    },
 
     patches: [
         {
@@ -107,7 +122,7 @@ export default definePlugin({
                             marginLeft: "2px"
                         }}
                     >
-                        NEW
+                        {t("plugin.betterSessions.new")}
                     </div>
                 )}
                 <RenameButton session={session} state={state} />
@@ -181,7 +196,7 @@ export default definePlugin({
             savedSessionsCache.set(session.id_hash, { name: "", isNew: true });
             showNotification({
                 title: "BetterSessions",
-                body: `New session:\n${session.client_info.os} · ${session.client_info.platform} · ${session.client_info.location}`,
+                body: `${t("plugin.betterSessions.newSessions")}\n${session.client_info.os} · ${session.client_info.platform} · ${session.client_info.location}`,
                 permanent: true,
                 onClick: () => UserSettingsModal.open("Sessions")
             });

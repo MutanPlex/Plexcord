@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Settings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -42,6 +43,10 @@ export default definePlugin({
     description: "Blur attachments in NSFW channels until hovered",
     authors: [Devs.Ven],
 
+    get displayDescription() {
+        return t("plugin.blurNSFW.description");
+    },
+
     patches: [
         {
             find: "}renderEmbeds(",
@@ -54,14 +59,24 @@ export default definePlugin({
 
     options: {
         blurAmount: {
+            get label() {
+                return t("plugin.blurNSFW.option.blurAmount.label");
+            },
+            get description() {
+                return t("plugin.blurNSFW.option.blurAmount.description");
+            },
             type: OptionType.NUMBER,
-            description: "Blur Amount (in pixels)",
             default: 10,
             onChange: setCss
         },
         blurAllChannels: {
+            get label() {
+                return t("plugin.blurNSFW.option.blurAllChannels.label");
+            },
+            get description() {
+                return t("plugin.blurNSFW.option.blurAllChannels.description");
+            },
             type: OptionType.BOOLEAN,
-            description: "Blur attachments in all channels (not just NSFW)",
             default: false
         }
     },

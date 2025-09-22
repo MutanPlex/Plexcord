@@ -6,6 +6,7 @@
  */
 
 import * as DataStore from "@api/DataStore";
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { User } from "@plexcord/discord-types";
@@ -32,12 +33,22 @@ interface Nameplate {
 
 const settings = definePluginSettings({
     animate: {
-        description: "Animate banners",
+        get label() {
+            return t("plugin.bannersEverywhere.option.animate.label");
+        },
+        get description() {
+            return t("plugin.bannersEverywhere.option.animate.description");
+        },
         type: OptionType.BOOLEAN,
         default: false
     },
     preferNameplate: {
-        description: "prefer nameplate over banner",
+        get label() {
+            return t("plugin.bannersEverywhere.option.preferNameplate.label");
+        },
+        get description() {
+            return t("plugin.bannersEverywhere.option.preferNameplate.description");
+        },
         type: OptionType.BOOLEAN,
         default: false
     },
@@ -53,6 +64,11 @@ export default definePlugin({
     description: "Displays banners in the member list ",
     authors: [Devs.ImLvna, Devs.AutumnVN, PcDevs.MutanPlex],
     settings,
+
+    get displayDescription() {
+        return t("plugin.bannersEverywhere.description");
+    },
+
     patches: [
         {
             find: "#{intl::GUILD_OWNER}),",

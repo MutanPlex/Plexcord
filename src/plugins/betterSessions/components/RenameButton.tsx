@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { SessionInfo } from "@plugins/betterSessions/types";
 import { openModal } from "@utils/modal";
 import { Button } from "@webpack/common";
@@ -32,7 +33,7 @@ export function RenameButton({ session, state }: { session: SessionInfo["session
                 ))
             }
         >
-            Rename
+            {t("plugin.betterSessions.rename")}
         </Button>
     );
 }

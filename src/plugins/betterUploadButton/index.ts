@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -24,6 +25,11 @@ export default definePlugin({
     name: "BetterUploadButton",
     authors: [Devs.fawn, Devs.Ven],
     description: "Upload with a single click, open menu with right click",
+
+    get displayDescription() {
+        return t("plugin.betterUploadButton.description");
+    },
+
     patches: [
         {
             find: ".CHAT_INPUT_BUTTON_NOTIFICATION,",

@@ -7,6 +7,7 @@
 
 import "./style.css";
 
+import { t } from "@api/i18n";
 import { Channel, Guild } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import { getCurrentGuild } from "@utils/discord";
@@ -37,9 +38,9 @@ function addBadgesToChannel(element: HTMLElement, channelId: string) {
     }
 
     const badgeConditions = [
-        { id: 6101, condition: isPrivate, title: "This channel is locked." },
-        { id: 6100, condition: isNSFW, title: "This channel is marked as NSFW." },
-        { id: 6102, condition: currentGuild?.rulesChannelId === channel.id, title: "This channel is the server rules channel." },
+        { id: 6101, condition: isPrivate, title: t("plugin.channelBadges.badge.private") },
+        { id: 6100, condition: isNSFW, title: t("plugin.channelBadges.badge.nsfw") },
+        { id: 6102, condition: currentGuild?.rulesChannelId === channel.id, title: t("plugin.channelBadges.badge.rules") },
     ];
 
     badgeConditions.forEach(({ id, condition, title }) => {
@@ -122,6 +123,10 @@ export default definePlugin({
     description: "Adds badges to channels based on their type",
     authors: [PcDevs.creations],
     settings,
+
+    get displayDescription() {
+        return t("plugin.channelBadges.description");
+    },
 
     async start() {
         currentGuild = getCurrentGuild();

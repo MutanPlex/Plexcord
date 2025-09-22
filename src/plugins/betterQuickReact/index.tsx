@@ -7,37 +7,63 @@
 
 import "./style.css";
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 
 export const settings = definePluginSettings({
     frequentEmojis: {
-        description: "Use frequently used emojis instead of favourite emojis",
+        get label() {
+            return t("plugin.betterQuickReact.option.frequentEmojis.label");
+        },
+        get description() {
+            return t("plugin.betterQuickReact.option.frequentEmojis.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     },
     rows: {
-        description: "Rows of quick reactions to display",
+        get label() {
+            return t("plugin.betterQuickReact.option.rows.label");
+        },
+        get description() {
+            return t("plugin.betterQuickReact.option.rows.description");
+        },
         type: OptionType.SLIDER,
         default: 2,
         markers: makeRange(1, 16, 1),
         stickToMarkers: true
     },
     columns: {
-        description: "Columns of quick reactions to display",
+        get label() {
+            return t("plugin.betterQuickReact.option.columns.label");
+        },
+        get description() {
+            return t("plugin.betterQuickReact.option.columns.description");
+        },
         type: OptionType.SLIDER,
         default: 4,
         markers: makeRange(1, 12, 1),
         stickToMarkers: true
     },
     compactMode: {
-        description: "Scales the buttons to 75% of their original scale, whilst increasing the inner emoji to 125% scale. Emojis will be 93.75% of the original size. Recommended to have a minimum of 5 columns",
+        get label() {
+            return t("plugin.betterQuickReact.option.compactMode.label");
+        },
+        get description() {
+            return t("plugin.betterQuickReact.option.compactMode.description");
+        },
         type: OptionType.BOOLEAN,
         default: false
     },
     scroll: {
-        description: "Enable scrolling the list of emojis",
+        get label() {
+            return t("plugin.betterQuickReact.option.scroll.label");
+        },
+        get description() {
+            return t("plugin.betterQuickReact.option.scroll.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     }
@@ -48,6 +74,10 @@ export default definePlugin({
     description: "Improves the quick react buttons in the message context menu.",
     authors: [Devs.Ven, Devs.Sqaaakoi, PcDevs.MutanPlex],
     settings,
+
+    get displayDescription() {
+        return t("plugin.betterQuickReact.description");
+    },
 
     patches: [
         // Remove favourite emojis from being inserted at the start of the reaction list

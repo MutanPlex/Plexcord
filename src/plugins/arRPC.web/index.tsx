@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t, tJsx } from "@api/i18n";
 import { popNotice, showNotice } from "@api/Notices";
 import { Link } from "@components/Link";
 import { Devs } from "@utils/constants";
@@ -45,11 +46,17 @@ export default definePlugin({
     reporterTestable: ReporterTestable.None,
     hidden: IS_PLEXTRON || "legcord" in window,
 
+    get displayDescription() {
+        return t("plugin.arRpc.description");
+    },
+
     settingsAboutComponent: () => (
         <>
-            <Forms.FormTitle tag="h3">How to use arRPC</Forms.FormTitle>
+            <Forms.FormTitle tag="h3">{t("plugin.arRpc.use.title")}</Forms.FormTitle>
             <Forms.FormText>
-                <Link href="https://github.com/OpenAsar/arrpc/tree/main#server">Follow the instructions in the GitHub repo</Link> to get the server running, and then enable the plugin.
+                {tJsx("plugin.arRpc.use.enable", {
+                    link: <Link href="https://github.com/OpenAsar/arrpc/tree/main#server">{t("plugin.arRpc.use.link")}</Link>
+                })}
             </Forms.FormText>
         </>
     ),
@@ -82,7 +89,7 @@ export default definePlugin({
 
         const connectionSuccessful = await new Promise(res => setTimeout(() => res(ws.readyState === WebSocket.OPEN), 1000)); // check if open after 1s
         if (!connectionSuccessful) {
-            showNotice("Failed to connect to arRPC, is it running?", "Retry", () => { // show notice about failure to connect, with retry/ignore
+            showNotice(t("plugin.arRpc.toast.failed"), t("plugin.arRpc.toast.retry"), () => { // show notice about failure to connect, with retry/ignore
                 popNotice();
                 this.start();
             });
@@ -90,7 +97,7 @@ export default definePlugin({
         }
 
         Toasts.show({ // show toast on success
-            message: "Connected to arRPC",
+            message: t("plugin.arRpc.toast.connected"),
             type: Toasts.Type.SUCCESS,
             id: Toasts.genId(),
             options: {

@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { MessageStore } from "@webpack/common";
@@ -13,6 +14,10 @@ export default definePlugin({
     name: "BetterPlusReacts",
     authors: [Devs.Joona],
     description: "The amount of plus before :emoji: is the message to add it to",
+
+    get displayDescription() {
+        return t("plugin.betterPlusReacts.description");
+    },
     patches: [
         {
             find: ".SLASH_COMMAND_USED,",

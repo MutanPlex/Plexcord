@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Devs } from "@utils/constants";
@@ -25,18 +26,33 @@ waitFor(["animating", "baseLayer", "bg", "layer", "layers"], m => Classes = m);
 
 const settings = definePluginSettings({
     disableFade: {
-        description: "Disable the crossfade animation",
+        get label() {
+            return t("plugin.betterSettings.option.disableFade.label");
+        },
+        get description() {
+            return t("plugin.betterSettings.option.disableFade.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     organizeMenu: {
-        description: "Organizes the settings cog context menu into categories",
+        get label() {
+            return t("plugin.betterSettings.option.organizeMenu.label");
+        },
+        get description() {
+            return t("plugin.betterSettings.option.organizeMenu.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     },
     eagerLoad: {
-        description: "Removes the loading delay when opening the menu for the first time",
+        get label() {
+            return t("plugin.betterSettings.option.eagerLoad.label");
+        },
+        get description() {
+            return t("plugin.betterSettings.option.eagerLoad.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
@@ -81,6 +97,10 @@ export default definePlugin({
     description: "Enhances your settings-menu-opening experience",
     authors: [Devs.Kyuuhachi],
     settings,
+
+    get displayDescription() {
+        return t("plugin.betterSettings.description");
+    },
 
     patches: [
         {

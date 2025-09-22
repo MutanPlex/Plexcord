@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Settings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { copyWithToast } from "@utils/misc";
@@ -26,6 +27,11 @@ export default definePlugin({
     name: "BetterRoleDot",
     authors: [Devs.Ven, Devs.AutumnVN],
     description: "Copy role colour on RoleDot (accessibility setting) click. Also allows using both RoleDot and coloured names simultaneously",
+
+    get displayDescription() {
+        return t("plugin.betterRoleDot.description");
+    },
+
     patches: [
         {
             find: ".dotBorderBase",
@@ -69,14 +75,24 @@ export default definePlugin({
 
     options: {
         bothStyles: {
+            get label() {
+                return t("plugin.betterRoleDot.option.bothStyles.label");
+            },
+            get description() {
+                return t("plugin.betterRoleDot.option.bothStyles.description");
+            },
             type: OptionType.BOOLEAN,
-            description: "Show both role dot and coloured names",
             restartNeeded: true,
             default: false,
         },
         copyRoleColorInProfilePopout: {
+            get label() {
+                return t("plugin.betterRoleDot.option.copyRoleColorInProfilePopout.label");
+            },
+            get description() {
+                return t("plugin.betterRoleDot.option.copyRoleColorInProfilePopout.description");
+            },
             type: OptionType.BOOLEAN,
-            description: "Allow click on role dot in profile popout to copy role color",
             restartNeeded: true,
             default: false
         }

@@ -7,6 +7,7 @@
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, sendBotMessage } from "@api/Commands";
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Flex } from "@components/Flex";
 import { OpenExternalIcon } from "@components/Icons";
@@ -147,10 +148,10 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
                     setFileUploader("Custom");
                     updateSetting("fileUploader", "Custom");
 
-                    showToast("ShareX config imported successfully!");
+                    showToast(t("plugin.bigFileUpload.toast.sharex.import.success"));
                 } catch (error) {
                     console.error("Error parsing ShareX config:", error);
-                    showToast("Error importing ShareX config. Check console for details.");
+                    showToast(t("plugin.bigFileUpload.toast.sharex.import.error"));
                 }
             };
             reader.readAsText(file);
@@ -162,15 +163,15 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
     const validateCustomUploaderSettings = () => {
         if (fileUploader === "Custom") {
             if (!settings.store.customUploaderRequestURL) {
-                showToast("Custom uploader request URL is required.");
+                showToast(t("plugin.bigFileUpload.toast.required.url"));
                 return false;
             }
             if (!settings.store.customUploaderFileFormName) {
-                showToast("Custom uploader file form name is required.");
+                showToast(t("plugin.bigFileUpload.toast.required.fileForm"));
                 return false;
             }
             if (!settings.store.customUploaderURL) {
-                showToast("Custom uploader URL (JSON path) is required.");
+                showToast(t("plugin.bigFileUpload.toast.required.json"));
                 return false;
             }
         }
@@ -241,18 +242,18 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
         <Flex flexDirection="column">
             {/* File Uploader Selection */}
             <Forms.FormDivider />
-            <Forms.FormSection title="Upload Limit Bypass">
+            <Forms.FormSection title={t("plugin.bigFileUpload.form.limit.title")}>
                 <Forms.FormText>
-                    Select the external file uploader service to be used to bypass the upload limit.
+                    {t("plugin.bigFileUpload.form.limit.description")}
                 </Forms.FormText>
                 <Select
                     options={[
-                        { label: "Custom Uploader", value: "Custom" },
-                        { label: "Catbox (Up to 200MB)", value: "Catbox" },
-                        { label: "Litterbox (Temporary | Up to 1GB)", value: "Litterbox" },
-                        { label: "GoFile (Temporary | Unlimited | No Embeds)", value: "GoFile" },
+                        { label: t("plugin.bigFileUpload.form.limit.option.custom"), value: "Custom" },
+                        { label: t("plugin.bigFileUpload.form.limit.option.catbox"), value: "Catbox" },
+                        { label: t("plugin.bigFileUpload.form.limit.option.litterBox"), value: "Litterbox" },
+                        { label: t("plugin.bigFileUpload.form.limit.option.goFile"), value: "GoFile" },
                     ]}
-                    placeholder="Select the file uploader service"
+                    placeholder={t("plugin.bigFileUpload.form.limit.placeholder")}
                     className={Margins.bottom16}
                     select={handleFileUploaderChange}
                     isSelected={v => v === fileUploader}
@@ -265,10 +266,10 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
                 <Switch
                     value={settings.store.autoSend === "Yes"}
                     onChange={(enabled: boolean) => updateSetting("autoSend", enabled ? "Yes" : "No")}
-                    note="Whether to automatically send the links with the uploaded files to chat instead of just pasting them into the chatbox."
+                    note={t("plugin.bigFileUpload.form.autoSend.description")}
                     hideBorder={true}
                 >
-                    Auto-Send Uploads To Chat
+                    {t("plugin.bigFileUpload.form.autoSend.label")}
                 </Switch>
             </Forms.FormSection>
 
@@ -277,24 +278,24 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
                 <Switch
                     value={settings.store.autoFormat === "Yes"}
                     onChange={(enabled: boolean) => updateSetting("autoFormat", enabled ? "Yes" : "No")}
-                    note="Whether to mask the link to match the original filename."
+                    note={t("plugin.bigFileUpload.form.autoMask.description")}
                     hideBorder={true}
                 >
-                    Auto-Mask Links
+                    {t("plugin.bigFileUpload.form.autoMask.label")}
                 </Switch>
             </Forms.FormSection>
 
             {/* GoFile Settings */}
             {fileUploader === "GoFile" && (
                 <>
-                    <Forms.FormSection title="GoFile Token (optional)">
+                    <Forms.FormSection title={t("plugin.bigFileUpload.form.goFile.title")}>
                         <Forms.FormText>
-                            Insert your personal GoFile account's token to save all uploads to your GoFile account.
+                            {t("plugin.bigFileUpload.form.goFile.description")}
                         </Forms.FormText>
                         <TextInput
                             type="text"
                             value={settings.store.gofileToken || ""}
-                            placeholder="Insert GoFile Token"
+                            placeholder={t("plugin.bigFileUpload.form.goFile.placeholder")}
                             onChange={newValue => updateSetting("gofileToken", newValue)}
                             className={Margins.top16}
                         />
@@ -305,14 +306,14 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
             {/* Catbox Settings */}
             {fileUploader === "Catbox" && (
                 <>
-                    <Forms.FormSection title="Catbox User hash (optional)">
+                    <Forms.FormSection title={t("plugin.bigFileUpload.form.catbox.title")}>
                         <Forms.FormText>
-                            Insert your personal Catbox account's hash to save all uploads to your Catbox account.
+                            {t("plugin.bigFileUpload.form.catbox.description")}
                         </Forms.FormText>
                         <TextInput
                             type="text"
                             value={settings.store.catboxUserHash || ""}
-                            placeholder="Insert User Hash"
+                            placeholder={t("plugin.bigFileUpload.form.catbox.placeholder")}
                             onChange={newValue => updateSetting("catboxUserHash", newValue)}
                             className={Margins.top16}
                         />
@@ -323,18 +324,18 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
             {/* Litterbox Settings */}
             {fileUploader === "Litterbox" && (
                 <>
-                    <Forms.FormSection title="File Expiration Time">
+                    <Forms.FormSection title={t("plugin.bigFileUpload.form.litterBox.title")}>
                         <Forms.FormText>
-                            Select how long it should take for your uploads to expire and get deleted.
+                            {t("plugin.bigFileUpload.form.litterBox.description")}
                         </Forms.FormText>
                         <Select
                             options={[
-                                { label: "1 hour", value: "1h" },
-                                { label: "12 hours", value: "12h" },
-                                { label: "24 hours", value: "24h" },
-                                { label: "72 hours", value: "72h" },
+                                { label: t("plugin.bigFileUpload.form.litterBox.option.1hour"), value: "1h" },
+                                { label: t("plugin.bigFileUpload.form.litterBox.option.12hour"), value: "12h" },
+                                { label: t("plugin.bigFileUpload.form.litterBox.option.24hour"), value: "24h" },
+                                { label: t("plugin.bigFileUpload.form.litterBox.option.72hour"), value: "72h" },
                             ]}
-                            placeholder="Select Duration"
+                            placeholder={t("plugin.bigFileUpload.form.litterBox.placeholder")}
                             className={Margins.top16}
                             select={newValue => updateSetting("litterboxTime", newValue)}
                             isSelected={v => v === settings.store.litterboxTime}
@@ -347,43 +348,43 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
             {/* Custom Uploader Settings */}
             {fileUploader === "Custom" && (
                 <>
-                    <Forms.FormSection title="Custom Uploader Name">
+                    <Forms.FormSection title={t("plugin.bigFileUpload.form.custom.uploader")}>
                         <TextInput
                             type="text"
                             value={customUploaderStore.get().name}
-                            placeholder="Name"
+                            placeholder={t("plugin.bigFileUpload.form.custom.name")}
                             onChange={(newValue: string) => customUploaderStore.set({ name: newValue })}
                             className={Margins.bottom16}
                         />
                     </Forms.FormSection>
 
-                    <Forms.FormSection title="Request URL">
+                    <Forms.FormSection title={t("plugin.bigFileUpload.form.custom.url")}>
                         <TextInput
                             type="text"
                             value={customUploaderStore.get().requestURL}
-                            placeholder="URL"
+                            placeholder={t("plugin.bigFileUpload.form.custom.urlholder")}
                             onChange={(newValue: string) => customUploaderStore.set({ requestURL: newValue })}
                             className={Margins.bottom16}
                         />
                     </Forms.FormSection>
 
-                    <Forms.FormSection title="File Form Name">
+                    <Forms.FormSection title={t("plugin.bigFileUpload.form.custom.formName")}>
                         <TextInput
                             type="text"
                             value={customUploaderStore.get().fileFormName}
-                            placeholder="Name"
+                            placeholder={t("plugin.bigFileUpload.form.custom.nameholder")}
                             onChange={(newValue: string) => customUploaderStore.set({ fileFormName: newValue })}
                             className={Margins.bottom16}
                         />
                     </Forms.FormSection>
 
-                    <Forms.FormSection title="Response type">
+                    <Forms.FormSection title={t("plugin.bigFileUpload.form.custom.responseType")}>
                         <Select
                             options={[
                                 { label: "Text", value: "Text" },
                                 { label: "JSON", value: "JSON" },
                             ]}
-                            placeholder="Select Response Type"
+                            placeholder={t("plugin.bigFileUpload.form.custom.typeholder")}
                             className={Margins.bottom16}
                             select={(newValue: string) => customUploaderStore.set({ responseType: newValue })}
                             isSelected={(v: string) => v === customUploaderStore.get().responseType}
@@ -391,41 +392,41 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
                         />
                     </Forms.FormSection>
 
-                    <Forms.FormSection title="URL (JSON path)">
+                    <Forms.FormSection title={t("plugin.bigFileUpload.form.custom.json")}>
                         <TextInput
                             type="text"
                             value={customUploaderStore.get().url}
-                            placeholder="URL"
+                            placeholder={t("plugin.bigFileUpload.form.custom.jsonholder")}
                             onChange={(newValue: string) => customUploaderStore.set({ url: newValue })}
                             className={Margins.bottom16}
                         />
                     </Forms.FormSection>
 
-                    <Forms.FormSection title="Thumbnail URL (JSON path)">
+                    <Forms.FormSection title={t("plugin.bigFileUpload.form.custom.thumbnail")}>
                         <TextInput
                             type="text"
                             value={customUploaderStore.get().thumbnailURL}
-                            placeholder="Thumbnail URL"
+                            placeholder={t("plugin.bigFileUpload.form.custom.thumbholder")}
                             onChange={(newValue: string) => customUploaderStore.set({ thumbnailURL: newValue })}
                             className={Margins.bottom16}
                         />
                     </Forms.FormSection>
 
                     <Forms.FormDivider />
-                    <Forms.FormTitle>Custom Uploader Arguments</Forms.FormTitle>
+                    <Forms.FormTitle>{t("plugin.bigFileUpload.form.custom.arguments")}</Forms.FormTitle>
                     {Object.entries(customUploaderStore.get().args).map(([key, value], index) => (
                         <div key={index}>
                             <TextInput
                                 type="text"
                                 value={key}
-                                placeholder="Argument Key"
+                                placeholder={t("plugin.bigFileUpload.form.custom.argKey")}
                                 onChange={(newKey: string) => handleArgChange(key, newKey, value as string)}
                                 className={Margins.bottom16}
                             />
                             <TextInput
                                 type="text"
                                 value={value as string}
-                                placeholder="Argument Value"
+                                placeholder={t("plugin.bigFileUpload.form.custom.argValue")}
                                 onChange={(newValue: string) => handleArgChange(key, key, newValue)}
                                 className={Margins.bottom16}
                             />
@@ -433,20 +434,20 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
                     ))}
 
                     <Forms.FormDivider />
-                    <Forms.FormTitle>Headers</Forms.FormTitle>
+                    <Forms.FormTitle>{t("plugin.bigFileUpload.form.custom.headers")}</Forms.FormTitle>
                     {Object.entries(customUploaderStore.get().headers).map(([key, value], index) => (
                         <div key={index}>
                             <TextInput
                                 type="text"
                                 value={key}
-                                placeholder="Header Key"
+                                placeholder={t("plugin.bigFileUpload.form.custom.headKey")}
                                 onChange={(newKey: string) => handleHeaderChange(key, newKey, value as string)}
                                 className={Margins.bottom16}
                             />
                             <TextInput
                                 type="text"
                                 value={value as string}
-                                placeholder="Header Value"
+                                placeholder={t("plugin.bigFileUpload.form.custom.headValue")}
                                 onChange={(newValue: string) => handleHeaderChange(key, key, newValue)}
                                 className={Margins.bottom16}
                             />
@@ -454,14 +455,14 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
                     ))}
 
                     <Forms.FormDivider />
-                    <Forms.FormTitle>Import ShareX Config</Forms.FormTitle>
+                    <Forms.FormTitle>{t("plugin.bigFileUpload.form.custom.importShareX")}</Forms.FormTitle>
                     <Button
                         onClick={triggerFileUpload}
                         color={Button.Colors.BRAND}
                         size={Button.Sizes.XLARGE}
                         className={Margins.bottom16}
                     >
-                        Import
+                        {t("plugin.bigFileUpload.form.custom.import")}
                     </Button>
                     <input
                         ref={fileInputRef}
@@ -478,112 +479,187 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
 
 const settings = definePluginSettings({
     fileUploader: {
+        get label() {
+            return t("plugin.bigFileUpload.option.fileUploader.label");
+        },
+        get description() {
+            return t("plugin.bigFileUpload.option.fileUploader.description");
+        },
         type: OptionType.SELECT,
         options: [
-            { label: "Custom Uploader", value: "Custom" },
-            { label: "Catbox", value: "Catbox", default: true },
-            { label: "Litterbox", value: "Litterbox" },
-            { label: "GoFile", value: "GoFile" },
+            { label: t("plugin.bigFileUpload.option.fileUploader.custom"), value: "Custom" },
+            { label: t("plugin.bigFileUpload.option.fileUploader.catbox"), value: "Catbox", default: true },
+            { label: t("plugin.bigFileUpload.option.fileUploader.litterBox"), value: "Litterbox" },
+            { label: t("plugin.bigFileUpload.option.fileUploader.goFile"), value: "GoFile" },
         ],
-        description: "Select the file uploader service",
         hidden: true
     },
     gofileToken: {
+        get label() {
+            return t("plugin.bigFileUpload.option.gofileToken.label");
+        },
+        get description() {
+            return t("plugin.bigFileUpload.option.gofileToken.description");
+        },
         type: OptionType.STRING,
         default: "",
-        description: "GoFile Token (optional)",
         hidden: true
     },
     autoSend: {
+        get label() {
+            return t("plugin.bigFileUpload.option.autoSend.label");
+        },
+        get description() {
+            return t("plugin.bigFileUpload.option.autoSend.description");
+        },
         type: OptionType.SELECT,
         options: [
-            { label: "Yes", value: "Yes" },
-            { label: "No", value: "No", default: true },
+            { label: t("plugin.bigFileUpload.option.autoSend.yes"), value: "Yes" },
+            { label: t("plugin.bigFileUpload.option.autoSend.no"), value: "No", default: true },
         ],
-        description: "Auto-Send",
         hidden: true
     },
     autoFormat: {
+        get label() {
+            return t("plugin.bigFileUpload.option.autoFormat.label");
+        },
+        get description() {
+            return t("plugin.bigFileUpload.option.autoFormat.description");
+        },
         type: OptionType.SELECT,
         options: [
-            { label: "Yes", value: "Yes" },
-            { label: "No", value: "No", default: true },
+            { label: t("plugin.bigFileUpload.option.autoFormat.yes"), value: "Yes" },
+            { label: t("plugin.bigFileUpload.option.autoFormat.no"), value: "No", default: true },
         ],
-        description: "Auto-Format",
         hidden: true
     },
     catboxUserHash: {
+        get label() {
+            return t("plugin.bigFileUpload.option.catboxUserHash.label");
+        },
+        get description() {
+            return t("plugin.bigFileUpload.option.catboxUserHash.description");
+        },
         type: OptionType.STRING,
         default: "",
-        description: "User hash for Catbox uploader (optional)",
         hidden: true
     },
     litterboxTime: {
+        get label() {
+            return t("plugin.bigFileUpload.option.litterboxTime.label");
+        },
+        get description() {
+            return t("plugin.bigFileUpload.option.litterboxTime.description");
+        },
         type: OptionType.SELECT,
         options: [
-            { label: "1 hour", value: "1h", default: true },
-            { label: "12 hours", value: "12h" },
-            { label: "24 hours", value: "24h" },
-            { label: "72 hours", value: "72h" },
+            { label: t("plugin.bigFileUpload.option.litterboxTime.1h"), value: "1h", default: true },
+            { label: t("plugin.bigFileUpload.option.litterboxTime.12h"), value: "12h" },
+            { label: t("plugin.bigFileUpload.option.litterboxTime.24h"), value: "24h" },
+            { label: t("plugin.bigFileUpload.option.litterboxTime.72h"), value: "72h" },
         ],
-        description: "Duration for files on Litterbox before they are deleted",
         hidden: true
     },
     customUploaderName: {
+        get label() {
+            return t("plugin.bigFileUpload.option.customUploaderName.label");
+        },
+        get description() {
+            return t("plugin.bigFileUpload.option.customUploaderName.description");
+        },
         type: OptionType.STRING,
         default: "",
-        description: "Name of the custom uploader",
         hidden: true
     },
     customUploaderRequestURL: {
+        get label() {
+            return t("plugin.bigFileUpload.option.customUploaderRequestURL.label");
+        },
+        get description() {
+            return t("plugin.bigFileUpload.option.customUploaderRequestURL.description");
+        },
         type: OptionType.STRING,
         default: "",
-        description: "Request URL for the custom uploader",
         hidden: true
     },
     customUploaderFileFormName: {
+        get label() {
+            return t("plugin.bigFileUpload.option.customUploaderFileFormName.label");
+        },
+        get description() {
+            return t("plugin.bigFileUpload.option.customUploaderFileFormName.description");
+        },
         type: OptionType.STRING,
         default: "",
-        description: "File form name for the custom uploader",
         hidden: true
     },
     customUploaderResponseType: {
+        get label() {
+            return t("plugin.bigFileUpload.option.customUploaderResponseType.label");
+        },
+        get description() {
+            return t("plugin.bigFileUpload.option.customUploaderResponseType.description");
+        },
         type: OptionType.SELECT,
         options: [
             { label: "Text", value: "Text", default: true },
             { label: "JSON", value: "JSON" },
         ],
-        description: "Response type for the custom uploader",
         hidden: true
     },
     customUploaderURL: {
+        get label() {
+            return t("plugin.bigFileUpload.option.customUploaderURL.label");
+        },
+        get description() {
+            return t("plugin.bigFileUpload.option.customUploaderURL.description");
+        },
         type: OptionType.STRING,
         default: "",
-        description: "URL (JSON path) for the custom uploader",
         hidden: true
     },
     customUploaderThumbnailURL: {
+        get label() {
+            return t("plugin.bigFileUpload.option.customUploaderThumbnailURL.label");
+        },
+        get description() {
+            return t("plugin.bigFileUpload.option.customUploaderThumbnailURL.description");
+        },
         type: OptionType.STRING,
         default: "",
-        description: "Thumbnail URL (JSON path) for the custom uploader",
         hidden: true
     },
     customUploaderHeaders: {
+        get label() {
+            return t("plugin.bigFileUpload.option.customUploaderHeaders.label");
+        },
+        get description() {
+            return t("plugin.bigFileUpload.option.customUploaderHeaders.description");
+        },
         type: OptionType.STRING,
         default: JSON.stringify({}),
-        description: "Headers for the custom uploader (JSON string)",
         hidden: true
     },
     customUploaderArgs: {
+        get label() {
+            return t("plugin.bigFileUpload.option.customUploaderArgs.label");
+        },
+        get description() {
+            return t("plugin.bigFileUpload.option.customUploaderArgs.description");
+        },
         type: OptionType.STRING,
         default: JSON.stringify({}),
-        description: "Arguments for the custom uploader (JSON string)",
         hidden: true
     },
     customSettings: {
+        get label() {
+            return t("plugin.bigFileUpload.option.customSettings.label");
+        },
+        get description() {
+            return t("plugin.bigFileUpload.option.customSettings.description");
+        },
         type: OptionType.COMPONENT,
         component: SettingsComponent,
-        description: "Configure custom uploader settings",
         hidden: false
     },
 }).withPrivateSettings<{
@@ -635,14 +711,22 @@ async function uploadFileToGofile(file: File, channelId: string) {
         }
         else {
             console.error("Unable to upload file. This is likely an issue with your network connection, firewall, or VPN.", uploadResult);
-            sendBotMessage(channelId, { content: "**Unable to upload file.** Check the console for more info. \n-# This is likely an issue with your network connection, firewall, or VPN." });
-            showToast("File Upload Failed", Toasts.Type.FAILURE);
+            sendBotMessage(channelId, {
+                author: {
+                    username: "Plexcord"
+                }, content: t("plugin.bigFileUpload.toast.unable")
+            });
+            showToast(t("plugin.bigFileUpload.toast.failed"), Toasts.Type.FAILURE);
             UploadManager.clearAll(channelId, DraftType.SlashCommand);
         }
     } catch (error) {
         console.error("Unable to upload file. This is likely an issue with your network connection, firewall, or VPN.", error);
-        sendBotMessage(channelId, { content: "**Unable to upload file.** Check the console for more info. \n-# This is likely an issue with your network connection, firewall, or VPN." });
-        showToast("File Upload Failed", Toasts.Type.FAILURE);
+        sendBotMessage(channelId, {
+            author: {
+                username: "Plexcord"
+            }, content: t("plugin.bigFileUpload.toast.unable")
+        });
+        showToast(t("plugin.bigFileUpload.toast.failed"), Toasts.Type.FAILURE);
         UploadManager.clearAll(channelId, DraftType.SlashCommand);
     }
 }
@@ -671,18 +755,26 @@ async function uploadFileToCatbox(file: File, channelId: string) {
             }
 
             setTimeout(() => sendTextToChat(`${finalUrl} `), 10);
-            showToast("File Successfully Uploaded!", Toasts.Type.SUCCESS);
+            showToast(t("plugin.bigFileUpload.toast.success"), Toasts.Type.SUCCESS);
             UploadManager.clearAll(channelId, DraftType.SlashCommand);
         } else {
             console.error("Unable to upload file. This is likely an issue with your network connection, firewall, or VPN.", uploadResult);
-            sendBotMessage(channelId, { content: "**Unable to upload file.** Check the console for more info. \n-# This is likely an issue with your network connection, firewall, or VPN." });
-            showToast("File Upload Failed", Toasts.Type.FAILURE);
+            sendBotMessage(channelId, {
+                author: {
+                    username: "Plexcord"
+                }, content: t("plugin.bigFileUpload.toast.unable")
+            });
+            showToast(t("plugin.bigFileUpload.toast.failed"), Toasts.Type.FAILURE);
             UploadManager.clearAll(channelId, DraftType.SlashCommand);
         }
     } catch (error) {
         console.error("Unable to upload file. This is likely an issue with your network connection, firewall, or VPN.", error);
-        sendBotMessage(channelId, { content: "**Unable to upload file.** Check the console for more info. \n-# This is likely an issue with your network connection, firewall, or VPN." });
-        showToast("File Upload Failed", Toasts.Type.FAILURE);
+        sendBotMessage(channelId, {
+            author: {
+                username: "Plexcord"
+            }, content: t("plugin.bigFileUpload.toast.unable")
+        });
+        showToast(t("plugin.bigFileUpload.toast.failed"), Toasts.Type.FAILURE);
         UploadManager.clearAll(channelId, DraftType.SlashCommand);
     }
 }
@@ -710,18 +802,26 @@ async function uploadFileToLitterbox(file: File, channelId: string) {
             }
 
             setTimeout(() => sendTextToChat(`${finalUrl}`), 10);
-            showToast("File Successfully Uploaded!", Toasts.Type.SUCCESS);
+            showToast(t("plugin.bigFileUpload.toast.success"), Toasts.Type.SUCCESS);
             UploadManager.clearAll(channelId, DraftType.SlashCommand);
         } else {
             console.error("Unable to upload file. This is likely an issue with your network connection, firewall, or VPN.", uploadResult);
-            showToast("File Upload Failed", Toasts.Type.FAILURE);
-            sendBotMessage(channelId, { content: "**Unable to upload file.** Check the console for more info. \n-# This is likely an issue with your network connection, firewall, or VPN." });
+            showToast(t("plugin.bigFileUpload.toast.failed"), Toasts.Type.FAILURE);
+            sendBotMessage(channelId, {
+                author: {
+                    username: "Plexcord"
+                }, content: t("plugin.bigFileUpload.toast.unable")
+            });
             UploadManager.clearAll(channelId, DraftType.SlashCommand);
         }
     } catch (error) {
         console.error("Unable to upload file. This is likely an issue with your network connection, firewall, or VPN.", error);
-        sendBotMessage(channelId, { content: "**Unable to upload file.** Check the console for more info. \n-# This is likely an issue with your network connection, firewall, or VPN." });
-        showToast("File Upload Failed", Toasts.Type.FAILURE);
+        sendBotMessage(channelId, {
+            author: {
+                username: "Plexcord"
+            }, content: t("plugin.bigFileUpload.toast.unable")
+        });
+        showToast(t("plugin.bigFileUpload.toast.failed"), Toasts.Type.FAILURE);
         UploadManager.clearAll(channelId, DraftType.SlashCommand);
     }
 }
@@ -802,13 +902,16 @@ async function uploadFileCustom(file: File, channelId: string) {
         }
 
         setTimeout(() => sendTextToChat(`${finalUrlForChat} `), 10);
-        showToast("File Successfully Uploaded!", Toasts.Type.SUCCESS);
+        showToast(t("plugin.bigFileUpload.toast.success"), Toasts.Type.SUCCESS);
     } catch (error) {
         console.error("Unable to upload file:", error);
         sendBotMessage(channelId, {
-            content: `Unable to upload file: ${error}. Check the console for more info.\n-# This could be due to network issues, firewall, VPN, or configuration errors.`
+            author: {
+                username: "Plexcord"
+            },
+            content: t("plugin.bigFileUpload.toast.unable")
         });
-        showToast("File Upload Failed", Toasts.Type.FAILURE);
+        showToast(t("plugin.bigFileUpload.toast.failed"), Toasts.Type.FAILURE);
     }
 
     UploadManager.clearAll(channelId, DraftType.SlashCommand);
@@ -831,7 +934,12 @@ async function uploadFile(file: File, channelId: string) {
             break;
         default:
             console.error("Unknown uploader:", uploader);
-            sendBotMessage(channelId, { content: "Error: Unknown uploader selected." });
+            sendBotMessage(channelId, {
+                author: {
+                    username: "Plexcord"
+                },
+                content: t("plugin.bigFileUpload.command.noUploader")
+            });
             UploadManager.clearAll(channelId, DraftType.SlashCommand);
     }
 }
@@ -849,7 +957,7 @@ function triggerFileUpload() {
                 const channelId = SelectedChannelStore.getChannelId();
                 await uploadFile(file, channelId);
             } else {
-                showToast("No file selected");
+                showToast(t("plugin.bigFileUpload.toast.noFile"));
             }
         }
     };
@@ -868,7 +976,7 @@ const ctxMenuPatch: NavContextMenuPatchCallback = (children, props) => {
             label={
                 <div className={OptionClasses.optionLabel}>
                     <OpenExternalIcon className={OptionClasses.optionIcon} height={24} width={24} />
-                    <div className={OptionClasses.optionName}>Upload a Big File</div>
+                    <div className={OptionClasses.optionName}>{t("plugin.bigFileUpload.context.upload")}</div>
                 </div>
             }
             action={triggerFileUpload}
@@ -881,6 +989,11 @@ export default definePlugin({
     description: "Bypass Discord's upload limit by uploading files using the 'Upload a Big File' button or /fileupload and they'll get uploaded as links into chat via file uploaders.",
     authors: [Devs.ScattrdBlade],
     settings,
+
+    get displayDescription() {
+        return t("plugin.bigFileUpload.description");
+    },
+
     dependencies: ["CommandsAPI"],
     contextMenus: {
         "channel-attach": ctxMenuPatch,
@@ -890,10 +1003,16 @@ export default definePlugin({
             inputType: ApplicationCommandInputType.BUILT_IN,
             name: "fileupload",
             description: "Upload a file",
+            get displayDescription() {
+                return t("plugin.bigFileUpload.command.description");
+            },
             options: [
                 {
                     name: "file",
                     description: "The file to upload",
+                    get displayDescription() {
+                        return t("plugin.bigFileUpload.command.upload");
+                    },
                     type: ApplicationCommandOptionType.ATTACHMENT,
                     required: true,
                 },
@@ -903,7 +1022,12 @@ export default definePlugin({
                 if (file) {
                     await uploadFile(file, cmdCtx.channel.id);
                 } else {
-                    sendBotMessage(cmdCtx.channel.id, { content: "No file specified!" });
+                    sendBotMessage(cmdCtx.channel.id, {
+                        author: {
+                            username: "Plexcord"
+                        },
+                        content: t("plugin.bigFileUpload.command.noFile")
+                    });
                     UploadManager.clearAll(cmdCtx.channel.id, DraftType.SlashCommand);
                 }
             },

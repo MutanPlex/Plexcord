@@ -6,6 +6,7 @@
  */
 
 
+import { t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { MessageJSON } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
@@ -15,25 +16,45 @@ let blockedKeywords: Array<RegExp>;
 
 const settings = definePluginSettings({
     blockedWords: {
+        get label() {
+            return t("plugin.blockKeywords.option.blockedWords.label");
+        },
+        get description() {
+            return t("plugin.blockKeywords.option.blockedWords.description");
+        },
         type: OptionType.STRING,
-        description: "Comma-seperated list of words to block",
         default: "",
         restartNeeded: true
     },
     useRegex: {
+        get label() {
+            return t("plugin.blockKeywords.option.useRegex.label");
+        },
+        get description() {
+            return t("plugin.blockKeywords.option.useRegex.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Use each value as a regular expression when checking message content (advanced)",
         default: false,
         restartNeeded: true
     },
     caseSensitive: {
+        get label() {
+            return t("plugin.blockKeywords.option.caseSensitive.label");
+        },
+        get description() {
+            return t("plugin.blockKeywords.option.caseSensitive.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether to use a case sensitive search or not",
         default: false,
         restartNeeded: true
     },
     ignoreBlockedMessages: {
-        description: "Completely ignores (recent) new messages bar",
+        get label() {
+            return t("plugin.blockKeywords.option.ignoreBlockedMessages.label");
+        },
+        get description() {
+            return t("plugin.blockKeywords.option.ignoreBlockedMessages.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true,
@@ -44,6 +65,11 @@ export default definePlugin({
     name: "BlockKeywords",
     description: "Blocks messages containing specific user-defined keywords, as if the user sending them was blocked.",
     authors: [PcDevs.catcraft, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.blockKeywords.description");
+    },
+
     patches: [
         {
             find: '"_channelMessages",{})',

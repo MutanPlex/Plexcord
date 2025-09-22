@@ -7,6 +7,7 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { PcDevs } from "@utils/constants";
 import { getIntlMessage, openUserProfile } from "@utils/discord";
 import definePlugin from "@utils/types";
@@ -19,6 +20,11 @@ export default definePlugin({
     name: "BetterBlockedUsers",
     description: "Allows you to search in blocked users list and makes names selectable in settings.",
     authors: [PcDevs.TheArmagan, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.betterBlockedUsers.description");
+    },
+
     patches: [
         {
             find: '"],{numberOfBlockedUsers:',
@@ -51,7 +57,7 @@ export default definePlugin({
         }, []);
 
         return <TextInput
-            placeholder="Search users..."
+            placeholder={t("plugin.betterBlockedUsers.placeholder")}
             style={{ width: "200px" }}
             onInput={e => {
                 const search = (e.target as HTMLInputElement).value.toLowerCase().trim();

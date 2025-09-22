@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { SessionInfo } from "@plugins/betterSessions/types";
 import { getDefaultName, savedSessionsCache, saveSessionsToDataStore } from "@plugins/betterSessions/utils";
 import { ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
@@ -42,11 +43,11 @@ export function RenameModal({ props, session, state }: { props: ModalProps, sess
     return (
         <ModalRoot {...props}>
             <ModalHeader>
-                <Forms.FormTitle tag="h4">Rename</Forms.FormTitle>
+                <Forms.FormTitle tag="h4">{t("plugin.betterSessions.rename")}</Forms.FormTitle>
             </ModalHeader>
 
             <ModalContent>
-                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>New device name</Forms.FormTitle>
+                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>{t("plugin.betterSessions.newDevice")}</Forms.FormTitle>
                 <TextInput
                     style={{ marginBottom: "10px" }}
                     placeholder={getDefaultName(session.client_info)}
@@ -70,7 +71,7 @@ export function RenameModal({ props, session, state }: { props: ModalProps, sess
                     size={Button.Sizes.NONE}
                     onClick={() => setValue("")}
                 >
-                    Reset Name
+                    {t("plugin.betterSessions.resetName")}
                 </Button>
             </ModalContent>
 
@@ -79,14 +80,14 @@ export function RenameModal({ props, session, state }: { props: ModalProps, sess
                     color={Button.Colors.BRAND}
                     onClick={onSaveClick}
                 >
-                    Save
+                    {t("plugin.betterSessions.save")}
                 </Button>
                 <Button
                     color={Button.Colors.TRANSPARENT}
                     look={Button.Looks.LINK}
                     onClick={() => props.onClose()}
                 >
-                    Cancel
+                    {t("plugin.betterSessions.cancel")}
                 </Button>
             </ModalFooter>
         </ModalRoot >

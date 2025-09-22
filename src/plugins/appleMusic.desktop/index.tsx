@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t, tJsx } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, IS_MAC } from "@utils/constants";
 import definePlugin, { OptionType, PluginNative, ReporterTestable } from "@utils/types";
@@ -84,71 +85,132 @@ function setActivity(activity: Activity | null) {
 
 const settings = definePluginSettings({
     activityType: {
+        get label() {
+            return t("plugin.appleMusic.option.activityType.label");
+        },
+        get description() {
+            return t("plugin.appleMusic.option.activityType.description");
+        },
         type: OptionType.SELECT,
-        description: "Which type of activity",
-        options: [
-            { label: "Playing", value: ActivityType.PLAYING, default: true },
-            { label: "Listening", value: ActivityType.LISTENING }
-        ],
+        get options() {
+            return [
+                { label: t("plugin.appleMusic.option.activityType.playing"), value: ActivityType.PLAYING, default: true },
+                { label: t("plugin.appleMusic.option.activityType.listening"), value: ActivityType.LISTENING }
+            ];
+        },
     },
     refreshInterval: {
+        get label() {
+            return t("plugin.appleMusic.option.refreshInterval.label");
+        },
+        get description() {
+            return t("plugin.appleMusic.option.refreshInterval.description");
+        },
         type: OptionType.SLIDER,
-        description: "The interval between activity refreshes (seconds)",
         markers: [1, 2, 2.5, 3, 5, 10, 15],
         default: 5,
         restartNeeded: true,
     },
     enableTimestamps: {
+        get label() {
+            return t("plugin.appleMusic.option.enableTimestamps.label");
+        },
+        get description() {
+            return t("plugin.appleMusic.option.enableTimestamps.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether or not to enable timestamps",
         default: true,
     },
     enableButtons: {
+        get label() {
+            return t("plugin.appleMusic.option.enableButtons.label");
+        },
+        get description() {
+            return t("plugin.appleMusic.option.enableButtons.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether or not to enable buttons",
         default: true,
     },
     nameString: {
+        get label() {
+            return t("plugin.appleMusic.option.nameString.label");
+        },
+        get description() {
+            return t("plugin.appleMusic.option.nameString.description");
+        },
         type: OptionType.STRING,
-        description: "Activity name format string",
         default: "Apple Music"
     },
     detailsString: {
+        get label() {
+            return t("plugin.appleMusic.option.detailsString.label");
+        },
+        get description() {
+            return t("plugin.appleMusic.option.detailsString.description");
+        },
         type: OptionType.STRING,
-        description: "Activity details format string",
         default: "{name}"
     },
     stateString: {
+        get label() {
+            return t("plugin.appleMusic.option.stateString.label");
+        },
+        get description() {
+            return t("plugin.appleMusic.option.stateString.description");
+        },
         type: OptionType.STRING,
-        description: "Activity state format string",
         default: "{artist} · {album}"
     },
     largeImageType: {
+        get label() {
+            return t("plugin.appleMusic.option.largeImageType.label");
+        },
+        get description() {
+            return t("plugin.appleMusic.option.largeImageType.description");
+        },
         type: OptionType.SELECT,
-        description: "Activity assets large image type",
-        options: [
-            { label: "Album artwork", value: AssetImageType.Album, default: true },
-            { label: "Artist artwork", value: AssetImageType.Artist },
-            { label: "Disabled", value: AssetImageType.Disabled }
-        ],
+        get options() {
+            return [
+                { label: t("plugin.appleMusic.option.largeImageType.album"), value: AssetImageType.Album, default: true },
+                { label: t("plugin.appleMusic.option.largeImageType.artist"), value: AssetImageType.Artist },
+                { label: t("plugin.appleMusic.option.largeImageType.disabled"), value: AssetImageType.Disabled }
+            ];
+        },
     },
     largeTextString: {
+        get label() {
+            return t("plugin.appleMusic.option.largeTextString.label");
+        },
+        get description() {
+            return t("plugin.appleMusic.option.largeTextString.description");
+        },
         type: OptionType.STRING,
-        description: "Activity assets large text format string",
         default: "{album}"
     },
     smallImageType: {
+        get label() {
+            return t("plugin.appleMusic.option.smallImageType.label");
+        },
+        get description() {
+            return t("plugin.appleMusic.option.smallImageType.description");
+        },
         type: OptionType.SELECT,
-        description: "Activity assets small image type",
-        options: [
-            { label: "Album artwork", value: AssetImageType.Album },
-            { label: "Artist artwork", value: AssetImageType.Artist, default: true },
-            { label: "Disabled", value: AssetImageType.Disabled }
-        ],
+        get options() {
+            return [
+                { label: t("plugin.appleMusic.option.smallImageType.album"), value: AssetImageType.Album },
+                { label: t("plugin.appleMusic.option.smallImageType.artist"), value: AssetImageType.Artist, default: true },
+                { label: t("plugin.appleMusic.option.smallImageType.disabled"), value: AssetImageType.Disabled }
+            ];
+        },
     },
     smallTextString: {
+        get label() {
+            return t("plugin.appleMusic.option.smallTextString.label");
+        },
+        get description() {
+            return t("plugin.appleMusic.option.smallTextString.description");
+        },
         type: OptionType.STRING,
-        description: "Activity assets small text format string",
         default: "{artist}"
     },
 });
@@ -173,6 +235,11 @@ function getImageAsset(type: AssetImageType, data: TrackData) {
 export default definePlugin({
     name: "AppleMusicRichPresence",
     description: "Discord rich presence for your Apple Music!",
+
+    get displayDescription() {
+        return t("plugin.appleMusic.description");
+    },
+
     authors: [Devs.RyanCaoDev],
     hidden: !IS_MAC,
     reporterTestable: ReporterTestable.None,
@@ -180,8 +247,11 @@ export default definePlugin({
     settingsAboutComponent() {
         return <>
             <Forms.FormText>
-                For the customizable activity format strings, you can use several special strings to include track data in activities!{" "}
-                <code>{"{name}"}</code> is replaced with the track name; <code>{"{artist}"}</code> is replaced with the artist(s)' name(s); and <code>{"{album}"}</code> is replaced with the album name.
+                {tJsx("plugin.appleMusic.about", {
+                    name: <code>{"{name}"}</code>,
+                    artist: <code>{"{artist}"}</code>,
+                    album: <code>{"{album}"}</code>
+                })}
             </Forms.FormText>
         </>;
     },
@@ -230,13 +300,13 @@ export default definePlugin({
         if (settings.store.enableButtons) {
             if (trackData.appleMusicLink)
                 buttons.push({
-                    label: "Listen on Apple Music",
+                    label: t("plugin.appleMusic.button.listen"),
                     url: trackData.appleMusicLink,
                 });
 
             if (trackData.songLink)
                 buttons.push({
-                    label: "View on SongLink",
+                    label: t("plugin.appleMusic.button.songLink"),
                     url: trackData.songLink,
                 });
         }

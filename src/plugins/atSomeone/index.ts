@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { addMessagePreSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -14,6 +15,11 @@ export default definePlugin({
     name: "AtSomeone",
     authors: [Devs.Joona, PcDevs.MutanPlex],
     description: "Mention someone randomly",
+
+    get displayDescription() {
+        return t("plugin.atSomeone.description");
+    },
+
     patches: [
         {
             find: ".LAUNCHABLE_APPLICATIONS;",
