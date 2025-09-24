@@ -91,6 +91,16 @@ export const settings = definePluginSettings({
         default: true,
         restartNeeded: true,
     },
+    hideTooltip: {
+        get label() {
+            return t("plugin.betterActivities.option.hideTooltip.label");
+        },
+        get description() {
+            return t("plugin.betterActivities.option.hideTooltip.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+    },
     allActivitiesStyle: {
         get label() {
             return t("plugin.betterActivities.option.allActivitiesStyle.label");

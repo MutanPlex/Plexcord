@@ -861,7 +861,31 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     Nick: {
         name: "Nick",
         id: 644298972420374528n
-    }
+    },
+    xijexo: {
+        name: "xijexo",
+        id: 1284113557201620995n
+    },
+    port22exposed: {
+        name: "port",
+        id: 1318383159645311009n,
+    },
+    nicola02nb: {
+        name: "nicola02nb",
+        id: 257900031351193600n
+    },
+    justjxke: {
+        name: "justjxke",
+        id: 852558183087472640n
+    },
+    qouesm: {
+        name: "qouesm",
+        id: 130388483494641664n,
+    },
+    CallMeGii: {
+        name: "gii",
+        id: 156481332652802048n,
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>

@@ -60,14 +60,9 @@ export const settings = definePluginSettings({
     },
     userBasedCategoryList: {
         type: OptionType.CUSTOM,
-        description: "User-based category list for pinned DMs",
-        default: {} as Record<string, Category[]>
+        default: {} as Record<string, Category[]>,
+        description: "",
     },
-    disableCreateDMButton: {
-        type: OptionType.BOOLEAN,
-        description: "Disables the create dm button",
-        default: true
-    }
 });
 
 export default definePlugin({
@@ -160,14 +155,6 @@ export default definePlugin({
                 replace: "$self.getAllUncollapsedChannels().concat($&.filter(c=>!$self.isPinned(c)))"
             }
         },
-        {
-            find: ".createDMButtonContainer,",
-            replacement: {
-                match: /"create-dm"\)/,
-                replace: "$&&&false"
-            },
-            predicate: () => settings.store.disableCreateDMButton
-        },
     ],
 
     sections: null as number[] | null,
@@ -232,7 +219,7 @@ export default definePlugin({
     },
 
     isChannelIndex(sectionIndex: number, channelIndex: number) {
-        if (settings.store.canCollapseDmSection && settings.store.dmSectionCollapsed && sectionIndex === this.getSections().length + 1) {
+        if (settings.store.canCollapseDmSection && settings.store.dmSectionCollapsed && sectionIndex !== 0) {
             return true;
         }
 
@@ -247,7 +234,7 @@ export default definePlugin({
     isChannelHidden(categoryIndex: number, channelIndex: number) {
         if (categoryIndex === 0) return false;
 
-        if (settings.store.canCollapseDmSection && settings.store.dmSectionCollapsed && categoryIndex === this.getSections().length + 1)
+        if (settings.store.canCollapseDmSection && settings.store.dmSectionCollapsed && this.getSections().length + 1 === categoryIndex)
             return true;
 
         if (!this.instance || !this.isChannelIndex(categoryIndex, channelIndex)) return false;

@@ -6,9 +6,10 @@
  */
 
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Activity, AllActivitiesProps } from "@plexcord/discord-types";
+import { Activity } from "@plexcord/discord-types";
 import { CarouselControls } from "@plugins/betterActivities/components/CarouselControls";
 import { settings } from "@plugins/betterActivities/settings";
+import { AllActivitiesProps } from "@plugins/betterActivities/types";
 import { ActivityView, getActivityApplication } from "@plugins/betterActivities/utils";
 import { PresenceStore, React, useEffect, useMemo, UserStore, useState, useStateFromStores } from "@webpack/common";
 import { JSX } from "react";

@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-
+import { playAudio } from "@api/AudioPlayer";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Devs, PcDevs } from "@utils/constants";
@@ -74,6 +74,7 @@ function ToggleModal() {
 }
 
 function handleToggle() {
+    console.log("Toggling demonstration mode");
     const style = document.getElementById("DemonstrationStyle");
     if (style != null) {
         style.remove();
@@ -120,12 +121,12 @@ function handleKeydown(event: KeyboardEvent) {
 }
 
 async function playSound(url: string) {
-    const audio = new Audio(url);
-    audio.volume = settings.store.soundVolume;
-    await audio.play().catch(error => {
-        console.error("Error playing sound:", error);
+    playAudio(url, {
+        volume: settings.store.soundVolume * 100,
+        onError: error => {
+            console.error("Error playing sound:", error);
+        }
     });
-    audio.remove();
 }
 
 
@@ -133,6 +134,7 @@ export default definePlugin({
     name: "Demonstration",
     description: "Plugin for taking theme screenshots - censors identifying images and text.",
     authors: [Devs.Samwich, PcDevs.Panniku, PcDevs.MutanPlex],
+    dependencies: ["AudioPlayerAPI"],
     settings,
     toolboxActions: {
         "Toggle Demonstration": (() => handleToggle())

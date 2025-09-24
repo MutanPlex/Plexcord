@@ -9,14 +9,11 @@ import { readdir, readFile, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import { DATA_DIR } from "@main/utils/constants";
+import { LoggedAttachment } from "@plugins/messageLoggerEnhanced/types";
+import { LOGS_DATA_FILENAME } from "@plugins/messageLoggerEnhanced/utils/constants";
 import { dialog, IpcMainInvokeEvent, shell } from "electron";
 
 import { getSettings, saveSettings } from "./settings";
-export * from "./updater";
-
-import { LoggedAttachment } from "@plugins/messageLoggerEnhanced/types";
-import { LOGS_DATA_FILENAME } from "@plugins/messageLoggerEnhanced/utils/constants";
-
 import { ensureDirectoryExists, getAttachmentIdFromFilename, sleep } from "./utils";
 
 export { getSettings };
@@ -51,6 +48,7 @@ export async function init(_event: IpcMainInvokeEvent) {
     const files = await readdir(imageDir);
     for (const filename of files) {
         const attachmentId = getAttachmentIdFromFilename(filename);
+
         nativeSavedImages.set(attachmentId, path.join(imageDir, filename));
     }
 }
@@ -79,6 +77,7 @@ export async function writeImageNative(_event: IpcMainInvokeEvent, filename: str
     if (existingImage) return;
 
     const imagePath = path.join(imageDir, filename);
+
     await ensureDirectoryExists(imageDir);
     await writeFile(imagePath, content);
 
@@ -147,23 +146,23 @@ export async function chooseFile(_event: IpcMainInvokeEvent, title: string, filt
 
 // doing it in native because you can only fetch images from the renderer
 // other types of files will cause cors issues
-export async function downloadAttachment(_event: IpcMainInvokeEvent, attachemnt: LoggedAttachment, attempts = 0, useOldUrl = false): Promise<{ error: string | null; path: string | null; }> {
+export async function downloadAttachment(_event: IpcMainInvokeEvent, attachment: LoggedAttachment, attempts = 0, useOldUrl = false): Promise<{ error: string | null; path: string | null; }> {
     try {
-        if (!attachemnt?.url || !attachemnt.oldUrl || !attachemnt?.id || !attachemnt?.fileExtension)
+        if (!attachment?.url || !attachment.oldUrl || !attachment?.id)
             return { error: "Invalid Attachment", path: null };
 
-        if (attachemnt.id.match(/[\\/.]/)) {
+        if (attachment.id.match(/[\\/.]/)) {
             return { error: "Invalid Attachment ID", path: null };
         }
 
-        const existingImage = nativeSavedImages.get(attachemnt.id);
+        const existingImage = nativeSavedImages.get(attachment.id);
         if (existingImage)
             return {
                 error: null,
                 path: existingImage
             };
 
-        const res = await fetch(useOldUrl ? attachemnt.oldUrl : attachemnt.url);
+        const res = await fetch(useOldUrl ? attachment.oldUrl : attachment.url);
 
         if (res.status !== 200) {
             if (res.status === 404 || res.status === 403 || res.status === 415)
@@ -172,23 +171,23 @@ export async function downloadAttachment(_event: IpcMainInvokeEvent, attachemnt:
             attempts++;
             if (attempts > 3) {
                 return {
-                    error: `Failed to get attachment ${attachemnt.id} for caching. too many attempts, error code ${res.status}`,
+                    error: `Failed to get attachment ${attachment.id} for caching. too many attempts, error code ${res.status}`,
                     path: null,
                 };
             }
 
             await sleep(1000);
-            return downloadAttachment(_event, attachemnt, attempts, useOldUrl);
+            return downloadAttachment(_event, attachment, attempts, useOldUrl);
         }
 
         const ab = await res.arrayBuffer();
         const imageCacheDir = await getImageCacheDir();
         await ensureDirectoryExists(imageCacheDir);
 
-        const finalPath = path.join(imageCacheDir, `${attachemnt.id}${attachemnt.fileExtension}`);
+        const finalPath = path.join(imageCacheDir, `${attachment.id}${attachment.fileExtension}`);
         await writeFile(finalPath, Buffer.from(ab));
 
-        nativeSavedImages.set(attachemnt.id, finalPath);
+        nativeSavedImages.set(attachment.id, finalPath);
 
         return {
             error: null,

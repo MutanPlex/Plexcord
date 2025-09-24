@@ -12,7 +12,7 @@ import { Devs } from "@utils/constants";
 import { isNonNullish } from "@utils/guards";
 import definePlugin, { OptionType } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
-import { SnowflakeUtils, Tooltip } from "@webpack/common";
+import { AuthenticationStore, SnowflakeUtils, Tooltip } from "@webpack/common";
 
 type FillValue = ("status-danger" | "status-warning" | "status-positive" | "text-muted");
 type Fill = [FillValue, FillValue, FillValue];
@@ -48,6 +48,11 @@ export default definePlugin({
         showMillis: {
             type: OptionType.BOOLEAN,
             description: "Show milliseconds",
+            default: false
+        },
+        ignoreSelf: {
+            type: OptionType.BOOLEAN,
+            description: "Don't add indicator to your own messages",
             default: false
         }
     }),
@@ -92,7 +97,7 @@ export default definePlugin({
     },
 
     latencyTooltipData(message: Message) {
-        const { latency, detectDiscordKotlin, showMillis } = this.settings.store;
+        const { latency, detectDiscordKotlin, showMillis, ignoreSelf } = this.settings.store;
         const { id, nonce } = message;
 
         // Message wasn't received through gateway
@@ -100,6 +105,8 @@ export default definePlugin({
 
         // Bots basically never send a nonce, and if someone does do it then it's usually not a snowflake
         if (message.author.bot) return null;
+
+        if (ignoreSelf && message.author.id === AuthenticationStore.getId()) return null;
 
         let isDiscordKotlin = false;
         let delta = SnowflakeUtils.extractTimestamp(id) - SnowflakeUtils.extractTimestamp(nonce); // milliseconds

@@ -301,8 +301,17 @@ function resetSettings(plugin: Plugin, warningModalProps?: ModalProps, pluginMod
     pluginModalProps?.onClose();
 }
 
-export function openWarningModal(plugin: Plugin, pluginModalProps: ModalProps, onRestartNeeded?: (pluginName: string) => void) {
-    if (Settings.ignoreResetWarning) return resetSettings(plugin, pluginModalProps, pluginModalProps, onRestartNeeded);
+export function openWarningModal(plugin?: Plugin | null, pluginModalProps?: ModalProps | null, onRestartNeeded?: (pluginName: string) => void, isPlugin = true, enabledPlugins?: number | null, reset?: any) {
+    if (Settings.ignoreResetWarning && isPlugin) {
+        if (plugin && pluginModalProps) return resetSettings(plugin, pluginModalProps, pluginModalProps, onRestartNeeded);
+        return;
+    } else if (Settings.ignoreResetWarning && !isPlugin) {
+        return reset();
+    }
+
+    const text = isPlugin
+        ? tJsx("plugins.dangerModal.resetDescription", { pluginName: <strong>{plugin?.name}</strong> })
+        : tJsx("plugins.dangerModal.disable", { enabledPlugins: <strong>{enabledPlugins}</strong> });
 
     openModal(warningModalProps => (
         <ModalRoot
@@ -312,18 +321,14 @@ export function openWarningModal(plugin: Plugin, pluginModalProps: ModalProps, o
             transitionState={warningModalProps.transitionState}
         >
             <ModalHeader separator={false}>
-                <Text className="text-danger">{t("plugins.dangerModal.title")}</Text>
+                <Text className="text-danger pc-pm-modal-title">{t("plugins.dangerModal.title")}</Text>
                 <ModalCloseButton onClick={warningModalProps.onClose} className="pc-modal-close-button" />
             </ModalHeader>
             <ModalContent>
                 <Forms.FormSection>
                     <Flex className="pc-warning-info">
-                        <img
-                            src="https://media.tenor.com/hapjxf8y50YAAAAi/stop-sign.gif"
-                            alt="Warning"
-                        />
                         <Text className="text-normal">
-                            {tJsx("plugins.dangerModal.resetDescription", { pluginName: <strong>{plugin.name}</strong> })}
+                            {text}
                         </Text>
                         <Text className="warning-text">
                             {t("plugins.dangerModal.irreversible")}
@@ -337,21 +342,13 @@ export function openWarningModal(plugin: Plugin, pluginModalProps: ModalProps, o
                     </Flex>
                 </Forms.FormSection>
             </ModalContent>
-            <ModalFooter className="modal-footer">
-                <Flex className="button-container">
-                    <Button
-                        size={Button.Sizes.SMALL}
-                        color={Button.Colors.PRIMARY}
-                        onClick={warningModalProps.onClose}
-                        look={Button.Looks.LINK}
-                    >
-                        {t("plugins.restart.button.disableWarning")}
-                    </Button>
-                    <Flex className="button-group">
+            <ModalFooter className="pc-modal-footer">
+                <Flex className="pc-button-container">
+                    <Flex className="pc-button-group" style={{ gap: ".2em" }}>
                         {!Settings.ignoreResetWarning && (
                             <Button
                                 size={Button.Sizes.SMALL}
-                                className="button-danger-background"
+                                className={cl("disable-warning")}
                                 onClick={() => {
                                     Settings.ignoreResetWarning = true;
                                 }}
@@ -359,21 +356,28 @@ export function openWarningModal(plugin: Plugin, pluginModalProps: ModalProps, o
                                 {t("plugins.restart.button.disableWarning")}
                             </Button>
                         )}
-                        <Tooltip text={t("plugins.dangerModal.undone")} shouldShow={true}>
-                            {({ onMouseEnter, onMouseLeave }) => (
-                                <Button
-                                    size={Button.Sizes.SMALL}
-                                    onClick={() => {
+                        <Button
+                            size={Button.Sizes.SMALL}
+                            onClick={() => {
+                                if (isPlugin) {
+                                    if (plugin && pluginModalProps)
                                         resetSettings(plugin, pluginModalProps, pluginModalProps, onRestartNeeded);
-                                    }}
-                                    onMouseEnter={onMouseEnter}
-                                    onMouseLeave={onMouseLeave}
-                                    className="button-danger-background-no-margin"
-                                >
-                                    {t("plugins.dangerModal.confirmReset")}
-                                </Button>
-                            )}
-                        </Tooltip>
+                                } else {
+                                    reset();
+                                }
+                            }}
+                            className={cl("confirm-reset")}
+                        >
+                            {t("plugins.dangerModal.confirmReset")}
+                        </Button>
+                        <Button
+                            size={Button.Sizes.SMALL}
+                            color={Button.Colors.PRIMARY}
+                            onClick={warningModalProps.onClose}
+                            look={Button.Looks.LINK}
+                        >
+                            {t("plugins.restart.button.disableWarning")}
+                        </Button>
                     </Flex>
                 </Flex>
             </ModalFooter>

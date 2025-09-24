@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import * as $AudioPlayer from "./AudioPlayer";
 import * as $Badges from "./Badges";
 import * as $ChatButtons from "./ChatButtons";
 import * as $Commands from "./Commands";
@@ -136,6 +137,11 @@ export const UserSettings = $UserSettings;
  * An API allowing you to add icons to the nickname, in profiles
  */
 export const NicknameIcons = $NicknameIcons;
+
+/**
+ * An API allowing you to play internal Discord audio files or external audio URLs/URIs.
+ */
+export const AudioPlayer = $AudioPlayer;
 
 /**
  * LocaleLoader for managing plugin translations

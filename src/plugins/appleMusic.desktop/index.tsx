@@ -7,50 +7,13 @@
 
 import { t, tJsx } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { Activity, ActivityAssets, ActivityButton } from "@plexcord/discord-types";
+import { ActivityFlags, ActivityStatusDisplayType, ActivityType } from "@plexcord/discord-types/enums";
 import { Devs, IS_MAC } from "@utils/constants";
 import definePlugin, { OptionType, PluginNative, ReporterTestable } from "@utils/types";
 import { ApplicationAssetUtils, FluxDispatcher, Forms } from "@webpack/common";
 
 const Native = PlexcordNative.pluginHelpers.AppleMusicRichPresence as PluginNative<typeof import("./native")>;
-
-interface ActivityAssets {
-    large_image?: string;
-    large_text?: string;
-    small_image?: string;
-    small_text?: string;
-}
-
-interface ActivityButton {
-    label: string;
-    url: string;
-}
-
-interface Activity {
-    state?: string;
-    details?: string;
-    timestamps?: {
-        start?: number;
-        end?: number;
-    };
-    assets?: ActivityAssets;
-    buttons?: Array<string>;
-    name: string;
-    application_id: string;
-    metadata?: {
-        button_urls?: Array<string>;
-    };
-    type: number;
-    flags: number;
-}
-
-const enum ActivityType {
-    PLAYING = 0,
-    LISTENING = 2,
-}
-
-const enum ActivityFlag {
-    INSTANCE = 1 << 0,
-}
 
 export interface TrackData {
     name: string;
@@ -98,6 +61,32 @@ const settings = definePluginSettings({
                 { label: t("plugin.appleMusic.option.activityType.listening"), value: ActivityType.LISTENING }
             ];
         },
+    },
+    statusDisplayType: {
+        get label() {
+            return t("plugin.appleMusic.option.statusDisplayType.label");
+        },
+        get description() {
+            return t("plugin.appleMusic.option.statusDisplayType.description");
+        },
+        type: OptionType.SELECT,
+        get options() {
+            return [
+                {
+                    label: t("plugin.appleMusic.option.statusDisplayType.off"),
+                    value: "off",
+                    default: true
+                },
+                {
+                    label: t("plugin.appleMusic.option.statusDisplayType.artist"),
+                    value: "artist"
+                },
+                {
+                    label: t("plugin.appleMusic.option.statusDisplayType.track"),
+                    value: "track"
+                }
+            ];
+        }
     },
     refreshInterval: {
         get label() {
@@ -329,7 +318,12 @@ export default definePlugin({
             metadata: !isRadio && buttons.length ? { button_urls: buttons.map(v => v.url) } : undefined,
 
             type: settings.store.activityType,
-            flags: ActivityFlag.INSTANCE,
+            status_display_type: {
+                "off": ActivityStatusDisplayType.NAME,
+                "artist": ActivityStatusDisplayType.STATE,
+                "track": ActivityStatusDisplayType.DETAILS
+            }[settings.store.statusDisplayType],
+            flags: ActivityFlags.INSTANCE,
         };
     }
 });

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t, tJsx } from "@api/i18n";
+import { t } from "@api/i18n";
 import { Settings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
@@ -86,6 +86,6 @@ export default definePlugin({
             deps: [channelId]
         });
 
-        return <p style={{ margin: 0 }}>{tJsx("plugin.callTimer.connected", { time: <span style={{ fontFamily: "var(--font-code)" }}>{formatDurationMs(time, Settings.plugins.CallTimer.format === "human")}</span> })} </p>;
+        return <p style={{ margin: 0, fontFamily: "var(--font-code)" }}>{formatDurationMs(time, Settings.plugins.CallTimer.format === "human")}</p>;
     }
 });

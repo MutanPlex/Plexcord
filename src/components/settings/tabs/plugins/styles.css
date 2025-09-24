@@ -70,25 +70,25 @@
     gap: 0.25em;
 }
 
-.pc-plugins-restart-button {
-    margin-top: 0.5em;
-    background: var(--info-warning-foreground) !important;
-    background-color: var(--background-color) !important;
-    border: 1px solid var(--info-warning-foreground) !important;
+.pc-plugins-restart-card {
+    padding: 1em;
+    background: var(--info-warning-background);
+    border: 1px solid var(--info-warning-foreground);
+    color: var(--info-warning-foreground);
 }
 
 .pc-plugins-info-icon:not(:hover, :focus) {
     color: var(--text-muted);
 }
 
-.pc-plugins-restart-button:hover {
-    background-color: var(--info-warning-foreground) !important;
+.pc-plugins-restart-button {
+    background-color: var(--background-color) !important;
+    border: 1px solid var(--info-warning-foreground) !important;
+    margin-top: 0.5em;
 }
 
-.pc-plugins-settings {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25em;
+.pc-plugins-restart-button:hover {
+    background-color: var(--info-warning-foreground) !important;
 }
 
 .pc-plugin-stats {
@@ -166,58 +166,57 @@
     margin-bottom: 10px;
 }
 
-.button-danger-background {
-    background-color: var(--background-color) !important;
-    border-style: solid !important;
-    border-width: .1rem !important;
-    border-color: var(--button-outline-danger-border) !important;
-    border-radius: 5px !important;
-}
-
-.button-danger-background.top-margin {
+.pc-plugins-disable-warning {
     margin-top: 10px;
 }
 
-.button-danger-background:hover {
-    background-color: var(--button-outline-danger-background-hover) !important;
-    border-style: solid;
-    border-width: .1rem;
-    border-color: var(--button-outline-danger-border) !important;
+.pc-plugins-disable-warning,
+.pc-plugin-modal-disable-warning {
+    background-color: color-mix(in srgb, var(--button-danger-background) 10%, transparent) !important;
+    border-style: solid !important;
+    padding: 10px;
+    border-width: .1rem !important;
+    border-color: color-mix(in srgb, var(--button-danger-background) 80%, transparent) !important;
+    border-radius: 5px !important;
+    color: color-mix(in srgb, var(--button-danger-background) 100%, transparent) !important;
 }
 
-.button-danger-background-no-margin {
+.pc-plugins-disable-warning:hover,
+.pc-plugin-modal-disable-warning:hover {
+    background-color: color-mix(in srgb, var(--button-danger-background-hover) 40%, transparent) !important;
+}
+
+.pc-plugins-confirm-reset,
+.pc-plugin-modal-confirm-reset {
     background-color: var(--button-danger-background) !important;
     color: var(--header-primary);
 }
 
-.button-danger-background-no-margin:hover {
+.pc-plugins-confirm-reset:hover,
+.pc-plugin-modal-confirm-reset:hover {
     background-color: var(--button-danger-background-hover) !important;
-    filter: saturate(75%);
+    filter: saturate(80%);
 }
 
 .pc-modal-close-button {
     margin-left: auto !important;
 }
 
-.modal-footer {
+.pc-modal-align-reset {
+    align-self: end;
+}
+
+.pc-modal-footer {
     display: flex;
     flex-direction: column;
     width: 100%;
     box-sizing: border-box;
 }
 
-.modal-footer .button-container {
-    display: flex !important;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.button-group {
-    display: flex !important;
+.pc-modal-footer .pc-button-container {
     gap: 10px;
     align-items: center;
-    justify-content: end !important;
+    justify-content: space-between !important;
 }
 
 /* Specific to disable all modal */
@@ -232,13 +231,6 @@
     text-decoration: underline;
 }
 
-.disable-all-button {
-    color: var(--header-primary);
-    width: 150px;
-    margin-left: auto;
-    margin-right: 4.5px !important;
-}
-
 .visual-refresh .button-danger-background {
     font-size: 16px;
     background-color: rgb(240 71 71 / 10%) !important;
@@ -248,7 +240,6 @@
     font-weight: 500;
     padding: 6px 10px;
     text-align: center;
-    margin-top: 10px;
 }
 
 .visual-refresh .button-danger-background:hover {
@@ -267,8 +258,32 @@
 
 .visual-refresh .pc-plugin-stats {
     background-color: var(--card-primary-bg) !important;
+    border: 1px solid var(--border-subtle) !important;
 
     &:hover {
         background-color: var(--card-primary-bg) !important;
     }
+}
+
+.pc-plugins-settings {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25em;
+}
+
+.pc-plugins-page-buttons {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pc-button-group {
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.pc-pm-modal-title {
+    padding: 5px 0 20px;
 }

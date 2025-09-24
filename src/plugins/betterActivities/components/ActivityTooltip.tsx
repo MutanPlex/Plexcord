@@ -6,7 +6,7 @@
  */
 
 import ErrorBoundary from "@components/ErrorBoundary";
-import { ActivityTooltipProps } from "@plexcord/discord-types";
+import { ActivityTooltipProps } from "@plugins/betterActivities/types";
 import { ActivityView, cl } from "@plugins/betterActivities/utils";
 import { UserStore } from "@webpack/common";
 

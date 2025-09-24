@@ -80,7 +80,6 @@
         },
         "settingsSection": {
             "title": "Ayarlar",
-            "hint": "İpucu: Bu ayarlar bölümünün konumunu <link>Ayarlar eklentisinin ayarlarından</link> değiştirebilirsiniz!",
             "hintParts": {
                 "prefix": "İpucu: Bu ayarlar bölümünün konumunu ",
                 "linkText": "Ayarlar eklentisinin ayarlarından",
@@ -149,6 +148,8 @@
     "plugins": {
         "title": "Eklentiler",
         "new": "Yeni",
+        "unknown": "Bilinmeyen",
+        "noDescription": "Açıklama mevcut değil.",
         "restart": {
             "apply": "Değişiklikleri uygulamak için yeniden başlatın!",
             "required": "Yeniden başlatma gerekli!",
@@ -214,6 +215,7 @@
             "enableBack": "Devam etmek istediğinizden kesinlikle emin misiniz? Daha sonra tekrardan aktifleştirebilirsiniz.",
             "undone": "Bu eylem geri alınamaz. Emin misin?",
             "resetDescription": "{{pluginName}} eklenti ayarlarını varsayılan değerlerine sıfırlamak üzeresiniz.",
+            "disable": "{{enabledPlugins}} eklentiyi devre dışı bırakmak üzeresiniz!",
             "confirmReset": "Onayla ve Sıfırla",
             "cancel": "İptal",
             "resetText": "Eğer devam etmek istediğinizden eminseniz, {{confirmReset}} butonuna tıklayın. Aksi takdirde, {{cancel}} butonuna tıklayın."
@@ -433,6 +435,80 @@
             "import": "İçe Aktar",
             "export": "Dışa Aktar"
         }
+    },
+    "changelog": {
+        "text": "Değişiklik Notları",
+        "title": "Değişiklik Notları",
+        "description": "Plexcord’daki en son değişiklikleri ve güncellemeleri burada bulabilirsiniz.",
+        "by": "yazar",
+        "check": "Depoyu kontrol et",
+        "uptodate": "güncel",
+        "update": "Güncelle",
+        "updatedPlugins": "Güncellenen Eklentiler",
+        "newSettings": "Yeni Ayarlar",
+        "newSettingTooltip": "{{plugin}} için yeni ayar",
+        "loading": "Yükleniyor...",
+        "repoUptodate": "Depo güncel",
+        "fetch": "Depodan Getir",
+        "clear": "Tüm Notları Temizle",
+        "internet": "İnternet bağlantınız olduğundan emin olun ve tekrar deneyin.",
+        "recent": "Son Değişiklikler",
+        "codeChanges": "Kod Değişiklikleri {{count}} yeni commit",
+        "updateLogs": "{{count}} Güncelleme Notu",
+        "noCommit": "Mevcut sürümünüzden ileriye dönük commit bulunamadı. Yeni değişiklikleri kontrol etmek için 'Depodan Getir'e tıklayın.",
+        "previous": "Önceki güncelleme oturumları, commit geçmişleri ve eklenti değişiklikleriyle birlikte.",
+        "modal": {
+            "description": "Plexcord’daki en son değişiklikleri görüntüleyin. Bu işlem, depodan commitleri doğrudan getirerek yenilikleri size gösterir.",
+            "repository": "Depo",
+            "failed": "Alınamadı - konsolu kontrol edin",
+            "current": "Mevcut:",
+            "hide": "Notları gizle",
+            "show": "Notları göster"
+        },
+        "commit": {
+            "available": "commit mevcut",
+            "no": "Yeni commit yok",
+            "new": "yeni eklentiler",
+            "updated": "güncellenen eklentiler",
+            "settings": "yeni ayarlar"
+        },
+        "toast": {
+            "already": "Depo zaten güncel",
+            "found": "Depodan {{count}} yeni commit bulundu",
+            "local": "Depo, yerel kopyanızla güncel",
+            "failed": "Depodan getirilemedi :(",
+            "cleared": "Tüm notlar temizlendi",
+            "logCleared": "Not temizlendi"
+        },
+        "alert": {
+            "clear": {
+                "title": "Tüm Notları Temizle",
+                "body": "Tüm notları temizlemek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+                "confirm": "Tümünü Temizle",
+                "confirmColor": "danger",
+                "cancel": "İptal"
+            },
+            "log": {
+                "title": "Günlüğü Temizle",
+                "body": "Bu günlüğü temizlemek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+                "confirm": "Günlüğü Temizle",
+                "confirmColor": "danger",
+                "cancel": "İptal"
+            }
+        },
+        "unit": {
+            "minute": "dakika",
+            "hour": "saat",
+            "day": "gün",
+            "week": "hafta",
+            "month": "ay",
+            "year": "yıl",
+            "ago": "önce",
+            "s": " "
+        },
+        "newPlugins": "{{count}} Yeni Eklenti",
+        "following": "Son güncellemelerde aşağıdaki eklentiler eklendi:",
+        "more": "+{{count}} yeni eklenti"
     },
     "cloud": {
         "text": "Cloud",
@@ -815,6 +891,13 @@
                     "listening": "Dinliyor",
                     "playing": "Oynuyor"
                 },
+                "statusDisplayType": {
+                    "label": "Durum Gösterim Türü",
+                    "description": "Üye listesinde parça / sanatçı adını göster",
+                    "off": "Gösterme (genel dinleme mesajını gösterir)",
+                    "artist": "Sanatçı adını göster",
+                    "track": "Parça adını göster"
+                },
                 "refreshInterval": {
                     "label": "Yenileme Aralığı",
                     "description": "Etkinlik yenileme aralığı (saniye)"
@@ -923,6 +1006,10 @@
                     "label": "Kullanıcı Açılır Penceresi",
                     "description": "Profil açılır penceresi/kenar çubuğunda tüm etkinlikleri göster"
                 },
+                "hideTooltip": {
+                    "label": "Araç İpucunu Gizle",
+                    "description": "Etkinlikleri çeşitli yerlerde gizler"
+                },
                 "allActivitiesStyle": {
                     "label": "Tüm Etkinlikler Stili",
                     "description": "Tüm etkinlikleri gösterme stili",
@@ -962,6 +1049,19 @@
                 "autoFillArguments": {
                     "label": "Argümanları Otomatik Doldur",
                     "description": "Komutu yalnızca gerekli argümanlarla değil, tüm argümanlarla otomatik olarak doldurur"
+                },
+                "allowNewlinesInCommands": {
+                    "label": "Komutlarda Yeni Satırları İzin Ver",
+                    "description": "Komut girişlerinde yeni satırlara izin ver (Shift + Enter)"
+                }
+            },
+            "command": {
+                "refresh": {
+                    "description": "Discord uygulama komutlarını yerel olarak yeniler",
+                    "user": "yenilemeye çalışılacak belirli kullanıcı",
+                    "refreshing": "Uygulama komutları yenileniyor...",
+                    "refreshed": "Komutlar başarıyla yenilendi!",
+                    "failed": "Komutları yenileme başarısız oldu. Ayrıntılar için konsolu kontrol edin."
                 }
             }
         },
@@ -1466,8 +1566,7 @@
                     "stopwatch": "30g 23:00:42",
                     "human": "30g 23s 00d 42sn"
                 }
-            },
-            "connected": "{{time}} süredir bağlı"
+            }
         },
         "channelBadges": {
             "name": "ChannelBadges",

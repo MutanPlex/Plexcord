@@ -22,7 +22,7 @@ export default definePlugin({
     name: "SoundBoardLogger",
     authors: [Devs.Moxxie, PcDevs.Fres, Devs.thororen, PcDevs.MutanPlex],
     description: "Logs all soundboards that are played in a voice chat and allows you to download them",
-    dependencies: ["ChatInputButtonAPI"],
+    dependencies: ["AudioPlayerAPI", "ChatInputButtonAPI"],
     patches: [
         {
             predicate: () => settings.store.IconLocation === "toolbar",

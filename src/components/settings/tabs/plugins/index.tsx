@@ -20,7 +20,7 @@
 import "./styles.css";
 
 import * as DataStore from "@api/DataStore";
-import { Settings, useSettings } from "@api/Settings";
+import { useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { SettingsTab, wrapTab } from "@components/settings";
 import { ChangeList } from "@utils/ChangeList";
@@ -28,18 +28,18 @@ import { proxyLazy } from "@utils/lazy";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
-import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { useAwaiter, useCleanupEffect } from "@utils/react";
 import { findByPropsLazy } from "@webpack";
-import { Alerts, Button, Card, Flex, Forms, lodash, Parser, React, Select, Text, TextInput, Toasts, Tooltip, useMemo, useState } from "@webpack/common";
+import { Alerts, Button, Card, Forms, lodash, Parser, React, Select, Text, TextInput, Toasts, Tooltip, useMemo, useState } from "@webpack/common";
 import { JSX } from "react";
 
 import Plugins, { ExcludedPlugins, PluginMeta } from "~plugins";// Avoid circular dependency
 const { stopPlugin } = proxyLazy(() => require("plugins"));
 
-import { t, tJsx } from "@api/i18n";
+import { t } from "@api/i18n";
 
 import { PluginCard } from "./PluginCard";
+import { openWarningModal } from "./PluginModal";
 import { StockPluginsCard } from "./PluginStatCards";
 
 export const cl = classNameFactory("pc-plugins-");
@@ -58,7 +58,7 @@ export function showErrorToast(message: string) {
     });
 }
 
-function ReloadRequiredCard({ required, enabledPlugins, openDisablePluginsModal, resetCheckAndDo, enabledStockPlugins, totalStockPlugins, enabledUserPlugins, totalUserPlugins }) {
+function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetCheckAndDo, enabledStockPlugins, totalStockPlugins, enabledUserPlugins, totalUserPlugins }) {
     return (
         <Card className={classes(cl("info-card"), required && "pc-warning-card")}>
             {required
@@ -90,12 +90,10 @@ function ReloadRequiredCard({ required, enabledPlugins, openDisablePluginsModal,
 
             {enabledPlugins.length > 0 && !required && (
                 <Button
-                    size={Button.Sizes.SMALL}
-                    className="button-danger-background disable-all-button"
+                    size={Button.Sizes.MAX}
+                    className={"pc-plugins-disable-warning pc-modal-align-reset"}
                     onClick={() => {
-                        if (Settings.ignoreResetWarning) return resetCheckAndDo();
-
-                        return openDisablePluginsModal(enabledPlugins, resetCheckAndDo);
+                        return openWarningModal(null, null, null, false, enabledPlugins.length, resetCheckAndDo);
                     }}
                 >
                     {t("plugins.restart.button.disableAll")}
@@ -319,82 +317,6 @@ function PluginSettings() {
         }
     }
 
-    function openDisablePluginsModal(enabledPlugins: String[], resetCheckAndDo: () => void) {
-        if (Settings.ignoreResetWarning) return resetCheckAndDo();
-
-        openModal(warningModalProps => (
-            <ModalRoot
-                {...warningModalProps}
-                size={ModalSize.SMALL}
-                className="pc-text-selectable"
-                transitionState={warningModalProps.transitionState}
-            >
-                <ModalHeader separator={false}>
-                    <Text className="text-danger">{t("plugins.dangerModal.title")}</Text>
-                    <ModalCloseButton onClick={warningModalProps.onClose} className="pc-modal-close-button" />
-                </ModalHeader>
-                <ModalContent>
-                    <Forms.FormSection>
-                        <Flex className="pc-warning-info">
-                            <img
-                                src="https://media.tenor.com/hapjxf8y50YAAAAi/stop-sign.gif"
-                                alt="Warning"
-                            />
-                            <Text className="warning-text">
-                                {tJsx("plugins.dangerModal.disablePlugins", { pluginCount: <span>{enabledPlugins.length}</span> })}
-                            </Text>
-                            <Text className="warning-text">
-                                {t("plugins.dangerModal.irreversible")}
-                            </Text>
-                            <Text className="text-normal margin-bottom">
-                                {t("plugins.dangerModal.enableBack")}
-                            </Text>
-                        </Flex>
-                    </Forms.FormSection>
-                </ModalContent>
-                <ModalFooter className="modal-footer">
-                    <Flex className="button-container">
-                        <Button
-                            size={Button.Sizes.SMALL}
-                            color={Button.Colors.PRIMARY}
-                            onClick={warningModalProps.onClose}
-                            look={Button.Looks.LINK}
-                        >
-                            {t("plugins.restart.button.cancel")}
-                        </Button>
-                        <Flex className="button-group">
-                            {!Settings.ignoreResetWarning && (
-                                <Button
-                                    size={Button.Sizes.SMALL}
-                                    className="button-danger-background"
-                                    onClick={() => {
-                                        Settings.ignoreResetWarning = true;
-                                    }}
-                                >
-                                    {t("plugins.restart.button.disableWarning")}
-                                </Button>
-                            )}
-                            <Tooltip text={t("plugins.dangerModal.undone")} shouldShow={true}>
-                                {({ onMouseEnter, onMouseLeave }) => (
-                                    <Button
-                                        size={Button.Sizes.SMALL}
-                                        className="button-danger-background-no-margin"
-                                        onClick={resetCheckAndDo}
-                                        onMouseEnter={onMouseEnter}
-                                        onMouseLeave={onMouseLeave}
-                                    >
-                                        {t("plugins.restart.button.disableAll")}
-                                    </Button>
-                                )}
-                            </Tooltip>
-                        </Flex>
-                    </Flex>
-                </ModalFooter>
-            </ModalRoot>
-        ));
-    }
-
-
     // Code directly taken from supportHelper.tsx
     const isApiPlugin = (plugin: string) => plugin.endsWith("API") || Plugins[plugin].required;
 
@@ -409,7 +331,7 @@ function PluginSettings() {
     return (
         <SettingsTab title={t("plugins.title")}>
 
-            <ReloadRequiredCard required={changes.hasChanges} enabledPlugins={enabledPlugins} openDisablePluginsModal={openDisablePluginsModal} resetCheckAndDo={resetCheckAndDo} enabledStockPlugins={enabledStockPlugins} totalStockPlugins={totalStockPlugins} enabledUserPlugins={enabledUserPlugins} totalUserPlugins={totalUserPlugins} />
+            <ReloadRequiredCard required={changes.hasChanges} enabledPlugins={enabledPlugins} openWarningModal={openWarningModal} resetCheckAndDo={resetCheckAndDo} enabledStockPlugins={enabledStockPlugins} totalStockPlugins={totalStockPlugins} enabledUserPlugins={enabledUserPlugins} totalUserPlugins={totalUserPlugins} />
 
             <Forms.FormTitle tag="h5" className={classes(Margins.top20, Margins.bottom8)}>
                 {t("plugins.filters.label")}

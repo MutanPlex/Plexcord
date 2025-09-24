@@ -1,0 +1,573 @@
+/*
+ * Plexcord, a modification for Discord's desktop app
+ * Copyright (c) 2025 Vendicated and contributors
+ * Copyright (c) 2025 MutanPlex
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+/* Existing changelog styles */
+.pc-changelog-entry {
+    padding: 0.75em;
+    margin-bottom: 0.5em;
+    background-color: var(--background-base-lower-alt);
+    border-radius: 8px;
+    transition: 0.1s ease-out;
+    transition-property: box-shadow, transform, background, opacity;
+}
+
+.pc-changelog-entry:hover {
+    background-color: var(--background-tertiary);
+    transform: translateY(-1px);
+    box-shadow: var(--elevation-high);
+}
+
+.pc-changelog-entry.required {
+    border-left: 4px solid var(--status-warning);
+    background-color: var(--background-base-lower-alt);
+    padding-left: calc(0.75em - 4px);
+}
+
+.pc-changelog-entry.required:hover {
+    background-color: var(--background-tertiary);
+    border-left-color: var(--status-warning-foreground);
+}
+
+.pc-changelog-entry-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 0.25em;
+}
+
+.pc-changelog-entry-hash {
+    font-size: 0.875em;
+    font-family: var(--font-code);
+    color: var(--text-muted);
+}
+
+.pc-changelog-entry-author {
+    font-size: 0.875em;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.pc-changelog-entry-message {
+    color: var(--text-default);
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+
+.pc-changelog-entry.required .pc-changelog-entry-hash {
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.pc-changelog-loading {
+    text-align: center;
+    padding: 2em;
+    color: var(--text-muted);
+}
+
+.pc-changelog-empty {
+    text-align: center;
+    padding: 2em;
+    background-color: var(--background-base-lower-alt);
+    border-radius: 8px;
+    color: var(--text-muted);
+}
+
+.pc-changelog-controls {
+    margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+.pc-changelog-repo-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 1em;
+}
+
+.pc-changelog-current-hash {
+    font-family: var(--font-code);
+    background-color: var(--background-base-lowest);
+    padding: 0.125em 0.25em;
+    border-radius: 3px;
+    font-size: 0.875em;
+}
+
+/* New Plugins Section Styles */
+.pc-changelog-new-plugins-section {
+    margin-bottom: 1.5em;
+    padding: 1em;
+    background-color: var(--background-base-lower-alt);
+    border-radius: 8px;
+    border-left: 4px solid var(--brand);
+}
+
+.pc-changelog-new-plugins-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0.75em;
+}
+
+.pc-changelog-new-plugin-card {
+    background-color: var(--background-tertiary);
+    border-radius: 6px;
+    padding: 0.5em;
+    transition: all 0.1s ease-out;
+}
+
+.pc-changelog-new-plugin-card:hover {
+    background-color: var(--background-base-lowest);
+    transform: translateY(-1px);
+    box-shadow: var(--elevation-medium);
+}
+
+.pc-changelog-new-plugin-card.required {
+    border-left: 4px solid var(--status-warning);
+    background-color: var(--background-base-lower-alt);
+}
+
+.pc-changelog-new-plugin-card.required:hover {
+    background-color: var(--background-tertiary);
+    border-left-color: var(--status-warning-foreground);
+}
+
+.pc-changelog-new-plugins-compact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-bottom: 0;
+    padding-top: 0;
+}
+
+.pc-changelog-new-plugins-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+.pc-changelog-new-plugin-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25em 0.5em;
+    background-color: var(--brand);
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 0.875em;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.1s ease;
+}
+
+.pc-changelog-new-plugin-tag:hover {
+    background-color: var(--brand-700);
+}
+
+.pc-changelog-new-plugin-tag.more {
+    background-color: var(--background-base-lower-alt);
+    color: var(--text-muted);
+}
+
+.pc-changelog-new-plugin-tag.required {
+    background-color: var(--status-warning);
+    color: var(--white);
+    border: 1px solid var(--status-warning-foreground);
+}
+
+.pc-changelog-new-plugin-tag.required:hover {
+    background-color: var(--status-warning-foreground);
+}
+
+.pc-changelog-restart-notice {
+    margin-top: 1em;
+    padding: 0.75em;
+    background-color: var(--info-warning-background);
+    border-radius: 6px;
+    border-left: 4px solid var(--status-warning);
+}
+
+/* Update Logs Styles */
+.pc-changelog-history {
+    margin-top: 1.5em;
+}
+
+.pc-changelog-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75em;
+    padding-right: 0.5em;
+    min-height: auto !important;
+    max-height: none !important;
+    height: auto !important;
+}
+
+.pc-changelog-log {
+    background-color: var(--background-base-lower-alt);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.1s ease-out;
+}
+
+.pc-changelog-log:hover {
+    box-shadow: var(--elevation-medium);
+}
+
+.pc-changelog-log-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+    user-select: none;
+    gap: 0.5em;
+    position: relative;
+}
+
+.pc-changelog-log-header:hover {
+    background-color: var(--background-tertiary);
+}
+
+.pc-changelog-log-info {
+    flex: 1;
+}
+
+.pc-changelog-log-title {
+    font-weight: 600;
+    font-size: 0.95em;
+    color: var(--text-default);
+    margin-bottom: 0.25em;
+    font-family: var(--font-code);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.pc-changelog-log-meta {
+    font-size: 0.875em;
+    color: var(--text-muted);
+    line-height: 1.3;
+}
+
+.pc-changelog-log-toggle {
+    transition: transform 0.2s ease;
+    color: var(--text-muted);
+    font-size: 0.75em;
+    flex-shrink: 0;
+}
+
+.pc-changelog-log-toggle.expanded {
+    transform: rotate(180deg);
+}
+
+.pc-changelog-log-content {
+    padding: 0 1em 1em;
+    border-top: 1px solid var(--background-base-lowest);
+    animation: expand-content 0.2s ease-out;
+
+    /* allow content to expand naturally (fixes cramming of elements) */
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+.pc-changelog-log-plugins {
+    margin-bottom: 1em;
+    padding-top: 0.75em;
+}
+
+.pc-changelog-log-plugins:last-child {
+    margin-bottom: 0;
+}
+
+.pc-changelog-log-commits {
+    margin-bottom: 1em;
+    padding-top: 0.75em;
+}
+
+.pc-changelog-log-commits:last-child {
+    margin-bottom: 0;
+}
+
+.pc-changelog-log-commits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0;
+}
+
+/* fix plugin entry padding to match commit entries (this took 3 different tries bro) */
+.pc-changelog-plugins-list .pc-changelog-entry {
+    padding: 0.75em;
+    margin-bottom: 0.5em;
+}
+
+/* Visual refresh support */
+.visual-refresh .pc-changelog-entry {
+    background-color: var(--card-primary-bg);
+    border: 1px solid var(--border-subtle);
+}
+
+.pc-changelog-log-commits-list .pc-changelog-entry:last-child {
+    margin-bottom: 0;
+}
+
+.pc-changelog-plugins-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0;
+}
+
+.visual-refresh .pc-changelog-entry.required {
+    border-left: 4px solid var(--status-warning);
+    background-color: var(--card-primary-bg);
+    border: 1px solid var(--border-subtle);
+    padding-left: calc(0.75em - 4px);
+}
+
+.pc-changelog-plugins-list .pc-changelog-entry:last-child {
+    margin-bottom: 0;
+}
+
+/* consistent padding for required plugin entries in logs */
+.pc-changelog-plugins-list .pc-changelog-entry.required {
+    padding-left: calc(0.75em - 4px);
+    margin-bottom: 0.5em;
+}
+
+.pc-changelog-plugins-list .pc-changelog-entry.required:last-child {
+    margin-bottom: 0;
+}
+
+.pc-changelog-log-commits-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.pc-changelog-log-commits-list::-webkit-scrollbar-track {
+    background: var(--background-base-lower-alt);
+    border-radius: 3px;
+}
+
+.pc-changelog-log-commits-list::-webkit-scrollbar-thumb {
+    background: var(--text-muted);
+    border-radius: 3px;
+}
+
+.pc-changelog-log-commits-list::-webkit-scrollbar-thumb:hover {
+    background: var(--text-default);
+}
+
+/* Current changes section */
+.pc-changelog-current {
+    margin-bottom: 1.5em;
+}
+
+.pc-changelog-commits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+/* Scrollbar styling for history list and log content */
+.pc-changelog-history-list::-webkit-scrollbar,
+.pc-changelog-log-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.pc-changelog-history-list::-webkit-scrollbar-track,
+.pc-changelog-log-content::-webkit-scrollbar-track {
+    background: var(--background-base-lower-alt);
+    border-radius: 3px;
+}
+
+.pc-changelog-history-list::-webkit-scrollbar-thumb,
+.pc-changelog-log-content::-webkit-scrollbar-thumb {
+    background: var(--text-muted);
+    border-radius: 3px;
+}
+
+.pc-changelog-history-list::-webkit-scrollbar-thumb:hover,
+.pc-changelog-log-content::-webkit-scrollbar-thumb:hover {
+    background: var(--text-default);
+}
+
+.visual-refresh .pc-changelog-entry:hover {
+    background-color: var(--card-primary-bg);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+}
+
+.visual-refresh .pc-changelog-empty {
+    background-color: var(--card-primary-bg);
+    border: 1px solid var(--border-subtle);
+}
+
+.visual-refresh .pc-changelog-current-hash {
+    background-color: var(--input-background);
+    border: 1px solid var(--border-subtle);
+}
+
+.visual-refresh .pc-changelog-new-plugins-section {
+    background-color: var(--card-primary-bg);
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid var(--brand);
+}
+
+.visual-refresh .pc-changelog-new-plugin-card {
+    background-color: var(--card-secondary-bg);
+    border: 1px solid var(--border-subtle);
+}
+
+.visual-refresh .pc-changelog-log {
+    background-color: var(--card-primary-bg);
+    border: 1px solid var(--border-subtle);
+}
+
+.visual-refresh .pc-changelog-log-header:hover {
+    background-color: var(--card-secondary-bg);
+}
+
+.visual-refresh .pc-changelog-log-content {
+    border-top: 1px solid var(--border-subtle);
+}
+
+.visual-refresh .pc-changelog-restart-notice {
+    background-color: var(--card-primary-bg);
+    border: 1px solid var(--status-warning);
+    border-left: 4px solid var(--status-warning);
+}
+
+/* Responsive design */
+@media (width <=768px) {
+    .pc-changelog-new-plugins-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pc-changelog-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pc-changelog-session-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5em;
+    }
+
+    .pc-changelog-log-toggle {
+        align-self: flex-end;
+        margin-top: -1.5em;
+    }
+
+    .pc-changelog-log-title {
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .pc-changelog-delete-button {
+        order: 1;
+    }
+}
+
+/* Animation for expanding/collapsing logs */
+
+@keyframes expand-content {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Badge styles for plugin counts */
+.pc-changelog-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125em 0.375em;
+    background-color: var(--brand);
+    color: var(--white);
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+    margin-left: 0.5em;
+}
+
+.pc-changelog-badge.warning {
+    background-color: var(--status-warning);
+}
+
+.pc-changelog-badge.success {
+    background-color: var(--status-positive);
+}
+
+/* Required plugin styling */
+.pc-changelog-dep-text {
+    font-size: 0.875em;
+    color: var(--text-muted);
+    margin-left: 1em;
+    font-style: italic;
+}
+
+/* Visual refresh support for required plugins */
+.visual-refresh .pc-changelog-new-plugin-tag.required {
+    background-color: var(--status-warning);
+    border: 1px solid var(--status-warning-foreground);
+}
+
+.visual-refresh .pc-changelog-new-plugin-card.required {
+    border-left: 4px solid var(--status-warning);
+    background-color: var(--card-secondary-bg);
+}
+
+/* Global overrides for changelog in settings modal */
+.pc-settings-tab [class*="changelog"] {
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+/* Ensure Forms.FormSection doesn't constrain changelog */
+.pc-settings-tab .pc-changelog-history,
+.pc-settings-tab .pc-changelog-history-list,
+.pc-settings-tab .pc-changelog-log-content {
+    min-height: auto !important;
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+}
+
+.visual-refresh .pc-changelog-entry.required:hover {
+    background-color: var(--card-secondary-bg);
+}
+
+/* Trash icon styling */
+.pc-changelog-delete-button {
+    transition:
+        opacity 0.2s ease,
+        color 0.2s ease,
+        background-color 0.2s ease;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.pc-changelog-delete-button:hover {
+    opacity: 1 !important;
+    color: var(--status-danger) !important;
+    background-color: var(--background-modifier-hover);
+}
+
+.pc-changelog-log-header:hover .pc-changelog-delete-button {
+    opacity: 0.8;
+}

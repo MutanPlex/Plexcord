@@ -1,25 +1,13 @@
 /*
  * Plexcord, a modification for Discord's desktop app
- * Copyright (c) 2022 Vendicated and Megumin
+ * Copyright (c) 2025 Vendicated and contributors
  * Copyright (c) 2025 MutanPlex
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
 import i18n, { SUPPORTED_LANGUAGES, t } from "@api/i18n";
 import { Settings } from "@api/Settings";
-import { BackupAndRestoreTab, CloudTab, PatchHelperTab, PlexcordTab, PluginsTab, ThemesTab, UpdaterTab } from "@components/settings/tabs";
+import { BackupAndRestoreTab, ChangelogTab, CloudTab, PatchHelperTab, PlexcordTab, PluginsTab, ThemesTab, UpdaterTab } from "@components/settings/tabs";
 import { Devs, PcDevs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
@@ -48,7 +36,7 @@ export default definePlugin({
             find: ".versionHash",
             replacement: [
                 {
-                    match: /\[\(0,\i\.jsxs?\)\((.{1,10}),(\{[^{}}]+\{.{0,20}.versionHash,.+?\})\)," "/,
+                    match: /\.info.+?\[\(0,\i\.jsxs?\)\((.{1,10}),(\{[^{}}]+\{.{0,20}.versionHash,.+?\})\)," "/,
                     replace: (m, component, props) => {
                         props = props.replace(/children:\[.+\]/, "");
                         return `${m},$self.makeInfoElements(${component}, ${props})`;
@@ -71,6 +59,15 @@ export default definePlugin({
                     match: /({(?=.+?function (\i).{0,160}(\i)=\i\.useMemo.{0,140}return \i\.useMemo\(\(\)=>\i\(\3).+?\(\)=>)\2/,
                     replace: (_, rest, settingsHook) => `${rest}$self.wrapSettingsHook(${settingsHook})`
                 }
+            ]
+        },
+        {
+            find: ".DEVELOPER_SECTION,",
+            replacement: [
+                {
+                    match: /\i\.\i\.isDeveloper/,
+                    replace: "true"
+                },
             ]
         },
         {
@@ -117,6 +114,12 @@ export default definePlugin({
                 searchableTitles: [t("updater.title")],
                 element: UpdaterTab,
                 className: "pc-updater"
+            }, {
+                section: "PlexcordChangelog",
+                label: t("changelog.text"),
+                searchableTitles: [t("changelog.text")],
+                element: ChangelogTab,
+                className: "pc-changelog",
             },
             {
                 section: "PlexcordCloud",

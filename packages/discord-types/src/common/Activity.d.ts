@@ -1,118 +1,43 @@
-import { CSSProperties, ImgHTMLAttributes, JSX } from "react";
-import { Application } from "./Application";
-import { User } from "./User";
+import { ActivityFlags, ActivityStatusDisplayType, ActivityType } from "../../enums";
 
-export type { User } from "./User";
-export type { Application } from "./Application";
-
-export interface ActivityTimestamp {
-    start?: number;
-    end?: number;
+export interface ActivityAssets {
+    large_image?: string;
+    large_text?: string;
+    small_image?: string;
+    small_text?: string;
 }
 
-export interface Developer {
-    id: string;
-    name: string;
+export interface ActivityButton {
+    label: string;
+    url: string;
 }
 
 export interface Activity {
-    created_at: number;
-    id: string;
+    created_at?: number;
+    id?: string;
     name: string;
-    type: number;
+    application_id: string;
+    type: ActivityType;
     emoji?: {
         animated: boolean;
         id: string;
         name: string;
     };
     state?: string;
-    flags?: number;
-    sync_id?: string;
+    state_url?: string;
     details?: string;
-    application_id?: string;
-    assets?: {
-        large_text?: string;
-        large_image?: string;
-        small_text?: string;
-        small_image?: string;
+    details_url?: string;
+    url?: string;
+    flags: ActivityFlags;
+    status_display_type?: ActivityStatusDisplayType;
+    timestamps?: {
+        start?: number;
+        end?: number;
     };
-    buttons?: Array<string>;
+    assets?: ActivityAssets;
+    buttons?: string[];
     metadata?: {
         button_urls?: Array<string>;
     };
-    timestamps?: ActivityTimestamp;
     platform?: string;
-}
-
-export interface ActivityViewProps {
-    activity: Activity | null;
-    user: User;
-    application?: Application;
-    currentUser: User;
-}
-
-export interface ApplicationIcon {
-    image?: ImgHTMLAttributes<HTMLImageElement> & {
-        src: string;
-        alt: string;
-    };
-    element?: JSX.Element;
-    activity: Activity;
-    application?: Application;
-}
-
-export interface Executable {
-    os: string;
-    name: string;
-    is_launcher: boolean;
-}
-
-export interface ActivityListIcon {
-    iconElement: JSX.Element;
-    tooltip?: JSX.Element | string;
-}
-
-export interface IconCSSProperties extends CSSProperties {
-    "--icon-size": string;
-}
-
-export interface ActivityListProps {
-    activities: Activity[];
-    user: User;
-    hideTooltip: boolean;
-}
-
-export interface ActivityTooltipProps {
-    activity: Activity;
-    application?: Application;
-    user: User;
-}
-
-export interface AllActivitiesProps {
-    activity: Activity;
-    user: User;
-    application: Application;
-    type: string;
-    [key: string]: any;
-}
-
-export interface CarouselControlsProps {
-    activities: Activity[];
-    currentActivity: Activity;
-    onActivityChange: (activity: Activity) => void;
-}
-
-export interface ActivityViewProps {
-    activity: Activity | null;
-    user: User;
-    application?: Application;
-    currentUser: User;
-}
-
-export const enum ActivityType {
-    PLAYING = 0,
-    STREAMING = 1,
-    LISTENING = 2,
-    WATCHING = 3,
-    COMPETING = 5
 }

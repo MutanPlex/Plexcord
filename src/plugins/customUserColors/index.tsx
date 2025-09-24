@@ -10,12 +10,12 @@ import "./styles.css";
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { get } from "@api/DataStore";
 import { definePluginSettings, Settings } from "@api/Settings";
-import { User } from "@plexcord/discord-types";
+import { Channel, User } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import { openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
 import { extractAndLoadChunksLazy } from "@webpack";
-import { Menu } from "@webpack/common";
+import { ChannelStore, Menu, SelectedChannelStore } from "@webpack/common";
 
 import { SetColorModal } from "./SetColorModal";
 
@@ -53,20 +53,37 @@ const userContextMenuPatch: NavContextMenuPatchCallback = (children, { user }: {
             icon={ColorIcon}
             action={async () => {
                 await requireSettingsMenu();
-                openModal(modalProps => <SetColorModal userId={user.id} modalProps={modalProps} />);
+                openModal(modalProps => <SetColorModal id={user.id} modalProps={modalProps} />);
             }}
         />
     );
 
     children.push(<Menu.MenuSeparator />, setCustomColorItem);
-
 };
 
-export function getCustomColorString(userId: string | undefined, withHash?: boolean): string | undefined {
-    if (!userId) return;
-    if (!colors[userId] || !Settings.plugins.CustomUserColors.enabled) return;
-    if (withHash) return `#${colors[userId]}`;
-    return colors[userId];
+const channelContextMenuPatch: NavContextMenuPatchCallback = (children, { channel }: { channel: Channel; }) => {
+    if (channel?.id == null) return;
+
+    const setCustomColorItem = (
+        <Menu.MenuItem
+            label="Set Color"
+            id="set-color"
+            icon={ColorIcon}
+            action={async () => {
+                await requireSettingsMenu();
+                openModal(modalProps => <SetColorModal id={channel.id} modalProps={modalProps} />);
+            }}
+        />
+    );
+
+    children.push(<Menu.MenuSeparator />, setCustomColorItem);
+};
+
+export function getCustomColorString(id: string | undefined, withHash?: boolean): string | undefined {
+    if (!id) return;
+    if (!colors[id] || !Settings.plugins.CustomUserColors.enabled) return;
+    if (withHash) return `#${colors[id]}`;
+    return colors[id];
 }
 
 const settings = definePluginSettings({
@@ -86,7 +103,10 @@ export default definePlugin({
     name: "CustomUserColors",
     description: "Lets you add a custom color to any user, anywhere! Highly recommend to use with typingTweaks and roleColorEverywhere",
     authors: [PcDevs.mochienya, PcDevs.MutanPlex],
-    contextMenus: { "user-context": userContextMenuPatch },
+    contextMenus: {
+        "user-context": userContextMenuPatch,
+        "gdm-context": channelContextMenuPatch,
+    },
     settings,
     requireSettingsMenu,
     getCustomColorString,
@@ -136,10 +156,12 @@ export default definePlugin({
 
     wrapMessageColorProps(colorProps: { colorString: string, colorStrings?: Record<"primaryColor" | "secondaryColor" | "tertiaryColor", string>; }, context: any) {
         try {
+            const channelId = SelectedChannelStore.getChannelId();
+            const channel = ChannelStore.getChannel(channelId);
+            const isDM = channel.isDM() || channel.isMultiUserDM();
             const colorString = this.colorIfServer(context);
-            if (colorString === colorProps.colorString) {
-                return colorProps;
-            }
+            if (colorString === colorProps.colorString) return colorProps;
+            if (!settings.store.colorInServers && !isDM) return colorProps;
 
             return {
                 ...colorProps,
@@ -157,8 +179,9 @@ export default definePlugin({
     },
 
     colorDMList(context: any): string | undefined {
-        const userId = context?.user?.id;
-        const colorString = getCustomColorString(userId, true);
+        const id = context?.user?.id ?? context?.channel?.id;
+        const colorString = getCustomColorString(id, true);
+
         return colorString ?? "inherit";
     },
 

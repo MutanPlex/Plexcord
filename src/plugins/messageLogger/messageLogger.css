@@ -2,7 +2,7 @@
     display: none;
 }
 
-.messagelogger-deleted:is(.messagelogger-deleted-attachment,
+.messagelogger-deleted :is(.messagelogger-deleted-attachment,
     .emoji,
     [data-type="sticker"],
     [class*="embedIframe"],
@@ -83,7 +83,6 @@
     border-radius: 3px;
     pointer-events: none;
 }
-
 
 /* when diffs are disabled for a specific message, remove diff colors */
 .messagelogger-diff-disabled .messagelogger-diff-added,

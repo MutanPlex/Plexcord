@@ -80,7 +80,6 @@
         },
         "settingsSection": {
             "title": "Settings",
-            "hint": "Hint: You can change the position of this settings section in the <link>settings of the Settings plugin</link>!",
             "hintParts": {
                 "prefix": "Hint: You can change the position of this settings section in the ",
                 "linkText": "settings of the Settings plugin",
@@ -149,6 +148,8 @@
     "plugins": {
         "title": "Plugins",
         "new": "NEW",
+        "unknown": "Unknown",
+        "noDescription": "No description available.",
         "restart": {
             "apply": "Restart to apply changes!",
             "required": "Restart required!",
@@ -214,9 +215,10 @@
             "enableBack": "Are you absolutely sure you want to proceed? You can always enable them back later.",
             "undone": "This action cannet be undone. Are you sure?",
             "resetDescription": "You are about to reset all settings for {{pluginName}} to their default values.",
+            "disable": "You are about to disable {{enabledPlugins}} plugins!",
             "confirmReset": "Confirm Reset",
             "cancel": "Cancel",
-            "resetText": "If you are certain you want to proceed, click <strong>Confirm Reset</strong>. Otherwise, click <strong>Cancel</strong>."
+            "resetText": "If you are certain you want to proceed, click {{confirmReset}}. Otherwise, click {{cancel}}."
         },
         "filters": {
             "label": "Filters",
@@ -500,6 +502,80 @@
             "description": "Which backend to use when using cloud integrations.",
             "invalid": "Invalid URL"
         }
+    },
+    "changelog": {
+        "text": "Changelog",
+        "title": "Changelog",
+        "description": "You can find the latest changes and updates to Plexcord here.",
+        "by": "by",
+        "check": "Repository check",
+        "uptodate": "up to date",
+        "update": "Update",
+        "updatedPlugins": "Updated Plugins",
+        "newSettings": "New Settings",
+        "newSettingTooltip": "New setting in {{plugin}}",
+        "loading": "Loading...",
+        "repoUptodate": "Repository up to date",
+        "fetch": "Fetch from Repository",
+        "clear": "Clear All Logs",
+        "internet": "Make sure you have an internet connection and try again.",
+        "recent": "Recent Changes",
+        "codeChanges": "Code Changes {{count}} new commit{{s}}",
+        "updateLogs": "Update Logs ({{count}})",
+        "noCommit": "No commits available ahead of your current version. Click 'Fetch from Repository' to check for new changes.",
+        "previous": "Previous update sessions with their commit history and plugin changes.",
+        "modal": {
+            "description": "View the most recent changes to Plexcord. This fetches commits directly from the repository to show you what's new.",
+            "repository": "Repository",
+            "failed": "Failed to retrieve - check console",
+            "current": "Current:",
+            "hide": "Hide logs",
+            "show": "Show logs"
+        },
+        "commit": {
+            "available": "commits available",
+            "no": "No new commits",
+            "new": "new plugins",
+            "updated": "updated plugins",
+            "settings": "new settings"
+        },
+        "toast": {
+            "already": "Already up to date with repository",
+            "found": "Found {{count}} new commit{{s}} from repository",
+            "local": "Repository is up to date with your local copy",
+            "failed": "Failed to fetch from repository :(",
+            "cleared": "All logs have been cleared",
+            "logCleared": "Log has been cleared"
+        },
+        "alert": {
+            "clear": {
+                "title": "Clear All Logs",
+                "body": "Are you sure you would like to clear all logs? This can't be undone.",
+                "confirm": "Clear All",
+                "confirmColor": "danger",
+                "cancel": "Cancel"
+            },
+            "log": {
+                "title": "Clear Log",
+                "body": "Are you sure you would like to clear this log? This can't be undone.",
+                "confirm": "Clear Log",
+                "confirmColor": "danger",
+                "cancel": "Cancel"
+            }
+        },
+        "unit": {
+            "minute": "minute",
+            "hour": "hour",
+            "day": "day",
+            "week": "week",
+            "month": "month",
+            "year": "year",
+            "ago": "ago",
+            "s": "s"
+        },
+        "newPlugins": "{{count}} New Plugin{{s}}",
+        "following": "The following plugins have been added in recent updates:",
+        "more": "+{{count}} more plugins"
     },
     "csp": {
         "restart": "A restart is required to apply this change",
@@ -804,7 +880,7 @@
             "name": "AppleMusicRichPresence",
             "description": "Discord rich presence for your Apple Music!",
             "about": "For the customizable activity format strings, you can use several special strings to include track data in activities! {{name}} is replaced with the track name; {{artist}} is replaced with the artist(s)' name(s); and {{album}} is replaced with the album name.",
-            "button":{
+            "button": {
                 "listen": "Listen on Apple Music",
                 "songLink": "View on SongLink"
             },
@@ -814,6 +890,13 @@
                     "description": "Which type of activity",
                     "listening": "Listening",
                     "playing": "Playing"
+                },
+                "statusDisplayType": {
+                    "label": "Status Display Type",
+                    "description": "Show the track / artist name in the member list",
+                    "off": "Don't show (shows generic listening message)",
+                    "artist": "Show artist name",
+                    "track": "Show track name"
                 },
                 "refreshInterval": {
                     "label": "Refresh Interval",
@@ -923,6 +1006,10 @@
                     "label": "User Popout",
                     "description": "Show all activities in the profile popout/sidebar"
                 },
+                "hideTooltip": {
+                    "label": "Hide Tooltip",
+                    "description": "Hides activities in various places"
+                },
                 "allActivitiesStyle": {
                     "label": "All Activities Style",
                     "description": "Style for showing all activities",
@@ -962,6 +1049,19 @@
                 "autoFillArguments": {
                     "label": "Auto Fill Arguments",
                     "description": "Automatically fill command with all arguments instead of just required ones"
+                },
+                "allowNewlinesInCommands": {
+                    "label": "Allow Newlines in Commands",
+                    "description": "Allow newlines in command inputs (Shift + Enter)"
+                }
+            },
+            "command": {
+                "refresh": {
+                    "description": "Refreshes Discord application commands locally",
+                    "user": "specific user to try and refresh",
+                    "refreshing": "Refreshing application commands...",
+                    "refreshed": "Commands refreshed successfully!",
+                    "failed": "Failed to refresh commands. Check the console for details."
                 }
             }
         },
@@ -1466,8 +1566,7 @@
                     "stopwatch": "30d 23:00:42",
                     "human": "30d 23h 00m 42s"
                 }
-            },
-            "connected": "Connected for {{time}}"
+            }
         },
         "channelBadges": {
             "name": "ChannelBadges",

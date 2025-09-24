@@ -8,6 +8,7 @@
 import "./styles.css";
 
 export * from "./BaseTab";
+export { default as ChangelogTab } from "./changelog";
 export { default as PatchHelperTab } from "./patchHelper";
 export { default as PlexcordTab } from "./plexcord";
 export { default as PluginsTab } from "./plugins";

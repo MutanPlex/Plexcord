@@ -17,58 +17,139 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { AudioPlayerInterface, createAudioPlayer } from "@api/AudioPlayer";
+import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
-let click1, click2, click3, backspace;
-let sounds = {
-    click1,
-    click2,
-    click3,
-    backspace
+import { ignoredKeys, packs } from "./packs";
+
+const allSounds = {
+    backspaces: [] as { playing: boolean; player: AudioPlayerInterface; }[],
+    caps: [] as { playing: boolean; player: AudioPlayerInterface; }[],
+    enters: [] as { playing: boolean; player: AudioPlayerInterface; }[],
+    arrows: [] as { playing: boolean; player: AudioPlayerInterface; }[],
+    others: [] as { playing: boolean; player: AudioPlayerInterface; }[]
 };
 
-const ignoredKeys = ["CapsLock", "ShiftLeft", "ShiftRight", "ControlLeft", "ControlRight", "AltLeft", "AltRight", "MetaLeft", "MetaRight", "ArrowUp", "ArrowRight", "ArrowLeft", "ArrowDown", "MediaPlayPause", "MediaStop", "MediaTrackNext", "MediaTrackPrevious", "MediaSelect", "MediaEject", "MediaVolumeUp", "MediaVolumeDown", "AudioVolumeUp", "AudioVolumeDown"];
+let chosenPack: typeof packs[keyof typeof packs];
+const keysCurrentlyPressed = new Set<string>();
+
+const keyup = (e: KeyboardEvent) => { keysCurrentlyPressed.delete(e.code); };
 
 const keydown = (e: KeyboardEvent) => {
-    if (ignoredKeys.includes(e.code)) return;
-    for (const sound of Object.values(sounds)) sound.pause();
-    if (e.code === "Backspace") {
-        sounds.backspace.currentTime = 0;
-        sounds.backspace.play();
-    } else {
-        const click = sounds[`click${Math.floor(Math.random() * 3) + 1}`];
-        click.currentTime = 0;
-        click.play();
+    if (!chosenPack) return;
+    if (ignoredKeys.includes(e.code) && !chosenPack.allowedIgnored?.includes(e.key)) return;
+    if (keysCurrentlyPressed.has(e.code)) return;
+    keysCurrentlyPressed.add(e.code);
+
+    function getRandomSound(soundsArray: { playing: boolean; player: AudioPlayerInterface; }[]) {
+        const nonplayingSounds = soundsArray.filter(sound => !sound?.playing);
+        let randomIndex;
+        let chosenSound;
+
+        if (nonplayingSounds.length) {
+            randomIndex = Math.floor(Math.random() * nonplayingSounds.length);
+            chosenSound = nonplayingSounds[randomIndex];
+        } else {
+            randomIndex = Math.floor(Math.random() * soundsArray.length);
+            chosenSound = soundsArray[randomIndex];
+        }
+
+        if (chosenSound) {
+            chosenSound.playing = true;
+            chosenSound.player.restart();
+        }
+    }
+
+    if (e.code === "Backspace" && allSounds.backspaces.length) {
+        getRandomSound(allSounds.backspaces);
+    } else if (e.code === "CapsLock" && allSounds.caps.length) {
+        getRandomSound(allSounds.caps);
+    } else if (e.code === "Enter" && allSounds.enters.length) {
+        getRandomSound(allSounds.enters);
+    } else if (["ArrowUp", "ArrowRight", "ArrowLeft", "ArrowDown"].includes(e.code) && allSounds.arrows.length) {
+        getRandomSound(allSounds.arrows);
+    } else if (allSounds.others.length) {
+        getRandomSound(allSounds.others);
     }
 };
+
+function clearSounds() {
+    Array.from(Object.values(allSounds)).forEach(soundsArray => { soundsArray.forEach(sound => sound.player.delete()); });
+    Object.keys(allSounds).forEach(key => { allSounds[key as keyof typeof allSounds] = []; });
+}
+
+function assignSounds(volume: number, pack: "operagx" | "osu") {
+    clearSounds();
+    chosenPack = packs[pack];
+
+    if (!chosenPack) {
+        return;
+    }
+
+    function addSounds(key: keyof typeof allSounds) {
+        if (!chosenPack[key]) return;
+        let soundIndex = -1;
+
+        for (let i = 0; i < 3; i++) {
+            for (const url of chosenPack[key]) {
+                soundIndex++;
+
+                allSounds[key].push({
+                    playing: false,
+                    player: createAudioPlayer(url, {
+                        volume,
+                        preload: true,
+                        persistent: true,
+                        onEnded: () => { allSounds[key][soundIndex].playing = false; }
+                    })
+                });
+            }
+        }
+    }
+
+    chosenPack.backspaces && addSounds("backspaces");
+    chosenPack.caps && addSounds("caps");
+    chosenPack.enters && addSounds("enters");
+    chosenPack.arrows && addSounds("arrows");
+    chosenPack.others && addSounds("others");
+}
+
+const settings = definePluginSettings({
+    volume: {
+        description: "Volume of the keyboard sounds.",
+        type: OptionType.SLIDER,
+        markers: [0, 25, 50, 75, 100],
+        stickToMarkers: false,
+        default: 100,
+        onChange: value => { assignSounds(value, settings.store.soundPack); }
+    },
+    soundPack: {
+        description: "Sound pack to use.",
+        type: OptionType.SELECT,
+        options: [
+            { label: "OperaGX", value: "operagx" as "operagx", default: true },
+            { label: "osu!", value: "osu" as "osu" }
+        ],
+        onChange: value => { assignSounds(settings.store.volume, value); }
+    }
+});
 
 export default definePlugin({
     name: "KeyboardSounds",
-    description: "Adds the Opera GX Keyboard Sounds to Discord",
-    authors: [Devs.HypedDomi, PcDevs.MutanPlex],
-    start: () => {
-        click1 = new Audio("https://raw.githubusercontent.com/MutanPlex/random-files/1046243ce11dc59cc13f7f3b18072df5011a6a92//sounds/keyboard/click1.wav");
-        click2 = new Audio("https://raw.githubusercontent.com/MutanPlex/random-files/1046243ce11dc59cc13f7f3b18072df5011a6a92/sounds/keyboard/click2.wav");
-        click3 = new Audio("https://raw.githubusercontent.com/MutanPlex/random-files/1046243ce11dc59cc13f7f3b18072df5011a6a92/sounds/keyboard/click3.wav");
-        backspace = new Audio("https://raw.githubusercontent.com/MutanPlex/random-files/1046243ce11dc59cc13f7f3b18072df5011a6a92/sounds/keyboard/backspace.wav");
-        sounds = {
-            click1,
-            click2,
-            click3,
-            backspace,
-        };
+    description: "Adds OperaGX or osu! sound effects when typing on your keyboard.",
+    authors: [Devs.HypedDomi, PcDevs.Etorix],
+    dependencies: ["AudioPlayerAPI"],
+    settings,
+    start() {
+        assignSounds(settings.store.volume, settings.store.soundPack);
+        document.addEventListener("keyup", keyup);
         document.addEventListener("keydown", keydown);
     },
-    stop: () => document.removeEventListener("keydown", keydown),
-    options: {
-        volume: {
-            description: "Volume",
-            type: OptionType.SLIDER,
-            markers: [0, 100],
-            stickToMarkers: false,
-            default: 100,
-            onChange: value => { for (const sound of Object.values(sounds)) sound.volume = value / 100; }
-        }
-    }
+    stop: () => {
+        clearSounds();
+        document.removeEventListener("keyup", keyup);
+        document.removeEventListener("keydown", keydown);
+    },
 });

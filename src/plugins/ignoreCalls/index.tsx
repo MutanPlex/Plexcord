@@ -7,18 +7,20 @@
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { definePluginSettings } from "@api/Settings";
+import { classNameFactory } from "@api/Styles";
 import { ErrorBoundary } from "@components/index";
 import { Channel } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
-import definePlugin, { OptionType } from "@utils/types";
+import definePlugin, { makeRange, OptionType } from "@utils/types";
 import { FluxDispatcher, Menu, React, UserStore } from "@webpack/common";
 
-const ignoredChannelIds = new Set<string>();
+const ignoredChannelIds: string[] = [];
+const cl = classNameFactory("pc-ignore-calls-");
 
 const ContextMenuPatch: NavContextMenuPatchCallback = (children, { channel }: { channel: Channel; }) => {
     if (!channel || (!channel.isDM() && !channel.isGroupDM())) return;
 
-    const [checked, setChecked] = React.useState(ignoredChannelIds.has(channel.id));
+    const [checked, setChecked] = React.useState(ignoredChannelIds.includes(channel.id));
 
     children.push(
         <Menu.MenuSeparator />,
@@ -28,9 +30,9 @@ const ContextMenuPatch: NavContextMenuPatchCallback = (children, { channel }: { 
             checked={checked}
             action={() => {
                 if (checked)
-                    ignoredChannelIds.delete(channel.id);
+                    ignoredChannelIds.includes(channel.id);
                 else
-                    ignoredChannelIds.add(channel.id);
+                    ignoredChannelIds.push(channel.id);
 
 
                 setChecked(!checked);
@@ -43,9 +45,9 @@ const settings = definePluginSettings({
     ignoreTimeout: {
         type: OptionType.SLIDER,
         description: "Timeout to click ignore",
-        markers: [0, 1000, 2000, 2500, 5000, 10000],
-        default: 2500,
-        stickToMarkers: false,
+        markers: makeRange(0, 10000, 1000),
+        default: 5000,
+        stickToMarkers: true,
     }
 });
 
@@ -53,7 +55,8 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "IgnoreCalls",
     description: "Allows you to ignore calls from specific users or dm groups.",
-    authors: [PcDevs.TheArmagan, PcDevs.MutanPlex],
+    authors: [PcDevs.TheArmagan],
+    settings,
     patches: [
         {
             find: "#{intl::INCOMING_CALL_ELLIPSIS}",
@@ -63,11 +66,14 @@ export default definePlugin({
             }
         }
     ],
-    settings,
+    contextMenus: {
+        "user-context": ContextMenuPatch,
+        "gdm-context": ContextMenuPatch,
+    },
     flux: {
         async CALL_UPDATE({ channelId, ringing, messageId, region }: { channelId: string; ringing: string[]; messageId: string; region: string; }) {
             setTimeout(() => {
-                if (!ignoredChannelIds.has(channelId)) return;
+                if (!ignoredChannelIds.includes(channelId)) return;
                 const currentUserId = UserStore.getCurrentUser().id;
                 if (ringing.includes(currentUserId)) {
                     return FluxDispatcher.dispatch({
@@ -82,17 +88,15 @@ export default definePlugin({
         }
     },
     renderIgnore(channel) {
-        const handeClick = () => {
-            ignoredChannelIds.add(channel.id);
-        };
         return (
             <ErrorBoundary>
-                <span onClick={handeClick} style={{ textAlign: "center", color: "var(--text-danger)" }}>Ignore</span>
+                <span
+                    className={cl("render")}
+                    onClick={() => ignoredChannelIds.push(channel.id)}
+                >
+                    Ignore
+                </span>
             </ErrorBoundary >
         );
-    },
-    contextMenus: {
-        "user-context": ContextMenuPatch,
-        "gdm-context": ContextMenuPatch,
     }
 });

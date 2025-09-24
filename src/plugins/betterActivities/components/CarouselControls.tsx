@@ -6,7 +6,7 @@
  */
 
 import { t } from "@api/i18n";
-import { CarouselControlsProps } from "@plexcord/discord-types";
+import { CarouselControlsProps } from "@plugins/betterActivities/types";
 import { cl } from "@plugins/betterActivities/utils";
 import { React, Tooltip } from "@webpack/common";
 
