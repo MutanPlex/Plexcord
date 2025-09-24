@@ -116,6 +116,10 @@
                     "top": "Top Right"
                 }
             },
+            "missed": {
+                "label": "Missed Notifications Count",
+                "description": "When refocusing discord a notification will popup with how you missed"
+            },
             "timeout": {
                 "label": "Notification Timeout",
                 "description": "The amount of time (in seconds) that notifications will stay on screen before automatically disappearing"
@@ -1999,6 +2003,24 @@
                     "switch": "Switch to {{oppositeTheme}} mode",
                     "disable": "Disable Nitro Theme",
                     "reset": "Reset Theme Color"
+                }
+            }
+        },
+        "clipsEnhancements": {
+            "name": "ClipsEnhancements",
+            "description": "Add more Clip FPS and duration options, plus RPC tagging!",
+            "minutes": "Minutes",
+            "option": {
+                "richPresenceTagging": {
+                    "label": "Rich Presence Tagging",
+                    "description": "When should clips be tagged with the current Rich Presence?",
+                    "always": "Always",
+                    "only": "Only when beginning or end of activity name matches",
+                    "never": "Never"
+                },
+                "clipsLink": {
+                    "label": "Clips Link",
+                    "link": "Change FPS and duration options in Clips settings!"
                 }
             }
         }

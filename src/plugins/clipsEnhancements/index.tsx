@@ -6,6 +6,7 @@
  */
 
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Link } from "@components/Link";
 import { Activity, SelectOption } from "@plexcord/discord-types";
@@ -17,15 +18,25 @@ import { PresenceStore, SettingsRouter, UserStore } from "@webpack/common";
 
 const settings = definePluginSettings({
     richPresenceTagging: {
+        get label() {
+            return t("plugin.clipsEnhancements.option.richPresenceTagging.label");
+        },
+        get description() {
+            return t("plugin.clipsEnhancements.option.richPresenceTagging.description");
+        },
         type: OptionType.SELECT,
-        description: "When should clips be tagged with the current Rich Presence?",
-        options: [
-            { label: "Always", value: "always" },
-            { label: "Only when beginning or end of activity name matches", value: "whenMatched", default: true },
-            { label: "Never", value: "never" },
-        ]
+        get options() {
+            return [
+                { label: t("plugin.clipsEnhancements.option.richPresenceTagging.always"), value: "always" },
+                { label: t("plugin.clipsEnhancements.option.richPresenceTagging.only"), value: "whenMatched", default: true },
+                { label: t("plugin.clipsEnhancements.option.richPresenceTagging.never"), value: "never" },
+            ];
+        }
     },
     clipsLink: {
+        get label() {
+            return t("plugin.clipsEnhancements.option.clipsLink.label");
+        },
         type: OptionType.COMPONENT,
         description: "",
         component: () => {
@@ -37,8 +48,8 @@ const settings = definePluginSettings({
                             ModalAPI.closeAllModals();
                         }}
                     >
-                        Change FPS and duration options in Clips settings!
-                    </Link >
+                        {t("plugin.clipsEnhancements.option.clipsLink.link")}
+                    </Link>
                 </>
             );
         }
@@ -49,6 +60,11 @@ export default definePlugin({
     name: "ClipsEnhancements",
     description: "Add more Clip FPS and duration options, plus RPC tagging!",
     authors: [Devs.niko],
+
+    get displayDescription() {
+        return t("plugin.clipsEnhancements.description");
+    },
+
     settings,
     patches: [
         {
@@ -77,7 +93,7 @@ export default definePlugin({
         const newTimeslots = [...timeslots];
         const extraTimeslots = [3, 5, 7, 10];
 
-        extraTimeslots.forEach(timeslot => newTimeslots.push({ value: timeslot * 60000, label: `${timeslot} Minutes` }));
+        extraTimeslots.forEach(timeslot => newTimeslots.push({ value: timeslot * 60000, label: `${timeslot} ${t("plugin.clipsEnhancements.minutes")}` }));
 
         return newTimeslots;
     },

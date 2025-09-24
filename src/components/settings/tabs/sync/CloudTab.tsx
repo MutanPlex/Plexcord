@@ -183,7 +183,7 @@ function CloudTab() {
                             cancelText: t("cloud.button.erase.cancel")
                         })}
                     >
-                        {t("cloud.button.erase")}
+                        {t("cloud.button.erase.erase")}
                     </Button>
                 </Grid>
 

@@ -116,6 +116,10 @@
                     "top": "Yukarı Sağ"
                 }
             },
+            "missed": {
+                "label": "Kaçırılan Bildirim Sayısı",
+                "description": "Discord'a yeniden odaklandığınızda, kaçırdığınız bildirimlerle ilgili bir bildirim açılacaktır."
+            },
             "timeout": {
                 "label": "Bildirim Zaman Aşımı",
                 "description": "Bildirimlerin otomatik olarak kaybolmadan önce ekranda kalma süresi (saniye cinsinden)"
@@ -1999,6 +2003,24 @@
                     "switch": "{{oppositeTheme}} moduna geç",
                     "disable": "Nitro Temasını Devre Dışı Bırak",
                     "reset": "Tema Rengini Sıfırla"
+                }
+            }
+        },
+        "clipsEnhancements": {
+            "name": "ClipsEnhancements",
+            "description": "Daha fazla Klip FPS ve süre seçeneği ekleyin, ayrıca RPC etiketleme!",
+            "minutes": "Dakika",
+            "option": {
+                "richPresenceTagging": {
+                    "label": "Rich Presence Etiketleme",
+                    "description": "Klipler mevcut Rich Presence ile ne zaman etiketlenmeli?",
+                    "always": "Her zaman",
+                    "only": "Yalnızca etkinlik adının başı veya sonu eşleştiğinde",
+                    "never": "Asla"
+                },
+                "clipsLink": {
+                    "label": "Klipler Bağlantısı",
+                    "link": "Klipler ayarlarında FPS ve süre seçeneklerini değiştirin!"
                 }
             }
         }

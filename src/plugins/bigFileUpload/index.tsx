@@ -938,7 +938,7 @@ async function uploadFile(file: File, channelId: string) {
                 author: {
                     username: "Plexcord"
                 },
-                content: t("plugin.bigFileUpload.command.noUploader")
+                content: t("plugin.bigFileUpload.commands.noUploader")
             });
             UploadManager.clearAll(channelId, DraftType.SlashCommand);
     }
@@ -1004,14 +1004,14 @@ export default definePlugin({
             name: "fileupload",
             description: "Upload a file",
             get displayDescription() {
-                return t("plugin.bigFileUpload.command.description");
+                return t("plugin.bigFileUpload.commands.description");
             },
             options: [
                 {
                     name: "file",
                     description: "The file to upload",
                     get displayDescription() {
-                        return t("plugin.bigFileUpload.command.upload");
+                        return t("plugin.bigFileUpload.commands.upload");
                     },
                     type: ApplicationCommandOptionType.ATTACHMENT,
                     required: true,
@@ -1026,7 +1026,7 @@ export default definePlugin({
                         author: {
                             username: "Plexcord"
                         },
-                        content: t("plugin.bigFileUpload.command.noFile")
+                        content: t("plugin.bigFileUpload.commands.noFile")
                     });
                     UploadManager.clearAll(cmdCtx.channel.id, DraftType.SlashCommand);
                 }

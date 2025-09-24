@@ -90,12 +90,12 @@ function NotificationSettings() {
                 serialize={identity}
             />
 
-            <Forms.FormTitle tag="h5" className={Margins.top16 + " " + Margins.bottom8}>Missed Notification Count</Forms.FormTitle>
+            <Forms.FormTitle tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t("settings.notifications.missed.label")}</Forms.FormTitle>
             <Switch
                 value={settings.missed}
                 onChange={(v: boolean) => settings.missed = v}
             >
-                When refocusing discord a notification will popup with how you missed
+                {t("settings.notifications.missed.description")}
             </Switch>
 
             <Forms.FormTitle tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t("settings.notifications.timeout.label")}</Forms.FormTitle>
