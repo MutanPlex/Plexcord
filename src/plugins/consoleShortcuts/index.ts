@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import { getCurrentChannel, getCurrentGuild } from "@utils/discord";
 import { runtimeHashMessageKey } from "@utils/intlHash";
@@ -237,6 +238,10 @@ export default definePlugin({
     description: "Adds shorter Aliases for many things on the window. Run `shortcutList` for a list.",
     authors: [Devs.Ven],
     startAt: StartAt.Init,
+
+    get displayDescription() {
+        return t("plugin.consoleShortcuts.description");
+    },
 
     patches: [
         {

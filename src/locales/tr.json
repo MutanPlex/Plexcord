@@ -2078,6 +2078,33 @@
                     "description": "Fare ile komut paletini kontrol etmeye izin ver."
                 }
             }
+        },
+        "consoleJanitor": {
+            "name": "ConsoleJanitor",
+            "description": "Can sıkıcı konsol mesajlarını/hatalarını devre dışı bırakır",
+            "option": {
+                "disableLoggers": {
+                    "label": "Logger’ları Devre Dışı Bırak",
+                    "description": "Discord’un logger’larını devre dışı bırakır"
+                },
+                "disableSpotifyLogger": {
+                    "label": "Spotify Logger’ını Devre Dışı Bırak",
+                    "description": "Hesap bilgilerini ve erişim anahtarını sızdıran Spotify logger’ını devre dışı bırakır"
+                },
+                "whitelistedLoggers": {
+                    "label": "Beyaz Listeye Alınmış Logger’lar",
+                    "description": "Diğerleri gizlense bile izin verilecek logger’ların noktalı virgülle ayrılmış listesi"
+                },
+                "allowLevel": {
+                    "label": "İzin Verilen Seviye",
+                    "description": "Bu türlerdeki logger’lara her zaman izin ver",
+                    "filter": "Filtre Listesi"
+                }
+            }
+        },
+        "consoleShortcuts": {
+            "name": "Console Shortcuts",
+            "description": "Pencere üzerinde birçok şey için daha kısa kısayollar ekler. Liste için `shortcutList` komutunu çalıştırın."
         }
     }
 }
