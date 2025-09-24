@@ -2023,6 +2023,61 @@
                     "link": "Klipler ayarlarında FPS ve süre seçeneklerini değiştirin!"
                 }
             }
+        },
+        "colorSighted": {
+            "name": "ColorSighted",
+            "description": "Durumlardan renk körlerine uygun simgeleri kaldırır, tıpkı 2015-2017 Discord gibi"
+        },
+        "commandPalette": {
+            "name": "CommandPalette",
+            "description": "Klavye ile arayüzde gezinmenizi sağlar.",
+            "search": "Komut Paletinde Ara",
+            "type": "Yazın ve Enter’a basın",
+            "enter": "Bir URL girin",
+            "fetch": "Getirilecek URL girin (yalnızca GET)",
+            "issue": "URL getirilirken sorun oluştu",
+            "enable": "Etkinleştir",
+            "disable": "Devre Dışı Bırak",
+            "open": {
+                "devTab": "Geliştirici Sekmesini Aç",
+                "plexcord": "Plexcord Sekmesini Aç",
+                "plugin": "Eklentiler Sekmesini Aç",
+                "themes": "Temalar Sekmesini Aç",
+                "updater": "Güncelleyici Sekmesini Aç",
+                "cloud": "Cloud Sekmesini Aç",
+                "backup": "Yedekleme & Geri Yükleme Sekmesini Aç",
+                "restart": "Plexcord’u Yeniden Başlat",
+                "quickCSS": "QuickCSS Dosyasını Aç",
+                "settings": "Ayarlar Klasörünü Aç",
+                "github": "Github’da Aç",
+                "browser": "Tarayıcıda Aç",
+                "togglePlugin": "Eklentiyi Aç/Kapat",
+                "quickFetch": "Hızlı Getir",
+                "copyGit": "Git Bilgilerini Kopyala",
+                "check": "Güncellemeleri Kontrol Et",
+                "navigate": "Sunucuya Git",
+                "changelog": "Değişiklik Notları Sekmesini Aç"
+            },
+            "toast": {
+                "invalid": "Geçersiz URL",
+                "copied": "Yanıt panoya kopyalandı!",
+                "git": "Git bilgileri panoya kopyalandı!",
+                "noUpdates": "Hiç güncelleme yok",
+                "enabled": "{{plugin}} başarıyla etkinleştirildi",
+                "disabled": "{{plugin}} başarıyla devre dışı bırakıldı"
+            },
+            "option": {
+                "hotkey": {
+                    "label": "Kısayol",
+                    "description": "Komut paletini açmak için kısayol tuşu",
+                    "recording": "Kaydediliyor...",
+                    "record": "Tuş kombinasyonunu kaydet"
+                },
+                "allowMouseControl": {
+                    "label": "Fare Kontrolüne İzin Ver",
+                    "description": "Fare ile komut paletini kontrol etmeye izin ver."
+                }
+            }
         }
     }
 }

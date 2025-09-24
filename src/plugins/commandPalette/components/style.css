@@ -57,7 +57,6 @@
     display: block;
     cursor: pointer;
     height: 40px;
-    width: 20rem;
 }
 
 .pc-command-palette-key-recorder {
@@ -100,7 +99,6 @@
     position: absolute;
     right: 1rem;
     height: 30px;
-    width: 128px;
     color: var(--white-500);
     background-color: var(--button-secondary-background);
     border-radius: 10px;

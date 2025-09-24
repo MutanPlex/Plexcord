@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Devs } from "@utils/constants";
@@ -21,7 +22,12 @@ let isRecordingGlobal: boolean = false;
 
 export const settings = definePluginSettings({
     hotkey: {
-        description: "The hotkey to open the command palette.",
+        get label() {
+            return t("plugin.commandPalette.option.hotkey.label");
+        },
+        get description() {
+            return t("plugin.commandPalette.option.hotkey.description");
+        },
         type: OptionType.COMPONENT,
         default: ["Control", "Shift", "P"],
         component: () => {
@@ -71,7 +77,7 @@ export const settings = definePluginSettings({
                         <div className={`${cl("key-recorder")} ${isRecording ? cl("recording") : ""}`}>
                             {settings.store.hotkey.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" + ")}
                             <button className={`${cl("key-recorder-button")} ${isRecording ? cl("recording-button") : ""}`} disabled={isRecording}>
-                                {isRecording ? "Recording..." : "Record keybind"}
+                                {isRecording ? t("plugin.commandPalette.option.hotkey.recording") : t("plugin.commandPalette.option.hotkey.record")}
                             </button>
                         </div>
                     </div>
@@ -80,7 +86,12 @@ export const settings = definePluginSettings({
         }
     },
     allowMouseControl: {
-        description: "Allow the mouse to control the command palette.",
+        get label() {
+            return t("plugin.commandPalette.option.allowMouseControl.label");
+        },
+        get description() {
+            return t("plugin.commandPalette.option.allowMouseControl.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     }
@@ -93,12 +104,16 @@ export default definePlugin({
     authors: [Devs.Ethan],
     settings,
 
+    get displayDescription() {
+        return t("plugin.commandPalette.description");
+    },
+
     start() {
         document.addEventListener("keydown", this.event);
 
         registerAction({
             id: "openDevSettings",
-            label: "Open Dev tab",
+            label: () => t("plugin.commandPalette.open.devTab"),
             callback: () => SettingsRouter.open("PlexcordPatchHelper"),
             registrar: "Plexcord"
         });

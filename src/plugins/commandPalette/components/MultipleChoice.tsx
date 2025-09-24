@@ -7,6 +7,7 @@
 
 import "./style.css";
 
+import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { ButtonAction } from "@plugins/commandPalette/commands";
 import { closeAllModals, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
@@ -28,10 +29,17 @@ export function MultipleChoice({ modalProps, onSelect, choices }: MultipleChoice
 
     const allowMouse = settings.store.allowMouseControl;
 
-    const sortedActions = choices.slice().sort((a, b) => a.label.localeCompare(b.label));
+    const sortedActions = choices.slice().sort((a, b) => {
+        const labelA = typeof a.label === "function" ? a.label() : a.label;
+        const labelB = typeof b.label === "function" ? b.label() : b.label;
+        return labelA.localeCompare(labelB);
+    });
 
     const filteredActions = sortedActions.filter(
-        action => action.label.toLowerCase().includes(queryEh.toLowerCase())
+        action => {
+            const label = typeof action.label === "function" ? action.label() : action.label;
+            return label.toLowerCase().includes(queryEh.toLowerCase());
+        }
     );
 
 
@@ -108,7 +116,7 @@ export function MultipleChoice({ modalProps, onSelect, choices }: MultipleChoice
                     value={queryEh}
                     onChange={e => setQuery(e)}
                     style={{ width: "100%", borderBottomLeftRadius: "0", borderBottomRightRadius: "0", paddingLeft: "0.9rem" }}
-                    placeholder="Search the Command Palette"
+                    placeholder={t("plugin.commandPalette.search")}
                 />
                 <div className={cl("option-container")}>
                     {visibleActions.map((action, index) => (
@@ -119,7 +127,7 @@ export function MultipleChoice({ modalProps, onSelect, choices }: MultipleChoice
                             onMouseMove={() => { if (allowMouse) setFocusedIndex(index); }}
                             style={allowMouse ? { cursor: "pointer" } : { cursor: "default" }}
                         >
-                            {action.label}
+                            {typeof action.label === "function" ? action.label() : action.label}
                             {action.registrar && <span className={cl("registrar")}>{action.registrar}</span>}
                         </button>
                     ))}

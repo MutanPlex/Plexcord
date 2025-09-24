@@ -2023,6 +2023,61 @@
                     "link": "Change FPS and duration options in Clips settings!"
                 }
             }
+        },
+        "colorSighted": {
+            "name": "ColorSighted",
+            "description": "Removes the colorblind-friendly icons from statuses, just like 2015-2017 Discord"
+        },
+        "commandPalette": {
+            "name": "CommandPalette",
+            "description": "Allows you to navigate the UI with a keyboard.",
+            "search": "Search the Command Palette",
+            "type": "Type and Press Enter",
+            "enter": "Enter a URL",
+            "fetch": "Enter URL to fetch (GET only)",
+            "issue": "Issue fetching URL",
+            "enable": "Enable",
+            "disable": "Disable",
+            "open": {
+                "devTab": "Open Dev Tab",
+                "plexcord": "Open Plexcord Tab",
+                "plugin": "Open Plugins Tab",
+                "themes": "Open Themes Tab",
+                "updater": "Open Updater Tab",
+                "cloud": "Open Cloud Tab",
+                "backup": "Open Backup & Restore Tab",
+                "restart": "Restart Plexcord",
+                "quickCSS": "Open Quick CSS File",
+                "settings": "Open Settings Folder",
+                "github": "Open in Github",
+                "browser": "Open in Browser",
+                "togglePlugin": "Toggle Plugin",
+                "quickFetch": "Quick Fetch",
+                "copyGit": "Copy Git Info",
+                "check": "Check for Updates",
+                "navigate": "Navigate to Server",
+                "changelog": "Open Changelog Tab"
+            },
+            "toast": {
+                "invalid": "Invalid URL",
+                "copied": "Copied response to clipboard!",
+                "git": "Copied git info to clipboard!",
+                "noUpdates": "No updates available",
+                "enabled": "Successfully enabled {{plugin}}",
+                "disabled": "Successfully disabled {{plugin}}"
+            },
+            "option": {
+                "hotkey": {
+                    "label": "Hotkey",
+                    "description": "The hotkey to open the command palette",
+                    "recording": "Recording...",
+                    "record": "Record keybind"
+                },
+                "allowMouseControl": {
+                    "label": "Allow Mouse Control",
+                    "description": "Allow the mouse to control the command palette."
+                }
+            }
         }
     }
 }
