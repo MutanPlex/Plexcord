@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Channel } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -12,7 +13,10 @@ import definePlugin from "@utils/types";
 export default definePlugin({
     name: "CleanChannelName",
     authors: [Devs.AutumnVN, PcDevs.MutanPlex],
-    description: "remove all emoji and decor shit from channel names",
+    description: "Remove all emoji and decor shit from channel names",
+    get displayDescription() {
+        return t("plugin.cleanChannelName.description");
+    },
     patches: [
         {
             find: "loadAllGuildAndPrivateChannelsFromDisk(){",

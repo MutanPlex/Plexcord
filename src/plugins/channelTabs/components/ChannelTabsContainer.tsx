@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { BasicChannelTabsProps, ChannelTabsProps, createTab, handleChannelSwitch, moveToTab, openedTabs, openStartupTabs, saveTabs, settings, setUpdaterFunction, useGhostTabs } from "@plugins/channelTabs/util";
 import { classes } from "@utils/misc";
@@ -137,7 +138,7 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
 
 export function ChannelTabsPreview(p) {
     const id = UserStore.getCurrentUser()?.id;
-    if (!id) return <Forms.FormText>there's no logged in account?????</Forms.FormText>;
+    if (!id) return <Forms.FormText>{t("plugin.channelTabs.error.noLogin")}</Forms.FormText>;
 
     const { setValue }: { setValue: (v: TabSet) => void; } = p;
     const { tabSet }: { tabSet: TabSet; } = settings.use(["tabSet"]);
@@ -147,7 +148,7 @@ export function ChannelTabsPreview(p) {
 
     return (
         <>
-            <Forms.FormTitle>Startup tabs</Forms.FormTitle>
+            <Forms.FormTitle>{t("plugin.channelTabs.tabs.startup")}</Forms.FormTitle>
             <Flex flexDirection="row" style={{ gap: "2px" }}>
                 {currentTabs.map(t => <>
                     <PreviewTab {...t} />
@@ -159,7 +160,7 @@ export function ChannelTabsPreview(p) {
                         setCurrentTabs([...openedTabs]);
                         setValue({ ...tabSet, [id]: [...openedTabs] });
                     }}
-                >Set to currently open tabs</Button>
+                >{t("plugin.channelTabs.tabs.startup")}</Button>
             </Flex>
         </>
     );

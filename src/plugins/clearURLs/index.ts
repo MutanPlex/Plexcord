@@ -17,10 +17,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import {
     MessageObject
 } from "@api/MessageEvents";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 const CLEAR_URLS_JSON_URL = "https://raw.githubusercontent.com/ClearURLs/Rules/master/data.min.json";
@@ -51,7 +52,11 @@ interface RuleSet {
 export default definePlugin({
     name: "ClearURLs",
     description: "Automatically removes tracking elements from URLs you send",
-    authors: [Devs.adryd, Devs.thororen],
+    authors: [Devs.adryd, Devs.thororen, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.clearURLs.description");
+    },
 
     rules: [] as RuleSet[],
 

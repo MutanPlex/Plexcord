@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { DataStore } from "@api/index";
 import { useAwaiter } from "@utils/react";
 import { ChannelStore, useCallback, UserStore, useState } from "@webpack/common";
@@ -17,14 +18,14 @@ export function isBookmarkFolder(bookmark: Bookmark | BookmarkFolder): bookmark 
 }
 
 export function bookmarkPlaceholderName(bookmark: Omit<Bookmark | BookmarkFolder, "name">) {
-    if (isBookmarkFolder(bookmark as Bookmark | BookmarkFolder)) return "Folder";
+    if (isBookmarkFolder(bookmark as Bookmark | BookmarkFolder)) return t("plugin.channelTabs.bookmark.folder");
     const channel = ChannelStore.getChannel((bookmark as Bookmark).channelId);
 
-    if (!channel) return "Bookmark";
+    if (!channel) return t("plugin.channelTabs.bookmark.label");
     if (channel.name) return `#${channel.name}`;
     if (channel.recipients) return UserStore.getUser(channel.recipients?.[0])?.username
-        ?? "Unknown User";
-    return "Bookmark";
+        ?? t("plugin.channelTabs.bookmark.unknown");
+    return t("plugin.channelTabs.bookmark.label");
 }
 
 export function useBookmarks(userId: string): UseBookmark {
@@ -69,7 +70,7 @@ export function useBookmarks(userId: string): UseBookmark {
         addFolder() {
             if (!bookmarks) return;
             const length = bookmarks[userId].push({
-                name: "Folder",
+                name: t("plugin.channelTabs.bookmark.folder"),
                 iconColor: bookmarkFolderColors.Black,
                 bookmarks: []
             });

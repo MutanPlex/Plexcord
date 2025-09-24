@@ -7,6 +7,7 @@
 
 import "./style.css";
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -14,8 +15,13 @@ import { UserStore } from "@webpack/common";
 
 const settings = definePluginSettings({
     colorEffects: {
+        get label() {
+            return t("plugin.characterCounter.option.colorEffects.label");
+        },
+        get description() {
+            return t("plugin.characterCounter.option.colorEffects.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Turn on or off color effects for getting close to the character limit",
         default: true,
     },
 });
@@ -23,8 +29,11 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "CharacterCounter",
     description: "Adds a character counter to the chat input",
-    authors: [PcDevs.creations, PcDevs.Panniku, Devs.thororen],
+    authors: [PcDevs.creations, PcDevs.Panniku, Devs.thororen, PcDevs.MutanPlex],
     settings,
+    get displayDescription() {
+        return t("plugin.characterCounter.description");
+    },
     patches: [
         {
             find: ".CREATE_FORUM_POST||",

@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { bookmarkFolderColors, bookmarkPlaceholderName, closeOtherTabs, closeTab, closeTabsToTheLeft, closeTabsToTheRight, createTab, hasClosedTabs, isBookmarkFolder, openedTabs, reopenClosedTab, settings, toggleCompactTab } from "@plugins/channelTabs/util";
 import { Bookmark, BookmarkFolder, Bookmarks, ChannelTabsProps, UseBookmarkMethods } from "@plugins/channelTabs/util/types";
 import { getIntlMessage } from "@utils/discord";
@@ -19,13 +20,13 @@ export function BasicContextMenu() {
         <Menu.Menu
             navId="channeltabs-context"
             onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-            aria-label="ChannelTabs Context Menu"
+            aria-label={t("plugin.channelTabs.context.label")}
         >
             <Menu.MenuGroup>
                 <Menu.MenuCheckboxItem
                     checked={showBookmarkBar}
                     id="show-bookmark-bar"
-                    label="Bookmark Bar"
+                    label={t("plugin.channelTabs.context.bookmarkBar")}
                     action={() => {
                         settings.store.showBookmarkBar = !settings.store.showBookmarkBar;
                     }}
@@ -48,17 +49,17 @@ export function EditModal({ modalProps, modalKey, bookmark, onSave }: {
     return (
         <ModalRoot {...modalProps}>
             <ModalHeader>
-                <Text variant="heading-lg/semibold">Edit Bookmark</Text>
+                <Text variant="heading-lg/semibold">{t("plugin.channelTabs.modal.edit.title")}</Text>
             </ModalHeader>
             <ModalContent>
-                <Forms.FormTitle className={Margins.top16}>Bookmark Name</Forms.FormTitle>
+                <Forms.FormTitle className={Margins.top16}>{t("plugin.channelTabs.modal.edit.name")}</Forms.FormTitle>
                 <TextInput
                     value={name === placeholder ? undefined : name}
                     placeholder={placeholder}
                     onChange={v => setName(v)}
                 />
                 {isBookmarkFolder(bookmark) && <>
-                    <Forms.FormTitle className={Margins.top16}>Folder Color</Forms.FormTitle>
+                    <Forms.FormTitle className={Margins.top16}>{t("plugin.channelTabs.modal.edit.folder")}</Forms.FormTitle>
                     <Select
                         options={
                             Object.entries(bookmarkFolderColors).map(([name, value]) => ({
@@ -76,12 +77,12 @@ export function EditModal({ modalProps, modalKey, bookmark, onSave }: {
             <ModalFooter>
                 <Button
                     onClick={() => onSave(name || placeholder, color!)}
-                >Save</Button>
+                >{t("plugin.channelTabs.button.save")}</Button>
                 <Button
                     color={Button.Colors.TRANSPARENT}
                     look={Button.Looks.LINK}
                     onClick={() => closeModal(modalKey)}
-                >Cancel</Button>
+                >{t("plugin.channelTabs.button.cancel")}</Button>
             </ModalFooter>
         </ModalRoot>
     );
@@ -98,10 +99,10 @@ function AddToFolderModal({ modalProps, modalKey, bookmarks, onSave }: {
     return (
         <ModalRoot {...modalProps}>
             <ModalHeader>
-                <Text variant="heading-lg/semibold">Add Bookmark to Folder</Text>
+                <Text variant="heading-lg/semibold">{t("plugin.channelTabs.modal.add.title")}</Text>
             </ModalHeader>
             <ModalContent>
-                <Forms.FormTitle className={Margins.top16}>Select a folder</Forms.FormTitle>
+                <Forms.FormTitle className={Margins.top16}>{t("plugin.channelTabs.modal.add.select")}</Forms.FormTitle>
                 <Select
                     options={[...Object.entries(bookmarks)
                         .filter(([, bookmark]) => isBookmarkFolder(bookmark))
@@ -110,7 +111,7 @@ function AddToFolderModal({ modalProps, modalKey, bookmarks, onSave }: {
                             value: parseInt(index, 10)
                         })),
                     {
-                        label: "Create one",
+                        label: t("plugin.channelTabs.modal.add.create"),
                         value: -1,
                         default: true
                     }]}
@@ -122,12 +123,12 @@ function AddToFolderModal({ modalProps, modalKey, bookmarks, onSave }: {
             <ModalFooter>
                 <Button
                     onClick={() => onSave(folderIndex)}
-                >Save</Button>
+                >{t("plugin.channelTabs.button.save")}</Button>
                 <Button
                     color={Button.Colors.TRANSPARENT}
                     look={Button.Looks.LINK}
                     onClick={() => closeModal(modalKey)}
-                >Cancel</Button>
+                >{t("plugin.channelTabs.button.cancel")}</Button>
             </ModalFooter>
         </ModalRoot>
     );
@@ -137,11 +138,11 @@ function DeleteFolderConfirmationModal({ modalProps, modalKey, onConfirm }) {
     return (
         <ModalRoot {...modalProps}>
             <ModalHeader>
-                <Text variant="heading-lg/semibold">Are you sure?</Text>
+                <Text variant="heading-lg/semibold">{t("plugin.channelTabs.modal.delete.title")}</Text>
             </ModalHeader>
             <ModalContent>
                 <Forms.FormText className={Margins.top16}>
-                    Deleting a bookmark folder will also delete all bookmarks within it.
+                    {t("plugin.channelTabs.modal.delete.description")}
                 </Forms.FormText>
             </ModalContent>
             <ModalFooter>
@@ -149,14 +150,14 @@ function DeleteFolderConfirmationModal({ modalProps, modalKey, onConfirm }) {
                     color={Button.Colors.RED}
                     onClick={onConfirm}
                 >
-                    Delete
+                    {t("plugin.channelTabs.button.delete")}
                 </Button>
                 <Button
                     color={Button.Colors.TRANSPARENT}
                     look={Button.Looks.LINK}
                     onClick={() => closeModal(modalKey)}
                 >
-                    Cancel
+                    {t("plugin.channelTabs.button.cancel")}
                 </Button>
             </ModalFooter>
         </ModalRoot>
@@ -172,7 +173,7 @@ export function BookmarkContextMenu({ bookmarks, index, methods }: { bookmarks: 
         <Menu.Menu
             navId="channeltabs-bookmark-context"
             onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-            aria-label="ChannelTabs Bookmark Context Menu"
+            aria-label={t("plugin.channelTabs.context.bookmark")}
         >
             <Menu.MenuGroup>
                 {bookmarkNotificationDot && !isFolder &&
@@ -186,12 +187,12 @@ export function BookmarkContextMenu({ bookmarks, index, methods }: { bookmarks: 
                 {isFolder
                     ? <Menu.MenuItem
                         id="open-all-in-folder"
-                        label={"Open All Bookmarks"}
+                        label={t("plugin.channelTabs.context.openAll")}
                         action={() => bookmark.bookmarks.forEach(b => createTab(b))}
                     />
                     : < Menu.MenuItem
                         id="open-in-tab"
-                        label={"Open in New Tab"}
+                        label={t("plugin.channelTabs.context.openNew")}
                         action={() => createTab(bookmark)}
                     />
                 }
@@ -199,7 +200,7 @@ export function BookmarkContextMenu({ bookmarks, index, methods }: { bookmarks: 
             <Menu.MenuGroup>
                 <Menu.MenuItem
                     id="edit-bookmark"
-                    label="Edit Bookmark"
+                    label={t("plugin.channelTabs.modal.edit.title")}
                     action={() => {
                         const key = openModal(modalProps =>
                             <EditModal
@@ -218,7 +219,7 @@ export function BookmarkContextMenu({ bookmarks, index, methods }: { bookmarks: 
                 />
                 <Menu.MenuItem
                     id="delete-bookmark"
-                    label="Delete Bookmark"
+                    label={t("plugin.channelTabs.bookmark.delete")}
                     action={() => {
                         if (isFolder) {
                             const key = openModal(modalProps =>
@@ -236,7 +237,7 @@ export function BookmarkContextMenu({ bookmarks, index, methods }: { bookmarks: 
                 />
                 <Menu.MenuItem
                     id="add-to-folder"
-                    label="Add Bookmark to Folder"
+                    label={t("plugin.channelTabs.modal.add.title")}
                     disabled={isFolder}
                     action={() => {
                         const key = openModal(modalProps =>
@@ -263,7 +264,7 @@ export function BookmarkContextMenu({ bookmarks, index, methods }: { bookmarks: 
                 <Menu.MenuCheckboxItem
                     checked={showBookmarkBar}
                     id="show-bookmark-bar"
-                    label="Bookmark Bar"
+                    label={t("plugin.channelTabs.context.bookmarkBar")}
                     action={() => {
                         settings.store.showBookmarkBar = !settings.store.showBookmarkBar;
                     }}
@@ -282,7 +283,7 @@ export function TabContextMenu({ tab }: { tab: ChannelTabsProps; }) {
         <Menu.Menu
             navId="channeltabs-tab-context"
             onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-            aria-label="ChannelTabs Tab Context Menu"
+            aria-label={t("plugin.channelTabs.context.tab")}
         >
             <Menu.MenuGroup>
                 {channel &&
@@ -296,7 +297,7 @@ export function TabContextMenu({ tab }: { tab: ChannelTabsProps; }) {
                 <Menu.MenuCheckboxItem
                     checked={compact}
                     id="toggle-compact-tab"
-                    label="Compact"
+                    label={t("plugin.channelTabs.context.compact")}
                     action={() => {
                         setCompact(compact => !compact);
                         toggleCompactTab(tab.id);
@@ -306,29 +307,29 @@ export function TabContextMenu({ tab }: { tab: ChannelTabsProps; }) {
             {openedTabs.length !== 1 && <Menu.MenuGroup>
                 <Menu.MenuItem
                     id="close-tab"
-                    label="Close Tab"
+                    label={t("plugin.channelTabs.context.close.tab")}
                     action={() => closeTab(tab.id)}
                 />
                 <Menu.MenuItem
                     id="close-other-tabs"
-                    label="Close Other Tabs"
+                    label={t("plugin.channelTabs.context.close.otherTabs")}
                     action={() => closeOtherTabs(tab.id)}
                 />
                 <Menu.MenuItem
                     id="close-right-tabs"
-                    label="Close Tabs to the Right"
+                    label={t("plugin.channelTabs.context.close.tabsToRight")}
                     disabled={openedTabs.indexOf(tab) === openedTabs.length - 1}
                     action={() => closeTabsToTheRight(tab.id)}
                 />
                 <Menu.MenuItem
                     id="close-left-tabs"
-                    label="Close Tabs to the Left"
+                    label={t("plugin.channelTabs.context.close.tabsToLeft")}
                     disabled={openedTabs.indexOf(tab) === 0}
                     action={() => closeTabsToTheLeft(tab.id)}
                 />
                 <Menu.MenuItem
                     id="reopen-closed-tab"
-                    label="Reopen Closed Tab"
+                    label={t("plugin.channelTabs.context.close.reopen")}
                     disabled={!hasClosedTabs()}
                     action={() => reopenClosedTab()}
                 />
@@ -337,7 +338,7 @@ export function TabContextMenu({ tab }: { tab: ChannelTabsProps; }) {
                 <Menu.MenuCheckboxItem
                     checked={showBookmarkBar}
                     id="show-bookmark-bar"
-                    label="Bookmark Bar"
+                    label={t("plugin.channelTabs.context.bookmarkBar")}
                     action={() => {
                         settings.store.showBookmarkBar = !settings.store.showBookmarkBar;
                     }}

@@ -1794,6 +1794,213 @@
                 "locked": "This channel is locked.",
                 "nsfw": "This channel is marked as NSFW."
             }
+        },
+        "channelTabs": {
+            "name": "ChannelTabs",
+            "description": "Group your commonly visited channels in tabs, like a browser",
+            "open": "Open in New Tab",
+            "bookmark": {
+                "label": "Bookmark",
+                "unknown": "Unknown User",
+                "folder": "Folder",
+                "add": "Add to Bookmarks",
+                "edit": "Edit Bookmark",
+                "delete": "Delete Bookmark",
+                "remove": "Remove from Bookmarks",
+                "removeFolder": "Remove Bookmark from Folder",
+                "loading": "Loading bookmarks...",
+                "noBookmarks": "You have no bookmarks. You can add an open tab or hide this by right clicking it"
+            },
+            "button": {
+                "save": "Save",
+                "delete": "Delete",
+                "cancel": "Cancel"
+            },
+            "context": {
+                "label": "ChannelTabs Context Menu",
+                "bookmark": "ChannelTabs Bookmark Context Menu",
+                "tab": "ChannelTabs Tab Context Menu",
+                "compact": "Compact",
+                "bookmarkBar": "Bookmark Bar",
+                "openAll": "Open All in Bookmarks",
+                "openNew": "Open in New Tab",
+                "close": {
+                    "tab": "Close Tab",
+                    "otherTabs": "Close Other Tabs",
+                    "tabsToRight": "Close Tabs to the Right",
+                    "tabsToLeft": "Close Tabs to the Left",
+                    "reopen": "Reopen Closed Tab",
+                    "allTabs": "Close All Tabs"
+                }
+            },
+            "error": {
+                "noLogin": "There's no logged in account?"
+            },
+            "modal": {
+                "add": {
+                    "title": "Add Bookmark to Folder",
+                    "select": "Select a folder",
+                    "create": "Create one"
+                },
+                "edit": {
+                    "title": "Edit Bookmark",
+                    "name": "Bookmark Name",
+                    "folder": "Folder Color"
+                },
+                "delete": {
+                    "title": "Are you sure?",
+                    "description": "Deleting a bookmark folder will also delete all bookmarks within it."
+                }
+            },
+            "option": {
+                "onStartup": {
+                    "label": "On Startup",
+                    "description": "What to do with tabs on startup",
+                    "nothing": "Do nothing (open on the friends tab)",
+                    "remember": "Remember tabs from last session",
+                    "open": "Open on a specific set of tabs"
+                },
+                "tabSet": {
+                    "label": "Tab Set",
+                    "description": "Select which tabs to open at startup"
+                },
+                "noPomeloNames": {
+                    "label": "No Pomelo Names",
+                    "description": "Use display names instead of usernames for DM's"
+                },
+                "showStatusIndicators": {
+                    "label": "Show Status Indicators",
+                    "description": "Show status indicators for DM's"
+                },
+                "showBookmarkBar": {
+                    "label": "Show Bookmark Bar"
+                },
+                "bookmarkNotificationDot": {
+                    "label": "Bookmark Notification Dot",
+                    "description": "Show notification dot for bookmarks"
+                },
+                "widerTabsAndBookmarks": {
+                    "label": "Wider Tabs and Bookmarks",
+                    "description": "Extend the length of tabs and bookmarks for larger monitors"
+                },
+                "switchToExistingTab": {
+                    "label": "Switch to Existing Tab",
+                    "description": "Switch to tab if it already exists for the channel you're navigating to"
+                },
+                "createNewTabIfNotExists": {
+                    "label": "Create New Tab If Not Exists",
+                    "description": "Create a new tab if one doesn't exist for the channel you're navigating to"
+                },
+                "enableRapidNavigation": {
+                    "label": "Enable Rapid Navigation",
+                    "description": "Enable rapid navigation behavior - quickly navigating between channels will replace the current tab instead of creating new ones"
+                },
+                "rapidNavigationThreshold": {
+                    "label": "Rapid Navigation Threshold",
+                    "description": "Time window (in milliseconds) for rapid navigation. Within this time, new channels replace the current tab instead of creating new ones."
+                },
+                "tabBarPosition": {
+                    "label": "Tab Bar Position",
+                    "description": "Position of the tab bar",
+                    "top": "Top",
+                    "bottom": "Bottom"
+                },
+                "enableHotkeys": {
+                    "label": "Enable Hotkeys",
+                    "description": "Enable hotkey (1-9) for tab switching"
+                },
+                "hotkeyCount": {
+                    "label": "Hotkey Count",
+                    "description": "Number of tabs accessible via keyboard shortcuts"
+                }
+            },
+            "tabs": {
+                "startup": "Startup Tabs",
+                "currently": "Set to currently open tabs"
+            },
+            "toast": {
+                "notRestoring": "Not restoring tabs as KeepCurrentChannel is enabled",
+                "failed": "Failed to restore tabs"
+            }
+        },
+        "characterCounter": {
+            "name": "CharacterCounter",
+            "description": "Displays a character counter in the message box",
+            "option": {
+                "colorEffects": {
+                    "label": "Color Effects",
+                    "description": "Turn on or off color effects for getting close to the character limit"
+                }
+            }
+        },
+        "cleanChannelName": {
+            "name": "CleanChannelName",
+            "description": "Remove all emoji and decor shit from channel names"
+        },
+        "clearURLs": {
+            "name": "ClearURLs",
+            "description": "Automatically removes tracking elements from URLs you send"
+        },
+        "clientSideBlock": {
+            "name": "ClientSideBlock",
+            "description": "Allows you to locally hide almost all content from any user",
+            "replying": "Replying to blocked message",
+            "option": {
+                "usersToBlock": {
+                    "label": "Users to Block",
+                    "description": "User IDs seperated by a comma and a space"
+                },
+                "hideBlockedUsers": {
+                    "label": "Hide Blocked Users",
+                    "description": "Should blocked users should also be hidden everywhere"
+                },
+                "hideBlockedMessages": {
+                    "label": "Hide Blocked Messages",
+                    "description": "Should messages from blocked users should be hidden fully (same as the old noblockedmessages plugin)"
+                },
+                "hideEmptyRoles": {
+                    "label": "Hide Empty Roles",
+                    "description": "Should role headers be hidden if all of their members are blocked"
+                },
+                "blockedReplyDisplay": {
+                    "label": "Blocked Reply Display",
+                    "description": "What should display instead of the message when someone replies to someone you have hidden",
+                    "displayText": "Display text saying a hidden message was replied to",
+                    "hideReply": "Literally nothing"
+                },
+                "guildBlackList": {
+                    "label": "Guild Blacklist",
+                    "description": "Guild ids to disable functionality in"
+                },
+                "guildWhiteList": {
+                    "label": "Guild Whitelist",
+                    "description": "Guild ids to enable functionality in"
+                }
+            }
+        },
+        "clientTheme": {
+            "name": "ClientTheme",
+            "description": "Recreation of the old client theme experiment. Add a color to your Discord client theme",
+            "title": "Theme Color",
+            "add": "Add a color to your Discord client theme",
+            "option": {
+                "color": {
+                    "label": "Color"
+                },
+                "resetColor": {
+                    "label": "Reset Color"
+                }
+            },
+            "error": {
+                "modal": {
+                    "title": "Your theme won't look good!",
+                    "contrast": "Selected color won't contrast well with text",
+                    "nitro": "Nitro themes aren't supported",
+                    "switch": "Switch to {{oppositeTheme}} mode",
+                    "disable": "Disable Nitro Theme",
+                    "reset": "Reset Theme Color"
+                }
+            }
         }
     }
 }

@@ -8,6 +8,7 @@
 import "./style.css";
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Channel, Message } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
@@ -25,7 +26,7 @@ const contextMenuPatch: NavContextMenuPatchCallback = (children, props: { channe
         const group = findGroupChildrenByChildId("channel-copy-link", children);
         group?.push(
             <Menu.MenuItem
-                label="Open in New Tab"
+                label={t("plugin.channelTabs.open")}
                 id="open-link-in-tab"
                 action={() => createTab({
                     guildId: channel.guild_id,
@@ -38,12 +39,17 @@ const contextMenuPatch: NavContextMenuPatchCallback = (children, props: { channe
 export default definePlugin({
     name: "ChannelTabs",
     description: "Group your commonly visited channels in tabs, like a browser",
-    authors: [Devs.TheSun, Devs.TheKodeToad, PcDevs.keifufu, Devs.Nickyux, PcDevs.DiabeloDEV],
+    authors: [Devs.TheSun, Devs.TheKodeToad, PcDevs.keifufu, Devs.Nickyux, PcDevs.DiabeloDEV, PcDevs.MutanPlex],
     dependencies: ["ContextMenuAPI"],
     contextMenus: {
         "channel-mention-context": contextMenuPatch,
         "channel-context": contextMenuPatch
     },
+
+    get displayDescription() {
+        return t("plugin.channelTabs.description");
+    },
+
     patches: [
         // add the channel tab container at the top
         {

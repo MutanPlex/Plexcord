@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { BasicChannelTabsProps, Bookmark, BookmarkFolder, BookmarkProps, CircleQuestionIcon, isBookmarkFolder, settings, switchChannel, useBookmarks } from "@plugins/channelTabs/util";
 import { getGuildAcronym, getIntlMessage } from "@utils/discord";
@@ -125,7 +126,7 @@ function BookmarkFolderOpenMenu(props: BookmarkProps) {
                         <Menu.MenuItem
                             key="edit-bookmark"
                             id="edit-bookmark"
-                            label="Edit Bookmark"
+                            label={t("plugin.channelTabs.bookmark.edit")}
                             action={() => {
                                 const key = openModal(modalProps =>
                                     <EditModal
@@ -145,7 +146,7 @@ function BookmarkFolderOpenMenu(props: BookmarkProps) {
                         <Menu.MenuItem
                             key="delete-bookmark"
                             id="delete-bookmark"
-                            label="Delete Bookmark"
+                            label={t("plugin.channelTabs.bookmark.delete")}
                             action={() => {
                                 methods.deleteBookmark(i, index);
                             }}
@@ -153,7 +154,7 @@ function BookmarkFolderOpenMenu(props: BookmarkProps) {
                         <Menu.MenuItem
                             key="remove-bookmark-from-folder"
                             id="remove-bookmark-from-folder"
-                            label="Remove Bookmark from Folder"
+                            label={t("plugin.channelTabs.bookmark.removeFolder")}
                             action={() => {
                                 const newBookmarks = [...bookmark.bookmarks];
                                 newBookmarks.splice(i, 1);
@@ -269,10 +270,10 @@ export default function BookmarkContainer(props: BasicChannelTabsProps & { userI
         <div className={cl("bookmark-container")}>
             <HorizontalScroller className={cl("bookmarks")}>
                 {!bookmarks && <Text className={cl("bookmark-placeholder-text")} variant="text-xs/normal">
-                    Loading bookmarks...
+                    {t("plugin.channelTabs.bookmark.loading")}
                 </Text>}
                 {bookmarks && !bookmarks.length && <Text className={cl("bookmark-placeholder-text")} variant="text-xs/normal">
-                    You have no bookmarks. You can add an open tab or hide this by right clicking it
+                    {t("plugin.channelTabs.bookmark.noBookmarks")}
                 </Text>}
                 {Array.isArray(bookmarks) && bookmarks.length > 0 &&
                     bookmarks.map((_, i) => (
@@ -281,7 +282,7 @@ export default function BookmarkContainer(props: BasicChannelTabsProps & { userI
                 }
             </HorizontalScroller>
 
-            <Tooltip text={isCurrentChannelBookmarked ? "Remove from Bookmarks" : "Add to Bookmarks"} position="left" >
+            <Tooltip text={isCurrentChannelBookmarked ? t("plugin.channelTabs.bookmark.remove") : t("plugin.channelTabs.bookmark.add")} position="left" >
                 {p => <button className={cl("button")} {...p} onClick={() => {
                     if (isCurrentChannelBookmarked) {
                         if (currentChannelFolderIndex === -1)

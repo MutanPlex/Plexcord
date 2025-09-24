@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { DataStore } from "@api/index";
 import { classNameFactory } from "@api/Styles";
 import { NavigationRouter, SelectedChannelStore, SelectedGuildStore, showToast, Toasts, useState } from "@webpack/common";
@@ -210,19 +211,19 @@ export function openStartupTabs(props: BasicChannelTabsProps & { userId: string;
     highestIdIndex = 0;
 
     if (settings.store.onStartup !== "nothing" && Plexcord.Plugins.isPluginEnabled("KeepCurrentChannel"))
-        return showToast("Not restoring tabs as KeepCurrentChannel is enabled", Toasts.Type.FAILURE);
+        return showToast(t("plugin.channelTabs.toast.notRestoring"), Toasts.Type.FAILURE);
 
     switch (settings.store.onStartup) {
         case "remember": {
             persistedTabs.then(tabs => {
-                const t = tabs?.[userId];
-                if (!t) {
+                const tb = tabs?.[userId];
+                if (!tb) {
                     createTab({ channelId: props.channelId, guildId: props.guildId }, true);
-                    return showToast("Failed to restore tabs", Toasts.Type.FAILURE);
+                    return showToast(t("plugin.channelTabs.toast.failed"), Toasts.Type.FAILURE);
                 }
                 replaceArray(openTabs); // empty the array
-                t.openTabs.forEach(tab => createTab(tab));
-                currentlyOpenTab = openTabs[t.openTabIndex]?.id ?? 0;
+                tb.openTabs.forEach(tab => createTab(tab));
+                currentlyOpenTab = openTabs[tb.openTabIndex]?.id ?? 0;
 
                 setUserId(userId);
                 moveToTab(currentlyOpenTab);

@@ -1794,6 +1794,213 @@
                 "locked": "Bu kanal kilitli.",
                 "nsfw": "Bu kanal NSFW olarak işaretlenmiş."
             }
+        },
+        "channelTabs": {
+            "name": "ChannelTabs",
+            "description": "Sık ziyaret ettiğiniz kanalları sekmelerde gruplayın, tıpkı bir tarayıcı gibi",
+            "open": "Yeni Sekmede Aç",
+            "bookmark": {
+                "label": "Yer İmi",
+                "unknown": "Bilinmeyen Kullanıcı",
+                "folder": "Klasör",
+                "add": "Yer İmlerine Ekle",
+                "edit": "Yer İmini Düzenle",
+                "delete": "Yer İmini Sil",
+                "remove": "Yer İmlerinden Kaldır",
+                "removeFolder": "Klasörden Yer İmini Kaldır",
+                "loading": "Yer imleri yükleniyor...",
+                "noBookmarks": "Hiç yer iminiz yok. Açık sekmeyi ekleyebilir veya sağ tıklayarak bunu gizleyebilirsiniz"
+            },
+            "button": {
+                "save": "Kaydet",
+                "delete": "Sil",
+                "cancel": "İptal"
+            },
+            "context": {
+                "label": "ChannelTabs Bağlam Menüsü",
+                "bookmark": "ChannelTabs Yer İmi Bağlam Menüsü",
+                "tab": "ChannelTabs Sekme Bağlam Menüsü",
+                "compact": "Kompakt",
+                "bookmarkBar": "Yer İmleri Çubuğu",
+                "openAll": "Yer İmlerinin Tümünü Aç",
+                "openNew": "Yeni Sekmede Aç",
+                "close": {
+                    "tab": "Sekmeyi Kapat",
+                    "otherTabs": "Diğer Sekmeleri Kapat",
+                    "tabsToRight": "Sağdaki Sekmeleri Kapat",
+                    "tabsToLeft": "Soldaki Sekmeleri Kapat",
+                    "reopen": "Kapatılan Sekmeyi Yeniden Aç",
+                    "allTabs": "Tüm Sekmeleri Kapat"
+                }
+            },
+            "error": {
+                "noLogin": "Giriş yapılmış bir hesap yok mu?"
+            },
+            "modal": {
+                "add": {
+                    "title": "Klasöre Yer İmi Ekle",
+                    "select": "Bir klasör seç",
+                    "create": "Yeni oluştur"
+                },
+                "edit": {
+                    "title": "Yer İmini Düzenle",
+                    "name": "Yer İmi Adı",
+                    "folder": "Klasör Rengi"
+                },
+                "delete": {
+                    "title": "Emin misiniz?",
+                    "description": "Bir yer imi klasörünü silmek, içindeki tüm yer imlerini de silecektir."
+                }
+            },
+            "option": {
+                "onStartup": {
+                    "label": "Başlangıçta",
+                    "description": "Başlangıçta sekmelerle ne yapılacak",
+                    "nothing": "Hiçbir şey yapma (arkadaşlar sekmesinde aç)",
+                    "remember": "Son oturumdaki sekmeleri hatırla",
+                    "open": "Belirli bir sekme grubunu aç"
+                },
+                "tabSet": {
+                    "label": "Sekme Grubu",
+                    "description": "Başlangıçta açılacak sekmeleri seç"
+                },
+                "noPomeloNames": {
+                    "label": "Pomelo İsimlerini Kullanma",
+                    "description": "DM’lerde kullanıcı adları yerine görünen adları kullan"
+                },
+                "showStatusIndicators": {
+                    "label": "Durum Göstergelerini Göster",
+                    "description": "DM’lerde durum göstergelerini göster"
+                },
+                "showBookmarkBar": {
+                    "label": "Yer İmleri Çubuğunu Göster"
+                },
+                "bookmarkNotificationDot": {
+                    "label": "Yer İmi Bildirim Noktası",
+                    "description": "Yer imleri için bildirim noktası göster"
+                },
+                "widerTabsAndBookmarks": {
+                    "label": "Daha Geniş Sekmeler ve Yer İmleri",
+                    "description": "Daha büyük ekranlar için sekme ve yer imlerinin genişliğini artır"
+                },
+                "switchToExistingTab": {
+                    "label": "Mevcut Sekmeye Geç",
+                    "description": "Geçiş yaptığınız kanal zaten açıksa o sekmeye geç"
+                },
+                "createNewTabIfNotExists": {
+                    "label": "Yoksa Yeni Sekme Oluştur",
+                    "description": "Geçiş yaptığınız kanal için bir sekme yoksa yeni bir sekme oluştur"
+                },
+                "enableRapidNavigation": {
+                    "label": "Hızlı Gezinmeyi Etkinleştir",
+                    "description": "Hızlı gezinme davranışını etkinleştir - kanallar arasında hızlı geçiş yapmak yeni sekme açmak yerine mevcut sekmeyi değiştirir"
+                },
+                "rapidNavigationThreshold": {
+                    "label": "Hızlı Gezinme Eşiği",
+                    "description": "Hızlı gezinme için zaman aralığı (milisaniye). Bu süre içinde yeni kanallar mevcut sekmeyi değiştirir, yeni sekme açmaz."
+                },
+                "tabBarPosition": {
+                    "label": "Sekme Çubuğu Konumu",
+                    "description": "Sekme çubuğunun konumu",
+                    "top": "Üst",
+                    "bottom": "Alt"
+                },
+                "enableHotkeys": {
+                    "label": "Kısayol Tuşlarını Etkinleştir",
+                    "description": "Sekmeler arası geçiş için kısayol tuşlarını (1-9) etkinleştir"
+                },
+                "hotkeyCount": {
+                    "label": "Kısayol Sayısı",
+                    "description": "Klavye kısayolları ile erişilebilecek sekme sayısı"
+                }
+            },
+            "tabs": {
+                "startup": "Başlangıç Sekmeleri",
+                "currently": "Geçerli açık sekmelere ayarla"
+            },
+            "toast": {
+                "notRestoring": "KeepCurrentChannel etkin olduğundan sekmeler geri yüklenmiyor",
+                "failed": "Sekmeler geri yüklenemedi"
+            }
+        },
+        "characterCounter": {
+            "name": "CharacterCounter",
+            "description": "Mesaj kutusunda bir karakter sayacı gösterir",
+            "option": {
+                "colorEffects": {
+                    "label": "Renk Efektleri",
+                    "description": "Karakter sınırına yaklaşırken renk efektlerini aç veya kapat"
+                }
+            }
+        },
+        "cleanChannelName": {
+            "name": "CleanChannelName",
+            "description": "Kanal adlarındaki tüm emoji ve saçma süslemeleri kaldır"
+        },
+        "clearURLs": {
+            "name": "ClearURLs",
+            "description": "Gönderdiğiniz URL'lerden izleme öğelerini otomatik olarak kaldırır"
+        },
+        "clientSideBlock": {
+            "name": "ClientSideBlock",
+            "description": "Herhangi bir kullanıcıdan gelen neredeyse tüm içerikleri yerel olarak gizlemenizi sağlar",
+            "replying": "Engellenen mesaja yanıt veriliyor",
+            "option": {
+                "usersToBlock": {
+                    "label": "Engellenecek Kullanıcılar",
+                    "description": "Virgül ve boşluk ile ayrılmış kullanıcı ID’leri"
+                },
+                "hideBlockedUsers": {
+                    "label": "Engellenen Kullanıcıları Gizle",
+                    "description": "Engellenen kullanıcılar her yerde tamamen gizlensin mi"
+                },
+                "hideBlockedMessages": {
+                    "label": "Engellenen Mesajları Gizle",
+                    "description": "Engellenen kullanıcılardan gelen mesajlar tamamen gizlensin mi (eski noblockedmessages eklentisiyle aynı)"
+                },
+                "hideEmptyRoles": {
+                    "label": "Boş Roller Gizlensin",
+                    "description": "Tüm üyeleri engellenmişse rol başlıkları gizlensin mi"
+                },
+                "blockedReplyDisplay": {
+                    "label": "Engellenmiş Yanıt Görünümü",
+                    "description": "Gizlediğiniz birine yanıt verildiğinde mesaj yerine ne görünsün",
+                    "displayText": "Gizlenmiş bir mesaja yanıt verildiğini belirten metin göster",
+                    "hideReply": "Hiçbir şey gösterme"
+                },
+                "guildBlackList": {
+                    "label": "Sunucu Kara Listesi",
+                    "description": "Fonksiyonelliğin devre dışı bırakılacağı sunucu ID’leri"
+                },
+                "guildWhiteList": {
+                    "label": "Sunucu Beyaz Listesi",
+                    "description": "Fonksiyonelliğin etkinleştirileceği sunucu ID’leri"
+                }
+            }
+        },
+        "clientTheme": {
+            "name": "ClientTheme",
+            "description": "Eski istemci tema deneyinin yeniden yapımı. Discord istemci temanıza bir renk ekleyin",
+            "title": "Tema Rengi",
+            "add": "Discord istemci temanıza bir renk ekleyin",
+            "option": {
+                "color": {
+                    "label": "Renk"
+                },
+                "resetColor": {
+                    "label": "Rengi Sıfırla"
+                }
+            },
+            "error": {
+                "modal": {
+                    "title": "Temanız iyi görünmeyecek!",
+                    "contrast": "Seçilen renk metinle iyi bir kontrast oluşturmayacak",
+                    "nitro": "Nitro temaları desteklenmiyor",
+                    "switch": "{{oppositeTheme}} moduna geç",
+                    "disable": "Nitro Temasını Devre Dışı Bırak",
+                    "reset": "Tema Rengini Sıfırla"
+                }
+            }
         }
     }
 }

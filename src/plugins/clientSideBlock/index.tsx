@@ -5,35 +5,56 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { GuildMember } from "@plexcord/discord-types";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { ChannelStore, GuildMemberStore, GuildRoleStore, RelationshipStore, Text, UserStore } from "@webpack/common";
 
 const settings = definePluginSettings(
     {
         usersToBlock: {
+            get label() {
+                return t("plugin.clientSideBlock.option.usersToBlock.label");
+            },
+            get description() {
+                return t("plugin.clientSideBlock.option.usersToBlock.description");
+            },
             type: OptionType.STRING,
-            description: "User IDs seperated by a comma and a space",
             restartNeeded: true,
             default: ""
         },
         hideBlockedUsers: {
+            get label() {
+                return t("plugin.clientSideBlock.option.hideBlockedUsers.label");
+            },
+            get description() {
+                return t("plugin.clientSideBlock.option.hideBlockedUsers.description");
+            },
             type: OptionType.BOOLEAN,
-            description: "Should blocked users should also be hidden everywhere",
             default: true,
             restartNeeded: true
         },
         hideBlockedMessages: {
+            get label() {
+                return t("plugin.clientSideBlock.option.hideBlockedMessages.label");
+            },
+            get description() {
+                return t("plugin.clientSideBlock.option.hideBlockedMessages.description");
+            },
             type: OptionType.BOOLEAN,
-            description: "Should messages from blocked users should be hidden fully (same as the old noblockedmessages plugin)",
             default: true,
             restartNeeded: true
         },
         hideEmptyRoles: {
+            get label() {
+                return t("plugin.clientSideBlock.option.hideEmptyRoles.label");
+            },
+            get description() {
+                return t("plugin.clientSideBlock.option.hideEmptyRoles.description");
+            },
             type: OptionType.BOOLEAN,
-            description: "Should role headers be hidden if all of their members are blocked",
             restartNeeded: true,
             default: true
         },
@@ -46,20 +67,51 @@ const settings = definePluginSettings(
             },
         */
         blockedReplyDisplay: {
+            get label() {
+                return t("plugin.clientSideBlock.option.blockedReplyDisplay.label");
+            },
+            get description() {
+                return t("plugin.clientSideBlock.option.blockedReplyDisplay.description");
+            },
             type: OptionType.SELECT,
-            description: "What should display instead of the message when someone replies to someone you have hidden",
             restartNeeded: true,
-            options: [{ value: "displayText", label: "Display text saying a hidden message was replied to", default: true }, { value: "hideReply", label: "Literally nothing" }]
+            get options() {
+                return [
+                    {
+                        value: "displayText",
+                        get label() {
+                            return t("plugin.clientSideBlock.option.blockedReplyDisplay.displayText");
+                        },
+                        default: true
+                    },
+                    {
+                        value: "hideReply",
+                        get label() {
+                            return t("plugin.clientSideBlock.option.blockedReplyDisplay.hideReply");
+                        }
+                    }
+                ];
+            }
         },
         guildBlackList: {
+            get label() {
+                return t("plugin.clientSideBlock.option.guildBlackList.label");
+            },
+            get description() {
+                return t("plugin.clientSideBlock.option.guildBlackList.description");
+            },
             type: OptionType.STRING,
-            description: "Guild ids to disable functionality in",
             restartNeeded: true,
             default: ""
         },
         guildWhiteList: {
+            get label() {
+                return t("plugin.clientSideBlock.option.guildWhiteList.label");
+            },
+            get description() {
+                return t("plugin.clientSideBlock.option.guildWhiteList.description");
+            },
             type: OptionType.STRING,
-            description: "Guild ids to enable functionality in",
             restartNeeded: true,
             default: ""
         }
@@ -117,7 +169,7 @@ function isRoleAllBlockedMembers(roleId, guildId) {
 function hiddenReplyComponent() {
     switch (settings.store.blockedReplyDisplay) {
         case "displayText":
-            return <Text tag="p" selectable={false} variant="text-sm/normal" style={{ marginTop: "0px", marginBottom: "0px" }}><i>↓ Replying to blocked message</i></Text>;
+            return <Text tag="p" selectable={false} variant="text-sm/normal" style={{ marginTop: "0px", marginBottom: "0px" }}><i>↓ {t("plugin.clientSideBlock.replying")}</i></Text>;
         case "hideReply":
             return null;
     }
@@ -127,7 +179,10 @@ export default definePlugin({
     name: "ClientSideBlock",
     description: "Allows you to locally hide almost all content from any user",
     tags: ["blocked", "block", "hide", "hidden", "noblockedmessages"],
-    authors: [Devs.Samwich],
+    get displayDescription() {
+        return t("plugin.clientSideBlock.description");
+    },
+    authors: [Devs.Samwich, PcDevs.MutanPlex],
     settings,
     shouldHideUser: shouldHideUser,
     hiddenReplyComponent: hiddenReplyComponent,
