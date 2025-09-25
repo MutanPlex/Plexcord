@@ -118,7 +118,10 @@
             },
             "missed": {
                 "label": "Missed Notifications Count",
-                "description": "When refocusing discord a notification will popup with how you missed"
+                "description": "When refocusing discord a notification will popup with how you missed",
+                "whileYou": "While you were away",
+                "count": "{{count}} notification{{s}} received",
+                "s": "s"
             },
             "timeout": {
                 "label": "Notification Timeout",

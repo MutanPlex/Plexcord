@@ -118,7 +118,10 @@
             },
             "missed": {
                 "label": "Kaçırılan Bildirim Sayısı",
-                "description": "Discord'a yeniden odaklandığınızda, kaçırdığınız bildirimlerle ilgili bir bildirim açılacaktır."
+                "description": "Discord'a yeniden odaklandığınızda, kaçırdığınız bildirimlerle ilgili bir bildirim açılacaktır.",
+                "whileYou": "Sen yokken",
+                "count": "{{count}} bildirim{{s}} alındı",
+                "s": " "
             },
             "timeout": {
                 "label": "Bildirim Zaman Aşımı",
