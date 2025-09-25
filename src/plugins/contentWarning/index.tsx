@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { DataStore } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
 import { Flex } from "@components/Flex";
@@ -83,7 +84,7 @@ function FlaggedInput({ index, forceUpdate }) {
     return (<Flex flexDirection="row">
         <div style={{ flexGrow: 1 }}>
             <TextInput
-                placeholder="Word"
+                placeholder={t("plugin.contentWarning.option.flagged.placeholder")}
                 spellCheck={false}
                 value={value}
                 onChange={updateValue}
@@ -119,13 +120,16 @@ function FlaggedWords() {
     });
 
     return (<>
-        <Forms.FormTitle tag="h4">Flagged Words</Forms.FormTitle>
+        <Forms.FormTitle tag="h4">{t("plugin.contentWarning.option.flagged.flagged")}</Forms.FormTitle>
         {inputs}
     </>);
 }
 
 const settings = definePluginSettings({
     flagged: {
+        get label() {
+            return t("plugin.contentWarning.option.flagged.label");
+        },
         type: OptionType.COMPONENT,
         component: () => <FlaggedWords />,
     }
@@ -136,6 +140,9 @@ export default definePlugin({
     authors: [PcDevs.camila314],
     description: "Allows you to specify certain trigger words that will be blurred by default. Clicking on the blurred content will reveal it.",
     settings,
+    get displayDescription() {
+        return t("plugin.contentWarning.description");
+    },
     patches: [
         {
             find: ".VOICE_HANGOUT_INVITE?",

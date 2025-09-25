@@ -2108,6 +2108,40 @@
         "consoleShortcuts": {
             "name": "Console Shortcuts",
             "description": "Adds shorter Aliases for many things on the window. Run `shortcutList` for a list."
+        },
+        "contentWarning": {
+            "name": "ContentWarning",
+            "description": "Allows you to specify certain trigger words that will be blurred by default. Clicking on the blurred content will reveal it.",
+            "option": {
+                "flagged": {
+                    "label": "Flagged",
+                    "flagged": "Flagged Words",
+                    "placeholder": "Word"
+                }
+            }
+        },
+        "copyEmojiMarkdown": {
+            "name": "CopyEmojiMarkdown",
+            "description": "Allows you to copy emojis as formatted string (<a:blob_pwease:1402403381900742737>)",
+            "option": {
+                "copyUnicode": {
+                    "label": "Copy Unicode",
+                    "description": "Copy the raw unicode character instead of :name: for default emojis (👽)"
+                }
+            },
+            "context": {
+                "copy": "Copy Emoji Markdown"
+            },
+            "toast": {
+                "success": "Success! Copied emoji markdown."
+            }
+        },
+        "copyFileContents": {
+            "name": "CopyFileContents",
+            "description": "Adds a button to text file attachments to copy their contents",
+            "copied": "Copied!",
+            "large": "File too large to copy.",
+            "copyFileContents": "Copy File Contents"
         }
     }
 }

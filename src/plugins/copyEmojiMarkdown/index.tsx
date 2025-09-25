@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { copyWithToast } from "@utils/misc";
@@ -43,17 +44,26 @@ function getEmojiMarkdown(target: Target, copyUnicode: boolean): string {
 
 const settings = definePluginSettings({
     copyUnicode: {
+        get label() {
+            return t("plugin.copyEmojiMarkdown.option.copyUnicode.label");
+        },
+        get description() {
+            return t("plugin.copyEmojiMarkdown.option.copyUnicode.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Copy the raw unicode character instead of :name: for default emojis (👽)",
         default: true,
     },
 });
 
 export default definePlugin({
     name: "CopyEmojiMarkdown",
-    description: "Allows you to copy emojis as formatted string (<:blobcatcozy:1026533070955872337>)",
+    description: "Allows you to copy emojis as formatted string (<a:blob_pwease:1402403381900742737>)",
     authors: [Devs.HappyEnderman, Devs.Vishnya],
     settings,
+
+    get displayDescription() {
+        return t("plugin.copyEmojiMarkdown.description");
+    },
 
     contextMenus: {
         "expression-picker"(children, { target }: { target: Target; }) {
@@ -62,11 +72,11 @@ export default definePlugin({
             children.push(
                 <Menu.MenuItem
                     id="pc-copy-emoji-markdown"
-                    label="Copy Emoji Markdown"
+                    label={t("plugin.copyEmojiMarkdown.context.copy")}
                     action={() => {
                         copyWithToast(
                             getEmojiMarkdown(target, settings.store.copyUnicode),
-                            "Success! Copied emoji markdown."
+                            t("plugin.copyEmojiMarkdown.toast.success")
                         );
                     }}
                 />

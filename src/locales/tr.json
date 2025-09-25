@@ -2108,6 +2108,40 @@
         "consoleShortcuts": {
             "name": "Console Shortcuts",
             "description": "Pencere üzerinde birçok şey için daha kısa kısayollar ekler. Liste için `shortcutList` komutunu çalıştırın."
+        },
+        "contentWarning": {
+            "name": "ContentWarning",
+            "description": "Belirli tetikleyici kelimelerin varsayılan olarak bulanık gösterilmesini sağlar. Bulanık içeriğe tıklamak onu görünür hale getirir.",
+            "option": {
+                "flagged": {
+                    "label": "İşaretle",
+                    "flagged": "İşaretlenmiş Kelimeler",
+                    "placeholder": "Kelime"
+                }
+            }
+        },
+        "copyEmojiMarkdown": {
+            "name": "CopyEmojiMarkdown",
+            "description": "Emojileri biçimlendirilmiş metin olarak kopyalamanı sağlar (<a:blob_pwease:1402403381900742737>)",
+            "option": {
+                "copyUnicode": {
+                    "label": "Unicode Kopyala",
+                    "description": "Varsayılan emojiler için :isim: yerine ham unicode karakterini kopyalar (👽)"
+                }
+            },
+            "context": {
+                "copy": "Emoji Markdown'ını Kopyala"
+            },
+            "toast": {
+                "success": "Başarılı! Emojinin markdown'ı kopyalandı."
+            }
+        },
+        "copyFileContents": {
+            "name": "CopyFileContents",
+            "description": "Metin dosyası eklerine içeriklerini kopyalamak için bir buton ekler",
+            "copied": "Kopyalandı!",
+            "large": "Dosya kopyalanamayacak kadar büyük.",
+            "copyFileContents": "Dosya İçeriğini Kopyala"
         }
     }
 }

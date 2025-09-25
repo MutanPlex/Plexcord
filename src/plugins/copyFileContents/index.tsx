@@ -7,6 +7,7 @@
 
 import "./style.css";
 
+import { t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { CopyIcon, NoEntrySignIcon } from "@components/Icons";
 import { Devs } from "@utils/constants";
@@ -24,6 +25,11 @@ export default definePlugin({
     name: "CopyFileContents",
     description: "Adds a button to text file attachments to copy their contents",
     authors: [Devs.Obsidian, Devs.Nuckyz],
+
+    get displayDescription() {
+        return t("plugin.copyFileContents.description");
+    },
+
     patches: [
         {
             find: "#{intl::PREVIEW_BYTES_LEFT}",
@@ -38,7 +44,7 @@ export default definePlugin({
         const [recentlyCopied, setRecentlyCopied] = useState(false);
 
         return (
-            <Tooltip text={recentlyCopied ? "Copied!" : bytesLeft > 0 ? "File too large to copy" : "Copy File Contents"}>
+            <Tooltip text={recentlyCopied ? t("plugin.copyFileContents.copied") : bytesLeft > 0 ? t("plugin.copyFileContents.large") : t("plugin.copyFileContents.copyFileContents")}>
                 {tooltipProps => (
                     <div
                         {...tooltipProps}
