@@ -2175,6 +2175,28 @@
             "context": {
                 "copy": "Copy User URL"
             }
+        },
+        "crashHandler": {
+            "name": "CrashHandler",
+            "description": "Utility plugin for handling and possibly recovering from crashes without a restart",
+            "option": {
+                "attemptToPreventCrashes": {
+                    "label": "Attempt to Prevent Crashes",
+                    "description": "Whether to attempt to prevent Discord crashes."
+                },
+                "attemptToNavigateToHome": {
+                    "label": "Attempt to Navigate to Home",
+                    "description": "Whether to attempt to navigate to the home tab on crash recovery."
+                }
+            },
+            "toast": {
+                "crashed": {
+                    "title": "Discord has crashed!",
+                    "body": "Awn :( Discord has crashed two times rapidly, not attempting to recover.",
+                    "update": "Uh oh, Discord has just crashed... but good news, there is a Plexcord update available that might fix this issue! Would you like to update now?",
+                    "recover": "Attempting to recover..."
+                }
+            }
         }
     }
 }

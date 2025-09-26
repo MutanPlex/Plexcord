@@ -2175,6 +2175,28 @@
             "context": {
                 "copy": "Kullanıcı URL’sini Kopyala"
             }
+        },
+        "crashHandler": {
+            "name": "CrashHandler",
+            "description": "Yeniden başlatmaya gerek kalmadan çökmeleri yönetmek ve mümkünse kurtarmak için yardımcı eklenti",
+            "option": {
+                "attemptToPreventCrashes": {
+                    "label": "Çökmeleri Önlemeye Çalış",
+                    "description": "Discord çökmelerini önlemeye çalışılsın mı."
+                },
+                "attemptToNavigateToHome": {
+                    "label": "Ana Sayfaya Yönlendirmeye Çalış",
+                    "description": "Çökme sonrası kurtarmada ana sekmeye yönlendirilmeye çalışılsın mı."
+                }
+            },
+            "toast": {
+                "crashed": {
+                    "title": "Discord çöktü!",
+                    "body": "Tüh :( Discord kısa sürede iki kez çöktü, kurtarma denemesi yapılmayacak.",
+                    "update": "Ah hayır, Discord yeni çöktü... ama güzel haber, bu sorunu düzeltebilecek bir Plexcord güncellemesi mevcut! Şimdi güncellemek ister misiniz?",
+                    "recover": "Kurtarılmaya çalışılıyor..."
+                }
+            }
         }
     }
 }
