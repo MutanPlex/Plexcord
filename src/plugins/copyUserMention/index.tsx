@@ -6,6 +6,7 @@
  */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import type { Channel, User } from "@plexcord/discord-types";
 import { copyToClipboard } from "@utils/clipboard";
 import { Devs, PcDevs } from "@utils/constants";
@@ -38,7 +39,7 @@ const UserContextMenuPatch: NavContextMenuPatchCallback = (children, { user }: U
     children.push(
         <Menu.MenuItem
             id="pc-copy-user-mention"
-            label="Copy User Mention"
+            label={t("plugin.copyUserMention.context.copy")}
             action={() => copyToClipboard(`<@${user.id}>`)}
             icon={MentionIcon}
         />
@@ -49,6 +50,11 @@ export default definePlugin({
     name: "CopyUserMention",
     authors: [PcDevs.Cortex, Devs.castdrian],
     description: "Adds a button to copy user's mention on the user context menu, works best with ValidUser.",
+
+    get displayDescription() {
+        return t("plugin.copyUserMention.description");
+    },
+
     contextMenus: {
         "user-context": UserContextMenuPatch
     }

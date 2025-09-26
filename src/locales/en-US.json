@@ -2142,6 +2142,39 @@
             "copied": "Copied!",
             "large": "File too large to copy.",
             "copyFileContents": "Copy File Contents"
+        },
+        "copyStatusUrls": {
+            "name": "CopyStatusUrls",
+            "description": "Copy the users status url when you right-click it",
+            "toast": {
+                "copied": "Copied URL",
+                "error": "Error copying URL, check console for more info"
+            }
+        },
+        "copyStickerLinks": {
+            "name": "CopyStickerLinks",
+            "description": "Adds the ability to copy & open Sticker links",
+            "context": {
+                "copy": "Copy Link",
+                "open": "Open Link"
+            },
+            "toast": {
+                "success": "Link copied!"
+            }
+        },
+        "copyUserMention": {
+            "name": "CopyUserMention",
+            "description": "Adds a button to copy user's mention on the user context menu, works best with ValidUser.",
+            "context": {
+                "copy": "Copy User Mention"
+            }
+        },
+        "copyUserURLs": {
+            "name": "CopyUserURLs",
+            "description": "Adds a 'Copy User URL' option to the user context menu.",
+            "context": {
+                "copy": "Copy User URL"
+            }
         }
     }
 }

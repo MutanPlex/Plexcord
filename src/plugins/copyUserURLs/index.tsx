@@ -18,6 +18,7 @@
 */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { LinkIcon } from "@components/Icons";
 import type { Channel, User } from "@plexcord/discord-types";
 import { copyToClipboard } from "@utils/clipboard";
@@ -37,7 +38,7 @@ const UserContextMenuPatch: NavContextMenuPatchCallback = (children, { user }: U
     children.push(
         <Menu.MenuItem
             id="pc-copy-user-url"
-            label="Copy User URL"
+            label={t("plugin.copyUserURLs.context.copy")}
             action={() => copyToClipboard(`<https://discord.com/users/${user.id}>`)}
             icon={LinkIcon}
         />
@@ -48,6 +49,11 @@ export default definePlugin({
     name: "CopyUserURLs",
     authors: [Devs.castdrian],
     description: "Adds a 'Copy User URL' option to the user context menu.",
+
+    get displayDescription() {
+        return t("plugin.copyUserURLs.description");
+    },
+
     contextMenus: {
         "user-context": UserContextMenuPatch
     }

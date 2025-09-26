@@ -2142,6 +2142,39 @@
             "copied": "Kopyalandı!",
             "large": "Dosya kopyalanamayacak kadar büyük.",
             "copyFileContents": "Dosya İçeriğini Kopyala"
+        },
+        "copyStatusUrls": {
+            "name": "CopyStatusUrls",
+            "description": "Bir kullanıcının durum URL’sini sağ tıkladığınızda kopyalayın",
+            "toast": {
+                "copied": "URL kopyalandı",
+                "error": "URL kopyalanırken hata oluştu, daha fazla bilgi için konsolu kontrol edin"
+            }
+        },
+        "copyStickerLinks": {
+            "name": "CopyStickerLinks",
+            "description": "Sticker bağlantılarını kopyalama ve açma özelliği ekler",
+            "context": {
+                "copy": "Bağlantıyı Kopyala",
+                "open": "Bağlantıyı Aç"
+            },
+            "toast": {
+                "success": "Bağlantı kopyalandı!"
+            }
+        },
+        "copyUserMention": {
+            "name": "CopyUserMention",
+            "description": "Kullanıcı bağlam menüsüne, kullanıcının mention’unu kopyalamak için bir buton ekler. ValidUser ile en iyi şekilde çalışır.",
+            "context": {
+                "copy": "Kullanıcı Mention’unu Kopyala"
+            }
+        },
+        "copyUserURLs": {
+            "name": "CopyUserURLs",
+            "description": "Kullanıcı bağlam menüsüne 'Kullanıcı URL’sini Kopyala' seçeneği ekler.",
+            "context": {
+                "copy": "Kullanıcı URL’sini Kopyala"
+            }
         }
     }
 }

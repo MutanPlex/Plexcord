@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { User } from "@plexcord/discord-types";
 import { copyToClipboard } from "@utils/clipboard";
 import { Devs } from "@utils/constants";
@@ -26,6 +27,10 @@ export default definePlugin({
     description: "Copy the users status url when you right-click it",
     authors: [Devs.sadan],
 
+    get displayDescription() {
+        return t("plugin.copyStatusUrls.description");
+    },
+
     patches: [
         {
             find: '?"PRESS_WATCH_ON_CRUNCHYROLL_BUTTON"',
@@ -46,7 +51,7 @@ export default definePlugin({
                 copyToClipboard(button_urls[index]);
                 Toasts.show({
                     id: Toasts.genId(),
-                    message: "Copied URL",
+                    message: t("plugin.copyStatusUrls.toast.copied"),
                     type: Toasts.Type.SUCCESS,
                     options: {
                         position: Toasts.Position.TOP
@@ -56,7 +61,7 @@ export default definePlugin({
                 console.error(e);
                 Toasts.show({
                     id: Toasts.genId(),
-                    message: "Error copying URL, check console for more info",
+                    message: t("plugin.copyStatusUrls.toast.error"),
                     type: Toasts.Type.FAILURE,
                     options: {
                         position: Toasts.Position.TOP
