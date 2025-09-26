@@ -2197,6 +2197,23 @@
                     "recover": "Kurtarılmaya çalışılıyor..."
                 }
             }
+        },
+        "ctrlEnterSend": {
+            "name": "CtrlEnterSend",
+            "description": "Mesaj göndermek için Ctrl+Enter kullanın (özelleştirilebilir)",
+            "option": {
+                "submitRule": {
+                    "label": "Gönderme Kuralı",
+                    "description": "Bir mesajın gönderilme şekli",
+                    "ctrlEnter": "Ctrl+Enter (Yeni satır için Enter veya Shift+Enter) (macOS’ta cmd+enter)",
+                    "shiftEnter": "Shift+Enter (Yeni satır için Enter)",
+                    "enter": "Enter (Yeni satır için Shift+Enter; Discord varsayılanı)"
+                },
+                "sendMessageInTheMiddleOfACodeBlock": {
+                    "label": "Kod Bloğunun Ortasında Mesaj Gönder",
+                    "description": "Bir kod bloğunun ortasında mesaj gönderilsin mi"
+                }
+            }
         }
     }
 }

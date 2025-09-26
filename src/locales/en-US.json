@@ -2197,6 +2197,23 @@
                     "recover": "Attempting to recover..."
                 }
             }
+        },
+        "ctrlEnterSend": {
+            "name": "CtrlEnterSend",
+            "description": "Use Ctrl+Enter to send messages (customizable)",
+            "option": {
+                "submitRule": {
+                    "label": "Submit Rule",
+                    "description": "The way to send a message",
+                    "ctrlEnter": "Ctrl+Enter (Enter or Shift+Enter for new line) (cmd+enter on macOS)",
+                    "shiftEnter": "Shift+Enter (Enter for new line)",
+                    "enter": "Enter (Shift+Enter for new line; Discord default)"
+                },
+                "sendMessageInTheMiddleOfACodeBlock": {
+                    "label": "Send Message In The Middle Of A Code Block",
+                    "description": "Whether to send a message in the middle of a code block"
+                }
+            }
         }
     }
 }

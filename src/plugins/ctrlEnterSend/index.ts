@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, IS_MAC } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -13,28 +14,42 @@ export default definePlugin({
     name: "CtrlEnterSend",
     authors: [Devs.UlyssesZhan],
     description: "Use Ctrl+Enter to send messages (customizable)",
+
+    get displayDescription() {
+        return t("plugin.ctrlEnterSend.description");
+    },
     settings: definePluginSettings({
         submitRule: {
-            description: "The way to send a message",
+            get label() {
+                return t("plugin.ctrlEnterSend.option.submitRule.label");
+            },
+            get description() {
+                return t("plugin.ctrlEnterSend.option.submitRule.description");
+            },
             type: OptionType.SELECT,
             options: [
                 {
-                    label: "Ctrl+Enter (Enter or Shift+Enter for new line) (cmd+enter on macOS)",
+                    label: t("plugin.ctrlEnterSend.option.submitRule.ctrlEnter"),
                     value: "ctrl+enter"
                 },
                 {
-                    label: "Shift+Enter (Enter for new line)",
+                    label: t("plugin.ctrlEnterSend.option.submitRule.shiftEnter"),
                     value: "shift+enter"
                 },
                 {
-                    label: "Enter (Shift+Enter for new line; Discord default)",
+                    label: t("plugin.ctrlEnterSend.option.submitRule.enter"),
                     value: "enter"
                 }
             ],
             default: "ctrl+enter"
         },
         sendMessageInTheMiddleOfACodeBlock: {
-            description: "Whether to send a message in the middle of a code block",
+            get label() {
+                return t("plugin.ctrlEnterSend.option.sendMessageInTheMiddleOfACodeBlock.label");
+            },
+            get description() {
+                return t("plugin.ctrlEnterSend.option.sendMessageInTheMiddleOfACodeBlock.description");
+            },
             type: OptionType.BOOLEAN,
             default: true,
         }
