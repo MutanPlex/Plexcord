@@ -178,12 +178,10 @@ function shouldHideBadgeOnUserProfiles(): boolean {
 function shouldHideQuestPopup(quest: Quest | null): boolean {
     const {
         disableQuestsPopupAboveAccountPanel,
-        disableQuestsEverything,
-        triggerQuestsRerender
+        disableQuestsEverything
     } = settings.use([
         "disableQuestsPopupAboveAccountPanel",
-        "disableQuestsEverything",
-        "triggerQuestsRerender"
+        "disableQuestsEverything"
     ]);
 
     const noProgress = !quest?.userStatus?.progress || Object.keys(quest?.userStatus?.progress || {}).length === 0;
@@ -251,16 +249,12 @@ function QuestTileContextMenu(children: React.ReactNode[], props: { quest: any; 
 
 export function getQuestTileClasses(originalClasses: string, quest: Quest, color: number | null | undefined, gradient: string | undefined): string {
     const {
-        ignoredQuestIDs,
-        ignoredQuestProfile,
         restyleQuestsUnclaimed,
         restyleQuestsClaimed,
         restyleQuestsIgnored,
         restyleQuestsExpired,
         restyleQuestsGradient
     } = settings.use([
-        "ignoredQuestIDs",
-        "ignoredQuestProfile",
         "restyleQuestsUnclaimed",
         "restyleQuestsClaimed",
         "restyleQuestsIgnored",
@@ -326,7 +320,7 @@ export function getQuestTileClasses(originalClasses: string, quest: Quest, color
 }
 
 function makeDesktopCompatible(quests: Quest[]): void {
-    const { makeMobileQuestsDesktopCompatible, triggerQuestsRerender } = settings.use(["makeMobileQuestsDesktopCompatible", "triggerQuestsRerender"]);
+    const { makeMobileQuestsDesktopCompatible } = settings.use(["makeMobileQuestsDesktopCompatible", "triggerQuestsRerender"]);
 
     if (makeMobileQuestsDesktopCompatible) {
         quests.forEach(quest => {
@@ -358,27 +352,17 @@ function makeDesktopCompatible(quests: Quest[]): void {
 
 function sortQuests(quests: Quest[], skip?: boolean): Quest[] {
     const {
-        ignoredQuestIDs,
-        ignoredQuestProfile,
         reorderQuests,
         unclaimedSubsort,
         claimedSubsort,
         ignoredSubsort,
-        expiredSubsort,
-        completeVideoQuestsInBackground,
-        completeGameQuestsInBackground,
-        triggerQuestsRerender
+        expiredSubsort
     } = settings.use([
-        "ignoredQuestIDs",
-        "ignoredQuestProfile",
         "reorderQuests",
         "unclaimedSubsort",
         "claimedSubsort",
         "ignoredSubsort",
-        "expiredSubsort",
-        "completeVideoQuestsInBackground",
-        "completeGameQuestsInBackground",
-        "triggerQuestsRerender"
+        "expiredSubsort"
     ]);
 
     makeDesktopCompatible(quests);
@@ -468,16 +452,6 @@ function sortQuests(quests: Quest[], skip?: boolean): Quest[] {
 }
 
 export function getQuestTileStyle(quest: Quest | null): Record<string, string> {
-    const {
-        restyleQuests,
-        ignoredQuestIDs,
-        ignoredQuestProfile
-    } = settings.use([
-        "restyleQuests",
-        "ignoredQuestIDs",
-        "ignoredQuestProfile"
-    ]);
-
     const style: Record<string, string> = {};
     let themeColor: RGB | null = null;
 
@@ -801,7 +775,6 @@ function disguiseHomeButton(location: string): boolean {
 }
 
 function useQuestRerender(): number {
-    const { triggerQuestsRerender } = settings.use(["triggerQuestsRerender"]);
     const [renderTrigger, setRenderTrigger] = useState(0);
     useEffect(() => addRerenderCallback(() => setRenderTrigger(prev => prev + 1)), []);
     return renderTrigger;
@@ -818,14 +791,20 @@ function getLastFilterChoices(): { group: string; filter: string; }[] | null {
 }
 
 function setLastSortChoice(sort: string): void {
-    const { rememberQuestPageFilters } = settings.use(["rememberQuestPageFilters"]);
     settings.store.lastQuestPageSort = sort;
 }
 
 function setLastFilterChoices(filters: { group: string; filter: string; }[]): void {
-    const { rememberQuestPageFilters } = settings.use(["rememberQuestPageFilters"]);
     if (!filters || !Object.keys(filters).length || !Object.values(filters).every(f => f.group && f.filter)) { return; }
     settings.store.lastQuestPageFilters = JSON.parse(JSON.stringify(filters)).reduce((acc, item) => ({ ...acc, [item.filter]: item }), {});
+}
+
+function getQuestAcceptedButtonProps(quest: Quest, text: string) {
+    return {
+        disabled: shouldDisableQuestAcceptedButton(quest) ?? true,
+        text: getQuestAcceptedButtonText(quest) ?? text,
+        onClick: () => { processQuestForAutoComplete(quest); }
+    };
 }
 
 export default definePlugin({
@@ -851,6 +830,7 @@ export default definePlugin({
     shouldDisableQuestAcceptedButton,
     processQuestForAutoComplete,
     getQuestAcceptedButtonText,
+    getQuestAcceptedButtonProps,
     getQuestPanelOverride,
     setLastFilterChoices,
     getLastFilterChoices,
@@ -1191,15 +1171,12 @@ export default definePlugin({
                 {
                     // The Quest Accepted button is disabled by default. If the user reloads the client, they need a way
                     // to resume the automatic completion, so patch in optionally enabling it if the feature is enabled.
-                    match: /(START_QUEST_CTA.{0,400}?disabled:)(!0)/,
-                    replace: "$1$self.shouldDisableQuestAcceptedButton(arguments[0].quest)??$2"
-                },
-                {
+
                     // The "Quest Accepted" text is changed to "Resume" if the Quest is in progress but not active.
                     // When the Quest Accepted button which has been enabled again by the above patch is clicked,
                     // resume the automatic completion of the Quest and disable the button again.
-                    match: /(\i.intl.string\(\i.\i#{intl::QUEST_ACCEPTED}\))/,
-                    replace: "$self.getQuestAcceptedButtonText(arguments[0].quest)??$1,onClick:()=>{$self.processQuestForAutoComplete(arguments[0].quest)}"
+                    match: /(?<=fullWidth:!0}\)}\):.{0,150}?secondary",)disabled:!0,text:(.{0,30}?\["9KoPyM"\]\)),/,
+                    replace: "...$self.getQuestAcceptedButtonProps(arguments[0].quest,$1),"
                 }
             ]
         },

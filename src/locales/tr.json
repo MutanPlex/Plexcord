@@ -2214,6 +2214,153 @@
                     "description": "Bir kod bloğunun ortasında mesaj gönderilsin mi"
                 }
             }
+        },
+        "customFolderIcons": {
+            "name": "CustomFolderIcons",
+            "description": "Klasör simgelerini herhangi bir png ile özelleştirin",
+            "option": {
+                "solidIcon": {
+                    "label": "Düz Simge",
+                    "description": "Resmin arka planında düz bir arka plan kullan"
+                },
+                "folderIcons": {
+                    "label": "Klasör Simgeleri",
+                    "description": "Klasör simgesi ayarları"
+                }
+            },
+            "modal": {
+                "change": "Klasör simgesinin boyutunu değiştir",
+                "save": "Kaydet",
+                "unset": "Kaldır",
+                "set": "Yeni Bir Simge Ayarla",
+                "hover": "Yenilenmesi için ayarladıktan sonra klasörün üzerine gelmeniz gerekebilir."
+            }
+        },
+        "customIdle": {
+            "name": "CustomIdle",
+            "description": "Discord’un boşta moda geçmeden önceki süresini ayarlamanıza (veya otomatik boşta modunu devre dışı bırakmanıza) izin verir",
+            "backOnline": "Tekrar hoş geldiniz! Çevrimiçi olmak için butona tıklayın. Yeniden yüklenene kadar boşta kalmak için X’e tıklayın.",
+            "exit": "Boştan Çık",
+            "option": {
+                "idleTimeout": {
+                    "label": "Boşta Zaman Aşımı",
+                    "description": "Discord’un boşta moda geçmeden önceki dakika sayısı (otomatik boşta modunu devre dışı bırakmak için 0)"
+                },
+                "remainInIdle": {
+                    "label": "Boşta Kal",
+                    "description": "Discord’a geri döndüğünüzde, çevrimiçi olmak istediğinizi onaylayana kadar boşta kal"
+                }
+            }
+        },
+        "customRPC": {
+            "name": "CustomRPC",
+            "description": "Discord profilinize tamamen özelleştirilebilir Rich Presence (Oyun durumu) ekleyin",
+            "goTo": "{{portal}} adresine gidin, bir uygulama oluşturun ve uygulama kimliğini alın.",
+            "upload": "Rich Presence sekmesine görseller yükleyerek görsel anahtarlarını alın.",
+            "image": "Bir görsel bağlantısı kullanmak istiyorsanız, görselinizi indirip {{imgur}} üzerine tekrar yükleyin ve görsele sağ tıklayıp 'Resim adresini kopyala' seçeneğini seçerek bağlantıyı alın.",
+            "button": "Kendi profilinizde kendi butonlarınızı göremezsiniz, ancak herkes sorunsuz görebilir.",
+            "font": "Bazı garip unicode yazılar ('fontlar' 𝖇𝖚𝖓𝖑𝖆𝖗 𝖌𝖎𝖇𝖎) rich presence’ın görünmemesine neden olabilir, normal harfler kullanmayı deneyin.",
+            "error": {
+                "notice": "Uyarı",
+                "sharing": "Etkinlik Paylaşımı etkin değil, insanlar özel rich presence’ınızı göremeyecek!",
+                "enable": "Etkinleştir",
+                "validStream": "Yayın bağlantısı geçerli bir URL olmalıdır.",
+                "streamCharacters": "Yayın bağlantısı 512 karakterden uzun olmamalıdır.",
+                "dontUse": "Discord bağlantısı kullanmayın. Bunun yerine bir Imgur görsel bağlantısı kullanın.",
+                "imgur": "Imgur bağlantısı doğrudan görsele yönlendiren bir bağlantı olmalıdır (örn. https://i.imgur.com/...). Görsele sağ tıklayıp 'Resim adresini kopyala' seçeneğini seçin.",
+                "tenor": "Tenor bağlantısı doğrudan görsele yönlendiren bir bağlantı olmalıdır (örn. https://media.tenor.com/...). GIF’e sağ tıklayıp 'Resim adresini kopyala' seçeneğini seçin.",
+                "appIdRequired": "Uygulama kimliği gereklidir.",
+                "appIdInvalid": "Uygulama kimliği bir sayı olmalıdır.",
+                "appNameRequired": "Uygulama adı gereklidir.",
+                "appNameInvalid": "Uygulama adı 128 karakterden uzun olmamalıdır.",
+                "detailsInvalid": "Detaylar (satır 1) 128 karakterden uzun olmamalıdır.",
+                "stateInvalid": "Durum (satır 2) 128 karakterden uzun olmamalıdır.",
+                "startTimeInvalid": "Başlangıç zaman damgası 0’dan büyük olmalıdır.",
+                "endTimeInvalid": "Bitiş zaman damgası 0’dan büyük olmalıdır.",
+                "bigImageTooltipCharacters": "Büyük görsel ipucu 128 karakterden uzun olmamalıdır.",
+                "smallImageTooltipCharacters": "Küçük görsel ipucu 128 karakterden uzun olmamalıdır.",
+                "buttonOneTextCharacters": "Buton 1 metni 31 karakterden uzun olmamalıdır.",
+                "buttonTwoTextCharacters": "Buton 2 metni 31 karakterden uzun olmamalıdır."
+            },
+            "option": {
+                "appId": {
+                    "label": "Uygulama Kimliği",
+                    "description": "Uygulama kimliği (gerekli)"
+                },
+                "appName": {
+                    "label": "Uygulama Adı",
+                    "description": "Uygulama adı (gerekli)"
+                },
+                "details": {
+                    "label": "Detaylar",
+                    "description": "Detaylar (satır 1)"
+                },
+                "state": {
+                    "label": "Durum",
+                    "description": "Durum (satır 2)"
+                },
+                "type": {
+                    "label": "Tür",
+                    "description": "Etkinlik türü",
+                    "playing": "Oynuyor",
+                    "streaming": "Yayın Yapıyor",
+                    "listening": "Dinliyor",
+                    "watching": "İzliyor",
+                    "competing": "Yarışıyor"
+                },
+                "streamLink": {
+                    "label": "Yayın Bağlantısı",
+                    "description": "Twitch.tv veya Youtube.com bağlantısı (yalnızca Yayın etkinlik türü için)"
+                },
+                "timestampMode": {
+                    "label": "Zaman Damgası Modu",
+                    "description": "Zaman damgasının neyi göstermesi gerektiği",
+                    "none": "Yok",
+                    "sinceDiscordOpen": "Discord açıldığından beri",
+                    "sameAsCurrentTime": "Geçerli zamanınızla aynı (24 saatten sonra sıfırlanmaz)",
+                    "custom": "Özel Zaman"
+                },
+                "startTime": {
+                    "label": "Başlangıç Zamanı",
+                    "description": "Başlangıç zaman damgası (milisaniye cinsinden, yalnızca özel zaman modu için)"
+                },
+                "endTime": {
+                    "label": "Bitiş Zamanı",
+                    "description": "Bitiş zaman damgası (milisaniye cinsinden, yalnızca özel zaman modu için)"
+                },
+                "imageBig": {
+                    "label": "Büyük Görsel Anahtarı",
+                    "description": "Büyük görsel anahtarı (Rich Presence sekmesine yüklenmiş olmalı)"
+                },
+                "imageBigTooltip": {
+                    "label": "Büyük Görsel İpucu",
+                    "description": "Büyük görsel üzerine gelindiğinde görünen ipucu"
+                },
+                "imageSmall": {
+                    "label": "Küçük Görsel Anahtarı",
+                    "description": "Küçük görsel anahtarı (Rich Presence sekmesine yüklenmiş olmalı)"
+                },
+                "imageSmallTooltip": {
+                    "label": "Küçük Görsel İpucu",
+                    "description": "Küçük görsel üzerine gelindiğinde görünen ipucu"
+                },
+                "buttonOneText": {
+                    "label": "Buton 1 Metni",
+                    "description": "Buton 1 metni"
+                },
+                "buttonOneURL": {
+                    "label": "Buton 1 URL",
+                    "description": "Buton 1 bağlantısı"
+                },
+                "buttonTwoText": {
+                    "label": "Buton 2 Metni",
+                    "description": "Buton 2 metni"
+                },
+                "buttonTwoURL": {
+                    "label": "Buton 2 URL",
+                    "description": "Buton 2 bağlantısı"
+                }
+            }
         }
     }
 }

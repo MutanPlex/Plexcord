@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { closeModal, ModalContent, ModalHeader, ModalRoot, openModalLazy } from "@utils/modal";
 import { Button, Menu, Slider, TextInput, useState } from "@webpack/common";
 
@@ -29,7 +30,7 @@ export function ImageModal(folderProps: folderProp) {
             {data && <>
                 <div style={{
                     color: "#FFF"
-                }}>Change the size of the folder icon</div>
+                }}>{t("plugin.customFolderIcons.modal.change")}</div>
                 <Slider
                     initialValue={100}
                     onValueChange={(v: number) => {
@@ -43,28 +44,32 @@ export function ImageModal(folderProps: folderProp) {
                     keyboardStep={1}
                     renderMarker={() => null} />
             </>}
-            <Button onClick={() => {
-                setFolderData(folderProps, {
-                    url: data,
-                    size: size
-                });
-                closeModal("custom-folder-icon");
-            }}
-            >
-                Save
-            </Button>
-            <hr />
-            <Button onClick={() => {
-                // INFO: unset button
-                const folderSettings = settings.store.folderIcons as folderIconsData;
-                if (folderSettings[folderProps.folderId]) {
-                    folderSettings[folderProps.folderId] = null;
-                }
-                closeModal("custom-folder-icon");
+            <div style={{
+                display: "flex",
+                justifyContent: "space-between",
+                marginTop: "20px"
             }}>
-                Unset
-            </Button>
-            <hr />
+                <Button onClick={() => {
+                    setFolderData(folderProps, {
+                        url: data,
+                        size: size
+                    });
+                    closeModal("custom-folder-icon");
+                }}
+                >
+                    {t("plugin.customFolderIcons.modal.save")}
+                </Button>
+                <Button onClick={() => {
+                    // INFO: unset button
+                    const folderSettings = settings.store.folderIcons as folderIconsData;
+                    if (folderSettings[folderProps.folderId]) {
+                        folderSettings[folderProps.folderId] = null;
+                    }
+                    closeModal("custom-folder-icon");
+                }}>
+                    {t("plugin.customFolderIcons.modal.unset")}
+                </Button>
+            </div>
         </>
     );
 }
@@ -75,6 +80,7 @@ export function RenderPreview({ folderProps, url, size }: { folderProps: folderP
             width: "20vh",
             height: "20vh",
             overflow: "hidden",
+            margin: "20px auto",
             // 16/48
             borderRadius: "33%",
             backgroundColor: int2rgba(folderProps.folderColor, 0.4),
@@ -101,7 +107,7 @@ export function makeContextItem(a: folderProp) {
                                 <div style={{
                                     color: "white"
                                 }}>
-                                    Set a New Icon.
+                                    {t("plugin.customFolderIcons.modal.set")}
                                 </div>
                             </ModalHeader>
                             <ModalContent>
@@ -109,10 +115,9 @@ export function makeContextItem(a: folderProp) {
                             </ModalContent>
                             <div style={{
                                 color: "white",
-                                margin: "2.5%",
-                                marginTop: "1%"
+                                margin: "24px",
                             }}>
-                                You might have to hover the folder after setting in order for it to refresh.
+                                {t("plugin.customFolderIcons.modal.hover")}
                             </div>
                         </ModalRoot>
                     );

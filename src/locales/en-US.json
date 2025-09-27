@@ -2214,6 +2214,153 @@
                     "description": "Whether to send a message in the middle of a code block"
                 }
             }
+        },
+        "customFolderIcons": {
+            "name": "CustomFolderIcons",
+            "description": "Customize folder icons with any png",
+            "option": {
+                "solidIcon": {
+                    "label": "Solid Icon",
+                    "description": "Use a solid background on the background of the image"
+                },
+                "folderIcons": {
+                    "label": "Folder Icons",
+                    "description": "folder icon settings"
+                }
+            },
+            "modal": {
+                "change": "Change the size of the folder icon",
+                "save": "Save",
+                "unset": "Unset",
+                "set": "Set a New Icon",
+                "hover": "You might have to hover the folder after setting in order for it to refresh."
+            }
+        },
+        "customIdle": {
+            "name": "CustomIdle",
+            "description": "Allows you to set the time before Discord goes idle (or disable auto-idle)",
+            "backOnline": "Welcome back! Click the button to go online. Click the X to stay idle until reload.",
+            "exit": "Exit Idle",
+            "option": {
+                "idleTimeout": {
+                    "label": "Idle Timeout",
+                    "description": "Minutes before Discord goes idle (0 to disable auto-idle)"
+                },
+                "remainInIdle": {
+                    "label": "Remain In Idle",
+                    "description": "When you come back to Discord, remain idle until you confirm you want to go online"
+                }
+            }
+        },
+        "customRPC": {
+            "name": "CustomRPC",
+            "description": "Add a fully customisable Rich Presence (Game status) to your Discord profile",
+            "goTo": "Go to the {{portal}} to create an application and get the application ID.",
+            "upload": "Upload images in the Rich Presence tab to get the image keys.",
+            "image": "If you want to use an image link, download your image and reupload the image to {{imgur}} and get the image link by right-clicking the image and selecting 'Copy image address'.",
+            "button": "You can't see your own buttons on your profile, but everyone else can see it fine.",
+            "font": "Some weird unicode text ('fonts' 𝖑𝖎𝖐𝖊 𝖙𝖍𝖎𝖘) may cause the rich presence to not show up, try using normal letters instead.",
+            "error": {
+                "notice": "Notice",
+                "sharing": "Activity Sharing isn't enabled, people won't be able to see your custom rich presence!",
+                "enable": "Enable",
+                "validStream": "Streaming link must be a valid URL.",
+                "streamCharacters": "Streaming link must be not longer than 512 characters.",
+                "dontUse": "Don't use a Discord link. Use an Imgur image link instead.",
+                "imgur": "Imgur link must be a direct link to the image (e.g. https://i.imgur.com/...). Right click the image and click 'Copy image address'",
+                "tenor": "Tenor link must be a direct link to the image (e.g. https://media.tenor.com/...). Right click the GIF and click 'Copy image address'",
+                "appIdRequired": "Application ID is required.",
+                "appIdInvalid": "Application ID must be a number.",
+                "appNameRequired": "Application name is required.",
+                "appNameInvalid": "Application name must be not longer than 128 characters.",
+                "detailsInvalid": "Details (line 1) must be not longer than 128 characters.",
+                "stateInvalid": "State (line 2) must be not longer than 128 characters.",
+                "startTimeInvalid": "Start timestamp must be greater than 0.",
+                "endTimeInvalid": "End timestamp must be greater than 0.",
+                "bigImageTooltipCharacters": "Big image tooltip must be not longer than 128 characters.",
+                "smallImageTooltipCharacters": "Small image tooltip must be not longer than 128 characters.",
+                "buttonOneTextCharacters": "Button 1 text must be not longer than 31 characters.",
+                "buttonTwoTextCharacters": "Button 2 text must be not longer than 31 characters."
+            },
+            "option": {
+                "appId": {
+                    "label": "App ID",
+                    "description": "Application ID (required)"
+                },
+                "appName": {
+                    "label": "App Name",
+                    "description": "Application name (required)"
+                },
+                "details": {
+                    "label": "Details",
+                    "description": "Details (line 1)"
+                },
+                "state": {
+                    "label": "State",
+                    "description": "State (line 2)"
+                },
+                "type": {
+                    "label": "Type",
+                    "description": "Activity type",
+                    "playing": "Playing",
+                    "streaming": "Streaming",
+                    "listening": "Listening",
+                    "watching": "Watching",
+                    "competing": "Competing"
+                },
+                "streamLink": {
+                    "label": "Stream Link",
+                    "description": "Twitch.tv or Youtube.com link (only for Streaming activity type)"
+                },
+                "timestampMode": {
+                    "label": "Timestamp Mode",
+                    "description": "What the timestamp should show",
+                    "none": "None",
+                    "sinceDiscordOpen": "Since discord open",
+                    "sameAsCurrentTime": "Same as your current time (not reset after 24h)",
+                    "custom": "Custom Time"
+                },
+                "startTime": {
+                    "label": "Start Time",
+                    "description": "Start timestamp in milliseconds (only for custom timestamp mode)"
+                },
+                "endTime": {
+                    "label": "End Time",
+                    "description": "End timestamp in milliseconds (only for custom timestamp mode)"
+                },
+                "imageBig": {
+                    "label": "Large Image Key",
+                    "description": "Large image key (must be uploaded in the Rich Presence tab)"
+                },
+                "imageBigTooltip": {
+                    "label": "Image Big Tooltip",
+                    "description": "Big image tooltip"
+                },
+                "imageSmall": {
+                    "label": "Small Image Key",
+                    "description": "Small image key (must be uploaded in the Rich Presence tab)"
+                },
+                "imageSmallTooltip": {
+                    "label": "Image Small Tooltip",
+                    "description": "Small image tooltip"
+                },
+                "buttonOneText": {
+                    "label": "Button 1 Text",
+                    "description": "Button 1 text"
+                },
+                "buttonOneURL": {
+                    "label": "Button 1 URL",
+                    "description": "Button 1 URL"
+                },
+                "buttonTwoText": {
+                    "label": "Button 2 Text",
+                    "description": "Button 2 text"
+                },
+                "buttonTwoURL": {
+                    "label": "Button 2 URL",
+                    "description": "Button 2 URL"
+                }
+            }
         }
     }
 }

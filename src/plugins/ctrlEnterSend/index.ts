@@ -27,20 +27,22 @@ export default definePlugin({
                 return t("plugin.ctrlEnterSend.option.submitRule.description");
             },
             type: OptionType.SELECT,
-            options: [
-                {
-                    label: t("plugin.ctrlEnterSend.option.submitRule.ctrlEnter"),
-                    value: "ctrl+enter"
-                },
-                {
-                    label: t("plugin.ctrlEnterSend.option.submitRule.shiftEnter"),
-                    value: "shift+enter"
-                },
-                {
-                    label: t("plugin.ctrlEnterSend.option.submitRule.enter"),
-                    value: "enter"
-                }
-            ],
+            get options() {
+                return [
+                    {
+                        label: t("plugin.ctrlEnterSend.option.submitRule.ctrlEnter"),
+                        value: "ctrl+enter"
+                    },
+                    {
+                        label: t("plugin.ctrlEnterSend.option.submitRule.shiftEnter"),
+                        value: "shift+enter"
+                    },
+                    {
+                        label: t("plugin.ctrlEnterSend.option.submitRule.enter"),
+                        value: "enter"
+                    }
+                ];
+            },
             default: "ctrl+enter"
         },
         sendMessageInTheMiddleOfACodeBlock: {

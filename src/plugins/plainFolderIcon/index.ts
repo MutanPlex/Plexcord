@@ -34,7 +34,7 @@ export default definePlugin({
                 {
                     // Discord always renders both plain and guild icons folders and uses a css transtion to switch between them
                     match: /(?<=.folderButtonContent]:(!\i))/,
-                    replace: (_, hasFolderButtonContentClass) => `,"pc-plainFolderIcon-plain":${hasFolderButtonContentClass}`
+                    replace: ',"pc-plainFolderIcon-plain":$1'
                 }
 
             ]

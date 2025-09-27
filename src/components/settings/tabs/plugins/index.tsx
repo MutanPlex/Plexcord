@@ -110,17 +110,17 @@ const enum SearchStatus {
     NEW
 }
 
+export const ExcludedReasons: Record<"web" | "discordDesktop" | "plextron" | "desktop" | "dev", string> = {
+    desktop: t("plugins.excluded.desktop"),
+    discordDesktop: t("plugins.excluded.discordDesktop"),
+    plextron: t("plugins.excluded.plextron"),
+    web: t("plugins.excluded.web"),
+    dev: t("plugins.excluded.dev")
+};
+
 function ExcludedPluginsList({ search }: { search: string; }) {
     const matchingExcludedPlugins = Object.entries(ExcludedPlugins)
         .filter(([name]) => name.toLowerCase().includes(search));
-
-    const ExcludedReasons: Record<"web" | "discordDesktop" | "plextron" | "desktop" | "dev", string> = {
-        desktop: t("plugins.excluded.desktop"),
-        discordDesktop: t("plugins.excluded.discordDesktop"),
-        plextron: t("plugins.excluded.plextron"),
-        web: t("plugins.excluded.web"),
-        dev: t("plugins.excluded.dev")
-    };
 
     return (
         <Text variant="text-md/normal" className={Margins.top16}>
@@ -166,19 +166,7 @@ function PluginSettings() {
             });
     }, []);
 
-    const depMap = useMemo(() => {
-        const o = {} as Record<string, string[]>;
-        for (const plugin in Plugins) {
-            const deps = Plugins[plugin].dependencies;
-            if (deps) {
-                for (const dep of deps) {
-                    o[dep] ??= [];
-                    o[dep].push(plugin);
-                }
-            }
-        }
-        return o;
-    }, []);
+    const depMap = Plexcord.Plugins.calculatePluginDependencyMap();
 
     const sortedPlugins = useMemo(() =>
         Object.values(Plugins).sort((a, b) => a.name.localeCompare(b.name)),
@@ -248,7 +236,7 @@ function PluginSettings() {
         if (isRequired) {
             const tooltipText = p.required || !depMap[p.name]
                 ? t("plugins.required.this")
-                : makeDependencyList(depMap[p.name]?.filter(d => settings.plugins[d].enabled));
+                : <PluginDependencyList deps={depMap[p.name]?.filter(d => settings.plugins[d].enabled)} />;
 
             requiredPlugins.push(
                 <Tooltip text={tooltipText} key={p.name}>
@@ -385,7 +373,7 @@ function PluginSettings() {
     );
 }
 
-function makeDependencyList(deps: string[]) {
+export function PluginDependencyList({ deps }: { deps: string[]; }) {
     return (
         <>
             <Forms.FormText>{t("plugins.required.by")}</Forms.FormText>

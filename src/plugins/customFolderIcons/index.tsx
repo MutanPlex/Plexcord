@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -17,6 +18,9 @@ export default definePlugin({
     description: "Customize folder icons with any png",
     authors: [Devs.sadan],
     settings,
+    get displayDescription() {
+        return t("plugin.customFolderIcons.description");
+    },
     patches: [
         {
             find: ".folderButtonInner",

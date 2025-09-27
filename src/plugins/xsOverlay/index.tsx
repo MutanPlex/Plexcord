@@ -8,7 +8,6 @@
 import { definePluginSettings } from "@api/Settings";
 import type { Channel, Embed, GuildMember, MessageAttachment, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
-import { Logger } from "@utils/Logger";
 import definePlugin, { makeRange, OptionType, PluginNative, ReporterTestable } from "@utils/types";
 import { findByCodeLazy, findLazy } from "@webpack";
 import { Button, ChannelStore, GuildRoleStore, GuildStore, UserStore } from "@webpack/common";
@@ -91,7 +90,6 @@ interface NotificationObject {
 }
 
 const notificationsShouldNotify = findByCodeLazy(".SUPPRESS_NOTIFICATIONS))return!1");
-const logger = new Logger("XSOverlay");
 
 const settings = definePluginSettings({
     webSocketPort: {

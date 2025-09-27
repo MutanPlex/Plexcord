@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Notices } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
@@ -13,7 +14,12 @@ import { FluxDispatcher } from "@webpack/common";
 
 const settings = definePluginSettings({
     idleTimeout: {
-        description: "Minutes before Discord goes idle (0 to disable auto-idle)",
+        get label() {
+            return t("plugin.customIdle.option.idleTimeout.label");
+        },
+        get description() {
+            return t("plugin.customIdle.option.idleTimeout.description");
+        },
         type: OptionType.SLIDER,
         markers: makeRange(0, 60, 5),
         default: 10,
@@ -21,7 +27,12 @@ const settings = definePluginSettings({
         restartNeeded: true // Because of the setInterval patch
     },
     remainInIdle: {
-        description: "When you come back to Discord, remain idle until you confirm you want to go online",
+        get label() {
+            return t("plugin.customIdle.option.remainInIdle.label");
+        },
+        get description() {
+            return t("plugin.customIdle.option.remainInIdle.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     }
@@ -32,6 +43,11 @@ export default definePlugin({
     description: "Allows you to set the time before Discord goes idle (or disable auto-idle)",
     authors: [Devs.newwares],
     settings,
+
+    get displayDescription() {
+        return t("plugin.customIdle.description");
+    },
+
     patches: [
         {
             find: 'type:"IDLE",idle:',
@@ -61,13 +77,13 @@ export default definePlugin({
             return;
         }
 
-        const backOnlineMessage = "Welcome back! Click the button to go online. Click the X to stay idle until reload.";
+        const backOnlineMessage = t("plugin.customIdle.backOnline");
         if (
             Notices.currentNotice?.[1] === backOnlineMessage ||
             Notices.noticesQueue.some(([, noticeMessage]) => noticeMessage === backOnlineMessage)
         ) return;
 
-        Notices.showNotice(backOnlineMessage, "Exit idle", () => {
+        Notices.showNotice(backOnlineMessage, t("plugin.customIdle.exit"), () => {
             Notices.popNotice();
             FluxDispatcher.dispatch({
                 type: "IDLE",
