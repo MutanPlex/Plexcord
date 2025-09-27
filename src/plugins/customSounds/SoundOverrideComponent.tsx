@@ -6,6 +6,7 @@
  */
 
 import { AudioPlayerInterface, playAudio } from "@api/AudioPlayer";
+import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { Margins } from "@utils/margins";
 import { useForceUpdater } from "@utils/react";
@@ -66,19 +67,19 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                 const dataUri = await ensureDataURICached(override.selectedFileId);
 
                 if (!dataUri || !dataUri.startsWith("data:audio/")) {
-                    showToast("No custom sound file available for preview");
+                    showToast(t("plugin.customSounds.toast.invalidFile"));
                     return;
                 }
 
                 sound.current = playAudio(dataUri, {
                     volume: override.volume, onError: e => {
                         console.error("[CustomSounds] Error playing custom audio:", e);
-                        showToast("Error playing custom sound. File may be corrupted.");
+                        showToast(t("plugin.customSounds.toast.playing"));
                     }
                 });
             } catch (error) {
                 console.error("[CustomSounds] Error in previewSound:", error);
-                showToast("Error playing sound.");
+                showToast(t("plugin.customSounds.toast.previewSound"));
             }
         } else if (selectedSound === "default") {
             sound.current = playAudio(type.id);
@@ -93,13 +94,13 @@ export function SoundOverrideComponent({ type, override, onChange }: {
 
         const fileExtension = file.name.split(".").pop()?.toLowerCase();
         if (!fileExtension || !AUDIO_EXTENSIONS.includes(fileExtension)) {
-            showToast("Invalid file type. Please upload an audio file.");
+            showToast(t("plugin.customSounds.toast.invalidExtension"));
             event.target.value = "";
             return;
         }
 
         try {
-            showToast("Uploading file...");
+            showToast(t("plugin.customSounds.toast.uploading"));
             const id = await saveAudio(file);
 
             const savedFiles = await getAllAudio();
@@ -111,10 +112,10 @@ export function SoundOverrideComponent({ type, override, onChange }: {
             await ensureDataURICached(id);
             await saveAndNotify();
 
-            showToast(`File uploaded successfully: ${file.name}`);
+            showToast(t("plugin.customSounds.toast.uploaded", { fileName: file.name }));
         } catch (error) {
             console.error("[CustomSounds] Error uploading file:", error);
-            showToast(`Error uploading file: ${error}`);
+            showToast(t("plugin.customSounds.toast.uploadError", { error: error }));
         }
 
         event.target.value = "";
@@ -133,10 +134,10 @@ export function SoundOverrideComponent({ type, override, onChange }: {
             } else {
                 update();
             }
-            showToast("File deleted successfully");
+            showToast(t("plugin.customSounds.toast.deleted"));
         } catch (error) {
             console.error("[CustomSounds] Error deleting file:", error);
-            showToast("Error deleting file.");
+            showToast(t("plugin.customSounds.toast.deleteError"));
         }
     };
 
@@ -161,7 +162,7 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                             await ensureDataURICached(override.selectedFileId);
                         } catch (error) {
                             console.error(`[CustomSounds] Failed to cache data URI for ${type.id}:`, error);
-                            showToast("Error loading custom sound file");
+                            showToast(t("plugin.customSounds.toast.loadingError"));
                         }
                     }
 
@@ -181,17 +182,17 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                             color={Button.Colors.GREEN}
                             onClick={previewSound}
                         >
-                            Preview
+                            {t("plugin.customSounds.button.preview")}
                         </Button>
                         <Button
                             color={Button.Colors.RED}
                             onClick={() => sound.current?.stop()}
                         >
-                            Stop
+                            {t("plugin.customSounds.button.stop")}
                         </Button>
                     </div>
 
-                    <Forms.FormTitle>Volume</Forms.FormTitle>
+                    <Forms.FormTitle>{t("plugin.customSounds.button.volume")}</Forms.FormTitle>
                     <Slider
                         markers={makeRange(0, 100, 10)}
                         initialValue={override.volume}
@@ -204,12 +205,12 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                         disabled={!override.enabled}
                     />
 
-                    <Forms.FormTitle>Sound Source</Forms.FormTitle>
+                    <Forms.FormTitle>{t("plugin.customSounds.button.soundSource")}</Forms.FormTitle>
                     <Select
                         options={[
-                            { value: "default", label: "Default" },
+                            { value: "default", label: t("plugin.customSounds.option.default") },
                             ...(type.seasonal?.map(id => ({ value: id, label: capitalizeWords(id) })) ?? []),
-                            { value: "custom", label: "Custom" }
+                            { value: "custom", label: t("plugin.customSounds.option.custom") }
                         ]}
                         isSelected={v => v === override.selectedSound}
                         select={async v => {
@@ -220,7 +221,7 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                                     await ensureDataURICached(override.selectedFileId);
                                 } catch (error) {
                                     console.error(`[CustomSounds] Failed to cache data URI for ${type.id}:`, error);
-                                    showToast("Error loading custom sound file");
+                                    showToast(t("plugin.customSounds.toast.loadingError"));
                                 }
                             }
 
@@ -232,10 +233,10 @@ export function SoundOverrideComponent({ type, override, onChange }: {
 
                     {override.selectedSound === "custom" && (
                         <>
-                            <Forms.FormTitle>Custom File</Forms.FormTitle>
+                            <Forms.FormTitle>{t("plugin.customSounds.button.customFile")}</Forms.FormTitle>
                             <Select
                                 options={[
-                                    { value: "", label: "Select a file..." },
+                                    { value: "", label: t("plugin.customSounds.option.select") },
                                     ...customFileOptions
                                 ]}
                                 isSelected={v => v === (override.selectedFileId || "")}
@@ -264,7 +265,7 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                                     onClick={() => fileInputRef.current?.click()}
                                     color={Button.Colors.BRAND}
                                 >
-                                    Upload New
+                                    {t("plugin.customSounds.button.uploadNew")}
                                 </Button>
 
                                 {override.selectedFileId && files[override.selectedFileId] && (
@@ -272,7 +273,7 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                                         color={Button.Colors.RED}
                                         onClick={() => deleteFile(override.selectedFileId!)}
                                     >
-                                        Delete Selected File
+                                        {t("plugin.customSounds.button.delete")}
                                     </Button>
                                 )}
                             </div>

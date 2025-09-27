@@ -9,6 +9,7 @@ import "./styles.css";
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { get } from "@api/DataStore";
+import { t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { Channel, User } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
@@ -48,7 +49,7 @@ const userContextMenuPatch: NavContextMenuPatchCallback = (children, { user }: {
 
     const setCustomColorItem = (
         <Menu.MenuItem
-            label="Set Color"
+            label={t("plugin.customUserColors.context.setColor")}
             id="set-color"
             icon={ColorIcon}
             action={async () => {
@@ -66,7 +67,7 @@ const channelContextMenuPatch: NavContextMenuPatchCallback = (children, { channe
 
     const setCustomColorItem = (
         <Menu.MenuItem
-            label="Set Color"
+            label={t("plugin.customUserColors.context.setColor")}
             id="set-color"
             icon={ColorIcon}
             action={async () => {
@@ -88,13 +89,23 @@ export function getCustomColorString(id: string | undefined, withHash?: boolean)
 
 const settings = definePluginSettings({
     dmList: {
+        get label() {
+            return t("plugin.customUserColors.option.dmList.label");
+        },
+        get description() {
+            return t("plugin.customUserColors.option.dmList.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Users with custom colors defined will have their name in the dm list colored",
         default: true,
     },
     colorInServers: {
+        get label() {
+            return t("plugin.customUserColors.option.colorInServers.label");
+        },
+        get description() {
+            return t("plugin.customUserColors.option.colorInServers.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "If name colors should be changed within servers",
         default: true,
     }
 });
@@ -110,6 +121,10 @@ export default definePlugin({
     settings,
     requireSettingsMenu,
     getCustomColorString,
+
+    get displayDescription() {
+        return t("plugin.customUserColors.description");
+    },
 
     patches: [
         {

@@ -6,6 +6,7 @@
  */
 
 import { set } from "@api/DataStore";
+import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { Margins } from "@utils/margins";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
@@ -48,14 +49,14 @@ export function SetColorModal({ id, modalProps }: { id: string, modalProps: Moda
         <ModalRoot {...modalProps}>
             <ModalHeader className={cl("modal-header")}>
                 <Forms.FormTitle tag="h2">
-                    Custom Color
+                    {t("plugin.customUserColors.modal.custom")}
                 </Forms.FormTitle>
                 <ModalCloseButton onClick={modalProps.onClose} />
             </ModalHeader>
             <ModalContent className={cl("modal-content")} onKeyDown={handleKey}>
                 <section className={Margins.bottom16}>
                     <Forms.FormTitle tag="h3">
-                        Pick a Color
+                        {t("plugin.customUserColors.modal.pick")}
                     </Forms.FormTitle>
                     <ColorPicker
                         color={colorPickerColor}
@@ -70,13 +71,13 @@ export function SetColorModal({ id, modalProps }: { id: string, modalProps: Moda
                     color={Button.Colors.RED}
                     onClick={deleteUserColor}
                 >
-                    Delete Entry
+                    {t("plugin.customUserColors.modal.delete")}
                 </Button>
                 <Button
                     color={Button.Colors.BRAND}
                     onClick={saveUserColor}
                 >
-                    Save
+                    {t("plugin.customUserColors.modal.save")}
                 </Button>
             </ModalFooter>
         </ModalRoot>

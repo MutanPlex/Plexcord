@@ -134,7 +134,7 @@ export function WarningIcon({ height = 32, width = 32, className }: IconProps) {
         <Icon
             height={height}
             width={width}
-            className={classes(className, "vc-warning-icon")}
+            className={classes(className, "pc-warning-icon")}
             viewBox="0 0 24 24"
         >
             <path

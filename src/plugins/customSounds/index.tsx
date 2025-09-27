@@ -9,9 +9,10 @@ import "./styles.css";
 
 import { addAudioProcessor, AudioProcessor, PreprocessAudioData, removeAudioProcessor } from "@api/AudioPlayer";
 import { get as getFromDataStore } from "@api/DataStore";
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType, StartAt } from "@utils/types";
 import { Button, Forms, React, showToast, TextInput } from "@webpack/common";
 
@@ -48,7 +49,7 @@ export const getCustomSoundURL: AudioProcessor = (data: PreprocessAudioData) => 
     let audioOverride = data.audio;
 
     if (data.audio in seasonalSounds) {
-        audioOverride = soundTypes.find(sound => sound.seasonal?.includes(data.audio))?.id || data.audio;
+        audioOverride = soundTypes.values.find(sound => sound.seasonal?.includes(data.audio))?.id || data.audio;
     }
 
     const override = getOverride(audioOverride);
@@ -75,7 +76,7 @@ export const getCustomSoundURL: AudioProcessor = (data: PreprocessAudioData) => 
             return;
         }
 
-        const soundType = allSoundTypes.find(t => t.id === data.audio);
+        const soundType = allSoundTypes.values.find(t => t.id === data.audio);
 
         if (soundType?.seasonal) {
             const seasonalId = soundType.seasonal.find(seasonalId =>
@@ -133,7 +134,7 @@ export async function refreshDataURI(id: string): Promise<void> {
 async function preloadDataURIs() {
     console.log("[CustomSounds] Preloading data URIs into memory cache...");
 
-    for (const soundType of allSoundTypes) {
+    for (const soundType of allSoundTypes.values) {
         const override = getOverride(soundType.id);
         if (override?.enabled && override.selectedSound === "custom" && override.selectedFileId) {
             try {
@@ -210,11 +211,11 @@ export async function debugCustomSounds() {
 }
 
 const soundSettings = Object.fromEntries(
-    allSoundTypes.map(type => [
+    allSoundTypes.values.map(type => [
         type.id,
         {
             type: OptionType.STRING,
-            description: `Override for ${type.name}`,
+            description: t("plugin.customSounds.toast.overrideDescription", { soundName: type.name }),
             default: JSON.stringify(makeEmptyOverride()),
             hidden: true
         }
@@ -232,7 +233,7 @@ const settings = definePluginSettings({
             const fileInputRef = React.useRef<HTMLInputElement>(null);
 
             React.useEffect(() => {
-                allSoundTypes.forEach(type => {
+                allSoundTypes.values.forEach(type => {
                     if (!settings.store[type.id]) {
                         setOverride(type.id, makeEmptyOverride());
                     }
@@ -240,12 +241,12 @@ const settings = definePluginSettings({
             }, []);
 
             const resetOverrides = () => {
-                allSoundTypes.forEach(type => {
+                allSoundTypes.values.forEach(type => {
                     setOverride(type.id, makeEmptyOverride());
                 });
                 dataUriCache.clear();
                 setResetTrigger(prev => prev + 1);
-                showToast("All overrides reset successfully!");
+                showToast(t("plugin.customSounds.toast.reset"));
             };
 
             const triggerFileUpload = () => {
@@ -277,10 +278,10 @@ const settings = definePluginSettings({
                             }
 
                             setResetTrigger(prev => prev + 1);
-                            showToast("Settings imported successfully!");
+                            showToast(t("plugin.customSounds.toast.imported"));
                         } catch (error) {
                             console.error("Error importing settings:", error);
-                            showToast("Error importing settings. Check console for details.");
+                            showToast(t("plugin.customSounds.toast.importError"));
                         }
                     };
 
@@ -290,7 +291,7 @@ const settings = definePluginSettings({
             };
 
             const downloadSettings = async () => {
-                const overrides = allSoundTypes.map(type => {
+                const overrides = allSoundTypes.values.map(type => {
                     const override = getOverride(type.id);
                     return {
                         id: type.id,
@@ -314,10 +315,10 @@ const settings = definePluginSettings({
                 a.click();
                 URL.revokeObjectURL(url);
 
-                showToast(`Exported ${overrides.length} settings (audio files not included)`);
+                showToast(t("plugin.customSounds.toast.exported", { count: overrides.length }));
             };
 
-            const filteredSoundTypes = allSoundTypes.filter(type =>
+            const filteredSoundTypes = allSoundTypes.values.filter(type =>
                 type.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 type.id.toLowerCase().includes(searchQuery.toLowerCase())
             );
@@ -325,10 +326,10 @@ const settings = definePluginSettings({
             return (
                 <div>
                     <div className="pc-custom-sounds-buttons">
-                        <Button color={Button.Colors.BRAND} onClick={triggerFileUpload}>Import</Button>
-                        <Button color={Button.Colors.PRIMARY} onClick={downloadSettings}>Export</Button>
-                        <Button color={Button.Colors.RED} onClick={resetOverrides}>Reset All</Button>
-                        <Button color={Button.Colors.WHITE} onClick={debugCustomSounds}>Debug</Button>
+                        <Button color={Button.Colors.BRAND} onClick={triggerFileUpload}>{t("plugin.customSounds.import")}</Button>
+                        <Button color={Button.Colors.PRIMARY} onClick={downloadSettings}>{t("plugin.customSounds.export")}</Button>
+                        <Button color={Button.Colors.RED} onClick={resetOverrides}>{t("plugin.customSounds.reset")}</Button>
+                        <Button color={Button.Colors.WHITE} onClick={debugCustomSounds}>{t("plugin.customSounds.debug")}</Button>
                         <input
                             ref={fileInputRef}
                             type="file"
@@ -339,11 +340,11 @@ const settings = definePluginSettings({
                     </div>
 
                     <div className={cl("search")}>
-                        <Forms.FormTitle>Search Sounds</Forms.FormTitle>
+                        <Forms.FormTitle>{t("plugin.customSounds.search")}</Forms.FormTitle>
                         <TextInput
                             value={searchQuery}
                             onChange={e => setSearchQuery(e)}
-                            placeholder="Search by name or ID"
+                            placeholder={t("plugin.customSounds.placeholder")}
                         />
                     </div>
 
@@ -365,7 +366,7 @@ const settings = definePluginSettings({
                                                 await ensureDataURICached(currentOverride.selectedFileId);
                                             } catch (error) {
                                                 console.error(`[CustomSounds] Failed to cache data URI for ${type.id}:`, error);
-                                                showToast("Error loading custom sound file");
+                                                showToast(t("plugin.customSounds.toast.error"));
                                             }
                                         }
 
@@ -393,8 +394,12 @@ export function findOverride(id: string): SoundOverride | null {
 export default definePlugin({
     name: "CustomSounds",
     description: "Customize Discord's sounds.",
-    authors: [Devs.ScattrdBlade, Devs.TheKodeToad],
+    authors: [Devs.ScattrdBlade, Devs.TheKodeToad, PcDevs.MutanPlex],
     dependencies: ["AudioPlayerAPI"],
+
+    get displayDescription() {
+        return t("plugin.customSounds.description");
+    },
 
     settings,
     getCustomSoundURL,

@@ -62,7 +62,7 @@ export default definePlugin({
             if (!message.content) return;
             const buttonElement = (
                 <Menu.MenuItem
-                    id="vc-quote"
+                    id="pc-quote"
                     label="Quote"
                     icon={QuoteIcon}
                     action={() => openModal(props => <QuoteModal message={message} {...props} />)}

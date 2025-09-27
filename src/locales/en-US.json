@@ -2361,6 +2361,185 @@
                     "description": "Button 2 URL"
                 }
             }
+        },
+        "customSounds": {
+            "name": "CustomSounds",
+            "description": "Customize Discord's sounds.",
+            "search": "Search sounds",
+            "placeholder": "Search by name or ID",
+            "import": "Import",
+            "export": "Export",
+            "reset": "Reset All",
+            "debug": "Debug",
+            "toast": {
+                "error": "Error loading custom sound file",
+                "exported": "Exported {{count}} settings (audio files not included)",
+                "imported": "Settings imported successfully",
+                "importError": "Error importing settings. Check console for details.",
+                "reset": "All overrides reset successfully!",
+                "overrideDescription": "Override for {{soundName}}",
+                "previewSound": "Error playing sound.",
+                "playing": "Error playing custom sound. File may be corrupted.",
+                "invalidFile": "No custom sound file available for preview",
+                "uploaded": "File uploaded successfully: {{fileName}}",
+                "uploadedError": "Error uploading file: {{error}}",
+                "invalidExtension": "Invalid file type. Please upload an audio file.",
+                "uploading": "Uploading file...",
+                "deleted": "File deleted successfully",
+                "deleteError": "Error deleting file.",
+                "loadingError": "Error loading custom sound file"
+            },
+            "button": {
+                "preview": "Preview",
+                "stop": "Stop",
+                "volume": "Volume",
+                "soundSource": "Sound Source",
+                "customFile": "Custom File",
+                "uploadNew": "Upload New",
+                "delete": "Delete Selected File"
+            },
+            "option": {
+                "default": "Default",
+                "custom": "Custom",
+                "select": "Select a file..."
+            },
+            "type": {
+                "activityEnd": "Activity End",
+                "activityLaunch": "Activity Launch",
+                "activityUserJoin": "Activity User Join",
+                "activityUserLeft": "Activity User Left",
+                "asmrMessage": "ASMR Message",
+                "bitMessage": "Bit Message",
+                "bopMessage": "Bop Message",
+                "callCalling": "Call Calling",
+                "callRinging": "Call Ringing",
+                "clipError": "Clip Error",
+                "clipSave": "Clip Save",
+                "ddrDown": "DDR Down",
+                "ddrLeft": "DDR Left",
+                "ddrRight": "DDR Right",
+                "ddrUp": "DDR Up",
+                "deafen": "Deafen",
+                "discodo": "Discodo",
+                "disconnect": "Disconnect",
+                "duckyMessage": "Ducky Message",
+                "hangStatusSelect": "Hang Status Select",
+                "highfiveClap": "Highfive Clap",
+                "highfiveWhistle": "Highfive Whistle",
+                "humanMan": "Human Man",
+                "lofiMessage": "LoFi Message",
+                "mention1": "Mention 1",
+                "mention2": "Mention 2",
+                "mention3": "Mention 3",
+                "message1": "Message 1",
+                "message2": "Message 2",
+                "message3": "Message 3",
+                "mute": "Mute",
+                "overlayUnlock": "Overlay Unlock",
+                "poggermodeAchievement": "Poggermode Achievement",
+                "poggermodeApplause": "Poggermode Applause",
+                "poggermodeEnabled": "Poggermode Enabled",
+                "poggermodeMessage": "Poggermode Message",
+                "pttStart": "PTT Start",
+                "pttStop": "PTT Stop",
+                "reconnect": "Reconnect",
+                "robotMan": "Robot Man",
+                "stageWaiting": "Stage Waiting",
+                "streamEnded": "Stream Ended",
+                "streamStarted": "Stream Started",
+                "streamUserJoined": "Stream User Joined",
+                "streamUserLeft": "Stream User Left",
+                "success": "Success",
+                "undeafen": "Undeafen",
+                "unmute": "Unmute",
+                "userJoin": "User Join",
+                "userLeave": "User Leave",
+                "userMoved": "User Moved",
+                "vibingWumpus": "Vibing Wumpus"
+            }
+        },
+        "customTimestamps": {
+            "name": "CustomTimestamps",
+            "description": "Custom timestamps on messages and tooltips",
+            "demo": {
+                "cozy": "Click me to switch to Cozy format",
+                "compact": "Click me to switch to Compact format",
+                "lastWeek": "This message was sent in the last week",
+                "hover": "Hover over timestamps to see tooltip formats",
+                "edit": "Edit the formats below to see them live update here"
+            },
+            "modal": {
+                "title": "How to use:",
+                "moment": "Moment.js formatting documentation",
+                "hint": "Additionally you can use these in your inputs:",
+                "calendar": "enables dynamic date formatting such as",
+                "today": "Today",
+                "yesterday": "Yesterday",
+                "relative": "gives you times such as",
+                "relativeTime": "4 hours ago",
+                "preview": "Preview",
+                "format": "Calendar formats",
+                "howTo": "How to format the [calendar] value if used in the above timestamps."
+            },
+            "option": {
+                "cozyFormat": {
+                    "label": "Cozy mode",
+                    "description": "Time format to use in messages on cozy mode"
+                },
+                "compactFormat": {
+                    "label": "Compact mode",
+                    "description": "Time format on compact mode and hovering messages"
+                },
+                "tooltipFormat": {
+                    "label": "Tooltip",
+                    "description": "Time format to use on tooltips"
+                },
+                "ariaLabelFormat": {
+                    "label": "Aria label",
+                    "description": "Time format to use on aria labels"
+                },
+                "sameDayFormat": {
+                    "label": "Same day",
+                    "description": "[calendar] format for today",
+                    "default": "[Today at ] HH:mm:ss"
+                },
+                "lastDayFormat": {
+                    "label": "Last day",
+                    "description": "[calendar] format for yesterday",
+                    "default": "[Yesterday at ] HH:mm:ss"
+                },
+                "lastWeekFormat": {
+                    "label": "Last week",
+                    "description": "[calendar] format for last week"
+                },
+                "sameElseFormat": {
+                    "label": "Older else",
+                    "description": "[calendar] format for older dates"
+                }
+            }
+        },
+        "customUserColors": {
+            "name": "CustomUserColors",
+            "description": "Lets you add a custom color to any user, anywhere! Highly recommend to use with typingTweaks and roleColorEverywhere",
+            "option": {
+                "dmList": {
+                    "label": "DM List",
+                    "description": "Users with custom colors defined will have their name in the dm list colored"
+                },
+                "colorInServers": {
+                    "label": "Color In Servers",
+                    "description": "If name colors should be changed within servers"
+                }
+            },
+            "context": {
+                "setColor": "Set Color"
+            },
+            "modal": {
+                "custom": "Custom Color",
+                "pick": "Pick a color",
+                "delete": "Delete Entry",
+                "save": "Save"
+            }
         }
     }
 }

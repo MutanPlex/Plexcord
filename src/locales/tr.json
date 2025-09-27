@@ -2361,6 +2361,185 @@
                     "description": "Buton 2 bağlantısı"
                 }
             }
+        },
+        "customSounds": {
+            "name": "CustomSounds",
+            "description": "Discord’un seslerini özelleştirin.",
+            "search": "Sesleri ara",
+            "placeholder": "İsme veya ID’ye göre ara",
+            "import": "İçe Aktar",
+            "export": "Dışa Aktar",
+            "reset": "Tümünü Sıfırla",
+            "debug": "Hata Ayıklama",
+            "toast": {
+                "error": "Özel ses dosyası yüklenirken hata oluştu",
+                "exported": "{{count}} ayar dışa aktarıldı (ses dosyaları dahil değil)",
+                "imported": "Ayarlar başarıyla içe aktarıldı",
+                "importError": "Ayarlar içe aktarılırken hata oluştu. Detaylar için konsolu kontrol edin.",
+                "reset": "Tüm sesler başarıyla sıfırlandı!",
+                "overrideDescription": "{{soundName}} sesi değiştirildi",
+                "previewSound": "Ses çalınırken hata oluştu.",
+                "playing": "Özel ses çalınamadı. Dosya bozuk olabilir.",
+                "invalidFile": "Önizleme için özel ses dosyası yok",
+                "uploaded": "Dosya başarıyla yüklendi: {{fileName}}",
+                "uploadedError": "Dosya yüklenirken hata oluştu: {{error}}",
+                "invalidExtension": "Geçersiz dosya türü. Lütfen bir ses dosyası yükleyin.",
+                "uploading": "Dosya yükleniyor...",
+                "deleted": "Dosya başarıyla silindi",
+                "deleteError": "Dosya silinirken hata oluştu.",
+                "loadingError": "Özel ses dosyası yüklenirken hata oluştu"
+            },
+            "button": {
+                "preview": "Önizle",
+                "stop": "Durdur",
+                "volume": "Ses",
+                "soundSource": "Ses Kaynağı",
+                "customFile": "Özel Dosya",
+                "uploadNew": "Yeni Yükle",
+                "delete": "Seçili Dosyayı Sil"
+            },
+            "option": {
+                "default": "Varsayılan",
+                "custom": "Özel",
+                "select": "Bir dosya seç..."
+            },
+            "type": {
+                "activityEnd": "Etkinlik Bitti",
+                "activityLaunch": "Etkinlik Başlatıldı",
+                "activityUserJoin": "Etkinliğe Kullanıcı Katıldı",
+                "activityUserLeft": "Etkinlikten Kullanıcı Ayrıldı",
+                "asmrMessage": "ASMR Mesajı",
+                "bitMessage": "Bit Mesajı",
+                "bopMessage": "Bop Mesajı",
+                "callCalling": "Arama Yapılıyor",
+                "callRinging": "Arama Çalıyor",
+                "clipError": "Klip Hatası",
+                "clipSave": "Klip Kaydedildi",
+                "ddrDown": "DDR Aşağı",
+                "ddrLeft": "DDR Sol",
+                "ddrRight": "DDR Sağ",
+                "ddrUp": "DDR Yukarı",
+                "deafen": "Sağırlaştır",
+                "discodo": "Discodo",
+                "disconnect": "Bağlantı Kesildi",
+                "duckyMessage": "Ducky Mesajı",
+                "hangStatusSelect": "Durum Seçimini Askıya Al",
+                "highfiveClap": "Çak Bir Beşlik Alkış",
+                "highfiveWhistle": "Çak Bir Beşlik Islık",
+                "humanMan": "İnsan Adam",
+                "lofiMessage": "LoFi Mesajı",
+                "mention1": "Bahsetme 1",
+                "mention2": "Bahsetme 2",
+                "mention3": "Bahsetme 3",
+                "message1": "Mesaj 1",
+                "message2": "Mesaj 2",
+                "message3": "Mesaj 3",
+                "mute": "Sessize Al",
+                "overlayUnlock": "Katman Kilidi Açıldı",
+                "poggermodeAchievement": "Poggermode Başarımı",
+                "poggermodeApplause": "Poggermode Alkış",
+                "poggermodeEnabled": "Poggermode Etkin",
+                "poggermodeMessage": "Poggermode Mesajı",
+                "pttStart": "PTT Başlat",
+                "pttStop": "PTT Durdur",
+                "reconnect": "Yeniden Bağlan",
+                "robotMan": "Robot Adam",
+                "stageWaiting": "Sahne Bekleniyor",
+                "streamEnded": "Yayın Bitti",
+                "streamStarted": "Yayın Başladı",
+                "streamUserJoined": "Yayına Kullanıcı Katıldı",
+                "streamUserLeft": "Yayından Kullanıcı Ayrıldı",
+                "success": "Başarılı",
+                "undeafen": "Sağırlaştırmayı Kaldır",
+                "unmute": "Sessizliği Kaldır",
+                "userJoin": "Kullanıcı Katıldı",
+                "userLeave": "Kullanıcı Ayrıldı",
+                "userMoved": "Kullanıcı Taşındı",
+                "vibingWumpus": "Takılan Wumpus"
+            }
+        },
+        "customTimestamps": {
+            "name": "CustomTimestamps",
+            "description": "Mesajlar ve ipuçları (tooltip) üzerinde özel zaman damgaları",
+            "demo": {
+                "cozy": "Rahat biçime geçmek için bana tıkla",
+                "compact": "Kompakt biçime geçmek için bana tıkla",
+                "lastWeek": "Bu mesaj geçen hafta gönderildi",
+                "hover": "Zaman damgalarının üzerine gelerek araç ipucu biçimlerini görebilirsiniz",
+                "edit": "Aşağıdaki biçimleri düzenleyin, burada canlı olarak güncellendiğini görün"
+            },
+            "modal": {
+                "title": "Nasıl kullanılır:",
+                "moment": "Moment.js biçimlendirme dökümantasyonu",
+                "hint": "Ek olarak girişlerinizde şunları kullanabilirsiniz:",
+                "calendar": "dinamik tarih biçimlendirmesini etkinleştirir, örneğin",
+                "today": "Bugün",
+                "yesterday": "Dün",
+                "relative": "size şu tür zamanlar verir:",
+                "relativeTime": "4 saat önce",
+                "preview": "Önizleme",
+                "format": "Takvim biçimi",
+                "howTo": "Yukarıdaki zaman damgalarında kullanıldığında [calendar] değerini nasıl biçimlendireceğiniz."
+            },
+            "option": {
+                "cozyFormat": {
+                    "label": "Rahat mod",
+                    "description": "Mesajlarda rahat mod için kullanılacak zaman biçimi"
+                },
+                "compactFormat": {
+                    "label": "Kompakt mod",
+                    "description": "Kompakt modda ve mesajların üzerine gelindiğinde kullanılacak zaman biçimi"
+                },
+                "tooltipFormat": {
+                    "label": "Araç ipucu",
+                    "description": "Araç ipuçlarında kullanılacak zaman biçimi"
+                },
+                "ariaLabelFormat": {
+                    "label": "Aria etiketi",
+                    "description": "Aria etiketlerinde kullanılacak zaman biçimi"
+                },
+                "sameDayFormat": {
+                    "label": "Aynı gün",
+                    "description": "Bugün için [calendar] biçimi",
+                    "default": "[Bugün ] HH:mm:ss"
+                },
+                "lastDayFormat": {
+                    "label": "Dün",
+                    "description": "Dün için [calendar] biçimi",
+                    "default": "[Dün ] HH:mm:ss"
+                },
+                "lastWeekFormat": {
+                    "label": "Geçen hafta",
+                    "description": "Geçen hafta için [calendar] biçimi"
+                },
+                "sameElseFormat": {
+                    "label": "Daha eski",
+                    "description": "Daha eski tarihler için [calendar] biçimi"
+                }
+            }
+        },
+        "customUserColors": {
+            "name": "CustomUserColors",
+            "description": "Herhangi bir kullanıcıya, her yerde özel bir renk eklemenizi sağlar! typingTweaks ve roleColorEverywhere ile kullanmanız şiddetle tavsiye edilir",
+            "option": {
+                "dmList": {
+                    "label": "DM Listesi",
+                    "description": "Özel renk atanmış kullanıcıların isimleri DM listesinde renklendirilecek"
+                },
+                "colorInServers": {
+                    "label": "Sunucularda Renk",
+                    "description": "İsim renkleri sunucularda da değiştirilsin mi"
+                }
+            },
+            "context": {
+                "setColor": "Renk Ayarla"
+            },
+            "modal": {
+                "custom": "Özel Renk",
+                "pick": "Bir renk seç",
+                "delete": "Kaydı Sil",
+                "save": "Kaydet"
+            }
         }
     }
 }
