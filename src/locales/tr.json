@@ -2732,6 +2732,10 @@
         "disableCallIdle": {
             "name": "DisableCallIdle",
             "description": "3 dakika sonra DM sesli aramasından otomatik olarak atılmayı ve AFK ses kanalına taşınmayı devre dışı bırakır."
+        },
+        "disableCameras": {
+            "name": "DisableCameras",
+            "description": "Varsayılan olarak aramalarda kameraları devre dışı bırakır"
         }
     }
 }

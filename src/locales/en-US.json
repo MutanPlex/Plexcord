@@ -2732,6 +2732,10 @@
         "disableCallIdle": {
             "name": "DisableCallIdle",
             "description": "Disables automatically getting kicked from a DM voice call after 3 minutes and being moved to an AFK voice channel."
+        },
+        "disableCameras": {
+            "name": "DisableCameras",
+            "description": "Disables cameras in a call by default"
         }
     }
 }
