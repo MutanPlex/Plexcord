@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t, tJsx } from "@api/i18n";
 import { addMessagePreSendListener } from "@api/MessageEvents";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -19,17 +20,17 @@ function escapeRegex(string) {
 function warningEmbedNotice(trigger) {
     return new Promise<boolean>(resolve => {
         Alerts.show({
-            title: "Hold on!",
+            title: t("plugin.dontFilterMe.alert.title"),
             body: <div>
                 <Forms.FormText>
-                    Your message contains a term on the automod preset list. (Term "{trigger}")
+                    {tJsx("plugin.dontFilterMe.alert.content", { trigger })}
                 </Forms.FormText>
                 <Forms.FormText>
-                    There is a high chance your message will be blocked and potentially moderated by a server moderator.
+                    {t("plugin.dontFilterMe.alert.content2")}
                 </Forms.FormText>
             </div>,
-            confirmText: "Send Anyway",
-            cancelText: "Cancel",
+            confirmText: t("plugin.dontFilterMe.alert.confirm"),
+            cancelText: t("plugin.dontFilterMe.alert.cancel"),
             onConfirm: () => resolve(true),
             onCloseCallback: () => setImmediate(() => resolve(false)),
         });

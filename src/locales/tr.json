@@ -2758,6 +2758,17 @@
                     "description": "Emoji seçicisindeki kullanılamayan kategorileri kaldır"
                 }
             }
+        },
+        "dontFilterMe": {
+            "name": "DontFilterMe",
+            "description": "Mesajınız otomatik moderasyon hazır listesinde bulunan bir terim içeriyorsa sizi uyarır",
+            "alert": {
+                "title": "Dur bir dakika!",
+                "content": "Mesajınız otomatik moderasyon hazır listesinde bulunan bir terim içeriyor. (Terim '{{trigger}}')",
+                "content2": "Mesajınızın engellenme ve bir sunucu moderatörü tarafından işlem görme olasılığı yüksek.",
+                "confirm": "Yine de Gönder",
+                "cancel": "İptal"
+            }
         }
     }
 }

@@ -2758,6 +2758,17 @@
                     "description": "Remove unavailable categories from the emoji picker"
                 }
             }
+        },
+        "dontFilterMe": {
+            "name": "DontFilterMe",
+            "description": "Warns you if your message contains a term in the automod preset list",
+            "alert": {
+                "title": "Hold on!",
+                "content": "Your message contains a term on the automod preset list. (Term '{{trigger}}')",
+                "content2": "There is a high chance your message will be blocked and potentially moderated by a server moderator.",
+                "confirm": "Send Anyway",
+                "cancel": "Cancel"
+            }
         }
     }
 }
