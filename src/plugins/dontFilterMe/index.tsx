@@ -62,6 +62,11 @@ export default definePlugin({
     description: "Warns you if your message contains a term in the automod preset list",
     authors: [Devs.Samwich],
     dependencies: ["MessageEventsAPI"],
+
+    get displayDescription() {
+        return t("plugin.dontFilterMe.description");
+    },
+
     start() {
         addMessagePreSendListener(handleMessage);
     },
