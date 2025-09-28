@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { moment } from "@webpack/common";
@@ -25,6 +26,10 @@ export default definePlugin({
     name: "DontRoundMyTimestamps",
     authors: [Devs.Lexi],
     description: "Always rounds relative timestamps down, so 7.6y becomes 7y instead of 8y",
+
+    get displayDescription() {
+        return t("plugin.dontRoundMyTimestamps.description");
+    },
 
     start() {
         moment.relativeTimeRounding(Math.floor);
