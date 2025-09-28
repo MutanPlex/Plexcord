@@ -2728,6 +2728,10 @@
                 "stopping": "{{plugin}} eklentisi durdurulurken hata oluştu",
                 "starting": "{{plugin}} eklentisi başlatılırken hata oluştu"
             }
+        },
+        "disableCallIdle": {
+            "name": "DisableCallIdle",
+            "description": "3 dakika sonra DM sesli aramasından otomatik olarak atılmayı ve AFK ses kanalına taşınmayı devre dışı bırakır."
         }
     }
 }
