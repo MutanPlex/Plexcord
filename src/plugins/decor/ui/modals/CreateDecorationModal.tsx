@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t, tJsx } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Link } from "@components/Link";
 import { GUILD_ID, INVITE_KEY, RAW_SKU_ID } from "@plugins/decor/lib/constants";
@@ -70,7 +71,7 @@ function CreateDecorationModal(props: ModalProps) {
                 tag="h1"
                 style={{ flexGrow: 1 }}
             >
-                Create Decoration
+                {t("plugin.decor.create.title")}
             </Text>
             <ModalCloseButton onClick={props.onClose} />
         </ModalHeader>
@@ -80,11 +81,9 @@ function CreateDecorationModal(props: ModalProps) {
         >
             <ErrorBoundary>
                 <HelpMessage messageType={HelpMessageTypes.WARNING}>
-                    Make sure your decoration does not violate <Link
-                        href="https://github.com/decor-discord/.github/blob/main/GUIDELINES.md"
-                    >
-                        the guidelines
-                    </Link> before submitting it.
+                    {tJsx("plugin.decor.create.notViolate", {
+                        guidelines: <Link href="https://github.com/decor-discord/.github/blob/main/GUIDELINES.md">{t("plugin.decor.create.guidelines")}</Link>
+                    })}
                 </HelpMessage>
                 <div className={cl("create-decoration-modal-form-preview-container")}>
                     <div className={cl("create-decoration-modal-form")}>
@@ -92,23 +91,23 @@ function CreateDecorationModal(props: ModalProps) {
                         <Forms.FormSection title="File">
                             <FileUpload
                                 filename={file?.name}
-                                placeholder="Choose a file"
-                                buttonText="Browse"
+                                placeholder={t("plugin.decor.create.fileHolder")}
+                                buttonText={t("plugin.decor.button.browse")}
                                 filters={[{ name: "Decoration file", extensions: ["png", "apng"] }]}
                                 onFileSelect={setFile}
                             />
                             <Forms.FormText className={Margins.top8}>
-                                File should be APNG or PNG.
+                                {t("plugin.decor.create.file")}
                             </Forms.FormText>
                         </Forms.FormSection>
-                        <Forms.FormSection title="Name">
+                        <Forms.FormSection title={t("plugin.decor.create.nameTitle")}>
                             <TextInput
-                                placeholder="Companion Cube"
+                                placeholder={t("plugin.decor.create.nameHolder")}
                                 value={name}
                                 onChange={setName}
                             />
                             <Forms.FormText className={Margins.top8}>
-                                This name will be used when referring to this decoration.
+                                {t("plugin.decor.create.name")}
                             </Forms.FormText>
                         </Forms.FormSection>
                     </div>
@@ -120,25 +119,27 @@ function CreateDecorationModal(props: ModalProps) {
                     </div>
                 </div>
                 <HelpMessage messageType={HelpMessageTypes.INFO} className={Margins.bottom8}>
-                    To receive updates on your decoration's review, join <Link
-                        href={`https://discord.gg/${INVITE_KEY}`}
-                        onClick={async e => {
-                            e.preventDefault();
-                            if (!GuildStore.getGuild(GUILD_ID)) {
-                                const inviteAccepted = await openInviteModal(INVITE_KEY);
-                                if (inviteAccepted) {
+                    {tJsx("plugin.decor.help.update", {
+                        server: <Link
+                            href={`https://discord.gg/${INVITE_KEY}`}
+                            onClick={async e => {
+                                e.preventDefault();
+                                if (!GuildStore.getGuild(GUILD_ID)) {
+                                    const inviteAccepted = await openInviteModal(INVITE_KEY);
+                                    if (inviteAccepted) {
+                                        closeAllModals();
+                                        FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
+                                    }
+                                } else {
                                     closeAllModals();
                                     FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
+                                    NavigationRouter.transitionToGuild(GUILD_ID);
                                 }
-                            } else {
-                                closeAllModals();
-                                FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
-                                NavigationRouter.transitionToGuild(GUILD_ID);
-                            }
-                        }}
-                    >
-                        Decor's Discord server
-                    </Link> and allow direct messages.
+                            }}
+                        >
+                            {t("plugin.decor.help.server")}
+                        </Link>
+                    })}
                 </HelpMessage>
             </ErrorBoundary>
         </ModalContent>
@@ -152,14 +153,14 @@ function CreateDecorationModal(props: ModalProps) {
                 disabled={!file || !name}
                 submitting={submitting}
             >
-                Submit for Review
+                {t("plugin.decor.button.submit")}
             </Button>
             <Button
                 onClick={props.onClose}
                 color={Button.Colors.PRIMARY}
                 look={Button.Looks.LINK}
             >
-                Cancel
+                {t("plugin.decor.button.cancel")}
             </Button>
         </ModalFooter>
     </ModalRoot>;

@@ -2540,6 +2540,194 @@
                 "delete": "Kaydı Sil",
                 "save": "Kaydet"
             }
+        },
+        "dearrow": {
+            "name": "Dearrow",
+            "description": "YouTube embed başlıklarını ve küçük resimlerini daha az sansasyonel hale getirir, Dearrow tarafından desteklenmektedir",
+            "option": {
+                "hideButton": {
+                    "label": "Butonu Gizle",
+                    "description": "YouTube embed'lerinden Dearrow butonunu gizler"
+                },
+                "replaceElements": {
+                    "label": "Öğeleri Değiştir",
+                    "description": "Gömünün hangi öğelerinin değiştirileceğini seçin",
+                    "everything": "Her şey (Başlıklar & Küçük Resimler)",
+                    "title": "Başlıklar",
+                    "thumbnail": "Küçük Resimler"
+                },
+                "dearrowByDefault": {
+                    "label": "Varsayılan Olarak Dearrow",
+                    "description": "Videoları otomatik olarak Dearrow uygula"
+                }
+            },
+            "tooltip": {
+                "dearrowed": "Bu embed'e Dearrow uygulandı, geri yüklemek için tıklayın",
+                "dearrow": "Dearrow uygulamak için tıklayın"
+            }
+        },
+        "decodeBase64": {
+            "name": "DecodeBase64",
+            "description": "Herhangi bir mesajın base64 içeriğini çöz ve çözülen içeriği kopyala.",
+            "right": {
+                "decode": "Çözüleni Kopyala (Sol Tık) / Base64 Çöz (Sağ Tık)",
+                "copy": "Base64 Çöz (Sol Tık) / Çözüleni Kopyala (Sağ Tık)"
+            },
+            "option": {
+                "clickMethod": {
+                    "label": "Tıklama Yöntemi",
+                    "description": "Herhangi bir mesajın base64 içeriğini çözmek için butonun davranışını değiştirin.",
+                    "left": "Base64 içeriğini çözmek için sol tık.",
+                    "right": "Base64 içeriğini çözmek için sağ tık."
+                }
+            },
+            "modal": {
+                "title": "Çözülen Base64 İçeriği",
+                "content": "Çözülen İçerik",
+                "copy": "Çözülen İçeriği Kopyala {{index}}",
+                "copied": "Çözülen içerik panoya kopyalandı!"
+            }
+        },
+        "decor": {
+            "name": "Decor",
+            "description": "Kendi özel avatar süslemelerinizi oluşturun ve kullanın veya hazır ayarlardan en sevdiğinizi seçin.",
+            "presetPart": "{{name}} Hazır Ayarının Bir Parçası",
+            "createdBy": "{{author}} tarafından oluşturuldu",
+            "copy": "Hazır Ayar Kimliğini Kopyala",
+            "your": {
+                "title": "Süslemelerin",
+                "subtitle": "Kendi süslemelerinizi sağ tıklayarak silebilirsiniz."
+            },
+            "option": {
+                "changeDecoration": {
+                    "label": "Süslemeyi Değiştir",
+                    "description": "Avatar süslemenizi değiştirmek için Dekor'u etkinleştirin ve istemcinizi yeniden başlatın.",
+                    "also": "Ayrıca {{profiles}} sayfasından Dekor süslemelerine erişebilirsiniz.",
+                    "profiles": "Profiller"
+                },
+                "baseUrl": {
+                    "label": "Temel URL",
+                    "description": "Dekor API URL'si"
+                },
+                "agreedToGuidelines": {
+                    "label": "Kuralları Kabul Ettim",
+                    "description": "Kurallar kabul edildi"
+                }
+            },
+            "context": {
+                "decorationOptions": "Süsleme Seçenekleri",
+                "copyHash": "Süsleme Hash'ini Kopyala",
+                "deleteDecoration": "Süslemeyi Sil"
+            },
+            "alert": {
+                "delete": {
+                    "title": "Süslemeyi Sil",
+                    "body": "{{decoration}} süslemesini silmek istediğinizden emin misiniz?",
+                    "confirm": "Sil",
+                    "cancel": "İptal"
+                },
+                "logout": {
+                    "title": "Çıkış Yap",
+                    "body": "Dekor’dan çıkış yapmak istediğinizden emin misiniz?",
+                    "confirm": "Çıkış Yap",
+                    "cancel": "İptal"
+                }
+            },
+            "button": {
+                "change": "Süslemeyi Değiştir",
+                "remove": "Süslemeyi Kaldır",
+                "apply": "Uygula",
+                "cancel": "İptal",
+                "browse": "Göz At",
+                "submit": "İnceleme İçin Gönder",
+                "continue": "Devam Et",
+                "back": "Geri Dön"
+            },
+            "tooltip": {
+                "pendingReview": "Halihazırda incelemede olan bir süslemeniz var",
+                "pending": "İnceleme Bekliyor"
+            },
+            "join": {
+                "tooltip": "Süslemenizin incelemesi ve yeni hazır ayarlar yayınlandığında bildirim almak için Decor’un Discord sunucusuna katılın",
+                "button": "Discord Sunucusu"
+            },
+            "create": {
+                "title": "Süsleme Oluştur",
+                "notViolate": "Göndermeden önce süslemenizin {{guidelines}} ihlal etmediğinden emin olun.",
+                "guidelines": "kuralları",
+                "file": "Dosya APNG veya PNG olmalıdır.",
+                "fileHolder": "Bir dosya seç",
+                "name": "Bu ad, bu süslemeye atıfta bulunurken kullanılacaktır.",
+                "nameHolder": "Companion Cube",
+                "nameTitle": "Ad"
+            },
+            "help": {
+                "update": "Süslemenizin incelemesiyle ilgili güncellemeler almak için {{server}} sunucusuna katılın ve direkt mesajlara izin verin.",
+                "server": "Decor’un Discord"
+            },
+            "guidelines": {
+                "hold": "Bekleyin",
+                "suspended": "Bir süsleme göndererek {{guidelines}} kabul etmiş olursunuz. Bu kuralları okumamak gelecekte daha fazla süsleme oluşturma hakkınızın askıya alınmasına neden olabilir.",
+                "guidelines": "kuralları"
+            }
+        },
+        "demonstration": {
+            "name": "Demonstration",
+            "description": "Tema ekran görüntüleri almak için eklenti - kimlik belirten resim ve metinleri sansürler.",
+            "toolbox": {
+                "toggle": "Sansürle"
+            },
+            "keycode": "Kısayol tuşunu değiştirmek için {{keycode}} adresine göz at!",
+            "this": "bu aracın",
+            "okay": "Tamam!",
+            "option": {
+                "keyBind": {
+                    "label": "Kısayol Tuşu",
+                    "description": "Basınca temayı açıp kapatacak tuş"
+                },
+                "soundVolume": {
+                    "label": "Ses Seviyesi",
+                    "description": "Açma/kapama sesinin yüksekliği (0 = kapalı)"
+                },
+                "showConfirmationModal": {
+                    "label": "Onay Penceresini Göster",
+                    "description": "Kısayolu hatırlatmak için pencere göster"
+                }
+            },
+            "switch": {
+                "note": "Bu ayarı daha sonra yeniden etkinleştirebilirsiniz",
+                "disable": "Onay penceresi devre dışı bırakılsın mı?"
+            },
+            "shortcut": "Bu tüm metinleri sansürleyecek! Bunu devre dışı bırakmak için kısayolu hatırla:"
+        },
+        "devCompanion": {
+            "name": "DevCompanion",
+            "description": "Geliştirici Yardımcı Eklentisi. Çalışmayan veya garip davranan bir şey görürseniz (büyük ihtimalle bir hatadır) MutanPlex'e bildirin, ya etiketleyin ya da dm atın, teşekkürler!",
+            "reconnect": "Yeniden Bağlan",
+            "option": {
+                "notifyOnAutoConnect": {
+                    "label": "Otomatik Bağlantıda Bildir",
+                    "description": "Dev Companion otomatik olarak bağlandığında bildirim gösterilsin mi?"
+                },
+                "usePatchedModule": {
+                    "label": "Yamalanmış Modülü Kullan",
+                    "description": "İstekler çıkarıldığında, orijinal yerine mevcut yamalanmış modül (eğer yamalıysa) ile yanıtla."
+                },
+                "reloadAfterToggle": {
+                    "label": "Değiştirdikten Sonra Yeniden Yükle",
+                    "description": "Bir eklenti etkinleştirme/devre dışı bırakma komutu alındığında yeniden yükle."
+                }
+            },
+            "toast": {
+                "connected": "WebSocket'e bağlandı",
+                "disconnected": "Dev Companion Bağlantısı Kesildi",
+                "error": "Dev Companion Hatası",
+                "reload": "Yeniden Yükleme Gerekli",
+                "failed": "Bağımlılıklar başlatılamadı:",
+                "close": "Kapat",
+                "stopping": "{{plugin}} eklentisi durdurulurken hata oluştu",
+                "starting": "{{plugin}} eklentisi başlatılırken hata oluştu"
+            }
         }
     }
 }

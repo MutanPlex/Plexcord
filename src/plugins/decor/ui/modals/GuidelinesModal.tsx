@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t, tJsx } from "@api/i18n";
 import { Link } from "@components/Link";
 import { settings } from "@plugins/decor/settings";
 import { cl, DecorationModalStyles, requireAvatarDecorationModal } from "@plugins/decor/ui";
@@ -26,7 +27,7 @@ function GuidelinesModal(props: ModalProps) {
                 tag="h1"
                 style={{ flexGrow: 1 }}
             >
-                Hold on
+                {t("plugin.decor.guidelines.hold")}
             </Text>
             <ModalCloseButton onClick={props.onClose} />
         </ModalHeader>
@@ -34,11 +35,14 @@ function GuidelinesModal(props: ModalProps) {
             scrollbarType="none"
         >
             <Forms.FormText>
-                By submitting a decoration, you agree to <Link
-                    href="https://github.com/decor-discord/.github/blob/main/GUIDELINES.md"
-                >
-                    the guidelines
-                </Link>. Not reading these guidelines may get your account suspended from creating more decorations in the future.
+                {tJsx("plugin.decor.guidelines.suspended", {
+                    guidelines: <Link
+                        href="https://github.com/decor-discord/.github/blob/main/GUIDELINES.md"
+                    >
+                        {t("plugin.decor.create.guidelines")}
+                    </Link>
+                })
+                }
             </Forms.FormText>
         </ModalContent>
         <ModalFooter className={cl("modal-footer")}>
@@ -49,14 +53,14 @@ function GuidelinesModal(props: ModalProps) {
                     openCreateDecorationModal();
                 }}
             >
-                Continue
+                {t("plugin.decor.button.continue")}
             </Button>
             <Button
                 onClick={props.onClose}
                 color={Button.Colors.PRIMARY}
                 look={Button.Looks.LINK}
             >
-                Go Back
+                {t("plugin.decor.button.back")}
             </Button>
         </ModalFooter>
     </ModalRoot>;

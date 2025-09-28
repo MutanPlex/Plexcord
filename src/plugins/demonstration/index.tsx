@@ -6,6 +6,7 @@
  */
 
 import { playAudio } from "@api/AudioPlayer";
+import { t, tJsx } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Devs, PcDevs } from "@utils/constants";
@@ -38,7 +39,12 @@ const validKeycodes = [
 
 const settings = definePluginSettings({
     keyBind: {
-        description: "The key to toggle the theme when pressed",
+        get label() {
+            return t("plugin.demonstration.option.keyBind.label");
+        },
+        get description() {
+            return t("plugin.demonstration.option.keyBind.description");
+        },
         type: OptionType.STRING,
         default: "F6",
         isValid: (value: string) => {
@@ -49,13 +55,23 @@ const settings = definePluginSettings({
         }
     },
     soundVolume: {
-        description: "How loud the toggle sound is (0 to disable)",
+        get label() {
+            return t("plugin.demonstration.option.soundVolume.label");
+        },
+        get description() {
+            return t("plugin.demonstration.option.soundVolume.description");
+        },
         type: OptionType.SLIDER,
         default: 0.5,
         markers: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
     },
     showConfirmationModal: {
-        description: "Show modal to remind shortcut",
+        get label() {
+            return t("plugin.demonstration.option.showConfirmationModal.label");
+        },
+        get description() {
+            return t("plugin.demonstration.option.showConfirmationModal.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
     }
@@ -65,10 +81,10 @@ function ToggleModal() {
     const value = !settings.use(["showConfirmationModal"]).showConfirmationModal;
     return (
         <Switch
-            note="You can re-enable this setting later"
+            note={t("plugin.demonstration.switch.note")}
             value={value}
             onChange={v => { settings.store.showConfirmationModal = !v; }}>
-            Disable modal?
+            {t("plugin.demonstration.switch.disable")}
         </Switch>
     );
 }
@@ -92,7 +108,7 @@ function handleToggle() {
                     </ModalHeader>
                     <ModalContent className={cl("content")}>
                         <Forms.FormText>
-                            This will censor all text! To disable this, remember the shortcut:
+                            {t("plugin.demonstration.shortcut")}
                         </Forms.FormText>
                         <Text variant="heading-xl/bold" style={{ textAlign: "center", width: "100%", paddingTop: "20px", paddingBottom: "20px" }}>
                             {settings.store.keyBind}
@@ -105,7 +121,7 @@ function handleToggle() {
                             injectCSS();
                             playSound("https://github.com/MutanPlex/random-files/raw/main/sounds/demonstration/on.wav");
                         }}
-                    >Okay!</Button>
+                    >{t("plugin.demonstration.okay")}</Button>
                 </ModalRoot>
             ));
         } else {
@@ -136,13 +152,22 @@ export default definePlugin({
     authors: [Devs.Samwich, PcDevs.Panniku, PcDevs.MutanPlex],
     dependencies: ["AudioPlayerAPI"],
     settings,
-    toolboxActions: {
-        "Toggle Demonstration": (() => handleToggle())
+
+    get displayDescription() {
+        return t("plugin.demonstration.description");
+    },
+
+    get toolboxActions() {
+        return {
+            [t("plugin.demonstration.toolbox.toggle")]: (() => handleToggle())
+        };
     },
     settingsAboutComponent: () => {
         return (
             <>
-                <Text>To change your keycode, check out <a href="https://www.toptal.com/developers/keycode" target="_blank" rel="noreferrer noopener">this tool</a>!</Text>
+                <Text>{tJsx("plugin.demonstration.keycode", {
+                    keycode: <a href="https://www.toptal.com/developers/keycode" target="_blank" rel="noreferrer noopener">{t("plugin.demonstration.this")}</a>
+                })}</Text>
             </>
         );
     },

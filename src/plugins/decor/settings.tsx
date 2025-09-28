@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t, tJsx } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Link } from "@components/Link";
 import { Margins } from "@utils/margins";
@@ -17,36 +18,51 @@ import DecorSection from "./ui/components/DecorSection";
 
 export const settings = definePluginSettings({
     changeDecoration: {
+        get label() {
+            return t("plugin.decor.option.changeDecoration.label");
+        },
         type: OptionType.COMPONENT,
         component() {
             if (!Plexcord.Plugins.plugins.Decor.started) return <Forms.FormText>
-                Enable Decor and restart your client to change your avatar decoration.
+                {t("plugin.decor.option.changeDecoration.description")}
             </Forms.FormText>;
 
             return <div>
                 <DecorSection hideTitle hideDivider noMargin />
                 <Forms.FormText className={classes(Margins.top8, Margins.bottom8)}>
-                    You can also access Decor decorations from the <Link
-                        href="/settings/profile-customization"
-                        onClick={e => {
-                            e.preventDefault();
-                            closeAllModals();
-                            FluxDispatcher.dispatch({ type: "USER_SETTINGS_MODAL_SET_SECTION", section: "Profile Customization" });
-                        }}
-                    >Profiles</Link> page.
+                    {tJsx("plugin.decor.option.changeDecoration.also", {
+                        profiles: <Link
+                            href="/settings/profile-customization"
+                            onClick={e => {
+                                e.preventDefault();
+                                closeAllModals();
+                                FluxDispatcher.dispatch({ type: "USER_SETTINGS_MODAL_SET_SECTION", section: "Profile Customization" });
+                            }}
+                        >{t("plugin.decor.option.changeDecoration.profiles")}</Link>
+                    })}
                 </Forms.FormText>
             </div>;
         }
     },
     baseUrl: {
+        get label() {
+            return t("plugin.decor.option.baseUrl.label");
+        },
+        get description() {
+            return t("plugin.decor.option.baseUrl.description");
+        },
         type: OptionType.STRING,
         hidden: true,
-        description: "Decor api url",
         default: "https://decor.fieryflames.dev"
     },
     agreedToGuidelines: {
+        get label() {
+            return t("plugin.decor.option.agreedToGuidelines.label");
+        },
+        get description() {
+            return t("plugin.decor.option.agreedToGuidelines.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Agreed to guidelines",
         hidden: true,
         default: false
     }

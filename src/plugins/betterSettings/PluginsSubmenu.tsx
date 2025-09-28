@@ -15,10 +15,10 @@ import Plugins from "~plugins";
 
 function onRestartNeeded() {
     Alerts.show({
-        title: t("plugins.betterSettings.alert.title"),
-        body: <p>{t("plugins.betterSettings.alert.restart")}</p>,
-        confirmText: t("plugins.betterSettings.alert.confirm"),
-        cancelText: t("plugins.betterSettings.alert.cancel"),
+        title: t("plugin.betterSettings.alert.title"),
+        body: <p>{t("plugin.betterSettings.alert.restart")}</p>,
+        confirmText: t("plugin.betterSettings.alert.confirm"),
+        cancelText: t("plugin.betterSettings.alert.cancel"),
         onConfirm: () => location.reload()
     });
 }

@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+import { t, tJsx } from "@api/i18n";
 import { addMessagePopoverButton, removeMessagePopoverButton } from "@api/MessagePopover";
 import { definePluginSettings } from "@api/Settings";
 import { CodeBlock } from "@components/CodeBlock";
@@ -70,12 +71,12 @@ function openDecodedBase64Modal(decodedContent) {
         <ErrorBoundary>
             <ModalRoot {...props} size={ModalSize.LARGE}>
                 <ModalHeader>
-                    <Text variant="heading-lg/semibold" style={{ flexGrow: 1 }}>Decoded Base64 Content</Text>
+                    <Text variant="heading-lg/semibold" style={{ flexGrow: 1 }}>{t("plugin.decodeBase64.modal.title")}</Text>
                     <ModalCloseButton onClick={() => closeModal(key)} />
                 </ModalHeader>
                 <ModalContent>
                     <div style={{ padding: "16px 0" }}>
-                        <Forms.FormTitle tag="h5">Decoded Content</Forms.FormTitle>
+                        <Forms.FormTitle tag="h5">{t("plugin.decodeBase64.modal.content")}</Forms.FormTitle>
                         {decodedContent.map((content, index) => (
                             <CodeBlock key={index} content={content} lang="" />
                         ))}
@@ -84,8 +85,10 @@ function openDecodedBase64Modal(decodedContent) {
                 <ModalFooter>
                     <Flex cellSpacing={10}>
                         {decodedContent.map((content, index) => (
-                            <Button key={index} onClick={() => copyWithToast(content, "Decoded content copied to clipboard!")}>
-                                Copy Decoded Content {index + 1}
+                            <Button key={index} onClick={() => copyWithToast(content, t("plugin.decodeBase64.modal.copied"))}>
+                                {tJsx("plugin.decodeBase64.modal.copy", {
+                                    index: index + 1
+                                })}
                             </Button>
                         ))}
                     </Flex>
@@ -97,12 +100,19 @@ function openDecodedBase64Modal(decodedContent) {
 
 const settings = definePluginSettings({
     clickMethod: {
-        description: "Change the button to decode base64 content of any message.",
+        get label() {
+            return t("plugin.decodeBase64.option.clickMethod.label");
+        },
+        get description() {
+            return t("plugin.decodeBase64.option.clickMethod.description");
+        },
         type: OptionType.SELECT,
-        options: [
-            { label: "Left Click to decode the base64 content.", value: "Left", default: true },
-            { label: "Right click to decode the base64 content.", value: "Right" }
-        ]
+        get options() {
+            return [
+                { label: t("plugin.decodeBase64.option.clickMethod.left"), value: "Left", default: true },
+                { label: t("plugin.decodeBase64.option.clickMethod.right"), value: "Right" }
+            ];
+        }
     }
 });
 
@@ -112,6 +122,10 @@ export default definePlugin({
     authors: [PcDevs.ThePirateStoner, PcDevs.MutanPlex],
     dependencies: ["MessagePopoverAPI"],
     settings,
+
+    get displayDescription() {
+        return t("plugin.decodeBase64.description");
+    },
 
     start() {
         addMessagePopoverButton("DecodeBase64", msg => {
@@ -140,8 +154,8 @@ export default definePlugin({
             };
 
             const label = settings.store.clickMethod === "Right"
-                ? "Copy Decoded (Left Click) / Decode Base64 (Right Click)"
-                : "Decode Base64 (Left Click) / Copy Decoded (Right Click)";
+                ? t("plugin.decodeBase64.right.decode")
+                : t("plugin.decodeBase64.right.copy");
 
             return {
                 label,

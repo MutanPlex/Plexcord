@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { showNotice } from "@api/Notices";
 import { Settings } from "@api/Settings";
 import { canonicalizeMatch } from "@utils/patches";
@@ -135,7 +136,7 @@ export function toggleEnabled(name: string, beforeReload: (error?: string) => vo
             }
             Toasts.show({
                 id: Toasts.genId(),
-                message: "Reload Needed",
+                message: t("plugin.devCompanion.toast.reload"),
                 type: Toasts.Type.MESSAGE,
                 options: {
                     duration: 5000,
@@ -157,7 +158,7 @@ export function toggleEnabled(name: string, beforeReload: (error?: string) => vo
         const { restartNeeded, failures } = Plexcord.Plugins.startDependenciesRecursive(plugin);
         if (failures.length) {
             console.error(`Failed to start dependencies for ${plugin.name}: ${failures.join(", ")}`);
-            showNotice("Failed to start dependencies: " + failures.join(", "), "Close", () => null);
+            showNotice(t("plugin.devCompanion.toast.failed") + " " + failures.join(", "), t("plugin.devCompanion.toast.close"), () => null);
             beforeReturn();
             return;
         } else if (restartNeeded) {
@@ -189,7 +190,7 @@ export function toggleEnabled(name: string, beforeReload: (error?: string) => vo
     if (!result) {
         settings.enabled = false;
 
-        const msg = `Error while ${wasEnabled ? "stopping" : "starting"} plugin ${plugin.name}`;
+        const msg = wasEnabled ? t("plugin.devCompanion.toast.disableFailed", { plugin: plugin.name }) : t("plugin.devCompanion.toast.enableFailed", { plugin: plugin.name });
         console.error(msg);
         showErrorToast(msg);
         beforeReturn();

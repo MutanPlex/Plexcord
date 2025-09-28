@@ -2540,6 +2540,194 @@
                 "delete": "Delete Entry",
                 "save": "Save"
             }
+        },
+        "dearrow": {
+            "name": "Dearrow",
+            "description": "Makes YouTube embed titles and thumbnails less sensationalist, powered by Dearrow",
+            "option": {
+                "hideButton": {
+                    "label": "Hide Button",
+                    "description": "Hides the Dearrow button from YouTube embeds"
+                },
+                "replaceElements": {
+                    "label": "Replace Elements",
+                    "description": "Choose which elements of the embed will be replaced",
+                    "everything": "Everything (Titles & Thumbnails)",
+                    "title": "Titles",
+                    "thumbnail": "Thumbnails"
+                },
+                "dearrowByDefault": {
+                    "label": "Dearrow By Default",
+                    "description": "Dearrow videos automatically"
+                }
+            },
+            "tooltip": {
+                "dearrowed": "This embed has been dearrowed, click to restore",
+                "dearrow": "Click to dearrow"
+            }
+        },
+        "decodeBase64": {
+            "name": "DecodeBase64",
+            "description": "Decode base64 content of any message and copy the decoded content.",
+            "right": {
+                "decode": "Copy Decoded (Left Click) / Decode Base64 (Right Click)",
+                "copy": "Decode Base64 (Left Click) / Copy Decoded (Right Click)"
+            },
+            "option": {
+                "clickMethod": {
+                    "label": "Click Method",
+                    "description": "Change the button to decode base64 content of any message.",
+                    "left": "Left Click to decode the base64 content.",
+                    "right": "Right click to decode the base64 content."
+                }
+            },
+            "modal": {
+                "title": "Decoded Base64 Content",
+                "content": "Decoded Content",
+                "copy": "Copy Decoded Content {{index}}",
+                "copied": "Decoded content copied to clipboard!"
+            }
+        },
+        "decor": {
+            "name": "Decor",
+            "description": "Create and use your own custom avatar decorations, or pick your favorite from the presets.",
+            "presetPart": "Part of the {{name}} Preset",
+            "createdBy": "Created by {{author}}",
+            "copy": "Copy Preset ID",
+            "your": {
+                "title": "Your Decorations",
+                "subtitle": "You can delete your own decorations by right clicking on them."
+            },
+            "option": {
+                "changeDecoration": {
+                    "label": "Change Decoration",
+                    "description": "Enable Decor and restart your client to change your avatar decoration.",
+                    "also": "You can also access Decor decorations from the {{profiles}} page.",
+                    "profiles": "Profiles"
+                },
+                "baseUrl": {
+                    "label": "Base URL",
+                    "description": "Decor api url"
+                },
+                "agreedToGuidelines": {
+                    "label": "Agreed To Guidelines",
+                    "description": "Agreed to guidelines"
+                }
+            },
+            "context": {
+                "decorationOptions": "Decoration Options",
+                "copyHash": "Copy Decoration Hash",
+                "deleteDecoration": "Delete Decoration"
+            },
+            "alert": {
+                "delete": {
+                    "title": "Delete Decoration",
+                    "body": "Are you sure you want to delete {{decoration}}?",
+                    "confirm": "Delete",
+                    "cancel": "Cancel"
+                },
+                "logout": {
+                    "title": "Log out",
+                    "body": "Are you sure you want to log out of Decor?",
+                    "confirm": "Log Out",
+                    "cancel": "Cancel"
+                }
+            },
+            "button": {
+                "change": "Change Decoration",
+                "remove": "Remove Decoration",
+                "apply": "Apply",
+                "cancel": "Cancel",
+                "browse": "Browse",
+                "submit": "Submit for Review",
+                "continue": "Continue",
+                "back": "Go Back"
+            },
+            "tooltip": {
+                "pendingReview": "You already have a decoration pending review",
+                "pending": "Pending Review"
+            },
+            "join": {
+                "tooltip": "Join Decor's Discord Server for notifications on your decoration's review, and when new presets are released",
+                "button": "Discord Server"
+            },
+            "create": {
+                "title": "Create Decoration",
+                "notViolate": "Make sure your decoration does not violate {{guidelines}} before submitting it.",
+                "guidelines": "the guidelines",
+                "file": "File should be APNG or PNG.",
+                "fileHolder": "Choose a file",
+                "name": "This name will be used when referring to this decoration.",
+                "nameHolder": "Companion Cube",
+                "nameTitle": "Name"
+            },
+            "help": {
+                "update": "To receive updates on your decoration's review, join {{server}} and allow direct messages.",
+                "server": "Decor's Discord Server"
+            },
+            "guidelines": {
+                "hold": "Hold on",
+                "suspended": "By submitting a decoration, you agree to {{guidelines}}. Not reading these guidelines may get your account suspended from creating more decorations in the future.",
+                "guidelines": "the guidelines"
+            }
+        },
+        "demonstration": {
+            "name": "Demonstration",
+            "description": "Plugin for taking theme screenshots - censors identifying images and text.",
+            "toolbox": {
+                "toggle": "Toggle Demonstration"
+            },
+            "keycode": "To change your keycode, check out {{keycode}}!",
+            "this": "this tool",
+            "okay": "Okay!",
+            "option": {
+                "keyBind": {
+                    "label": "Key Bind",
+                    "description": "The key to toggle the theme when pressed"
+                },
+                "soundVolume": {
+                    "label": "Sound Volume",
+                    "description": "How loud the toggle sound is (0 to disable)"
+                },
+                "showConfirmationModal": {
+                    "label": "Show Confirmation Modal",
+                    "description": "Show modal to remind shortcut"
+                }
+            },
+            "switch": {
+                "note": "You can re-enable this setting later",
+                "disable": "Disable modal?"
+            },
+            "shortcut": "This will censor all text! To disable this, remember the shortcut:"
+        },
+        "devCompanion": {
+            "name": "DevCompanion",
+            "description": "Dev Companion Plugin. Please report anything not working or being weird (most likely its a bug) to MutanPlex, either ping or dm, thanks!",
+            "reconnect": "Reconnect",
+            "option": {
+                "notifyOnAutoConnect": {
+                    "label": "Notify on Auto Connect",
+                    "description": "Whether to notify when Dev Companion has automatically connected."
+                },
+                "usePatchedModule": {
+                    "label": "Use Patched Module",
+                    "description": "On extract requests, reply with the current patched module (if it is patched) instead of the original."
+                },
+                "reloadAfterToggle": {
+                    "label": "Reload After Toggle",
+                    "description": "Reload after a disable/enable plugin command is received."
+                }
+            },
+            "toast": {
+                "connected": "Connected to WebSocket",
+                "disconnected": "Dev Companion Disconnected",
+                "error": "Dev Companion Error",
+                "reload": "Reload Needed",
+                "failed": "Failed to start dependencies:",
+                "close": "Close",
+                "stopping": "Error while stopping plugin {{plugin}}",
+                "starting": "Error while starting plugin {{plugin}}"
+            }
         }
     }
 }

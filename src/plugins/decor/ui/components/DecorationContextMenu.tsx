@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { CopyIcon, DeleteIcon } from "@components/Icons";
 import { Decoration } from "@plugins/decor/lib/api";
 import { useCurrentUserDecorationsStore } from "@plugins/decor/lib/stores/CurrentUserDecorationsStore";
@@ -18,26 +19,26 @@ export default function DecorationContextMenu({ decoration }: { decoration: Deco
     return <Menu.Menu
         navId={cl("decoration-context-menu")}
         onClose={ContextMenuApi.closeContextMenu}
-        aria-label="Decoration Options"
+        aria-label={t("plugin.decor.context.decorationOptions")}
     >
         <Menu.MenuItem
             id={cl("decoration-context-menu-copy-hash")}
-            label="Copy Decoration Hash"
+            label={t("plugin.decor.context.copyDecorationHash")}
             icon={CopyIcon}
             action={() => copyToClipboard(decoration.hash)}
         />
         {decoration.authorId === UserStore.getCurrentUser().id &&
             <Menu.MenuItem
                 id={cl("decoration-context-menu-delete")}
-                label="Delete Decoration"
+                label={t("plugin.decor.context.deleteDecoration")}
                 color="danger"
                 icon={DeleteIcon}
                 action={() => Alerts.show({
-                    title: "Delete Decoration",
-                    body: `Are you sure you want to delete ${decoration.alt}?`,
-                    confirmText: "Delete",
+                    title: t("plugin.decor.alert.delete.title"),
+                    body: t("plugin.decor.alert.delete.body", { decoration }),
+                    confirmText: t("plugin.decor.alert.delete.confirm"),
                     confirmColor: cl("danger-btn"),
-                    cancelText: "Cancel",
+                    cancelText: t("plugin.decor.alert.delete.cancel"),
                     onConfirm() {
                         deleteDecoration(decoration);
                     }

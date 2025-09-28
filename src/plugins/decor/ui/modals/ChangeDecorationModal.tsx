@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t, tJsx } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { User } from "@plexcord/discord-types";
@@ -123,8 +124,8 @@ function ChangeDecorationModal(props: ModalProps) {
 
     const data = [
         {
-            title: "Your Decorations",
-            subtitle: "You can delete your own decorations by right clicking on them.",
+            title: t("plugin.decor.your.title"),
+            subtitle: t("plugin.decor.your.subtitle"),
             sectionKey: "ownDecorations",
             items: ["none", ...ownDecorations, "create"]
         },
@@ -149,7 +150,7 @@ function ChangeDecorationModal(props: ModalProps) {
                 tag="h1"
                 style={{ flexGrow: 1 }}
             >
-                Change Decoration
+                {t("plugin.decor.button.change")}
             </Text>
             <ModalCloseButton onClick={props.onClose} />
         </ModalHeader>
@@ -169,7 +170,7 @@ function ChangeDecorationModal(props: ModalProps) {
                                         onSelect={() => setTryingDecoration(null)}
                                     />;
                                 case "create":
-                                    return <Tooltip text="You already have a decoration pending review" shouldShow={hasDecorationPendingReview}>
+                                    return <Tooltip text={t("plugin.decor.tooltip.pendingReview")} shouldShow={hasDecorationPendingReview}>
                                         {tooltipProps => <DecorationGridCreate
                                             className={cl("change-decoration-modal-decoration")}
                                             {...tooltipProps}
@@ -178,7 +179,7 @@ function ChangeDecorationModal(props: ModalProps) {
                                     </Tooltip>;
                             }
                         } else {
-                            return <Tooltip text={"Pending review"} shouldShow={item.reviewed === false}>
+                            return <Tooltip text={t("plugin.decor.tooltip.pending")} shouldShow={item.reviewed === false}>
                                 {tooltipProps => (
                                     <DecorDecorationGridDecoration
                                         {...tooltipProps}
@@ -201,7 +202,7 @@ function ChangeDecorationModal(props: ModalProps) {
                         avatarDecorationOverride={avatarDecorationOverride}
                         user={UserStore.getCurrentUser()}
                     />
-                    {isActiveDecorationPreset && <Forms.FormTitle className="">Part of the {activeDecorationPreset.name} Preset</Forms.FormTitle>}
+                    {isActiveDecorationPreset && <Forms.FormTitle className="">{tJsx("plugin.decor.title.presetPart", { name: activeDecorationPreset.name })}</Forms.FormTitle>}
                     {typeof activeSelectedDecoration === "object" &&
                         <Text
                             variant="text-sm/semibold"
@@ -212,12 +213,12 @@ function ChangeDecorationModal(props: ModalProps) {
                     }
                     {activeDecorationHasAuthor && (
                         <Text key={`createdBy-${activeSelectedDecoration.authorId}`}>
-                            Created by {Parser.parse(`<@${activeSelectedDecoration.authorId}>`)}
+                            {tJsx("plugin.decor.createdBy", { author: Parser.parse(`<@${activeSelectedDecoration.authorId}>`) })}
                         </Text>
                     )}
                     {isActiveDecorationPreset && (
                         <Button onClick={() => copyWithToast(activeDecorationPreset.id)}>
-                            Copy Preset ID
+                            {t("plugin.decor.copy")}
                         </Button>
                     )}
                 </div>
@@ -231,24 +232,24 @@ function ChangeDecorationModal(props: ModalProps) {
                     }}
                     disabled={!isTryingDecoration}
                 >
-                    Apply
+                    {t("plugin.decor.button.apply")}
                 </Button>
                 <Button
                     onClick={props.onClose}
                     color={Button.Colors.PRIMARY}
                     look={Button.Looks.LINK}
                 >
-                    Cancel
+                    {t("plugin.decor.button.cancel")}
                 </Button>
             </div>
             <div className={cl("change-decoration-modal-footer-btn-container")}>
                 <Button
                     onClick={() => Alerts.show({
-                        title: "Log Out",
-                        body: "Are you sure you want to log out of Decor?",
-                        confirmText: "Log Out",
+                        title: t("plugin.decor.alert.logout.title"),
+                        body: t("plugin.decor.alert.logout.body"),
+                        confirmText: t("plugin.decor.alert.logout.confirm"),
                         confirmColor: cl("danger-btn"),
-                        cancelText: "Cancel",
+                        cancelText: t("plugin.decor.alert.logout.cancel"),
                         onConfirm() {
                             useAuthorizationStore.getState().remove(UserStore.getCurrentUser().id);
                             props.onClose();
@@ -257,9 +258,9 @@ function ChangeDecorationModal(props: ModalProps) {
                     color={Button.Colors.PRIMARY}
                     look={Button.Looks.LINK}
                 >
-                    Log Out
+                    {t("plugin.decor.alert.logout.title")}
                 </Button>
-                <Tooltip text="Join Decor's Discord Server for notifications on your decoration's review, and when new presets are released">
+                <Tooltip text={t("plugin.decor.join.tooltip")}>
                     {tooltipProps => <Button
                         {...tooltipProps}
                         onClick={async () => {
@@ -278,7 +279,7 @@ function ChangeDecorationModal(props: ModalProps) {
                         color={Button.Colors.PRIMARY}
                         look={Button.Looks.LINK}
                     >
-                        Discord Server
+                        {t("plugin.decor.join.button")}
                     </Button>}
                 </Tooltip>
             </div>

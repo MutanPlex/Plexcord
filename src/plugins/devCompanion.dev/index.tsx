@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
@@ -30,17 +31,32 @@ export const logger = new Logger("DevCompanion");
 
 export const settings = definePluginSettings({
     notifyOnAutoConnect: {
-        description: "Whether to notify when Dev Companion has automatically connected.",
+        get label() {
+            return t("plugin.devCompanion.option.notifyOnAutoConnect.label");
+        },
+        get description() {
+            return t("plugin.devCompanion.option.notifyOnAutoConnect.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     },
     usePatchedModule: {
-        description: "On extract requests, reply with the current patched module (if it is patched) instead of the original.",
+        get label() {
+            return t("plugin.devCompanion.option.usePatchedModule.label");
+        },
+        get description() {
+            return t("plugin.devCompanion.option.usePatchedModule.description");
+        },
         default: true,
         type: OptionType.BOOLEAN,
     },
     reloadAfterToggle: {
-        description: "Reload after a disable/enable plugin command is recived.",
+        get label() {
+            return t("plugin.devCompanion.option.reloadAfterToggle.label");
+        },
+        get description() {
+            return t("plugin.devCompanion.option.reloadAfterToggle.description");
+        },
         default: true,
         type: OptionType.BOOLEAN
     }
@@ -53,11 +69,17 @@ export default definePlugin({
     reporterTestable: ReporterTestable.None,
     settings,
 
-    toolboxActions: {
-        "Reconnect"() {
-            socket?.close(1000, "Reconnecting");
-            initWs(true);
-        }
+    get displayDescription() {
+        return t("plugin.devCompanion.description");
+    },
+
+    get toolboxActions() {
+        return {
+            [t("plugin.devCompanion.reconnect")]() {
+                socket?.close(1000, "Reconnecting");
+                initWs(true);
+            }
+        };
     },
 
     start() {
