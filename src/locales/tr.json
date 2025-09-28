@@ -2736,6 +2736,28 @@
         "disableCameras": {
             "name": "DisableCameras",
             "description": "Varsayılan olarak aramalarda kameraları devre dışı bırakır"
+        },
+        "disCleaner": {
+            "name": "DisCleaner",
+            "description": "Discord'dan mağazaları ve diğer gereksiz şeyleri kaldırır",
+            "option": {
+                "dms": {
+                    "label": "DM'ler",
+                    "description": "DM listesinin üstündeki mağazaları kaldır"
+                },
+                "billing": {
+                    "label": "Faturalandırma",
+                    "description": "Faturalandırma ayarlarını kaldır"
+                },
+                "gift": {
+                    "label": "Hediye",
+                    "description": "Hediye butonunu kaldır"
+                },
+                "emojiList": {
+                    "label": "Emoji Listesi",
+                    "description": "Emoji seçicisindeki kullanılamayan kategorileri kaldır"
+                }
+            }
         }
     }
 }

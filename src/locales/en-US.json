@@ -2736,6 +2736,28 @@
         "disableCameras": {
             "name": "DisableCameras",
             "description": "Disables cameras in a call by default"
+        },
+        "disCleaner": {
+            "name": "DisCleaner",
+            "description": "Removes shops and other useless things from Discord",
+            "option": {
+                "dms": {
+                    "label": "DMs",
+                    "description": "Remove shops above DMs list"
+                },
+                "billing": {
+                    "label": "Billing",
+                    "description": "Remove billing settings"
+                },
+                "gift": {
+                    "label": "Gift",
+                    "description": "Remove gift button"
+                },
+                "emojiList": {
+                    "label": "Emoji List",
+                    "description": "Remove unavailable categories from the emoji picker"
+                }
+            }
         }
     }
 }

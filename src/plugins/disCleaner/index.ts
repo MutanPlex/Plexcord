@@ -5,33 +5,54 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 export const settings = definePluginSettings({
     dms: {
+        get label() {
+            return t("plugin.disCleaner.option.dms.label");
+        },
+        get description() {
+            return t("plugin.disCleaner.option.dms.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Remove shops above DMs list",
         restartNeeded: true,
     },
     billing: {
+        get label() {
+            return t("plugin.disCleaner.option.billing.label");
+        },
+        get description() {
+            return t("plugin.disCleaner.option.billing.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Remove billing settings",
         restartNeeded: true,
     },
     gift: {
+        get label() {
+            return t("plugin.disCleaner.option.gift.label");
+        },
+        get description() {
+            return t("plugin.disCleaner.option.gift.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Remove gift button",
         restartNeeded: true,
     },
     emojiList: {
+        get label() {
+            return t("plugin.disCleaner.option.emojiList.label");
+        },
+        get description() {
+            return t("plugin.disCleaner.option.emojiList.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Remove unavailable categories from the emoji picker",
         restartNeeded: true,
     },
 });
@@ -41,6 +62,10 @@ export default definePlugin({
     description: "Removes shops and other useless things from Discord",
     authors: [Devs.Kyuuhachi, PcDevs.MutanPlex],
     settings,
+
+    get displayDescription() {
+        return t("plugin.disCleaner.description");
+    },
 
     patches: [
         {
