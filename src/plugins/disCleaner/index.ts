@@ -22,6 +22,17 @@ export const settings = definePluginSettings({
         default: true,
         restartNeeded: true,
     },
+    serverBoost: {
+        get label() {
+            return t("plugin.disCleaner.option.serverBoost.label");
+        },
+        get description() {
+            return t("plugin.disCleaner.option.serverBoost.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: true,
+    },
     billing: {
         get label() {
             return t("plugin.disCleaner.option.billing.label");
@@ -42,6 +53,17 @@ export const settings = definePluginSettings({
         },
         type: OptionType.BOOLEAN,
         default: true,
+        restartNeeded: true,
+    },
+    gif: {
+        get label() {
+            return t("plugin.disCleaner.option.gif.label");
+        },
+        get description() {
+            return t("plugin.disCleaner.option.gif.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: false,
         restartNeeded: true,
     },
     emojiList: {
@@ -84,6 +106,15 @@ export default definePlugin({
             predicate: () => settings.store.dms,
         },
         {
+            // Channel list server boost progress bar
+            find: "useGuildActionRow",
+            replacement: {
+                match: /\i\.premiumProgressBarEnabled&&[^,]+/,
+                replace: "null"
+            },
+            predicate: () => settings.store.serverBoost,
+        },
+        {
             // Above DMs, keyboard nav
             find: ".hasLibraryApplication()&&!",
             replacement: [
@@ -103,7 +134,7 @@ export default definePlugin({
             find: "#{intl::BILLING_SETTINGS}",
             replacement: [
                 {
-                    match: /(?<=#{intl::BILLING_SETTINGS}\),)/,
+                    match: /(?<=#{intl::BILLING_SETTINGS}[^,]*?,)(?=div)/,
                     replace: "capitalism:true,"
                 },
                 {
@@ -115,20 +146,25 @@ export default definePlugin({
         },
         {
             // Gift button
-            find: "GIFT_BUTTON)",
-            replacement: {
-                match: /if\(\i\)return null;/,
-                replace: "return null;",
-            },
-            all: true,
+            find: '"sticker")',
+            replacement: { match: /&&\i\.push\(\([^&]*?,"gift"\)\)/, replace: "", },
             predicate: () => settings.store.gift,
+        },
+        {
+            // Gif and sticker buttons
+            find: '"sticker")',
+            replacement: [
+                { match: /&&\i\.push\([^&]*?,"gif"\)\)/, replace: "", },
+                { match: /&&\i\.push\([^&]*?,"sticker"\)\)/, replace: "", },
+            ],
+            predicate: () => settings.store.gif,
         },
         {
             // Emoji list
             find: "#{intl::EMOJI_PICKER_CREATE_EMOJI_TITLE}),size:",
             replacement: {
                 match: /(\i)=\i\|\|!\i&&\i.\i.isEmojiCategoryNitroLocked\(\{[^}]*\}\);/,
-                replace: "$&$1=($1 && $1.isNitroLocked && !$1.isUserAccess);"
+                replace: "$&$1||"
             },
             predicate: () => settings.store.emojiList,
         },
@@ -137,7 +173,7 @@ export default definePlugin({
             find: "#{intl::EMOJI_CATEGORY_TOP_GUILD_EMOJI},{guildName:",
             replacement: {
                 match: /(?<=(\i)\.unshift\((\i)\):)(?=\1\.push\(\2\))/,
-                replace: "$2.isNitroLocked && !$2.isUserAccess ||"
+                replace: "$2.isNitroLocked||"
             },
             predicate: () => settings.store.emojiList,
         }

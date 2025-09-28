@@ -29,6 +29,8 @@ import {
     getLastRepositoryCheckHash,
     getNewPlugins,
     getNewSettings,
+    getNewSettingsEntries,
+    getNewSettingsSize,
     getUpdatedPlugins,
     initializeChangelog,
     saveUpdateSession,
@@ -156,8 +158,8 @@ function UpdateLogCard({
                         {log.updatedPlugins.length > 0 &&
                             ` • ${log.updatedPlugins.length} ${t("changelog.commit.updated")}`}
                         {log.newSettings &&
-                            log.newSettings.size > 0 &&
-                            ` • ${Array.from(log.newSettings.values()).reduce((sum, arr) => sum + arr.length, 0)} ${t("changelog.commit.settings")}`}
+                            getNewSettingsSize(log.newSettings) > 0 &&
+                            ` • ${getNewSettingsEntries(log.newSettings).reduce((sum, [, arr]) => sum + arr.length, 0)} ${t("changelog.commit.settings")}`}
                     </div>
                 </div>
                 <div
@@ -193,33 +195,33 @@ function UpdateLogCard({
                         </div>
                     )}
 
-                    {log.newSettings && log.newSettings.size > 0 && (
-                        <div className="pc-changelog-log-plugins">
-                            <Forms.FormTitle
-                                tag="h6"
-                                className={Margins.bottom8}
-                            >
-                                {t("changelog.newSettings")}
-                            </Forms.FormTitle>
-                            <div className="pc-changelog-new-plugins-list">
-                                {Array.from(
-                                    log.newSettings?.entries() || [],
-                                ).map(([pluginName, settings]) =>
-                                    settings.map(setting => (
-                                        <span
-                                            key={`${pluginName}-${setting}`}
-                                            className="pc-changelog-new-plugin-tag"
-                                            title={t("changelog.newSettingTooltip", {
-                                                plugin: pluginName,
-                                            })}
-                                        >
-                                            {pluginName}.{setting}
-                                        </span>
-                                    )),
-                                )}
+                    {log.newSettings &&
+                        getNewSettingsSize(log.newSettings) > 0 && (
+                            <div className="pc-changelog-log-plugins">
+                                <Forms.FormTitle
+                                    tag="h6"
+                                    className={Margins.bottom8}
+                                >
+                                    {t("changelog.newSettings")}
+                                </Forms.FormTitle>
+                                <div className="pc-changelog-new-plugins-list">
+                                    {getNewSettingsEntries(log.newSettings).map(
+                                        ([pluginName, settings]) =>
+                                            settings.map(setting => (
+                                                <span
+                                                    key={`${pluginName}-${setting}`}
+                                                    className="pc-changelog-new-plugin-tag"
+                                                    title={t("changelog.newSettingTooltip", {
+                                                        plugin: pluginName,
+                                                    })}
+                                                >
+                                                    {pluginName}.{setting}
+                                                </span>
+                                            )),
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                    )}
+                        )}
 
                     {log.commits.length > 0 && (
                         <div className="pc-changelog-log-commits">
@@ -351,7 +353,6 @@ function ChangelogContent() {
                 });
                 return;
             }
-
 
             if (updates.ok && updates.value) {
                 setChangelog(updates.value);

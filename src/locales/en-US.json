@@ -440,7 +440,10 @@
         },
         "button": {
             "import": "Import Settings",
-            "export": "Export Settings"
+            "export": "Export Settings",
+            "plugins": "Export Plugins",
+            "css": "Export CSS",
+            "datastores": "Export DataStores"
         }
     },
     "cloud": {
@@ -2745,6 +2748,10 @@
                     "label": "DMs",
                     "description": "Remove shops above DMs list"
                 },
+                "serverBoost": {
+                    "label": "Server Boost",
+                    "description": "Remove server boost info above channel list"
+                },
                 "billing": {
                     "label": "Billing",
                     "description": "Remove billing settings"
@@ -2752,6 +2759,10 @@
                 "gift": {
                     "label": "Gift",
                     "description": "Remove gift button"
+                },
+                "gif": {
+                    "label": "GIF",
+                    "description": "Remove gif and sticker buttons"
                 },
                 "emojiList": {
                     "label": "Emoji List",

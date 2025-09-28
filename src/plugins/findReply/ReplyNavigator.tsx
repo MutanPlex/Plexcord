@@ -4,6 +4,7 @@
  * Copyright (c) 2025 MutanPlex
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
+import "./styles.css";
 
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Message } from "@plexcord/discord-types";
@@ -41,13 +42,6 @@ export default function ReplyNavigator({ replies }: { replies: Message[]; }) {
         <ErrorBoundary>
             <div ref={ref} className={containerStyles.containerBottom + " pc-findreply-div"} style={{
                 display: visible ? "flex" : "none",
-                backgroundColor: "var(--background-primary)",
-                borderRadius: "3vmin",
-                zIndex: 0,
-                flexDirection: "row",
-                alignItems: "center",
-                paddingLeft: "1em",
-                paddingRight: "1em"
             }}>
                 <Paginator
                     className={"pc-findreply-paginator"}

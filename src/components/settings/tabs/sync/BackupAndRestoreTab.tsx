@@ -54,10 +54,28 @@ function BackupAndRestoreTab() {
                     {t("sync.button.import")}
                 </Button>
                 <Button
-                    onClick={downloadSettingsBackup}
+                    onClick={() => downloadSettingsBackup("settings")}
                     size={Button.Sizes.SMALL}
                 >
                     {t("sync.button.export")}
+                </Button>
+                <Button
+                    onClick={() => downloadSettingsBackup("plugins")}
+                    size={Button.Sizes.SMALL}
+                >
+                    {t("sync.button.plugins")}
+                </Button>
+                <Button
+                    onClick={() => downloadSettingsBackup("css")}
+                    size={Button.Sizes.SMALL}
+                >
+                    {t("sync.button.css")}
+                </Button>
+                <Button
+                    onClick={() => downloadSettingsBackup("datastore")}
+                    size={Button.Sizes.SMALL}
+                >
+                    {t("sync.button.datastores")}
                 </Button>
             </Flex>
         </SettingsTab>

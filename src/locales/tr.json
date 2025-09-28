@@ -440,7 +440,10 @@
         },
         "button": {
             "import": "İçe Aktar",
-            "export": "Dışa Aktar"
+            "export": "Dışa Aktar",
+            "plugins": "Eklentileri Dışa Aktar",
+            "css": "CSS'leri Dışa Aktar",
+            "datastores": "Veri Depoları Dışa Aktar"
         }
     },
     "changelog": {
@@ -2745,6 +2748,10 @@
                     "label": "DM'ler",
                     "description": "DM listesinin üstündeki mağazaları kaldır"
                 },
+                "serverBoost": {
+                    "label": "Sunucu Boost",
+                    "description": "Sunucu boost bilgilerini kanal listesinin üstünden kaldır"
+                },
                 "billing": {
                     "label": "Faturalandırma",
                     "description": "Faturalandırma ayarlarını kaldır"
@@ -2752,6 +2759,10 @@
                 "gift": {
                     "label": "Hediye",
                     "description": "Hediye butonunu kaldır"
+                },
+                "gif": {
+                    "label": "GIF",
+                    "description": "GIF ve çıkartma butonlarını kaldır"
                 },
                 "emojiList": {
                     "label": "Emoji Listesi",
