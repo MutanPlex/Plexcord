@@ -8,7 +8,6 @@
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
 import {
     ApplicationCommandInputType,
-    ApplicationCommandOptionType,
     sendBotMessage,
 } from "@api/Commands";
 import * as DataStore from "@api/DataStore";
@@ -26,6 +25,7 @@ import {
 } from "@webpack/common";
 const CloudUpload = findLazy(m => m.prototype?.trackUploadFinished);
 
+import { t } from "@api/i18n";
 import { getCurrentChannel } from "@utils/discord";
 import { findLazy } from "@webpack";
 
@@ -53,7 +53,11 @@ const ChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
                 // @ts-expect-error typing issue
                 if (getCurrentChannel().id !== groupChannel) {
                     // @ts-expect-error typing issue
-                    sendBotMessage(getCurrentChannel().id, { content: `You must be in <#${groupChannel}> to send an encrypted message!\n> If you wish to send an unencrypted message, please click the button in the chatbar.` });
+                    sendBotMessage(getCurrentChannel().id, {
+                        author: {
+                            username: "Plexcord"
+                        }, content: t("plugin.encryptcord.message.mustChannel", { groupChannel })
+                    });
                     message.content = "";
                     return;
                 }
@@ -81,7 +85,7 @@ const ChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
 
     return (
         <ChatBarButton
-            tooltip={enabled ? "Send Unencrypted Messages" : "Send Encrypted Messages"}
+            tooltip={enabled ? t("plugin.encryptcord.button.sendUnencrypted") : t("plugin.encryptcord.button.sendEncrypted")}
             onClick={async () => {
                 // @ts-expect-error typing issue
                 if (await DataStore.get("encryptcordGroup") === false || (await DataStore.get("encryptcordChannelId") !== getCurrentChannel().id)) {
@@ -89,12 +93,22 @@ const ChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
                     // @ts-expect-error typing issue
                     await sendTempMessage(getCurrentChannel().id, "", `join\`\`\`\n${await DataStore.get("encryptcordPublicKey")}\`\`\``, false);
                     // @ts-expect-error typing issue
-                    sendBotMessage(getCurrentChannel().id, { content: `*Checking for any groups in this channel...*\n> If none is found, a new one will be created <t:${Math.floor(Date.now() / 1000) + 5}:R>\n> [Tip] You can do \`/encryptcord leave\` to leave a group` });
+                    sendBotMessage(getCurrentChannel().id, {
+                        author: {
+                            username: "Plexcord"
+                        }, content: t("plugin.encryptcord.message.checkingGroup", {
+                            time: `<t:${Math.floor(Date.now() / 1000) + 5}:R>`
+                        })
+                    });
                     await sleep(5000);
                     // @ts-expect-error typing issue
                     if (await DataStore.get("encryptcordGroup") === true && (await DataStore.get("encryptcordChannelId") !== getCurrentChannel().id)) {
                         // @ts-expect-error typing issue
-                        sendBotMessage(getCurrentChannel().id, { content: "*Leaving current group...*" });
+                        sendBotMessage(getCurrentChannel().id, {
+                            author: {
+                                username: "Plexcord"
+                            }, content: t("plugin.encryptcord.message.leaving")
+                        });
                         await leave("", { channel: { id: await DataStore.get("encryptcordChannelId") } });
                     } else if (await DataStore.get("encryptcordGroup") === true) {
                         setButtonDisabled(false);
@@ -142,6 +156,11 @@ export default definePlugin({
     name: "Encryptcord",
     description: "End-to-end encryption in Discord!",
     authors: [PcDevs.MutanPlex, Devs.Inbestigator, PcDevs.ItsAlex],
+
+    get displayDescription() {
+        return t("plugin.encryptcord.description");
+    },
+
     patches: [
         {
             find: "INTERACTION_APPLICATION_COMMAND_INVALID_VERSION",
@@ -229,36 +248,22 @@ export default definePlugin({
     },
     commands: [
         {
-            name: "encryptcord",
-            description: "End-to-end encryption in Discord!",
-            options: [
-                {
-                    name: "leave",
-                    description: "Leave current group",
-                    options: [],
-                    type: ApplicationCommandOptionType.SUB_COMMAND,
-                },
-                {
-                    name: "data",
-                    description: "View your keys and current group members",
-                    options: [],
-                    type: ApplicationCommandOptionType.SUB_COMMAND,
-                },
-            ],
-            inputType: ApplicationCommandInputType.BUILT_IN,
-            execute: (opts, ctx) => {
-                switch (opts[0].name) {
-                    case "start":
-                        startGroup(opts[0].options, ctx);
-                        break;
-                    case "leave":
-                        leave(opts[0].options, ctx);
-                        break;
-                    case "data":
-                        data(opts[0].options, ctx);
-                        break;
-                }
+            name: "encryptcord-leave",
+            description: "Leave current group",
+            get displayDescription() {
+                return t("plugin.encryptcord.command.leave");
             },
+            inputType: ApplicationCommandInputType.BUILT_IN,
+            execute: (opts, ctx) => leave(opts, ctx),
+        },
+        {
+            name: "encryptcord-data",
+            description: "View your keys and current group members",
+            get displayDescription() {
+                return t("plugin.encryptcord.command.data");
+            },
+            inputType: ApplicationCommandInputType.BUILT_IN,
+            execute: (opts, ctx) => data(opts, ctx),
         },
     ],
     async start() {
@@ -399,13 +404,13 @@ async function handleJoin(senderId: string, senderKey: string, encryptcordGroupM
             components: [{
                 type: 2,
                 style: 4,
-                label: "I don't want to talk to you!",
+                label: t("plugin.encryptcord.button.removeFromSelf"),
                 custom_id: "removeFromSelf"
             },
             {
                 type: 2,
                 style: 2,
-                label: "(Other users can still send/receive messages to/from them)",
+                label: t("plugin.encryptcord.button.stillInGroup"),
                 disabled: true,
                 custom_id: "encryptcord"
             }]
@@ -415,7 +420,11 @@ async function handleJoin(senderId: string, senderKey: string, encryptcordGroupM
 
 // Create message for group
 async function createMessage(message: string, senderId: string, channelId: string, type: number) {
-    const messageStart = sendBotMessage("", { channel_id: channelId, embeds: [] });
+    const messageStart = sendBotMessage("", {
+        author: {
+            username: "Plexcord"
+        }, channel_id: channelId, embeds: []
+    });
     const sender = await UserUtils.getUser(senderId).catch(() => null);
     if (!sender) return;
     return { ...messageStart, content: message, author: sender, type, flags: 0 };
@@ -429,7 +438,11 @@ async function startGroup(opts, ctx) {
         [UserStore.getCurrentUser().id]: { key: await DataStore.get("encryptcordPublicKey"), parent: null, child: null }
     });
     await DataStore.set("encryptcordGroup", true);
-    sendBotMessage(channelId, { content: "Group created!\n> Other users can click the lock icon to join." });
+    sendBotMessage(channelId, {
+        author: {
+            username: "Plexcord"
+        }, content: t("plugin.encryptcord.message.created")
+    });
     await MessageActions.receiveMessage(channelId, await createMessage("", UserStore.getCurrentUser().id, channelId, 7));
     setEnabled(true);
 }
@@ -438,7 +451,11 @@ async function startGroup(opts, ctx) {
 async function leave(opts, ctx) {
     const channelId = ctx.channel.id;
     if (!(await DataStore.get("encryptcordGroup"))) {
-        sendBotMessage(channelId, { content: "You're not in a group!" });
+        sendBotMessage(channelId, {
+            author: {
+                username: "Plexcord"
+            }, content: t("plugin.encryptcord.message.notInGroup")
+        });
         return;
     }
     const user = UserStore.getCurrentUser();
@@ -467,6 +484,8 @@ async function data(opts, ctx) {
     const exportedPrivateKey = await crypto.subtle.exportKey("pkcs8", encryptcordPrivateKey);
     const groupMembers = Object.keys(encryptcordGroupMembers);
     sendBotMessage(channelId, {
-        content: `## Public key:\n\`\`\`${encryptcordPublicKey}\`\`\`\n## Private key:\n||\`\`\`${formatPemKey(exportedPrivateKey, "private")}\`\`\`||*(DO **NOT** SHARE THIS)*\n## Group members:\n\`\`\`json\n${JSON.stringify(groupMembers)}\`\`\``
+        author: {
+            username: "Plexcord"
+        }, content: `## ${t("plugin.encryptcord.message.publicKey")}:\n\`\`\`${encryptcordPublicKey}\`\`\`\n## ${t("plugin.encryptcord.message.privateKey")}:\n||\`\`\`${formatPemKey(exportedPrivateKey, "private")}\`\`\`||${t("plugin.encryptcord.message.privateKeyWarning")}\n## ${t("plugin.encryptcord.message.members")}:\n\`\`\`json\n${JSON.stringify(groupMembers)}\`\`\``
     });
 }

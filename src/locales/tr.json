@@ -2930,6 +2930,31 @@
                 "failed": "Dosya İndirme Başarısız",
                 "errorDownloading": "Dosya İndirilirken Hata"
             }
+        },
+        "encryptcord": {
+            "name": "Encryptcord",
+            "description": "Discord'da uçtan uca şifreleme!",
+            "message": {
+                "mustChannel": "Şifreli mesaj göndermek için <#{{groupChannel}}> kanalında olmalısınız! \n> Şifrelenmemiş bir mesaj göndermek istiyorsanız, sohbet çubuğundaki butona tıklayın.",
+                "checkingGroup": "*Bu kanalda herhangi bir grup olup olmadığı kontrol ediliyor...* \n> Eğer bulunmazsa, {{time}} içinde yeni bir grup oluşturulacak \n[İpucu] Bir gruptan ayrılmak için /encryptcord leave komutunu kullanabilirsiniz",
+                "leaving": "*Mevcut gruptan ayrılıyor...*",
+                "notInGroup": "Bir grupta değilsiniz!",
+                "created": "Grup oluşturuldu! Diğer kullanıcılar katılmak için kilit simgesine tıklayabilir.",
+                "publicKey": "Genel Anahtar",
+                "privateKey": "Özel Anahtar",
+                "privateKeyWarning": "*(BU BİLGİYİ **KESİNLİKLE PAYLAŞMAYIN**)*",
+                "members": "Grup Üyeleri"
+            },
+            "button": {
+                "sendUnencrypted": "Şifrelenmemiş Mesaj Gönder",
+                "sendEncrypted": "Şifreli Mesaj Gönder",
+                "removeFromSelf": "Seninle konuşmak istemiyorum",
+                "stillInGroup": "(Diğer kullanıcılar hâlâ onlarla mesaj alıp gönderebilir)"
+            },
+            "command": {
+                "leave": "Mevcut gruptan ayrıl",
+                "data": "Anahtarlarını ve mevcut grup üyelerini görüntüle"
+            }
         }
     }
 }
