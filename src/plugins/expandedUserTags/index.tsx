@@ -7,6 +7,7 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { Channel, Message, User } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
@@ -24,7 +25,7 @@ const genTagTypes = () => {
     let i = 100;
     const obj = {};
 
-    for (const { name } of tags) {
+    for (const { name } of tags.values) {
         obj[name] = ++i;
         obj[i] = name;
     }
@@ -39,6 +40,11 @@ export default definePlugin({
     dependencies: ["MemberListDecoratorsAPI", "NicknameIconsAPI", "MessageDecorationsAPI"],
     tags: ["MoreUserTags"],
     settings,
+
+    get displayDescription() {
+        return t("plugin.expandedUserTags.description");
+    },
+
     patches: [
         // Make discord actually use our tags
         {
@@ -58,7 +64,7 @@ export default definePlugin({
     ],
     start() {
         const tagSettings = settings.store.tagSettings || {} as TagSettings;
-        for (const tag of Object.values(tags)) {
+        for (const tag of tags.values) {
             tagSettings[tag.name] ??= {
                 showInChat: true,
                 showInNotChat: true,
@@ -117,7 +123,7 @@ export default definePlugin({
 
     getTagText(tagName: string) {
         if (!tagName) return getIntlMessage("APP_TAG");
-        const tag = tags.find(({ name }) => tagName === name);
+        const tag = tags.values.find(({ name }) => tagName === name);
         if (!tag) return tagName || getIntlMessage("APP_TAG");
 
         return settings.store.tagSettings?.[tag.name]?.text || tag.displayName;
@@ -143,7 +149,7 @@ export default definePlugin({
 
         const perms = this.getPermissions(user, channel);
 
-        for (const tag of tags) {
+        for (const tag of tags.values) {
             if (isChat && !settings.tagSettings[tag.name]?.showInChat)
                 continue;
             if (!isChat && !settings.tagSettings[tag.name]?.showInNotChat)
@@ -166,7 +172,7 @@ export default definePlugin({
 
             if ("permissions" in tag ?
                 tag.permissions.some(perm => perms.includes(perm)) :
-                tag.condition(message!, user, channel)) {
+                (typeof tag.condition === "function" && tag.condition(message!, user, channel))) {
 
                 return this.localTags[tag.name];
             }

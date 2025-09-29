@@ -5,6 +5,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+
+
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Margins } from "@utils/margins";
 import { OptionType } from "@utils/types";
@@ -17,9 +20,9 @@ function SettingsComponent() {
     const tagSettings = (settings.store.tagSettings ??= {} as TagSettings);
     const { localTags } = Plexcord.Plugins.plugins.ExpandedUserTags as any;
 
-    tags.forEach(t => {
-        if (!tagSettings[t.name]) {
-            tagSettings[t.name] = { text: t.displayName, showInChat: true, showInNotChat: true };
+    tags.values.forEach(tag => {
+        if (!tagSettings[tag.name]) {
+            tagSettings[tag.name] = { text: tag.displayName, showInChat: true, showInNotChat: true };
         }
     });
 
@@ -32,9 +35,9 @@ function SettingsComponent() {
                     gap: "16px",
                 }}
             >
-                {tags.map(t => (
+                {tags.values.map(tag => (
                     <Card
-                        key={t.name}
+                        key={tag.name}
                         style={{
                             padding: "1em 1em 0",
                             width: "calc(33.333% - 11px)",
@@ -42,13 +45,13 @@ function SettingsComponent() {
                         }}
                     >
                         <Forms.FormTitle style={{ width: "fit-content" }}>
-                            <Tooltip text={t.description}>
+                            <Tooltip text={tag.description}>
                                 {({ onMouseEnter, onMouseLeave }) => (
                                     <div
                                         onMouseEnter={onMouseEnter}
                                         onMouseLeave={onMouseLeave}
                                     >
-                                        {t.displayName} Tag
+                                        {tag.displayName} {t("plugin.expandedUserTags.modal.tag")}
                                     </div>
                                 )}
                             </Tooltip>
@@ -56,33 +59,33 @@ function SettingsComponent() {
 
                         <div style={{ marginBottom: "10px" }}>
                             <Forms.FormText style={{ fontSize: "13px" }}>
-                                Example:
+                                {t("plugin.expandedUserTags.modal.example")}:
                             </Forms.FormText>
-                            <Tag type={localTags[t.name]} />
+                            <Tag type={localTags[tag.name]} />
                         </div>
 
                         <TextInput
                             type="text"
-                            value={tagSettings[t.name]?.text ?? t.displayName}
-                            placeholder={`Text on tag (default: ${t.displayName})`}
-                            onChange={v => tagSettings[t.name].text = v}
+                            value={tagSettings[tag.name]?.text ?? tag.displayName}
+                            placeholder={t("plugin.expandedUserTags.modal.customTextPlaceholder", { displayName: tag.displayName })}
+                            onChange={v => tagSettings[tag.name].text = v}
                             className={Margins.bottom16}
                         />
 
                         <Switch
-                            value={tagSettings[t.name]?.showInChat ?? true}
-                            onChange={v => tagSettings[t.name].showInChat = v}
+                            value={tagSettings[tag.name]?.showInChat ?? true}
+                            onChange={v => tagSettings[tag.name].showInChat = v}
                             hideBorder
                         >
-                            Show in messages
+                            {t("plugin.expandedUserTags.modal.messages")}
                         </Switch>
 
                         <Switch
-                            value={tagSettings[t.name]?.showInNotChat ?? true}
-                            onChange={v => tagSettings[t.name].showInNotChat = v}
+                            value={tagSettings[tag.name]?.showInNotChat ?? true}
+                            onChange={v => tagSettings[tag.name].showInNotChat = v}
                             hideBorder
                         >
-                            Show in member list and profiles
+                            {t("plugin.expandedUserTags.modal.memberList")}
                         </Switch>
                     </Card>
                 ))}
@@ -93,24 +96,44 @@ function SettingsComponent() {
 
 export const settings = definePluginSettings({
     dontShowForBots: {
-        description: "Don't show extra tags for bots (excluding webhooks)",
+        get label() {
+            return t("plugin.expandedUserTags.option.dontShowForBots.label");
+        },
+        get description() {
+            return t("plugin.expandedUserTags.option.dontShowForBots.description");
+        },
         type: OptionType.BOOLEAN,
         default: false
     },
     dontShowBotTag: {
-        description: "Only show extra tags for bots / Hide [APP] text",
+        get label() {
+            return t("plugin.expandedUserTags.option.dontShowBotTag.label");
+        },
+        get description() {
+            return t("plugin.expandedUserTags.option.dontShowBotTag.description");
+        },
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
     },
     showWebhookTagFully: {
-        description: "Show Webhook tag in followed channels like announcements",
+        get label() {
+            return t("plugin.expandedUserTags.option.showWebhookTagFully.label");
+        },
+        get description() {
+            return t("plugin.expandedUserTags.option.showWebhookTagFully.description");
+        },
         type: OptionType.BOOLEAN,
         default: false
     },
     tagSettings: {
+        get label() {
+            return t("plugin.expandedUserTags.option.tagSettings.label");
+        },
+        get description() {
+            return t("plugin.expandedUserTags.option.tagSettings.description");
+        },
         type: OptionType.COMPONENT,
-        component: SettingsComponent,
-        description: "fill me"
+        component: SettingsComponent
     },
 });

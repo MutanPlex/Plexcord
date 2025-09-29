@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Channel, Guild, Message, RC, User } from "@plexcord/discord-types";
 import { findByCodeLazy, findLazy } from "@webpack";
 import { GuildStore } from "@webpack/common";
@@ -17,45 +18,54 @@ export const isWebhook = (message: Message, user: User) => {
     return !!message?.webhookId && user.isNonUserBot() && !isFollowed;
 };
 
-export const tags = [
-    {
-        name: "WEBHOOK",
-        displayName: "Webhook",
-        description: "Messages sent by webhooks",
-        condition: isWebhook
-    }, {
-        name: "OWNER",
-        displayName: "Owner",
-        description: "Owns the server",
-        condition: (_, user, channel) => GuildStore.getGuild(channel?.guild_id)?.ownerId === user.id
-    }, {
-        name: "ADMINISTRATOR",
-        displayName: "Admin",
-        description: "Has the administrator permission",
-        permissions: ["ADMINISTRATOR"]
-    }, {
-        name: "MODERATOR_STAFF",
-        displayName: "Staff",
-        description: "Can manage the server, channels or roles",
-        permissions: ["MANAGE_GUILD", "MANAGE_CHANNELS", "MANAGE_ROLES"]
-    }, {
-        name: "MODERATOR",
-        displayName: "Mod",
-        description: "Can manage messages or kick/ban people",
-        permissions: ["MANAGE_MESSAGES", "KICK_MEMBERS", "BAN_MEMBERS"]
-    }, {
-        name: "VOICE_MODERATOR",
-        displayName: "VC Mod",
-        description: "Can manage voice chats",
-        permissions: ["MOVE_MEMBERS", "MUTE_MEMBERS", "DEAFEN_MEMBERS"]
-    }, {
-        name: "CHAT_MODERATOR",
-        displayName: "Chat Mod",
-        description: "Can timeout people",
-        permissions: ["MODERATE_MEMBERS"]
+export const tags = {
+    get values(): ITag[] {
+        return [
+            {
+                name: "WEBHOOK",
+                displayName: t("plugin.expandedUserTags.tag.webhook.name"),
+                description: t("plugin.expandedUserTags.tag.webhook.description"),
+                condition: isWebhook
+            },
+            {
+                name: "OWNER",
+                displayName: t("plugin.expandedUserTags.tag.owner.name"),
+                description: t("plugin.expandedUserTags.tag.owner.description"),
+                condition: (_, user, channel) => GuildStore.getGuild(channel?.guild_id)?.ownerId === user.id
+            },
+            {
+                name: "ADMINISTRATOR",
+                displayName: t("plugin.expandedUserTags.tag.admin.name"),
+                description: t("plugin.expandedUserTags.tag.admin.description"),
+                permissions: ["ADMINISTRATOR"]
+            },
+            {
+                name: "MODERATOR_STAFF",
+                displayName: t("plugin.expandedUserTags.tag.staff.name"),
+                description: t("plugin.expandedUserTags.tag.staff.description"),
+                permissions: ["MANAGE_GUILD", "MANAGE_CHANNELS", "MANAGE_ROLES"]
+            },
+            {
+                name: "MODERATOR",
+                displayName: t("plugin.expandedUserTags.tag.mod.name"),
+                description: t("plugin.expandedUserTags.tag.mod.description"),
+                permissions: ["MANAGE_MESSAGES", "KICK_MEMBERS", "BAN_MEMBERS"]
+            },
+            {
+                name: "VOICE_MODERATOR",
+                displayName: t("plugin.expandedUserTags.tag.vcmod.name"),
+                description: t("plugin.expandedUserTags.tag.vcmod.description"),
+                permissions: ["MOVE_MEMBERS", "MUTE_MEMBERS", "DEAFEN_MEMBERS"]
+            },
+            {
+                name: "CHAT_MODERATOR",
+                displayName: t("plugin.expandedUserTags.tag.chatmod.name"),
+                description: t("plugin.expandedUserTags.tag.chatmod.description"),
+                permissions: ["MODERATE_MEMBERS"]
+            }
+        ] as const;
     }
-] as const satisfies ITag[];
-
+};
 export const Tag = findLazy(m => m.Types?.[0] === "BOT") as RC<{ type?: number | null, className?: string, useRemSizes?: boolean; }> & { Types: Record<string, number>; };
 
 // PermissionStore.computePermissions will not work here since it only gets permissions for the current user
