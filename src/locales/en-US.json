@@ -2784,6 +2784,156 @@
         "dontRoundMyTimestamps": {
             "name": "DontRoundMyTimestamps",
             "description": "Always rounds relative timestamps down, so 7.6y becomes 7y instead of 8y"
+        },
+        "downloadify": {
+            "name": "Downloadify",
+            "description": "Download various assets directly in Discord without having to open a browser or dig through HTML.",
+            "failedDirectory": "Failed to set download directory.",
+            "modal": {
+                "title": "Default Directory",
+                "description": "Default download location. If set, the file will always be downloaded in its original format even if alternatives are available. Leave empty to pick a folder and file type each time.",
+                "noDirectory": "No directory set",
+                "browsing": "Browsing...",
+                "browse": "Browse",
+                "clear": "Clear"
+            },
+            "option": {
+                "displayStatus": {
+                    "label": "Display Status",
+                    "description": "Display a status notification when downloads start, finish, or error."
+                },
+                "statusDuration": {
+                    "label": "Status Duration",
+                    "description": "The number of seconds to display status notifications."
+                },
+                "voiceMessages": {
+                    "label": "Voice Messages",
+                    "description": "Add a download button to voice messages."
+                },
+                "allowUnicode": {
+                    "label": "Allow Unicode",
+                    "description": "Allow non-ASCII characters in file names."
+                },
+                "overwriteFiles": {
+                    "label": "Overwrite Files",
+                    "description": "If a default directory is set and a download file name matches an existing file, overwrite the file. If disabled, a number will be appended to the file name."
+                },
+                "defaultDirectory": {
+                    "label": "Default Directory"
+                }
+            },
+            "context": {
+                "download": "Download",
+                "role": {
+                    "name": "Download {{role}} Icon",
+                    "unnamed": "Download Role icon",
+                    "labelName": "{{role}} Icon",
+                    "labelUnnamed": "Role Icon"
+                },
+                "clan": {
+                    "name": "Download {{clan}} Clan Badge",
+                    "label": "{{clan}} Clan Badge"
+                },
+                "customEmoji": {
+                    "name": "Download {{emoji}}",
+                    "unnamed": "Download Custom Emoji",
+                    "labelName": "{{emoji}}",
+                    "labelUnnamed": "Custom Emoji"
+                },
+                "unicodeEmoji": {
+                    "name": "Download {{emoji}}",
+                    "unnamed": "Download Unicode Emoji",
+                    "labelName": "{{emoji}}",
+                    "labelUnnamed": "Unicode Emoji"
+                },
+                "sticker": {
+                    "name": "Download {{sticker}}",
+                    "unnamed": "Download Sticker",
+                    "labelName": "{{sticker}}",
+                    "labelUnnamed": "Sticker"
+                },
+                "media": {
+                    "name": "Download Media",
+                    "label": "Media"
+                },
+                "attachment": {
+                    "name": "Download Tenor GIF",
+                    "media": "Download {{type}}",
+                    "labelName": "Tenor GIF",
+                    "footer": "Footer icon",
+                    "author": "Author icon",
+                    "thumbnail": "Thumbnail Image",
+                    "embed": "Embed Media",
+                    "mediaType": "Media"
+                },
+                "group":{
+                    "name": "Download Group Icon",
+                    "label": "Group Icon",
+                    "defaultName": "Download Default Icon",
+                    "defaultLabel": "Default Icon"
+                },
+                "icon": {
+                    "name": "Download Icon",
+                    "label": "Icon"
+                },
+                "banner": {
+                    "name": "Download Banner",
+                    "label": "Banner"
+                },
+                "inviteSplash": {
+                    "name": "Download Invite Splash",
+                    "label": "Invite Splash"
+                },
+                "discoverySplash": {
+                    "name": "Download Discovery Splash",
+                    "label": "Discovery Splash"
+                },
+                "userAvatar": {
+                    "name": "Download User Avatar",
+                    "label": "User Avatar"
+                },
+                "userBanner": {
+                    "name": "Download User Banner",
+                    "label": "User Banner"
+                },
+                "userAvatarDecoration": {
+                    "name": "Download User Avatar Decoration",
+                    "label": "User Avatar Decoration"
+                },
+                "memberAvatar": {
+                    "name": "Download Member Avatar",
+                    "label": "Member Avatar"
+                },
+                "memberBanner": {
+                    "name": "Download Member Banner",
+                    "label": "Member Banner"
+                },
+                "memberAvatarDecoration": {
+                    "name": "Download Member Avatar Decoration",
+                    "label": "Member Avatar Decoration"
+                },
+                "memberDefaultAvatar": {
+                    "name": "Download Member Default Avatar",
+                    "label": "Member Default Avatar"
+                },
+                "nameplate": {
+                    "name": "Download Nameplate",
+                    "label": "Nameplate"
+                },
+                "voiceMessage": {
+                    "label": "Download Voice Message"
+                }
+            },
+            "toast": {
+                "unknown": "Unknown Media Item. Falling Back to Default Behavior",
+                "started": "Download started",
+                "canceled": "Download canceled",
+                "error": "Error Opening Save Dialogue",
+                "tenor": "Unsupported Tenor Extension",
+                "downloaded": "File Downloaded",
+                "failed": "File Download Failed",
+                "errorDownloading": "Error Downloading File"
+            }
         }
     }
 }

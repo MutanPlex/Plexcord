@@ -7,6 +7,7 @@
 
 import "./style.css";
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { OptionType } from "@utils/types";
@@ -27,7 +28,7 @@ function DefaultDirectorySetting(): JSX.Element {
             directory && (settings.store.defaultDirectory = directory);
         } catch (error) {
             DownloadifyLogger.error(`[${getFormattedNow()}] [FAILED TO SET DOWNLOAD DIRECTORY]`, error);
-            showToast("Failed to set download directory.", Toasts.Type.FAILURE, { duration: 3000 });
+            showToast(t("plugin.downloadify.failedDirectory"), Toasts.Type.FAILURE, { duration: 3000 });
         } finally {
             setDialogueOpen(false);
         }
@@ -41,14 +42,14 @@ function DefaultDirectorySetting(): JSX.Element {
         <ErrorBoundary>
             <Forms.FormSection>
                 <Forms.FormTitle className={d("form-title")}>
-                    Default Directory
+                    {t("plugin.downloadify.modal.title")}
                 </Forms.FormTitle>
                 <Forms.FormText className={d("form-description")}>
-                    Default download location. If set, the file will always be downloaded in its original format even if alternatives are available. Leave empty to pick a folder and file type each time.
+                    {t("plugin.downloadify.modal.description")}
                 </Forms.FormText>
                 <div className={d("directory-container")}>
                     <Forms.FormText className={d("directory-display")}>
-                        {defaultDirectory || "No Directory Set"}
+                        {defaultDirectory || t("plugin.downloadify.noDirectory")}
                     </Forms.FormText>
                     <div className={d("directory-buttons")}>
                         <Button
@@ -57,7 +58,7 @@ function DefaultDirectorySetting(): JSX.Element {
                             onClick={handlePickDirectory}
                             color={Button.Colors.CUSTOM}
                         >
-                            {isDialogueOpen ? "Browsing..." : "Browse"}
+                            {isDialogueOpen ? t("plugin.downloadify.modal.browsing") : t("plugin.downloadify.modal.browse")}
                         </Button>
                         <Button
                             disabled={!defaultDirectory || isDialogueOpen}
@@ -65,7 +66,7 @@ function DefaultDirectorySetting(): JSX.Element {
                             onClick={handleClearDirectory}
                             color={Button.Colors.CUSTOM}
                         >
-                            Clear
+                            {t("plugin.downloadify.modal.clear")}
                         </Button>
                     </div>
                 </div>
@@ -76,33 +77,61 @@ function DefaultDirectorySetting(): JSX.Element {
 
 export const settings = definePluginSettings({
     displayStatus: {
-        description: "Display a status notification when downloads start, finish, or error.",
+        get label() {
+            return t("plugin.downloadify.option.displayStatus.label");
+        },
+        get description() {
+            return t("plugin.downloadify.option.displayStatus.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
     },
     statusDuration: {
+        get label() {
+            return t("plugin.downloadify.option.statusDuration.label");
+        },
+        get description() {
+            return t("plugin.downloadify.option.statusDuration.description");
+        },
         type: OptionType.SLIDER,
-        description: "The number of seconds to display status notifications.",
         markers: [1, 3, 5],
         default: 2.5,
         stickToMarkers: false,
     },
     voiceMessages: {
-        description: "Add a download button to voice messages.",
+        get label() {
+            return t("plugin.downloadify.option.voiceMessages.label");
+        },
+        get description() {
+            return t("plugin.downloadify.option.voiceMessages.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
     },
     allowUnicode: {
-        description: "Allow non-ASCII characters in file names.",
+        get label() {
+            return t("plugin.downloadify.option.allowUnicode.label");
+        },
+        get description() {
+            return t("plugin.downloadify.option.allowUnicode.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
     },
     overwriteFiles: {
-        description: "If a default directory is set and a download file name matches an existing file, overwrite the file. If disabled, a number will be appended to the file name.",
+        get label() {
+            return t("plugin.downloadify.option.overwriteFiles.label");
+        },
+        get description() {
+            return t("plugin.downloadify.option.overwriteFiles.description");
+        },
         type: OptionType.BOOLEAN,
         default: false,
     },
     defaultDirectory: {
+        get label() {
+            return t("plugin.downloadify.option.defaultDirectory.label");
+        },
         component: DefaultDirectorySetting,
         type: OptionType.COMPONENT,
         default: "",

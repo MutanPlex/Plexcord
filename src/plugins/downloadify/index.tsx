@@ -7,6 +7,7 @@
 
 import "./style.css";
 
+import { t } from "@api/i18n";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -18,6 +19,10 @@ export default definePlugin({
     description: "Download various assets directly in Discord without having to open a browser or dig through HTML.",
     authors: [PcDevs.Etorix],
     settings,
+
+    get displayDescription() {
+        return t("plugin.downloadify.description");
+    },
 
     VoiceMessageDownloadButton,
     handleHoverDownloadButtonClicked,

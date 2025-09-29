@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { ImageIcon } from "@components/Icons";
 import { StickerFormatType } from "@plexcord/discord-types/enums";
 import { settings } from "@plugins/downloadify/settings";
@@ -107,8 +108,8 @@ export function MessageContextMenu(children: Array<any>, props: MessageContextMe
         downloadifyItems.push(
             <Menu.MenuItem
                 id="downloadify-role-icon"
-                label={`Download ${role?.name ?? "Role"} Icon`}
-                submenuItemLabel={` ${role?.name ?? "Role"} Icon`}
+                label={role?.name ? t("plugin.downloadify.context.role.name", { role: role.name }) : t("plugin.downloadify.context.role.unnamed")}
+                submenuItemLabel={role?.name ? t("plugin.downloadify.context.role.labelName", { role: role.name }) : t("plugin.downloadify.context.role.labelUnnamed")}
                 icon={() => ImageIcon({ width: 20, height: 20 })}
                 action={async () => {
                     await handleDownload(
@@ -127,8 +128,8 @@ export function MessageContextMenu(children: Array<any>, props: MessageContextMe
         downloadifyItems.push(
             <Menu.MenuItem
                 id="downloadify-clan-badge"
-                label={`Download ${primaryGuild.tag} Clan Badge`}
-                submenuItemLabel={`${primaryGuild.tag} Clan Badge`}
+                label={t("plugin.downloadify.context.clan.name", { clan: primaryGuild.tag })}
+                submenuItemLabel={t("plugin.downloadify.context.clan.label", { clan: primaryGuild.tag })}
                 icon={() => ImageIcon({ width: 20, height: 20 })}
                 action={async () => {
                     await handleDownload(
@@ -149,8 +150,8 @@ export function MessageContextMenu(children: Array<any>, props: MessageContextMe
         downloadifyItems.push(
             <Menu.MenuItem
                 id="downloadify-custom-emoji"
-                label={`Download ${emojiName || "Custom Emoji"}`}
-                submenuItemLabel={`${emojiName || "Custom Emoji"}`}
+                label={emojiName ? t("plugin.downloadify.context.customEmoji.name", { emoji: emojiName }) : t("plugin.downloadify.context.customEmoji.unnamed")}
+                submenuItemLabel={emojiName ? t("plugin.downloadify.context.customEmoji.labelName", { emoji: emojiName }) : t("plugin.downloadify.context.customEmoji.labelUnnamed")}
                 icon={() => ImageIcon({ width: 20, height: 20 })}
                 action={async () => {
                     await handleDownload(
@@ -171,8 +172,8 @@ export function MessageContextMenu(children: Array<any>, props: MessageContextMe
         downloadifyItems.push(
             <Menu.MenuItem
                 id="downloadify-unicode-emoji"
-                label={`Download ${emojiName || "Unicode Emoji"}`}
-                submenuItemLabel={`${emojiName || "Unicode Emoji"}`}
+                label={emojiName ? t("plugin.downloadify.context.unicodeEmoji.name", { emoji: emojiName }) : t("plugin.downloadify.context.unicodeEmoji.unnamed")}
+                submenuItemLabel={emojiName ? t("plugin.downloadify.context.unicodeEmoji.labelName", { emoji: emojiName }) : t("plugin.downloadify.context.unicodeEmoji.labelUnnamed")}
                 icon={() => ImageIcon({ width: 20, height: 20 })}
                 action={async () => {
                     await handleDownload(
@@ -212,8 +213,8 @@ export function MessageContextMenu(children: Array<any>, props: MessageContextMe
         downloadifyItems.push(
             <Menu.MenuItem
                 id="downloadify-sticker"
-                label={`Download ${sticker.name || "Sticker"}`}
-                submenuItemLabel={`${sticker.name || "Sticker"}`}
+                label={sticker.name ? t("plugin.downloadify.context.sticker.name", { sticker: sticker.name }) : t("plugin.downloadify.context.sticker.unnamed")}
+                submenuItemLabel={sticker.name ? t("plugin.downloadify.context.sticker.labelName", { sticker: sticker.name }) : t("plugin.downloadify.context.sticker.labelUnnamed")}
                 icon={() => ImageIcon({ width: 20, height: 20 })}
                 action={async () => {
                     await handleDownload(
@@ -236,8 +237,8 @@ export function MessageContextMenu(children: Array<any>, props: MessageContextMe
         downloadifyItems.push(
             <Menu.MenuItem
                 id="downloadify-attachment"
-                label="Download Media"
-                submenuItemLabel="Media"
+                label={t("plugin.downloadify.context.media.name")}
+                submenuItemLabel={t("plugin.downloadify.context.media.label")}
                 icon={() => ImageIcon({ width: 20, height: 20 })}
                 action={async () => {
                     await handleDownload(
@@ -278,20 +279,20 @@ export function MessageContextMenu(children: Array<any>, props: MessageContextMe
         const targetEmbed = (embedImage || embedVideo || embedThumbnail || embedAuthor || embedFooter);
         const targetEmbedItem = (embedImage?.image || embedVideo?.video || embedThumbnail?.thumbnail || embedAuthor?.author || embedFooter?.footer);
         const labelEmbedMedia = embedFooter?.footer
-            ? "Footer Icon"
+            ? t("plugin.downloadify.context.attachment.footer")
             : embedAuthor?.author
-                ? "Author Icon"
+                ? t("plugin.downloadify.context.attachment.author")
                 : embedThumbnail?.thumbnail
-                    ? "Thumbnail Image"
+                    ? t("plugin.downloadify.context.attachment.thumbnail")
                     : targetEmbed?.type === "rich" || !!targetEmbed?.provider
-                        ? "Embed Media"
-                        : "Media";
+                        ? t("plugin.downloadify.context.attachment.embed")
+                        : t("plugin.downloadify.context.attachment.mediaType");
 
         downloadifyItems.push(
             <Menu.MenuItem
                 id="downloadify-attachment"
-                label={isTenor ? "Download Tenor GIF" : `Download ${labelEmbedMedia}`}
-                submenuItemLabel={isTenor ? "Tenor GIF" : labelEmbedMedia}
+                label={isTenor ? t("plugin.downloadify.context.attachment.name") : t("plugin.downloadify.context.attachment.media", { type: labelEmbedMedia })}
+                submenuItemLabel={isTenor ? t("plugin.downloadify.context.attachment.labelName") : labelEmbedMedia}
                 icon={() => ImageIcon({ width: 20, height: 20 })}
                 action={async () => {
                     let srcIsAnimated = !!(targetEmbedItem as any)?.srcIsAnimated;
@@ -348,7 +349,7 @@ export function MessageContextMenu(children: Array<any>, props: MessageContextMe
         downloadifyItems,
         "message-content-group",
         "downloadify-submenu",
-        "Download",
+        t("plugin.downloadify.context.download"),
         [{
             id: { child: "devmode-copy-id" },
             type: "WITH_GROUP",
@@ -372,8 +373,8 @@ export function GDMContextMenu(children: Array<any>, props: GDMContextMenuProps)
         channelIconURL ? (
             <Menu.MenuItem
                 id="downloadify-gdm-channel-icon"
-                label="Download Group Icon"
-                submenuItemLabel="Group Icon"
+                label={t("plugin.downloadify.context.group.name")}
+                submenuItemLabel={t("plugin.downloadify.context.group.label")}
                 icon={() => ImageIcon({ width: 20, height: 20 })}
                 action={async () => {
                     await handleDownload(
@@ -388,8 +389,8 @@ export function GDMContextMenu(children: Array<any>, props: GDMContextMenuProps)
         defaultChannelIconURL ? (
             <Menu.MenuItem
                 id="downloadify-default-gdm-channel-icon"
-                label="Download Default Icon"
-                submenuItemLabel="Default Icon"
+                label={t("plugin.downloadify.context.group.defaultName")}
+                submenuItemLabel={t("plugin.downloadify.context.group.defaultLabel")}
                 icon={() => ImageIcon({ width: 20, height: 20 })}
                 action={async () => {
                     await handleDownload(
@@ -408,7 +409,7 @@ export function GDMContextMenu(children: Array<any>, props: GDMContextMenuProps)
         downloadifyItems,
         "channel-content-group",
         "downloadify-submenu",
-        "Download",
+        t("plugin.downloadify.context.download"),
         [{
             id: { child: "devmode-copy-id" },
             type: "WITH_GROUP",
@@ -441,8 +442,8 @@ export function GuildContextMenu(children: Array<any>, props: GuildContextMenuPr
     const downloadifyItems = [guildIconURL ? (
         <Menu.MenuItem
             id="downloadify-guild-icon"
-            label="Download Icon"
-            submenuItemLabel="Icon"
+            label={t("plugin.downloadify.context.icon.name")}
+            submenuItemLabel={t("plugin.downloadify.context.icon.label")}
             icon={() => ImageIcon({ width: 20, height: 20 })}
             action={async () => await handleDownload(
                 guildIconURL,
@@ -455,8 +456,8 @@ export function GuildContextMenu(children: Array<any>, props: GuildContextMenuPr
     guildBannerURL ? (
         <Menu.MenuItem
             id="downloadify-guild-banner"
-            label="Download Banner"
-            submenuItemLabel="Banner"
+            label={t("plugin.downloadify.context.banner.name")}
+            submenuItemLabel={t("plugin.downloadify.context.banner.label")}
             icon={() => ImageIcon({ width: 20, height: 20 })}
             action={async () => await handleDownload(
                 guildBannerURL,
@@ -469,8 +470,8 @@ export function GuildContextMenu(children: Array<any>, props: GuildContextMenuPr
     guildInviteURL ? (
         <Menu.MenuItem
             id="downloadify-guild-invite-splash"
-            label="Download Invite Splash"
-            submenuItemLabel="Invite Splash"
+            label={t("plugin.downloadify.context.inviteSplash.name")}
+            submenuItemLabel={t("plugin.downloadify.context.inviteSplash.label")}
             icon={() => ImageIcon({ width: 20, height: 20 })}
             action={async () => await handleDownload(
                 guildInviteURL,
@@ -483,8 +484,8 @@ export function GuildContextMenu(children: Array<any>, props: GuildContextMenuPr
     guildDiscoveryURL ? (
         <Menu.MenuItem
             id="downloadify-guild-discovery-splash"
-            label="Download Discovery Splash"
-            submenuItemLabel="Discovery Splash"
+            label={t("plugin.downloadify.context.discoverySplash.name")}
+            submenuItemLabel={t("plugin.downloadify.context.discoverySplash.label")}
             icon={() => ImageIcon({ width: 20, height: 20 })}
             action={async () => await handleDownload(
                 guildDiscoveryURL,
@@ -500,7 +501,7 @@ export function GuildContextMenu(children: Array<any>, props: GuildContextMenuPr
         downloadifyItems,
         "guild-content-group",
         "downloadify-submenu",
-        "Download",
+        t("plugin.downloadify.context.download"),
         [{
             id: { child: "devmode-copy-id" },
             type: "WITH_GROUP",
@@ -541,8 +542,8 @@ export function UserContextMenu(children: Array<any>, props: UserContextMenuProp
     const downloadifyItems = [userAvatarURL ? (
         <Menu.MenuItem
             id="downloadify-user-avatar"
-            label="Download User Avatar"
-            submenuItemLabel="User Avatar"
+            label={t("plugin.downloadify.context.userAvatar.name")}
+            submenuItemLabel={t("plugin.downloadify.context.userAvatar.label")}
             icon={() => ImageIcon({ width: 20, height: 20 })}
             action={async () => await handleDownload(
                 userAvatarURL,
@@ -555,8 +556,8 @@ export function UserContextMenu(children: Array<any>, props: UserContextMenuProp
     userBannerURL ? (
         <Menu.MenuItem
             id="downloadify-user-banner"
-            label="Download User Banner"
-            submenuItemLabel="User Banner"
+            label={t("plugin.downloadify.context.userBanner.name")}
+            submenuItemLabel={t("plugin.downloadify.context.userBanner.label")}
             icon={() => ImageIcon({ width: 20, height: 20 })}
             action={async () => await handleDownload(
                 userBannerURL,
@@ -569,8 +570,8 @@ export function UserContextMenu(children: Array<any>, props: UserContextMenuProp
     userAvatarDecorationURL ? (
         <Menu.MenuItem
             id="downloadify-user-avatar-decoration"
-            label="Download User Avatar Decoration"
-            submenuItemLabel="User Avatar Decoration"
+            label={t("plugin.downloadify.context.userAvatarDecoration.name")}
+            submenuItemLabel={t("plugin.downloadify.context.userAvatarDecoration.label")}
             icon={() => ImageIcon({ width: 20, height: 20 })}
             action={async () => await handleDownload(
                 userAvatarDecorationURL,
@@ -583,8 +584,8 @@ export function UserContextMenu(children: Array<any>, props: UserContextMenuProp
     memberAvatarURL ? (
         <Menu.MenuItem
             id="downloadify-member-avatar"
-            label="Download Member Avatar"
-            submenuItemLabel="Member Avatar"
+            label={t("plugin.downloadify.context.memberAvatar.name")}
+            submenuItemLabel={t("plugin.downloadify.context.memberAvatar.label")}
             icon={() => ImageIcon({ width: 20, height: 20 })}
             action={async () => await handleDownload(
                 memberAvatarURL,
@@ -597,8 +598,8 @@ export function UserContextMenu(children: Array<any>, props: UserContextMenuProp
     memberBannerURL ? (
         <Menu.MenuItem
             id="downloadify-member-banner"
-            label="Download Member Banner"
-            submenuItemLabel="Member Banner"
+            label={t("plugin.downloadify.context.memberBanner.name")}
+            submenuItemLabel={t("plugin.downloadify.context.memberBanner.label")}
             icon={() => ImageIcon({ width: 20, height: 20 })}
             action={async () => await handleDownload(
                 memberBannerURL,
@@ -611,8 +612,8 @@ export function UserContextMenu(children: Array<any>, props: UserContextMenuProp
     memberAvatarDecorationURL ? (
         <Menu.MenuItem
             id="downloadify-member-avatar-decoration"
-            label="Download Member Avatar Decoration"
-            submenuItemLabel="Member Avatar Decoration"
+            label={t("plugin.downloadify.context.memberAvatarDecoration.name")}
+            submenuItemLabel={t("plugin.downloadify.context.memberAvatarDecoration.label")}
             icon={() => ImageIcon({ width: 20, height: 20 })}
             action={async () => await handleDownload(
                 memberAvatarDecorationURL,
@@ -625,8 +626,8 @@ export function UserContextMenu(children: Array<any>, props: UserContextMenuProp
     defaultUserAvatarURL ? (
         <Menu.MenuItem
             id="downloadify-default-user-avatar"
-            label="Download Default Avatar"
-            submenuItemLabel="Default Avatar"
+            label={t("plugin.downloadify.context.defaultUserAvatar.name")}
+            submenuItemLabel={t("plugin.downloadify.context.defaultUserAvatar.label")}
             icon={() => ImageIcon({ width: 20, height: 20 })}
             action={async () => await handleDownload(
                 defaultUserAvatarURL,
@@ -639,8 +640,8 @@ export function UserContextMenu(children: Array<any>, props: UserContextMenuProp
     userNameplateURL ? (
         <Menu.MenuItem
             id="downloadify-user-nameplate"
-            label="Download Nameplate"
-            submenuItemLabel="Nameplate"
+            label={t("plugin.downloadify.context.nameplate.name")}
+            submenuItemLabel={t("plugin.downloadify.context.nameplate.label")}
             icon={() => ImageIcon({ width: 20, height: 20 })}
             action={async () => await handleDownload(
                 userNameplateURL,
@@ -656,7 +657,7 @@ export function UserContextMenu(children: Array<any>, props: UserContextMenuProp
         downloadifyItems,
         "user-content-group",
         "downloadify-submenu",
-        "Download",
+        t("plugin.downloadify.context.download"),
         [{
             id: { child: "devmode-copy-id" },
             type: "WITH_GROUP",
@@ -678,7 +679,7 @@ export async function handleHoverDownloadButtonClicked(props: HoverDownloadProps
     if (!originalItem) {
         // Fallback to default behavior.
         DownloadifyLogger.info(`[${getFormattedNow()}] [UNRECOGNIZED HOVER DOWNLOAD ITEM]`, props.item);
-        displayStatus && showToast("Unknown Media Item. Falling Back to Default Behavior", Toasts.Type.MESSAGE, { duration: statusDuration * 1250 });
+        displayStatus && showToast(t("plugin.downloadify.context.toast.unknown"), Toasts.Type.MESSAGE, { duration: statusDuration * 1250 });
         window.open(downloadUrl, "_blank");
     } else {
         contentType ??= (await DownloadifyNative.queryURL(downloadUrl) || "");
@@ -701,7 +702,7 @@ export async function handleExpandedModalDownloadButtonClicked(props: ExpandedMo
     if (!url && !original) {
         // Fallback to default behavior.
         DownloadifyLogger.info(`[${getFormattedNow()}] [UNRECOGNIZED EXPANDED MODAL DOWNLOAD ITEM]`, props.item);
-        displayStatus && showToast("Unknown Media Item. Falling Back to Default Behavior", Toasts.Type.MESSAGE, { duration: statusDuration * 1250 });
+        displayStatus && showToast(t("plugin.downloadify.toast.unknown"), Toasts.Type.MESSAGE, { duration: statusDuration * 1250 });
         await fallback();
     } else {
         contentType ??= (await DownloadifyNative.queryURL(url) || "");
@@ -842,7 +843,7 @@ export function VoiceMessageDownloadButton(props: VoiceMessageDownloadButtonProp
                 <button
                     onClick={voiceMessageDownloadClicked}
                     className={d("voice-message-button")}
-                    aria-label="Download Voice Message"
+                    aria-label={t("plugin.downloadify.context.voiceMessage.label")}
                     rel="noreferrer noopener"
                 >
                     {DownloadIcon({ width: 20, height: 20 })}
@@ -878,7 +879,7 @@ async function handleDownload(
     if (defaultDirectory) {
         const resolvedDirectory = defaultDirectory.trim().replace(/^["']|["']$/g, "").replace(/[/\\]+$/, "").replace(/\\/g, "/");
         resolvedPath = `${resolvedDirectory}/${baseName}${resolvedExtension ? `.${resolvedExtension}` : ""}`;
-        displayStatus && showToast("Download Started", Toasts.Type.MESSAGE, { duration: statusDuration * 1000 });
+        displayStatus && showToast(t("plugin.downloadify.toast.started"), Toasts.Type.MESSAGE, { duration: statusDuration * 1000 });
 
         if (!overwriteFiles) {
             for (let num = 1; await DownloadifyNative.fileExists(resolvedPath); num++) {
@@ -891,7 +892,7 @@ async function handleDownload(
 
             if (!resolvedPath) {
                 DownloadifyLogger.info(`[${getFormattedNow()}] [SAVE DIALOGUE CLOSED / DOWNLOAD CANCELED]`);
-                displayStatus && showToast("Download Canceled", Toasts.Type.MESSAGE, { duration: statusDuration * 1000 });
+                displayStatus && showToast(t("plugin.downloadify.toast.canceled"), Toasts.Type.MESSAGE, { duration: statusDuration * 1000 });
                 return;
             }
 
@@ -905,7 +906,7 @@ async function handleDownload(
             }
         } catch (error) {
             DownloadifyLogger.error(`[${getFormattedNow()}] [ERROR OPENING SAVE DIALOGUE]:`, error);
-            displayStatus && showToast("Error Opening Save Dialogue", Toasts.Type.FAILURE, { duration: statusDuration * 1000 });
+            displayStatus && showToast(t("plugin.downloadify.toast.error"), Toasts.Type.FAILURE, { duration: statusDuration * 1000 });
             return;
         }
     }
@@ -976,7 +977,7 @@ async function handleDownload(
                 resolvedURL = `${TENOR_BASE}/${tenorID}${TENOR_MP4_ID}/tenor.mp4`;
             } else {
                 DownloadifyLogger.warn(`[${getFormattedNow()}] [UNSUPPORTED TENOR EXTENSION]\n${chosenExtension}\n${resolvedPath}\n${resolvedURL}`);
-                displayStatus && showToast("Unsupported Tenor Extension", Toasts.Type.FAILURE, { duration: statusDuration * 1000 });
+                displayStatus && showToast(t("plugin.downloadify.toast.tenor"), Toasts.Type.FAILURE, { duration: statusDuration * 1000 });
                 return;
             }
         } else if ([AssetSource.EXTERNAL, AssetSource.PRIMARY_DOMAIN].includes(asset.source)) {
@@ -988,13 +989,13 @@ async function handleDownload(
 
         if (success) {
             DownloadifyLogger.info(`[${getFormattedNow()}] [DOWNLOAD SUCCESS]\n${resolvedPath}\n${resolvedURL}`);
-            displayStatus && showToast("File Downloaded", Toasts.Type.SUCCESS, { duration: statusDuration * 1000 });
+            displayStatus && showToast(t("plugin.downloadify.toast.downloaded"), Toasts.Type.SUCCESS, { duration: statusDuration * 1000 });
         } else {
             DownloadifyLogger.error(`[${getFormattedNow()}] [DOWNLOAD FAILED]\n${resolvedPath}\n${resolvedURL}`);
-            displayStatus && showToast("File Download Failed", Toasts.Type.FAILURE, { duration: statusDuration * 1000 });
+            displayStatus && showToast(t("plugin.downloadify.toast.failed"), Toasts.Type.FAILURE, { duration: statusDuration * 1000 });
         }
     } catch (error) {
         DownloadifyLogger.error(`[${getFormattedNow()}] [DOWNLOAD ERRORED]\n${resolvedPath}\n${resolvedURL}`, error);
-        displayStatus && showToast("Error Downloading File", Toasts.Type.FAILURE, { duration: statusDuration * 1000 });
+        displayStatus && showToast(t("plugin.downloadify.toast.errorDownloading"), Toasts.Type.FAILURE, { duration: statusDuration * 1000 });
     }
 }

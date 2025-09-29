@@ -2784,6 +2784,156 @@
         "dontRoundMyTimestamps": {
             "name": "DontRoundMyTimestamps",
             "description": "Göreli zaman damgalarını her zaman aşağı yuvarlar, böylece 7.6y 8y yerine 7y olur"
+        },
+        "downloadify": {
+            "name": "Downloadify",
+            "description": "Çeşitli içerikleri tarayıcı açmadan veya HTML içinde aramadan doğrudan Discord üzerinden indirin.",
+            "failedDirectory": "İndirme dizini ayarlanamadı.",
+            "modal": {
+                "title": "Varsayılan Dizin",
+                "description": "Varsayılan indirme konumu. Ayarlanırsa, alternatifler olsa bile dosya her zaman orijinal formatında indirilecektir. Her seferinde klasör ve dosya türü seçmek için boş bırakın.",
+                "noDirectory": "Dizin ayarlanmadı",
+                "browsing": "Göz atılıyor...",
+                "browse": "Göz At",
+                "clear": "Temizle"
+            },
+            "option": {
+                "displayStatus": {
+                    "label": "Durumu Göster",
+                    "description": "İndirmeler başladığında, tamamlandığında veya hata oluştuğunda durum bildirimi göster."
+                },
+                "statusDuration": {
+                    "label": "Durum Süresi",
+                    "description": "Durum bildirimlerinin gösterileceği saniye sayısı."
+                },
+                "voiceMessages": {
+                    "label": "Sesli Mesajlar",
+                    "description": "Sesli mesajlara bir indirme butonu ekleyin."
+                },
+                "allowUnicode": {
+                    "label": "Unicode'a İzin Ver",
+                    "description": "Dosya adlarında ASCII dışı karakterlere izin ver."
+                },
+                "overwriteFiles": {
+                    "label": "Dosyaların Üzerine Yaz",
+                    "description": "Varsayılan dizin ayarlanmışsa ve indirilen dosya adı mevcut bir dosyayla eşleşiyorsa, dosyanın üzerine yaz. Devre dışı bırakılırsa dosya adına bir sayı eklenecektir."
+                },
+                "defaultDirectory": {
+                    "label": "Varsayılan Dizin"
+                }
+            },
+            "context": {
+                "download": "İndir",
+                "role": {
+                    "name": "{{role}} Rol İkonunu İndir",
+                    "unnamed": "Rol İkonunu İndir",
+                    "labelName": "{{role}} İkonu",
+                    "labelUnnamed": "Rol İkonu"
+                },
+                "clan": {
+                    "name": "{{clan}} Klan Rozetini İndir",
+                    "label": "{{clan}} Klan Rozeti"
+                },
+                "customEmoji": {
+                    "name": "{{emoji}} Emojisini İndir",
+                    "unnamed": "Özel Emoji İndir",
+                    "labelName": "{{emoji}}",
+                    "labelUnnamed": "Özel Emoji"
+                },
+                "unicodeEmoji": {
+                    "name": "{{emoji}} Emojisini İndir",
+                    "unnamed": "Unicode Emoji İndir",
+                    "labelName": "{{emoji}}",
+                    "labelUnnamed": "Unicode Emoji"
+                },
+                "sticker": {
+                    "name": "{{sticker}} Çıkartmasını İndir",
+                    "unnamed": "Çıkartma İndir",
+                    "labelName": "{{sticker}}",
+                    "labelUnnamed": "Çıkartma"
+                },
+                "media": {
+                    "name": "Medyayı İndir",
+                    "label": "Medya"
+                },
+                "attachment": {
+                    "name": "Tenor GIF İndir",
+                    "media": "{{type}} İndir",
+                    "labelName": "Tenor GIF",
+                    "footer": "Altbilgi ikonu",
+                    "author": "Yazar ikonu",
+                    "thumbnail": "Küçük Resim",
+                    "embed": "Gömülü Medya",
+                    "mediaType": "Medya"
+                },
+                "group": {
+                    "name": "Grup İkonunu İndir",
+                    "label": "Grup İkonu",
+                    "defaultName": "Varsayılan İkonu İndir",
+                    "defaultLabel": "Varsayılan İkon"
+                },
+                "icon": {
+                    "name": "İkonu İndir",
+                    "label": "İkon"
+                },
+                "banner": {
+                    "name": "Afişi İndir",
+                    "label": "Afiş"
+                },
+                "inviteSplash": {
+                    "name": "Davet Arka Planını İndir",
+                    "label": "Davet Arka Planı"
+                },
+                "discoverySplash": {
+                    "name": "Keşif Arka Planını İndir",
+                    "label": "Keşif Arka Planı"
+                },
+                "userAvatar": {
+                    "name": "Kullanıcı Avatarını İndir",
+                    "label": "Kullanıcı Avatarı"
+                },
+                "userBanner": {
+                    "name": "Kullanıcı Afişini İndir",
+                    "label": "Kullanıcı Afişi"
+                },
+                "userAvatarDecoration": {
+                    "name": "Kullanıcı Avatar Süslemesini İndir",
+                    "label": "Kullanıcı Avatar Süslemesi"
+                },
+                "memberAvatar": {
+                    "name": "Üye Avatarını İndir",
+                    "label": "Üye Avatarı"
+                },
+                "memberBanner": {
+                    "name": "Üye Afişini İndir",
+                    "label": "Üye Afişi"
+                },
+                "memberAvatarDecoration": {
+                    "name": "Üye Avatar Süslemesini İndir",
+                    "label": "Üye Avatar Süslemesi"
+                },
+                "memberDefaultAvatar": {
+                    "name": "Üye Varsayılan Avatarını İndir",
+                    "label": "Üye Varsayılan Avatarı"
+                },
+                "nameplate": {
+                    "name": "İsim Plakasını İndir",
+                    "label": "İsim Plakası"
+                },
+                "voiceMessage": {
+                    "label": "Sesli Mesajı İndir"
+                }
+            },
+            "toast": {
+                "unknown": "Bilinmeyen Medya Öğesi. Varsayılan Davranışa Dönülüyor",
+                "started": "İndirme başladı",
+                "canceled": "İndirme iptal edildi",
+                "error": "Kaydetme Diyaloğu Açılırken Hata",
+                "tenor": "Desteklenmeyen Tenor Uzantısı",
+                "downloaded": "Dosya İndirildi",
+                "failed": "Dosya İndirme Başarısız",
+                "errorDownloading": "Dosya İndirilirken Hata"
+            }
         }
     }
 }
