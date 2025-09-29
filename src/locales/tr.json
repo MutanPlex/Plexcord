@@ -3014,6 +3014,29 @@
                     "description": "doldurulacak"
                 }
             }
+        },
+        "experiments": {
+            "name": "Experiments",
+            "description": "Discord'da Deneyler ve diğer yalnızca geliştiriciye özel özelliklere erişim sağlar!",
+            "modal": {
+                "about": {
+                    "title": "Daha Fazla Bilgi",
+                    "body": "{{key}} ile Discord'un Geliştirici Araçlarını açabilirsiniz"
+                },
+                "warning": {
+                    "title": "Dikkat!!",
+                    "body": "Deneyler, yayınlanmamış Discord özellikleridir. Çalışmayabilirler, hatta istemcinizi bozabilir veya hesabınızın devre dışı kalmasına neden olabilirler.",
+                    "notReponsible": "Deneyleri yalnızca ne yaptığınızı biliyorsanız kullanın. Plexcord, deneyleri etkinleştirerek oluşabilecek hiçbir zarardan sorumlu değildir.",
+                    "useAtOwnRisk": "Bir deneyin ne işe yaradığını bilmiyorsanız, görmezden gelin. Bizden de ne yaptıklarını sormayın, büyük ihtimalle biz de bilmiyoruz.",
+                    "serverSideFeatures": "Hayır, 'Send to Client' kutusunu işaretlemek gibi sunucu tarafı özelliklerini kullanamazsınız."
+                }
+            },
+            "option": {
+                "toolbarDevMenu": {
+                    "label": "Araç Çubuğu Geliştirici Menüsü",
+                    "description": "Yardım (?) araç çubuğu düğmesini (sohbetin sağ üstünde) Discord'un geliştirici menüsüyle değiştirir"
+                }
+            }
         }
     }
 }

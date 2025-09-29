@@ -17,11 +17,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t, tJsx } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { ErrorCard } from "@components/ErrorCard";
-import { Devs, IS_MAC } from "@utils/constants";
+import { Devs, IS_MAC, PcDevs } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy, findLazy } from "@webpack";
@@ -37,8 +38,13 @@ const altKey = IS_MAC ? "opt" : "alt";
 
 const settings = definePluginSettings({
     toolbarDevMenu: {
+        get label() {
+            return t("plugin.experiments.option.toolbarDevMenu.label");
+        },
+        get description() {
+            return t("plugin.experiments.option.toolbarDevMenu.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Change the Help (?) toolbar button (top right in chat) to Discord's developer menu",
         default: false,
         restartNeeded: true
     }
@@ -53,7 +59,12 @@ export default definePlugin({
         Devs.Nickyux,
         Devs.BanTheNons,
         Devs.Nuckyz,
+        PcDevs.MutanPlex
     ],
+
+    get displayDescription() {
+        return t("plugin.experiments.description");
+    },
 
     settings,
 
@@ -136,14 +147,15 @@ export default definePlugin({
     settingsAboutComponent: () => {
         return (
             <React.Fragment>
-                <Forms.FormTitle tag="h3">More Information</Forms.FormTitle>
+                <Forms.FormTitle tag="h3">{t("plugin.experiments.modal.about.title")}</Forms.FormTitle>
                 <Forms.FormText variant="text-md/normal">
-                    You can open Discord's DevTools via {" "}
-                    <div className={KbdStyles.combo} style={{ display: "inline-flex" }}>
-                        <kbd className={KbdStyles.key}>{modKey}</kbd> +{" "}
-                        <kbd className={KbdStyles.key}>{altKey}</kbd> +{" "}
-                        <kbd className={KbdStyles.key}>O</kbd>{" "}
-                    </div>
+                    {tJsx("plugin.experiments.modal.about.body", {
+                        key: <div className={KbdStyles.combo} style={{ display: "inline-flex" }}>
+                            <kbd className={KbdStyles.key}>{modKey}</kbd> +{" "}
+                            <kbd className={KbdStyles.key}>{altKey}</kbd> +{" "}
+                            <kbd className={KbdStyles.key}>O</kbd>{" "}
+                        </div>
+                    })}
                 </Forms.FormText>
             </React.Fragment>
         );
@@ -151,20 +163,20 @@ export default definePlugin({
 
     WarningCard: ErrorBoundary.wrap(() => (
         <ErrorCard id="pc-experiments-warning-card" className={Margins.bottom16}>
-            <Forms.FormTitle tag="h2">Hold on!!</Forms.FormTitle>
+            <Forms.FormTitle tag="h2">{t("plugin.experiments.modal.warning.title")}</Forms.FormTitle>
 
             <Forms.FormText>
-                Experiments are unreleased Discord features. They might not work, or even break your client or get your account disabled.
+                {t("plugin.experiments.modal.warning.body")}
             </Forms.FormText>
 
             <Forms.FormText className={Margins.top8}>
-                Only use experiments if you know what you're doing. Plexcord is not responsible for any damage caused by enabling experiments.
+                {t("plugin.experiments.modal.warning.notReponsible")}
 
-                If you don't know what an experiment does, ignore it. Do not ask us what experiments do either, we probably don't know.
+                {t("plugin.experiments.modal.warning.useAtOwnRisk")}
             </Forms.FormText>
 
             <Forms.FormText className={Margins.top8}>
-                No, you cannot use server-side features like checking the "Send to Client" box.
+                {t("plugin.experiments.modal.warning.serverSideFeatures")}
             </Forms.FormText>
         </ErrorCard>
     ), { noop: true })
