@@ -19,6 +19,7 @@ import {
 import { Guild } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
+import { findStoreLazy } from "@webpack";
 import { Menu, React, useStateFromStores } from "@webpack/common";
 
 import hiddenServersButton from "./components/HiddenServersButton";
@@ -39,17 +40,30 @@ type qsResult = {
     };
 };
 
+
+export const SortedGuildStore = findStoreLazy("SortedGuildStore");
+
 const Patch: NavContextMenuPatchCallback = (
     children,
     { guild }: { guild: Guild; }
 ) => {
     const group = findGroupChildrenByChildId("privacy", children);
 
-    group?.push(
+    if (!group) return;
+
+    const isHidden = HiddenServersStore.hiddenGuilds.has(guild.id.toString());
+
+    group.push(
         <Menu.MenuItem
             id="pc-hide-server"
-            label="Hide Server"
-            action={() => HiddenServersStore.addHidden(guild)}
+            label={isHidden ? "Unhide Server" : "Hide Server"}
+            action={() => {
+                if (isHidden) {
+                    HiddenServersStore.removeHiddenGuild(guild.id);
+                } else {
+                    HiddenServersStore.addHiddenGuild(guild.id);
+                }
+            }}
         />
     );
 };
@@ -66,12 +80,37 @@ export default definePlugin({
     name: "HideServers",
     description: "Allows you to hide servers from the guild list and quick switcher by right clicking them",
     authors: [PcDevs.bep, PcDevs.MutanPlex],
-    tags: ["guild", "server", "hide"],
+    tags: ["guild", "server", "hide", "folder"],
 
     dependencies: ["ServerListAPI"],
     contextMenus: {
-        "guild-context": Patch,
         "guild-header-popout": Patch,
+        "guild-context": (menuItems, props: any) => {
+            if ("guild" in props) {
+                Patch(menuItems, props);
+            }
+
+            if ("folderId" in props) {
+                const { folderId } = props;
+                const folder = SortedGuildStore.getGuildFolderById(folderId);
+                const { guildIds } = folder;
+                const isHidden = guildIds.every(id => HiddenServersStore.hiddenGuilds.has(id));
+
+                menuItems.push(
+                    <Menu.MenuItem
+                        id="pc-hide-folder"
+                        label={isHidden ? "Unhide Folder" : "Hide Folder"}
+                        action={() => {
+                            if (isHidden) {
+                                HiddenServersStore.removeHiddenFolder(folderId, guildIds);
+                            } else {
+                                HiddenServersStore.addHiddenFolder(folderId, guildIds);
+                            }
+                        }}
+                    />
+                );
+            }
+        },
     },
     patches: [
         {
@@ -81,7 +120,6 @@ export default definePlugin({
                     match: /(\i)(\.map\(.{0,30}\}\),\i)/,
                     replace: "$self.useFilteredGuilds($1)$2"
                 },
-                // despite my best efforts, the above doesnt trigger a rerender
                 {
                     match: /let{disableAppDownload.{0,10}isPlatformEmbedded/,
                     replace: "$self.useStore();$&",
@@ -112,15 +150,26 @@ export default definePlugin({
     },
 
     useFilteredGuilds(guilds: guildsNode[]): guildsNode[] {
-        const hiddenGuilds = useStateFromStores([HiddenServersStore], () => HiddenServersStore.hiddenGuilds, undefined, (old, newer) => old.size === newer.size);
+        const hiddenGuilds = useStateFromStores(
+            [HiddenServersStore],
+            () => HiddenServersStore.hiddenGuilds,
+            undefined,
+            (old, newer) => old.size === newer.size
+        );
         return guilds.flatMap(guild => {
             if (!(hiddenGuilds instanceof Set)) return [guild];
-            if (hiddenGuilds.has(guild.id.toString())) {
+            if (guild.type === "guild" && hiddenGuilds.has(guild.id.toString())) {
+                return [];
+            }
+
+            if (guild.type === "folder" && hiddenGuilds.has("folder-" + guild.id.toString())) {
                 return [];
             }
             const newGuild = Object.assign({}, guild);
             newGuild.children = guild.children.filter(
-                child => !hiddenGuilds.has(child.id.toString())
+                child =>
+                    !hiddenGuilds.has(child.id.toString()) &&
+                    !(child.type === "folder" && hiddenGuilds.has("folder-" + child.id.toString()))
             );
 
             return [newGuild];
@@ -128,7 +177,6 @@ export default definePlugin({
     },
 
     filteredGuildResults(results: qsResult[]): qsResult[] {
-        // not used in a component so no useStateFromStore
         const { hiddenGuilds } = HiddenServersStore;
         return results.filter(result => {
             if (result?.record?.guild_id && hiddenGuilds.has(result.record.guild_id)) {

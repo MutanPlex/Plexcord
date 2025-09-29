@@ -2760,10 +2760,6 @@
                     "label": "Gift",
                     "description": "Remove gift button"
                 },
-                "gif": {
-                    "label": "GIF",
-                    "description": "Remove gif and sticker buttons"
-                },
                 "emojiList": {
                     "label": "Emoji List",
                     "description": "Remove unavailable categories from the emoji picker"

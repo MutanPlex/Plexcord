@@ -87,7 +87,7 @@ export default definePlugin({
 
         ws.onmessage = this.handleEvent;
 
-        const connectionSuccessful = await new Promise(res => setTimeout(() => res(ws.readyState === WebSocket.OPEN), 1000)); // check if open after 1s
+        const connectionSuccessful = await new Promise(res => setTimeout(() => res(ws.readyState === WebSocket.OPEN), 5000)); // check if open after 5s
         if (!connectionSuccessful) {
             showNotice(t("plugin.arRpc.toast.failed"), t("plugin.arRpc.toast.retry"), () => { // show notice about failure to connect, with retry/ignore
                 popNotice();

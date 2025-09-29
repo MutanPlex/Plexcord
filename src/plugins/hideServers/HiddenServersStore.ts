@@ -19,10 +19,8 @@ export const HiddenServersStore = proxyLazyWebpack(() => {
 
     class HiddenServersStore extends Store {
         public _hiddenGuilds: Set<string> = new Set();
-        public get hiddenGuilds() {
-            return this._hiddenGuilds;
-        }
-        // id try to use .initialize() but i dont know how it works
+        public get hiddenGuilds() { return this._hiddenGuilds; }
+
         public async load() {
             const data = await DataStore.get(DB_KEY);
             if (data && data instanceof Set) {
@@ -33,16 +31,35 @@ export const HiddenServersStore = proxyLazyWebpack(() => {
             this._hiddenGuilds.clear();
         }
 
-        public addHidden(guild: Guild) {
-            this._hiddenGuilds.add(guild.id);
+        private save() {
             DataStore.set(DB_KEY, this._hiddenGuilds);
-            this.emitChange();
         }
-        public removeHidden(id: string) {
+
+        public addHiddenGuild(id: string) {
+            this._hiddenGuilds.add(id);
+            this.save();
+        }
+
+        public removeHiddenGuild(id: string) {
             this._hiddenGuilds.delete(id);
-            DataStore.set(DB_KEY, this._hiddenGuilds);
+            this.save();
             this.emitChange();
         }
+
+        public addHiddenFolder(id: string, guildIds: string[]) {
+            this._hiddenGuilds.add(`folder-${id}`);
+            guildIds.forEach(gid => this._hiddenGuilds.add(gid));
+            this.save();
+            this.emitChange();
+        }
+
+        public removeHiddenFolder(id: string, guildIds: string[]) {
+            this._hiddenGuilds.delete(`folder-${id}`);
+            guildIds.forEach(gid => this._hiddenGuilds.delete(gid));
+            this.save();
+            this.emitChange();
+        }
+
         public clearHidden() {
             this._hiddenGuilds.clear();
             DataStore.del(DB_KEY);

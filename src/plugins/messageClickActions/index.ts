@@ -18,10 +18,11 @@
 */
 
 import { definePluginSettings } from "@api/Settings";
+import { MessageFlags } from "@plexcord/discord-types/enums";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { FluxDispatcher, PermissionsBits, PermissionStore, UserStore, WindowStore } from "@webpack/common";
+import { FluxDispatcher, MessageTypeSets, PermissionsBits, PermissionStore, UserStore, WindowStore } from "@webpack/common";
 import NoReplyMentionPlugin from "plugins/noReplyMention";
 
 const MessageActions = findByPropsLazy("deleteMessage", "startEditMessage");
@@ -74,7 +75,7 @@ export default definePlugin({
         WindowStore.removeChangeListener(focusChanged);
     },
 
-    onMessageClick(msg: any, channel, event) {
+    onMessageClick(msg, channel, event) {
         const isMe = msg.author.id === UserStore.getCurrentUser().id;
         if (!isDeletePressed) {
             if (event.detail < 2) return;
@@ -90,8 +91,7 @@ export default definePlugin({
             } else {
                 if (!settings.store.enableDoubleClickToReply) return;
 
-                const EPHEMERAL = 64;
-                if (msg.hasFlag(EPHEMERAL)) return;
+                if (!MessageTypeSets.REPLYABLE.has(msg.type) || msg.hasFlag(MessageFlags.EPHEMERAL)) return;
 
                 const isShiftPress = event.shiftKey && !settings.store.requireModifier;
                 const shouldMention = Plexcord.Plugins.isPluginEnabled(NoReplyMentionPlugin.name)

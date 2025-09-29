@@ -2760,10 +2760,6 @@
                     "label": "Hediye",
                     "description": "Hediye butonunu kaldır"
                 },
-                "gif": {
-                    "label": "GIF",
-                    "description": "GIF ve çıkartma butonlarını kaldır"
-                },
                 "emojiList": {
                     "label": "Emoji Listesi",
                     "description": "Emoji seçicisindeki kullanılamayan kategorileri kaldır"
