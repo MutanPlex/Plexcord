@@ -3120,6 +3120,28 @@
                 "user": "User",
                 "exportAllChannel": "Export All Channel Messages"
             }
+        },
+        "expressionCloner": {
+            "name": "ExpressionCloner",
+            "description": "Allows you to clone Emotes & Stickers to your own server (right click them)",
+            "modal": {
+                "title": "Custom Name",
+                "invalidName": "Name must be between 2 and 32 characters and only contain alphanumeric characters"
+            },
+            "toast": {
+                "success": "Successfully cloned {{name}} to {{guild}}!",
+                "yourServer": "your server",
+                "failed": "Failed to clone: ",
+                "console": "Something went wrong (check console!)"
+            },
+            "context": {
+                "clone": "Clone {{type}}",
+                "cloneName": "Clone {{data}}"
+            }
+        },
+        "f8break": {
+            "name": "F8Break",
+            "description": "Pause the client when you press F8 with DevTools (+ breakpoints) open."
         }
     }
 }

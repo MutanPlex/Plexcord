@@ -18,6 +18,7 @@
 */
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { migratePluginSettings } from "@api/Settings";
 import { CheckedTextInput } from "@components/CheckedTextInput";
 import { Guild, GuildSticker } from "@plexcord/discord-types";
@@ -150,19 +151,19 @@ async function doClone(guildId: string, data: Sticker | Emoji) {
             await cloneEmoji(guildId, data);
 
         Toasts.show({
-            message: `Successfully cloned ${data.name} to ${GuildStore.getGuild(guildId)?.name ?? "your server"}!`,
+            message: t("plugin.expressionCloner.toast.success", { name: data.name, guild: GuildStore.getGuild(guildId)?.name ?? t("plugin.expressionCloner.toast.yourServer") }),
             type: Toasts.Type.SUCCESS,
             id: Toasts.genId()
         });
     } catch (e: any) {
-        let message = "Something went wrong (check console!)";
+        let message = t("plugin.expressionCloner.toast.console");
         try {
             message = JSON.parse(e.text).message;
         } catch { }
 
         new Logger("ExpressionCloner").error("Failed to clone", data.name, "to", guildId, e);
         Toasts.show({
-            message: "Failed to clone: " + message,
+            message: t("plugin.expressionCloner.toast.failed") + message,
             type: Toasts.Type.FAILURE,
             id: Toasts.genId()
         });
@@ -187,7 +188,7 @@ function CloneModal({ data }: { data: Sticker | Emoji; }) {
 
     return (
         <>
-            <Forms.FormTitle className={Margins.top20}>Custom Name</Forms.FormTitle>
+            <Forms.FormTitle className={Margins.top20}>{t("plugin.expressionCloner.modal.title")}</Forms.FormTitle>
             <CheckedTextInput
                 value={name}
                 onChange={v => {
@@ -197,7 +198,7 @@ function CloneModal({ data }: { data: Sticker | Emoji; }) {
                 validate={v =>
                     (data.t === "Emoji" && v.length > 2 && v.length < 32 && nameValidator.test(v))
                     || (data.t === "Sticker" && v.length > 2 && v.length < 30)
-                    || "Name must be between 2 and 32 characters and only contain alphanumeric characters"
+                    || t("plugin.expressionCloner.modal.invalidName")
                 }
             />
             <div style={{
@@ -280,7 +281,7 @@ function buildMenuItem(type: "Emoji" | "Sticker", fetchData: () => Promisable<Om
         <Menu.MenuItem
             id="emote-cloner"
             key="emote-cloner"
-            label={`Clone ${type}`}
+            label={t("plugin.expressionCloner.context.clone", { type })}
             action={() =>
                 openModalLazy(async () => {
                     const res = await fetchData();
@@ -299,7 +300,7 @@ function buildMenuItem(type: "Emoji" | "Sticker", fetchData: () => Promisable<Om
                                     width={24}
                                     style={{ marginRight: "0.5em" }}
                                 />
-                                <Forms.FormText>Clone {data.name}</Forms.FormText>
+                                <Forms.FormText>{t("plugin.expressionCloner.context.cloneName", { data: data.name })}</Forms.FormText>
                             </ModalHeader>
                             <ModalContent>
                                 <CloneModal data={data} />
@@ -370,6 +371,11 @@ export default definePlugin({
     description: "Allows you to clone Emotes & Stickers to your own server (right click them)",
     tags: ["StickerCloner", "EmoteCloner", "EmojiCloner"],
     authors: [Devs.Ven, Devs.Nuckyz],
+
+    get displayDescription() {
+        return t("plugin.expressionCloner.description");
+    },
+
     contextMenus: {
         "message": messageContextMenuPatch,
         "expression-picker": expressionPickerPatch

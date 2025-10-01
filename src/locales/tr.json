@@ -3120,6 +3120,28 @@
                 "user": "Kullanıcı",
                 "exportAllChannel": "Kanalın Tüm Mesajlarını Dışarı Aktar"
             }
+        },
+        "expressionCloner": {
+            "name": "ExpressionCloner",
+            "description": "Emojileri ve Stickerları kendi sunucunuza klonlamanıza izin verir (sağ tıklayın)",
+            "modal": {
+                "title": "Özel İsim",
+                "invalidName": "İsim 2 ile 32 karakter arasında olmalı ve yalnızca alfanümerik karakterler içermelidir"
+            },
+            "toast": {
+                "success": "{{name}}, {{guild}} sunucusuna başarıyla klonlandı!",
+                "yourServer": "senin sunucun",
+                "failed": "Klonlama başarısız: ",
+                "console": "Bir şeyler yanlış gitti (konsolu kontrol et!)"
+            },
+            "context": {
+                "clone": "{{type}} Klonla",
+                "cloneName": "{{data}} Klonla"
+            }
+        },
+        "f8break": {
+            "name": "F8Break",
+            "description": "DevTools (+ breakpoints) açıkken F8’e bastığınızda istemciyi duraklatır."
         }
     }
 }
