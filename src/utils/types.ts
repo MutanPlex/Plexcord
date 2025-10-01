@@ -100,6 +100,7 @@ export interface Plugin extends PluginDef {
 export interface PluginDef {
     name: string;
     description: string;
+    displayDescription?: string;
     authors: PluginAuthor[];
     start?(): void;
     stop?(): void;

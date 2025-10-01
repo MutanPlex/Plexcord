@@ -626,8 +626,8 @@ export function UserContextMenu(children: Array<any>, props: UserContextMenuProp
     defaultUserAvatarURL ? (
         <Menu.MenuItem
             id="downloadify-default-user-avatar"
-            label={t("plugin.downloadify.context.defaultUserAvatar.name")}
-            submenuItemLabel={t("plugin.downloadify.context.defaultUserAvatar.label")}
+            label={t("plugin.downloadify.context.memberDefaultAvatar.name")}
+            submenuItemLabel={t("plugin.downloadify.context.memberDefaultAvatar.label")}
             icon={() => ImageIcon({ width: 20, height: 20 })}
             action={async () => await handleDownload(
                 defaultUserAvatarURL,

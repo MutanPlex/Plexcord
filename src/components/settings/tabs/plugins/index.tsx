@@ -200,7 +200,8 @@ function PluginSettings() {
         return (
             plugin.name.toLowerCase().includes(search) ||
             plugin.description.toLowerCase().includes(search) ||
-            plugin.tags?.some(t => t.toLowerCase().includes(search))
+            plugin.tags?.some(t => t.toLowerCase().includes(search)) ||
+            plugin.displayDescription?.toLowerCase().includes(search)
         );
     };
 

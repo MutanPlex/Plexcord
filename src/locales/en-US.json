@@ -3037,6 +3037,89 @@
                     "description": "Change the Help (?) toolbar button (top right in chat) to Discord's developer menu"
                 }
             }
+        },
+        "exportMessages": {
+            "name": "ExportMessages",
+            "description": "Allows you to export messages to files - single message, all messages from a user, or all channel messages",
+            "option": {
+                "maxMessages": {
+                    "label": "Max Messages",
+                    "description": "Maximum number of messages to export (0 = unlimited)"
+                },
+                "includeAttachments": {
+                    "label": "Include Attachments",
+                    "description": "Include attachment information in exports"
+                },
+                "includeEmbeds": {
+                    "label": "Include Embeds",
+                    "description": "Include embed information in exports"
+                },
+                "includeReactions": {
+                    "label": "Include Reactions",
+                    "description": "Include reaction information in exports"
+                },
+                "includeComponents": {
+                    "label": "Include Components",
+                    "description": "Include component information in exports"
+                }
+            },
+            "message": {
+                "invalid": "Invalid message - no author",
+                "unknownUser": "Unknown User",
+                "botEmbed": "Bot Embed Message",
+                "attachments": "Attachments",
+                "unknown": "Unknown",
+                "noUrl": "No URL",
+                "embeds": "Embeds",
+                "title": "Title",
+                "description": "Description",
+                "url": "URL",
+                "footer": "Footer",
+                "author": "Author",
+                "fields": "Fields",
+                "components": "Components",
+                "component": "Component",
+                "interactiveElement": "Interactive Element",
+                "reactions": "Reactions",
+                "errorFormatting": "Error formatting message",
+                "unknownError": "Unknown error",
+                "header": "{{titlePrefix}} {{displayName}} in {{channelName}}",
+                "from": "Messages from",
+                "direct": "Direct Messages",
+                "exported": "Exported on",
+                "total": "Total messages"
+            },
+            "toast": {
+                "export": {
+                    "title": "Export Messages",
+                    "body": "Failed to export message"
+                },
+                "noMessages": {
+                    "title": "Export Messages",
+                    "notFoundUser": "No messages found from this user in this channel",
+                    "notFoundChannel": "No messages found in this channel"
+                },
+                "failed": {
+                    "title": "Export Messages",
+                    "body": "Failed to export messages"
+                },
+                "userNotFound": {
+                    "title": "Export Messages",
+                    "body": "User not found"
+                },
+                "complete": {
+                    "title": "Export Complete",
+                    "saved": "File saved",
+                    "downloaded": "File downloaded",
+                    "messages": "messages"
+                }
+            },
+            "context": {
+                "exportMessage": "Export This Message",
+                "exportAll": "Export All Messages in from {{user}}",
+                "user": "User",
+                "exportAllChannel": "Export All Channel Messages"
+            }
         }
     }
 }

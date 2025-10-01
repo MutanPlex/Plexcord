@@ -3037,6 +3037,89 @@
                     "description": "Yardım (?) araç çubuğu düğmesini (sohbetin sağ üstünde) Discord'un geliştirici menüsüyle değiştirir"
                 }
             }
+        },
+        "exportMessages": {
+            "name": "ExportMessages",
+            "description": "Mesajları dosyalara aktarmanıza izin verir - tek mesaj, bir kullanıcıya ait tüm mesajlar veya bir kanalın tüm mesajları",
+            "option": {
+                "maxMessages": {
+                    "label": "Maksimum Mesaj",
+                    "description": "Aktarılacak maksimum mesaj sayısı (0 = sınırsız)"
+                },
+                "includeAttachments": {
+                    "label": "Ekleri Dahil Et",
+                    "description": "Aktarımlara ek bilgilerini dahil et"
+                },
+                "includeEmbeds": {
+                    "label": "Embedleri Dahil Et",
+                    "description": "Aktarımlara embed bilgilerini dahil et"
+                },
+                "includeReactions": {
+                    "label": "Tepkileri Dahil Et",
+                    "description": "Aktarımlara tepki bilgilerini dahil et"
+                },
+                "includeComponents": {
+                    "label": "Bileşenleri Dahil Et",
+                    "description": "Aktarımlara bileşen bilgilerini dahil et"
+                }
+            },
+            "message": {
+                "invalid": "Geçersiz mesaj - yazar yok",
+                "unknownUser": "Bilinmeyen Kullanıcı",
+                "botEmbed": "Bot Embed Mesajı",
+                "attachments": "Ekler",
+                "unknown": "Bilinmeyen",
+                "noUrl": "URL yok",
+                "embeds": "Embedler",
+                "title": "Başlık",
+                "description": "Açıklama",
+                "url": "URL",
+                "footer": "Altbilgi",
+                "author": "Yazar",
+                "fields": "Alanlar",
+                "components": "Bileşenler",
+                "component": "Bileşen",
+                "interactiveElement": "Etkileşimli Öğe",
+                "reactions": "Tepkiler",
+                "errorFormatting": "Mesaj biçimlendirilirken hata",
+                "unknownError": "Bilinmeyen hata",
+                "header": "{{titlePrefix}} {{displayName}}, {{channelName}} kanalında",
+                "from": "Mesajlar -",
+                "direct": "Doğrudan Mesajlar",
+                "exported": "Dışarı Aktarım Tarihi",
+                "total": "Toplam mesaj"
+            },
+            "toast": {
+                "export": {
+                    "title": "Mesajları Dışarı Aktar",
+                    "body": "Mesaj dışarı aktarımı başarısız oldu"
+                },
+                "noMessages": {
+                    "title": "Mesajları Dışarı Aktar",
+                    "notFoundUser": "Bu kullanıcıya ait mesaj bulunamadı",
+                    "notFoundChannel": "Bu kanalda mesaj bulunamadı"
+                },
+                "failed": {
+                    "title": "Mesajları Dışarı Aktar",
+                    "body": "Mesajlar dışarı aktarılırken hata oluştu"
+                },
+                "userNotFound": {
+                    "title": "Mesajları Dışarı Aktar",
+                    "body": "Kullanıcı bulunamadı"
+                },
+                "complete": {
+                    "title": "Dışarı Aktarım Tamamlandı",
+                    "saved": "Dosya kaydedildi",
+                    "downloaded": "Dosya indirildi",
+                    "messages": "mesaj"
+                }
+            },
+            "context": {
+                "exportMessage": "Bu Mesajı Dışarı Aktar",
+                "exportAll": "{{user}} kullanıcısının tüm mesajlarını dışarı aktar",
+                "user": "Kullanıcı",
+                "exportAllChannel": "Kanalın Tüm Mesajlarını Dışarı Aktar"
+            }
         }
     }
 }
