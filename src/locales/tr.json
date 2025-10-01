@@ -3278,6 +3278,28 @@
                 "buildBackwards": "Geriye dönük uyumlu FPTE oluştur",
                 "moreCharacters": "Daha fazla karakter kullanılacak"
             }
+        },
+        "fastDeleteChannels": {
+            "name": "FastDeleteChannels",
+            "description": "Kanalları silmek için bir çöp kutusu simgesi ekler",
+            "option": {
+                "keyBind": {
+                    "label": "Kısayol Tuşu",
+                    "description": "Çöp kutusunu açıp kapatmak için kullanılacak tuş."
+                },
+                "reqCtrl": {
+                    "label": "Ctrl Tuşu Gerekli",
+                    "description": "Çöp kutusunu açmak için Ctrl tuşunun basılı tutulmasını gerektirir."
+                },
+                "reqShift": {
+                    "label": "Shift Tuşu Gerekli",
+                    "description": "Çöp kutusunu açmak için Shift tuşunun basılı tutulmasını gerektirir."
+                },
+                "reqAlt": {
+                    "label": "Alt Tuşu Gerekli",
+                    "description": "Çöp kutusunu açmak için Alt tuşunun basılı tutulmasını gerektirir."
+                }
+            }
         }
     }
 }

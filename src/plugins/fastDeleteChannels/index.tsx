@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -50,23 +51,43 @@ function showIcon() {
 // TY ToggleVideoBind
 const settings = definePluginSettings({
     keyBind: {
-        description: "The key to toggle trash when pressed.",
+        get label() {
+            return t("plugins.fastDeleteChannels.option.keyBind.label");
+        },
+        get description() {
+            return t("plugins.fastDeleteChannels.option.keyBind.description");
+        },
         type: OptionType.STRING,
         default: "KeyZ",
         isValid: (value: string) => validKeycodes.includes(value),
     },
     reqCtrl: {
-        description: "Require control to be held.",
+        get label() {
+            return t("plugins.fastDeleteChannels.option.reqCtrl.label");
+        },
+        get description() {
+            return t("plugins.fastDeleteChannels.option.reqCtrl.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
     },
     reqShift: {
-        description: "Require shift to be held.",
+        get label() {
+            return t("plugins.fastDeleteChannels.option.reqShift.label");
+        },
+        get description() {
+            return t("plugins.fastDeleteChannels.option.reqShift.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
     },
     reqAlt: {
-        description: "Require alt to be held.",
+        get label() {
+            return t("plugins.fastDeleteChannels.option.reqAlt.label");
+        },
+        get description() {
+            return t("plugins.fastDeleteChannels.option.reqAlt.description");
+        },
         type: OptionType.BOOLEAN,
         default: false,
     },
@@ -77,6 +98,11 @@ export default definePlugin({
     description: "Adds a trash icon to delete channels",
     authors: [Devs.thororen],
     settings,
+
+    get displayDescription() {
+        return t("plugins.fastDeleteChannels.description");
+    },
+
     patches: [
         // TY TypingIndicator
         {

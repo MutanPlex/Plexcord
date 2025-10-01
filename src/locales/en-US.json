@@ -3278,6 +3278,28 @@
                 "buildBackwards": "Build backwards compatible FPTE",
                 "moreCharacters": "Will use more characters"
             }
+        },
+        "fastDeleteChannels": {
+            "name": "FastDeleteChannels",
+            "description": "Adds a trash icon to delete channels",
+            "option": {
+                "keyBind": {
+                    "label": "Key Bind",
+                    "description": "The key to toggle trash when pressed."
+                },
+                "reqCtrl": {
+                    "label": "Require Control",
+                    "description": "Require control key to be held."
+                },
+                "reqShift": {
+                    "label": "Require Shift",
+                    "description": "Require shift key to be held."
+                },
+                "reqAlt": {
+                    "label": "Require Alt",
+                    "description": "Require alt key to be held."
+                }
+            }
         }
     }
 }
