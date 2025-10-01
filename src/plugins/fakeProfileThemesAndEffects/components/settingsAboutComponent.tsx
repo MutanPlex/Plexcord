@@ -5,25 +5,26 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Margins } from "@utils/margins";
 import { Forms } from "@webpack/common";
 
 export const settingsAboutComponent = () => (
     <Forms.FormSection>
-        <Forms.FormTitle tag="h3">Usage</Forms.FormTitle>
+        <Forms.FormTitle tag="h3">{t("plugin.fakeProfileThemesAndEffects.modal.usage.title")}</Forms.FormTitle>
         <Forms.FormText>
-            After enabling this plugin, you will see custom theme colors and effects in the profiles of others using this plugin.
+            {t("plugin.fakeProfileThemesAndEffects.modal.usage.intro")}
             <div className={Margins.top8}>
-                <b>To set your own profile theme colors and effect:</b>
+                <b>{t("plugin.fakeProfileThemesAndEffects.modal.usage.setColor")}</b>
             </div>
             <ol
                 className={Margins.bottom8}
                 style={{ listStyle: "decimal", paddingLeft: "40px" }}
             >
-                <li>Go to your profile settings</li>
-                <li>Use the FPTE Builder to choose your profile theme colors and effect</li>
-                <li>Click the "Copy FPTE" button</li>
-                <li>Paste the invisible text anywhere in your About Me</li>
+                <li>{t("plugin.fakeProfileThemesAndEffects.modal.usage.step1")}</li>
+                <li>{t("plugin.fakeProfileThemesAndEffects.modal.usage.step2")}</li>
+                <li>{t("plugin.fakeProfileThemesAndEffects.modal.usage.step3", { copy: t("plugin.fakeProfileThemesAndEffects.button.copyFPTE") })}</li>
+                <li>{t("plugin.fakeProfileThemesAndEffects.modal.usage.step4")}</li>
             </ol>
         </Forms.FormText>
     </Forms.FormSection>

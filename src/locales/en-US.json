@@ -3237,6 +3237,47 @@
                     "fake": "Fake colors"
                 }
             }
+        },
+        "fakeProfileThemesAndEffects": {
+            "name": "FakeProfileThemesAndEffects",
+            "description": "Allows profile theming and profile effects by hiding the colors and effects in your bio thanks to invisible 3y3 encoding",
+            "option": {
+                "prioritizeNitro": {
+                    "label": "Prioritize Nitro",
+                    "description": "Source to prioritize",
+                    "nitro": "Nitro",
+                    "aboutMe": "About me"
+                },
+                "hideBuilder": {
+                    "label": "Hide Builder",
+                    "description": "Hide the FPTE Builder in the User Profile and Server Profiles settings pages"
+                }
+            },
+            "modal": {
+                "primary": "Primary",
+                "accent": "Accent",
+                "effect": "Effect",
+                "usage": {
+                    "title": "Usage",
+                    "intro": "After enabling this plugin, you will see custom theme colors and effects in the profiles of others using this plugin.",
+                    "setColor": "To set your own colors and effect:",
+                    "step1": "Go to your profile settings",
+                    "step2": "Use the FPTE Builder to choose your profile theme colors and effect",
+                    "step3": "Click the {{copy}} button",
+                    "step4": "Paste the invisible text anywhere in your bio"
+                }
+            },
+            "toast": {
+                "copied": "FPTE copied to clipboard!",
+                "empty": "FPTE Builder is empty; nothing to copy!"
+            },
+            "button": {
+                "copyFPTE": "Copy FPTE",
+                "reset": "Reset",
+                "preview": "FPTE Builder Preview",
+                "buildBackwards": "Build backwards compatible FPTE",
+                "moreCharacters": "Will use more characters"
+            }
         }
     }
 }

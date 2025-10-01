@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import { canonicalizeMatch, canonicalizeReplace } from "@utils/patches";
@@ -35,15 +36,27 @@ function replaceHelper(
 
 export const settings = definePluginSettings({
     prioritizeNitro: {
-        description: "Source to prioritize",
+        get label() {
+            return t("plugin.fakeProfileThemesAndEffects.option.prioritizeNitro.label");
+        },
+        get description() {
+            return t("plugin.fakeProfileThemesAndEffects.option.prioritizeNitro.description");
+        },
         type: OptionType.SELECT,
-        options: [
-            { label: "Nitro", value: true },
-            { label: "About Me", value: false, default: true }
-        ]
+        get options() {
+            return [
+                { label: t("plugin.fakeProfileThemesAndEffects.option.prioritizeNitro.nitro"), value: true },
+                { label: t("plugin.fakeProfileThemesAndEffects.option.prioritizeNitro.aboutMe"), value: false, default: true }
+            ];
+        }
     },
     hideBuilder: {
-        description: "Hide the FPTE Builder in the User Profile and Server Profiles settings pages",
+        get label() {
+            return t("plugin.fakeProfileThemesAndEffects.option.hideBuilder.label");
+        },
+        get description() {
+            return t("plugin.fakeProfileThemesAndEffects.option.hideBuilder.description");
+        },
         type: OptionType.BOOLEAN,
         default: false
     }
@@ -53,6 +66,11 @@ export default definePlugin({
     name: "FakeProfileThemesAndEffects",
     description: "Allows profile theming and the usage of profile effects by hiding the colors and effect ID in your About Me using invisible, zero-width characters",
     authors: [PcDevs.ryan, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.fakeProfileThemesAndEffects.description");
+    },
+
     patches: [
         // Patches UserProfileStore.getUserProfile
         {

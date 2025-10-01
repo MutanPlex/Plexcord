@@ -3237,6 +3237,47 @@
                     "fake": "Sahte renkler"
                 }
             }
+        },
+        "fakeProfileThemesAndEffects": {
+            "name": "FakeProfileThemesAndEffects",
+            "description": "Profil temaları ve profil efektleri eklemene olanak tanır; görünmez 3y3 kodlaması sayesinde biyona gizlenmiş renkler ve efektler eklenir.",
+            "option": {
+                "prioritizeNitro": {
+                    "label": "Nitro'yu Önceliklendir",
+                    "description": "Önceliklendirilecek kaynak",
+                    "nitro": "Nitro",
+                    "aboutMe": "Hakkımda"
+                },
+                "hideBuilder": {
+                    "label": "Oluşturucuyu Gizle",
+                    "description": "Kullanıcı Profili ve Sunucu Profili ayar sayfalarında FPTE Oluşturucuyu gizle"
+                }
+            },
+            "modal": {
+                "primary": "Birincil",
+                "accent": "Vurgu",
+                "effect": "Efekt",
+                "usage": {
+                    "title": "Kullanım",
+                    "intro": "Bu eklentiyi etkinleştirdikten sonra, bu eklentiyi kullanan diğer kişilerin profillerinde özel tema renklerini ve efektlerini göreceksiniz.",
+                    "setColor": "Kendi renklerini ve efektini ayarlamak için:",
+                    "step1": "Profil ayarlarına git",
+                    "step2": "Profil tema renklerini ve efektini seçmek için FPTE Oluşturucuyu kullan",
+                    "step3": "{{copy}} butonuna tıkla",
+                    "step4": "Görünmez metni biyona istediğin yere yapıştır"
+                }
+            },
+            "toast": {
+                "copied": "FPTE panoya kopyalandı!",
+                "empty": "FPTE Oluşturucu boş; kopyalanacak bir şey yok!"
+            },
+            "button": {
+                "copyFPTE": "FPTE Kopyala",
+                "reset": "Sıfırla",
+                "preview": "FPTE Oluşturucu Önizleme",
+                "buildBackwards": "Geriye dönük uyumlu FPTE oluştur",
+                "moreCharacters": "Daha fazla karakter kullanılacak"
+            }
         }
     }
 }

@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import type { Guild } from "@plexcord/discord-types";
 import { buildFPTE } from "@plugins/fakeProfileThemesAndEffects/lib/fpte";
 import { useAccentColor, usePrimaryColor, useProfileEffect, useShowPreview } from "@plugins/fakeProfileThemesAndEffects/lib/profilePreview";
@@ -35,19 +36,19 @@ export function Builder({ guild }: BuilderProps) {
             <CustomizationSection title="FPTE Builder">
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <BuilderColorButton
-                        label="Primary"
+                        label={t("plugin.fakeProfileThemesAndEffects.modal.primary")}
                         color={primaryColor}
                         setColor={setPrimaryColor}
                         suggestedColors={avatarColors}
                     />
                     <BuilderColorButton
-                        label="Accent"
+                        label={t("plugin.fakeProfileThemesAndEffects.modal.accent")}
                         color={accentColor}
                         setColor={setAccentColor}
                         suggestedColors={avatarColors}
                     />
                     <BuilderButton
-                        label="Effect"
+                        label={t("plugin.fakeProfileThemesAndEffects.modal.effect")}
                         tooltip={effect?.title}
                         selectedStyle={effect ? {
                             background: `top / cover url(${effect.thumbnailPreviewSrc}), top / cover url(/assets/f328a6f8209d4f1f5022.png)`
@@ -70,12 +71,12 @@ export function Builder({ guild }: BuilderProps) {
                             onClick={() => {
                                 const strToCopy = buildFPTE(primaryColor ?? -1, accentColor ?? -1, effect?.id ?? "", buildLegacy);
                                 if (strToCopy)
-                                    copyWithToast(strToCopy, "FPTE copied to clipboard!");
+                                    copyWithToast(strToCopy, t("plugin.fakeProfileThemesAndEffects.toast.copied"));
                                 else
-                                    showToast("FPTE Builder is empty; nothing to copy!");
+                                    showToast(t("plugin.fakeProfileThemesAndEffects.toast.empty"));
                             }}
                         >
-                            Copy FPTE
+                            {t("plugin.fakeProfileThemesAndEffects.button.copyFPTE")}
                         </Button>
                         <Button
                             look={Button.Looks.LINK}
@@ -88,7 +89,7 @@ export function Builder({ guild }: BuilderProps) {
                                 setEffect(null);
                             }}
                         >
-                            Reset
+                            {t("plugin.fakeProfileThemesAndEffects.button.reset")}
                         </Button>
                     </div>
                 </div>
@@ -97,14 +98,14 @@ export function Builder({ guild }: BuilderProps) {
                 value={preview}
                 onChange={setPreview}
             >
-                FPTE Builder Preview
+                {t("plugin.fakeProfileThemesAndEffects.button.preview")}
             </Switch>
             <Switch
                 value={buildLegacy}
-                note="Will use more characters"
+                note={t("plugin.fakeProfileThemesAndEffects.button.moreCharacters")}
                 onChange={setBuildLegacy}
             >
-                Build backwards compatible FPTE
+                {t("plugin.fakeProfileThemesAndEffects.button.buildBackwards")}
             </Switch>
         </>
     );
