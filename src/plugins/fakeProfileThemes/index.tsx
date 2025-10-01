@@ -20,6 +20,7 @@
 // This plugin is a port from Alyxia's Vendetta plugin
 import "./style.css";
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { User, UserProfile } from "@plexcord/discord-types";
@@ -74,12 +75,19 @@ function decode(bio: string): Array<number> | null {
 
 const settings = definePluginSettings({
     nitroFirst: {
-        description: "Default color source if both are present",
+        get label() {
+            return t("plugin.fakeProfileThemes.option.nitroFirst.label");
+        },
+        get description() {
+            return t("plugin.fakeProfileThemes.option.nitroFirst.description");
+        },
         type: OptionType.SELECT,
-        options: [
-            { label: "Nitro colors", value: true, default: true },
-            { label: "Fake colors", value: false },
-        ]
+        get options() {
+            return [
+                { label: t("plugin.fakeProfileThemes.option.nitroFirst.nitro"), value: true, default: true },
+                { label: t("plugin.fakeProfileThemes.option.nitroFirst.fake"), value: false },
+            ];
+        }
     }
 });
 
@@ -115,23 +123,22 @@ function SettingsAboutComponent() {
 
     return (
         <Forms.FormSection>
-            <Forms.FormTitle tag="h3">Usage</Forms.FormTitle>
+            <Forms.FormTitle tag="h3">{t("plugin.fakeProfileThemes.modal.usage")}</Forms.FormTitle>
             <Forms.FormText>
-                After enabling this plugin, you will see custom colors in
-                the profiles of other people using compatible plugins.{" "}
+                {t("plugin.fakeProfileThemes.modal.intro")}
                 <br />
-                To set your own colors:
+                {t("plugin.fakeProfileThemes.modal.setColor")}
                 <ul>
                     <li>
-                        • use the color pickers below to choose your colors
+                        • {t("plugin.fakeProfileThemes.modal.step1")}
                     </li>
-                    <li>• click the "Copy 3y3" button</li>
-                    <li>• paste the invisible text anywhere in your bio</li>
+                    <li>• {t("plugin.fakeProfileThemes.modal.step2", { copy: t("plugin.fakeProfileThemes.button.copy") })}</li>
+                    <li>• {t("plugin.fakeProfileThemes.modal.step3")}</li>
                 </ul><br />
                 <Forms.FormDivider
                     className={classes(Margins.top8, Margins.bottom8)}
                 />
-                <Forms.FormTitle tag="h3">Color pickers</Forms.FormTitle>
+                <Forms.FormTitle tag="h3">{t("plugin.fakeProfileThemes.modal.pickers")}</Forms.FormTitle>
                 <Flex
                     direction={Flex.Direction.HORIZONTAL}
                     style={{ gap: "1rem" }}
@@ -143,7 +150,7 @@ function SettingsAboutComponent() {
                                 variant={"text-xs/normal"}
                                 style={{ marginTop: "4px" }}
                             >
-                                Primary
+                                {t("plugin.fakeProfileThemes.modal.primary")}
                             </Text>
                         }
                         onChange={(color: number) => {
@@ -157,7 +164,7 @@ function SettingsAboutComponent() {
                                 variant={"text-xs/normal"}
                                 style={{ marginTop: "4px" }}
                             >
-                                Accent
+                                {t("plugin.fakeProfileThemes.modal.accent")}
                             </Text>
                         }
                         onChange={(color: number) => {
@@ -172,13 +179,13 @@ function SettingsAboutComponent() {
                         color={Button.Colors.PRIMARY}
                         size={Button.Sizes.XLARGE}
                     >
-                        Copy 3y3
+                        {t("plugin.fakeProfileThemes.button.copy")}
                     </Button>
                 </Flex>
                 <Forms.FormDivider
                     className={classes(Margins.top8, Margins.bottom8)}
                 />
-                <Forms.FormTitle tag="h3">Preview</Forms.FormTitle>
+                <Forms.FormTitle tag="h3">{t("plugin.fakeProfileThemes.modal.preview")}</Forms.FormTitle>
                 <div className="pc-fpt-preview">
                     <ProfileModal
                         user={UserStore.getCurrentUser()}
@@ -199,6 +206,11 @@ export default definePlugin({
     name: "FakeProfileThemes",
     description: "Allows profile theming by hiding the colors in your bio thanks to invisible 3y3 encoding",
     authors: [Devs.Alyxia, Devs.Remty],
+
+    get displayDescription() {
+        return t("plugin.fakeProfileThemes.description");
+    },
+
     patches: [
         {
             find: "UserProfileStore",
@@ -242,7 +254,7 @@ export default definePlugin({
             color={Button.Colors.PRIMARY}
             size={Button.Sizes.XLARGE}
             className={Margins.left16}
-        >Copy 3y3
+        >{t("plugin.fakeProfileThemes.button.copy")}
         </Button >;
     }, { noop: true }),
 });

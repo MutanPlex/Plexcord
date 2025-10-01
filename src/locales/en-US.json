@@ -3210,6 +3210,33 @@
                     "body": "You cannot send this message because it contains an animated FakeNitro sticker, and you do not have permissions to attach files in the current channel. Please remove the sticker to proceed."
                 }
             }
+        },
+        "fakeProfileThemes": {
+            "name": "FakeProfileThemes",
+            "description": "Allows profile theming by hiding the colors in your bio thanks to invisible 3y3 encoding",
+            "button": {
+                "copy": "Copy 3y3"
+            },
+            "modal": {
+                "usage": "Usage",
+                "preview": "Preview",
+                "intro": "After enabling this plugin, you will see custom colors in the profiles of other people using compatible plugins.",
+                "setColor": "To set your own colors:",
+                "step1": "• use the color pickers below to choose your colors",
+                "step2": "• click the {{copy}} button",
+                "step3": "• paste the invisible text anywhere in your bio",
+                "pickers": "Color Pickers",
+                "primary": "Primary",
+                "accent": "Accent"
+            },
+            "option": {
+                "nitroFirst": {
+                    "label": "Nitro First",
+                    "description": "Default color source if both are present",
+                    "nitro": "Nitro colors",
+                    "fake": "Fake colors"
+                }
+            }
         }
     }
 }

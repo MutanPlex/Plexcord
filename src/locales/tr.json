@@ -3210,6 +3210,33 @@
                     "body": "Bu mesajı gönderemezsin çünkü animasyonlu bir FakeNitro sticker içeriyor ve bu kanalda dosya ekleme iznin yok. Devam etmek için stickerı kaldırmalısın."
                 }
             }
+        },
+        "fakeProfileThemes": {
+            "name": "FakeProfileThemes",
+            "description": "Profil temalandırmayı sağlar; görünmez 3y3 kodlaması sayesinde biyona gizlenmiş renkler ekler.",
+            "button": {
+                "copy": "3y3 Kopyala"
+            },
+            "modal": {
+                "usage": "Kullanım",
+                "preview": "Önizleme",
+                "intro": "Bu eklentiyi etkinleştirdikten sonra, uyumlu eklentileri kullanan diğer kişilerin profillerinde özel renkler göreceksin.",
+                "setColor": "Kendi renklerini ayarlamak için:",
+                "step1": "• aşağıdaki renk seçicileri kullanarak renklerini seç",
+                "step2": "• {{copy}} butonuna tıkla",
+                "step3": "• görünmez yazıyı biyona herhangi bir yere yapıştır",
+                "pickers": "Renk Seçiciler",
+                "primary": "Birincil",
+                "accent": "Vurgu"
+            },
+            "option": {
+                "nitroFirst": {
+                    "label": "Önce Nitro",
+                    "description": "Her ikisi de mevcutsa varsayılan renk kaynağı",
+                    "nitro": "Nitro renkleri",
+                    "fake": "Sahte renkler"
+                }
+            }
         }
     }
 }
