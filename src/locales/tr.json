@@ -3300,6 +3300,10 @@
                     "description": "Çöp kutusunu açmak için Alt tuşunun basılı tutulmasını gerektirir."
                 }
             }
+        },
+        "favoriteEmojiFirst": {
+            "name": "FavoriteEmojiFirst",
+            "description": "Favori emojinizi emoji otomatik tamamlama listesinin en üstüne koyar."
         }
     }
 }

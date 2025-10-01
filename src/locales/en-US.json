@@ -3300,6 +3300,10 @@
                     "description": "Require alt key to be held."
                 }
             }
+        },
+        "favoriteEmojiFirst": {
+            "name": "FavoriteEmojiFirst",
+            "description": "Puts your favorite emoji first in the emoji autocomplete."
         }
     }
 }

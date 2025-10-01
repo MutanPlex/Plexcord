@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Emoji } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -38,6 +39,11 @@ export default definePlugin({
     name: "FavoriteEmojiFirst",
     authors: [Devs.Aria, Devs.Ven],
     description: "Puts your favorite emoji first in the emoji autocomplete.",
+
+    get displayDescription() {
+        return t("plugins.favEmojiFirst.description");
+    },
+
     patches: [
         {
             find: "renderResults({results:",
