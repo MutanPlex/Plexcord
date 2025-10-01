@@ -3142,6 +3142,74 @@
         "f8break": {
             "name": "F8Break",
             "description": "DevTools (+ breakpoints) açıkken F8’e bastığınızda istemciyi duraklatır."
+        },
+        "fakeNitro": {
+            "name": "FakeNitro",
+            "description": "Sahte emojiler/stickerlar göndermenizi, nitro temalarını kullanmanızı ve nitro kalitesinde yayın yapmanızı sağlar",
+            "option": {
+                "enableEmojiBypass": {
+                    "label": "Emoji Atlamayı Etkinleştir",
+                    "description": "Sahte emoji göndermeye izin verir (ayrıca özel emoji kullanma izni eksikliğini de atlar)"
+                },
+                "emojiSize": {
+                    "label": "Emoji Boyutu",
+                    "description": "Emoji gönderilirken kullanılacak boyut"
+                },
+                "transformEmojis": {
+                    "label": "Emojileri Dönüştür",
+                    "description": "Sahte emojilerin gerçek emojilere dönüştürülüp dönüştürülmeyeceğini belirler"
+                },
+                "enableStickerBypass": {
+                    "label": "Sticker Atlamayı Etkinleştir",
+                    "description": "Sahte sticker göndermeye izin verir (ayrıca sticker kullanma izni eksikliğini de atlar)"
+                },
+                "stickerSize": {
+                    "label": "Sticker Boyutu",
+                    "description": "Sticker gönderilirken kullanılacak boyut"
+                },
+                "transformStickers": {
+                    "label": "Stickerları Dönüştür",
+                    "description": "Sahte stickerların gerçek stickerlara dönüştürülüp dönüştürülmeyeceğini belirler"
+                },
+                "transformCompoundSentence": {
+                    "label": "Birleşik Cümleleri Dönüştür",
+                    "description": "Birleşik cümlelerdeki (sadece sahte emoji veya sticker bağlantısından daha fazla içerik içeren cümleler) sahte emoji ve stickerların dönüştürülüp dönüştürülmeyeceğini belirler"
+                },
+                "enableStreamQualityBypass": {
+                    "label": "Yayın Kalitesi Atlamayı Etkinleştir",
+                    "description": "Nitro kalitesinde yayın yapmaya izin verir"
+                },
+                "useHyperLinks": {
+                    "label": "Köprü Kullan",
+                    "description": "Sahte emoji ve sticker gönderirken köprü kullanılıp kullanılmayacağını belirler"
+                },
+                "hyperLinkText": {
+                    "label": "Köprü Metni",
+                    "description": "Köprüde kullanılacak metin. {{NAME}} emoji/sticker ismiyle değiştirilecektir."
+                },
+                "disableEmbedPermissionCheck": {
+                    "label": "Gömme İzin Kontrolünü Devre Dışı Bırak",
+                    "description": "Sahte emoji ve sticker gönderirken gömme izni kontrolünün devre dışı bırakılıp bırakılmayacağını belirler"
+                }
+            },
+            "modal": {
+                "sticker": "Bu bir FakeNitro stickerıdır ve yalnızca senin için gerçek bir sticker gibi görünür. Eklenti kullanmayanlara bağlantı olarak görünür.",
+                "emoji": "Bu bir FakeNitro emojidir ve yalnızca senin için gerçek bir emoji gibi görünür. Eklenti kullanmayanlara bağlantı olarak görünür."
+            },
+            "alert": {
+                "notice": {
+                    "title": "Dikkat!",
+                    "body": "Bir FakeNitro emoji veya sticker içeren bir mesaj göndermeye/düzenlemeye çalışıyorsun, ancak bu kanalda bağlantı gömme iznine sahip değilsin. Bu mesajı göndermek istediğine emin misin? FakeNitro ögelerin sadece bağlantı olarak görünecektir.",
+                    "footer": "Bu uyarıyı FakeNitro ayarlarından devre dışı bırakabilirsin",
+                    "confirm": "Yine de Gönder",
+                    "cancel": "İptal",
+                    "secondaryConfirm": "Bir Daha Gösterme"
+                },
+                "apngSticker": {
+                    "title": "Dikkat!",
+                    "body": "Bu mesajı gönderemezsin çünkü animasyonlu bir FakeNitro sticker içeriyor ve bu kanalda dosya ekleme iznin yok. Devam etmek için stickerı kaldırmalısın."
+                }
+            }
         }
     }
 }

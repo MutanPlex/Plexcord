@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { addMessagePreEditListener, addMessagePreSendListener, removeMessagePreEditListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { definePluginSettings } from "@api/Settings";
 import type { Emoji, Message } from "@plexcord/discord-types";
@@ -78,64 +79,119 @@ const hyperLinkRegex = /\[.+?\]\((https?:\/\/.+?)\)/;
 
 const settings = definePluginSettings({
     enableEmojiBypass: {
-        description: "Allows sending fake emojis (also bypasses missing permission to use custom emojis)",
+        get label() {
+            return t("plugin.fakeNitro.option.enableEmojiBypass.label");
+        },
+        get description() {
+            return t("plugin.fakeNitro.option.enableEmojiBypass.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     emojiSize: {
-        description: "Size of the emojis when sending",
+        get label() {
+            return t("plugin.fakeNitro.option.emojiSize.label");
+        },
+        get description() {
+            return t("plugin.fakeNitro.option.emojiSize.description");
+        },
         type: OptionType.SLIDER,
         default: 48,
         markers: [32, 48, 64, 96, 128, 160, 256, 512]
     },
     transformEmojis: {
-        description: "Whether to transform fake emojis into real ones",
+        get label() {
+            return t("plugin.fakeNitro.option.transformEmojis.label");
+        },
+        get description() {
+            return t("plugin.fakeNitro.option.transformEmojis.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     enableStickerBypass: {
-        description: "Allows sending fake stickers (also bypasses missing permission to use stickers)",
+        get label() {
+            return t("plugin.fakeNitro.option.enableStickerBypass.label");
+        },
+        get description() {
+            return t("plugin.fakeNitro.option.enableStickerBypass.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     stickerSize: {
-        description: "Size of the stickers when sending",
+        get label() {
+            return t("plugin.fakeNitro.option.stickerSize.label");
+        },
+        get description() {
+            return t("plugin.fakeNitro.option.stickerSize.description");
+        },
         type: OptionType.SLIDER,
         default: 160,
         markers: [32, 64, 128, 160, 256, 512]
     },
     transformStickers: {
-        description: "Whether to transform fake stickers into real ones",
+        get label() {
+            return t("plugin.fakeNitro.option.transformStickers.label");
+        },
+        get description() {
+            return t("plugin.fakeNitro.option.transformStickers.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     transformCompoundSentence: {
-        description: "Whether to transform fake stickers and emojis in compound sentences (sentences with more content than just the fake emoji or sticker link)",
+        get label() {
+            return t("plugin.fakeNitro.option.transformCompoundSentence.label");
+        },
+        get description() {
+            return t("plugin.fakeNitro.option.transformCompoundSentence.description");
+        },
         type: OptionType.BOOLEAN,
         default: false
     },
     enableStreamQualityBypass: {
-        description: "Allow streaming in nitro quality",
+        get label() {
+            return t("plugin.fakeNitro.option.enableStreamQualityBypass.label");
+        },
+        get description() {
+            return t("plugin.fakeNitro.option.enableStreamQualityBypass.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     useHyperLinks: {
-        description: "Whether to use hyperlinks when sending fake emojis and stickers",
+        get label() {
+            return t("plugin.fakeNitro.option.useHyperLinks.label");
+        },
+        get description() {
+            return t("plugin.fakeNitro.option.useHyperLinks.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     },
     hyperLinkText: {
-        description: "What text the hyperlink should use. {{NAME}} will be replaced with the emoji/sticker name.",
+        get label() {
+            return t("plugin.fakeNitro.option.hyperLinkText.label");
+        },
+        get description() {
+            return t("plugin.fakeNitro.option.hyperLinkText.description");
+        },
         type: OptionType.STRING,
         default: "{{NAME}}"
     },
     disableEmbedPermissionCheck: {
-        description: "Whether to disable the embed permission check when sending fake emojis and stickers",
+        get label() {
+            return t("plugin.fakeNitro.option.disableEmbedPermissionCheck.label");
+        },
+        get description() {
+            return t("plugin.fakeNitro.option.disableEmbedPermissionCheck.description");
+        },
         type: OptionType.BOOLEAN,
         default: false
     }
@@ -178,6 +234,10 @@ export default definePlugin({
     authors: [Devs.Arjix, Devs.D3SOX, Devs.Ven, Devs.fawn, Devs.captain, Devs.Nuckyz, Devs.AutumnVN, Devs.sadan],
     description: "Allows you to send fake emojis/stickers, use nitro themes, and stream in nitro quality",
     dependencies: ["MessageEventsAPI"],
+
+    get displayDescription() {
+        return t("plugin.fakeNitro.description");
+    },
 
     settings,
 
@@ -690,12 +750,12 @@ export default definePlugin({
 
         switch (type) {
             case FakeNoticeType.Sticker: {
-                node.push(" This is a FakeNitro sticker and renders like a real sticker only for you. Appears as a link to non-plugin users.");
+                node.push(" " + t("plugin.fakeNitro.modal.sticker"));
 
                 return node;
             }
             case FakeNoticeType.Emoji: {
-                node.push(" This is a FakeNitro emoji and renders like a real emoji only for you. Appears as a link to non-plugin users.");
+                node.push(" " + t("plugin.fakeNitro.modal.emoji"));
 
                 return node;
             }
@@ -794,20 +854,18 @@ export default definePlugin({
         function cannotEmbedNotice() {
             return new Promise<boolean>(resolve => {
                 Alerts.show({
-                    title: "Hold on!",
+                    title: t("plugin.fakeNitro.notice.alert.title"),
                     body: <div>
                         <Forms.FormText>
-                            You are trying to send/edit a message that contains a FakeNitro emoji or sticker,
-                            however you do not have permissions to embed links in the current channel.
-                            Are you sure you want to send this message? Your FakeNitro items will appear as a link only.
+                            {t("plugin.fakeNitro.notice.alert.body")}
                         </Forms.FormText>
                         <Forms.FormText>
-                            You can disable this notice in the plugin settings.
+                            {t("plugin.fakeNitro.notice.alert.footer")}
                         </Forms.FormText>
                     </div>,
-                    confirmText: "Send Anyway",
-                    cancelText: "Cancel",
-                    secondaryConfirmText: "Do not show again",
+                    confirmText: t("plugin.fakeNitro.notice.alert.confirm"),
+                    cancelText: t("plugin.fakeNitro.notice.alert.cancel"),
+                    secondaryConfirmText: t("plugin.fakeNitro.notice.alert.secondaryConfirm"),
                     onConfirm: () => resolve(true),
                     onCloseCallback: () => setImmediate(() => resolve(false)),
                     onConfirmSecondary() {
@@ -851,11 +909,10 @@ export default definePlugin({
                 if (sticker.format_type === StickerFormatType.APNG) {
                     if (!hasAttachmentPerms(channelId)) {
                         Alerts.show({
-                            title: "Hold on!",
+                            title: t("plugin.fakeNitro.notice.apngSticker.title"),
                             body: <div>
                                 <Forms.FormText>
-                                    You cannot send this message because it contains an animated FakeNitro sticker,
-                                    and you do not have permissions to attach files in the current channel. Please remove the sticker to proceed.
+                                    {t("plugin.fakeNitro.notice.apngSticker.body")}
                                 </Forms.FormText>
                             </div>
                         });

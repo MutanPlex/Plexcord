@@ -3142,6 +3142,74 @@
         "f8break": {
             "name": "F8Break",
             "description": "Pause the client when you press F8 with DevTools (+ breakpoints) open."
+        },
+        "fakeNitro": {
+            "name": "FakeNitro",
+            "description": "Allows you to send fake emojis/stickers, use nitro themes, and stream in nitro quality",
+            "option": {
+                "enableEmojiBypass": {
+                    "label": "Enable Emoji Bypass",
+                    "description": "Allows sending fake emojis (also bypasses missing permission to use custom emojis)"
+                },
+                "emojiSize": {
+                    "label": "Emoji Size",
+                    "description": "Size of the emojis when sending"
+                },
+                "transformEmojis": {
+                    "label": "Transform Emojis",
+                    "description": "Whether to transform fake emojis into real ones"
+                },
+                "enableStickerBypass": {
+                    "label": "Enable Sticker Bypass",
+                    "description": "Allows sending fake stickers (also bypasses missing permission to use stickers)"
+                },
+                "stickerSize": {
+                    "label": "Sticker Size",
+                    "description": "Size of the stickers when sending"
+                },
+                "transformStickers": {
+                    "label": "Transform Stickers",
+                    "description": "Whether to transform fake stickers into real ones"
+                },
+                "transformCompoundSentence": {
+                    "label": "Transform Compound Sentence",
+                    "description": "Whether to transform fake stickers and emojis in compound sentences (sentences with more content than just the fake emoji or sticker link)"
+                },
+                "enableStreamQualityBypass": {
+                    "label": "Enable Stream Quality Bypass",
+                    "description": "Allow streaming in nitro quality"
+                },
+                "useHyperLinks": {
+                    "label": "Use Hyper Links",
+                    "description": "Whether to use hyperlinks when sending fake emojis and stickers"
+                },
+                "hyperLinkText": {
+                    "label": "Hyper Link Text",
+                    "description": "What text the hyperlink should use. {{NAME}} will be replaced with the emoji/sticker name."
+                },
+                "disableEmbedPermissionCheck": {
+                    "label": "Disable Embed Permission Check",
+                    "description": "Whether to disable the embed permission check when sending fake emojis and stickers"
+                }
+            },
+            "modal": {
+                "sticker": "This is a FakeNitro sticker and renders like a real sticker only for you. Appears as a link to non-plugin users.",
+                "emoji": "This is a FakeNitro emoji and renders like a real emoji only for you. Appears as a link to non-plugin users."
+            },
+            "alert": {
+                "notice": {
+                    "title": "Hold on!",
+                    "body": "You are trying to send/edit a message that contains a FakeNitro emoji or sticker, however you do not have permissions to embed links in the current channel. Are you sure you want to send this message? Your FakeNitro items will appear as a link only.",
+                    "footer": "You can disable this alert in the FakeNitro settings",
+                    "confirm": "Send Anyway",
+                    "cancel": "Cancel",
+                    "secondaryConfirm": "Do not show again"
+                },
+                "apngSticker": {
+                    "title": "Hold on!",
+                    "body": "You cannot send this message because it contains an animated FakeNitro sticker, and you do not have permissions to attach files in the current channel. Please remove the sticker to proceed."
+                }
+            }
         }
     }
 }
