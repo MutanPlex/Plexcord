@@ -3224,7 +3224,7 @@
                 "setColor": "Kendi renklerini ayarlamak için:",
                 "step1": "• aşağıdaki renk seçicileri kullanarak renklerini seç",
                 "step2": "• {{copy}} butonuna tıkla",
-                "step3": "• görünmez yazıyı biyona herhangi bir yere yapıştır",
+                "step3": "• görünmez yazıyı hakkında kısmında herhangi bir yere yapıştır",
                 "pickers": "Renk Seçiciler",
                 "primary": "Birincil",
                 "accent": "Vurgu"
@@ -3304,6 +3304,46 @@
         "favoriteEmojiFirst": {
             "name": "FavoriteEmojiFirst",
             "description": "Favori emojinizi emoji otomatik tamamlama listesinin en üstüne koyar."
+        },
+        "favoriteGifSearch": {
+            "name": "FavoriteGifSearch",
+            "description": "Favori GIF’lere bir arama çubuğu ekler.",
+            "placeholder": "Favori GIF’lerde ara",
+            "option": {
+                "searchOption": {
+                    "label": "Arama Seçeneği",
+                    "description": "URL’nin hangi kısmında arama yapmak istediğiniz",
+                    "url": "Tüm URL",
+                    "path": "Yalnızca Yol (/somegif.gif)",
+                    "hostandpath": "Host ve Yol (tenor.com somegif.gif)"
+                }
+            }
+        },
+        "findReply": {
+            "name": "FindReply",
+            "description": "Bir kanaldaki bir mesaja verilen en eski yanıta atlar (geçmiş konuşmaları daha kolay takip etmenizi sağlar).",
+            "context": {
+                "jump": "Yanıta Git"
+            },
+            "toast": {
+                "navigate": "Yanıtlar arasında gezinmek için alt paneli kullanın.",
+                "container": "Kapsayıcı öğe bulunamadı.",
+                "couldntFind": "Yanıt mesajı bulunamadı."
+            },
+            "option": {
+                "includePings": {
+                    "label": "Bahsetmeleri Dahil Et",
+                    "description": "Yazarına direkt @ atılan mesajları da arar"
+                },
+                "includeAuthor": {
+                    "label": "Yazarı Dahil Et",
+                    "description": "Yalnızca ilgili mesaja değil, genel olarak yazara verilen yanıtları da arar"
+                },
+                "hideButtonIfNoReply": {
+                    "label": "Yanıt Yoksa Butonu Gizle",
+                    "description": "Mesaja yanıt yoksa butonu gizler"
+                }
+            }
         }
     }
 }

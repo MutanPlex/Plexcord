@@ -52,10 +52,10 @@ function showIcon() {
 const settings = definePluginSettings({
     keyBind: {
         get label() {
-            return t("plugins.fastDeleteChannels.option.keyBind.label");
+            return t("plugin.fastDeleteChannels.option.keyBind.label");
         },
         get description() {
-            return t("plugins.fastDeleteChannels.option.keyBind.description");
+            return t("plugin.fastDeleteChannels.option.keyBind.description");
         },
         type: OptionType.STRING,
         default: "KeyZ",
@@ -63,30 +63,30 @@ const settings = definePluginSettings({
     },
     reqCtrl: {
         get label() {
-            return t("plugins.fastDeleteChannels.option.reqCtrl.label");
+            return t("plugin.fastDeleteChannels.option.reqCtrl.label");
         },
         get description() {
-            return t("plugins.fastDeleteChannels.option.reqCtrl.description");
+            return t("plugin.fastDeleteChannels.option.reqCtrl.description");
         },
         type: OptionType.BOOLEAN,
         default: true,
     },
     reqShift: {
         get label() {
-            return t("plugins.fastDeleteChannels.option.reqShift.label");
+            return t("plugin.fastDeleteChannels.option.reqShift.label");
         },
         get description() {
-            return t("plugins.fastDeleteChannels.option.reqShift.description");
+            return t("plugin.fastDeleteChannels.option.reqShift.description");
         },
         type: OptionType.BOOLEAN,
         default: true,
     },
     reqAlt: {
         get label() {
-            return t("plugins.fastDeleteChannels.option.reqAlt.label");
+            return t("plugin.fastDeleteChannels.option.reqAlt.label");
         },
         get description() {
-            return t("plugins.fastDeleteChannels.option.reqAlt.description");
+            return t("plugin.fastDeleteChannels.option.reqAlt.description");
         },
         type: OptionType.BOOLEAN,
         default: false,
@@ -100,7 +100,7 @@ export default definePlugin({
     settings,
 
     get displayDescription() {
-        return t("plugins.fastDeleteChannels.description");
+        return t("plugin.fastDeleteChannels.description");
     },
 
     patches: [

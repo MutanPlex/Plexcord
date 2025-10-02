@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { addMessagePopoverButton, removeMessagePopoverButton } from "@api/MessagePopover";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { Message } from "@plexcord/discord-types";
@@ -71,6 +72,11 @@ export default definePlugin({
     name: "FindReply",
     description: "Jumps to the earliest reply to a message in a channel (lets you follow past conversations more easily).",
     authors: [Devs.newwares],
+
+    get displayDescription() {
+        return t("plugin.findReply.description");
+    },
+
     start() {
         enableStyle(styles);
         addMessagePopoverButton("pc-findreply", message => {
@@ -78,7 +84,7 @@ export default definePlugin({
             const replies = findReplies(message);
             if (Plexcord.Settings.plugins.FindReply.hideButtonIfNoReply && !replies.length) return null;
             return {
-                label: "Jump to Reply",
+                label: t("plugin.findReply.context.jump"),
                 icon: FindReplyIcon,
                 message,
                 channel: ChannelStore.getChannel(message.channel_id),
@@ -95,14 +101,14 @@ export default definePlugin({
                         if (replies.length > 1) {
                             Toasts.show({
                                 id: Toasts.genId(),
-                                message: "Use the bottom panel to navigate between replies.",
+                                message: t("plugin.findReply.toast.navigate"),
                                 type: Toasts.Type.MESSAGE
                             });
                             const container = document.querySelector("[class^=channelBottomBarArea_]");
                             if (!container) {
                                 Toasts.show({
                                     id: Toasts.genId(),
-                                    message: "Couldn't find the container element.",
+                                    message: t("plugin.findReply.toast.container"),
                                     type: Toasts.Type.FAILURE
                                 });
                                 return;
@@ -118,7 +124,7 @@ export default definePlugin({
                     } else {
                         Toasts.show({
                             id: Toasts.genId(),
-                            message: "Couldn't find a reply.",
+                            message: t("plugin.findReply.toast.noreplies"),
                             type: Toasts.Type.FAILURE
                         });
                     }
@@ -134,20 +140,35 @@ export default definePlugin({
     },
     options: {
         includePings: {
+            get label() {
+                return t("plugin.findReply.option.includePings.label");
+            },
+            get description() {
+                return t("plugin.findReply.option.includePings.description");
+            },
             type: OptionType.BOOLEAN,
-            description: "Will also search for messages that @ the author directly",
             default: false,
             restartNeeded: false
         },
         includeAuthor: {
+            get label() {
+                return t("plugin.findReply.option.includeAuthor.label");
+            },
+            get description() {
+                return t("plugin.findReply.option.includeAuthor.description");
+            },
             type: OptionType.BOOLEAN,
-            description: "Will also search for messages that reply to the author in general, not just that exact message",
             default: false,
             restartNeeded: false
         },
         hideButtonIfNoReply: {
+            get label() {
+                return t("plugin.findReply.option.hideButtonIfNoReply.label");
+            },
+            get description() {
+                return t("plugin.findReply.option.hideButtonIfNoReply.description");
+            },
             type: OptionType.BOOLEAN,
-            description: "Hides the button if there are no replies to the message",
             default: true,
             restartNeeded: true
         }

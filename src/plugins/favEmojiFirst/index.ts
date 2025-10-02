@@ -41,7 +41,7 @@ export default definePlugin({
     description: "Puts your favorite emoji first in the emoji autocomplete.",
 
     get displayDescription() {
-        return t("plugins.favEmojiFirst.description");
+        return t("plugin.favoriteEmojiFirst.description");
     },
 
     patches: [

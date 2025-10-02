@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
@@ -61,23 +62,30 @@ interface Instance {
 
 export const settings = definePluginSettings({
     searchOption: {
+        get label() {
+            return t("plugin.favoriteGifSearch.option.searchOption.label");
+        },
+        get description() {
+            return t("plugin.favoriteGifSearch.option.searchOption.description");
+        },
         type: OptionType.SELECT,
-        description: "The part of the url you want to search",
-        options: [
-            {
-                label: "Entire Url",
-                value: "url"
-            },
-            {
-                label: "Path Only (/somegif.gif)",
-                value: "path"
-            },
-            {
-                label: "Host & Path (tenor.com somgif.gif)",
-                value: "hostandpath",
-                default: true
-            }
-        ] as const
+        get options() {
+            return [
+                {
+                    label: t("plugin.favoriteGifSearch.option.searchOption.url"),
+                    value: "url"
+                },
+                {
+                    label: t("plugin.favoriteGifSearch.option.searchOption.path"),
+                    value: "path"
+                },
+                {
+                    label: t("plugin.favoriteGifSearch.option.searchOption.hostandpath"),
+                    value: "hostandpath",
+                    default: true
+                }
+            ] as const;
+        }
     }
 });
 
@@ -85,6 +93,10 @@ export default definePlugin({
     name: "FavoriteGifSearch",
     authors: [Devs.Aria],
     description: "Adds a search bar to favorite gifs.",
+
+    get displayDescription() {
+        return t("plugin.favoriteEmojiFirst.description");
+    },
 
     patches: [
         {
@@ -189,7 +201,7 @@ function SearchBar({ instance, SearchBarComponent }: { instance: Instance; Searc
                 }
             }}
             query={query}
-            placeholder="Search Favorite Gifs"
+            placeholder={t("plugin.favoriteEmojiFirst.searchPlaceholder")}
         />
     );
 }

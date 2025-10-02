@@ -3304,6 +3304,46 @@
         "favoriteEmojiFirst": {
             "name": "FavoriteEmojiFirst",
             "description": "Puts your favorite emoji first in the emoji autocomplete."
+        },
+        "favoriteGifSearch": {
+            "name": "FavoriteGifSearch",
+            "description": "Adds a search bar to favorite gifs.",
+            "placeholder": "Search favorite gifs",
+            "option": {
+                "searchOption": {
+                    "label": "Search Option",
+                    "description": "The part of the url you want to search",
+                    "url": "Entire Url",
+                    "path": "Path Only (/somegif.gif)",
+                    "hostandpath": "Host & Path (tenor.com somgif.gif)"
+                }
+            }
+        },
+        "findReply": {
+            "name": "FindReply",
+            "description": "Jumps to the earliest reply to a message in a channel (lets you follow past conversations more easily).",
+            "context": {
+                "jump": "Jump to Reply"
+            },
+            "toast": {
+                "navigate": "Use the bottom panel to navigate between replies.",
+                "container": "Couldn't find the container element.",
+                "couldntFind": "Couldn't find the reply message."
+            },
+            "option": {
+                "includePings": {
+                    "label": "Include Pings",
+                    "description": "Will also search for messages that @ the author directly"
+                },
+                "includeAuthor": {
+                    "label": "Include Author",
+                    "description": "Will also search for messages that reply to the author in general, not just that exact message"
+                },
+                "hideButtonIfNoReply": {
+                    "label": "Hide Button If No Reply",
+                    "description": "Hides the button if there are no replies to the message"
+                }
+            }
         }
     }
 }
