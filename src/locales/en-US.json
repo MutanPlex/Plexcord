@@ -3445,6 +3445,10 @@
         "fixFileExtensions": {
             "name": "FixFileExtensions",
             "description": "Fixes file extensions by renaming them to a compatible supported format if possible"
+        },
+        "fixImagesQuality": {
+            "name": "FixImagesQuality",
+            "description": "Prevents images from being loaded as webp, which can cause quality loss"
         }
     }
 }

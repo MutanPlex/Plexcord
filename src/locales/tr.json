@@ -3445,6 +3445,10 @@
         "fixFileExtensions": {
             "name": "FixFileExtensions",
             "description": "Dosya uzantılarını, mümkünse uyumlu desteklenen bir formata yeniden adlandırarak düzeltir"
+        },
+        "fixImagesQuality": {
+            "name": "FixImagesQuality",
+            "description": "Görsellerin kalite kaybına neden olabilen webp formatında yüklenmesini engeller"
         }
     }
 }
