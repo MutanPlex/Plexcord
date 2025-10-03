@@ -3459,6 +3459,10 @@
                     "description": "The volume % to set for spotify embeds. Anything above 10% is veeeery loud"
                 }
             }
+        },
+        "fixYoutubeEmbeds": {
+            "name": "FixYoutubeEmbeds",
+            "description": "Bypasses youtube videos being blocked from display on Discord (for example by UMG)"
         }
     }
 }
