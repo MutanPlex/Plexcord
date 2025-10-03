@@ -1,0 +1,23 @@
+.pc-form-switch-wrapper {
+    margin-bottom: 20px;
+}
+
+.pc-form-switch {
+    display: flex;
+    width: 100%;
+
+    > :last-child {
+        margin-left: auto;
+    }
+}
+
+.pc-form-switch-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pc-form-switch-border {
+    margin-top: 20px;
+}

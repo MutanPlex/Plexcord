@@ -20,21 +20,21 @@ import ChannelsTabsContainer from "./components/ChannelTabsContainer";
 import { BasicChannelTabsProps, createTab, handleChannelSwitch, settings } from "./util";
 import * as ChannelTabsUtils from "./util";
 
-const contextMenuPatch: NavContextMenuPatchCallback = (children, props: { channel: Channel, messageId?: string; }) =>
-    () => {
-        const { channel, messageId } = props;
-        const group = findGroupChildrenByChildId("channel-copy-link", children);
-        group?.push(
-            <Menu.MenuItem
-                label={t("plugin.channelTabs.open")}
-                id="open-link-in-tab"
-                action={() => createTab({
-                    guildId: channel.guild_id,
-                    channelId: channel.id
-                }, true, messageId)}
-            />
-        );
-    };
+
+const contextMenuPatch: NavContextMenuPatchCallback = (children, props: { channel: Channel, messageId?: string; }) => {
+    const { channel, messageId } = props;
+    const group = findGroupChildrenByChildId("channel-copy-link", children);
+    group?.push(
+        <Menu.MenuItem
+            label={t("plugin.channelTabs.open")}
+            id="open-link-in-tab"
+            action={() => createTab({
+                guildId: channel.guild_id || "@me", // Normalize for DMs/Group Chats
+                channelId: channel.id
+            }, settings.store.openInNewTabAutoSwitch, messageId)}
+        />
+    );
+};
 
 export default definePlugin({
     name: "ChannelTabs",

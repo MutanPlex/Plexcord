@@ -521,6 +521,8 @@
         "check": "Repository check",
         "uptodate": "up to date",
         "update": "Update",
+        "noMessage": "No message",
+        "noUnknown": "Unknown",
         "updatedPlugins": "Updated Plugins",
         "newSettings": "New Settings",
         "newSettingTooltip": "New setting in {{plugin}}",
@@ -555,7 +557,8 @@
             "local": "Repository is up to date with your local copy",
             "failed": "Failed to fetch from repository :(",
             "cleared": "All logs have been cleared",
-            "logCleared": "Log has been cleared"
+            "logCleared": "Log has been cleared",
+            "yourLatest": "Logged commits from your latest update"
         },
         "alert": {
             "clear": {
@@ -840,7 +843,21 @@
                 "file": {
                     "label": "File",
                     "description": "Remove the 'Potentially Dangerous Download' popup when opening links"
+                },
+                "noDeleteSafety": {
+                    "label": "No Delete Safety",
+                    "description": "Removes the enter server name requirement when deleting a server"
+                },
+                "confirmModal": {
+                    "label": "Confirm Modal",
+                    "description": "Should a 'are you sure you want to delete' modal be shown?"
                 }
+            },
+            "alert": {
+                "title": "Delete server?",
+                "body": "It's permanent, if that wasn't obvious.",
+                "confirm": "Delete",
+                "cancel": "Cancel"
             }
         },
         "amITyping": {
@@ -1133,7 +1150,8 @@
             "description": "See invites expiration date, view inviter profile and preview discoverable servers before joining by clicking their name",
             "render": {
                 "tip": "This invite will expire {{time}}",
-                "header": "HAS INVITED YOU TO JOIN"
+                "header": "{{name}} invited you to {{server}}",
+                "never": "not expire"
             }
         },
         "betterNotesBox": {

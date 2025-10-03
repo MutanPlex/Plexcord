@@ -26,7 +26,45 @@ const cl = classNameFactory("pc-channeltabs-");
 
 export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
     const [userId, setUserId] = useState("");
-    const { showBookmarkBar, widerTabsAndBookmarks, enableHotkeys, hotkeyCount, tabBarPosition } = settings.use(["showBookmarkBar", "widerTabsAndBookmarks", "enableHotkeys", "hotkeyCount", "tabBarPosition"]);
+    const {
+        showBookmarkBar,
+        widerTabsAndBookmarks,
+        enableHotkeys,
+        hotkeyCount,
+        tabBarPosition,
+        animationHover,
+        animationSelection,
+        animationDragDrop,
+        animationEnterExit,
+        animationIconPop,
+        animationCloseRotation,
+        animationPlusPulse,
+        animationMentionGlow,
+        animationCompactExpand,
+        animationSelectedBorder,
+        animationSelectedBackground,
+        animationTabShadows,
+        compactAutoExpandSelected
+    } = settings.use([
+        "showBookmarkBar",
+        "widerTabsAndBookmarks",
+        "enableHotkeys",
+        "hotkeyCount",
+        "tabBarPosition",
+        "animationHover",
+        "animationSelection",
+        "animationDragDrop",
+        "animationEnterExit",
+        "animationIconPop",
+        "animationCloseRotation",
+        "animationPlusPulse",
+        "animationMentionGlow",
+        "animationCompactExpand",
+        "animationSelectedBorder",
+        "animationSelectedBackground",
+        "animationTabShadows",
+        "compactAutoExpandSelected"
+    ]);
     const GhostTabs = useGhostTabs();
     const isFullscreen = useStateFromStores([ChannelRTCStore], () => ChannelRTCStore.isFullscreenInContext() ?? false);
 
@@ -109,7 +147,23 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
 
     return (
         <div
-            className={classes(cl("container"), tabBarPosition === "top" && cl("container-top"))}
+            className={classes(
+                cl("container"),
+                tabBarPosition === "top" && cl("container-top"),
+                !animationHover && cl("no-hover-animation"),
+                !animationSelection && cl("no-selection-animation"),
+                !animationDragDrop && cl("no-drag-animation"),
+                !animationEnterExit && cl("no-enter-exit-animation"),
+                !animationIconPop && cl("no-icon-pop-animation"),
+                !animationCloseRotation && cl("no-close-rotation"),
+                !animationPlusPulse && cl("no-plus-animation"),
+                !animationMentionGlow && cl("no-mention-glow"),
+                !animationCompactExpand && cl("no-compact-animation"),
+                !animationSelectedBorder && cl("no-selected-border"),
+                !animationSelectedBackground && cl("no-selected-background"),
+                !animationTabShadows && cl("no-tab-shadows"),
+                !compactAutoExpandSelected && cl("no-compact-auto-expand")
+            )}
             ref={ref}
             onContextMenu={e => ContextMenuApi.openContextMenu(e, () => <BasicContextMenu />)}
         >
@@ -118,8 +172,8 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
                 <div className={cl("separator")} />
             </>}
             <div className={cl("tab-container")}>
-                {openedTabs.map((tab, i) =>
-                    <ChannelTab {...tab} index={i} key={i} />
+                {openedTabs.filter(tab => tab != null).map((tab, i) =>
+                    <ChannelTab {...tab} index={i} key={tab.id} />
                 )}
 
                 <button

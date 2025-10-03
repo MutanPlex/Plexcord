@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { FormSwitch } from "@components/FormSwitch";
 import { encrypt } from "@plugins/invisibleChat.desktop/index";
 import { insertTextIntoChatInputBox } from "@utils/discord";
 import {
@@ -27,7 +28,7 @@ import {
     ModalRoot,
     openModal,
 } from "@utils/modal";
-import { Button, Forms, React, Switch, TextInput } from "@webpack/common";
+import { Button, Forms, React, TextInput } from "@webpack/common";
 
 function EncModal(props: ModalProps) {
     const [secret, setSecret] = React.useState("");
@@ -65,14 +66,14 @@ function EncModal(props: ModalProps) {
                         setPassword(e);
                     }}
                 />
-                <Switch
+                <FormSwitch
                     value={noCover}
                     onChange={(e: boolean) => {
                         setNoCover(e);
                     }}
-                >
-                    Don't use a Cover
-                </Switch>
+                    title="Don't use a Cover"
+                />
+
             </ModalContent>
 
             <ModalFooter>

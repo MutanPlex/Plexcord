@@ -19,13 +19,14 @@
 
 import { t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
+import { FormSwitch } from "@components/FormSwitch";
 import { Link } from "@components/Link";
 import { handleSettingsTabError, SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { Margins } from "@utils/margins";
 import { ModalCloseButton, ModalContent, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { useAwaiter } from "@utils/react";
 import { getRepo, isNewer, UpdateLogger } from "@utils/updater";
-import { Forms, React, Switch } from "@webpack/common";
+import { Forms, React } from "@webpack/common";
 
 import gitHash from "~git-hash";
 
@@ -47,21 +48,19 @@ function Updater() {
     return (
         <SettingsTab title={"Plexcord " + t("updater.title")}>
             <Forms.FormTitle tag="h5">{t("updater.settings")}</Forms.FormTitle>
-            <Switch
+            <FormSwitch
                 value={settings.autoUpdate}
                 onChange={(v: boolean) => settings.autoUpdate = v}
-                note={t("updater.automatically.description")}
-            >
-                {t("updater.automatically.label")}
-            </Switch>
-            <Switch
+                description={t("updater.automatically.description")}
+                title={t("updater.automatically.label")}
+            />
+            <FormSwitch
                 value={settings.autoUpdateNotification}
                 onChange={(v: boolean) => settings.autoUpdateNotification = v}
-                note={t("updater.notify.description")}
+                description={t("updater.notify.description")}
                 disabled={!settings.autoUpdate}
-            >
-                {t("updater.notify.label")}
-            </Switch>
+                title={t("updater.notify.label")}
+            />
 
             <Forms.FormTitle tag="h5">{t("updater.repo")}</Forms.FormTitle>
 

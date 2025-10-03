@@ -216,7 +216,7 @@ export default definePlugin({
         {
             find: "._areActivitiesExperimentallyHidden=(",
             replacement: {
-                match: /\i.memo\(function\(\i\){/,
+                match: /NumberFormat\(.{0,50}\]\);(?=.{0,100}\.membersGroup)/,
                 replace: "$&if($self.isRoleAllBlockedMembers(arguments[0].id, arguments[0].guildId)) return null;"
             },
             predicate: () => settings.store.hideEmptyRoles

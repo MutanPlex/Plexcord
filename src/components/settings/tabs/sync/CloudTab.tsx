@@ -21,13 +21,14 @@ import { t, tJsx } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { Settings, useSettings } from "@api/Settings";
 import { CheckedTextInput } from "@components/CheckedTextInput";
+import { FormSwitch } from "@components/FormSwitch";
 import { Grid } from "@components/Grid";
 import { Link } from "@components/Link";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { authorizeCloud, checkCloudUrlCsp, cloudLogger, deauthorizeCloud, getCloudAuth, getCloudUrl } from "@utils/cloud";
 import { Margins } from "@utils/margins";
 import { deleteCloudSettings, getCloudSettings, putCloudSettings } from "@utils/settingsSync";
-import { Alerts, Button, Forms, Switch, Tooltip } from "@webpack/common";
+import { Alerts, Button, Forms, Tooltip } from "@webpack/common";
 
 function validateUrl(url: string) {
     try {
@@ -75,14 +76,13 @@ function SettingsSyncSection() {
             <Forms.FormText variant="text-md/normal" className={Margins.bottom20}>
                 {t("cloud.description")}
             </Forms.FormText>
-            <Switch
+            <FormSwitch
                 key="cloud-sync"
                 disabled={!cloud.authenticated}
                 value={cloud.settingsSync}
+                title={t("cloud.title")}
                 onChange={v => { cloud.settingsSync = v; }}
-            >
-                {t("cloud.title")}
-            </Switch>
+            />
             <div className="pc-cloud-settings-sync-grid">
                 <Button
                     size={Button.Sizes.SMALL}
@@ -130,7 +130,7 @@ function CloudTab() {
                         source: <Link href="https://github.com/Plexcord/Backend">{t("cloud.source")}</Link>
                     })}
                 </Forms.FormText>
-                <Switch
+                <FormSwitch
                     key="backend"
                     value={settings.cloud.authenticated}
                     onChange={v => {
@@ -139,10 +139,9 @@ function CloudTab() {
                         else
                             settings.cloud.authenticated = v;
                     }}
-                    note={t("cloud.authorization")}
-                >
-                    {t("cloud.button.enable")}
-                </Switch>
+                    description={t("cloud.authorization")}
+                    title={t("cloud.button.enable")}
+                />
                 <Forms.FormTitle tag="h5">{t("cloud.backend.title")}</Forms.FormTitle>
                 <Forms.FormText className={Margins.bottom8}>
                     {t("cloud.backend.description")}

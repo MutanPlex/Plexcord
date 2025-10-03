@@ -8,12 +8,13 @@
 import "./style.css";
 
 import { t, tJsx } from "@api/i18n";
-import { PcDevs } from "@utils/constants";
+import { InfoIcon } from "@components/Icons";
+import { Devs, PcDevs } from "@utils/constants";
 import { openUserProfile } from "@utils/discord";
 import { classes } from "@utils/misc";
 import definePlugin, { StartAt } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { Parser } from "@webpack/common";
+import { Parser, Tooltip, UserStore } from "@webpack/common";
 
 
 const AvatarStyles = findByPropsLazy("avatar", "zalgo");
@@ -35,7 +36,7 @@ function lurk(id: string) {
 export default definePlugin({
     name: "BetterInvites",
     description: "See invites expiration date, view inviter profile and preview discoverable servers before joining by clicking their name",
-    authors: [PcDevs.iamme, PcDevs.MutanPlex],
+    authors: [PcDevs.iamme, PcDevs.MutanPlex, Devs.thororen],
 
     get displayDescription() {
         return t("plugin.betterInvites.description");
@@ -43,38 +44,81 @@ export default definePlugin({
 
     patches: [
         {
-            find: "#{intl::HUB_INVITE_ANOTHER_SCHOOL_LINK}",
+            find: ".hideDetailsButtonContainer,",
             replacement: [
                 {
-                    match: /,(\i)&&(\(.{0,50}asContainer.+)(\i\.\i\.string\(\i\.\i#{intl::GUEST_MEMBERSHIP_EXPLANATION}\))/,
-                    replace: ",($1||((!$1)&&arguments[0].invite.expires_at)) && $2$self.RenderTip($1, $3, arguments[0].invite.expires_at)"
+                    match: /banner\}\),.{0,25}profile:\i\}\),.{0,15}profile:\i/,
+                    replace: "$&,invite:arguments[0].invite"
+                }
+            ]
+        },
+        {
+            find: '"disableGuildNameClick"',
+            replacement: [
+                {
+                    match: /(?=children:\i\.name\}\)\):)/,
+                    replace: "onClick:$self.Lurkable(arguments[0].invite?.guild?.id,arguments[0].invite?.guild?.features),"
                 },
                 {
-                    match: /(\.jsx\)\(\i.\i.Info,{.+onClick:\i)/,
-                    replace: "$& || $self.Lurkable(arguments[0].invite.guild.id, arguments[0].invite.guild.features)"
+                    match: /\),\{profile:\i,disableGuildNameClick:\i/,
+                    replace: "$&,invite:arguments[0].invite"
                 },
                 {
-                    match: /(\.jsx\)\(\i\.\i\.Header,\{)text:(\i)/,
-                    replace: "$1text: $self.Header(arguments[0].currentUserId, arguments[0].invite.inviter, $2)"
+                    match: /\}\)\)\}\),\i/,
+                    replace: "$&,$self.RenderTip(arguments[0].invite?.expires_at)"
+                },
+                {
+                    match: /(?<=text:(\i\.name).*?\]\}\))/,
+                    replace: "$&,$self.Header(arguments[0].invite?.inviter,$1)"
                 }
             ]
         }
     ],
-    RenderTip(isGuest: boolean, message: string, expires_at: string) {
-        return <> {tJsx("plugin.betterInvites.render.tip", { time: Parser.parse(`<t:${Math.round(new Date(expires_at).getTime() / 1000)}:R>`) })} {isGuest ? ". " + message : ""}</>;
+    RenderTip(expires_at: string) {
+        if (!expires_at) return null;
+        const timestamp = <>{Parser.parse(`<t:${Math.round(new Date(expires_at).getTime() / 1000)}:R>`)}</>;
+        const tooltipText = (
+            <>
+                {tJsx("plugin.betterInvites.render.tip", { time: expires_at ? timestamp : t("plugin.betterInvites.render.never") })}
+            </>
+        );
+
+
+        return (
+            <Tooltip text={tooltipText}>
+                {({ onMouseEnter, onMouseLeave }) => (
+                    <div
+                        className="pc-bi-tooltip"
+                        onMouseEnter={onMouseEnter}
+                        onMouseLeave={onMouseLeave}
+                    >
+                        <InfoIcon className="pc-bi-tooltip-icon" />
+                    </div>
+                )}
+            </Tooltip>
+        );
     },
-    Header(currentUserId: string, inviter: User | undefined, defaultMessage: string) {
-        return <div className="pc-bi-header-inner">
-            {(inviter && (currentUserId !== inviter.id)) ? <>
+    Header(inviter: User | undefined, guildName: string) {
+        const userId = UserStore.getCurrentUser().id;
+        if (!inviter || userId === inviter.id) return null;
+        return (
+            <div className="pc-bi-header-inner">
                 <img
                     alt=""
                     className={classes(AvatarStyles.avatar, AvatarStyles.clickable) + " pc-bi-inviter-avatar"}
                     onClick={() => openUserProfile(inviter.id)}
-                    src={inviter.avatar ? `https://cdn.discordapp.com/avatars/${inviter.id}/${inviter.avatar}.webp?size=80` : "/assets/1f0bfc0865d324c2587920a7d80c609b.png?size=128"}
-                /> {inviter.global_name ? inviter.global_name.toUpperCase() : inviter.username.toUpperCase()} {t("plugin.betterInvites.render.header")}
-            </> : defaultMessage}</div>;
+                    src={inviter.avatar
+                        ? `https://cdn.discordapp.com/avatars/${inviter.id}/${inviter.avatar}.webp?size=80`
+                        : "/assets/1f0bfc0865d324c2587920a7d80c609b.png?size=128"}
+                />
+                <div className="pc-bi-header-text">
+                    {t("plugin.betterInvites.render.header", { user: inviter.username, guild: guildName })}
+                </div>
+            </div>
+        );
     },
     Lurkable: (id: string, features: Iterable<string> | undefined) => {
+        if (!id || !features) return null;
         return new Set(features).has("DISCOVERABLE") ? () => lurk(id) : null;
     },
     startAt: StartAt.WebpackReady

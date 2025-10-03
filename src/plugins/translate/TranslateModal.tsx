@@ -17,9 +17,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { FormSwitch } from "@components/FormSwitch";
 import { Margins } from "@utils/margins";
 import { ModalCloseButton, ModalContent, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
-import { Forms, SearchableSelect, Switch, useMemo } from "@webpack/common";
+import { Forms, SearchableSelect, useMemo } from "@webpack/common";
 
 import { settings } from "./settings";
 import { cl, getLanguages } from "./utils";
@@ -61,14 +62,14 @@ function AutoTranslateToggle() {
     const value = settings.use(["autoTranslate"]).autoTranslate;
 
     return (
-        <Switch
+        <FormSwitch
             value={value}
             onChange={v => settings.store.autoTranslate = v}
-            note={settings.def.autoTranslate.description}
+            description={settings.def.autoTranslate.description}
             hideBorder
-        >
-            Auto Translate
-        </Switch>
+            title={"Auto Translate"}
+        />
+
     );
 }
 

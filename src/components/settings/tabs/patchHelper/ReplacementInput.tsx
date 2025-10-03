@@ -6,8 +6,9 @@
  */
 
 import { t } from "@api/i18n";
+import { FormSwitch } from "@components/FormSwitch";
 import { Margins } from "@utils/margins";
-import { Forms, Parser, Switch, TextInput, useEffect, useState } from "@webpack/common";
+import { Forms, Parser, TextInput, useEffect, useState } from "@webpack/common";
 
 const RegexGuide = {
     "\\i": "patchHelper.cheatSheet.identifiers",
@@ -71,15 +72,14 @@ export function ReplacementInput({ replacement, setReplacement, replacementError
                 </div>
             )}
 
-            <Switch
+            <FormSwitch
                 className={Margins.top16}
                 value={isFunc}
                 onChange={setIsFunc}
-                note={t("patchHelper.replacementEval.description")}
+                title={t("patchHelper.replacementEval.label")}
+                description={t("patchHelper.replacementEval.description")}
                 hideBorder
-            >
-                {t("patchHelper.replacementEval.label")}
-            </Switch>
+            />
         </>
     );
 }

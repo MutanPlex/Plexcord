@@ -454,6 +454,8 @@
         "check": "Depoyu kontrol et",
         "uptodate": "güncel",
         "update": "Güncelle",
+        "noMessage": "Mesaj yok",
+        "noUnknown": "Bilinmiyor",
         "updatedPlugins": "Güncellenen Eklentiler",
         "newSettings": "Yeni Ayarlar",
         "newSettingTooltip": "{{plugin}} için yeni ayar",
@@ -488,7 +490,8 @@
             "local": "Depo, yerel kopyanızla güncel",
             "failed": "Depodan getirilemedi :(",
             "cleared": "Tüm notlar temizlendi",
-            "logCleared": "Not temizlendi"
+            "logCleared": "Not temizlendi",
+            "yourLatest": "Son güncellemenizden kaydedilen commitler"
         },
         "alert": {
             "clear": {
@@ -840,7 +843,21 @@
                 "file": {
                     "label": "Dosya",
                     "description": "'Potansiyel olarak tehlikeli' indirme açılır penceresini kaldırır"
+                },
+                "noDeleteSafety": {
+                    "label": "Silme Güvenliği Yok",
+                    "description": "Sunucuyu silerken sunucu adını girme gerekliliğini kaldırır"
+                },
+                "confirmModal": {
+                    "label": "Onay Açılır Penceresi",
+                    "description": "'Bu işlemi onaylamak istediğinizden emin misiniz?' açılır penceresini kaldırır"
                 }
+            },
+            "alert": {
+                "title": "Sunucuyu sil?",
+                "body": "Bu işlem kalıcıdır, eğer belli değilse belirtelim!",
+                "confirm": "Sil",
+                "cancel": "İptal"
             }
         },
         "amITyping": {
@@ -1133,7 +1150,8 @@
             "description": "Davetlerin bitiş tarihini gör, davet edenin profilini görüntüle ve adına tıklayarak keşfedilebilir sunucuları katılmadan önce önizle.",
             "render": {
                 "tip": "Bu davet {{time}} sonra sona erecek",
-                "header": "SENİ KATILMAYA DAVET ETTİ"
+                "header": "{{name}} seni {{server}} sunucusuna davet etti",
+                "never": "hiçbir zaman"
             }
         },
         "betterNotesBox": {

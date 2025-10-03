@@ -21,6 +21,18 @@ import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
+import { Alerts, Button, GuildStore } from "@webpack/common";
+import { findByPropsLazy } from "webpack";
+
+const DeleteGuild = findByPropsLazy("deleteGuild", "sendTransferOwnershipPincode").deleteGuild;
+
+function GetPropsAndDeleteGuild(id) {
+    const GotGuild = GuildStore.getGuild(id);
+    if (!GotGuild) return;
+
+    DeleteGuild(id, GotGuild.name);
+}
+
 
 const settings = definePluginSettings({
     domain: {
@@ -44,7 +56,28 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
-    }
+    },
+    noDeleteSafety: {
+        get label() {
+            return t("plugin.alwaysTrust.option.noDeleteSafety.label");
+        },
+        get description() {
+            return t("plugin.alwaysTrust.option.noDeleteSafety.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: true
+    },
+    confirmModal: {
+        get label() {
+            return t("plugin.alwaysTrust.option.confirmModal.label");
+        },
+        get description() {
+            return t("plugin.alwaysTrust.option.confirmModal.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true
+    },
 });
 
 export default definePlugin({
@@ -72,7 +105,29 @@ export default definePlugin({
                 replace: "$&return null;"
             },
             predicate: () => settings.store.file
+        },
+        {
+            find: ".DELETE,onClick(){let",
+            replacement: {
+                match: /let\{name:\i\}=\i\.guild/,
+                replace: "$self.HandleGuildDeleteModal($1);$&"
+            },
+            predicate: () => settings.store.noDeleteSafety
         }
     ],
+    async HandleGuildDeleteModal(server) {
+        if (settings.store.confirmModal) {
+            return Alerts.show({
+                title: t("plugin.alwaysTrust.alert.title"),
+                body: t("plugin.alwaysTrust.alert.body"),
+                confirmColor: Button.Colors.RED,
+                confirmText: t("plugin.alwaysTrust.alert.confirm"),
+                onConfirm: () => GetPropsAndDeleteGuild(server.id),
+                cancelText: t("plugin.alwaysTrust.alert.cancel")
+            });
+        } else {
+            return GetPropsAndDeleteGuild(server.id);
+        }
+    },
     settings
 });

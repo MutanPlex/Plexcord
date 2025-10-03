@@ -20,6 +20,7 @@
 import i18n, { SUPPORTED_LANGUAGES, t, useForceUpdateOnLocaleChange, useTranslation } from "@api/i18n";
 import { openNotificationLogModal } from "@api/Notifications/notificationLog";
 import { Settings, useSettings } from "@api/Settings";
+import { FormSwitch } from "@components/FormSwitch";
 import { FolderIcon, GithubIcon, LogIcon, openPluginModal, PaintbrushIcon, RestartIcon } from "@components/index";
 import { QuickAction, QuickActionCard } from "@components/settings/QuickAction";
 import { SpecialCard } from "@components/settings/SpecialCard";
@@ -30,7 +31,7 @@ import { IS_MAC, IS_WINDOWS } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import { classes, isPcPluginDev, isPluginDev } from "@utils/misc";
 import { relaunch } from "@utils/native";
-import { Forms, React, Select, Switch, useMemo, UserStore } from "@webpack/common";
+import { Forms, React, Select, useMemo, UserStore } from "@webpack/common";
 
 import { DonateButtonComponent, isDonor } from "./DonateButton";
 import { VibrancySettings } from "./MacVibrancySettings";
@@ -126,14 +127,13 @@ function Switches() {
     }>;
 
     return Switches.map(s => s && (
-        <Switch
+        <FormSwitch
             key={s.key}
             value={settings[s.key]}
             onChange={v => settings[s.key] = v}
-            note={s.note}
-        >
-            {s.title}
-        </Switch>
+            description={s.note}
+            title={s.title}
+        />
     ));
 }
 

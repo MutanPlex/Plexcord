@@ -7,7 +7,7 @@
 
 
 import { t } from "@api/i18n";
-import { definePluginSettings, Settings } from "@api/Settings";
+import { definePluginSettings } from "@api/Settings";
 import { Message } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -113,7 +113,7 @@ export default definePlugin({
             '"ReadStateStore"'
         ].map(find => ({
             find,
-            predicate: () => Settings.plugins.BlockKeywords.ignoreBlockedMessages && !Settings.plugins.NoBlockedMessages.ignoreBlockedMessages,
+            predicate: () => settings.store.ignoreBlockedMessages,
             replacement: [
                 {
                     match: /(?<=function (\i)\((\i)\){)(?=.*MESSAGE_CREATE:\1)/,
@@ -127,10 +127,10 @@ export default definePlugin({
     containsBlockedKeywords,
 
     start() {
-        const blockedWordsList: Array<string> = Settings.plugins.BlockKeywords.blockedWords.split(",");
-        const caseSensitiveFlag = Settings.plugins.BlockKeywords.caseSensitive ? "" : "i";
+        const blockedWordsList: Array<string> = settings.store.blockedWords.split(",");
+        const caseSensitiveFlag = settings.store.caseSensitive ? "" : "i";
 
-        if (Settings.plugins.BlockKeywords.useRegex) {
+        if (settings.store.useRegex) {
             blockedKeywords = blockedWordsList.map(word => {
                 return new RegExp(word, caseSensitiveFlag);
             });
@@ -141,7 +141,6 @@ export default definePlugin({
                 return new RegExp(`\\b${word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, caseSensitiveFlag);
             });
         }
-        console.log(blockedKeywords);
     },
 
     blockMessagesWithKeywords(messageList: any) {
