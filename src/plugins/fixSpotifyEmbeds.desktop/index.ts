@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
@@ -14,10 +15,20 @@ export default definePlugin({
     name: "FixSpotifyEmbeds",
     description: "Fixes spotify embeds being incredibly loud by letting you customise the volume",
     authors: [Devs.Ven],
+
+    get displayDescription() {
+        return t("plugin.fixSpotifyEmbeds.description");
+    },
+
     settings: definePluginSettings({
         volume: {
+            get label() {
+                return t("plugin.fixSpotifyEmbeds.option.volume.label");
+            },
+            get description() {
+                return t("plugin.fixSpotifyEmbeds.option.volume.description");
+            },
             type: OptionType.SLIDER,
-            description: "The volume % to set for spotify embeds. Anything above 10% is veeeery loud",
             markers: makeRange(0, 100, 10),
             stickToMarkers: false,
             default: 10

@@ -3446,9 +3446,15 @@
             "name": "FixFileExtensions",
             "description": "Dosya uzantılarını, mümkünse uyumlu desteklenen bir formata yeniden adlandırarak düzeltir"
         },
-        "fixImagesQuality": {
-            "name": "FixImagesQuality",
-            "description": "Görsellerin kalite kaybına neden olabilen webp formatında yüklenmesini engeller"
+        "fixSpotifyEmbeds": {
+            "name": "FixSpotifyEmbeds",
+            "description": "Spotify embed'lerinin aşırı yüksek sesli olmasını düzeltir, ses seviyesini özelleştirmenize izin verir",
+            "option": {
+                "volume": {
+                    "label": "Ses Seviyesi",
+                    "description": "Spotify embed'leri için ayarlanacak ses yüzdesi. %10'un üzeri çok yüksek olur"
+                }
+            }
         }
     }
 }

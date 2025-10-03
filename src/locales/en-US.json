@@ -3449,6 +3449,16 @@
         "fixImagesQuality": {
             "name": "FixImagesQuality",
             "description": "Prevents images from being loaded as webp, which can cause quality loss"
+        },
+        "fixSpotifyEmbeds": {
+            "name": "FixSpotifyEmbeds",
+            "description": "Fixes spotify embeds being incredibly loud by letting you customise the volume",
+            "option": {
+                "volume": {
+                    "label": "Volume",
+                    "description": "The volume % to set for spotify embeds. Anything above 10% is veeeery loud"
+                }
+            }
         }
     }
 }
