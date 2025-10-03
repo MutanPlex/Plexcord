@@ -28,7 +28,7 @@ export interface FormSwitchProps {
 export function FormSwitch({ onChange, title, value, description, disabled, className, hideBorder }: FormSwitchProps) {
     return (
         <div className="pc-form-switch-wrapper">
-            <div className={classes("pc-form-switch", className)}>
+            <div className={classes("pc-form-switch", className, disabled && "pc-form-switch-disabled")}>
                 <div className={"pc-form-switch-text"}>
                     <Text variant="text-md/medium">{title}</Text>
                     {description && <Text variant="text-sm/normal">{description}</Text>}

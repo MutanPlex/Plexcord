@@ -11,6 +11,13 @@
     }
 }
 
+.pc-form-switch-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+
 .pc-form-switch-text {
     display: flex;
     flex-direction: column;

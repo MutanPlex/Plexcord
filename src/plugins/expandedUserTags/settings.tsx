@@ -9,9 +9,10 @@
 
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { FormSwitch } from "@components/FormSwitch";
 import { Margins } from "@utils/margins";
 import { OptionType } from "@utils/types";
-import { Card, Flex, Forms, Switch, TextInput, Tooltip } from "@webpack/common";
+import { Card, Flex, Forms, TextInput, Tooltip } from "@webpack/common";
 
 import { Tag, tags } from "./consts";
 import { TagSettings } from "./types";
@@ -72,21 +73,19 @@ function SettingsComponent() {
                             className={Margins.bottom16}
                         />
 
-                        <Switch
+                        <FormSwitch
                             value={tagSettings[tag.name]?.showInChat ?? true}
                             onChange={v => tagSettings[tag.name].showInChat = v}
                             hideBorder
-                        >
-                            {t("plugin.expandedUserTags.modal.messages")}
-                        </Switch>
+                            title={t("plugin.expandedUserTags.modal.messages")}
+                        />
 
-                        <Switch
+                        <FormSwitch
                             value={tagSettings[tag.name]?.showInNotChat ?? true}
                             onChange={v => tagSettings[tag.name].showInNotChat = v}
                             hideBorder
-                        >
-                            {t("plugin.expandedUserTags.modal.memberList")}
-                        </Switch>
+                            title={t("plugin.expandedUserTags.modal.memberList")}
+                        />
                     </Card>
                 ))}
             </div>

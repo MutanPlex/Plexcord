@@ -10,10 +10,11 @@ import { openNotificationLogModal } from "@api/Notifications/notificationLog";
 import { useSettings } from "@api/Settings";
 import { ErrorCard } from "@components/ErrorCard";
 import { Flex } from "@components/Flex";
+import { FormSwitch } from "@components/FormSwitch";
 import { Margins } from "@utils/margins";
 import { identity } from "@utils/misc";
 import { ModalCloseButton, ModalContent, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
-import { Button, Forms, Select, Slider, Switch, Text } from "@webpack/common";
+import { Button, Forms, Select, Slider, Text } from "@webpack/common";
 
 export function NotificationSection() {
     return (
@@ -91,12 +92,12 @@ function NotificationSettings() {
             />
 
             <Forms.FormTitle tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t("settings.notifications.missed.label")}</Forms.FormTitle>
-            <Switch
+            <FormSwitch
                 value={settings.missed}
                 onChange={(v: boolean) => settings.missed = v}
-            >
-                {t("settings.notifications.missed.description")}
-            </Switch>
+                title={t("settings.notifications.missed.description")}
+            />
+
 
             <Forms.FormTitle tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t("settings.notifications.timeout.label")}</Forms.FormTitle>
             <Forms.FormText className={Margins.bottom16}>{t("settings.notifications.timeout.description")}</Forms.FormText>

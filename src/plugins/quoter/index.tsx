@@ -7,12 +7,13 @@
 
 import { findGroupChildrenByChildId } from "@api/ContextMenu";
 import { definePluginSettings } from "@api/Settings";
+import { FormSwitch } from "@components/FormSwitch";
 import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { getCurrentChannel } from "@utils/discord";
 import { ModalCloseButton, ModalContent, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
-import { Button, Menu, Select, Switch, Text, UploadHandler, useEffect, useState } from "@webpack/common";
+import { Button, Menu, Select, Text, UploadHandler, useEffect, useState } from "@webpack/common";
 
 import { QuoteIcon } from "./components";
 import { canvasToBlob, fetchImageAsBlob, FixUpQuote, wrapText } from "./utils";
@@ -217,7 +218,7 @@ function QuoteModal({ message, ...props }: ModalProps & { message: Message; }) {
                 <img alt="" src="" id="quoterPreview" style={{ borderRadius: "20px", width: "100%" }} />
                 <br /><br />
                 <br /><br />
-                <Switch value={gray} onChange={setGray}>Grayscale</Switch>
+                <FormSwitch value={gray} onChange={setGray} title={"Grayscale"} />
                 <Select
                     look={1}
                     options={Object.keys(ImageStyle)

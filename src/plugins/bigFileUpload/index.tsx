@@ -10,6 +10,7 @@ import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Flex } from "@components/Flex";
+import { FormSwitch } from "@components/FormSwitch";
 import { OpenExternalIcon } from "@components/Icons";
 import { CommandArgument, CommandContext } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -17,7 +18,7 @@ import { insertTextIntoChatInputBox, sendMessage } from "@utils/discord";
 import { Margins } from "@utils/margins";
 import definePlugin, { OptionType, PluginNative } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { Button, DraftType, Forms, Menu, PermissionsBits, PermissionStore, React, Select, SelectedChannelStore, showToast, Switch, TextInput, Toasts, UploadManager, useEffect, useState } from "@webpack/common";
+import { Button, DraftType, Forms, Menu, PermissionsBits, PermissionStore, React, Select, SelectedChannelStore, showToast, TextInput, Toasts, UploadManager, useEffect, useState } from "@webpack/common";
 
 const Native = PlexcordNative.pluginHelpers.BigFileUpload as PluginNative<typeof import("./native")>;
 
@@ -263,26 +264,24 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
 
             {/* Auto-Send Settings */}
             <Forms.FormSection>
-                <Switch
+                <FormSwitch
                     value={settings.store.autoSend === "Yes"}
                     onChange={(enabled: boolean) => updateSetting("autoSend", enabled ? "Yes" : "No")}
-                    note={t("plugin.bigFileUpload.form.autoSend.description")}
+                    description={t("plugin.bigFileUpload.form.autoSend.description")}
                     hideBorder={true}
-                >
-                    {t("plugin.bigFileUpload.form.autoSend.label")}
-                </Switch>
+                    title={t("plugin.bigFileUpload.form.autoSend.label")}
+                />
             </Forms.FormSection>
 
             {/* Auto-Format Settings */}
             <Forms.FormSection>
-                <Switch
+                <FormSwitch
                     value={settings.store.autoFormat === "Yes"}
                     onChange={(enabled: boolean) => updateSetting("autoFormat", enabled ? "Yes" : "No")}
-                    note={t("plugin.bigFileUpload.form.autoMask.description")}
+                    description={t("plugin.bigFileUpload.form.autoMask.description")}
                     hideBorder={true}
-                >
-                    {t("plugin.bigFileUpload.form.autoMask.label")}
-                </Switch>
+                    title={t("plugin.bigFileUpload.form.autoMask.label")}
+                />
             </Forms.FormSection>
 
             {/* GoFile Settings */}

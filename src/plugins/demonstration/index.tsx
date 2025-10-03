@@ -9,10 +9,11 @@ import { playAudio } from "@api/AudioPlayer";
 import { t, tJsx } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { FormSwitch } from "@components/FormSwitch";
 import { Devs, PcDevs } from "@utils/constants";
 import { closeModal, ModalCloseButton, ModalContent, ModalHeader, ModalRoot, openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
-import { Button, Forms, Switch, Text } from "@webpack/common";
+import { Button, Forms, Text } from "@webpack/common";
 
 // definitely not stolen from glide :P
 async function injectCSS() {
@@ -80,12 +81,11 @@ const settings = definePluginSettings({
 function ToggleModal() {
     const value = !settings.use(["showConfirmationModal"]).showConfirmationModal;
     return (
-        <Switch
-            note={t("plugin.demonstration.switch.note")}
+        <FormSwitch
+            description={t("plugin.demonstration.switch.note")}
             value={value}
-            onChange={v => { settings.store.showConfirmationModal = !v; }}>
-            {t("plugin.demonstration.switch.disable")}
-        </Switch>
+            onChange={v => { settings.store.showConfirmationModal = !v; }}
+            title={t("plugin.demonstration.switch.disable")} />
     );
 }
 

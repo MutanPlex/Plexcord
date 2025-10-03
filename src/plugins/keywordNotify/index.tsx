@@ -11,6 +11,7 @@ import { DataStore } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Flex } from "@components/Flex";
+import { FormSwitch } from "@components/FormSwitch";
 import { DeleteIcon } from "@components/Icons";
 import { Message } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
@@ -19,7 +20,7 @@ import { classes } from "@utils/misc";
 import { useForceUpdater } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy, findByPropsLazy } from "@webpack";
-import { Button, ChannelStore, FluxDispatcher, Forms, Select, SelectedChannelStore, Switch, TabBar, TextInput, Tooltip, UserStore, useState } from "@webpack/common";
+import { Button, ChannelStore, FluxDispatcher, Forms, Select, SelectedChannelStore, TabBar, TextInput, Tooltip, UserStore, useState } from "@webpack/common";
 import type { PropsWithChildren, SVGAttributes } from "react";
 
 type IconProps = SVGAttributes<SVGElement>;
@@ -226,15 +227,14 @@ function KeywordEntries() {
                             <DeleteIcon />
                         </Button>
                     </Flex>
-                    <Switch
+                    <FormSwitch
                         value={values[i].ignoreCase}
                         onChange={() => {
                             setIgnoreCase(i, !values[i].ignoreCase);
                         }}
-                        style={{ marginTop: "0.5em", marginRight: "40px" }}
-                    >
-                        Ignore Case
-                    </Switch>
+                        className={cl("switch")}
+                        title={"Ignore Case"}
+                    />
                     <Forms.FormTitle tag="h5">Whitelist/Blacklist</Forms.FormTitle>
                     <Flex flexDirection="row">
                         <div style={{ flexGrow: 1 }}>
