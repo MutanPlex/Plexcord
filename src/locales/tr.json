@@ -3437,6 +3437,10 @@
                     "description": "Mesaja yanıt yoksa butonu gizler"
                 }
             }
+        },
+        "fixCodeblockGap": {
+            "name": "FixCodeblockGap",
+            "description": "Kod blokları ile altındaki metin arasındaki boşluğu kaldırır"
         }
     }
 }
