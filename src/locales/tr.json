@@ -3508,6 +3508,36 @@
                 "follow": "Takip Et",
                 "unfollow": "Takibi Bırak"
             }
+        },
+        "fontLoader": {
+            "name": "FontLoader",
+            "description": "Google Fonts üzerinden herhangi bir yazı tipini yükler",
+            "option": {
+                "selectedFont": {
+                    "label": "Seçilen Yazı Tipi",
+                    "description": "Şu anda seçili olan yazı tipi"
+                },
+                "fontSearch": {
+                    "label": "Yazı Tipi Arama",
+                    "description": "Google Fonts üzerinden yazı tiplerini ara ve seç"
+                },
+                "applyOnCodeBlocks": {
+                    "label": "Kod Bloklarına Uygula",
+                    "description": "Yazı tipini kod bloklarına uygula"
+                }
+            },
+            "toast": {
+                "failedLoad": "Yazı tipi yüklenemedi"
+            },
+            "modal": {
+                "settings": {
+                    "title": "Google Fonts'ta Ara",
+                    "description": "Uygulamak için bir yazı tipi seç",
+                    "placeholder": "Yazı tiplerini ara...",
+                    "previewText": "Pijamalı hasta yağız şoföre çabucak güvendi",
+                    "authors": "{{authors}} tarafından"
+                }
+            }
         }
     }
 }

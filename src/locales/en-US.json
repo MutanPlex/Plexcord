@@ -3508,6 +3508,36 @@
                 "follow": "Follow User",
                 "unfollow": "Unfollow User"
             }
+        },
+        "fontLoader": {
+            "name": "FontLoader",
+            "description": "Loads any font from Google Fonts",
+            "option": {
+                "selectedFont": {
+                    "label": "Selected Font",
+                    "description": "Currently selected font"
+                },
+                "fontSearch": {
+                    "label": "Font Search",
+                    "description": "Search and select Google Fonts"
+                },
+                "applyOnCodeBlocks": {
+                    "label": "Apply on Code Blocks",
+                    "description": "Apply the font to code blocks"
+                }
+            },
+            "toast": {
+                "failedLoad": "Failed to load font"
+            },
+            "modal": {
+                "settings": {
+                    "title": "Search Google Fonts",
+                    "description": "Select a font to apply it",
+                    "placeholder": "Search fonts...",
+                    "previewText": "The quick brown fox jumps over the lazy dog",
+                    "authors": "By {{authors}}"
+                }
+            }
         }
     }
 }

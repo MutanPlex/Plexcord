@@ -7,6 +7,7 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { debounce } from "@shared/debounce";
 import { PcDevs } from "@utils/constants";
@@ -92,7 +93,7 @@ const applyFont = async (fontFamily: string) => {
                 --font-primary: '${fontFamily}', sans-serif !important;
                 --font-display: '${fontFamily}', sans-serif !important;
                 --font-headline: '${fontFamily}', sans-serif !important;
-                ${settings.store.applyOnClodeBlocks ? "--font-code: '${fontFamily}', monospace !important;" : ""}
+                ${settings.store.applyOnCodeBlocks ? "--font-code: '${fontFamily}', monospace !important;" : ""}
             }
         `;
     } catch (err) {
@@ -132,13 +133,13 @@ function GoogleFontSearch({ onSelect }: { onSelect: (font: GoogleFontMetadata) =
 
     return (
         <Forms.FormSection>
-            <Forms.FormTitle tag="h3">Search Google Fonts</Forms.FormTitle>
-            <Forms.FormText>Click on any font to apply it.</Forms.FormText>
+            <Forms.FormTitle tag="h3">{t("plugin.fontLoader.modal.settings.title")}</Forms.FormTitle>
+            <Forms.FormText>{t("plugin.fontLoader.modal.settings.description")}</Forms.FormText>
 
             <TextInput
                 value={query}
                 onChange={e => handleSearch(e)}
-                placeholder="Search fonts..."
+                placeholder={t("plugin.fontLoader.modal.settings.placeholder")}
                 disabled={loading}
                 className={Margins.bottom16}
             />
@@ -153,11 +154,11 @@ function GoogleFontSearch({ onSelect }: { onSelect: (font: GoogleFontMetadata) =
                         >
                             <div className="pc-googlefonts-preview" style={{ fontFamily: font.family }}>
                                 <Forms.FormTitle tag="h4">{font.displayName}</Forms.FormTitle>
-                                <Forms.FormText>The quick brown fox jumps over the lazy dog</Forms.FormText>
+                                <Forms.FormText>{t("plugin.fontLoader.modal.settings.previewText")}</Forms.FormText>
                             </div>
                             {font.authors?.length && (
                                 <Forms.FormText className={Margins.top8} style={{ opacity: 0.7 }}>
-                                    by {font.authors.join(", ")}
+                                    {t("plugin.fontLoader.modal.settings.authors", { authors: font.authors.join(", ") })}
                                 </Forms.FormText>
                             )}
                         </Card>
@@ -170,14 +171,24 @@ function GoogleFontSearch({ onSelect }: { onSelect: (font: GoogleFontMetadata) =
 
 const settings = definePluginSettings({
     selectedFont: {
+        get label() {
+            return t("plugin.fontLoader.option.selectedFont.label");
+        },
+        get description() {
+            return t("plugin.fontLoader.option.selectedFont.description");
+        },
         type: OptionType.STRING,
-        description: "Currently selected font",
         default: "",
         hidden: true
     },
     fontSearch: {
+        get label() {
+            return t("plugin.fontLoader.option.fontSearch.label");
+        },
+        get description() {
+            return t("plugin.fontLoader.option.fontSearch.description");
+        },
         type: OptionType.COMPONENT,
-        description: "Search and select Google Fonts",
         component: () => (
             <GoogleFontSearch
                 onSelect={font => {
@@ -187,9 +198,14 @@ const settings = definePluginSettings({
             />
         )
     },
-    applyOnClodeBlocks: {
+    applyOnCodeBlocks: {
+        get label() {
+            return t("plugin.fontLoader.option.applyOnCodeBlocks.label");
+        },
+        get description() {
+            return t("plugin.fontLoader.option.applyOnCodeBlocks.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Apply the font to code blocks",
         default: false
     }
 });
@@ -199,6 +215,10 @@ export default definePlugin({
     description: "Loads any font from Google Fonts",
     authors: [PcDevs.vmohammad, PcDevs.MutanPlex],
     settings,
+
+    get displayDescription() {
+        return t("plugin.fontLoader.description");
+    },
 
     async start() {
         const savedFont = settings.store.selectedFont;
