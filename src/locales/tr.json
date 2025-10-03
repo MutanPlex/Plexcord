@@ -3463,6 +3463,51 @@
         "fixYoutubeEmbeds": {
             "name": "FixYoutubeEmbeds",
             "description": "YouTube videolarının Discord'da görüntülenmesinin engellenmesini atlar (ör. UMG tarafından)"
+        },
+        "followUser": {
+            "name": "FollowUser",
+            "description": "Kullanıcı bağlam menüsüne bir takip seçeneği ekler; her zaman aynı sesli kanalda olmanı sağlar",
+            "indicatorTooltip": "{{user}} takip ediliyor (manuel tetiklemek için tıkla, takibi bırakmak için sağ tıkla)",
+            "unknownUser": "Bilinmeyen Kullanıcı",
+            "option": {
+                "executeOnFollow": {
+                    "label": "Takip Edince Uygula",
+                    "description": "Bir kullanıcıyı takip ederken aynı sesli kanalda olduğundan emin olun"
+                },
+                "onlyManualTrigger": {
+                    "label": "Sadece Manuel Tetikleme",
+                    "description": "Sadece göstergeye tıklandığında tetikle"
+                },
+                "followLeave": {
+                    "label": "Takip Edilen Ayrılınca",
+                    "description": "Takip edilen kullanıcı ayrıldığında siz de ayrılın"
+                },
+                "autoMoveBack": {
+                    "label": "Otomatik Geri Taşı",
+                    "description": "Taşındığınızda otomatik olarak takip edilen kullanıcının sesli kanalına geri dönün"
+                },
+                "followUserId": {
+                    "label": "Takip Edilen Kullanıcı ID",
+                    "description": "Takip edilen kullanıcı ID'si"
+                },
+                "channelFull": {
+                    "label": "Kanal Doldu",
+                    "description": "Kanal artık dolu değilse sizi oraya taşımayı dene"
+                }
+            },
+            "toast": {
+                "channelFull": "Kanal dolu",
+                "newVc": "Takip edilen kullanıcı yeni bir sesli kanala geçti",
+                "insufficientPermissions": "Sesli kanala giriş için yetki yetersiz",
+                "sameVc": "Zaten aynı kanaldasınız",
+                "disconnect": "Takip edilen kullanıcı ayrıldı, bağlantı kesildi",
+                "notFollowing": "Takip edilen kullanıcı ayrıldı, ancak takipten ayrılmadınız",
+                "notVc": "Takip edilen kullanıcı sesli kanalda değil"
+            },
+            "context": {
+                "follow": "Takip Et",
+                "unfollow": "Takibi Bırak"
+            }
         }
     }
 }

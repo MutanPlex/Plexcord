@@ -6,6 +6,7 @@
  */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t, useForceUpdateOnLocaleChange } from "@api/i18n";
 import { definePluginSettings, useSettings } from "@api/Settings";
 import type { Channel, User, VoiceState } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
@@ -86,39 +87,69 @@ function UnfollowIcon(props: IconProps) {
 
 export const settings = definePluginSettings({
     executeOnFollow: {
+        get label() {
+            return t("plugin.followUser.option.executeOnFollow.label");
+        },
+        get description() {
+            return t("plugin.followUser.option.executeOnFollow.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Make sure to be in the same VC when following a user",
         restartNeeded: false,
         default: true
     },
     onlyManualTrigger: {
+        get label() {
+            return t("plugin.followUser.option.onlyManualTrigger.label");
+        },
+        get description() {
+            return t("plugin.followUser.option.onlyManualTrigger.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Only trigger on indicator click",
         restartNeeded: false,
         default: false
     },
     followLeave: {
+        get label() {
+            return t("plugin.followUser.option.followLeave.label");
+        },
+        get description() {
+            return t("plugin.followUser.option.followLeave.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Also leave when the followed user leaves",
         restartNeeded: false,
         default: false
     },
     autoMoveBack: {
+        get label() {
+            return t("plugin.followUser.option.autoMoveBack.label");
+        },
+        get description() {
+            return t("plugin.followUser.option.autoMoveBack.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Automatically move back to the VC of the followed user when you got moved",
         restartNeeded: false,
         default: false
     },
     followUserId: {
+        get label() {
+            return t("plugin.followUser.option.followUserId.label");
+        },
+        get description() {
+            return t("plugin.followUser.option.followUserId.description");
+        },
         type: OptionType.STRING,
-        description: "Followed User ID",
         restartNeeded: false,
         hidden: true, // Managed via context menu and indicator
         default: "",
     },
     channelFull: {
+        get label() {
+            return t("plugin.followUser.option.channelFull.label");
+        },
+        get description() {
+            return t("plugin.followUser.option.channelFull.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Attempt to move you to the channel when is not full anymore",
         restartNeeded: false,
         default: true,
     }
@@ -166,7 +197,7 @@ function triggerFollow(userChannelId: string | null = getChannelId(settings.stor
                 if (channel.type === 1 || PermissionStore.can(CONNECT, channel)) {
                     if (channel.userLimit !== 0 && memberCount !== null && memberCount >= channel.userLimit && !PermissionStore.can(PermissionsBits.MOVE_MEMBERS, channel)) {
                         Toasts.show({
-                            message: "Channel is full",
+                            message: t("plugin.followUser.toast.channelFull"),
                             id: Toasts.genId(),
                             type: Toasts.Type.FAILURE
                         });
@@ -174,20 +205,20 @@ function triggerFollow(userChannelId: string | null = getChannelId(settings.stor
                     }
                     ChannelActions.selectVoiceChannel(userChannelId);
                     Toasts.show({
-                        message: "Followed user into a new voice channel",
+                        message: t("plugin.followUser.toast.newVc"),
                         id: Toasts.genId(),
                         type: Toasts.Type.SUCCESS
                     });
                 } else {
                     Toasts.show({
-                        message: "Insufficient permissions to enter in the voice channel",
+                        message: t("plugin.followUser.toast.insufficientPermissions"),
                         id: Toasts.genId(),
                         type: Toasts.Type.FAILURE
                     });
                 }
             } else {
                 Toasts.show({
-                    message: "You are already in the same channel",
+                    message: t("plugin.followUser.toast.sameVc"),
                     id: Toasts.genId(),
                     type: Toasts.Type.FAILURE
                 });
@@ -197,20 +228,20 @@ function triggerFollow(userChannelId: string | null = getChannelId(settings.stor
             if (settings.store.followLeave) {
                 ChannelActions.disconnect();
                 Toasts.show({
-                    message: "Followed user left, disconnected",
+                    message: t("plugin.followUser.toast.disconnect"),
                     id: Toasts.genId(),
                     type: Toasts.Type.SUCCESS
                 });
             } else {
                 Toasts.show({
-                    message: "Followed user left, but not following disconnect",
+                    message: t("plugin.followUser.toast.notFollowing"),
                     id: Toasts.genId(),
                     type: Toasts.Type.FAILURE
                 });
             }
         } else {
             Toasts.show({
-                message: "Followed user is not in a voice channel",
+                message: t("plugin.followUser.toast.notVc"),
                 id: Toasts.genId(),
                 type: Toasts.Type.FAILURE
             });
@@ -238,7 +269,7 @@ interface UserContextProps {
 const UserContext: NavContextMenuPatchCallback = (children, { user }: UserContextProps) => {
     if (!user || user.id === UserStore.getCurrentUser().id) return;
     const isFollowed = settings.store.followUserId === user.id;
-    const label = isFollowed ? "Unfollow User" : "Follow User";
+    const label = isFollowed ? t("plugin.followUser.context.unfollow") : t("plugin.followUser.context.follow");
     const icon = isFollowed ? UnfollowIcon : FollowIcon;
 
     children.splice(-1, 0, (
@@ -257,6 +288,10 @@ export default definePlugin({
     name: "FollowUser",
     description: "Adds a follow option in the user context menu to always be in the same VC as them",
     authors: [Devs.D3SOX, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.followUser.description");
+    },
 
     settings,
 
@@ -323,12 +358,13 @@ export default definePlugin({
 
     FollowIndicator() {
         const { plugins: { FollowUser: { followUserId } } } = useSettings(["plugins.FollowUser.followUserId"]);
+        useForceUpdateOnLocaleChange();
         if (followUserId) {
             const followedUser = UserStore.getUser(followUserId);
-            const username = followedUser?.username || "Unknown User";
+            const username = followedUser?.username || t("plugin.followUser.unknownUser");
             return (
                 <HeaderBarIcon
-                    tooltip={`Following ${username} (click to trigger manually, right-click to unfollow)`}
+                    tooltip={t("plugin.followUser.indicatorTooltip", { user: username })}
                     icon={UnfollowIcon}
                     onClick={() => {
                         triggerFollow();

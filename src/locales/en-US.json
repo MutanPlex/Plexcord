@@ -3463,6 +3463,51 @@
         "fixYoutubeEmbeds": {
             "name": "FixYoutubeEmbeds",
             "description": "Bypasses youtube videos being blocked from display on Discord (for example by UMG)"
+        },
+        "followUser": {
+            "name": "FollowUser",
+            "description": "Adds a follow option in the user context menu to always be in the same VC as them",
+            "indicatorTooltip": "Following {{user}} (click to trigger manually, right-click to unfollow)",
+            "unknownUser": "Unknown User",
+            "option": {
+                "executeOnFollow": {
+                    "label": "Execute On Follow",
+                    "description": "Make sure to be in the same VC when following a user"
+                },
+                "onlyManualTrigger": {
+                    "label": "Only Manual Trigger",
+                    "description": "Only trigger on indicator click"
+                },
+                "followLeave": {
+                    "label": "Follow Leave",
+                    "description": "Also leave when the followed user leaves"
+                },
+                "autoMoveBack": {
+                    "label": "Auto Move Back",
+                    "description": "Automatically move back to the VC of the followed user when you got moved"
+                },
+                "followUserId": {
+                    "label": "Follow User ID",
+                    "description": "Followed User ID"
+                },
+                "channelFull": {
+                    "label": "Channel Full",
+                    "description": "Attempt to move you to the channel when it is not full anymore"
+                }
+            },
+            "toast": {
+                "channelFull": "Channel is full",
+                "newVc": "Followed user into a new voice channel",
+                "insufficientPermissions": "Insufficient permissions to enter in the voice channel",
+                "sameVc": "You are already in the same channel",
+                "disconnect": "Followed user left, disconnected",
+                "notFollowing": "Followed user left, but not following disconnect",
+                "notVc": "Followed user is not in a voice channel"
+            },
+            "context": {
+                "follow": "Follow User",
+                "unfollow": "Unfollow User"
+            }
         }
     }
 }
