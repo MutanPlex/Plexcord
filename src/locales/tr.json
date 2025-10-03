@@ -679,7 +679,6 @@
             "command": "{{path}} komutu bulunamadı. Bunu indirin veya tekrar deneyin.",
             "code": "Kod {{code}}. Daha fazla bilgi için console'a bakın.",
             "running": "{{cmd}} yürütülürken bir sorun oluştu: {{error}}",
-            "render": "{{tab}} sekmesi yüklenemedi. Bu sorun devam ederse, yükleyiciyi kullanarak yeniden yüklemeyi deneyin!",
             "failed": "Bu da başarısız oldu :( Lütfen güncellemeyi deneyin veya yükleyici ile yeniden yükleyin!"
         },
         "available": "1 güncelleme mevcut",
@@ -1827,6 +1826,23 @@
             "name": "ChannelTabs",
             "description": "Sık ziyaret ettiğiniz kanalları sekmelerde gruplayın, tıpkı bir tarayıcı gibi",
             "open": "Yeni Sekmede Aç",
+            "animation": {
+                "title": "Animasyon Kontolleri",
+                "description": "Kanal sekmeleri için belirli animasyonları etkinleştir veya devre dışı bırak. Her seçenek bağımsız olarak açılıp kapatılabilir.",
+                "placeholder": "Hangi animasyonların etkinleştirileceğini seçin...",
+                "tabHover": "Sekme Üzerine Gelme Efektleri (kaldırma + ölçek)",
+                "tabSelection": "Seçili Sekme Kaldırma Animasyonu",
+                "tabDragDrop": "Sekme Sürükle & Bırak (hayalet + yeniden sıralama)",
+                "tabEnterExit": "Sekme Giriş/Çıkış Kaydırmaları (oluşturma + kapatma)",
+                "tabIconPop": "Seçimde Simge Patlaması (simge büyütme)",
+                "closeRotation": "Kapatma Butonu Döndürme",
+                "plusPulse": "Artı Butonu Nabız",
+                "mentionGlow": "Bahsetme Rozeti Parlaması",
+                "compactExpand": "Sıkıştırılmış Mod Genişlemesi",
+                "selectedBorder": "Seçili Sekme Mavi Kenarlık",
+                "selectedBackground": "Seçili Sekme Arka Plan Rengi",
+                "tabShadows": "Sekme Gölge Efektleri"
+            },
             "bookmark": {
                 "label": "Yer İmi",
                 "unknown": "Bilinmeyen Kullanıcı",
@@ -1940,6 +1956,65 @@
                 "hotkeyCount": {
                     "label": "Kısayol Sayısı",
                     "description": "Klavye kısayolları ile erişilebilecek sekme sayısı"
+                },
+                "animations": {
+                    "label": "Animasyonlar"
+                },
+                "animationHover": {
+                    "label": "Üzerine Gelince Animasyon",
+                    "description": "Üzerine gelindiğinde kaldırma ve ölçeklendirme efektlerini etkinleştir"
+                },
+                "animationSelection": {
+                    "label": "Seçim Animasyonu",
+                    "description": "Seçim animasyonlarını (kenar parlaması, kaldırma) etkinleştir"
+                },
+                "animationDragDrop": {
+                    "label": "Sürükle-Bırak Animasyonu",
+                    "description": "Sürükle bırak hayalet efektlerini etkinleştir"
+                },
+                "animationEnterExit": {
+                    "label": "Giriş/Çıkış Animasyonu",
+                    "description": "Sekme oluşturma/kapatma kaydırma animasyonlarını etkinleştir"
+                },
+                "animationIconPop": {
+                    "label": "Simge Patlama Animasyonu",
+                    "description": "Seçim sırasında simge büyütme animasyonunu etkinleştir"
+                },
+                "animationCloseRotation": {
+                    "label": "Kapatma Döndürme Animasyonu",
+                    "description": "Kapatma butonları için döndürme animasyonunu etkinleştir"
+                },
+                "animationPlusPulse": {
+                    "label": "Artı Buton Nabız Animasyonu",
+                    "description": "Artı butonu için nabız animasyonunu etkinleştir"
+                },
+                "animationMentionGlow": {
+                    "label": "Bahsetme Parlama Animasyonu",
+                    "description": "Bahsetmeler için kırmızı yanıp sönme efektini etkinleştir"
+                },
+                "animationCompactExpand": {
+                    "label": "Sıkıştırılmış/Genişletilmiş Animasyon",
+                    "description": "Sıkıştırılmış sekmeler için yumuşak genişleme animasyonunu etkinleştir"
+                },
+                "animationSelectedBorder": {
+                    "label": "Seçili Kenarlık Animasyonu",
+                    "description": "Seçili sekmeler için kenarlık ve parıltı stilini etkinleştir"
+                },
+                "animationSelectedBackground": {
+                    "label": "Seçili Arka Plan Animasyonu",
+                    "description": "Seçili sekmeler için arka plan rengi değişimini etkinleştir"
+                },
+                "animationTabShadows": {
+                    "label": "Sekme Gölgeleri Animasyonu",
+                    "description": "Sekmelerde gölge efektlerini etkinleştir"
+                },
+                "compactAutoExpandSelected": {
+                    "label": "Seçilenleri Otomatik Genişlet (Sıkıştırılmış)",
+                    "description": "Seçildiğinde sıkıştırılmış sekmeleri otomatik olarak genişlet ve kanal adını tamamen göster"
+                },
+                "openInNewTabAutoSwitch": {
+                    "label": "Yeni Sekmede Aç – Otomatik Geçiş",
+                    "description": "'Yeni Sekmede Aç' bağlam menüsünden açılan sekmelere otomatik geçiş yap"
                 }
             },
             "tabs": {

@@ -22,18 +22,18 @@ interface DynamicDropdownSettingOption {
 
 function AnimationSettings(): JSX.Element {
     const animationOptions: DynamicDropdownSettingOption[] = [
-        { label: "Tab Hover Effects (lift + scale)", value: "hover", selected: settings.store.animationHover },
-        { label: "Selected Tab Lift Animation", value: "selection", selected: settings.store.animationSelection },
-        { label: "Tab Drag & Drop (ghost + reorder)", value: "drag-drop", selected: settings.store.animationDragDrop },
-        { label: "Tab Enter/Exit Slides (creation + closing)", value: "enter-exit", selected: settings.store.animationEnterExit },
-        { label: "Icon Pop on Selection (icon scale-up)", value: "icon-pop", selected: settings.store.animationIconPop },
-        { label: "Close Button Rotation", value: "close-rotation", selected: settings.store.animationCloseRotation },
-        { label: "Plus Button Pulse", value: "plus-pulse", selected: settings.store.animationPlusPulse },
-        { label: "Mention Badge Glow", value: "mention-glow", selected: settings.store.animationMentionGlow },
-        { label: "Compact Mode Expansion", value: "compact-expand", selected: settings.store.animationCompactExpand },
-        { label: "Selected Tab Blue Border", value: "selected-border", selected: settings.store.animationSelectedBorder },
-        { label: "Selected Tab Background Color", value: "selected-background", selected: settings.store.animationSelectedBackground },
-        { label: "Tab Shadow Effects", value: "tab-shadows", selected: settings.store.animationTabShadows }
+        { label: t("plugin.channelTabs.animation.tabHover"), value: "hover", selected: settings.store.animationHover },
+        { label: t("plugin.channelTabs.animation.tabSelection"), value: "selection", selected: settings.store.animationSelection },
+        { label: t("plugin.channelTabs.animation.tabDragDrop"), value: "drag-drop", selected: settings.store.animationDragDrop },
+        { label: t("plugin.channelTabs.animation.tabEnterExit"), value: "enter-exit", selected: settings.store.animationEnterExit },
+        { label: t("plugin.channelTabs.animation.tabIconPop"), value: "icon-pop", selected: settings.store.animationIconPop },
+        { label: t("plugin.channelTabs.animation.closeRotation"), value: "close-rotation", selected: settings.store.animationCloseRotation },
+        { label: t("plugin.channelTabs.animation.plusPulse"), value: "plus-pulse", selected: settings.store.animationPlusPulse },
+        { label: t("plugin.channelTabs.animation.mentionGlow"), value: "mention-glow", selected: settings.store.animationMentionGlow },
+        { label: t("plugin.channelTabs.animation.compactExpand"), value: "compact-expand", selected: settings.store.animationCompactExpand },
+        { label: t("plugin.channelTabs.animation.selectedBorder"), value: "selected-border", selected: settings.store.animationSelectedBorder },
+        { label: t("plugin.channelTabs.animation.selectedBackground"), value: "selected-background", selected: settings.store.animationSelectedBackground },
+        { label: t("plugin.channelTabs.animation.tabShadows"), value: "tab-shadows", selected: settings.store.animationTabShadows }
     ];
 
     const [currentValue, setCurrentValue] = useState(animationOptions.filter(option => option.selected));
@@ -80,13 +80,13 @@ function AnimationSettings(): JSX.Element {
 
     return (
         <Forms.FormSection>
-            <Forms.FormTitle>Animation Controls</Forms.FormTitle>
+            <Forms.FormTitle>{t("plugin.channelTabs.animation.title")}</Forms.FormTitle>
             <Forms.FormText>
-                Enable or disable specific animations for channel tabs. Each option can be toggled independently.
+                {t("plugin.channelTabs.animation.description")}
             </Forms.FormText>
             <div style={{ marginTop: "8px" }}>
                 <SearchableSelect
-                    placeholder="Select which animations to enable..."
+                    placeholder={t("plugin.channelTabs.animation.placeholder")}
                     maxVisibleItems={12}
                     clearable={true}
                     multi={true}
@@ -286,91 +286,164 @@ export const settings = definePluginSettings({
         stickToMarkers: true,
     },
     animations: {
+        get label() {
+            return t("plugin.channelTabs.option.animations.label");
+        },
         type: OptionType.COMPONENT,
         component: AnimationSettings
     },
     // me when storage yes
     animationHover: {
+        get label() {
+            return t("plugin.channelTabs.option.animationHover.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.animationHover.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Enable hover lift and scale effects",
         default: true,
         hidden: true
     },
     animationSelection: {
+        get label() {
+            return t("plugin.channelTabs.option.animationSelection.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.animationSelection.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Enable selection animations (border glow, lift)",
         default: true,
         hidden: true
     },
     animationDragDrop: {
+        get label() {
+            return t("plugin.channelTabs.option.animationDragDrop.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.animationDragDrop.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Enable drag and drop ghost effects",
         default: true,
         hidden: true
     },
     animationEnterExit: {
+        get label() {
+            return t("plugin.channelTabs.option.animationEnterExit.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.animationEnterExit.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Enable tab creation/closing slide animations",
         default: true,
         hidden: true
     },
     animationIconPop: {
+        get label() {
+            return t("plugin.channelTabs.option.animationIconPop.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.animationIconPop.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Enable icon scale-up animation on selection",
         default: true,
         hidden: true
     },
     animationCloseRotation: {
+        get label() {
+            return t("plugin.channelTabs.option.animationCloseRotation.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.animationCloseRotation.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Enable rotation animation for close buttons",
         default: true,
         hidden: true
     },
     animationPlusPulse: {
+        get label() {
+            return t("plugin.channelTabs.option.animationPlusPulse.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.animationPlusPulse.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Enable pulse animation for plus button",
         default: true,
         hidden: true
     },
     animationMentionGlow: {
+        get label() {
+            return t("plugin.channelTabs.option.animationMentionGlow.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.animationMentionGlow.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Enable pulsing red glow for mentions",
         default: true,
         hidden: true
     },
     animationCompactExpand: {
+        get label() {
+            return t("plugin.channelTabs.option.animationCompactExpand.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.animationCompactExpand.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Enable smooth expansion for compact tabs",
         default: true,
         hidden: true
     },
     animationSelectedBorder: {
+        get label() {
+            return t("plugin.channelTabs.option.animationSelectedBorder.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.animationSelectedBorder.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Enable border and glow styling for selected tabs",
         default: true,
         hidden: true
     },
     animationSelectedBackground: {
+        get label() {
+            return t("plugin.channelTabs.option.animationSelectedBackground.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.animationSelectedBackground.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Enable background color change for selected tabs",
         default: true,
         hidden: true
     },
     animationTabShadows: {
+        get label() {
+            return t("plugin.channelTabs.option.animationTabShadows.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.animationTabShadows.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Enable shadow effects on tabs",
         default: true,
         hidden: true
     },
     compactAutoExpandSelected: {
+        get label() {
+            return t("plugin.channelTabs.option.compactAutoExpandSelected.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.compactAutoExpandSelected.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Automatically expand compact tabs when selected to show the full channel name",
         default: true,
         restartNeeded: false
     },
     openInNewTabAutoSwitch: {
+        get label() {
+            return t("plugin.channelTabs.option.openInNewTabAutoSwitch.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.openInNewTabAutoSwitch.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Automatically switch to new tabs opened from 'Open in New Tab' context menu",
         default: true,
         restartNeeded: false
     }

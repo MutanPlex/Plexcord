@@ -112,7 +112,7 @@ export default definePlugin({
                         : "/assets/1f0bfc0865d324c2587920a7d80c609b.png?size=128"}
                 />
                 <div className="pc-bi-header-text">
-                    {t("plugin.betterInvites.render.header", { user: inviter.username, guild: guildName })}
+                    {t("plugin.betterInvites.render.header", { name: inviter.username, server: guildName })}
                 </div>
             </div>
         );

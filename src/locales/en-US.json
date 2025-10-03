@@ -679,7 +679,6 @@
             "command": "Command {{path}} not found. Please install it and try again.",
             "code": "Code {{code}}. See the console for more info.",
             "running": "An error occurred while running {{cmd}}: {{error}}",
-            "render": "Failed to render the {{tab}} tab. If this issue persists, try using the installer to reinstall!",
             "failed": "That also failed :( Try updating or re-installing with the installer!"
         },
         "available": "There is 1 update",
@@ -1827,6 +1826,23 @@
             "name": "ChannelTabs",
             "description": "Group your commonly visited channels in tabs, like a browser",
             "open": "Open in New Tab",
+            "animation": {
+                "title": "Animation Controls",
+                "description": "Enable or disable specific animations for channel tabs. Each option can be toggled independently.",
+                "placeholder": "Select which animations to enable...",
+                "tabHover": "Tab Hover Effects (lift + scale)",
+                "tabSelection": "Selected Tab Lift Animation",
+                "tabDragDrop": "Tab Drag & Drop (ghost + reorder)",
+                "tabEnterExit": "Tab Enter/Exit Slides (creation + closing)",
+                "tabIconPop": "Icon Pop on Selection (icon scale-up)",
+                "closeRotation": "Close Button Rotation",
+                "plusPulse": "Plus Button Pulse",
+                "mentionGlow": "Mention Badge Glow",
+                "compactExpand": "Compact Mode Expansion",
+                "selectedBorder": "Selected Tab Blue Border",
+                "selectedBackground": "Selected Tab Background Color",
+                "tabShadows": "Tab Shadow Effects"
+            },
             "bookmark": {
                 "label": "Bookmark",
                 "unknown": "Unknown User",
@@ -1940,6 +1956,65 @@
                 "hotkeyCount": {
                     "label": "Hotkey Count",
                     "description": "Number of tabs accessible via keyboard shortcuts"
+                },
+                "animations": {
+                    "label": "Animations"
+                },
+                "animationHover": {
+                    "label": "Animation on Hover",
+                    "description": "Enable hover lift and scale effects"
+                },
+                "animationSelection": {
+                    "label": "Animation on Selection",
+                    "description": "Enable selection animations (border glow, lift)"
+                },
+                "animationDragDrop": {
+                    "label": "Animation on Drag and Drop",
+                    "description": "Enable drag and drop ghost effects"
+                },
+                "animationEnterExit": {
+                    "label": "Animation on Enter/Exit",
+                    "description": "Enable tab creation/closing slide animations"
+                },
+                "animationIconPop": {
+                    "label": "Animation on Icon Pop",
+                    "description": "Enable icon scale-up animation on selection"
+                },
+                "animationCloseRotation": {
+                    "label": "Animation on Close Rotation",
+                    "description": "Enable rotation animation for close buttons"
+                },
+                "animationPlusPulse": {
+                    "label": "Animation on Plus Button Pulse",
+                    "description": "Enable pulse animation for plus button"
+                },
+                "animationMentionGlow": {
+                    "label": "Animation on Mention Glow",
+                    "description": "Enable pulsing red glow for mentions"
+                },
+                "animationCompactExpand": {
+                    "label": "Animation on Compact/Expand",
+                    "description": "Enable smooth expansion for compact tabs"
+                },
+                "animationSelectedBorder": {
+                    "label": "Animation on Selected Border",
+                    "description": "Enable border and glow styling for selected tabs"
+                },
+                "animationSelectedBackground": {
+                    "label": "Animation on Selected Background",
+                    "description": "Enable background color change for selected tabs"
+                },
+                "animationTabShadows": {
+                    "label": "Animation on Tab Shadows",
+                    "description": "Enable shadow effects on tabs"
+                },
+                "compactAutoExpandSelected": {
+                    "label": "Compact Auto-Expand Selected",
+                    "description": "Automatically expand compact tabs when selected to show the full channel name"
+                },
+                "openInNewTabAutoSwitch": {
+                    "label": "Open in New Tab Auto-Switch",
+                    "description": "Automatically switch to new tabs opened from 'Open in New Tab' context menu"
                 }
             },
             "tabs": {
