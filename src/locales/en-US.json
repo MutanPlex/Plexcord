@@ -3441,6 +3441,10 @@
         "fixCodeblockGap": {
             "name": "FixCodeblockGap",
             "description": "Removes the gap between codeblocks and text below it"
+        },
+        "fixFileExtensions": {
+            "name": "FixFileExtensions",
+            "description": "Fixes file extensions by renaming them to a compatible supported format if possible"
         }
     }
 }

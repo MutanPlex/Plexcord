@@ -3441,6 +3441,10 @@
         "fixCodeblockGap": {
             "name": "FixCodeblockGap",
             "description": "Kod blokları ile altındaki metin arasındaki boşluğu kaldırır"
+        },
+        "fixFileExtensions": {
+            "name": "FixFileExtensions",
+            "description": "Dosya uzantılarını, mümkünse uyumlu desteklenen bir formata yeniden adlandırarak düzeltir"
         }
     }
 }

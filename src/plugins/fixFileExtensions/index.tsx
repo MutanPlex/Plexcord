@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Settings } from "@api/Settings";
 import { CloudUpload } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
@@ -31,6 +32,11 @@ export default definePlugin({
     authors: [Devs.thororen, PcDevs.MutanPlex],
     description: "Fixes file extensions by renaming them to a compatible supported format if possible",
     reporterTestable: ReporterTestable.None,
+
+    get displayDescription() {
+        return t("plugin.fixFileExtensions.description");
+    },
+
     patches: [
         // Taken from AnonymiseFileNames
         {

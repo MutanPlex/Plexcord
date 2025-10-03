@@ -27,7 +27,7 @@ export default definePlugin({
     authors: [Devs.Grzesiek11],
 
     get displayDescription() {
-        return t("plugins.fixCodeblockGap.description");
+        return t("plugin.fixCodeblockGap.description");
     },
 
     patches: [
