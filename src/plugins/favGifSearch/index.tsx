@@ -95,7 +95,7 @@ export default definePlugin({
     description: "Adds a search bar to favorite gifs.",
 
     get displayDescription() {
-        return t("plugin.favoriteEmojiFirst.description");
+        return t("plugin.favoriteGifSearch.description");
     },
 
     patches: [
@@ -201,7 +201,7 @@ function SearchBar({ instance, SearchBarComponent }: { instance: Instance; Searc
                 }
             }}
             query={query}
-            placeholder={t("plugin.favoriteEmojiFirst.searchPlaceholder")}
+            placeholder={t("plugin.favoriteGifSearch.searchPlaceholder")}
         />
     );
 }

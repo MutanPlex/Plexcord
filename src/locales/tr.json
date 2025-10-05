@@ -3538,6 +3538,28 @@
                     "authors": "{{authors}} tarafından"
                 }
             }
+        },
+        "forceOwnerCrown": {
+            "name": "ForceOwnerCrown",
+            "description": "Sunucu büyük olsa bile, kullanıcı adlarının yanında sunucu sahibi tacını zorla gösterir."
+        },
+        "freaky": {
+            "name": "Freaky",
+            "description": "/freaky komutu ile mesajını garip bir fontla göndermene olanak tanır.",
+            "command": {
+                "freaky": "Tuhaf oldu.",
+                "message": "Mesajını garip bir fontla gönder"
+            },
+            "option": {
+                "addFreakyEnding": {
+                    "label": "Tuhaf Son Ekleyin",
+                    "description": "Sona 👅 veya ❤️ ekleyin"
+                }
+            }
+        },
+        "frequentQuickSwitcher": {
+            "name": "Frequent Quick Switcher",
+            "description": "Hızlı geçiş penceresindeki sonuçları en sık kullandığın kanallarla değiştirir ve filtreler."
         }
     }
 }

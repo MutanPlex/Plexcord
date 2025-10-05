@@ -3538,6 +3538,28 @@
                     "authors": "By {{authors}}"
                 }
             }
+        },
+        "forceOwnerCrown": {
+            "name": "ForceOwnerCrown",
+            "description": "Force the owner crown next to usernames even if the server is large."
+        },
+        "freaky": {
+            "name": "Freaky",
+            "description": "Allows you to send your message in a weird font using the /freaky command.",
+            "command": {
+                "freaky": "It's freaky.",
+                "message": "Make your message freaky"
+            },
+            "option": {
+                "addFreakyEnding": {
+                    "label": "Add Freaky Ending",
+                    "description": "Add 👅 or ❤️ at the end"
+                }
+            }
+        },
+        "frequentQuickSwitcher": {
+            "name": "Frequent Quick Switcher",
+            "description": "Rewrites and filters the quick switcher results to be your most frequent channels."
         }
     }
 }
