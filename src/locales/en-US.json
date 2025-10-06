@@ -3560,6 +3560,59 @@
         "frequentQuickSwitcher": {
             "name": "Frequent Quick Switcher",
             "description": "Rewrites and filters the quick switcher results to be your most frequent channels."
+        },
+        "friendInvites": {
+            "name": "FriendInvites",
+            "description": "Create and manage friend invite links via slash commands (/create friend invite, /view friend invites, /revoke friend invites).",
+            "command": {
+                "create": {
+                    "description": "Generates a friend invite link.",
+                    "message": "discord.gg/{{code}}`\n· Expires <t:{{expiration}}:R>\n· Max Uses: {{uses}}"
+                },
+                "view": {
+                    "description": "View a list of all generated friend invites.",
+                    "message": "_discord.gg/{{code}}_ \n· Expires: <t:{{expiration}}:R> \n· Times used: {{uses}}/{{maxUses}}",
+                    "noInvites": "You have no active friend invites."
+                },
+                "revoke": {
+                    "description": "Revokes all generated friend invites.",
+                    "message": "All friend invites have been revoked."
+                }
+            }
+        },
+        "friendshipRanks": {
+            "name": "FriendshipRanks",
+            "description": "Adds badges showcasing how long you have been friends with a user for",
+            "badge": {
+                "sprout": {
+                    "name": "Sprout",
+                    "description": "Your friendship is just starting"
+                },
+                "blooming": {
+                    "name": "Blooming",
+                    "description": "Your friendship is getting there! (1 Month)"
+                },
+                "burning": {
+                    "name": "Burning",
+                    "description": "Your friendship has reached terminal velocity (3 Months)"
+                },
+                "fighter": {
+                    "name": "Fighter",
+                    "description": "Your friendship is strong (6 Months)"
+                },
+                "star": {
+                    "name": "Star",
+                    "description": "Your friendship has been going on for a WHILE (1 Year)"
+                },
+                "royal": {
+                    "name": "Royal",
+                    "description": "Your friendship has gone through thick and thin- a whole 2 years!"
+                },
+                "besties": {
+                    "name": "Besties",
+                    "description": "How do you even manage this??? (5 Years)"
+                }
+            }
         }
     }
 }

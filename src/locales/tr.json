@@ -3560,6 +3560,59 @@
         "frequentQuickSwitcher": {
             "name": "Frequent Quick Switcher",
             "description": "Hızlı geçiş penceresindeki sonuçları en sık kullandığın kanallarla değiştirir ve filtreler."
+        },
+        "friendInvites": {
+            "name": "FriendInvites",
+            "description": "Slash komutları ile arkadaş davet bağlantıları oluştur ve yönet (/create friend invite, /view friend invites, /revoke friend invites).",
+            "command": {
+                "create": {
+                    "description": "Bir arkadaş davet bağlantısı oluşturur.",
+                    "message": "discord.gg/{{code}}`\n· Süre bitişi: <t:{{expiration}}:R>\n· Maksimum Kullanım: {{uses}}"
+                },
+                "view": {
+                    "description": "Oluşturulmuş tüm arkadaş davet bağlantılarını görüntüle.",
+                    "message": "_discord.gg/{{code}}_ \n· Süre bitişi: <t:{{expiration}}:R> \n· Kullanım sayısı: {{uses}}/{{maxUses}}",
+                    "noInvites": "Etkin arkadaş davet bağlantın yok."
+                },
+                "revoke": {
+                    "description": "Oluşturulmuş tüm arkadaş davet bağlantılarını iptal eder.",
+                    "message": "Tüm arkadaş davet bağlantıları iptal edildi."
+                }
+            }
+        },
+        "friendshipRanks": {
+            "name": "FriendshipRanks",
+            "description": "Bir kullanıcıyla ne kadar süredir arkadaş olduğunu gösteren rozetler ekler.",
+            "badge": {
+                "sprout": {
+                    "name": "Sprout",
+                    "description": "Arkadaşlığınız yeni filizleniyor."
+                },
+                "blooming": {
+                    "name": "Blooming",
+                    "description": "Arkadaşlığınız gelişiyor! (1 Ay)"
+                },
+                "burning": {
+                    "name": "Burning",
+                    "description": "Arkadaşlığınız zirveye ulaştı. (3 Ay)"
+                },
+                "fighter": {
+                    "name": "Fighter",
+                    "description": "Arkadaşlığınız güçlü. (6 Ay)"
+                },
+                "star": {
+                    "name": "Star",
+                    "description": "Arkadaşlığınız uzun süredir devam ediyor. (1 Yıl)"
+                },
+                "royal": {
+                    "name": "Royal",
+                    "description": "Arkadaşlığınız her zorluğu aşmış — tam 2 yıl!"
+                },
+                "besties": {
+                    "name": "Besties",
+                    "description": "Bunu nasıl başarıyorsunuz??? (5 Yıl)"
+                }
+            }
         }
     }
 }

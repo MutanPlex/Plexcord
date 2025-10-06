@@ -18,6 +18,7 @@
 */
 
 import { ApplicationCommandInputType, sendBotMessage } from "@api/Commands";
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findByPropsLazy } from "@webpack";
@@ -28,21 +29,29 @@ export default definePlugin({
     name: "FriendInvites",
     description: "Create and manage friend invite links via slash commands (/create friend invite, /view friend invites, /revoke friend invites).",
     authors: [Devs.afn, Devs.Dziurwa],
+
+    get displayDescription() {
+        return t("plugin.friendInvites.description");
+    },
+
     commands: [
         {
             name: "create friend invite",
             description: "Generates a friend invite link.",
             inputType: ApplicationCommandInputType.BUILT_IN,
+            get displayDescription() {
+                return t("plugin.friendInvites.command.create.description");
+            },
 
             execute: async (args, ctx) => {
                 const invite = await FriendInvites.createFriendInvite();
 
                 sendBotMessage(ctx.channel.id, {
-                    content: `
-                        discord.gg/${invite.code} ·
-                        Expires: <t:${new Date(invite.expires_at).getTime() / 1000}:R> ·
-                        Max uses: \`${invite.max_uses}\`
-                    `.trim().replace(/\s+/g, " ")
+                    content: t("plugin.friendInvites.command.create.message", {
+                        code: invite.code,
+                        expiration: new Date(invite.expires_at).getTime() / 1000,
+                        maxUses: invite.max_uses
+                    })
                 });
             }
         },
@@ -50,18 +59,24 @@ export default definePlugin({
             name: "view friend invites",
             description: "View a list of all generated friend invites.",
             inputType: ApplicationCommandInputType.BUILT_IN,
+
+            get displayDescription() {
+                return t("plugin.friendInvites.command.view.description");
+            },
+
             execute: async (_, ctx) => {
                 const invites = await FriendInvites.getAllFriendInvites();
                 const friendInviteList = invites.map(i =>
-                    `
-                    _discord.gg/${i.code}_ ·
-                    Expires: <t:${new Date(i.expires_at).getTime() / 1000}:R> ·
-                    Times used: \`${i.uses}/${i.max_uses}\`
-                    `.trim().replace(/\s+/g, " ")
+                    t("plugin.friendInvites.command.view.invite", {
+                        code: i.code,
+                        uses: i.uses,
+                        maxUses: i.max_uses,
+                        expiration: new Date(i.expires_at).getTime() / 1000
+                    })
                 );
 
                 sendBotMessage(ctx.channel.id, {
-                    content: friendInviteList.join("\n") || "You have no active friend invites!"
+                    content: friendInviteList.join("\n") || t("plugin.friendInvites.command.view.noInvites")
                 });
             },
         },
@@ -69,11 +84,16 @@ export default definePlugin({
             name: "revoke friend invites",
             description: "Revokes all generated friend invites.",
             inputType: ApplicationCommandInputType.BUILT_IN,
+
+            get displayDescription() {
+                return t("plugin.friendInvites.command.revoke.description");
+            },
+
             execute: async (_, ctx) => {
                 await FriendInvites.revokeFriendInvites();
 
                 sendBotMessage(ctx.channel.id, {
-                    content: "All friend invites have been revoked."
+                    content: t("plugin.friendInvites.command.revoke.message")
                 });
             },
         },

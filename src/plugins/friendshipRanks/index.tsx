@@ -6,6 +6,7 @@
  */
 
 import { BadgeUserArgs, ProfileBadge } from "@api/Badges";
+import { i18n, t } from "@api/i18n";
 import { Badges } from "@api/index";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs, PcDevs } from "@utils/constants";
@@ -34,53 +35,56 @@ function daysSince(dateString: string): number {
     return Math.floor(days);
 }
 
-const ranks: rankInfo[] =
-    [
+
+function getRanks(): rankInfo[] {
+    return [
         {
-            title: "Sprout",
-            description: "Your friendship is just starting",
+            title: t("plugin.friendshipRanks.badge.sprout.name"),
+            description: t("plugin.friendshipRanks.badge.sprout.description"),
             requirement: 0,
             assetSVG: sproutIcon
         },
         {
-            title: "Blooming",
-            description: "Your friendship is getting there! (1 Month)",
+            title: t("plugin.friendshipRanks.badge.blooming.name"),
+            description: t("plugin.friendshipRanks.badge.blooming.description"),
             requirement: 30,
             assetSVG: bloomingIcon
         },
         {
-            title: "Burning",
-            description: "Your friendship has reached terminal velocity (3 Months)",
+            title: t("plugin.friendshipRanks.badge.burning.name"),
+            description: t("plugin.friendshipRanks.badge.burning.description"),
             requirement: 90,
             assetSVG: burningIcon
         },
         {
-            title: "Fighter",
-            description: "Your friendship is strong (6 Months)",
+            title: t("plugin.friendshipRanks.badge.fighter.name"),
+            description: t("plugin.friendshipRanks.badge.fighter.description"),
             requirement: 182.5,
             assetSVG: fighterIcon
         },
         {
-            title: "Star",
-            description: "Your friendship has been going on for a WHILE (1 Year)",
+            title: t("plugin.friendshipRanks.badge.star.name"),
+            description: t("plugin.friendshipRanks.badge.star.description"),
             requirement: 365,
             assetSVG: starIcon
         },
         {
-            title: "Royal",
-            description: "Your friendship has gone through thick and thin- a whole 2 years!",
+            title: t("plugin.friendshipRanks.badge.royal.name"),
+            description: t("plugin.friendshipRanks.badge.royal.description"),
             requirement: 730,
             assetSVG: royalIcon
         },
         {
-            title: "Besties",
-            description: "How do you even manage this??? (5 Years)",
+            title: t("plugin.friendshipRanks.badge.besties.name"),
+            description: t("plugin.friendshipRanks.badge.besties.description"),
             requirement: 1826.25,
             assetSVG: bestiesIcon
         }
     ];
+}
 
-function openRankModal(rank: rankInfo) {
+function openRankModal(rankIndex: number) {
+    const rank = getRanks()[rankIndex];
     openModal(props => (
         <ErrorBoundary>
             <ModalRoot {...props} size={ModalSize.DYNAMIC}>
@@ -111,11 +115,12 @@ function openRankModal(rank: rankInfo) {
     ));
 }
 
-function getBadgeComponent(rank,) {
+function getBadgeComponent(rankIndex: number) {
+    const rank = getRanks()[rankIndex];
     // there may be a better button component to do this with
     return (
         <div style={{ transform: "scale(0.80)" }}>
-            <Button onClick={() => openRankModal(rank)} width={"21.69px"} height={"21.69px"} size={Button.Sizes.NONE} look={Button.Looks.BLANK}>
+            <Button onClick={() => openRankModal(rankIndex)} width={"21.69px"} height={"21.69px"} size={Button.Sizes.NONE} look={Button.Looks.BLANK}>
                 <rank.assetSVG height={"21.69px"} />
             </Button>
         </div>
@@ -126,6 +131,7 @@ function shouldShowBadge(userId: string, requirement: number, index: number) {
     if (!RelationshipStore.isFriend(userId)) return false;
 
     const days = daysSince(RelationshipStore.getSince(userId));
+    const ranks = getRanks();
 
     if (ranks[index + 1] == null) return days > requirement;
 
@@ -133,11 +139,12 @@ function shouldShowBadge(userId: string, requirement: number, index: number) {
 }
 
 function getBadgesToApply() {
+    const ranks = getRanks();
     const badgesToApply: ProfileBadge[] = ranks.map((rank, index) => {
         return (
             {
                 description: rank.title,
-                component: () => getBadgeComponent(rank),
+                component: () => getBadgeComponent(index),
                 shouldShow: (info: BadgeUserArgs) => shouldShowBadge(info.userId, rank.requirement, index),
             });
     });
@@ -145,15 +152,32 @@ function getBadgesToApply() {
     return badgesToApply;
 }
 
+let currentBadges: ProfileBadge[] = [];
+
+function reloadBadges() {
+    currentBadges.forEach(b => Badges.removeProfileBadge(b));
+    currentBadges = getBadgesToApply();
+    currentBadges.forEach(b => Badges.addProfileBadge(b));
+}
+
 export default definePlugin({
     name: "FriendshipRanks",
     description: "Adds badges showcasing how long you have been friends with a user for",
     authors: [Devs.Samwich, PcDevs.MutanPlex],
-    start() {
-        getBadgesToApply().forEach(b => Badges.addProfileBadge(b));
 
+    localeUnsubscribe: null as (() => void) | null,
+
+    get displayDescription() {
+        return t("plugin.friendshipRanks.description");
+    },
+
+    start() {
+        currentBadges = getBadgesToApply();
+        currentBadges.forEach(b => Badges.addProfileBadge(b));
+        this.localeUnsubscribe = i18n.addListener(reloadBadges);
     },
     stop() {
-        getBadgesToApply().forEach(b => Badges.removeProfileBadge(b));
+        currentBadges.forEach(b => Badges.removeProfileBadge(b));
+        this.localeUnsubscribe?.();
     },
 });
