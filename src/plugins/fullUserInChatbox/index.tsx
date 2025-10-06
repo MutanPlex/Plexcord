@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -25,6 +26,10 @@ export default definePlugin({
     name: "FullUserInChatbox",
     description: "Makes the user mention in the chatbox have more functionalities, like left/right clicking",
     authors: [Devs.sadan],
+
+    get displayDescription() {
+        return t("plugin.fullUserInChatbox.description");
+    },
 
     patches: [
         {

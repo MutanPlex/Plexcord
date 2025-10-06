@@ -3622,6 +3622,10 @@
         "fullSearchContext": {
             "name": "FullSearchContext",
             "description": "Mesaj arama sonuçlarındaki mesaj bağlam menüsünü, beklediğin tüm seçeneklerle tam hale getirir."
+        },
+        "fullUserInChatbox": {
+            "name": "FullUserInChatbox",
+            "description": "Sohbet kutusundaki kullanıcı etiketine sol/sağ tıklama gibi ek işlevler ekler."
         }
     }
 }

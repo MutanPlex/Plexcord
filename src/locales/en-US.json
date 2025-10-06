@@ -3622,6 +3622,10 @@
         "fullSearchContext": {
             "name": "FullSearchContext",
             "description": "Makes the message context menu in message search results have all options you'd expect"
+        },
+        "fullUserInChatbox": {
+            "name": "FullUserInChatbox",
+            "description": "Makes the user mention in the chatbox have more functionalities, like left/right clicking"
         }
     }
 }
