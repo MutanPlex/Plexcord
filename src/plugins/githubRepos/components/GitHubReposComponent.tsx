@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { fetchReposByUserId, fetchReposByUsername, fetchUserInfo, GitHubUserInfo } from "@plugins/githubRepos/githubApi";
 import { GitHubRepo } from "@plugins/githubRepos/types";
@@ -90,10 +91,10 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
     }, [id]);
 
     if (loading) return <Text variant="text-xs/semibold" className={cl("loading")} style={{ color: "var(--header-secondary)" }}>
-        Loading repositories...</Text>;
+        {t("plugin.githubRepos.loading")}</Text>;
 
     if (error) return <Text variant="text-xs/semibold" className={cl("error")} style={{ color: "var(--text-danger)" }}>
-        Error: {error}</Text>;
+        {t("plugin.githubRepos.error.error")}: {error}</Text>;
 
     if (!repos.length) return null;
 
@@ -106,7 +107,7 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
                 color={Button.Colors.TRANSPARENT}
                 onClick={openReposModal}
             >
-                Show GitHub Repositories
+                {t("plugin.githubRepos.button.show")}
             </Button>
         );
     }
@@ -116,10 +117,10 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
     return (
         <div className={cl("container")}>
             <Text variant="text-xs/semibold" className={cl("header")} style={{ color: "var(--header-secondary)" }}>
-                GitHub Repositories
+                {t("plugin.githubRepos.button.repositories")}
                 {userInfo && (
                     <span className={cl("count")} style={{ color: "var(--text-muted)" }}>
-                        {` (Showing only top ${topRepos.length}/${userInfo.totalRepos})`}
+                        {` ${t("plugin.githubRepos.button.only", { length: topRepos.length, total: userInfo.totalRepos })}`}
                     </span>
                 )}
             </Text>
@@ -141,7 +142,7 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
                     color={Button.Colors.TRANSPARENT}
                     onClick={openReposModal}
                 >
-                    Show More
+                    {t("plugin.githubRepos.button.more")}
                 </Button>
             </div>
         </div>

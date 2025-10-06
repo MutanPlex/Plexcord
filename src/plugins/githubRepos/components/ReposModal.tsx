@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { getLanguageColor } from "@plugins/githubRepos/colors";
 import { GitHubRepo } from "@plugins/githubRepos/types";
 import { ModalContent, ModalFooter, ModalHeader, ModalRoot } from "@utils/modal";
@@ -22,10 +23,10 @@ export function ReposModal({ repos, username, rootProps }: ReposModalProps) {
     const renderTableHeader = () => (
         <thead>
             <tr>
-                <th>Repository</th>
-                <th>Description</th>
-                <th>Language</th>
-                <th>Stars</th>
+                <th>{t("plugin.githubRepos.modal.repository")}</th>
+                <th>{t("plugin.githubRepos.modal.description")}</th>
+                <th>{t("plugin.githubRepos.modal.language")}</th>
+                <th>{t("plugin.githubRepos.modal.stars")}</th>
             </tr>
         </thead>
     );
@@ -64,7 +65,7 @@ export function ReposModal({ repos, username, rootProps }: ReposModalProps) {
         <ModalRoot className="pc-github-repos-modal" size="large" {...rootProps}>
             <ModalHeader>
                 <Forms.FormTitle tag="h2" className="pc-github-repos-modal-title">
-                    {username}'s GitHub Repositories
+                    {t("plugin.githubRepos.modal.title", { user: username })}
                 </Forms.FormTitle>
             </ModalHeader>
             <ModalContent className="pc-github-repos-modal-content">
@@ -87,14 +88,14 @@ export function ReposModal({ repos, username, rootProps }: ReposModalProps) {
                 <Button
                     onClick={() => window.open(`https://github.com/${username}?tab=repositories`, "_blank")}
                 >
-                    View on GitHub
+                    {t("plugin.githubRepos.modal.viewOnGitHub")}
                 </Button>
                 <Button
                     color={Button.Colors.TRANSPARENT}
                     look={Button.Looks.LINK}
                     onClick={rootProps.onClose}
                 >
-                    Close
+                    {t("plugin.githubRepos.modal.close")}
                 </Button>
             </ModalFooter>
         </ModalRoot>

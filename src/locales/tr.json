@@ -705,7 +705,7 @@
             "label": "Otomatik güncelleme bildirimi göster",
             "description": "Plexcord otomatik olarak güncellendiğinde bir bildirim göster"
         },
-        "repo": "Repo"
+        "repo": "Depo"
     },
     "components": {
         "error": {
@@ -3781,6 +3781,68 @@
         "gifPaste": {
             "name": "GifPaste",
             "description": "GIF'leri doğrudan sohbet kutusuna yapıştırmana olanak tanır."
+        },
+        "githubRepos": {
+            "name": "GitHubRepos",
+            "description": "Kullanıcının herkese açık GitHub depolarını profilinde gösterir.",
+            "loading": "Depolar yükleniyor...",
+            "option": {
+                "showStars": {
+                    "label": "Yıldızları Göster",
+                    "description": "Depo yıldızlarını göster"
+                },
+                "showLanguage": {
+                    "label": "Dili Göster",
+                    "description": "Depoların ana programlama dilini göster"
+                },
+                "showInMiniProfile": {
+                    "label": "Mini Profilde Göster",
+                    "description": "Depoları mini profil penceresinde göster"
+                }
+            },
+            "error": {
+                "error": "Hata",
+                "render": "Hata: GithubRepos görüntülenemedi"
+            },
+            "button": {
+                "show": "GitHub Depolarını Göster",
+                "repositories": "GitHub Depoları",
+                "more": "Daha Fazla Göster",
+                "only": "Yalnızca en iyi {{length}}/{{total}} gösteriliyor"
+            },
+            "modal": {
+                "title": "{{user}} adlı kullanıcının GitHub Depoları",
+                "repository": "Depo",
+                "description": "Açıklama",
+                "language": "Dil",
+                "stars": "Yıldız",
+                "viewOnGitHub": "GitHub'da Görüntüle",
+                "close": "Kapat"
+            }
+        },
+        "googleThat": {
+            "name": "GoogleThat",
+            "description": "İnternet arama bağlantısı göndermeni sağlayan bir komut ekler.",
+            "command": {
+                "googleThat": {
+                    "description": "Bir arama motoru bağlantısı gönder",
+                    "query": "Arama sorgusu"
+                }
+            },
+            "option": {
+                "hyperlink": {
+                    "label": "Köprü",
+                    "description": "Gönderilen bağlantının, sorgu etiketiyle köprü olarak gönderilip gönderilmeyeceği"
+                },
+                "defaultEngine": {
+                    "label": "Varsayılan Arama Motoru",
+                    "description": "Kullanılacak arama motoru"
+                },
+                "customEngineURL": {
+                    "label": "Özel Arama Motoru URL’si",
+                    "description": "Kullanmak istediğin arama motorunun URL’si"
+                }
+            }
         }
     }
 }

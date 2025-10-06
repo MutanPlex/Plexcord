@@ -3781,6 +3781,68 @@
         "gifPaste": {
             "name": "GifPaste",
             "description": "Allows you to paste gifs directly into the chatbox"
+        },
+        "githubRepos": {
+            "name": "GitHubRepos",
+            "description": "Displays a user's public GitHub repositories in their profile",
+            "loading": "Loading repositories...",
+            "option": {
+                "showStars": {
+                    "label": "Show Stars",
+                    "description": "Show repository stars"
+                },
+                "showLanguage": {
+                    "label": "Show Language",
+                    "description": "Show repository primary language"
+                },
+                "showInMiniProfile": {
+                    "label": "Show in Mini Profile",
+                    "description": "Show repositories in the mini profile popout"
+                }
+            },
+            "error": {
+                "error": "Error",
+                "render": "Error, Failed to render GithubRepos"
+            },
+            "button": {
+                "show": "Show github Repositories",
+                "repositories": "Github Repositories",
+                "more": "Show More",
+                "only": "Showing only top {{length}}/{{total}}"
+            },
+            "modal": {
+                "title": "{{user}}'s Github Repositories",
+                "repository": "Repository",
+                "description": "Description",
+                "language": "Language",
+                "stars": "Stars",
+                "viewOnGitHub": "View on GitHub",
+                "close": "Close"
+            }
+        },
+        "googleThat": {
+            "name": "GoogleThat",
+            "description": "Adds a command to send an internet search link",
+            "command": {
+                "googleThat": {
+                    "description": "Send a search engine link",
+                    "query": "The search query"
+                }
+            },
+            "option": {
+                "hyperlink": {
+                    "label": "Hyperlink",
+                    "description": "If the sent link should hyperlink with the query as the label"
+                },
+                "defaultEngine": {
+                    "label": "Default Engine",
+                    "description": "The search engine to use"
+                },
+                "customEngineURL": {
+                    "label": "Custom Engine URL",
+                    "description": "The URL of the Engine you wish to use"
+                }
+            }
         }
     }
 }

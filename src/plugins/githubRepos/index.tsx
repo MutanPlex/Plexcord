@@ -7,6 +7,7 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { User } from "@plexcord/discord-types";
@@ -20,18 +21,33 @@ import { GitHubReposComponent } from "./components/GitHubReposComponent";
 
 export const settings = definePluginSettings({
     showStars: {
+        get label() {
+            return t("plugin.githubRepos.option.showStars.label");
+        },
+        get description() {
+            return t("plugin.githubRepos.option.showStars.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show repository stars",
         default: true
     },
     showLanguage: {
+        get label() {
+            return t("plugin.githubRepos.option.showLanguage.label");
+        },
+        get description() {
+            return t("plugin.githubRepos.option.showLanguage.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show repository language",
         default: true
     },
     showInMiniProfile: {
+        get label() {
+            return t("plugin.githubRepos.option.showInMiniProfile.label");
+        },
+        get description() {
+            return t("plugin.githubRepos.option.showInMiniProfile.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show full ui in the mini profile instead of just a button",
         default: true
     },
 });
@@ -57,7 +73,8 @@ const ProfilePopoutComponent = ErrorBoundary.wrap(
         onError: err => {
             logger.error("Error in profile popout component", err);
             return <Text variant="text-xs/semibold" className="pc-github-repos-error" style={{ color: "var(--text-danger)" }}>
-                Error, Failed to render GithubRepos</Text>;
+                {t("plugin.githubRepos.error.render")}
+            </Text>;
         }
     }
 );
@@ -67,6 +84,10 @@ export default definePlugin({
     description: "Displays a user's public GitHub repositories in their profile",
     authors: [PcDevs.talhakf, PcDevs.Panniku, PcDevs.MutanPlex],
     settings,
+
+    get displayDescription() {
+        return t("plugin.githubRepos.description");
+    },
 
     patches: [
         {
