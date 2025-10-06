@@ -3866,6 +3866,16 @@
                 "multi": "Unholy Multi-Greet",
                 "send": "Send Greets"
             }
+        },
+        "guildPickerDumper": {
+            "name": "GuildPickerDumper",
+            "description": "Context menu to dump and download a server's emojis and stickers.",
+            "context": {
+                "download": {
+                    "emoji": "Download Emojis",
+                    "sticker": "Download Stickers"
+                }
+            }
         }
     }
 }

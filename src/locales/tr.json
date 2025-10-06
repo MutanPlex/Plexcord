@@ -3866,6 +3866,16 @@
                 "multi": "Çoklu Selamlama",
                 "send": "Selam Gönder"
             }
+        },
+        "guildPickerDumper": {
+            "name": "GuildPickerDumper",
+            "description": "Bir sunucunun emoji ve çıkartmalarını dışa aktarıp indirmeni sağlayan bir bağlam menüsü ekler.",
+            "context": {
+                "download": {
+                    "emoji": "Emojileri İndir",
+                    "sticker": "Çıkartmaları İndir"
+                }
+            }
         }
     }
 }
