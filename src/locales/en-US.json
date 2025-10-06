@@ -3618,6 +3618,10 @@
             "name": "FriendsSince",
             "description": "Shows when you became friends with someone in the user popout",
             "section": "Friends Since"
+        },
+        "fullSearchContext": {
+            "name": "FullSearchContext",
+            "description": "Makes the message context menu in message search results have all options you'd expect"
         }
     }
 }

@@ -3585,31 +3585,31 @@
             "description": "Bir kullanıcıyla ne kadar süredir arkadaş olduğunu gösteren rozetler ekler.",
             "badge": {
                 "sprout": {
-                    "name": "Sprout",
+                    "name": "Filiz",
                     "description": "Arkadaşlığınız yeni filizleniyor."
                 },
                 "blooming": {
-                    "name": "Blooming",
+                    "name": "Çiçek Açıyor",
                     "description": "Arkadaşlığınız gelişiyor! (1 Ay)"
                 },
                 "burning": {
-                    "name": "Burning",
+                    "name": "Alevlenmiş",
                     "description": "Arkadaşlığınız zirveye ulaştı. (3 Ay)"
                 },
                 "fighter": {
-                    "name": "Fighter",
+                    "name": "Savaşçı",
                     "description": "Arkadaşlığınız güçlü. (6 Ay)"
                 },
                 "star": {
-                    "name": "Star",
+                    "name": "Yıldız",
                     "description": "Arkadaşlığınız uzun süredir devam ediyor. (1 Yıl)"
                 },
                 "royal": {
-                    "name": "Royal",
+                    "name": "Asil",
                     "description": "Arkadaşlığınız her zorluğu aşmış — tam 2 yıl!"
                 },
                 "besties": {
-                    "name": "Besties",
+                    "name": "En İyi Arkadaş",
                     "description": "Bunu nasıl başarıyorsunuz??? (5 Yıl)"
                 }
             }
@@ -3618,6 +3618,10 @@
             "name": "FriendsSince",
             "description": "Kullanıcı açılır penceresinde biriyle ne zaman arkadaş olduğunu gösterir.",
             "section": "Arkadaş Olunan Tarih"
+        },
+        "fullSearchContext": {
+            "name": "FullSearchContext",
+            "description": "Mesaj arama sonuçlarındaki mesaj bağlam menüsünü, beklediğin tüm seçeneklerle tam hale getirir."
         }
     }
 }
