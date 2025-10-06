@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
 import { getCurrentChannel } from "@utils/discord";
@@ -22,6 +23,11 @@ export default definePlugin({
     name: "FriendsSince",
     description: "Shows when you became friends with someone in the user popout",
     authors: [Devs.Elvyra, Devs.Antti],
+
+    get displayDescription() {
+        return t("plugin.friendsSince.description");
+    },
+
     patches: [
         // DM User Sidebar
         {
@@ -56,7 +62,7 @@ export default definePlugin({
         if (!friendsSince) return null;
 
         return (
-            <Section heading="Friends Since">
+            <Section heading={t("plugin.friendsSince.section")}>
                 {
                     isSidebar ? (
                         <Text variant="text-sm/normal">
