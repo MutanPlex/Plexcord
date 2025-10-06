@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -67,7 +68,7 @@ function GameActivityToggleButton(props: { nameplate?: any; }) {
     return (
         <Button
             className="pc-game-activity"
-            tooltipText={showCurrentGame ? "Disable Game Activity" : "Enable Game Activity"}
+            tooltipText={showCurrentGame ? t("plugin.gameActivityToggle.gameActivity.enabled") : t("plugin.gameActivityToggle.gameActivity.disabled")}
             icon={makeIcon(showCurrentGame)}
             role="switch"
             aria-checked={!showCurrentGame}
@@ -80,8 +81,13 @@ function GameActivityToggleButton(props: { nameplate?: any; }) {
 
 const settings = definePluginSettings({
     oldIcon: {
+        get label() {
+            return t("plugin.gameActivityToggle.option.oldIcon.label");
+        },
+        get description() {
+            return t("plugin.gameActivityToggle.option.oldIcon.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Use the old icon style before Discord icon redesign",
         default: false
     }
 });
@@ -92,6 +98,10 @@ export default definePlugin({
     authors: [Devs.Nuckyz, Devs.RuukuLada],
     dependencies: ["UserSettingsAPI"],
     settings,
+
+    get displayDescription() {
+        return t("plugin.gameActivityToggle.description");
+    },
 
     managedStyle,
 

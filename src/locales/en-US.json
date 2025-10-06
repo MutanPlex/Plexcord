@@ -3630,6 +3630,21 @@
         "fullVCPFP": {
             "name": "FullVCPFP",
             "description": "Makes avatars take up the entire vc tile"
+        },
+        "gameActivityToggle": {
+            "name": "GameActivityToggle",
+            "description": "Adds a toggle to the user popout to show/hide your game activity",
+            "tooltip": "Toggle Game Activity",
+            "gameActivity" : {
+                "enabled": "Game Activity Enabled",
+                "disabled": "Game Activity Disabled"
+            },
+            "option": {
+                "oldIcon": {
+                    "label": "Old Icon",
+                    "description": "Use the old icon style before Discord icon redesign"
+                }
+            }
         }
     }
 }

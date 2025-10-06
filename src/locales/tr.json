@@ -3630,6 +3630,21 @@
         "fullVCPFP": {
             "name": "FullVCPFP",
             "description": "Avatarların sesli sohbet kutucuğunun tamamını kaplamasını sağlar."
+        },
+        "gameActivityToggle": {
+            "name": "GameActivityToggle",
+            "description": "Kullanıcı açılır penceresine oyun etkinliğinizi gösterip gizlemek için bir anahtar ekler.",
+            "tooltip": "Oyun Etkinliğini Değiştir",
+            "gameActivity" : {
+                "enabled": "Oyun Etkinliği Etkin",
+                "disabled": "Oyun Etkinliği Devre Dışı"
+            },
+            "option": {
+                "oldIcon": {
+                    "label": "Eski İkon",
+                    "description": "Discord ikonunun yeniden tasarımından önceki eski ikon stilini kullan"
+                }
+            }
         }
     }
 }
