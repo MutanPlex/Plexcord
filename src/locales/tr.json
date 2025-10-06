@@ -3635,7 +3635,7 @@
             "name": "GameActivityToggle",
             "description": "Kullanıcı açılır penceresine oyun etkinliğinizi gösterip gizlemek için bir anahtar ekler.",
             "tooltip": "Oyun Etkinliğini Değiştir",
-            "gameActivity" : {
+            "gameActivity": {
                 "enabled": "Oyun Etkinliği Etkin",
                 "disabled": "Oyun Etkinliği Devre Dışı"
             },
@@ -3643,6 +3643,138 @@
                 "oldIcon": {
                     "label": "Eski İkon",
                     "description": "Discord ikonunun yeniden tasarımından önceki eski ikon stilini kullan"
+                }
+            }
+        },
+        "gifCollection": {
+            "name": "GifCollection",
+            "description": "GIF koleksiyonları oluşturmanı sağlar.",
+            "context": {
+                "copyImageLink": "Görsel Bağlantısını Kopyala",
+                "copyUrl": "URL'yi Kopyala",
+                "collection": {
+                    "add": "Koleksiyona Ekle",
+                    "gif": "GIF Koleksiyonları",
+                    "delete": "Koleksiyonu Sil",
+                    "create": "Koleksiyon Oluştur",
+                    "remove": "Kaldır",
+                    "information": "Koleksiyon Bilgisi",
+                    "name": "İsim",
+                    "gifs": "GIF'ler",
+                    "created": "Oluşturulma Tarihi",
+                    "updated": "Son Güncelleme",
+                    "close": "Kapat",
+                    "rename": "Yeniden Adlandır",
+                    "move": "Koleksiyona Taşı",
+                    "select": "Taşınacak koleksiyonu seç"
+                },
+                "gif": {
+                    "information": "Bilgi",
+                    "added": "Eklendiği Tarih",
+                    "width": "Genişlik",
+                    "height": "Yükseklik",
+                    "close": "Kapat"
+                }
+            },
+            "option": {
+                "itemPrefix": {
+                    "label": "Öğe Öneki",
+                    "description": "GIF öğeleri için önek"
+                },
+                "collectionPrefix": {
+                    "label": "Koleksiyon Öneki",
+                    "description": "Koleksiyonlar için önek"
+                },
+                "onlyShowCollections": {
+                    "label": "Yalnızca Koleksiyonları Göster",
+                    "description": "Yalnızca koleksiyonları göster"
+                },
+                "stopWarnings": {
+                    "label": "Uyarıları Durdur",
+                    "description": "Silme uyarılarını durdur"
+                },
+                "showCopyImageLink": {
+                    "label": "Görsel Bağlantısını Kopyala Seçeneğini Göster",
+                    "description": "Bağlam menülerinde {{copyImageLink}} seçeneğini göster"
+                },
+                "defaultEmptyCollectionImage": {
+                    "label": "Varsayılan Boş Koleksiyon Görseli",
+                    "description": "Koleksiyonda hiç görsel/GIF olmadığında gösterilecek görsel/GIF"
+                },
+                "collectionsSortType": {
+                    "label": "Koleksiyon Sıralama Türü",
+                    "description": "Koleksiyonların sıralama türü"
+                },
+                "collectionsSortOrder": {
+                    "label": "Koleksiyon Sıralama Düzeni",
+                    "description": "Koleksiyonların sıralama düzeni"
+                },
+                "collectionsSort": {
+                    "label": "Koleksiyonları Sırala",
+                    "description": "Koleksiyonları nasıl sıralayacağını belirle",
+                    "title": "Koleksiyonları Sırala",
+                    "sortDescription": "Koleksiyonların için bir sıralama ölçütü seç",
+                    "sortBy": "Sıralama Ölçütü",
+                    "name": "İsim",
+                    "creationDate": "Oluşturulma Tarihi",
+                    "modifiedDate": "Değiştirilme Tarihi",
+                    "ascending": "Artan",
+                    "descending": "Azalan"
+                },
+                "importGifs": {
+                    "label": "GIF'leri İçe Aktar",
+                    "description": "Koleksiyonları içe aktar",
+                    "button": "Koleksiyonları İçe Aktar"
+                },
+                "exportGifs": {
+                    "label": "GIF'leri Dışa Aktar",
+                    "description": "Koleksiyonları dışa aktar",
+                    "button": "Koleksiyonları Dışa Aktar"
+                },
+                "resetCollections": {
+                    "label": "Koleksiyonları Sıfırla",
+                    "description": "Koleksiyonları varsayılanlara sıfırla (tüm koleksiyonlarını siler)",
+                    "button": "Koleksiyonları Sıfırla"
+                }
+            },
+            "toast": {
+                "copied": "Görsel bağlantısı panoya kopyalandı!",
+                "urlCopied": "URL panoya kopyalandı!",
+                "already": "Bu koleksiyon zaten mevcut"
+            },
+            "modal": {
+                "create": {
+                    "title": "Koleksiyon Oluştur",
+                    "name": "Koleksiyon Adı",
+                    "create": "Oluştur"
+                },
+                "rename": {
+                    "title": "Koleksiyonu Yeniden Adlandır",
+                    "name": "Yeni Koleksiyon Adı",
+                    "warning": "İsim 24 karakterden uzun olamaz",
+                    "rename": "Yeniden Adlandır"
+                }
+            },
+            "alert": {
+                "import": {
+                    "title": "Emin misin?",
+                    "body": "Koleksiyonları içe aktarmak mevcut koleksiyonlarını üzerine yazar.",
+                    "confirm": "İçe Aktar",
+                    "cancel": "Vazgeç"
+                },
+                "reset": {
+                    "title": "Emin misin?",
+                    "body": "Koleksiyonları sıfırlamak tüm koleksiyonlarını kaldırır.",
+                    "confirm": "Sıfırla",
+                    "cancel": "Vazgeç"
+                },
+                "delete": {
+                    "title": "Emin misin?",
+                    "deleteBody": "Bu koleksiyonu gerçekten silmek istiyor musun?",
+                    "removeBody": "Bu öğeyi gerçekten kaldırmak istiyor musun?",
+                    "confirm": "Sil",
+                    "remove": "Kaldır",
+                    "cancel": "Vazgeç"
                 }
             }
         }

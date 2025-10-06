@@ -3645,6 +3645,138 @@
                     "description": "Use the old icon style before Discord icon redesign"
                 }
             }
+        },
+        "gifCollection": {
+            "name": "GifCollection",
+            "description": "Allows you to create collections of gifs",
+            "context": {
+                "copyImageLink": "Copy Image Link",
+                "copyUrl": "Copy URL",
+                "collection": {
+                    "add": "Add to Collection",
+                    "gif": "GIF Collections",
+                    "delete": "Delete Collection",
+                    "create": "Create Collection",
+                    "remove": "Remove",
+                    "information": "Collection Information",
+                    "name": "Name",
+                    "gifs": "GIFs",
+                    "created": "Created At",
+                    "updated" : "Last Updated",
+                    "close": "Close",
+                    "rename": "Rename",
+                    "move": "Move to Collection",
+                    "select": "Select a collection to move the item to"
+                },
+                "gif": {
+                    "information": "Information",
+                    "added": "Added At",
+                    "width": "Width",
+                    "height": "Height",
+                    "close": "Close"
+                }
+            },
+            "option": {
+                "itemPrefix": {
+                    "label": "Item Prefix",
+                    "description": "The prefix for gif items"
+                },
+                "collectionPrefix": {
+                    "label": "Collection Prefix",
+                    "description": "The prefix for collections"
+                },
+                "onlyShowCollections": {
+                    "label": "Only Show Collections",
+                    "description": "Only show collections"
+                },
+                "stopWarnings": {
+                    "label": "Stop Warnings",
+                    "description": "Stop deletion warnings"
+                },
+                "showCopyImageLink": {
+                    "label": "Show Copy Image Link",
+                    "description": "Show {{copyImageLink}} option in context menus"
+                },
+                "defaultEmptyCollectionImage": {
+                    "label": "Default Empty Collection Image",
+                    "description": "The image / gif that will be shown when a collection has no images / gifs"
+                },
+                "collectionsSortType": {
+                    "label": "Collections Sort Type",
+                    "description": "The type of sorting for collections"
+                },
+                "collectionsSortOrder": {
+                    "label": "Collections Sort Order",
+                    "description": "The order of sorting for collections"
+                },
+                "collectionsSort": {
+                    "label": "Collections Sort",
+                    "description": "Decide how to sort collections",
+                    "title": "Sort Collections",
+                    "sortDescription": "Choose a sorting criteria for your collections",
+                    "sortBy": "Sort By",
+                    "name": "Name",
+                    "creationDate": "Creation Date",
+                    "modifiedDate": "Modified Date",
+                    "ascending": "Ascending",
+                    "descending": "Descending"
+                },
+                "importGifs": {
+                    "label": "Import Gifs",
+                    "description": "Import Collections",
+                    "button": "Import Collections"
+                },
+                "exportGifs": {
+                    "label": "Export Gifs",
+                    "description": "Export Collections",
+                    "button": "Export Collections"
+                },
+                "resetCollections": {
+                    "label": "Reset Collections",
+                    "description": "Reset Collections to default (deletes all your collections)",
+                    "button": "Reset Collections"
+                }
+            },
+            "toast": {
+                "copied": "Image link copied to clipboard!",
+                "urlCopied": "URL copied to clipboard!",
+                "already": "That collection already exists"
+            },
+            "modal": {
+                "create": {
+                    "title": "Create Collection",
+                    "name": "Collection Name",
+                    "create": "Create"
+                },
+                "rename": {
+                    "title": "Rename Collection",
+                    "name": "New Collection Name",
+                    "warning": "Name can't be longer than 24 characters",
+                    "rename": "Rename"
+                }
+            },
+            "alert": {
+                "import": {
+                    "title": "Are you sure?",
+                    "body": "Importing collections will overwrite your current collections.",
+                    "confirm": "Import",
+                    "cancel": "Nevermind"
+                },
+                "reset": {
+                    "title": "Are you sure?",
+                    "body": "Resetting collections will remove all your collections.",
+                    "confirm": "Reset",
+                    "cancel": "Nevermind"
+                },
+                "delete": {
+                    "title": "Are you sure?",
+                    "deleteBody": "Do you really want to delete this collection?",
+                    "removeBody": "Do you really want to remove this item?",
+                    "confirm": "Delete",
+                    "remove": "Remove",
+                    "cancel": "Nevermind"
+                }
+            }
         }
     }
 }

@@ -201,7 +201,7 @@ function SearchBar({ instance, SearchBarComponent }: { instance: Instance; Searc
                 }
             }}
             query={query}
-            placeholder={t("plugin.favoriteGifSearch.searchPlaceholder")}
+            placeholder={t("plugin.favoriteGifSearch.placeholder")}
         />
     );
 }

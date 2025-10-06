@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { DataStore } from "@api/index";
 import { settings } from "@plugins/gifCollections/index";
 import { Collection, Gif } from "@plugins/gifCollections/types";
@@ -31,7 +32,7 @@ export const createCollection = async (name: string, gifs: Gif[]): Promise<void>
     const duplicateCollection = collections.find(c => c.name === `${settings.store.collectionPrefix}${name}`);
     if (duplicateCollection)
         return Toasts.show({
-            message: "That collection already exists",
+            message: t("plugin.gifCollection.toast.already"),
             type: Toasts.Type.FAILURE,
             id: Toasts.genId(),
             options: {
