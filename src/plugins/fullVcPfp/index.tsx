@@ -25,7 +25,7 @@ export default definePlugin({
     authors: [PcDevs.mochienya, PcDevs.MutanPlex],
 
     get displayDescription() {
-        return t("plugin.fullVcPfp.description");
+        return t("plugin.fullVCPFP.description");
     },
 
     patches: [
