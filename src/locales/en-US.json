@@ -3843,6 +3843,29 @@
                     "description": "The URL of the Engine you wish to use"
                 }
             }
+        },
+        "greetStickerPicker": {
+            "name": "GreetStickerPicker",
+            "description": "Allows you to use any greet sticker instead of only the random one by right-clicking the 'Wave to say hi!' button",
+            "mode": {
+                "greet": "Greet",
+                "message": "Message"
+            },
+            "option": {
+                "greetMode": {
+                    "label": "Greet Mode",
+                    "description": "Choose the greet mode",
+                    "greet": "Greet (you can only greet 3 times)",
+                    "message": "Message (you can greet spam)"
+                }
+            },
+            "context": {
+                "label": "Greet Sticker Picker",
+                "mode": "Greet Mode",
+                "stickers": "Greet Stickers",
+                "multi": "Unholy Multi-Greet",
+                "send": "Send Greets"
+            }
         }
     }
 }

@@ -3843,6 +3843,29 @@
                     "description": "Kullanmak istediğin arama motorunun URL’si"
                 }
             }
+        },
+        "greetStickerPicker": {
+            "name": "GreetStickerPicker",
+            "description": "'El salla ve merhaba de!' butonuna sağ tıklayarak rastgele olan yerine istediğin karşılama çıkartmasını kullanmanı sağlar.",
+            "mode": {
+                "greet": "Selamla",
+                "message": "Mesaj"
+            },
+            "option": {
+                "greetMode": {
+                    "label": "Selamlama Modu",
+                    "description": "Selamlama modunu seç",
+                    "greet": "Selamla (yalnızca 3 kez selam gönderebilirsin)",
+                    "message": "Mesaj (sınırsız selam gönderebilirsin)"
+                }
+            },
+            "context": {
+                "label": "Selamlama Çıkartması Seçici",
+                "mode": "Selamlama Modu",
+                "stickers": "Selamlama Çıkartmaları",
+                "multi": "Çoklu Selamlama",
+                "send": "Selam Gönder"
+            }
         }
     }
 }

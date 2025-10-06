@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Channel, Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -24,19 +25,30 @@ import definePlugin, { OptionType } from "@utils/types";
 import { findLazy } from "@webpack";
 import { ContextMenuApi, FluxDispatcher, Menu, MessageActions } from "@webpack/common";
 
-enum GreetMode {
-    Greet = "Greet",
-    NormalMessage = "Message"
-}
+const GreetMode = {
+    get Greet() {
+        return t("plugin.greetStickerPicker.mode.greet");
+    },
+    get NormalMessage() {
+        return t("plugin.greetStickerPicker.mode.message");
+    }
+};
 
 const settings = definePluginSettings({
     greetMode: {
+        get label() {
+            return t("plugin.greetStickerPicker.option.greetMode.label");
+        },
+        get description() {
+            return t("plugin.greetStickerPicker.option.greetMode.description");
+        },
         type: OptionType.SELECT,
-        options: [
-            { label: "Greet (you can only greet 3 times)", value: GreetMode.Greet, default: true },
-            { label: "Normal Message (you can greet spam)", value: GreetMode.NormalMessage }
-        ],
-        description: "Choose the greet mode"
+        get options() {
+            return [
+                { label: t("plugin.greetStickerPicker.option.greetMode.greet"), value: GreetMode.Greet, default: true },
+                { label: t("plugin.greetStickerPicker.option.greetMode.message"), value: GreetMode.NormalMessage }
+            ];
+        }
     }
 }).withPrivateSettings<{
     multiGreetChoices?: string[];
@@ -77,10 +89,10 @@ function GreetMenu({ channel, message }: { message: Message, channel: Channel; }
         <Menu.Menu
             navId="greet-sticker-picker"
             onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-            aria-label="Greet Sticker Picker"
+            aria-label={t("plugin.greetStickerPicker.context.label")}
         >
             <Menu.MenuGroup
-                label="Greet Mode"
+                label={t("plugin.greetStickerPicker.context.mode")}
             >
                 {Object.values(GreetMode).map(mode => (
                     <Menu.MenuRadioItem
@@ -97,7 +109,7 @@ function GreetMenu({ channel, message }: { message: Message, channel: Channel; }
             <Menu.MenuSeparator />
 
             <Menu.MenuGroup
-                label="Greet Stickers"
+                label={t("plugin.greetStickerPicker.context.stickers")}
             >
                 {WELCOME_STICKERS.map(sticker => (
                     <Menu.MenuItem
@@ -114,7 +126,7 @@ function GreetMenu({ channel, message }: { message: Message, channel: Channel; }
                     <Menu.MenuSeparator />
 
                     <Menu.MenuItem
-                        label="Unholy Multi-Greet"
+                        label={t("plugin.greetStickerPicker.context.multi")}
                         id="unholy-multi-greet"
                     >
                         {WELCOME_STICKERS.map(sticker => {
@@ -139,7 +151,7 @@ function GreetMenu({ channel, message }: { message: Message, channel: Channel; }
                         <Menu.MenuSeparator />
                         <Menu.MenuItem
                             id="multi-greet-submit"
-                            label="Send Greets"
+                            label={t("plugin.greetStickerPicker.context.send")}
                             action={() => greet(channel, message, multiGreetChoices!)}
                             disabled={multiGreetChoices.length === 0}
                         />
@@ -155,6 +167,10 @@ export default definePlugin({
     name: "GreetStickerPicker",
     description: "Allows you to use any greet sticker instead of only the random one by right-clicking the 'Wave to say hi!' button",
     authors: [Devs.Ven],
+
+    get displayDescription() {
+        return t("plugin.greetStickerPicker.description");
+    },
 
     settings,
 
