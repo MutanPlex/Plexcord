@@ -3777,6 +3777,10 @@
                     "cancel": "Vazgeç"
                 }
             }
+        },
+        "gifPaste": {
+            "name": "GifPaste",
+            "description": "GIF'leri doğrudan sohbet kutusuna yapıştırmana olanak tanır."
         }
     }
 }

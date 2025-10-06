@@ -3777,6 +3777,10 @@
                     "cancel": "Nevermind"
                 }
             }
+        },
+        "gifPaste": {
+            "name": "GifPaste",
+            "description": "Allows you to paste gifs directly into the chatbox"
         }
     }
 }
