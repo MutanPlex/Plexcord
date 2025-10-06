@@ -3626,6 +3626,10 @@
         "fullUserInChatbox": {
             "name": "FullUserInChatbox",
             "description": "Sohbet kutusundaki kullanıcı etiketine sol/sağ tıklama gibi ek işlevler ekler."
+        },
+        "fullVCPFP": {
+            "name": "FullVCPFP",
+            "description": "Avatarların sesli sohbet kutucuğunun tamamını kaplamasını sağlar."
         }
     }
 }

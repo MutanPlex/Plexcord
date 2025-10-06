@@ -3626,6 +3626,10 @@
         "fullUserInChatbox": {
             "name": "FullUserInChatbox",
             "description": "Makes the user mention in the chatbox have more functionalities, like left/right clicking"
+        },
+        "fullVCPFP": {
+            "name": "FullVCPFP",
+            "description": "Makes avatars take up the entire vc tile"
         }
     }
 }

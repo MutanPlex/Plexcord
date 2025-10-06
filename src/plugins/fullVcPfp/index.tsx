@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Settings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { PcDevs } from "@utils/constants";
@@ -22,6 +23,11 @@ export default definePlugin({
     name: "FullVCPFP",
     description: "Makes avatars take up the entire vc tile",
     authors: [PcDevs.mochienya, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.fullVcPfp.description");
+    },
+
     patches: [
         {
             find: "\"data-selenium-video-tile\":",
