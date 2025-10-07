@@ -3876,6 +3876,13 @@
                     "sticker": "Çıkartmaları İndir"
                 }
             }
+        },
+        "hideMedia": {
+            "name": "HideMedia",
+            "description": "Üzerine gelindiğinde beliren bir butonla belirli mesajlardaki ekleri ve gömülü içerikleri gizlemeni sağlar.",
+            "show": "Medyayı Göster",
+            "hide": "Medyayı Gizle",
+            "hidden": "Medya Gizlendi"
         }
     }
 }

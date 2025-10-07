@@ -3876,6 +3876,13 @@
                     "sticker": "Download Stickers"
                 }
             }
+        },
+        "hideMedia": {
+            "name": "HideMedia",
+            "description": "Hide attachments and embeds for individual messages via hover button",
+            "show": "Show Media",
+            "hide": "Hide Media",
+            "hidden": "Media Hidden"
         }
     }
 }

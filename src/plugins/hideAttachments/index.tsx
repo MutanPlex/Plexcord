@@ -20,6 +20,7 @@
 import "./styles.css";
 
 import { get, set } from "@api/DataStore";
+import { t } from "@api/i18n";
 import { updateMessage } from "@api/MessageUpdater";
 import { migratePluginSettings } from "@api/Settings";
 import { ImageInvisible, ImageVisible } from "@components/Icons";
@@ -50,6 +51,10 @@ export default definePlugin({
     authors: [Devs.Ven],
     dependencies: ["MessageUpdaterAPI"],
 
+    get displayDescription() {
+        return t("plugin.hideAttachments.description");
+    },
+
     patches: [{
         find: "this.renderAttachments(",
         replacement: {
@@ -64,7 +69,7 @@ export default definePlugin({
         const isHidden = hiddenMessages.has(msg.id);
 
         return {
-            label: isHidden ? "Show Media" : "Hide Media",
+            label: isHidden ? t("plugin.hideAttachments.show") : t("plugin.hideAttachments.hide"),
             icon: isHidden ? ImageVisible : ImageInvisible,
             message: msg,
             channel: ChannelStore.getChannel(msg.channel_id),
@@ -77,7 +82,7 @@ export default definePlugin({
 
         return (
             <span className={classes("pc-hideAttachments-accessory", !message.content && "pc-hideAttachments-no-content")}>
-                Media Hidden
+                {t("plugin.hideAttachments.hidden")}
             </span>
         );
     },
