@@ -20,6 +20,7 @@
 import type * as t from "@plexcord/discord-types";
 import { _resolveReady, filters, findByCodeLazy, findByPropsLazy, findLazy, mapMangledModuleLazy, waitFor } from "@webpack";
 
+
 export let FluxDispatcher: t.FluxDispatcher;
 waitFor(["dispatch", "subscribe"], m => {
     FluxDispatcher = m;
@@ -51,10 +52,8 @@ export const useDrag = findByCodeLazy("useDrag::spec.begin was deprecated");
 // you cant make a better finder i love that they remove display names sm
 export const useDrop = findByCodeLazy(".options);return", ".collect,");
 
-export const { match, P }: Pick<typeof import("ts-pattern"), "match" | "P"> = mapMangledModuleLazy("@ts-pattern/matcher", {
-    match: filters.byCode("return new"),
-    P: filters.byProps("when")
-});
+export const { match }: { match: typeof import("ts-pattern").match; } = mapMangledModuleLazy("@ts-pattern/matcher", { match: filters.byCode("return new") });
+export const { P } = mapMangledModuleLazy("@ts-pattern/matcher", { P: filters.byProps("when") });
 
 export const lodash: typeof import("lodash") = findByPropsLazy("debounce", "cloneDeep");
 
