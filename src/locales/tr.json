@@ -3448,7 +3448,7 @@
         },
         "fixImagesQuality": {
             "name": "FixImagesQuality",
-            "description": "Görsellerin kalite kaybına neden olabilen webp formatında yüklenmesini engeller"
+            "description": "Sohbetteki görsellerin kalitesini artırmak için PNG formatını zorlar."
         },
         "fixSpotifyEmbeds": {
             "name": "FixSpotifyEmbeds",
@@ -3697,6 +3697,10 @@
                     "label": "Görsel Bağlantısını Kopyala Seçeneğini Göster",
                     "description": "Bağlam menülerinde {{copyImageLink}} seçeneğini göster"
                 },
+                "preventDuplicates": {
+                    "label": "Tekrarları Önle",
+                    "description": "Aynı GIF'in bir koleksiyona birden fazla kez eklenmesini önle"
+                },
                 "defaultEmptyCollectionImage": {
                     "label": "Varsayılan Boş Koleksiyon Görseli",
                     "description": "Koleksiyonda hiç görsel/GIF olmadığında gösterilecek görsel/GIF"
@@ -3740,7 +3744,8 @@
             "toast": {
                 "copied": "Görsel bağlantısı panoya kopyalandı!",
                 "urlCopied": "URL panoya kopyalandı!",
-                "already": "Bu koleksiyon zaten mevcut"
+                "already": "Bu koleksiyon zaten mevcut",
+                "alreadyCollection": "Bu GIF zaten koleksiyonda mevcut"
             },
             "modal": {
                 "create": {

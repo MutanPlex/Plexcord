@@ -44,7 +44,8 @@ const settings = definePluginSettings({
             return t("plugin.betterSettings.option.organizeMenu.description");
         },
         type: OptionType.BOOLEAN,
-        default: true
+        default: true,
+        restartNeeded: true
     },
     eagerLoad: {
         get label() {
@@ -106,22 +107,19 @@ export default definePlugin({
         {
             find: "this.renderArtisanalHack()",
             replacement: [
-                {
-                    // Fade in on layer
+                { // Fade in on layer
                     match: /(?<=\((\i),"contextType",\i\.\i\);)/,
                     replace: "$1=$self.Layer;",
                     predicate: () => settings.store.disableFade
                 },
-                {
-                    // Lazy-load contents
+                { // Lazy-load contents
                     match: /createPromise:\(\)=>([^:}]*?),webpackId:"?\d+"?,name:(?!="CollectiblesShop")"[^"]+"/g,
                     replace: "$&,_:$1",
                     predicate: () => settings.store.eagerLoad
                 }
             ]
         },
-        {
-            // For some reason standardSidebarView also has a small fade-in
+        { // For some reason standardSidebarView also has a small fade-in
             find: 'minimal:"contentColumnMinimal"',
             replacement: [
                 {
@@ -143,7 +141,8 @@ export default definePlugin({
             },
             predicate: () => settings.store.eagerLoad
         },
-        { // Settings cog context menu
+        {
+            // Settings cog context menu
             find: "#{intl::USER_SETTINGS_ACTIONS_MENU_LABEL}",
             replacement: [
                 {
@@ -175,8 +174,7 @@ export default definePlugin({
         return <Layer {...props} />;
     },
 
-    wrapMenu(list: SettingsEntry[]) {
-        if (!settings.store.organizeMenu) return list;
+    transformSettingsEntries(list: SettingsEntry[]) {
 
         const items = [{ label: null as string | null, items: [] as SettingsEntry[] }];
 
@@ -190,34 +188,31 @@ export default definePlugin({
             }
         }
 
-        return {
-            filter(predicate: (item: SettingsEntry) => boolean) {
-                for (const category of items) {
-                    category.items = category.items.filter(predicate);
-                }
-                return this;
-            },
-            map(render: (item: SettingsEntry) => ReactElement<any>) {
-                return items
-                    .filter(a => a.items.length > 0)
-                    .map(({ label, items }) => {
-                        const children = items.map(render);
-                        if (label) {
-                            return (
-                                <Menu.MenuItem
-                                    key={label}
-                                    id={label.replace(/\W/, "_")}
-                                    label={label}
-                                    action={children[0].props.action}
-                                >
-                                    {children}
-                                </Menu.MenuItem>
-                            );
-                        } else {
-                            return children;
-                        }
-                    });
-            }
+        return items;
+    },
+
+    wrapMap(toWrap: any[]) {
+        // @ts-expect-error
+        toWrap.map = function (render: (item: SettingsEntry) => ReactElement<any>) {
+            return this
+                .filter(a => a.items.length > 0)
+                .map(({ label, items }) => {
+                    const children = items.map(render);
+                    if (label) {
+                        return (
+                            <Menu.MenuItem
+                                key={label}
+                                id={label.replace(/\W/, "_")}
+                                label={label}
+                            >
+                                {children}
+                            </Menu.MenuItem>
+                        );
+                    } else {
+                        return children;
+                    }
+                });
         };
+        return toWrap;
     }
 });

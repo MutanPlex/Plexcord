@@ -3448,7 +3448,7 @@
         },
         "fixImagesQuality": {
             "name": "FixImagesQuality",
-            "description": "Prevents images from being loaded as webp, which can cause quality loss"
+            "description": "Improves quality of images in chat by forcing png format"
         },
         "fixSpotifyEmbeds": {
             "name": "FixSpotifyEmbeds",
@@ -3697,6 +3697,10 @@
                     "label": "Show Copy Image Link",
                     "description": "Show {{copyImageLink}} option in context menus"
                 },
+                "preventDuplicates": {
+                    "label": "Prevent Duplicates",
+                    "description": "Prevent adding the same GIF to a collection multiple times"
+                },
                 "defaultEmptyCollectionImage": {
                     "label": "Default Empty Collection Image",
                     "description": "The image / gif that will be shown when a collection has no images / gifs"
@@ -3740,7 +3744,8 @@
             "toast": {
                 "copied": "Image link copied to clipboard!",
                 "urlCopied": "URL copied to clipboard!",
-                "already": "That collection already exists"
+                "already": "That collection already exists",
+                "alreadyCollection": "That GIF is already in that collection"
             },
             "modal": {
                 "create": {
