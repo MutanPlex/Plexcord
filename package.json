@@ -49,7 +49,7 @@
     },
     "devDependencies": {
         "@electron/asar": "^4.0.1",
-        "@plexcord/discord-types": "link:packages\\discord-types",
+        "@plexcord/discord-types": "^1.0.0",
         "@stylistic/eslint-plugin": "^4.4.1",
         "@types/chrome": "^0.0.312",
         "@types/diff": "^7.0.2",
@@ -83,7 +83,7 @@
         "typescript-transform-paths": "^3.5.5",
         "zip-local": "^0.3.5"
     },
-    "packageManager": "pnpm@10.18.0",
+    "packageManager": "pnpm@10.18.1",
     "pnpm": {
         "patchedDependencies": {
             "eslint@9.20.1": "patches/eslint@9.20.1.patch",

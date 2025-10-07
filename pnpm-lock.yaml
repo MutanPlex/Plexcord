@@ -51,8 +51,8 @@ importers:
         specifier: ^4.0.1
         version: 4.0.1
       '@plexcord/discord-types':
-        specifier: link:packages\discord-types
-        version: link:packages/discord-types
+        specifier: ^1.0.0
+        version: 1.0.0(@types/react@19.1.13)
       '@stylistic/eslint-plugin':
         specifier: ^4.4.1
         version: 4.4.1(eslint@9.20.1(patch_hash=4f22e92770bf528b2448fbec0984b9c0761dd588ed0e83dcc41edfc9af711215))(typescript@5.9.2)
@@ -164,6 +164,9 @@ importers:
 
   packages/plexcord-types:
     dependencies:
+      '@plexcord/discord-types':
+        specifier: ^1.0.0
+        version: 1.0.0(@types/react@18.3.1)
       '@types/lodash':
         specifier: 4.17.15
         version: 4.17.15
@@ -176,9 +179,15 @@ importers:
       '@types/react-dom':
         specifier: 18.3.1
         version: 18.3.1
-      standalone-electron-types:
-        specifier: ^34.2.0
-        version: 34.2.0
+      highlight.js:
+        specifier: 11.11.1
+        version: 11.11.1
+      moment:
+        specifier: ^2.22.2
+        version: 2.30.1
+      ts-pattern:
+        specifier: ^5.6.0
+        version: 5.8.0
       type-fest:
         specifier: ^4.35.0
         version: 4.41.0
@@ -489,6 +498,11 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@plexcord/discord-types@1.0.0':
+    resolution: {integrity: sha512-sqnPOdY32fm8hHng2Rtq5v1lmIRkw/1eLfUZrsiMwBeLrsq0vsdy5mBYEgg60woouiCZFmyFzqQT50oFCPTTxg==}
+    peerDependencies:
+      '@types/react': ^19.0.10
 
   '@puppeteer/browsers@2.10.9':
     resolution: {integrity: sha512-kUGHwABarVhvMP+zhW5zvDA7LmGcd4TwrTEBwcTQic5EebUqaK5NjC0UXLJepIFVGsr2N/Z8NJQz2JYGo1ZwxA==}
@@ -2829,6 +2843,18 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
+
+  '@plexcord/discord-types@1.0.0(@types/react@18.3.1)':
+    dependencies:
+      '@types/react': 18.3.1
+      moment: 2.30.1
+      type-fest: 4.41.0
+
+  '@plexcord/discord-types@1.0.0(@types/react@19.1.13)':
+    dependencies:
+      '@types/react': 19.1.13
+      moment: 2.30.1
+      type-fest: 4.41.0
 
   '@puppeteer/browsers@2.10.9':
     dependencies:

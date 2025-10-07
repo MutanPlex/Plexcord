@@ -32,6 +32,30 @@ enum MediaType {
 
 export type RepeatMode = "NONE" | "ONE" | "ALL";
 
+interface IYoutubeMusicStore {
+    mPosition: number;
+    song: Song | null;
+    isPlaying: boolean;
+    isShuffled: boolean;
+    repeat: Repeat;
+    volume: number;
+    muted: boolean;
+    isSettingPosition: boolean;
+    socket: YoutubemusicSocket;
+    openExternal(path: string): void;
+    position: number;
+    prev(): void;
+    next(): void;
+    setVolume(percent: number): void;
+    setPlaying(playing: boolean): void;
+    switchRepeat(): void;
+    shuffle(): void;
+    seek(ms: number): void;
+    toggleMute(): void;
+    addChangeListener(callback: () => void): void;
+    removeChangeListener(callback: () => void): void;
+    emitChange(): void;
+}
 
 export interface Song {
     title: string;
@@ -181,7 +205,7 @@ class YoutubemusicSocket {
     }
 }
 
-export const YoutubeMusicStore = proxyLazyWebpack(() => {
+export const YoutubeMusicStore: ReturnType<typeof proxyLazyWebpack<IYoutubeMusicStore>> = proxyLazyWebpack(() => {
     const { Store } = Flux;
 
     class YoutubeMusicStore extends Store {

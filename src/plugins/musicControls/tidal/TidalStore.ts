@@ -34,6 +34,30 @@ export type Repeat = 0 | 1 | 2;
 
 const logger = new Logger("TidalControls");
 
+interface ITidalStore {
+    mPosition: number;
+    start: number;
+    track: Track | null;
+    isPlaying: boolean;
+    repeat: Repeat;
+    shuffle: boolean;
+    volume: number;
+    socket: TidalSocket;
+    openExternal(path: string): void;
+    position: number;
+    previous(): void;
+    next(): void;
+    setVolume(percent: number): void;
+    setPlaying(playing: boolean): void;
+    setRepeat(state: Repeat): void;
+    setShuffle(state: boolean): void;
+    seek(ms: number): void;
+    ensureSocketReady(): boolean;
+    addChangeListener(callback: () => void): void;
+    removeChangeListener(callback: () => void): void;
+    emitChange(): void;
+}
+
 function mapApiResponseToTrack(apiData: any): Track | null {
     if (!apiData?.track) return null;
 
@@ -138,7 +162,7 @@ class TidalSocket {
     }
 }
 
-export const TidalStore = proxyLazyWebpack(() => {
+export const TidalStore: ReturnType<typeof proxyLazyWebpack<ITidalStore>> = proxyLazyWebpack(() => {
     const { Store } = Flux;
 
     class TidalStore extends Store {

@@ -10,8 +10,23 @@ import { Guild } from "@plexcord/discord-types";
 import { findStoreLazy, proxyLazyWebpack } from "@webpack";
 import { Flux, FluxDispatcher, GuildStore } from "@webpack/common";
 
+interface IHiddenServersStore {
+    _hiddenGuilds: Set<string>;
+    hiddenGuilds: Set<string>;
+    load(): Promise<void>;
+    unload(): void;
+    addHiddenGuild(id: string): void;
+    removeHiddenGuild(id: string): void;
+    addHiddenFolder(id: string, guildIds: string[]): void;
+    removeHiddenFolder(id: string, guildIds: string[]): void;
+    clearHidden(): void;
+    hiddenGuildsDetail(): Guild[];
+    addChangeListener(callback: () => void): void;
+    removeChangeListener(callback: () => void): void;
+    emitChange(): void;
+}
 
-export const HiddenServersStore = proxyLazyWebpack(() => {
+export const HiddenServersStore: ReturnType<typeof proxyLazyWebpack<IHiddenServersStore>> = proxyLazyWebpack(() => {
     const { Store } = Flux;
 
     const SortedGuildStore = findStoreLazy("SortedGuildStore");

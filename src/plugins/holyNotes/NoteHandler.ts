@@ -14,7 +14,7 @@ import { deleteCacheFromDataStore, DeleteEntireStore, saveCacheToDataStore } fro
 
 export const noteHandlerCache = new Map();
 
-export default new (class NoteHandler {
+class NoteHandler {
     private _formatNote(channel: Channel, message: Message): HolyNotes.Note {
         return {
             id: message.id,
@@ -207,4 +207,21 @@ export default new (class NoteHandler {
         });
 
     };
-});
+}
+
+const noteHandler: {
+    getNotes(notebook?: string): Record<string, HolyNotes.Note>;
+    getAllNotes(): HolyNotes.Note[];
+    addNote(message: Message, notebook: string): Promise<void>;
+    deleteNote(noteId: string, notebook: string): Promise<void>;
+    moveNote(note: HolyNotes.Note, from: string, to: string): Promise<void>;
+    newNoteBook(notebookName: string, silent?: Boolean): Promise<void | { id: string; message: string; type: any; }>;
+    deleteNotebook(notebookName: string): Promise<void>;
+    refreshAvatars(): Promise<void>;
+    deleteEverything(): Promise<void>;
+    exportNotes(): Promise<HolyNotes.Note[]>;
+    importNotes(notes: HolyNotes.Note[]): Promise<void | { id: string; message: string; type: any; }>;
+} = new NoteHandler();
+
+export default noteHandler;
+
