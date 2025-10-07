@@ -52,7 +52,7 @@ export default definePlugin({
     dependencies: ["MessageUpdaterAPI"],
 
     get displayDescription() {
-        return t("plugin.hideAttachments.description");
+        return t("plugin.hideMedia.description");
     },
 
     patches: [{
@@ -69,7 +69,7 @@ export default definePlugin({
         const isHidden = hiddenMessages.has(msg.id);
 
         return {
-            label: isHidden ? t("plugin.hideAttachments.show") : t("plugin.hideAttachments.hide"),
+            label: isHidden ? t("plugin.hideMedia.show") : t("plugin.hideMedia.hide"),
             icon: isHidden ? ImageVisible : ImageInvisible,
             message: msg,
             channel: ChannelStore.getChannel(msg.channel_id),
@@ -82,7 +82,7 @@ export default definePlugin({
 
         return (
             <span className={classes("pc-hideAttachments-accessory", !message.content && "pc-hideAttachments-no-content")}>
-                {t("plugin.hideAttachments.hidden")}
+                {t("plugin.hideMedia.hidden")}
             </span>
         );
     },
