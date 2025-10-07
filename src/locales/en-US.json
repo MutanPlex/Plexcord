@@ -4010,6 +4010,37 @@
         "homeTyping": {
             "name": "HomeTyping",
             "description": "Changes the home button to a typing indicator if someone in your dms is typing"
+        },
+        "identity": {
+            "name": "Identity",
+            "description": "Allows you to edit your profile to a random fake person with the click of a button",
+            "toast": {
+                "noSaved": "No saved base! Save one first."
+            },
+            "modal": {
+                "title": "Identity"
+            },
+            "alert": {
+                "save": {
+                    "title": "Hold on!",
+                    "body": "Saving your base profile will allow you to have a backup of your actual profile",
+                    "description": "If you save, it will overwrite your previous data.",
+                    "confirm": "Save Anyway",
+                    "cancel": "Nevermind"
+                },
+                "load": {
+                    "title": "Hold on!",
+                    "body": "Loading your base profile will restore your actual profile settings",
+                    "description": "If you load, it will overwrite your current profile configuration.",
+                    "confirm": "Load Anyway",
+                    "cancel": "Nevermind"
+                }
+            },
+            "button": {
+                "save": "Save Base",
+                "load": "Load Base",
+                "randomize": "Randomize"
+            }
         }
     }
 }

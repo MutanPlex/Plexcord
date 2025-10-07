@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { DataStore } from "@api/index";
 import { Flex } from "@components/Flex";
 import { Devs, PcDevs } from "@utils/constants";
@@ -52,7 +53,7 @@ async function SaveData() {
 async function LoadData() {
     const userDataMaybeNull = await DataStore.get("identity-saved-base");
     if (!userDataMaybeNull) {
-        Toasts.show({ message: "No saved base! Save one first.", id: Toasts.genId(), type: Toasts.Type.FAILURE });
+        Toasts.show({ message: t("plugin.identity.toast.noSaved"), id: Toasts.genId(), type: Toasts.Type.FAILURE });
         return;
     }
 
@@ -74,7 +75,7 @@ async function LoadData() {
 function ResetCard() {
     return (
         <CustomizationSection
-            title={"Identity"}
+            title={t("plugin.identity.modal.title")}
             hasBackground={true}
             hideDivider={false}
         >
@@ -82,50 +83,50 @@ function ResetCard() {
                 <Button
                     onClick={() => {
                         Alerts.show({
-                            title: "Hold on!",
+                            title: t("plugin.identity.alert.save.title"),
                             body: <div>
                                 <Forms.FormText>
-                                    Saving your base profile will allow you to have a backup of your actual profile
+                                    {t("plugin.identity.alert.save.body")}
                                 </Forms.FormText>
                                 <Forms.FormText>
-                                    If you save, it will overwrite your previous data.
+                                    {t("plugin.identity.alert.save.description")}
                                 </Forms.FormText>
                             </div>,
-                            confirmText: "Save Anyway",
-                            cancelText: "Cancel",
+                            confirmText: t("plugin.identity.alert.save.confirm"),
+                            cancelText: t("plugin.identity.alert.save.cancel"),
                             onConfirm: SaveData
                         });
                     }}
-                    size={Button.Sizes.MEDIUM}
+                    size={Button.Sizes.SMALL}
                 >
-                    Save Base
+                    {t("plugin.identity.button.save")}
                 </Button>
                 <Button
                     onClick={() => {
                         Alerts.show({
-                            title: "Hold on!",
+                            title: t("plugin.identity.alert.load.title"),
                             body: <div>
                                 <Forms.FormText>
-                                    Loading your base profile will restore your actual profile settings
+                                    {t("plugin.identity.alert.load.body")}
                                 </Forms.FormText>
                                 <Forms.FormText>
-                                    If you load, it will overwrite your current profile configuration.
+                                    {t("plugin.identity.alert.load.description")}
                                 </Forms.FormText>
                             </div>,
-                            confirmText: "Load Anyway",
-                            cancelText: "Cancel",
+                            confirmText: t("plugin.identity.alert.load.confirm"),
+                            cancelText: t("plugin.identity.alert.load.cancel"),
                             onConfirm: LoadData
                         });
                     }}
-                    size={Button.Sizes.MEDIUM}
+                    size={Button.Sizes.SMALL}
                 >
-                    Load Base
+                    {t("plugin.identity.button.load")}
                 </Button>
                 <Button
                     onClick={SetNewData}
-                    size={Button.Sizes.MEDIUM}
+                    size={Button.Sizes.SMALL}
                 >
-                    Randomise
+                    {t("plugin.identity.button.randomize")}
                 </Button>
             </Flex>
         </CustomizationSection>
@@ -136,6 +137,11 @@ export default definePlugin({
     name: "Identity",
     description: "Allows you to edit your profile to a random fake person with the click of a button",
     authors: [Devs.Samwich, PcDevs.port22exposed],
+
+    get displayDescription() {
+        return t("plugin.identity.description");
+    },
+
     ResetCard: ResetCard,
     patches: [
         {

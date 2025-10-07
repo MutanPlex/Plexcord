@@ -4010,6 +4010,37 @@
         "homeTyping": {
             "name": "HomeTyping",
             "description": "DM’lerinde biri yazı yazıyorsa, ana sayfa butonunu yazıyor göstergesine dönüştürür."
+        },
+        "identity": {
+            "name": "Identity",
+            "description": "Tek bir tıklamayla profilini rastgele sahte bir kişiyle düzenlemene olanak tanır.",
+            "toast": {
+                "noSaved": "Kayıtlı bir profil yok! Önce bir tane kaydet."
+            },
+            "modal": {
+                "title": "Kimlik"
+            },
+            "alert": {
+                "save": {
+                    "title": "Bir dakika!",
+                    "body": "Profilini kaydetmek, gerçek profilinin bir yedeğini oluşturmanı sağlar.",
+                    "description": "Kaydedersen, önceki verilerin üzerine yazılacak.",
+                    "confirm": "Yine de Kaydet",
+                    "cancel": "Vazgeç"
+                },
+                "load": {
+                    "title": "Bir dakika!",
+                    "body": "Profilini yüklemek, gerçek profil ayarlarını geri yükleyecektir.",
+                    "description": "Yüklersen, mevcut profil yapılandırmanın üzerine yazılacak.",
+                    "confirm": "Yine de Yükle",
+                    "cancel": "Vazgeç"
+                }
+            },
+            "button": {
+                "save": "Profili Kaydet",
+                "load": "Profili Yükle",
+                "randomize": "Rastgele"
+            }
         }
     }
 }
