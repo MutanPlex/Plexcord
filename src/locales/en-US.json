@@ -3888,6 +3888,42 @@
             "show": "Show Media",
             "hide": "Hide Media",
             "hidden": "Media Hidden"
+        },
+        "hideServers": {
+            "name": "HideServers",
+            "description": "Hides servers from the server list",
+            "context": {
+                "hide": "Hide Server",
+                "unhide": "Unhide Server",
+                "folder": {
+                    "hide": "Hide Folder",
+                    "unhide": "Unhide Folder"
+                }
+            },
+            "option": {
+                "showIndicator": {
+                    "label": "Show Indicator",
+                    "description": "Show menu to unhide servers at the bottom of the list"
+                },
+                "guildsList": {
+                    "label": "Guilds List",
+                    "description": "Remove hidden servers"
+                },
+                "resetHidden": {
+                    "label": "Reset Hidden",
+                    "description": "Remove all hidden guilds from the list",
+                    "button": "Reset Hidden Servers"
+                }
+            },
+            "button": {
+                "hidden": "Hidden",
+                "hiddenServers": "Hidden Servers",
+                "remove": "Remove",
+                "folder": "Folder",
+                "removeAll": "Remove All",
+                "guilds": "Guilds",
+                "noHiddenServers": "No hidden servers"
+            }
         }
     }
 }

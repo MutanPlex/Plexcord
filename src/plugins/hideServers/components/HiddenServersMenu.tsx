@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { Guild } from "@plexcord/discord-types";
 import { HiddenServersStore } from "@plugins/hideServers/HiddenServersStore";
@@ -36,7 +37,7 @@ function HiddenServersModal({ modalProps, close }: { modalProps: ModalProps; clo
         <ModalRoot {...modalProps} size={ModalSize.LARGE}>
             <ModalHeader>
                 <Text variant="heading-lg/semibold" style={{ flexGrow: 1 }}>
-                    Hidden Servers
+                    {t("plugin.hideServers.button.hiddenServers")}
                 </Text>
                 <ModalCloseButton onClick={close} />
             </ModalHeader>
@@ -102,7 +103,7 @@ function GuildRow({ guild }) {
                 color={Button.Colors.PRIMARY}
                 onClick={() => restoreGuild(guild, SortedGuildStore)}
             >
-                Remove
+                {t("plugin.hideServers.button.remove")}
             </Button>
         </div>
     );
@@ -130,7 +131,7 @@ export function HiddenServersMenu({ guilds }: { guilds: Guild[]; }) {
             return (
                 <div key={folderId} className={cl("folder")}>
                     <div className={cl("folder-header")}>
-                        <Text variant="heading-sm/medium">{folder.folderName || "Folder"}</Text>
+                        <Text variant="heading-sm/medium">{folder.folderName || t("plugin.hideServers.button.folder")}</Text>
                         <Button
                             color={Button.Colors.PRIMARY}
                             onClick={() => {
@@ -139,7 +140,7 @@ export function HiddenServersMenu({ guilds }: { guilds: Guild[]; }) {
                             size={Button.Sizes.TINY}
                             className={cl("restore-all")}
                         >
-                            Remove All
+                            {t("plugin.hideServers.button.removeAll")}
                         </Button>
                     </div>
                     {folderGuilds.map(guild => (
@@ -152,7 +153,7 @@ export function HiddenServersMenu({ guilds }: { guilds: Guild[]; }) {
             );
         })}
 
-        <Text variant="heading-sm/medium">Guilds</Text>
+        <Text variant="heading-sm/medium">{t("plugin.hideServers.button.guilds")}</Text>
         {guildsWithoutFolder.map(guild => (
             <GuildRow
                 key={guild.id}
@@ -160,7 +161,7 @@ export function HiddenServersMenu({ guilds }: { guilds: Guild[]; }) {
             />
         ))}
 
-        {hiddenGuilds.length === 0 && <Text variant="heading-sm/medium">No hidden servers</Text>}
+        {hiddenGuilds.length === 0 && <Text variant="heading-sm/medium">{t("plugin.hideServers.button.noHiddenServers")}</Text>}
     </div>;
 }
 

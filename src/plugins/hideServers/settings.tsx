@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { OptionType } from "@utils/types";
 import { Button, useStateFromStores } from "@webpack/common";
@@ -15,8 +16,13 @@ import { HiddenServersStore } from "./HiddenServersStore";
 
 export default definePluginSettings({
     showIndicator: {
+        get label() {
+            return t("plugin.hideServers.option.showIndicator.label");
+        },
+        get description() {
+            return t("plugin.hideServers.option.showIndicator.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show menu to unhide servers at the bottom of the list",
         default: true,
         onChange: val => {
             if (val) {
@@ -27,16 +33,26 @@ export default definePluginSettings({
         }
     },
     guildsList: {
+        get label() {
+            return t("plugin.hideServers.option.guildsList.label");
+        },
+        get description() {
+            return t("plugin.hideServers.option.guildsList.description");
+        },
         type: OptionType.COMPONENT,
-        description: "Remove hidden servers",
         component: () => {
             const detail = useStateFromStores([HiddenServersStore], () => HiddenServersStore.hiddenGuildsDetail());
             return <HiddenServersMenu guilds={detail} />;
         }
     },
     resetHidden: {
+        get label() {
+            return t("plugin.hideServers.option.resetHidden.label");
+        },
+        get description() {
+            return t("plugin.hideServers.option.resetHidden.description");
+        },
         type: OptionType.COMPONENT,
-        description: "Remove all hidden guilds from the list",
         component: () => (
             <div>
                 <Button
@@ -44,7 +60,7 @@ export default definePluginSettings({
                     color={Button.Colors.RED}
                     onClick={() => HiddenServersStore.clearHidden()}
                 >
-                    Reset Hidden Servers
+                    {t("plugin.hideServers.option.resetHidden.button")}
                 </Button>
             </div>
         ),

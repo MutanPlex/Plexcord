@@ -11,6 +11,7 @@ import {
     findGroupChildrenByChildId,
     NavContextMenuPatchCallback,
 } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import {
     addServerListElement,
     removeServerListElement,
@@ -56,7 +57,7 @@ const Patch: NavContextMenuPatchCallback = (
     group.push(
         <Menu.MenuItem
             id="pc-hide-server"
-            label={isHidden ? "Unhide Server" : "Hide Server"}
+            label={isHidden ? t("plugin.hideServers.context.unhide") : t("plugin.hideServers.context.hide")}
             action={() => {
                 if (isHidden) {
                     HiddenServersStore.removeHiddenGuild(guild.id);
@@ -82,6 +83,10 @@ export default definePlugin({
     authors: [PcDevs.bep, PcDevs.MutanPlex],
     tags: ["guild", "server", "hide", "folder"],
 
+    get displayDescription() {
+        return t("plugin.hideServers.description");
+    },
+
     dependencies: ["ServerListAPI"],
     contextMenus: {
         "guild-header-popout": Patch,
@@ -99,7 +104,7 @@ export default definePlugin({
                 menuItems.push(
                     <Menu.MenuItem
                         id="pc-hide-folder"
-                        label={isHidden ? "Unhide Folder" : "Hide Folder"}
+                        label={isHidden ? t("plugin.hideServers.context.folder.unhide") : t("plugin.hideServers.context.folder.hide")}
                         action={() => {
                             if (isHidden) {
                                 HiddenServersStore.removeHiddenFolder(folderId, guildIds);

@@ -3888,6 +3888,42 @@
             "show": "Medyayı Göster",
             "hide": "Medyayı Gizle",
             "hidden": "Medya Gizlendi"
+        },
+        "hideServers": {
+            "name": "HideServers",
+            "description": "Sunucuları sunucu listesinden gizler",
+            "context": {
+                "hide": "Sunucuyu Gizle",
+                "unhide": "Sunucuyu Göster",
+                "folder": {
+                    "hide": "Klasörü Gizle",
+                    "unhide": "Klasörü Göster"
+                }
+            },
+            "option": {
+                "showIndicator": {
+                    "label": "Göstergeleri Göster",
+                    "description": "Listede gizli sunucuları göstermek için menüyü alt kısımda göster"
+                },
+                "guildsList": {
+                    "label": "Sunucu Listesi",
+                    "description": "Gizli sunucuları kaldır"
+                },
+                "resetHidden": {
+                    "label": "Gizli Sunucuları Sıfırla",
+                    "description": "Listeden tüm gizli sunucuları kaldır",
+                    "button": "Gizli Sunucuları Sıfırla"
+                }
+            },
+            "button": {
+                "hidden": "Gizli",
+                "hiddenServers": "Gizli Sunucular",
+                "remove": "Kaldır",
+                "folder": "Klasör",
+                "removeAll": "Tümünü Kaldır",
+                "guilds": "Sunucular",
+                "noHiddenServers": "Gizli sunucu yok"
+            }
         }
     }
 }
