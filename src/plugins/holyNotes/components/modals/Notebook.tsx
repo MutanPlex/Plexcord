@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import HelpIcon from "@plugins/holyNotes/components/icons/HelpIcon";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
@@ -69,13 +70,12 @@ export const NoteModal = (props: ModalProps & { onClose: () => void; }) => {
 
     const forceUpdate = React.useReducer(() => ({}), {})[1] as () => void;
 
-    // Tab değiştirme fonksiyonu - state'leri sıfırla
     const handleTabChange = React.useCallback((newNotebook: string) => {
         setCurrentNotebook(newNotebook);
-        setSearch(""); // Arama inputunu sıfırla
-        setSortType(true); // Sort type'ı varsayılana döndür
-        setSortDirection(true); // Sort direction'ı varsayılana döndür
-        forceUpdate(); // Component'i yeniden render et
+        setSearch("");
+        setSortType(true);
+        setSortDirection(true);
+        forceUpdate();
     }, [forceUpdate]);
 
     const notes = noteHandler.getNotes(currentNotebook);
@@ -93,7 +93,7 @@ export const NoteModal = (props: ModalProps & { onClose: () => void; }) => {
                                 variant="heading-lg/semibold"
                                 style={{ flexGrow: 1 }}
                                 className={classes("pc-notebook-heading")}>
-                                NOTEBOOK
+                                {t("plugin.holyNotes.modal.notebook.title")}
                             </Text>
                             <div className={classes("pc-notebook-flex", "pc-help-icon")} onClick={() => openModal(HelpModal)}>
                                 <HelpIcon />
@@ -101,7 +101,7 @@ export const NoteModal = (props: ModalProps & { onClose: () => void; }) => {
                             <div style={{ marginBottom: "10px" }} className={classes("pc-notebook-search")}>
                                 <TextInput
                                     autoFocus={false}
-                                    placeholder="Search for a message..."
+                                    placeholder={t("plugin.holyNotes.modal.notebook.search")}
                                     onChange={e => setSearch(e)}
                                 />
                             </div>
@@ -136,28 +136,28 @@ export const NoteModal = (props: ModalProps & { onClose: () => void; }) => {
                                     <Menu.Menu
                                         navId="sort-menu"
                                         onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-                                        aria-label="Sort Menu"
+                                        aria-label={t("plugin.holyNotes.modal.notebook.label")}
                                     >
                                         <Menu.MenuItem
-                                            label="Ascending / Date Added"
+                                            label={t("plugin.holyNotes.modal.notebook.ada")}
                                             id="ada"
                                             action={() => {
                                                 setSortDirection(true);
                                                 setSortType(true);
                                             }} /><Menu.MenuItem
-                                            label="Ascending / Message Date"
+                                            label={t("plugin.holyNotes.modal.notebook.amd")}
                                             id="amd"
                                             action={() => {
                                                 setSortDirection(true);
                                                 setSortType(false);
                                             }} /><Menu.MenuItem
-                                            label="Descending / Date Added"
+                                            label={t("plugin.holyNotes.modal.notebook.dda")}
                                             id="dda"
                                             action={() => {
                                                 setSortDirection(false);
                                                 setSortType(true);
                                             }} /><Menu.MenuItem
-                                            label="Descending / Message Date"
+                                            label={t("plugin.holyNotes.modal.notebook.dmd")}
                                             id="dmd"
                                             action={() => {
                                                 setSortDirection(false);
@@ -168,11 +168,11 @@ export const NoteModal = (props: ModalProps & { onClose: () => void; }) => {
                                 ));
                             }}
                         >
-                            <Text className={quickSelectLabel}>Change Sorting:</Text>
+                            <Text className={quickSelectLabel}>{t("plugin.holyNotes.modal.notebook.change")}:</Text>
                             <Flex grow={0} align={Flex.Align.CENTER} className={quickSelectQuick}>
                                 <Text className={quickSelectValue}>
-                                    {sortDirection ? "Ascending" : "Descending"} /{" "}
-                                    {sortType ? "Date Added" : "Message Date"}
+                                    {sortDirection ? t("plugin.holyNotes.modal.notebook.ascending") : t("plugin.holyNotes.modal.notebook.descending")} /{" "}
+                                    {sortType ? t("plugin.holyNotes.modal.notebook.dateAdded") : t("plugin.holyNotes.modal.notebook.messageDate")}
                                 </Text>
                                 <div className={quickSelectArrow} />
                             </Flex>

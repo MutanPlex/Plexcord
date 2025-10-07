@@ -6,6 +6,7 @@
  */
 
 import { createStore } from "@api/DataStore";
+import { t } from "@api/i18n";
 import { DataStore } from "@api/index";
 import { Toasts } from "@webpack/common";
 
@@ -86,7 +87,7 @@ export async function uploadNotes() {
                     console.error(err);
                     Toasts.show({
                         id: Toasts.genId(),
-                        message: "Invalid JSON.",
+                        message: t("plugin.holyNotes.toast.invalid"),
                         type: Toasts.Type.FAILURE,
                     });
                 }

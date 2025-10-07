@@ -5,12 +5,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { SvgOverFlowIcon } from "@plugins/holyNotes/components/icons/overFlowIcon";
 import { classes } from "@utils/misc";
 import { findByCode } from "@webpack";
 import { Button, Clickable, Menu, Popout, React, useRef } from "@webpack/common";
-
-
 
 export function NoteBookTabs({ tabs, selectedTabId, onSelectTab }: { tabs: string[], selectedTabId: string, onSelectTab: (tab: string) => void; }) {
     const tabBarRef = React.useRef<HTMLDivElement>(null);
@@ -82,7 +81,7 @@ export function NoteBookTabs({ tabs, selectedTabId, onSelectTab }: { tabs: strin
         return (
             <Menu.Menu
                 navId="notebook-tabs"
-                aria-label="Notebook Tabs"
+                aria-label={t("plugin.holyNotes.modal.tabs.label")}
                 variant="fixed"
                 onClose={closePopout}
                 onSelect={closePopout}
@@ -172,7 +171,6 @@ export function CreateTabBar({ tabs, firstSelectedTab, onChangeTab }) {
         firstSelectedTab || (tabKeys.length > 0 ? tabKeys[0] : null)
     );
 
-    // firstSelectedTab değiştiğinde selectedTab'ı güncelle
     React.useEffect(() => {
         if (firstSelectedTab && firstSelectedTab !== selectedTab) {
             setSelectedTab(firstSelectedTab);

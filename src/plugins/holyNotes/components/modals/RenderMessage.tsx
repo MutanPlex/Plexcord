@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { makeDummyUser } from "@components/settings/tabs/plugins/PluginModal";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
 import { HolyNotes } from "@plugins/holyNotes/types";
@@ -129,7 +130,7 @@ const NoteContextMenu = (
             aria-label="Holy Notes"
         >
             <Menu.MenuItem
-                label="Jump To Message"
+                label={t("plugin.holyNotes.modal.help.jumpToMessage")}
                 id="jump"
                 action={() => {
                     NavigationRouter.transitionTo(`/channels/${note.guild_id ?? "@me"}/${note.channel_id}/${note.id}`);
@@ -137,19 +138,19 @@ const NoteContextMenu = (
                 }}
             />
             <Menu.MenuItem
-                label="Copy Text"
+                label={t("plugin.holyNotes.button.copyText")}
                 id="copy-text"
                 action={() => copyToClipboard(note.content)}
             />
             {note?.attachments.length ? (
                 <Menu.MenuItem
-                    label="Copy Attachment URL"
+                    label={t("plugin.holyNotes.button.copyAttachment")}
                     id="copy-url"
                     action={() => copyToClipboard(note.attachments[0].url)}
                 />) : null}
             <Menu.MenuItem
                 color="danger"
-                label="Delete Note"
+                label={t("plugin.holyNotes.button.deleteNote")}
                 id="delete"
                 action={() => {
                     noteHandler.deleteNote(note.id, notebook);
@@ -158,7 +159,7 @@ const NoteContextMenu = (
             />
             {Object.keys(noteHandler.getAllNotes()).length !== 1 ? (
                 <Menu.MenuItem
-                    label="Move Note"
+                    label={t("plugin.holyNotes.button.moveNote")}
                     id="move-note"
                 >
                     {Object.keys(noteHandler.getAllNotes()).map((key: string) => {
@@ -166,7 +167,7 @@ const NoteContextMenu = (
                             return (
                                 <Menu.MenuItem
                                     key={key}
-                                    label={`Move to ${key}`}
+                                    label={t("plugin.holyNotes.button.moveTo", { key })}
                                     id={key}
                                     action={() => {
                                         noteHandler.moveNote(note, notebook, key);
@@ -179,7 +180,7 @@ const NoteContextMenu = (
                 </Menu.MenuItem>
             ) : null}
             <Menu.MenuItem
-                label="Copy ID"
+                label={t("plugin.holyNotes.button.copyId")}
                 id="copy-id"
                 action={() => copyToClipboard(note.id)}
             />

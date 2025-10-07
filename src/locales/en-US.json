@@ -3924,6 +3924,88 @@
                 "guilds": "Guilds",
                 "noHiddenServers": "No hidden servers"
             }
+        },
+        "holyNotes": {
+            "name": "HolyNotes",
+            "description": "Holy Notes allows you to save messages",
+            "main": "Main",
+            "button": {
+                "tooltip": "Holy Notes",
+                "save": "Save Note",
+                "addNote": "Add Note",
+                "refresh": "Refresh Avatars",
+                "import": "Import Notes",
+                "export": "Export Notes",
+                "deleteAll": "Delete All Notes",
+                "delete": "Delete Notebook",
+                "create": "Create Notebook",
+                "copyText": "Copy Text",
+                "copyAttachment": "Copy Attachment URL",
+                "deleteNote": "Delete Note",
+                "moveNote": "Move Note",
+                "moveTo": "Move to {{key}}",
+                "copyId": "Copy ID"
+            },
+            "modal": {
+                "error": {
+                    "generic": "There was an error parsing your notes! The issue was logged in your console, press CTRL + I to access it! Please visit the support server if you need extra help!",
+                    "easter": "No notes were found. Empathy banana is here for you.",
+                    "empty": "No notes were found saved in this notebook."
+                },
+                "help": {
+                    "title": "Help Modal",
+                    "addingNotes": "Adding Notes",
+                    "addingNotesText": "To add a note right click on a message then hover over the 'Note Message' item and click the button with the notebook name you would like to note the message to.",
+                    "prototype": "Prototype",
+                    "noteMessage": "Clicking the 'Note Message' button by itself will note to Main by default!",
+                    "deletingNotes": "Deleting Notes",
+                    "deletingNotesText": "Note you can either right click the note and hit 'Delete Note' or you can hold the 'DELETE' key on your keyboard and click on a note; it's like magic!",
+                    "movingNotes": "Moving Notes",
+                    "movingNotesText": "To move a note right click on a note and hover over the 'Move Note' item and click on the button corresponding to the notebook you would like to move the note to.",
+                    "jumpToMessage": "Jump To Message",
+                    "jumpToMessageText": "To jump to the location that the note was originally located at just right click on the note and hit 'Jump to Message'."
+                },
+                "notebook": {
+                    "title": "NOTEBOOK",
+                    "search": "Search for a message...",
+                    "label": "Sort Menu",
+                    "ada": "Ascending / Date Added",
+                    "amd": "Ascending / Message Date",
+                    "dda": "Descending / Date Added",
+                    "dmd": "Descending / Message Date",
+                    "change": "Change Sorting",
+                    "ascending": "Ascending",
+                    "descending": "Descending",
+                    "dateAdded": "Date Added",
+                    "messageDate": "Message Date"
+                },
+                "create": {
+                    "title": "Create Notebook",
+                    "placeholder": "Notebook Name"
+                },
+                "delete": {
+                    "title": "Confirm Deletion",
+                    "button": "Delete"
+                },
+                "tabs": {
+                    "label": "Notebook Tabs"
+                }
+            },
+            "toast": {
+                "saved": "Successfully added message to {{notebook}}",
+                "deleted": "Successfully deleted note from {{notebook}}",
+                "moved": "Successfully moved note from {{from}} to {{to}}.",
+                "exists": "Notebook {{notebookName}} already exists.",
+                "created": "Successfully created {{notebookName}}.",
+                "deletedNotebook": "Successfully deleted {{notebookName}}.",
+                "refreshed": "Successfully refreshed avatars.",
+                "deletedAll": "Successfully deleted all notes.",
+                "imported": "Successfully imported notes.",
+                "invalid": "Invalid JSON."
+            },
+            "toolbox": {
+                "action": "Open Notes"
+            }
         }
     }
 }

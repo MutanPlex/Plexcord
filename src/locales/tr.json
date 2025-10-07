@@ -3924,6 +3924,88 @@
                 "guilds": "Sunucular",
                 "noHiddenServers": "Gizli sunucu yok"
             }
+        },
+        "holyNotes": {
+            "name": "HolyNotes",
+            "description": "Holy Notes mesajları kaydetmeni sağlar",
+            "main": "Ana",
+            "button": {
+                "tooltip": "Holy Notes",
+                "save": "Notu Kaydet",
+                "addNote": "Notlara Ekle",
+                "refresh": "Avatarları Yenile",
+                "import": "Notları İçe Aktar",
+                "export": "Notları Dışa Aktar",
+                "deleteAll": "Tüm Notları Sil",
+                "delete": "Not Defterini Sil",
+                "create": "Not Defteri Oluştur",
+                "copyText": "Metni Kopyala",
+                "copyAttachment": "Ek URL’sini Kopyala",
+                "deleteNote": "Notu Sil",
+                "moveNote": "Notu Taşı",
+                "moveTo": "{{key}} konumuna taşı",
+                "copyId": "ID’yi Kopyala"
+            },
+            "modal": {
+                "error": {
+                    "generic": "Notların işlenirken bir hata oluştu! Hata konsoluna kaydedildi, CTRL + I tuşuna basarak erişebilirsin! Ek yardım için destek sunucusuna katıl!",
+                    "easter": "Hiç not bulunamadı. Empati muzu seninle.",
+                    "empty": "Bu not defterinde kayıtlı not yok."
+                },
+                "help": {
+                    "title": "Yardım Penceresi",
+                    "addingNotes": "Not Ekleme",
+                    "addingNotesText": "Bir not eklemek için bir mesaja sağ tıkla, 'Mesajı Not Et' seçeneğinin üzerine gel ve notu eklemek istediğin defteri seç.",
+                    "prototype": "Prototip",
+                    "noteMessage": "'Mesajı Not Et' butonuna tek tıklamak, varsayılan olarak Ana deftere ekler!",
+                    "deletingNotes": "Not Silme",
+                    "deletingNotesText": "Bir notu silmek için sağ tıklayıp 'Notu Sil' seçeneğini seçebilir ya da klavyendeki 'DELETE' tuşunu basılı tutup nota tıklayabilirsin.",
+                    "movingNotes": "Not Taşıma",
+                    "movingNotesText": "Bir notu taşımak için sağ tıklayıp 'Notu Taşı' seçeneği üzerinden taşımak istediğin defteri seç.",
+                    "jumpToMessage": "Mesaja Git",
+                    "jumpToMessageText": "Bir notun ait olduğu mesaja gitmek için notun üzerine sağ tıkla ve 'Mesaja Git' seçeneğini seç."
+                },
+                "notebook": {
+                    "title": "NOT DEFTERİ",
+                    "search": "Bir mesaj ara...",
+                    "label": "Sıralama Menüsü",
+                    "ada": "Artan / Eklenme Tarihi",
+                    "amd": "Artan / Mesaj Tarihi",
+                    "dda": "Azalan / Eklenme Tarihi",
+                    "dmd": "Azalan / Mesaj Tarihi",
+                    "change": "Sıralamayı Değiştir",
+                    "ascending": "Artan",
+                    "descending": "Azalan",
+                    "dateAdded": "Eklenme Tarihi",
+                    "messageDate": "Mesaj Tarihi"
+                },
+                "create": {
+                    "title": "Not Defteri Oluştur",
+                    "placeholder": "Not Defteri Adı"
+                },
+                "delete": {
+                    "title": "Silmeyi Onayla",
+                    "button": "Sil"
+                },
+                "tabs": {
+                    "label": "Not Defteri Sekmeleri"
+                }
+            },
+            "toast": {
+                "saved": "Mesaj başarıyla {{notebook}} defterine eklendi.",
+                "deleted": "Not {{notebook}} defterinden başarıyla silindi.",
+                "moved": "Not başarıyla {{from}} defterinden {{to}} defterine taşındı.",
+                "exists": "{{notebookName}} adlı defter zaten mevcut.",
+                "created": "{{notebookName}} başarıyla oluşturuldu.",
+                "deletedNotebook": "{{notebookName}} başarıyla silindi.",
+                "refreshed": "Avatarlar başarıyla yenilendi.",
+                "deletedAll": "Tüm notlar başarıyla silindi.",
+                "imported": "Notlar başarıyla içe aktarıldı.",
+                "invalid": "Geçersiz JSON."
+            },
+            "toolbox": {
+                "action": "Notları Aç"
+            }
         }
     }
 }

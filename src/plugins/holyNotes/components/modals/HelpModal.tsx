@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
 import { downloadNotes, uploadNotes } from "@plugins/holyNotes/utils";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
@@ -15,41 +16,36 @@ export default ({ onClose, ...modalProps }: ModalProps & { onClose: () => void; 
     const { statusTagGreen } = findByProps("statusTagGreen");
 
     return (
-        <ModalRoot {...modalProps} className="pc-help-modal" size={ModalSize.MEDIUM}>
+        <ModalRoot {...modalProps} className="pc-help-modal" size={ModalSize.LARGE}>
             <ModalHeader className="notebook-header">
-                <Text tag="h3">Help Modal</Text>
+                <Text tag="h3">{t("plugin.holyNotes.modal.help.title")}</Text>
                 <ModalCloseButton onClick={onClose} />
             </ModalHeader>
             <ModalContent>
                 <div className="pc-help-markdown">
-                    <Text>Adding Notes</Text>
+                    <Text>{t("plugin.holyNotes.modal.help.addingNotes")}</Text>
                     <Forms.FormText>
-                        To add a note right click on a message then hover over the "Note Message" item and click
-                        <br />
-                        the button with the notebook name you would like to note the message to.
+                        {t("plugin.holyNotes.modal.help.addingNotesText")}
                         <br />
                         <span style={{ fontWeight: "bold" }} className={statusTagGreen}>
-                            Protip:
+                            {t("plugin.holyNotes.modal.help.prototype")}:
                         </span>{" "}
-                        Clicking the "Note Message" button by itself will note to Main by default!
+                        {t("plugin.holyNotes.modal.help.noteMessage")}
                     </Forms.FormText>
                     <hr />
-                    <Text>Deleting Notes</Text>
+                    <Text>{t("plugin.holyNotes.modal.help.deletingNotes")}</Text>
                     <Forms.FormText>
-                        Note you can either right click the note and hit "Delete Note" or you can hold the
-                        'DELETE' key on your keyboard and click on a note; it's like magic!
+                        {t("plugin.holyNotes.modal.help.deletingNotesText")}
                     </Forms.FormText>
                     <hr />
-                    <Text>Moving Notes</Text>
+                    <Text>{t("plugin.holyNotes.modal.help.movingNotes")}</Text>
                     <Forms.FormText>
-                        To move a note right click on a note and hover over the "Move Note" item and click on
-                        the button corresponding to the notebook you would like to move the note to.
+                        {t("plugin.holyNotes.modal.help.movingNotesText")}
                     </Forms.FormText>
                     <hr />
-                    <Text>Jump To Message</Text>
+                    <Text>{t("plugin.holyNotes.modal.help.jumpToMessage")}</Text>
                     <Forms.FormText>
-                        To jump to the location that the note was originally located at just right click on the
-                        note and hit "Jump to Message".
+                        {t("plugin.holyNotes.modal.help.jumpToMessageText")}
                     </Forms.FormText>
                 </div>
             </ModalContent>
@@ -61,27 +57,27 @@ export default ({ onClose, ...modalProps }: ModalProps & { onClose: () => void; 
                         style={{ marginRight: "10px" }}
                         onClick={() => {
                             noteHandler.refreshAvatars();
-                        }}>Refresh Avatars</Button>
+                        }}>{t("plugin.holyNotes.button.refresh")}</Button>
                     <Button
                         look={Button.Looks.FILLED}
                         color={Button.Colors.GREEN}
                         style={{ marginRight: "10px" }}
                         onClick={() => {
                             uploadNotes();
-                        }}>Import Notes</Button>
+                        }}>{t("plugin.holyNotes.button.import")}</Button>
                     <Button
                         look={Button.Looks.FILLED}
                         color={Button.Colors.GREEN}
                         style={{ marginRight: "10px" }}
                         onClick={() => {
                             downloadNotes();
-                        }}>Export Notes</Button>
+                        }}>{t("plugin.holyNotes.button.export")}</Button>
                     <Button
                         look={Button.Looks.FILLED}
                         color={Button.Colors.RED}
                         onClick={() => {
                             noteHandler.deleteEverything();
-                        }}>Delete All Notes</Button>
+                        }}>{t("plugin.holyNotes.button.deleteAll")}</Button>
                 </div>
             </ModalFooter>
         </ModalRoot>

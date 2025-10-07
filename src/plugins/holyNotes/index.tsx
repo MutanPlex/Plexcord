@@ -20,6 +20,7 @@
 import "./style.css";
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { DataStore } from "@api/index";
 import { addMessagePopoverButton, removeMessagePopoverButton } from "@api/MessagePopover";
 import { Message } from "@plexcord/discord-types";
@@ -38,7 +39,7 @@ export const MessageType = findByCodeLazy("isEdited(){");
 
 const messageContextMenuPatch: NavContextMenuPatchCallback = async (children, { message }: { message: Message; }) => {
     children.push(
-        <Menu.MenuItem label="Add Message To" id="add-message-to-note">
+        <Menu.MenuItem label={t("plugin.holyNotes.button.addNote")} id="add-message-to-note">
             {Object.keys(noteHandler.getAllNotes()).map((notebook: string, index: number) => (
                 <Menu.MenuItem
                     key={notebook}
@@ -57,6 +58,10 @@ export default definePlugin({
     authors: [PcDevs.Wolfie, PcDevs.MutanPlex],
     dependencies: ["MessagePopoverAPI", "ChatInputButtonAPI"],
 
+    get displayDescription() {
+        return t("plugin.holyNotes.description");
+    },
+
     patches: [
         {
             find: '?"BACK_FORWARD_NAVIGATION":',
@@ -68,7 +73,7 @@ export default definePlugin({
     ],
     renderHolyNotesButton() {
         return (
-            <Tooltip text="Holy Notes">
+            <Tooltip text={t("plugin.holyNotes.button.tooltip")}>
                 {tooltipProps => (
                     <Button style={{ backgroundColor: "transparent", border: "none" }}
                         {...tooltipProps}
@@ -82,10 +87,12 @@ export default definePlugin({
             </Tooltip>
         );
     },
-    toolboxActions: {
-        async "Open Notes"() {
-            openModal(props => <NoteModal {...props} />);
-        }
+    get toolboxActions() {
+        return {
+            [t("plugin.holyNotes.toolbox.action")]: async () => {
+                openModal(props => <NoteModal {...props} />);
+            }
+        };
     },
 
     contextMenus: {
@@ -97,7 +104,7 @@ export default definePlugin({
 
         addMessagePopoverButton("HolyNotes", message => {
             return {
-                label: "Save Note",
+                label: t("plugin.holyNotes.button.save"),
                 icon: NoteButtonPopover,
                 message: message,
                 channel: ChannelStore.getChannel(message.channel_id),
