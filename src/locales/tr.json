@@ -4259,6 +4259,22 @@
                 "dimensions": "Boyutlar",
                 "filename": "Dosya Adı"
             }
+        },
+        "imgToGif": {
+            "name": "ImgToGif",
+            "description": "Herhangi bir görseli GIF'e dönüştürmek için /imgtogif komutunu ekler",
+            "command": {
+                "imgToGif": {
+                    "description": "Bir görseli GIF'e dönüştürmenizi sağlar",
+                    "image": "Kullanılacak görsel eki",
+                    "width": "GIF genişliği",
+                    "height": "GIF yüksekliği"
+                }
+            },
+            "error": {
+                "noImage": "Görsel belirtilmedi!",
+                "notImage": "Yüklenen dosya bir görsel değil"
+            }
         }
     }
 }

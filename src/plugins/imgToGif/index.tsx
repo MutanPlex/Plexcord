@@ -18,6 +18,7 @@
 */
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, sendBotMessage } from "@api/Commands";
+import { t } from "@api/i18n";
 import { CommandArgument, CommandContext } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -58,7 +59,7 @@ async function resolveImage(options: CommandArgument[], ctx: CommandContext): Pr
                 if (upload) {
                     if (!upload.isImage) {
                         UploadManager.clearAll(ctx.channel.id, DraftType.SlashCommand);
-                        throw "Upload is not an image";
+                        throw t("plugin.imgToGif.error.notImage");
                     }
                     image = upload.item.file;
                 }
@@ -85,27 +86,39 @@ export default definePlugin({
             inputType: ApplicationCommandInputType.BUILT_IN,
             name: "imgtogif",
             description: "Allows you to turn an image to a gif",
+            get displayDescription() {
+                return t("plugin.imgToGif.command.imgToGif.description");
+            },
             options: [
                 {
                     name: "image",
                     description: "Image attachment to use",
+                    get displayDescription() {
+                        return t("plugin.imgToGif.command.imgToGif.image");
+                    },
                     type: ApplicationCommandOptionType.ATTACHMENT
                 },
                 {
                     name: "width",
                     description: "Width of the gif",
+                    get displayDescription() {
+                        return t("plugin.imgToGif.command.imgToGif.width");
+                    },
                     type: ApplicationCommandOptionType.INTEGER
                 },
                 {
                     name: "height",
                     description: "Height of the gif",
+                    get displayDescription() {
+                        return t("plugin.imgToGif.command.imgToGif.height");
+                    },
                     type: ApplicationCommandOptionType.INTEGER
                 }
             ],
             execute: async (opts, cmdCtx) => {
                 try {
                     const { image, width, height } = await resolveImage(opts, cmdCtx);
-                    if (!image) throw "No Image specified!";
+                    if (!image) throw t("plugin.imgToGif.error.noImage");
 
                     const avatar = await loadImage(image);
 
@@ -139,7 +152,11 @@ export default definePlugin({
                     setTimeout(() => UploadHandler.promptToUpload([file], cmdCtx.channel, DraftType.ChannelMessage), 10);
                 } catch (err) {
                     UploadManager.clearAll(cmdCtx.channel.id, DraftType.SlashCommand);
-                    sendBotMessage(cmdCtx.channel.id, { content: String(err) });
+                    sendBotMessage(cmdCtx.channel.id, {
+                        author: {
+                            username: "Plexcord"
+                        }, content: String(err)
+                    });
                 }
             },
         },
