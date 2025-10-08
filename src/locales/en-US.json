@@ -3882,6 +3882,24 @@
                 }
             }
         },
+        "hideChatButtons": {
+            "name": "HideChatButtons",
+            "description": "able to hide the chat buttons",
+            "tooltip": {
+                "close": "Close",
+                "open": "Open"
+            },
+            "option": {
+                "color": {
+                    "label": "Color",
+                    "description": "Color it red on open"
+                },
+                "open": {
+                    "label": "Open",
+                    "description": "opened by default"
+                }
+            }
+        },
         "hideMedia": {
             "name": "HideMedia",
             "description": "Hide attachments and embeds for individual messages via hover button",

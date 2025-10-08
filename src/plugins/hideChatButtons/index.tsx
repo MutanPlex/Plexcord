@@ -6,6 +6,7 @@
  */
 
 import { ChatBarButton } from "@api/ChatButtons";
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType, StartAt } from "@utils/types";
@@ -16,13 +17,23 @@ let hidechatbuttonsopen: boolean | undefined;
 
 const settings = definePluginSettings({
     Color: {
+        get label() {
+            return t("plugin.hideChatButtons.option.color.label");
+        },
+        get description() {
+            return t("plugin.hideChatButtons.option.color.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Color it red on open", // something extra
         default: false,
     },
     Open: {
+        get label() {
+            return t("plugin.hideChatButtons.option.open.label");
+        },
+        get description() {
+            return t("plugin.hideChatButtons.option.open.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "opened by default",
         default: false,
         onChange: (store: { open: boolean; }) => {
             hidechatbuttonsopen = store.open;
@@ -33,7 +44,7 @@ const settings = definePluginSettings({
 function HideToggleButton(props: { open: boolean | undefined, onClick: MouseEventHandler<HTMLButtonElement>; }) {
     return (<ChatBarButton
         onClick={props.onClick}
-        tooltip={props.open ? "Close" : "Open"}
+        tooltip={props.open ? t("plugin.hideChatButtons.tooltip.close") : t("plugin.hideChatButtons.tooltip.open")}
     >
         <svg
             fill={settings.store.Color && props.open ? "#c32a32" : "currentColor"}
@@ -81,6 +92,11 @@ export default definePlugin({
     description: "able to hide the chat buttons",
     settings: settings,
     authors: [PcDevs.iamme, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.hideChatButtons.description");
+    },
+
     patches: [
         {
             find: '"sticker")',

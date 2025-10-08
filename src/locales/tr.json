@@ -3882,6 +3882,24 @@
                 }
             }
         },
+        "hideChatButtons": {
+            "name": "HideChatButtons",
+            "description": "Sohbet butonlarını gizlemeni sağlar.",
+            "tooltip": {
+                "close": "Kapat",
+                "open": "Aç"
+            },
+            "option": {
+                "color": {
+                    "label": "Renk",
+                    "description": "Açıldığında kırmızı renkle göster"
+                },
+                "open": {
+                    "label": "Açık",
+                    "description": "Varsayılan olarak açık"
+                }
+            }
+        },
         "hideMedia": {
             "name": "HideMedia",
             "description": "Üzerine gelindiğinde beliren bir butonla belirli mesajlardaki ekleri ve gömülü içerikleri gizlemeni sağlar.",
