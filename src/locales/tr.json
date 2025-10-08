@@ -4207,6 +4207,58 @@
             "toast": {
                 "invalidFormat": "Geçersiz format, lütfen WxH formatını kullanın. Varsayılana sıfırlanıyor."
             }
+        },
+        "imageZoom": {
+            "name": "ImageZoom",
+            "description": "Görselleri ve GIF'leri yakınlaştırmanıza ve ayrıca görsel meta verilerini görüntülemenize olanak tanır. Fare tekerleğini kullanarak yakınlaştırın, Shift + fare tekerleği ile mercek yarıçapını artırın.",
+            "option": {
+                "saveZoomValues": {
+                    "label": "Yakınlaştırma Değerlerini Kaydet",
+                    "description": "Yakınlaştırma ve mercek boyutu değerlerinin kaydedilip kaydedilmeyeceğini belirler"
+                },
+                "invertScroll": {
+                    "label": "Kaydırmayı Ters Çevir",
+                    "description": "Fare kaydırma yönünü tersine çevirir"
+                },
+                "nearestNeighbour": {
+                    "label": "En Yakın Komşu",
+                    "description": "Görselleri ölçeklendirirken En Yakın Komşu Enterpolasyonunu kullanır"
+                },
+                "square": {
+                    "label": "Kare",
+                    "description": "Merceği kare şekline getirir"
+                },
+                "zoom": {
+                    "label": "Yakınlaştırma",
+                    "description": "Merceğin yakınlaştırma oranı"
+                },
+                "size": {
+                    "label": "Boyut",
+                    "description": "Mercek yarıçapı / boyutu"
+                },
+                "zoomSpeed": {
+                    "label": "Yakınlaştırma Hızı",
+                    "description": "Yakınlaştırma / mercek boyutunun değişim hızını belirler"
+                },
+                "showMetadata": {
+                    "label": "Meta Verileri Göster",
+                    "description": "Seçili görsele çift tıklandığında meta verileri gösterir"
+                }
+            },
+            "context": {
+                "square": "Kare Mercek",
+                "nearest": "Pikselli Büyütme",
+                "zoom": "Yakınlaştırma",
+                "size": "Mercek Boyutu",
+                "zoomSpeed": "Yakınlaştırma Hızı",
+                "showImageMetadata": "Görsel Meta Verilerini Göster",
+                "view": "Meta Verileri Görüntüle",
+                "loading": "Yükleniyor...",
+                "unknown": "Bilinmiyor",
+                "sizeHTML": "Boyut",
+                "dimensions": "Boyutlar",
+                "filename": "Dosya Adı"
+            }
         }
     }
 }

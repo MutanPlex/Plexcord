@@ -18,8 +18,8 @@
 */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { debounce } from "@shared/debounce";
 import { Devs, PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
@@ -46,38 +46,68 @@ const DOUBLE_CLICK_THRESHOLD = 300;
 
 export const settings = definePluginSettings({
     saveZoomValues: {
+        get label() {
+            return t("plugin.imageZoom.option.saveZoomValues.label");
+        },
+        get description() {
+            return t("plugin.imageZoom.option.saveZoomValues.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether to save zoom and lens size values",
         default: true,
     },
 
     invertScroll: {
+        get label() {
+            return t("plugin.imageZoom.option.invertScroll.label");
+        },
+        get description() {
+            return t("plugin.imageZoom.option.invertScroll.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Invert scroll",
         default: true,
     },
 
     nearestNeighbour: {
+        get label() {
+            return t("plugin.imageZoom.option.nearestNeighbour.label");
+        },
+        get description() {
+            return t("plugin.imageZoom.option.nearestNeighbour.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Use Nearest Neighbour Interpolation when scaling images",
         default: false,
     },
 
     square: {
+        get label() {
+            return t("plugin.imageZoom.option.square.label");
+        },
+        get description() {
+            return t("plugin.imageZoom.option.square.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Make the lens square",
         default: false,
     },
 
     zoom: {
-        description: "Zoom of the lens",
+        get label() {
+            return t("plugin.imageZoom.option.zoom.label");
+        },
+        get description() {
+            return t("plugin.imageZoom.option.zoom.description");
+        },
         type: OptionType.SLIDER,
         markers: makeRange(1, 50, 4),
         default: 2,
         stickToMarkers: false,
     },
     size: {
-        description: "Radius / Size of the lens",
+        get label() {
+            return t("plugin.imageZoom.option.size.label");
+        },
+        get description() {
+            return t("plugin.imageZoom.option.size.description");
+        },
         type: OptionType.SLIDER,
         markers: makeRange(50, 1000, 50),
         default: 100,
@@ -85,7 +115,12 @@ export const settings = definePluginSettings({
     },
 
     zoomSpeed: {
-        description: "How fast the zoom / lens size changes",
+        get label() {
+            return t("plugin.imageZoom.option.zoomSpeed.label");
+        },
+        get description() {
+            return t("plugin.imageZoom.option.zoomSpeed.description");
+        },
         type: OptionType.SLIDER,
         markers: makeRange(0.1, 5, 0.2),
         default: 0.5,
@@ -93,8 +128,13 @@ export const settings = definePluginSettings({
     },
 
     showMetadata: {
+        get label() {
+            return t("plugin.imageZoom.option.showMetadata.label");
+        },
+        get description() {
+            return t("plugin.imageZoom.option.showMetadata.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show image metadata when double clicking on selected image",
         default: true,
     }
 });
@@ -112,7 +152,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
         <Menu.MenuGroup id="image-zoom">
             <Menu.MenuCheckboxItem
                 id="pc-square"
-                label="Square Lens"
+                label={t("plugin.imageZoom.context.square")}
                 checked={square}
                 action={() => {
                     settings.store.square = !square;
@@ -120,7 +160,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
             />
             <Menu.MenuCheckboxItem
                 id="pc-nearest-neighbour"
-                label="Nearest Neighbour"
+                label={t("plugin.imageZoom.context.nearest")}
                 checked={nearestNeighbour}
                 action={() => {
                     settings.store.nearestNeighbour = !nearestNeighbour;
@@ -128,7 +168,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
             />
             <Menu.MenuControlItem
                 id="pc-zoom"
-                label="Zoom"
+                label={t("plugin.imageZoom.context.zoom")}
                 control={(props, ref) => (
                     <Menu.MenuSliderControl
                         ref={ref}
@@ -136,13 +176,13 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
                         minValue={1}
                         maxValue={50}
                         value={settings.store.zoom}
-                        onChange={debounce((value: number) => settings.store.zoom = value, 100)}
+                        onChange={(value: number) => settings.store.zoom = value}
                     />
                 )}
             />
             <Menu.MenuControlItem
                 id="pc-size"
-                label="Lens Size"
+                label={t("plugin.imageZoom.context.size")}
                 control={(props, ref) => (
                     <Menu.MenuSliderControl
                         ref={ref}
@@ -150,13 +190,13 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
                         minValue={50}
                         maxValue={1000}
                         value={settings.store.size}
-                        onChange={debounce((value: number) => settings.store.size = value, 100)}
+                        onChange={(value: number) => settings.store.size = value}
                     />
                 )}
             />
             <Menu.MenuControlItem
                 id="pc-zoom-speed"
-                label="Zoom Speed"
+                label={t("plugin.imageZoom.context.zoomSpeed")}
                 control={(props, ref) => (
                     <Menu.MenuSliderControl
                         ref={ref}
@@ -164,7 +204,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
                         minValue={0.1}
                         maxValue={5}
                         value={settings.store.zoomSpeed}
-                        onChange={debounce((value: number) => settings.store.zoomSpeed = value, 100)}
+                        onChange={(value: number) => settings.store.zoomSpeed = value}
                         renderValue={(value: number) => `${value.toFixed(3)}x`}
                     />
                 )}
@@ -172,7 +212,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
             <Menu.MenuSeparator />
             <Menu.MenuCheckboxItem
                 id="pc-show-metadata"
-                label="Show Image Metadata"
+                label={t("plugin.imageZoom.context.showImageMetadata")}
                 checked={showMetadata}
                 action={() => {
                     settings.store.showMetadata = !showMetadata;
@@ -180,7 +220,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
             />
             <Menu.MenuItem
                 id="pc-view-metadata"
-                label="View Metadata"
+                label={t("plugin.imageZoom.context.view")}
                 action={() => {
                     const target = props.target as HTMLImageElement;
                     if (target && target.src) {
@@ -252,16 +292,16 @@ function createMetadataDisplay(imgElement: HTMLImageElement) {
     container.className = "pc-image-metadata";
     container.innerHTML = `
         <div class="pc-metadata-row">
-            <span class="pc-metadata-label">Filename:</span>
+            <span class="pc-metadata-label">${t("plugin.imageZoom.context.filename")}:</span>
             <span>${metadata.filename}</span>
         </div>
         <div class="pc-metadata-row">
-            <span class="pc-metadata-label">Dimensions:</span>
+            <span class="pc-metadata-label">${t("plugin.imageZoom.context.dimensions")}:</span>
             <span>${metadata.dimensions}</span>
         </div>
         <div class="pc-metadata-row">
-            <span class="pc-metadata-label">Size:</span>
-            <span>${metadata.size || "Loading..."}</span>
+            <span class="pc-metadata-label">${t("plugin.imageZoom.context.sizeHTML")}:</span>
+            <span>${metadata.size || t("plugin.imageZoom.context.loading")}</span>
         </div>
     `;
 
@@ -276,7 +316,7 @@ function getFilenameFromURL(url: string): string {
         const parts = cleanUrl.split("/");
         return decodeURIComponent(parts[parts.length - 1]);
     } catch {
-        return "Unknown";
+        return t("plugin.imageZoom.context.unknown");
     }
 }
 
@@ -302,6 +342,10 @@ export default definePlugin({
     description: "Lets you zoom in to images and gifs as well as displays image metadata. Use scroll wheel to zoom in and shift + scroll wheel to increase lens radius.",
     authors: [Devs.Aria, PcDevs.Campfire],
     tags: ["ImageUtilities"],
+
+    get displayDescription() {
+        return t("plugin.imageZoom.description");
+    },
 
     managedStyle,
 
@@ -340,10 +384,6 @@ export default definePlugin({
                 {
                     match: /componentWillUnmount\(\){/,
                     replace: "$&$self.unMountMagnifier();"
-                },
-                {
-                    match: /componentDidUpdate\(\i\){/,
-                    replace: "$&$self.updateMagnifier(this);"
                 }
             ]
         }
@@ -390,16 +430,12 @@ export default definePlugin({
                     this.root = createRoot(this.element!);
                 }
 
-                this.currentMagnifierElement = <Magnifier size={settings.store.size} zoom={settings.store.zoom} instance={instance} />;
+                this.currentMagnifierElement = <Magnifier instance={instance} />;
                 this.root.render(this.currentMagnifierElement);
             }
         } catch (error) {
             new Logger("ImageZoom").error("Failed to render magnifier:", error);
         }
-    },
-
-    updateMagnifier(instance) {
-        this.renderMagnifier(instance);
     },
 
     unMountMagnifier() {

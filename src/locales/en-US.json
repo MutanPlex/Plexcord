@@ -4207,6 +4207,58 @@
             "toast": {
                 "invalidFormat": "Invalid format, please use WxH format. Resetting to default."
             }
+        },
+        "imageZoom": {
+            "name": "ImageZoom",
+            "description": "Lets you zoom in to images and gifs as well as displays image metadata. Use scroll wheel to zoom in and shift + scroll wheel to increase lens radius.",
+            "option": {
+                "saveZoomValues": {
+                    "label": "Save Zoom Values",
+                    "description": "Whether to save zoom and lens size values"
+                },
+                "invertScroll": {
+                    "label": "Invert Scroll",
+                    "description": "Invert scroll"
+                },
+                "nearestNeighbour": {
+                    "label": "Nearest Neighbour",
+                    "description": "Use Nearest Neighbour Interpolation when scaling images"
+                },
+                "square": {
+                    "label": "Square",
+                    "description": "Make the lens square"
+                },
+                "zoom": {
+                    "label": "Zoom",
+                    "description": "Zoom of the lens"
+                },
+                "size": {
+                    "label": "Size",
+                    "description": "Radius / Size of the lens"
+                },
+                "zoomSpeed": {
+                    "label": "Zoom Speed",
+                    "description": "How fast the zoom / lens size changes"
+                },
+                "showMetadata": {
+                    "label": "Show Metadata",
+                    "description": "Show image metadata when double clicking on selected image"
+                }
+            },
+            "context": {
+                "square": "Square Lens",
+                "nearest": "Nearest Neighbour",
+                "zoom": "Zoom",
+                "size": "Lens Size",
+                "zoomSpeed": "Zoom Speed",
+                "showImageMetadata": "Show Image Metadata",
+                "view": "View Metadata",
+                "loading": "Loading...",
+                "unknown": "Unknown",
+                "sizeHTML": "Size",
+                "dimensions": "Dimensions",
+                "filename": "Filename"
+            }
         }
     }
 }
