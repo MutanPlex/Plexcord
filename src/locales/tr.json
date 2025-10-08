@@ -4132,6 +4132,10 @@
                 "ignore": "Yoksay",
                 "ignoreCalls": "Aramaları Yoksay"
             }
+        },
+        "ignoreTerms": {
+            "name": "IgnoreTerms",
+            "description": "Discord'un yeni hizmet şartlarını yok say"
         }
     }
 }

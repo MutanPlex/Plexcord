@@ -4132,6 +4132,10 @@
                 "ignore": "Ignore",
                 "ignoreCalls": "Ignore Calls"
             }
+        },
+        "ignoreTerms": {
+            "name": "IgnoreTerms",
+            "description": "Ignore Discord's new terms of service"
         }
     }
 }
