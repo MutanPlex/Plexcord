@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -14,7 +15,12 @@ const GifHostRegex = /^(.+?\.)?(tenor|giphy|imgur)\.com$/i;
 
 const settings = definePluginSettings({
     showFullUrl: {
-        description: "Show the full URL of the image instead of just the file name. Always enabled for GIFs because they usually have no meaningful file name",
+        get label() {
+            return t("plugin.imageFilename.option.showFullUrl.label");
+        },
+        get description() {
+            return t("plugin.imageFilename.option.showFullUrl.description");
+        },
         type: OptionType.BOOLEAN,
         default: false,
     },
@@ -25,6 +31,10 @@ export default definePlugin({
     authors: [Devs.Ven],
     description: "Display the file name of images & GIFs as a tooltip when hovering over them",
     settings,
+
+    get displayDescription() {
+        return t("plugin.imageFilename.description");
+    },
 
     patches: [
         {

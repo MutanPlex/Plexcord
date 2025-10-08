@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -12,6 +13,10 @@ export default definePlugin({
     name: "ImageLink",
     description: "Never hide image links in messages, even if it's the only content",
     authors: [Devs.Kyuuhachi, Devs.Sqaaakoi],
+
+    get displayDescription() {
+        return t("plugin.imageLink.description");
+    },
 
     patches: [
         {

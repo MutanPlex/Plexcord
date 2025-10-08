@@ -4140,6 +4140,20 @@
         "iLoveSpam": {
             "name": "ILoveSpam",
             "description": "'Muhtemel spam göndericilerinden' gelen mesajları gizleme."
+        },
+        "imageFilename": {
+            "name": "ImageFilename",
+            "description": "Görsellere ve GIF’lere fareyle geldiğinde dosya adını ipucu olarak gösterir.",
+            "option": {
+                "showFullUrl": {
+                    "label": "Tam URL'yi Göster",
+                    "description": "Yalnızca dosya adı yerine görselin tam URL’sini gösterir. GIF’ler için her zaman etkindir çünkü genellikle anlamlı bir dosya adları yoktur."
+                }
+            }
+        },
+        "imageLink": {
+            "name": "ImageLink",
+            "description": "Mesajlarda yalnızca görsel bağlantısı olsa bile görsel bağlantılarını asla gizlemez."
         }
     }
 }

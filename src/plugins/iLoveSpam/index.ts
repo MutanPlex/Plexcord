@@ -27,7 +27,7 @@ export default definePlugin({
     authors: [Devs.botato, Devs.Nyako],
 
     get displayDescription() {
-        return t("plugins.iLoveSpam.description");
+        return t("plugin.iLoveSpam.description");
     },
 
     patches: [

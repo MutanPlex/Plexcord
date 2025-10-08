@@ -4140,6 +4140,20 @@
         "iLoveSpam": {
             "name": "ILoveSpam",
             "description": "Do not hide messages from 'likely spammers'"
+        },
+        "imageFilename": {
+            "name": "ImageFilename",
+            "description": "Display the file name of images & GIFs as a tooltip when hovering over them",
+            "option": {
+                "showFullUrl": {
+                    "label": "Show Full URL",
+                    "description": "Show the full URL of the image instead of just the file name. Always enabled for GIFs because they usually have no meaningful file name"
+                }
+            }
+        },
+        "imageLink": {
+            "name": "ImageLink",
+            "description": "Never hide image links in messages, even if it's the only content"
         }
     }
 }
