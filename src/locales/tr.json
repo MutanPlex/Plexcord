@@ -4275,6 +4275,17 @@
                 "noImage": "Görsel belirtilmedi!",
                 "notImage": "Yüklenen dosya bir görsel değil"
             }
+        },
+        "implicitRelationships": {
+            "name": "ImplicitRelationships",
+            "description": "Arkadaşlar sekmesinde dolaylı ilişkilerinizi gösterir.",
+            "option": {
+                "sortByAffinity": {
+                    "label": "Yakınlığa Göre Sırala",
+                    "description": "Dolaylı ilişkilerin size olan yakınlığına göre sıralanıp sıralanmayacağını belirler."
+                }
+            },
+            "implicit": "Dolaylı"
         }
     }
 }

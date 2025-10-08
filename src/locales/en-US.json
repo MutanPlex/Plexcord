@@ -4275,6 +4275,17 @@
                 "noImage": "No Image specified!",
                 "notImage": "Upload is not an image"
             }
+        },
+        "implicitRelationships": {
+            "name": "ImplicitRelationships",
+            "description": "Shows your implicit relationships in the Friends tab.",
+            "option": {
+                "sortByAffinity": {
+                    "label": "Sort by Affinity",
+                    "description": "Whether to sort implicit relationships by their affinity to you."
+                }
+            },
+            "implicit": "Implicit"
         }
     }
 }

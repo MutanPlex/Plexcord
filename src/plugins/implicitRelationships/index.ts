@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -30,13 +31,18 @@ export default definePlugin({
     name: "ImplicitRelationships",
     description: "Shows your implicit relationships in the Friends tab.",
     authors: [Devs.Dolfies],
+
+    get displayDescription() {
+        return t("plugin.implicitRelationships.description");
+    },
+
     patches: [
         // Counts header
         {
             find: "#{intl::FRIENDS_ALL_HEADER}",
             replacement: {
                 match: /toString\(\)\}\);case (\i\.\i)\.PENDING/,
-                replace: 'toString()});case $1.IMPLICIT:return "Implicit — "+arguments[1];case $1.BLOCKED'
+                replace: 'toString()});case $1.IMPLICIT:return $self.getImplicitLabel() + " — "+arguments[1];case $1.BLOCKED'
             },
         },
         // No friends page
@@ -52,7 +58,7 @@ export default definePlugin({
             find: "#{intl::FRIENDS_SECTION_ONLINE}),className:",
             replacement: {
                 match: /,{id:(\i\.\i)\.PENDING,show:.+?className:(\i\.item)/,
-                replace: (rest, relationShipTypes, className) => `,{id:${relationShipTypes}.IMPLICIT,show:true,className:${className},content:"Implicit"}${rest}`
+                replace: (rest, relationShipTypes, className) => `,{id:${relationShipTypes}.IMPLICIT,show:true,className:${className},content:$self.getImplicitLabel()}${rest}`
             }
         },
         // Sections content
@@ -108,9 +114,14 @@ export default definePlugin({
     settings: definePluginSettings(
         {
             sortByAffinity: {
+                get label() {
+                    return t("plugin.implicitRelationships.option.sortByAffinity.label");
+                },
+                get description() {
+                    return t("plugin.implicitRelationships.option.sortByAffinity.description");
+                },
                 type: OptionType.BOOLEAN,
                 default: true,
-                description: "Whether to sort implicit relationships by their affinity to you.",
                 restartNeeded: true
             },
         }
@@ -120,6 +131,10 @@ export default definePlugin({
         return row.type === 5
             ? (UserAffinitiesStore.getUserAffinity(row.user.id)?.communicationRank ?? 0)
             : comparator(row);
+    },
+
+    getImplicitLabel() {
+        return t("plugin.implicitRelationships.implicit");
     },
 
     async fetchImplicitRelationships() {
@@ -167,6 +182,6 @@ export default definePlugin({
     },
 
     start() {
-        Constants.FriendsSections.IMPLICIT = "IMPLICIT";
+        Constants.FriendsSections.IMPLICIT = t("plugin.implicitRelationships.implicit");
     }
 });
