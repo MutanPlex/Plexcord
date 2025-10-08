@@ -4041,6 +4041,65 @@
                 "load": "Profili Yükle",
                 "randomize": "Rastgele"
             }
+        },
+        "ignoreActivities": {
+            "name": "IgnoreActivities",
+            "description": "Etkinliklerin yalnızca durumunda görünmesini engeller. Kayıtlı Oyunlar ve Etkinlikler sekmelerinden hangilerinin yok sayılacağını belirleyebilir veya aşağıdaki genel ayarları kullanabilirsin.",
+            "modal": {
+                "import": {
+                    "title": "CustomRPC eklentisinin uygulama kimliğini filtre listesine aktar"
+                },
+                "filter": {
+                    "title": "Filtre Listesi",
+                    "description": "Filtrelenecek etkinlik kimliklerinin virgülle ayrılmış listesi (Belirli RPC etkinliklerini ve CustomRPC’yi filtrelemek için yararlıdır)"
+                }
+            },
+            "toast": {
+                "id": {
+                    "notSet": "CustomRPC uygulama kimliği ayarlanmamış.",
+                    "alreadyAdded": "CustomRPC uygulama kimliği zaten eklenmiş."
+                }
+            },
+            "button": {
+                "import": "CustomRPC Kimliğini Aktar"
+            },
+            "option": {
+                "importCustomRPC": {
+                    "label": "CustomRPC’yi Aktar"
+                },
+                "listMode": {
+                    "label": "Liste Modu",
+                    "description": "Filtre listesinin nasıl uygulanacağını seç",
+                    "blacklist": "Kara Liste (Yalnızca listedekileri yok say)",
+                    "whitelist": "Beyaz Liste (Listedekiler dışındakileri yok say)"
+                },
+                "idList": {
+                    "label": "Kimlik Listesi"
+                },
+                "ignorePlaying": {
+                    "label": "Oynananları Yok Say",
+                    "description": "Tüm oynanan etkinlikleri yok say (Genellikle oyun ve RPC etkinlikleridir)"
+                },
+                "ignoreStreaming": {
+                    "label": "Yayınları Yok Say",
+                    "description": "Tüm yayın etkinliklerini yok say"
+                },
+                "ignoreListening": {
+                    "label": "Dinlenenleri Yok Say",
+                    "description": "Tüm dinleme etkinliklerini yok say (Genellikle Spotify etkinlikleridir)"
+                },
+                "ignoreWatching": {
+                    "label": "İzlenenleri Yok Say",
+                    "description": "Tüm izleme etkinliklerini yok say"
+                },
+                "ignoreCompeting": {
+                    "label": "Rekabet Etkinliklerini Yok Say",
+                    "description": "Tüm rekabet (yarışma) etkinliklerini yok say (Genellikle özel oyun etkinlikleridir)"
+                },
+                "ignoredActivities": {
+                    "label": "Yok Sayılan Etkinlikler"
+                }
+            }
         }
     }
 }

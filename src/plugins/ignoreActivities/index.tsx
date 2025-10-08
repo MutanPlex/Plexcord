@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -83,22 +84,22 @@ function recalculateActivities() {
 function ImportCustomRPCComponent() {
     return (
         <Flex flexDirection="column">
-            <Forms.FormText>Import the application id of the CustomRPC plugin to the filter list</Forms.FormText>
+            <Forms.FormText>{t("plugin.ignoreActivities.modal.import.title")}</Forms.FormText>
             <div>
                 <Button
                     onClick={() => {
                         const id = Settings.plugins.CustomRPC?.appID as string | undefined;
                         if (!id) {
-                            return showToast("CustomRPC application ID is not set.", Toasts.Type.FAILURE);
+                            return showToast(t("plugin.ignoreActivities.toast.id.notSet"), Toasts.Type.FAILURE);
                         }
 
                         const isAlreadyAdded = idsListPushID?.(id);
                         if (isAlreadyAdded) {
-                            showToast("CustomRPC application ID is already added.", Toasts.Type.FAILURE);
+                            showToast(t("plugin.ignoreActivities.toast.id.alreadyAdded"), Toasts.Type.FAILURE);
                         }
                     }}
                 >
-                    Import CustomRPC ID
+                    {t("plugin.ignoreActivities.button.import")}
                 </Button>
             </div>
         </Flex>
@@ -133,8 +134,8 @@ function IdsListComponent(props: { setValue: (value: string) => void; }) {
 
     return (
         <Forms.FormSection>
-            <Forms.FormTitle tag="h3">Filter List</Forms.FormTitle>
-            <Forms.FormText className={Margins.bottom8}>Comma separated list of activity IDs to filter (Useful for filtering specific RPC activities and CustomRPC</Forms.FormText>
+            <Forms.FormTitle tag="h3">{t("plugin.ignoreActivities.modal.filter.title")}</Forms.FormTitle>
+            <Forms.FormText className={Margins.bottom8}>{t("plugin.ignoreActivities.modal.filter.description")}</Forms.FormText>
             <TextInput
                 type="text"
                 value={idsList}
@@ -147,26 +148,39 @@ function IdsListComponent(props: { setValue: (value: string) => void; }) {
 
 const settings = definePluginSettings({
     importCustomRPC: {
+        get label() {
+            return t("plugin.ignoreActivities.option.importCustomRPC.label");
+        },
         type: OptionType.COMPONENT,
         component: ImportCustomRPCComponent
     },
     listMode: {
+        get label() {
+            return t("plugin.ignoreActivities.option.listMode.label");
+        },
+        get description() {
+            return t("plugin.ignoreActivities.option.listMode.description");
+        },
         type: OptionType.SELECT,
-        description: "Change the mode of the filter list",
-        options: [
-            {
-                label: "Whitelist",
-                value: FilterMode.Whitelist,
-                default: true
-            },
-            {
-                label: "Blacklist",
-                value: FilterMode.Blacklist,
-            }
-        ],
+        get options() {
+            return [
+                {
+                    label: t("plugin.ignoreActivities.option.listMode.whitelist"),
+                    value: FilterMode.Whitelist,
+                    default: true
+                },
+                {
+                    label: t("plugin.ignoreActivities.option.listMode.blacklist"),
+                    value: FilterMode.Blacklist,
+                }
+            ];
+        },
         onChange: recalculateActivities
     },
     idsList: {
+        get label() {
+            return t("plugin.ignoreActivities.modal.filter.title");
+        },
         type: OptionType.COMPONENT,
         default: "",
         onChange(newValue: string) {
@@ -177,36 +191,64 @@ const settings = definePluginSettings({
         component: props => <IdsListComponent setValue={props.setValue} />
     },
     ignorePlaying: {
+        get label() {
+            return t("plugin.ignoreActivities.option.ignorePlaying.label");
+        },
+        get description() {
+            return t("plugin.ignoreActivities.option.ignorePlaying.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Ignore all playing activities (These are usually game and RPC activities)",
         default: false,
         onChange: recalculateActivities
     },
     ignoreStreaming: {
+        get label() {
+            return t("plugin.ignoreActivities.option.ignoreStreaming.label");
+        },
+        get description() {
+            return t("plugin.ignoreActivities.option.ignoreStreaming.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Ignore all streaming activities",
         default: false,
         onChange: recalculateActivities
     },
     ignoreListening: {
+        get label() {
+            return t("plugin.ignoreActivities.option.ignoreListening.label");
+        },
+        get description() {
+            return t("plugin.ignoreActivities.option.ignoreListening.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Ignore all listening activities (These are usually spotify activities)",
         default: false,
         onChange: recalculateActivities
     },
     ignoreWatching: {
+        get label() {
+            return t("plugin.ignoreActivities.option.ignoreWatching.label");
+        },
+        get description() {
+            return t("plugin.ignoreActivities.option.ignoreWatching.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Ignore all watching activities",
         default: false,
         onChange: recalculateActivities
     },
     ignoreCompeting: {
+        get label() {
+            return t("plugin.ignoreActivities.option.ignoreCompeting.label");
+        },
+        get description() {
+            return t("plugin.ignoreActivities.option.ignoreCompeting.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Ignore all competing activities (These are normally special game activities)",
         default: false,
         onChange: recalculateActivities
     },
     ignoredActivities: {
+        get label() {
+            return t("plugin.ignoreActivities.option.idList.label");
+        },
         type: OptionType.CUSTOM,
         default: [] as IgnoredActivity[],
         onChange: recalculateActivities,
@@ -235,6 +277,10 @@ export default definePlugin({
     authors: [Devs.Nuckyz, Devs.Kylie],
     description: "Ignore activities from showing up on your status ONLY. You can configure which ones are specifically ignored from the Registered Games and Activities tabs, or use the general settings below",
     dependencies: ["UserSettingsAPI"],
+
+    get displayDescription() {
+        return t("plugin.ignoreActivities.description");
+    },
 
     settings,
 

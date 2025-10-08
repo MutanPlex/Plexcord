@@ -4041,6 +4041,65 @@
                 "load": "Load Base",
                 "randomize": "Randomize"
             }
+        },
+        "ignoreActivities": {
+            "name": "IgnoreActivities",
+            "description": "Ignore activities from showing up on your status ONLY. You can configure which ones are specifically ignored from the Registered Games and Activities tabs, or use the general settings below",
+            "modal": {
+                "import": {
+                    "title": "Import the application id of the CustomRPC plugin to the filter list"
+                },
+                "filter": {
+                    "title": "Filter List",
+                    "description": "Comma separated list of activity IDs to filter (Useful for filtering specific RPC activities and CustomRPC)"
+                }
+            },
+            "toast": {
+                "id": {
+                    "notSet": "CustomRPC application ID is not set.",
+                    "alreadyAdded": "CustomRPC application ID is already added."
+                }
+            },
+            "button": {
+                "import": "Import CustomRPC ID"
+            },
+            "option": {
+                "importCustomRPC": {
+                    "label": "Import CustomRPC"
+                },
+                "listMode": {
+                    "label": "List Mode",
+                    "description": "Choose how the filter list is applied",
+                    "blacklist": "Blacklist (Ignore only what's in the list)",
+                    "whitelist": "Whitelist (Ignore everything except what's in the list)"
+                },
+                "idList": {
+                    "label": "IDs List"
+                },
+                "ignorePlaying": {
+                    "label": "Ignore Playing",
+                    "description": "Ignore all playing activities (These are usually game and RPC activities)"
+                },
+                "ignoreStreaming": {
+                    "label": "Ignore Streaming",
+                    "description": "Ignore all streaming activities"
+                },
+                "ignoreListening": {
+                    "label": "Ignore Listening",
+                    "description": "Ignore all listening activities (These are usually spotify activities)"
+                },
+                "ignoreWatching": {
+                    "label": "Ignore Watching",
+                    "description": "Ignore all watching activities"
+                },
+                "ignoreCompeting": {
+                    "label": "Ignore Competing",
+                    "description": "Ignore all competing activities (These are normally special game activities)"
+                },
+                "ignoredActivities": {
+                    "label": "Ignored Activities"
+                }
+            }
         }
     }
 }

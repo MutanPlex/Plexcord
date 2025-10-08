@@ -146,8 +146,9 @@ export default definePlugin({
             find: "#{intl::USER_SETTINGS_ACTIONS_MENU_LABEL}",
             replacement: [
                 {
-                    match: /(\(0,\i.\i\)\(\))(?=\.filter\(\i=>\{let\{section:\i\}=)/,
-                    replace: "$self.wrapMenu($1)"
+                    match: /=\[\];return (\i)(?=\.forEach)/,
+                    replace: "=$self.wrapMap([]);return $self.transformSettingsEntries($1)",
+                    predicate: () => settings.store.organizeMenu
                 },
                 {
                     match: /case \i\.\i\.DEVELOPER_OPTIONS:return \i;/,
