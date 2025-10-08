@@ -4154,6 +4154,59 @@
         "imageLink": {
             "name": "ImageLink",
             "description": "Mesajlarda yalnızca görsel bağlantısı olsa bile görsel bağlantılarını asla gizlemez."
+        },
+        "imagePreview": {
+            "name": "ImagePreview",
+            "description": "Mesaj görsellerine, avatarlarına, bağlantılara ve çıkartmalara fareyle gelindiğinde tam önizleme gösterir.",
+            "previewOf": "{{type}} önizlemesi",
+            "imagePreview": "Görsel Önizleme",
+            "videoPreview": "Video Önizleme",
+            "loadingImage": "Görsel Yükleniyor",
+            "option": {
+                "messageImages": {
+                    "label": "Mesaj Görselleri",
+                    "description": "Mesaj görselleri için fareyle üzerine gelme algılamasını etkinleştirir"
+                },
+                "messageAvatars": {
+                    "label": "Mesaj Avatarları",
+                    "description": "Mesaj avatarları için fareyle üzerine gelme algılamasını etkinleştirir"
+                },
+                "messageLinks": {
+                    "label": "Mesaj Bağlantıları",
+                    "description": "Mesaj bağlantıları için fareyle üzerine gelme algılamasını etkinleştirir"
+                },
+                "messageStickers": {
+                    "label": "Mesaj Çıkartmaları",
+                    "description": "Mesaj çıkartmaları için fareyle üzerine gelme algılamasını etkinleştirir"
+                },
+                "mouseOnlyMode": {
+                    "label": "Sadece Fare Modu",
+                    "description": "Görsellere yakınlaştırma ve taşıma yapmak için CTRL tuşuna basma gerekliliğini kaldırır"
+                },
+                "fixedImage": {
+                    "label": "Sabit Görsel",
+                    "description": "Görsel önizlemesini ilk üzerine gelinen noktada sabitler"
+                },
+                "fileInformation": {
+                    "label": "Dosya Bilgisi",
+                    "description": "Fareyle üzerine gelindiğinde dosya bilgisini gösterir"
+                },
+                "hoverDelay": {
+                    "label": "Gecikme Süresi",
+                    "description": "Görsel önizlemesinin görünmesi için gereken saniye cinsinden gecikme"
+                },
+                "zoomFactor": {
+                    "label": "Yakınlaştırma Faktörü",
+                    "description": "Görselin yakınlaştırma hızını belirler"
+                },
+                "defaultMaxSize": {
+                    "label": "Varsayılan Maksimum Boyut",
+                    "description": "Görseller için varsayılan maksimum boyutu ayarlar (WxH formatı gerektirir)"
+                }
+            },
+            "toast": {
+                "invalidFormat": "Geçersiz format, lütfen WxH formatını kullanın. Varsayılana sıfırlanıyor."
+            }
         }
     }
 }

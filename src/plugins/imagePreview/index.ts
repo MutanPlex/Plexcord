@@ -7,6 +7,7 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { StickerFormatType } from "@plexcord/discord-types/enums";
 import { PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
@@ -192,7 +193,7 @@ function loadImagePreview(url: string, sticker: boolean) {
 
     loadingSpinner = document.createElement("div");
     loadingSpinner.className = "loading-spinner";
-    loadingSpinner.setAttribute("aria-label", "Loading image");
+    loadingSpinner.setAttribute("aria-label", t("plugin.imagePreview.loadingImage"));
     loadingSpinner.setAttribute("role", "status");
 
     preview.appendChild(loadingSpinner);
@@ -246,7 +247,7 @@ function loadImagePreview(url: string, sticker: boolean) {
         video.autoplay = true;
         video.muted = true;
         video.loop = true;
-        video.setAttribute("aria-label", `Video preview: ${url.split("/").pop()?.split("?")[0] || ""}`);
+        video.setAttribute("aria-label", `${t("plugin.imagePreview.videoPreview")}: ${url.split("/").pop()?.split("?")[0] || ""}`);
 
         video.onplay = () => {
             video.removeAttribute("controls");
@@ -282,8 +283,8 @@ function loadImagePreview(url: string, sticker: boolean) {
         const img = new Image();
         img.src = url;
         img.className = "preview-media";
-        img.setAttribute("aria-label", `Image preview: ${url.split("/").pop()?.split("?")[0] || ""}`);
-        img.setAttribute("alt", `Preview of ${url.split("/").pop()?.split("?")[0] || ""}`);
+        img.setAttribute("aria-label", `${t("plugin.imagePreview.imagePreview")}: ${url.split("/").pop()?.split("?")[0] || ""}`);
+        img.setAttribute("alt", t("plugin.imagePreview.previewOf", { type: url.split("/").pop()?.split("?")[0] || "" }));
         img.onload = () => {
             currentPreviewFileSize = [img.naturalWidth, img.naturalHeight];
             fileSizeSpan.textContent = `${currentPreviewFileSize[0]}x${currentPreviewFileSize[1]}`;
@@ -569,6 +570,10 @@ export default definePlugin({
     description: "Hover on message images, avatars, links, and message stickers to show a full preview.",
     authors: [PcDevs.creations, PcDevs.MutanPlex],
     settings: settings,
+
+    get displayDescription() {
+        return t("plugin.imagePreview.description");
+    },
 
     start() {
         const targetNode = document.body;

@@ -3635,7 +3635,7 @@
             "name": "GameActivityToggle",
             "description": "Adds a toggle to the user popout to show/hide your game activity",
             "tooltip": "Toggle Game Activity",
-            "gameActivity" : {
+            "gameActivity": {
                 "enabled": "Game Activity Enabled",
                 "disabled": "Game Activity Disabled"
             },
@@ -3662,7 +3662,7 @@
                     "name": "Name",
                     "gifs": "GIFs",
                     "created": "Created At",
-                    "updated" : "Last Updated",
+                    "updated": "Last Updated",
                     "close": "Close",
                     "rename": "Rename",
                     "move": "Move to Collection",
@@ -4154,6 +4154,59 @@
         "imageLink": {
             "name": "ImageLink",
             "description": "Never hide image links in messages, even if it's the only content"
+        },
+        "imagePreview": {
+            "name": "ImagePreview",
+            "description": "Hover on message images, avatars, links, and message stickers to show a full preview.",
+            "previewOf": "Preview of {{type}}",
+            "imagePreview": "Image Preview",
+            "videoPreview": "Video Preview",
+            "loadingImage": "Loading Image",
+            "option": {
+                "messageImages": {
+                    "label": "Message Images",
+                    "description": "Enable message images hover detection"
+                },
+                "messageAvatars": {
+                    "label": "Message Avatars",
+                    "description": "Enable message avatars hover detection"
+                },
+                "messageLinks": {
+                    "label": "Message Links",
+                    "description": "Enable message links hover detection"
+                },
+                "messageStickers": {
+                    "label": "Message Stickers",
+                    "description": "Enable message stickers hover detection"
+                },
+                "mouseOnlyMode": {
+                    "label": "Mouse Only Mode",
+                    "description": "Allows you to skip having to hold control to zoom in and move images"
+                },
+                "fixedImage": {
+                    "label": "Fixed Image",
+                    "description": "Fixes the image preview to the initial point of hover"
+                },
+                "fileInformation": {
+                    "label": "File Information",
+                    "description": "Show file information on hover"
+                },
+                "hoverDelay": {
+                    "label": "Hover Delay",
+                    "description": "Delay in seconds before the image preview appears"
+                },
+                "zoomFactor": {
+                    "label": "Zoom Factor",
+                    "description": "Speed at which the image zooms in"
+                },
+                "defaultMaxSize": {
+                    "label": "Default Max Size",
+                    "description": "Default max size for images, requires WxH format"
+                }
+            },
+            "toast": {
+                "invalidFormat": "Invalid format, please use WxH format. Resetting to default."
+            }
         }
     }
 }
