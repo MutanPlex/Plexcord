@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t, tJsx } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { GuildMember } from "@plexcord/discord-types";
@@ -19,9 +20,9 @@ export function showInRoleModal(members: GuildMember[], roleId: string, channelI
             <ErrorBoundary>
                 <ModalRoot {...props} size={ModalSize.DYNAMIC} fullscreenOnMobile={true} >
                     <ModalHeader className={cl("header")}>
-                        <Forms.FormText style={{ fontSize: "1.2rem", fontWeight: "bold", marginRight: "7px" }}>Members of role {
+                        <Forms.FormText style={{ fontSize: "1.2rem", fontWeight: "bold", marginRight: "7px" }}>{
                             Parser.parse(`<@&${roleId}>`, true, { channelId, viewingChannelId: channelId })
-                        } ({members.length})</Forms.FormText>
+                        }: {tJsx("plugin.inRole.modal.member.title")} ({members.length})</Forms.FormText>
                         <ModalCloseButton onClick={props.onClose} className={cl("close")} />
                     </ModalHeader>
                     <ModalContent>
@@ -33,7 +34,7 @@ export function showInRoleModal(members: GuildMember[], roleId: string, channelI
                                             {Parser.parse(`<@${member.userId}>`, true, { channelId, viewingChannelId: channelId })}
                                         </Forms.FormText>
                                     </>
-                                ) : <Forms.FormText>Looks like no online cached members with that role were found. Try scrolling down on your member list to cache more users!</Forms.FormText>
+                                ) : <Forms.FormText>{t("plugin.inRole.modal.member.noMembers")}</Forms.FormText>
                             }
                         </div>
                     </ModalContent>

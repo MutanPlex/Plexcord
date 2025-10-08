@@ -4286,6 +4286,35 @@
                 }
             },
             "implicit": "Dolaylı"
+        },
+        "inRole": {
+            "name": "InRole",
+            "description": "Rol bağlam menüsünü veya /inrole komutunu kullanarak bir rolde kimlerin olduğunu öğrenin (eklenti bilgilerini okuyun!)",
+            "command": {
+                "inrole": {
+                    "description": "Bir rolde kimlerin olduğunu öğren",
+                    "role": "Rol",
+                    "noGuild": "Bir sunucuda olduğunuzdan emin olun."
+                }
+            },
+            "context": {
+                "view": "Roldaki Üyeleri Görüntüle"
+            },
+            "modal": {
+                "about": {
+                    "title": "Sınırlamalar",
+                    "description": "Sunucuda moderasyon izinlerine sahip değilseniz ve sunucu büyükse (100'den fazla üye), eklenti şu şekillerde sınırlı olabilir:",
+                    "list": {
+                        "one": "Çevrimdışı üyeler listelenmeyecektir",
+                        "two": "Varsayılan olarak en fazla 100 üye listelenecektir. Daha fazla üye görmek için üye listesinde aşağı kaydırın.",
+                        "three": "Ancak arkadaşlarınız, durumlarından bağımsız olarak her zaman gösterilecektir."
+                    }
+                },
+                "member": {
+                    "title": "Rolündeki Üyeler",
+                    "noMembers": "Bu role sahip çevrimiçi önbelleğe alınmış üye bulunamadı. Daha fazla kullanıcı önbelleğe almak için üye listenizde aşağı kaydırmayı deneyin!"
+                }
+            }
         }
     }
 }

@@ -4286,6 +4286,35 @@
                 }
             },
             "implicit": "Implicit"
+        },
+        "inRole": {
+            "name": "InRole",
+            "description": "Know who is in a role with the role context menu or /inrole command (read plugin info!)",
+            "command": {
+                "inrole": {
+                    "description": "Know who is in a role",
+                    "role": "The role",
+                    "noGuild": "Make sure that you are in a server."
+                }
+            },
+            "context": {
+                "view": "View Members in Role"
+            },
+            "modal": {
+                "about": {
+                    "title": "Limitations",
+                    "description": "If you don't have mod permissions on the server, and that server is large (over 100 members), the plugin may be limited in the following ways",
+                    "list": {
+                        "one": "Offline members won't be listed",
+                        "two": "Up to 100 members will be listed by default. To get more, scroll down in the member list to load more members.",
+                        "three": "However, friends will always be shown regardless of their status."
+                    }
+                },
+                "member": {
+                    "title": "Role Members",
+                    "noMembers": "Looks like no online cached members with that role were found. Try scrolling down on your member list to cache more users!"
+                }
+            }
         }
     }
 }

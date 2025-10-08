@@ -8,6 +8,7 @@
 import "./style.css";
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, sendBotMessage } from "@api/Commands";
+import { t } from "@api/i18n";
 import { getUserSettingLazy } from "@api/UserSettings";
 import { InfoIcon } from "@components/Icons";
 import { GuildMember } from "@plexcord/discord-types";
@@ -36,6 +37,11 @@ export default definePlugin({
     description: "Know who is in a role with the role context menu or /inrole command (read plugin info!)",
     authors: [Devs.nin0dev],
     dependencies: ["UserSettingsAPI"],
+
+    get displayDescription() {
+        return t("plugin.inRole.description");
+    },
+
     start() {
         // DeveloperMode needs to be enabled for the context menu to be shown
         DeveloperMode.updateSetting(true);
@@ -43,11 +49,11 @@ export default definePlugin({
     settingsAboutComponent: () => {
         return (
             <>
-                <Forms.FormText style={{ fontSize: "1.2rem", marginTop: "15px", fontWeight: "bold" }}>{Parser.parse(":warning:")} Limitations</Forms.FormText>
-                <Forms.FormText style={{ marginTop: "10px", fontWeight: "500" }} >If you don't have mod permissions on the server, and that server is large (over 100 members), the plugin may be limited in the following ways:</Forms.FormText>
-                <Forms.FormText>• Offline members won't be listed</Forms.FormText>
-                <Forms.FormText>• Up to 100 members will be listed by default. To get more, scroll down in the member list to load more members.</Forms.FormText>
-                <Forms.FormText>• However, friends will always be shown regardless of their status.</Forms.FormText>
+                <Forms.FormText style={{ fontSize: "1.2rem", marginTop: "15px", fontWeight: "bold" }}>{Parser.parse(":warning:")} {t("plugin.inRole.modal.about.title")}</Forms.FormText>
+                <Forms.FormText style={{ marginTop: "10px", fontWeight: "500" }} >{t("plugin.inRole.modal.about.description")}:</Forms.FormText>
+                <Forms.FormText>• {t("plugin.inRole.modal.about.list.one")}</Forms.FormText>
+                <Forms.FormText>• {t("plugin.inRole.modal.about.list.two")}</Forms.FormText>
+                <Forms.FormText>• {t("plugin.inRole.modal.about.list.three")}</Forms.FormText>
             </>
         );
     },
@@ -56,11 +62,17 @@ export default definePlugin({
         {
             name: "inrole",
             description: "Know who is in a role",
+            get displayDescription() {
+                return t("plugin.inRole.command.inrole.description");
+            },
             inputType: ApplicationCommandInputType.BUILT_IN,
             options: [
                 {
                     name: "role",
                     description: "The role",
+                    get displayDescription() {
+                        return t("plugin.inRole.command.inrole.role");
+                    },
                     type: ApplicationCommandOptionType.ROLE,
                     required: true
                 },
@@ -68,7 +80,7 @@ export default definePlugin({
             execute: (args, ctx) => {
                 // Guild check
                 if (!ctx.guild) {
-                    return sendBotMessage(ctx.channel.id, { content: "Make sure that you are in a server." });
+                    return sendBotMessage(ctx.channel.id, { author: { username: "Plexcord" }, content: t("plugin.inRole.command.inrole.noGuild") });
                 }
                 const role = args[0].value;
                 showInRoleModal(getMembersInRole(role, ctx.guild.id), role, ctx.channel.id);
@@ -89,7 +101,7 @@ export default definePlugin({
             children.push(
                 <Menu.MenuItem
                     id="pc-view-inrole"
-                    label="View Members in Role"
+                    label={t("plugin.inRole.context.view")}
                     action={() => {
                         showInRoleModal(getMembersInRole(role.id, guild.id), role.id, channel.id);
                     }}
@@ -115,7 +127,7 @@ export default definePlugin({
             children.push(
                 <Menu.MenuItem
                     id="pc-view-inrole"
-                    label="View Members in Role"
+                    label={t("plugin.inRole.context.view")}
                     action={() => {
                         showInRoleModal(getMembersInRole(role.id, guild.id), role.id, channel.id);
                     }}
