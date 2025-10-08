@@ -4136,6 +4136,10 @@
         "ignoreTerms": {
             "name": "IgnoreTerms",
             "description": "Ignore Discord's new terms of service"
+        },
+        "iLoveSpam": {
+            "name": "ILoveSpam",
+            "description": "Do not hide messages from 'likely spammers'"
         }
     }
 }

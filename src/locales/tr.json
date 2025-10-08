@@ -4136,6 +4136,10 @@
         "ignoreTerms": {
             "name": "IgnoreTerms",
             "description": "Discord'un yeni hizmet şartlarını yok say"
+        },
+        "iLoveSpam": {
+            "name": "ILoveSpam",
+            "description": "'Muhtemel spam göndericilerinden' gelen mesajları gizleme."
         }
     }
 }
