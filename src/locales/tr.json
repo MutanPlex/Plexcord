@@ -4118,6 +4118,20 @@
                     "label": "Yok Sayılan Etkinlikler"
                 }
             }
+        },
+        "ignoreCalls": {
+            "name": "IgnoreCalls",
+            "description": "Belirli kullanıcılar veya DM gruplarından gelen aramaları yok saymanı sağlar.",
+            "option": {
+                "ignoreTimeout": {
+                    "label": "Yoksayma Zaman Aşımı",
+                    "description": "Yoksay düğmesine basmak için zaman aşımı süresi"
+                }
+            },
+            "button": {
+                "ignore": "Yoksay",
+                "ignoreCalls": "Aramaları Yoksay"
+            }
         }
     }
 }

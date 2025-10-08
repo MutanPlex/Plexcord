@@ -6,6 +6,7 @@
  */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { ErrorBoundary } from "@components/index";
@@ -26,7 +27,7 @@ const ContextMenuPatch: NavContextMenuPatchCallback = (children, { channel }: { 
         <Menu.MenuSeparator />,
         <Menu.MenuCheckboxItem
             id="ic-ignore-calls"
-            label="Ignore Calls"
+            label={t("plugin.ignoreCalls.button.ignoreCalls")}
             checked={checked}
             action={() => {
                 if (checked)
@@ -43,8 +44,13 @@ const ContextMenuPatch: NavContextMenuPatchCallback = (children, { channel }: { 
 
 const settings = definePluginSettings({
     ignoreTimeout: {
+        get label() {
+            return t("plugin.ignoreCalls.option.ignoreTimeout.label");
+        },
+        get description() {
+            return t("plugin.ignoreCalls.option.ignoreTimeout.description");
+        },
         type: OptionType.SLIDER,
-        description: "Timeout to click ignore",
         markers: makeRange(0, 10000, 1000),
         default: 5000,
         stickToMarkers: true,
@@ -57,6 +63,11 @@ export default definePlugin({
     description: "Allows you to ignore calls from specific users or dm groups.",
     authors: [PcDevs.TheArmagan],
     settings,
+
+    get displayDescription() {
+        return t("plugin.ignoreCalls.description");
+    },
+
     patches: [
         {
             find: "#{intl::INCOMING_CALL_ELLIPSIS}",
@@ -94,7 +105,7 @@ export default definePlugin({
                     className={cl("render")}
                     onClick={() => ignoredChannelIds.push(channel.id)}
                 >
-                    Ignore
+                    {t("plugin.ignoreCalls.button.ignore")}
                 </span>
             </ErrorBoundary >
         );

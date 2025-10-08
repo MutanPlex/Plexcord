@@ -4118,6 +4118,20 @@
                     "label": "Ignored Activities"
                 }
             }
+        },
+        "ignoreCalls": {
+            "name": "IgnoreCalls",
+            "description": "Allows you to ignore calls from specific users or dm groups.",
+            "option": {
+                "ignoreTimeout": {
+                    "label": "Ignore Timeout",
+                    "description": "Timeout to click ignore"
+                }
+            },
+            "button": {
+                "ignore": "Ignore",
+                "ignoreCalls": "Ignore Calls"
+            }
         }
     }
 }
