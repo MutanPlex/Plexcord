@@ -4315,6 +4315,19 @@
                     "noMembers": "Bu role sahip çevrimiçi önbelleğe alınmış üye bulunamadı. Daha fazla kullanıcı önbelleğe almak için üye listenizde aşağı kaydırmayı deneyin!"
                 }
             }
+        },
+        "instantScreenshare": {
+            "name": "InstantScreenshare",
+            "description": "Bir ses kanalına katıldığınızda anında ekran paylaşımı yapmanızı sağlar",
+            "option": {
+                "streamMedia": {
+                    "label": "Yayınlanacak medya kaynağı",
+                    "description": "Bulunamazsa ana ekrana sıfırlanır",
+                    "loading": "Medya kaynakları yükleniyor...",
+                    "none": "Hiçbir medya kaynağı bulunamadı",
+                    "placeholder": "Yayınlamak için bir medya kaynağı seçin"
+                }
+            }
         }
     }
 }

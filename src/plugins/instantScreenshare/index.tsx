@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { VoiceState } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -41,6 +42,10 @@ export default definePlugin({
     description: "Instantly screenshare when joining a voice channel",
     authors: [Devs.HAHALOSAH, Devs.thororen],
     settings,
+    get displayDescription() {
+        return t("plugin.instantScreenshare.description");
+    },
+
     flux: {
         async VOICE_STATE_UPDATES({ voiceStates }: { voiceStates: VoiceState[]; }) {
             const myId = UserStore.getCurrentUser().id;

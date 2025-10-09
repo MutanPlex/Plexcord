@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Logger } from "@utils/Logger";
 import { OptionType } from "@utils/types";
@@ -51,7 +52,7 @@ function StreamSimplePicker({ streamMediaSelection, streamMedia }: PickerProps) 
 
     return (
         <SearchableSelect
-            placeholder="Select a media source to stream "
+            placeholder={t("plugin.instantScreenshare.option.streamMedia.placeholder")}
             maxVisibleItems={5}
             options={options}
             value={options.find(o => o.value === streamMedia)}
@@ -85,8 +86,8 @@ function ScreenSetting() {
         return () => { active = false; };
     }, []);
 
-    if (loading) return <Forms.FormText>Loading media sources...</Forms.FormText>;
-    if (!streamMediaSelection.length) return <Forms.FormText>No Media found.</Forms.FormText>;
+    if (loading) return <Forms.FormText>{t("plugin.instantScreenshare.option.streamMedia.loading")}</Forms.FormText>;
+    if (!streamMediaSelection.length) return <Forms.FormText>{t("plugin.instantScreenshare.option.streamMedia.none")}</Forms.FormText>;
 
     return <StreamSimplePicker streamMediaSelection={streamMediaSelection} streamMedia={streamMedia} />;
 }
@@ -94,8 +95,8 @@ function ScreenSetting() {
 function SettingSection() {
     return (
         <Forms.FormSection>
-            <Forms.FormTitle>Media source to stream</Forms.FormTitle>
-            <Forms.FormText>Resets to main screen if not found</Forms.FormText>
+            <Forms.FormTitle>{t("plugin.instantScreenshare.option.streamMedia.label")}</Forms.FormTitle>
+            <Forms.FormText>{t("plugin.instantScreenshare.option.streamMedia.description")}</Forms.FormText>
             <ScreenSetting />
         </Forms.FormSection>
     );
