@@ -18,6 +18,7 @@
 */
 
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
+import { t } from "@api/i18n";
 import { updateMessage } from "@api/MessageUpdater";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -48,10 +49,10 @@ function PopOverIcon() {
 
 function Indicator() {
     return (
-        <Tooltip text="This message has a hidden message! (InvisibleChat)">
+        <Tooltip text={t("plugin.invisibleChat.tooltip.hidden")}>
             {({ onMouseEnter, onMouseLeave }) => (
                 <img
-                    aria-label="Hidden Message Indicator (InvisibleChat)"
+                    aria-label={t("plugin.invisibleChat.button.hidden")}
                     onMouseEnter={onMouseEnter}
                     onMouseLeave={onMouseLeave}
                     src="https://github.com/SammCheese/invisible-chat/raw/NewReplugged/src/assets/lock.png"
@@ -71,7 +72,7 @@ const ChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
 
     return (
         <ChatBarButton
-            tooltip="Encrypt Message"
+            tooltip={t("plugin.invisibleChat.button.encrypt")}
             onClick={() => buildEncModal()}
 
             buttonProps={{
@@ -94,9 +95,14 @@ const ChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
 
 const settings = definePluginSettings({
     savedPasswords: {
+        get label() {
+            return t("plugin.invisibleChat.option.savedPasswords.label");
+        },
+        get description() {
+            return t("plugin.invisibleChat.option.savedPasswords.description");
+        },
         type: OptionType.STRING,
         default: "password, Password",
-        description: "Saved Passwords (Seperated with a , )"
     }
 });
 
@@ -107,6 +113,10 @@ export default definePlugin({
     dependencies: ["MessageUpdaterAPI"],
     reporterTestable: ReporterTestable.Patches,
     settings,
+
+    get displayDescription() {
+        return t("plugin.invisibleChat.description");
+    },
 
     patches: [
         {
@@ -132,7 +142,7 @@ export default definePlugin({
     renderMessagePopoverButton(message) {
         return this.INV_REGEX.test(message?.content)
             ? {
-                label: "Decrypt Message",
+                label: t("plugin.invisibleChat.button.decrypt"),
                 icon: this.popOverIcon,
                 message: message,
                 channel: ChannelStore.getChannel(message.channel_id),
@@ -174,11 +184,11 @@ export default definePlugin({
 
         message.embeds.push({
             type: "rich",
-            rawTitle: "Decrypted Message",
+            rawTitle: t("plugin.invisibleChat.embed.title"),
             color: "#45f5f5",
             rawDescription: revealed,
             footer: {
-                text: "Made with ❤️ by c0dine and Sammy!",
+                text: t("plugin.invisibleChat.embed.footer"),
             },
         });
 

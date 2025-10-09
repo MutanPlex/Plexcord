@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { FormSwitch } from "@components/FormSwitch";
 import { encrypt } from "@plugins/invisibleChat.desktop/index";
 import { insertTextIntoChatInputBox } from "@utils/discord";
@@ -41,24 +42,24 @@ function EncModal(props: ModalProps) {
     return (
         <ModalRoot {...props}>
             <ModalHeader>
-                <Forms.FormTitle tag="h4">Encrypt Message</Forms.FormTitle>
+                <Forms.FormTitle tag="h4">{t("plugin.invisibleChat.modal.encrypt.title")}</Forms.FormTitle>
             </ModalHeader>
 
             <ModalContent>
-                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>Secret</Forms.FormTitle>
+                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>{t("plugin.invisibleChat.modal.encrypt.secret")}</Forms.FormTitle>
                 <TextInput
                     onChange={(e: string) => {
                         setSecret(e);
                     }}
                 />
-                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>Cover (2 or more Words!!)</Forms.FormTitle>
+                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>{t("plugin.invisibleChat.modal.encrypt.cover")}</Forms.FormTitle>
                 <TextInput
                     disabled={noCover}
                     onChange={(e: string) => {
                         setCover(e);
                     }}
                 />
-                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>Password</Forms.FormTitle>
+                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>{t("plugin.invisibleChat.modal.encrypt.password")}</Forms.FormTitle>
                 <TextInput
                     style={{ marginBottom: "20px" }}
                     defaultValue={"password"}
@@ -71,7 +72,7 @@ function EncModal(props: ModalProps) {
                     onChange={(e: boolean) => {
                         setNoCover(e);
                     }}
-                    title="Don't use a Cover"
+                    title={t("plugin.invisibleChat.modal.encrypt.dontUseCover")}
                 />
 
             </ModalContent>
@@ -91,7 +92,7 @@ function EncModal(props: ModalProps) {
                         props.onClose();
                     }}
                 >
-                    Send
+                    {t("plugin.invisibleChat.modal.encrypt.send")}
                 </Button>
                 <Button
                     color={Button.Colors.TRANSPARENT}
@@ -101,7 +102,7 @@ function EncModal(props: ModalProps) {
                         props.onClose();
                     }}
                 >
-                    Cancel
+                    {t("plugin.invisibleChat.modal.encrypt.cancel")}
                 </Button>
             </ModalFooter>
         </ModalRoot>

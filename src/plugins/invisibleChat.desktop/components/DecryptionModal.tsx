@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { decrypt } from "@plugins/invisibleChat.desktop/index";
 import {
     ModalContent,
@@ -34,13 +35,13 @@ export function DecModal(props: any) {
     return (
         <ModalRoot {...props}>
             <ModalHeader>
-                <Forms.FormTitle tag="h4">Decrypt Message</Forms.FormTitle>
+                <Forms.FormTitle tag="h4">{t("plugin.invisibleChat.modal.decrypt.title")}</Forms.FormTitle>
             </ModalHeader>
 
             <ModalContent>
-                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>Message with Encryption</Forms.FormTitle>
+                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>{t("plugin.invisibleChat.modal.decrypt.with")}</Forms.FormTitle>
                 <TextInput defaultValue={encryptedMessage} disabled={true}></TextInput>
-                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>Password</Forms.FormTitle>
+                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>{t("plugin.invisibleChat.modal.decrypt.password")}</Forms.FormTitle>
                 <TextInput
                     style={{ marginBottom: "20px" }}
                     onChange={setPassword}
@@ -57,7 +58,7 @@ export function DecModal(props: any) {
                         Plexcord.Plugins.plugins.InvisibleChat.buildEmbed(props?.message, toSend);
                         props.onClose();
                     }}>
-                    Decrypt
+                    {t("plugin.invisibleChat.modal.decrypt.decrypt")}
                 </Button>
                 <Button
                     color={Button.Colors.TRANSPARENT}
@@ -65,7 +66,7 @@ export function DecModal(props: any) {
                     style={{ left: 15, position: "absolute" }}
                     onClick={props.onClose}
                 >
-                    Cancel
+                    {t("plugin.invisibleChat.modal.decrypt.cancel")}
                 </Button>
             </ModalFooter>
         </ModalRoot>

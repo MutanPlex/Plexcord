@@ -4328,6 +4328,46 @@
                     "placeholder": "Yayınlamak için bir medya kaynağı seçin"
                 }
             }
+        },
+        "invisibleChat": {
+            "name": "InvisibleChat",
+            "description": "Mesajlarını şüphe çekmeden şifrele!",
+            "option": {
+                "savedPasswords": {
+                    "label": "Kayıtlı Şifreler",
+                    "description": "Kayıtlı Şifreler (Virgülle ayrılmış şekilde)"
+                }
+            },
+            "button": {
+                "encrypt": "Mesajı Şifrele",
+                "decrypt": "Mesajı Deşifre Et",
+                "hidden": "Gizli Mesaj Göstergesi (InvisibleChat)"
+            },
+            "tooltip": {
+                "hidden": "Bu mesajda gizli bir mesaj var! (InvisibleChat)"
+            },
+            "embed": {
+                "title": "Deşifre Edilmiş Mesaj",
+                "footer": "InvisibleChat ile gönderildi"
+            },
+            "modal": {
+                "encrypt": {
+                    "title": "Mesajı Şifrele",
+                    "secret": "Gizli Mesaj",
+                    "cover": "Kapak (2 veya daha fazla kelime!!)",
+                    "password": "Şifre",
+                    "dontUseCover": "Kapak Kullanma",
+                    "send": "Gönder",
+                    "cancel": "İptal"
+                },
+                "decrypt": {
+                    "title": "Mesajı Deşifre Et",
+                    "with": "Şifreli Mesaj",
+                    "password": "Şifre",
+                    "decrypt": "Deşifre Et",
+                    "cancel": "İptal"
+                }
+            }
         }
     }
 }

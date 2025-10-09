@@ -4328,6 +4328,46 @@
                     "placeholder": "Select a media source to stream"
                 }
             }
+        },
+        "invisibleChat": {
+            "name": "InvisibleChat",
+            "description": "Encrypt your Messages in a non-suspicious way!",
+            "option": {
+                "savedPasswords": {
+                    "label": "Saved Passwords",
+                    "description": "Saved Passwords (Seperated with a , )"
+                }
+            },
+            "button": {
+                "encrypt": "Encrypt Message",
+                "decrypt": "Decrypt Message",
+                "hidden": "Hidden Message Indicator (InvisibleChat)"
+            },
+            "tooltip": {
+                "hidden": "This message has a hidden message! (InvisibleChat)"
+            },
+            "embed": {
+                "title": "Decrypted Message",
+                "footer": "Sent with InvisibleChat"
+            },
+            "modal": {
+                "encrypt": {
+                    "title": "Encrypt Message",
+                    "secret": "Secret",
+                    "cover": "Cover (2 or more Words!!)",
+                    "password": "Password",
+                    "dontUseCover": "Don't use a Cover",
+                    "send": "Send",
+                    "cancel": "Cancel"
+                },
+                "decrypt": {
+                    "title": "Decrypt Message",
+                    "with": "Message with Encryption",
+                    "password": "Password",
+                    "decrypt": "Decrypt",
+                    "cancel": "Cancel"
+                }
+            }
         }
     }
 }
