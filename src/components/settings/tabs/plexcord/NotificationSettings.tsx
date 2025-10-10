@@ -18,7 +18,8 @@ import { Button, Forms, Select, Slider, Text } from "@webpack/common";
 
 export function NotificationSection() {
     return (
-        <Forms.FormSection className={Margins.top16} title={"Plexcord " + t("settings.notifications.title")} tag="h5">
+        <section className={Margins.top16}>
+            <Forms.FormTitle tag="h5">Plexcord {t("settings.notifications.title")}</Forms.FormTitle>
             <Flex>
                 <Button onClick={openNotificationSettingsModal}>
                     {t("settings.notifications.settings")}
@@ -27,7 +28,7 @@ export function NotificationSection() {
                     {t("settings.notifications.viewLog")}
                 </Button>
             </Flex>
-        </Forms.FormSection>
+        </section>
     );
 }
 

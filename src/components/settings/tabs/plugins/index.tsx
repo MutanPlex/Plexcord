@@ -37,6 +37,7 @@ import Plugins, { ExcludedPlugins, PluginMeta } from "~plugins";// Avoid circula
 const { stopPlugin } = proxyLazy(() => require("plugins"));
 
 import { t } from "@api/i18n";
+import ErrorBoundary from "@components/ErrorBoundary";
 
 import { PluginCard } from "./PluginCard";
 import { openWarningModal } from "./PluginModal";
@@ -327,20 +328,24 @@ function PluginSettings() {
             </Forms.FormTitle>
 
             <div className={classes(Margins.bottom20, cl("filter-controls"))}>
-                <TextInput autoFocus value={searchValue.value} placeholder={t("plugins.filters.placeholder")} onChange={onSearch} />
+                <ErrorBoundary noop>
+                    <TextInput autoFocus value={searchValue.value} placeholder={t("plugins.filters.placeholder")} onChange={onSearch} />
+                </ErrorBoundary>
                 <div className={InputStyles.inputWrapper}>
-                    <Select
-                        options={[
-                            { label: t("plugins.filters.option.all"), value: SearchStatus.ALL, default: true },
-                            { label: t("plugins.filters.option.enabled"), value: SearchStatus.ENABLED },
-                            { label: t("plugins.filters.option.disabled"), value: SearchStatus.DISABLED },
-                            { label: t("plugins.filters.option.new"), value: SearchStatus.NEW }
-                        ]}
-                        serialize={String}
-                        select={onStatusChange}
-                        isSelected={v => v === searchValue.status}
-                        closeOnSelect={true}
-                    />
+                    <ErrorBoundary noop>
+                        <Select
+                            options={[
+                                { label: t("plugins.filters.option.all"), value: SearchStatus.ALL, default: true },
+                                { label: t("plugins.filters.option.enabled"), value: SearchStatus.ENABLED },
+                                { label: t("plugins.filters.option.disabled"), value: SearchStatus.DISABLED },
+                                { label: t("plugins.filters.option.new"), value: SearchStatus.NEW }
+                            ]}
+                            serialize={String}
+                            select={onStatusChange}
+                            isSelected={v => v === searchValue.status}
+                            closeOnSelect={true}
+                        />
+                    </ErrorBoundary>
                 </div>
             </div>
 

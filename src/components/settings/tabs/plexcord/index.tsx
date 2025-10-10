@@ -63,7 +63,7 @@ function LanguageSelector() {
     return (
         <div style={{ display: "flex" }}>
             <div>
-                <Forms.FormTitle>{t("settings.language.selector.label")}</Forms.FormTitle>
+                <Forms.FormTitle tag="h5">{t("settings.language.selector.label")}</Forms.FormTitle>
                 <Forms.FormText className="description" style={{ marginBottom: "8px" }}>
                     {t("settings.language.selector.description")}
                 </Forms.FormText>
@@ -190,7 +190,8 @@ function PlexcordSettings() {
                 />
             )}
 
-            <Forms.FormSection title={t("settings.quickActions.title")}>
+            <section>
+                <Forms.FormTitle tag="h5">{t("settings.quickActions.title")}</Forms.FormTitle>
                 <QuickActionCard>
                     <QuickAction
                         Icon={LogIcon}
@@ -222,11 +223,12 @@ function PlexcordSettings() {
                         action={() => PlexcordNative.native.openExternal("https://github.com/" + gitRemote)}
                     />
                 </QuickActionCard>
-            </Forms.FormSection>
+            </section>
 
             <Forms.FormDivider />
 
-            <Forms.FormSection className={Margins.top16} title={t("settings.settingsSection.title")} tag="h5">
+            <section className={Margins.top16}>
+                <Forms.FormTitle tag="h5">{t("settings.settingsSection.title")}</Forms.FormTitle>
                 <Forms.FormText className={Margins.bottom20} style={{ color: "var(--text-muted)" }}>
                     {t("settings.settingsSection.hintParts.prefix")}
                     <a onClick={() => openPluginModal(Plexcord.Plugins.plugins.Settings)}>
@@ -240,7 +242,7 @@ function PlexcordSettings() {
                 <Forms.FormDivider className={classes(Margins.top16, Margins.bottom20)} />
 
                 <Switches />
-            </Forms.FormSection>
+            </section>
 
 
             {needsVibrancySettings && <VibrancySettings />}

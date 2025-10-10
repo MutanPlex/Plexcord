@@ -2690,6 +2690,7 @@
             "presetPart": "{{name}} Hazır Ayarının Bir Parçası",
             "createdBy": "{{author}} tarafından oluşturuldu",
             "copy": "Hazır Ayar Kimliğini Kopyala",
+            "file": "Dosya",
             "your": {
                 "title": "Süslemelerin",
                 "subtitle": "Kendi süslemelerinizi sağ tıklayarak silebilirsiniz."

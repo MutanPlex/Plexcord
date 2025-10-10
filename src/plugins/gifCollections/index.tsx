@@ -533,7 +533,7 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
                                     <Forms.FormText className="custom-modal-title">{t("plugin.gifCollection.context.collection.information")}</Forms.FormText>
                                 </ModalHeader>
                                 <ModalContent className="custom-modal-content">
-                                    <Forms.FormSection>
+                                    <section>
                                         <Flex className="collection-info">
                                             <Forms.FormTitle tag="h5" className="collection-info-title">{t("plugin.gifCollection.context.collection.name")}</Forms.FormTitle>
                                             <Forms.FormText className="collection-info-text">{collection.name.replace(/.+?:/, "")}</Forms.FormText>
@@ -550,7 +550,7 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
                                             <Forms.FormTitle tag="h5" className="collection-info-title">{t("plugin.gifCollection.context.collection.updated")}</Forms.FormTitle>
                                             <Forms.FormText className="collection-info-text">{collection.lastUpdated ? new Date(collection.lastUpdated).toLocaleString() : "Unknown"}</Forms.FormText>
                                         </Flex>
-                                    </Forms.FormSection>
+                                    </section>
                                 </ModalContent>
                                 <ModalFooter className="custom-modal-footer">
                                     <Button onClick={modalProps.onClose} className="custom-modal-button">{t("plugin.gifCollection.context.collection.close")}</Button>
@@ -594,7 +594,7 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
                                     <Forms.FormText className="custom-modal-title">{t("plugin.gifCollection.context.gif.information")}</Forms.FormText>
                                 </ModalHeader>
                                 <ModalContent className="custom-modal-content">
-                                    <Forms.FormSection>
+                                    <section>
                                         <Flex className="gif-info">
                                             <Forms.FormTitle tag="h5" className="gif-info-title">{t("plugin.gifCollection.context.gif.added")}</Forms.FormTitle>
                                             <Forms.FormText className="gif-info-text">{gifInfo.addedAt ? new Date(gifInfo.addedAt).toLocaleString() : "Unknown"}</Forms.FormText>
@@ -607,7 +607,7 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
                                             <Forms.FormTitle tag="h5" className="gif-info-title">{t("plugin.gifCollection.context.gif.height")}</Forms.FormTitle>
                                             <Forms.FormText className="gif-info-text">{gifInfo.height}</Forms.FormText>
                                         </Flex>
-                                    </Forms.FormSection>
+                                    </section>
                                 </ModalContent>
                                 <ModalFooter className="custom-modal-footer">
                                     <Button onClick={modalProps.onClose} className="custom-modal-button">{t("plugin.gifCollection.context.gif.close")}</Button>

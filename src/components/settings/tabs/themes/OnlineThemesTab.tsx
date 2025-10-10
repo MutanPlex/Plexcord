@@ -41,7 +41,8 @@ export function OnlineThemesTab() {
                 <Forms.FormText>{t("themes.advanced.direct")}</Forms.FormText>
             </Card>
 
-            <Forms.FormSection title={t("themes.online")} tag="h5">
+            <section>
+                <Forms.FormTitle tag="h5">{t("themes.online")}</Forms.FormTitle>
                 <TextArea
                     value={themeText}
                     onChange={setThemeText}
@@ -51,7 +52,7 @@ export function OnlineThemesTab() {
                     onBlur={onBlur}
                     rows={10}
                 />
-            </Forms.FormSection>
+            </section>
         </>
     );
 }

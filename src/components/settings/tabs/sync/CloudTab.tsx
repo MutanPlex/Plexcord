@@ -72,7 +72,8 @@ function SettingsSyncSection() {
     const sectionEnabled = cloud.authenticated && cloud.settingsSync;
 
     return (
-        <Forms.FormSection title={t("cloud.title")} className={Margins.top16}>
+        <section className={Margins.top16}>
+            <Forms.FormTitle tag="h5">{t("cloud.title")}</Forms.FormTitle>
             <Forms.FormText variant="text-md/normal" className={Margins.bottom20}>
                 {t("cloud.description")}
             </Forms.FormText>
@@ -114,7 +115,7 @@ function SettingsSyncSection() {
                     {t("cloud.button.delete")}
                 </Button>
             </div>
-        </Forms.FormSection>
+        </section>
     );
 }
 
@@ -123,7 +124,8 @@ function CloudTab() {
 
     return (
         <SettingsTab title={"Plexcord " + t("cloud.text")}>
-            <Forms.FormSection title={t("cloud.settings")} className={Margins.top16}>
+            <section className={Margins.top16}>
+                <Forms.FormTitle tag="h5">{t("cloud.settings")}</Forms.FormTitle>
                 <Forms.FormText variant="text-md/normal" className={Margins.bottom20}>
                     {tJsx("cloud.overview", {
                         privacy: <Link href="https://api.plexcord.club/privacy">{t("cloud.privacy")}</Link>,
@@ -187,7 +189,7 @@ function CloudTab() {
                 </Grid>
 
                 <Forms.FormDivider className={Margins.top16} />
-            </Forms.FormSection >
+            </section >
             <SettingsSyncSection />
         </SettingsTab>
     );

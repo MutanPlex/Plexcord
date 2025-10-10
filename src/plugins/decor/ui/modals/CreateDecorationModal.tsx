@@ -88,7 +88,8 @@ function CreateDecorationModal(props: ModalProps) {
                 <div className={cl("create-decoration-modal-form-preview-container")}>
                     <div className={cl("create-decoration-modal-form")}>
                         {error !== null && <Text color="text-danger" variant="text-xs/normal">{error.message}</Text>}
-                        <Forms.FormSection title="File">
+                        <section>
+                            <Forms.FormTitle>{t("plugin.decor.file")}</Forms.FormTitle>
                             <FileUpload
                                 filename={file?.name}
                                 placeholder={t("plugin.decor.create.fileHolder")}
@@ -99,8 +100,8 @@ function CreateDecorationModal(props: ModalProps) {
                             <Forms.FormText className={Margins.top8}>
                                 {t("plugin.decor.create.file")}
                             </Forms.FormText>
-                        </Forms.FormSection>
-                        <Forms.FormSection title={t("plugin.decor.create.nameTitle")}>
+                        </section>
+                        <section title={t("plugin.decor.create.nameTitle")}>
                             <TextInput
                                 placeholder={t("plugin.decor.create.nameHolder")}
                                 value={name}
@@ -109,7 +110,7 @@ function CreateDecorationModal(props: ModalProps) {
                             <Forms.FormText className={Margins.top8}>
                                 {t("plugin.decor.create.name")}
                             </Forms.FormText>
-                        </Forms.FormSection>
+                        </section>
                     </div>
                     <div>
                         <AvatarDecorationModalPreview

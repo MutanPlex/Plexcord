@@ -365,6 +365,7 @@ function validateQuestButtonSetting() {
 
 function validateDisableQuestSetting() {
     const {
+        disableQuestsEverything,
         disableQuestsDiscoveryTab,
         disableQuestsFetchingQuests,
         disableQuestsPopupAboveAccountPanel,
@@ -372,6 +373,7 @@ function validateDisableQuestSetting() {
         disableQuestsGiftInventoryRelocationNotice,
         disableFriendsListActiveNowPromotion
     } = settings.use([
+        "disableQuestsEverything",
         "disableQuestsDiscoveryTab",
         "disableQuestsFetchingQuests",
         "disableQuestsPopupAboveAccountPanel",
@@ -521,7 +523,7 @@ function QuestButtonSettings(): JSX.Element {
         <ErrorBoundary>
             <Forms.FormDivider className={q("setting-divider")} />
             <div className={q("setting", "quest-icon-setting")}>
-                <Forms.FormSection>
+                <section>
                     <div className={q("main-inline-group")}>
                         <div>
                             <Forms.FormTitle className={q("form-title")}>
@@ -631,7 +633,7 @@ function QuestButtonSettings(): JSX.Element {
                         </div>
                     </div>
                     <div className={q("main-inline-group")}>
-                        <Forms.FormSection>
+                        <section>
                             <Forms.FormTitle className={q("form-subtitle", "form-subtitle-spacier")}>
                                 Included Reward Types
                             </Forms.FormTitle>
@@ -652,9 +654,9 @@ function QuestButtonSettings(): JSX.Element {
                                 closeOnSelect={false}
                             >
                             </DynamicDropdown>
-                        </Forms.FormSection>
+                        </section>
                     </div>
-                </Forms.FormSection>
+                </section>
             </div>
         </ErrorBoundary>
     );
@@ -770,7 +772,7 @@ function DisableQuestsSetting(): JSX.Element {
         <ErrorBoundary>
             <Forms.FormDivider className={q("setting-divider")} />
             <div className={q("setting", "disable-quests-setting")}>
-                <Forms.FormSection>
+                <section>
                     <Forms.FormTitle className={q("form-title")}>
                         Quest Features
                     </Forms.FormTitle>
@@ -806,7 +808,7 @@ function DisableQuestsSetting(): JSX.Element {
                         closeOnSelect={false}
                     >
                     </DynamicDropdown>
-                </Forms.FormSection>
+                </section>
             </div>
         </ErrorBoundary>
     );
@@ -948,7 +950,7 @@ function RestyleQuestsSetting() {
         <ErrorBoundary>
             <Forms.FormDivider className={q("setting-divider")} />
             <div className={q("setting", "restyle-quests-setting")}>
-                <Forms.FormSection>
+                <section>
                     <div>
                         <Forms.FormTitle className={q("form-title")}>
                             Restyle Quests
@@ -1025,7 +1027,7 @@ function RestyleQuestsSetting() {
                             <DummyQuestPreview quest={dummyQuest} dummyColor={dummyColor} dummyGradient={dummyGradient} />
                         )}
                     </div>
-                </Forms.FormSection>
+                </section>
             </div>
         </ErrorBoundary>
     );
@@ -1084,7 +1086,7 @@ function ReorderQuestsSetting(): JSX.Element {
         <ErrorBoundary>
             <Forms.FormDivider className={q("setting-divider")} />
             <div className={q("setting", "reorder-quests-setting")}>
-                <Forms.FormSection>
+                <section>
                     <div>
                         <Forms.FormTitle className={q("form-title")}>
                             Reorder Quests
@@ -1244,7 +1246,7 @@ function ReorderQuestsSetting(): JSX.Element {
                             If remembering is disabled, the sort or filter options will be reset each time you open the Quest page.
                         </Forms.FormText>
                     </div>
-                </Forms.FormSection>
+                </section>
             </div>
         </ErrorBoundary>
     );
@@ -1462,7 +1464,7 @@ function FetchingQuestsSetting(): JSX.Element {
         <ErrorBoundary>
             <Forms.FormDivider className={q("setting-divider")} />
             <div className={q("setting", "fetching-quests-setting")}>
-                <Forms.FormSection>
+                <section>
                     <div>
                         <Forms.FormTitle className={q("form-title")}>
                             Fetching Quests
@@ -1559,7 +1561,7 @@ function FetchingQuestsSetting(): JSX.Element {
                             </div>
                         </div>
                     </div>
-                </Forms.FormSection>
+                </section>
             </div>
         </ErrorBoundary>
     );

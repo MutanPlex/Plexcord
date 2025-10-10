@@ -101,7 +101,8 @@ export function LocalThemesTab() {
                 <Forms.FormText>{t("themes.external.host")}</Forms.FormText>
             </Card>
 
-            <Forms.FormSection title={t("themes.local")}>
+            <section>
+                <Forms.FormTitle tag="h5">{t("themes.local")}</Forms.FormTitle>
                 <QuickActionCard>
                     <>
                         {IS_WEB ?
@@ -166,7 +167,7 @@ export function LocalThemesTab() {
                         />
                     ))}
                 </div>
-            </Forms.FormSection>
+            </section>
         </>
     );
 }

@@ -228,7 +228,7 @@ export default definePlugin({
         }
 
         return (
-            <Forms.FormSection>
+            <section>
                 <Forms.FormText>
                     You can customise the spoken messages below. You can disable specific messages by setting them to nothing
                 </Forms.FormText>
@@ -256,7 +256,7 @@ export default definePlugin({
                     </>
                 )}
                 {errorComponent}
-            </Forms.FormSection>
+            </section>
         );
     }
 });

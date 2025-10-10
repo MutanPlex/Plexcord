@@ -2690,6 +2690,7 @@
             "presetPart": "Part of the {{name}} Preset",
             "createdBy": "Created by {{author}}",
             "copy": "Copy Preset ID",
+            "file": "File",
             "your": {
                 "title": "Your Decorations",
                 "subtitle": "You can delete your own decorations by right clicking on them."

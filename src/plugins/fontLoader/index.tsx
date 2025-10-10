@@ -132,7 +132,7 @@ function GoogleFontSearch({ onSelect }: { onSelect: (font: GoogleFontMetadata) =
     };
 
     return (
-        <Forms.FormSection>
+        <section>
             <Forms.FormTitle tag="h3">{t("plugin.fontLoader.modal.settings.title")}</Forms.FormTitle>
             <Forms.FormText>{t("plugin.fontLoader.modal.settings.description")}</Forms.FormText>
 
@@ -165,7 +165,7 @@ function GoogleFontSearch({ onSelect }: { onSelect: (font: GoogleFontMetadata) =
                     ))}
                 </div>
             )}
-        </Forms.FormSection>
+        </section>
     );
 }
 

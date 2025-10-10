@@ -133,7 +133,7 @@ function IdsListComponent(props: { setValue: (value: string) => void; }) {
     }
 
     return (
-        <Forms.FormSection>
+        <section>
             <Forms.FormTitle tag="h3">{t("plugin.ignoreActivities.modal.filter.title")}</Forms.FormTitle>
             <Forms.FormText className={Margins.bottom8}>{t("plugin.ignoreActivities.modal.filter.description")}</Forms.FormText>
             <TextInput
@@ -142,7 +142,7 @@ function IdsListComponent(props: { setValue: (value: string) => void; }) {
                 onChange={handleChange}
                 placeholder="235834946571337729, 343383572805058560"
             />
-        </Forms.FormSection>
+        </section>
     );
 }
 

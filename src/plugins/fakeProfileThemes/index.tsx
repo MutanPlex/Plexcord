@@ -122,7 +122,7 @@ function SettingsAboutComponent() {
     const [color2, setColor2] = useState(existingColors[1]);
 
     return (
-        <Forms.FormSection>
+        <section>
             <Forms.FormTitle tag="h3">{t("plugin.fakeProfileThemes.modal.usage")}</Forms.FormTitle>
             <Forms.FormText>
                 {t("plugin.fakeProfileThemes.modal.intro")}
@@ -199,7 +199,7 @@ function SettingsAboutComponent() {
                     />
                 </div>
             </Forms.FormText>
-        </Forms.FormSection>);
+        </section>);
 }
 
 export default definePlugin({

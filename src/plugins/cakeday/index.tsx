@@ -101,7 +101,7 @@ function BirthdayModal({ userId, username, modalProps }: { userId: string, usern
                 <Forms.FormTitle tag="h2">{t("plugin.cakeDay.modal.title", { username })}</Forms.FormTitle>
             </ModalHeader>
             <ModalContent>
-                <Forms.FormSection>
+                <section>
                     <Forms.FormText className={Margins.bottom8}>
                         {t("plugin.cakeDay.modal.description")}
                     </Forms.FormText>
@@ -117,7 +117,7 @@ function BirthdayModal({ userId, username, modalProps }: { userId: string, usern
                             {t("plugin.cakeDay.modal.current")} {savedBirthdays[userId]}
                         </Forms.FormText>
                     )}
-                </Forms.FormSection>
+                </section>
             </ModalContent>
             <ModalFooter>
                 <Button
@@ -190,17 +190,17 @@ function CakeDaySettings() {
 
     if (Object.keys(birthdays).length === 0) {
         return (
-            <Forms.FormSection>
+            <section>
                 <Forms.FormTitle tag="h3">{t("plugin.cakeDay.modal.saved")}</Forms.FormTitle>
                 <Forms.FormText>
                     {t("plugin.cakeDay.modal.savedDesc")}
                 </Forms.FormText>
-            </Forms.FormSection>
+            </section>
         );
     }
 
     return (
-        <Forms.FormSection>
+        <section>
             <Forms.FormTitle tag="h3">{t("plugin.cakeDay.modal.saved")}</Forms.FormTitle>
             {Object.entries(birthdays).map(([userId, birthday]) => {
                 const user = UserStore.getUser(userId);
@@ -225,7 +225,7 @@ function CakeDaySettings() {
                     </div>
                 );
             })}
-        </Forms.FormSection>
+        </section>
     );
 }
 

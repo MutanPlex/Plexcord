@@ -12,7 +12,6 @@ import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { User } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
-import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy } from "@webpack";
 import { React, Text } from "@webpack/common";
@@ -55,9 +54,6 @@ export const settings = definePluginSettings({
 
 const getProfileThemeProps = findByCodeLazy(".getPreviewThemeColors", "primaryColor:");
 
-const logger = new Logger("GitHubRepos");
-logger.info("Plugin loaded");
-
 const ProfilePopoutComponent = ErrorBoundary.wrap(
     (props: { user: User; displayProfile?: any; }) => {
         return (
@@ -70,12 +66,9 @@ const ProfilePopoutComponent = ErrorBoundary.wrap(
     },
     {
         noop: true,
-        onError: err => {
-            logger.error("Error in profile popout component", err);
-            return <Text variant="text-xs/semibold" className="pc-github-repos-error" style={{ color: "var(--text-danger)" }}>
-                {t("plugin.githubRepos.error.render")}
-            </Text>;
-        }
+        fallback: () => <Text variant="text-xs/semibold" className="pc-github-repos-error" style={{ color: "var(--text-danger)" }}>
+            {t("plugin.githubRepos.error.render")}
+        </Text>
     }
 );
 

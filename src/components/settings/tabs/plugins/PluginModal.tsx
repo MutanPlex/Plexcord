@@ -115,14 +115,15 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
 
             const Component = OptionComponentMap[setting.type];
             return (
-                <Component
-                    id={key}
-                    key={key}
-                    option={setting}
-                    onChange={debounce(onChange)}
-                    pluginSettings={pluginSettings}
-                    definedSettings={plugin.settings}
-                />
+                <ErrorBoundary noop key={key}>
+                    <Component
+                        id={key}
+                        option={setting}
+                        onChange={debounce(onChange)}
+                        pluginSettings={pluginSettings}
+                        definedSettings={plugin.settings}
+                    />
+                </ErrorBoundary>
             );
         });
 
@@ -160,7 +161,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                 <ModalCloseButton onClick={onClose} />
             </ModalHeader>
             <ModalContent className={Margins.bottom16}>
-                <Forms.FormSection>
+                <section>
                     <Flex className={cl("info")}>
                         <Forms.FormText className={cl("description")}>{displayDescription}</Forms.FormText>
                         {!pluginMeta.userPlugin && (
@@ -199,20 +200,20 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                             )}
                         />
                     </div>
-                </Forms.FormSection>
+                </section>
                 {!!plugin.settingsAboutComponent && (
                     <div className={Margins.top16}>
-                        <Forms.FormSection>
+                        <section>
                             <ErrorBoundary message={t("plugins.error.infoRender")}>
                                 <plugin.settingsAboutComponent />
                             </ErrorBoundary>
-                        </Forms.FormSection>
+                        </section>
                     </div>
                 )}
-                <Forms.FormSection>
+                <section>
                     <Text variant="heading-lg/semibold" className={classes(Margins.top16, Margins.bottom8)}>{t("plugins.pluginModal.settings")}</Text>
                     {renderSettings()}
-                </Forms.FormSection>
+                </section>
             </ModalContent>;
             {
                 hasSettings && <ModalFooter>
@@ -325,7 +326,7 @@ export function openWarningModal(plugin?: Plugin | null, pluginModalProps?: Moda
                 <ModalCloseButton onClick={warningModalProps.onClose} className="pc-modal-close-button" />
             </ModalHeader>
             <ModalContent>
-                <Forms.FormSection>
+                <section>
                     <Flex className="pc-warning-info">
                         <Text className="text-normal">
                             {text}
@@ -340,7 +341,7 @@ export function openWarningModal(plugin?: Plugin | null, pluginModalProps?: Moda
                             })}
                         </Text>
                     </Flex>
-                </Forms.FormSection>
+                </section>
             </ModalContent>
             <ModalFooter className="pc-modal-footer">
                 <Flex className="pc-button-container">

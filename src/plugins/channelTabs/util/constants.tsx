@@ -79,7 +79,7 @@ function AnimationSettings(): JSX.Element {
     }
 
     return (
-        <Forms.FormSection>
+        <section>
             <Forms.FormTitle>{t("plugin.channelTabs.animation.title")}</Forms.FormTitle>
             <Forms.FormText>
                 {t("plugin.channelTabs.animation.description")}
@@ -96,7 +96,7 @@ function AnimationSettings(): JSX.Element {
                     closeOnSelect={false}
                 />
             </div>
-        </Forms.FormSection>
+        </section>
     );
 }
 

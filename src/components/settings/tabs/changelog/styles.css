@@ -538,7 +538,7 @@
     overflow: visible !important;
 }
 
-/* Ensure Forms.FormSection doesn't constrain changelog */
+/* Ensure section doesn't constrain changelog */
 .pc-settings-tab .pc-changelog-history,
 .pc-settings-tab .pc-changelog-history-list,
 .pc-settings-tab .pc-changelog-log-content {

@@ -21,7 +21,8 @@ function ReasonsComponent() {
     const { reasons } = settings.store;
 
     return (
-        <Forms.FormSection title={t("plugin.betterBanReasons.title")}>
+        <section>
+            <Forms.FormTitle tag="h5">{t("plugin.betterBanReasons.title")}</Forms.FormTitle>
             {reasons.map((r, i) => (
                 <div
                     key={i}
@@ -54,7 +55,7 @@ function ReasonsComponent() {
                     <PlusIcon /> {t("plugin.betterBanReasons.add")}
                 </Button>
             </div>
-        </Forms.FormSection>
+        </section>
     );
 }
 

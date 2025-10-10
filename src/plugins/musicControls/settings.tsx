@@ -26,12 +26,12 @@ export function toggleHoverControls(value: boolean) {
 
 function InstallInstructions() {
     return (
-        <Forms.FormSection>
+        <section>
             <Forms.FormTitle tag="h3">How to install</Forms.FormTitle>
             <Forms.FormText>
                 Install <MaskedLink href="https://github.com/Inrixia/TidaLuna#installation">TidaLuna</MaskedLink> from here, then go to TidalLuna settings &rarr; Plugin stores &rarr; Install <code>@vmohammad/api</code>
             </Forms.FormText>
-        </Forms.FormSection>
+        </section>
     );
 }
 
@@ -39,9 +39,9 @@ export const settings = definePluginSettings({
     SpotifySectionTitle: {
         type: OptionType.COMPONENT,
         component: () => (
-            <Forms.FormSection>
+            <section>
                 <Forms.FormTitle tag="h3">Spotify</Forms.FormTitle>
-            </Forms.FormSection>
+            </section>
         )
     },
     showSpotifyControls: {
@@ -68,9 +68,9 @@ export const settings = definePluginSettings({
     TidalSectionTitle: {
         type: OptionType.COMPONENT,
         component: () => (
-            <Forms.FormSection>
+            <section>
                 <Forms.FormTitle tag="h3">Tidal</Forms.FormTitle>
-            </Forms.FormSection>
+            </section>
         )
     },
     installTidalWithWS: {
@@ -118,9 +118,9 @@ export const settings = definePluginSettings({
     YtmSectionTitle: {
         type: OptionType.COMPONENT,
         component: () => (
-            <Forms.FormSection>
+            <section>
                 <Forms.FormTitle tag="h3">Youtube Music</Forms.FormTitle>
-            </Forms.FormSection>
+            </section>
         )
     },
     showYoutubeMusicControls: {

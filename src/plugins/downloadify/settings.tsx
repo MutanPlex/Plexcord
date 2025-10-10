@@ -40,7 +40,7 @@ function DefaultDirectorySetting(): JSX.Element {
 
     return (
         <ErrorBoundary>
-            <Forms.FormSection>
+            <section>
                 <Forms.FormTitle className={d("form-title")}>
                     {t("plugin.downloadify.modal.title")}
                 </Forms.FormTitle>
@@ -70,7 +70,7 @@ function DefaultDirectorySetting(): JSX.Element {
                         </Button>
                     </div>
                 </div>
-            </Forms.FormSection>
+            </section>
         </ErrorBoundary>
     );
 }

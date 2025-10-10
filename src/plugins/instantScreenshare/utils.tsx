@@ -94,10 +94,10 @@ function ScreenSetting() {
 
 function SettingSection() {
     return (
-        <Forms.FormSection>
+        <section>
             <Forms.FormTitle>{t("plugin.instantScreenshare.option.streamMedia.label")}</Forms.FormTitle>
             <Forms.FormText>{t("plugin.instantScreenshare.option.streamMedia.description")}</Forms.FormText>
             <ScreenSetting />
-        </Forms.FormSection>
+        </section>
     );
 }

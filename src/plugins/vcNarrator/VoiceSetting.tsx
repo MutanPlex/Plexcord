@@ -119,9 +119,9 @@ function VoiceSetting() {
 
 export function VoiceSettingSection() {
     return (
-        <Forms.FormSection>
+        <section>
             <Forms.FormTitle>Voice</Forms.FormTitle>
             <VoiceSetting />
-        </Forms.FormSection>
+        </section>
     );
 }
