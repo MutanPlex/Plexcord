@@ -33,7 +33,7 @@ export default function DonateButton({
             look={look}
             color={color}
             onClick={() => PlexcordNative.native.openExternal("https://github.com/sponsors/MutanPlex")}
-            innerClassName="pc-donate-button"
+            className="pc-donate-button"
         >
             <Heart />
             {t("settings.specialCards.donations.button")}

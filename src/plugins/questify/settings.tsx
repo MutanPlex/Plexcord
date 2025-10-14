@@ -7,10 +7,10 @@
 
 import { defaultAudioNames, playAudio } from "@api/AudioPlayer";
 import { definePluginSettings } from "@api/Settings";
-import { ErrorBoundary } from "@components/index";
+import { Divider, ErrorBoundary, Heading, Paragraph } from "@components/index";
 import { Logger } from "@utils/Logger";
 import { OptionType } from "@utils/types";
-import { Button, ColorPicker, ContextMenuApi, Forms, Menu, Select, TextInput, useEffect, useRef, useState } from "@webpack/common";
+import { Button, ColorPicker, ContextMenuApi, Menu, Select, TextInput, useEffect, useRef, useState } from "@webpack/common";
 import { JSX } from "react";
 
 import { activeQuestIntervals, getQuestTileClasses, getQuestTileStyle } from "./index";
@@ -521,17 +521,17 @@ function QuestButtonSettings(): JSX.Element {
 
     return (
         <ErrorBoundary>
-            <Forms.FormDivider className={q("setting-divider")} />
+            <Divider className={q("setting-divider")} />
             <div className={q("setting", "quest-icon-setting")}>
                 <section>
                     <div className={q("main-inline-group")}>
                         <div>
-                            <Forms.FormTitle className={q("form-title")}>
+                            <Heading className={q("form-title")}>
                                 Quest Button
-                            </Forms.FormTitle>
-                            <Forms.FormText className={q("form-description")}>
+                            </Heading>
+                            <Paragraph className={q("form-description")}>
                                 Show a Quest button in the server list with an optional indicator for unclaimed Quests.
-                            </Forms.FormText>
+                            </Paragraph>
                         </div>
                         <div className={q("dummy-quest-button")}>
                             <DummyQuestButton
@@ -549,9 +549,9 @@ function QuestButtonSettings(): JSX.Element {
                     </div>
                     <div className={q("main-inline-group")}>
                         <div className={q("inline-group-item")}>
-                            <Forms.FormTitle className={q("form-subtitle", "form-subtitle-spacier")}>
+                            <Heading className={q("form-subtitle", "form-subtitle-spacier")}>
                                 Left Click Action
-                            </Forms.FormTitle>
+                            </Heading>
                             <Select
                                 options={questButtonClickOptions}
                                 className={q("select")}
@@ -562,9 +562,9 @@ function QuestButtonSettings(): JSX.Element {
                             />
                         </div>
                         <div className={q("inline-group-item")}>
-                            <Forms.FormTitle className={q("form-subtitle", "form-subtitle-spacier")}>
+                            <Heading className={q("form-subtitle", "form-subtitle-spacier")}>
                                 Middle Click Action
-                            </Forms.FormTitle>
+                            </Heading>
                             <Select
                                 options={questButtonClickOptions}
                                 className={q("select")}
@@ -575,9 +575,9 @@ function QuestButtonSettings(): JSX.Element {
                             />
                         </div>
                         <div className={q("inline-group-item")}>
-                            <Forms.FormTitle className={q("form-subtitle", "form-subtitle-spacier")}>
+                            <Heading className={q("form-subtitle", "form-subtitle-spacier")}>
                                 Right Click Action
-                            </Forms.FormTitle>
+                            </Heading>
                             <Select
                                 options={questButtonClickOptions}
                                 className={q("select")}
@@ -590,17 +590,17 @@ function QuestButtonSettings(): JSX.Element {
                     </div>
                     <div className={q("main-inline-group")}>
                         <div className={q("inline-group-item")}>
-                            <Forms.FormTitle className={q("form-subtitle")}>
+                            <Heading className={q("form-subtitle")}>
                                 Button Visibility
-                            </Forms.FormTitle>
+                            </Heading>
                             <RadioGroup
                                 value={(currentQuestButtonDisplay as any).value}
                                 options={questButtonDisplayOptions}
                                 onChange={handleQuestButtonDisplayChange}
                             />
-                            <Forms.FormTitle className={q("form-subtitle")}>
+                            <Heading className={q("form-subtitle")}>
                                 Badge Color
-                            </Forms.FormTitle>
+                            </Heading>
                             <div className={q("sub-inline-group")}>
                                 <ColorPicker
                                     color={currentBadgeColor}
@@ -622,9 +622,9 @@ function QuestButtonSettings(): JSX.Element {
                             </div>
                         </div>
                         <div className={q("inline-group-item")}>
-                            <Forms.FormTitle className={q("form-subtitle")}>
+                            <Heading className={q("form-subtitle")}>
                                 Unclaimed Indicator
-                            </Forms.FormTitle>
+                            </Heading>
                             <RadioGroup
                                 value={(currentQuestButtonUnclaimed as any).value}
                                 options={questButtonUnclaimedOptions}
@@ -634,13 +634,13 @@ function QuestButtonSettings(): JSX.Element {
                     </div>
                     <div className={q("main-inline-group")}>
                         <section>
-                            <Forms.FormTitle className={q("form-subtitle", "form-subtitle-spacier")}>
+                            <Heading className={q("form-subtitle", "form-subtitle-spacier")}>
                                 Included Reward Types
-                            </Forms.FormTitle>
-                            <Forms.FormText className={q("form-description")}>
+                            </Heading>
+                            <Paragraph className={q("form-description")}>
                                 Only count Quests with these reward types as unclaimed when determining button
                                 visibility, badge count, and when playing the alert sound.
-                            </Forms.FormText>
+                            </Paragraph>
                             <DynamicDropdown
                                 placeholder="Select which reward types to include in the unclaimed count..."
                                 feedback="There's no supported Quest feature by that name."
@@ -770,13 +770,13 @@ function DisableQuestsSetting(): JSX.Element {
 
     return (
         <ErrorBoundary>
-            <Forms.FormDivider className={q("setting-divider")} />
+            <Divider className={q("setting-divider")} />
             <div className={q("setting", "disable-quests-setting")}>
                 <section>
-                    <Forms.FormTitle className={q("form-title")}>
+                    <Heading className={q("form-title")}>
                         Quest Features
-                    </Forms.FormTitle>
-                    <Forms.FormText className={q("form-description")}>
+                    </Heading>
+                    <Paragraph className={q("form-description")}>
                         Modify specific Quest features.
                         <br /><br />
                         The <span className={q("inline-code-block")}>Disable Quest Popup Above Account Panel</span> option
@@ -794,7 +794,7 @@ function DisableQuestsSetting(): JSX.Element {
                         can open the context menu on the Quest tile and select <span className={q("inline-code-block")}>Stop Auto-Complete</span>.
                         <br /><br />
                         Using either of those options is against Discord's TOS. Use at your own risk.
-                    </Forms.FormText>
+                    </Paragraph>
                     <DynamicDropdown
                         placeholder="Select which Quest features to modify."
                         feedback="There's no supported Quest feature by that name."
@@ -948,24 +948,24 @@ function RestyleQuestsSetting() {
 
     return (
         <ErrorBoundary>
-            <Forms.FormDivider className={q("setting-divider")} />
+            <Divider className={q("setting-divider")} />
             <div className={q("setting", "restyle-quests-setting")}>
                 <section>
                     <div>
-                        <Forms.FormTitle className={q("form-title")}>
+                        <Heading className={q("form-title")}>
                             Restyle Quests
-                        </Forms.FormTitle>
-                        <Forms.FormText className={q("form-description")}>
+                        </Heading>
+                        <Paragraph className={q("form-description")}>
                             Highlight Quests with optional theme colors for visibility.
                             <br /><br />
                             Claimed and Expired Quest styles will take precedence even if a Quest is ignored.
-                        </Forms.FormText>
+                        </Paragraph>
                     </div>
                     <div className={q("main-inline-group")}>
                         <div className={q("gradient-setting-group", "inline-group-item", "flex-35")}>
-                            <Forms.FormTitle className={q("form-subtitle")}>
+                            <Heading className={q("form-subtitle")}>
                                 Gradient Style
-                            </Forms.FormTitle>
+                            </Heading>
                             <Select
                                 options={gradientOptions}
                                 className={q("select")}
@@ -976,9 +976,9 @@ function RestyleQuestsSetting() {
                             />
                         </div>
                         <div className={q("preload-setting-group", "inline-group-item", "flex-65")}>
-                            <Forms.FormTitle className={q("form-subtitle")}>
+                            <Heading className={q("form-subtitle")}>
                                 Asset Preload
-                            </Forms.FormTitle>
+                            </Heading>
                             <Select
                                 options={preloadOptions}
                                 className={q("select")}
@@ -995,9 +995,9 @@ function RestyleQuestsSetting() {
                                 key={label}
                                 className={q("inline-group-item", "color-picker-group")}
                             >
-                                <Forms.FormTitle className={q("form-subtitle")}>
+                                <Heading className={q("form-subtitle")}>
                                     {label}
-                                </Forms.FormTitle>
+                                </Heading>
                                 <div className={q("color-picker-with-buttons")}>
                                     <ColorPicker
                                         color={value}
@@ -1084,18 +1084,18 @@ function ReorderQuestsSetting(): JSX.Element {
 
     return (
         <ErrorBoundary>
-            <Forms.FormDivider className={q("setting-divider")} />
+            <Divider className={q("setting-divider")} />
             <div className={q("setting", "reorder-quests-setting")}>
                 <section>
                     <div>
-                        <Forms.FormTitle className={q("form-title")}>
+                        <Heading className={q("form-title")}>
                             Reorder Quests
-                        </Forms.FormTitle>
-                        <Forms.FormText className={q("form-description")}>
+                        </Heading>
+                        <Paragraph className={q("form-description")}>
                             Sort Quests by their status. Applied when the "Questify" sort option is selected on the Quest page.
                             <br /><br />
                             Comma-separated list must contain all of: <span className={q("inline-code-block")}>UNCLAIMED, CLAIMED, IGNORED, EXPIRED</span>.
-                        </Forms.FormText>
+                        </Paragraph>
                     </div>
                     <div>
                         <TextInput
@@ -1125,9 +1125,9 @@ function ReorderQuestsSetting(): JSX.Element {
                     </div>
                     <div className={q("main-inline-group")}>
                         <div className={q("inline-group-item")}>
-                            <Forms.FormTitle className={q("form-subtitle")}>
+                            <Heading className={q("form-subtitle")}>
                                 Unclaimed Subsort
-                            </Forms.FormTitle>
+                            </Heading>
                             <Select
                                 options={getSubsortOptions("unclaimed")}
                                 className={q("select")}
@@ -1140,9 +1140,9 @@ function ReorderQuestsSetting(): JSX.Element {
                             />
                         </div>
                         <div className={q("inline-group-item")}>
-                            <Forms.FormTitle className={q("form-subtitle")}>
+                            <Heading className={q("form-subtitle")}>
                                 Claimed Subsort
-                            </Forms.FormTitle>
+                            </Heading>
                             <Select
                                 options={getSubsortOptions("claimed")}
                                 className={q("select")}
@@ -1157,9 +1157,9 @@ function ReorderQuestsSetting(): JSX.Element {
                     </div>
                     <div className={q("main-inline-group")}>
                         <div className={q("inline-group-item")}>
-                            <Forms.FormTitle className={q("form-subtitle")}>
+                            <Heading className={q("form-subtitle")}>
                                 Ignored Subsort
-                            </Forms.FormTitle>
+                            </Heading>
                             <Select
                                 options={getSubsortOptions("ignored")}
                                 className={q("select")}
@@ -1172,9 +1172,9 @@ function ReorderQuestsSetting(): JSX.Element {
                             />
                         </div>
                         <div className={q("inline-group-item")}>
-                            <Forms.FormTitle className={q("form-subtitle")}>
+                            <Heading className={q("form-subtitle")}>
                                 Expired Subsort
-                            </Forms.FormTitle>
+                            </Heading>
                             <Select
                                 options={getSubsortOptions("expired")}
                                 className={q("select")}
@@ -1189,9 +1189,9 @@ function ReorderQuestsSetting(): JSX.Element {
                     </div>
                     <div className={q("main-inline-group")}>
                         <div className={q("inline-group-item")}>
-                            <Forms.FormTitle className={q("form-subtitle")}>
+                            <Heading className={q("form-subtitle")}>
                                 Ignored Quest Profile
-                            </Forms.FormTitle>
+                            </Heading>
                             <Select
                                 options={[
                                     { label: "Shared: All accounts on this client share ignores.", value: "shared" },
@@ -1207,9 +1207,9 @@ function ReorderQuestsSetting(): JSX.Element {
                     </div>
                     <div className={q("main-inline-group")}>
                         <div className={q("inline-group-item")}>
-                            <Forms.FormTitle className={q("form-subtitle")}>
+                            <Heading className={q("form-subtitle")}>
                                 Remember Sort Choice
-                            </Forms.FormTitle>
+                            </Heading>
                             <Select
                                 options={[
                                     { label: "Yes", value: true },
@@ -1223,9 +1223,9 @@ function ReorderQuestsSetting(): JSX.Element {
                             />
                         </div>
                         <div className={q("inline-group-item")}>
-                            <Forms.FormTitle className={q("form-subtitle")}>
+                            <Heading className={q("form-subtitle")}>
                                 Remember Filter Choice
-                            </Forms.FormTitle>
+                            </Heading>
                             <Select
                                 options={[
                                     { label: "Yes", value: true },
@@ -1240,11 +1240,11 @@ function ReorderQuestsSetting(): JSX.Element {
                         </div>
                     </div>
                     <div className={q("main-inline-group")}>
-                        <Forms.FormText className={q("form-description")}>
+                        <Paragraph className={q("form-description")}>
                             This sort and filter choice refers to the built-in sort and filter options on the Quest page.
                             The custom sorting above is only applied when the "Questify" sort option is selected on the Quest page.
                             If remembering is disabled, the sort or filter options will be reset each time you open the Quest page.
-                        </Forms.FormText>
+                        </Paragraph>
                     </div>
                 </section>
             </div>
@@ -1462,14 +1462,14 @@ function FetchingQuestsSetting(): JSX.Element {
 
     return (
         <ErrorBoundary>
-            <Forms.FormDivider className={q("setting-divider")} />
+            <Divider className={q("setting-divider")} />
             <div className={q("setting", "fetching-quests-setting")}>
                 <section>
                     <div>
-                        <Forms.FormTitle className={q("form-title")}>
+                        <Heading className={q("form-title")}>
                             Fetching Quests
-                        </Forms.FormTitle>
-                        <Forms.FormText className={q("form-description")}>
+                        </Heading>
+                        <Paragraph className={q("form-description")}>
                             Configure how often to fetch Quests from Discord and set up alerts for new Quests.
                             <br /><br />
                             By default, Discord only fetches Quests on load and when visiting the Quests page.
@@ -1480,13 +1480,13 @@ function FetchingQuestsSetting(): JSX.Element {
                             unclaimed <span className={q("inline-code-block")}>Pill</span>, <span className={q("inline-code-block")}>Badge</span>, or <span className={q("inline-code-block")}>Both</span> indicators enabled. Otherwise, there is no reason to periodically fetch Quests.
                             <br /><br />
                             Also, if <span className={q("inline-code-block")}>Fetching Quests</span> is blocked in the <span className={q("inline-code-block")}>Quest Features</span> setting, this will not work.
-                        </Forms.FormText>
+                        </Paragraph>
                     </div>
                     <div>
                         <div>
-                            <Forms.FormTitle className={q("form-subtitle", "form-subtitle-spacier")}>
+                            <Heading className={q("form-subtitle", "form-subtitle-spacier")}>
                                 Fetch Interval
-                            </Forms.FormTitle>
+                            </Heading>
                         </div>
                         <div>
                             <DynamicDropdown
@@ -1515,9 +1515,9 @@ function FetchingQuestsSetting(): JSX.Element {
                     </div>
                     <div>
                         <div>
-                            <Forms.FormTitle className={q("form-subtitle", "form-subtitle-spacier")}>
+                            <Heading className={q("form-subtitle", "form-subtitle-spacier")}>
                                 Alert Sound
-                            </Forms.FormTitle>
+                            </Heading>
                         </div>
                         <div className={q("sub-inline-group")}>
                             <div className={q("inline-group-item")}>

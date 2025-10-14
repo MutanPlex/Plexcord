@@ -18,10 +18,11 @@
 */
 
 import { t } from "@api/i18n";
+import { Heading } from "@components/Heading";
 import { SessionInfo } from "@plugins/betterSessions/types";
 import { getDefaultName, savedSessionsCache, saveSessionsToDataStore } from "@plugins/betterSessions/utils";
 import { ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
-import { Button, Forms, React, TextInput } from "@webpack/common";
+import { Button, React, TextInput } from "@webpack/common";
 import { KeyboardEvent } from "react";
 
 export function RenameModal({ props, session, state }: { props: ModalProps, session: SessionInfo["session"], state: [string, React.Dispatch<React.SetStateAction<string>>]; }) {
@@ -43,11 +44,11 @@ export function RenameModal({ props, session, state }: { props: ModalProps, sess
     return (
         <ModalRoot {...props}>
             <ModalHeader>
-                <Forms.FormTitle tag="h4">{t("plugin.betterSessions.rename")}</Forms.FormTitle>
+                <Heading>{t("plugin.betterSessions.rename")}</Heading>
             </ModalHeader>
 
             <ModalContent>
-                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>{t("plugin.betterSessions.newDevice")}</Forms.FormTitle>
+                <Heading style={{ marginTop: "10px" }}>{t("plugin.betterSessions.newDevice")}</Heading>
                 <TextInput
                     style={{ marginBottom: "10px" }}
                     placeholder={getDefaultName(session.client_info)}
@@ -76,19 +77,21 @@ export function RenameModal({ props, session, state }: { props: ModalProps, sess
             </ModalContent>
 
             <ModalFooter>
-                <Button
-                    color={Button.Colors.BRAND}
-                    onClick={onSaveClick}
-                >
-                    {t("plugin.betterSessions.save")}
-                </Button>
-                <Button
-                    color={Button.Colors.TRANSPARENT}
-                    look={Button.Looks.LINK}
-                    onClick={() => props.onClose()}
-                >
-                    {t("plugin.betterSessions.cancel")}
-                </Button>
+                <div className="pc-betterSessions-footer-buttons">
+                    <Button
+                        color={Button.Colors.PRIMARY}
+                        onClick={onSaveClick}
+                    >
+                        {t("plugin.betterSessions.save")}
+                    </Button>
+                    <Button
+                        color={Button.Colors.BRAND}
+                        look={Button.Looks.LINK}
+                        onClick={() => props.onClose()}
+                    >
+                        {t("plugin.betterSessions.cancel")}
+                    </Button>
+                </div>
             </ModalFooter>
         </ModalRoot >
     );

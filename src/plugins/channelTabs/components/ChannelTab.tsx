@@ -6,12 +6,13 @@
  */
 
 import { classNameFactory } from "@api/Styles";
+import { BaseText } from "@components/BaseText";
 import { Channel, Guild, User } from "@plexcord/discord-types";
 import { ChannelTabsProps, CircleQuestionIcon, closeTab, isTabSelected, moveDraggedTabs, moveToTab, openedTabs, settings } from "@plugins/channelTabs/util";
 import { getGuildAcronym, getIntlMessage, getUniqueUsername } from "@utils/discord";
 import { classes } from "@utils/misc";
 import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
-import { Avatar, ChannelStore, ContextMenuApi, GuildStore, PresenceStore, ReadStateStore, Text, TypingStore, useDrag, useDrop, useEffect, useRef, UserStore, useState, useStateFromStores } from "@webpack/common";
+import { Avatar, ChannelStore, ContextMenuApi, GuildStore, PresenceStore, ReadStateStore, TypingStore, useDrag, useDrop, useEffect, useRef, UserStore, useState, useStateFromStores } from "@webpack/common";
 
 import { TabContextMenu } from "./ContextMenus";
 
@@ -38,7 +39,7 @@ const GuildIcon = ({ guild }: { guild: Guild; }) => {
             className={cl("icon")}
         />
         : <div className={cl("guild-acronym-icon")}>
-            <Text variant="text-xs/semibold" tag="span">{getGuildAcronym(guild)}</Text>
+            <BaseText size="xs" weight="semibold" tag="span">{getGuildAcronym(guild)}</BaseText>
         </div>;
 };
 
@@ -108,7 +109,7 @@ function ChannelTabContent(props: ChannelTabsProps & {
                 <>
                     <GuildIcon guild={guild} />
                     <ChannelTypeIcon channel={channel} guild={guild} />
-                    <Text className={cl("name-text")}>{channel.name}</Text>
+                    <BaseText className={cl("name-text")}>{channel.name}</BaseText>
                     <NotificationDot channelIds={[channel.id]} />
                     <TypingIndicator isTyping={isTyping} />
                 </>
@@ -135,7 +136,7 @@ function ChannelTabContent(props: ChannelTabsProps & {
             return (
                 <>
                     <GuildIcon guild={guild} />
-                    <Text className={cl("name-text")}>{name}</Text>
+                    <BaseText className={cl("name-text")}>{name}</BaseText>
                 </>
             );
         }
@@ -157,9 +158,9 @@ function ChannelTabContent(props: ChannelTabsProps & {
                         isTyping={isTyping}
                         isMobile={isMobile}
                     />
-                    <Text className={cl("name-text")}>
+                    <BaseText className={cl("name-text")}>
                         {username}
-                    </Text>
+                    </BaseText>
                     <NotificationDot channelIds={[channel.id]} />
                     {!showStatusIndicators && <TypingIndicator isTyping={isTyping} />}
                 </>
@@ -169,7 +170,7 @@ function ChannelTabContent(props: ChannelTabsProps & {
             return (
                 <>
                     <ChannelIcon channel={channel} />
-                    <Text className={cl("name-text")}>{channel?.name || getIntlMessage("GROUP_DM")}</Text>
+                    <BaseText className={cl("name-text")}>{channel?.name || getIntlMessage("GROUP_DM")}</BaseText>
                     <NotificationDot channelIds={[channel.id]} />
                     <TypingIndicator isTyping={isTyping} />
                 </>
@@ -181,14 +182,14 @@ function ChannelTabContent(props: ChannelTabsProps & {
         return (
             <>
                 <FriendsIcon />
-                <Text className={cl("name-text")}>{getIntlMessage("FRIENDS")}</Text>
+                <BaseText className={cl("name-text")}>{getIntlMessage("FRIENDS")}</BaseText>
             </>
         );
 
     return (
         <>
             <CircleQuestionIcon />
-            <Text className={cl("name-text")}>{getIntlMessage("UNKNOWN_CHANNEL")}</Text>
+            <BaseText className={cl("name-text")}>{getIntlMessage("UNKNOWN_CHANNEL")}</BaseText>
         </>
     );
 }

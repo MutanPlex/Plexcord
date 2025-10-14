@@ -20,10 +20,12 @@
 import "./styles.css";
 
 import { t, tJsx } from "@api/i18n";
+import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
+import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { getStylusWebStoreUrl } from "@utils/web";
-import { Card, Forms, React, TabBar, useState } from "@webpack/common";
+import { Card, React, TabBar, useState } from "@webpack/common";
 
 import { CspErrorCard } from "./CspErrorCard";
 import { LocalThemesTab } from "./LocalThemesTab";
@@ -72,13 +74,13 @@ function UserscriptThemesTab() {
     return (
         <SettingsTab title="Themes">
             <Card className="pc-settings-card">
-                <Forms.FormTitle tag="h5">{t("themes.error.userscript")}</Forms.FormTitle>
+                <Heading>{t("themes.error.userscript")}</Heading>
 
-                <Forms.FormText>
+                <Paragraph>
                     {tJsx("themes.error.stylus", {
                         stylus: <Link href={getStylusWebStoreUrl()}>{t("themes.stylus")}</Link>
                     })}
-                </Forms.FormText>
+                </Paragraph>
             </Card>
         </SettingsTab>
     );

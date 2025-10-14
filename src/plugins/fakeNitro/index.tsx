@@ -20,6 +20,7 @@
 import { t } from "@api/i18n";
 import { addMessagePreEditListener, addMessagePreSendListener, removeMessagePreEditListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { definePluginSettings } from "@api/Settings";
+import { Paragraph } from "@components/Paragraph";
 import type { Emoji, Message } from "@plexcord/discord-types";
 import { StickerFormatType } from "@plexcord/discord-types/enums";
 import { Devs } from "@utils/constants";
@@ -28,7 +29,7 @@ import { getCurrentGuild, getEmojiURL } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType, Patch } from "@utils/types";
 import { findByCodeLazy, findByPropsLazy, findStoreLazy, proxyLazyWebpack } from "@webpack";
-import { Alerts, ChannelStore, DraftType, EmojiStore, FluxDispatcher, Forms, GuildMemberStore, lodash, Parser, PermissionsBits, PermissionStore, StickersStore, UploadHandler, UserSettingsActionCreators, UserStore } from "@webpack/common";
+import { Alerts, ChannelStore, DraftType, EmojiStore, FluxDispatcher, GuildMemberStore, lodash, OverridePremiumTypeStore, Parser, PermissionsBits, PermissionStore, StickersStore, UploadHandler, UserSettingsActionCreators } from "@webpack/common";
 import { applyPalette, GIFEncoder, quantize } from "gifenc";
 import type { ReactElement, ReactNode } from "react";
 
@@ -441,18 +442,18 @@ export default definePlugin({
     },
 
     get canUseEmotes() {
-        return (UserStore.getCurrentUser().premiumType ?? 0) > 0;
+        return (OverridePremiumTypeStore.getState().premiumTypeActual ?? 0) > 0;
     },
 
     get canUseStickers() {
-        return (UserStore.getCurrentUser().premiumType ?? 0) > 1;
+        return (OverridePremiumTypeStore.getState().premiumTypeActual ?? 0) > 1;
     },
 
     handleProtoChange(proto: any, user: any) {
         try {
             if (proto == null || typeof proto === "string") return;
 
-            const premiumType: number = user?.premium_type ?? UserStore?.getCurrentUser()?.premiumType ?? 0;
+            const premiumType = OverridePremiumTypeStore.getState().premiumTypeActual ?? 0;
 
             if (premiumType !== 2) {
                 proto.appearance ??= AppearanceSettingsActionCreators.create();
@@ -473,7 +474,7 @@ export default definePlugin({
     },
 
     handleGradientThemeSelect(backgroundGradientPresetId: number | undefined, theme: number, original: () => void) {
-        const premiumType = UserStore?.getCurrentUser()?.premiumType ?? 0;
+        const premiumType = OverridePremiumTypeStore.getState().premiumTypeActual ?? 0;
         if (premiumType === 2 || backgroundGradientPresetId == null) return original();
 
         if (!PreloadedUserSettingsActionCreators || !AppearanceSettingsActionCreators || !ClientThemeSettingsActionsCreators || !BINARY_READ_OPTIONS) return;
@@ -856,12 +857,12 @@ export default definePlugin({
                 Alerts.show({
                     title: t("plugin.fakeNitro.notice.alert.title"),
                     body: <div>
-                        <Forms.FormText>
+                        <Paragraph>
                             {t("plugin.fakeNitro.notice.alert.body")}
-                        </Forms.FormText>
-                        <Forms.FormText>
+                        </Paragraph>
+                        <Paragraph>
                             {t("plugin.fakeNitro.notice.alert.footer")}
-                        </Forms.FormText>
+                        </Paragraph>
                     </div>,
                     confirmText: t("plugin.fakeNitro.notice.alert.confirm"),
                     cancelText: t("plugin.fakeNitro.notice.alert.cancel"),
@@ -911,9 +912,9 @@ export default definePlugin({
                         Alerts.show({
                             title: t("plugin.fakeNitro.notice.apngSticker.title"),
                             body: <div>
-                                <Forms.FormText>
+                                <Paragraph>
                                     {t("plugin.fakeNitro.notice.apngSticker.body")}
-                                </Forms.FormText>
+                                </Paragraph>
                             </div>
                         });
                     } else {

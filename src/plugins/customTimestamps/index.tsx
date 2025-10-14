@@ -9,14 +9,17 @@ import "./style.css";
 
 import { t } from "@api/i18n";
 import { definePluginSettings, useSettings } from "@api/Settings";
+import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
+import { Paragraph } from "@components/Paragraph";
 import { Devs, PcDevs } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import { useForceUpdater } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy, findComponentByCodeLazy } from "@webpack";
-import { Forms, moment, TextInput, useEffect, useRef, UserStore, useState } from "@webpack/common";
+import { moment, TextInput, useEffect, useRef, UserStore, useState } from "@webpack/common";
 
 type TimeFormat = {
     readonly label: string;
@@ -163,8 +166,8 @@ const TimeRow = (props: TimeRowProps) => {
 
     return (
         <>
-            <Forms.FormTitle tag="h5">{props.format.label}</Forms.FormTitle>
-            <Forms.FormText>{props.format.description}</Forms.FormText>
+            <Heading>{props.format.label}</Heading>
+            <Paragraph>{props.format.description}</Paragraph>
             <TextInput value={state} onChange={handleChange} />
         </>
     );
@@ -200,10 +203,10 @@ const DemoMessage = (props: { msgId, compact, message, date: Date | undefined, i
             />
         </div>
     ) : <div className="pc-cmt-demo-message">
-        <Forms.FormText>
+        <Paragraph>
             {/* @ts-ignore */}
             <b>{t("plugin.customTimestamps.modal.preview")}:</b> {Plexcord.Plugins.plugins.CustomTimestamps.renderTimestamp(date, "cozy")}
-        </Forms.FormText>
+        </Paragraph>
     </div>;
 };
 
@@ -249,11 +252,11 @@ const settings = definePluginSettings({
                         <section key={key}>
                             {key === "sameDayFormat" && (
                                 <div className={Margins.bottom20}>
-                                    <Forms.FormDivider style={{ marginBottom: "10px" }} />
-                                    <Forms.FormTitle tag="h1">{t("plugin.customTimestamps.modal.format")}</Forms.FormTitle>
-                                    <Forms.FormText>
+                                    <Divider style={{ marginBottom: "10px" }} />
+                                    <Heading>{t("plugin.customTimestamps.modal.format")}</Heading>
+                                    <Paragraph>
                                         {t("plugin.customTimestamps.modal.howTo")}<br />
-                                    </Forms.FormText>
+                                    </Paragraph>
                                 </div>
                             )}
                             <TimeRow
@@ -292,15 +295,15 @@ export default definePlugin({
 
     settingsAboutComponent: () => (
         <div className={"pc-cmt-info-card"}>
-            <Forms.FormTitle tag="h2">{t("plugin.customTimestamps.modal.title")}</Forms.FormTitle>
-            <Forms.FormText>
+            <Heading>{t("plugin.customTimestamps.modal.title")}</Heading>
+            <Paragraph>
                 <Link href="https://momentjs.com/docs/#/displaying/format/">{t("plugin.customTimestamps.modal.moment")}</Link>
                 <div className={Margins.top8}>
                     {t("plugin.customTimestamps.modal.hint")}<br />
                     <b>[calendar]</b> {t("plugin.customTimestamps.modal.calendar")} &quot;{t("plugin.customTimestamps.modal.today")}&quot; or &quot;{t("plugin.customTimestamps.modal.yesterday")}&quot;.<br />
                     <b>[relative]</b> {t("plugin.customTimestamps.modal.relative")} &quot;{t("plugin.customTimestamps.modal.relativeTime")}&quot;.<br />
                 </div>
-            </Forms.FormText>
+            </Paragraph>
         </div>
     ),
     patches: [

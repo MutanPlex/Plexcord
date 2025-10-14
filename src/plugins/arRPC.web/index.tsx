@@ -19,11 +19,13 @@
 
 import { t, tJsx } from "@api/i18n";
 import { popNotice, showNotice } from "@api/Notices";
+import { HeadingSecondary } from "@components/Heading";
 import { Link } from "@components/Link";
+import { Paragraph } from "@components/Paragraph";
 import { Devs } from "@utils/constants";
 import definePlugin, { ReporterTestable } from "@utils/types";
 import { findByCodeLazy } from "@webpack";
-import { ApplicationAssetUtils, FluxDispatcher, Forms, Toasts } from "@webpack/common";
+import { ApplicationAssetUtils, FluxDispatcher, Toasts } from "@webpack/common";
 
 const fetchApplicationsRPC = findByCodeLazy('"Invalid Origin"', ".application");
 
@@ -52,12 +54,12 @@ export default definePlugin({
 
     settingsAboutComponent: () => (
         <>
-            <Forms.FormTitle tag="h3">{t("plugin.arRpc.use.title")}</Forms.FormTitle>
-            <Forms.FormText>
+            <HeadingSecondary>{t("plugin.arRpc.use.title")}</HeadingSecondary>
+            <Paragraph>
                 {tJsx("plugin.arRpc.use.enable", {
                     link: <Link href="https://github.com/OpenAsar/arrpc/tree/main#server">{t("plugin.arRpc.use.link")}</Link>
                 })}
-            </Forms.FormText>
+            </Paragraph>
         </>
     ),
 

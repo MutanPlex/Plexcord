@@ -7,8 +7,9 @@
 
 import { t } from "@api/i18n";
 import { FormSwitch } from "@components/FormSwitch";
+import { Heading, Paragraph } from "@components/index";
 import { Margins } from "@utils/margins";
-import { Forms, Parser, TextInput, useEffect, useState } from "@webpack/common";
+import { Parser, TextInput, useEffect, useState } from "@webpack/common";
 
 const RegexGuide = {
     "\\i": "patchHelper.cheatSheet.identifiers",
@@ -54,7 +55,7 @@ export function ReplacementInput({ replacement, setReplacement, replacementError
     return (
         <>
             {/* FormTitle adds a class if className is not set, so we set it to an empty string to prevent that */}
-            <Forms.FormTitle className="">{t("patchHelper.replacement")}</Forms.FormTitle>
+            <Heading className="">{t("patchHelper.replacement")}</Heading>
             <TextInput
                 value={replacement?.toString()}
                 onChange={onChange}
@@ -62,12 +63,12 @@ export function ReplacementInput({ replacement, setReplacement, replacementError
             />
             {!isFunc && (
                 <div>
-                    <Forms.FormTitle className={Margins.top8}>{t("patchHelper.cheatSheet.title")}</Forms.FormTitle>
+                    <Heading className={Margins.top8}>{t("patchHelper.cheatSheet.title")}</Heading>
 
                     {Object.entries(RegexGuide).map(([placeholder, desc]) => (
-                        <Forms.FormText key={placeholder}>
+                        <Paragraph key={placeholder}>
                             {Parser.parse("`" + placeholder + "`")}: {t(desc)}
-                        </Forms.FormText>
+                        </Paragraph>
                     ))}
                 </div>
             )}

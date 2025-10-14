@@ -5,12 +5,13 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { BaseText } from "@components/BaseText";
 import { Channel } from "@plexcord/discord-types";
 import { getVcLogs, vcLogSubscribe } from "@plugins/voiceChannelLog.dev/logs";
 import { classes } from "@utils/misc";
 import { ModalCloseButton, ModalContent, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { findStoreLazy } from "@webpack";
-import { React, ScrollerThin, Text } from "@webpack/common";
+import { React, ScrollerThin } from "@webpack/common";
 
 import { cl } from "..";
 import { VoiceChannelLogEntryComponent } from "./VoiceChannelLogEntryComponent";
@@ -54,7 +55,7 @@ export function VoiceChannelLogModal({ channel, props }: { channel: Channel; pro
             size={ModalSize.LARGE}
         >
             <ModalHeader>
-                <Text className={cl("header")} variant="heading-lg/semibold" style={{ flexGrow: 1 }}>{channel.name} logs</Text>
+                <BaseText className={cl("header")} size="lg" weight="semibold" style={{ flexGrow: 1 }}>{channel.name} logs</BaseText>
                 <ModalCloseButton onClick={props.onClose} />
             </ModalHeader>
 
@@ -63,6 +64,6 @@ export function VoiceChannelLogModal({ channel, props }: { channel: Channel; pro
                     {logElements}
                 </ScrollerThin>
             </ModalContent>
-        </ModalRoot >
+        </ModalRoot>
     );
 }

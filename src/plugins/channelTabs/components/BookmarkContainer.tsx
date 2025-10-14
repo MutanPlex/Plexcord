@@ -7,12 +7,13 @@
 
 import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
+import { BaseText } from "@components/BaseText";
 import { BasicChannelTabsProps, Bookmark, BookmarkFolder, BookmarkProps, CircleQuestionIcon, isBookmarkFolder, settings, switchChannel, useBookmarks } from "@plugins/channelTabs/util";
 import { getGuildAcronym, getIntlMessage } from "@utils/discord";
 import { classes } from "@utils/misc";
 import { closeModal, openModal } from "@utils/modal";
 import { findComponentByCodeLazy } from "@webpack";
-import { Avatar, ChannelStore, ContextMenuApi, FluxDispatcher, GuildStore, Menu, ReadStateStore, ReadStateUtils, Text, Tooltip, useDrag, useDrop, useEffect, useRef, UserStore } from "@webpack/common";
+import { Avatar, ChannelStore, ContextMenuApi, FluxDispatcher, GuildStore, Menu, ReadStateStore, ReadStateUtils, Tooltip, useDrag, useDrop, useEffect, useRef, UserStore } from "@webpack/common";
 
 import { NotificationDot } from "./ChannelTab";
 import { BookmarkContextMenu, EditModal } from "./ContextMenus";
@@ -49,7 +50,7 @@ function BookmarkIcon({ bookmark }: { bookmark: Bookmark | BookmarkFolder; }) {
             className={cl("bookmark-icon")}
         />
         : <div className={cl("bookmark-icon")}>
-            <Text variant="text-xxs/semibold" tag="span">{getGuildAcronym(guild)}</Text>
+            <BaseText size="xxs" weight="semibold" tag="span">{getGuildAcronym(guild)}</BaseText>
         </div>;
 
     if (channel?.recipients?.length) {
@@ -224,9 +225,7 @@ function Bookmark(props: BookmarkProps) {
             )}
         >
             <BookmarkIcon bookmark={bookmark} />
-            <Text variant="text-sm/normal" className={cl("name-text")}>
-                {bookmark.name}
-            </Text>
+            <BaseText size="sm" weight="normal" className={cl("name-text")}>{bookmark.name}</BaseText>
             {bookmarkNotificationDot && <NotificationDot channelIds={isBookmarkFolder(bookmark)
                 ? bookmark.bookmarks.map(b => b.channelId)
                 : [bookmark.channelId]
@@ -269,12 +268,12 @@ export default function BookmarkContainer(props: BasicChannelTabsProps & { userI
     return (
         <div className={cl("bookmark-container")}>
             <HorizontalScroller className={cl("bookmarks")}>
-                {!bookmarks && <Text className={cl("bookmark-placeholder-text")} variant="text-xs/normal">
+                {!bookmarks && <BaseText className={cl("bookmark-placeholder-text")} size="xs" weight="normal">
                     {t("plugin.channelTabs.bookmark.loading")}
-                </Text>}
-                {bookmarks && !bookmarks.length && <Text className={cl("bookmark-placeholder-text")} variant="text-xs/normal">
+                </BaseText>}
+                {bookmarks && !bookmarks.length && <BaseText className={cl("bookmark-placeholder-text")} size="xs" weight="normal">
                     {t("plugin.channelTabs.bookmark.noBookmarks")}
-                </Text>}
+                </BaseText>}
                 {Array.isArray(bookmarks) && bookmarks.length > 0 &&
                     bookmarks.map((_, i) => (
                         <Bookmark key={i} index={i} bookmarks={bookmarks} methods={methods} />

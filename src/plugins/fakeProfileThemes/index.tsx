@@ -22,7 +22,11 @@ import "./style.css";
 
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { BaseText } from "@components/BaseText";
+import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { User, UserProfile } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { fetchUserProfile } from "@utils/discord";
@@ -31,7 +35,7 @@ import { classes, copyWithToast } from "@utils/misc";
 import { useAwaiter } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
-import { Button, ColorPicker, Flex, Forms, React, Text, UserProfileStore, UserStore, useState } from "@webpack/common";
+import { Button, ColorPicker, Flex, React, UserProfileStore, UserStore, useState } from "@webpack/common";
 import virtualMerge from "virtual-merge";
 
 interface Colors {
@@ -123,8 +127,8 @@ function SettingsAboutComponent() {
 
     return (
         <section>
-            <Forms.FormTitle tag="h3">{t("plugin.fakeProfileThemes.modal.usage")}</Forms.FormTitle>
-            <Forms.FormText>
+            <Heading>{t("plugin.fakeProfileThemes.modal.usage")}</Heading>
+            <Paragraph>
                 {t("plugin.fakeProfileThemes.modal.intro")}
                 <br />
                 {t("plugin.fakeProfileThemes.modal.setColor")}
@@ -135,10 +139,10 @@ function SettingsAboutComponent() {
                     <li>• {t("plugin.fakeProfileThemes.modal.step2", { copy: t("plugin.fakeProfileThemes.button.copy") })}</li>
                     <li>• {t("plugin.fakeProfileThemes.modal.step3")}</li>
                 </ul><br />
-                <Forms.FormDivider
+                <Divider
                     className={classes(Margins.top8, Margins.bottom8)}
                 />
-                <Forms.FormTitle tag="h3">{t("plugin.fakeProfileThemes.modal.pickers")}</Forms.FormTitle>
+                <Heading>{t("plugin.fakeProfileThemes.modal.pickers")}</Heading>
                 <Flex
                     direction={Flex.Direction.HORIZONTAL}
                     style={{ gap: "1rem" }}
@@ -146,12 +150,9 @@ function SettingsAboutComponent() {
                     <ColorPicker
                         color={color1}
                         label={
-                            <Text
-                                variant={"text-xs/normal"}
-                                style={{ marginTop: "4px" }}
-                            >
+                            <BaseText size="xs" weight="normal" style={{ marginTop: "4px" }}>
                                 {t("plugin.fakeProfileThemes.modal.primary")}
-                            </Text>
+                            </BaseText>
                         }
                         onChange={(color: number) => {
                             setColor1(color);
@@ -160,12 +161,9 @@ function SettingsAboutComponent() {
                     <ColorPicker
                         color={color2}
                         label={
-                            <Text
-                                variant={"text-xs/normal"}
-                                style={{ marginTop: "4px" }}
-                            >
+                            <BaseText size="xs" weight="normal" style={{ marginTop: "4px" }}>
                                 {t("plugin.fakeProfileThemes.modal.accent")}
-                            </Text>
+                            </BaseText>
                         }
                         onChange={(color: number) => {
                             setColor2(color);
@@ -182,10 +180,10 @@ function SettingsAboutComponent() {
                         {t("plugin.fakeProfileThemes.button.copy")}
                     </Button>
                 </Flex>
-                <Forms.FormDivider
+                <Divider
                     className={classes(Margins.top8, Margins.bottom8)}
                 />
-                <Forms.FormTitle tag="h3">{t("plugin.fakeProfileThemes.modal.preview")}</Forms.FormTitle>
+                <Heading>{t("plugin.fakeProfileThemes.modal.preview")}</Heading>
                 <div className="pc-fpt-preview">
                     <ProfileModal
                         user={UserStore.getCurrentUser()}
@@ -198,7 +196,7 @@ function SettingsAboutComponent() {
                         isTryItOutFlow={true}
                     />
                 </div>
-            </Forms.FormText>
+            </Paragraph>
         </section>);
 }
 

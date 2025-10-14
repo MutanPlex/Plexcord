@@ -20,9 +20,11 @@
 import { t, tJsx } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
+import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
+import { Paragraph } from "@components/Paragraph";
 import { openUpdaterModal } from "@components/settings/tabs/updater";
 import { Channel } from "@plexcord/discord-types";
 import { BOT_COMMANDS_CHANNEL_ID, CONTRIB_ROLE_ID, Devs, DONOR_ROLE_ID, KNOWN_ISSUES_CHANNEL_ID, PcDevs, PLEXBOT_USER_ID, PLEXCORD_GUILD_ID, REGULAR_ROLE_ID, SUPPORT_CATEGORY_ID, SUPPORT_CHANNEL_ID } from "@utils/constants";
@@ -35,7 +37,7 @@ import { onlyOnce } from "@utils/onlyOnce";
 import { makeCodeblock } from "@utils/text";
 import definePlugin from "@utils/types";
 import { checkForUpdates, isOutdated, update } from "@utils/updater";
-import { Alerts, Button, Card, ChannelStore, Forms, GuildMemberStore, Parser, PermissionsBits, PermissionStore, RelationshipStore, showToast, Text, Toasts, UserStore } from "@webpack/common";
+import { Alerts, Button, Card, ChannelStore, GuildMemberStore, Parser, PermissionsBits, PermissionStore, RelationshipStore, showToast, Toasts, UserStore } from "@webpack/common";
 import { JSX } from "react";
 
 import gitHash from "~git-hash";
@@ -226,10 +228,10 @@ export default definePlugin({
                     return Alerts.show({
                         title: t("plugins.metadata.supportHelper.modals.outdated.title"),
                         body: <div>
-                            <Forms.FormText>{t("plugins.metadata.supportHelper.modals.outdated.body")}</Forms.FormText>
-                            <Forms.FormText className={Margins.top8}>
+                            <Paragraph>{t("plugins.metadata.supportHelper.modals.outdated.body")}</Paragraph>
+                            <Paragraph className={Margins.top8}>
                                 {t("plugins.metadata.supportHelper.modals.outdated.footer")}
-                            </Forms.FormText>
+                            </Paragraph>
                         </div>,
                         onCancel: () => openUpdaterModal!(),
                         cancelText: t("plugins.metadata.supportHelper.modals.outdated.button.cancel"),
@@ -247,12 +249,12 @@ export default definePlugin({
                 return Alerts.show({
                     title: t("plugins.metadata.supportHelper.modals.updater.title"),
                     body: <div>
-                        <Forms.FormText>{t("plugins.metadata.supportHelper.modals.updater.body")}</Forms.FormText>
-                        <Forms.FormText className={Margins.top8}>
+                        <Paragraph>{t("plugins.metadata.supportHelper.modals.updater.body")}</Paragraph>
+                        <Paragraph className={Margins.top8}>
                             {tJsx("plugins.metadata.supportHelper.modals.updater.footer", {
                                 officially: <Link href="https://plexcord.club/download">{t("plugins.metadata.supportHelper.modals.updater.officially")}</Link>
                             })}
-                        </Forms.FormText>
+                        </Paragraph>
                     </div>
                 });
             }
@@ -261,16 +263,16 @@ export default definePlugin({
                 return Alerts.show({
                     title: t("plugins.metadata.supportHelper.modals.custom.title"),
                     body: <div>
-                        <Forms.FormText>{t("plugins.metadata.supportHelper.modals.custom.header")}</Forms.FormText>
+                        <Paragraph>{t("plugins.metadata.supportHelper.modals.custom.header")}</Paragraph>
 
-                        <Forms.FormText className={Margins.top8}>
+                        <Paragraph className={Margins.top8}>
                             {tJsx("plugins.metadata.supportHelper.modals.custom.body", {
                                 officialBuild: <Link href="https://plexcord.club/download">{t("plugins.metadata.supportHelper.modals.custom.official")}</Link>,
                                 switch: <Link href="https://plexcord.club/download">{t("plugins.metadata.supportHelper.modals.custom.switch")}</Link>
                             })}
-                        </Forms.FormText>
+                        </Paragraph>
 
-                        <Text variant="text-md/bold" className={Margins.top8}>{t("plugins.metadata.supportHelper.modals.custom.footer")}</Text>
+                        <BaseText size="md" weight="bold" className={Margins.top8}>{t("plugins.metadata.supportHelper.modals.custom.footer")}</BaseText>
                     </div>,
                     confirmText: t("plugins.metadata.supportHelper.modals.custom.button.confirm"),
                     secondaryConfirmText: t("plugins.metadata.supportHelper.modals.custom.button.secondaryConfirm"),
@@ -318,12 +320,14 @@ export default definePlugin({
                 buttons.push(
                     <Button
                         key="pc-dbg"
+                        color={Button.Colors.PRIMARY}
                         onClick={async () => sendMessage(props.channel.id, { content: await generateDebugInfoMessage() })}
                     >
                         {t("plugins.metadata.supportHelper.button.debug")}
                     </Button>,
                     <Button
                         key="pc-plg-list"
+                        color={Button.Colors.PRIMARY}
                         onClick={async () => sendMessage(props.channel.id, { content: generatePluginList() })}
                     >
                         {t("plugins.metadata.supportHelper.button.plugins")}

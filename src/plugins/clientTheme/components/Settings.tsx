@@ -8,11 +8,13 @@
 import { t, tJsx } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { ErrorCard } from "@components/ErrorCard";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { relativeLuminance } from "@plugins/clientTheme/utils/colorUtils";
 import { createOrUpdateThemeColorVars } from "@plugins/clientTheme/utils/styleUtils";
 import { Margins } from "@utils/margins";
 import { findByCodeLazy, findStoreLazy } from "@webpack";
-import { Button, ColorPicker, Forms, ThemeStore, useStateFromStores } from "@webpack/common";
+import { Button, ColorPicker, ThemeStore, useStateFromStores } from "@webpack/common";
 
 import { settings } from "..";
 const saveClientTheme = findByCodeLazy('type:"UNSYNCED_USER_SETTINGS_UPDATE', '"system"===');
@@ -68,8 +70,8 @@ export function ThemeSettingsComponent() {
         <div className={cl("settings")}>
             <div className={cl("container")}>
                 <div className={cl("settings-labels")}>
-                    <Forms.FormTitle tag="h3">{t("plugin.clientTheme.title")}</Forms.FormTitle>
-                    <Forms.FormText>{t("plugin.clientTheme.add")}</Forms.FormText>
+                    <Heading>{t("plugin.clientTheme.title")}</Heading>
+                    <Paragraph>{t("plugin.clientTheme.add")}</Paragraph>
                 </div>
                 <ColorPicker
                     color={parseInt(settings.store.color, 16)}
@@ -80,10 +82,10 @@ export function ThemeSettingsComponent() {
             </div>
             {(contrastWarning || nitroThemeEnabled) && (<>
                 <ErrorCard className={Margins.top8}>
-                    <Forms.FormTitle tag="h2">{t("plugin.clientTheme.error.modal.title")}</Forms.FormTitle>
+                    <Heading>{t("plugin.clientTheme.error.modal.title")}</Heading>
 
-                    {contrastWarning && <Forms.FormText>{">"} {t("plugin.clientTheme.error.modal.contrast")}</Forms.FormText>}
-                    {nitroThemeEnabled && <Forms.FormText>{">"} {t("plugin.clientTheme.error.modal.nitro")}</Forms.FormText>}
+                    {contrastWarning && <Paragraph>{">"} {t("plugin.clientTheme.error.modal.contrast")}</Paragraph>}
+                    {nitroThemeEnabled && <Paragraph>{">"} {t("plugin.clientTheme.error.modal.nitro")}</Paragraph>}
 
                     <div className={cl("buttons-container")}>
                         {(contrastWarning && fixableContrast) && <Button onClick={() => setDiscordTheme(oppositeTheme)} color={Button.Colors.RED}>{tJsx("plugin.clientTheme.error.modal.switch", { oppositeTheme })}</Button>}

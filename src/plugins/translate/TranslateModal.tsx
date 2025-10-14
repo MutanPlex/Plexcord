@@ -17,10 +17,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { Divider } from "@components/Divider";
 import { FormSwitch } from "@components/FormSwitch";
+import { Heading } from "@components/Heading";
 import { Margins } from "@utils/margins";
 import { ModalCloseButton, ModalContent, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
-import { Forms, SearchableSelect, useMemo } from "@webpack/common";
+import { SearchableSelect, useMemo } from "@webpack/common";
 
 import { settings } from "./settings";
 import { cl, getLanguages } from "./utils";
@@ -42,9 +44,9 @@ function LanguageSelect({ settingsKey, includeAuto }: { settingsKey: typeof Lang
 
     return (
         <section className={Margins.bottom16}>
-            <Forms.FormTitle tag="h3">
+            <Heading>
                 {settings.def[settingsKey].description}
-            </Forms.FormTitle>
+            </Heading>
 
             <SearchableSelect
                 options={options}
@@ -78,9 +80,9 @@ export function TranslateModal({ rootProps }: { rootProps: ModalProps; }) {
     return (
         <ModalRoot {...rootProps}>
             <ModalHeader className={cl("modal-header")}>
-                <Forms.FormTitle tag="h2" className={cl("modal-title")}>
+                <Heading className={cl("modal-title")}>
                     Translate
-                </Forms.FormTitle>
+                </Heading>
                 <ModalCloseButton onClick={rootProps.onClose} />
             </ModalHeader>
 
@@ -93,7 +95,7 @@ export function TranslateModal({ rootProps }: { rootProps: ModalProps; }) {
                     />
                 ))}
 
-                <Forms.FormDivider className={Margins.bottom16} />
+                <Divider className={Margins.bottom16} />
 
                 <AutoTranslateToggle />
             </ModalContent>

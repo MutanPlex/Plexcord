@@ -7,11 +7,13 @@
 
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { ChannelTabsPreview } from "@plugins/channelTabs/components/ChannelTabsContainer";
 import { Logger } from "@utils/Logger";
 import { OptionType } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
-import { Forms, SearchableSelect, useState } from "@webpack/common";
+import { SearchableSelect, useState } from "@webpack/common";
 import { JSX } from "react";
 
 interface DynamicDropdownSettingOption {
@@ -80,10 +82,10 @@ function AnimationSettings(): JSX.Element {
 
     return (
         <section>
-            <Forms.FormTitle>{t("plugin.channelTabs.animation.title")}</Forms.FormTitle>
-            <Forms.FormText>
+            <Heading>{t("plugin.channelTabs.animation.title")}</Heading>
+            <Paragraph>
                 {t("plugin.channelTabs.animation.description")}
-            </Forms.FormText>
+            </Paragraph>
             <div style={{ marginTop: "8px" }}>
                 <SearchableSelect
                     placeholder={t("plugin.channelTabs.animation.placeholder")}

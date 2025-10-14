@@ -6,10 +6,11 @@
  */
 
 import { t } from "@api/i18n";
+import { HeadingPrimary } from "@components/Heading";
 import { getLanguageColor } from "@plugins/githubRepos/colors";
 import { GitHubRepo } from "@plugins/githubRepos/types";
 import { ModalContent, ModalFooter, ModalHeader, ModalRoot } from "@utils/modal";
-import { Button, Forms, React } from "@webpack/common";
+import { Button, React } from "@webpack/common";
 
 import { Star } from "./Star";
 
@@ -64,9 +65,9 @@ export function ReposModal({ repos, username, rootProps }: ReposModalProps) {
     return (
         <ModalRoot className="pc-github-repos-modal" size="large" {...rootProps}>
             <ModalHeader>
-                <Forms.FormTitle tag="h2" className="pc-github-repos-modal-title">
+                <HeadingPrimary className="pc-github-repos-modal-title">
                     {t("plugin.githubRepos.modal.title", { user: username })}
-                </Forms.FormTitle>
+                </HeadingPrimary>
             </ModalHeader>
             <ModalContent className="pc-github-repos-modal-content">
                 <div className="pc-github-repos-table-container">

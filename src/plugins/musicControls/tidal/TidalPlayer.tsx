@@ -9,11 +9,13 @@ import "./tidalStyles.css";
 
 import { Settings } from "@api/Settings";
 import { ImageIcon, LinkIcon, OpenExternalIcon } from "@components/Icons";
+import { Paragraph } from "@components/Paragraph";
+import { Span } from "@components/Span";
 import { SeekBar } from "@plugins/musicControls/spotify/SeekBar";
 import { debounce } from "@shared/debounce";
 import { openImageModal } from "@utils/discord";
 import { classes, copyWithToast } from "@utils/misc";
-import { ContextMenuApi, Flex, FluxDispatcher, Forms, Menu, React, useEffect, useState, useStateFromStores } from "@webpack/common";
+import { ContextMenuApi, Flex, FluxDispatcher, Menu, React, useEffect, useState, useStateFromStores } from "@webpack/common";
 
 import { type PlayerState, type Repeat, TidalStore } from "./TidalStore";
 
@@ -180,13 +182,14 @@ function TdlSeekBar() {
 
     return (
         <div id={cl("progress-bar")}>
-            <Forms.FormText
-                variant="text-xs/medium"
+            <Span
+                size="xs"
+                weight="medium"
                 className={`${cl("progress-time")} ${cl("time-left")}`}
                 aria-label="Progress"
             >
                 {msToHuman(position)}
-            </Forms.FormText>
+            </Span>
             <SeekBar
                 initialValue={position}
                 minValue={0}
@@ -195,13 +198,14 @@ function TdlSeekBar() {
                 asValueChanges={onChange}
                 onValueRender={msToHuman}
             />
-            <Forms.FormText
-                variant="text-xs/medium"
+            <Span
+                size="xs"
+                weight="medium"
                 className={`${cl("progress-time")} ${cl("time-right")}`}
                 aria-label="Total Duration"
             >
                 {msToHuman(songDuration * 1000)}
-            </Forms.FormText>
+            </Span>
         </div>
     );
 }
@@ -280,25 +284,25 @@ function Info({ track }: { track: NonNullable<PlayerState["track"]>; }) {
         <div id={cl("info-wrapper")}>
             {i}
             <div id={cl("titles")}>
-                <Forms.FormText
-                    variant="text-sm/semibold"
+                <Paragraph
+                    weight="semibold"
                     id={cl("song-title")}
                     className={cl("ellipoverflow")}
                     title={track?.name}
                     {...makeLinkProps(`"${track.name}"`, track?.id, track?.url || `https://tidal.com/track/${track?.id}`)}
                 >
                     {track?.name}
-                </Forms.FormText>
+                </Paragraph>
                 {track.artist && (
-                    <Forms.FormText variant="text-sm/normal" className={cl("ellipoverflow")}>
+                    <Paragraph className={cl("ellipoverflow")}>
                         by&nbsp;
                         <span className={cl("artist")} style={{ fontSize: "inherit" }} title={track.artist}>
                             {track.artist}
                         </span>
-                    </Forms.FormText>
+                    </Paragraph>
                 )}
                 {track.album && (
-                    <Forms.FormText variant="text-sm/normal" className={cl("ellipoverflow")}>
+                    <Paragraph className={cl("ellipoverflow")}>
                         on&nbsp;
                         <span
                             id={cl("album-title")}
@@ -308,7 +312,7 @@ function Info({ track }: { track: NonNullable<PlayerState["track"]>; }) {
                         >
                             {track.album}
                         </span>
-                    </Forms.FormText>
+                    </Paragraph>
                 )}
             </div>
         </div>

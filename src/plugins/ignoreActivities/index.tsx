@@ -10,11 +10,13 @@ import { definePluginSettings, Settings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { Devs } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import definePlugin, { OptionType } from "@utils/types";
 import { findStoreLazy } from "@webpack";
-import { Button, Forms, showToast, TextInput, Toasts, Tooltip, useEffect, useState } from "@webpack/common";
+import { Button, showToast, TextInput, Toasts, Tooltip, useEffect, useState } from "@webpack/common";
 
 const enum ActivitiesTypes {
     Game,
@@ -84,7 +86,7 @@ function recalculateActivities() {
 function ImportCustomRPCComponent() {
     return (
         <Flex flexDirection="column">
-            <Forms.FormText>{t("plugin.ignoreActivities.modal.import.title")}</Forms.FormText>
+            <Paragraph>{t("plugin.ignoreActivities.modal.import.title")}</Paragraph>
             <div>
                 <Button
                     onClick={() => {
@@ -134,8 +136,8 @@ function IdsListComponent(props: { setValue: (value: string) => void; }) {
 
     return (
         <section>
-            <Forms.FormTitle tag="h3">{t("plugin.ignoreActivities.modal.filter.title")}</Forms.FormTitle>
-            <Forms.FormText className={Margins.bottom8}>{t("plugin.ignoreActivities.modal.filter.description")}</Forms.FormText>
+            <Heading>{t("plugin.ignoreActivities.modal.filter.title")}</Heading>
+            <Paragraph className={Margins.bottom8}>{t("plugin.ignoreActivities.modal.filter.description")}</Paragraph>
             <TextInput
                 type="text"
                 value={idsList}

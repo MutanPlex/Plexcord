@@ -19,14 +19,17 @@
 
 import { t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
+import { Divider } from "@components/Divider";
 import { FormSwitch } from "@components/FormSwitch";
+import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
+import { Paragraph } from "@components/Paragraph";
 import { handleSettingsTabError, SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { Margins } from "@utils/margins";
 import { ModalCloseButton, ModalContent, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { useAwaiter } from "@utils/react";
 import { getRepo, isNewer, UpdateLogger } from "@utils/updater";
-import { Forms, React } from "@webpack/common";
+import { React } from "@webpack/common";
 
 import gitHash from "~git-hash";
 
@@ -47,7 +50,7 @@ function Updater() {
 
     return (
         <SettingsTab title={"Plexcord " + t("updater.title")}>
-            <Forms.FormTitle tag="h5">{t("updater.settings")}</Forms.FormTitle>
+            <Heading>{t("updater.settings")}</Heading>
             <FormSwitch
                 value={settings.autoUpdate}
                 onChange={(v: boolean) => settings.autoUpdate = v}
@@ -62,9 +65,9 @@ function Updater() {
                 title={t("updater.notify.label")}
             />
 
-            <Forms.FormTitle tag="h5">{t("updater.repo")}</Forms.FormTitle>
+            <Heading>{t("updater.repo")}</Heading>
 
-            <Forms.FormText>
+            <Paragraph>
                 {repoPending
                     ? repo
                     : err
@@ -77,11 +80,11 @@ function Updater() {
                 }
                 {" "}
                 (<HashLink hash={gitHash} repo={repo} disabled={repoPending} />)
-            </Forms.FormText>
+            </Paragraph>
 
-            <Forms.FormDivider className={Margins.top8 + " " + Margins.bottom8} />
+            <Divider className={Margins.top8 + " " + Margins.bottom8} />
 
-            <Forms.FormTitle tag="h5">{t("updater.updates")}</Forms.FormTitle>
+            <Heading>{t("updater.updates")}</Heading>
 
             {isNewer
                 ? <Newer {...commonProps} />

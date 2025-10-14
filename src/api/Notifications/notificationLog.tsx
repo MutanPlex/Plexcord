@@ -21,11 +21,13 @@ import * as DataStore from "@api/DataStore";
 import { t, tJsx } from "@api/i18n";
 import { Settings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { BaseText } from "@components/BaseText";
 import { Flex } from "@components/Flex";
+import { Paragraph } from "@components/Paragraph";
 import { openNotificationSettingsModal } from "@components/settings/tabs/plexcord/NotificationSettings";
 import { closeModal, ModalCloseButton, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { useAwaiter } from "@utils/react";
-import { Alerts, Button, Forms, ListScrollerThin, React, Text, Timestamp, useEffect, useReducer, useState } from "@webpack/common";
+import { Alerts, Button, ListScrollerThin, React, Timestamp, useEffect, useReducer, useState } from "@webpack/common";
 import { nanoid } from "nanoid";
 import type { DispatchWithoutAction } from "react";
 
@@ -134,9 +136,9 @@ export function NotificationLog({ log, pending }: { log: PersistentNotificationD
         return (
             <div className={cl("container")}>
                 <div className={cl("empty")} />
-                <Forms.FormText style={{ textAlign: "center" }}>
+                <Paragraph style={{ textAlign: "center" }}>
                     {t("notifications.noYet")}
-                </Forms.FormText>
+                </Paragraph>
             </div>
         );
 
@@ -158,7 +160,7 @@ function LogModal({ modalProps, close }: { modalProps: ModalProps; close(): void
     return (
         <ModalRoot {...modalProps} size={ModalSize.LARGE} className={cl("modal")}>
             <ModalHeader>
-                <Text variant="heading-lg/semibold" style={{ flexGrow: 1 }}>{t("notifications.log.title")}</Text>
+                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t("notifications.log.title")}</BaseText>
                 <ModalCloseButton onClick={close} />
             </ModalHeader>
 

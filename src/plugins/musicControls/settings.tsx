@@ -7,8 +7,10 @@
 
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { makeRange, OptionType } from "@utils/types";
-import { Button, Forms, MaskedLink, showToast, Toasts } from "@webpack/common";
+import { Button, MaskedLink, showToast, Toasts } from "@webpack/common";
 
 import hoverOnlyStyle from "./hoverOnly.css?managed";
 import { clearLyricsCache, removeTranslations } from "./spotify/lyrics/api";
@@ -27,10 +29,10 @@ export function toggleHoverControls(value: boolean) {
 function InstallInstructions() {
     return (
         <section>
-            <Forms.FormTitle tag="h3">How to install</Forms.FormTitle>
-            <Forms.FormText>
+            <Heading>How to install</Heading>
+            <Paragraph>
                 Install <MaskedLink href="https://github.com/Inrixia/TidaLuna#installation">TidaLuna</MaskedLink> from here, then go to TidalLuna settings &rarr; Plugin stores &rarr; Install <code>@vmohammad/api</code>
-            </Forms.FormText>
+            </Paragraph>
         </section>
     );
 }
@@ -40,7 +42,7 @@ export const settings = definePluginSettings({
         type: OptionType.COMPONENT,
         component: () => (
             <section>
-                <Forms.FormTitle tag="h3">Spotify</Forms.FormTitle>
+                <Heading>Spotify</Heading>
             </section>
         )
     },
@@ -69,7 +71,7 @@ export const settings = definePluginSettings({
         type: OptionType.COMPONENT,
         component: () => (
             <section>
-                <Forms.FormTitle tag="h3">Tidal</Forms.FormTitle>
+                <Heading>Tidal</Heading>
             </section>
         )
     },
@@ -87,39 +89,12 @@ export const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: false,
     },
-    TidalLyricFetch: {
-        description: "Custom URL for fetching lyrics",
-        type: OptionType.STRING,
-        default: "https://api.vmohammad.dev/",
-        placeholder: "https://api.vmohammad.dev/",
-        onChange: (value: string) => {
-            if (!value.endsWith("/")) {
-                value += "/";
-            }
-            if (URL.canParse(value)) {
-                settings.store.TidalLyricFetch = value;
-            } else {
-                showToast("Invalid URL format for CustomUrl: " + value, Toasts.Type.FAILURE);
-                settings.store.TidalLyricFetch = "https://api.vmohammad.dev/";
-            }
-        }
-    },
-    TidalSyncMode: {
-        description: "Lyrics sync mode",
-        type: OptionType.SELECT,
-        options: [
-            { value: "line", label: "Line", default: true },
-            { value: "word", label: "Word" },
-            { value: "character", label: "Character" },
-        ],
-        default: "line",
-    },
 
     YtmSectionTitle: {
         type: OptionType.COMPONENT,
         component: () => (
             <section>
-                <Forms.FormTitle tag="h3">Youtube Music</Forms.FormTitle>
+                <Heading>Youtube Music</Heading>
             </section>
         )
     },

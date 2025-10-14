@@ -7,9 +7,11 @@
 
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { cl, getEmojiUrl, SoundLogEntry, User } from "@plugins/soundBoardLogger/utils";
 import { closeModal, ModalContent, ModalRoot, openModal } from "@utils/modal";
-import { Clickable, Forms } from "@webpack/common";
+import { Clickable } from "@webpack/common";
 
 export function openMoreUsersModal(item: SoundLogEntry, users: User[], onClickUser: Function) {
     const key = openModal(props => (
@@ -30,7 +32,7 @@ export default function MoreUsersModal({ item, users, onClickUser, closeModal }:
                     src={getEmojiUrl(item.emoji)}
                     alt=""
                 />
-                <Forms.FormTitle tag="h2" className={cl("more-soundId")}>{item.soundId}</Forms.FormTitle>
+                <Heading tag="h2" className={cl("more-soundId")}>{item.soundId}</Heading>
             </div>
             <div className={cl("more-users")}>
                 {users.map(user => {
@@ -48,9 +50,9 @@ export default function MoreUsersModal({ item, users, onClickUser, closeModal }:
                                         alt=""
                                         style={{ cursor: "pointer" }}
                                     />
-                                    <Forms.FormText variant="text-xs/medium" style={{ cursor: "pointer" }}>{user.username}</Forms.FormText>
+                                    <Paragraph size="xs" weight="medium" style={{ cursor: "pointer" }}>{user.username}</Paragraph>
                                 </Flex>
-                                <Forms.FormText variant="text-xs/medium" style={{ cursor: "pointer" }}>Played {currentUser.plays.length} {currentUser.plays.length === 1 ? "time" : "times"}</Forms.FormText>
+                                <Paragraph size="xs" weight="medium" style={{ cursor: "pointer" }}>Played {currentUser.plays.length} {currentUser.plays.length === 1 ? "time" : "times"}</Paragraph>
                             </div>
                         </Clickable>
                     );

@@ -29,15 +29,18 @@ import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { useAwaiter, useCleanupEffect } from "@utils/react";
-import { findByPropsLazy } from "@webpack";
-import { Alerts, Button, Card, Forms, lodash, Parser, React, Select, Text, TextInput, Toasts, Tooltip, useMemo, useState } from "@webpack/common";
+import { Alerts, Button, Card, lodash, Parser, React, Select, TextInput, Toasts, Tooltip, useMemo, useState } from "@webpack/common";
 import { JSX } from "react";
 
 import Plugins, { ExcludedPlugins, PluginMeta } from "~plugins";// Avoid circular dependency
 const { stopPlugin } = proxyLazy(() => require("plugins"));
 
 import { t } from "@api/i18n";
+import { BaseText } from "@components/BaseText";
+import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { HeadingTertiary } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 
 import { PluginCard } from "./PluginCard";
 import { openWarningModal } from "./PluginModal";
@@ -45,8 +48,6 @@ import { StockPluginsCard } from "./PluginStatCards";
 
 export const cl = classNameFactory("pc-plugins-");
 export const logger = new Logger("PluginSettings", "#a6d189");
-
-const InputStyles = findByPropsLazy("inputWrapper", "inputError", "error");
 
 export function showErrorToast(message: string) {
     Toasts.show({
@@ -65,10 +66,10 @@ function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetC
             {required
                 ? (
                     <>
-                        <Forms.FormTitle tag="h5">{t("plugins.restart.required")}</Forms.FormTitle>
-                        <Forms.FormText className={cl("dep-text")}>
+                        <HeadingTertiary>{t("plugins.restart.required")}</HeadingTertiary>
+                        <Paragraph className={cl("dep-text")}>
                             {t("plugins.restart.description")}
-                        </Forms.FormText>
+                        </Paragraph>
                         <Button onClick={() => location.reload()} className={cl("restart-button")}>
                             {t("plugins.restart.button.restart")}
                         </Button>
@@ -76,9 +77,9 @@ function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetC
                 )
                 : (
                     <>
-                        <Forms.FormText>{t("plugins.infoModal.description")}</Forms.FormText>
-                        <Forms.FormText>{t("plugins.infoModal.settingsInfo")}</Forms.FormText>
-                        <Forms.FormDivider className={`${Margins.top8} ${Margins.bottom8}`} />
+                        <Paragraph>{t("plugins.infoModal.description")}</Paragraph>
+                        <Paragraph>{t("plugins.infoModal.settingsInfo")}</Paragraph>
+                        <Divider className={`${Margins.top8} ${Margins.bottom8}`} />
 
                         <StockPluginsCard
                             enabledStockPlugins={enabledStockPlugins}
@@ -91,7 +92,7 @@ function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetC
 
             {enabledPlugins.length > 0 && !required && (
                 <Button
-                    size={Button.Sizes.MAX}
+                    size={Button.Sizes.SMALL}
                     className={"pc-plugins-disable-warning pc-modal-align-reset"}
                     onClick={() => {
                         return openWarningModal(null, null, null, false, enabledPlugins.length, resetCheckAndDo);
@@ -124,10 +125,10 @@ function ExcludedPluginsList({ search }: { search: string; }) {
         .filter(([name]) => name.toLowerCase().includes(search));
 
     return (
-        <Text variant="text-md/normal" className={Margins.top16}>
+        <Paragraph className={Margins.top16}>
             {matchingExcludedPlugins.length
                 ? <>
-                    <Forms.FormText>{t("plugins.search.looking")}:</Forms.FormText>
+                    <Paragraph>{t("plugins.search.looking")}:</Paragraph>
                     <ul>
                         {matchingExcludedPlugins.map(([name, reason]) => (
                             <li key={name}>
@@ -138,7 +139,7 @@ function ExcludedPluginsList({ search }: { search: string; }) {
                 </>
                 : t("plugins.search.noCriteria")
             }
-        </Text>
+        </Paragraph>
     );
 }
 
@@ -323,15 +324,15 @@ function PluginSettings() {
 
             <ReloadRequiredCard required={changes.hasChanges} enabledPlugins={enabledPlugins} openWarningModal={openWarningModal} resetCheckAndDo={resetCheckAndDo} enabledStockPlugins={enabledStockPlugins} totalStockPlugins={totalStockPlugins} enabledUserPlugins={enabledUserPlugins} totalUserPlugins={totalUserPlugins} />
 
-            <Forms.FormTitle tag="h5" className={classes(Margins.top20, Margins.bottom8)}>
+            <HeadingTertiary className={classes(Margins.top20, Margins.bottom8)}>
                 {t("plugins.filters.label")}
-            </Forms.FormTitle>
+            </HeadingTertiary>
 
             <div className={classes(Margins.bottom20, cl("filter-controls"))}>
                 <ErrorBoundary noop>
                     <TextInput autoFocus value={searchValue.value} placeholder={t("plugins.filters.placeholder")} onChange={onSearch} />
                 </ErrorBoundary>
-                <div className={InputStyles.inputWrapper}>
+                <div>
                     <ErrorBoundary noop>
                         <Select
                             options={[
@@ -349,14 +350,14 @@ function PluginSettings() {
                 </div>
             </div>
 
-            <Forms.FormTitle className={Margins.top20}>{t("plugins.title")}</Forms.FormTitle>
+            <HeadingTertiary className={Margins.top20}>{t("plugins.title")}</HeadingTertiary>
 
             {plugins.length || requiredPlugins.length
                 ? (
                     <div className={cl("grid")}>
                         {plugins.length
                             ? plugins
-                            : <Text variant="text-md/normal">{t("plugins.search.noCriteria")}</Text>
+                            : <BaseText size="md" weight="normal">{t("plugins.search.noCriteria")}</BaseText>
                         }
                     </div>
                 )
@@ -364,15 +365,15 @@ function PluginSettings() {
             }
 
 
-            <Forms.FormDivider className={Margins.top20} />
+            <Divider className={Margins.top20} />
 
-            <Forms.FormTitle tag="h5" className={classes(Margins.top20, Margins.bottom8)}>
+            <Paragraph className={classes(Margins.top20, Margins.bottom8)}>
                 {t("plugins.required.title")}
-            </Forms.FormTitle>
+            </Paragraph>
             <div className={cl("grid")}>
                 {requiredPlugins.length
                     ? requiredPlugins
-                    : <Text variant="text-md/normal">{t("plugins.search.noCriteria")}</Text>
+                    : <BaseText size="md" weight="normal">{t("plugins.search.noCriteria")}</BaseText>
                 }
             </div>
         </SettingsTab >
@@ -382,8 +383,8 @@ function PluginSettings() {
 export function PluginDependencyList({ deps }: { deps: string[]; }) {
     return (
         <>
-            <Forms.FormText>{t("plugins.required.by")}</Forms.FormText>
-            {deps.map((dep: string) => <Forms.FormText key={dep} className={cl("dep-text")}>{dep}</Forms.FormText>)}
+            <Paragraph>{t("plugins.required.by")}</Paragraph>
+            {deps.map((dep: string) => <Paragraph key={dep} className={cl("dep-text")}>{dep}</Paragraph>)}
         </>
     );
 }

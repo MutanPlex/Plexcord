@@ -8,11 +8,13 @@
 import { t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { BaseText } from "@components/BaseText";
+import { Heading } from "@components/Heading";
 import { PluginCard } from "@components/settings/tabs/plugins/PluginCard";
 import { ChangeList } from "@utils/ChangeList";
 import { Margins } from "@utils/margins";
 import { useForceUpdater } from "@utils/react";
-import { Button, Card, Forms, React, Tooltip } from "@webpack/common";
+import { Button, Card, React, Tooltip } from "@webpack/common";
 
 import Plugins from "~plugins";
 
@@ -64,11 +66,11 @@ export function NewPluginsSection({
         if (!deps) return null;
         return (
             <React.Fragment>
-                <Forms.FormText>{t("plugins.required.by")}</Forms.FormText>
+                <BaseText>{t("plugins.required.by")}</BaseText>
                 {deps.map((dep: string) => (
-                    <Forms.FormText key={dep} className="pc-changelog-dep-text">
+                    <BaseText key={dep} className="pc-changelog-dep-text">
                         {dep}
-                    </Forms.FormText>
+                    </BaseText>
                 ))}
             </React.Fragment>
         );
@@ -76,13 +78,13 @@ export function NewPluginsSection({
 
     return (
         <div className={cl("new-plugins-section")}>
-            <Forms.FormTitle tag="h5" className={Margins.bottom8}>
+            <Heading className={Margins.bottom8}>
                 {t("changelog.newPlugins", { count: sortedPlugins.length })}
-            </Forms.FormTitle>
+            </Heading>
 
-            <Forms.FormText className={Margins.bottom16}>
+            <BaseText className={Margins.bottom16}>
                 {t("changelog.following")}
-            </Forms.FormText>
+            </BaseText>
 
             <div className={cl("new-plugins-grid")}>
                 {sortedPlugins.map(plugin => {
@@ -164,7 +166,7 @@ export function NewPluginsSection({
                         {tooltipProps => (
                             <Button
                                 {...tooltipProps}
-                                color={Button.Colors.YELLOW}
+                                color={Button.Colors.LINK}
                                 size={Button.Sizes.SMALL}
                                 onClick={() => location.reload()}
                                 className={Margins.top16}

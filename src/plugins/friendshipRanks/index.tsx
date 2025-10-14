@@ -9,11 +9,12 @@ import { BadgeUserArgs, ProfileBadge } from "@api/Badges";
 import { i18n, t } from "@api/i18n";
 import { Badges } from "@api/index";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Heading, Paragraph } from "@components/index";
 import { Devs, PcDevs } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import { ModalContent, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
-import { Button, Flex, Forms, RelationshipStore } from "@webpack/common";
+import { Button, Flex, RelationshipStore } from "@webpack/common";
 
 import { bestiesIcon, bloomingIcon, burningIcon, fighterIcon, royalIcon, sproutIcon, starIcon } from "./icons";
 
@@ -90,24 +91,17 @@ function openRankModal(rankIndex: number) {
             <ModalRoot {...props} size={ModalSize.DYNAMIC}>
                 <ModalHeader>
                     <Flex style={{ width: "100%", justifyContent: "center" }}>
-                        <Forms.FormTitle
-                            tag="h2"
-                            style={{
-                                width: "100%",
-                                textAlign: "center",
-                                margin: 0
-                            }}
-                        >
+                        <Heading style={{ width: "100%", textAlign: "center", margin: 0 }}>
                             {rank.title}
-                        </Forms.FormTitle>
+                        </Heading>
                     </Flex>
                 </ModalHeader>
                 <ModalContent>
                     <div style={{ padding: "1em", textAlign: "center" }}>
                         <rank.assetSVG height="150px"></rank.assetSVG>
-                        <Forms.FormText className={Margins.top16}>
+                        <Paragraph className={Margins.top16}>
                             {rank.description}
-                        </Forms.FormText>
+                        </Paragraph>
                     </div>
                 </ModalContent>
             </ModalRoot>
@@ -120,7 +114,7 @@ function getBadgeComponent(rankIndex: number) {
     // there may be a better button component to do this with
     return (
         <div style={{ transform: "scale(0.80)" }}>
-            <Button onClick={() => openRankModal(rankIndex)} width={"21.69px"} height={"21.69px"} size={Button.Sizes.NONE} look={Button.Looks.BLANK}>
+            <Button onClick={() => openRankModal(rankIndex)} width={"21.69px"} height={"21.69px"} size={Button.Sizes.NONE} look={Button.Looks.LINK}>
                 <rank.assetSVG height={"21.69px"} />
             </Button>
         </div>

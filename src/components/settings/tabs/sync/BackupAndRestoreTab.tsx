@@ -18,12 +18,13 @@
 */
 
 import { t } from "@api/i18n";
+import { BaseText } from "@components/BaseText";
 import { Flex } from "@components/Flex";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { downloadSettingsBackup, uploadSettingsBackup } from "@utils/settingsSync";
-import { Button, Card, Text } from "@webpack/common";
+import { Button, Card } from "@webpack/common";
 
 function BackupAndRestoreTab() {
     return (
@@ -34,10 +35,10 @@ function BackupAndRestoreTab() {
                     <span>{t("sync.warningText")}</span>
                 </Flex>
             </Card>
-            <Text variant="text-md/normal" className={Margins.bottom8}>
+            <BaseText size="md" weight="normal" className={Margins.bottom8}>
                 {t("sync.description")}
-            </Text>
-            <Text variant="text-md/normal" className={Margins.bottom8}>
+            </BaseText>
+            <BaseText size="md" weight="normal" className={Margins.bottom8}>
                 {t("sync.settings.text")}
                 <ul>
                     <li>&mdash; {t("sync.settings.quickcss")}</li>
@@ -45,7 +46,7 @@ function BackupAndRestoreTab() {
                     <li>&mdash; {t("sync.settings.plugins")}</li>
                     <li>&mdash; {t("sync.settings.datastores")}</li>
                 </ul>
-            </Text>
+            </BaseText>
             <Flex>
                 <Button
                     onClick={() => uploadSettingsBackup()}

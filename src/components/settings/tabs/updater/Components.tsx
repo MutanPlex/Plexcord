@@ -9,11 +9,12 @@ import { t, tJsx } from "@api/i18n";
 import { ErrorCard } from "@components/ErrorCard";
 import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
+import { Paragraph } from "@components/Paragraph";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { relaunch } from "@utils/native";
 import { changes, checkForUpdates, update, updateError } from "@utils/updater";
-import { Alerts, Button, Card, Forms, React, Toasts, useState } from "@webpack/common";
+import { Alerts, Button, Card, React, Toasts, useState } from "@webpack/common";
 
 import { runWithDispatch } from "./runWithDispatch";
 
@@ -60,9 +61,9 @@ export function Changes({ updates, repo, repoPending }: CommonProps & { updates:
 export function Newer(props: CommonProps) {
     return (
         <>
-            <Forms.FormText className={Margins.bottom8}>
+            <Paragraph className={Margins.bottom8}>
                 {t("updater.github.local")}
-            </Forms.FormText>
+            </Paragraph>
             <Changes {...props} updates={changes} />
         </>
     );
@@ -79,17 +80,17 @@ export function Updatable(props: CommonProps) {
         <>
             {!updates && updateError ? (
                 <>
-                    <Forms.FormText>{t("updater.error.check")}</Forms.FormText>
+                    <Paragraph>{t("updater.error.check")}</Paragraph>
                     <ErrorCard style={{ padding: "1em" }}>
                         <p>{updateError.stderr || updateError.stdout || t("updater.error.occurred")}</p>
                     </ErrorCard>
                 </>
             ) : (
-                <Forms.FormText className={Margins.bottom8}>
+                <Paragraph className={Margins.bottom8}>
                     {isOutdated ? (updates.length === 1 ? t("updater.available") : tJsx("updater.available_plural", {
                         count: updates.length
                     })) : t("updater.current")}
-                </Forms.FormText>
+                </Paragraph>
             )}
 
             {isOutdated && <Changes updates={updates} {...props} />}

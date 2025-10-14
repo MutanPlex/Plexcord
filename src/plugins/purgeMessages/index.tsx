@@ -18,10 +18,11 @@
 */
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, sendBotMessage } from "@api/Commands";
+import { Paragraph } from "@components/Paragraph";
 import { Channel, Message } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
-import { Forms, MessageActions, MessageStore, UserStore } from "@webpack/common";
+import { MessageActions, MessageStore, UserStore } from "@webpack/common";
 
 async function deleteMessages(amount: number, channel: Channel, delay: number = 1500): Promise<number> {
     let deleted = 0;
@@ -44,9 +45,9 @@ export default definePlugin({
     description: "Purges messages from a channel",
     authors: [PcDevs.bhop, Devs.nyx, PcDevs.MutanPlex],
     settingsAboutComponent: () => <>
-        <Forms.FormText className="plugin-warning">
+        <Paragraph className="plugin-warning">
             We can't guarantee this plugin won't get you warned or banned.
-        </Forms.FormText>
+        </Paragraph>
     </>,
     commands: [
         {

@@ -18,12 +18,13 @@
 */
 
 import ErrorBoundary from "@components/ErrorBoundary";
+import { BaseText, HeadingTertiary } from "@components/index";
 import type { Guild, GuildMember } from "@plexcord/discord-types";
 import { cl, getGuildPermissionSpecMap, getSortedRolesForMember, sortUserRoles } from "@plugins/permissionsViewer/utils";
 import { getIntlMessage } from "@utils/discord";
 import { classes } from "@utils/misc";
 import { filters, findBulk, proxyLazyWebpack } from "@webpack";
-import { PermissionsBits, Text, Tooltip, useMemo, UserStore } from "@webpack/common";
+import { PermissionsBits, Tooltip, useMemo, UserStore } from "@webpack/common";
 
 import { PermissionsSortOrder, settings } from "..";
 import openRolesAndUsersPermissionsModal, { PermissionType, type RoleOrUserPermission } from "./RolesAndUsersPermissions";
@@ -62,12 +63,9 @@ function FakeRole({ text, color, ...props }: FakeRoleProps) {
                 />
             </div>
             <div className={RoleClasses.roleName}>
-                <Text
-                    className={RoleClasses.roleNameOverflow}
-                    variant="text-xs/medium"
-                >
+                <BaseText size="xs" weight="medium" className={RoleClasses.roleNameOverflow}>
                     {text}
-                </Text>
+                </BaseText>
             </div>
         </div>
     );
@@ -81,7 +79,7 @@ interface GrantedByTooltipProps {
 function GrantedByTooltip({ roleName, roleColor }: GrantedByTooltipProps) {
     return (
         <>
-            <Text variant="text-sm/medium">Granted By</Text>
+            <BaseText size="sm" weight="medium">Granted By</BaseText>
             <FakeRole text={roleName} color={roleColor} />
         </>
     );
@@ -141,7 +139,7 @@ function UserPermissionsComponent({ guild, guildMember, closePopout }: { guild: 
 
     return <div>
         <div className={cl("user-header-container")}>
-            <Text variant="eyebrow">Permissions</Text>
+            <HeadingTertiary>Permissions</HeadingTertiary>
             <div className={cl("user-header-btns")}>
                 <Tooltip text={`Sorting by ${permissionsSortOrder === PermissionsSortOrder.HighestRole ? "Highest Role" : "Lowest Role"}`}>
                     {tooltipProps => (

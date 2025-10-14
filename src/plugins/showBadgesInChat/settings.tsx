@@ -6,8 +6,9 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
+import { BaseText } from "@components/BaseText";
 import { OptionType } from "@utils/types";
-import { Text, useEffect, UserStore, useState } from "@webpack/common";
+import { useEffect, UserStore, useState } from "@webpack/common";
 
 const settings = definePluginSettings({
     showPlexcordDonor: {
@@ -135,10 +136,10 @@ const BadgeSettings = () => {
 
     return (
         <>
-            <Text>Drag the badges to reorder them, you can click to enable/disable a specific badge type.</Text>
+            <BaseText>Drag the badges to reorder them, you can click to enable/disable a specific badge type.</BaseText>
             <div className="pc-sbic-badge-settings">
                 <img className="pc-sbic-settings-avatar" src={UserStore.getCurrentUser().getAvatarURL()}></img>
-                <Text className="pc-sbic-settings-username">{(UserStore.getCurrentUser() as any).globalName}</Text>
+                <BaseText className="pc-sbic-settings-username">{(UserStore.getCurrentUser() as any).globalName}</BaseText>
                 {images
                     .sort((a, b) => a.position - b.position)
                     .map((image, index) => (

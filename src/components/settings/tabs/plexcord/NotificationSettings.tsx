@@ -8,18 +8,22 @@
 import { t, tJsx } from "@api/i18n";
 import { openNotificationLogModal } from "@api/Notifications/notificationLog";
 import { useSettings } from "@api/Settings";
+import { BaseText } from "@components/BaseText";
 import { ErrorCard } from "@components/ErrorCard";
 import { Flex } from "@components/Flex";
 import { FormSwitch } from "@components/FormSwitch";
+import { Heading, HeadingTertiary } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { Margins } from "@utils/margins";
 import { identity } from "@utils/misc";
 import { ModalCloseButton, ModalContent, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
-import { Button, Forms, Select, Slider, Text } from "@webpack/common";
+import { Button, Select, Slider } from "@webpack/common";
 
 export function NotificationSection() {
     return (
         <section className={Margins.top16}>
-            <Forms.FormTitle tag="h5">Plexcord {t("settings.notifications.title")}</Forms.FormTitle>
+            <HeadingTertiary>{t("settings.notifications.title")}</HeadingTertiary>
+            <Paragraph className={Margins.bottom8}>{t("settings.notifications.description")}</Paragraph>
             <Flex>
                 <Button onClick={openNotificationSettingsModal}>
                     {t("settings.notifications.settings")}
@@ -36,7 +40,7 @@ export function openNotificationSettingsModal() {
     openModal(props => (
         <ModalRoot {...props} size={ModalSize.MEDIUM}>
             <ModalHeader>
-                <Text variant="heading-lg/semibold" style={{ flexGrow: 1 }}>{t("settings.notifications.settings")}</Text>
+                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t("settings.notifications.settings")}</BaseText>
                 <ModalCloseButton onClick={props.onClose} />
             </ModalHeader>
 
@@ -52,20 +56,20 @@ function NotificationSettings() {
 
     return (
         <div style={{ padding: "1em 0" }}>
-            <Forms.FormTitle tag="h5">{t("settings.notifications.style.label")}</Forms.FormTitle>
+            <Heading tag="h5">{t("settings.notifications.style.label")}</Heading>
             {settings.useNative !== "never" && Notification?.permission === "denied" && (
                 <ErrorCard style={{ padding: "1em" }} className={Margins.bottom8}>
-                    <Forms.FormTitle tag="h5">{t("settings.notifications.permissions.denied.title")}</Forms.FormTitle>
-                    <Forms.FormText>{t("settings.notifications.permissions.denied.label")}</Forms.FormText>
+                    <Heading tag="h5">{t("settings.notifications.permissions.denied.title")}</Heading>
+                    <Paragraph>{t("settings.notifications.permissions.denied.label")}</Paragraph>
                 </ErrorCard>
             )}
-            <Forms.FormText className={Margins.bottom8}>
+            <Paragraph className={Margins.bottom8}>
                 {t("settings.notifications.style.description")}
                 <ul>
                     <li><strong>{t("settings.notifications.style.plexcord")}</strong>: {t("settings.notifications.style.plexcordDesc")}</li>
                     <li><strong>{t("settings.notifications.style.desktop")}</strong>: {t("settings.notifications.style.desktopDesc")}</li>
                 </ul>
-            </Forms.FormText>
+            </Paragraph>
             <Select
                 placeholder={t("settings.notifications.style.label")}
                 options={[
@@ -79,7 +83,7 @@ function NotificationSettings() {
                 serialize={identity}
             />
 
-            <Forms.FormTitle tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t("settings.notifications.positions.label")}</Forms.FormTitle>
+            <Heading tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t("settings.notifications.positions.label")}</Heading>
             <Select
                 isDisabled={settings.useNative === "always"}
                 placeholder={t("settings.notifications.positions.label")}
@@ -92,7 +96,7 @@ function NotificationSettings() {
                 serialize={identity}
             />
 
-            <Forms.FormTitle tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t("settings.notifications.missed.label")}</Forms.FormTitle>
+            <Heading tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t("settings.notifications.missed.label")}</Heading>
             <FormSwitch
                 value={settings.missed}
                 onChange={(v: boolean) => settings.missed = v}
@@ -100,8 +104,8 @@ function NotificationSettings() {
             />
 
 
-            <Forms.FormTitle tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t("settings.notifications.timeout.label")}</Forms.FormTitle>
-            <Forms.FormText className={Margins.bottom16}>{t("settings.notifications.timeout.description")}</Forms.FormText>
+            <Heading tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t("settings.notifications.timeout.label")}</Heading>
+            <Paragraph className={Margins.bottom16}>{t("settings.notifications.timeout.description")}</Paragraph>
             <Slider
                 disabled={settings.useNative === "always"}
                 markers={[0, 1000, 2500, 5000, 10_000, 20_000]}
@@ -114,10 +118,10 @@ function NotificationSettings() {
                 stickToMarkers={false}
             />
 
-            <Forms.FormTitle tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t("settings.notifications.logLimit.label")}</Forms.FormTitle>
-            <Forms.FormText className={Margins.bottom16}>
+            <Heading tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t("settings.notifications.logLimit.label")}</Heading>
+            <Paragraph className={Margins.bottom16}>
                 {tJsx("settings.notifications.logLimit.description", { unlimited: <code>∞</code>, disable: <code>0</code> })}.
-            </Forms.FormText>
+            </Paragraph>
             <Slider
                 markers={[0, 25, 50, 75, 100, 200]}
                 minValue={0}

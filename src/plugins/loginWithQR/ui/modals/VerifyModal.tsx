@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { BaseText } from "@components/BaseText";
 import { images } from "@plugins/loginWithQR/images";
 import { getIntlMessage } from "@utils/discord";
 import {
@@ -19,7 +20,6 @@ import { findByPropsLazy } from "@webpack";
 import {
     Button,
     RestAPI,
-    Text,
     useEffect,
     useRef,
     useState,
@@ -126,21 +126,12 @@ function VerifyModal({
                             key="img-success"
                             draggable={false}
                         />
-                        <Text
-                            variant="heading-xl/bold"
-                            color="header-primary"
-                            tag="h1"
-                            className={cl("device-header")}
-                        >
+                        <BaseText size="xl" weight="bold" color="header-primary" tag="h1" className={cl("device-header")}>
                             {getIntlMessage("QR_CODE_LOGIN_SUCCESS")}
-                        </Text>
-                        <Text
-                            variant="text-md/semibold"
-                            color="text-normal"
-                            style={{ width: "30rem" }}
-                        >
+                        </BaseText>
+                        <BaseText size="md" weight="semibold" color="text-normal" style={{ width: "30rem" }}>
                             {getIntlMessage("QR_CODE_LOGIN_SUCCESS_FLAVOR")}
-                        </Text>
+                        </BaseText>
                     </>
                 ) : state === VerifyState.NotFound ? (
                     <>
@@ -150,21 +141,12 @@ function VerifyModal({
                             key="img-not_found"
                             draggable={false}
                         />
-                        <Text
-                            variant="heading-xl/bold"
-                            color="header-primary"
-                            tag="h1"
-                            className={cl("device-header")}
-                        >
+                        <BaseText size="xl" weight="bold" color="header-primary" tag="h1" className={cl("device-header")}>
                             {getIntlMessage("QR_CODE_NOT_FOUND")}
-                        </Text>
-                        <Text
-                            variant="text-md/semibold"
-                            color="text-normal"
-                            style={{ width: "30rem" }}
-                        >
+                        </BaseText>
+                        <BaseText size="md" weight="semibold" color="text-normal" style={{ width: "30rem" }}>
                             {getIntlMessage("QR_CODE_NOT_FOUND_DESCRIPTION")}
-                        </Text>
+                        </BaseText>
                     </>
                 ) : (
                     <>
@@ -174,17 +156,12 @@ function VerifyModal({
                             key="img-loaded"
                             draggable={false}
                         />
-                        <Text
-                            variant="heading-xl/bold"
-                            color="header-primary"
-                            tag="h1"
-                            className={cl("device-header")}
-                        >
+                        <BaseText size="xl" weight="bold" color="header-primary" tag="h1" className={cl("device-header")}>
                             {getIntlMessage("QR_CODE_LOGIN_CONFIRM")}
-                        </Text>
-                        <Text variant="text-md/semibold" color="text-danger">
+                        </BaseText>
+                        <BaseText size="md" weight="semibold" color="text-danger">
                             Never scan a login QR code from another user or application.
-                        </Text>
+                        </BaseText>
                         <Button
                             size={Button.Sizes.LARGE}
                             color={Button.Colors.RED}
@@ -194,7 +171,7 @@ function VerifyModal({
                             }}
                             onPointerDown={startInput}
                             onPointerUp={endInput}
-                            buttonRef={buttonRef}
+                            ref={buttonRef}
                             disabled={inProgress}
                         >
                             Hold to confirm login

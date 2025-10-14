@@ -6,6 +6,7 @@
  */
 
 import { t } from "@api/i18n";
+import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import HelpIcon from "@plugins/holyNotes/components/icons/HelpIcon";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
@@ -13,7 +14,7 @@ import { HolyNotes } from "@plugins/holyNotes/types";
 import { classes } from "@utils/misc";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { findByProps } from "@webpack";
-import { ContextMenuApi, Flex, FluxDispatcher, Menu, React, Text, TextInput } from "@webpack/common";
+import { ContextMenuApi, Flex, FluxDispatcher, Menu, React, TextInput } from "@webpack/common";
 
 import Errors from "./Error";
 import HelpModal from "./HelpModal";
@@ -89,12 +90,9 @@ export const NoteModal = (props: ModalProps & { onClose: () => void; }) => {
                 <Flex className={classes("pc-notebook-flex")} direction={Flex.Direction.VERTICAL} style={{ width: "100%" }}>
                     <div className={classes("pc-notebook-top-section")}>
                         <ModalHeader className={classes("pc-notebook-header-main")}>
-                            <Text
-                                variant="heading-lg/semibold"
-                                style={{ flexGrow: 1 }}
-                                className={classes("pc-notebook-heading")}>
+                            <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }} className={classes("pc-notebook-heading")}>
                                 {t("plugin.holyNotes.modal.notebook.title")}
-                            </Text>
+                            </BaseText>
                             <div className={classes("pc-notebook-flex", "pc-help-icon")} onClick={() => openModal(HelpModal)}>
                                 <HelpIcon />
                             </div>
@@ -168,12 +166,12 @@ export const NoteModal = (props: ModalProps & { onClose: () => void; }) => {
                                 ));
                             }}
                         >
-                            <Text className={quickSelectLabel}>{t("plugin.holyNotes.modal.notebook.change")}:</Text>
+                            <BaseText className={quickSelectLabel}>{t("plugin.holyNotes.modal.notebook.change")}:</BaseText>
                             <Flex grow={0} align={Flex.Align.CENTER} className={quickSelectQuick}>
-                                <Text className={quickSelectValue}>
+                                <BaseText className={quickSelectValue}>
                                     {sortDirection ? t("plugin.holyNotes.modal.notebook.ascending") : t("plugin.holyNotes.modal.notebook.descending")} /{" "}
                                     {sortType ? t("plugin.holyNotes.modal.notebook.dateAdded") : t("plugin.holyNotes.modal.notebook.messageDate")}
-                                </Text>
+                                </BaseText>
                                 <div className={quickSelectArrow} />
                             </Flex>
                         </Flex>

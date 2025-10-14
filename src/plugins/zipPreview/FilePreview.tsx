@@ -93,7 +93,7 @@ function CodeBlockWithDownload({ lang, content, onDownload }: CodeBlockWithDownl
 
         // Wait for ShikiCodeBlocks to render
         const checkAndInject = () => {
-            const codeContainer = containerRef.current?.querySelector(".vc-shiki-root") as HTMLElement;
+            const codeContainer = containerRef.current?.querySelector(".pc-shiki-root") as HTMLElement;
             if (!codeContainer) return;
 
             // Check if download button already exists
@@ -105,9 +105,9 @@ function CodeBlockWithDownload({ lang, content, onDownload }: CodeBlockWithDownl
             }
 
             // Move copy button to outer container so it's always visible
-            const copyBtns = codeContainer.querySelector(".vc-shiki-btns") as HTMLElement;
-            if (copyBtns && containerRef.current && !containerRef.current.querySelector(".vc-shiki-btns-moved")) {
-                copyBtns.classList.add("vc-shiki-btns-moved");
+            const copyBtns = codeContainer.querySelector(".pc-shiki-btns") as HTMLElement;
+            if (copyBtns && containerRef.current && !containerRef.current.querySelector(".pc-shiki-btns-moved")) {
+                copyBtns.classList.add("pc-shiki-btns-moved");
                 Object.assign(copyBtns.style, {
                     position: "absolute",
                     bottom: "12px",
@@ -181,13 +181,13 @@ function CodeBlockWithDownload({ lang, content, onDownload }: CodeBlockWithDownl
         }}
             onMouseEnter={() => {
                 const downloadBtn = containerRef.current?.querySelector(".zp-download-btn") as HTMLElement;
-                const copyBtns = containerRef.current?.querySelector(".vc-shiki-btns-moved") as HTMLElement;
+                const copyBtns = containerRef.current?.querySelector(".pc-shiki-btns-moved") as HTMLElement;
                 if (downloadBtn) downloadBtn.style.opacity = "1";
                 if (copyBtns) copyBtns.style.opacity = "1";
             }}
             onMouseLeave={() => {
                 const downloadBtn = containerRef.current?.querySelector(".zp-download-btn") as HTMLElement;
-                const copyBtns = containerRef.current?.querySelector(".vc-shiki-btns-moved") as HTMLElement;
+                const copyBtns = containerRef.current?.querySelector(".pc-shiki-btns-moved") as HTMLElement;
                 if (downloadBtn) downloadBtn.style.opacity = "0";
                 if (copyBtns) copyBtns.style.opacity = "0";
             }}>

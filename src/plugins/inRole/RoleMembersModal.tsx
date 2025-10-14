@@ -8,9 +8,10 @@
 import { t, tJsx } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Paragraph } from "@components/Paragraph";
 import { GuildMember } from "@plexcord/discord-types";
 import { ModalCloseButton, ModalContent, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
-import { Forms, Parser } from "@webpack/common";
+import { Parser } from "@webpack/common";
 
 const cl = classNameFactory("pc-inrole-");
 
@@ -20,9 +21,9 @@ export function showInRoleModal(members: GuildMember[], roleId: string, channelI
             <ErrorBoundary>
                 <ModalRoot {...props} size={ModalSize.DYNAMIC} fullscreenOnMobile={true} >
                     <ModalHeader className={cl("header")}>
-                        <Forms.FormText style={{ fontSize: "1.2rem", fontWeight: "bold", marginRight: "7px" }}>{
+                        <Paragraph style={{ fontSize: "1.2rem", fontWeight: "bold", marginRight: "7px" }}>{
                             Parser.parse(`<@&${roleId}>`, true, { channelId, viewingChannelId: channelId })
-                        }: {tJsx("plugin.inRole.modal.member.title")} ({members.length})</Forms.FormText>
+                        }: {tJsx("plugin.inRole.modal.member.title")} ({members.length})</Paragraph>
                         <ModalCloseButton onClick={props.onClose} className={cl("close")} />
                     </ModalHeader>
                     <ModalContent>
@@ -30,11 +31,11 @@ export function showInRoleModal(members: GuildMember[], roleId: string, channelI
                             {
                                 members.length !== 0 ? members.map(member =>
                                     <>
-                                        <Forms.FormText className={cl("modal-member")}>
+                                        <Paragraph className={cl("modal-member")}>
                                             {Parser.parse(`<@${member.userId}>`, true, { channelId, viewingChannelId: channelId })}
-                                        </Forms.FormText>
+                                        </Paragraph>
                                     </>
-                                ) : <Forms.FormText>{t("plugin.inRole.modal.member.noMembers")}</Forms.FormText>
+                                ) : <Paragraph>{t("plugin.inRole.modal.member.noMembers")}</Paragraph>
                             }
                         </div>
                     </ModalContent>

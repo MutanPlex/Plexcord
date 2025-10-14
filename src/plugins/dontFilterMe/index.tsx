@@ -7,9 +7,10 @@
 
 import { t, tJsx } from "@api/i18n";
 import { addMessagePreSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
+import { Paragraph } from "@components/Paragraph";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
-import { Alerts, ChannelStore, Forms, PermissionsBits, PermissionStore } from "@webpack/common";
+import { Alerts, ChannelStore, PermissionsBits, PermissionStore } from "@webpack/common";
 
 import filterList from "./constants";
 
@@ -22,12 +23,12 @@ function warningEmbedNotice(trigger) {
         Alerts.show({
             title: t("plugin.dontFilterMe.alert.title"),
             body: <div>
-                <Forms.FormText>
+                <Paragraph>
                     {tJsx("plugin.dontFilterMe.alert.content", { trigger })}
-                </Forms.FormText>
-                <Forms.FormText>
+                </Paragraph>
+                <Paragraph>
                     {t("plugin.dontFilterMe.alert.content2")}
-                </Forms.FormText>
+                </Paragraph>
             </div>,
             confirmText: t("plugin.dontFilterMe.alert.confirm"),
             cancelText: t("plugin.dontFilterMe.alert.cancel"),

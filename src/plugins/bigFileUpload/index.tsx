@@ -9,16 +9,19 @@ import { ApplicationCommandInputType, ApplicationCommandOptionType, sendBotMessa
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { Divider } from "@components/Divider";
 import { Flex } from "@components/Flex";
 import { FormSwitch } from "@components/FormSwitch";
+import { Heading } from "@components/Heading";
 import { OpenExternalIcon } from "@components/Icons";
+import { Paragraph } from "@components/Paragraph";
 import { CommandArgument, CommandContext } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { insertTextIntoChatInputBox, sendMessage } from "@utils/discord";
 import { Margins } from "@utils/margins";
 import definePlugin, { OptionType, PluginNative } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { Button, DraftType, Forms, Menu, PermissionsBits, PermissionStore, React, Select, SelectedChannelStore, showToast, TextInput, Toasts, UploadManager, useEffect, useState } from "@webpack/common";
+import { Button, DraftType, Menu, PermissionsBits, PermissionStore, React, Select, SelectedChannelStore, showToast, TextInput, Toasts, UploadManager, useEffect, useState } from "@webpack/common";
 
 const Native = PlexcordNative.pluginHelpers.BigFileUpload as PluginNative<typeof import("./native")>;
 
@@ -242,12 +245,12 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
     return (
         <Flex flexDirection="column">
             {/* File Uploader Selection */}
-            <Forms.FormDivider />
+            <Divider />
             <section>
-                <Forms.FormTitle tag="h5">{t("plugin.bigFileUpload.form.limit.title")}</Forms.FormTitle>
-                <Forms.FormText>
+                <Heading>{t("plugin.bigFileUpload.form.limit.title")}</Heading>
+                <Paragraph>
                     {t("plugin.bigFileUpload.form.limit.description")}
-                </Forms.FormText>
+                </Paragraph>
                 <Select
                     options={[
                         { label: t("plugin.bigFileUpload.form.limit.option.custom"), value: "Custom" },
@@ -289,10 +292,10 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
             {fileUploader === "GoFile" && (
                 <>
                     <section>
-                        <Forms.FormTitle tag="h5">{t("plugin.bigFileUpload.form.goFile.title")}</Forms.FormTitle>
-                        <Forms.FormText>
+                        <Heading>{t("plugin.bigFileUpload.form.goFile.title")}</Heading>
+                        <Paragraph>
                             {t("plugin.bigFileUpload.form.goFile.description")}
-                        </Forms.FormText>
+                        </Paragraph>
                         <TextInput
                             type="text"
                             value={settings.store.gofileToken || ""}
@@ -308,10 +311,10 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
             {fileUploader === "Catbox" && (
                 <>
                     <section>
-                        <Forms.FormTitle tag="h5">{t("plugin.bigFileUpload.form.catbox.title")}</Forms.FormTitle>
-                        <Forms.FormText>
+                        <Heading>{t("plugin.bigFileUpload.form.catbox.title")}</Heading>
+                        <Paragraph>
                             {t("plugin.bigFileUpload.form.catbox.description")}
-                        </Forms.FormText>
+                        </Paragraph>
                         <TextInput
                             type="text"
                             value={settings.store.catboxUserHash || ""}
@@ -327,10 +330,10 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
             {fileUploader === "Litterbox" && (
                 <>
                     <section>
-                        <Forms.FormTitle tag="h5">{t("plugin.bigFileUpload.form.litterBox.title")}</Forms.FormTitle>
-                        <Forms.FormText>
+                        <Heading>{t("plugin.bigFileUpload.form.litterBox.title")}</Heading>
+                        <Paragraph>
                             {t("plugin.bigFileUpload.form.litterBox.description")}
-                        </Forms.FormText>
+                        </Paragraph>
                         <Select
                             options={[
                                 { label: t("plugin.bigFileUpload.form.litterBox.option.1hour"), value: "1h" },
@@ -352,7 +355,7 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
             {fileUploader === "Custom" && (
                 <>
                     <section>
-                        <Forms.FormTitle tag="h5">{t("plugin.bigFileUpload.form.custom.uploader")}</Forms.FormTitle>
+                        <Heading>{t("plugin.bigFileUpload.form.custom.uploader")}</Heading>
                         <TextInput
                             type="text"
                             value={customUploaderStore.get().name}
@@ -363,7 +366,7 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
                     </section>
 
                     <section>
-                        <Forms.FormTitle tag="h5">{t("plugin.bigFileUpload.form.custom.url")}</Forms.FormTitle>
+                        <Heading>{t("plugin.bigFileUpload.form.custom.url")}</Heading>
                         <TextInput
                             type="text"
                             value={customUploaderStore.get().requestURL}
@@ -374,7 +377,7 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
                     </section>
 
                     <section>
-                        <Forms.FormTitle tag="h5">{t("plugin.bigFileUpload.form.custom.formName")}</Forms.FormTitle>
+                        <Heading>{t("plugin.bigFileUpload.form.custom.formName")}</Heading>
                         <TextInput
                             type="text"
                             value={customUploaderStore.get().fileFormName}
@@ -385,7 +388,7 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
                     </section>
 
                     <section>
-                        <Forms.FormTitle tag="h5">{t("plugin.bigFileUpload.form.custom.responseType")}</Forms.FormTitle>
+                        <Heading>{t("plugin.bigFileUpload.form.custom.responseType")}</Heading>
                         <Select
                             options={[
                                 { label: "Text", value: "Text" },
@@ -400,7 +403,7 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
                     </section>
 
                     <section>
-                        <Forms.FormTitle tag="h5">{t("plugin.bigFileUpload.form.custom.json")}</Forms.FormTitle>
+                        <Heading>{t("plugin.bigFileUpload.form.custom.json")}</Heading>
                         <TextInput
                             type="text"
                             value={customUploaderStore.get().url}
@@ -411,7 +414,7 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
                     </section>
 
                     <section>
-                        <Forms.FormTitle tag="h5">{t("plugin.bigFileUpload.form.custom.thumbnail")}</Forms.FormTitle>
+                        <Heading>{t("plugin.bigFileUpload.form.custom.thumbnail")}</Heading>
                         <TextInput
                             type="text"
                             value={customUploaderStore.get().thumbnailURL}
@@ -421,8 +424,8 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
                         />
                     </section>
 
-                    <Forms.FormDivider />
-                    <Forms.FormTitle tag="h5">{t("plugin.bigFileUpload.form.custom.arguments")}</Forms.FormTitle>
+                    <Divider />
+                    <Heading>{t("plugin.bigFileUpload.form.custom.arguments")}</Heading>
                     {Object.entries(customUploaderStore.get().args).map(([key, value], index) => (
                         <div key={index}>
                             <TextInput
@@ -442,8 +445,8 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
                         </div>
                     ))}
 
-                    <Forms.FormDivider />
-                    <Forms.FormTitle tag="h5">{t("plugin.bigFileUpload.form.custom.headers")}</Forms.FormTitle>
+                    <Divider />
+                    <Heading>{t("plugin.bigFileUpload.form.custom.headers")}</Heading>
                     {Object.entries(customUploaderStore.get().headers).map(([key, value], index) => (
                         <div key={index}>
                             <TextInput
@@ -463,8 +466,8 @@ function SettingsComponent(props: { setValue(v: any): void; }) {
                         </div>
                     ))}
 
-                    <Forms.FormDivider />
-                    <Forms.FormTitle tag="h5">{t("plugin.bigFileUpload.form.custom.importShareX")}</Forms.FormTitle>
+                    <Divider />
+                    <Heading>{t("plugin.bigFileUpload.form.custom.importShareX")}</Heading>
                     <Button
                         onClick={triggerFileUpload}
                         color={Button.Colors.BRAND}

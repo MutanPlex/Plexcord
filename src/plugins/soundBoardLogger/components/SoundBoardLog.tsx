@@ -5,8 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
+import { Paragraph } from "@components/Paragraph";
 import { User } from "@plexcord/discord-types";
 import settings from "@plugins/soundBoardLogger/settings";
 import { clearLoggedSounds, getLoggedSounds } from "@plugins/soundBoardLogger/store";
@@ -14,7 +16,7 @@ import { addListener, AvatarStyles, cl, downloadAudio, getEmojiUrl, playSound, r
 import { Margins } from "@utils/margins";
 import { classes, copyWithToast } from "@utils/misc";
 import { closeModal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
-import { Button, Clickable, Forms, Text, Tooltip, useCallback, useEffect, useMemo, UserUtils, useState } from "@webpack/common";
+import { Button, Clickable, Tooltip, useCallback, useEffect, useMemo, UserUtils, useState } from "@webpack/common";
 
 import { openMoreUsersModal } from "./MoreUsersModal";
 import { openUserModal } from "./UserModal";
@@ -52,14 +54,14 @@ function SoundBoardLogContainer({ closeModal }) {
         return (
             <>
                 <ModalHeader className={cl("modal-header")}>
-                    <Text variant="heading-lg/semibold" style={{ flexGrow: 1 }}>SoundBoard log</Text>
+                    <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>SoundBoard log</BaseText>
                     <ModalCloseButton onClick={closeModal} />
                 </ModalHeader>
                 <ModalContent className={classes(cl("modal-content"), Margins.top8)}>
                     <div style={{ textAlign: "center", padding: "2rem" }}>
-                        <Text variant="text-sm/medium" style={{ color: "var(--text-muted)" }}>
+                        <BaseText size="sm" weight="medium" style={{ color: "var(--text-muted)" }}>
                             Loading sounds...
-                        </Text>
+                        </BaseText>
                     </div>
                 </ModalContent>
             </>
@@ -85,7 +87,7 @@ const SoundItem = ({ item, itemUsers, avatarsMax, onClickUser, renderMoreUsers }
                     src={getEmojiUrl(item.emoji)}
                     className={cl("sound-emoji")}
                 />
-                <Forms.FormText variant="text-xs/medium" className={cl("sound-id")}>{item.soundId}</Forms.FormText>
+                <Paragraph size="xs" weight="medium" className={cl("sound-id")}>{item.soundId}</Paragraph>
             </Flex>
             <UserSummaryItem
                 users={itemUsers.slice(0, avatarsMax)}
@@ -264,7 +266,7 @@ export default function SoundBoardLog({ data, closeModal }) {
     return (
         <>
             <ModalHeader className={cl("modal-header")}>
-                <Text variant="heading-lg/semibold" style={{ flexGrow: 1 }}>SoundBoard log</Text>
+                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>SoundBoard log</BaseText>
                 <ModalCloseButton onClick={closeModal} />
             </ModalHeader>
             <ModalContent className={classes(cl("modal-content"), Margins.top8)}>
@@ -274,9 +276,9 @@ export default function SoundBoardLog({ data, closeModal }) {
                             src="https://raw.githubusercontent.com/fres621/assets/main/shiggy.png"
                             height="200px"
                         />
-                        <Forms.FormText variant="text-sm/medium" style={{ color: "var(--text-muted)" }} className={Margins.bottom16}>
+                        <Paragraph size="sm" weight="medium" style={{ color: "var(--text-muted)" }} className={Margins.bottom16}>
                             No sounds logged yet. Join a voice chat to start logging!
-                        </Forms.FormText>
+                        </Paragraph>
                     </div>
                 }
             </ModalContent>

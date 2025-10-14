@@ -21,7 +21,7 @@ import i18n, { SUPPORTED_LANGUAGES, t, useForceUpdateOnLocaleChange, useTranslat
 import { openNotificationLogModal } from "@api/Notifications/notificationLog";
 import { Settings, useSettings } from "@api/Settings";
 import { FormSwitch } from "@components/FormSwitch";
-import { FolderIcon, GithubIcon, LogIcon, openPluginModal, PaintbrushIcon, RestartIcon } from "@components/index";
+import { Divider, FolderIcon, GithubIcon, Heading, LogIcon, openPluginModal, PaintbrushIcon, Paragraph, RestartIcon } from "@components/index";
 import { QuickAction, QuickActionCard } from "@components/settings/QuickAction";
 import { SpecialCard } from "@components/settings/SpecialCard";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
@@ -31,7 +31,7 @@ import { IS_MAC, IS_WINDOWS } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import { classes, isPcPluginDev, isPluginDev } from "@utils/misc";
 import { relaunch } from "@utils/native";
-import { Forms, React, Select, useMemo, UserStore } from "@webpack/common";
+import { Alerts, React, Select, useMemo, UserStore } from "@webpack/common";
 
 import { DonateButtonComponent, isDonor } from "./DonateButton";
 import { VibrancySettings } from "./MacVibrancySettings";
@@ -63,10 +63,10 @@ function LanguageSelector() {
     return (
         <div style={{ display: "flex" }}>
             <div>
-                <Forms.FormTitle tag="h5">{t("settings.language.selector.label")}</Forms.FormTitle>
-                <Forms.FormText className="description" style={{ marginBottom: "8px" }}>
+                <Heading tag="h5">{t("settings.language.selector.label")}</Heading>
+                <Paragraph className="description" style={{ marginBottom: "8px" }}>
                     {t("settings.language.selector.description")}
-                </Forms.FormText>
+                </Paragraph>
             </div>
             <div style={{ marginLeft: "auto", minWidth: "200px" }}>
                 <Select
@@ -89,52 +89,82 @@ function Switches() {
         {
             key: "useQuickCss",
             title: t("settings.switches.useQuickCss.label"),
-            note: t("settings.switches.useQuickCss.description")
+            restartRequired: true,
+            warning: { enabled: false }
         },
         !IS_WEB && {
             key: "enableReactDevtools",
             title: t("settings.switches.enableReactDevtools.label"),
-            note: t("settings.switches.enableReactDevtools.description")
+            restartRequired: true,
+            warning: { enabled: false }
         },
         !IS_WEB && (!IS_DISCORD_DESKTOP || !IS_WINDOWS ? {
             key: "frameless",
             title: t("settings.switches.frameless.label"),
-            note: t("settings.switches.frameless.description")
+            restartRequired: true,
+            warning: { enabled: false }
         } : {
             key: "winNativeTitleBar",
             title: t("settings.switches.winNativeTitleBar.label"),
-            note: t("settings.switches.winNativeTitleBar.description")
+            restartRequired: true,
+            warning: { enabled: false }
         }),
         !IS_WEB && {
             key: "transparent",
             title: t("settings.switches.transparent.label"),
-            note: t("settings.switches.transparent.description")
+            description: t("settings.switches.transparent.description"),
+            restartRequired: true,
+            warning: { enabled: false }
         },
         !IS_WEB && IS_WINDOWS && {
             key: "winCtrlQ",
             title: t("settings.switches.winCtrlQ.label"),
-            note: t("settings.switches.winCtrlQ.description")
+            restartRequired: false,
+            warning: { enabled: false }
         },
         IS_DISCORD_DESKTOP && {
             key: "disableMinSize",
             title: t("settings.switches.disableMinSize.label"),
-            note: t("settings.switches.disableMinSize.description")
+            restartRequired: false,
+            warning: { enabled: false }
         },
     ] satisfies Array<false | {
         key: KeysOfType<typeof settings, boolean>;
         title: string;
-        note: string;
+        description?: string;
+        restartRequired?: boolean;
+        warning: { enabled: boolean; message?: string; };
     }>;
 
-    return Switches.map(s => s && (
-        <FormSwitch
-            key={s.key}
-            value={settings[s.key]}
-            onChange={v => settings[s.key] = v}
-            description={s.note}
-            title={s.title}
-        />
-    ));
+    return Switches.map(setting => {
+        if (!setting) {
+            return null;
+        }
+
+        const { key, title, description, restartRequired } = setting;
+
+        return (
+            <FormSwitch
+                key={key}
+                title={title}
+                description={description}
+                value={settings[key]}
+                onChange={v => {
+                    settings[key] = v;
+
+                    if (restartRequired) {
+                        Alerts.show({
+                            title: t("plugins.restart.required"),
+                            body: t("plugins.restart.apply"),
+                            confirmText: t("plugins.restart.button.now"),
+                            cancelText: t("plugins.restart.buttonlater"),
+                            onConfirm: relaunch
+                        });
+                    }
+                }}
+            />
+        );
+    });
 }
 
 function PlexcordSettings() {
@@ -147,7 +177,7 @@ function PlexcordSettings() {
 
     const needsVibrancySettings = IS_DISCORD_DESKTOP && IS_MAC;
 
-    const user = UserStore.getCurrentUser();
+    const user = UserStore?.getCurrentUser();
 
     return (
         <SettingsTab title={"Plexcord " + t("settings.title")}>
@@ -191,7 +221,7 @@ function PlexcordSettings() {
             )}
 
             <section>
-                <Forms.FormTitle tag="h5">{t("settings.quickActions.title")}</Forms.FormTitle>
+                <Heading tag="h5">{t("settings.quickActions.title")}</Heading>
                 <QuickActionCard>
                     <QuickAction
                         Icon={LogIcon}
@@ -225,21 +255,21 @@ function PlexcordSettings() {
                 </QuickActionCard>
             </section>
 
-            <Forms.FormDivider />
+            <Divider />
 
             <section className={Margins.top16}>
-                <Forms.FormTitle tag="h5">{t("settings.settingsSection.title")}</Forms.FormTitle>
-                <Forms.FormText className={Margins.bottom20} style={{ color: "var(--text-muted)" }}>
+                <Heading tag="h5">{t("settings.settingsSection.title")}</Heading>
+                <Paragraph className={Margins.bottom20} style={{ color: "var(--text-muted)" }}>
                     {t("settings.settingsSection.hintParts.prefix")}
                     <a onClick={() => openPluginModal(Plexcord.Plugins.plugins.Settings)}>
                         {t("settings.settingsSection.hintParts.linkText")}
                     </a>
                     {t("settings.settingsSection.hintParts.suffix")}
-                </Forms.FormText>
+                </Paragraph>
 
                 <LanguageSelector />
 
-                <Forms.FormDivider className={classes(Margins.top16, Margins.bottom20)} />
+                <Divider className={classes(Margins.top16, Margins.bottom20)} />
 
                 <Switches />
             </section>

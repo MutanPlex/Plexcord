@@ -11,11 +11,12 @@ import { ApplicationCommandInputType, ApplicationCommandOptionType, sendBotMessa
 import { t } from "@api/i18n";
 import { getUserSettingLazy } from "@api/UserSettings";
 import { InfoIcon } from "@components/Icons";
+import { Paragraph } from "@components/Paragraph";
 import { GuildMember } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { getCurrentChannel, getCurrentGuild } from "@utils/discord";
 import definePlugin from "@utils/types";
-import { Forms, GuildMemberStore, GuildRoleStore, Menu, Parser } from "@webpack/common";
+import { GuildMemberStore, GuildRoleStore, Menu, Parser } from "@webpack/common";
 
 import { showInRoleModal } from "./RoleMembersModal";
 
@@ -49,11 +50,11 @@ export default definePlugin({
     settingsAboutComponent: () => {
         return (
             <>
-                <Forms.FormText style={{ fontSize: "1.2rem", marginTop: "15px", fontWeight: "bold" }}>{Parser.parse(":warning:")} {t("plugin.inRole.modal.about.title")}</Forms.FormText>
-                <Forms.FormText style={{ marginTop: "10px", fontWeight: "500" }} >{t("plugin.inRole.modal.about.description")}:</Forms.FormText>
-                <Forms.FormText>• {t("plugin.inRole.modal.about.list.one")}</Forms.FormText>
-                <Forms.FormText>• {t("plugin.inRole.modal.about.list.two")}</Forms.FormText>
-                <Forms.FormText>• {t("plugin.inRole.modal.about.list.three")}</Forms.FormText>
+                <Paragraph style={{ fontSize: "1.2rem", marginTop: "15px", fontWeight: "bold" }}>{Parser.parse(":warning:")} {t("plugin.inRole.modal.about.title")}</Paragraph>
+                <Paragraph style={{ marginTop: "10px", fontWeight: "500" }}>{t("plugin.inRole.modal.about.description")}:</Paragraph>
+                <Paragraph>• {t("plugin.inRole.modal.about.list.one")}</Paragraph>
+                <Paragraph>• {t("plugin.inRole.modal.about.list.two")}</Paragraph>
+                <Paragraph>• {t("plugin.inRole.modal.about.list.three")}</Paragraph>
             </>
         );
     },

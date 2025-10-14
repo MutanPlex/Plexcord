@@ -7,11 +7,13 @@
 
 import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { BasicChannelTabsProps, ChannelTabsProps, createTab, handleChannelSwitch, moveToTab, openedTabs, openStartupTabs, saveTabs, settings, setUpdaterFunction, useGhostTabs } from "@plugins/channelTabs/util";
 import { classes } from "@utils/misc";
 import { useForceUpdater } from "@utils/react";
 import { findComponentByCodeLazy, findStoreLazy } from "@webpack";
-import { Button, ContextMenuApi, Flex, FluxDispatcher, Forms, useCallback, useEffect, useRef, UserStore, useState, useStateFromStores } from "@webpack/common";
+import { Button, ContextMenuApi, Flex, FluxDispatcher, useCallback, useEffect, useRef, UserStore, useState, useStateFromStores } from "@webpack/common";
 
 import BookmarkContainer from "./BookmarkContainer";
 import ChannelTab, { PreviewTab } from "./ChannelTab";
@@ -192,7 +194,7 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
 
 export function ChannelTabsPreview(p) {
     const id = UserStore.getCurrentUser()?.id;
-    if (!id) return <Forms.FormText>{t("plugin.channelTabs.error.noLogin")}</Forms.FormText>;
+    if (!id) return <Paragraph>{t("plugin.channelTabs.error.noLogin")}</Paragraph>;
 
     const { setValue }: { setValue: (v: TabSet) => void; } = p;
     const { tabSet }: { tabSet: TabSet; } = settings.use(["tabSet"]);
@@ -202,7 +204,7 @@ export function ChannelTabsPreview(p) {
 
     return (
         <>
-            <Forms.FormTitle>{t("plugin.channelTabs.tabs.startup")}</Forms.FormTitle>
+            <Heading>{t("plugin.channelTabs.tabs.startup")}</Heading>
             <Flex flexDirection="row" style={{ gap: "2px" }}>
                 {currentTabs.map(t => <>
                     <PreviewTab {...t} />

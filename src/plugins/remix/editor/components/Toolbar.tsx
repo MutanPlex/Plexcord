@@ -5,12 +5,13 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { Paragraph } from "@components/Paragraph";
 import { Switch } from "@components/settings";
 import { BrushTool } from "@plugins/remix/editor/tools/brush";
 import { CropTool, resetBounds } from "@plugins/remix/editor/tools/crop";
 import { EraseTool } from "@plugins/remix/editor/tools/eraser";
 import { currentShape, setShape, setShapeFill, Shape, ShapeTool } from "@plugins/remix/editor/tools/shape";
-import { Button, Forms, Select, Slider, useEffect, useState } from "@webpack/common";
+import { Button, Select, Slider, useEffect, useState } from "@webpack/common";
 
 import { brushCanvas, canvas, cropCanvas, render, shapeCanvas } from "./Canvas";
 import { SettingColorComponent } from "./SettingColorComponent";
@@ -130,7 +131,7 @@ export const Toolbar = () => {
                             }
                         />
 
-                        <Forms.FormText className="pc-remix-setting-switch">Fill <Switch checked={fill} onChange={setFill} /></Forms.FormText>
+                        <Paragraph className="pc-remix-setting-switch">Fill <Switch checked={fill} onChange={setFill} /></Paragraph>
                     </>)}
                 </div>
             </div>

@@ -9,12 +9,13 @@ import "./styles.css";
 
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { User } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy } from "@webpack";
-import { React, Text } from "@webpack/common";
+import { React } from "@webpack/common";
 
 import { GitHubReposComponent } from "./components/GitHubReposComponent";
 
@@ -66,9 +67,9 @@ const ProfilePopoutComponent = ErrorBoundary.wrap(
     },
     {
         noop: true,
-        fallback: () => <Text variant="text-xs/semibold" className="pc-github-repos-error" style={{ color: "var(--text-danger)" }}>
+        fallback: () => <BaseText size="xs" weight="semibold" className="pc-github-repos-error" style={{ color: "var(--text-danger)" }}>
             {t("plugin.githubRepos.error.render")}
-        </Text>
+        </BaseText>
     }
 );
 

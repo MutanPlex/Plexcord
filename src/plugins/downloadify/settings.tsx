@@ -10,8 +10,10 @@ import "./style.css";
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { OptionType } from "@utils/types";
-import { Button, Forms, showToast, Toasts, useState } from "@webpack/common";
+import { Button, showToast, Toasts, useState } from "@webpack/common";
 import { JSX } from "react";
 
 import { d, DownloadifyLogger, DownloadifyNative } from "./utils/definitions";
@@ -41,16 +43,16 @@ function DefaultDirectorySetting(): JSX.Element {
     return (
         <ErrorBoundary>
             <section>
-                <Forms.FormTitle className={d("form-title")}>
+                <Heading className={d("form-title")}>
                     {t("plugin.downloadify.modal.title")}
-                </Forms.FormTitle>
-                <Forms.FormText className={d("form-description")}>
+                </Heading>
+                <Paragraph className={d("form-description")}>
                     {t("plugin.downloadify.modal.description")}
-                </Forms.FormText>
+                </Paragraph>
                 <div className={d("directory-container")}>
-                    <Forms.FormText className={d("directory-display")}>
+                    <Paragraph className={d("directory-display")}>
                         {defaultDirectory || t("plugin.downloadify.noDirectory")}
-                    </Forms.FormText>
+                    </Paragraph>
                     <div className={d("directory-buttons")}>
                         <Button
                             disabled={isDialogueOpen}

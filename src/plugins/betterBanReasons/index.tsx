@@ -10,10 +10,11 @@ import "./styles.css";
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { Heading } from "@components/Heading";
 import { DeleteIcon, PlusIcon } from "@components/Icons";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import { Button, Forms, TextInput } from "@webpack/common";
+import { Button, TextInput } from "@webpack/common";
 
 const cl = classNameFactory("pc-bbr-");
 
@@ -22,7 +23,7 @@ function ReasonsComponent() {
 
     return (
         <section>
-            <Forms.FormTitle tag="h5">{t("plugin.betterBanReasons.title")}</Forms.FormTitle>
+            <Heading>{t("plugin.betterBanReasons.title")}</Heading>
             {reasons.map((r, i) => (
                 <div
                     key={i}
@@ -43,7 +44,7 @@ function ReasonsComponent() {
                             reasons.splice(i, 1);
                             settings.store.reasons = reasons;
                         }}
-                        look={Button.Looks.BLANK}
+                        look={Button.Looks.LINK}
                         size={Button.Sizes.MIN}
                     >
                         <DeleteIcon />

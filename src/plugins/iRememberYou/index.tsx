@@ -10,12 +10,13 @@ import "styles.css?managed";
 import { DataStore } from "@api/index";
 import { addMessagePreSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { Heart } from "@components/Heart";
+import { BaseText, Paragraph } from "@components/index";
 import { Guild, User } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import { openUserProfile } from "@utils/discord";
 import * as Modal from "@utils/modal";
 import definePlugin from "@utils/types";
-import { Avatar, Button, ChannelStore, Clickable, Flex, GuildMemberStore, GuildStore, MessageStore, React, Text, TextArea, TextInput, Tooltip, UserStore, } from "@webpack/common";
+import { Avatar, Button, ChannelStore, Clickable, Flex, GuildMemberStore, GuildStore, MessageStore, React, TextArea, TextInput, Tooltip, UserStore, } from "@webpack/common";
 
 interface IUserExtra {
     isOwner?: boolean;
@@ -191,12 +192,12 @@ class DataUI {
     }
 
     renderSectionDescription() {
-        return <Text>{"Provides a list of users you have mentioned or replied to, or those who own the servers you belong to (owner*), or are members of your guild"}</Text>;
+        return <BaseText>{"Provides a list of users you have mentioned or replied to, or those who own the servers you belong to (owner*), or are members of your guild"}</BaseText>;
     }
 
     renderUsersCollectionAsRows(usersCollection: Data["usersCollection"]) {
         if (Object.keys(usersCollection).length === 0) {
-            return <Text>It's empty right now</Text>;
+            return <BaseText>It's empty right now</BaseText>;
         }
         const elements = Object.entries(usersCollection)
             .map(([_key, { users, name }]) => ({ name, users: Object.values(users) }))
@@ -214,7 +215,7 @@ class DataUI {
 
         return <aside key={key} >
             <div className={"pc-i-remember-you-user-header-container"}>
-                <Text>{key.toUpperCase()}</Text>
+                <BaseText>{key.toUpperCase()}</BaseText>
                 <div className={"pc-i-remember-you-user-header-btns"}>
                     <Flex style={{ gap: "calc(0.5em + 0.5vw) 0.2em", flexDirection: "column" }}>
                         {usersElements}
@@ -246,13 +247,13 @@ class DataUI {
                     {this.renderUserAvatar(user)}
                     <Tooltip text={this.userTooltipText(user)}>
                         {props =>
-                            <Text {...props} selectable>{user.tag} {allowExtra.owner && user.extra?.isOwner && "(owner)"}</Text>
+                            <Paragraph {...props} >{user.tag} {allowExtra.owner && user.extra?.isOwner && "(owner)"}</Paragraph>
                         }
                     </Tooltip>
                 </Flex>
             </span>
 
-            <span style={{ height: "min-content" }}><Text selectable variant="code" style={{ opacity: 0.75 }}>{user.id}</Text></span>
+            <span style={{ height: "min-content" }}><Paragraph style={{ opacity: 0.75 }}>{user.id}</Paragraph></span>
         </Flex>;
     }
 
@@ -262,14 +263,9 @@ class DataUI {
 
                 <Clickable onClick={() => Modal.openModal(props => <Modal.ModalRoot size={Modal.ModalSize.LARGE} fullscreenOnMobile={true} {...props}>
                     <Modal.ModalHeader separator={false}>
-                        <Text
-                            color="header-primary"
-                            variant="heading-lg/semibold"
-                            tag="h1"
-                            style={{ flexGrow: 1 }}
-                        >
+                        <BaseText color="header-primary" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
                             Editor
-                        </Text>
+                        </BaseText>
                         <Modal.ModalCloseButton onClick={props.onClose} />
                     </Modal.ModalHeader>
                     <Modal.ModalContent>
@@ -280,7 +276,7 @@ class DataUI {
                         <TextArea value={JSON.stringify(usersCollection, null, "\t")} onChange={() => { }} rows={20} />
                     </Modal.ModalContent>
                 </Modal.ModalRoot>)}>
-                    <Text variant="eyebrow" style={{ cursor: "pointer" }} >Open editor</Text>
+                    <Paragraph style={{ cursor: "pointer" }}>Open editor</Paragraph>
                 </Clickable>
 
                 <Clickable onClick={
@@ -295,7 +291,7 @@ class DataUI {
                         data.usersCollection = {};
                         await data.updateStorage();
                     }
-                }><Text style={{ cursor: "pointer" }}>Reset storage</Text>
+                }><BaseText style={{ cursor: "pointer" }}>Reset storage</BaseText>
                 </Clickable>
             </Flex>
         </footer >;
@@ -331,10 +327,10 @@ class DataUI {
           > Let me know a more promising color, instead of #ffffff
           */
             <main style={{ color: "#ffffff", paddingBottom: "4em" }}>
-                <Text tag="h1" variant="heading-lg/bold">
+                <BaseText tag="h1" size="lg" weight="bold">
                     {"IRememberYou"}{" "}
                     <Heart />
-                </Text>
+                </BaseText>
 
 
                 {this.renderSectionDescription()}

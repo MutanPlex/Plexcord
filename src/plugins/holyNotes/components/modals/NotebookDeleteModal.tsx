@@ -6,10 +6,11 @@
  */
 
 import { t } from "@api/i18n";
+import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
-import { Button, React, Text } from "@webpack/common";
+import { Button, React } from "@webpack/common";
 
 import Error from "./Error";
 import { RenderMessage } from "./RenderMessage";
@@ -29,7 +30,7 @@ export default ({ onClose, notebook, onChangeTab, ...props }: ModalProps & { onC
             className="pc-delete-notebook"
             size={ModalSize.LARGE}>
             <ModalHeader>
-                <Text tag="h3">{t("plugin.holyNotes.modal.delete.title")}</Text>
+                <BaseText tag="h3">{t("plugin.holyNotes.modal.delete.title")}</BaseText>
                 <ModalCloseButton onClick={onClose} />
             </ModalHeader>
             <ModalContent>

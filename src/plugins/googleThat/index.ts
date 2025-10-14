@@ -74,7 +74,7 @@ const settings = definePluginSettings({
             return t("plugin.googleThat.option.customEngineURL.description");
         },
         type: OptionType.STRING,
-        placeholder: "https://search.vmohammad.dev/?q="
+        placeholder: ""
     }
 });
 

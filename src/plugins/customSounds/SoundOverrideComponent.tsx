@@ -8,12 +8,12 @@
 import { AudioPlayerInterface, playAudio } from "@api/AudioPlayer";
 import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
-import { FormSwitch } from "@components/index";
+import { FormSwitch, Heading } from "@components/index";
 import { Margins } from "@utils/margins";
 import { useForceUpdater } from "@utils/react";
 import { makeRange } from "@utils/types";
 import { findLazy } from "@webpack";
-import { Button, Card, Forms, React, Select, showToast, Slider } from "@webpack/common";
+import { Button, Card, React, Select, showToast, Slider } from "@webpack/common";
 import { ComponentType, Ref, SyntheticEvent } from "react";
 
 import { deleteAudio, getAllAudio, saveAudio, StoredAudioFile } from "./audioStore";
@@ -192,7 +192,7 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                         </Button>
                     </div>
 
-                    <Forms.FormTitle>{t("plugin.customSounds.button.volume")}</Forms.FormTitle>
+                    <Heading>{t("plugin.customSounds.button.volume")}</Heading>
                     <Slider
                         markers={makeRange(0, 100, 10)}
                         initialValue={override.volume}
@@ -205,7 +205,7 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                         disabled={!override.enabled}
                     />
 
-                    <Forms.FormTitle>{t("plugin.customSounds.button.soundSource")}</Forms.FormTitle>
+                    <Heading>{t("plugin.customSounds.button.soundSource")}</Heading>
                     <Select
                         options={[
                             { value: "default", label: t("plugin.customSounds.option.default") },
@@ -233,7 +233,7 @@ export function SoundOverrideComponent({ type, override, onChange }: {
 
                     {override.selectedSound === "custom" && (
                         <>
-                            <Forms.FormTitle>{t("plugin.customSounds.button.customFile")}</Forms.FormTitle>
+                            <Heading>{t("plugin.customSounds.button.customFile")}</Heading>
                             <Select
                                 options={[
                                     { value: "", label: t("plugin.customSounds.option.select") },

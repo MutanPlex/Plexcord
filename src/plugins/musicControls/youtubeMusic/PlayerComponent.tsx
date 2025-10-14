@@ -20,11 +20,12 @@
 import "./ytmStyles.css";
 
 import { ImageIcon, LinkIcon, OpenExternalIcon } from "@components/Icons";
+import { Paragraph } from "@components/Paragraph";
 import { SeekBar } from "@plugins/musicControls/spotify/SeekBar";
 import { debounce } from "@shared/debounce";
 import { openImageModal } from "@utils/discord";
 import { classes, copyWithToast } from "@utils/misc";
-import { ContextMenuApi, Flex, FluxDispatcher, Forms, Menu, React, useEffect, useState, useStateFromStores } from "@webpack/common";
+import { ContextMenuApi, Flex, FluxDispatcher, Menu, React, useEffect, useState, useStateFromStores } from "@webpack/common";
 
 import { type Repeat, type Song, YoutubeMusicStore } from "./YtmStore";
 
@@ -180,13 +181,14 @@ function YtmSeekBar() {
 
     return (
         <div id={cl("progress-bar")}>
-            <Forms.FormText
-                variant="text-xs/medium"
+            <Paragraph
+                size="xs"
+                weight="medium"
                 className={`${cl("progress-time")} ${cl("time-left")}`}
                 aria-label="Progress"
             >
                 {msToHuman(position)}
-            </Forms.FormText>
+            </Paragraph>
             <SeekBar
                 initialValue={position}
                 minValue={0}
@@ -195,13 +197,14 @@ function YtmSeekBar() {
                 asValueChanges={onChange}
                 onValueRender={msToHuman}
             />
-            <Forms.FormText
-                variant="text-xs/medium"
+            <Paragraph
+                size="xs"
+                weight="medium"
                 className={`${cl("progress-time")} ${cl("time-right")}`}
                 aria-label="Total Duration"
             >
                 {msToHuman(songDuration * 1000)}
-            </Forms.FormText>
+            </Paragraph>
         </div>
     );
 }
@@ -297,25 +300,26 @@ function Info({ track }: { track: NonNullable<Song>; }) {
         <div id={cl("info-wrapper")}>
             {i}
             <div id={cl("titles")}>
-                <Forms.FormText
-                    variant="text-sm/semibold"
+                <Paragraph
+                    size="sm"
+                    weight="semibold"
                     id={cl("song-title")}
                     className={cl("ellipoverflow")}
                     title={track?.title}
                     {...makeLinkProps("Song", track?.videoId, `/watch?v=${track?.videoId}`)}
                 >
                     {track?.title}
-                </Forms.FormText>
+                </Paragraph>
                 {track.artist && (
-                    <Forms.FormText variant="text-sm/normal" className={cl("ellipoverflow")}>
+                    <Paragraph size="sm" weight="normal" className={cl("ellipoverflow")}>
                         by&nbsp;
                         <span className={cl("artist")} style={{ fontSize: "inherit" }} title={track.artist}>
                             {track.artist}
                         </span>
-                    </Forms.FormText>
+                    </Paragraph>
                 )}
                 {track.album && (
-                    <Forms.FormText variant="text-sm/normal" className={cl("ellipoverflow")}>
+                    <Paragraph size="sm" weight="normal" className={cl("ellipoverflow")}>
                         on&nbsp;
                         <span
                             id={cl("album-title")}
@@ -325,7 +329,7 @@ function Info({ track }: { track: NonNullable<Song>; }) {
                         >
                             {track.album}
                         </span>
-                    </Forms.FormText>
+                    </Paragraph>
                 )}
             </div>
         </div>

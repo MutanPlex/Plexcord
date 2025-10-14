@@ -6,9 +6,10 @@
  */
 
 import { classNameFactory } from "@api/Styles";
+import { BaseText } from "@components/BaseText";
 import { getLanguageColor } from "@plugins/githubRepos/colors";
 import { RepoCardProps } from "@plugins/githubRepos/types";
-import { React, Text, Tooltip } from "@webpack/common";
+import { React, Tooltip } from "@webpack/common";
 
 import { Star } from "./Star";
 
@@ -23,7 +24,7 @@ export function RepoCard({ repo, showStars, showLanguage }: RepoCardProps) {
         return (
             <div className={cl("stars")}>
                 <Star className={cl("stars-icon")} />
-                <Text variant="text-sm/normal" style={{ color: "var(--text-muted)" }}>{repo.stargazers_count.toLocaleString()}</Text>
+                <BaseText size="sm" weight="normal" style={{ color: "var(--text-muted)" }}>{repo.stargazers_count.toLocaleString()}</BaseText>
             </div>
         );
     };
@@ -57,7 +58,7 @@ export function RepoCard({ repo, showStars, showLanguage }: RepoCardProps) {
                     className={cl("language-color")}
                     style={{ backgroundColor: getLanguageColor(repo.language) }}
                 />
-                <Text variant="text-sm/normal" style={{ color: "var(--text-muted)" }}>{repo.language}</Text>
+                <BaseText size="sm" weight="normal" style={{ color: "var(--text-muted)" }}>{repo.language}</BaseText>
                 {renderStars()}
             </div >
         );
@@ -73,9 +74,9 @@ export function RepoCard({ repo, showStars, showLanguage }: RepoCardProps) {
                             onMouseEnter={onMouseEnter}
                         >
                             <div className={cl("header")}>
-                                <Text variant="text-sm/medium" className={cl("name")} style={{ color: "var(--interactive-active)" }}>
+                                <BaseText size="sm" weight="medium" className={cl("name")} style={{ color: "var(--interactive-active)" }}>
                                     {repo.name}
-                                </Text>
+                                </BaseText>
                                 {renderLink()}
                             </div>
                             {renderLanguage()}
@@ -85,9 +86,9 @@ export function RepoCard({ repo, showStars, showLanguage }: RepoCardProps) {
             ) : (
                 <div className={cl("card")}>
                     <div className={cl("header")}>
-                        <Text variant="text-sm/medium" className={cl("name")} style={{ color: "var(--interactive-active)" }}>
+                        <BaseText size="sm" weight="medium" className={cl("name")} style={{ color: "var(--interactive-active)" }}>
                             {repo.name}
-                        </Text>
+                        </BaseText>
                         {renderLink()}
                     </div>
                     {renderLanguage()}

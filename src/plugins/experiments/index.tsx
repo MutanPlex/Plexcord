@@ -22,11 +22,13 @@ import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { ErrorCard } from "@components/ErrorCard";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { Devs, IS_MAC, PcDevs } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy, findLazy } from "@webpack";
-import { Forms, React } from "@webpack/common";
+import { React } from "@webpack/common";
 
 import hideBugReport from "./hideBugReport.css?managed";
 
@@ -84,13 +86,13 @@ export default definePlugin({
             }
         },
         {
-            find: 'Search experiments"',
+            find: 'placeholder:"Search experiments"',
             replacement: {
-                match: '"div",{children:[',
-                replace: "$&$self.WarningCard(),"
+                match: /(?<=children:\[)(?=\(0,\i\.jsx?\)\(\i\.\i,{placeholder:"Search experiments")/,
+                replace: "$self.WarningCard(),"
             }
         },
-        // Change top right chat toolbar button from the help one to the dev one
+        // Change top right toolbar button from the help one to the dev one
         {
             find: '?"BACK_FORWARD_NAVIGATION":',
             replacement: {
@@ -98,6 +100,15 @@ export default definePlugin({
                 replace: "_hasBugReporterAccess:$1=true"
             },
             predicate: () => settings.store.toolbarDevMenu
+        },
+
+        // Disable opening the bug report menu when clicking the top right toolbar dev button
+        {
+            find: 'navId:"staff-help-popout"',
+            replacement: {
+                match: /(isShown.+?)onClick:\i/,
+                replace: (_, rest) => `${rest}onClick:()=>{}`
+            }
         },
 
         // Make the Favourites Server experiment allow favouriting DMs and threads
@@ -147,8 +158,8 @@ export default definePlugin({
     settingsAboutComponent: () => {
         return (
             <React.Fragment>
-                <Forms.FormTitle tag="h3">{t("plugin.experiments.modal.about.title")}</Forms.FormTitle>
-                <Forms.FormText variant="text-md/normal">
+                <Heading>{t("plugin.experiments.modal.about.title")}</Heading>
+                <Paragraph size="md">
                     {tJsx("plugin.experiments.modal.about.body", {
                         key: <div className={KbdStyles.combo} style={{ display: "inline-flex" }}>
                             <kbd className={KbdStyles.key}>{modKey}</kbd> +{" "}
@@ -156,28 +167,28 @@ export default definePlugin({
                             <kbd className={KbdStyles.key}>O</kbd>{" "}
                         </div>
                     })}
-                </Forms.FormText>
+                </Paragraph>
             </React.Fragment>
         );
     },
 
     WarningCard: ErrorBoundary.wrap(() => (
         <ErrorCard id="pc-experiments-warning-card" className={Margins.bottom16}>
-            <Forms.FormTitle tag="h2">{t("plugin.experiments.modal.warning.title")}</Forms.FormTitle>
+            <Heading>{t("plugin.experiments.modal.warning.title")}</Heading>
 
-            <Forms.FormText>
+            <Paragraph>
                 {t("plugin.experiments.modal.warning.body")}
-            </Forms.FormText>
+            </Paragraph>
 
-            <Forms.FormText className={Margins.top8}>
+            <Paragraph className={Margins.top8}>
                 {t("plugin.experiments.modal.warning.notReponsible")}
 
                 {t("plugin.experiments.modal.warning.useAtOwnRisk")}
-            </Forms.FormText>
+            </Paragraph>
 
-            <Forms.FormText className={Margins.top8}>
+            <Paragraph className={Margins.top8}>
                 {t("plugin.experiments.modal.warning.serverSideFeatures")}
-            </Forms.FormText>
+            </Paragraph>
         </ErrorCard>
     ), { noop: true })
 });

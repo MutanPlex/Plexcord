@@ -1,12 +1,3 @@
-.pc-open-external-icon {
-    transform: rotate(45deg);
-}
-
 .pc-owner-crown-icon {
     color: var(--status-warning);
-}
-
-.pc-heart-icon {
-    margin-right: 0.5em;
-    translate: 0 2px;
 }

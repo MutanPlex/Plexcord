@@ -18,6 +18,7 @@
 */
 
 import { t } from "@api/i18n";
+import { Heading } from "@components/Heading";
 import { decrypt } from "@plugins/invisibleChat.desktop/index";
 import {
     ModalContent,
@@ -26,7 +27,7 @@ import {
     ModalRoot,
     openModal,
 } from "@utils/modal";
-import { Button, Forms, React, TextInput } from "@webpack/common";
+import { Button, React, TextInput } from "@webpack/common";
 
 export function DecModal(props: any) {
     const encryptedMessage: string = props?.message?.content;
@@ -35,13 +36,13 @@ export function DecModal(props: any) {
     return (
         <ModalRoot {...props}>
             <ModalHeader>
-                <Forms.FormTitle tag="h4">{t("plugin.invisibleChat.modal.decrypt.title")}</Forms.FormTitle>
+                <Heading>{t("plugin.invisibleChat.modal.decrypt.title")}</Heading>
             </ModalHeader>
 
             <ModalContent>
-                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>{t("plugin.invisibleChat.modal.decrypt.with")}</Forms.FormTitle>
+                <Heading style={{ marginTop: "10px" }}>{t("plugin.invisibleChat.modal.decrypt.with")}</Heading>
                 <TextInput defaultValue={encryptedMessage} disabled={true}></TextInput>
-                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>{t("plugin.invisibleChat.modal.decrypt.password")}</Forms.FormTitle>
+                <Heading style={{ marginTop: "10px" }}>{t("plugin.invisibleChat.modal.decrypt.password")}</Heading>
                 <TextInput
                     style={{ marginBottom: "20px" }}
                     onChange={setPassword}

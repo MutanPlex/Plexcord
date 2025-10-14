@@ -20,9 +20,12 @@
 import { t, tJsx } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
+import { Divider } from "@components/Divider";
 import { ErrorCard } from "@components/ErrorCard";
 import { Flex } from "@components/Flex";
+import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
+import { Paragraph } from "@components/Paragraph";
 import { Activity } from "@plexcord/discord-types";
 import { ActivityType } from "@plexcord/discord-types/enums";
 import { Devs } from "@utils/constants";
@@ -32,7 +35,7 @@ import { classes } from "@utils/misc";
 import { useAwaiter } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy, findComponentByCodeLazy } from "@webpack";
-import { ApplicationAssetUtils, Button, FluxDispatcher, Forms, React, UserStore } from "@webpack/common";
+import { ApplicationAssetUtils, Button, FluxDispatcher, React, UserStore } from "@webpack/common";
 
 const useProfileThemeStyle = findByCodeLazy("profileThemeStyle:", "--profile-gradient-primary-color");
 const ActivityView = findComponentByCodeLazy(".party?(0", ".card");
@@ -485,8 +488,8 @@ export default definePlugin({
                         className={classes(Margins.top16, Margins.bottom16)}
                         style={{ padding: "1em" }}
                     >
-                        <Forms.FormTitle>{t("plugin.customRPC.error.notice")}</Forms.FormTitle>
-                        <Forms.FormText>{t("plugin.customRPC.error.sharing")}</Forms.FormText>
+                        <Heading>{t("plugin.customRPC.error.notice")}</Heading>
+                        <Paragraph>{t("plugin.customRPC.error.sharing")}</Paragraph>
 
                         <Button
                             color={Button.Colors.TRANSPARENT}
@@ -499,28 +502,28 @@ export default definePlugin({
                 )}
 
                 <Flex flexDirection="column" style={{ gap: ".5em" }} className={Margins.top16}>
-                    <Forms.FormText>
+                    <Paragraph>
                         {tJsx("plugin.customRPC.goTo", {
                             portal: <Link href="https://discord.com/developers/applications">Discord Developer Portal</Link>
                         })}
-                    </Forms.FormText>
-                    <Forms.FormText>
+                    </Paragraph>
+                    <Paragraph>
                         {t("plugin.customRPC.upload")}
-                    </Forms.FormText>
-                    <Forms.FormText>
+                    </Paragraph>
+                    <Paragraph>
                         {tJsx("plugin.customRPC.image", {
                             imgur: <Link href="https://imgur.com">Imgur</Link>
                         })}
-                    </Forms.FormText>
-                    <Forms.FormText>
+                    </Paragraph>
+                    <Paragraph>
                         {t("plugin.customRPC.button")}
-                    </Forms.FormText>
-                    <Forms.FormText>
+                    </Paragraph>
+                    <Paragraph>
                         {t("plugin.customRPC.font")}
-                    </Forms.FormText>
+                    </Paragraph>
                 </Flex>
 
-                <Forms.FormDivider className={Margins.top8} />
+                <Divider className={Margins.top8} />
 
                 <div style={{ width: "284px", ...profileThemeStyle, marginTop: 8, borderRadius: 8, background: "var(--background-mod-faint)" }}>
                     {activity[0] && <ActivityView

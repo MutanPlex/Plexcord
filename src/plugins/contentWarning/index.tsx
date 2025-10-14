@@ -10,10 +10,11 @@ import { DataStore } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
 import { Flex } from "@components/Flex";
 import { DeleteIcon } from "@components/Icons";
+import { HeadingTertiary } from "@components/index";
 import { PcDevs } from "@utils/constants";
 import { useForceUpdater } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
-import { Button, Forms, TextInput, useState } from "@webpack/common";
+import { Button, TextInput, useState } from "@webpack/common";
 
 const WORDS_KEY = "ContentWarning_words";
 
@@ -93,8 +94,8 @@ function FlaggedInput({ index, forceUpdate }) {
 
         <Button
             onClick={removeSelf}
-            look={Button.Looks.BLANK}
-            size={Button.Sizes.ICON}
+            look={Button.Looks.LINK}
+            size={Button.Sizes.SMALL}
             style={{
                 padding: 0,
                 color: "var(--primary-400)",
@@ -120,7 +121,7 @@ function FlaggedWords() {
     });
 
     return (<>
-        <Forms.FormTitle tag="h4">{t("plugin.contentWarning.option.flagged.flagged")}</Forms.FormTitle>
+        <HeadingTertiary>{t("plugin.contentWarning.option.flagged.flagged")}</HeadingTertiary>
         {inputs}
     </>);
 }
@@ -147,8 +148,8 @@ export default definePlugin({
         {
             find: ".VOICE_HANGOUT_INVITE?",
             replacement: {
-                match: /(?<=compact:\i}=(\i).+?)(\(0,.+\}\)\]\}\))/,
-                replace: "$self.modify($1,$2)"
+                match: /(compact:\i}=(\i).+?)(\(0,.+\}\)\]\}\))/,
+                replace: "$1 $self.modify($2,$3)"
             }
         }
     ],

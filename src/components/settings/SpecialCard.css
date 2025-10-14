@@ -4,6 +4,7 @@
 
 .pc-donate-button .pc-heart-icon {
     transition: transform 0.3s;
+    margin-right: 0.5em;
 }
 
 .pc-donate-button:hover .pc-heart-icon {

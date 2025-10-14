@@ -7,10 +7,11 @@
 
 import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
+import { BaseText } from "@components/BaseText";
 import { fetchReposByUserId, fetchReposByUsername, fetchUserInfo, GitHubUserInfo } from "@plugins/githubRepos/githubApi";
 import { GitHubRepo } from "@plugins/githubRepos/types";
 import { openModal } from "@utils/modal";
-import { Button, React, Text, useEffect, UserProfileStore, useState } from "@webpack/common";
+import { Button, React, useEffect, UserProfileStore, useState } from "@webpack/common";
 
 import { settings } from "..";
 import { RepoCard } from "./RepoCard";
@@ -90,11 +91,11 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
         fetchData();
     }, [id]);
 
-    if (loading) return <Text variant="text-xs/semibold" className={cl("loading")} style={{ color: "var(--header-secondary)" }}>
-        {t("plugin.githubRepos.loading")}</Text>;
+    if (loading) return <BaseText size="xs" weight="semibold" className={cl("loading")} style={{ color: "var(--header-secondary)" }}>
+        {t("plugin.githubRepos.loading")}</BaseText>;
 
-    if (error) return <Text variant="text-xs/semibold" className={cl("error")} style={{ color: "var(--text-danger)" }}>
-        {t("plugin.githubRepos.error.error")}: {error}</Text>;
+    if (error) return <BaseText size="xs" weight="semibold" className={cl("error")} style={{ color: "var(--text-danger)" }}>
+        {t("plugin.githubRepos.error.error")}: {error}</BaseText>;
 
     if (!repos.length) return null;
 
@@ -103,7 +104,7 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
             <Button
                 className={cl("button")}
                 size={Button.Sizes.SMALL}
-                look={Button.Looks.OUTLINED}
+                look={Button.Looks.LINK}
                 color={Button.Colors.TRANSPARENT}
                 onClick={openReposModal}
             >
@@ -116,14 +117,14 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
 
     return (
         <div className={cl("container")}>
-            <Text variant="text-xs/semibold" className={cl("header")} style={{ color: "var(--header-secondary)" }}>
+            <BaseText size="xs" weight="semibold" className={cl("header")} style={{ color: "var(--header-secondary)" }}>
                 {t("plugin.githubRepos.button.repositories")}
                 {userInfo && (
                     <span className={cl("count")} style={{ color: "var(--text-muted)" }}>
                         {` ${t("plugin.githubRepos.button.only", { length: topRepos.length, total: userInfo.totalRepos })}`}
                     </span>
                 )}
-            </Text>
+            </BaseText>
             <div className={cl("list")}>
                 {topRepos.map(repo => (
                     <RepoCard
@@ -138,7 +139,7 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
                 <Button
                     className={cl("show-more")}
                     size={Button.Sizes.SMALL}
-                    look={Button.Looks.OUTLINED}
+                    look={Button.Looks.LINK}
                     color={Button.Colors.TRANSPARENT}
                     onClick={openReposModal}
                 >

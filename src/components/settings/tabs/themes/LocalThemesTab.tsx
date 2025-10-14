@@ -8,13 +8,15 @@
 import { t } from "@api/i18n";
 import { Settings, useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { Heading } from "@components/Heading";
 import { FolderIcon, PaintbrushIcon, PencilIcon, PlusIcon, RestartIcon } from "@components/Icons";
 import { Link } from "@components/Link";
+import { Paragraph } from "@components/Paragraph";
 import { QuickAction, QuickActionCard } from "@components/settings/QuickAction";
 import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
 import { UserThemeHeader } from "@main/themes";
 import { findLazy } from "@webpack";
-import { Card, Forms, useEffect, useRef, useState } from "@webpack/common";
+import { Card, useEffect, useRef, useState } from "@webpack/common";
 import ClientThemePlugin from "plugins/clientTheme";
 import type { ComponentType, Ref, SyntheticEvent } from "react";
 
@@ -85,24 +87,24 @@ export function LocalThemesTab() {
     return (
         <>
             <Card className="pc-settings-card">
-                <Forms.FormTitle tag="h5">{t("themes.find")}:</Forms.FormTitle>
+                <Heading>{t("themes.find")}:</Heading>
                 <div style={{ marginBottom: ".5em", display: "flex", flexDirection: "column" }}>
                     <Link style={{ marginRight: ".5em" }} href="https://betterdiscord.app/themes">
                         {t("themes.bd")}
                     </Link>
                     <Link href="https://github.com/search?q=discord+theme">{t("github")}</Link>
                 </div>
-                <Forms.FormText>{t("themes.download")}</Forms.FormText>
+                <Paragraph>{t("themes.download")}</Paragraph>
             </Card>
 
             <Card className="pc-settings-card">
-                <Forms.FormTitle tag="h5">{t("themes.external.title")}</Forms.FormTitle>
-                <Forms.FormText>{t("themes.external.security")}</Forms.FormText>
-                <Forms.FormText>{t("themes.external.host")}</Forms.FormText>
+                <Heading>{t("themes.external.title")}</Heading>
+                <Paragraph>{t("themes.external.security")}</Paragraph>
+                <Paragraph>{t("themes.external.host")}</Paragraph>
             </Card>
 
             <section>
-                <Forms.FormTitle tag="h5">{t("themes.local")}</Forms.FormTitle>
+                <Heading>{t("themes.local")}</Heading>
                 <QuickActionCard>
                     <>
                         {IS_WEB ?

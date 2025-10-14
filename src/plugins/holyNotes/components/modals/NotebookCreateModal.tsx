@@ -6,9 +6,10 @@
  */
 
 import { t } from "@api/i18n";
+import { BaseText } from "@components/BaseText";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
-import { Button, React, Text, TextInput } from "@webpack/common";
+import { Button, React, TextInput } from "@webpack/common";
 
 export default (props: ModalProps & { onClose: () => void; }) => {
     const [notebookName, setNotebookName] = React.useState("");
@@ -22,7 +23,7 @@ export default (props: ModalProps & { onClose: () => void; }) => {
         <div>
             <ModalRoot className="pc-create-notebook" size={ModalSize.SMALL} {...props}>
                 <ModalHeader className="pc-notebook-header">
-                    <Text tag="h3">{t("plugin.holyNotes.modal.create.title")}</Text>
+                    <BaseText tag="h3">{t("plugin.holyNotes.modal.create.title")}</BaseText>
                     <ModalCloseButton onClick={props.onClose} />
                 </ModalHeader>
                 <ModalContent>

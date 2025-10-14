@@ -31,7 +31,7 @@ async function fetchBlobWithDebug(url: string) {
 
 async function tryNativeDownloadAttachment(attachment: any) {
     try {
-        const helpers = (globalThis as any).VencordNative?.pluginHelpers?.MessageLoggerEnhanced;
+        const helpers = (globalThis as any).PlexcordNative?.pluginHelpers?.MessageLoggerEnhanced;
         if (!helpers) return null;
 
         const filename = attachment?.filename || attachment?.title || attachment?.name || "";

@@ -8,11 +8,12 @@
 import { t, tJsx } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Link } from "@components/Link";
+import { Paragraph } from "@components/Paragraph";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { closeAllModals } from "@utils/modal";
 import { OptionType } from "@utils/types";
-import { FluxDispatcher, Forms } from "@webpack/common";
+import { FluxDispatcher } from "@webpack/common";
 
 import DecorSection from "./ui/components/DecorSection";
 
@@ -23,13 +24,13 @@ export const settings = definePluginSettings({
         },
         type: OptionType.COMPONENT,
         component() {
-            if (!Plexcord.Plugins.plugins.Decor.started) return <Forms.FormText>
+            if (!Plexcord.Plugins.plugins.Decor.started) return <Paragraph>
                 {t("plugin.decor.option.changeDecoration.description")}
-            </Forms.FormText>;
+            </Paragraph>;
 
             return <div>
                 <DecorSection hideTitle hideDivider noMargin />
-                <Forms.FormText className={classes(Margins.top8, Margins.bottom8)}>
+                <Paragraph className={classes(Margins.top8, Margins.bottom8)}>
                     {tJsx("plugin.decor.option.changeDecoration.also", {
                         profiles: <Link
                             href="/settings/profile-customization"
@@ -40,7 +41,7 @@ export const settings = definePluginSettings({
                             }}
                         >{t("plugin.decor.option.changeDecoration.profiles")}</Link>
                     })}
-                </Forms.FormText>
+                </Paragraph>
             </div>;
         }
     },

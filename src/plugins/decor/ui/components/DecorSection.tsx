@@ -6,13 +6,14 @@
  */
 
 import { t } from "@api/i18n";
+import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
 import { useAuthorizationStore } from "@plugins/decor/lib/stores/AuthorizationStore";
 import { useCurrentUserDecorationsStore } from "@plugins/decor/lib/stores/CurrentUserDecorationsStore";
 import { cl } from "@plugins/decor/ui";
 import { openChangeDecorationModal } from "@plugins/decor/ui/modals/ChangeDecorationModal";
 import { findComponentByCodeLazy } from "@webpack";
-import { Button, useEffect } from "@webpack/common";
+import { useEffect } from "@webpack/common";
 
 const CustomizationSection = findComponentByCodeLazy(".customizationSectionBackground");
 
@@ -36,22 +37,22 @@ export default function DecorSection({ hideTitle = false, hideDivider = false, n
         hideDivider={hideDivider}
         className={noMargin && cl("section-remove-margin")}
     >
-        <Flex>
+        <Flex style={{ gap: "4px " }}>
             <Button
                 onClick={() => {
                     if (!authorization.isAuthorized()) {
                         authorization.authorize().then(openChangeDecorationModal).catch(() => { });
                     } else openChangeDecorationModal();
                 }}
-                size={Button.Sizes.SMALL}
+                variant="primary"
+                size="small"
             >
                 {t("plugin.decor.button.change")}
             </Button>
             {selectedDecoration && authorization.isAuthorized() && <Button
                 onClick={() => selectDecoration(null)}
-                color={Button.Colors.PRIMARY}
-                size={Button.Sizes.SMALL}
-                look={Button.Looks.LINK}
+                variant="secondary"
+                size={"small"}
             >
                 {t("plugin.decor.button.remove")}
             </Button>}

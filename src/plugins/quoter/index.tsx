@@ -7,13 +7,14 @@
 
 import { findGroupChildrenByChildId } from "@api/ContextMenu";
 import { definePluginSettings } from "@api/Settings";
+import { BaseText } from "@components/BaseText";
 import { FormSwitch } from "@components/FormSwitch";
 import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { getCurrentChannel } from "@utils/discord";
 import { ModalCloseButton, ModalContent, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
-import { Button, Menu, Select, Text, UploadHandler, useEffect, useState } from "@webpack/common";
+import { Button, Menu, Select, UploadHandler, useEffect, useState } from "@webpack/common";
 
 import { QuoteIcon } from "./components";
 import { canvasToBlob, fetchImageAsBlob, FixUpQuote, wrapText } from "./utils";
@@ -209,9 +210,9 @@ function QuoteModal({ message, ...props }: ModalProps & { message: Message; }) {
     return (
         <ModalRoot {...props} size={ModalSize.MEDIUM}>
             <ModalHeader separator={false}>
-                <Text color="header-primary" variant="heading-lg/semibold" tag="h1" style={{ flexGrow: 1 }}>
+                <BaseText color="header-primary" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
                     Catch Them In 4K.
-                </Text>
+                </BaseText>
                 <ModalCloseButton onClick={props.onClose} />
             </ModalHeader>
             <ModalContent scrollbarType="none">
@@ -232,8 +233,8 @@ function QuoteModal({ message, ...props }: ModalProps & { message: Message; }) {
                     serialize={v => v}
                 />
                 <br />
-                <Button color={Button.Colors.BRAND_NEW} size={Button.Sizes.SMALL} onClick={async () => await Export()} style={{ display: "inline-block", marginRight: "5px" }}>Export</Button>
-                <Button color={Button.Colors.BRAND_NEW} size={Button.Sizes.SMALL} onClick={async () => await SendInChat()} style={{ display: "inline-block" }}>Send</Button>
+                <Button color={Button.Colors.BRAND} size={Button.Sizes.SMALL} onClick={async () => await Export()} style={{ display: "inline-block", marginRight: "5px" }}>Export</Button>
+                <Button color={Button.Colors.BRAND} size={Button.Sizes.SMALL} onClick={async () => await SendInChat()} style={{ display: "inline-block" }}>Send</Button>
             </ModalContent>
             <br></br>
         </ModalRoot>

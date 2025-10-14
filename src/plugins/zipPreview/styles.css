@@ -306,21 +306,21 @@
 }
 
 /* Force code block container to full width and add balanced padding */
-.zp-code-modal .vc-shiki-container {
+.zp-code-modal .pc-shiki-container {
     width: 100% !important;
     min-width: 100% !important;
     max-width: 100% !important;
     flex: 1 1 100% !important;
 }
 
-.zp-code-modal .vc-shiki-root {
+.zp-code-modal .pc-shiki-root {
     width: 100% !important;
     min-width: 100% !important;
     max-width: 100% !important;
     position: relative !important;
 }
 
-.zp-code-modal .vc-shiki-code {
+.zp-code-modal .pc-shiki-code {
     width: 100% !important;
     min-width: 100% !important;
     max-width: 100% !important;
@@ -328,18 +328,18 @@
     box-sizing: border-box !important;
 }
 
-.zp-code-modal .vc-shiki-table {
+.zp-code-modal .pc-shiki-table {
     width: 100% !important;
     min-width: 100% !important;
     max-width: 100% !important;
 }
 
-.zp-code-modal .vc-shiki-root .vc-shiki-table-cell:last-child {
+.zp-code-modal .pc-shiki-root .pc-shiki-table-cell:last-child {
     padding-right: 48px !important;
 }
 
 /* Reposition copy button to be accessible without scrolling */
-.zp-code-modal .vc-shiki-btns {
+.zp-code-modal .pc-shiki-btns {
     position: absolute !important;
     bottom: 8px !important;
     right: 8px !important;

@@ -7,10 +7,12 @@
 
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { Logger } from "@utils/Logger";
 import { OptionType } from "@utils/types";
 import { findByCodeLazy } from "@webpack";
-import { Forms, MediaEngineStore, SearchableSelect, useEffect, useState } from "@webpack/common";
+import { MediaEngineStore, SearchableSelect, useEffect, useState } from "@webpack/common";
 
 interface PickerProps {
     streamMediaSelection: any[];
@@ -86,8 +88,8 @@ function ScreenSetting() {
         return () => { active = false; };
     }, []);
 
-    if (loading) return <Forms.FormText>{t("plugin.instantScreenshare.option.streamMedia.loading")}</Forms.FormText>;
-    if (!streamMediaSelection.length) return <Forms.FormText>{t("plugin.instantScreenshare.option.streamMedia.none")}</Forms.FormText>;
+    if (loading) return <Paragraph>{t("plugin.instantScreenshare.option.streamMedia.loading")}</Paragraph>;
+    if (!streamMediaSelection.length) return <Paragraph>{t("plugin.instantScreenshare.option.streamMedia.none")}</Paragraph>;
 
     return <StreamSimplePicker streamMediaSelection={streamMediaSelection} streamMedia={streamMedia} />;
 }
@@ -95,8 +97,8 @@ function ScreenSetting() {
 function SettingSection() {
     return (
         <section>
-            <Forms.FormTitle>{t("plugin.instantScreenshare.option.streamMedia.label")}</Forms.FormTitle>
-            <Forms.FormText>{t("plugin.instantScreenshare.option.streamMedia.description")}</Forms.FormText>
+            <Heading>{t("plugin.instantScreenshare.option.streamMedia.label")}</Heading>
+            <Paragraph>{t("plugin.instantScreenshare.option.streamMedia.description")}</Paragraph>
             <ScreenSetting />
         </section>
     );

@@ -6,10 +6,11 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
+import { Paragraph } from "@components/Paragraph";
 import { PcDevs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
-import { Button, Forms, Menu } from "@webpack/common";
+import { Button, Menu } from "@webpack/common";
 import { ReactElement } from "react";
 
 import { preload, unload } from "./images";
@@ -29,9 +30,9 @@ export default definePlugin({
             component() {
                 if (!Plexcord.Plugins.plugins.LoginWithQR.started)
                     return (
-                        <Forms.FormText>
+                        <Paragraph>
                             Enable the plugin and restart your client to scan a login QR code
-                        </Forms.FormText>
+                        </Paragraph>
                     );
 
                 return (

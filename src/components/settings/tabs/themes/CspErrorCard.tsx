@@ -6,14 +6,17 @@
  */
 
 import { t, tJsx } from "@api/i18n";
+import { Divider } from "@components/Divider";
 import { ErrorCard } from "@components/ErrorCard";
+import { HeadingTertiary } from "@components/Heading";
 import { Link } from "@components/Link";
+import { Paragraph } from "@components/Paragraph";
 import { CspBlockedUrls, useCspErrors } from "@utils/cspViolations";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { relaunch } from "@utils/native";
 import { useForceUpdater } from "@utils/react";
-import { Alerts, Button, Forms } from "@webpack/common";
+import { Alerts, Button } from "@webpack/common";
 
 export function CspErrorCard() {
     if (IS_WEB) return null;
@@ -52,20 +55,20 @@ export function CspErrorCard() {
 
     return (
         <ErrorCard className="pc-settings-card">
-            <Forms.FormTitle tag="h5">{t("csp.blocked.resources")}</Forms.FormTitle>
-            <Forms.FormText>{t("csp.blocked.disallowed")}</Forms.FormText>
-            <Forms.FormText>{t("csp.blocked.recommended")}</Forms.FormText>
-            <Forms.FormText>
+            <HeadingTertiary>{t("csp.blocked.resources")}</HeadingTertiary>
+            <Paragraph>{t("csp.blocked.disallowed")}</Paragraph>
+            <Paragraph>{t("csp.blocked.recommended")}</Paragraph>
+            <Paragraph>
                 {tJsx("csp.blocked.afterAllow", {
                     platform: IS_DISCORD_DESKTOP ? "Discord" : "Plextron"
                 })}
-            </Forms.FormText>
+            </Paragraph>
 
-            <Forms.FormTitle tag="h5" className={classes(Margins.top16, Margins.bottom8)}>{t("csp.blocked.url")}</Forms.FormTitle>
+            <HeadingTertiary className={classes(Margins.top16, Margins.bottom8)}>{t("csp.blocked.url")}</HeadingTertiary>
             <div className="pc-settings-csp-list">
                 {errors.map((url, i) => (
                     <div key={url}>
-                        {i !== 0 && <Forms.FormDivider className={Margins.bottom8} />}
+                        {i !== 0 && <Divider className={Margins.bottom8} />}
                         <div className="pc-settings-csp-row">
                             <Link href={url}>{url}</Link>
                             <Button color={Button.Colors.PRIMARY} onClick={() => allowUrl(url)} disabled={isImgurHtmlDomain(url)}>
@@ -78,11 +81,11 @@ export function CspErrorCard() {
 
             {hasImgurHtmlDomain && (
                 <>
-                    <Forms.FormDivider className={classes(Margins.top8, Margins.bottom16)} />
-                    <Forms.FormText>
+                    <Divider className={classes(Margins.top8, Margins.bottom16)} />
+                    <Paragraph>
                         {tJsx("csp.imgur.direct", { etc: <code>https://i.imgur.com/...</code> })}
-                    </Forms.FormText>
-                    <Forms.FormText>{t("csp.imgur.copy")}</Forms.FormText>
+                    </Paragraph>
+                    <Paragraph>{t("csp.imgur.copy")}</Paragraph>
                 </>
             )}
         </ErrorCard>

@@ -6,6 +6,7 @@
  */
 
 import { classNameFactory } from "@api/Styles";
+import { BaseText } from "@components/BaseText";
 import { Flex } from "@components/Flex";
 import { InfoIcon } from "@components/Icons";
 import { User } from "@plexcord/discord-types";
@@ -19,7 +20,7 @@ import { copyWithToast } from "@utils/misc";
 import { closeAllModals, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { LazyComponent } from "@utils/react";
 import { find, findByCode, findByCodeLazy } from "@webpack";
-import { Alerts, Button, ChannelStore, ContextMenuApi, FluxDispatcher, Menu, NavigationRouter, React, TabBar, Text, TextInput, Tooltip, useMemo, useRef, useState } from "@webpack/common";
+import { Alerts, Button, ChannelStore, ContextMenuApi, FluxDispatcher, Menu, NavigationRouter, React, TabBar, TextInput, Tooltip, useMemo, useRef, useState } from "@webpack/common";
 
 import { useMessages } from "./hooks";
 
@@ -159,7 +160,7 @@ export function LogsModal({ modalProps, initalQuery }: Props) {
                 </Button>
                 <Button
                     style={{ marginRight: "16px" }}
-                    color={Button.Colors.YELLOW}
+                    color={Button.Colors.LINK}
                     disabled={messages?.length === 0}
                     onClick={() => Alerts.show({
                         title: "Clear Logs",
@@ -252,12 +253,12 @@ function NoResults({ tab }: { tab: LogTabs; }) {
 
     return (
         <div className={cl("empty-logs", "content-inner")} style={{ textAlign: "center" }}>
-            <Text variant="text-lg/normal">
+            <BaseText size="lg" weight="normal">
                 No results in <b>{tab}</b>.
-            </Text>
-            <Text variant="text-lg/normal" style={{ marginTop: "0.2rem" }}>
+            </BaseText>
+            <BaseText size="lg" weight="normal" style={{ marginTop: "0.2rem" }}>
                 Maybe try <b>{nextTab}</b> or <b>{lastTab}</b>
-            </Text>
+            </BaseText>
         </div>
     );
 }
@@ -267,9 +268,9 @@ function EmptyLogs({ hasQuery, reset: forceUpdate }: { hasQuery: boolean; reset:
         <div className={cl("empty-logs", "content-inner")} style={{ textAlign: "center" }}>
             <Flex flexDirection="column" style={{ position: "relative" }}>
 
-                <Text variant="text-lg/normal">
+                <BaseText size="lg" weight="normal">
                     Empty eh
-                </Text>
+                </BaseText>
 
                 {!hasQuery && (
                     <>

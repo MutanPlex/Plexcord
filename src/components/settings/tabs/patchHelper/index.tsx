@@ -19,7 +19,9 @@
 
 import { t } from "@api/i18n";
 import { CodeBlock } from "@components/CodeBlock";
+import { Divider } from "@components/Divider";
 import { Flex } from "@components/Flex";
+import { HeadingTertiary } from "@components/Heading";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { debounce } from "@shared/debounce";
 import { Margins } from "@utils/margins";
@@ -27,7 +29,7 @@ import { copyWithToast } from "@utils/misc";
 import { stripIndent } from "@utils/text";
 import { ReplaceFn } from "@utils/types";
 import { search } from "@webpack";
-import { Button, Forms, React, TextInput, useMemo, useState } from "@webpack/common";
+import { Button, React, TextInput, useMemo, useState } from "@webpack/common";
 
 import { FullPatchInput } from "./FullPatchInput";
 import { PatchPreview } from "./PatchPreview";
@@ -105,7 +107,7 @@ function PatchHelper() {
 
     return (
         <SettingsTab title={t("patchHelper.title")}>
-            <Forms.FormTitle>{t("patchHelper.fullPatch.label")}</Forms.FormTitle>
+            <HeadingTertiary>{t("patchHelper.fullPatch.label")}</HeadingTertiary>
             <FullPatchInput
                 setFind={onFindChange}
                 setParsedFind={setParsedFind}
@@ -113,7 +115,7 @@ function PatchHelper() {
                 setReplacement={setReplacement}
             />
 
-            <Forms.FormTitle className={Margins.top8}>{t("patchHelper.find")}</Forms.FormTitle>
+            <HeadingTertiary className={Margins.top8}>{t("patchHelper.find")}</HeadingTertiary>
             <TextInput
                 type="text"
                 value={find}
@@ -121,7 +123,7 @@ function PatchHelper() {
                 error={findError}
             />
 
-            <Forms.FormTitle className={Margins.top8}>{t("patchHelper.match")}</Forms.FormTitle>
+            <HeadingTertiary className={Margins.top8}>{t("patchHelper.match")}</HeadingTertiary>
             <TextInput
                 type="text"
                 value={match}
@@ -136,7 +138,7 @@ function PatchHelper() {
                 replacementError={replacementError}
             />
 
-            <Forms.FormDivider />
+            <Divider />
             {module && (
                 <PatchPreview
                     module={module}
@@ -148,7 +150,7 @@ function PatchHelper() {
 
             {!!(find && match && replacement) && (
                 <>
-                    <Forms.FormTitle className={Margins.top20}>{t("patchHelper.code")}</Forms.FormTitle>
+                    <HeadingTertiary className={Margins.top20}>{t("patchHelper.code")}</HeadingTertiary>
                     <CodeBlock lang="js" content={code} />
                     <Flex className={Margins.top16}>
                         <Button onClick={() => copyWithToast(code)}>

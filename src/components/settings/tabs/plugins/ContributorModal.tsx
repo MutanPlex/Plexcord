@@ -11,14 +11,16 @@ import { t, tJsx } from "@api/i18n";
 import { useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { HeadingPrimary } from "@components/Heading";
 import { Link } from "@components/Link";
+import { Paragraph } from "@components/Paragraph";
 import { GithubButton, WebsiteButton } from "@components/settings/tabs/plugins/LinkIconButton";
 import { User } from "@plexcord/discord-types";
 import { DevsById, PcDevsById } from "@utils/constants";
 import { fetchUserProfile } from "@utils/discord";
 import { classes } from "@utils/misc";
 import { ModalContent, ModalRoot, openModal } from "@utils/modal";
-import { Forms, showToast, useEffect, useMemo, UserProfileStore, useStateFromStores } from "@webpack/common";
+import { showToast, useEffect, useMemo, UserProfileStore, useStateFromStores } from "@webpack/common";
 
 import Plugins from "~plugins";
 
@@ -72,7 +74,7 @@ function ContributorModal({ user }: { user: User; }) {
                     src={user.getAvatarURL(void 0, 512, true)}
                     alt=""
                 />
-                <Forms.FormTitle tag="h2" className={cl("name")}>{user.username}</Forms.FormTitle>
+                <HeadingPrimary className={cl("name")}>{user.username}</HeadingPrimary>
 
                 <div className={classes("pc-settings-modal-links", cl("links"))}>
                     {website && (
@@ -91,21 +93,21 @@ function ContributorModal({ user }: { user: User; }) {
             </div>
 
             {plugins.length ? (
-                <Forms.FormText>
+                <Paragraph>
                     {tJsx("plugins.contributor.modal.contributionsInfo", {
                         userName: user.username,
                         contributionCount: plugins.length,
                         continuedLink: ContributedHyperLink,
                         s: plugins.length === 1 ? "" : "s"
                     })}
-                </Forms.FormText>
+                </Paragraph>
             ) : (
-                <Forms.FormText>
+                <Paragraph>
                     {tJsx("plugins.contributor.modal.noContributions", {
                         userName: user.username,
                         contributedLink: ContributedHyperLink
                     })}
-                </Forms.FormText>
+                </Paragraph>
             )}
 
             {!!plugins.length && (

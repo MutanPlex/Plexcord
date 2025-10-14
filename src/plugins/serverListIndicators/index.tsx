@@ -22,11 +22,12 @@ import "./styles.css";
 import { addServerListElement, removeServerListElement, ServerListRenderPosition } from "@api/ServerList";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { findStoreLazy } from "@webpack";
-import { GuildStore, PresenceStore, RelationshipStore, Text, Tooltip, useStateFromStores } from "@webpack/common";
+import { GuildStore, PresenceStore, RelationshipStore, Tooltip, useStateFromStores } from "@webpack/common";
 
 const enum IndicatorType {
     SERVER = 1 << 0,
@@ -75,11 +76,8 @@ function FriendsIndicator() {
                     </path>
                 </svg>
             }
-            <Text
-                variant="text-xs/normal"
-                id="pc-friendcount-text">{onlineFriendsCount}
-            </Text>
-            {!!settings.store.useCompact && <Text variant="text-xs/normal" id="pc-friendcount-text-compact">Friends</Text>}
+            <BaseText size="xs" weight="normal" id="pc-friendcount-text">{onlineFriendsCount}</BaseText>
+            {!!settings.store.useCompact && <BaseText size="xs" weight="normal" id="pc-friendcount-text-compact">Friends</BaseText>}
         </div>
     );
 }
@@ -111,11 +109,8 @@ function ServersIndicator() {
                     </path>
                 </svg>
             }
-            <Text
-                variant="text-xs/normal"
-                id="pc-guildcount-text">{guildCount}
-            </Text>
-            {!!settings.store.useCompact && <Text variant="text-xs/normal" id="pc-guildcount-text-compact">Servers</Text>}
+            <BaseText size="xs" weight="normal" id="pc-guildcount-text">{guildCount}</BaseText>
+            {!!settings.store.useCompact && <BaseText size="xs" weight="normal" id="pc-guildcount-text-compact">Servers</BaseText>}
         </div>
     );
 }

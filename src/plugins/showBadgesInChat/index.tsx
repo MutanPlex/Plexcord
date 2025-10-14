@@ -10,7 +10,9 @@ import "./styles.css";
 import { addMessageDecoration, removeMessageDecoration } from "@api/MessageDecorations";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
+import { Heading } from "@components/Heading";
 import { Heart } from "@components/Heart";
+import { Paragraph } from "@components/Paragraph";
 import DonateButton from "@components/settings/DonateButton";
 import { openContributorModal } from "@components/settings/tabs";
 import { User } from "@plexcord/discord-types";
@@ -20,7 +22,6 @@ import { isPcPluginDev } from "@utils/misc";
 import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalRoot, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
 import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
-import { Forms } from "@webpack/common";
 import badges from "plugins/_api/badges";
 import { JSX } from "react";
 
@@ -38,17 +39,10 @@ function openDonorModal() {
             <ModalRoot {...props}>
                 <ModalHeader>
                     <Flex style={{ width: "100%", justifyContent: "center" }}>
-                        <Forms.FormTitle
-                            tag="h2"
-                            style={{
-                                width: "100%",
-                                textAlign: "center",
-                                margin: 0
-                            }}
-                        >
+                        <Heading style={{ width: "100%", textAlign: "center", margin: 0 }}>
                             <Heart />
                             Plexcord Donor
-                        </Forms.FormTitle>
+                        </Heading>
                     </Flex>
                 </ModalHeader>
                 <ModalContent>
@@ -67,12 +61,12 @@ function openDonorModal() {
                         />
                     </Flex>
                     <div style={{ padding: "1em" }}>
-                        <Forms.FormText>
+                        <Paragraph>
                             This Badge is a special perk for Plexcord Donors
-                        </Forms.FormText>
-                        <Forms.FormText className={Margins.top20}>
+                        </Paragraph>
+                        <Paragraph className={Margins.top20}>
                             Please consider supporting the development of Plexcord by becoming a donor. It would mean a lot!!
-                        </Forms.FormText>
+                        </Paragraph>
                     </div>
                 </ModalContent>
                 <ModalFooter>

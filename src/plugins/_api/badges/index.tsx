@@ -23,7 +23,9 @@ import { _getBadges, BadgePosition, BadgeUserArgs, ProfileBadge } from "@api/Bad
 import { t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
+import { Heading } from "@components/Heading";
 import { Heart } from "@components/Heart";
+import { Paragraph } from "@components/Paragraph";
 import DonateButton from "@components/settings/DonateButton";
 import { openContributorModal } from "@components/settings/tabs";
 import { User } from "@plexcord/discord-types";
@@ -33,7 +35,7 @@ import { Margins } from "@utils/margins";
 import { copyWithToast, shouldShowContributorBadge, shouldShowPcContributorBadge } from "@utils/misc";
 import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalRoot, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
-import { ContextMenuApi, Forms, Menu, Toasts, UserStore } from "@webpack/common";
+import { ContextMenuApi, Menu, Toasts, UserStore } from "@webpack/common";
 
 const CONTRIBUTOR_BADGE = "https://cdn.discordapp.com/emojis/1092089799109775453.png?size=64";
 const PLEXCORD_BADGE = "https://cdn.discordapp.com/emojis/1357527217332031508.webp?size=64";
@@ -233,19 +235,18 @@ export default definePlugin({
                     }}>
                         <ModalRoot {...props}>
                             <ModalHeader>
-                                <Flex style={{ width: "100%", justifyContent: "center" }}>
-                                    <Forms.FormTitle
-                                        tag="h2"
-                                        style={{
-                                            width: "100%",
-                                            textAlign: "center",
-                                            margin: 0
-                                        }}
-                                    >
+                                <Heading
+                                    style={{
+                                        width: "100%",
+                                        textAlign: "center",
+                                        margin: 0
+                                    }}
+                                >
+                                    <Flex style={{ justifyContent: "center", alignItems: "center", gap: "0.5em" }}>
                                         <Heart />
                                         {t("plugins.metadata.badges.modal.title")}
-                                    </Forms.FormTitle>
-                                </Flex>
+                                    </Flex>
+                                </Heading>
                             </ModalHeader>
                             <ModalContent>
                                 <Flex>
@@ -263,12 +264,12 @@ export default definePlugin({
                                     />
                                 </Flex>
                                 <div style={{ padding: "1em" }}>
-                                    <Forms.FormText>
+                                    <Paragraph>
                                         {t("plugins.metadata.badges.modal.special")}
-                                    </Forms.FormText>
-                                    <Forms.FormText className={Margins.top20}>
+                                    </Paragraph>
+                                    <Paragraph className={Margins.top20}>
                                         {t("plugins.metadata.badges.modal.description")}
-                                    </Forms.FormText>
+                                    </Paragraph>
                                 </div>
                             </ModalContent>
                             <ModalFooter>

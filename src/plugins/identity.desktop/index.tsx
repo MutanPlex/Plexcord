@@ -8,10 +8,11 @@
 import { t } from "@api/i18n";
 import { DataStore } from "@api/index";
 import { Flex } from "@components/Flex";
+import { Paragraph } from "@components/Paragraph";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { PluginNative } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
-import { Alerts, Button, FluxDispatcher, Forms, Toasts, UserProfileStore, UserStore } from "@webpack/common";
+import { Alerts, Button, FluxDispatcher, Toasts, UserProfileStore, UserStore } from "@webpack/common";
 const native = PlexcordNative.pluginHelpers.Identity as PluginNative<typeof import("./native")>;
 
 const CustomizationSection = findComponentByCodeLazy(".customizationSectionBackground");
@@ -85,12 +86,12 @@ function ResetCard() {
                         Alerts.show({
                             title: t("plugin.identity.alert.save.title"),
                             body: <div>
-                                <Forms.FormText>
+                                <Paragraph>
                                     {t("plugin.identity.alert.save.body")}
-                                </Forms.FormText>
-                                <Forms.FormText>
+                                </Paragraph>
+                                <Paragraph>
                                     {t("plugin.identity.alert.save.description")}
-                                </Forms.FormText>
+                                </Paragraph>
                             </div>,
                             confirmText: t("plugin.identity.alert.save.confirm"),
                             cancelText: t("plugin.identity.alert.save.cancel"),
@@ -106,12 +107,12 @@ function ResetCard() {
                         Alerts.show({
                             title: t("plugin.identity.alert.load.title"),
                             body: <div>
-                                <Forms.FormText>
+                                <Paragraph>
                                     {t("plugin.identity.alert.load.body")}
-                                </Forms.FormText>
-                                <Forms.FormText>
+                                </Paragraph>
+                                <Paragraph>
                                     {t("plugin.identity.alert.load.description")}
-                                </Forms.FormText>
+                                </Paragraph>
                             </div>,
                             confirmText: t("plugin.identity.alert.load.confirm"),
                             cancelText: t("plugin.identity.alert.load.cancel"),

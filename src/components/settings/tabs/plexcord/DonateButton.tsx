@@ -12,7 +12,7 @@ import BadgeAPI from "plugins/_api/badges";
 
 export const isDonor = (userId: string) => !!(
     BadgeAPI.getDonorBadges(userId)?.length > 0
-    || GuildMemberStore.getMember(PLEXCORD_GUILD_ID, userId)?.roles.includes(DONOR_ROLE_ID)
+    || GuildMemberStore?.getMember(PLEXCORD_GUILD_ID, userId)?.roles.includes(DONOR_ROLE_ID)
 );
 
 export function DonateButtonComponent() {

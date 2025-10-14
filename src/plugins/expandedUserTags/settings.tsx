@@ -10,9 +10,11 @@
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { FormSwitch } from "@components/FormSwitch";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { Margins } from "@utils/margins";
 import { OptionType } from "@utils/types";
-import { Card, Flex, Forms, TextInput, Tooltip } from "@webpack/common";
+import { Card, Flex, TextInput, Tooltip } from "@webpack/common";
 
 import { Tag, tags } from "./consts";
 import { TagSettings } from "./types";
@@ -45,7 +47,7 @@ function SettingsComponent() {
                             boxSizing: "border-box",
                         }}
                     >
-                        <Forms.FormTitle style={{ width: "fit-content" }}>
+                        <Heading style={{ width: "fit-content" }}>
                             <Tooltip text={tag.description}>
                                 {({ onMouseEnter, onMouseLeave }) => (
                                     <div
@@ -56,12 +58,12 @@ function SettingsComponent() {
                                     </div>
                                 )}
                             </Tooltip>
-                        </Forms.FormTitle>
+                        </Heading>
 
                         <div style={{ marginBottom: "10px" }}>
-                            <Forms.FormText style={{ fontSize: "13px" }}>
+                            <Paragraph style={{ fontSize: "13px" }}>
                                 {t("plugin.expandedUserTags.modal.example")}:
-                            </Forms.FormText>
+                            </Paragraph>
                             <Tag type={localTags[tag.name]} />
                         </div>
 

@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { BaseText } from "@components/BaseText";
 import { images } from "@plugins/loginWithQR/images";
 import { getIntlMessage } from "@utils/discord";
 import {
@@ -19,7 +20,6 @@ import { findByPropsLazy } from "@webpack";
 import {
     Button,
     RestAPI,
-    Text,
     useEffect,
     useRef,
     useState,
@@ -373,14 +373,9 @@ function QrModal(props: ModalProps) {
     return (
         <ModalRoot size={ModalSize.DYNAMIC} {...props}>
             <ModalHeader separator={false} className={cl("modal-header")}>
-                <Text
-                    color="header-primary"
-                    variant="heading-lg/semibold"
-                    tag="h1"
-                    style={{ flexGrow: 1 }}
-                >
+                <BaseText color="header-primary" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
                     {getIntlMessage("USER_SETTINGS_SCAN_QR_CODE")}
-                </Text>
+                </BaseText>
             </ModalHeader>
             <ModalContent scrollbarType="none">
                 <div
@@ -466,21 +461,21 @@ function QrModal(props: ModalProps) {
                     ) : state === LoginStateType.Loading ? (
                         <Spinner type={SpinnerTypes.WANDERING_CUBES} />
                     ) : error.current ? (
-                        <Text color="text-danger" variant="heading-md/semibold">
+                        <BaseText size="md" weight="semibold" color="text-danger">
                             {error.current}
-                        </Text>
+                        </BaseText>
                     ) : state === LoginStateType.Camera ? (
-                        <Text color="header-primary" variant="heading-md/semibold">
+                        <BaseText size="md" weight="semibold" color="header-primary">
                             Scanning...
-                        </Text>
+                        </BaseText>
                     ) : (
                         <>
-                            <Text color="header-primary" variant="heading-md/semibold">
+                            <BaseText size="md" weight="semibold" color="header-primary">
                                 Drag and drop an image here, or click to select an image
-                            </Text>
-                            <Text color="text-muted" variant="heading-sm/medium">
+                            </BaseText>
+                            <BaseText size="sm" weight="medium" color="text-muted">
                                 Or paste an image from your clipboard!
-                            </Text>
+                            </BaseText>
                             <br />
                             <QrCodeIcon />
                         </>

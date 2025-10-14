@@ -10,7 +10,7 @@ style.href = browser.runtime.getURL("dist/Plexcord.css");
 document.addEventListener(
     "DOMContentLoaded",
     () => {
-        document.documentElement.append(style);
+        document.body.insertAdjacentElement("afterend", style);
         window.postMessage({
             type: "plexcord:meta",
             meta: {

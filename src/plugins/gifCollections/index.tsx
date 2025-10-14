@@ -11,12 +11,15 @@ import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/Co
 import { t } from "@api/i18n";
 import { DataStore } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
+import { Divider } from "@components/Divider";
 import { Flex } from "@components/Flex";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { copyToClipboard } from "@utils/clipboard";
 import { Devs, PcDevs } from "@utils/constants";
 import { ModalContent, ModalFooter, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
-import { Alerts, Button, ContextMenuApi, FluxDispatcher, Forms, Menu, React, showToast, TextInput, Toasts, useCallback, useState } from "@webpack/common";
+import { Alerts, Button, ContextMenuApi, FluxDispatcher, Menu, React, showToast, TextInput, Toasts, useCallback, useState } from "@webpack/common";
 
 import { addToCollection, cache_collections, createCollection, DATA_COLLECTION_NAME, deleteCollection, fixPrefix, getCollections, getGifById, getItemCollectionNameFromId, moveGifToCollection, refreshCacheCollection, removeFromCollection, renameCollection, updateGif } from "./utils/collectionManager";
 import { getFormat } from "./utils/getFormat";
@@ -225,14 +228,14 @@ export const settings = definePluginSettings({
 
             return (
                 <div className="collections-sort-container">
-                    <Forms.FormTitle className="collections-sort-title">{t("plugin.gifCollection.option.collectionsSort.title")}</Forms.FormTitle>
-                    <Forms.FormDivider className="collections-sort-divider" />
-                    <Forms.FormText className="collections-sort-description">
+                    <Heading className="collections-sort-title">{t("plugin.gifCollection.option.collectionsSort.title")}</Heading>
+                    <Divider className="collections-sort-divider" />
+                    <Paragraph className="collections-sort-description">
                         {t("plugin.gifCollection.option.collectionsSort.sortDescription")}
-                    </Forms.FormText>
-                    <Forms.FormDivider className="collections-sort-divider" />
+                    </Paragraph>
+                    <Divider className="collections-sort-divider" />
                     <div className="collections-sort-section">
-                        <Forms.FormText className="collections-sort-section-title">{t("plugin.gifCollection.option.collectionsSort.sortBy")}</Forms.FormText>
+                        <Paragraph className="collections-sort-section-title">{t("plugin.gifCollection.option.collectionsSort.sortBy")}</Paragraph>
                         <div className="collections-sort-option">
                             <label className="collections-sort-label">
                                 <input
@@ -273,9 +276,9 @@ export const settings = definePluginSettings({
                             </label>
                         </div>
                     </div>
-                    <Forms.FormDivider className="collections-sort-divider" />
+                    <Divider className="collections-sort-divider" />
                     <div className="collections-sort-section">
-                        <Forms.FormText className="collections-sort-section-title">Order</Forms.FormText>
+                        <Paragraph className="collections-sort-section-title">Order</Paragraph>
                         <div className="collections-sort-option">
                             <label className="collections-sort-label">
                                 <input
@@ -530,25 +533,25 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
                                 className="custom-modal"
                             >
                                 <ModalHeader separator={false} className="custom-modal-header">
-                                    <Forms.FormText className="custom-modal-title">{t("plugin.gifCollection.context.collection.information")}</Forms.FormText>
+                                    <Paragraph className="custom-modal-title">{t("plugin.gifCollection.context.collection.information")}</Paragraph>
                                 </ModalHeader>
                                 <ModalContent className="custom-modal-content">
                                     <section>
                                         <Flex className="collection-info">
-                                            <Forms.FormTitle tag="h5" className="collection-info-title">{t("plugin.gifCollection.context.collection.name")}</Forms.FormTitle>
-                                            <Forms.FormText className="collection-info-text">{collection.name.replace(/.+?:/, "")}</Forms.FormText>
+                                            <Heading className="collection-info-title">{t("plugin.gifCollection.context.collection.name")}</Heading>
+                                            <Paragraph className="collection-info-text">{collection.name.replace(/.+?:/, "")}</Paragraph>
                                         </Flex>
                                         <Flex className="collection-info">
-                                            <Forms.FormTitle tag="h5" className="collection-info-title">{t("plugin.gifCollection.context.collection.gifs")}</Forms.FormTitle>
-                                            <Forms.FormText className="collection-info-text">{collection.gifs.length}</Forms.FormText>
+                                            <Heading className="collection-info-title">{t("plugin.gifCollection.context.collection.gifs")}</Heading>
+                                            <Paragraph className="collection-info-text">{collection.gifs.length}</Paragraph>
                                         </Flex>
                                         <Flex className="collection-info">
-                                            <Forms.FormTitle tag="h5" className="collection-info-title">{t("plugin.gifCollection.context.collection.created")}</Forms.FormTitle>
-                                            <Forms.FormText className="collection-info-text">{collection.createdAt ? new Date(collection.createdAt).toLocaleString() : "Unknown"}</Forms.FormText>
+                                            <Heading className="collection-info-title">{t("plugin.gifCollection.context.collection.created")}</Heading>
+                                            <Paragraph className="collection-info-text">{collection.createdAt ? new Date(collection.createdAt).toLocaleString() : "Unknown"}</Paragraph>
                                         </Flex>
                                         <Flex className="collection-info">
-                                            <Forms.FormTitle tag="h5" className="collection-info-title">{t("plugin.gifCollection.context.collection.updated")}</Forms.FormTitle>
-                                            <Forms.FormText className="collection-info-text">{collection.lastUpdated ? new Date(collection.lastUpdated).toLocaleString() : "Unknown"}</Forms.FormText>
+                                            <Heading className="collection-info-title">{t("plugin.gifCollection.context.collection.updated")}</Heading>
+                                            <Paragraph className="collection-info-text">{collection.lastUpdated ? new Date(collection.lastUpdated).toLocaleString() : "Unknown"}</Paragraph>
                                         </Flex>
                                     </section>
                                 </ModalContent>
@@ -591,21 +594,21 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
                                 className="custom-modal"
                             >
                                 <ModalHeader separator={false} className="custom-modal-header">
-                                    <Forms.FormText className="custom-modal-title">{t("plugin.gifCollection.context.gif.information")}</Forms.FormText>
+                                    <Paragraph className="custom-modal-title">{t("plugin.gifCollection.context.gif.information")}</Paragraph>
                                 </ModalHeader>
                                 <ModalContent className="custom-modal-content">
                                     <section>
                                         <Flex className="gif-info">
-                                            <Forms.FormTitle tag="h5" className="gif-info-title">{t("plugin.gifCollection.context.gif.added")}</Forms.FormTitle>
-                                            <Forms.FormText className="gif-info-text">{gifInfo.addedAt ? new Date(gifInfo.addedAt).toLocaleString() : "Unknown"}</Forms.FormText>
+                                            <Heading className="gif-info-title">{t("plugin.gifCollection.context.gif.added")}</Heading>
+                                            <Paragraph className="gif-info-text">{gifInfo.addedAt ? new Date(gifInfo.addedAt).toLocaleString() : "Unknown"}</Paragraph>
                                         </Flex>
                                         <Flex className="gif-info">
-                                            <Forms.FormTitle tag="h5" className="gif-info-title">{t("plugin.gifCollection.context.gif.width")}</Forms.FormTitle>
-                                            <Forms.FormText className="gif-info-text">{gifInfo.width}</Forms.FormText>
+                                            <Heading className="gif-info-title">{t("plugin.gifCollection.context.gif.width")}</Heading>
+                                            <Paragraph className="gif-info-text">{gifInfo.width}</Paragraph>
                                         </Flex>
                                         <Flex className="gif-info">
-                                            <Forms.FormTitle tag="h5" className="gif-info-title">{t("plugin.gifCollection.context.gif.height")}</Forms.FormTitle>
-                                            <Forms.FormText className="gif-info-text">{gifInfo.height}</Forms.FormText>
+                                            <Heading className="gif-info-title">{t("plugin.gifCollection.context.gif.height")}</Heading>
+                                            <Paragraph className="gif-info-text">{gifInfo.height}</Paragraph>
                                         </Flex>
                                     </section>
                                 </ModalContent>
@@ -675,12 +678,12 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
                                 className="custom-modal"
                             >
                                 <ModalHeader separator={false} className="custom-modal-header">
-                                    <Forms.FormText className="custom-modal-title">{t("plugin.gifCollection.context.collection.move")}</Forms.FormText>
+                                    <Paragraph className="custom-modal-title">{t("plugin.gifCollection.context.collection.move")}</Paragraph>
                                 </ModalHeader>
                                 <ModalContent className="custom-modal-content">
-                                    <Forms.FormTitle tag="h5" className="custom-modal-text">
+                                    <Heading className="custom-modal-text">
                                         {t("plugin.gifCollection.context.collection.select")}
-                                    </Forms.FormTitle>
+                                    </Heading>
                                     <div className="collection-buttons">
                                         {cache_collections
                                             .filter(col => col.name !== getItemCollectionNameFromId(nameOrId))
@@ -827,10 +830,10 @@ function CreateCollectionModal({ gif, onClose, modalProps }) {
         <ModalRoot {...modalProps}>
             <form onSubmit={onSubmit}>
                 <ModalHeader>
-                    <Forms.FormText>{t("plugin.gifCollection.modal.create.title")}</Forms.FormText>
+                    <Paragraph>{t("plugin.gifCollection.modal.create.title")}</Paragraph>
                 </ModalHeader>
                 <ModalContent>
-                    <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>{t("plugin.gifCollection.modal.create.name")}</Forms.FormTitle>
+                    <Heading style={{ marginTop: "10px" }}>{t("plugin.gifCollection.modal.create.name")}</Heading>
                     <TextInput onChange={e => setName(e)} />
                 </ModalContent>
                 <div style={{ marginTop: "1rem" }}>
@@ -866,12 +869,12 @@ function RenameCollectionModal({ name, onClose, modalProps }) {
         <ModalRoot {...modalProps}>
             <form onSubmit={onSubmit}>
                 <ModalHeader>
-                    <Forms.FormText>{t("plugin.gifCollection.modal.rename.title")}</Forms.FormText>
+                    <Paragraph>{t("plugin.gifCollection.modal.rename.title")}</Paragraph>
                 </ModalHeader>
                 <ModalContent>
-                    <Forms.FormText className="rename-collection-text">{t("plugin.gifCollection.modal.rename.name")}</Forms.FormText>
+                    <Paragraph className="rename-collection-text">{t("plugin.gifCollection.modal.rename.name")}</Paragraph>
                     <TextInput value={newName} className={`rename-collection-input ${newName.length >= 25 ? "input-warning" : ""}`} onChange={e => setNewName(e)} />
-                    {newName.length >= 25 && <Forms.FormText className="warning-text">{t("plugin.gifCollection.modal.rename.warning")}</Forms.FormText>}
+                    {newName.length >= 25 && <Paragraph className="warning-text">{t("plugin.gifCollection.modal.rename.warning")}</Paragraph>}
                 </ModalContent>
                 <div style={{ marginTop: "1rem" }}>
                     <ModalFooter>

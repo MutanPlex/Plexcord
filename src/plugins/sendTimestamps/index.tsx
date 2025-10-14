@@ -22,12 +22,14 @@ import "./styles.css";
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { Devs } from "@utils/constants";
 import { getTheme, insertTextIntoChatInputBox, Theme } from "@utils/discord";
 import { Margins } from "@utils/margins";
 import { closeModal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
-import { Button, Forms, Parser, Select, useMemo, useState } from "@webpack/common";
+import { Button, Parser, Select, useMemo, useState } from "@webpack/common";
 
 const settings = definePluginSettings({
     replaceMessageContents: {
@@ -69,9 +71,9 @@ function PickerModal({ rootProps, close }: { rootProps: ModalProps, close(): voi
     return (
         <ModalRoot {...rootProps}>
             <ModalHeader className={cl("modal-header")}>
-                <Forms.FormTitle tag="h2" className={cl("modal-title")}>
+                <Heading className={cl("modal-title")}>
                     Timestamp Picker
-                </Forms.FormTitle>
+                </Heading>
 
                 <ModalCloseButton onClick={close} className={cl("modal-close-button")} />
             </ModalHeader>
@@ -87,7 +89,7 @@ function PickerModal({ rootProps, close }: { rootProps: ModalProps, close(): voi
                     }}
                 />
 
-                <Forms.FormTitle>Timestamp Format</Forms.FormTitle>
+                <Heading>Timestamp Format</Heading>
                 <div className={cl("format-select")}>
                     <Select
                         options={
@@ -108,10 +110,10 @@ function PickerModal({ rootProps, close }: { rootProps: ModalProps, close(): voi
                     />
                 </div>
 
-                <Forms.FormTitle className={Margins.bottom8}>Preview</Forms.FormTitle>
-                <Forms.FormText className={cl("preview-text")}>
+                <Heading className={Margins.bottom8}>Preview</Heading>
+                <Paragraph className={cl("preview-text")}>
                     {rendered} ({formatted})
-                </Forms.FormText>
+                </Paragraph>
             </ModalContent>
 
             <ModalFooter>
@@ -184,14 +186,14 @@ export default definePlugin({
 
         return (
             <>
-                <Forms.FormText>
+                <Paragraph>
                     To quickly send send time only timestamps, include timestamps formatted as `HH:MM` (including the backticks!) in your message
-                </Forms.FormText>
-                <Forms.FormText>
+                </Paragraph>
+                <Paragraph>
                     See below for examples.
                     If you need anything more specific, use the Date button in the chat bar!
-                </Forms.FormText>
-                <Forms.FormText>
+                </Paragraph>
+                <Paragraph>
                     Examples:
                     <ul>
                         {samples.map(s => (
@@ -200,7 +202,7 @@ export default definePlugin({
                             </li>
                         ))}
                     </ul>
-                </Forms.FormText>
+                </Paragraph>
             </>
         );
     },

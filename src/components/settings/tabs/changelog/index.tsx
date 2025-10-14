@@ -8,14 +8,16 @@
 import "./styles.css";
 
 import { t } from "@api/i18n";
+import { Divider } from "@components/Divider";
 import { ErrorCard } from "@components/ErrorCard";
 import { DeleteIcon } from "@components/Icons";
+import { BaseText, Heading, Paragraph } from "@components/index";
 import { Link } from "@components/Link";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { Margins } from "@utils/margins";
 import { useAwaiter } from "@utils/react";
 import { getRepo, shortGitHash, UpdateLogger } from "@utils/updater";
-import { Alerts, Button, Card, Forms, React, Toasts } from "@webpack/common";
+import { Alerts, Button, Card, React, Toasts } from "@webpack/common";
 
 import gitHash from "~git-hash";
 
@@ -130,7 +132,7 @@ function UpdateLogCard({
                         <Button
                             size={Button.Sizes.NONE}
                             color={Button.Colors.TRANSPARENT}
-                            look={Button.Looks.BLANK}
+                            look={Button.Looks.LINK}
                             className="pc-changelog-delete-button"
                             style={{
                                 padding: "4px",
@@ -183,12 +185,9 @@ function UpdateLogCard({
 
                     {log.updatedPlugins.length > 0 && (
                         <div className="pc-changelog-log-plugins">
-                            <Forms.FormTitle
-                                tag="h6"
-                                className={Margins.bottom8}
-                            >
+                            <Heading className={Margins.bottom8}>
                                 {t("changelog.updatedplugins")}
-                            </Forms.FormTitle>
+                            </Heading>
                             <NewPluginsCompact
                                 newPlugins={log.updatedPlugins}
                                 maxDisplay={50}
@@ -199,12 +198,9 @@ function UpdateLogCard({
                     {log.newSettings &&
                         getNewSettingsSize(log.newSettings) > 0 && (
                             <div className="pc-changelog-log-plugins">
-                                <Forms.FormTitle
-                                    tag="h6"
-                                    className={Margins.bottom8}
-                                >
+                                <Heading className={Margins.bottom8}>
                                     {t("changelog.newSettings")}
-                                </Forms.FormTitle>
+                                </Heading>
                                 <div className="pc-changelog-new-plugins-list">
                                     {getNewSettingsEntries(log.newSettings).map(
                                         ([pluginName, settings]) =>
@@ -498,12 +494,12 @@ function ChangelogContent() {
 
     return (
         <>
-            <Forms.FormText className={Margins.bottom16}>
+            <Paragraph className={Margins.bottom16}>
                 {t("changelog.modal.description")}
-            </Forms.FormText>
+            </Paragraph>
 
-            <Forms.FormTitle tag="h5">{t("changelog.modal.repository")}</Forms.FormTitle>
-            <Forms.FormText className={Margins.bottom16}>
+            <Heading>{t("changelog.modal.repository")}</Heading>
+            <Paragraph className={Margins.bottom16}>
                 {repoPending ? (
                     repo
                 ) : repoErr ? (
@@ -518,7 +514,7 @@ function ChangelogContent() {
                     {shortGitHash()}
                 </span>
                 )
-            </Forms.FormText>
+            </Paragraph>
 
             <div className="pc-changelog-controls">
                 <Button
@@ -589,25 +585,25 @@ function ChangelogContent() {
             {error && (
                 <ErrorCard style={{ padding: "1em", marginBottom: "1em" }}>
                     <p>{error}</p>
-                    <Forms.FormText
+                    <BaseText
                         style={{
                             marginTop: "0.5em",
                             color: "var(--text-muted)",
                         }}
                     >
                         {t("changelog.internet")}
-                    </Forms.FormText>
+                    </BaseText>
                 </ErrorCard>
             )}
 
-            <Forms.FormDivider className={Margins.bottom16} />
+            <Divider className={Margins.bottom16} />
 
             {/* Current Changes Section */}
             {hasCurrentChanges ? (
                 <div className="pc-changelog-current">
-                    <Forms.FormTitle tag="h6" className={Margins.bottom8}>
+                    <Heading className={Margins.bottom8}>
                         {t("changelog.recent")}
-                    </Forms.FormTitle>
+                    </Heading>
 
                     {/* New Plugins Section */}
                     {newPlugins.length > 0 && (
@@ -624,12 +620,9 @@ function ChangelogContent() {
                     {/* Updated Plugins Section */}
                     {updatedPlugins.length > 0 && (
                         <div className={Margins.bottom16}>
-                            <Forms.FormTitle
-                                tag="h6"
-                                className={Margins.bottom8}
-                            >
+                            <Heading className={Margins.bottom8}>
                                 ({updatedPlugins.length}) {t("changelog.updatedPlugins")}
-                            </Forms.FormTitle>
+                            </Heading>
                             <NewPluginsCompact newPlugins={updatedPlugins} />
                         </div>
                     )}
@@ -637,12 +630,9 @@ function ChangelogContent() {
                     {/* Code Changes */}
                     {changelog.length > 0 && (
                         <div>
-                            <Forms.FormTitle
-                                tag="h6"
-                                className={Margins.bottom8}
-                            >
+                            <Heading className={Margins.bottom8}>
                                 {t("changelog.codeChanges", { count: changelog.length, s: changelog.length === 1 ? "" : "s" })}
-                            </Forms.FormTitle>
+                            </Heading>
                             <div className="pc-changelog-commits-list">
                                 {changelog.map(entry => (
                                     <ChangelogCard
@@ -660,9 +650,9 @@ function ChangelogContent() {
                 !isLoading &&
                 !error && (
                     <Card className="pc-changelog-empty">
-                        <Forms.FormText>
+                        <BaseText>
                             {t("changelog.noCommit")}
-                        </Forms.FormText>
+                        </BaseText>
                     </Card>
                 )
             )}
@@ -670,18 +660,18 @@ function ChangelogContent() {
             {/* History Section */}
             {showHistory && changelogHistory.length > 0 && (
                 <div className="pc-changelog-history">
-                    <Forms.FormDivider
+                    <Divider
                         className={Margins.top16}
                         style={{ marginBottom: "1em" }}
                     />
-                    <Forms.FormTitle tag="h5" className={Margins.bottom8}>
+                    <Heading className={Margins.bottom8}>
                         {t("changelog.updateLogs", {
                             count: changelogHistory.length,
                         })}
-                    </Forms.FormTitle>
-                    <Forms.FormText className={Margins.bottom16}>
+                    </Heading>
+                    <Paragraph className={Margins.bottom16}>
                         {t("changelog.previous")}
-                    </Forms.FormText>
+                    </Paragraph>
 
                     <div className="pc-changelog-history-list">
                         {changelogHistory.map(log => (

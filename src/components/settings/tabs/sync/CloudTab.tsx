@@ -21,14 +21,17 @@ import { t, tJsx } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { Settings, useSettings } from "@api/Settings";
 import { CheckedTextInput } from "@components/CheckedTextInput";
+import { Divider } from "@components/Divider";
 import { FormSwitch } from "@components/FormSwitch";
 import { Grid } from "@components/Grid";
+import { HeadingTertiary } from "@components/Heading";
 import { Link } from "@components/Link";
+import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { authorizeCloud, checkCloudUrlCsp, cloudLogger, deauthorizeCloud, getCloudAuth, getCloudUrl } from "@utils/cloud";
 import { Margins } from "@utils/margins";
 import { deleteCloudSettings, getCloudSettings, putCloudSettings } from "@utils/settingsSync";
-import { Alerts, Button, Forms, Tooltip } from "@webpack/common";
+import { Alerts, Button, Tooltip } from "@webpack/common";
 
 function validateUrl(url: string) {
     try {
@@ -73,10 +76,10 @@ function SettingsSyncSection() {
 
     return (
         <section className={Margins.top16}>
-            <Forms.FormTitle tag="h5">{t("cloud.title")}</Forms.FormTitle>
-            <Forms.FormText variant="text-md/normal" className={Margins.bottom20}>
+            <HeadingTertiary>{t("cloud.title")}</HeadingTertiary>
+            <Paragraph size="md" className={Margins.bottom20}>
                 {t("cloud.description")}
-            </Forms.FormText>
+            </Paragraph>
             <FormSwitch
                 key="cloud-sync"
                 disabled={!cloud.authenticated}
@@ -125,13 +128,13 @@ function CloudTab() {
     return (
         <SettingsTab title={"Plexcord " + t("cloud.text")}>
             <section className={Margins.top16}>
-                <Forms.FormTitle tag="h5">{t("cloud.settings")}</Forms.FormTitle>
-                <Forms.FormText variant="text-md/normal" className={Margins.bottom20}>
+                <HeadingTertiary>{t("cloud.settings")}</HeadingTertiary>
+                <Paragraph size="md" className={Margins.bottom20}>
                     {tJsx("cloud.overview", {
                         privacy: <Link href="https://api.plexcord.club/privacy">{t("cloud.privacy")}</Link>,
                         source: <Link href="https://github.com/Plexcord/Backend">{t("cloud.source")}</Link>
                     })}
-                </Forms.FormText>
+                </Paragraph>
                 <FormSwitch
                     key="backend"
                     value={settings.cloud.authenticated}
@@ -144,10 +147,10 @@ function CloudTab() {
                     description={t("cloud.authorization")}
                     title={t("cloud.button.enable")}
                 />
-                <Forms.FormTitle tag="h5">{t("cloud.backend.title")}</Forms.FormTitle>
-                <Forms.FormText className={Margins.bottom8}>
+                <HeadingTertiary>{t("cloud.backend.title")}</HeadingTertiary>
+                <Paragraph className={Margins.bottom8}>
                     {t("cloud.backend.description")}
-                </Forms.FormText>
+                </Paragraph>
                 <CheckedTextInput
                     key="backendUrl"
                     value={settings.cloud.url}
@@ -188,7 +191,7 @@ function CloudTab() {
                     </Button>
                 </Grid>
 
-                <Forms.FormDivider className={Margins.top16} />
+                <Divider className={Margins.top16} />
             </section >
             <SettingsSyncSection />
         </SettingsTab>

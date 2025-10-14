@@ -136,44 +136,8 @@
     cursor: pointer;
 }
 
-.pc-rdb-avatar {
-    z-index: 1 !important;
-}
-
-.pc-rdb-white-line {
-    position: absolute;
-    left: calc(var(--pc-rdb-avatar-size) / 2);
-    top: calc(var(--pc-rdb-avatar-size) + 2 * var(--pc-rdb-spacing-size));
-    width: 2px;
-    height: calc(100% - var(--pc-rdb-avatar-size) - 4 * var(--pc-rdb-spacing-size) - 2px);
-    ;
-    border-left: 3px solid gray;
-}
-
-.pc-rdb-reply-line {
-    position: relative;
-    border: 3px solid gray;
-    border-top: none;
-    border-right: none;
-    border-bottom-left-radius: 20px;
-    height: calc(8px);
-    width: calc(24px);
-    top: calc(var(--pc-rdb-avatar-size) / 2 + 4px);
-    left: calc(var(--pc-rdb-avatar-size) * -2 - 4px);
-}
-
-.pc-rdb-profile-photo-container {
-    position: relative;
-}
-
-.pc-rdb-buttons {
-    opacity: 0;
-}
-
-.pc-rdb-reply:hover > .pc-rdb-buttons {
-    opacity: 1;
-}
-
-.pc-rdb-review:hover > .pc-rdb-buttons {
-    opacity: 1;
+.pc-bite-size-rdb-button,
+.pc-bite-size-rdb-button:hover {
+    background: var(--redesign-button-overlay-alpha-background);
+    border-radius: 50%;
 }

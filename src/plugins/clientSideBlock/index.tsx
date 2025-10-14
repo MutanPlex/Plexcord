@@ -7,10 +7,11 @@
 
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { BaseText } from "@components/BaseText";
 import { GuildMember } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import { ChannelStore, GuildMemberStore, GuildRoleStore, RelationshipStore, Text, UserStore } from "@webpack/common";
+import { ChannelStore, GuildMemberStore, GuildRoleStore, RelationshipStore, UserStore } from "@webpack/common";
 
 const settings = definePluginSettings(
     {
@@ -169,7 +170,7 @@ function isRoleAllBlockedMembers(roleId, guildId) {
 function hiddenReplyComponent() {
     switch (settings.store.blockedReplyDisplay) {
         case "displayText":
-            return <Text tag="p" selectable={false} variant="text-sm/normal" style={{ marginTop: "0px", marginBottom: "0px" }}><i>↓ {t("plugin.clientSideBlock.replying")}</i></Text>;
+            return <BaseText size="sm" tag="p" style={{ marginTop: "0px", marginBottom: "0px" }}><i>↓ {t("plugin.clientSideBlock.replying")}</i></BaseText>;
         case "hideReply":
             return null;
     }

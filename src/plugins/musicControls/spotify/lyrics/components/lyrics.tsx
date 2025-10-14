@@ -5,11 +5,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { BaseText } from "@components/BaseText";
 import { settings } from "@plugins/musicControls/settings";
 import { SpotifyLrcStore } from "@plugins/musicControls/spotify/lyrics/providers/store";
 import { SpotifyStore } from "@plugins/musicControls/spotify/SpotifyStore";
 import { openModal } from "@utils/modal";
-import { ContextMenuApi, React, Text, TooltipContainer, useEffect, useState, useStateFromStores } from "@webpack/common";
+import { ContextMenuApi, React, TooltipContainer, useEffect, useState, useStateFromStores } from "@webpack/common";
 
 import { LyricsContextMenu } from "./ctxMenu";
 import { LyricsModal } from "./modal";
@@ -42,12 +43,9 @@ function LyricsDisplay({ scroll = true }: { scroll?: boolean; }) {
         >
             {currentLyrics ? currentLyrics.map((line, i) => (
                 <div ref={lyricRefs[i]} key={i}>
-                    <Text
-                        variant={currLrcIndex === i ? "text-sm/normal" : "text-xs/normal"}
-                        className={makeClassName(i)}
-                    >
+                    <BaseText size={currLrcIndex === i ? "sm" : "xs"} weight="normal" className={makeClassName(i)}>
                         {line.text || NoteSvg()}
-                    </Text>
+                    </BaseText>
                 </div>
             )) : ShowMusicNoteOnNoLyrics ? (
                 <TooltipContainer text="No synced lyrics found">

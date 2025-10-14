@@ -9,12 +9,14 @@ import "./styles.css";
 
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { HeadingSecondary, HeadingTertiary } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { debounce } from "@shared/debounce";
 import { PcDevs } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
-import { Card, Forms, React, TextInput } from "@webpack/common";
+import { Card, React, TextInput } from "@webpack/common";
 
 interface GoogleFontMetadata {
     family: string;
@@ -133,8 +135,8 @@ function GoogleFontSearch({ onSelect }: { onSelect: (font: GoogleFontMetadata) =
 
     return (
         <section>
-            <Forms.FormTitle tag="h3">{t("plugin.fontLoader.modal.settings.title")}</Forms.FormTitle>
-            <Forms.FormText>{t("plugin.fontLoader.modal.settings.description")}</Forms.FormText>
+            <HeadingSecondary>{t("plugin.fontLoader.modal.settings.title")}</HeadingSecondary>
+            <Paragraph>{t("plugin.fontLoader.modal.settings.description")}</Paragraph>
 
             <TextInput
                 value={query}
@@ -153,13 +155,13 @@ function GoogleFontSearch({ onSelect }: { onSelect: (font: GoogleFontMetadata) =
                             onClick={() => onSelect(font)}
                         >
                             <div className="pc-googlefonts-preview" style={{ fontFamily: font.family }}>
-                                <Forms.FormTitle tag="h4">{font.displayName}</Forms.FormTitle>
-                                <Forms.FormText>{t("plugin.fontLoader.modal.settings.previewText")}</Forms.FormText>
+                                <HeadingTertiary>{font.displayName}</HeadingTertiary>
+                                <Paragraph>{t("plugin.fontLoader.modal.settings.previewText")}</Paragraph>
                             </div>
                             {font.authors?.length && (
-                                <Forms.FormText className={Margins.top8} style={{ opacity: 0.7 }}>
+                                <Paragraph className={Margins.top8} style={{ opacity: 0.7 }}>
                                     {t("plugin.fontLoader.modal.settings.authors", { authors: font.authors.join(", ") })}
-                                </Forms.FormText>
+                                </Paragraph>
                             )}
                         </Card>
                     ))}

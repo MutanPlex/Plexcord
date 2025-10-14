@@ -155,9 +155,7 @@ export default definePlugin({
                     look={Button.Looks.FILLED}
                     size={Button.Sizes.NONE}
                     color={RoleButtonClasses.bannerColor}
-                    className={classes(RoleButtonClasses.button, RoleButtonClasses.icon, RoleButtonClasses.banner)}
-                    innerClassName={classes(RoleButtonClasses.buttonInner, RoleButtonClasses.icon, RoleButtonClasses.banner)}
-                >
+                    className={classes(RoleButtonClasses.button, RoleButtonClasses.icon, RoleButtonClasses.banner, "pc-bite-size-rdb-button")}>
                     <NotesIcon height={16} width={16} />
                 </Button>
             </TooltipContainer>

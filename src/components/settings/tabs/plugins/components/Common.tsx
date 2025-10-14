@@ -5,12 +5,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
+import { BaseText } from "@components/BaseText";
 import { classes } from "@utils/misc";
 import { wordsFromCamel, wordsToTitle } from "@utils/text";
 import { DefinedSettings, PluginOptionBase } from "@utils/types";
-import { Text } from "@webpack/common";
 import { PropsWithChildren } from "react";
 
 export const cl = classNameFactory("pc-plugins-setting-");
@@ -32,7 +31,7 @@ export type ComponentSettingProps<T extends Omit<PluginOptionBase, "description"
 export function resolveError(isValidResult: boolean | string) {
     if (typeof isValidResult === "string") return isValidResult;
 
-    return isValidResult ? null : t("plugins.error.invalidInput");
+    return isValidResult ? null : "Invalid input provided";
 }
 
 interface SettingsSectionProps extends PropsWithChildren {
@@ -41,19 +40,20 @@ interface SettingsSectionProps extends PropsWithChildren {
     label?: string;
     error?: string | null;
     inlineSetting?: boolean;
+    tag?: "label" | "div";
 }
 
-export function SettingsSection({ name, description, label, error, inlineSetting, children }: SettingsSectionProps) {
+export function SettingsSection({ tag: Tag = "div", name, description, label, error, inlineSetting, children }: SettingsSectionProps) {
     return (
-        <div className={cl("section")}>
+        <Tag className={cl("section")}>
             <div className={classes(cl("content"), inlineSetting && cl("inline"))}>
                 <div className={cl("label")}>
-                    {name && <Text className={cl("title")} variant="text-md/medium">{label || wordsToTitle(wordsFromCamel(name))}</Text>}
-                    {description && <Text className={cl("description")} variant="text-sm/normal">{description}</Text>}
+                    {name && <BaseText size="md" weight="medium" className={cl("title")}>{label || wordsToTitle(wordsFromCamel(name))}</BaseText>}
+                    {description && <BaseText size="sm" weight="normal" className={cl("description")}>{description}</BaseText>}
                 </div>
                 {children}
             </div>
-            {error && <Text className={cl("error")} variant="text-sm/normal">{error}</Text>}
-        </div>
+            {error && <BaseText size="sm" weight="normal" className={cl("error")}>{error}</BaseText>}
+        </Tag>
     );
 }

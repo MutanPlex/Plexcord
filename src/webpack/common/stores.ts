@@ -58,6 +58,7 @@ export let DraftStore: t.DraftStore;
 export let MediaEngineStore: t.MediaEngineStore;
 export let StreamerModeStore: t.StreamerModeStore;
 export let SpellCheckStore: t.SpellCheckStore;
+export let OverridePremiumTypeStore: GenericStore;
 
 /**
  * @see jsdoc of {@link t.useStateFromStores}
@@ -84,6 +85,7 @@ waitForStore("SpellcheckStore", m => SpellCheckStore = m);
 waitForStore("StickersStore", m => StickersStore = m);
 waitForStore("StreamerModeStore", m => StreamerModeStore = m);
 waitForStore("TypingStore", m => TypingStore = m);
+waitForStore("OverridePremiumTypeStore", m => OverridePremiumTypeStore = m);
 waitForStore("ThemeStore", m => {
     ThemeStore = m;
     // Importing this directly can easily cause circular imports. For this reason, use a non import access here.

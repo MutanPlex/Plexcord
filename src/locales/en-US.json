@@ -24,32 +24,26 @@
         },
         "switches": {
             "useQuickCss": {
-                "label": "Enable Custom CSS",
-                "description": "Loads your Custom CSS"
+                "label": "Enable Custom CSS"
             },
             "enableReactDevtools": {
-                "label": "Enable React Developer Tools",
-                "description": "Requires a full restart"
+                "label": "Enable React Developer Tools"
             },
             "frameless": {
-                "label": "Disable the window frame",
-                "description": "Requires a full restart"
+                "label": "Disable the window frame"
             },
             "winNativeTitleBar": {
-                "label": "Use Windows' native title bar instead of Discord's custom one",
-                "description": "Requires a full restart"
+                "label": "Use Windows' native title bar instead of Discord's custom one"
             },
             "transparent": {
                 "label": "Enable window transparency",
-                "description": "You need a theme that supports transparency or this will do nothing. WILL STOP THE WINDOW FROM BEING RESIZABLE!! Requires a full restart"
+                "description": "A theme that supports transparency is required or this will do nothing. Stops the window from being resizable as a side effect"
             },
             "winCtrlQ": {
-                "label": "Register Ctrl+Q as shortcut to close Discord (Alternative to Alt+F4)",
-                "description": "Requires a full restart"
+                "label": "Register Ctrl+Q as shortcut to close Discord (Alternative to Alt+F4)"
             },
             "disableMinSize": {
-                "label": "Disable minimum window size",
-                "description": "Requires a full restart"
+                "label": "Disable minimum window size"
             }
         },
         "quickActions": {
@@ -88,6 +82,7 @@
         },
         "notifications": {
             "title": "Notifications",
+            "description": "Settings for Notifications sent by Plexcord. This does NOT include Discord notifications (messages, etc.)",
             "settings": "Notification Settings",
             "viewLog": "View Notification Log",
             "permissions": {
@@ -245,7 +240,9 @@
             "enabledStock": "Enabled Stock Plugins",
             "totalStock": "Total Stock Plugins",
             "enabledUser": "Enabled User Plugins",
-            "totalUser": "Total User Plugins"
+            "totalUser": "Total User Plugins",
+            "info": "View more info",
+            "source": "View source code"
         },
         "metadata": {
             "api": {
@@ -418,8 +415,8 @@
             "pluginInstance": "Insert the plugin instance"
         },
         "replacementEval": {
-            "label": "Treat as Function",
-            "description": "'replacement' will be evaled if this is toggled"
+            "label": "Treat Replacement as function",
+            "description": "'Replacement' will be evaluated as a function if this is enabled"
         }
     },
     "sync": {
@@ -989,6 +986,24 @@
         "atSomeone": {
             "name": "AtSomeone",
             "description": "With @someone you can mention someone randomly"
+        },
+        "autoDndWhilePlaying": {
+            "name": "AutoDndWhilePlaying",
+            "description": "Automatically updates your online status (online, idle, dnd) when launching games",
+            "option": {
+                "statusToSet": {
+                    "label": "Status to Set",
+                    "description": "The status to set when launching a game",
+                    "online": "Online",
+                    "dnd": "Do Not Disturb",
+                    "idle": "Idle",
+                    "invisible": "Invisible"
+                },
+                "excludeInvisible": {
+                    "label": "Exclude Invisible",
+                    "description": "Prevent automatic status changes while your status is set to invisible"
+                }
+            }
         },
         "bannersEverywhere": {
             "name": "BannersEverywhere",

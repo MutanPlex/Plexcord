@@ -19,6 +19,7 @@
 
 import { t } from "@api/i18n";
 import { FormSwitch } from "@components/FormSwitch";
+import { Heading } from "@components/Heading";
 import { encrypt } from "@plugins/invisibleChat.desktop/index";
 import { insertTextIntoChatInputBox } from "@utils/discord";
 import {
@@ -29,7 +30,7 @@ import {
     ModalRoot,
     openModal,
 } from "@utils/modal";
-import { Button, Forms, React, TextInput } from "@webpack/common";
+import { Button, React, TextInput } from "@webpack/common";
 
 function EncModal(props: ModalProps) {
     const [secret, setSecret] = React.useState("");
@@ -42,24 +43,24 @@ function EncModal(props: ModalProps) {
     return (
         <ModalRoot {...props}>
             <ModalHeader>
-                <Forms.FormTitle tag="h4">{t("plugin.invisibleChat.modal.encrypt.title")}</Forms.FormTitle>
+                <Heading>{t("plugin.invisibleChat.modal.encrypt.title")}</Heading>
             </ModalHeader>
 
             <ModalContent>
-                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>{t("plugin.invisibleChat.modal.encrypt.secret")}</Forms.FormTitle>
+                <Heading style={{ marginTop: "10px" }}>{t("plugin.invisibleChat.modal.encrypt.secret")}</Heading>
                 <TextInput
                     onChange={(e: string) => {
                         setSecret(e);
                     }}
                 />
-                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>{t("plugin.invisibleChat.modal.encrypt.cover")}</Forms.FormTitle>
+                <Heading style={{ marginTop: "10px" }}>{t("plugin.invisibleChat.modal.encrypt.cover")}</Heading>
                 <TextInput
                     disabled={noCover}
                     onChange={(e: string) => {
                         setCover(e);
                     }}
                 />
-                <Forms.FormTitle tag="h5" style={{ marginTop: "10px" }}>{t("plugin.invisibleChat.modal.encrypt.password")}</Forms.FormTitle>
+                <Heading style={{ marginTop: "10px" }}>{t("plugin.invisibleChat.modal.encrypt.password")}</Heading>
                 <TextInput
                     style={{ marginBottom: "20px" }}
                     defaultValue={"password"}

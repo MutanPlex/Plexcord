@@ -24,32 +24,26 @@
         },
         "switches": {
             "useQuickCss": {
-                "label": "Özel CSS'yi Etkinleştir",
-                "description": "Özel CSS dosyanızı yükler"
+                "label": "Özel CSS'yi Etkinleştir"
             },
             "enableReactDevtools": {
-                "label": "React Geliştirici Araçlarını Etkinleştir",
-                "description": "Tamamen yeniden başlatma gerektirir"
+                "label": "React Geliştirici Araçlarını Etkinleştir"
             },
             "frameless": {
-                "label": "Pencere çerçevesini devre dışı bırak",
-                "description": "Tamamen yeniden başlatma gerektirir"
+                "label": "Pencere çerçevesini devre dışı bırak"
             },
             "winNativeTitleBar": {
-                "label": "Discord'un özel başlık çubuğu yerine Windows'un yerel başlık çubuğunu kullan",
-                "description": "Tamamen yeniden başlatma gerektirir"
+                "label": "Discord'un özel başlık çubuğu yerine Windows'un yerel başlık çubuğunu kullan"
             },
             "transparent": {
                 "label": "Pencere şeffaflığını etkinleştir",
-                "description": "Şeffaflığı destekleyen bir temaya ihtiyacınız var, aksi takdirde hiçbir şey yapmaz. PENCEREYİ YENİDEN BOYUTLANDIRILAMAZ HALE GETİRECEK!! Tamamen yeniden başlatma gerektirir"
+                "description": "Bu işlem için şeffaflığı destekleyen bir tema gereklidir, aksi takdirde hiçbir etkisi olmaz. Yan etki olarak pencerenin yeniden boyutlandırılmasını engeller."
             },
             "winCtrlQ": {
-                "label": "Discord'u kapatmak için Ctrl+Q kısayolunu kaydet (Alt+F4'e alternatif)",
-                "description": "Tamamen yeniden başlatma gerektirir"
+                "label": "Discord'u kapatmak için Ctrl+Q kısayolunu kaydet (Alt+F4'e alternatif)"
             },
             "disableMinSize": {
-                "label": "Minimum pencere boyutunu devre dışı bırak",
-                "description": "Tamamen yeniden başlatma gerektirir"
+                "label": "Minimum pencere boyutunu devre dışı bırak"
             }
         },
         "quickActions": {
@@ -87,7 +81,8 @@
             }
         },
         "notifications": {
-            "title": "Bildirimleri",
+            "title": "Bildirimler",
+            "description": "Plexcord tarafından gönderilen bildirimler için ayarlar. Bu, Discord bildirimlerini (mesajlar vb.) içermez.",
             "settings": "Bildirim Ayarları",
             "viewLog": "Bildirim Geçmişini Görüntüle",
             "permissions": {
@@ -245,7 +240,9 @@
             "enabledStock": "Aktif Stok Eklentiler",
             "totalStock": "Toplam Stok Eklentiler",
             "enabledUser": "Aktif Kullanıcı Eklentileri",
-            "totalUser": "Toplam Kullanıcı Eklentileri"
+            "totalUser": "Toplam Kullanıcı Eklentileri",
+            "info": "Daha fazla bilgi görüntüle",
+            "source": "Kaynak kodunu görüntüle"
         },
         "metadata": {
             "api": {
@@ -418,8 +415,8 @@
             "pluginInstance": "Eklenti örneğini ekler"
         },
         "replacementEval": {
-            "label": "Fonksiyon olarak işle",
-            "description": "İşaretlenirse 'Değiştir' alanı eval edilip bir fonksiyon olarak kullanılacaktır."
+            "label": "Değiştirmeyi fonksiyon olarak işle",
+            "description": "'Değiştirme' bu etkinleştirildiğinde bir fonksiyon olarak değerlendirilecektir."
         }
     },
     "sync": {
@@ -989,6 +986,24 @@
         "atSomeone": {
             "name": "AtSomeone",
             "description": "@someone ile rastgele birini etiketlemeni sağlar"
+        },
+        "autoDndWhilePlaying": {
+            "name": "AutoDndWhilePlaying",
+            "description": "Oyun başlattığında çevrimiçi durumunu (çevrimiçi, boşta, rahatsız etmeyin) otomatik olarak günceller",
+            "option": {
+                "statusToSet": {
+                    "label": "Ayarlanacak Durum",
+                    "description": "Bir oyun başlatıldığında ayarlanacak durum",
+                    "online": "Çevrimiçi",
+                    "dnd": "Rahatsız Etmeyin",
+                    "idle": "Boşta",
+                    "invisible": "Görünmez"
+                },
+                "excludeInvisible": {
+                    "label": "Görünmezi Hariç Tut",
+                    "description": "Durumun görünmez olarak ayarlandığında otomatik durum değişikliklerini engelle"
+                }
+            }
         },
         "bannersEverywhere": {
             "name": "Banners Everywhere",

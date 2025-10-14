@@ -208,7 +208,7 @@ async function printReport() {
         };
 
         // functions similar to https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries
-        // used by venbot to ensure webhook invocations are genuine (since we will pass the webhook url as a workflow input which is publicly visible)
+        // used by plexbot to ensure webhook invocations are genuine (since we will pass the webhook url as a workflow input which is publicly visible)
         // generate a secret with something like `openssl rand -hex 128`
         if (process.env.WEBHOOK_SECRET) {
             headers["X-Signature"] = "sha256=" + createHmac("sha256", process.env.WEBHOOK_SECRET).update(body).digest("hex");

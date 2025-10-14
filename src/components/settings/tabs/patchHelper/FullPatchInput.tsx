@@ -6,9 +6,10 @@
  */
 
 import { t } from "@api/i18n";
+import { Paragraph } from "@components/Paragraph";
 import { Margins } from "@utils/margins";
 import { Patch, ReplaceFn } from "@utils/types";
-import { Forms, TextArea, useEffect, useRef, useState } from "@webpack/common";
+import { TextArea, useEffect, useRef, useState } from "@webpack/common";
 
 export interface FullPatchInputProps {
     setFind(v: string): void;
@@ -70,16 +71,16 @@ export function FullPatchInput({ setFind, setParsedFind, setMatch, setReplacemen
 
     return (
         <>
-            <Forms.FormText className={Margins.bottom8}>
+            <Paragraph className={Margins.bottom8}>
                 {t("patchHelper.fullPatch.description")}
-            </Forms.FormText>
+            </Paragraph>
             <TextArea
                 inputRef={textAreaRef}
                 value={patch}
                 onChange={setPatch}
                 onBlur={update}
             />
-            {error !== "" && <Forms.FormText style={{ color: "var(--text-danger)" }}>{error}</Forms.FormText>}
+            {error !== "" && <Paragraph style={{ color: "var(--text-danger)" }}>{error}</Paragraph>}
         </>
     );
 }

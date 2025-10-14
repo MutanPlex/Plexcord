@@ -13,12 +13,14 @@ import { addMemberListDecorator, removeMemberListDecorator } from "@api/MemberLi
 import { addMessageDecoration, removeMessageDecoration } from "@api/MessageDecorations";
 import { Settings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import { ModalContent, ModalFooter, ModalHeader, ModalRoot, openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
-import { Button, Forms, Menu, React, showToast, TextInput, Toasts, Tooltip, UserStore } from "@webpack/common";
+import { Button, Menu, React, showToast, TextInput, Toasts, Tooltip, UserStore } from "@webpack/common";
 
 interface SavedBirthdays {
     [userId: string]: string;
@@ -98,13 +100,13 @@ function BirthdayModal({ userId, username, modalProps }: { userId: string, usern
     return (
         <ModalRoot {...modalProps} className="pc-cakeday-modal">
             <ModalHeader>
-                <Forms.FormTitle tag="h2">{t("plugin.cakeDay.modal.title", { username })}</Forms.FormTitle>
+                <Heading>{t("plugin.cakeDay.modal.title", { username })}</Heading>
             </ModalHeader>
             <ModalContent>
                 <section>
-                    <Forms.FormText className={Margins.bottom8}>
+                    <Paragraph className={Margins.bottom8}>
                         {t("plugin.cakeDay.modal.description")}
-                    </Forms.FormText>
+                    </Paragraph>
                     <TextInput
                         placeholder={t("plugin.cakeDay.modal.placeholder")}
                         value={birthdayInput}
@@ -113,9 +115,9 @@ function BirthdayModal({ userId, username, modalProps }: { userId: string, usern
                         disabled={loading}
                     />
                     {savedBirthdays[userId] && (
-                        <Forms.FormText className={Margins.top8}>
+                        <Paragraph className={Margins.top8}>
                             {t("plugin.cakeDay.modal.current")} {savedBirthdays[userId]}
-                        </Forms.FormText>
+                        </Paragraph>
                     )}
                 </section>
             </ModalContent>
@@ -191,17 +193,17 @@ function CakeDaySettings() {
     if (Object.keys(birthdays).length === 0) {
         return (
             <section>
-                <Forms.FormTitle tag="h3">{t("plugin.cakeDay.modal.saved")}</Forms.FormTitle>
-                <Forms.FormText>
+                <Heading>{t("plugin.cakeDay.modal.saved")}</Heading>
+                <Paragraph>
                     {t("plugin.cakeDay.modal.savedDesc")}
-                </Forms.FormText>
+                </Paragraph>
             </section>
         );
     }
 
     return (
         <section>
-            <Forms.FormTitle tag="h3">{t("plugin.cakeDay.modal.saved")}</Forms.FormTitle>
+            <Heading>{t("plugin.cakeDay.modal.saved")}</Heading>
             {Object.entries(birthdays).map(([userId, birthday]) => {
                 const user = UserStore.getUser(userId);
                 const isBirthday = checkBirthday(userId);
@@ -209,14 +211,14 @@ function CakeDaySettings() {
                 return (
                     <div key={userId} className={Margins.bottom8}>
                         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                            <Forms.FormText>
+                            <Paragraph>
                                 <strong>{user?.username || "Unknown User"}</strong> - {birthday}
                                 {isBirthday && <span style={{ marginLeft: "8px" }}>🎂 {t("plugin.cakeDay.modal.today")}</span>}
-                            </Forms.FormText>
+                            </Paragraph>
                             <Button
-                                size={Button.Sizes.TINY}
+                                size={Button.Sizes.MIN}
                                 color={Button.Colors.RED}
-                                look={Button.Looks.OUTLINED}
+                                look={Button.Looks.FILLED}
                                 onClick={() => clearBirthday(userId, user?.username || "Unknown")}
                             >
                                 {t("plugin.cakeDay.modal.remove")}

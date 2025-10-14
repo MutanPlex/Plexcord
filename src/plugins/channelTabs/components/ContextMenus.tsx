@@ -6,12 +6,15 @@
  */
 
 import { t } from "@api/i18n";
+import { BaseText } from "@components/BaseText";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { bookmarkFolderColors, bookmarkPlaceholderName, closeOtherTabs, closeTab, closeTabsToTheLeft, closeTabsToTheRight, createTab, hasClosedTabs, isBookmarkFolder, openedTabs, reopenClosedTab, settings, toggleCompactTab } from "@plugins/channelTabs/util";
 import { Bookmark, BookmarkFolder, Bookmarks, ChannelTabsProps, UseBookmarkMethods } from "@plugins/channelTabs/util/types";
 import { getIntlMessage } from "@utils/discord";
 import { Margins } from "@utils/margins";
 import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, openModal } from "@utils/modal";
-import { Button, ChannelStore, FluxDispatcher, Forms, Menu, ReadStateStore, ReadStateUtils, Select, Text, TextInput, useState } from "@webpack/common";
+import { Button, ChannelStore, FluxDispatcher, Menu, ReadStateStore, ReadStateUtils, Select, TextInput, useState } from "@webpack/common";
 
 export function BasicContextMenu() {
     const { showBookmarkBar } = settings.use(["showBookmarkBar"]);
@@ -49,17 +52,17 @@ export function EditModal({ modalProps, modalKey, bookmark, onSave }: {
     return (
         <ModalRoot {...modalProps}>
             <ModalHeader>
-                <Text variant="heading-lg/semibold">{t("plugin.channelTabs.modal.edit.title")}</Text>
+                <BaseText size="lg" weight="semibold">{t("plugin.channelTabs.modal.edit.title")}</BaseText>
             </ModalHeader>
             <ModalContent>
-                <Forms.FormTitle className={Margins.top16}>{t("plugin.channelTabs.modal.edit.name")}</Forms.FormTitle>
+                <Heading className={Margins.top16}>{t("plugin.channelTabs.modal.edit.name")}</Heading>
                 <TextInput
                     value={name === placeholder ? undefined : name}
                     placeholder={placeholder}
                     onChange={v => setName(v)}
                 />
                 {isBookmarkFolder(bookmark) && <>
-                    <Forms.FormTitle className={Margins.top16}>{t("plugin.channelTabs.modal.edit.folder")}</Forms.FormTitle>
+                    <Heading className={Margins.top16}>{t("plugin.channelTabs.modal.edit.folder")}</Heading>
                     <Select
                         options={
                             Object.entries(bookmarkFolderColors).map(([name, value]) => ({
@@ -99,10 +102,10 @@ function AddToFolderModal({ modalProps, modalKey, bookmarks, onSave }: {
     return (
         <ModalRoot {...modalProps}>
             <ModalHeader>
-                <Text variant="heading-lg/semibold">{t("plugin.channelTabs.modal.add.title")}</Text>
+                <BaseText size="lg" weight="semibold">{t("plugin.channelTabs.modal.add.title")}</BaseText>
             </ModalHeader>
             <ModalContent>
-                <Forms.FormTitle className={Margins.top16}>{t("plugin.channelTabs.modal.add.select")}</Forms.FormTitle>
+                <Heading className={Margins.top16}>{t("plugin.channelTabs.modal.add.select")}</Heading>
                 <Select
                     options={[...Object.entries(bookmarks)
                         .filter(([, bookmark]) => isBookmarkFolder(bookmark))
@@ -138,12 +141,12 @@ function DeleteFolderConfirmationModal({ modalProps, modalKey, onConfirm }) {
     return (
         <ModalRoot {...modalProps}>
             <ModalHeader>
-                <Text variant="heading-lg/semibold">{t("plugin.channelTabs.modal.delete.title")}</Text>
+                <BaseText size="lg" weight="semibold">{t("plugin.channelTabs.modal.delete.title")}</BaseText>
             </ModalHeader>
             <ModalContent>
-                <Forms.FormText className={Margins.top16}>
+                <Paragraph className={Margins.top16}>
                     {t("plugin.channelTabs.modal.delete.description")}
-                </Forms.FormText>
+                </Paragraph>
             </ModalContent>
             <ModalFooter>
                 <Button

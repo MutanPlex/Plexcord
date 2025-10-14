@@ -6,11 +6,13 @@
  */
 
 import { t } from "@api/i18n";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { Margins } from "@utils/margins";
 import { canonicalizeMatch, canonicalizeReplace } from "@utils/patches";
 import { makeCodeblock } from "@utils/text";
 import { ReplaceFn } from "@utils/types";
-import { Button, Forms, Parser, useMemo, useState } from "@webpack/common";
+import { Button, Parser, useMemo, useState } from "@webpack/common";
 import type { Change } from "diff";
 
 // Do not include diff in non dev builds (side effects import)
@@ -55,7 +57,7 @@ function Match({ matchResult }: { matchResult: RegExpMatchArray | null; }) {
 
     return (
         <>
-            <Forms.FormTitle>{t("patchHelper.match")}</Forms.FormTitle>
+            <Heading>{t("patchHelper.match")}</Heading>
             <div style={{ userSelect: "text" }}>{Parser.parse(fullMatch)}</div>
             <div style={{ userSelect: "text" }}>{Parser.parse(groups)}</div>
         </>
@@ -85,7 +87,7 @@ function Diff({ diff }: { diff: Change[] | null; }) {
 
     return (
         <>
-            <Forms.FormTitle>{t("patchHelper.diff")}</Forms.FormTitle>
+            <Heading>{t("patchHelper.diff")}</Heading>
             {diffLines}
         </>
     );
@@ -120,7 +122,7 @@ export function PatchPreview({ module, match, replacement, setReplacementError }
 
     return (
         <>
-            <Forms.FormTitle>{t("patchHelper.module")} {id}</Forms.FormTitle>
+            <Heading>{t("patchHelper.module")} {id}</Heading>
 
             <Match matchResult={matchResult} />
             <Diff diff={diff} />
@@ -142,9 +144,9 @@ export function PatchPreview({ module, match, replacement, setReplacementError }
             )}
 
             {compileResult && (
-                <Forms.FormText style={{ color: compileResult[0] ? "var(--status-positive)" : "var(--text-danger)" }}>
+                <Paragraph style={{ color: compileResult[0] ? "var(--status-positive)" : "var(--text-danger)" }}>
                     {compileResult[1]}
-                </Forms.FormText>
+                </Paragraph>
             )}
         </>
     );

@@ -23,8 +23,10 @@ import { generateId } from "@api/Commands";
 import { t, tJsx, useForceUpdateOnLocaleChange } from "@api/i18n";
 import { Settings, useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
+import { Paragraph } from "@components/Paragraph";
 import { User } from "@plexcord/discord-types";
 import { debounce } from "@shared/debounce";
 import { gitRemote } from "@shared/plexcordUserAgent";
@@ -34,7 +36,7 @@ import { classes, isObjectEmpty } from "@utils/misc";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { OptionType, Plugin } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { Button, Clickable, FluxDispatcher, Forms, React, Text, Toasts, Tooltip, useEffect, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
+import { Button, Clickable, FluxDispatcher, React, Toasts, Tooltip, useEffect, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
 import { Constructor } from "type-fest";
 
 import { PluginMeta } from "~plugins";
@@ -82,12 +84,16 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
     useEffect(() => {
         (async () => {
             for (const user of plugin.authors.slice(0, 6)) {
-                const author = user.id
-                    ? await UserUtils.getUser(`${user.id}`)
-                        .catch(() => makeDummyUser({ username: user.name }))
-                    : makeDummyUser({ username: user.name });
+                try {
+                    const author = user.id
+                        ? await UserUtils.getUser(`${user.id}`)
+                            .catch(() => makeDummyUser({ username: user.name }))
+                        : makeDummyUser({ username: user.name });
 
-                setAuthors(a => [...a, author]);
+                    setAuthors(a => [...a, author]);
+                } catch (error) {
+                    continue;
+                }
             }
         })();
     }, [plugin.authors]);
@@ -99,7 +105,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
 
     function renderSettings() {
         if (!hasSettings || !plugin.options)
-            return <Forms.FormText>{t("plugins.pluginModal.noSettings")}</Forms.FormText>;
+            return <Paragraph>{t("plugins.pluginModal.noSettings")}</Paragraph>;
 
         const options = Object.entries(plugin.options).map(([key, setting]) => {
             if (setting.type === OptionType.CUSTOM || setting.hidden) return null;
@@ -157,48 +163,51 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
     return (
         <ModalRoot transitionState={transitionState} size={ModalSize.MEDIUM}>
             <ModalHeader separator={false} className={Margins.bottom8}>
-                <Text variant="heading-xl/bold" style={{ flexGrow: 1 }}>{displayName}</Text>
+                <BaseText size="xl" weight="bold" style={{ flexGrow: 1 }}>{displayName}</BaseText>
                 <ModalCloseButton onClick={onClose} />
             </ModalHeader>
             <ModalContent className={Margins.bottom16}>
                 <section>
                     <Flex className={cl("info")}>
-                        <Forms.FormText className={cl("description")}>{displayDescription}</Forms.FormText>
+                        <Paragraph className={cl("description")}>{displayDescription}</Paragraph>
                         {!pluginMeta.userPlugin && (
                             <div className="pc-settings-modal-links">
                                 <WebsiteButton
-                                    text="View more info"
+                                    text={"plugins.pluginModal.info"}
                                     href={`https://plexcord.club/plugins/${plugin.name}`}
                                 />
                                 <GithubButton
-                                    text="View source code"
+                                    text={"plugins.pluginModal.source"}
                                     href={`https://github.com/${gitRemote}/tree/main/src/plugins/${pluginMeta.folderName}`}
                                 />
                             </div>
                         )}
                     </Flex>
-                    <Text variant="heading-lg/semibold" className={classes(Margins.top8, Margins.bottom8)}>{t("plugins.pluginModal.authors")}</Text>
+                    <BaseText size="lg" weight="semibold" className={classes(Margins.top8, Margins.bottom8)}>{t("plugins.pluginModal.authors")}</BaseText>
                     <div style={{ width: "fit-content" }}>
-                        <UserSummaryItem
-                            users={authors}
-                            guildId={undefined}
-                            renderIcon={false}
-                            showDefaultAvatarsForNullUsers
-                            renderMoreUsers={renderMoreUsers}
-                            renderUser={(user: User) => (
-                                <Clickable
-                                    className={AvatarStyles.clickableAvatar}
-                                    onClick={() => openContributorModal(user)}
-                                >
-                                    <img
-                                        className={AvatarStyles.avatar}
-                                        src={user.getAvatarURL(void 0, 80, true)}
-                                        alt={user.username}
-                                        title={user.username}
-                                    />
-                                </Clickable>
-                            )}
-                        />
+                        <ErrorBoundary noop>
+                            <UserSummaryItem
+                                users={authors}
+                                guildId={undefined}
+                                renderIcon={false}
+                                max={6}
+                                showDefaultAvatarsForNullUsers
+                                renderMoreUsers={renderMoreUsers}
+                                renderUser={(user: User) => (
+                                    <Clickable
+                                        className={AvatarStyles.clickableAvatar}
+                                        onClick={() => openContributorModal(user)}
+                                    >
+                                        <img
+                                            className={AvatarStyles.avatar}
+                                            src={user.getAvatarURL(void 0, 80, true)}
+                                            alt={user.username}
+                                            title={user.username}
+                                        />
+                                    </Clickable>
+                                )}
+                            />
+                        </ErrorBoundary>
                     </div>
                 </section>
                 {!!plugin.settingsAboutComponent && (
@@ -211,7 +220,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                     </div>
                 )}
                 <section>
-                    <Text variant="heading-lg/semibold" className={classes(Margins.top16, Margins.bottom8)}>{t("plugins.pluginModal.settings")}</Text>
+                    <BaseText size="lg" weight="semibold" className={classes(Margins.top16, Margins.bottom8)}>{t("plugins.pluginModal.settings")}</BaseText>
                     {renderSettings()}
                 </section>
             </ModalContent>;
@@ -322,24 +331,24 @@ export function openWarningModal(plugin?: Plugin | null, pluginModalProps?: Moda
             transitionState={warningModalProps.transitionState}
         >
             <ModalHeader separator={false}>
-                <Text className="text-danger pc-pm-modal-title">{t("plugins.dangerModal.title")}</Text>
+                <BaseText className="text-danger pc-pm-modal-title">{t("plugins.dangerModal.title")}</BaseText>
                 <ModalCloseButton onClick={warningModalProps.onClose} className="pc-modal-close-button" />
             </ModalHeader>
             <ModalContent>
                 <section>
                     <Flex className="pc-warning-info">
-                        <Text className="text-normal">
+                        <BaseText className="text-normal">
                             {text}
-                        </Text>
-                        <Text className="warning-text">
+                        </BaseText>
+                        <BaseText className="warning-text">
                             {t("plugins.dangerModal.irreversible")}
-                        </Text>
-                        <Text className="text-normal margin-bottom">
+                        </BaseText>
+                        <BaseText className="text-normal margin-bottom">
                             {tJsx("plugins.dangerModal.resetText", {
                                 confirmReset: <strong>{t("plugins.dangerModal.confirmReset")}</strong>,
                                 cancel: <strong>{t("plugins.dangerModal.cancel")}</strong>,
                             })}
-                        </Text>
+                        </BaseText>
                     </Flex>
                 </section>
             </ModalContent>

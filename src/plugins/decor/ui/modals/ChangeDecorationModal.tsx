@@ -6,8 +6,12 @@
  */
 
 import { t, tJsx } from "@api/i18n";
+import { BaseText } from "@components/BaseText";
+import { Button as NewButton } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { User } from "@plexcord/discord-types";
 import { Decoration, getPresets, Preset } from "@plugins/decor/lib/api";
 import { GUILD_ID, INVITE_KEY } from "@plugins/decor/lib/constants";
@@ -23,10 +27,10 @@ import DecorDecorationGridDecoration from "@plugins/decor/ui/components/DecorDec
 import SectionedGridList from "@plugins/decor/ui/components/SectionedGridList";
 import { openInviteModal } from "@utils/discord";
 import { Margins } from "@utils/margins";
-import { classes, copyWithToast } from "@utils/misc";
+import { copyWithToast } from "@utils/misc";
 import { closeAllModals, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { Queue } from "@utils/Queue";
-import { Alerts, Button, FluxDispatcher, Forms, GuildStore, NavigationRouter, Parser, Text, Tooltip, useEffect, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
+import { Alerts, Button, FluxDispatcher, GuildStore, NavigationRouter, Parser, Tooltip, useEffect, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
 
 import { openCreateDecorationModal } from "./CreateDecorationModal";
 import { openGuidelinesModal } from "./GuidelinesModal";
@@ -72,7 +76,7 @@ function SectionHeader({ section }: SectionHeaderProps) {
 
     return <div>
         <Flex>
-            <Forms.FormTitle style={{ flexGrow: 1 }}>{section.title}</Forms.FormTitle>
+            <Heading style={{ flexGrow: 1 }}>{section.title}</Heading>
             {hasAuthorIds && <UserSummaryItem
                 users={authors}
                 guildId={undefined}
@@ -85,9 +89,9 @@ function SectionHeader({ section }: SectionHeaderProps) {
             />}
         </Flex>
         {hasSubtitle &&
-            <Forms.FormText className={Margins.bottom8}>
+            <Paragraph className={Margins.bottom8}>
                 {section.subtitle}
-            </Forms.FormText>
+            </Paragraph>
         }
     </div>;
 }
@@ -144,14 +148,9 @@ function ChangeDecorationModal(props: ModalProps) {
         className={DecorationModalStyles.modal}
     >
         <ModalHeader separator={false} className={cl("modal-header")}>
-            <Text
-                color="header-primary"
-                variant="heading-lg/semibold"
-                tag="h1"
-                style={{ flexGrow: 1 }}
-            >
+            <BaseText color="header-primary" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
                 {t("plugin.decor.button.change")}
-            </Text>
+            </BaseText>
             <ModalCloseButton onClick={props.onClose} />
         </ModalHeader>
         <ModalContent
@@ -202,19 +201,20 @@ function ChangeDecorationModal(props: ModalProps) {
                         avatarDecorationOverride={avatarDecorationOverride}
                         user={UserStore.getCurrentUser()}
                     />
-                    {isActiveDecorationPreset && <Forms.FormTitle className="">{tJsx("plugin.decor.title.presetPart", { name: activeDecorationPreset.name })}</Forms.FormTitle>}
+                    {isActiveDecorationPreset && <Heading className="">{tJsx("plugin.decor.title.presetPart", { name: activeDecorationPreset.name })}</Heading>}
                     {typeof activeSelectedDecoration === "object" &&
-                        <Text
-                            variant="text-sm/semibold"
+                        <BaseText
+                            size="sm"
+                            weight="semibold"
                             color="header-primary"
                         >
                             {activeSelectedDecoration?.alt}
-                        </Text>
+                        </BaseText>
                     }
                     {activeDecorationHasAuthor && (
-                        <Text key={`createdBy-${activeSelectedDecoration.authorId}`}>
+                        <BaseText key={`createdBy-${activeSelectedDecoration.authorId}`}>
                             {tJsx("plugin.decor.createdBy", { author: Parser.parse(`<@${activeSelectedDecoration.authorId}>`) })}
-                        </Text>
+                        </BaseText>
                     )}
                     {isActiveDecorationPreset && (
                         <Button onClick={() => copyWithToast(activeDecorationPreset.id)}>
@@ -224,8 +224,14 @@ function ChangeDecorationModal(props: ModalProps) {
                 </div>
             </ErrorBoundary>
         </ModalContent>
-        <ModalFooter className={classes(cl("change-decoration-modal-footer", cl("modal-footer")))}>
-            <div className={cl("change-decoration-modal-footer-btn-container")}>
+        <ModalFooter className={cl("change-decoration-modal-footer", "modal-footer")}>
+            <div className={cl("modal-footer-btn-container")}>
+                <Button
+                    onClick={props.onClose}
+                    color={Button.Colors.PRIMARY}
+                >
+                    {t("plugin.decor.button.cancel")}
+                </Button>
                 <Button
                     onClick={() => {
                         selectDecoration(tryingDecoration!).then(props.onClose);
@@ -234,15 +240,29 @@ function ChangeDecorationModal(props: ModalProps) {
                 >
                     {t("plugin.decor.button.apply")}
                 </Button>
-                <Button
-                    onClick={props.onClose}
-                    color={Button.Colors.PRIMARY}
-                    look={Button.Looks.LINK}
-                >
-                    {t("plugin.decor.button.cancel")}
-                </Button>
             </div>
-            <div className={cl("change-decoration-modal-footer-btn-container")}>
+            <div className={cl("modal-footer-btn-container")}>
+                <Tooltip text={t("plugin.decor.join.tooltip")}>
+                    {tooltipProps => <NewButton
+                        {...tooltipProps}
+                        onClick={async () => {
+                            if (!GuildStore.getGuild(GUILD_ID)) {
+                                const inviteAccepted = await openInviteModal(INVITE_KEY);
+                                if (inviteAccepted) {
+                                    closeAllModals();
+                                    FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
+                                }
+                            } else {
+                                props.onClose();
+                                FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
+                                NavigationRouter.transitionToGuild(GUILD_ID);
+                            }
+                        }}
+                        variant="link"
+                    >
+                        {t("plugin.decor.join.button")}
+                    </NewButton>}
+                </Tooltip>
                 <Button
                     onClick={() => Alerts.show({
                         title: t("plugin.decor.alert.logout.title"),
@@ -260,28 +280,6 @@ function ChangeDecorationModal(props: ModalProps) {
                 >
                     {t("plugin.decor.alert.logout.title")}
                 </Button>
-                <Tooltip text={t("plugin.decor.join.tooltip")}>
-                    {tooltipProps => <Button
-                        {...tooltipProps}
-                        onClick={async () => {
-                            if (!GuildStore.getGuild(GUILD_ID)) {
-                                const inviteAccepted = await openInviteModal(INVITE_KEY);
-                                if (inviteAccepted) {
-                                    closeAllModals();
-                                    FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
-                                }
-                            } else {
-                                props.onClose();
-                                FluxDispatcher.dispatch({ type: "LAYER_POP_ALL" });
-                                NavigationRouter.transitionToGuild(GUILD_ID);
-                            }
-                        }}
-                        color={Button.Colors.PRIMARY}
-                        look={Button.Looks.LINK}
-                    >
-                        {t("plugin.decor.join.button")}
-                    </Button>}
-                </Tooltip>
             </div>
         </ModalFooter>
     </ModalRoot>;

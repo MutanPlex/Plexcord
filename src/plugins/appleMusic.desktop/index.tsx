@@ -7,11 +7,12 @@
 
 import { t, tJsx } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { Paragraph } from "@components/Paragraph";
 import { Activity, ActivityAssets, ActivityButton } from "@plexcord/discord-types";
 import { ActivityFlags, ActivityStatusDisplayType, ActivityType } from "@plexcord/discord-types/enums";
 import { Devs, IS_MAC } from "@utils/constants";
 import definePlugin, { OptionType, PluginNative, ReporterTestable } from "@utils/types";
-import { ApplicationAssetUtils, FluxDispatcher, Forms } from "@webpack/common";
+import { ApplicationAssetUtils, FluxDispatcher } from "@webpack/common";
 
 const Native = PlexcordNative.pluginHelpers.AppleMusicRichPresence as PluginNative<typeof import("./native")>;
 
@@ -235,13 +236,13 @@ export default definePlugin({
 
     settingsAboutComponent() {
         return <>
-            <Forms.FormText>
+            <Paragraph>
                 {tJsx("plugin.appleMusic.about", {
                     name: <code>{"{name}"}</code>,
                     artist: <code>{"{artist}"}</code>,
                     album: <code>{"{album}"}</code>
                 })}
-            </Forms.FormText>
+            </Paragraph>
         </>;
     },
 

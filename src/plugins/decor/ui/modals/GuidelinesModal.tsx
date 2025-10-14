@@ -6,11 +6,14 @@
  */
 
 import { t, tJsx } from "@api/i18n";
+import { BaseText } from "@components/BaseText";
+import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
+import { Paragraph } from "@components/Paragraph";
 import { settings } from "@plugins/decor/settings";
 import { cl, DecorationModalStyles, requireAvatarDecorationModal } from "@plugins/decor/ui";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
-import { Button, Forms, Text } from "@webpack/common";
+import { Button } from "@webpack/common";
 
 import { openCreateDecorationModal } from "./CreateDecorationModal";
 
@@ -21,20 +24,15 @@ function GuidelinesModal(props: ModalProps) {
         className={DecorationModalStyles.modal}
     >
         <ModalHeader separator={false} className={cl("modal-header")}>
-            <Text
-                color="header-primary"
-                variant="heading-lg/semibold"
-                tag="h1"
-                style={{ flexGrow: 1 }}
-            >
+            <BaseText size="lg" weight="semibold" color="header-primary" tag="h1" style={{ flexGrow: 1 }}>
                 {t("plugin.decor.guidelines.hold")}
-            </Text>
+            </BaseText>
             <ModalCloseButton onClick={props.onClose} />
         </ModalHeader>
         <ModalContent
             scrollbarType="none"
         >
-            <Forms.FormText>
+            <Paragraph>
                 {tJsx("plugin.decor.guidelines.suspended", {
                     guidelines: <Link
                         href="https://github.com/decor-discord/.github/blob/main/GUIDELINES.md"
@@ -43,25 +41,27 @@ function GuidelinesModal(props: ModalProps) {
                     </Link>
                 })
                 }
-            </Forms.FormText>
+            </Paragraph>
         </ModalContent>
         <ModalFooter className={cl("modal-footer")}>
-            <Button
-                onClick={() => {
-                    settings.store.agreedToGuidelines = true;
-                    props.onClose();
-                    openCreateDecorationModal();
-                }}
-            >
-                {t("plugin.decor.button.continue")}
-            </Button>
-            <Button
-                onClick={props.onClose}
-                color={Button.Colors.PRIMARY}
-                look={Button.Looks.LINK}
-            >
-                {t("plugin.decor.button.back")}
-            </Button>
+            <Flex style={{ gap: "4px" }}>
+                <Button
+                    onClick={() => {
+                        settings.store.agreedToGuidelines = true;
+                        props.onClose();
+                        openCreateDecorationModal();
+                    }}
+                >
+                    {t("plugin.decor.button.continue")}
+                </Button>
+                <Button
+                    onClick={props.onClose}
+                    color={Button.Colors.PRIMARY}
+                    look={Button.Looks.LINK}
+                >
+                    {t("plugin.decor.button.back")}
+                </Button>
+            </Flex>
         </ModalFooter>
     </ModalRoot>;
 }

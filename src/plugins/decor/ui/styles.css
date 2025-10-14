@@ -28,11 +28,6 @@
     justify-content: space-between;
 }
 
-.pc-decor-change-decoration-modal-footer-btn-container {
-    display: flex;
-    flex-direction: row-reverse;
-}
-
 .pc-decor-create-decoration-modal-content {
     display: flex;
     flex-direction: column;
@@ -53,6 +48,12 @@
     padding: 16px;
 }
 
+.pc-decor-modal-footer-btn-container {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+
 .pc-decor-create-decoration-modal-form {
     display: flex;
     flex-direction: column;
@@ -65,8 +66,10 @@
     flex-direction: column;
     overflow: hidden scroll;
     max-height: 512px;
-    width: 352px;
     gap: 12px;
+
+    /* ((80 + 8 (grid gap)) * desired columns) (scrolled takes the extra 8 padding off conveniently) */
+    width: 352px;
 }
 
 .pc-decor-sectioned-grid-list-grid {

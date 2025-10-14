@@ -8,10 +8,10 @@
 import "./FormSwitch.css";
 
 import { classes } from "@utils/misc";
-import { Text } from "@webpack/common";
 import type { PropsWithChildren, ReactNode } from "react";
 
-import { FormDivider } from "./FormDivider";
+import { Divider } from "./Divider";
+import { Span } from "./Span";
 import { Switch } from "./Switch";
 
 export interface FormSwitchProps {
@@ -27,21 +27,24 @@ export interface FormSwitchProps {
 
 export function FormSwitch({ onChange, title, value, description, disabled, className, hideBorder }: FormSwitchProps) {
     return (
-        <div className="pc-form-switch-wrapper">
+        <label className="pc-form-switch-wrapper">
             <div className={classes("pc-form-switch", className, disabled && "pc-form-switch-disabled")}>
                 <div className={"pc-form-switch-text"}>
-                    <Text variant="text-md/medium">{title}</Text>
-                    {description && <Text variant="text-sm/normal">{description}</Text>}
+                    <Span size="md" weight="medium">{title}</Span>
+                    {description && <Span size="sm" weight="normal">{description}</Span>}
                 </div>
 
                 <Switch checked={value} onChange={onChange} disabled={disabled} />
             </div>
-            {!hideBorder && <FormDivider className="pc-form-switch-border" />}
-        </div>
+            {!hideBorder && <Divider className="pc-form-switch-border" />}
+        </label>
     );
 }
 
-/** Compatibility with Discord's old FormSwitch */
-export function FormSwitchCompat(props: PropsWithChildren<any>) {
-    return <FormSwitch {...props} title={props.children ?? ""} description={props.note} />;
+// #region Old compatibility
+
+export function FormSwitchCompat({ note, children, ...restProps }: PropsWithChildren<any>) {
+    return <FormSwitch title={children ?? ""} description={note} {...restProps} />;
 }
+
+// #endregion

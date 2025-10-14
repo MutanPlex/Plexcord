@@ -6,11 +6,13 @@
  */
 
 import { t } from "@api/i18n";
+import { BaseText } from "@components/BaseText";
+import { Paragraph } from "@components/Paragraph";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
 import { downloadNotes, uploadNotes } from "@plugins/holyNotes/utils";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
 import { findByProps } from "@webpack";
-import { Button, Forms, Text } from "@webpack/common";
+import { Button } from "@webpack/common";
 
 export default ({ onClose, ...modalProps }: ModalProps & { onClose: () => void; }) => {
     const { statusTagGreen } = findByProps("statusTagGreen");
@@ -18,35 +20,35 @@ export default ({ onClose, ...modalProps }: ModalProps & { onClose: () => void; 
     return (
         <ModalRoot {...modalProps} className="pc-help-modal" size={ModalSize.LARGE}>
             <ModalHeader className="notebook-header">
-                <Text tag="h3">{t("plugin.holyNotes.modal.help.title")}</Text>
+                <BaseText tag="h3">{t("plugin.holyNotes.modal.help.title")}</BaseText>
                 <ModalCloseButton onClick={onClose} />
             </ModalHeader>
             <ModalContent>
                 <div className="pc-help-markdown">
-                    <Text>{t("plugin.holyNotes.modal.help.addingNotes")}</Text>
-                    <Forms.FormText>
+                    <BaseText>{t("plugin.holyNotes.modal.help.addingNotes")}</BaseText>
+                    <Paragraph>
                         {t("plugin.holyNotes.modal.help.addingNotesText")}
                         <br />
                         <span style={{ fontWeight: "bold" }} className={statusTagGreen}>
                             {t("plugin.holyNotes.modal.help.prototype")}:
                         </span>{" "}
                         {t("plugin.holyNotes.modal.help.noteMessage")}
-                    </Forms.FormText>
+                    </Paragraph>
                     <hr />
-                    <Text>{t("plugin.holyNotes.modal.help.deletingNotes")}</Text>
-                    <Forms.FormText>
+                    <BaseText>{t("plugin.holyNotes.modal.help.deletingNotes")}</BaseText>
+                    <Paragraph>
                         {t("plugin.holyNotes.modal.help.deletingNotesText")}
-                    </Forms.FormText>
+                    </Paragraph>
                     <hr />
-                    <Text>{t("plugin.holyNotes.modal.help.movingNotes")}</Text>
-                    <Forms.FormText>
+                    <BaseText>{t("plugin.holyNotes.modal.help.movingNotes")}</BaseText>
+                    <Paragraph>
                         {t("plugin.holyNotes.modal.help.movingNotesText")}
-                    </Forms.FormText>
+                    </Paragraph>
                     <hr />
-                    <Text>{t("plugin.holyNotes.modal.help.jumpToMessage")}</Text>
-                    <Forms.FormText>
+                    <BaseText>{t("plugin.holyNotes.modal.help.jumpToMessage")}</BaseText>
+                    <Paragraph>
                         {t("plugin.holyNotes.modal.help.jumpToMessageText")}
-                    </Forms.FormText>
+                    </Paragraph>
                 </div>
             </ModalContent>
             <ModalFooter>

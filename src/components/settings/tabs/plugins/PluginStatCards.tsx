@@ -1,29 +1,30 @@
 import "./styles.css";
 
 import { t } from "@api/i18n";
-import { Text, Tooltip } from "@webpack/common";
+import { BaseText } from "@components/BaseText";
+import { Tooltip } from "@webpack/common";
 
 export function StockPluginsCard({ totalStockPlugins, enabledStockPlugins, totalUserPlugins, enabledUserPlugins }) {
     return (
         <div className="pc-plugin-stats pc-stockplugins-stats-card">
             <div className="pc-plugin-stats-card-container">
                 <div className="pc-plugin-stats-card-section">
-                    <Text variant="text-md/bold">{t("plugins.pluginModal.enabledStock")}</Text>
-                    <Text variant="heading-xl/bold">{enabledStockPlugins}</Text>
+                    <BaseText size="md" weight="bold">{t("plugins.pluginModal.enabledStock")}</BaseText>
+                    <BaseText size="xl" weight="bold">{enabledStockPlugins}</BaseText>
                 </div>
                 <div className="pc-plugin-stats-card-divider"></div>
                 <div className="pc-plugin-stats-card-section">
-                    <Text variant="text-md/bold">{t("plugins.pluginModal.totalStock")}</Text>
-                    <Text variant="heading-xl/bold">{totalStockPlugins}</Text>
+                    <BaseText size="md" weight="bold">{t("plugins.pluginModal.totalStock")}</BaseText>
+                    <BaseText size="xl" weight="bold">{totalStockPlugins}</BaseText>
                 </div>
                 <div className="pc-plugin-stats-card-divider"></div>
                 <div className="pc-plugin-stats-card-section">
-                    <Text variant="text-md/bold">{t("plugins.pluginModal.enabledUser")}</Text>
-                    <Text variant="heading-xl/bold">{enabledUserPlugins}</Text>
+                    <BaseText size="md" weight="bold">{t("plugins.pluginModal.enabledUser")}</BaseText>
+                    <BaseText size="xl" weight="bold">{enabledUserPlugins}</BaseText>
                 </div>
                 <div className="pc-plugin-stats-card-divider"></div>
                 <div className="pc-plugin-stats-card-section">
-                    <Text variant="text-md/bold">{t("plugins.pluginModal.totalUser")}</Text>
+                    <BaseText size="md" weight="bold">{t("plugins.pluginModal.totalUser")}</BaseText>
                     {totalUserPlugins === 0 ? (
                         <Tooltip
                             text={
@@ -35,14 +36,14 @@ export function StockPluginsCard({ totalStockPlugins, enabledStockPlugins, total
                         >
                             {tooltipProps => (
                                 <span style={{ display: "inline", position: "relative" }}>
-                                    <Text variant="heading-xl/bold" {...tooltipProps}>
+                                    <BaseText size="xl" weight="bold" {...tooltipProps}>
                                         {totalUserPlugins}
-                                    </Text>
+                                    </BaseText>
                                 </span>
                             )}
                         </Tooltip>
                     ) : (
-                        <Text variant="heading-xl/bold">{totalUserPlugins}</Text>
+                        <BaseText size="xl" weight="bold">{totalUserPlugins}</BaseText>
                     )}
                 </div>
             </div>

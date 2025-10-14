@@ -7,9 +7,11 @@
 
 import { t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
+import { HeadingTertiary } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
-import { Card, Forms, TextArea, useState } from "@webpack/common";
+import { Card, TextArea, useState } from "@webpack/common";
 
 export function OnlineThemesTab() {
     const settings = useSettings(["themeLinks"]);
@@ -30,19 +32,19 @@ export function OnlineThemesTab() {
     return (
         <>
             <Card className={classes("pc-warning-card", Margins.bottom16)}>
-                <Forms.FormText>
+                <HeadingTertiary>
                     {t("themes.advanced.warning")}
-                </Forms.FormText>
+                </HeadingTertiary>
             </Card>
             <Card className="pc-settings-card">
-                <Forms.FormTitle tag="h5">{t("themes.advanced.paste")}</Forms.FormTitle>
-                <Forms.FormText>{t("themes.advanced.line")}</Forms.FormText>
-                <Forms.FormText>{t("themes.advanced.prefix")}</Forms.FormText>
-                <Forms.FormText>{t("themes.advanced.direct")}</Forms.FormText>
+                <HeadingTertiary>{t("themes.advanced.paste")}</HeadingTertiary>
+                <Paragraph>{t("themes.advanced.line")}</Paragraph>
+                <Paragraph>{t("themes.advanced.prefix")}</Paragraph>
+                <Paragraph>{t("themes.advanced.direct")}</Paragraph>
             </Card>
 
             <section>
-                <Forms.FormTitle tag="h5">{t("themes.online")}</Forms.FormTitle>
+                <HeadingTertiary>{t("themes.online")}</HeadingTertiary>
                 <TextArea
                     value={themeText}
                     onChange={setThemeText}
