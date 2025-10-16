@@ -46,7 +46,7 @@ export const HiddenServersStore: ReturnType<typeof proxyLazyWebpack<IHiddenServe
             this._hiddenGuilds.clear();
         }
 
-        private save() {
+        public save() {
             DataStore.set(DB_KEY, this._hiddenGuilds);
         }
 

@@ -18,7 +18,7 @@
 */
 
 import { t, tJsx } from "@api/i18n";
-import { definePluginSettings, Settings } from "@api/Settings";
+import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import { Divider } from "@components/Divider";
 import { ErrorCard } from "@components/ErrorCard";
@@ -37,6 +37,8 @@ import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy, findComponentByCodeLazy } from "@webpack";
 import { ApplicationAssetUtils, Button, FluxDispatcher, React, UserStore } from "@webpack/common";
 
+import { RPCSettings } from "./RPCSettings";
+
 const useProfileThemeStyle = findByCodeLazy("profileThemeStyle:", "--profile-gradient-primary-color");
 const ActivityView = findComponentByCodeLazy(".party?(0", ".card");
 
@@ -53,298 +55,32 @@ export const enum TimestampMode {
     CUSTOM,
 }
 
-const settings = definePluginSettings({
-    appID: {
-        get label() {
-            return t("plugin.customRPC.option.appId.label");
-        },
-        get description() {
-            return t("plugin.customRPC.option.appId.description");
-        },
-        type: OptionType.STRING,
-        onChange: onChange,
-        isValid: (value: string) => {
-            if (!value) return t("plugin.customRPC.error.appIdRequired");
-            if (value && !/^\d+$/.test(value)) return t("plugin.customRPC.error.appIdInvalid");
-            return true;
-        }
-    },
-    appName: {
-        get label() {
-            return t("plugin.customRPC.option.appName.label");
-        },
-        get description() {
-            return t("plugin.customRPC.option.appName.description");
-        },
-        type: OptionType.STRING,
-        onChange: onChange,
-        isValid: (value: string) => {
-            if (!value) return t("plugin.customRPC.error.appNameRequired");
-            if (value.length > 128) return t("plugin.customRPC.error.appNameInvalid");
-            return true;
-        }
-    },
-    details: {
-        get label() {
-            return t("plugin.customRPC.option.details.label");
-        },
-        get description() {
-            return t("plugin.customRPC.option.details.description");
-        },
-        type: OptionType.STRING,
-        onChange: onChange,
-        isValid: (value: string) => {
-            if (value && value.length > 128) return t("plugin.customRPC.error.detailsInvalid");
-            return true;
-        }
-    },
-    state: {
-        get label() {
-            return t("plugin.customRPC.option.state.label");
-        },
-        get description() {
-            return t("plugin.customRPC.option.state.description");
-        },
-        type: OptionType.STRING,
-        onChange: onChange,
-        isValid: (value: string) => {
-            if (value && value.length > 128) return t("plugin.customRPC.error.stateInvalid");
-            return true;
-        }
-    },
-    type: {
-        get label() {
-            return t("plugin.customRPC.option.type.label");
-        },
-        get description() {
-            return t("plugin.customRPC.option.type.description");
-        },
-        type: OptionType.SELECT,
-        onChange: onChange,
-        get options() {
-            return [
-                {
-                    label: t("plugin.customRPC.option.type.playing"),
-                    value: ActivityType.PLAYING,
-                    default: true
-                },
-                {
-                    label: t("plugin.customRPC.option.type.streaming"),
-                    value: ActivityType.STREAMING
-                },
-                {
-                    label: t("plugin.customRPC.option.type.listening"),
-                    value: ActivityType.LISTENING
-                },
-                {
-                    label: t("plugin.customRPC.option.type.watching"),
-                    value: ActivityType.WATCHING
-                },
-                {
-                    label: t("plugin.customRPC.option.type.competing"),
-                    value: ActivityType.COMPETING
-                }
-            ];
-        }
-    },
-    streamLink: {
-        get label() {
-            return t("plugin.customRPC.option.streamLink.label");
-        },
-        get description() {
-            return t("plugin.customRPC.option.streamLink.description");
-        },
-        type: OptionType.STRING,
-        onChange: onChange,
-        disabled: isStreamLinkDisabled,
-        isValid: isStreamLinkValid
-    },
-    timestampMode: {
-        get label() {
-            return t("plugin.customRPC.option.timestampMode.label");
-        },
-        get description() {
-            return t("plugin.customRPC.option.timestampMode.description");
-        },
-        type: OptionType.SELECT,
-        onChange: onChange,
-        get options() {
-            return [
-                {
-                    label: t("plugin.customRPC.option.timestampMode.none"),
-                    value: TimestampMode.NONE,
-                    default: true
-                },
-                {
-                    label: t("plugin.customRPC.option.timestampMode.sinceDiscordOpen"),
-                    value: TimestampMode.NOW
-                },
-                {
-                    label: t("plugin.customRPC.option.timestampMode.sameAsCurrentTime"),
-                    value: TimestampMode.TIME
-                },
-                {
-                    label: t("plugin.customRPC.option.timestampMode.custom"),
-                    value: TimestampMode.CUSTOM
-                }
-            ];
-        }
-    },
-    startTime: {
-        get label() {
-            return t("plugin.customRPC.option.startTime.label");
-        },
-        get description() {
-            return t("plugin.customRPC.option.startTime.description");
-        },
-        type: OptionType.NUMBER,
-        onChange: onChange,
-        disabled: isTimestampDisabled,
-        isValid: (value: number) => {
-            if (value && value < 0) return t("plugin.customRPC.error.startTimeInvalid");
-            return true;
-        }
-    },
-    endTime: {
-        get label() {
-            return t("plugin.customRPC.option.endTime.label");
-        },
-        get description() {
-            return t("plugin.customRPC.option.endTime.description");
-        },
-        type: OptionType.NUMBER,
-        onChange: onChange,
-        disabled: isTimestampDisabled,
-        isValid: (value: number) => {
-            if (value && value < 0) return t("plugin.customRPC.error.endTimeInvalid");
-            return true;
-        }
-    },
-    imageBig: {
-        get label() {
-            return t("plugin.customRPC.option.imageBig.label");
-        },
-        get description() {
-            return t("plugin.customRPC.option.imageBig.description");
-        },
-        type: OptionType.STRING,
-        onChange: onChange,
-        isValid: isImageKeyValid
-    },
-    imageBigTooltip: {
-        get label() {
-            return t("plugin.customRPC.option.imageBigTooltip.label");
-        },
-        get description() {
-            return t("plugin.customRPC.option.imageBigTooltip.description");
-        },
-        type: OptionType.STRING,
-        onChange: onChange,
-        isValid: (value: string) => {
-            if (value && value.length > 128) return t("plugin.customRPC.error.bigImageTooltipCharacters");
-            return true;
-        }
-    },
-    imageSmall: {
-        get label() {
-            return t("plugin.customRPC.option.imageSmall.label");
-        },
-        get description() {
-            return t("plugin.customRPC.option.imageSmall.description");
-        },
-        type: OptionType.STRING,
-        onChange: onChange,
-        isValid: isImageKeyValid
-    },
-    imageSmallTooltip: {
-        get label() {
-            return t("plugin.customRPC.option.imageSmallTooltip.label");
-        },
-        get description() {
-            return t("plugin.customRPC.option.imageSmallTooltip.description");
-        },
-        type: OptionType.STRING,
-        onChange: onChange,
-        isValid: (value: string) => {
-            if (value && value.length > 128) return t("plugin.customRPC.error.smallImageTooltipCharacters");
-            return true;
-        }
-    },
-    buttonOneText: {
-        get label() {
-            return t("plugin.customRPC.option.buttonOneText.label");
-        },
-        get description() {
-            return t("plugin.customRPC.option.buttonOneText.description");
-        },
-        type: OptionType.STRING,
-        onChange: onChange,
-        isValid: (value: string) => {
-            if (value && value.length > 31) return t("plugin.customRPC.error.buttonOneTextCharacters");
-            return true;
-        }
-    },
-    buttonOneURL: {
-        get label() {
-            return t("plugin.customRPC.option.buttonOneURL.label");
-        },
-        get description() {
-            return t("plugin.customRPC.option.buttonOneURL.description");
-        },
-        type: OptionType.STRING,
-        onChange: onChange
-    },
-    buttonTwoText: {
-        get label() {
-            return t("plugin.customRPC.option.buttonTwoText.label");
-        },
-        get description() {
-            return t("plugin.customRPC.option.buttonTwoText.description");
-        },
-        type: OptionType.STRING,
-        onChange: onChange,
-        isValid: (value: string) => {
-            if (value && value.length > 31) return t("plugin.customRPC.error.buttonTwoTextCharacters");
-            return true;
-        }
-    },
-    buttonTwoURL: {
-        get label() {
-            return t("plugin.customRPC.option.buttonTwoURL.label");
-        },
-        get description() {
-            return t("plugin.customRPC.option.buttonTwoURL.description");
-        },
-        type: OptionType.STRING,
-        onChange: onChange
+export const settings = definePluginSettings({
+    config: {
+        type: OptionType.COMPONENT,
+        component: RPCSettings
     }
-});
-
-function onChange() {
-    setRpc(true);
-    if (Settings.plugins.CustomRPC.enabled) setRpc();
-}
-
-function isStreamLinkDisabled() {
-    return settings.store.type !== ActivityType.STREAMING;
-}
-
-function isStreamLinkValid(value: string) {
-    if (!isStreamLinkDisabled() && !/https?:\/\/(www\.)?(twitch\.tv|youtube\.com)\/\w+/.test(value)) return t("plugin.customRPC.error.validStream");
-    if (value && value.length > 512) return t("plugin.customRPC.error.streamCharacters");
-    return true;
-}
-
-function isTimestampDisabled() {
-    return settings.store.timestampMode !== TimestampMode.CUSTOM;
-}
-
-function isImageKeyValid(value: string) {
-    if (/https?:\/\/(cdn|media)\.discordapp\.(com|net)\//.test(value)) return t("plugin.customRPC.error.dontUse");
-    if (/https?:\/\/(?!i\.)?imgur\.com\//.test(value)) return t("plugin.customRPC.error.imgur");
-    if (/https?:\/\/(?!media\.)?tenor\.com\//.test(value)) return t("plugin.customRPC.error.tenor");
-    return true;
-}
+}).withPrivateSettings<{
+    appID?: string;
+    appName?: string;
+    details?: string;
+    state?: string;
+    type?: ActivityType;
+    streamLink?: string;
+    timestampMode?: TimestampMode;
+    startTime?: number;
+    endTime?: number;
+    imageBig?: string;
+    imageBigTooltip?: string;
+    imageSmall?: string;
+    imageSmallTooltip?: string;
+    buttonOneText?: string;
+    buttonOneURL?: string;
+    buttonTwoText?: string;
+    buttonTwoURL?: string;
+    partySize?: number;
+    partyMaxSize?: number;
+}>();
 
 async function createActivity(): Promise<Activity | undefined> {
     const {
@@ -363,7 +99,10 @@ async function createActivity(): Promise<Activity | undefined> {
         buttonOneText,
         buttonOneURL,
         buttonTwoText,
-        buttonTwoURL
+        buttonTwoURL,
+        partyMaxSize,
+        partySize,
+        timestampMode
     } = settings.store;
 
     if (!appName) return;
@@ -373,13 +112,13 @@ async function createActivity(): Promise<Activity | undefined> {
         name: appName,
         state,
         details,
-        type,
+        type: type ?? ActivityType.PLAYING,
         flags: 1 << 0,
     };
 
     if (type === ActivityType.STREAMING) activity.url = streamLink;
 
-    switch (settings.store.timestampMode) {
+    switch (timestampMode) {
         case TimestampMode.NOW:
             activity.timestamps = {
                 start: Date.now()
@@ -431,6 +170,11 @@ async function createActivity(): Promise<Activity | undefined> {
         };
     }
 
+    if (partyMaxSize && partySize) {
+        activity.party = {
+            size: [partySize, partyMaxSize]
+        };
+    }
 
     for (const k in activity) {
         if (k === "type") continue;
@@ -442,7 +186,7 @@ async function createActivity(): Promise<Activity | undefined> {
     return activity;
 }
 
-async function setRpc(disable?: boolean) {
+export async function setRpc(disable?: boolean) {
     const activity: Activity | undefined = await createActivity();
 
     FluxDispatcher.dispatch({
@@ -477,7 +221,7 @@ export default definePlugin({
     ],
 
     settingsAboutComponent: () => {
-        const activity = useAwaiter(createActivity);
+        const [activity] = useAwaiter(createActivity, { fallbackValue: undefined, deps: Object.values(settings.store) });
         const gameActivityEnabled = ShowCurrentGame.useSetting();
         const { profileThemeStyle } = useProfileThemeStyle({});
 
@@ -526,8 +270,8 @@ export default definePlugin({
                 <Divider className={Margins.top8} />
 
                 <div style={{ width: "284px", ...profileThemeStyle, marginTop: 8, borderRadius: 8, background: "var(--background-mod-faint)" }}>
-                    {activity[0] && <ActivityView
-                        activity={activity[0]}
+                    {activity && <ActivityView
+                        activity={activity}
                         user={UserStore.getCurrentUser()}
                         currentUser={UserStore.getCurrentUser()}
                     />}

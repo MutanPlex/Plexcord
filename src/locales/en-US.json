@@ -2371,6 +2371,8 @@
             "image": "If you want to use an image link, download your image and reupload the image to {{imgur}} and get the image link by right-clicking the image and selecting 'Copy image address'.",
             "button": "You can't see your own buttons on your profile, but everyone else can see it fine.",
             "font": "Some weird unicode text ('fonts' 𝖑𝖎𝖐𝖊 𝖙𝖍𝖎𝖘) may cause the rich presence to not show up, try using normal letters instead.",
+            "placeholder": "Enter a value",
+            "select": "Select an option",
             "error": {
                 "notice": "Notice",
                 "sharing": "Activity Sharing isn't enabled, people won't be able to see your custom rich presence!",
@@ -2380,18 +2382,12 @@
                 "dontUse": "Don't use a Discord link. Use an Imgur image link instead.",
                 "imgur": "Imgur link must be a direct link to the image (e.g. https://i.imgur.com/...). Right click the image and click 'Copy image address'",
                 "tenor": "Tenor link must be a direct link to the image (e.g. https://media.tenor.com/...). Right click the GIF and click 'Copy image address'",
-                "appIdRequired": "Application ID is required.",
-                "appIdInvalid": "Application ID must be a number.",
-                "appNameRequired": "Application name is required.",
-                "appNameInvalid": "Application name must be not longer than 128 characters.",
-                "detailsInvalid": "Details (line 1) must be not longer than 128 characters.",
-                "stateInvalid": "State (line 2) must be not longer than 128 characters.",
+                "required": "This field is required.",
+                "tooLong": "Must be not longer than {{maxLength}} characters.",
+                "mustBeNumber": "Must be a number.",
+                "mustBePositive": "Must be a positive number.",
                 "startTimeInvalid": "Start timestamp must be greater than 0.",
-                "endTimeInvalid": "End timestamp must be greater than 0.",
-                "bigImageTooltipCharacters": "Big image tooltip must be not longer than 128 characters.",
-                "smallImageTooltipCharacters": "Small image tooltip must be not longer than 128 characters.",
-                "buttonOneTextCharacters": "Button 1 text must be not longer than 31 characters.",
-                "buttonTwoTextCharacters": "Button 2 text must be not longer than 31 characters."
+                "endTimeInvalid": "End timestamp must be greater than 0."
             },
             "option": {
                 "appId": {
@@ -2410,8 +2406,16 @@
                     "label": "State",
                     "description": "State (line 2)"
                 },
+                "partySize": {
+                    "label": "Party Size",
+                    "description": "Current party size (must be used with Max Party Size)"
+                },
+                "partyMax": {
+                    "label": "Max Party Size",
+                    "description": "Max party size (must be used with Current Party Size)"
+                },
                 "type": {
-                    "label": "Type",
+                    "label": "Activity type",
                     "description": "Activity type",
                     "playing": "Playing",
                     "streaming": "Streaming",
@@ -2432,11 +2436,11 @@
                     "custom": "Custom Time"
                 },
                 "startTime": {
-                    "label": "Start Time",
+                    "label": "Start Time (in milliseconds)",
                     "description": "Start timestamp in milliseconds (only for custom timestamp mode)"
                 },
                 "endTime": {
-                    "label": "End Time",
+                    "label": "End Time (in milliseconds)",
                     "description": "End timestamp in milliseconds (only for custom timestamp mode)"
                 },
                 "imageBig": {

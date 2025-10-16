@@ -234,7 +234,7 @@ export default definePlugin({
     authors: [Devs.amia, PcDevs.MutanPlex],
     patches: [
         {
-            find: "BkZhUF),",
+            find: ".platformSelectorPrimary,",
             replacement: {
                 match: /(?<=questId:(\i\.id).*?"secondary",)disabled:!0/,
                 replace: "onClick: () => $self.mobileQuestPatch($1)"

@@ -41,7 +41,7 @@ interface IYoutubeMusicStore {
     volume: number;
     muted: boolean;
     isSettingPosition: boolean;
-    socket: YoutubemusicSocket;
+    socket: YoutubeMusicSocket;
     openExternal(path: string): void;
     position: number;
     prev(): void;
@@ -135,7 +135,7 @@ type Message = PlayerInfo | VideoChanged | PlayerStateChanged | PositionChanged 
 
 type PlayerState = Partial<Omit<PlayerInfo, "type">>;
 
-class YoutubemusicSocket {
+class YoutubeMusicSocket {
     public onChange: (e: PlayerState) => void;
     private ready = false;
     private connecting = false;
@@ -210,7 +210,7 @@ export const YoutubeMusicStore: ReturnType<typeof proxyLazyWebpack<IYoutubeMusic
 
     class YoutubeMusicStore extends Store {
         public mPosition = 0;
-        private start = 0;
+        public start = 0;
 
         public song: Song | null = null;
         public isPlaying = false;
@@ -221,7 +221,7 @@ export const YoutubeMusicStore: ReturnType<typeof proxyLazyWebpack<IYoutubeMusic
 
         public isSettingPosition = false;
 
-        public socket = new YoutubemusicSocket((message: PlayerState) => {
+        public socket = new YoutubeMusicSocket((message: PlayerState) => {
             if (message.song) {
                 store.song = message.song;
                 store.isPlaying = !(message.song?.isPaused ?? false);
@@ -305,7 +305,7 @@ export const YoutubeMusicStore: ReturnType<typeof proxyLazyWebpack<IYoutubeMusic
             this.req("post", "/api/v1/toggle-mute");
         }
 
-        private req(method: "post" | "get" | "put", route: string, data: any = {}) {
+        public req(method: "post" | "get" | "put", route: string, data: any = {}) {
             const apiServerUrl = Settings.plugins.MusicControls.YoutubeMusicApiUrl;
             if (apiServerUrl === "") return;
             const url = apiServerUrl + route;
