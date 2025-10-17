@@ -7,7 +7,7 @@
 
 import { t } from "@api/i18n";
 import { VoiceState } from "@plexcord/discord-types";
-import { Devs } from "@utils/constants";
+import { Devs, IS_LINUX } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findByCodeLazy } from "@webpack";
 import { ChannelStore, PermissionsBits, PermissionStore, SelectedChannelStore, UserStore } from "@webpack/common";
@@ -42,6 +42,7 @@ export default definePlugin({
     description: "Instantly screenshare when joining a voice channel",
     authors: [Devs.HAHALOSAH, Devs.thororen],
     settings,
+    hidden: IS_LINUX,
     get displayDescription() {
         return t("plugin.instantScreenshare.description");
     },
@@ -66,4 +67,5 @@ export default definePlugin({
             }
         }
     },
+    getCurrentMedia,
 });

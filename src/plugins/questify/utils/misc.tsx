@@ -7,6 +7,7 @@
 
 import { classNameFactory } from "@api/Styles";
 import { questIsIgnored, settings } from "@plugins/questify/settings";
+import { getIntlMessageFromHash, runtimeHashMessageKey, runtimeHashMessageKeyLegacy } from "@utils/index";
 import { Logger } from "@utils/Logger";
 import { findStoreLazy } from "@webpack";
 import { FluxDispatcher, RestAPI, UserStore } from "@webpack/common";
@@ -20,6 +21,15 @@ export const questPath = "/quest-home";
 export const leftClick = 0;
 export const middleClick = 1;
 export const rightClick = 2;
+
+// TODO: Remove this once Discord has properly deployed the new system.
+export function getIntlMessageQuestify(key: string, values?: Record<PropertyKey, any>): string[] {
+    const remake = getIntlMessageFromHash(runtimeHashMessageKey(key), values, key);
+    const legacy = getIntlMessageFromHash(runtimeHashMessageKeyLegacy(key), values, key);
+
+    return remake.length ? remake : legacy.length ? legacy : [""];
+}
+
 
 export function setIgnoredQuestIDs(questIDs: string[], userId?: string): void {
     const currentUserID = userId ?? UserStore.getCurrentUser()?.id;
