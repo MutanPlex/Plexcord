@@ -4442,6 +4442,27 @@
                     "description": "Renkleri yalnızca özel mesajlarda uygula; sunucularda uygulama."
                 }
             }
+        },
+        "iRememberYou": {
+            "name": "IRememberYou",
+            "description": "İletişim kurduğun herkesi (sunucular dahil) yerel olarak kaydeder, kayıp durumuna karşı koruma sağlar.",
+            "section": {
+                "description": "Bahsettiğin, yanıtladığın, üyesi olduğun sunucuların sahipleri (sunucu sahibi*) veya bulunduğun sunuculardaki üyelerin listesini gösterir.",
+                "empty": "Şu anda boş.",
+                "tooltip": "{{user}}, {{updatedAtContent}} tarihinde güncellendi",
+                "owner": "Sunucu Sahibi"
+            },
+            "modal": {
+                "title": "Düzenleyici",
+                "filter": "Etikete, kullanıcı adına veya ID’ye göre filtrele",
+                "button": {
+                    "validate": "Doğrula ve Kaydet",
+                    "cancel": "İptal",
+                    "openEditor": "Düzenleyiciyi Aç",
+                    "resetData": "Verileri Sıfırla",
+                    "sure": "Emin misin?"
+                }
+            }
         }
     }
 }

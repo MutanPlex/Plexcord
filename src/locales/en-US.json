@@ -4442,6 +4442,27 @@
                     "description": "Apply colors only in direct messages; do not apply colors in servers."
                 }
             }
+        },
+        "iRememberYou": {
+            "name": "IRememberYou",
+            "description": "Locally saves everyone you've been communicating with (including servers), in case of lose",
+            "section": {
+                "description": "Provides a list of users you have mentioned or replied to, or those who own the servers you belong to (user owner*), or are members of your guild",
+                "empty": "It's empty right now.",
+                "tooltip": "{{user}}, updated at {{updatedAtContent}}",
+                "owner": "Server Owner"
+            },
+            "modal": {
+                "title": "Editor",
+                "filter": "Filter by tag, username, ID",
+                "button": {
+                    "validate": "Validate and Save",
+                    "cancel": "Cancel",
+                    "openEditor": "Open Editor",
+                    "resetData": "Reset Storage",
+                    "sure": "Are you sure?"
+                }
+            }
         }
     }
 }

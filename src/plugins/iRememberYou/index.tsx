@@ -7,6 +7,7 @@
 
 import "styles.css?managed";
 
+import { t } from "@api/i18n";
 import { DataStore } from "@api/index";
 import { addMessagePreSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { Heart } from "@components/Heart";
@@ -192,12 +193,12 @@ class DataUI {
     }
 
     renderSectionDescription() {
-        return <BaseText>{"Provides a list of users you have mentioned or replied to, or those who own the servers you belong to (owner*), or are members of your guild"}</BaseText>;
+        return <BaseText>{t("plugin.iRememberYou.section.description")}</BaseText>;
     }
 
     renderUsersCollectionAsRows(usersCollection: Data["usersCollection"]) {
         if (Object.keys(usersCollection).length === 0) {
-            return <BaseText>It's empty right now</BaseText>;
+            return <BaseText>{t("plugin.iRememberYou.section.empty")}</BaseText>;
         }
         const elements = Object.entries(usersCollection)
             .map(([_key, { users, name }]) => ({ name, users: Object.values(users) }))
@@ -235,7 +236,7 @@ class DataUI {
     userTooltipText(user: IStorageUser) {
         const { updatedAt } = user.extra || {};
         const updatedAtContent = updatedAt ? new Intl.DateTimeFormat().format(updatedAt) : null;
-        return `${user.username ?? user.tag}, updated at ${updatedAtContent}`;
+        return t("plugin.iRememberYou.section.tooltip", { user: user.username ?? user.tag, updatedAtContent });
     }
 
     renderUserRow(user: IStorageUser, allowExtra: { owner?: boolean; } = {}) {
@@ -247,7 +248,7 @@ class DataUI {
                     {this.renderUserAvatar(user)}
                     <Tooltip text={this.userTooltipText(user)}>
                         {props =>
-                            <Paragraph {...props} >{user.tag} {allowExtra.owner && user.extra?.isOwner && "(owner)"}</Paragraph>
+                            <Paragraph {...props} >{user.tag} {allowExtra.owner && user.extra?.isOwner && "(" + t("plugin.iRememberYou.section.owner") + ")"}</Paragraph>
                         }
                     </Tooltip>
                 </Flex>
@@ -261,27 +262,55 @@ class DataUI {
         return <footer>
             <Flex style={{ gap: "1.5em", marginTop: "2em" }}>
 
-                <Clickable onClick={() => Modal.openModal(props => <Modal.ModalRoot size={Modal.ModalSize.LARGE} fullscreenOnMobile={true} {...props}>
-                    <Modal.ModalHeader separator={false}>
-                        <BaseText color="header-primary" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
-                            Editor
-                        </BaseText>
-                        <Modal.ModalCloseButton onClick={props.onClose} />
-                    </Modal.ModalHeader>
-                    <Modal.ModalContent>
-                        <Flex style={{ paddingBlock: "0.5em", gap: "0.75em" }}>
-                            <Button label="Validate and save" >Validate and save</Button>
-                            <Button label="Cancel" color={Button.Colors.TRANSPARENT}>Cancel</Button>
-                        </Flex>
-                        <TextArea value={JSON.stringify(usersCollection, null, "\t")} onChange={() => { }} rows={20} />
-                    </Modal.ModalContent>
-                </Modal.ModalRoot>)}>
-                    <Paragraph style={{ cursor: "pointer" }}>Open editor</Paragraph>
+                <Clickable onClick={() => Modal.openModal(props => {
+                    const EditorModal = () => {
+                        const [jsonText, setJsonText] = React.useState(JSON.stringify(usersCollection, null, "\t"));
+                        const [error, setError] = React.useState<string | null>(null);
+
+                        const handleValidate = async () => {
+                            try {
+                                const parsed = JSON.parse(jsonText);
+                                const { plugin } = this;
+                                const data = plugin.dataManager as Data;
+                                data.usersCollection = parsed;
+                                await data.updateStorage();
+                                setError(null);
+                                props.onClose();
+                            } catch (err) {
+                                setError(err instanceof Error ? err.message : "Invalid JSON");
+                            }
+                        };
+
+                        return <Modal.ModalRoot size={Modal.ModalSize.LARGE} fullscreenOnMobile={true} {...props}>
+                            <Modal.ModalHeader separator={false}>
+                                <BaseText color="header-primary" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
+                                    {t("plugin.iRememberYou.modal.title")}
+                                </BaseText>
+                                <Modal.ModalCloseButton onClick={props.onClose} />
+                            </Modal.ModalHeader>
+                            <Modal.ModalContent>
+                                <Flex style={{ paddingBlock: "0.5em", gap: "0.75em" }}>
+                                    <Button onClick={handleValidate}>{t("plugin.iRememberYou.modal.button.validate")}</Button>
+                                    <Button color={Button.Colors.TRANSPARENT} onClick={props.onClose}>{t("plugin.iRememberYou.modal.button.cancel")}</Button>
+                                </Flex>
+                                {error && <BaseText style={{ color: "var(--text-danger)", marginTop: "0.5em" }}>{error}</BaseText>}
+                                <TextArea
+                                    value={jsonText}
+                                    onChange={setJsonText}
+                                    rows={20}
+                                    style={{ fontFamily: "monospace" }}
+                                />
+                            </Modal.ModalContent>
+                        </Modal.ModalRoot>;
+                    };
+                    return <EditorModal />;
+                })}>
+                    <Button style={{ cursor: "pointer" }}>{t("plugin.iRememberYou.modal.button.openEditor")}</Button>
                 </Clickable>
 
-                <Clickable onClick={
+                <Button color={Button.Colors.TRANSPARENT} onClick={
                     async () => {
-                        const confirmed = confirm("Sure?");
+                        const confirmed = confirm(t("plugin.iRememberYou.modal.button.sure"));
                         if (!confirmed) {
                             return;
                         }
@@ -291,8 +320,8 @@ class DataUI {
                         data.usersCollection = {};
                         await data.updateStorage();
                     }
-                }><BaseText style={{ cursor: "pointer" }}>Reset storage</BaseText>
-                </Clickable>
+                }>{t("plugin.iRememberYou.modal.button.resetData")}
+                </Button>
             </Flex>
         </footer >;
     }
@@ -306,10 +335,10 @@ class DataUI {
         const list = [...map.values()];
 
         return <section style={{ paddingBlock: "1em" }}>
-            <TextInput placeholder="Filter by tag, username" name="Filter" onChange={value => setState(value)} />
+            <TextInput placeholder={t("plugin.iRememberYou.modal.filter")} name="Filter" onChange={value => setState(value)} />
             {current &&
                 <Flex style={{ flexDirection: "column", gap: "0.5em", paddingTop: "1em" }}>
-                    {list.filter(user => user.tag.includes(current) || user.username.includes(current))
+                    {list.filter(user => user.tag.includes(current) || user.username.includes(current) || user.id.includes(current))
                         .map(user => this.renderUserRow(
                             user,
                             { owner: false }
@@ -352,6 +381,10 @@ export default definePlugin({
     authors: [PcDevs.zoodogood, PcDevs.MutanPlex],
     dependencies: ["MessageEventsAPI"],
 
+    get displayDescription() {
+        return t("plugin.iRememberYou.description");
+    },
+
     patches: [],
 
     async start() {
@@ -373,7 +406,7 @@ export default definePlugin({
         ).customSections;
 
         customSettingsSections.push(_ => ({
-            section: "iremeberyou.display-data",
+            section: "irememberyou.display-data",
             label: "IRememberYou",
             element: () => ui.toElement(data.usersCollection),
         }));
