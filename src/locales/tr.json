@@ -4420,6 +4420,28 @@
                     "description": "Sunucu davetleri için varsayılan geçici üyelik ayarı"
                 }
             }
+        },
+        "ircColors": {
+            "name": "IrcColors",
+            "description": "Sohbetteki kullanıcı adlarının renklerini IRC istemcilerindeki gibi benzersiz hale getirir.",
+            "option": {
+                "lightness": {
+                    "label": "Aydınlık",
+                    "description": "Aydınlık oranı (% cinsinden). Renkler çok açık veya koyu görünüyorsa değiştirin."
+                },
+                "memberListColors": {
+                    "label": "Üye Listesi Renkleri",
+                    "description": "Üye listesindeki rol renklerini değiştir."
+                },
+                "applyColorOnlyToUsersWithoutColor": {
+                    "label": "Sadece Rengi Olmayan Kullanıcılara Uygula",
+                    "description": "Rengi önceden tanımlanmamış kullanıcılara renk uygula."
+                },
+                "applyColorOnlyInDms": {
+                    "label": "Sadece Özel Mesajlarda Uygula",
+                    "description": "Renkleri yalnızca özel mesajlarda uygula; sunucularda uygulama."
+                }
+            }
         }
     }
 }

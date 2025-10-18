@@ -4420,6 +4420,28 @@
                     "description": "Default temporary membership for server invites"
                 }
             }
+        },
+        "ircColors": {
+            "name": "IrcColors",
+            "description": "Makes username colors in chat unique, like in IRC clients",
+            "option": {
+                "lightness": {
+                    "label": "Lightness",
+                    "description": "Lightness, in %. Change if the colors are too light or too dark"
+                },
+                "memberListColors": {
+                    "label": "Member List Colors",
+                    "description": "Replace role colors in the member list"
+                },
+                "applyColorOnlyToUsersWithoutColor": {
+                    "label": "Apply Color Only to Users Without Color",
+                    "description": "Apply colors only to users who don't have a predefined color"
+                },
+                "applyColorOnlyInDms": {
+                    "label": "Apply Color Only in DMs",
+                    "description": "Apply colors only in direct messages; do not apply colors in servers."
+                }
+            }
         }
     }
 }
