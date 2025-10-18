@@ -4388,6 +4388,38 @@
                     "cancel": "İptal"
                 }
             }
+        },
+        "inviteDefaults": {
+            "name": "InviteDefaults",
+            "description": "Sunucu davetleri oluştururken varsayılan değerleri düzenlemenizi sağlar.",
+            "option": {
+                "inviteDuration": {
+                    "label": "Davet Süresi",
+                    "description": "Sunucu davetleri için varsayılan süre",
+                    "30m": "30 Dakika",
+                    "1h": "1 Saat",
+                    "6h": "6 Saat",
+                    "12h": "12 Saat",
+                    "1d": "1 Gün",
+                    "7d": "7 Gün",
+                    "forever": "Süresiz"
+                },
+                "maxUses": {
+                    "label": "Maksimum Kullanım",
+                    "description": "Sunucu davetleri için varsayılan maksimum kullanım sayısı",
+                    "unlimited": "Sınırsız",
+                    "1": "1",
+                    "5": "5",
+                    "10": "10",
+                    "25": "25",
+                    "50": "50",
+                    "100": "100"
+                },
+                "temporaryMembership": {
+                    "label": "Geçici Üyelik",
+                    "description": "Sunucu davetleri için varsayılan geçici üyelik ayarı"
+                }
+            }
         }
     }
 }

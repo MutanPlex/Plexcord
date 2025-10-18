@@ -4388,6 +4388,38 @@
                     "cancel": "Cancel"
                 }
             }
+        },
+        "inviteDefaults": {
+            "name": "InviteDefaults",
+            "description": "Allows you to edit the default values when creating server invites.",
+            "option": {
+                "inviteDuration": {
+                    "label": "Invite Duration",
+                    "description": "Default duration for server invites",
+                    "30m": "30 Minutes",
+                    "1h": "1 Hour",
+                    "6h": "6 Hours",
+                    "12h": "12 Hours",
+                    "1d": "1 Day",
+                    "7d": "7 Days",
+                    "forever": "Forever"
+                },
+                "maxUses": {
+                    "label": "Max Uses",
+                    "description": "Default maximum uses for server invites",
+                    "unlimited": "Unlimited",
+                    "1": "1",
+                    "5": "5",
+                    "10": "10",
+                    "25": "25",
+                    "50": "50",
+                    "100": "100"
+                },
+                "temporaryMembership": {
+                    "label": "Temporary Membership",
+                    "description": "Default temporary membership for server invites"
+                }
+            }
         }
     }
 }

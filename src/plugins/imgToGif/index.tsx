@@ -81,6 +81,11 @@ export default definePlugin({
     name: "ImgToGif",
     description: "Adds a /imgtogif slash command to create a gif from any image",
     authors: [PcDevs.zyqunix, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.imgToGif.description");
+    },
+
     commands: [
         {
             inputType: ApplicationCommandInputType.BUILT_IN,
