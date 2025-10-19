@@ -4463,6 +4463,14 @@
                     "sure": "Emin misin?"
                 }
             }
+        },
+        "jumpTo": {
+            "name": "JumpTo",
+            "description": "Bir kanalın veya özel mesajın başına ya da sonuna atlamak için sağ tık menüsüne seçenekler ekler.",
+            "context": {
+                "top": "İlk Mesaja Git",
+                "bottom": "Son Mesaja Git"
+            }
         }
     }
 }

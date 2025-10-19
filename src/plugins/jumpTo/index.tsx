@@ -6,6 +6,7 @@
  */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { migratePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -36,12 +37,12 @@ const MenuPatch: NavContextMenuPatchCallback = (children, { channel }) => {
     children.push(
         <Menu.MenuItem
             id="pc-jump-to-first"
-            label="Jump To First Message"
+            label={t("plugin.jumpTo.context.top")}
             action={() => jumpToFirstMessage(channel)}
         />,
         <Menu.MenuItem
             id="pc-jump-to-bottom"
-            label="Jump To Bottom"
+            label={t("plugin.jumpTo.context.bottom")}
             action={() => jumpToBottom(channel)}
         />
     );
@@ -52,6 +53,11 @@ export default definePlugin({
     name: "JumpTo",
     description: "Adds context menu options to jump to the start or bottom of a channel/DM",
     authors: [Devs.Samwich, Devs.thororen],
+
+    get displayDescription() {
+        return t("plugin.jumpTo.description");
+    },
+
     contextMenus: {
         "channel-context": MenuPatch,
         "user-context": MenuPatch,
