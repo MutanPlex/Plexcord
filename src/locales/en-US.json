@@ -4475,6 +4475,22 @@
         "keepCurrentChannel": {
             "name": "KeepCurrentChannel",
             "description": "Attempt to navigate to the channel you were in before switching accounts or loading Discord."
+        },
+        "keyboardSounds": {
+            "name": "KeyboardSounds",
+            "description": "Adds OperaGX or osu! sound effects when typing on your keyboard.",
+            "option": {
+                "volume": {
+                    "label": "Volume",
+                    "description": "Volume of the keyboard sounds"
+                },
+                "soundPack": {
+                    "label": "Sound Pack",
+                    "description": "Sound pack to use for keyboard sounds",
+                    "operagx": "OperaGX",
+                    "osu": "osu!"
+                }
+            }
         }
     }
 }

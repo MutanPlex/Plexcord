@@ -4475,6 +4475,22 @@
         "keepCurrentChannel": {
             "name": "KeepCurrentChannel",
             "description": "Hesap değiştirirken veya Discord yüklenirken bulunduğun kanala geri dönmeye çalışır."
+        },
+        "keyboardSounds": {
+            "name": "KeyboardSounds",
+            "description": "Klavye ile yazarken OperaGX veya osu! ses efektleri ekler.",
+            "option": {
+                "volume": {
+                    "label": "Ses Seviyesi",
+                    "description": "Klavye seslerinin ses seviyesi"
+                },
+                "soundPack": {
+                    "label": "Ses Paketi",
+                    "description": "Klavye sesleri için kullanılacak ses paketi",
+                    "operagx": "OperaGX",
+                    "osu": "osu!"
+                }
+            }
         }
     }
 }
