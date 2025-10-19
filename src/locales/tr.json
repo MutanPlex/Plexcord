@@ -4471,6 +4471,10 @@
                 "top": "İlk Mesaja Git",
                 "bottom": "Son Mesaja Git"
             }
+        },
+        "keepCurrentChannel": {
+            "name": "KeepCurrentChannel",
+            "description": "Hesap değiştirirken veya Discord yüklenirken bulunduğun kanala geri dönmeye çalışır."
         }
     }
 }
