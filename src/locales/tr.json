@@ -4491,6 +4491,42 @@
                     "osu": "osu!"
                 }
             }
+        },
+        "keywordNotify": {
+            "name": "KeywordNotify",
+            "description": "Belirli anahtar kelimeler veya regex ifadeleriyle eşleşen mesajlarda bildirim gönderir.",
+            "idHolder": "ID",
+            "keywordEntry": "Anahtar Kelime Girişi",
+            "regexHolder": "örnek|regex",
+            "ignoreCase": "Büyük/Küçük Harf Duyarsız",
+            "whiteblackLabel": "Beyaz Liste / Kara Liste",
+            "tab": {
+                "title": "Anahtar Kelimeler",
+                "clearAll": "Tümünü Temizle"
+            },
+            "button": {
+                "addId": "ID Ekle",
+                "addKeyword": "Anahtar Kelime Girişi Ekle"
+            },
+            "listTypeSelector": {
+                "blacklist": "Kara Liste",
+                "whitelist": "Beyaz Liste",
+                "placeholder": "Bir liste türü seçin"
+            },
+            "option": {
+                "ignoreBots": {
+                    "label": "Botları Yoksay",
+                    "description": "Botlardan gelen mesajları yoksay"
+                },
+                "amountToKeep": {
+                    "label": "Kaydedilecek Miktar",
+                    "description": "Günlükte tutulacak mesaj sayısı"
+                },
+                "keywords": {
+                    "label": "Anahtar Kelimeler",
+                    "description": "Anahtar kelimeleri yönet"
+                }
+            }
         }
     }
 }

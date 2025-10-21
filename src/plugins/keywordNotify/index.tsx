@@ -7,6 +7,7 @@
 
 import "./style.css";
 
+import { t } from "@api/i18n";
 import { DataStore } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
@@ -134,7 +135,7 @@ function ListedIds({ listIds, setListIds }) {
                 <Flex flexDirection="row" style={{ marginBottom: "5px" }}>
                     <div style={{ flexGrow: 1 }}>
                         <TextInput
-                            placeholder="ID"
+                            placeholder={t("plugin.keywordNotify.idHolder")}
                             spellCheck={false}
                             value={currentValue}
                             onChange={e => onChange(e, index)}
@@ -167,10 +168,10 @@ function ListTypeSelector({ listType, setListType }: { listType: ListType, setLi
     return (
         <Select
             options={[
-                { label: "Whitelist", value: ListType.Whitelist },
-                { label: "Blacklist", value: ListType.BlackList }
+                { label: t("plugin.keywordNotify.listTypeSelector.whitelist"), value: ListType.Whitelist },
+                { label: t("plugin.keywordNotify.listTypeSelector.blacklist"), value: ListType.BlackList }
             ]}
-            placeholder={"Select a list type"}
+            placeholder={t("plugin.keywordNotify.listTypeSelector.placeholder")}
             isSelected={v => v === listType}
             closeOnSelect={true}
             select={setListType}
@@ -210,11 +211,11 @@ function KeywordEntries() {
     const elements = keywordEntries.map((entry, i) => {
         return (
             <>
-                <Collapsible title={`Keyword Entry ${i + 1}`}>
+                <Collapsible title={`${t("plugin.keywordNotify.keywordEntry")} ${i + 1}`}>
                     <Flex flexDirection="row">
                         <div style={{ flexGrow: 1 }}>
                             <TextInput
-                                placeholder="example|regex"
+                                placeholder={t("plugin.keywordNotify.regexHolder")}
                                 spellCheck={false}
                                 value={values[i].regex}
                                 onChange={e => setRegex(i, e)}
@@ -234,9 +235,9 @@ function KeywordEntries() {
                             setIgnoreCase(i, !values[i].ignoreCase);
                         }}
                         className={cl("switch")}
-                        title={"Ignore Case"}
+                        title={t("plugin.keywordNotify.ignoreCase")}
                     />
-                    <Heading>Whitelist/Blacklist</Heading>
+                    <Heading>{t("plugin.keywordNotify.whiteblackLabel")}</Heading>
                     <Flex flexDirection="row">
                         <div style={{ flexGrow: 1 }}>
                             <ListedIds listIds={values[i].listIds} setListIds={e => setListIds(i, e)} />
@@ -247,7 +248,7 @@ function KeywordEntries() {
                         <Button onClick={() => {
                             values[i].listIds.push("");
                             update();
-                        }}>Add ID</Button>
+                        }}>{t("plugin.keywordNotify.button.addId")}</Button>
                         <div style={{ flexGrow: 1 }}>
                             <ListTypeSelector listType={values[i].listType} setListType={e => setListType(i, e)} />
                         </div>
@@ -260,7 +261,7 @@ function KeywordEntries() {
     return (
         <>
             {elements}
-            <div><Button onClick={() => addKeywordEntry(update)}>Add Keyword Entry</Button></div>
+            <div><Button onClick={() => addKeywordEntry(update)}>{t("plugin.keywordNotify.button.addKeyword")}</Button></div>
         </>
     );
 }
@@ -303,18 +304,33 @@ function DoubleCheckmarkIcon(props: IconProps) {
 
 const settings = definePluginSettings({
     ignoreBots: {
+        get label() {
+            return t("plugin.keywordNotify.option.ignoreBots.label");
+        },
+        get description() {
+            return t("plugin.keywordNotify.option.ignoreBots.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Ignore messages from bots",
         default: true
     },
     amountToKeep: {
+        get label() {
+            return t("plugin.keywordNotify.option.amountToKeep.label");
+        },
+        get description() {
+            return t("plugin.keywordNotify.option.amountToKeep.description");
+        },
         type: OptionType.NUMBER,
-        description: "Amount of messages to keep in the log",
         default: 50
     },
     keywords: {
+        get label() {
+            return t("plugin.keywordNotify.option.keywords.label");
+        },
+        get description() {
+            return t("plugin.keywordNotify.option.keywords.description");
+        },
         type: OptionType.COMPONENT,
-        description: "Manage keywords",
         component: () => <KeywordEntries />
     }
 });
@@ -324,6 +340,11 @@ export default definePlugin({
     authors: [PcDevs.camila314, PcDevs.x3rt],
     description: "Sends a notification if a given message matches certain keywords or regexes",
     settings,
+
+    get displayDescription() {
+        return t("plugin.keywordNotify.description");
+    },
+
     patches: [
         {
             find: "#{intl::UNREADS_TAB_LABEL})}",
@@ -491,14 +512,14 @@ export default definePlugin({
     keywordTabBar() {
         return (
             <TabBar.Item className={classes(tabClass.tab, tabClass.expanded)} id={8}>
-                Keywords
+                {t("plugin.keywordNotify.tab.title")}
             </TabBar.Item>
         );
     },
 
     keywordClearButton() {
         return (
-            <Tooltip text="Clear All">
+            <Tooltip text={t("plugin.keywordNotify.tab.clearAll")}>
                 {({ onMouseLeave, onMouseEnter }) => (
                     <div
                         className={classes(tabClass.controlButton, buttonClass.button, buttonClass.tertiary, buttonClass.size32)}

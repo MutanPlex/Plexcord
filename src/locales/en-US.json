@@ -4491,6 +4491,42 @@
                     "osu": "osu!"
                 }
             }
+        },
+        "keywordNotify": {
+            "name": "KeywordNotify",
+            "description": "Sends a notification if a given message matches certain keywords or regexes",
+            "idHolder": "ID",
+            "keywordEntry": "Keyword Entry",
+            "regexHolder": "example|regex",
+            "ignoreCase": "Ignore Case",
+            "whiteblackLabel": "Whitelist/Blacklist",
+            "tab": {
+                "title": "Keywords",
+                "clearAll": "Clear All"
+            },
+            "button": {
+                "addId": "Add ID",
+                "addKeyword": "Add Keyword Entry"
+            },
+            "listTypeSelector": {
+                "blacklist": "Blacklist",
+                "whitelist": "Whitelist",
+                "placeholder": "Select a list type"
+            },
+            "option": {
+                "ignoreBots": {
+                    "label": "Ignore Bots",
+                    "description": "Ignore messages from bots"
+                },
+                "amountToKeep": {
+                    "label": "Amount to Keep",
+                    "description": "Amount of messages to keep in the log"
+                },
+                "keywords": {
+                    "label": "Keywords",
+                    "description": "Manage keywords"
+                }
+            }
         }
     }
 }
