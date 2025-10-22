@@ -4554,6 +4554,73 @@
                     "description": "Milliseconds until re-enabling global paste events after middle click."
                 }
             }
+        },
+        "listenBrainzRPC": {
+            "name": "ListenBrainzRPC",
+            "description": "Little plugin for ListenBrainz rich presence",
+            "about": {
+                "title": "About MusicBrainz API",
+                "description": "The MusicBrainz API does not require an API key, but it does require a {{link}}. For most, an email address should suffice.",
+                "userAgent": "meaningful user-agent string"
+            },
+            "option": {
+                "username": {
+                    "label": "Username",
+                    "description": "ListenBrainz username"
+                },
+                "mbContact": {
+                    "label": "MB Contact",
+                    "description": "ListenBrainz contact"
+                },
+                "shareUsername": {
+                    "label": "Share Username",
+                    "description": "show link to ListenBrainz profile (may only be visible to other users)"
+                },
+                "shareSong": {
+                    "label": "Share Song",
+                    "description": "show link to current song on ListenBrainz (may only be visible to other users)"
+                },
+                "hideWithSpotify": {
+                    "label": "Hide with Spotify",
+                    "description": "hide ListenBrainz presence if Spotify is running"
+                },
+                "hideWithActivity": {
+                    "label": "Hide with Activity",
+                    "description": "hide ListenBrainz presence if you have any other presence"
+                },
+                "useTimeBar": {
+                    "label": "Use Time Bar",
+                    "description": "use track duration to display a time bar (must be using Listening status)"
+                },
+                "statusName": {
+                    "label": "Status Name",
+                    "description": "custom status text"
+                },
+                "nameFormat": {
+                    "label": "Name Format",
+                    "description": "Show name of song and artist in status name",
+                    "custom": "Use custom status name",
+                    "artistSong": "Use format 'artist - song'",
+                    "songArtist": "Use format 'song - artist'",
+                    "artistOnly": "Use artist name only",
+                    "songOnly": "Use song name only",
+                    "albumName": "Use album name (falls back to custom status text if song has no album)"
+                },
+                "useListeningStatus": {
+                    "label": "Use Listening Status",
+                    "description": "show 'Listening to' status instead of 'Playing'"
+                },
+                "missingArt": {
+                    "label": "Missing Art",
+                    "description": "When album or album art is missing",
+                    "listenbrainzLogo": "Use large ListenBrainz logo",
+                    "generic": "Use generic placeholder"
+                },
+                "useLogo": {
+                    "label": "Use Logo",
+                    "description": "Show ListenBrainz logo on album art"
+                }
+            }
         }
     }
 }

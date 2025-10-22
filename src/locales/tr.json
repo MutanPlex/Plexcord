@@ -4554,6 +4554,73 @@
                     "description": "Orta tıklamadan sonra genel yapıştırma olaylarının yeniden etkinleştirilmesi için milisaniye cinsinden süre."
                 }
             }
+        },
+        "listenBrainzRPC": {
+            "name": "ListenBrainzRPC",
+            "description": "ListenBrainz rich presence için küçük bir eklenti.",
+            "about": {
+                "title": "MusicBrainz API Hakkında",
+                "description": "MusicBrainz API bir API anahtarı gerektirmez, ancak bir {{link}} gerektirir. Çoğu kullanıcı için bir e-posta adresi yeterlidir.",
+                "userAgent": "anlamlı bir kullanıcı aracısı (user-agent) dizesi"
+            },
+            "option": {
+                "username": {
+                    "label": "Kullanıcı Adı",
+                    "description": "ListenBrainz kullanıcı adı"
+                },
+                "mbContact": {
+                    "label": "MB İletişim",
+                    "description": "ListenBrainz iletişim bilgisi"
+                },
+                "shareUsername": {
+                    "label": "Kullanıcı Adını Paylaş",
+                    "description": "ListenBrainz profil bağlantısını göster (yalnızca diğer kullanıcılar görebilir)"
+                },
+                "shareSong": {
+                    "label": "Şarkıyı Paylaş",
+                    "description": "ListenBrainz üzerindeki mevcut şarkıya bağlantı göster (yalnızca diğer kullanıcılar görebilir)"
+                },
+                "hideWithSpotify": {
+                    "label": "Spotify Aktifken Gizle",
+                    "description": "Spotify çalışıyorsa ListenBrainz durumunu gizle"
+                },
+                "hideWithActivity": {
+                    "label": "Başka Etkinlik Varsa Gizle",
+                    "description": "Başka bir durumun varsa ListenBrainz durumunu gizle"
+                },
+                "useTimeBar": {
+                    "label": "Zaman Çubuğu Kullan",
+                    "description": "Parça süresini zaman çubuğu olarak göster (Dinleme durumu kullanılmalıdır)"
+                },
+                "statusName": {
+                    "label": "Durum Adı",
+                    "description": "Özel durum metni"
+                },
+                "nameFormat": {
+                    "label": "İsim Biçimi",
+                    "description": "Durum adında şarkı ve sanatçı adını gösterme biçimi",
+                    "custom": "Özel durum metni kullan",
+                    "artistSong": "'sanatçı - şarkı' biçimini kullan",
+                    "songArtist": "'şarkı - sanatçı' biçimini kullan",
+                    "artistOnly": "Sadece sanatçı adını kullan",
+                    "songOnly": "Sadece şarkı adını kullan",
+                    "albumName": "Albüm adını kullan (şarkının albümü yoksa özel durum metnine geri döner)"
+                },
+                "useListeningStatus": {
+                    "label": "Dinliyor Durumunu Kullan",
+                    "description": "'Oynatıyor' yerine 'Dinliyor' durumunu göster"
+                },
+                "missingArt": {
+                    "label": "Eksik Kapak Görseli",
+                    "description": "Albüm veya albüm kapağı eksik olduğunda",
+                    "listenbrainzLogo": "Büyük ListenBrainz logosunu kullan",
+                    "generic": "Genel bir yer tutucu kullan"
+                },
+                "useLogo": {
+                    "label": "Logo Kullan",
+                    "description": "Albüm kapağında ListenBrainz logosunu göster"
+                }
+            }
         }
     }
 }
