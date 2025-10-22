@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
@@ -24,27 +25,39 @@ import definePlugin, { makeRange, OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     limitTo: {
+        get label() {
+            return t("plugin.limitMiddleClickPaste.option.limitTo.label");
+        },
+        get description() {
+            return t("plugin.limitMiddleClickPaste.option.limitTo.description");
+        },
         type: OptionType.SELECT,
-        description: "Allow middle click pastes:",
-        options: [
-            {
-                label: "Whenever a text box is active",
-                value: "active",
-                default: true
-            },
-            {
-                label: "Only when clicking on a text box",
-                value: "direct"
-            },
-            {
-                label: "Never",
-                value: "never"
-            }
-        ]
+        get options() {
+            return [
+                {
+                    label: t("plugin.limitMiddleClickPaste.option.limitTo.active"),
+                    value: "active",
+                    default: true
+                },
+                {
+                    label: t("plugin.limitMiddleClickPaste.option.limitTo.direct"),
+                    value: "direct"
+                },
+                {
+                    label: t("plugin.limitMiddleClickPaste.option.limitTo.never"),
+                    value: "never"
+                }
+            ];
+        }
     },
     reenableDelay: {
+        get label() {
+            return t("plugin.limitMiddleClickPaste.option.reenableDelay.label");
+        },
+        get description() {
+            return t("plugin.limitMiddleClickPaste.option.reenableDelay.description");
+        },
         type: OptionType.SLIDER,
-        description: "Milliseconds until re-enabling global paste events after middle click.",
         markers: makeRange(0, 1000, 500),
         default: 500,
     },
@@ -56,6 +69,10 @@ export default definePlugin({
     name: "LimitMiddleClickPaste",
     description: "For middle-click autoscroll users, prevents middle-click from making unwanted pastes.",
     authors: [PcDevs.nobody, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.limitMiddleClickPaste.description");
+    },
 
     settings: settings,
 

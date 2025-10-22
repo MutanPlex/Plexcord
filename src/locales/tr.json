@@ -4537,6 +4537,23 @@
                 "m": "dakika"
             },
             "online": "{{formattedTime}} önce çevrimiçiydi"
+        },
+        "limitMiddleClickPaste": {
+            "name": "LimitMiddleClickPaste",
+            "description": "Orta tıklama ile otomatik kaydırma kullananlar için, istenmeyen yapıştırma işlemlerini engeller.",
+            "option": {
+                "limitTo": {
+                    "label": "Sınırlama",
+                    "description": "Orta tıklama ile yapıştırmaya izin ver:",
+                    "never": "Asla",
+                    "direct": "Sadece bir metin kutusuna tıklanırken",
+                    "active": "Bir metin kutusu aktifken"
+                },
+                "reenableDelay": {
+                    "label": "Yeniden Etkinleştirme Gecikmesi",
+                    "description": "Orta tıklamadan sonra genel yapıştırma olaylarının yeniden etkinleştirilmesi için milisaniye cinsinden süre."
+                }
+            }
         }
     }
 }

@@ -4537,6 +4537,23 @@
                 "m": "minute"
             },
             "online": "Online {{formattedTime}} ago"
+        },
+        "limitMiddleClickPaste": {
+            "name": "LimitMiddleClickPaste",
+            "description": "For middle-click autoscroll users, prevents middle-click from making unwanted pastes.",
+            "option": {
+                "limitTo": {
+                    "label": "Limit To",
+                    "description": "Allow middle click pastes:",
+                    "never": "Never",
+                    "direct": "Only when clicking on a text box",
+                    "active": "Whenever a text box is active"
+                },
+                "reenableDelay": {
+                    "label": "Re-enable Delay",
+                    "description": "Milliseconds until re-enabling global paste events after middle click."
+                }
+            }
         }
     }
 }
