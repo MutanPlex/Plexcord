@@ -4621,6 +4621,32 @@
                     "description": "Albüm kapağında ListenBrainz logosunu göster"
                 }
             }
+        },
+        "loadingQuotes": {
+            "name": "LoadingQuotes",
+            "description": "Discord'un yükleme alıntılarını değiştirir",
+            "option": {
+                "replaceEvents": {
+                    "label": "Etkinlikleri Değiştir",
+                    "description": "Bu eklenti özel etkinlik temalı alıntıları olan etkinlikler sırasında da uygulanmalı mı? (örn. Cadılar Bayramı)"
+                },
+                "enablePluginPresetQuotes": {
+                    "label": "Eklenti Hazır Alıntılarını Etkinleştir",
+                    "description": "Bu eklenti tarafından hazırlanan alıntıları etkinleştir"
+                },
+                "enableDiscordPresetQuotes": {
+                    "label": "Discord Hazır Alıntılarını Etkinleştir",
+                    "description": "Discord'un hazır alıntılarını etkinleştir (etkinlik alıntıları dahil, etkinlikler sırasında)"
+                },
+                "additionalQuotes": {
+                    "label": "Ek Alıntılar",
+                    "description": "Görünebilecek ek özel alıntılar, aşağıdaki ayırıcı ile ayrılmış"
+                },
+                "additionalQuotesDelimiter": {
+                    "label": "Ek Alıntılar Ayırıcısı",
+                    "description": "Ek alıntılar için ayırıcı"
+                }
+            }
         }
     }
 }

@@ -4621,6 +4621,32 @@
                     "description": "Show ListenBrainz logo on album art"
                 }
             }
+        },
+        "loadingQuotes": {
+            "name": "LoadingQuotes",
+            "description": "Replace Discord's loading quotes",
+            "option": {
+                "replaceEvents": {
+                    "label": "Replace Events",
+                    "description": "Should this plugin also apply during events with special event themed quotes? (e.g. Halloween)"
+                },
+                "enablePluginPresetQuotes": {
+                    "label": "Enable Plugin Preset Quotes",
+                    "description": "Enable the quotes preset by this plugin"
+                },
+                "enableDiscordPresetQuotes": {
+                    "label": "Enable Discord Preset Quotes",
+                    "description": "Enable Discord's preset quotes (including event quotes, during events)"
+                },
+                "additionalQuotes": {
+                    "label": "Additional Quotes",
+                    "description": "Additional custom quotes to possibly appear, separated by the below delimiter"
+                },
+                "additionalQuotesDelimiter": {
+                    "label": "Additional Quotes Delimiter",
+                    "description": "Delimiter for additional quotes"
+                }
+            }
         }
     }
 }

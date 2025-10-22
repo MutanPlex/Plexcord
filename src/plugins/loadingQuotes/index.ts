@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
@@ -28,27 +29,52 @@ const noQuotesQuote = "Did you really disable all loading quotes? What a buffoon
 
 const settings = definePluginSettings({
     replaceEvents: {
-        description: "Should this plugin also apply during events with special event themed quotes? (e.g. Halloween)",
+        get label() {
+            return t("plugin.loadingQuotes.option.replaceEvents.label");
+        },
+        get description() {
+            return t("plugin.loadingQuotes.option.replaceEvents.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     },
     enablePluginPresetQuotes: {
-        description: "Enable the quotes preset by this plugin",
+        get label() {
+            return t("plugin.loadingQuotes.option.enablePluginPresetQuotes.label");
+        },
+        get description() {
+            return t("plugin.loadingQuotes.option.enablePluginPresetQuotes.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     },
     enableDiscordPresetQuotes: {
-        description: "Enable Discord's preset quotes (including event quotes, during events)",
+        get label() {
+            return t("plugin.loadingQuotes.option.enableDiscordPresetQuotes.label");
+        },
+        get description() {
+            return t("plugin.loadingQuotes.option.enableDiscordPresetQuotes.description");
+        },
         type: OptionType.BOOLEAN,
         default: false
     },
     additionalQuotes: {
-        description: "Additional custom quotes to possibly appear, separated by the below delimiter",
+        get label() {
+            return t("plugin.loadingQuotes.option.additionalQuotes.label");
+        },
+        get description() {
+            return t("plugin.loadingQuotes.option.additionalQuotes.description");
+        },
         type: OptionType.STRING,
         default: "",
     },
     additionalQuotesDelimiter: {
-        description: "Delimiter for additional quotes",
+        get label() {
+            return t("plugin.loadingQuotes.option.additionalQuotesDelimiter.label");
+        },
+        get description() {
+            return t("plugin.loadingQuotes.option.additionalQuotesDelimiter.description");
+        },
         type: OptionType.STRING,
         default: "|",
     },
@@ -58,6 +84,10 @@ export default definePlugin({
     name: "LoadingQuotes",
     description: "Replace Discords loading quotes",
     authors: [Devs.Ven, Devs.KraXen72, Devs.UlyssesZhan],
+
+    get displayDescription() {
+        return t("plugin.loadingQuotes.description");
+    },
 
     settings,
 
