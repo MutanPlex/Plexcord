@@ -4527,6 +4527,16 @@
                     "description": "Manage keywords"
                 }
             }
+        },
+        "lastOnline": {
+            "name": "LastOnline",
+            "description": "Adds a last online indicator under usernames in your DM list and guild and GDM member list",
+            "unit": {
+                "d": "day",
+                "h": "hour",
+                "m": "minute"
+            },
+            "online": "Online {{formattedTime}} ago"
         }
     }
 }

@@ -4527,6 +4527,16 @@
                     "description": "Anahtar kelimeleri yönet"
                 }
             }
+        },
+        "lastOnline": {
+            "name": "LastOnline",
+            "description": "DM listende, sunucu ve grup DM üye listesinde kullanıcı adlarının altında son çevrimiçi olma göstergesi ekler.",
+            "unit": {
+                "d": "gün",
+                "h": "saat",
+                "m": "dakika"
+            },
+            "online": "{{formattedTime}} önce çevrimiçiydi"
         }
     }
 }
