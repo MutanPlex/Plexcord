@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { images } from "@plugins/loginWithQR/images";
 import { getIntlMessage } from "@utils/discord";
@@ -160,7 +161,7 @@ function VerifyModal({
                             {getIntlMessage("QR_CODE_LOGIN_CONFIRM")}
                         </BaseText>
                         <BaseText size="md" weight="semibold" color="text-danger">
-                            Never scan a login QR code from another user or application.
+                            {t("plugin.loginWithQR.neverScan")}
                         </BaseText>
                         <Button
                             size={Button.Sizes.LARGE}
@@ -174,7 +175,7 @@ function VerifyModal({
                             ref={buttonRef}
                             disabled={inProgress}
                         >
-                            Hold to confirm login
+                            {t("plugin.loginWithQR.hold")}
                         </Button>
                     </>
                 )}

@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Paragraph } from "@components/Paragraph";
 import { PcDevs } from "@utils/constants";
@@ -23,15 +24,24 @@ export default definePlugin({
     description: "Allows you to login to another device by scanning a login QR code, just like on mobile!",
     authors: [PcDevs.nexpid, PcDevs.MutanPlex],
 
+    get displayDescription() {
+        return t("plugin.loginWithQR.description");
+    },
+
     settings: definePluginSettings({
         scanQr: {
+            get label() {
+                return t("plugin.loginWithQR.option.scanQr.label");
+            },
+            get description() {
+                return t("plugin.loginWithQR.option.scanQr.description");
+            },
             type: OptionType.COMPONENT,
-            description: "Scan a QR code",
             component() {
                 if (!Plexcord.Plugins.plugins.LoginWithQR.started)
                     return (
                         <Paragraph>
-                            Enable the plugin and restart your client to scan a login QR code
+                            {t("plugin.loginWithQR.option.scanQr.notEnabled")}
                         </Paragraph>
                     );
 

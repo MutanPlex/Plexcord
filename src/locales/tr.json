@@ -4647,6 +4647,24 @@
                     "description": "Ek alıntılar için ayırıcı"
                 }
             }
+        },
+        "loginWithQR": {
+            "name": "LoginWithQR",
+            "description": "Tıpkı mobilde olduğu gibi, giriş QR kodunu tarayarak başka bir cihaza giriş yapmanı sağlar!",
+            "option": {
+                "scanQr": {
+                    "label": "QR Kodunu Tara",
+                    "description": "Bir QR kodunu tara",
+                    "notEnabled": "Bir giriş QR kodunu taramak için eklentiyi etkinleştir ve istemcini yeniden başlat"
+                }
+            },
+            "neverScan": "Başka bir kullanıcıdan veya uygulamadan gelen giriş QR kodunu asla tarama.",
+            "hold": "Girişi onaylamak için basılı tut",
+            "scanning": "Taranıyor...",
+            "stopScanning": "Taramayı Durdur",
+            "usingWebcam": "Web kamerası kullanarak tara",
+            "dragDrop": "Bir resmi buraya sürükleyip bırak ya da bir resim seçmek için tıkla",
+            "orPaste": "Veya panodan bir resim yapıştır!"
         }
     }
 }

@@ -4647,6 +4647,24 @@
                     "description": "Delimiter for additional quotes"
                 }
             }
+        },
+        "loginWithQR": {
+            "name": "LoginWithQR",
+            "description": "Allows you to login to another device by scanning a login QR code, just like on mobile!",
+            "option": {
+                "scanQr": {
+                    "label": "Scan QR Code",
+                    "description": "Scan a QR code",
+                    "notEnabled": "Enable the plugin and restart your client to scan a login QR code"
+                }
+            },
+            "neverScan": "Never scan a login QR code from another user or application.",
+            "hold": "Hold to confirm login",
+            "scanning": "Scanning...",
+            "stopScanning": "Stop Scanning",
+            "usingWebcam": "Scan using webcam",
+            "dragDrop": "Drag and drop an image here, or click to select an image",
+            "orPaste": "Or paste an image from your clipboard!"
         }
     }
 }

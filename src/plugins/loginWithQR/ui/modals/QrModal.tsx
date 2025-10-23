@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { images } from "@plugins/loginWithQR/images";
 import { getIntlMessage } from "@utils/discord";
@@ -466,15 +467,15 @@ function QrModal(props: ModalProps) {
                         </BaseText>
                     ) : state === LoginStateType.Camera ? (
                         <BaseText size="md" weight="semibold" color="header-primary">
-                            Scanning...
+                            {t("plugin.loginWithQR.scanning")}
                         </BaseText>
                     ) : (
                         <>
                             <BaseText size="md" weight="semibold" color="header-primary">
-                                Drag and drop an image here, or click to select an image
+                                {t("plugin.loginWithQR.dragDrop")}
                             </BaseText>
                             <BaseText size="sm" weight="medium" color="text-muted">
-                                Or paste an image from your clipboard!
+                                {t("plugin.loginWithQR.orPaste")}
                             </BaseText>
                             <br />
                             <QrCodeIcon />
@@ -509,8 +510,8 @@ function QrModal(props: ModalProps) {
                     }}
                 >
                     {state === LoginStateType.Camera
-                        ? "Stop scanning"
-                        : "Scan using webcamera"}
+                        ? t("plugin.loginWithQR.stopScanning")
+                        : t("plugin.loginWithQR.usingWebcam")}
                 </Button>
             </ModalContent>
         </ModalRoot>
