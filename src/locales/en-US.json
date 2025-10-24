@@ -812,7 +812,29 @@
         },
         "alwaysAnimate": {
             "name": "AlwaysAnimate",
-            "description": "Animates anything that can be animated"
+            "description": "Animates anything that can be animated",
+            "option": {
+                "icons": {
+                    "label": "Icons",
+                    "description": "Always animate server icons, avatars, decor and more"
+                },
+                "statusEmojis": {
+                    "label": "Status Emojis",
+                    "description": "Always animate status emojis"
+                },
+                "serverBanners": {
+                    "label": "Server Banners",
+                    "description": "Always animate server banners"
+                },
+                "nameplates": {
+                    "label": "Nameplates",
+                    "description": "Always animate nameplates"
+                },
+                "roleGradients": {
+                    "label": "Role Gradients",
+                    "description": "Always animate role gradients"
+                }
+            }
         },
         "alwaysExpandProfile": {
             "name": "AlwaysExpandProfile",
@@ -1856,7 +1878,10 @@
                 "compactExpand": "Compact Mode Expansion",
                 "selectedBorder": "Selected Tab Blue Border",
                 "selectedBackground": "Selected Tab Background Color",
-                "tabShadows": "Tab Shadow Effects"
+                "tabShadows": "Tab Shadow Effects",
+                "tabRepositioning": "Tab Repositioning (smooth position changes)",
+                "resizeHandle": "Resize Handle Fade",
+                "questActivate": "Active Quest Gradient"
             },
             "bookmark": {
                 "label": "Bookmark",
@@ -1868,7 +1893,15 @@
                 "remove": "Remove from Bookmarks",
                 "removeFolder": "Remove Bookmark from Folder",
                 "loading": "Loading bookmarks...",
-                "noBookmarks": "You have no bookmarks. You can add an open tab or hide this by right clicking it"
+                "noBookmarks": "You have no bookmarks. You can add an open tab or hide this by right clicking it",
+                "quests": "Quests",
+                "messageRequests": "Message Requests",
+                "friends": "Friends",
+                "shop": "Shop",
+                "library": "Library",
+                "discovery": "Discovery",
+                "nitro": "Nitro",
+                "specialPage": "Special Page"
             },
             "button": {
                 "save": "Save",
@@ -1941,6 +1974,14 @@
                 "widerTabsAndBookmarks": {
                     "label": "Wider Tabs and Bookmarks",
                     "description": "Extend the length of tabs and bookmarks for larger monitors"
+                },
+                "tabWidthScale": {
+                    "label": "Tab Width Scale",
+                    "description": "Tab width scale (percentage) - adjustable by dragging tab edges"
+                },
+                "renderAllTabs": {
+                    "label": "Render All Tabs",
+                    "description": "Keep all tabs cached in memory for faster switching (caches scroll position and state)"
                 },
                 "switchToExistingTab": {
                     "label": "Switch to Existing Tab",
@@ -2023,13 +2064,49 @@
                     "label": "Animation on Tab Shadows",
                     "description": "Enable shadow effects on tabs"
                 },
+                "animationTabPositioning": {
+                    "label": "Animation Tab Positioning",
+                    "description": "Enable smooth transitions when tabs move positions"
+                },
+                "animationResizeHandle": {
+                    "label": "Animation Resize Handle",
+                    "description": "Enable fade animation for resize handle"
+                },
+                "animationQuestsActive": {
+                    "label": "Animation Quests Active",
+                    "description": "Enable gradient animations on Quests tab when quests are actively running"
+                },
                 "compactAutoExpandSelected": {
                     "label": "Compact Auto-Expand Selected",
                     "description": "Automatically expand compact tabs when selected to show the full channel name"
                 },
+                "compactAutoExpandOnHover": {
+                    "label": "Compact Auto-Expand on Hover",
+                    "description": "Automatically expand compact tabs on hover to show the full channel name"
+                },
                 "openInNewTabAutoSwitch": {
                     "label": "Open in New Tab Auto-Switch",
                     "description": "Automatically switch to new tabs opened from 'Open in New Tab' context menu"
+                },
+                "bookmarksIndependentFromTabs": {
+                    "label": "Bookmarks Independent From Tabs",
+                    "description": "Bookmarks navigate independently without affecting the active tabs bar"
+                },
+                "showResizeHandle": {
+                    "label": "Show Resize Handle",
+                    "description": "Show resize handle when hovering over tabs to adjust tab width"
+                },
+                "openNewTabsInCompactMode": {
+                    "label": "Open New Tabs in Compact Mode",
+                    "description": "Open all newly created tabs in compact mode by default"
+                },
+                "oneTabPerServer": {
+                    "label": "One Tab Per Server",
+                    "description": "Limit to one tab per server, so opening a new channel in that server will use the existing tab."
+                },
+                "maxOpenTabs": {
+                    "label": "Max Open Tabs",
+                    "description": "Maximum number of open tabs (0 = unlimited)"
                 }
             },
             "tabs": {

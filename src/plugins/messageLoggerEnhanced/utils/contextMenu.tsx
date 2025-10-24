@@ -9,7 +9,7 @@ import { addContextMenuPatch, NavContextMenuPatchCallback, removeContextMenuPatc
 import { openLogModal } from "@plugins/messageLoggerEnhanced/components/LogsModal";
 import { deleteMessageIDB } from "@plugins/messageLoggerEnhanced/db";
 import { settings } from "@plugins/messageLoggerEnhanced/index";
-import { FluxDispatcher, Menu, React, Toasts } from "@webpack/common";
+import { FluxDispatcher, Menu, MessageActions, React, Toasts, UserStore } from "@webpack/common";
 
 import { addToXAndRemoveFromOpposite, ListType, removeFromX } from ".";
 
@@ -114,7 +114,33 @@ export const contextMenuPath: NavContextMenuPatchCallback = (children, props) =>
                         {renderListOption("blacklistedIds", IdType as idKeys, props)}
                         {renderListOption("whitelistedIds", IdType as idKeys, props)}
                     </React.Fragment>
-                ))}
+                ))}{
+                    settings.store.hideMessageFromMessageLoggers
+                    && props.navId === "message"
+                    && props.message?.author?.id === UserStore.getCurrentUser().id
+                    && props.message?.deleted === false
+                    && (
+                        <>
+                            <Menu.MenuSeparator />
+                            <Menu.MenuItem
+                                id="hide-from-message-loggers"
+                                label="Delete Message (Hide From Message Loggers)"
+                                color="danger"
+
+                                action={async () => {
+                                    await MessageActions.deleteMessage(props.message.channel_id, props.message.id);
+                                    MessageActions._sendMessage(props.message.channel_id, {
+                                        "content": settings.store.hideMessageFromMessageLoggersDeletedMessage,
+                                        "tts": false,
+                                        "invalidEmojis": [],
+                                        "validNonShortcutEmojis": []
+                                    }, { nonce: props.message.id });
+                                }}
+
+                            />
+                        </>
+                    )
+                }
             </Menu.MenuItem>
         );
     }

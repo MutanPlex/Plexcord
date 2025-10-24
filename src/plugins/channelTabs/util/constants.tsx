@@ -11,8 +11,7 @@ import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { ChannelTabsPreview } from "@plugins/channelTabs/components/ChannelTabsContainer";
 import { Logger } from "@utils/Logger";
-import { OptionType } from "@utils/types";
-import { findComponentByCodeLazy } from "@webpack";
+import { makeRange, OptionType } from "@utils/types";
 import { SearchableSelect, useState } from "@webpack/common";
 import { JSX } from "react";
 
@@ -35,7 +34,10 @@ function AnimationSettings(): JSX.Element {
         { label: t("plugin.channelTabs.animation.compactExpand"), value: "compact-expand", selected: settings.store.animationCompactExpand },
         { label: t("plugin.channelTabs.animation.selectedBorder"), value: "selected-border", selected: settings.store.animationSelectedBorder },
         { label: t("plugin.channelTabs.animation.selectedBackground"), value: "selected-background", selected: settings.store.animationSelectedBackground },
-        { label: t("plugin.channelTabs.animation.tabShadows"), value: "tab-shadows", selected: settings.store.animationTabShadows }
+        { label: t("plugin.channelTabs.animation.tabShadows"), value: "tab-shadows", selected: settings.store.animationTabShadows },
+        { label: t("plugin.channelTabs.animation.tabRepositioning"), value: "tab-positioning", selected: settings.store.animationTabPositioning },
+        { label: t("plugin.channelTabs.animation.resizeHandle"), value: "resize-handle", selected: settings.store.animationResizeHandle },
+        { label: t("plugin.channelTabs.animation.questActivate"), value: "quests-active", selected: settings.store.animationQuestsActive }
     ];
 
     const [currentValue, setCurrentValue] = useState(animationOptions.filter(option => option.selected));
@@ -59,6 +61,9 @@ function AnimationSettings(): JSX.Element {
         settings.store.animationSelectedBorder = enabledValues.includes("selected-border");
         settings.store.animationSelectedBackground = enabledValues.includes("selected-background");
         settings.store.animationTabShadows = enabledValues.includes("tab-shadows");
+        settings.store.animationTabPositioning = enabledValues.includes("tab-positioning");
+        settings.store.animationResizeHandle = enabledValues.includes("resize-handle");
+        settings.store.animationQuestsActive = enabledValues.includes("quests-active");
 
         setCurrentValue(enabled);
     }
@@ -203,6 +208,24 @@ export const settings = definePluginSettings({
         default: false,
         restartNeeded: false
     },
+    tabWidthScale: {
+        get label() {
+            return t("plugin.channelTabs.option.tabWidthScale.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.tabWidthScale.description");
+        },
+        type: OptionType.NUMBER,
+        default: 100,
+        hidden: true,
+        restartNeeded: false
+    },
+    renderAllTabs: {
+        type: OptionType.BOOLEAN,
+        description: "Keep all tabs cached in memory for faster switching (caches scroll position and state)",
+        default: false,
+        restartNeeded: false
+    },
     switchToExistingTab: {
         get label() {
             return t("plugin.channelTabs.option.switchToExistingTab.label");
@@ -283,7 +306,7 @@ export const settings = definePluginSettings({
             return t("plugin.channelTabs.option.hotkeyCount.description");
         },
         type: OptionType.SLIDER,
-        markers: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        markers: makeRange(1, 9, 1),
         default: 3,
         stickToMarkers: true,
     },
@@ -427,12 +450,56 @@ export const settings = definePluginSettings({
         default: true,
         hidden: true
     },
+    animationTabPositioning: {
+        get label() {
+            return t("plugin.channelTabs.option.animationTabPositioning.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.animationTabPositioning.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        hidden: true
+    },
+    animationResizeHandle: {
+        get label() {
+            return t("plugin.channelTabs.option.animationResizeHandle.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.animationResizeHandle.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        hidden: true
+    },
+    animationQuestsActive: {
+        get label() {
+            return t("plugin.channelTabs.option.animationQuestsActive.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.animationQuestsActive.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        hidden: true
+    },
     compactAutoExpandSelected: {
         get label() {
             return t("plugin.channelTabs.option.compactAutoExpandSelected.label");
         },
         get description() {
             return t("plugin.channelTabs.option.compactAutoExpandSelected.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: false
+    },
+    compactAutoExpandOnHover: {
+        get label() {
+            return t("plugin.channelTabs.option.compactAutoExpandOnHover.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.compactAutoExpandOnHover.description");
         },
         type: OptionType.BOOLEAN,
         default: true,
@@ -448,7 +515,62 @@ export const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
+    },
+    bookmarksIndependentFromTabs: {
+        get label() {
+            return t("plugin.channelTabs.option.bookmarksIndependentFromTabs.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.bookmarksIndependentFromTabs.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: false
+    },
+    showResizeHandle: {
+        get label() {
+            return t("plugin.channelTabs.option.showResizeHandle.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.showResizeHandle.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: false
+    },
+    openNewTabsInCompactMode: {
+        get label() {
+            return t("plugin.channelTabs.option.openNewTabsInCompactMode.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.openNewTabsInCompactMode.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: false,
+        restartNeeded: false
+    },
+    oneTabPerServer: {
+        get label() {
+            return t("plugin.channelTabs.option.oneTabPerServer.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.oneTabPerServer.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: false,
+        restartNeeded: false
+    },
+    maxOpenTabs: {
+        get label() {
+            return t("plugin.channelTabs.option.maxOpenTabs.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.maxOpenTabs.description");
+        },
+        type: OptionType.SLIDER,
+        markers: makeRange(0, 20, 1),
+        default: 0,
+        stickToMarkers: true,
+        restartNeeded: false
     }
 });
-
-export const CircleQuestionIcon = findComponentByCodeLazy("10.58l-3.3-3.3a1");

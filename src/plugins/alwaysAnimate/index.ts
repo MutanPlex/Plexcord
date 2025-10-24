@@ -18,13 +18,73 @@
 */
 
 import { t } from "@api/i18n";
+import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
-import definePlugin from "@utils/types";
+import definePlugin, { OptionType } from "@utils/types";
+
+const settings = definePluginSettings({
+    icons: {
+        get label() {
+            return t("plugin.alwaysAnimate.option.icons.label");
+        },
+        get description() {
+            return t("plugin.alwaysAnimate.option.icons.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: true
+    },
+    statusEmojis: {
+        get label() {
+            return t("plugin.alwaysAnimate.option.statusEmojis.label");
+        },
+        get description() {
+            return t("plugin.alwaysAnimate.option.statusEmojis.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: true
+    },
+    serverBanners: {
+        get label() {
+            return t("plugin.alwaysAnimate.option.serverBanners.label");
+        },
+        get description() {
+            return t("plugin.alwaysAnimate.option.serverBanners.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: true
+    },
+    nameplates: {
+        get label() {
+            return t("plugin.alwaysAnimate.option.nameplates.label");
+        },
+        get description() {
+            return t("plugin.alwaysAnimate.option.nameplates.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: true
+    },
+    roleGradients: {
+        get label() {
+            return t("plugin.alwaysAnimate.option.roleGradients.label");
+        },
+        get description() {
+            return t("plugin.alwaysAnimate.option.roleGradients.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: true
+    }
+});
 
 export default definePlugin({
     name: "AlwaysAnimate",
     description: "Animates anything that can be animated",
     authors: [Devs.FieryFlames],
+    settings,
 
     get displayDescription() {
         return t("plugin.alwaysAnimate.description");
@@ -33,6 +93,7 @@ export default definePlugin({
     patches: [
         {
             find: "canAnimate:",
+            predicate: () => settings.store.icons,
             all: true,
             // Some modules match the find but the replacement is returned untouched
             noWarn: true,
@@ -48,6 +109,7 @@ export default definePlugin({
         {
             // Status emojis
             find: "#{intl::GUILD_OWNER}),children:",
+            predicate: () => settings.store.statusEmojis,
             replacement: {
                 match: /(\.CUSTOM_STATUS.+?animateEmoji:)\i/,
                 replace: "$1!0"
@@ -56,6 +118,7 @@ export default definePlugin({
         {
             // Guild Banner
             find: ".animatedBannerHoverLayer,onMouseEnter:",
+            predicate: () => settings.store.serverBanners,
             replacement: {
                 match: /(\.headerContent.+?guildBanner:\i,animate:)\i/,
                 replace: "$1!0"
@@ -64,14 +127,16 @@ export default definePlugin({
         {
             // Nameplates
             find: ".MINI_PREVIEW,[",
+            predicate: () => settings.store.nameplates,
             replacement: {
-                match: /animate:\i,loop:/,
-                replace: "animate:true,loop:true,_loop:"
-            }
+                match: /animate:\i,loop:.{0,15}===\i/,
+                replace: "animate:true,loop:true"
+            },
         },
         {
             // Gradient roles in chat
             find: "=!1,contentOnly:",
+            predicate: () => settings.store.roleGradients,
             replacement: {
                 match: /animate:\i/,
                 replace: "animate:!0"
@@ -80,6 +145,7 @@ export default definePlugin({
         {
             // Gradient roles in member list
             find: '="left",className:',
+            predicate: () => settings.store.roleGradients,
             replacement: {
                 match: /,animateGradient:[^)]+\)/,
                 replace: ",animateGradient:!0"
@@ -88,6 +154,7 @@ export default definePlugin({
         {
             // Role Gradients
             find: "animateGradient:",
+            predicate: () => settings.store.roleGradients,
             all: true,
             noWarn: true,
             replacement: {

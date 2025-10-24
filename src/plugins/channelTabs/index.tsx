@@ -31,7 +31,7 @@ const contextMenuPatch: NavContextMenuPatchCallback = (children, props: { channe
             action={() => createTab({
                 guildId: channel.guild_id || "@me", // Normalize for DMs/Group Chats
                 channelId: channel.id
-            }, settings.store.openInNewTabAutoSwitch, messageId)}
+            }, settings.store.openInNewTabAutoSwitch, messageId, true, true)}
         />
     );
 };
@@ -105,6 +105,66 @@ export default definePlugin({
 
     containerHeight: 0,
 
+    flux: {
+        CHANNEL_SELECT(data: { channelId: string | null, guildId: string | null; }) {
+            // Skip if this navigation was triggered by us (clicking a tab)
+            if (ChannelTabsUtils.isNavigatingViaTab()) {
+                return;
+            }
+
+            const isViewingViaBookmark = ChannelTabsUtils.isViewingViaBookmarkMode();
+
+            let { channelId } = data;
+            let { guildId } = data;
+
+            // Detect special pages by pathname when no channelId
+            if (!channelId) {
+                const path = window.location.pathname;
+
+                if (path === "/quest-home" || path.includes("quest-home")) {
+                    channelId = "__quests__";
+                    guildId = "@me";
+                } else if (path.includes("/message-requests")) {
+                    channelId = "__message-requests__";
+                    guildId = "@me";
+                } else if (path === "/channels/@me") {
+                    channelId = "__friends__";
+                    guildId = "@me";
+                } else if (path.includes("/shop")) {
+                    channelId = "__shop__";
+                    guildId = "@me";
+                } else if (path.includes("/library")) {
+                    channelId = "__library__";
+                    guildId = "@me";
+                } else if (path.includes("/discovery")) {
+                    channelId = "__discovery__";
+                    guildId = "@me";
+                } else if (path.includes("/store")) {
+                    channelId = "__nitro__";
+                    guildId = "@me";
+                } else {
+                    // Unknown page without channelId - ignore
+                    return;
+                }
+            }
+
+            // if bookmark independent mode setting is on, navigate
+            if (isViewingViaBookmark) {
+                // dont modify tabs, just let that bookmark action happen
+                return;
+            }
+
+            // clear bookmark viewing mode only when this is NOT a bookmark navigation
+            // this happens when someone manually navigates to a channel (channel list)
+            ChannelTabsUtils.clearBookmarkViewingMode();
+
+            // At this point, channelId is guaranteed to be non-null
+            if (channelId && guildId) {
+                handleChannelSwitch({ guildId, channelId });
+            }
+        }
+    },
+
     render({ currentChannel, children }: {
         currentChannel: BasicChannelTabsProps,
         children: JSX.Element;
@@ -142,7 +202,18 @@ export default definePlugin({
     },
 
     handleNavigation(guildId: string, channelId: string) {
-        if (!guildId || !channelId) return;
+        // Skip if we initiated this navigation
+        if (ChannelTabsUtils.isNavigatingViaTab()) {
+            return;
+        }
+
+        // Skip if we're viewing via bookmarks in independent mode
+        if (ChannelTabsUtils.isViewingViaBookmarkMode()) {
+            return;
+        }
+
+        // Clear bookmark viewing mode when navigating to a regular channel
+        ChannelTabsUtils.clearBookmarkViewingMode();
 
         // wait for discord to update channel data
         requestAnimationFrame(() => {

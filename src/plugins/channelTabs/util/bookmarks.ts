@@ -19,7 +19,25 @@ export function isBookmarkFolder(bookmark: Bookmark | BookmarkFolder): bookmark 
 
 export function bookmarkPlaceholderName(bookmark: Omit<Bookmark | BookmarkFolder, "name">) {
     if (isBookmarkFolder(bookmark as Bookmark | BookmarkFolder)) return t("plugin.channelTabs.bookmark.folder");
-    const channel = ChannelStore.getChannel((bookmark as Bookmark).channelId);
+
+    const { channelId } = (bookmark as Bookmark);
+
+    // handle special synthetic pages
+    if (channelId?.startsWith("__")) {
+        const specialPagesMap: Record<string, string> = {
+            "__quests__": t("plugin.channelTabs.bookmark.quests"),
+            "__message-requests__": t("plugin.channelTabs.bookmark.messageRequests"),
+            "__friends__": t("plugin.channelTabs.bookmark.friends"),
+            "__shop__": t("plugin.channelTabs.bookmark.shop"),
+            "__library__": t("plugin.channelTabs.bookmark.library"),
+            "__discovery__": t("plugin.channelTabs.bookmark.discovery"),
+            "__nitro__": t("plugin.channelTabs.bookmark.nitro")
+        };
+
+        return specialPagesMap[channelId] || t("plugin.channelTabs.bookmark.specialPage");
+    }
+
+    const channel = ChannelStore.getChannel(channelId);
 
     if (!channel) return t("plugin.channelTabs.bookmark.label");
     if (channel.name) return `#${channel.name}`;
