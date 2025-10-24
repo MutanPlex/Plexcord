@@ -4873,6 +4873,13 @@
                     "description": "Whether the the @ symbol should be displayed on user mentions"
                 }
             }
+        },
+        "meow": {
+            "name": "Meow",
+            "description": "Adds a chatbar button to meow in chat",
+            "button": {
+                "meow": "Meow"
+            }
         }
     }
 }

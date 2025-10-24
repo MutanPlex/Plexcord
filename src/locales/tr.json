@@ -4873,6 +4873,13 @@
                     "description": "Kullanıcı bahsetmelerinde @ simgesinin gösterilip gösterilmeyeceğini belirler."
                 }
             }
+        },
+        "meow": {
+            "name": "Meow",
+            "description": "Sohbet çubuğuna, sohbette miyavlamak için bir düğme ekler.",
+            "button": {
+                "meow": "Miyav"
+            }
         }
     }
 }
