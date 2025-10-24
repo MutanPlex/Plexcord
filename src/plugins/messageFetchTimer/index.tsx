@@ -6,6 +6,7 @@
  */
 
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import { getCurrentChannel } from "@utils/discord";
@@ -26,18 +27,33 @@ const channelTimings: Map<string, { time: number; timestamp: Date; }> = new Map(
 
 const settings = definePluginSettings({
     showIcon: {
+        get label() {
+            return t("plugin.messageFetchTimer.option.showIcon.label");
+        },
+        get description() {
+            return t("plugin.messageFetchTimer.option.showIcon.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show fetch time icon in message bar",
         default: true,
     },
     showMs: {
+        get label() {
+            return t("plugin.messageFetchTimer.option.showMs.label");
+        },
+        get description() {
+            return t("plugin.messageFetchTimer.option.showMs.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show milliseconds in timing",
         default: true,
     },
     iconColor: {
+        get label() {
+            return t("plugin.messageFetchTimer.option.iconColor.label");
+        },
+        get description() {
+            return t("plugin.messageFetchTimer.option.iconColor.description");
+        },
         type: OptionType.STRING,
-        description: "Icon color (CSS color value)",
         default: "#00d166",
     }
 });
@@ -65,7 +81,7 @@ const FetchTimeButton: ChatBarButtonFactory = ({ isMainChat }) => {
 
     return (
         <ChatBarButton
-            tooltip={`Messages loaded in ${Math.round(time)}ms (${timeAgo})`}
+            tooltip={t("plugin.messageFetchTimer.loaded", { time: Math.round(time), timeAgo })}
             onClick={() => { }}
         >
             <div style={{
@@ -102,13 +118,13 @@ function formatTimeAgo(timestamp: Date): string {
     const days = Math.floor(hours / 24);
 
     if (days > 0) {
-        return `${days} day${days > 1 ? "s" : ""} ago`;
+        return `${days} ${t("plugin.messageFetchTimer.day", { s: days > 1 ? "s" : "" })}`;
     } else if (hours > 0) {
-        return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+        return `${hours} ${t("plugin.messageFetchTimer.hour", { s: hours > 1 ? "s" : "" })}`;
     } else if (minutes > 0) {
-        return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+        return `${minutes} ${t("plugin.messageFetchTimer.minute", { s: minutes > 1 ? "s" : "" })}`;
     } else {
-        return "just now";
+        return t("plugin.messageFetchTimer.justNow");
     }
 }
 
@@ -145,6 +161,10 @@ export default definePlugin({
     description: "Shows how long it took to fetch messages for the current channel",
     authors: [PcDevs.GroupXyz],
     settings,
+
+    get displayDescription() {
+        return t("plugin.messageFetchTimer.description");
+    },
 
     start() {
         FluxDispatcher.subscribe("CHANNEL_SELECT", handleChannelSelect);

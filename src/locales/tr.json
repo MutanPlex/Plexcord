@@ -4901,6 +4901,29 @@
                     "both": "Her iki taraf"
                 }
             }
+        },
+        "messageFetchTimer": {
+            "name": "MessageFetchTimer",
+            "description": "Geçerli kanalın mesajlarının ne kadar sürede yüklendiğini gösterir.",
+            "option": {
+                "showIcon": {
+                    "label": "Simgeyi Göster",
+                    "description": "Mesaj çubuğunda yükleme süresi simgesini göster"
+                },
+                "showMs": {
+                    "label": "Milisaniyeleri Göster",
+                    "description": "Zamanlamada milisaniyeleri göster"
+                },
+                "iconColor": {
+                    "label": "Simge Rengi",
+                    "description": "Simge rengi (CSS renk değeri)"
+                }
+            },
+            "loaded": "Mesajlar {{time}}ms içinde yüklendi ({{timeAgo}})",
+            "day": "gün önce",
+            "hour": "saat önce",
+            "minute": "dakika önce",
+            "justNow": "şimdi"
         }
     }
 }

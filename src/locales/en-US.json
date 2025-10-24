@@ -4901,6 +4901,29 @@
                     "both": "Both sides"
                 }
             }
+        },
+        "messageFetchTimer": {
+            "name": "MessageFetchTimer",
+            "description": "Shows how long it took to fetch messages for the current channel",
+            "option": {
+                "showIcon": {
+                    "label": "Show Icon",
+                    "description": "Show fetch time icon in message bar"
+                },
+                "showMs": {
+                    "label": "Show Milliseconds",
+                    "description": "Show milliseconds in timing"
+                },
+                "iconColor": {
+                    "label": "Icon Color",
+                    "description": "Icon color (CSS color value)"
+                }
+            },
+            "loaded": "Messages loaded in {{time}}ms ({{timeAgo}})",
+            "day": "day{{s}} ago",
+            "hour": "hour{{s}} ago",
+            "minute": "minute{{s}} ago",
+            "justNow": "just now"
         }
     }
 }
