@@ -4820,6 +4820,28 @@
                 "installed": "Yüklü!",
                 "notInstalled": "Yüklü Değil!"
             }
+        },
+        "mediaPlaybackSpeed": {
+            "name": "MediaPlaybackSpeed",
+            "description": "Medya gömülerinin (varsayılan) oynatma hızını değiştirmenizi sağlar.",
+            "playbackSpeed": "Oynatma Hızı",
+            "context": {
+                "label": "Oynatma hızı kontrolü"
+            },
+            "option": {
+                "defaultVoiceMessageSpeed": {
+                    "label": "Varsayılan Sesli Mesaj Hızı",
+                    "description": "Sesli mesajlar"
+                },
+                "defaultVideoSpeed": {
+                    "label": "Varsayılan Video Hızı",
+                    "description": "Videolar"
+                },
+                "defaultAudioSpeed": {
+                    "label": "Varsayılan Ses Hızı",
+                    "description": "Ses dosyaları"
+                }
+            }
         }
     }
 }

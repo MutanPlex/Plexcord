@@ -7,6 +7,7 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -25,21 +26,36 @@ const speeds = makeRange(min, max, 0.25);
 
 const settings = definePluginSettings({
     defaultVoiceMessageSpeed: {
+        get label() {
+            return t("plugin.mediaPlaybackSpeed.option.defaultVoiceMessageSpeed.label");
+        },
+        get description() {
+            return t("plugin.mediaPlaybackSpeed.option.defaultVoiceMessageSpeed.description");
+        },
         type: OptionType.SLIDER,
         default: 1,
-        description: "Voice messages",
         markers: speeds,
     },
     defaultVideoSpeed: {
+        get label() {
+            return t("plugin.mediaPlaybackSpeed.option.defaultVideoSpeed.label");
+        },
+        get description() {
+            return t("plugin.mediaPlaybackSpeed.option.defaultVideoSpeed.description");
+        },
         type: OptionType.SLIDER,
         default: 1,
-        description: "Videos",
         markers: speeds,
     },
     defaultAudioSpeed: {
+        get label() {
+            return t("plugin.mediaPlaybackSpeed.option.defaultAudioSpeed.label");
+        },
+        get description() {
+            return t("plugin.mediaPlaybackSpeed.option.defaultAudioSpeed.description");
+        },
         type: OptionType.SLIDER,
         default: 1,
-        description: "Audios",
         markers: speeds,
     },
 });
@@ -50,6 +66,10 @@ export default definePlugin({
     name: "MediaPlaybackSpeed",
     description: "Allows changing the (default) playback speed of media embeds",
     authors: [Devs.D3SOX, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.mediaPlaybackSpeed.description");
+    },
 
     settings,
 
@@ -78,7 +98,7 @@ export default definePlugin({
         }, [mediaRef]);
 
         return (
-            <Tooltip text="Playback speed">
+            <Tooltip text={t("plugin.mediaPlaybackSpeed.playbackSpeed")}>
                 {tooltipProps => (
                     <button
                         {...tooltipProps}
@@ -88,10 +108,10 @@ export default definePlugin({
                                 <Menu.Menu
                                     navId="pc-playback-speed"
                                     onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-                                    aria-label="Playback speed control"
+                                    aria-label={t("plugin.mediaPlaybackSpeed.context.label")}
                                 >
                                     <Menu.MenuGroup
-                                        label="Playback speed"
+                                        label={t("plugin.mediaPlaybackSpeed.playbackSpeed")}
                                     >
                                         {speeds.map(speed => (
                                             <Menu.MenuItem

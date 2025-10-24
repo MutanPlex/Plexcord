@@ -4820,6 +4820,28 @@
                 "installed": "Installed!",
                 "notInstalled": "Not Installed!"
             }
+        },
+        "mediaPlaybackSpeed": {
+            "name": "MediaPlaybackSpeed",
+            "description": "Allows changing the (default) playback speed of media embeds",
+            "playbackSpeed": "Playback Speed",
+            "context": {
+                "label": "Playback speed control"
+            },
+            "option": {
+                "defaultVoiceMessageSpeed": {
+                    "label": "Default Voice Message Speed",
+                    "description": "Voice messages"
+                },
+                "defaultVideoSpeed": {
+                    "label": "Default Video Speed",
+                    "description": "Videos"
+                },
+                "defaultAudioSpeed": {
+                    "label": "Default Audio Speed",
+                    "description": "Audios"
+                }
+            }
         }
     }
 }
