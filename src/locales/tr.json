@@ -4924,6 +4924,44 @@
             "hour": "saat önce",
             "minute": "dakika önce",
             "justNow": "şimdi"
+        },
+        "messageLatency": {
+            "name": "MessageLatency",
+            "description": "Gönderilmesi ≥n saniye süren mesajlar için bir gösterge ekler.",
+            "day": "gün",
+            "days": "gün",
+            "hour": "saat",
+            "hours": "saat",
+            "minute": "dakika",
+            "minutes": "dakika",
+            "second": "saniye",
+            "seconds": "saniye",
+            "millisecond": "milisaniye",
+            "milliseconds": "milisaniye",
+            "and": "ve",
+            "oldKotlinDetected": "Kullanıcının eski bir Discord Android istemcisi kullandığından şüpheleniliyor.",
+            "ahead": "Bu kullanıcının saati {{delta}} ileri.",
+            "delay": "Bu mesaj {{delta}} gecikmeyle gönderildi.",
+            "delayedMessage": "Gecikmeli Mesaj",
+            "oldAndroidClient": "Eski Discord Android istemcisi",
+            "option": {
+                "latency": {
+                    "label": "Gecikme",
+                    "description": "Gecikme göstergesi için saniye cinsinden eşik değeri"
+                },
+                "detectDiscordKotlin": {
+                    "label": "Discord Kotlin'i Algıla",
+                    "description": "Eski Discord Android istemcilerini algıla"
+                },
+                "showMillis": {
+                    "label": "Milisaniyeleri Göster",
+                    "description": "Milisaniyeleri göster"
+                },
+                "ignoreSelf": {
+                    "label": "Kendimi Yoksay",
+                    "description": "Kendi mesajlarına gösterge ekleme"
+                }
+            }
         }
     }
 }

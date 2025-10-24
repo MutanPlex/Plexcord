@@ -4924,6 +4924,44 @@
             "hour": "hour{{s}} ago",
             "minute": "minute{{s}} ago",
             "justNow": "just now"
+        },
+        "messageLatency": {
+            "name": "MessageLatency",
+            "description": "Displays an indicator for messages that took ≥n seconds to send",
+            "day": "day",
+            "days": "days",
+            "hour": "hour",
+            "hours": "hours",
+            "minute": "minute",
+            "minutes": "minutes",
+            "second": "second",
+            "seconds": "seconds",
+            "millisecond": "millisecond",
+            "milliseconds": "milliseconds",
+            "and": "and",
+            "oldKotlinDetected": "User is suspected to be on an old Discord Android client.",
+            "ahead": "This user's clock is {{delta}} ahead.",
+            "delay": "This message was sent with a delay of {{delta}}.",
+            "delayedMessage": "Delayed Message",
+            "oldAndroidClient": "Old Discord Android client",
+            "option": {
+                "latency": {
+                    "label": "Latency",
+                    "description": "Threshold in seconds for latency indicator"
+                },
+                "detectDiscordKotlin": {
+                    "label": "Detect Discord Kotlin",
+                    "description": "Detect old Discord Android clients"
+                },
+                "showMillis": {
+                    "label": "Show Milliseconds",
+                    "description": "Show milliseconds"
+                },
+                "ignoreSelf": {
+                    "label": "Ignore Self",
+                    "description": "Don't add indicator to your own messages"
+                }
+            }
         }
     }
 }
