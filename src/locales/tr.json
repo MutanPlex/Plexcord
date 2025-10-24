@@ -4855,6 +4855,28 @@
             "button": {
                 "meow": "Miyav"
             }
+        },
+        "messageClickActions": {
+            "name": "MessageClickActions",
+            "description": "Backspace tuşunu basılı tutup tıklayarak silmeyi, çift tıklayarak düzenleme veya yanıtlamayı sağlar.",
+            "option": {
+                "enableDeleteOnClick": {
+                    "label": "Tıklamayla Silmeyi Etkinleştir",
+                    "description": "Backspace tuşunu basılı tutarken tıklamayla silmeyi etkinleştir"
+                },
+                "enableClickToEdit": {
+                    "label": "Tıklamayla Düzenlemeyi Etkinleştir",
+                    "description": "Çift tıklamayla düzenlemeyi etkinleştir"
+                },
+                "enableDoubleClickToReply": {
+                    "label": "Çift Tıklamayla Yanıtlamayı Etkinleştir",
+                    "description": "Çift tıklamayla yanıtlamayı etkinleştir"
+                },
+                "requireModifier": {
+                    "label": "Değiştirici Tuş Gerekli",
+                    "description": "Yalnızca shift/ctrl tuşu basılıyken çift tıklama eylemlerini gerçekleştir"
+                }
+            }
         }
     }
 }

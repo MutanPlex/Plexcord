@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { MessageFlags } from "@plexcord/discord-types/enums";
 import { Devs } from "@utils/constants";
@@ -35,23 +36,43 @@ const focusChanged = () => !WindowStore.isFocused() && (isDeletePressed = false)
 
 const settings = definePluginSettings({
     enableDeleteOnClick: {
+        get label() {
+            return t("plugin.messageClickActions.option.enableDeleteOnClick.label");
+        },
+        get description() {
+            return t("plugin.messageClickActions.option.enableDeleteOnClick.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Enable delete on click while holding backspace",
         default: true
     },
     enableDoubleClickToEdit: {
+        get label() {
+            return t("plugin.messageClickActions.option.enableDoubleClickToEdit.label");
+        },
+        get description() {
+            return t("plugin.messageClickActions.option.enableDoubleClickToEdit.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Enable double click to edit",
         default: true
     },
     enableDoubleClickToReply: {
+        get label() {
+            return t("plugin.messageClickActions.option.enableDoubleClickToReply.label");
+        },
+        get description() {
+            return t("plugin.messageClickActions.option.enableDoubleClickToReply.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Enable double click to reply",
         default: true
     },
     requireModifier: {
+        get label() {
+            return t("plugin.messageClickActions.option.requireModifier.label");
+        },
+        get description() {
+            return t("plugin.messageClickActions.option.requireModifier.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Only do double click actions when shift/ctrl is held",
         default: false
     }
 });
@@ -60,6 +81,10 @@ export default definePlugin({
     name: "MessageClickActions",
     description: "Hold Backspace and click to delete, double click to edit/reply",
     authors: [Devs.Ven],
+
+    get displayDescription() {
+        return t("plugin.messageClickActions.description");
+    },
 
     settings,
 
