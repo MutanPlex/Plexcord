@@ -4877,6 +4877,30 @@
                     "description": "Only do double click actions when shift/ctrl is held"
                 }
             }
+        },
+        "messageColors": {
+            "name": "MessageColors",
+            "description": "Displays color codes like #FF0042 inside of messages",
+            "option": {
+                "renderType": {
+                    "label": "Render Type",
+                    "description": "How to render colors",
+                    "textColor": "Text color",
+                    "block": "Block nearby",
+                    "backgroundColor": "Background color"
+                },
+                "enableShortHexCodes": {
+                    "label": "Enable Short Hex Codes",
+                    "description": "Enable 3 char hex-code like #39f"
+                },
+                "blockView": {
+                    "label": "Block View Type",
+                    "description": "How to display color blocks",
+                    "right": "Right side",
+                    "left": "Left side",
+                    "both": "Both sides"
+                }
+            }
         }
     }
 }

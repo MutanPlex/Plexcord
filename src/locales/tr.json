@@ -4877,6 +4877,30 @@
                     "description": "Yalnızca shift/ctrl tuşu basılıyken çift tıklama eylemlerini gerçekleştir"
                 }
             }
+        },
+        "messageColors": {
+            "name": "MessageColors",
+            "description": "Mesajlarda #FF0042 gibi renk kodlarını gösterir.",
+            "option": {
+                "renderType": {
+                    "label": "Görselleştirme Türü",
+                    "description": "Renklerin nasıl görüntüleneceğini belirler",
+                    "textColor": "Metin rengi",
+                    "block": "Yanında blok",
+                    "backgroundColor": "Arka plan rengi"
+                },
+                "enableShortHexCodes": {
+                    "label": "Kısa Hex Kodlarını Etkinleştir",
+                    "description": "#39f gibi 3 karakterli hex kodlarını etkinleştir"
+                },
+                "blockView": {
+                    "label": "Blok Görünüm Türü",
+                    "description": "Renk bloklarının nasıl görüntüleneceğini belirler",
+                    "right": "Sağ taraf",
+                    "left": "Sol taraf",
+                    "both": "Her iki taraf"
+                }
+            }
         }
     }
 }

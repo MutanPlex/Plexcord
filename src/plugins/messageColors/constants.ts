@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { OptionType } from "@utils/types";
 
@@ -22,50 +23,69 @@ export const enum BlockDisplayType {
 
 export const settings = definePluginSettings({
     renderType: {
+        get label() {
+            return t("plugin.messageColors.option.renderType.label");
+        },
+        get description() {
+            return t("plugin.messageColors.option.renderType.description");
+        },
         type: OptionType.SELECT,
-        description: "How to render colors",
-        options: [
-            {
-                label: "Text color",
-                value: RenderType.FOREGROUND,
-                default: true,
-            },
-            {
-                label: "Block nearby",
-                value: RenderType.BLOCK,
-            },
-            {
-                label: "Background color",
-                value: RenderType.BACKGROUND
-            },
-        ]
+        get options() {
+            return [
+                {
+                    label: t("plugin.messageColors.option.renderType.textColor"),
+                    value: RenderType.FOREGROUND,
+                    default: true,
+                },
+                {
+                    label: t("plugin.messageColors.option.renderType.block"),
+                    value: RenderType.BLOCK,
+                },
+                {
+                    label: t("plugin.messageColors.option.renderType.backgroundColor"),
+                    value: RenderType.BACKGROUND
+                },
+            ];
+        }
     },
     enableShortHexCodes: {
+        get label() {
+            return t("plugin.messageColors.option.enableShortHexCodes.label");
+        },
+        get description() {
+            return t("plugin.messageColors.option.enableShortHexCodes.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Enable 3 char hex-code like #39f",
         default: true,
         // Regex are created on the start, so without restart nothing would change
         restartNeeded: true
     },
     blockView: {
+        get label() {
+            return t("plugin.messageColors.option.blockView.label");
+        },
+        get description() {
+            return t("plugin.messageColors.option.blockView.description");
+        },
         type: OptionType.SELECT,
         disabled: () => settings.store.renderType !== RenderType.BLOCK,
-        description: "Where to display colored block",
-        options: [
-            {
-                label: "Right side",
-                value: BlockDisplayType.RIGHT,
-                default: true
-            },
-            {
-                label: "Left side",
-                value: BlockDisplayType.LEFT
-            },
-            {
-                label: "Both sides",
-                value: BlockDisplayType.BOTH
-            }
-        ]
+        get options() {
+            return [
+                {
+                    label: t("plugin.messageColors.option.blockView.right"),
+                    value: BlockDisplayType.RIGHT,
+                    default: true
+                },
+                {
+                    label: t("plugin.messageColors.option.blockView.left"),
+                    value: BlockDisplayType.LEFT
+                },
+                {
+                    label: t("plugin.messageColors.option.blockView.both"),
+                    value: BlockDisplayType.BOTH
+                }
+            ];
+        }
     }
 });
 

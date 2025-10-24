@@ -7,6 +7,7 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { StartAt } from "@utils/types";
@@ -30,6 +31,11 @@ export default definePlugin({
     name: "MessageColors",
     description: "Displays color codes like #FF0042 inside of messages",
     settings,
+
+    get displayDescription() {
+        return t("plugin.messageColors.description");
+    },
+
     patches: [
         // Create a new markdown rule, so it parses just like any other features
         // Like bolding, spoilers, mentions, etc
