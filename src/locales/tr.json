@@ -4863,6 +4863,16 @@
             "onlineThisChannel": "{{formattedOnlineCount}} bu kanalda çevrimiçi",
             "totalMembers": "{{formattedTotalCount}} sunucudaki toplam üye",
             "totalVoice": "{{formattedVoiceCount}} sesli kanallarda üye"
+        },
+        "mentionAvatars": {
+            "name": "MentionAvatars",
+            "description": "Bahsetmeler içinde kullanıcı avatarlarını ve rol simgelerini gösterir.",
+            "option": {
+                "showAtSymbol": {
+                    "label": "@ Simgesini Göster",
+                    "description": "Kullanıcı bahsetmelerinde @ simgesinin gösterilip gösterilmeyeceğini belirler."
+                }
+            }
         }
     }
 }

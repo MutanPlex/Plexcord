@@ -4863,6 +4863,16 @@
             "onlineThisChannel": "{{formattedOnlineCount}} online in this channel",
             "totalMembers": "{{formattedTotalCount}} total server members",
             "totalVoice": "{{formattedVoiceCount}} members in voice"
+        },
+        "mentionAvatars": {
+            "name": "MentionAvatars",
+            "description": "Shows user avatars and role icons inside mentions",
+            "option": {
+                "showAtSymbol": {
+                    "label": "Show @ Symbol",
+                    "description": "Whether the the @ symbol should be displayed on user mentions"
+                }
+            }
         }
     }
 }
