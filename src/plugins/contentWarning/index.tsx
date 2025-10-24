@@ -5,9 +5,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import "./styles.css";
+
 import { t } from "@api/i18n";
 import { DataStore } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
+import { classNameFactory } from "@api/Styles";
 import { Flex } from "@components/Flex";
 import { DeleteIcon } from "@components/Icons";
 import { HeadingTertiary } from "@components/index";
@@ -16,6 +19,7 @@ import { useForceUpdater } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { Button, TextInput, useState } from "@webpack/common";
 
+const cl = classNameFactory("pc-content-warning-");
 const WORDS_KEY = "ContentWarning_words";
 
 let triggerWords = [""];
@@ -31,26 +35,31 @@ function safeMatchesRegex(s: string, r: string) {
 
 function TriggerContainer({ child }) {
     const [visible, setVisible] = useState(false);
+    const { onClick } = settings.store;
+
+    const className = onClick ? cl("container") : "";
 
     if (visible) {
         return child;
     } else {
-        return (<div onClick={() => setVisible(true)}>
-            <div style={{
-                filter: "blur(4px) brightness(70%)",
-                transition: "filter 0.2s ease-in-out",
-                cursor: "pointer",
-            }}
+        return (
+            <div
+                className={className}
+                onClick={() => onClick && setVisible(true)}
                 onMouseEnter={event => {
-                    event.currentTarget.style.filter = "none";
+                    if (!onClick) {
+                        event.currentTarget.className = cl("enter");
+                    }
                 }}
                 onMouseLeave={event => {
-                    event.currentTarget.style.filter = "blur(4px) brightness(70%)";
+                    if (!onClick) {
+                        event.currentTarget.className = cl("leave");
+                    }
                 }}
             >
                 {child}
             </div>
-        </div>);
+        );
     }
 }
 
@@ -119,11 +128,12 @@ function FlaggedWords() {
             />
         );
     });
-
-    return (<>
-        <HeadingTertiary>{t("plugin.contentWarning.option.flagged.flagged")}</HeadingTertiary>
-        {inputs}
-    </>);
+    return (
+        <>
+            <HeadingTertiary>{t("plugin.contentWarning.option.flagged.flagged")}</HeadingTertiary>
+            {inputs}
+        </>
+    );
 }
 
 const settings = definePluginSettings({
@@ -133,6 +143,16 @@ const settings = definePluginSettings({
         },
         type: OptionType.COMPONENT,
         component: () => <FlaggedWords />,
+    },
+    onClick: {
+        get label() {
+            return t("plugin.contentWarning.option.onClick.label");
+        },
+        get description() {
+            return t("plugin.contentWarning.option.onClick.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: false
     }
 });
 
@@ -149,13 +169,13 @@ export default definePlugin({
             find: ".VOICE_HANGOUT_INVITE?",
             replacement: {
                 match: /(compact:\i}=(\i).+?)(\(0,.+\}\)\]\}\))/,
-                replace: "$1 $self.modify($2,$3)"
+                replace: "$1 $self.modify(arguments[0].message,$3)"
             }
         }
     ],
 
-    modify(e, child) {
-        if (triggerWords.some(word => safeMatchesRegex(e.message.content, word))) {
+    modify(message, child) {
+        if (triggerWords.some(w => safeMatchesRegex(message.content, w))) {
             return <TriggerContainer child={child} />;
         } else {
             return child;

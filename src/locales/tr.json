@@ -2229,6 +2229,10 @@
                     "flagged": "İşaretlenmiş Kelimeler",
                     "placeholder": "Kelime"
                 }
+            },
+            "onClick": {
+                "label": "Tıklama Üzerine",
+                "description": "İçeriği yalnızca fareyle üzerine gelince değil, tıklanınca göster"
             }
         },
         "copyEmojiMarkdown": {
@@ -4665,6 +4669,80 @@
             "usingWebcam": "Web kamerası kullanarak tara",
             "dragDrop": "Bir resmi buraya sürükleyip bırak ya da bir resim seçmek için tıkla",
             "orPaste": "Veya panodan bir resim yapıştır!"
+        },
+        "mediaDownloader": {
+            "name": "MediaDownloader",
+            "description": "YouTube, Twitter, Reddit ve daha fazlasından videolar indirip göndermenizi sağlar.",
+            "downloading": "Video indiriliyor...",
+            "ffmpegWarning": "FFmpeg algılanamadı. Daha düşük indirme kalitesi ve eksik özellikler yaşayabilirsiniz.",
+            "error": "Hata!",
+            "done": "Tamamlandı!",
+            "noGoodStreams": "Uygun akış bulunamadı. Başarılı bir indirme olasılığını artırmak için ffmpeg kurmayı düşünün.",
+            "failed": "Medya indirilemedi.",
+            "button": {
+                "download": "İndir",
+                "cancel": "İndirmeyi İptal Et"
+            },
+            "option": {
+                "supportedWebsites": {
+                    "label": "Desteklenen Web Siteleri",
+                    "description": "Desteklenen web sitelerinin listesi için bağlantıya bakın.",
+                    "link": "Desteklenen web sitelerini görmek için tıklayın."
+                },
+                "showProgress": {
+                    "label": "İlerlemeyi Göster",
+                    "description": "İndirme ilerlemesini gösteren bir Plexcord mesajı gönder."
+                },
+                "showFfmpegWarning": {
+                    "label": "FFmpeg Uyarısını Göster",
+                    "description": "FFmpeg yüklü değilse bir uyarı mesajı göster."
+                },
+                "defaultGifQuality": {
+                    "label": "Varsayılan GIF Kalitesi",
+                    "description": "GIF indirirken bir değer belirtilmemişse kullanılacak kalite seviyesi. 1 ile 5 arasında bir sayı."
+                },
+                "ytdlpArgs": {
+                    "label": "yt-dlp Argümanları",
+                    "description": "yt-dlp’ye iletilecek ek argümanlar. Bu, varsayılan eklenti argümanlarını (örneğin format seçimi) geçersiz kılabilir. Not: çıktıyı değiştiriyorsanız, dosya adının `download` ile başladığından emin olun."
+                },
+                "ffmpegArgs": {
+                    "label": "FFmpeg Argümanları",
+                    "description": "ffmpeg’e iletilecek ek argümanlar. Bu, varsayılan eklenti argümanlarını (örneğin otomatik ölçekleme) geçersiz kılabilir. Not: çıktıyı değiştiriyorsanız, dosya adının `remux` ile başladığından emin olun."
+                }
+            },
+            "command": {
+                "download": {
+                    "description": "Video, ses veya GIF indirip gönderir.",
+                    "url": "yt-dlp tarafından desteklenen herhangi bir videonun URL’si.",
+                    "format": {
+                        "description": "Video mu, ses mi indirileceğini belirtir.",
+                        "video": "Video",
+                        "audio": "Ses",
+                        "gif": "GIF"
+                    },
+                    "gifQuality": "GIF kullanırken kalite seviyesi. GIF çok büyükse bu sayıyı azaltmayı deneyin.",
+                    "args": {
+                        "ytdlp": "yt-dlp’ye iletilecek ek argümanlar. Bunlar ayarlarda belirtilen argümanların önüne geçer. Bu, varsayılan eklenti argümanlarını (örneğin format seçimi) geçersiz kılabilir. Not: çıktıyı değiştiriyorsanız, dosya adının `download` ile başladığından emin olun.",
+                        "ffmpeg": "ffmpeg’e iletilecek ek argümanlar. Bunlar ayarlarda belirtilen argümanların önüne geçer. Bu, varsayılan eklenti argümanlarını (örneğin otomatik ölçekleme) geçersiz kılabilir. Not: çıktıyı değiştiriyorsanız, dosya adının `remux` ile başladığından emin olun."
+                    }
+                }
+            },
+            "modal": {
+                "title": "MediaDownloader: Eksik bağımlılıklar",
+                "description": {
+                    "first": "MediaDownloader eklentisi, sisteminizde yt-dlp’nin yüklü olmasını gerektirir. Daha yüksek kaliteli videolar ve GIF’ler için isteğe bağlı olarak ffmpeg de yüklenebilir.",
+                    "second": "yt-dlp veya ffmpeg’in nasıl kurulacağını bilmiyorsanız, aşağıdaki kurulum kılavuzlarına bakın (nasıl kurulacağını biliyorsanız, PATH’e eklendiğinden emin olun).",
+                    "note": "Not: yt-dlp veya ffmpeg kurulumundan sonra eklentinin bunları algılaması için Discord’u tamamen yeniden başlatmanız gerekebilir."
+                },
+                "ytDlpLink": "yt-dlp Kurulum Kılavuzu",
+                "ffmpegLink": "Resmî Olmayan ffmpeg Kurulum Kılavuzu",
+                "ytDlpStatus": "yt-dlp durumu",
+                "checkAgain": "Yeniden Kontrol Et",
+                "ffmpegStatus": "ffmpeg durumu",
+                "checking": "Kontrol ediliyor...",
+                "installed": "Yüklü!",
+                "notInstalled": "Yüklü Değil!"
+            }
         }
     }
 }

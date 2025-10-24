@@ -9,6 +9,7 @@ import "./style.css";
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, sendBotMessage } from "@api/Commands";
 import * as DataStore from "@api/DataStore";
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -75,7 +76,9 @@ const CancelButton = [{
             name: "⚪",
             animated: "media-downloader-stop-download"
         },
-        label: "Cancel download",
+        get label() {
+            return t("plugin.mediaDownloader.button.cancel");
+        },
         id: "0,0",
         style: 4,
         type: 2,
@@ -96,7 +99,10 @@ async function sendProgress(channelId: string, promise: Promise<{
         return await promise;
     }
     const clydeMessage = sendBotMessage(channelId, {
-        content: "Downloading video...",
+        author: {
+            username: "Plexcord",
+        },
+        content: t("plugin.mediaDownloader.downloading"),
         components: CancelButton
     });
     const updateMessage = (stdout: string, append?: string) => {
@@ -105,7 +111,7 @@ async function sendProgress(channelId: string, promise: Promise<{
             type: "MESSAGE_UPDATE",
             message: {
                 ...clydeMessage,
-                content: `Downloading video...\n\`\`\`\n${text}\n\`\`\`${append || ""}`,
+                content: `${t("plugin.mediaDownloader.downloading")}\n\`\`\`\n${text}\n\`\`\`${append || ""}`,
                 components: append ? [] : clydeMessage.components
             }
         });
@@ -119,13 +125,16 @@ async function sendProgress(channelId: string, promise: Promise<{
     const data = await promise;
     clearInterval(id);
     const stdout = await Native.getStdout();
-    updateMessage(stdout, "error" in data ? "Error!" : "Done!");
+    updateMessage(stdout, "error" in data ? t("plugin.mediaDownloader.error") : t("plugin.mediaDownloader.done"));
     return data;
 }
 
 function sendFfmpegWarning(channelId: string) {
     sendBotMessage(channelId, {
-        content: "FFmpeg not detected. You may experience lower download quality and missing features."
+        author: {
+            username: "Plexcord",
+        },
+        content: t("plugin.mediaDownloader.ffmpegWarning")
     });
 }
 
@@ -144,7 +153,12 @@ async function openDependencyModal() {
 
 const settings = definePluginSettings({
     supportedWebsites: {
-        description: "See the link for a list of supported websites.",
+        get label() {
+            return t("plugin.mediaDownloader.option.supportedWebsites.label");
+        },
+        get description() {
+            return t("plugin.mediaDownloader.option.supportedWebsites.description");
+        },
         type: OptionType.COMPONENT,
         default: "none",
         component: () => (
@@ -152,7 +166,7 @@ const settings = definePluginSettings({
                 <Paragraph>
                     <Link href="https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md" className="media-downloader-link">
                         <Button role="link" style={{ width: "100%" }}>
-                            Click to see supported websites.
+                            {t("plugin.mediaDownloader.option.supportedWebsites.link")}
                         </Button>
                     </Link>
                 </Paragraph>
@@ -161,28 +175,53 @@ const settings = definePluginSettings({
         )
     },
     showProgress: {
+        get label() {
+            return t("plugin.mediaDownloader.option.showProgress.label");
+        },
+        get description() {
+            return t("plugin.mediaDownloader.option.showProgress.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Send a Clyde message with the download progress.",
         default: true,
     },
     showFfmpegWarning: {
+        get label() {
+            return t("plugin.mediaDownloader.option.showFfmpegWarning.label");
+        },
+        get description() {
+            return t("plugin.mediaDownloader.option.showFfmpegWarning.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show a warning message if ffmpeg is not installed.",
         default: true,
     },
     defaultGifQuality: {
+        get label() {
+            return t("plugin.mediaDownloader.option.defaultGifQuality.label");
+        },
+        get description() {
+            return t("plugin.mediaDownloader.option.defaultGifQuality.description");
+        },
         type: OptionType.NUMBER,
-        description: "The quality level to use if no value is specified when downloading gifs. A number between 1 and 5.",
         default: 3,
     },
     ytdlpArgs: {
+        get label() {
+            return t("plugin.mediaDownloader.option.ytdlpArgs.label");
+        },
+        get description() {
+            return t("plugin.mediaDownloader.option.ytdlpArgs.description");
+        },
         type: OptionType.STRING,
-        description: "Additional arguments to pass to yt-dlp. This may overwrite default plugin arguments such format selection. Note: if modifying the ouptup, ensure the filename starts with `download`.",
         placeholder: "--format bestvideo+bestaudio",
     },
     ffmpegArgs: {
+        get label() {
+            return t("plugin.mediaDownloader.option.ffmpegArgs.label");
+        },
+        get description() {
+            return t("plugin.mediaDownloader.option.ffmpegArgs.description");
+        },
         type: OptionType.STRING,
-        description: "Additional arguments to pass to ffmpeg. This may overwrite default plugin arguments such as auto-scaling. Note: if modifying the output, ensure the filename starts with `remux`.",
         placeholder: "-vf scale=1280:720",
     }
 }, {
@@ -199,20 +238,34 @@ export default definePlugin({
     authors: [PcDevs.Colorman],
     reporterTestable: ReporterTestable.Patches,
     settings,
+
+    get displayDescription() {
+        return t("plugin.mediaDownloader.description");
+    },
+
     commands: [{
         inputType: ApplicationCommandInputType.BUILT_IN,
         name: "download",
         description: "Download and send videos, audio or gifs.",
+        get displayDescription() {
+            return t("plugin.mediaDownloader.command.download.description");
+        },
         options: [
             {
                 name: "url",
                 description: "The URL of any video supported by yt-dlp.",
+                get displayDescription() {
+                    return t("plugin.mediaDownloader.command.download.url");
+                },
                 required: true,
                 type: ApplicationCommandOptionType.STRING
             },
             {
                 name: "format",
                 description: "Whether to download a video or audio.",
+                get displayDescription() {
+                    return t("plugin.mediaDownloader.command.download.format.description");
+                },
                 type: ApplicationCommandOptionType.STRING,
                 choices: [
                     { name: "Video", value: "video", label: "Video" },
@@ -225,6 +278,9 @@ export default definePlugin({
                 name: "gif_quality",
                 type: ApplicationCommandOptionType.INTEGER,
                 description: "The quality level when using GIF. Try lowering this number if the GIF is too large.",
+                get displayDescription() {
+                    return t("plugin.mediaDownloader.command.download.gifQuality");
+                },
                 required: false,
                 choices: [
                     { name: "5", value: "5", label: "5" },
@@ -237,12 +293,18 @@ export default definePlugin({
             {
                 name: "yt-dlp_args",
                 description: "Additional arguments to pass to yt-dlp. These will take precedence over arguments set in the settings. This may overwrite default plugin arguments such format selection. Note: if modifying the output, ensure the filename starts with `download`.",
+                get displayDescription() {
+                    return t("plugin.mediaDownloader.command.download.args.ytdlp");
+                },
                 required: false,
                 type: ApplicationCommandOptionType.STRING
             },
             {
                 name: "ffmpeg_args",
                 description: "Additional arguments to pass to ffmpeg. These will take precedence over arguments set in the settings. This may overwrite default plugin arguments such as auto-scaling. Note: if modifying the output, ensure the filename starts with `remux`.",
+                get displayDescription() {
+                    return t("plugin.mediaDownloader.command.download.args.ffmpeg");
+                },
                 required: false,
                 type: ApplicationCommandOptionType.STRING
             }
@@ -325,10 +387,11 @@ async function download(channel: Channel, {
     if ("error" in data) {
         // Open the modal if the error is due to missing formats (could be fixed by downloading ffmpeg)
         if (data.error.includes("--list-formats") && !(await Native.isFfmpegAvailable()))
-            return sendBotMessage(channel.id, { content: "No good streams found. Consider installing ffmpeg to increase the likelihood of a successful stream." }), openDependencyModal();
+            return sendBotMessage(channel.id, { author: { username: "Plexcord" }, content: t("plugin.mediaDownloader.noGoodStreams") }), openDependencyModal();
 
         return sendBotMessage(channel.id, {
-            content: `Failed to download video: ${data.error.includes("\n") ? "\n```" + data.error + "\n```" : `\`${data.error}\``}`
+            author: { username: "Plexcord" },
+            content: `${t("plugin.mediaDownloader.failed")}: ${data.error.includes("\n") ? "\n```" + data.error + "\n```" : `\`${data.error}\``}`
         });
     }
 

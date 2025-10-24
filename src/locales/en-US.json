@@ -2228,6 +2228,10 @@
                     "label": "Flagged",
                     "flagged": "Flagged Words",
                     "placeholder": "Word"
+                },
+                "onClick": {
+                    "label": "On Click",
+                    "description": "Only show trigger content on click instead of hover"
                 }
             }
         },
@@ -4665,6 +4669,80 @@
             "usingWebcam": "Scan using webcam",
             "dragDrop": "Drag and drop an image here, or click to select an image",
             "orPaste": "Or paste an image from your clipboard!"
+        },
+        "mediaDownloader": {
+            "name": "MediaDownloader",
+            "description": "Download and send videos with from YouTube, Twitter, Reddit and more.",
+            "downloading": "Downloading video...",
+            "ffmpegWarning": "FFmpeg not detected. You may experience lower download quality and missing features.",
+            "error": "Error!",
+            "done": "Done!",
+            "noGoodStreams": "No good streams found. Consider installing ffmpeg to increase the likelihood of a successful stream.",
+            "failed": "Failed to download media",
+            "button": {
+                "download": "Download",
+                "cancel": "Cancel download"
+            },
+            "option": {
+                "supportedWebsites": {
+                    "label": "Supported Websites",
+                    "description": "See the link for a list of supported websites.",
+                    "link": "Click to see supported websites."
+                },
+                "showProgress": {
+                    "label": "Show Progress",
+                    "description": "Send a Plexcord message with the download progress."
+                },
+                "showFfmpegWarning": {
+                    "label": "Show FFmpeg Warning",
+                    "description": "Show a warning message if ffmpeg is not installed."
+                },
+                "defaultGifQuality": {
+                    "label": "Default GIF Quality",
+                    "description": "The quality level to use if no value is specified when downloading gifs. A number between 1 and 5."
+                },
+                "ytdlpArgs": {
+                    "label": "yt-dlp Arguments",
+                    "description": "Additional arguments to pass to yt-dlp. This may overwrite default plugin arguments such format selection. Note: if modifying the output, ensure the filename starts with `download`."
+                },
+                "ffmpegArgs": {
+                    "label": "FFmpeg Arguments",
+                    "description": "Additional arguments to pass to ffmpeg. This may overwrite default plugin arguments such as auto-scaling. Note: if modifying the output, ensure the filename starts with `remux`."
+                }
+            },
+            "command": {
+                "download": {
+                    "description": "Download and send videos, audio or gifs.",
+                    "url": "The URL of any video supported by yt-dlp.",
+                    "format": {
+                        "description": "Whether to download a video or audio.",
+                        "video": "Video",
+                        "audio": "Audio",
+                        "gif": "GIF"
+                    },
+                    "gifQuality": "The quality level when using GIF. Try lowering this number if the GIF is too large.",
+                    "args": {
+                        "ytdlp": "Additional arguments to pass to yt-dlp. These will take precedence over arguments set in the settings. This may overwrite default plugin arguments such format selection. Note: if modifying the output, ensure the filename starts with `download`.",
+                        "ffmpeg": "Additional arguments to pass to ffmpeg. These will take precedence over arguments set in the settings. This may overwrite default plugin arguments such as auto-scaling. Note: if modifying the output, ensure the filename starts with `remux`."
+                    }
+                }
+            },
+            "modal": {
+                "title": "MediaDownloader: Missing dependencies",
+                "description": {
+                    "first": "The MediaDownloader plugin requires a working version of yt-dlp to be installed on your system. For extra features such as higher quality videos and gifs, you can also optionally install ffmpeg.",
+                    "second": "If you don't know how to install yt-dlp or ffmpeg, check the installation guides below (if you do know how to install it, make sure it's in your PATH).",
+                    "note": "Note: You may need to completely restart Discord after installing yt-dlp or ffmpeg for the plugin to detect them."
+                },
+                "ytDlpLink": "yt-dlp Installation Guide",
+                "ffmpegLink": "Unofficial ffmpeg installation guide",
+                "ytDlpStatus": "yt-dlp status",
+                "checkAgain": "Check Again",
+                "ffmpegStatus": "ffmpeg status",
+                "checking": "Checking...",
+                "installed": "Installed!",
+                "notInstalled": "Not Installed!"
+            }
         }
     }
 }

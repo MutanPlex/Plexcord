@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { closeModal, ModalCloseButton, ModalContent, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
 import { Button, useEffect, useState } from "@webpack/common";
@@ -17,9 +18,9 @@ export function DependencyModal({ props, options: { key, checkytdlp, checkffmpeg
         checkffmpeg: () => Promise<boolean>;
     };
 }) {
-    const checking = <span>Checking...</span>;
-    const installed = <span style={{ color: "green" }}>Installed!</span>;
-    const notInstalled = (color: string) => <span style={{ color }}>Not installed.</span>;
+    const checking = <span>{t("plugin.mediaDownloader.modal.checking")}</span>;
+    const installed = <span style={{ color: "green" }}>{t("plugin.mediaDownloader.modal.installed")}</span>;
+    const notInstalled = (color: string) => <span style={{ color }}>{t("plugin.mediaDownloader.modal.notInstalled")}</span>;
 
     const [ytdlpStatus, setYtdlpStatus] = useState(checking);
     const [ffmpegStatus, setFfmpegStatus] = useState(checking);
@@ -32,24 +33,24 @@ export function DependencyModal({ props, options: { key, checkytdlp, checkffmpeg
     return (
         <ModalRoot {...props} size={ModalSize.MEDIUM}>
             <ModalHeader>
-                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>MediaDownloader: Missing dependencies</BaseText>
+                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t("plugin.mediaDownloader.modal.title")}</BaseText>
                 <ModalCloseButton onClick={() => closeModal(key)} />
             </ModalHeader>
             <ModalContent>
                 <div style={{ padding: "16px 0" }}>
                     <BaseText size="md" weight="normal">
-                        The MediaDownloader plugin requires a working version of yt-dlp to be installed on your system. For extra features such as higher quality videos and gifs, you can also optionally install ffmpeg.
+                        {t("plugin.mediaDownloader.modal.description.first")}
                         <br /><br />
-                        If you don't know how to install yt-dlp or ffmpeg, check the installation guides below (if you <i>do</i> know how to install it, make sure it's in your PATH).
+                        {t("plugin.mediaDownloader.modal.description.second")}
                         <br /><br />
-                        <strong>Note:</strong> You may need to completely restart Discord after installing yt-dlp or ffmpeg for the plugin to detect them.
+                        {t("plugin.mediaDownloader.modal.description.note")}
                         <br /><br />
                         <ul style={{ listStyleType: "disc", marginLeft: "1rem" }}>
                             <li>
-                                <a href="https://github.com/yt-dlp/yt-dlp/wiki/Installation#windows" target="_blank" rel="noreferrer">yt-dlp installation guide</a>
+                                <a href="https://github.com/yt-dlp/yt-dlp/wiki/Installation#windows" target="_blank" rel="noreferrer">{t("plugin.mediaDownloader.modal.ytDlpLink")}</a>
                             </li>
                             <li>
-                                <a href="https://phoenixnap.com/kb/ffmpeg-windows" target="_blank" rel="noreferrer">Unofficial ffmpeg installation guide</a>
+                                <a href="https://phoenixnap.com/kb/ffmpeg-windows" target="_blank" rel="noreferrer">{t("plugin.mediaDownloader.modal.ffmpegLink")}</a>
                             </li>
                         </ul>
                     </BaseText>
@@ -70,7 +71,7 @@ export function DependencyModal({ props, options: { key, checkytdlp, checkffmpeg
                             }}
                         >
                             <BaseText size="md" weight="bold">
-                                yt-dlp status: {ytdlpStatus}
+                                {t("plugin.mediaDownloader.modal.ytDlpStatus")}: {ytdlpStatus}
                             </BaseText>
                         </div>
                         <Button
@@ -82,7 +83,7 @@ export function DependencyModal({ props, options: { key, checkytdlp, checkffmpeg
                             }}
                             style={{ gridArea: "1 / 2 / 2 / 3" }}
                         >
-                            Check again
+                            {t("plugin.mediaDownloader.modal.checkAgain")}
                         </Button>
                         <div
                             style={{
@@ -94,7 +95,7 @@ export function DependencyModal({ props, options: { key, checkytdlp, checkffmpeg
                             }}
                         >
                             <BaseText size="md" weight="bold">
-                                ffmpeg status: {ffmpegStatus}
+                                {t("plugin.mediaDownloader.modal.ffmpegStatus")}: {ffmpegStatus}
                             </BaseText>
                         </div>
                         <Button
@@ -106,7 +107,7 @@ export function DependencyModal({ props, options: { key, checkytdlp, checkffmpeg
                             }}
                             style={{ gridArea: "2 / 2 / 3 / 3" }}
                         >
-                            Check again
+                            {t("plugin.mediaDownloader.modal.checkAgain")}
                         </Button>
                     </div>
                 </div>

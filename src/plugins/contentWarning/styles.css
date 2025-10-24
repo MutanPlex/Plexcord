@@ -1,0 +1,13 @@
+.pc-content-warning-container {
+    filter: blur(5px) brightness(30%);
+    transition: filter 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.pc-content-warning-enter {
+    filter: none;
+}
+
+.pc-content-warning-leave {
+    filter: blur(5px) brightness(30%);
+}
