@@ -19,6 +19,7 @@
 
 import "./style.css";
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -40,20 +41,35 @@ export const ThreadMemberListStore = findStoreLazy("ThreadMemberListStore") as F
 
 export const settings = definePluginSettings({
     toolTip: {
+        get label() {
+            return t("plugin.memberCount.option.toolTip.label");
+        },
+        get description() {
+            return t("plugin.memberCount.option.toolTip.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show member count on the server tooltip",
         default: true,
         restartNeeded: true
     },
     memberList: {
+        get label() {
+            return t("plugin.memberCount.option.memberList.label");
+        },
+        get description() {
+            return t("plugin.memberCount.option.memberList.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show member count in the member list",
         default: true,
         restartNeeded: true
     },
     voiceActivity: {
+        get label() {
+            return t("plugin.memberCount.option.voiceActivity.label");
+        },
+        get description() {
+            return t("plugin.memberCount.option.voiceActivity.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show voice activity with member count in the member list",
         default: true
     }
 });
@@ -67,6 +83,10 @@ export default definePlugin({
     description: "Shows the number of online members, total members, and users in voice channels on the server — in the member list and tooltip.",
     authors: [Devs.Ven, Devs.Commandtechno, Devs.Apexo],
     settings,
+
+    get displayDescription() {
+        return t("plugin.memberCount.description");
+    },
 
     patches: [
         {

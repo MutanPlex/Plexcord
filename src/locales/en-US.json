@@ -4842,6 +4842,27 @@
                     "description": "Audios"
                 }
             }
+        },
+        "memberCount": {
+            "name": "MemberCount",
+            "description": "Shows the number of online members, total members, and users in voice channels on the server — in the member list and tooltip.",
+            "option": {
+                "toolTip": {
+                    "label": "Tooltip",
+                    "description": "Show member count on the server tooltip"
+                },
+                "memberList": {
+                    "label": "Member List",
+                    "description": "Show member count in the member list header"
+                },
+                "voiceActivity": {
+                    "label": "Voice Activity",
+                    "description": "Show number of users in voice channels"
+                }
+            },
+            "onlineThisChannel": "{{formattedOnlineCount}} online in this channel",
+            "totalMembers": "{{formattedTotalCount}} total server members",
+            "totalVoice": "{{formattedVoiceCount}} members in voice"
         }
     }
 }

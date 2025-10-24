@@ -4842,6 +4842,27 @@
                     "description": "Ses dosyaları"
                 }
             }
+        },
+        "memberCount": {
+            "name": "MemberCount",
+            "description": "Sunucuda çevrimiçi üyelerin, toplam üyelerin ve sesli kanallardaki kullanıcıların sayısını — üye listesinde ve araç ipucunda gösterir.",
+            "option": {
+                "toolTip": {
+                    "label": "Araç İpucu",
+                    "description": "Sunucu araç ipucunda üye sayısını göster"
+                },
+                "memberList": {
+                    "label": "Üye Listesi",
+                    "description": "Üye listesinin üst kısmında üye sayısını göster"
+                },
+                "voiceActivity": {
+                    "label": "Sesli Aktivite",
+                    "description": "Sesli kanallardaki kullanıcı sayısını göster"
+                }
+            },
+            "onlineThisChannel": "{{formattedOnlineCount}} bu kanalda çevrimiçi",
+            "totalMembers": "{{formattedTotalCount}} sunucudaki toplam üye",
+            "totalVoice": "{{formattedVoiceCount}} sesli kanallarda üye"
         }
     }
 }
