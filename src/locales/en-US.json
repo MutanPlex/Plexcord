@@ -3125,31 +3125,6 @@
                 "errorDownloading": "Error Downloading File"
             }
         },
-        "encryptcord": {
-            "name": "Encryptcord",
-            "description": "End-to-end encryption in Discord!",
-            "message": {
-                "mustChannel": "You must be in <#{{groupChannel}}> to send an encrypted message! \nIf you wish to send an unencrypted message, please click the button in the chatbar.",
-                "checkingGroup": "*Checking for any groups in this channel...* \n> If none is found, a new one will be created {{time}} \n[Tip] You can do /encryptcord leave to leave a group",
-                "leaving": "*Leaving current group...*",
-                "notInGroup": "You're not in a group!",
-                "created": "Group created! Other users can click the lock icon to join.",
-                "publicKey": "Public Key",
-                "privateKey": "Private Key",
-                "privateKeyWarning": "*(DO **NOT** SHARE THIS)*",
-                "members": "Group Members"
-            },
-            "button": {
-                "sendUnencrypted": "Send Unencrypted Message",
-                "sendEncrypted": "Send Encrypted Message",
-                "removeFromSelf": "I don't want to talk to you",
-                "stillInGroup": "(Other users can still send/receive messages to/from them)"
-            },
-            "command": {
-                "leave": "Leave the current group",
-                "data": "View your keys and current group members"
-            }
-        },
         "expandedUserTags": {
             "name": "ExpandedUserTags",
             "description": "Adds tags for webhooks and moderative roles (owner, admin, etc.)",
