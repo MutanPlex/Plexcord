@@ -45,7 +45,7 @@ const log = (...data: string[]) => (console.log(`[Plugin:MediaDownloader] ${data
 const error = (...data: string[]) => console.error(`[Plugin:MediaDownloader] [ERROR] ${data.join(" ")}`);
 
 function ytdlp(args: string[]): Promise<string> {
-    log(`Executing yt-dlp with args: ["${args.map(a => a.replace(/"/g, '\\"')).join('", "')}"]`);
+    log(`Executing yt-dlp with args: ["${args.map(a => a.replace(/\\/g, "\\\\").replace(/"/g, '\\"')).join('", "')}"]`);
     let errorMsg = "";
 
     return new Promise<string>((resolve, reject) => {
@@ -66,7 +66,7 @@ function ytdlp(args: string[]): Promise<string> {
     });
 }
 function ffmpeg(args: string[]): Promise<string> {
-    log(`Executing ffmpeg with args: ["${args.map(a => a.replace(/"/g, '\\"')).join('", "')}"]`);
+    log(`Executing ffmpeg with args: ["${args.map(a => a.replace(/\\/g, "\\\\").replace(/"/g, '\\"')).join('", "')}"]`);
     let errorMsg = "";
 
     return new Promise<string>((resolve, reject) => {
