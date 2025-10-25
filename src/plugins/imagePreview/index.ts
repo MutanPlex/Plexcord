@@ -35,6 +35,17 @@ let lastMouseEvent: MouseEvent | null = null;
 
 let observer: MutationObserver | null = null;
 
+function isSafeMediaUrl(url: string): boolean {
+    try {
+        const parsed = new URL(url, window.location.origin);
+        if (!/^https?:$/.test(parsed.protocol)) return false;
+        const safeExts = ["jpg", "jpeg", "png", "apng", "gif", "webp", "svg", "mp4", "webm", "mov"];
+        const ext = parsed.pathname.split(".").pop()?.toLowerCase() || "";
+        return safeExts.includes(ext);
+    } catch (e) {
+        return false;
+    }
+}
 function deleteCurrentPreview() {
     if (!currentPreview) return;
 
@@ -251,6 +262,9 @@ function loadImagePreview(url: string, sticker: boolean) {
 
     if (currentPreviewType === "video") {
         const video = document.createElement("video");
+        if (!isSafeMediaUrl(url)) {
+            return;
+        }
         video.src = url;
         video.className = "preview-media";
         video.autoplay = true;
