@@ -96,9 +96,18 @@ function scanObjects(element: Element) {
         });
     }
 
+    function stripAllHtmlTags(input: string): string {
+        let prev: string;
+        do {
+            prev = input;
+            input = input.replace(/<[^>]*>?/gm, "");
+        } while (input !== prev);
+        return input;
+    }
+
     if (settings.store.messageLinks) {
         element.querySelectorAll("span:not([data-processed='true'])").forEach(span => {
-            const url = span.textContent?.replace(/<[^>]*>?/gm, "").trim();
+            const url = span.textContent ? stripAllHtmlTags(span.textContent).trim() : "";
             if (url && (url.startsWith("http://") || url.startsWith("https://")) && isLinkAnImage(url)) {
                 const messageParent = span.closest("[class^='messageListItem_']");
                 if (messageParent) {
