@@ -169,7 +169,7 @@ function stripDiscordParams(url: string) {
     }
 
     if (!newUrl.includes("?") && newUrl.includes("&")) {
-        newUrl = newUrl.replace("&", "?");
+        newUrl = newUrl.replace(/&/g, "?");
     }
 
     return newUrl;
