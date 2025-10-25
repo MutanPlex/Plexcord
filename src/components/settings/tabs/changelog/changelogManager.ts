@@ -46,7 +46,8 @@ function normalizeRepoUrl(repoUrl: string | null | undefined): string | null {
     try {
         const normalized = repoUrl.replace(/^git\+/, "");
         const url = new URL(normalized);
-        if (!url.hostname.endsWith("github.com")) return null;
+        const allowedGitHubHosts = ["github.com", "www.github.com"];
+        if (!allowedGitHubHosts.includes(url.hostname)) return null;
         const segments = url.pathname.replace(/\.git$/, "").split("/").filter(Boolean);
         if (segments.length < 2) return null;
         return `${segments[0]}/${segments[1]}`;
