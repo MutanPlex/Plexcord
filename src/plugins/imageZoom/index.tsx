@@ -290,20 +290,39 @@ function createMetadataDisplay(imgElement: HTMLImageElement) {
 
     const container = document.createElement("div");
     container.className = "pc-image-metadata";
-    container.innerHTML = `
-        <div class="pc-metadata-row">
-            <span class="pc-metadata-label">${t("plugin.imageZoom.context.filename")}:</span>
-            <span>${metadata.filename}</span>
-        </div>
-        <div class="pc-metadata-row">
-            <span class="pc-metadata-label">${t("plugin.imageZoom.context.dimensions")}:</span>
-            <span>${metadata.dimensions}</span>
-        </div>
-        <div class="pc-metadata-row">
-            <span class="pc-metadata-label">${t("plugin.imageZoom.context.sizeHTML")}:</span>
-            <span>${metadata.size || t("plugin.imageZoom.context.loading")}</span>
-        </div>
-    `;
+
+    const filenameRow = document.createElement("div");
+    filenameRow.className = "pc-metadata-row";
+    const filenameLabel = document.createElement("span");
+    filenameLabel.className = "pc-metadata-label";
+    filenameLabel.textContent = t("plugin.imageZoom.context.filename") + ":";
+    const filenameValue = document.createElement("span");
+    filenameValue.textContent = metadata.filename;
+    filenameRow.appendChild(filenameLabel);
+    filenameRow.appendChild(filenameValue);
+    container.appendChild(filenameRow);
+
+    const dimensionsRow = document.createElement("div");
+    dimensionsRow.className = "pc-metadata-row";
+    const dimensionsLabel = document.createElement("span");
+    dimensionsLabel.className = "pc-metadata-label";
+    dimensionsLabel.textContent = t("plugin.imageZoom.context.dimensions") + ":";
+    const dimensionsValue = document.createElement("span");
+    dimensionsValue.textContent = metadata.dimensions;
+    dimensionsRow.appendChild(dimensionsLabel);
+    dimensionsRow.appendChild(dimensionsValue);
+    container.appendChild(dimensionsRow);
+
+    const sizeRow = document.createElement("div");
+    sizeRow.className = "pc-metadata-row";
+    const sizeLabel = document.createElement("span");
+    sizeLabel.className = "pc-metadata-label";
+    sizeLabel.textContent = t("plugin.imageZoom.context.sizeHTML") + ":";
+    const sizeValue = document.createElement("span");
+    sizeValue.textContent = metadata.size || t("plugin.imageZoom.context.loading");
+    sizeRow.appendChild(sizeLabel);
+    sizeRow.appendChild(sizeValue);
+    container.appendChild(sizeRow);
 
     wrapper.appendChild(container);
 
