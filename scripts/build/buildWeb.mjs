@@ -23,7 +23,7 @@
 import { readFileSync } from "fs";
 import { appendFile, mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
 import { join } from "path";
-import Zip from "zip-local";
+import JSZip from "jszip";
 
 import { BUILD_TIMESTAMP, commonOpts, globPlugins, IS_COMPANION_TEST, IS_DEV, IS_REPORTER, IS_ANTI_CRASH_TEST, VERSION, commonRendererPlugins, buildOrWatchAll, stringifyValues } from "./common.mjs";
 
@@ -177,6 +177,28 @@ async function buildExtension(target, files) {
     console.info("Unpacked Extension written to dist/" + target);
 }
 
+/**
+ * Add a directory recursively to a JSZip instance
+ * @param {JSZip} zip - JSZip instance
+ * @param {string} dirPath - Directory path to add
+ * @param {string} zipPath - Path in the zip file
+ */
+async function addDirectoryToZip(zip, dirPath, zipPath) {
+    const entries = await readdir(dirPath, { withFileTypes: true });
+
+    for (const entry of entries) {
+        const fullPath = join(dirPath, entry.name);
+        const zipFilePath = zipPath ? join(zipPath, entry.name) : entry.name;
+
+        if (entry.isDirectory()) {
+            await addDirectoryToZip(zip, fullPath, zipFilePath);
+        } else {
+            const content = await readFile(fullPath);
+            zip.file(zipFilePath, content);
+        }
+    }
+}
+
 const appendCssRuntime = readFile("dist/Plexcord.user.css", "utf-8").then(content => {
     const cssRuntime = `
 ;document.addEventListener("DOMContentLoaded", () => document.body.insertAdjacentElement("afterend",
@@ -197,10 +219,18 @@ if (!process.argv.includes("--skip-extension")) {
         buildExtension("firefox-unpacked", ["background.js", "content.js", "manifestv2.json", "icon.png"]),
     ]);
 
-    Zip.sync.zip("dist/chromium-unpacked").compress().save("dist/extension-chrome.zip");
+    // Zip chromium extension
+    const chromiumZip = new JSZip();
+    await addDirectoryToZip(chromiumZip, "dist/chromium-unpacked", "");
+    const chromiumBuffer = await chromiumZip.generateAsync({ type: "nodebuffer" });
+    await writeFile("dist/extension-chrome.zip", chromiumBuffer);
     console.info("Packed Chromium Extension written to dist/extension-chrome.zip");
 
-    Zip.sync.zip("dist/firefox-unpacked").compress().save("dist/extension-firefox.zip");
+    // Zip firefox extension
+    const firefoxZip = new JSZip();
+    await addDirectoryToZip(firefoxZip, "dist/firefox-unpacked", "");
+    const firefoxBuffer = await firefoxZip.generateAsync({ type: "nodebuffer" });
+    await writeFile("dist/extension-firefox.zip", firefoxBuffer);
     console.info("Packed Firefox Extension written to dist/extension-firefox.zip");
 } else {
     await appendCssRuntime;

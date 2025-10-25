@@ -60,8 +60,6 @@ export default definePlugin({
         }
         result.title = title;
 
-        console.log({ ...result, channel, message, user });
-
         return result;
     }
 });

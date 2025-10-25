@@ -20,7 +20,7 @@
 .pc-plugins-grid {
     margin-top: 16px;
     display: grid;
-    grid-gap: 16px;
+    gap: 16px;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import type { MapValue } from "type-fest/source/entry";
+type MapValue<T extends Map<any, any>> = T extends Map<any, infer V> ? V : never;
 
 export type Style = MapValue<typeof PlexcordStyles>;
 

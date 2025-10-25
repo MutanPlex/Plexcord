@@ -43,61 +43,64 @@
         "gifenc": "github:mattdesl/gifenc#64842fca317b112a8590f8fef2bf3825da8f6fe3",
         "idb": "^8.0.3",
         "jsqr": "^1.4.0",
-        "monaco-editor": "^0.52.2",
+        "monaco-editor": "^0.54.0",
         "nanoid": "^5.1.6",
         "virtual-merge": "^1.0.2"
     },
     "devDependencies": {
         "@electron/asar": "^4.0.1",
         "@plexcord/discord-types": "link:packages\\discord-types",
-        "@stylistic/eslint-plugin": "^4.4.1",
-        "@types/chrome": "^0.0.312",
-        "@types/diff": "^7.0.2",
+        "@stylistic/eslint-plugin": "^5.5.0",
+        "@types/chrome": "^0.1.24",
         "@types/lodash": "^4.17.20",
-        "@types/node": "^22.18.10",
+        "@types/node": "^24.9.1",
         "@types/react": "19.2.2",
         "@types/react-dom": "19.2.2",
-        "@types/yazl": "^2.4.6",
-        "diff": "^7.0.0",
+        "@types/yazl": "^3.3.0",
+        "diff": "^8.0.2",
         "esbuild": "^0.25.11",
-        "eslint": "9.20.1",
+        "eslint": "9.38.0",
         "eslint-import-resolver-alias": "^1.1.2",
         "eslint-plugin-path-alias": "2.1.0",
         "eslint-plugin-react": "^7.37.5",
         "eslint-plugin-simple-header": "^1.2.2",
         "eslint-plugin-simple-import-sort": "^12.1.1",
-        "eslint-plugin-unused-imports": "^4.2.0",
+        "eslint-plugin-unused-imports": "^4.3.0",
         "highlight.js": "11.11.1",
         "html-minifier-terser": "^7.2.0",
+        "jszip": "^3.10.1",
         "moment": "^2.30.1",
-        "puppeteer-core": "^24.25.0",
+        "puppeteer-core": "^24.26.1",
         "standalone-electron-types": "^34.2.0",
         "stylelint": "^16.25.0",
-        "stylelint-config-standard": "^37.0.0",
+        "stylelint-config-standard": "^39.0.1",
         "ts-patch": "^3.3.0",
         "ts-pattern": "^5.8.0",
         "tsx": "^4.20.6",
-        "type-fest": "^4.41.0",
+        "type-fest": "^5.1.0",
         "typescript": "^5.9.3",
-        "typescript-eslint": "^8.46.1",
-        "typescript-transform-paths": "^3.5.5",
-        "zip-local": "^0.3.5"
+        "typescript-eslint": "^8.46.2",
+        "typescript-transform-paths": "^3.5.5"
     },
-    "packageManager": "pnpm@10.18.1",
+    "packageManager": "pnpm@10.19.0",
     "pnpm": {
         "overrides": {
             "@types/react": "19.2.2",
-            "@types/react-dom": "19.2.2"
+            "@types/react-dom": "19.2.2",
+            "jszip": "^3.10.1",
+            "@eslint/plugin-kit": "^0.3.4"
         },
         "patchedDependencies": {
-            "eslint@9.20.1": "patches/eslint@9.20.1.patch",
             "eslint-plugin-path-alias@2.1.0": "patches/eslint-plugin-path-alias@2.1.0.patch"
         },
         "peerDependencyRules": {
             "ignoreMissing": [
                 "eslint-plugin-import",
                 "eslint"
-            ]
+            ],
+            "allowedVersions": {
+                "eslint": "9"
+            }
         },
         "allowedDeprecatedVersions": {
             "source-map-resolve": "*",
