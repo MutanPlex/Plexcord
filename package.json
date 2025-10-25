@@ -88,7 +88,8 @@
             "@types/react": "19.2.2",
             "@types/react-dom": "19.2.2",
             "jszip": "^3.10.1",
-            "@eslint/plugin-kit": "^0.3.4"
+            "@eslint/plugin-kit": "^0.3.4",
+            "dompurify": "^3.3.0"
         },
         "patchedDependencies": {
             "eslint-plugin-path-alias@2.1.0": "patches/eslint-plugin-path-alias@2.1.0.patch"
