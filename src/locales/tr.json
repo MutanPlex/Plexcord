@@ -4199,14 +4199,15 @@
             "name": "IgnoreCalls",
             "description": "Belirli kullanıcılar veya DM gruplarından gelen aramaları yok saymanı sağlar.",
             "option": {
-                "ignoreTimeout": {
-                    "label": "Yoksayma Zaman Aşımı",
-                    "description": "Yoksay düğmesine basmak için zaman aşımı süresi"
+                "permanentlyIgnoredUsers": {
+                    "label": "Kalıcı Olarak Yok Sayılan Kullanıcılar",
+                    "description": "User IDs (virgül + boşluk) who should be permanently ignored"
                 }
             },
             "button": {
                 "ignore": "Yoksay",
-                "ignoreCalls": "Aramaları Yoksay"
+                "temporarilyIgnore": "Geçici Olarak Yoksay",
+                "permanentlyIgnore": "Kalıcı Olarak Yoksay"
             }
         },
         "ignoreTerms": {

@@ -129,7 +129,7 @@ function Controls() {
     return (
         <Flex className={cl("button-row")} style={{ gap: 0 }}>
             <Button
-                className={classes(cl("button"), isShuffled ? cl("shuffle-on") : cl("shuffle-off"))}
+                className={classes(cl("button"), cl("shuffle"), isShuffled ? cl("shuffle-on") : cl("shuffle-off"))}
                 onClick={() => YoutubeMusicStore.shuffle()}
             >
                 <Shuffle />

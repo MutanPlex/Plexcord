@@ -1,4 +1,4 @@
-.pc-ignore-calls-render {
-    text-align: center;
-    color: var(--text-danger);
+.pc-ignore-calls-button {
+    width: 64px;
+    border-radius: 12px;
 }

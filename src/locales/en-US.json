@@ -4199,14 +4199,15 @@
             "name": "IgnoreCalls",
             "description": "Allows you to ignore calls from specific users or dm groups.",
             "option": {
-                "ignoreTimeout": {
-                    "label": "Ignore Timeout",
-                    "description": "Timeout to click ignore"
+                "permanentlyIgnoredUsers": {
+                    "label": "Permanently Ignored Users",
+                    "description": "User IDs (comma + space) who should be permanently ignored"
                 }
             },
             "button": {
                 "ignore": "Ignore",
-                "ignoreCalls": "Ignore Calls"
+                "temporarilyIgnore": "Temporarily Ignore Calls",
+                "permanentlyIgnore": "Permanently Ignore Calls"
             }
         },
         "ignoreTerms": {
