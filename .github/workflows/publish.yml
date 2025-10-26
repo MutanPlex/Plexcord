@@ -1,4 +1,6 @@
 name: Release Browser Extension
+permissions:
+    contents: read
 on:
     push:
         tags:

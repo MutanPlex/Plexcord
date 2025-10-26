@@ -1,4 +1,6 @@
 name: Test Patches
+permissions:
+    contents: read
 on:
     workflow_dispatch:
         inputs:
