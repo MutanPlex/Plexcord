@@ -4245,14 +4245,41 @@
         },
         "instantScreenshare": {
             "name": "InstantScreenshare",
-            "description": "Bir ses kanalına katıldığınızda anında ekran paylaşımı yapmanızı sağlar",
+            "description": "Bir ses kanalına katıldığında masaüstü kaynakları, pencereler ve video giriş cihazları (kameralar, yakalama kartları) desteğiyle anında ekran paylaşımı yapmanı sağlar.",
+            "modal": {
+                "linux": {
+                    "title": "Linux İçin",
+                    "body": "Wayland kullanıyorsan yalnızca ekran paylaşımı seçimini açar.",
+                    "bodyTwo": "X11 için çalışabilir de çalışmayabilir de :shrug:"
+                },
+                "videoDevices": {
+                    "title": "Video Giriş Cihazları",
+                    "body": "Ayarlar etkinleştirildiğinde kameraları ve yakalama kartlarını (örneğin Elgato HD60X) destekler."
+                },
+                "regardingSound": {
+                    "title": "Ses ve Önizleme Ayarları Hakkında",
+                    "body": "Akış önizlemesi ve sesin etkinleştirilip etkinleştirilmeyeceğine karar vermek için Discord’un kullandığı ayarları kullanıyoruz."
+                }
+            },
             "option": {
                 "streamMedia": {
-                    "label": "Yayınlanacak medya kaynağı",
-                    "description": "Bulunamazsa ana ekrana sıfırlanır",
+                    "label": "Yayınlanacak Medya Kaynağı",
+                    "description": "Bulunamazsa ana ekrana sıfırlanır.",
                     "loading": "Medya kaynakları yükleniyor...",
                     "none": "Hiçbir medya kaynağı bulunamadı",
-                    "placeholder": "Yayınlamak için bir medya kaynağı seçin"
+                    "placeholder": "Yayınlamak için bir medya kaynağı seç"
+                },
+                "includeVideoDevices": {
+                    "label": "Video Cihazlarını Dahil Et",
+                    "description": "Kaynak listesine video giriş cihazlarını (kameralar, yakalama kartları) dahil et"
+                },
+                "autoMute": {
+                    "label": "Otomatik Sessize Al",
+                    "description": "Bir ses kanalına katıldığında mikrofonunu otomatik olarak sessize al"
+                },
+                "autoDeafen": {
+                    "label": "Otomatik Sağırlaştır",
+                    "description": "Bir ses kanalına katıldığında otomatik olarak sağırlaştır (aynı zamanda seni de sessize alır)"
                 }
             }
         },

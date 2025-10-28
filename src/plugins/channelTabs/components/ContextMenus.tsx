@@ -83,7 +83,7 @@ export function EditModal({ modalProps, modalKey, bookmark, onSave }: {
                 >{t("plugin.channelTabs.button.save")}</Button>
                 <Button
                     color={Button.Colors.TRANSPARENT}
-                    look={Button.Looks.LINK}
+                    look={Button.Looks.FILLED}
                     onClick={() => closeModal(modalKey)}
                 >{t("plugin.channelTabs.button.cancel")}</Button>
             </ModalFooter>
@@ -129,7 +129,7 @@ function AddToFolderModal({ modalProps, modalKey, bookmarks, onSave }: {
                 >{t("plugin.channelTabs.button.save")}</Button>
                 <Button
                     color={Button.Colors.TRANSPARENT}
-                    look={Button.Looks.LINK}
+                    look={Button.Looks.FILLED}
                     onClick={() => closeModal(modalKey)}
                 >{t("plugin.channelTabs.button.cancel")}</Button>
             </ModalFooter>
@@ -157,7 +157,7 @@ function DeleteFolderConfirmationModal({ modalProps, modalKey, onConfirm }) {
                 </Button>
                 <Button
                     color={Button.Colors.TRANSPARENT}
-                    look={Button.Looks.LINK}
+                    look={Button.Looks.FILLED}
                     onClick={() => closeModal(modalKey)}
                 >
                     {t("plugin.channelTabs.button.cancel")}

@@ -113,9 +113,9 @@ function getBadgeComponent(rankIndex: number) {
     const rank = getRanks()[rankIndex];
     // there may be a better button component to do this with
     return (
-        <div style={{ transform: "scale(0.80)" }}>
-            <Button onClick={() => openRankModal(rankIndex)} width={"21.69px"} height={"21.69px"} size={Button.Sizes.NONE} look={Button.Looks.LINK}>
-                <rank.assetSVG height={"21.69px"} />
+        <div style={{ transform: "scale(0.80)", marginTop: "3px" }}>
+            <Button onClick={() => openRankModal(rankIndex)} width={"22px"} height={"22px"} size={Button.Sizes.NONE} look={Button.Looks.LINK}>
+                <rank.assetSVG />
             </Button>
         </div>
     );

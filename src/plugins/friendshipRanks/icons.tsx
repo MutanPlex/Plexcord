@@ -5,9 +5,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-export function sproutIcon(props) {
+export function sproutIcon() {
     return (
-        <svg width={props.height} height={props.height} viewBox="0 0 303 303" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width={"22px"} height={"22px"} viewBox="0 0 303 303" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="shape-gradient-Circle" gradientTransform="rotate(90)">
                     <stop offset="0%" stopColor="#5865F1" />
@@ -53,9 +53,9 @@ export function sproutIcon(props) {
     );
 }
 
-export function bloomingIcon(props) {
+export function bloomingIcon() {
     return (
-        <svg width={props.height} height={props.height} viewBox="0 0 303 303" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width={"22px"} height={"22px"} viewBox="0 0 303 303" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient gradientTransform="rotate(90)">
                     <stop offset="0%" stopColor="#5865F1" />
@@ -100,9 +100,9 @@ export function bloomingIcon(props) {
     );
 }
 
-export function burningIcon(props) {
+export function burningIcon() {
     return (
-        <svg width={props.width} height={props.height} viewBox="0 0 303 303" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width={"22px"} height={"22px"} viewBox="0 0 303 303" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient gradientTransform="rotate(90)">
                     <stop offset="0%" stopColor="#5865F1" />
@@ -147,9 +147,9 @@ export function burningIcon(props) {
     );
 }
 
-export function fighterIcon(props) {
+export function fighterIcon() {
     return (
-        <svg width={props.width} height={props.height} viewBox="0 0 303 303" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width={"22px"} height={"22px"} viewBox="0 0 303 303" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="shape-gradient-Circle" gradientTransform="rotate(90)">
                     <stop offset="0%" stopColor="#5865F1" />
@@ -193,9 +193,9 @@ export function fighterIcon(props) {
     );
 }
 
-export function starIcon(props) {
+export function starIcon() {
     return (
-        <svg width={props.width} height={props.height} viewBox="0 0 303 303" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width={"22px"} height={"22px"} viewBox="0 0 303 303" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="shape-gradient-Circle" gradientTransform="rotate(90)">
                     <stop offset="0%" stopColor="#5865F1" />
@@ -240,9 +240,9 @@ export function starIcon(props) {
     );
 }
 
-export function royalIcon(props) {
+export function royalIcon() {
     return (
-        <svg width={props.width} height={props.height} viewBox="0 0 303 303" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width={"22px"} height={"22px"} viewBox="0 0 303 303" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="shape-gradient-Circle" gradientTransform="rotate(90)">
                     <stop offset="0%" stopColor="#5865F1" />
@@ -287,9 +287,9 @@ export function royalIcon(props) {
     );
 }
 
-export function bestiesIcon(props) {
+export function bestiesIcon() {
     return (
-        <svg width={props.width} height={props.height} viewBox="0 0 303 303" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width={"22px"} height={"22px"} viewBox="0 0 303 303" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="shape-gradient-Circle" gradientTransform="rotate(90)">
                     <stop offset="0%" stopColor="#5865F1" />

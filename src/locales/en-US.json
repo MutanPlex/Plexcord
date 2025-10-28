@@ -4245,7 +4245,22 @@
         },
         "instantScreenshare": {
             "name": "InstantScreenshare",
-            "description": "Instantly screenshare when joining a voice channel",
+            "description": "Instantly screenshare when joining a voice channel with support for desktop sources, windows, and video input devices (cameras, capture cards)",
+            "modal": {
+                "linux": {
+                    "title": "For Linux",
+                    "body": "For Wayland it only pops up the screenshare select",
+                    "bodyTwo": "For X11 it may or may not work :shrug:"
+                },
+                "videoDevices": {
+                    "title": "Video Input Devices",
+                    "body": "Supports cameras and capture cards (like Elgato HD60X) when enabled in settings"
+                },
+                "regardingSound": {
+                    "title": "Regarding Sound & Preview Settings",
+                    "body": "We use the settings set and used by discord to decide if stream preview and sound should be enabled or not"
+                }
+            },
             "option": {
                 "streamMedia": {
                     "label": "Media source to stream",
@@ -4253,6 +4268,18 @@
                     "loading": "Loading media sources...",
                     "none": "No media sources found",
                     "placeholder": "Select a media source to stream"
+                },
+                "includeVideoDevices": {
+                    "label": "Include Video Devices",
+                    "description": "Include video input devices (cameras, capture cards) in the source list"
+                },
+                "autoMute": {
+                    "label": "Auto Mute",
+                    "description": "Automatically mute your microphone when joining a voice channel"
+                },
+                "autoDeafen": {
+                    "label": "Auto Deafen",
+                    "description": "Automatically deafen when joining a voice channel (also mutes you)"
                 }
             }
         },

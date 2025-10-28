@@ -188,7 +188,7 @@ function VerifyModal({
                 ) : (
                     <Button
                         color={Button.Colors.LINK}
-                        look={Button.Looks.LINK}
+                        look={Button.Looks.FILLED}
                         onClick={props.onClose}
                     >
                         {state === VerifyState.NotFound
