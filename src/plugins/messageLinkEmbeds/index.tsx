@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { addMessageAccessory, removeMessageAccessory } from "@api/MessageAccessories";
 import { updateMessage } from "@api/MessageUpdater";
 import { definePluginSettings } from "@api/Settings";
@@ -76,53 +77,80 @@ const messageFetchQueue = new Queue();
 
 const settings = definePluginSettings({
     messageBackgroundColor: {
-        description: "Background color for messages in rich embeds",
+        get label() {
+            return t("plugin.messageLinkEmbeds.option.messageBackgroundColor.label");
+        },
+        get description() {
+            return t("plugin.messageLinkEmbeds.option.messageBackgroundColor.description");
+        },
         type: OptionType.BOOLEAN
     },
     automodEmbeds: {
-        description: "Use automod embeds instead of rich embeds (smaller but less info)",
+        get label() {
+            return t("plugin.messageLinkEmbeds.option.automodEmbeds.label");
+        },
+        get description() {
+            return t("plugin.messageLinkEmbeds.option.automodEmbeds.description");
+        },
         type: OptionType.SELECT,
-        options: [
-            {
-                label: "Always use automod embeds",
-                value: "always"
-            },
-            {
-                label: "Prefer automod embeds, but use rich embeds if some content can't be shown",
-                value: "prefer"
-            },
-            {
-                label: "Never use automod embeds",
-                value: "never",
-                default: true
-            }
-        ]
+        get options() {
+            return [
+                {
+                    label: t("plugin.messageLinkEmbeds.option.automodEmbeds.always"),
+                    value: "always"
+                },
+                {
+                    label: t("plugin.messageLinkEmbeds.option.automodEmbeds.prefer"),
+                    value: "prefer"
+                },
+                {
+                    label: t("plugin.messageLinkEmbeds.option.automodEmbeds.never"),
+                    value: "never",
+                    default: true
+                }
+            ];
+        }
     },
     listMode: {
-        description: "Whether to use ID list as blacklist or whitelist",
+        get label() {
+            return t("plugin.messageLinkEmbeds.option.listMode.label");
+        },
+        get description() {
+            return t("plugin.messageLinkEmbeds.option.listMode.description");
+        },
         type: OptionType.SELECT,
-        options: [
-            {
-                label: "Blacklist",
-                value: "blacklist",
-                default: true
-            },
-            {
-                label: "Whitelist",
-                value: "whitelist"
-            }
-        ]
+        get options() {
+            return [
+                {
+                    label: t("plugin.messageLinkEmbeds.option.listMode.blacklist"),
+                    value: "blacklist",
+                    default: true
+                },
+                {
+                    label: t("plugin.messageLinkEmbeds.option.listMode.whitelist"),
+                    value: "whitelist"
+                }
+            ];
+        }
     },
     idList: {
-        description: "Guild/channel/user IDs to blacklist or whitelist (separate with comma)",
+        get label() {
+            return t("plugin.messageLinkEmbeds.option.idList.label");
+        },
+        get description() {
+            return t("plugin.messageLinkEmbeds.option.idList.description");
+        },
         type: OptionType.STRING,
         default: ""
     },
     clearMessageCache: {
+        get label() {
+            return t("plugin.messageLinkEmbeds.option.clearMessageCache.label");
+        },
         type: OptionType.COMPONENT,
         component: () => (
             <Button onClick={() => messageCache.clear()}>
-                Clear the linked message cache
+                {t("plugin.messageLinkEmbeds.option.clearMessageCache.description")}
             </Button>
         )
     }
@@ -188,9 +216,9 @@ function getImages(message: Message): Attachment[] {
 
 function noContent(attachments: number, embeds: number) {
     if (!attachments && !embeds) return "";
-    if (!attachments) return `[no content, ${embeds} embed${embeds !== 1 ? "s" : ""}]`;
-    if (!embeds) return `[no content, ${attachments} attachment${attachments !== 1 ? "s" : ""}]`;
-    return `[no content, ${attachments} attachment${attachments !== 1 ? "s" : ""} and ${embeds} embed${embeds !== 1 ? "s" : ""}]`;
+    if (!attachments) return `[${t("plugin.messageLinkEmbeds.noContent.noAttachments", { count: embeds, s: embeds !== 1 ? "s" : "" })}]`;
+    if (!embeds) return `[${t("plugin.messageLinkEmbeds.noContent.noEmbeds", { count: attachments, s: attachments !== 1 ? "s" : "" })}]`;
+    return `[${t("plugin.messageLinkEmbeds.noContent.both", { attachments, embeds, attachmentsS: attachments !== 1 ? "s" : "", embedsS: embeds !== 1 ? "s" : "" })}]`;
 }
 
 function requiresRichEmbed(message: Message) {
@@ -279,9 +307,9 @@ function MessageEmbedAccessory({ message }: { message: Message; }) {
 }
 
 function getChannelLabelAndIconUrl(channel: Channel) {
-    if (channel.isDM()) return ["Direct Message", IconUtils.getUserAvatarURL(UserStore.getUser(channel.recipients[0]))];
-    if (channel.isGroupDM()) return ["Group DM", IconUtils.getChannelIconURL(channel)];
-    return ["Server", IconUtils.getGuildIconURL(GuildStore.getGuild(channel.guild_id))];
+    if (channel.isDM()) return [t("plugin.messageLinkEmbeds.dm"), IconUtils.getUserAvatarURL(UserStore.getUser(channel.recipients[0]))];
+    if (channel.isGroupDM()) return [t("plugin.messageLinkEmbeds.groupDm"), IconUtils.getChannelIconURL(channel)];
+    return [t("plugin.messageLinkEmbeds.server"), IconUtils.getGuildIconURL(GuildStore.getGuild(channel.guild_id))];
 }
 
 function ChannelMessageEmbedAccessory({ message, channel }: MessageEmbedProps): JSX.Element | null {
@@ -369,6 +397,10 @@ export default definePlugin({
     description: "Adds a preview to messages that link another message",
     authors: [Devs.TheSun, Devs.Ven, Devs.RyanCaoDev],
     dependencies: ["MessageAccessoriesAPI", "MessageUpdaterAPI", "UserSettingsAPI"],
+
+    get displayDescription() {
+        return t("plugin.messageLinkEmbeds.description");
+    },
 
     settings,
 

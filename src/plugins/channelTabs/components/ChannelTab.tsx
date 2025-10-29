@@ -352,7 +352,7 @@ export default function ChannelTab(props: ChannelTabsProps & { index: number; })
             const hoverMiddleX = hoverWidth / 2;
 
             // get tab width
-            const draggedElement = document.querySelector(".vc-channeltabs-tab-dragging") as HTMLElement;
+            const draggedElement = document.querySelector(".pc-channeltabs-tab-dragging") as HTMLElement;
             const draggedWidth = draggedElement?.getBoundingClientRect().width || hoverWidth;
             const halfDraggedWidth = draggedWidth / 2;
 

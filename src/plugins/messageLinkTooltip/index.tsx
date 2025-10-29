@@ -7,6 +7,7 @@
 
 import "./style.css";
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -22,41 +23,63 @@ const ChannelMessage = findComponentByCodeLazy("isFirstMessageInForumPost", "tra
 
 const settings = definePluginSettings({
     onLink: {
-        description: "Show tooltip when hovering over message links",
+        get label() {
+            return t("plugin.messageLinkTooltip.option.onLink.label");
+        },
+        get description() {
+            return t("plugin.messageLinkTooltip.option.onLink.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true,
     },
     onReply: {
-        description: "Show tooltip when hovering over message replies",
+        get label() {
+            return t("plugin.messageLinkTooltip.option.onReply.label");
+        },
+        get description() {
+            return t("plugin.messageLinkTooltip.option.onReply.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true,
     },
     onForward: {
-        description: "Show tooltip when hovering over forwarded messages",
+        get label() {
+            return t("plugin.messageLinkTooltip.option.onForward.label");
+        },
+        get description() {
+            return t("plugin.messageLinkTooltip.option.onForward.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true,
     },
     display: {
-        description: "Display style",
+        get label() {
+            return t("plugin.messageLinkTooltip.option.display.label");
+        },
+        get description() {
+            return t("plugin.messageLinkTooltip.option.display.description");
+        },
         type: OptionType.SELECT,
-        options: [
-            {
-                label: "Same as message",
-                value: "auto",
-                default: true
-            },
-            {
-                label: "Compact",
-                value: "compact"
-            },
-            {
-                label: "Cozy",
-                value: "cozy"
-            },
-        ]
+        get options() {
+            return [
+                {
+                    label: t("plugin.messageLinkTooltip.option.display.auto"),
+                    value: "auto",
+                    default: true
+                },
+                {
+                    label: t("plugin.messageLinkTooltip.option.display.compact"),
+                    value: "compact"
+                },
+                {
+                    label: t("plugin.messageLinkTooltip.option.display.cozy"),
+                    value: "cozy"
+                },
+            ];
+        }
     },
 });
 
@@ -64,6 +87,10 @@ export default definePlugin({
     name: "MessageLinkTooltip",
     description: "Like MessageLinkEmbed but without taking space",
     authors: [Devs.Kyuuhachi, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.messageLinkTooltip.description");
+    },
 
     settings,
 
@@ -136,7 +163,7 @@ function MessagePreview({ channelId, messageId }) {
     const compact = settings.store.display === "compact" ? true : settings.store.display === "cozy" ? false : rawCompact;
 
     if (!message) {
-        return <span>Loading...</span>;
+        return <span>{t("plugin.messageLinkTooltip.loading")}</span>;
     }
 
     return <ChannelMessage

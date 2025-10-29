@@ -4840,6 +4840,71 @@
                     "description": "Kendi mesajlarına gösterge ekleme"
                 }
             }
+        },
+        "messageLinkEmbeds": {
+            "name": "MessageLinkEmbeds",
+            "description": "Başka bir mesaja bağlantı içeren mesajlara bir önizleme ekler.",
+            "option": {
+                "messageBackgroundColor": {
+                    "label": "Mesaj Arka Plan Rengi",
+                    "description": "Zengin yerleştirmelerdeki mesajlar için arka plan rengi"
+                },
+                "automodEmbeds": {
+                    "label": "Automod Gömüleri",
+                    "description": "Zengin yerleştirmeler yerine automod gömülerini kullan (daha küçük ama daha az bilgi içerir)",
+                    "always": "Her zaman automod gömülerini kullan",
+                    "prefer": "Automod gömülerini tercih et, ancak bazı içerikler gösterilemiyorsa zengin yerleştirmeleri kullan",
+                    "never": "Asla automod gömülerini kullanma"
+                },
+                "listMode": {
+                    "label": "Liste Modu",
+                    "description": "ID listesinin kara liste mi yoksa beyaz liste mi olarak kullanılacağını belirle",
+                    "blacklist": "Kara Liste",
+                    "whitelist": "Beyaz Liste"
+                },
+                "idList": {
+                    "label": "ID Listesi",
+                    "description": "Kara listeye veya beyaz listeye eklenecek sunucu/kanal/kullanıcı ID’leri (virgülle ayır)"
+                },
+                "clearMessageCache": {
+                    "label": "Mesaj Önbelleğini Temizle",
+                    "description": "Bağlantılı mesaj önbelleğini temizle"
+                }
+            },
+            "noContent": {
+                "noAttachments": "içerik yok {{count}} gömülü mesaj",
+                "noEmbeds": "içerik yok {{count}} ek",
+                "both": "içerik yok, {{attachments}} ek ve {{embeds}} gömülü mesaj"
+            },
+            "dm": "Özel Mesaj",
+            "groupDm": "Grup Mesajı",
+            "server": "Sunucu"
+        },
+        "messageLinkTooltip": {
+            "name": "MessageLinkTooltip",
+            "description": "MessageLinkEmbed gibi ama yer kaplamadan çalışır.",
+            "loading": "Yükleniyor...",
+            "option": {
+                "onLink": {
+                    "label": "Bağlantı Üzerinde",
+                    "description": "Mesaj bağlantılarının üzerine gelindiğinde araç ipucunu göster"
+                },
+                "onReply": {
+                    "label": "Yanıt Üzerinde",
+                    "description": "Mesaj yanıtlarının üzerine gelindiğinde araç ipucunu göster"
+                },
+                "onForward": {
+                    "label": "İletilen Mesaj Üzerinde",
+                    "description": "İletilen mesajların üzerine gelindiğinde araç ipucunu göster"
+                },
+                "display": {
+                    "label": "Görünüm",
+                    "description": "Görünüm stili",
+                    "auto": "Mesaj ile aynı",
+                    "compact": "Kompakt",
+                    "cozy": "Rahat"
+                }
+            }
         }
     }
 }

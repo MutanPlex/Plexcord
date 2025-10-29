@@ -4840,6 +4840,71 @@
                     "description": "Don't add indicator to your own messages"
                 }
             }
+        },
+        "messageLinkEmbeds": {
+            "name": "MessageLinkEmbeds",
+            "description": "Adds a preview to messages that link another message",
+            "option": {
+                "messageBackgroundColor": {
+                    "label": "Message Background Color",
+                    "description": "Background color for messages in rich embeds"
+                },
+                "automodEmbeds": {
+                    "label": "Automod Embeds",
+                    "description": "Use automod embeds instead of rich embeds (smaller but less info)",
+                    "always": "Always use automod embeds",
+                    "prefer": "Prefer automod embeds, but use rich embeds if some content can't be shown",
+                    "never": "Never use automod embeds"
+                },
+                "listMode": {
+                    "label": "List Mode",
+                    "description": "Whether to use ID list as blacklist or whitelist",
+                    "blacklist": "Blacklist",
+                    "whitelist": "Whitelist"
+                },
+                "idList": {
+                    "label": "ID List",
+                    "description": "Guild/channel/user IDs to blacklist or whitelist (separate with comma)"
+                },
+                "clearMessageCache": {
+                    "label": "Clear Message Cache",
+                    "description": "Clear the linked message cache"
+                }
+            },
+            "noContent": {
+                "noAttachments": "no content {{count}} embed{{s}}",
+                "noEmbeds": "no content {{count}} attachment{{s}}",
+                "both": "no content, {{attachments}} attachment{{attachmentsS}} and {{embeds}} embed{{embedsS}}"
+            },
+            "dm": "Direct Message",
+            "groupDm": "Group DM",
+            "server": "Server"
+        },
+        "messageLinkTooltip": {
+            "name": "MessageLinkTooltip",
+            "description": "Like MessageLinkEmbed but without taking space",
+            "loading": "Loading...",
+            "option": {
+                "onLink": {
+                    "label": "On Link",
+                    "description": "Show tooltip when hovering over message links"
+                },
+                "onReply": {
+                    "label": "On Reply",
+                    "description": "Show tooltip when hovering over message replies"
+                },
+                "onForward": {
+                    "label": "On Forward",
+                    "description": "Show tooltip when hovering over forwarded messages"
+                },
+                "display": {
+                    "label": "Display",
+                    "description": "Display style",
+                    "auto": "Same as message",
+                    "compact": "Compact",
+                    "cozy": "Cozy"
+                }
+            }
         }
     }
 }
