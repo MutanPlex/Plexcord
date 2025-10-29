@@ -17,7 +17,7 @@ Taking Discord to the Next Level!
 
 ## Join our Support/Community Server
 
-https://discord.gg/5backnRhY9
+https://discord.gg/HQGYXm5XSh
 
 ## Star History
 

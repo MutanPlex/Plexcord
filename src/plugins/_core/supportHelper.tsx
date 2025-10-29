@@ -373,7 +373,7 @@ export default definePlugin({
                 {tJsx("plugins.metadata.supportHelper.dm.warning", {
                     br: <br />,
                     channel: Parser.parse("https://discord.com/channels/1342668210331324476/1344043206286905364"),
-                    support: <Link href="https://discord.gg/5backnRhY9" target="_blank" rel="noreferrer">Plexcord</Link>
+                    support: <Link href="https://discord.gg/HQGYXm5XSh" target="_blank" rel="noreferrer">Plexcord</Link>
                 })}
             </Card>
         );
