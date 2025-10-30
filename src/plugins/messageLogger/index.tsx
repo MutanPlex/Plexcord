@@ -23,6 +23,7 @@ import {
     findGroupChildrenByChildId,
     NavContextMenuPatchCallback,
 } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { updateMessage } from "@api/MessageUpdater";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
@@ -124,9 +125,9 @@ const patchMessageContextMenu: NavContextMenuPatchCallback = (
     let label;
 
     if (!Plexcord.Plugins.isPluginEnabled("MessageLoggerEnhanced")) {
-        label = "Remove Message History";
+        label = t("plugin.messageLogger.removeMessage");
     } else {
-        label = "Remove Message (Temporary)";
+        label = t("plugin.messageLogger.removeMessageTemporary");
     }
 
     children.push(
@@ -163,7 +164,7 @@ const patchChannelContextMenu: NavContextMenuPatchCallback = (
     group.push(
         <Menu.MenuItem
             id="pc-ml-clear-channel"
-            label="Clear Message Log"
+            label={t("plugin.messageLogger.clearMessageLog")}
             color="danger"
             action={() => {
                 messages.forEach(msg => {
@@ -320,64 +321,121 @@ export function parseEditContent(content: string, message: Message, previousCont
 
 const settings = definePluginSettings({
     deleteStyle: {
+        get label() {
+            return t("plugin.messageLogger.option.deleteStyle.label");
+        },
+        get description() {
+            return t("plugin.messageLogger.option.deleteStyle.description");
+        },
         type: OptionType.SELECT,
-        description: "The style of deleted messages",
         default: "text",
-        options: [
-            { label: "Red text", value: "text", default: true },
-            { label: "Red overlay", value: "overlay" },
-        ],
+        get options() {
+            return [
+                { label: t("plugin.messageLogger.option.deleteStyle.text"), value: "text", default: true },
+                { label: t("plugin.messageLogger.option.deleteStyle.overlay"), value: "overlay" },
+            ];
+        },
         onChange: () => addDeleteStyle(),
     },
     logDeletes: {
+        get label() {
+            return t("plugin.messageLogger.option.logDeletes.label");
+        },
+        get description() {
+            return t("plugin.messageLogger.option.logDeletes.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether to log deleted messages",
         default: true,
     },
     collapseDeleted: {
+        get label() {
+            return t("plugin.messageLogger.option.collapseDeleted.label");
+        },
+        get description() {
+            return t("plugin.messageLogger.option.collapseDeleted.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether to collapse deleted messages, similar to blocked messages",
         default: false,
         restartNeeded: true,
     },
     logEdits: {
+        get label() {
+            return t("plugin.messageLogger.option.logEdits.label");
+        },
+        get description() {
+            return t("plugin.messageLogger.option.logEdits.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether to log edited messages",
         default: true,
     },
     inlineEdits: {
+        get label() {
+            return t("plugin.messageLogger.option.inlineEdits.label");
+        },
+        get description() {
+            return t("plugin.messageLogger.option.inlineEdits.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether to display edit history as part of message content",
         default: true,
     },
     ignoreBots: {
+        get label() {
+            return t("plugin.messageLogger.option.ignoreBots.label");
+        },
+        get description() {
+            return t("plugin.messageLogger.option.ignoreBots.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether to ignore messages by bots",
         default: false,
     },
     ignoreSelf: {
+        get label() {
+            return t("plugin.messageLogger.option.ignoreSelf.label");
+        },
+        get description() {
+            return t("plugin.messageLogger.option.ignoreSelf.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether to ignore messages by yourself",
         default: false,
     },
     ignoreUsers: {
+        get label() {
+            return t("plugin.messageLogger.option.ignoreUsers.label");
+        },
+        get description() {
+            return t("plugin.messageLogger.option.ignoreUsers.description");
+        },
         type: OptionType.STRING,
-        description: "Comma-separated list of user IDs to ignore",
         default: "",
     },
     ignoreChannels: {
+        get label() {
+            return t("plugin.messageLogger.option.ignoreChannels.label");
+        },
+        get description() {
+            return t("plugin.messageLogger.option.ignoreChannels.description");
+        },
         type: OptionType.STRING,
-        description: "Comma-separated list of channel IDs to ignore",
         default: "",
     },
     ignoreGuilds: {
+        get label() {
+            return t("plugin.messageLogger.option.ignoreGuilds.label");
+        },
+        get description() {
+            return t("plugin.messageLogger.option.ignoreGuilds.description");
+        },
         type: OptionType.STRING,
-        description: "Comma-separated list of guild IDs to ignore",
         default: "",
     },
     showEditDiffs: {
+        get label() {
+            return t("plugin.messageLogger.option.showEditDiffs.label");
+        },
+        get description() {
+            return t("plugin.messageLogger.option.showEditDiffs.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show visual differences between edited message versions",
         default: false,
         onChange: value => {
             if (!value && settings.store.separatedDiffs) {
@@ -386,8 +444,13 @@ const settings = definePluginSettings({
         },
     },
     separatedDiffs: {
+        get label() {
+            return t("plugin.messageLogger.option.separatedDiffs.label");
+        },
+        get description() {
+            return t("plugin.messageLogger.option.separatedDiffs.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Separate addition and removals in diffs for a more readable differential",
         default: false,
     },
 }, {
@@ -404,6 +467,10 @@ export default definePlugin({
     authors: [Devs.rushii, Devs.Ven, Devs.AutumnVN, Devs.Nickyux, Devs.Kyuuhachi, PcDevs.justjxke],
     dependencies: ["MessageUpdaterAPI"],
     settings,
+
+    get displayDescription() {
+        return t("plugin.messageLogger.description");
+    },
 
     contextMenus: {
         message: patchMessageContextMenu,

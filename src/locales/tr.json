@@ -4742,8 +4742,8 @@
                     "label": "Tıklamayla Silmeyi Etkinleştir",
                     "description": "Backspace tuşunu basılı tutarken tıklamayla silmeyi etkinleştir"
                 },
-                "enableClickToEdit": {
-                    "label": "Tıklamayla Düzenlemeyi Etkinleştir",
+                "enableDoubleClickToEdit": {
+                    "label": "Çift Tıklamayla Düzenlemeyi Etkinleştir",
                     "description": "Çift tıklamayla düzenlemeyi etkinleştir"
                 },
                 "enableDoubleClickToReply": {
@@ -4903,6 +4903,71 @@
                     "auto": "Mesaj ile aynı",
                     "compact": "Kompakt",
                     "cozy": "Rahat"
+                }
+            }
+        },
+        "messageLogger": {
+            "name": "MessageLogger",
+            "description": "Silinen ve düzenlenen mesajları geçici olarak kaydeder.",
+            "removeMessage": "Mesaj Geçmişini Kaldır",
+            "removeMessageTemporary": "Mesajı Kaldır (Geçici)",
+            "clearMessageLog": "Mesaj Günlüğünü Temizle",
+            "modal": {
+                "edit": {
+                    "title": "Mesaj Düzenleme Geçmişi",
+                    "tooltip": "Bu düzenleme durumu kaydedilmediği için görüntülenemiyor."
+                }
+            },
+            "option": {
+                "deleteStyle": {
+                    "label": "Silme Stili",
+                    "description": "Silinen mesajların görünüm stili",
+                    "text": "Kırmızı metin",
+                    "overlay": "Kırmızı kaplama"
+                },
+                "logDeletes": {
+                    "label": "Silinenleri Kaydet",
+                    "description": "Silinen mesajların kaydedilip kaydedilmeyeceğini belirler"
+                },
+                "collapseDeleted": {
+                    "label": "Silinenleri Daralt",
+                    "description": "Silinen mesajları, engellenen mesajlara benzer şekilde daralt"
+                },
+                "logEdits": {
+                    "label": "Düzenlenenleri Kaydet",
+                    "description": "Düzenlenen mesajların kaydedilip kaydedilmeyeceğini belirler"
+                },
+                "inlineEdits": {
+                    "label": "Satır İçi Düzenlemeler",
+                    "description": "Düzenleme geçmişini mesaj içeriğinin bir parçası olarak göster"
+                },
+                "ignoreBots": {
+                    "label": "Botları Yoksay",
+                    "description": "Botlar tarafından gönderilen mesajları yoksay"
+                },
+                "ignoreSelf": {
+                    "label": "Kendimi Yoksay",
+                    "description": "Kendi mesajlarını yoksay"
+                },
+                "ignoreUsers": {
+                    "label": "Kullanıcıları Yoksay",
+                    "description": "Yoksayılacak kullanıcı kimliklerinin virgülle ayrılmış listesi"
+                },
+                "ignoreChannels": {
+                    "label": "Kanalları Yoksay",
+                    "description": "Yoksayılacak kanal kimliklerinin virgülle ayrılmış listesi"
+                },
+                "ignoreGuilds": {
+                    "label": "Sunucuları Yoksay",
+                    "description": "Yoksayılacak sunucu kimliklerinin virgülle ayrılmış listesi"
+                },
+                "showEditDiffs": {
+                    "label": "Düzenleme Farklarını Göster",
+                    "description": "Düzenlenmiş mesaj sürümleri arasındaki farkları göster"
+                },
+                "separatedDiffs": {
+                    "label": "Ayrılmış Farklar",
+                    "description": "Farklarda eklemeleri ve silmeleri ayrı göstererek daha okunabilir bir görünüm sağlar"
                 }
             }
         }

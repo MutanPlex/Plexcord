@@ -4742,8 +4742,8 @@
                     "label": "Enable Delete on Click",
                     "description": "Enable delete on click while holding backspace"
                 },
-                "enableClickToEdit": {
-                    "label": "Enable Click to Edit",
+                "enableDoubleClickToEdit": {
+                    "label": "Enable Double Click to Edit",
                     "description": "Enable double click to edit"
                 },
                 "enableDoubleClickToReply": {
@@ -4903,6 +4903,71 @@
                     "auto": "Same as message",
                     "compact": "Compact",
                     "cozy": "Cozy"
+                }
+            }
+        },
+        "messageLogger": {
+            "name": "MessageLogger",
+            "description": "Temporarily logs deleted and edited messages.",
+            "removeMessage": "Remove Message History",
+            "removeMessageTemporary": "Remove Message (Temporary)",
+            "clearMessageLog": "Clear Message Log",
+            "modal": {
+                "edit": {
+                    "title": "Message Edit History",
+                    "tooltip": "This edit state was not logged so it can't be displayed."
+                }
+            },
+            "option": {
+                "deleteStyle": {
+                    "label": "Delete Style",
+                    "description": "The style of deleted messages",
+                    "text": "Red text",
+                    "overlay": "Red overlay"
+                },
+                "logDeletes": {
+                    "label": "Log Deletes",
+                    "description": "Whether to log deleted messages"
+                },
+                "collapseDeleted": {
+                    "label": "Collapse Deleted",
+                    "description": "Whether to collapse deleted messages, similar to blocked messages"
+                },
+                "logEdits": {
+                    "label": "Log Edits",
+                    "description": "Whether to log edited messages"
+                },
+                "inlineEdits": {
+                    "label": "Inline Edits",
+                    "description": "Whether to display edit history as part of message content"
+                },
+                "ignoreBots": {
+                    "label": "Ignore Bots",
+                    "description": "Whether to ignore messages by bots"
+                },
+                "ignoreSelf": {
+                    "label": "Ignore Self",
+                    "description": "Whether to ignore messages by yourself"
+                },
+                "ignoreUsers": {
+                    "label": "Ignore Users",
+                    "description": "Comma-separated list of user IDs to ignore"
+                },
+                "ignoreChannels": {
+                    "label": "Ignore Channels",
+                    "description": "Comma-separated list of channel IDs to ignore"
+                },
+                "ignoreGuilds": {
+                    "label": "Ignore Guilds",
+                    "description": "Comma-separated list of guild IDs to ignore"
+                },
+                "showEditDiffs": {
+                    "label": "Show Edit Diffs",
+                    "description": "Show visual differences between edited message versions"
+                },
+                "separatedDiffs":{
+                    "label": "Separated Diffs",
+                    "description": "Separate addition and removals in diffs for a more readable differential"
                 }
             }
         }

@@ -23,6 +23,7 @@ export type ITag = {
 
 export interface TagSetting {
     text: string;
+    description?: string;
     showInChat: boolean;
     showInNotChat: boolean;
 }
