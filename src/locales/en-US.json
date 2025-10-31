@@ -4980,9 +4980,8 @@
             "blacklist": "Blacklist",
             "whitelist": "Whitelist",
             "failedToRemove": "Failed to remove message",
-            "deleted": "Deleted",
-            "edited": "Edited",
-            "ghostPinged": "Ghost Pinged",
+            "successfullyImported": "Successfully imported logs",
+            "errorImportingLogs": "Error importing logs. Check the console for more information",
             "alert": {
                 "clearLogs": {
                     "title": "Clear Logs",

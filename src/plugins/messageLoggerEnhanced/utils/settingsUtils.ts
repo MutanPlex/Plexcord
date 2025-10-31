@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { addMessagesBulkIDB, DBMessageRecord, getAllMessagesIDB } from "@plugins/messageLoggerEnhanced/db";
 import { LoggedMessage, LoggedMessageJSON } from "@plugins/messageLoggerEnhanced/types";
 import { chooseFile as chooseFileWeb } from "@utils/web";
@@ -69,7 +70,7 @@ export async function importLogs() {
 
         Toasts.show({
             id: Toasts.genId(),
-            message: "Successfully imported logs",
+            message: t("plugin.messageLoggerEnhanced.successfullyImported"),
             type: Toasts.Type.SUCCESS
         });
     } catch (e) {
@@ -77,7 +78,7 @@ export async function importLogs() {
 
         Toasts.show({
             id: Toasts.genId(),
-            message: "Error importing logs. Check the console for more information",
+            message: t("plugin.messageLoggerEnhanced.errorImportingLogs"),
             type: Toasts.Type.FAILURE
         });
     }

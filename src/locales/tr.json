@@ -4980,6 +4980,8 @@
             "blacklist": "Kara Liste",
             "whitelist": "Beyaz Liste",
             "failedToRemove": "Mesaj kaldırılamadı",
+            "successfullyImported": "Günlükler başarıyla içe aktarıldı.",
+            "errorImportingLogs": "Günlükler içe aktarılırken bir hata oluştu. Daha fazla bilgi için konsolu kontrol edin.",
             "alert": {
                 "clearLogs": {
                     "title": "Günlükleri Temizle",
