@@ -19,7 +19,7 @@
 
 import "./styles.css";
 
-import { Settings } from "@api/Settings";
+import { migratePluginToSetting } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -31,6 +31,9 @@ import { SpotifyPlayer } from "./spotify/PlayerComponent";
 import { TidalLyrics } from "./tidal/lyrics/components/lyrics";
 import { TidalPlayer } from "./tidal/TidalPlayer";
 import { YtmPlayer } from "./youtubeMusic/PlayerComponent";
+
+migratePluginToSetting("MusicControls", "SpotifyControls", "showSpotifyControls");
+migratePluginToSetting("MusicControls", "SpotifyLyrics", "showSpotifyLyrics");
 
 export default definePlugin({
     name: "MusicControls",
@@ -120,14 +123,6 @@ export default definePlugin({
     },
 
     async start() {
-        if (Settings.plugins?.SpotifyControls?.enabled) {
-            settings.store.showSpotifyControls = true;
-            Settings.plugins.SpotifyControls.enabled = false;
-        }
-        if (Settings.plugins?.SpotifyLyrics?.enabled) {
-            settings.store.showSpotifyLyrics = true;
-            Settings.plugins.SpotifyLyrics.enabled = false;
-        }
         await migrateOldLyrics();
         toggleHoverControls(settings.store.hoverControls);
     },

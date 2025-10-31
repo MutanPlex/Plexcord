@@ -9,6 +9,7 @@ export const Native = getNative();
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { Devs, PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin from "@utils/types";
@@ -252,8 +253,12 @@ async function processMessageFetch(response: FetchMessagesResponse) {
 export default definePlugin({
     name: "MessageLoggerEnhanced",
     authors: [Devs.Aria, PcDevs.MutanPlex],
-    description: "G'day",
+    description: "Enhances the MessageLogger plugin with additional features.",
     dependencies: ["MessageLogger"],
+
+    get displayDescription() {
+        return t("messageLoggerEnhanced.description");
+    },
 
     patches: [
         {
@@ -280,7 +285,7 @@ export default definePlugin({
         {
             find: '?"BACK_FORWARD_NAVIGATION":',
             replacement: {
-                match: /focusSectionProps:"HELP".{0,20},className:(\i(?:\.button)?)\}\),/,
+                match: /canShowReminder:.+?className:(\i).*?\}\),/,
                 replace: "$& $self.renderMessageLogButton(),"
             }
         },

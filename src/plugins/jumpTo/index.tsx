@@ -7,7 +7,6 @@
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { t } from "@api/i18n";
-import { migratePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { Menu, NavigationRouter, RestAPI } from "@webpack/common";
@@ -48,7 +47,6 @@ const MenuPatch: NavContextMenuPatchCallback = (children, { channel }) => {
     );
 };
 
-migratePluginSettings("JumpTo", "JumpToStart", "AutoJump");
 export default definePlugin({
     name: "JumpTo",
     description: "Adds context menu options to jump to the start or bottom of a channel/DM",

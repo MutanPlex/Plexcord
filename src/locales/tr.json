@@ -4970,6 +4970,226 @@
                     "description": "Farklarda eklemeleri ve silmeleri ayrı göstererek daha okunabilir bir görünüm sağlar"
                 }
             }
+        },
+        "messageLoggerEnhanced": {
+            "name": "MessageLoggerEnhanced",
+            "description": "MessageLogger eklentisini ek özelliklerle geliştirir.",
+            "updateImageCacheDir": "Görsel önbellek dizini başarıyla güncellendi.",
+            "updateLogsDir": "Günlükler dizini başarıyla güncellendi.",
+            "failedUpdate": "Dizin güncellenemedi.",
+            "blacklist": "Kara Liste",
+            "whitelist": "Beyaz Liste",
+            "failedToRemove": "Mesaj kaldırılamadı",
+            "alert": {
+                "clearLogs": {
+                    "title": "Günlükleri Temizle",
+                    "body": "Tüm günlükleri temizlemek istediğinizden emin misiniz?",
+                    "confirmText": "Temizle",
+                    "cancel": "İptal"
+                },
+                "clearVisibleLogs": {
+                    "title": "Görünür Günlükleri Temizle",
+                    "body": "{{messages}} günlükleri temizlemek istediğinizden emin misiniz?",
+                    "confirmText": "Temizle",
+                    "cancel": "İptal"
+                }
+            },
+            "context": {
+                "title": "Mesaj Günlüğü",
+                "jumpToMessage": "Mesaja Git",
+                "openUserProfile": "Kullanıcı Profilini Aç",
+                "copyContent": "İçeriği Kopyala",
+                "copyUserId": "Kullanıcı Kimliğini Kopyala",
+                "copyMessageId": "Mesaj Kimliğini Kopyala",
+                "copyChannelId": "Kanal Kimliğini Kopyala",
+                "copyServerId": "Sunucu Kimliğini Kopyala",
+                "deleteLog": "Günlüğü Sil",
+                "fromUsernameDm": "{{username}} adlı kullanıcının DM'lerinden",
+                "fromGroupDm": "{{channelName}} grup DM'sinden",
+                "fromServerChannel": "{{serverName}} sunucusundaki {{channelName}} kanalından",
+                "moveTypeTo": "{{type}} öğesini {{destination}}'ye taşı",
+                "removeTypeFrom": "{{type}} öğesini {{list}}'den kaldır",
+                "openLogsFor": "{{name}} için Günlükleri Aç",
+                "openLogs": "Günlükleri Aç",
+                "removeMessage": "Mesajı Kaldır (Kalıcı)",
+                "removeMessageHistory": "Mesaj Geçmişini Kaldır (Kalıcı)",
+                "deleteMessageHide": "Mesajı Sil (Mesaj Günlükçülerinden Gizle)",
+                "addServerToBlacklist": "Sunucuyu Kara Listeye Ekle",
+                "addServerToWhitelist": "Sunucuyu Beyaz Listeye Ekle",
+                "removeServerFromBlacklist": "Sunucuyu Kara Listeden Kaldır",
+                "removeServerFromWhitelist": "Sunucuyu Beyaz Listeden Kaldır",
+                "moveServerToBlacklist": "Sunucuyu Kara Listeye Taşı",
+                "moveServerToWhitelist": "Sunucuyu Beyaz Listeye Taşı",
+                "addUserToBlacklist": "Kullanıcıyı Kara Listeye Ekle",
+                "addUserToWhitelist": "Kullanıcıyı Beyaz Listeye Ekle",
+                "removeUserFromBlacklist": "Kullanıcıyı Kara Listeden Kaldır",
+                "removeUserFromWhitelist": "Kullanıcıyı Beyaz Listeden Kaldır",
+                "moveUserToBlacklist": "Kullanıcıyı Kara Listeye Taşı",
+                "moveUserToWhitelist": "Kullanıcıyı Beyaz Listeye Taşı",
+                "addChannelToBlacklist": "Kanalı Kara Listeye Ekle",
+                "addChannelToWhitelist": "Kanalı Beyaz Listeye Ekle",
+                "removeChannelFromBlacklist": "Kanalı Kara Listeden Kaldır",
+                "removeChannelFromWhitelist": "Kanalı Beyaz Listeden Kaldır",
+                "moveChannelToBlacklist": "Kanalı Kara Listeye Taşı",
+                "moveChannelToWhitelist": "Kanalı Beyaz Listeye Taşı"
+            },
+            "type": {
+                "server": "Sunucu",
+                "user": "Kullanıcı",
+                "channel": "Kanal"
+            },
+            "button": {
+                "chooseFolder": "Klasör Seç",
+                "browse": "Gözat",
+                "clearLogs": "Tüm Günlükleri Temizle",
+                "clearVisibleLogs": "Görünür Günlükleri Temizle",
+                "sortOldest": "Eskiden Yeniye Sırala",
+                "sortNewest": "Yeniden Eskiye Sırala",
+                "loadMore": "Daha Fazla Yükle",
+                "noResults": "{{tab}} sekmesinde sonuç yok",
+                "tryOtherTabs": "{{nextTab}} veya {{lastTab}} sekmelerini dene",
+                "importLogs": "Günlükleri İçe Aktar"
+            },
+            "modal": {
+                "title": "Mesajları Filtrele",
+                "deleted": "Silinmiş",
+                "edited": "Düzenlenmiş",
+                "ghostPing": "Görünmez Ping",
+                "empty": "Boş, huh",
+                "importLogs": "ML Enhanced artık günlükleri IndexedDB'ye kaydediyor. Eski günlüklerinizi günlük dizininden içe aktarmanız gerekiyor. İçe aktarma mevcut günlükleri değiştirmez."
+            },
+            "clear": {
+                "title": "Günlükleri Temizle",
+                "description": "Tüm günlükleri temizlemek istediğinizden emin misiniz?",
+                "confirm": "Temizle",
+                "cancel": "İptal"
+            },
+            "option": {
+                "saveMessages": {
+                    "label": "Mesajları Kaydet",
+                    "description": "Silinen ve düzenlenen mesajların kaydedilip kaydedilmeyeceğini belirler."
+                },
+                "saveImages": {
+                    "label": "Görselleri Kaydet",
+                    "description": "Silinen ekleri kaydet."
+                },
+                "sortNewest": {
+                    "label": "Yeniden Eskiye Sırala",
+                    "description": "Günlükleri en yeniye göre sırala."
+                },
+                "cacheMessagesFromServers": {
+                    "label": "Sunuculardan Mesajları Önbelleğe Al",
+                    "description": "Genellikle günlükleyici yalnızca beyaz listedeki kimlikleri ve DM'leri kaydeder, bu seçeneği etkinleştirmek tüm sunuculardaki mesajları da kaydeder. Ancak bu önbellek sınırını aşabilir ve bazı mesajların atlanmasına neden olabilir."
+                },
+                "ignoreBots": {
+                    "label": "Botları Yoksay",
+                    "description": "Bot mesajlarını yoksay."
+                },
+                "ignoreWebhooks": {
+                    "label": "Webhookları Yoksay",
+                    "description": "Webhook mesajlarını yoksay."
+                },
+                "ignoreSelf": {
+                    "label": "Kendimi Yoksay",
+                    "description": "Kendi mesajlarını yoksay."
+                },
+                "ignoreMutedGuilds": {
+                    "label": "Sessize Alınmış Sunucuları Yoksay",
+                    "description": "Sessize alınmış sunuculardaki mesajlar kaydedilmez. Ancak beyaz listedeki kullanıcılar/kanallar yine de kaydedilir."
+                },
+                "ignoreMutedCategories": {
+                    "label": "Sessize Alınmış Kategorileri Yoksay",
+                    "description": "Sessize alınmış kategorilere ait kanallardaki mesajlar kaydedilmez."
+                },
+                "ignoreMutedChannels": {
+                    "label": "Sessize Alınmış Kanalları Yoksay",
+                    "description": "Sessize alınmış kanallardaki mesajlar kaydedilmez."
+                },
+                "alwaysLogDirectMessages": {
+                    "label": "DM'leri Her Zaman Kaydet",
+                    "description": "Doğrudan mesajları her zaman kaydet."
+                },
+                "alwaysLogCurrentChannel": {
+                    "label": "Geçerli Kanalı Her Zaman Kaydet",
+                    "description": "Geçerli kanalı her zaman kaydeder. Kara listedeki kanallar/kullanıcılar hariç tutulur."
+                },
+                "hideMessageFromMessageLoggers": {
+                    "label": "Mesajı Günlükleyicilerden Gizle",
+                    "description": "Etkinleştirildiğinde, mesajları diğer günlükleyicilerden gizlemek için bir bağlam menüsü seçeneği ekler. Güvenli olmayabilir, kendi sorumluluğunuzda kullanın."
+                },
+                "showLogsButton": {
+                    "label": "Günlük Butonunu Göster",
+                    "description": "Araç çubuğunun gösterilip gösterilmeyeceğini değiştirir."
+                },
+                "showWhereMessageIsFrom": {
+                    "label": "Mesajın Kaynağını Göster",
+                    "description": "Mesajın kanalını/yazan kişiyi ve sunucu adını göster."
+                },
+                "messagesToDisplayAtOnceInLogs": {
+                    "label": "Günlüklerde Aynı Anda Gösterilecek Mesaj Sayısı",
+                    "description": "Günlüklerde bir seferde gösterilecek mesaj sayısını ve daha fazla mesaj yüklendiğinde eklenecek miktarı belirler."
+                },
+                "hideMessageFromMessageLoggersDeletedMessage": {
+                    "label": "Mesaj Günlükleyicilerinden Gizlenen Mesaj İçeriği",
+                    "description": "Mesaj günlükleyicilerden gizleme özelliği kullanıldığında mesajın yerine geçecek içerik."
+                },
+                "messageLimit": {
+                    "label": "Mesaj Sınırı",
+                    "description": "Kaydedilecek maksimum mesaj sayısı. Limit aşıldığında eski mesajlar silinir. 0 = limitsiz."
+                },
+                "attachmentSizeLimitInMegabytes": {
+                    "label": "Ek Boyut Sınırı (MB)",
+                    "description": "Kaydedilecek eklerin maksimum boyutu (MB cinsinden). Bu değerden büyük ekler kaydedilmez."
+                },
+                "attachmentFileExtensions": {
+                    "label": "Ek Dosya Uzantıları",
+                    "description": "Kaydedilecek dosya uzantılarının virgülle ayrılmış listesi. Boş bırakılırsa tüm ekler kaydedilir."
+                },
+                "cacheLimit": {
+                    "label": "Önbellek Sınırı",
+                    "description": "Önbellekte tutulacak maksimum mesaj sayısı. Limit aşıldığında eski mesajlar silinir."
+                },
+                "whitelistedIds": {
+                    "label": "Beyaz Liste Kimlikleri",
+                    "description": "Beyaz listedeki sunucu, kanal veya kullanıcı kimlikleri."
+                },
+                "blacklistedIds": {
+                    "label": "Kara Liste Kimlikleri",
+                    "description": "Kara listedeki sunucu, kanal veya kullanıcı kimlikleri."
+                },
+                "imageCacheDir": {
+                    "label": "Görsel Önbellek Dizini",
+                    "description": "Kaydedilen görsellerin dizinini seçin."
+                },
+                "logsDir": {
+                    "label": "Günlük Dizini",
+                    "description": "Günlüklerin kaydedileceği dizini seçin."
+                },
+                "importLogs": {
+                    "label": "Günlükleri İçe Aktar",
+                    "description": "Dosyadan günlükleri içe aktar."
+                },
+                "exportLogs": {
+                    "label": "Günlükleri Dışa Aktar",
+                    "description": "Günlükleri IndexedDB'den dışa aktar."
+                },
+                "openLogs": {
+                    "label": "Günlükleri Aç",
+                    "description": "Günlükleri aç."
+                },
+                "openImageCacheFolder": {
+                    "label": "Görsel Önbellek Klasörünü Aç",
+                    "description": "Görsel önbellek dizinini açar."
+                },
+                "clearLogs": {
+                    "label": "Günlükleri Temizle",
+                    "description": "Günlükleri temizle.",
+                    "title": "Günlükleri Temizle",
+                    "body": "Tüm günlükleri temizlemek istediğinizden emin misiniz?",
+                    "confirmText": "Temizle",
+                    "cancel": "İptal"
+                }
+            }
         }
     }
 }

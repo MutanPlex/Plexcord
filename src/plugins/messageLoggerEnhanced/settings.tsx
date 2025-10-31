@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { OptionType } from "@utils/types";
@@ -21,32 +22,57 @@ import { exportLogs, importLogs } from "./utils/settingsUtils";
 
 export const settings = definePluginSettings({
     saveMessages: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.saveMessages.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.saveMessages.description");
+        },
         default: true,
         type: OptionType.BOOLEAN,
-        description: "Whether to save the deleted and edited messages.",
     },
 
     saveImages: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.saveImages.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.saveImages.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Save deleted attachments.",
         default: false
     },
 
     sortNewest: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.sortNewest.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.sortNewest.description");
+        },
         default: true,
-        type: OptionType.BOOLEAN,
-        description: "Sort logs by newest.",
+        type: OptionType.BOOLEAN
     },
 
     cacheMessagesFromServers: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.cacheMessagesFromServers.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.cacheMessagesFromServers.description");
+        },
         default: false,
-        type: OptionType.BOOLEAN,
-        description: "Usually message logger only logs from whitelisted ids and dms, enabling this would mean it would log messages from all servers as well. Note that this may cause the cache to exceed its limit, resulting in some messages being missed. If you are in a lot of servers, this may significantly increase the chances of messages being logged, which can result in a large message record and the inclusion of irrelevant messages.",
+        type: OptionType.BOOLEAN
     },
 
     ignoreBots: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.ignoreBots.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.ignoreBots.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether to ignore messages by bots",
         default: false,
         onChange() {
             // we will be handling the ignoreBots now (enabled or not) so the original messageLogger shouldnt
@@ -55,14 +81,24 @@ export const settings = definePluginSettings({
     },
 
     ignoreWebhooks: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.ignoreWebhooks.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.ignoreWebhooks.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether to ignore messages by webhooks",
         default: false,
     },
 
     ignoreSelf: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.ignoreSelf.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.ignoreSelf.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether to ignore messages by yourself",
         default: false,
         onChange() {
             Settings.plugins.MessageLogger.ignoreSelf = false;
@@ -70,82 +106,147 @@ export const settings = definePluginSettings({
     },
 
     ignoreMutedGuilds: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.ignoreMutedGuilds.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.ignoreMutedGuilds.description");
+        },
         default: false,
-        type: OptionType.BOOLEAN,
-        description: "Messages in muted guilds will not be logged. Whitelisted users/channels in muted guilds will still be logged."
+        type: OptionType.BOOLEAN
     },
 
     ignoreMutedCategories: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.ignoreMutedCategories.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.ignoreMutedCategories.description");
+        },
         default: false,
-        type: OptionType.BOOLEAN,
-        description: "Messages in channels belonging to muted categories will not be logged. Whitelisted users/channels in muted guilds will still be logged."
+        type: OptionType.BOOLEAN
     },
 
     ignoreMutedChannels: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.ignoreMutedChannels.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.ignoreMutedChannels.description");
+        },
         default: false,
-        type: OptionType.BOOLEAN,
-        description: "Messages in muted channels will not be logged. Whitelisted users/channels in muted guilds will still be logged."
+        type: OptionType.BOOLEAN
     },
 
     alwaysLogDirectMessages: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.alwaysLogDirectMessages.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.alwaysLogDirectMessages.description");
+        },
         default: true,
-        type: OptionType.BOOLEAN,
-        description: "Always log DMs",
+        type: OptionType.BOOLEAN
     },
 
     alwaysLogCurrentChannel: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.alwaysLogCurrentChannel.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.alwaysLogCurrentChannel.description");
+        },
         default: true,
-        type: OptionType.BOOLEAN,
-        description: "Always log current selected channel. Blacklisted channels/users will still be ignored.",
+        type: OptionType.BOOLEAN
     },
 
     hideMessageFromMessageLoggers: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.hideMessageFromMessageLoggers.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.hideMessageFromMessageLoggers.description");
+        },
         default: false,
-        type: OptionType.BOOLEAN,
-        description: "When enabled, a context menu button will be added to messages to allow you to delete messages without them being logged by other loggers. Might not be safe, use at your own risk."
+        type: OptionType.BOOLEAN
     },
 
     ShowLogsButton: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.showLogsButton.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.showLogsButton.description");
+        },
         default: true,
         type: OptionType.BOOLEAN,
-        description: "Toggle to whenever show the toolbox or not",
         restartNeeded: true,
     },
 
     ShowWhereMessageIsFrom: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.showWhereMessageIsFrom.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.showWhereMessageIsFrom.description");
+        },
         default: false,
-        type: OptionType.BOOLEAN,
-        description: "Show message channel/author name and server name",
+        type: OptionType.BOOLEAN
     },
 
     messagesToDisplayAtOnceInLogs: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.messagesToDisplayAtOnceInLogs.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.messagesToDisplayAtOnceInLogs.description");
+        },
         default: 100,
-        type: OptionType.NUMBER,
-        description: "Number of messages to display at once in logs & number of messages to load when loading more messages in logs.",
+        type: OptionType.NUMBER
     },
 
     hideMessageFromMessageLoggersDeletedMessage: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.hideMessageFromMessageLoggersDeletedMessage.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.hideMessageFromMessageLoggersDeletedMessage.description");
+        },
         default: "redacted eh",
-        type: OptionType.STRING,
-        description: "The message content to replace the message with when using the hide message from message loggers feature.",
+        type: OptionType.STRING
     },
 
     messageLimit: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.messageLimit.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.messageLimit.description");
+        },
         default: 200,
-        type: OptionType.NUMBER,
-        description: "Maximum number of messages to save. Older messages are deleted when the limit is reached. 0 means there is no limit"
+        type: OptionType.NUMBER
     },
 
     attachmentSizeLimitInMegabytes: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.attachmentSizeLimitInMegabytes.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.attachmentSizeLimitInMegabytes.description");
+        },
         default: 12,
-        type: OptionType.NUMBER,
-        description: "Maximum size of an attachment in megabytes to save. Attachments larger than this size will not be saved."
+        type: OptionType.NUMBER
     },
 
     attachmentFileExtensions: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.attachmentFileExtensions.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.attachmentFileExtensions.description");
+        },
         default: "png,jpg,jpeg,gif,webp,mp4,webm,mp3,ogg,wav",
         type: OptionType.STRING,
-        description: "Comma separated list of file extensions to save. Attachments with file extensions not in this list will not be saved. Leave empty to save all attachments.",
         onChange: (value: string) => {
             if (!value) return;
             const exts = value.split(",").map(ext => ext.trim().toLowerCase());
@@ -160,64 +261,109 @@ export const settings = definePluginSettings({
         }
     },
     cacheLimit: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.cacheLimit.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.cacheLimit.description");
+        },
         default: 1000,
-        type: OptionType.NUMBER,
-        description: "Maximum number of messages to store in the cache. Older messages are deleted when the limit is reached. This helps reduce memory usage and improve performance. 0 means there is no limit",
+        type: OptionType.NUMBER
     },
 
     whitelistedIds: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.whitelistedIds.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.whitelistedIds.description");
+        },
         default: "",
-        type: OptionType.STRING,
-        description: "Whitelisted server, channel, or user IDs."
+        type: OptionType.STRING
     },
 
     blacklistedIds: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.blacklistedIds.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.blacklistedIds.description");
+        },
         default: "",
-        type: OptionType.STRING,
-        description: "Blacklisted server, channel, or user IDs."
+        type: OptionType.STRING
     },
 
     imageCacheDir: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.imageCacheDir.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.imageCacheDir.description");
+        },
         type: OptionType.COMPONENT,
-        description: "Select saved images directory",
         component: ErrorBoundary.wrap(ImageCacheDir) as any
     },
 
     logsDir: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.logsDir.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.logsDir.description");
+        },
         type: OptionType.COMPONENT,
-        description: "Select logs directory",
         component: ErrorBoundary.wrap(LogsDir) as any
     },
 
     importLogs: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.importLogs.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.importLogs.description");
+        },
         type: OptionType.COMPONENT,
-        description: "Import Logs From File",
         component: () =>
             <Button onClick={importLogs}>
-                Import Logs
+                {t("plugin.messageLoggerEnhanced.option.importLogs.label")}
             </Button>
     },
 
     exportLogs: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.exportLogs.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.exportLogs.description");
+        },
         type: OptionType.COMPONENT,
-        description: "Export Logs From IndexedDB",
         component: () =>
             <Button onClick={exportLogs}>
-                Export Logs
+                {t("plugin.messageLoggerEnhanced.option.exportLogs.label")}
             </Button>
     },
 
     openLogs: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.openLogs.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.openLogs.description");
+        },
         type: OptionType.COMPONENT,
-        description: "Open Logs",
         component: () =>
             <Button onClick={() => openLogModal()}>
-                Open Logs
+                {t("plugin.messageLoggerEnhanced.option.openLogs.label")}
             </Button>
     },
     openImageCacheFolder: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.openImageCacheFolder.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.openImageCacheFolder.description");
+        },
         type: OptionType.COMPONENT,
-        description: "Opens the image cache directory",
         component: () =>
             <Button
                 disabled={
@@ -227,28 +373,33 @@ export const settings = definePluginSettings({
                 }
                 onClick={() => Native.showItemInFolder(settings.store.imageCacheDir)}
             >
-                Open Image Cache Folder
+                {t("plugin.messageLoggerEnhanced.option.openImageCacheFolder.label")}
             </Button>
     },
 
     clearLogs: {
+        get label() {
+            return t("plugin.messageLoggerEnhanced.option.clearLogs.label");
+        },
+        get description() {
+            return t("plugin.messageLoggerEnhanced.option.clearLogs.description");
+        },
         type: OptionType.COMPONENT,
-        description: "Clear Logs",
         component: () =>
             <Button
                 color={Button.Colors.RED}
                 onClick={() => Alerts.show({
-                    title: "Clear Logs",
-                    body: "Are you sure you want to clear all logs?",
+                    title: t("plugin.messageLoggerEnhanced.option.clearLogs.title"),
+                    body: t("plugin.messageLoggerEnhanced.option.clearLogs.body"),
                     confirmColor: Button.Colors.RED,
-                    confirmText: "Clear",
-                    cancelText: "Cancel",
+                    confirmText: t("plugin.messageLoggerEnhanced.option.clearLogs.confirmText"),
+                    cancelText: t("plugin.messageLoggerEnhanced.option.clearLogs.cancelText"),
                     onConfirm: () => {
                         clearMessagesIDB();
                     },
                 })}
             >
-                Clear Logs
+                {t("plugin.messageLoggerEnhanced.option.clearLogs.label")}
             </Button>
     },
 

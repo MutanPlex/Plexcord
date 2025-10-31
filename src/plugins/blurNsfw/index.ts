@@ -18,7 +18,7 @@
 */
 
 import { t } from "@api/i18n";
-import { Settings } from "@api/Settings";
+import { definePluginSettings, Settings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
@@ -38,10 +38,35 @@ function setCss() {
         `;
 }
 
+const settings = definePluginSettings({
+    blurAmount: {
+        get label() {
+            return t("plugin.blurNSFW.option.blurAmount.label");
+        },
+        get description() {
+            return t("plugin.blurNSFW.option.blurAmount.description");
+        },
+        type: OptionType.NUMBER,
+        default: 10,
+        onChange: setCss
+    },
+    blurAllChannels: {
+        get label() {
+            return t("plugin.blurNSFW.option.blurAllChannels.label");
+        },
+        get description() {
+            return t("plugin.blurNSFW.option.blurAllChannels.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: false
+    }
+});
+
 export default definePlugin({
     name: "BlurNSFW",
     description: "Blur attachments in NSFW channels until hovered",
     authors: [Devs.Ven],
+    settings,
 
     get displayDescription() {
         return t("plugin.blurNSFW.description");
@@ -52,34 +77,10 @@ export default definePlugin({
             find: "}renderEmbeds(",
             replacement: [{
                 match: /\.container/,
-                replace: "$&+(this.props.channel.nsfw || Plexcord.Settings.plugins.BlurNSFW.blurAllChannels ? ' pc-nsfw-img': '')"
+                replace: "$&+(this.props.channel.nsfw || $self.settings.store.blurAllChannels ? ' pc-nsfw-img': '')"
             }]
         }
     ],
-
-    options: {
-        blurAmount: {
-            get label() {
-                return t("plugin.blurNSFW.option.blurAmount.label");
-            },
-            get description() {
-                return t("plugin.blurNSFW.option.blurAmount.description");
-            },
-            type: OptionType.NUMBER,
-            default: 10,
-            onChange: setCss
-        },
-        blurAllChannels: {
-            get label() {
-                return t("plugin.blurNSFW.option.blurAllChannels.label");
-            },
-            get description() {
-                return t("plugin.blurNSFW.option.blurAllChannels.description");
-            },
-            type: OptionType.BOOLEAN,
-            default: false
-        }
-    },
 
     start() {
         style = document.createElement("style");

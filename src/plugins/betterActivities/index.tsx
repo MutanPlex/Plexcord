@@ -8,15 +8,12 @@
 import "./styles.css";
 
 import { t } from "@api/i18n";
-import { migratePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 import { patchActivityList } from "./patch-helpers/activityList";
 import { showAllActivitiesComponent } from "./patch-helpers/popout";
 import { settings } from "./settings";
-
-migratePluginSettings("BetterActivities", "MemberListActivities");
 
 export default definePlugin({
     name: "BetterActivities",

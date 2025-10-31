@@ -18,15 +18,41 @@
 */
 
 import { t } from "@api/i18n";
-import { Settings } from "@api/Settings";
+import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { copyWithToast } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
+
+const settings = definePluginSettings({
+    bothStyles: {
+        get label() {
+            return t("plugin.betterRoleDot.option.bothStyles.label");
+        },
+        get description() {
+            return t("plugin.betterRoleDot.option.bothStyles.description");
+        },
+        type: OptionType.BOOLEAN,
+        restartNeeded: true,
+        default: false,
+    },
+    copyRoleColorInProfilePopout: {
+        get label() {
+            return t("plugin.betterRoleDot.option.copyRoleColorInProfilePopout.label");
+        },
+        get description() {
+            return t("plugin.betterRoleDot.option.copyRoleColorInProfilePopout.description");
+        },
+        type: OptionType.BOOLEAN,
+        restartNeeded: true,
+        default: false
+    }
+});
 
 export default definePlugin({
     name: "BetterRoleDot",
     authors: [Devs.Ven, Devs.AutumnVN],
     description: "Copy role colour on RoleDot (accessibility setting) click. Also allows using both RoleDot and coloured names simultaneously",
+    settings,
 
     get displayDescription() {
         return t("plugin.betterRoleDot.description");
@@ -44,7 +70,7 @@ export default definePlugin({
             find: '"dot"===',
             all: true,
             noWarn: true,
-            predicate: () => Settings.plugins.BetterRoleDot.bothStyles,
+            predicate: () => settings.store.bothStyles,
             replacement: {
                 match: /"(?:username|dot)"===\i(?!\.\i)/g,
                 replace: "true",
@@ -54,7 +80,7 @@ export default definePlugin({
         {
             find: "#{intl::ADD_ROLE_A11Y_LABEL}",
             all: true,
-            predicate: () => Settings.plugins.BetterRoleDot.copyRoleColorInProfilePopout && !Settings.plugins.BetterRoleDot.bothStyles,
+            predicate: () => settings.store.copyRoleColorInProfilePopout && !settings.store.bothStyles,
             noWarn: true,
             replacement: {
                 match: /"dot"===\i/,
@@ -64,7 +90,7 @@ export default definePlugin({
         {
             find: ".roleVerifiedIcon",
             all: true,
-            predicate: () => Settings.plugins.BetterRoleDot.copyRoleColorInProfilePopout && !Settings.plugins.BetterRoleDot.bothStyles,
+            predicate: () => settings.store.copyRoleColorInProfilePopout && !settings.store.bothStyles,
             noWarn: true,
             replacement: {
                 match: /"dot"===\i/,
@@ -72,31 +98,6 @@ export default definePlugin({
             }
         }
     ],
-
-    options: {
-        bothStyles: {
-            get label() {
-                return t("plugin.betterRoleDot.option.bothStyles.label");
-            },
-            get description() {
-                return t("plugin.betterRoleDot.option.bothStyles.description");
-            },
-            type: OptionType.BOOLEAN,
-            restartNeeded: true,
-            default: false,
-        },
-        copyRoleColorInProfilePopout: {
-            get label() {
-                return t("plugin.betterRoleDot.option.copyRoleColorInProfilePopout.label");
-            },
-            get description() {
-                return t("plugin.betterRoleDot.option.copyRoleColorInProfilePopout.description");
-            },
-            type: OptionType.BOOLEAN,
-            restartNeeded: true,
-            default: false
-        }
-    },
 
     copyToClipBoard(color: string) {
         copyWithToast(color);

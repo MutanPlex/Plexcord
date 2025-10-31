@@ -19,6 +19,7 @@
 
 import { t } from "@api/i18n";
 import { addMessagePopoverButton, removeMessagePopoverButton } from "@api/MessagePopover";
+import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -54,12 +55,12 @@ function findReplies(message: Message) {
         if (other.messageReference?.message_id === message.id) {
             found.push(other);
         }
-        if (Plexcord.Settings.plugins.FindReply.includePings) {
+        if (settings.store.includePings) {
             if (other.content?.includes(`<@${message.author.id}>`)) {
                 found.push(other);
             }
         }
-        if (Plexcord.Settings.plugins.FindReply.includeAuthor) {
+        if (settings.store.includeAuthor) {
             if (messages.find(m => m.id === other.messageReference?.message_id)?.author.id === message.author.id) {
                 found.push(other);
             }
@@ -68,10 +69,47 @@ function findReplies(message: Message) {
     return found;
 }
 
+const settings = definePluginSettings({
+    includePings: {
+        get label() {
+            return t("plugin.findReply.option.includePings.label");
+        },
+        get description() {
+            return t("plugin.findReply.option.includePings.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: false,
+        restartNeeded: false
+    },
+    includeAuthor: {
+        get label() {
+            return t("plugin.findReply.option.includeAuthor.label");
+        },
+        get description() {
+            return t("plugin.findReply.option.includeAuthor.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: false,
+        restartNeeded: false
+    },
+    hideButtonIfNoReply: {
+        get label() {
+            return t("plugin.findReply.option.hideButtonIfNoReply.label");
+        },
+        get description() {
+            return t("plugin.findReply.option.hideButtonIfNoReply.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: true
+    }
+});
+
 export default definePlugin({
     name: "FindReply",
     description: "Jumps to the earliest reply to a message in a channel (lets you follow past conversations more easily).",
     authors: [Devs.newwares],
+    settings,
 
     get displayDescription() {
         return t("plugin.findReply.description");
@@ -82,7 +120,7 @@ export default definePlugin({
         addMessagePopoverButton("pc-findreply", message => {
             if (!message.id) return null;
             const replies = findReplies(message);
-            if (Plexcord.Settings.plugins.FindReply.hideButtonIfNoReply && !replies.length) return null;
+            if (settings.store.hideButtonIfNoReply && !replies.length) return null;
             return {
                 label: t("plugin.findReply.context.jump"),
                 icon: FindReplyIcon,
@@ -138,39 +176,4 @@ export default definePlugin({
         element?.remove();
         disableStyle(styles);
     },
-    options: {
-        includePings: {
-            get label() {
-                return t("plugin.findReply.option.includePings.label");
-            },
-            get description() {
-                return t("plugin.findReply.option.includePings.description");
-            },
-            type: OptionType.BOOLEAN,
-            default: false,
-            restartNeeded: false
-        },
-        includeAuthor: {
-            get label() {
-                return t("plugin.findReply.option.includeAuthor.label");
-            },
-            get description() {
-                return t("plugin.findReply.option.includeAuthor.description");
-            },
-            type: OptionType.BOOLEAN,
-            default: false,
-            restartNeeded: false
-        },
-        hideButtonIfNoReply: {
-            get label() {
-                return t("plugin.findReply.option.hideButtonIfNoReply.label");
-            },
-            get description() {
-                return t("plugin.findReply.option.hideButtonIfNoReply.description");
-            },
-            type: OptionType.BOOLEAN,
-            default: true,
-            restartNeeded: true
-        }
-    }
 });

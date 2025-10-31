@@ -38,7 +38,6 @@ export default definePlugin({
     description: "Adds tags for webhooks and moderative roles (owner, admin, etc.)",
     authors: [Devs.Cyn, Devs.TheSun, Devs.RyanCaoDev, Devs.LordElias, Devs.AutumnVN, PcDevs.Hen, PcDevs.MutanPlex],
     dependencies: ["MemberListDecoratorsAPI", "NicknameIconsAPI", "MessageDecorationsAPI"],
-    tags: ["MoreUserTags"],
     settings,
 
     get displayDescription() {

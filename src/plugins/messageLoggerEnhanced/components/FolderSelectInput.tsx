@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { Heading } from "@components/Heading";
 import { DEFAULT_IMAGE_CACHE_DIR } from "@plugins/messageLoggerEnhanced/utils/constants";
@@ -43,8 +44,8 @@ function createDirSelector(settingKey: "logsDir" | "imageCacheDir", successMessa
     };
 }
 
-export const ImageCacheDir = createDirSelector("imageCacheDir", "Successfully updated Image Cache Dir");
-export const LogsDir = createDirSelector("logsDir", "Successfully updated Logs Dir");
+export const ImageCacheDir = createDirSelector("imageCacheDir", t("plugin.messageLoggerEnhanced.updateImageCacheDir"));
+export const LogsDir = createDirSelector("logsDir", t("plugin.messageLoggerEnhanced.updateLogsDir"));
 
 interface Props {
     settingsKey: "imageCacheDir" | "logsDir",
@@ -74,7 +75,7 @@ export function SelectFolderInput({ settingsKey, successMessage }: Props) {
             Toasts.show({
                 id: Toasts.genId(),
                 type: Toasts.Type.FAILURE,
-                message: "Failed to update directory"
+                message: t("plugin.messageLoggerEnhanced.failedUpdate")
             });
         }
     }
@@ -82,14 +83,14 @@ export function SelectFolderInput({ settingsKey, successMessage }: Props) {
     return (
         <div className={cl("-container")}>
             <div onClick={() => copyWithToast(path)} className={cl("-input")}>
-                {path == null || path === DEFAULT_IMAGE_CACHE_DIR ? "Choose Folder" : getDirName(path)}
+                {path == null || path === DEFAULT_IMAGE_CACHE_DIR ? t("plugin.messageLoggerEnhanced.button.chooseFolder") : getDirName(path)}
             </div>
             <Button
                 className={cl("-button")}
                 size={Button.Sizes.SMALL}
                 onClick={onFolderSelect}
             >
-                Browse
+                {t("plugin.messageLoggerEnhanced.button.browse")}
             </Button>
         </div>
     );

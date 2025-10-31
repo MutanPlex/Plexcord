@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { Flex } from "@components/Flex";
@@ -59,9 +60,9 @@ const ChildrenAccessories = LazyComponent<ChildrenAccProops>(() => findByCode("c
 const cl = classNameFactory("msg-logger-modal-");
 
 export enum LogTabs {
-    DELETED = "Deleted",
-    EDITED = "Edited",
-    GHOST_PING = "Ghost Pinged"
+    DELETED = "DELETED",
+    EDITED = "EDITED",
+    GHOST_PING = "GHOST_PING"
 }
 
 interface Props {
@@ -81,7 +82,7 @@ export function LogsModal({ modalProps, initalQuery }: Props) {
     return (
         <ModalRoot className={cl("root")} {...modalProps} size={ModalSize.LARGE}>
             <ModalHeader className={cl("header")}>
-                <TextInput value={queryEh} onChange={e => setQuery(e)} style={{ width: "100%" }} placeholder="Filter Messages" />
+                <TextInput value={queryEh} onChange={e => setQuery(e)} style={{ width: "100%" }} placeholder={t("plugin.messageLoggerEnhanced.modal.title")} />
                 <TabBar
                     type="top"
                     look="brand"
@@ -98,19 +99,19 @@ export function LogsModal({ modalProps, initalQuery }: Props) {
                         className={cl("tab-bar-item")}
                         id={LogTabs.DELETED}
                     >
-                        Deleted
+                        {t("plugin.messageLoggerEnhanced.modal.deleted")}
                     </TabBar.Item>
                     <TabBar.Item
                         className={cl("tab-bar-item")}
                         id={LogTabs.EDITED}
                     >
-                        Edited
+                        {t("plugin.messageLoggerEnhanced.modal.edited")}
                     </TabBar.Item>
                     <TabBar.Item
                         className={cl("tab-bar-item")}
                         id={LogTabs.GHOST_PING}
                     >
-                        Ghost Pinged
+                        {t("plugin.messageLoggerEnhanced.modal.ghostPing")}
                     </TabBar.Item>
                 </TabBar>
             </ModalHeader>
@@ -144,11 +145,11 @@ export function LogsModal({ modalProps, initalQuery }: Props) {
                 <Button
                     color={Button.Colors.RED}
                     onClick={() => Alerts.show({
-                        title: "Clear Logs",
-                        body: "Are you sure you want to clear all the logs",
-                        confirmText: "Clear",
+                        title: t("plugin.messageLoggerEnhanced.alert.clearLogs.title"),
+                        body: t("plugin.messageLoggerEnhanced.alert.clearLogs.body"),
+                        confirmText: t("plugin.messageLoggerEnhanced.alert.clearLogs.confirmText"),
                         confirmColor: Button.Colors.RED,
-                        cancelText: "Cancel",
+                        cancelText: t("plugin.messageLoggerEnhanced.alert.clearLogs.cancel"),
                         onConfirm: async () => {
                             await clearMessagesIDB();
                             reset();
@@ -156,25 +157,25 @@ export function LogsModal({ modalProps, initalQuery }: Props) {
 
                     })}
                 >
-                    Clear All Logs
+                    {t("plugin.messageLoggerEnhanced.button.clearLogs")}
                 </Button>
                 <Button
                     style={{ marginRight: "16px" }}
                     color={Button.Colors.BRAND}
                     disabled={messages?.length === 0}
                     onClick={() => Alerts.show({
-                        title: "Clear Logs",
-                        body: `Are you sure you want to clear ${messages.length} logs`,
-                        confirmText: "Clear",
+                        title: t("plugin.messageLoggerEnhanced.alert.clearVisibleLogs.title"),
+                        body: t("plugin.messageLoggerEnhanced.alert.clearVisibleLogs.body", { messages: messages.length }),
+                        confirmText: t("plugin.messageLoggerEnhanced.alert.clearVisibleLogs.confirmText"),
                         confirmColor: Button.Colors.RED,
-                        cancelText: "Cancel",
+                        cancelText: t("plugin.messageLoggerEnhanced.alert.clearVisibleLogs.cancel"),
                         onConfirm: async () => {
                             await deleteMessagesBulkIDB(messages.map(e => e.message_id));
                             reset();
                         }
                     })}
                 >
-                    Clear Visible Logs
+                    {t("plugin.messageLoggerEnhanced.button.clearVisibleLogs")}
                 </Button>
                 <Button
                     style={{ marginRight: "16px" }}
@@ -188,7 +189,7 @@ export function LogsModal({ modalProps, initalQuery }: Props) {
                         contentRef.current?.firstElementChild?.scrollTo(0, 0);
                     }}
                 >
-                    Sort {sortNewest ? "Oldest First" : "Newest First"}
+                    {sortNewest ? t("plugin.messageLoggerEnhanced.button.sortOldest") : t("plugin.messageLoggerEnhanced.button.sortNewest")}
                 </Button>
             </ModalFooter>
         </ModalRoot>
@@ -225,7 +226,7 @@ function LogsContent({ visibleMessages, canLoadMore, sortNewest, tab, reset, han
                     style={{ marginTop: "1rem", width: "100%" }}
                     size={Button.Sizes.SMALL} onClick={() => handleLoadMore()}
                 >
-                    Load More
+                    {t("plugin.messageLoggerEnhanced.button.loadMore")}
                 </Button>
             }
         </div>
@@ -236,14 +237,27 @@ const LogsContentMemo = LazyComponent(() => React.memo(LogsContent));
 
 
 function NoResults({ tab }: { tab: LogTabs; }) {
+    const getTabLabel = (tab: LogTabs) => {
+        switch (tab) {
+            case LogTabs.DELETED:
+                return t("plugin.messageLoggerEnhanced.modal.deleted");
+            case LogTabs.EDITED:
+                return t("plugin.messageLoggerEnhanced.modal.edited");
+            case LogTabs.GHOST_PING:
+                return t("plugin.messageLoggerEnhanced.modal.ghostPing");
+            default:
+                return "";
+        }
+    };
+
     const generateSuggestedTabs = (tab: LogTabs) => {
         switch (tab) {
             case LogTabs.DELETED:
-                return { nextTab: LogTabs.EDITED, lastTab: LogTabs.GHOST_PING };
+                return { nextTab: getTabLabel(LogTabs.EDITED), lastTab: getTabLabel(LogTabs.GHOST_PING) };
             case LogTabs.EDITED:
-                return { nextTab: LogTabs.GHOST_PING, lastTab: LogTabs.DELETED };
+                return { nextTab: getTabLabel(LogTabs.GHOST_PING), lastTab: getTabLabel(LogTabs.DELETED) };
             case LogTabs.GHOST_PING:
-                return { nextTab: LogTabs.DELETED, lastTab: LogTabs.EDITED };
+                return { nextTab: getTabLabel(LogTabs.DELETED), lastTab: getTabLabel(LogTabs.EDITED) };
             default:
                 return { nextTab: "", lastTab: "" };
         }
@@ -254,10 +268,10 @@ function NoResults({ tab }: { tab: LogTabs; }) {
     return (
         <div className={cl("empty-logs", "content-inner")} style={{ textAlign: "center" }}>
             <BaseText size="lg" weight="normal">
-                No results in <b>{tab}</b>.
+                {t("plugin.messageLoggerEnhanced.button.noResults", { tab: getTabLabel(tab) })}
             </BaseText>
             <BaseText size="lg" weight="normal" style={{ marginTop: "0.2rem" }}>
-                Maybe try <b>{nextTab}</b> or <b>{lastTab}</b>
+                {t("plugin.messageLoggerEnhanced.button.tryOtherTabs", { nextTab, lastTab })}
             </BaseText>
         </div>
     );
@@ -269,12 +283,12 @@ function EmptyLogs({ hasQuery, reset: forceUpdate }: { hasQuery: boolean; reset:
             <Flex flexDirection="column" style={{ position: "relative" }}>
 
                 <BaseText size="lg" weight="normal">
-                    Empty eh
+                    {t("plugin.messageLoggerEnhanced.modal.empty")}
                 </BaseText>
 
                 {!hasQuery && (
                     <>
-                        <Tooltip text="ML Enhanced now stores logs in indexeddb. You need to import your old logs from the logs directory. Importing wont overwrite existing logs">
+                        <Tooltip text={t("plugin.messageLoggerEnhanced.modal.importLogs")}>
                             {({ onMouseEnter, onMouseLeave }) => (
                                 <div
                                     className={cl("info-icon")}
@@ -287,7 +301,7 @@ function EmptyLogs({ hasQuery, reset: forceUpdate }: { hasQuery: boolean; reset:
                         </Tooltip>
 
                         <Button onClick={() => importLogs().then(() => forceUpdate())}>
-                            Import Logs
+                            {t("plugin.messageLoggerEnhanced.button.importLogs")}
                         </Button>
                     </>
                 )}
@@ -319,13 +333,13 @@ function LMessage({ log, isGroupStart, reset, }: LMessageProps) {
                     <Menu.Menu
                         navId="message-logger"
                         onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-                        aria-label="Message Logger"
+                        aria-label={t("plugin.messageLoggerEnhanced.context.title")}
                     >
 
                         <Menu.MenuItem
                             key="jump-to-message"
                             id="jump-to-message"
-                            label="Jump To Message"
+                            label={t("plugin.messageLoggerEnhanced.context.jumpToMessage")}
                             action={() => {
                                 NavigationRouter.transitionTo(`/channels/${ChannelStore.getChannel(message.channel_id)?.guild_id ?? "@me"}/${message.channel_id}${message.id ? "/" + message.id : ""}`);
                                 closeAllModals();
@@ -334,7 +348,7 @@ function LMessage({ log, isGroupStart, reset, }: LMessageProps) {
                         <Menu.MenuItem
                             key="open-user-profile"
                             id="open-user-profile"
-                            label="Open user profile"
+                            label={t("plugin.messageLoggerEnhanced.context.openUserProfile")}
                             action={() => {
                                 closeAllModals();
                                 openUserProfile(message.author.id);
@@ -344,28 +358,28 @@ function LMessage({ log, isGroupStart, reset, }: LMessageProps) {
                         <Menu.MenuItem
                             key="copy-content"
                             id="copy-content"
-                            label="Copy Content"
+                            label={t("plugin.messageLoggerEnhanced.context.copyContent")}
                             action={() => copyWithToast(message.content)}
                         />
 
                         <Menu.MenuItem
                             key="copy-user-id"
                             id="copy-user-id"
-                            label="Copy User ID"
+                            label={t("plugin.messageLoggerEnhanced.context.copyUserId")}
                             action={() => copyWithToast(message.author.id)}
                         />
 
                         <Menu.MenuItem
                             key="copy-message-id"
                             id="copy-message-id"
-                            label="Copy Message ID"
+                            label={t("plugin.messageLoggerEnhanced.context.copyMessageId")}
                             action={() => copyWithToast(message.id)}
                         />
 
                         <Menu.MenuItem
                             key="copy-channel-id"
                             id="copy-channel-id"
-                            label="Copy Channel ID"
+                            label={t("plugin.messageLoggerEnhanced.context.copyChannelId")}
                             action={() => copyWithToast(message.channel_id)}
                         />
 
@@ -375,7 +389,7 @@ function LMessage({ log, isGroupStart, reset, }: LMessageProps) {
                                 <Menu.MenuItem
                                     key="copy-server-id"
                                     id="copy-server-id"
-                                    label="Copy Server ID"
+                                    label={t("plugin.messageLoggerEnhanced.context.copyServerId")}
                                     action={() => copyWithToast(log.message.guildId!)}
                                 />
                             )
@@ -384,7 +398,7 @@ function LMessage({ log, isGroupStart, reset, }: LMessageProps) {
                         <Menu.MenuItem
                             key="delete-log"
                             id="delete-log"
-                            label="Delete Log"
+                            label={t("plugin.messageLoggerEnhanced.context.deleteLog")}
                             color="danger"
                             action={() =>
                                 deleteMessageIDB(log.message.id).then(() => reset())
@@ -422,13 +436,13 @@ function LMessage({ log, isGroupStart, reset, }: LMessageProps) {
                 }
             />
             {settings.store.ShowWhereMessageIsFrom && channel?.isDM() && message?.author && (
-                <span className={`${cl("from")} ${message.deleted ? cl("from-deleted") : cl("from-edited")}`}>From {message.author.username}'s DMs</span>
+                <span className={`${cl("from")} ${message.deleted ? cl("from-deleted") : cl("from-edited")}`}>{t("plugin.messageLoggerEnhanced.context.fromUsernameDm", { username: message.author.username })}</span>
             )}
             {settings.store.ShowWhereMessageIsFrom && channel?.isGroupDM() && channel?.name && (
-                <span className={`${cl("from")} ${message.deleted ? cl("from-deleted") : cl("from-edited")}`}>From {channel.name} Group DM</span>
+                <span className={`${cl("from")} ${message.deleted ? cl("from-deleted") : cl("from-edited")}`}>{t("plugin.messageLoggerEnhanced.context.fromGroupDm", { channelName: channel.name })}</span>
             )}
             {settings.store.ShowWhereMessageIsFrom && !channel?.isDM() && !channel?.isGroupDM() && channel?.name && guild?.name && (
-                <span className={`${cl("from")} ${message.deleted ? cl("from-deleted") : cl("from-edited")}`}>From {channel.name} in {guild.name}</span>
+                <span className={`${cl("from")} ${message.deleted ? cl("from-deleted") : cl("from-edited")}`}>{t("plugin.messageLoggerEnhanced.context.fromServerChannel", { channelName: channel.name, serverName: guild.name })}</span>
             )}
         </div>
     );

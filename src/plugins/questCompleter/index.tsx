@@ -243,7 +243,7 @@ export default definePlugin({
         {
             find: '?"BACK_FORWARD_NAVIGATION":',
             replacement: {
-                match: /focusSectionProps:"HELP".{0,20},className:(\i(?:\.button)?)\}\),/,
+                match: /canShowReminder:.+?className:(\i).*?\}\),/,
                 replace: "$& $self.renderQuestButton(),"
             }
         }

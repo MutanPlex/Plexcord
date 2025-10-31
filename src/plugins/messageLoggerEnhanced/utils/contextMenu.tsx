@@ -6,6 +6,7 @@
  */
 
 import { addContextMenuPatch, NavContextMenuPatchCallback, removeContextMenuPatch } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { openLogModal } from "@plugins/messageLoggerEnhanced/components/LogsModal";
 import { deleteMessageIDB } from "@plugins/messageLoggerEnhanced/db";
 import { settings } from "@plugins/messageLoggerEnhanced/index";
@@ -28,7 +29,8 @@ function renderListOption(listType: ListType, IdType: idKeys, props: any) {
     const isBlocked = settings.store[listType].includes(id);
     const oppositeListType = listType === "blacklistedIds" ? "whitelistedIds" : "blacklistedIds";
     const isOppositeBlocked = settings.store[oppositeListType].includes(id);
-    const list = listType === "blacklistedIds" ? "Blacklist" : "Whitelist";
+    const translatedType = t(`plugin.messageLoggerEnhanced.type.${IdType.toLowerCase()}`);
+    const listAction = listType === "blacklistedIds" ? "blacklist" : "whitelist";
 
     const addToList = () => addToXAndRemoveFromOpposite(listType, id);
     const removeFromList = () => removeFromX(listType, id);
@@ -38,8 +40,10 @@ function renderListOption(listType: ListType, IdType: idKeys, props: any) {
             id={`${listType}-${IdType}-${id}`}
             label={
                 isOppositeBlocked
-                    ? `Move ${IdType} to ${list}`
-                    : isBlocked ? `Remove ${IdType} From ${list}` : `${list} ${IdType}`
+                    ? t(`plugin.messageLoggerEnhanced.context.move${IdType}To${listAction === "blacklist" ? "Blacklist" : "Whitelist"}`)
+                    : isBlocked
+                        ? t(`plugin.messageLoggerEnhanced.context.remove${IdType}From${listAction === "blacklist" ? "Blacklist" : "Whitelist"}`)
+                        : t(`plugin.messageLoggerEnhanced.context.add${IdType}To${listAction === "blacklist" ? "Blacklist" : "Whitelist"}`)
             }
             action={isBlocked ? removeFromList : addToList}
         />
@@ -50,10 +54,12 @@ function renderOpenLogs(idType: idKeys, props: any) {
     const id = idFunctions[idType](props);
     if (!id) return null;
 
+    const translatedType = t(`plugin.messageLoggerEnhanced.type.${idType.toLowerCase()}`);
+
     return (
         <Menu.MenuItem
             id={`open-logs-for-${idType.toLowerCase()}`}
-            label={`Open Logs For ${idType}`}
+            label={t("plugin.messageLoggerEnhanced.context.openLogsFor", { name: translatedType })}
             action={() => openLogModal(`${idType.toLowerCase()}:${id}`)}
         />
     );
@@ -67,7 +73,7 @@ export const contextMenuPath: NavContextMenuPatchCallback = (children, props) =>
             children.push(
                 <Menu.MenuItem
                     id="remove-message"
-                    label={props.message?.deleted ? "Remove Message (Permanent)" : "Remove Message History (Permanent)"}
+                    label={props.message?.deleted ? t("plugin.messageLoggerEnhanced.context.removeMessage") : t("plugin.messageLoggerEnhanced.context.removeMessageHistory")}
                     color="danger"
                     action={() =>
                         deleteMessageIDB(props.message.id)
@@ -84,7 +90,7 @@ export const contextMenuPath: NavContextMenuPatchCallback = (children, props) =>
                                 }
                             }).catch(() => Toasts.show({
                                 type: Toasts.Type.FAILURE,
-                                message: "Failed to remove message",
+                                message: t("plugin.messageLoggerEnhanced.failedToRemove"),
                                 id: Toasts.genId()
                             }))
 
@@ -96,12 +102,12 @@ export const contextMenuPath: NavContextMenuPatchCallback = (children, props) =>
         children.push(
             <Menu.MenuItem
                 id="message-logger"
-                label="Message Logger"
+                label={t("plugin.messageLoggerEnhanced.context.title")}
             >
 
                 <Menu.MenuItem
                     id="open-logs"
-                    label="Open Logs"
+                    label={t("plugin.messageLoggerEnhanced.context.openLogs")}
                     action={() => openLogModal()}
                 />
 
@@ -124,7 +130,7 @@ export const contextMenuPath: NavContextMenuPatchCallback = (children, props) =>
                             <Menu.MenuSeparator />
                             <Menu.MenuItem
                                 id="hide-from-message-loggers"
-                                label="Delete Message (Hide From Message Loggers)"
+                                label={t("plugin.messageLoggerEnhanced.context.deleteMessageHide")}
                                 color="danger"
 
                                 action={async () => {

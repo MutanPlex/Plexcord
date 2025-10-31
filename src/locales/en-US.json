@@ -4970,6 +4970,229 @@
                     "description": "Separate addition and removals in diffs for a more readable differential"
                 }
             }
+        },
+        "messageLoggerEnhanced": {
+            "name": "MessageLoggerEnhanced",
+            "description": "Enhances the MessageLogger plugin with additional features.",
+            "updateImageCacheDir": "Successfully updated image cache directory.",
+            "updateLogsDir": "Successfully updated logs directory.",
+            "failedUpdate": "Failed to update directory.",
+            "blacklist": "Blacklist",
+            "whitelist": "Whitelist",
+            "failedToRemove": "Failed to remove message",
+            "deleted": "Deleted",
+            "edited": "Edited",
+            "ghostPinged": "Ghost Pinged",
+            "alert": {
+                "clearLogs": {
+                    "title": "Clear Logs",
+                    "body": "Are you sure you want to clear all the logs",
+                    "confirmText": "Clear",
+                    "cancel": "Cancel"
+                },
+                "clearVisibleLogs": {
+                    "title": "Clear Visible Logs",
+                    "body": "Are you sure you want to clear {{messages}} logs",
+                    "confirmText": "Clear",
+                    "cancel": "Cancel"
+                }
+            },
+            "context": {
+                "title": "Message Logger",
+                "jumpToMessage": "Jump to Message",
+                "openUserProfile": "Open User Profile",
+                "copyContent": "Copy Content",
+                "copyUserId": "Copy User ID",
+                "copyMessageId": "Copy Message ID",
+                "copyChannelId": "Copy Channel ID",
+                "copyServerId": "Copy Server ID",
+                "deleteLog": "Delete Log",
+                "fromUsernameDm": "From {{username}}'s DM's",
+                "fromGroupDm": "From {{channelName}} Group DM",
+                "fromServerChannel": "From {{channelName}} in {{serverName}}",
+                "moveTypeTo": "Move {{type}} to {{destination}}",
+                "removeTypeFrom": "Remove {{type}} from {{list}}",
+                "openLogsFor": "Open Logs for {{name}}",
+                "openLogs": "Open Logs",
+                "removeMessage": "Remove Message (Permanent)",
+                "removeMessageHistory": "Remove Message History (Permanent)",
+                "deleteMessageHide": "Delete Message (Hide from Message Loggers)",
+                "addServerToBlacklist": "Add Server to Blacklist",
+                "addServerToWhitelist": "Add Server to Whitelist",
+                "removeServerFromBlacklist": "Remove Server from Blacklist",
+                "removeServerFromWhitelist": "Remove Server from Whitelist",
+                "moveServerToBlacklist": "Move Server to Blacklist",
+                "moveServerToWhitelist": "Move Server to Whitelist",
+                "addUserToBlacklist": "Add User to Blacklist",
+                "addUserToWhitelist": "Add User to Whitelist",
+                "removeUserFromBlacklist": "Remove User from Blacklist",
+                "removeUserFromWhitelist": "Remove User from Whitelist",
+                "moveUserToBlacklist": "Move User to Blacklist",
+                "moveUserToWhitelist": "Move User to Whitelist",
+                "addChannelToBlacklist": "Add Channel to Blacklist",
+                "addChannelToWhitelist": "Add Channel to Whitelist",
+                "removeChannelFromBlacklist": "Remove Channel from Blacklist",
+                "removeChannelFromWhitelist": "Remove Channel from Whitelist",
+                "moveChannelToBlacklist": "Move Channel to Blacklist",
+                "moveChannelToWhitelist": "Move Channel to Whitelist"
+            },
+            "type": {
+                "server": "Server",
+                "user": "User",
+                "channel": "Channel"
+            },
+            "button": {
+                "chooseFolder": "Choose Folder",
+                "browse": "Browse",
+                "clearLogs": "Clear All Logs",
+                "clearVisibleLogs": "Clear Visible Logs",
+                "sortOldest": "Sort Oldest First",
+                "sortNewest": "Sort Newest First",
+                "loadMore": "Load More",
+                "noResults": "No results in {{tab}}",
+                "tryOtherTabs": "Maybe try {{nextTab}} or {{lastTab}}",
+                "importLogs": "Import Logs"
+            },
+            "modal": {
+                "title": "Filter Messages",
+                "deleted": "Deleted",
+                "edited": "Edited",
+                "ghostPing": "Ghost Pinged",
+                "empty": "Empty eh",
+                "importLogs": "ML Enhanced now stores logs in indexeddb. You need to import your old logs from the logs directory. Importing wont overwrite existing logs"
+            },
+            "clear": {
+                "title": "Clear Logs",
+                "description": "Are you sure you want to clear all the logs",
+                "confirm": "Clear",
+                "cancel": "Cancel"
+            },
+            "option": {
+                "saveMessages": {
+                    "label": "Save Messages",
+                    "description": "Whether to save the deleted and edited messages."
+                },
+                "saveImages": {
+                    "label": "Save Images",
+                    "description": "Save deleted attachments."
+                },
+                "sortNewest": {
+                    "label": "Sort Newest First",
+                    "description": "Sort logs by newest."
+                },
+                "cacheMessagesFromServers": {
+                    "label": "Cache Messages From Servers",
+                    "description": "Usually message logger only logs from whitelisted ids and dms, enabling this would mean it would log messages from all servers as well. Note that this may cause the cache to exceed its limit, resulting in some messages being missed. If you are in a lot of servers, this may significantly increase the chances of messages being logged, which can result in a large message record and the inclusion of irrelevant messages."
+                },
+                "ignoreBots": {
+                    "label": "Ignore Bots",
+                    "description": "Whether to ignore messages by bots"
+                },
+                "ignoreWebhooks": {
+                    "label": "Ignore Webhooks",
+                    "description": "Whether to ignore messages by webhooks"
+                },
+                "ignoreSelf":{
+                    "label": "Ignore Self",
+                    "description": "Whether to ignore messages by yourself"
+                },
+                "ignoreMutedGuilds": {
+                    "label": "Ignore Muted Guilds",
+                    "description": "Messages in muted guilds will not be logged. Whitelisted users/channels in muted guilds will still be logged."
+                },
+                "ignoreMutedCategories": {
+                    "label": "Ignore Muted Categories",
+                    "description": "Messages in channels belonging to muted categories will not be logged. Whitelisted users/channels in muted guilds will still be logged."
+                },
+                "ignoreMutedChannels": {
+                    "label": "Ignore Muted Channels",
+                    "description": "Messages in muted channels will not be logged. Whitelisted users/channels in muted guilds will still be logged."
+                },
+                "alwaysLogDirectMessages": {
+                    "label": "Always Log Direct Messages",
+                    "description": "Always log DMs"
+                },
+                "alwaysLogCurrentChannel": {
+                    "label": "Always Log Current Channel",
+                    "description": "Always log current selected channel. Blacklisted channels/users will still be ignored."
+                },
+                "hideMessageFromMessageLoggers": {
+                    "label": "Hide Message From Message Loggers",
+                    "description": "When enabled, a context menu button will be added to messages to allow you to delete messages without them being logged by other loggers. Might not be safe, use at your own risk."
+                },
+                "showLogsButton": {
+                    "label": "Show Logs Button",
+                    "description": "Toggle to whenever show the toolbox or not"
+                },
+                "showWhereMessageIsFrom": {
+                    "label": "Show Where Message Is From",
+                    "description": "Show message channel/author name and server name"
+                },
+                "messagesToDisplayAtOnceInLogs": {
+                    "label": "Messages to Display at Once in Logs",
+                    "description": "Number of messages to display at once in logs & number of messages to load when loading more messages in logs."
+                },
+                "hideMessageFromMessageLoggersDeletedMessage": {
+                    "label": "Hide Message From Message Loggers Deleted Message",
+                    "description": "The message content to replace the message with when using the hide message from message loggers feature."
+                },
+                "messageLimit": {
+                    "label": "Message Limit",
+                    "description": "Maximum number of messages to save. Older messages are deleted when the limit is reached. 0 means there is no limit"
+                },
+                "attachmentSizeLimitInMegabytes": {
+                    "label": "Attachment Size Limit in Megabytes",
+                    "description": "Maximum size of an attachment in megabytes to save. Attachments larger than this size will not be saved."
+                },
+                "attachmentFileExtensions": {
+                    "label": "Attachment File Extensions",
+                    "description": "Comma separated list of file extensions to save. Attachments with file extensions not in this list will not be saved. Leave empty to save all attachments."
+                },
+                "cacheLimit": {
+                    "label": "Cache Limit",
+                    "description": "Maximum number of messages to keep in the cache. Older messages are deleted when the limit is reached."
+                },
+                "whitelistedIds": {
+                    "label": "Whitelisted IDs",
+                    "description": "Whitelisted server, channel, or user IDs."
+                },
+                "blacklistedIds": {
+                    "label": "Blacklisted IDs",
+                    "description": "Blacklisted server, channel, or user IDs."
+                },
+                "imageCacheDir": {
+                    "label": "Image Cache Directory",
+                    "description": "Select saved images directory"
+                },
+                "logsDir": {
+                    "label": "Logs Directory",
+                    "description": "Select logs directory"
+                },
+                "importLogs": {
+                    "label": "Import Logs",
+                    "description": "Import Logs From File"
+                },
+                "exportLogs": {
+                    "label": "Export Logs",
+                    "description": "Export Logs From IndexedDB"
+                },
+                "openLogs": {
+                    "label": "Open Logs",
+                    "description": "Open Logs"
+                },
+                "openImageCacheFolder": {
+                    "label": "Open Image Cache Folder",
+                    "description": "Opens the image cache directory"
+                },
+                "clearLogs": {
+                    "label": "Clear Logs",
+                    "description": "Clear Logs",
+                    "title": "Clear logs",
+                    "body": "Are you sure you want to clear all logs?",
+                    "confirmText": "Clear",
+                    "cancel": "Cancel"
+                }
+            }
         }
     }
 }

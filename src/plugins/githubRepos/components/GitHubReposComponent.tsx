@@ -8,14 +8,17 @@
 import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
+import { Button, TextButton } from "@components/Button";
 import { fetchReposByUserId, fetchReposByUsername, fetchUserInfo, GitHubUserInfo } from "@plugins/githubRepos/githubApi";
 import { GitHubRepo } from "@plugins/githubRepos/types";
 import { openModal } from "@utils/modal";
-import { Button, React, useEffect, UserProfileStore, useState } from "@webpack/common";
+import { React, useEffect, UserProfileStore, useState } from "@webpack/common";
 
 import { settings } from "..";
 import { RepoCard } from "./RepoCard";
 import { ReposModal } from "./ReposModal";
+
+export const cl = classNameFactory("pc-github-repos-");
 
 export function GitHubReposComponent({ id, theme }: { id: string, theme: string; }) {
     const [repos, setRepos] = useState<GitHubRepo[]>([]);
@@ -24,7 +27,6 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
     const [userInfo, setUserInfo] = useState<GitHubUserInfo | null>(null);
     const [returnJustButton, setReturnJustButton] = useState(false);
 
-    const cl = classNameFactory("pc-github-repos-");
 
     const openReposModal = () => {
         if (!userInfo) return;
@@ -103,9 +105,8 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
         return (
             <Button
                 className={cl("button")}
-                size={Button.Sizes.SMALL}
-                look={Button.Looks.LINK}
-                color={Button.Colors.TRANSPARENT}
+                size="small"
+                variant="secondary"
                 onClick={openReposModal}
             >
                 {t("plugin.githubRepos.button.show")}
@@ -136,15 +137,13 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
                 }
             </div>
             <div className={cl("footer")}>
-                <Button
+                <TextButton
                     className={cl("show-more")}
-                    size={Button.Sizes.SMALL}
-                    look={Button.Looks.LINK}
-                    color={Button.Colors.TRANSPARENT}
+                    color="secondary"
                     onClick={openReposModal}
                 >
                     {t("plugin.githubRepos.button.more")}
-                </Button>
+                </TextButton>
             </div>
         </div>
     );

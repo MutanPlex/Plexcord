@@ -22,7 +22,6 @@ import "./styles.css";
 import { get, set } from "@api/DataStore";
 import { t } from "@api/i18n";
 import { updateMessage } from "@api/MessageUpdater";
-import { migratePluginSettings } from "@api/Settings";
 import { ImageInvisible, ImageVisible } from "@components/Icons";
 import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -40,8 +39,6 @@ async function getHiddenMessages() {
 }
 
 const saveHiddenMessages = (ids: Set<string>) => set(KEY, ids);
-
-migratePluginSettings("HideMedia", "HideAttachments");
 
 const hasMedia = (msg: Message) => msg.attachments.length > 0 || msg.embeds.length > 0 || msg.stickerItems.length > 0;
 

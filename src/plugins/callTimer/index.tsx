@@ -18,7 +18,7 @@
 */
 
 import { t } from "@api/i18n";
-import { Settings } from "@api/Settings";
+import { definePluginSettings, Settings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
 import { useTimer } from "@utils/react";
@@ -28,11 +28,37 @@ import { React } from "@webpack/common";
 
 import alignedChatInputFix from "./alignedChatInputFix.css?managed";
 
+const settings = definePluginSettings({
+    format: {
+        get label() {
+            return t("plugin.callTimer.option.format.label");
+        },
+        get description() {
+            return t("plugin.callTimer.option.format.description");
+        },
+        type: OptionType.SELECT,
+        get options() {
+            return [
+                {
+                    label: t("plugin.callTimer.option.format.stopwatch"),
+                    value: "stopwatch",
+                    default: true
+                },
+                {
+                    label: t("plugin.callTimer.option.format.human"),
+                    value: "human"
+                }
+            ];
+        }
+    }
+});
+
 export default definePlugin({
     name: "CallTimer",
     description: "Adds a timer to vcs",
     authors: [Devs.Ven],
     managedStyle: alignedChatInputFix,
+    settings,
 
     get displayDescription() {
         return t("plugin.callTimer.description");
@@ -40,31 +66,6 @@ export default definePlugin({
 
     startTime: 0,
     interval: void 0 as NodeJS.Timeout | undefined,
-
-    options: {
-        format: {
-            get label() {
-                return t("plugin.callTimer.option.format.label");
-            },
-            get description() {
-                return t("plugin.callTimer.option.format.description");
-            },
-            type: OptionType.SELECT,
-            get options() {
-                return [
-                    {
-                        label: t("plugin.callTimer.option.format.stopwatch"),
-                        value: "stopwatch",
-                        default: true
-                    },
-                    {
-                        label: t("plugin.callTimer.option.format.human"),
-                        value: "human"
-                    }
-                ];
-            }
-        }
-    },
 
     patches: [{
         find: "renderConnectionStatus(){",
