@@ -257,7 +257,7 @@ export default definePlugin({
     dependencies: ["MessageLogger"],
 
     get displayDescription() {
-        return t("messageLoggerEnhanced.description");
+        return t("plugin.messageLoggerEnhanced.description");
     },
 
     patches: [
