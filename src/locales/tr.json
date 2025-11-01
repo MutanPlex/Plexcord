@@ -5192,6 +5192,52 @@
                     "cancel": "İptal"
                 }
             }
+        },
+        "messageTags": {
+            "name": "MessageTags",
+            "description": "Mesajları kaydetmenizi ve basit bir komutla kullanmanızı sağlar.",
+            "notExist": "**{{tagname}}** etiketi artık mevcut değil! Düzeltmek için Discord’u yeniden başlatın :)",
+            "alreadyExist": "**{{tagname}}** adlı bir etiket zaten var!",
+            "sentTag": "**{{tagname}}** etiketi gönderildi!",
+            "successCreate": "**{{tagname}}** etiketi başarıyla oluşturuldu!",
+            "allTags": "Tüm etiketlerin:",
+            "noTags": "Ups! Henüz hiç etiket yok, oluşturmak için /tag create komutunu kullan!",
+            "noDeleteTag": "**{{tagname}}** adlı bir etiket bulunamadı, bu yüzden silinemiyor!",
+            "successDelete": "**{{name}}** etiketi başarıyla silindi!",
+            "tagPreview": "**{{name}}** adlı bir etiket mevcut değil!",
+            "option": {
+                "clyde": {
+                    "label": "Gönderimde Clyde mesajı",
+                    "description": "Etkinleştirildiğinde, bir etiket kullanıldığında Clyde sana geçici bir mesaj gönderir."
+                },
+                "tagsList": {
+                    "label": "Etiket Listesi",
+                    "description": ""
+                }
+            },
+            "command": {
+                "tags": {
+                    "description": "Kendi etiketlerini yönet",
+                    "option": {
+                        "create": {
+                            "description": "Yeni bir etiket oluştur",
+                            "name": "Yanıtı tetikleyecek etiketin adı",
+                            "message": "Bu etiketi kullandığında gönderilecek mesaj"
+                        },
+                        "list": {
+                            "description": "Tüm etiketlerini listele"
+                        },
+                        "delete": {
+                            "description": "Bir etiketi sil",
+                            "name": "Silinecek etiketin adı"
+                        },
+                        "preview": {
+                            "description": "Bir etiketi herkese açık göndermeden önizle",
+                            "name": "Önizlenecek etiketin adı"
+                        }
+                    }
+                }
+            }
         }
     }
 }

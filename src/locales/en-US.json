@@ -5192,6 +5192,52 @@
                     "cancel": "Cancel"
                 }
             }
+        },
+        "messageTags": {
+            "name": "MessageTags",
+            "description": "Allows you to save messages and to use them with a simple command.",
+            "notExist": "The tag **{{tagname}}** does not exist anymore! Please reload ur Discord to fix :)",
+            "alreadyExist": "A tag with the name **{{tagname}}** already exists!",
+            "sentTag": "The tag **{{tagname}}** has been sent!",
+            "successCreate": "The tag **{{tagname}}** has been created!",
+            "allTags": "All your tags:",
+            "noTags": "Woops! There are no tags yet, use /tag create to create one!",
+            "noDeleteTag": "A tag **{{tagname}}** does not exist, so it can't be deleted!",
+            "successDelete": "Successfully deleted the tag **{{name}}**!",
+            "tagPreview": "A Tag with the name **{{name}}** does not exist!",
+            "option": {
+                "clyde": {
+                    "label": "Clyde message on send",
+                    "description": "If enabled, clyde will send you an ephemeral message when a tag was used."
+                },
+                "tagsList": {
+                    "label": "Tags List",
+                    "description": ""
+                }
+            },
+            "command": {
+                "tags": {
+                    "description": "Manage all the tags for yourself",
+                    "option": {
+                        "create": {
+                            "description": "Create a new tag",
+                            "name": "The name of the tag to trigger the response",
+                            "message": "The message that you will send when using this tag"
+                        },
+                        "list": {
+                            "description": "List all tags from yourself"
+                        },
+                        "delete": {
+                            "description": "Remove a tag from yourself",
+                            "name": "The name of the tag to remove"
+                        },
+                        "preview": {
+                            "description": "Preview a tag without sending it publicly",
+                            "name": "The name of the tag to preview"
+                        }
+                    }
+                }
+            }
         }
     }
 }
