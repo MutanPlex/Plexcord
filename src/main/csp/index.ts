@@ -26,7 +26,6 @@ export const CspPolicies: PolicyMap = {
     "127.0.0.1:*": ImageAndCssSrc,
     "localhost:24123": ImageAndCssSrc,
 
-    "*.gofile.io": ConnectSrc, // GoFile API, used by BigFileUpload plugin
     "*.github.io": ImageAndCssSrc, // GitHub pages, used by most themes
     "github.com": ImageAndCssSrc, // GitHub content (stuff uploaded to markdown forms), used by most themes
     "raw.githubusercontent.com": ImageAndCssSrc, // GitHub raw, used by some themes
@@ -43,7 +42,6 @@ export const CspPolicies: PolicyMap = {
     "i.ibb.co": ImageSrc, // ImgBB, used by some themes
     "i.pinimg.com": ImageSrc, // Pinterest, used by some themes
     "*.tenor.com": ImageSrc, // Tenor, used by some themes
-    "files.catbox.moe": ImageAndCssSrc, // Catbox, used by some themes
 
     "cdn.discordapp.com": ImageAndCssSrc, // Discord CDN, used by Plexcord and some themes to load media
     "media.discordapp.net": ImageSrc, // Discord media CDN, possible alternative to Discord CDN
