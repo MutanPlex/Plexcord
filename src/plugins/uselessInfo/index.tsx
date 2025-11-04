@@ -5,8 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import definePlugin from "@utils/types";
 import { PcDevs } from "@utils/constants";
+import definePlugin from "@utils/types";
 // Useless Info Plugin
 
 // Types
@@ -22,7 +22,7 @@ const GITHUB_API_CONTENT_URL = "https://api.github.com/repos/tab2can/uselessInfo
 const STORAGE_DATA_KEY = "uselessInfo:data"; // StoredData
 const STORAGE_HISTORY_KEY = "uselessInfo:history"; // InfoItem[] (last 10)
 const STORAGE_RECENT_KEY = "uselessInfo:recent"; // string[] of last shown texts (queue)
-const STORAGE_SHOWN_KEY = "uselessInfo:shown";   // string[] of all-time shown texts (set persisted)
+const STORAGE_SHOWN_KEY = "uselessInfo:shown"; // string[] of all-time shown texts (set persisted)
 const STORAGE_CONFIG_KEY = "uselessInfo:config"; // Config
 const DEFAULT_CONFIG: Config = { intervalMinutes: 30, randomShortcut: "Alt+I", historyShortcut: "Alt+U", noRepeatEnabled: false, noRepeatWindow: 5 };
 const DATA_TTL_MS = 12 * 60 * 60 * 1000; // 12 hours
@@ -52,7 +52,7 @@ async function loadUILang(code: string): Promise<UILang> {
         currentUiLang = uiLangs[key];
         return uiLangs[key];
     } catch {
-        return uiLangs["en"] || { "title": "UselessInfo", "settings": "Settings", "intervalLabel": "Auto show interval (minutes, 0=off)", "randomShortcut": "Random fact shortcut", "historyShortcut": "History panel shortcut", "save": "Save", "reset": "Reset", "noneYet": "No facts yet. Use the shortcut or wait.", "source": "Source", "saved": "Settings saved.", "resetDone": "Settings reset to defaults.", "waiting": "Waiting", "showRandom": "Show Random", "close": "Close" };
+        return uiLangs.en || { "title": "UselessInfo", "settings": "Settings", "intervalLabel": "Auto show interval (minutes, 0=off)", "randomShortcut": "Random fact shortcut", "historyShortcut": "History panel shortcut", "save": "Save", "reset": "Reset", "noneYet": "No facts yet. Use the shortcut or wait.", "source": "Source", "saved": "Settings saved.", "resetDone": "Settings reset to defaults.", "waiting": "Waiting", "showRandom": "Show Random", "close": "Close" };
     }
 }
 function getDiscordLocale(): string {
@@ -96,7 +96,7 @@ function getDiscordLocale(): string {
 }
 function t(key: string, lang: UILang): string { return lang[key] || key; }
 function getUILangSync(): UILang {
-    return currentUiLang || uiLangs["en"] || { "title": "UselessInfo", "settings": "Settings", "intervalLabel": "Auto show interval (minutes, 0=off)", "randomShortcut": "Random fact shortcut", "historyShortcut": "History panel shortcut", "noRepeatTitle": "Avoid showing same items", "noRepeatWindow": "How many recents to avoid (0 = avoid any shown)", "save": "Save", "reset": "Reset", "noneYet": "No facts yet. Use the shortcut or wait.", "source": "Source", "saved": "Settings saved.", "resetDone": "Settings reset to defaults.", "waiting": "Waiting", "showRandom": "Show Random", "close": "Close", "fetchFail": "Couldn’t fetch data. Check network or blockers.", "noNew": "No new info for now." };
+    return currentUiLang || uiLangs.en || { "title": "UselessInfo", "settings": "Settings", "intervalLabel": "Auto show interval (minutes, 0=off)", "randomShortcut": "Random fact shortcut", "historyShortcut": "History panel shortcut", "noRepeatTitle": "Avoid showing same items", "noRepeatWindow": "How many recents to avoid (0 = avoid any shown)", "save": "Save", "reset": "Reset", "noneYet": "No facts yet. Use the shortcut or wait.", "source": "Source", "saved": "Settings saved.", "resetDone": "Settings reset to defaults.", "waiting": "Waiting", "showRandom": "Show Random", "close": "Close", "fetchFail": "Couldn’t fetch data. Check network or blockers.", "noNew": "No new info for now." };
 }
 
 // In-memory fallback store when localStorage is not available
@@ -206,7 +206,7 @@ async function fetchInfoList(prevEtag?: string): Promise<FetchResult> {
             const parsed = JSON.parse(txt);
             const rawList: any[] = Array.isArray(parsed?.info) ? parsed.info : [];
             const items: InfoItem[] = rawList
-                .map((x) => {
+                .map(x => {
                     if (!x || typeof x !== "object") return null;
                     const translations = (x as any).translations || {};
                     const en = translations.en || translations.tr || Object.values(translations)[0] || null;
@@ -388,7 +388,7 @@ function setupShortcutRecorder(input: HTMLInputElement) {
     let handler: ((e: KeyboardEvent) => void) | null = null;
     let prevValue = "";
     let labelEl: HTMLElement | null = null;
-    const findLabel = () => input.parentElement?.querySelector('span');
+    const findLabel = () => input.parentElement?.querySelector("span");
     const start = () => {
         if (listening) return;
         listening = true;
@@ -429,7 +429,7 @@ function setupShortcutRecorder(input: HTMLInputElement) {
     // blur can be due to clicking elsewhere -> treat as cancel unless blur came from auto-confirm
     input.addEventListener("blur", () => stop(false));
     // If user clicks outside without pressing non-modifier, revert
-    input.addEventListener("keydown", (e) => { /* prevent bubbling inside input */ e.stopPropagation(); });
+    input.addEventListener("keydown", e => { /* prevent bubbling inside input */ e.stopPropagation(); });
 }
 
 // Toast UI
@@ -608,7 +608,7 @@ async function getRandomItem(): Promise<InfoItem | null> {
         if (rawList && Array.isArray(rawList)) {
             const src = rawList[i];
             const translations = src?.translations || {};
-            const tr = translations[langCode] || translations["en"] || Object.values(translations)[0] || null;
+            const tr = translations[langCode] || translations.en || Object.values(translations)[0] || null;
             if (tr && typeof tr.text === "string") return { text: tr.text, link: typeof tr.link === "string" ? tr.link : undefined } as InfoItem;
         }
         return list[i] ?? null;
@@ -649,7 +649,7 @@ async function getRandomItem(): Promise<InfoItem | null> {
 
 async function showRandom() {
     try {
-        let item = await getRandomItem();
+        const item = await getRandomItem();
         if (!item) {
             // Don’t fake content; inform user once
             try { const lang = getUILangSync(); showNotice(t("fetchFail", lang)); } catch { }
@@ -768,7 +768,7 @@ async function buildPanel(): Promise<HTMLElement> {
     btnClose.addEventListener("click", () => hidePanel());
 
     const btnRandom = document.createElement("button");
-    btnRandom.textContent = (uiLang["showRandom"]) || "Show Random";
+    btnRandom.textContent = (uiLang.showRandom) || "Show Random";
     styleButton(btnRandom);
     btnRandom.addEventListener("click", () => { showRandom(); });
 
@@ -937,7 +937,7 @@ function showPanel() {
         panelEl = el;
         document.body.appendChild(panelEl);
         // click outside to close
-        panelEl.addEventListener("click", (e) => { if (e.target === panelEl) hidePanel(); });
+        panelEl.addEventListener("click", e => { if (e.target === panelEl) hidePanel(); });
         renderPanel();
     })();
 }
@@ -974,7 +974,7 @@ export default definePlugin({
         try { await loadUILang(getDiscordLocale()); } catch { }
         applyConfig(cfg);
         // Warm up data cache
-        ensureData().then(() => {/* noop */ });
+        ensureData().then(() => { /* noop */ });
     },
     stop() {
         if (intervalId) { clearInterval(intervalId); intervalId = null; }
