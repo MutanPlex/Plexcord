@@ -688,7 +688,7 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     },
     mochienya: {
         name: "mochie",
-        id: 1043599230247374869n,
+        id: 1043599230247374869n
     },
     ryan: {
         name: "ryan",
@@ -780,7 +780,7 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     },
     Reycko: {
         name: "Reycko",
-        id: 1123725368004726794n,
+        id: 1123725368004726794n
     },
     Skully: {
         name: "Skully",
@@ -812,7 +812,7 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     },
     Campfire: {
         name: "Campfire",
-        id: 376414446840578081n,
+        id: 376414446840578081n
     },
     GroupXyz: {
         name: "GroupXyz",
@@ -836,7 +836,7 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     },
     davidkra230: {
         name: "davidkra230",
-        id: 652699312631054356n,
+        id: 652699312631054356n
     },
     secp192k1: {
         name: "secp192k1",
@@ -848,7 +848,7 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     },
     Etorix: {
         name: "Etorix",
-        id: 94597845868355584n,
+        id: 94597845868355584n
     },
     keifufu: {
         name: "keifufu",
@@ -868,7 +868,7 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     },
     port22exposed: {
         name: "port",
-        id: 1318383159645311009n,
+        id: 1318383159645311009n
     },
     nicola02nb: {
         name: "nicola02nb",
@@ -880,15 +880,19 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     },
     qouesm: {
         name: "qouesm",
-        id: 130388483494641664n,
+        id: 130388483494641664n
     },
     CallMeGii: {
         name: "gii",
-        id: 156481332652802048n,
+        id: 156481332652802048n
     },
     mart: {
         name: "mja00",
         id: 108698087769260032n
+    },
+    He4vuc: {
+        name: "he4vuc",
+        id: 789139476286013441n
     },
 } satisfies Record<string, PcDev>);
 
