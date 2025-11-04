@@ -5041,6 +5041,34 @@
                 }
             }
         },
+        "moyai": {
+            "name": "Moyai",
+            "description": "🗿🗿🗿🗿🗿🗿🗿🗿",
+            "option": {
+                "volume": {
+                    "label": "Volume",
+                    "description": "Volume of the 🗿🗿🗿"
+                },
+                "quality": {
+                    "label": "Quality",
+                    "description": "Quality of the 🗿🗿🗿",
+                    "normal": "Normal",
+                    "hd": "HD"
+                },
+                "triggerWhenUnfocused": {
+                    "label": "Trigger When Unfocused",
+                    "description": "Trigger the 🗿 even when the window is unfocused"
+                },
+                "ignoreBots": {
+                    "label": "Ignore Bots",
+                    "description": "Ignore messages from bots"
+                },
+                "ignoreBlocked": {
+                    "label": "Ignore Blocked Users",
+                    "description": "Ignore messages from blocked users"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

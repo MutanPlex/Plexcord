@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Message, ReactionEmoji } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -57,32 +58,59 @@ const MOYAI_URL_HD = "https://github.com/MutanPlex/random-files/raw/main/sounds/
 
 const settings = definePluginSettings({
     volume: {
-        description: "Volume of the 🗿🗿🗿",
+        get label() {
+            return t("plugin.moyai.option.volume.label");
+        },
+        get description() {
+            return t("plugin.moyai.option.volume.description");
+        },
         type: OptionType.SLIDER,
         markers: makeRange(0, 1, 0.1),
         default: 0.5,
         stickToMarkers: false
     },
     quality: {
-        description: "Quality of the 🗿🗿🗿",
+        get label() {
+            return t("plugin.moyai.option.quality.label");
+        },
+        get description() {
+            return t("plugin.moyai.option.quality.description");
+        },
         type: OptionType.SELECT,
-        options: [
-            { label: "Normal", value: "Normal", default: true },
-            { label: "HD", value: "HD" }
-        ],
+        get options() {
+            return [
+                { label: t("plugin.moyai.option.quality.normal"), value: "Normal", default: true },
+                { label: t("plugin.moyai.option.quality.hd"), value: "HD" }
+            ];
+        },
     },
     triggerWhenUnfocused: {
-        description: "Trigger the 🗿 even when the window is unfocused",
+        get label() {
+            return t("plugin.moyai.option.triggerWhenUnfocused.label");
+        },
+        get description() {
+            return t("plugin.moyai.option.triggerWhenUnfocused.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     },
     ignoreBots: {
-        description: "Ignore bots",
+        get label() {
+            return t("plugin.moyai.option.ignoreBots.label");
+        },
+        get description() {
+            return t("plugin.moyai.option.ignoreBots.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     },
     ignoreBlocked: {
-        description: "Ignore blocked users",
+        get label() {
+            return t("plugin.moyai.option.ignoreBlocked.label");
+        },
+        get description() {
+            return t("plugin.moyai.option.ignoreBlocked.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     }
@@ -93,6 +121,10 @@ export default definePlugin({
     authors: [Devs.Megu, Devs.Nuckyz],
     description: "🗿🗿🗿🗿🗿🗿🗿🗿",
     settings,
+
+    get displayDescription() {
+        return t("plugin.moyai.description");
+    },
 
     flux: {
         async MESSAGE_CREATE({ optimistic, type, message, channelId }: IMessageCreate) {

@@ -5042,6 +5042,34 @@
                 }
             }
         },
+        "moyai": {
+            "name": "Moyai",
+            "description": "🗿🗿🗿🗿🗿🗿🗿🗿",
+            "option": {
+                "volume": {
+                    "label": "Ses Düzeyi",
+                    "description": "🗿🗿🗿 ses düzeyi"
+                },
+                "quality": {
+                    "label": "Kalite",
+                    "description": "🗿🗿🗿 kalitesi",
+                    "normal": "Normal",
+                    "hd": "HD"
+                },
+                "triggerWhenUnfocused": {
+                    "label": "Odak Dışındayken Tetikle",
+                    "description": "Pencere odakta olmasa bile 🗿 tetikle"
+                },
+                "ignoreBots": {
+                    "label": "Botları Yoksay",
+                    "description": "Botlardan gelen mesajları yoksay"
+                },
+                "ignoreBlocked": {
+                    "label": "Engellenen Kullanıcıları Yoksay",
+                    "description": "Engellenen kullanıcılardan gelen mesajları yoksay"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
