@@ -215,7 +215,7 @@ export function RPCSettings() {
                 },
                 {
                     settingsKey: "partyMaxSize",
-                    label: t("plugin.customRPC.option.partyMaxSize.label"),
+                    label: t("plugin.customRPC.option.partyMax.label"),
                     transform: parseNumber,
                     isValid: isNumberValid,
                     disabled: s.type !== ActivityType.PLAYING,

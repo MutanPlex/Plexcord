@@ -2316,7 +2316,7 @@
                     "label": "Details",
                     "description": "Details (line 1)"
                 },
-                "detailsUrl": {
+                "detailsURL": {
                     "label": "Details URL",
                     "description": "Details clickable URL"
                 },
@@ -2324,7 +2324,7 @@
                     "label": "State",
                     "description": "State (line 2)"
                 },
-                "stateUrl": {
+                "stateURL": {
                     "label": "State URL",
                     "description": "State clickable URL"
                 },

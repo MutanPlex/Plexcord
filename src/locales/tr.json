@@ -2316,7 +2316,7 @@
                     "label": "Detaylar",
                     "description": "Detaylar (satır 1)"
                 },
-                "detailsUrl": {
+                "detailsURL": {
                     "label": "Detaylar URL'si",
                     "description": "Detaylar için tıklanabilir URL"
                 },
@@ -2324,7 +2324,7 @@
                     "label": "Durum",
                     "description": "Durum (2. satır)"
                 },
-                "stateUrl": {
+                "stateURL": {
                     "label": "Durum URL'si",
                     "description": "Durum için tıklanabilir URL"
                 },
