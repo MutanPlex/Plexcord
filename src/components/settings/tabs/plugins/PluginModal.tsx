@@ -173,11 +173,11 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                         {!pluginMeta.userPlugin && (
                             <div className="pc-settings-modal-links">
                                 <WebsiteButton
-                                    text={"plugins.pluginModal.info"}
+                                    text={t("plugins.pluginModal.info")}
                                     href={`https://plexcord.club/plugins/${plugin.name}`}
                                 />
                                 <GithubButton
-                                    text={"plugins.pluginModal.source"}
+                                    text={t("plugins.pluginModal.source")}
                                     href={`https://github.com/${gitRemote}/tree/main/src/plugins/${pluginMeta.folderName}`}
                                 />
                             </div>

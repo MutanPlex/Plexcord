@@ -5041,6 +5041,46 @@
                     "message": "Dönüştürülecek metin"
                 }
             }
+        },
+        "uselessInfo": {
+            "name": "UselessInfo",
+            "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
+            "recording": "Kaydediliyor...",
+            "record": "Kaydet",
+            "option": {
+                "delay": {
+                    "label": "Bildirim Aralığı",
+                    "description": "Bildirimlerin gösterilme aralığı (dakika cinsinden)"
+                },
+                "historyHotkey": {
+                    "label": "Geçmiş Paneli Kısayolu",
+                    "description": "Daha önce gösterilen bilgilerin geçmişini açmak için kısayol tuşu"
+                },
+                "randomFactHotkey": {
+                    "label": "Rastgele Bilgi Kısayolu",
+                    "description": "Rastgele bilgi panelini açmak için kısayol tuşu"
+                },
+                "sameFact": {
+                    "label": "Aynı Bilgileri Tekrarlamayı Önle",
+                    "description": "Tüm bilgiler gösterilmeden aynı bilginin birden fazla kez gösterilmesini önler"
+                },
+                "lastNFacts": {
+                    "label": "Tekrarlanmaması Gereken Son Bilgiler",
+                    "description": "Yeniden gösterilmemesi gereken son bilgi sayısı (0 = tüm zamanlar)"
+                }
+            },
+            "modal": {
+                "title": "UselessInfo",
+                "history": {
+                    "none": "Henüz bilgi yok. Kısayolu kullan veya bekle.",
+                    "source": "Kaynak"
+                },
+                "showRandom": "Rastgele Göster",
+                "close": "Kapat"
+            },
+            "notification": {
+                "title": "Biliyor muydun?"
+            }
         }
     }
 }

@@ -4656,7 +4656,7 @@
                     "label": "Show Edit Diffs",
                     "description": "Show visual differences between edited message versions"
                 },
-                "separatedDiffs":{
+                "separatedDiffs": {
                     "label": "Separated Diffs",
                     "description": "Separate addition and removals in diffs for a more readable differential"
                 }
@@ -4782,7 +4782,7 @@
                     "label": "Ignore Webhooks",
                     "description": "Whether to ignore messages by webhooks"
                 },
-                "ignoreSelf":{
+                "ignoreSelf": {
                     "label": "Ignore Self",
                     "description": "Whether to ignore messages by yourself"
                 },
@@ -5039,6 +5039,46 @@
                     "description": "Translate to or from Morse code",
                     "message": "Text to convert"
                 }
+            }
+        },
+        "uselessInfo": {
+            "name": "UselessInfo",
+            "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
+            "recording": "Recording...",
+            "record": "Record",
+            "option": {
+                "delay": {
+                    "label": "Notification Interval",
+                    "description": "Notification display interval in minutes"
+                },
+                "historyHotkey": {
+                    "label": "History Panel Shortcut",
+                    "description": "Hotkey to show a history of previously shown facts"
+                },
+                "randomFactHotkey": {
+                    "label": "Random Fact Shortcut",
+                    "description": "Hotkey to open the random fact panel"
+                },
+                "sameFact": {
+                    "label": "Avoid showing same items",
+                    "description": "Avoid showing the same fact multiple times until all facts have been shown"
+                },
+                "lastNFacts": {
+                    "label": "How many recents to avoid",
+                    "description": "Number of most recently shown facts to avoid repeating (0 = all-time)"
+                }
+            },
+            "modal": {
+                "title": "UselessInfo",
+                "history": {
+                    "none": "No facts yet. Use the shortcut or wait.",
+                    "source": "Source"
+                },
+                "showRandom": "Show Random",
+                "close": "Close"
+            },
+            "notification": {
+                "title": "Did you know?"
             }
         }
     }
