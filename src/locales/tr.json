@@ -5027,6 +5027,10 @@
                     "text": "Dönüştürülecek metin"
                 }
             }
+        },
+        "moreKaomoji": {
+            "name": "MoreKaomoji",
+            "description": "Discord'a daha fazla Kaomoji ekler. ヽ(´▽`)/"
         }
     }
 }

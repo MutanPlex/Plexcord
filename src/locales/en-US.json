@@ -5026,6 +5026,10 @@
                     }
                 }
             }
+        },
+        "moreKaomoji": {
+            "name": "MoreKaomoji",
+            "description": "Adds more Kaomoji to discord. ヽ(´▽`)/"
         }
     }
 }

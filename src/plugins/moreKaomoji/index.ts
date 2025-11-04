@@ -18,6 +18,7 @@
 */
 
 import { findOption, OptionalMessageOption } from "@api/Commands";
+import { t } from "@api/i18n";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -25,6 +26,11 @@ export default definePlugin({
     name: "MoreKaomoji",
     description: "Adds more Kaomoji to discord. ヽ(´▽`)/",
     authors: [Devs.JacobTm, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.moreKaomoji.description");
+    },
+
     commands: [
         { name: "dissatisfaction", description: " ＞﹏＜" },
         { name: "smug", description: "ಠ_ಠ" },
