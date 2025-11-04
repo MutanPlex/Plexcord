@@ -5030,6 +5030,16 @@
         "moreKaomoji": {
             "name": "MoreKaomoji",
             "description": "Adds more Kaomoji to discord. ヽ(´▽`)/"
+        },
+        "morse": {
+            "name": "Morse",
+            "description": "A slash command to translate to/from morse code.",
+            "command": {
+                "morse": {
+                    "description": "Translate to or from Morse code",
+                    "message": "Text to convert"
+                }
+            }
         }
     }
 }

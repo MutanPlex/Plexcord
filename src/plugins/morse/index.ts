@@ -18,6 +18,7 @@
 */
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType } from "@api/Commands";
+import { t } from "@api/i18n";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -49,15 +50,26 @@ export default definePlugin({
     name: "Morse",
     description: "A slash command to translate to/from morse code.",
     authors: [PcDevs.zyqunix],
+
+    get displayDescription() {
+        return t("plugin.morse.description");
+    },
+
     commands: [
         {
             inputType: ApplicationCommandInputType.BUILT_IN_TEXT,
             name: "morse",
             description: "Translate to or from Morse code",
+            get displayDescription() {
+                return t("plugin.morse.description");
+            },
             options: [
                 {
                     name: "text",
                     description: "Text to convert",
+                    get displayDescription() {
+                        return t("plugin.morse.options.text");
+                    },
                     type: ApplicationCommandOptionType.STRING,
                     required: true
                 }

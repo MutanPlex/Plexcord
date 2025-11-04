@@ -5031,6 +5031,16 @@
         "moreKaomoji": {
             "name": "MoreKaomoji",
             "description": "Discord'a daha fazla Kaomoji ekler. ヽ(´▽`)/"
+        },
+        "morse": {
+            "name": "Morse",
+            "description": "Mors koduna çeviri yapmak veya mors kodundan çevirmek için bir komut.",
+            "command": {
+                "morse": {
+                    "description": "Mors koduna veya mors kodundan çeviri yapar",
+                    "message": "Dönüştürülecek metin"
+                }
+            }
         }
     }
 }
