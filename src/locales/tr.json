@@ -4912,6 +4912,104 @@
                     }
                 }
             }
+        },
+        "moreCommands": {
+            "name": "MoreCommands",
+            "description": "Echo, Lenny, Mock ve daha fazlası",
+            "command": {
+                "echo": {
+                    "description": "Bir mesajı Clyde olarak (yerel) gönderir"
+                },
+                "lenny": {
+                    "description": "Bir Lenny yüzü gönderir"
+                },
+                "mock": {
+                    "description": "İnsanlarla dalga geçer (mOcK PeOpLe)"
+                },
+                "wordcount": {
+                    "description": "Bir mesajdaki kelime sayısını hesaplar",
+                    "response": "Mesaj {{count}} kelime içeriyor."
+                },
+                "flipcoin": {
+                    "description": "Yazı-tura atar ve sonucu döndürür",
+                    "heads": "Yazı",
+                    "tails": "Tura",
+                    "response": "Para {{result}} geldi."
+                },
+                "ask": {
+                    "description": "Evet/hayır sorusu sorar ve cevap verir",
+                    "yes": "Evet",
+                    "no": "Hayır",
+                    "maybe": "Belki",
+                    "askAgain": "Daha sonra tekrar sor",
+                    "definitelyNot": "Kesinlikle hayır",
+                    "itIsCertain": "Kesinlikle evet"
+                },
+                "randomanimal": {
+                    "description": "Rastgele bir hayvan resmi getirir",
+                    "animal": "hayvanını seç",
+                    "cat": "kedi",
+                    "dog": "köpek",
+                    "response": "Üzgünüm, şu anda hayvan resmi alınamadı"
+                },
+                "randomnumber": {
+                    "description": "İki değer arasında rastgele bir sayı üretir",
+                    "min": "Minimum değer",
+                    "max": "Maksimum değer",
+                    "response": "{{min}} ile {{max}} arasında rastgele sayı: {{number}}"
+                },
+                "choose": {
+                    "description": "Verilen seçenekler arasından rastgele birini seçer",
+                    "option": "Virgülle ayrılmış seçenek listesi",
+                    "response": "Seçimim: {{choice}}"
+                },
+                "systeminfo": {
+                    "description": "Sistem bilgilerini gösterir",
+                    "platform": "Platform",
+                    "deviceType": "Cihaz Türü",
+                    "mobile": "Mobil",
+                    "desktop": "Masaüstü",
+                    "browser": "Tarayıcı",
+                    "cpuCores": "CPU Çekirdekleri",
+                    "memory": "Bellek",
+                    "screen": "Ekran",
+                    "languages": "Dil",
+                    "network": "Ağ",
+                    "online": "Çevrimiçi",
+                    "offline": "Çevrimdışı",
+                    "failedToFetch": "Sistem bilgileri alınamadı",
+                    "unknown": "Bilinmiyor"
+                },
+                "getuptime": {
+                    "description": "İstemcinin çalışma süresini gösterir",
+                    "response": "**İstemci Çalışma Süresi**: {{uptime}} dakika"
+                },
+                "gettime": {
+                    "description": "Geçerli zamanı gösterir",
+                    "response": "Şu anki saat: {{time}}"
+                },
+                "transform": {
+                    "description": "Metnini belirtilen seçeneğe göre dönüştürür",
+                    "transformation": {
+                        "description": "Metne uygulanacak dönüştürme türü",
+                        "lowercase": "Metni küçük harfe çevir",
+                        "uppercase": "Metni büyük harfe çevir",
+                        "localeLowercase": "Metni yerel küçük harfe çevir",
+                        "localeUppercase": "Metni yerel büyük harfe çevir",
+                        "same": "Aynı bırak"
+                    },
+                    "repeat": "Kaç kez tekrarlanacağı",
+                    "reverse": "Metnin ters çevrilip çevrilmeyeceği",
+                    "normalize": {
+                        "description": "Metin normalizasyon biçimi",
+                        "nfc": "Normalizasyon Biçimi C (NFC)",
+                        "nfd": "Normalizasyon Biçimi D (NFD)",
+                        "nfkc": "Normalizasyon Biçimi KC (NFKC)",
+                        "nfkd": "Normalizasyon Biçimi KD (NFKD)"
+                    },
+                    "text": "Dönüştürülecek metin"
+                }
+            }
         }
     }
 }

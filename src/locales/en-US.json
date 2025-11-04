@@ -4912,6 +4912,103 @@
                     }
                 }
             }
+        },
+        "moreCommands": {
+            "name": "MoreCommands",
+            "description": "Echo, Lenny, Mock, and More",
+            "command": {
+                "echo": {
+                    "description": "Sends a message as Clyde (locally)"
+                },
+                "lenny": {
+                    "description": "Sends a lenny face"
+                },
+                "mock": {
+                    "description": "mOcK PeOpLe"
+                },
+                "wordcount": {
+                    "description": "Counts the number of words in a message",
+                    "response": "The message contains {{count}} words."
+                },
+                "flipcoin": {
+                    "description": "Flips a coin and returns heads or tails",
+                    "heads": "Heads",
+                    "tails": "Tails",
+                    "response": "The coin landed on {{result}}."
+                },
+                "ask": {
+                    "description": "Ask a yes/no question and get an answer",
+                    "yes": "Yes",
+                    "no": "No",
+                    "maybe": "Maybe",
+                    "askAgain": "Ask Again Later",
+                    "definitelyNot": "Definitely not",
+                    "itIsCertain": "It is certain"
+                },
+                "randomanimal": {
+                    "description": "Get a random animal picture",
+                    "animal": "pick your animal",
+                    "cat": "cat",
+                    "dog": "dog",
+                    "response": "Sorry, couldn't fetch an animal picture right now"
+                },
+                "randomnumber": {
+                    "description": "Generates a random number between two values",
+                    "min": "Minimum value",
+                    "max": "Maximum value",
+                    "response": "Random number between {{min}} and {{max}}: {{number}}"
+                },
+                "choose": {
+                    "description": "Randomly chooses from provided options",
+                    "option": "Comma-separated list of choices",
+                    "response": "I choose: {{choice}}"
+                },
+                "systeminfo": {
+                    "description": "Shows system information",
+                    "platform": "Platform",
+                    "deviceType": "Device Type",
+                    "mobile": "Mobile",
+                    "desktop": "Desktop",
+                    "browser": "Browser",
+                    "cpuCores": "CPU Cores",
+                    "memory": "Memory",
+                    "screen": "Screen",
+                    "languages": "Languages",
+                    "network": "Network",
+                    "online": "Online",
+                    "offline": "Offline",
+                    "failedToFetch": "Failed to fetch system information",
+                    "unknown": "Unknown"
+                },
+                "getuptime": {
+                    "description": "Gets the client's uptime",
+                    "response": "**Client Uptime**: {{uptime}} minutes"
+                },
+                "gettime": {
+                    "description": "Gets the current time",
+                    "response": "Current time is {{time}}"
+                },
+                "transform": {
+                    "description": "Transform your text with the specified option",
+                    "transformation": {
+                        "description": "Transformation to apply to your text",
+                        "lowercase": "Convert text to lowercase",
+                        "uppercase": "Convert text to uppercase",
+                        "localeLowercase": "Convert text to locale lowercase",
+                        "localeUppercase": "Convert text to locale uppercase",
+                        "same": "Stay the same"
+                    },
+                    "repeat": "how many times to repeat",
+                    "reverse": "whether to reverse the text",
+                    "normalize": {
+                        "description": "Text normalization form",
+                        "nfc": "Normalization Form C (NFC)",
+                        "nfd": "Normalization Form D (NFD)",
+                        "nfkc": "Normalization Form KC (NFKC)",
+                        "nfkd": "Normalization Form KD (NFKD)"
+                    }
+                }
+            }
         }
     }
 }
