@@ -2291,6 +2291,7 @@
                 "sharing": "Etkinlik Paylaşımı etkin değil, insanlar özel Rich Presence’inizi göremeyecek!",
                 "enable": "Etkinleştir",
                 "validStream": "Yayın bağlantısı geçerli bir URL olmalıdır.",
+                "mustBeURL": "Geçerli bir URL olmalıdır.",
                 "streamCharacters": "Yayın bağlantısı 512 karakterden uzun olmamalıdır.",
                 "dontUse": "Bir Discord bağlantısı kullanmayın. Bunun yerine bir Imgur görsel bağlantısı kullanın.",
                 "imgur": "Imgur bağlantısı doğrudan görsele ait olmalıdır (örneğin: https://i.imgur.com/...). Görselin üzerine sağ tıklayın ve 'Resim adresini kopyala' seçeneğini tıklayın.",
@@ -2315,9 +2316,17 @@
                     "label": "Detaylar",
                     "description": "Detaylar (satır 1)"
                 },
+                "detailsUrl": {
+                    "label": "Detaylar URL'si",
+                    "description": "Detaylar için tıklanabilir URL"
+                },
                 "state": {
                     "label": "Durum",
                     "description": "Durum (2. satır)"
+                },
+                "stateUrl": {
+                    "label": "Durum URL'si",
+                    "description": "Durum için tıklanabilir URL"
                 },
                 "partySize": {
                     "label": "Grup Boyutu",
@@ -2364,6 +2373,10 @@
                     "label": "Büyük Görsel İpucu",
                     "description": "Büyük görsel üzerine gelindiğinde görünen ipucu"
                 },
+                "imageBigURL": {
+                    "label": "Büyük Görsel URL'si",
+                    "description": "Büyük Görsel Tıklanabilir URL'si"
+                },
                 "imageSmall": {
                     "label": "Küçük Görsel Anahtarı",
                     "description": "Küçük görsel anahtarı (Rich Presence sekmesine yüklenmiş olmalı)"
@@ -2371,6 +2384,10 @@
                 "imageSmallTooltip": {
                     "label": "Küçük Görsel İpucu",
                     "description": "Küçük görsel üzerine gelindiğinde görünen ipucu"
+                },
+                "imageSmallURL": {
+                    "label": "Küçük Görsel URL'si",
+                    "description": "Küçük Görsel Tıklanabilir URL'si"
                 },
                 "buttonOneText": {
                     "label": "Buton 1 Metni",

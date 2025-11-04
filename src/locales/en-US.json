@@ -2291,6 +2291,7 @@
                 "sharing": "Activity Sharing isn't enabled, people won't be able to see your custom rich presence!",
                 "enable": "Enable",
                 "validStream": "Streaming link must be a valid URL.",
+                "mustBeURL": "Must be a valid URL.",
                 "streamCharacters": "Streaming link must be not longer than 512 characters.",
                 "dontUse": "Don't use a Discord link. Use an Imgur image link instead.",
                 "imgur": "Imgur link must be a direct link to the image (e.g. https://i.imgur.com/...). Right click the image and click 'Copy image address'",
@@ -2315,9 +2316,17 @@
                     "label": "Details",
                     "description": "Details (line 1)"
                 },
+                "detailsUrl": {
+                    "label": "Details URL",
+                    "description": "Details clickable URL"
+                },
                 "state": {
                     "label": "State",
                     "description": "State (line 2)"
+                },
+                "stateUrl": {
+                    "label": "State URL",
+                    "description": "State clickable URL"
                 },
                 "partySize": {
                     "label": "Party Size",
@@ -2364,6 +2373,10 @@
                     "label": "Image Big Tooltip",
                     "description": "Big image tooltip"
                 },
+                "imageBigURL": {
+                    "label": "Large Image URL",
+                    "description": "Large Image Clickable URL"
+                },
                 "imageSmall": {
                     "label": "Small Image Key",
                     "description": "Small image key (must be uploaded in the Rich Presence tab)"
@@ -2371,6 +2384,10 @@
                 "imageSmallTooltip": {
                     "label": "Image Small Tooltip",
                     "description": "Small image tooltip"
+                },
+                "imageSmallURL": {
+                    "label": "Small Image URL",
+                    "description": "Small Image Clickable URL"
                 },
                 "buttonOneText": {
                     "label": "Button 1 Text",

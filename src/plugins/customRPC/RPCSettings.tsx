@@ -75,6 +75,12 @@ function isNumberValid(value: number) {
     return true;
 }
 
+function isUrlValid(value: string) {
+    if (value && !/^https?:\/\/.+/.test(value)) return t("plugin.customRPC.error.mustBeURL");
+    return true;
+}
+
+
 function isImageKeyValid(value: string) {
     if (/https?:\/\/(cdn|media)\.discordapp\.(com|net)\//.test(value)) return t("plugin.customRPC.error.dontUse");
     if (/https?:\/\/(?!i\.)?imgur\.com\//.test(value)) return t("plugin.customRPC.error.imgur");
@@ -182,8 +188,15 @@ export function RPCSettings() {
                 { settingsKey: "appName", label: t("plugin.customRPC.option.appName.label"), isValid: makeValidator(128, true) },
             ]} />
 
-            <SingleSetting settingsKey="details" label={t("plugin.customRPC.option.details.label")} isValid={maxLength128} />
-            <SingleSetting settingsKey="state" label={t("plugin.customRPC.option.state.label")} isValid={maxLength128} />
+            <PairSetting data={[
+                { settingsKey: "details", label: t("plugin.customRPC.option.details.label"), isValid: maxLength128 },
+                { settingsKey: "detailsURL", label: t("plugin.customRPC.option.detailsURL.label"), isValid: isUrlValid },
+            ]} />
+
+            <PairSetting data={[
+                { settingsKey: "state", label: t("plugin.customRPC.option.state.label"), isValid: maxLength128 },
+                { settingsKey: "stateURL", label: t("plugin.customRPC.option.stateURL.label"), isValid: isUrlValid },
+            ]} />
 
             <SingleSetting
                 settingsKey="streamLink"
@@ -197,13 +210,15 @@ export function RPCSettings() {
                     settingsKey: "partySize",
                     label: t("plugin.customRPC.option.partySize.label"),
                     transform: parseNumber,
-                    isValid: isNumberValid
+                    isValid: isNumberValid,
+                    disabled: s.type !== ActivityType.PLAYING,
                 },
                 {
                     settingsKey: "partyMaxSize",
                     label: t("plugin.customRPC.option.partyMaxSize.label"),
                     transform: parseNumber,
-                    isValid: isNumberValid
+                    isValid: isNumberValid,
+                    disabled: s.type !== ActivityType.PLAYING,
                 },
             ]} />
 
@@ -213,21 +228,24 @@ export function RPCSettings() {
                 { settingsKey: "imageBig", label: t("plugin.customRPC.option.imageBig.label"), isValid: isImageKeyValid },
                 { settingsKey: "imageBigTooltip", label: t("plugin.customRPC.option.imageBigTooltip.label"), isValid: maxLength128 },
             ]} />
+            <SingleSetting settingsKey="imageBigURL" label={t("plugin.customRPC.option.imageBigURL.label")} isValid={isUrlValid} />
 
             <PairSetting data={[
                 { settingsKey: "imageSmall", label: t("plugin.customRPC.option.imageSmall.label"), isValid: isImageKeyValid },
                 { settingsKey: "imageSmallTooltip", label: t("plugin.customRPC.option.imageSmallTooltip.label"), isValid: maxLength128 },
             ]} />
 
+            <SingleSetting settingsKey="imageSmallURL" label={t("plugin.customRPC.option.imageSmallURL.label")} isValid={isUrlValid} />
+
             <Divider />
 
             <PairSetting data={[
                 { settingsKey: "buttonOneText", label: t("plugin.customRPC.option.buttonOneText.label"), isValid: makeValidator(31) },
-                { settingsKey: "buttonOneURL", label: t("plugin.customRPC.option.buttonOneURL.label") },
+                { settingsKey: "buttonOneURL", label: t("plugin.customRPC.option.buttonOneURL.label"), isValid: isUrlValid },
             ]} />
             <PairSetting data={[
                 { settingsKey: "buttonTwoText", label: t("plugin.customRPC.option.buttonTwoText.label"), isValid: makeValidator(31) },
-                { settingsKey: "buttonTwoURL", label: t("plugin.customRPC.option.buttonTwoURL.label") },
+                { settingsKey: "buttonTwoURL", label: t("plugin.customRPC.option.buttonTwoURL.label"), isValid: isUrlValid },
             ]} />
 
             <Divider />

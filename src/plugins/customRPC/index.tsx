@@ -64,7 +64,9 @@ export const settings = definePluginSettings({
     appID?: string;
     appName?: string;
     details?: string;
+    detailsURL?: string;
     state?: string;
+    stateURL?: string;
     type?: ActivityType;
     streamLink?: string;
     timestampMode?: TimestampMode;
@@ -72,8 +74,10 @@ export const settings = definePluginSettings({
     endTime?: number;
     imageBig?: string;
     imageBigTooltip?: string;
+    imageBigURL?: string;
     imageSmall?: string;
     imageSmallTooltip?: string;
+    imageSmallURL?: string;
     buttonOneText?: string;
     buttonOneURL?: string;
     buttonTwoText?: string;
@@ -87,15 +91,19 @@ async function createActivity(): Promise<Activity | undefined> {
         appID,
         appName,
         details,
+        detailsURL,
         state,
+        stateURL,
         type,
         streamLink,
         startTime,
         endTime,
         imageBig,
         imageBigTooltip,
+        imageBigURL,
         imageSmall,
         imageSmallTooltip,
+        imageSmallURL,
         buttonOneText,
         buttonOneURL,
         buttonTwoText,
@@ -141,6 +149,14 @@ async function createActivity(): Promise<Activity | undefined> {
             break;
     }
 
+    if (detailsURL) {
+        activity.details_url = detailsURL;
+    }
+
+    if (stateURL) {
+        activity.state_url = stateURL;
+    }
+
     if (buttonOneText) {
         activity.buttons = [
             buttonOneText,
@@ -158,7 +174,8 @@ async function createActivity(): Promise<Activity | undefined> {
     if (imageBig) {
         activity.assets = {
             large_image: await getApplicationAsset(imageBig),
-            large_text: imageBigTooltip || undefined
+            large_text: imageBigTooltip || undefined,
+            large_url: imageBigURL || undefined
         };
     }
 
@@ -166,7 +183,8 @@ async function createActivity(): Promise<Activity | undefined> {
         activity.assets = {
             ...activity.assets,
             small_image: await getApplicationAsset(imageSmall),
-            small_text: imageSmallTooltip || undefined
+            small_text: imageSmallTooltip || undefined,
+            small_url: imageSmallURL || undefined
         };
     }
 

@@ -41,7 +41,7 @@ async function openCompleteQuestUI() {
             title: "Quest Completer",
             body: "No Quests To Complete. Click to navigate to the quests tab",
             onClick() {
-                NavigationRouter.transitionTo("/discovery/quests");
+                NavigationRouter.transitionTo("/quest-home");
             },
         });
     } else {
@@ -237,7 +237,7 @@ export default definePlugin({
             find: ".platformSelectorPrimary,",
             replacement: {
                 match: /(?<=questId:(\i\.id).*?"secondary",)disabled:!0/,
-                replace: "onClick: () => $self.mobileQuestPatch($1)"
+                replace: "onClick:()=>$self.mobileQuestPatch($1)"
             },
         },
         {

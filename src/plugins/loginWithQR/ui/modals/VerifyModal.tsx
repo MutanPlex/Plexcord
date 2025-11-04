@@ -7,6 +7,7 @@
 
 import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
+import { Button, TextButton } from "@components/Button";
 import { images } from "@plugins/loginWithQR/images";
 import { getIntlMessage } from "@utils/discord";
 import {
@@ -19,7 +20,6 @@ import {
 } from "@utils/modal";
 import { findByPropsLazy } from "@webpack";
 import {
-    Button,
     RestAPI,
     useEffect,
     useRef,
@@ -130,7 +130,7 @@ function VerifyModal({
                         <BaseText size="xl" weight="bold" color="header-primary" tag="h1" className={cl("device-header")}>
                             {getIntlMessage("QR_CODE_LOGIN_SUCCESS")}
                         </BaseText>
-                        <BaseText size="md" weight="semibold" color="text-normal" style={{ width: "30rem" }}>
+                        <BaseText size="md" weight="semibold" color="text-normal" style={{ width: "30rem", textAlign: "center" }}>
                             {getIntlMessage("QR_CODE_LOGIN_SUCCESS_FLAVOR")}
                         </BaseText>
                     </>
@@ -164,8 +164,8 @@ function VerifyModal({
                             {t("plugin.loginWithQR.neverScan")}
                         </BaseText>
                         <Button
-                            size={Button.Sizes.LARGE}
-                            color={Button.Colors.RED}
+                            size="medium"
+                            variant="dangerPrimary"
                             className={cl("device-confirm")}
                             style={{
                                 ["--duration" as any]: `${holdDuration}ms`,
@@ -186,15 +186,14 @@ function VerifyModal({
                         {getIntlMessage("QR_CODE_LOGIN_FINISH_BUTTON")}
                     </Button>
                 ) : (
-                    <Button
-                        color={Button.Colors.LINK}
-                        look={Button.Looks.FILLED}
+                    <TextButton
+                        variant="link"
                         onClick={props.onClose}
                     >
                         {state === VerifyState.NotFound
                             ? getIntlMessage("CLOSE")
                             : getIntlMessage("CANCEL")}
-                    </Button>
+                    </TextButton>
                 )}
             </ModalFooter>
         </ModalRoot>

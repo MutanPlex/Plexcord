@@ -18,7 +18,6 @@ import { preload, unload } from "./images";
 import { cl } from "./ui";
 import openQrModal from "./ui/modals/QrModal";
 
-const qrModalOpen = false;
 export default definePlugin({
     name: "LoginWithQR",
     description: "Allows you to login to another device by scanning a login QR code, just like on mobile!",
@@ -100,7 +99,7 @@ export default definePlugin({
         }
     ],
 
-    qrModalOpen,
+    qrModalOpen: false,
 
     insertScanQrButton: (button: ReactElement) => (
         <div className={cl("settings-btns")}>
