@@ -8,7 +8,6 @@
 import { t } from "@api/i18n";
 import { SvgOverFlowIcon } from "@plugins/holyNotes/components/icons/overFlowIcon";
 import { classes } from "@utils/misc";
-import { findByCode } from "@webpack";
 import { Button, Clickable, Menu, Popout, React, useRef } from "@webpack/common";
 
 export function NoteBookTabs({ tabs, selectedTabId, onSelectTab }: { tabs: string[], selectedTabId: string, onSelectTab: (tab: string) => void; }) {
@@ -23,7 +22,6 @@ export function NoteBookTabs({ tabs, selectedTabId, onSelectTab }: { tabs: strin
         return value !== null && value !== undefined;
     }
 
-    const { overflowIcon } = findByCode("overflowIcon");
 
     const handleResize = React.useCallback(() => {
         if (!tabBarRef.current) return;
@@ -149,7 +147,7 @@ export function NoteBookTabs({ tabs, selectedTabId, onSelectTab }: { tabs: strin
                             look={Button.Looks.FILLED}
                             onClick={() => setShow(v => !v)}
                         >
-                            <SvgOverFlowIcon className={classes(overflowIcon)} width={16} height={16} />
+                            <SvgOverFlowIcon width={16} height={16} />
                         </Button>
                     )}
                 </Popout>

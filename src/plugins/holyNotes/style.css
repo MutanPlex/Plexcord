@@ -90,6 +90,11 @@ $modifier: var(--input-border);
     height: 16px;
     position: relative;
     top: -10px;
+    text-align: center;
+}
+
+.pc-notebook-overflow-chevron svg {
+    margin-top: 6px;
 }
 
 .pc-notebook-tabbar-container {
