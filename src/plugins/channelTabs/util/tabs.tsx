@@ -374,7 +374,9 @@ export function moveToTab(id: number) {
             "__shop__": "/shop",
             "__library__": "/library",
             "__discovery__": "/discovery",
-            "__nitro__": "/store"
+            "__nitro__": "/store",
+            "__icymi__": "/icymi",
+            "__activity__": "/channels/@me/activity",
         };
 
         const route = routeMap[tab.channelId];
@@ -502,7 +504,9 @@ export function navigateToBookmark(ch: BasicChannelTabsProps) {
                 "__shop__": "/shop",
                 "__library__": "/library",
                 "__discovery__": "/discovery",
-                "__nitro__": "/store"
+                "__nitro__": "/store",
+                "__icymi__": "/icymi",
+                "__activity__": "/channels/@me/activity",
             };
 
             const route = routeMap[ch.channelId];

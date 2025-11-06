@@ -13,7 +13,7 @@ import { VoiceState } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findByCodeLazy, findStoreLazy } from "@webpack";
-import { ChannelStore, MediaEngineStore, PermissionsBits, PermissionStore, SelectedChannelStore, UserStore, VoiceActions } from "@webpack/common";
+import { ChannelStore, MediaEngineStore, PermissionsBits, PermissionStore, SelectedChannelStore, showToast, Toasts, UserStore, VoiceActions } from "@webpack/common";
 
 import { getCurrentMedia, settings } from "./utils";
 
@@ -53,6 +53,11 @@ async function autoStartStream() {
     });
 }
 
+function handleToggle() {
+    settings.store.toolboxManagement = !settings.store.toolboxManagement;
+    showToast(`${t("plugin.instantScreenshare.toolbox.toast", { state: settings.store.toolboxManagement ? t("plugin.instantScreenshare.toolbox.enabled") : t("plugin.instantScreenshare.toolbox.disabled") })}`, Toasts.Type.SUCCESS);
+}
+
 export default definePlugin({
     name: "InstantScreenshare",
     description: "Instantly screenshare when joining a voice channel with support for desktop sources, windows, and video input devices (cameras, capture cards)",
@@ -87,6 +92,7 @@ export default definePlugin({
 
     flux: {
         async VOICE_STATE_UPDATES({ voiceStates }: { voiceStates: VoiceState[]; }) {
+            if (!settings.store.toolboxManagement) return;
             const myId = UserStore.getCurrentUser().id;
             for (const state of voiceStates) {
                 const { userId, channelId } = state;
@@ -105,4 +111,10 @@ export default definePlugin({
             }
         }
     },
+
+    get toolboxActions() {
+        return {
+            [t("plugin.instantScreenshare.toolbox.label")]: (() => handleToggle())
+        };
+    }
 });

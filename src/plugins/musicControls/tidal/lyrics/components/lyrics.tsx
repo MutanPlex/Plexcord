@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { settings } from "@plugins/musicControls/settings";
 import { TidalLrcStore } from "@plugins/musicControls/tidal/lyrics/providers/store";
@@ -41,7 +42,7 @@ function LyricsDisplay({ scroll = true }: { scroll?: boolean; }) {
             <div className="pc-tidal-lyrics"
                 onContextMenu={e => ContextMenuApi.openContextMenu(e, () => <LyricsContextMenu />)}
             >
-                <TooltipContainer text="No lyrics found">
+                <TooltipContainer text={t("plugin.musicControls.context.lyrics.notFound")}>
                     {NoteElement}
                 </TooltipContainer>
             </div>

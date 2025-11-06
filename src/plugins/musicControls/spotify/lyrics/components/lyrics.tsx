@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { settings } from "@plugins/musicControls/settings";
 import { SpotifyLrcStore } from "@plugins/musicControls/spotify/lyrics/providers/store";
@@ -48,7 +49,7 @@ function LyricsDisplay({ scroll = true }: { scroll?: boolean; }) {
                     </BaseText>
                 </div>
             )) : ShowMusicNoteOnNoLyrics ? (
-                <TooltipContainer text="No synced lyrics found">
+                <TooltipContainer text={t("plugin.musicControls.context.lyrics.notFound")}>
                     <NoteSvg />
                 </TooltipContainer>
             ) : null}

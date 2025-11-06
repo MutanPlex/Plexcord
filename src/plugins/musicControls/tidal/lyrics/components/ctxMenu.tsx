@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { copyWithToast } from "@utils/misc";
 import { findComponentByCodeLazy } from "@webpack";
 import { FluxDispatcher, Menu } from "@webpack/common";
@@ -21,14 +22,14 @@ export function LyricsContextMenu() {
         <Menu.Menu
             navId="tidal-lyrics-menu"
             onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-            aria-label="Tidal Lyrics Menu"
+            aria-label={t("plugin.musicControls.context.tidal.label")}
         >
             <Menu.MenuItem
                 key="copy-lyric"
                 id="copy-lyric"
-                label="Copy current lyric"
+                label={t("plugin.musicControls.context.copy.currentLyrics")}
                 disabled={!currLyric?.text}
-                action={() => copyWithToast(currLyric!.text!, "Lyric copied!")}
+                action={() => copyWithToast(currLyric!.text!, t("plugin.musicControls.alert.lyricCopied"))}
                 icon={CopyIcon}
             />
         </Menu.Menu>

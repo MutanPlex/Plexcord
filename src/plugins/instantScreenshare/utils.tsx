@@ -57,6 +57,16 @@ export const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: false,
     },
+    toolboxManagement: {
+        get label() {
+            return t("plugin.instantScreenshare.option.toolboxManagement.label");
+        },
+        get description() {
+            return t("plugin.instantScreenshare.option.toolboxManagement.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+    }
 });
 
 export async function getCurrentMedia() {

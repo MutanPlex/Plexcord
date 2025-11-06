@@ -130,6 +130,9 @@ export default definePlugin({
                 } else if (path === "/channels/@me") {
                     channelId = "__friends__";
                     guildId = "@me";
+                } else if (path === "/channels/@me/activity") {
+                    channelId = "__activity__";
+                    guildId = "@me";
                 } else if (path.includes("/shop")) {
                     channelId = "__shop__";
                     guildId = "@me";
@@ -141,6 +144,9 @@ export default definePlugin({
                     guildId = "@me";
                 } else if (path.includes("/store")) {
                     channelId = "__nitro__";
+                    guildId = "@me";
+                } else if (path.includes("/icymi")) {
+                    channelId = "__icymi__";
                     guildId = "@me";
                 } else {
                     // Unknown page without channelId - ignore

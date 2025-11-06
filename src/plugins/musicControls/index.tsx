@@ -19,6 +19,7 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { migratePluginToSetting } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs, PcDevs } from "@utils/constants";
@@ -54,6 +55,10 @@ export default definePlugin({
         "YoutubeMusic",
         "YoutubeMusicControls"
     ],
+
+    get displayDescription() {
+        return t("plugin.musicControls.description");
+    },
 
     patches: [
         {
@@ -103,8 +108,8 @@ export default definePlugin({
                 <ErrorBoundary
                     fallback={() => (
                         <div className="pc-tidal-fallback">
-                            <p>Failed to render Modal :(</p>
-                            <p>Check the console for errors</p>
+                            <p>{t("plugin.musicControls.error.failed")}</p>
+                            <p>{t("plugin.musicControls.error.checkConsole")}</p>
                         </div>
                     )}
                 >

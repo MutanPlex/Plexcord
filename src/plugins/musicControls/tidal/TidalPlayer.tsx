@@ -7,6 +7,7 @@
 
 import "./tidalStyles.css";
 
+import { t } from "@api/i18n";
 import { Settings } from "@api/Settings";
 import { ImageIcon, LinkIcon, OpenExternalIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
@@ -75,19 +76,19 @@ function CopyContextMenu({ name, path }: { name: string; path: string; }) {
         <Menu.Menu
             navId={`tdl-${name}-menu`}
             onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-            aria-label={`TIdal ${name} Menu`}
+            aria-label={t("plugin.musicControls.context.tidal.type", { name })}
         >
             <Menu.MenuItem
                 key={copyId}
                 id={copyId}
-                label={`Copy ${name} Link`}
+                label={t("plugin.musicControls.context.tidal.copy", { name })}
                 action={() => copyWithToast(path.replace("http://", "https://"))}
                 icon={LinkIcon}
             />
             <Menu.MenuItem
                 key={openId}
                 id={openId}
-                label={`Open ${name} in Tidal`}
+                label={t("plugin.musicControls.context.tidal.open", { name })}
                 action={() => TidalStore.openExternal(path)}
                 icon={OpenExternalIcon}
             />
@@ -186,7 +187,7 @@ function TdlSeekBar() {
                 size="xs"
                 weight="medium"
                 className={`${cl("progress-time")} ${cl("time-left")}`}
-                aria-label="Progress"
+                aria-label={t("plugin.musicControls.modal.player.progress")}
             >
                 {msToHuman(position)}
             </Span>
@@ -202,7 +203,7 @@ function TdlSeekBar() {
                 size="xs"
                 weight="medium"
                 className={`${cl("progress-time")} ${cl("time-right")}`}
-                aria-label="Total Duration"
+                aria-label={t("plugin.musicControls.modal.player.totalDuration")}
             >
                 {msToHuman(songDuration * 1000)}
             </Span>
@@ -215,19 +216,19 @@ function AlbumContextMenu({ track }: { track: PlayerState["track"]; }) {
         <Menu.Menu
             navId="tdl-album-menu"
             onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-            aria-label="Tidal Album Menu"
+            aria-label={t("plugin.musicControls.context.tidal.album")}
         >
             <Menu.MenuItem
                 key="view-cover"
                 id="view-cover"
-                label="View Album Cover"
+                label={t("plugin.musicControls.modal.album.viewCover")}
                 action={() => track?.imageSrc && openImageModal({ url: track.imageSrc })}
                 icon={ImageIcon}
             />
             <Menu.MenuControlItem
                 id="tdl-volume"
                 key="tdl-volume"
-                label="Volume"
+                label={t("plugin.musicControls.modal.album.volume")}
                 control={(props, ref) => (
                     <Menu.MenuSliderControl
                         {...props}
@@ -264,7 +265,7 @@ function Info({ track }: { track: NonNullable<PlayerState["track"]>; }) {
                 <img
                     id={cl("album-image")}
                     src={img}
-                    alt="Album Image"
+                    alt={t("plugin.musicControls.modal.album.image")}
                     onClick={() => setCoverExpanded(!coverExpanded)}
                     onContextMenu={e => {
                         ContextMenuApi.openContextMenu(e, () => <AlbumContextMenu track={track} />);
@@ -295,7 +296,7 @@ function Info({ track }: { track: NonNullable<PlayerState["track"]>; }) {
                 </Paragraph>
                 {track.artist && (
                     <Paragraph className={cl("ellipoverflow")}>
-                        by&nbsp;
+                        {t("plugin.musicControls.modal.player.artist")}&nbsp;
                         <span className={cl("artist")} style={{ fontSize: "inherit" }} title={track.artist}>
                             {track.artist}
                         </span>
@@ -303,7 +304,7 @@ function Info({ track }: { track: NonNullable<PlayerState["track"]>; }) {
                 )}
                 {track.album && (
                     <Paragraph className={cl("ellipoverflow")}>
-                        on&nbsp;
+                        {t("plugin.musicControls.modal.player.album")}&nbsp;
                         <span
                             id={cl("album-title")}
                             className={cl("album")}

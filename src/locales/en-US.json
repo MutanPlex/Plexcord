@@ -1733,6 +1733,8 @@
                 "library": "Library",
                 "discovery": "Discovery",
                 "nitro": "Nitro",
+                "icymi": "ICYMI",
+                "activity": "Activity",
                 "specialPage": "Special Page"
             },
             "button": {
@@ -4045,7 +4047,17 @@
                 "autoDeafen": {
                     "label": "Auto Deafen",
                     "description": "Automatically deafen when joining a voice channel (also mutes you)"
+                },
+                "toolboxManagement": {
+                    "label": "Toolbox Management",
+                    "description": "Enable/Disable Instant Screenshare"
                 }
+            },
+            "toolbox": {
+                "label": "Instant Screenshare",
+                "toast": "Instant Screenshare {{state}}",
+                "enabled": "Enabled",
+                "disabled": "Disabled"
             }
         },
         "invisibleChat": {
@@ -5023,7 +5035,8 @@
                         "nfd": "Normalization Form D (NFD)",
                         "nfkc": "Normalization Form KC (NFKC)",
                         "nfkd": "Normalization Form KD (NFKD)"
-                    }
+                    },
+                    "text": "Transform this text"
                 }
             }
         },
@@ -5067,6 +5080,177 @@
                     "label": "Ignore Blocked Users",
                     "description": "Ignore messages from blocked users"
                 }
+            }
+        },
+        "musicControls": {
+            "name": "MusicControls",
+            "description": "Music Controls and Lyrics for multiple services",
+            "option": {
+                "SpotifySectionTitle": {
+                    "label": "Spotify"
+                },
+                "showSpotifyControls": {
+                    "label": "Show Spotify Controls",
+                    "description": "Show music controls for Spotify"
+                },
+                "showSpotifyLyrics": {
+                    "label": "Show Spotify Lyrics",
+                    "description": "Show lyrics for Spotify"
+                },
+                "useSpotifyUris": {
+                    "label": "Use Spotify URIs",
+                    "description": "Open Spotify URIs instead of Spotify URLs. Will only work if you have Spotify installed and might not work on all platforms"
+                },
+                "previousButtonRestartsTrack": {
+                    "label": "Previous Button Restarts Track",
+                    "description": "Restart currently playing track when pressing the previous button if playtime is >3s"
+                },
+                "TidalSectionTitle": {
+                    "label": "Tidal"
+                },
+                "showTidalControls": {
+                    "label": "Show Tidal Controls",
+                    "description": "Show music controls for Tidal"
+                },
+                "showTidalLyrics": {
+                    "label": "Show Tidal Lyrics",
+                    "description": "Show lyrics for Tidal"
+                },
+                "YtmSectionTitle": {
+                    "label": "YouTube Music"
+                },
+                "showYoutubeMusicControls": {
+                    "label": "Show YouTube Music Controls",
+                    "description": "Show music controls for YouTube Music"
+                },
+                "YoutubeMusicApiUrl": {
+                    "label": "YouTube Music API URL",
+                    "description": "The URL for the YouTube Music API server you are using"
+                },
+                "hoverControls": {
+                    "label": "Hover Controls",
+                    "description": "Show controls on hover"
+                },
+                "ShowMusicNoteOnNoLyrics": {
+                    "label": "Show Music Note On No Lyrics",
+                    "description": "Show a music note icon when no lyrics are found"
+                },
+                "LyricsPosition": {
+                    "label": "Lyrics Position",
+                    "description": "Position of the lyrics panel",
+                    "above": "Above Player(s)",
+                    "below": "Below  Player(s)"
+                },
+                "LyricsProvider": {
+                    "label": "Lyrics Provider",
+                    "description": "Where lyrics are fetched from",
+                    "spotify": "Spotify (Musixmatch)",
+                    "LRCLIB": "LRCLIB"
+                },
+                "TranslateTo": {
+                    "label": "Translate To",
+                    "description": "Translate lyrics to - Changing this will clear existing translations",
+                    "cleared": "Translation Cleared"
+                },
+                "LyricsConversion": {
+                    "label": "Lyrics Conversion",
+                    "description": "Automatically translate or romanize lyrics",
+                    "none": "None",
+                    "translate": "Translate",
+                    "romanize": "Romanize"
+                },
+                "FallbackProvider": {
+                    "label": "Fallback Provider",
+                    "description": "When a lyrics provider fails, try other providers"
+                },
+                "ShowFailedToasts": {
+                    "label": "Show Failed Toasts",
+                    "description": "Show toasts when lyrics fail to load"
+                },
+                "PurgeLyricsCache": {
+                    "label": "Purge Lyrics Cache",
+                    "description": "Clear all cached lyrics and translations",
+                    "button": "Purge Cache",
+                    "cacheLyricsPurged": "Lyrics cache purged"
+                }
+            },
+            "context": {
+                "spotify": {
+                    "label": "Spotify Lyrics Menu",
+                    "type": "Spotify {{type}} Menu",
+                    "copy": "Copy {{type}} Name",
+                    "link": "Copy {{type}} Link",
+                    "open": "Open {{type}} in Spotify",
+                    "album": "Spotify Album Menu"
+                },
+                "tidal": {
+                    "label": "Tidal Lyrics Menu",
+                    "lyrics": "Tidal Lyrics",
+                    "type": "Tidal {{name}} Menu",
+                    "copy": "Copy {{name}} Name",
+                    "open": "Open {{name}} in Tidal",
+                    "album": "Tidal Album Menu"
+                },
+                "ytm": {
+                    "type": "Youtube Music {{name}} Menu",
+                    "copy": "Copy {{name}} Name",
+                    "open": "Open {{name}} in Youtube Music",
+                    "album": "Youtube Music Album Menu",
+                    "muted": "Muted"
+                },
+                "lyrics": {
+                    "provider": "Lyrics Provider",
+                    "saved": "saved",
+                    "notFound": "No synced lyrics found"
+                },
+                "copy": {
+                    "currentLyrics": "Copy current lyrics"
+                }
+            },
+            "alert": {
+                "lyricCopied": "Lyric copied to clipboard!",
+                "noLyrics": "No lyrics",
+                "noLyricsTo": "No lyrics to {{translated}}",
+                "translate": "translate",
+                "romanize": "romanize",
+                "lyricsFetchFailed": "Lyrics fetch failed",
+                "failedToFetchLyrics": "Failed to fetch {{translated}}",
+                "translation": "translation",
+                "romanization": "romanization",
+                "failedToFetchTranslation": "Failed to fetch {{translated}} lyrics"
+            },
+            "modal": {
+                "install": {
+                    "title": "How to install",
+                    "install": "Install {{link}} from here, then go to TidalLuna settings → Plugin stores → Install @vmohammad/api",
+                    "tidaluna": "TidaLuna"
+                },
+                "player": {
+                    "noPlaying": "No track playing",
+                    "artist": "Artist:",
+                    "album": "Album:",
+                    "noLyrics": "No lyrics available :(",
+                    "progress": "Progress",
+                    "totalDuration": "Total Duration"
+                },
+                "album": {
+                    "open": "Open Album",
+                    "viewCover": "View Album Cover",
+                    "volume": "Volume",
+                    "image": "Album Image"
+                }
+            },
+            "provider": {
+                "lrclib": "LRCLIB",
+                "spotify": "Spotify",
+                "translated": "Translated",
+                "romanized": "Romanized",
+                "none": "None"
+            },
+            "error": {
+                "failed": "Failed to render Modal :(",
+                "checkConsole": "Check the console for errors",
+                "invalidUrlCustomApi": "Invalid URL format for Custom Api Server URL"
             }
         },
         "uselessInfo": {

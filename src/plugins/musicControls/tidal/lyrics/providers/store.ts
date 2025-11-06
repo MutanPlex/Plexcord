@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { settings } from "@plugins/musicControls/settings";
 import { getLyrics } from "@plugins/musicControls/tidal/lyrics/api";
@@ -44,7 +45,7 @@ export const TidalLrcStore = proxyLazyWebpack(() => {
             .then(l => { lyrics = l; store.emitChange(); })
             .catch(() => {
                 lyrics = null;
-                showNotif("Tidal Lyrics", "Failed to fetch lyrics");
+                showNotif(t("plugin.musicControls.context.tidal.lyrics"), t("plugin.musicControls.alert.lyricsFetchFailed"));
                 store.emitChange();
             });
     }

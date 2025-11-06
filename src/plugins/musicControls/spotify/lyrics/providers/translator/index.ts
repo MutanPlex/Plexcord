@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import settings from "@plugins/musicControls";
+import { settings } from "@plugins/musicControls/settings";
 import { Provider, SyncedLyric } from "@plugins/musicControls/spotify/lyrics/providers/types";
 
 // stolen from src/plugins/translate/utils.ts

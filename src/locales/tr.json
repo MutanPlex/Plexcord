@@ -1733,6 +1733,8 @@
                 "library": "Kütüphane",
                 "discovery": "Keşfet",
                 "nitro": "Nitro",
+                "icymi": "ICYMI",
+                "activity": "Etkinlik",
                 "specialPage": "Özel Sayfa"
             },
             "button": {
@@ -4045,7 +4047,17 @@
                 "autoDeafen": {
                     "label": "Otomatik Sağırlaştır",
                     "description": "Bir ses kanalına katıldığında otomatik olarak sağırlaştır (aynı zamanda seni de sessize alır)"
+                },
+                "toolboxManagement": {
+                    "label": "Araç Kutusu Yönetimi",
+                    "description": "Anında Ekran Paylaşımını Etkinleştir/Devre Dışı Bırak"
                 }
+            },
+            "toolbox": {
+                "label": "Anında Ekran Paylaşımı",
+                "toast": "Anında Ekran Paylaşımı {{state}}",
+                "enabled": "Etkin",
+                "disabled": "Devre Dışı"
             }
         },
         "invisibleChat": {
@@ -5068,6 +5080,177 @@
                     "label": "Engellenen Kullanıcıları Yoksay",
                     "description": "Engellenen kullanıcılardan gelen mesajları yoksay"
                 }
+            }
+        },
+        "musicControls": {
+            "name": "MusicControls",
+            "description": "Birden fazla servis için Müzik Kontrolleri ve Şarkı Sözleri",
+            "option": {
+                "SpotifySectionTitle": {
+                    "label": "Spotify"
+                },
+                "showSpotifyControls": {
+                    "label": "Spotify Kontrollerini Göster",
+                    "description": "Spotify için müzik kontrollerini göster"
+                },
+                "showSpotifyLyrics": {
+                    "label": "Spotify Şarkı Sözlerini Göster",
+                    "description": "Spotify için şarkı sözlerini göster"
+                },
+                "useSpotifyUris": {
+                    "label": "Spotify URI'larını Kullan",
+                    "description": "Spotify URL'leri yerine URI'larını açar. Yalnızca Spotify yüklüyse çalışır ve her platformda çalışmayabilir"
+                },
+                "previousButtonRestartsTrack": {
+                    "label": "Önceki Tuşu Şarkıyı Yeniden Başlatsın",
+                    "description": "Oynatma süresi 3 saniyeden fazlaysa önceki tuşuna basıldığında mevcut şarkıyı baştan başlatır"
+                },
+                "TidalSectionTitle": {
+                    "label": "Tidal"
+                },
+                "showTidalControls": {
+                    "label": "Tidal Kontrollerini Göster",
+                    "description": "Tidal için müzik kontrollerini göster"
+                },
+                "showTidalLyrics": {
+                    "label": "Tidal Şarkı Sözlerini Göster",
+                    "description": "Tidal için şarkı sözlerini göster"
+                },
+                "YtmSectionTitle": {
+                    "label": "YouTube Music"
+                },
+                "showYoutubeMusicControls": {
+                    "label": "YouTube Music Kontrollerini Göster",
+                    "description": "YouTube Music için müzik kontrollerini göster"
+                },
+                "YoutubeMusicApiUrl": {
+                    "label": "YouTube Music API URL'si",
+                    "description": "Kullandığınız YouTube Music API sunucusunun URL'si"
+                },
+                "hoverControls": {
+                    "label": "Üzerine Gelince Kontroller",
+                    "description": "Fareyle üzerine gelince kontrolleri göster"
+                },
+                "ShowMusicNoteOnNoLyrics": {
+                    "label": "Şarkı Sözü Yoksa Nota Göster",
+                    "description": "Şarkı sözü bulunamadığında nota simgesi göster"
+                },
+                "LyricsPosition": {
+                    "label": "Şarkı Sözü Konumu",
+                    "description": "Şarkı sözü panelinin konumu",
+                    "above": "Oynatıcı(lar)ın Üstünde",
+                    "below": "Oynatıcı(lar)ın Altında"
+                },
+                "LyricsProvider": {
+                    "label": "Şarkı Sözü Sağlayıcısı",
+                    "description": "Şarkı sözlerinin alındığı kaynak",
+                    "spotify": "Spotify (Musixmatch)",
+                    "LRCLIB": "LRCLIB"
+                },
+                "TranslateTo": {
+                    "label": "Diline Çevir",
+                    "description": "Şarkı sözlerini çevir — Bunu değiştirmek mevcut çevirileri temizler",
+                    "cleared": "Çeviri Temizlendi"
+                },
+                "LyricsConversion": {
+                    "label": "Şarkı Sözü Dönüştürme",
+                    "description": "Şarkı sözlerini otomatik olarak çevir veya romanize et",
+                    "none": "Hiçbiri",
+                    "translate": "Çevir",
+                    "romanize": "Romanize Et"
+                },
+                "FallbackProvider": {
+                    "label": "Yedek Sağlayıcı",
+                    "description": "Bir şarkı sözü sağlayıcısı başarısız olursa diğerini dene"
+                },
+                "ShowFailedToasts": {
+                    "label": "Başarısız Bildirimlerini Göster",
+                    "description": "Şarkı sözleri yüklenemediğinde bildirim göster"
+                },
+                "PurgeLyricsCache": {
+                    "label": "Şarkı Sözü Önbelleğini Temizle",
+                    "description": "Tüm önbelleğe alınmış şarkı sözlerini ve çevirileri sil",
+                    "button": "Önbelleği Temizle",
+                    "cacheLyricsPurged": "Şarkı sözü önbelleği temizlendi"
+                }
+            },
+            "context": {
+                "spotify": {
+                    "label": "Spotify Şarkı Sözü Menüsü",
+                    "type": "Spotify {{type}} Menüsü",
+                    "copy": "{{type}} Adını Kopyala",
+                    "link": "{{type}} Bağlantısını Kopyala",
+                    "open": "{{type}}’i Spotify’da Aç",
+                    "album": "Spotify Albüm Menüsü"
+                },
+                "tidal": {
+                    "label": "Tidal Şarkı Sözü Menüsü",
+                    "lyrics": "Tidal Şarkı Sözleri",
+                    "type": "Tidal {{name}} Menüsü",
+                    "copy": "{{name}} Adını Kopyala",
+                    "open": "{{name}}’i Tidal’da Aç",
+                    "album": "Tidal Albüm Menüsü"
+                },
+                "ytm": {
+                    "type": "YouTube Music {{name}} Menüsü",
+                    "copy": "{{name}} Adını Kopyala",
+                    "open": "{{name}}’i YouTube Music’te Aç",
+                    "album": "YouTube Music Albüm Menüsü",
+                    "muted": "Sessize Alındı"
+                },
+                "lyrics": {
+                    "provider": "Şarkı Sözü Sağlayıcısı",
+                    "saved": "kaydedildi",
+                    "notFound": "Eşzamanlı şarkı sözleri bulunamadı"
+                },
+                "copy": {
+                    "currentLyrics": "Geçerli şarkı sözlerini kopyala"
+                }
+            },
+            "alert": {
+                "lyricCopied": "Şarkı sözü panoya kopyalandı!",
+                "noLyrics": "Şarkı sözü yok",
+                "noLyricsTo": "{{translated}} için şarkı sözü yok",
+                "translate": "çeviri",
+                "romanize": "romanize etme",
+                "lyricsFetchFailed": "Şarkı sözü alınamadı",
+                "failedToFetchLyrics": "{{translated}} alınamadı",
+                "translation": "çeviri",
+                "romanization": "romanizasyon",
+                "failedToFetchTranslation": "{{translated}} şarkı sözü çevirisi alınamadı"
+            },
+            "modal": {
+                "install": {
+                    "title": "Nasıl Yüklenir",
+                    "install": "{{link}} buradan yükleyin, ardından TidaLuna ayarlarına gidin → Eklenti mağazaları → @vmohammad/api’yi yükleyin",
+                    "tidaluna": "TidaLuna"
+                },
+                "player": {
+                    "noPlaying": "Çalan parça yok",
+                    "artist": "Sanatçı:",
+                    "album": "Albüm:",
+                    "noLyrics": "Şarkı sözü bulunamadı :(",
+                    "progress": "İlerleme",
+                    "totalDuration": "Toplam Süre"
+                },
+                "album": {
+                    "open": "Albümü Aç",
+                    "viewCover": "Albüm Kapağını Görüntüle",
+                    "volume": "Ses Düzeyi",
+                    "image": "Albüm Görseli"
+                }
+            },
+            "provider": {
+                "lrclib": "LRCLIB",
+                "spotify": "Spotify",
+                "translated": "Çevrilmiş",
+                "romanized": "Romanize Edilmiş",
+                "none": "Hiçbiri"
+            },
+            "error": {
+                "failed": "Pencere oluşturulamadı :(",
+                "checkConsole": "Hatalar için konsolu kontrol et",
+                "invalidUrlCustomApi": "Geçersiz Özel API Sunucu URL biçimi"
             }
         },
         "uselessInfo": {

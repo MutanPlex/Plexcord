@@ -31,7 +31,9 @@ export function bookmarkPlaceholderName(bookmark: Omit<Bookmark | BookmarkFolder
             "__shop__": t("plugin.channelTabs.bookmark.shop"),
             "__library__": t("plugin.channelTabs.bookmark.library"),
             "__discovery__": t("plugin.channelTabs.bookmark.discovery"),
-            "__nitro__": t("plugin.channelTabs.bookmark.nitro")
+            "__nitro__": t("plugin.channelTabs.bookmark.nitro"),
+            "__icymi__": t("plugin.channelTabs.bookmark.icymi"),
+            "__activity__": t("plugin.channelTabs.bookmark.activity"),
         };
 
         return specialPagesMap[channelId] || t("plugin.channelTabs.bookmark.specialPage");

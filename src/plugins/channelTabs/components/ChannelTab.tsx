@@ -9,7 +9,7 @@ import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { Channel, Guild, User } from "@plexcord/discord-types";
-import { ChannelTabsProps, CircleQuestionIcon, closeTab, DiscoveryIcon, EnvelopeIcon, FriendsIcon, isTabSelected, moveDraggedTabs, moveToTab, NitroIcon, openedTabs, QuestIcon, settings, ShopIcon } from "@plugins/channelTabs/util";
+import { ActivityIcon, ChannelTabsProps, CircleQuestionIcon, closeTab, DiscoveryIcon, EnvelopeIcon, FriendsIcon, ICYMIIcon, isTabSelected, moveDraggedTabs, moveToTab, NitroIcon, openedTabs, QuestIcon, settings, ShopIcon } from "@plugins/channelTabs/util";
 import { activeQuestIntervals } from "@plugins/questify";
 import { getGuildAcronym, getIntlMessage, getUniqueUsername } from "@utils/discord";
 import { classes } from "@utils/misc";
@@ -205,7 +205,9 @@ function ChannelTabContent(props: ChannelTabsProps & {
             "__shop__": { label: t("plugin.channelTabs.bookmark.shop"), Icon: ShopIcon },
             "__library__": { label: t("plugin.channelTabs.bookmark.library"), Icon: () => LibraryIcon(20, 20) },
             "__discovery__": { label: t("plugin.channelTabs.bookmark.discovery"), Icon: DiscoveryIcon },
-            "__nitro__": { label: t("plugin.channelTabs.bookmark.nitro"), Icon: NitroIcon }
+            "__nitro__": { label: t("plugin.channelTabs.bookmark.nitro"), Icon: NitroIcon },
+            "__icymi__": { label: t("plugin.channelTabs.bookmark.icymi"), Icon: ICYMIIcon },
+            "__activity__": { label: t("plugin.channelTabs.bookmark.activity"), Icon: ActivityIcon },
         };
 
         const pageConfig = specialPagesConfig[channelId];

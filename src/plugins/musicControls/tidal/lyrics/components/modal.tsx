@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { TidalStore, Track } from "@plugins/musicControls/tidal/TidalStore";
 import { ModalContent, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
@@ -30,8 +31,8 @@ function ModalHeaderContent({ track }: { track: Track; }) {
                 )}
                 <div>
                     <BaseText size="sm" weight="semibold">{track.name}</BaseText>
-                    <BaseText size="sm">by {track.artist}</BaseText>
-                    {track.album && <BaseText size="sm">on {track.album}</BaseText>}
+                    <BaseText size="sm">{t("plugin.musicControls.modal.player.artist")} {track.artist}</BaseText>
+                    {track.album && <BaseText size="sm">{t("plugin.musicControls.modal.player.album")} {track.album}</BaseText>}
                 </div>
             </div>
         </ModalHeader>
@@ -65,7 +66,7 @@ export function LyricsModal({ rootProps }: { rootProps: ModalProps; }) {
                             </BaseText>
                         ))
                     ) : (
-                        <BaseText size="sm" weight="normal" className={cl("modal-no-lyrics")}>No lyrics available :(</BaseText>
+                        <BaseText size="sm" weight="normal" className={cl("modal-no-lyrics")}>{t("plugin.musicControls.modal.player.noLyrics")}</BaseText>
                     )}
                 </div>
             </ModalContent>
