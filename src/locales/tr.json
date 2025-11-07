@@ -5262,6 +5262,51 @@
             "noGroup": "Ortak grup DM'i yok",
             "header": "Ortak Gruplar"
         },
+        "newGuildSettings": {
+            "name": "NewGuildSettings",
+            "description": "Yeni sunuculara katıldığında otomatik olarak sessize alır ve çeşitli diğer ayarları değiştirir",
+            "context": {
+                "apply": "Yeni Sunucu Ayarlarını Uygula"
+            },
+            "option": {
+                "guild": {
+                    "label": "Sunucuyu Sessize Al",
+                    "description": "Sunucuyu otomatik olarak sessize al"
+                },
+                "messages": {
+                    "label": "Sunucu Bildirim Ayarları",
+                    "description": "Sunucu bildirim ayarları",
+                    "all": "Tüm mesajlar",
+                    "mentions": "Yalnızca @bahsetmeler",
+                    "nothing": "Hiçbiri",
+                    "default": "Sunucu varsayılanı"
+                },
+                "everyone": {
+                    "label": "@everyone ve @here'i Bastır",
+                    "description": "@everyone ve @here bildirimlerini bastır"
+                },
+                "role": {
+                    "label": "Tüm Rol @bahsetmelerini Bastır",
+                    "description": "Tüm rol @bahsetmelerini bastır"
+                },
+                "highlights": {
+                    "label": "Vurgulamaları Bastır",
+                    "description": "Vurgulamaları otomatik olarak bastır"
+                },
+                "events": {
+                    "label": "Yeni Etkinlikleri Sessize Al",
+                    "description": "Yeni etkinlikleri otomatik olarak sessize al"
+                },
+                "showAllChannels": {
+                    "label": "Tüm Kanalları Göster",
+                    "description": "Tüm kanalları otomatik olarak göster"
+                },
+                "mobilePush": {
+                    "label": "Mobil Bildirimleri Sessize Al",
+                    "description": "Mobil bildirimleri otomatik olarak sessize al"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

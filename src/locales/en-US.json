@@ -5262,6 +5262,51 @@
             "noGroup": "No group dms in common",
             "header": "Mutual Groups"
         },
+        "newGuildSettings": {
+            "name": "NewGuildSettings",
+            "description": "Automatically mute new servers and change various other settings upon joining",
+            "context": {
+                "apply": "Apply NewGuildSettings"
+            },
+            "option": {
+                "guild": {
+                    "label": "Mute Guild",
+                    "description": "Mute Guild automatically"
+                },
+                "messages": {
+                    "label": "Server Notification Settings",
+                    "description": "Server Notification Settings",
+                    "all": "All messages",
+                    "mentions": "Only @mentions",
+                    "nothing": "Nothing",
+                    "default": "Server default"
+                },
+                "everyone": {
+                    "label": "Suppress @everyone and @here",
+                    "description": "Suppress @everyone and @here"
+                },
+                "role": {
+                    "label": "Suppress All Role @mentions",
+                    "description": "Suppress All Role @mentions"
+                },
+                "highlights": {
+                    "label": "Suppress Highlights",
+                    "description": "Suppress Highlights automatically"
+                },
+                "events": {
+                    "label": "Mute New Events",
+                    "description": "Mute New Events automatically"
+                },
+                "showAllChannels": {
+                    "label": "Show All Channels",
+                    "description": "Show all channels automatically"
+                },
+                "mobilePush": {
+                    "label": "Mute Mobile Push Notifications",
+                    "description": "Mute Mobile Push Notifications automatically"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

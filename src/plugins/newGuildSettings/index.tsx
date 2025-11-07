@@ -21,6 +21,7 @@ import {
     findGroupChildrenByChildId,
     NavContextMenuPatchCallback
 } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { CogWheel } from "@components/Icons";
 import { Guild } from "@plexcord/discord-types";
@@ -40,47 +41,89 @@ const isOptInEnabledForGuild = findByCodeLazy(".COMMUNITY)||", ".isOptInEnabled(
 
 const settings = definePluginSettings({
     guild: {
-        description: "Mute Guild automatically",
+        get label() {
+            return t("plugin.newGuildSettings.option.guild.label");
+        },
+        get description() {
+            return t("plugin.newGuildSettings.option.guild.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     },
     messages: {
-        description: "Server Notification Settings",
+        get label() {
+            return t("plugin.newGuildSettings.option.messages.label");
+        },
+        get description() {
+            return t("plugin.newGuildSettings.option.messages.description");
+        },
         type: OptionType.SELECT,
-        options: [
-            { label: "All messages", value: 0 },
-            { label: "Only @mentions", value: 1 },
-            { label: "Nothing", value: 2 },
-            { label: "Server default", value: 3, default: true }
-        ],
+        get options() {
+            return [
+                { label: t("plugin.newGuildSettings.option.messages.all"), value: 0 },
+                { label: t("plugin.newGuildSettings.option.messages.mentions"), value: 1 },
+                { label: t("plugin.newGuildSettings.option.messages.nothing"), value: 2 },
+                { label: t("plugin.newGuildSettings.option.messages.default"), value: 3, default: true }
+            ];
+        },
     },
     everyone: {
-        description: "Suppress @everyone and @here",
+        get label() {
+            return t("plugin.newGuildSettings.option.everyone.label");
+        },
+        get description() {
+            return t("plugin.newGuildSettings.option.everyone.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     },
     role: {
-        description: "Suppress All Role @mentions",
+        get label() {
+            return t("plugin.newGuildSettings.option.role.label");
+        },
+        get description() {
+            return t("plugin.newGuildSettings.option.role.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     },
     highlights: {
-        description: "Suppress Highlights automatically",
+        get label() {
+            return t("plugin.newGuildSettings.option.highlights.label");
+        },
+        get description() {
+            return t("plugin.newGuildSettings.option.highlights.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     },
     events: {
-        description: "Mute New Events automatically",
+        get label() {
+            return t("plugin.newGuildSettings.option.events.label");
+        },
+        get description() {
+            return t("plugin.newGuildSettings.option.events.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     },
     showAllChannels: {
-        description: "Show all channels automatically",
+        get label() {
+            return t("plugin.newGuildSettings.option.showAllChannels.label");
+        },
+        get description() {
+            return t("plugin.newGuildSettings.option.showAllChannels.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     },
     mobilePush: {
-        description: "Mute Mobile Push Notifications automatically",
+        get label() {
+            return t("plugin.newGuildSettings.option.mobilePush.label");
+        },
+        get description() {
+            return t("plugin.newGuildSettings.option.mobilePush.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     }
@@ -92,7 +135,7 @@ const makeContextMenuPatch: (shouldAddIcon: boolean) => NavContextMenuPatchCallb
     const group = findGroupChildrenByChildId("privacy", children);
     group?.push(
         <Menu.MenuItem
-            label="Apply NewGuildSettings"
+            label={t("plugin.newGuildSettings.context.apply")}
             id="pc-newguildsettings-apply"
             icon={shouldAddIcon ? CogWheel : void 0}
             action={() => applyDefaultSettings(guild.id)}
@@ -127,6 +170,11 @@ export default definePlugin({
     description: "Automatically mute new servers and change various other settings upon joining",
     tags: ["MuteNewGuild", "mute", "server"],
     authors: [Devs.Glitch, Devs.Nuckyz, Devs.carince, Devs.Mopi, Devs.GabiRP],
+
+    get displayDescription() {
+        return t("plugin.newGuildSettings.description");
+    },
+
     contextMenus: {
         "guild-context": makeContextMenuPatch(false),
         "guild-header-popout": makeContextMenuPatch(true)
