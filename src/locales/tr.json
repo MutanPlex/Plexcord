@@ -5437,6 +5437,56 @@
             "name": "NormalizeMessageLinks",
             "description": "Mesaj bağlantılarından canary/ptb öneklerini kaldırır."
         },
+        "noRPC": {
+            "name": "NoRPC",
+            "description": "Discord Rich Presence'ı devre dışı bırakır."
+        },
+        "noServerEmojis": {
+            "name": "NoServerEmojis",
+            "description": "Sunucu emojilerini otomatik tamamlama menüsünde göstermez.",
+            "option": {
+                "shownEmojis": {
+                    "label": "Gösterilen Emojiler",
+                    "description": "Otomatik tamamlama menüsünde hangi emojilerin gösterileceğini seçin",
+                    "onlyUnicode": "Yalnızca Unicode emojiler",
+                    "currentServer": "Unicode emojiler ve mevcut sunucudaki emojiler",
+                    "all": "Unicode emojiler ve tüm sunucu emojileri (Discord varsayılanı)"
+                }
+            }
+        },
+        "noSystemBadge": {
+            "name": "NoSystemBadge",
+            "description": "Görev çubuğu ve sistem tepsisindeki okunmamış bildirim rozetini devre dışı bırakır."
+        },
+        "notificationVolume": {
+            "name": "NotificationVolume",
+            "description": "Discord bildirimleri için özel ses seviyesi ayarlayın.",
+            "option": {
+                "notificationVolume": {
+                    "label": "Bildirim Sesi",
+                    "description": "Bildirim ses seviyesi"
+                }
+            }
+        },
+        "noTypingAnimation": {
+            "name": "NoTypingAnimation",
+            "description": "Sohbetlerdeki yazıyor animasyonunu devre dışı bırakır."
+        },
+        "noUnblockToJump": {
+            "name": "NoUnblockToJump",
+            "description": "Engellenen veya yok sayılan kullanıcıların (ve muhtemelen spam göndericilerin) mesajlarına, onları engelini kaldırmadan atlamanıza izin verir."
+        },
+        "oneko": {
+            "name": "Oneko",
+            "description": "fareyi takip eden kedi (gerçek)",
+            "option": {
+                "speed": {
+                    "label": "Hız",
+                    "description": "Kedinin hızı :3",
+                    "biggerThan": "Sayı 0'dan büyük olmalıdır"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

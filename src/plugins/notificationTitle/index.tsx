@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Devs, PcDevs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import definePlugin from "@utils/types";
@@ -23,6 +24,10 @@ export default definePlugin({
     name: "NotificationTitle",
     description: "Makes desktop notifications more informative",
     authors: [Devs.Kyuuhachi, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.notificationTitle.description");
+    },
 
     patches: [
         {

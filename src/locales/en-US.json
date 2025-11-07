@@ -5437,6 +5437,56 @@
             "name": "NormalizeMessageLinks",
             "description": "Strip canary/ptb from message links"
         },
+        "noRPC": {
+            "name": "NoRPC",
+            "description": "Disables Discord Rich Presence"
+        },
+        "noServerEmojis": {
+            "name": "NoServerEmojis",
+            "description": "Do not show server emojis in the autocomplete menu.",
+            "option": {
+                "shownEmojis": {
+                    "label": "Shown Emojis",
+                    "description": "Choose which emojis to show in the autocomplete menu",
+                    "onlyUnicode": "Only unicode emojis",
+                    "currentServer": "Unicode emojis and server emojis from current server",
+                    "all": "Unicode emojis and all server emojis (Discord default)"
+                }
+            }
+        },
+        "noSystemBadge": {
+            "name": "NoSystemBadge",
+            "description": "Disables the taskbar and system tray unread count badge."
+        },
+        "notificationVolume": {
+            "name": "NotificationVolume",
+            "description": "Set custom volume for Discord notifications",
+            "option": {
+                "notificationVolume": {
+                    "label": "Notification Volume",
+                    "description": "Notification volume"
+                }
+            }
+        },
+        "noTypingAnimation": {
+            "name": "NoTypingAnimation",
+            "description": "Disables the typing animation in chat"
+        },
+        "noUnblockToJump": {
+            "name": "NoUnblockToJump",
+            "description": "Allows you to jump to messages of blocked or ignored users and likely spammers without unblocking them."
+        },
+        "oneko": {
+            "name": "Oneko",
+            "description": "cat follow mouse (real)",
+            "option": {
+                "speed": {
+                    "label": "Speed",
+                    "description": "Speed of Da Cat :3",
+                    "biggerThan": "The number must be bigger than 0"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

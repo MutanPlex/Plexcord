@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import type { Channel, Emoji } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -12,14 +13,21 @@ import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     shownEmojis: {
-        description: "The types of emojis to show in the autocomplete menu.",
+        get label() {
+            return t("plugin.noServerEmojis.option.shownEmojis.label");
+        },
+        get description() {
+            return t("plugin.noServerEmojis.option.shownEmojis.description");
+        },
         type: OptionType.SELECT,
         default: "onlyUnicode",
-        options: [
-            { label: "Only unicode emojis", value: "onlyUnicode" },
-            { label: "Unicode emojis and server emojis from current server", value: "currentServer" },
-            { label: "Unicode emojis and all server emojis (Discord default)", value: "all" }
-        ]
+        get options() {
+            return [
+                { label: t("plugin.noServerEmojis.option.shownEmojis.onlyUnicode"), value: "onlyUnicode" },
+                { label: t("plugin.noServerEmojis.option.shownEmojis.currentServer"), value: "currentServer" },
+                { label: t("plugin.noServerEmojis.option.shownEmojis.all"), value: "all" }
+            ];
+        }
     }
 });
 
@@ -28,6 +36,11 @@ export default definePlugin({
     authors: [Devs.UlyssesZhan],
     description: "Do not show server emojis in the autocomplete menu.",
     settings,
+
+    get displayDescription() {
+        return t("plugin.noServerEmojis.description");
+    },
+
     patches: [
         {
             find: "}searchWithoutFetchingLatest(",

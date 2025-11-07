@@ -17,18 +17,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings, migratePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
-
 const settings = definePluginSettings({
     speed: {
-        description: "Speed of Da Cat :3",
+        get label() {
+            return t("plugin.oneko.option.speed.label");
+        },
+        get description() {
+            return t("plugin.oneko.option.speed.description");
+        },
         type: OptionType.NUMBER,
         default: 10,
         isValid: (value: number) => {
-            if (value && value < 0) return "The number must be bigger than 0";
+            if (value && value < 0) return t("plugin.oneko.option.speed.biggerThan");
             return true;
         },
         onChange: () => {
@@ -54,6 +59,10 @@ export default definePlugin({
     // Listing adryd here because this literally just evals her script
     authors: [Devs.Ven, Devs.adryd],
     settings,
+
+    get displayDescription() {
+        return t("plugin.oneko.description");
+    },
 
     start() {
         fetch("https://raw.githubusercontent.com/adryd325/oneko.js/c4ee66353b11a44e4a5b7e914a81f8d33111555e/oneko.js")
