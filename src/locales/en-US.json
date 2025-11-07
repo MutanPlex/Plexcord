@@ -5307,6 +5307,20 @@
                 }
             }
         },
+        "noBlockedMessages": {
+            "name": "NoBlockedMessages",
+            "description": "Hides all blocked/ignored messages from chat completely",
+            "option": {
+                "ignoreMessages": {
+                    "label": "Ignore Messages",
+                    "description": "Completely ignores incoming messages from blocked and ignored (if enabled) users"
+                },
+                "applyToIgnoredUsers": {
+                    "label": "Apply to Ignored Users",
+                    "description": "Additionally apply to 'ignored' users"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

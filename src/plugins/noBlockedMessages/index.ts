@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -31,13 +32,23 @@ interface MessageDeleteProps {
 
 const settings = definePluginSettings({
     ignoreMessages: {
-        description: "Completely ignores incoming messages from blocked and ignored (if enabled) users",
+        get label() {
+            return t("plugin.noBlockedMessages.option.ignoreMessages.label");
+        },
+        get description() {
+            return t("plugin.noBlockedMessages.option.ignoreMessages.description");
+        },
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
     },
     applyToIgnoredUsers: {
-        description: "Additionally apply to 'ignored' users",
+        get label() {
+            return t("plugin.noBlockedMessages.option.applyToIgnoredUsers.label");
+        },
+        get description() {
+            return t("plugin.noBlockedMessages.option.applyToIgnoredUsers.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
@@ -49,6 +60,10 @@ export default definePlugin({
     description: "Hides all blocked/ignored messages from chat completely",
     authors: [Devs.rushii, Devs.Samu, Devs.jamesbt365],
     settings,
+
+    get displayDescription() {
+        return t("plugin.noBlockedMessages.description");
+    },
 
     patches: [
         {

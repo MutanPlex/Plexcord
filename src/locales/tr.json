@@ -5307,6 +5307,20 @@
                 }
             }
         },
+        "noBlockedMessages": {
+            "name": "NoBlockedMessages",
+            "description": "Sohbetten engellenmiş/yok sayılmış tüm mesajları tamamen gizler",
+            "option": {
+                "ignoreMessages": {
+                    "label": "Mesajları Yoksay",
+                    "description": "Engellenmiş ve (etkinse) yok sayılmış kullanıcılardan gelen mesajları tamamen yok sayar"
+                },
+                "applyToIgnoredUsers": {
+                    "label": "Yok Sayılmış Kullanıcılara Uygula",
+                    "description": "Ek olarak 'yok sayılmış' kullanıcılara da uygular"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
