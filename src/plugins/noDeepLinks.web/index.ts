@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -13,6 +14,10 @@ export default definePlugin({
     description: "Disables Discord's stupid deep linking feature which tries to force you to use their Desktop App",
     authors: [Devs.Ven],
     required: true,
+
+    get displayDescription() {
+        return t("plugin.noDeepLinks.description");
+    },
 
     noop: () => { },
 

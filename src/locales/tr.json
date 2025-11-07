@@ -5321,6 +5321,14 @@
                 }
             }
         },
+        "noBulletPoints": {
+            "name": "NoBulletPoints",
+            "description": "Markdown madde işaretleri (•, -, *) yazmanı engeller (kötü alışkanlık)"
+        },
+        "noDeepLinks": {
+            "name": "DisableDeepLinks",
+            "description": "Discord’un masaüstü uygulamasını zorla açmaya çalışan sinir bozucu derin bağlantı (deep link) özelliğini devre dışı bırakır"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

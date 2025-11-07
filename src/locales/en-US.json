@@ -5321,6 +5321,14 @@
                 }
             }
         },
+        "noBulletPoints": {
+            "name": "NoBulletPoints",
+            "description": "Stops you from typing markdown bullet points (stinky)"
+        },
+        "noDeepLinks": {
+            "name": "DisableDeepLinks",
+            "description": "Disables Discord's stupid deep linking feature which tries to force you to use their Desktop App"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
