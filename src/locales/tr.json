@@ -5387,6 +5387,24 @@
             "name": "NoOnboardingDelay",
             "description": "Yavaş ve sinir bozucu sunucu katılım gecikmesini atlar."
         },
+        "noPendingCount": {
+            "name": "NoPendingCount",
+            "description": "Gelen arkadaşlık istekleri, mesaj istekleri ve Nitro tekliflerinin bildirim sayısını kaldırır.",
+            "option": {
+                "hideFriendRequestsCount": {
+                    "label": "Arkadaşlık İstek Sayısını Gizle",
+                    "description": "Gelen arkadaşlık isteklerinin sayısını gizle"
+                },
+                "hideMessageRequestsCount": {
+                    "label": "Mesaj İstek Sayısını Gizle",
+                    "description": "Mesaj isteklerinin sayısını gizle"
+                },
+                "hidePremiumOffersCount": {
+                    "label": "Nitro Teklif Sayısını Gizle",
+                    "description": "Nitro tekliflerinin sayısını gizle"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

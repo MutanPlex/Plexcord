@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -26,20 +27,35 @@ const MessageRequestStore = findByPropsLazy("getMessageRequestsCount");
 
 const settings = definePluginSettings({
     hideFriendRequestsCount: {
+        get label() {
+            return t("plugin.noPendingCount.option.hideFriendRequestsCount.label");
+        },
+        get description() {
+            return t("plugin.noPendingCount.option.hideFriendRequestsCount.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Hide incoming friend requests count",
         default: true,
         restartNeeded: true
     },
     hideMessageRequestsCount: {
+        get label() {
+            return t("plugin.noPendingCount.option.hideMessageRequestsCount.label");
+        },
+        get description() {
+            return t("plugin.noPendingCount.option.hideMessageRequestsCount.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Hide message requests count",
         default: true,
         restartNeeded: true
     },
     hidePremiumOffersCount: {
+        get label() {
+            return t("plugin.noPendingCount.option.hidePremiumOffersCount.label");
+        },
+        get description() {
+            return t("plugin.noPendingCount.option.hidePremiumOffersCount.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Hide nitro offers count",
         default: true,
         restartNeeded: true
     }
@@ -49,8 +65,11 @@ export default definePlugin({
     name: "NoPendingCount",
     description: "Removes the ping count of incoming friend requests, message requests, and nitro offers.",
     authors: [Devs.amia],
-
     settings: settings,
+
+    get displayDescription() {
+        return t("plugin.noPendingCount.description");
+    },
 
     // Functions used to determine the top left count indicator can be found in the single module that calls getUnacknowledgedOffers(...)
     // or by searching for "showProgressBadge:"

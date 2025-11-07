@@ -5387,6 +5387,24 @@
             "name": "NoOnboardingDelay",
             "description": "Skips the slow and annoying onboarding delay"
         },
+        "noPendingCount": {
+            "name": "NoPendingCount",
+            "description": "Removes the ping count of incoming friend requests, message requests, and nitro offers.",
+            "option": {
+                "hideFriendRequestsCount": {
+                    "label": "Hide Friend Request Count",
+                    "description": "Hide incoming friend requests count"
+                },
+                "hideMessageRequestsCount": {
+                    "label": "Hide Message Requests Count",
+                    "description": "Hide message requests count"
+                },
+                "hidePremiumOffersCount": {
+                    "label": "Hide Premium Offers Count",
+                    "description": "Hide nitro offers count"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
