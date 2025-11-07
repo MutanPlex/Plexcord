@@ -17,14 +17,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { UserStore } from "@webpack/common";
 
 export default definePlugin({
     name: "NoProfileThemes",
-    description: "Completely removes Nitro profile themes from everyone but yourself",
+    description: "Completely removes Nitro profile themes from everyone but yourself.",
     authors: [Devs.TheKodeToad],
+
+    get displayDescription() {
+        return t("plugin.noProfileThemes.description");
+    },
+
     patches: [
         {
             find: "hasThemeColors(){",

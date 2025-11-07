@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import type { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -25,34 +26,54 @@ import { ChannelStore, GuildMemberStore } from "@webpack/common";
 
 const settings = definePluginSettings({
     userList: {
-        description:
-            "List of users to allow or exempt pings for (separated by commas or spaces)",
+        get label() {
+            return t("plugin.noReplyMention.option.userList.label");
+        },
+        get description() {
+            return t("plugin.noReplyMention.option.userList.description");
+        },
         type: OptionType.STRING,
         default: "1234567890123445,1234567890123445",
     },
     roleList: {
-        description:
-            "List of roles to allow or exempt pings for (separated by commas or spaces)",
+        get label() {
+            return t("plugin.noReplyMention.option.roleList.label");
+        },
+        get description() {
+            return t("plugin.noReplyMention.option.roleList.description");
+        },
         type: OptionType.STRING,
         default: "1234567890123445,1234567890123445",
     },
     shouldPingListed: {
-        description: "Behaviour",
+        get label() {
+            return t("plugin.noReplyMention.option.shouldPingListed.label");
+        },
+        get description() {
+            return t("plugin.noReplyMention.option.shouldPingListed.description");
+        },
         type: OptionType.SELECT,
-        options: [
-            {
-                label: "Do not ping the listed users / roles",
-                value: false,
-            },
-            {
-                label: "Only ping the listed users / roles",
-                value: true,
-                default: true,
-            },
-        ],
+        get options() {
+            return [
+                {
+                    label: t("plugin.noReplyMention.option.shouldPingListed.dontPing"),
+                    value: false,
+                },
+                {
+                    label: t("plugin.noReplyMention.option.shouldPingListed.onlyPing"),
+                    value: true,
+                    default: true,
+                },
+            ];
+        },
     },
     inverseShiftReply: {
-        description: "Invert Discord's shift replying behaviour (enable to make shift reply mention user)",
+        get label() {
+            return t("plugin.noReplyMention.option.inverseShiftReply.label");
+        },
+        get description() {
+            return t("plugin.noReplyMention.option.inverseShiftReply.description");
+        },
         type: OptionType.BOOLEAN,
         default: false,
     }
@@ -63,6 +84,10 @@ export default definePlugin({
     description: "Disables reply pings by default",
     authors: [Devs.DustyAngel47, Devs.rae, Devs.pylix, Devs.outfoxxed],
     settings,
+
+    get displayDescription() {
+        return t("plugin.noReplyMention.description");
+    },
 
     shouldMention(message: Message, isHoldingShift: boolean) {
         let isListed = settings.store.userList.includes(message.author.id);

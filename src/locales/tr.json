@@ -5405,6 +5405,34 @@
                 }
             }
         },
+        "noProfileThemes": {
+            "name": "NoProfileThemes",
+            "description": "Nitro profil temalarını, kendiniz hariç herkes için tamamen kaldırır."
+        },
+        "noReplyMention": {
+            "name": "NoReplyMention",
+            "description": "Yanıt pinglerini varsayılan olarak devre dışı bırakır.",
+            "option": {
+                "userList": {
+                    "label": "Kullanıcı Listesi",
+                    "description": "Ping'e izin verilecek veya muaf tutulacak kullanıcıların listesi (virgül veya boşlukla ayrılmalı)"
+                },
+                "roleList": {
+                    "label": "Rol Listesi",
+                    "description": "Ping'e izin verilecek veya muaf tutulacak rollerin listesi (virgül veya boşlukla ayrılmalı)"
+                },
+                "shouldPingListed": {
+                    "label": "Listelenenleri Pingleme",
+                    "description": "Davranış",
+                    "dontPing": "Listelenen kullanıcıları / rolleri pingleme",
+                    "onlyPing": "Yalnızca listelenen kullanıcıları / rolleri pingle"
+                },
+                "inverseShiftReply": {
+                    "label": "Shift Yanıt Davranışını Ters Çevir",
+                    "description": "Discord’un shift ile yanıt verme davranışını tersine çevirir (etkinleştirildiğinde shift ile yanıt verirken kullanıcıyı mention'lar)"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

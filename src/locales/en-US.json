@@ -5405,6 +5405,34 @@
                 }
             }
         },
+        "noProfileThemes": {
+            "name": "NoProfileThemes",
+            "description": "Completely removes Nitro profile themes from everyone but yourself."
+        },
+        "noReplyMention": {
+            "name": "NoReplyMention",
+            "description": "Disables reply pings by default",
+            "option": {
+                "userList": {
+                    "label": "User List",
+                    "description": "List of users to allow or exempt pings for (separated by commas or spaces)"
+                },
+                "roleList": {
+                    "label": "Role List",
+                    "description": "List of roles to allow or exempt pings for (separated by commas or spaces)"
+                },
+                "shouldPingListed": {
+                    "label": "Should Ping Listed",
+                    "description": "Behaviour",
+                    "dontPing": "Do not ping the listed users / roles",
+                    "onlyPing": "Only ping the listed users / roles"
+                },
+                "inverseShiftReply": {
+                    "label": "Inverse Shift Reply",
+                    "description": "Invert Discord's shift replying behaviour (enable to make shift reply mention user)"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
