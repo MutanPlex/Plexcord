@@ -5345,6 +5345,14 @@
                 "cancel": "İptal"
             }
         },
+        "noDevtoolsWarning": {
+            "name": "NoDevtoolsWarning",
+            "description": "Konsoldaki 'DUR BAKALIM' uyarı afişini devre dışı bırakır. Yan etkisi olarak, Discord’un token’ını gizlemesini de engeller, bu da rastgele oturum kapatmalarını önler."
+        },
+        "noF1": {
+            "name": "NoF1",
+            "description": "F1 yardım kısayolunu devre dışı bırakır."
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

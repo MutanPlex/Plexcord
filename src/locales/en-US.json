@@ -5345,6 +5345,14 @@
                 "cancel": "Cancel"
             }
         },
+        "noDevtoolsWarning": {
+            "name": "NoDevtoolsWarning",
+            "description": "Disables the 'HOLD UP' banner in the console. As a side effect, also prevents Discord from hiding your token, which prevents random logouts."
+        },
+        "noF1": {
+            "name": "NoF1",
+            "description": "Disables F1 help bind."
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

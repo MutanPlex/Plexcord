@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -24,6 +25,11 @@ export default definePlugin({
     name: "NoF1",
     description: "Disables F1 help bind.",
     authors: [Devs.Cyn],
+
+    get displayDescription() {
+        return t("plugin.noF1.description");
+    },
+
     patches: [
         {
             find: ',"f1"],comboKeysBindGlobal:',
