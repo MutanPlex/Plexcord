@@ -112,17 +112,21 @@ const enum SearchStatus {
     NEW
 }
 
-export const ExcludedReasons: Record<"web" | "discordDesktop" | "plextron" | "desktop" | "dev", string> = {
-    desktop: t("plugins.excluded.desktop"),
-    discordDesktop: t("plugins.excluded.discordDesktop"),
-    plextron: t("plugins.excluded.plextron"),
-    web: t("plugins.excluded.web"),
-    dev: t("plugins.excluded.dev")
-};
+export function getExcludedReasons(): Record<"web" | "discordDesktop" | "plextron" | "desktop" | "dev", string> {
+    return {
+        desktop: t("plugins.excluded.desktop"),
+        discordDesktop: t("plugins.excluded.discordDesktop"),
+        plextron: t("plugins.excluded.plextron"),
+        web: t("plugins.excluded.web"),
+        dev: t("plugins.excluded.dev")
+    };
+}
 
 function ExcludedPluginsList({ search }: { search: string; }) {
     const matchingExcludedPlugins = Object.entries(ExcludedPlugins)
         .filter(([name]) => name.toLowerCase().includes(search));
+
+    const excludedReasons = getExcludedReasons();
 
     return (
         <Paragraph className={Margins.top16}>
@@ -132,7 +136,7 @@ function ExcludedPluginsList({ search }: { search: string; }) {
                     <ul>
                         {matchingExcludedPlugins.map(([name, reason]) => (
                             <li key={name}>
-                                <b>{name}</b>: {t("plugins.search.onlyAvailable")} {ExcludedReasons[reason]}
+                                <b>{name}</b>: {t("plugins.search.onlyAvailable")} {excludedReasons[reason]}
                             </li>
                         ))}
                     </ul>

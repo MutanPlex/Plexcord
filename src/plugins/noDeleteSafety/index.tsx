@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -23,19 +24,36 @@ const settings = definePluginSettings(
     {
         confirmModal: {
             type: OptionType.BOOLEAN,
-            description: "Should a \"are you sure you want to delete\" modal be shown?",
+            get label() {
+                return t("plugin.noDeleteSafety.option.confirmModal.label");
+            },
+            get description() {
+                return t("plugin.noDeleteSafety.option.confirmModal.description");
+            },
             default: true
         },
     });
 
 export default definePlugin({
     name: "NoDeleteSafety",
-    description: "Removes the \"enter server name\" requirement when deleting a server",
+    description: "Removes the 'enter server name' requirement when deleting a server",
     authors: [Devs.Samwich],
     settings,
+
+    get displayDescription() {
+        return t("plugin.noDeleteSafety.description");
+    },
+
     async HandleGuildDeleteModal(server) {
         if (settings.store.confirmModal) {
-            return Alerts.show({ title: "Delete server?", body: <p>It's permanent, if that wasn't obvious.</p>, confirmColor: Button.Colors.RED, confirmText: "Delete", onConfirm: () => GetPropsAndDeleteGuild(server.id), cancelText: "Cancel" });
+            return Alerts.show({
+                title: t("plugin.noDeleteSafety.modal.title"),
+                body: <p>{t("plugin.noDeleteSafety.modal.body")}</p>,
+                confirmColor: Button.Colors.RED,
+                confirmText: t("plugin.noDeleteSafety.modal.confirm"),
+                onConfirm: () => GetPropsAndDeleteGuild(server.id),
+                cancelText: t("plugin.noDeleteSafety.modal.cancel")
+            });
         } else {
             return GetPropsAndDeleteGuild(server.id);
         }

@@ -142,7 +142,7 @@
                 "tooltip": "Tooltip",
                 "menu": "Menu",
                 "popover": "Popover",
-                "fullscreen-ui": "Fullscreen UI (Transparent but slightly blurred)",
+                "fullscreenUI": "Fullscreen UI (Transparent but slightly blurred)",
                 "hud": "HUD (Most Transparent)"
             }
         }
@@ -5328,6 +5328,22 @@
         "noDeepLinks": {
             "name": "DisableDeepLinks",
             "description": "Disables Discord's stupid deep linking feature which tries to force you to use their Desktop App"
+        },
+        "noDeleteSafety": {
+            "name": "NoDeleteSafety",
+            "description": "Removes the 'enter server name' requirement when deleting a server",
+            "option": {
+                "confirmModal": {
+                    "label": "Confirm Modal",
+                    "description": "Should a 'are you sure you want to delete' modal be shown?"
+                }
+            },
+            "modal": {
+                "title": "Delete server?",
+                "body": "It's permanent, if that wasn't obvious.",
+                "confirm": "Delete",
+                "cancel": "Cancel"
+            }
         },
         "uselessInfo": {
             "name": "UselessInfo",

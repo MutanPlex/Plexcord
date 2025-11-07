@@ -157,7 +157,7 @@ function Switches() {
                             title: t("plugins.restart.required"),
                             body: t("plugins.restart.apply"),
                             confirmText: t("plugins.restart.button.now"),
-                            cancelText: t("plugins.restart.buttonlater"),
+                            cancelText: t("plugins.restart.button.later"),
                             onConfirm: relaunch
                         });
                     }

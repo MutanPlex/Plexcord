@@ -142,7 +142,7 @@
                 "tooltip": "Araç ipucu",
                 "menu": "Menü",
                 "popover": "Açılır pencere",
-                "fullscreen-ui": "Tam ekran UI (şeffaf ama biraz mat)",
+                "fullscreenUI": "Tam ekran UI (şeffaf ama biraz mat)",
                 "hud": "HUD (En şeffaf)"
             }
         }
@@ -5328,6 +5328,22 @@
         "noDeepLinks": {
             "name": "DisableDeepLinks",
             "description": "Discord’un masaüstü uygulamasını zorla açmaya çalışan sinir bozucu derin bağlantı (deep link) özelliğini devre dışı bırakır"
+        },
+        "noDeleteSafety": {
+            "name": "NoDeleteSafety",
+            "description": "Sunucuyu silerken 'sunucu adını yaz' gereksinimini kaldırır",
+            "option": {
+                "confirmModal": {
+                    "label": "Onay Penceresi",
+                    "description": "'Bu sunucuyu silmek istediğine emin misin?' onay penceresi gösterilsin mi?"
+                }
+            },
+            "modal": {
+                "title": "Sunucu silinsin mi?",
+                "body": "Kalıcı olacak, bu açık değilse bile.",
+                "confirm": "Sil",
+                "cancel": "İptal"
+            }
         },
         "uselessInfo": {
             "name": "UselessInfo",
