@@ -5353,6 +5353,40 @@
             "name": "NoF1",
             "description": "F1 yardım kısayolunu devre dışı bırakır."
         },
+        "noMaskedUrlPaste": {
+            "name": "NoMaskedUrlPaste",
+            "description": "Seçili metin varken bir bağlantı yapıştırıldığında, bağlantının maskelenmiş URL olarak yapıştırılmasını engeller."
+        },
+        "noMirroredCamera": {
+            "name": "NoMirroredCamera",
+            "description": "Kameranın ekranda aynalanmasını engeller."
+        },
+        "noModalAnimation": {
+            "name": "NoModalAnimation",
+            "description": "Tüm modal pencerelerdeki açılma/kapanma animasyonlarını devre dışı bırakır."
+        },
+        "noMosaic": {
+            "name": "NoMosaic",
+            "description": "Discord’un görsel mozaik düzenini kaldırır.",
+            "option": {
+                "inlineVideo": {
+                    "label": "Satır İçi Video",
+                    "description": "Videoları döngü modali olmadan oynat."
+                }
+            }
+        },
+        "noNitroUpsell": {
+            "name": "NoNitroUpsell",
+            "description": "İstemciyi Nitro’ya sahip olduğunuzu düşünmesi için kandırarak Discord’daki TÜM Nitro satış bildirimlerini kaldırır."
+        },
+        "noOnboarding": {
+            "name": "NoOnboarding",
+            "description": "Discord’un sunucuya katılma sürecini atlayarak daha hızlı giriş yapılmasını sağlar."
+        },
+        "noOnboardingDelay": {
+            "name": "NoOnboardingDelay",
+            "description": "Yavaş ve sinir bozucu sunucu katılım gecikmesini atlar."
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

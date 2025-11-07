@@ -5353,6 +5353,40 @@
             "name": "NoF1",
             "description": "Disables F1 help bind."
         },
+        "noMaskedUrlPaste": {
+            "name": "NoMaskedUrlPaste",
+            "description": "Pasting a link while having text selected will not paste as masked URL"
+        },
+        "noMirroredCamera": {
+            "name": "NoMirroredCamera",
+            "description": "Prevents the camera from being mirrored on your screen"
+        },
+        "noModalAnimation": {
+            "name": "NoModalAnimation",
+            "description": "Remove the 300ms long animation when opening or closing modals"
+        },
+        "noMosaic": {
+            "name": "NoMosaic",
+            "description": "Removes Discord image mosaic",
+            "option": {
+                "inlineVideo": {
+                    "label": "Inline Video",
+                    "description": "Play videos without carousel modal"
+                }
+            }
+        },
+        "noNitroUpsell": {
+            "name": "NoNitroUpsell",
+            "description": "Removes ALL of Discord's nitro upsells by tricking the client into thinking you have nitro."
+        },
+        "noOnboarding": {
+            "name": "NoOnboarding",
+            "description": "Bypasses Discord's onboarding process for quicker server entry."
+        },
+        "noOnboardingDelay": {
+            "name": "NoOnboardingDelay",
+            "description": "Skips the slow and annoying onboarding delay"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

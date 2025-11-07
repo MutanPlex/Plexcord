@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -12,6 +13,11 @@ export default definePlugin({
     name: "NoModalAnimation",
     description: "Remove the 300ms long animation when opening or closing modals",
     authors: [Devs.AutumnVN, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.noModalAnimation.description");
+    },
+
     patches: [
         {
             find: "DURATION_IN:",

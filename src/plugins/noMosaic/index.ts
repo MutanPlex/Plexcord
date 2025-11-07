@@ -5,13 +5,19 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     inlineVideo: {
-        description: "Play videos without carousel modal",
+        get label() {
+            return t("plugin.noMosaic.option.inlineVideo.label");
+        },
+        get description() {
+            return t("plugin.noMosaic.option.inlineVideo.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
@@ -23,6 +29,10 @@ export default definePlugin({
     authors: [Devs.AutumnVN],
     description: "Removes Discord image mosaic",
     tags: ["image", "mosaic", "media"],
+
+    get displayDescription() {
+        return t("plugin.noMosaic.description");
+    },
 
     settings,
 
