@@ -19,6 +19,7 @@
 
 import "./style.css";
 
+import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Channel, User } from "@plexcord/discord-types";
@@ -54,7 +55,7 @@ const isBotOrSelf = (user: User) => user.bot || user.id === UserStore.getCurrent
 
 function getMutualGDMCountText(user: User) {
     const count = getMutualGroupDms(user.id).length;
-    return `${count === 0 ? "No" : count} Mutual Group${count !== 1 ? "s" : ""}`;
+    return `${count === 0 ? t("plugin.mutualGroupDMs.no") : t("plugin.mutualGroupDMs.mutualGroup", { s: count !== 1 ? "s" : "", count })}`;
 }
 
 function renderClickableGDMs(mutualDms: Channel[], onClose: () => void) {
@@ -75,7 +76,7 @@ function renderClickableGDMs(mutualDms: Channel[], onClose: () => void) {
             </Avatar>
             <div className={MutualsListClasses.details}>
                 <div className={MutualsListClasses.name}>{getGroupDMName(c)}</div>
-                <BaseText size="xs" weight="medium">{c.recipients.length + 1} Members</BaseText>
+                <BaseText size="xs" weight="medium">{c.recipients.length + 1} {t("plugin.mutualGroupDMs.members")}</BaseText>
             </div>
         </Clickable>
     ));
@@ -87,6 +88,10 @@ export default definePlugin({
     name: "MutualGroupDMs",
     description: "Shows mutual group dms in profiles",
     authors: [Devs.amia],
+
+    get displayDescription() {
+        return t("plugin.mutualGroupDMs.description");
+    },
 
     patches: [
         // User Profile Modal
@@ -183,7 +188,7 @@ export default definePlugin({
                     : (
                         <div className={ProfileListClasses.empty}>
                             <div className={ProfileListClasses.emptyIconFriends}></div>
-                            <div className={ProfileListClasses.emptyText}>No group dms in common</div>
+                            <div className={ProfileListClasses.emptyText}>{t("plugin.mutualGroupDMs.noGroup")}</div>
                         </div>
                     )
                 }
@@ -200,7 +205,7 @@ export default definePlugin({
                 {hasDivider && Divider}
                 <ExpandableList
                     listClassName={listStyle}
-                    header={"Mutual Groups"}
+                    header={t("plugin.mutualGroupDMs.header")}
                     isLoading={false}
                     items={renderClickableGDMs(mutualGDms, () => { })}
                 />

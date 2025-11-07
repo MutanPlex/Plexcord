@@ -5253,6 +5253,15 @@
                 "invalidUrlCustomApi": "Geçersiz Özel API Sunucu URL biçimi"
             }
         },
+        "mutualGroupDMs": {
+            "name": "MutualGroupDMs",
+            "description": "Profillerde ortak grup DM'lerini gösterir",
+            "no": "Ortak Grup Yok",
+            "mutualGroup": "{{count}} Ortak Grup",
+            "members": "Üye",
+            "noGroup": "Ortak grup DM'i yok",
+            "header": "Ortak Gruplar"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

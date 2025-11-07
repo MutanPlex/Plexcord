@@ -5253,6 +5253,15 @@
                 "invalidUrlCustomApi": "Invalid URL format for Custom Api Server URL"
             }
         },
+        "mutualGroupDMs": {
+            "name": "MutualGroupDMs",
+            "description": "Shows mutual group dms in profiles",
+            "no": "No Mutual Groups",
+            "mutualGroup": "{{count}} Mutual Group{{s}}",
+            "members": "Members",
+            "noGroup": "No group dms in common",
+            "header": "Mutual Groups"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
