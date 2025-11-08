@@ -5520,6 +5520,32 @@
                 }
             }
         },
+        "openInApp": {
+            "name": "OpenInApp",
+            "description": "Bağlantıları tarayıcı yerine ilgili uygulamalarda açar",
+            "option": {
+                "spotify": {
+                    "label": "Spotify",
+                    "description": "Spotify bağlantılarını Spotify uygulamasında aç"
+                },
+                "steam": {
+                    "label": "Steam",
+                    "description": "Steam bağlantılarını Steam uygulamasında aç"
+                },
+                "epic": {
+                    "label": "Epic Games",
+                    "description": "Epic Games bağlantılarını Epic Games Launcher'da aç"
+                },
+                "tidal": {
+                    "label": "Tidal",
+                    "description": "Tidal bağlantılarını Tidal uygulamasında aç"
+                },
+                "itunes": {
+                    "label": "iTunes",
+                    "description": "Apple Music bağlantılarını iTunes uygulamasında aç"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

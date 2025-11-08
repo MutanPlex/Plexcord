@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType, PluginNative, SettingsDefinition } from "@utils/types";
@@ -26,7 +27,6 @@ import type { MouseEvent } from "react";
 interface URLReplacementRule {
     match: RegExp;
     replace: (...matches: string[]) => string;
-    description: string;
     shortlinkMatch?: RegExp;
     accountViewReplace?: (userId: string) => string;
 }
@@ -36,39 +36,39 @@ const UrlReplacementRules: Record<string, URLReplacementRule> = {
     spotify: {
         match: /^https:\/\/open\.spotify\.com\/(?:intl-[a-z]{2}\/)?(track|album|artist|playlist|user|episode|prerelease)\/(.+)(?:\?.+?)?$/,
         replace: (_, type, id) => `spotify://${type}/${id}`,
-        description: "Open Spotify links in the Spotify app",
         shortlinkMatch: /^https:\/\/spotify\.link\/.+$/,
         accountViewReplace: userId => `spotify:user:${userId}`,
     },
     steam: {
         match: /^https:\/\/(steamcommunity\.com|(?:help|store)\.steampowered\.com)\/.+$/,
         replace: match => `steam://openurl/${match}`,
-        description: "Open Steam links in the Steam app",
         shortlinkMatch: /^https:\/\/s.team\/.+$/,
         accountViewReplace: userId => `steam://openurl/https://steamcommunity.com/profiles/${userId}`,
     },
     epic: {
         match: /^https:\/\/store\.epicgames\.com\/(.+)$/,
-        replace: (_, id) => `com.epicgames.launcher://store/${id}`,
-        description: "Open Epic Games links in the Epic Games Launcher",
+        replace: (_, id) => `com.epicgames.launcher://store/${id}`
     },
     tidal: {
         match: /^https:\/\/(?:listen\.)?tidal\.com\/(?:browse\/)?(track|album|artist|playlist|user|video|mix)\/([a-f0-9-]+).*$/,
-        replace: (_, type, id) => `tidal://${type}/${id}`,
-        description: "Open Tidal links in the Tidal app",
+        replace: (_, type, id) => `tidal://${type}/${id}`
     },
     itunes: {
         match: /^https:\/\/(?:geo\.)?music\.apple\.com\/([a-z]{2}\/)?(album|artist|playlist|song|curator)\/([^/?#]+)\/?([^/?#]+)?(?:\?.*)?(?:#.*)?$/,
-        replace: (_, lang, type, name, id) => id ? `itunes://music.apple.com/us/${type}/${name}/${id}` : `itunes://music.apple.com/us/${type}/${name}`,
-        description: "Open Apple Music links in the iTunes app"
+        replace: (_, lang, type, name, id) => id ? `itunes://music.apple.com/us/${type}/${name}/${id}` : `itunes://music.apple.com/us/${type}/${name}`
     },
 };
 
 const pluginSettings = definePluginSettings(
-    Object.entries(UrlReplacementRules).reduce((acc, [key, rule]) => {
+    Object.entries(UrlReplacementRules).reduce((acc, [key]) => {
         acc[key] = {
+            get label() {
+                return t(`plugin.openInApp.option.${key}.label`);
+            },
+            get description() {
+                return t(`plugin.openInApp.option.${key}.description`);
+            },
             type: OptionType.BOOLEAN,
-            description: rule.description,
             default: true,
         };
         return acc;
@@ -83,6 +83,10 @@ export default definePlugin({
     description: "Open links in their respective apps instead of your browser",
     authors: [Devs.Ven, Devs.surgedevs],
     settings: pluginSettings,
+
+    get displayDescription() {
+        return t("plugin.openInApp.description");
+    },
 
     patches: [
         {

@@ -5520,6 +5520,32 @@
                 }
             }
         },
+        "openInApp": {
+            "name": "OpenInApp",
+            "description": "Open links in their respective apps instead of your browser",
+            "option": {
+                "spotify": {
+                    "label": "Spotify",
+                    "description": "Open Spotify links in the Spotify app"
+                },
+                "steam": {
+                    "label": "Steam",
+                    "description": "Open Steam links in the Steam app"
+                },
+                "epic": {
+                    "label": "Epic Games",
+                    "description": "Open Epic Games links in the Epic Games Launcher"
+                },
+                "tidal": {
+                    "label": "Tidal",
+                    "description": "Open Tidal links in the Tidal app"
+                },
+                "itunes": {
+                    "label": "iTunes",
+                    "description": "Open Apple Music links in the iTunes app"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
