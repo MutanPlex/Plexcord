@@ -5546,6 +5546,24 @@
                 }
             }
         },
+        "overrideForumDefaults": {
+            "name": "OverrideForumDefaults",
+            "description": "Allows you to override default forum layout/sort order. you can still change it on a per-channel basis",
+            "option": {
+                "defaultLayout": {
+                    "label": "Default Tags",
+                    "description": "Which layout to use as default",
+                    "list": "List",
+                    "gallery": "Gallery"
+                },
+                "defaultSortOrder": {
+                    "label": "Default Sort Order",
+                    "description": "Which sort order to use as default",
+                    "recentlyActive": "Recently Active",
+                    "datePosted": "Date Posted"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

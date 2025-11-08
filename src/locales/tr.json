@@ -5546,6 +5546,24 @@
                 }
             }
         },
+        "overrideForumDefaults": {
+            "name": "OverrideForumDefaults",
+            "description": "Varsayılan forum düzenini/sıralama düzenini geçersiz kılmanıza olanak tanır. Yine de kanal bazında değişiklik yapabilirsiniz.",
+            "option": {
+                "defaultLayout": {
+                    "label": "Varsayılan Düzen",
+                    "description": "Varsayılan olarak hangi düzenin kullanılacağını seçin",
+                    "list": "Liste",
+                    "gallery": "Galeri"
+                },
+                "defaultSortOrder": {
+                    "label": "Varsayılan Sıralama Düzeni",
+                    "description": "Varsayılan olarak hangi sıralama düzeninin kullanılacağını seçin",
+                    "recentlyActive": "Son Etkin",
+                    "datePosted": "Gönderilme Tarihi"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
