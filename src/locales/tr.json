@@ -5458,6 +5458,10 @@
             "name": "NoSystemBadge",
             "description": "Görev çubuğu ve sistem tepsisindeki okunmamış bildirim rozetini devre dışı bırakır."
         },
+        "notificationTitle": {
+            "name": "NotificationTitle",
+            "description": "Masaüstü bildirimlerini daha bilgilendirici hale getirir."
+        },
         "notificationVolume": {
             "name": "NotificationVolume",
             "description": "Discord bildirimleri için özel ses seviyesi ayarlayın.",
@@ -5484,6 +5488,35 @@
                     "label": "Hız",
                     "description": "Kedinin hızı :3",
                     "biggerThan": "Sayı 0'dan büyük olmalıdır"
+                }
+            }
+        },
+        "onePingPerDM": {
+            "name": "OnePingPerDM",
+            "description": "Bir kullanıcı DM’lerde art arda okunmamış mesajlar gönderse bile yalnızca bir sesli bildirim alırsınız. Limiti sıfırlamak için mesajları okuyun.",
+            "option": {
+                "channelToAffect": {
+                    "label": "Etkilenecek Kanal Türü",
+                    "description": "Eklentinin etkileyeceği DM türünü seçin",
+                    "both": "Her ikisi de",
+                    "user": "Kullanıcı DM'leri",
+                    "group": "Grup DM'leri"
+                },
+                "allowMentions": {
+                    "label": "@Bahsetmelere İzin Ver",
+                    "description": "@mention'lar için sesli bildirim al"
+                },
+                "allowEveryone": {
+                    "label": "@everyone’a İzin Ver",
+                    "description": "Grup DM'lerinde @everyone ve @here için sesli bildirim al"
+                },
+                "ignoreUsers": {
+                    "label": "Yok Sayılacak Kullanıcılar",
+                    "description": "Bildirimleri ASLA sınırlandırılmayacak kullanıcı kimlikleri (virgül + boşluk ile ayırın)"
+                },
+                "alwaysPlaySound": {
+                    "label": "Her Zaman Ses Çal",
+                    "description": "Bildirim sesi devre dışı olsa bile ses çal"
                 }
             }
         },

@@ -5458,6 +5458,10 @@
             "name": "NoSystemBadge",
             "description": "Disables the taskbar and system tray unread count badge."
         },
+        "notificationTitle": {
+            "name": "NotificationTitle",
+            "description": "Makes desktop notifications more informative"
+        },
         "notificationVolume": {
             "name": "NotificationVolume",
             "description": "Set custom volume for Discord notifications",
@@ -5484,6 +5488,35 @@
                     "label": "Speed",
                     "description": "Speed of Da Cat :3",
                     "biggerThan": "The number must be bigger than 0"
+                }
+            }
+        },
+        "onePingPerDM": {
+            "name": "OnePingPerDM",
+            "description": "If unread messages are sent by a user in DMs multiple times, you'll only receive one audio ping. Read the messages to reset the limit",
+            "option": {
+                "channelToAffect": {
+                    "label": "Channel to Affect",
+                    "description": "Select the type of DM for the plugin to affect",
+                    "both": "Both",
+                    "user": "User DMs",
+                    "group": "Group DMs"
+                },
+                "allowMentions": {
+                    "label": "Allow Mentions",
+                    "description": "Receive audio pings for @mentions"
+                },
+                "allowEveryone": {
+                    "label": "Allow Everyone",
+                    "description": "Receive audio pings for @everyone and @here in group DMs"
+                },
+                "ignoreUsers": {
+                    "label": "Ignore Users",
+                    "description": "User IDs (comma + space) whose pings should NEVER be throttled"
+                },
+                "alwaysPlaySound": {
+                    "label": "Always Play Sound",
+                    "description": "Play the message notification sound even when its disabled"
                 }
             }
         },

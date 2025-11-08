@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { MessageJSON } from "@plexcord/discord-types";
 import { ChannelType } from "@plexcord/discord-types/enums";
@@ -14,33 +15,60 @@ import { ChannelStore, ReadStateStore, UserStore } from "@webpack/common";
 
 const settings = definePluginSettings({
     channelToAffect: {
+        get label() {
+            return t("plugin.onePingPerDM.option.channelToAffect.label");
+        },
+        get description() {
+            return t("plugin.onePingPerDM.option.channelToAffect.description");
+        },
         type: OptionType.SELECT,
-        description: "Select the type of DM for the plugin to affect",
-        options: [
-            { label: "Both", value: "both_dms", default: true },
-            { label: "User DMs", value: "user_dm" },
-            { label: "Group DMs", value: "group_dm" },
-        ]
+        get options() {
+            return [
+                { label: t("plugin.onePingPerDM.option.channelToAffect.both"), value: "both_dms", default: true },
+                { label: t("plugin.onePingPerDM.option.channelToAffect.user"), value: "user_dm" },
+                { label: t("plugin.onePingPerDM.option.channelToAffect.group"), value: "group_dm" },
+            ];
+        }
     },
     allowMentions: {
+        get label() {
+            return t("plugin.onePingPerDM.option.allowMentions.label");
+        },
+        get description() {
+            return t("plugin.onePingPerDM.option.allowMentions.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Receive audio pings for @mentions",
         default: false,
     },
     allowEveryone: {
+        get label() {
+            return t("plugin.onePingPerDM.option.allowEveryone.label");
+        },
+        get description() {
+            return t("plugin.onePingPerDM.option.allowEveryone.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Receive audio pings for @everyone and @here in group DMs",
         default: false,
     },
     ignoreUsers: {
+        get label() {
+            return t("plugin.onePingPerDM.option.ignoreUsers.label");
+        },
+        get description() {
+            return t("plugin.onePingPerDM.option.ignoreUsers.description");
+        },
         type: OptionType.STRING,
-        description: "User IDs (comma + space) whose pings should NEVER be throttled",
         restartNeeded: true,
         default: ""
     },
     alwaysPlaySound: {
+        get label() {
+            return t("plugin.onePingPerDM.option.alwaysPlaySound.label");
+        },
+        get description() {
+            return t("plugin.onePingPerDM.option.alwaysPlaySound.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Play the message notification sound even when its disabled",
         restartNeeded: true,
         default: false
     }
@@ -51,6 +79,11 @@ export default definePlugin({
     description: "If unread messages are sent by a user in DMs multiple times, you'll only receive one audio ping. Read the messages to reset the limit",
     authors: [Devs.ProffDea],
     settings,
+
+    get displayDescription() {
+        return t("plugin.onePingPerDM.description");
+    },
+
     patches: [
         {
             find: ".getDesktopType()===",
