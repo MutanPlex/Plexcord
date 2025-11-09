@@ -20,6 +20,7 @@
 import "./styles.css";
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { SafetyIcon } from "@components/Icons";
@@ -50,12 +51,19 @@ const enum MenuItemParentType {
 
 export const settings = definePluginSettings({
     permissionsSortOrder: {
-        description: "The sort method used for defining which role grants an user a certain permission",
+        get label() {
+            return t("plugin.permissionsViewer.option.permissionsSortOrder.label");
+        },
+        get description() {
+            return t("plugin.permissionsViewer.option.permissionsSortOrder.description");
+        },
         type: OptionType.SELECT,
-        options: [
-            { label: "Highest Role", value: PermissionsSortOrder.HighestRole, default: true },
-            { label: "Lowest Role", value: PermissionsSortOrder.LowestRole }
-        ]
+        get options() {
+            return [
+                { label: t("plugin.permissionsViewer.option.permissionsSortOrder.highest"), value: PermissionsSortOrder.HighestRole, default: true },
+                { label: t("plugin.permissionsViewer.option.permissionsSortOrder.lowest"), value: PermissionsSortOrder.LowestRole }
+            ];
+        }
     },
 });
 
@@ -65,7 +73,7 @@ function MenuItem(guildId: string, id?: string, type?: MenuItemParentType) {
     return (
         <Menu.MenuItem
             id="perm-viewer-permissions"
-            label="Permissions"
+            label={t("plugin.permissionsViewer.context.permissions")}
             action={() => {
                 const guild = GuildStore.getGuild(guildId);
 
@@ -164,6 +172,10 @@ export default definePlugin({
     authors: [Devs.Nuckyz, Devs.Ven],
     settings,
 
+    get displayDescription() {
+        return t("plugin.permissionsViewer.description");
+    },
+
     patches: [
         {
             find: "#{intl::VIEW_ALL_ROLES}",
@@ -189,7 +201,7 @@ export default definePlugin({
                 )}
             >
                 {popoutProps => (
-                    <TooltipContainer text="View Permissions">
+                    <TooltipContainer text={t("plugin.permissionsViewer.view")}>
                         <Button
                             {...popoutProps}
                             ref={buttonRef}

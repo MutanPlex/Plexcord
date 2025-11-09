@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType, ReporterTestable } from "@utils/types";
@@ -30,13 +31,20 @@ const enum Intensity {
 
 const settings = definePluginSettings({
     superIntensePartyMode: {
-        description: "Party intensity",
+        get label() {
+            return t("plugin.partyMode.option.superIntensePartyMode.label");
+        },
+        get description() {
+            return t("plugin.partyMode.option.superIntensePartyMode.description");
+        },
         type: OptionType.SELECT,
-        options: [
-            { label: "Normal", value: Intensity.Normal, default: true },
-            { label: "Better", value: Intensity.Better },
-            { label: "Project X", value: Intensity.ProjectX },
-        ],
+        get options() {
+            return [
+                { label: t("plugin.partyMode.option.superIntensePartyMode.normal"), value: Intensity.Normal, default: true },
+                { label: t("plugin.partyMode.option.superIntensePartyMode.better"), value: Intensity.Better },
+                { label: t("plugin.partyMode.option.superIntensePartyMode.projectX"), value: Intensity.ProjectX },
+            ];
+        },
         restartNeeded: false,
         onChange: setSettings
     },
@@ -48,6 +56,10 @@ export default definePlugin({
     authors: [Devs.UwUDev],
     reporterTestable: ReporterTestable.None,
     settings,
+
+    get displayDescription() {
+        return t("plugin.partyMode.description");
+    },
 
     start() {
         setPoggerState(true);

@@ -5564,6 +5564,71 @@
                 }
             }
         },
+        "partyMode": {
+            "name": "PartyMode",
+            "description": "Parti modu kullanmanı sağlar çünkü parti asla bitmez ✨",
+            "option": {
+                "superIntensePartyMode": {
+                    "label": "Süper Yoğun Parti Modu",
+                    "description": "Parti yoğunluğu",
+                    "normal": "Normal",
+                    "better": "Daha İyi",
+                    "projectX": "Project X"
+                }
+            }
+        },
+        "pauseInvitesForever": {
+            "name": "PauseInvitesForever",
+            "description": "Discord'un aptalca kaldırdığı 'davetleri süresiz olarak duraklatma' seçeneğini geri getirir.",
+            "pauseIndefinitely": "Süresiz Duraklat"
+        },
+        "permissionFreeWill": {
+            "name": "PermissionFreeWill",
+            "description": "Kanal izin yönetimindeki istemci tarafı kısıtlamalarını devre dışı bırakır.",
+            "option": {
+                "lockout": {
+                    "label": "Kilitlenme",
+                    "description": "İzin kilitlenme korumasını atla ('Bunu yapmak istediğinizden emin misiniz?')"
+                },
+                "onboarding": {
+                    "label": "Başlangıç Gereksinimleri",
+                    "description": "Sunucunun uyumsuz hale gelmesine neden olabilecek onboarding gereksinimlerini atla ('Bu değişiklik sunucunuzu uyumsuz hale getirebilir [...]')"
+                }
+            }
+        },
+        "permissionsViewer": {
+            "name": "PermissionsViewer",
+            "description": "Bir kullanıcının veya kanalın sahip olduğu izinleri ve bir sunucunun rollerini görüntülemeni sağlar.",
+            "view": "İzinleri Görüntüle",
+            "option": {
+                "permissionsSortOrder": {
+                    "label": "İzin Sıralama Düzeni",
+                    "description": "Bir rolün bir kullanıcıya belirli bir izni nasıl verdiğini belirlemek için kullanılan sıralama yöntemi",
+                    "highest": "En Yüksek Rol",
+                    "lowest": "En Düşük Rol"
+                }
+            },
+            "icon": {
+                "denied": "Reddedildi",
+                "allowed": "İzin Verildi",
+                "notOverwritten": "Üzerine Yazılmadı"
+            },
+            "context": {
+                "permissions": "İzinler"
+            },
+            "modal": {
+                "title": "İzinler",
+                "noPermissions": "Gösterilecek izin yok!",
+                "owner": "sahip",
+                "grantedBy": "İzin Veren",
+                "serverOwner": "Sunucu Sahibi",
+                "ownerRole": "Sahip",
+                "sortingBy": "{{method}} öncelikli sıralanıyor",
+                "highest": "En Yüksek Rol",
+                "lowest": "En Düşük Rol",
+                "details": "Rol Detayları"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

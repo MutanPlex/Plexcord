@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { BaseText, HeadingTertiary } from "@components/index";
 import type { Guild, GuildMember } from "@plexcord/discord-types";
@@ -79,7 +80,7 @@ interface GrantedByTooltipProps {
 function GrantedByTooltip({ roleName, roleColor }: GrantedByTooltipProps) {
     return (
         <>
-            <BaseText size="sm" weight="medium">Granted By</BaseText>
+            <BaseText size="sm" weight="medium">{t("plugin.permissionsViewer.modal.grantedBy")}</BaseText>
             <FakeRole text={roleName} color={roleColor} />
         </>
     );
@@ -106,10 +107,10 @@ function UserPermissionsComponent({ guild, guildMember, closePopout }: { guild: 
                 permissions: Object.values(PermissionsBits).reduce((prev, curr) => prev | curr, 0n)
             });
 
-            const OWNER = getIntlMessage("GUILD_OWNER") ?? "Server Owner";
+            const OWNER = getIntlMessage("GUILD_OWNER") ?? t("plugin.permissionsViewer.modal.serverOwner");
             userPermissions.push({
                 permission: OWNER,
-                roleName: "Owner",
+                roleName: t("plugin.permissionsViewer.modal.ownerRole"),
                 roleColor: "var(--primary-300)",
                 rolePosition: Infinity
             });
@@ -139,9 +140,9 @@ function UserPermissionsComponent({ guild, guildMember, closePopout }: { guild: 
 
     return <div>
         <div className={cl("user-header-container")}>
-            <HeadingTertiary>Permissions</HeadingTertiary>
+            <HeadingTertiary>{t("plugin.permissionsViewer.modal.title")}</HeadingTertiary>
             <div className={cl("user-header-btns")}>
-                <Tooltip text={`Sorting by ${permissionsSortOrder === PermissionsSortOrder.HighestRole ? "Highest Role" : "Lowest Role"}`}>
+                <Tooltip text={t("plugin.permissionsViewer.modal.sortingBy", { method: permissionsSortOrder === PermissionsSortOrder.HighestRole ? t("plugin.permissionsViewer.modal.highest") : t("plugin.permissionsViewer.modal.lowest") })}>
                     {tooltipProps => (
                         <div
                             {...tooltipProps}
@@ -163,7 +164,7 @@ function UserPermissionsComponent({ guild, guildMember, closePopout }: { guild: 
                         </div>
                     )}
                 </Tooltip>
-                <Tooltip text="Role Details">
+                <Tooltip text={t("plugin.permissionsViewer.modal.details")}>
                     {tooltipProps => (
                         <div
                             {...tooltipProps}

@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { canonicalizeMatch } from "@utils/patches";
@@ -12,15 +13,25 @@ import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     lockout: {
+        get label() {
+            return t("plugin.permissionFreeWill.option.lockout.label");
+        },
+        get description() {
+            return t("plugin.permissionFreeWill.option.lockout.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: 'Bypass the permission lockout prevention ("Pretty sure you don\'t want to do this")',
         restartNeeded: true
     },
     onboarding: {
+        get label() {
+            return t("plugin.permissionFreeWill.option.onboarding.label");
+        },
+        get description() {
+            return t("plugin.permissionFreeWill.option.onboarding.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: 'Bypass the onboarding requirements ("Making this change will make your server incompatible [...]")',
         restartNeeded: true
     }
 });
@@ -29,6 +40,10 @@ export default definePlugin({
     name: "PermissionFreeWill",
     description: "Disables the client-side restrictions for channel permission management.",
     authors: [Devs.lewisakura],
+
+    get displayDescription() {
+        return t("plugin.permissionFreeWill.description");
+    },
 
     patches: [
         // Permission lockout, just set the check to true
