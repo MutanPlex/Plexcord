@@ -26,6 +26,8 @@ export const CspPolicies: PolicyMap = {
     "127.0.0.1:*": ImageAndCssSrc,
     "localhost:24123": ImageAndCssSrc,
 
+    "lrclib.net": ConnectSrc, // Lyrics library used by some lyrics plugins
+    "translate.googleapis.com": ConnectSrc, // Google Translate API
     "*.github.io": ImageAndCssSrc, // GitHub pages, used by most themes
     "github.com": ImageAndCssSrc, // GitHub content (stuff uploaded to markdown forms), used by most themes
     "raw.githubusercontent.com": ImageAndCssSrc, // GitHub raw, used by some themes
