@@ -25,28 +25,28 @@ const settings = definePluginSettings({
         get options() {
             return [
                 {
-                    label: t("plugin.platformSpoofer.platform.desktop"),
+                    label: t("plugin.platformSpoofer.option.platform.desktop"),
                     value: "desktop",
                     default: true
                 },
                 {
-                    label: t("plugin.platformSpoofer.platform.web"),
+                    label: t("plugin.platformSpoofer.option.platform.web"),
                     value: "web"
                 },
                 {
-                    label: t("plugin.platformSpoofer.platform.android"),
+                    label: t("plugin.platformSpoofer.option.platform.android"),
                     value: "android"
                 },
                 {
-                    label: t("plugin.platformSpoofer.platform.ios"),
+                    label: t("plugin.platformSpoofer.option.platform.ios"),
                     value: "ios"
                 },
                 {
-                    label: t("plugin.platformSpoofer.platform.xbox"),
+                    label: t("plugin.platformSpoofer.option.platform.xbox"),
                     value: "xbox"
                 },
                 {
-                    label: t("plugin.platformSpoofer.platform.playstation"),
+                    label: t("plugin.platformSpoofer.option.platform.playstation"),
                     value: "playstation"
                 },
             ];
