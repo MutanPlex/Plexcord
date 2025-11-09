@@ -5811,6 +5811,11 @@
                 "openQuickCSS": "Open QuickCSS"
             }
         },
+        "previewMessage": {
+            "name": "PreviewMessage",
+            "description": "Lets you preview your message before sending it.",
+            "tooltip": "Preview Message"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

@@ -5811,6 +5811,11 @@
                 "openQuickCSS": "QuickCSS'i Aç"
             }
         },
+        "previewMessage": {
+            "name": "PreviewMessage",
+            "description": "Mesajınızı göndermeden önce önizlemenizi sağlar.",
+            "tooltip": "Mesajı Önizle"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
