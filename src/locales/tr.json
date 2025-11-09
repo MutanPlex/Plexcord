@@ -5776,6 +5776,31 @@
                 }
             }
         },
+        "platformSpoofer": {
+            "name": "PlatformSpoofer",
+            "description": "Hangi platformda veya cihazda olduğunuzu taklit eder",
+            "about": "Bu eklentinin sizi uyarılmaktan veya yasaklanmaktan koruyacağını garanti edemeyiz.",
+            "platform": {
+                "desktop": "Discord İstemcisi",
+                "web": "Discord Web",
+                "ios": "Discord iOS",
+                "android": "Discord Android",
+                "xbox": "Gömülü Discord",
+                "playstation": "Gömülü Discord"
+            },
+            "option": {
+                "platform": {
+                    "label": "Platform",
+                    "description": "Hangi platform olarak görünmek istiyorsunuz",
+                    "desktop": "Masaüstü",
+                    "web": "Web",
+                    "android": "Android",
+                    "ios": "iOS",
+                    "xbox": "Xbox",
+                    "playstation": "PlayStation"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

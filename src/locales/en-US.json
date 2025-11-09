@@ -5776,6 +5776,31 @@
                 }
             }
         },
+        "platformSpoofer": {
+            "name": "PlatformSpoofer",
+            "description": "Spoof what platform or device you're on",
+            "about": "We can't guarantee this plugin won't get you warned or banned.",
+            "platform": {
+                "desktop": "Discord Client",
+                "web": "Discord Web",
+                "ios": "Discord iOS",
+                "android": "Discord Android",
+                "xbox": "Discord Embedded",
+                "playstation": "Discord Embedded"
+            },
+            "option": {
+                "platform": {
+                    "label": "Platform",
+                    "description": "What platform to show up as on",
+                    "desktop": "Desktop",
+                    "web": "Web",
+                    "android": "Android",
+                    "ios": "iOS",
+                    "xbox": "Xbox",
+                    "playstation": "PlayStation"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

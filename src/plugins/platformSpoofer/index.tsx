@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Paragraph } from "@components/Paragraph";
 import { PcDevs } from "@utils/constants";
@@ -13,36 +14,43 @@ import { UserStore } from "@webpack/common";
 
 const settings = definePluginSettings({
     platform: {
+        get label() {
+            return t("plugin.platformSpoofer.option.platform.label");
+        },
+        get description() {
+            return t("plugin.platformSpoofer.option.platform.description");
+        },
         type: OptionType.SELECT,
-        description: "What platform to show up as on",
         restartNeeded: true,
-        options: [
-            {
-                label: "Desktop",
-                value: "desktop",
-                default: true
-            },
-            {
-                label: "Web",
-                value: "web"
-            },
-            {
-                label: "Android",
-                value: "android"
-            },
-            {
-                label: "iOS",
-                value: "ios"
-            },
-            {
-                label: "Xbox",
-                value: "xbox"
-            },
-            {
-                label: "Playstation",
-                value: "playstation"
-            },
-        ]
+        get options() {
+            return [
+                {
+                    label: t("plugin.platformSpoofer.platform.desktop"),
+                    value: "desktop",
+                    default: true
+                },
+                {
+                    label: t("plugin.platformSpoofer.platform.web"),
+                    value: "web"
+                },
+                {
+                    label: t("plugin.platformSpoofer.platform.android"),
+                    value: "android"
+                },
+                {
+                    label: t("plugin.platformSpoofer.platform.ios"),
+                    value: "ios"
+                },
+                {
+                    label: t("plugin.platformSpoofer.platform.xbox"),
+                    value: "xbox"
+                },
+                {
+                    label: t("plugin.platformSpoofer.platform.playstation"),
+                    value: "playstation"
+                },
+            ];
+        }
     }
 });
 
@@ -52,10 +60,15 @@ export default definePlugin({
     authors: [PcDevs.Drag, PcDevs.MutanPlex],
     settingsAboutComponent: () => <>
         <Paragraph className="plugin-warning">
-            We can't guarantee this plugin won't get you warned or banned.
+            {t("plugin.platformSpoofer.about")}
         </Paragraph>
     </>,
     settings: settings,
+
+    get displayDescription() {
+        return t("plugin.platformSpoofer.description");
+    },
+
     patches: [
         {
             find: "_doIdentify(){",
@@ -78,17 +91,17 @@ export default definePlugin({
         if (bypass || userId === UserStore.getCurrentUser().id) {
             switch (platform) {
                 case "desktop":
-                    return { browser: "Discord Client", vcIcon: 0 };
+                    return { browser: t("plugin.platformSpoofer.platform.desktop"), vcIcon: 0 };
                 case "web":
-                    return { browser: "Discord Web", vcIcon: 0 };
+                    return { browser: t("plugin.platformSpoofer.platform.web"), vcIcon: 0 };
                 case "ios":
-                    return { browser: "Discord iOS", vcIcon: 1 };
+                    return { browser: t("plugin.platformSpoofer.platform.ios"), vcIcon: 1 };
                 case "android":
-                    return { browser: "Discord Android", vcIcon: 1 };
+                    return { browser: t("plugin.platformSpoofer.platform.android"), vcIcon: 1 };
                 case "xbox":
-                    return { browser: "Discord Embedded", vcIcon: 2 };
+                    return { browser: t("plugin.platformSpoofer.platform.xbox"), vcIcon: 2 };
                 case "playstation":
-                    return { browser: "Discord Embedded", vcIcon: 3 };
+                    return { browser: t("plugin.platformSpoofer.platform.playstation"), vcIcon: 3 };
                 default:
                     return null;
             }
