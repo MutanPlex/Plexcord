@@ -18,6 +18,7 @@
 */
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, sendBotMessage } from "@api/Commands";
+import { t } from "@api/i18n";
 import { CommandArgument, CommandContext } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { makeLazy } from "@utils/lazy";
@@ -64,7 +65,7 @@ async function resolveImage(options: CommandArgument[], ctx: CommandContext, noS
                 if (upload) {
                     if (!upload.isImage) {
                         UploadManager.clearAll(ctx.channel.id, DraftType.SlashCommand);
-                        throw "Upload is not an image";
+                        throw t("plugin.petpet.error.uploadNotImage");
                     }
                     return upload.item.file;
                 }
@@ -78,7 +79,7 @@ async function resolveImage(options: CommandArgument[], ctx: CommandContext, noS
                 } catch (err) {
                     console.error("[petpet] Failed to fetch user\n", err);
                     UploadManager.clearAll(ctx.channel.id, DraftType.SlashCommand);
-                    throw "Failed to fetch user. Check the console for more info.";
+                    throw t("plugin.petpet.error.fetchUserFailed");
                 }
         }
     }
@@ -90,40 +91,66 @@ export default definePlugin({
     name: "petpet",
     description: "Adds a /petpet slash command to create headpet gifs from any image",
     authors: [Devs.Ven],
+
+    get displayDescription() {
+        return t("plugin.petpet.description");
+    },
+
     commands: [
         {
             inputType: ApplicationCommandInputType.BUILT_IN,
             name: "petpet",
             description: "Create a petpet gif. You can only specify one of the image options",
+            get displayDescription() {
+                return t("plugin.petpet.command.petpet.description");
+            },
             options: [
                 {
                     name: "delay",
                     description: "The delay between each frame. Defaults to 20.",
+                    get displayDescription() {
+                        return t("plugin.petpet.command.petpet.delay");
+                    },
                     type: ApplicationCommandOptionType.INTEGER
                 },
                 {
                     name: "resolution",
                     description: "Resolution for the gif. Defaults to 120. If you enter an insane number and it freezes Discord that's your fault.",
+                    get displayDescription() {
+                        return t("plugin.petpet.command.petpet.resolution");
+                    },
                     type: ApplicationCommandOptionType.INTEGER
                 },
                 {
                     name: "image",
                     description: "Image attachment to use",
+                    get displayDescription() {
+                        return t("plugin.petpet.command.petpet.image");
+                    },
                     type: ApplicationCommandOptionType.ATTACHMENT
                 },
                 {
                     name: "url",
                     description: "URL to fetch image from",
+                    get displayDescription() {
+                        return t("plugin.petpet.command.petpet.url");
+                    },
                     type: ApplicationCommandOptionType.STRING
                 },
                 {
                     name: "user",
                     description: "User whose avatar to use as image",
+                    get displayDescription() {
+                        return t("plugin.petpet.command.petpet.user");
+                    },
                     type: ApplicationCommandOptionType.USER
                 },
                 {
                     name: "no-server-pfp",
                     description: "Use the normal avatar instead of the server specific one when using the 'user' option",
+                    get displayDescription() {
+                        return t("plugin.petpet.command.petpet.noServerPfp");
+                    },
                     type: ApplicationCommandOptionType.BOOLEAN
                 }
             ],
@@ -133,7 +160,7 @@ export default definePlugin({
                 const noServerPfp = findOption(opts, "no-server-pfp", false);
                 try {
                     var url = await resolveImage(opts, cmdCtx, noServerPfp);
-                    if (!url) throw "No Image specified!";
+                    if (!url) throw t("plugin.petpet.command.petpet.error.noImage");
                 } catch (err) {
                     UploadManager.clearAll(cmdCtx.channel.id, DraftType.SlashCommand);
                     sendBotMessage(cmdCtx.channel.id, {

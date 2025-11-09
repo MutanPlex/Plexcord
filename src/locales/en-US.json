@@ -5629,6 +5629,92 @@
                 "details": "Role Details"
             }
         },
+        "petpet": {
+            "name": "petpet",
+            "description": "Adds a /petpet slash command to create headpet gifs from any image",
+            "command": {
+                "petpet": {
+                    "description": "Create a petpet gif. You can only specify one of the image options",
+                    "delay": "The delay between each frame. Defaults to 20.",
+                    "resolution": "Resolution for the gif. Defaults to 120. If you enter an insane number and it freezes Discord that's your fault.",
+                    "image": "Image attachment to use",
+                    "url": "URL to fetch image from",
+                    "user": "User whose avatar to use as image",
+                    "noServerPfp": "Use the normal avatar instead of the server specific one when using the 'user' option",
+                    "error": {
+                        "noImage": "No Image specified!"
+                    }
+                }
+            },
+            "error": {
+                "uploadNotImage": "Upload is not an image",
+                "fetchUserFailed": "Failed to fetch user. Check the console for more info."
+            }
+        },
+        "pictureInPicture": {
+            "name": "PictureInPicture",
+            "description": "Adds picture in picture to videos (next to the Download button)",
+            "tooltip": "Toggle Picture in Picture",
+            "option": {
+                "loop": {
+                    "label": "Loop",
+                    "description": "Whether to make the PiP video loop or not"
+                }
+            }
+        },
+        "pinDMs": {
+            "name": "PinDMs",
+            "description": "Allows you to pin private channels to the top of your DM list. To pin/unpin or re-order pins, right click DMs",
+            "context" : {
+                "category": {
+                    "label": "Pin DMs Category Menu",
+                    "edit": "Edit Category",
+                    "up": "Move Up",
+                    "down": "Move Down",
+                    "delete": "Delete Category",
+                    "unnamed": "uh oh"
+                },
+                "pin": {
+                    "label": "Pin DM",
+                    "addCategory": "Add Category"
+                },
+                "unPin": {
+                    "label": "Unpin DM",
+                    "move": "Move to Category"
+                }
+            },
+            "option": {
+                "pinOrder": {
+                    "label": "Pin Order",
+                    "description": "Which order should pinned DMs be displayed in?",
+                    "lastMessage": "Most recent message",
+                    "custom": "Custom (right click channels to reorder)"
+                },
+                "canCollapseDmSection": {
+                    "label": "Collapsible Pinned Section",
+                    "description": "Allow uncategorised DMs section to be collapsable"
+                },
+                "dmSectionCollapsed": {
+                    "label": "DM Section Collapsed",
+                    "description": "Collapse DM section"
+                },
+                "userBasedCategoryList": {
+                    "label": "User Based Category List",
+                    "description": ""
+                }
+            },
+            "modal": {
+                "category": {
+                    "pin": "Pin Category",
+                    "edit": "Edit Category",
+                    "new": "New Category",
+                    "name": "Name",
+                    "color": "Color",
+                    "save": "Save",
+                    "create": "Create"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

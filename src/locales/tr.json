@@ -5629,6 +5629,92 @@
                 "details": "Rol Detayları"
             }
         },
+        "petpet": {
+            "name": "petpet",
+            "description": "Herhangi bir resimden petpet gif'i oluşturmak için /petpet komutu ekler",
+            "command": {
+                "petpet": {
+                    "description": "Bir petpet gif'i oluşturun. Resim seçeneklerinden yalnızca birini belirtebilirsiniz",
+                    "delay": "Her kare arasındaki gecikme. Varsayılan 20.",
+                    "resolution": "Gif için çözünürlük. Varsayılan 120. Çılgın bir sayı girerseniz ve Discord donarsa bu sizin hatanız.",
+                    "image": "Kullanılacak resim eki",
+                    "url": "Resim almak için URL",
+                    "user": "Avatarı resim olarak kullanılacak kullanıcı",
+                    "noServerPfp": "'user' seçeneğini kullanırken sunucuya özel yerine normal avatarı kullan",
+                    "error": {
+                        "noImage": "Resim belirtilmedi!"
+                    }
+                }
+            },
+            "error": {
+                "uploadNotImage": "Yüklenen dosya bir resim değil",
+                "fetchUserFailed": "Kullanıcı alınamadı. Daha fazla bilgi için konsolu kontrol edin."
+            }
+        },
+        "pictureInPicture": {
+            "name": "PictureInPicture",
+            "description": "Videolara resim içinde resim özelliği ekler (İndirme düğmesinin yanında)",
+            "tooltip": "Resim İçinde Resim Aç/Kapat",
+            "option": {
+                "loop": {
+                    "label": "Döngü",
+                    "description": "PiP videosunun döngüye alınıp alınmayacağı"
+                }
+            }
+        },
+        "pinDMs": {
+            "name": "PinDMs",
+            "description": "Özel kanalları (DM'leri) DM listenin en üstüne sabitlemeni sağlar. DM'leri sabitlemek/kaldırmak veya sırasını değiştirmek için DM'lere sağ tıklayabilirsin.",
+            "context": {
+                "category": {
+                    "label": "DM Kategorisi Menüsü",
+                    "edit": "Kategoriyi Düzenle",
+                    "up": "Yukarı Taşı",
+                    "down": "Aşağı Taşı",
+                    "delete": "Kategoriyi Sil",
+                    "unnamed": "isimsiz"
+                },
+                "pin": {
+                    "label": "DM Sabitle",
+                    "addCategory": "Kategori Ekle"
+                },
+                "unPin": {
+                    "label": "DM Sabitlemesini Kaldır",
+                    "move": "Kategorisine Taşı"
+                }
+            },
+            "option": {
+                "pinOrder": {
+                    "label": "Sabitleme Sırası",
+                    "description": "Sabitlenen DM'ler hangi sırayla görüntülensin?",
+                    "lastMessage": "Son mesaj tarihine göre",
+                    "custom": "Özel (kanallara sağ tıklayarak sırayı değiştir)"
+                },
+                "canCollapseDmSection": {
+                    "label": "Daraltılabilir Sabitlenmiş Bölüm",
+                    "description": "Kategorize edilmemiş DM'lerin bölümünü daraltılabilir hale getir"
+                },
+                "dmSectionCollapsed": {
+                    "label": "DM Bölümü Daraltıldı",
+                    "description": "DM bölümünü daralt"
+                },
+                "userBasedCategoryList": {
+                    "label": "Kullanıcı Bazlı Kategori Listesi",
+                    "description": ""
+                }
+            },
+            "modal": {
+                "category": {
+                    "pin": "Kategoriyi Sabitle",
+                    "edit": "Kategoriyi Düzenle",
+                    "new": "Yeni Kategori",
+                    "name": "İsim",
+                    "color": "Renk",
+                    "save": "Kaydet",
+                    "create": "Oluştur"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
