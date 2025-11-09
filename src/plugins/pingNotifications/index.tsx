@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
@@ -24,29 +25,54 @@ const UserGuildSettingsStore = findStoreLazy("UserGuildSettingsStore");
 
 const settings = definePluginSettings({
     friends: {
+        get label() {
+            return t("plugin.pingNotifications.option.friends.label");
+        },
+        get description() {
+            return t("plugin.pingNotifications.option.friends.description");
+        },
         type: OptionType.BOOLEAN,
-        default: false,
-        description: "Notify when friends send messages in servers"
+        default: false
     },
     mentions: {
+        get label() {
+            return t("plugin.pingNotifications.option.mentions.label");
+        },
+        get description() {
+            return t("plugin.pingNotifications.option.mentions.description");
+        },
         type: OptionType.BOOLEAN,
-        default: true,
-        description: "Notify when someone @mentions you directly"
+        default: true
     },
     dms: {
+        get label() {
+            return t("plugin.pingNotifications.option.dms.label");
+        },
+        get description() {
+            return t("plugin.pingNotifications.option.dms.description");
+        },
         type: OptionType.BOOLEAN,
-        default: true,
-        description: "Notify for direct messages (DMs)"
+        default: true
     },
     showInActive: {
+        get label() {
+            return t("plugin.pingNotifications.option.showInActive.label");
+        },
+        get description() {
+            return t("plugin.pingNotifications.option.showInActive.description");
+        },
         type: OptionType.BOOLEAN,
-        default: false,
-        description: "Show notifications even for currently active channel"
+        default: false
     },
     ignoreMuted: {
+        get label() {
+            return t("plugin.pingNotifications.option.ignoreMuted.label");
+        },
+        get description() {
+            return t("plugin.pingNotifications.option.ignoreMuted.description");
+        },
         type: OptionType.BOOLEAN,
-        default: true,
-        description: "Skip notifications from muted servers, channels, or users"
+        default: true
     }
 });
 
@@ -96,6 +122,10 @@ export default definePlugin({
     authors: [PcDevs.smuki, PcDevs.MutanPlex],
     settings,
 
+    get displayDescription() {
+        return t("plugin.pingNotifications.description");
+    },
+
     flux: {
         MESSAGE_CREATE({ message }) {
             try {
@@ -114,8 +144,8 @@ export default definePlugin({
                 if (!settings.store.showInActive && channel.id === SelectedChannelStore.getChannelId()) return;
                 if (PresenceStore.getStatus(currentUser.id) === "dnd") return;
 
-                const author = UserStore.getUser(message.author.id) || { username: "Unknown" };
-                const channelName = channel.name || (isDM ? "DM" : "Group");
+                const author = UserStore.getUser(message.author.id) || { username: t("plugin.pingNotifications.unknown") };
+                const channelName = channel.name || (isDM ? t("plugin.pingNotifications.dm") : t("plugin.pingNotifications.groupDM"));
                 const body = formatContent(message);
 
                 let shouldNotify = false;
@@ -130,7 +160,7 @@ export default definePlugin({
 
                 if (shouldNotify) {
                     showNotification({
-                        title: `${author.username} in ${channelName}`,
+                        title: t("plugin.pingNotifications.title", { username: author.username, channelName }),
                         body,
                         icon: author.getAvatarURL?.(undefined, 128),
                         onClick: () => NavigationRouter.transitionTo(

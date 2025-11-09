@@ -5715,6 +5715,36 @@
                 }
             }
         },
+        "pingNotifications": {
+            "name": "PingNotifications",
+            "description": "Customizable notifications with improved mention formatting",
+            "option": {
+                "friends": {
+                    "label": "Friends",
+                    "description": "Notify when friends send messages in servers"
+                },
+                "mentions": {
+                    "label": "Mentions",
+                    "description": "Notify when someone @mentions you directly"
+                },
+                "dms": {
+                    "label": "DMs",
+                    "description": "Notify for direct messages (DMs)"
+                },
+                "showInActive": {
+                    "label": "Show In Active",
+                    "description": "Show notifications even for currently active channel"
+                },
+                "ignoreMuted": {
+                    "label": "Ignore Muted",
+                    "description": "Skip notifications from muted servers, channels, or users"
+                }
+            },
+            "unknown": "Unknown",
+            "dm": "DM",
+            "groupDM": "Group DM",
+            "title": "{{username}} in {{channelName}}"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

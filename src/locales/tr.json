@@ -5715,6 +5715,36 @@
                 }
             }
         },
+        "pingNotifications": {
+            "name": "PingNotifications",
+            "description": "Kişiselleştirilebilir bildirimler ve geliştirilmiş bahsetme biçimlendirmesi",
+            "option": {
+                "friends": {
+                    "label": "Arkadaşlar",
+                    "description": "Arkadaşların sunucularda mesaj gönderdiğinde bildirim al"
+                },
+                "mentions": {
+                    "label": "Bahsetmeler",
+                    "description": "Biri doğrudan senden @bahsettiğinde bildirim al"
+                },
+                "dms": {
+                    "label": "DM'ler",
+                    "description": "Doğrudan mesajlar (DM) için bildirim al"
+                },
+                "showInActive": {
+                    "label": "Aktif Kanallarda Göster",
+                    "description": "Şu anda aktif olunan kanallar için bile bildirim göster"
+                },
+                "ignoreMuted": {
+                    "label": "Sessize Alınanları Yoksay",
+                    "description": "Sessize alınmış sunuculardan, kanallardan veya kullanıcılardan gelen bildirimleri atla"
+                }
+            },
+            "unknown": "Bilinmiyor",
+            "dm": "DM",
+            "groupDM": "Grup DM",
+            "title": "{{username}}, {{channelName}} kanalında"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
