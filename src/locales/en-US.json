@@ -5753,6 +5753,29 @@
             "name": "PlainFolderIcon",
             "description": "Dont show the small guild icons in folders"
         },
+        "platformIndicators": {
+            "name": "PlatformIndicators",
+            "description": "Adds platform indicators (Desktop, Mobile, Web...) to users",
+            "embeddedTooltip": "Console",
+            "option": {
+                "list": {
+                    "label": "List",
+                    "description": "Show indicators in the member list"
+                },
+                "badges": {
+                    "label": "Badges",
+                    "description": "Show indicators in user profiles, as badges"
+                },
+                "messages": {
+                    "label": "Messages",
+                    "description": "Show indicators inside messages"
+                },
+                "colorMobileIndicator": {
+                    "label": "Color Mobile Indicator",
+                    "description": "Whether to make the mobile indicator match the color of the user status."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

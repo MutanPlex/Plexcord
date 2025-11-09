@@ -5753,6 +5753,29 @@
             "name": "PlainFolderIcon",
             "description": "Klasörlerdeki küçük sunucu simgelerini göstermez."
         },
+        "platformIndicators": {
+            "name": "PlatformIndicators",
+            "description": "Kullanıcılara platform göstergeleri (Masaüstü, Mobil, Web...) ekler.",
+            "embeddedTooltip": "Konsol",
+            "option": {
+                "list": {
+                    "label": "Liste",
+                    "description": "Üye listesinde göstergeleri göster"
+                },
+                "badges": {
+                    "label": "Rozetler",
+                    "description": "Kullanıcı profillerinde göstergeleri rozet olarak göster"
+                },
+                "messages": {
+                    "label": "Mesajlar",
+                    "description": "Mesajların içinde göstergeleri göster"
+                },
+                "colorMobileIndicator": {
+                    "label": "Mobil Göstergesini Renklendir",
+                    "description": "Mobil göstergenin kullanıcı durum rengini alıp almamasını belirler."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

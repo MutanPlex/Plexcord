@@ -20,6 +20,7 @@
 import "./style.css";
 
 import { addProfileBadge, BadgePosition, BadgeUserArgs, ProfileBadge, removeProfileBadge } from "@api/Badges";
+import { t } from "@api/i18n";
 import { addMemberListDecorator, removeMemberListDecorator } from "@api/MemberListDecorators";
 import { addMessageDecoration, removeMessageDecoration } from "@api/MessageDecorations";
 import { Settings } from "@api/Settings";
@@ -77,7 +78,7 @@ const { useStatusFillColor } = mapMangledModuleLazy(".concat(.5625*", {
 
 const PlatformIcon = ({ platform, status, small }: { platform: Platform, status: string; small: boolean; }) => {
     const tooltip = platform === "embedded"
-        ? "Console"
+        ? t("plugin.platformIndicators.embeddedTooltip")
         : platform[0].toUpperCase() + platform.slice(1);
 
     const Icon = Icons[platform] ?? Icons.desktop;
@@ -170,7 +171,12 @@ const badge: ProfileBadge = {
 
 const indicatorLocations = {
     list: {
-        description: "In the member list",
+        get label() {
+            return t("plugin.platformIndicators.option.list.label");
+        },
+        get description() {
+            return t("plugin.platformIndicators.option.list.description");
+        },
         onEnable: () => addMemberListDecorator("platform-indicator", props =>
             <ErrorBoundary noop>
                 <PlatformIndicator user={props.user} small={true} />
@@ -179,12 +185,22 @@ const indicatorLocations = {
         onDisable: () => removeMemberListDecorator("platform-indicator")
     },
     badges: {
-        description: "In user profiles, as badges",
+        get label() {
+            return t("plugin.platformIndicators.option.badges.label");
+        },
+        get description() {
+            return t("plugin.platformIndicators.option.badges.description");
+        },
         onEnable: () => addProfileBadge(badge),
         onDisable: () => removeProfileBadge(badge)
     },
     messages: {
-        description: "Inside messages",
+        get label() {
+            return t("plugin.platformIndicators.option.messages.label");
+        },
+        get description() {
+            return t("plugin.platformIndicators.option.messages.description");
+        },
         onEnable: () => addMessageDecoration("platform-indicator", props =>
             <ErrorBoundary noop>
                 <PlatformIndicator user={props.message?.author} />
@@ -199,6 +215,10 @@ export default definePlugin({
     description: "Adds platform indicators (Desktop, Mobile, Web...) to users",
     authors: [Devs.kemo, Devs.TheSun, Devs.Nuckyz, Devs.Ven],
     dependencies: ["MessageDecorationsAPI", "MemberListDecoratorsAPI"],
+
+    get displayDescription() {
+        return t("plugin.platformIndicators.description");
+    },
 
     start() {
         const settings = Settings.plugins.PlatformIndicators;
@@ -279,8 +299,13 @@ export default definePlugin({
         ...Object.fromEntries(
             Object.entries(indicatorLocations).map(([key, value]) => {
                 return [key, {
+                    get label() {
+                        return t("plugin.platformIndicators.option." + key + ".label");
+                    },
+                    get description() {
+                        return t("plugin.platformIndicators.option." + key + ".description");
+                    },
                     type: OptionType.BOOLEAN,
-                    description: `Show indicators ${value.description.toLowerCase()}`,
                     // onChange doesn't give any way to know which setting was changed, so restart required
                     restartNeeded: true,
                     default: true
@@ -288,8 +313,13 @@ export default definePlugin({
             })
         ),
         colorMobileIndicator: {
+            get label() {
+                return t("plugin.platformIndicators.option.colorMobileIndicator.label");
+            },
+            get description() {
+                return t("plugin.platformIndicators.option.colorMobileIndicator.description");
+            },
             type: OptionType.BOOLEAN,
-            description: "Whether to make the mobile indicator match the color of the user status.",
             default: true,
             restartNeeded: true
         }
