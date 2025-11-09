@@ -25,7 +25,6 @@ export function ThemeCard({ theme, enabled, onChange, onDelete }: ThemeCardProps
     // @ts-ignore
     const themeInfo = getThemeInfo(theme.content, theme.fileName);
     return (
-        console.log("Rendering theme:", themeInfo),
         <AddonCard
             name={themeInfo.name}
             description={themeInfo.description}
