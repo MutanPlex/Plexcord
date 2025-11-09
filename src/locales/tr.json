@@ -5816,6 +5816,23 @@
             "description": "Mesajınızı göndermeden önce önizlemenizi sağlar.",
             "tooltip": "Mesajı Önizle"
         },
+        "questCompleter": {
+            "name": "QuestCompleter",
+            "description": "Oyunu yüklemeden görevleri tamamlamanı sağlayan bir eklenti.",
+            "tooltip": "Görevleri Tamamla",
+            "alert": {
+                "title": "Görev Tamamlayıcı",
+                "noQuest": "Tamamlanacak görev yok. Görevler sekmesine gitmek için tıklayın.",
+                "completed": "Görev tamamlandı.",
+                "spoofingVideo": "{{applicationName}} için video taklidi yapılıyor",
+                "spoofingApplication": "{{applicationName}} için uygulama taklidi yapılıyor",
+                "currentProgress": "Mevcut İlerleme: {{progress}}/{{goal}} saniye",
+                "notStreaming": "Yayın yapmıyorsun",
+                "startStreaming": "{{applicationName}} senin yayın yapmanı gerektiriyor. Lütfen ses kanalında herhangi bir pencereyi yayınla.",
+                "onePersonNeeded": "Unutma, ses kanalında en az 1 kişinin daha olması gerekiyor!",
+                "streamMore": "Ses kanalında herhangi bir pencereyi {{seconds}} dakika daha yayınla."
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

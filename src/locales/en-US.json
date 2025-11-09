@@ -5816,6 +5816,23 @@
             "description": "Lets you preview your message before sending it.",
             "tooltip": "Preview Message"
         },
+        "questCompleter": {
+            "name": "QuestCompleter",
+            "description": "A plugin to complete quests without having the game installed.",
+            "tooltip": "Complete Quests",
+            "alert": {
+                "title": "Quest Completer",
+                "noQuest": "No Quests To Complete. Click to navigate to the quests tab",
+                "completed": "Quest Completed.",
+                "spoofingVideo": "Spoofing video for {{applicationName}}",
+                "spoofingApplication": "Spoofing application for {{applicationName}}",
+                "currentProgress": "Current Progress: {{progress}}/{{goal}} seconds",
+                "notStreaming": "You are not streaming",
+                "startStreaming": "{{applicationName}} requires you to be streaming. Please stream any window in vc.",
+                "onePersonNeeded": "Remember that you need at least 1 other person to be in the vc!",
+                "streamMore": "Stream any window in vc for {{seconds}} more minutes."
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
