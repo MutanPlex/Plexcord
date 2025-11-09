@@ -5833,6 +5833,11 @@
                 "streamMore": "Stream any window in vc for {{seconds}} more minutes."
             }
         },
+        "questFocused": {
+            "name": "QuestFocused",
+            "description": "Prevent the quests player from pausing and possibly skip it all together.",
+            "about": "You might need to spam left mouse button on the video to skip it."
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

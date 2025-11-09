@@ -5833,6 +5833,11 @@
                 "streamMore": "Ses kanalında herhangi bir pencereyi {{seconds}} dakika daha yayınla."
             }
         },
+        "questFocused": {
+            "name": "QuestFocused",
+            "description": "Görev oynatıcısının duraklamasını engeller ve mümkünse tamamen atlamanı sağlar.",
+            "about": "Videoyu atlamak için sol fare tuşuna birkaç kez tıklaman gerekebilir."
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Paragraph } from "@components/Paragraph";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -14,10 +15,15 @@ export default definePlugin({
     description: "Prevent the quests player from pausing and possibly skip it all together.",
     settingsAboutComponent: () => <>
         <Paragraph className="plugin-warning">
-            You might need to spam left mouse button on the video to skip it.
+            {t("plugin.questFocused.about")}
         </Paragraph>
     </>,
     authors: [PcDevs.secp192k1],
+
+    get displayDescription() {
+        return t("plugin.questFocused.description");
+    },
+
     patches: [
         // Block pausing
         {
