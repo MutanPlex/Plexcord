@@ -5745,6 +5745,14 @@
             "groupDM": "Group DM",
             "title": "{{username}} in {{channelName}}"
         },
+        "pinIcon": {
+            "name": "PinIcon",
+            "description": "Adds a pin icon to pinned messages"
+        },
+        "plainFolderIcon": {
+            "name": "PlainFolderIcon",
+            "description": "Dont show the small guild icons in folders"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

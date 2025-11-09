@@ -18,6 +18,7 @@
 */
 
 
+import { t } from "@api/i18n";
 import { Message } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -28,6 +29,11 @@ export default definePlugin({
     name: "PinIcon",
     description: "Adds a pin icon to pinned messages",
     authors: [PcDevs.iamme, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.pinIcon.description");
+    },
+
     patches: [
         {
             find: "isUnsupported})",

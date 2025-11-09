@@ -5745,6 +5745,14 @@
             "groupDM": "Grup DM",
             "title": "{{username}}, {{channelName}} kanalında"
         },
+        "pinIcon": {
+            "name": "PinIcon",
+            "description": "Sabitlenmiş mesajlara bir iğne simgesi ekler."
+        },
+        "plainFolderIcon": {
+            "name": "PlainFolderIcon",
+            "description": "Klasörlerdeki küçük sunucu simgelerini göstermez."
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

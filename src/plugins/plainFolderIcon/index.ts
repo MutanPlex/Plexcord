@@ -19,6 +19,7 @@
 
 import "./style.css";
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -26,6 +27,10 @@ export default definePlugin({
     name: "PlainFolderIcon",
     description: "Dont show the small guild icons in folders",
     authors: [Devs.botato],
+
+    get displayDescription() {
+        return t("plugin.plainFolderIcon.description");
+    },
 
     patches: [
         {
