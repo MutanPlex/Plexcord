@@ -112,7 +112,7 @@ function CreateDecorationModal(props: ModalProps) {
                     </div>
                     <div>
                         <AvatarDecorationModalPreview
-                            avatarDecorationOverride={decoration}
+                            avatarDecoration={decoration}
                             user={UserStore.getCurrentUser()}
                         />
                     </div>
