@@ -19,6 +19,7 @@
 
 import "./index.css";
 
+import { t } from "@api/i18n";
 import { openNotificationLogModal } from "@api/Notifications/notificationLog";
 import { Settings, useSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -66,20 +67,20 @@ function PlexcordPopout(onClose: () => void) {
         >
             <Menu.MenuItem
                 id="pc-toolbox-notifications"
-                label="Open Notification Log"
+                label={t("plugin.plexcordToolbox.context.openLog")}
                 action={openNotificationLogModal}
             />
             <Menu.MenuCheckboxItem
                 id="pc-toolbox-quickcss-toggle"
                 checked={useQuickCss}
-                label={"Enable QuickCSS"}
+                label={t("plugin.plexcordToolbox.context.enableQuickCSS")}
                 action={() => {
                     Settings.useQuickCss = !useQuickCss;
                 }}
             />
             <Menu.MenuItem
                 id="pc-toolbox-quickcss"
-                label="Open QuickCSS"
+                label={t("plugin.plexcordToolbox.context.openQuickCSS")}
                 action={() => PlexcordNative.quickCss.openEditor()}
             />
             {...pluginEntries}
@@ -114,7 +115,7 @@ function PlexcordPopoutButton() {
                     ref={buttonRef}
                     className="pc-toolbox-btn"
                     onClick={() => setShow(v => !v)}
-                    tooltip={isShown ? null : "Plexcord Toolbox"}
+                    tooltip={isShown ? null : t("plugin.plexcordToolbox.tooltip")}
                     icon={() => PlexcordPopoutIcon(isShown)}
                     selected={isShown}
                 />
@@ -135,6 +136,10 @@ export default definePlugin({
     name: "PlexcordToolbox",
     description: "Adds a button to the AppBar that houses Plexcord quick actions",
     authors: [Devs.Ven, Devs.AutumnVN, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.plexcordToolbox.description");
+    },
 
     patches: [
         {

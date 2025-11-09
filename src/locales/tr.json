@@ -5801,6 +5801,16 @@
                 }
             }
         },
+        "plexcordToolbox": {
+            "name": "PlexcordToolbox",
+            "description": "Uygulama çubuğuna Plexcord hızlı işlemlerini barındıran bir düğme ekler.",
+            "tooltip": "Plexcord Araç Kutusu",
+            "context": {
+                "openLog": "Bildirim Günlüğünü Aç",
+                "enableQuickCSS": "QuickCSS'i Etkinleştir",
+                "openQuickCSS": "QuickCSS'i Aç"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

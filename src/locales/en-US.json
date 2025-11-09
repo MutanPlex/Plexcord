@@ -5801,6 +5801,16 @@
                 }
             }
         },
+        "plexcordToolbox": {
+            "name": "PlexcordToolbox",
+            "description": "Adds a button to the AppBar that houses Plexcord quick actions",
+            "tooltip": "Plexcord Toolbox",
+            "context": {
+                "openLog": "Open Notification Log",
+                "enableQuickCSS": "Enable QuickCSS",
+                "openQuickCSS": "Open QuickCSS"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
