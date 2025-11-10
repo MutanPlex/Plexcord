@@ -7,7 +7,7 @@
 
 import { classNameFactory } from "@api/Styles";
 import { questIsIgnored, settings } from "@plugins/questify/settings";
-import { getIntlMessageFromHash, runtimeHashMessageKey, runtimeHashMessageKeyLegacy } from "@utils/index";
+import { getIntlMessage } from "@utils/index";
 import { Logger } from "@utils/Logger";
 import { findStoreLazy } from "@webpack";
 import { FluxDispatcher, RestAPI, UserStore } from "@webpack/common";
@@ -22,12 +22,9 @@ export const leftClick = 0;
 export const middleClick = 1;
 export const rightClick = 2;
 
-// TODO: Remove this once Discord has properly deployed the new system.
+// This is for Discord's internal quest messages that are not yet in our i18n system
 export function getIntlMessageQuestify(key: string, values?: Record<PropertyKey, any>): string[] {
-    const remake = getIntlMessageFromHash(runtimeHashMessageKey(key), values, key);
-    const legacy = getIntlMessageFromHash(runtimeHashMessageKeyLegacy(key), values, key);
-
-    return remake.length ? remake : legacy.length ? legacy : [""];
+    return getIntlMessage(key, values);
 }
 
 

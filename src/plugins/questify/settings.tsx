@@ -6,6 +6,7 @@
  */
 
 import { defaultAudioNames, playAudio } from "@api/AudioPlayer";
+import { t, tJsx } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Divider, ErrorBoundary, Heading, Paragraph } from "@components/index";
 import { Logger } from "@utils/Logger";
@@ -273,21 +274,21 @@ function DummyQuestButton({
                 <Menu.Menu
                     navId={q("dummy-quest-button-context-menu")}
                     onClose={ContextMenuApi.closeContextMenu}
-                    aria-label="Quest Button Menu"
+                    aria-label={t("plugin.questify.context.quest.label")}
                 >
                     <Menu.MenuItem
                         id={q("dummy-quest-button-mark-all-ignored")}
-                        label="Mark All Ignored"
+                        label={t("plugin.questify.context.quest.ignore")}
                         disabled={true}
                     />
                     <Menu.MenuItem
                         id={q("dummy-quest-button-reset-ignored-list")}
-                        label="Reset Ignored List"
+                        label={t("plugin.questify.context.quest.reset")}
                         disabled={true}
                     />
                     <Menu.MenuItem
                         id={q("dummy-quest-button-fetch-quests")}
-                        label="Fetch Quests"
+                        label={t("plugin.questify.context.quest.fetch")}
                         disabled={true}
                     />
                 </Menu.Menu>
@@ -308,7 +309,7 @@ function DummyQuestButton({
             id={q("dummy-quest-button")}
             className={q("dummy-quest-button", "quest-button")}
             icon={QuestIcon(26, 26)}
-            tooltip="Quests"
+            tooltip={t("plugin.questify.quests")}
             showPill={true}
             isVisible={visible}
             isSelected={selected}
@@ -417,31 +418,31 @@ function QuestButtonSettings(): JSX.Element {
     ]);
 
     const questButtonDisplayOptions: RadioOption[] = [
-        { name: "Always", value: "always" },
-        { name: "Unclaimed", value: "unclaimed" },
-        { name: "Never", value: "never" }
+        { name: t("plugin.questify.settings.options.always"), value: "always" },
+        { name: t("plugin.questify.settings.options.unclaimed"), value: "unclaimed" },
+        { name: t("plugin.questify.settings.options.never"), value: "never" }
     ];
 
     const questButtonUnclaimedOptions: RadioOption[] = [
-        { name: "Pill", value: "pill" },
-        { name: "Badge", value: "badge" },
-        { name: "Both", value: "both" },
-        { name: "None", value: "none" }
+        { name: t("plugin.questify.settings.options.pill"), value: "pill" },
+        { name: t("plugin.questify.settings.options.badge"), value: "badge" },
+        { name: t("plugin.questify.settings.options.both"), value: "both" },
+        { name: t("plugin.questify.settings.options.none"), value: "none" }
     ];
 
     const questButtonClickOptions: SelectOption[] = [
-        { label: "Open Quests", value: "open-quests" },
-        { label: "Context Menu", value: "context-menu" },
-        { label: "Plugin Settings", value: "plugin-settings" },
-        { label: "Nothing", value: "nothing" }
+        { label: t("plugin.questify.settings.options.openQuests"), value: "open-quests" },
+        { label: t("plugin.questify.settings.options.contextMenu"), value: "context-menu" },
+        { label: t("plugin.questify.settings.options.pluginSettings"), value: "plugin-settings" },
+        { label: t("plugin.questify.settings.options.nothing"), value: "nothing" }
     ];
 
     const questButtonRewardDisplayOptions: DynamicDropdownSettingOption[] = [
-        { label: "Orbs", value: "orbs", selected: questRewardIncludeOrbs },
-        { label: "Nitro Codes", value: "nitro-code", selected: questRewardIncludeNitroCode },
-        { label: "Reward Codes", value: "reward-code", selected: questRewardIncludeRewardCode },
-        { label: "In Game Items", value: "in-game", selected: questRewardIncludeInGame },
-        { label: "Profile Collectibles", value: "collectibles", selected: questRewardIncludeCollectibles },
+        { label: t("plugin.questify.settings.options.orbs"), value: "orbs", selected: questRewardIncludeOrbs },
+        { label: t("plugin.questify.settings.options.nitroCodes"), value: "nitro-code", selected: questRewardIncludeNitroCode },
+        { label: t("plugin.questify.settings.options.rewardCodes"), value: "reward-code", selected: questRewardIncludeRewardCode },
+        { label: t("plugin.questify.settings.options.inGameItems"), value: "in-game", selected: questRewardIncludeInGame },
+        { label: t("plugin.questify.settings.options.profileCollectibles"), value: "collectibles", selected: questRewardIncludeCollectibles },
     ];
 
     const [currentRewardsOptions, setCurrentRewardsOptions] = useState(questButtonRewardDisplayOptions.filter(option => option.selected));
@@ -527,10 +528,10 @@ function QuestButtonSettings(): JSX.Element {
                     <div className={q("main-inline-group")}>
                         <div>
                             <Heading className={q("form-title")}>
-                                Quest Button
+                                {t("plugin.questify.settings.questButton.title")}
                             </Heading>
                             <Paragraph className={q("form-description")}>
-                                Show a Quest button in the server list with an optional indicator for unclaimed Quests.
+                                {t("plugin.questify.settings.questButton.description")}
                             </Paragraph>
                         </div>
                         <div className={q("dummy-quest-button")}>
@@ -550,7 +551,7 @@ function QuestButtonSettings(): JSX.Element {
                     <div className={q("main-inline-group")}>
                         <div className={q("inline-group-item")}>
                             <Heading className={q("form-subtitle", "form-subtitle-spacier")}>
-                                Left Click Action
+                                {t("plugin.questify.settings.questButton.leftClick")}
                             </Heading>
                             <Select
                                 options={questButtonClickOptions}
@@ -563,7 +564,7 @@ function QuestButtonSettings(): JSX.Element {
                         </div>
                         <div className={q("inline-group-item")}>
                             <Heading className={q("form-subtitle", "form-subtitle-spacier")}>
-                                Middle Click Action
+                                {t("plugin.questify.settings.questButton.middleClick")}
                             </Heading>
                             <Select
                                 options={questButtonClickOptions}
@@ -576,7 +577,7 @@ function QuestButtonSettings(): JSX.Element {
                         </div>
                         <div className={q("inline-group-item")}>
                             <Heading className={q("form-subtitle", "form-subtitle-spacier")}>
-                                Right Click Action
+                                {t("plugin.questify.settings.questButton.rightClick")}
                             </Heading>
                             <Select
                                 options={questButtonClickOptions}
@@ -591,7 +592,7 @@ function QuestButtonSettings(): JSX.Element {
                     <div className={q("main-inline-group")}>
                         <div className={q("inline-group-item")}>
                             <Heading className={q("form-subtitle")}>
-                                Button Visibility
+                                {t("plugin.questify.settings.questButton.visibility")}
                             </Heading>
                             <RadioGroup
                                 value={(currentQuestButtonDisplay as any).value}
@@ -599,7 +600,7 @@ function QuestButtonSettings(): JSX.Element {
                                 onChange={handleQuestButtonDisplayChange}
                             />
                             <Heading className={q("form-subtitle")}>
-                                Badge Color
+                                {t("plugin.questify.settings.questButton.badgeColor")}
                             </Heading>
                             <div className={q("sub-inline-group")}>
                                 <ColorPicker
@@ -608,22 +609,22 @@ function QuestButtonSettings(): JSX.Element {
                                     showEyeDropper={true}
                                 />
                                 <Button
-                                    className={q("button", "button-blue")}
+                                    className={q("button", "button-blue", "disable-quest-default")}
                                     onClick={() => handleBadgeColorChange(defaultUnclaimedColor)}
                                 >
-                                    Default
+                                    {t("plugin.questify.settings.questButton.default")}
                                 </Button>
                                 <Button
-                                    className={q("button", "button-red")}
+                                    className={q("button", "button-red", "disable-quest-disable")}
                                     onClick={() => handleBadgeColorChange(null)}
                                 >
-                                    Disable
+                                    {t("plugin.questify.settings.questButton.disable")}
                                 </Button>
                             </div>
                         </div>
                         <div className={q("inline-group-item")}>
                             <Heading className={q("form-subtitle")}>
-                                Unclaimed Indicator
+                                {t("plugin.questify.settings.questButton.unclaimedIndicator")}
                             </Heading>
                             <RadioGroup
                                 value={(currentQuestButtonUnclaimed as any).value}
@@ -635,15 +636,14 @@ function QuestButtonSettings(): JSX.Element {
                     <div className={q("main-inline-group")}>
                         <section>
                             <Heading className={q("form-subtitle", "form-subtitle-spacier")}>
-                                Included Reward Types
+                                {t("plugin.questify.settings.questButton.includedRewardTypes")}
                             </Heading>
                             <Paragraph className={q("form-description")}>
-                                Only count Quests with these reward types as unclaimed when determining button
-                                visibility, badge count, and when playing the alert sound.
+                                {t("plugin.questify.settings.questButton.includedRewardTypesDesc")}
                             </Paragraph>
                             <DynamicDropdown
-                                placeholder="Select which reward types to include in the unclaimed count..."
-                                feedback="There's no supported Quest feature by that name."
+                                placeholder={t("plugin.questify.settings.questButton.selectRewardTypes")}
+                                feedback={t("plugin.questify.settings.questButton.noRewardType")}
                                 className={q("select")}
                                 maxVisibleItems={questButtonRewardDisplayOptions.length}
                                 clearable={true}
@@ -690,16 +690,16 @@ function DisableQuestsSetting(): JSX.Element {
     ]);
 
     const options: DynamicDropdownSettingOption[] = [
-        { label: "Disable Everything", value: "everything", selected: disableQuestsEverything, type: "disable" },
-        { label: "Disable Fetching Quests", value: "fetching", selected: disableQuestsFetchingQuests, type: "disable" },
-        { label: "Disable Discovery Quests Tab", value: "discovery", selected: disableQuestsDiscoveryTab, type: "disable" },
-        { label: "Disable Badge on User Profiles", value: "badge", selected: disableQuestsBadgeOnUserProfiles, type: "disable" },
-        { label: "Disable Popup Above User Panel", value: "popup", selected: disableQuestsPopupAboveAccountPanel, type: "disable" },
-        { label: "Disable Gift Inventory Relocation Notice", value: "inventory", selected: disableQuestsGiftInventoryRelocationNotice, type: "disable" },
-        { label: "Disable Friends List Active Now Promotion", value: "friends-list", selected: disableFriendsListActiveNowPromotion, type: "disable" },
-        { label: "Complete Game Quests in Background", value: "game-quests-background", selected: completeGameQuestsInBackground, type: "modification" },
-        { label: "Complete Video Quests in Background", value: "video-quests-background", selected: completeVideoQuestsInBackground, type: "modification" },
-        { label: "Make Mobile Quests Desktop Compatible", value: "mobile-desktop-compatible", selected: makeMobileQuestsDesktopCompatible, type: "modification" }
+        { label: t("plugin.questify.settings.disableOptions.everything"), value: "everything", selected: disableQuestsEverything, type: "disable" },
+        { label: t("plugin.questify.settings.disableOptions.fetching"), value: "fetching", selected: disableQuestsFetchingQuests, type: "disable" },
+        { label: t("plugin.questify.settings.disableOptions.discovery"), value: "discovery", selected: disableQuestsDiscoveryTab, type: "disable" },
+        { label: t("plugin.questify.settings.disableOptions.badge"), value: "badge", selected: disableQuestsBadgeOnUserProfiles, type: "disable" },
+        { label: t("plugin.questify.settings.disableOptions.popup"), value: "popup", selected: disableQuestsPopupAboveAccountPanel, type: "disable" },
+        { label: t("plugin.questify.settings.disableOptions.inventory"), value: "inventory", selected: disableQuestsGiftInventoryRelocationNotice, type: "disable" },
+        { label: t("plugin.questify.settings.disableOptions.friendsList"), value: "friends-list", selected: disableFriendsListActiveNowPromotion, type: "disable" },
+        { label: t("plugin.questify.settings.disableOptions.gameQuests"), value: "game-quests-background", selected: completeGameQuestsInBackground, type: "modification" },
+        { label: t("plugin.questify.settings.disableOptions.videoQuests"), value: "video-quests-background", selected: completeVideoQuestsInBackground, type: "modification" },
+        { label: t("plugin.questify.settings.disableOptions.mobileDesktop"), value: "mobile-desktop-compatible", selected: makeMobileQuestsDesktopCompatible, type: "modification" }
     ];
 
     const disableOptions = options.filter(option => option.type === "disable");
@@ -774,30 +774,32 @@ function DisableQuestsSetting(): JSX.Element {
             <div className={q("setting", "disable-quests-setting")}>
                 <section>
                     <Heading className={q("form-title")}>
-                        Quest Features
+                        {t("plugin.questify.settings.questFeatures.title")}
                     </Heading>
                     <Paragraph className={q("form-description")}>
-                        Modify specific Quest features.
+                        {t("plugin.questify.settings.questFeatures.description")}
                         <br /><br />
-                        The <span className={q("inline-code-block")}>Disable Quest Popup Above Account Panel</span> option
-                        will be ignored for completed Quests and Quest progress tracking.
+                        {tJsx("plugin.questify.settings.questFeatures.popupWarning", {
+                            disablePopup: <span className={q("inline-code-block")}>{t("plugin.questify.settings.questFeatures.disablePopup")}</span>
+                        })}
                         <br /><br />
-                        The <span className={q("inline-code-block")}>Complete Video Quests in Background</span> option
-                        will wait for the duration of the Video Quest and mark it as completed automatically.
+                        {tJsx("plugin.questify.settings.questFeatures.videoQuestInfo", {
+                            completeVideo: <span className={q("inline-code-block")}>{t("plugin.questify.settings.questFeatures.completeVideo")}</span>
+                        })}
                         <br /><br />
-                        Similarly, the <span className={q("inline-code-block")}>Complete Play Game Quests in Background</span> option
-                        will wait for the duration of the Game Quest and mark it as completed automatically. This option is only supported
-                        on the official desktop client.
+                        {tJsx("plugin.questify.settings.questFeatures.gameQuestInfo", {
+                            completeGame: <span className={q("inline-code-block")}>{t("plugin.questify.settings.questFeatures.completeGame")}</span>
+                        })}
                         <br /><br />
-                        You still must start the Quests manually. The first click will start the Quests in the background.
-                        For Video Quests, subsequent clicks will open the video modal as normal. To abort the Quests, you
-                        can open the context menu on the Quest tile and select <span className={q("inline-code-block")}>Stop Auto-Complete</span>.
+                        {tJsx("plugin.questify.settings.questFeatures.manualStartWarning", {
+                            stopAuto: <span className={q("inline-code-block")}>{t("plugin.questify.settings.questFeatures.stopAuto")}</span>
+                        })}
                         <br /><br />
-                        Using either of those options is against Discord's TOS. Use at your own risk.
+                        {t("plugin.questify.settings.questFeatures.tosWarning")}
                     </Paragraph>
                     <DynamicDropdown
-                        placeholder="Select which Quest features to modify."
-                        feedback="There's no supported Quest feature by that name."
+                        placeholder={t("plugin.questify.settings.questFeatures.selectFeatures")}
+                        feedback={t("plugin.questify.settings.questButton.noRewardType")}
                         className={q("select")}
                         maxVisibleItems={options.length}
                         clearable={true}
@@ -909,25 +911,25 @@ function RestyleQuestsSetting() {
 
     const colorPickers = [
         {
-            label: "Unclaimed",
+            label: t("plugin.questify.settings.restyleQuests.unclaimed"),
             idx: 0,
             defaultValue: defaultUnclaimedColor,
             value: unclaimedColor
         },
         {
-            label: "Claimed",
+            label: t("plugin.questify.settings.restyleQuests.claimed"),
             idx: 1,
             defaultValue: defaultClaimedColor,
             value: claimedColor
         },
         {
-            label: "Ignored",
+            label: t("plugin.questify.settings.restyleQuests.ignored"),
             idx: 2,
             defaultValue: defaultIgnoredColor,
             value: ignoredColor
         },
         {
-            label: "Expired",
+            label: t("plugin.questify.settings.restyleQuests.expired"),
             idx: 3,
             defaultValue: defaultExpiredColor,
             value: expiredColor
@@ -935,15 +937,15 @@ function RestyleQuestsSetting() {
     ];
 
     const gradientOptions = [
-        { label: "Intense Restyle Gradient", value: "intense" },
-        { label: "Default Restyle Gradient", value: "default" },
-        { label: "Subtle Black Gradient", value: "black" },
-        { label: "No Gradient", value: "hide" }
+        { label: t("plugin.questify.settings.restyleQuests.intenseGradient"), value: "intense" },
+        { label: t("plugin.questify.settings.restyleQuests.defaultGradient"), value: "default" },
+        { label: t("plugin.questify.settings.restyleQuests.blackGradient"), value: "black" },
+        { label: t("plugin.questify.settings.restyleQuests.noGradient"), value: "hide" }
     ];
 
     const preloadOptions = [
-        { label: "Load All Quest Assets On Page Load", value: true },
-        { label: "Load Quest Assets During Page Scroll", value: false }
+        { label: t("plugin.questify.settings.restyleQuests.loadAllAssets"), value: true },
+        { label: t("plugin.questify.settings.restyleQuests.loadDuringScroll"), value: false }
     ];
 
     return (
@@ -953,18 +955,18 @@ function RestyleQuestsSetting() {
                 <section>
                     <div>
                         <Heading className={q("form-title")}>
-                            Restyle Quests
+                            {t("plugin.questify.settings.restyleQuests.title")}
                         </Heading>
                         <Paragraph className={q("form-description")}>
-                            Highlight Quests with optional theme colors for visibility.
+                            {t("plugin.questify.settings.restyleQuests.description")}
                             <br /><br />
-                            Claimed and Expired Quest styles will take precedence even if a Quest is ignored.
+                            {t("plugin.questify.settings.restyleQuests.precedenceNote")}
                         </Paragraph>
                     </div>
                     <div className={q("main-inline-group")}>
                         <div className={q("gradient-setting-group", "inline-group-item", "flex-35")}>
                             <Heading className={q("form-subtitle")}>
-                                Gradient Style
+                                {t("plugin.questify.settings.restyleQuests.gradientStyle")}
                             </Heading>
                             <Select
                                 options={gradientOptions}
@@ -977,7 +979,7 @@ function RestyleQuestsSetting() {
                         </div>
                         <div className={q("preload-setting-group", "inline-group-item", "flex-65")}>
                             <Heading className={q("form-subtitle")}>
-                                Asset Preload
+                                {t("plugin.questify.settings.restyleQuests.assetPreload")}
                             </Heading>
                             <Select
                                 options={preloadOptions}
@@ -1009,13 +1011,13 @@ function RestyleQuestsSetting() {
                                             className={q("button", "wide-button", "button-blue")}
                                             onClick={() => handleRestyleChange(idx, defaultValue)}
                                         >
-                                            Default
+                                            {t("plugin.questify.settings.questButton.default")}
                                         </Button>
                                         <Button
                                             className={q("button", "wide-button", "button-red")}
                                             onClick={() => handleRestyleChange(idx, null)}
                                         >
-                                            Disable
+                                            {t("plugin.questify.settings.questButton.disable")}
                                         </Button>
                                     </div>
                                 </div>
@@ -1056,26 +1058,26 @@ function ReorderQuestsSetting(): JSX.Element {
 
     const getSubsortOptions = (source: string): SelectOption[] => {
         const baseOptions = [
-            { label: "Added (Newest)", value: "Recent DESC" },
-            { label: "Added (Oldest)", value: "Recent ASC" }
+            { label: t("plugin.questify.settings.reorderQuests.addedNewest"), value: "Recent DESC" },
+            { label: t("plugin.questify.settings.reorderQuests.addedOldest"), value: "Recent ASC" }
         ];
 
         if (source === "expired") {
             baseOptions.push(
-                { label: "Expired (Most Recent)", value: "Expiring DESC" },
-                { label: "Expired (Least Recent)", value: "Expiring ASC" }
+                { label: t("plugin.questify.settings.reorderQuests.expiredRecent"), value: "Expiring DESC" },
+                { label: t("plugin.questify.settings.reorderQuests.expiredLeast"), value: "Expiring ASC" }
             );
         } else if (source !== "claimed") {
             baseOptions.push(
-                { label: "Expiring (Soonest)", value: "Expiring ASC" },
-                { label: "Expiring (Latest)", value: "Expiring DESC" }
+                { label: t("plugin.questify.settings.reorderQuests.expiringSoon"), value: "Expiring ASC" },
+                { label: t("plugin.questify.settings.reorderQuests.expiringLate"), value: "Expiring DESC" }
             );
         }
 
         if (source === "claimed") {
             baseOptions.push(
-                { label: "Claimed (Most Recent)", value: "Claimed DESC" },
-                { label: "Claimed (Least Recent)", value: "Claimed ASC" }
+                { label: t("plugin.questify.settings.reorderQuests.claimedRecent"), value: "Claimed DESC" },
+                { label: t("plugin.questify.settings.reorderQuests.claimedLeast"), value: "Claimed ASC" }
             );
         }
 
@@ -1089,12 +1091,14 @@ function ReorderQuestsSetting(): JSX.Element {
                 <section>
                     <div>
                         <Heading className={q("form-title")}>
-                            Reorder Quests
+                            {t("plugin.questify.settings.reorderQuests.title")}
                         </Heading>
                         <Paragraph className={q("form-description")}>
-                            Sort Quests by their status. Applied when the "Questify" sort option is selected on the Quest page.
+                            {t("plugin.questify.settings.reorderQuests.description")}
                             <br /><br />
-                            Comma-separated list must contain all of: <span className={q("inline-code-block")}>UNCLAIMED, CLAIMED, IGNORED, EXPIRED</span>.
+                            {tJsx("plugin.questify.settings.reorderQuests.formatNote", {
+                                items: <span className={q("inline-code-block")}>UNCLAIMED, CLAIMED, IGNORED, EXPIRED</span>
+                            })}
                         </Paragraph>
                     </div>
                     <div>
@@ -1114,11 +1118,11 @@ function ReorderQuestsSetting(): JSX.Element {
                                     settings.store.reorderQuests = cleaned;
                                 }
                             }}
-                            placeholder="You must include all of UNCLAIMED, CLAIMED, IGNORED, EXPIRED"
+                            placeholder={t("plugin.questify.settings.reorderQuests.placeholder")}
                             error={
                                 validCommaSeparatedList(reorderQuests, ["UNCLAIMED", "CLAIMED", "IGNORED", "EXPIRED"], false, true, true, false)
                                     ? undefined
-                                    : "Invalid format."
+                                    : t("plugin.questify.settings.reorderQuests.invalidFormat")
                             }
                         >
                         </TextInput>
@@ -1126,7 +1130,7 @@ function ReorderQuestsSetting(): JSX.Element {
                     <div className={q("main-inline-group")}>
                         <div className={q("inline-group-item")}>
                             <Heading className={q("form-subtitle")}>
-                                Unclaimed Subsort
+                                {t("plugin.questify.settings.reorderQuests.unclaimedSubsort")}
                             </Heading>
                             <Select
                                 options={getSubsortOptions("unclaimed")}
@@ -1141,7 +1145,7 @@ function ReorderQuestsSetting(): JSX.Element {
                         </div>
                         <div className={q("inline-group-item")}>
                             <Heading className={q("form-subtitle")}>
-                                Claimed Subsort
+                                {t("plugin.questify.settings.reorderQuests.claimedSubsort")}
                             </Heading>
                             <Select
                                 options={getSubsortOptions("claimed")}
@@ -1158,7 +1162,7 @@ function ReorderQuestsSetting(): JSX.Element {
                     <div className={q("main-inline-group")}>
                         <div className={q("inline-group-item")}>
                             <Heading className={q("form-subtitle")}>
-                                Ignored Subsort
+                                {t("plugin.questify.settings.reorderQuests.ignoredSubsort")}
                             </Heading>
                             <Select
                                 options={getSubsortOptions("ignored")}
@@ -1173,7 +1177,7 @@ function ReorderQuestsSetting(): JSX.Element {
                         </div>
                         <div className={q("inline-group-item")}>
                             <Heading className={q("form-subtitle")}>
-                                Expired Subsort
+                                {t("plugin.questify.settings.reorderQuests.expiredSubsort")}
                             </Heading>
                             <Select
                                 options={getSubsortOptions("expired")}
@@ -1190,12 +1194,12 @@ function ReorderQuestsSetting(): JSX.Element {
                     <div className={q("main-inline-group")}>
                         <div className={q("inline-group-item")}>
                             <Heading className={q("form-subtitle")}>
-                                Ignored Quest Profile
+                                {t("plugin.questify.settings.reorderQuests.ignoredQuestProfile")}
                             </Heading>
                             <Select
                                 options={[
-                                    { label: "Shared: All accounts on this client share ignores.", value: "shared" },
-                                    { label: "Private: All accounts on this client have separate ignores.", value: "private" }
+                                    { label: t("plugin.questify.settings.reorderQuests.sharedProfile"), value: "shared" },
+                                    { label: t("plugin.questify.settings.reorderQuests.privateProfile"), value: "private" }
                                 ]}
                                 className={q("select")}
                                 popoutPosition="bottom"
@@ -1208,12 +1212,12 @@ function ReorderQuestsSetting(): JSX.Element {
                     <div className={q("main-inline-group")}>
                         <div className={q("inline-group-item")}>
                             <Heading className={q("form-subtitle")}>
-                                Remember Sort Choice
+                                {t("plugin.questify.settings.reorderQuests.rememberSort")}
                             </Heading>
                             <Select
                                 options={[
-                                    { label: "Yes", value: true },
-                                    { label: "No", value: false }
+                                    { label: t("plugin.questify.settings.reorderQuests.yes"), value: true },
+                                    { label: t("plugin.questify.settings.reorderQuests.no"), value: false }
                                 ]}
                                 className={q("select")}
                                 popoutPosition="bottom"
@@ -1224,12 +1228,12 @@ function ReorderQuestsSetting(): JSX.Element {
                         </div>
                         <div className={q("inline-group-item")}>
                             <Heading className={q("form-subtitle")}>
-                                Remember Filter Choice
+                                {t("plugin.questify.settings.reorderQuests.rememberFilter")}
                             </Heading>
                             <Select
                                 options={[
-                                    { label: "Yes", value: true },
-                                    { label: "No", value: false }
+                                    { label: t("plugin.questify.settings.reorderQuests.yes"), value: true },
+                                    { label: t("plugin.questify.settings.reorderQuests.no"), value: false }
                                 ]}
                                 className={q("select")}
                                 popoutPosition="bottom"
@@ -1241,9 +1245,7 @@ function ReorderQuestsSetting(): JSX.Element {
                     </div>
                     <div className={q("main-inline-group")}>
                         <Paragraph className={q("form-description")}>
-                            This sort and filter choice refers to the built-in sort and filter options on the Quest page.
-                            The custom sorting above is only applied when the "Questify" sort option is selected on the Quest page.
-                            If remembering is disabled, the sort or filter options will be reset each time you open the Quest page.
+                            {t("plugin.questify.settings.reorderQuests.rememberNote")}
                         </Paragraph>
                     </div>
                 </section>
@@ -1262,17 +1264,17 @@ function FetchingQuestsSetting(): JSX.Element {
     ]);
 
     const allowedScales: Record<string, { singular: string; plural: string; multiplier: number; }> = {
-        minutes: { singular: "Minute", plural: "Minutes", multiplier: 60 },
-        hours: { singular: "Hour", plural: "Hours", multiplier: 60 * 60 },
+        minutes: { singular: t("plugin.questify.settings.fetchingQuests.minute"), plural: t("plugin.questify.settings.fetchingQuests.minutes"), multiplier: 60 },
+        hours: { singular: t("plugin.questify.settings.fetchingQuests.hour"), plural: t("plugin.questify.settings.fetchingQuests.hours"), multiplier: 60 * 60 },
     };
 
     const resolvedIntervals: SelectOption[] = [
-        { value: 0, label: "Disabled" },
-        { value: 60 * 30, label: "30 Minutes" },
-        { value: 60 * 60, label: "1 Hour" },
-        { value: 60 * 60 * 2, label: "3 Hours" },
-        { value: 60 * 60 * 4, label: "6 Hours" },
-        { value: 60 * 60 * 6, label: "12 Hours" },
+        { value: 0, label: t("plugin.questify.settings.fetchingQuests.disabled") },
+        { value: 60 * 30, label: t("plugin.questify.settings.fetchingQuests.30minutes") },
+        { value: 60 * 60, label: t("plugin.questify.settings.fetchingQuests.1hour") },
+        { value: 60 * 60 * 2, label: t("plugin.questify.settings.fetchingQuests.3hours") },
+        { value: 60 * 60 * 4, label: t("plugin.questify.settings.fetchingQuests.6hours") },
+        { value: 60 * 60 * 6, label: t("plugin.questify.settings.fetchingQuests.12hours") },
     ];
 
     const resolvedSounds: SelectOption[] = defaultAudioNames().map(sound => {
@@ -1314,7 +1316,7 @@ function FetchingQuestsSetting(): JSX.Element {
             ?.replace(/_/g, " ")
             .replace(/\w\S*/g, word =>
                 word.toUpperCase()
-            ) || "CUSTOM SOUND";
+            ) || t("plugin.questify.settings.fetchingQuests.customSound");
 
         return {
             value: value,
@@ -1467,32 +1469,38 @@ function FetchingQuestsSetting(): JSX.Element {
                 <section>
                     <div>
                         <Heading className={q("form-title")}>
-                            Fetching Quests
+                            {t("plugin.questify.settings.fetchingQuests.title")}
                         </Heading>
                         <Paragraph className={q("form-description")}>
-                            Configure how often to fetch Quests from Discord and set up alerts for new Quests.
+                            {t("plugin.questify.settings.fetchingQuests.description")}
                             <br /><br />
-                            By default, Discord only fetches Quests on load and when visiting the Quests page.
-                            This means that without a fetch interval defined below, this plugin will become unaware
-                            of new Quests added throughout the day.
+                            {t("plugin.questify.settings.fetchingQuests.defaultBehavior")}
                             <br /><br />
-                            This relies on the Quest Button being enabled and set to either <span className={q("inline-code-block")}>Unclaimed</span>, or set to <span className={q("inline-code-block")}>Always</span> with
-                            unclaimed <span className={q("inline-code-block")}>Pill</span>, <span className={q("inline-code-block")}>Badge</span>, or <span className={q("inline-code-block")}>Both</span> indicators enabled. Otherwise, there is no reason to periodically fetch Quests.
+                            {tJsx("plugin.questify.settings.fetchingQuests.requirement", {
+                                unclaimed: <span className={q("inline-code-block")}>{t("plugin.questify.settings.options.unclaimed")}</span>,
+                                always: <span className={q("inline-code-block")}>{t("plugin.questify.settings.options.always")}</span>,
+                                pill: <span className={q("inline-code-block")}>{t("plugin.questify.settings.options.pill")}</span>,
+                                badge: <span className={q("inline-code-block")}>{t("plugin.questify.settings.options.badge")}</span>,
+                                both: <span className={q("inline-code-block")}>{t("plugin.questify.settings.options.both")}</span>
+                            })}
                             <br /><br />
-                            Also, if <span className={q("inline-code-block")}>Fetching Quests</span> is blocked in the <span className={q("inline-code-block")}>Quest Features</span> setting, this will not work.
+                            {tJsx("plugin.questify.settings.fetchingQuests.blockWarning", {
+                                questFeatures: <span className={q("inline-code-block")}>{t("plugin.questify.settings.questFeatures.title")}</span>,
+                                fetchingQuests: <span className={q("inline-code-block")}>{t("plugin.questify.settings.fetchingQuests.title")}</span>
+                            })}
                         </Paragraph>
                     </div>
                     <div>
                         <div>
                             <Heading className={q("form-subtitle", "form-subtitle-spacier")}>
-                                Fetch Interval
+                                {t("plugin.questify.settings.fetchingQuests.fetchInterval")}
                             </Heading>
                         </div>
                         <div>
                             <DynamicDropdown
                                 filter={(options, query) => options}
-                                placeholder="Select or type an interval between 30 minutes and 12 hours."
-                                feedback="Intervals must be between 30 minutes and 12 hours."
+                                placeholder={t("plugin.questify.settings.fetchingQuests.intervalPlaceholder")}
+                                feedback={t("plugin.questify.settings.fetchingQuests.intervalFeedback")}
                                 className={q("select")}
                                 maxVisibleItems={resolvedIntervals.length + 1}
                                 clearable={false}
@@ -1516,15 +1524,15 @@ function FetchingQuestsSetting(): JSX.Element {
                     <div>
                         <div>
                             <Heading className={q("form-subtitle", "form-subtitle-spacier")}>
-                                Alert Sound
+                                {t("plugin.questify.settings.fetchingQuests.alertSound")}
                             </Heading>
                         </div>
                         <div className={q("sub-inline-group")}>
                             <div className={q("inline-group-item")}>
                                 <DynamicDropdown
                                     filter={(options, query) => options}
-                                    placeholder="Select a sound or provide a custom sound URL."
-                                    feedback="Sound not found, or URL is not from a supported domain."
+                                    placeholder={t("plugin.questify.settings.fetchingQuests.soundPlaceholder")}
+                                    feedback={t("plugin.questify.settings.fetchingQuests.soundFeedback")}
                                     className={q("select")}
                                     clearable={true}
                                     multi={false}
@@ -1571,59 +1579,106 @@ export const settings = definePluginSettings({
     disableQuests: {
         type: OptionType.COMPONENT,
         component: DisableQuestsSetting,
-        description: "Select which Quest features to disable."
+        get description() {
+            return t("plugin.questify.option.disableQuests.description");
+        }
     },
     disableQuestsEverything: {
         type: OptionType.BOOLEAN,
-        description: "Disable all Quest features.",
+        get label() {
+            return t("plugin.questify.option.disableQuestsEverything.label");
+        },
+        get description() {
+            return t("plugin.questify.option.disableQuestsEverything.description");
+        },
         default: false,
         hidden: true
     },
     disableQuestsFetchingQuests: {
         type: OptionType.BOOLEAN,
-        description: "Disable fetching Quests from Discord.",
+        get label() {
+            return t("plugin.questify.option.disableQuestsFetchingQuests.label");
+        },
+        get description() {
+            return t("plugin.questify.option.disableQuestsFetchingQuests.description");
+        },
         default: false,
         hidden: true
     },
     disableQuestsDiscoveryTab: {
         type: OptionType.BOOLEAN,
-        description: "Disable Quest tab in the Discovery page.",
+        get label() {
+            return t("plugin.questify.option.disableQuestsDiscoveryTab.label");
+        },
+        get description() {
+            return t("plugin.questify.option.disableQuestsDiscoveryTab.description");
+        },
         default: false,
         hidden: true
     },
     disableQuestsPopupAboveAccountPanel: {
         type: OptionType.BOOLEAN,
-        description: "Disable the Quest popup above your account panel.",
+        get label() {
+            return t("plugin.questify.option.disableQuestsPopupAboveAccountPanel.label");
+        },
+        get description() {
+            return t("plugin.questify.option.disableQuestsPopupAboveAccountPanel.description");
+        },
         default: true,
         hidden: true
     },
     disableQuestsBadgeOnUserProfiles: {
         type: OptionType.BOOLEAN,
-        description: "Disable the Quest badge on user profiles.",
+        get label() {
+            return t("plugin.questify.option.disableQuestsBadgeOnUserProfiles.label");
+        },
+        get description() {
+            return t("plugin.questify.option.disableQuestsBadgeOnUserProfiles.description");
+        },
         default: false,
         hidden: true
     },
     disableQuestsGiftInventoryRelocationNotice: {
         type: OptionType.BOOLEAN,
-        description: "Disable the gift inventory Quest relocation notice.",
+        get label() {
+            return t("plugin.questify.option.disableQuestsGiftInventoryRelocationNotice.label");
+        },
+        get description() {
+            return t("plugin.questify.option.disableQuestsGiftInventoryRelocationNotice.description");
+        },
         default: true,
         hidden: true
     },
     disableFriendsListActiveNowPromotion: {
         type: OptionType.BOOLEAN,
-        description: "Disable the promotion of Quests for games played by friends.",
+        get label() {
+            return t("plugin.questify.option.disableFriendsListActiveNowPromotion.label");
+        },
+        get description() {
+            return t("plugin.questify.option.disableFriendsListActiveNowPromotion.description");
+        },
         default: true,
         hidden: true
     },
     makeMobileQuestsDesktopCompatible: {
         type: OptionType.BOOLEAN,
-        description: "Make mobile-only Quests compatible with desktop.",
+        get label() {
+            return t("plugin.questify.option.makeMobileQuestsDesktopCompatible.label");
+        },
+        get description() {
+            return t("plugin.questify.option.makeMobileQuestsDesktopCompatible.description");
+        },
         default: true,
         hidden: true
     },
     completeVideoQuestsInBackground: {
         type: OptionType.BOOLEAN,
-        description: "Complete Video Quests in the background after the video duration has passed.",
+        get label() {
+            return t("plugin.questify.option.completeVideoQuestsInBackground.label");
+        },
+        get description() {
+            return t("plugin.questify.option.completeVideoQuestsInBackground.description");
+        },
         default: false,
         hidden: true,
         onChange: (value: boolean) => {
@@ -1642,7 +1697,12 @@ export const settings = definePluginSettings({
     },
     completeGameQuestsInBackground: {
         type: OptionType.BOOLEAN,
-        description: "Complete Game Quests in the background after the game duration has passed.",
+        get label() {
+            return t("plugin.questify.option.completeGameQuestsInBackground.label");
+        },
+        get description() {
+            return t("plugin.questify.option.completeGameQuestsInBackground.description");
+        },
         default: false,
         hidden: true,
         onChange: (value: boolean) => {
@@ -1662,213 +1722,381 @@ export const settings = definePluginSettings({
     questButton: {
         type: OptionType.COMPONENT,
         component: QuestButtonSettings,
-        description: "Show a Quest button in the server list."
+        get description() {
+            return t("plugin.questify.option.questButton.description");
+        }
     },
     questButtonDisplay: {
         type: OptionType.STRING,
-        description: "Which display type to use for the Quest button in the server list.",
+        get label() {
+            return t("plugin.questify.option.questButtonDisplay.label");
+        },
+        get description() {
+            return t("plugin.questify.option.questButtonDisplay.description");
+        },
         default: defaultQuestButtonDisplay, // "always", "unclaimed", "never"
         hidden: true,
     },
     questRewardIncludeRewardCode: {
         type: OptionType.BOOLEAN,
-        description: "Include Quests with Reward Codes when displaying Quest counts.",
+        get label() {
+            return t("plugin.questify.option.questRewardIncludeRewardCode.label");
+        },
+        get description() {
+            return t("plugin.questify.option.questRewardIncludeRewardCode.description");
+        },
         default: true,
         hidden: true,
     },
     questRewardIncludeNitroCode: {
         type: OptionType.BOOLEAN,
-        description: "Include Quests with Nitro Codes when displaying Quest counts.",
+        get label() {
+            return t("plugin.questify.option.questRewardIncludeNitroCode.label");
+        },
+        get description() {
+            return t("plugin.questify.option.questRewardIncludeNitroCode.description");
+        },
         default: true,
         hidden: true,
     },
     questRewardIncludeInGame: {
         type: OptionType.BOOLEAN,
-        description: "Include Quests with In-Game rewards when displaying Quest counts.",
+        get label() {
+            return t("plugin.questify.option.questRewardIncludeInGame.label");
+        },
+        get description() {
+            return t("plugin.questify.option.questRewardIncludeInGame.description");
+        },
         default: true,
         hidden: true,
     },
     questRewardIncludeCollectibles: {
         type: OptionType.BOOLEAN,
-        description: "Include Quests with Collectibles when displaying Quest counts.",
+        get label() {
+            return t("plugin.questify.option.questRewardIncludeCollectibles.label");
+        },
+        get description() {
+            return t("plugin.questify.option.questRewardIncludeCollectibles.description");
+        },
         default: true,
         hidden: true,
     },
     questRewardIncludeOrbs: {
         type: OptionType.BOOLEAN,
-        description: "Include Quests with Orbs when displaying Quest counts.",
+        get label() {
+            return t("plugin.questify.option.questRewardIncludeOrbs.label");
+        },
+        get description() {
+            return t("plugin.questify.option.questRewardIncludeOrbs.description");
+        },
         default: true,
         hidden: true,
     },
     questButtonUnclaimed: {
         type: OptionType.STRING,
-        description: "Which display type to use for the unclaimed indicator on the Quest button in the server list.",
+        get label() {
+            return t("plugin.questify.option.questButtonUnclaimed.label");
+        },
+        get description() {
+            return t("plugin.questify.option.questButtonUnclaimed.description");
+        },
         default: defaultQuestButtonUnclaimed, // "pill", "badge", "both", "none"
         hidden: true,
     },
     questButtonBadgeColor: {
         type: OptionType.NUMBER | OptionType.CUSTOM,
-        description: "The color of the Quest button badge in the server list.",
+        get label() {
+            return t("plugin.questify.option.questButtonBadgeColor.label");
+        },
+        get description() {
+            return t("plugin.questify.option.questButtonBadgeColor.description");
+        },
         default: defaultUnclaimedColor, // Decimal, null (Discord Default)
         hidden: true
     },
     questButtonLeftClickAction: {
         type: OptionType.STRING,
-        description: "The action to perform when left-clicking the Quest button in the server list.",
+        get label() {
+            return t("plugin.questify.option.questButtonLeftClickAction.label");
+        },
+        get description() {
+            return t("plugin.questify.option.questButtonLeftClickAction.description");
+        },
         default: defaultLeftClickAction, // "open-quests", "context-menu", "plugin-settings", "nothing"
         hidden: true
     },
     questButtonMiddleClickAction: {
         type: OptionType.STRING,
-        description: "The action to perform when middle-clicking the Quest button in the server list.",
+        get label() {
+            return t("plugin.questify.option.questButtonMiddleClickAction.label");
+        },
+        get description() {
+            return t("plugin.questify.option.questButtonMiddleClickAction.description");
+        },
         default: defaultMiddleClickAction, // "open-quests", "context-menu", "plugin-settings", "nothing"
         hidden: true
     },
     questButtonRightClickAction: {
         type: OptionType.STRING,
-        description: "The action to perform when right-clicking the Quest button in the server list.",
+        get label() {
+            return t("plugin.questify.option.questButtonRightClickAction.label");
+        },
+        get description() {
+            return t("plugin.questify.option.questButtonRightClickAction.description");
+        },
         default: defaultRightClickAction, // "open-quests", "context-menu", "plugin-settings", "nothing"
         hidden: true
     },
     fetchingQuests: {
         type: OptionType.COMPONENT,
         component: FetchingQuestsSetting,
-        description: "Fetch Quests from Discord."
+        get description() {
+            return t("plugin.questify.option.fetchingQuests.description");
+        }
     },
     fetchingQuestsInterval: {
         type: OptionType.NUMBER | OptionType.CUSTOM,
-        description: "The interval in seconds to fetch Quests from Discord.",
+        get label() {
+            return t("plugin.questify.option.fetchingQuestsInterval.label");
+        },
+        get description() {
+            return t("plugin.questify.option.fetchingQuestsInterval.description");
+        },
         default: 2700, // Digit >= 0, null (Disabled)
         hidden: true
     },
     fetchingQuestsAlert: {
         type: OptionType.STRING | OptionType.CUSTOM,
-        description: "The sound to play when new Quests are detected.",
+        get label() {
+            return t("plugin.questify.option.fetchingQuestsAlert.label");
+        },
+        get description() {
+            return t("plugin.questify.option.fetchingQuestsAlert.description");
+        },
         default: defaultFetchQuestsAlert, // Item from predefined list or a URL to CSP valid audio file.
         hidden: true
     },
     restyleQuests: {
         type: OptionType.COMPONENT,
         component: RestyleQuestsSetting,
-        description: "Customize the appearance of Quest tiles in the Quests page."
+        get description() {
+            return t("plugin.questify.option.restyleQuests.description");
+        }
     },
     restyleQuestsUnclaimed: {
         type: OptionType.NUMBER | OptionType.CUSTOM,
-        description: "The color of unclaimed Quest tiles in the Quests page.",
+        get label() {
+            return t("plugin.questify.option.restyleQuestsUnclaimed.label");
+        },
+        get description() {
+            return t("plugin.questify.option.restyleQuestsUnclaimed.description");
+        },
         default: defaultUnclaimedColor, // Decimal, null (Discord Default)
         hidden: true
     },
     restyleQuestsClaimed: {
         type: OptionType.NUMBER | OptionType.CUSTOM,
-        description: "The color of claimed Quest tiles in the Quests page.",
+        get label() {
+            return t("plugin.questify.option.restyleQuestsClaimed.label");
+        },
+        get description() {
+            return t("plugin.questify.option.restyleQuestsClaimed.description");
+        },
         default: defaultClaimedColor, // Decimal, null (Discord Default)
         hidden: true
     },
     restyleQuestsIgnored: {
         type: OptionType.NUMBER | OptionType.CUSTOM,
-        description: "The color of ignored Quest tiles in the Quests page.",
+        get label() {
+            return t("plugin.questify.option.restyleQuestsIgnored.label");
+        },
+        get description() {
+            return t("plugin.questify.option.restyleQuestsIgnored.description");
+        },
         default: defaultIgnoredColor, // Decimal, null (Discord Default)
         hidden: true
     },
     restyleQuestsExpired: {
         type: OptionType.NUMBER | OptionType.CUSTOM,
-        description: "The color of expired Quest tiles in the Quests page.",
+        get label() {
+            return t("plugin.questify.option.restyleQuestsExpired.label");
+        },
+        get description() {
+            return t("plugin.questify.option.restyleQuestsExpired.description");
+        },
         default: defaultExpiredColor, // Decimal, null (Discord Default)
         hidden: true
     },
     restyleQuestsGradient: {
         type: OptionType.STRING,
-        description: "Style of the gradient used in the Quest tiles.",
+        get label() {
+            return t("plugin.questify.option.restyleQuestsGradient.label");
+        },
+        get description() {
+            return t("plugin.questify.option.restyleQuestsGradient.description");
+        },
         default: defaultRestyleQuestsGradient, // "intense", "default", "black", "hide"
         hidden: true
     },
     restyleQuestsPreload: {
         type: OptionType.BOOLEAN,
-        description: "Attempt to preload the assets for the Quest tiles.",
+        get label() {
+            return t("plugin.questify.option.restyleQuestsPreload.label");
+        },
+        get description() {
+            return t("plugin.questify.option.restyleQuestsPreload.description");
+        },
         default: true,
         hidden: true
     },
     reorderQuests: {
         type: OptionType.COMPONENT,
-        description: "Sort Quests by their status. Leave empty for default sorting. Comma-separated list must contain all of: UNCLAIMED, CLAIMED, IGNORED, EXPIRED.",
+        get description() {
+            return t("plugin.questify.option.reorderQuests.description");
+        },
         default: defaultQuestOrder,
         component: ReorderQuestsSetting,
     },
     unclaimedSubsort: {
         type: OptionType.STRING,
-        description: "Subsort method for unclaimed Quests.",
+        get label() {
+            return t("plugin.questify.option.unclaimedSubsort.label");
+        },
+        get description() {
+            return t("plugin.questify.option.unclaimedSubsort.description");
+        },
         default: "Expiring ASC", // "Recent ASC", "Recent DESC", "Expiring ASC", "Expiring DESC"
         hidden: true
     },
     claimedSubsort: {
         type: OptionType.STRING,
-        description: "Subsort method for claimed Quests.",
+        get label() {
+            return t("plugin.questify.option.claimedSubsort.label");
+        },
+        get description() {
+            return t("plugin.questify.option.claimedSubsort.description");
+        },
         default: "Claimed DESC", // "Recent ASC", "Recent DESC", "Claimed ASC", "Claimed DESC"
         hidden: true
     },
     ignoredSubsort: {
         type: OptionType.STRING,
-        description: "Subsort method for ignored Quests.",
+        get label() {
+            return t("plugin.questify.option.ignoredSubsort.label");
+        },
+        get description() {
+            return t("plugin.questify.option.ignoredSubsort.description");
+        },
         default: "Recent DESC", // "Recent ASC", "Recent DESC", "Expiring ASC", "Expiring DESC"
         hidden: true
     },
     expiredSubsort: {
         type: OptionType.STRING,
-        description: "Subsort method for expired Quests.",
+        get label() {
+            return t("plugin.questify.option.expiredSubsort.label");
+        },
+        get description() {
+            return t("plugin.questify.option.expiredSubsort.description");
+        },
         default: "Expiring DESC", // "Recent ASC", "Recent DESC", "Expiring ASC", "Expiring DESC"
         hidden: true
     },
     unclaimedUnignoredQuests: {
         type: OptionType.NUMBER,
-        description: "Tracks the number of unclaimed and unignored Quests.",
+        get label() {
+            return t("plugin.questify.option.unclaimedUnignoredQuests.label");
+        },
+        get description() {
+            return t("plugin.questify.option.unclaimedUnignoredQuests.description");
+        },
         default: 0, // Digit >= 0
         hidden: true
     },
     onQuestsPage: {
         type: OptionType.BOOLEAN,
-        description: "Whether the user is currently on the Quests page.",
+        get label() {
+            return t("plugin.questify.option.onQuestsPage.label");
+        },
+        get description() {
+            return t("plugin.questify.option.onQuestsPage.description");
+        },
         default: false,
         hidden: true
     },
     triggerQuestsRerender: {
         type: OptionType.BOOLEAN,
-        description: "Trigger a rerender of the Quests page by toggling this setting.",
+        get label() {
+            return t("plugin.questify.option.triggerQuestsRerender.label");
+        },
+        get description() {
+            return t("plugin.questify.option.triggerQuestsRerender.description");
+        },
         default: false,
         hidden: true
     },
     ignoredQuestProfile: {
         type: OptionType.STRING,
-        description: "The profile used for ignored Quests.",
+        get label() {
+            return t("plugin.questify.option.ignoredQuestProfile.label");
+        },
+        get description() {
+            return t("plugin.questify.option.ignoredQuestProfile.description");
+        },
         default: "private", // "shared", "private"
         hidden: true
     },
     rememberQuestPageSort: {
         type: OptionType.BOOLEAN,
-        description: "Remember the last used sort on the Quests page.",
+        get label() {
+            return t("plugin.questify.option.rememberQuestPageSort.label");
+        },
+        get description() {
+            return t("plugin.questify.option.rememberQuestPageSort.description");
+        },
         default: true,
         hidden: true
     },
     rememberQuestPageFilters: {
         type: OptionType.BOOLEAN,
-        description: "Remember the last used filters on the Quests page.",
+        get label() {
+            return t("plugin.questify.option.rememberQuestPageFilters.label");
+        },
+        get description() {
+            return t("plugin.questify.option.rememberQuestPageFilters.description");
+        },
         default: true,
         hidden: true
     },
     lastQuestPageSort: {
         type: OptionType.STRING,
-        description: "Remember the last used sort on the Quests page.",
+        get label() {
+            return t("plugin.questify.option.lastQuestPageSort.label");
+        },
+        get description() {
+            return t("plugin.questify.option.lastQuestPageSort.description");
+        },
         default: "questify" as string, // sort key
         hidden: true
     },
     lastQuestPageFilters: {
         type: OptionType.CUSTOM,
-        description: "Remember the last used filters on the Quests page.",
+        get label() {
+            return t("plugin.questify.option.lastQuestPageFilters.label");
+        },
+        get description() {
+            return t("plugin.questify.option.lastQuestPageFilters.description");
+        },
         default: {} as { [filter: string]: { group: string, filter: string; }; }, // Array of filters
         hidden: true
     },
     ignoredQuestIDs: {
         type: OptionType.CUSTOM,
-        description: "An array of Quest IDs that are ignored.",
+        get label() {
+            return t("plugin.questify.option.ignoredQuestIDs.label");
+        },
+        get description() {
+            return t("plugin.questify.option.ignoredQuestIDs.description");
+        },
         default: {} as Record<string, string[]>,
         hidden: true,
     }

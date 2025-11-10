@@ -5838,6 +5838,338 @@
             "description": "Prevent the quests player from pausing and possibly skip it all together.",
             "about": "You might need to spam left mouse button on the video to skip it."
         },
+        "questify": {
+            "name": "Questify",
+            "description": "Enhance your Quest experience with a suite of features, or disable them entirely if they're not your thing.",
+            "quests": "Quests",
+            "context": {
+                "quest": {
+                    "label": "Quest Button Menu",
+                    "ignored": "Mark All Ignored",
+                    "reset": "Reset Ignored List",
+                    "fetch": "Fetch Quests",
+                    "markAsIgnored": "Mark as Ignored",
+                    "unmarkAsIgnored": "Unmark as Ignored",
+                    "stopAuto": "Stop Auto-Complete"
+                }
+            },
+            "settings": {
+                "questButton": {
+                    "title": "Quest Button",
+                    "description": "Show a Quest button in the server list with an optional indicator for unclaimed Quests.",
+                    "leftClick": "Left Click Action",
+                    "middleClick": "Middle Click Action",
+                    "rightClick": "Right Click Action",
+                    "visibility": "Button Visibility",
+                    "unclaimedIndicator": "Unclaimed Indicator",
+                    "badgeColor": "Badge Color",
+                    "rewardDisplay": "Reward Display",
+                    "includedRewardTypes": "Included Reward Types",
+                    "includedRewardTypesDesc": "Only count Quests with these reward types as unclaimed when determining button visibility, badge count, and when playing the alert sound.",
+                    "selectRewardTypes": "Select which reward types to include in the unclaimed count...",
+                    "noRewardType": "There's no supported Quest feature by that name.",
+                    "default": "Default",
+                    "disable": "Disable"
+                },
+                "questFeatures": {
+                    "title": "Quest Features",
+                    "description": "Modify specific Quest features.",
+                    "popupWarning": "The {{disablePopup}} option will be ignored for completed Quests and Quest progress tracking.",
+                    "videoQuestInfo": "The {{completeVideo}} option will wait for the duration of the Video Quest and mark it as completed automatically.",
+                    "gameQuestInfo": "Similarly, the {{completeGame}} option will wait for the duration of the Game Quest and mark it as completed automatically. This option is only supported on the official desktop client.",
+                    "manualStartWarning": "You still must start the Quests manually. The first click will start the Quests in the background. For Video Quests, subsequent clicks will open the video modal as normal. To abort the Quests, you can open the context menu on the Quest tile and select {{stopAuto}}.",
+                    "tosWarning": "Using either of those options is against Discord's TOS. Use at your own risk.",
+                    "selectFeatures": "Select which Quest features to modify.",
+                    "disablePopup": "Disable Quest Popup Above Account Panel",
+                    "completeVideo": "Complete Video Quests in Background",
+                    "completeGame": "Complete Play Game Quests in Background",
+                    "stopAuto": "Stop Auto-Complete"
+                },
+                "restyleQuests": {
+                    "title": "Restyle Quests",
+                    "description": "Highlight Quests with optional theme colors for visibility.",
+                    "precedenceNote": "Claimed and Expired Quest styles will take precedence even if a Quest is ignored.",
+                    "gradientStyle": "Gradient Style",
+                    "assetPreload": "Asset Preload",
+                    "unclaimed": "Unclaimed",
+                    "claimed": "Claimed",
+                    "ignored": "Ignored",
+                    "expired": "Expired",
+                    "intenseGradient": "Intense Restyle Gradient",
+                    "defaultGradient": "Default Restyle Gradient",
+                    "blackGradient": "Subtle Black Gradient",
+                    "noGradient": "No Gradient",
+                    "loadAllAssets": "Load All Quest Assets On Page Load",
+                    "loadDuringScroll": "Load Quest Assets During Page Scroll"
+                },
+                "reorderQuests": {
+                    "title": "Reorder Quests",
+                    "description": "Sort Quests by their status. Applied when the \"Questify\" sort option is selected on the Quest page.",
+                    "formatNote": "Comma-separated list must contain all of: {{items}}.",
+                    "placeholder": "You must include all of UNCLAIMED, CLAIMED, IGNORED, EXPIRED",
+                    "invalidFormat": "Invalid format.",
+                    "unclaimedSubsort": "Unclaimed Subsort",
+                    "claimedSubsort": "Claimed Subsort",
+                    "ignoredSubsort": "Ignored Subsort",
+                    "expiredSubsort": "Expired Subsort",
+                    "addedNewest": "Added (Newest)",
+                    "addedOldest": "Added (Oldest)",
+                    "expiredRecent": "Expired (Most Recent)",
+                    "expiredLeast": "Expired (Least Recent)",
+                    "expiringSoon": "Expiring (Soonest)",
+                    "expiringLate": "Expiring (Latest)",
+                    "claimedRecent": "Claimed (Most Recent)",
+                    "claimedLeast": "Claimed (Least Recent)",
+                    "ignoredQuestProfile": "Ignored Quest Profile",
+                    "sharedProfile": "Shared: All accounts on this client share ignores.",
+                    "privateProfile": "Private: All accounts on this client have separate ignores.",
+                    "rememberSort": "Remember Sort Choice",
+                    "rememberFilter": "Remember Filter Choice",
+                    "yes": "Yes",
+                    "no": "No",
+                    "rememberNote": "This sort and filter choice refers to the built-in sort and filter options on the Quest page. The custom sorting above is only applied when the \"Questify\" sort option is selected on the Quest page. If remembering is disabled, the sort or filter options will be reset each time you open the Quest page."
+                },
+                "fetchingQuests": {
+                    "title": "Fetching Quests",
+                    "description": "Configure how often to fetch Quests from Discord and set up alerts for new Quests.",
+                    "defaultBehavior": "By default, Discord only fetches Quests on load and when visiting the Quests page. This means that without a fetch interval defined below, this plugin will become unaware of new Quests added throughout the day.",
+                    "requirement": "This relies on the Quest Button being enabled and set to either {{unclaimed}}, or set to {{always}} with unclaimed {{pill}}, {{badge}}, or {{both}} indicators enabled. Otherwise, there is no reason to periodically fetch Quests.",
+                    "blockWarning": "Also, if {{fetchingQuests}} is blocked in the {{questFeatures}} setting, this will not work.",
+                    "fetchInterval": "Fetch Interval",
+                    "alertSound": "Alert Sound",
+                    "intervalPlaceholder": "Select or type an interval between 30 minutes and 12 hours.",
+                    "intervalFeedback": "Intervals must be between 30 minutes and 12 hours.",
+                    "soundPlaceholder": "Select a sound or provide a custom sound URL.",
+                    "soundFeedback": "Sound not found, or URL is not from a supported domain.",
+                    "disabled": "Disabled",
+                    "minutes": "Minutes",
+                    "minute": "Minute",
+                    "hours": "Hours",
+                    "hour": "Hour",
+                    "30minutes": "30 Minutes",
+                    "1hour": "1 Hour",
+                    "3hours": "3 Hours",
+                    "6hours": "6 Hours",
+                    "12hours": "12 Hours",
+                    "customSound": "CUSTOM SOUND"
+                },
+                "disableOptions": {
+                    "everything": "Everything",
+                    "discovery": "Discovery Tab",
+                    "fetching": "Fetching Quests",
+                    "popup": "Popup Above Account Panel",
+                    "badge": "Badge on User Profiles",
+                    "inventory": "Gift Inventory Relocation Notice",
+                    "friendsList": "Friends List Active Now Promotion",
+                    "gameQuests": "Complete Game Quests in Background",
+                    "videoQuests": "Complete Video Quests in Background",
+                    "mobileDesktop": "Make Mobile Quests Desktop Compatible"
+                },
+                "options": {
+                    "always": "Always",
+                    "unclaimed": "Unclaimed",
+                    "never": "Never",
+                    "pill": "Pill",
+                    "badge": "Badge",
+                    "both": "Both",
+                    "none": "None",
+                    "openQuests": "Open Quests",
+                    "contextMenu": "Context Menu",
+                    "pluginSettings": "Plugin Settings",
+                    "nothing": "Nothing",
+                    "orbs": "Orbs",
+                    "nitroCodes": "Nitro Codes",
+                    "rewardCodes": "Reward Codes",
+                    "inGameItems": "In Game Items",
+                    "profileCollectibles": "Profile Collectibles"
+                }
+            },
+            "option": {
+                "disableQuests": {
+                    "description": "Select which Quest features to disable."
+                },
+                "disableQuestsEverything": {
+                    "label": "Disable Everything",
+                    "description": "Disable all Quest features."
+                },
+                "disableQuestsFetchingQuests": {
+                    "label": "Disable Fetching Quests",
+                    "description": "Disable fetching Quests from Discord."
+                },
+                "disableQuestsDiscoveryTab": {
+                    "label": "Disable Discovery Tab",
+                    "description": "Disable Quest tab in the Discovery page."
+                },
+                "disableQuestsPopupAboveAccountPanel": {
+                    "label": "Disable Popup Above Account Panel",
+                    "description": "Disable the Quest popup above your account panel."
+                },
+                "disableQuestsBadgeOnUserProfiles": {
+                    "label": "Disable Badge On User Profiles",
+                    "description": "Disable the Quest badge on user profiles."
+                },
+                "disableQuestsGiftInventoryRelocationNotice": {
+                    "label": "Disable Gift Inventory Relocation Notice",
+                    "description": "Disable the gift inventory Quest relocation notice."
+                },
+                "disableFriendsListActiveNowPromotion": {
+                    "label": "Disable Friends List Active Now Promotion",
+                    "description": "Disable the promotion of Quests for games played by friends."
+                },
+                "makeMobileQuestsDesktopCompatible": {
+                    "label": "Make Mobile Quests Desktop Compatible",
+                    "description": "Make mobile-only Quests compatible with desktop."
+                },
+                "completeVideoQuestsInBackground": {
+                    "label": "Complete Video Quests In Background",
+                    "description": "Complete Video Quests in the background after the video duration has passed."
+                },
+                "completeGameQuestsInBackground": {
+                    "label": "Complete Game Quests In Background",
+                    "description": "Complete Game Quests in the background after the game duration has passed."
+                },
+                "questButton": {
+                    "description": "Show a Quest button in the server list."
+                },
+                "questButtonDisplay": {
+                    "label": "Quest Button Display",
+                    "description": "Which display type to use for the Quest button in the server list."
+                },
+                "questRewardIncludeRewardCode": {
+                    "label": "Include Reward Codes",
+                    "description": "Include Quests with Reward Codes when displaying Quest counts."
+                },
+                "questRewardIncludeNitroCode": {
+                    "label": "Include Nitro Codes",
+                    "description": "Include Quests with Nitro Codes when displaying Quest counts."
+                },
+                "questRewardIncludeInGame": {
+                    "label": "Include In-Game Rewards",
+                    "description": "Include Quests with In-Game rewards when displaying Quest counts."
+                },
+                "questRewardIncludeCollectibles": {
+                    "label": "Include Collectibles",
+                    "description": "Include Quests with Collectibles when displaying Quest counts."
+                },
+                "questRewardIncludeOrbs": {
+                    "label": "Include Orbs",
+                    "description": "Include Quests with Orbs when displaying Quest counts."
+                },
+                "questButtonUnclaimed": {
+                    "label": "Quest Button Unclaimed Indicator",
+                    "description": "Which display type to use for the unclaimed indicator on the Quest button in the server list."
+                },
+                "questButtonBadgeColor": {
+                    "label": "Quest Button Badge Color",
+                    "description": "The color of the Quest button badge in the server list."
+                },
+                "questButtonLeftClickAction": {
+                    "label": "Left Click Action",
+                    "description": "The action to perform when left-clicking the Quest button in the server list."
+                },
+                "questButtonMiddleClickAction": {
+                    "label": "Middle Click Action",
+                    "description": "The action to perform when middle-clicking the Quest button in the server list."
+                },
+                "questButtonRightClickAction": {
+                    "label": "Right Click Action",
+                    "description": "The action to perform when right-clicking the Quest button in the server list."
+                },
+                "fetchingQuests": {
+                    "description": "Fetch Quests from Discord."
+                },
+                "fetchingQuestsInterval": {
+                    "label": "Fetching Quests Interval",
+                    "description": "The interval in seconds to fetch Quests from Discord."
+                },
+                "fetchingQuestsAlert": {
+                    "label": "Fetching Quests Alert",
+                    "description": "The sound to play when new Quests are detected."
+                },
+                "restyleQuests": {
+                    "description": "Customize the appearance of Quest tiles in the Quests page."
+                },
+                "restyleQuestsUnclaimed": {
+                    "label": "Restyle Quests Unclaimed",
+                    "description": "The color of unclaimed Quest tiles in the Quests page."
+                },
+                "restyleQuestsClaimed": {
+                    "label": "Restyle Quests Claimed",
+                    "description": "The color of claimed Quest tiles in the Quests page."
+                },
+                "restyleQuestsIgnored": {
+                    "label": "Restyle Quests Ignored",
+                    "description": "The color of ignored Quest tiles in the Quests page."
+                },
+                "restyleQuestsExpired": {
+                    "label": "Restyle Quests Expired",
+                    "description": "The color of expired Quest tiles in the Quests page."
+                },
+                "restyleQuestsGradient": {
+                    "label": "Restyle Quests Gradient",
+                    "description": "Style of the gradient used in the Quest tiles."
+                },
+                "restyleQuestsPreload": {
+                    "label": "Restyle Quests Preload",
+                    "description": "Attempt to preload the assets for the Quest tiles."
+                },
+                "reorderQuests": {
+                    "description": "Sort Quests by their status. Leave empty for default sorting. Comma-separated list must contain all of: UNCLAIMED, CLAIMED, IGNORED, EXPIRED."
+                },
+                "unclaimedSubsort": {
+                    "label": "Unclaimed Subsort",
+                    "description": "Subsort method for unclaimed Quests."
+                },
+                "claimedSubsort": {
+                    "label": "Claimed Subsort",
+                    "description": "Subsort method for claimed Quests."
+                },
+                "ignoredSubsort": {
+                    "label": "Ignored Subsort",
+                    "description": "Subsort method for ignored Quests."
+                },
+                "expiredSubsort": {
+                    "label": "Expired Subsort",
+                    "description": "Subsort method for expired Quests."
+                },
+                "unclaimedUnignoredQuests": {
+                    "label": "Unclaimed Unignored Quests",
+                    "description": "Tracks the number of unclaimed and unignored Quests."
+                },
+                "onQuestsPage": {
+                    "label": "On Quests Page",
+                    "description": "Whether the user is currently on the Quests page."
+                },
+                "triggerQuestsRerender": {
+                    "label": "Trigger Quests Rerender",
+                    "description": "Trigger a rerender of the Quests page by toggling this setting."
+                },
+                "ignoredQuestProfile": {
+                    "label": "Ignored Quest Profile",
+                    "description": "The profile used for ignored Quests."
+                },
+                "rememberQuestPageSort": {
+                    "label": "Remember Quest Page Sort",
+                    "description": "Remember the last used sort on the Quests page."
+                },
+                "rememberQuestPageFilters": {
+                    "label": "Remember Quest Page Filters",
+                    "description": "Remember the last used filters on the Quests page."
+                },
+                "lastQuestPageSort": {
+                    "label": "Last Quest Page Sort",
+                    "description": "Remember the last used sort on the Quests page."
+                },
+                "lastQuestPageFilters": {
+                    "label": "Last Quest Page Filters",
+                    "description": "Remember the last used filters on the Quests page."
+                },
+                "ignoredQuestIDs": {
+                    "label": "Ignored Quest IDs",
+                    "description": "An array of Quest IDs that are ignored."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

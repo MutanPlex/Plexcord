@@ -338,3 +338,18 @@
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
+
+.questify-sub-inline-group [class^="swatch"]:nth-child(1) {
+    width: 38px;
+    min-width: 38px;
+}
+
+.questify-disable-quest-default {
+    width: 80px;
+    min-width: 80px;
+}
+
+.questify-disable-quest-disable {
+    width: 130px;
+    min-width: 130px;
+}

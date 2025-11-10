@@ -5838,6 +5838,338 @@
             "description": "Görev oynatıcısının duraklamasını engeller ve mümkünse tamamen atlamanı sağlar.",
             "about": "Videoyu atlamak için sol fare tuşuna birkaç kez tıklaman gerekebilir."
         },
+        "questify": {
+            "name": "Questify",
+            "description": "Görev deneyiminizi bir dizi özellik ile geliştirin veya istediğiniz değilse tamamen devre dışı bırakın.",
+            "quests": "Görevler",
+            "context": {
+                "quest": {
+                    "label": "Görev Düğmesi Menüsü",
+                    "ignore": "Tümünü Yoksay Olarak İşaretle",
+                    "reset": "Yoksayma Listesini Sıfırla",
+                    "fetch": "Görevleri Getir",
+                    "markAsIgnored": "Yoksay Olarak İşaretle",
+                    "unmarkAsIgnored": "Yoksaymayı Kaldır",
+                    "stopAuto": "Otomatik Tamamlamayı Durdur"
+                }
+            },
+            "settings": {
+                "questButton": {
+                    "title": "Görev Düğmesi",
+                    "description": "Sunucu listesinde talep edilmemiş Görevler için isteğe bağlı gösterge içeren bir Görev düğmesi gösterin.",
+                    "leftClick": "Sol Tıklama İşlemi",
+                    "middleClick": "Orta Tıklama İşlemi",
+                    "rightClick": "Sağ Tıklama İşlemi",
+                    "visibility": "Düğme Görünürlüğü",
+                    "unclaimedIndicator": "Talep Edilmemiş Gösterge",
+                    "badgeColor": "Rozet Rengi",
+                    "rewardDisplay": "Ödül Gösterimi",
+                    "includedRewardTypes": "Dahil Edilen Ödül Türleri",
+                    "includedRewardTypesDesc": "Düğme görünürlüğü, rozet sayısı ve uyarı sesini çalarken yalnızca bu ödül türlerine sahip Görevleri talep edilmemiş olarak say.",
+                    "selectRewardTypes": "Talep edilmemiş sayıma dahil edilecek ödül türlerini seçin...",
+                    "noRewardType": "Bu isimde desteklenen bir Görev özelliği yok.",
+                    "default": "Varsayılan",
+                    "disable": "Devre Dışı Bırak"
+                },
+                "questFeatures": {
+                    "title": "Görev Özellikleri",
+                    "description": "Belirli Görev özelliklerini değiştirin.",
+                    "popupWarning": "{{disablePopup}} seçeneği, tamamlanmış Görevler ve Görev ilerleme takibi için göz ardı edilecektir.",
+                    "videoQuestInfo": "{{completeVideo}} seçeneği, Video Görevinin süresini bekleyecek ve otomatik olarak tamamlandı olarak işaretleyecektir.",
+                    "gameQuestInfo": "Benzer şekilde, {{completeGame}} seçeneği Oyun Görevinin süresini bekleyecek ve otomatik olarak tamamlandı olarak işaretleyecektir. Bu seçenek yalnızca resmi masaüstü istemcisinde desteklenir.",
+                    "manualStartWarning": "Görevleri manuel olarak başlatmanız gerekir. İlk tıklama, Görevleri arka planda başlatır. Video Görevleri için, sonraki tıklamalar video modalını normal şekilde açar. Görevleri iptal etmek için Görev kutucuğunda bağlam menüsünü açıp {{stopAuto}} seçeneğini seçebilirsiniz.",
+                    "tosWarning": "Bu seçeneklerden herhangi birini kullanmak Discord'un Hizmet Şartlarına aykırıdır. Riski kendinize ait olmak üzere kullanın.",
+                    "selectFeatures": "Hangi Görev özelliklerini değiştireceğinizi seçin.",
+                    "disablePopup": "Hesap Paneli Üzerindeki Görev Açılır Penceresini Devre Dışı Bırak",
+                    "completeVideo": "Video Görevlerini Arka Planda Tamamla",
+                    "completeGame": "Oyun Oynama Görevlerini Arka Planda Tamamla",
+                    "stopAuto": "Otomatik Tamamlamayı Durdur"
+                },
+                "restyleQuests": {
+                    "title": "Görevleri Yeniden Biçimlendir",
+                    "description": "Görünürlük için isteğe bağlı tema renkleriyle Görevleri vurgulayın.",
+                    "precedenceNote": "Talep Edilmiş ve Süresi Dolmuş Görev stilleri, Görev yoksayılsa bile öncelikli olacaktır.",
+                    "gradientStyle": "Gradyan Stili",
+                    "assetPreload": "Varlık Ön Yükleme",
+                    "unclaimed": "Talep Edilmemiş",
+                    "claimed": "Talep Edilmiş",
+                    "ignored": "Yoksayılmış",
+                    "expired": "Süresi Dolmuş",
+                    "intenseGradient": "Yoğun Yeniden Biçimlendirme Gradyanı",
+                    "defaultGradient": "Varsayılan Yeniden Biçimlendirme Gradyanı",
+                    "blackGradient": "İnce Siyah Gradyan",
+                    "noGradient": "Gradyan Yok",
+                    "loadAllAssets": "Sayfa Yüklendiğinde Tüm Görev Varlıklarını Yükle",
+                    "loadDuringScroll": "Sayfa Kaydırma Sırasında Görev Varlıklarını Yükle"
+                },
+                "reorderQuests": {
+                    "title": "Görevleri Yeniden Sırala",
+                    "description": "Görevleri durumlarına göre sıralayın. Görev sayfasında \"Questify\" sıralama seçeneği seçildiğinde uygulanır.",
+                    "formatNote": "Virgülle ayrılmış liste şunların hepsini içermelidir: {{items}}.",
+                    "placeholder": "UNCLAIMED, CLAIMED, IGNORED, EXPIRED hepsini eklemelisiniz",
+                    "invalidFormat": "Geçersiz format.",
+                    "unclaimedSubsort": "Talep Edilmemiş Alt Sıralama",
+                    "claimedSubsort": "Talep Edilmiş Alt Sıralama",
+                    "ignoredSubsort": "Yoksayılmış Alt Sıralama",
+                    "expiredSubsort": "Süresi Dolmuş Alt Sıralama",
+                    "addedNewest": "Eklenme (En Yeni)",
+                    "addedOldest": "Eklenme (En Eski)",
+                    "expiredRecent": "Süresi Dolmuş (En Son)",
+                    "expiredLeast": "Süresi Dolmuş (En Az Son)",
+                    "expiringSoon": "Süresi Doluyor (En Yakın)",
+                    "expiringLate": "Süresi Doluyor (En Geç)",
+                    "claimedRecent": "Talep Edilmiş (En Son)",
+                    "claimedLeast": "Talep Edilmiş (En Az Son)",
+                    "ignoredQuestProfile": "Yoksayılan Görev Profili",
+                    "sharedProfile": "Paylaşımlı: Bu istemcideki tüm hesaplar yoksaymaları paylaşır.",
+                    "privateProfile": "Özel: Bu istemcideki tüm hesapların ayrı yoksaymaları vardır.",
+                    "rememberSort": "Sıralama Seçimini Hatırla",
+                    "rememberFilter": "Filtre Seçimini Hatırla",
+                    "yes": "Evet",
+                    "no": "Hayır",
+                    "rememberNote": "Bu sıralama ve filtre seçimi, Görev sayfasındaki yerleşik sıralama ve filtre seçeneklerini ifade eder. Yukarıdaki özel sıralama yalnızca Görev sayfasında \"Questify\" sıralama seçeneği seçildiğinde uygulanır. Hatırlama devre dışı bırakılırsa, sıralama veya filtre seçenekleri Görev sayfasını her açtığınızda sıfırlanır."
+                },
+                "fetchingQuests": {
+                    "title": "Görevleri Getirme",
+                    "description": "Discord'dan ne sıklıkla Görev getirileceğini yapılandırın ve yeni Görevler için uyarılar ayarlayın.",
+                    "defaultBehavior": "Varsayılan olarak, Discord Görevleri yalnızca yüklendiğinde ve Görevler sayfasını ziyaret ettiğinizde getirir. Bu, aşağıda tanımlanan bir getirme aralığı olmadan, bu eklentinin gün boyunca eklenen yeni Görevlerden haberdar olamayacağı anlamına gelir.",
+                    "requirement": "Bu, Görev Düğmesinin etkin olmasına ve {{unclaimed}} olarak ayarlanmasına veya {{always}} olarak ayarlanıp talep edilmemiş {{pill}}, {{badge}} veya {{both}} göstergelerinin etkin olmasına bağlıdır. Aksi takdirde, periyodik olarak Görev getirmeye gerek yoktur.",
+                    "blockWarning": "Ayrıca, {{questFeatures}} ayarında {{fetchingQuests}} engellenirse, bu çalışmayacaktır.",
+                    "fetchInterval": "Getirme Aralığı",
+                    "alertSound": "Uyarı Sesi",
+                    "intervalPlaceholder": "30 dakika ile 12 saat arasında bir aralık seçin veya yazın.",
+                    "intervalFeedback": "Aralıklar 30 dakika ile 12 saat arasında olmalıdır.",
+                    "soundPlaceholder": "Bir ses seçin veya özel bir ses URL'si sağlayın.",
+                    "soundFeedback": "Ses bulunamadı veya URL desteklenen bir alan adından değil.",
+                    "disabled": "Devre Dışı",
+                    "minutes": "Dakika",
+                    "minute": "Dakika",
+                    "hours": "Saat",
+                    "hour": "Saat",
+                    "30minutes": "30 Dakika",
+                    "1hour": "1 Saat",
+                    "3hours": "3 Saat",
+                    "6hours": "6 Saat",
+                    "12hours": "12 Saat",
+                    "customSound": "ÖZEL SES"
+                },
+                "disableOptions": {
+                    "everything": "Her şey",
+                    "discovery": "Keşfet Sekmesi",
+                    "fetching": "Görevleri Getirme",
+                    "popup": "Hesap Paneli Üzerindeki Açılır Pencere",
+                    "badge": "Kullanıcı Profillerinde Rozet",
+                    "inventory": "Hediye Envanteri Taşınma Bildirimi",
+                    "friendsList": "Arkadaş Listesi Şu Anda Aktif Tanıtımı",
+                    "gameQuests": "Oyun Görevlerini Arka Planda Tamamla",
+                    "videoQuests": "Video Görevlerini Arka Planda Tamamla",
+                    "mobileDesktop": "Mobil Görevleri Masaüstü Uyumlu Yap"
+                },
+                "options": {
+                    "always": "Her Zaman",
+                    "unclaimed": "Talep Edilmemiş",
+                    "never": "Asla",
+                    "pill": "Hap",
+                    "badge": "Rozet",
+                    "both": "İkisi de",
+                    "none": "Hiçbiri",
+                    "openQuests": "Görevleri Aç",
+                    "contextMenu": "Bağlam Menüsü",
+                    "pluginSettings": "Eklenti Ayarları",
+                    "nothing": "Hiçbir şey",
+                    "orbs": "Küreler",
+                    "nitroCodes": "Nitro Kodları",
+                    "rewardCodes": "Ödül Kodları",
+                    "inGameItems": "Oyun İçi Öğeler",
+                    "profileCollectibles": "Profil Koleksiyonları"
+                }
+            },
+            "option": {
+                "disableQuests": {
+                    "description": "Hangi Görev özelliklerini devre dışı bırakacağınızı seçin."
+                },
+                "disableQuestsEverything": {
+                    "label": "Her Şeyi Devre Dışı Bırak",
+                    "description": "Tüm Görev özelliklerini devre dışı bırak."
+                },
+                "disableQuestsFetchingQuests": {
+                    "label": "Görev Getirmeyi Devre Dışı Bırak",
+                    "description": "Discord'dan Görev getirmeyi devre dışı bırak."
+                },
+                "disableQuestsDiscoveryTab": {
+                    "label": "Keşfet Sekmesini Devre Dışı Bırak",
+                    "description": "Keşfet sayfasındaki Görev sekmesini devre dışı bırak."
+                },
+                "disableQuestsPopupAboveAccountPanel": {
+                    "label": "Hesap Paneli Üstündeki Açılır Pencereyi Devre Dışı Bırak",
+                    "description": "Hesap panelinizin üstündeki Görev açılır penceresini devre dışı bırak."
+                },
+                "disableQuestsBadgeOnUserProfiles": {
+                    "label": "Kullanıcı Profillerindeki Rozeti Devre Dışı Bırak",
+                    "description": "Kullanıcı profillerindeki Görev rozetini devre dışı bırak."
+                },
+                "disableQuestsGiftInventoryRelocationNotice": {
+                    "label": "Hediye Envanteri Taşınma Bildirimini Devre Dışı Bırak",
+                    "description": "Hediye envanteri Görev taşınma bildirimini devre dışı bırak."
+                },
+                "disableFriendsListActiveNowPromotion": {
+                    "label": "Arkadaş Listesi Şu Anda Aktif Tanıtımını Devre Dışı Bırak",
+                    "description": "Arkadaşların oynadığı oyunlar için Görev tanıtımını devre dışı bırak."
+                },
+                "makeMobileQuestsDesktopCompatible": {
+                    "label": "Mobil Görevleri Masaüstü Uyumlu Yap",
+                    "description": "Yalnızca mobil Görevleri masaüstü ile uyumlu hale getir."
+                },
+                "completeVideoQuestsInBackground": {
+                    "label": "Video Görevlerini Arka Planda Tamamla",
+                    "description": "Video Görevlerini, video süresi geçtikten sonra arka planda tamamla."
+                },
+                "completeGameQuestsInBackground": {
+                    "label": "Oyun Görevlerini Arka Planda Tamamla",
+                    "description": "Oyun Görevlerini, oyun süresi geçtikten sonra arka planda tamamla."
+                },
+                "questButton": {
+                    "description": "Sunucu listesinde bir Görev düğmesi göster."
+                },
+                "questButtonDisplay": {
+                    "label": "Görev Düğmesi Görünümü",
+                    "description": "Sunucu listesindeki Görev düğmesi için hangi görüntüleme türünün kullanılacağı."
+                },
+                "questRewardIncludeRewardCode": {
+                    "label": "Ödül Kodlarını Dahil Et",
+                    "description": "Görev sayılarını görüntülerken Ödül Kodlu Görevleri dahil et."
+                },
+                "questRewardIncludeNitroCode": {
+                    "label": "Nitro Kodlarını Dahil Et",
+                    "description": "Görev sayılarını görüntülerken Nitro Kodlu Görevleri dahil et."
+                },
+                "questRewardIncludeInGame": {
+                    "label": "Oyun İçi Ödülleri Dahil Et",
+                    "description": "Görev sayılarını görüntülerken Oyun İçi ödüllü Görevleri dahil et."
+                },
+                "questRewardIncludeCollectibles": {
+                    "label": "Koleksiyonları Dahil Et",
+                    "description": "Görev sayılarını görüntülerken Koleksiyon Öğeli Görevleri dahil et."
+                },
+                "questRewardIncludeOrbs": {
+                    "label": "Küreleri Dahil Et",
+                    "description": "Görev sayılarını görüntülerken Küre ödüllü Görevleri dahil et."
+                },
+                "questButtonUnclaimed": {
+                    "label": "Görev Düğmesi Talep Edilmemiş Göstergesi",
+                    "description": "Sunucu listesindeki Görev düğmesinde talep edilmemiş gösterge için hangi görüntüleme türünün kullanılacağı."
+                },
+                "questButtonBadgeColor": {
+                    "label": "Görev Düğmesi Rozet Rengi",
+                    "description": "Sunucu listesindeki Görev düğmesi rozetinin rengi."
+                },
+                "questButtonLeftClickAction": {
+                    "label": "Sol Tıklama İşlemi",
+                    "description": "Sunucu listesindeki Görev düğmesine sol tıklanınca yapılacak işlem."
+                },
+                "questButtonMiddleClickAction": {
+                    "label": "Orta Tıklama İşlemi",
+                    "description": "Sunucu listesindeki Görev düğmesine orta tıklanınca yapılacak işlem."
+                },
+                "questButtonRightClickAction": {
+                    "label": "Sağ Tıklama İşlemi",
+                    "description": "Sunucu listesindeki Görev düğmesine sağ tıklanınca yapılacak işlem."
+                },
+                "fetchingQuests": {
+                    "description": "Discord'dan Görev getir."
+                },
+                "fetchingQuestsInterval": {
+                    "label": "Görev Getirme Aralığı",
+                    "description": "Discord'dan Görevleri getirme aralığı (saniye cinsinden)."
+                },
+                "fetchingQuestsAlert": {
+                    "label": "Görev Getirme Uyarısı",
+                    "description": "Yeni Görevler tespit edildiğinde çalınacak ses."
+                },
+                "restyleQuests": {
+                    "description": "Görevler sayfasındaki Görev kutucuklarının görünümünü özelleştir."
+                },
+                "restyleQuestsUnclaimed": {
+                    "label": "Görevleri Yeniden Biçimlendir - Talep Edilmemiş",
+                    "description": "Görevler sayfasındaki talep edilmemiş Görev kutucuklarının rengi."
+                },
+                "restyleQuestsClaimed": {
+                    "label": "Görevleri Yeniden Biçimlendir - Talep Edilmiş",
+                    "description": "Görevler sayfasındaki talep edilmiş Görev kutucuklarının rengi."
+                },
+                "restyleQuestsIgnored": {
+                    "label": "Görevleri Yeniden Biçimlendir - Yoksayılmış",
+                    "description": "Görevler sayfasındaki yoksayılmış Görev kutucuklarının rengi."
+                },
+                "restyleQuestsExpired": {
+                    "label": "Görevleri Yeniden Biçimlendir - Süresi Dolmuş",
+                    "description": "Görevler sayfasındaki süresi dolmuş Görev kutucuklarının rengi."
+                },
+                "restyleQuestsGradient": {
+                    "label": "Görevleri Yeniden Biçimlendir - Gradyan",
+                    "description": "Görev kutucuklarında kullanılan gradyan stili."
+                },
+                "restyleQuestsPreload": {
+                    "label": "Görevleri Yeniden Biçimlendir - Ön Yükleme",
+                    "description": "Görev kutucukları için varlıkları önceden yüklemeyi dene."
+                },
+                "reorderQuests": {
+                    "description": "Görevleri durumlarına göre sırala. Varsayılan sıralama için boş bırak. Virgülle ayrılmış liste şunların hepsini içermelidir: UNCLAIMED, CLAIMED, IGNORED, EXPIRED."
+                },
+                "unclaimedSubsort": {
+                    "label": "Talep Edilmemiş Alt Sıralama",
+                    "description": "Talep edilmemiş Görevler için alt sıralama yöntemi."
+                },
+                "claimedSubsort": {
+                    "label": "Talep Edilmiş Alt Sıralama",
+                    "description": "Talep edilmiş Görevler için alt sıralama yöntemi."
+                },
+                "ignoredSubsort": {
+                    "label": "Yoksayılmış Alt Sıralama",
+                    "description": "Yoksayılmış Görevler için alt sıralama yöntemi."
+                },
+                "expiredSubsort": {
+                    "label": "Süresi Dolmuş Alt Sıralama",
+                    "description": "Süresi dolmuş Görevler için alt sıralama yöntemi."
+                },
+                "unclaimedUnignoredQuests": {
+                    "label": "Talep Edilmemiş Yoksayılmamış Görevler",
+                    "description": "Talep edilmemiş ve yoksayılmamış Görevlerin sayısını takip eder."
+                },
+                "onQuestsPage": {
+                    "label": "Görevler Sayfasında",
+                    "description": "Kullanıcının şu anda Görevler sayfasında olup olmadığı."
+                },
+                "triggerQuestsRerender": {
+                    "label": "Görevler Yeniden Render Tetikleme",
+                    "description": "Bu ayarı değiştirerek Görevler sayfasının yeniden render edilmesini tetikle."
+                },
+                "ignoredQuestProfile": {
+                    "label": "Yoksayılan Görev Profili",
+                    "description": "Yoksayılan Görevler için kullanılan profil."
+                },
+                "rememberQuestPageSort": {
+                    "label": "Görev Sayfası Sıralamasını Hatırla",
+                    "description": "Görevler sayfasında en son kullanılan sıralamayı hatırla."
+                },
+                "rememberQuestPageFilters": {
+                    "label": "Görev Sayfası Filtrelerini Hatırla",
+                    "description": "Görevler sayfasında en son kullanılan filtreleri hatırla."
+                },
+                "lastQuestPageSort": {
+                    "label": "Son Görev Sayfası Sıralaması",
+                    "description": "Görevler sayfasında en son kullanılan sıralamayı hatırla."
+                },
+                "lastQuestPageFilters": {
+                    "label": "Son Görev Sayfası Filtreleri",
+                    "description": "Görevler sayfasında en son kullanılan filtreleri hatırla."
+                },
+                "ignoredQuestIDs": {
+                    "label": "Yoksayılan Görev Kimlikleri",
+                    "description": "Yoksayılan Görev kimliklerinin dizisi."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

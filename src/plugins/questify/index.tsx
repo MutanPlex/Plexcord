@@ -7,6 +7,7 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { addServerListElement, removeServerListElement, ServerListRenderPosition } from "@api/ServerList";
 import { ErrorBoundary, openPluginModal } from "@components/index";
 import { PcDevs } from "@utils/constants";
@@ -91,23 +92,23 @@ export function QuestButton(): JSX.Element {
                 <Menu.Menu
                     navId={q("quest-button-context-menu")}
                     onClose={ContextMenuApi.closeContextMenu}
-                    aria-label="Quest Button Menu"
+                    aria-label={t("plugin.questify.context.quest.label")}
                 >
                     <Menu.MenuItem
                         id={q("ignore-quests-option")}
-                        label="Mark All Ignored"
+                        label={t("plugin.questify.context.quest.ignore")}
                         action={questMenuIgnoreAllClicked}
                         disabled={!unclaimedUnignoredQuests}
                     />
                     <Menu.MenuItem
                         id={q("unignore-quests-option")}
-                        label="Reset Ignored List"
+                        label={t("plugin.questify.context.quest.reset")}
                         action={questMenuUnignoreAllClicked}
                         disabled={!getIgnoredQuestIDs().length}
                     />
                     <Menu.MenuItem
                         id={q("fetch-quests-option")}
-                        label="Fetch Quests"
+                        label={t("plugin.questify.context.quest.fetch")}
                         action={() => fetchAndAlertQuests("Questify-ManualFetch", QuestifyLogger)}
                     />
                 </Menu.Menu>
@@ -127,7 +128,7 @@ export function QuestButton(): JSX.Element {
             id={q("quest-button")}
             className={q("quest-button")}
             icon={QuestIcon(26, 26)}
-            tooltip="Quests"
+            tooltip={t("plugin.questify.quests")}
             showPill={true}
             isVisible={showQuestsButton(questButtonDisplay, unclaimedUnignoredQuests, onQuestsPage)}
             isSelected={onQuestsPage}
@@ -220,20 +221,20 @@ function QuestTileContextMenu(children: React.ReactNode[], props: { quest: any; 
         <Menu.MenuGroup>
             <Menu.MenuItem
                 id={q("ignore-quests")}
-                label="Mark as Ignored"
+                label={t("plugin.questify.context.quest.markAsIgnored")}
                 disabled={shouldDisableQuestTileOptions(props.quest, false)}
                 action={() => { addIgnoredQuest(props.quest.id); }}
             />
             <Menu.MenuItem
                 id={q("unignore-quests")}
-                label="Unmark as Ignored"
+                label={t("plugin.questify.context.quest.unmarkAsIgnored")}
                 disabled={shouldDisableQuestTileOptions(props.quest, true)}
                 action={() => { removeIgnoredQuest(props.quest.id); }}
             />
             {activeQuestIntervals.has(props.quest.id) &&
                 <Menu.MenuItem
                     id={q("stop-auto-complete")}
-                    label="Stop Auto-Complete"
+                    label={t("plugin.questify.context.quest.stopAuto")}
                     action={() => {
                         const interval = activeQuestIntervals.get(props.quest.id);
 
@@ -846,6 +847,10 @@ export default definePlugin({
     dependencies: ["AudioPlayerAPI", "ServerListAPI"],
     startAt: StartAt.Init, // Needed in order to beat Read All Messages to inserting above the server list.
     settings,
+
+    get displayDescription() {
+        return t("plugin.questify.description");
+    },
 
     sortQuests,
     formatLowerBadge,
