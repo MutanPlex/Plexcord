@@ -6170,6 +6170,38 @@
                 }
             }
         },
+        "questionMarkReplacement": {
+            "name": "QuestionMarkReplacement",
+            "description": "Replace all question marks with chosen string, if message only contains question marks.",
+            "option": {
+                "replace": {
+                    "label": "Replace",
+                    "description": "Replace with"
+                }
+            }
+        },
+        "quickMention": {
+            "name": "QuickMention",
+            "description": "Adds a quick mention button to the message actions bar",
+            "tooltip": "Quick Mention"
+        },
+        "quickReply": {
+            "name": "QuickReply",
+            "description": "Reply to (ctrl + up/down) and edit (ctrl + shift + up/down) messages via keybinds",
+            "option": {
+                "shouldMention": {
+                    "label": "Should Mention",
+                    "description": "Ping reply by default",
+                    "noReplyMentionPlugin": "Follow NoReplyMention plugin (if enabled)",
+                    "enabled": "Enabled",
+                    "disabled":"Disabled"
+                },
+                "ignoreBlockedAndIgnored": {
+                    "label": "Ignore Block And Ignored",
+                    "description": "Ignore messages by blocked/ignored users when navigating"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

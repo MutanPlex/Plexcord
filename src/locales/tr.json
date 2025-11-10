@@ -6170,6 +6170,38 @@
                 }
             }
         },
+        "questionMarkReplacement": {
+            "name": "QuestionMarkReplacement",
+            "description": "Mesaj yalnızca soru işaretlerinden oluşuyorsa, tüm soru işaretlerini seçilen dizeyle değiştirir.",
+            "option": {
+                "replace": {
+                    "label": "Değiştir",
+                    "description": "Şununla değiştir"
+                }
+            }
+        },
+        "quickMention": {
+            "name": "QuickMention",
+            "description": "Mesaj eylem çubuğuna hızlı bahsetme düğmesi ekler.",
+            "tooltip": "Hızlı Bahset"
+        },
+        "quickReply": {
+            "name": "QuickReply",
+            "description": "Kısayol tuşlarıyla mesajlara yanıt ver (ctrl + yukarı/aşağı) ve düzenle (ctrl + shift + yukarı/aşağı).",
+            "option": {
+                "shouldMention": {
+                    "label": "Bahsetmeli mi",
+                    "description": "Varsayılan olarak yanıtta ping at",
+                    "noReplyMentionPlugin": "NoReplyMention eklentisini takip et (etkinse)",
+                    "enabled": "Etkin",
+                    "disabled": "Devre Dışı"
+                },
+                "ignoreBlockedAndIgnored": {
+                    "label": "Engellenen ve Yoksayılanları Yoksay",
+                    "description": "Gezinirken engellenmiş/yoksayılmış kullanıcıların mesajlarını yoksay"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Message } from "@plexcord/discord-types";
 import { MessageFlags } from "@plexcord/discord-types/enums";
@@ -37,21 +38,33 @@ const enum MentionOptions {
 
 const settings = definePluginSettings({
     shouldMention: {
+        get label() {
+            return t("plugin.quickReply.option.shouldMention.label");
+        },
+        get description() {
+            return t("plugin.quickReply.option.shouldMention.description");
+        },
         type: OptionType.SELECT,
-        description: "Ping reply by default",
-        options: [
-            {
-                label: "Follow NoReplyMention plugin (if enabled)",
-                value: MentionOptions.NO_REPLY_MENTION_PLUGIN,
-                default: true
-            },
-            { label: "Enabled", value: MentionOptions.ENABLED },
-            { label: "Disabled", value: MentionOptions.DISABLED },
-        ]
+        get options() {
+            return [
+                {
+                    label: t("plugin.quickReply.option.shouldMention.option.noReplyMentionPlugin"),
+                    value: MentionOptions.NO_REPLY_MENTION_PLUGIN,
+                    default: true
+                },
+                { label: t("plugin.quickReply.option.shouldMention.option.enabled"), value: MentionOptions.ENABLED },
+                { label: t("plugin.quickReply.option.shouldMention.option.disabled"), value: MentionOptions.DISABLED },
+            ];
+        }
     },
     ignoreBlockedAndIgnored: {
+        get label() {
+            return t("plugin.quickReply.option.ignoreBlockedAndIgnored.label");
+        },
+        get description() {
+            return t("plugin.quickReply.option.ignoreBlockedAndIgnored.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Ignore messages by blocked/ignored users when navigating",
         default: true
     }
 });
@@ -61,6 +74,10 @@ export default definePlugin({
     authors: [Devs.fawn, Devs.Ven, Devs.pylix],
     description: "Reply to (ctrl + up/down) and edit (ctrl + shift + up/down) messages via keybinds",
     settings,
+
+    get displayDescription() {
+        return t("plugin.quickReply.description");
+    },
 
     start() {
         document.addEventListener("keydown", onKeydown);

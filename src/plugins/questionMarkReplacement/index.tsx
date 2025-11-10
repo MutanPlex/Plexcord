@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { addMessagePreSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
@@ -12,8 +13,13 @@ import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     replace: {
+        get label() {
+            return t("plugin.questionMarkReplacement.option.replace.label");
+        },
+        get description() {
+            return t("plugin.questionMarkReplacement.option.replace.description");
+        },
         type: OptionType.STRING,
-        description: "Replace with",
         default: ":face_with_monocle:"
     },
 });
@@ -34,6 +40,10 @@ export default definePlugin({
     description: "Replace all question marks with chosen string, if message only contains question marks.",
     authors: [Devs.nyx, PcDevs.MutanPlex],
     settings,
+
+    get displayDescription() {
+        return t("plugin.questionMarkReplacement.description");
+    },
 
     start() {
         this.preSend = addMessagePreSendListener((_, msg) => {

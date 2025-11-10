@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import { insertTextIntoChatInputBox } from "@utils/discord";
 import definePlugin from "@utils/types";
@@ -27,12 +28,16 @@ export default definePlugin({
     authors: [Devs.kemo],
     description: "Adds a quick mention button to the message actions bar",
 
+    get displayDescription() {
+        return t("plugin.quickMention.description");
+    },
+
     renderMessagePopoverButton(msg) {
         const channel = ChannelStore.getChannel(msg.channel_id);
         if (channel.guild_id && !PermissionStore.can(PermissionsBits.SEND_MESSAGES, channel)) return null;
 
         return {
-            label: "Quick Mention",
+            label: t("plugin.quickMention.tooltip"),
             icon: this.Icon,
             message: msg,
             channel,
