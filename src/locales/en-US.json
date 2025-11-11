@@ -6202,6 +6202,28 @@
                 }
             }
         },
+        "quoter": {
+            "name": "Quoter",
+            "description": "Adds the ability to create an inspirational quote image from a message",
+            "context": {
+                "quote": "Quote"
+            },
+            "modal": {
+                "title": "Catch Them In 4k",
+                "grayscale": "Grayscale",
+                "export": "Export",
+                "send": "Send"
+            },
+            "option": {
+                "userIdentifier": {
+                    "label": "User Identifier",
+                    "description": "What the author's name should be displayed as",
+                    "displayName": "Display Name",
+                    "username": "Username",
+                    "userId": "User ID"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

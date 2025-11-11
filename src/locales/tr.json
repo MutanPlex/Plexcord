@@ -6202,6 +6202,28 @@
                 }
             }
         },
+        "quoter": {
+            "name": "Quoter",
+            "description": "Bir mesajdan ilham verici alıntı görseli oluşturma özelliği ekler.",
+            "context": {
+                "quote": "Alıntıla"
+            },
+            "modal": {
+                "title": "4K'da Yakala",
+                "grayscale": "Gri Tonlama",
+                "export": "Dışa Aktar",
+                "send": "Gönder"
+            },
+            "option": {
+                "userIdentifier": {
+                    "label": "Kullanıcı Tanımlayıcı",
+                    "description": "Yazarın adının nasıl gösterileceği",
+                    "displayName": "Görünen Ad",
+                    "username": "Kullanıcı Adı",
+                    "userId": "Kullanıcı ID'si"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

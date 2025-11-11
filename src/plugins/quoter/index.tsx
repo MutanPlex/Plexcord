@@ -6,6 +6,7 @@
  */
 
 import { findGroupChildrenByChildId } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import { FormSwitch } from "@components/FormSwitch";
@@ -31,13 +32,20 @@ enum userIDOptions {
 
 const settings = definePluginSettings({
     userIdentifier: {
+        get label() {
+            return t("plugin.quoter.option.userIdentifier.label");
+        },
+        get description() {
+            return t("plugin.quoter.option.userIdentifier.description");
+        },
         type: OptionType.SELECT,
-        description: "What the author's name should be displayed as",
-        options: [
-            { label: "Display Name", value: userIDOptions.displayName, default: true },
-            { label: "Username", value: userIDOptions.userName },
-            { label: "User ID", value: userIDOptions.userId }
-        ]
+        get options() {
+            return [
+                { label: t("plugin.quoter.option.userIdentifier.displayName"), value: userIDOptions.displayName, default: true },
+                { label: t("plugin.quoter.option.userIdentifier.username"), value: userIDOptions.userName },
+                { label: t("plugin.quoter.option.userIdentifier.userId"), value: userIDOptions.userId }
+            ];
+        }
     }
 });
 
@@ -59,13 +67,18 @@ export default definePlugin({
     description: "Adds the ability to create an inspirational quote image from a message",
     authors: [Devs.Samwich, Devs.thororen],
     settings,
+
+    get displayDescription() {
+        return t("plugin.quoter.description");
+    },
+
     contextMenus: {
         "message": (children, { message }) => {
             if (!message.content) return;
             const buttonElement = (
                 <Menu.MenuItem
                     id="pc-quote"
-                    label="Quote"
+                    label={t("plugin.quoter.context.quote")}
                     icon={QuoteIcon}
                     action={() => openModal(props => <QuoteModal message={message} {...props} />)}
                 />
@@ -211,7 +224,7 @@ function QuoteModal({ message, ...props }: ModalProps & { message: Message; }) {
         <ModalRoot {...props} size={ModalSize.MEDIUM}>
             <ModalHeader separator={false}>
                 <BaseText color="header-primary" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
-                    Catch Them In 4K.
+                    {t("plugin.quoter.modal.title")}
                 </BaseText>
                 <ModalCloseButton onClick={props.onClose} />
             </ModalHeader>
@@ -219,7 +232,7 @@ function QuoteModal({ message, ...props }: ModalProps & { message: Message; }) {
                 <img alt="" src="" id="quoterPreview" style={{ borderRadius: "20px", width: "100%" }} />
                 <br /><br />
                 <br /><br />
-                <FormSwitch value={gray} onChange={setGray} title={"Grayscale"} />
+                <FormSwitch value={gray} onChange={setGray} title={t("plugin.quoter.modal.grayscale")} />
                 <Select
                     look={1}
                     options={Object.keys(ImageStyle)
@@ -233,8 +246,8 @@ function QuoteModal({ message, ...props }: ModalProps & { message: Message; }) {
                     serialize={v => v}
                 />
                 <br />
-                <Button color={Button.Colors.BRAND} size={Button.Sizes.SMALL} onClick={async () => await Export()} style={{ display: "inline-block", marginRight: "5px" }}>Export</Button>
-                <Button color={Button.Colors.BRAND} size={Button.Sizes.SMALL} onClick={async () => await SendInChat()} style={{ display: "inline-block" }}>Send</Button>
+                <Button color={Button.Colors.BRAND} size={Button.Sizes.SMALL} onClick={async () => await Export()} style={{ display: "inline-block", marginRight: "5px" }}>{t("plugin.quoter.modal.export")}</Button>
+                <Button color={Button.Colors.BRAND} size={Button.Sizes.SMALL} onClick={async () => await SendInChat()} style={{ display: "inline-block" }}>{t("plugin.quoter.modal.send")}</Button>
             </ModalContent>
             <br></br>
         </ModalRoot>
