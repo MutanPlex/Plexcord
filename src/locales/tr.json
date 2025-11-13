@@ -6423,6 +6423,11 @@
             "name": "ReactErrorDecoder",
             "description": "React hata kodlarını insan tarafından okunabilir mesajlara dönüştürür."
         },
+        "readAllNotifications": {
+            "name": "ReadAllNotifications",
+            "description": "Tüm sunucu bildirimlerini tek bir butonla okundu olarak işaretle!",
+            "button": "Hepsini Oku"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

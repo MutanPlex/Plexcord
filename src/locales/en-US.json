@@ -6423,6 +6423,11 @@
             "name": "ReactErrorDecoder",
             "description": "Decodes React error codes into human-readable messages."
         },
+        "readAllNotifications": {
+            "name": "ReadAllNotifications",
+            "description": "Read all server notifications with a single button click!",
+            "button": "Read All"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

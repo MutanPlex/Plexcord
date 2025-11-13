@@ -19,6 +19,7 @@
 
 import "./style.css";
 
+import { t } from "@api/i18n";
 import { addServerListElement, removeServerListElement, ServerListRenderPosition } from "@api/ServerList";
 import { TextButton } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -77,7 +78,7 @@ const ReadAllButton = () => (
         onClick={onClick}
         className="pc-ranb-button"
     >
-        Read All
+        {t("plugin.readAllNotifications.button")}
     </TextButton>
 );
 
@@ -86,6 +87,10 @@ export default definePlugin({
     description: "Read all server notifications with a single button click!",
     authors: [Devs.kemo],
     dependencies: ["ServerListAPI"],
+
+    get displayDescription() {
+        return t("plugin.readAllNotificationsButton.description");
+    },
 
     renderReadAllButton: ErrorBoundary.wrap(ReadAllButton, { noop: true }),
 
