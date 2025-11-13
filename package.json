@@ -1,7 +1,7 @@
 {
     "name": "plexcord",
     "private": "true",
-    "version": "1.17.8",
+    "version": "1.17.9",
     "description": "Taking Discord to the Next Level!",
     "homepage": "https://github.com/MutanPlex/Plexcord#readme",
     "bugs": {
