@@ -17,12 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-export const PLEXCORD_FILES = [
-    IS_DISCORD_DESKTOP ? "patcher.js" : "plexcordDesktopMain.js",
-    IS_DISCORD_DESKTOP ? "preload.js" : "plexcordDesktopPreload.js",
-    IS_DISCORD_DESKTOP ? "renderer.js" : "plexcordDesktopRenderer.js",
-    IS_DISCORD_DESKTOP ? "renderer.css" : "plexcordDesktopRenderer.css",
-];
+export const ASAR_FILE = IS_PLEXTRON ? "plextron.asar" : "desktop.asar";
 
 export function serializeErrors(func: (...args: any[]) => any) {
     return async function () {
