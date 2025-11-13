@@ -6278,6 +6278,147 @@
                 }
             }
         },
+        "randomVoice": {
+            "name": "RandomVoice",
+            "description": "Sessiz alma butonunun yanında rastgele bir sesli aramaya katılma butonu ekler.",
+            "tooltip": "Rastgele Sesli",
+            "context": {
+                "label": "Ses durumu düzenleyici",
+                "amountLabel": "KULLANICI SAYISI",
+                "spacesLabel": "BOŞ YER",
+                "voiceLabel": "SES LİMİTİ",
+                "selfLabel": "KENDİ AYARLARIN",
+                "select": {
+                    "servers": "Sunucu Seç",
+                    "list": "Liste Seç",
+                    "filters": "Filtreleri Seç",
+                    "amount": "Kullanıcı Sayısı",
+                    "userAmount": "{{amount}} kullanıcı",
+                    "parameters": "Parametreler",
+                    "moreThan": "Şundan fazla",
+                    "lessThan": "Şundan az",
+                    "equalTo": "Şuna eşit",
+                    "spaces": "Boş Yer",
+                    "voice": "Ses Limiti"
+                },
+                "filter": {
+                    "muted": "Sessizde",
+                    "deafened": "Sağırlaştırılmış",
+                    "camera": "Kamera",
+                    "stream": "Yayın",
+                    "includeFilters": "Filtreleri Dahil Et",
+                    "avoidFilters": "Filtrelerden Kaçın"
+                },
+                "reset": {
+                    "list": "Listeyi Sıfırla"
+                },
+                "voice": {
+                    "label": "Ses Ayarları",
+                    "auto": {
+                        "mute": "Otomatik Sessize Al",
+                        "deafen": "Otomatik Sağırlaştır",
+                        "camera": "Otomatik Kamera",
+                        "stream": "Otomatik Yayın",
+                        "leaveWhenEmpty": "Boş Olunca Ayrıl",
+                        "navigate": "Otomatik Gezin",
+                        "stage": "Sahne Kanallarından Kaçın",
+                        "afk": "AFK Kanallarından Kaçın"
+                    }
+                },
+                "invalid": {
+                    "invalid": "geçersiz sunucu"
+                }
+            },
+            "option": {
+                "userAmountOperation": {
+                    "label": "Kullanıcı Sayısı İşlemi",
+                    "description": "Kullanıcı sayısı için bir işlem seçin"
+                },
+                "userAmount": {
+                    "label": "Kullanıcı Sayısı",
+                    "description": "Kullanıcı sayısını seçin"
+                },
+                "spacesLeftOperation": {
+                    "label": "Boş Yer İşlemi",
+                    "description": "Maksimum kullanıcı sayısı için bir işlem seçin"
+                },
+                "spacesLeft": {
+                    "label": "Boş Yer",
+                    "description": "Boş yer miktarını seçin"
+                },
+                "vcLimitOperation": {
+                    "label": "Ses Kanalı Limit İşlemi",
+                    "description": "Ses kanalı limiti için bir işlem seçin."
+                },
+                "vcLimit": {
+                    "label": "Ses Kanalı Limiti",
+                    "description": "Bir ses kanalı limiti seçin"
+                },
+                "servers": {
+                    "label": "Sunucular",
+                    "description": "Dahil edilecek sunucular"
+                },
+                "autoNavigate": {
+                    "label": "Otomatik Gezinme",
+                    "description": "Ses kanalına otomatik olarak gider."
+                },
+                "autoCamera": {
+                    "label": "Otomatik Kamera",
+                    "description": "Kamerayı otomatik olarak açar"
+                },
+                "autoStream": {
+                    "label": "Otomatik Yayın",
+                    "description": "Yayını otomatik olarak başlatır"
+                },
+                "selfMute": {
+                    "label": "Otomatik Sessize Al",
+                    "description": "Ses kanalına katıldığınızda mikrofonunuzu otomatik olarak sessize alır."
+                },
+                "selfDeafen": {
+                    "label": "Otomatik Sağırlaştır",
+                    "description": "Ses kanalına katıldığınızda sizi otomatik olarak sağırlaştırır."
+                },
+                "leaveEmpty": {
+                    "label": "Boş Olunca Ayrıl",
+                    "description": "Sesli kanal boşaldığında rastgele başka bir çağrı bulur."
+                },
+                "avoidStages": {
+                    "label": "Sahne Kanallarından Kaçın",
+                    "description": "Sahne tipi ses kanallarına katılmaktan kaçınır."
+                },
+                "avoidAfk": {
+                    "label": "AFK Kanallarından Kaçın",
+                    "description": "AFK ses kanallarına katılmaktan kaçınır."
+                },
+                "video": {
+                    "label": "Video",
+                    "description": "Kamerası açık olan kullanıcıları arar"
+                },
+                "stream": {
+                    "label": "Yayın",
+                    "description": "Yayın yapan kullanıcıları arar"
+                },
+                "mute": {
+                    "label": "Sessizde",
+                    "description": "Sessizde olan kullanıcıları arar"
+                },
+                "deafen": {
+                    "label": "Sağırlaştırılmış",
+                    "description": "Sağırlaştırılmış kullanıcıları arar"
+                },
+                "includeStates": {
+                    "label": "Filtreleri Dahil Et",
+                    "description": "Belirli kullanıcı durumlarının dahil edilmesini sağlar"
+                },
+                "avoidStates": {
+                    "label": "Filtrelerden Kaçın",
+                    "description": "Belirli kullanıcı durumlarından kaçınılmasını sağlar"
+                }
+            },
+            "alert": {
+                "failed": "Bir Ses Kanalı bulunamadı!"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

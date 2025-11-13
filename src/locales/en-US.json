@@ -6278,6 +6278,147 @@
                 }
             }
         },
+        "randomVoice": {
+            "name": "RandomVoice",
+            "description": "Adds a Button near the Mute button to join a random voice call.",
+            "tooltip": "Random Voice",
+            "context": {
+                "label": "Voice state modifier",
+                "amountLabel": "USER AMOUNT",
+                "spacesLabel": "SPACES LEFT",
+                "voiceLabel": "VOICE LIMIT",
+                "selfLabel": "SELF SETTINGS",
+                "select": {
+                    "servers": "Select Servers",
+                    "list": "Select List",
+                    "filters": "Select Filters",
+                    "amount": "User Amount",
+                    "userAmount": "{{amount}} user{{s}}",
+                    "parameters": "Parameters",
+                    "moreThan": "More than",
+                    "lessThan": "Less than",
+                    "equalTo": "Equal to",
+                    "spaces": "Spaces Left",
+                    "voice": "Voice Limit"
+                },
+                "filter": {
+                    "muted": "Muted",
+                    "deafened": "Deafened",
+                    "camera": "Camera",
+                    "stream": "Stream",
+                    "includeFilters": "Include Filters",
+                    "avoidFilters": "Avoid Filters"
+                },
+                "reset": {
+                    "list": "Reset List"
+                },
+                "voice": {
+                    "label": "Voice Options",
+                    "auto": {
+                        "mute": "Auto Mute",
+                        "deafen": "Auto Deafen",
+                        "camera": "Auto Camera",
+                        "stream": "Auto Stream",
+                        "leaveWhenEmpty": "Leave When Empty",
+                        "navigate": "Auto Navigate",
+                        "stage": "Avoid Stage",
+                        "afk": "Avoid AFK"
+                    }
+                },
+                "invalid": {
+                    "invalid": "invalid server"
+                }
+            },
+            "option": {
+                "userAmountOperation": {
+                    "label": "User Amount Operation",
+                    "description": "Select an operation for the amounts of users"
+                },
+                "userAmount": {
+                    "label": "User Amount",
+                    "description": "Select amount of users"
+                },
+                "spacesLeftOperation": {
+                    "label": "Spaces Left Operation",
+                    "description": "Select an operation for the maximum amounts of users"
+                },
+                "spacesLeft": {
+                    "label": "Spaces Left",
+                    "description": "Select amount of max users"
+                },
+                "vcLimitOperation": {
+                    "label": "Voice Channel Limit Operation",
+                    "description": "Select an operation for the voice-channel."
+                },
+                "vcLimit": {
+                    "label": "Voice Channel Limit",
+                    "description": "Select a voice-channel limit"
+                },
+                "servers": {
+                    "label": "Servers",
+                    "description": "Servers that are included"
+                },
+                "autoNavigate": {
+                    "label": "Auto Navigate",
+                    "description": "Automatically navigates to the voice-channel."
+                },
+                "autoCamera": {
+                    "label": "Auto Camera",
+                    "description": "Automatically turns on camera"
+                },
+                "autoStream": {
+                    "label": "Auto Stream",
+                    "description": "Automatically turns on stream"
+                },
+                "selfMute": {
+                    "label": "Auto Mute",
+                    "description": "Automatically mutes your mic when joining voice-channel."
+                },
+                "selfDeafen": {
+                    "label": "Auto Deafen",
+                    "description": "Automatically deafems your mic when joining voice-channel."
+                },
+                "leaveEmpty": {
+                    "label": "Leave When Empty",
+                    "description": "Finds a random-call, when the voice chat is empty."
+                },
+                "avoidStages": {
+                    "label": "Avoid Stage",
+                    "description": "Avoids joining stage voice-channels."
+                },
+                "avoidAfk": {
+                    "label": "Avoid AFK",
+                    "description": "Avoids joining AFK voice-channels."
+                },
+                "video": {
+                    "label": "Video",
+                    "description": "Searches for users with their video on"
+                },
+                "stream": {
+                    "label": "Stream",
+                    "description": "Searches for users who are streaming"
+                },
+                "mute": {
+                    "label": "Mute",
+                    "description": "Searches for users who are muted"
+                },
+                "deafen": {
+                    "label": "Deafen",
+                    "description": "Searches for users who are deafened"
+                },
+                "includeStates": {
+                    "label": "Include Filters",
+                    "description": "Option to include states"
+                },
+                "avoidStates": {
+                    "label": "Avoid Filters",
+                    "description": "Option to avoid states"
+                }
+            },
+            "alert": {
+                "failed": "Failed to find a Voice Channel!"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -23,9 +24,9 @@ const startStream = findByCodeLazy('type:"STREAM_START"');
 const getDesktopSources = findByCodeLazy("desktop sources");
 
 const valueOperation = [
-    { label: "More than", value: "<", default: false },
-    { label: "Less than", value: ">", default: false },
-    { label: "Equal to", value: "==", default: true },
+    { label: t("plugin.randomVoice.context.select.lessThan"), value: "<", default: false },
+    { label: t("plugin.randomVoice.context.select.moreThan"), value: ">", default: false },
+    { label: t("plugin.randomVoice.context.select.equalTo"), value: "==", default: true },
 ];
 
 const CONNECT = 1n << 20n;
@@ -35,114 +36,219 @@ const VIDEO = 1 << 21;
 
 const settings = definePluginSettings({
     UserAmountOperation: {
-        description: "Select an operation for the amounts of users",
+        get label() {
+            return t("plugin.randomVoice.option.userAmountOperation.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.userAmountOperation.description");
+        },
         type: OptionType.SELECT,
         options: [...valueOperation],
     },
     UserAmount: {
-        description: "Select amount of users",
+        get label() {
+            return t("plugin.randomVoice.option.userAmount.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.userAmount.description");
+        },
         type: OptionType.SLIDER,
         markers: makeRange(0, 15, 1),
         default: 3,
         stickToMarkers: true,
     },
     spacesLeftOperation: {
-        description: "Select an operation for the maximum amounts of users",
+        get label() {
+            return t("plugin.randomVoice.option.spacesLeftOperation.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.spacesLeftOperation.description");
+        },
         type: OptionType.SELECT,
         options: [...valueOperation],
     },
     spacesLeft: {
-        description: "Select amount of max users",
+        get label() {
+            return t("plugin.randomVoice.option.spacesLeft.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.spacesLeft.description");
+        },
         type: OptionType.SLIDER,
         markers: makeRange(0, 15, 1),
         default: 3,
         stickToMarkers: true,
     },
     vcLimitOperation: {
-        description: "Select an operation for the voice-channel.",
+        get label() {
+            return t("plugin.randomVoice.option.vcLimitOperation.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.vcLimitOperation.description");
+        },
         type: OptionType.SELECT,
         options: [...valueOperation],
     },
     vcLimit: {
-        description: "Select a voice-channel limit",
+        get label() {
+            return t("plugin.randomVoice.option.vcLimit.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.vcLimit.description");
+        },
         type: OptionType.SLIDER,
         markers: makeRange(1, 15, 1),
         default: 5,
         stickToMarkers: true,
     },
     Servers: {
-        description: "Servers that are included",
+        get label() {
+            return t("plugin.randomVoice.option.servers.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.servers.description");
+        },
         type: OptionType.STRING,
         default: "",
     },
     autoNavigate: {
+        get label() {
+            return t("plugin.randomVoice.option.autoNavigate.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.autoNavigate.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Automatically navigates to the voice-channel.",
         default: false,
     },
     autoCamera: {
+        get label() {
+            return t("plugin.randomVoice.option.autoCamera.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.autoCamera.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Automatically turns on camera",
         default: false,
     },
     autoStream: {
+        get label() {
+            return t("plugin.randomVoice.option.autoStream.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.autoStream.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Automatically turns on stream",
         default: false,
     },
     selfMute: {
+        get label() {
+            return t("plugin.randomVoice.option.selfMute.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.selfMute.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Automatically mutes your mic when joining voice-channel.",
         default: false,
     },
     selfDeafen: {
+        get label() {
+            return t("plugin.randomVoice.option.selfDeafen.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.selfDeafen.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Automatically deafems your mic when joining voice-channel.",
         default: false,
     },
     leaveEmpty: {
+        get label() {
+            return t("plugin.randomVoice.option.leaveEmpty.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.leaveEmpty.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Finds a random-call, when the voice chat is empty.",
         default: false,
     },
     avoidStages: {
+        get label() {
+            return t("plugin.randomVoice.option.avoidStages.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.avoidStages.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Avoids joining stage voice-channels.",
         default: false,
     },
     avoidAfk: {
+        get label() {
+            return t("plugin.randomVoice.option.avoidAfk.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.avoidAfk.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Avoids joining AFK voice-channels.",
         default: false,
     },
     video: {
+        get label() {
+            return t("plugin.randomVoice.option.video.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.video.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Searches for users with their video on",
         default: false,
     },
     stream: {
+        get label() {
+            return t("plugin.randomVoice.option.stream.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.stream.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Searches for users who are streaming",
         default: false,
     },
     mute: {
+        get label() {
+            return t("plugin.randomVoice.option.mute.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.mute.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Searches for users who are muted",
         default: false,
     },
     deafen: {
+        get label() {
+            return t("plugin.randomVoice.option.deafen.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.deafen.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Searches for users who are deafened",
         default: false,
     },
     includeStates: {
+        get label() {
+            return t("plugin.randomVoice.option.includeStates.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.includeStates.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Option to include states",
         default: false,
     },
     avoidStates: {
+        get label() {
+            return t("plugin.randomVoice.option.avoidStates.label");
+        },
+        get description() {
+            return t("plugin.randomVoice.option.avoidStates.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Option to avoid states",
         default: false,
     },
 });
@@ -166,6 +272,11 @@ export default definePlugin({
     name: "RandomVoice",
     description: "Adds a Button near the Mute button to join a random voice call.",
     authors: [PcDevs.xijexo, PcDevs.omaw, Devs.thororen],
+
+    get displayDescription() {
+        return t("plugin.randomVoice.description");
+    },
+
     patches: [
         {
             find: "#{intl::ACCOUNT_SPEAKING_WHILE_MUTED}",
@@ -208,7 +319,7 @@ function randomVoice() {
                 onContextMenu={e => ContextMenuApi.openContextMenu(e, () => <ContextMenu />)}
                 onClick={() => getChannels()}
                 role="switch"
-                tooltipText={"Random Voice"}
+                tooltipText={t("plugin.randomVoice.tooltip")}
                 icon={<svg
                     width="18"
                     height="18"
@@ -257,27 +368,27 @@ function ContextMenu() {
         <Menu.Menu
             navId="random-vc"
             onClose={() => { }}
-            aria-label="Voice state modifier"
+            aria-label={t("plugin.randomVoice.context.label")}
         >
 
 
             <Menu.MenuItem
                 id="servers"
-                label="Select Servers"
+                label={t("plugin.randomVoice.context.select.servers")}
                 action={() => { }} >
                 <>
                     {Servers.map(server => (
                         <>
                             <Menu.MenuCheckboxItem
-                                key={String(server?.id ?? "invalid server")}
-                                id={String(server?.name ?? "invalid server")}
-                                label={server?.name ?? "invalid server"}
-                                checked={servers.includes(server?.id ?? "invalid server")}
+                                key={String(server?.id ?? t("plugin.randomVoice.context.invalid.server"))}
+                                id={String(server?.name ?? t("plugin.randomVoice.context.invalid.server"))}
+                                label={server?.name ?? t("plugin.randomVoice.context.invalid.server")}
+                                checked={servers.includes(server?.id ?? t("plugin.randomVoice.context.invalid.server"))}
                                 action={() => {
-                                    if (settings.store.Servers.includes(server?.id ?? "invalid server"))
+                                    if (settings.store.Servers.includes(server?.id ?? t("plugin.randomVoice.context.invalid.server")))
                                         settings.store.Servers = settings.store.Servers.replace(`/${server.id}`, "");
                                     else
-                                        settings.store.Servers += `/${server?.id ?? "invalid server"}`;
+                                        settings.store.Servers += `/${server?.id ?? t("plugin.randomVoice.context.invalid.server")}`;
                                     setServers(settings.store.Servers);
                                 }} />
                         </>
@@ -285,7 +396,7 @@ function ContextMenu() {
 
                     <Menu.MenuItem
                         id="selectAll"
-                        label="Select List"
+                        label={t("plugin.randomVoice.context.select.list")}
                         action={() => {
                             const allServerIds = Servers.filter(server => server?.id).map(server => server.id);
                             settings.store.Servers = `/${allServerIds.join("/")}`;
@@ -305,13 +416,12 @@ function ContextMenu() {
                     />
 
                     <Menu.MenuItem
-                        id="clear list "
-                        label="Reset List"
+                        id="clearList"
+                        label={t("plugin.randomVoice.context.reset.list")}
                         disabled={servers.length === 0}
                         action={() => {
                             settings.store.Servers = "";
                             setServers("");
-
                         }}
                         icon={() => {
                             return (
@@ -335,14 +445,14 @@ function ContextMenu() {
             </Menu.MenuItem>
 
             <Menu.MenuItem
-                id="Filter states"
-                label="Select Filters"
+                id="filterStates"
+                label={t("plugin.randomVoice.context.select.filters")}
                 action={() => { }} >
                 <>
                     <Menu.MenuCheckboxItem
                         key="muted"
                         id="muted"
-                        label="Muted"
+                        label={t("plugin.randomVoice.context.filter.muted")}
                         action={() => {
                             setMute(!mute);
                             settings.store.mute = !mute;
@@ -351,7 +461,7 @@ function ContextMenu() {
                     <Menu.MenuCheckboxItem
                         key="deafen"
                         id="deafen"
-                        label="Deafened"
+                        label={t("plugin.randomVoice.context.filter.deafened")}
                         action={() => {
                             setDeafen(!deafen);
                             settings.store.deafen = !deafen;
@@ -360,7 +470,7 @@ function ContextMenu() {
                     <Menu.MenuCheckboxItem
                         key="video"
                         id="video"
-                        label="Camera"
+                        label={t("plugin.randomVoice.context.filter.camera")}
                         action={() => {
                             setVideo(!video);
                             settings.store.video = !video;
@@ -369,7 +479,7 @@ function ContextMenu() {
                     <Menu.MenuCheckboxItem
                         key="stream"
                         id="stream"
-                        label="Stream"
+                        label={t("plugin.randomVoice.context.filter.stream")}
                         action={() => {
                             setStream(!stream);
                             settings.store.stream = !stream;
@@ -378,7 +488,7 @@ function ContextMenu() {
                     <Menu.MenuCheckboxItem
                         key="state"
                         id="state"
-                        label="Include Filters"
+                        label={t("plugin.randomVoice.context.filter.includeFilters")}
                         disabled={settings.store.avoidStates || !settings.store.includeStates && !settings.store.mute && !settings.store.deafen && !settings.store.video && !settings.store.stream}
                         action={() => {
                             setState(!state);
@@ -389,7 +499,7 @@ function ContextMenu() {
                     <Menu.MenuCheckboxItem
                         key="notstate"
                         id="notstate"
-                        label="Avoid Filters"
+                        label={t("plugin.randomVoice.context.filter.avoidFilters")}
                         disabled={settings.store.includeStates || !settings.store.avoidStates && !settings.store.avoidStates && !settings.store.mute && !settings.store.deafen && !settings.store.video && !settings.store.stream}
                         action={() => {
                             avoidState(!notstate);
@@ -402,12 +512,12 @@ function ContextMenu() {
             <Menu.MenuSeparator />
 
             <Menu.MenuGroup
-                label="USER AMOUNT"
+                label={t("plugin.randomVoice.context.amountLabel")}
             >
 
                 <Menu.MenuControlItem
                     id="min-user"
-                    label="User Amount"
+                    label={t("plugin.randomVoice.context.select.amount")}
                     control={(props, ref) => (
                         <Menu.MenuSliderControl
                             ref={ref}
@@ -418,19 +528,19 @@ function ContextMenu() {
                             onChange={debounce((value: number) => {
                                 settings.store.UserAmount = Number(value.toFixed(0));
                             }, 50)}
-                            renderValue={(value: number) => `${value.toFixed(0)} user${Number(value.toFixed(0)) === 1 ? "" : "s"}`} />
+                            renderValue={(value: number) => t("plugin.randomVoice.context.select.userAmount", { amount: value.toFixed(0), s: Number(value.toFixed(0)) === 1 ? "" : "s" })} />
                     )} />
 
                 <Menu.MenuItem
                     id="minParms"
-                    label="Parameters"
+                    label={t("plugin.randomVoice.context.select.parameters")}
                     action={() => { }} >
                     <>
                         <Menu.MenuRadioItem
                             key={"More than"}
                             group="minGroup"
                             id={"More than"}
-                            label={"More than"}
+                            label={t("plugin.randomVoice.context.select.moreThan")}
                             checked={userAmount === "<"}
                             action={() => {
                                 setuserAmount("<");
@@ -440,7 +550,7 @@ function ContextMenu() {
                             key={"Less than"}
                             group="minGroup"
                             id={"Less than"}
-                            label={"Less than"}
+                            label={t("plugin.randomVoice.context.select.lessThan")}
                             checked={userAmount === ">"}
                             action={() => {
                                 setuserAmount(">");
@@ -450,7 +560,7 @@ function ContextMenu() {
                             key={"Equal to"}
                             group="minGroup"
                             id={"Equal to "}
-                            label={"Equal to "}
+                            label={t("plugin.randomVoice.context.select.equalTo")}
                             checked={userAmount === "=="}
                             action={() => {
                                 setuserAmount("==");
@@ -464,12 +574,12 @@ function ContextMenu() {
             <Menu.MenuSeparator />
 
             <Menu.MenuGroup
-                label="SPACES LEFT"
+                label={t("plugin.randomVoice.context.spacesLabel")}
             >
 
                 <Menu.MenuControlItem
                     id="max-user"
-                    label="Spaces Left"
+                    label={t("plugin.randomVoice.context.select.spaces")}
                     control={(props, ref) => (
                         <Menu.MenuSliderControl
                             ref={ref}
@@ -480,19 +590,19 @@ function ContextMenu() {
                             onChange={debounce((value: number) => {
                                 settings.store.spacesLeft = Number(value.toFixed(0));
                             }, 50)}
-                            renderValue={(value: number) => `${value.toFixed(0)} user${Number(value.toFixed(0)) === 1 ? "" : "s"}`} />
+                            renderValue={(value: number) => t("plugin.randomVoice.context.select.userAmount", { amount: value.toFixed(0), s: Number(value.toFixed(0)) === 1 ? "" : "s" })} />
                     )} />
 
                 <Menu.MenuItem
                     id="maxGroup"
-                    label="Parameters"
+                    label={t("plugin.randomVoice.context.select.parameters")}
                     action={() => { }} >
                     <>
                         <Menu.MenuRadioItem
                             key={"More than"}
                             group="maxGroup"
                             id={"More than"}
-                            label={"More than"}
+                            label={t("plugin.randomVoice.context.select.moreThan")}
                             checked={SpacesLeftOperation === "<"}
                             action={() => {
                                 setSpacesLeftOperation("<");
@@ -502,7 +612,7 @@ function ContextMenu() {
                             key={"Less than"}
                             group="maxGroup"
                             id={"Less than"}
-                            label={"Less than"}
+                            label={t("plugin.randomVoice.context.select.lessThan")}
                             checked={SpacesLeftOperation === ">"}
                             action={() => {
                                 setSpacesLeftOperation(">");
@@ -512,7 +622,7 @@ function ContextMenu() {
                             key={"Equal to"}
                             group="maxGroup"
                             id={"Equal to "}
-                            label={"Equal to "}
+                            label={t("plugin.randomVoice.context.select.equalTo")}
                             checked={SpacesLeftOperation === "=="}
                             action={() => {
                                 setSpacesLeftOperation("==");
@@ -526,12 +636,12 @@ function ContextMenu() {
             <Menu.MenuSeparator />
 
             <Menu.MenuGroup
-                label="VOICE LIMIT"
+                label={t("plugin.randomVoice.context.voiceLabel")}
             >
 
                 <Menu.MenuControlItem
                     id="pc-limit"
-                    label="Voice Limit"
+                    label={t("plugin.randomVoice.context.select.voice")}
                     control={(props, ref) => (
                         <Menu.MenuSliderControl
                             ref={ref}
@@ -542,19 +652,19 @@ function ContextMenu() {
                             onChange={debounce((value: number) => {
                                 settings.store.vcLimit = Number(value.toFixed(0));
                             }, 50)}
-                            renderValue={(value: number) => `${value.toFixed(0)} user${Number(value.toFixed(0)) === 1 ? "" : "s"}`} />
+                            renderValue={(value: number) => t("plugin.randomVoice.context.select.userAmount", { amount: value.toFixed(0), s: Number(value.toFixed(0)) === 1 ? "" : "s" })} />
                     )} />
 
                 <Menu.MenuItem
                     id="vcParms"
-                    label="Parameters"
+                    label={t("plugin.randomVoice.context.select.parameters")}
                     action={() => { }} >
                     <>
                         <Menu.MenuRadioItem
                             key={"More than"}
                             group="vcGroup"
                             id={"More than"}
-                            label={"More than"}
+                            label={t("plugin.randomVoice.context.select.moreThan")}
                             checked={vcOperation === "<"}
                             action={() => {
                                 setVcOperation("<");
@@ -564,7 +674,7 @@ function ContextMenu() {
                             key={"Less than"}
                             group="vcGroup"
                             id={"Less than"}
-                            label={"Less than"}
+                            label={t("plugin.randomVoice.context.select.lessThan")}
                             checked={vcOperation === ">"}
                             action={() => {
                                 setVcOperation(">");
@@ -574,7 +684,7 @@ function ContextMenu() {
                             key={"Equal to"}
                             group="vcGroup"
                             id={"Equal to "}
-                            label={"Equal to "}
+                            label={t("plugin.randomVoice.context.select.equalTo")}
                             checked={vcOperation === "=="}
                             action={() => {
                                 setVcOperation("==");
@@ -587,15 +697,15 @@ function ContextMenu() {
 
             <Menu.MenuSeparator />
             <Menu.MenuGroup
-                label="SELF SETTINGS"
+                label={t("plugin.randomVoice.context.selfLabel")}
             >
-                <Menu.MenuItem id="voiceOptions" label="Voice Options" action={() => { }} >
+                <Menu.MenuItem id="voiceOptions" label={t("plugin.randomVoice.context.voice.label")} action={() => { }} >
                     <>
                         { }
                         <Menu.MenuCheckboxItem
                             key="selfMute"
                             id="selfMute"
-                            label="Auto Mute"
+                            label={t("plugin.randomVoice.context.voice.auto.mute")}
                             action={() => {
                                 setSelfMute(!muteself);
                                 settings.store.selfMute = !muteself;
@@ -604,7 +714,7 @@ function ContextMenu() {
                         <Menu.MenuCheckboxItem
                             key="selfDeafen"
                             id="selfDeafen"
-                            label="Auto Deafen"
+                            label={t("plugin.randomVoice.context.voice.auto.deafen")}
                             action={() => {
                                 setSelfDeafen(!deafenself);
                                 settings.store.selfDeafen = !deafenself;
@@ -613,7 +723,7 @@ function ContextMenu() {
                         <Menu.MenuCheckboxItem
                             key="autoCamera"
                             id="autoCamera"
-                            label="Auto Camera"
+                            label={t("plugin.randomVoice.context.voice.auto.camera")}
                             action={() => {
                                 setCamera(!camera);
                                 settings.store.autoCamera = !camera;
@@ -622,7 +732,7 @@ function ContextMenu() {
                         <Menu.MenuCheckboxItem
                             key="autoStream"
                             id="autoStream"
-                            label="Auto Stream"
+                            label={t("plugin.randomVoice.context.voice.auto.stream")}
                             action={() => {
                                 setStream(!stream);
                                 settings.store.autoStream = !stream;
@@ -631,7 +741,7 @@ function ContextMenu() {
                         <Menu.MenuCheckboxItem
                             key="leaveEmpty"
                             id="leaveEmpty"
-                            label="Leave when Empty"
+                            label={t("plugin.randomVoice.context.voice.auto.leaveWhenEmpty")}
                             action={() => {
                                 setEmpty(!empty);
                                 settings.store.leaveEmpty = !empty;
@@ -643,7 +753,7 @@ function ContextMenu() {
                 <Menu.MenuCheckboxItem
                     key="autonavigate"
                     id="autonavigate"
-                    label="Auto Navigate"
+                    label={t("plugin.randomVoice.context.voice.auto.navigate")}
                     action={() => {
                         setnavigate(!navigate);
                         settings.store.autoNavigate = !navigate;
@@ -653,7 +763,7 @@ function ContextMenu() {
                 <Menu.MenuCheckboxItem
                     key="avoidStage"
                     id="avoidStage"
-                    label="Avoid Stage"
+                    label={t("plugin.randomVoice.context.voice.auto.stage")}
                     action={() => {
                         setStage(!stage);
                         settings.store.avoidStages = !stage;
@@ -663,7 +773,7 @@ function ContextMenu() {
                 <Menu.MenuCheckboxItem
                     key="avoidAfk"
                     id="avoidAfk"
-                    label="Avoid AFK"
+                    label={t("plugin.randomVoice.context.voice.auto.afk")}
                     action={() => {
                         setAfk(!afk);
                         settings.store.avoidAfk = !afk;
@@ -748,7 +858,7 @@ function getChannels() {
 
     if (criteriaChannel.length === 0) {
         Toasts.show({
-            message: "Failed to find a Voice channel!",
+            message: t("plugin.randomVoice.alert.failed"),
             id: "pc-not-found",
             type: Toasts.Type.MESSAGE,
             options: {
