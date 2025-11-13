@@ -10,6 +10,7 @@ import { definePluginSettings } from "@api/Settings";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { ChannelTabsPreview } from "@plugins/channelTabs/components/ChannelTabsContainer";
+import { KeybindSettings } from "@plugins/channelTabs/components/KeybindSettings";
 import { Logger } from "@utils/Logger";
 import { makeRange, OptionType } from "@utils/types";
 import { SearchableSelect, useState } from "@webpack/common";
@@ -152,9 +153,6 @@ export const settings = definePluginSettings({
         get label() {
             return t("plugin.channelTabs.option.tabSet.label");
         },
-        get description() {
-            return t("plugin.channelTabs.option.tabSet.description");
-        },
         component: ChannelTabsPreview,
         type: OptionType.COMPONENT,
         default: {}
@@ -287,28 +285,140 @@ export const settings = definePluginSettings({
         },
         restartNeeded: true
     },
-    enableHotkeys: {
+    enableNumberKeySwitching: {
         get label() {
-            return t("plugin.channelTabs.option.enableHotkeys.label");
+            return t("plugin.channelTabs.option.enableNumberKeySwitching.label");
         },
         get description() {
-            return t("plugin.channelTabs.option.enableHotkeys.description");
+            return t("plugin.channelTabs.option.enableNumberKeySwitching.description");
         },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
     },
-    hotkeyCount: {
+    numberKeySwitchCount: {
         get label() {
-            return t("plugin.channelTabs.option.hotkeyCount.label");
+            return t("plugin.channelTabs.option.numberKeySwitchCount.label");
         },
         get description() {
-            return t("plugin.channelTabs.option.hotkeyCount.description");
+            return t("plugin.channelTabs.option.numberKeySwitchCount.description");
         },
         type: OptionType.SLIDER,
         markers: makeRange(1, 9, 1),
         default: 3,
         stickToMarkers: true,
+    },
+    enableCloseTabShortcut: {
+        get label() {
+            return t("plugin.channelTabs.option.enableCloseTabShortcut.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.enableCloseTabShortcut.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: false
+    },
+    enableNewTabShortcut: {
+        get label() {
+            return t("plugin.channelTabs.option.enableNewTabShortcut.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.enableNewTabShortcut.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: false
+    },
+    enableTabCycleShortcut: {
+        get label() {
+            return t("plugin.channelTabs.option.enableTabCycleShortcut.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.enableTabCycleShortcut.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: false
+    },
+    keybindsSection: {
+        get label() {
+            return t("plugin.channelTabs.option.keybindsSection.label");
+        },
+        type: OptionType.COMPONENT,
+        component: KeybindSettings
+    },
+    // me when storage yes for keybinds
+    closeTabKeybind: {
+        get label() {
+            return t("plugin.channelTabs.option.closeTabKeybind.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.closeTabKeybind.description");
+        },
+        type: OptionType.STRING,
+        default: "CTRL+W",
+        hidden: true
+    },
+    newTabKeybind: {
+        get label() {
+            return t("plugin.channelTabs.option.newTabKeybind.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.newTabKeybind.description");
+        },
+        type: OptionType.STRING,
+        default: "CTRL+T",
+        hidden: true
+    },
+    cycleTabForwardKeybind: {
+        get label() {
+            return t("plugin.channelTabs.option.cycleTabForwardKeybind.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.cycleTabForwardKeybind.description");
+        },
+        type: OptionType.STRING,
+        default: "CTRL+TAB",
+        hidden: true
+    },
+    cycleTabBackwardKeybind: {
+        get label() {
+            return t("plugin.channelTabs.option.cycleTabBackwardKeybind.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.cycleTabBackwardKeybind.description");
+        },
+        type: OptionType.STRING,
+        default: "CTRL+SHIFT+TAB",
+        hidden: true
+    },
+    showTabNumbers: {
+        get label() {
+            return t("plugin.channelTabs.option.showTabNumbers.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.showTabNumbers.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: false,
+        restartNeeded: false
+    },
+    tabNumberPosition: {
+        get label() {
+            return t("plugin.channelTabs.option.tabNumberPosition.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.tabNumberPosition.description");
+        },
+        type: OptionType.SELECT,
+        get options() {
+            return [
+                { label: t("plugin.channelTabs.option.tabNumberPosition.left"), value: "left", default: true },
+                { label: t("plugin.channelTabs.option.tabNumberPosition.right"), value: "right" }
+            ];
+        },
+        restartNeeded: false
     },
     animations: {
         get label() {

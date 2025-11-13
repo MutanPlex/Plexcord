@@ -23,8 +23,7 @@ import * as ChannelTabsUtils from "./util";
 
 const contextMenuPatch: NavContextMenuPatchCallback = (children, props: { channel: Channel, messageId?: string; }) => {
     const { channel, messageId } = props;
-    const group = findGroupChildrenByChildId("channel-copy-link", children);
-    group?.push(
+    const menuItem = (
         <Menu.MenuItem
             label={t("plugin.channelTabs.open")}
             id="open-link-in-tab"
@@ -34,6 +33,17 @@ const contextMenuPatch: NavContextMenuPatchCallback = (children, props: { channe
             }, settings.store.openInNewTabAutoSwitch, messageId, true, true)}
         />
     );
+
+    const group = findGroupChildrenByChildId("channel-copy-link", children);
+    if (group) {
+        group.push(menuItem);
+    } else {
+        children.splice(-1, 0, (
+            <Menu.MenuGroup>
+                {menuItem}
+            </Menu.MenuGroup>
+        ));
+    }
 };
 
 export default definePlugin({
@@ -43,7 +53,9 @@ export default definePlugin({
     dependencies: ["ContextMenuAPI"],
     contextMenus: {
         "channel-mention-context": contextMenuPatch,
-        "channel-context": contextMenuPatch
+        "channel-context": contextMenuPatch,
+        "user-context": contextMenuPatch,
+        "gdm-context": contextMenuPatch
     },
 
     get displayDescription() {
@@ -103,12 +115,30 @@ export default definePlugin({
 
     settings,
 
+    start() {
+        // migrate old settings to new granular keybind settings
+        const store = settings.store as any;
+        if (store.enableHotkeys !== undefined) {
+            const oldValue = store.enableHotkeys;
+            settings.store.enableNumberKeySwitching = oldValue;
+            settings.store.enableCloseTabShortcut = oldValue;
+            settings.store.enableNewTabShortcut = oldValue;
+            settings.store.enableTabCycleShortcut = oldValue;
+            delete store.enableHotkeys;
+        }
+        if (store.hotkeyCount !== undefined) {
+            settings.store.numberKeySwitchCount = store.hotkeyCount;
+            delete store.hotkeyCount;
+        }
+    },
+
     containerHeight: 0,
 
     flux: {
         CHANNEL_SELECT(data: { channelId: string | null, guildId: string | null; }) {
             // Skip if this navigation was triggered by us (clicking a tab)
             if (ChannelTabsUtils.isNavigatingViaTab()) {
+                ChannelTabsUtils.clearNavigationFlag();
                 return;
             }
 

@@ -189,7 +189,9 @@ function applyAggregatedCustomContent(message: Message, key: string, nodes: Reac
     const payload = {
         __messageloggerDiff: true,
         __messageloggerDiffKey: key,
-        content: React.createElement(React.Fragment, { key }, nodes),
+        content: <React.Fragment key={key}>
+            {nodes}
+        </React.Fragment>
     };
 
     const existingKey = (message as any).customRenderedContent?.__messageloggerDiffKey;
@@ -242,7 +244,11 @@ function createDiffSegment(part: DiffPart, message: Message, key: React.Key, hig
         }
     }
 
-    return React.createElement("span", { key, className }, parsedContent);
+    return (
+        <span key={key} className={className}>
+            {parsedContent}
+        </span>
+    );
 }
 
 function renderDiffParts(diffParts: DiffPart[], message: Message) {
@@ -291,9 +297,19 @@ export function parseEditContent(content: string, message: Message, previousCont
                 clearCustomRenderedContent(message);
             }
 
-            return React.createElement("div", { className: "messagelogger-diff-view" },
-                originalSegments.length ? React.createElement("div", { className: "messagelogger-diff-original" }, renderDiffParts(originalSegments, message)) : null,
-                !highlightCurrent && updatedSegments.length ? React.createElement("div", { className: "messagelogger-diff-updated" }, renderDiffParts(updatedSegments, message)) : null,
+            return (
+                <div className="messagelogger-diff-view" >
+                    {originalSegments.length ? (
+                        <div className="messagelogger-diff-original">
+                            {renderDiffParts(originalSegments, message)}
+                        </div>
+                    ) : null}
+                    {!highlightCurrent && updatedSegments.length ? (
+                        <div className="messagelogger-diff-updated">
+                            {renderDiffParts(updatedSegments, message)}
+                        </div>
+                    ) : null}
+                </div>
             );
         }
 

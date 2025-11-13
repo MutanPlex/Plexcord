@@ -148,7 +148,7 @@ function Modal({ modalProps }: { modalProps: ModalProps; }) {
             URL.revokeObjectURL(blobUrl);
     }, [blobUrl]);
 
-    const [meta] = useAwaiter(async () => {
+    const [meta, metaError] = useAwaiter(async () => {
         if (!blob) return EMPTY_META;
 
         const audioContext = new AudioContext();
@@ -218,11 +218,15 @@ function Modal({ modalProps }: { modalProps: ModalProps; }) {
                 </div>
 
                 <Heading>Preview</Heading>
-                <VoicePreview
-                    src={blobUrl}
-                    waveform={meta.waveform}
-                    recording={isRecording}
-                />
+                {metaError
+                    ? <Paragraph className={cl("error")}>Failed to parse selected audio file: {metaError.message}</Paragraph>
+                    : (
+                        <VoicePreview
+                            src={blobUrl}
+                            waveform={meta.waveform}
+                            recording={isRecording}
+                        />
+                    )}
 
                 {isUnsupportedFormat && (
                     <Card className={`pc-warning-card ${Margins.top16}`}>
@@ -240,7 +244,7 @@ function Modal({ modalProps }: { modalProps: ModalProps; }) {
                 <Button
                     disabled={!blob}
                     onClick={() => {
-                        sendAudio(blob!, meta);
+                        sendAudio(blob!, meta ?? EMPTY_META);
                         modalProps.onClose();
                         showToast("Now sending voice message... Please be patient", Toasts.Type.MESSAGE);
                     }}

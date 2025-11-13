@@ -1787,8 +1787,7 @@
                     "open": "Open on a specific set of tabs"
                 },
                 "tabSet": {
-                    "label": "Tab Set",
-                    "description": "Select which tabs to open at startup"
+                    "label": "Tab Set"
                 },
                 "noPomeloNames": {
                     "label": "No Pomelo Names",
@@ -1839,13 +1838,54 @@
                     "top": "Top",
                     "bottom": "Bottom"
                 },
-                "enableHotkeys": {
-                    "label": "Enable Hotkeys",
-                    "description": "Enable hotkey (1-9) for tab switching"
+                "enableNumberKeySwitching": {
+                    "label": "Enable Number Key Switching",
+                    "description": "Enable number keys (1-9) to switch tabs"
                 },
-                "hotkeyCount": {
-                    "label": "Hotkey Count",
-                    "description": "Number of tabs accessible via keyboard shortcuts"
+                "numberKeySwitchCount": {
+                    "label": "Number Key Switch Count",
+                    "description": "Number of tabs accessible via number keys (1-9)"
+                },
+                "enableCloseTabShortcut": {
+                    "label": "Enable Close Tab Shortcut",
+                    "description": "Enable close tab keyboard shortcut"
+                },
+                "enableNewTabShortcut": {
+                    "label": "Enable New Tab Shortcut",
+                    "description": "Enable new tab keyboard shortcut"
+                },
+                "enableTabCycleShortcut": {
+                    "label": "Enable Tab Cycle Shortcut",
+                    "description": "Enable tab cycling keyboard shortcut"
+                },
+                "keybindsSection": {
+                    "label": "Keybinds"
+                },
+                "closeTabKeybind": {
+                    "label": "Close Tab Keybind",
+                    "description": "Keyboard shortcut to close the current tab"
+                },
+                "newTabKeybind": {
+                    "label": "New Tab Keybind",
+                    "description": "Keyboard shortcut to open a new tab"
+                },
+                "cycleTabForwardKeybind": {
+                    "label": "Cycle Tab Forward Keybind",
+                    "description": "Keyboard shortcut to cycle to the next tab"
+                },
+                "cycleTabBackwardKeybind": {
+                    "label": "Cycle Tab Backward Keybind",
+                    "description": "Keyboard shortcut to cycle to the previous tab"
+                },
+                "showTabNumbers": {
+                    "label": "Show Tab Numbers",
+                    "description": "Show numbered badges on tabs to indicate keyboard shortcuts"
+                },
+                "tabNumberPosition": {
+                    "label": "Tab Number Position",
+                    "description": "Where to display the numbered badge on tabs",
+                    "left": "Left side (before icon)",
+                    "right": "Right side (after content)"
                 },
                 "animations": {
                     "label": "Animations"
@@ -5954,13 +5994,15 @@
                     "customSound": "CUSTOM SOUND"
                 },
                 "disableOptions": {
-                    "everything": "Everything",
-                    "discovery": "Discovery Tab",
-                    "fetching": "Fetching Quests",
-                    "popup": "Popup Above Account Panel",
-                    "badge": "Badge on User Profiles",
-                    "inventory": "Gift Inventory Relocation Notice",
+                    "everything": "Disable Everything",
+                    "discovery": "Disable Discovery Tab",
+                    "dms": "Disable Quests Tab in DMs",
+                    "fetching": "Disable Fetching Quests",
+                    "popup": "Disable Popup Above Account Panel",
+                    "badge": "Disable Badge on User Profiles",
+                    "inventory": "Disable Gift Inventory Relocation Notice",
                     "friendsList": "Friends List Active Now Promotion",
+                    "membersList": "Members List Actively Playing Icons",
                     "gameQuests": "Complete Game Quests in Background",
                     "videoQuests": "Complete Video Quests in Background",
                     "mobileDesktop": "Make Mobile Quests Desktop Compatible"
@@ -5996,6 +6038,10 @@
                     "label": "Disable Fetching Quests",
                     "description": "Disable fetching Quests from Discord."
                 },
+                "disableQuestsDirectMessagesTab": {
+                    "label": "Disable Quests Tab in DMs",
+                    "description": "Disable Quest tab in the Direct Messages page."
+                },
                 "disableQuestsDiscoveryTab": {
                     "label": "Disable Discovery Tab",
                     "description": "Disable Quest tab in the Discovery page."
@@ -6015,6 +6061,10 @@
                 "disableFriendsListActiveNowPromotion": {
                     "label": "Disable Friends List Active Now Promotion",
                     "description": "Disable the promotion of Quests for games played by friends."
+                },
+                "disableMembersListActivelyPlayingIcons": {
+                    "label": "Disable Members List Actively Playing Icons",
+                    "description": "Disable the actively playing icons in the members list."
                 },
                 "makeMobileQuestsDesktopCompatible": {
                     "label": "Make Mobile Quests Desktop Compatible",
@@ -6085,6 +6135,10 @@
                 "fetchingQuestsAlert": {
                     "label": "Fetching Quests Alert",
                     "description": "The sound to play when new Quests are detected."
+                },
+                "fetchingQuestsAlertVolume": {
+                    "label": "Fetching Quests Alert Volume",
+                    "description": "The volume of the alert sound when new Quests are detected."
                 },
                 "restyleQuests": {
                     "description": "Customize the appearance of Quest tiles in the Quests page."

@@ -1693,26 +1693,26 @@
         },
         "channelTabs": {
             "name": "ChannelTabs",
-            "description": "Sık ziyaret ettiğiniz kanalları sekmelerde gruplayın, tıpkı bir tarayıcı gibi",
+            "description": "Sık ziyaret ettiğiniz kanalları bir tarayıcıdaki gibi sekmelerde gruplayın",
             "open": "Yeni Sekmede Aç",
             "animation": {
-                "title": "Animasyon Kontolleri",
+                "title": "Animasyon Kontrolleri",
                 "description": "Kanal sekmeleri için belirli animasyonları etkinleştir veya devre dışı bırak. Her seçenek bağımsız olarak açılıp kapatılabilir.",
                 "placeholder": "Hangi animasyonların etkinleştirileceğini seçin...",
-                "tabHover": "Sekme Üzerine Gelme Efektleri (kaldırma + ölçek)",
+                "tabHover": "Sekme Üzerine Gelme Efektleri (kaldır + ölçek)",
                 "tabSelection": "Seçili Sekme Kaldırma Animasyonu",
                 "tabDragDrop": "Sekme Sürükle & Bırak (hayalet + yeniden sıralama)",
                 "tabEnterExit": "Sekme Giriş/Çıkış Kaydırmaları (oluşturma + kapatma)",
-                "tabIconPop": "Seçimde Simge Patlaması (simge büyütme)",
-                "closeRotation": "Kapatma Butonu Döndürme",
-                "plusPulse": "Artı Butonu Nabız",
-                "mentionGlow": "Bahsetme Rozeti Parlaması",
-                "compactExpand": "Sıkıştırılmış Mod Genişlemesi",
-                "selectedBorder": "Seçili Sekme Mavi Kenarlık",
+                "tabIconPop": "Simge Pop (seçimde büyüme)",
+                "closeRotation": "Kapatma Butonu Dönüşü",
+                "plusPulse": "Artı Butonu Nabız Efekti",
+                "mentionGlow": "Bahsetme Rozeti Işıltısı",
+                "compactExpand": "Kompakt Mod Genişleme",
+                "selectedBorder": "Seçili Sekme Mavi Kenarlığı",
                 "selectedBackground": "Seçili Sekme Arka Plan Rengi",
                 "tabShadows": "Sekme Gölge Efektleri",
-                "tabRepositioning": "Sekme Yeniden Konumlandırma (yumuşak pozisyon değişimleri)",
-                "resizeHandle": "Yeniden Boyutlandırma Tutamacı Solması",
+                "tabRepositioning": "Sekme Yeniden Konumlandırma (yumuşak geçiş)",
+                "resizeHandle": "Yeniden Boyutlandırma Tutacağı Solma",
                 "questActivate": "Aktif Görev Gradyanı"
             },
             "bookmark": {
@@ -1723,15 +1723,15 @@
                 "edit": "Yer İmini Düzenle",
                 "delete": "Yer İmini Sil",
                 "remove": "Yer İmlerinden Kaldır",
-                "removeFolder": "Klasörden Yer İmini Kaldır",
+                "removeFolder": "Yer İmini Klasörden Kaldır",
                 "loading": "Yer imleri yükleniyor...",
-                "noBookmarks": "Hiç yer iminiz yok. Açık sekmeyi ekleyebilir veya sağ tıklayarak bunu gizleyebilirsiniz",
+                "noBookmarks": "Hiç yer iminiz yok. Açık bir sekmeyi ekleyebilir ya da sağ tıklayarak bunu gizleyebilirsiniz.",
                 "quests": "Görevler",
                 "messageRequests": "Mesaj İstekleri",
                 "friends": "Arkadaşlar",
                 "shop": "Mağaza",
                 "library": "Kütüphane",
-                "discovery": "Keşfet",
+                "discovery": "Keşif",
                 "nitro": "Nitro",
                 "icymi": "ICYMI",
                 "activity": "Etkinlik",
@@ -1747,8 +1747,8 @@
                 "bookmark": "ChannelTabs Yer İmi Bağlam Menüsü",
                 "tab": "ChannelTabs Sekme Bağlam Menüsü",
                 "compact": "Kompakt",
-                "bookmarkBar": "Yer İmleri Çubuğu",
-                "openAll": "Yer İmlerinin Tümünü Aç",
+                "bookmarkBar": "Yer İmi Çubuğu",
+                "openAll": "Tümünü Yer İmlerinde Aç",
                 "openNew": "Yeni Sekmede Aç",
                 "close": {
                     "tab": "Sekmeyi Kapat",
@@ -1764,7 +1764,7 @@
             },
             "modal": {
                 "add": {
-                    "title": "Klasöre Yer İmi Ekle",
+                    "title": "Yer İmini Klasöre Ekle",
                     "select": "Bir klasör seç",
                     "create": "Yeni oluştur"
                 },
@@ -1775,23 +1775,22 @@
                 },
                 "delete": {
                     "title": "Emin misiniz?",
-                    "description": "Bir yer imi klasörünü silmek, içindeki tüm yer imlerini de silecektir."
+                    "description": "Bir yer imi klasörünü silmek, içindeki tüm yer imlerini de siler."
                 }
             },
             "option": {
                 "onStartup": {
                     "label": "Başlangıçta",
-                    "description": "Başlangıçta sekmelerle ne yapılacağını belirler",
-                    "nothing": "Hiçbir şey yapma (arkadaşlar sekmesinde aç)",
+                    "description": "Başlangıçta sekmelerle ne yapılacağını seçin",
+                    "nothing": "Hiçbir şey yapma (arkadaşlar sekmesini aç)",
                     "remember": "Son oturumdaki sekmeleri hatırla",
-                    "open": "Belirli sekme kümesini aç"
+                    "open": "Belirli sekmeleri aç"
                 },
                 "tabSet": {
-                    "label": "Sekme Kümesi",
-                    "description": "Başlangıçta açılacak sekmeleri seç"
+                    "label": "Sekme Seti"
                 },
                 "noPomeloNames": {
-                    "label": "Pomelo İsimleri Kullanma",
+                    "label": "Pomelo İsimleri Yok",
                     "description": "DM'ler için kullanıcı adları yerine görünen adları kullan"
                 },
                 "showStatusIndicators": {
@@ -1799,39 +1798,39 @@
                     "description": "DM'ler için durum göstergelerini göster"
                 },
                 "showBookmarkBar": {
-                    "label": "Yer İmleri Çubuğunu Göster"
+                    "label": "Yer İmi Çubuğunu Göster"
                 },
                 "bookmarkNotificationDot": {
                     "label": "Yer İmi Bildirim Noktası",
                     "description": "Yer imleri için bildirim noktası göster"
                 },
                 "widerTabsAndBookmarks": {
-                    "label": "Daha Geniş Sekmeler ve Yer İmleri",
-                    "description": "Büyük monitörler için sekme ve yer imlerinin uzunluğunu artır"
+                    "label": "Geniş Sekmeler ve Yer İmleri",
+                    "description": "Daha büyük monitörlerde sekmeleri ve yer imlerini genişlet"
                 },
                 "tabWidthScale": {
                     "label": "Sekme Genişlik Ölçeği",
-                    "description": "Sekme genişlik ölçeği (yüzde) - sekme kenarlarını sürükleyerek ayarlanabilir"
+                    "description": "Sekme genişliği ölçeği (yüzde) – sekme kenarlarını sürükleyerek ayarlanabilir"
                 },
                 "renderAllTabs": {
-                    "label": "Tüm Sekmeleri İşle",
-                    "description": "Daha hızlı geçiş için tüm sekmeleri bellekte önbelleğe al (kaydırma konumu ve durumu önbelleğe alınır)"
+                    "label": "Tüm Sekmeleri Bellekte Tut",
+                    "description": "Sekmeler arasında daha hızlı geçiş için tüm sekmeleri bellekte tut (kaydırma ve durum önbelleklenir)"
                 },
                 "switchToExistingTab": {
-                    "label": "Mevcut Sekmeye Geç",
-                    "description": "Gezinilen kanal zaten açıksa o sekmeye geç"
+                    "label": "Var Olan Sekmeye Geç",
+                    "description": "Gezindiğiniz kanal için bir sekme zaten varsa ona geç"
                 },
                 "createNewTabIfNotExists": {
-                    "label": "Sekme Yoksa Yeni Sekme Oluştur",
-                    "description": "Gezinilen kanal için sekme yoksa yeni bir sekme oluştur"
+                    "label": "Sekme Yoksa Oluştur",
+                    "description": "Bir kanal için sekme yoksa yeni bir sekme oluştur"
                 },
                 "enableRapidNavigation": {
                     "label": "Hızlı Gezinmeyi Etkinleştir",
-                    "description": "Hızlı gezinme davranışını etkinleştir - kanallar arasında hızlı geçiş yapılırsa mevcut sekme değiştirilir, yenisi oluşturulmaz"
+                    "description": "Kanal değişimleri hızlı yapıldığında yeni sekme yerine mevcut sekme değişsin"
                 },
                 "rapidNavigationThreshold": {
                     "label": "Hızlı Gezinme Eşiği",
-                    "description": "Hızlı gezinme için zaman aralığı (milisaniye cinsinden). Bu süre içinde yeni kanallar mevcut sekmeyi değiştirir, yeni sekme oluşturulmaz."
+                    "description": "Milisaniye cinsinden zaman aralığı. Bu sürede yeni kanal açılırsa mevcut sekme değiştirilir."
                 },
                 "tabBarPosition": {
                     "label": "Sekme Çubuğu Konumu",
@@ -1839,116 +1838,157 @@
                     "top": "Üst",
                     "bottom": "Alt"
                 },
-                "enableHotkeys": {
-                    "label": "Kısayol Tuşlarını Etkinleştir",
-                    "description": "Sekme geçişi için kısayol tuşlarını (1-9) etkinleştir"
+                "enableNumberKeySwitching": {
+                    "label": "Numara Tuşlarıyla Sekme Değiştirme",
+                    "description": "1–9 tuşlarıyla sekme değiştirmeyi etkinleştir"
                 },
-                "hotkeyCount": {
-                    "label": "Kısayol Sayısı",
-                    "description": "Klavye kısayolları ile erişilebilen sekme sayısı"
+                "numberKeySwitchCount": {
+                    "label": "Numara Tuşu Sekme Sayısı",
+                    "description": "Numara tuşlarıyla erişilebilecek sekme sayısı (1–9)"
+                },
+                "enableCloseTabShortcut": {
+                    "label": "Sekme Kapatma Kısayolu",
+                    "description": "Sekme kapatma klavye kısayolunu etkinleştir"
+                },
+                "enableNewTabShortcut": {
+                    "label": "Yeni Sekme Kısayolu",
+                    "description": "Yeni sekme açma kısayolunu etkinleştir"
+                },
+                "enableTabCycleShortcut": {
+                    "label": "Sekme Döngüsü Kısayolu",
+                    "description": "Sekmeler arasında geçiş kısayolunu etkinleştir"
+                },
+                "keybindsSection": {
+                    "label": "Klavye Kısayolları"
+                },
+                "closeTabKeybind": {
+                    "label": "Sekme Kapatma Kısayolu",
+                    "description": "Geçerli sekmeyi kapatma kısayolu"
+                },
+                "newTabKeybind": {
+                    "label": "Yeni Sekme Kısayolu",
+                    "description": "Yeni sekme açma kısayolu"
+                },
+                "cycleTabForwardKeybind": {
+                    "label": "İleri Sekme Döngüsü",
+                    "description": "Sonraki sekmeye geçme kısayolu"
+                },
+                "cycleTabBackwardKeybind": {
+                    "label": "Geri Sekme Döngüsü",
+                    "description": "Önceki sekmeye geçme kısayolu"
+                },
+                "showTabNumbers": {
+                    "label": "Sekme Numaralarını Göster",
+                    "description": "Kısayolları göstermek için sekmelerde numara rozetlerini göster"
+                },
+                "tabNumberPosition": {
+                    "label": "Sekme Numarası Konumu",
+                    "description": "Sekmelerde numara rozetlerinin konumu",
+                    "left": "Sol (simge öncesi)",
+                    "right": "Sağ (içerik sonrası)"
                 },
                 "animations": {
                     "label": "Animasyonlar"
                 },
                 "animationHover": {
                     "label": "Üzerine Gelme Animasyonu",
-                    "description": "Üzerine gelme sırasında kaldırma ve ölçeklendirme efektlerini etkinleştir"
+                    "description": "Hover sırasında kaldırma ve büyütme efektlerini etkinleştir"
                 },
                 "animationSelection": {
                     "label": "Seçim Animasyonu",
-                    "description": "Seçim animasyonlarını etkinleştir (kenar parlaması, kaldırma)"
+                    "description": "Seçim anında ışık/çerçeve animasyonlarını etkinleştir"
                 },
                 "animationDragDrop": {
-                    "label": "Sürükle Bırak Animasyonu",
-                    "description": "Sürükle bırak için hayalet efektlerini etkinleştir"
+                    "label": "Sürükle-Bırak Animasyonu",
+                    "description": "Sürükleme sırasında hayalet efekti etkinleştir"
                 },
                 "animationEnterExit": {
                     "label": "Giriş/Çıkış Animasyonu",
-                    "description": "Sekme oluşturma/kapatma sırasında kaydırma animasyonlarını etkinleştir"
+                    "description": "Sekme oluşturma/kapatma sırasında kaydırma animasyonları"
                 },
                 "animationIconPop": {
-                    "label": "İkon Büyüme Animasyonu",
-                    "description": "Seçim sırasında ikonun büyüme animasyonunu etkinleştir"
+                    "label": "Simge Pop Animasyonu",
+                    "description": "Seçim sırasında simgenin büyüme animasyonunu etkinleştir"
                 },
                 "animationCloseRotation": {
-                    "label": "Kapatma Döndürme Animasyonu",
-                    "description": "Kapatma düğmeleri için döndürme animasyonunu etkinleştir"
+                    "label": "Kapatma Düğmesi Dönüşü",
+                    "description": "Kapatma ikonuna dönüş animasyonu ekle"
                 },
                 "animationPlusPulse": {
-                    "label": "Artı Butonu Nabız Animasyonu",
-                    "description": "Artı butonu için nabız animasyonunu etkinleştir"
+                    "label": "Artı Düğmesi Nabzı",
+                    "description": "Yeni sekme butonu için nabız animasyonunu etkinleştir"
                 },
                 "animationMentionGlow": {
-                    "label": "Bahsetme Parlaması Animasyonu",
-                    "description": "Bahsetmeler için kırmızı nabız parlamasını etkinleştir"
+                    "label": "Bahsetme Işıltısı",
+                    "description": "Bahsetme rozetinde kırmızı parlama animasyonunu etkinleştir"
                 },
                 "animationCompactExpand": {
                     "label": "Kompakt Genişleme Animasyonu",
-                    "description": "Kompakt sekmeler için yumuşak genişleme efektini etkinleştir"
+                    "description": "Kompakt sekmelerin yumuşak şekilde genişlemesini etkinleştir"
                 },
                 "animationSelectedBorder": {
-                    "label": "Seçili Kenar Animasyonu",
-                    "description": "Seçili sekmeler için kenar ve parlama stilini etkinleştir"
+                    "label": "Seçili Sekme Kenarlığı Animasyonu",
+                    "description": "Seçili sekme için kenarlık ve parıltı stil animasyonlarını etkinleştir"
                 },
                 "animationSelectedBackground": {
-                    "label": "Seçili Arka Plan Animasyonu",
-                    "description": "Seçili sekmeler için arka plan rengi değişim animasyonunu etkinleştir"
+                    "label": "Seçili Sekme Arka Plan Animasyonu",
+                    "description": "Seçili sekmenin arka plan renginin animasyonlu değişimini etkinleştir"
                 },
                 "animationTabShadows": {
-                    "label": "Sekme Gölgeleri Animasyonu",
+                    "label": "Sekme Gölge Animasyonu",
                     "description": "Sekmelerde gölge efektlerini etkinleştir"
                 },
                 "animationTabPositioning": {
                     "label": "Sekme Konumlandırma Animasyonu",
-                    "description": "Sekmelerin pozisyon değişiminde yumuşak geçişleri etkinleştir"
+                    "description": "Sekmeler yer değiştirirken yumuşak geçiş animasyonları"
                 },
                 "animationResizeHandle": {
-                    "label": "Yeniden Boyutlandırma Tutamacı Animasyonu",
-                    "description": "Yeniden boyutlandırma tutamacı için solma animasyonunu etkinleştir"
+                    "label": "Yeniden Boyutlandırma Animasyonu",
+                    "description": "Boyutlandırma tutacağının solma animasyonunu etkinleştir"
                 },
                 "animationQuestsActive": {
                     "label": "Aktif Görev Animasyonu",
-                    "description": "Görevler aktifken Görevler sekmesinde gradyan animasyonlarını etkinleştir"
+                    "description": "Görevler aktifken sekmede gradyan animasyonlarını etkinleştir"
                 },
                 "compactAutoExpandSelected": {
-                    "label": "Kompakt Seçim Otomatik Genişletme",
-                    "description": "Seçildiğinde kompakt sekmeleri otomatik olarak genişletip tam kanal adını göster"
+                    "label": "Seçilince Otomatik Genişlet",
+                    "description": "Seçildiğinde kompakt sekmeleri otomatik genişlet"
                 },
                 "compactAutoExpandOnHover": {
-                    "label": "Kompakt Üzerine Gelince Genişletme",
-                    "description": "Üzerine gelindiğinde kompakt sekmeleri otomatik olarak genişletip tam kanal adını göster"
+                    "label": "Üzerine Gelince Otomatik Genişlet",
+                    "description": "Üzerine gelince kompakt sekmeleri otomatik genişlet"
                 },
                 "openInNewTabAutoSwitch": {
-                    "label": "Yeni Sekmede Aç Otomatik Geçiş",
-                    "description": "'Yeni Sekmede Aç' bağlam menüsünden açılan sekmelere otomatik geçiş yap"
+                    "label": "Yeni Sekmede Açarken Otomatik Geçiş",
+                    "description": "Yeni sekme açıldığında otomatik olarak o sekmeye geç"
                 },
                 "bookmarksIndependentFromTabs": {
-                    "label": "Sekmelerden Bağımsız Yer İmleri",
-                    "description": "Yer imleri aktif sekme çubuğunu etkilemeden bağımsız olarak gezinir"
+                    "label": "Yer İmleri Bağımsız",
+                    "description": "Yer imleri, sekme çubuğunu etkilemeden bağımsız olarak gezinir"
                 },
                 "showResizeHandle": {
-                    "label": "Yeniden Boyutlandırma Tutamacını Göster",
-                    "description": "Sekme genişliğini ayarlamak için sekmelerin üzerine gelindiğinde tutamacı göster"
+                    "label": "Boyutlandırma Tutacağını Göster",
+                    "description": "Sekmelerin genişliğini ayarlamak için tutacağı göster"
                 },
                 "openNewTabsInCompactMode": {
-                    "label": "Yeni Sekmeleri Kompakt Modda Aç",
-                    "description": "Tüm yeni oluşturulan sekmeleri varsayılan olarak kompakt modda aç"
+                    "label": "Yeni Sekmeleri Kompakt Aç",
+                    "description": "Yeni açılan sekmeler varsayılan olarak kompakt modda açılsın"
                 },
                 "oneTabPerServer": {
                     "label": "Sunucu Başına Tek Sekme",
-                    "description": "Sunucu başına yalnızca bir sekmeye izin verir, böylece o sunucuda yeni bir kanal açmak mevcut sekmeyi kullanır."
+                    "description": "Bir sunucu için yalnızca tek sekme olsun; yeni kanal açıldığında aynı sekme kullanılsın"
                 },
                 "maxOpenTabs": {
-                    "label": "Maksimum Açık Sekme Sayısı",
-                    "description": "Açık sekmelerin maksimum sayısı (0 = sınırsız)"
+                    "label": "Maksimum Açık Sekme",
+                    "description": "Aynı anda açık olabilecek maksimum sekme sayısı (0 = sınırsız)"
                 }
             },
             "tabs": {
                 "startup": "Başlangıç Sekmeleri",
-                "currently": "Geçerli açık sekmelere ayarla"
+                "currently": "Şu an açık sekmeleri ayarla"
             },
             "toast": {
-                "notRestoring": "KeepCurrentChannel etkin olduğundan sekmeler geri yüklenmiyor",
+                "notRestoring": "KeepCurrentChannel etkin olduğu için sekmeler geri yüklenmiyor",
                 "failed": "Sekmeler geri yüklenemedi"
             }
         },
@@ -5954,16 +5994,18 @@
                     "customSound": "ÖZEL SES"
                 },
                 "disableOptions": {
-                    "everything": "Her şey",
-                    "discovery": "Keşfet Sekmesi",
-                    "fetching": "Görevleri Getirme",
-                    "popup": "Hesap Paneli Üzerindeki Açılır Pencere",
-                    "badge": "Kullanıcı Profillerinde Rozet",
-                    "inventory": "Hediye Envanteri Taşınma Bildirimi",
+                    "everything": "Her Şeyi Devre Dışı Bırak",
+                    "discovery": "Keşfet Sekmesini Devre Dışı Bırak",
+                    "dms": "DM'lerde Görevler Sekmesini Devre Dışı Bırak",
+                    "fetching": "Görev Getirmeyi Devre Dışı Bırak",
+                    "popup": "Hesap Panelinin Üstündeki Açılır Pencereyi Devre Dışı Bırak",
+                    "badge": "Kullanıcı Profillerindeki Rozeti Devre Dışı Bırak",
+                    "inventory": "Hediye Envanteri Taşıma Bildirimini Devre Dışı Bırak",
                     "friendsList": "Arkadaş Listesi Şu Anda Aktif Tanıtımı",
+                    "membersList": "Üyeler Listesi Aktif Oynuyor Simgeleri",
                     "gameQuests": "Oyun Görevlerini Arka Planda Tamamla",
                     "videoQuests": "Video Görevlerini Arka Planda Tamamla",
-                    "mobileDesktop": "Mobil Görevleri Masaüstü Uyumlu Yap"
+                    "mobileDesktop": "Mobil Görevleri Masaüstü ile Uyumlu Hale Getir"
                 },
                 "options": {
                     "always": "Her Zaman",
@@ -5996,6 +6038,10 @@
                     "label": "Görev Getirmeyi Devre Dışı Bırak",
                     "description": "Discord'dan Görev getirmeyi devre dışı bırak."
                 },
+                "disableQuestsDirectMessagesTab": {
+                    "label": "DM'lerdeki Görev Sekmesini Devre Dışı Bırak",
+                    "description": "Doğrudan Mesajlar sayfasındaki Görev sekmesini devre dışı bırak."
+                },
                 "disableQuestsDiscoveryTab": {
                     "label": "Keşfet Sekmesini Devre Dışı Bırak",
                     "description": "Keşfet sayfasındaki Görev sekmesini devre dışı bırak."
@@ -6015,6 +6061,10 @@
                 "disableFriendsListActiveNowPromotion": {
                     "label": "Arkadaş Listesi Şu Anda Aktif Tanıtımını Devre Dışı Bırak",
                     "description": "Arkadaşların oynadığı oyunlar için Görev tanıtımını devre dışı bırak."
+                },
+                "disableMembersListActivelyPlayingIcons": {
+                    "label": "Üyeler Listesindeki Aktif Oynama Simgelerini Devre Dışı Bırak",
+                    "description": "Üyeler listesindeki aktif oynama simgelerini devre dışı bırak."
                 },
                 "makeMobileQuestsDesktopCompatible": {
                     "label": "Mobil Görevleri Masaüstü Uyumlu Yap",
@@ -6085,6 +6135,10 @@
                 "fetchingQuestsAlert": {
                     "label": "Görev Getirme Uyarısı",
                     "description": "Yeni Görevler tespit edildiğinde çalınacak ses."
+                },
+                "fetchingQuestsAlertVolume": {
+                    "label": "Görev Getirme Uyarısı Sesi Hacmi",
+                    "description": "Yeni Görevler tespit edildiğinde çalınacak sesin hacmi."
                 },
                 "restyleQuests": {
                     "description": "Görevler sayfasındaki Görev kutucuklarının görünümünü özelleştir."

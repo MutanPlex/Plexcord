@@ -10,8 +10,8 @@ import { t, tJsx } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Divider, ErrorBoundary, Heading, Paragraph } from "@components/index";
 import { Logger } from "@utils/Logger";
-import { OptionType } from "@utils/types";
-import { Button, ColorPicker, ContextMenuApi, Menu, Select, TextInput, useEffect, useRef, useState } from "@webpack/common";
+import { makeRange, OptionType } from "@utils/types";
+import { Button, ColorPicker, ContextMenuApi, Menu, Select, Slider, TextInput, useEffect, useRef, useState } from "@webpack/common";
 import { JSX } from "react";
 
 import { activeQuestIntervals, getQuestTileClasses, getQuestTileStyle } from "./index";
@@ -74,7 +74,7 @@ export function fetchAndAlertQuests(source: string, logger: Logger): void {
 
                 if (shouldAlert && newOnlyFiltered.length > 0) {
                     logger.info(`[${getFormattedNow()}] New Quests detected. Playing alert sound.`);
-                    playAudio(shouldAlert);
+                    playAudio(shouldAlert, { volume: settings.store.fetchingQuestsAlertVolume });
                 } else {
                     logger.info(`[${getFormattedNow()}] New Quests detected.`);
                 }
@@ -369,21 +369,25 @@ function validateDisableQuestSetting() {
         disableQuestsEverything,
         disableQuestsDiscoveryTab,
         disableQuestsFetchingQuests,
+        disableQuestsDirectMessagesTab,
         disableQuestsPopupAboveAccountPanel,
         disableQuestsBadgeOnUserProfiles,
         disableQuestsGiftInventoryRelocationNotice,
-        disableFriendsListActiveNowPromotion
+        disableFriendsListActiveNowPromotion,
+        disableMembersListActivelyPlayingIcon
     } = settings.use([
         "disableQuestsEverything",
         "disableQuestsDiscoveryTab",
         "disableQuestsFetchingQuests",
+        "disableQuestsDirectMessagesTab",
         "disableQuestsPopupAboveAccountPanel",
         "disableQuestsBadgeOnUserProfiles",
         "disableQuestsGiftInventoryRelocationNotice",
-        "disableFriendsListActiveNowPromotion"
+        "disableFriendsListActiveNowPromotion",
+        "disableMembersListActivelyPlayingIcon"
     ]);
 
-    if (disableQuestsDiscoveryTab || disableQuestsFetchingQuests || disableQuestsPopupAboveAccountPanel || disableQuestsBadgeOnUserProfiles || disableQuestsGiftInventoryRelocationNotice || disableFriendsListActiveNowPromotion) {
+    if (disableQuestsDiscoveryTab || disableQuestsDirectMessagesTab || disableQuestsFetchingQuests || disableQuestsPopupAboveAccountPanel || disableQuestsBadgeOnUserProfiles || disableQuestsGiftInventoryRelocationNotice || disableFriendsListActiveNowPromotion || disableMembersListActivelyPlayingIcon) {
         settings.store.disableQuestsEverything = false;
     }
 }
@@ -669,10 +673,12 @@ function DisableQuestsSetting(): JSX.Element {
         disableQuestsEverything,
         disableQuestsDiscoveryTab,
         disableQuestsFetchingQuests,
+        disableQuestsDirectMessagesTab,
         disableQuestsPopupAboveAccountPanel,
         disableQuestsBadgeOnUserProfiles,
         disableQuestsGiftInventoryRelocationNotice,
         disableFriendsListActiveNowPromotion,
+        disableMembersListActivelyPlayingIcon,
         makeMobileQuestsDesktopCompatible,
         completeVideoQuestsInBackground,
         completeGameQuestsInBackground
@@ -680,10 +686,12 @@ function DisableQuestsSetting(): JSX.Element {
         "disableQuestsEverything",
         "disableQuestsDiscoveryTab",
         "disableQuestsFetchingQuests",
+        "disableQuestsDirectMessagesTab",
         "disableQuestsPopupAboveAccountPanel",
         "disableQuestsBadgeOnUserProfiles",
         "disableQuestsGiftInventoryRelocationNotice",
         "disableFriendsListActiveNowPromotion",
+        "disableMembersListActivelyPlayingIcon",
         "makeMobileQuestsDesktopCompatible",
         "completeVideoQuestsInBackground",
         "completeGameQuestsInBackground"
@@ -692,11 +700,13 @@ function DisableQuestsSetting(): JSX.Element {
     const options: DynamicDropdownSettingOption[] = [
         { label: t("plugin.questify.settings.disableOptions.everything"), value: "everything", selected: disableQuestsEverything, type: "disable" },
         { label: t("plugin.questify.settings.disableOptions.fetching"), value: "fetching", selected: disableQuestsFetchingQuests, type: "disable" },
+        { label: t("plugin.questify.settings.disableOptions.dms"), value: "direct-messages", selected: disableQuestsDirectMessagesTab, type: "disable" },
         { label: t("plugin.questify.settings.disableOptions.discovery"), value: "discovery", selected: disableQuestsDiscoveryTab, type: "disable" },
         { label: t("plugin.questify.settings.disableOptions.badge"), value: "badge", selected: disableQuestsBadgeOnUserProfiles, type: "disable" },
         { label: t("plugin.questify.settings.disableOptions.popup"), value: "popup", selected: disableQuestsPopupAboveAccountPanel, type: "disable" },
         { label: t("plugin.questify.settings.disableOptions.inventory"), value: "inventory", selected: disableQuestsGiftInventoryRelocationNotice, type: "disable" },
         { label: t("plugin.questify.settings.disableOptions.friendsList"), value: "friends-list", selected: disableFriendsListActiveNowPromotion, type: "disable" },
+        { label: t("plugin.questify.settings.disableOptions.membersList"), value: "members-list", selected: disableMembersListActivelyPlayingIcon, type: "disable" },
         { label: t("plugin.questify.settings.disableOptions.gameQuests"), value: "game-quests-background", selected: completeGameQuestsInBackground, type: "modification" },
         { label: t("plugin.questify.settings.disableOptions.videoQuests"), value: "video-quests-background", selected: completeVideoQuestsInBackground, type: "modification" },
         { label: t("plugin.questify.settings.disableOptions.mobileDesktop"), value: "mobile-desktop-compatible", selected: makeMobileQuestsDesktopCompatible, type: "modification" }
@@ -721,11 +731,13 @@ function DisableQuestsSetting(): JSX.Element {
 
         settings.store.disableQuestsEverything = enabledValues.includes("everything");
         settings.store.disableQuestsDiscoveryTab = enabledValues.includes("discovery");
+        settings.store.disableQuestsDirectMessagesTab = enabledValues.includes("direct-messages");
         settings.store.disableQuestsFetchingQuests = enabledValues.includes("fetching");
         settings.store.disableQuestsPopupAboveAccountPanel = enabledValues.includes("popup");
         settings.store.disableQuestsBadgeOnUserProfiles = enabledValues.includes("badge");
         settings.store.disableQuestsGiftInventoryRelocationNotice = enabledValues.includes("inventory");
         settings.store.disableFriendsListActiveNowPromotion = enabledValues.includes("friends-list");
+        settings.store.disableMembersListActivelyPlayingIcon = enabledValues.includes("members-list");
         settings.store.completeGameQuestsInBackground = enabledValues.includes("game-quests-background");
         settings.store.completeVideoQuestsInBackground = enabledValues.includes("video-quests-background");
         settings.store.makeMobileQuestsDesktopCompatible = enabledValues.includes("mobile-desktop-compatible");
@@ -1558,7 +1570,7 @@ function FetchingQuestsSetting(): JSX.Element {
                                         if (activePlayer.current) {
                                             clearActivePlayer();
                                         } else {
-                                            activePlayer.current = playAudio(currentAlertSelection.value as string, { onEnded: clearActivePlayer });
+                                            activePlayer.current = playAudio(currentAlertSelection.value as string, { onEnded: clearActivePlayer, volume: settings.store.fetchingQuestsAlertVolume });
                                             setIsPlaying(true);
                                         }
                                     }
@@ -1566,6 +1578,16 @@ function FetchingQuestsSetting(): JSX.Element {
                                 style={{ cursor: currentAlertSelection && currentAlertSelection.value ? "pointer" : "default" }}
                             >
                                 {SoundIcon(24, 24)}
+                            </div>
+                        </div>
+                        <div className={q("sub-inline-group")}>
+                            <div className={q("inline-group-item", "volume-slider-container")}>
+                                <Slider
+                                    markers={makeRange(0, 100, 10)}
+                                    initialValue={settings.store.fetchingQuestsAlertVolume}
+                                    onValueChange={val => { settings.store.fetchingQuestsAlertVolume = val; }}
+                                    className={q("volume-slider")}
+                                />
                             </div>
                         </div>
                     </div>
@@ -1616,6 +1638,17 @@ export const settings = definePluginSettings({
         default: false,
         hidden: true
     },
+    disableQuestsDirectMessagesTab: {
+        type: OptionType.BOOLEAN,
+        get label() {
+            return t("plugin.questify.option.disableQuestsDirectMessagesTab.label");
+        },
+        get description() {
+            return t("plugin.questify.option.disableQuestsDirectMessagesTab.description");
+        },
+        default: false,
+        hidden: true
+    },
     disableQuestsPopupAboveAccountPanel: {
         type: OptionType.BOOLEAN,
         get label() {
@@ -1656,6 +1689,17 @@ export const settings = definePluginSettings({
         },
         get description() {
             return t("plugin.questify.option.disableFriendsListActiveNowPromotion.description");
+        },
+        default: true,
+        hidden: true
+    },
+    disableMembersListActivelyPlayingIcon: {
+        type: OptionType.BOOLEAN,
+        get label() {
+            return t("plugin.questify.option.disableMembersListActivelyPlayingIcon.label");
+        },
+        get description() {
+            return t("plugin.questify.option.disableMembersListActivelyPlayingIcon.description");
         },
         default: true,
         hidden: true
@@ -1874,6 +1918,17 @@ export const settings = definePluginSettings({
             return t("plugin.questify.option.fetchingQuestsAlert.description");
         },
         default: defaultFetchQuestsAlert, // Item from predefined list or a URL to CSP valid audio file.
+        hidden: true
+    },
+    fetchingQuestsAlertVolume: {
+        type: OptionType.NUMBER,
+        get label() {
+            return t("plugin.questify.option.fetchingQuestsAlertVolume.label");
+        },
+        get description() {
+            return t("plugin.questify.option.fetchingQuestsAlertVolume.description");
+        },
+        default: 100, // 0 - 100
         hidden: true
     },
     restyleQuests: {

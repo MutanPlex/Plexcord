@@ -33,9 +33,28 @@ const renderNotebook = ({
     searchInput: string;
     closeModal: () => void;
 }) => {
-    const messageArray = Object.values(notes).map(note => (
+    let notesArray = Object.values(notes);
+
+    if (searchInput) {
+        const searchLower = searchInput.toLowerCase();
+        notesArray = notesArray.filter(note =>
+            note.content?.toLowerCase().includes(searchLower)
+        );
+    }
+
+    if (!notesArray.length) return <Errors />;
+
+    if (sortType) {
+        notesArray.sort((a, b) =>
+            new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+        );
+    }
+
+    if (sortDirection) notesArray.reverse();
+
+    return notesArray.map(note => (
         <RenderMessage
-            key={`${notebook}-${note.id}`}
+            key={note.id || notebook}
             note={note}
             notebook={notebook}
             updateParent={updateParent}
@@ -43,20 +62,6 @@ const renderNotebook = ({
             closeModal={closeModal}
         />
     ));
-
-    if (sortType)
-        messageArray.sort(
-            (a, b) =>
-                new Date(b.props.note?.timestamp)?.getTime() - new Date(a.props.note?.timestamp)?.getTime(),
-        );
-
-    if (sortDirection) messageArray.reverse();
-
-    const filteredMessages = messageArray.filter(message =>
-        message.props.note?.content?.toLowerCase().includes(searchInput.toLowerCase()),
-    );
-
-    return filteredMessages.length > 0 ? filteredMessages : <Errors />;
 };
 
 
@@ -67,7 +72,7 @@ export const NoteModal = (props: ModalProps & { onClose: () => void; }) => {
     const [sortDirection, setSortDirection] = React.useState(true);
     const [currentNotebook, setCurrentNotebook] = React.useState("Main");
 
-    const { quickSelect, quickSelectLabel, quickSelectQuick, quickSelectValue, quickSelectArrow } = findByProps("quickSelect");
+    const { quickSelect, quickSelectLabel, quickSelectQuick, quickSelectValue, quickSelectArrow } = findByProps("quickSelect") || {};
 
     const forceUpdate = React.useReducer(() => ({}), {})[1] as () => void;
 

@@ -141,3 +141,22 @@ $modifier: var(--input-border);
     height: var(--space-32);
     color: var(--interactive-normal) !important;
 }
+
+.pc-help-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.pc-help-modal-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+
+.pc-help-markdown span[class*="statusTag"] {
+    display: inline-block;
+    width: auto;
+}

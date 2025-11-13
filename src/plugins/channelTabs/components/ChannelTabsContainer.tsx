@@ -9,14 +9,14 @@ import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
-import { BasicChannelTabsProps, ChannelTabsProps, clearStaleNavigationContext, createTab, handleChannelSwitch, isNavigationFromSource, moveToTab, openedTabs, openStartupTabs, saveTabs, settings, setUpdaterFunction, useGhostTabs } from "@plugins/channelTabs/util";
+import { BasicChannelTabsProps, ChannelTabsProps, clearStaleNavigationContext, closeTab, createTab, handleChannelSwitch, isNavigationFromSource, isTabSelected, moveToTab, openedTabs, openStartupTabs, saveTabs, settings, setUpdaterFunction, useGhostTabs } from "@plugins/channelTabs/util";
 import { IS_MAC } from "@utils/constants";
 import { classes } from "@utils/misc";
 import { useForceUpdater } from "@utils/react";
 import { findComponentByCodeLazy, findStoreLazy } from "@webpack";
 import { Button, ContextMenuApi, Flex, FluxDispatcher, useCallback, useEffect, useRef, UserStore, useState, useStateFromStores } from "@webpack/common";
 
-import BookmarkContainer from "./BookmarkContainer";
+import BookmarkContainer, { HorizontalScroller } from "./BookmarkContainer";
 import ChannelTab, { PreviewTab } from "./ChannelTab";
 import { BasicContextMenu } from "./ContextMenus";
 
@@ -33,8 +33,15 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
         showBookmarkBar,
         widerTabsAndBookmarks,
         tabWidthScale,
-        enableHotkeys,
-        hotkeyCount,
+        enableNumberKeySwitching,
+        numberKeySwitchCount,
+        enableCloseTabShortcut,
+        enableNewTabShortcut,
+        enableTabCycleShortcut,
+        closeTabKeybind,
+        newTabKeybind,
+        cycleTabForwardKeybind,
+        cycleTabBackwardKeybind,
         tabBarPosition,
         animationHover,
         animationSelection,
@@ -57,8 +64,15 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
         "showBookmarkBar",
         "widerTabsAndBookmarks",
         "tabWidthScale",
-        "enableHotkeys",
-        "hotkeyCount",
+        "enableNumberKeySwitching",
+        "numberKeySwitchCount",
+        "enableCloseTabShortcut",
+        "enableNewTabShortcut",
+        "enableTabCycleShortcut",
+        "closeTabKeybind",
+        "newTabKeybind",
+        "cycleTabForwardKeybind",
+        "cycleTabBackwardKeybind",
         "tabBarPosition",
         "animationHover",
         "animationSelection",
@@ -117,11 +131,35 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
         _update();
     }, [widerTabsAndBookmarks]);
     useEffect(() => {
-        if (!enableHotkeys) return;
+        const matchesKeybind = (event: KeyboardEvent, keybindString: string): boolean => {
+            const parts = keybindString.split("+");
+            const hasCtrl = parts.includes("CTRL");
+            const hasShift = parts.includes("SHIFT");
+            const hasAlt = parts.includes("ALT");
+            const mainKey = parts[parts.length - 1].toLowerCase();
+
+            const ctrlPressed = event.ctrlKey || event.metaKey;
+            const shiftPressed = event.shiftKey;
+            const altPressed = event.altKey;
+            const keyPressed = event.key.toLowerCase();
+
+            // special handling for TAB key
+            if (mainKey === "tab") {
+                return hasCtrl === ctrlPressed && hasShift === shiftPressed && hasAlt === altPressed && keyPressed === "tab";
+            }
+
+            // special handling for SPACE
+            if (mainKey === "space") {
+                return hasCtrl === ctrlPressed && hasShift === shiftPressed && hasAlt === altPressed && keyPressed === " ";
+            }
+
+            return hasCtrl === ctrlPressed && hasShift === shiftPressed && hasAlt === altPressed && keyPressed === mainKey;
+        };
 
         const handleKeyDown = (event: KeyboardEvent) => {
             const target = event.target as HTMLElement;
 
+            // skip if typing in input fields
             if (
                 target.tagName === "INPUT" ||
                 target.tagName === "TEXTAREA" ||
@@ -130,23 +168,80 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
                 return;
             }
 
-            const keyNumber = parseInt(event.key, 10);
-
-            if (!isNaN(keyNumber) && keyNumber >= 1 && keyNumber <= hotkeyCount) {
-                const tabIndex = keyNumber - 1;
-                if (openedTabs[tabIndex]) {
-                    event.preventDefault();
-                    moveToTab(openedTabs[tabIndex].id);
+            // 1. number key switching (1-9)
+            if (enableNumberKeySwitching) {
+                const keyNumber = parseInt(event.key, 10);
+                if (!isNaN(keyNumber) && keyNumber >= 1 && keyNumber <= numberKeySwitchCount) {
+                    const tabIndex = keyNumber - 1;
+                    if (openedTabs[tabIndex]) {
+                        event.preventDefault();
+                        moveToTab(openedTabs[tabIndex].id);
+                        return;
+                    }
                 }
+            }
+
+            // 2. close tab shortcut (default: CTRL+W)
+            if (enableCloseTabShortcut && matchesKeybind(event, closeTabKeybind)) {
+                event.preventDefault();
+                const currentTab = openedTabs.find(t => isTabSelected(t.id));
+                if (currentTab && openedTabs.length > 1) {
+                    closeTab(currentTab.id);
+                }
+                return;
+            }
+
+            // 3. new tab shortcut (default: CTRL+T)
+            if (enableNewTabShortcut && matchesKeybind(event, newTabKeybind)) {
+                event.preventDefault();
+                event.stopPropagation(); // prevent discord's quick switcher from seeing this
+                createTab(props, true);
+                return;
+            }
+
+            // 4. cycle tabs forward (default: CTRL+TAB)
+            if (enableTabCycleShortcut && matchesKeybind(event, cycleTabForwardKeybind)) {
+                event.preventDefault();
+                event.stopPropagation(); // prevent discord's guild switcher from seeing this
+                const currentIndex = openedTabs.findIndex(t => isTabSelected(t.id));
+                if (currentIndex !== -1 && openedTabs.length > 1) {
+                    const nextIndex = (currentIndex + 1) % openedTabs.length;
+                    moveToTab(openedTabs[nextIndex].id);
+                }
+                return;
+            }
+
+            // 5. cycle tabs backward (default: CTRL+SHIFT+TAB)
+            if (enableTabCycleShortcut && matchesKeybind(event, cycleTabBackwardKeybind)) {
+                event.preventDefault();
+                event.stopPropagation(); // prevent Discord's guild switcher from seeing this
+                const currentIndex = openedTabs.findIndex(t => isTabSelected(t.id));
+                if (currentIndex !== -1 && openedTabs.length > 1) {
+                    const nextIndex = (currentIndex - 1 + openedTabs.length) % openedTabs.length;
+                    moveToTab(openedTabs[nextIndex].id);
+                }
+                return;
             }
         };
 
-        document.addEventListener("keydown", handleKeyDown);
+        document.addEventListener("keydown", handleKeyDown, true);
 
         return () => {
-            document.removeEventListener("keydown", handleKeyDown);
+            document.removeEventListener("keydown", handleKeyDown, true);
         };
-    }, [enableHotkeys, hotkeyCount]);
+    }, [
+        enableNumberKeySwitching,
+        numberKeySwitchCount,
+        enableCloseTabShortcut,
+        closeTabKeybind,
+        enableNewTabShortcut,
+        newTabKeybind,
+        enableTabCycleShortcut,
+        cycleTabForwardKeybind,
+        cycleTabBackwardKeybind,
+        props,
+        openedTabs
+    ]);
 
     useEffect(() => {
         if (userId) {
@@ -202,9 +297,11 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
                 <div className={cl("separator")} />
             </>}
             <div className={cl("tab-container")}>
-                {openedTabs.filter(tab => tab != null).map((tab, i) =>
-                    <ChannelTab {...tab} index={i} key={tab.id} />
-                )}
+                <HorizontalScroller className={cl("tab-scroller")}>
+                    {openedTabs.filter(tab => tab != null).map((tab, i) =>
+                        <ChannelTab {...tab} index={i} key={tab.id} />
+                    )}
+                </HorizontalScroller>
 
                 <button
                     onClick={() => createTab(props, true)}
@@ -220,11 +317,11 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
     );
 }
 
-export function ChannelTabsPreview(p) {
+export function ChannelTabsPreview(p: { setValue: (v: TabSet) => void; }) {
     const id = UserStore.getCurrentUser()?.id;
     if (!id) return <Paragraph>{t("plugin.channelTabs.error.noLogin")}</Paragraph>;
 
-    const { setValue }: { setValue: (v: TabSet) => void; } = p;
+    const { setValue } = p;
     const { tabSet }: { tabSet: TabSet; } = settings.use(["tabSet"]);
 
     const placeholder = [{ guildId: "@me", channelId: undefined as any }];

@@ -453,7 +453,7 @@ function Bookmark(props: BookmarkProps & { isExpanded?: boolean; onToggleFolder?
     );
 }
 
-function HorizontalScroller({ children, className, customRef }: React.PropsWithChildren<{ className?: string; customRef?: (node: HTMLDivElement) => void; }>) {
+export function HorizontalScroller({ children, className, customRef }: React.PropsWithChildren<{ className?: string; customRef?: (node: HTMLDivElement) => void; }>) {
     const internalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -462,7 +462,7 @@ function HorizontalScroller({ children, className, customRef }: React.PropsWithC
 
         const handleWheel = (e: WheelEvent) => {
             e.preventDefault();
-            element.scrollLeft += e.deltaY;
+            element.scrollLeft += e.deltaX + e.deltaY;
         };
 
         element.addEventListener("wheel", handleWheel);

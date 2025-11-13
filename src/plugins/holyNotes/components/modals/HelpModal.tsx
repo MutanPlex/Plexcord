@@ -7,6 +7,7 @@
 
 import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
 import { downloadNotes, uploadNotes } from "@plugins/holyNotes/utils";
@@ -19,8 +20,8 @@ export default ({ onClose, ...modalProps }: ModalProps & { onClose: () => void; 
 
     return (
         <ModalRoot {...modalProps} className="pc-help-modal" size={ModalSize.LARGE}>
-            <ModalHeader className="notebook-header">
-                <BaseText tag="h3">{t("plugin.holyNotes.modal.help.title")}</BaseText>
+            <ModalHeader className="pc-help-modal-header">
+                <BaseText tag="h3" style={{ flexGrow: 1 }}>{t("plugin.holyNotes.modal.help.title")}</BaseText>
                 <ModalCloseButton onClick={onClose} />
             </ModalHeader>
             <ModalContent>
@@ -28,10 +29,14 @@ export default ({ onClose, ...modalProps }: ModalProps & { onClose: () => void; 
                     <BaseText>{t("plugin.holyNotes.modal.help.addingNotes")}</BaseText>
                     <Paragraph>
                         {t("plugin.holyNotes.modal.help.addingNotesText")}
-                        <br />
-                        <span style={{ fontWeight: "bold" }} className={statusTagGreen}>
+
+                    </Paragraph>
+                    <div className={Margins.top16}>
+                        <span className={statusTagGreen}>
                             {t("plugin.holyNotes.modal.help.prototype")}:
                         </span>{" "}
+                    </div>
+                    <Paragraph className={Margins.top8}>
                         {t("plugin.holyNotes.modal.help.noteMessage")}
                     </Paragraph>
                     <hr />
@@ -52,25 +57,22 @@ export default ({ onClose, ...modalProps }: ModalProps & { onClose: () => void; 
                 </div>
             </ModalContent>
             <ModalFooter>
-                <div className="pc-notebook-display-left">
+                <div className="pc-help-modal-footer">
                     <Button
                         look={Button.Looks.FILLED}
                         color={Button.Colors.GREEN}
-                        style={{ marginRight: "10px" }}
                         onClick={() => {
                             noteHandler.refreshAvatars();
                         }}>{t("plugin.holyNotes.button.refresh")}</Button>
                     <Button
                         look={Button.Looks.FILLED}
                         color={Button.Colors.GREEN}
-                        style={{ marginRight: "10px" }}
                         onClick={() => {
                             uploadNotes();
                         }}>{t("plugin.holyNotes.button.import")}</Button>
                     <Button
                         look={Button.Looks.FILLED}
                         color={Button.Colors.GREEN}
-                        style={{ marginRight: "10px" }}
                         onClick={() => {
                             downloadNotes();
                         }}>{t("plugin.holyNotes.button.export")}</Button>
