@@ -6419,6 +6419,10 @@
                 "failed": "Bir Ses Kanalı bulunamadı!"
             }
         },
+        "reactErrorDecoder": {
+            "name": "ReactErrorDecoder",
+            "description": "React hata kodlarını insan tarafından okunabilir mesajlara dönüştürür."
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

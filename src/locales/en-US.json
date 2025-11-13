@@ -6419,6 +6419,10 @@
                 "failed": "Failed to find a Voice Channel!"
             }
         },
+        "reactErrorDecoder": {
+            "name": "ReactErrorDecoder",
+            "description": "Decodes React error codes into human-readable messages."
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
