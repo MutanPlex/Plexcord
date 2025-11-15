@@ -57,7 +57,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "PlatformSpoofer",
     description: "Spoof what platform or device you're on",
-    authors: [PcDevs.Drag, PcDevs.MutanPlex],
+    authors: [PcDevs.Drag, PcDevs.MutanPlex, PcDevs.He4vuc],
     settingsAboutComponent: () => <>
         <Paragraph className="plugin-warning">
             {t("plugin.platformSpoofer.about")}
@@ -91,17 +91,17 @@ export default definePlugin({
         if (bypass || userId === UserStore.getCurrentUser().id) {
             switch (platform) {
                 case "desktop":
-                    return { browser: t("plugin.platformSpoofer.platform.desktop"), vcIcon: 0 };
+                    return { os: "Windows", browser: t("plugin.platformSpoofer.platform.desktop"), vcIcon: 0 };
                 case "web":
-                    return { browser: t("plugin.platformSpoofer.platform.web"), vcIcon: 0 };
+                    return { os: "Web", browser: t("plugin.platformSpoofer.platform.web"), vcIcon: 0 };
                 case "ios":
-                    return { browser: t("plugin.platformSpoofer.platform.ios"), vcIcon: 1 };
+                    return { os: "iOS", browser: t("plugin.platformSpoofer.platform.ios"), vcIcon: 1 };
                 case "android":
-                    return { browser: t("plugin.platformSpoofer.platform.android"), vcIcon: 1 };
+                    return { os: "Android", browser: t("plugin.platformSpoofer.platform.android"), vcIcon: 1 };
                 case "xbox":
-                    return { browser: t("plugin.platformSpoofer.platform.xbox"), vcIcon: 2 };
+                    return { os: "Xbox", browser: t("plugin.platformSpoofer.platform.xbox"), vcIcon: 2 };
                 case "playstation":
-                    return { browser: t("plugin.platformSpoofer.platform.playstation"), vcIcon: 3 };
+                    return { os: "PlayStation", browser: t("plugin.platformSpoofer.platform.playstation"), vcIcon: 3 };
                 default:
                     return null;
             }

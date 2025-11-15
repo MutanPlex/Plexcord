@@ -28,30 +28,29 @@
 .pc-github-repos-button,
 .pc-github-repos-show-more {
     color: var(--text-default);
-    background-color: var(--control-background-primary-default);
     width: 100%;
 }
 
-.pc-github-repo-card {
+.pc-github-repos-card {
     padding: 8px;
     border-radius: var(--radius-xs);
     border: 1px solid var(--profile-body-divider-color, var(--input-border));
 }
 
-.pc-github-repo-header {
+.pc-github-repos-header {
+    color: var(--header-secondary);
     display: flex;
     justify-content: space-between;
 }
 
-.pc-github-repo-stars {
+.pc-github-repos-stars {
     display: flex;
     align-items: center;
     gap: 4px;
-    color: var(--info-warning-foreground);
-    fill: var(--info-warning-foreground);
+    color: var(--text-muted);
 }
 
-.pc-github-repo-language {
+.pc-github-repos-language {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -59,7 +58,7 @@
     font-size: 12px;
 }
 
-.pc-github-repo-language-color {
+.pc-github-repos-language-color {
     width: var(--size-sm);
     height: var(--size-sm);
     border-radius: var(--radius-round);
@@ -69,6 +68,7 @@
 .pc-github-repos-modal {
     width: 90%;
     max-width: 900px;
+    background-color: var(--background-base-lower);
 }
 
 .pc-github-repos-modal-title {
@@ -188,4 +188,57 @@
 
 .pc-github-repos-modal-footer-close {
     margin-right: 5px;
+}
+
+.pc-github-repos-modal-footer-close,
+.pc-github-repos-modal-footer-github {
+    color: var(--text-default);
+    background-color: color-mix(in srgb, var(--background-base-low) 90%, white);
+    border: 0;
+}
+
+.pc-github-repos-modal-footer-close:hover,
+.pc-github-repos-modal-footer-github:hover {
+    background-color: color-mix(in srgb, var(--background-base-low) 75%, white);
+}
+
+.pc-github-repos-modal-footer {
+    background-color: var(--background-base-lower);
+}
+
+.pc-github-repos-loading {
+    color: var(--header-secondary);
+}
+
+.pc-github-repos-count {
+    color: var(--text-muted);
+}
+
+.pc-github-repos-error {
+    color: var(--text-danger);
+}
+
+.pc-github-repos-link {
+    cursor: pointer;
+    fill: var(--interactive-normal);
+}
+
+.pc-github-repos-name {
+    color: var(--interactive-active);
+}
+
+.pc-github-repos-header-repo {
+    width: 20%
+}
+
+.pc-github-repos-header-description {
+    width: 50%
+}
+
+.pc-github-repos-header-language {
+    width: 15%
+}
+
+.pc-github-repos-header-stars {
+    width: 10%
 }

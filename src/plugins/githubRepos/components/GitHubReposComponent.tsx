@@ -6,7 +6,6 @@
  */
 
 import { t } from "@api/i18n";
-import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { Button, TextButton } from "@components/Button";
 import { fetchReposByUserId, fetchReposByUsername, fetchUserInfo, GitHubUserInfo } from "@plugins/githubRepos/githubApi";
@@ -14,11 +13,9 @@ import { GitHubRepo } from "@plugins/githubRepos/types";
 import { openModal } from "@utils/modal";
 import { React, useEffect, UserProfileStore, useState } from "@webpack/common";
 
-import { settings } from "..";
+import { cl, settings } from "..";
 import { RepoCard } from "./RepoCard";
 import { ReposModal } from "./ReposModal";
-
-export const cl = classNameFactory("pc-github-repos-");
 
 export function GitHubReposComponent({ id, theme }: { id: string, theme: string; }) {
     const [repos, setRepos] = useState<GitHubRepo[]>([]);
@@ -93,10 +90,10 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
         fetchData();
     }, [id]);
 
-    if (loading) return <BaseText size="xs" weight="semibold" className={cl("loading")} style={{ color: "var(--header-secondary)" }}>
+    if (loading) return <BaseText size="xs" weight="semibold" className={cl("loading")}>
         {t("plugin.githubRepos.loading")}</BaseText>;
 
-    if (error) return <BaseText size="xs" weight="semibold" className={cl("error")} style={{ color: "var(--text-danger)" }}>
+    if (error) return <BaseText size="xs" weight="semibold" className={cl("error")}>
         {t("plugin.githubRepos.error.error")}: {error}</BaseText>;
 
     if (!repos.length) return null;
@@ -118,10 +115,10 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
 
     return (
         <div className={cl("container")}>
-            <BaseText size="xs" weight="semibold" className={cl("header")} style={{ color: "var(--header-secondary)" }}>
+            <BaseText size="xs" weight="semibold" className={cl("header")}>
                 {t("plugin.githubRepos.button.repositories")}
                 {userInfo && (
-                    <span className={cl("count")} style={{ color: "var(--text-muted)" }}>
+                    <span className={cl("count")}>
                         {` ${t("plugin.githubRepos.button.only", { length: topRepos.length, total: userInfo.totalRepos })}`}
                     </span>
                 )}

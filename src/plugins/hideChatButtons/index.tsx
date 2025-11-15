@@ -77,6 +77,7 @@ function ButtonsInnerComponent({ buttons }: { buttons: ReactNode[]; }) {
             flexWrap: "nowrap",
             overflowX: "auto",
             height: "100%",
+            alignItems: "center",
         }}>
             {open && buttons.map((b, i) => <React.Fragment key={i}>{b}</React.Fragment>)}
             <HideToggleButton onClick={() => setOpen(!open)} open={open} />

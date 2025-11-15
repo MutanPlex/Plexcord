@@ -9,6 +9,7 @@ import "./styles.css";
 
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { User } from "@plexcord/discord-types";
@@ -18,6 +19,7 @@ import { findByCodeLazy } from "@webpack";
 import { React } from "@webpack/common";
 
 import { GitHubReposComponent } from "./components/GitHubReposComponent";
+export const cl = classNameFactory("pc-github-repos-");
 
 export const settings = definePluginSettings({
     showStars: {
