@@ -78,7 +78,7 @@ const ReadAllButton = () => (
         onClick={onClick}
         className="pc-ranb-button"
     >
-        {t("plugin.readAllNotifications.button")}
+        {t("plugin.readAllNotificationsButton.button")}
     </TextButton>
 );
 

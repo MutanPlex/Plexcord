@@ -50,7 +50,7 @@ export default definePlugin({
                     content: t("plugin.friendInvites.command.create.message", {
                         code: invite.code,
                         expiration: new Date(invite.expires_at).getTime() / 1000,
-                        maxUses: invite.max_uses
+                        uses: invite.max_uses
                     })
                 });
             }

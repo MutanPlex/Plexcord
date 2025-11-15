@@ -1509,6 +1509,10 @@
                     "label": "Show Stage Badge",
                     "description": "Show Stage badge"
                 },
+                "showAnnouncementBadge": {
+                    "label": "Show Announcement Badge",
+                    "description": "Show Announcement badge"
+                },
                 "showForumBadge": {
                     "label": "Show Forum Badge",
                     "description": "Show Forum badge"
@@ -6423,8 +6427,8 @@
             "name": "ReactErrorDecoder",
             "description": "Decodes React error codes into human-readable messages."
         },
-        "readAllNotifications": {
-            "name": "ReadAllNotifications",
+        "readAllNotificationsButton": {
+            "name": "ReadAllNotificationsButton",
             "description": "Read all server notifications with a single button click!",
             "button": "Read All"
         },

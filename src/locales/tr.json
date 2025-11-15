@@ -1509,6 +1509,10 @@
                     "label": "Sahne Rozetini Göster",
                     "description": "Sahne rozetini göster"
                 },
+                "showAnnouncementBadge": {
+                    "label": "Duyuru Rozetini Göster",
+                    "description": "Duyuru rozetini göster"
+                },
                 "showForumBadge": {
                     "label": "Forum Rozetini Göster",
                     "description": "Forum rozetini göster"
@@ -6423,9 +6427,9 @@
             "name": "ReactErrorDecoder",
             "description": "React hata kodlarını insan tarafından okunabilir mesajlara dönüştürür."
         },
-        "readAllNotifications": {
-            "name": "ReadAllNotifications",
-            "description": "Tüm sunucu bildirimlerini tek bir butonla okundu olarak işaretle!",
+        "readAllNotificationsButton": {
+            "name": "ReadAllNotificationsButton",
+            "description": "Tüm bildirimleri tek bir tıklamayla okunmuş olarak işaretlemek için bildirim paneline bir düğme ekler.",
             "button": "Hepsini Oku"
         },
         "uselessInfo": {

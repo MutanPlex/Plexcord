@@ -24,9 +24,9 @@ const startStream = findByCodeLazy('type:"STREAM_START"');
 const getDesktopSources = findByCodeLazy("desktop sources");
 
 const valueOperation = [
-    { label: t("plugin.randomVoice.context.select.lessThan"), value: "<", default: false },
-    { label: t("plugin.randomVoice.context.select.moreThan"), value: ">", default: false },
-    { label: t("plugin.randomVoice.context.select.equalTo"), value: "==", default: true },
+    { get label() { return t("plugin.randomVoice.context.select.lessThan"); }, value: "<", default: false },
+    { get label() { return t("plugin.randomVoice.context.select.moreThan"); }, value: ">", default: false },
+    { get label() { return t("plugin.randomVoice.context.select.equalTo"); }, value: "==", default: true },
 ];
 
 const CONNECT = 1n << 20n;
