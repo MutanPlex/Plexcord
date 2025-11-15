@@ -1,7 +1,7 @@
 {
     "name": "plexcord",
     "private": "true",
-    "version": "1.17.9",
+    "version": "1.18.0",
     "description": "Taking Discord to the Next Level!",
     "homepage": "https://github.com/MutanPlex/Plexcord#readme",
     "bugs": {
@@ -51,10 +51,10 @@
         "@electron/asar": "^4.0.1",
         "@plexcord/discord-types": "link:packages\\discord-types",
         "@stylistic/eslint-plugin": "^5.5.0",
-        "@types/chrome": "^0.1.28",
+        "@types/chrome": "^0.1.29",
         "@types/lodash": "^4.17.20",
         "@types/node": "^24.10.1",
-        "@types/react": "19.2.4",
+        "@types/react": "19.2.5",
         "@types/react-dom": "19.2.3",
         "@types/yazl": "^3.3.0",
         "diff": "^8.0.2",
@@ -70,7 +70,7 @@
         "html-minifier-terser": "^7.2.0",
         "jszip": "^3.10.1",
         "moment": "^2.30.1",
-        "puppeteer-core": "^24.29.1",
+        "puppeteer-core": "^24.30.0",
         "standalone-electron-types": "^34.2.0",
         "stylelint": "^16.25.0",
         "stylelint-config-standard": "^39.0.1",
@@ -85,7 +85,7 @@
     "packageManager": "pnpm@10.22.0",
     "pnpm": {
         "overrides": {
-            "@types/react": "19.2.4",
+            "@types/react": "19.2.5",
             "@types/react-dom": "19.2.3",
             "jszip": "^3.10.1",
             "@eslint/plugin-kit": "^0.3.4",
