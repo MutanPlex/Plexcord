@@ -367,7 +367,8 @@
                 },
                 "toast": {
                     "success": "Başarılı!",
-                    "failed": "Kod parçası çalıştırılamadı :("
+                    "failed": "Kod parçası çalıştırılamadı :(",
+                    "failedOpenInvite": "Davet açılamadı, lütfen konsolu kontrol edin :("
                 },
                 "dm": {
                     "warning": "Lütfen destek için Plexcord eklenti geliştiricilerine özel mesaj göndermeyin!{{br}}Bunun yerine {{support}} sunucusuna katılarak Plexcord destek kanalını kullanabilirsiniz: {{channel}}"

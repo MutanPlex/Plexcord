@@ -367,7 +367,8 @@
                 },
                 "toast": {
                     "success": "Success!",
-                    "failed": "Failed to run snippet :("
+                    "failed": "Failed to run snippet :(",
+                    "failedOpenInvite": "Failed to open invite please check console :("
                 },
                 "dm": {
                     "warning": "Please do not private message Plexcord plugin developers for support!{{br}}Instead, you can join the {{support}} server and use the Plexcord support channel: {{channel}}"

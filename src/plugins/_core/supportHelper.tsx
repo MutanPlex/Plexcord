@@ -379,7 +379,7 @@ export default definePlugin({
                 }
             } catch (error) {
                 console.error("Failed to open invite modal:", error);
-                showToast("Failed to open invite", Toasts.Type.FAILURE);
+                showToast(t("plugins.metadata.supportHelper.toast.failedOpenInvite"), Toasts.Type.FAILURE);
             }
         };
 
