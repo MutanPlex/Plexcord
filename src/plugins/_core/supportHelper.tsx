@@ -28,7 +28,7 @@ import { Paragraph } from "@components/Paragraph";
 import { openUpdaterModal } from "@components/settings/tabs/updater";
 import { Channel } from "@plexcord/discord-types";
 import { BOT_COMMANDS_CHANNEL_ID, CONTRIB_ROLE_ID, Devs, DONOR_ROLE_ID, KNOWN_ISSUES_CHANNEL_ID, PcDevs, PLEXBOT_USER_ID, PLEXCORD_GUILD_ID, REGULAR_ROLE_ID, SUPPORT_CATEGORY_ID, SUPPORT_CHANNEL_ID } from "@utils/constants";
-import { sendMessage } from "@utils/discord";
+import { openInviteModal, sendMessage } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import { isPcPluginDev, isPluginDev, tryOrElse } from "@utils/misc";
@@ -37,7 +37,7 @@ import { onlyOnce } from "@utils/onlyOnce";
 import { makeCodeblock } from "@utils/text";
 import definePlugin from "@utils/types";
 import { checkForUpdates, isOutdated, update } from "@utils/updater";
-import { Alerts, Button, Card, ChannelStore, GuildMemberStore, Parser, PermissionsBits, PermissionStore, RelationshipStore, showToast, Toasts, UserStore } from "@webpack/common";
+import { Alerts, Button, Card, ChannelRouter, ChannelStore, GuildMemberStore, Parser, PermissionsBits, PermissionStore, RelationshipStore, showToast, Toasts, UserStore } from "@webpack/common";
 import { JSX } from "react";
 
 import gitHash from "~git-hash";
@@ -368,12 +368,33 @@ export default definePlugin({
         if (!isPluginDev(userId) && !isPcPluginDev(userId)) return null;
         if (RelationshipStore.isFriend(userId) || (isPluginDev(UserStore.getCurrentUser()?.id) && isPcPluginDev(UserStore.getCurrentUser()?.id))) return null;
 
+        const handleJoinServer = async (e: React.MouseEvent) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            try {
+                const accepted = await openInviteModal("HQGYXm5XSh");
+                if (accepted) {
+                    ChannelRouter.transitionToChannel("1344043206286905364");
+                }
+            } catch (error) {
+                console.error("Failed to open invite modal:", error);
+                showToast("Failed to open invite", Toasts.Type.FAILURE);
+            }
+        };
+
+        const isInGuild = GuildMemberStore.isMember(PLEXCORD_GUILD_ID, UserStore.getCurrentUser()?.id);
+
+        const channelLink = isInGuild
+            ? Parser.parse("https://discord.com/channels/1342668210331324476/1344043206286905364")
+            : <a onClick={handleJoinServer} style={{ cursor: "pointer", color: "var(--text-link)", textDecoration: "none" }}>#plexcord-support</a>;
+
         return (
             <Card className={`pc-warning-card ${Margins.top8}`}>
                 {tJsx("plugins.metadata.supportHelper.dm.warning", {
                     br: <br />,
-                    channel: Parser.parse("https://discord.com/channels/1342668210331324476/1344043206286905364"),
-                    support: <Link href="https://discord.gg/HQGYXm5XSh" target="_blank" rel="noreferrer">Plexcord</Link>
+                    channel: channelLink,
+                    support: <a onClick={handleJoinServer} style={{ cursor: "pointer", color: "var(--text-link)", textDecoration: "none" }}>Plexcord</a>
                 })}
             </Card>
         );
