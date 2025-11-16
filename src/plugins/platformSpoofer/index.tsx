@@ -91,17 +91,17 @@ export default definePlugin({
         if (bypass || userId === UserStore.getCurrentUser().id) {
             switch (platform) {
                 case "desktop":
-                    return { os: "Windows", browser: t("plugin.platformSpoofer.platform.desktop"), vcIcon: 0 };
+                    return { os: "Windows", browser: "Discord Client", vcIcon: 0 };
                 case "web":
-                    return { os: "Web", browser: t("plugin.platformSpoofer.platform.web"), vcIcon: 0 };
+                    return { os: "Windows", browser: "Chrome", vcIcon: 0 };
                 case "ios":
-                    return { os: "iOS", browser: t("plugin.platformSpoofer.platform.ios"), vcIcon: 1 };
+                    return { os: "iOS", browser: "Discord iOS", vcIcon: 1 };
                 case "android":
-                    return { os: "Android", browser: t("plugin.platformSpoofer.platform.android"), vcIcon: 1 };
+                    return { os: "Android", browser: "Discord Android", vcIcon: 1 };
                 case "xbox":
-                    return { os: "Xbox", browser: t("plugin.platformSpoofer.platform.xbox"), vcIcon: 2 };
+                    return { os: "Xbox", browser: "Discord Embedded", vcIcon: 2 };
                 case "playstation":
-                    return { os: "PlayStation", browser: t("plugin.platformSpoofer.platform.playstation"), vcIcon: 3 };
+                    return { os: "PlayStation", browser: "Discord Embedded", vcIcon: 3 };
                 default:
                     return null;
             }
