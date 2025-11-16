@@ -23,7 +23,7 @@ const settings = definePluginSettings({
             return t("plugin.blockKeywords.option.blockedWords.description");
         },
         type: OptionType.STRING,
-        default: "",
+        default: "blockedKeyword",
         restartNeeded: true
     },
     useRegex: {
