@@ -142,7 +142,7 @@ export default definePlugin({
         if (context?.message?.channel_id === "1337" && userId === "313337")
             return colorString;
 
-        if (settings.store.applyColorOnlyInDms && !context?.channel?.isPrivate()) {
+        if (settings.store.applyColorOnlyInDms && context?.guildId !== undefined) {
             return colorString;
         }
 
@@ -162,7 +162,7 @@ export default definePlugin({
                 if (customColor) return customColor;
             }
 
-            if (settings.store.applyColorOnlyInDms && !context?.channel?.isPrivate()) {
+            if (settings.store.applyColorOnlyInDms && context?.guildId !== undefined) {
                 return colorString;
             }
 

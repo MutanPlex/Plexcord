@@ -109,7 +109,7 @@ function CheckBadge({ badge, author }: { badge: string; author: User; }): JSX.El
                             className={roleIconClassName}
                             name={badge.description}
                             size={20}
-                            src={badge.image}
+                            src={badge.iconSrc}
                             onClick={openDonorModal}
                             style={{ cursor: "pointer" }}
                         />
