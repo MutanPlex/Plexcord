@@ -4295,7 +4295,7 @@
         },
         "lastVoice": {
             "name": "LastVoice",
-            "description": "Discord'u kapayıp açtığınızda son bulunduğunuz ses kanalına otomatik olarak katılır. Her Discord sürümü (Normal, PTB, Canary) bağımsız çalışır."
+            "description": "Discord'u kapayıp açtığınızda son bulunduğunuz ses kanalına otomatik olarak katılır."
         },
         "limitMiddleClickPaste": {
             "name": "LimitMiddleClickPaste",

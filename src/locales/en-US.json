@@ -4295,7 +4295,7 @@
         },
         "lastVoice": {
             "name": "LastVoice",
-            "description": "Automatically rejoins your last voice channel when you restart Discord. Each Discord version (Stable, PTB, Canary) works independently."
+            "description": "Automatically rejoins your last voice channel when you restart Discord."
         },
         "limitMiddleClickPaste": {
             "name": "LimitMiddleClickPaste",
