@@ -4293,6 +4293,10 @@
             },
             "online": "{{formattedTime}} önce çevrimiçiydi"
         },
+        "lastVoice": {
+            "name": "LastVoice",
+            "description": "Discord'u kapayıp açtığınızda son bulunduğunuz ses kanalına otomatik olarak katılır. Her Discord sürümü (Normal, PTB, Canary) bağımsız çalışır."
+        },
         "limitMiddleClickPaste": {
             "name": "LimitMiddleClickPaste",
             "description": "Orta tıklama ile otomatik kaydırma kullananlar için, istenmeyen yapıştırma işlemlerini engeller.",
