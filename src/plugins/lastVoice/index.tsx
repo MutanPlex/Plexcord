@@ -34,7 +34,7 @@ async function autoRejoin() {
 export default definePlugin({
     name: "LastVoice",
     description: "Automatically rejoins your last voice channel when you restart Discord.",
-    authors: [PcDevs.MutanPlex],
+    authors: [PcDevs.He4vuc],
     get displayDescription() { return t("plugin.lastVoice.description"); },
     flux: {
         VOICE_STATE_UPDATES({ voiceStates }) {
