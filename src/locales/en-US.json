@@ -4301,6 +4301,10 @@
             },
             "online": "Online {{formattedTime}} ago"
         },
+        "lastVoice": {
+            "name": "LastVoice",
+            "description": "Automatically rejoins your last voice channel when you restart Discord."
+        },
         "limitMiddleClickPaste": {
             "name": "LimitMiddleClickPaste",
             "description": "For middle-click autoscroll users, prevents middle-click from making unwanted pastes.",
@@ -5726,7 +5730,7 @@
         "pinDMs": {
             "name": "PinDMs",
             "description": "Allows you to pin private channels to the top of your DM list. To pin/unpin or re-order pins, right click DMs",
-            "context" : {
+            "context": {
                 "category": {
                     "label": "Pin DMs Category Menu",
                     "edit": "Edit Category",
@@ -6269,7 +6273,7 @@
                     "description": "Ping reply by default",
                     "noReplyMentionPlugin": "Follow NoReplyMention plugin (if enabled)",
                     "enabled": "Enabled",
-                    "disabled":"Disabled"
+                    "disabled": "Disabled"
                 },
                 "ignoreBlockedAndIgnored": {
                     "label": "Ignore Block And Ignored",
