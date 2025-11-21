@@ -10,11 +10,12 @@ import "./styles.css";
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { DeleteIcon, PlusIcon } from "@components/Icons";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import { Button, TextInput } from "@webpack/common";
+import { TextInput } from "@webpack/common";
 
 const cl = classNameFactory("pc-bbr-");
 
@@ -39,20 +40,19 @@ function ReasonsComponent() {
                     />
                     <Button
                         className={cl("remove-button")}
-                        color={Button.Colors.TRANSPARENT}
                         onClick={() => {
                             reasons.splice(i, 1);
                             settings.store.reasons = reasons;
                         }}
-                        look={Button.Looks.FILLED}
-                        size={Button.Sizes.MIN}
+                        variant="secondary"
+                        size="min"
                     >
                         <DeleteIcon />
                     </Button>
                 </div>
             ))}
             <div className={cl("reason-wrapper")}>
-                <Button onClick={() => settings.store.reasons.push("")} className={cl("add-button")} size={Button.Sizes.LARGE} color={Button.Colors.TRANSPARENT}>
+                <Button onClick={() => settings.store.reasons.push("")} className={cl("add-button")} size="medium" variant="secondary">
                     <PlusIcon /> {t("plugin.betterBanReasons.add")}
                 </Button>
             </div>

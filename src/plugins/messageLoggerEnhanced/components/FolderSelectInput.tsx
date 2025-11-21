@@ -19,10 +19,11 @@
 
 import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
+import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { DEFAULT_IMAGE_CACHE_DIR } from "@plugins/messageLoggerEnhanced/utils/constants";
-import { copyWithToast } from "@utils/misc";
-import { Button, Toasts } from "@webpack/common";
+import { copyWithToast } from "@utils/discord";
+import { Toasts } from "@webpack/common";
 
 import { Native, settings } from "..";
 
@@ -87,7 +88,7 @@ export function SelectFolderInput({ settingsKey, successMessage }: Props) {
             </div>
             <Button
                 className={cl("-button")}
-                size={Button.Sizes.SMALL}
+                size="small"
                 onClick={onFolderSelect}
             >
                 {t("plugin.messageLoggerEnhanced.button.browse")}

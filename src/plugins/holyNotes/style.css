@@ -35,6 +35,7 @@ $modifier: var(--input-border);
 
 .pc-notebook-flex {
     overflow: hidden;
+    flex-direction: column;
 }
 
 .pc-notebook-flex .pc-help-icon {
@@ -134,7 +135,6 @@ $modifier: var(--input-border);
 }
 
 .pc-holy-notes-icon {
-    bottom: -2px;
     padding: 0;
     width: var(--space-32);
     min-width: 0;

@@ -6,8 +6,9 @@
  */
 
 import { t } from "@api/i18n";
+import { Button } from "@components/Button";
 import { openModal } from "@utils/modal";
-import { Button, React } from "@webpack/common";
+import { React } from "@webpack/common";
 
 import NotebookCreateModal from "./NotebookCreateModal";
 import NotebookDeleteModal from "./NotebookDeleteModal";
@@ -17,7 +18,7 @@ export default ({ notebook, setNotebook }: { notebook: string, setNotebook: (not
 
     return (
         <Button
-            color={isNotMain ? Button.Colors.RED : Button.Colors.GREEN}
+            variant={isNotMain ? "dangerPrimary" : "positive"}
             onClick={
                 isNotMain
                     ? () => openModal(props => <NotebookDeleteModal {...props} notebook={notebook} onChangeTab={setNotebook} />)

@@ -7,9 +7,10 @@
 
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { OptionType } from "@utils/types";
-import { Alerts, Button } from "@webpack/common";
+import { Alerts } from "@webpack/common";
 import { Settings } from "Plexcord";
 
 import { Native } from ".";
@@ -387,11 +388,11 @@ export const settings = definePluginSettings({
         type: OptionType.COMPONENT,
         component: () =>
             <Button
-                color={Button.Colors.RED}
+                variant="dangerPrimary"
                 onClick={() => Alerts.show({
                     title: t("plugin.messageLoggerEnhanced.option.clearLogs.title"),
                     body: t("plugin.messageLoggerEnhanced.option.clearLogs.body"),
-                    confirmColor: Button.Colors.RED,
+                    confirmColor: "dangerPrimary",
                     confirmText: t("plugin.messageLoggerEnhanced.option.clearLogs.confirmText"),
                     cancelText: t("plugin.messageLoggerEnhanced.option.clearLogs.cancelText"),
                     onConfirm: () => {

@@ -109,10 +109,13 @@
 }
 
 .pc-soundboard-log-icon {
-    bottom: -2px;
     padding: 0 !important;
     width: var(--space-32);
     min-width: 0 !important;
     height: var(--space-32);
     color: var(--interactive-normal) !important;
+}
+
+.pc-soundlog-also-played {
+    margin-top: 35px;
 }

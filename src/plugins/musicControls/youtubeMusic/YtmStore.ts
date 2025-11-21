@@ -4,7 +4,8 @@
  * Copyright (c) 2025 MutanPlex
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
-
+import { isPluginEnabled } from "@api/PluginManager";
+import OpenInAppPlugin from "@plugins/openInApp";
 import { Logger } from "@utils/Logger";
 import { proxyLazyWebpack } from "@webpack";
 import { Flux, FluxDispatcher } from "@webpack/common";
@@ -240,7 +241,7 @@ export const YoutubeMusicStore: ReturnType<typeof proxyLazyWebpack<IYoutubeMusic
         public openExternal(path: string) {
             const videoId = path.match(/watch\?v=([\w-]+)/);
 
-            const url = Plexcord.Plugins.isPluginEnabled("OpenInApp") && videoId
+            const url = isPluginEnabled(OpenInAppPlugin.name) && videoId
                 ? encodeURI("youtubemusic://openVideo " + videoId[1])
                 : "https://music.youtube.com" + path;
 

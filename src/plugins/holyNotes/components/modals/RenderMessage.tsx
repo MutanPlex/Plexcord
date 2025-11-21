@@ -6,16 +6,16 @@
  */
 
 import { t } from "@api/i18n";
-import { CopyIcon, DeleteIcon, IDIcon, LinkIcon, OpenExternalIcon } from "@components/index";
+import { CopyIcon, DeleteIcon, IDIcon, LinkIcon, OpenExternalIcon } from "@components/Icons";
 import { makeDummyUser } from "@components/settings/tabs/plugins/PluginModal";
+import { MessageType } from "@plugins/holyNotes";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
 import { HolyNotes } from "@plugins/holyNotes/types";
 import { copyToClipboard } from "@utils/clipboard";
 import { classes } from "@utils/misc";
 import { ModalProps } from "@utils/modal";
 import { findByCodeLazy, findByPropsLazy, findComponentByCodeLazy } from "@webpack";
-import { ContextMenuApi, FluxDispatcher, Menu, NavigationRouter, React } from "@webpack/common";
-import { MessageType } from "plugins/holyNotes";
+import { ContextMenuApi, FluxDispatcher, Menu, NavigationRouter, React, useEffect } from "@webpack/common";
 
 const messageClasses = findByPropsLazy("message", "groupStart", "cozyMessage");
 const Channel = findByCodeLazy("computeLurkerPermissionsAllowList(){");
@@ -37,7 +37,7 @@ export const RenderMessage = ({
     const isHoldingDeleteRef = React.useRef(false);
     const [, forceUpdate] = React.useReducer(x => x + 1, 0);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const deleteHandler = (e: KeyboardEvent) => {
             if (e.key.toLowerCase() !== "delete") return;
             const newState = e.type === "keydown";

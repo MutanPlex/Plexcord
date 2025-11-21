@@ -6,7 +6,7 @@
  */
 
 import { t } from "@api/i18n";
-import { BaseText } from "@components/index";
+import { BaseText } from "@components/BaseText";
 import { SpotifyStore, Track } from "@plugins/musicControls/spotify/SpotifyStore";
 import { openImageModal } from "@utils/discord";
 import { ModalContent, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";

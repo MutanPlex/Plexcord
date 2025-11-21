@@ -5,10 +5,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { Flex } from "@components/Flex";
 import { User } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
-import { Flex, React } from "@webpack/common";
+import { React } from "@webpack/common";
 
 import { settings } from "./settings";
 import { UserChatButton, UserDeafenButton, UserMuteButton } from "./utils";
@@ -32,7 +33,7 @@ export default definePlugin({
     renderButtons(user: User) {
         if (!user) return null;
         return (
-            <Flex direction={Flex.Direction.HORIZONTAL} className="voice-user-buttons">
+            <Flex className="voice-user-buttons">
                 {settings.store.showChatButton && <UserChatButton user={user} />}
                 {settings.store.showMuteButton && <UserMuteButton user={user} />}
                 {settings.store.showDeafenButton && <UserDeafenButton user={user} />}

@@ -27,8 +27,8 @@ import { CopyIcon, ImageIcon, LinkIcon, OpenExternalIcon } from "@components/Ico
 import { Paragraph } from "@components/Paragraph";
 import { Span } from "@components/Span";
 import { debounce } from "@shared/debounce";
-import { openImageModal } from "@utils/discord";
-import { classes, copyWithToast } from "@utils/misc";
+import { copyWithToast, openImageModal } from "@utils/discord";
+import { classes } from "@utils/misc";
 import { ContextMenuApi, FluxDispatcher, Menu, React, useEffect, useState, useStateFromStores } from "@webpack/common";
 
 import { SeekBar } from "./SeekBar";
@@ -370,7 +370,7 @@ export function SpotifyPlayer() {
 
     // Hide player after 5 minutes of inactivity
 
-    React.useEffect(() => {
+    useEffect(() => {
         setShouldHide(false);
         if (!isPlaying) {
             const timeout = setTimeout(() => setShouldHide(true), 1000 * 60 * 5);

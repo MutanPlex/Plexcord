@@ -13,6 +13,7 @@ import { classes } from "@utils/misc";
 import type { ComponentPropsWithRef } from "react";
 
 import { OpenExternalIcon } from "./Icons";
+import { Link } from "./Link";
 
 const btnCls = classNameFactory("pc-btn-");
 const textBtnCls = classNameFactory("pc-text-btn-");
@@ -26,12 +27,26 @@ export type ButtonProps = ComponentPropsWithRef<"button"> & {
     size?: ButtonSize;
 };
 
+export type LinkButtonProps = ComponentPropsWithRef<"a"> & {
+    size?: ButtonSize;
+    variant?: ButtonVariant;
+};
+
 export function Button({ variant = "primary", size = "medium", children, className, ...restProps }: ButtonProps) {
     return (
         <button data-mana-component="button" className={classes(btnCls("base", variant, size), className)} {...restProps}>
             {children}
             {variant === "link" && <OpenExternalIcon className={btnCls("link-icon")} />}
         </button>
+    );
+}
+
+export function LinkButton({ variant = "link", size = "medium", className, children, ...restProps }: LinkButtonProps) {
+    return (
+        <Link data-mana-component="button" className={classes(btnCls("base", variant, size), className)} {...restProps}>
+            {children}
+            <OpenExternalIcon className={btnCls("link-icon")} />
+        </Link>
     );
 }
 

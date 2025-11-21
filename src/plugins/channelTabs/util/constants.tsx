@@ -659,6 +659,17 @@ export const settings = definePluginSettings({
         default: false,
         restartNeeded: false
     },
+    newTabButtonBehavior: {
+        get label() {
+            return t("plugin.channelTabs.option.newTabButtonBehavior.label");
+        },
+        get description() {
+            return t("plugin.channelTabs.option.newTabButtonBehavior.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: false
+    },
     oneTabPerServer: {
         get label() {
             return t("plugin.channelTabs.option.oneTabPerServer.label");

@@ -20,6 +20,7 @@
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import { CodeBlock } from "@components/CodeBlock";
 import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -27,12 +28,11 @@ import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
 import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
-import { getCurrentGuild, getIntlMessage } from "@utils/discord";
+import { copyWithToast, getCurrentGuild, getIntlMessage } from "@utils/discord";
 import { Margins } from "@utils/margins";
-import { copyWithToast } from "@utils/misc";
 import { closeModal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
-import { Button, ChannelStore, GuildRoleStore, Menu } from "@webpack/common";
+import { ChannelStore, GuildRoleStore, Menu } from "@webpack/common";
 
 
 const CopyIcon = () => {
@@ -88,7 +88,7 @@ function openViewRawModal(json: string, type: string, msgContent?: string) {
                     </div>
                 </ModalContent >
                 <ModalFooter>
-                    <Flex cellSpacing={10}>
+                    <Flex>
                         <Button onClick={() => copyWithToast(json, `${type} data copied to clipboard!`)}>
                             Copy {type} JSON
                         </Button>

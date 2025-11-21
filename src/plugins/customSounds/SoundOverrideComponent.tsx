@@ -8,12 +8,15 @@
 import { AudioPlayerInterface, playAudio } from "@api/AudioPlayer";
 import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
-import { FormSwitch, Heading } from "@components/index";
+import { Button } from "@components/Button";
+import { Card } from "@components/Card";
+import { FormSwitch } from "@components/FormSwitch";
+import { Heading } from "@components/Heading";
 import { Margins } from "@utils/margins";
 import { useForceUpdater } from "@utils/react";
 import { makeRange } from "@utils/types";
 import { findLazy } from "@webpack";
-import { Button, Card, React, Select, showToast, Slider } from "@webpack/common";
+import { React, Select, showToast, Slider, useEffect } from "@webpack/common";
 import { ComponentType, Ref, SyntheticEvent } from "react";
 
 import { deleteAudio, getAllAudio, saveAudio, StoredAudioFile } from "./audioStore";
@@ -44,7 +47,7 @@ export function SoundOverrideComponent({ type, override, onChange }: {
     const sound = React.useRef<AudioPlayerInterface | null>(null);
     const [files, setFiles] = React.useState<Record<string, StoredAudioFile>>({});
 
-    React.useEffect(() => {
+    useEffect(() => {
         getAllAudio().then(setFiles);
     }, []);
 
@@ -179,13 +182,13 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                 <>
                     <div style={{ display: "flex", gap: "8px", marginBottom: "16px" }}>
                         <Button
-                            color={Button.Colors.GREEN}
+                            variant="positive"
                             onClick={previewSound}
                         >
                             {t("plugin.customSounds.button.preview")}
                         </Button>
                         <Button
-                            color={Button.Colors.RED}
+                            variant="dangerPrimary"
                             onClick={() => sound.current?.stop()}
                         >
                             {t("plugin.customSounds.button.stop")}
@@ -263,14 +266,14 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                             <div style={{ display: "flex", gap: "8px", marginBottom: "16px" }}>
                                 <Button
                                     onClick={() => fileInputRef.current?.click()}
-                                    color={Button.Colors.BRAND}
+                                    variant="secondary"
                                 >
                                     {t("plugin.customSounds.button.uploadNew")}
                                 </Button>
 
                                 {override.selectedFileId && files[override.selectedFileId] && (
                                     <Button
-                                        color={Button.Colors.RED}
+                                        variant="dangerPrimary"
                                         onClick={() => deleteFile(override.selectedFileId!)}
                                     >
                                         {t("plugin.customSounds.button.delete")}

@@ -5,8 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import * as DataStore from "@api/DataStore";
 import { t } from "@api/i18n";
-import { DataStore } from "@api/index";
 
 import gitHash from "~git-hash";
 import plugins from "~plugins";

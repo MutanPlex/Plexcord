@@ -10,11 +10,12 @@ export const Native = getNative();
 import "./styles.css";
 
 import { t } from "@api/i18n";
+import { Button } from "@components/Button";
 import { Devs, PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { Button, FluxDispatcher, MessageStore, React, Tooltip, UserStore } from "@webpack/common";
+import { FluxDispatcher, MessageStore, React, Tooltip, UserStore } from "@webpack/common";
 
 import { openLogModal } from "./components/LogsModal";
 import * as idb from "./db";
@@ -46,8 +47,8 @@ function OpenLogsIcon() {
             fill="none"
             strokeWidth="0"
             viewBox="0 0 15 15"
-            height={20}
-            width={20}
+            height={24}
+            width={24}
             xmlns="http://www.w3.org/2000/svg"
         >
             <path
@@ -334,7 +335,7 @@ export default definePlugin({
                 {tooltipProps => (
                     <Button style={{ backgroundColor: "transparent", border: "none" }}
                         {...tooltipProps}
-                        size={Button.Sizes.SMALL}
+                        size="small"
                         className={"pc-message-logger-icon"}
                         onClick={() => openLogModal()}
                     >

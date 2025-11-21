@@ -17,6 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { Style } from "@api/Styles";
+
 declare global {
     /**
      * This exists only at build time, so references to it in patches should insert it
@@ -47,12 +49,7 @@ declare global {
 
     export var PlexcordNative: typeof import("./PlexcordNative").default;
     export var Plexcord: typeof import("./Plexcord");
-    export var PlexcordStyles: Map<string, {
-        name: string;
-        source: string;
-        classNames: Record<string, string>;
-        dom: HTMLStyleElement | null;
-    }>;
+    export var PlexcordStyles: Map<string, Style>;
     export var appSettings: {
         set(setting: string, v: any): void;
     };

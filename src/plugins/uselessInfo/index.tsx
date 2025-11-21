@@ -7,8 +7,8 @@
 
 import "./style.css";
 
+import * as DataStore from "@api/DataStore";
 import { t } from "@api/i18n";
-import { DataStore } from "@api/index";
 import { showNotification } from "@api/Notifications";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
@@ -21,7 +21,7 @@ import { Margins } from "@components/margins";
 import { PcDevs } from "@utils/constants";
 import { closeAllModals, ModalContent, ModalFooter, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
-import { Flex, React, Slider, useState } from "@webpack/common";
+import { React, Slider, useEffect, useState } from "@webpack/common";
 
 let isRecordingGlobal: boolean = false;
 const cl = classNameFactory("pc-useless-info-");
@@ -408,11 +408,11 @@ export function UselessModal({ modalProps }) {
     const settingsRef = React.useRef<HTMLDivElement>(null);
     const historyRef = React.useRef<HTMLElement>(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
         loadHistory().then(setHistory);
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const settingsEl = settingsRef.current;
         const historyEl = historyRef.current;
 
@@ -514,7 +514,7 @@ export function UselessModal({ modalProps }) {
                     )}
                 </div>
             </ModalContent>
-            <ModalFooter className={cl("footer")} align={Flex.Align.START} justify={Flex.Justify.BETWEEN} direction={Flex.Direction.HORIZONTAL}>
+            <ModalFooter className={cl("footer")} align="start" justify="between" direction="horizontal">
                 <Button
                     className={cl("random-button")}
                     size="small"

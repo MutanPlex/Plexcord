@@ -6,6 +6,7 @@
  */
 
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Paragraph } from "@components/Paragraph";
@@ -13,10 +14,11 @@ import { User } from "@plexcord/discord-types";
 import settings from "@plugins/soundBoardLogger/settings";
 import { clearLoggedSounds, getLoggedSounds } from "@plugins/soundBoardLogger/store";
 import { addListener, AvatarStyles, cl, downloadAudio, getEmojiUrl, playSound, removeListener, SoundLogEntry, UserSummaryItem } from "@plugins/soundBoardLogger/utils";
+import { copyWithToast } from "@utils/discord";
 import { Margins } from "@utils/margins";
-import { classes, copyWithToast } from "@utils/misc";
+import { classes } from "@utils/misc";
 import { closeModal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
-import { Button, Clickable, Tooltip, useCallback, useEffect, useMemo, UserUtils, useState } from "@webpack/common";
+import { Clickable, Tooltip, useCallback, useEffect, useMemo, UserUtils, useState } from "@webpack/common";
 
 import { openMoreUsersModal } from "./MoreUsersModal";
 import { openUserModal } from "./UserModal";
@@ -114,11 +116,11 @@ const SoundItem = ({ item, itemUsers, avatarsMax, onClickUser, renderMoreUsers }
                 )}
             />
             <Flex flexDirection="row" className={cl("sound-buttons")}>
-                <Button color={Button.Colors.PRIMARY} size={Button.Sizes.SMALL} onClick={handleDownload}>Download</Button>
-                <Button color={Button.Colors.GREEN} size={Button.Sizes.SMALL} onClick={handleCopyId}>Copy ID</Button>
+                <Button variant="secondary" size="small" onClick={handleDownload}>Download</Button>
+                <Button variant="positive" size="small" onClick={handleCopyId}>Copy ID</Button>
                 <Tooltip text={`Soundboard volume: ${Math.floor(settings.store.soundVolume * 100)}%`}>
                     {({ onMouseEnter, onMouseLeave }) =>
-                        <Button color={Button.Colors.BRAND} size={Button.Sizes.SMALL} onClick={handlePlaySound} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>Play Sound</Button>
+                        <Button variant="primary" size="small" onClick={handlePlaySound} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>Play Sound</Button>
                     }
                 </Tooltip>
             </Flex>
@@ -283,7 +285,7 @@ export default function SoundBoardLog({ data, closeModal }) {
                 }
             </ModalContent>
             <ModalFooter className={cl("modal-footer")}>
-                <Button color={Button.Colors.RED} onClick={handleClearLogs}>
+                <Button variant="dangerPrimary" onClick={handleClearLogs}>
                     Clear logs
                 </Button>
             </ModalFooter>

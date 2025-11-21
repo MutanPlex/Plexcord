@@ -20,27 +20,28 @@
 import "./styles.css";
 
 import * as DataStore from "@api/DataStore";
+import { t } from "@api/i18n";
+import { isPluginEnabled, stopPlugin } from "@api/PluginManager";
 import { useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
-import { SettingsTab, wrapTab } from "@components/settings";
-import { ChangeList } from "@utils/ChangeList";
-import { proxyLazy } from "@utils/lazy";
-import { Logger } from "@utils/Logger";
-import { Margins } from "@utils/margins";
-import { classes } from "@utils/misc";
-import { useAwaiter, useCleanupEffect } from "@utils/react";
-import { Alerts, Button, Card, lodash, Parser, React, Select, TextInput, Toasts, Tooltip, useMemo, useState } from "@webpack/common";
-import { JSX } from "react";
-
-import Plugins, { ExcludedPlugins, PluginMeta } from "~plugins";// Avoid circular dependency
-const { stopPlugin } = proxyLazy(() => require("plugins"));
-
-import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
+import { Card } from "@components/Card";
 import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { HeadingTertiary } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
+import { SettingsTab, wrapTab } from "@components/settings";
+import { ChangeList } from "@utils/ChangeList";
+import { isTruthy } from "@utils/guards";
+import { Logger } from "@utils/Logger";
+import { Margins } from "@utils/margins";
+import { classes } from "@utils/misc";
+import { useAwaiter, useCleanupEffect } from "@utils/react";
+import { Alerts, lodash, Parser, React, Select, TextInput, Toasts, Tooltip, useMemo, useState } from "@webpack/common";
+import { JSX } from "react";
+
+import Plugins, { ExcludedPlugins, PluginMeta } from "~plugins"; // Avoid circular dependency
 
 import { PluginCard } from "./PluginCard";
 import { openWarningModal } from "./PluginModal";
@@ -62,7 +63,7 @@ export function showErrorToast(message: string) {
 
 function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetCheckAndDo, enabledStockPlugins, totalStockPlugins, enabledUserPlugins, totalUserPlugins }) {
     return (
-        <Card className={classes(cl("info-card"), required && "pc-warning-card")}>
+        <Card variant={required ? "warning" : "normal"} className={cl("info-card")}>
             {required
                 ? (
                     <>
@@ -92,7 +93,7 @@ function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetC
 
             {enabledPlugins.length > 0 && !required && (
                 <Button
-                    size={Button.Sizes.SMALL}
+                    size="small"
                     className={"pc-plugins-disable-warning pc-modal-align-reset"}
                     onClick={() => {
                         return openWarningModal(null, null, null, false, enabledPlugins.length, resetCheckAndDo);
@@ -109,7 +110,9 @@ const enum SearchStatus {
     ALL,
     ENABLED,
     DISABLED,
-    NEW
+    NEW,
+    USER_PLUGINS,
+    API_PLUGINS
 }
 
 export function getExcludedReasons(): Record<"web" | "discordDesktop" | "plextron" | "desktop" | "dev", string> {
@@ -123,8 +126,10 @@ export function getExcludedReasons(): Record<"web" | "discordDesktop" | "plextro
 }
 
 function ExcludedPluginsList({ search }: { search: string; }) {
-    const matchingExcludedPlugins = Object.entries(ExcludedPlugins)
-        .filter(([name]) => name.toLowerCase().includes(search));
+    const matchingExcludedPlugins = search
+        ? Object.entries(ExcludedPlugins)
+            .filter(([name]) => name.toLowerCase().includes(search))
+        : [];
 
     const excludedReasons = getExcludedReasons();
 
@@ -179,6 +184,8 @@ function PluginSettings() {
         []
     );
 
+    const hasUserPlugins = useMemo(() => !IS_STANDALONE && Object.values(PluginMeta).some(m => m.userPlugin), []);
+
     const [searchValue, setSearchValue] = useState({ value: "", status: SearchStatus.ALL });
 
     const search = searchValue.value.toLowerCase();
@@ -187,7 +194,7 @@ function PluginSettings() {
 
     const pluginFilter = (plugin: typeof Plugins[keyof typeof Plugins]) => {
         const { status } = searchValue;
-        const enabled = Plexcord.Plugins.isPluginEnabled(plugin.name);
+        const enabled = isPluginEnabled(plugin.name);
 
         switch (status) {
             case SearchStatus.DISABLED:
@@ -198,6 +205,12 @@ function PluginSettings() {
                 break;
             case SearchStatus.NEW:
                 if (!newPlugins?.includes(plugin.name)) return false;
+                break;
+            case SearchStatus.USER_PLUGINS:
+                if (!PluginMeta[plugin.name]?.userPlugin) return false;
+                break;
+            case SearchStatus.API_PLUGINS:
+                if (!plugin.name.endsWith("API")) return false;
                 break;
         }
 
@@ -231,7 +244,7 @@ function PluginSettings() {
     const plugins = [] as JSX.Element[];
     const requiredPlugins = [] as JSX.Element[];
 
-    const showApi = searchValue.value.includes("API");
+    const showApi = searchValue.status === SearchStatus.API_PLUGINS;
     for (const p of sortedPlugins) {
         if (p.hidden || (!p.options && p.name.endsWith("API") && !showApi))
             continue;
@@ -316,7 +329,7 @@ function PluginSettings() {
     const isApiPlugin = (plugin: string) => plugin.endsWith("API") || Plugins[plugin].required;
 
     const totalPlugins = Object.keys(Plugins).filter(p => !isApiPlugin(p));
-    const enabledPlugins = Object.keys(Plugins).filter(p => Plexcord.Plugins.isPluginEnabled(p) && !isApiPlugin(p));
+    const enabledPlugins = Object.keys(Plugins).filter(p => isPluginEnabled(p) && !isApiPlugin(p));
 
     const totalStockPlugins = totalPlugins.filter(p => !PluginMeta[p].userPlugin && !Plugins[p].hidden).length;
     const totalUserPlugins = totalPlugins.filter(p => PluginMeta[p].userPlugin).length;
@@ -343,8 +356,10 @@ function PluginSettings() {
                                 { label: t("plugins.filters.option.all"), value: SearchStatus.ALL, default: true },
                                 { label: t("plugins.filters.option.enabled"), value: SearchStatus.ENABLED },
                                 { label: t("plugins.filters.option.disabled"), value: SearchStatus.DISABLED },
-                                { label: t("plugins.filters.option.new"), value: SearchStatus.NEW }
-                            ]}
+                                { label: t("plugins.filters.option.new"), value: SearchStatus.NEW },
+                                hasUserPlugins && { label: t("plugins.filters.option.userplugins"), value: SearchStatus.USER_PLUGINS },
+                                IS_DEV && { label: t("plugins.filters.option.api"), value: SearchStatus.API_PLUGINS },
+                            ].filter(isTruthy)}
                             serialize={String}
                             select={onStatusChange}
                             isSelected={v => v === searchValue.status}

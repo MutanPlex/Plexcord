@@ -25,6 +25,7 @@ import {
 } from "@api/ContextMenu";
 import { t } from "@api/i18n";
 import { updateMessage } from "@api/MessageUpdater";
+import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -124,7 +125,7 @@ const patchMessageContextMenu: NavContextMenuPatchCallback = (
 
     let label;
 
-    if (!Plexcord.Plugins.isPluginEnabled("MessageLoggerEnhanced")) {
+    if (!isPluginEnabled("MessageLoggerEnhanced")) {
         label = t("plugin.messageLogger.removeMessage");
     } else {
         label = t("plugin.messageLogger.removeMessageTemporary");
@@ -159,8 +160,7 @@ const patchChannelContextMenu: NavContextMenuPatchCallback = (
     const messages = MessageStore.getMessages(channel?.id) as MLMessage[];
     if (!messages?.some(msg => msg.deleted || msg.editHistory?.length)) return;
 
-    const group =
-        findGroupChildrenByChildId("mark-channel-read", children) ?? children;
+    const group = findGroupChildrenByChildId("mark-channel-read", children) ?? children;
     group.push(
         <Menu.MenuItem
             id="pc-ml-clear-channel"

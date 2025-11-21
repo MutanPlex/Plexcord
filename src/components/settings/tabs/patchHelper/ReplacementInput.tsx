@@ -7,7 +7,8 @@
 
 import { t } from "@api/i18n";
 import { FormSwitch } from "@components/FormSwitch";
-import { Heading, Paragraph } from "@components/index";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { Margins } from "@utils/margins";
 import { Parser, TextInput, useEffect, useState } from "@webpack/common";
 

@@ -6,9 +6,9 @@
  */
 
 import DonateButton from "@components/settings/DonateButton";
+import BadgeAPI from "@plugins/_api/badges";
 import { DONOR_ROLE_ID, PLEXCORD_GUILD_ID } from "@utils/constants";
 import { Button, GuildMemberStore } from "@webpack/common";
-import BadgeAPI from "plugins/_api/badges";
 
 export const isDonor = (userId: string) => !!(
     BadgeAPI.getDonorBadges(userId)?.length > 0

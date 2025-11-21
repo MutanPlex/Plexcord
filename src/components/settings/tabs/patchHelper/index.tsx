@@ -18,18 +18,19 @@
 */
 
 import { t } from "@api/i18n";
+import { Button } from "@components/Button";
 import { CodeBlock } from "@components/CodeBlock";
 import { Divider } from "@components/Divider";
 import { Flex } from "@components/Flex";
 import { HeadingTertiary } from "@components/Heading";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { debounce } from "@shared/debounce";
+import { copyWithToast } from "@utils/discord";
 import { Margins } from "@utils/margins";
-import { copyWithToast } from "@utils/misc";
 import { stripIndent } from "@utils/text";
 import { ReplaceFn } from "@utils/types";
 import { search } from "@webpack";
-import { Button, React, TextInput, useMemo, useState } from "@webpack/common";
+import { React, TextInput, useMemo, useState } from "@webpack/common";
 
 import { FullPatchInput } from "./FullPatchInput";
 import { PatchPreview } from "./PatchPreview";

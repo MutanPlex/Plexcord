@@ -17,9 +17,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-type MapValue<T extends Map<any, any>> = T extends Map<any, infer V> ? V : never;
-
-export type Style = MapValue<typeof PlexcordStyles>;
+export interface Style {
+    name: string;
+    source: string;
+    classNames: Record<string, string>;
+    dom: HTMLStyleElement | null;
+}
 
 export const styleMap = window.PlexcordStyles ??= new Map();
 

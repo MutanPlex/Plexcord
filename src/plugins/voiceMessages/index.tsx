@@ -22,6 +22,8 @@ import "./styles.css";
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { Button } from "@components/Button";
+import { Card } from "@components/Card";
 import { Heading } from "@components/Heading";
 import { Microphone } from "@components/Icons";
 import { Link } from "@components/Link";
@@ -36,7 +38,7 @@ import { useAwaiter } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { chooseFile } from "@utils/web";
 import { findByPropsLazy, findLazy, findStoreLazy } from "@webpack";
-import { Button, Card, Constants, FluxDispatcher, lodash, Menu, MessageActions, PermissionsBits, PermissionStore, RestAPI, SelectedChannelStore, showToast, SnowflakeUtils, Toasts, useEffect, useState } from "@webpack/common";
+import { Constants, FluxDispatcher, lodash, Menu, MessageActions, PermissionsBits, PermissionStore, RestAPI, SelectedChannelStore, showToast, SnowflakeUtils, Toasts, useEffect, useState } from "@webpack/common";
 
 import { VoiceRecorderDesktop } from "./components/DesktopRecorder";
 import { VoicePreview } from "./components/VoicePreview";
@@ -157,7 +159,7 @@ const ctxMenuPatch: NavContextMenuPatchCallback = (children, props) => {
 
     children.push(
         <Menu.MenuItem
-            id="vc-send-vmsg"
+            id="pc-send-vmsg"
             label={
                 <div className={OptionClasses.optionLabel}>
                     <Microphone className={OptionClasses.optionIcon} height={24} width={24} />
@@ -241,7 +243,7 @@ function Modal({ modalProps }: { modalProps: ModalProps; }) {
                     )}
 
                 {isUnsupportedFormat && (
-                    <Card className={`pc-warning-card ${Margins.top16}`}>
+                    <Card variant="warning" className={Margins.top16} defaultPadding>
                         <Paragraph>Voice Messages have to be OggOpus to be playable on iOS. This file is <code>{blob.type}</code> so it will not be playable on iOS.</Paragraph>
 
                         <Paragraph className={Margins.top8}>

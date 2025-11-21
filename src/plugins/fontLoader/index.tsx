@@ -9,6 +9,7 @@ import "./styles.css";
 
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { Card } from "@components/Card";
 import { HeadingSecondary, HeadingTertiary } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { debounce } from "@shared/debounce";
@@ -16,7 +17,7 @@ import { PcDevs } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
-import { Card, React, TextInput } from "@webpack/common";
+import { React, TextInput, useEffect } from "@webpack/common";
 
 interface GoogleFontMetadata {
     family: string;
@@ -109,7 +110,7 @@ function GoogleFontSearch({ onSelect }: { onSelect: (font: GoogleFontMetadata) =
     const [loading, setLoading] = React.useState(false);
     const previewStyles = React.useRef<HTMLStyleElement[]>([]);
 
-    React.useEffect(() => () => {
+    useEffect(() => () => {
         previewStyles.current.forEach(style => style.remove());
     }, []);
 

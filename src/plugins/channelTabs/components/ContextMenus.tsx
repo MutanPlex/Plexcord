@@ -7,6 +7,7 @@
 
 import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { bookmarkFolderColors, bookmarkPlaceholderName, closeOtherTabs, closeTab, closeTabsToTheLeft, closeTabsToTheRight, createTab, hasClosedTabs, isBookmarkFolder, openedTabs, reopenClosedTab, settings, toggleCompactTab } from "@plugins/channelTabs/util";
@@ -14,7 +15,7 @@ import { Bookmark, BookmarkFolder, Bookmarks, ChannelTabsProps, UseBookmarkMetho
 import { getIntlMessage } from "@utils/discord";
 import { Margins } from "@utils/margins";
 import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, openModal } from "@utils/modal";
-import { Button, ChannelStore, FluxDispatcher, Menu, ReadStateStore, ReadStateUtils, Select, TextInput, useState } from "@webpack/common";
+import { ChannelStore, FluxDispatcher, Menu, ReadStateStore, ReadStateUtils, Select, TextInput, useState } from "@webpack/common";
 
 export function BasicContextMenu() {
     const { showBookmarkBar } = settings.use(["showBookmarkBar"]);
@@ -82,8 +83,7 @@ export function EditModal({ modalProps, modalKey, bookmark, onSave }: {
                     onClick={() => onSave(name || placeholder, color!)}
                 >{t("plugin.channelTabs.button.save")}</Button>
                 <Button
-                    color={Button.Colors.TRANSPARENT}
-                    look={Button.Looks.FILLED}
+                    variant="primary"
                     onClick={() => closeModal(modalKey)}
                 >{t("plugin.channelTabs.button.cancel")}</Button>
             </ModalFooter>
@@ -128,8 +128,7 @@ function AddToFolderModal({ modalProps, modalKey, bookmarks, onSave }: {
                     onClick={() => onSave(folderIndex)}
                 >{t("plugin.channelTabs.button.save")}</Button>
                 <Button
-                    color={Button.Colors.TRANSPARENT}
-                    look={Button.Looks.FILLED}
+                    variant="primary"
                     onClick={() => closeModal(modalKey)}
                 >{t("plugin.channelTabs.button.cancel")}</Button>
             </ModalFooter>
@@ -150,14 +149,13 @@ function DeleteFolderConfirmationModal({ modalProps, modalKey, onConfirm }) {
             </ModalContent>
             <ModalFooter>
                 <Button
-                    color={Button.Colors.RED}
+                    variant="dangerPrimary"
                     onClick={onConfirm}
                 >
                     {t("plugin.channelTabs.button.delete")}
                 </Button>
                 <Button
-                    color={Button.Colors.TRANSPARENT}
-                    look={Button.Looks.FILLED}
+                    variant="primary"
                     onClick={() => closeModal(modalKey)}
                 >
                     {t("plugin.channelTabs.button.cancel")}

@@ -20,6 +20,7 @@
 import { t, tJsx } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
+import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
 import { ErrorCard } from "@components/ErrorCard";
 import { Flex } from "@components/Flex";
@@ -35,7 +36,7 @@ import { classes } from "@utils/misc";
 import { useAwaiter } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy, findComponentByCodeLazy } from "@webpack";
-import { ApplicationAssetUtils, Button, FluxDispatcher, React, UserStore } from "@webpack/common";
+import { ApplicationAssetUtils, FluxDispatcher, React, UserStore } from "@webpack/common";
 
 import { RPCSettings } from "./RPCSettings";
 
@@ -254,7 +255,7 @@ export default definePlugin({
                         <Paragraph>{t("plugin.customRPC.error.sharing")}</Paragraph>
 
                         <Button
-                            color={Button.Colors.TRANSPARENT}
+                            variant="secondary"
                             className={Margins.top8}
                             onClick={() => ShowCurrentGame.updateSetting(true)}
                         >

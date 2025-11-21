@@ -22,12 +22,13 @@ import { t, tJsx } from "@api/i18n";
 import { Settings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
 import { Paragraph } from "@components/Paragraph";
 import { openNotificationSettingsModal } from "@components/settings/tabs/plexcord/NotificationSettings";
 import { closeModal, ModalCloseButton, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { useAwaiter } from "@utils/react";
-import { Alerts, Button, ListScrollerThin, React, Timestamp, useEffect, useReducer, useState } from "@webpack/common";
+import { Alerts, ListScrollerThin, React, Timestamp, useEffect, useReducer, useState } from "@webpack/common";
 import { nanoid } from "nanoid";
 import type { DispatchWithoutAction } from "react";
 
@@ -176,7 +177,7 @@ function LogModal({ modalProps, close }: { modalProps: ModalProps; close(): void
 
                     <Button
                         disabled={log.length === 0}
-                        color={Button.Colors.RED}
+                        variant="dangerPrimary"
                         onClick={() => {
                             Alerts.show({
                                 title: t("notifications.log.sure"),

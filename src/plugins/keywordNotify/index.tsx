@@ -7,10 +7,11 @@
 
 import "./style.css";
 
+import * as DataStore from "@api/DataStore";
 import { t } from "@api/i18n";
-import { DataStore } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
@@ -22,7 +23,7 @@ import { classes } from "@utils/misc";
 import { useForceUpdater } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy, findByPropsLazy } from "@webpack";
-import { Button, ChannelStore, FluxDispatcher, Select, SelectedChannelStore, TabBar, TextInput, Tooltip, UserStore, useState } from "@webpack/common";
+import { ChannelStore, FluxDispatcher, Select, SelectedChannelStore, TabBar, TextInput, Tooltip, UserStore, useState } from "@webpack/common";
 import type { PropsWithChildren, SVGAttributes } from "react";
 
 type IconProps = SVGAttributes<SVGElement>;
@@ -102,8 +103,8 @@ function Collapsible({ title, children }) {
         <div>
             <Button
                 onClick={() => setIsOpen(!isOpen)}
-                look={Button.Looks.FILLED}
-                size={Button.Sizes.SMALL}
+                variant="secondary"
+                size="small"
                 className={cl("collapsible")}>
                 <div style={{ display: "flex", alignItems: "center" }}>
                     <div style={{
@@ -147,8 +148,8 @@ function ListedIds({ listIds, setListIds }) {
                             setListIds(values);
                             update();
                         }}
-                        look={Button.Looks.FILLED}
-                        size={Button.Sizes.SMALL}
+                        variant="secondary"
+                        size="small"
                         className={cl("delete")}>
                         <DeleteIcon />
                     </Button>
@@ -223,8 +224,8 @@ function KeywordEntries() {
                         </div>
                         <Button
                             onClick={() => removeKeywordEntry(i, update)}
-                            look={Button.Looks.FILLED}
-                            size={Button.Sizes.SMALL}
+                            variant="secondary"
+                            size="small"
                             className={cl("delete")}>
                             <DeleteIcon />
                         </Button>

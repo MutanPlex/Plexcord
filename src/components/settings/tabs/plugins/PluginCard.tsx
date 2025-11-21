@@ -7,9 +7,9 @@
 
 import { t, tJsx } from "@api/i18n";
 import { showNotice } from "@api/Notices";
+import { isPluginEnabled, startDependenciesRecursive, startPlugin, stopPlugin } from "@api/PluginManager";
 import { CogWheel, InfoIcon } from "@components/Icons";
 import { AddonCard } from "@components/settings/AddonCard";
-import { proxyLazy } from "@utils/lazy";
 import { isObjectEmpty } from "@utils/misc";
 import { Plugin } from "@utils/types";
 import { React, showToast, Toasts } from "@webpack/common";
@@ -17,9 +17,6 @@ import { Settings } from "Plexcord";
 
 import { cl, logger } from ".";
 import { openPluginModal } from "./PluginModal";
-
-// Avoid circular dependency
-const { startDependenciesRecursive, startPlugin, stopPlugin, isPluginEnabled } = proxyLazy(() => require("plugins") as typeof import("plugins"));
 
 interface PluginCardProps {
     plugin: Plugin;
@@ -105,7 +102,7 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
                     onClick={() => openPluginModal(plugin, onRestartNeeded)}
                     className={cl("info-button")}
                 >
-                    {plugin.options && !isObjectEmpty(plugin.options)
+                    {plugin.settings && !isObjectEmpty(plugin.settings)
                         ? <CogWheel className={cl("info-icon")} />
                         : <InfoIcon className={cl("info-icon")} />
                     }

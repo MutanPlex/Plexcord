@@ -1,4 +1,5 @@
 .pc-quest-completer-icon {
+    margin-top: 2px;
     padding: 0;
     width: var(--space-32);
     min-width: 0;

@@ -18,9 +18,12 @@
 */
 
 import { t, tJsx } from "@api/i18n";
+import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
+import { Card } from "@components/Card";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
@@ -37,7 +40,7 @@ import { onlyOnce } from "@utils/onlyOnce";
 import { makeCodeblock } from "@utils/text";
 import definePlugin from "@utils/types";
 import { checkForUpdates, isOutdated, update } from "@utils/updater";
-import { Alerts, Button, Card, ChannelRouter, ChannelStore, GuildMemberStore, Parser, PermissionsBits, PermissionStore, RelationshipStore, showToast, Toasts, UserStore } from "@webpack/common";
+import { Alerts, ChannelRouter, ChannelStore, GuildMemberStore, Parser, PermissionsBits, PermissionStore, RelationshipStore, showToast, Toasts, UserStore } from "@webpack/common";
 import { JSX } from "react";
 
 import gitHash from "~git-hash";
@@ -127,7 +130,6 @@ async function generateDebugInfoMessage() {
     }
 
     const commonIssues = {
-        "NoRPC enabled": Plexcord.Plugins.isPluginEnabled("NoRPC"),
         "Activity Sharing disabled": tryOrElse(() => !ShowCurrentGame.getSetting(), false),
         "Plexcord DevBuild": !IS_STANDALONE,
         "Has UserPlugins": Object.values(PluginMeta).some(m => m.userPlugin),
@@ -146,7 +148,7 @@ function generatePluginList() {
     const isApiPlugin = (plugin: string) => plugin.endsWith("API") || plugins[plugin].required;
 
     const enabledPlugins = Object.keys(plugins)
-        .filter(p => Plexcord.Plugins.isPluginEnabled(p) && !isApiPlugin(p));
+        .filter(p => isPluginEnabled(p) && !isApiPlugin(p));
 
     const enabledStockPlugins = enabledPlugins.filter(p => !PluginMeta[p].userPlugin);
     const enabledUserPlugins = enabledPlugins.filter(p => PluginMeta[p].userPlugin);
@@ -297,7 +299,7 @@ export default definePlugin({
             buttons.push(
                 <Button
                     key="pc-update"
-                    color={Button.Colors.GREEN}
+                    variant="positive"
                     onClick={async () => {
                         try {
                             if (await forceUpdate())
@@ -320,14 +322,14 @@ export default definePlugin({
                 buttons.push(
                     <Button
                         key="pc-dbg"
-                        color={Button.Colors.PRIMARY}
+                        variant="primary"
                         onClick={async () => sendMessage(props.channel.id, { content: await generateDebugInfoMessage() })}
                     >
                         {t("plugins.metadata.supportHelper.button.debug")}
                     </Button>,
                     <Button
                         key="pc-plg-list"
-                        color={Button.Colors.PRIMARY}
+                        variant="primary"
                         onClick={async () => sendMessage(props.channel.id, { content: generatePluginList() })}
                     >
                         {t("plugins.metadata.supportHelper.button.plugins")}
@@ -390,7 +392,7 @@ export default definePlugin({
             : <a onClick={handleJoinServer} style={{ cursor: "pointer", color: "var(--text-link)", textDecoration: "none" }}>#plexcord-support</a>;
 
         return (
-            <Card className={`pc-warning-card ${Margins.top8}`}>
+            <Card variant="warning" className={Margins.top8} defaultPadding>
                 {tJsx("plugins.metadata.supportHelper.dm.warning", {
                     br: <br />,
                     channel: channelLink,

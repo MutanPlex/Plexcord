@@ -18,7 +18,9 @@
 */
 
 import { t } from "@api/i18n";
+import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings, migratePluginSettings } from "@api/Settings";
+import OnekoPlugin from "@plugins/oneko";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
@@ -38,7 +40,7 @@ const settings = definePluginSettings({
         },
         onChange: () => {
             // note: cant call the start() function from here. so i just copy pasted it (This was pointed out in the last commit i made. So this is to just clear stuff up for any future devs that work on this :D )
-            if (Plexcord.Plugins.isPluginEnabled("Oneko")) {
+            if (isPluginEnabled(OnekoPlugin.name)) {
                 document.getElementById("oneko")?.remove();
                 fetch("https://raw.githubusercontent.com/adryd325/oneko.js/c4ee66353b11a44e4a5b7e914a81f8d33111555e/oneko.js")
                     .then(x => x.text())

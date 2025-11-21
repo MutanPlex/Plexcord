@@ -10,9 +10,9 @@ import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
 import { CopyIcon } from "@components/Icons";
 import { AvatarStyles, cl, downloadAudio, getEmojiUrl, playSound, SoundLogEntry, User, UserSummaryItem } from "@plugins/soundBoardLogger/utils";
-import { openUserProfile } from "@utils/discord";
+import { copyWithToast, openUserProfile } from "@utils/discord";
 import { Margins } from "@utils/margins";
-import { classes, copyWithToast } from "@utils/misc";
+import { classes } from "@utils/misc";
 import { closeModal, ModalContent, ModalRoot, openModal } from "@utils/modal";
 import { Clickable, Timestamp } from "@webpack/common";
 import moment from "moment";
@@ -53,55 +53,57 @@ export default function UserModal({ item, user, sounds, closeModal }: { item: So
                     src={getEmojiUrl(item.emoji)}
                     alt=""
                 />
-                <Flex flexDirection="column" style={{ gap: "7px", height: "68px", justifyContent: "space-between" }}>
+                <Flex justifyContent="space-between" flexDirection="column" style={{ gap: "7px", height: "68px" }}>
                     <BaseText size="md" weight="bold" style={{ height: "20px" }}>{item.soundId}</BaseText>
                     <BaseText size="md" weight="normal">Played {currentUser.plays.length} {currentUser.plays.length === 1 ? "time" : "times"}.</BaseText>
                     <BaseText size="md" weight="normal">Last played: <Timestamp timestamp={new Date(moment(currentUser.plays.at(-1)).toDate())} /></BaseText>
                 </Flex>
             </Flex>
-            <BaseText size="lg" weight="semibold" tag="h2" className={classes(Margins.top16, Margins.bottom8)}>
-                {soundsDoneByCurrentUser.length ? "Also played:" : " "}
-            </BaseText>
-            <Flex style={{ justifyContent: "space-between" }}>
-                <UserSummaryItem
-                    users={soundsDoneByCurrentUser}
-                    count={soundsDoneByCurrentUser.length}
-                    guildId={undefined}
-                    renderIcon={false}
-                    max={10}
-                    showDefaultAvatarsForNullUsers
-                    showUserPopout
-                    renderMoreUsers={() =>
-                        <div className={AvatarStyles.emptyUser}>
-                            <div className={AvatarStyles.moreUsers}>
-                                ...
+            <div className={classes(cl("also-played"), Margins.bottom8)}>
+                <BaseText size="lg" weight="semibold" tag="h2">
+                    {soundsDoneByCurrentUser.length ? "Also played:" : " "}
+                </BaseText>
+                <Flex justifyContent="space-between">
+                    <UserSummaryItem
+                        users={soundsDoneByCurrentUser}
+                        count={soundsDoneByCurrentUser.length}
+                        guildId={undefined}
+                        renderIcon={false}
+                        max={10}
+                        showDefaultAvatarsForNullUsers
+                        showUserPopout
+                        renderMoreUsers={() =>
+                            <div className={AvatarStyles.emptyUser}>
+                                <div className={AvatarStyles.moreUsers}>
+                                    ...
+                                </div>
                             </div>
-                        </div>
-                    }
-                    className={cl("user-sounds")}
-                    renderUser={({ soundId, emoji }) => (
-                        <Clickable
-                            className={AvatarStyles.clickableAvatar}
-                            onClick={() => {
-                                closeModal();
-                                openUserModal(sounds.find(sound => sound.soundId === soundId), user, sounds);
-                            }}
-                        >
-                            <img
-                                className={AvatarStyles.avatar}
-                                src={getEmojiUrl(emoji)}
-                                alt={soundId}
-                                title={soundId}
-                            />
-                        </Clickable>
-                    )}
-                />
-                <div className={cl("user-buttons")}>
-                    <IconWithTooltip text="Download" icon={<DownloadIcon />} onClick={() => downloadAudio(item.soundId)} />
-                    <IconWithTooltip text="Copy ID" icon={<CopyIcon />} onClick={() => copyWithToast(item.soundId, "ID copied to clipboard!")} />
-                    <IconWithTooltip text="Play Sound" icon={<PlayIcon />} onClick={() => playSound(item.soundId)} />
-                </div>
-            </Flex>
+                        }
+                        className={cl("user-sounds")}
+                        renderUser={({ soundId, emoji }) => (
+                            <Clickable
+                                className={AvatarStyles.clickableAvatar}
+                                onClick={() => {
+                                    closeModal();
+                                    openUserModal(sounds.find(sound => sound.soundId === soundId), user, sounds);
+                                }}
+                            >
+                                <img
+                                    className={AvatarStyles.avatar}
+                                    src={getEmojiUrl(emoji)}
+                                    alt={soundId}
+                                    title={soundId}
+                                />
+                            </Clickable>
+                        )}
+                    />
+                    <div className={cl("user-buttons")}>
+                        <IconWithTooltip text="Download" icon={<DownloadIcon />} onClick={() => downloadAudio(item.soundId)} />
+                        <IconWithTooltip text="Copy ID" icon={<CopyIcon />} onClick={() => copyWithToast(item.soundId, "ID copied to clipboard!")} />
+                        <IconWithTooltip text="Play Sound" icon={<PlayIcon />} onClick={() => playSound(item.soundId)} />
+                    </div>
+                </Flex>
+            </div>
         </ModalContent>
     );
 }

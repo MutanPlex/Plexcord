@@ -17,9 +17,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { MessageObject } from "@api/MessageEvents";
-import { Channel, CloudUpload, Guild, GuildFeatures, Message, User } from "@plexcord/discord-types";
-import { ChannelActionCreators, ChannelStore, ComponentDispatch, Constants, FluxDispatcher, GuildStore, i18n, IconUtils, InviteActions, MessageActions, RestAPI, SelectedChannelStore, SelectedGuildStore, UserProfileActions, UserProfileStore, UserSettingsActionCreators, UserUtils } from "@webpack/common";
+import type { MessageObject } from "@api/MessageEvents";
+import type { Channel, CloudUpload, Guild, GuildFeatures, Message, User } from "@plexcord/discord-types";
+import { ChannelActionCreators, ChannelStore, ComponentDispatch, Constants, FluxDispatcher, GuildStore, i18n, IconUtils, InviteActions, MessageActions, RestAPI, SelectedChannelStore, SelectedGuildStore, Toasts, UserProfileActions, UserProfileStore, UserSettingsActionCreators, UserUtils } from "@webpack/common";
 import { Except } from "type-fest";
 
 import { runtimeHashMessageKey, runtimeHashMessageKeyLegacy } from "./intlHash";
@@ -27,7 +27,7 @@ import { Logger } from "./Logger";
 import { MediaModalItem, MediaModalProps, openMediaModal } from "./modal";
 
 const IntlManagerLogger = new Logger("IntlManager");
-
+import { copyToClipboard } from "./clipboard";
 // TODO: remove legacy hashing function once Discord ships new one everywhere for a while
 
 /**
@@ -114,6 +114,16 @@ export function insertTextIntoChatInputBox(text: string) {
     ComponentDispatch.dispatchToLastSubscribed("INSERT_TEXT", {
         rawText: text,
         plainText: text
+    });
+}
+
+export async function copyWithToast(text: string, toastMessage?: string) {
+    const { t } = await import("@api/i18n");
+    await copyToClipboard(text);
+    Toasts.show({
+        message: toastMessage ?? t("utils.toast.copied"),
+        id: Toasts.genId(),
+        type: Toasts.Type.SUCCESS
     });
 }
 

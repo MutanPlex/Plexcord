@@ -18,11 +18,12 @@
 */
 
 import { t } from "@api/i18n";
+import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { SessionInfo } from "@plugins/betterSessions/types";
 import { getDefaultName, savedSessionsCache, saveSessionsToDataStore } from "@plugins/betterSessions/utils";
 import { ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
-import { Button, React, TextInput } from "@webpack/common";
+import { React, TextInput } from "@webpack/common";
 import { KeyboardEvent } from "react";
 
 export function RenameModal({ props, session, state }: { props: ModalProps, session: SessionInfo["session"], state: [string, React.Dispatch<React.SetStateAction<string>>]; }) {
@@ -67,9 +68,8 @@ export function RenameModal({ props, session, state }: { props: ModalProps, sess
                         paddingRight: "1px",
                         opacity: 0.6
                     }}
-                    look={Button.Looks.LINK}
-                    color={Button.Colors.LINK}
-                    size={Button.Sizes.NONE}
+                    variant="primary"
+                    size="min"
                     onClick={() => setValue("")}
                 >
                     {t("plugin.betterSessions.resetName")}
@@ -79,14 +79,13 @@ export function RenameModal({ props, session, state }: { props: ModalProps, sess
             <ModalFooter>
                 <div className="pc-betterSessions-footer-buttons">
                     <Button
-                        color={Button.Colors.PRIMARY}
+                        variant="primary"
                         onClick={onSaveClick}
                     >
                         {t("plugin.betterSessions.save")}
                     </Button>
                     <Button
-                        color={Button.Colors.BRAND}
-                        look={Button.Looks.LINK}
+                        variant="primary"
                         onClick={() => props.onClose()}
                     >
                         {t("plugin.betterSessions.cancel")}

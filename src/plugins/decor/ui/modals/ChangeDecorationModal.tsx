@@ -25,12 +25,11 @@ import DecorationGridCreate from "@plugins/decor/ui/components/DecorationGridCre
 import DecorationGridNone from "@plugins/decor/ui/components/DecorationGridNone";
 import DecorDecorationGridDecoration from "@plugins/decor/ui/components/DecorDecorationGridDecoration";
 import SectionedGridList from "@plugins/decor/ui/components/SectionedGridList";
-import { openInviteModal } from "@utils/discord";
+import { copyWithToast, openInviteModal } from "@utils/discord";
 import { Margins } from "@utils/margins";
-import { copyWithToast } from "@utils/misc";
 import { closeAllModals, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { Queue } from "@utils/Queue";
-import { Alerts, Button, FluxDispatcher, GuildStore, NavigationRouter, Parser, Tooltip, useEffect, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
+import { Alerts, FluxDispatcher, GuildStore, NavigationRouter, Parser, Tooltip, useEffect, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
 
 import { openCreateDecorationModal } from "./CreateDecorationModal";
 import { openGuidelinesModal } from "./GuidelinesModal";
@@ -201,7 +200,7 @@ function ChangeDecorationModal(props: ModalProps) {
                         avatarDecoration={avatarDecoration}
                         user={UserStore.getCurrentUser()}
                     />
-                    {isActiveDecorationPreset && <Heading className="">{tJsx("plugin.decor.title.presetPart", { name: activeDecorationPreset.name })}</Heading>}
+                    {isActiveDecorationPreset && <Heading className="">{tJsx("plugin.decor.presetPart", { name: activeDecorationPreset.name })}</Heading>}
                     {typeof activeSelectedDecoration === "object" &&
                         <BaseText
                             size="sm"
@@ -213,33 +212,33 @@ function ChangeDecorationModal(props: ModalProps) {
                     }
                     {activeDecorationHasAuthor && (
                         <BaseText key={`createdBy-${activeSelectedDecoration.authorId}`}>
-                            {tJsx("plugin.decor.createdBy", { author: Parser.parse(`<@${activeSelectedDecoration.authorId}>`) })}
+                            {tJsx("plugin.decor.createdBy", { author: Parser.parse(`<@${activeSelectedDecoration.authorId}>`)[0] })}
                         </BaseText>
                     )}
                     {isActiveDecorationPreset && (
-                        <Button onClick={() => copyWithToast(activeDecorationPreset.id)}>
+                        <NewButton onClick={() => copyWithToast(activeDecorationPreset.id)}>
                             {t("plugin.decor.copy")}
-                        </Button>
+                        </NewButton>
                     )}
                 </div>
             </ErrorBoundary>
         </ModalContent>
         <ModalFooter className={cl("change-decoration-modal-footer", "modal-footer")}>
             <div className={cl("modal-footer-btn-container")}>
-                <Button
+                <NewButton
                     onClick={props.onClose}
-                    color={Button.Colors.PRIMARY}
+                    variant="primary"
                 >
                     {t("plugin.decor.button.cancel")}
-                </Button>
-                <Button
+                </NewButton>
+                <NewButton
                     onClick={() => {
                         selectDecoration(tryingDecoration!).then(props.onClose);
                     }}
                     disabled={!isTryingDecoration}
                 >
                     {t("plugin.decor.button.apply")}
-                </Button>
+                </NewButton>
             </div>
             <div className={cl("modal-footer-btn-container")}>
                 <Tooltip text={t("plugin.decor.join.tooltip")}>
@@ -263,7 +262,7 @@ function ChangeDecorationModal(props: ModalProps) {
                         {t("plugin.decor.join.button")}
                     </NewButton>}
                 </Tooltip>
-                <Button
+                <NewButton
                     onClick={() => Alerts.show({
                         title: t("plugin.decor.alert.logout.title"),
                         body: t("plugin.decor.alert.logout.body"),
@@ -275,11 +274,10 @@ function ChangeDecorationModal(props: ModalProps) {
                             props.onClose();
                         }
                     })}
-                    color={Button.Colors.PRIMARY}
-                    look={Button.Looks.LINK}
+                    variant="primary"
                 >
                     {t("plugin.decor.alert.logout.title")}
-                </Button>
+                </NewButton>
             </div>
         </ModalFooter>
     </ModalRoot>;

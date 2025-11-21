@@ -8,10 +8,11 @@
 import "./styles.css";
 
 import { t } from "@api/i18n";
+import { Button } from "@components/Button";
 import { PcDevs } from "@utils/constants";
 import { getIntlMessage, openUserProfile } from "@utils/discord";
 import definePlugin from "@utils/types";
-import { Button, React, RelationshipStore, TextInput, UserStore } from "@webpack/common";
+import { React, RelationshipStore, TextInput, useEffect, UserStore } from "@webpack/common";
 
 let lastSearch = "";
 let updateFunc = (v: any) => { };
@@ -51,7 +52,7 @@ export default definePlugin({
     renderSearchInput() {
         const [value, setValue] = React.useState(lastSearch);
 
-        React.useEffect(() => {
+        useEffect(() => {
             const searchResults = this.getFilteredUsers(lastSearch);
             updateFunc(searchResults);
         }, []);
@@ -71,7 +72,7 @@ export default definePlugin({
     renderUser(userId: string, rest: any) {
         return (
             <div style={{ display: "flex", gap: "8px" }}>
-                <Button color={Button.Colors.PRIMARY} onClick={() => openUserProfile(userId)}>
+                <Button variant="primary" onClick={() => openUserProfile(userId)}>
                     {getIntlMessage("SHOW_USER_PROFILE")}
                 </Button>
                 {rest}

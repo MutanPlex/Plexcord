@@ -8,9 +8,9 @@
 import { t } from "@api/i18n";
 import { Settings } from "@api/Settings";
 import { CloudUpload } from "@plexcord/discord-types";
+import { tarExtMatcher } from "@plugins/anonymiseFileNames";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { ReporterTestable } from "@utils/types";
-import { tarExtMatcher } from "plugins/anonymiseFileNames";
 
 const extensionMap = {
     "ogg": [".ogv", ".oga", ".ogx", ".ogm", ".spx", ".opus", ".flac", ".aac", ".wma"],

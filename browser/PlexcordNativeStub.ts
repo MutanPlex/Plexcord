@@ -20,13 +20,16 @@
 /// <reference path="../src/modules.d.ts" />
 /// <reference path="../src/globals.d.ts" />
 
+// Be very careful with imports in this file to avoid circular dependency issues.
+// Only import pure modules that don't import other parts of Plexcord.
 import monacoHtmlLocal from "file://monacoWin.html?minify";
-import * as DataStore from "../src/api/DataStore";
-import { debounce, localStorage } from "../src/utils";
-import { EXTENSION_BASE_URL } from "../src/utils/web-metadata";
-import { getTheme, Theme } from "../src/utils/discord";
-import { getThemeInfo } from "../src/main/themes";
-import { Settings } from "../src/Plexcord";
+import * as DataStore from "@api/DataStore";
+import { debounce } from "@shared/debounce";
+import { localStorage } from "@utils/localStorage";
+import { EXTENSION_BASE_URL } from "@utils/web-metadata";
+import { getTheme, Theme } from "@utils/discord";
+import { getThemeInfo } from "@main/themes";
+import type { Settings } from "@api/Settings";
 import { getStylusWebStoreUrl } from "@utils/web";
 
 // listeners for ipc.on
@@ -95,6 +98,8 @@ window.PlexcordNative = {
                 alert("Failed to open QuickCSS popup. Make sure to allow popups!");
                 return;
             }
+
+            const { getTheme, Theme } = require("@utils/discord");
 
             win.baseUrl = EXTENSION_BASE_URL;
             win.setCss = setCssDebounced;

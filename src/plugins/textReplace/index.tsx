@@ -18,6 +18,7 @@
 */
 
 import { definePluginSettings } from "@api/Settings";
+import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
@@ -26,7 +27,7 @@ import { Message } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
-import { Button, React, Select, TextInput, UserStore, useState } from "@webpack/common";
+import { React, Select, TextInput, UserStore, useState } from "@webpack/common";
 
 type Rule = Record<"find" | "replace" | "onlyIfIncludes" | "scope", string>;
 
@@ -180,7 +181,7 @@ function TextReplace({ title, rulesArray }: TextReplaceProps) {
                                     />
                                 </div>
                                 <Button
-                                    size={Button.Sizes.MIN}
+                                    size="small"
                                     onClick={() => onClickRemove(index)}
                                     style={{ flex: 0.10, backgroundColor: "var(--input-background)", border: "1px solid var(--input-border)", color: "var(--status-danger)" }}
                                 >

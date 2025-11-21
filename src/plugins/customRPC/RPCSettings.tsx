@@ -8,6 +8,7 @@
 import "./settings.css";
 
 import { t } from "@api/i18n";
+import { isPluginEnabled } from "@api/PluginManager";
 import { classNameFactory } from "@api/Styles";
 import { Divider } from "@components/Divider";
 import { Heading } from "@components/Heading";
@@ -16,7 +17,7 @@ import { ActivityType } from "@plexcord/discord-types/enums";
 import { debounce } from "@shared/debounce";
 import { Select, Text, TextInput, useState } from "@webpack/common";
 
-import { setRpc, settings, TimestampMode } from ".";
+import CustomRPCPlugin, { setRpc, settings, TimestampMode } from ".";
 
 const cl = classNameFactory("pc-customRPC-settings-");
 
@@ -52,7 +53,7 @@ function isAppIdValid(value: string) {
 
 const updateRPC = debounce(() => {
     setRpc(true);
-    if (Plexcord.Plugins.isPluginEnabled("CustomRPC")) setRpc();
+    if (isPluginEnabled(CustomRPCPlugin.name)) setRpc();
 });
 
 function isStreamLinkDisabled() {

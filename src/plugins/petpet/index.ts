@@ -19,6 +19,7 @@
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, sendBotMessage } from "@api/Commands";
 import { t } from "@api/i18n";
+import { migratePluginSettings } from "@api/Settings";
 import { CommandArgument, CommandContext } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { makeLazy } from "@utils/lazy";
@@ -87,8 +88,9 @@ async function resolveImage(options: CommandArgument[], ctx: CommandContext, noS
     return null;
 }
 
+migratePluginSettings("PetPet", "petpet");
 export default definePlugin({
-    name: "petpet",
+    name: "PetPet",
     description: "Adds a /petpet slash command to create headpet gifs from any image",
     authors: [Devs.Ven],
 

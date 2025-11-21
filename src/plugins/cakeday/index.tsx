@@ -12,6 +12,7 @@ import { Badges } from "@api/index";
 import { addMemberListDecorator, removeMemberListDecorator } from "@api/MemberListDecorators";
 import { addMessageDecoration, removeMessageDecoration } from "@api/MessageDecorations";
 import { Settings } from "@api/Settings";
+import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
@@ -20,8 +21,7 @@ import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import { ModalContent, ModalFooter, ModalHeader, ModalRoot, openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
-import { Button, Menu, React, showToast, TextInput, Toasts, Tooltip, UserStore } from "@webpack/common";
-
+import { Menu, React, showToast, TextInput, Toasts, Tooltip, useEffect, UserStore } from "@webpack/common";
 interface SavedBirthdays {
     [userId: string]: string;
 }
@@ -123,7 +123,7 @@ function BirthdayModal({ userId, username, modalProps }: { userId: string, usern
             </ModalContent>
             <ModalFooter>
                 <Button
-                    color={Button.Colors.BRAND}
+                    variant="primary"
                     onClick={async () => {
                         setLoading(true);
                         await setBirthday(userId, username, birthdayInput);
@@ -135,8 +135,7 @@ function BirthdayModal({ userId, username, modalProps }: { userId: string, usern
                     {t("plugin.cakeDay.modal.set")}
                 </Button>
                 <Button
-                    color={Button.Colors.PRIMARY}
-                    look={Button.Looks.LINK}
+                    variant="primary"
                     onClick={() => {
                         if (!loading) modalProps.onClose();
                     }}
@@ -182,7 +181,7 @@ function CakeIcon({ width, height, onClick }: { width: number; height: number; o
 function CakeDaySettings() {
     const [birthdays, setBirthdays] = React.useState(savedBirthdays);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const interval = setInterval(() => {
             setBirthdays({ ...savedBirthdays });
         }, 1000);
@@ -216,9 +215,8 @@ function CakeDaySettings() {
                                 {isBirthday && <span style={{ marginLeft: "8px" }}>🎂 {t("plugin.cakeDay.modal.today")}</span>}
                             </Paragraph>
                             <Button
-                                size={Button.Sizes.MIN}
-                                color={Button.Colors.RED}
-                                look={Button.Looks.FILLED}
+                                size="min"
+                                variant="dangerPrimary"
                                 onClick={() => clearBirthday(userId, user?.username || "Unknown")}
                             >
                                 {t("plugin.cakeDay.modal.remove")}

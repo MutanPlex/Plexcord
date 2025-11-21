@@ -31,7 +31,7 @@ export default definePlugin({
             find: "inQuote:",
             replacement: {
                 match: /,content:([^,]+),inQuote/,
-                replace: (_, content) => `,content:Plexcord.Plugins.plugins.Unindent.unindent(${content}),inQuote`
+                replace: (_, content) => `,content:$self.unindent(${content}),inQuote`
             }
         }
     ],

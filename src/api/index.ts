@@ -33,9 +33,11 @@ import * as $MessageUpdater from "./MessageUpdater";
 import * as $NicknameIcons from "./NicknameIcons";
 import * as $Notices from "./Notices";
 import * as $Notifications from "./Notifications";
+export * as PluginManager from "./PluginManager";
 import * as $ServerList from "./ServerList";
 import * as $Settings from "./Settings";
 import * as $Styles from "./Styles";
+import * as $Themes from "./Themes";
 import * as $UserSettings from "./UserSettings";
 
 /**
@@ -142,6 +144,11 @@ export const NicknameIcons = $NicknameIcons;
  * An API allowing you to play internal Discord audio files or external audio URLs/URIs.
  */
 export const AudioPlayer = $AudioPlayer;
+
+/**
+ * Don't use this
+ */
+export const Themes = $Themes;
 
 /**
  * LocaleLoader for managing plugin translations

@@ -20,15 +20,16 @@
 import "./style.css";
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import * as DataStore from "@api/DataStore";
 import { t } from "@api/i18n";
-import { DataStore } from "@api/index";
 import { addMessagePopoverButton, removeMessagePopoverButton } from "@api/MessagePopover";
+import { Button } from "@components/Button";
 import { Message } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import { openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
 import { findByCodeLazy } from "@webpack";
-import { Button, ChannelStore, Menu, Tooltip } from "@webpack/common";
+import { ChannelStore, Menu, Tooltip } from "@webpack/common";
 
 import { Popover as NoteButtonPopover, Popover } from "./components/icons/NoteButton";
 import { NoteModal } from "./components/modals/Notebook";
@@ -77,7 +78,7 @@ export default definePlugin({
                 {tooltipProps => (
                     <Button style={{ backgroundColor: "transparent", border: "none" }}
                         {...tooltipProps}
-                        size={Button.Sizes.SMALL}
+                        size="small"
                         className={"pc-holy-notes-icon"}
                         onClick={() => openModal(props => <NoteModal {...props} />)}
                     >

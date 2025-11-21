@@ -9,8 +9,9 @@ import "./style.css";
 
 import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
+import { Button } from "@components/Button";
 import { HiddenServersStore } from "@plugins/hideServers/HiddenServersStore";
-import { Button, GuildStore, useStateFromStores } from "@webpack/common";
+import { GuildStore, useStateFromStores } from "@webpack/common";
 
 import { openHiddenServersModal } from "./HiddenServersMenu";
 
@@ -25,8 +26,8 @@ function HiddenServersButton() {
             {actuallyHidden > 0 ? (
                 <Button
                     className={cl("button")}
-                    look={Button.Looks.FILLED}
-                    size={Button.Sizes.MIN}
+                    variant="secondary"
+                    size="min"
                     onClick={() => openHiddenServersModal()}
                 >
                     {actuallyHidden} {t("plugin.hideServers.button.hidden")}

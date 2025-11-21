@@ -24,6 +24,7 @@ import { t, tJsx, useForceUpdateOnLocaleChange } from "@api/i18n";
 import { Settings, useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Paragraph } from "@components/Paragraph";
@@ -36,7 +37,7 @@ import { classes, isObjectEmpty } from "@utils/misc";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { OptionType, Plugin } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { Button, Clickable, FluxDispatcher, React, Toasts, Tooltip, useEffect, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
+import { Clickable, FluxDispatcher, React, Toasts, Tooltip, useEffect, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
 import { Constructor } from "type-fest";
 
 import { PluginMeta } from "~plugins";
@@ -228,11 +229,10 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                 hasSettings && <ModalFooter>
                     <Flex flexDirection="column" style={{ width: "100%" }}>
                         <Flex style={{ justifyContent: "space-between" }}>
-                            <Tooltip text="Reset to default settings" shouldShow={!isObjectEmpty(pluginSettings)}>
+                            <Tooltip text={t("plugins.restart.resetDefault")} shouldShow={!isObjectEmpty(pluginSettings)}>
                                 {({ onMouseEnter, onMouseLeave }) => (
                                     <Button
-                                        size={Button.Sizes.SMALL}
-                                        color={Button.Colors.BRAND}
+                                        size="small"
                                         onClick={handleResetClick}
                                         onMouseEnter={onMouseEnter}
                                         onMouseLeave={onMouseLeave}
@@ -357,7 +357,7 @@ export function openWarningModal(plugin?: Plugin | null, pluginModalProps?: Moda
                     <Flex className="pc-button-group" style={{ gap: ".2em" }}>
                         {!Settings.ignoreResetWarning && (
                             <Button
-                                size={Button.Sizes.SMALL}
+                                size="small"
                                 className={cl("disable-warning")}
                                 onClick={() => {
                                     Settings.ignoreResetWarning = true;
@@ -367,7 +367,7 @@ export function openWarningModal(plugin?: Plugin | null, pluginModalProps?: Moda
                             </Button>
                         )}
                         <Button
-                            size={Button.Sizes.SMALL}
+                            size="small"
                             onClick={() => {
                                 if (isPlugin) {
                                     if (plugin && pluginModalProps)
@@ -381,10 +381,9 @@ export function openWarningModal(plugin?: Plugin | null, pluginModalProps?: Moda
                             {t("plugins.dangerModal.confirmReset")}
                         </Button>
                         <Button
-                            size={Button.Sizes.SMALL}
-                            color={Button.Colors.PRIMARY}
+                            size="small"
                             onClick={warningModalProps.onClose}
-                            look={Button.Looks.LINK}
+                            variant="none"
                         >
                             {t("plugins.restart.button.disableWarning")}
                         </Button>

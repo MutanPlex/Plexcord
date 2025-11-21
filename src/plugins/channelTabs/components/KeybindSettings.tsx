@@ -5,13 +5,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { settings } from "@plugins/channelTabs/util";
 import { IS_MAC } from "@utils/constants";
-import { Button, React, Text, useEffect, useRef, useState } from "@webpack/common";
+import { React, useEffect, useRef, useState } from "@webpack/common";
 import { JSX } from "react";
 
 interface KeybindInputProps {
@@ -116,19 +117,19 @@ function KeybindInput({ label, description, settingKey, enabledKey }: KeybindInp
     return (
         <div className="channelTabs-keybind-input">
             <div className="channelTabs-keybind-info">
-                <Text variant="text-md/semibold">{label}</Text>
-                <Text variant="text-sm/normal" style={{ color: "var(--text-muted)" }}>
+                <Paragraph size="md" weight="semibold">{label}</Paragraph>
+                <Paragraph size="sm" weight="normal" style={{ color: "var(--text-muted)" }}>
                     {description}
-                </Text>
+                </Paragraph>
                 {!isEnabled && (
-                    <Text variant="text-xs/normal" style={{ color: "var(--text-danger)" }}>
+                    <Paragraph size="xs" weight="normal" style={{ color: "var(--text-danger)" }}>
                         This shortcut is currently disabled
-                    </Text>
+                    </Paragraph>
                 )}
                 {error && (
-                    <Text variant="text-xs/normal" className="channelTabs-keybind-conflict">
+                    <Paragraph size="xs" weight="normal" className="channelTabs-keybind-conflict">
                         {error}
-                    </Text>
+                    </Paragraph>
                 )}
             </div>
             <div className="channelTabs-keybind-controls">
@@ -141,8 +142,8 @@ function KeybindInput({ label, description, settingKey, enabledKey }: KeybindInp
                     {isListening ? "Press any key..." : formatKeybind(currentKeybind)}
                 </button>
                 <Button
-                    size={Button.Sizes.SMALL}
-                    color={Button.Colors.PRIMARY}
+                    size="small"
+                    variant="primary"
                     onClick={handleReset}
                     disabled={!isEnabled}
                 >
@@ -217,7 +218,7 @@ export function KeybindSettings(): JSX.Element {
 
                 <div style={{ marginTop: "16px" }}>
                     <Button
-                        color={Button.Colors.RED}
+                        variant="dangerPrimary"
                         onClick={handleResetAll}
                     >
                         Reset All to Defaults

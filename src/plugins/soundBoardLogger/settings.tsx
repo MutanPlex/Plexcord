@@ -6,10 +6,11 @@
  */
 
 import { definePluginSettings } from "@api/Settings";
+import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { OptionType } from "@utils/types";
-import { Button, TextInput, useState } from "@webpack/common";
+import { TextInput, useState } from "@webpack/common";
 
 import { openSoundBoardLog } from "./components/SoundBoardLog";
 
@@ -78,7 +79,7 @@ const settings = definePluginSettings({
         type: OptionType.COMPONENT,
         description: "show the logs",
         component: () =>
-            <Button color={Button.Colors.LINK} size={Button.Sizes.SMALL} onClick={openSoundBoardLog}>Open Logs</Button>
+            <Button variant="secondary" size="small" onClick={openSoundBoardLog}>Open Logs</Button>
     },
     soundVolume: {
         description: "How loud the toggle sound is (0 to disable)",

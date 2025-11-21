@@ -7,10 +7,11 @@
 
 import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
-import { Button, React } from "@webpack/common";
+import { React } from "@webpack/common";
 
 import Error from "./Error";
 import { RenderMessage } from "./RenderMessage";
@@ -50,7 +51,7 @@ export default ({ onClose, notebook, onChangeTab, ...props }: ModalProps & { onC
             </ModalContent>
             <ModalFooter>
                 <Button
-                    color={Button.Colors.RED}
+                    variant="dangerPrimary"
                     onClick={handleDelete}
                 >
                     {t("plugin.holyNotes.modal.delete.button")}

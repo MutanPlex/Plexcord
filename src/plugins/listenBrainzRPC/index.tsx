@@ -17,6 +17,7 @@ import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
 import { ApplicationAssetUtils, FluxDispatcher } from "@webpack/common";
+let updateInterval: NodeJS.Timeout | undefined;
 
 interface TrackData {
     name: string;
@@ -246,13 +247,14 @@ export default definePlugin({
 
     start() {
         this.updatePresence();
-        this.updateInterval = setInterval(() => {
+        updateInterval = setInterval(() => {
             this.updatePresence();
         }, 16000);
     },
 
     stop() {
-        clearInterval(this.updateInterval);
+        clearInterval(updateInterval);
+        updateInterval = undefined;
     },
 
     async fetchTrackData(): Promise<TrackData | null> {

@@ -7,13 +7,13 @@
 
 import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
 import { downloadNotes, uploadNotes } from "@plugins/holyNotes/utils";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
 import { findByProps } from "@webpack";
-import { Button } from "@webpack/common";
 
 export default ({ onClose, ...modalProps }: ModalProps & { onClose: () => void; }) => {
     const { statusTagGreen } = findByProps("statusTagGreen");
@@ -59,26 +59,22 @@ export default ({ onClose, ...modalProps }: ModalProps & { onClose: () => void; 
             <ModalFooter>
                 <div className="pc-help-modal-footer">
                     <Button
-                        look={Button.Looks.FILLED}
-                        color={Button.Colors.GREEN}
+                        variant="positive"
                         onClick={() => {
                             noteHandler.refreshAvatars();
                         }}>{t("plugin.holyNotes.button.refresh")}</Button>
                     <Button
-                        look={Button.Looks.FILLED}
-                        color={Button.Colors.GREEN}
+                        variant="positive"
                         onClick={() => {
                             uploadNotes();
                         }}>{t("plugin.holyNotes.button.import")}</Button>
                     <Button
-                        look={Button.Looks.FILLED}
-                        color={Button.Colors.GREEN}
+                        variant="positive"
                         onClick={() => {
                             downloadNotes();
                         }}>{t("plugin.holyNotes.button.export")}</Button>
                     <Button
-                        look={Button.Looks.FILLED}
-                        color={Button.Colors.RED}
+                        variant="dangerPrimary"
                         onClick={() => {
                             noteHandler.deleteEverything();
                         }}>{t("plugin.holyNotes.button.deleteAll")}</Button>

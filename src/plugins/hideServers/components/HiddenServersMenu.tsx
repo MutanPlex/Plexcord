@@ -8,6 +8,7 @@
 import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { Guild } from "@plexcord/discord-types";
 import { HiddenServersStore } from "@plugins/hideServers/HiddenServersStore";
@@ -24,7 +25,7 @@ import {
     openModal,
 } from "@utils/modal";
 import { findByPropsLazy } from "@webpack";
-import { Button, IconUtils, useStateFromStores } from "@webpack/common";
+import { IconUtils, useStateFromStores } from "@webpack/common";
 
 import { SortedGuildStore } from "..";
 
@@ -100,7 +101,7 @@ function GuildRow({ guild }) {
             </Heading>
             <Button
                 className="row-button"
-                color={Button.Colors.PRIMARY}
+                variant="primary"
                 onClick={() => restoreGuild(guild, SortedGuildStore)}
             >
                 {t("plugin.hideServers.button.remove")}
@@ -133,11 +134,11 @@ export function HiddenServersMenu({ guilds }: { guilds: Guild[]; }) {
                     <div className={cl("folder-header")}>
                         <BaseText size="sm" weight="medium">{folder.folderName || t("plugin.hideServers.button.folder")}</BaseText>
                         <Button
-                            color={Button.Colors.PRIMARY}
+                            variant="primary"
                             onClick={() => {
                                 folderGuilds.forEach(g => restoreGuild(g, SortedGuildStore));
                             }}
-                            size={Button.Sizes.SMALL}
+                            size="small"
                             className={cl("restore-all")}
                         >
                             {t("plugin.hideServers.button.removeAll")}

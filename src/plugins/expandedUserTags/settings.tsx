@@ -9,12 +9,14 @@
 
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { Card } from "@components/Card";
+import { Flex } from "@components/Flex";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { Margins } from "@utils/margins";
 import { OptionType } from "@utils/types";
-import { Card, Flex, TextInput, Tooltip } from "@webpack/common";
+import { TextInput, Tooltip } from "@webpack/common";
 
 import { Tag, tags } from "./consts";
 import { TagSettings } from "./types";

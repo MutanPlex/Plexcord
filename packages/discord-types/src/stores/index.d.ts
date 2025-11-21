@@ -10,6 +10,7 @@ export * from "./GuildRoleStore";
 export * from "./GuildStore";
 export * from "./MediaEngineStore";
 export * from "./MessageStore";
+export * from "./PresenceStore";
 export * from "./RelationshipStore";
 export * from "./SelectedChannelStore";
 export * from "./SelectedGuildStore";

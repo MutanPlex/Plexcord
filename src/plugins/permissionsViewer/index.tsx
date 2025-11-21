@@ -22,14 +22,15 @@ import "./styles.css";
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { SafetyIcon } from "@components/Icons";
 import type { Guild, GuildMember } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
-import { findByPropsLazy } from "@webpack";
-import { Button, ChannelStore, Dialog, GuildMemberStore, GuildRoleStore, GuildStore, match, Menu, PermissionsBits, Popout, TooltipContainer, useRef, UserStore } from "@webpack/common";
+import { ChannelStore, Dialog, GuildMemberStore, GuildRoleStore, GuildStore, match, Menu, PermissionsBits, Popout, TooltipContainer, useRef, UserStore } from "@webpack/common";
+import { findByPropsLazy } from "webpack";
 
 import openRolesAndUsersPermissionsModal, { PermissionType, RoleOrUserPermission } from "./components/RolesAndUsersPermissions";
 import UserPermissions from "./components/UserPermissions";
@@ -205,9 +206,8 @@ export default definePlugin({
                         <Button
                             {...popoutProps}
                             ref={buttonRef}
-                            color={Button.Colors.CUSTOM}
-                            look={Button.Looks.FILLED}
-                            size={Button.Sizes.NONE}
+                            variant="none"
+                            size="min"
                             className={classes(RoleButtonClasses.button, RoleButtonClasses.icon, "pc-permviewer-role-button")}
                         >
                             <SafetyIcon height="16" width="16" />

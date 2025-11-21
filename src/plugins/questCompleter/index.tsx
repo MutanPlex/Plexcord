@@ -21,11 +21,12 @@ import "./style.css";
 
 import { t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
+import { Button } from "@components/Button";
 import { Devs, PcDevs } from "@utils/constants";
 import { getTheme, Theme } from "@utils/discord";
 import definePlugin from "@utils/types";
 import { findByProps, findComponentByCodeLazy } from "@webpack";
-import { Button, ChannelStore, FluxDispatcher, GuildChannelStore, NavigationRouter, RestAPI, Tooltip, UserStore } from "@webpack/common";
+import { ChannelStore, FluxDispatcher, GuildChannelStore, NavigationRouter, RestAPI, Tooltip, UserStore } from "@webpack/common";
 
 const QuestIcon = findComponentByCodeLazy("10.47a.76.76");
 
@@ -272,11 +273,11 @@ export default definePlugin({
                 {tooltipProps => (
                     <Button style={{ backgroundColor: "transparent", border: "none" }}
                         {...tooltipProps}
-                        size={Button.Sizes.SMALL}
+                        size="small"
                         className={"pc-quest-completer-icon"}
                         onClick={openCompleteQuestUI}
                     >
-                        <QuestIcon width={20} height={20} size={Button.Sizes.SMALL} />
+                        <QuestIcon width={24} height={24} size="small" />
                     </Button>
                 )}
             </Tooltip>

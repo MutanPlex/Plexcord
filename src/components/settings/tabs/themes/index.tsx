@@ -20,12 +20,13 @@
 import "./styles.css";
 
 import { t, tJsx } from "@api/i18n";
+import { Card } from "@components/Card";
 import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { getStylusWebStoreUrl } from "@utils/web";
-import { Card, React, TabBar, useState } from "@webpack/common";
+import { React, TabBar, useState } from "@webpack/common";
 
 import { CspErrorCard } from "./CspErrorCard";
 import { LocalThemesTab } from "./LocalThemesTab";
@@ -72,8 +73,8 @@ function ThemesTab() {
 
 function UserscriptThemesTab() {
     return (
-        <SettingsTab title="Themes">
-            <Card className="pc-settings-card">
+        <SettingsTab title={t("themes.title")}>
+            <Card variant="danger">
                 <Heading>{t("themes.error.userscript")}</Heading>
 
                 <Paragraph>

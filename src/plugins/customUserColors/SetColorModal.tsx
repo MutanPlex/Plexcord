@@ -8,10 +8,11 @@
 import { set } from "@api/DataStore";
 import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
+import { Button } from "@components/Button";
 import { HeadingPrimary, HeadingSecondary } from "@components/Heading";
 import { Margins } from "@utils/margins";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
-import { Button, ColorPicker, useState } from "@webpack/common";
+import { ColorPicker, useState } from "@webpack/common";
 
 import { colors, DATASTORE_KEY } from "./index";
 
@@ -69,13 +70,13 @@ export function SetColorModal({ id, modalProps }: { id: string, modalProps: Moda
 
             <ModalFooter className={cl("modal-footer")}>
                 <Button
-                    color={Button.Colors.RED}
+                    variant="dangerSecondary"
                     onClick={deleteUserColor}
                 >
                     {t("plugin.customUserColors.modal.delete")}
                 </Button>
                 <Button
-                    color={Button.Colors.BRAND}
+                    variant="secondary"
                     onClick={saveUserColor}
                 >
                     {t("plugin.customUserColors.modal.save")}

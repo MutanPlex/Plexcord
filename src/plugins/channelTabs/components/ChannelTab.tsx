@@ -138,13 +138,19 @@ function ChannelTabContent(props: ChannelTabsProps & {
         showStatusIndicators
     } = settings.use(["noPomeloNames", "showStatusIndicators"]);
 
+
+
     const [isTyping, status, isMobile] = useStateFromStores(
         [TypingStore, PresenceStore],
-        () => [
-            !!((Object.keys(TypingStore.getTypingUsers(props.channelId)) as string[]).filter(id => id !== userId).length),
-            PresenceStore.getStatus(recipients?.[0]) as string,
-            PresenceStore.isMobileOnline(recipients?.[0]) as boolean
-        ]
+        () => {
+            const recipientId = recipients?.[0] ?? "";
+
+            return [
+                !!((Object.keys(TypingStore.getTypingUsers(props.channelId)) as string[]).filter(id => id !== userId).length),
+                PresenceStore.getStatus(recipientId),
+                PresenceStore.isMobileOnline(recipientId)
+            ];
+        }
     );
 
     if (guild) {

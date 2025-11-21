@@ -12,6 +12,7 @@ export interface VoiceState extends DiscordRecord {
     guildId?: string | null | undefined;
     mute: boolean;
     deaf: boolean;
+    stream: boolean;
     selfMute: boolean;
     selfDeaf: boolean;
     selfVideo: boolean;

@@ -159,6 +159,7 @@
             "following": "The following plugins require a restart:",
             "fully": "Some plugins require a restart to fully disable",
             "would": "Would you like to restart now?",
+            "resetDefault": "Reset to default settings",
             "button": {
                 "restart": "Restart",
                 "later": "Later!",
@@ -229,7 +230,9 @@
                 "all": "Show All",
                 "enabled": "Show Enabled",
                 "disabled": "Show Disabled",
-                "new": "Show New"
+                "new": "Show New",
+                "userplugins": "Show User Plugins",
+                "api": "Show API Plugins"
             }
         },
         "pluginModal": {
@@ -1978,6 +1981,10 @@
                 "openNewTabsInCompactMode": {
                     "label": "Open New Tabs in Compact Mode",
                     "description": "Open all newly created tabs in compact mode by default"
+                },
+                "newTabButtonBehavior": {
+                    "label": "New Tab Button Behavior",
+                    "description": "New tab (+) button follows tabs instead of staying pinned to the right"
                 },
                 "oneTabPerServer": {
                     "label": "One Tab Per Server",
@@ -5352,6 +5359,15 @@
                 }
             }
         },
+        "newPluginsManager": {
+            "name": "NewPluginsManager",
+            "description": "Utility that notifies you when new plugins are added to Plexcord",
+            "modal": {
+                "title": "New Plugins and Settings",
+                "tooltip": "Dismiss for this session",
+                "dontShowAgain": "Don't show this again"
+            }
+        },
         "noBlockedMessages": {
             "name": "NoBlockedMessages",
             "description": "Hides all blocked/ignored messages from chat completely",
@@ -5675,7 +5691,7 @@
             }
         },
         "petpet": {
-            "name": "petpet",
+            "name": "PetPet",
             "description": "Adds a /petpet slash command to create headpet gifs from any image",
             "command": {
                 "petpet": {
@@ -6271,15 +6287,37 @@
                 "title": "Catch Them In 4k",
                 "grayscale": "Grayscale",
                 "export": "Export",
-                "send": "Send"
+                "send": "Send",
+                "saveAsGIF": "Save as GIF",
+                "saveDescription": "Saves/Sends the image as a GIF instead of a PNG",
+                "showWatermark": "Show Watermark",
+                "watermarkText": "Watermark Text (max 32 characters)"
             },
             "option": {
-                "userIdentifier": {
-                    "label": "User Identifier",
-                    "description": "What the author's name should be displayed as",
-                    "displayName": "Display Name",
-                    "username": "Username",
-                    "userId": "User ID"
+                "quoteFont": {
+                    "label": "Quote Font",
+                    "description": "Font for quote text (author/username always use M PLUS Rounded 1c)",
+                    "mPlusRounded": "M PLUS Rounded 1c",
+                    "openSans": "Open Sans",
+                    "momoSignature": "Momo Signature",
+                    "lora": "Lora",
+                    "merriWeather": "Merriweather"
+                },
+                "watermark": {
+                    "label": "Watermark",
+                    "description": "Custom watermark text (max 32 characters)"
+                },
+                "grayscale": {
+                    "label": "Grayscale",
+                    "description": "Enable grayscale by default"
+                },
+                "showWatermark": {
+                    "label": "Show Watermark",
+                    "description": "Show watermark by default"
+                },
+                "saveAsGif": {
+                    "label": "Save As Gif",
+                    "description": "Save as GIF by default"
                 }
             }
         },

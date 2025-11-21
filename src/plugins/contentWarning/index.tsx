@@ -7,17 +7,18 @@
 
 import "./styles.css";
 
+import * as DataStore from "@api/DataStore";
 import { t } from "@api/i18n";
-import { DataStore } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
+import { HeadingTertiary } from "@components/Heading";
 import { DeleteIcon } from "@components/Icons";
-import { HeadingTertiary } from "@components/index";
 import { PcDevs } from "@utils/constants";
 import { useForceUpdater } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
-import { Button, TextInput, useState } from "@webpack/common";
+import { TextInput, useState } from "@webpack/common";
 
 const cl = classNameFactory("pc-content-warning-");
 const WORDS_KEY = "ContentWarning_words";
@@ -103,8 +104,8 @@ function FlaggedInput({ index, forceUpdate }) {
 
         <Button
             onClick={removeSelf}
-            look={Button.Looks.FILLED}
-            size={Button.Sizes.SMALL}
+            variant="none"
+            size="small"
             style={{
                 padding: 0,
                 color: "var(--primary-400)",

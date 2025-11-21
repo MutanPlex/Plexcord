@@ -9,63 +9,88 @@ import { findGroupChildrenByChildId } from "@api/ContextMenu";
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import { FormSwitch } from "@components/FormSwitch";
+import { QuoteIcon } from "@components/Icons";
 import { Message } from "@plexcord/discord-types";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import { getCurrentChannel } from "@utils/discord";
 import { ModalCloseButton, ModalContent, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
-import { Button, Menu, Select, UploadHandler, useEffect, useState } from "@webpack/common";
+import { Menu, UploadHandler, useEffect, useState } from "@webpack/common";
 
-import { QuoteIcon } from "./components";
-import { canvasToBlob, fetchImageAsBlob, FixUpQuote, wrapText } from "./utils";
-
-enum ImageStyle {
-    inspirational
-}
-
-enum userIDOptions {
-    displayName,
-    userName,
-    userId
-}
+import { QuoteFont } from "./types";
+import { createQuoteImage, ensureFontLoaded, generateFileNamePreview, getFileExtension, getMimeType, resetFontLoading, sizeUpgrade } from "./utils";
 
 const settings = definePluginSettings({
-    userIdentifier: {
+    quoteFont: {
         get label() {
-            return t("plugin.quoter.option.userIdentifier.label");
+            return t("plugin.quoter.option.quoteFont.label");
         },
         get description() {
-            return t("plugin.quoter.option.userIdentifier.description");
+            return t("plugin.quoter.option.quoteFont.description");
         },
         type: OptionType.SELECT,
         get options() {
             return [
-                { label: t("plugin.quoter.option.userIdentifier.displayName"), value: userIDOptions.displayName, default: true },
-                { label: t("plugin.quoter.option.userIdentifier.username"), value: userIDOptions.userName },
-                { label: t("plugin.quoter.option.userIdentifier.userId"), value: userIDOptions.userId }
+                { label: t("plugin.quoter.option.quoteFont.mPlusRounded"), value: QuoteFont.MPlusRounded, default: true },
+                { label: t("plugin.quoter.option.quoteFont.openSans"), value: QuoteFont.OpenSans },
+                { label: t("plugin.quoter.option.quoteFont.momoSignature"), value: QuoteFont.MomoSignature },
+                { label: t("plugin.quoter.option.quoteFont.lora"), value: QuoteFont.Lora },
+                { label: t("plugin.quoter.option.quoteFont.merriWeather"), value: QuoteFont.Merriweather }
             ];
         }
+    },
+    watermark: {
+        get label() {
+            return t("plugin.quoter.option.watermark.label");
+        },
+        get description() {
+            return t("plugin.quoter.option.watermark.description");
+        },
+        type: OptionType.STRING,
+        default: "Made with Plexcord",
+        hidden: true
+    },
+    grayscale: {
+        get label() {
+            return t("plugin.quoter.option.grayscale.label");
+        },
+        get description() {
+            return t("plugin.quoter.option.grayscale.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        hidden: true
+    },
+    showWatermark: {
+        get label() {
+            return t("plugin.quoter.option.showWatermark.label");
+        },
+        get description() {
+            return t("plugin.quoter.option.showWatermark.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        hidden: true
+    },
+    saveAsGif: {
+        get label() {
+            return t("plugin.quoter.option.saveAsGif.label");
+        },
+        get description() {
+            return t("plugin.quoter.option.saveAsGif.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: false,
+        hidden: true
     }
 });
-
-interface QuoteImageOptions {
-    avatarUrl: string;
-    quoteOld: string;
-    grayScale: boolean;
-    imageStyle: ImageStyle;
-    author: {
-        username: string;
-        globalName?: string;
-        id: string;
-    };
-    userIdentifier: userIDOptions;
-}
 
 export default definePlugin({
     name: "Quoter",
     description: "Adds the ability to create an inspirational quote image from a message",
-    authors: [Devs.Samwich, Devs.thororen],
+    authors: [Devs.Samwich, Devs.thororen, PcDevs.MutanPlex, PcDevs.neoarz, PcDevs.Prism],
     settings,
 
     get displayDescription() {
@@ -88,135 +113,90 @@ export default definePlugin({
             if (!group) children.push(buttonElement);
             else group.splice(group.findIndex(c => c?.props?.id === "copy-text") + 1, 0, buttonElement);
         }
-    }
+    },
+
+    async start() {
+        await ensureFontLoaded();
+    },
+
+    stop() {
+        const style = document.getElementById("quoter-font-style");
+        if (style) style.remove();
+        resetFontLoading();
+    },
 });
 
-function sizeUpgrade(url: string) {
-    const u = new URL(url);
-    u.searchParams.set("size", "512");
-    return u.toString();
-}
-
-const preparingSentence: string[] = [];
-const lines: string[] = [];
-
-async function createQuoteImage(options: QuoteImageOptions): Promise<Blob> {
-    const { avatarUrl, quoteOld, grayScale, imageStyle, author, userIdentifier } = options;
-    const quote = FixUpQuote(quoteOld);
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    if (!ctx) throw new Error("Cant get 2d rendering context :(");
-
-    let name = "";
-    switch (userIdentifier) {
-        case userIDOptions.displayName:
-            name = author.globalName || author.username;
-            break;
-        case userIDOptions.userName:
-            name = author.username;
-            break;
-        case userIDOptions.userId:
-            name = author.id;
-            break;
-        default:
-            name = "Unknown";
-    }
-
-    switch (imageStyle) {
-        case ImageStyle.inspirational:
-            const cardWidth = 1200;
-            const cardHeight = 600;
-            canvas.width = cardWidth;
-            canvas.height = cardHeight;
-
-            ctx.fillStyle = "#000";
-            ctx.fillRect(0, 0, cardWidth, cardHeight);
-
-            const avatarBlob = await fetchImageAsBlob(avatarUrl);
-            const fadeBlob = await fetchImageAsBlob("https://raw.githubusercontent.com/MutanPlex/random-files/main/quoter.png");
-
-            const avatar = new Image();
-            const fade = new Image();
-
-            await Promise.all([
-                new Promise<void>(resolve => { avatar.onload = () => resolve(); avatar.src = URL.createObjectURL(avatarBlob); }),
-                new Promise<void>(resolve => { fade.onload = () => resolve(); fade.src = URL.createObjectURL(fadeBlob); })
-            ]);
-
-            ctx.drawImage(avatar, 0, 0, cardHeight, cardHeight);
-
-            if (grayScale) {
-                ctx.globalCompositeOperation = "saturation";
-                ctx.fillStyle = "#fff";
-                ctx.fillRect(0, 0, cardWidth, cardHeight);
-                ctx.globalCompositeOperation = "source-over";
-            }
-
-            ctx.drawImage(fade, cardHeight - 400, 0, 400, cardHeight);
-
-            ctx.fillStyle = "#fff";
-            ctx.font = "italic 20px Georgia";
-            const quoteWidth = cardWidth / 2 - 50;
-            const quoteX = cardWidth - cardHeight;
-            const quoteY = cardHeight / 2 - 10;
-            wrapText(ctx, `"${quote}"`, quoteX, quoteY, quoteWidth, 20, preparingSentence, lines);
-
-            const wrappedTextHeight = lines.length * 25;
-
-            ctx.font = "bold 16px Georgia";
-            const authorNameX = cardHeight * 1.5 - ctx.measureText(`- ${name}`).width / 2 - 30;
-            const authorNameY = quoteY + wrappedTextHeight + 30;
-
-            ctx.fillText(`- ${name}`, authorNameX, authorNameY);
-            preparingSentence.length = 0;
-            lines.length = 0;
-            return await canvasToBlob(canvas);
-    }
-}
-
-function generateFileNamePreview(message: string) {
-    const words = message.split(" ");
-    return words.length >= 6 ? words.slice(0, 6).join(" ") : words.join(" ");
-}
-
 function QuoteModal({ message, ...props }: ModalProps & { message: Message; }) {
-    const [gray, setGray] = useState(true);
-    const [style, setStyle] = useState(ImageStyle.inspirational);
+    const [gray, setGray] = useState(settings.store.grayscale);
+    const [showWatermark, setShowWatermark] = useState(settings.store.showWatermark);
+    const [saveAsGif, setSaveAsGif] = useState(settings.store.saveAsGif);
+    const [watermarkText, setWatermarkText] = useState(settings.store.watermark);
     const [quoteImage, setQuoteImage] = useState<Blob | null>(null);
-    const { userIdentifier } = settings.store;
-    const safeContent = message.content ? message.content : "";
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+    const { quoteFont } = settings.store;
+
+    useEffect(() => {
+        settings.store.grayscale = gray;
+        settings.store.showWatermark = showWatermark;
+        settings.store.saveAsGif = saveAsGif;
+    }, [gray, showWatermark, saveAsGif]);
 
     const generateImage = async () => {
         const image = await createQuoteImage({
             avatarUrl: sizeUpgrade(message.author.getAvatarURL()),
-            quoteOld: safeContent,
+            quote: message.content,
             grayScale: gray,
-            imageStyle: style,
             author: message.author,
-            userIdentifier
+            watermark: watermarkText,
+            showWatermark,
+            saveAsGif,
+            quoteFont
         });
         setQuoteImage(image);
-        document.getElementById("quoterPreview")?.setAttribute("src", URL.createObjectURL(image));
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
+
+        const newUrl = URL.createObjectURL(image);
+        setPreviewUrl(newUrl);
+        document.getElementById("quoterPreview")?.setAttribute("src", newUrl);
     };
 
-    useEffect(() => { generateImage(); }, [gray, style, safeContent]);
+    useEffect(() => { generateImage(); }, [gray, showWatermark, saveAsGif, watermarkText, quoteFont]);
 
-    const Export = () => {
+    useEffect(() => {
+        return () => {
+            if (previewUrl) {
+                URL.revokeObjectURL(previewUrl);
+            }
+        };
+    }, [previewUrl]);
+
+    const handleExport = () => {
         if (!quoteImage) return;
+        const preview = generateFileNamePreview(message.content);
+        const extension = getFileExtension(saveAsGif);
+        const url = URL.createObjectURL(quoteImage);
         const link = document.createElement("a");
-        const preview = generateFileNamePreview(safeContent);
-        link.href = URL.createObjectURL(quoteImage);
-        link.download = `${preview} - ${message.author.username}.png`;
+        link.href = url;
+        link.download = `${preview} - ${message.author.username}.${extension}`;
         link.click();
         link.remove();
+
+        URL.revokeObjectURL(url);
     };
 
-    const SendInChat = () => {
+    const handleSendInChat = () => {
         if (!quoteImage) return;
-        const preview = generateFileNamePreview(safeContent);
-        const file = new File([quoteImage], `${preview} - ${message.author.username}.png`, { type: "image/png" });
-        // @ts-expect-error typing issue
-        UploadHandler.promptToUpload([file], getCurrentChannel(), 0);
+
+        const channel = getCurrentChannel();
+        if (!channel) return;
+
+        const preview = generateFileNamePreview(message.content);
+        const extension = getFileExtension(saveAsGif);
+        const mimeType = getMimeType(saveAsGif);
+
+        const file = new File([quoteImage], `${preview} - ${message.author.username}.${extension}`, { type: mimeType });
+
+        UploadHandler.promptToUpload([file], channel, 0);
         props.onClose?.();
     };
 
@@ -229,27 +209,19 @@ function QuoteModal({ message, ...props }: ModalProps & { message: Message; }) {
                 <ModalCloseButton onClick={props.onClose} />
             </ModalHeader>
             <ModalContent scrollbarType="none">
-                <img alt="" src="" id="quoterPreview" style={{ borderRadius: "20px", width: "100%" }} />
-                <br /><br />
-                <br /><br />
-                <FormSwitch value={gray} onChange={setGray} title={t("plugin.quoter.modal.grayscale")} />
-                <Select
-                    look={1}
-                    options={Object.keys(ImageStyle)
-                        .filter(key => isNaN(parseInt(key, 10)))
-                        .map(key => ({
-                            label: key.charAt(0).toUpperCase() + key.slice(1),
-                            value: ImageStyle[key as keyof typeof ImageStyle]
-                        }))}
-                    select={v => setStyle(v)}
-                    isSelected={v => v === style}
-                    serialize={v => v}
+                <img alt="Quote preview" src="" id="quoterPreview" style={{ borderRadius: "20px", width: "100%", marginBottom: "20px" }} />
+                <FormSwitch title={t("plugin.quoter.modal.grayscale")} value={gray} onChange={setGray} />
+                <FormSwitch
+                    title={t("plugin.quoter.modal.saveAsGIF")}
+                    value={saveAsGif}
+                    onChange={setSaveAsGif}
+                    description={t("plugin.quoter.modal.saveDescription")}
                 />
-                <br />
-                <Button color={Button.Colors.BRAND} size={Button.Sizes.SMALL} onClick={async () => await Export()} style={{ display: "inline-block", marginRight: "5px" }}>{t("plugin.quoter.modal.export")}</Button>
-                <Button color={Button.Colors.BRAND} size={Button.Sizes.SMALL} onClick={async () => await SendInChat()} style={{ display: "inline-block" }}>{t("plugin.quoter.modal.send")}</Button>
+                <div style={{ display: "flex", gap: "8px", marginTop: "16px", marginBottom: "16px" }}>
+                    <Button variant="secondary" size="small" onClick={handleExport}>{t("plugin.quoter.modal.export")}</Button>
+                    <Button variant="secondary" size="small" onClick={handleSendInChat}>{t("plugin.quoter.modal.send")}</Button>
+                </div>
             </ModalContent>
-            <br></br>
         </ModalRoot>
     );
 }

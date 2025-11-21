@@ -25,7 +25,6 @@ import { Logger } from "@utils/Logger";
 import { canonicalizeMatch } from "@utils/patches";
 
 import { traceFunction } from "../debug/Tracer";
-import { Flux } from "./common";
 import { AnyModuleFactory, AnyWebpackRequire } from "./types";
 
 const logger = new Logger("Webpack");
@@ -40,7 +39,7 @@ export const onceReady = new Promise<void>(r => _resolveReady = r);
 export let wreq: WebpackRequire;
 export let cache: WebpackRequire["c"];
 
-export const fluxStores: Record<string, FluxStore> = {};
+export const fluxStores = new Map<string, FluxStore>();
 
 export type FilterFn = (mod: any) => boolean;
 
@@ -63,7 +62,7 @@ export const filters = {
 
     byCode: (...code: CodeFilter): FilterFn => {
         const parsedCode = code.map(canonicalizeMatch);
-        const filter = m => {
+        const filter = (m: any) => {
             if (typeof m !== "function") return false;
             return stringMatches(Function.prototype.toString.call(m), parsedCode);
         };
@@ -457,55 +456,49 @@ export function findByCodeLazy(...code: CodeFilter) {
     return proxyLazy(() => findByCode(...code));
 }
 
+function populateFluxStoreMap() {
+    const { Flux } = require("./common") as typeof import("./common");
+
+    Flux.Store.getAll?.().forEach(store =>
+        fluxStores.set(store.getName(), store)
+    );
+
+    try {
+        const getLibdiscore = findByCode("libdiscoreWasm is not initialized");
+        const libdiscoreExports = getLibdiscore();
+
+        for (const libdiscoreExportName in libdiscoreExports) {
+            if (!libdiscoreExportName.endsWith("Store")) {
+                continue;
+            }
+
+            const storeName = libdiscoreExportName;
+            const store = libdiscoreExports[storeName];
+
+            fluxStores.set(storeName, store);
+        }
+    } catch { }
+}
 /**
  * Find a store by its displayName
  */
 export function findStore(name: StoreNameFilter) {
-    let res = fluxStores[name] as any;
-    if (res == null) {
-        for (const store of Flux.Store.getAll?.() ?? []) {
-            const storeName = store.getName();
-
-            if (storeName === name) {
-                res = store;
-            }
-
-            if (fluxStores[storeName] == null) {
-                fluxStores[storeName] = store;
-            }
-        }
-
-        try {
-            const getLibdiscore = findByCode("libdiscoreWasm is not initialized");
-            const libdiscoreExports = getLibdiscore();
-
-            for (const libdiscoreExportName in libdiscoreExports) {
-                if (!libdiscoreExportName.endsWith("Store")) {
-                    continue;
-                }
-
-                const storeName = libdiscoreExportName;
-                const store = libdiscoreExports[storeName];
-
-                if (storeName === name) {
-                    res = store;
-                }
-
-                if (fluxStores[storeName] == null) {
-                    fluxStores[storeName] = store;
-                }
-            }
-
-        } catch { }
-
-        if (res == null) {
-            res = find(filters.byStoreName(name), { isIndirect: true });
-        }
+    if (!fluxStores.has(name)) {
+        populateFluxStoreMap();
     }
 
-    if (!res)
-        handleModuleNotFound("findStore", name);
-    return res;
+    if (fluxStores.has(name)) {
+        return fluxStores.get(name);
+    }
+
+    const res = find(filters.byStoreName(name), { isIndirect: true });
+    if (res) {
+        fluxStores.set(name, res);
+        return res;
+    }
+
+    handleModuleNotFound("findStore", name);
+    return null;
 }
 
 /**

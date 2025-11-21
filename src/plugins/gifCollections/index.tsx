@@ -8,9 +8,10 @@
 import "./style.css";
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
+import * as DataStore from "@api/DataStore";
 import { t } from "@api/i18n";
-import { DataStore } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
+import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
@@ -19,7 +20,7 @@ import { copyToClipboard } from "@utils/clipboard";
 import { Devs, PcDevs } from "@utils/constants";
 import { ModalContent, ModalFooter, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
-import { Alerts, Button, ContextMenuApi, FluxDispatcher, Menu, React, showToast, TextInput, Toasts, useCallback, useState } from "@webpack/common";
+import { Alerts, ContextMenuApi, FluxDispatcher, Menu, React, showToast, TextInput, Toasts, useCallback, useState } from "@webpack/common";
 
 import { addToCollection, cache_collections, createCollection, DATA_COLLECTION_NAME, deleteCollection, fixPrefix, getCollections, getGifById, getItemCollectionNameFromId, moveGifToCollection, refreshCacheCollection, removeFromCollection, renameCollection, updateGif } from "./utils/collectionManager";
 import { getFormat } from "./utils/getFormat";
@@ -324,7 +325,7 @@ export const settings = definePluginSettings({
                     title: t("plugin.gifCollection.alert.import.title"),
                     body: t("plugin.gifCollection.alert.import.body"),
                     confirmText: t("plugin.gifCollection.alert.import.confirm"),
-                    confirmColor: Button.Colors.RED,
+                    confirmColor: "dangerPrimary",
                     cancelText: t("plugin.gifCollection.alert.import.cancel"),
                     onConfirm: async () => uploadGifCollections()
                 }) : uploadGifCollections()}>
@@ -358,7 +359,7 @@ export const settings = definePluginSettings({
                     title: t("plugin.gifCollection.alert.reset.title"),
                     body: t("plugin.gifCollection.alert.reset.body"),
                     confirmText: t("plugin.gifCollection.alert.reset.confirm"),
-                    confirmColor: Button.Colors.RED,
+                    confirmColor: "dangerPrimary",
                     cancelText: t("plugin.gifCollection.alert.reset.cancel"),
                     onConfirm: async () => {
                         await DataStore.set(DATA_COLLECTION_NAME, []);
@@ -749,7 +750,7 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
                     title: t("plugin.gifCollection.alert.delete.title"),
                     body: `${type === "collection" ? t("plugin.gifCollection.alert.delete.deleteBody") : t("plugin.gifCollection.alert.delete.removeBody")}`,
                     confirmText: type === "collection" ? t("plugin.gifCollection.alert.delete.confirm") : t("plugin.gifCollection.alert.delete.remove"),
-                    confirmColor: Button.Colors.RED,
+                    confirmColor: "dangerPrimary",
                     cancelText: t("plugin.gifCollection.alert.delete.cancel"),
                     onConfirm: async () => {
                         const collectionName = type === "collection" ? nameOrId : getItemCollectionNameFromId(nameOrId);
@@ -840,7 +841,7 @@ function CreateCollectionModal({ gif, onClose, modalProps }) {
                     <ModalFooter>
                         <Button
                             type="submit"
-                            color={Button.Colors.GREEN}
+                            variant="primary"
                             disabled={!name.length}
                             onClick={onSubmit}
                         >
@@ -880,7 +881,7 @@ function RenameCollectionModal({ name, onClose, modalProps }) {
                     <ModalFooter>
                         <Button
                             type="submit"
-                            color={Button.Colors.GREEN}
+                            variant="positive"
                             disabled={!newName.length || newName.length >= 25}
                             onClick={onSubmit}
                         >

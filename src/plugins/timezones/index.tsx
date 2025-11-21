@@ -10,13 +10,14 @@ import "./styles.css";
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import * as DataStore from "@api/DataStore";
 import { definePluginSettings } from "@api/Settings";
+import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Message, User } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { Button, Menu, showToast, Toasts, Tooltip, useEffect, UserStore, useState } from "@webpack/common";
+import { Menu, showToast, Toasts, Tooltip, useEffect, UserStore, useState } from "@webpack/common";
 
 import { deleteTimezone, getTimezone, loadDatabaseTimezones, setUserDatabaseTimezone } from "./database";
 import { SetTimezoneModal } from "./TimezoneModal";
@@ -109,7 +110,7 @@ export const settings = definePluginSettings({
         type: OptionType.COMPONENT,
         component: () => (
             <Button
-                color={Button.Colors.RED}
+                variant="dangerPrimary"
                 onClick={async () => {
                     try {
                         await setUserDatabaseTimezone(UserStore.getCurrentUser().id, null);
@@ -315,7 +316,7 @@ export default definePlugin({
                         duration: 10000,
                         component: (
                             <Button
-                                color={Button.Colors.GREEN}
+                                variant="positive"
                                 onClick={() => {
                                     openModal(modalProps => <SetTimezoneModal userId={UserStore.getCurrentUser().id} modalProps={modalProps} database={true} />);
                                 }}

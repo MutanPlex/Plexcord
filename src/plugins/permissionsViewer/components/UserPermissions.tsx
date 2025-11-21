@@ -19,7 +19,8 @@
 
 import { t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { BaseText, HeadingTertiary } from "@components/index";
+import { HeadingTertiary } from "@components/Heading";
+import { BaseText } from "@components/index";
 import type { Guild, GuildMember } from "@plexcord/discord-types";
 import { cl, getGuildPermissionSpecMap, getSortedRolesForMember, sortUserRoles } from "@plugins/permissionsViewer/utils";
 import { getIntlMessage } from "@utils/discord";

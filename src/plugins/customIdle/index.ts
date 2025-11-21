@@ -6,7 +6,7 @@
  */
 
 import { t } from "@api/i18n";
-import { Notices } from "@api/index";
+import { currentNotice, noticesQueue, popNotice, showNotice } from "@api/Notices";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
@@ -79,12 +79,12 @@ export default definePlugin({
 
         const backOnlineMessage = t("plugin.customIdle.backOnline");
         if (
-            Notices.currentNotice?.[1] === backOnlineMessage ||
-            Notices.noticesQueue.some(([, noticeMessage]) => noticeMessage === backOnlineMessage)
+            currentNotice?.[1] === backOnlineMessage ||
+            noticesQueue.some(([, noticeMessage]) => noticeMessage === backOnlineMessage)
         ) return;
 
-        Notices.showNotice(backOnlineMessage, t("plugin.customIdle.exit"), () => {
-            Notices.popNotice();
+        showNotice(backOnlineMessage, t("plugin.customIdle.exit"), () => {
+            popNotice();
             FluxDispatcher.dispatch({
                 type: "IDLE",
                 idle: false

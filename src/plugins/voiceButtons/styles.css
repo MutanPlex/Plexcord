@@ -1,5 +1,6 @@
 .voice-user-buttons {
     flex: none !important;
+    flex-direction: row;
 }
 
 .voice-user-button-container {

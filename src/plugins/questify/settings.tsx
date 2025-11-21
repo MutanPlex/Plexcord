@@ -8,10 +8,14 @@
 import { defaultAudioNames, playAudio } from "@api/AudioPlayer";
 import { t, tJsx } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { Divider, ErrorBoundary, Heading, Paragraph } from "@components/index";
+import { Button } from "@components/Button";
+import { Divider } from "@components/Divider";
+import { Heading } from "@components/Heading";
+import { ErrorBoundary } from "@components/index";
+import { Paragraph } from "@components/Paragraph";
 import { Logger } from "@utils/Logger";
 import { makeRange, OptionType } from "@utils/types";
-import { Button, ColorPicker, ContextMenuApi, Menu, Select, Slider, TextInput, useEffect, useRef, useState } from "@webpack/common";
+import { ColorPicker, ContextMenuApi, Menu, Select, Slider, TextInput, useEffect, useRef, useState } from "@webpack/common";
 import { JSX } from "react";
 
 import { activeQuestIntervals, getQuestTileClasses, getQuestTileStyle } from "./index";

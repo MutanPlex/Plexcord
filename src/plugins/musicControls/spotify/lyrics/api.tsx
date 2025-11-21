@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { DataStore } from "@api/index";
+import * as DataStore from "@api/DataStore";
 import { settings } from "@plugins/musicControls/settings";
 import { Track } from "@plugins/musicControls/spotify/SpotifyStore";
 

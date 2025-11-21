@@ -20,13 +20,14 @@
 import "./ytmStyles.css";
 
 import { t } from "@api/i18n";
+import { Flex } from "@components/Flex";
 import { ImageIcon, LinkIcon, OpenExternalIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
 import { SeekBar } from "@plugins/musicControls/spotify/SeekBar";
 import { debounce } from "@shared/debounce";
-import { openImageModal } from "@utils/discord";
-import { classes, copyWithToast } from "@utils/misc";
-import { ContextMenuApi, Flex, FluxDispatcher, Menu, React, useEffect, useState, useStateFromStores } from "@webpack/common";
+import { copyWithToast, openImageModal } from "@utils/discord";
+import { classes } from "@utils/misc";
+import { ContextMenuApi, FluxDispatcher, Menu, React, useEffect, useState, useStateFromStores } from "@webpack/common";
 
 import { type Repeat, type Song, YoutubeMusicStore } from "./YtmStore";
 
@@ -349,7 +350,7 @@ export function YtmPlayer() {
     const [shouldHide, setShouldHide] = useState(false);
 
 
-    React.useEffect(() => {
+    useEffect(() => {
         setShouldHide(false);
         if (!isPlaying) {
             const timeout = setTimeout(() => setShouldHide(true), 1000 * 60 * 5);

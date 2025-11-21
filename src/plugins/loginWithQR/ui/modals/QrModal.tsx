@@ -7,6 +7,7 @@
 
 import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import { images } from "@plugins/loginWithQR/images";
 import { getIntlMessage } from "@utils/discord";
 import {
@@ -19,7 +20,6 @@ import {
 } from "@utils/modal";
 import { findByPropsLazy } from "@webpack";
 import {
-    Button,
     RestAPI,
     useEffect,
     useRef,
@@ -500,7 +500,7 @@ function QrModal(props: ModalProps) {
                     style={{ display: "none" }}
                 />
                 <Button
-                    size={Button.Sizes.MEDIUM}
+                    size="medium"
                     className={cl("modal-button")}
                     disabled={state === LoginStateType.Loading}
                     onClick={() => {

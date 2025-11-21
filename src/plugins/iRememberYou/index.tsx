@@ -5,19 +5,21 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import "styles.css?managed";
+import "./styles.css?managed";
 
 import { t } from "@api/i18n";
 import { DataStore } from "@api/index";
 import { addMessagePreSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
+import { Button } from "@components/Button";
+import { Flex } from "@components/Flex";
 import { Heart } from "@components/Heart";
-import { BaseText, Paragraph } from "@components/index";
+import { BaseText, Margins, Paragraph } from "@components/index";
 import { Guild, User } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import { openUserProfile } from "@utils/discord";
 import * as Modal from "@utils/modal";
 import definePlugin from "@utils/types";
-import { Avatar, Button, ChannelStore, Clickable, Flex, GuildMemberStore, GuildStore, MessageStore, React, TextArea, TextInput, Tooltip, UserStore, } from "@webpack/common";
+import { Avatar, ChannelStore, Clickable, GuildMemberStore, GuildStore, MessageStore, React, TextArea, TextInput, Tooltip, UserStore, } from "@webpack/common";
 
 interface IUserExtra {
     isOwner?: boolean;
@@ -216,9 +218,9 @@ class DataUI {
 
         return <aside key={key} >
             <div className={"pc-i-remember-you-user-header-container"}>
-                <BaseText>{key.toUpperCase()}</BaseText>
+                <BaseText className={Margins.bottom8}>{key.toUpperCase()}</BaseText>
                 <div className={"pc-i-remember-you-user-header-btns"}>
-                    <Flex style={{ gap: "calc(0.5em + 0.5vw) 0.2em", flexDirection: "column" }}>
+                    <Flex flexDirection="column" style={{ gap: "calc(0.5em + 0.5vw) 0.2em" }}>
                         {usersElements}
                     </Flex>
                 </div>
@@ -242,9 +244,9 @@ class DataUI {
     renderUserRow(user: IStorageUser, allowExtra: { owner?: boolean; } = {}) {
         allowExtra = Object.assign({ owner: true }, allowExtra);
 
-        return <Flex key={user.id} style={{ margin: 0, width: "100%", flexWrap: "wrap", alignItems: "center" }}>
+        return <Flex alignItems="center" key={user.id} style={{ margin: 0, width: "100%", flexWrap: "wrap" }}>
             <span style={{ width: "24em" }}>
-                <Flex style={{ gap: "0.5em", alignItems: "center", margin: 0, wordBreak: "break-word" }}>
+                <Flex alignItems="center" style={{ gap: "0.5em", margin: 0, wordBreak: "break-word" }}>
                     {this.renderUserAvatar(user)}
                     <Tooltip text={this.userTooltipText(user)}>
                         {props =>
@@ -291,7 +293,7 @@ class DataUI {
                             <Modal.ModalContent>
                                 <Flex style={{ paddingBlock: "0.5em", gap: "0.75em" }}>
                                     <Button onClick={handleValidate}>{t("plugin.iRememberYou.modal.button.validate")}</Button>
-                                    <Button color={Button.Colors.TRANSPARENT} onClick={props.onClose}>{t("plugin.iRememberYou.modal.button.cancel")}</Button>
+                                    <Button variant="secondary" onClick={props.onClose}>{t("plugin.iRememberYou.modal.button.cancel")}</Button>
                                 </Flex>
                                 {error && <BaseText style={{ color: "var(--text-danger)", marginTop: "0.5em" }}>{error}</BaseText>}
                                 <TextArea
@@ -308,7 +310,7 @@ class DataUI {
                     <Button style={{ cursor: "pointer" }}>{t("plugin.iRememberYou.modal.button.openEditor")}</Button>
                 </Clickable>
 
-                <Button color={Button.Colors.TRANSPARENT} onClick={
+                <Button variant="none" onClick={
                     async () => {
                         const confirmed = confirm(t("plugin.iRememberYou.modal.button.sure"));
                         if (!confirmed) {
@@ -337,7 +339,7 @@ class DataUI {
         return <section style={{ paddingBlock: "1em" }}>
             <TextInput placeholder={t("plugin.iRememberYou.modal.filter")} name="Filter" onChange={value => setState(value)} />
             {current &&
-                <Flex style={{ flexDirection: "column", gap: "0.5em", paddingTop: "1em" }}>
+                <Flex flexDirection="column" style={{ gap: "0.5em", paddingTop: "1em" }}>
                     {list.filter(user => user.tag.includes(current) || user.username.includes(current) || user.id.includes(current))
                         .map(user => this.renderUserRow(
                             user,
@@ -365,7 +367,7 @@ class DataUI {
                 {this.renderSectionDescription()}
                 <br />
                 {this.renderSearchElement(usersCollection)}
-                <Flex style={{ gap: "1.5em", flexDirection: "column" }}>
+                <Flex flexDirection="column" style={{ gap: "1.5em" }}>
                     {this.renderUsersCollectionAsRows(usersCollection)}
                 </Flex>
                 {this.renderButtonsFooter(usersCollection)}

@@ -20,10 +20,10 @@
 import { t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { hash as h64 } from "@intrnl/xxhash64";
+import { getCustomColorString } from "@plugins/customUserColors";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { useMemo } from "@webpack/common";
-import { getCustomColorString } from "plugins/customUserColors";
 
 // Calculate a CSS color string based on the user ID
 function calculateNameColorForUser(id?: string) {

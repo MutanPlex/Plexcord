@@ -7,10 +7,11 @@
 
 import * as DataStore from "@api/DataStore";
 import { classNameFactory } from "@api/Styles";
+import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { Margins } from "@utils/margins";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
-import { Button, SearchableSelect, useEffect, useMemo, useState } from "@webpack/common";
+import { SearchableSelect, useEffect, useMemo, useState } from "@webpack/common";
 
 import { DATASTORE_KEY, getSystemTimezone, resolveUserTimezone, settings, timezones } from ".";
 import { setTimezone, setUserDatabaseTimezone } from "./database";
@@ -69,7 +70,7 @@ export function SetTimezoneModal({ userId, modalProps, database }: { userId: str
             <ModalFooter className={cl("modal-footer")}>
                 {!database && (
                     <Button
-                        color={Button.Colors.RED}
+                        variant="dangerPrimary"
                         onClick={async () => {
                             await setUserTimezone(userId, null);
                             modalProps.onClose();
@@ -79,7 +80,7 @@ export function SetTimezoneModal({ userId, modalProps, database }: { userId: str
                     </Button>
                 )}
                 <Button
-                    color={Button.Colors.BRAND}
+                    variant="secondary"
                     disabled={currentValue === null}
                     onClick={async () => {
                         if (database) {

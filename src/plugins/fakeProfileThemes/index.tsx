@@ -23,19 +23,21 @@ import "./style.css";
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { User, UserProfile } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
-import { fetchUserProfile } from "@utils/discord";
+import { copyWithToast, fetchUserProfile } from "@utils/discord";
 import { Margins } from "@utils/margins";
-import { classes, copyWithToast } from "@utils/misc";
+import { classes } from "@utils/misc";
 import { useAwaiter } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
-import { Button, ColorPicker, Flex, React, UserProfileStore, UserStore, useState } from "@webpack/common";
+import { ColorPicker, React, UserProfileStore, UserStore, useState } from "@webpack/common";
 import virtualMerge from "virtual-merge";
 
 interface Colors {
@@ -132,10 +134,8 @@ function SettingsAboutComponent() {
                 {t("plugin.fakeProfileThemes.modal.intro")}
                 <br />
                 {t("plugin.fakeProfileThemes.modal.setColor")}
-                <ul>
-                    <li>
-                        • {t("plugin.fakeProfileThemes.modal.step1")}
-                    </li>
+                <ul className={Margins.top8}>
+                    <li>• {t("plugin.fakeProfileThemes.modal.step1")}</li>
                     <li>• {t("plugin.fakeProfileThemes.modal.step2", { copy: t("plugin.fakeProfileThemes.button.copy") })}</li>
                     <li>• {t("plugin.fakeProfileThemes.modal.step3")}</li>
                 </ul><br />
@@ -143,10 +143,7 @@ function SettingsAboutComponent() {
                     className={classes(Margins.top8, Margins.bottom8)}
                 />
                 <Heading>{t("plugin.fakeProfileThemes.modal.pickers")}</Heading>
-                <Flex
-                    direction={Flex.Direction.HORIZONTAL}
-                    style={{ gap: "1rem" }}
-                >
+                <Flex gap="1em">
                     <ColorPicker
                         color={color1}
                         label={
@@ -174,8 +171,8 @@ function SettingsAboutComponent() {
                             const colorString = encode(color1, color2);
                             copyWithToast(colorString);
                         }}
-                        color={Button.Colors.PRIMARY}
-                        size={Button.Sizes.XLARGE}
+                        variant="primary"
+                        size="medium"
                     >
                         {t("plugin.fakeProfileThemes.button.copy")}
                     </Button>
@@ -249,9 +246,9 @@ export default definePlugin({
                 const colorString = encode(primary, accent);
                 copyWithToast(colorString);
             }}
-            color={Button.Colors.PRIMARY}
-            size={Button.Sizes.XLARGE}
-            className={Margins.left16}
+            variant="primary"
+            size="medium"
+            style={{ marginBottom: "auto" }}
         >{t("plugin.fakeProfileThemes.button.copy")}
         </Button >;
     }, { noop: true }),

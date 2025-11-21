@@ -1,33 +1,20 @@
 /*
  * Plexcord, a modification for Discord's desktop app
- * Copyright (c) 2023 Vendicated and contributors
+ * Copyright (c) 2025 Vendicated and contributors
  * Copyright (c) 2025 MutanPlex
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
 import * as DataStore from "@api/DataStore";
 import { t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { Settings } from "@api/Settings";
+import { Logger } from "@utils/Logger";
+import { openModal } from "@utils/modal";
+import { relaunch } from "@utils/native";
 import { Alerts, OAuth2AuthorizeModal, UserStore } from "@webpack/common";
 
-import { Logger } from "./Logger";
-import { openModal } from "./modal";
-import { relaunch } from "./native";
-
-export const cloudLogger = new Logger("Cloud", "#39b7e0");
+export const logger = new Logger("SettingsSync:CloudSetup", "#39b7e0");
 
 export const getCloudUrl = () => new URL(Settings.cloud.url);
 const getCloudUrlOrigin = () => getCloudUrl().origin;
@@ -139,7 +126,7 @@ export async function authorizeCloud() {
                 });
                 const { secret } = await res.json();
                 if (secret) {
-                    cloudLogger.info("Authorized with secret");
+                    logger.info("Authorized with secret");
                     await setAuthorization(secret);
                     showNotification({
                         title: t("cloud.notification.title"),
@@ -154,7 +141,7 @@ export async function authorizeCloud() {
                     Settings.cloud.authenticated = false;
                 }
             } catch (e: any) {
-                cloudLogger.error("Failed to authorize", e);
+                logger.error("Failed to authorize", e);
                 showNotification({
                     title: t("cloud.notification.title"),
                     body: t("cloud.error.string", { error: e.toString() })

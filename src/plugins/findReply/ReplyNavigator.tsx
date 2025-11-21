@@ -10,7 +10,7 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { Message } from "@plexcord/discord-types";
 import { ModalCloseButton } from "@utils/modal";
 import { findByPropsLazy } from "@webpack";
-import { Paginator, React, useRef, useState } from "@webpack/common";
+import { Paginator, React, useEffect, useRef, useState } from "@webpack/common";
 import { MutableRefObject } from "react";
 
 import { jumper } from "./index";
@@ -21,11 +21,11 @@ export default function ReplyNavigator({ replies }: { replies: Message[]; }) {
     const [page, setPage] = useState(1);
     const [visible, setVisible] = useState(true);
     const ref: MutableRefObject<HTMLDivElement | null> = useRef(null);
-    React.useEffect(() => {
+    useEffect(() => {
         setPage(1);
         setVisible(true);
     }, [replies]);
-    React.useEffect(() => {
+    useEffect(() => {
         // https://stackoverflow.com/a/42234988
         function onMouseDown(event: MouseEvent) {
             if (ref.current && event.target instanceof Element && !ref.current.contains(event.target)) {

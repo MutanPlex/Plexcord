@@ -35,7 +35,7 @@ export let MessageStore: Omit<t.MessageStore, "getMessages"> & GenericStore & {
 export let PermissionStore: GenericStore;
 export let GuildChannelStore: t.GuildChannelStore;
 export let ReadStateStore: GenericStore;
-export let PresenceStore: GenericStore;
+export let PresenceStore: t.PresenceStore;
 export let VoiceStateStore: t.VoiceStateStore;
 
 export let GuildStore: t.GuildStore;
@@ -88,8 +88,9 @@ waitForStore("TypingStore", m => TypingStore = m);
 waitForStore("OverridePremiumTypeStore", m => OverridePremiumTypeStore = m);
 waitForStore("ThemeStore", m => {
     ThemeStore = m;
-    // Importing this directly can easily cause circular imports. For this reason, use a non import access here.
-    Plexcord.QuickCss.initQuickCssThemeStore();
+    // Importing this directly causes all webpack commons to be imported, which can easily cause circular dependencies.
+    // For this reason, use a non import access here.
+    Plexcord.Api.Themes.initQuickCssThemeStore(m);
 });
 waitForStore("UserStore", s => UserStore = s);
 waitForStore("UserProfileStore", m => UserProfileStore = m);

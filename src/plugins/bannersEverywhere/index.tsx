@@ -7,9 +7,11 @@
 
 import * as DataStore from "@api/DataStore";
 import { t } from "@api/i18n";
+import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { User } from "@plexcord/discord-types";
+import USRBGPlugin from "@plugins/usrbg";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType, Plugin } from "@utils/types";
 import { findStoreLazy } from "@webpack";
@@ -155,7 +157,7 @@ export default definePlugin({
     },
 
     getBanner(userId: string): string | undefined {
-        if (Plexcord.Plugins.isPluginEnabled("USRBG") && (Plexcord.Plugins.plugins.USRBG as iUSRBG).userHasBackground(userId)) {
+        if (isPluginEnabled(USRBGPlugin.name) && (Plexcord.Plugins.plugins.USRBG as iUSRBG).userHasBackground(userId)) {
             let banner = (Plexcord.Plugins.plugins.USRBG as iUSRBG).getImageUrl(userId);
             if (banner === null) banner = "";
             return banner;

@@ -18,20 +18,17 @@
 */
 
 import { t } from "@api/i18n";
+import { Button } from "@components/Button";
 import { Heart } from "@components/Heart";
-import { ButtonProps } from "@plexcord/discord-types";
-import { Button } from "@webpack/common";
 
 export default function DonateButton({
-    look = Button.Looks.LINK,
-    color = Button.Colors.TRANSPARENT,
+    variant = "overlayPrimary",
     ...props
-}: Partial<ButtonProps>) {
+}) {
     return (
         <Button
             {...props}
-            look={look}
-            color={color}
+            variant="overlayPrimary"
             onClick={() => PlexcordNative.native.openExternal("https://github.com/sponsors/MutanPlex")}
             className="pc-donate-button"
         >

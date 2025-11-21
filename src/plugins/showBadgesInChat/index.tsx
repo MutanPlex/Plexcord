@@ -16,13 +16,13 @@ import { Paragraph } from "@components/Paragraph";
 import DonateButton from "@components/settings/DonateButton";
 import { openContributorModal } from "@components/settings/tabs";
 import { User } from "@plexcord/discord-types";
+import badges from "@plugins/_api/badges";
 import { Devs, PcDevs } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import { isPcPluginDev } from "@utils/misc";
 import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalRoot, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
 import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
-import badges from "plugins/_api/badges";
 import { JSX } from "react";
 
 import settings from "./settings";
@@ -38,7 +38,7 @@ function openDonorModal() {
         }}>
             <ModalRoot {...props}>
                 <ModalHeader>
-                    <Flex style={{ width: "100%", justifyContent: "center" }}>
+                    <Flex justifyContent="center" style={{ width: "100%" }}>
                         <Heading style={{ width: "100%", textAlign: "center", margin: 0 }}>
                             <Heart />
                             Plexcord Donor
@@ -70,7 +70,7 @@ function openDonorModal() {
                     </div>
                 </ModalContent>
                 <ModalFooter>
-                    <Flex style={{ width: "100%", justifyContent: "center" }}>
+                    <Flex justifyContent="center" style={{ width: "100%" }}>
                         <DonateButton />
                     </Flex>
                 </ModalFooter>

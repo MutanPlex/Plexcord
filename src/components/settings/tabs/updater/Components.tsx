@@ -6,6 +6,8 @@
  */
 
 import { t, tJsx } from "@api/i18n";
+import { Button } from "@components/Button";
+import { Card } from "@components/Card";
 import { ErrorCard } from "@components/ErrorCard";
 import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
@@ -14,7 +16,7 @@ import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { relaunch } from "@utils/native";
 import { changes, checkForUpdates, update, updateError } from "@utils/updater";
-import { Alerts, Button, Card, React, Toasts, useState } from "@webpack/common";
+import { Alerts, React, Toasts, useState } from "@webpack/common";
 
 import { runWithDispatch } from "./runWithDispatch";
 
@@ -33,7 +35,7 @@ export function HashLink({ repo, hash, disabled = false }: { repo: string, hash:
 
 export function Changes({ updates, repo, repoPending }: CommonProps & { updates: typeof changes; }) {
     return (
-        <Card style={{ padding: "0 0.5em" }}>
+        <Card style={{ padding: "0 0.5em" }} defaultPadding={false}>
             {updates.map(({ hash, author, message }) => (
                 <div
                     key={hash}
@@ -98,7 +100,7 @@ export function Updatable(props: CommonProps) {
             <Flex className={classes(Margins.bottom8, Margins.top8)}>
                 {isOutdated && (
                     <Button
-                        size={Button.Sizes.SMALL}
+                        size="small"
                         disabled={isUpdating || isChecking}
                         onClick={runWithDispatch(setIsUpdating, async () => {
                             if (await update()) {
@@ -124,7 +126,7 @@ export function Updatable(props: CommonProps) {
                     </Button>
                 )}
                 <Button
-                    size={Button.Sizes.SMALL}
+                    size="small"
                     disabled={isUpdating || isChecking}
                     onClick={runWithDispatch(setIsChecking, async () => {
                         const outdated = await checkForUpdates();

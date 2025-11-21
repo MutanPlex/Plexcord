@@ -18,6 +18,7 @@
 */
 
 import { t } from "@api/i18n";
+import { Button } from "@components/Button";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
 import { encrypt } from "@plugins/invisibleChat.desktop/index";
@@ -30,7 +31,7 @@ import {
     ModalRoot,
     openModal,
 } from "@utils/modal";
-import { Button, React, TextInput } from "@webpack/common";
+import { React, TextInput } from "@webpack/common";
 
 function EncModal(props: ModalProps) {
     const [secret, setSecret] = React.useState("");
@@ -80,7 +81,7 @@ function EncModal(props: ModalProps) {
 
             <ModalFooter>
                 <Button
-                    color={Button.Colors.GREEN}
+                    variant="positive"
                     disabled={!isValid}
                     onClick={() => {
                         if (!isValid) return;
@@ -96,8 +97,7 @@ function EncModal(props: ModalProps) {
                     {t("plugin.invisibleChat.modal.encrypt.send")}
                 </Button>
                 <Button
-                    color={Button.Colors.TRANSPARENT}
-                    look={Button.Looks.LINK}
+                    variant="secondary"
                     style={{ left: 15, position: "absolute" }}
                     onClick={() => {
                         props.onClose();

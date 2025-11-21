@@ -5,11 +5,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { BaseText } from "@components/index";
+import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import { WallpaperFreeStore } from "@plugins/wallpaperFree/store";
 import { openModal } from "@utils/modal";
 import { makeCodeblock } from "@utils/text";
-import { Button, FluxDispatcher, Parser } from "@webpack/common";
+import { FluxDispatcher, Parser } from "@webpack/common";
 
 import { SetWallpaperModal } from "./modal";
 
@@ -29,12 +30,12 @@ export function GlobalDefaultComponent() {
             }}>Set a global wallpaper</Button>
 
             <Button
-                color={Button.Colors.RED}
+                variant="dangerPrimary"
                 onClick={() => setGlobal(void 0)}
             >Remove global default wallpaper</Button>
 
             <Button
-                color={Button.Colors.RED}
+                variant="dangerPrimary"
                 onClick={() => {
                     // @ts-ignore
                     FluxDispatcher.dispatch({ type: "PC_WALLPAPER_FREE_RESET" });

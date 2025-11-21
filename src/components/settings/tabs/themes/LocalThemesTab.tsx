@@ -6,8 +6,11 @@
  */
 
 import { t } from "@api/i18n";
+import { isPluginEnabled } from "@api/PluginManager";
 import { Settings, useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { Card } from "@components/Card";
+import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
 import { FolderIcon, PaintbrushIcon, PencilIcon, PlusIcon, RestartIcon } from "@components/Icons";
 import { Link } from "@components/Link";
@@ -15,9 +18,9 @@ import { Paragraph } from "@components/Paragraph";
 import { QuickAction, QuickActionCard } from "@components/settings/QuickAction";
 import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
 import { UserThemeHeader } from "@main/themes";
+import ClientThemePlugin from "@plugins/clientTheme";
 import { findLazy } from "@webpack";
-import { Card, useEffect, useRef, useState } from "@webpack/common";
-import ClientThemePlugin from "plugins/clientTheme";
+import { useEffect, useRef, useState } from "@webpack/common";
 import type { ComponentType, Ref, SyntheticEvent } from "react";
 
 import { ThemeCard } from "./ThemeCard";
@@ -85,8 +88,8 @@ export function LocalThemesTab() {
     }
 
     return (
-        <>
-            <Card className="pc-settings-card">
+        <Flex flexDirection="column" gap="1em">
+            <Card>
                 <Heading>{t("themes.find")}:</Heading>
                 <div style={{ marginBottom: ".5em", display: "flex", flexDirection: "column" }}>
                     <Link style={{ marginRight: ".5em" }} href="https://betterdiscord.app/themes">
@@ -97,7 +100,7 @@ export function LocalThemesTab() {
                 <Paragraph>{t("themes.download")}</Paragraph>
             </Card>
 
-            <Card className="pc-settings-card">
+            <Card>
                 <Heading>{t("themes.external.title")}</Heading>
                 <Paragraph>{t("themes.external.security")}</Paragraph>
                 <Paragraph>{t("themes.external.host")}</Paragraph>
@@ -144,7 +147,7 @@ export function LocalThemesTab() {
                             Icon={PaintbrushIcon}
                         />
 
-                        {Plexcord.Plugins.isPluginEnabled(ClientThemePlugin.name) && (
+                        {isPluginEnabled(ClientThemePlugin.name) && (
                             <QuickAction
                                 text={t("themes.editClient")}
                                 action={() => openPluginModal(ClientThemePlugin)}
@@ -170,6 +173,6 @@ export function LocalThemesTab() {
                     ))}
                 </div>
             </section>
-        </>
+        </Flex>
     );
 }

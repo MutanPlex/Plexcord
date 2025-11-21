@@ -7,11 +7,11 @@
 
 import { t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
+import { Card } from "@components/Card";
+import { Flex } from "@components/Flex";
 import { HeadingTertiary } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
-import { Margins } from "@utils/margins";
-import { classes } from "@utils/misc";
-import { Card, TextArea, useState } from "@webpack/common";
+import { TextArea, useState } from "@webpack/common";
 
 export function OnlineThemesTab() {
     const settings = useSettings(["themeLinks"]);
@@ -30,13 +30,13 @@ export function OnlineThemesTab() {
     }
 
     return (
-        <>
-            <Card className={classes("pc-warning-card", Margins.bottom16)}>
+        <Flex flexDirection="column" gap="1em">
+            <Card variant="warning" defaultPadding>
                 <HeadingTertiary>
                     {t("themes.advanced.warning")}
                 </HeadingTertiary>
             </Card>
-            <Card className="pc-settings-card">
+            <Card>
                 <HeadingTertiary>{t("themes.advanced.paste")}</HeadingTertiary>
                 <Paragraph>{t("themes.advanced.line")}</Paragraph>
                 <Paragraph>{t("themes.advanced.prefix")}</Paragraph>
@@ -55,6 +55,6 @@ export function OnlineThemesTab() {
                     rows={10}
                 />
             </section>
-        </>
+        </Flex>
     );
 }

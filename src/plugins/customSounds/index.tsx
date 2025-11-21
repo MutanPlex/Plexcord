@@ -12,10 +12,11 @@ import { get as getFromDataStore } from "@api/DataStore";
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType, StartAt } from "@utils/types";
-import { Button, React, showToast, TextInput } from "@webpack/common";
+import { React, showToast, TextInput, useEffect } from "@webpack/common";
 
 import { getAllAudio, getAudioDataURI } from "./audioStore";
 import { SoundOverrideComponent } from "./SoundOverrideComponent";
@@ -233,7 +234,7 @@ const settings = definePluginSettings({
             const [searchQuery, setSearchQuery] = React.useState("");
             const fileInputRef = React.useRef<HTMLInputElement>(null);
 
-            React.useEffect(() => {
+            useEffect(() => {
                 allSoundTypes.values.forEach(type => {
                     if (!settings.store[type.id]) {
                         setOverride(type.id, makeEmptyOverride());
@@ -327,10 +328,10 @@ const settings = definePluginSettings({
             return (
                 <div>
                     <div className="pc-custom-sounds-buttons">
-                        <Button color={Button.Colors.BRAND} onClick={triggerFileUpload}>{t("plugin.customSounds.import")}</Button>
-                        <Button color={Button.Colors.PRIMARY} onClick={downloadSettings}>{t("plugin.customSounds.export")}</Button>
-                        <Button color={Button.Colors.RED} onClick={resetOverrides}>{t("plugin.customSounds.reset")}</Button>
-                        <Button color={Button.Colors.WHITE} onClick={debugCustomSounds}>{t("plugin.customSounds.debug")}</Button>
+                        <Button variant="secondary" onClick={triggerFileUpload}>{t("plugin.customSounds.import")}</Button>
+                        <Button variant="primary" onClick={downloadSettings}>{t("plugin.customSounds.export")}</Button>
+                        <Button variant="dangerPrimary" onClick={resetOverrides}>{t("plugin.customSounds.reset")}</Button>
+                        <Button variant="dangerSecondary" onClick={debugCustomSounds}>{t("plugin.customSounds.debug")}</Button>
                         <input
                             ref={fileInputRef}
                             type="file"

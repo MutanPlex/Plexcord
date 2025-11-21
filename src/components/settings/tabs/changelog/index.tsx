@@ -8,16 +8,20 @@
 import "./styles.css";
 
 import { t } from "@api/i18n";
+import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
+import { Card } from "@components/Card";
 import { Divider } from "@components/Divider";
 import { ErrorCard } from "@components/ErrorCard";
+import { Heading } from "@components/Heading";
 import { DeleteIcon } from "@components/Icons";
-import { BaseText, Heading, Paragraph } from "@components/index";
 import { Link } from "@components/Link";
+import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { Margins } from "@utils/margins";
 import { useAwaiter } from "@utils/react";
 import { getRepo, shortGitHash, UpdateLogger } from "@utils/updater";
-import { Alerts, Button, Card, React, Toasts } from "@webpack/common";
+import { Alerts, React, Toasts, useEffect } from "@webpack/common";
 
 import gitHash from "~git-hash";
 
@@ -130,9 +134,8 @@ function UpdateLogCard({
                                 : `${t("changelog.update")}: ${log.fromHash.slice(0, 7)} → ${log.toHash.slice(0, 7)}`}
                         </span>
                         <Button
-                            size={Button.Sizes.NONE}
-                            color={Button.Colors.TRANSPARENT}
-                            look={Button.Looks.FILLED}
+                            variant="secondary"
+                            size="min"
                             className="pc-changelog-delete-button"
                             style={{
                                 padding: "4px",
@@ -257,7 +260,7 @@ function ChangelogContent() {
     const [showHistory, setShowHistory] = React.useState(false);
     const [recentlyChecked, setRecentlyChecked] = React.useState(false);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const init = async () => {
             try {
                 await initializeChangelog();
@@ -269,7 +272,7 @@ function ChangelogContent() {
         init();
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (repoErr) {
             UpdateLogger.error("Failed to retrieve repo", repoErr);
             setError("Failed to retrieve repository information");
@@ -323,7 +326,7 @@ function ChangelogContent() {
     }, [repo, repoErr, repoPending, loadChangelogHistory]);
 
     // check if the repository was recently refreshed
-    React.useEffect(() => {
+    useEffect(() => {
         const checkRecentStatus = async () => {
             try {
                 const lastRepoCheck = await getLastRepositoryCheckHash();
@@ -452,7 +455,7 @@ function ChangelogContent() {
         }
     }, [repoPending, repoErr, loadNewPlugins, loadChangelogHistory]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const loadInitialData = async () => {
             if (!repoPending && !repoErr) {
                 await loadNewPlugins();
@@ -518,13 +521,13 @@ function ChangelogContent() {
 
             <div className="pc-changelog-controls">
                 <Button
-                    size={Button.Sizes.SMALL}
+                    size="small"
                     disabled={isLoading || repoPending || !!repoErr}
                     onClick={fetchChangelog}
-                    color={
+                    variant={
                         recentlyChecked
-                            ? Button.Colors.GREEN
-                            : Button.Colors.BRAND
+                            ? "positive"
+                            : "secondary"
                     }
                 >
                     {isLoading
@@ -537,11 +540,11 @@ function ChangelogContent() {
                 {changelogHistory.length > 0 && (
                     <>
                         <Button
-                            size={Button.Sizes.SMALL}
-                            color={
+                            size="small"
+                            variant={
                                 showHistory
-                                    ? Button.Colors.PRIMARY
-                                    : Button.Colors.BRAND
+                                    ? "primary"
+                                    : "secondary"
                             }
                             onClick={() => setShowHistory(!showHistory)}
                             style={{ marginLeft: "8px" }}
@@ -549,8 +552,8 @@ function ChangelogContent() {
                             {showHistory ? t("changelog.modal.hide") : t("changelog.modal.show")}
                         </Button>
                         <Button
-                            size={Button.Sizes.SMALL}
-                            color={Button.Colors.RED}
+                            size="small"
+                            variant="dangerPrimary"
                             onClick={() => {
                                 Alerts.show({
                                     title: t("changelog.alert.clear.title"),

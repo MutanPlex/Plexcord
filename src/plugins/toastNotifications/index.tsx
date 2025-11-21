@@ -18,12 +18,13 @@
 */
 
 import { definePluginSettings } from "@api/Settings";
+import { Button } from "@components/Button";
 import { Channel, Message, User } from "@plexcord/discord-types";
 import { MessageType } from "@plexcord/discord-types/enums";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 import { findByPropsLazy, findStore } from "@webpack";
-import { Button, ChannelStore, GuildRoleStore, NavigationRouter, RelationshipStore, SelectedChannelStore, StreamerModeStore, UserStore } from "@webpack/common";
+import { ChannelStore, GuildRoleStore, NavigationRouter, RelationshipStore, SelectedChannelStore, StreamerModeStore, UserStore } from "@webpack/common";
 import { ReactNode } from "react";
 
 import { NotificationData, showNotification } from "./components/Notifications";

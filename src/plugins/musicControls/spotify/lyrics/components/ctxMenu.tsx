@@ -9,7 +9,7 @@ import { t } from "@api/i18n";
 import { providers } from "@plugins/musicControls/spotify/lyrics/api";
 import { lyricsAlternative } from "@plugins/musicControls/spotify/lyrics/providers/store";
 import { Provider } from "@plugins/musicControls/spotify/lyrics/providers/types";
-import { copyWithToast } from "@utils/misc";
+import { copyWithToast } from "@utils/discord";
 import { findComponentByCodeLazy } from "@webpack";
 import { FluxDispatcher, Menu } from "@webpack/common";
 

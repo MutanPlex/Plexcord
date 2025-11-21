@@ -7,12 +7,13 @@
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { t } from "@api/i18n";
+import { isPluginEnabled } from "@api/PluginManager";
 import { Message, Sticker } from "@plexcord/discord-types";
+import ExpressionClonerPlugin from "@plugins/expressionCloner";
 import { Devs, PcDevs } from "@utils/constants";
-import { copyWithToast } from "@utils/misc";
+import { copyWithToast } from "@utils/discord";
 import definePlugin from "@utils/types";
 import { Menu, React, StickersStore } from "@webpack/common";
-import ExpressionClonerPlugin from "plugins/expressionCloner";
 
 const StickerExt = [, "png", "png", "json", "gif"] as const;
 
@@ -69,7 +70,7 @@ const expressionPickerPatch: NavContextMenuPatchCallback = (children, props: { t
 
     const sticker = StickersStore.getStickerById(id);
     if (sticker) {
-        children.push(buildMenuItem(sticker, Plexcord.Plugins.isPluginEnabled(ExpressionClonerPlugin.name)));
+        children.push(buildMenuItem(sticker, isPluginEnabled(ExpressionClonerPlugin.name)));
     }
 };
 

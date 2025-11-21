@@ -159,6 +159,7 @@
             "following": "Aşağıdaki eklentiler yeniden başlatma gerektiriyor:",
             "fully": "Bazı eklentilerin tamamen devre dışı bırakılması için yeniden başlatma gerekir.",
             "would": "Yeniden başlatmak ister misiniz?",
+            "resetDefault": "Varsayılan ayarlara sıfırla",
             "button": {
                 "restart": "Yeniden Başlat",
                 "later": "Sonra!",
@@ -229,7 +230,9 @@
                 "all": "Hepsi",
                 "enabled": "Aktif Olanlar",
                 "disabled": "Devre Dışı Olanlar",
-                "new": "Yeniler"
+                "new": "Yeniler",
+                "userplugins": "Kullanıcı Eklentileri",
+                "api": "API Eklentileri"
             }
         },
         "pluginModal": {
@@ -1978,6 +1981,10 @@
                 "openNewTabsInCompactMode": {
                     "label": "Yeni Sekmeleri Kompakt Aç",
                     "description": "Yeni açılan sekmeler varsayılan olarak kompakt modda açılsın"
+                },
+                "newTabButtonBehavior": {
+                    "label": "Yeni Sekme Butonu Davranışı",
+                    "description": "Yeni sekme (+) butonu sabit olarak sağda durmak yerine sekmeleri takip eder"
                 },
                 "oneTabPerServer": {
                     "label": "Sunucu Başına Tek Sekme",
@@ -5352,6 +5359,15 @@
                 }
             }
         },
+        "newPluginsManager": {
+            "name": "NewPluginsManager",
+            "description": "Plexcord’a yeni eklentiler eklendiğinde sizi bilgilendiren yardımcı araç",
+            "modal": {
+                "title": "Yeni Eklentiler ve Ayarlar",
+                "tooltip": "Bu oturum için kapat",
+                "dontShowAgain": "Bir daha gösterme"
+            }
+        },
         "noBlockedMessages": {
             "name": "NoBlockedMessages",
             "description": "Sohbetten engellenmiş/yok sayılmış tüm mesajları tamamen gizler",
@@ -5675,7 +5691,7 @@
             }
         },
         "petpet": {
-            "name": "petpet",
+            "name": "PetPet",
             "description": "Herhangi bir resimden petpet gif'i oluşturmak için /petpet komutu ekler",
             "command": {
                 "petpet": {
@@ -6263,23 +6279,45 @@
         },
         "quoter": {
             "name": "Quoter",
-            "description": "Bir mesajdan ilham verici alıntı görseli oluşturma özelliği ekler.",
+            "description": "Bir mesajdan ilham verici alıntı görseli oluşturmanı sağlar",
             "context": {
-                "quote": "Alıntıla"
+                "quote": "Alıntı"
             },
             "modal": {
                 "title": "4K'da Yakala",
-                "grayscale": "Gri Tonlama",
+                "grayscale": "Siyah-Beyaz",
                 "export": "Dışa Aktar",
-                "send": "Gönder"
+                "send": "Gönder",
+                "saveAsGIF": "GIF olarak Kaydet",
+                "saveDescription": "Görseli PNG yerine GIF olarak kaydeder/gönderir",
+                "showWatermark": "Filigranı Göster",
+                "watermarkText": "Filigran Metni (maks. 32 karakter)"
             },
             "option": {
-                "userIdentifier": {
-                    "label": "Kullanıcı Tanımlayıcı",
-                    "description": "Yazarın adının nasıl gösterileceği",
-                    "displayName": "Görünen Ad",
-                    "username": "Kullanıcı Adı",
-                    "userId": "Kullanıcı ID'si"
+                "quoteFont": {
+                    "label": "Alıntı Fontu",
+                    "description": "Alıntı metni için font (yazar/kullanıcı adı her zaman M PLUS Rounded 1c kullanır)",
+                    "mPlusRounded": "M PLUS Rounded 1c",
+                    "openSans": "Open Sans",
+                    "momoSignature": "Momo Signature",
+                    "lora": "Lora",
+                    "merriWeather": "Merriweather"
+                },
+                "watermark": {
+                    "label": "Filigran",
+                    "description": "Özel filigran metni (maks. 32 karakter)"
+                },
+                "grayscale": {
+                    "label": "Siyah-Beyaz",
+                    "description": "Varsayılan olarak siyah-beyazı etkinleştir"
+                },
+                "showWatermark": {
+                    "label": "Filigranı Göster",
+                    "description": "Varsayılan olarak filigranı göster"
+                },
+                "saveAsGif": {
+                    "label": "GIF Olarak Kaydet",
+                    "description": "Varsayılan olarak GIF olarak kaydet"
                 }
             }
         },

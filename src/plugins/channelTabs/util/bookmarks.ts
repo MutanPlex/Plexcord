@@ -5,8 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import * as DataStore from "@api/DataStore";
 import { t } from "@api/i18n";
-import { DataStore } from "@api/index";
 import { useAwaiter } from "@utils/react";
 import { ChannelStore, useCallback, UserStore, useState } from "@webpack/common";
 

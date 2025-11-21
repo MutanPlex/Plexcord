@@ -7,6 +7,7 @@
 
 import { t, tJsx } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
@@ -19,7 +20,7 @@ import { openInviteModal } from "@utils/discord";
 import { Margins } from "@utils/margins";
 import { closeAllModals, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { filters, findComponentByCodeLazy, mapMangledModuleLazy } from "@webpack";
-import { Button, FluxDispatcher, GuildStore, NavigationRouter, TextInput, useEffect, useMemo, UserStore, useState } from "@webpack/common";
+import { FluxDispatcher, GuildStore, NavigationRouter, TextInput, useEffect, useMemo, UserStore, useState } from "@webpack/common";
 
 const FileUpload = findComponentByCodeLazy(".fileUpload),");
 
@@ -146,7 +147,7 @@ function CreateDecorationModal(props: ModalProps) {
             <div className={cl("modal-footer-btn-container")}>
                 <Button
                     onClick={props.onClose}
-                    color={Button.Colors.PRIMARY}
+                    variant="primary"
                 >
                     {t("plugin.decor.button.cancel")}
                 </Button>

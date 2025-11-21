@@ -7,6 +7,7 @@
 
 import { t, tJsx } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
+import { Button } from "@components/Button";
 import { ErrorCard } from "@components/ErrorCard";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
@@ -14,7 +15,7 @@ import { relativeLuminance } from "@plugins/clientTheme/utils/colorUtils";
 import { createOrUpdateThemeColorVars } from "@plugins/clientTheme/utils/styleUtils";
 import { Margins } from "@utils/margins";
 import { findByCodeLazy, findStoreLazy } from "@webpack";
-import { Button, ColorPicker, ThemeStore, useStateFromStores } from "@webpack/common";
+import { ColorPicker, ThemeStore, useStateFromStores } from "@webpack/common";
 
 import { settings } from "..";
 const saveClientTheme = findByCodeLazy('type:"UNSYNCED_USER_SETTINGS_UPDATE', '"system"===');
@@ -88,8 +89,8 @@ export function ThemeSettingsComponent() {
                     {nitroThemeEnabled && <Paragraph>{">"} {t("plugin.clientTheme.error.modal.nitro")}</Paragraph>}
 
                     <div className={cl("buttons-container")}>
-                        {(contrastWarning && fixableContrast) && <Button onClick={() => setDiscordTheme(oppositeTheme)} color={Button.Colors.RED}>{tJsx("plugin.clientTheme.error.modal.switch", { oppositeTheme })}</Button>}
-                        {(nitroThemeEnabled) && <Button onClick={() => setDiscordTheme(currentTheme)} color={Button.Colors.RED}>{t("plugin.clientTheme.error.modal.disable")}</Button>}
+                        {(contrastWarning && fixableContrast) && <Button onClick={() => setDiscordTheme(oppositeTheme)} variant="dangerPrimary">{tJsx("plugin.clientTheme.error.modal.switch", { oppositeTheme })}</Button>}
+                        {(nitroThemeEnabled) && <Button onClick={() => setDiscordTheme(currentTheme)} variant="dangerPrimary">{t("plugin.clientTheme.error.modal.disable")}</Button>}
                     </div>
                 </ErrorCard>
             </>)}

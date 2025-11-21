@@ -8,10 +8,11 @@
 import { t, tJsx } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
+import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { makeRange, OptionType } from "@utils/types";
-import { Button, MaskedLink, showToast, Toasts } from "@webpack/common";
+import { MaskedLink, showToast, Toasts } from "@webpack/common";
 
 import hoverOnlyStyle from "./hoverOnly.css?managed";
 import { clearLyricsCache, removeTranslations } from "./spotify/lyrics/api";
@@ -272,7 +273,7 @@ export const settings = definePluginSettings({
         type: OptionType.COMPONENT,
         component: () => (
             <Button
-                color={Button.Colors.RED}
+                variant="dangerPrimary"
                 onClick={() => {
                     clearLyricsCache();
                     showToast(t("plugin.musicControls.option.PurgeLyricsCache.cacheLyricsPurged"), Toasts.Type.SUCCESS);

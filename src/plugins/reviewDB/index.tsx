@@ -20,6 +20,7 @@
 import "./style.css";
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { NotesIcon, OpenExternalIcon } from "@components/Icons";
 import { Guild, User } from "@plexcord/discord-types";
@@ -27,7 +28,7 @@ import { Devs } from "@utils/constants";
 import { classes } from "@utils/misc";
 import definePlugin from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { Alerts, Button, Menu, Parser, TooltipContainer } from "@webpack/common";
+import { Alerts, Menu, Parser, TooltipContainer } from "@webpack/common";
 
 import { Auth, initAuth, updateAuth } from "./auth";
 import { openReviewsModal } from "./components/ReviewModal";
@@ -152,8 +153,8 @@ export default definePlugin({
             <TooltipContainer text="View Reviews">
                 <Button
                     onClick={() => openReviewsModal(user.id, user.username, ReviewType.User)}
-                    look={Button.Looks.FILLED}
-                    size={Button.Sizes.NONE}
+                    variant="secondary"
+                    size="min"
                     color={RoleButtonClasses.bannerColor}
                     className={classes(RoleButtonClasses.button, RoleButtonClasses.icon, RoleButtonClasses.banner, "pc-bite-size-rdb-button")}>
                     <NotesIcon height={16} width={16} />

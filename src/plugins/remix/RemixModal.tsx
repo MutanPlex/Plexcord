@@ -6,8 +6,8 @@
  */
 
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
-import { Button } from "@webpack/common";
 
 import { sendRemix } from ".";
 import { brushCanvas, canvas, cropCanvas, ctx, exportImg, shapeCanvas } from "./editor/components/Canvas";
@@ -49,7 +49,7 @@ export default function RemixModal({ modalProps, close, url }: Props) {
             </ModalContent>
             <ModalFooter className="pc-remix-modal-footer">
                 <Button onClick={() => closeModal(close, true)} className="pc-remix-send"><SendIcon /> Send</Button>
-                <Button onClick={() => closeModal(close)} color={Button.Colors.RED}>Close</Button>
+                <Button onClick={() => closeModal(close)} variant="dangerPrimary">Close</Button>
             </ModalFooter>
         </ModalRoot>
     );

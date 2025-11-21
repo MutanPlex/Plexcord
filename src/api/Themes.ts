@@ -18,9 +18,8 @@
 */
 
 import { Settings, SettingsStore } from "@api/Settings";
-import { ThemeStore } from "@webpack/common";
-
-import { createAndAppendStyle } from "./css";
+import { ThemeStore } from "@plexcord/discord-types";
+import { createAndAppendStyle } from "@utils/css";
 
 let style: HTMLStyleElement;
 let themesStyle: HTMLStyleElement;
@@ -54,6 +53,8 @@ async function initThemes() {
     themesStyle ??= createAndAppendStyle("plexcord-themes");
 
     const { themeLinks, enabledThemes } = Settings;
+
+    const { ThemeStore } = require("@webpack/common/stores") as typeof import("@webpack/common/stores");
 
     // "darker" and "midnight" both count as dark
     // This function is first called on DOMContentLoaded, so ThemeStore may not have been loaded yet
@@ -103,16 +104,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 }, { once: true });
 
-export function initQuickCssThemeStore() {
+export function initQuickCssThemeStore(themeStore: ThemeStore) {
     if (IS_USERSCRIPT) return;
 
     initThemes();
 
-    let currentTheme = ThemeStore.theme;
-    ThemeStore.addChangeListener(() => {
-        if (currentTheme === ThemeStore.theme) return;
+    let currentTheme = themeStore.theme;
+    themeStore.addChangeListener(() => {
+        if (currentTheme === themeStore.theme) return;
 
-        currentTheme = ThemeStore.theme;
+        currentTheme = themeStore.theme;
         initThemes();
     });
 }

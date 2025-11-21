@@ -344,7 +344,7 @@ page.on("console", async e => {
 });
 
 page.on("error", e => logStderr("[Error]", e.message));
-page.on("pageerror", e => {
+page.on("pageerror", (e: any) => {
     const message = (e as Error).message;
     if (message.includes("Sentry successfully disabled")) return;
 

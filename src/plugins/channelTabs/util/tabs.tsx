@@ -5,8 +5,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import * as DataStore from "@api/DataStore";
 import { t } from "@api/i18n";
-import { DataStore } from "@api/index";
+import { isPluginEnabled } from "@api/PluginManager";
 import { classNameFactory } from "@api/Styles";
 import { NavigationRouter, SelectedChannelStore, SelectedGuildStore, showToast, Toasts, useEffect, useRef, useState } from "@webpack/common";
 import { JSX } from "react";
@@ -459,7 +460,7 @@ export function openStartupTabs(props: BasicChannelTabsProps & { userId: string;
     replaceArray(openTabHistory);
     highestIdIndex = 0;
 
-    if (settings.store.onStartup !== "nothing" && Plexcord.Plugins.isPluginEnabled("KeepCurrentChannel"))
+    if (settings.store.onStartup !== "nothing" && isPluginEnabled("KeepCurrentChannel"))
         return showToast(t("plugin.channelTabs.toast.notRestoring"), Toasts.Type.FAILURE);
 
     switch (settings.store.onStartup) {

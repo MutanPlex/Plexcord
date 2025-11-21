@@ -6,8 +6,9 @@
  */
 
 import { t } from "@api/i18n";
+import { Button } from "@components/Button";
 import { closeModal, ModalContent, ModalHeader, ModalRoot, openModalLazy } from "@utils/modal";
-import { Button, Menu, Slider, TextInput, useState } from "@webpack/common";
+import { Menu, Slider, TextInput, useState } from "@webpack/common";
 
 import { folderIconsData, settings } from "./settings";
 import { folderProp, int2rgba, setFolderData } from "./util";

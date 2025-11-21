@@ -5,11 +5,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { addPatch } from "@api/PluginManager";
 import { initWs } from "@plugins/devCompanion.dev/initWs";
 import { Logger } from "@utils/Logger";
 import * as Webpack from "@webpack";
-import { addPatch, patches } from "plugins";
-import { getBuildNumber, patchTimings } from "webpack/patchWebpack";
+import { getBuildNumber, patches, patchTimings } from "@webpack/patcher";
 
 import { loadLazyChunks } from "./loadLazyChunks";
 import { reporterData } from "./reporterData";

@@ -17,12 +17,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { debounce } from "@shared/debounce";
 import { SettingsStore as SettingsStoreClass } from "@shared/SettingsStore";
-import { localStorage } from "@utils/localStorage";
 import { Logger } from "@utils/Logger";
 import { mergeDefaults } from "@utils/mergeDefaults";
-import { putCloudSettings } from "@utils/settingsSync";
 import { DefinedSettings, OptionType, SettingsChecks, SettingsDefinition } from "@utils/types";
 import { React, useEffect } from "@webpack/common";
 
@@ -144,14 +141,6 @@ const DefaultSettings: Settings = {
 const settings = !IS_REPORTER ? PlexcordNative.settings.get() : {} as Settings;
 mergeDefaults(settings, DefaultSettings);
 
-const saveSettingsOnFrequentAction = debounce(async () => {
-    if (Settings.cloud.settingsSync && Settings.cloud.authenticated) {
-        await putCloudSettings();
-        delete localStorage.Plexcord_settingsDirty;
-    }
-}, 60_000);
-
-
 export const SettingsStore = new SettingsStoreClass(settings, {
     readOnly: true,
     getDefaultValue({
@@ -194,8 +183,6 @@ export const SettingsStore = new SettingsStoreClass(settings, {
 if (!IS_REPORTER) {
     SettingsStore.addGlobalChangeListener((_, path) => {
         SettingsStore.plain.cloud.settingsSyncVersion = Date.now();
-        localStorage.Plexcord_settingsDirty = true;
-        saveSettingsOnFrequentAction();
         PlexcordNative.settings.set(SettingsStore.plain, path);
 
         if (path.startsWith("language.")) {
@@ -263,6 +250,7 @@ export function migratePluginToSetting(newName: string, oldName: string, setting
     if (oldPlugin?.enabled) {
         newPlugin[settingName] = true;
         oldPlugin.enabled = false;
+        if (!newPlugin?.enabled) newPlugin.enabled = true;
         SettingsStore.markAsChanged();
     }
 }

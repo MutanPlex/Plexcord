@@ -7,11 +7,12 @@
 
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { Button } from "@components/Button";
 import { Paragraph } from "@components/Paragraph";
 import { PcDevs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
-import { Button, Menu } from "@webpack/common";
+import { Menu } from "@webpack/common";
 import { ReactElement } from "react";
 
 import { preload, unload } from "./images";
@@ -45,7 +46,7 @@ export default definePlugin({
                     );
 
                 return (
-                    <Button size={Button.Sizes.SMALL} onClick={openQrModal}>
+                    <Button size="small" onClick={openQrModal}>
                         {getIntlMessage("USER_SETTINGS_SCAN_QR_CODE")}
                     </Button>
                 );
@@ -103,7 +104,7 @@ export default definePlugin({
 
     insertScanQrButton: (button: ReactElement) => (
         <div className={cl("settings-btns")}>
-            <Button size={Button.Sizes.SMALL} onClick={openQrModal}>
+            <Button size="small" onClick={openQrModal}>
                 {getIntlMessage("USER_SETTINGS_SCAN_QR_CODE")}
             </Button>
             {button}

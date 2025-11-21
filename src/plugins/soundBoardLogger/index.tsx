@@ -7,9 +7,10 @@
 
 import { addChatBarButton, removeChatBarButton } from "@api/ChatButtons";
 import { disableStyle, enableStyle } from "@api/Styles";
+import { Button } from "@components/Button";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
-import { Button, FluxDispatcher, Tooltip } from "@webpack/common";
+import { FluxDispatcher, Tooltip } from "@webpack/common";
 
 import { ChatBarIcon, LogIcon } from "./components/Icons";
 import { openSoundBoardLog } from "./components/SoundBoardLog";
@@ -40,7 +41,7 @@ export default definePlugin({
                 {tooltipProps => (
                     <Button style={{ backgroundColor: "transparent", border: "none" }}
                         {...tooltipProps}
-                        size={Button.Sizes.SMALL}
+                        size="small"
                         className={"pc-soundboard-log-icon"}
                         onClick={() => openSoundBoardLog()}
                     >

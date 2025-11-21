@@ -6,9 +6,10 @@
  */
 
 import { t } from "@api/i18n";
+import { Button } from "@components/Button";
 import { SvgOverFlowIcon } from "@plugins/holyNotes/components/icons/overFlowIcon";
 import { classes } from "@utils/misc";
-import { Button, Clickable, Menu, Popout, React, useRef } from "@webpack/common";
+import { Clickable, Menu, Popout, React, useEffect, useRef } from "@webpack/common";
 
 export function NoteBookTabs({ tabs, selectedTabId, onSelectTab }: { tabs: string[], selectedTabId: string, onSelectTab: (tab: string) => void; }) {
     const tabBarRef = React.useRef<HTMLDivElement>(null);
@@ -50,7 +51,7 @@ export function NoteBookTabs({ tabs, selectedTabId, onSelectTab }: { tabs: strin
     }, [tabs, selectedTabId]);
 
 
-    React.useEffect(() => {
+    useEffect(() => {
         handleResize();
 
         resizeObserverRef.current = new ResizeObserver(handleResize);
@@ -143,8 +144,8 @@ export function NoteBookTabs({ tabs, selectedTabId, onSelectTab }: { tabs: strin
                             ref={buttonRef}
                             {...props}
                             className={"pc-notebook-overflow-chevron"}
-                            size={Button.Sizes.SMALL}
-                            look={Button.Looks.FILLED}
+                            size="small"
+                            variant="secondary"
                             onClick={() => setShow(v => !v)}
                         >
                             <SvgOverFlowIcon width={16} height={16} />
@@ -169,7 +170,7 @@ export function CreateTabBar({ tabs, firstSelectedTab, onChangeTab }) {
         firstSelectedTab || (tabKeys.length > 0 ? tabKeys[0] : null)
     );
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (firstSelectedTab && firstSelectedTab !== selectedTab) {
             setSelectedTab(firstSelectedTab);
         }

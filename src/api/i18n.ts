@@ -18,7 +18,9 @@
 
 import { localStorage } from "@utils/localStorage";
 import { Logger } from "@utils/Logger";
-import { FluxDispatcher, React, useEffect, useState } from "@webpack/common";
+import { FluxDispatcher, useEffect, useState } from "@webpack/common";
+
+import { PlexcordCreateElement } from "../../scripts/build/inject/react.mjs";
 
 let Settings: any = null;
 const getSettings = () => {
@@ -388,7 +390,7 @@ class I18nManager {
                 return result[0];
             }
 
-            return React.createElement(React.Fragment, null, ...result);
+            return PlexcordCreateElement(React.Fragment, null, ...result);
         } catch (error) {
             let result = translation;
             Object.entries(params).forEach(([param, value]) => {
@@ -603,7 +605,7 @@ export function useForceUpdateOnLocaleChange() {
 export function withI18n<P extends object>(Component: React.ComponentType<P>) {
     const WrappedComponent = (props: P) => {
         useForceUpdateOnLocaleChange();
-        return React.createElement(Component, props);
+        return PlexcordCreateElement(Component, props);
     };
 
     WrappedComponent.displayName = `withI18n(${Component.displayName || Component.name})`;

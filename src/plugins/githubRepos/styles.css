@@ -47,7 +47,8 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    color: var(--text-muted);
+    color: var(--info-warning-foreground);
+    fill: var(--info-warning-foreground);
 }
 
 .pc-github-repos-language {

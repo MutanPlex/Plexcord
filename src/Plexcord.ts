@@ -23,20 +23,18 @@ import "~plugins";
 import { i18n, t } from "./api/i18n";
 
 export * as Api from "./api";
+export * as Plugins from "./api/PluginManager";
+export * as QuickCss from "./api/Themes";
 export * as Components from "./components";
-export * as Plugins from "./plugins";
 export * as Util from "./utils";
-export * as QuickCss from "./utils/quickCss";
 export * as Updater from "./utils/updater";
 export * as Webpack from "./webpack";
 export * as WebpackPatcher from "./webpack/patchWebpack";
 export { PlainSettings, Settings };
 
-import "./utils/quickCss";
-import "./webpack/patchWebpack";
-
 import { addPlexcordUiStyles } from "@components/css";
 import { openUpdaterModal } from "@components/settings/tabs/updater";
+import { debounce } from "@shared/debounce";
 import { IS_WINDOWS } from "@utils/constants";
 import { createAndAppendStyle } from "@utils/css";
 import { StartAt } from "@utils/types";
@@ -44,14 +42,15 @@ import { StartAt } from "@utils/types";
 import { get as dsGet } from "./api/DataStore";
 import { LocaleLoader } from "./api/LocaleLoader";
 import { NotificationData, showNotification } from "./api/Notifications";
-import { PlainSettings, Settings } from "./api/Settings";
-import { patches, PMLogger, startAllPlugins } from "./plugins";
+import { initPluginManager, PMLogger, startAllPlugins } from "./api/PluginManager";
+import { PlainSettings, Settings, SettingsStore } from "./api/Settings";
+import { getCloudSettings, putCloudSettings } from "./api/SettingsSync/cloudSync";
 import { localStorage } from "./utils/localStorage";
 import { relaunch } from "./utils/native";
-import { getCloudSettings, putCloudSettings } from "./utils/settingsSync";
 import { checkForUpdates, update, UpdateLogger } from "./utils/updater";
 import { onceReady } from "./webpack";
 import { SettingsRouter } from "./webpack/common";
+import { patches } from "./webpack/patchWebpack";
 
 if (IS_REPORTER) {
     require("./debug/runReporter");
@@ -111,6 +110,17 @@ async function syncSettings() {
             });
         }
     }
+    const saveSettingsOnFrequentAction = debounce(async () => {
+        if (Settings.cloud.settingsSync && Settings.cloud.authenticated) {
+            await putCloudSettings();
+            delete localStorage.Plexcord_settingsDirty;
+        }
+    }, 60_000);
+
+    SettingsStore.addGlobalChangeListener(() => {
+        localStorage.Plexcord_settingsDirty = true;
+        saveSettingsOnFrequentAction();
+    });
 }
 
 let notifiedForUpdatesThisSession = false;
@@ -188,6 +198,7 @@ async function init() {
     }
 }
 
+initPluginManager();
 startAllPlugins(StartAt.Init);
 init();
 

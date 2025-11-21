@@ -9,12 +9,14 @@ import { BadgeUserArgs, ProfileBadge } from "@api/Badges";
 import { i18n, t } from "@api/i18n";
 import { Badges } from "@api/index";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Heading, Paragraph } from "@components/index";
+import { Flex } from "@components/Flex";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { Devs, PcDevs } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import { ModalContent, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
-import { Button, Flex, RelationshipStore } from "@webpack/common";
+import { RelationshipStore } from "@webpack/common";
 
 import { bestiesIcon, bloomingIcon, burningIcon, fighterIcon, royalIcon, sproutIcon, starIcon } from "./icons";
 
@@ -90,7 +92,7 @@ function openRankModal(rankIndex: number) {
         <ErrorBoundary>
             <ModalRoot {...props} size={ModalSize.DYNAMIC}>
                 <ModalHeader>
-                    <Flex style={{ width: "100%", justifyContent: "center" }}>
+                    <Flex justifyContent="center" style={{ width: "100%" }}>
                         <Heading style={{ width: "100%", textAlign: "center", margin: 0 }}>
                             {rank.title}
                         </Heading>
@@ -114,9 +116,9 @@ function getBadgeComponent(rankIndex: number) {
     // there may be a better button component to do this with
     return (
         <div style={{ transform: "scale(0.80)", marginTop: "3px" }}>
-            <Button onClick={() => openRankModal(rankIndex)} width={"22px"} height={"22px"} size={Button.Sizes.NONE} look={Button.Looks.LINK}>
+            <div onClick={() => openRankModal(rankIndex)} style={{ width: "22px", height: "27px" }}>
                 <rank.assetSVG />
-            </Button>
+            </div>
         </div>
     );
 }

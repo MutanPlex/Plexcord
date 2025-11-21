@@ -30,9 +30,10 @@ import DonateButton from "@components/settings/DonateButton";
 import { openContributorModal } from "@components/settings/tabs";
 import { User } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
+import { copyWithToast } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
-import { copyWithToast, shouldShowContributorBadge, shouldShowPcContributorBadge } from "@utils/misc";
+import { shouldShowContributorBadge, shouldShowPcContributorBadge } from "@utils/misc";
 import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalRoot, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
 import { ContextMenuApi, Menu, Toasts, UserStore } from "@webpack/common";
@@ -242,7 +243,7 @@ export default definePlugin({
                                         margin: 0
                                     }}
                                 >
-                                    <Flex style={{ justifyContent: "center", alignItems: "center", gap: "0.5em" }}>
+                                    <Flex justifyContent="center" alignItems="center" style={{ gap: "0.5em" }}>
                                         <Heart />
                                         {t("plugins.metadata.badges.modal.title")}
                                     </Flex>
@@ -273,7 +274,7 @@ export default definePlugin({
                                 </div>
                             </ModalContent>
                             <ModalFooter>
-                                <Flex style={{ width: "100%", justifyContent: "center" }}>
+                                <Flex justifyContent="center" style={{ width: "100%" }}>
                                     <DonateButton />
                                 </Flex>
                             </ModalFooter>

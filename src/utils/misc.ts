@@ -17,9 +17,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Toasts } from "@webpack/common";
-
-import { copyToClipboard } from "./clipboard";
 import { DevsById, PcDevsById } from "./constants";
 
 /**
@@ -35,16 +32,6 @@ export function classes(...classes: Array<string | null | undefined | false>) {
  */
 export function sleep(ms: number): Promise<void> {
     return new Promise(r => setTimeout(r, ms));
-}
-
-export async function copyWithToast(text: string, toastMessage?: string) {
-    const { t } = await import("@api/i18n");
-    await copyToClipboard(text);
-    Toasts.show({
-        message: toastMessage ?? t("utils.toast.copied"),
-        id: Toasts.genId(),
-        type: Toasts.Type.SUCCESS
-    });
 }
 
 /**
@@ -88,10 +75,6 @@ export const checkIntersecting = (el: Element) => {
 export function identity<T>(value: T): T {
     return value;
 }
-
-// https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent#mobile_tablet_or_desktop
-// "In summary, we recommend looking for the string Mobi anywhere in the User Agent to detect a mobile device."
-export const isMobile = navigator.userAgent.includes("Mobi");
 
 export const isPluginDev = (id: string) => Object.hasOwn(DevsById, id);
 export const isPcPluginDev = (id: string) => Object.hasOwn(PcDevsById, id);

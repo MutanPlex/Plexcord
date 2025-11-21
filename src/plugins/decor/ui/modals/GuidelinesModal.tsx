@@ -7,13 +7,13 @@
 
 import { t, tJsx } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
 import { settings } from "@plugins/decor/settings";
 import { cl, DecorationModalStyles, requireAvatarDecorationModal } from "@plugins/decor/ui";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
-import { Button } from "@webpack/common";
 
 import { openCreateDecorationModal } from "./CreateDecorationModal";
 
@@ -56,8 +56,7 @@ function GuidelinesModal(props: ModalProps) {
                 </Button>
                 <Button
                     onClick={props.onClose}
-                    color={Button.Colors.PRIMARY}
-                    look={Button.Looks.LINK}
+                    variant="none"
                 >
                     {t("plugin.decor.button.back")}
                 </Button>

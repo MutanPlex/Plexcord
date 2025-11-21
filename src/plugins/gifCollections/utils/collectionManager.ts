@@ -5,8 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import * as DataStore from "@api/DataStore";
 import { t } from "@api/i18n";
-import { DataStore } from "@api/index";
 import { settings } from "@plugins/gifCollections/index";
 import { Collection, Gif } from "@plugins/gifCollections/types";
 import { Toasts } from "@webpack/common";

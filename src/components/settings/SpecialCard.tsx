@@ -20,8 +20,9 @@
 import "./SpecialCard.css";
 
 import { classNameFactory } from "@api/Styles";
+import { Card } from "@components/Card";
 import { Divider } from "@components/Divider";
-import { Card, Clickable, React } from "@webpack/common";
+import { Clickable } from "@webpack/common";
 import type { PropsWithChildren } from "react";
 
 import { HeadingTertiary, Paragraph } from "..";

@@ -20,8 +20,10 @@
 export function relaunch() {
     if (IS_DISCORD_DESKTOP)
         window.DiscordNative.app.relaunch();
-    else
+    else if (IS_PLEXTRON)
         window.PlextronNative.app.relaunch();
+    else
+        location.reload();
 }
 
 export function showItemInFolder(path: string) {

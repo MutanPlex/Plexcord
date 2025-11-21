@@ -6,6 +6,7 @@
  */
 
 import { t, tJsx } from "@api/i18n";
+import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
 import { ErrorCard } from "@components/ErrorCard";
 import { HeadingTertiary } from "@components/Heading";
@@ -16,7 +17,7 @@ import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { relaunch } from "@utils/native";
 import { useForceUpdater } from "@utils/react";
-import { Alerts, Button } from "@webpack/common";
+import { Alerts } from "@webpack/common";
 
 export function CspErrorCard() {
     if (IS_WEB) return null;
@@ -54,7 +55,7 @@ export function CspErrorCard() {
     const hasImgurHtmlDomain = errors.some(isImgurHtmlDomain);
 
     return (
-        <ErrorCard className="pc-settings-card">
+        <ErrorCard className={Margins.bottom16}>
             <HeadingTertiary>{t("csp.blocked.resources")}</HeadingTertiary>
             <Paragraph>{t("csp.blocked.disallowed")}</Paragraph>
             <Paragraph>{t("csp.blocked.recommended")}</Paragraph>
@@ -71,7 +72,7 @@ export function CspErrorCard() {
                         {i !== 0 && <Divider className={Margins.bottom8} />}
                         <div className="pc-settings-csp-row">
                             <Link href={url}>{url}</Link>
-                            <Button color={Button.Colors.PRIMARY} onClick={() => allowUrl(url)} disabled={isImgurHtmlDomain(url)}>
+                            <Button variant="primary" onClick={() => allowUrl(url)} disabled={isImgurHtmlDomain(url)}>
                                 {t("csp.blocked.allow")}
                             </Button>
                         </div>

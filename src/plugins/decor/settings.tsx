@@ -15,6 +15,7 @@ import { closeAllModals } from "@utils/modal";
 import { OptionType } from "@utils/types";
 import { FluxDispatcher } from "@webpack/common";
 
+import DecorPlugin from ".";
 import DecorSection from "./ui/components/DecorSection";
 
 export const settings = definePluginSettings({
@@ -24,7 +25,7 @@ export const settings = definePluginSettings({
         },
         type: OptionType.COMPONENT,
         component() {
-            if (!Plexcord.Plugins.plugins.Decor.started) return <Paragraph>
+            if (!DecorPlugin.started) return <Paragraph>
                 {t("plugin.decor.option.changeDecoration.description")}
             </Paragraph>;
 

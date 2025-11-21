@@ -6,8 +6,9 @@
  */
 
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import { ModalContent, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
-import { Button, TextInput, useState } from "@webpack/common";
+import { TextInput, useState } from "@webpack/common";
 
 interface Props {
     props: ModalProps;
@@ -51,7 +52,7 @@ export function SetWallpaperModal({ props, onSelect, initialUrl }: Props) {
                     <div style={{ display: "flex", justifyContent: "flex-end", gap: 8 }}>
                         <Button onClick={props.onClose}>Cancel</Button>
                         <Button
-                            color={Button.Colors.BRAND}
+                            variant="secondary"
                             onClick={() => {
                                 onSelect(url);
                                 props.onClose();

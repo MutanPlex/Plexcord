@@ -17,7 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { DataStore, Notices } from "@api/index";
+import * as DataStore from "@api/DataStore";
+import { popNotice, showNotice } from "@api/Notices";
 import { showNotification } from "@api/Notifications";
 import { FluxStore } from "@plexcord/discord-types";
 import { ChannelType } from "@plexcord/discord-types/enums";
@@ -112,7 +113,7 @@ export async function syncAndRunChecks() {
 
 export function notify(text: string, icon?: string, onClick?: () => void) {
     if (settings.store.notices)
-        Notices.showNotice(text, "OK", () => Notices.popNotice());
+        showNotice(text, "OK", () => popNotice());
 
     showNotification({
         title: "Relationship Notifier",

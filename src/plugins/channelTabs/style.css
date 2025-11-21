@@ -107,6 +107,11 @@
     padding-top: 1px;
 }
 
+.pc-channeltabs-tab-scroller-following {
+    width: fit-content;
+    flex: unset;
+}
+
 .pc-channeltabs-tab-scroller::-webkit-scrollbar {
     display: none;
 }

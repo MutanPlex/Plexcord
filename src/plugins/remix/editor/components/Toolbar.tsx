@@ -5,13 +5,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { Button } from "@components/Button";
 import { Paragraph } from "@components/Paragraph";
 import { Switch } from "@components/settings";
 import { BrushTool } from "@plugins/remix/editor/tools/brush";
 import { CropTool, resetBounds } from "@plugins/remix/editor/tools/crop";
 import { EraseTool } from "@plugins/remix/editor/tools/eraser";
 import { currentShape, setShape, setShapeFill, Shape, ShapeTool } from "@plugins/remix/editor/tools/shape";
-import { Button, Select, Slider, useEffect, useState } from "@webpack/common";
+import { Select, Slider, useEffect, useState } from "@webpack/common";
 
 import { brushCanvas, canvas, cropCanvas, render, shapeCanvas } from "./Canvas";
 import { SettingColorComponent } from "./SettingColorComponent";

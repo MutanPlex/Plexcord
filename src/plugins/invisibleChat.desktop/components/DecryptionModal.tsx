@@ -18,6 +18,7 @@
 */
 
 import { t } from "@api/i18n";
+import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { decrypt } from "@plugins/invisibleChat.desktop/index";
 import {
@@ -27,7 +28,7 @@ import {
     ModalRoot,
     openModal,
 } from "@utils/modal";
-import { Button, React, TextInput } from "@webpack/common";
+import { React, TextInput } from "@webpack/common";
 
 export function DecModal(props: any) {
     const encryptedMessage: string = props?.message?.content;
@@ -51,7 +52,7 @@ export function DecModal(props: any) {
 
             <ModalFooter>
                 <Button
-                    color={Button.Colors.GREEN}
+                    variant="positive"
                     onClick={() => {
                         const toSend = decrypt(encryptedMessage, password, true);
                         if (!toSend || !props?.message) return;
@@ -62,8 +63,7 @@ export function DecModal(props: any) {
                     {t("plugin.invisibleChat.modal.decrypt.decrypt")}
                 </Button>
                 <Button
-                    color={Button.Colors.TRANSPARENT}
-                    look={Button.Looks.LINK}
+                    variant="secondary"
                     style={{ left: 15, position: "absolute" }}
                     onClick={props.onClose}
                 >

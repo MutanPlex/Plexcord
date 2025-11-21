@@ -6,8 +6,8 @@
  */
 
 import { createStore } from "@api/DataStore";
+import * as DataStore from "@api/DataStore";
 import { t } from "@api/i18n";
-import { DataStore } from "@api/index";
 import { Toasts } from "@webpack/common";
 
 import noteHandler, { noteHandlerCache } from "./NoteHandler";

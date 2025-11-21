@@ -18,14 +18,15 @@
 */
 
 import { t } from "@api/i18n";
+import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import { Message } from "@plexcord/discord-types";
 import { MessageFlags } from "@plexcord/discord-types/enums";
+import NoBlockedMessagesPlugin from "@plugins/noBlockedMessages";
+import NoReplyMentionPlugin from "@plugins/noReplyMention";
 import { Devs, IS_MAC } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { ChannelStore, ComponentDispatch, FluxDispatcher as Dispatcher, MessageActions, MessageStore, MessageTypeSets, PermissionsBits, PermissionStore, RelationshipStore, SelectedChannelStore, UserStore } from "@webpack/common";
-import NoBlockedMessagesPlugin from "plugins/noBlockedMessages";
-import NoReplyMentionPlugin from "plugins/noReplyMention";
 
 let currentlyReplyingId: string | null = null;
 let currentlyEditingId: string | null = null;
@@ -48,12 +49,12 @@ const settings = definePluginSettings({
         get options() {
             return [
                 {
-                    label: t("plugin.quickReply.option.shouldMention.option.noReplyMentionPlugin"),
+                    label: t("plugin.quickReply.option.shouldMention.noReplyMentionPlugin"),
                     value: MentionOptions.NO_REPLY_MENTION_PLUGIN,
                     default: true
                 },
-                { label: t("plugin.quickReply.option.shouldMention.option.enabled"), value: MentionOptions.ENABLED },
-                { label: t("plugin.quickReply.option.shouldMention.option.disabled"), value: MentionOptions.DISABLED },
+                { label: t("plugin.quickReply.option.shouldMention.enabled"), value: MentionOptions.ENABLED },
+                { label: t("plugin.quickReply.option.shouldMention.disabled"), value: MentionOptions.DISABLED },
             ];
         }
     },
@@ -152,7 +153,7 @@ function getNextMessage(isUp: boolean, isReply: boolean) {
     let messages: Message[] = MessageStore.getMessages(SelectedChannelStore.getChannelId())._array;
 
     const meId = UserStore.getCurrentUser().id;
-    const hasNoBlockedMessages = Plexcord.Plugins.isPluginEnabled(NoBlockedMessagesPlugin.name);
+    const hasNoBlockedMessages = isPluginEnabled(NoBlockedMessagesPlugin.name);
 
     messages = messages.filter(m => {
         if (m.deleted) return false;
@@ -188,7 +189,7 @@ function getNextMessage(isUp: boolean, isReply: boolean) {
 function shouldMention(message: Message) {
     switch (settings.store.shouldMention) {
         case MentionOptions.NO_REPLY_MENTION_PLUGIN:
-            if (!Plexcord.Plugins.isPluginEnabled(NoReplyMentionPlugin.name)) return true;
+            if (!isPluginEnabled(NoReplyMentionPlugin.name)) return true;
             return NoReplyMentionPlugin.shouldMention(message, false);
         case MentionOptions.DISABLED:
             return false;

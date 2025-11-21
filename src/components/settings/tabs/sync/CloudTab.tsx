@@ -18,8 +18,10 @@
 */
 
 import { t, tJsx } from "@api/i18n";
-import { showNotification } from "@api/Notifications";
-import { Settings, useSettings } from "@api/Settings";
+import { useSettings } from "@api/Settings";
+import { authorizeCloud, deauthorizeCloud } from "@api/SettingsSync/cloudSetup";
+import { deleteCloudSettings, eraseAllCloudData, getCloudSettings, putCloudSettings } from "@api/SettingsSync/cloudSync";
+import { Button } from "@components/Button";
 import { CheckedTextInput } from "@components/CheckedTextInput";
 import { Divider } from "@components/Divider";
 import { FormSwitch } from "@components/FormSwitch";
@@ -28,10 +30,8 @@ import { HeadingTertiary } from "@components/Heading";
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
-import { authorizeCloud, checkCloudUrlCsp, cloudLogger, deauthorizeCloud, getCloudAuth, getCloudUrl } from "@utils/cloud";
 import { Margins } from "@utils/margins";
-import { deleteCloudSettings, getCloudSettings, putCloudSettings } from "@utils/settingsSync";
-import { Alerts, Button, Tooltip } from "@webpack/common";
+import { Alerts, Tooltip } from "@webpack/common";
 
 function validateUrl(url: string) {
     try {
@@ -40,34 +40,6 @@ function validateUrl(url: string) {
     } catch {
         return t("cloud.backend.invalid");
     }
-}
-
-async function eraseAllData() {
-    if (!await checkCloudUrlCsp()) return;
-
-    const res = await fetch(new URL("/v1/", getCloudUrl()), {
-        method: "DELETE",
-        headers: { Authorization: await getCloudAuth() }
-    });
-
-    if (!res.ok) {
-        cloudLogger.error(`Failed to erase data, API returned ${res.status}`);
-        showNotification({
-            title: t("cloud.notifications.title"),
-            body: t("cloud.notifications.erase.failed", { status: res.status }),
-            color: "var(--red-360)"
-        });
-        return;
-    }
-
-    Settings.cloud.authenticated = false;
-    await deauthorizeCloud();
-
-    showNotification({
-        title: t("cloud.notifications.title"),
-        body: t("cloud.notifications.erase.successful"),
-        color: "var(--green-360)"
-    });
 }
 
 function SettingsSyncSection() {
@@ -89,7 +61,7 @@ function SettingsSyncSection() {
             />
             <div className="pc-cloud-settings-sync-grid">
                 <Button
-                    size={Button.Sizes.SMALL}
+                    size="small"
                     disabled={!sectionEnabled}
                     onClick={() => putCloudSettings(true)}
                 >
@@ -100,8 +72,8 @@ function SettingsSyncSection() {
                         <Button
                             onMouseLeave={onMouseLeave}
                             onMouseEnter={onMouseEnter}
-                            size={Button.Sizes.SMALL}
-                            color={Button.Colors.RED}
+                            size="small"
+                            variant="dangerPrimary"
                             disabled={!sectionEnabled}
                             onClick={() => getCloudSettings(true, true)}
                         >
@@ -110,8 +82,8 @@ function SettingsSyncSection() {
                     )}
                 </Tooltip>
                 <Button
-                    size={Button.Sizes.SMALL}
-                    color={Button.Colors.RED}
+                    size="small"
+                    variant="dangerPrimary"
                     disabled={!sectionEnabled}
                     onClick={() => deleteCloudSettings()}
                 >
@@ -164,7 +136,7 @@ function CloudTab() {
 
                 <Grid columns={2} gap="1em" className={Margins.top8}>
                     <Button
-                        size={Button.Sizes.MEDIUM}
+                        size="medium"
                         disabled={!settings.cloud.authenticated}
                         onClick={async () => {
                             await deauthorizeCloud();
@@ -175,13 +147,13 @@ function CloudTab() {
                         {t("cloud.button.reauthorize")}
                     </Button>
                     <Button
-                        size={Button.Sizes.MEDIUM}
-                        color={Button.Colors.RED}
+                        size="medium"
+                        variant="dangerPrimary"
                         disabled={!settings.cloud.authenticated}
                         onClick={() => Alerts.show({
                             title: t("cloud.button.erase.title"),
                             body: t("cloud.button.erase.body"),
-                            onConfirm: eraseAllData,
+                            onConfirm: eraseAllCloudData,
                             confirmText: t("cloud.button.erase.confirm"),
                             confirmColor: "pc-cloud-erase-data-danger-btn",
                             cancelText: t("cloud.button.erase.cancel")

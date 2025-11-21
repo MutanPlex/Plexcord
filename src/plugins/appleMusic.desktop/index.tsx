@@ -15,7 +15,7 @@ import definePlugin, { OptionType, PluginNative, ReporterTestable } from "@utils
 import { ApplicationAssetUtils, FluxDispatcher } from "@webpack/common";
 
 const Native = PlexcordNative.pluginHelpers.AppleMusicRichPresence as PluginNative<typeof import("./native")>;
-
+let updateInterval: NodeJS.Timeout | undefined;
 export interface TrackData {
     name: string;
     album?: string;
@@ -250,11 +250,12 @@ export default definePlugin({
 
     start() {
         this.updatePresence();
-        this.updateInterval = setInterval(() => { this.updatePresence(); }, settings.store.refreshInterval * 1000);
+        updateInterval = setInterval(() => { this.updatePresence(); }, settings.store.refreshInterval * 1000);
     },
 
     stop() {
-        clearInterval(this.updateInterval);
+        clearInterval(updateInterval);
+        updateInterval = undefined;
         FluxDispatcher.dispatch({ type: "LOCAL_ACTIVITY_UPDATE", activity: null });
     },
 

@@ -8,6 +8,7 @@
 import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
 import { InfoIcon } from "@components/Icons";
 import { User } from "@plexcord/discord-types";
@@ -16,12 +17,11 @@ import { settings } from "@plugins/messageLoggerEnhanced/index";
 import { LoggedMessage, LoggedMessageJSON } from "@plugins/messageLoggerEnhanced/types";
 import { messageJsonToMessageClass } from "@plugins/messageLoggerEnhanced/utils";
 import { importLogs } from "@plugins/messageLoggerEnhanced/utils/settingsUtils";
-import { openUserProfile } from "@utils/discord";
-import { copyWithToast } from "@utils/misc";
+import { copyWithToast, openUserProfile } from "@utils/discord";
 import { closeAllModals, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { LazyComponent } from "@utils/react";
 import { find, findByCode, findByCodeLazy } from "@webpack";
-import { Alerts, Button, ChannelStore, ContextMenuApi, FluxDispatcher, GuildStore, Menu, NavigationRouter, React, TabBar, TextInput, Tooltip, useMemo, useRef, useState } from "@webpack/common";
+import { Alerts, ChannelStore, ContextMenuApi, FluxDispatcher, GuildStore, Menu, NavigationRouter, React, TabBar, TextInput, Tooltip, useMemo, useRef, useState } from "@webpack/common";
 
 import { useMessages } from "./hooks";
 
@@ -143,12 +143,12 @@ export function LogsModal({ modalProps, initalQuery }: Props) {
             </div>
             <ModalFooter>
                 <Button
-                    color={Button.Colors.RED}
+                    variant="dangerPrimary"
                     onClick={() => Alerts.show({
                         title: t("plugin.messageLoggerEnhanced.alert.clearLogs.title"),
                         body: t("plugin.messageLoggerEnhanced.alert.clearLogs.body"),
                         confirmText: t("plugin.messageLoggerEnhanced.alert.clearLogs.confirmText"),
-                        confirmColor: Button.Colors.RED,
+                        confirmColor: "dangerPrimary",
                         cancelText: t("plugin.messageLoggerEnhanced.alert.clearLogs.cancel"),
                         onConfirm: async () => {
                             await clearMessagesIDB();
@@ -161,13 +161,13 @@ export function LogsModal({ modalProps, initalQuery }: Props) {
                 </Button>
                 <Button
                     style={{ marginRight: "16px" }}
-                    color={Button.Colors.BRAND}
+                    variant="secondary"
                     disabled={messages?.length === 0}
                     onClick={() => Alerts.show({
                         title: t("plugin.messageLoggerEnhanced.alert.clearVisibleLogs.title"),
                         body: t("plugin.messageLoggerEnhanced.alert.clearVisibleLogs.body", { messages: messages.length }),
                         confirmText: t("plugin.messageLoggerEnhanced.alert.clearVisibleLogs.confirmText"),
-                        confirmColor: Button.Colors.RED,
+                        confirmColor: "dangerPrimary",
                         cancelText: t("plugin.messageLoggerEnhanced.alert.clearVisibleLogs.cancel"),
                         onConfirm: async () => {
                             await deleteMessagesBulkIDB(messages.map(e => e.message_id));
@@ -179,7 +179,7 @@ export function LogsModal({ modalProps, initalQuery }: Props) {
                 </Button>
                 <Button
                     style={{ marginRight: "16px" }}
-                    color={Button.Colors.PRIMARY}
+                    variant="primary"
                     onClick={() => {
                         setSortNewest(e => {
                             const val = !e;
@@ -224,7 +224,7 @@ function LogsContent({ visibleMessages, canLoadMore, sortNewest, tab, reset, han
                 canLoadMore &&
                 <Button
                     style={{ marginTop: "1rem", width: "100%" }}
-                    size={Button.Sizes.SMALL} onClick={() => handleLoadMore()}
+                    size="small" onClick={() => handleLoadMore()}
                 >
                     {t("plugin.messageLoggerEnhanced.button.loadMore")}
                 </Button>

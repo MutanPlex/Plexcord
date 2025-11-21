@@ -9,7 +9,8 @@ import "./styles.css";
 
 import { t } from "@api/i18n";
 import { addServerListElement, removeServerListElement, ServerListRenderPosition } from "@api/ServerList";
-import { ErrorBoundary, openPluginModal } from "@components/index";
+import { ErrorBoundary } from "@components/index";
+import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
 import { PcDevs } from "@utils/constants";
 import { getIntlMessage } from "@utils/index";
 import definePlugin, { StartAt } from "@utils/types";
@@ -841,16 +842,14 @@ function getLastSortChoice(): string | null {
 
 function getLastFilterChoices(): { group: string; filter: string; }[] | null {
     const { rememberQuestPageFilters, lastQuestPageFilters } = settings.store;
-    return rememberQuestPageFilters ? Object.values(lastQuestPageFilters) : null;
+    return rememberQuestPageFilters ? Object.values(lastQuestPageFilters).map(item => JSON.parse(JSON.stringify(item))) : null;
 }
 
 function setLastSortChoice(sort: string): void {
-    const { rememberQuestPageFilters } = settings.use(["rememberQuestPageFilters"]);
     settings.store.lastQuestPageSort = sort;
 }
 
 function setLastFilterChoices(filters: { group: string; filter: string; }[]): void {
-    const { rememberQuestPageFilters } = settings.use(["rememberQuestPageFilters"]);
     if (!filters || !Object.keys(filters).length || !Object.values(filters).every(f => f.group && f.filter)) { return; }
     settings.store.lastQuestPageFilters = JSON.parse(JSON.stringify(filters)).reduce((acc, item) => ({ ...acc, [item.filter]: item }), {});
 }
@@ -926,8 +925,8 @@ export default definePlugin({
             find: "QUEST_HOME_V2):",
             replacement: [
                 {
-                    match: /(?<="family-center"\):null,\i)/,
-                    replace: "||$self.shouldHideDirectMessagesTab()"
+                    match: /(?<="family-center"\):null,)(\i)/,
+                    replace: "$self.shouldHideDirectMessagesTab()||$1"
                 }
             ]
         },
@@ -1163,7 +1162,7 @@ export default definePlugin({
                 },
                 {
                     // Set the initial filters.
-                    match: /(useState\()(\i\),{quests)/,
+                    match: /(get\(\i\)\)\)\?\i:)(\i)/,
                     replace: "$1$self.getLastFilterChoices()??$2"
                 },
                 {
@@ -1178,8 +1177,8 @@ export default definePlugin({
                 },
                 {
                     // Update the last used sort and filter choices when the toggle setting for either is changed.
-                    match: /(\[(\i),\i\]=\i.useState.{0,80}?\[(\i),\i\]=\i.useState.{0,350}?)(return \i.useEffect)/,
-                    replace: "$1$self.setLastSortChoice($2);$self.setLastFilterChoices($3);$4"
+                    match: /(?<=ALL,\i.useMemo\(\(\)=>\()({sortMethod:(\i),filters:(\i))/,
+                    replace: "$self.setLastSortChoice($2),$self.setLastFilterChoices($3),$1"
                 }
             ]
         },
