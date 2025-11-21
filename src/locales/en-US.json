@@ -4301,10 +4301,6 @@
             },
             "online": "Online {{formattedTime}} ago"
         },
-        "lastVoice": {
-            "name": "LastVoice",
-            "description": "Automatically rejoins your last voice channel when you restart Discord."
-        },
         "limitMiddleClickPaste": {
             "name": "LimitMiddleClickPaste",
             "description": "For middle-click autoscroll users, prevents middle-click from making unwanted pastes.",
