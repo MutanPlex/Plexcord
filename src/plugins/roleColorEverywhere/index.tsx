@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs, PcDevs } from "@utils/constants";
@@ -29,44 +30,79 @@ const useMessageAuthor = findByCodeLazy('"Result cannot be null because the mess
 
 const settings = definePluginSettings({
     chatMentions: {
+        get label() {
+            return t("plugins.roleColorEverywhere.option.chatMentions.label");
+        },
+        get description() {
+            return t("plugins.roleColorEverywhere.option.chatMentions.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Show role colors in chat mentions (including in the message box)",
         restartNeeded: true
     },
     memberList: {
+        get label() {
+            return t("plugins.roleColorEverywhere.option.memberList.label");
+        },
+        get description() {
+            return t("plugins.roleColorEverywhere.option.memberList.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Show role colors in member list role headers",
         restartNeeded: true
     },
     voiceUsers: {
+        get label() {
+            return t("plugins.roleColorEverywhere.option.voiceUsers.label");
+        },
+        get description() {
+            return t("plugins.roleColorEverywhere.option.voiceUsers.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Show role colors in the voice chat user list",
         restartNeeded: true
     },
     reactorsList: {
+        get label() {
+            return t("plugins.roleColorEverywhere.option.reactorsList.label");
+        },
+        get description() {
+            return t("plugins.roleColorEverywhere.option.reactorsList.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Show role colors in the reactors list",
         restartNeeded: true
     },
     pollResults: {
+        get label() {
+            return t("plugins.roleColorEverywhere.option.pollResults.label");
+        },
+        get description() {
+            return t("plugins.roleColorEverywhere.option.pollResults.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Show role colors in the poll results",
         restartNeeded: true
     },
     colorChatMessages: {
+        get label() {
+            return t("plugins.roleColorEverywhere.option.colorChatMessages.label");
+        },
+        get description() {
+            return t("plugins.roleColorEverywhere.option.colorChatMessages.description");
+        },
         type: OptionType.BOOLEAN,
         default: false,
-        description: "Color chat messages based on the author's role color",
         restartNeeded: true,
     },
     messageSaturation: {
+        get label() {
+            return t("plugins.roleColorEverywhere.option.messageSaturation.label");
+        },
+        get description() {
+            return t("plugins.roleColorEverywhere.option.messageSaturation.description");
+        },
         type: OptionType.SLIDER,
-        description: "Intensity of message coloring.",
         markers: makeRange(0, 100, 10),
         default: 30
     }
@@ -77,6 +113,10 @@ export default definePlugin({
     authors: [Devs.KingFish, Devs.lewisakura, Devs.AutumnVN, Devs.Kyuuhachi, Devs.jamesbt365, PcDevs.MutanPlex],
     description: "Adds the top role color anywhere possible",
     settings,
+
+    get displayDescription() {
+        return t("plugins.roleColorEverywhere.description");
+    },
 
     patches: [
         // Chat Mentions

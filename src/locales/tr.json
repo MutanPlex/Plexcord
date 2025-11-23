@@ -6677,6 +6677,40 @@
                 }
             }
         },
+        "roleColorEverywhere": {
+            "name": "RoleColorEverywhere",
+            "description": "En üst roldeki rengi mümkün olan her yerde gösterir",
+            "option": {
+                "chatMentions": {
+                    "label": "Sohbet Bahsetmeleri",
+                    "description": "Sohbet bahsetmelerinde rol renklerini göster (mesaj kutusu dahil)"
+                },
+                "memberList": {
+                    "label": "Üye Listesi",
+                    "description": "Üye listesi rol başlıklarında rol renklerini göster"
+                },
+                "voiceUsers": {
+                    "label": "Sesli Kullanıcılar",
+                    "description": "Sesli sohbet kullanıcı listesinde rol renklerini göster"
+                },
+                "reactorsList": {
+                    "label": "Reaktörler Listesi",
+                    "description": "Emoji reaksiyonu veren kullanıcı listesinde rol renklerini göster"
+                },
+                "pollResults": {
+                    "label": "Anket Sonuçları",
+                    "description": "Anket sonuçlarında rol renklerini göster"
+                },
+                "colorChatMessages": {
+                    "label": "Sohbet Mesajlarını Renklendir",
+                    "description": "Sohbet mesajlarını yazarın rol rengine göre renklendir"
+                },
+                "messageSaturation": {
+                    "label": "Mesaj Doygunluğu",
+                    "description": "Mesaj renklendirme yoğunluğu"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

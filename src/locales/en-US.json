@@ -6677,6 +6677,40 @@
                 }
             }
         },
+        "roleColorEverywhere": {
+            "name": "RoleColorEverywhere",
+            "description": "Adds the top role color anywhere possible",
+            "option": {
+                "chatMentions": {
+                    "label": "Chat Mentions",
+                    "description": "Show role colors in chat mentions (including in the message box)"
+                },
+                "memberList": {
+                    "label": "Member List",
+                    "description": "Show role colors in member list role headers"
+                },
+                "voiceUsers": {
+                    "label": "Voice Users",
+                    "description": "Show role colors in the voice chat user list"
+                },
+                "reactorsList": {
+                    "label": "Reactors List",
+                    "description": "Show role colors in the reactors list"
+                },
+                "pollResults": {
+                    "label": "Poll Results",
+                    "description": "Show role colors in the poll results"
+                },
+                "colorChatMessages": {
+                    "label": "Color Chat Messages",
+                    "description": "Color chat messages based on the author's role color"
+                },
+                "messageSaturation": {
+                    "label": "Message Saturation",
+                    "description": "Intensity of message coloring"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
