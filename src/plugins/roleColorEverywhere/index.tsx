@@ -23,7 +23,7 @@ import { Devs, PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 import { findByCodeLazy } from "@webpack";
-import { ChannelStore, GuildMemberStore, GuildRoleStore, GuildStore } from "@webpack/common";
+import { ChannelStore, GuildMemberStore, GuildRoleStore, GuildStore, UserStore } from "@webpack/common";
 
 const useMessageAuthor = findByCodeLazy('"Result cannot be null because the message is not null"');
 
@@ -164,6 +164,31 @@ export default definePlugin({
         }
     ],
 
+    getDisplayNameFont(userId: string) {
+        try {
+            const user = UserStore.getUser(userId);
+            const fontId = user?.displayNameStyles?.fontId;
+
+            if (!fontId || Number(fontId) === 1) return "";
+
+            const fontClasses: Record<number, string> = {
+                2: "zillaSlab__89a31",
+                3: "cherryBomb__89a31",
+                4: "chicle__89a31",
+                5: "museoModerno__89a31",
+                6: "neoCastel__89a31",
+                7: "pixelify__89a31",
+                8: "sinistre__89a31"
+            };
+
+            return fontClasses[Number(fontId)] || "";
+        } catch (e) {
+            new Logger("RoleColorEverywhere").error("Failed to get display name font", e);
+        }
+
+        return "";
+    },
+
     getColorString(userId: string, channelOrGuildId: string) {
         try {
             const guildId = ChannelStore.getChannel(channelOrGuildId)?.guild_id ?? GuildStore.getGuild(channelOrGuildId)?.id;
@@ -193,15 +218,19 @@ export default definePlugin({
     },
 
     getColorClass(userId: string, channelOrGuildId: string) {
-        return this.getColorString(userId, channelOrGuildId)?.secondaryColor
-            ? "usernameFont__07f91 username__07f91 twoColorGradient_e5de78 usernameGradient_e5de78"
+        const fontClass = this.getDisplayNameFont(userId);
+        const baseClass = this.getColorString(userId, channelOrGuildId)?.secondaryColor
+            ? "usernameFont__07f91 username__07f91 twoColorGradient_e5de78 usernameGradient_e5de78 "
             : "usernameFont__07f91 username__07f91 ";
+        return fontClass ? `${baseClass}${fontClass}` : baseClass;
     },
 
     getPollResultColorClass(userId: string, channelOrGuildId: string) {
-        return this.getColorString(userId, channelOrGuildId)?.secondaryColor
-            ? "twoColorGradient_e5de78 usernameGradient_e5de78"
+        const fontClass = this.getDisplayNameFont(userId);
+        const baseClass = this.getColorString(userId, channelOrGuildId)?.secondaryColor
+            ? "twoColorGradient_e5de78 usernameGradient_e5de78 "
             : "";
+        return fontClass ? `${baseClass} ${fontClass}`.trim() : baseClass;
     },
 
     useMessageColorsStyle(message: any) {
