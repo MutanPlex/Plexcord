@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -29,6 +30,10 @@ export default definePlugin({
     description: "Notifies you when a friend, group chat, or server removes you.",
     authors: [Devs.nick],
     settings,
+
+    get displayDescription() {
+        return t("plugin.relationshipNotifier.description");
+    },
 
     patches: [
         {

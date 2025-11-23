@@ -6,13 +6,14 @@
  */
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { migratePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Message } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { sendMessage } from "@utils/discord";
 import { useForceUpdater } from "@utils/react";
-import definePlugin from "@utils/types";
+import definePlugin, { IconComponent } from "@utils/types";
 import { ChannelStore, Menu, useEffect } from "@webpack/common";
 
 interface AttachmentInfo {
@@ -22,18 +23,18 @@ interface AttachmentInfo {
 
 const cl = classNameFactory("pc-repeat-");
 
-function RepeatMessageIcon({ className }: { className?: string; }) {
+const RepeatMessageIcon: IconComponent = ({ height = 24, width = 24, className }) => {
     return (
         <svg
             viewBox="0 -960 960 960"
-            height={24}
-            width={24}
+            height={height}
+            width={width}
             className={cl("icon", className)}
         >
             <path fill="currentColor" d="m274-200 34 34q12 12 11.5 28T308-110q-12 12-28.5 12.5T251-109L148-212q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l103-103q12-12 28.5-11.5T308-370q11 12 11.5 28T308-314l-34 34h406v-120q0-17 11.5-28.5T720-440q17 0 28.5 11.5T760-400v120q0 33-23.5 56.5T680-200H274Zm412-480H280v120q0 17-11.5 28.5T240-520q-17 0-28.5-11.5T200-560v-120q0-33 23.5-56.5T280-760h406l-34-34q-12-12-11.5-28t11.5-28q12-12 28.5-12.5T709-851l103 103q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L709-589q-12 12-28.5 11.5T652-590q-11-12-11.5-28t11.5-28l34-34Z" />
         </svg>
     );
-}
+};
 
 let shift = false;
 
@@ -114,7 +115,7 @@ const messageCtxPatch: NavContextMenuPatchCallback = (children, { msg }: { msg: 
     group.splice(group.findIndex(c => c?.props?.id === "reply") + 1, 0, (
         <Menu.MenuItem
             id="pc-repeat"
-            label={shift ? "Repeat and Reply" : "Repeat"}
+            label={shift ? t("plugin.repeatMessages.context.repeatAndReply") : t("plugin.repeatMessages.context.repeat")}
             icon={RepeatMessageIcon}
             action={async () => repeatMessage(msg)}
         />
@@ -134,25 +135,37 @@ export default definePlugin({
     name: "RepeatMessages",
     description: "Allows you to repeat messages quickly. If you hold shift while clicking the Repeat option, it will reply to the message.",
     authors: [PcDevs.Tolgchu, Devs.thororen],
+    dependencies: ["MessagePopoverAPI"],
+
+    get displayDescription() {
+        return t("plugin.repeatMessages.description");
+    },
+
     contextMenus: {
         "message": messageCtxPatch
     },
-    renderMessagePopoverButton(msg) {
-        if (!msg) return null;
-        return {
-            label: "Repeat (Click) / Repeat and Reply (Shift + Click)",
-            icon: RepeatMessageIcon,
-            message: msg,
-            channel: ChannelStore.getChannel(msg.channel_id),
-            onClick: async () => repeatMessage(msg)
-        };
+
+    messagePopoverButton: {
+        icon: RepeatMessageIcon,
+        render(msg) {
+            if (!msg) return null;
+            return {
+                label: t("plugin.repeatMessages.button"),
+                icon: RepeatMessageIcon,
+                message: msg,
+                channel: ChannelStore.getChannel(msg.channel_id),
+                onClick: async () => repeatMessage(msg)
+            };
+        }
     },
+
     start() {
         document.addEventListener("keyup", keyupListener);
         document.addEventListener("keydown", keydownListener);
     },
+
     stop() {
         document.removeEventListener("keyup", keyupListener);
         document.removeEventListener("keydown", keydownListener);
-    },
+    }
 });

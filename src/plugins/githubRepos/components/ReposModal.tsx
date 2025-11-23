@@ -26,10 +26,10 @@ export function ReposModal({ repos, username, rootProps }: ReposModalProps) {
     const renderTableHeader = () => (
         <thead>
             <tr>
-                <th>{t("plugin.githubRepos.modal.repository")}</th>
-                <th>{t("plugin.githubRepos.modal.description")}</th>
-                <th>{t("plugin.githubRepos.modal.language")}</th>
-                <th>{t("plugin.githubRepos.modal.stars")}</th>
+                <th>{t("plugin.gitHubRepos.modal.repository")}</th>
+                <th>{t("plugin.gitHubRepos.modal.description")}</th>
+                <th>{t("plugin.gitHubRepos.modal.language")}</th>
+                <th>{t("plugin.gitHubRepos.modal.stars")}</th>
             </tr>
         </thead>
     );
@@ -68,7 +68,7 @@ export function ReposModal({ repos, username, rootProps }: ReposModalProps) {
         <ModalRoot className={cl("modal")} size="large" {...rootProps}>
             <ModalHeader>
                 <HeadingPrimary className={cl("modal-title")}>
-                    {t("plugin.githubRepos.modal.title", { user: username })}
+                    {t("plugin.gitHubRepos.modal.title", { user: username })}
                 </HeadingPrimary>
             </ModalHeader>
             <ModalContent className={cl("modal-content")}>
@@ -93,14 +93,14 @@ export function ReposModal({ repos, username, rootProps }: ReposModalProps) {
                     variant="link"
                     onClick={() => window.open(`https://github.com/${username}?tab=repositories`, "_blank")}
                 >
-                    {t("plugin.githubRepos.modal.viewOnGitHub")}
+                    {t("plugin.gitHubRepos.modal.viewOnGitHub")}
                 </Button>
                 <Button
                     className={cl("modal-footer-close")}
                     variant="secondary"
                     onClick={rootProps.onClose}
                 >
-                    {t("plugin.githubRepos.modal.close")}
+                    {t("plugin.gitHubRepos.modal.close")}
                 </Button>
             </ModalFooter>
         </ModalRoot>

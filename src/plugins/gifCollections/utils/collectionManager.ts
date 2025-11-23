@@ -32,7 +32,7 @@ export const createCollection = async (name: string, gifs: Gif[]): Promise<void>
     const duplicateCollection = collections.find(c => c.name === `${settings.store.collectionPrefix}${name}`);
     if (duplicateCollection)
         return Toasts.show({
-            message: t("plugin.gifCollection.toast.already"),
+            message: t("plugin.gifCollections.toast.already"),
             type: Toasts.Type.FAILURE,
             id: Toasts.genId(),
             options: {
@@ -66,7 +66,7 @@ export const addToCollection = async (name: string, gif: Gif): Promise<void> => 
         const isDuplicate = collections[collectionIndex].gifs.some(g => g.url === gif.url);
         if (isDuplicate) {
             return Toasts.show({
-                message: t("plugin.gifCollection.toast.alreadyCollection"),
+                message: t("plugin.gifCollections.toast.alreadyCollection"),
                 type: Toasts.Type.FAILURE,
                 id: Toasts.genId(),
                 options: {

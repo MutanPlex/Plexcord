@@ -5,7 +5,6 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { addChatBarButton, removeChatBarButton } from "@api/ChatButtons";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { Button } from "@components/Button";
 import { Devs, PcDevs } from "@utils/constants";
@@ -35,6 +34,7 @@ export default definePlugin({
         },
     ],
     settings,
+
     renderSoundBoardLoggerButton() {
         return (
             <Tooltip text="SoundBoardLogger">
@@ -51,6 +51,12 @@ export default definePlugin({
             </Tooltip>
         );
     },
+
+    chatBarButton: {
+        icon: LogIcon,
+        render: ChatBarIcon
+    },
+
     start() {
         enableStyle(styles);
         FluxDispatcher.subscribe("VOICE_CHANNEL_EFFECT_SEND", async sound => {
@@ -58,10 +64,9 @@ export default definePlugin({
             await updateLoggedSounds(sound);
             getListeners().forEach(cb => cb());
         });
-        if (settings.store.IconLocation === "chat") addChatBarButton("pc-soundlog-button", ChatBarIcon);
     },
+
     stop() {
         disableStyle(styles);
-        if (settings.store.IconLocation === "chat") removeChatBarButton("pc-soundlog-button");
     }
 });

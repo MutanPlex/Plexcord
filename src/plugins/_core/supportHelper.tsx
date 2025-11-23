@@ -28,7 +28,7 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
-import { openUpdaterModal } from "@components/settings/tabs/updater";
+import { openSettingsTabModal, UpdaterTab } from "@components/settings";
 import { Channel } from "@plexcord/discord-types";
 import { BOT_COMMANDS_CHANNEL_ID, CONTRIB_ROLE_ID, Devs, DONOR_ROLE_ID, KNOWN_ISSUES_CHANNEL_ID, PcDevs, PLEXBOT_USER_ID, PLEXCORD_GUILD_ID, REGULAR_ROLE_ID, SUPPORT_CATEGORY_ID, SUPPORT_CHANNEL_ID } from "@utils/constants";
 import { openInviteModal, sendMessage } from "@utils/discord";
@@ -235,7 +235,7 @@ export default definePlugin({
                                 {t("plugins.metadata.supportHelper.modals.outdated.footer")}
                             </Paragraph>
                         </div>,
-                        onCancel: () => openUpdaterModal!(),
+                        onCancel: () => openSettingsTabModal(UpdaterTab!),
                         cancelText: t("plugins.metadata.supportHelper.modals.outdated.button.cancel"),
                         confirmText: t("plugins.metadata.supportHelper.modals.outdated.button.confirm"),
                         onConfirm: forceUpdate,

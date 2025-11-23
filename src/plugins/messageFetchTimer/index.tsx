@@ -10,7 +10,7 @@ import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import { getCurrentChannel } from "@utils/discord";
-import definePlugin, { OptionType } from "@utils/types";
+import definePlugin, { IconComponent, OptionType } from "@utils/types";
 import { FluxDispatcher, React } from "@webpack/common";
 
 interface FetchTiming {
@@ -20,6 +20,20 @@ interface FetchTiming {
     duration?: number;
     timestamp?: Date;
 }
+
+const TimerIcon: IconComponent = ({ height = 16, width = 16, className }) => {
+    return (
+        <svg
+            width={width}
+            height={height}
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className={className}
+        >
+            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z" />
+        </svg>
+    );
+};
 
 let currentFetch: FetchTiming | null = null;
 let currentChannelId: string | null = null;
@@ -89,14 +103,7 @@ const FetchTimeButton: ChatBarButtonFactory = ({ isMainChat }) => {
                 alignItems: "center",
                 gap: "4px"
             }}>
-                <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                >
-                    <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z" />
-                </svg>
+                <TimerIcon />
                 <span style={{
                     fontSize: "12px",
                     color: iconColor,
@@ -160,6 +167,7 @@ export default definePlugin({
     name: "MessageFetchTimer",
     description: "Shows how long it took to fetch messages for the current channel",
     authors: [PcDevs.GroupXyz],
+    dependencies: ["ChatInputButtonAPI"],
     settings,
 
     get displayDescription() {
@@ -187,5 +195,8 @@ export default definePlugin({
         currentChannelId = null;
     },
 
-    renderChatBarButton: FetchTimeButton,
+    chatBarButton: {
+        icon: TimerIcon,
+        render: FetchTimeButton
+    }
 });

@@ -24,30 +24,30 @@ export const cl = classNameFactory("pc-github-repos-");
 export const settings = definePluginSettings({
     showStars: {
         get label() {
-            return t("plugin.githubRepos.option.showStars.label");
+            return t("plugin.gitHubRepos.option.showStars.label");
         },
         get description() {
-            return t("plugin.githubRepos.option.showStars.description");
+            return t("plugin.gitHubRepos.option.showStars.description");
         },
         type: OptionType.BOOLEAN,
         default: true
     },
     showLanguage: {
         get label() {
-            return t("plugin.githubRepos.option.showLanguage.label");
+            return t("plugin.gitHubRepos.option.showLanguage.label");
         },
         get description() {
-            return t("plugin.githubRepos.option.showLanguage.description");
+            return t("plugin.gitHubRepos.option.showLanguage.description");
         },
         type: OptionType.BOOLEAN,
         default: true
     },
     showInMiniProfile: {
         get label() {
-            return t("plugin.githubRepos.option.showInMiniProfile.label");
+            return t("plugin.gitHubRepos.option.showInMiniProfile.label");
         },
         get description() {
-            return t("plugin.githubRepos.option.showInMiniProfile.description");
+            return t("plugin.gitHubRepos.option.showInMiniProfile.description");
         },
         type: OptionType.BOOLEAN,
         default: true
@@ -70,7 +70,7 @@ const ProfilePopoutComponent = ErrorBoundary.wrap(
     {
         noop: true,
         fallback: () => <BaseText size="xs" weight="semibold" className="pc-github-repos-error" style={{ color: "var(--text-danger)" }}>
-            {t("plugin.githubRepos.error.render")}
+            {t("plugin.gitHubRepos.error.render")}
         </BaseText>
     }
 );
@@ -82,7 +82,7 @@ export default definePlugin({
     settings,
 
     get displayDescription() {
-        return t("plugin.githubRepos.description");
+        return t("plugin.gitHubRepos.description");
     },
 
     patches: [

@@ -35,7 +35,7 @@ const STREAM = 1n << 9n;
 const VIDEO = 1 << 21;
 
 const settings = definePluginSettings({
-    UserAmountOperation: {
+    userAmountOperation: {
         get label() {
             return t("plugin.randomVoice.option.userAmountOperation.label");
         },
@@ -45,7 +45,7 @@ const settings = definePluginSettings({
         type: OptionType.SELECT,
         options: [...valueOperation],
     },
-    UserAmount: {
+    userAmount: {
         get label() {
             return t("plugin.randomVoice.option.userAmount.label");
         },
@@ -101,7 +101,7 @@ const settings = definePluginSettings({
         default: 5,
         stickToMarkers: true,
     },
-    Servers: {
+    servers: {
         get label() {
             return t("plugin.randomVoice.option.servers.label");
         },
@@ -346,9 +346,9 @@ function ContextMenu() {
 
     ServerList = Array.from(new Set(ServerList));
     const Servers = ServerList.map(server => GuildStore.getGuild(server)).filter(guild => guild && guild.id);
-    const [servers, setServers] = React.useState(settings.store.Servers);
-    const [SpacesLeftOperation, setSpacesLeftOperation] = React.useState(settings.store.spacesLeftOperation);
-    const [userAmount, setuserAmount] = React.useState(settings.store.UserAmountOperation);
+    const [servers, setServers] = React.useState(settings.store.servers);
+    const [spacesLeftOperation, setSpacesLeftOperation] = React.useState(settings.store.spacesLeftOperation);
+    const [userAmount, setuserAmount] = React.useState(settings.store.userAmountOperation);
     const [vcOperation, setVcOperation] = React.useState(settings.store.vcLimitOperation);
     const [navigate, setnavigate] = React.useState(settings.store.autoNavigate);
     const [stage, setStage] = React.useState(settings.store.avoidStages);
@@ -385,11 +385,11 @@ function ContextMenu() {
                                 label={server?.name ?? t("plugin.randomVoice.context.invalid.server")}
                                 checked={servers.includes(server?.id ?? t("plugin.randomVoice.context.invalid.server"))}
                                 action={() => {
-                                    if (settings.store.Servers.includes(server?.id ?? t("plugin.randomVoice.context.invalid.server")))
-                                        settings.store.Servers = settings.store.Servers.replace(`/${server.id}`, "");
+                                    if (settings.store.servers.includes(server?.id ?? t("plugin.randomVoice.context.invalid.server")))
+                                        settings.store.servers = settings.store.servers.replace(`/${server.id}`, "");
                                     else
-                                        settings.store.Servers += `/${server?.id ?? t("plugin.randomVoice.context.invalid.server")}`;
-                                    setServers(settings.store.Servers);
+                                        settings.store.servers += `/${server?.id ?? t("plugin.randomVoice.context.invalid.server")}`;
+                                    setServers(settings.store.servers);
                                 }} />
                         </>
                     ))}
@@ -399,8 +399,8 @@ function ContextMenu() {
                         label={t("plugin.randomVoice.context.select.list")}
                         action={() => {
                             const allServerIds = Servers.filter(server => server?.id).map(server => server.id);
-                            settings.store.Servers = `/${allServerIds.join("/")}`;
-                            setServers(settings.store.Servers);
+                            settings.store.servers = `/${allServerIds.join("/")}`;
+                            setServers(settings.store.servers);
                         }}
                         disabled={servers.length === Servers.filter(server => server?.id).length}
                         icon={() => {
@@ -420,7 +420,7 @@ function ContextMenu() {
                         label={t("plugin.randomVoice.context.reset.list")}
                         disabled={servers.length === 0}
                         action={() => {
-                            settings.store.Servers = "";
+                            settings.store.servers = "";
                             setServers("");
                         }}
                         icon={() => {
@@ -524,9 +524,9 @@ function ContextMenu() {
                             {...props}
                             minValue={1}
                             maxValue={15}
-                            value={settings.store.UserAmount}
+                            value={settings.store.userAmount}
                             onChange={debounce((value: number) => {
-                                settings.store.UserAmount = Number(value.toFixed(0));
+                                settings.store.userAmount = Number(value.toFixed(0));
                             }, 50)}
                             renderValue={(value: number) => t("plugin.randomVoice.context.select.userAmount", { amount: value.toFixed(0), s: Number(value.toFixed(0)) === 1 ? "" : "s" })} />
                     )} />
@@ -544,7 +544,7 @@ function ContextMenu() {
                             checked={userAmount === "<"}
                             action={() => {
                                 setuserAmount("<");
-                                settings.store.UserAmountOperation = "<";
+                                settings.store.userAmountOperation = "<";
                             }} />
                         <Menu.MenuRadioItem
                             key={"Less than"}
@@ -554,7 +554,7 @@ function ContextMenu() {
                             checked={userAmount === ">"}
                             action={() => {
                                 setuserAmount(">");
-                                settings.store.UserAmountOperation = ">";
+                                settings.store.userAmountOperation = ">";
                             }} />
                         <Menu.MenuRadioItem
                             key={"Equal to"}
@@ -564,7 +564,7 @@ function ContextMenu() {
                             checked={userAmount === "=="}
                             action={() => {
                                 setuserAmount("==");
-                                settings.store.UserAmountOperation = "==";
+                                settings.store.userAmountOperation = "==";
                             }} />
                     </>
                 </Menu.MenuItem>
@@ -603,7 +603,7 @@ function ContextMenu() {
                             group="maxGroup"
                             id={"More than"}
                             label={t("plugin.randomVoice.context.select.moreThan")}
-                            checked={SpacesLeftOperation === "<"}
+                            checked={spacesLeftOperation === "<"}
                             action={() => {
                                 setSpacesLeftOperation("<");
                                 settings.store.spacesLeftOperation = "<";
@@ -613,7 +613,7 @@ function ContextMenu() {
                             group="maxGroup"
                             id={"Less than"}
                             label={t("plugin.randomVoice.context.select.lessThan")}
-                            checked={SpacesLeftOperation === ">"}
+                            checked={spacesLeftOperation === ">"}
                             action={() => {
                                 setSpacesLeftOperation(">");
                                 settings.store.spacesLeftOperation = ">";
@@ -623,7 +623,7 @@ function ContextMenu() {
                             group="maxGroup"
                             id={"Equal to "}
                             label={t("plugin.randomVoice.context.select.equalTo")}
-                            checked={SpacesLeftOperation === "=="}
+                            checked={spacesLeftOperation === "=="}
                             action={() => {
                                 setSpacesLeftOperation("==");
                                 settings.store.spacesLeftOperation = "==";
@@ -798,7 +798,7 @@ function getChannels() {
         if (!channel) return;
         const channelVoiceStates = VoiceStateStore.getVoiceStatesForChannel(channelId);
 
-        if (!settings.store.Servers.split("/").includes(channel.getGuildId())) return;
+        if (!settings.store.servers.split("/").includes(channel.getGuildId())) return;
         if (settings.store.avoidStages && channel.isGuildStageVoice()) return;
         const operations = {
             ">": (a, b) => a < b,
@@ -812,7 +812,7 @@ function getChannels() {
         const spacesLeft = VcLimit - users;
 
         if (!operations[settings.store.spacesLeftOperation](spacesLeft, settings.store.spacesLeft)) return;
-        if (!operations[settings.store.UserAmountOperation](users, settings.store.UserAmount)) return;
+        if (!operations[settings.store.userAmountOperation](users, settings.store.userAmount)) return;
         if (!operations[settings.store.vcLimitOperation](VcLimit, settings.store.vcLimit)) return;
         if (Object.keys(channelVoiceStates).length === channel?.userLimit) return;
         if (Object.keys(channelVoiceStates).includes(UserStore.getCurrentUser().id)) return;

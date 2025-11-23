@@ -18,6 +18,7 @@
 */
 
 import * as DataStore from "@api/DataStore";
+import { t } from "@api/i18n";
 import { popNotice, showNotice } from "@api/Notices";
 import { showNotification } from "@api/Notifications";
 import { FluxStore } from "@plexcord/discord-types";
@@ -67,14 +68,14 @@ export async function syncAndRunChecks() {
         if (settings.store.groups && oldGroups?.size) {
             for (const [id, group] of oldGroups) {
                 if (!groups.has(id))
-                    notify(`You are no longer in the group ${group.name}.`, group.iconURL);
+                    notify(t("plugin.relationshipNotifier.notification.noLongerGroup", { group: group.name }), group.iconURL);
             }
         }
 
         if (settings.store.servers && oldGuilds?.size) {
             for (const [id, guild] of oldGuilds) {
                 if (!guilds.has(id) && !GuildAvailabilityStore.isUnavailable(id))
-                    notify(`You are no longer in the server ${guild.name}.`, guild.iconURL);
+                    notify(t("plugin.relationshipNotifier.notification.noLongerServer", { server: guild.name }), guild.iconURL);
             }
         }
 
@@ -85,7 +86,7 @@ export async function syncAndRunChecks() {
                 const user = await UserUtils.getUser(id).catch(() => void 0);
                 if (user)
                     notify(
-                        `You are no longer friends with ${getUniqueUsername(user)}.`,
+                        t("plugin.relationshipNotifier.notification.noLongerFriend", { user: getUniqueUsername(user) }),
                         user.getAvatarURL(undefined, undefined, false),
                         () => openUserProfile(user.id)
                     );
@@ -102,7 +103,7 @@ export async function syncAndRunChecks() {
                 const user = await UserUtils.getUser(id).catch(() => void 0);
                 if (user)
                     notify(
-                        `Friend request from ${getUniqueUsername(user)} has been revoked.`,
+                        t("plugin.relationshipNotifier.notification.friendRequestRevoked", { user: getUniqueUsername(user) }),
                         user.getAvatarURL(undefined, undefined, false),
                         () => openUserProfile(user.id)
                     );
@@ -113,7 +114,7 @@ export async function syncAndRunChecks() {
 
 export function notify(text: string, icon?: string, onClick?: () => void) {
     if (settings.store.notices)
-        showNotice(text, "OK", () => popNotice());
+        showNotice(text, t("plugin.relationshipNotifier.notification.ok"), () => popNotice());
 
     showNotification({
         title: "Relationship Notifier",

@@ -9,6 +9,7 @@ import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Paragraph } from "@components/Paragraph";
+import LoginWithQR from "@plugins/loginWithQR";
 import { PcDevs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
@@ -38,7 +39,7 @@ export default definePlugin({
             },
             type: OptionType.COMPONENT,
             component() {
-                if (!Plexcord.Plugins.plugins.LoginWithQR.started)
+                if (!LoginWithQR.started)
                     return (
                         <Paragraph>
                             {t("plugin.loginWithQR.option.scanQr.notEnabled")}

@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { MessageJSON } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
@@ -13,13 +14,23 @@ import { MessageStore, UserStore } from "@webpack/common";
 
 export const settings = definePluginSettings({
     alwaysPingOnReply: {
+        get label() {
+            return t("plugin.replyPingControl.option.alwaysPingOnReply.label");
+        },
+        get description() {
+            return t("plugin.replyPingControl.option.alwaysPingOnReply.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Always get pinged when someone replies to your messages",
         default: false,
     },
     replyPingWhitelist: {
+        get label() {
+            return t("plugin.replyPingControl.option.replyPingWhitelist.label");
+        },
+        get description() {
+            return t("plugin.replyPingControl.option.replyPingWhitelist.description");
+        },
         type: OptionType.STRING,
-        description: "Comma-separated list of User IDs to always receive reply pings from",
         default: "",
         disabled: () => settings.store.alwaysPingOnReply,
     }
@@ -30,6 +41,10 @@ export default definePlugin({
     description: "Control whether to always or never get pinged on message replies, with a whitelist feature",
     authors: [Devs.ant0n, PcDevs.MrDiamond, PcDevs.MutanPlex],
     settings,
+
+    get displayDescription() {
+        return t("plugin.replyPingControl.description");
+    },
 
     patches: [{
         find: "_channelMessages",

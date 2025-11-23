@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { OptionType } from "@utils/types";
@@ -27,38 +28,64 @@ import { cl } from "./utils";
 
 export const settings = definePluginSettings({
     authorize: {
+        get label() {
+            return t("plugin.reviewDB.option.authorize.label");
+        },
         type: OptionType.COMPONENT,
         component: () => (
             <Button onClick={() => authorize()}>
-                Authorize with ReviewDB
+                {t("plugin.reviewDB.option.authorize.button")}
             </Button>
         )
     },
     notifyReviews: {
+        get label() {
+            return t("plugin.reviewDB.option.notifyReviews.label");
+        },
+        get description() {
+            return t("plugin.reviewDB.option.notifyReviews.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Notify about new reviews on startup",
         default: true,
     },
     showWarning: {
+        get label() {
+            return t("plugin.reviewDB.option.showWarning.label");
+        },
+        get description() {
+            return t("plugin.reviewDB.option.showWarning.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Display warning to be respectful at the top of the reviews list",
         default: true,
     },
     hideTimestamps: {
+        get label() {
+            return t("plugin.reviewDB.option.hideTimestamps.label");
+        },
+        get description() {
+            return t("plugin.reviewDB.option.hideTimestamps.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Hide timestamps on reviews",
         default: false,
     },
     hideBlockedUsers: {
+        get label() {
+            return t("plugin.reviewDB.option.hideBlockedUsers.label");
+        },
+        get description() {
+            return t("plugin.reviewDB.option.hideBlockedUsers.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Hide reviews from blocked users",
         default: true,
     },
     buttons: {
+        get label() {
+            return t("plugin.reviewDB.option.buttons.label");
+        },
         type: OptionType.COMPONENT,
         component: () => (
             <div className={cl("button-grid")} >
-                <Button onClick={openBlockModal}>Manage Blocked Users</Button>
+                <Button onClick={openBlockModal}>{t("plugin.reviewDB.option.buttons.manageBlocked")}</Button>
 
                 <Button
                     variant="positive"
@@ -66,7 +93,7 @@ export const settings = definePluginSettings({
                         PlexcordNative.native.openExternal("https://github.com/sponsors/mantikafasi");
                     }}
                 >
-                    Support ReviewDB development
+                    {t("plugin.reviewDB.option.buttons.support")}
                 </Button>
 
                 <Button onClick={async () => {
@@ -77,14 +104,14 @@ export const settings = definePluginSettings({
 
                     PlexcordNative.native.openExternal(url);
                 }}>
-                    ReviewDB website
+                    {t("plugin.reviewDB.option.buttons.website")}
                 </Button>
 
 
                 <Button onClick={() => {
                     PlexcordNative.native.openExternal("https://discord.gg/eWPBSbvznt");
                 }}>
-                    ReviewDB Support Server
+                    {t("plugin.reviewDB.option.buttons.server")}
                 </Button>
             </div >
         )

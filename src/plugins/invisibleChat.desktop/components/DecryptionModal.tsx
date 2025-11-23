@@ -20,7 +20,7 @@
 import { t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
-import { decrypt } from "@plugins/invisibleChat.desktop/index";
+import invisibleChatDesktop, { decrypt } from "@plugins/invisibleChat.desktop/index";
 import {
     ModalContent,
     ModalFooter,
@@ -56,8 +56,7 @@ export function DecModal(props: any) {
                     onClick={() => {
                         const toSend = decrypt(encryptedMessage, password, true);
                         if (!toSend || !props?.message) return;
-                        // @ts-expect-error
-                        Plexcord.Plugins.plugins.InvisibleChat.buildEmbed(props?.message, toSend);
+                        invisibleChatDesktop.buildEmbed(props?.message, toSend);
                         props.onClose();
                     }}>
                     {t("plugin.invisibleChat.modal.decrypt.decrypt")}

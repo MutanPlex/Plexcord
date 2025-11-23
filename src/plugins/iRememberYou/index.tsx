@@ -15,6 +15,7 @@ import { Flex } from "@components/Flex";
 import { Heart } from "@components/Heart";
 import { BaseText, Margins, Paragraph } from "@components/index";
 import { Guild, User } from "@plexcord/discord-types";
+import settings from "@plugins/_core/settings";
 import { PcDevs } from "@utils/constants";
 import { openUserProfile } from "@utils/discord";
 import * as Modal from "@utils/modal";
@@ -402,7 +403,7 @@ export default definePlugin({
         data.storageAutoSaveProtocol();
 
         const customSettingsSections = (
-            Plexcord.Plugins.plugins.Settings as any as {
+            settings as any as {
                 customSections: ((ID: Record<string, unknown>) => any)[];
             }
         ).customSections;
@@ -410,12 +411,21 @@ export default definePlugin({
         customSettingsSections.push(_ => ({
             section: "irememberyou.display-data",
             label: "IRememberYou",
+            id: "IRememberYou",
             element: () => ui.toElement(data.usersCollection),
         }));
     },
 
     stop() {
         const dataManager = this.dataManager as Data;
+        const customSettingsSections = (
+            settings as any as {
+                customSections: ((ID: Record<string, unknown>) => any)[];
+            }
+        ).customSections;
+        const i = customSettingsSections.findIndex(s => s({}).id === "IRememberYou");
+        if (i !== -1) customSettingsSections.splice(i, 1);
+
 
         removeMessagePreSendListener(dataManager._onMessagePreSend_preSend);
         clearInterval(dataManager._storageAutoSaveProtocol_interval);

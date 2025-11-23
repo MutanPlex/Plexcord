@@ -293,3 +293,15 @@
 .pc-pm-modal-title {
     padding: 5px 0 20px;
 }
+
+.pc-plugins-stats-container {
+    margin-top: 16px;
+    gap: 16px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.pc-plugins-ui-elements {
+    margin-top: 16px;
+}

@@ -6,6 +6,7 @@
  */
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { PaintbrushIcon } from "@components/Icons";
 import { PcDevs } from "@utils/constants";
@@ -33,7 +34,7 @@ const UploadContextMenuPatch: NavContextMenuPatchCallback = (children, props) =>
         label={
             <div className={OptionClasses.optionLabel}>
                 <PaintbrushIcon className={OptionClasses.optionIcon} height={24} width={24} />
-                <div className={OptionClasses.optionName}>Remix</div>
+                <div className={OptionClasses.optionName}>{t("plugin.remix.label")}</div>
             </div>
         }
         action={() => {
@@ -57,7 +58,7 @@ const MessageContextMenuPatch: NavContextMenuPatchCallback = (children, props) =
 
     group.splice(index + 1, 0, <Menu.MenuItem
         id="pc-remix"
-        label="Remix"
+        label={t("plugin.remix.label")}
         icon={PaintbrushIcon}
         action={() => {
             const key = openModal(modalProps =>
@@ -78,9 +79,14 @@ export function sendRemix(blob: Blob) {
 }
 
 export default definePlugin({
-    name: "RemixRevived",
-    description: "Revives Remix and breings it to Desktop",
+    name: "Remix",
+    description: "Adds Remix to Desktop",
     authors: [PcDevs.MrDiamond, PcDevs.meowabyte],
+
+    get displayDescription() {
+        return t("plugin.remix.description");
+    },
+
     contextMenus: {
         "channel-attach": UploadContextMenuPatch,
         "message": MessageContextMenuPatch,

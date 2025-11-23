@@ -23,9 +23,10 @@ import { updateMessage } from "@api/MessageUpdater";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Message } from "@plexcord/discord-types";
+import InvisibleChatPlugin from "@plugins/invisibleChat.desktop";
 import { Devs } from "@utils/constants";
 import { getStegCloak } from "@utils/dependencies";
-import definePlugin, { OptionType, ReporterTestable } from "@utils/types";
+import definePlugin, { IconComponent, OptionType, ReporterTestable } from "@utils/types";
 import { ChannelStore, Constants, RestAPI, Tooltip } from "@webpack/common";
 
 import { buildDecModal } from "./components/DecryptionModal";
@@ -33,18 +34,19 @@ import { buildEncModal } from "./components/EncryptionModal";
 
 let steggo: any;
 
-function PopOverIcon() {
+const PopOverIcon: IconComponent = ({ height = 24, width = 24, className }) => {
     return (
-
         <svg
             fill="var(--header-secondary)"
-            width={24} height={24}
-            viewBox={"0 0 64 64"}
+            width={width}
+            height={height}
+            viewBox="0 0 64 64"
+            className={className}
         >
             <path d="M 32 9 C 24.832 9 19 14.832 19 22 L 19 27.347656 C 16.670659 28.171862 15 30.388126 15 33 L 15 49 C 15 52.314 17.686 55 21 55 L 43 55 C 46.314 55 49 52.314 49 49 L 49 33 C 49 30.388126 47.329341 28.171862 45 27.347656 L 45 22 C 45 14.832 39.168 9 32 9 z M 32 13 C 36.963 13 41 17.038 41 22 L 41 27 L 23 27 L 23 22 C 23 17.038 27.037 13 32 13 z" />
         </svg>
     );
-}
+};
 
 
 function Indicator() {
@@ -109,7 +111,7 @@ export default definePlugin({
     name: "InvisibleChat",
     description: "Encrypt your Messages in a non-suspicious way!",
     authors: [Devs.SammCheese],
-    dependencies: ["MessageUpdaterAPI"],
+    dependencies: ["MessageUpdaterAPI", "MessagePopoverAPI", "ChatInputButtonAPI"],
     reporterTestable: ReporterTestable.Patches,
     settings,
 
@@ -133,31 +135,39 @@ export default definePlugin({
     URL_REGEX: new RegExp(
         /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/,
     ),
+
     async start() {
         const { default: StegCloak } = await getStegCloak();
         steggo = new StegCloak(true, false);
     },
 
-    renderMessagePopoverButton(message) {
-        return this.INV_REGEX.test(message?.content)
-            ? {
-                label: t("plugin.invisibleChat.button.decrypt"),
-                icon: this.popOverIcon,
-                message: message,
-                channel: ChannelStore.getChannel(message.channel_id),
-                onClick: async () => {
-                    const res = await iteratePasswords(message);
+    messagePopoverButton: {
+        icon: PopOverIcon,
+        render(message) {
+            const plugin = InvisibleChatPlugin;
+            return plugin.INV_REGEX.test(message?.content)
+                ? {
+                    label: t("plugin.invisibleChat.button.decrypt"),
+                    icon: PopOverIcon,
+                    message,
+                    channel: ChannelStore.getChannel(message.channel_id),
+                    onClick: async () => {
+                        const res = await iteratePasswords(message);
 
-                    if (res)
-                        this.buildEmbed(message, res);
-                    else
-                        buildDecModal({ message });
+                        if (res)
+                            plugin.buildEmbed(message, res);
+                        else
+                            buildDecModal({ message });
+                    }
                 }
-            }
-            : null;
+                : null;
+        }
     },
 
-    renderChatBarButton: ChatBarIcon,
+    chatBarButton: {
+        icon: PopOverIcon,
+        render: ChatBarIcon
+    },
 
     colorCodeFromNumber(color: number): string {
         return `#${[color >> 16, color >> 8, color]
@@ -200,7 +210,6 @@ export default definePlugin({
         updateMessage(message.channel_id, message.id, { embeds: message.embeds });
     },
 
-    popOverIcon: () => <PopOverIcon />,
     indicator: ErrorBoundary.wrap(Indicator, { noop: true })
 });
 

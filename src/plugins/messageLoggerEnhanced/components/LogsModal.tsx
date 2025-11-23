@@ -435,13 +435,13 @@ function LMessage({ log, isGroupStart, reset, }: LMessageProps) {
                     />
                 }
             />
-            {settings.store.ShowWhereMessageIsFrom && channel?.isDM() && message?.author && (
+            {settings.store.showWhereMessageIsFrom && channel?.isDM() && message?.author && (
                 <span className={`${cl("from")} ${message.deleted ? cl("from-deleted") : cl("from-edited")}`}>{t("plugin.messageLoggerEnhanced.context.fromUsernameDm", { username: message.author.username })}</span>
             )}
-            {settings.store.ShowWhereMessageIsFrom && channel?.isGroupDM() && channel?.name && (
+            {settings.store.showWhereMessageIsFrom && channel?.isGroupDM() && channel?.name && (
                 <span className={`${cl("from")} ${message.deleted ? cl("from-deleted") : cl("from-edited")}`}>{t("plugin.messageLoggerEnhanced.context.fromGroupDm", { channelName: channel.name })}</span>
             )}
-            {settings.store.ShowWhereMessageIsFrom && !channel?.isDM() && !channel?.isGroupDM() && channel?.name && guild?.name && (
+            {settings.store.showWhereMessageIsFrom && !channel?.isDM() && !channel?.isGroupDM() && channel?.name && guild?.name && (
                 <span className={`${cl("from")} ${message.deleted ? cl("from-deleted") : cl("from-edited")}`}>{t("plugin.messageLoggerEnhanced.context.fromServerChannel", { channelName: channel.name, serverName: guild.name })}</span>
             )}
         </div>

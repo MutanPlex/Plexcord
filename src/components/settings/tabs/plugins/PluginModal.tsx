@@ -73,7 +73,7 @@ export function makeDummyUser(user: { username: string; id?: string; avatar?: st
 
 export default function PluginModal({ plugin, onRestartNeeded, onClose, transitionState }: PluginModalProps) {
 
-    const pluginSettings = useSettings().plugins[plugin.name];
+    const pluginSettings = useSettings([`plugins.${plugin.name}.*`]).plugins[plugin.name];
     useForceUpdateOnLocaleChange();
 
     const displayName = (plugin as any).displayName || plugin.name;

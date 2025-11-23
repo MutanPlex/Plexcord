@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Toasts } from "@webpack/common";
 
 import { Auth, authorize, getToken, updateAuth } from "./auth";
@@ -61,7 +62,7 @@ export async function getReviews(id: string, offset = 0): Promise<Response> {
     const res = (req.ok)
         ? await req.json() as Response
         : {
-            message: req.status === 429 ? "You are sending requests too fast. Wait a few seconds and try again." : "An Error occured while fetching reviews. Please try again later.",
+            message: req.status === 429 ? t("plugin.reviewDB.notification.error.fast") : t("plugin.reviewDB.notification.error.fetching"),
             reviews: [],
             updated: false,
             hasNextPage: false,
@@ -98,7 +99,7 @@ export async function addReview(review: any): Promise<Response | null> {
 
     const token = await getToken();
     if (!token) {
-        showToast("Please authorize to add a review.");
+        showToast(t("plugin.reviewDB.notification.auth.required"));
         authorize();
         return null;
     }
@@ -162,9 +163,9 @@ async function patchBlock(action: "block" | "unblock", userId: string) {
     });
 
     if (!res.ok) {
-        showToast(`Failed to ${action} user`, Toasts.Type.FAILURE);
+        showToast(t("plugin.reviewDB.notification.action.failed", { action }), Toasts.Type.FAILURE);
     } else {
-        showToast(`Successfully ${action}ed user`, Toasts.Type.SUCCESS);
+        showToast(t("plugin.reviewDB.notification.action.success", { action }), Toasts.Type.SUCCESS);
 
         if (Auth?.user?.blockedUsers) {
             const newBlockedUsers = action === "block"

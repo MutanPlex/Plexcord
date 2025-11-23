@@ -18,12 +18,11 @@
 */
 
 import { t } from "@api/i18n";
-import { addMessagePopoverButton, removeMessagePopoverButton } from "@api/MessagePopover";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
-import definePlugin, { OptionType } from "@utils/types";
+import definePlugin, { IconComponent, OptionType } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
 import { ChannelStore, createRoot, MessageStore, Toasts } from "@webpack/common";
 import { Root } from "react-dom/client";
@@ -33,11 +32,20 @@ import styles from "./styles.css?managed";
 
 
 export const jumper: any = findByPropsLazy("jumpToMessage");
-const FindReplyIcon = () => {
-    return <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" width="18" height="18">
-        <path
-            d="M 7 3 L 7 11 C 7 11 7 12 6 12 L 5 12 C 4 12 4 12 4.983 13.115 L 8.164 17.036 C 9 18 9 18 9.844 17.018 L 12.991 13.277 C 14 12 14 12 13.006 11.985 L 12 12 C 12 12 11 12 11 11 L 11 3 C 11 2 11 2 10 2 L 8 2 C 7 2 7 2 7 3" />
-    </svg>;
+
+const FindReplyIcon: IconComponent = ({ height = 18, width = 18, className }) => {
+    return (
+        <svg
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+            width={width}
+            height={height}
+            className={className}
+        >
+            <path d="M 7 3 L 7 11 C 7 11 7 12 6 12 L 5 12 C 4 12 4 12 4.983 13.115 L 8.164 17.036 C 9 18 9 18 9.844 17.018 L 12.991 13.277 C 14 12 14 12 13.006 11.985 L 12 12 C 12 12 11 12 11 11 L 11 3 C 11 2 11 2 10 2 L 8 2 C 7 2 7 2 7 3" />
+        </svg>
+    );
 };
 let root: Root | null = null;
 let element: HTMLDivElement | null = null;
@@ -109,6 +117,7 @@ export default definePlugin({
     name: "FindReply",
     description: "Jumps to the earliest reply to a message in a channel (lets you follow past conversations more easily).",
     authors: [Devs.newwares],
+    dependencies: ["MessagePopoverAPI"],
     settings,
 
     get displayDescription() {
@@ -117,10 +126,21 @@ export default definePlugin({
 
     start() {
         enableStyle(styles);
-        addMessagePopoverButton("pc-findreply", message => {
+    },
+
+    stop() {
+        root && root.unmount();
+        element?.remove();
+        disableStyle(styles);
+    },
+
+    messagePopoverButton: {
+        icon: FindReplyIcon,
+        render(message) {
             if (!message.id) return null;
             const replies = findReplies(message);
             if (settings.store.hideButtonIfNoReply && !replies.length) return null;
+
             return {
                 label: t("plugin.findReply.context.jump"),
                 icon: FindReplyIcon,
@@ -168,12 +188,6 @@ export default definePlugin({
                     }
                 }
             };
-        });
-    },
-    stop() {
-        removeMessagePopoverButton("pc-findreply");
-        root && root.unmount();
-        element?.remove();
-        disableStyle(styles);
-    },
+        }
+    }
 });

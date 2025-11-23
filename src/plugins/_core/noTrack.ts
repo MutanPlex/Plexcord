@@ -27,11 +27,11 @@ import definePlugin, { OptionType, StartAt } from "@utils/types";
 const settings = definePluginSettings({
     disableAnalytics: {
         get label() {
-            return t("plugins.metadata.noTrack.option.disableAnalytics.label");
+            return t("plugin.noTrack.option.disableAnalytics.label");
         },
         type: OptionType.BOOLEAN,
         get description() {
-            return t("plugins.metadata.noTrack.option.disableAnalytics.description");
+            return t("plugin.noTrack.option.disableAnalytics.description");
         },
         default: true,
         restartNeeded: true
@@ -46,11 +46,11 @@ export default definePlugin({
     settings,
 
     get displayName() {
-        return t("plugins.metadata.noTrack.name");
+        return t("plugin.noTrack.name");
     },
 
     get displayDescription() {
-        return t("plugins.metadata.noTrack.description");
+        return t("plugin.noTrack.description");
     },
 
     patches: [

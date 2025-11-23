@@ -6,6 +6,7 @@
  */
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Flex } from "@components/Flex";
 import { Devs } from "@utils/constants";
@@ -26,12 +27,22 @@ const DefaultEngines = {
 
 const settings = definePluginSettings({
     customEngineName: {
-        description: "Name of the custom search engine",
+        get label() {
+            return t("plugin.replaceGoogleSearch.option.customEngineName.label");
+        },
+        get description() {
+            return t("plugin.replaceGoogleSearch.option.customEngineName.description");
+        },
         type: OptionType.STRING,
         placeholder: "Google"
     },
     customEngineURL: {
-        description: "The URL of your Engine",
+        get label() {
+            return t("plugin.replaceGoogleSearch.option.customEngineURL.label");
+        },
+        get description() {
+            return t("plugin.replaceGoogleSearch.option.customEngineURL.description");
+        },
         type: OptionType.STRING,
         placeholder: "https://google.com/search?q="
     }
@@ -52,7 +63,7 @@ function makeSearchItem(src: string) {
 
     return (
         <Menu.MenuItem
-            label="Search Text"
+            label={t("plugin.replaceGoogleSearch.context.label")}
             key="search-text"
             id="pc-search-text"
         >

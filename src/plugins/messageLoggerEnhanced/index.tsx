@@ -13,7 +13,7 @@ import { t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Devs, PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
-import definePlugin from "@utils/types";
+import definePlugin, { IconComponent } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
 import { FluxDispatcher, MessageStore, React, Tooltip, UserStore } from "@webpack/common";
 
@@ -40,16 +40,17 @@ const cacheThing = findByPropsLazy("commit", "getOrCreate");
 
 let oldGetMessage: typeof MessageStore.getMessage;
 
-function OpenLogsIcon() {
+const OpenLogsIcon: IconComponent = ({ height = 24, width = 24, className }) => {
     return (
         <svg
             stroke="currentColor"
             fill="none"
             strokeWidth="0"
             viewBox="0 0 15 15"
-            height={24}
-            width={24}
+            height={height}
+            width={width}
             xmlns="http://www.w3.org/2000/svg"
+            className={className}
         >
             <path
                 fillRule="evenodd"
@@ -60,7 +61,7 @@ function OpenLogsIcon() {
             </path>
         </svg>
     );
-}
+};
 
 const handledMessageIds = new Set();
 async function messageDeleteHandler(payload: MessageDeletePayload & { isBulk: boolean; }) {

@@ -304,16 +304,6 @@
                     }
                 }
             },
-            "noTrack": {
-                "name": "NoTrack",
-                "description": "Disable Discord's tracking (analytics/'science'), metrics and Sentry crash reporting",
-                "option": {
-                    "disableAnalytics": {
-                        "label": "Disable Analytics",
-                        "description": "Disable Discord's tracking (analytics/'science'), metrics and Sentry crash reporting"
-                    }
-                }
-            },
             "supportHelper": {
                 "name": "Support Helper",
                 "description": "Helps us provide support to you",
@@ -375,6 +365,20 @@
                 },
                 "dm": {
                     "warning": "Please do not private message Plexcord plugin developers for support!{{br}}Instead, you can join the {{support}} server and use the Plexcord support channel: {{channel}}"
+                }
+            }
+        },
+        "uiElements": {
+            "manage": "Manage UI Elements",
+            "allows": "Allows you to hide buttons you don't like",
+            "section": {
+                "chatbar": {
+                    "title": "Chatbar Buttons",
+                    "description": "These are the buttons on the right side of the chat input bar"
+                },
+                "messagePopover": {
+                    "title": "Message Popover Buttons",
+                    "description": "These are the floating buttons on the right when you hover over a message"
                 }
             }
         }
@@ -760,11 +764,21 @@
         }
     },
     "plugin": {
+        "noTrack": {
+            "name": "NoTrack",
+            "description": "Disable Discord's tracking (analytics/'science'), metrics and Sentry crash reporting",
+            "option": {
+                "disableAnalytics": {
+                    "label": "Disable Analytics",
+                    "description": "Disable Discord's tracking (analytics/'science'), metrics and Sentry crash reporting"
+                }
+            }
+        },
         "accountPanelServerProfile": {
             "name": "AccountPanelServerProfile",
             "description": "Right click your account panel in the bottom left to view your profile in the current server",
             "option": {
-                "prioritize": {
+                "prioritizeServerProfile": {
                     "label": "Prioritize Server Profile",
                     "description": "Prioritize Server Profile when left clicking your account panel"
                 }
@@ -1013,7 +1027,7 @@
             "name": "AtSomeone",
             "description": "With @someone you can mention someone randomly"
         },
-        "autoDndWhilePlaying": {
+        "autoDNDWhilePlaying": {
             "name": "AutoDndWhilePlaying",
             "description": "Automatically updates your online status (online, idle, dnd) when launching games",
             "option": {
@@ -3472,10 +3486,16 @@
                 "oldIcon": {
                     "label": "Old Icon",
                     "description": "Use the old icon style before Discord icon redesign"
+                },
+                "location": {
+                    "label": "Location",
+                    "description": "Where to show the game activity toggle button",
+                    "panel": "Next to Mute/Deafen",
+                    "toolbox": "Plexcord Toolbox"
                 }
             }
         },
-        "gifCollection": {
+        "gifCollections": {
             "name": "GifCollection",
             "description": "Allows you to create collections of gifs",
             "context": {
@@ -3616,7 +3636,7 @@
             "name": "GifPaste",
             "description": "Allows you to paste gifs directly into the chatbox"
         },
-        "githubRepos": {
+        "gitHubRepos": {
             "name": "GitHubRepos",
             "description": "Displays a user's public GitHub repositories in their profile",
             "loading": "Loading repositories...",
@@ -5869,7 +5889,15 @@
             "context": {
                 "openLog": "Open Notification Log",
                 "enableQuickCSS": "Enable QuickCSS",
-                "openQuickCSS": "Open QuickCSS"
+                "openQuickCSS": "Edit QuickCSS",
+                "openSettings": "Open Settings",
+                "manageThemes": "Manage Themes"
+            },
+            "option": {
+                "showPluginMenu": {
+                    "label": "Show Plugin Menu",
+                    "description": "Show the plugin menu in the Plexcord Toolbox"
+                }
             }
         },
         "previewMessage": {
@@ -6470,6 +6498,184 @@
             "name": "ReadAllNotificationsButton",
             "description": "Read all server notifications with a single button click!",
             "button": "Read All"
+        },
+        "relationshipNotifier": {
+            "name": "RelationshipNotifier",
+            "description": "Notifies you when a friend, group chat, or server removes you.",
+            "option": {
+                "notices": {
+                    "label": "Notices",
+                    "description": "Also show a notice at the top of your screen when removed (use this if you don't want to miss any notifications)."
+                },
+                "offlineRemovals": {
+                    "label": "Offline Removals",
+                    "description": "Notify you when starting discord if you were removed while offline."
+                },
+                "friends": {
+                    "label": "Friends",
+                    "description": "Notify when a friend removes you"
+                },
+                "friendRequestCancels": {
+                    "label": "Friend Request Cancels",
+                    "description": "Notify when a friend request is cancelled"
+                },
+                "servers": {
+                    "label": "Servers",
+                    "description": "Notify when removed from a server"
+                },
+                "groups": {
+                    "label": "Groups",
+                    "description": "Notify when removed from a group chat"
+                }
+            },
+            "notification": {
+                "removedFriend": "{{user}} removed you as a friend.",
+                "cancelledFriendRequest": "A friend request from {{user}} has been removed.",
+                "removedFromServer": "You have been removed from the server {{server}}.",
+                "removedFromGroup": "You were removed from the group {{group}}.",
+                "noLongerGroup": "You are no longer in the group {{group}}.",
+                "noLongerServer": "You are no longer in the server {{server}}.",
+                "noLongerFriend": "You are no longer friends with {{user}}.",
+                "friendRequestRevoked": "Friend request from {{user}} has been revoked.",
+                "ok": "OK"
+            }
+        },
+        "remix": {
+            "name": "Remix",
+            "description": "Adds Remix to Desktop.",
+            "label": "Remix",
+            "button": {
+                "send": "Send",
+                "close": "Close",
+                "brush": "Brush",
+                "erase": "Erase",
+                "crop": "Crop",
+                "shape": "Shape",
+                "reset": "Reset",
+                "clear": "Clear"
+            },
+            "editor": {
+                "choose": "Choose an Image",
+                "browse": "Browse",
+                "rectangle": "Rectangle",
+                "ellipse": "Ellipse",
+                "line": "Line",
+                "arrow": "Arrow",
+                "fill": "Fill"
+            }
+        },
+        "repeatMessages": {
+            "name": "RepeatMessages",
+            "description": "Allows you to repeat messages quickly. If you hold shift while clicking the Repeat option, it will reply to the message.",
+            "button": "Repeat (Click) / Repeat and Reply (Shift + Click)",
+            "context": {
+                "repeat": "Repeat",
+                "repeatAndReply": "Repeat and Reply"
+            }
+        },
+        "replaceGoogleSearch": {
+            "name": "ReplaceGoogleSearch",
+            "description": "Replaces the Google search with different Engines.",
+            "option": {
+                "customEngineName": {
+                    "label": "Custom Engine Name",
+                    "description": "Name of the custom search engine"
+                },
+                "customEngineURL": {
+                    "label": "Custom Engine URL",
+                    "description": "The URL of your Engine"
+                }
+            },
+            "context": {
+                "label": "Search Text"
+            }
+        },
+        "replyPingControl": {
+            "name": "ReplyPingControl",
+            "description": "Control whether to always or never get pinged on message replies, with a whitelist feature",
+            "option": {
+                "alwaysPingOnReply": {
+                    "label": "Always Ping On Reply",
+                    "description": "Always get pinged when someone replies to your messages"
+                },
+                "replyPingWhitelist": {
+                    "label": "Reply Ping Whitelist",
+                    "description": "Comma-separated list of User IDs to always receive reply pings from"
+                }
+            }
+        },
+        "replyTimestamp": {
+            "name": "ReplyTimestamp",
+            "description": "Shows a timestamp on replied-message previews"
+        },
+        "revealAllSpoilers": {
+            "name": "RevealAllSpoilers",
+            "description": "Reveal all spoilers in a message by Ctrl-clicking a spoiler, or in the chat with Ctrl+Shift-click"
+        },
+        "reverseImageSearch": {
+            "name": "ReverseImageSearch",
+            "description": "Adds ImageSearch to image context menus",
+            "context": {
+                "label": "Search Image",
+                "all": "Search All"
+            }
+        },
+        "reviewDB": {
+            "name": "ReviewDB",
+            "description": "Review other users (Adds a new settings to profiles)",
+            "notification": {
+                "newReview": "You have new reviews on your profile!",
+                "auth": {
+                    "error": "An error occured while authorizing",
+                    "successfully": "Successfully logged in!",
+                    "failed": "Failed to authorize",
+                    "review": "Please authorize to add a review."
+                },
+                "error": {
+                    "fast": "You are sending requests too fast. Wait a few seconds and try again.",
+                    "fetching": "An error occured while fetching reviews.",
+                    "action": {
+                        "failed": "Failed to {{action}} user",
+                        "success": "Successfully {{action}}ed user"
+                    }
+                }
+            },
+            "button": {
+                "appeal": "Appeal",
+                "ok": "OK"
+            },
+            "context": {
+                "view": "View Reviews"
+            },
+            "option": {
+                "authorize": {
+                    "label": "Authorize",
+                    "button": "Authorize with ReviewDB"
+                },
+                "notifyReviews": {
+                    "label": "Notify Reviews",
+                    "description": "Notify about new reviews on startup"
+                },
+                "showWarning": {
+                    "label": "Show Warning",
+                    "description": "Display warning to be respectful at the top of the reviews list"
+                },
+                "hideTimestamps": {
+                    "label": "Hide Timestamps",
+                    "description": "Hide timestamps on reviews"
+                },
+                "hideBlockedUsers": {
+                    "label": "Hide Blocked Users",
+                    "description": "Hide reviews from blocked users"
+                },
+                "buttons": {
+                    "label": "Buttons",
+                    "manageBlocked": "Manage Blocked Users",
+                    "support": "Support ReviewDB development",
+                    "website": "ReviewDB website",
+                    "server": "ReviewDB Support server"
+                }
+            }
         },
         "uselessInfo": {
             "name": "UselessInfo",

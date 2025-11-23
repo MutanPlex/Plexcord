@@ -19,8 +19,6 @@
 
 import "./style.css";
 
-import { addMessageAccessory } from "@api/MessageAccessories";
-import { addMessagePopoverButton } from "@api/MessagePopover";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -57,9 +55,13 @@ export default definePlugin({
     name: "UnitConverter",
     description: "Converts metric units to Imperal units and vice versa",
     authors: [Devs.sadan],
-    start() {
-        addMessageAccessory("pc-converter", props => <ConverterAccessory message={props.message} />);
-        addMessagePopoverButton("pc-converter", message => {
+    dependencies: ["MessagePopoverAPI"],
+
+    renderMessageAccessory: props => <ConverterAccessory message={props.message} />,
+
+    messagePopoverButton: {
+        icon: ConvertIcon,
+        render(message) {
             if (!message.content) return null;
             return {
                 label: "Convert Units",
@@ -72,7 +74,8 @@ export default definePlugin({
                     setConversion(convert(message.content));
                 }
             };
-        });
+        }
     },
+
     settings,
 });

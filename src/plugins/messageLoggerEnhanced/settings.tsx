@@ -172,7 +172,7 @@ export const settings = definePluginSettings({
         type: OptionType.BOOLEAN
     },
 
-    ShowLogsButton: {
+    showLogsButton: {
         get label() {
             return t("plugin.messageLoggerEnhanced.option.showLogsButton.label");
         },
@@ -184,7 +184,7 @@ export const settings = definePluginSettings({
         restartNeeded: true,
     },
 
-    ShowWhereMessageIsFrom: {
+    showWhereMessageIsFrom: {
         get label() {
             return t("plugin.messageLoggerEnhanced.option.showWhereMessageIsFrom.label");
         },

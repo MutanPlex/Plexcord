@@ -188,7 +188,6 @@ const settings = definePluginSettings({
         default: true,
         onChange: reloadBadges,
     },
-
     textBadgeLabel: {
         get label() {
             return t("plugin.channelBadges.option.textBadgeLabel.label");

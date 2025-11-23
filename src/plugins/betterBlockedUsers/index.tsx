@@ -89,7 +89,7 @@ export default definePlugin({
     },
     getFilteredUsers(search: string) {
         search = search.toLowerCase();
-        return (RelationshipStore as any).getBlockedIDs().filter(id => {
+        return (RelationshipStore).getBlockedIDs().filter(id => {
             const user = UserStore.getUser(id) as any;
             if (!user) return id === search;
             return id === search || user?.username?.toLowerCase()?.includes(search) || user?.globalName?.toLowerCase()?.includes(search);

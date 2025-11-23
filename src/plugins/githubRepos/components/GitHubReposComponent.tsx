@@ -91,10 +91,10 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
     }, [id]);
 
     if (loading) return <BaseText size="xs" weight="semibold" className={cl("loading")}>
-        {t("plugin.githubRepos.loading")}</BaseText>;
+        {t("plugin.gitHubRepos.loading")}</BaseText>;
 
     if (error) return <BaseText size="xs" weight="semibold" className={cl("error")}>
-        {t("plugin.githubRepos.error.error")}: {error}</BaseText>;
+        {t("plugin.gitHubRepos.error.error")}: {error}</BaseText>;
 
     if (!repos.length) return null;
 
@@ -106,7 +106,7 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
                 variant="secondary"
                 onClick={openReposModal}
             >
-                {t("plugin.githubRepos.button.show")}
+                {t("plugin.gitHubRepos.button.show")}
             </Button>
         );
     }
@@ -116,10 +116,10 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
     return (
         <div className={cl("container")}>
             <BaseText size="xs" weight="semibold" className={cl("header")}>
-                {t("plugin.githubRepos.button.repositories")}
+                {t("plugin.gitHubRepos.button.repositories")}
                 {userInfo && (
                     <span className={cl("count")}>
-                        {` ${t("plugin.githubRepos.button.only", { length: topRepos.length, total: userInfo.totalRepos })}`}
+                        {` ${t("plugin.gitHubRepos.button.only", { length: topRepos.length, total: userInfo.totalRepos })}`}
                     </span>
                 )}
             </BaseText>
@@ -139,7 +139,7 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
                     color="secondary"
                     onClick={openReposModal}
                 >
-                    {t("plugin.githubRepos.button.more")}
+                    {t("plugin.gitHubRepos.button.more")}
                 </TextButton>
             </div>
         </div>

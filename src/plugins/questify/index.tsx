@@ -11,6 +11,7 @@ import { t } from "@api/i18n";
 import { addServerListElement, removeServerListElement, ServerListRenderPosition } from "@api/ServerList";
 import { ErrorBoundary } from "@components/index";
 import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
+import Questify from "@plugins/questify";
 import { PcDevs } from "@utils/constants";
 import { getIntlMessage } from "@utils/index";
 import definePlugin, { StartAt } from "@utils/types";
@@ -87,7 +88,7 @@ export function QuestButton(): JSX.Element {
         if (todo === "open-quests") {
             NavigationRouter.transitionTo(questPath);
         } else if (todo === "plugin-settings") {
-            openPluginModal(Plexcord.Plugins.plugins.Questify);
+            openPluginModal(Questify);
         } else if (todo === "context-menu") {
             ContextMenuApi.openContextMenu(event, () => (
                 <Menu.Menu

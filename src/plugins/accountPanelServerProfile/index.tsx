@@ -58,10 +58,10 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: false,
         get label() {
-            return t("plugin.accountPanelServerProfile.option.prioritize.label");
+            return t("plugin.accountPanelServerProfile.option.prioritizeServerProfile.label");
         },
         get description() {
-            return t("plugin.accountPanelServerProfile.option.prioritize.description");
+            return t("plugin.accountPanelServerProfile.option.prioritizeServerProfile.description");
         }
     }
 });

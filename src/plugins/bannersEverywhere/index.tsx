@@ -157,8 +157,8 @@ export default definePlugin({
     },
 
     getBanner(userId: string): string | undefined {
-        if (isPluginEnabled(USRBGPlugin.name) && (Plexcord.Plugins.plugins.USRBG as iUSRBG).userHasBackground(userId)) {
-            let banner = (Plexcord.Plugins.plugins.USRBG as iUSRBG).getImageUrl(userId);
+        if (isPluginEnabled(USRBGPlugin.name) && USRBGPlugin.userHasBackground(userId)) {
+            let banner = USRBGPlugin.getImageUrl(userId);
             if (banner === null) banner = "";
             return banner;
         }

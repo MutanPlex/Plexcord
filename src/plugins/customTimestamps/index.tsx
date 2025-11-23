@@ -14,6 +14,7 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
+import CustomTimestampsPlugin from "@plugins/customTimestamps";
 import { Devs, PcDevs } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import { useForceUpdater } from "@utils/react";
@@ -205,7 +206,7 @@ const DemoMessage = (props: { msgId, compact, message, date: Date | undefined, i
     ) : <div className="pc-cmt-demo-message">
         <Paragraph>
             {/* @ts-ignore */}
-            <b>{t("plugin.customTimestamps.modal.preview")}:</b> {Plexcord.Plugins.plugins.CustomTimestamps.renderTimestamp(date, "cozy")}
+            <b>{t("plugin.customTimestamps.modal.preview")}:</b> {CustomTimestampsPlugin.renderTimestamp(date, "cozy")}
         </Paragraph>
     </div>;
 };

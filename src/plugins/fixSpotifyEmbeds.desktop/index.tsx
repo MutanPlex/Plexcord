@@ -10,6 +10,21 @@ import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 
+
+const settings = definePluginSettings({
+    volume: {
+        get label() {
+            return t("plugin.fixSpotifyEmbeds.option.volume.label");
+        },
+        get description() {
+            return t("plugin.fixSpotifyEmbeds.option.volume.description");
+        },
+        type: OptionType.SLIDER,
+        markers: makeRange(0, 100, 10),
+        stickToMarkers: false,
+        default: 10
+    }
+});
 // The entire code of this plugin can be found in ipcPlugins
 export default definePlugin({
     name: "FixSpotifyEmbeds",
@@ -20,18 +35,5 @@ export default definePlugin({
         return t("plugin.fixSpotifyEmbeds.description");
     },
 
-    settings: definePluginSettings({
-        volume: {
-            get label() {
-                return t("plugin.fixSpotifyEmbeds.option.volume.label");
-            },
-            get description() {
-                return t("plugin.fixSpotifyEmbeds.option.volume.description");
-            },
-            type: OptionType.SLIDER,
-            markers: makeRange(0, 100, 10),
-            stickToMarkers: false,
-            default: 10
-        }
-    })
+    settings
 });

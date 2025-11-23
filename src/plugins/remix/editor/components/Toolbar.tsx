@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Paragraph } from "@components/Paragraph";
 import { Switch } from "@components/settings";
@@ -94,10 +95,10 @@ export const Toolbar = () => {
     return (
         <div className="pc-remix-toolbar">
             <div className="pc-remix-tools">
-                <Button className={(tool === "brush" ? "tool-active" : "")} onClick={() => changeTool("brush")}>Brush</Button>
-                <Button className={(tool === "erase" ? "tool-active" : "")} onClick={() => changeTool("erase")}>Erase</Button>
-                <Button className={(tool === "crop" ? "tool-active" : "")} onClick={() => changeTool("crop")}>Crop</Button>
-                <Button className={(tool === "shape" ? "tool-active" : "")} onClick={() => changeTool("shape")}>Shape</Button>
+                <Button className={(tool === "brush" ? "tool-active" : "")} onClick={() => changeTool("brush")}>{t("plugin.remix.button.brush")}</Button>
+                <Button className={(tool === "erase" ? "tool-active" : "")} onClick={() => changeTool("erase")}>{t("plugin.remix.button.erase")}</Button>
+                <Button className={(tool === "crop" ? "tool-active" : "")} onClick={() => changeTool("crop")}>{t("plugin.remix.button.crop")}</Button>
+                <Button className={(tool === "shape" ? "tool-active" : "")} onClick={() => changeTool("shape")}>{t("plugin.remix.button.shape")}</Button>
             </div>
             <div className="pc-remix-settings">
                 <div className="pc-remix-setting-section">
@@ -116,7 +117,7 @@ export const Toolbar = () => {
                         />
                     }
                 </div>
-                {(tool === "crop") && <Button onClick={resetBounds}>Reset</Button>}
+                {(tool === "crop") && <Button onClick={resetBounds}>{t("plugin.remix.button.reset")}</Button>}
                 <div className="pc-remix-setting-section">
                     {(tool === "shape") && (<>
                         <Select
@@ -125,19 +126,19 @@ export const Toolbar = () => {
                             serialize={v => String(v)}
                             placeholder="Shape"
                             options={
-                                ["Rectangle", "Ellipse", "Line", "Arrow"].map(v => ({
+                                [t("plugin.remix.editor.rectangle"), t("plugin.remix.editor.ellipse"), t("plugin.remix.editor.line"), t("plugin.remix.editor.arrow")].map(v => ({
                                     label: v,
                                     value: v.toLowerCase() as Shape,
                                 }))
                             }
                         />
 
-                        <Paragraph className="pc-remix-setting-switch">Fill <Switch checked={fill} onChange={setFill} /></Paragraph>
+                        <Paragraph className="pc-remix-setting-switch">{t("plugin.remix.editor.fill")} <Switch checked={fill} onChange={setFill} /></Paragraph>
                     </>)}
                 </div>
             </div>
             <div className="pc-remix-misc">
-                <Button onClick={clear}>Clear</Button>
+                <Button onClick={clear}>{t("plugin.remix.button.clear")}</Button>
             </div>
         </div>
     );

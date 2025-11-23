@@ -17,18 +17,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import type { ProfileBadge } from "@api/Badges";
-import type { ChatBarButtonFactory } from "@api/ChatButtons";
-import type { NavContextMenuPatchCallback } from "@api/ContextMenu";
-import type { MemberListDecoratorFactory } from "@api/MemberListDecorators";
-import type { MessageAccessoryFactory } from "@api/MessageAccessories";
-import type { MessageDecorationFactory } from "@api/MessageDecorations";
-import type { MessageClickListener, MessageEditListener, MessageSendListener } from "@api/MessageEvents";
-import type { MessagePopoverButtonFactory } from "@api/MessagePopover";
-import type { NicknameIconFactory } from "@api/NicknameIcons";
-import type { Command, FluxEvents } from "@plexcord/discord-types";
-import type { ReactNode } from "react";
-import type { LiteralUnion } from "type-fest";
+import { ProfileBadge } from "@api/Badges";
+import { ChatBarButtonData } from "@api/ChatButtons";
+import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { MemberListDecoratorFactory } from "@api/MemberListDecorators";
+import { MessageAccessoryFactory } from "@api/MessageAccessories";
+import { MessageDecorationFactory } from "@api/MessageDecorations";
+import { MessageClickListener, MessageEditListener, MessageSendListener } from "@api/MessageEvents";
+import { MessagePopoverButtonData } from "@api/MessagePopover";
+import { NicknameIconFactory } from "@api/NicknameIcons";
+import { Command, FluxEvents } from "@plexcord/discord-types";
+import { ReactNode } from "react";
+import { LiteralUnion } from "type-fest";
 
 // exists to export default definePlugin({...})
 export default function definePlugin<P extends PluginDef>(p: P & Record<PropertyKey, any>) {
@@ -97,6 +97,8 @@ export interface Plugin extends PluginDef {
     isDependency?: boolean;
 }
 
+export type IconComponent = (props: IconProps & Record<string, any>) => ReactNode;
+export type IconProps = { height?: number | string; width?: number | string; className?: string; };
 export interface PluginDef {
     name: string;
     description: string;
@@ -163,9 +165,16 @@ export interface PluginDef {
     contextMenus?: Record<string, NavContextMenuPatchCallback>;
     /**
      * Allows you to add custom actions to the Plexcord Toolbox.
-     * The key will be used as text for the button
+     *
+     * Can either be an object mapping labels to action functions or a Function returning Menu components.
+     * Please note that you can only use Menu components.
+     *
+     * @example
+     * toolboxActions: {
+     * "Click Me": () => { alert("Hi"); }
+     *
      */
-    toolboxActions?: Record<string, () => void>;
+    toolboxActions?: Record<string, () => void> | (() => ReactNode);
 
     tags?: string[];
 
@@ -177,20 +186,30 @@ export interface PluginDef {
     userProfileBadge?: ProfileBadge;
     userProfileBadges?: ProfileBadge[];
 
+    messagePopoverButton?: MessagePopoverButtonData;
+    chatBarButton?: ChatBarButtonData;
+
     userProfileContributorBadge?: ProfileBadge;
 
     onMessageClick?: MessageClickListener;
     onBeforeMessageSend?: MessageSendListener;
     onBeforeMessageEdit?: MessageEditListener;
 
-    renderMessagePopoverButton?: MessagePopoverButtonFactory;
     renderMessageAccessory?: MessageAccessoryFactory;
     renderMessageDecoration?: MessageDecorationFactory;
 
     renderMemberListDecorator?: MemberListDecoratorFactory;
     renderNicknameIcon?: NicknameIconFactory;
 
-    renderChatBarButton?: ChatBarButtonFactory;
+    // TODO: Remove eventually
+    /**
+     * @deprecated Use {@link chatBarButton} instead
+     */
+    renderChatBarButton?: never;
+    /**
+     * @deprecated Use {@link messagePopoverButton} instead
+     */
+    renderMessagePopoverButton?: never;
 }
 
 export const enum StartAt {
@@ -421,3 +440,5 @@ export type PluginNative<PluginExports extends Record<string, (event: Electron.I
     ? (...args: Args) => Return extends Promise<any> ? Return : Promise<Return>
     : never;
 };
+
+export type AllOrNothing<T> = T | { [K in keyof T]?: never; };

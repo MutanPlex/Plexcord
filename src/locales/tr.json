@@ -304,16 +304,6 @@
                     }
                 }
             },
-            "noTrack": {
-                "name": "NoTrack",
-                "description": "Discord'un takip sistemini (analitik/'science'), metriklerini ve Sentry çökme raporlamasını devre dışı bırakır",
-                "option": {
-                    "disableAnalytics": {
-                        "label": "Analizi Kapat",
-                        "description": "Discord'un takip sistemini (analitik/'science') metriklerini ve Sentry çökme raporlamasını devre dışı bırak"
-                    }
-                }
-            },
             "supportHelper": {
                 "name": "Destek Yardımcısı",
                 "description": "Sana destek sağlamamıza yardımcı olur",
@@ -375,6 +365,20 @@
                 },
                 "dm": {
                     "warning": "Lütfen destek için Plexcord eklenti geliştiricilerine özel mesaj göndermeyin!{{br}}Bunun yerine {{support}} sunucusuna katılarak Plexcord destek kanalını kullanabilirsiniz: {{channel}}"
+                }
+            }
+        },
+        "uiElements": {
+            "manage": "UI Öğelerini Yönet",
+            "allows": "Beğenmediğiniz butonları gizlemenizi sağlar",
+            "section": {
+                "chatbar": {
+                    "title": "Sohbet Çubuğu Butonları",
+                    "description": "Bunlar, sohbet giriş çubuğunun sağ tarafındaki butonlardır"
+                },
+                "messagePopover": {
+                    "title": "Mesaj Açılır Butonları",
+                    "description": "Bunlar, bir mesajın üzerine geldiğinizde sağda beliren yüzen butonlardır"
                 }
             }
         }
@@ -760,11 +764,21 @@
         }
     },
     "plugin": {
+        "noTrack": {
+            "name": "NoTrack",
+            "description": "Discord'un takip sistemini (analitik/'science'), metriklerini ve Sentry çökme raporlamasını devre dışı bırakır",
+            "option": {
+                "disableAnalytics": {
+                    "label": "Analizi Kapat",
+                    "description": "Discord'un takip sistemini (analitik/'science') metriklerini ve Sentry çökme raporlamasını devre dışı bırak"
+                }
+            }
+        },
         "accountPanelServerProfile": {
             "name": "AccountPanelServerProfile",
             "description": "Hesap panelinize sol tıkladığınızda sunucu profilinizi görüntülemek için sağ tıklayın",
             "option": {
-                "prioritize": {
+                "prioritizeServerProfile": {
                     "label": "Sunucu Profilini Önceliklendir",
                     "description": "Hesap panelinize sol tıkladığınızda sunucu profilini önceliklendir"
                 }
@@ -1013,7 +1027,7 @@
             "name": "AtSomeone",
             "description": "@someone ile rastgele birini etiketlemeni sağlar"
         },
-        "autoDndWhilePlaying": {
+        "autoDNDWhilePlaying": {
             "name": "AutoDndWhilePlaying",
             "description": "Oyun başlattığında çevrimiçi durumunu (çevrimiçi, boşta, rahatsız etmeyin) otomatik olarak günceller",
             "option": {
@@ -3472,10 +3486,16 @@
                 "oldIcon": {
                     "label": "Eski İkon",
                     "description": "Discord ikonunun yeniden tasarımından önceki eski ikon stilini kullan"
+                },
+                "location": {
+                    "label": "Konum",
+                    "description": "Oyun etkinliği anahtarının nerede gösterileceği",
+                    "panel": "Sustur/Mikrofon Kapat'ın Yanında",
+                    "toolbox": "Plexcord Araç Kutusunda"
                 }
             }
         },
-        "gifCollection": {
+        "gifCollections": {
             "name": "GifCollection",
             "description": "GIF koleksiyonları oluşturmanı sağlar.",
             "context": {
@@ -3616,7 +3636,7 @@
             "name": "GifPaste",
             "description": "GIF'leri doğrudan sohbet kutusuna yapıştırmana olanak tanır."
         },
-        "githubRepos": {
+        "gitHubRepos": {
             "name": "GitHubRepos",
             "description": "Kullanıcının herkese açık GitHub depolarını profilinde gösterir.",
             "loading": "Depolar yükleniyor...",
@@ -5869,7 +5889,15 @@
             "context": {
                 "openLog": "Bildirim Günlüğünü Aç",
                 "enableQuickCSS": "QuickCSS'i Etkinleştir",
-                "openQuickCSS": "QuickCSS'i Aç"
+                "openQuickCSS": "QuickCSS'i Aç",
+                "openSettings": "Ayarları Aç",
+                "manageThemes": "Temaları Yönet"
+            },
+            "option": {
+                "showPluginMenu": {
+                    "label": "Eklenti Menüsünü Göster",
+                    "description": "Plexcord Araç Kutusunda eklentiler menüsünü göster"
+                }
             }
         },
         "previewMessage": {
@@ -6470,6 +6498,184 @@
             "name": "ReadAllNotificationsButton",
             "description": "Tüm bildirimleri tek bir tıklamayla okunmuş olarak işaretlemek için bildirim paneline bir düğme ekler.",
             "button": "Hepsini Oku"
+        },
+        "relationshipNotifier": {
+            "name": "RelationshipNotifier",
+            "description": "Bir arkadaş, grup sohbeti veya sunucu seni kaldırdığında bildirir.",
+            "option": {
+                "notices": {
+                    "label": "Bildirimler",
+                    "description": "Kaldırıldığında ekranın üstünde bir bildirim göster (hiçbir bildirimi kaçırmak istemiyorsan bunu kullan)."
+                },
+                "offlineRemovals": {
+                    "label": "Çevrimdışı Kaldırmalar",
+                    "description": "Discord'u açtığında çevrimdışıyken kaldırıldıysan bildirim gönder."
+                },
+                "friends": {
+                    "label": "Arkadaşlar",
+                    "description": "Bir arkadaş seni listeden kaldırdığında bildir"
+                },
+                "friendRequestCancels": {
+                    "label": "Arkadaşlık İsteği İptalleri",
+                    "description": "Bir arkadaşlık isteği iptal edildiğinde bildir"
+                },
+                "servers": {
+                    "label": "Sunucular",
+                    "description": "Bir sunucudan kaldırıldığında bildir"
+                },
+                "groups": {
+                    "label": "Gruplar",
+                    "description": "Bir grup sohbetinden kaldırıldığında bildir"
+                }
+            },
+            "notification": {
+                "removedFriend": "{{user}} seni arkadaşlıktan çıkardı.",
+                "cancelledFriendRequest": "{{user}} tarafından gönderilen bir arkadaşlık isteği iptal edildi.",
+                "removedFromServer": "{{server}} sunucusundan kaldırıldın.",
+                "removedFromGroup": "{{group}} grubundan kaldırıldın.",
+                "noLongerGroup": "{{group}} grubunda artık değilsin.",
+                "noLongerServer": "{{server}} sunucusunda artık değilsin.",
+                "noLongerFriend": "{{user}} ile artık arkadaş değilsiniz.",
+                "friendRequestRevoked": "{{user}} tarafından gönderilen arkadaşlık isteği geri çekildi.",
+                "ok": "Tamam"
+            }
+        },
+        "remix": {
+            "name": "Remix",
+            "description": "Remix özelliğini masaüstüne ekler.",
+            "label": "Remix",
+            "button": {
+                "send": "Gönder",
+                "close": "Kapat",
+                "brush": "Fırça",
+                "erase": "Silgi",
+                "crop": "Kırp",
+                "shape": "Şekil",
+                "reset": "Sıfırla",
+                "clear": "Temizle"
+            },
+            "editor": {
+                "choose": "Bir Görsel Seç",
+                "browse": "Gözat",
+                "rectangle": "Dikdörtgen",
+                "ellipse": "Elips",
+                "line": "Çizgi",
+                "arrow": "Ok",
+                "fill": "Doldur"
+            }
+        },
+        "repeatMessages": {
+            "name": "RepeatMessages",
+            "description": "Mesajları hızlıca tekrar göndermenize olanak tanır. Tekrarla seçeneğine tıklarken Shift tuşunu basılı tutarsanız mesaja yanıt olarak gönderir.",
+            "button": "Tekrarla (Tıkla) / Tekrarla ve Yanıtla (Shift + Tıkla)",
+            "context": {
+                "repeat": "Tekrarla",
+                "repeatAndReply": "Tekrarla ve Yanıtla"
+            }
+        },
+        "replaceGoogleSearch": {
+            "name": "ReplaceGoogleSearch",
+            "description": "Google aramasını farklı arama motorlarıyla değiştirir.",
+            "option": {
+                "customEngineName": {
+                    "label": "Özel Motor Adı",
+                    "description": "Özel arama motorunun adı"
+                },
+                "customEngineURL": {
+                    "label": "Özel Motor URL'si",
+                    "description": "Arama motorunuzun URL’si"
+                }
+            },
+            "context": {
+                "label": "Metni Ara"
+            }
+        },
+        "replyPingControl": {
+            "name": "ReplyPingControl",
+            "description": "Mesaj yanıtlarında her zaman veya asla ping almayı kontrol etmenizi sağlar, ayrıca beyaz liste özelliği içerir",
+            "option": {
+                "alwaysPingOnReply": {
+                    "label": "Her Zaman Yanıt Ping'i",
+                    "description": "Birisi mesajlarınıza yanıt verdiğinde her zaman ping alın"
+                },
+                "replyPingWhitelist": {
+                    "label": "Yanıt Ping Beyaz Listesi",
+                    "description": "Her zaman yanıt ping'i almak istediğiniz kullanıcıların ID’lerini virgülle ayırarak girin"
+                }
+            }
+        },
+        "replyTimestamp": {
+            "name": "ReplyTimestamp",
+            "description": "Yanıtlanan mesaj önizlemelerinde zaman damgası gösterir"
+        },
+        "revealAllSpoilers": {
+            "name": "RevealAllSpoilers",
+            "description": "Bir spoilere Ctrl tıklayarak bir mesajdaki tüm spoilerları, Ctrl+Shift tıklayarak sohbetin tamamındaki tüm spoilerları göster"
+        },
+        "reverseImageSearch": {
+            "name": "ReverseImageSearch",
+            "description": "Görsel sağ tık menülerine Ters Görsel Arama seçenekleri ekler",
+            "context": {
+                "label": "Görseli Ara",
+                "all": "Tümünde Ara"
+            }
+        },
+        "reviewDB": {
+            "name": "ReviewDB",
+            "description": "Diğer kullanıcıları değerlendirin (Profillere yeni bir ayar bölümü ekler)",
+            "notification": {
+                "newReview": "Profilinizde yeni değerlendirmeler var!",
+                "auth": {
+                    "error": "Yetkilendirme sırasında bir hata oluştu",
+                    "successfully": "Başarıyla giriş yapıldı!",
+                    "failed": "Yetkilendirme başarısız",
+                    "review": "Bir değerlendirme eklemek için lütfen yetkilendirin."
+                },
+                "error": {
+                    "fast": "Çok hızlı istekte bulunuyorsunuz. Birkaç saniye bekleyip tekrar deneyin.",
+                    "fetching": "Değerlendirmeler alınırken bir hata oluştu.",
+                    "action": {
+                        "failed": "Kullanıcı {{action}} edilemedi",
+                        "success": "Kullanıcı başarıyla {{action}} edildi"
+                    }
+                }
+            },
+            "button": {
+                "appeal": "İtiraz Et",
+                "ok": "Tamam"
+            },
+            "context": {
+                "view": "Değerlendirmeleri Gör"
+            },
+            "option": {
+                "authorize": {
+                    "label": "Yetkilendir",
+                    "button": "ReviewDB ile Yetkilendir"
+                },
+                "notifyReviews": {
+                    "label": "Değerlendirme Bildirimi",
+                    "description": "Başlangıçta yeni değerlendirmeleri bildir"
+                },
+                "showWarning": {
+                    "label": "Uyarıyı Göster",
+                    "description": "Değerlendirme listesinin üstünde saygılı olun uyarısını göster"
+                },
+                "hideTimestamps": {
+                    "label": "Zaman Damgalarını Gizle",
+                    "description": "Değerlendirmelerdeki zaman damgalarını gizle"
+                },
+                "hideBlockedUsers": {
+                    "label": "Engellenen Kullanıcıları Gizle",
+                    "description": "Engellediğiniz kullanıcıların değerlendirmelerini gizle"
+                },
+                "buttons": {
+                    "label": "Butonlar",
+                    "manageBlocked": "Engellenmiş Kullanıcıları Yönet",
+                    "support": "ReviewDB geliştirmesine destek ol",
+                    "website": "ReviewDB websitesi",
+                    "server": "ReviewDB Destek Sunucusu"
+                }
+            }
         },
         "uselessInfo": {
             "name": "UselessInfo",

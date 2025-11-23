@@ -16,7 +16,7 @@ import type { MouseEventHandler, ReactNode } from "react";
 let hidechatbuttonsopen: boolean | undefined;
 
 const settings = definePluginSettings({
-    Color: {
+    color: {
         get label() {
             return t("plugin.hideChatButtons.option.color.label");
         },
@@ -26,7 +26,7 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: false,
     },
-    Open: {
+    open: {
         get label() {
             return t("plugin.hideChatButtons.option.open.label");
         },
@@ -47,7 +47,7 @@ function HideToggleButton(props: { open: boolean | undefined, onClick: MouseEven
         tooltip={props.open ? t("plugin.hideChatButtons.tooltip.close") : t("plugin.hideChatButtons.tooltip.open")}
     >
         <svg
-            fill={settings.store.Color && props.open ? "#c32a32" : "currentColor"}
+            fill={settings.store.color && props.open ? "#c32a32" : "currentColor"}
             fillRule="evenodd"
             width="20"
             height="20"
@@ -109,6 +109,6 @@ export default definePlugin({
         return <ButtonsInnerComponent buttons={buttons} />;
     },
     async start() {
-        hidechatbuttonsopen = settings.store.Open;
+        hidechatbuttonsopen = settings.store.open;
     }
 });

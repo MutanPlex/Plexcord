@@ -61,10 +61,10 @@
     background-color: var(--button-danger-background);
 }
 
-.pc-updater-modal {
+.pc-settings-modal {
     padding: 1.5em !important;
 }
 
-.pc-updater-modal-close-button {
+.pc-settings-modal-close {
     float: right;
 }

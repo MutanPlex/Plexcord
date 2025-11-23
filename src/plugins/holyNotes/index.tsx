@@ -22,7 +22,6 @@ import "./style.css";
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import * as DataStore from "@api/DataStore";
 import { t } from "@api/i18n";
-import { addMessagePopoverButton, removeMessagePopoverButton } from "@api/MessagePopover";
 import { Button } from "@components/Button";
 import { Message } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
@@ -99,23 +98,22 @@ export default definePlugin({
     contextMenus: {
         "message": messageContextMenuPatch
     },
+
     async start() {
         if (await DataStore.keys(HolyNoteStore).then(keys => !keys.includes("Main"))) return noteHandler.newNoteBook("Main");
         if (!noteHandlerCache.has("Main")) await DataStoreToCache();
+    },
 
-        addMessagePopoverButton("HolyNotes", message => {
+    messagePopoverButton: {
+        icon: NoteButtonPopover,
+        render(message) {
             return {
                 label: t("plugin.holyNotes.button.save"),
                 icon: NoteButtonPopover,
-                message: message,
+                message,
                 channel: ChannelStore.getChannel(message.channel_id),
                 onClick: () => noteHandler.addNote(message, "Main")
-
             };
-        });
-    },
-
-    async stop() {
-        removeMessagePopoverButton("HolyNotes");
+        }
     }
 });

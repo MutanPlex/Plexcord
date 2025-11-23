@@ -17,38 +17,69 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { OptionType } from "@utils/types";
 
 export default definePluginSettings({
     notices: {
+        get label() {
+            return t("plugin.relationshipNotifier.option.notices.label");
+        },
+        get description() {
+            return t("plugin.relationshipNotifier.option.notices.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Also show a notice at the top of your screen when removed (use this if you don't want to miss any notifications).",
         default: false
     },
     offlineRemovals: {
+        get label() {
+            return t("plugin.relationshipNotifier.option.offlineRemovals.label");
+        },
+        get description() {
+            return t("plugin.relationshipNotifier.option.offlineRemovals.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Notify you when starting discord if you were removed while offline.",
         default: true
     },
     friends: {
+        get label() {
+            return t("plugin.relationshipNotifier.option.friends.label");
+        },
+        get description() {
+            return t("plugin.relationshipNotifier.option.friends.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Notify when a friend removes you",
         default: true
     },
     friendRequestCancels: {
+        get label() {
+            return t("plugin.relationshipNotifier.option.friendRequestCancels.label");
+        },
+        get description() {
+            return t("plugin.relationshipNotifier.option.friendRequestCancels.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Notify when a friend request is cancelled",
         default: true
     },
     servers: {
+        get label() {
+            return t("plugin.relationshipNotifier.option.servers.label");
+        },
+        get description() {
+            return t("plugin.relationshipNotifier.option.servers.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Notify when removed from a server",
         default: true
     },
     groups: {
+        get label() {
+            return t("plugin.relationshipNotifier.option.groups.label");
+        },
+        get description() {
+            return t("plugin.relationshipNotifier.option.groups.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Notify when removed from a group chat",
         default: true
     }
 });

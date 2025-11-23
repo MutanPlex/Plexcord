@@ -14,6 +14,7 @@ import { Flex } from "@components/Flex";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
+import ExpandedUserTagsPlugin from "@plugins/expandedUserTags";
 import { Margins } from "@utils/margins";
 import { OptionType } from "@utils/types";
 import { TextInput, Tooltip } from "@webpack/common";
@@ -23,7 +24,7 @@ import { TagSettings } from "./types";
 
 function SettingsComponent() {
     const tagSettings = (settings.store.tagSettings ??= {} as TagSettings);
-    const { localTags } = Plexcord.Plugins.plugins.ExpandedUserTags as any;
+    const { localTags } = ExpandedUserTagsPlugin;
 
     tags.values.forEach(tag => {
         if (!tagSettings[tag.name]) {

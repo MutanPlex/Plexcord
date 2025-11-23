@@ -8,6 +8,7 @@
 import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
+import { buildPluginMenuEntries, buildThemeMenuEntries } from "@plugins/plexcordToolbox/menu";
 import { Devs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import { Logger } from "@utils/Logger";
@@ -15,8 +16,6 @@ import definePlugin, { OptionType } from "@utils/types";
 import { waitFor } from "@webpack";
 import { ComponentDispatch, FocusLock, Menu, useEffect, useRef } from "@webpack/common";
 import type { HTMLAttributes, ReactElement } from "react";
-
-import PluginsSubmenu from "./PluginsSubmenu";
 
 type SettingsEntry = { section: string, label: string; };
 
@@ -146,19 +145,20 @@ export default definePlugin({
             find: "#{intl::USER_SETTINGS_ACTIONS_MENU_LABEL}",
             replacement: [
                 {
-                    match: /=\[\];return (\i)(?=\.forEach)/,
-                    replace: "=$self.wrapMap([]);return $self.transformSettingsEntries($1)",
+                    match: /=\[\];if\((\i)(?=\.forEach)/,
+                    replace: "=$self.wrapMap([]);if($self.transformSettingsEntries($1)",
                     predicate: () => settings.store.organizeMenu
                 },
                 {
                     match: /case \i\.\i\.DEVELOPER_OPTIONS:return \i;/,
-                    replace: "$&case 'UserPlugins':return $self.PluginsSubmenu();"
+                    replace: "$&case 'UserPlugins':return $self.buildPluginMenuEntries(true);$&case 'PlexcordThemes':return $self.buildThemeMenuEntries();"
                 }
             ]
         },
     ],
 
-    PluginsSubmenu,
+    buildPluginMenuEntries,
+    buildThemeMenuEntries,
 
     // This is the very outer layer of the entire ui, so we can't wrap this in an ErrorBoundary
     // without possibly also catching unrelated errors of children.

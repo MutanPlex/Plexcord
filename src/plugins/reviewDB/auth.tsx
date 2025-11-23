@@ -6,6 +6,7 @@
  */
 
 import * as DataStore from "@api/DataStore";
+import { t } from "@api/i18n";
 import { Logger } from "@utils/Logger";
 import { openModal } from "@utils/modal";
 import { OAuth2AuthorizeModal, showToast, Toasts, UserStore } from "@webpack/common";
@@ -62,16 +63,16 @@ export function authorize(callback?: any) {
 
                     if (!res.ok) {
                         const { message } = await res.json();
-                        showToast(message || "An error occured while authorizing", Toasts.Type.FAILURE);
+                        showToast(message || t("plugin.reviewDB.notification.auth.error"), Toasts.Type.FAILURE);
                         return;
                     }
 
                     const { token } = await res.json();
                     updateAuth({ token });
-                    showToast("Successfully logged in!", Toasts.Type.SUCCESS);
+                    showToast(t("plugin.reviewDB.notification.auth.successfully"), Toasts.Type.SUCCESS);
                     callback?.();
                 } catch (e) {
-                    new Logger("ReviewDB").error("Failed to authorize", e);
+                    new Logger("ReviewDB").error(t("plugin.reviewDB.notification.auth.failed"), e);
                 }
             }}
         />

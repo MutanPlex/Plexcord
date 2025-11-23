@@ -8,6 +8,7 @@
 import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
+import LoginWithQR from "@plugins/loginWithQR";
 import { images } from "@plugins/loginWithQR/images";
 import { getIntlMessage } from "@utils/discord";
 import {
@@ -250,7 +251,7 @@ function QrModal(props: ModalProps) {
     });
 
     useEffect(() => {
-        const plugin = Plexcord.Plugins.plugins.LoginWithQR as any;
+        const plugin = LoginWithQR;
 
         plugin.qrModalOpen = true;
         return () => void (plugin.qrModalOpen = false);

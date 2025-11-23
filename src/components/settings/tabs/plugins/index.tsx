@@ -46,6 +46,7 @@ import Plugins, { ExcludedPlugins, PluginMeta } from "~plugins"; // Avoid circul
 import { PluginCard } from "./PluginCard";
 import { openWarningModal } from "./PluginModal";
 import { StockPluginsCard } from "./PluginStatCards";
+import { UIElementsButton } from "./UIElements";
 
 export const cl = classNameFactory("pc-plugins-");
 export const logger = new Logger("PluginSettings", "#a6d189");
@@ -340,6 +341,8 @@ function PluginSettings() {
         <SettingsTab title={t("plugins.title")}>
 
             <ReloadRequiredCard required={changes.hasChanges} enabledPlugins={enabledPlugins} openWarningModal={openWarningModal} resetCheckAndDo={resetCheckAndDo} enabledStockPlugins={enabledStockPlugins} totalStockPlugins={totalStockPlugins} enabledUserPlugins={enabledUserPlugins} totalUserPlugins={totalUserPlugins} />
+
+            <UIElementsButton />
 
             <HeadingTertiary className={classes(Margins.top20, Margins.bottom8)}>
                 {t("plugins.filters.label")}

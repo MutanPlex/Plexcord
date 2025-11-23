@@ -27,16 +27,23 @@ import { Heading } from "@components/Heading";
 import { PcDevs } from "@utils/constants";
 import { copyWithToast } from "@utils/discord";
 import { closeModal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
-import definePlugin, { OptionType } from "@utils/types";
+import definePlugin, { IconComponent, OptionType } from "@utils/types";
 import { ChannelStore } from "@webpack/common";
 
-function DecodeIcon() {
+const DecodeIcon: IconComponent = ({ height = 24, width = 24, className }) => {
     return (
-        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+            width={width}
+            height={height}
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className={className}
+        >
             <path d="M6.5 9.50026H14.0385C15.4063 9.50026 16.0902 9.50026 16.5859 9.82073C16.8235 9.97438 17.0259 10.1767 17.1795 10.4144C17.5 10.91 17.5 11.5939 17.5 12.9618C17.5 14.3297 17.5 15.0136 17.1795 15.5092C17.0259 15.7469 16.8235 15.9492 16.5859 16.1029C16.0902 16.4233 15.4063 16.4233 14.0385 16.4233H9.5M6.5 9.50026L8.75 7.42334M6.5 9.50026L8.75 11.5772" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
         </svg>
     );
-}
+};
 
 
 function isValidUtf8String(str) {
@@ -128,42 +135,45 @@ export default definePlugin({
         return t("plugin.decodeBase64.description");
     },
 
-    renderMessagePopoverButton(msg) {
-        const handleClick = () => {
-            const base64Strings = findBase64Strings(msg.content);
-            const decodedContent = decodeBase64Strings(base64Strings);
-            if (settings.store.clickMethod === "Right") {
-                decodedContent.forEach(content => copyWithToast(content));
-            } else {
-                openDecodedBase64Modal(decodedContent);
-            }
-        };
+    messagePopoverButton: {
+        icon: DecodeIcon,
+        render(msg) {
+            const handleClick = () => {
+                const base64Strings = findBase64Strings(msg.content);
+                const decodedContent = decodeBase64Strings(base64Strings);
+                if (settings.store.clickMethod === "Right") {
+                    decodedContent.forEach(content => copyWithToast(content));
+                } else {
+                    openDecodedBase64Modal(decodedContent);
+                }
+            };
 
-        const handleContextMenu = e => {
-            const base64Strings = findBase64Strings(msg.content);
-            const decodedContent = decodeBase64Strings(base64Strings);
-            if (settings.store.clickMethod === "Left") {
-                e.preventDefault();
-                e.stopPropagation();
-                decodedContent.forEach(content => copyWithToast(content));
-            } else {
-                e.preventDefault();
-                e.stopPropagation();
-                openDecodedBase64Modal(decodedContent);
-            }
-        };
+            const handleContextMenu = e => {
+                const base64Strings = findBase64Strings(msg.content);
+                const decodedContent = decodeBase64Strings(base64Strings);
+                if (settings.store.clickMethod === "Left") {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    decodedContent.forEach(content => copyWithToast(content));
+                } else {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openDecodedBase64Modal(decodedContent);
+                }
+            };
 
-        const label = settings.store.clickMethod === "Right"
-            ? t("plugin.decodeBase64.right.decode")
-            : t("plugin.decodeBase64.right.copy");
+            const label = settings.store.clickMethod === "Right"
+                ? t("plugin.decodeBase64.right.decode")
+                : t("plugin.decodeBase64.right.copy");
 
-        return {
-            label,
-            icon: DecodeIcon,
-            message: msg,
-            channel: ChannelStore.getChannel(msg.channel_id),
-            onClick: handleClick,
-            onContextMenu: handleContextMenu
-        };
+            return {
+                label,
+                icon: DecodeIcon,
+                message: msg,
+                channel: ChannelStore.getChannel(msg.channel_id),
+                onClick: handleClick,
+                onContextMenu: handleContextMenu
+            };
+        }
     }
 });

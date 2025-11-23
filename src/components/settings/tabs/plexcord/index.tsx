@@ -30,6 +30,7 @@ import { SpecialCard } from "@components/settings/SpecialCard";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { openContributorModal } from "@components/settings/tabs/plugins/ContributorModal";
 import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
+import settingsPlugin from "@plugins/_core/settings";
 import { gitRemote } from "@shared/plexcordUserAgent";
 import { IS_MAC, IS_WINDOWS } from "@utils/constants";
 import { Margins } from "@utils/margins";
@@ -265,7 +266,7 @@ function PlexcordSettings() {
                 <Heading tag="h5">{t("settings.settingsSection.title")}</Heading>
                 <Paragraph className={Margins.bottom20} style={{ color: "var(--text-muted)" }}>
                     {t("settings.settingsSection.hintParts.prefix")}
-                    <a onClick={() => openPluginModal(Plexcord.Plugins.plugins.Settings)}>
+                    <a onClick={() => openPluginModal(settingsPlugin)}>
                         {t("settings.settingsSection.hintParts.linkText")}
                     </a>
                     {t("settings.settingsSection.hintParts.suffix")}

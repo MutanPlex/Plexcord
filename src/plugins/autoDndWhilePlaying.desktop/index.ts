@@ -18,29 +18,29 @@ const StatusSettings = getUserSettingLazy<string>("status", "status")!;
 const settings = definePluginSettings({
     statusToSet: {
         get label() {
-            return t("plugin.autoDndWhilePlaying.option.statusToSet.label");
+            return t("plugin.autoDNDWhilePlaying.option.statusToSet.label");
         },
         get description() {
-            return t("plugin.autoDndWhilePlaying.option.statusToSet.description");
+            return t("plugin.autoDNDWhilePlaying.option.statusToSet.description");
         },
         type: OptionType.SELECT,
         get options() {
             return [
                 {
-                    label: t("plugin.autoDndWhilePlaying.option.statusToSet.online"),
+                    label: t("plugin.autoDNDWhilePlaying.option.statusToSet.online"),
                     value: "online"
                 },
                 {
-                    label: t("plugin.autoDndWhilePlaying.option.statusToSet.idle"),
+                    label: t("plugin.autoDNDWhilePlaying.option.statusToSet.idle"),
                     value: "idle"
                 },
                 {
-                    label: t("plugin.autoDndWhilePlaying.option.statusToSet.dnd"),
+                    label: t("plugin.autoDNDWhilePlaying.option.statusToSet.dnd"),
                     value: "dnd",
                     default: true
                 },
                 {
-                    label: t("plugin.autoDndWhilePlaying.option.statusToSet.invisible"),
+                    label: t("plugin.autoDNDWhilePlaying.option.statusToSet.invisible"),
                     value: "invisible"
                 }
             ];
@@ -48,10 +48,10 @@ const settings = definePluginSettings({
     },
     excludeInvisible: {
         get label() {
-            return t("plugin.autoDndWhilePlaying.option.excludeInvisible.label");
+            return t("plugin.autoDNDWhilePlaying.option.excludeInvisible.label");
         },
         get description() {
-            return t("plugin.autoDndWhilePlaying.option.excludeInvisible.description");
+            return t("plugin.autoDNDWhilePlaying.option.excludeInvisible.description");
         },
         type: OptionType.BOOLEAN,
         default: false
@@ -65,7 +65,7 @@ export default definePlugin({
     settings,
 
     get displayDescription() {
-        return t("plugin.autoDndWhilePlaying.description");
+        return t("plugin.autoDNDWhilePlaying.description");
     },
 
     flux: {
