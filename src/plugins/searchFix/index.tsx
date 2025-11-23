@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -25,14 +26,14 @@ function settingsComponent() {
         <span style={{ color: "white" }}>
             <i>
                 <b>
-                    This fix isn't perfect, so you may have to reload the search bar to fix issues.
+                    {t("plugin.searchFix.notPerfect")}
                 </b>
             </i>
-            Discord only allows a max offset of 5000 (this is what causes the magnifying glass error).
-            This means that you can only see precisely 5000 messages into the past, and 5000 messages into the future (when sorting by old).
-            This plugin just jumps to the opposite sorting method to try get around Discord's restriction,
-            but if there is a large search result, and you try to view a message that is unobtainable with both methods of sorting,
-            the plugin will simply show offset 0 (either newest or oldest message depending on the sorting method).
+            {t("plugin.searchFix.paragraph1")}<br />
+            {t("plugin.searchFix.paragraph2")}<br />
+            {t("plugin.searchFix.paragraph3")}<br />
+            {t("plugin.searchFix.paragraph4")}<br />
+            {t("plugin.searchFix.paragraph5")}
         </span>
     );
 }
@@ -42,6 +43,11 @@ export default definePlugin({
     description: 'Fixes the annoying "We dropped the magnifying glass!" error.',
     settingsAboutComponent: () => settingsComponent(),
     authors: [PcDevs.Jaxx, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.searchFix.description");
+    },
+
     patches: [
         {
             find: '"SearchQueryStore");',

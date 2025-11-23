@@ -20,6 +20,7 @@
 import "./styles.css";
 
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
@@ -34,7 +35,12 @@ import { Parser, Select, useMemo, useState } from "@webpack/common";
 
 const settings = definePluginSettings({
     replaceMessageContents: {
-        description: "Replace timestamps in message contents",
+        get label() {
+            return t("plugin.sendTimestamps.option.replaceMessageContents.label");
+        },
+        get description() {
+            return t("plugin.sendTimestamps.option.replaceMessageContents.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
     },
@@ -73,7 +79,7 @@ function PickerModal({ rootProps, close }: { rootProps: ModalProps, close(): voi
         <ModalRoot {...rootProps}>
             <ModalHeader className={cl("modal-header")}>
                 <Heading className={cl("modal-title")}>
-                    Timestamp Picker
+                    {t("plugin.sendTimestamps.modal.title")}
                 </Heading>
 
                 <ModalCloseButton onClick={close} className={cl("modal-close-button")} />
@@ -86,11 +92,11 @@ function PickerModal({ rootProps, close }: { rootProps: ModalProps, close(): voi
                     value={value}
                     onChange={e => setValue(e.currentTarget.value)}
                     style={{
-                        colorScheme: getTheme() === Theme.Light ? "light" : "dark",
+                        colorScheme: getTheme() === Theme.Light ? t("plugin.sendTimestamps.modal.light") : t("plugin.sendTimestamps.modal.dark"),
                     }}
                 />
 
-                <Heading>Timestamp Format</Heading>
+                <Heading>{t("plugin.sendTimestamps.modal.format")}</Heading>
                 <div className={cl("format-select")}>
                     <Select
                         options={
@@ -111,7 +117,7 @@ function PickerModal({ rootProps, close }: { rootProps: ModalProps, close(): voi
                     />
                 </div>
 
-                <Heading className={Margins.bottom8}>Preview</Heading>
+                <Heading className={Margins.bottom8}>{t("plugin.sendTimestamps.modal.preview")}</Heading>
                 <Paragraph className={cl("preview-text")}>
                     {rendered} ({formatted})
                 </Paragraph>
@@ -123,7 +129,7 @@ function PickerModal({ rootProps, close }: { rootProps: ModalProps, close(): voi
                         insertTextIntoChatInputBox(formatted + " ");
                         close();
                     }}
-                >Insert</Button>
+                >{t("plugin.sendTimestamps.modal.insert")}</Button>
             </ModalFooter>
         </ModalRoot>
     );
@@ -153,7 +159,7 @@ const SendTimestampButton: ChatBarButtonFactory = ({ isMainChat }) => {
 
     return (
         <ChatBarButton
-            tooltip="Insert Timestamp"
+            tooltip={t("plugin.sendTimestamps.button.tooltip")}
             onClick={() => {
                 const key = openModal(props => (
                     <PickerModal
@@ -174,6 +180,10 @@ export default definePlugin({
     description: "Send timestamps easily via chat box button & text shortcuts. Read the extended description!",
     authors: [Devs.Ven, Devs.Tyler, Devs.Grzesiek11],
     settings,
+
+    get displayDescription() {
+        return t("plugin.sendTimestamps.description");
+    },
 
     chatBarButton: {
         icon: SendTimestampIcon,
@@ -199,14 +209,13 @@ export default definePlugin({
         return (
             <>
                 <Paragraph>
-                    To quickly send send time only timestamps, include timestamps formatted as `HH:MM` (including the backticks!) in your message
+                    {t("plugin.sendTimestamps.sample.paragraph1")}
                 </Paragraph>
                 <Paragraph>
-                    See below for examples.
-                    If you need anything more specific, use the Date button in the chat bar!
+                    {t("plugin.sendTimestamps.sample.paragraph2")}
                 </Paragraph>
                 <Paragraph>
-                    Examples:
+                    {t("plugin.sendTimestamps.sample.examples")}:
                     <ul>
                         {samples.map(s => (
                             <li key={s}>

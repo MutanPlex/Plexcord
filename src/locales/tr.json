@@ -6711,6 +6711,64 @@
                 }
             }
         },
+        "searchFix": {
+            "name": "SearchFix",
+            "description": "Sinir bozucu 'Büyüteci düşürdük!' hatasını düzeltir.",
+            "notPerfect": "Bu düzeltme mükemmel değildir, bu yüzden sorunları çözmek için arama çubuğunu yeniden yüklemeniz gerekebilir.",
+            "paragraph1": "Discord yalnızca maksimum 5000 ofsetine izin verir (büyüteç hatasına sebep olan şey budur).",
+            "paragraph2": "Bu, geçmişte tam olarak 5000 mesajı ve gelecekte (eskiye göre sıralandığında) 5000 mesajı görebileceğiniz anlamına gelir.",
+            "paragraph3": "Bu eklenti, Discord’un kısıtlamasını aşmak için karşıt sıralama yöntemine geçiş yapar,",
+            "paragraph4": "ancak büyük bir arama sonucu varsa ve her iki sıralama yöntemiyle de erişilemeyen bir mesajı görüntülemeye çalışırsanız,",
+            "paragraph5": "eklenti yalnızca ofset 0’ı gösterir (sıralama yöntemine bağlı olarak en yeni veya en eski mesaj)."
+        },
+        "secretRingToneEnabler": {
+            "name": "SecretRingToneEnabler",
+            "description": "Discord zil sesinin gizli versiyonunu her zaman çalar (özel zil sesi etkinlikleri dışında)",
+            "option": {
+                "onlySnow": {
+                    "label": "Yalnızca Kar Zil Sesi Etkinliği Sırasında",
+                    "description": "Yalnızca Snow Halation Temasını çal"
+                }
+            }
+        },
+        "summaries": {
+            "name": "Summaries",
+            "description": "Discord'un deneysel Özetler özelliğini tüm sunucularda etkinleştirir ve konuşmaların yapay zekâ tarafından oluşturulmuş özetlerini gösterir",
+            "option": {
+                "summaryExpiryThresholdDays": {
+                    "label": "Özet Silinme Eşiği (Gün)",
+                    "description": "Bir özetin kaldırılmadan önce geçerli olduğu gün sayısı. Kanal başına en fazla 50 özetin saklandığını unutmayın"
+                }
+            }
+        },
+        "selfForward": {
+            "name": "SelfForward",
+            "description": "Geçerli kanalı iletme listesi açılır penceresine ekler"
+        },
+        "sendTimestamps": {
+            "name": "SendTimestamps",
+            "description": "Zaman damgalarını sohbet kutusu butonu ve metin kısayolları ile kolayca gönderin. Genişletilmiş açıklamayı okuyun!",
+            "sample": {
+                "paragraph1": "Yalnızca saat içeren zaman damgalarını hızlıca göndermek için, mesajınıza `SS:DD` formatında (ters tırnaklar dahil!) zaman damgaları ekleyin",
+                "paragraph2": "Aşağıdaki örneklere bakın.\nDaha spesifik bir şeye ihtiyaç duyarsanız, sohbet çubuğundaki Tarih butonunu kullanın!",
+                "examples": "Örnekler:"
+            },
+            "modal": {
+                "title": "Zaman Damgası Seçici",
+                "light": "Açık",
+                "dark": "Koyu",
+                "format": "Zaman Damgası Formatı",
+                "preview": "Önizleme",
+                "insert": "Ekle",
+                "insertTimestamp": "Zaman Damgası Ekle"
+            },
+            "option": {
+                "replaceMessageContents": {
+                    "label": "Mesaj İçeriğini Değiştir",
+                    "description": "Mesaj içeriğindeki zaman damgalarını değiştir"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

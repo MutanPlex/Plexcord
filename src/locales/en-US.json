@@ -6711,6 +6711,64 @@
                 }
             }
         },
+        "searchFix": {
+            "name": "SearchFix",
+            "description": "Fixes the annoying 'We dropped the magnifying glass!' error.",
+            "notPerfect": "This fix isn't perfect, so you may have to reload the search bar to fix issues.",
+            "paragraph1":"Discord only allows a max offset of 5000 (this is what causes the magnifying glass error).",
+            "paragraph2": "This means that you can only see precisely 5000 messages into the past, and 5000 messages into the future (when sorting by old).",
+            "paragraph3": "This plugin just jumps to the opposite sorting method to try get around Discord's restriction,",
+            "paragraph4": "but if there is a large search result, and you try to view a message that is unobtainable with both methods of sorting,",
+            "paragraph5": "the plugin will simply show offset 0 (either newest or oldest message depending on the sorting method)."
+        },
+        "secretRingToneEnabler": {
+            "name": "SecretRingToneEnabler",
+            "description": "Always play the secret version of the discord ringtone (except during special ringtone events)",
+            "option": {
+                "onlySnow": {
+                    "label": "Only During Snow Ringtone Event",
+                    "description": "Only play the Snow Halation Theme"
+                }
+            }
+        },
+        "summaries": {
+            "name": "Summaries",
+            "description": "Enables Discord's experimental Summaries feature on every server, displaying AI generated summaries of conversations",
+            "option": {
+                "summaryExpiryThresholdDays": {
+                    "label": "Summary Expiry Threshold (Days)",
+                    "description": "The time in days before a summary is removed. Note that only up to 50 summaries are kept per channel"
+                }
+            }
+        },
+        "selfForward": {
+            "name": "SelfForward",
+            "description": "Adds the current channel to the forward list popup"
+        },
+        "sendTimestamps": {
+            "name": "SendTimestamps",
+            "description": "Send timestamps easily via chat box button & text shortcuts. Read the extended description!",
+            "sample": {
+                "paragraph1": "To quickly send send time only timestamps, include timestamps formatted as `HH:MM` (including the backticks!) in your message",
+                "paragraph2": "See below for examples.\nIf you need anything more specific, use the Date button in the chat bar!",
+                "examples": "Examples:"
+            },
+            "modal": {
+                "title": "Timestamp Picker",
+                "light": "Light",
+                "dark": "Dark",
+                "format": "Timestamp Format",
+                "preview": "Preview",
+                "insert": "Insert",
+                "insertTimestamp": "Insert Timestamp"
+            },
+            "option": {
+                "replaceMessageContents": {
+                    "label": "Replace Message Contents",
+                    "description": "Replace timestamps in message contents"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

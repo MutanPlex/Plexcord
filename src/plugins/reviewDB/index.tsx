@@ -155,7 +155,7 @@ export default definePlugin({
 
     BiteSizeReviewsButton: ErrorBoundary.wrap(({ user }: { user: User; }) => {
         return (
-            <TooltipContainer text={t("plugin.reviewDB.button.view")}>
+            <TooltipContainer text={t("plugin.reviewDB.context.view")}>
                 <Button
                     onClick={() => openReviewsModal(user.id, user.username, ReviewType.User)}
                     variant="secondary"
