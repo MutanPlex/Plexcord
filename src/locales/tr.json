@@ -6542,7 +6542,7 @@
         },
         "remix": {
             "name": "Remix",
-            "description": "Remix özelliğini masaüstüne ekler.",
+            "description": "Dosya gönderme butonunun sağ tık menüsüne bir 'Remix' seçeneği ekler. Bu, bir görseli basit bir görsel düzenleyicide açar ve düzenlenen görseli doğrudan sohbete gönderme seçeneği sunar.",
             "label": "Remix",
             "button": {
                 "send": "Gönder",

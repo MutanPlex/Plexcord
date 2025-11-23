@@ -80,7 +80,7 @@ export function sendRemix(blob: Blob) {
 
 export default definePlugin({
     name: "Remix",
-    description: "Adds Remix to Desktop",
+    description: "Adds a 'Remix' option to the right-click menu of the file upload button. This option opens an image in a simple image editor and allows you to send the edited image directly into the chat.",
     authors: [PcDevs.MrDiamond, PcDevs.meowabyte],
 
     get displayDescription() {
