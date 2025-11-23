@@ -124,13 +124,13 @@ export const Toolbar = () => {
                             select={setShape}
                             isSelected={v => v === currentShape}
                             serialize={v => String(v)}
-                            placeholder="Shape"
-                            options={
-                                [t("plugin.remix.editor.rectangle"), t("plugin.remix.editor.ellipse"), t("plugin.remix.editor.line"), t("plugin.remix.editor.arrow")].map(v => ({
-                                    label: v,
-                                    value: v.toLowerCase() as Shape,
-                                }))
-                            }
+                            placeholder={t("plugin.remix.button.shape")}
+                            options={[
+                                { label: t("plugin.remix.editor.rectangle"), value: "rectangle" as Shape },
+                                { label: t("plugin.remix.editor.ellipse"), value: "ellipse" as Shape },
+                                { label: t("plugin.remix.editor.line"), value: "line" as Shape },
+                                { label: t("plugin.remix.editor.arrow"), value: "arrow" as Shape },
+                            ]}
                         />
 
                         <Paragraph className="pc-remix-setting-switch">{t("plugin.remix.editor.fill")} <Switch checked={fill} onChange={setFill} /></Paragraph>
