@@ -7,6 +7,7 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { addServerListElement, removeServerListElement, ServerListRenderPosition } from "@api/ServerList";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { PcDevs } from "@utils/constants";
@@ -31,10 +32,14 @@ export default definePlugin({
     authors: [PcDevs.camila314, PcDevs.MutanPlex],
     description: "Navigate your servers better with a quick search button",
 
+    get displayDescription() {
+        return t("plugin.serverSearch.description");
+    },
+
     renderButton() {
         return <ErrorBoundary noop>
             <div id="pc-searchbutton-container">
-                <Tooltip text="Search" position="right">
+                <Tooltip text={t("plugin.serverSearch.tooltip")} position="right">
                     {({ onMouseEnter, onMouseLeave }) => (
                         <div
                             id="pc-searchbutton"

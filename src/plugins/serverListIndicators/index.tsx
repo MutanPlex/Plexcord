@@ -19,6 +19,7 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { addServerListElement, removeServerListElement, ServerListRenderPosition } from "@api/ServerList";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
@@ -34,7 +35,6 @@ const enum IndicatorType {
     FRIEND = 1 << 1,
     BOTH = SERVER | FRIEND,
 }
-
 
 let onlineFriendsCount = 0;
 let guildCount = 0;
@@ -77,7 +77,7 @@ function FriendsIndicator() {
                 </svg>
             }
             <BaseText size="xs" weight="normal" id="pc-friendcount-text">{onlineFriendsCount}</BaseText>
-            {!!settings.store.useCompact && <BaseText size="xs" weight="normal" id="pc-friendcount-text-compact">Friends</BaseText>}
+            {!!settings.store.useCompact && <BaseText size="xs" weight="normal" id="pc-friendcount-text-compact">{t("plugin.serverListIndicators.friends")}</BaseText>}
         </div>
     );
 }
@@ -110,24 +110,36 @@ function ServersIndicator() {
                 </svg>
             }
             <BaseText size="xs" weight="normal" id="pc-guildcount-text">{guildCount}</BaseText>
-            {!!settings.store.useCompact && <BaseText size="xs" weight="normal" id="pc-guildcount-text-compact">Servers</BaseText>}
+            {!!settings.store.useCompact && <BaseText size="xs" weight="normal" id="pc-guildcount-text-compact">{t("plugin.serverListIndicators.servers")}</BaseText>}
         </div>
     );
 }
 
 export const settings = definePluginSettings({
     mode: {
-        description: "Mode",
+        get label() {
+            return t("plugin.serverListIndicators.option.mode.label");
+        },
+        get description() {
+            return t("plugin.serverListIndicators.option.mode.description");
+        },
         type: OptionType.SELECT,
-        options: [
-            { label: "Only online friend count", value: IndicatorType.FRIEND, default: true },
-            { label: "Only server count", value: IndicatorType.SERVER },
-            { label: "Both server and online friend counts", value: IndicatorType.BOTH },
-        ],
+        get options() {
+            return [
+                { label: t("plugin.serverListIndicators.option.mode.friend"), value: IndicatorType.FRIEND, default: true },
+                { label: t("plugin.serverListIndicators.option.mode.server"), value: IndicatorType.SERVER },
+                { label: t("plugin.serverListIndicators.option.mode.both"), value: IndicatorType.BOTH },
+            ];
+        },
         restartNeeded: true // Restart needed just to force update
     },
     useCompact: {
-        description: "Makes the indicator appear with only text",
+        get label() {
+            return t("plugin.serverListIndicators.option.useCompact.label");
+        },
+        get description() {
+            return t("plugin.serverListIndicators.option.useCompact.description");
+        },
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true // Restart needed just to force update
@@ -141,19 +153,23 @@ export default definePlugin({
     dependencies: ["ServerListAPI"],
     settings,
 
+    get displayDescription() {
+        return t("plugin.serverListIndicators.description");
+    },
+
     renderIndicator: () => {
         const { mode, useCompact } = settings.store;
         let text;
         // switch is simply better
         switch (mode) {
             case IndicatorType.BOTH:
-                text = `${onlineFriendsCount} Friends, ${guildCount} Servers`;
+                text = `${onlineFriendsCount} ${t("plugin.serverListIndicators.friends")}, ${guildCount} ${t("plugin.serverListIndicators.servers")}`;
                 break;
             case IndicatorType.FRIEND:
-                text = `${onlineFriendsCount} Friends`;
+                text = `${onlineFriendsCount} ${t("plugin.serverListIndicators.friends")}`;
                 break;
             case IndicatorType.SERVER:
-                text = `${guildCount} Servers`;
+                text = `${guildCount} ${t("plugin.serverListIndicators.servers")}`;
                 break;
         }
 

@@ -290,20 +290,6 @@
                     "description": "Lütfen bağışçı olarak Plexcord’un geliştirilmesini desteklemeyi düşünün. Bu bizim için çok değerli olur!!"
                 }
             },
-            "settings": {
-                "name": "Ayarlar",
-                "description": "Ayarlar arayüzünü ve hata ayıklama bilgisi ekler",
-                "option": {
-                    "language": {
-                        "label": "Dil",
-                        "description": "Plexcord için tercih ettiğiniz dili seçin."
-                    },
-                    "settingsLocation": {
-                        "label": "Ayarlar Konumu",
-                        "description": "Plexcord ayarlar bölümünün nereye konulacağını belirler"
-                    }
-                }
-            },
             "supportHelper": {
                 "name": "Destek Yardımcısı",
                 "description": "Sana destek sağlamamıza yardımcı olur",
@@ -771,6 +757,20 @@
                 "disableAnalytics": {
                     "label": "Analizi Kapat",
                     "description": "Discord'un takip sistemini (analitik/'science') metriklerini ve Sentry çökme raporlamasını devre dışı bırak"
+                }
+            }
+        },
+        "settings": {
+            "name": "Ayarlar",
+            "description": "Ayarlar arayüzünü ve hata ayıklama bilgisi ekler",
+            "option": {
+                "language": {
+                    "label": "Dil",
+                    "description": "Plexcord için tercih ettiğiniz dili seçin."
+                },
+                "settingsLocation": {
+                    "label": "Ayarlar Konumu",
+                    "description": "Plexcord ayarlar bölümünün nereye konulacağını belirler"
                 }
             }
         },
@@ -6768,6 +6768,72 @@
                     "description": "Mesaj içeriğindeki zaman damgalarını değiştir"
                 }
             }
+        },
+        "serverInfo": {
+            "name": "ServerInfo",
+            "description": "Bir sunucu hakkında bilgi görüntülemenizi sağlar",
+            "context": {
+                "serverInfo": "Sunucu Bilgisi"
+            },
+            "option": {
+                "sorting": {
+                    "label": "Sıralama",
+                    "description": "Kullanıcı adı veya varsa Görünen Ad",
+                    "username": "Kullanıcı Adı",
+                    "displayname": "Görünen Ad",
+                    "none": "Sıralama Yapma"
+                }
+            },
+            "modal": {
+                "tab": {
+                    "serverInfo": "Sunucu Bilgisi",
+                    "friends": "Arkadaşlar",
+                    "mutualUsers": "Ortak Kullanıcılar",
+                    "blockedUsers": "Engellenen Kullanıcılar",
+                    "ignoredUsers": "Yok Sayılan Kullanıcılar"
+                },
+                "owner": "Sunucu Sahibi",
+                "loading": "Yükleniyor...",
+                "createdAt": "Oluşturulma Tarihi",
+                "joinedAt": "Katılma Tarihi",
+                "vanityLink": "Özel Davet Bağlantısı",
+                "preferredLocale": "Tercih Edilen Bölge",
+                "verification": {
+                    "level": "Doğrulama Seviyesi",
+                    "none": "Yok",
+                    "low": "Düşük",
+                    "medium": "Orta",
+                    "high": "Yüksek",
+                    "highest": "En Yüksek"
+                },
+                "serverBoosts": "Sunucu Boostları",
+                "channels": "Kanallar",
+                "roles": "Roller"
+            }
+        },
+        "serverListIndicators": {
+            "name": "ServerListIndicators",
+            "description": "Sunucu listesine çevrimiçi arkadaş sayısı veya sunucu sayısı ekler",
+            "friends": "Arkadaş",
+            "servers": "Sunucu",
+            "option": {
+                "mode": {
+                    "label": "Mod",
+                    "description": "Sunucu listesinde görüntülenecek mod",
+                    "friend": "Yalnızca çevrimiçi arkadaş sayısı",
+                    "server": "Yalnızca sunucu sayısı",
+                    "both": "Hem sunucu hem çevrimiçi arkadaş sayısı"
+                },
+                "useCompact": {
+                    "label": "Kompakt Modu Kullan",
+                    "description": "Göstergenin yalnızca metinle görünmesini sağlar"
+                }
+            }
+        },
+        "serverSearch": {
+            "name": "ServerSearch",
+            "description": "Hızlı arama butonu ile sunucularınızda daha iyi gezinin",
+            "tooltip": "Ara"
         },
         "uselessInfo": {
             "name": "UselessInfo",

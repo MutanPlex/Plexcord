@@ -290,20 +290,6 @@
                     "description": "Please consider supporting the development of Plexcord by becoming a donor. It would mean a lot!"
                 }
             },
-            "settings": {
-                "name": "Settings",
-                "description": "Adds Settings UI and debug info",
-                "option": {
-                    "language": {
-                        "label": "Language",
-                        "description": "Select your preferred language for Plexcord."
-                    },
-                    "settingsLocation": {
-                        "label": "Settings Location",
-                        "description": "Determines where the Plexcord settings section will be located."
-                    }
-                }
-            },
             "supportHelper": {
                 "name": "Support Helper",
                 "description": "Helps us provide support to you",
@@ -771,6 +757,20 @@
                 "disableAnalytics": {
                     "label": "Disable Analytics",
                     "description": "Disable Discord's tracking (analytics/'science'), metrics and Sentry crash reporting"
+                }
+            }
+        },
+        "settings": {
+            "name": "Settings",
+            "description": "Adds Settings UI and debug info",
+            "option": {
+                "language": {
+                    "label": "Language",
+                    "description": "Select your preferred language for Plexcord."
+                },
+                "settingsLocation": {
+                    "label": "Settings Location",
+                    "description": "Determines where the Plexcord settings section will be located."
                 }
             }
         },
@@ -6715,7 +6715,7 @@
             "name": "SearchFix",
             "description": "Fixes the annoying 'We dropped the magnifying glass!' error.",
             "notPerfect": "This fix isn't perfect, so you may have to reload the search bar to fix issues.",
-            "paragraph1":"Discord only allows a max offset of 5000 (this is what causes the magnifying glass error).",
+            "paragraph1": "Discord only allows a max offset of 5000 (this is what causes the magnifying glass error).",
             "paragraph2": "This means that you can only see precisely 5000 messages into the past, and 5000 messages into the future (when sorting by old).",
             "paragraph3": "This plugin just jumps to the opposite sorting method to try get around Discord's restriction,",
             "paragraph4": "but if there is a large search result, and you try to view a message that is unobtainable with both methods of sorting,",
@@ -6768,6 +6768,72 @@
                     "description": "Replace timestamps in message contents"
                 }
             }
+        },
+        "serverInfo": {
+            "name": "ServerInfo",
+            "description": "Allows you to view info about a server",
+            "context": {
+                "serverInfo": "Server Info"
+            },
+            "option": {
+                "sorting": {
+                    "label": "Sorting",
+                    "description": "Username or if applicable Display Name",
+                    "username": "Username",
+                    "displayname": "Display Name",
+                    "none": "Dont Sort"
+                }
+            },
+            "modal": {
+                "tab": {
+                    "serverInfo": "Server Info",
+                    "friends": "Friends",
+                    "mutualUsers": "Mutual Users",
+                    "blockedUsers": "Blocked Users",
+                    "ignoredUsers": "Ignored Users"
+                },
+                "owner": "Server Owner",
+                "loading": "Loading...",
+                "createdAt": "Created At",
+                "joinedAt": "Joined At",
+                "vanityLink": "Vanity Link",
+                "preferredLocale": "Preferred Locale",
+                "verification": {
+                    "level": "Verification Level",
+                    "none": "None",
+                    "low": "Low",
+                    "medium": "Medium",
+                    "high": "High",
+                    "highest": "Highest"
+                },
+                "serverBoosts": "Server Boosts",
+                "channels": "Channels",
+                "roles": "Roles"
+            }
+        },
+        "serverListIndicators": {
+            "name": "ServerListIndicators",
+            "description": "Add online friend count or server count in the server list",
+            "friends":"Friends",
+            "servers":"Servers",
+            "option": {
+                "mode": {
+                    "label": "Mode",
+                    "description": "Mode to display in server list",
+                    "friend": "Only online friend count",
+                    "server": "Only server count",
+                    "both": "Both server and online friend counts"
+                },
+                "useCompact": {
+                    "label": "Use Compact Mode",
+                    "description": "Makes the indicator appear with only text"
+                }
+            }
+        },
+        "serverSearch": {
+            "name": "ServerSearch",
+            "description": "Navigate your servers better with a quick search button",
+            "tooltip": "Search"
         },
         "uselessInfo": {
             "name": "UselessInfo",

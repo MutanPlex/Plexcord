@@ -25,10 +25,10 @@ export default definePlugin({
     required: true,
 
     get displayName() {
-        return t("plugins.metadata.settings.name");
+        return t("plugin.settings.name");
     },
     get displayDescription() {
-        return t("plugins.metadata.settings.description");
+        return t("plugin.settings.description");
     },
 
     patches: [
@@ -214,11 +214,11 @@ export default definePlugin({
     options: {
         language: {
             get label() {
-                return t("plugins.metadata.settings.option.language.label");
+                return t("plugin.settings.option.language.label");
             },
             type: OptionType.SELECT,
             get description() {
-                return t("plugins.metadata.settings.option.language.description");
+                return t("plugin.settings.option.language.description");
             },
             get options() {
                 return Object.entries(SUPPORTED_LANGUAGES).map(([code, info]) => ({
@@ -233,11 +233,11 @@ export default definePlugin({
         },
         settingsLocation: {
             get label() {
-                return t("plugins.metadata.settings.option.settingsLocation.label");
+                return t("plugin.settings.option.settingsLocation.label");
             },
             type: OptionType.SELECT,
             get description() {
-                return t("plugins.metadata.settings.option.settingsLocation.description");
+                return t("plugin.settings.option.settingsLocation.description");
             },
             get options() {
                 return [
