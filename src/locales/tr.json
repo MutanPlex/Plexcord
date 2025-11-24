@@ -6835,6 +6835,45 @@
             "description": "Hızlı arama butonu ile sunucularınızda daha iyi gezinin",
             "tooltip": "Ara"
         },
+        "shikiCodeblocks": {
+            "name": "ShikiCodeblocks",
+            "description": "Shiki tarafından desteklenen, VSCode tarzı kod bloklarını Discord’a getirir",
+            "option": {
+                "theme": {
+                    "label": "Tema",
+                    "description": "Varsayılan temalar"
+                },
+                "customTheme": {
+                    "label": "Özel Tema",
+                    "description": "Özel bir VSCode temasına bağlantı",
+                    "mustURL": "Geçerli bir URL olmalıdır",
+                    "mustJSON": "Bir JSON dosyası olmalıdır"
+                },
+                "tryHljs": {
+                    "label": "Hljs'e Yedeklenme",
+                    "description": "Daha hafif olan varsayılan Discord renklendiricisini ve temasını kullan.",
+                    "never": "Asla",
+                    "secondary": "Highlight.js yerine Shiki'yi tercih et",
+                    "primary": "Shiki yerine Highlight.js'i tercih et",
+                    "always": "Her zaman"
+                },
+                "useDevIcon": {
+                    "label": "Dil İkonları İçin Devicon Kullan",
+                    "description": "Kod bloklarında dil ikonlarının nasıl gösterileceği",
+                    "disabled": "Devre Dışı",
+                    "colorless": "Renksiz",
+                    "colored": "Renkli"
+                },
+                "bgOpacity": {
+                    "label": "Arkaplan Opaklığı",
+                    "description": "Arkaplan opaklığı"
+                }
+            },
+            "button": {
+                "copy": "Kopyala",
+                "copied": "Kopyalandı!"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

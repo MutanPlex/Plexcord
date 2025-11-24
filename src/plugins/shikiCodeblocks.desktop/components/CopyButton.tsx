@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { useCopyCooldown } from "@plugins/shikiCodeblocks.desktop/hooks/useCopyCooldown";
 
 export interface CopyButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
@@ -35,7 +36,7 @@ export function CopyButton({ content, ...props }: CopyButtonProps) {
             }}
             onClick={() => copy(content)}
         >
-            {copyCooldown ? "Copied!" : "Copy"}
+            {copyCooldown ? t("plugin.shikiCodeblocks.button.copied") : t("plugin.shikiCodeblocks.button.copy")}
         </button>
 
     );

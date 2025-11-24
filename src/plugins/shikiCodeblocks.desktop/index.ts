@@ -19,6 +19,7 @@
 
 import "./shiki.css";
 
+import { t } from "@api/i18n";
 import { enableStyle } from "@api/Styles";
 import { Devs } from "@utils/constants";
 import definePlugin, { ReporterTestable } from "@utils/types";
@@ -37,6 +38,10 @@ export default definePlugin({
     authors: [Devs.Vap],
     reporterTestable: ReporterTestable.Patches,
     settings,
+
+    get displayDescription() {
+        return t("plugin.shikiCodeblocks.description");
+    },
 
     patches: [
         {

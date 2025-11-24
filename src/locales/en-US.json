@@ -6835,6 +6835,45 @@
             "description": "Navigate your servers better with a quick search button",
             "tooltip": "Search"
         },
+        "shikiCodeblocks": {
+            "name": "ShikiCodeblocks",
+            "description": "Brings vscode-style codeblocks into Discord, powered by Shiki",
+            "option": {
+                "theme": {
+                    "label": "Theme",
+                    "description": "Default themes"
+                },
+                "customTheme": {
+                    "label": "Custom Theme",
+                    "description": "A link to a custom vscode theme",
+                    "mustURL": "Must be a valid URL",
+                    "mustJSON": "Must be a json file"
+                },
+                "tryHljs": {
+                    "label": "Fallback to Hljs",
+                    "description": "Use the more lightweight default Discord highlighter and theme.",
+                    "never": "Never",
+                    "secondary": "Prefer Shiki instead of Highlight.js",
+                    "primary": "Prefer Highlight.js instead of Shiki",
+                    "always": "Always"
+                },
+                "useDevIcon": {
+                    "label": "Use Devicon for Language Icons",
+                    "description": "How to show language icons on codeblocks",
+                    "disabled": "Disabled",
+                    "colorless": "Colorless",
+                    "colored": "Colored"
+                },
+                "bgOpacity": {
+                    "label": "Background Opacity",
+                    "description": "Background opacity"
+                }
+            },
+            "button": {
+                "copy": "Copy",
+                "copied": "Copied!"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
