@@ -6874,6 +6874,20 @@
                 "copied": "Kopyalandı!"
             }
         },
+        "showAllMessageButtons": {
+            "name": "ShowAllMessageButtons",
+            "description": "Shift tuşuna bassanız da basmasanız da tüm mesaj butonlarını her zaman gösterir.",
+            "option": {
+                "noShiftDelete": {
+                    "label": "Shift'siz Silme",
+                    "description": "Bir mesajı silmek için shift tuşuna basma gereksinimini kaldırır."
+                },
+                "noShiftPin": {
+                    "label": "Shift'siz Sabitleme",
+                    "description": "Bir mesajı sabitlemek için shift tuşuna basma gereksinimini kaldırır."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

@@ -17,32 +17,43 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import { findByPropsLazy } from "@webpack";
 
 const settings = definePluginSettings({
     noShiftDelete: {
+        get label() {
+            return t("plugin.showAllMessageButtons.option.noShiftDelete.label");
+        },
+        get description() {
+            return t("plugin.showAllMessageButtons.option.noShiftDelete.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Remove requirement to hold shift for deleting a message.",
         default: true,
     },
     noShiftPin: {
+        get label() {
+            return t("plugin.showAllMessageButtons.option.noShiftPin.label");
+        },
+        get description() {
+            return t("plugin.showAllMessageButtons.option.noShiftPin.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Remove requirement to hold shift for pinning a message.",
         default: true,
     },
 });
 
-const PinActions = findByPropsLazy("pinMessage", "unpinMessage");
-
 export default definePlugin({
     name: "ShowAllMessageButtons",
-    description:
-        "Always show all message buttons no matter if you are holding the shift key or not.",
+    description: "Always show all message buttons no matter if you are holding the shift key or not.",
     authors: [Devs.Nuckyz, PcDevs.mochienya],
     settings,
+
+    get displayDescription() {
+        return t("plugin.showAllMessageButtons.description");
+    },
 
     patches: [
         {

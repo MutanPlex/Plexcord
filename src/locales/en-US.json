@@ -6874,6 +6874,20 @@
                 "copied": "Copied!"
             }
         },
+        "showAllMessageButtons": {
+            "name": "ShowAllMessageButtons",
+            "description": "Always show all message buttons no matter if you are holding the shift key or not.",
+            "option": {
+                "noShiftDelete": {
+                    "label": "No Shift Delete",
+                    "description": "Remove requirement to hold shift for deleting a message."
+                },
+                "noShiftPin": {
+                    "label": "No Shift Pin",
+                    "description": "Remove requirement to hold shift for pinning a message."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
