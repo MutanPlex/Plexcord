@@ -7,20 +7,15 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { addMessageDecoration, removeMessageDecoration } from "@api/MessageDecorations";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Flex } from "@components/Flex";
-import { Heading } from "@components/Heading";
-import { Heart } from "@components/Heart";
-import { Paragraph } from "@components/Paragraph";
-import DonateButton from "@components/settings/DonateButton";
 import { openContributorModal } from "@components/settings/tabs";
 import { User } from "@plexcord/discord-types";
-import badges from "@plugins/_api/badges";
+import badges, { openDonorModal } from "@plugins/_api/badges";
 import { Devs, PcDevs } from "@utils/constants";
-import { Margins } from "@utils/margins";
 import { isPcPluginDev } from "@utils/misc";
-import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalRoot, openModal } from "@utils/modal";
+import { closeModal, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
 import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
 import { JSX } from "react";
@@ -30,69 +25,33 @@ import settings from "./settings";
 const roleIconClassName = findByPropsLazy("roleIcon", "separator").roleIcon;
 const RoleIconComponent = findComponentByCodeLazy("#{intl::ROLE_ICON_ALT_TEXT}");
 
-function openDonorModal() {
+function openDonorsModal() {
     const modalKey = openModal(props => (
         <ErrorBoundary noop onError={() => {
             closeModal(modalKey);
             PlexcordNative.native.openExternal("https://github.com/sponsors/MutanPlex");
         }}>
-            <ModalRoot {...props}>
-                <ModalHeader>
-                    <Flex justifyContent="center" style={{ width: "100%" }}>
-                        <Heading style={{ width: "100%", textAlign: "center", margin: 0 }}>
-                            <Heart />
-                            Plexcord Donor
-                        </Heading>
-                    </Flex>
-                </ModalHeader>
-                <ModalContent>
-                    <Flex>
-                        <img
-                            role="presentation"
-                            src="https://cdn.discordapp.com/emojis/1026533070955872337.png"
-                            alt=""
-                            style={{ margin: "auto" }}
-                        />
-                        <img
-                            role="presentation"
-                            src="https://cdn.discordapp.com/emojis/1026533090627174460.png"
-                            alt=""
-                            style={{ margin: "auto" }}
-                        />
-                    </Flex>
-                    <div style={{ padding: "1em" }}>
-                        <Paragraph>
-                            This Badge is a special perk for Plexcord Donors
-                        </Paragraph>
-                        <Paragraph className={Margins.top20}>
-                            Please consider supporting the development of Plexcord by becoming a donor. It would mean a lot!!
-                        </Paragraph>
-                    </div>
-                </ModalContent>
-                <ModalFooter>
-                    <Flex justifyContent="center" style={{ width: "100%" }}>
-                        <DonateButton />
-                    </Flex>
-                </ModalFooter>
-            </ModalRoot>
+            {openDonorModal(props)}
         </ErrorBoundary>
     ));
 }
 
-const discordBadges: readonly [number, string, string][] = Object.freeze([
-    [0, "Discord Staff", "5e74e9b61934fc1f67c65515d1f7e60d"],
-    [1, "Partnered Server Owner", "3f9748e53446a137a052f3454e2de41e"],
-    [2, "HypeSquad Events", "bf01d1073931f921909045f3a39fd264"],
-    [6, "HypeSquad Bravery", "8a88d63823d8a71cd5e390baa45efa02"],
-    [7, "HypeSquad Brilliance", "011940fd013da3f7fb926e4a1cd2e618"],
-    [8, "HypeSquad Balance", "3aa41de486fa12454c3761e8e223442e"],
-    [3, "Discord Bug Hunter", "2717692c7dca7289b35297368a940dd0"],
-    [14, "Discord Bug Hunter", "848f79194d4be5ff5f81505cbd0ce1e6"],
-    [22, "Active Developer", "6bdc42827a38498929a4920da12695d9"],
-    [17, "Early Verified Bot Developer", "6df5892e0f35b051f8b61eace34f4967"],
-    [9, "Early Supporter", "7060786766c9c840eb3019e725d2b358"],
-    [18, "Moderator Programs Alumni", "fee1624003e2fee35cb398e125dc479b"]
-]);
+function getDiscordBadges(): readonly [number, string, string][] {
+    return [
+        [0, t("plugin.showBadgesInChat.badge.staff"), "5e74e9b61934fc1f67c65515d1f7e60d"],
+        [1, t("plugin.showBadgesInChat.badge.partner"), "3f9748e53446a137a052f3454e2de41e"],
+        [2, t("plugin.showBadgesInChat.badge.events"), "bf01d1073931f921909045f3a39fd264"],
+        [6, t("plugin.showBadgesInChat.badge.bravery"), "8a88d63823d8a71cd5e390baa45efa02"],
+        [7, t("plugin.showBadgesInChat.badge.brilliance"), "011940fd013da3f7fb926e4a1cd2e618"],
+        [8, t("plugin.showBadgesInChat.badge.balance"), "3aa41de486fa12454c3761e8e223442e"],
+        [3, t("plugin.showBadgesInChat.badge.bugHunter"), "2717692c7dca7289b35297368a940dd0"],
+        [14, t("plugin.showBadgesInChat.badge.bugHunter"), "848f79194d4be5ff5f81505cbd0ce1e6"],
+        [22, t("plugin.showBadgesInChat.badge.activeDeveloper"), "6bdc42827a38498929a4920da12695d9"],
+        [17, t("plugin.showBadgesInChat.badge.earlyVerifiedBotDeveloper"), "6df5892e0f35b051f8b61eace34f4967"],
+        [9, t("plugin.showBadgesInChat.badge.earlySupporter"), "7060786766c9c840eb3019e725d2b358"],
+        [18, t("plugin.showBadgesInChat.badge.moderatorProgram"), "fee1624003e2fee35cb398e125dc479b"]
+    ];
+}
 
 function CheckBadge({ badge, author }: { badge: string; author: User; }): JSX.Element | null {
 
@@ -102,7 +61,7 @@ function CheckBadge({ badge, author }: { badge: string; author: User; }): JSX.El
             if (!plexcordDonorBadges || plexcordDonorBadges.length === 0) return null;
 
             return (
-                <span style={{ order: settings.store.PlexcordDonorPosition, display: "flex", gap: "4px" }}>
+                <span style={{ order: settings.store.plexcordDonorPosition, display: "flex", gap: "4px" }}>
                     {plexcordDonorBadges.map((badge: any, index: number) => (
                         <RoleIconComponent
                             key={`${author.id}-${index}`}
@@ -110,7 +69,7 @@ function CheckBadge({ badge, author }: { badge: string; author: User; }): JSX.El
                             name={badge.description}
                             size={20}
                             src={badge.iconSrc}
-                            onClick={openDonorModal}
+                            onClick={openDonorsModal}
                             style={{ cursor: "pointer" }}
                         />
                     ))}
@@ -119,10 +78,10 @@ function CheckBadge({ badge, author }: { badge: string; author: User; }): JSX.El
         case "PlexcordContributor":
             const isContributor = isPcPluginDev(author.id);
             return isContributor ? (
-                <span style={{ order: settings.store.PlexcordContributorPosition }}>
+                <span style={{ order: settings.store.plexcordContributorPosition }}>
                     <RoleIconComponent
                         className={roleIconClassName}
-                        name="Plexcord Contributor"
+                        name={t("plugin.showBadgesInChat.modal.plexcordContributor")}
                         size={20}
                         src={"https://plexcord.club/favicon.png"}
                         onClick={() => openContributorModal(author)}
@@ -131,6 +90,7 @@ function CheckBadge({ badge, author }: { badge: string; author: User; }): JSX.El
                 </span>
             ) : null;
         case "DiscordProfile":
+            const discordBadges = getDiscordBadges();
             const chatBadges = discordBadges
                 .filter(badge => (author.flags || author.publicFlags) & (1 << badge[0]))
                 .map(badge => (
@@ -144,18 +104,18 @@ function CheckBadge({ badge, author }: { badge: string; author: User; }): JSX.El
                     />
                 ));
             return chatBadges.length > 0 ? (
-                <span style={{ order: settings.store.DiscordProfilePosition }}>
+                <span style={{ order: settings.store.discordProfilePosition }}>
                     {chatBadges}
                 </span>
             ) : null;
         case "DiscordNitro":
             return (author?.premiumType ?? 0) > 0 ? (
-                <span style={{ order: settings.store.DiscordNitroPosition }}>
+                <span style={{ order: settings.store.discordNitroPosition }}>
                     <RoleIconComponent
                         className={roleIconClassName}
                         name={
-                            "Discord Nitro" +
-                            (author.premiumType === 3 ? " Basic" : author.premiumType === 1 ? " Classic" : "")
+                            t("plugin.showBadgesInChat.modal.discordNitro") +
+                            (author.premiumType === 3 ? " " + t("plugin.showBadgesInChat.modal.basic") : author.premiumType === 1 ? " " + t("plugin.showBadgesInChat.modal.classic") : "")
                         }
                         size={20}
                         src={"https://cdn.discordapp.com/badge-icons/2ba85e8026a8614b640c2837bcdfe21b.png"}
@@ -184,6 +144,11 @@ export default definePlugin({
     description: "Shows the message author's badges beside their name in chat.",
     dependencies: ["MessageDecorationsAPI"],
     settings,
+
+    get displayDescription() {
+        return t("plugin.showBadgesInChat.description");
+    },
+
     start: () => {
         addMessageDecoration("pc-show-badges-in-chat", props => props.message?.author ? <ChatBadges author={props.message.author} /> : null);
     },

@@ -6888,6 +6888,72 @@
                 }
             }
         },
+        "showBadgesInChat": {
+            "name": "ShowBadgesInChat",
+            "description": "Sohbette, mesaj yazarının adının yanında rozetlerini gösterir.",
+            "option": {
+                "showPlexcordDonor": {
+                    "label": "Plexcord Bağışçı Rozetini Göster",
+                    "description": "Sohbette Plexcord Bağışçı rozetlerini göstermek için etkinleştirin."
+                },
+                "plexcordDonorPosition": {
+                    "label": "Plexcord Bağışçı Rozeti Konumu",
+                    "description": "Plexcord Bağışçı rozetlerinin konumu."
+                },
+                "showPlexcordContributor": {
+                    "label": "Plexcord Katkıcı Rozetini Göster",
+                    "description": "Sohbette Plexcord Katkıcı rozetlerini göstermek için etkinleştirin."
+                },
+                "plexcordContributorPosition": {
+                    "label": "Plexcord Katkıcı Rozeti Konumu",
+                    "description": "Plexcord Katkıcı rozetlerinin konumu."
+                },
+                "showDiscordProfile": {
+                    "label": "Discord Profil Rozetini Göster",
+                    "description": "Sohbette Discord Profil rozetlerini göstermek için etkinleştirin."
+                },
+                "discordProfilePosition": {
+                    "label": "Discord Profil Rozeti Konumu",
+                    "description": "Discord Profil rozetlerinin konumu."
+                },
+                "showDiscordNitro": {
+                    "label": "Discord Nitro Rozetini Göster",
+                    "description": "Sohbette Discord Nitro rozetlerini göstermek için etkinleştirin."
+                },
+                "discordNitroPosition": {
+                    "label": "Discord Nitro Rozeti Konumu",
+                    "description": "Discord Nitro rozetlerinin konumu."
+                },
+                "badgeSettings": {
+                    "label": "Rozet Ayarları",
+                    "description": "Sohbette gösterilen diğer rozetlerin konumlarını yapılandırın.",
+                    "modal": "Rozetleri yeniden sıralamak için sürükleyin; belirli bir rozet türünü etkinleştirmek/devre dışı bırakmak için tıklayın."
+                }
+            },
+            "badge": {
+                "plexcord": "Plexcord destekçi rozeti",
+                "contributor": "Plexcord katılımcı rozeti",
+                "discordProfile": "Discord profil rozetleri (HypeSquad, Discord Staff, Active Developer vb.)",
+                "nitro": "Nitro rozeti",
+                "staff": "Discord Personeli",
+                "partner": "Partner Sunucu Sahibi",
+                "events": "HypeSquad Etkinlikleri",
+                "bravery": "HypeSquad Bravery",
+                "brilliance": "HypeSquad Brilliance",
+                "balance": "HypeSquad Balance",
+                "bugHunter": "Discord Hata Avcısı",
+                "activeDeveloper": "Aktif Geliştirici",
+                "earlyVerifiedBotDeveloper": "Erken Doğrulanmış Bot Geliştiricisi",
+                "earlySupporter": "Erken Destekçi",
+                "moderatorProgram": "Moderatör Programı Mezunu"
+            },
+            "modal": {
+                "plexcordContributor": "Plexcord Katılımcısı",
+                "discordNitro": "Discord Nitro",
+                "basic": "Basic",
+                "classic": "Classic"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

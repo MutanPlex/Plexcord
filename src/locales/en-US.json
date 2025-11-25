@@ -6888,6 +6888,75 @@
                 }
             }
         },
+        "showBadgesInChat": {
+            "name": "ShowBadgesInChat",
+            "description": "Shows the message author's badges beside their name in chat.",
+            "option": {
+                "showPlexcordDonor": {
+                    "label": "Show Plexcord Donor Badge",
+                    "description": "Enable to show Plexcord Donor badges in chat."
+                },
+                "plexcordDonorPosition": {
+                    "label": "Plexcord Donor Badge Position",
+                    "description": "The position of the Plexcord Donor badges."
+                },
+                "showPlexcordContributor": {
+                    "label": "Show Plexcord Contributor Badge",
+                    "description": "Enable to show Plexcord Contributor badges in chat."
+                },
+                "plexcordContributorPosition": {
+                    "label": "Plexcord Contributor Badge Position",
+                    "description": "The position of the Plexcord Contributor badges."
+                },
+                "showDiscordProfile": {
+                    "label": "Show Discord Profile Badge",
+                    "description": "Enable to show Discord Profile badges in chat."
+                },
+                "discordProfilePosition": {
+                    "label": "Discord Profile Badge Position",
+                    "description": "The position of the Discord Profile badges."
+                },
+                "showDiscordNitro": {
+                    "label": "Show Discord Nitro Badge",
+                    "description": "Enable to show Discord Nitro badges in chat."
+                },
+                "discordNitroPosition": {
+                    "label": "Discord Nitro Badge Position",
+                    "description": "The position of the Discord Nitro badges."
+                },
+                "badgeSettings": {
+                    "label": "Badge Settings",
+                    "description": "Configure the position of other badges shown in chat.",
+                    "modal": "Drag the badges to reorder them, you can click to enable/disable a specific badge type."
+                }
+            },
+            "badge": {
+                "plexcord": "Plexcord donor badge",
+                "contributor": "Plexcord contributor badge",
+                "discordProfile": "Discord profile badges (HypeSquad, Discord Staff, Active Developer, etc.)",
+                "nitro": "Nitro badge",
+                "staff": "Discord Staff",
+                "partner": "Partnered Server Owner",
+                "events": "HypeSquad Events",
+                "bravery": "HypeSquad Bravery",
+                "brilliance": "HypeSquad Brilliance",
+                "balance": "HypeSquad Balance",
+                "bugHunter": "Discord Bug Hunter",
+                "activeDeveloper": "Active Developer",
+                "earlyVerifiedBotDeveloper": "Early Verified Bot Developer",
+                "earlySupporter": "Early Supporter",
+                "moderatorProgram": "Moderator Program Alumni"
+            },
+            "modal": {
+                "title": "Plexcord Donor",
+                "content": "This Badge is a special perk for Plexcord Donors",
+                "support": "Please consider supporting the development of Plexcord by becoming a donor. It would mean a lot!!",
+                "plexcordContributor": "Plexcord Contributor",
+                "discordNitro": "Discord Nitro",
+                "basic": "Basic",
+                "classic": "Classic"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
