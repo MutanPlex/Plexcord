@@ -6954,6 +6954,23 @@
                 "classic": "Classic"
             }
         },
+        "showConnections": {
+            "name": "ShowConnections",
+            "description": "Kullanıcı açılır kartlarında bağlı hesapları gösterir",
+            "option": {
+                "iconSize": {
+                    "label": "İkon Boyutu",
+                    "description": "İkon boyutu (px)"
+                },
+                "iconSpacing": {
+                    "label": "İkon Boşluğu",
+                    "description": "İkon kenar boşluğu",
+                    "compact": "Kompakt",
+                    "cozy": "Rahat",
+                    "rommy": "Geniş"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

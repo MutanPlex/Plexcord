@@ -19,6 +19,7 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -47,19 +48,31 @@ const getSpacingPx = (spacing: Spacing | undefined) => (spacing ?? Spacing.COMPA
 
 const settings = definePluginSettings({
     iconSize: {
+        get label() {
+            return t("plugin.showConnections.option.iconSize.label");
+        },
+        get description() {
+            return t("plugin.showConnections.option.iconSize.description");
+        },
         type: OptionType.NUMBER,
-        description: "Icon size (px)",
         default: 32
     },
     iconSpacing: {
+        get label() {
+            return t("plugin.showConnections.option.iconSpacing.label");
+        },
+        get description() {
+            return t("plugin.showConnections.option.iconSpacing.description");
+        },
         type: OptionType.SELECT,
-        description: "Icon margin",
         default: Spacing.COZY,
-        options: [
-            { label: "Compact", value: Spacing.COMPACT },
-            { label: "Cozy", value: Spacing.COZY }, // US Spelling :/
-            { label: "Roomy", value: Spacing.ROOMY }
-        ]
+        get options() {
+            return [
+                { label: t("plugin.showConnections.option.iconSpacing.options.compact"), value: Spacing.COMPACT },
+                { label: t("plugin.showConnections.option.iconSpacing.options.cozy"), value: Spacing.COZY }, // US Spelling :/
+                { label: t("plugin.showConnections.option.iconSpacing.options.roomy"), value: Spacing.ROOMY }
+            ];
+        }
     }
 });
 
@@ -161,6 +174,10 @@ export default definePlugin({
     description: "Show connected accounts in user popouts",
     authors: [Devs.TheKodeToad],
     settings,
+
+    get displayDescription() {
+        return t("plugin.showConnections.description");
+    },
 
     patches: [
         {

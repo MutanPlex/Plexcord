@@ -6948,13 +6948,27 @@
                 "moderatorProgram": "Moderator Program Alumni"
             },
             "modal": {
-                "title": "Plexcord Donor",
-                "content": "This Badge is a special perk for Plexcord Donors",
-                "support": "Please consider supporting the development of Plexcord by becoming a donor. It would mean a lot!!",
                 "plexcordContributor": "Plexcord Contributor",
                 "discordNitro": "Discord Nitro",
                 "basic": "Basic",
                 "classic": "Classic"
+            }
+        },
+        "showConnections": {
+            "name": "ShowConnections",
+            "description": "Show connected accounts in user popouts",
+            "option": {
+                "iconSize": {
+                    "label": "Icon Size",
+                    "description": "Icon size (px)"
+                },
+                "iconSpacing": {
+                    "label": "Icon Spacing",
+                    "description": "Icon margin",
+                    "compact": "Compact",
+                    "cozy": "Cozy",
+                    "rommy": "Roomy"
+                }
             }
         },
         "uselessInfo": {
