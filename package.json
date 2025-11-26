@@ -1,7 +1,7 @@
 {
     "name": "plexcord",
     "private": "true",
-    "version": "1.18.1",
+    "version": "1.18.2",
     "description": "Taking Discord to the Next Level!",
     "homepage": "https://github.com/MutanPlex/Plexcord#readme",
     "bugs": {
@@ -85,7 +85,7 @@
     "packageManager": "pnpm@10.23.0",
     "pnpm": {
         "overrides": {
-            "@types/react": "19.2.6",
+            "@types/react": "19.2.7",
             "@types/react-dom": "19.2.3",
             "jszip": "^3.10.1",
             "@eslint/plugin-kit": "^0.3.4",
