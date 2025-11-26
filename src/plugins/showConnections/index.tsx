@@ -68,9 +68,9 @@ const settings = definePluginSettings({
         default: Spacing.COZY,
         get options() {
             return [
-                { label: t("plugin.showConnections.option.iconSpacing.options.compact"), value: Spacing.COMPACT },
-                { label: t("plugin.showConnections.option.iconSpacing.options.cozy"), value: Spacing.COZY }, // US Spelling :/
-                { label: t("plugin.showConnections.option.iconSpacing.options.roomy"), value: Spacing.ROOMY }
+                { label: t("plugin.showConnections.option.iconSpacing.compact"), value: Spacing.COMPACT },
+                { label: t("plugin.showConnections.option.iconSpacing.cozy"), value: Spacing.COZY }, // US Spelling :/
+                { label: t("plugin.showConnections.option.iconSpacing.roomy"), value: Spacing.ROOMY }
             ];
         }
     }

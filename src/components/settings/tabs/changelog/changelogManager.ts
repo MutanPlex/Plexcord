@@ -472,22 +472,3 @@ export async function getLastRepositoryCheckHash(): Promise<string | null> {
 export async function setLastRepositoryCheckHash(hash: string): Promise<void> {
     await DataStore.set(LAST_REPO_CHECK_KEY, hash);
 }
-
-export function formatTimestamp(timestamp: number): string {
-    const date = new Date(timestamp);
-    const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
-    const diffMinutes = Math.floor(diffMs / (1000 * 60));
-    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-    if (diffMinutes < 60) {
-        return `${diffMinutes} ${t("changelog.unit.minute")}${diffMinutes !== 1 ? t("changelog.unit.s") : ""} ${t("changelog.unit.ago")}`;
-    } else if (diffHours < 24) {
-        return `${diffHours} ${t("changelog.unit.hour")}${diffHours !== 1 ? t("changelog.unit.s") : ""} ${t("changelog.unit.ago")}`;
-    } else if (diffDays < 7) {
-        return `${diffDays} ${t("changelog.unit.day")}${diffDays !== 1 ? t("changelog.unit.s") : ""} ${t("changelog.unit.ago")}`;
-    } else {
-        return date.toLocaleDateString();
-    }
-}

@@ -20,6 +20,7 @@ import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { Margins } from "@utils/margins";
 import { useAwaiter } from "@utils/react";
+import { formatTimestamp } from "@utils/text";
 import { getRepo, shortGitHash, UpdateLogger } from "@utils/updater";
 import { Alerts, React, Toasts, useEffect } from "@webpack/common";
 
@@ -30,7 +31,6 @@ import {
     ChangelogHistory,
     clearChangelogHistory,
     clearIndividualLog,
-    formatTimestamp,
     getChangelogHistory,
     getCommitsSinceLastSeen,
     getLastRepositoryCheckHash,

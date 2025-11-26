@@ -567,16 +567,6 @@
                 "cancel": "Cancel"
             }
         },
-        "unit": {
-            "minute": "minute",
-            "hour": "hour",
-            "day": "day",
-            "week": "week",
-            "month": "month",
-            "year": "year",
-            "ago": "ago",
-            "s": "s"
-        },
         "newPlugins": "{{count}} New Plugin{{s}}",
         "following": "The following plugins have been added in recent updates:",
         "more": "+{{count}} more plugins"
@@ -747,6 +737,26 @@
     "utils": {
         "toast": {
             "copied": "Copied to clipboard!"
+        }
+    },
+    "common": {
+        "unit": {
+            "year": "year",
+            "years": "years",
+            "month": "month",
+            "months": "months",
+            "week": "week",
+            "weeks": "weeks",
+            "day": "day",
+            "days": "days",
+            "hour": "hour",
+            "hours": "hours",
+            "minute": "minute",
+            "minutes": "minutes",
+            "second": "second",
+            "seconds": "seconds",
+            "ago": "ago",
+            "s": "s"
         }
     },
     "plugin": {
@@ -6814,8 +6824,8 @@
         "serverListIndicators": {
             "name": "ServerListIndicators",
             "description": "Add online friend count or server count in the server list",
-            "friends":"Friends",
-            "servers":"Servers",
+            "friends": "Friends",
+            "servers": "Servers",
             "option": {
                 "mode": {
                     "label": "Mode",
@@ -6967,8 +6977,80 @@
                     "description": "Icon margin",
                     "compact": "Compact",
                     "cozy": "Cozy",
-                    "rommy": "Roomy"
+                    "roomy": "Roomy"
                 }
+            }
+        },
+        "showHiddenChannels": {
+            "name": "ShowHiddenChannels",
+            "description": "Show channels that you do not have access to view.",
+            "tooltip": "Hidden Channel",
+            "option": {
+                "hideUnreads": {
+                    "label": "Hide Unreads",
+                    "description": "Hide Unreads"
+                },
+                "showMode": {
+                    "label": "Show Mode",
+                    "description": "The mode used to display hidden channels.",
+                    "lock": "Plain style with Lock Icon instead",
+                    "hidden": "Muted style with hidden eye icon on the right"
+                },
+                "defaultAllowedUsersAndRolesDropdownState": {
+                    "label": "Default Allowed Users And Roles Dropdown State",
+                    "description": "Whether the allowed users and roles dropdown on hidden channels should be open by default"
+                }
+            },
+            "channelType": {
+                "text": "text",
+                "announcement": "announcement",
+                "forum": "forum",
+                "voice": "voice",
+                "stage": "stage"
+            },
+            "sortOrder": {
+                "latestActivity": "Latest Activity",
+                "creationDate": "Creation Date"
+            },
+            "forumLayout": {
+                "default": "Not set",
+                "list": "List view",
+                "grid": "Gallery view"
+            },
+            "videoQuality": {
+                "auto": "Automatic",
+                "full": "720p"
+            },
+            "modal": {
+                "hidden": "hidden",
+                "locked": "locked",
+                "threads": "threads",
+                "posts": "posts",
+                "messages": "messages",
+                "post": "post",
+                "message": "message",
+                "unknown": "unknown",
+                "permissionDetails": "Permission Details",
+                "thisIsA": "This is a {{status}} {{channelType}} channel",
+                "canNotSee": "You cannot see the {{type}} of this channel.",
+                "guidelines": "However you may see its guidelines:",
+                "lastCreated": "Last {{type}} created:",
+                "lastPin": "Last message pin:",
+                "threadSlowmode": "Default thread slowmode:",
+                "slowmode": "Slowmode:",
+                "bitrate": "Bitrate:",
+                "region": "Region:",
+                "automatic": "Automatic",
+                "videoQuality": "Video Quality Mode:",
+                "inactiveArchiveDuration": "Default inactivity duration before archiving {{type}}",
+                "defaultLayout": "Default layout:",
+                "defaultSort": "Default sort order:",
+                "defaultReaction": "Default reaction emoji:",
+                "requireTag": "Posts on this forum require a tag to be set.",
+                "availableTags": "Available Tags:",
+                "allowedUsersAndRoles": "Allowed users and roles:",
+                "hideAllowedUsersAndRoles": "Hide Allowed Users and Roles",
+                "viewAllowedUsersAndRoles": "View Allowed Users and Roles"
             }
         },
         "uselessInfo": {

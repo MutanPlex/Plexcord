@@ -19,6 +19,7 @@
 
 import "./style.css";
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -44,22 +45,39 @@ const CONNECT = 1n << 20n;
 
 export const settings = definePluginSettings({
     hideUnreads: {
-        description: "Hide Unreads",
+        get label() {
+            return t("plugin.showHiddenChannels.option.hideUnreads.label");
+        },
+        get description() {
+            return t("plugin.showHiddenChannels.option.hideUnreads.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     showMode: {
-        description: "The mode used to display hidden channels.",
+        get label() {
+            return t("plugin.showHiddenChannels.option.showMode.label");
+        },
+        get description() {
+            return t("plugin.showHiddenChannels.option.showMode.description");
+        },
         type: OptionType.SELECT,
-        options: [
-            { label: "Plain style with Lock Icon instead", value: ShowMode.LockIcon, default: true },
-            { label: "Muted style with hidden eye icon on the right", value: ShowMode.HiddenIconWithMutedStyle },
-        ],
+        get options() {
+            return [
+                { label: t("plugin.showHiddenChannels.option.showMode.lock"), value: ShowMode.LockIcon, default: true },
+                { label: t("plugin.showHiddenChannels.option.showMode.hidden"), value: ShowMode.HiddenIconWithMutedStyle },
+            ];
+        },
         restartNeeded: true
     },
     defaultAllowedUsersAndRolesDropdownState: {
-        description: "Whether the allowed users and roles dropdown on hidden channels should be open by default",
+        get label() {
+            return t("plugin.showHiddenChannels.option.defaultAllowedUsersAndRolesDropdownState.label");
+        },
+        get description() {
+            return t("plugin.showHiddenChannels.option.defaultAllowedUsersAndRolesDropdownState.description");
+        },
         type: OptionType.BOOLEAN,
         default: true
     }
@@ -74,6 +92,10 @@ export default definePlugin({
     description: "Show channels that you do not have access to view.",
     authors: [Devs.BigDuck, Devs.AverageReactEnjoyer, Devs.D3SOX, Devs.Ven, Devs.Nuckyz, Devs.Nickyux, Devs.dzshn],
     settings,
+
+    get displayDescription() {
+        return t("plugin.showHiddenChannels.description");
+    },
 
     patches: [
         {
@@ -554,7 +576,7 @@ export default definePlugin({
     ), { noop: true }),
 
     HiddenChannelIcon: ErrorBoundary.wrap(() => (
-        <Tooltip text="Hidden Channel">
+        <Tooltip text={t("plugin.showHiddenChannels.tooltip")}>
             {({ onMouseLeave, onMouseEnter }) => (
                 <svg
                     onMouseLeave={onMouseLeave}

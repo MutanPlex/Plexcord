@@ -500,16 +500,6 @@
                 "cancel": "İptal"
             }
         },
-        "unit": {
-            "minute": "dakika",
-            "hour": "saat",
-            "day": "gün",
-            "week": "hafta",
-            "month": "ay",
-            "year": "yıl",
-            "ago": "önce",
-            "s": " "
-        },
         "newPlugins": "{{count}} Yeni Eklenti",
         "following": "Son güncellemelerde aşağıdaki eklentiler eklendi:",
         "more": "+{{count}} yeni eklenti"
@@ -747,6 +737,26 @@
     "utils": {
         "toast": {
             "copied": "Panoya kopyalandı!"
+        }
+    },
+    "common": {
+        "unit": {
+            "year": "yıl",
+            "years": "yıl",
+            "month": "ay",
+            "months": "ay",
+            "week": "hafta",
+            "weeks": "hafta",
+            "day": "gün",
+            "days": "gün",
+            "hour": "saat",
+            "hours": "saat",
+            "minute": "dakika",
+            "minutes": "dakika",
+            "second": "saniye",
+            "seconds": "saniye",
+            "ago": "önce",
+            "s": " "
         }
     },
     "plugin": {
@@ -6967,8 +6977,80 @@
                     "description": "İkon kenar boşluğu",
                     "compact": "Kompakt",
                     "cozy": "Rahat",
-                    "rommy": "Geniş"
+                    "roomy": "Geniş"
                 }
+            }
+        },
+        "showHiddenChannels": {
+            "name": "ShowHiddenChannels",
+            "description": "Erişim izniniz olmayan kanalları gösterir.",
+            "tooltip": "Gizli Kanal",
+            "option": {
+                "hideUnreads": {
+                    "label": "Okunmamışları Gizle",
+                    "description": "Okunmamışları gizle"
+                },
+                "showMode": {
+                    "label": "Gösterim Modu",
+                    "description": "Gizli kanalların görüntülenmesinde kullanılan mod.",
+                    "lock": "Kilit ikonu ile sade stil",
+                    "hidden": "Sağda gizli göz ikonu ile sessize alınmış stil"
+                },
+                "defaultAllowedUsersAndRolesDropdownState": {
+                    "label": "Varsayılan İzinli Kullanıcılar ve Roller Açılır Durumu",
+                    "description": "Gizli kanallarda izinli kullanıcılar ve roller menüsünün varsayılan olarak açık olup olmayacağı"
+                }
+            },
+            "channelType": {
+                "text": "metin",
+                "announcement": "duyuru",
+                "forum": "forum",
+                "voice": "ses",
+                "stage": "sahne"
+            },
+            "sortOrder": {
+                "latestActivity": "Son Etkinlik",
+                "creationDate": "Oluşturulma Tarihi"
+            },
+            "forumLayout": {
+                "default": "Ayarlanmadı",
+                "list": "Liste görünümü",
+                "grid": "Galeri görünümü"
+            },
+            "videoQuality": {
+                "auto": "Otomatik",
+                "full": "720p"
+            },
+            "modal": {
+                "hidden": "gizli",
+                "locked": "kilitli",
+                "threads": "konular",
+                "posts": "gönderiler",
+                "messages": "mesajlar",
+                "post": "gönderi",
+                "message": "mesaj",
+                "unknown": "bilinmeyen",
+                "permissionDetails": "İzin Detayları",
+                "thisIsA": "Bu bir {{status}} {{channelType}} kanalıdır",
+                "canNotSee": "Bu kanalın {{type}} kısmını göremezsiniz.",
+                "guidelines": "Ancak yönergelerini görebilirsiniz:",
+                "lastCreated": "Son oluşturulan {{type}}:",
+                "lastPin": "Son mesaj sabitleme:",
+                "threadSlowmode": "Varsayılan konu yavaş modu:",
+                "slowmode": "Yavaş mod:",
+                "bitrate": "Bitrate:",
+                "region": "Bölge:",
+                "automatic": "Otomatik",
+                "videoQuality": "Video Kalitesi Modu:",
+                "inactiveArchiveDuration": "{{type}} arşivlenmeden önceki varsayılan etkinliksiz süre",
+                "defaultLayout": "Varsayılan düzen:",
+                "defaultSort": "Varsayılan sıralama:",
+                "defaultReaction": "Varsayılan tepki emojisi:",
+                "requireTag": "Bu forumda gönderiler için bir etiket ayarlamak zorunludur.",
+                "availableTags": "Kullanılabilir Etiketler:",
+                "allowedUsersAndRoles": "İzin verilen kullanıcılar ve roller:",
+                "hideAllowedUsersAndRoles": "İzinli Kullanıcılar ve Rolleri Gizle",
+                "viewAllowedUsersAndRoles": "İzinli Kullanıcılar ve Rolleri Görüntüle"
             }
         },
         "uselessInfo": {

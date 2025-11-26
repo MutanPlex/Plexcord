@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { Settings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
@@ -90,28 +91,40 @@ const TagComponent = findComponentByCodeLazy("#{intl::FORUM_TAG_A11Y_FILTER_BY_T
 const EmojiParser = findByPropsLazy("convertSurrogateToName");
 const EmojiUtils = findByPropsLazy("getURL", "getEmojiColors");
 
-const ChannelTypesToChannelNames = {
-    [ChannelTypes.GUILD_TEXT]: "text",
-    [ChannelTypes.GUILD_ANNOUNCEMENT]: "announcement",
-    [ChannelTypes.GUILD_FORUM]: "forum",
-    [ChannelTypes.GUILD_VOICE]: "voice",
-    [ChannelTypes.GUILD_STAGE_VOICE]: "stage"
+const getChannelTypeName = (type: ChannelTypes) => {
+    switch (type) {
+        case ChannelTypes.GUILD_TEXT: return t("plugin.showHiddenChannels.channelType.text");
+        case ChannelTypes.GUILD_ANNOUNCEMENT: return t("plugin.showHiddenChannels.channelType.announcement");
+        case ChannelTypes.GUILD_FORUM: return t("plugin.showHiddenChannels.channelType.forum");
+        case ChannelTypes.GUILD_VOICE: return t("plugin.showHiddenChannels.channelType.voice");
+        case ChannelTypes.GUILD_STAGE_VOICE: return t("plugin.showHiddenChannels.channelType.stage");
+        default: return t("plugin.showHiddenChannels.modal.unknown");
+    }
 };
 
-const SortOrderTypesToNames = {
-    [SortOrderTypes.LATEST_ACTIVITY]: "Latest activity",
-    [SortOrderTypes.CREATION_DATE]: "Creation date"
+const getSortOrderName = (order: SortOrderTypes) => {
+    switch (order) {
+        case SortOrderTypes.LATEST_ACTIVITY: return t("plugin.showHiddenChannels.sortOrder.latestActivity");
+        case SortOrderTypes.CREATION_DATE: return t("plugin.showHiddenChannels.sortOrder.creationDate");
+        default: return t("plugin.showHiddenChannels.modal.unknown");
+    }
 };
 
-const ForumLayoutTypesToNames = {
-    [ForumLayoutTypes.DEFAULT]: "Not set",
-    [ForumLayoutTypes.LIST]: "List view",
-    [ForumLayoutTypes.GRID]: "Gallery view"
+const getForumLayoutName = (layout: ForumLayoutTypes) => {
+    switch (layout) {
+        case ForumLayoutTypes.DEFAULT: return t("plugin.showHiddenChannels.forumLayout.default");
+        case ForumLayoutTypes.LIST: return t("plugin.showHiddenChannels.forumLayout.list");
+        case ForumLayoutTypes.GRID: return t("plugin.showHiddenChannels.forumLayout.grid");
+        default: return t("plugin.showHiddenChannels.modal.unknown");
+    }
 };
 
-const VideoQualityModesToNames = {
-    [VideoQualityModes.AUTO]: "Automatic",
-    [VideoQualityModes.FULL]: "720p"
+const getVideoQualityName = (quality: VideoQualityModes) => {
+    switch (quality) {
+        case VideoQualityModes.AUTO: return t("plugin.showHiddenChannels.videoQuality.auto");
+        case VideoQualityModes.FULL: return t("plugin.showHiddenChannels.videoQuality.full");
+        default: return t("plugin.showHiddenChannels.modal.unknown");
+    }
 };
 
 // Icon from the modal when clicking a message link you don't have access to view
@@ -177,7 +190,7 @@ function HiddenChannelLockScreen({ channel }: { channel: ExtendedChannel; }) {
                 <img className={cl("logo")} src={HiddenChannelLogo} />
 
                 <div className={cl("heading-container")}>
-                    <BaseText size="xxl" weight="bold">This is a {!PermissionStore.can(PermissionsBits.VIEW_CHANNEL, channel) ? "hidden" : "locked"} {ChannelTypesToChannelNames[type]} channel</BaseText>
+                    <BaseText size="xxl" weight="bold">{t("plugin.showHiddenChannels.modal.thisIsA", { status: !PermissionStore.can(PermissionsBits.VIEW_CHANNEL, channel) ? t("plugin.showHiddenChannels.modal.hidden") : t("plugin.showHiddenChannels.modal.locked"), channelType: getChannelTypeName(type) })}</BaseText>
                     {channel.isNSFW() &&
                         <Tooltip text="NSFW">
                             {({ onMouseLeave, onMouseEnter }) => (
@@ -200,8 +213,8 @@ function HiddenChannelLockScreen({ channel }: { channel: ExtendedChannel; }) {
 
                 {(!channel.isGuildVoice() && !channel.isGuildStageVoice()) && (
                     <BaseText size="lg" weight="normal">
-                        You can not see the {channel.isForumChannel() ? "posts" : "messages"} of this channel.
-                        {channel.isForumChannel() && topic && topic.length > 0 && " However you may see its guidelines:"}
+                        {t("plugin.showHiddenChannels.modal.canNotSee", { type: channel.isForumChannel() ? t("plugin.showHiddenChannels.modal.posts") : t("plugin.showHiddenChannels.modal.messages") })}
+                        {channel.isForumChannel() && topic && topic.length > 0 && " " + t("plugin.showHiddenChannels.modal.guidelines")}
                     </BaseText>
                 )}
 
@@ -213,45 +226,45 @@ function HiddenChannelLockScreen({ channel }: { channel: ExtendedChannel; }) {
 
                 {lastMessageId &&
                     <BaseText size="md" weight="normal">
-                        Last {channel.isForumChannel() ? "post" : "message"} created:
+                        {t("plugin.showHiddenChannels.modal.lastCreated", { type: channel.isForumChannel() ? t("plugin.showHiddenChannels.modal.post") : t("plugin.showHiddenChannels.modal.message") })}
                         <Timestamp timestamp={new Date(SnowflakeUtils.extractTimestamp(lastMessageId))} />
                     </BaseText>
                 }
                 {lastPinTimestamp &&
-                    <BaseText size="md" weight="normal">Last message pin: <Timestamp timestamp={new Date(lastPinTimestamp)} /></BaseText>
+                    <BaseText size="md" weight="normal">{t("plugin.showHiddenChannels.modal.lastPin")} <Timestamp timestamp={new Date(lastPinTimestamp)} /></BaseText>
                 }
                 {(rateLimitPerUser ?? 0) > 0 &&
-                    <BaseText size="md" weight="normal">Slowmode: {formatDuration(rateLimitPerUser!, "seconds")}</BaseText>
+                    <BaseText size="md" weight="normal">{t("plugin.showHiddenChannels.modal.slowmode")} {formatDuration(rateLimitPerUser!, "seconds")}</BaseText>
                 }
                 {(defaultThreadRateLimitPerUser ?? 0) > 0 &&
                     <BaseText size="md" weight="normal">
-                        Default thread slowmode: {formatDuration(defaultThreadRateLimitPerUser!, "seconds")}
+                        {t("plugin.showHiddenChannels.modal.threadSlowmode")} {formatDuration(defaultThreadRateLimitPerUser!, "seconds")}
                     </BaseText>
                 }
                 {((channel.isGuildVoice() || channel.isGuildStageVoice()) && bitrate != null) &&
-                    <BaseText size="md" weight="normal">Bitrate: {bitrate} bits</BaseText>
+                    <BaseText size="md" weight="normal">{t("plugin.showHiddenChannels.modal.bitrate")} {bitrate} bits</BaseText>
                 }
                 {rtcRegion !== undefined &&
-                    <BaseText size="md" weight="normal">Region: {rtcRegion ?? "Automatic"}</BaseText>
+                    <BaseText size="md" weight="normal">{t("plugin.showHiddenChannels.modal.region")} {rtcRegion ?? t("plugin.showHiddenChannels.modal.automatic")}</BaseText>
                 }
                 {(channel.isGuildVoice() || channel.isGuildStageVoice()) &&
-                    <BaseText size="md" weight="normal">Video quality mode: {VideoQualityModesToNames[videoQualityMode ?? VideoQualityModes.AUTO]}</BaseText>
+                    <BaseText size="md" weight="normal">{t("plugin.showHiddenChannels.modal.videoQuality")} {getVideoQualityName(videoQualityMode ?? VideoQualityModes.AUTO)}</BaseText>
                 }
                 {(defaultAutoArchiveDuration ?? 0) > 0 &&
                     <BaseText size="md" weight="normal">
-                        Default inactivity duration before archiving {channel.isForumChannel() ? "posts" : "threads"}:
+                        {t("plugin.showHiddenChannels.modal.inactiveArchiveDuration", { type: channel.isForumChannel() ? t("plugin.showHiddenChannels.modal.posts") : t("plugin.showHiddenChannels.modal.threads") })}
                         {" " + formatDuration(defaultAutoArchiveDuration!, "minutes")}
                     </BaseText>
                 }
                 {defaultForumLayout != null &&
-                    <BaseText size="md" weight="normal">Default layout: {ForumLayoutTypesToNames[defaultForumLayout]}</BaseText>
+                    <BaseText size="md" weight="normal">{t("plugin.showHiddenChannels.modal.defaultLayout")} {getForumLayoutName(defaultForumLayout)}</BaseText>
                 }
                 {defaultSortOrder != null &&
-                    <BaseText size="md" weight="normal">Default sort order: {SortOrderTypesToNames[defaultSortOrder]}</BaseText>
+                    <BaseText size="md" weight="normal">{t("plugin.showHiddenChannels.modal.defaultSort")} {getSortOrderName(defaultSortOrder)}</BaseText>
                 }
                 {defaultReactionEmoji != null &&
                     <div className={cl("default-emoji-container")}>
-                        <BaseText size="md" weight="normal">Default reaction emoji:</BaseText>
+                        <BaseText size="md" weight="normal">{t("plugin.showHiddenChannels.modal.defaultReaction")}</BaseText>
                         {Parser.defaultRules[defaultReactionEmoji.emojiName ? "emoji" : "customEmoji"].react({
                             name: defaultReactionEmoji.emojiName
                                 ? EmojiParser.convertSurrogateToName(defaultReactionEmoji.emojiName)
@@ -265,11 +278,11 @@ function HiddenChannelLockScreen({ channel }: { channel: ExtendedChannel; }) {
                     </div>
                 }
                 {channel.hasFlag(ChannelFlags.REQUIRE_TAG) &&
-                    <BaseText size="md" weight="normal">Posts on this forum require a tag to be set.</BaseText>
+                    <BaseText size="md" weight="normal">{t("plugin.showHiddenChannels.modal.requireTag")}</BaseText>
                 }
                 {availableTags && availableTags.length > 0 &&
                     <div className={cl("tags-container")}>
-                        <BaseText size="lg" weight="bold">Available tags:</BaseText>
+                        <BaseText size="lg" weight="bold">{t("plugin.showHiddenChannels.modal.availableTags")}</BaseText>
                         <div className={cl("tags")}>
                             {availableTags.map(tag => <TagComponent tag={tag} key={tag.id} />)}
                         </div>
@@ -278,7 +291,7 @@ function HiddenChannelLockScreen({ channel }: { channel: ExtendedChannel; }) {
                 <div className={cl("allowed-users-and-roles-container")}>
                     <div className={cl("allowed-users-and-roles-container-title")}>
                         {isPluginEnabled(PermissionsViewerPlugin.name) && (
-                            <Tooltip text="Permission Details">
+                            <Tooltip text={t("plugin.showHiddenChannels.modal.permissionDetails")}>
                                 {({ onMouseLeave, onMouseEnter }) => (
                                     <button
                                         onMouseLeave={onMouseLeave}
@@ -297,8 +310,8 @@ function HiddenChannelLockScreen({ channel }: { channel: ExtendedChannel; }) {
                                 )}
                             </Tooltip>
                         )}
-                        <BaseText size="lg" weight="bold">Allowed users and roles:</BaseText>
-                        <Tooltip text={defaultAllowedUsersAndRolesDropdownState ? "Hide Allowed Users and Roles" : "View Allowed Users and Roles"}>
+                        <BaseText size="lg" weight="bold">{t("plugin.showHiddenChannels.modal.allowedUsersAndRoles")}</BaseText>
+                        <Tooltip text={defaultAllowedUsersAndRolesDropdownState ? t("plugin.showHiddenChannels.modal.hideAllowedUsersAndRoles") : t("plugin.showHiddenChannels.modal.viewAllowedUsersAndRoles")}>
                             {({ onMouseLeave, onMouseEnter }) => (
                                 <button
                                     onMouseLeave={onMouseLeave}

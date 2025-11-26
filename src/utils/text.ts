@@ -17,6 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
+
 // Utils for readable text transformations eg: `toTitle(fromKebab())`
 
 // Case style to words
@@ -39,10 +41,22 @@ export const wordsToTitle = (words: string[]) =>
 const units = ["years", "months", "weeks", "days", "hours", "minutes", "seconds"] as const;
 type Units = typeof units[number];
 
-function getUnitStr(unit: Units, isOne: boolean, short: boolean) {
-    if (short === false) return isOne ? unit.slice(0, -1) : unit;
+const unitMap: Record<Units, string> = {
+    years: "year",
+    months: "month",
+    weeks: "week",
+    days: "day",
+    hours: "hour",
+    minutes: "minute",
+    seconds: "second"
+};
 
-    return unit[0];
+function getUnitStr(unit: Units, isOne: boolean, short: boolean) {
+    if (short) return t("common.unit.s");
+
+    const unitKey = unitMap[unit];
+    const translatedUnit = t(`common.unit.${unitKey}`);
+    return isOne ? translatedUnit : translatedUnit;
 }
 
 /**
@@ -113,6 +127,26 @@ export function formatDurationMs(ms: number, human: boolean = false, seconds: bo
 
     return res;
 }
+
+export function formatTimestamp(timestamp: number): string {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMinutes = Math.floor(diffMs / (1000 * 60));
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+    if (diffMinutes < 60) {
+        return `${diffMinutes} ${diffMinutes !== 1 ? t("common.unit.minutes") : t("common.unit.minute")} ${t("common.unit.ago")}`;
+    } else if (diffHours < 24) {
+        return `${diffHours} ${diffHours !== 1 ? t("common.unit.hours") : t("common.unit.hour")} ${t("common.unit.ago")}`;
+    } else if (diffDays < 7) {
+        return `${diffDays} ${diffDays !== 1 ? t("common.unit.days") : t("common.unit.day")} ${t("common.unit.ago")}`;
+    } else {
+        return date.toLocaleDateString();
+    }
+}
+
 
 /**
  * Join an array of strings in a human readable way (1, 2 and 3)
