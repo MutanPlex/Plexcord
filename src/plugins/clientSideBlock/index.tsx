@@ -15,6 +15,17 @@ import { ChannelStore, GuildMemberStore, GuildRoleStore, RelationshipStore, User
 
 const settings = definePluginSettings(
     {
+        hideVc: {
+            get label() {
+                return t("plugin.clientSideBlock.option.hideVc.label");
+            },
+            get description() {
+                return t("plugin.clientSideBlock.option.hideVc.description");
+            },
+            type: OptionType.BOOLEAN,
+            default: false,
+            restartNeeded: true
+        },
         usersToBlock: {
             get label() {
                 return t("plugin.clientSideBlock.option.usersToBlock.label");
@@ -118,36 +129,23 @@ const settings = definePluginSettings(
         }
     });
 
-function isChannelBlocked(channelID) {
-    const guildID = ChannelStore.getChannel(channelID)?.guild_id;
+function isChannelInGuildBlocked(channelID, guild) {
+    const guildID = guild ? channelID : ChannelStore.getChannel(channelID)?.guild_id;
 
-    if (settings.store.guildBlackList.split(", ").includes(guildID) || (!settings.store.guildWhiteList.split(", ").includes(guildID) && settings.store.guildWhiteList.length > 0)) {
-        return true;
-    }
+    const blacklist = settings.store.guildBlackList?.split(",").map(s => s.trim()).filter(Boolean) ?? [];
+    const whitelist = settings.store.guildWhiteList?.split(",").map(s => s.trim()).filter(Boolean) ?? [];
+
+    if (blacklist.includes(guildID)) return true;
+    if (whitelist.length && !whitelist.includes(guildID)) return true;
 
     return false;
 }
 
 function shouldHideUser(userId: string, channelId?: string) {
-    if (channelId) {
-        if (isChannelBlocked(channelId)) {
-            return false;
-        }
+    if (channelId && isChannelInGuildBlocked(channelId, false)) return true;
+    if (RelationshipStore.isBlocked(userId) && settings.store.hideBlockedUsers) return true;
+    if (settings.store.usersToBlock.length === 0) return false;
 
-        const guildID = ChannelStore.getChannel(channelId)?.guild_id;
-
-        // add new user hiding logic here at some point
-    }
-
-    // hide the user if the user is blocked and the hide blocked users setting is enabled
-    if (RelationshipStore.isBlocked(userId) && settings.store.hideBlockedUsers) {
-        return true;
-    }
-    // failsafe that is needed for some reason
-    if (settings.store.usersToBlock.length === 0) {
-        return false;
-    }
-    // hide the user if the id is in the users to block setting
     return settings.store.usersToBlock.split(", ").includes(userId);
 }
 
@@ -157,15 +155,11 @@ function isRoleAllBlockedMembers(roleId, guildId) {
     if (!role) return false;
 
     const membersWithRole: GuildMember[] = GuildMemberStore.getMembers(guildId).filter(member => member.roles.includes(roleId));
-    if (membersWithRole.length === 0) return false;
+    if (!membersWithRole.length) return false;
+    if (isChannelInGuildBlocked(guildId, true)) return true;
 
-    if (isChannelBlocked(guildId)) {
-        return false;
-    }
-    // need to add an online check at some point but this sorta works for now
     return membersWithRole.every(member => shouldHideUser(member.userId) && !(UserStore.getUser(member.userId).desktop || UserStore.getUser(member.userId).mobile));
 }
-
 
 function hiddenReplyComponent() {
     switch (settings.store.blockedReplyDisplay) {
@@ -176,6 +170,37 @@ function hiddenReplyComponent() {
     }
 }
 
+function activeNowView(cards) {
+    if (!Array.isArray(cards)) return cards;
+
+    return cards.filter(card => {
+        if (!card?.key) return false;
+
+        const newKey = card.key.match(/(?:user-|party-spotify:)(.+)/)?.[1];
+        if (newKey) return !shouldHideUser(newKey);
+
+        if (card.key.startsWith("channel-") && settings.store.hideVc) {
+            const { party } = card.props;
+            if (!party) return true;
+
+            const { applicationStreams, partiedMembers, priorityMembers, voiceChannels } = party;
+            voiceChannels?.forEach(vc => vc.members = vc.members?.filter(m => !shouldHideUser(m.id)) ?? []);
+            party.applicationStreams = (applicationStreams ?? []).filter(applicationStream => !shouldHideUser(applicationStream.streamUser.id));
+            party.priorityMembers = priorityMembers?.filter(m => !shouldHideUser(m.user.id)) ?? [];
+            party.partiedMembers = partiedMembers?.filter(m => !shouldHideUser(m.id)) ?? [];
+
+            const hasMembers = (voiceChannels?.some(vc => vc.members?.length) ?? false) ||
+                (party.partiedMembers?.length ?? 0) ||
+                (party.priorityMembers?.length ?? 0) ||
+                (party.applicationStreams?.length ?? 0);
+
+            return hasMembers;
+        }
+
+        return true;
+    });
+}
+
 export default definePlugin({
     name: "ClientSideBlock",
     description: "Allows you to locally hide almost all content from any user",
@@ -183,11 +208,12 @@ export default definePlugin({
     get displayDescription() {
         return t("plugin.clientSideBlock.description");
     },
-    authors: [Devs.Samwich, PcDevs.MutanPlex],
+    authors: [Devs.Samwich, PcDevs.MutanPlex, PcDevs.KamiRu],
     settings,
-    shouldHideUser: shouldHideUser,
-    hiddenReplyComponent: hiddenReplyComponent,
-    isRoleAllBlockedMembers: isRoleAllBlockedMembers,
+    activeNowView,
+    shouldHideUser,
+    hiddenReplyComponent,
+    isRoleAllBlockedMembers,
     patches: [
         // message
         {
@@ -246,11 +272,10 @@ export default definePlugin({
             find: "PrivateChannel.renderAvatar",
             replacement: {
                 // horror but it works
-                match: /(function\(\i,(\i),\i\){.*)(return \i\.isMultiUserDM\(\))/,
-                replace: "$1if($2.rawRecipients[0] != null){if($2.rawRecipients[0].id != null){if($self.shouldHideUser($2.rawRecipients[0].id)) return null;}}$3"
+                match: /(return \i\.isMultiUserDM\(\))(?<=function\(\i,(\i),\i\){.*)/,
+                replace: "if($2.rawRecipients[0] && $2.rawRecipients[0]?.id){if($self.shouldHideUser($2.rawRecipients[0].id)) return null;}$1"
             }
         },
-
         // thank nick (644298972420374528) for these patches :3
 
         // filter relationships
@@ -274,17 +299,8 @@ export default definePlugin({
             find: "}getMutualFriends(",
             replacement: {
                 match: /(getMutualFriends\(\i\){)return (\i\.get\(\i\))/,
-                replace: "$1if($2 != undefined) return $2.filter(u => !$self.shouldHideUser(u.key))"
+                replace: "$1if($2) return $2.filter(u => !$self.shouldHideUser(u.key))"
             }
         }
-    ],
-    activeNowView(cards) {
-        if (!Array.isArray(cards)) return cards;
-
-        return cards.filter(card => {
-            if (!card?.key) return false;
-            const newKey = card.key.match(/(?:user-|party-spotify:)(.+)/)?.[1];
-            return this.shouldHideUser(newKey) ? null : card;
-        });
-    }
+    ]
 });

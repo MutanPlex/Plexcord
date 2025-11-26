@@ -2051,6 +2051,10 @@
             "description": "Herhangi bir kullanıcıdan gelen neredeyse tüm içerikleri yerel olarak gizlemenizi sağlar",
             "replying": "Engellenen mesaja yanıt veriliyor",
             "option": {
+                "hideVc": {
+                    "label": "Sesli Kanallardan Gizle",
+                    "description": "Engellenen kullanıcıları içeren sesli kanalları gizle"
+                },
                 "usersToBlock": {
                     "label": "Engellenecek Kullanıcılar",
                     "description": "Virgül ve boşluk ile ayrılmış kullanıcı ID’leri"
@@ -6281,6 +6285,11 @@
                     "label": "Yoksayılan Görev Kimlikleri",
                     "description": "Yoksayılan Görev kimliklerinin dizisi."
                 }
+            },
+            "button": {
+                "questInProgressWithTime": "Tamamlanıyor ({{remainTime}})",
+                "completing": "Tamamlanıyor",
+                "resume": "Devam Et (~{{remainTime}})"
             }
         },
         "questionMarkReplacement": {

@@ -15,11 +15,6 @@ import { IconUtils, UserStore } from "@webpack/common";
 
 import style from "./style.css?managed";
 
-interface iUSRBG extends Plugin {
-    userHasBackground(userId: string);
-    getImageUrl(userId: string): string | null;
-}
-
 export default definePlugin({
     name: "FullVCPFP",
     description: "Makes avatars take up the entire vc tile",

@@ -63,4 +63,5 @@ export interface UserJSON {
     id: string;
     publicFlags: number;
     username: string;
+    globalName: string | undefined;
 }

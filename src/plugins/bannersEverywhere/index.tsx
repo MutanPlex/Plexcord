@@ -13,15 +13,10 @@ import { disableStyle, enableStyle } from "@api/Styles";
 import { User } from "@plexcord/discord-types";
 import USRBGPlugin from "@plugins/usrbg";
 import { Devs, PcDevs } from "@utils/constants";
-import definePlugin, { OptionType, Plugin } from "@utils/types";
+import definePlugin, { OptionType } from "@utils/types";
 import { findStoreLazy } from "@webpack";
 
 import style from "./style.css?managed";
-
-interface iUSRBG extends Plugin {
-    userHasBackground(userId: string);
-    getImageUrl(userId: string): string | null;
-}
 
 interface Nameplate {
     imgAlt: string;

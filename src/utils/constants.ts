@@ -904,7 +904,11 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     Prism: {
         name: "Prism",
         id: 390884143749136386n
-    }
+    },
+    KamiRu: {
+        name: "KamiRu",
+        id: 819191621676695563n
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>
