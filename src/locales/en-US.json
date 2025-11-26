@@ -420,7 +420,8 @@
         "description": "You can import and export your Plexcord settings as a JSON file. This allows you to easily transfer your settings to another device, or recover your settings after reinstalling Plexcord or Discord.",
         "successful": "Settings successfully imported. Restart to apply changes!",
         "error": {
-            "failure": "Failed to import settings: {{error}}"
+            "failure": "Failed to import settings: {{error}}",
+            "invalid": "Invalid Settings. Is this even a Plexcord Settings file?"
         },
         "settings": {
             "text": "Settings Export contains:",

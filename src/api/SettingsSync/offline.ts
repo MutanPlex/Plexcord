@@ -29,25 +29,31 @@ const toastFailure = (err: any) =>
 const logger = new Logger("SettingsSync:Offline", "#39b7e0");
 
 export async function importSettings(data: string) {
+    let parsed: any;
     try {
-        var parsed = JSON.parse(data);
+        parsed = JSON.parse(data);
     } catch (err) {
         console.log(data);
         throw new Error("Failed to parse JSON: " + String(err));
     }
 
-    if ("settings" in parsed && "quickCss" in parsed) {
+    if ("settings" in parsed) {
         Object.assign(PlainSettings, parsed.settings);
         await PlexcordNative.settings.set(parsed.settings);
-        await PlexcordNative.quickCss.set(parsed.quickCss);
-    } else
-        throw new Error("Invalid Settings. Is this even a Plexcord Settings file?");
+    }
+
+    if ("quickCss" in parsed) await PlexcordNative.quickCss.set(parsed.quickCss);
+
+    if ("dataStore" in parsed) await DataStore.setMany(parsed.dataStore);
+
+    if (!("settings" in parsed || "quickCss" in parsed || "dataStore" in parsed)) throw new Error(t("sync.error.invalid"));
 }
 
 export async function exportSettings({ minify }: { minify?: boolean; } = {}) {
     const settings = PlexcordNative.settings.get();
     const quickCss = await PlexcordNative.quickCss.get();
-    return JSON.stringify({ settings, quickCss }, null, minify ? undefined : 4);
+    const dataStore = await DataStore.entries();
+    return JSON.stringify({ settings, quickCss, dataStore }, null, minify ? undefined : 4);
 }
 
 export async function exportPlugins({ minify }: { minify?: boolean; } = {}) {
@@ -111,7 +117,7 @@ export async function uploadSettingsBackup(showToast = true): Promise<void> {
                 await importSettings(new TextDecoder().decode(file.data));
                 if (showToast) toastSuccess();
             } catch (err) {
-                new Logger("SettingsSync").error(err);
+                logger.error(err);
                 if (showToast) toastFailure(err);
             }
         }
@@ -125,7 +131,7 @@ export async function uploadSettingsBackup(showToast = true): Promise<void> {
                 await importSettings(reader.result as string);
                 if (showToast) toastSuccess();
             } catch (err) {
-                new Logger("SettingsSync").error(err);
+                logger.error(err);
                 if (showToast) toastFailure(err);
             }
         };

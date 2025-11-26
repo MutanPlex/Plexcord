@@ -420,7 +420,8 @@
         "description": "Plexcord ayarlarınızı bir JSON dosyası olarak içe ve dışa aktarabilirsiniz. Bu sayede ayarlarınızı kolayca başka bir cihaza taşıyabilir veya Plexcord ya da Discord’u yeniden yükledikten sonra ayarlarınızı geri yükleyebilirsiniz.",
         "successful": "Ayarlar başarıyla içeri aktarıldı. Değişikliklerin etkili olması için uygulamayı yeniden başlatın!",
         "error": {
-            "failure": "Ayarları içe aktarma başarısız oldu: {{error}}"
+            "failure": "Ayarları içe aktarma başarısız oldu: {{error}}",
+            "invalid": "Geçersiz Ayarlar. Bu gerçekten bir Plexcord Ayar dosyası mı?"
         },
         "settings": {
             "text": "Dışarı aktarma şu ayarları içerir:",
