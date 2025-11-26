@@ -7053,6 +7053,24 @@
                 "viewAllowedUsersAndRoles": "View Allowed Users and Roles"
             }
         },
+        "showHiddenThings" :{
+            "name": "ShowHiddenThings",
+            "description": "Displays various hidden & moderator-only things regardless of permissions.",
+            "option": {
+                "showTimeouts": {
+                    "label": "Show Member Timeouts in Chat",
+                    "description": "Show member timeout icons in chat."
+                },
+                "showInvitesPaused": {
+                    "label": "Show Invites Paused",
+                    "description": "Show the invites paused tooltip in the server list."
+                },
+                "showModView": {
+                    "label": "Show Mod View",
+                    "description": "Show the member mod view context menu item in all servers."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

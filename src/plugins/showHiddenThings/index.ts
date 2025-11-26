@@ -17,23 +17,47 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { GuildMember, Role } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
-import definePlugin, { OptionType, PluginSettingDef } from "@utils/types";
-
-const opt = (description: string) => ({
-    type: OptionType.BOOLEAN,
-    description,
-    default: true,
-    restartNeeded: true
-} satisfies PluginSettingDef);
+import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
-    showTimeouts: opt("Show member timeout icons in chat."),
-    showInvitesPaused: opt("Show the invites paused tooltip in the server list."),
-    showModView: opt("Show the member mod view context menu item in all servers.")
+    showTimeouts: {
+        get label() {
+            return t("plugin.showHiddenThings.option.showTimeouts.label");
+        },
+        get description() {
+            return t("plugin.showHiddenThings.option.showTimeouts.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: true
+    },
+    showInvitesPaused: {
+        get label() {
+            return t("plugin.showHiddenThings.option.showInvitesPaused.label");
+        },
+        get description() {
+            return t("plugin.showHiddenThings.option.showInvitesPaused.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: true
+    },
+    showModView: {
+        get label() {
+            return t("plugin.showHiddenThings.option.showModView.label");
+        },
+        get description() {
+            return t("plugin.showHiddenThings.option.showModView.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: true
+    }
 });
 
 export default definePlugin({
@@ -42,6 +66,10 @@ export default definePlugin({
     description: "Displays various hidden & moderator-only things regardless of permissions.",
     authors: [Devs.Dolfies],
     settings,
+
+    get displayDescription() {
+        return t("plugin.showHiddenThings.description");
+    },
 
     patches: [
         {

@@ -7053,6 +7053,24 @@
                 "viewAllowedUsersAndRoles": "İzinli Kullanıcılar ve Rolleri Görüntüle"
             }
         },
+        "showHiddenThings": {
+            "name": "ShowHiddenThings",
+            "description": "İzinlere bakılmaksızın çeşitli gizli ve yalnızca moderatörlere özel şeyleri gösterir.",
+            "option": {
+                "showTimeouts": {
+                    "label": "Sohbette Üye Zaman Aşımını Göster",
+                    "description": "Sohbette üye zaman aşımı ikonlarını göster."
+                },
+                "showInvitesPaused": {
+                    "label": "Davetler Duraklatıldı Bilgisini Göster",
+                    "description": "Sunucu listesinde davetlerin duraklatıldığı bilgisini göster."
+                },
+                "showModView": {
+                    "label": "Mod Görünümünü Göster",
+                    "description": "Tüm sunucularda üye mod görünümü bağlam menüsü seçeneğini göster."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
