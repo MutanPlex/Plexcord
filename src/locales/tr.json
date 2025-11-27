@@ -7185,6 +7185,18 @@
                 }
             }
         },
+        "showTimeoutDuration": {
+            "name": "ShowTimeoutDuration",
+            "description": "Bir kullanıcının zaman aşımının ne kadar daha süreceğini, zaman aşımı ikonu araç ipucunda veya yanında gösterir",
+            "option": {
+                "displayStyle": {
+                    "label": "Görüntüleme Stili",
+                    "description": "Zaman aşımı süresinin nasıl görüntüleneceği",
+                    "tooltip": "Araç İpucunda",
+                    "inline": "Zaman aşımı ikonunun yanında"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

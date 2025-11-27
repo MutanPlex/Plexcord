@@ -7185,6 +7185,18 @@
                 }
             }
         },
+        "showTimeoutDuration": {
+            "name": "ShowTimeoutDuration",
+            "description": "Shows how much longer a user's timeout will last, either in the timeout icon tooltip or next to it",
+            "option": {
+                "displayStyle": {
+                    "label": "Display Style",
+                    "description": "How to display the timeout duration",
+                    "tooltip": "In the Tooltip",
+                    "inline": "Next to the timeout icon"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
