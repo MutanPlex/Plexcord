@@ -13,10 +13,10 @@ import definePlugin, { OptionType } from "@utils/types";
 const settings = definePluginSettings({
     onlySnow: {
         get label() {
-            return t("plugin.secretRingTone.option.onlySnow.label");
+            return t("plugin.secretRingToneEnabler.option.onlySnow.label");
         },
         get description() {
-            return t("plugin.secretRingTone.option.onlySnow.description");
+            return t("plugin.secretRingToneEnabler.option.onlySnow.description");
         },
         type: OptionType.BOOLEAN,
         default: false,
@@ -31,7 +31,7 @@ export default definePlugin({
     settings,
 
     get displayDescription() {
-        return t("plugin.secretRingTone.description");
+        return t("plugin.secretRingToneEnabler.description");
     },
 
     patches: [

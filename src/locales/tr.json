@@ -7222,6 +7222,48 @@
                 }
             }
         },
+        "signature": {
+            "name": "Signature",
+            "description": "Otomatik imza/mesaj sonu metni",
+            "option": {
+                "name": {
+                    "label": "İmza",
+                    "description": "Mesajlarınızın sonuna eklenecek imza metni"
+                },
+                "textHeader": {
+                    "label": "Metin Başlığı",
+                    "description": "Metnin başına eklenecek başlık"
+                },
+                "showIcon": {
+                    "label": "İkonu Göster",
+                    "description": "Sohbet çubuğunda eklentiyi açıp kapatmak için bir ikon göster"
+                },
+                "contextMenu": {
+                    "label": "Bağlam Menüsü",
+                    "description": "Sohbet giriş bağlam menüsüne işlevi açıp kapatma seçeneği ekle"
+                },
+                "isEnabled": {
+                    "label": "Etkin",
+                    "description": "İşlevi aç/kapat"
+                }
+            },
+            "tooltip": {
+                "enable": "İmzayı Etkinleştir",
+                "disable": "İmzayı Devre Dışı Bırak"
+            },
+            "context": {
+                "enable": "İmzayı Etkinleştir"
+            },
+            "command": {
+                "signature": {
+                    "name": "Signature",
+                    "description": "İmzanızı açıp kapatın",
+                    "toogle": "İmzanızı değiştirin (varsayılan davranış: değiştir)",
+                    "enabled": "İmza etkinleştirildi",
+                    "disabled": "İmza devre dışı bırakıldı"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

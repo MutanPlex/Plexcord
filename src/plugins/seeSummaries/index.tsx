@@ -20,10 +20,10 @@ const createSummaryFromServer = findByCodeLazy(".people)),startId:", ".type}");
 const settings = definePluginSettings({
     summaryExpiryThresholdDays: {
         get label() {
-            return t("plugin.seeSummaries.option.summaryExpiryThresholdDays.label");
+            return t("plugin.summaries.option.summaryExpiryThresholdDays.label");
         },
         get description() {
-            return t("plugin.seeSummaries.option.summaryExpiryThresholdDays.description");
+            return t("plugin.summaries.option.summaryExpiryThresholdDays.description");
         },
         type: OptionType.SLIDER,
         markers: [1, 3, 5, 7, 10, 15, 20, 25, 30],
@@ -63,7 +63,7 @@ export default definePlugin({
     settings,
 
     get displayDescription() {
-        return t("plugin.seeSummaries.description");
+        return t("plugin.summaries.description");
     },
 
     patches: [
