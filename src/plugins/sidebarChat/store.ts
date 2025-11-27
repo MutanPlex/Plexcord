@@ -4,6 +4,7 @@
  * Copyright (c) 2025 MutanPlex
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Flux as TFlux } from "@plexcord/discord-types";
 import { proxyLazy } from "@utils/lazy";
@@ -15,13 +16,23 @@ interface IFlux extends TFlux {
 
 export const settings = definePluginSettings({
     persistSidebar: {
+        get label() {
+            return t("plugin.sidebarChat.option.persistSidebar.label");
+        },
+        get description() {
+            return t("plugin.sidebarChat.option.persistSidebar.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Keep the sidebar chat open across Discord restarts",
         default: true,
     },
     patchCommunity: {
+        get label() {
+            return t("plugin.sidebarChat.option.patchCommunity.label");
+        },
+        get description() {
+            return t("plugin.sidebarChat.option.patchCommunity.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Patch things like the Channel Browser or Members tab that community servers have.",
         default: true,
         restartNeeded: true,
     }

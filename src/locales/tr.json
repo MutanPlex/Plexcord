@@ -7197,6 +7197,31 @@
                 }
             }
         },
+        "sidebarChat": {
+            "name": "SidebarChat",
+            "description": "Başka bir kanalı veya DM'i kenar çubuğu olarak ya da açılır pencere şeklinde açın",
+            "toolbox": {
+                "label": "Önceki Sohbeti Aç"
+            },
+            "context": {
+                "label": "Kenar Çubuğu Sohbetini Aç"
+            },
+            "modal": {
+                "switch": "Kanalları Değiştir",
+                "popout": "Sohbeti Açılır Pencere Olarak Aç",
+                "close": "Kenar Çubuğu Sohbetini Kapat"
+            },
+            "option": {
+                "persistSidebar": {
+                    "label": "Kenar Çubuğu Sohbetini Kalıcı Yap",
+                    "description": "Discord yeniden başlatıldığında kenar çubuğu sohbetinin açık kalmasını sağlar"
+                },
+                "patchCommunity": {
+                    "label": "Community Yamasını Uygula",
+                    "description": "Topluluk sunucularındaki Kanal Tarayıcı veya Üyeler sekmesi gibi öğeleri yamalar."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

@@ -8,6 +8,7 @@
 import "./styles.css";
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Channel, Guild, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -24,13 +25,13 @@ import {
     mapMangledModuleLazy
 } from "@webpack";
 import {
-    ChannelRouter,
     ChannelStore,
     FluxDispatcher,
     GuildStore,
     Menu,
     MessageActions,
     MessageStore,
+    NavigationRouter,
     PermissionsBits,
     PermissionStore,
     PopoutActions,
@@ -104,7 +105,7 @@ const MakeContextMenu = (id: string, guildId: string | null) => {
     return (
         <Menu.MenuItem
             id={`pc-sidebar-chat-${id}`}
-            label={"Open Sidebar Chat"}
+            label={t("plugin.sidebarChat.context.label")}
             action={() => {
                 FluxDispatcher.dispatch({
                     // @ts-ignore
@@ -136,10 +137,23 @@ const ChannelContextPatch: NavContextMenuPatchCallback = (children, args: { chan
     children.push(MakeContextMenu(args.channel.id, args.channel.guild_id));
 };
 
+const handleToggle = () => {
+    FluxDispatcher.dispatch({
+        // @ts-ignore
+        type: "PC_SIDEBAR_CHAT_PREVIOUS",
+    });
+};
+
+
 export default definePlugin({
     name: "SidebarChat",
     authors: [Devs.Joona],
     description: "Open a another channel or a DM as a sidebar or as a popout",
+
+    get displayDescription() {
+        return t("plugin.sidebarChat.description");
+    },
+
     patches: [
         {
             find: 'case"pendingFriends":',
@@ -168,14 +182,10 @@ export default definePlugin({
         "thread-context": ChannelContextPatch,
         "gdm-context": ChannelContextPatch,
     },
-
-    toolboxActions: {
-        "Open Previous Chat"() {
-            FluxDispatcher.dispatch({
-                // @ts-ignore
-                type: "PC_SIDEBAR_CHAT_PREVIOUS",
-            });
-        }
+    get toolboxActions() {
+        return {
+            [t("plugin.sidebarChat.toolbox.label")]: (() => handleToggle())
+        };
     },
 
     renderSidebar() {
@@ -300,19 +310,20 @@ const Header = ({ guild, channel }: { guild: Guild; channel: Channel; }) => {
         FluxDispatcher.dispatch({
             // @ts-ignore
             type: "PC_SIDEBAR_CHAT_NEW",
-            guildId: mainChannel.guild_id,
+            guildId: mainChannel.guild_id ?? "@me",
             id: mainChannel.id,
         });
-        ChannelRouter.transitionToChannel(channel.id);
-    }, [channel.id]);
+
+        NavigationRouter.transitionTo(`/channels/${channel.guild_id ?? "@me"}/${channel.id}`);
+    }, [channel.id, channel.guild_id]);
 
     return (
         <HeaderBar
             toolbar={
                 <>
-                    <HeaderBarIcon icon={ArrowsLeftRightIcon} tooltip="Switch channels" onClick={switchChannels} />
-                    <HeaderBarIcon icon={WindowLaunchIcon} tooltip="Popout Chat" onClick={openPopout} />
-                    <HeaderBarIcon icon={XSmallIcon} tooltip="Close Sidebar Chat" onClick={closeSidebar} />
+                    <HeaderBarIcon icon={ArrowsLeftRightIcon} tooltip={t("plugin.sidebarChat.modal.switch")} onClick={switchChannels} />
+                    <HeaderBarIcon icon={WindowLaunchIcon} tooltip={t("plugin.sidebarChat.modal.popout")} onClick={openPopout} />
+                    <HeaderBarIcon icon={XSmallIcon} tooltip={t("plugin.sidebarChat.modal.close")} onClick={closeSidebar} />
                 </>
             }
         >

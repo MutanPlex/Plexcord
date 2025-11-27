@@ -7197,6 +7197,31 @@
                 }
             }
         },
+        "sidebarChat": {
+            "name": "SidebarChat",
+            "description": "Open a another channel or a DM as a sidebar or as a popout",
+            "toolbox": {
+                "label": "Open Previous Chat"
+            },
+            "context": {
+                "label": "Open Sidebar Chat"
+            },
+            "modal": {
+                "switch": "Switch channels",
+                "popout": "Popout chat",
+                "close": "Close sidebar chat"
+            },
+            "option": {
+                "persistSidebar": {
+                    "label": "Persist Sidebar Chat",
+                    "description": "Keep the sidebar chat open across Discord restarts"
+                },
+                "patchCommunity":{
+                    "label": "Patch Community",
+                    "description": "Patch things like the Channel Browser or Members tab that community servers have."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
