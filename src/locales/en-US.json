@@ -7081,6 +7081,20 @@
                 }
             }
         },
+        "showMessageEmbeds": {
+            "name": "ShowMessageEmbeds",
+            "description": "Adds a context menu option to show embeds for links that don't have one",
+            "context": {
+                "embed": {
+                    "show": "Show Embed",
+                    "hide": "Remove Embed"
+                }
+            },
+            "error": {
+                "failed": "Failed to get embed",
+                "noEmbed": "No embeds found"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

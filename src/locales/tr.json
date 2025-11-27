@@ -7081,6 +7081,20 @@
                 }
             }
         },
+        "showMessageEmbeds": {
+            "name": "ShowMessageEmbeds",
+            "description": "Embed'i olmayan bağlantılar için embed gösterme seçeneğini bağlam menüsüne ekler",
+            "context": {
+                "embed": {
+                    "show": "Embed'i Göster",
+                    "hide": "Embed'i Kaldır"
+                }
+            },
+            "error": {
+                "failed": "Embed alınamadı",
+                "noEmbed": "Embed bulunamadı"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

@@ -6,6 +6,7 @@
  */
 
 import { findGroupChildrenByChildId } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { updateMessage } from "@api/MessageUpdater";
 import { ImageInvisible, ImageVisible } from "@components/Icons";
 import { Message } from "@plexcord/discord-types";
@@ -45,7 +46,7 @@ const addButton = (children, message, url) => {
         children.splice(0, 0,
             <Menu.MenuItem
                 id="pc-sme-show"
-                label="Show Embed"
+                label={t("plugin.showMessageEmbeds.context.embed.show")}
                 action={_ => unfurlEmbed(url, message)}
                 icon={ImageVisible}
                 key="pc-sme-show" />);
@@ -53,7 +54,7 @@ const addButton = (children, message, url) => {
         children.splice(0, 0,
             <Menu.MenuItem
                 id="pc-sme-remove"
-                label="Remove Embed"
+                label={t("plugin.showMessageEmbeds.context.embed.hide")}
                 action={_ => removeEmbed(url, message)}
                 icon={ImageInvisible}
                 key="pc-sme-remove" />);
@@ -146,12 +147,12 @@ async function unfurlEmbed(url: string, message: Message) {
             urls: [url]
         }
     }).catch(e => {
-        showFailureToast("Failed to get embed");
+        showFailureToast(t("plugin.showMessageEmbeds.error.failed"));
         logger.error("Failed to get embed", e);
     });
 
     if (!resp?.body?.embeds || resp.body.embeds.length === 0) {
-        showFailureToast("No embeds found");
+        showFailureToast(t("plugin.showMessageEmbeds.error.noEmbed"));
         return;
     }
 
@@ -162,13 +163,13 @@ async function unfurlEmbed(url: string, message: Message) {
         try {
             const convertedEmbed = convertEmbed(channel.id, message.id, embed);
             if (!convertedEmbed) {
-                showFailureToast("Failed to get embed");
+                showFailureToast(t("plugin.showMessageEmbeds.error.failed"));
                 logger.error("embed object couldn't be converted", embed);
                 continue;
             }
             convertedEmbeds.push(convertedEmbed);
         } catch (e) {
-            showFailureToast("Failed to get embed");
+            showFailureToast(t("plugin.showMessageEmbeds.error.failed"));
             logger.error("Failed to convert embed", e);
         }
     }
@@ -195,6 +196,10 @@ export default definePlugin({
     name: "ShowMessageEmbeds",
     description: "Adds a context menu option to show embeds for links that don't have one",
     authors: [PcDevs.Suffocate],
+
+    get displayDescription() {
+        return t("plugin.showMessageEmbeds.description");
+    },
 
     patches: [
         {
