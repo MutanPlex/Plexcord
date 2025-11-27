@@ -7,6 +7,7 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { GuildMember, Message, User } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
@@ -688,113 +689,218 @@ function removeHoveringReactionPopout(id: string) {
 
 const settings = definePluginSettings({
     messages: {
+        get label() {
+            return t("plugin.showMeYourName.option.messages.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.messages.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Display custom name format in messages.",
     },
     replies: {
+        get label() {
+            return t("plugin.showMeYourName.option.replies.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.replies.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Display custom name format in replies.",
     },
     mentions: {
+        get label() {
+            return t("plugin.showMeYourName.option.mentions.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.mentions.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Display custom name format in mentions.",
     },
     memberList: {
+        get label() {
+            return t("plugin.showMeYourName.option.memberList.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.memberList.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Display the first available name listed in your custom name format in the member list.",
     },
     profilePopout: {
+        get label() {
+            return t("plugin.showMeYourName.option.profilePopout.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.profilePopout.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Display the first available name listed in your custom name format in profile popouts.",
     },
     voiceChannels: {
+        get label() {
+            return t("plugin.showMeYourName.option.voiceChannels.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.voiceChannels.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Display the first available name listed in your custom name format in voice channels.",
     },
     reactions: {
+        get label() {
+            return t("plugin.showMeYourName.option.reactions.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.reactions.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Display the first available name listed in your custom name format in reaction tooltips, and the full name in reaction popouts.",
     },
     discriminators: {
+        get label() {
+            return t("plugin.showMeYourName.option.discriminators.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.discriminators.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Append discriminators to usernames for bots. Discriminators were deprecated for users, but are still used for bots. By default, a bot's username is equivalent to a user's global name, therefore multiple bots can have the same username. Appending discriminators makes them unique again.",
     },
     hideDefaultAtSign: {
+        get label() {
+            return t("plugin.showMeYourName.option.hideDefaultAtSign.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.hideDefaultAtSign.description");
+        },
         type: OptionType.BOOLEAN,
         default: false,
-        description: "Hide the default \"@\" symbol before the name in mentions and replies. Only applied if either feature is enabled.",
     },
     truncateAllNamesWithStreamerMode: {
+        get label() {
+            return t("plugin.showMeYourName.option.truncateAllNamesWithStreamerMode.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.truncateAllNamesWithStreamerMode.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Truncate all names, not just usernames, while in Streamer Mode.",
     },
     removeDuplicates: {
+        get label() {
+            return t("plugin.showMeYourName.option.removeDuplicates.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.removeDuplicates.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "If any of the names are equivalent, remove them, leaving only the unique names.",
     },
     ignoreFonts: {
+        get label() {
+            return t("plugin.showMeYourName.option.ignoreFonts.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.ignoreFonts.description");
+        },
         type: OptionType.BOOLEAN,
         default: false,
-        description: "For the second, third, and fourth names, use GG SANS regardless of the user's custom font.",
     },
     ignoreGradients: {
+        get label() {
+            return t("plugin.showMeYourName.option.ignoreGradients.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.ignoreGradients.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "For the second, third, and fourth names, if the role has a gradient, ignore it in favor of the value below.",
     },
     animateGradients: {
+        get label() {
+            return t("plugin.showMeYourName.option.animateGradients.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.animateGradients.description");
+        },
         type: OptionType.BOOLEAN,
         default: false,
-        description: "For the second, third, and fourth names, if the role has a gradient, animate it. This is disabled by \"Ignore Gradients\" and reduced motion.",
     },
     nameSeparator: {
+        get label() {
+            return t("plugin.showMeYourName.option.nameSeparator.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.nameSeparator.description");
+        },
         type: OptionType.STRING,
-        description: "The separator to use between names. The default is a single space.",
         default: " ",
     },
     includedNames: {
+        get label() {
+            return t("plugin.showMeYourName.option.includedNames.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.includedNames.description");
+        },
         type: OptionType.STRING,
-        description: "The order to display usernames, display names, nicknames, and friend names. Use the following placeholders: {user}, {display}, {nick}, {friend}. You can provide multiple name options to use as fallbacks if one is unavailable by separating them with commas as such: {friend, nick, display}. You can have up to three prefixes and three suffixes per name.",
         default: "{friend, nick} [{display}] (@{user})",
         isValid: validTemplate,
     },
     friendNameColor: {
+        get label() {
+            return t("plugin.showMeYourName.option.friendNameColor.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.friendNameColor.description");
+        },
         type: OptionType.STRING,
-        description: "The color to use for a friend's nickname if it's not the first displayed. Leave blank for default. Accepts hex(a), rgb(a), or hsl(a) input. Use \"Role\" to follow the user's top role color. Use \"Role+-#\" to adjust the brightness by that percentage (ex: \"Role+15\")",
         default: "Role-25",
         isValid: validColor,
     },
     nicknameColor: {
+        get label() {
+            return t("plugin.showMeYourName.option.nicknameColor.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.nicknameColor.description");
+        },
         type: OptionType.STRING,
-        description: "The color to use for the nickname if it's not the first displayed. Leave blank for default. Accepts hex(a), rgb(a), or hsl(a) input. Use \"Role\" to follow the user's top role color. Use \"Role+-#\" to adjust the brightness by that percentage (ex: \"Role+15\")",
         default: "Role-25",
         isValid: validColor,
     },
     displayNameColor: {
+        get label() {
+            return t("plugin.showMeYourName.option.displayNameColor.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.displayNameColor.description");
+        },
         type: OptionType.STRING,
-        description: "The color to use for the display name if it's not the first displayed. Leave blank for default. Accepts hex(a), rgb(a), or hsl(a) input. Use \"Role\" to follow the user's top role color. Use \"Role+-#\" to adjust the brightness by that percentage (ex: \"Role+15\")",
         default: "Role-25",
         isValid: validColor,
     },
     usernameColor: {
+        get label() {
+            return t("plugin.showMeYourName.option.usernameColor.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.usernameColor.description");
+        },
         type: OptionType.STRING,
-        description: "The color to use for the username if it's not the first displayed. Leave blank for default. Accepts hex(a), rgb(a), or hsl(a) input. Use \"Role\" to follow the user's top role color. Use \"Role+-#\" to adjust the brightness by that percentage (ex: \"Role+15\")",
         default: "Role-25",
         isValid: validColor,
     },
     triggerNameRerender: {
+        get label() {
+            return t("plugin.showMeYourName.option.triggerNameRerender.label");
+        },
+        get description() {
+            return t("plugin.showMeYourName.option.triggerNameRerender.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Trigger a name rerender by toggling this setting.",
         default: false,
         hidden: true
     },
@@ -805,6 +911,10 @@ export default definePlugin({
     description: "Display any permutation of nicknames, display names, and usernames in chat.",
     authors: [Devs.Rini, Devs.TheKodeToad, PcDevs.Etorix, Devs.sadan],
     settings,
+
+    get displayDescription() {
+        return t("plugin.showMeYourName.description");
+    },
 
     patches: [
         {

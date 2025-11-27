@@ -7095,6 +7095,96 @@
                 "noEmbed": "No embeds found"
             }
         },
+        "showMeYourName": {
+            "name": "ShowMeYourName",
+            "description": "Display any permutation of nicknames, display names, and usernames in chat.",
+            "option": {
+                "messages": {
+                    "label": "Messages",
+                    "description": "Display custom name format in messages."
+                },
+                "replies": {
+                    "label": "Replies",
+                    "description": "Display custom name format in replies."
+                },
+                "mentions": {
+                    "label": "Mentions",
+                    "description": "Display custom name format in mentions."
+                },
+                "memberList": {
+                    "label": "Member List",
+                    "description": "Display the first available name listed in your custom name format in the member list."
+                },
+                "profilePopout": {
+                    "label": "Profile Popout",
+                    "description": "Display the first available name listed in your custom name format in profile popouts."
+                },
+                "voiceChannels": {
+                    "label": "Voice Channels",
+                    "description": "Display the first available name listed in your custom name format in voice channels."
+                },
+                "reactions": {
+                    "label": "Reactions",
+                    "description": "Display the first available name listed in your custom name format in reaction tooltips, and the full name in reaction popouts."
+                },
+                "discriminators": {
+                    "label": "Discriminators",
+                    "description": "Append discriminators to usernames for bots. Discriminators were deprecated for users, but are still used for bots. By default, a bot's username is equivalent to a user's global name, therefore multiple bots can have the same username. Appending discriminators makes them unique again."
+                },
+                "hideDefaultAtSign": {
+                    "label": "Hide Default At Sign",
+                    "description": "Hide the default '@' symbol before the name in mentions and replies. Only applied if either feature is enabled."
+                },
+                "truncateAllNamesWithStreamerMode": {
+                    "label": "Truncate All Names with Streamer Mode",
+                    "description": "Truncate all names, not just usernames, while in Streamer Mode."
+                },
+                "removeDuplicates": {
+                    "label": "Remove Duplicates",
+                    "description": "If any of the names are equivalent, remove them, leaving only the unique names."
+                },
+                "ignoreFonts": {
+                    "label": "Ignore Fonts",
+                    "description": "For the second, third, and fourth names, use GG SANS regardless of the user's custom font."
+                },
+                "ignoreGradients": {
+                    "label": "Ignore Gradients",
+                    "description": "For the second, third, and fourth names, if the role has a gradient, ignore it in favor of the value below."
+                },
+                "animateGradients": {
+                    "label": "Animate Gradients",
+                    "description": "For the second, third, and fourth names, if the role has a gradient, animate it. This is disabled by 'Ignore Gradients' and reduced motion."
+                },
+                "nameSeparator": {
+                    "label": "Name Separator",
+                    "description": "The separator to use between names. The default is a single space."
+                },
+                "includedNames": {
+                    "label": "Included Names",
+                    "description": "The order to display usernames, display names, nicknames, and friend names. Use the following placeholders: {user}, {display}, {nick}, {friend}. You can provide multiple name options to use as fallbacks if one is unavailable by separating them with commas as such: {friend, nick, display}. You can have up to three prefixes and three suffixes per name."
+                },
+                "friendNameColor": {
+                    "label": "Friend Name Color",
+                    "description": "The color to use for a friend's nickname if it's not the first displayed. Leave blank for default. Accepts hex(a), rgb(a), or hsl(a) input. Use 'Role' to follow the user's top role color. Use 'Role+-#' to adjust the brightness by that percentage (ex: 'Role+15')"
+                },
+                "nicknameColor": {
+                    "label": "Nickname Color",
+                    "description": "The color to use for the nickname if it's not the first displayed. Leave blank for default. Accepts hex(a), rgb(a), or hsl(a) input. Use 'Role' to follow the user's top role color. Use 'Role+-#' to adjust the brightness by that percentage (ex: 'Role+15')"
+                },
+                "displayNameColor": {
+                    "label": "Display Name Color",
+                    "description": "The color to use for the display name if it's not the first displayed. Leave blank for default. Accepts hex(a), rgb(a), or hsl(a) input. Use 'Role' to follow the user's top role color. Use 'Role+-#' to adjust the brightness by that percentage (ex: 'Role+15')"
+                },
+                "usernameColor": {
+                    "label": "Username Color",
+                    "description": "The color to use for the username if it's not the first displayed. Leave blank for default. Accepts hex(a), rgb(a), or hsl(a) input. Use 'Role' to follow the user's top role color. Use 'Role+-#' to adjust the brightness by that percentage (ex: 'Role+15')"
+                },
+                "triggerNameRerender": {
+                    "label": "Trigger Name Rerender",
+                    "description": "Trigger a name rerender by toggling this setting."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

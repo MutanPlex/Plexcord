@@ -7095,6 +7095,96 @@
                 "noEmbed": "Embed bulunamadı"
             }
         },
+        "showMeYourName": {
+            "name": "ShowMeYourName",
+            "description": "Sohbette takma adların, görünen adların ve kullanıcı adlarının herhangi bir kombinasyonunu görüntüleyin.",
+            "option": {
+                "messages": {
+                    "label": "Mesajlar",
+                    "description": "Mesajlarda özel ad formatını görüntüle."
+                },
+                "replies": {
+                    "label": "Yanıtlar",
+                    "description": "Yanıtlarda özel ad formatını görüntüle."
+                },
+                "mentions": {
+                    "label": "Bahsetmeler",
+                    "description": "Bahsetmelerde özel ad formatını görüntüle."
+                },
+                "memberList": {
+                    "label": "Üye Listesi",
+                    "description": "Üye listesinde özel ad formatınızda listelenen ilk kullanılabilir adı göster."
+                },
+                "profilePopout": {
+                    "label": "Profil Açılır Kartı",
+                    "description": "Profil açılır kartlarında özel ad formatınızda listelenen ilk kullanılabilir adı göster."
+                },
+                "voiceChannels": {
+                    "label": "Ses Kanalları",
+                    "description": "Ses kanallarında özel ad formatınızda listelenen ilk kullanılabilir adı göster."
+                },
+                "reactions": {
+                    "label": "Tepkiler",
+                    "description": "Tepki araç ipuçlarında özel ad formatınızda listelenen ilk kullanılabilir adı, tepki açılır pencerelerinde ise tam adı göster."
+                },
+                "discriminators": {
+                    "label": "Ayrıştırıcıları Göster",
+                    "description": "Bot kullanıcı adlarına ayrıştırıcı ekleyin. Ayrıştırıcılar normal kullanıcılar için kaldırıldı, ancak botlar için hâlâ kullanılıyor. Varsayılan olarak bir botun kullanıcı adı bir kullanıcının global adına eşdeğerdir ve bu nedenle birden fazla bot aynı kullanıcı adına sahip olabilir. Ayrıştırıcı eklemek onları tekrar benzersiz hale getirir."
+                },
+                "hideDefaultAtSign": {
+                    "label": "Varsayılan @ İşaretini Gizle",
+                    "description": "Bahsetmelerde ve yanıtlarda adın başındaki varsayılan '@' simgesini gizleyin. Yalnızca ilgili özellik etkinse uygulanır."
+                },
+                "truncateAllNamesWithStreamerMode": {
+                    "label": "Yayıncı Modunda Tüm İsimleri Kısalt",
+                    "description": "Yayıncı Modundayken yalnızca kullanıcı adlarını değil, tüm adları kısalt."
+                },
+                "removeDuplicates": {
+                    "label": "Kopyaları Kaldır",
+                    "description": "Adlardan herhangi ikisi aynıysa tekrar edenleri kaldırarak yalnızca benzersiz olanları bırak."
+                },
+                "ignoreFonts": {
+                    "label": "Yazı Tiplerini Yoksay",
+                    "description": "İkinci, üçüncü ve dördüncü adlar için kullanıcının özel yazı tipini yok sayarak GG SANS kullan."
+                },
+                "ignoreGradients": {
+                    "label": "Gradyanları Yoksay",
+                    "description": "İkinci, üçüncü ve dördüncü adlar için rolün gradyanı varsa bunu yok sayıp aşağıdaki değeri kullan."
+                },
+                "animateGradients": {
+                    "label": "Gradyanları Animasyonlu Yap",
+                    "description": "İkinci, üçüncü ve dördüncü adlarda rol gradyanı varsa animasyonlu göster. 'Gradyanları Yoksay' etkinse veya azaltılmış hareket açıksa devre dışı kalır."
+                },
+                "nameSeparator": {
+                    "label": "Ad Ayırıcı",
+                    "description": "Adlar arasında kullanılacak ayırıcı. Varsayılan tek boşluktur."
+                },
+                "includedNames": {
+                    "label": "Dahil Edilen Adlar",
+                    "description": "Kullanıcı adlarının, görünen adların, takma adların ve arkadaş adlarının görüntülenme sırası. Şu yer tutucuları kullanın: {user}, {display}, {nick}, {friend}. Bir ad mevcut değilse kullanılacak alternatifleri virgülle ayırarak yazabilirsiniz: {friend, nick, display}. Her bir ad için üç ön ek ve üç son ek ekleyebilirsiniz."
+                },
+                "friendNameColor": {
+                    "label": "Arkadaş Adı Rengi",
+                    "description": "Arkadaş adının ilk görüntülenen ad olmadığı durumlarda kullanılacak renk. Boş bırakılırsa varsayılan kullanılır. Hex(a), rgb(a) veya hsl(a) kabul eder. 'Role' kullanıcının en yüksek rol rengine uyar. 'Role+-#' parlaklığı belirtilen yüzde kadar artırır/azaltır (örn: 'Role+15')."
+                },
+                "nicknameColor": {
+                    "label": "Takma Ad Rengi",
+                    "description": "Takma ad ilk görüntülenen ad değilse kullanılacak renk. Aynı renk formatı kuralları geçerlidir."
+                },
+                "displayNameColor": {
+                    "label": "Görünen Ad Rengi",
+                    "description": "Görünen ad ilk görüntülenen ad değilse kullanılacak renk. Aynı renk formatı kuralları geçerlidir."
+                },
+                "usernameColor": {
+                    "label": "Kullanıcı Adı Rengi",
+                    "description": "Kullanıcı adı ilk görüntülenen ad değilse kullanılacak renk. Aynı renk formatı kuralları geçerlidir."
+                },
+                "triggerNameRerender": {
+                    "label": "Adı Yeniden Oluşturmayı Tetikle",
+                    "description": "Bu ayarı değiştirerek adın yeniden oluşturulmasını tetikler."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
