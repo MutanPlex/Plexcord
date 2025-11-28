@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -58,7 +59,7 @@ function SpotifyActivityToggleButton() {
 
     return (
         <Button
-            tooltipText={showActivity ? "Turn off Spotify activity" : "Turn on Spotify activity"}
+            tooltipText={showActivity ? t("plugin.spotifyActivityToggle.tooltip.disable") : t("plugin.spotifyActivityToggle.tooltip.enable")}
             icon={makeSpotifyIcon(showActivity)}
             role="switch"
             aria-checked={showActivity}
@@ -81,6 +82,11 @@ export default definePlugin({
     name: "SpotifyActivityToggle",
     description: "Adds a toggle button for Spotify activity visibility.",
     authors: [Devs.thororen],
+
+    get displayDescription() {
+        return t("plugin.spotifyActivityToggle.description");
+    },
+
     patches: [
         {
             find: "#{intl::ACCOUNT_SPEAKING_WHILE_MUTED}",
