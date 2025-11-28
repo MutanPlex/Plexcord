@@ -7514,6 +7514,20 @@
                 }
             }
         },
+        "startupTimings": {
+            "name": "StartupTimings",
+            "description": "Adds Startup Timings to the Settings menu",
+            "modal": {
+                "title": "Startup Timings",
+                "ended": "Trace ended at:",
+                "start": "Start",
+                "interval": "Interval",
+                "delta": "Delta",
+                "event": "Event",
+                "serverTrace": "Server Trace",
+                "loading": "Loading..."
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

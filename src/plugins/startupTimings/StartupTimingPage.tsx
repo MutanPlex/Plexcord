@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
@@ -95,14 +96,14 @@ function TimingSection({ title, logs, traceEnd }: TimingSectionProps) {
             <code>
                 {traceEnd && (
                     <div style={{ color: "var(--header-primary)", marginBottom: 5, userSelect: "text" }}>
-                        Trace ended at: {(new Date(traceEnd)).toTimeString()}
+                        {t("plugin.startupTimings.modal.ended")} {(new Date(traceEnd)).toTimeString()}
                     </div>
                 )}
                 <div style={{ color: "var(--header-primary)", display: "grid", gridTemplateColumns: "repeat(3, auto) 1fr", gap: "2px 10px", userSelect: "text" }}>
-                    <span>Start</span>
-                    <span>Interval</span>
-                    <span>Delta</span>
-                    <span style={{ marginBottom: 5 }}>Event</span>
+                    <span>{t("plugin.startupTimings.modal.start")}</span>
+                    <span>{t("plugin.startupTimings.modal.interval")}</span>
+                    <span>{t("plugin.startupTimings.modal.delta")}</span>
+                    <span style={{ marginBottom: 5 }}>{t("plugin.startupTimings.modal.event")}</span>
                     {AppStartPerformance.logs.map((log, i) => (
                         <TimerItem key={i} {...log} instance={timings[i]} />
                     ))}
@@ -121,7 +122,7 @@ function ServerTrace({ trace }: ServerTraceProps) {
 
     return (
         <section>
-            <Heading>Server Trace</Heading>
+            <Heading>{t("plugin.startupTimings.modal.serverTrace")}</Heading>
             <code>
                 <Flex flexDirection="column" style={{ color: "var(--header-primary)", gap: 5, userSelect: "text" }}>
                     {lines.map((line, idx) => (
@@ -134,14 +135,14 @@ function ServerTrace({ trace }: ServerTraceProps) {
 }
 
 function StartupTimingPage() {
-    if (!AppStartPerformance?.logs) return <div>Loading...</div>;
+    if (!AppStartPerformance?.logs) return <div>{t("plugin.startupTimings.modal.loading")}</div>;
 
     const serverTrace = AppStartPerformance.logGroups.find(g => g.serverTrace)?.serverTrace;
 
     return (
         <React.Fragment>
             <TimingSection
-                title="Startup Timings"
+                title={t("plugin.startupTimings.modal.title")}
                 logs={AppStartPerformance.logs}
                 traceEnd={AppStartPerformance.endTime_}
             />

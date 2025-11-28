@@ -7514,6 +7514,20 @@
                 }
             }
         },
+        "startupTimings": {
+            "name": "StartupTimings",
+            "description": "Ayarlar menüsüne Başlangıç Zamanlamaları ekler",
+            "modal": {
+                "title": "Başlangıç Zamanlamaları",
+                "ended": "İzleme bitiş zamanı:",
+                "start": "Başlangıç",
+                "interval": "Aralık",
+                "delta": "Delta",
+                "event": "Olay",
+                "serverTrace": "Sunucu İzlemesi",
+                "loading": "Yükleniyor..."
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
