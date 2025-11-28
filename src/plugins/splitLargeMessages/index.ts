@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { addMessagePreSendListener, MessageSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
@@ -76,8 +77,13 @@ const listener: MessageSendListener = async (channelId, msg) => {
 
 const settings = definePluginSettings({
     maxLength: {
+        get label() {
+            return t("plugin.splitLargeMessages.option.maxLength.label");
+        },
+        get description() {
+            return t("plugin.splitLargeMessages.option.maxLength.description");
+        },
         type: OptionType.NUMBER,
-        description: "Maximum length of a message before it is split. Set to 0 to automatically detect.",
         default: 0,
         max: 4000,
         onChange(newValue) {
@@ -86,28 +92,53 @@ const settings = definePluginSettings({
         },
     },
     disableFileConversion: {
+        get label() {
+            return t("plugin.splitLargeMessages.option.disableFileConversion.label");
+        },
+        get description() {
+            return t("plugin.splitLargeMessages.option.disableFileConversion.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "If true, disables file conversion for large messages.",
         default: true,
     },
     sendDelay: {
+        get label() {
+            return t("plugin.splitLargeMessages.option.sendDelay.label");
+        },
+        get description() {
+            return t("plugin.splitLargeMessages.option.sendDelay.description");
+        },
         type: OptionType.SLIDER,
-        description: "Delay between each chunk in seconds.",
         default: 1,
         markers: [1, 2, 3, 5, 10],
     },
     hardSplit: {
+        get label() {
+            return t("plugin.splitLargeMessages.option.hardSplit.label");
+        },
+        get description() {
+            return t("plugin.splitLargeMessages.option.hardSplit.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "If true, splits on the last character instead of the last space/newline.",
         default: false,
     },
     splitInSlowmode: {
+        get label() {
+            return t("plugin.splitLargeMessages.option.splitInSlowmode.label");
+        },
+        get description() {
+            return t("plugin.splitLargeMessages.option.splitInSlowmode.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Should messages be split if the channel has slowmode enabled?",
     },
     slowmodeMax: {
+        get label() {
+            return t("plugin.splitLargeMessages.option.slowmodeMax.label");
+        },
+        get description() {
+            return t("plugin.splitLargeMessages.option.slowmodeMax.description");
+        },
         type: OptionType.NUMBER,
-        description: "Maximum slowmode time if splitting in slowmode.",
         default: 5,
         min: 1,
         max: 30,
@@ -120,6 +151,10 @@ export default definePlugin({
     authors: [PcDevs.Reycko],
     dependencies: ["MessageEventsAPI"],
     settings,
+
+    get displayDescription() {
+        return t("plugin.splitLargeMessages.description");
+    },
 
     start() {
         if (settings.store.maxLength === 0) maxLength = autoMaxLength();

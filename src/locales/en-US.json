@@ -7451,6 +7451,36 @@
                 "volume": "Soundboard Volume"
             }
         },
+        "splitLargeMessages": {
+            "name": "SplitLargeMessages",
+            "description": "Splits large messages into multiple to fit Discord's message limit.",
+            "option": {
+                "maxLength": {
+                    "label": "Maximum Message Length",
+                    "description": "Maximum length of a message before it is split. Set to 0 to automatically detect."
+                },
+                "disableFileConversion": {
+                    "label": "Disable File Conversion",
+                    "description": "If true, disables file conversion for large messages."
+                },
+                "sendDelay": {
+                    "label": "Send Delay",
+                    "description": "Delay between each chunk in seconds."
+                },
+                "hardSplit": {
+                    "label": "Hard Split",
+                    "description": "If true, splits on the last character instead of the last space/newline."
+                },
+                "splitInSlowmode": {
+                    "label": "Split In Slowmode",
+                    "description": "Should messages be split if the channel has slowmode enabled?"
+                },
+                "slowmodeMax": {
+                    "label": "Slowmode Max",
+                    "description": "Maximum slowmode time if splitting in slowmode."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

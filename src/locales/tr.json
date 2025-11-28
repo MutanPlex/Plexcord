@@ -7451,6 +7451,36 @@
                 "volume": "Soundboard Ses Seviyesi"
             }
         },
+        "splitLargeMessages": {
+            "name": "SplitLargeMessages",
+            "description": "Büyük mesajları, Discord'un mesaj sınırına uyması için birden fazla mesaja böler.",
+            "option": {
+                "maxLength": {
+                    "label": "Maksimum Mesaj Uzunluğu",
+                    "description": "Bir mesajın bölünmeden önce sahip olabileceği maksimum uzunluk. Otomatik algılama için 0 olarak ayarlayın."
+                },
+                "disableFileConversion": {
+                    "label": "Dosya Dönüştürmeyi Devre Dışı Bırak",
+                    "description": "Etkinse, büyük mesajlar için dosya dönüştürmeyi devre dışı bırakır."
+                },
+                "sendDelay": {
+                    "label": "Gönderim Gecikmesi",
+                    "description": "Her parça arasında saniye cinsinden bekleme süresi."
+                },
+                "hardSplit": {
+                    "label": "Katı Bölme",
+                    "description": "Etkinse, boşluk/yeni satır yerine son karakterden böler."
+                },
+                "splitInSlowmode": {
+                    "label": "Yavaş Modda Böl",
+                    "description": "Kanalda yavaş mod etkinse mesajlar bölünsün mü?"
+                },
+                "slowmodeMax": {
+                    "label": "Yavaş Mod Maksimumu",
+                    "description": "Yavaş modda bölünürken izin verilen maksimum yavaş mod süresi."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
