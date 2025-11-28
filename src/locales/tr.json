@@ -7503,6 +7503,17 @@
                 }
             }
         },
+        "spotifyShareCommands": {
+            "name": "SpotifyShareCommands",
+            "description": "Geçerli Spotify şarkınızı, albümünüzü veya sanatçınızı slash komutlarıyla paylaşın (/track, /album, /artist)",
+            "command": {
+                "makeCommand": {
+                    "description": "Geçerli Spotify {{type}} öğenizi sohbette paylaşın",
+                    "track": "Spotify’da herhangi bir şarkı dinlemiyorsunuz.",
+                    "find": "Şarkı Spotify’da bulunamadı."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

@@ -18,6 +18,7 @@
 */
 
 import { ApplicationCommandInputType, findOption, OptionalMessageOption, sendBotMessage } from "@api/Commands";
+import { t } from "@api/i18n";
 import { Command } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { sendMessage } from "@utils/discord";
@@ -62,20 +63,29 @@ function makeCommand(name: string, formatUrl: (track: Track) => string): Command
     return {
         name,
         description: `Share your current Spotify ${name} in chat`,
+        get displayDescription() {
+            return t("plugin.spotifyShareCommands.command.makeCommand.description", { type: name });
+        },
         inputType: ApplicationCommandInputType.BUILT_IN,
         options: [OptionalMessageOption],
         execute(options, { channel }) {
             const track: Track | null = Spotify.getTrack();
             if (!track) {
                 return sendBotMessage(channel.id, {
-                    content: "You're not listening to any music."
+                    author: {
+                        username: "Plexcord"
+                    },
+                    content: t("plugin.spotifyShareCommands.command.makeCommand.track")
                 });
             }
 
             // local tracks have an id of null
             if (track.id == null) {
                 return sendBotMessage(channel.id, {
-                    content: "Failed to find the track on spotify."
+                    author: {
+                        username: "Plexcord"
+                    },
+                    content: t("plugin.spotifyShareCommands.command.makeCommand.find")
                 });
             }
 
@@ -101,6 +111,11 @@ export default definePlugin({
     name: "SpotifyShareCommands",
     description: "Share your current Spotify track, album or artist via slash command (/track, /album, /artist)",
     authors: [Devs.katlyn],
+
+    get displayDescription() {
+        return t("plugin.spotifyShareCommands.description");
+    },
+
     commands: [
         makeCommand("track", track => `https://open.spotify.com/track/${track.id}`),
         makeCommand("album", track => `https://open.spotify.com/album/${track.album.id}`),
