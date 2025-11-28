@@ -7400,6 +7400,57 @@
                 }
             }
         },
+        "soundBoardLogger": {
+            "name": "SoundBoardLogger",
+            "description": "Sesli sohbetlerde çalınan tüm soundboard seslerini kaydeder ve bunları indirmenize olanak tanır",
+            "tooltip": "SoundBoard Logunu Aç",
+            "option": {
+                "savedIds": {
+                    "label": "Kaydedilen Soundboard ID'leri",
+                    "description": "Bir seferde kaydetmek istediğiniz soundboard ID miktarı (0 sınırsız kaydetmenizi sağlar)",
+                    "notNumber": "Değer bir sayı değil.",
+                    "cantDecimal": "Değer ondalık bir sayı olamaz.",
+                    "cantNegative": "Değer negatif bir sayı olamaz.",
+                    "heading": "Bir seferde kaydetmek istediğiniz soundboard ID miktarı (0 sınırsız kaydetmenizi sağlar)",
+                    "warning": "Uyarı! Sayıyı daha düşük bir değere ayarlamak logları sıfırlayacaktır!",
+                    "placeholder": "Bir sayı girin"
+                },
+                "fileType": {
+                    "label": "Dosya Türü",
+                    "description": "Dosyanızı kaydetmek istediğiniz format"
+                },
+                "openLogs": {
+                    "label": "Logları Aç",
+                    "description": "Logları göster",
+                    "button": "Logları Aç"
+                },
+                "soundVolume": {
+                    "label": "Ses Seviyesi",
+                    "description": "Açma/kapama sesinin yüksekliği (0 devre dışı bırakır)"
+                },
+                "iconLocation": {
+                    "label": "İkon Konumu",
+                    "description": "SoundBoard Log ikonunun nerede görüneceğini seçin (yeniden başlatma gerektirir)",
+                    "toolbar": "Araç Çubuğu",
+                    "chatInput": "Sohbet Girişi"
+                }
+            },
+            "modal": {
+                "title": "SoundBoard Logları",
+                "loading": "Sesler yükleniyor...",
+                "noLogs": "Henüz hiçbir ses kaydedilmedi. Log kaydı için bir sesli sohbete katılın!",
+                "clearLogs": "Logları Temizle",
+                "played": "{{time}} kez çalındı",
+                "last": "Son çalınma:",
+                "also": "Ayrıca şunları çaldı:",
+                "download": "İndir",
+                "copyId": "ID'yi Kopyala",
+                "copied": "ID panoya kopyalandı!",
+                "playSound": "Sesi Çal",
+                "moreUsers": "bu sesi başka insanlar da kullandı...",
+                "volume": "Soundboard Ses Seviyesi"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

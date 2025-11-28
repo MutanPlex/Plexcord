@@ -7400,6 +7400,57 @@
                 }
             }
         },
+        "soundBoardLogger": {
+            "name": "SoundBoardLogger",
+            "description": "Logs all soundboards that are played in a voice chat and allows you to download them",
+            "tooltip": "Open SoundBoard Log",
+            "option": {
+                "savedIds": {
+                    "label": "Saved Soundboard IDs",
+                    "description": "The amount of soundboard ids you want to save at a time (0 lets you save infinite)",
+                    "notNumber": "The value is not a number.",
+                    "cantDecimal": "The value can't be a decimal number.",
+                    "cantNegative": "The value can't be a negative number.",
+                    "heading": "The amount of soundboard ids you want to save at a time (0 lets you save infinite)",
+                    "warning": "Warning! Setting the number to a lower value will reset the log!",
+                    "placeholder": "Enter a number"
+                },
+                "fileType": {
+                    "label": "File Type",
+                    "description": "the format that you want to save your file"
+                },
+                "openLogs": {
+                    "label": "Open Logs",
+                    "description": "show the logs",
+                    "button": "Open Logs"
+                },
+                "soundVolume": {
+                    "label": "Sound Volume",
+                    "description": "How loud the toggle sound is (0 to disable)"
+                },
+                "iconLocation": {
+                    "label": "Icon Location",
+                    "description": "choose where to show the SoundBoard Log icon (requires restart)",
+                    "toolbar": "Toolbar",
+                    "chatInput": "Chat Input"
+                }
+            },
+            "modal": {
+                "title": "SoundBoard Logs",
+                "loading": "Loading sounds...",
+                "noLogs": "No sounds logged yet. Join a voice chat to start logging!",
+                "clearLogs": "Clear Logs",
+                "played": "Played {{time}} time{{s}}",
+                "last": "Last played:",
+                "also": "Also played:",
+                "download": "Download",
+                "copyId": "Copy ID",
+                "copied": "ID copied to clipboard!",
+                "playSound": "Play Sound",
+                "moreUsers": "other people used this sound...",
+                "volume": "Soundboard Volume"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

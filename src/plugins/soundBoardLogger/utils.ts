@@ -46,7 +46,7 @@ export const playSound = id => {
 };
 
 export async function downloadAudio(id: string): Promise<void> {
-    const filename = id + settings.store.FileType;
+    const filename = id + settings.store.fileType;
     const original = await fetch(`https://cdn.discordapp.com/soundboard-sounds/${id}`).then(res => res.arrayBuffer());
 
     if (IS_DISCORD_DESKTOP) {

@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -56,13 +57,13 @@ function SoundBoardLogContainer({ closeModal }) {
         return (
             <>
                 <ModalHeader className={cl("modal-header")}>
-                    <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>SoundBoard log</BaseText>
+                    <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t("plugin.soundBoardLogger.modal.title")}</BaseText>
                     <ModalCloseButton onClick={closeModal} />
                 </ModalHeader>
                 <ModalContent className={classes(cl("modal-content"), Margins.top8)}>
                     <div style={{ textAlign: "center", padding: "2rem" }}>
                         <BaseText size="sm" weight="medium" style={{ color: "var(--text-muted)" }}>
-                            Loading sounds...
+                            {t("plugin.soundBoardLogger.modal.loading")}
                         </BaseText>
                     </div>
                 </ModalContent>
@@ -76,7 +77,7 @@ function SoundBoardLogContainer({ closeModal }) {
 // Optimized individual sound item component
 const SoundItem = ({ item, itemUsers, avatarsMax, onClickUser, renderMoreUsers }) => {
     const handleDownload = useCallback(() => downloadAudio(item.soundId), [item.soundId]);
-    const handleCopyId = useCallback(() => copyWithToast(item.soundId, "ID copied to clipboard!"), [item.soundId]);
+    const handleCopyId = useCallback(() => copyWithToast(item.soundId, t("plugin.soundBoardLogger.modal.copied")), [item.soundId]);
     const handlePlaySound = useCallback(() => playSound(item.soundId), [item.soundId]);
 
     return (
@@ -116,11 +117,11 @@ const SoundItem = ({ item, itemUsers, avatarsMax, onClickUser, renderMoreUsers }
                 )}
             />
             <Flex flexDirection="row" className={cl("sound-buttons")}>
-                <Button variant="secondary" size="small" onClick={handleDownload}>Download</Button>
-                <Button variant="positive" size="small" onClick={handleCopyId}>Copy ID</Button>
-                <Tooltip text={`Soundboard volume: ${Math.floor(settings.store.soundVolume * 100)}%`}>
+                <Button variant="secondary" size="small" onClick={handleDownload}>{t("plugin.soundBoardLogger.modal.download")}</Button>
+                <Button variant="positive" size="small" onClick={handleCopyId}>{t("plugin.soundBoardLogger.modal.copyId")}</Button>
+                <Tooltip text={`${t("plugin.soundBoardLogger.modal.volume")}: ${Math.floor(settings.store.soundVolume * 100)}%`}>
                     {({ onMouseEnter, onMouseLeave }) =>
-                        <Button variant="primary" size="small" onClick={handlePlaySound} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>Play Sound</Button>
+                        <Button variant="primary" size="small" onClick={handlePlaySound} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>{t("plugin.soundBoardLogger.modal.playSound")}</Button>
                     }
                 </Tooltip>
             </Flex>
@@ -201,7 +202,7 @@ export default function SoundBoardLog({ data, closeModal }) {
                 className={AvatarStyles.clickableAvatar}
                 onClick={() => onClickShowMoreUsers(item, itemUsers)}
             >
-                <Tooltip text={`${itemUsers.length - avatarsMax} other people used this sound...`}>
+                <Tooltip text={`${itemUsers.length - avatarsMax} ${t("plugin.soundBoardLogger.modal.moreUsers")}`}>
                     {({ onMouseEnter, onMouseLeave }) => (
                         <div
                             className={AvatarStyles.moreUsers}
@@ -268,7 +269,7 @@ export default function SoundBoardLog({ data, closeModal }) {
     return (
         <>
             <ModalHeader className={cl("modal-header")}>
-                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>SoundBoard log</BaseText>
+                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t("plugin.soundBoardLogger.modal.title")}</BaseText>
                 <ModalCloseButton onClick={closeModal} />
             </ModalHeader>
             <ModalContent className={classes(cl("modal-content"), Margins.top8)}>
@@ -279,14 +280,14 @@ export default function SoundBoardLog({ data, closeModal }) {
                             height="200px"
                         />
                         <Paragraph size="sm" weight="medium" style={{ color: "var(--text-muted)" }} className={Margins.bottom16}>
-                            No sounds logged yet. Join a voice chat to start logging!
+                            {t("plugin.soundBoardLogger.modal.noLogs")}
                         </Paragraph>
                     </div>
                 }
             </ModalContent>
             <ModalFooter className={cl("modal-footer")}>
                 <Button variant="dangerPrimary" onClick={handleClearLogs}>
-                    Clear logs
+                    {t("plugin.soundBoardLogger.modal.clearLogs")}
                 </Button>
             </ModalFooter>
         </>

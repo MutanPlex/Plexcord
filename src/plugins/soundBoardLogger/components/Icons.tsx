@@ -6,6 +6,7 @@
  */
 
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
+import { t } from "@api/i18n";
 import { Button } from "@components/Button";
 import settings from "@plugins/soundBoardLogger/settings";
 import { cl } from "@plugins/soundBoardLogger/utils";
@@ -71,9 +72,9 @@ export function IconWithTooltip({ text, icon, onClick }) {
 }
 
 export const ChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
-    if (!isMainChat || settings.store.IconLocation !== "chat") return null;
+    if (!isMainChat || settings.store.iconLocation !== "chat") return null;
     return (
-        <ChatBarButton tooltip="Open SoundBoard Log"
+        <ChatBarButton tooltip={t("plugin.soundBoardLogger.tooltip")}
             onClick={openSoundBoardLog}>
             <LogIcon width={20} height={20} className="chatBarLogIcon" />
         </ChatBarButton>

@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
@@ -15,11 +16,16 @@ import { TextInput, useState } from "@webpack/common";
 import { openSoundBoardLog } from "./components/SoundBoardLog";
 
 const settings = definePluginSettings({
-    SavedIds: {
-        description: "The amount of soundboard ids you want to save at a time (0 lets you save infinite)",
+    savedIds: {
+        get label() {
+            return t("plugin.soundBoardLogger.option.savedIds.label");
+        },
+        get description() {
+            return t("plugin.soundBoardLogger.option.savedIds.description");
+        },
         type: OptionType.COMPONENT,
         component: ({ setValue }) => {
-            const value = settings.store.SavedIds ?? 50;
+            const value = settings.store.savedIds ?? 50;
             const [state, setState] = useState(`${value}`);
             const [shouldShowWarning, setShouldShowWarning] = useState(false);
             const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -29,9 +35,9 @@ const settings = definePluginSettings({
 
                 if (Number.isNaN(changed) || changed % 1 !== 0 || changed < 0) {
                     let errorMsg = "";
-                    errorMsg += Number.isNaN(changed) ? "The value is not a number.\n" : "";
-                    errorMsg += (changed % 1 !== 0) ? "The value can't be a decimal number.\n" : "";
-                    errorMsg += (changed < 0) ? "The value can't be a negative number.\n" : "";
+                    errorMsg += Number.isNaN(changed) ? t("plugin.soundBoardLogger.option.savedIds.notNumber") + "\n" : "";
+                    errorMsg += (changed % 1 !== 0) ? t("plugin.soundBoardLogger.option.savedIds.cantDecimal") + "\n" : "";
+                    errorMsg += (changed < 0) ? t("plugin.soundBoardLogger.option.savedIds.negativeNumber") + "\n" : "";
                     setErrorMessage(errorMsg);
                     return;
                 } else {
@@ -51,23 +57,28 @@ const settings = definePluginSettings({
 
             return (
                 <section>
-                    <Heading>The amount of soundboard ids you want to save at a time (0 lets you save infinite)</Heading>
+                    <Heading>{t("plugin.soundBoardLogger.option.savedIds.heading")}</Heading>
                     <TextInput
                         type="number"
                         pattern="-?[0-9]+"
                         value={state}
                         onChange={handleChange}
-                        placeholder={"Enter a number"}
+                        placeholder={t("plugin.soundBoardLogger.option.savedIds.placeholder")}
                     />
-                    {shouldShowWarning && <Paragraph style={{ color: "var(--text-danger)" }}>Warning! Setting the number to a lower value will reset the log!</Paragraph>}
+                    {shouldShowWarning && <Paragraph style={{ color: "var(--text-danger)" }}>{t("plugin.soundBoardLogger.option.savedIds.warning")}</Paragraph>}
                     {errorMessage && <Paragraph style={{ color: "var(--text-danger)" }}>{errorMessage}</Paragraph>}
                 </section>
             );
         }
 
     },
-    FileType: {
-        description: "the format that you want to save your file",
+    fileType: {
+        get label() {
+            return t("plugin.soundBoardLogger.option.fileType.label");
+        },
+        get description() {
+            return t("plugin.soundBoardLogger.option.fileType.description");
+        },
         type: OptionType.SELECT,
         options: [
             { label: ".ogg", value: ".ogg", default: true },
@@ -75,25 +86,42 @@ const settings = definePluginSettings({
             { label: ".wav", value: ".wav" },
         ],
     },
-    OpenLogs: {
+    openLogs: {
+        get label() {
+            return t("plugin.soundBoardLogger.option.openLogs.label");
+        },
+        get description() {
+            return t("plugin.soundBoardLogger.option.openLogs.description");
+        },
         type: OptionType.COMPONENT,
-        description: "show the logs",
         component: () =>
-            <Button variant="secondary" size="small" onClick={openSoundBoardLog}>Open Logs</Button>
+            <Button variant="secondary" size="small" onClick={openSoundBoardLog}>{t("plugin.soundBoardLogger.option.openLogs.button")}</Button>
     },
     soundVolume: {
-        description: "How loud the toggle sound is (0 to disable)",
+        get label() {
+            return t("plugin.soundBoardLogger.option.soundVolume.label");
+        },
+        get description() {
+            return t("plugin.soundBoardLogger.option.soundVolume.description");
+        },
         type: OptionType.SLIDER,
         default: 0.5,
         markers: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
     },
-    IconLocation: {
-        description: "choose where to show the SoundBoard Log icon (requires restart)",
+    iconLocation: {
+        get label() {
+            return t("plugin.soundBoardLogger.option.iconLocation.label");
+        },
+        get description() {
+            return t("plugin.soundBoardLogger.option.iconLocation.description");
+        },
         type: OptionType.SELECT,
-        options: [
-            { label: "Toolbar", value: "toolbar", default: true },
-            { label: "Chat input", value: "chat" }
-        ],
+        get options() {
+            return [
+                { label: t("plugin.soundBoardLogger.option.iconLocation.toolbar"), value: "toolbar", default: true },
+                { label: t("plugin.soundBoardLogger.option.iconLocation.chatInput"), value: "chat" }
+            ];
+        },
         restartNeeded: true
     },
 });

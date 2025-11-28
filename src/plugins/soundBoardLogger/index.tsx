@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { Button } from "@components/Button";
 import { Devs, PcDevs } from "@utils/constants";
@@ -23,9 +24,14 @@ export default definePlugin({
     authors: [Devs.Moxxie, PcDevs.Fres, Devs.thororen, PcDevs.MutanPlex],
     description: "Logs all soundboards that are played in a voice chat and allows you to download them",
     dependencies: ["AudioPlayerAPI", "ChatInputButtonAPI"],
+
+    get displayDescription() {
+        return t("plugin.soundBoardLogger.description");
+    },
+
     patches: [
         {
-            predicate: () => settings.store.IconLocation === "toolbar",
+            predicate: () => settings.store.iconLocation === "toolbar",
             find: '?"BACK_FORWARD_NAVIGATION":',
             replacement: {
                 match: /canShowReminder:.+?className:(\i).*?\}\),/,

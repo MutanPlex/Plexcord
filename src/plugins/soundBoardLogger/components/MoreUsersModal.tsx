@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
@@ -52,7 +53,7 @@ export default function MoreUsersModal({ item, users, onClickUser, closeModal }:
                                     />
                                     <Paragraph size="xs" weight="medium" style={{ cursor: "pointer" }}>{user.username}</Paragraph>
                                 </Flex>
-                                <Paragraph size="xs" weight="medium" style={{ cursor: "pointer" }}>Played {currentUser.plays.length} {currentUser.plays.length === 1 ? "time" : "times"}</Paragraph>
+                                <Paragraph size="xs" weight="medium" style={{ cursor: "pointer" }}>{t("plugin.soundBoardLogger.modal.played", { time: currentUser.plays.length, s: currentUser.plays.length === 1 ? "" : "s" })}</Paragraph>
                             </div>
                         </Clickable>
                     );

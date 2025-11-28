@@ -75,14 +75,14 @@ export async function updateLoggedSounds(sound: SoundEvent): Promise<void> {
         newSounds.unshift(existingSound); // Add to beginning
 
         // Apply limit if necessary
-        let limit = settings.store.SavedIds ?? 50;
+        let limit = settings.store.savedIds ?? 50;
         if (limit === 0) limit = Infinity;
         const limitedSounds = newSounds.slice(0, limit);
 
         await DataStore.set("SoundBoardLogList", limitedSounds);
     } else {
         // New sound
-        let limit = settings.store.SavedIds ?? 50;
+        let limit = settings.store.savedIds ?? 50;
         if (limit === 0) limit = Infinity;
 
         const newEntry = { ...sound, users: [{ id: sound.userId, plays: [timestamp] }] };
