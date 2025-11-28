@@ -19,6 +19,7 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
@@ -44,9 +45,14 @@ function getSince(user: User) {
 
 const settings = definePluginSettings({
     showDates: {
+        get label() {
+            return t("plugin.sortFriends.option.showDates.label");
+        },
+        get description() {
+            return t("plugin.sortFriends.option.showDates.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show dates on friend requests",
-        default: false,
+        default: true,
         restartNeeded: true
     }
 });
@@ -56,6 +62,10 @@ export default definePlugin({
     authors: [Devs.Megu, PcDevs.CallMeGii],
     description: "Sorts friend requests by date of receipt",
     settings,
+
+    get displayDescription() {
+        return t("plugin.sortFriends.description");
+    },
 
     patches: [
         {
@@ -75,7 +85,6 @@ export default definePlugin({
         {
             find: "peopleListItemRef",
             replacement: {
-                predicate: () => settings.store.showDates,
                 match: /(?<=children:.*user:(\i),.*subText:).+?(?=,hovered:\i,showAccountIdentifier)/,
                 replace: "$self.makeSubtext($1, $&)"
             }
@@ -96,11 +105,11 @@ export default definePlugin({
 
         return (
             <Flex
-                flexDirection="column"
-                style={{ gap: "0px", flexWrap: "wrap", lineHeight: "0.9rem" }}
+                flexDirection="row"
+                style={{ gap: "0px", flexWrap: "wrap", lineHeight: "0.9rem", flexFlow: "row wrap!important" }}
             >
                 <span>{origSubtext}</span>
-                <span>
+                <span style={{ display: "flex" }}>
                     <div className="" style={{ display: "flex", alignItems: "center" }}>
                         <svg
                             aria-hidden="true"
@@ -119,7 +128,7 @@ export default definePlugin({
                                 clipRule="evenodd"
                             ></path>
                         </svg>
-                        <span>Added &mdash; {since.toDateString()}</span>
+                        <span>{t("plugin.sortFriends.tooltip", { date: formatter.format(since) })}</span>
                     </div>
                 </span>
             </Flex>

@@ -7389,6 +7389,17 @@
                 }
             }
         },
+        "sortFriends": {
+            "name": "SortFriends",
+            "description": "Arkadaş isteklerini alınma tarihine göre sıralar",
+            "tooltip": "Eklendi — {{date}}",
+            "option": {
+                "showDates": {
+                    "label": "Tarihleri Göster",
+                    "description": "Arkadaş isteklerinde tarihleri göster"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
