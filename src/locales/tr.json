@@ -7489,6 +7489,20 @@
                 "disable": "Spotify etkinliğini kapat"
             }
         },
+        "spotifyCrack": {
+            "name": "SpotifyCrack",
+            "description": "Ücretsiz birlikte dinleme, sesli sohbette otomatik duraklatmayı engelleme ve boştayken Spotify etkinliğinin çalmaya devam etmesini sağlar",
+            "option": {
+                "noSpotifyAutoPause": {
+                    "label": "Spotify Otomatik Duraklatmayı Kapat",
+                    "description": "Spotify’ın otomatik duraklatmasını devre dışı bırak."
+                },
+                "keepSpotifyActivityOnIdle": {
+                    "label": "Boştayken Spotify Etkinliğini Sürdür",
+                    "description": "Boştayken Spotify etkinliğinin çalmaya devam etmesini sağlar"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

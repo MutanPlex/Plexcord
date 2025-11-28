@@ -7489,6 +7489,20 @@
                 "disable": "Turn off Spotify activity"
             }
         },
+        "spotifyCrack": {
+            "name": "SpotifyCrack",
+            "description": "Free listen along, no auto-pausing in voice chat, and allows activity to continue playing when idling",
+            "option": {
+                "noSpotifyAutoPause": {
+                    "label": "No Spotify Auto-Pause",
+                    "description": "Disable Spotify auto-pause."
+                },
+                "keepSpotifyActivityOnIdle": {
+                    "label": "Keep Spotify Activity On Idle",
+                    "description": "Keep Spotify activity playing when idling"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

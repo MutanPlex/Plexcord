@@ -17,19 +17,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     noSpotifyAutoPause: {
-        description: "Disable Spotify auto-pause",
+        get label() {
+            return t("plugin.spotifyCrack.option.noSpotifyAutoPause.label");
+        },
+        get description() {
+            return t("plugin.spotifyCrack.option.noSpotifyAutoPause.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     keepSpotifyActivityOnIdle: {
-        description: "Keep Spotify activity playing when idling",
+        get label() {
+            return t("plugin.spotifyCrack.option.keepSpotifyActivityOnIdle.label");
+        },
+        get description() {
+            return t("plugin.spotifyCrack.option.keepSpotifyActivityOnIdle.description");
+        },
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
@@ -41,6 +52,10 @@ export default definePlugin({
     description: "Free listen along, no auto-pausing in voice chat, and allows activity to continue playing when idling",
     authors: [Devs.Cyn, Devs.Nuckyz],
     settings,
+
+    get displayDescription() {
+        return t("plugin.spotifyCrack.description");
+    },
 
     patches: [
         {
