@@ -7264,6 +7264,131 @@
                 }
             }
         },
+        "silentMessageToggle": {
+            "name": "SilentMessageToggle",
+            "description": "Sohbet çubuğuna sessiz mesaj göndermeyi açıp kapatmak için bir buton ekler.",
+            "option": {
+                "persistState": {
+                    "label": "Durumu Kalıcı Yap",
+                    "description": "Sessiz mesaj geçiş durumunun nasıl kalıcı olacağını belirleyin",
+                    "none": "Kalıcı olmasın (kanal değişince sıfırlansın)",
+                    "channels": "Kanallar arasında kalıcı olsun",
+                    "restarts": "Kanallar ve Discord yeniden başlatmaları arasında kalıcı olsun"
+                },
+                "autoDisable": {
+                    "label": "Otomatik Devre Dışı Bırak",
+                    "description": "Bir sessiz mesaj gönderdikten sonra özelliği otomatik olarak tekrar devre dışı bırak"
+                }
+            },
+            "tooltip": {
+                "enable": "Sessiz Mesajı Etkinleştir",
+                "disable": "Sessiz Mesajı Devre Dışı Bırak"
+            }
+        },
+        "silentTyping": {
+            "name": "SilentTyping",
+            "description": "Yazıyor göstergenizi sohbetten gizler.",
+            "command": {
+                "silentTyping": {
+                    "name": "SilentTyping",
+                    "description": "Yazıyor göstergenizi sohbetten gizler.",
+                    "toogle": {
+                        "name": "toggle",
+                        "description": "İşlevi global olarak, kanal için veya sunucu için aç/kapat.",
+                        "global": "Global",
+                        "channel": "Kanal",
+                        "guild": "Sunucu"
+                    },
+                    "chatBarIndicator": {
+                        "name": "chatBarIndicator",
+                        "description": "Diğer kullanıcıların yazıyor göstergelerini sohbet çubuğunun üstünden gizle."
+                    },
+                    "membersListIndicator": {
+                        "name": "membersListIndicator",
+                        "description": "Diğer kullanıcıların yazıyor göstergelerini üye listesinden gizle."
+                    },
+                    "chatIcon": {
+                        "name": "chatIcon",
+                        "description": "Eklentiyi hızlıca açıp kapatmak için sohbet çubuğunda bir ikon göster."
+                    },
+                    "chatContextMenu": {
+                        "name": "chatContextMenu",
+                        "description": "Eklenti ayarlarını hızlıca değiştirmek için sohbet bağlam menüsüne bir açılır menü ekle."
+                    },
+                    "defaultHidden": {
+                        "name": "defaultHidden",
+                        "description": "DM’lerde/kanallarda/sunucularda yazıyor bilgisinin varsayılan olarak gizlenip gizlenmeyeceğini belirler."
+                    }
+                }
+            },
+            "content": {
+                "updated": "Sessiz yazma ayarları güncellendi.",
+                "noChanges": "Sessiz yazma ayarlarında değişiklik yapılmadı."
+            },
+            "tooltip": {
+                "hidden": "Yazıyor Gizli ({{location}})",
+                "visible": "Yazıyor Görünür ({{location}})",
+                "global": "Yazıyor Görünür (Global)"
+            },
+            "option": {
+                "enabledGlobally": {
+                    "label": "Global Olarak Etkin",
+                    "description": "Kendi yazıyor göstergenizi global olarak aç/kapat."
+                },
+                "hideChatBoxTypingIndicators": {
+                    "label": "Sohbet Kutusu Yazıyor Göstergelerini Gizle",
+                    "description": "Diğer kullanıcıların sohbet kutusu üstündeki yazıyor göstergelerini gizle."
+                },
+                "hideMembersListTypingIndicators": {
+                    "label": "Üye Listesi Yazıyor Göstergelerini Gizle",
+                    "description": "Diğer kullanıcıların üye listesindeki yazıyor göstergelerini gizle."
+                },
+                "chatIcon": {
+                    "label": "Sohbet İkonu",
+                    "description": "Eklentiyi hızlıca değiştirmek için sohbet çubuğunda bir ikon göster."
+                },
+                "chatIconLeftClickAction": {
+                    "label": "Sohbet İkonu Sol Tıklama Aksiyonu",
+                    "description": "Sohbet ikonuna sol tıklandığında ne yapılacağını belirleyin.",
+                    "global": "Global Yazıyor Durumunu Değiştir",
+                    "channel": "Kanal İçin Yazıyor Durumunu Değiştir",
+                    "guild": "Sunucu İçin Yazıyor Durumunu Değiştir",
+                    "settings": "Eklenti Ayarlarını Aç"
+                },
+                "chatIconMiddleClickAction": {
+                    "label": "Sohbet İkonu Orta Tıklama Aksiyonu",
+                    "description": "Sohbet ikonuna orta tıklandığında ne yapılacağını belirleyin.",
+                    "global": "Global Yazıyor Durumunu Değiştir",
+                    "channel": "Kanal İçin Yazıyor Durumunu Değiştir",
+                    "guild": "Sunucu İçin Yazıyor Durumunu Değiştir",
+                    "settings": "Eklenti Ayarlarını Aç"
+                },
+                "chatIconRightClickAction": {
+                    "label": "Sohbet İkonu Sağ Tıklama Aksiyonu",
+                    "description": "Sohbet ikonuna sağ tıklandığında ne yapılacağını belirleyin.",
+                    "global": "Global Yazıyor Durumunu Değiştir",
+                    "channel": "Kanal İçin Yazıyor Durumunu Değiştir",
+                    "guild": "Sunucu İçin Yazıyor Durumunu Değiştir",
+                    "settings": "Eklenti Ayarlarını Aç"
+                },
+                "chatContextMenu": {
+                    "label": "Sohbet Bağlam Menüsü",
+                    "description": "Eklenti ayarlarını hızlıca değiştirmek için sohbet bağlam menüsüne bir açılır menü ekle."
+                },
+                "defaultHidden": {
+                    "label": "Varsayılan Gizli",
+                    "description": "Etkinleştirilirse, aşağıda 'Devre Dışı Konumlar' listesinde yer almayan tüm DM/kanal/sunucularda yazıyor göstergeniz diğer kullanıcılardan gizlenecek. Devre dışı ise, 'Etkin Konumlar' listesinde yer almayan yerlerde yazıyor göstergeniz görünecek."
+                },
+                "enabledLocations": {
+                    "label": "Etkin Konumlar",
+                    "description": "Bu ID'ler için işlevi etkinleştir. Virgülle ayrılmış DM ID'leri, kanal ID'leri ve sunucu ID'leri kabul eder. Yalnızca 'Varsayılan Gizli' devre dışı ise kullanılır."
+                },
+                "disabledLocations": {
+                    "label": "Devre Dışı Konumlar",
+                    "description": "Bu ID'ler için işlevi devre dışı bırak. Virgülle ayrılmış DM ID'leri, kanal ID'leri ve sunucu ID'leri kabul eder. Yalnızca 'Varsayılan Gizli' etkinse kullanılır."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

@@ -159,7 +159,7 @@ const SendTimestampButton: ChatBarButtonFactory = ({ isMainChat }) => {
 
     return (
         <ChatBarButton
-            tooltip={t("plugin.sendTimestamps.button.tooltip")}
+            tooltip={t("plugin.sendTimestamps.modal.insertTimestamp")}
             onClick={() => {
                 const key = openModal(props => (
                     <PickerModal

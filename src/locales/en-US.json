@@ -7264,6 +7264,131 @@
                 }
             }
         },
+        "silentMessageToggle": {
+            "name": "SilentMessageToggle",
+            "description": "Adds a button to the chat bar to toggle sending a silent message.",
+            "option": {
+                "persistState": {
+                    "label": "Persist State",
+                    "description": "How to persist the silent message toggle state",
+                    "none": "Don't persist (reset on channel change)",
+                    "channels": "Persist between channels",
+                    "restarts": "Persist between channels and restarts"
+                },
+                "autoDisable": {
+                    "label": "Auto Disable",
+                    "description": "Automatically disable the silent message toggle again after sending one"
+                }
+            },
+            "tooltip": {
+                "enable": "Enable Silent Message",
+                "disable": "Disable Silent Message"
+            }
+        },
+        "silentTyping": {
+            "name": "SilentTyping",
+            "description": "Hide your typing indicator from chat.",
+            "command": {
+                "silentTyping": {
+                    "name": "SilentTyping",
+                    "description": "Hide your typing indicator from chat.",
+                    "toogle": {
+                        "name": "toggle",
+                        "description": "Toggle functionality globally, for the channel, or for the guild.",
+                        "global": "Global",
+                        "channel": "Channel",
+                        "guild": "Guild"
+                    },
+                    "chatBarIndicator": {
+                        "name": "chatBarIndicator",
+                        "description": "Hide other users' typing indicators from above the chat bar."
+                    },
+                    "membersListIndicator": {
+                        "name": "membersListIndicator",
+                        "description": "Hide other users' typing indicators from the members list."
+                    },
+                    "chatIcon": {
+                        "name": "chatIcon",
+                        "description": "Show an icon in the chat bar for toggling the plugin on the go."
+                    },
+                    "chatContextMenu": {
+                        "name": "chatContextMenu",
+                        "description": "Show a dropdown in the chat context menu to toggle plugin settings on the go."
+                    },
+                    "defaultHidden": {
+                        "name": "defaultHidden",
+                        "description": "Whether to hide typing in DMs/channels/guilds by default or not."
+                    }
+                }
+            },
+            "content": {
+                "updated": "Silent typing settings updated.",
+                "noChanges": "No changes made to silent typing settings."
+            },
+            "tooltip": {
+                "hidden": "Typing Hidden ({{location}})",
+                "visible": "Typing Visible ({{location}})",
+                "global": "Typing Visible (Global)"
+            },
+            "option": {
+                "enabledGlobally": {
+                    "label": "Enabled Globally",
+                    "description": "Toggle functionality of your own typing indicator globally."
+                },
+                "hideChatBoxTypingIndicators": {
+                    "label": "Hide Chat Box Typing Indicators",
+                    "description": "Hide other users' typing indicators from above the chat bar."
+                },
+                "hideMembersListTypingIndicators": {
+                    "label": "Hide Members List Typing Indicators",
+                    "description": "Hide other users' typing indicators from the members list."
+                },
+                "chatIcon": {
+                    "label": "Chat Icon",
+                    "description": "Show an icon in the chat bar for modifying the plugin on the go."
+                },
+                "chatIconLeftClickAction": {
+                    "label": "Chat Icon Left Click Action",
+                    "description": "What to do when left clicking the chat icon.",
+                    "global": "Toggle Typing Globally",
+                    "channel": "Toggle Typing for Channel",
+                    "guild": "Toggle Typing for Guild",
+                    "settings": "Open Plugin Settings"
+                },
+                "chatIconMiddleClickAction": {
+                    "label": "Chat Icon Middle Click Action",
+                    "description": "What to do when middle clicking the chat icon.",
+                    "global": "Toggle Typing Globally",
+                    "channel": "Toggle Typing for Channel",
+                    "guild": "Toggle Typing for Guild",
+                    "settings": "Open Plugin Settings"
+                },
+                "chatIconRightClickAction": {
+                    "label": "Chat Icon Right Click Action",
+                    "description": "What to do when right clicking the chat icon.",
+                    "global": "Toggle Typing Globally",
+                    "channel": "Toggle Typing for Channel",
+                    "guild": "Toggle Typing for Guild",
+                    "settings": "Open Plugin Settings"
+                },
+                "chatContextMenu": {
+                    "label": "Chat Context Menu",
+                    "description": "Show a dropdown in the chat context menu to modify plugin settings on the go."
+                },
+                "defaultHidden": {
+                    "label": "Default Hidden",
+                    "description": "If enabled, the plugin will hide your typing from others in any DMs/channels/guilds not listed in 'Disabled Locations' below. If disabled, the plugin will show your typing to others for any DMs/channels/guilds not listed in 'Enabled Locations' below."
+                },
+                "enabledLocations": {
+                    "label": "Enabled Locations",
+                    "description": "Enable functionality for these IDs. Accepts a comma separated list of DM IDs, channel IDs, and guild IDs. Only used if 'Default Hidden' is disabled."
+                },
+                "disabledLocations": {
+                    "label": "Disabled Locations",
+                    "description": "Disable functionality for these IDs. Accepts a comma separated list of DM IDs, channel IDs, and guild IDs. Only used if 'Default Hidden' is enabled."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

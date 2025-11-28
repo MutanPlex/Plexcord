@@ -92,7 +92,7 @@ export default definePlugin({
     buildRecentlyOffline(user: User) {
         if (!user) return <></>;
 
-        const { subtext } = findByProps("interactiveSelected", "interactiveSystemDM", "subtext");
+        const { subtext } = findByProps("interactiveSelected", "subtext");
 
         const presenceStatus = recentlyOnlineList.get(user.id);
         const formattedTime = presenceStatus && presenceStatus.lastOffline !== null

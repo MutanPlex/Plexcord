@@ -31,10 +31,10 @@ const useMessageAuthor = findByCodeLazy('"Result cannot be null because the mess
 const settings = definePluginSettings({
     chatMentions: {
         get label() {
-            return t("plugin.rolecoloreverywhere.option.chatMentions.label");
+            return t("plugin.roleColorEverywhere.option.chatMentions.label");
         },
         get description() {
-            return t("plugin.rolecoloreverywhere.option.chatMentions.description");
+            return t("plugin.roleColorEverywhere.option.chatMentions.description");
         },
         type: OptionType.BOOLEAN,
         default: true,
@@ -42,10 +42,10 @@ const settings = definePluginSettings({
     },
     memberList: {
         get label() {
-            return t("plugin.rolecoloreverywhere.option.memberList.label");
+            return t("plugin.roleColorEverywhere.option.memberList.label");
         },
         get description() {
-            return t("plugin.rolecoloreverywhere.option.memberList.description");
+            return t("plugin.roleColorEverywhere.option.memberList.description");
         },
         type: OptionType.BOOLEAN,
         default: true,
@@ -53,10 +53,10 @@ const settings = definePluginSettings({
     },
     voiceUsers: {
         get label() {
-            return t("plugin.rolecoloreverywhere.option.voiceUsers.label");
+            return t("plugin.roleColorEverywhere.option.voiceUsers.label");
         },
         get description() {
-            return t("plugin.rolecoloreverywhere.option.voiceUsers.description");
+            return t("plugin.roleColorEverywhere.option.voiceUsers.description");
         },
         type: OptionType.BOOLEAN,
         default: true,
@@ -64,10 +64,10 @@ const settings = definePluginSettings({
     },
     reactorsList: {
         get label() {
-            return t("plugin.rolecoloreverywhere.option.reactorsList.label");
+            return t("plugin.roleColorEverywhere.option.reactorsList.label");
         },
         get description() {
-            return t("plugin.rolecoloreverywhere.option.reactorsList.description");
+            return t("plugin.roleColorEverywhere.option.reactorsList.description");
         },
         type: OptionType.BOOLEAN,
         default: true,
@@ -75,10 +75,10 @@ const settings = definePluginSettings({
     },
     pollResults: {
         get label() {
-            return t("plugin.rolecoloreverywhere.option.pollResults.label");
+            return t("plugin.roleColorEverywhere.option.pollResults.label");
         },
         get description() {
-            return t("plugin.rolecoloreverywhere.option.pollResults.description");
+            return t("plugin.roleColorEverywhere.option.pollResults.description");
         },
         type: OptionType.BOOLEAN,
         default: true,
@@ -86,10 +86,10 @@ const settings = definePluginSettings({
     },
     colorChatMessages: {
         get label() {
-            return t("plugin.rolecoloreverywhere.option.colorChatMessages.label");
+            return t("plugin.roleColorEverywhere.option.colorChatMessages.label");
         },
         get description() {
-            return t("plugin.rolecoloreverywhere.option.colorChatMessages.description");
+            return t("plugin.roleColorEverywhere.option.colorChatMessages.description");
         },
         type: OptionType.BOOLEAN,
         default: false,
@@ -97,10 +97,10 @@ const settings = definePluginSettings({
     },
     messageSaturation: {
         get label() {
-            return t("plugin.rolecoloreverywhere.option.messageSaturation.label");
+            return t("plugin.roleColorEverywhere.option.messageSaturation.label");
         },
         get description() {
-            return t("plugin.rolecoloreverywhere.option.messageSaturation.description");
+            return t("plugin.roleColorEverywhere.option.messageSaturation.description");
         },
         type: OptionType.SLIDER,
         markers: makeRange(0, 100, 10),
@@ -115,7 +115,7 @@ export default definePlugin({
     settings,
 
     get displayDescription() {
-        return t("plugin.rolecoloreverywhere.description");
+        return t("plugin.roleColorEverywhere.description");
     },
 
     patches: [
