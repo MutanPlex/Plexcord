@@ -49,14 +49,14 @@ function createPinMenuItem(channelId: string) {
                 <>
                     <Menu.MenuItem
                         id="unpin-dm"
-                        label={t("plugin.pinDMs.context.unpin.label")}
+                        label={t("plugin.pinDMs.context.unPin.label")}
                         color="danger"
                         action={() => removeChannelFromCategory(channelId)}
                     />
 
                     <Menu.MenuItem
                         id="move-to-category"
-                        label={t("plugin.pinDMs.context.unpin.move")}
+                        label={t("plugin.pinDMs.context.unPin.move")}
                     >
                         {
                             currentUserCategories
