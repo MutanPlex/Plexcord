@@ -7649,6 +7649,35 @@
                 }
             }
         },
+        "textReplace": {
+            "name": "TextReplace",
+            "description": "Replace text in your messages. You can find pre-made rules in the #textreplace-rules channel in Plexcord's Server",
+            "option": {
+                "replace": {
+                    "label": "Replace",
+                    "string": "Using String",
+                    "regex": "Using Regex",
+                    "myMessages": "Apply to your messages (visible to everyone)",
+                    "othersMessages": "Apply to others' messages (only visible to you)",
+                    "allMessages": "Apply to all messages"
+                },
+                "stringRules": {
+                    "label": "String Rules",
+                    "description": "Rules for replacing text using string matching."
+                },
+                "regexRules": {
+                    "label": "Regex Rules",
+                    "description": "Rules for replacing text using regular expressions."
+                }
+            },
+            "modal": {
+                "find": "Find",
+                "replace": "Replace",
+                "includes": "Only if includes",
+                "type": "Type a message",
+                "applied": "Message with rules applied"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

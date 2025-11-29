@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
@@ -46,6 +47,9 @@ const makeEmptyRuleArray = () => [makeEmptyRule()];
 
 const settings = definePluginSettings({
     replace: {
+        get label() {
+            return t("plugin.textReplace.option.replace.label");
+        },
         type: OptionType.COMPONENT,
         component: () => {
             const { stringRules, regexRules } = settings.use(["stringRules", "regexRules"]);
@@ -53,11 +57,11 @@ const settings = definePluginSettings({
             return (
                 <>
                     <TextReplace
-                        title="Using String"
+                        title={t("plugin.textReplace.option.replace.string")}
                         rulesArray={stringRules}
                     />
                     <TextReplace
-                        title="Using Regex"
+                        title={t("plugin.textReplace.option.replace.regex")}
                         rulesArray={regexRules}
                     />
                     <TextReplaceTesting />
@@ -66,14 +70,24 @@ const settings = definePluginSettings({
         }
     },
     stringRules: {
+        get label() {
+            return t("plugin.textReplace.option.stringRules.label");
+        },
+        get description() {
+            return t("plugin.textReplace.option.stringRules.description");
+        },
         type: OptionType.CUSTOM,
         default: makeEmptyRuleArray(),
-        description: "Rules for replacing text using string matching."
     },
     regexRules: {
+        get label() {
+            return t("plugin.textReplace.option.regexRules.label");
+        },
+        get description() {
+            return t("plugin.textReplace.option.regexRules.description");
+        },
         type: OptionType.CUSTOM,
         default: makeEmptyRuleArray(),
-        description: "Rules for replacing text using regular expressions."
     }
 });
 
@@ -122,7 +136,7 @@ function Input({ initialValue, onChange, placeholder }: {
 }
 
 function TextReplace({ title, rulesArray }: TextReplaceProps) {
-    const isRegexRules = title === "Using Regex";
+    const isRegexRules = title === t("plugin.textReplace.option.replace.regex");
 
     async function onClickRemove(index: number) {
         if (index === rulesArray.length - 1) return;
@@ -142,9 +156,9 @@ function TextReplace({ title, rulesArray }: TextReplaceProps) {
     }
 
     const scopeOptions = [
-        { label: "Apply to your messages (visible to everyone)", value: "myMessages" },
-        { label: "Apply to others' messages (only visible to you)", value: "othersMessages" },
-        { label: "Apply to all messages", value: "allMessages" }
+        { label: t("plugin.textReplace.option.replace.myMessages"), value: "myMessages" },
+        { label: t("plugin.textReplace.option.replace.othersMessages"), value: "othersMessages" },
+        { label: t("plugin.textReplace.option.replace.allMessages"), value: "allMessages" }
     ];
 
     return (
@@ -156,17 +170,17 @@ function TextReplace({ title, rulesArray }: TextReplaceProps) {
                         <React.Fragment key={`${rule.find}-${index}`}>
                             <Flex flexDirection="row" style={{ flexGrow: 1, gap: "0.5em" }}>
                                 <Input
-                                    placeholder="Find"
+                                    placeholder={t("plugin.textReplace.modal.find")}
                                     initialValue={rule.find}
                                     onChange={e => onChange(e, index, "find")}
                                 />
                                 <Input
-                                    placeholder="Replace"
+                                    placeholder={t("plugin.textReplace.modal.replace")}
                                     initialValue={rule.replace}
                                     onChange={e => onChange(e, index, "replace")}
                                 />
                                 <Input
-                                    placeholder="Only if includes"
+                                    placeholder={t("plugin.textReplace.modal.includes")}
                                     initialValue={rule.onlyIfIncludes}
                                     onChange={e => onChange(e, index, "onlyIfIncludes")}
                                 />
@@ -203,8 +217,8 @@ function TextReplaceTesting() {
     return (
         <>
             <Heading>Test Rules</Heading>
-            <TextInput placeholder="Type a message" onChange={setValue} />
-            <TextInput placeholder="Message with rules applied" editable={false} value={applyRules(value, "allMessages")} />
+            <TextInput placeholder={t("plugin.textReplace.modal.type")} onChange={setValue} />
+            <TextInput placeholder={t("plugin.textReplace.modal.applied")} editable={false} value={applyRules(value, "allMessages")} />
         </>
     );
 }
@@ -258,6 +272,10 @@ export default definePlugin({
     name: "TextReplace",
     description: "Replace text in your messages. You can find pre-made rules in the #textreplace-rules channel in Plexcord's Server",
     authors: [Devs.AutumnVN, Devs.TheKodeToad, PcDevs.Etorix],
+
+    get displayDescription() {
+        return t("plugin.textReplace.description");
+    },
 
     settings,
     modifyIncomingMessage,

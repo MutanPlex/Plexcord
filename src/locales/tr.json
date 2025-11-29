@@ -7649,6 +7649,35 @@
                 }
             }
         },
+        "textReplace": {
+            "name": "TextReplace",
+            "description": "Mesajlarınızdaki metni değiştirin. Plexcord sunucusundaki #textreplace-rules kanalında hazır kurallar bulabilirsiniz",
+            "option": {
+                "replace": {
+                    "label": "Değiştir",
+                    "string": "Düz Metin Kullanarak",
+                    "regex": "Regex Kullanarak",
+                    "myMessages": "Kendi mesajlarınıza uygula (herkes tarafından görünür)",
+                    "othersMessages": "Başkalarının mesajlarına uygula (yalnızca size görünür)",
+                    "allMessages": "Tüm mesajlara uygula"
+                },
+                "stringRules": {
+                    "label": "Düz Metin Kuralları",
+                    "description": "Düz metin eşleştirme kullanarak metin değiştirme kuralları."
+                },
+                "regexRules": {
+                    "label": "Regex Kuralları",
+                    "description": "Düzenli ifadeler kullanarak metin değiştirme kuralları."
+                }
+            },
+            "modal": {
+                "find": "Bul",
+                "replace": "Değiştir",
+                "includes": "Yalnızca içeriyorsa",
+                "type": "Bir mesaj yazın",
+                "applied": "Kurallar uygulanmış mesaj"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
