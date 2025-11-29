@@ -7542,6 +7542,39 @@
                 "successfully": "Successfully saved status"
             }
         },
+        "steamStatusSync": {
+            "name": "SteamStatusSync",
+            "description": "Sync your status to Steam!",
+            "option": {
+                "onlineStatus": {
+                    "label": "Online Status",
+                    "description": "Steam status when on Online"
+                },
+                "idleStatus": {
+                    "label": "Idle Status",
+                    "description": "Steam status when on Idle"
+                },
+                "dndStatus": {
+                    "label": "Do Not Disturb Status",
+                    "description": "Steam status when on Do Not Disturb"
+                },
+                "invisibleStatus": {
+                    "label": "Invisible Status",
+                    "description": "Steam status when on Invisible"
+                },
+                "goInvisibleIfActivityIsHidden": {
+                    "label": "Go Invisible If Activity Is Hidden",
+                    "description": "Set Steam status to Invisible when Discord activity is hidden"
+                }
+            },
+            "status": {
+                "online": "Online",
+                "away": "Away",
+                "invisible": "Invisible",
+                "offline": "Offline (Disconnect Steam Chat)",
+                "disabled": "Disabled"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

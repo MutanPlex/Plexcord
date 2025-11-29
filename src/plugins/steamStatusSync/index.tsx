@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -34,52 +35,85 @@ interface SettingsProto {
 
 export const settings = definePluginSettings({
     onlineStatus: {
+        get label() {
+            return t("plugin.steamStatusSync.option.onlineStatus.label");
+        },
+        get description() {
+            return t("plugin.steamStatusSync.option.onlineStatus.description");
+        },
         type: OptionType.SELECT,
-        description: "Steam status when on Online",
-        options: [
-            { label: "Online", value: SteamStatus.Online, default: true },
-            { label: "Away", value: SteamStatus.Away },
-            { label: "Invisible", value: SteamStatus.Invisible },
-            { label: "Offline (Disconnect Steam Chat)", value: SteamStatus.Offline },
-            { label: "Disabled", value: SteamStatus.None }
-        ],
+        get options() {
+            return [
+                { label: t("plugin.steamStatusSync.status.online"), value: SteamStatus.Online, default: true },
+                { label: t("plugin.steamStatusSync.status.away"), value: SteamStatus.Away },
+                { label: t("plugin.steamStatusSync.status.invisible"), value: SteamStatus.Invisible },
+                { label: t("plugin.steamStatusSync.status.offline"), value: SteamStatus.Offline },
+                { label: t("plugin.steamStatusSync.status.disabled"), value: SteamStatus.None }
+            ];
+        }
     },
     idleStatus: {
+        get label() {
+            return t("plugin.steamStatusSync.option.idleStatus.label");
+        },
+        get description() {
+            return t("plugin.steamStatusSync.option.idleStatus.description");
+        },
         type: OptionType.SELECT,
-        description: "Steam status when on Idle",
-        options: [
-            { label: "Online", value: SteamStatus.Online },
-            { label: "Away", value: SteamStatus.Away, default: true },
-            { label: "Invisible", value: SteamStatus.Invisible },
-            { label: "Offline (Disconnect Steam Chat)", value: SteamStatus.Offline },
-            { label: "Disabled", value: SteamStatus.None }
-        ],
+        get options() {
+            return [
+                { label: t("plugin.steamStatusSync.status.online"), value: SteamStatus.Online },
+                { label: t("plugin.steamStatusSync.status.away"), value: SteamStatus.Away, default: true },
+                { label: t("plugin.steamStatusSync.status.invisible"), value: SteamStatus.Invisible },
+                { label: t("plugin.steamStatusSync.status.offline"), value: SteamStatus.Offline },
+                { label: t("plugin.steamStatusSync.status.disabled"), value: SteamStatus.None }
+            ];
+        }
     },
     dndStatus: {
+        get label() {
+            return t("plugin.steamStatusSync.option.dndStatus.label");
+        },
+        get description() {
+            return t("plugin.steamStatusSync.option.dndStatus.description");
+        },
         type: OptionType.SELECT,
-        description: "Steam status when on Do Not Disturb",
-        options: [
-            { label: "Online", value: SteamStatus.Online },
-            { label: "Away", value: SteamStatus.Away },
-            { label: "Invisible", value: SteamStatus.Invisible },
-            { label: "Offline (Disconnect Steam Chat)", value: SteamStatus.Offline },
-            { label: "Disabled", value: SteamStatus.None, default: true }
-        ],
+        get options() {
+            return [
+                { label: t("plugin.steamStatusSync.status.online"), value: SteamStatus.Online },
+                { label: t("plugin.steamStatusSync.status.away"), value: SteamStatus.Away },
+                { label: t("plugin.steamStatusSync.status.invisible"), value: SteamStatus.Invisible },
+                { label: t("plugin.steamStatusSync.status.offline"), value: SteamStatus.Offline },
+                { label: t("plugin.steamStatusSync.status.disabled"), value: SteamStatus.None, default: true }
+            ];
+        }
     },
     invisibleStatus: {
+        get label() {
+            return t("plugin.steamStatusSync.option.invisibleStatus.label");
+        },
+        get description() {
+            return t("plugin.steamStatusSync.option.invisibleStatus.description");
+        },
         type: OptionType.SELECT,
-        description: "Steam status when on Invisible",
-        options: [
-            { label: "Online", value: SteamStatus.Online },
-            { label: "Away", value: SteamStatus.Away },
-            { label: "Invisible", value: SteamStatus.Invisible, default: true },
-            { label: "Offline (Disconnect Steam Chat)", value: SteamStatus.Offline },
-            { label: "Disabled", value: SteamStatus.None }
-        ],
+        get options() {
+            return [
+                { label: t("plugin.steamStatusSync.status.online"), value: SteamStatus.Online },
+                { label: t("plugin.steamStatusSync.status.away"), value: SteamStatus.Away },
+                { label: t("plugin.steamStatusSync.status.invisible"), value: SteamStatus.Invisible, default: true },
+                { label: t("plugin.steamStatusSync.status.offline"), value: SteamStatus.Offline },
+                { label: t("plugin.steamStatusSync.status.disabled"), value: SteamStatus.None }
+            ];
+        }
     },
     goInvisibleIfActivityIsHidden: {
+        get label() {
+            return t("plugin.steamStatusSync.option.goInvisibleIfActivityIsHidden.label");
+        },
+        get description() {
+            return t("plugin.steamStatusSync.option.goInvisibleIfActivityIsHidden.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Always go invisible if hiding game activity on Discord"
     }
 });
 
@@ -87,6 +121,10 @@ export default definePlugin({
     name: "SteamStatusSync",
     description: "Sync your status to Steam!",
     authors: [PcDevs.niko],
+
+    get displayDescription() {
+        return t("plugin.steamStatusSync.description");
+    },
 
     settings,
 

@@ -7542,6 +7542,39 @@
                 "successfully": "Durum başarıyla kaydedildi"
             }
         },
+        "steamStatusSync": {
+            "name": "SteamStatusSync",
+            "description": "Durumunuzu Steam ile senkronize edin!",
+            "option": {
+                "onlineStatus": {
+                    "label": "Çevrimiçi Durumu",
+                    "description": "Discord Çevrimiçi iken Steam durumu"
+                },
+                "idleStatus": {
+                    "label": "Boşta Durumu",
+                    "description": "Discord Boşta iken Steam durumu"
+                },
+                "dndStatus": {
+                    "label": "Rahatsız Etmeyin Durumu",
+                    "description": "Discord Rahatsız Etmeyin iken Steam durumu"
+                },
+                "invisibleStatus": {
+                    "label": "Görünmez Durumu",
+                    "description": "Discord Görünmez iken Steam durumu"
+                },
+                "goInvisibleIfActivityIsHidden": {
+                    "label": "Etkinlik Gizliyse Görünmez Ol",
+                    "description": "Discord etkinliği gizlendiğinde Steam durumunu Görünmez olarak ayarla"
+                }
+            },
+            "status": {
+                "online": "Çevrimiçi",
+                "away": "Uzakta",
+                "invisible": "Görünmez",
+                "offline": "Çevrimdışı (Steam Sohbet Bağlantısını Kes)",
+                "disabled": "Devre Dışı"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
