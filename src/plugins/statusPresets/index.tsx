@@ -19,6 +19,8 @@
 
 import "./style.css";
 
+import * as DataStore from "@api/DataStore";
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -27,25 +29,40 @@ import { proxyLazy } from "@utils/lazy";
 import { classes } from "@utils/misc";
 import { openModalLazy } from "@utils/modal";
 import { useForceUpdater } from "@utils/react";
-import definePlugin, { OptionType, StartAt } from "@utils/types";
+import definePlugin, { StartAt } from "@utils/types";
 import { extractAndLoadChunksLazy, findByPropsLazy, findComponentByCodeLazy, findModuleId, wreq } from "@webpack";
 import { Clickable, Menu, OverridePremiumTypeStore, Toasts, useState } from "@webpack/common";
 
 import managedStyle from "./fixActionBar.css?managed";
 
-const settings = definePluginSettings({
-    StatusPresets: {
-        type: OptionType.COMPONENT,
-        description: "Status Presets",
-        component: () => <></>,
-        default: {}
-    }
-});
+const settings = definePluginSettings({});
 
 interface Emoji {
     animated: boolean;
-    id: bigint | null;
+    id: string | null;
     name: string;
+}
+
+interface DiscordStatus {
+    emoji: Emoji | null;
+    state: string;
+    expiresAtMs?: string;
+    emojiId?: string;
+    emojiName?: string;
+}
+
+interface SavedStatusPresets {
+    [statusText: string]: DiscordStatus;
+}
+
+let savedStatusPresets: SavedStatusPresets = {};
+
+async function loadStatusPresets() {
+    savedStatusPresets = await DataStore.get("StatusPresets_statuses") ?? {};
+}
+
+async function saveStatusPresets() {
+    await DataStore.set("StatusPresets_statuses", savedStatusPresets);
 }
 
 const PlusSmallIcon = findComponentByCodeLazy("0-2h-5V6Z");
@@ -77,19 +94,12 @@ const openCustomStatusModalLazy = () => openModalLazy(async () => {
     return props => <Component {...props} />;
 });
 
-function getExpirationMs(expiration: "TODAY" | number) {
-    if (expiration !== "TODAY") return Date.now() + expiration;
-
-    const now = new Date();
-    return new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1).getTime();
-}
-
 function setStatus(status: DiscordStatus) {
     CustomStatusSettings.updateSetting({
-        text: status.text.trim(),
-        expiresAtMs: status.clearAfter != null ? String(getExpirationMs(status.clearAfter)) : "0",
-        emojiId: status.emojiInfo?.id ?? "0",
-        emojiName: status.emojiInfo?.name ?? "",
+        text: status.state.trim(),
+        expiresAtMs: status.expiresAtMs ?? "0",
+        emojiId: status.emoji?.id ?? "0",
+        emojiName: status.emoji?.name ?? "",
         createdAtMs: String(Date.now())
     });
 }
@@ -99,7 +109,7 @@ const ClearStatusButton = () => <Clickable className={StatusStyles.clearCustomSt
 function StatusIcon({ isHovering, status }: { isHovering: boolean; status: DiscordStatus; }) {
     return <div className={StatusStyles.status}>{isHovering ?
         <PlusSmallIcon className={"pc-sp-icon"} />
-        : (status.emojiInfo != null ? <EmojiComponent emoji={status.emojiInfo} animate={false} hideTooltip={false} /> : <div className={StatusStyles.customEmojiPlaceholder} />)}</div>;
+        : (status.emoji != null ? <EmojiComponent emoji={status.emoji} animate={true} hideTooltip={false} size="24px" /> : <div className={StatusStyles.customEmojiPlaceholder} />)}</div>;
 }
 
 const RenderStatusMenuItem = ({ status, update, disabled }: { status: DiscordStatus; update: () => void; disabled: boolean; }) => {
@@ -116,12 +126,13 @@ const RenderStatusMenuItem = ({ status, update, disabled }: { status: DiscordSta
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}>
         <Clickable
-            onClick={e => {
+            onClick={async e => {
                 e.stopPropagation();
-                settings.store.StatusPresets[status.text] = undefined; // setting to undefined to remove it.
+                delete savedStatusPresets[status.state];
+                await saveStatusPresets();
                 update();
             }}><StatusIcon isHovering={isHovering} status={status} /></Clickable>
-        <div className={StatusStyles.status} style={{ marginLeft: "2px" }}>{status.text}</div>
+        <div className={StatusStyles.status} style={{ marginLeft: "2px" }}>{status.state}</div>
     </div >;
 };
 
@@ -130,15 +141,15 @@ const StatusSubMenuComponent = () => {
     const premiumType = OverridePremiumTypeStore.getState().premiumTypeActual ?? 0;
     const update = useForceUpdater();
     return <Menu.Menu navId="sp-custom-status-submenu" onClose={() => { }}>
-        {Object.entries((settings.store.StatusPresets as { [k: string]: DiscordStatus | undefined; })).map(([index, status]) => status != null ? <Menu.MenuItem
-            key={"status-presets-" + index}
-            id={"status-presets-" + index}
-            label={status.status}
-            action={() => (status.emojiInfo?.id != null && premiumType > 0 || status.emojiInfo?.id == null) && setStatus(status)}
+        {Object.entries(savedStatusPresets).map(([statusText, status]) => status != null ? <Menu.MenuItem
+            key={"status-presets-" + statusText}
+            id={"status-presets-" + statusText}
+            label={status.state}
+            action={() => (status.emoji?.id != null && premiumType > 0 || status.emoji?.id == null) && setStatus(status)}
             render={() => <RenderStatusMenuItem
                 status={status}
                 update={update}
-                disabled={status.emojiInfo?.id != null && premiumType === 0}
+                disabled={status.emoji?.id != null && premiumType === 0}
             />}
         /> : null)}
     </Menu.Menu>;
@@ -151,6 +162,11 @@ export default definePlugin({
     authors: [PcDevs.iamme],
     settings: settings,
     dependencies: ["UserSettingsAPI"],
+
+    get displayDescription() {
+        return t("plugin.statusPresets.description");
+    },
+
     managedStyle,
     patches: [
         {
@@ -183,7 +199,7 @@ export default definePlugin({
                                 className={StatusStyles.customEmojiPlaceholder}
                             />
                         }
-                        label="Set Custom Status"
+                        label={t("plugin.statusPresets.context.set")}
                         renderSubmenu={StatusSubMenuComponent}
                     />
                     :
@@ -196,12 +212,13 @@ export default definePlugin({
                             () => status.emoji != null ? (
                                 <EmojiComponent
                                     emoji={status.emoji}
-                                    animate={false}
+                                    animate={true}
                                     hideTooltip={false}
+                                    size="24px"
                                 />
                             ) : null
                         }
-                        label="Edit Custom Status"
+                        label={t("plugin.statusPresets.context.edit")}
                         renderSubmenu={StatusSubMenuComponent}
                     />}
             </ErrorBoundary>
@@ -209,17 +226,21 @@ export default definePlugin({
     },
     renderRememberButton(status: DiscordStatus) {
         return {
-            text: "Keep",
+            text: t("plugin.statusPresets.button.remember"),
             style: { marginLeft: "20px" },
-            onClick: () => {
-                settings.store.StatusPresets[status.text] = status;
+            onClick: async () => {
+                savedStatusPresets[status.state] = status;
+                await saveStatusPresets();
                 Toasts.show({
-                    message: "Successfully Saved Status",
+                    message: t("plugin.statusPresets.notification.successfully"),
                     type: Toasts.Type.SUCCESS,
                     id: Toasts.genId()
                 });
             }
         };
+    },
+    async start() {
+        await loadStatusPresets();
     },
     startAt: StartAt.WebpackReady
 });

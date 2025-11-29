@@ -11,3 +11,8 @@
     transform: rotate(45deg);
     margin-top: 4px;
 }
+
+.pc-sp-item img {
+    width: 20px;
+    height: 20px;
+}

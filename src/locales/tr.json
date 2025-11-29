@@ -7528,6 +7528,20 @@
                 "loading": "Yükleniyor..."
             }
         },
+        "statusPresets": {
+            "name": "StatusPresets",
+            "description": "Durumlarınızı kaydedip daha sonra yeniden ayarlamanıza olanak tanır",
+            "button": {
+                "remember": "Kaydet"
+            },
+            "context": {
+                "edit": "Özel Ön Ayarları Düzenle",
+                "set": "Özel Durumu Ayarla"
+            },
+            "notification": {
+                "successfully": "Durum başarıyla kaydedildi"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

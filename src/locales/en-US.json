@@ -7528,6 +7528,20 @@
                 "loading": "Loading..."
             }
         },
+        "statusPresets": {
+            "name": "StatusPresets",
+            "description": "Allows you to remember your statuses and set them later",
+            "button": {
+                "remember": "Remember"
+            },
+            "context": {
+                "edit": "Edit Custom Presets",
+                "set": "Set Custom Status"
+            },
+            "notification": {
+                "successfully": "Successfully saved status"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
