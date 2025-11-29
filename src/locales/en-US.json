@@ -7631,6 +7631,24 @@
                 }
             }
         },
+        "superReactionTweaks":{
+            "name": "SuperReactionTweaks",
+            "description": "Customize the limit of Super Reactions playing at once, and super react by default",
+            "option": {
+                "superReactByDefault": {
+                    "label": "Super React By Default",
+                    "description": "Reaction picker will default to Super Reactions"
+                },
+                "unlimitedSuperReactionPlaying": {
+                    "label": "Unlimited Super Reactions Playing",
+                    "description": "Remove the limit on Super Reactions playing at once"
+                },
+                "superReactionPlayingLimit": {
+                    "label": "Super Reactions Playing Limit",
+                    "description": "Max Super Reactions to play at once. 0 to disable playing Super Reactions"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

@@ -7631,6 +7631,24 @@
                 }
             }
         },
+        "superReactionTweaks": {
+            "name": "SuperReactionTweaks",
+            "description": "Aynı anda oynatılan Süper Tepkilerin sınırını özelleştirin ve varsayılan olarak süper tepki kullanın",
+            "option": {
+                "superReactByDefault": {
+                    "label": "Varsayılan Olarak Süper Tepki",
+                    "description": "Tepki seçici varsayılan olarak Süper Tepkileri kullanır"
+                },
+                "unlimitedSuperReactionPlaying": {
+                    "label": "Sınırsız Süper Tepki Oynatma",
+                    "description": "Aynı anda oynatılan Süper Tepki sınırını kaldırır"
+                },
+                "superReactionPlayingLimit": {
+                    "label": "Süper Tepki Oynatma Sınırı",
+                    "description": "Aynı anda oynatılacak maksimum Süper Tepki sayısı. 0, Süper Tepkilerin oynatılmasını devre dışı bırakır"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
