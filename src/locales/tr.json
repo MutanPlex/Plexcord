@@ -7575,6 +7575,36 @@
                 "disabled": "Devre Dışı"
             }
         },
+        "stickerBlocker": {
+            "name": "StickerBlocker",
+            "description": "Çıkartmaların görüntülenmesini engellemenizi sağlar.",
+            "option": {
+                "showGif": {
+                    "label": "GIF Göster",
+                    "description": "Havalı bir kedi GIF'inin gösterilip gösterilmeyeceği."
+                },
+                "showMessage": {
+                    "label": "Mesaj Göster",
+                    "description": "Hangi ID'nin engellendiğini belirten bir mesaj gösterilip gösterilmeyeceği"
+                },
+                "showButton": {
+                    "label": "Butonu Göster",
+                    "description": "GIF'in engelini kaldırmak için bir butonun gösterilip gösterilmeyeceği"
+                },
+                "blockedStickers": {
+                    "label": "Engellenen Çıkartmalar",
+                    "description": "Engellenmiş çıkartma ID'lerinin listesi (ne yaptığınızı bilmiyorsanız düzenlemeyin)"
+                }
+            },
+            "modal": {
+                "blocked": "Engellenen Çıkartma. ID: {{id}} AD: {{name}}",
+                "unblock": "{{name}} engelini kaldır"
+            },
+            "context": {
+                "blockSticker": "Çıkartmayı Engelle",
+                "unblockSticker": "Çıkartmanın Engelini Kaldır"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

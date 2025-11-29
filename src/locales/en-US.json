@@ -7575,6 +7575,36 @@
                 "disabled": "Disabled"
             }
         },
+        "stickerBlocker": {
+            "name": "StickerBlocker",
+            "description": "Allows you to block stickers from being displayed.",
+            "option": {
+                "showGif": {
+                    "label": "Show GIF",
+                    "description": "Whether to show a snazzy cat gif."
+                },
+                "showMessage": {
+                    "label": "Show Message",
+                    "description": "Whether to show a message detailing which id was blocked"
+                },
+                "showButton": {
+                    "label": "Show Button",
+                    "description": "Whether to show a button to unblock the gif"
+                },
+                "blockedStickers": {
+                    "label": "Blocked Stickers",
+                    "description": "The list of blocked sticker IDs (don't edit unless you know what you're doing)"
+                }
+            },
+            "modal": {
+                "blocked": "Blocked Sticker. ID: {{id}} NAME: {{name}}",
+                "unblock": "Unblock {{name}}"
+            },
+            "context": {
+                "blockSticker": "Block Sticker",
+                "unblockSticker": "Unblock Sticker"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
