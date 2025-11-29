@@ -7609,6 +7609,10 @@
             "name": "StickerPaste",
             "description": "Makes picking a sticker in the sticker picker insert it into the chatbox instead of instantly sending"
         },
+        "streamerModeOnStream": {
+            "name": "StreamerModeOnStream",
+            "description": "Automatically enables streamer mode when you start streaming in Discord"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

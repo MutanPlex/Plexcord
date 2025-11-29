@@ -7609,6 +7609,10 @@
             "name": "StickerPaste",
             "description": "Çıkartma seçicide bir çıkartma seçtiğinizde, onu anında göndermek yerine sohbet kutusuna ekler"
         },
+        "streamerModeOnStream": {
+            "name": "StreamerModeOnStream",
+            "description": "Discord’da yayın yapmaya başladığınızda yayıncı modunu otomatik olarak etkinleştirir"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
