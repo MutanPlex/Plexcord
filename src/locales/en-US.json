@@ -7605,6 +7605,10 @@
                 "unblockSticker": "Unblock Sticker"
             }
         },
+        "stickerPaste": {
+            "name": "StickerPaste",
+            "description": "Makes picking a sticker in the sticker picker insert it into the chatbox instead of instantly sending"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
