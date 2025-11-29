@@ -7678,6 +7678,10 @@
                 "applied": "Kurallar uygulanmış mesaj"
             }
         },
+        "themeAttributes": {
+            "name": "ThemeAttributes",
+            "description": "Tema oluşturma amacıyla çeşitli öğelere veri öznitelikleri ekler"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
