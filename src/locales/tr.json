@@ -7613,6 +7613,24 @@
             "name": "StreamerModeOnStream",
             "description": "Discord’da yayın yapmaya başladığınızda yayıncı modunu otomatik olarak etkinleştirir"
         },
+        "streamingCodecDisabler": {
+            "name": "StreamingCodecDisabler",
+            "description": "İstediğiniz yayın codec'lerini devre dışı bırakır",
+            "option": {
+                "disableAv1Codec": {
+                    "label": "AV1 Codec'ini Devre Dışı Bırak",
+                    "description": "Discord'un yayın için AV1 kullanmayı düşünmesini engeller."
+                },
+                "disableH265Codec": {
+                    "label": "H265 Codec'ini Devre Dışı Bırak",
+                    "description": "Discord'un yayın için H265 kullanmayı düşünmesini engeller."
+                },
+                "disableH264Codec": {
+                    "label": "H264 Codec'ini Devre Dışı Bırak",
+                    "description": "Discord'un yayın için H264 kullanmayı düşünmesini engeller."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

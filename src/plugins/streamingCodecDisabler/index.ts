@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -21,17 +22,14 @@ type CodecType = "AV1" | "H265" | "H264";
 const CODEC_CONFIGS = {
     AV1: {
         settingKey: "disableAv1Codec" as const,
-        description: "Make Discord not consider using AV1 for streaming.",
         method: "setAv1Enabled" as const,
     },
     H265: {
         settingKey: "disableH265Codec" as const,
-        description: "Make Discord not consider using H265 for streaming.",
         method: "setH265Enabled" as const,
     },
     H264: {
         settingKey: "disableH264Codec" as const,
-        description: "Make Discord not consider using H264 for streaming.",
         method: "setH264Enabled" as const,
     },
 } as const;
@@ -42,24 +40,48 @@ const originalCodecStatuses = new Map<CodecType, boolean>([
     ["H264", true],
 ]);
 
-const settings = definePluginSettings(
-    Object.fromEntries(
-        Object.entries(CODEC_CONFIGS).map(([codec, config]) => [
-            config.settingKey,
-            {
-                description: config.description,
-                type: OptionType.BOOLEAN,
-                default: false,
-            },
-        ])
-    )
-);
+const settings = definePluginSettings({
+    disableAv1Codec: {
+        get label() {
+            return t("plugin.streamingCodecDisabler.option.disableAv1Codec.label");
+        },
+        get description() {
+            return t("plugin.streamingCodecDisabler.option.disableAv1Codec.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: false,
+    },
+    disableH265Codec: {
+        get label() {
+            return t("plugin.streamingCodecDisabler.option.disableH265Codec.label");
+        },
+        get description() {
+            return t("plugin.streamingCodecDisabler.option.disableH265Codec.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: false,
+    },
+    disableH264Codec: {
+        get label() {
+            return t("plugin.streamingCodecDisabler.option.disableH264Codec.label");
+        },
+        get description() {
+            return t("plugin.streamingCodecDisabler.option.disableH264Codec.description");
+        },
+        type: OptionType.BOOLEAN,
+        default: false,
+    },
+});
 
 export default definePlugin({
     name: "StreamingCodecDisabler",
     description: "Disable codecs for streaming of your choice",
     authors: [PcDevs.davidkra230],
     settings,
+
+    get displayDescription() {
+        return t("plugin.streamingCodecDisabler.description");
+    },
 
     patches: [
         {

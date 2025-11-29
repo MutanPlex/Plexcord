@@ -7613,6 +7613,24 @@
             "name": "StreamerModeOnStream",
             "description": "Automatically enables streamer mode when you start streaming in Discord"
         },
+        "streamingCodecDisabler": {
+            "name": "StreamingCodecDisabler",
+            "description": "Disable codecs for streaming of your choice",
+            "option": {
+                "disableAv1Codec": {
+                    "label": "Disable AV1 Codec",
+                    "description": "Make Discord not consider using AV1 for streaming."
+                },
+                "disableH265Codec": {
+                    "label": "Disable H265 Codec",
+                    "description": "Make Discord not consider using H265 for streaming."
+                },
+                "disableH264Codec": {
+                    "label": "Disable H264 Codec",
+                    "description": "Make Discord not consider using H264 for streaming."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
