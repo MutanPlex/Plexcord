@@ -7682,6 +7682,16 @@
             "name": "ThemeAttributes",
             "description": "Tema oluşturma amacıyla çeşitli öğelere veri öznitelikleri ekler"
         },
+        "timelessClips": {
+            "name": "TimelessClips",
+            "description": "Kendi klip uzunluğunuzu ekleyin",
+            "option": {
+                "clipLength": {
+                    "label": "Klip Uzunluğu",
+                    "description": "Dakika cinsinden klip uzunluğu seçeneği ekleyin"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

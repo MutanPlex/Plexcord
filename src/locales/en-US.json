@@ -7682,6 +7682,16 @@
             "name": "ThemeAttributes",
             "description": "Adds data attributes to various elements for theming purposes"
         },
+        "timelessClips": {
+            "name": "TimelessClips",
+            "description": "Add a your own clip length",
+            "option": {
+                "clipLength": {
+                    "label": "Clip Length",
+                    "description": "Add clip length option in minutes"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
