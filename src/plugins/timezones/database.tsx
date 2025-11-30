@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { openModal } from "@utils/index";
 import { OAuth2AuthorizeModal, showToast, Toasts } from "@webpack/common";
 
@@ -110,14 +111,14 @@ async function setTimezoneInternal(timezone: string): Promise<boolean> {
 
         if (!res.ok) {
             const error = await safeJsonParse(res);
-            handleApiError(error, "Failed to set timezone");
+            handleApiError(error, t("plugin.timezones.toast.update.failed"));
             return false;
         }
 
-        showToast("Timezone updated successfully!", Toasts.Type.SUCCESS);
+        showToast(t("plugin.timezones.toast.updated"), Toasts.Type.SUCCESS);
         return true;
     } catch (e) {
-        handleApiError(e, "Failed to set timezone");
+        handleApiError(e, t("plugin.timezones.toast.update.failed"));
         return false;
     }
 }
@@ -149,14 +150,14 @@ async function deleteTimezoneInternal(): Promise<boolean> {
 
         if (!res.ok) {
             const error = await safeJsonParse(res);
-            handleApiError(error, "Failed to delete timezone");
+            handleApiError(error, t("plugin.timezones.toast.deleteFailed"));
             return false;
         }
 
-        showToast("Timezone deleted successfully!", Toasts.Type.SUCCESS);
+        showToast(t("plugin.timezones.toast.delete.successfully"), Toasts.Type.SUCCESS);
         return true;
     } catch (e) {
-        handleApiError(e, "Failed to delete timezone");
+        handleApiError(e, t("plugin.timezones.toast.delete.failed"));
         return false;
     }
 }
@@ -181,13 +182,13 @@ export function authModal(callback?: () => void) {
                     });
                     const json = await safeJsonParse(r);
                     if (!r.ok) {
-                        handleApiError(json, "Authorization failed");
+                        handleApiError(json, t("plugin.timezones.toast.auth.failed"));
                         return;
                     }
-                    showToast("Authorization successful!", Toasts.Type.SUCCESS);
+                    showToast(t("plugin.timezones.toast.auth.success"), Toasts.Type.SUCCESS);
                     callback?.();
                 } catch (e) {
-                    handleApiError(e, "Unexpected error during authorization");
+                    handleApiError(e, t("plugin.timezones.toast.auth.failed"));
                 }
             }}
         />

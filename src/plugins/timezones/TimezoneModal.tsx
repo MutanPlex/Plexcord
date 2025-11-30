@@ -6,6 +6,7 @@
  */
 
 import * as DataStore from "@api/DataStore";
+import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
@@ -45,7 +46,7 @@ export function SetTimezoneModal({ userId, modalProps, database }: { userId: str
         <ModalRoot {...modalProps}>
             <ModalHeader className={cl("modal-header")}>
                 <Heading>
-                    Timezones
+                    {t("plugin.timezones.modal.title")}
                 </Heading>
                 <ModalCloseButton onClick={modalProps.onClose} />
             </ModalHeader>
@@ -53,13 +54,13 @@ export function SetTimezoneModal({ userId, modalProps, database }: { userId: str
             <ModalContent className={cl("modal-content")}>
                 <section className={Margins.bottom16}>
                     <Heading>
-                        Select Timezone
+                        {t("plugin.timezones.modal.select")}
                     </Heading>
 
                     <SearchableSelect
                         options={options}
                         value={options.find(o => o.value === currentValue)}
-                        placeholder={"Select a Timezone"}
+                        placeholder={t("plugin.timezones.modal.selectPlaceholder")}
                         maxVisibleItems={5}
                         closeOnSelect={true}
                         onChange={v => setCurrentValue(v)}
@@ -76,7 +77,7 @@ export function SetTimezoneModal({ userId, modalProps, database }: { userId: str
                             modalProps.onClose();
                         }}
                     >
-                        Delete Timezone
+                        {t("plugin.timezones.modal.delete")}
                     </Button>
                 )}
                 <Button
@@ -95,7 +96,7 @@ export function SetTimezoneModal({ userId, modalProps, database }: { userId: str
                         modalProps.onClose();
                     }}
                 >
-                    Save
+                    {t("plugin.timezones.modal.save")}
                 </Button>
             </ModalFooter>
         </ModalRoot>

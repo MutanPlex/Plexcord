@@ -7063,7 +7063,7 @@
                 "viewAllowedUsersAndRoles": "View Allowed Users and Roles"
             }
         },
-        "showHiddenThings" :{
+        "showHiddenThings": {
             "name": "ShowHiddenThings",
             "description": "Displays various hidden & moderator-only things regardless of permissions.",
             "option": {
@@ -7216,7 +7216,7 @@
                     "label": "Persist Sidebar Chat",
                     "description": "Keep the sidebar chat open across Discord restarts"
                 },
-                "patchCommunity":{
+                "patchCommunity": {
                     "label": "Patch Community",
                     "description": "Patch things like the Channel Browser or Members tab that community servers have."
                 }
@@ -7631,7 +7631,7 @@
                 }
             }
         },
-        "superReactionTweaks":{
+        "superReactionTweaks": {
             "name": "SuperReactionTweaks",
             "description": "Customize the limit of Super Reactions playing at once, and super react by default",
             "option": {
@@ -7690,6 +7690,94 @@
                     "label": "Clip Length",
                     "description": "Add clip length option in minutes"
                 }
+            }
+        },
+        "timezones": {
+            "name": "Timezones",
+            "description": "Shows the local time of users in profiles and message headers",
+            "button": {
+                "wantToSave": "Want to save your timezone to the database? Click here to set it.",
+                "yourLocalTimezone": "(Your local timezone)"
+            },
+            "context": {
+                "set": "Set Local Timezone"
+            },
+            "toast": {
+                "refresh": {
+                    "successfully": "Timezones refreshed successfully!",
+                    "failed": "Timezones Failed to refresh!",
+                    "failedTo": "Failed to refresh timezones."
+                },
+                "update": {
+                    "failed": "Failed to set timezone."
+                },
+                "delete": {
+                    "successfully": "Timezone deleted successfully!",
+                    "failed": "Failed to delete timezone."
+                },
+                "auth": {
+                    "failed": "Authentication failed.",
+                    "success": "Authorization successful!"
+                }
+            },
+            "toolbox": {
+                "set": "Set Database Timezone",
+                "refresh": "Refresh Database Timezones"
+            },
+            "option": {
+                "showOwnTimezone": {
+                    "label": "Show Own Timezone",
+                    "description": "Show your own timezone in profiles and message headers"
+                },
+                "twentyFourHourTime": {
+                    "label": "24-Hour Time",
+                    "description": "Show time in 24-hour format"
+                },
+                "showTimezoneInfo": {
+                    "label": "Show Timezone Info",
+                    "description": "Show timezone info next to time"
+                },
+                "showMessageHeaderTime": {
+                    "label": "Show Message Header Time",
+                    "description": "Show time in message headers"
+                },
+                "showProfileTime": {
+                    "label": "Show Profile Time",
+                    "description": "Show time in user profiles"
+                },
+                "useDatabase": {
+                    "label": "Use Database Timezone",
+                    "description": "Enable database for getting user timezones"
+                },
+                "preferDatabaseOverLocal": {
+                    "label": "Prefer Database Over Local",
+                    "description": "Prefer database over local storage for timezones"
+                },
+                "databaseUrl": {
+                    "label": "Database URL",
+                    "description": "The URL of the timezone database server"
+                },
+                "setDatabaseTimezone": {
+                    "label": "Set Database Timezone",
+                    "description": "Set your timezone on the database",
+                    "setTimezone": "Set Timezone on Database"
+                },
+                "resetDatabaseTimezone": {
+                    "label": "Reset Database Timezone",
+                    "description": "Reset your timezone on the database",
+                    "failed": "Failed to reset database timezone"
+                },
+                "askedTimezone": {
+                    "label": "Asked Timezone",
+                    "description": "Whether the user has been asked to set their timezone"
+                }
+            },
+            "modal": {
+                "title": "Timezones",
+                "select": "Select Timezone",
+                "selectPlaceholder": "Select a Timezone",
+                "delete": "Delete Timezone",
+                "save": "Save"
             }
         },
         "uselessInfo": {

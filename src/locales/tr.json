@@ -7692,6 +7692,94 @@
                 }
             }
         },
+        "timezones": {
+            "name": "Timezones",
+            "description": "Kullanıcıların yerel saatini profillerde ve mesaj başlıklarında gösterir",
+            "button": {
+                "wantToSave": "Saat diliminizi veritabanına kaydetmek ister misiniz? Ayarlamak için buraya tıklayın.",
+                "yourLocalTimezone": "(Yerel saat diliminiz)"
+            },
+            "context": {
+                "set": "Yerel Saat Dilimini Ayarla"
+            },
+            "toast": {
+                "refresh": {
+                    "successfully": "Saat dilimleri başarıyla yenilendi!",
+                    "failed": "Saat dilimleri yenilenemedi!",
+                    "failedTo": "Saat dilimleri yenilenemedi."
+                },
+                "update": {
+                    "failed": "Saat dilimi ayarlanamadı."
+                },
+                "delete": {
+                    "successfully": "Saat dilimi başarıyla silindi!",
+                    "failed": "Saat dilimi silinemedi."
+                },
+                "auth": {
+                    "failed": "Kimlik doğrulama başarısız.",
+                    "success": "Yetkilendirme başarılı!"
+                }
+            },
+            "toolbox": {
+                "set": "Veritabanı Saat Dilimini Ayarla",
+                "refresh": "Veritabanı Saat Dilimlerini Yenile"
+            },
+            "option": {
+                "showOwnTimezone": {
+                    "label": "Kendi Saat Dilimini Göster",
+                    "description": "Profilinizde ve mesaj başlıklarında kendi saat diliminizi gösterir"
+                },
+                "twentyFourHourTime": {
+                    "label": "24 Saat Biçimi",
+                    "description": "Saati 24 saatlik biçimde göster"
+                },
+                "showTimezoneInfo": {
+                    "label": "Saat Dilimi Bilgisini Göster",
+                    "description": "Saate ek olarak saat dilimi bilgisini göster"
+                },
+                "showMessageHeaderTime": {
+                    "label": "Mesaj Başlığı Saatini Göster",
+                    "description": "Mesaj başlıklarında saati göster"
+                },
+                "showProfileTime": {
+                    "label": "Profil Saatini Göster",
+                    "description": "Kullanıcı profillerinde saati göster"
+                },
+                "useDatabase": {
+                    "label": "Veritabanı Saat Dilimini Kullan",
+                    "description": "Kullanıcı saat dilimlerini almak için veritabanını kullan"
+                },
+                "preferDatabaseOverLocal": {
+                    "label": "Yerel Yerine Veritabanını Tercih Et",
+                    "description": "Saat dilimlerinde yerel depolama yerine veritabanını tercih et"
+                },
+                "databaseUrl": {
+                    "label": "Veritabanı URL'si",
+                    "description": "Saat dilimi veritabanı sunucusunun URL'si"
+                },
+                "setDatabaseTimezone": {
+                    "label": "Veritabanı Saat Dilimini Ayarla",
+                    "description": "Saat diliminizi veritabanında ayarlayın",
+                    "setTimezone": "Veritabanında Saat Dilimini Ayarla"
+                },
+                "resetDatabaseTimezone": {
+                    "label": "Veritabanı Saat Dilimini Sıfırla",
+                    "description": "Veritabanındaki saat diliminizi sıfırlayın",
+                    "failed": "Veritabanı saat dilimi sıfırlanamadı"
+                },
+                "askedTimezone": {
+                    "label": "Saat Dilimi Soruldu",
+                    "description": "Kullanıcıya saat diliminin sorulup sorulmadığını belirtir"
+                }
+            },
+            "modal": {
+                "title": "Saat Dilimleri",
+                "select": "Saat Dilimi Seç",
+                "selectPlaceholder": "Bir Saat Dilimi Seçin",
+                "delete": "Saat Dilimini Sil",
+                "save": "Kaydet"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
