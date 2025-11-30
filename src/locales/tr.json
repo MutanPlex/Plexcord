@@ -7990,6 +7990,56 @@
                 }
             }
         },
+        "typingIndicator": {
+            "name": "TypingIndicator",
+            "description": "Bir kanalda birisi yazıyor olduğunda bir gösterge ekler.",
+            "option": {
+                "includeCurrentChannel": {
+                    "label": "Geçerli Kanalı Dahil Et",
+                    "description": "Geçerli seçili kanal için yazıyor göstergesinin gösterilip gösterilmeyeceği"
+                },
+                "includeMutedChannels": {
+                    "label": "Sessize Alınmış Kanalları Dahil Et",
+                    "description": "Sessize alınmış kanallar için yazıyor göstergesinin gösterilip gösterilmeyeceği."
+                },
+                "includeIgnoredUsers": {
+                    "label": "Yok Sayılan Kullanıcıları Dahil Et",
+                    "description": "Yok sayılan kullanıcılar için yazıyor göstergesinin gösterilip gösterilmeyeceği."
+                },
+                "includeBlockedUsers": {
+                    "label": "Engellenen Kullanıcıları Dahil Et",
+                    "description": "Engellenen kullanıcılar için yazıyor göstergesinin gösterilip gösterilmeyeceği."
+                },
+                "indicatorMode": {
+                    "label": "Gösterge Modu",
+                    "description": "Gösterge nasıl görüntülensin?",
+                    "both": "Avatarlar ve animasyonlu noktalar",
+                    "dots": "Animasyonlu noktalar",
+                    "avatars": "Avatarlar"
+                }
+            }
+        },
+        "typingTweaks": {
+            "name": "TypingTweaks",
+            "description": "Yazıyor göstergesinde avatarları ve rol renklerini gösterir",
+            "option": {
+                "showAvatars": {
+                    "label": "Birden Fazla Kullanıcıyı Göster",
+                    "description": "Yazıyor göstergesinde avatarları göster"
+                },
+                "showRoleColors": {
+                    "label": "Rol Renklerini Göster",
+                    "description": "Yazıyor göstergesinde rol renklerini göster"
+                },
+                "alternativeFormatting": {
+                    "label": "Alternatif Biçim",
+                    "description": "Birden fazla kişi yazıyor olduğunda daha kullanışlı bir mesaj göster"
+                }
+            },
+            "others": {
+                "areTyping": "ve {{count}} kişi daha yazıyor..."
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

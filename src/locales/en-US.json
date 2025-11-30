@@ -7990,6 +7990,56 @@
                 }
             }
         },
+        "typingIndicator": {
+            "name": "TypingIndicator",
+            "description": "Adds an indicator if someone is typing on a channel.",
+            "option": {
+                "includeCurrentChannel": {
+                    "label": "Include Current Channel",
+                    "description": "Whether to show the typing indicator for the currently selected channel"
+                },
+                "includeMutedChannels": {
+                    "label": "Include Muted Channels",
+                    "description": "Whether to show the typing indicator for muted channels."
+                },
+                "includeIgnoredUsers": {
+                    "label": "Include Ignored Users",
+                    "description": "Whether to show the typing indicator for ignored users."
+                },
+                "includeBlockedUsers": {
+                    "label": "Include Blocked Users",
+                    "description": "Whether to show the typing indicator for blocked users."
+                },
+                "indicatorMode": {
+                    "label": "Indicator Mode",
+                    "description": "How should the indicator be displayed?",
+                    "both": "Avatars and animated dots",
+                    "dots": "Animated dots",
+                    "avatars": "Avatars"
+                }
+            }
+        },
+        "typingTweaks": {
+            "name": "TypingTweaks",
+            "description": "Show avatars and role colours in the typing indicator",
+            "option": {
+                "showAvatars": {
+                    "label": "Show Several Users",
+                    "description": "Show avatars in the typing indicator"
+                },
+                "showRoleColors": {
+                    "label": "Show Role Colors",
+                    "description": "Show role colors in the typing indicator"
+                },
+                "alternativeFormatting": {
+                    "label": "Alternative Formatting",
+                    "description": "Show a more useful message when several users are typing"
+                }
+            },
+            "others": {
+                "areTyping": "and {{count}} others are typing..."
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

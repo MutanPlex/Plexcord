@@ -19,6 +19,7 @@
 
 import "./style.css";
 
+import { t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { buildSeveralUsers } from "@plugins/typingTweaks";
@@ -136,33 +137,60 @@ function TypingIndicator({ channelId, guildId }: { channelId: string; guildId: s
 
 const settings = definePluginSettings({
     includeCurrentChannel: {
+        get label() {
+            return t("plugin.typingIndicator.option.includeCurrentChannel.label");
+        },
+        get description() {
+            return t("plugin.typingIndicator.option.includeCurrentChannel.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether to show the typing indicator for the currently selected channel",
         default: true
     },
     includeMutedChannels: {
+        get label() {
+            return t("plugin.typingIndicator.option.includeMutedChannels.label");
+        },
+        get description() {
+            return t("plugin.typingIndicator.option.includeMutedChannels.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether to show the typing indicator for muted channels.",
         default: false
     },
     includeIgnoredUsers: {
+        get label() {
+            return t("plugin.typingIndicator.option.includeIgnoredUsers.label");
+        },
+        get description() {
+            return t("plugin.typingIndicator.option.includeIgnoredUsers.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether to show the typing indicator for ignored users.",
         default: false
     },
     includeBlockedUsers: {
+        get label() {
+            return t("plugin.typingIndicator.option.includeBlockedUsers.label");
+        },
+        get description() {
+            return t("plugin.typingIndicator.option.includeBlockedUsers.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Whether to show the typing indicator for blocked users.",
         default: false
     },
     indicatorMode: {
+        get label() {
+            return t("plugin.typingIndicator.option.indicatorMode.label");
+        },
+        get description() {
+            return t("plugin.typingIndicator.option.indicatorMode.description");
+        },
         type: OptionType.SELECT,
-        description: "How should the indicator be displayed?",
-        options: [
-            { label: "Avatars and animated dots", value: IndicatorMode.Dots | IndicatorMode.Avatars, default: true },
-            { label: "Animated dots", value: IndicatorMode.Dots },
-            { label: "Avatars", value: IndicatorMode.Avatars },
-        ],
+        get options() {
+            return [
+                { label: t("plugin.typingIndicator.option.indicatorMode.both"), value: IndicatorMode.Dots | IndicatorMode.Avatars, default: true },
+                { label: t("plugin.typingIndicator.option.indicatorMode.dots"), value: IndicatorMode.Dots },
+                { label: t("plugin.typingIndicator.option.indicatorMode.avatars"), value: IndicatorMode.Avatars },
+            ];
+        },
     }
 });
 
@@ -171,6 +199,10 @@ export default definePlugin({
     description: "Adds an indicator if someone is typing on a channel.",
     authors: [Devs.Nuckyz, Devs.fawn, Devs.Sqaaakoi],
     settings,
+
+    get displayDescription() {
+        return t("plugin.typingIndicator.description");
+    },
 
     patches: [
         {

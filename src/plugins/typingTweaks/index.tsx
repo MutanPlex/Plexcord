@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Channel, User } from "@plexcord/discord-types";
@@ -33,19 +34,34 @@ import managedStyle from "./style.css?managed";
 
 const settings = definePluginSettings({
     showAvatars: {
+        get label() {
+            return t("plugin.typingTweaks.option.showAvatars.label");
+        },
+        get description() {
+            return t("plugin.typingTweaks.option.showAvatars.description");
+        },
         type: OptionType.BOOLEAN,
-        default: true,
-        description: "Show avatars in the typing indicator"
+        default: true
     },
     showRoleColors: {
+        get label() {
+            return t("plugin.typingTweaks.option.showRoleColors.label");
+        },
+        get description() {
+            return t("plugin.typingTweaks.option.showRoleColors.description");
+        },
         type: OptionType.BOOLEAN,
-        default: true,
-        description: "Show role colors in the typing indicator"
+        default: true
     },
     alternativeFormatting: {
+        get label() {
+            return t("plugin.typingTweaks.option.alternativeFormatting.label");
+        },
+        get description() {
+            return t("plugin.typingTweaks.option.alternativeFormatting.description");
+        },
         type: OptionType.BOOLEAN,
-        default: true,
-        description: "Show a more useful message when several users are typing"
+        default: true
     }
 });
 
@@ -58,7 +74,7 @@ export const buildSeveralUsers = ErrorBoundary.wrap(function buildSeveralUsers({
                     {", "}
                 </React.Fragment>
             ))}
-            and {count} others are typing...
+            {t("plugin.typingTweaks.others.areTyping", { count })}
         </>
     );
 }, { noop: true });
@@ -110,6 +126,10 @@ export default definePlugin({
     description: "Show avatars and role colours in the typing indicator",
     authors: [Devs.zt, Devs.sadan],
     settings,
+
+    get displayDescription() {
+        return t("plugin.typingTweaks.description");
+    },
 
     managedStyle,
 
