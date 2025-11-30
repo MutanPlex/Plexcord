@@ -7780,6 +7780,45 @@
                 "save": "Save"
             }
         },
+        "toastNotifications": {
+            "name": "ToastNotifications",
+            "description": "Show a toast notification whenever you receive a direct message.",
+            "notification": {
+                "call": "Started a call with you!",
+                "recipient": {
+                    "add": "{{target}} was added to the group by {{actor}}.",
+                    "remove": "{{target}} was removed from the group by {{actor}}.",
+                    "left": "Left the group."
+                },
+                "channel": {
+                    "change": {
+                        "name": "Changed the channel name to {{name}}.",
+                        "icon": "Changed the channel icon."
+                    },
+                    "pinned": "Pinned a message."
+                },
+                "sent": {
+                    "embed": "Sent an embed.",
+                    "sticker": "Sent a sticker.",
+                    "attachment": "Attachment:"
+                },
+                "redacted": "Message content has been redacted.",
+                "friend": {
+                    "accept": "{{user}} is now your friend",
+                    "acceptBody": "You can now message them directly.",
+                    "request": "{{user}} sent you a friend request.",
+                    "requestBody": "You can accept or decline it in the Friends tab."
+                },
+                "example": {
+                    "title": "Example Notification",
+                    "body": "This is an example notification body."
+                }
+            },
+            "modal": {
+                "dismiss": "Dismiss Notification",
+                "attachments": "{{attachments}} attachment{{s}} {{were}} sent."
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

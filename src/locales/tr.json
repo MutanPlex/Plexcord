@@ -7780,6 +7780,45 @@
                 "save": "Kaydet"
             }
         },
+        "toastNotifications": {
+            "name": "ToastNotifications",
+            "description": "Bir direkt mesaj aldığınızda bildirim şeklinde bir toast bildirimi gösterir.",
+            "notification": {
+                "call": "Sizinle bir arama başlattı!",
+                "recipient": {
+                    "add": "{{target}}, {{actor}} tarafından gruba eklendi.",
+                    "remove": "{{target}}, {{actor}} tarafından gruptan çıkarıldı.",
+                    "left": "Gruptan ayrıldı."
+                },
+                "channel": {
+                    "change": {
+                        "name": "Kanal adı {{name}} olarak değiştirildi.",
+                        "icon": "Kanal ikonu değiştirildi."
+                    },
+                    "pinned": "Bir mesaj sabitledi."
+                },
+                "sent": {
+                    "embed": "Bir embed gönderdi.",
+                    "sticker": "Bir çıkartma gönderdi.",
+                    "attachment": "Dosya:"
+                },
+                "redacted": "Mesaj içeriği sansürlendi.",
+                "friend": {
+                    "accept": "{{user}} artık arkadaşınız",
+                    "acceptBody": "Artık onlara doğrudan mesaj gönderebilirsiniz.",
+                    "request": "{{user}} size bir arkadaşlık isteği gönderdi.",
+                    "requestBody": "Bunu Arkadaşlar sekmesinden kabul edebilir veya reddedebilirsiniz."
+                },
+                "example": {
+                    "title": "Örnek Bildirim",
+                    "body": "Bu bir örnek bildirim metnidir."
+                }
+            },
+            "modal": {
+                "dismiss": "Bildirim Kapat",
+                "attachments": "{{attachments}} dosya gönderildi."
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

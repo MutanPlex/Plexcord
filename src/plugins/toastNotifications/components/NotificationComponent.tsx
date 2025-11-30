@@ -19,6 +19,7 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { settings as PluginSettings } from "@plugins/toastNotifications/index";
 import { classes } from "@utils/misc";
@@ -118,7 +119,7 @@ export default ErrorBoundary.wrap(function NotificationComponent({
                             }}
                         >
                             <svg width="24" height="24" viewBox="0 0 24 24" role="img" aria-labelledby="toastnotifications-notification-dismiss-title">
-                                <title id="toastnotifications-notification-dismiss-title">Dismiss Notification</title>
+                                <title id="toastnotifications-notification-dismiss-title">{t("plugin.toastNotifications.modal.dismiss")}</title>
                                 <path fill="currentColor" d="M18.4 4L12 10.4L5.6 4L4 5.6L10.4 12L4 18.4L5.6 20L12 13.6L18.4 20L20 18.4L13.6 12L20 5.6L18.4 4Z" />
                             </svg>
                         </button>
@@ -132,7 +133,7 @@ export default ErrorBoundary.wrap(function NotificationComponent({
                             )
                         ) : null}
                         {PluginSettings.store.renderImages && image && <img className="toastnotifications-notification-img" src={image} alt="ToastNotification Image" />}
-                        {footer && <p className="toastnotifications-notification-footer">{`${attachments} attachment${attachments > 1 ? "s" : ""} ${attachments > 1 ? "were" : "was"} sent.`}</p>}
+                        {footer && <p className="toastnotifications-notification-footer">{t("plugin.toastNotifications.modal.attachments", { attachments, s: attachments > 1 ? "s" : "", were: attachments > 1 ? "were" : "was" })}</p>}
                     </div>
                 </div>
             </div>

@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Channel, Message, User } from "@plexcord/discord-types";
@@ -213,6 +214,11 @@ export default definePlugin({
     description: "Show a toast notification whenever you receive a direct message.",
     authors: [PcDevs.Skully, Devs.Ethan, PcDevs.Buzzy],
     settings,
+
+    get displayDescription() {
+        return t("plugin.toastNotifications.description");
+    },
+
     flux: {
         async MESSAGE_CREATE({ message }: { message: Message; }) {
 
@@ -275,7 +281,7 @@ export default definePlugin({
             // Handle specific message types.
             switch (message.type) {
                 case MessageType.CALL: {
-                    Notification.body = "Started a call with you!";
+                    Notification.body = t("plugin.toastNotifications.notification.call");
                     break;
                 }
                 case MessageType.RECIPIENT_ADD: {
@@ -283,7 +289,7 @@ export default definePlugin({
                     const user = message.mentions[0];
                     const targetUser = UserStore.getUser((user as any).id);
 
-                    Notification.body = `${getName(targetUser)} was added to the group by ${getName(actor)}.`;
+                    Notification.body = t("plugin.toastNotifications.notification.recipient.add", { target: getName(targetUser), actor: getName(actor) });
                     break;
                 }
                 case MessageType.RECIPIENT_REMOVE: {
@@ -292,34 +298,34 @@ export default definePlugin({
                     const targetUser = UserStore.getUser((user as any).id);
 
                     if (actor.id !== targetUser.id) {
-                        Notification.body = `${getName(targetUser)} was removed from the group by ${getName(actor)}.`;
+                        Notification.body = t("plugin.toastNotifications.notification.recipient.remove", { target: getName(targetUser), actor: getName(actor) });
                     } else {
-                        Notification.body = "Left the group.";
+                        Notification.body = t("plugin.toastNotifications.notification.recipient.left");
                     }
                     break;
                 }
                 case MessageType.CHANNEL_NAME_CHANGE: {
-                    Notification.body = `Changed the channel name to '${message.content}'.`;
+                    Notification.body = t("plugin.toastNotifications.notification.channel.change.name", { name: message.content });
                     break;
                 }
                 case MessageType.CHANNEL_ICON_CHANGE: {
-                    Notification.body = "Changed the channel icon.";
+                    Notification.body = t("plugin.toastNotifications.notification.channel.change.icon");
                     break;
                 }
                 case MessageType.CHANNEL_PINNED_MESSAGE: {
-                    Notification.body = "Pinned a message.";
+                    Notification.body = t("plugin.toastNotifications.notification.channel.pinned");
                     break;
                 }
             }
 
             // Message contains an embed.
             if (message.embeds?.length !== 0) {
-                Notification.body = notificationText || "Sent an embed.";
+                Notification.body = notificationText || t("plugin.toastNotifications.notification.sent.embed");
             }
 
             // Message contains a sticker.
             if (message?.stickerItems) {
-                Notification.body = notificationText || "Sent a sticker.";
+                Notification.body = notificationText || t("plugin.toastNotifications.notification.sent.sticker");
             }
 
             // Message contains an attachment.
@@ -330,7 +336,7 @@ export default definePlugin({
                     Notification.body = notificationText || ""; // Dont show any body
                     Notification.image = images[0].url;
                 } else {
-                    Notification.body += ` [Attachment: ${message.attachments[0].filename}]`;
+                    Notification.body += ` [${t("plugin.toastNotifications.notification.sent.attachment")} ${message.attachments[0].filename}]`;
                 }
             }
 
@@ -370,7 +376,7 @@ export default definePlugin({
             Notification.body = limitMessageLength(Notification.body, Notification.attachments > 0);
 
             if (isStreaming && settings.store.streamingTreatment === StreamingTreatment.NO_CONTENT) {
-                Notification.body = "Message content has been redacted.";
+                Notification.body = t("plugin.toastNotifications.notification.redacted");
             }
 
             if (!settings.store.renderImages) {
@@ -433,7 +439,7 @@ function findNotificationLevel(channel: Channel): NotificationLevel {
 async function handleGuildMessage(message: Message) {
     const c = ChannelStore.getChannel(message.channel_id);
     const notificationLevel: number = findNotificationLevel(c);
-    let t = false;
+    let isAllOrFriend = false;
     // 0: All messages 1: Only mentions 2: No messages
     // todo: check if the user who sent it is a friend
     const all = notifyFor.includes(message.channel_id);
@@ -442,7 +448,7 @@ async function handleGuildMessage(message: Message) {
 
 
     if (!all && !friend) {
-        t = true;
+        isAllOrFriend = true;
         const isMention: boolean = message.content.includes(`<@${UserStore.getCurrentUser().id}>`);
         const meetsMentionCriteria = notificationLevel !== NotificationLevel.ALL_MESSAGES && !isMention;
 
@@ -466,12 +472,12 @@ async function handleGuildMessage(message: Message) {
     };
 
     if (message.embeds?.length !== 0) {
-        Notification.body = notificationText || "Sent an embed.";
+        Notification.body = notificationText || t("plugin.toastNotifications.notification.sent.embed");
     }
 
     // Message contains a sticker.
     if (message?.stickerItems) {
-        Notification.body = notificationText || "Sent a sticker.";
+        Notification.body = notificationText || t("plugin.toastNotifications.notification.sent.sticker");
     }
 
     // Message contains an attachment.
@@ -482,7 +488,7 @@ async function handleGuildMessage(message: Message) {
             Notification.body = notificationText || ""; // Dont show any body
             Notification.image = images[0].url;
         } else {
-            Notification.body += ` [Attachment: ${message.attachments[0].filename}]`;
+            Notification.body += ` [${t("plugin.toastNotifications.notification.sent.attachment")} ${message.attachments[0].filename}]`;
         }
     }
 
@@ -524,14 +530,14 @@ async function handleGuildMessage(message: Message) {
     const isStreaming = findStore("ApplicationStreamingStore").getAnyStreamForUser(UserStore.getCurrentUser()?.id);
 
     if (isStreaming && settings.store.streamingTreatment === StreamingTreatment.NO_CONTENT) {
-        Notification.body = "Message content has been redacted.";
+        Notification.body = t("plugin.toastNotifications.notification.redacted");
     }
 
     if (!settings.store.renderImages) {
         Notification.icon = undefined;
     }
 
-    console.log("noti that went through: " + t);
+    console.log("noti that went through: " + isAllOrFriend);
     await showNotification(Notification);
 
 }
@@ -552,8 +558,8 @@ async function relationshipAdd(user: User, type: Number) {
     }
 
     if (type === RelationshipType.FRIEND) {
-        Notification.title = `${user.username} is now your friend`;
-        Notification.body = "You can now message them directly.";
+        Notification.title = t("plugin.toastNotifications.friend.accept", { user: user.username });
+        Notification.body = t("plugin.toastNotifications.friend.acceptBody");
         Notification.onClick = () => switchChannels(null, user.id);
 
 
@@ -561,8 +567,8 @@ async function relationshipAdd(user: User, type: Number) {
 
     } else if (type === RelationshipType.INCOMING_REQUEST) {
 
-        Notification.title = `${user.username} sent you a friend request`;
-        Notification.body = "You can accept or decline it in the Friends tab.";
+        Notification.title = t("plugin.toastNotifications.friend.request", { user: user.username });
+        Notification.body = t("plugin.toastNotifications.friend.requestBody");
         Notification.onClick = () => switchChannels(null, "");
 
         await showNotification(Notification);
@@ -571,9 +577,9 @@ async function relationshipAdd(user: User, type: Number) {
 
 function showExampleNotification(): Promise<void> {
     const Notification: NotificationData = {
-        title: "Example Notification",
+        title: t("plugin.toastNotifications.notification.example.title"),
         icon: `https://cdn.discordapp.com/avatars/${UserStore.getCurrentUser().id}/${UserStore.getCurrentUser().avatar}.png?size=128`,
-        body: "This is an example toast notification!",
+        body: t("plugin.toastNotifications.notification.example.body"),
         attachments: 0,
         permanent: false
     };
