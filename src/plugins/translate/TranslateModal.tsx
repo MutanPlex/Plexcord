@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Divider } from "@components/Divider";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
@@ -51,7 +52,7 @@ function LanguageSelect({ settingsKey, includeAuto }: { settingsKey: typeof Lang
             <SearchableSelect
                 options={options}
                 value={options.find(o => o.value === currentValue)}
-                placeholder={"Select a language"}
+                placeholder={t("plugin.translate.modal.select")}
                 maxVisibleItems={5}
                 closeOnSelect={true}
                 onChange={v => settings.store[settingsKey] = v}
@@ -69,7 +70,7 @@ function AutoTranslateToggle() {
             onChange={v => settings.store.autoTranslate = v}
             description={settings.def.autoTranslate.description}
             hideBorder
-            title={"Auto Translate"}
+            title={t("plugin.translate.modal.auto")}
         />
 
     );
@@ -81,7 +82,7 @@ export function TranslateModal({ rootProps }: { rootProps: ModalProps; }) {
         <ModalRoot {...rootProps}>
             <ModalHeader className={cl("modal-header")}>
                 <Heading className={cl("modal-title")}>
-                    Translate
+                    {t("plugin.translate.modal.title")}
                 </Heading>
                 <ModalCloseButton onClick={rootProps.onClose} />
             </ModalHeader>

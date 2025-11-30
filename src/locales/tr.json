@@ -7911,6 +7911,85 @@
                 }
             }
         },
+        "translate": {
+            "name": "Translate",
+            "description": "Mesajları Google Translate veya DeepL ile çevirin",
+            "tooltip": {
+                "label": "Çevir"
+            },
+            "context": {
+                "translate": "Çevir",
+                "open": "Çeviri Penceresini Aç",
+                "auto": "Otomatik Çeviri Etkin"
+            },
+            "option": {
+                "receivedInput": {
+                    "label": "Alınan Girdi",
+                    "description": "Alınan mesajların hangi dilden çevrileceği"
+                },
+                "receivedOutput": {
+                    "label": "Alınan Çıktı",
+                    "description": "Alınan mesajların hangi dile çevrileceği"
+                },
+                "sentInput": {
+                    "label": "Gönderilen Girdi",
+                    "description": "Kendi mesajlarınızın hangi dilden çevrileceği"
+                },
+                "sentOutput": {
+                    "label": "Gönderilen Çıktı",
+                    "description": "Kendi mesajlarınızın hangi dile çevrileceği"
+                },
+                "showChatBarButton": {
+                    "label": "Sohbet Çubuğu Butonunu Göster",
+                    "description": "Sohbet çubuğunda çeviri butonunu göster"
+                },
+                "service": {
+                    "label": "Çeviri Servisi",
+                    "description": "DeepL Pro, ücretli bir API anahtarı gerektirir",
+                    "descriptionWeb": "Çeviri servisi (Web üzerinde desteklenmez!)",
+                    "google": "Google Translate",
+                    "deepl": "DeepL Ücretsiz",
+                    "deeplPro": "DeepL Pro"
+                },
+                "deeplApiKey": {
+                    "label": "DeepL API Anahtarı",
+                    "description": "DeepL API anahtarı",
+                    "placeholder": "API anahtarınızı https://deepl.com/your-account adresinden alın"
+                },
+                "autoTranslate": {
+                    "label": "Otomatik Çeviri",
+                    "description": "Mesajlarınızı göndermeden önce otomatik olarak çevirir. Ayrıca bu özelliği açıp kapatmak için çeviri butonuna shift veya sağ tıklayabilirsiniz"
+                },
+                "showAutoTranslateTooltip": {
+                    "label": "Otomatik Çeviri Açıklamasını Göster",
+                    "description": "Bir mesaj otomatik çevrildiğinde sohbet çubuğu butonunda bir açıklama göster"
+                }
+            },
+            "modal": {
+                "title": "Çeviri",
+                "select": "Bir dil seçin",
+                "auto": "Otomatik Çeviri",
+                "dismiss": "Kapat",
+                "translated": "{{from}} dilinden çevrildi",
+                "failed": {
+                    "to": "{{text}} çevirisi başarısız oldu",
+                    "connect": "DeepL API bağlantısı başarısız:"
+                },
+                "wrong": "Bir şeyler ters gitti. Sorun devam ederse lütfen konsolu kontrol edin veya destek sunucusundan yardım isteyin.",
+                "deepl": {
+                    "api": "DeepL API kotası aşıldı. Google Translate'e geçiliyor.",
+                    "apiKey": "DeepL API anahtarı ayarlanmamış. Google'a dönülüyor.",
+                    "auth": "Geçersiz DeepL API anahtarı veya sürümü"
+                },
+                "autoTranslateEnabled": {
+                    "title": "Plexcord Otomatik Çeviri Etkin",
+                    "body": "Otomatik Çeviriyi yeni etkinleştirdiniz! Gönderdiğiniz tüm mesajlar gönderilmeden önce otomatik olarak çevrilecek.",
+                    "confirm": "Otomatik Çeviriyi Devre Dışı Bırak",
+                    "cancel": "Anladım",
+                    "secondaryConfirm": "Bir daha gösterme"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

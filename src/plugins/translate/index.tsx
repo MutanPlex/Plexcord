@@ -20,6 +20,7 @@
 import "./styles.css";
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -40,7 +41,7 @@ const messageCtxPatch: NavContextMenuPatchCallback = (children, { message }: { m
     group.splice(group.findIndex(c => c?.props?.id === "copy-text") + 1, 0, (
         <Menu.MenuItem
             id="pc-trans"
-            label="Translate"
+            label={t("plugin.translate.context.translate")}
             icon={TranslateIcon}
             action={async () => {
                 const trans = await translate("received", content);
@@ -67,6 +68,11 @@ export default definePlugin({
     authors: [Devs.Ven, Devs.AshtonMemer],
     dependencies: ["ChatInputButtonAPI", "MessagePopoverAPI"],
     settings,
+
+    get displayDescription() {
+        return t("plugin.translate.description");
+    },
+
     contextMenus: {
         "message": messageCtxPatch
     },
@@ -87,7 +93,7 @@ export default definePlugin({
             if (!content) return null;
 
             return {
-                label: "Translate",
+                label: t("plugin.translate.tooltip.label"),
                 icon: TranslateIcon,
                 message,
                 channel: ChannelStore.getChannel(message.channel_id),

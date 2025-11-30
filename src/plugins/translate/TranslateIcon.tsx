@@ -18,6 +18,7 @@
 */
 
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
+import { t } from "@api/i18n";
 import { Paragraph } from "@components/Paragraph";
 import { classes } from "@utils/misc";
 import { openModal } from "@utils/modal";
@@ -57,15 +58,15 @@ export const TranslateChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
         settings.store.autoTranslate = newState;
         if (newState && settings.store.showAutoTranslateAlert !== false)
             Alerts.show({
-                title: "Plexcord Auto-Translate Enabled",
+                title: t("plugin.translate.modal.autoTranslateEnabled.title"),
                 body: <>
                     <Paragraph>
-                        You just enabled Auto Translate! Any message <b>will automatically be translated</b> before being sent.
+                        {t("plugin.translate.modal.autoTranslateEnabled.body")}
                     </Paragraph>
                 </>,
-                confirmText: "Disable Auto-Translate",
-                cancelText: "Got it",
-                secondaryConfirmText: "Don't show again",
+                confirmText: t("plugin.translate.modal.autoTranslateEnabled.confirm"),
+                cancelText: t("plugin.translate.modal.autoTranslateEnabled.cancel"),
+                secondaryConfirmText: t("plugin.translate.modal.autoTranslateEnabled.secondaryConfirm"),
                 onConfirmSecondary: () => settings.store.showAutoTranslateAlert = false,
                 onConfirm: () => settings.store.autoTranslate = false,
                 // troll
@@ -75,7 +76,7 @@ export const TranslateChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
 
     const button = (
         <ChatBarButton
-            tooltip="Open Translate Modal"
+            tooltip={t("plugin.translate.context.open")}
             onClick={e => {
                 if (e.shiftKey) return toggle();
 
@@ -94,7 +95,7 @@ export const TranslateChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
 
     if (shouldShowTranslateEnabledTooltip && settings.store.showAutoTranslateTooltip)
         return (
-            <Tooltip text="Auto Translate Enabled" forceOpen>
+            <Tooltip text={t("plugin.translate.context.auto")} forceOpen>
                 {() => button}
             </Tooltip>
         );

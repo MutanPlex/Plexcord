@@ -17,66 +17,117 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { OptionType } from "@utils/types";
 
 export const settings = definePluginSettings({
     receivedInput: {
+        get label() {
+            return t("plugin.translate.option.receivedInput.label");
+        },
+        get description() {
+            return t("plugin.translate.option.receivedInput.description");
+        },
         type: OptionType.STRING,
-        description: "Language that received messages should be translated from",
         default: "auto",
         hidden: true
     },
     receivedOutput: {
+        get label() {
+            return t("plugin.translate.option.receivedOutput.label");
+        },
+        get description() {
+            return t("plugin.translate.option.receivedOutput.description");
+        },
         type: OptionType.STRING,
-        description: "Language that received messages should be translated to",
         default: "en",
         hidden: true
     },
     sentInput: {
+        get label() {
+            return t("plugin.translate.option.sentInput.label");
+        },
+        get description() {
+            return t("plugin.translate.option.sentInput.description");
+        },
         type: OptionType.STRING,
-        description: "Language that your own messages should be translated from",
         default: "auto",
         hidden: true
     },
     sentOutput: {
+        get label() {
+            return t("plugin.translate.option.sentOutput.label");
+        },
+        get description() {
+            return t("plugin.translate.option.sentOutput.description");
+        },
         type: OptionType.STRING,
-        description: "Language that your own messages should be translated to",
         default: "en",
         hidden: true
     },
-
     showChatBarButton: {
+        get label() {
+            return t("plugin.translate.option.showChatBarButton.label");
+        },
+        get description() {
+            return t("plugin.translate.option.showChatBarButton.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show translate button in chat bar",
         default: true
     },
     service: {
+        get label() {
+            return t("plugin.translate.option.service.label");
+        },
+        get description() {
+            return IS_WEB
+                ? t("plugin.translate.option.service.descriptionWeb")
+                : t("plugin.translate.option.service.description");
+        },
         type: OptionType.SELECT,
-        description: IS_WEB ? "Translation service (Not supported on Web!)" : "Translation service",
         disabled: () => IS_WEB,
-        options: [
-            { label: "Google Translate", value: "google", default: true },
-            { label: "DeepL Free", value: "deepl" },
-            { label: "DeepL Pro", value: "deepl-pro" }
-        ] as const,
+        get options() {
+            return [
+                { label: t("plugin.translate.option.service.google"), value: "google", default: true },
+                { label: t("plugin.translate.option.service.deepl"), value: "deepl" },
+                { label: t("plugin.translate.option.service.deeplPro"), value: "deepl-pro" }
+            ] as const;
+        },
         onChange: resetLanguageDefaults
     },
     deeplApiKey: {
+        get label() {
+            return t("plugin.translate.option.deeplApiKey.label");
+        },
+        get description() {
+            return t("plugin.translate.option.deeplApiKey.description");
+        },
         type: OptionType.STRING,
-        description: "DeepL API key",
         default: "",
-        placeholder: "Get your API key from https://deepl.com/your-account",
+        get placeholder() {
+            return t("plugin.translate.option.deeplApiKey.placeholder");
+        },
         disabled: () => IS_WEB
     },
     autoTranslate: {
+        get label() {
+            return t("plugin.translate.option.autoTranslate.label");
+        },
+        get description() {
+            return t("plugin.translate.option.autoTranslate.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Automatically translate your messages before sending. You can also shift/right click the translate button to toggle this",
         default: false
     },
     showAutoTranslateTooltip: {
+        get label() {
+            return t("plugin.translate.option.showAutoTranslateTooltip.label");
+        },
+        get description() {
+            return t("plugin.translate.option.showAutoTranslateTooltip.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show a tooltip on the ChatBar button whenever a message is automatically translated",
         default: true
     }
 }).withPrivateSettings<{

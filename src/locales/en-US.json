@@ -7818,7 +7818,7 @@
                 "dismiss": "Dismiss Notification",
                 "attachments": "{{attachments}} attachment{{s}} {{were}} sent."
             },
-            "option":{
+            "option": {
                 "position": {
                     "label": "Position",
                     "description": "The position of the toast notification",
@@ -7908,6 +7908,85 @@
                 "reqAlt": {
                     "label": "Require Alt",
                     "description": "Require alt to be held."
+                }
+            }
+        },
+        "translate": {
+            "name": "Translate",
+            "description": "Translate messages with Google Translate or DeepL",
+            "tooltip": {
+                "label": "Translate"
+            },
+            "context": {
+                "translate": "Translate",
+                "open": "Open Translate Modal",
+                "auto": "Auto Translate Enabled"
+            },
+            "option": {
+                "receivedInput": {
+                    "label": "Received Input",
+                    "description": "Language that received messages should be translated from"
+                },
+                "receivedOutput": {
+                    "label": "Received Output",
+                    "description": "Language that received messages should be translated to"
+                },
+                "sentInput": {
+                    "label": "Sent Input",
+                    "description": "Language that your own messages should be translated from"
+                },
+                "sentOutput": {
+                    "label": "Sent Output",
+                    "description": "Language that your own messages should be translated to"
+                },
+                "showChatBarButton": {
+                    "label": "Show Chat Bar Button",
+                    "description": "Show translate button in chat bar"
+                },
+                "service": {
+                    "label": "Translation Service",
+                    "description": "DeepL requires a paid API key from DeepL Pro",
+                    "descriptionWeb": "Translation service (Not supported on Web!)",
+                    "google": "Google Translate",
+                    "deepl": "DeepL Free",
+                    "deeplPro": "DeepL Pro"
+                },
+                "deeplApiKey": {
+                    "label": "DeepL API Key",
+                    "description": "DeepL API key",
+                    "placeholder": "Get your API key from https://deepl.com/your-account"
+                },
+                "autoTranslate": {
+                    "label": "Auto Translate",
+                    "description": "Automatically translate your messages before sending. You can also shift/right click the translate button to toggle this"
+                },
+                "showAutoTranslateTooltip": {
+                    "label": "Show Auto Translate Tooltip",
+                    "description": "Show a tooltip on the ChatBar button whenever a message is automatically translated"
+                }
+            },
+            "modal": {
+                "title": "Translate",
+                "select": "Select a language",
+                "auto": "Auto Translate",
+                "dismiss": "Dismiss",
+                "translated": "translated from {{from}}",
+                "failed": {
+                    "to": "Failed to translate {{text}}",
+                    "connect": "Failed to connect to DeepL API:"
+                },
+                "wrong": "Something went wrong. If this issue persists, please check the console or ask for help in the support server.",
+                "deepl": {
+                    "api": "Deepl API quota exceeded. Falling back to Google Translate.",
+                    "apiKey": "DeepL API key is not set. Resetting to Google",
+                    "auth": "Invalid DeepL API key or version"
+                },
+                "autoTranslateEnabled": {
+                    "title": "Plexcord Auto-Translate Enabled",
+                    "body": "You just enabled Auto Translate! Any message will automatically be translated before being sent.",
+                    "confirm": "Disable Auto-Translate",
+                    "cancel": "Got It",
+                    "secondaryConfirm": "Don't show again"
                 }
             }
         },

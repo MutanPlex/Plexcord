@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { onlyOnce } from "@utils/onlyOnce";
 import { PluginNative } from "@utils/types";
@@ -64,7 +65,7 @@ export async function translate(kind: "received" | "sent", text: string): Promis
     } catch (e) {
         const userMessage = typeof e === "string"
             ? e
-            : "Something went wrong. If this issue persists, please check the console or ask for help in the support server.";
+            : t("plugin.translate.modal.wrong");
 
         showToast(userMessage, Toasts.Type.FAILURE);
 
@@ -87,7 +88,7 @@ async function googleTranslate(text: string, sourceLang: string, targetLang: str
     const res = await fetch(url);
     if (!res.ok)
         throw new Error(
-            `Failed to translate "${text}" (${sourceLang} -> ${targetLang})`
+            `${t("plugin.translate.utils.to", { text })} (${sourceLang} -> ${targetLang})`
             + `\n${res.status} ${res.statusText}`
         );
 
@@ -108,12 +109,12 @@ function fallbackToGoogle(text: string, sourceLang: string, targetLang: string):
 }
 
 const showDeeplApiQuotaToast = onlyOnce(
-    () => showToast("Deepl API quota exceeded. Falling back to Google Translate", Toasts.Type.FAILURE)
+    () => showToast(t("plugin.translate.modal.deepl.api"), Toasts.Type.FAILURE)
 );
 
 async function deeplTranslate(text: string, sourceLang: string, targetLang: string): Promise<TranslationValue> {
     if (!settings.store.deeplApiKey) {
-        showToast("DeepL API key is not set. Resetting to Google", Toasts.Type.FAILURE);
+        showToast(t("plugin.translate.modal.deepl.apiKey"), Toasts.Type.FAILURE);
 
         settings.store.service = "google";
         resetLanguageDefaults();
@@ -136,9 +137,9 @@ async function deeplTranslate(text: string, sourceLang: string, targetLang: stri
         case 200:
             break;
         case -1:
-            throw "Failed to connect to DeepL API: " + data;
+            throw t("plugin.translate.modal.connect") + data;
         case 403:
-            throw "Invalid DeepL API key or version";
+            throw t("plugin.translate.modal.deepl.auth");
         case 456:
             showDeeplApiQuotaToast();
             return fallbackToGoogle(text, sourceLang, targetLang);
