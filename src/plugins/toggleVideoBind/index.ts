@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -23,23 +24,43 @@ const validKeycodes = [
 
 const settings = definePluginSettings({
     keyBind: {
-        description: "The key to toggle webcam when pressed.",
+        get label() {
+            return t("plugin.toggleVideoBind.option.keyBind.label");
+        },
+        get description() {
+            return t("plugin.toggleVideoBind.option.keyBind.description");
+        },
         type: OptionType.STRING,
         default: "KeyX",
         isValid: (value: string) => validKeycodes.includes(value),
     },
     reqCtrl: {
-        description: "Require control to be held.",
+        get label() {
+            return t("plugin.toggleVideoBind.option.reqCtrl.label");
+        },
+        get description() {
+            return t("plugin.toggleVideoBind.option.reqCtrl.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
     },
     reqShift: {
-        description: "Require shift to be held.",
+        get label() {
+            return t("plugin.toggleVideoBind.option.reqShift.label");
+        },
+        get description() {
+            return t("plugin.toggleVideoBind.option.reqShift.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
     },
     reqAlt: {
-        description: "Require alt to be held.",
+        get label() {
+            return t("plugin.toggleVideoBind.option.reqAlt.label");
+        },
+        get description() {
+            return t("plugin.toggleVideoBind.option.reqAlt.description");
+        },
         type: OptionType.BOOLEAN,
         default: false,
     },
@@ -62,6 +83,11 @@ export default definePlugin({
     description: "Adds a customizable bind to toggle webcam.",
     authors: [PcDevs.mochienya],
     settings,
+
+    get displayDescription() {
+        return t("plugin.toggleVideoBind.description");
+    },
+
     start() {
         document.addEventListener("keydown", handleKeydown);
     },

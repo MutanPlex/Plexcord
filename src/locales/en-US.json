@@ -7819,6 +7819,28 @@
                 "attachments": "{{attachments}} attachment{{s}} {{were}} sent."
             }
         },
+        "toggleVideoBind": {
+            "name": "ToggleVideoBind",
+            "description": "Adds a customizable bind to toggle webcam.",
+            "option": {
+                "keyBind": {
+                    "label": "Keybind",
+                    "description": "The key to toggle webcam when pressed."
+                },
+                "reqCtrl": {
+                    "label": "Require Ctrl",
+                    "description": "Require control to be held."
+                },
+                "reqShift": {
+                    "label": "Require Shift",
+                    "description": "Require shift to be held."
+                },
+                "reqAlt": {
+                    "label": "Require Alt",
+                    "description": "Require alt to be held."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

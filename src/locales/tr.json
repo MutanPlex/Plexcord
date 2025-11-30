@@ -7819,6 +7819,28 @@
                 "attachments": "{{attachments}} dosya gönderildi."
             }
         },
+        "toggleVideoBind": {
+            "name": "ToggleVideoBind",
+            "description": "Web kameranızı açıp kapatmak için özelleştirilebilir bir kısayol tuşu ekler.",
+            "option": {
+                "keyBind": {
+                    "label": "Kısayol Tuşu",
+                    "description": "Basılınca web kamerasını açıp kapatacak tuş."
+                },
+                "reqCtrl": {
+                    "label": "Ctrl Gerekli",
+                    "description": "Ctrl tuşuna basılmasını zorunlu kıl."
+                },
+                "reqShift": {
+                    "label": "Shift Gerekli",
+                    "description": "Shift tuşuna basılmasını zorunlu kıl."
+                },
+                "reqAlt": {
+                    "label": "Alt Gerekli",
+                    "description": "Alt tuşuna basılmasını zorunlu kıl."
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
