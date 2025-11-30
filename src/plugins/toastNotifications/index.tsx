@@ -44,118 +44,197 @@ const USER_MENTION_REGEX = /<@!?(\d{17,20})>|<#(\d{17,20})>|<@&(\d{17,20})>/g; /
 
 export const settings = definePluginSettings({
     position: {
+        get label() {
+            return t("plugin.toastNotifications.option.position.label");
+        },
+        get description() {
+            return t("plugin.toastNotifications.option.position.description");
+        },
         type: OptionType.SELECT,
-        description: "The position of the toast notification",
-        options: [
-            {
-                label: "Bottom Left",
-                value: "bottom-left",
-                default: true
-            },
-            {
-                label: "Top Left",
-                value: "top-left"
-            },
-            {
-                label: "Top Right",
-                value: "top-right"
-            },
-            {
-                label: "Bottom Right",
-                value: "bottom-right"
-            },
-        ]
+        get options() {
+            return [
+                {
+                    label: t("plugin.toastNotifications.option.position.bottomLeft"),
+                    value: "bottom-left",
+                    default: true
+                },
+                {
+                    label: t("plugin.toastNotifications.option.position.topLeft"),
+                    value: "top-left"
+                },
+                {
+                    label: t("plugin.toastNotifications.option.position.topRight"),
+                    value: "top-right"
+                },
+                {
+                    label: t("plugin.toastNotifications.option.position.bottomRight"),
+                    value: "bottom-right"
+                },
+            ];
+        }
     },
     timeout: {
+        get label() {
+            return t("plugin.toastNotifications.option.timeout.label");
+        },
+        get description() {
+            return t("plugin.toastNotifications.option.timeout.description");
+        },
         type: OptionType.SLIDER,
-        description: "Time in seconds notifications will be shown for",
         default: 5,
         markers: makeRange(1, 15, 1)
     },
     opacity: {
+        get label() {
+            return t("plugin.toastNotifications.option.opacity.label");
+        },
+        get description() {
+            return t("plugin.toastNotifications.option.opacity.description");
+        },
         type: OptionType.SLIDER,
-        description: "Opacity of the notification",
         default: 100,
         markers: makeRange(10, 100, 10)
     },
     maxNotifications: {
+        get label() {
+            return t("plugin.toastNotifications.option.maxNotifications.label");
+        },
+        get description() {
+            return t("plugin.toastNotifications.option.maxNotifications.description");
+        },
         type: OptionType.SLIDER,
-        description: "Maximum number of notifications displayed at once",
         default: 3,
         markers: makeRange(1, 5, 1)
     },
     determineServerNotifications: {
+        get label() {
+            return t("plugin.toastNotifications.option.determineServerNotifications.label");
+        },
+        get description() {
+            return t("plugin.toastNotifications.option.determineServerNotifications.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Automatically determine what server notifications to show based on your channel/guild settings",
         default: true
     },
     disableInStreamerMode: {
+        get label() {
+            return t("plugin.toastNotifications.option.disableInStreamerMode.label");
+        },
+        get description() {
+            return t("plugin.toastNotifications.option.disableInStreamerMode.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Disable notifications while in streamer mode",
         default: true
     },
     renderImages: {
+        get label() {
+            return t("plugin.toastNotifications.option.renderImages.label");
+        },
+        get description() {
+            return t("plugin.toastNotifications.option.renderImages.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Render images in notifications",
         default: true
     },
     directMessages: {
+        get label() {
+            return t("plugin.toastNotifications.option.directMessages.label");
+        },
+        get description() {
+            return t("plugin.toastNotifications.option.directMessages.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show notifications for direct messages",
         default: true
     },
     groupMessages: {
+        get label() {
+            return t("plugin.toastNotifications.option.groupMessages.label");
+        },
+        get description() {
+            return t("plugin.toastNotifications.option.groupMessages.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show notifications for group messages",
         default: true
     },
     friendServerNotifications: {
+        get label() {
+            return t("plugin.toastNotifications.option.friendServerNotifications.label");
+        },
+        get description() {
+            return t("plugin.toastNotifications.option.friendServerNotifications.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show notifications when friends send messages in servers they share with you",
         default: true
     },
     friendActivity: {
+        get label() {
+            return t("plugin.toastNotifications.option.friendActivity.label");
+        },
+        get description() {
+            return t("plugin.toastNotifications.option.friendActivity.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show notifications for adding someone or receiving a friend request",
         default: true
     },
     streamingTreatment: {
+        get label() {
+            return t("plugin.toastNotifications.option.streamingTreatment.label");
+        },
+        get description() {
+            return t("plugin.toastNotifications.option.streamingTreatment.description");
+        },
         type: OptionType.SELECT,
-        description: "How to treat notifications while sharing your screen",
-        options: [
-            {
-                label: "Normal - Show the notification as normal",
-                value: StreamingTreatment.NORMAL,
-                default: true
-            },
-            {
-                label: "No Content - Hide the notification body",
-                value: StreamingTreatment.NO_CONTENT
-            },
-            {
-                label: "Ignore - Don't show the notification at all",
-                value: StreamingTreatment.IGNORE
-            }
-        ]
+        get options() {
+            return [
+                {
+                    label: t("plugin.toastNotifications.option.streamingTreatment.normal"),
+                    value: StreamingTreatment.NORMAL,
+                    default: true
+                },
+                {
+                    label: t("plugin.toastNotifications.option.streamingTreatment.noContent"),
+                    value: StreamingTreatment.NO_CONTENT
+                },
+                {
+                    label: t("plugin.toastNotifications.option.streamingTreatment.ignore"),
+                    value: StreamingTreatment.IGNORE
+                }
+            ];
+        }
     },
     notifyFor: {
+        get label() {
+            return t("plugin.toastNotifications.option.notifyFor.label");
+        },
+        get description() {
+            return t("plugin.toastNotifications.option.notifyFor.description");
+        },
         type: OptionType.STRING,
-        description: "Create a list of channel ids to receive notifications from (separate with commas)",
         onChange: () => { notifyFor = stringToList(settings.store.notifyFor); },
         default: ""
     },
     ignoreUsers: {
+        get label() {
+            return t("plugin.toastNotifications.option.ignoreUsers.label");
+        },
+        get description() {
+            return t("plugin.toastNotifications.option.ignoreUsers.description");
+        },
         type: OptionType.STRING,
-        description: "Create a list of user ids to ignore all their notifications from (separate with commas)",
         onChange: () => { ignoredUsers = stringToList(settings.store.ignoreUsers); },
         default: ""
     },
     exampleButton: {
+        get label() {
+            return t("plugin.toastNotifications.option.exampleButton.label");
+        },
+        get description() {
+            return t("plugin.toastNotifications.option.exampleButton.description");
+        },
         type: OptionType.COMPONENT,
-        description: "Show an example toast notification.",
         component: () =>
             <Button onClick={showExampleNotification}>
-                Show Example Notification
+                {t("plugin.toastNotifications.option.exampleButton.show")}
             </Button>
     }
 });

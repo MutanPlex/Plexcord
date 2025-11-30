@@ -7817,6 +7817,76 @@
             "modal": {
                 "dismiss": "Dismiss Notification",
                 "attachments": "{{attachments}} attachment{{s}} {{were}} sent."
+            },
+            "option":{
+                "position": {
+                    "label": "Position",
+                    "description": "The position of the toast notification",
+                    "topRight": "Top Right",
+                    "topLeft": "Top Left",
+                    "bottomRight": "Bottom Right",
+                    "bottomLeft": "Bottom Left"
+                },
+                "timeout": {
+                    "label": "Timeout",
+                    "description": "Time in seconds notifications will be shown for"
+                },
+                "opacity": {
+                    "label": "Opacity",
+                    "description": "The opacity of the toast notification"
+                },
+                "maxNotifications": {
+                    "label": "Max Notifications",
+                    "description": "Maximum number of notifications displayed at once"
+                },
+                "determineServerNotifications": {
+                    "label": "Determine Server Notifications",
+                    "description": "Determine whether to show notifications based on server notification settings"
+                },
+                "disableInStreamerMode": {
+                    "label": "Disable In Streamer Mode",
+                    "description": "Disable notifications while in streamer mode"
+                },
+                "renderImages": {
+                    "label": "Render Images",
+                    "description": "Render images in notifications"
+                },
+                "directMessages": {
+                    "label": "Direct Messages",
+                    "description": "Show notifications for direct messages"
+                },
+                "groupMessages": {
+                    "label": "Group Messages",
+                    "description": "Show notifications for group messages"
+                },
+                "friendServerNotifications": {
+                    "label": "Friend & Server Notifications",
+                    "description": "Show notifications when friends send messages in servers they share with you"
+                },
+                "friendActivity": {
+                    "label": "Friend Activity",
+                    "description": "Show notifications for adding someone or receiving a friend request"
+                },
+                "streamingTreatment": {
+                    "label": "Streaming Treatment",
+                    "description": "How to treat notifications while sharing your screen",
+                    "normal": "Normal - Show the notification as normal",
+                    "noContent": "No Content - Hide the notification body",
+                    "ignore": "Ignore - Don't show the notification at all"
+                },
+                "notifyFor": {
+                    "label": "Notify For",
+                    "description": "Create a list of channel ids to receive notifications from (separate with commas)"
+                },
+                "ignoreUsers": {
+                    "label": "Ignore Users",
+                    "description": "Create a list of user ids to ignore all their notifications from (separate with commas)"
+                },
+                "exampleButton": {
+                    "label": "Example Button",
+                    "description": "Show an example toast notification.",
+                    "show": "Show Example Notification"
+                }
             }
         },
         "toggleVideoBind": {

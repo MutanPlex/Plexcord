@@ -7782,7 +7782,7 @@
         },
         "toastNotifications": {
             "name": "ToastNotifications",
-            "description": "Bir direkt mesaj aldığınızda bildirim şeklinde bir toast bildirimi gösterir.",
+            "description": "Bir direkt mesaj aldığınızda bir toast bildirimi gösterir.",
             "notification": {
                 "call": "Sizinle bir arama başlattı!",
                 "recipient": {
@@ -7802,10 +7802,10 @@
                     "sticker": "Bir çıkartma gönderdi.",
                     "attachment": "Dosya:"
                 },
-                "redacted": "Mesaj içeriği sansürlendi.",
+                "redacted": "Mesaj içeriği gizlendi.",
                 "friend": {
                     "accept": "{{user}} artık arkadaşınız",
-                    "acceptBody": "Artık onlara doğrudan mesaj gönderebilirsiniz.",
+                    "acceptBody": "Artık ona doğrudan mesaj gönderebilirsiniz.",
                     "request": "{{user}} size bir arkadaşlık isteği gönderdi.",
                     "requestBody": "Bunu Arkadaşlar sekmesinden kabul edebilir veya reddedebilirsiniz."
                 },
@@ -7815,8 +7815,78 @@
                 }
             },
             "modal": {
-                "dismiss": "Bildirim Kapat",
+                "dismiss": "Bildirimi Kapat",
                 "attachments": "{{attachments}} dosya gönderildi."
+            },
+            "option": {
+                "position": {
+                    "label": "Konum",
+                    "description": "Toast bildiriminin konumu",
+                    "topRight": "Sağ Üst",
+                    "topLeft": "Sol Üst",
+                    "bottomRight": "Sağ Alt",
+                    "bottomLeft": "Sol Alt"
+                },
+                "timeout": {
+                    "label": "Kapatma Süresi",
+                    "description": "Bildirimlerin kaç saniye gösterileceği"
+                },
+                "opacity": {
+                    "label": "Opaklık",
+                    "description": "Toast bildiriminin opaklığı"
+                },
+                "maxNotifications": {
+                    "label": "Maksimum Bildirim",
+                    "description": "Aynı anda gösterilecek maksimum bildirim sayısı"
+                },
+                "determineServerNotifications": {
+                    "label": "Sunucu Bildirimlerini Belirle",
+                    "description": "Sunucu bildirim ayarlarına göre bildirim gösterilip gösterilmeyeceğini belirle"
+                },
+                "disableInStreamerMode": {
+                    "label": "Yayıncı Modunda Devre Dışı Bırak",
+                    "description": "Yayıncı modunda bildirimleri devre dışı bırak"
+                },
+                "renderImages": {
+                    "label": "Görüntüleri Göster",
+                    "description": "Bildirimlerde görüntüleri göster"
+                },
+                "directMessages": {
+                    "label": "Direkt Mesajlar",
+                    "description": "Direkt mesajlar için bildirim göster"
+                },
+                "groupMessages": {
+                    "label": "Grup Mesajları",
+                    "description": "Grup mesajları için bildirim göster"
+                },
+                "friendServerNotifications": {
+                    "label": "Arkadaş ve Sunucu Bildirimleri",
+                    "description": "Arkadaşlar ortak sunucularda mesaj gönderdiğinde bildirim göster"
+                },
+                "friendActivity": {
+                    "label": "Arkadaş Etkinliği",
+                    "description": "Arkadaş ekleme veya arkadaşlık isteği alma durumları için bildirim göster"
+                },
+                "streamingTreatment": {
+                    "label": "Yayın Sırasında Bildirim Davranışı",
+                    "description": "Ekran paylaşımı sırasında bildirimlerin nasıl davranacağını belirleyin",
+                    "normal": "Normal - Bildirimi normal şekilde göster",
+                    "noContent": "İçeriksiz - Bildirimin gövdesini gizle",
+                    "ignore": "Yoksay - Bildirimi hiç gösterme"
+                },
+                "notifyFor": {
+                    "label": "Bildirim Alınacak Kanallar",
+                    "description": "Bildirim alınacak kanal ID’lerini girin (virgülle ayırın)"
+                },
+                "ignoreUsers": {
+                    "label": "Yoksayılacak Kullanıcılar",
+                    "description": "Bildirimleri yoksayılacak kullanıcı ID’lerini girin (virgülle ayırın)"
+                },
+                "exampleButton": {
+                    "label": "Örnek Buton",
+                    "description": "Bir örnek toast bildirimi göster.",
+                    "show": "Örnek Bildirim Göster"
+                }
             }
         },
         "toggleVideoBind": {
