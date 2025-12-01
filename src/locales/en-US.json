@@ -8167,6 +8167,23 @@
             "notification": {
                 "cannotJoin": "You cannot join the user's Voice Channel."
             }
+        },
+        "uSRBG": {
+            "name": "USRBG",
+            "description": "Displays user banners from USRBG, allowing anyone to get a banner without Nitro",
+            "option": {
+                "nitroFirst": {
+                    "label": "Nitro First",
+                    "description": "Banner to use if both Nitro and USRBG banners are present",
+                    "nitro": "Nitro Banner",
+                    "usrbg": "USRBG Banner"
+                },
+                "voiceBackground": {
+                    "label": "Voice Background",
+                    "description": "Use USRBG banners as voice chat backgrounds"
+                }
+            },
+            "button": "Get your own USRBG banner"
         }
     }
 }

@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
@@ -35,15 +36,27 @@ interface UsrbgApiReturn {
 
 const settings = definePluginSettings({
     nitroFirst: {
-        description: "Banner to use if both Nitro and USRBG banners are present",
+        get label() {
+            return t("plugin.uSRBG.option.nitroFirst.label");
+        },
+        get description() {
+            return t("plugin.uSRBG.option.nitroFirst.description");
+        },
         type: OptionType.SELECT,
-        options: [
-            { label: "Nitro banner", value: true, default: true },
-            { label: "USRBG banner", value: false },
-        ]
+        get options() {
+            return [
+                { label: t("plugin.uSRBG.option.nitroFirst.nitro"), value: true, default: true },
+                { label: t("plugin.uSRBG.option.nitroFirst.usrbg"), value: false },
+            ];
+        }
     },
     voiceBackground: {
-        description: "Use USRBG banners as voice chat backgrounds",
+        get label() {
+            return t("plugin.uSRBG.option.voiceBackground.label");
+        },
+        get description() {
+            return t("plugin.uSRBG.option.voiceBackground.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
@@ -55,6 +68,11 @@ export default definePlugin({
     description: "Displays user banners from USRBG, allowing anyone to get a banner without Nitro",
     authors: [Devs.AutumnVN, Devs.katlyn, Devs.pylix, Devs.TheKodeToad, PcDevs.MutanPlex],
     settings,
+
+    get displayDescription() {
+        return t("plugin.uSRBG.description");
+    },
+
     patches: [
         {
             find: '.banner)==null?"COMPLETE"',
@@ -84,7 +102,7 @@ export default definePlugin({
             className={cl("settings-button")}
             onClick={() => PlexcordNative.native.openExternal("https://github.com/AutumnVN/usrbg#how-to-request-your-own-usrbg-banner")}
         >
-            Get your own USRBG banner
+            {t("plugin.uSRBG.button")}
         </Button>
     ),
 

@@ -8167,6 +8167,23 @@
             "notification": {
                 "cannotJoin": "Kullanıcının ses kanalına katılamazsınız."
             }
+        },
+        "uSRBG": {
+            "name": "USRBG",
+            "description": "USRBG’den kullanıcı bannerlarını görüntüler, böylece Nitro olmadan herkes banner kullanabilir",
+            "option": {
+                "nitroFirst": {
+                    "label": "Önce Nitro",
+                    "description": "Hem Nitro hem de USRBG bannerı varsa hangisinin kullanılacağını belirleyin",
+                    "nitro": "Nitro Banner",
+                    "usrbg": "USRBG Banner"
+                },
+                "voiceBackground": {
+                    "label": "Ses Arka Planı",
+                    "description": "USRBG bannerlarını sesli sohbet arka planı olarak kullan"
+                }
+            },
+            "button": "Kendi USRBG bannerınızı alın"
         }
     }
 }
