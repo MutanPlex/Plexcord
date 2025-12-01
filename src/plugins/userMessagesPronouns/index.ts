@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -28,6 +29,10 @@ export default definePlugin({
     authors: [Devs.Tyman, Devs.TheKodeToad, Devs.Ven, Devs.Elvyra],
     description: "Adds pronouns to chat user messages",
     settings,
+
+    get displayDescription() {
+        return t("plugin.userMessagesPronouns.description");
+    },
 
     patches: [
         {

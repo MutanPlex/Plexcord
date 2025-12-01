@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { OptionType } from "@utils/types";
 
@@ -27,23 +28,35 @@ export const enum PronounsFormat {
 
 export const settings = definePluginSettings({
     pronounsFormat: {
+        get label() {
+            return t("plugin.userMessagesPronouns.option.pronounsFormat.label");
+        },
+        get description() {
+            return t("plugin.userMessagesPronouns.option.pronounsFormat.description");
+        },
         type: OptionType.SELECT,
-        description: "The format for pronouns to appear in chat",
-        options: [
-            {
-                label: "Lowercase",
-                value: PronounsFormat.Lowercase,
-                default: true
-            },
-            {
-                label: "Capitalized",
-                value: PronounsFormat.Capitalized
-            }
-        ]
+        get options() {
+            return [
+                {
+                    label: t("plugin.userMessagesPronouns.option.pronounsFormat.lowercase"),
+                    value: PronounsFormat.Lowercase,
+                    default: true
+                },
+                {
+                    label: t("plugin.userMessagesPronouns.option.pronounsFormat.capitalized"),
+                    value: PronounsFormat.Capitalized
+                }
+            ];
+        }
     },
     showSelf: {
+        get label() {
+            return t("plugin.userMessagesPronouns.option.showSelf.label");
+        },
+        get description() {
+            return t("plugin.userMessagesPronouns.option.showSelf.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Enable or disable showing pronouns for yourself",
         default: true
     }
 });

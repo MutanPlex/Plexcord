@@ -8127,6 +8127,22 @@
             "notification": {
                 "title": "Biliyor muydun?"
             }
+        },
+        "userMessagesPronouns": {
+            "name": "UserMessagesPronouns",
+            "description": "Kullanıcı zamirlerini mesaj başlıklarında gösterir",
+            "option": {
+                "pronounsFormat": {
+                    "label": "Zamir Biçimi",
+                    "description": "Sohbette zamirlerin nasıl görüneceği",
+                    "lowercase": "Küçük harf",
+                    "capitalized": "Baş harfi büyük"
+                },
+                "showSelf": {
+                    "label": "Kendini Göster",
+                    "description": "Kendi zamirlerinizin gösterilmesini açıp kapatın"
+                }
+            }
         }
     }
 }

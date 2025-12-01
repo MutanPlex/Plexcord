@@ -8127,6 +8127,22 @@
             "notification": {
                 "title": "Did you know?"
             }
+        },
+        "userMessagesPronouns": {
+            "name": "UserMessagesPronouns",
+            "description": "Shows user pronouns in message headers",
+            "option": {
+                "pronounsFormat": {
+                    "label": "Pronouns Format",
+                    "description": "The format for pronouns to appear in chat",
+                    "lowercase": "Lowercase",
+                    "capitalized": "Capitalized"
+                },
+                "showSelf": {
+                    "label": "Show Self",
+                    "description": "Enable or disable showing pronouns for yourself"
+                }
+            }
         }
     }
 }
