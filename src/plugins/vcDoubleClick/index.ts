@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { ChannelRouter, ChannelStore, SelectedChannelStore } from "@webpack/common";
@@ -30,6 +31,11 @@ export default definePlugin({
     name: "VoiceChatDoubleClick",
     description: "Join voice chats via double click instead of single click",
     authors: [Devs.Ven, Devs.D3SOX, Devs.sadan],
+
+    get displayDescription() {
+        return t("plugin.voiceChatDoubleClick.description");
+    },
+
     patches: [
         ...[
             ".handleVoiceStatusClick", // voice channels

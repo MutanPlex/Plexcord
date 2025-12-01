@@ -8206,6 +8206,10 @@
                 "earlySupporter": "Erken Destekçi",
                 "earlyVerifiedBotDeveloper": "Erken Doğrulanmış Bot Geliştiricisi"
             }
+        },
+        "voiceChatDoubleClick": {
+            "name": "VoiceChatDoubleClick",
+            "description": "Sesli sohbetlere tek tık yerine çift tıklayarak katılmanızı sağlar"
         }
     }
 }
