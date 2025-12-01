@@ -8210,6 +8210,70 @@
         "voiceChatDoubleClick": {
             "name": "VoiceChatDoubleClick",
             "description": "Sesli sohbetlere tek tık yerine çift tıklayarak katılmanızı sağlar"
+        },
+        "vcNarrator": {
+            "name": "VCNarrator",
+            "description": "Kullanıcılar ses kanallarına katıldığında, ayrıldığında veya taşındığında anlatıcı aracılığıyla duyuru yapar",
+            "option": {
+                "voice": {
+                    "label": "Ses"
+                },
+                "volume": {
+                    "label": "Ses Seviyesi",
+                    "description": "Anlatıcı ses seviyesi"
+                },
+                "rate": {
+                    "label": "Hız",
+                    "description": "Anlatıcı konuşma hızı"
+                },
+                "sayOwnName": {
+                    "label": "Kendi İsmini Söyle",
+                    "description": "Anlatıcının sizin adınızı söyleyip söylemeyeceği"
+                },
+                "latinOnly": {
+                    "label": "Sadece Latin",
+                    "description": "Okumadan önce isimlerdeki Latin olmayan karakterleri temizle"
+                },
+                "joinMessage": {
+                    "label": "Katılma Mesajı",
+                    "description": "Katılma mesajı"
+                },
+                "leaveMessage": {
+                    "label": "Ayrılma Mesajı",
+                    "description": "Ayrılma mesajı"
+                },
+                "moveMessage": {
+                    "label": "Taşınma Mesajı",
+                    "description": "Taşınma mesajı"
+                },
+                "muteMessage": {
+                    "label": "Sessize Alma Mesajı",
+                    "description": "Sessize alma mesajı (şimdilik sadece kendiniz)"
+                },
+                "unmuteMessage": {
+                    "label": "Sessizden Çıkma Mesajı",
+                    "description": "Sessizden çıkma mesajı (şimdilik sadece kendiniz)"
+                },
+                "deafenMessage": {
+                    "label": "Sağırlaştırma Mesajı",
+                    "description": "Sağırlaştırma mesajı (şimdilik sadece kendiniz)"
+                },
+                "undeafenMessage": {
+                    "label": "Sağırlaştırmadan Çıkma Mesajı",
+                    "description": "Sağırlaştırmadan çıkma mesajı (şimdilik sadece kendiniz)"
+                }
+            },
+            "modal": {
+                "title": "Örnek Sesleri Oynat",
+                "voice": "Bir ses seçin",
+                "language": "Bir dil seçin",
+                "noVoice": "Anlatıcı sesi bulunamadı.",
+                "linuxNote": "speech-dispatcher veya espeak kurun ve Discord'u --enable-speech-dispatcher parametresiyle çalıştırın",
+                "someNarrator": "İşletim sisteminizin Anlatıcı ayarlarından bazı sesler yüklemeyi deneyin",
+                "dontHaveEnglish": "Hiç İngilizce ses yüklememişsiniz, bu yüzden anlatıcı garip gelebilir",
+                "customiseMessages": "Aşağıdaki konuşulan mesajları özelleştirebilirsiniz. Boş bırakırsanız belirli mesajları devre dışı bırakabilirsiniz",
+                "placeholdersInfo": "Özel yer tutucular {{USER}}, {{DISPLAY_NAME}}, {{NICKNAME}} ve {{CHANNEL}} sırasıyla kullanıcının adı (kendinizseniz boş), görüntü adı, sunucudaki takma adı ve kanal adıyla değiştirilir"
+            }
         }
     }
 }

@@ -8210,6 +8210,70 @@
         "voiceChatDoubleClick": {
             "name": "VoiceChatDoubleClick",
             "description": "Join voice chats via double click instead of single click"
+        },
+        "vcNarrator": {
+            "name": "VCNarrator",
+            "description": "Announces when users join, leave, or move voice channels via narrator",
+            "option": {
+                "voice": {
+                    "label": "Voice"
+                },
+                "volume": {
+                    "label": "Volume",
+                    "description": "Narrator Volume"
+                },
+                "rate": {
+                    "label": "Rate",
+                    "description": "Narrator Speed"
+                },
+                "sayOwnName": {
+                    "label": "Say Own Name",
+                    "description": "Say own name"
+                },
+                "latinOnly": {
+                    "label": "Latin Only",
+                    "description": "Strip non latin characters from names before saying them"
+                },
+                "joinMessage": {
+                    "label": "Join Message",
+                    "description": "Join Message"
+                },
+                "leaveMessage": {
+                    "label": "Leave Message",
+                    "description": "Leave Message"
+                },
+                "moveMessage": {
+                    "label": "Move Message",
+                    "description": "Move Message"
+                },
+                "muteMessage": {
+                    "label": "Mute Message",
+                    "description": "Mute Message (only self for now)"
+                },
+                "unmuteMessage": {
+                    "label": "Unmute Message",
+                    "description": "Unmute Message (only self for now)"
+                },
+                "deafenMessage": {
+                    "label": "Deafen Message",
+                    "description": "Deafen Message (only self for now)"
+                },
+                "undeafenMessage": {
+                    "label": "Undeafen Message",
+                    "description": "Undeafen Message (only self for now)"
+                }
+            },
+            "modal": {
+                "title": "Play Example Sounds",
+                "voice": "Select a voice",
+                "language": "Select a language",
+                "noVoice": "No narrator voices found. ",
+                "linuxNote": "Install speech-dispatcher or espeak and run Discord with the --enable-speech-dispatcher flag",
+                "someNarrator": "Try installing some in the Narrator settings of your Operating System",
+                "dontHaveEnglish": "You don't have any English voices installed, so the narrator might sound weird",
+                "customiseMessages": "You can customise the spoken messages below. You can disable specific messages by setting them to nothing",
+                "placeholdersInfo": "The special placeholders {{USER}}, {{DISPLAY_NAME}}, {{NICKNAME}} and {{CHANNEL}} will be replaced with the user's name (nothing if it's yourself), the user's display name, the user's nickname on current server and the channel's name respectively"
+            }
         }
     }
 }
