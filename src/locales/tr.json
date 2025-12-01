@@ -8274,6 +8274,16 @@
                 "customiseMessages": "Aşağıdaki konuşulan mesajları özelleştirebilirsiniz. Boş bırakırsanız belirli mesajları devre dışı bırakabilirsiniz",
                 "placeholdersInfo": "Özel yer tutucular {{USER}}, {{DISPLAY_NAME}}, {{NICKNAME}} ve {{CHANNEL}} sırasıyla kullanıcının adı (kendinizseniz boş), görüntü adı, sunucudaki takma adı ve kanal adıyla değiştirilir"
             }
+        },
+        "videoSpeed": {
+            "name": "VideoSpeed",
+            "description": "Videoların hızını değiştirmenizi sağlar",
+            "option": {
+                "playbackSpeed": {
+                    "label": "Oynatma Hızı",
+                    "description": "Videoların oynatılacağı hız"
+                }
+            }
         }
     }
 }

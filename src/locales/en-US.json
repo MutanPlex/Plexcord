@@ -8274,6 +8274,16 @@
                 "customiseMessages": "You can customise the spoken messages below. You can disable specific messages by setting them to nothing",
                 "placeholdersInfo": "The special placeholders {{USER}}, {{DISPLAY_NAME}}, {{NICKNAME}} and {{CHANNEL}} will be replaced with the user's name (nothing if it's yourself), the user's display name, the user's nickname on current server and the channel's name respectively"
             }
+        },
+        "videoSpeed": {
+            "name": "VideoSpeed",
+            "description": "Allows you to change the speed of videos",
+            "option": {
+                "playbackSpeed": {
+                    "label": "Playback Speed",
+                    "description": "The speed at which videos should be played back"
+                }
+            }
         }
     }
 }

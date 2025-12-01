@@ -31,11 +31,11 @@ export default definePlugin({
             find: /\.VIDEO\?\i\.videoControls:/,
             replacement: {
                 match: /children:\[this\.renderPlayIcon\(\),.{0,200}\.setDurationRef}\),/,
-                replace: "$&$self.SpeedButton(),"
+                replace: "$&$self.SpeedButton({mediaRef:this?.props?.mediaRef}),"
             },
         },
     ],
-    SpeedButton: ErrorBoundary.wrap(() => {
+    SpeedButton: ErrorBoundary.wrap(({ mediaRef }: { mediaRef: any; }) => {
         const elementRef = useRef<HTMLDivElement>(null);
 
         const [speed, setSpeed] = useState(1);
@@ -61,7 +61,6 @@ export default definePlugin({
                             paddingRight: "4px",
                         }}
                         onClick={e => {
-                            console.log(e);
                             let newSpeed;
                             switch (speed) {
                                 case 1:
@@ -77,14 +76,13 @@ export default definePlugin({
                                     newSpeed = 1;
                                     break;
                             }
-                            const parent = e.currentTarget.parentNode!.parentNode!.parentNode!;
 
-                            // this works with audio too as it is but it doesnt always select the right audio tag
-                            const media = parent.querySelector("video")! /* ?? document.querySelector("source")?.parentElement*/;
-                            console.log(media);
-                            media.playbackRate = newSpeed;
-                            media.preservesPitch = settings.store.preservePitch;
-                            setSpeed(newSpeed);
+                            const media = mediaRef?.current;
+                            if (media) {
+                                media.playbackRate = newSpeed;
+                                media.preservesPitch = settings.store.preservePitch;
+                                setSpeed(newSpeed);
+                            }
                         }}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="19px" height="19px" viewBox="0 0 448 512"><path fill="currentColor" d={speedPaths[speed]}></path></svg>
