@@ -8306,6 +8306,27 @@
                     "description": "Kullanılacak görsel boyutu"
                 }
             }
+        },
+        "viewRaw": {
+            "name": "ViewRaw",
+            "description": "Herhangi bir mesajın, kanalın veya sunucunun ham içerik/verisini kopyalayın ve görüntüleyin",
+            "context": {
+                "copyLeft": "Ham Veriyi Kopyala (Sol Tık) / Ham Veriyi Görüntüle (Sağ Tık)",
+                "copyRight": "Ham Veriyi Kopyala (Sağ Tık) / Ham Veriyi Görüntüle (Sol Tık)",
+                "view": "Ham Veriyi Görüntüle"
+            },
+            "option": {
+                "popoverButton": {
+                    "label": "Açılır Menü Butonu",
+                    "description": "Mesajın ham içerik/verisini görüntülemek için mesaj popover'ında bir buton göster."
+                },
+                "clickMethod": {
+                    "label": "Tıklama Yöntemi",
+                    "description": "Herhangi bir mesajın ham içerik/verisini görüntülemek için kullanılacak tıklama yöntemini değiştirin.",
+                    "left": "Ham içeriği görüntülemek için Sol Tık.",
+                    "right": "Ham içeriği görüntülemek için Sağ Tık."
+                }
+            }
         }
     }
 }

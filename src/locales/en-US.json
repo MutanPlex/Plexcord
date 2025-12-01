@@ -8306,6 +8306,27 @@
                     "description": "The image size to use"
                 }
             }
+        },
+        "viewRaw": {
+            "name": "ViewRaw",
+            "description": "Copy and view the raw content/data of any message, channel or guild",
+            "context": {
+                "copyLeft": "Copy Raw (Left Click) / View Raw (Right Click)",
+                "copyRight": "Copy Raw (Right Click) / View Raw (Left Click)",
+                "view": "View Raw"
+            },
+            "option": {
+                "popoverButton": {
+                    "label": "Popover Button",
+                    "description": "Show a button in the message popover to view the raw content/data of the message."
+                },
+                "clickMethod": {
+                    "label": "Click Method",
+                    "description": "Change the button to view the raw content/data of any message.",
+                    "left": "Left Click to view the raw content.",
+                    "right": "Right Click to view the raw content."
+                }
+            }
         }
     }
 }

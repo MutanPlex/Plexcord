@@ -18,6 +18,7 @@
 */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
@@ -113,17 +114,29 @@ function openViewRawModalMessage(msg: Message) {
 
 const settings = definePluginSettings({
     popoverButton: {
-        description: "Show a button in the message popover to view the raw content/data of the message.",
+        get label() {
+            return t("plugin.viewRaw.option.popoverButton.label");
+        },
+        get description() {
+            return t("plugin.viewRaw.option.popoverButton.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
     },
     clickMethod: {
-        description: "Change the button to view the raw content/data of any message.",
+        get label() {
+            return t("plugin.viewRaw.option.clickMethod.label");
+        },
+        get description() {
+            return t("plugin.viewRaw.option.clickMethod.description");
+        },
         type: OptionType.SELECT,
-        options: [
-            { label: "Left Click to view the raw content.", value: "Left", default: true },
-            { label: "Right click to view the raw content.", value: "Right" }
-        ]
+        get options() {
+            return [
+                { label: t("plugin.viewRaw.option.clickMethod.left"), value: "Left", default: true },
+                { label: t("plugin.viewRaw.option.clickMethod.right"), value: "Right" }
+            ];
+        }
     }
 });
 
@@ -158,7 +171,7 @@ function MakeContextCallback(name: "Guild" | "Role" | "User" | "Channel" | "Mess
         children.splice(sliceIndex, 0,
             <Menu.MenuItem
                 id={`pc-view-${name.toLowerCase()}-raw`}
-                label="View Raw"
+                label={t("plugin.viewRaw.context.view")}
                 action={() => openViewRawModal(JSON.stringify(value, null, 4), name, messageContent)}
                 icon={CopyIcon}
             />
@@ -176,7 +189,7 @@ const devContextCallback: NavContextMenuPatchCallback = (children, { id }: { id:
     children.splice(0, 0,
         <Menu.MenuItem
             id={"pc-view-role-raw"}
-            label="View Raw"
+            label={t("plugin.viewRaw.context.view")}
             action={() => openViewRawModal(JSON.stringify(role, null, 4), "Role")}
             icon={CopyIcon}
         />
@@ -189,6 +202,10 @@ export default definePlugin({
     authors: [Devs.KingFish, Devs.Ven, Devs.rad, Devs.ImLvna],
     dependencies: ["MessagePopoverAPI"],
     settings,
+
+    get displayDescription() {
+        return t("plugin.viewRaw.description");
+    },
 
     contextMenus: {
         "guild-context": MakeContextCallback("Guild"),
@@ -227,8 +244,8 @@ export default definePlugin({
             };
 
             const label = settings.store.clickMethod === "Right"
-                ? "Copy Raw (Left Click) / View Raw (Right Click)"
-                : "View Raw (Left Click) / Copy Raw (Right Click)";
+                ? t("plugin.viewRaw.context.copyLeft")
+                : t("plugin.viewRaw.context.copyRight");
 
             return {
                 label,
