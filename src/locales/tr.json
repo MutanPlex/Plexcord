@@ -8044,6 +8044,22 @@
             "name": "Unindent",
             "description": "Kod bloklarındaki baştaki girintiyi kaldırır"
         },
+        "unitConverter": {
+            "name": "UnitConverter",
+            "description": "Metrik birimleri İmparatorluk birimlerine ve tam tersine dönüştürür",
+            "tooltip": "Birimleri Dönüştür",
+            "option": {
+                "myUnits": {
+                    "label": "Benim Birimlerim",
+                    "description": "Kullandığınız ve dönüştürülmesini istediğiniz birimler. Varsayılan: imperial",
+                    "imperial": "İmparatorluk",
+                    "metric": "Metrik"
+                }
+            },
+            "button": {
+                "dismiss": "Kapat"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

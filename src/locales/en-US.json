@@ -8044,6 +8044,22 @@
             "name": "Unindent",
             "description": "Trims leading indentation from codeblocks"
         },
+        "unitConverter": {
+            "name": "UnitConverter",
+            "description": "Converts metric units to Imperal units and vice versa",
+            "tooltip": "Convert Units",
+            "option": {
+                "myUnits": {
+                    "label": "My Units",
+                    "description": "the units you use and want things converted to. defaults to imperial",
+                    "imperial": "Imperial",
+                    "metric": "Metric"
+                }
+            },
+            "button": {
+                "dismiss": "Dismiss"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

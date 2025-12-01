@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { Message } from "@plexcord/discord-types";
 import { IconComponent } from "@utils/types";
@@ -30,7 +31,7 @@ function Dismiss({ onDismiss }: { onDismiss: () => void; }) {
             onClick={onDismiss}
             className={cl("dismiss")}
         >
-            Dismiss
+            {t("plugin.unitConverter.button.dismiss")}
         </button>
     );
 }

@@ -19,6 +19,7 @@
 
 import "./style.css";
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -30,19 +31,26 @@ import { conversions, ConverterAccessory, ConvertIcon } from "./ConverterAccesso
 
 export const settings = definePluginSettings({
     myUnits: {
+        get label() {
+            return t("plugin.unitConverter.option.myUnits.label");
+        },
+        get description() {
+            return t("plugin.unitConverter.option.myUnits.description");
+        },
         type: OptionType.SELECT,
-        description: "the units you use and want things converted to. defaults to imperial",
-        options: [
-            {
-                default: true,
-                label: "Imperial",
-                value: "imperial",
-            },
-            {
-                label: "Metric",
-                value: "metric"
-            }
-        ]
+        get options() {
+            return [
+                {
+                    default: true,
+                    label: t("plugin.unitConverter.option.myUnits.imperial"),
+                    value: "imperial",
+                },
+                {
+                    label: t("plugin.unitConverter.option.myUnits.metric"),
+                    value: "metric"
+                }
+            ];
+        }
     },
     // invert: {
     //     type: OptionType.BOOLEAN,
@@ -57,6 +65,10 @@ export default definePlugin({
     authors: [Devs.sadan],
     dependencies: ["MessagePopoverAPI"],
 
+    get displayDescription() {
+        return t("plugin.unitConverter.description");
+    },
+
     renderMessageAccessory: props => <ConverterAccessory message={props.message} />,
 
     messagePopoverButton: {
@@ -64,7 +76,7 @@ export default definePlugin({
         render(message) {
             if (!message.content) return null;
             return {
-                label: "Convert Units",
+                label: t("plugin.unitConverter.tooltip"),
                 icon: ConvertIcon,
                 message,
                 channel: ChannelStore.getChannel(message.channel_id),
