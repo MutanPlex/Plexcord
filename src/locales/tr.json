@@ -8143,6 +8143,30 @@
                     "description": "Kendi zamirlerinizin gösterilmesini açıp kapatın"
                 }
             }
+        },
+        "userVoiceShow": {
+            "name": "UserVoiceShow",
+            "description": "Bir kullanıcı ses kanalındayken bir gösterge gösterir",
+            "option": {
+                "showInUserProfileModal": {
+                    "label": "Kullanıcı Profilinde Göster",
+                    "description": "Kullanıcı profilinde ismin yanında ses kanalı göstergesini göster"
+                },
+                "showInMemberList": {
+                    "label": "Üye Listesinde Göster",
+                    "description": "Üye ve DM listesinde ses kanalı göstergesini göster"
+                },
+                "showInMessages": {
+                    "label": "Mesajlarda Göster",
+                    "description": "Mesajlarda ses kanalı göstergesini göster"
+                }
+            },
+            "modal": {
+                "inVoiceChat": "Sesli Sohbette"
+            },
+            "notification": {
+                "cannotJoin": "Kullanıcının ses kanalına katılamazsınız."
+            }
         }
     }
 }

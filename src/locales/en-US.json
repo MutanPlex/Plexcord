@@ -8143,6 +8143,30 @@
                     "description": "Enable or disable showing pronouns for yourself"
                 }
             }
+        },
+        "userVoiceShow": {
+            "name": "UserVoiceShow",
+            "description": "Shows an indicator when a user is in a Voice Channel",
+            "option": {
+                "showInUserProfileModal": {
+                    "label": "Show In User Profile Modal",
+                    "description": "Show a user's Voice Channel indicator in their profile next to the name"
+                },
+                "showInMemberList": {
+                    "label": "Show In Member List",
+                    "description": "Show a user's Voice Channel indicator in the member and DMs list"
+                },
+                "showInMessages": {
+                    "label": "Show In Messages",
+                    "description": "Show a user's Voice Channel indicator in messages"
+                }
+            },
+            "modal": {
+                "inVoiceChat": "In Voice Chat"
+            },
+            "notification": {
+                "cannotJoin": "You cannot join the user's Voice Channel."
+            }
         }
     }
 }

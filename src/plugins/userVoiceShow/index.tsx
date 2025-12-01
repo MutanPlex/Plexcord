@@ -19,6 +19,7 @@
 
 import "./style.css";
 
+import { t } from "@api/i18n";
 import { addMemberListDecorator, removeMemberListDecorator } from "@api/MemberListDecorators";
 import { addMessageDecoration, removeMessageDecoration } from "@api/MessageDecorations";
 import { addNicknameIcon, removeNicknameIcon } from "@api/NicknameIcons";
@@ -30,20 +31,35 @@ import { VoiceChannelIndicator } from "./components";
 
 const settings = definePluginSettings({
     showInUserProfileModal: {
+        get label() {
+            return t("plugin.userVoiceShow.option.showInUserProfileModal.label");
+        },
+        get description() {
+            return t("plugin.userVoiceShow.option.showInUserProfileModal.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show a user's Voice Channel indicator in their profile next to the name",
         default: true,
         restartNeeded: true
     },
     showInMemberList: {
+        get label() {
+            return t("plugin.userVoiceShow.option.showInMemberList.label");
+        },
+        get description() {
+            return t("plugin.userVoiceShow.option.showInMemberList.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show a user's Voice Channel indicator in the member and DMs list",
         default: true,
         restartNeeded: true
     },
     showInMessages: {
+        get label() {
+            return t("plugin.userVoiceShow.option.showInMessages.label");
+        },
+        get description() {
+            return t("plugin.userVoiceShow.option.showInMessages.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Show a user's Voice Channel indicator in messages",
         default: true,
         restartNeeded: true
     }
@@ -55,6 +71,10 @@ export default definePlugin({
     authors: [Devs.Nuckyz, Devs.LordElias, PcDevs.omaw],
     dependencies: ["NicknameIconsAPI", "MemberListDecoratorsAPI", "MessageDecorationsAPI"],
     settings,
+
+    get displayDescription() {
+        return t("plugin.userVoiceShow.description");
+    },
 
     patches: [
         // Friends List
