@@ -8060,6 +8060,26 @@
                 "dismiss": "Kapat"
             }
         },
+        "unlimitedAccounts": {
+            "name": "UnlimitedAccounts",
+            "description": "Ekleyebileceğiniz hesap sayısını artırır.",
+            "option": {
+                "maxAccounts": {
+                    "label": "Maksimum Hesap",
+                    "description": "Eklenebilecek hesap sayısı, sınırsız için 0 girin"
+                }
+            }
+        },
+        "unlockedAvatarZoom": {
+            "name": "UnlockedAvatarZoom",
+            "description": "Avatarınızı değiştirirken görüntü kırpma aracında daha fazla yakınlaştırmanıza olanak tanır",
+            "option": {
+                "zoomMultiplier": {
+                    "label": "Yakınlaştırma Çarpanı",
+                    "description": "Yakınlaştırma çarpanı"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",

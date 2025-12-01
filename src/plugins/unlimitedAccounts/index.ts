@@ -17,13 +17,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     maxAccounts: {
-        description: "Number of accounts that can be added, or 0 for no limit",
+        get label() {
+            return t("plugin.unlimitedAccounts.option.maxAccounts.label");
+        },
+        get description() {
+            return t("plugin.unlimitedAccounts.option.maxAccounts.description");
+        },
         default: 0,
         type: OptionType.NUMBER,
         restartNeeded: true,
@@ -35,6 +41,11 @@ export default definePlugin({
     description: "Increases the amount of accounts you can add.",
     authors: [Devs.thororen, PcDevs.MutanPlex],
     settings,
+
+    get displayDescription() {
+        return t("plugin.unlimitedAccounts.description");
+    },
+
     patches: [
         {
             find: "multiaccount_cta_tooltip_seen",

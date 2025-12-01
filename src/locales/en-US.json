@@ -8060,6 +8060,26 @@
                 "dismiss": "Dismiss"
             }
         },
+        "unlimitedAccounts": {
+            "name": "UnlimitedAccounts",
+            "description": "Increases the amount of accounts you can add.",
+            "option": {
+                "maxAccounts": {
+                    "label": "Max Accounts",
+                    "description": "Number of accounts that can be added, or 0 for no limit" 
+                }
+            }
+        },
+        "unlockedAvatarZoom": {
+            "name": "UnlockedAvatarZoom",
+            "description": "Allows you to zoom in further in the image crop tool when changing your avatar",
+            "option": {
+                "zoomMultiplier": {
+                    "label": "Zoom Multiplier",
+                    "description": "Zoom multiplier"
+                }
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
