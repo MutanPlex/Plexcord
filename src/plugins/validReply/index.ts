@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Channel, Message, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -35,6 +36,11 @@ export default definePlugin({
     name: "ValidReply",
     description: 'Fixes "Message could not be loaded" upon hovering over the reply',
     authors: [Devs.newwares],
+
+    get displayDescription() {
+        return t("plugin.validReply.description");
+    },
+
     patches: [
         {
             find: "#{intl::REPLY_QUOTE_MESSAGE_NOT_LOADED}",

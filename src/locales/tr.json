@@ -8184,6 +8184,28 @@
                 }
             },
             "button": "Kendi USRBG bannerınızı alın"
+        },
+        "validReply": {
+            "name": "ValidReply",
+            "description": "Yanıtın üzerine gelindiğinde görülen 'Mesaj yüklenemedi' hatasını düzeltir"
+        },
+        "validUser": {
+            "name": "ValidUser",
+            "description": "Bilinmeyen kullanıcılar için '@unknown-user' olarak görünen bahsetmeleri düzeltir (düzeltmek için bahsetmenin üzerine gelin)",
+            "badges": {
+                "activeDeveloper": "Aktif Geliştirici",
+                "discordBugHunter": "Discord Hata Avcısı",
+                "moderatorProgramsAlumni": "Moderatör Programları Mezunu",
+                "discordStaff": "Discord Personeli",
+                "hypeSquadEvents": "HypeSquad Etkinlikleri",
+                "bravery": "HypeSquad Cesaret",
+                "brilliance": "HypeSquad Parlaklık",
+                "balance": "HypeSquad Denge",
+                "partneredServerOwner": "Ortak Sunucu Sahibi",
+                "nitro": "Discord Nitro",
+                "earlySupporter": "Erken Destekçi",
+                "earlyVerifiedBotDeveloper": "Erken Doğrulanmış Bot Geliştiricisi"
+            }
         }
     }
 }

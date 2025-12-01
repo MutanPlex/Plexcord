@@ -8184,6 +8184,28 @@
                 }
             },
             "button": "Get your own USRBG banner"
+        },
+        "validReply": {
+            "name": "ValidReply",
+            "description": "Fixes 'Message could not be loaded' upon hovering over the reply"
+        },
+        "validUser": {
+            "name": "ValidUser",
+            "description": "Fix mentions for unknown users showing up as '@unknown-user' (hover over a mention to fix it)",
+            "badges": {
+                "activeDeveloper": "Active Developer",
+                "discordBugHunter": "Discord Bug Hunter",
+                "moderatorProgramsAlumni": "Moderator Programs Alumni",
+                "discordStaff": "Discord Staff",
+                "hypeSquadEvents": "HypeSquad Events",
+                "bravery": "HypeSquad Bravery",
+                "brilliance": "HypeSquad Brilliance",
+                "balance": "HypeSquad Balance",
+                "partneredServerOwner": "Partnered Server Owner",
+                "nitro": "Discord Nitro",
+                "earlySupporter": "Early Supporter",
+                "earlyVerifiedBotDeveloper": "Early Verified Bot Developer"
+            }
         }
     }
 }
