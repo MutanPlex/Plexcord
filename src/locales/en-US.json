@@ -8040,6 +8040,10 @@
                 "areTyping": "and {{count}} others are typing..."
             }
         },
+        "unindent": {
+            "name": "Unindent",
+            "description": "Trims leading indentation from codeblocks"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

@@ -8040,6 +8040,10 @@
                 "areTyping": "ve {{count}} kişi daha yazıyor..."
             }
         },
+        "unindent": {
+            "name": "Unindent",
+            "description": "Kod bloklarındaki baştaki girintiyi kaldırır"
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
