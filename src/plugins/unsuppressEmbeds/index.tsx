@@ -18,6 +18,7 @@
 */
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { ImageInvisible, ImageVisible } from "@components/Icons";
 import { Channel, Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -47,7 +48,7 @@ const messageContextMenuPatch: NavContextMenuPatchCallback = (
         <Menu.MenuItem
             id="unsuppress-embeds"
             key="unsuppress-embeds"
-            label={isEmbedSuppressed ? "Unsuppress Embeds" : "Suppress Embeds"}
+            label={isEmbedSuppressed ? t("plugin.unsuppressEmbeds.context.unsuppress") : t("plugin.unsuppressEmbeds.context.suppress")}
             color={isEmbedSuppressed ? undefined : "danger"}
             icon={isEmbedSuppressed ? ImageVisible : ImageInvisible}
             action={() =>
@@ -64,6 +65,11 @@ export default definePlugin({
     name: "UnsuppressEmbeds",
     authors: [Devs.rad, Devs.HypedDomi],
     description: "Allows you to unsuppress embeds in messages",
+
+    get displayDescription() {
+        return t("plugin.unsuppressEmbeds.description");
+    },
+
     contextMenus: {
         "message": messageContextMenuPatch
     }

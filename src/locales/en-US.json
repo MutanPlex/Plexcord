@@ -8080,6 +8080,14 @@
                 }
             }
         },
+        "unsuppressEmbeds": {
+            "name": "UnsuppressEmbeds",
+            "description": "Allows you to unsuppress embeds in messages",
+            "context": {
+                "unsuppress": "Unsuppress Embed",
+                "suppress": "Suppress Embed"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Shows random useless information within Discord; shortcuts and spacing are adjustable.",

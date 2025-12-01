@@ -8080,6 +8080,14 @@
                 }
             }
         },
+        "unsuppressEmbeds": {
+            "name": "UnsuppressEmbeds",
+            "description": "Mesajlardaki embed içeriklerin bastırılmasını kaldırmanıza olanak tanır",
+            "context": {
+                "unsuppress": "Embed Bastırmasını Kaldır",
+                "suppress": "Embed'i Bastır"
+            }
+        },
         "uselessInfo": {
             "name": "UselessInfo",
             "description": "Discord içinde rastgele işe yaramaz bilgiler gösterir; kısayollar ve aralık ayarları yapılabilir.",
