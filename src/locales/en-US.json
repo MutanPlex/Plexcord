@@ -8284,6 +8284,28 @@
                     "description": "The speed at which videos should be played back"
                 }
             }
+        },
+        "viewIcons": {
+            "name": "ViewIcons",
+            "description": "Makes avatars and banners in user profiles clickable, adds View Icon/Banner entries in the user, server and group channel context menu.",
+            "context": {
+                "view": {
+                    "avatar": "View Avatar",
+                    "serverAvatar": "View Server Avatar",
+                    "icon": "View Icon",
+                    "banner": "View Banner"
+                }
+            },
+            "option": {
+                "format": {
+                    "label": "Format",
+                    "description": "Choose the image format to use for non animated images. Animated images will always use .gif"
+                },
+                "imgSize": {
+                    "label": "Image Size",
+                    "description": "The image size to use"
+                }
+            }
         }
     }
 }

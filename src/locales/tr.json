@@ -8284,6 +8284,28 @@
                     "description": "Videoların oynatılacağı hız"
                 }
             }
+        },
+        "viewIcons": {
+            "name": "ViewIcons",
+            "description": "Kullanıcı profillerindeki avatar ve banner görsellerini tıklanabilir hale getirir; kullanıcı, sunucu ve grup kanal bağlam menüsüne Avatar/Banner Görüntüle seçenekleri ekler.",
+            "context": {
+                "view": {
+                    "avatar": "Avatarı Görüntüle",
+                    "serverAvatar": "Sunucu Avatarını Görüntüle",
+                    "icon": "İkonu Görüntüle",
+                    "banner": "Bannerı Görüntüle"
+                }
+            },
+            "option": {
+                "format": {
+                    "label": "Format",
+                    "description": "Hareketli olmayan görseller için kullanılacak görüntü formatını seçin. Hareketli görseller her zaman .gif formatını kullanır"
+                },
+                "imgSize": {
+                    "label": "Görsel Boyutu",
+                    "description": "Kullanılacak görsel boyutu"
+                }
+            }
         }
     }
 }

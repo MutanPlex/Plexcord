@@ -18,6 +18,7 @@
 */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { ImageIcon } from "@components/Icons";
 import type { Channel, Guild, User } from "@plexcord/discord-types";
@@ -43,8 +44,13 @@ interface GroupDMContextProps {
 
 const settings = definePluginSettings({
     format: {
+        get label() {
+            return t("plugin.viewIcons.option.format.label");
+        },
+        get description() {
+            return t("plugin.viewIcons.option.format.description");
+        },
         type: OptionType.SELECT,
-        description: "Choose the image format to use for non animated images. Animated images will always use .gif",
         options: [
             {
                 label: "webp",
@@ -62,8 +68,13 @@ const settings = definePluginSettings({
         ]
     },
     imgSize: {
+        get label() {
+            return t("plugin.viewIcons.option.imgSize.label");
+        },
+        get description() {
+            return t("plugin.viewIcons.option.imgSize.description");
+        },
         type: OptionType.SELECT,
-        description: "The image size to use",
         options: ["128", "256", "512", "1024", "2048", "4096"].map(n => ({ label: n, value: n, default: n === "1024" }))
     }
 });
@@ -103,14 +114,14 @@ const UserContext: NavContextMenuPatchCallback = (children, { user, guildId }: U
         <Menu.MenuGroup>
             <Menu.MenuItem
                 id="view-avatar"
-                label="View Avatar"
+                label={t("plugin.viewIcons.context.view.avatar")}
                 action={() => openAvatar(IconUtils.getUserAvatarURL(user, true))}
                 icon={ImageIcon}
             />
             {memberAvatar && (
                 <Menu.MenuItem
                     id="view-server-avatar"
-                    label="View Server Avatar"
+                    label={t("plugin.viewIcons.context.view.serverAvatar")}
                     action={() => openAvatar(IconUtils.getGuildMemberAvatarURLSimple({
                         userId: user.id,
                         avatar: memberAvatar,
@@ -135,7 +146,7 @@ const GuildContext: NavContextMenuPatchCallback = (children, { guild }: GuildCon
             {icon ? (
                 <Menu.MenuItem
                     id="view-icon"
-                    label="View Icon"
+                    label={t("plugin.viewIcons.context.view.icon")}
                     action={() =>
                         openAvatar(IconUtils.getGuildIconURL({
                             id,
@@ -149,7 +160,7 @@ const GuildContext: NavContextMenuPatchCallback = (children, { guild }: GuildCon
             {banner ? (
                 <Menu.MenuItem
                     id="view-banner"
-                    label="View Banner"
+                    label={t("plugin.viewIcons.context.view.banner")}
                     action={() =>
                         openBanner(IconUtils.getGuildBannerURL(guild, true)!)
                     }
@@ -167,7 +178,7 @@ const GroupDMContext: NavContextMenuPatchCallback = (children, { channel }: Grou
         <Menu.MenuGroup>
             <Menu.MenuItem
                 id="view-group-channel-icon"
-                label="View Icon"
+                label={t("plugin.viewIcons.context.view.icon")}
                 action={() =>
                     openAvatar(IconUtils.getChannelIconURL(channel)!)
                 }
@@ -183,6 +194,10 @@ export default definePlugin({
     description: "Makes avatars and banners in user profiles clickable, adds View Icon/Banner entries in the user, server and group channel context menu.",
     tags: ["ImageUtilities"],
     dependencies: ["DynamicImageModalAPI"],
+
+    get displayDescription() {
+        return t("plugin.viewIcons.description");
+    },
 
     settings,
 
