@@ -8279,9 +8279,9 @@
             "name": "VideoSpeed",
             "description": "Allows you to change the speed of videos",
             "option": {
-                "playbackSpeed": {
-                    "label": "Playback Speed",
-                    "description": "The speed at which videos should be played back"
+                "preservePitch": {
+                    "label": "Preserve Pitch",
+                    "description": "Should pitch be preserved when changing speed?"
                 }
             }
         },
@@ -8450,6 +8450,13 @@
                 "deafenAll": "Deafen All",
                 "undeafenAll": "Undeafen All",
                 "moveAll": "Move All"
+            }
+        },
+        "voiceDownload": {
+            "name": "VoiceDownload",
+            "description": "Adds a download to voice messages. (Opens a new browser tab)",
+            "context": {
+                "download": "Download voice message"
             }
         }
     }

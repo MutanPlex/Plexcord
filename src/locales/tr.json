@@ -8277,11 +8277,11 @@
         },
         "videoSpeed": {
             "name": "VideoSpeed",
-            "description": "Videoların hızını değiştirmenizi sağlar",
+            "description": "Videoların hızını değiştirmenize olanak tanır",
             "option": {
-                "playbackSpeed": {
-                    "label": "Oynatma Hızı",
-                    "description": "Videoların oynatılacağı hız"
+                "preservePitch": {
+                    "label": "Perdeyi Koru",
+                    "description": "Hız değiştirildiğinde ses perdesi korunmalı mı?"
                 }
             }
         },
@@ -8450,6 +8450,13 @@
                 "deafenAll": "Herkesi Sağırlaştır",
                 "undeafenAll": "Herkesi Sağırlaştırmadan Çıkar",
                 "moveAll": "Herkesi Taşı"
+            }
+        },
+        "voiceDownload": {
+            "name": "VoiceDownload",
+            "description": "Sesli mesajlara indirme seçeneği ekler. (Yeni bir tarayıcı sekmesi açar)",
+            "context": {
+                "download": "Sesli mesajı indir"
             }
         }
     }

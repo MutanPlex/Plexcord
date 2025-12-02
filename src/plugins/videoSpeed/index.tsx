@@ -15,8 +15,13 @@ import { Tooltip, useRef, useState } from "@webpack/common";
 const settings = definePluginSettings(
     {
         preservePitch: {
+            get label() {
+                return t("plugin.videoSpeed.option.preservePitch.label");
+            },
+            get description() {
+                return t("plugin.videoSpeed.option.preservePitch.description");
+            },
             type: OptionType.BOOLEAN,
-            description: "Should pitch be preserved when changing speed?",
             default: false,
             restartNeeded: true
         },
