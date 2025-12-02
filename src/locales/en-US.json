@@ -8568,6 +8568,19 @@
                     "description": "Toggle clicking avatars in reactions"
                 }
             }
+        },
+        "whosWatching": {
+            "name": "WhosWatching",
+            "description": "Hover over the screenshare icon to view what users are watching your stream",
+            "modal": {
+                "noSpectator": "No spectators"
+            },
+            "option": {
+                "showPanel": {
+                    "label": "Show Panel",
+                    "description": "Show spectators under screenshare panel"
+                }
+            }
         }
     }
 }

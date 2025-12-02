@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -34,7 +35,12 @@ function getUsername(user: any): string {
 
 const settings = definePluginSettings({
     showPanel: {
-        description: "Show spectators under screenshare panel",
+        get label() {
+            return t("plugin.whosWatching.option.showPanel.label");
+        },
+        get description() {
+            return t("plugin.whosWatching.option.showPanel.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
@@ -61,7 +67,7 @@ function Watching({ userIds, guildId }: WatchingProps): JSX.Element {
                         {missingUsers > 0 && <span className={cl("more_users")}>{`+${getIntlMessage("NUM_USERS", { num: missingUsers })}`}</span>}
                     </Flex>
                 </>)
-                : (<span className={cl("no_viewers")}>No spectators</span>)}
+                : (<span className={cl("no_viewers")}>{t("plugin.whosWatching.modal.noSpectator")}</span>)}
         </div>
     );
 }
@@ -75,6 +81,11 @@ export default definePlugin({
     name: "WhosWatching",
     description: "Hover over the screenshare icon to view what users are watching your stream",
     authors: [PcDevs.Fres, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.whosWatching.description");
+    },
+
     settings,
     patches: [
         {
@@ -149,7 +160,7 @@ export default definePlugin({
                                 )}
                             />
                         </>
-                        : <Paragraph>No spectators</Paragraph>
+                        : <Paragraph>{t("plugin.whosWatching.modal.noSpectator")}</Paragraph>
                     }
                 </div>
             </>

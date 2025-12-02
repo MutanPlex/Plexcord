@@ -8568,6 +8568,19 @@
                     "description": "Reaksiyonlardaki avatarların tıklanabilirliğini aç/kapat"
                 }
             }
+        },
+        "whosWatching": {
+            "name": "WhosWatching",
+            "description": "Ekran paylaşımı simgesinin üzerine gelerek yayınızı izleyen kullanıcıları görüntüleyin",
+            "modal": {
+                "noSpectator": "İzleyici yok"
+            },
+            "option": {
+                "showPanel": {
+                    "label": "Paneli Göster",
+                    "description": "İzleyicileri ekran paylaşımı panelinin altında göster"
+                }
+            }
         }
     }
 }
