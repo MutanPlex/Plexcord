@@ -8550,6 +8550,14 @@
                     "description": "Görseller, bağlantılar ve sohbet giriş çubuğu için Discord bağlam menülerini geri ekle"
                 }
             }
+        },
+        "webKeybinds": {
+            "name": "WebKeybinds",
+            "description": "Discord’un web sürümünde eksik olan kısayol tuşlarını geri ekler: ctrl+t, ctrl+shift+t, ctrl+tab, ctrl+shift+tab, ctrl+1-9, ctrl+,. Tam olarak yalnızca Plextron/Legcord üzerinde çalışır, tarayıcı içinde çalışmaz."
+        },
+        "webScreenShareFixes": {
+            "name": "WebScreenShareFixes",
+            "description": "Chromium ve Plextron istemcilerindeki 2500 kbps ekran paylaşımı bitrate sınırını kaldırır."
         }
     }
 }

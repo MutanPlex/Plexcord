@@ -8550,6 +8550,14 @@
                     "description": "Add back the Discord context menus for images, links and the chat input bar"
                 }
             }
+        },
+        "webKeybinds": {
+            "name": "WebKeybinds",
+            "description": "Re-adds keybinds missing in the web version of Discord: ctrl+t, ctrl+shift+t, ctrl+tab, ctrl+shift+tab, ctrl+1-9, ctrl+,. Only works fully on Plextron/Legcord, not inside your browser"
+        },
+        "webScreenShareFixes": {
+            "name": "WebScreenShareFixes",
+            "description": "Removes 2500kbps bitrate cap on chromium and Plextron clients."
         }
     }
 }
