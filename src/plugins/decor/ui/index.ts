@@ -11,5 +11,5 @@ import { extractAndLoadChunksLazy, findByPropsLazy } from "@webpack";
 export const cl = classNameFactory("pc-decor-");
 export const DecorationModalStyles = findByPropsLazy("modalPreview", "modalCloseButton", "spinner", "modal");
 
-export const requireAvatarDecorationModal = extractAndLoadChunksLazy(["initialSelectedDecoration:", /initialSelectedDecoration:\i,.{0,300}Promise\.all/]);
+export const requireAvatarDecorationModal = extractAndLoadChunksLazy(["initialSelectedDecoration:", /initialSelectedDecoration:\i,.{0,200}onCloseModal:\i/]);
 export const requireCreateStickerModal = extractAndLoadChunksLazy(["stickerInspected]:"]);

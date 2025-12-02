@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs, PcDevs } from "@utils/constants";
@@ -26,6 +27,11 @@ export default definePlugin({
     description: "Allows you to change the speed of videos",
     authors: [Devs.Samwich, PcDevs.MutanPlex],
     settings,
+
+    get displayDescription() {
+        return t("plugin.videoSpeed.description");
+    },
+
     patches: [
         {
             find: /\.VIDEO\?\i\.videoControls:/,

@@ -6,14 +6,16 @@
  */
 
 import { t } from "@api/i18n";
+import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { User } from "@plexcord/discord-types";
+import alwaysExpandProfile from "@plugins/alwaysExpandProfile";
 import { Devs } from "@utils/constants";
 import { getCurrentChannel } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
-import { ContextMenuApi, Menu } from "@webpack/common";
+import { ContextMenuApi, Menu, UserStore } from "@webpack/common";
 
 interface UserProfileProps {
     popoutProps: Record<string, any>;
@@ -39,6 +41,10 @@ const AccountPanelContextMenu = ErrorBoundary.wrap(() => {
                 label={prioritizeServerProfile ? t("plugin.accountPanelServerProfile.context.account") : t("plugin.accountPanelServerProfile.context.server")}
                 disabled={getCurrentChannel()?.getGuildId() == null}
                 action={e => {
+                    if (isPluginEnabled(alwaysExpandProfile.name)) {
+                        const user = UserStore.getCurrentUser();
+                        return alwaysExpandProfile.openUserModal(user);
+                    }
                     openAlternatePopout = true;
                     accountPanelRef.current?.click();
                 }}
