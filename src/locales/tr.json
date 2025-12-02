@@ -8558,6 +8558,16 @@
         "webScreenShareFixes": {
             "name": "WebScreenShareFixes",
             "description": "Chromium ve Plextron istemcilerindeki 2500 kbps ekran paylaşımı bitrate sınırını kaldırır."
+        },
+        "whoReacted": {
+            "name": "WhoReacted",
+            "description": "Bir mesaja reaksiyon veren kullanıcıların avatarlarını gösterir",
+            "option": {
+                "avatarClick": {
+                    "label": "Avatar Tıklaması",
+                    "description": "Reaksiyonlardaki avatarların tıklanabilirliğini aç/kapat"
+                }
+            }
         }
     }
 }
