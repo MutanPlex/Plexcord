@@ -8428,6 +8428,29 @@
                     "description": "Engellediğiniz kullanıcıları loglama"
                 }
             }
+        },
+        "voiceChatUtilities": {
+            "name": "VoiceChatUtilities",
+            "description": "Bu eklenti, bir kanalın tamamında birden fazla işlem yapmanıza olanak tanır (taşıma, sessize alma, bağlantı kesme vb.) (ilk olarak dutake tarafından)",
+            "option": {
+                "waitAfter": {
+                    "label": "Eylemden Sonra Bekle",
+                    "description": "Beklemeden önce yapılacak API işlemi sayısı (rate limit'e yakalanmamak için)"
+                },
+                "waitSeconds": {
+                    "label": "Bekleme Süresi",
+                    "description": "Her işlem arasında beklenecek süre (saniye cinsinden)"
+                }
+            },
+            "context": {
+                "voiceTools": "Ses Araçları",
+                "disconnectAll": "Herkesin Bağlantısını Kes",
+                "muteAll": "Herkesi Sessize Al",
+                "unmuteAll": "Herkesi Sessizden Çıkar",
+                "deafenAll": "Herkesi Sağırlaştır",
+                "undeafenAll": "Herkesi Sağırlaştırmadan Çıkar",
+                "moveAll": "Herkesi Taşı"
+            }
         }
     }
 }

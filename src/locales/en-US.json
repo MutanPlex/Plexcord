@@ -8428,6 +8428,29 @@
                     "description": "Do not log blocked users"
                 }
             }
+        },
+        "voiceChatUtilities": {
+            "name": "VoiceChatUtilities",
+            "description": "This plugin allows you to perform multiple actions on an entire channel (move, mute, disconnect, etc.) (originally by dutake)",
+            "option": {
+                "waitAfter": {
+                    "label": "Wait After Action",
+                    "description": "Amount of API actions to perform before waiting (to avoid rate limits)"
+                },
+                "waitSeconds": {
+                    "label": "Wait Seconds",
+                    "description": "Time to wait between each action (in seconds)"
+                }
+            },
+            "context": {
+                "voiceTools": "Voice Tools",
+                "disconnectAll": "Disconnect All",
+                "muteAll": "Mute All",
+                "unmuteAll": "Unmute All",
+                "deafenAll": "Deafen All",
+                "undeafenAll": "Undeafen All",
+                "moveAll": "Move All"
+            }
         }
     }
 }

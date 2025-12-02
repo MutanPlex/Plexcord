@@ -6,6 +6,7 @@
  */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import type { Channel } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
@@ -66,14 +67,14 @@ const VoiceChannelContext: NavContextMenuPatchCallback = (children, { channel }:
         -1,
         0,
         <Menu.MenuItem
-            label="Voice Tools"
+            label={t("plugin.voiceChatUtilities.context.voiceTools")}
             key="voice-tools"
             id="voice-tools"
         >
             <Menu.MenuItem
                 key="voice-tools-disconnect-all"
                 id="voice-tools-disconnect-all"
-                label="Disconnect all"
+                label={t("plugin.voiceChatUtilities.context.disconnectAll")}
                 action={() => sendPatch(channel, {
                     channel_id: null,
                 })}
@@ -82,7 +83,7 @@ const VoiceChannelContext: NavContextMenuPatchCallback = (children, { channel }:
             <Menu.MenuItem
                 key="voice-tools-mute-all"
                 id="voice-tools-mute-all"
-                label="Mute all"
+                label={t("plugin.voiceChatUtilities.context.muteAll")}
                 action={() => sendPatch(channel, {
                     mute: true,
                 })}
@@ -91,7 +92,7 @@ const VoiceChannelContext: NavContextMenuPatchCallback = (children, { channel }:
             <Menu.MenuItem
                 key="voice-tools-unmute-all"
                 id="voice-tools-unmute-all"
-                label="Unmute all"
+                label={t("plugin.voiceChatUtilities.context.unmuteAll")}
                 action={() => sendPatch(channel, {
                     mute: false,
                 })}
@@ -100,7 +101,7 @@ const VoiceChannelContext: NavContextMenuPatchCallback = (children, { channel }:
             <Menu.MenuItem
                 key="voice-tools-deafen-all"
                 id="voice-tools-deafen-all"
-                label="Deafen all"
+                label={t("plugin.voiceChatUtilities.context.deafenAll")}
                 action={() => sendPatch(channel, {
                     deaf: true,
                 })}
@@ -109,14 +110,14 @@ const VoiceChannelContext: NavContextMenuPatchCallback = (children, { channel }:
             <Menu.MenuItem
                 key="voice-tools-undeafen-all"
                 id="voice-tools-undeafen-all"
-                label="Undeafen all"
+                label={t("plugin.voiceChatUtilities.context.undeafenAll")}
                 action={() => sendPatch(channel, {
                     deaf: false,
                 })}
             />
 
             <Menu.MenuItem
-                label="Move all"
+                label={t("plugin.voiceChatUtilities.context.moveAll")}
                 key="voice-tools-move-all"
                 id="voice-tools-move-all"
             >
@@ -140,14 +141,24 @@ const VoiceChannelContext: NavContextMenuPatchCallback = (children, { channel }:
 
 const settings = definePluginSettings({
     waitAfter: {
+        get label() {
+            return t("plugin.voiceChatUtilities.option.waitAfter.label");
+        },
+        get description() {
+            return t("plugin.voiceChatUtilities.option.waitAfter.description");
+        },
         type: OptionType.SLIDER,
-        description: "Amount of API actions to perform before waiting (to avoid rate limits)",
         default: 5,
         markers: makeRange(1, 20),
     },
     waitSeconds: {
+        get label() {
+            return t("plugin.voiceChatUtilities.option.waitSeconds.label");
+        },
+        get description() {
+            return t("plugin.voiceChatUtilities.option.waitSeconds.description");
+        },
         type: OptionType.SLIDER,
-        description: "Time to wait between each action (in seconds)",
         default: 2,
         markers: makeRange(1, 10, .5),
     }
@@ -157,6 +168,10 @@ export default definePlugin({
     name: "VoiceChatUtilities",
     description: "This plugin allows you to perform multiple actions on an entire channel (move, mute, disconnect, etc.) (originally by dutake)",
     authors: [Devs.D3SOX, PcDevs.MutanPlex],
+
+    get displayDescription() {
+        return t("plugin.voiceChatUtilities.description");
+    },
 
     settings,
 
