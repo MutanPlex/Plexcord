@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { copyToClipboard } from "@utils/clipboard";
 import { Devs } from "@utils/constants";
@@ -42,8 +43,13 @@ const settings = definePluginSettings({
     // This needs to be all in one setting because to enable any of these, we need to make Discord use their desktop context
     // menu handler instead of the web one, which breaks the other menus that aren't enabled
     addBack: {
+        get label() {
+            return t("plugin.webContextMenus.settings.addBack.label");
+        },
+        get description() {
+            return t("plugin.webContextMenus.settings.addBack.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Add back the Discord context menus for images, links and the chat input bar",
         default: false,
         restartNeeded: true,
         // Web slate menu has proper spellcheck suggestions and image context menu is also pretty good,
@@ -82,6 +88,10 @@ export default definePlugin({
     authors: [Devs.Ven],
     enabledByDefault: true,
     required: IS_PLEXTRON,
+
+    get displayDescription() {
+        return t("plugin.webContextMenus.description");
+    },
 
     settings,
 

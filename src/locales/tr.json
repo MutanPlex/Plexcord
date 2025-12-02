@@ -8507,6 +8507,49 @@
                     "description": "Ses Çarpanı"
                 }
             }
+        },
+        "wallpaperFree": {
+            "name": "WallpaperFree",
+            "description": "Eski DM duvar kâğıdı deneyinin yeniden yapımı; herhangi bir kanal, kullanıcı veya sunucu için arka plan resmi ayarlayın.",
+            "option": {
+                "globalDefault": {
+                    "label": "Genel Varsayılan",
+                    "description": "Tüm kanallar için genel bir varsayılan duvar kâğıdı ayarlayın."
+                },
+                "stylingTips": {
+                    "label": "Stil İpuçları"
+                }
+            },
+            "context": {
+                "setWallpaper": "Duvar Kâğıdı Ayarla",
+                "removeWallpaper": "Duvar Kâğıdını Kaldır"
+            },
+            "modal": {
+                "set": "Duvar kâğıdı ayarla",
+                "image": "Resim URL'si",
+                "cancel": "İptal",
+                "apply": "Uygula",
+                "global": {
+                    "set": "Genel bir duvar kâğıdı ayarla",
+                    "remove": "Genel varsayılan duvar kâğıdını kaldır",
+                    "reset": "Duvar kâğıdı verilerini sıfırla"
+                },
+                "web": {
+                    "info": "Yerel dosyaları, plexcord tema dizinine koyarak ve plexcord:///themes/filename.ext url'sini kullanarak kullanabilirsiniz.",
+                    "open": "Tema Dizini Aç",
+                    "quickCSS": "QuickCSS'i Aç"
+                }
+            }
+        },
+        "webContextMenus": {
+            "name": "WebContextMenus",
+            "description": "Discord’un web sürümünde eksik olan bağlam menülerini geri ekler: Bağlantılar ve Görseller (Bağlantıyı/Görseli Kopyala veya Aç), Metin Alanı (Kopyala, Kes, Yapıştır, Yazım Denetimi)",
+            "option": {
+                "addBack": {
+                    "label": "Geri Ekle",
+                    "description": "Görseller, bağlantılar ve sohbet giriş çubuğu için Discord bağlam menülerini geri ekle"
+                }
+            }
         }
     }
 }

@@ -8507,6 +8507,49 @@
                     "description": "Volume Multiplier"
                 }
             }
+        },
+        "wallpaperFree": {
+            "name": "WallpaperFree",
+            "description": "Recreation of the old DM wallpaper experiment; Set a background image for any channel, user or server.",
+            "option": {
+                "globalDefault": {
+                    "label": "Global Default",
+                    "description": "Set a global default wallpaper for all channels."
+                },
+                "stylingTips": {
+                    "label": "Styling Tips"
+                }
+            },
+            "context": {
+                "setWallpaper": "Set Wallpaper",
+                "removeWallpaper": "Remove Wallpaper"
+            },
+            "modal": {
+                "set": "Set wallpaper",
+                "image": "The image URL",
+                "cancel": "Cancel",
+                "apply": "Apply",
+                "global": {
+                    "set": "Set a global wallpaper",
+                    "remove": "Remove global default wallpaper",
+                    "reset": "Reset wallpaper data"
+                },
+                "web": {
+                    "info": "you can use local files by having them in the plexcord theme directory, and using the url plexcord:///themes/filename.ext",
+                    "open": "Open Theme Directory",
+                    "quickCSS": "Open QuickCSS"
+                }
+            }
+        },
+        "webContextMenus": {
+            "name": "WebContextMenus",
+            "description": "Re-adds context menus missing in the web version of Discord: Links & Images (Copy/Open Link/Image), Text Area (Copy, Cut, Paste, SpellCheck)",
+            "option": {
+                "addBack": {
+                    "label": "Add Back",
+                    "description": "Add back the Discord context menus for images, links and the chat input bar"
+                }
+            }
         }
     }
 }

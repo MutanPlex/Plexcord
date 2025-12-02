@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { WallpaperFreeStore } from "@plugins/wallpaperFree/store";
@@ -27,12 +28,12 @@ export function GlobalDefaultComponent() {
         <>
             <Button onClick={() => {
                 openModal(props => <SetWallpaperModal props={props} onSelect={setGlobal} initialUrl={WallpaperFreeStore.globalDefault} />);
-            }}>Set a global wallpaper</Button>
+            }}>{t("plugin.wallpaperFree.modal.global.set")}</Button>
 
             <Button
                 variant="dangerPrimary"
                 onClick={() => setGlobal(void 0)}
-            >Remove global default wallpaper</Button>
+            >{t("plugin.wallpaperFree.modal.global.remove")}</Button>
 
             <Button
                 variant="dangerPrimary"
@@ -40,7 +41,7 @@ export function GlobalDefaultComponent() {
                     // @ts-ignore
                     FluxDispatcher.dispatch({ type: "PC_WALLPAPER_FREE_RESET" });
                 }}
-            >Reset wallpaper data</Button>
+            >{t("plugin.wallpaperFree.modal.global.reset")}</Button>
         </>
     );
 }
@@ -69,16 +70,16 @@ export function TipsComponent() {
             {!IS_WEB && (
                 <>
                     <BaseText>
-                        you can use local files by having them in the plexcord theme directory, and using the url <code>plexcord:///themes/filename.ext</code>
+                        {t("plugin.wallpaperFree.modal.web.info")}
                     </BaseText>
                     <Button onClick={() => PlexcordNative.themes.openFolder()}>
-                        Open Theme Directory
+                        {t("plugin.wallpaperFree.modal.web.open")}
                     </Button>
                 </>
             )}
             {Parser.parse(makeCodeblock(tipText, "css"))}
             <Button onClick={() => PlexcordNative.quickCss.openEditor()}>
-                Open QuickCSS
+                {t("plugin.wallpaperFree.modal.web.quickCSS")}
             </Button>
         </div>
     );
