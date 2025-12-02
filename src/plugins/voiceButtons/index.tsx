@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { Flex } from "@components/Flex";
 import { User } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
@@ -19,6 +20,11 @@ export default definePlugin({
     description: "Quickly DM, mute, or deafen any user right from the voice-call panel.",
     authors: [PcDevs.nicola02nb, PcDevs.omaw],
     settings,
+
+    get displayDescription() {
+        return t("plugin.voiceButtons.description");
+    },
+
     patches: [
         {
             find: "\"avatarContainerClass\",\"userNameClassName\"",

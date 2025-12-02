@@ -8327,6 +8327,67 @@
                     "right": "Right Click to view the raw content."
                 }
             }
+        },
+        "voiceButtons": {
+            "name": "VoiceButtons",
+            "description": "Quickly DM, mute, or deafen any user right from the voice-call panel.",
+            "option": {
+                "showChatButton": {
+                    "label": "Show Chat Button",
+                    "description": "Whether you want to display the chat button"
+                },
+                "showMuteButton": {
+                    "label": "Show Mute Button",
+                    "description": "Whether you want to display the mute button"
+                },
+                "showDeafenButton": {
+                    "label": "Show Deafen Button",
+                    "description": "Whether you want to display the deafen button"
+                },
+                "muteSoundboard": {
+                    "label": "Mute Soundboard",
+                    "description": "Toggles their soundboard upon clicking deafen button."
+                },
+                "disableVideo": {
+                    "label": "Disable Video",
+                    "description": "Toggles their video upon clicking deafen button."
+                },
+                "useServer": {
+                    "label": "Use Server",
+                    "description": "Use server mute/deafen instead of local when you have permission."
+                },
+                "serverSelf": {
+                    "label": "Server Self",
+                    "description": "Deafen / Mute yourself on the server when using mute/deafen."
+                },
+                "showButtonsSelf": {
+                    "label": "Show Buttons on Self",
+                    "description": "Whether you want to display buttons for your own user. Same functionality as other button(s) except it'll open DMs panel and mute/deafen for yourself upon clicking button(s).",
+                    "display": "Display",
+                    "hide": "Hide",
+                    "disable": "Disable" 
+                },
+                "whichNameToShow": {
+                    "label": "Which Name to Show",
+                    "description": "Choose whether to show nickname or username in tooltip.",
+                    "global": "Global Name",
+                    "username": "Username",
+                    "both": "Both"
+                }
+            },
+            "tooltip":{
+                "navigate": "Navigate to DMs",
+                "open": "Open DMs with {{username}}",
+                "yourself": "yourself",
+                "serverMute": "Server Mute",
+                "serverDeafen": "Server Deafen",
+                "mute": "Mute",
+                "deafen": "Deafen",
+                "unmute": "Unmute",
+                "undeafen": "Undeafen",
+                "serverUnmute": "Server Unmute",
+                "serverUndeafen": "Server Undeafen"
+            }
         }
     }
 }

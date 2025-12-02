@@ -7,6 +7,7 @@
 
 import "./styles.css";
 
+import { t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Icon, User } from "@plexcord/discord-types";
 import { findComponentByCodeLazy, findStoreLazy } from "@webpack";
@@ -90,7 +91,7 @@ export function UserChatButton({ user }: { user: User; }) {
     return (
         <VoiceUserButton
             user={user}
-            tooltip={isCurrent ? "Navigate to DMs" : `Open DMs with ${getUserName(user)}`}
+            tooltip={isCurrent ? t("plugin.voiceButtons.tooltip.navigate") : t("plugin.voiceButtons.tooltip.open", { username: getUserName(user) })}
             icon={<ChatIcon size="sm" />}
             onClick={() => {
                 if (isCurrent) {
@@ -115,13 +116,13 @@ export function UserMuteButton({ user }: { user: User; }) {
     const isMuted = canServerMute ? isServerMuted : isLocalMuted;
     const color = isMuted ? "var(--status-danger)" : "var(--channels-default)";
 
-    const muteAction = canServerMute && (useServerMuteForSelf || !isCurrent) ? "Server Mute" : "Mute";
-    const tooltipAction = isMuted ? (canServerMute && (useServerMuteForSelf || !isCurrent) ? "Unserver Mute" : "Unmute") : muteAction;
+    const muteAction = canServerMute && (useServerMuteForSelf || !isCurrent) ? t("plugin.voiceButtons.tooltip.serverMute") : t("plugin.voiceButtons.tooltip.mute");
+    const tooltipAction = isMuted ? (canServerMute && (useServerMuteForSelf || !isCurrent) ? t("plugin.voiceButtons.tooltip.serverUnmute") : t("plugin.voiceButtons.tooltip.unmute")) : muteAction;
 
     return (
         <VoiceUserButton
             user={user}
-            tooltip={`${tooltipAction} ${isCurrent ? "yourself" : `${getUserName(user)}`}`}
+            tooltip={`${tooltipAction} ${isCurrent ? t("plugin.voiceButtons.tooltip.yourself") : `${getUserName(user)}`}`}
             icon={isCurrent ? <MuteIconSelf muted={isMuted} size="sm" color={color} /> : <MuteIconOther muted={isMuted} size="sm" color={color} />}
             onClick={() => {
                 if (canServerMute) {
@@ -161,13 +162,13 @@ export function UserDeafenButton({ user }: { user: User; }) {
     const isDeafened = canServerDeafen && (useServerDeafenForSelf || !isCurrent) ? isServerDeafened : isLocalDeafened;
     const color = isDeafened ? "var(--status-danger)" : "var(--channels-default)";
 
-    const deafenAction = canServerDeafen && (useServerDeafenForSelf || !isCurrent) ? "Server Deafen" : "Deafen";
-    const tooltipAction = isDeafened ? (canServerDeafen && (useServerDeafenForSelf || !isCurrent) ? "Unserver Deafen" : "Undeafen") : deafenAction;
+    const deafenAction = canServerDeafen && (useServerDeafenForSelf || !isCurrent) ? t("plugin.voiceButtons.tooltip.serverDeafen") : t("plugin.voiceButtons.tooltip.deafen");
+    const tooltipAction = isDeafened ? (canServerDeafen && (useServerDeafenForSelf || !isCurrent) ? t("plugin.voiceButtons.tooltip.serverUndeafen") : t("plugin.voiceButtons.tooltip.undeafen")) : deafenAction;
 
     return (
         <VoiceUserButton
             user={user}
-            tooltip={`${tooltipAction} ${isCurrent ? "yourself" : `${getUserName(user)}`}`}
+            tooltip={`${tooltipAction} ${isCurrent ? t("plugin.voiceButtons.tooltip.yourself") : `${getUserName(user)}`}`}
             icon={isCurrent ? <DeafenIconSelf muted={isDeafened} size="sm" color={color} /> : <DeafenIconOther muted={isDeafened} size="sm" color={color} />}
             onClick={() => {
                 if (canServerDeafen) {

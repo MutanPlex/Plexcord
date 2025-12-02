@@ -5,73 +5,123 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { OptionType } from "@utils/types";
 
 export const settings = definePluginSettings({
     showChatButton: {
+        get label() {
+            return t("plugin.voiceButtons.option.showChatButton.label");
+        },
+        get description() {
+            return t("plugin.voiceButtons.option.showChatButton.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Whether you want to display the chat button",
         restartNeeded: true,
     },
     showMuteButton: {
+        get label() {
+            return t("plugin.voiceButtons.option.showMuteButton.label");
+        },
+        get description() {
+            return t("plugin.voiceButtons.option.showMuteButton.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Whether you want to display the mute button",
         restartNeeded: true,
     },
     showDeafenButton: {
+        get label() {
+            return t("plugin.voiceButtons.option.showDeafenButton.label");
+        },
+        get description() {
+            return t("plugin.voiceButtons.option.showDeafenButton.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Whether you want to display the deafen button",
         restartNeeded: true,
     },
     muteSoundboard: {
+        get label() {
+            return t("plugin.voiceButtons.option.muteSoundboard.label");
+        },
+        get description() {
+            return t("plugin.voiceButtons.option.muteSoundboard.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Toggles their soundboard upon clicking deafen button.",
         restartNeeded: false,
     },
     disableVideo: {
+        get label() {
+            return t("plugin.voiceButtons.option.disableVideo.label");
+        },
+        get description() {
+            return t("plugin.voiceButtons.option.disableVideo.description");
+        },
         type: OptionType.BOOLEAN,
         default: true,
-        description: "Toggles their video upon clicking deafen button.",
         restartNeeded: false,
     },
     useServer: {
+        get label() {
+            return t("plugin.voiceButtons.option.useServer.label");
+        },
+        get description() {
+            return t("plugin.voiceButtons.option.useServer.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Use server mute/deafen instead of local when you have permission.",
         default: false,
         restartNeeded: false,
     },
     serverSelf: {
+        get label() {
+            return t("plugin.voiceButtons.option.serverSelf.label");
+        },
+        get description() {
+            return t("plugin.voiceButtons.option.serverSelf.description");
+        },
         type: OptionType.BOOLEAN,
-        description: "Deafen / Mute yourself on the server when using mute/deafen.",
         default: false,
         restartNeeded: false,
     },
     showButtonsSelf: {
+        get label() {
+            return t("plugin.voiceButtons.option.showButtonsSelf.label");
+        },
+        get description() {
+            return t("plugin.voiceButtons.option.showButtonsSelf.description");
+        },
         type: OptionType.SELECT,
         default: "display",
-        description: "Whether you want to display buttons for your own user. Same functionality as other button(s) except it'll open DMs panel and mute/deafen for yourself upon clicking button(s).",
         restartNeeded: true,
-        options: [
-            { label: "Display", value: "display" },
-            { label: "Hide", value: "hide" },
-            { label: "Disable", value: "disable" },
-        ],
+        get options() {
+            return [
+                { label: t("plugin.voiceButtons.option.showButtonsSelf.display"), value: "display" },
+                { label: t("plugin.voiceButtons.option.showButtonsSelf.hide"), value: "hide" },
+                { label: t("plugin.voiceButtons.option.showButtonsSelf.disable"), value: "disable" },
+            ];
+        },
     },
     whichNameToShow: {
+        get label() {
+            return t("plugin.voiceButtons.option.whichNameToShow.label");
+        },
+        get description() {
+            return t("plugin.voiceButtons.option.whichNameToShow.description");
+        },
         type: OptionType.SELECT,
         default: "both",
-        description: "Choose whether to show nickname or username in tooltip.",
         restartNeeded: false,
-        options: [
-            { label: "Global Name", value: "global" },
-            { label: "Default Username", value: "username" },
-            { label: "Both", value: "both" },
-        ],
+        get options() {
+            return [
+                { label: t("plugin.voiceButtons.option.whichNameToShow.global"), value: "global" },
+                { label: t("plugin.voiceButtons.option.whichNameToShow.username"), value: "username" },
+                { label: t("plugin.voiceButtons.option.whichNameToShow.both"), value: "both" },
+            ];
+        },
     }
 }, {
     useServer: {

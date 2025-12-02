@@ -8327,6 +8327,67 @@
                     "right": "Ham içeriği görüntülemek için Sağ Tık."
                 }
             }
+        },
+        "voiceButtons": {
+            "name": "VoiceButtons",
+            "description": "Sesli arama panelinden herhangi bir kullanıcıya hızlıca DM gönderin, sessize alın veya sağırlaştırın.",
+            "option": {
+                "showChatButton": {
+                    "label": "Sohbet Butonunu Göster",
+                    "description": "Sohbet butonunun gösterilip gösterilmeyeceği"
+                },
+                "showMuteButton": {
+                    "label": "Sessize Alma Butonunu Göster",
+                    "description": "Sessize alma butonunun gösterilip gösterilmeyeceği"
+                },
+                "showDeafenButton": {
+                    "label": "Sağırlaştırma Butonunu Göster",
+                    "description": "Sağırlaştırma butonunun gösterilip gösterilmeyeceği"
+                },
+                "muteSoundboard": {
+                    "label": "Soundboard'u Sessize Al",
+                    "description": "Sağırlaştırma butonuna tıklandığında kullanıcının soundboard'unu açıp kapatır."
+                },
+                "disableVideo": {
+                    "label": "Videoyu Devre Dışı Bırak",
+                    "description": "Sağırlaştırma butonuna tıklandığında kullanıcının videosunu açıp kapatır."
+                },
+                "useServer": {
+                    "label": "Sunucuyu Kullan",
+                    "description": "İzniniz varsa yerel yerine sunucu sessize alma/sağırlaştırmayı kullanır."
+                },
+                "serverSelf": {
+                    "label": "Sunucuda Kendini Sessize Al",
+                    "description": "Sessize alma/sağırlaştırma kullanıldığında kendinizi sunucuda sessize alır veya sağırlaştırır."
+                },
+                "showButtonsSelf": {
+                    "label": "Kendiniz için Butonları Göster",
+                    "description": "Kendi kullanıcınız için butonların gösterilip gösterilmeyeceği. Aynı işleve sahiptir; DM paneli açılır ve kendinizi sessize alır/sağırlaştırır.",
+                    "display": "Göster",
+                    "hide": "Gizle",
+                    "disable": "Devre Dışı"
+                },
+                "whichNameToShow": {
+                    "label": "Hangi İsim Görünsün",
+                    "description": "Araç ipuçlarında kullanıcı adı, global ad veya her ikisi gösterilsin mi?",
+                    "global": "Global İsim",
+                    "username": "Kullanıcı Adı",
+                    "both": "Her İkisi"
+                }
+            },
+            "tooltip": {
+                "navigate": "DM'lere git",
+                "open": "{{username}} ile DM aç",
+                "yourself": "kendin",
+                "serverMute": "Sunucuda Sessize Al",
+                "serverDeafen": "Sunucuda Sağırlaştır",
+                "mute": "Sessize Al",
+                "deafen": "Sağırlaştır",
+                "unmute": "Sessizden Çıkar",
+                "undeafen": "Sağırlaştırmadan Çıkar",
+                "serverUnmute": "Sunucuda Sessizden Çıkar",
+                "serverUndeafen": "Sunucuda Sağırlaştırmadan Çıkar"
+            }
         }
     }
 }
