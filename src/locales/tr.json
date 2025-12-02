@@ -8497,6 +8497,16 @@
                 "pause": "Kaydı duraklat",
                 "recording": "KAYIT YAPILIYOR"
             }
+        },
+        "volumeBooster": {
+            "name": "VolumeBooster",
+            "description": "Kullanıcı ve yayın ses seviyesini varsayılan maksimumun üzerine çıkarmanıza olanak tanır",
+            "option": {
+                "multiplier": {
+                    "label": "Çarpan",
+                    "description": "Ses Çarpanı"
+                }
+            }
         }
     }
 }
