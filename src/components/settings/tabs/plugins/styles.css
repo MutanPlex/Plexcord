@@ -172,10 +172,6 @@
     margin-bottom: 10px;
 }
 
-.pc-plugins-disable-warning {
-    margin-top: 10px;
-}
-
 .pc-plugins-disable-warning,
 .pc-plugin-modal-disable-warning {
     background-color: color-mix(in srgb, var(--button-danger-background) 10%, transparent) !important;
@@ -210,6 +206,7 @@
 
 .pc-modal-align-reset {
     align-self: end;
+    height: 45px;
 }
 
 .pc-modal-footer {
@@ -304,4 +301,8 @@
 
 .pc-plugins-ui-elements {
     margin-top: 16px;
+}
+
+.pc-plugins-language {
+    display: inline-flex;
 }

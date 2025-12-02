@@ -20,15 +20,16 @@
 import "./styles.css";
 
 import * as DataStore from "@api/DataStore";
-import { t } from "@api/i18n";
+import i18n, { SUPPORTED_LANGUAGES, t, useTranslation } from "@api/i18n";
 import { isPluginEnabled, stopPlugin } from "@api/PluginManager";
-import { useSettings } from "@api/Settings";
+import { Settings, useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Flex } from "@components/Flex";
 import { HeadingTertiary } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings";
@@ -62,6 +63,31 @@ export function showErrorToast(message: string) {
     });
 }
 
+function LanguageSelector() {
+    const { t, locale, isAutoDetect } = useTranslation();
+    const languageOptions = Object.entries(SUPPORTED_LANGUAGES).map(([code, info]) => ({
+        label: `${info.nativeName} (${info.name})`,
+        value: code
+    }));
+
+    const handleLocaleChange = (value: string) => {
+        i18n.setLocale(value, true);
+        Settings.language.locale = value;
+    };
+    return (
+        <div className={cl("language")}>
+            <Select
+                options={languageOptions}
+                serialize={v => v}
+                select={handleLocaleChange}
+                isSelected={v => v === locale}
+                closeOnSelect={true}
+                placeholder={t("settings.language.selector.placeholder")}
+            />
+        </div>
+    );
+}
+
 function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetCheckAndDo, enabledStockPlugins, totalStockPlugins, enabledUserPlugins, totalUserPlugins }) {
     return (
         <Card variant={required ? "warning" : "normal"} className={cl("info-card")}>
@@ -91,18 +117,20 @@ function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetC
                         />
                     </>
                 )}
-
-            {enabledPlugins.length > 0 && !required && (
-                <Button
-                    size="small"
-                    className={"pc-plugins-disable-warning pc-modal-align-reset"}
-                    onClick={() => {
-                        return openWarningModal(null, null, null, false, enabledPlugins.length, resetCheckAndDo);
-                    }}
-                >
-                    {t("plugins.restart.button.disableAll")}
-                </Button>
-            )}
+            <Flex justifyContent="space-between" alignItems="center" flexDirection="row" className={Margins.top16}>
+                <LanguageSelector />
+                {enabledPlugins.length > 0 && !required && (
+                    <Button
+                        size="small"
+                        className={"pc-plugins-disable-warning pc-modal-align-reset"}
+                        onClick={() => {
+                            return openWarningModal(null, null, null, false, enabledPlugins.length, resetCheckAndDo);
+                        }}
+                    >
+                        {t("plugins.restart.button.disableAll")}
+                    </Button>
+                )}
+            </Flex>
         </Card>
     );
 }
