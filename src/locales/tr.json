@@ -8388,6 +8388,46 @@
                 "serverUnmute": "Sunucuda Sessizden Çıkar",
                 "serverUndeafen": "Sunucuda Sağırlaştırmadan Çıkar"
             }
+        },
+        "voiceChannelLog": {
+            "name": "VoiceChannelLog",
+            "description": "Ses kanallarına kimlerin katıldığını ve ayrıldığını kaydeder",
+            "context": {
+                "view": "Kanal Loglarını Görüntüle"
+            },
+            "modal": {
+                "joined": "<#{{channel}}> kanalına katıldı",
+                "left": "<#{{channel}}> kanalından ayrıldı",
+                "movedTo": "<#{{channel}}> kanalına taşındı",
+                "movedFrom": "<#{{channel}}> kanalından taşındı",
+                "noLogs": "Gösterilecek log bulunmuyor.",
+                "logs": "{{channel}} logları"
+            },
+            "option": {
+                "mode": {
+                    "label": "Mod",
+                    "description": "Ses kanalı logunun nasıl gösterileceği",
+                    "menu": "Log menüsü",
+                    "associated": "Doğrudan ilgili sohbet kanalına logla",
+                    "both": "Hem sohbet kanalına hem log menüsüne logla"
+                },
+                "voiceChannelChatSelf": {
+                    "label": "Ses Kanalı Sohbeti (Kendiniz)",
+                    "description": "Kendi ses kanalı hareketlerinizi ses kanallarında loglayın"
+                },
+                "voiceChannelChatSilent": {
+                    "label": "Sessiz Ses Kanalı Sohbeti",
+                    "description": "Ses kanalı sohbetlerinde katılma/ayrılma/taşınma mesajları sessiz olur"
+                },
+                "voiceChannelChatSilentSelf": {
+                    "label": "Sessiz Ses Kanalı Sohbeti (Kendiniz)",
+                    "description": "Ses kanalındaysanız katılma/ayrılma/taşınma mesajları sessiz olur"
+                },
+                "ignoreBlockedUsers": {
+                    "label": "Engellenmiş Kullanıcıları Yoksay",
+                    "description": "Engellediğiniz kullanıcıları loglama"
+                }
+            }
         }
     }
 }

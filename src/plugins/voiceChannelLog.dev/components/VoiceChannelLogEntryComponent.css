@@ -40,3 +40,7 @@
     margin: auto 3px;
     margin-left: 15px;
 }
+
+.pc-voice-channel-log-empty {
+    color: var(--text-muted);
+}

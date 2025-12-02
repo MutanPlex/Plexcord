@@ -8388,6 +8388,46 @@
                 "serverUnmute": "Server Unmute",
                 "serverUndeafen": "Server Undeafen"
             }
+        },
+        "voiceChannelLog": {
+            "name": "VoiceChannelLog",
+            "description": "Logs who joins and leaves voice channels",
+            "context": {
+                "view": "View Channel Log"
+            },
+            "modal": {
+                "joined": "Joined <#{{channel}}>",
+                "left": "Left <#{{channel}}>",
+                "movedTo": "Moved to <#{{channel}}>",
+                "movedFrom": "Moved from <#{{channel}}>",
+                "noLogs": "No logs to display.",
+                "logs": "{{channel}} logs"
+            },
+            "option": {
+                "mode": {
+                    "label": "Mode",
+                    "description": "How to show the voice channel log",
+                    "menu": "Log menu",
+                    "associated": "Log to associated chat directly",
+                    "both": "Log to chat and log menu"
+                },
+                "voiceChannelChatSelf": {
+                    "label": "Voice Channel Chat Self",
+                    "description": "Log your own voice channel events in the voice channels"
+                },
+                "voiceChannelChatSilent": {
+                    "label": "Voice Channel Chat Silent",
+                    "description": "Join/leave/move messages in voice channel chats will be silent"
+                },
+                "voiceChannelChatSilentSelf": {
+                    "label": "Voice Channel Chat Silent Self",
+                    "description": "Join/leave/move messages in voice channel chats will be silent if you are in the voice channel"
+                },
+                "ignoreBlockedUsers": {
+                    "label": "Ignore Blocked Users",
+                    "description": "Do not log blocked users"
+                }
+            }
         }
     }
 }

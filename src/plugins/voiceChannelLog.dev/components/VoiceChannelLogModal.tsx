@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Channel } from "@plexcord/discord-types";
 import { getVcLogs, vcLogSubscribe } from "@plugins/voiceChannelLog.dev/logs";
@@ -46,7 +47,7 @@ export function VoiceChannelLogModal({ channel, props }: { channel: Channel; pro
             }
         }
     } else {
-        logElements.push(<div className={cl("empty")}>No logs to display.</div>);
+        logElements.push(<div className={cl("empty")}>{t("plugin.voiceChannelLog.modal.noLogs")}</div>);
     }
 
     return (
@@ -55,7 +56,7 @@ export function VoiceChannelLogModal({ channel, props }: { channel: Channel; pro
             size={ModalSize.LARGE}
         >
             <ModalHeader>
-                <BaseText className={cl("header")} size="lg" weight="semibold" style={{ flexGrow: 1 }}>{channel.name} logs</BaseText>
+                <BaseText className={cl("header")} size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t("plugin.voiceChannelLog.modal.logs", { channel: channel.name })}</BaseText>
                 <ModalCloseButton onClick={props.onClose} />
             </ModalHeader>
 
