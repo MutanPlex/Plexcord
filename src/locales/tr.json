@@ -8591,6 +8591,88 @@
                     "description": "Büyük harfe çevrilmemesi gereken ifadeler (virgülle ayırın)"
                 }
             }
+        },
+        "xSOverlay": {
+            "name": "XSOverlay",
+            "description": "Discord bildirimlerini VR ortamında kolay görüntüleme için XSOverlay'e iletir",
+            "notification": {
+                "call": {
+                    "title": "{{user}} seni arıyor.",
+                    "content": "Gelen arama"
+                },
+                "message": {
+                    "reply": " (yanıt)",
+                    "embed": " [embed] ",
+                    "onlyEmbed": "mesaj embed(leri) gönderdi",
+                    "sticker": " [sticker] ",
+                    "onlySticker": "bir çıkartma gönderdi",
+                    "image": "resim",
+                    "attachment": "ek"
+                },
+                "test": {
+                    "title": "Plexcord'dan selam!",
+                    "content": "Bu bir test bildirimidir! explode",
+                    "button": "Test bildirimi gönder"
+                }
+            },
+            "option": {
+                "webSocketPort": {
+                    "label": "WebSocket Portu",
+                    "description": "WebSocket portu"
+                },
+                "preferUDP": {
+                    "label": "UDP Tercih Et",
+                    "description": "XSOverlay'in eski sürümlerini kullanıyorsanız ve WebSocket ile bağlanamıyorsanız etkinleştirin. Bu ayar web üzerinde yok sayılır."
+                },
+                "botNotifications": {
+                    "label": "Bot Bildirimleri",
+                    "description": "Bot bildirimlerine izin ver"
+                },
+                "serverNotifications": {
+                    "label": "Sunucu Bildirimleri",
+                    "description": "Sunucu bildirimlerine izin ver"
+                },
+                "dmNotifications": {
+                    "label": "DM Bildirimleri",
+                    "description": "Özel mesaj bildirimlerine izin ver"
+                },
+                "groupDmNotifications": {
+                    "label": "Grup DM Bildirimleri",
+                    "description": "Grup DM bildirimlerine izin ver"
+                },
+                "callNotifications": {
+                    "label": "Arama Bildirimleri",
+                    "description": "Arama bildirimlerine izin ver"
+                },
+                "pingColor": {
+                    "label": "Ping Rengi",
+                    "description": "Kullanıcı etiketleme rengi"
+                },
+                "channelPingColor": {
+                    "label": "Kanal Ping Rengi",
+                    "description": "Kanal etiketleme rengi"
+                },
+                "soundPath": {
+                    "label": "Ses Yolu",
+                    "description": "Bildirim sesi (default/warning/error)"
+                },
+                "timeout": {
+                    "label": "Zaman Aşımı",
+                    "description": "Bildirim süresi (saniye)"
+                },
+                "lengthBasedTimeout": {
+                    "label": "Mesaj Uzunluk Tabanlı Süre",
+                    "description": "Süreyi mesaj uzunluğuna göre uzat"
+                },
+                "opacity": {
+                    "label": "Opaklık",
+                    "description": "Bildirim opaklığı"
+                },
+                "volume": {
+                    "label": "Ses",
+                    "description": "Ses seviyesi"
+                }
+            }
         }
     }
 }

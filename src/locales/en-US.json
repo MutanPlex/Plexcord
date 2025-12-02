@@ -8591,6 +8591,88 @@
                     "description": "Strings not to capitilise (seperate with a comma)"
                 }
             }
+        },
+        "xSOverlay": {
+            "name": "XSOverlay",
+            "description": "Forwards discord notifications to XSOverlay, for easy viewing in VR",
+            "notification": {
+                "call": {
+                    "title": "{{user}} is calling you.",
+                    "content": "Incoming call"
+                },
+                "message": {
+                    "reply": " (reply)",
+                    "embed": " [embed] ",
+                    "onlyEmbed": "sent message embed(s)",
+                    "sticker": " [sticker] ",
+                    "onlySticker": "sent a sticker",
+                    "image": "image",
+                    "attachment": "attachment"
+                },
+                "test": {
+                    "title": "Hello from Plexcord!",
+                    "content": "This is a test notification! explode",
+                    "button": "Send test notification"
+                }
+            },
+            "option": {
+                "webSocketPort": {
+                    "label": "WebSocket Port",
+                    "description": "Websocket port"
+                },
+                "preferUDP": {
+                    "label": "Prefer UDP",
+                    "description": "Enable if you use an older build of XSOverlay unable to connect through websockets. This setting is ignored on web."
+                },
+                "botNotifications": {
+                    "label": "Bot Notifications",
+                    "description": "Allow bot notifications"
+                },
+                "serverNotifications": {
+                    "label": "Server Notifications",
+                    "description": "Allow server notifications"
+                },
+                "dmNotifications": {
+                    "label": "DM Notifications",
+                    "description": "Allow Direct Message notifications"
+                },
+                "groupDmNotifications": {
+                    "label": "Group DM Notifications",
+                    "description": "Allow Group DM notifications"
+                },
+                "callNotifications": {
+                    "label": "Call Notifications",
+                    "description": "Allow call notifications"
+                },
+                "pingColor": {
+                    "label": "Ping Color",
+                    "description": "User mention color"
+                },
+                "channelPingColor": {
+                    "label": "Channel Ping Color",
+                    "description": "Channel mention color"
+                },
+                "soundPath": {
+                    "label": "Sound Path",
+                    "description": "Notification sound (default/warning/error)"
+                },
+                "timeout": {
+                    "label": "Timeout",
+                    "description": "Notification duration (secs)"
+                },
+                "lengthBasedTimeout": {
+                    "label": "Length Based Timeout",
+                    "description": "Extend duration with message length"
+                },
+                "opacity": {
+                    "label": "Opacity",
+                    "description": "Notification opacity"
+                },
+                "volume": {
+                    "label": "Volume",
+                    "description": "Volume"
+                }
+            }
         }
     }
 }
