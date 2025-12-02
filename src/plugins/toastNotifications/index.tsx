@@ -637,8 +637,8 @@ async function relationshipAdd(user: User, type: Number) {
     }
 
     if (type === RelationshipType.FRIEND) {
-        Notification.title = t("plugin.toastNotifications.friend.accept", { user: user.username });
-        Notification.body = t("plugin.toastNotifications.friend.acceptBody");
+        Notification.title = t("plugin.toastNotifications.notification.friend.accept", { user: user.username });
+        Notification.body = t("plugin.toastNotifications.notification.friend.acceptBody");
         Notification.onClick = () => switchChannels(null, user.id);
 
 
@@ -646,8 +646,8 @@ async function relationshipAdd(user: User, type: Number) {
 
     } else if (type === RelationshipType.INCOMING_REQUEST) {
 
-        Notification.title = t("plugin.toastNotifications.friend.request", { user: user.username });
-        Notification.body = t("plugin.toastNotifications.friend.requestBody");
+        Notification.title = t("plugin.toastNotifications.notification.friend.request", { user: user.username });
+        Notification.body = t("plugin.toastNotifications.notification.friend.requestBody");
         Notification.onClick = () => switchChannels(null, "");
 
         await showNotification(Notification);

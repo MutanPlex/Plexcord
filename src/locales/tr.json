@@ -8458,6 +8458,45 @@
             "context": {
                 "download": "Sesli mesajı indir"
             }
+        },
+        "voiceMessages": {
+            "name": "VoiceMessages",
+            "description": "Mobildeki gibi sesli mesaj göndermenize olanak tanır. Bunu yapmak için, yükleme butonuna sağ tıklayın ve 'Sesli Mesaj Gönder'i seçin.",
+            "option": {
+                "noiseSuppression": {
+                    "label": "Gürültü Engelleme",
+                    "description": "Gürültü Engelleme"
+                },
+                "echoCancellation": {
+                    "label": "Yankı Engelleme",
+                    "description": "Yankı Engelleme"
+                }
+            },
+            "notification": {
+                "failed": {
+                    "upload": "Sesli mesaj yüklenemedi.",
+                    "start": "Kayıt başlatılamadı.",
+                    "finish": "Kayıt tamamlanamadı."
+                }
+            },
+            "context": {
+                "sendVoiceMessage": "Sesli Mesaj Gönder",
+                "missingPermissions": "(İzin Eksik)"
+            },
+            "modal": {
+                "record": "Sesli Mesaj Kaydet",
+                "upload": "Dosya Yükle",
+                "preview": "Önizleme",
+                "failed": "Seçilen ses dosyası çözümlenemedi:",
+                "oggOpus": "Sesli mesajların iOS'ta oynatılabilmesi için OggOpus formatında olması gerekir. Bu dosya {{type}} formatında olduğu için iOS'ta oynatılamaz.",
+                "fix": "Bunu düzeltmek için, önce dosyayı OggOpus formatına dönüştürün. Örneğin {{link}} kullanabilirsiniz.",
+                "sending": "Sesli mesaj gönderiliyor... Lütfen bekleyin.",
+                "stop": "Kaydı durdur",
+                "start": "Kaydı başlat",
+                "resume": "Kaydı sürdür",
+                "pause": "Kaydı duraklat",
+                "recording": "KAYIT YAPILIYOR"
+            }
         }
     }
 }

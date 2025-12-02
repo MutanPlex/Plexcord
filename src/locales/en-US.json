@@ -8066,7 +8066,7 @@
             "option": {
                 "maxAccounts": {
                     "label": "Max Accounts",
-                    "description": "Number of accounts that can be added, or 0 for no limit" 
+                    "description": "Number of accounts that can be added, or 0 for no limit"
                 }
             }
         },
@@ -8365,7 +8365,7 @@
                     "description": "Whether you want to display buttons for your own user. Same functionality as other button(s) except it'll open DMs panel and mute/deafen for yourself upon clicking button(s).",
                     "display": "Display",
                     "hide": "Hide",
-                    "disable": "Disable" 
+                    "disable": "Disable"
                 },
                 "whichNameToShow": {
                     "label": "Which Name to Show",
@@ -8375,7 +8375,7 @@
                     "both": "Both"
                 }
             },
-            "tooltip":{
+            "tooltip": {
                 "navigate": "Navigate to DMs",
                 "open": "Open DMs with {{username}}",
                 "yourself": "yourself",
@@ -8457,6 +8457,45 @@
             "description": "Adds a download to voice messages. (Opens a new browser tab)",
             "context": {
                 "download": "Download voice message"
+            }
+        },
+        "voiceMessages": {
+            "name": "VoiceMessages",
+            "description": "Allows you to send voice messages like on mobile. To do so, right click the upload button and click Send Voice Message.",
+            "option": {
+                "noiseSuppression": {
+                    "label": "Noise Suppression",
+                    "description": "Noise Suppression"
+                },
+                "echoCancellation": {
+                    "label": "Echo Cancellation",
+                    "description": "Echo Cancellation"
+                }
+            },
+            "notification": {
+                "failed": {
+                    "upload": "Failed to upload voice message.",
+                    "start": "Failed to start recording.",
+                    "finish": "Failed to finish recording."
+                }
+            },
+            "context": {
+                "sendVoiceMessage": "Send Voice Message",
+                "missingPermissions": "(Missing Permissions)"
+            },
+            "modal": {
+                "record": "Record Voice Message",
+                "upload": "Upload File",
+                "preview": "Preview",
+                "failed": "Failed to parse selected audio file:",
+                "oggOpus": "Voice Messages have to be OggOpus to be playable on iOS. This file is {{type}} so it will not be playable on iOS.",
+                "fix": "To fix it, first convert it to OggOpus, for example using the {{link}}",
+                "sending": "Now sending voice message... Please be patient.",
+                "stop": "Stop recording",
+                "start": "Start recording",
+                "resume": "Resume recording",
+                "pause": "Pause recording",
+                "recording": "RECORDING"
             }
         }
     }
