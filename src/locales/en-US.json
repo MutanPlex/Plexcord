@@ -8581,6 +8581,16 @@
                     "description": "Show spectators under screenshare panel"
                 }
             }
+        },
+        "writeUpperCase": {
+            "name": "WriteUpperCase",
+            "description": "Changes the first Letter of each Sentence in Message Inputs to Uppercase",
+            "option": {
+                "blockedWords": {
+                    "label": "Blocked Words",
+                    "description": "Strings not to capitilise (seperate with a comma)"
+                }
+            }
         }
     }
 }

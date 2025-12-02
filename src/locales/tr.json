@@ -8581,6 +8581,16 @@
                     "description": "İzleyicileri ekran paylaşımı panelinin altında göster"
                 }
             }
+        },
+        "writeUpperCase": {
+            "name": "WriteUpperCase",
+            "description": "Mesaj girişlerinde her cümlenin ilk harfini büyük harfe çevirir",
+            "option": {
+                "blockedWords": {
+                    "label": "Engellenen Kelimeler",
+                    "description": "Büyük harfe çevrilmemesi gereken ifadeler (virgülle ayırın)"
+                }
+            }
         }
     }
 }
