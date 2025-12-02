@@ -8673,6 +8673,14 @@
                     "description": "Ses seviyesi"
                 }
             }
+        },
+        "youtubeAdblock": {
+            "name": "YouTubeAdblock",
+            "description": "YouTube yerleştirmelerindeki ve WatchTogether aktivitesindeki reklamları AdGuard ile engeller"
+        },
+        "youtubeDescription": {
+            "name": "YouTubeDescription",
+            "description": "YouTube video yerleştirmelerine açıklamalar ekler"
         }
     }
 }

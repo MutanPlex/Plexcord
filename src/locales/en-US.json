@@ -8673,6 +8673,14 @@
                     "description": "Volume"
                 }
             }
+        },
+        "youtubeAdblock": {
+            "name": "YouTubeAdblock",
+            "description": "Block ads in YouTube embeds and the WatchTogether activity via AdGuard"
+        },
+        "youtubeDescription": {
+            "name": "YouTubeDescription",
+            "description": "Adds descriptions to youtube video embeds"
         }
     }
 }
