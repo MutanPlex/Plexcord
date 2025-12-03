@@ -21,12 +21,12 @@ const settings = definePluginSettings({
         type: OptionType.SELECT,
         get options() {
             return [
-                { label: t("plugin.inviteDefaults.option.inviteDuration.30m"), value: 1800 },
-                { label: t("plugin.inviteDefaults.option.inviteDuration.1h"), value: 3600 },
-                { label: t("plugin.inviteDefaults.option.inviteDuration.6h"), value: 21600 },
-                { label: t("plugin.inviteDefaults.option.inviteDuration.12h"), value: 43200 },
-                { label: t("plugin.inviteDefaults.option.inviteDuration.1d"), value: 86400 },
-                { label: t("plugin.inviteDefaults.option.inviteDuration.7d"), value: 604800 },
+                { label: t("plugin.inviteDefaults.option.inviteDuration.thirtyMinutes"), value: 1800 },
+                { label: t("plugin.inviteDefaults.option.inviteDuration.oneHour"), value: 3600 },
+                { label: t("plugin.inviteDefaults.option.inviteDuration.sixHours"), value: 21600 },
+                { label: t("plugin.inviteDefaults.option.inviteDuration.twelveHours"), value: 43200 },
+                { label: t("plugin.inviteDefaults.option.inviteDuration.oneDay"), value: 86400 },
+                { label: t("plugin.inviteDefaults.option.inviteDuration.sevenDays"), value: 604800 },
                 { label: t("plugin.inviteDefaults.option.inviteDuration.forever"), value: 0, default: true },
             ];
         }

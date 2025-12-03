@@ -4194,12 +4194,12 @@
                 "inviteDuration": {
                     "label": "Davet Süresi",
                     "description": "Sunucu davetleri için varsayılan süre",
-                    "30m": "30 Dakika",
-                    "1h": "1 Saat",
-                    "6h": "6 Saat",
-                    "12h": "12 Saat",
-                    "1d": "1 Gün",
-                    "7d": "7 Gün",
+                    "thirtyMinutes": "30 Dakika",
+                    "oneHour": "1 Saat",
+                    "sixHours": "6 Saat",
+                    "twelveHours": "12 Saat",
+                    "oneDay": "1 Gün",
+                    "sevenDays": "7 Gün",
                     "forever": "Süresiz"
                 },
                 "maxUses": {
@@ -6050,11 +6050,11 @@
                     "minute": "Dakika",
                     "hours": "Saat",
                     "hour": "Saat",
-                    "30minutes": "30 Dakika",
-                    "1hour": "1 Saat",
-                    "3hours": "3 Saat",
-                    "6hours": "6 Saat",
-                    "12hours": "12 Saat",
+                    "thirtyMinutes": "30 Dakika",
+                    "oneHour": "1 Saat",
+                    "threeHours": "3 Saat",
+                    "sixHours": "6 Saat",
+                    "twelveHours": "12 Saat",
                     "customSound": "ÖZEL SES"
                 },
                 "disableOptions": {

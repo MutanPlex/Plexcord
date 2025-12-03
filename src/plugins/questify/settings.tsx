@@ -1286,11 +1286,11 @@ function FetchingQuestsSetting(): JSX.Element {
 
     const resolvedIntervals: SelectOption[] = [
         { value: 0, label: t("plugin.questify.settings.fetchingQuests.disabled") },
-        { value: 60 * 30, label: t("plugin.questify.settings.fetchingQuests.30minutes") },
-        { value: 60 * 60, label: t("plugin.questify.settings.fetchingQuests.1hour") },
-        { value: 60 * 60 * 2, label: t("plugin.questify.settings.fetchingQuests.3hours") },
-        { value: 60 * 60 * 4, label: t("plugin.questify.settings.fetchingQuests.6hours") },
-        { value: 60 * 60 * 6, label: t("plugin.questify.settings.fetchingQuests.12hours") },
+        { value: 60 * 30, label: t("plugin.questify.settings.fetchingQuests.thirtyMinutes") },
+        { value: 60 * 60, label: t("plugin.questify.settings.fetchingQuests.oneHour") },
+        { value: 60 * 60 * 2, label: t("plugin.questify.settings.fetchingQuests.threeHours") },
+        { value: 60 * 60 * 4, label: t("plugin.questify.settings.fetchingQuests.sixHours") },
+        { value: 60 * 60 * 6, label: t("plugin.questify.settings.fetchingQuests.twelveHours") },
     ];
 
     const resolvedSounds: SelectOption[] = defaultAudioNames().map(sound => {

@@ -4194,12 +4194,12 @@
                 "inviteDuration": {
                     "label": "Invite Duration",
                     "description": "Default duration for server invites",
-                    "30m": "30 Minutes",
-                    "1h": "1 Hour",
-                    "6h": "6 Hours",
-                    "12h": "12 Hours",
-                    "1d": "1 Day",
-                    "7d": "7 Days",
+                    "thirtyMinutes": "30 Minutes",
+                    "oneHour": "1 Hour",
+                    "sixHours": "6 Hours",
+                    "twelveHours": "12 Hours",
+                    "oneDay": "1 Day",
+                    "sevenDays": "7 Days",
                     "forever": "Forever"
                 },
                 "maxUses": {
@@ -6050,11 +6050,11 @@
                     "minute": "Minute",
                     "hours": "Hours",
                     "hour": "Hour",
-                    "30minutes": "30 Minutes",
-                    "1hour": "1 Hour",
-                    "3hours": "3 Hours",
-                    "6hours": "6 Hours",
-                    "12hours": "12 Hours",
+                    "thirtyMinutes": "30 Minutes",
+                    "oneHour": "1 Hour",
+                    "threeHours": "3 Hours",
+                    "sixHours": "6 Hours",
+                    "twelveHours": "12 Hours",
                     "customSound": "CUSTOM SOUND"
                 },
                 "disableOptions": {
