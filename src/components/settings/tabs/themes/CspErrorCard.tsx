@@ -72,7 +72,7 @@ export function CspErrorCard() {
                         {i !== 0 && <Divider className={Margins.bottom8} />}
                         <div className="pc-settings-csp-row">
                             <Link href={url}>{url}</Link>
-                            <Button variant="primary" onClick={() => allowUrl(url)} disabled={isImgurHtmlDomain(url)}>
+                            <Button variant="secondary" onClick={() => allowUrl(url)} disabled={isImgurHtmlDomain(url)}>
                                 {t(csp.blocked.allow)}
                             </Button>
                         </div>

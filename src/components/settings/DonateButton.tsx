@@ -22,13 +22,14 @@ import { Button } from "@components/Button";
 import { Heart } from "@components/Heart";
 
 export default function DonateButton({
-    variant = "overlayPrimary",
     ...props
 }) {
     return (
         <Button
             {...props}
             variant="overlayPrimary"
+            size="medium"
+            type="button"
             onClick={() => PlexcordNative.native.openExternal("https://github.com/sponsors/MutanPlex")}
             className="pc-donate-button"
         >

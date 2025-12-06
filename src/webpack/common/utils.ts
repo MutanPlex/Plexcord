@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-
 import type * as t from "@plexcord/discord-types";
 import { _resolveReady, filters, findByCodeLazy, findByPropsLazy, findLazy, mapMangledModuleLazy, waitFor } from "@webpack";
+import type * as TSPattern from "ts-pattern";
 
 
 export let FluxDispatcher: t.FluxDispatcher;
@@ -53,8 +53,10 @@ export const useDrag = findByCodeLazy("useDrag::spec.begin was deprecated");
 // you cant make a better finder i love that they remove display names sm
 export const useDrop = findByCodeLazy(".options);return", ".collect,");
 
-export const { match }: { match: typeof import("ts-pattern").match; } = mapMangledModuleLazy("@ts-pattern/matcher", { match: filters.byCode("return new") });
-export const { P } = mapMangledModuleLazy("@ts-pattern/matcher", { P: filters.byProps("when") });
+export const { match, P }: Pick<typeof TSPattern, "match" | "P"> = mapMangledModuleLazy("@ts-pattern/matcher", {
+    match: filters.byCode("return new"),
+    P: filters.byProps("when")
+});
 
 export const lodash: typeof import("lodash") = findByPropsLazy("debounce", "cloneDeep");
 

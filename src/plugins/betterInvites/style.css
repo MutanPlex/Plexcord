@@ -24,7 +24,7 @@ h3[class^="h5"]:has([class="pc-bi-header-inner"]) {
 .pc-bi-header-text {
     flex: 1;
     white-space: normal;
-    color: var(--text-secondary);
+    color: var(--text-subtle);
 }
 
 .pc-bi-tooltip-icon {

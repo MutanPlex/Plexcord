@@ -17,5 +17,5 @@
 /* Light color in dark theme */
 .theme-dark .pc-color-bg.pc-color-bg-invert,
 .theme-light .pc-color-bg:not(.pc-color-bg-invert) {
-    color: var(--background-secondary);
+    color: var(--background-secondary-alt);
 }

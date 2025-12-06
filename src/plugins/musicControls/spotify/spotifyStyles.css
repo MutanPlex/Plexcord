@@ -149,7 +149,7 @@
 }
 
 .pc-spotify-comma {
-    color: var(--header-secondary);
+    color: var(--text-default);
 }
 
 .pc-spotify-artist[role="link"]:hover,

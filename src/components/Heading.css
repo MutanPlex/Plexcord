@@ -7,7 +7,7 @@
 .pc-h3,
 .pc-h4,
 .pc-h5 {
-    color: var(--header-secondary);
+    color: var(--text-default);
 }
 
 .pc-h1 {

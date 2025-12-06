@@ -46,14 +46,25 @@ export async function importSettings(data: string) {
 
     if ("dataStore" in parsed) await DataStore.setMany(parsed.dataStore);
 
+    if (parsed.dataStore) await DataStore.setMany(parsed.dataStore);
+
     if (!("settings" in parsed || "quickCss" in parsed || "dataStore" in parsed)) throw new Error(t(sync.error.invalid));
 }
 
-export async function exportSettings({ minify }: { minify?: boolean; } = {}) {
+export async function exportSettings({ syncDataStore = true, minify }: { syncDataStore?: boolean; minify?: boolean; }) {
     const settings = PlexcordNative.settings.get();
     const quickCss = await PlexcordNative.quickCss.get();
-    const dataStore = await DataStore.entries();
-    return JSON.stringify({ settings, quickCss, dataStore }, null, minify ? undefined : 4);
+    const dataStore = syncDataStore ? await DataStore.entries() : undefined;
+
+    return JSON.stringify(
+        {
+            settings,
+            quickCss,
+            ...(syncDataStore && { dataStore })
+        },
+        null,
+        minify ? undefined : 4
+    );
 }
 
 export async function exportPlugins({ minify }: { minify?: boolean; } = {}) {

@@ -38,7 +38,7 @@
 }
 
 .pc-github-repos-header {
-    color: var(--header-secondary);
+    color: var(--text-default);
     display: flex;
     justify-content: space-between;
 }
@@ -208,7 +208,7 @@
 }
 
 .pc-github-repos-loading {
-    color: var(--header-secondary);
+    color: var(--text-default);
 }
 
 .pc-github-repos-count {

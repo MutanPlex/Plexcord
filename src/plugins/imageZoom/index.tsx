@@ -450,7 +450,7 @@ export default definePlugin({
             .pc-image-metadata {
                 padding: 8px;
                 margin: 6px 0;
-                background-color: var(--background-secondary);
+                background-color: var(--background-secondary-alt);
                 border-radius: 4px;
                 font-size: 14px;
                 color: var(--text-default);
