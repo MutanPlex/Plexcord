@@ -6,7 +6,7 @@
  */
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption } from "@api/Commands";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import { sendMessage } from "@utils/discord";
@@ -32,12 +32,8 @@ function makeFreaky(text: string) {
 
 const settings = definePluginSettings({
     addFreakyEnding: {
-        get label() {
-            return t("plugin.freaky.option.addFreakyEnding.label");
-        },
-        get description() {
-            return t("plugin.freaky.option.addFreakyEnding.description");
-        },
+        label: () => t(plugin.freaky.option.addFreakyEnding.label),
+        description: () => t(plugin.freaky.option.addFreakyEnding.description),
         type: OptionType.BOOLEAN,
         default: true
     }
@@ -45,28 +41,18 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "Freaky",
-    description: "Allows you to send your message in a weird font using the /freaky command.",
+    description: () => t(plugin.freaky.description),
     authors: [PcDevs.nyx, PcDevs.MutanPlex],
     settings,
-
-    get displayDescription() {
-        return t("plugin.freaky.description");
-    },
 
     commands: [
         {
             name: "freaky",
-            description: "It's freaky.",
-            get displayDescription() {
-                return t("plugin.freaky.command.freaky");
-            },
+            description: () => t(plugin.freaky.command.freaky),
             inputType: ApplicationCommandInputType.BUILT_IN,
             options: [{
                 name: "message",
-                description: "Make your message freaky",
-                get displayDescription() {
-                    return t("plugin.freaky.command.message");
-                },
+                description: () => t(plugin.freaky.command.message),
                 type: ApplicationCommandOptionType.STRING,
                 required: true
             }],

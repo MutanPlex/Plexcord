@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { settings } from "@plugins/musicControls/settings";
 import { getLyrics, lyricFetchers, providers, updateLyrics } from "@plugins/musicControls/spotify/lyrics/api";
@@ -80,7 +80,7 @@ export const SpotifyLrcStore = proxyLazyWebpack(() => {
                     providers.map(p => currentInfo?.lyricsVersions[p]).find(Boolean);
 
                 if (!originalLyrics || !currentInfo) {
-                    showNotif(t("plugin.musicControls.alert.noLyrics"), `${t("plugin.musicControls.alert.noLyricsTo", { translated: provider === Provider.Translated ? t("plugin.musicControls.alert.translate") : t("plugin.musicControls.alert.romanize") })}`);
+                    showNotif(t(plugin.musicControls.alert.noLyrics), `${t(plugin.musicControls.alert.noLyricsTo, { translated: provider === Provider.Translated ? t(plugin.musicControls.alert.translate) : t(plugin.musicControls.alert.romanize) })}`);
                     return;
                 }
 
@@ -101,7 +101,7 @@ export const SpotifyLrcStore = proxyLazyWebpack(() => {
                 const fetchResult = await lyricsAlternativeFetchers[provider](originalLyrics);
 
                 if (!fetchResult) {
-                    showNotif(t("plugin.musicControls.alert.lyricsFetchFailed"), `${t("plugin.musicControls.alert.failedToFetchLyrics", { translated: provider === Provider.Translated ? t("plugin.musicControls.alert.translation") : t("plugin.musicControls.alert.romanization") })}`);
+                    showNotif(t(plugin.musicControls.alert.lyricsFetchFailed), `${t(plugin.musicControls.alert.failedToFetchLyrics, { translated: provider === Provider.Translated ? t(plugin.musicControls.alert.translation) : t(plugin.musicControls.alert.romanization) })}`);
                     return;
                 }
 
@@ -122,7 +122,7 @@ export const SpotifyLrcStore = proxyLazyWebpack(() => {
 
             const newLyricsInfo = await lyricFetchers[e.provider](track);
             if (!newLyricsInfo) {
-                showNotif(t("plugin.musicControls.alert.lyricsFetchFailed"), `${t("plugin.musicControls.alert.failedToFetchTranslation", { translated: e.provider })}`);
+                showNotif(t(plugin.musicControls.alert.lyricsFetchFailed), `${t(plugin.musicControls.alert.failedToFetchTranslation, { translated: e.provider })}`);
                 return;
             }
 

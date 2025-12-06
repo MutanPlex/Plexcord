@@ -6,7 +6,7 @@
  */
 
 import { ApplicationCommandOptionType, findOption } from "@api/Commands";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -43,22 +43,14 @@ const searchEngines = {
 
 const settings = definePluginSettings({
     hyperlink: {
-        get label() {
-            return t("plugin.googleThat.option.hyperlink.label");
-        },
-        get description() {
-            return t("plugin.googleThat.option.hyperlink.description");
-        },
+        label: () => t(plugin.googleThat.option.hyperlink.label),
+        description: () => t(plugin.googleThat.option.hyperlink.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     defaultEngine: {
-        get label() {
-            return t("plugin.googleThat.option.defaultEngine.label");
-        },
-        get description() {
-            return t("plugin.googleThat.option.defaultEngine.description");
-        },
+        label: () => t(plugin.googleThat.option.defaultEngine.label),
+        description: () => t(plugin.googleThat.option.defaultEngine.description),
         type: OptionType.SELECT,
         options: Object.keys(searchEngines).map((key, index) => ({
             label: key,
@@ -67,12 +59,8 @@ const settings = definePluginSettings({
         }))
     },
     customEngineURL: {
-        get label() {
-            return t("plugin.googleThat.option.customEngineURL.label");
-        },
-        get description() {
-            return t("plugin.googleThat.option.customEngineURL.description");
-        },
+        label: () => t(plugin.googleThat.option.customEngineURL.label),
+        description: () => t(plugin.googleThat.option.customEngineURL.description),
         type: OptionType.STRING,
         placeholder: ""
     }
@@ -80,29 +68,19 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "GoogleThat",
-    description: "Adds a command to send a internet search link",
+    description: () => t(plugin.googleThat.description),
     authors: [Devs.Samwich, PcDevs.KrystalSkull, PcDevs.MutanPlex],
     tags: ["search", "google", "query", "duckduckgo", "command"],
     settings,
 
-    get displayDescription() {
-        return t("plugin.googleThat.description");
-    },
-
     commands: [
         {
             name: "googlethat",
-            description: "Send a search engine link",
-            get displayDescription() {
-                return t("plugin.googleThat.command.googleThat.description");
-            },
+            description: () => t(plugin.googleThat.command.googleThat.description),
             options: [
                 {
                     name: "input",
-                    description: "The search query",
-                    get displayDescription() {
-                        return t("plugin.googleThat.command.googleThat.query");
-                    },
+                    description: () => t(plugin.googleThat.command.googleThat.query),
                     type: ApplicationCommandOptionType.STRING,
                     required: true,
                 }

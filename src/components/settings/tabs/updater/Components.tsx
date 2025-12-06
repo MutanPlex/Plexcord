@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t, tJsx } from "@api/i18n";
+import { t, updater } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { ErrorCard } from "@components/ErrorCard";
@@ -64,7 +64,7 @@ export function Newer(props: CommonProps) {
     return (
         <>
             <Paragraph className={Margins.bottom8}>
-                {t("updater.github.local")}
+                {t(updater.github.local)}
             </Paragraph>
             <Changes {...props} updates={changes} />
         </>
@@ -82,16 +82,16 @@ export function Updatable(props: CommonProps) {
         <>
             {!updates && updateError ? (
                 <>
-                    <Paragraph>{t("updater.error.check")}</Paragraph>
+                    <Paragraph>{t(updater.error.check)}</Paragraph>
                     <ErrorCard style={{ padding: "1em" }}>
-                        <p>{updateError.stderr || updateError.stdout || t("updater.error.occurred")}</p>
+                        <p>{updateError.stderr || updateError.stdout || t(updater.error.occurred)}</p>
                     </ErrorCard>
                 </>
             ) : (
                 <Paragraph className={Margins.bottom8}>
-                    {isOutdated ? (updates.length === 1 ? t("updater.available") : tJsx("updater.available_plural", {
+                    {isOutdated ? (updates.length === 1 ? t(updater.available) : t(updater.available_plural, {
                         count: updates.length
-                    })) : t("updater.current")}
+                    })) : t(updater.current)}
                 </Paragraph>
             )}
 
@@ -108,10 +108,10 @@ export function Updatable(props: CommonProps) {
 
                                 await new Promise<void>(r => {
                                     Alerts.show({
-                                        title: t("updater.successful.title"),
-                                        body: t("updater.successful.body"),
-                                        confirmText: t("updater.successful.button.confirm"),
-                                        cancelText: t("updater.successful.button.cancel"),
+                                        title: t(updater.successful.title),
+                                        body: t(updater.successful.body),
+                                        confirmText: t(updater.successful.button.confirm),
+                                        cancelText: t(updater.successful.button.cancel),
                                         onConfirm() {
                                             relaunch();
                                             r();
@@ -122,7 +122,7 @@ export function Updatable(props: CommonProps) {
                             }
                         })}
                     >
-                        {t("updater.successful.button.update")}
+                        {t(updater.successful.button.update)}
                     </Button>
                 )}
                 <Button
@@ -137,7 +137,7 @@ export function Updatable(props: CommonProps) {
                             setUpdates([]);
 
                             Toasts.show({
-                                message: t("updater.successful.noFound"),
+                                message: t(updater.successful.noFound),
                                 id: Toasts.genId(),
                                 type: Toasts.Type.MESSAGE,
                                 options: {
@@ -147,7 +147,7 @@ export function Updatable(props: CommonProps) {
                         }
                     })}
                 >
-                    {t("updater.successful.button.check")}
+                    {t(updater.successful.button.check)}
                 </Button>
             </Flex>
         </>

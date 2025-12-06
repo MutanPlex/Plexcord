@@ -20,7 +20,7 @@
 import "./PluginModal.css";
 
 import { generateId } from "@api/Commands";
-import { t, tJsx, useForceUpdateOnLocaleChange } from "@api/i18n";
+import { plugins, t, useForceUpdateOnLocaleChange } from "@api/i18n";
 import { Settings, useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
@@ -51,6 +51,10 @@ const cl = classNameFactory("pc-plugin-modal-");
 const AvatarStyles = findByPropsLazy("moreUsers", "emptyUser", "avatarContainer", "clickableAvatar");
 const UserRecord: Constructor<Partial<User>> = proxyLazy(() => UserStore.getCurrentUser().constructor) as any;
 
+function getName(name: string | (() => string)): string {
+    return typeof name === "function" ? name() : name;
+}
+
 interface PluginModalProps extends ModalProps {
     plugin: Plugin;
     onRestartNeeded(key: string): void;
@@ -73,11 +77,15 @@ export function makeDummyUser(user: { username: string; id?: string; avatar?: st
 
 export default function PluginModal({ plugin, onRestartNeeded, onClose, transitionState }: PluginModalProps) {
 
-    const pluginSettings = useSettings([`plugins.${plugin.name}.*`]).plugins[plugin.name];
+    const pluginName = getName(plugin.name);
+    const pluginSettings = useSettings([`plugins.${pluginName}.*`]).plugins[pluginName];
     useForceUpdateOnLocaleChange();
 
-    const displayName = (plugin as any).displayName || plugin.name;
-    const displayDescription = (plugin as any).displayDescription || plugin.description;
+    const displayName = (plugin as any).displayName || pluginName;
+    const rawDisplayDescription = (plugin as any).displayDescription;
+    const displayDescription = rawDisplayDescription
+        ? (typeof rawDisplayDescription === "function" ? rawDisplayDescription() : rawDisplayDescription)
+        : (typeof plugin.description === "function" ? plugin.description() : plugin.description);
 
     const hasSettings = Boolean(pluginSettings && plugin.options && !isObjectEmpty(plugin.options));
     const [authors, setAuthors] = useState<Partial<User>[]>([]);
@@ -106,7 +114,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
 
     function renderSettings() {
         if (!hasSettings || !plugin.options)
-            return <Paragraph>{t("plugins.pluginModal.noSettings")}</Paragraph>;
+            return <Paragraph>{t(plugins.pluginModal.noSettings)}</Paragraph>;
 
         const options = Object.entries(plugin.options).map(([key, setting]) => {
             if (setting.type === OptionType.CUSTOM || setting.hidden) return null;
@@ -159,7 +167,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
         );
     }
 
-    const pluginMeta = PluginMeta[plugin.name];
+    const pluginMeta = PluginMeta[pluginName];
 
     return (
         <ModalRoot transitionState={transitionState} size={ModalSize.MEDIUM}>
@@ -174,17 +182,17 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                         {!pluginMeta.userPlugin && (
                             <div className="pc-settings-modal-links">
                                 <WebsiteButton
-                                    text={t("plugins.pluginModal.info")}
+                                    text={t(plugins.pluginModal.info)}
                                     href={`https://plexcord.club/plugins/${plugin.name}`}
                                 />
                                 <GithubButton
-                                    text={t("plugins.pluginModal.source")}
+                                    text={t(plugins.pluginModal.source)}
                                     href={`https://github.com/${gitRemote}/tree/main/src/plugins/${pluginMeta.folderName}`}
                                 />
                             </div>
                         )}
                     </Flex>
-                    <BaseText size="lg" weight="semibold" className={classes(Margins.top8, Margins.bottom8)}>{t("plugins.pluginModal.authors")}</BaseText>
+                    <BaseText size="lg" weight="semibold" className={classes(Margins.top8, Margins.bottom8)}>{t(plugins.pluginModal.authors)}</BaseText>
                     <div style={{ width: "fit-content" }}>
                         <ErrorBoundary noop>
                             <UserSummaryItem
@@ -214,14 +222,14 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                 {!!plugin.settingsAboutComponent && (
                     <div className={Margins.top16}>
                         <section>
-                            <ErrorBoundary message={t("plugins.error.infoRender")}>
+                            <ErrorBoundary message={t(plugins.error.infoRender)}>
                                 <plugin.settingsAboutComponent />
                             </ErrorBoundary>
                         </section>
                     </div>
                 )}
                 <section>
-                    <BaseText size="lg" weight="semibold" className={classes(Margins.top16, Margins.bottom8)}>{t("plugins.pluginModal.settings")}</BaseText>
+                    <BaseText size="lg" weight="semibold" className={classes(Margins.top16, Margins.bottom8)}>{t(plugins.pluginModal.settings)}</BaseText>
                     {renderSettings()}
                 </section>
             </ModalContent>;
@@ -229,7 +237,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                 hasSettings && <ModalFooter>
                     <Flex flexDirection="column" style={{ width: "100%" }}>
                         <Flex style={{ justifyContent: "space-between" }}>
-                            <Tooltip text={t("plugins.restart.resetDefault")} shouldShow={!isObjectEmpty(pluginSettings)}>
+                            <Tooltip text={t(plugins.restart.resetDefault)} shouldShow={!isObjectEmpty(pluginSettings)}>
                                 {({ onMouseEnter, onMouseLeave }) => (
                                     <Button
                                         size="small"
@@ -237,7 +245,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                                         onMouseEnter={onMouseEnter}
                                         onMouseLeave={onMouseLeave}
                                     >
-                                        {t("plugins.restart.button.reset")}
+                                        {t(plugins.restart.button.reset)}
                                     </Button>
                                 )}
                             </Tooltip>
@@ -250,18 +258,19 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
 }
 
 export function openPluginModal(plugin: Plugin, onRestartNeeded?: (pluginName: string, key: string) => void) {
+    const pluginName = getName(plugin.name);
     openModal(modalProps => (
         <PluginModal
             {...modalProps}
             plugin={plugin}
-            onRestartNeeded={(key: string) => onRestartNeeded?.(plugin.name, key)}
+            onRestartNeeded={(key: string) => onRestartNeeded?.(pluginName, key)}
         />
     ));
 }
 
 function resetSettings(plugin: Plugin, warningModalProps?: ModalProps, pluginModalProps?: ModalProps, onRestartNeeded?: (pluginName: string) => void) {
     const defaultSettings = plugin.settings?.def;
-    const pluginName = plugin.name;
+    const pluginName = getName(plugin.name);
 
     if (!defaultSettings) {
         console.error(`No default settings found for ${pluginName}`);
@@ -295,11 +304,11 @@ function resetSettings(plugin: Plugin, warningModalProps?: ModalProps, pluginMod
     }
 
     if (restartNeeded) {
-        onRestartNeeded?.(plugin.name);
+        onRestartNeeded?.(pluginName);
     }
 
     Toasts.show({
-        message: t("plugins.pluginModal.successfulReset", { plugin: pluginName }),
+        message: t(plugins.pluginModal.successfulReset, { plugin: pluginName }),
         id: Toasts.genId(),
         type: Toasts.Type.SUCCESS,
         options: {
@@ -320,8 +329,8 @@ export function openWarningModal(plugin?: Plugin | null, pluginModalProps?: Moda
     }
 
     const text = isPlugin
-        ? tJsx("plugins.dangerModal.resetDescription", { pluginName: <strong>{plugin?.name}</strong> })
-        : tJsx("plugins.dangerModal.disable", { enabledPlugins: <strong>{enabledPlugins}</strong> });
+        ? t(plugins.dangerModal.resetDescription, { pluginName: <strong>{plugin ? getName(plugin.name) : ""}</strong> })
+        : t(plugins.dangerModal.disable, { enabledPlugins: <strong>{enabledPlugins}</strong> });
 
     openModal(warningModalProps => (
         <ModalRoot
@@ -331,7 +340,7 @@ export function openWarningModal(plugin?: Plugin | null, pluginModalProps?: Moda
             transitionState={warningModalProps.transitionState}
         >
             <ModalHeader separator={false}>
-                <BaseText className="text-danger pc-pm-modal-title">{t("plugins.dangerModal.title")}</BaseText>
+                <BaseText className="text-danger pc-pm-modal-title">{t(plugins.dangerModal.title)}</BaseText>
                 <ModalCloseButton onClick={warningModalProps.onClose} className="pc-modal-close-button" />
             </ModalHeader>
             <ModalContent>
@@ -341,12 +350,12 @@ export function openWarningModal(plugin?: Plugin | null, pluginModalProps?: Moda
                             {text}
                         </BaseText>
                         <BaseText className="warning-text">
-                            {t("plugins.dangerModal.irreversible")}
+                            {t(plugins.dangerModal.irreversible)}
                         </BaseText>
                         <BaseText className="text-normal margin-bottom">
-                            {tJsx("plugins.dangerModal.resetText", {
-                                confirmReset: <strong>{t("plugins.dangerModal.confirmReset")}</strong>,
-                                cancel: <strong>{t("plugins.dangerModal.cancel")}</strong>,
+                            {t(plugins.dangerModal.resetText, {
+                                confirmReset: <strong>{t(plugins.dangerModal.confirmReset)}</strong>,
+                                cancel: <strong>{t(plugins.dangerModal.cancel)}</strong>,
                             })}
                         </BaseText>
                     </Flex>
@@ -363,7 +372,7 @@ export function openWarningModal(plugin?: Plugin | null, pluginModalProps?: Moda
                                     Settings.ignoreResetWarning = true;
                                 }}
                             >
-                                {t("plugins.restart.button.disableWarning")}
+                                {t(plugins.restart.button.disableWarning)}
                             </Button>
                         )}
                         <Button
@@ -378,14 +387,14 @@ export function openWarningModal(plugin?: Plugin | null, pluginModalProps?: Moda
                             }}
                             className={cl("confirm-reset")}
                         >
-                            {t("plugins.dangerModal.confirmReset")}
+                            {t(plugins.dangerModal.confirmReset)}
                         </Button>
                         <Button
                             size="small"
                             onClick={warningModalProps.onClose}
                             variant="none"
                         >
-                            {t("plugins.restart.button.disableWarning")}
+                            {t(plugins.restart.button.disableWarning)}
                         </Button>
                     </Flex>
                 </Flex>

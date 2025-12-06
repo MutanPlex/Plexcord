@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import type { Channel, Embed, GuildMember, MessageAttachment, User } from "@plexcord/discord-types";
@@ -95,12 +95,8 @@ const notificationsShouldNotify = findByCodeLazy(".SUPPRESS_NOTIFICATIONS))retur
 
 const settings = definePluginSettings({
     webSocketPort: {
-        get label() {
-            return t("plugin.xSOverlay.option.webSocketPort.label");
-        },
-        get description() {
-            return t("plugin.xSOverlay.option.webSocketPort.description");
-        },
+        label: () => t(plugin.xSOverlay.option.webSocketPort.label),
+        description: () => t(plugin.xSOverlay.option.webSocketPort.description),
         type: OptionType.NUMBER,
         default: 42070,
         async onChange() {
@@ -108,134 +104,82 @@ const settings = definePluginSettings({
         }
     },
     preferUDP: {
-        get label() {
-            return t("plugin.xSOverlay.option.preferUDP.label");
-        },
-        get description() {
-            return t("plugin.xSOverlay.option.preferUDP.description");
-        },
+        label: () => t(plugin.xSOverlay.option.preferUDP.label),
+        description: () => t(plugin.xSOverlay.option.preferUDP.description),
         type: OptionType.BOOLEAN,
         default: false,
         disabled: () => IS_WEB
     },
     botNotifications: {
-        get label() {
-            return t("plugin.xSOverlay.option.botNotifications.label");
-        },
-        get description() {
-            return t("plugin.xSOverlay.option.botNotifications.description");
-        },
+        label: () => t(plugin.xSOverlay.option.botNotifications.label),
+        description: () => t(plugin.xSOverlay.option.botNotifications.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     serverNotifications: {
-        get label() {
-            return t("plugin.xSOverlay.option.serverNotifications.label");
-        },
-        get description() {
-            return t("plugin.xSOverlay.option.serverNotifications.description");
-        },
+        label: () => t(plugin.xSOverlay.option.serverNotifications.label),
+        description: () => t(plugin.xSOverlay.option.serverNotifications.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     dmNotifications: {
-        get label() {
-            return t("plugin.xSOverlay.option.dmNotifications.label");
-        },
-        get description() {
-            return t("plugin.xSOverlay.option.dmNotifications.description");
-        },
+        label: () => t(plugin.xSOverlay.option.dmNotifications.label),
+        description: () => t(plugin.xSOverlay.option.dmNotifications.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     groupDmNotifications: {
-        get label() {
-            return t("plugin.xSOverlay.option.groupDmNotifications.label");
-        },
-        get description() {
-            return t("plugin.xSOverlay.option.groupDmNotifications.description");
-        },
+        label: () => t(plugin.xSOverlay.option.groupDmNotifications.label),
+        description: () => t(plugin.xSOverlay.option.groupDmNotifications.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     callNotifications: {
-        get label() {
-            return t("plugin.xSOverlay.option.callNotifications.label");
-        },
-        get description() {
-            return t("plugin.xSOverlay.option.callNotifications.description");
-        },
+        label: () => t(plugin.xSOverlay.option.callNotifications.label),
+        description: () => t(plugin.xSOverlay.option.callNotifications.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     pingColor: {
-        get label() {
-            return t("plugin.xSOverlay.option.pingColor.label");
-        },
-        get description() {
-            return t("plugin.xSOverlay.option.pingColor.description");
-        },
+        label: () => t(plugin.xSOverlay.option.pingColor.label),
+        description: () => t(plugin.xSOverlay.option.pingColor.description),
         type: OptionType.STRING,
         default: "#7289da"
     },
     channelPingColor: {
-        get label() {
-            return t("plugin.xSOverlay.option.channelPingColor.label");
-        },
-        get description() {
-            return t("plugin.xSOverlay.option.channelPingColor.description");
-        },
+        label: () => t(plugin.xSOverlay.option.channelPingColor.label),
+        description: () => t(plugin.xSOverlay.option.channelPingColor.description),
         type: OptionType.STRING,
         default: "#8a2be2"
     },
     soundPath: {
-        get label() {
-            return t("plugin.xSOverlay.option.soundPath.label");
-        },
-        get description() {
-            return t("plugin.xSOverlay.option.soundPath.description");
-        },
+        label: () => t(plugin.xSOverlay.option.soundPath.label),
+        description: () => t(plugin.xSOverlay.option.soundPath.description),
         type: OptionType.STRING,
         default: "default"
     },
     timeout: {
-        get label() {
-            return t("plugin.xSOverlay.option.timeout.label");
-        },
-        get description() {
-            return t("plugin.xSOverlay.option.timeout.description");
-        },
+        label: () => t(plugin.xSOverlay.option.timeout.label),
+        description: () => t(plugin.xSOverlay.option.timeout.description),
         type: OptionType.NUMBER,
         default: 3,
     },
     lengthBasedTimeout: {
-        get label() {
-            return t("plugin.xSOverlay.option.lengthBasedTimeout.label");
-        },
-        get description() {
-            return t("plugin.xSOverlay.option.lengthBasedTimeout.description");
-        },
+        label: () => t(plugin.xSOverlay.option.lengthBasedTimeout.label),
+        description: () => t(plugin.xSOverlay.option.lengthBasedTimeout.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     opacity: {
-        get label() {
-            return t("plugin.xSOverlay.option.opacity.label");
-        },
-        get description() {
-            return t("plugin.xSOverlay.option.opacity.description");
-        },
+        label: () => t(plugin.xSOverlay.option.opacity.label),
+        description: () => t(plugin.xSOverlay.option.opacity.description),
         type: OptionType.SLIDER,
         default: 1,
         markers: makeRange(0, 1, 0.1)
     },
     volume: {
-        get label() {
-            return t("plugin.xSOverlay.option.volume.label");
-        },
-        get description() {
-            return t("plugin.xSOverlay.option.volume.description");
-        },
+        label: () => t(plugin.xSOverlay.option.volume.label),
+        description: () => t(plugin.xSOverlay.option.volume.description),
         type: OptionType.SLIDER,
         default: 0.2,
         markers: makeRange(0, 1, 0.1)
@@ -258,21 +202,17 @@ const Native = PlexcordNative.pluginHelpers.XSOverlay as PluginNative<typeof imp
 
 export default definePlugin({
     name: "XSOverlay",
-    description: "Forwards discord notifications to XSOverlay, for easy viewing in VR",
+    description: () => t(plugin.xSOverlay.description),
     authors: [Devs.Nyako],
     tags: ["vr", "notify"],
     reporterTestable: ReporterTestable.None,
     settings,
 
-    get displayDescription() {
-        return t("plugin.xSOverlay.description");
-    },
-
     flux: {
         CALL_UPDATE({ call }: { call: Call; }) {
             if (call?.ringing?.includes(UserStore.getCurrentUser().id) && settings.store.callNotifications) {
                 const channel = ChannelStore.getChannel(call.channel_id);
-                sendOtherNotif(t("plugin.xSOverlay.notification.call.title"), t("plugin.xSOverlay.notification.call.content", { user: channel.name }));
+                sendOtherNotif(t(plugin.xSOverlay.notification.call.title), t(plugin.xSOverlay.notification.call.content, { user: channel.name }));
             }
         },
         MESSAGE_CREATE({ message, optimistic }: { message: Message; optimistic: boolean; }) {
@@ -302,20 +242,20 @@ export default definePlugin({
             }
 
             if (message.referenced_message) {
-                titleString += t("plugin.xSOverlay.notification.message.reply");
+                titleString += t(plugin.xSOverlay.notification.message.reply);
             }
 
             if (message.embeds.length > 0) {
-                finalMsg += t("plugin.xSOverlay.notification.message.embed");
+                finalMsg += t(plugin.xSOverlay.notification.message.embed);
                 if (message.content === "") {
-                    finalMsg = t("plugin.xSOverlay.notification.message.onlyEmbed");
+                    finalMsg = t(plugin.xSOverlay.notification.message.onlyEmbed);
                 }
             }
 
             if (message.sticker_items) {
-                finalMsg += t("plugin.xSOverlay.notification.message.sticker");
+                finalMsg += t(plugin.xSOverlay.notification.message.sticker);
                 if (message.content === "") {
-                    finalMsg = t("plugin.xSOverlay.notification.message.onlySticker");
+                    finalMsg = t(plugin.xSOverlay.notification.message.onlySticker);
                 }
             }
 
@@ -326,11 +266,11 @@ export default definePlugin({
 
 
             images.forEach(img => {
-                finalMsg += ` [${t("plugin.xSOverlay.notification.message.image")}: ${img.filename}] `;
+                finalMsg += ` [${t(plugin.xSOverlay.notification.message.image)}: ${img.filename}] `;
             });
 
             message.attachments.filter(a => a && !a.content_type?.startsWith("image")).forEach(a => {
-                finalMsg += ` [${t("plugin.xSOverlay.notification.message.attachment")}: ${a.filename}] `;
+                finalMsg += ` [${t(plugin.xSOverlay.notification.message.attachment)}: ${a.filename}] `;
             });
 
             // make mentions readable
@@ -380,8 +320,8 @@ export default definePlugin({
 
     settingsAboutComponent: () => (
         <>
-            <Button onClick={() => sendOtherNotif(t("plugin.xSOverlay.notification.test.content"), t("plugin.xSOverlay.notification.test.title"))}>
-                {t("plugin.xSOverlay.notification.test.button")}
+            <Button onClick={() => sendOtherNotif(t(plugin.xSOverlay.notification.test.content), t(plugin.xSOverlay.notification.test.title))}>
+                {t(plugin.xSOverlay.notification.test.button)}
             </Button>
         </>
     )

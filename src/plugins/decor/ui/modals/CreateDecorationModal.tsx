@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t, tJsx } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -70,7 +70,7 @@ function CreateDecorationModal(props: ModalProps) {
     >
         <ModalHeader separator={false} className={cl("modal-header")}>
             <BaseText size="lg" weight="semibold" color="header-primary" tag="h1" style={{ flexGrow: 1 }}>
-                {t("plugin.decor.create.title")}
+                {t(plugin.decor.create.title)}
             </BaseText>
             <ModalCloseButton onClick={props.onClose} />
         </ModalHeader>
@@ -80,34 +80,34 @@ function CreateDecorationModal(props: ModalProps) {
         >
             <ErrorBoundary>
                 <HelpMessage messageType={HelpMessageTypes.WARNING}>
-                    {tJsx("plugin.decor.create.notViolate", {
-                        guidelines: <Link href="https://github.com/decor-discord/.github/blob/main/GUIDELINES.md">{t("plugin.decor.create.guidelines")}</Link>
+                    {t(plugin.decor.create.notViolate, {
+                        guidelines: <Link href="https://github.com/decor-discord/.github/blob/main/GUIDELINES.md">{t(plugin.decor.create.guidelines)}</Link>
                     })}
                 </HelpMessage>
                 <div className={cl("create-decoration-modal-form-preview-container")}>
                     <div className={cl("create-decoration-modal-form")}>
                         {error !== null && <BaseText size="xs" weight="normal" color="text-danger">{error.message}</BaseText>}
                         <section>
-                            <Heading>{t("plugin.decor.file")}</Heading>
+                            <Heading>{t(plugin.decor.file)}</Heading>
                             <FileUpload
                                 filename={file?.name}
-                                placeholder={t("plugin.decor.create.fileHolder")}
-                                buttonText={t("plugin.decor.button.browse")}
+                                placeholder={t(plugin.decor.create.fileHolder)}
+                                buttonText={t(plugin.decor.button.browse)}
                                 filters={[{ name: "Decoration file", extensions: ["png", "apng"] }]}
                                 onFileSelect={setFile}
                             />
                             <Paragraph className={Margins.top8}>
-                                {t("plugin.decor.create.file")}
+                                {t(plugin.decor.create.file)}
                             </Paragraph>
                         </section>
-                        <section title={t("plugin.decor.create.nameTitle")}>
+                        <section title={t(plugin.decor.create.nameTitle)}>
                             <TextInput
-                                placeholder={t("plugin.decor.create.nameHolder")}
+                                placeholder={t(plugin.decor.create.nameHolder)}
                                 value={name}
                                 onChange={setName}
                             />
                             <Paragraph className={Margins.top8}>
-                                {t("plugin.decor.create.name")}
+                                {t(plugin.decor.create.name)}
                             </Paragraph>
                         </section>
                     </div>
@@ -119,7 +119,7 @@ function CreateDecorationModal(props: ModalProps) {
                     </div>
                 </div>
                 <HelpMessage messageType={HelpMessageTypes.INFO} className={Margins.bottom8}>
-                    {tJsx("plugin.decor.help.update", {
+                    {t(plugin.decor.help.update, {
                         server: <Link
                             href={`https://discord.gg/${INVITE_KEY}`}
                             onClick={async e => {
@@ -137,7 +137,7 @@ function CreateDecorationModal(props: ModalProps) {
                                 }
                             }}
                         >
-                            {t("plugin.decor.help.server")}
+                            {t(plugin.decor.help.server)}
                         </Link>
                     })}
                 </HelpMessage>
@@ -149,7 +149,7 @@ function CreateDecorationModal(props: ModalProps) {
                     onClick={props.onClose}
                     variant="primary"
                 >
-                    {t("plugin.decor.button.cancel")}
+                    {t(plugin.decor.button.cancel)}
                 </Button>
                 <Button
                     onClick={() => {
@@ -159,7 +159,7 @@ function CreateDecorationModal(props: ModalProps) {
                     }}
                     disabled={!file || !name || submitting}
                 >
-                    {t("plugin.decor.button.submit")}
+                    {t(plugin.decor.button.submit)}
                 </Button>
             </div>
         </ModalFooter>

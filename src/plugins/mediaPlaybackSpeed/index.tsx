@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -26,34 +26,22 @@ const speeds = makeRange(min, max, 0.25);
 
 const settings = definePluginSettings({
     defaultVoiceMessageSpeed: {
-        get label() {
-            return t("plugin.mediaPlaybackSpeed.option.defaultVoiceMessageSpeed.label");
-        },
-        get description() {
-            return t("plugin.mediaPlaybackSpeed.option.defaultVoiceMessageSpeed.description");
-        },
+        label: () => t(plugin.mediaPlaybackSpeed.option.defaultVoiceMessageSpeed.label),
+        description: () => t(plugin.mediaPlaybackSpeed.option.defaultVoiceMessageSpeed.description),
         type: OptionType.SLIDER,
         default: 1,
         markers: speeds,
     },
     defaultVideoSpeed: {
-        get label() {
-            return t("plugin.mediaPlaybackSpeed.option.defaultVideoSpeed.label");
-        },
-        get description() {
-            return t("plugin.mediaPlaybackSpeed.option.defaultVideoSpeed.description");
-        },
+        label: () => t(plugin.mediaPlaybackSpeed.option.defaultVideoSpeed.label),
+        description: () => t(plugin.mediaPlaybackSpeed.option.defaultVideoSpeed.description),
         type: OptionType.SLIDER,
         default: 1,
         markers: speeds,
     },
     defaultAudioSpeed: {
-        get label() {
-            return t("plugin.mediaPlaybackSpeed.option.defaultAudioSpeed.label");
-        },
-        get description() {
-            return t("plugin.mediaPlaybackSpeed.option.defaultAudioSpeed.description");
-        },
+        label: () => t(plugin.mediaPlaybackSpeed.option.defaultAudioSpeed.label),
+        description: () => t(plugin.mediaPlaybackSpeed.option.defaultAudioSpeed.description),
         type: OptionType.SLIDER,
         default: 1,
         markers: speeds,
@@ -64,13 +52,8 @@ type MediaRef = RefObject<HTMLMediaElement> | undefined;
 
 export default definePlugin({
     name: "MediaPlaybackSpeed",
-    description: "Allows changing the (default) playback speed of media embeds",
+    description: () => t(plugin.mediaPlaybackSpeed.description),
     authors: [Devs.D3SOX, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.mediaPlaybackSpeed.description");
-    },
-
     settings,
 
     renderPlaybackSpeedComponent: ErrorBoundary.wrap(({ mediaRef }: { mediaRef: MediaRef; }) => {
@@ -98,7 +81,7 @@ export default definePlugin({
         }, [mediaRef]);
 
         return (
-            <Tooltip text={t("plugin.mediaPlaybackSpeed.playbackSpeed")}>
+            <Tooltip text={t(plugin.mediaPlaybackSpeed.playbackSpeed)}>
                 {tooltipProps => (
                     <button
                         {...tooltipProps}
@@ -108,10 +91,10 @@ export default definePlugin({
                                 <Menu.Menu
                                     navId="pc-playback-speed"
                                     onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-                                    aria-label={t("plugin.mediaPlaybackSpeed.context.label")}
+                                    aria-label={t(plugin.mediaPlaybackSpeed.context.label)}
                                 >
                                     <Menu.MenuGroup
-                                        label={t("plugin.mediaPlaybackSpeed.playbackSpeed")}
+                                        label={t(plugin.mediaPlaybackSpeed.playbackSpeed)}
                                     >
                                         {speeds.map(speed => (
                                             <Menu.MenuItem

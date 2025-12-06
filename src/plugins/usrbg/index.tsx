@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
@@ -36,27 +36,17 @@ interface UsrbgApiReturn {
 
 const settings = definePluginSettings({
     nitroFirst: {
-        get label() {
-            return t("plugin.uSRBG.option.nitroFirst.label");
-        },
-        get description() {
-            return t("plugin.uSRBG.option.nitroFirst.description");
-        },
+        label: () => t(plugin.uSRBG.option.nitroFirst.label),
+        description: () => t(plugin.uSRBG.option.nitroFirst.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.uSRBG.option.nitroFirst.nitro"), value: true, default: true },
-                { label: t("plugin.uSRBG.option.nitroFirst.usrbg"), value: false },
-            ];
-        }
+        options: [
+            { label: () => t(plugin.uSRBG.option.nitroFirst.nitro), value: true, default: true },
+            { label: () => t(plugin.uSRBG.option.nitroFirst.usrbg), value: false },
+        ]
     },
     voiceBackground: {
-        get label() {
-            return t("plugin.uSRBG.option.voiceBackground.label");
-        },
-        get description() {
-            return t("plugin.uSRBG.option.voiceBackground.description");
-        },
+        label: () => t(plugin.uSRBG.option.voiceBackground.label),
+        description: () => t(plugin.uSRBG.option.voiceBackground.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
@@ -65,13 +55,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "USRBG",
-    description: "Displays user banners from USRBG, allowing anyone to get a banner without Nitro",
+    description: () => t(plugin.uSRBG.description),
     authors: [Devs.AutumnVN, Devs.katlyn, Devs.pylix, Devs.TheKodeToad, PcDevs.MutanPlex],
     settings,
-
-    get displayDescription() {
-        return t("plugin.uSRBG.description");
-    },
 
     patches: [
         {
@@ -102,7 +88,7 @@ export default definePlugin({
             className={cl("settings-button")}
             onClick={() => PlexcordNative.native.openExternal("https://github.com/AutumnVN/usrbg#how-to-request-your-own-usrbg-banner")}
         >
-            {t("plugin.uSRBG.button")}
+            {t(plugin.uSRBG.button)}
         </Button>
     ),
 

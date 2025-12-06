@@ -6,7 +6,7 @@
  */
 
 import * as DataStore from "@api/DataStore";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
@@ -30,22 +30,14 @@ interface Nameplate {
 
 const settings = definePluginSettings({
     animate: {
-        get label() {
-            return t("plugin.bannersEverywhere.option.animate.label");
-        },
-        get description() {
-            return t("plugin.bannersEverywhere.option.animate.description");
-        },
+        label: () => t(plugin.bannersEverywhere.option.animate.label),
+        description: () => t(plugin.bannersEverywhere.option.animate.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     preferNameplate: {
-        get label() {
-            return t("plugin.bannersEverywhere.option.preferNameplate.label");
-        },
-        get description() {
-            return t("plugin.bannersEverywhere.option.preferNameplate.description");
-        },
+        label: () => t(plugin.bannersEverywhere.option.preferNameplate.label),
+        description: () => t(plugin.bannersEverywhere.option.preferNameplate.description),
         type: OptionType.BOOLEAN,
         default: false
     },
@@ -58,13 +50,9 @@ const UserProfileStore = findStoreLazy("UserProfileStore");
 
 export default definePlugin({
     name: "BannersEverywhere",
-    description: "Displays banners in the member list ",
+    description: () => t(plugin.bannersEverywhere.description),
     authors: [Devs.ImLvna, Devs.AutumnVN, PcDevs.MutanPlex],
     settings,
-
-    get displayDescription() {
-        return t("plugin.bannersEverywhere.description");
-    },
 
     patches: [
         {

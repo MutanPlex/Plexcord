@@ -19,7 +19,7 @@
 
 import "./style.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { Button } from "@components/Button";
 import { Devs, PcDevs } from "@utils/constants";
@@ -40,8 +40,8 @@ async function openCompleteQuestUI() {
 
     if (!quest) {
         showNotification({
-            title: t("plugin.questCompleter.alert.title"),
-            body: t("plugin.questCompleter.alert.noQuest"),
+            title: t(plugin.questCompleter.alert.title),
+            body: t(plugin.questCompleter.alert.noQuest),
             onClick() {
                 NavigationRouter.transitionTo("/quest-home");
             },
@@ -78,15 +78,15 @@ async function openCompleteQuestUI() {
                     await new Promise(resolve => setTimeout(resolve, interval * 1000));
                 }
                 showNotification({
-                    title: `${applicationName} - ${t("plugin.questCompleter.alert.title")}`,
-                    body: t("plugin.questCompleter.alert.completed"),
+                    title: `${applicationName} - ${t(plugin.questCompleter.alert.title)}`,
+                    body: t(plugin.questCompleter.alert.completed),
                     icon: icon,
                 });
             };
             fn();
             showNotification({
-                title: `${applicationName} - ${t("plugin.questCompleter.alert.title")}`,
-                body: t("plugin.questCompleter.alert.spoofingVideo", { applicationName }),
+                title: `${applicationName} - ${t(plugin.questCompleter.alert.title)}`,
+                body: t(plugin.questCompleter.alert.spoofingVideo, { applicationName }),
                 icon: icon,
             });
         } else if (taskName === "PLAY_ON_DESKTOP") {
@@ -119,15 +119,15 @@ async function openCompleteQuestUI() {
                 const fn = data => {
                     const progress = quest.config.configVersion === 1 ? data.userStatus.streamProgressSeconds : Math.floor(data.userStatus.progress.PLAY_ON_DESKTOP.value);
                     showNotification({
-                        title: `${applicationName} - ${t("plugin.questCompleter.alert.title")}`,
-                        body: t("plugin.questCompleter.alert.currentProgress", { progress, goal: secondsNeeded }),
+                        title: `${applicationName} - ${t(plugin.questCompleter.alert.title)}`,
+                        body: t(plugin.questCompleter.alert.currentProgress, { progress, goal: secondsNeeded }),
                         icon: icon,
                     });
 
                     if (progress >= secondsNeeded) {
                         showNotification({
-                            title: `${applicationName} - ${t("plugin.questCompleter.alert.title")}`,
-                            body: t("plugin.questCompleter.alert.completed"),
+                            title: `${applicationName} - ${t(plugin.questCompleter.alert.title)}`,
+                            body: t(plugin.questCompleter.alert.completed),
                             icon: icon,
                         });
 
@@ -139,8 +139,8 @@ async function openCompleteQuestUI() {
                 };
                 FluxDispatcher.subscribe("QUESTS_SEND_HEARTBEAT_SUCCESS", fn);
                 showNotification({
-                    title: `${applicationName} - ${t("plugin.questCompleter.alert.title")}`,
-                    body: t("plugin.questCompleter.alert.spoofingApplication", { applicationName }),
+                    title: `${applicationName} - ${t(plugin.questCompleter.alert.title)}`,
+                    body: t(plugin.questCompleter.alert.spoofingApplication, { applicationName }),
                     icon: icon,
                 });
             });
@@ -148,14 +148,14 @@ async function openCompleteQuestUI() {
             const stream = ApplicationStreamingStore.getAnyStreamForUser(UserStore.getCurrentUser()?.id);
             if (!stream) {
                 showNotification({
-                    title: `${t("plugin.questCompleter.alert.notStreaming")} - ${t("plugin.questCompleter.alert.title")}`,
-                    body: t("plugin.questCompleter.alert.startStreaming", { applicationName }),
+                    title: `${t(plugin.questCompleter.alert.notStreaming)} - ${t(plugin.questCompleter.alert.title)}`,
+                    body: t(plugin.questCompleter.alert.startStreaming, { applicationName }),
                     icon: icon,
                 });
             }
             showNotification({
-                title: `${applicationName} - ${t("plugin.questCompleter.alert.title")}`,
-                body: t("plugin.questCompleter.alert.onePersonNeeded"),
+                title: `${applicationName} - ${t(plugin.questCompleter.alert.title)}`,
+                body: t(plugin.questCompleter.alert.onePersonNeeded),
                 icon: icon,
             });
             const realFunc = ApplicationStreamingStore.getStreamerActiveStreamMetadata;
@@ -168,15 +168,15 @@ async function openCompleteQuestUI() {
             const fn = data => {
                 const progress = quest.config.configVersion === 1 ? data.userStatus.streamProgressSeconds : Math.floor(data.userStatus.progress.STREAM_ON_DESKTOP.value);
                 showNotification({
-                    title: `${applicationName} - ${t("plugin.questCompleter.alert.title")}`,
-                    body: t("plugin.questCompleter.alert.currentProgress", { progress, goal: secondsNeeded }),
+                    title: `${applicationName} - ${t(plugin.questCompleter.alert.title)}`,
+                    body: t(plugin.questCompleter.alert.currentProgress, { progress, goal: secondsNeeded }),
                     icon: icon,
                 });
 
                 if (progress >= secondsNeeded) {
                     showNotification({
-                        title: `${applicationName} - ${t("plugin.questCompleter.alert.title")}`,
-                        body: t("plugin.questCompleter.alert.completed"),
+                        title: `${applicationName} - ${t(plugin.questCompleter.alert.title)}`,
+                        body: t(plugin.questCompleter.alert.completed),
                         icon: icon,
                     });
 
@@ -186,13 +186,13 @@ async function openCompleteQuestUI() {
             };
             FluxDispatcher.subscribe("QUESTS_SEND_HEARTBEAT_SUCCESS", fn);
             showNotification({
-                title: `${applicationName} - ${t("plugin.questCompleter.alert.title")}`,
-                body: t("plugin.questCompleter.alert.streamMore", { seconds: Math.ceil((secondsNeeded - secondsDone) / 60) }),
+                title: `${applicationName} - ${t(plugin.questCompleter.alert.title)}`,
+                body: t(plugin.questCompleter.alert.streamMore, { seconds: Math.ceil((secondsNeeded - secondsDone) / 60) }),
                 icon: icon,
             });
             showNotification({
-                title: `${applicationName} - ${t("plugin.questCompleter.alert.title")}`,
-                body: t("plugin.questCompleter.alert.onePersonNeeded"),
+                title: `${applicationName} - ${t(plugin.questCompleter.alert.title)}`,
+                body: t(plugin.questCompleter.alert.onePersonNeeded),
                 icon: icon,
             });
         } else if (taskName === "PLAY_ACTIVITY") {
@@ -205,8 +205,8 @@ async function openCompleteQuestUI() {
                     const res = await RestAPI.post({ url: `/quests/${quest.id}/heartbeat`, body: { stream_key: streamKey, terminal: false } });
                     const progress = res.body.progress.PLAY_ACTIVITY.value;
                     showNotification({
-                        title: `${applicationName} - ${t("plugin.questCompleter.alert.title")}`,
-                        body: t("plugin.questCompleter.alert.currentProgress", { progress, goal: secondsNeeded }),
+                        title: `${applicationName} - ${t(plugin.questCompleter.alert.title)}`,
+                        body: t(plugin.questCompleter.alert.currentProgress, { progress, goal: secondsNeeded }),
                         icon: icon,
                     });
 
@@ -219,8 +219,8 @@ async function openCompleteQuestUI() {
                 }
 
                 showNotification({
-                    title: `${applicationName} - ${t("plugin.questCompleter.alert.title")}`,
-                    body: t("plugin.questCompleter.alert.completed"),
+                    title: `${applicationName} - ${t(plugin.questCompleter.alert.title)}`,
+                    body: t(plugin.questCompleter.alert.completed),
                     icon: icon,
                 });
             };
@@ -232,12 +232,8 @@ async function openCompleteQuestUI() {
 
 export default definePlugin({
     name: "QuestCompleter",
-    description: "A plugin to complete quests without having the game installed.",
+    description: () => t(plugin.questCompleter.description),
     authors: [Devs.amia, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.questCompleter.description");
-    },
 
     patches: [
         {
@@ -269,7 +265,7 @@ export default definePlugin({
 
     renderQuestButton() {
         return (
-            <Tooltip text={t("plugin.questCompleter.tooltip")}>
+            <Tooltip text={t(plugin.questCompleter.tooltip)}>
                 {tooltipProps => (
                     <Button style={{ backgroundColor: "transparent", border: "none" }}
                         {...tooltipProps}

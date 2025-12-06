@@ -7,7 +7,7 @@
 
 import "./ContributorModal.css";
 
-import { t, tJsx } from "@api/i18n";
+import { plugins, t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -23,6 +23,10 @@ import { ModalContent, ModalRoot, openModal } from "@utils/modal";
 import { showToast, useEffect, useMemo, UserProfileStore, useStateFromStores } from "@webpack/common";
 
 import Plugins from "~plugins";
+
+function getName(name: string | (() => string)): string {
+    return typeof name === "function" ? name() : name;
+}
 
 import { PluginCard } from "./PluginCard";
 
@@ -53,18 +57,16 @@ function ContributorModal({ user }: { user: User; }) {
     const githubName = profile?.connectedAccounts?.find(a => a.type === "github")?.name;
     const website = profile?.connectedAccounts?.find(a => a.type === "domain")?.name;
 
-    const plugins = useMemo(() => {
+    const pluginList = useMemo(() => {
         const allPlugins = Object.values(Plugins);
         const pluginsByAuthor = DevsById[user.id] || PcDevsById[user.id]
             ? allPlugins.filter(p => p.authors.includes(DevsById[user.id] || PcDevsById[user.id]))
             : allPlugins.filter(p => p.authors.some(a => a.name === user.username));
 
         return pluginsByAuthor
-            .filter(p => !p.name.endsWith("API"))
+            .filter(p => !getName(p.name).endsWith("API"))
             .sort((a, b) => Number(a.required ?? false) - Number(b.required ?? false));
     }, [user.id, user.username]);
-
-    const ContributedHyperLink = <Link href="https://plexcord.club/source">{t("plugins.contributor.contributed")}</Link>;
 
     return (
         <>
@@ -92,32 +94,32 @@ function ContributorModal({ user }: { user: User; }) {
                 </div>
             </div>
 
-            {plugins.length ? (
+            {pluginList.length ? (
                 <Paragraph>
-                    {tJsx("plugins.contributor.modal.contributionsInfo", {
+                    {t(plugins.contributor.modal.contributionsInfo, {
                         userName: user.username,
-                        contributionCount: plugins.length,
-                        continuedLink: ContributedHyperLink,
-                        s: plugins.length === 1 ? "" : "s"
+                        contributionCount: pluginList.length,
+                        continuedLink: <Link href="https://plexcord.club/source">{t(plugins.contributor.contributed)}</Link>,
+                        s: pluginList.length === 1 ? "" : "s"
                     })}
                 </Paragraph>
             ) : (
                 <Paragraph>
-                    {tJsx("plugins.contributor.modal.noContributions", {
+                    {t(plugins.contributor.modal.noContributions, {
                         userName: user.username,
-                        contributedLink: ContributedHyperLink
+                        contributedLink: <Link href="https://plexcord.club/source">{t(plugins.contributor.contributed)}</Link>
                     })}
                 </Paragraph>
             )}
 
-            {!!plugins.length && (
+            {!!pluginList.length && (
                 <div className={cl("plugins")}>
-                    {plugins.map(p =>
+                    {pluginList.map(p =>
                         <PluginCard
-                            key={p.name}
+                            key={getName(p.name)}
                             plugin={p}
                             disabled={p.required ?? false}
-                            onRestartNeeded={() => showToast(t("plugins.restart.apply"))}
+                            onRestartNeeded={() => showToast(t(plugins.restart.apply))}
                         />
                     )}
                 </div>

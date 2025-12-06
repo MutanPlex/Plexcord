@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { makeDummyUser } from "@components/settings/tabs/plugins/PluginModal";
 import { Channel, Message } from "@plexcord/discord-types";
 import { ChannelStore, lodash, Toasts, UserStore } from "@webpack/common";
@@ -63,7 +63,7 @@ class NoteHandler {
 
         Toasts.show({
             id: Toasts.genId(),
-            message: t("plugin.holyNotes.toast.saved", { notebook }),
+            message: t(plugin.holyNotes.toast.saved, { notebook }),
             type: Toasts.Type.SUCCESS,
         });
     };
@@ -76,7 +76,7 @@ class NoteHandler {
 
         Toasts.show({
             id: Toasts.genId(),
-            message: t("plugin.holyNotes.toast.deleted", { notebook }),
+            message: t(plugin.holyNotes.toast.deleted, { notebook }),
             type: Toasts.Type.SUCCESS,
         });
     };
@@ -93,10 +93,9 @@ class NoteHandler {
         saveCacheToDataStore(from, lodash.omit(origNotebook, note.id) as unknown as HolyNotes.Note[]);
         saveCacheToDataStore(to, newNoteBook as unknown as HolyNotes.Note[]);
 
-
         Toasts.show({
             id: Toasts.genId(),
-            message: t("plugin.holyNotes.toast.moved", { from, to }),
+            message: t(plugin.holyNotes.toast.moved, { from, to }),
             type: Toasts.Type.SUCCESS,
         });
     };
@@ -114,7 +113,7 @@ class NoteHandler {
         if (notebookExists) {
             Toasts.show({
                 id: Toasts.genId(),
-                message: t("plugin.holyNotes.toast.exists", { notebookName }),
+                message: t(plugin.holyNotes.toast.exists, { notebookName }),
                 type: Toasts.Type.FAILURE,
             });
             return;
@@ -125,7 +124,7 @@ class NoteHandler {
 
         if (!silent) return Toasts.show({
             id: Toasts.genId(),
-            message: t("plugin.holyNotes.toast.created", { notebookName }),
+            message: t(plugin.holyNotes.toast.created, { notebookName }),
             type: Toasts.Type.SUCCESS,
         });
     };
@@ -136,7 +135,7 @@ class NoteHandler {
 
         Toasts.show({
             id: Toasts.genId(),
-            message: t("plugin.holyNotes.toast.deletedNotebook", { notebookName }),
+            message: t(plugin.holyNotes.toast.deletedNotebook, { notebookName }),
             type: Toasts.Type.SUCCESS,
         });
     };
@@ -163,7 +162,7 @@ class NoteHandler {
 
         Toasts.show({
             id: Toasts.genId(),
-            message: t("plugin.holyNotes.toast.refreshedAvatars"),
+            message: t(plugin.holyNotes.toast.refreshed),
             type: Toasts.Type.SUCCESS,
         });
 
@@ -175,7 +174,7 @@ class NoteHandler {
 
         Toasts.show({
             id: Toasts.genId(),
-            message: t("plugin.holyNotes.toast.deletedAll"),
+            message: t(plugin.holyNotes.toast.deletedAll),
             type: Toasts.Type.SUCCESS,
         });
     };
@@ -191,7 +190,7 @@ class NoteHandler {
             console.log(e);
             return Toasts.show({
                 id: Toasts.genId(),
-                message: t("plugin.holyNotes.toast.invalid"),
+                message: t(plugin.holyNotes.toast.invalid),
                 type: Toasts.Type.FAILURE,
             });
         }
@@ -203,7 +202,7 @@ class NoteHandler {
 
         Toasts.show({
             id: Toasts.genId(),
-            message: t("plugin.holyNotes.toast.imported"),
+            message: t(plugin.holyNotes.toast.imported),
             type: Toasts.Type.SUCCESS,
         });
 

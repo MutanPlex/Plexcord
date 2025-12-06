@@ -6,7 +6,7 @@
  */
 
 import { set } from "@api/DataStore";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
 import { HeadingPrimary, HeadingSecondary } from "@components/Heading";
@@ -51,14 +51,14 @@ export function SetColorModal({ id, modalProps }: { id: string, modalProps: Moda
         <ModalRoot {...modalProps}>
             <ModalHeader className={cl("modal-header")}>
                 <HeadingPrimary>
-                    {t("plugin.customUserColors.modal.custom")}
+                    {t(plugin.customUserColors.modal.custom)}
                 </HeadingPrimary>
                 <ModalCloseButton onClick={modalProps.onClose} />
             </ModalHeader>
             <ModalContent className={cl("modal-content")} onKeyDown={handleKey}>
                 <section className={Margins.bottom16}>
                     <HeadingSecondary>
-                        {t("plugin.customUserColors.modal.pick")}
+                        {t(plugin.customUserColors.modal.pick)}
                     </HeadingSecondary>
                     <ColorPicker
                         color={colorPickerColor}
@@ -73,13 +73,13 @@ export function SetColorModal({ id, modalProps }: { id: string, modalProps: Moda
                     variant="dangerSecondary"
                     onClick={deleteUserColor}
                 >
-                    {t("plugin.customUserColors.modal.delete")}
+                    {t(plugin.customUserColors.modal.delete)}
                 </Button>
                 <Button
                     variant="secondary"
                     onClick={saveUserColor}
                 >
-                    {t("plugin.customUserColors.modal.save")}
+                    {t(plugin.customUserColors.modal.save)}
                 </Button>
             </ModalFooter>
         </ModalRoot>

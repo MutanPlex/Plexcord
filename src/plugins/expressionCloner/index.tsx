@@ -18,7 +18,7 @@
 */
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { CheckedTextInput } from "@components/CheckedTextInput";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
@@ -179,19 +179,19 @@ async function doClone(guildId: string, data: Sticker | Emoji) {
             await cloneEmoji(guildId, data);
 
         Toasts.show({
-            message: t("plugin.expressionCloner.toast.success", { name: data.name, guild: GuildStore.getGuild(guildId)?.name ?? t("plugin.expressionCloner.toast.yourServer") }),
+            message: t(plugin.expressionCloner.toast.success, { name: data.name, guild: GuildStore.getGuild(guildId)?.name ?? t(plugin.expressionCloner.toast.yourServer) }),
             type: Toasts.Type.SUCCESS,
             id: Toasts.genId()
         });
     } catch (e: any) {
-        let message = t("plugin.expressionCloner.toast.console");
+        let message = t(plugin.expressionCloner.toast.console);
         try {
             message = JSON.parse(e.text).message;
         } catch { }
 
         new Logger("ExpressionCloner").error("Failed to clone", data.name, "to", guildId, e);
         Toasts.show({
-            message: t("plugin.expressionCloner.toast.failed") + message,
+            message: t(plugin.expressionCloner.toast.failed) + message,
             type: Toasts.Type.FAILURE,
             id: Toasts.genId()
         });
@@ -216,7 +216,7 @@ function CloneModal({ data }: { data: Sticker | Emoji; }) {
 
     return (
         <>
-            <Heading className={Margins.top20}>{t("plugin.expressionCloner.modal.title")}</Heading>
+            <Heading className={Margins.top20}>{t(plugin.expressionCloner.modal.title)}</Heading>
             <CheckedTextInput
                 value={name}
                 onChange={v => {
@@ -226,7 +226,7 @@ function CloneModal({ data }: { data: Sticker | Emoji; }) {
                 validate={v =>
                     (data.t === "Emoji" && v.length > 2 && v.length < 32 && nameValidator.test(v))
                     || (data.t === "Sticker" && v.length > 2 && v.length < 30)
-                    || t("plugin.expressionCloner.modal.invalidName")
+                    || t(plugin.expressionCloner.modal.invalidName)
                 }
             />
             <div style={{
@@ -309,7 +309,7 @@ function buildMenuItem(type: "Emoji" | "Sticker", fetchData: () => Promisable<Om
         <Menu.MenuItem
             id="emote-cloner"
             key="emote-cloner"
-            label={t("plugin.expressionCloner.context.clone", { type })}
+            label={t(plugin.expressionCloner.context.clone, { type })}
             action={() =>
                 openModalLazy(async () => {
                     const res = await fetchData();
@@ -328,7 +328,7 @@ function buildMenuItem(type: "Emoji" | "Sticker", fetchData: () => Promisable<Om
                                     width={24}
                                     style={{ marginRight: "0.5em" }}
                                 />
-                                <Paragraph>{t("plugin.expressionCloner.context.cloneName", { data: data.name })}</Paragraph>
+                                <Paragraph>{t(plugin.expressionCloner.context.cloneName, { data: data.name })}</Paragraph>
                             </ModalHeader>
                             <ModalContent>
                                 <CloneModal data={data} />
@@ -395,13 +395,9 @@ const expressionPickerPatch: NavContextMenuPatchCallback = (children, props: { t
 
 export default definePlugin({
     name: "ExpressionCloner",
-    description: "Allows you to clone Emotes & Stickers to your own server (right click them)",
+    description: () => t(plugin.expressionCloner.description),
     tags: ["StickerCloner", "EmoteCloner", "EmojiCloner"],
     authors: [Devs.Ven, Devs.Nuckyz],
-
-    get displayDescription() {
-        return t("plugin.expressionCloner.description");
-    },
 
     contextMenus: {
         "message": messageContextMenuPatch,

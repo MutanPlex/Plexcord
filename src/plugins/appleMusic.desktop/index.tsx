@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t, tJsx } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Paragraph } from "@components/Paragraph";
 import { Activity, ActivityAssets, ActivityButton } from "@plexcord/discord-types";
@@ -49,157 +49,101 @@ function setActivity(activity: Activity | null) {
 
 const settings = definePluginSettings({
     activityType: {
-        get label() {
-            return t("plugin.appleMusic.option.activityType.label");
-        },
-        get description() {
-            return t("plugin.appleMusic.option.activityType.description");
-        },
+        label: () => t(plugin.appleMusic.option.activityType.label),
+        description: () => t(plugin.appleMusic.option.activityType.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.appleMusic.option.activityType.playing"), value: ActivityType.PLAYING, default: true },
-                { label: t("plugin.appleMusic.option.activityType.listening"), value: ActivityType.LISTENING }
-            ];
-        },
+        options: [
+            { label: () => t(plugin.appleMusic.option.activityType.playing), value: ActivityType.PLAYING, default: true },
+            { label: () => t(plugin.appleMusic.option.activityType.listening), value: ActivityType.LISTENING }
+        ],
     },
     statusDisplayType: {
-        get label() {
-            return t("plugin.appleMusic.option.statusDisplayType.label");
-        },
-        get description() {
-            return t("plugin.appleMusic.option.statusDisplayType.description");
-        },
+        label: () => t(plugin.appleMusic.option.statusDisplayType.label),
+        description: () => t(plugin.appleMusic.option.statusDisplayType.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.appleMusic.option.statusDisplayType.off"),
-                    value: "off",
-                    default: true
-                },
-                {
-                    label: t("plugin.appleMusic.option.statusDisplayType.artist"),
-                    value: "artist"
-                },
-                {
-                    label: t("plugin.appleMusic.option.statusDisplayType.track"),
-                    value: "track"
-                }
-            ];
-        }
+        options: [
+            {
+                label: () => t(plugin.appleMusic.option.statusDisplayType.off),
+                value: "off",
+                default: true
+            },
+            {
+                label: () => t(plugin.appleMusic.option.statusDisplayType.artist),
+                value: "artist"
+            },
+            {
+                label: () => t(plugin.appleMusic.option.statusDisplayType.track),
+                value: "track"
+            }
+        ]
     },
     refreshInterval: {
-        get label() {
-            return t("plugin.appleMusic.option.refreshInterval.label");
-        },
-        get description() {
-            return t("plugin.appleMusic.option.refreshInterval.description");
-        },
+        label: () => t(plugin.appleMusic.option.refreshInterval.label),
+        description: () => t(plugin.appleMusic.option.refreshInterval.description),
         type: OptionType.SLIDER,
         markers: [1, 2, 2.5, 3, 5, 10, 15],
         default: 5,
         restartNeeded: true,
     },
     enableTimestamps: {
-        get label() {
-            return t("plugin.appleMusic.option.enableTimestamps.label");
-        },
-        get description() {
-            return t("plugin.appleMusic.option.enableTimestamps.description");
-        },
+        label: () => t(plugin.appleMusic.option.enableTimestamps.label),
+        description: () => t(plugin.appleMusic.option.enableTimestamps.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     enableButtons: {
-        get label() {
-            return t("plugin.appleMusic.option.enableButtons.label");
-        },
-        get description() {
-            return t("plugin.appleMusic.option.enableButtons.description");
-        },
+        label: () => t(plugin.appleMusic.option.enableButtons.label),
+        description: () => t(plugin.appleMusic.option.enableButtons.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     nameString: {
-        get label() {
-            return t("plugin.appleMusic.option.nameString.label");
-        },
-        get description() {
-            return t("plugin.appleMusic.option.nameString.description");
-        },
+        label: () => t(plugin.appleMusic.option.nameString.label),
+        description: () => t(plugin.appleMusic.option.nameString.description),
         type: OptionType.STRING,
         default: "Apple Music"
     },
     detailsString: {
-        get label() {
-            return t("plugin.appleMusic.option.detailsString.label");
-        },
-        get description() {
-            return t("plugin.appleMusic.option.detailsString.description");
-        },
+        label: () => t(plugin.appleMusic.option.detailsString.label),
+        description: () => t(plugin.appleMusic.option.detailsString.description),
         type: OptionType.STRING,
         default: "{name}"
     },
     stateString: {
-        get label() {
-            return t("plugin.appleMusic.option.stateString.label");
-        },
-        get description() {
-            return t("plugin.appleMusic.option.stateString.description");
-        },
+        label: () => t(plugin.appleMusic.option.stateString.label),
+        description: () => t(plugin.appleMusic.option.stateString.description),
         type: OptionType.STRING,
         default: "{artist} · {album}"
     },
     largeImageType: {
-        get label() {
-            return t("plugin.appleMusic.option.largeImageType.label");
-        },
-        get description() {
-            return t("plugin.appleMusic.option.largeImageType.description");
-        },
+        label: () => t(plugin.appleMusic.option.largeImageType.label),
+        description: () => t(plugin.appleMusic.option.largeImageType.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.appleMusic.option.largeImageType.album"), value: AssetImageType.Album, default: true },
-                { label: t("plugin.appleMusic.option.largeImageType.artist"), value: AssetImageType.Artist },
-                { label: t("plugin.appleMusic.option.largeImageType.disabled"), value: AssetImageType.Disabled }
-            ];
-        },
+        options: [
+            { label: () => t(plugin.appleMusic.option.largeImageType.album), value: AssetImageType.Album, default: true },
+            { label: () => t(plugin.appleMusic.option.largeImageType.artist), value: AssetImageType.Artist },
+            { label: () => t(plugin.appleMusic.option.largeImageType.disabled), value: AssetImageType.Disabled }
+        ]
     },
     largeTextString: {
-        get label() {
-            return t("plugin.appleMusic.option.largeTextString.label");
-        },
-        get description() {
-            return t("plugin.appleMusic.option.largeTextString.description");
-        },
+        label: () => t(plugin.appleMusic.option.largeTextString.label),
+        description: () => t(plugin.appleMusic.option.largeTextString.description),
         type: OptionType.STRING,
         default: "{album}"
     },
     smallImageType: {
-        get label() {
-            return t("plugin.appleMusic.option.smallImageType.label");
-        },
-        get description() {
-            return t("plugin.appleMusic.option.smallImageType.description");
-        },
+        label: () => t(plugin.appleMusic.option.smallImageType.label),
+        description: () => t(plugin.appleMusic.option.smallImageType.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.appleMusic.option.smallImageType.album"), value: AssetImageType.Album },
-                { label: t("plugin.appleMusic.option.smallImageType.artist"), value: AssetImageType.Artist, default: true },
-                { label: t("plugin.appleMusic.option.smallImageType.disabled"), value: AssetImageType.Disabled }
-            ];
-        },
+        options: [
+            { label: () => t(plugin.appleMusic.option.smallImageType.album), value: AssetImageType.Album },
+            { label: () => t(plugin.appleMusic.option.smallImageType.artist), value: AssetImageType.Artist, default: true },
+            { label: () => t(plugin.appleMusic.option.smallImageType.disabled), value: AssetImageType.Disabled }
+        ]
     },
     smallTextString: {
-        get label() {
-            return t("plugin.appleMusic.option.smallTextString.label");
-        },
-        get description() {
-            return t("plugin.appleMusic.option.smallTextString.description");
-        },
+        label: () => t(plugin.appleMusic.option.smallTextString.label),
+        description: () => t(plugin.appleMusic.option.smallTextString.description),
         type: OptionType.STRING,
         default: "{artist}"
     },
@@ -224,12 +168,7 @@ function getImageAsset(type: AssetImageType, data: TrackData) {
 
 export default definePlugin({
     name: "AppleMusicRichPresence",
-    description: "Discord rich presence for your Apple Music!",
-
-    get displayDescription() {
-        return t("plugin.appleMusic.description");
-    },
-
+    description: () => t(plugin.appleMusic.description),
     authors: [Devs.RyanCaoDev],
     hidden: !IS_MAC,
     reporterTestable: ReporterTestable.None,
@@ -237,7 +176,7 @@ export default definePlugin({
     settingsAboutComponent() {
         return <>
             <Paragraph>
-                {tJsx("plugin.appleMusic.about", {
+                {t(plugin.appleMusic.about, {
                     name: <code>{"{name}"}</code>,
                     artist: <code>{"{artist}"}</code>,
                     album: <code>{"{album}"}</code>
@@ -291,13 +230,13 @@ export default definePlugin({
         if (settings.store.enableButtons) {
             if (trackData.appleMusicLink)
                 buttons.push({
-                    label: t("plugin.appleMusic.button.listen"),
+                    label: t(plugin.appleMusic.button.listen),
                     url: trackData.appleMusicLink,
                 });
 
             if (trackData.songLink)
                 buttons.push({
-                    label: t("plugin.appleMusic.button.songLink"),
+                    label: t(plugin.appleMusic.button.songLink),
                     url: trackData.songLink,
                 });
         }

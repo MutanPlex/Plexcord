@@ -18,7 +18,7 @@
 */
 
 import * as DataStore from "@api/DataStore";
-import { t, tJsx } from "@api/i18n";
+import { notifications, t } from "@api/i18n";
 import { Settings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
@@ -138,7 +138,7 @@ export function NotificationLog({ log, pending }: { log: PersistentNotificationD
             <div className={cl("container")}>
                 <div className={cl("empty")} />
                 <Paragraph style={{ textAlign: "center" }}>
-                    {t("notifications.noYet")}
+                    {t(notifications.noYet)}
                 </Paragraph>
             </div>
         );
@@ -161,7 +161,7 @@ function LogModal({ modalProps, close }: { modalProps: ModalProps; close(): void
     return (
         <ModalRoot {...modalProps} size={ModalSize.LARGE} className={cl("modal")}>
             <ModalHeader>
-                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t("notifications.log.title")}</BaseText>
+                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t(notifications.log.title)}</BaseText>
                 <ModalCloseButton onClick={close} />
             </ModalHeader>
 
@@ -172,7 +172,7 @@ function LogModal({ modalProps, close }: { modalProps: ModalProps; close(): void
             <ModalFooter>
                 <Flex>
                     <Button onClick={openNotificationSettingsModal}>
-                        {t("notifications.settings")}
+                        {t(notifications.settings)}
                     </Button>
 
                     <Button
@@ -180,8 +180,8 @@ function LogModal({ modalProps, close }: { modalProps: ModalProps; close(): void
                         variant="dangerPrimary"
                         onClick={() => {
                             Alerts.show({
-                                title: t("notifications.log.sure"),
-                                body: tJsx("notifications.log.permamently", {
+                                title: t(notifications.log.sure),
+                                body: t(notifications.log.permamently, {
                                     count: log.length,
                                     s: log.length !== 1 ? "s" : ""
                                 }),
@@ -189,13 +189,13 @@ function LogModal({ modalProps, close }: { modalProps: ModalProps; close(): void
                                     await DataStore.set(KEY, []);
                                     signals.forEach(x => x());
                                 },
-                                confirmText: t("notifications.log.clear"),
+                                confirmText: t(notifications.log.clear),
                                 confirmColor: "pc-notification-log-danger-btn",
-                                cancelText: t("notifications.log.cancel")
+                                cancelText: t(notifications.log.button.cancel)
                             });
                         }}
                     >
-                        {t("notifications.log.clear")}
+                        {t(notifications.log.clear)}
                     </Button>
                 </Flex>
             </ModalFooter>

@@ -5,59 +5,43 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     inviteDuration: {
-        get label() {
-            return t("plugin.inviteDefaults.option.inviteDuration.label");
-        },
-        get description() {
-            return t("plugin.inviteDefaults.option.inviteDuration.description");
-        },
+        label: () => t(plugin.inviteDefaults.option.inviteDuration.label),
+        description: () => t(plugin.inviteDefaults.option.inviteDuration.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.inviteDefaults.option.inviteDuration.thirtyMinutes"), value: 1800 },
-                { label: t("plugin.inviteDefaults.option.inviteDuration.oneHour"), value: 3600 },
-                { label: t("plugin.inviteDefaults.option.inviteDuration.sixHours"), value: 21600 },
-                { label: t("plugin.inviteDefaults.option.inviteDuration.twelveHours"), value: 43200 },
-                { label: t("plugin.inviteDefaults.option.inviteDuration.oneDay"), value: 86400 },
-                { label: t("plugin.inviteDefaults.option.inviteDuration.sevenDays"), value: 604800 },
-                { label: t("plugin.inviteDefaults.option.inviteDuration.forever"), value: 0, default: true },
-            ];
-        }
+        options: [
+            { label: () => t(plugin.inviteDefaults.option.inviteDuration.thirtyMinutes), value: 1800 },
+            { label: () => t(plugin.inviteDefaults.option.inviteDuration.oneHour), value: 3600 },
+            { label: () => t(plugin.inviteDefaults.option.inviteDuration.sixHours), value: 21600 },
+            { label: () => t(plugin.inviteDefaults.option.inviteDuration.twelveHours), value: 43200 },
+            { label: () => t(plugin.inviteDefaults.option.inviteDuration.oneDay), value: 86400 },
+            { label: () => t(plugin.inviteDefaults.option.inviteDuration.sevenDays), value: 604800 },
+            { label: () => t(plugin.inviteDefaults.option.inviteDuration.forever), value: 0, default: true },
+        ],
     },
     maxUses: {
-        get label() {
-            return t("plugin.inviteDefaults.option.maxUses.label");
-        },
-        get description() {
-            return t("plugin.inviteDefaults.option.maxUses.description");
-        },
+        label: () => t(plugin.inviteDefaults.option.maxUses.label),
+        description: () => t(plugin.inviteDefaults.option.maxUses.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.inviteDefaults.option.maxUses.unlimited"), value: 0, default: true },
-                { label: t("plugin.inviteDefaults.option.maxUses.1"), value: 1 },
-                { label: t("plugin.inviteDefaults.option.maxUses.5"), value: 5 },
-                { label: t("plugin.inviteDefaults.option.maxUses.10"), value: 10 },
-                { label: t("plugin.inviteDefaults.option.maxUses.25"), value: 25 },
-                { label: t("plugin.inviteDefaults.option.maxUses.50"), value: 50 },
-                { label: t("plugin.inviteDefaults.option.maxUses.100"), value: 100 },
-            ];
-        }
+        options: [
+            { label: () => t(plugin.inviteDefaults.option.maxUses.unlimited), value: 0, default: true },
+            { label: () => t(plugin.inviteDefaults.option.maxUses.one), value: 1 },
+            { label: () => t(plugin.inviteDefaults.option.maxUses.five), value: 5 },
+            { label: () => t(plugin.inviteDefaults.option.maxUses.ten), value: 10 },
+            { label: () => t(plugin.inviteDefaults.option.maxUses.twentyFive), value: 25 },
+            { label: () => t(plugin.inviteDefaults.option.maxUses.fifty), value: 50 },
+            { label: () => t(plugin.inviteDefaults.option.maxUses.oneHundred), value: 100 },
+        ],
     },
     temporaryMembership: {
-        get label() {
-            return t("plugin.inviteDefaults.option.temporaryMembership.label");
-        },
-        get description() {
-            return t("plugin.inviteDefaults.option.temporaryMembership.description");
-        },
+        label: () => t(plugin.inviteDefaults.option.temporaryMembership.label),
+        description: () => t(plugin.inviteDefaults.option.temporaryMembership.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
@@ -65,13 +49,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "InviteDefaults",
-    description: "Allows you to edit the default values when creating server invites.",
+    description: () => t(plugin.inviteDefaults.description),
     authors: [PcDevs.VillainsRule],
     settings,
-
-    get displayDescription() {
-        return t("plugin.inviteDefaults.description");
-    },
 
     patches: [
         {
@@ -93,3 +73,4 @@ export default definePlugin({
         }
     ]
 });
+

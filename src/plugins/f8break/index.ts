@@ -17,18 +17,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "F8Break",
-    description: "Pause the client when you press F8 with DevTools (+ breakpoints) open.",
+    description: () => t(plugin.f8break.description),
     authors: [Devs.lewisakura],
-
-    get displayDescription() {
-        return t("plugin.f8break.description");
-    },
 
     start() {
         window.addEventListener("keydown", this.event);

@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -60,7 +60,7 @@ function AllowLevelSetting({ settingKey }: AllowLevelSettingProps) {
 
 const AllowLevelSettings = ErrorBoundary.wrap(() => {
     return (
-        <SettingsSection name={t("plugin.consoleJanitor.option.allowLevel.filter")} description={t("plugin.consoleJanitor.option.allowLevel.description")}>
+        <SettingsSection name={t(plugin.consoleJanitor.option.allowLevel.filter)} description={t(plugin.consoleJanitor.option.allowLevel.description)}>
             <div style={{ display: "flex", flexDirection: "row" }}>
                 {Object.keys(settings.store.allowLevel).map(key => (
                     <AllowLevelSetting key={key} settingKey={key as keyof AllowLevels} />
@@ -72,34 +72,22 @@ const AllowLevelSettings = ErrorBoundary.wrap(() => {
 
 const settings = definePluginSettings({
     disableLoggers: {
-        get label() {
-            return t("plugin.consoleJanitor.option.disableLoggers.label");
-        },
-        get description() {
-            return t("plugin.consoleJanitor.option.disableLoggers.description");
-        },
+        label: () => t(plugin.consoleJanitor.option.disableLoggers.label),
+        description: () => t(plugin.consoleJanitor.option.disableLoggers.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
     },
     disableSpotifyLogger: {
-        get label() {
-            return t("plugin.consoleJanitor.option.disableSpotifyLogger.label");
-        },
-        get description() {
-            return t("plugin.consoleJanitor.option.disableSpotifyLogger.description");
-        },
+        label: () => t(plugin.consoleJanitor.option.disableSpotifyLogger.label),
+        description: () => t(plugin.consoleJanitor.option.disableSpotifyLogger.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     whitelistedLoggers: {
-        get label() {
-            return t("plugin.consoleJanitor.option.whitelistedLoggers.label");
-        },
-        get description() {
-            return t("plugin.consoleJanitor.option.whitelistedLoggers.description");
-        },
+        label: () => t(plugin.consoleJanitor.option.whitelistedLoggers.label),
+        description: () => t(plugin.consoleJanitor.option.whitelistedLoggers.description),
         type: OptionType.STRING,
         default: "GatewaySocket; Routing/Utils",
         onChange(newVal: string) {
@@ -108,9 +96,7 @@ const settings = definePluginSettings({
         }
     },
     allowLevel: {
-        get label() {
-            return t("plugin.consoleJanitor.option.allowLevel.label");
-        },
+        label: () => t(plugin.consoleJanitor.option.allowLevel.label),
         type: OptionType.COMPONENT,
         component: AllowLevelSettings,
         default: defineDefault<AllowLevels>({
@@ -126,13 +112,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "ConsoleJanitor",
-    description: "Disables annoying console messages/errors",
+    description: () => t(plugin.consoleJanitor.description),
     authors: [Devs.Nuckyz, Devs.sadan, PcDevs.MutanPlex],
     settings,
-
-    get displayDescription() {
-        return t("plugin.consoleJanitor.description");
-    },
 
     startAt: StartAt.Init,
     start() {

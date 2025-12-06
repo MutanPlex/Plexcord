@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t, tJsx } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
@@ -171,19 +171,10 @@ const settings = definePluginSettings({}).withPrivateSettings<{
 
 export default definePlugin({
     name: "SupportHelper",
+    description: () => t(plugin.supportHelper.description),
     required: true,
-    description: "Helps us provide support to you",
     authors: [Devs.Ven, PcDevs.MutanPlex],
     dependencies: ["UserSettingsAPI"],
-
-    get displayName() {
-        return t("plugins.metadata.supportHelper.name");
-    },
-
-    get displayDescription() {
-        return t("plugins.metadata.supportHelper.description");
-    },
-
     settings,
 
     patches: [{
@@ -197,19 +188,13 @@ export default definePlugin({
     commands: [
         {
             name: "plexcord-debug",
-            description: "Send Plexcord debug info",
-            get displayDescription() {
-                return t("plugins.metadata.supportHelper.commands.description.debug");
-            },
+            description: () => t(plugin.supportHelper.commands.description.debug),
             predicate: ctx => (isPluginDev(UserStore.getCurrentUser()?.id) && isPcPluginDev(UserStore.getCurrentUser()?.id)) || isSupportAllowedChannel(ctx.channel),
             execute: async () => ({ content: await generateDebugInfoMessage() })
         },
         {
             name: "plexcord-plugins",
-            description: "Send Plexcord plugin list",
-            get displayDescription() {
-                return t("plugins.metadata.supportHelper.commands.description.plugins");
-            },
+            description: () => t(plugin.supportHelper.commands.description.plugins),
             predicate: ctx => (isPluginDev(UserStore.getCurrentUser()?.id) && isPcPluginDev(UserStore.getCurrentUser()?.id)) || isSupportAllowedChannel(ctx.channel),
             execute: () => ({ content: generatePluginList() })
         }
@@ -228,18 +213,18 @@ export default definePlugin({
 
                 if (isOutdated) {
                     return Alerts.show({
-                        title: t("plugins.metadata.supportHelper.modals.outdated.title"),
+                        title: t(plugin.supportHelper.modals.outdated.title),
                         body: <div>
-                            <Paragraph>{t("plugins.metadata.supportHelper.modals.outdated.body")}</Paragraph>
+                            <Paragraph>{t(plugin.supportHelper.modals.outdated.body)}</Paragraph>
                             <Paragraph className={Margins.top8}>
-                                {t("plugins.metadata.supportHelper.modals.outdated.footer")}
+                                {t(plugin.supportHelper.modals.outdated.footer)}
                             </Paragraph>
                         </div>,
                         onCancel: () => openSettingsTabModal(UpdaterTab!),
-                        cancelText: t("plugins.metadata.supportHelper.modals.outdated.button.cancel"),
-                        confirmText: t("plugins.metadata.supportHelper.modals.outdated.button.confirm"),
+                        cancelText: t(plugin.supportHelper.modals.outdated.button.cancel),
+                        confirmText: t(plugin.supportHelper.modals.outdated.button.confirm),
                         onConfirm: forceUpdate,
-                        secondaryConfirmText: t("plugins.metadata.supportHelper.modals.outdated.button.secondaryConfirm")
+                        secondaryConfirmText: t(plugin.supportHelper.modals.outdated.button.secondaryConfirm)
                     });
                 }
             }
@@ -249,12 +234,12 @@ export default definePlugin({
 
             if (!IS_WEB && IS_UPDATER_DISABLED) {
                 return Alerts.show({
-                    title: t("plugins.metadata.supportHelper.modals.updater.title"),
+                    title: t(plugin.supportHelper.modals.updater.title),
                     body: <div>
-                        <Paragraph>{t("plugins.metadata.supportHelper.modals.updater.body")}</Paragraph>
+                        <Paragraph>{t(plugin.supportHelper.modals.updater.body)}</Paragraph>
                         <Paragraph className={Margins.top8}>
-                            {tJsx("plugins.metadata.supportHelper.modals.updater.footer", {
-                                officially: <Link href="https://plexcord.club/download">{t("plugins.metadata.supportHelper.modals.updater.officially")}</Link>
+                            {t(plugin.supportHelper.modals.updater.footer, {
+                                officially: <Link href="https://plexcord.club/download">{t(plugin.supportHelper.modals.updater.officially)}</Link>
                             })}
                         </Paragraph>
                     </div>
@@ -263,21 +248,21 @@ export default definePlugin({
 
             if (!IS_STANDALONE && !settings.store.dismissedDevBuildWarning) {
                 return Alerts.show({
-                    title: t("plugins.metadata.supportHelper.modals.custom.title"),
+                    title: t(plugin.supportHelper.modals.custom.title),
                     body: <div>
-                        <Paragraph>{t("plugins.metadata.supportHelper.modals.custom.header")}</Paragraph>
+                        <Paragraph>{t(plugin.supportHelper.modals.custom.header)}</Paragraph>
 
                         <Paragraph className={Margins.top8}>
-                            {tJsx("plugins.metadata.supportHelper.modals.custom.body", {
-                                officialBuild: <Link href="https://plexcord.club/download">{t("plugins.metadata.supportHelper.modals.custom.official")}</Link>,
-                                switch: <Link href="https://plexcord.club/download">{t("plugins.metadata.supportHelper.modals.custom.switch")}</Link>
+                            {t(plugin.supportHelper.modals.custom.body, {
+                                officialBuild: <Link href="https://plexcord.club/download">{t(plugin.supportHelper.modals.custom.official)}</Link>,
+                                switch: <Link href="https://plexcord.club/download">{t(plugin.supportHelper.modals.custom.switch)}</Link>
                             })}
                         </Paragraph>
 
-                        <BaseText size="md" weight="bold" className={Margins.top8}>{t("plugins.metadata.supportHelper.modals.custom.footer")}</BaseText>
+                        <BaseText size="md" weight="bold" className={Margins.top8}>{t(plugin.supportHelper.modals.custom.footer)}</BaseText>
                     </div>,
-                    confirmText: t("plugins.metadata.supportHelper.modals.custom.button.confirm"),
-                    secondaryConfirmText: t("plugins.metadata.supportHelper.modals.custom.button.secondaryConfirm"),
+                    confirmText: t(plugin.supportHelper.modals.custom.button.confirm),
+                    secondaryConfirmText: t(plugin.supportHelper.modals.custom.button.secondaryConfirm),
                     onConfirmSecondary: () => settings.store.dismissedDevBuildWarning = true
                 });
             }
@@ -303,16 +288,16 @@ export default definePlugin({
                     onClick={async () => {
                         try {
                             if (await forceUpdate())
-                                showToast(t("plugins.metadata.supportHelper.modals.updater.toast.success"), Toasts.Type.SUCCESS);
+                                showToast(t(plugin.supportHelper.modals.updater.toast.success), Toasts.Type.SUCCESS);
                             else
-                                showToast(t("plugins.metadata.supportHelper.modals.updater.toast.already"), Toasts.Type.MESSAGE);
+                                showToast(t(plugin.supportHelper.modals.updater.toast.already), Toasts.Type.MESSAGE);
                         } catch (e) {
-                            new Logger(this.name).error("Error while updating:", e);
-                            showToast(t("plugins.metadata.supportHelper.modals.updater.toast.failed"), Toasts.Type.FAILURE);
+                            new Logger(t(plugin.supportHelper.name)).error("Error while updating:", e);
+                            showToast(t(plugin.supportHelper.modals.updater.toast.failed), Toasts.Type.FAILURE);
                         }
                     }}
                 >
-                    {t("plugins.metadata.supportHelper.modals.updater.button.now")}
+                    {t(plugin.supportHelper.modals.updater.button.now)}
                 </Button>
             );
         }
@@ -325,14 +310,14 @@ export default definePlugin({
                         variant="primary"
                         onClick={async () => sendMessage(props.channel.id, { content: await generateDebugInfoMessage() })}
                     >
-                        {t("plugins.metadata.supportHelper.button.debug")}
+                        {t(plugin.supportHelper.button.debug)}
                     </Button>,
                     <Button
                         key="pc-plg-list"
                         variant="primary"
                         onClick={async () => sendMessage(props.channel.id, { content: generatePluginList() })}
                     >
-                        {t("plugins.metadata.supportHelper.button.plugins")}
+                        {t(plugin.supportHelper.button.plugins)}
                     </Button>
                 );
             }
@@ -346,14 +331,14 @@ export default definePlugin({
                             onClick={async () => {
                                 try {
                                     await AsyncFunction(match[1])();
-                                    showToast(t("plugins.metadata.supportHelper.toast.success"), Toasts.Type.SUCCESS);
+                                    showToast(t(plugin.supportHelper.toast.success), Toasts.Type.SUCCESS);
                                 } catch (e) {
-                                    new Logger(this.name).error("Error while running snippet:", e);
-                                    showToast(t("plugins.metadata.supportHelper.toast.failed"), Toasts.Type.FAILURE);
+                                    new Logger(t(plugin.supportHelper.name)).error("Error while running snippet:", e);
+                                    showToast(t(plugin.supportHelper.toast.failed), Toasts.Type.FAILURE);
                                 }
                             }}
                         >
-                            {t("plugins.metadata.supportHelper.button.snippet")}
+                            {t(plugin.supportHelper.button.snippet)}
                         </Button>
                     );
                 }
@@ -381,7 +366,7 @@ export default definePlugin({
                 }
             } catch (error) {
                 console.error("Failed to open invite modal:", error);
-                showToast(t("plugins.metadata.supportHelper.toast.failedOpenInvite"), Toasts.Type.FAILURE);
+                showToast(t(plugin.supportHelper.toast.failedOpenInvite), Toasts.Type.FAILURE);
             }
         };
 
@@ -393,7 +378,7 @@ export default definePlugin({
 
         return (
             <Card variant="warning" className={Margins.top8} defaultPadding>
-                {tJsx("plugins.metadata.supportHelper.dm.warning", {
+                {t(plugin.supportHelper.dm.warning, {
                     br: <br />,
                     channel: channelLink,
                     support: <a onClick={handleJoinServer} style={{ cursor: "pointer", color: "var(--text-link)", textDecoration: "none" }}>Plexcord</a>

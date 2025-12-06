@@ -20,7 +20,7 @@
 import "./style.css";
 
 import { addProfileBadge, BadgePosition, BadgeUserArgs, ProfileBadge, removeProfileBadge } from "@api/Badges";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { addMemberListDecorator, removeMemberListDecorator } from "@api/MemberListDecorators";
 import { addMessageDecoration, removeMessageDecoration } from "@api/MessageDecorations";
 import { Settings } from "@api/Settings";
@@ -78,7 +78,7 @@ const { useStatusFillColor } = mapMangledModuleLazy(".concat(.5625*", {
 
 const PlatformIcon = ({ platform, status, small }: { platform: Platform, status: string; small: boolean; }) => {
     const tooltip = platform === "embedded"
-        ? t("plugin.platformIndicators.embeddedTooltip")
+        ? t(plugin.platformIndicators.embeddedTooltip)
         : platform[0].toUpperCase() + platform.slice(1);
 
     const Icon = Icons[platform] ?? Icons.desktop;
@@ -171,12 +171,8 @@ const badge: ProfileBadge = {
 
 const indicatorLocations = {
     list: {
-        get label() {
-            return t("plugin.platformIndicators.option.list.label");
-        },
-        get description() {
-            return t("plugin.platformIndicators.option.list.description");
-        },
+        label: () => t(plugin.platformIndicators.option.list.label),
+        description: () => t(plugin.platformIndicators.option.list.description),
         onEnable: () => addMemberListDecorator("platform-indicator", props =>
             <ErrorBoundary noop>
                 <PlatformIndicator user={props.user} small={true} />
@@ -185,22 +181,14 @@ const indicatorLocations = {
         onDisable: () => removeMemberListDecorator("platform-indicator")
     },
     badges: {
-        get label() {
-            return t("plugin.platformIndicators.option.badges.label");
-        },
-        get description() {
-            return t("plugin.platformIndicators.option.badges.description");
-        },
+        label: () => t(plugin.platformIndicators.option.badges.label),
+        description: () => t(plugin.platformIndicators.option.badges.description),
         onEnable: () => addProfileBadge(badge),
         onDisable: () => removeProfileBadge(badge)
     },
     messages: {
-        get label() {
-            return t("plugin.platformIndicators.option.messages.label");
-        },
-        get description() {
-            return t("plugin.platformIndicators.option.messages.description");
-        },
+        label: () => t(plugin.platformIndicators.option.messages.label),
+        description: () => t(plugin.platformIndicators.option.messages.description),
         onEnable: () => addMessageDecoration("platform-indicator", props =>
             <ErrorBoundary noop>
                 <PlatformIndicator user={props.message?.author} />
@@ -212,13 +200,9 @@ const indicatorLocations = {
 
 export default definePlugin({
     name: "PlatformIndicators",
-    description: "Adds platform indicators (Desktop, Mobile, Web...) to users",
+    description: () => t(plugin.platformIndicators.description),
     authors: [Devs.kemo, Devs.TheSun, Devs.Nuckyz, Devs.Ven],
     dependencies: ["MessageDecorationsAPI", "MemberListDecoratorsAPI"],
-
-    get displayDescription() {
-        return t("plugin.platformIndicators.description");
-    },
 
     start() {
         const settings = Settings.plugins.PlatformIndicators;
@@ -299,12 +283,8 @@ export default definePlugin({
         ...Object.fromEntries(
             Object.entries(indicatorLocations).map(([key, value]) => {
                 return [key, {
-                    get label() {
-                        return t("plugin.platformIndicators.option." + key + ".label");
-                    },
-                    get description() {
-                        return t("plugin.platformIndicators.option." + key + ".description");
-                    },
+                    label: () => t(plugin.platformIndicators.option[key].label),
+                    description: () => t(plugin.platformIndicators.option[key].description),
                     type: OptionType.BOOLEAN,
                     // onChange doesn't give any way to know which setting was changed, so restart required
                     restartNeeded: true,
@@ -313,12 +293,8 @@ export default definePlugin({
             })
         ),
         colorMobileIndicator: {
-            get label() {
-                return t("plugin.platformIndicators.option.colorMobileIndicator.label");
-            },
-            get description() {
-                return t("plugin.platformIndicators.option.colorMobileIndicator.description");
-            },
+            label: () => t(plugin.platformIndicators.option.colorMobileIndicator.label),
+            description: () => t(plugin.platformIndicators.option.colorMobileIndicator.description),
             type: OptionType.BOOLEAN,
             default: true,
             restartNeeded: true

@@ -18,7 +18,7 @@
 */
 
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Message } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -27,12 +27,8 @@ import { findComponentByCodeLazy } from "@webpack";
 const PinIcon = findComponentByCodeLazy("1-.06-.63L6.16");
 export default definePlugin({
     name: "PinIcon",
-    description: "Adds a pin icon to pinned messages",
+    description: () => t(plugin.pinIcon.description),
     authors: [PcDevs.iamme, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.pinIcon.description");
-    },
 
     patches: [
         {

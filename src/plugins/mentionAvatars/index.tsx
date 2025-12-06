@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { User } from "@plexcord/discord-types";
@@ -17,12 +17,8 @@ import { GuildRoleStore, SelectedGuildStore, useState } from "@webpack/common";
 
 const settings = definePluginSettings({
     showAtSymbol: {
-        get label() {
-            return t("plugin.mentionAvatars.option.showAtSymbol.label");
-        },
-        get description() {
-            return t("plugin.mentionAvatars.option.showAtSymbol.description");
-        },
+        label: () => t(plugin.mentionAvatars.option.showAtSymbol.label),
+        description: () => t(plugin.mentionAvatars.option.showAtSymbol.description),
         type: OptionType.BOOLEAN,
         default: true
     }
@@ -51,12 +47,8 @@ function DefaultRoleIcon() {
 
 export default definePlugin({
     name: "MentionAvatars",
-    description: "Shows user avatars and role icons inside mentions",
+    description: () => t(plugin.mentionAvatars.description),
     authors: [Devs.Ven, Devs.SerStars],
-
-    get displayDescription() {
-        return t("plugin.mentionAvatars.description");
-    },
 
     patches: [{
         find: ".USER_MENTION)",

@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Card } from "@components/Card";
 import { HeadingSecondary, HeadingTertiary } from "@components/Heading";
@@ -136,13 +136,13 @@ function GoogleFontSearch({ onSelect }: { onSelect: (font: GoogleFontMetadata) =
 
     return (
         <section>
-            <HeadingSecondary>{t("plugin.fontLoader.modal.settings.title")}</HeadingSecondary>
-            <Paragraph>{t("plugin.fontLoader.modal.settings.description")}</Paragraph>
+            <HeadingSecondary>{t(plugin.fontLoader.modal.settings.title)}</HeadingSecondary>
+            <Paragraph>{t(plugin.fontLoader.modal.settings.description)}</Paragraph>
 
             <TextInput
                 value={query}
                 onChange={e => handleSearch(e)}
-                placeholder={t("plugin.fontLoader.modal.settings.placeholder")}
+                placeholder={t(plugin.fontLoader.modal.settings.placeholder)}
                 disabled={loading}
                 className={Margins.bottom16}
             />
@@ -157,11 +157,11 @@ function GoogleFontSearch({ onSelect }: { onSelect: (font: GoogleFontMetadata) =
                         >
                             <div className="pc-googlefonts-preview" style={{ fontFamily: font.family }}>
                                 <HeadingTertiary>{font.displayName}</HeadingTertiary>
-                                <Paragraph>{t("plugin.fontLoader.modal.settings.previewText")}</Paragraph>
+                                <Paragraph>{t(plugin.fontLoader.modal.settings.previewText)}</Paragraph>
                             </div>
                             {font.authors?.length && (
                                 <Paragraph className={Margins.top8} style={{ opacity: 0.7 }}>
-                                    {t("plugin.fontLoader.modal.settings.authors", { authors: font.authors.join(", ") })}
+                                    {t(plugin.fontLoader.modal.settings.authors, { authors: font.authors.join(", ") })}
                                 </Paragraph>
                             )}
                         </Card>
@@ -174,23 +174,15 @@ function GoogleFontSearch({ onSelect }: { onSelect: (font: GoogleFontMetadata) =
 
 const settings = definePluginSettings({
     selectedFont: {
-        get label() {
-            return t("plugin.fontLoader.option.selectedFont.label");
-        },
-        get description() {
-            return t("plugin.fontLoader.option.selectedFont.description");
-        },
+        label: () => t(plugin.fontLoader.option.selectedFont.label),
+        description: () => t(plugin.fontLoader.option.selectedFont.description),
         type: OptionType.STRING,
         default: "",
         hidden: true
     },
     fontSearch: {
-        get label() {
-            return t("plugin.fontLoader.option.fontSearch.label");
-        },
-        get description() {
-            return t("plugin.fontLoader.option.fontSearch.description");
-        },
+        label: () => t(plugin.fontLoader.option.fontSearch.label),
+        description: () => t(plugin.fontLoader.option.fontSearch.description),
         type: OptionType.COMPONENT,
         component: () => (
             <GoogleFontSearch
@@ -202,12 +194,8 @@ const settings = definePluginSettings({
         )
     },
     applyOnCodeBlocks: {
-        get label() {
-            return t("plugin.fontLoader.option.applyOnCodeBlocks.label");
-        },
-        get description() {
-            return t("plugin.fontLoader.option.applyOnCodeBlocks.description");
-        },
+        label: () => t(plugin.fontLoader.option.applyOnCodeBlocks.label),
+        description: () => t(plugin.fontLoader.option.applyOnCodeBlocks.description),
         type: OptionType.BOOLEAN,
         default: false
     }
@@ -215,13 +203,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "FontLoader",
-    description: "Loads any font from Google Fonts",
+    description: () => t(plugin.fontLoader.description),
     authors: [PcDevs.vmohammad, PcDevs.MutanPlex],
     settings,
-
-    get displayDescription() {
-        return t("plugin.fontLoader.description");
-    },
 
     async start() {
         const savedFont = settings.store.selectedFont;

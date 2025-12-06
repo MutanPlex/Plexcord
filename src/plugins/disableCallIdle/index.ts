@@ -17,18 +17,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "DisableCallIdle",
-    description: "Disables automatically getting kicked from a DM voice call after 3 minutes and being moved to an AFK voice channel.",
+    description: () => t(plugin.disableCallIdle.description),
     authors: [Devs.Nuckyz],
-
-    get displayDescription() {
-        return t("plugin.disableCallIdle.description");
-    },
 
     patches: [
         {

@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Paragraph } from "@components/Paragraph";
 import { Switch } from "@components/settings";
@@ -95,10 +95,10 @@ export const Toolbar = () => {
     return (
         <div className="pc-remix-toolbar">
             <div className="pc-remix-tools">
-                <Button className={(tool === "brush" ? "tool-active" : "")} onClick={() => changeTool("brush")}>{t("plugin.remix.button.brush")}</Button>
-                <Button className={(tool === "erase" ? "tool-active" : "")} onClick={() => changeTool("erase")}>{t("plugin.remix.button.erase")}</Button>
-                <Button className={(tool === "crop" ? "tool-active" : "")} onClick={() => changeTool("crop")}>{t("plugin.remix.button.crop")}</Button>
-                <Button className={(tool === "shape" ? "tool-active" : "")} onClick={() => changeTool("shape")}>{t("plugin.remix.button.shape")}</Button>
+                <Button className={(tool === "brush" ? "tool-active" : "")} onClick={() => changeTool("brush")}>{t(plugin.remix.button.brush)}</Button>
+                <Button className={(tool === "erase" ? "tool-active" : "")} onClick={() => changeTool("erase")}>{t(plugin.remix.button.erase)}</Button>
+                <Button className={(tool === "crop" ? "tool-active" : "")} onClick={() => changeTool("crop")}>{t(plugin.remix.button.crop)}</Button>
+                <Button className={(tool === "shape" ? "tool-active" : "")} onClick={() => changeTool("shape")}>{t(plugin.remix.button.shape)}</Button>
             </div>
             <div className="pc-remix-settings">
                 <div className="pc-remix-setting-section">
@@ -117,28 +117,28 @@ export const Toolbar = () => {
                         />
                     }
                 </div>
-                {(tool === "crop") && <Button onClick={resetBounds}>{t("plugin.remix.button.reset")}</Button>}
+                {(tool === "crop") && <Button onClick={resetBounds}>{t(plugin.remix.button.reset)}</Button>}
                 <div className="pc-remix-setting-section">
                     {(tool === "shape") && (<>
                         <Select
                             select={setShape}
                             isSelected={v => v === currentShape}
                             serialize={v => String(v)}
-                            placeholder={t("plugin.remix.button.shape")}
+                            placeholder={t(plugin.remix.button.shape)}
                             options={[
-                                { label: t("plugin.remix.editor.rectangle"), value: "rectangle" as Shape },
-                                { label: t("plugin.remix.editor.ellipse"), value: "ellipse" as Shape },
-                                { label: t("plugin.remix.editor.line"), value: "line" as Shape },
-                                { label: t("plugin.remix.editor.arrow"), value: "arrow" as Shape },
+                                { label: t(plugin.remix.editor.rectangle), value: "rectangle" as Shape },
+                                { label: t(plugin.remix.editor.ellipse), value: "ellipse" as Shape },
+                                { label: t(plugin.remix.editor.line), value: "line" as Shape },
+                                { label: t(plugin.remix.editor.arrow), value: "arrow" as Shape },
                             ]}
                         />
 
-                        <Paragraph className="pc-remix-setting-switch">{t("plugin.remix.editor.fill")} <Switch checked={fill} onChange={setFill} /></Paragraph>
+                        <Paragraph className="pc-remix-setting-switch">{t(plugin.remix.editor.fill)} <Switch checked={fill} onChange={setFill} /></Paragraph>
                     </>)}
                 </div>
             </div>
             <div className="pc-remix-misc">
-                <Button onClick={clear}>{t("plugin.remix.button.clear")}</Button>
+                <Button onClick={clear}>{t(plugin.remix.button.clear)}</Button>
             </div>
         </div>
     );

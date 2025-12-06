@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
@@ -31,32 +31,20 @@ export const logger = new Logger("DevCompanion");
 
 export const settings = definePluginSettings({
     notifyOnAutoConnect: {
-        get label() {
-            return t("plugin.devCompanion.option.notifyOnAutoConnect.label");
-        },
-        get description() {
-            return t("plugin.devCompanion.option.notifyOnAutoConnect.description");
-        },
+        label: () => t(plugin.devCompanion.option.notifyOnAutoConnect.label),
+        description: () => t(plugin.devCompanion.option.notifyOnAutoConnect.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     usePatchedModule: {
-        get label() {
-            return t("plugin.devCompanion.option.usePatchedModule.label");
-        },
-        get description() {
-            return t("plugin.devCompanion.option.usePatchedModule.description");
-        },
+        label: () => t(plugin.devCompanion.option.usePatchedModule.label),
+        description: () => t(plugin.devCompanion.option.usePatchedModule.description),
         default: true,
         type: OptionType.BOOLEAN,
     },
     reloadAfterToggle: {
-        get label() {
-            return t("plugin.devCompanion.option.reloadAfterToggle.label");
-        },
-        get description() {
-            return t("plugin.devCompanion.option.reloadAfterToggle.description");
-        },
+        label: () => t(plugin.devCompanion.option.reloadAfterToggle.label),
+        description: () => t(plugin.devCompanion.option.reloadAfterToggle.description),
         default: true,
         type: OptionType.BOOLEAN
     }
@@ -64,23 +52,17 @@ export const settings = definePluginSettings({
 
 export default definePlugin({
     name: "DevCompanion",
-    description: "Dev Companion Plugin. Please report anything not working or being weird (most likely its a bug) to MutanPlex, either ping or dm, thanks!",
+    description: () => t(plugin.devCompanion.description),
     authors: [Devs.Ven, Devs.sadan, Devs.Samwich],
     reporterTestable: ReporterTestable.None,
     settings,
 
-    get displayDescription() {
-        return t("plugin.devCompanion.description");
-    },
-
-    get toolboxActions() {
-        return {
-            [t("plugin.devCompanion.reconnect")]() {
-                socket?.close(1000, "Reconnecting");
-                initWs(true);
-            }
-        };
-    },
+    toolboxActions: () => ({
+        [t(plugin.devCompanion.reconnect)]() {
+            socket?.close(1000, "Reconnecting");
+            initWs(true);
+        }
+    }),
 
     start() {
         // if we're running the reporter, we need to initws in the reporter file to avoid a race condition

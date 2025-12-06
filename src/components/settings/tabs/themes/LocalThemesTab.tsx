@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { t, themes } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { Settings, useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
@@ -90,24 +90,24 @@ export function LocalThemesTab() {
     return (
         <Flex flexDirection="column" gap="1em">
             <Card>
-                <Heading>{t("themes.find")}:</Heading>
+                <Heading>{t(themes.find)}:</Heading>
                 <div style={{ marginBottom: ".5em", display: "flex", flexDirection: "column" }}>
                     <Link style={{ marginRight: ".5em" }} href="https://betterdiscord.app/themes">
-                        {t("themes.bd")}
+                        {t(themes.bd)}
                     </Link>
-                    <Link href="https://github.com/search?q=discord+theme">{t("github")}</Link>
+                    <Link href="https://github.com/search?q=discord+theme">{t(themes.github)}</Link>
                 </div>
-                <Paragraph>{t("themes.download")}</Paragraph>
+                <Paragraph>{t(themes.download)}</Paragraph>
             </Card>
 
             <Card>
-                <Heading>{t("themes.external.title")}</Heading>
-                <Paragraph>{t("themes.external.security")}</Paragraph>
-                <Paragraph>{t("themes.external.host")}</Paragraph>
+                <Heading>{t(themes.external.title)}</Heading>
+                <Paragraph>{t(themes.external.security)}</Paragraph>
+                <Paragraph>{t(themes.external.host)}</Paragraph>
             </Card>
 
             <section>
-                <Heading>{t("themes.local")}</Heading>
+                <Heading>{t(themes.local)}</Heading>
                 <QuickActionCard>
                     <>
                         {IS_WEB ?
@@ -115,7 +115,7 @@ export function LocalThemesTab() {
                                 <QuickAction
                                     text={
                                         <span style={{ position: "relative" }}>
-                                            {t("themes.upload")}
+                                            {t(themes.upload)}
                                             <FileInput
                                                 ref={fileInputRef}
                                                 onChange={async e => {
@@ -131,25 +131,25 @@ export function LocalThemesTab() {
                                 />
                             ) : (
                                 <QuickAction
-                                    text={t("themes.openFolder")}
+                                    text={t(themes.openFolder)}
                                     action={() => PlexcordNative.themes.openFolder()}
                                     Icon={FolderIcon}
                                 />
                             )}
                         <QuickAction
-                            text={t("themes.loadMissing")}
+                            text={t(themes.loadMissing)}
                             action={refreshLocalThemes}
                             Icon={RestartIcon}
                         />
                         <QuickAction
-                            text={t("themes.editQuickCSS")}
+                            text={t(themes.editQuickCSS)}
                             action={() => PlexcordNative.quickCss.openEditor()}
                             Icon={PaintbrushIcon}
                         />
 
                         {isPluginEnabled(ClientThemePlugin.name) && (
                             <QuickAction
-                                text={t("themes.editClient")}
+                                text={t(themes.editClient)}
                                 action={() => openPluginModal(ClientThemePlugin)}
                                 Icon={PencilIcon}
                             />

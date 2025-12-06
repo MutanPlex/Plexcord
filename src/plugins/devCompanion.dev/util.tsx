@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { showNotice } from "@api/Notices";
 import { Settings } from "@api/Settings";
 import { canonicalizeMatch } from "@utils/patches";
@@ -15,6 +15,10 @@ import { WebpackPatcher } from "Plexcord";
 
 import { logger, settings as companionSettings } from ".";
 import { FindNode } from "./types/recieve";
+
+function getName(name: string | (() => string)): string {
+    return typeof name === "function" ? name() : name;
+}
 
 const { getFactoryPatchedBy, getFactoryPatchedSource } = WebpackPatcher;
 
@@ -136,7 +140,7 @@ export function toggleEnabled(name: string, beforeReload: (error?: string) => vo
             }
             Toasts.show({
                 id: Toasts.genId(),
-                message: t("plugin.devCompanion.toast.reload"),
+                message: t(plugin.devCompanion.toast.reload),
                 type: Toasts.Type.MESSAGE,
                 options: {
                     duration: 5000,
@@ -145,9 +149,9 @@ export function toggleEnabled(name: string, beforeReload: (error?: string) => vo
             });
         }
     }
-    const plugin = Plexcord.Plugins.plugins[name];
+    const targetPlugin = Plexcord.Plugins.plugins[name];
 
-    const settings = Settings.plugins[plugin.name];
+    const settings = Settings.plugins[getName(targetPlugin.name)];
 
     const isEnabled = () => settings.enabled ?? false;
 
@@ -155,10 +159,10 @@ export function toggleEnabled(name: string, beforeReload: (error?: string) => vo
 
     // If we're enabling a plugin, make sure all deps are enabled recursively.
     if (!wasEnabled) {
-        const { restartNeeded, failures } = Plexcord.Plugins.startDependenciesRecursive(plugin);
+        const { restartNeeded, failures } = Plexcord.Plugins.startDependenciesRecursive(targetPlugin);
         if (failures.length) {
-            console.error(`Failed to start dependencies for ${plugin.name}: ${failures.join(", ")}`);
-            showNotice(t("plugin.devCompanion.toast.failed") + " " + failures.join(", "), t("plugin.devCompanion.toast.close"), () => null);
+            console.error(`Failed to start dependencies for ${targetPlugin.name}: ${failures.join(", ")}`);
+            showNotice(t(plugin.devCompanion.toast.failed) + " " + failures.join(", "), t(plugin.devCompanion.toast.close), () => null);
             beforeReturn();
             return;
         } else if (restartNeeded) {
@@ -171,7 +175,7 @@ export function toggleEnabled(name: string, beforeReload: (error?: string) => vo
     }
 
     // if the plugin has patches, dont use stopPlugin/startPlugin. Wait for restart to apply changes.
-    if (plugin.patches?.length) {
+    if (targetPlugin.patches?.length) {
         settings.enabled = !wasEnabled;
         onRestartNeeded();
         beforeReturn();
@@ -179,18 +183,18 @@ export function toggleEnabled(name: string, beforeReload: (error?: string) => vo
     }
 
     // If the plugin is enabled, but hasn't been started, then we can just toggle it off.
-    if (wasEnabled && !plugin.started) {
+    if (wasEnabled && !targetPlugin.started) {
         settings.enabled = !wasEnabled;
         beforeReturn();
         return;
     }
 
-    const result = wasEnabled ? Plexcord.Plugins.stopPlugin(plugin) : Plexcord.Plugins.startPlugin(plugin);
+    const result = wasEnabled ? Plexcord.Plugins.stopPlugin(targetPlugin) : Plexcord.Plugins.startPlugin(targetPlugin);
 
     if (!result) {
         settings.enabled = false;
 
-        const msg = wasEnabled ? t("plugin.devCompanion.toast.disableFailed", { plugin: plugin.name }) : t("plugin.devCompanion.toast.enableFailed", { plugin: plugin.name });
+        const msg = wasEnabled ? t(plugin.devCompanion.toast.stopping, { plugin: targetPlugin.name }) : t(plugin.devCompanion.toast.starting, { plugin: targetPlugin.name });
         console.error(msg);
         showErrorToast(msg);
         beforeReturn();

@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
@@ -24,18 +24,18 @@ export default (props: ModalProps & { onClose: () => void; }) => {
         <div>
             <ModalRoot className="pc-create-notebook" size={ModalSize.SMALL} {...props}>
                 <ModalHeader className="pc-notebook-header">
-                    <BaseText tag="h3">{t("plugin.holyNotes.modal.create.title")}</BaseText>
+                    <BaseText tag="h3">{t(plugin.holyNotes.modal.create.title)}</BaseText>
                     <ModalCloseButton onClick={props.onClose} />
                 </ModalHeader>
                 <ModalContent>
                     <TextInput
                         value={notebookName}
-                        placeholder={t("plugin.holyNotes.modal.create.placeholder")}
+                        placeholder={t(plugin.holyNotes.modal.create.placeholder)}
                         onChange={value => setNotebookName(value)}
                         style={{ marginBottom: "10px" }} />
                 </ModalContent>
                 <ModalFooter>
-                    <Button onClick={handleCreateNotebook} variant="positive">{t("plugin.holyNotes.button.create")}</Button>
+                    <Button onClick={handleCreateNotebook} variant="positive">{t(plugin.holyNotes.button.create)}</Button>
                 </ModalFooter>
             </ModalRoot>
         </div>

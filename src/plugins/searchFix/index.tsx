@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -26,27 +26,23 @@ function settingsComponent() {
         <span style={{ color: "white" }}>
             <i>
                 <b>
-                    {t("plugin.searchFix.notPerfect")}
+                    {t(plugin.searchFix.notPerfect)}
                 </b>
             </i>
-            {t("plugin.searchFix.paragraph1")}<br />
-            {t("plugin.searchFix.paragraph2")}<br />
-            {t("plugin.searchFix.paragraph3")}<br />
-            {t("plugin.searchFix.paragraph4")}<br />
-            {t("plugin.searchFix.paragraph5")}
+            {t(plugin.searchFix.paragraph1)}<br />
+            {t(plugin.searchFix.paragraph2)}<br />
+            {t(plugin.searchFix.paragraph3)}<br />
+            {t(plugin.searchFix.paragraph4)}<br />
+            {t(plugin.searchFix.paragraph5)}
         </span>
     );
 }
 
 export default definePlugin({
     name: "SearchFix",
-    description: 'Fixes the annoying "We dropped the magnifying glass!" error.',
+    description: () => t(plugin.searchFix.description),
     settingsAboutComponent: () => settingsComponent(),
     authors: [PcDevs.Jaxx, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.searchFix.description");
-    },
 
     patches: [
         {

@@ -9,7 +9,7 @@ import "./styles.css";
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { get } from "@api/DataStore";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { Channel, User } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
@@ -49,7 +49,7 @@ const userContextMenuPatch: NavContextMenuPatchCallback = (children, { user }: {
 
     const setCustomColorItem = (
         <Menu.MenuItem
-            label={t("plugin.customUserColors.context.setColor")}
+            label={t(plugin.customUserColors.context.setColor)}
             id="set-color"
             icon={ColorIcon}
             action={async () => {
@@ -67,7 +67,7 @@ const channelContextMenuPatch: NavContextMenuPatchCallback = (children, { channe
 
     const setCustomColorItem = (
         <Menu.MenuItem
-            label={t("plugin.customUserColors.context.setColor")}
+            label={t(plugin.customUserColors.context.setColor)}
             id="set-color"
             icon={ColorIcon}
             action={async () => {
@@ -89,22 +89,14 @@ export function getCustomColorString(id: string | undefined, withHash?: boolean)
 
 const settings = definePluginSettings({
     dmList: {
-        get label() {
-            return t("plugin.customUserColors.option.dmList.label");
-        },
-        get description() {
-            return t("plugin.customUserColors.option.dmList.description");
-        },
+        label: () => t(plugin.customUserColors.option.dmList.label),
+        description: () => t(plugin.customUserColors.option.dmList.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     colorInServers: {
-        get label() {
-            return t("plugin.customUserColors.option.colorInServers.label");
-        },
-        get description() {
-            return t("plugin.customUserColors.option.colorInServers.description");
-        },
+        label: () => t(plugin.customUserColors.option.colorInServers.label),
+        description: () => t(plugin.customUserColors.option.colorInServers.description),
         type: OptionType.BOOLEAN,
         default: true,
     }
@@ -112,7 +104,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "CustomUserColors",
-    description: "Lets you add a custom color to any user, anywhere! Highly recommend to use with typingTweaks and roleColorEverywhere",
+    description: () => t(plugin.customUserColors.description),
     authors: [PcDevs.mochienya, PcDevs.MutanPlex],
     contextMenus: {
         "user-context": userContextMenuPatch,
@@ -121,10 +113,6 @@ export default definePlugin({
     settings,
     requireSettingsMenu,
     getCustomColorString,
-
-    get displayDescription() {
-        return t("plugin.customUserColors.description");
-    },
 
     patches: [
         {

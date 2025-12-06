@@ -18,7 +18,7 @@
 */
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, registerCommand, sendBotMessage, unregisterCommand } from "@api/Commands";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -56,14 +56,14 @@ function createTagCommand(tag: Tag) {
             if (!getTag(tag.name)) {
                 sendBotMessage(ctx.channel.id, {
                     author: { username: "Plexcord" },
-                    content: `${EMOTE} ${t("plugin.messageTags.notExist", { tagname: tag.name })}`
+                    content: `${EMOTE} ${t(plugin.messageTags.notExist, { tagname: tag.name })}`
                 });
                 return { content: `/${tag.name}` };
             }
 
             if (settings.store.clyde) sendBotMessage(ctx.channel.id, {
                 author: { username: "Plexcord" },
-                content: `${EMOTE} ${t("plugin.messageTags.sentTag", { tagname: tag.name })}`
+                content: `${EMOTE} ${t(plugin.messageTags.sentTag, { tagname: tag.name })}`
             });
             return { content: tag.message.replaceAll("\\n", "\n") };
         },
@@ -73,22 +73,14 @@ function createTagCommand(tag: Tag) {
 
 const settings = definePluginSettings({
     clyde: {
-        get label() {
-            return t("plugin.messageTags.option.clyde.label");
-        },
-        get description() {
-            return t("plugin.messageTags.option.clyde.description");
-        },
+        label: () => t(plugin.messageTags.option.clyde.label),
+        description: () => t(plugin.messageTags.option.clyde.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     tagsList: {
-        get label() {
-            return t("plugin.messageTags.option.tagsList.label");
-        },
-        get description() {
-            return t("plugin.messageTags.option.tagsList.description");
-        },
+        label: () => t(plugin.messageTags.option.tagsList.label),
+        description: () => t(plugin.messageTags.option.tagsList.description),
         type: OptionType.CUSTOM,
         default: {} as Record<string, Tag>
     }
@@ -96,13 +88,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "MessageTags",
-    description: "Allows you to save messages and to use them with a simple command.",
+    description: () => t(plugin.messageTags.description),
     authors: [Devs.Luna],
     settings,
-
-    get displayDescription() {
-        return t("plugin.messageTags.description");
-    },
 
     async start() {
         const tags = getTags();
@@ -114,27 +102,18 @@ export default definePlugin({
     commands: [
         {
             name: "tag create",
-            description: "Create a new tag",
-            get displayDescription() {
-                return t("plugin.messageTags.command.tags.option.create.description");
-            },
+            description: () => t(plugin.messageTags.command.tags.option.create.description),
             inputType: ApplicationCommandInputType.BUILT_IN,
             options: [
                 {
                     name: "tag-name",
-                    description: "The name of the tag to trigger the response",
-                    get displayDescription() {
-                        return t("plugin.messageTags.command.tags.option.create.name");
-                    },
+                    description: () => t(plugin.messageTags.command.tags.option.create.name),
                     type: ApplicationCommandOptionType.STRING,
                     required: true
                 },
                 {
                     name: "message",
-                    description: "The message that you will send when using this tag",
-                    get displayDescription() {
-                        return t("plugin.messageTags.command.tags.option.create.message");
-                    },
+                    description: () => t(plugin.messageTags.command.tags.option.create.message),
                     type: ApplicationCommandOptionType.STRING,
                     required: true
                 }
@@ -146,7 +125,7 @@ export default definePlugin({
                 if (getTag(name))
                     return sendBotMessage(ctx.channel.id, {
                         author: { username: "Plexcord" },
-                        content: `${EMOTE} ${t("plugin.messageTags.alreadyExist", { tagname: name })}`
+                        content: `${EMOTE} ${t(plugin.messageTags.alreadyExist, { tagname: name })}`
                     });
 
                 const tag = {
@@ -159,16 +138,13 @@ export default definePlugin({
 
                 sendBotMessage(ctx.channel.id, {
                     author: { username: "Plexcord" },
-                    content: `${EMOTE} ${t("plugin.messageTags.successCreate", { tagname: name })}`
+                    content: `${EMOTE} ${t(plugin.messageTags.successCreate, { tagname: name })}`
                 });
             }
         },
         {
             name: "tag list",
-            description: "List all tags from yourself",
-            get displayDescription() {
-                return t("plugin.messageTags.command.tags.option.list.description");
-            },
+            description: () => t(plugin.messageTags.command.tags.option.list.description),
             inputType: ApplicationCommandInputType.BUILT_IN,
             options: [],
             execute: async (_, ctx) => {
@@ -176,10 +152,10 @@ export default definePlugin({
                     author: { username: "Plexcord" },
                     embeds: [
                         {
-                            title: t("plugin.messageTags.allTags"),
+                            title: t(plugin.messageTags.allTags),
                             description: Object.values(getTags())
                                 .map(tag => `\`${tag.name}\`: ${tag.message.slice(0, 72).replaceAll("\\n", " ")}${tag.message.length > 72 ? "..." : ""}`)
-                                .join("\n") || `${EMOTE} ${t("plugin.messageTags.noTags")}`,
+                                .join("\n") || `${EMOTE} ${t(plugin.messageTags.noTags)}`,
                             // @ts-expect-error
                             color: 0xd77f7f,
                             type: "rich",
@@ -190,18 +166,12 @@ export default definePlugin({
         },
         {
             name: "tag delete",
-            description: "Remove a tag from yourself",
-            get displayDescription() {
-                return t("plugin.messageTags.command.tags.option.delete.description");
-            },
+            description: () => t(plugin.messageTags.command.tags.option.delete.description),
             inputType: ApplicationCommandInputType.BUILT_IN,
             options: [
                 {
                     name: "tag-name",
-                    description: "The name of the tag to remove",
-                    get displayDescription() {
-                        return t("plugin.messageTags.command.tags.option.delete.name");
-                    },
+                    description: () => t(plugin.messageTags.command.tags.option.delete.name),
                     type: ApplicationCommandOptionType.STRING,
                     required: true
                 }
@@ -212,7 +182,7 @@ export default definePlugin({
                 if (!getTag(name))
                     return sendBotMessage(ctx.channel.id, {
                         author: { username: "Plexcord" },
-                        content: `${EMOTE} ${t("plugin.messageTags.noDeleteTag", { tagname: name })}`
+                        content: `${EMOTE} ${t(plugin.messageTags.noDeleteTag, { tagname: name })}`
                     });
 
                 unregisterCommand(name);
@@ -220,24 +190,18 @@ export default definePlugin({
 
                 sendBotMessage(ctx.channel.id, {
                     author: { username: "Plexcord" },
-                    content: `${EMOTE} ${t("plugin.messageTags.successDelete", { name })}`
+                    content: `${EMOTE} ${t(plugin.messageTags.successDelete, { name })}`
                 });
             }
         },
         {
             name: "tag preview",
-            description: "Preview a tag without sending it publicly",
-            get displayDescription() {
-                return t("plugin.messageTags.command.tags.option.preview.description");
-            },
+            description: () => t(plugin.messageTags.command.tags.option.preview.description),
             inputType: ApplicationCommandInputType.BUILT_IN,
             options: [
                 {
                     name: "tag-name",
-                    description: "The name of the tag to preview",
-                    get displayDescription() {
-                        return t("plugin.messageTags.command.tags.option.preview.name");
-                    },
+                    description: () => t(plugin.messageTags.command.tags.option.preview.name),
                     type: ApplicationCommandOptionType.STRING,
                     required: true
                 }
@@ -249,7 +213,7 @@ export default definePlugin({
                 if (!tag)
                     return sendBotMessage(ctx.channel.id, {
                         author: { username: "Plexcord" },
-                        content: `${EMOTE} ${t("plugin.messageTags.tagPreview", { name })}`
+                        content: `${EMOTE} ${t(plugin.messageTags.tagPreview, { name })}`
                     });
 
                 sendBotMessage(ctx.channel.id, {

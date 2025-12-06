@@ -18,7 +18,7 @@
 */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
@@ -47,6 +47,11 @@ function sortObject<T extends object>(obj: T): T {
     return Object.fromEntries(Object.entries(obj).sort(([k1], [k2]) => k1.localeCompare(k2))) as T;
 }
 
+function translateType(type: string): string {
+    const typeKey = type.toLowerCase() as "message" | "channel" | "guild" | "role" | "user";
+    return t(plugin.viewRaw.types[typeKey]) || type;
+}
+
 function cleanMessage(msg: Message) {
     const clone = sortObject(JSON.parse(JSON.stringify(msg)));
     for (const key of [
@@ -71,31 +76,31 @@ function openViewRawModal(json: string, type: string, msgContent?: string) {
         <ErrorBoundary>
             <ModalRoot {...props} size={ModalSize.LARGE}>
                 <ModalHeader>
-                    <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>View Raw</BaseText>
+                    <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t(plugin.viewRaw.modal.title)}</BaseText>
                     <ModalCloseButton onClick={() => closeModal(key)} />
                 </ModalHeader>
                 <ModalContent>
                     <div style={{ padding: "16px 0" }}>
                         {!!msgContent && (
                             <>
-                                <Heading>Content</Heading>
+                                <Heading>{t(plugin.viewRaw.modal.content)}</Heading>
                                 <CodeBlock content={msgContent} lang="" />
                                 <Divider className={Margins.bottom20} />
                             </>
                         )}
 
-                        <Heading>{type} Data</Heading>
+                        <Heading>{t(plugin.viewRaw.modal.data, { type: translateType(type) })}</Heading>
                         <CodeBlock content={json} lang="json" />
                     </div>
                 </ModalContent >
                 <ModalFooter>
                     <Flex>
-                        <Button onClick={() => copyWithToast(json, `${type} data copied to clipboard!`)}>
-                            Copy {type} JSON
+                        <Button onClick={() => copyWithToast(json, t(plugin.viewRaw.modal.copied, { type: translateType(type) }))}>
+                            {t(plugin.viewRaw.modal.copy, { type: translateType(type) })}
                         </Button>
                         {!!msgContent && (
-                            <Button onClick={() => copyWithToast(msgContent, "Content copied to clipboard!")}>
-                                Copy Raw Content
+                            <Button onClick={() => copyWithToast(msgContent, t(plugin.viewRaw.modal.copiedContent))}>
+                                {t(plugin.viewRaw.modal.copyContent)}
                             </Button>
                         )}
                     </Flex>
@@ -114,29 +119,19 @@ function openViewRawModalMessage(msg: Message) {
 
 const settings = definePluginSettings({
     popoverButton: {
-        get label() {
-            return t("plugin.viewRaw.option.popoverButton.label");
-        },
-        get description() {
-            return t("plugin.viewRaw.option.popoverButton.description");
-        },
+        label: () => t(plugin.viewRaw.option.popoverButton.label),
+        description: () => t(plugin.viewRaw.option.popoverButton.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     clickMethod: {
-        get label() {
-            return t("plugin.viewRaw.option.clickMethod.label");
-        },
-        get description() {
-            return t("plugin.viewRaw.option.clickMethod.description");
-        },
+        label: () => t(plugin.viewRaw.option.clickMethod.label),
+        description: () => t(plugin.viewRaw.option.clickMethod.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.viewRaw.option.clickMethod.left"), value: "Left", default: true },
-                { label: t("plugin.viewRaw.option.clickMethod.right"), value: "Right" }
-            ];
-        }
+        options: [
+            { label: () => t(plugin.viewRaw.option.clickMethod.left), value: "Left", default: true },
+            { label: () => t(plugin.viewRaw.option.clickMethod.right), value: "Right" }
+        ]
     }
 });
 
@@ -171,7 +166,7 @@ function MakeContextCallback(name: "Guild" | "Role" | "User" | "Channel" | "Mess
         children.splice(sliceIndex, 0,
             <Menu.MenuItem
                 id={`pc-view-${name.toLowerCase()}-raw`}
-                label={t("plugin.viewRaw.context.view")}
+                label={t(plugin.viewRaw.context.view)}
                 action={() => openViewRawModal(JSON.stringify(value, null, 4), name, messageContent)}
                 icon={CopyIcon}
             />
@@ -189,7 +184,7 @@ const devContextCallback: NavContextMenuPatchCallback = (children, { id }: { id:
     children.splice(0, 0,
         <Menu.MenuItem
             id={"pc-view-role-raw"}
-            label={t("plugin.viewRaw.context.view")}
+            label={t(plugin.viewRaw.context.view)}
             action={() => openViewRawModal(JSON.stringify(role, null, 4), "Role")}
             icon={CopyIcon}
         />
@@ -198,14 +193,10 @@ const devContextCallback: NavContextMenuPatchCallback = (children, { id }: { id:
 
 export default definePlugin({
     name: "ViewRaw",
-    description: "Copy and view the raw content/data of any message, channel or guild",
+    description: () => t(plugin.viewRaw.description),
     authors: [Devs.KingFish, Devs.Ven, Devs.rad, Devs.ImLvna],
     dependencies: ["MessagePopoverAPI"],
     settings,
-
-    get displayDescription() {
-        return t("plugin.viewRaw.description");
-    },
 
     contextMenus: {
         "guild-context": MakeContextCallback("Guild"),
@@ -244,8 +235,8 @@ export default definePlugin({
             };
 
             const label = settings.store.clickMethod === "Right"
-                ? t("plugin.viewRaw.context.copyLeft")
-                : t("plugin.viewRaw.context.copyRight");
+                ? t(plugin.viewRaw.context.copyLeft)
+                : t(plugin.viewRaw.context.copyRight);
 
             return {
                 label,

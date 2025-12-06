@@ -6,7 +6,7 @@
  */
 
 import * as DataStore from "@api/DataStore";
-import { t } from "@api/i18n";
+import { changelog, t } from "@api/i18n";
 
 import gitHash from "~git-hash";
 import plugins from "~plugins";
@@ -79,11 +79,11 @@ async function fetchCommitsBetween(
 
         return data.commits.map((commit: any) => {
             const message: string = commit?.commit?.message ?? "";
-            const summary = message.split("\n")[0] || t("changelog.noMessage");
+            const summary = message.split("\n")[0] || t(changelog.noMessage);
             const authorName =
                 commit?.commit?.author?.name ||
                 commit?.author?.login ||
-                t("changelog.unknown");
+                t(changelog.unknown);
             const timestamp = commit?.commit?.author?.date
                 ? Date.parse(commit.commit.author.date)
                 : undefined;

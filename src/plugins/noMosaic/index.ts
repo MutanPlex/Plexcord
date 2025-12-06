@@ -5,19 +5,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     inlineVideo: {
-        get label() {
-            return t("plugin.noMosaic.option.inlineVideo.label");
-        },
-        get description() {
-            return t("plugin.noMosaic.option.inlineVideo.description");
-        },
+        label: () => t(plugin.noMosaic.option.inlineVideo.label),
+        description: () => t(plugin.noMosaic.option.inlineVideo.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
@@ -27,13 +23,8 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "NoMosaic",
     authors: [Devs.AutumnVN],
-    description: "Removes Discord image mosaic",
+    description: () => t(plugin.noMosaic.description),
     tags: ["image", "mosaic", "media"],
-
-    get displayDescription() {
-        return t("plugin.noMosaic.description");
-    },
-
     settings,
 
     patches: [

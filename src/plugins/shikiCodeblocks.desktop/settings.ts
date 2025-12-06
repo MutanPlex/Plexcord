@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { parseUrl } from "@utils/misc";
@@ -34,12 +34,8 @@ const themeNames = Object.keys(themes) as (keyof typeof themes)[];
 export type ShikiSettings = typeof settings.store;
 export const settings = definePluginSettings({
     theme: {
-        get label() {
-            return t("plugin.shikiCodeblocks.option.theme.label");
-        },
-        get description() {
-            return t("plugin.shikiCodeblocks.option.theme.description");
-        },
+        label: () => t(plugin.shikiCodeblocks.option.theme.label),
+        description: () => t(plugin.shikiCodeblocks.option.theme.description),
         type: OptionType.SELECT,
         options: themeNames.map(themeName => ({
             label: wordsToTitle(wordsFromPascal(themeName)),
@@ -49,12 +45,8 @@ export const settings = definePluginSettings({
         onChange: shiki.setTheme,
     },
     customTheme: {
-        get label() {
-            return t("plugin.shikiCodeblocks.option.customTheme.label");
-        },
-        get description() {
-            return t("plugin.shikiCodeblocks.option.customTheme.description");
-        },
+        label: () => t(plugin.shikiCodeblocks.option.customTheme.label),
+        description: () => t(plugin.shikiCodeblocks.option.customTheme.description),
         type: OptionType.STRING,
         placeholder: themes.MaterialCandy,
         onChange: value => {
@@ -62,72 +54,56 @@ export const settings = definePluginSettings({
         },
     },
     tryHljs: {
-        get label() {
-            return t("plugin.shikiCodeblocks.option.tryHljs.label");
-        },
-        get description() {
-            return t("plugin.shikiCodeblocks.option.tryHljs.description");
-        },
+        label: () => t(plugin.shikiCodeblocks.option.tryHljs.label),
+        description: () => t(plugin.shikiCodeblocks.option.tryHljs.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.shikiCodeblocks.option.tryHljs.never"),
-                    value: HljsSetting.Never,
-                },
-                {
-                    label: t("plugin.shikiCodeblocks.option.tryHljs.secondary"),
-                    value: HljsSetting.Secondary,
-                    default: true,
-                },
-                {
-                    label: t("plugin.shikiCodeblocks.option.tryHljs.primary"),
-                    value: HljsSetting.Primary,
-                },
-                {
-                    label: t("plugin.shikiCodeblocks.option.tryHljs.always"),
-                    value: HljsSetting.Always,
-                },
-            ];
-        },
+        options: [
+            {
+                label: () => t(plugin.shikiCodeblocks.option.tryHljs.never),
+                value: HljsSetting.Never,
+            },
+            {
+                label: () => t(plugin.shikiCodeblocks.option.tryHljs.secondary),
+                value: HljsSetting.Secondary,
+                default: true,
+            },
+            {
+                label: () => t(plugin.shikiCodeblocks.option.tryHljs.primary),
+                value: HljsSetting.Primary,
+            },
+            {
+                label: () => t(plugin.shikiCodeblocks.option.tryHljs.always),
+                value: HljsSetting.Always,
+            },
+        ]
     },
     useDevIcon: {
-        get label() {
-            return t("plugin.shikiCodeblocks.option.useDevIcon.label");
-        },
-        get description() {
-            return t("plugin.shikiCodeblocks.option.useDevIcon.description");
-        },
+        label: () => t(plugin.shikiCodeblocks.option.useDevIcon.label),
+        description: () => t(plugin.shikiCodeblocks.option.useDevIcon.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.shikiCodeblocks.option.useDevIcon.disabled"),
-                    value: DeviconSetting.Disabled,
-                },
-                {
-                    label: t("plugin.shikiCodeblocks.option.useDevIcon.colorless"),
-                    value: DeviconSetting.Greyscale,
-                    default: true,
-                },
-                {
-                    label: t("plugin.shikiCodeblocks.option.useDevIcon.colored"),
-                    value: DeviconSetting.Color,
-                },
-            ];
-        },
+        options: [
+            {
+                label: () => t(plugin.shikiCodeblocks.option.useDevIcon.disabled),
+                value: DeviconSetting.Disabled,
+            },
+            {
+                label: () => t(plugin.shikiCodeblocks.option.useDevIcon.colorless),
+                value: DeviconSetting.Greyscale,
+                default: true,
+            },
+            {
+                label: () => t(plugin.shikiCodeblocks.option.useDevIcon.colored),
+                value: DeviconSetting.Color,
+            },
+        ],
         onChange: (newValue: DeviconSetting) => {
             if (newValue === DeviconSetting.Disabled) disableStyle(deviconStyle);
             else enableStyle(deviconStyle);
         },
     },
     bgOpacity: {
-        get label() {
-            return t("plugin.shikiCodeblocks.option.bgOpacity.label");
-        },
-        get description() {
-            return t("plugin.shikiCodeblocks.option.bgOpacity.description");
-        },
+        label: () => t(plugin.shikiCodeblocks.option.bgOpacity.label),
+        description: () => t(plugin.shikiCodeblocks.option.bgOpacity.description),
         type: OptionType.SLIDER,
         markers: [0, 20, 40, 60, 80, 100],
         default: 100,
@@ -144,9 +120,9 @@ export const settings = definePluginSettings({
         isValid(value) {
             if (!value) return true;
             const url = parseUrl(value);
-            if (!url) return t("plugin.shikiCodeblocks.option.customTheme.mustURL");
+            if (!url) return t(plugin.shikiCodeblocks.option.customTheme.mustURL);
 
-            if (!url.pathname.endsWith(".json")) return t("plugin.shikiCodeblocks.option.customTheme.mustJSON");
+            if (!url.pathname.endsWith(".json")) return t(plugin.shikiCodeblocks.option.customTheme.mustJSON);
 
             return true;
         },

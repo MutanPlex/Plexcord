@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { t, themes } from "@api/i18n";
 import { useSettings } from "@api/Settings";
 import { Card } from "@components/Card";
 import { Flex } from "@components/Flex";
@@ -33,23 +33,23 @@ export function OnlineThemesTab() {
         <Flex flexDirection="column" gap="1em">
             <Card variant="warning" defaultPadding>
                 <HeadingTertiary>
-                    {t("themes.advanced.warning")}
+                    {t(themes.advanced.warning)}
                 </HeadingTertiary>
             </Card>
             <Card>
-                <HeadingTertiary>{t("themes.advanced.paste")}</HeadingTertiary>
-                <Paragraph>{t("themes.advanced.line")}</Paragraph>
-                <Paragraph>{t("themes.advanced.prefix")}</Paragraph>
-                <Paragraph>{t("themes.advanced.direct")}</Paragraph>
+                <HeadingTertiary>{t(themes.advanced.paste)}</HeadingTertiary>
+                <Paragraph>{t(themes.advanced.line)}</Paragraph>
+                <Paragraph>{t(themes.advanced.prefix)}</Paragraph>
+                <Paragraph>{t(themes.advanced.direct)}</Paragraph>
             </Card>
 
             <section>
-                <HeadingTertiary>{t("themes.online")}</HeadingTertiary>
+                <HeadingTertiary>{t(themes.online)}</HeadingTertiary>
                 <TextArea
                     value={themeText}
                     onChange={setThemeText}
                     className={"pc-settings-theme-links"}
-                    placeholder={t("themes.links")}
+                    placeholder={t(themes.links)}
                     spellCheck={false}
                     onBlur={onBlur}
                     rows={10}

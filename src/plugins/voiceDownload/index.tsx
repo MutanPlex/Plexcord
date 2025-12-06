@@ -7,18 +7,14 @@
 
 import "./style.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "VoiceDownload",
-    description: "Adds a download to voice messages. (Opens a new browser tab)",
+    description: () => t(plugin.voiceDownload.description),
     authors: [Devs.puv],
-
-    get displayDescription() {
-        return t("plugin.voiceDownload.description");
-    },
 
     patches: [
         {
@@ -36,7 +32,7 @@ export default definePlugin({
                 className="pc-voice-download"
                 href={src}
                 onClick={e => e.stopPropagation()}
-                aria-label={t("plugin.voiceDownload.context.download")}
+                aria-label={t(plugin.voiceDownload.context.download)}
                 {...IS_DISCORD_DESKTOP
                     ? { target: "_blank" } // open externally
                     : { download: "voice-message.ogg" } // download directly (not supported on discord desktop)

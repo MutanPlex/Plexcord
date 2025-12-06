@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
@@ -24,21 +24,21 @@ interface DynamicDropdownSettingOption {
 
 function AnimationSettings(): JSX.Element {
     const animationOptions: DynamicDropdownSettingOption[] = [
-        { label: t("plugin.channelTabs.animation.tabHover"), value: "hover", selected: settings.store.animationHover },
-        { label: t("plugin.channelTabs.animation.tabSelection"), value: "selection", selected: settings.store.animationSelection },
-        { label: t("plugin.channelTabs.animation.tabDragDrop"), value: "drag-drop", selected: settings.store.animationDragDrop },
-        { label: t("plugin.channelTabs.animation.tabEnterExit"), value: "enter-exit", selected: settings.store.animationEnterExit },
-        { label: t("plugin.channelTabs.animation.tabIconPop"), value: "icon-pop", selected: settings.store.animationIconPop },
-        { label: t("plugin.channelTabs.animation.closeRotation"), value: "close-rotation", selected: settings.store.animationCloseRotation },
-        { label: t("plugin.channelTabs.animation.plusPulse"), value: "plus-pulse", selected: settings.store.animationPlusPulse },
-        { label: t("plugin.channelTabs.animation.mentionGlow"), value: "mention-glow", selected: settings.store.animationMentionGlow },
-        { label: t("plugin.channelTabs.animation.compactExpand"), value: "compact-expand", selected: settings.store.animationCompactExpand },
-        { label: t("plugin.channelTabs.animation.selectedBorder"), value: "selected-border", selected: settings.store.animationSelectedBorder },
-        { label: t("plugin.channelTabs.animation.selectedBackground"), value: "selected-background", selected: settings.store.animationSelectedBackground },
-        { label: t("plugin.channelTabs.animation.tabShadows"), value: "tab-shadows", selected: settings.store.animationTabShadows },
-        { label: t("plugin.channelTabs.animation.tabRepositioning"), value: "tab-positioning", selected: settings.store.animationTabPositioning },
-        { label: t("plugin.channelTabs.animation.resizeHandle"), value: "resize-handle", selected: settings.store.animationResizeHandle },
-        { label: t("plugin.channelTabs.animation.questActivate"), value: "quests-active", selected: settings.store.animationQuestsActive }
+        { label: t(plugin.channelTabs.animation.tabHover), value: "hover", selected: settings.store.animationHover },
+        { label: t(plugin.channelTabs.animation.tabSelection), value: "selection", selected: settings.store.animationSelection },
+        { label: t(plugin.channelTabs.animation.tabDragDrop), value: "drag-drop", selected: settings.store.animationDragDrop },
+        { label: t(plugin.channelTabs.animation.tabEnterExit), value: "enter-exit", selected: settings.store.animationEnterExit },
+        { label: t(plugin.channelTabs.animation.tabIconPop), value: "icon-pop", selected: settings.store.animationIconPop },
+        { label: t(plugin.channelTabs.animation.closeRotation), value: "close-rotation", selected: settings.store.animationCloseRotation },
+        { label: t(plugin.channelTabs.animation.plusPulse), value: "plus-pulse", selected: settings.store.animationPlusPulse },
+        { label: t(plugin.channelTabs.animation.mentionGlow), value: "mention-glow", selected: settings.store.animationMentionGlow },
+        { label: t(plugin.channelTabs.animation.compactExpand), value: "compact-expand", selected: settings.store.animationCompactExpand },
+        { label: t(plugin.channelTabs.animation.selectedBorder), value: "selected-border", selected: settings.store.animationSelectedBorder },
+        { label: t(plugin.channelTabs.animation.selectedBackground), value: "selected-background", selected: settings.store.animationSelectedBackground },
+        { label: t(plugin.channelTabs.animation.tabShadows), value: "tab-shadows", selected: settings.store.animationTabShadows },
+        { label: t(plugin.channelTabs.animation.tabRepositioning), value: "tab-positioning", selected: settings.store.animationTabPositioning },
+        { label: t(plugin.channelTabs.animation.resizeHandle), value: "resize-handle", selected: settings.store.animationResizeHandle },
+        { label: t(plugin.channelTabs.animation.questActivate), value: "quests-active", selected: settings.store.animationQuestsActive }
     ];
 
     const [currentValue, setCurrentValue] = useState(animationOptions.filter(option => option.selected));
@@ -88,13 +88,13 @@ function AnimationSettings(): JSX.Element {
 
     return (
         <section>
-            <Heading>{t("plugin.channelTabs.animation.title")}</Heading>
+            <Heading>{t(plugin.channelTabs.animation.title)}</Heading>
             <Paragraph>
-                {t("plugin.channelTabs.animation.description")}
+                {t(plugin.channelTabs.animation.description)}
             </Paragraph>
             <div style={{ marginTop: "8px" }}>
                 <SearchableSelect
-                    placeholder={t("plugin.channelTabs.animation.placeholder")}
+                    placeholder={t(plugin.channelTabs.animation.placeholder)}
                     maxVisibleItems={12}
                     clearable={true}
                     multi={true}
@@ -124,570 +124,373 @@ export const bookmarkFolderColors = {
 
 export const settings = definePluginSettings({
     onStartup: {
-        get label() {
-            return t("plugin.channelTabs.option.onStartup.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.onStartup.description");
-        },
+        label: () => t(plugin.channelTabs.option.onStartup.label),
+        description: () => t(plugin.channelTabs.option.onStartup.description),
         type: OptionType.SELECT,
-        options: [{
-            get label() {
-                return t("plugin.channelTabs.option.onStartup.nothing");
+        options: [
+            {
+                label: () => t(plugin.channelTabs.option.onStartup.nothing),
+                value: "nothing",
+                default: true
             },
-            value: "nothing",
-            default: true
-        }, {
-            get label() {
-                return t("plugin.channelTabs.option.onStartup.remember");
+            {
+                label: () => t(plugin.channelTabs.option.onStartup.remember),
+                value: "remember"
             },
-            value: "remember"
-        }, {
-            get label() {
-                return t("plugin.channelTabs.option.onStartup.open");
-            },
-            value: "preset"
-        }],
+            {
+                label: () => t(plugin.channelTabs.option.onStartup.open),
+                value: "preset"
+            }
+        ],
     },
     tabSet: {
-        get label() {
-            return t("plugin.channelTabs.option.tabSet.label");
-        },
+        label: () => t(plugin.channelTabs.option.tabSet.label),
         component: ChannelTabsPreview,
         type: OptionType.COMPONENT,
         default: {}
     },
     noPomeloNames: {
-        get label() {
-            return t("plugin.channelTabs.option.noPomeloNames.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.noPomeloNames.description");
-        },
+        label: () => t(plugin.channelTabs.option.noPomeloNames.label),
+        description: () => t(plugin.channelTabs.option.noPomeloNames.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     showStatusIndicators: {
-        get label() {
-            return t("plugin.channelTabs.option.showStatusIndicators.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.showStatusIndicators.description");
-        },
+        label: () => t(plugin.channelTabs.option.showStatusIndicators.label),
+        description: () => t(plugin.channelTabs.option.showStatusIndicators.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     showBookmarkBar: {
-        get label() {
-            return t("plugin.channelTabs.option.showBookmarkBar.label");
-        },
+        label: () => t(plugin.channelTabs.option.showBookmarkBar.label),
         description: "",
         type: OptionType.BOOLEAN,
         default: true
     },
     bookmarkNotificationDot: {
-        get label() {
-            return t("plugin.channelTabs.option.bookmarkNotificationDot.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.bookmarkNotificationDot.description");
-        },
+        label: () => t(plugin.channelTabs.option.bookmarkNotificationDot.label),
+        description: () => t(plugin.channelTabs.option.bookmarkNotificationDot.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     widerTabsAndBookmarks: {
-        get label() {
-            return t("plugin.channelTabs.option.widerTabsAndBookmarks.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.widerTabsAndBookmarks.description");
-        },
+        label: () => t(plugin.channelTabs.option.widerTabsAndBookmarks.label),
+        description: () => t(plugin.channelTabs.option.widerTabsAndBookmarks.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: false
     },
     tabWidthScale: {
-        get label() {
-            return t("plugin.channelTabs.option.tabWidthScale.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.tabWidthScale.description");
-        },
+        label: () => t(plugin.channelTabs.option.tabWidthScale.label),
+        description: () => t(plugin.channelTabs.option.tabWidthScale.description),
         type: OptionType.NUMBER,
         default: 100,
         hidden: true,
         restartNeeded: false
     },
     renderAllTabs: {
+        label: () => t(plugin.channelTabs.option.renderAllTabs.label),
+        description: () => t(plugin.channelTabs.option.renderAllTabs.description),
         type: OptionType.BOOLEAN,
-        description: "Keep all tabs cached in memory for faster switching (caches scroll position and state)",
         default: false,
         restartNeeded: false
     },
     switchToExistingTab: {
-        get label() {
-            return t("plugin.channelTabs.option.switchToExistingTab.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.switchToExistingTab.description");
-        },
+        label: () => t(plugin.channelTabs.option.switchToExistingTab.label),
+        description: () => t(plugin.channelTabs.option.switchToExistingTab.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: false
     },
     createNewTabIfNotExists: {
-        get label() {
-            return t("plugin.channelTabs.option.createNewTabIfNotExists.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.createNewTabIfNotExists.description");
-        },
+        label: () => t(plugin.channelTabs.option.createNewTabIfNotExists.label),
+        description: () => t(plugin.channelTabs.option.createNewTabIfNotExists.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: false
     },
     enableRapidNavigation: {
-        get label() {
-            return t("plugin.channelTabs.option.enableRapidNavigation.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.enableRapidNavigation.description");
-        },
+        label: () => t(plugin.channelTabs.option.enableRapidNavigation.label),
+        description: () => t(plugin.channelTabs.option.enableRapidNavigation.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: false
     },
     rapidNavigationThreshold: {
-        get label() {
-            return t("plugin.channelTabs.option.rapidNavigationThreshold.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.rapidNavigationThreshold.description");
-        },
+        label: () => t(plugin.channelTabs.option.rapidNavigationThreshold.label),
+        description: () => t(plugin.channelTabs.option.rapidNavigationThreshold.description),
         type: OptionType.SLIDER,
         markers: [500, 1000, 1500, 2000, 3000, 5000, 10000],
         default: 3000,
         stickToMarkers: false,
     },
     tabBarPosition: {
-        get label() {
-            return t("plugin.channelTabs.option.tabBarPosition.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.tabBarPosition.description");
-        },
+        label: () => t(plugin.channelTabs.option.tabBarPosition.label),
+        description: () => t(plugin.channelTabs.option.tabBarPosition.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.channelTabs.option.tabBarPosition.top"), value: "top", default: true },
-                { label: t("plugin.channelTabs.option.tabBarPosition.bottom"), value: "bottom" }
-            ];
-        },
+        options: [
+            { label: () => t(plugin.channelTabs.option.tabBarPosition.top), value: "top", default: true },
+            { label: () => t(plugin.channelTabs.option.tabBarPosition.bottom), value: "bottom" }
+        ],
         restartNeeded: true
     },
     enableNumberKeySwitching: {
-        get label() {
-            return t("plugin.channelTabs.option.enableNumberKeySwitching.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.enableNumberKeySwitching.description");
-        },
+        label: () => t(plugin.channelTabs.option.enableNumberKeySwitching.label),
+        description: () => t(plugin.channelTabs.option.enableNumberKeySwitching.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
     },
     numberKeySwitchCount: {
-        get label() {
-            return t("plugin.channelTabs.option.numberKeySwitchCount.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.numberKeySwitchCount.description");
-        },
+        label: () => t(plugin.channelTabs.option.numberKeySwitchCount.label),
+        description: () => t(plugin.channelTabs.option.numberKeySwitchCount.description),
         type: OptionType.SLIDER,
         markers: makeRange(1, 9, 1),
         default: 3,
         stickToMarkers: true,
     },
     enableCloseTabShortcut: {
-        get label() {
-            return t("plugin.channelTabs.option.enableCloseTabShortcut.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.enableCloseTabShortcut.description");
-        },
+        label: () => t(plugin.channelTabs.option.enableCloseTabShortcut.label),
+        description: () => t(plugin.channelTabs.option.enableCloseTabShortcut.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
     },
     enableNewTabShortcut: {
-        get label() {
-            return t("plugin.channelTabs.option.enableNewTabShortcut.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.enableNewTabShortcut.description");
-        },
+        label: () => t(plugin.channelTabs.option.enableNewTabShortcut.label),
+        description: () => t(plugin.channelTabs.option.enableNewTabShortcut.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
     },
     enableTabCycleShortcut: {
-        get label() {
-            return t("plugin.channelTabs.option.enableTabCycleShortcut.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.enableTabCycleShortcut.description");
-        },
+        label: () => t(plugin.channelTabs.option.enableTabCycleShortcut.label),
+        description: () => t(plugin.channelTabs.option.enableTabCycleShortcut.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
     },
     keybindsSection: {
-        get label() {
-            return t("plugin.channelTabs.option.keybindsSection.label");
-        },
+        label: () => t(plugin.channelTabs.option.keybindsSection.label),
         type: OptionType.COMPONENT,
         component: KeybindSettings
     },
     // me when storage yes for keybinds
     closeTabKeybind: {
-        get label() {
-            return t("plugin.channelTabs.option.closeTabKeybind.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.closeTabKeybind.description");
-        },
+        label: () => t(plugin.channelTabs.option.closeTabKeybind.label),
+        description: () => t(plugin.channelTabs.option.closeTabKeybind.description),
         type: OptionType.STRING,
         default: "CTRL+W",
         hidden: true
     },
     newTabKeybind: {
-        get label() {
-            return t("plugin.channelTabs.option.newTabKeybind.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.newTabKeybind.description");
-        },
+        label: () => t(plugin.channelTabs.option.newTabKeybind.label),
+        description: () => t(plugin.channelTabs.option.newTabKeybind.description),
         type: OptionType.STRING,
         default: "CTRL+T",
         hidden: true
     },
     cycleTabForwardKeybind: {
-        get label() {
-            return t("plugin.channelTabs.option.cycleTabForwardKeybind.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.cycleTabForwardKeybind.description");
-        },
+        label: () => t(plugin.channelTabs.option.cycleTabForwardKeybind.label),
+        description: () => t(plugin.channelTabs.option.cycleTabForwardKeybind.description),
         type: OptionType.STRING,
         default: "CTRL+TAB",
         hidden: true
     },
     cycleTabBackwardKeybind: {
-        get label() {
-            return t("plugin.channelTabs.option.cycleTabBackwardKeybind.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.cycleTabBackwardKeybind.description");
-        },
+        label: () => t(plugin.channelTabs.option.cycleTabBackwardKeybind.label),
+        description: () => t(plugin.channelTabs.option.cycleTabBackwardKeybind.description),
         type: OptionType.STRING,
         default: "CTRL+SHIFT+TAB",
         hidden: true
     },
     showTabNumbers: {
-        get label() {
-            return t("plugin.channelTabs.option.showTabNumbers.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.showTabNumbers.description");
-        },
+        label: () => t(plugin.channelTabs.option.showTabNumbers.label),
+        description: () => t(plugin.channelTabs.option.showTabNumbers.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: false
     },
     tabNumberPosition: {
-        get label() {
-            return t("plugin.channelTabs.option.tabNumberPosition.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.tabNumberPosition.description");
-        },
+        label: () => t(plugin.channelTabs.option.tabNumberPosition.label),
+        description: () => t(plugin.channelTabs.option.tabNumberPosition.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.channelTabs.option.tabNumberPosition.left"), value: "left", default: true },
-                { label: t("plugin.channelTabs.option.tabNumberPosition.right"), value: "right" }
-            ];
-        },
+        options: [
+            { label: () => t(plugin.channelTabs.option.tabNumberPosition.left), value: "left", default: true },
+            { label: () => t(plugin.channelTabs.option.tabNumberPosition.right), value: "right" }
+        ],
         restartNeeded: false
     },
     animations: {
-        get label() {
-            return t("plugin.channelTabs.option.animations.label");
-        },
+        label: () => t(plugin.channelTabs.option.animations.label),
         type: OptionType.COMPONENT,
         component: AnimationSettings
     },
     // me when storage yes
     animationHover: {
-        get label() {
-            return t("plugin.channelTabs.option.animationHover.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.animationHover.description");
-        },
+        label: () => t(plugin.channelTabs.option.animationHover.label),
+        description: () => t(plugin.channelTabs.option.animationHover.description),
         type: OptionType.BOOLEAN,
         default: true,
         hidden: true
     },
     animationSelection: {
-        get label() {
-            return t("plugin.channelTabs.option.animationSelection.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.animationSelection.description");
-        },
+        label: () => t(plugin.channelTabs.option.animationSelection.label),
+        description: () => t(plugin.channelTabs.option.animationSelection.description),
         type: OptionType.BOOLEAN,
         default: true,
         hidden: true
     },
     animationDragDrop: {
-        get label() {
-            return t("plugin.channelTabs.option.animationDragDrop.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.animationDragDrop.description");
-        },
+        label: () => t(plugin.channelTabs.option.animationDragDrop.label),
+        description: () => t(plugin.channelTabs.option.animationDragDrop.description),
         type: OptionType.BOOLEAN,
         default: true,
         hidden: true
     },
     animationEnterExit: {
-        get label() {
-            return t("plugin.channelTabs.option.animationEnterExit.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.animationEnterExit.description");
-        },
+        label: () => t(plugin.channelTabs.option.animationEnterExit.label),
+        description: () => t(plugin.channelTabs.option.animationEnterExit.description),
         type: OptionType.BOOLEAN,
         default: true,
         hidden: true
     },
     animationIconPop: {
-        get label() {
-            return t("plugin.channelTabs.option.animationIconPop.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.animationIconPop.description");
-        },
+        label: () => t(plugin.channelTabs.option.animationIconPop.label),
+        description: () => t(plugin.channelTabs.option.animationIconPop.description),
         type: OptionType.BOOLEAN,
         default: true,
         hidden: true
     },
     animationCloseRotation: {
-        get label() {
-            return t("plugin.channelTabs.option.animationCloseRotation.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.animationCloseRotation.description");
-        },
+        label: () => t(plugin.channelTabs.option.animationCloseRotation.label),
+        description: () => t(plugin.channelTabs.option.animationCloseRotation.description),
         type: OptionType.BOOLEAN,
         default: true,
         hidden: true
     },
     animationPlusPulse: {
-        get label() {
-            return t("plugin.channelTabs.option.animationPlusPulse.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.animationPlusPulse.description");
-        },
+        label: () => t(plugin.channelTabs.option.animationPlusPulse.label),
+        description: () => t(plugin.channelTabs.option.animationPlusPulse.description),
         type: OptionType.BOOLEAN,
         default: true,
         hidden: true
     },
     animationMentionGlow: {
-        get label() {
-            return t("plugin.channelTabs.option.animationMentionGlow.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.animationMentionGlow.description");
-        },
+        label: () => t(plugin.channelTabs.option.animationMentionGlow.label),
+        description: () => t(plugin.channelTabs.option.animationMentionGlow.description),
         type: OptionType.BOOLEAN,
         default: true,
         hidden: true
     },
     animationCompactExpand: {
-        get label() {
-            return t("plugin.channelTabs.option.animationCompactExpand.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.animationCompactExpand.description");
-        },
+        label: () => t(plugin.channelTabs.option.animationCompactExpand.label),
+        description: () => t(plugin.channelTabs.option.animationCompactExpand.description),
         type: OptionType.BOOLEAN,
         default: true,
         hidden: true
     },
     animationSelectedBorder: {
-        get label() {
-            return t("plugin.channelTabs.option.animationSelectedBorder.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.animationSelectedBorder.description");
-        },
+        label: () => t(plugin.channelTabs.option.animationSelectedBorder.label),
+        description: () => t(plugin.channelTabs.option.animationSelectedBorder.description),
         type: OptionType.BOOLEAN,
         default: true,
         hidden: true
     },
     animationSelectedBackground: {
-        get label() {
-            return t("plugin.channelTabs.option.animationSelectedBackground.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.animationSelectedBackground.description");
-        },
+        label: () => t(plugin.channelTabs.option.animationSelectedBackground.label),
+        description: () => t(plugin.channelTabs.option.animationSelectedBackground.description),
         type: OptionType.BOOLEAN,
         default: true,
         hidden: true
     },
     animationTabShadows: {
-        get label() {
-            return t("plugin.channelTabs.option.animationTabShadows.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.animationTabShadows.description");
-        },
+        label: () => t(plugin.channelTabs.option.animationTabShadows.label),
+        description: () => t(plugin.channelTabs.option.animationTabShadows.description),
         type: OptionType.BOOLEAN,
         default: true,
         hidden: true
     },
     animationTabPositioning: {
-        get label() {
-            return t("plugin.channelTabs.option.animationTabPositioning.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.animationTabPositioning.description");
-        },
+        label: () => t(plugin.channelTabs.option.animationTabPositioning.label),
+        description: () => t(plugin.channelTabs.option.animationTabPositioning.description),
         type: OptionType.BOOLEAN,
         default: true,
         hidden: true
     },
     animationResizeHandle: {
-        get label() {
-            return t("plugin.channelTabs.option.animationResizeHandle.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.animationResizeHandle.description");
-        },
+        label: () => t(plugin.channelTabs.option.animationResizeHandle.label),
+        description: () => t(plugin.channelTabs.option.animationResizeHandle.description),
         type: OptionType.BOOLEAN,
         default: true,
         hidden: true
     },
     animationQuestsActive: {
-        get label() {
-            return t("plugin.channelTabs.option.animationQuestsActive.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.animationQuestsActive.description");
-        },
+        label: () => t(plugin.channelTabs.option.animationQuestsActive.label),
+        description: () => t(plugin.channelTabs.option.animationQuestsActive.description),
         type: OptionType.BOOLEAN,
         default: true,
         hidden: true
     },
     compactAutoExpandSelected: {
-        get label() {
-            return t("plugin.channelTabs.option.compactAutoExpandSelected.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.compactAutoExpandSelected.description");
-        },
+        label: () => t(plugin.channelTabs.option.compactAutoExpandSelected.label),
+        description: () => t(plugin.channelTabs.option.compactAutoExpandSelected.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
     },
     compactAutoExpandOnHover: {
-        get label() {
-            return t("plugin.channelTabs.option.compactAutoExpandOnHover.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.compactAutoExpandOnHover.description");
-        },
+        label: () => t(plugin.channelTabs.option.compactAutoExpandOnHover.label),
+        description: () => t(plugin.channelTabs.option.compactAutoExpandOnHover.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
     },
     openInNewTabAutoSwitch: {
-        get label() {
-            return t("plugin.channelTabs.option.openInNewTabAutoSwitch.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.openInNewTabAutoSwitch.description");
-        },
+        label: () => t(plugin.channelTabs.option.openInNewTabAutoSwitch.label),
+        description: () => t(plugin.channelTabs.option.openInNewTabAutoSwitch.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
     },
     bookmarksIndependentFromTabs: {
-        get label() {
-            return t("plugin.channelTabs.option.bookmarksIndependentFromTabs.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.bookmarksIndependentFromTabs.description");
-        },
+        label: () => t(plugin.channelTabs.option.bookmarksIndependentFromTabs.label),
+        description: () => t(plugin.channelTabs.option.bookmarksIndependentFromTabs.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
     },
     showResizeHandle: {
-        get label() {
-            return t("plugin.channelTabs.option.showResizeHandle.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.showResizeHandle.description");
-        },
+        label: () => t(plugin.channelTabs.option.showResizeHandle.label),
+        description: () => t(plugin.channelTabs.option.showResizeHandle.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
     },
     openNewTabsInCompactMode: {
-        get label() {
-            return t("plugin.channelTabs.option.openNewTabsInCompactMode.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.openNewTabsInCompactMode.description");
-        },
+        label: () => t(plugin.channelTabs.option.openNewTabsInCompactMode.label),
+        description: () => t(plugin.channelTabs.option.openNewTabsInCompactMode.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: false
     },
     newTabButtonBehavior: {
-        get label() {
-            return t("plugin.channelTabs.option.newTabButtonBehavior.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.newTabButtonBehavior.description");
-        },
+        label: () => t(plugin.channelTabs.option.newTabButtonBehavior.label),
+        description: () => t(plugin.channelTabs.option.newTabButtonBehavior.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
     },
     oneTabPerServer: {
-        get label() {
-            return t("plugin.channelTabs.option.oneTabPerServer.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.oneTabPerServer.description");
-        },
+        label: () => t(plugin.channelTabs.option.oneTabPerServer.label),
+        description: () => t(plugin.channelTabs.option.oneTabPerServer.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: false
     },
     maxOpenTabs: {
-        get label() {
-            return t("plugin.channelTabs.option.maxOpenTabs.label");
-        },
-        get description() {
-            return t("plugin.channelTabs.option.maxOpenTabs.description");
-        },
+        label: () => t(plugin.channelTabs.option.maxOpenTabs.label),
+        description: () => t(plugin.channelTabs.option.maxOpenTabs.description),
         type: OptionType.SLIDER,
         markers: makeRange(0, 20, 1),
         default: 0,

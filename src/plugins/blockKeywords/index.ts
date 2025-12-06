@@ -6,7 +6,7 @@
  */
 
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Message } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
@@ -16,45 +16,29 @@ let blockedKeywords: Array<RegExp>;
 
 const settings = definePluginSettings({
     blockedWords: {
-        get label() {
-            return t("plugin.blockKeywords.option.blockedWords.label");
-        },
-        get description() {
-            return t("plugin.blockKeywords.option.blockedWords.description");
-        },
+        label: () => t(plugin.blockKeywords.option.blockedWords.label),
+        description: () => t(plugin.blockKeywords.option.blockedWords.description),
         type: OptionType.STRING,
         default: "blockedKeyword",
         restartNeeded: true
     },
     useRegex: {
-        get label() {
-            return t("plugin.blockKeywords.option.useRegex.label");
-        },
-        get description() {
-            return t("plugin.blockKeywords.option.useRegex.description");
-        },
+        label: () => t(plugin.blockKeywords.option.useRegex.label),
+        description: () => t(plugin.blockKeywords.option.useRegex.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
     },
     caseSensitive: {
-        get label() {
-            return t("plugin.blockKeywords.option.caseSensitive.label");
-        },
-        get description() {
-            return t("plugin.blockKeywords.option.caseSensitive.description");
-        },
+        label: () => t(plugin.blockKeywords.option.caseSensitive.label),
+        description: () => t(plugin.blockKeywords.option.caseSensitive.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
     },
     ignoreBlockedMessages: {
-        get label() {
-            return t("plugin.blockKeywords.option.ignoreBlockedMessages.label");
-        },
-        get description() {
-            return t("plugin.blockKeywords.option.ignoreBlockedMessages.description");
-        },
+        label: () => t(plugin.blockKeywords.option.ignoreBlockedMessages.label),
+        description: () => t(plugin.blockKeywords.option.ignoreBlockedMessages.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true,
@@ -92,12 +76,8 @@ export function containsBlockedKeywords(message: Message) {
 
 export default definePlugin({
     name: "BlockKeywords",
-    description: "Blocks messages containing specific user-defined keywords, as if the user sending them was blocked.",
+    description: () => t(plugin.blockKeywords.description),
     authors: [PcDevs.catcraft, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.blockKeywords.description");
-    },
 
     patches: [
         {

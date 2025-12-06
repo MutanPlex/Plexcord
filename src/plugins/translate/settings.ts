@@ -17,116 +17,76 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { OptionType } from "@utils/types";
 
 export const settings = definePluginSettings({
     receivedInput: {
-        get label() {
-            return t("plugin.translate.option.receivedInput.label");
-        },
-        get description() {
-            return t("plugin.translate.option.receivedInput.description");
-        },
+        label: () => t(plugin.translate.option.receivedInput.label),
+        description: () => t(plugin.translate.option.receivedInput.description),
         type: OptionType.STRING,
         default: "auto",
         hidden: true
     },
     receivedOutput: {
-        get label() {
-            return t("plugin.translate.option.receivedOutput.label");
-        },
-        get description() {
-            return t("plugin.translate.option.receivedOutput.description");
-        },
+        label: () => t(plugin.translate.option.receivedOutput.label),
+        description: () => t(plugin.translate.option.receivedOutput.description),
         type: OptionType.STRING,
         default: "en",
         hidden: true
     },
     sentInput: {
-        get label() {
-            return t("plugin.translate.option.sentInput.label");
-        },
-        get description() {
-            return t("plugin.translate.option.sentInput.description");
-        },
+        label: () => t(plugin.translate.option.sentInput.label),
+        description: () => t(plugin.translate.option.sentInput.description),
         type: OptionType.STRING,
         default: "auto",
         hidden: true
     },
     sentOutput: {
-        get label() {
-            return t("plugin.translate.option.sentOutput.label");
-        },
-        get description() {
-            return t("plugin.translate.option.sentOutput.description");
-        },
+        label: () => t(plugin.translate.option.sentOutput.label),
+        description: () => t(plugin.translate.option.sentOutput.description),
         type: OptionType.STRING,
         default: "en",
         hidden: true
     },
     showChatBarButton: {
-        get label() {
-            return t("plugin.translate.option.showChatBarButton.label");
-        },
-        get description() {
-            return t("plugin.translate.option.showChatBarButton.description");
-        },
+        label: () => t(plugin.translate.option.showChatBarButton.label),
+        description: () => t(plugin.translate.option.showChatBarButton.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     service: {
-        get label() {
-            return t("plugin.translate.option.service.label");
-        },
-        get description() {
-            return IS_WEB
-                ? t("plugin.translate.option.service.descriptionWeb")
-                : t("plugin.translate.option.service.description");
-        },
+        label: () => t(plugin.translate.option.service.label),
+        description: () => IS_WEB
+            ? t(plugin.translate.option.service.descriptionWeb)
+            : t(plugin.translate.option.service.description),
         type: OptionType.SELECT,
         disabled: () => IS_WEB,
-        get options() {
-            return [
-                { label: t("plugin.translate.option.service.google"), value: "google", default: true },
-                { label: t("plugin.translate.option.service.deepl"), value: "deepl" },
-                { label: t("plugin.translate.option.service.deeplPro"), value: "deepl-pro" }
-            ] as const;
-        },
+        options: [
+            { label: () => t(plugin.translate.option.service.google), value: "google", default: true },
+            { label: () => t(plugin.translate.option.service.deepl), value: "deepl" },
+            { label: () => t(plugin.translate.option.service.deeplPro), value: "deepl-pro" }
+        ] as const,
         onChange: resetLanguageDefaults
     },
     deeplApiKey: {
-        get label() {
-            return t("plugin.translate.option.deeplApiKey.label");
-        },
-        get description() {
-            return t("plugin.translate.option.deeplApiKey.description");
-        },
+        label: () => t(plugin.translate.option.deeplApiKey.label),
+        description: () => t(plugin.translate.option.deeplApiKey.description),
         type: OptionType.STRING,
         default: "",
-        get placeholder() {
-            return t("plugin.translate.option.deeplApiKey.placeholder");
-        },
+        placeholder: () => t(plugin.translate.option.deeplApiKey.placeholder),
         disabled: () => IS_WEB
     },
     autoTranslate: {
-        get label() {
-            return t("plugin.translate.option.autoTranslate.label");
-        },
-        get description() {
-            return t("plugin.translate.option.autoTranslate.description");
-        },
+        label: () => t(plugin.translate.option.autoTranslate.label),
+        description: () => t(plugin.translate.option.autoTranslate.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     showAutoTranslateTooltip: {
-        get label() {
-            return t("plugin.translate.option.showAutoTranslateTooltip.label");
-        },
-        get description() {
-            return t("plugin.translate.option.showAutoTranslateTooltip.description");
-        },
+        label: () => t(plugin.translate.option.showAutoTranslateTooltip.label),
+        description: () => t(plugin.translate.option.showAutoTranslateTooltip.description),
         type: OptionType.BOOLEAN,
         default: true
     }

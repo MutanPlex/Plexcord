@@ -7,7 +7,7 @@
 
 
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Card } from "@components/Card";
 import { Flex } from "@components/Flex";
@@ -19,14 +19,14 @@ import { Margins } from "@utils/margins";
 import { OptionType } from "@utils/types";
 import { TextInput, Tooltip } from "@webpack/common";
 
-import { Tag, tags } from "./consts";
+import { getTags, Tag } from "./consts";
 import { TagSettings } from "./types";
 
 function SettingsComponent() {
     const tagSettings = (settings.store.tagSettings ??= {} as TagSettings);
     const { localTags } = ExpandedUserTagsPlugin;
 
-    tags.values.forEach(tag => {
+    getTags().forEach(tag => {
         if (!tagSettings[tag.name]) {
             tagSettings[tag.name] = { text: tag.displayName, showInChat: true, showInNotChat: true };
         }
@@ -41,7 +41,7 @@ function SettingsComponent() {
                     gap: "16px",
                 }}
             >
-                {tags.values.map(tag => (
+                {getTags().map(tag => (
                     <Card
                         key={tag.name}
                         style={{
@@ -57,7 +57,7 @@ function SettingsComponent() {
                                         onMouseEnter={onMouseEnter}
                                         onMouseLeave={onMouseLeave}
                                     >
-                                        {tag.displayName} {t("plugin.expandedUserTags.modal.tag")}
+                                        {tag.displayName} {t(plugin.expandedUserTags.modal.tag)}
                                     </div>
                                 )}
                             </Tooltip>
@@ -65,15 +65,15 @@ function SettingsComponent() {
 
                         <div style={{ marginBottom: "10px" }}>
                             <Paragraph style={{ fontSize: "13px" }}>
-                                {t("plugin.expandedUserTags.modal.example")}:
+                                {t(plugin.expandedUserTags.modal.example)}:
                             </Paragraph>
                             <Tag type={localTags[tag.name]} />
                         </div>
 
                         <TextInput
                             type="text"
-                            value={tagSettings[tag.name]?.text ?? tag.displayName}
-                            placeholder={t("plugin.expandedUserTags.modal.customTextPlaceholder", { displayName: tag.displayName })}
+                            value={tagSettings[tag.name]?.text || ""}
+                            placeholder={t(plugin.expandedUserTags.modal.customTextPlaceholder, { displayName: tag.displayName })}
                             onChange={v => tagSettings[tag.name].text = v}
                             className={Margins.bottom16}
                         />
@@ -82,14 +82,14 @@ function SettingsComponent() {
                             value={tagSettings[tag.name]?.showInChat ?? true}
                             onChange={v => tagSettings[tag.name].showInChat = v}
                             hideBorder
-                            title={t("plugin.expandedUserTags.modal.messages")}
+                            title={t(plugin.expandedUserTags.modal.messages)}
                         />
 
                         <FormSwitch
                             value={tagSettings[tag.name]?.showInNotChat ?? true}
                             onChange={v => tagSettings[tag.name].showInNotChat = v}
                             hideBorder
-                            title={t("plugin.expandedUserTags.modal.memberList")}
+                            title={t(plugin.expandedUserTags.modal.memberList)}
                         />
                     </Card>
                 ))}
@@ -100,43 +100,27 @@ function SettingsComponent() {
 
 export const settings = definePluginSettings({
     dontShowForBots: {
-        get label() {
-            return t("plugin.expandedUserTags.option.dontShowForBots.label");
-        },
-        get description() {
-            return t("plugin.expandedUserTags.option.dontShowForBots.description");
-        },
+        label: () => t(plugin.expandedUserTags.option.dontShowForBots.label),
+        description: () => t(plugin.expandedUserTags.option.dontShowForBots.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     dontShowBotTag: {
-        get label() {
-            return t("plugin.expandedUserTags.option.dontShowBotTag.label");
-        },
-        get description() {
-            return t("plugin.expandedUserTags.option.dontShowBotTag.description");
-        },
+        label: () => t(plugin.expandedUserTags.option.dontShowBotTag.label),
+        description: () => t(plugin.expandedUserTags.option.dontShowBotTag.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
     },
     showWebhookTagFully: {
-        get label() {
-            return t("plugin.expandedUserTags.option.showWebhookTagFully.label");
-        },
-        get description() {
-            return t("plugin.expandedUserTags.option.showWebhookTagFully.description");
-        },
+        label: () => t(plugin.expandedUserTags.option.showWebhookTagFully.label),
+        description: () => t(plugin.expandedUserTags.option.showWebhookTagFully.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     tagSettings: {
-        get label() {
-            return t("plugin.expandedUserTags.option.tagSettings.label");
-        },
-        get description() {
-            return t("plugin.expandedUserTags.option.tagSettings.description");
-        },
+        label: () => t(plugin.expandedUserTags.option.tagSettings.label),
+        description: () => t(plugin.expandedUserTags.option.tagSettings.description),
         type: OptionType.COMPONENT,
         component: SettingsComponent
     },

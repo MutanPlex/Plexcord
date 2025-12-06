@@ -8,7 +8,7 @@
 import "./styles.css";
 
 import * as DataStore from "@api/DataStore";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
@@ -95,7 +95,7 @@ function FlaggedInput({ index, forceUpdate }) {
     return (<Flex flexDirection="row">
         <div style={{ flexGrow: 1 }}>
             <TextInput
-                placeholder={t("plugin.contentWarning.option.flagged.placeholder")}
+                placeholder={t(plugin.contentWarning.option.flagged.placeholder)}
                 spellCheck={false}
                 value={value}
                 onChange={updateValue}
@@ -131,7 +131,7 @@ function FlaggedWords() {
     });
     return (
         <>
-            <HeadingTertiary>{t("plugin.contentWarning.option.flagged.flagged")}</HeadingTertiary>
+            <HeadingTertiary>{t(plugin.contentWarning.option.flagged.flagged)}</HeadingTertiary>
             {inputs}
         </>
     );
@@ -139,19 +139,13 @@ function FlaggedWords() {
 
 const settings = definePluginSettings({
     flagged: {
-        get label() {
-            return t("plugin.contentWarning.option.flagged.label");
-        },
+        label: () => t(plugin.contentWarning.option.flagged.label),
         type: OptionType.COMPONENT,
         component: () => <FlaggedWords />,
     },
     onClick: {
-        get label() {
-            return t("plugin.contentWarning.option.onClick.label");
-        },
-        get description() {
-            return t("plugin.contentWarning.option.onClick.description");
-        },
+        label: () => t(plugin.contentWarning.option.onClick.label),
+        description: () => t(plugin.contentWarning.option.onClick.description),
         type: OptionType.BOOLEAN,
         default: false
     }
@@ -159,12 +153,10 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "ContentWarning",
+    description: () => t(plugin.contentWarning.description),
     authors: [PcDevs.camila314],
-    description: "Allows you to specify certain trigger words that will be blurred by default. Clicking on the blurred content will reveal it.",
     settings,
-    get displayDescription() {
-        return t("plugin.contentWarning.description");
-    },
+
     patches: [
         {
             find: ".VOICE_HANGOUT_INVITE?",

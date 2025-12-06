@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t, tJsx } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Paragraph } from "@components/Paragraph";
@@ -23,7 +23,7 @@ export function showInRoleModal(members: GuildMember[], roleId: string, channelI
                     <ModalHeader className={cl("header")}>
                         <Paragraph style={{ fontSize: "1.2rem", fontWeight: "bold", marginRight: "7px" }}>{
                             Parser.parse(`<@&${roleId}>`, true, { channelId, viewingChannelId: channelId })
-                        }: {tJsx("plugin.inRole.modal.member.title")} ({members.length})</Paragraph>
+                        }: {t(plugin.inRole.modal.member.title)} ({members.length})</Paragraph>
                         <ModalCloseButton onClick={props.onClose} className={cl("close")} />
                     </ModalHeader>
                     <ModalContent>
@@ -35,7 +35,7 @@ export function showInRoleModal(members: GuildMember[], roleId: string, channelI
                                             {Parser.parse(`<@${member.userId}>`, true, { channelId, viewingChannelId: channelId })}
                                         </Paragraph>
                                     </>
-                                ) : <Paragraph>{t("plugin.inRole.modal.member.noMembers")}</Paragraph>
+                                ) : <Paragraph>{t(plugin.inRole.modal.member.noMembers)}</Paragraph>
                             }
                         </div>
                     </ModalContent>

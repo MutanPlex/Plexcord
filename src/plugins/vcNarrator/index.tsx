@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { ErrorCard } from "@components/ErrorCard";
 import { Heading } from "@components/Heading";
@@ -143,14 +143,9 @@ function playSample(type: string) {
 
 export default definePlugin({
     name: "VcNarrator",
-    description: "Announces when users join, leave, or move voice channels via narrator",
+    description: () => t(plugin.vcNarrator.description),
     authors: [Devs.Ven],
     reporterTestable: ReporterTestable.None,
-
-    get displayDescription() {
-        return t("plugin.vcNarrator.description");
-    },
-
     settings,
 
     flux: {
@@ -226,26 +221,26 @@ export default definePlugin({
 
         let errorComponent: ReactElement<any> | null = null;
         if (!hasVoices) {
-            let error = t("plugin.vcNarrator.modal.noVoices");
+            let error = t(plugin.vcNarrator.modal.noVoice);
             error += IS_LINUX
-                ? t("plugin.vcNarrator.modal.linuxNote")
-                : t("plugin.vcNarrator.modal.someNarrator");
+                ? t(plugin.vcNarrator.modal.linuxNote)
+                : t(plugin.vcNarrator.modal.someNarrator);
             errorComponent = <ErrorCard>{error}</ErrorCard>;
         } else if (!hasEnglishVoices) {
-            errorComponent = <ErrorCard>{t("plugin.vcNarrator.modal.dontHaveEnglish")}</ErrorCard>;
+            errorComponent = <ErrorCard>{t(plugin.vcNarrator.modal.dontHaveEnglish)}</ErrorCard>;
         }
 
         return (
             <section>
                 <Paragraph>
-                    {t("plugin.vcNarrator.modal.customiseMessages")}
+                    {t(plugin.vcNarrator.modal.customiseMessages)}
                 </Paragraph>
                 <Paragraph>
-                    {t("plugin.vcNarrator.modal.placeholdersInfo")}
+                    {t(plugin.vcNarrator.modal.placeholdersInfo)}
                 </Paragraph>
                 {hasEnglishVoices && (
                     <>
-                        <Heading className={Margins.top20}>{t("plugin.vcNarrator.modal.title")}</Heading>
+                        <Heading className={Margins.top20}>{t(plugin.vcNarrator.modal.title)}</Heading>
                         <div
                             style={{
                                 display: "grid",

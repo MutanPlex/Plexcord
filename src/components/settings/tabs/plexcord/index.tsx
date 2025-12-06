@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import i18n, { SUPPORTED_LANGUAGES, t, useForceUpdateOnLocaleChange, useTranslation } from "@api/i18n";
+import i18n, { plugins, settings, SUPPORTED_LANGUAGES, t, useForceUpdateOnLocaleChange, useTranslation } from "@api/i18n";
 import { openNotificationLogModal } from "@api/Notifications/notificationLog";
 import { Settings, useSettings } from "@api/Settings";
 import { Divider } from "@components/Divider";
@@ -68,9 +68,9 @@ function LanguageSelector() {
     return (
         <div style={{ display: "flex" }}>
             <div>
-                <Heading tag="h5">{t("settings.language.selector.label")}</Heading>
+                <Heading tag="h5">{t(settings.language.selector.label)}</Heading>
                 <Paragraph className="description" style={{ marginBottom: "8px" }}>
-                    {t("settings.language.selector.description")}
+                    {t(settings.language.selector.description)}
                 </Paragraph>
             </div>
             <div style={{ marginLeft: "auto", minWidth: "200px" }}>
@@ -80,7 +80,7 @@ function LanguageSelector() {
                     select={handleLocaleChange}
                     isSelected={v => v === locale}
                     closeOnSelect={true}
-                    placeholder={t("settings.language.selector.placeholder")}
+                    placeholder={t(settings.language.selector.placeholder)}
                 />
             </div>
         </div>
@@ -88,53 +88,53 @@ function LanguageSelector() {
 }
 
 function Switches() {
-    const settings = useSettings(["useQuickCss", "enableReactDevtools", "frameless", "winNativeTitleBar", "transparent", "winCtrlQ", "disableMinSize"]);
+    const settingsState = useSettings(["useQuickCss", "enableReactDevtools", "frameless", "winNativeTitleBar", "transparent", "winCtrlQ", "disableMinSize"]);
 
     const Switches = [
         {
             key: "useQuickCss",
-            title: t("settings.switches.useQuickCss.label"),
+            title: t(settings.switches.useQuickCss.label),
             restartRequired: true,
             warning: { enabled: false }
         },
         !IS_WEB && {
             key: "enableReactDevtools",
-            title: t("settings.switches.enableReactDevtools.label"),
+            title: t(settings.switches.enableReactDevtools.label),
             restartRequired: true,
             warning: { enabled: false }
         },
         !IS_WEB && (!IS_DISCORD_DESKTOP || !IS_WINDOWS ? {
             key: "frameless",
-            title: t("settings.switches.frameless.label"),
+            title: t(settings.switches.frameless.label),
             restartRequired: true,
             warning: { enabled: false }
         } : {
             key: "winNativeTitleBar",
-            title: t("settings.switches.winNativeTitleBar.label"),
+            title: t(settings.switches.winNativeTitleBar.label),
             restartRequired: true,
             warning: { enabled: false }
         }),
         !IS_WEB && {
             key: "transparent",
-            title: t("settings.switches.transparent.label"),
-            description: t("settings.switches.transparent.description"),
+            title: t(settings.switches.transparent.label),
+            description: t(settings.switches.transparent.description),
             restartRequired: true,
             warning: { enabled: false }
         },
         !IS_WEB && IS_WINDOWS && {
             key: "winCtrlQ",
-            title: t("settings.switches.winCtrlQ.label"),
+            title: t(settings.switches.winCtrlQ.label),
             restartRequired: false,
             warning: { enabled: false }
         },
         IS_DISCORD_DESKTOP && {
             key: "disableMinSize",
-            title: t("settings.switches.disableMinSize.label"),
+            title: t(settings.switches.disableMinSize.label),
             restartRequired: false,
             warning: { enabled: false }
         },
     ] satisfies Array<false | {
-        key: KeysOfType<typeof settings, boolean>;
+        key: KeysOfType<typeof settingsState, boolean>;
         title: string;
         description?: string;
         restartRequired?: boolean;
@@ -153,16 +153,16 @@ function Switches() {
                 key={key}
                 title={title}
                 description={description}
-                value={settings[key]}
+                value={settingsState[key]}
                 onChange={v => {
-                    settings[key] = v;
+                    settingsState[key] = v;
 
                     if (restartRequired) {
                         Alerts.show({
-                            title: t("plugins.restart.required"),
-                            body: t("plugins.restart.apply"),
-                            confirmText: t("plugins.restart.button.now"),
-                            cancelText: t("plugins.restart.button.later"),
+                            title: t(plugins.restart.required),
+                            body: t(plugins.restart.apply),
+                            confirmText: t(plugins.restart.button.now),
+                            cancelText: t(plugins.restart.button.later),
                             onConfirm: relaunch
                         });
                     }
@@ -185,13 +185,13 @@ function PlexcordSettings() {
     const user = UserStore?.getCurrentUser();
 
     return (
-        <SettingsTab title={"Plexcord " + t("settings.title")}>
+        <SettingsTab title={"Plexcord " + t(settings.title)}>
             {isDonor(user?.id)
                 ? (
                     <SpecialCard
-                        title={t("settings.specialCards.donations.title")}
-                        subtitle={t("settings.specialCards.donations.subtitle")}
-                        description={t("settings.specialCards.donations.description")}
+                        title={t(settings.specialCards.donations.title)}
+                        subtitle={t(settings.specialCards.donations.subtitle)}
+                        description={t(settings.specialCards.donations.description)}
                         cardImage={VENNIE_DONATOR_IMAGE}
                         backgroundImage={DONOR_BACKGROUND_IMAGE}
                         backgroundColor="#ED87A9"
@@ -201,8 +201,8 @@ function PlexcordSettings() {
                 )
                 : (
                     <SpecialCard
-                        title={t("settings.specialCards.supportProject.title")}
-                        description={t("settings.specialCards.supportProject.description")}
+                        title={t(settings.specialCards.supportProject.title)}
+                        description={t(settings.specialCards.supportProject.description)}
                         cardImage={donateImage}
                         backgroundImage={DONOR_BACKGROUND_IMAGE}
                         backgroundColor="#c3a3ce"
@@ -214,47 +214,47 @@ function PlexcordSettings() {
 
             {isPluginDev(user?.id) || isPcPluginDev(user?.id) && (
                 <SpecialCard
-                    title={t("settings.specialCards.contributions.title")}
-                    subtitle={t("settings.specialCards.contributions.subtitle")}
-                    description={t("settings.specialCards.contributions.description")}
+                    title={t(settings.specialCards.contributions.title)}
+                    subtitle={t(settings.specialCards.contributions.subtitle)}
+                    description={t(settings.specialCards.contributions.description)}
                     cardImage={COZY_CONTRIB_IMAGE}
                     backgroundImage={CONTRIB_BACKGROUND_IMAGE}
                     backgroundColor="#EDCC87"
-                    buttonTitle={t("settings.specialCards.contributions.buttonTitle")}
+                    buttonTitle={t(settings.specialCards.contributions.buttonTitle)}
                     buttonOnClick={() => openContributorModal(user)}
                 />
             )}
 
             <section>
-                <Heading tag="h5">{t("settings.quickActions.title")}</Heading>
+                <Heading tag="h5">{t(settings.quickActions.title)}</Heading>
                 <QuickActionCard>
                     <QuickAction
                         Icon={LogIcon}
-                        text={t("settings.quickActions.notificationLog")}
+                        text={t(settings.quickActions.notificationLog)}
                         action={openNotificationLogModal}
                     />
                     <QuickAction
                         Icon={PaintbrushIcon}
-                        text={t("settings.quickActions.editQuickCSS")}
+                        text={t(settings.quickActions.editQuickCSS)}
                         action={() => PlexcordNative.quickCss.openEditor()}
                     />
                     {!IS_WEB && (
                         <>
                             <QuickAction
                                 Icon={RestartIcon}
-                                text={t("settings.quickActions.relaunchDiscord")}
+                                text={t(settings.quickActions.relaunchDiscord)}
                                 action={relaunch}
                             />
                             <QuickAction
                                 Icon={FolderIcon}
-                                text={t("settings.quickActions.openSettingsFolder")}
+                                text={t(settings.quickActions.openSettingsFolder)}
                                 action={() => PlexcordNative.settings.openFolder()}
                             />
                         </>
                     )}
                     <QuickAction
                         Icon={GithubIcon}
-                        text={t("settings.quickActions.viewSourceCode")}
+                        text={t(settings.quickActions.viewSourceCode)}
                         action={() => PlexcordNative.native.openExternal("https://github.com/" + gitRemote)}
                     />
                 </QuickActionCard>
@@ -263,13 +263,13 @@ function PlexcordSettings() {
             <Divider />
 
             <section className={Margins.top16}>
-                <Heading tag="h5">{t("settings.settingsSection.title")}</Heading>
+                <Heading tag="h5">{t(settings.settingsSection.title)}</Heading>
                 <Paragraph className={Margins.bottom20} style={{ color: "var(--text-muted)" }}>
-                    {t("settings.settingsSection.hintParts.prefix")}
+                    {t(settings.settingsSection.hintParts.prefix)}
                     <a onClick={() => openPluginModal(settingsPlugin)}>
-                        {t("settings.settingsSection.hintParts.linkText")}
+                        {t(settings.settingsSection.hintParts.linkText)}
                     </a>
-                    {t("settings.settingsSection.hintParts.suffix")}
+                    {t(settings.settingsSection.hintParts.suffix)}
                 </Paragraph>
 
                 <LanguageSelector />
@@ -287,4 +287,4 @@ function PlexcordSettings() {
     );
 }
 
-export default wrapTab(PlexcordSettings, "Plexcord " + t("settings.title"));
+export default wrapTab(PlexcordSettings, "Plexcord " + t(settings.title));

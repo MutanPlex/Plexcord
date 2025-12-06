@@ -18,7 +18,7 @@
 */
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, OptionalMessageOption, RequiredMessageOption, sendBotMessage } from "@api/Commands";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -33,20 +33,13 @@ function mock(input: string): string {
 
 export default definePlugin({
     name: "MoreCommands",
-    description: "Echo, Lenny, Mock, and More",
+    description: () => t(plugin.moreCommands.description),
     authors: [Devs.Arjix, Devs.Samu, PcDevs.zyqunix],
-
-    get displayDescription() {
-        return t("plugin.moreCommands.description");
-    },
 
     commands: [
         {
             name: "echo",
-            description: "Sends a message as Clyde (locally)",
-            get displayDescription() {
-                return t("plugin.moreCommands.command.echo.description");
-            },
+            description: () => t(plugin.moreCommands.command.echo.description),
             options: [OptionalMessageOption],
             inputType: ApplicationCommandInputType.BUILT_IN,
             execute: (opts, ctx) => {
@@ -57,10 +50,7 @@ export default definePlugin({
         },
         {
             name: "lenny",
-            description: "Sends a lenny face",
-            get displayDescription() {
-                return t("plugin.moreCommands.command.lenny.description");
-            },
+            description: () => t(plugin.moreCommands.command.lenny.description),
             options: [OptionalMessageOption],
             execute: opts => ({
                 content: findOption(opts, "message", "") + " ( ͡° ͜ʖ ͡°)"
@@ -68,10 +58,7 @@ export default definePlugin({
         },
         {
             name: "mock",
-            description: "mOcK PeOpLe",
-            get displayDescription() {
-                return t("plugin.moreCommands.command.mock.description");
-            },
+            description: () => t(plugin.moreCommands.command.mock.description),
             options: [RequiredMessageOption],
             execute: opts => ({
                 content: mock(findOption(opts, "message", ""))
@@ -79,44 +66,35 @@ export default definePlugin({
         },
         {
             name: "wordcount",
-            description: "Counts the number of words in a message",
-            get displayDescription() {
-                return t("plugin.moreCommands.command.wordcount.description");
-            },
+            description: () => t(plugin.moreCommands.command.wordcount.description),
             options: [RequiredMessageOption],
             inputType: ApplicationCommandInputType.BUILT_IN,
             execute: (opts, ctx) => {
                 const message = findOption(opts, "message", "");
                 const wordCount = message.trim().split(/\s+/).length;
                 sendBotMessage(ctx.channel.id, {
-                    content: t("plugin.moreCommands.command.wordcount.response", { count: wordCount })
+                    content: t(plugin.moreCommands.command.wordcount.response, { count: wordCount })
                 });
             },
         },
         {
             name: "flipcoin",
-            description: "Flips a coin and returns heads or tails",
-            get displayDescription() {
-                return t("plugin.moreCommands.command.flipcoin.description");
-            },
+            description: () => t(plugin.moreCommands.command.flipcoin.description),
             options: [],
             execute: (opts, ctx) => {
-                const flip = Math.random() < 0.5 ? t("plugin.moreCommands.command.flipcoin.heads") : t("plugin.moreCommands.command.flipcoin.tails");
+                const flip = Math.random() < 0.5 ? t(plugin.moreCommands.command.flipcoin.heads) : t(plugin.moreCommands.command.flipcoin.tails);
                 return {
-                    content: t("plugin.moreCommands.command.flipcoin.response", { result: flip })
+                    content: t(plugin.moreCommands.command.flipcoin.response, { result: flip })
                 };
             },
         },
         {
             name: "ask",
-            description: "Ask a yes/no question and get an answer",
-            get displayDescription() {
-                return t("plugin.moreCommands.command.ask.description");
-            },
+            description: () => t(plugin.moreCommands.command.ask.description),
             options: [RequiredMessageOption],
             execute: opts => {
                 const question = findOption(opts, "message", "");
-                const responses = [t("plugin.moreCommands.command.ask.yes"), t("plugin.moreCommands.command.ask.no"), t("plugin.moreCommands.command.ask.maybe"), t("plugin.moreCommands.command.ask.askAgain"), t("plugin.moreCommands.command.ask.definitelyNot"), t("plugin.moreCommands.command.ask.itIsCertain")];
+                const responses = [t(plugin.moreCommands.command.ask.yes), t(plugin.moreCommands.command.ask.no), t(plugin.moreCommands.command.ask.maybe), t(plugin.moreCommands.command.ask.askAgain), t(plugin.moreCommands.command.ask.definitelyNot), t(plugin.moreCommands.command.ask.itIsCertain)];
                 const response = responses[Math.floor(Math.random() * responses.length)];
                 return {
                     content: `${question} - ${response}`
@@ -125,22 +103,16 @@ export default definePlugin({
         },
         {
             name: "randomanimal",
-            description: "Get a random animal picture",
-            get displayDescription() {
-                return t("plugin.moreCommands.command.randomanimal.description");
-            },
+            description: () => t(plugin.moreCommands.command.randomanimal.description),
             options: [
                 {
                     name: "animal",
-                    description: "pick your animal",
-                    get displayDescription() {
-                        return t("plugin.moreCommands.command.randomanimal.animal");
-                    },
+                    description: () => t(plugin.moreCommands.command.randomanimal.animal),
                     type: ApplicationCommandOptionType.STRING,
                     required: true,
                     choices: [
-                        { name: "cat", value: "cat", label: t("plugin.moreCommands.command.randomanimal.cat") },
-                        { name: "dog", value: "dog", label: t("plugin.moreCommands.command.randomanimal.dog") },
+                        { name: "cat", value: "cat", label: t(plugin.moreCommands.command.randomanimal.cat) },
+                        { name: "dog", value: "dog", label: t(plugin.moreCommands.command.randomanimal.dog) },
                     ]
                 }
             ],
@@ -162,7 +134,7 @@ export default definePlugin({
                         };
                     } catch (err) {
                         sendBotMessage(ctx.channel.id, {
-                            content: t("plugin.moreCommands.command.randomanimal.response")
+                            content: t(plugin.moreCommands.command.randomanimal.response)
                         });
                     }
                 })();
@@ -170,26 +142,17 @@ export default definePlugin({
         },
         {
             name: "randomnumber",
-            description: "Generates a random number between two values",
-            get displayDescription() {
-                return t("plugin.moreCommands.command.randomnumber.description");
-            },
+            description: () => t(plugin.moreCommands.command.randomnumber.description),
             options: [
                 {
                     name: "min",
-                    description: "Minimum value",
-                    get displayDescription() {
-                        return t("plugin.moreCommands.command.randomnumber.min");
-                    },
+                    description: () => t(plugin.moreCommands.command.randomnumber.min),
                     type: ApplicationCommandOptionType.INTEGER,
                     required: true
                 },
                 {
                     name: "max",
-                    description: "Maximum value",
-                    get displayDescription() {
-                        return t("plugin.moreCommands.command.randomnumber.max");
-                    },
+                    description: () => t(plugin.moreCommands.command.randomnumber.max),
                     type: ApplicationCommandOptionType.INTEGER,
                     required: true
                 }
@@ -199,23 +162,17 @@ export default definePlugin({
                 const max = parseInt(findOption(opts, "max", "100"));
                 const number = Math.floor(Math.random() * (max - min + 1)) + min;
                 return {
-                    content: t("plugin.moreCommands.command.randomnumber.response", { number, min, max })
+                    content: t(plugin.moreCommands.command.randomnumber.response, { number, min, max })
                 };
             }
         },
         {
             name: "choose",
-            description: "Randomly chooses from provided options",
-            get displayDescription() {
-                return t("plugin.moreCommands.command.choose.description");
-            },
+            description: () => t(plugin.moreCommands.command.choose.description),
             options: [
                 {
                     name: "choices",
-                    description: "Comma-separated list of choices",
-                    get displayDescription() {
-                        return t("plugin.moreCommands.command.choose.option");
-                    },
+                    description: () => t(plugin.moreCommands.command.choose.option),
                     type: ApplicationCommandOptionType.STRING,
                     required: true
                 }
@@ -224,16 +181,13 @@ export default definePlugin({
                 const choices = findOption(opts, "choices", "").split(",").map(c => c.trim());
                 const choice = choices[Math.floor(Math.random() * choices.length)];
                 return {
-                    content: t("plugin.moreCommands.command.choose.response", { choice })
+                    content: t(plugin.moreCommands.command.choose.response, { choice })
                 };
             }
         },
         {
             name: "systeminfo",
-            description: "Shows system information",
-            get displayDescription() {
-                return t("plugin.moreCommands.command.systeminfo.description");
-            },
+            description: () => t(plugin.moreCommands.command.systeminfo.description),
             options: [],
             execute: async (opts, ctx) => {
                 try {
@@ -242,112 +196,88 @@ export default definePlugin({
                     const { deviceMemory, connection }: { deviceMemory: any, connection: any; } = navigator as any;
                     const platform = userAgent.includes("Windows") ? "Windows" :
                         userAgent.includes("Mac") ? "MacOS" :
-                            userAgent.includes("Linux") ? "Linux" : t("plugin.moreCommands.command.systeminfo.unknown");
+                            userAgent.includes("Linux") ? "Linux" : t(plugin.moreCommands.command.systeminfo.unknown);
                     const isMobile = /Mobile|Android|iPhone/i.test(userAgent);
-                    const deviceType = isMobile ? t("plugin.moreCommands.command.systeminfo.mobile") : t("plugin.moreCommands.command.systeminfo.desktop");
-                    const browserInfo = userAgent.match(/(?:chrome|firefox|safari|edge|opr)\/?\s*(\d+)/i)?.[0] || t("plugin.moreCommands.command.systeminfo.unknown");
-                    const networkInfo = connection ? `${connection.effectiveType || t("plugin.moreCommands.command.systeminfo.unknown")}` : t("plugin.moreCommands.command.systeminfo.unknown");
+                    const deviceType = isMobile ? t(plugin.moreCommands.command.systeminfo.mobile) : t(plugin.moreCommands.command.systeminfo.desktop);
+                    const browserInfo = userAgent.match(/(?:chrome|firefox|safari|edge|opr)\/?\s*(\d+)/i)?.[0] || t(plugin.moreCommands.command.systeminfo.unknown);
+                    const networkInfo = connection ? `${connection.effectiveType || t(plugin.moreCommands.command.systeminfo.unknown)}` : t(plugin.moreCommands.command.systeminfo.unknown);
                     const info = [
-                        `> **${t("plugin.moreCommands.command.systeminfo.platform")}**: ${platform}`,
-                        `> **${t("plugin.moreCommands.command.systeminfo.deviceType")}**: ${deviceType}`,
-                        `> **${t("plugin.moreCommands.command.systeminfo.browser")}**: ${browserInfo}`,
-                        `> **${t("plugin.moreCommands.command.systeminfo.cpuCores")}**: ${hardwareConcurrency || "N/A"}`,
-                        `> **${t("plugin.moreCommands.command.systeminfo.memory")}**: ${deviceMemory ? `${deviceMemory}GB` : "N/A"}`,
-                        `> **${t("plugin.moreCommands.command.systeminfo.screen")}**: ${width}x${height} (${colorDepth}bit)`,
-                        `> **${t("plugin.moreCommands.command.systeminfo.languages")}**: ${languages?.join(", ")}`,
-                        `> **${t("plugin.moreCommands.command.systeminfo.network")}**: ${networkInfo} (${onLine ? t("plugin.moreCommands.command.systeminfo.online") : t("plugin.moreCommands.command.systeminfo.offline")})`
+                        `> **${t(plugin.moreCommands.command.systeminfo.platform)}**: ${platform}`,
+                        `> **${t(plugin.moreCommands.command.systeminfo.deviceType)}**: ${deviceType}`,
+                        `> **${t(plugin.moreCommands.command.systeminfo.browser)}**: ${browserInfo}`,
+                        `> **${t(plugin.moreCommands.command.systeminfo.cpuCores)}**: ${hardwareConcurrency || "N/A"}`,
+                        `> **${t(plugin.moreCommands.command.systeminfo.memory)}**: ${deviceMemory ? `${deviceMemory}GB` : "N/A"}`,
+                        `> **${t(plugin.moreCommands.command.systeminfo.screen)}**: ${width}x${height} (${colorDepth}bit)`,
+                        `> **${t(plugin.moreCommands.command.systeminfo.languages)}**: ${languages?.join(", ")}`,
+                        `> **${t(plugin.moreCommands.command.systeminfo.network)}**: ${networkInfo} (${onLine ? t(plugin.moreCommands.command.systeminfo.online) : t(plugin.moreCommands.command.systeminfo.offline)})`
                     ].join("\n");
                     return { content: info };
                 } catch (err) {
-                    sendBotMessage(ctx.channel.id, { content: t("plugin.moreCommands.command.systeminfo.failedToFetch") });
+                    sendBotMessage(ctx.channel.id, { content: t(plugin.moreCommands.command.systeminfo.failedToFetch) });
                 }
             },
         },
         {
             name: "getuptime",
-            description: "Returns the client's uptime",
-            get displayDescription() {
-                return t("plugin.moreCommands.command.getuptime.description");
-            },
+            description: () => t(plugin.moreCommands.command.getuptime.description),
             execute: async (opts, ctx) => {
                 const uptime = performance.now() / 1000;
-                const uptimeInfo = `> ${t("plugin.moreCommands.command.getuptime.response", { uptime: Math.floor(uptime / 60) })}`;
+                const uptimeInfo = `> ${t(plugin.moreCommands.command.getuptime.response, { uptime: Math.floor(uptime / 60) })}`;
                 return { content: uptimeInfo };
             },
         },
         {
             name: "gettime",
-            description: "Returns the current time",
-            get displayDescription() {
-                return t("plugin.moreCommands.command.gettime.description");
-            },
+            description: () => t(plugin.moreCommands.command.gettime.description),
             execute: async (opts, ctx) => {
                 const currentTime = new Date().toLocaleString();
-                return { content: `> ${t("plugin.moreCommands.command.gettime.response", { time: currentTime })}` };
+                return { content: `> ${t(plugin.moreCommands.command.gettime.response, { time: currentTime })}` };
             },
         },
         {
             name: "transform",
-            description: "Transform your text with the specified option",
-            get displayDescription() {
-                return t("plugin.moreCommands.command.transform.description");
-            },
+            description: () => t(plugin.moreCommands.command.transform.description),
             options: [
                 {
                     name: "transformation",
-                    description: "transformation to apply to your text",
-                    get displayDescription() {
-                        return t("plugin.moreCommands.command.transform.transformation.description");
-                    },
+                    description: () => t(plugin.moreCommands.command.transform.transformation.description),
                     type: ApplicationCommandOptionType.STRING,
                     required: true,
                     choices: [
-                        { name: "toLowerCase", value: "toLowerCase", label: t("plugin.moreCommands.command.transform.transformation.lowercase") },
-                        { name: "toUpperCase", value: "toUpperCase", label: t("plugin.moreCommands.command.transform.transformation.uppercase") },
-                        { name: "toLocaleLowerCase", value: "toLocaleLowerCase", label: t("plugin.moreCommands.command.transform.transformation.localeLowercase") },
-                        { name: "toLocaleUpperCase", value: "toLocaleUpperCase", label: t("plugin.moreCommands.command.transform.transformation.localeUppercase") },
-                        { name: "stay the same", value: "same", label: t("plugin.moreCommands.command.transform.transformation.same") }
+                        { name: "toLowerCase", value: "toLowerCase", label: t(plugin.moreCommands.command.transform.transformation.lowercase) },
+                        { name: "toUpperCase", value: "toUpperCase", label: t(plugin.moreCommands.command.transform.transformation.uppercase) },
+                        { name: "toLocaleLowerCase", value: "toLocaleLowerCase", label: t(plugin.moreCommands.command.transform.transformation.localeLowercase) },
+                        { name: "toLocaleUpperCase", value: "toLocaleUpperCase", label: t(plugin.moreCommands.command.transform.transformation.localeUppercase) },
+                        { name: "stay the same", value: "same", label: t(plugin.moreCommands.command.transform.transformation.same) }
                     ]
                 },
                 {
                     name: "repeat",
-                    description: "how many times to repeat",
-                    get displayDescription() {
-                        return t("plugin.moreCommands.command.transform.repeat");
-                    },
+                    description: () => t(plugin.moreCommands.command.transform.repeat),
                     type: ApplicationCommandOptionType.INTEGER,
                     required: false
                 },
                 {
                     name: "reverse",
-                    description: "reverse your text",
-                    get displayDescription() {
-                        return t("plugin.moreCommands.command.transform.reverse");
-                    },
+                    description: () => t(plugin.moreCommands.command.transform.reverse),
                     type: ApplicationCommandOptionType.BOOLEAN,
                     required: false
                 },
                 {
                     name: "normalize",
-                    description: "which normailze option to use",
-                    get displayDescription() {
-                        return t("plugin.moreCommands.command.transform.normalize.description");
-                    },
+                    description: () => t(plugin.moreCommands.command.transform.normalize.description),
                     type: ApplicationCommandOptionType.STRING,
                     required: false,
                     choices: [
-                        { name: "NFC", value: "NFC", label: t("plugin.moreCommands.command.transform.normalize.nfc") },
-                        { name: "NFD", value: "NFD", label: t("plugin.moreCommands.command.transform.normalize.nfd") },
-                        { name: "NFKC", value: "NFKC", label: t("plugin.moreCommands.command.transform.normalize.nfkc") },
-                        { name: "NFKD", value: "NFKD", label: t("plugin.moreCommands.command.transform.normalize.nfkd") }
+                        { name: "NFC", value: "NFC", label: t(plugin.moreCommands.command.transform.normalize.nfc) },
+                        { name: "NFD", value: "NFD", label: t(plugin.moreCommands.command.transform.normalize.nfd) },
+                        { name: "NFKC", value: "NFKC", label: t(plugin.moreCommands.command.transform.normalize.nfkc) },
+                        { name: "NFKD", value: "NFKD", label: t(plugin.moreCommands.command.transform.normalize.nfkd) }
                     ]
                 },
                 {
                     name: "text",
-                    description: "text to transform",
-                    get displayDescription() {
-                        return t("plugin.moreCommands.command.transform.text");
-                    },
+                    description: () => t(plugin.moreCommands.command.transform.text),
                     type: ApplicationCommandOptionType.STRING,
                     required: true
                 }

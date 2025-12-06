@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t, tJsx } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { popNotice, showNotice } from "@api/Notices";
 import { HeadingSecondary } from "@components/Heading";
 import { Link } from "@components/Link";
@@ -41,21 +41,17 @@ async function lookupApp(applicationId: string): Promise<string> {
 let ws: WebSocket;
 export default definePlugin({
     name: "WebRichPresence (arRPC)",
-    description: "Client plugin for arRPC to enable RPC on Discord Web (experimental)",
+    description: () => t(plugin.arRpc.description),
     authors: [Devs.Ducko],
     reporterTestable: ReporterTestable.None,
     hidden: IS_PLEXTRON || "legcord" in window,
 
-    get displayDescription() {
-        return t("plugin.arRpc.description");
-    },
-
     settingsAboutComponent: () => (
         <>
-            <HeadingSecondary>{t("plugin.arRpc.use.title")}</HeadingSecondary>
+            <HeadingSecondary>{t(plugin.arRpc.use.title)}</HeadingSecondary>
             <Paragraph>
-                {tJsx("plugin.arRpc.use.enable", {
-                    link: <Link href="https://github.com/OpenAsar/arrpc/tree/main#server">{t("plugin.arRpc.use.link")}</Link>
+                {t(plugin.arRpc.use.enable, {
+                    link: <Link href="https://github.com/OpenAsar/arrpc/tree/main#server">{t(plugin.arRpc.use.link)}</Link>
                 })}
             </Paragraph>
         </>
@@ -89,7 +85,7 @@ export default definePlugin({
 
         const connectionSuccessful = await new Promise(res => setTimeout(() => res(ws.readyState === WebSocket.OPEN), 5000)); // check if open after 5s
         if (!connectionSuccessful) {
-            showNotice(t("plugin.arRpc.toast.failed"), t("plugin.arRpc.toast.retry"), () => { // show notice about failure to connect, with retry/ignore
+            showNotice(t(plugin.arRpc.toast.failed), t(plugin.arRpc.toast.retry), () => { // show notice about failure to connect, with retry/ignore
                 popNotice();
                 this.start();
             });
@@ -97,7 +93,7 @@ export default definePlugin({
         }
 
         Toasts.show({ // show toast on success
-            message: t("plugin.arRpc.toast.connected"),
+            message: t(plugin.arRpc.toast.connected),
             type: Toasts.Type.SUCCESS,
             id: Toasts.genId(),
             options: {

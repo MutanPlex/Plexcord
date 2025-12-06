@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType, PluginNative, SettingsDefinition } from "@utils/types";
@@ -80,13 +80,9 @@ const Native = PlexcordNative.pluginHelpers.OpenInApp as PluginNative<typeof imp
 
 export default definePlugin({
     name: "OpenInApp",
-    description: "Open links in their respective apps instead of your browser",
+    description: () => t(plugin.openInApp.description),
     authors: [Devs.Ven, Devs.surgedevs],
     settings: pluginSettings,
-
-    get displayDescription() {
-        return t("plugin.openInApp.description");
-    },
 
     patches: [
         {
@@ -136,7 +132,7 @@ export default definePlugin({
             }
 
             if (rule.match.test(url)) {
-                showToast("Opened link in native app", Toasts.Type.SUCCESS);
+                showToast(t(plugin.openInApp.notification.open), Toasts.Type.SUCCESS);
 
                 const newUrl = url.replace(rule.match, rule.replace);
                 PlexcordNative.native.openExternal(newUrl);

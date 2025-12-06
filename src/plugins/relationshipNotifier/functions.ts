@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { ChannelType } from "@plexcord/discord-types/enums";
 import { getUniqueUsername, openUserProfile } from "@utils/discord";
 import { UserUtils } from "@webpack/common";
@@ -48,7 +48,7 @@ export async function onRelationshipRemove({ relationship: { type, id } }: Relat
         case RelationshipType.FRIEND:
             if (settings.store.friends)
                 notify(
-                    t("plugin.relationshipNotifier.notification.removedFriend", { user: getUniqueUsername(user) }),
+                    t(plugin.relationshipNotifier.notification.removedFriend, { user: getUniqueUsername(user) }),
                     user.getAvatarURL(undefined, undefined, false),
                     () => openUserProfile(user.id)
                 );
@@ -56,7 +56,7 @@ export async function onRelationshipRemove({ relationship: { type, id } }: Relat
         case RelationshipType.INCOMING_REQUEST:
             if (settings.store.friendRequestCancels)
                 notify(
-                    t("plugin.relationshipNotifier.notification.cancelledFriendRequest", { user: getUniqueUsername(user) }),
+                    t(plugin.relationshipNotifier.notification.cancelledFriendRequest, { user: getUniqueUsername(user) }),
                     user.getAvatarURL(undefined, undefined, false),
                     () => openUserProfile(user.id)
                 );
@@ -77,7 +77,7 @@ export function onGuildDelete({ guild: { id, unavailable } }: GuildDelete) {
     const guild = getGuild(id);
     if (guild) {
         deleteGuild(id);
-        notify(t("plugin.relationshipNotifier.notification.removedFromServer", { server: guild.name }), guild.iconURL);
+        notify(t(plugin.relationshipNotifier.notification.removedFromServer, { server: guild.name }), guild.iconURL);
     }
 }
 
@@ -94,6 +94,6 @@ export function onChannelDelete({ channel: { id, type } }: ChannelDelete) {
     const group = getGroup(id);
     if (group) {
         deleteGroup(id);
-        notify(t("plugin.relationshipNotifier.notification.removedFromGroup", { group: group.name }), group.iconURL);
+        notify(t(plugin.relationshipNotifier.notification.removedFromGroup, { group: group.name }), group.iconURL);
     }
 }

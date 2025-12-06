@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
@@ -46,7 +46,7 @@ function useCategory(categoryId: string | null, initalChannelId: string | null) 
         } else if (initalChannelId) {
             return {
                 id: Toasts.genId(),
-                name: `${t("plugin.pinDMs.modal.category.pin")} ${categoryLen() + 1}`,
+                name: `${t(plugin.pinDMs.modal.category.pin)} ${categoryLen() + 1}`,
                 color: DEFAULT_COLOR,
                 collapsed: false,
                 channels: [initalChannelId]
@@ -80,14 +80,14 @@ export function NewCategoryModal({ categoryId, modalProps, initialChannelId }: P
     return (
         <ModalRoot {...modalProps}>
             <ModalHeader>
-                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{categoryId ? t("plugin.pinDMs.modal.category.edit") : t("plugin.pinDMs.modal.category.new")}</BaseText>
+                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{categoryId ? t(plugin.pinDMs.modal.category.edit) : t(plugin.pinDMs.modal.category.new)}</BaseText>
             </ModalHeader>
 
             {/* form is here so when you press enter while in the text input it submits */}
             <form onSubmit={onSave}>
                 <ModalContent className={cl("content")}>
                     <section>
-                        <Heading>{t("plugin.pinDMs.modal.category.name")}</Heading>
+                        <Heading>{t(plugin.pinDMs.modal.category.name)}</Heading>
                         <TextInput
                             value={name}
                             onChange={e => setName(e)}
@@ -95,7 +95,7 @@ export function NewCategoryModal({ categoryId, modalProps, initialChannelId }: P
                     </section>
                     <Divider />
                     <section>
-                        <Heading>{t("plugin.pinDMs.modal.category.color")}</Heading>
+                        <Heading>{t(plugin.pinDMs.modal.category.color)}</Heading>
                         <ColorPickerWithSwatches
                             key={category.id}
                             defaultColor={DEFAULT_COLOR}
@@ -115,7 +115,7 @@ export function NewCategoryModal({ categoryId, modalProps, initialChannelId }: P
                     </section>
                 </ModalContent>
                 <ModalFooter>
-                    <Button type="submit" onClick={onSave} disabled={!name}>{categoryId ? t("plugin.pinDMs.modal.category.save") : t("plugin.pinDMs.modal.category.create")}</Button>
+                    <Button type="submit" onClick={onSave} disabled={!name}>{categoryId ? t(plugin.pinDMs.modal.category.save) : t(plugin.pinDMs.modal.category.create)}</Button>
                 </ModalFooter>
             </form>
         </ModalRoot>

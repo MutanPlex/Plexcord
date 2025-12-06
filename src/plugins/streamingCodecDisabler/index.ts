@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -42,32 +42,20 @@ const originalCodecStatuses = new Map<CodecType, boolean>([
 
 const settings = definePluginSettings({
     disableAv1Codec: {
-        get label() {
-            return t("plugin.streamingCodecDisabler.option.disableAv1Codec.label");
-        },
-        get description() {
-            return t("plugin.streamingCodecDisabler.option.disableAv1Codec.description");
-        },
+        label: () => t(plugin.streamingCodecDisabler.option.disableAv1Codec.label),
+        description: () => t(plugin.streamingCodecDisabler.option.disableAv1Codec.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     disableH265Codec: {
-        get label() {
-            return t("plugin.streamingCodecDisabler.option.disableH265Codec.label");
-        },
-        get description() {
-            return t("plugin.streamingCodecDisabler.option.disableH265Codec.description");
-        },
+        label: () => t(plugin.streamingCodecDisabler.option.disableH265Codec.label),
+        description: () => t(plugin.streamingCodecDisabler.option.disableH265Codec.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     disableH264Codec: {
-        get label() {
-            return t("plugin.streamingCodecDisabler.option.disableH264Codec.label");
-        },
-        get description() {
-            return t("plugin.streamingCodecDisabler.option.disableH264Codec.description");
-        },
+        label: () => t(plugin.streamingCodecDisabler.option.disableH264Codec.label),
+        description: () => t(plugin.streamingCodecDisabler.option.disableH264Codec.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
@@ -75,13 +63,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "StreamingCodecDisabler",
-    description: "Disable codecs for streaming of your choice",
+    description: () => t(plugin.streamingCodecDisabler.description),
     authors: [PcDevs.davidkra230],
     settings,
-
-    get displayDescription() {
-        return t("plugin.streamingCodecDisabler.description");
-    },
 
     patches: [
         {

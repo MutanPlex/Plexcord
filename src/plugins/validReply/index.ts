@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Channel, Message, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -34,12 +34,8 @@ const createMessageRecord = findByCodeLazy(".createFromServer(", ".isBlockedForM
 
 export default definePlugin({
     name: "ValidReply",
-    description: 'Fixes "Message could not be loaded" upon hovering over the reply',
+    description: () => t(plugin.validReply.description),
     authors: [Devs.newwares],
-
-    get displayDescription() {
-        return t("plugin.validReply.description");
-    },
 
     patches: [
         {

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import { insertTextIntoChatInputBox } from "@utils/discord";
 import definePlugin from "@utils/types";
@@ -25,12 +25,8 @@ import { ExpressionPickerStore } from "@webpack/common";
 
 export default definePlugin({
     name: "GifPaste",
-    description: "Makes picking a gif in the gif picker insert a link into the chatbox instead of instantly sending it",
+    description: () => t(plugin.gifPaste.description),
     authors: [Devs.Ven],
-
-    get displayDescription() {
-        return t("plugin.gifPaste.description");
-    },
 
     patches: [{
         find: '"handleSelectGIF",',

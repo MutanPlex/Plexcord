@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs, PcDevs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import definePlugin from "@utils/types";
@@ -22,12 +22,8 @@ const MessageTypes = findByPropsLazy("REPLY", "STAGE_RAISE_HAND", "CHANNEL_NAME_
 
 export default definePlugin({
     name: "NotificationTitle",
-    description: "Makes desktop notifications more informative",
+    description: () => t(plugin.notificationTitle.description),
     authors: [Devs.Kyuuhachi, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.notificationTitle.description");
-    },
 
     patches: [
         {

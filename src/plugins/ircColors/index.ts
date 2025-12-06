@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { hash as h64 } from "@intrnl/xxhash64";
 import { getCustomColorString } from "@plugins/customUserColors";
@@ -35,43 +35,27 @@ function calculateNameColorForUser(id?: string) {
 
 const settings = definePluginSettings({
     lightness: {
-        get label() {
-            return t("plugin.ircColors.option.lightness.label");
-        },
-        get description() {
-            return t("plugin.ircColors.option.lightness.description");
-        },
+        label: () => t(plugin.ircColors.option.lightness.label),
+        description: () => t(plugin.ircColors.option.lightness.description),
         type: OptionType.NUMBER,
         default: 70,
     },
     memberListColors: {
-        get label() {
-            return t("plugin.ircColors.option.memberListColors.label");
-        },
-        get description() {
-            return t("plugin.ircColors.option.memberListColors.description");
-        },
+        label: () => t(plugin.ircColors.option.memberListColors.label),
+        description: () => t(plugin.ircColors.option.memberListColors.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     applyColorOnlyToUsersWithoutColor: {
-        get label() {
-            return t("plugin.ircColors.option.applyColorOnlyToUsersWithoutColor.label");
-        },
-        get description() {
-            return t("plugin.ircColors.option.applyColorOnlyToUsersWithoutColor.description");
-        },
+        label: () => t(plugin.ircColors.option.applyColorOnlyToUsersWithoutColor.label),
+        description: () => t(plugin.ircColors.option.applyColorOnlyToUsersWithoutColor.description),
         restartNeeded: false,
         type: OptionType.BOOLEAN,
         default: false
     },
     applyColorOnlyInDms: {
-        get label() {
-            return t("plugin.ircColors.option.applyColorOnlyInDms.label");
-        },
-        get description() {
-            return t("plugin.ircColors.option.applyColorOnlyInDms.description");
-        },
+        label: () => t(plugin.ircColors.option.applyColorOnlyInDms.label),
+        description: () => t(plugin.ircColors.option.applyColorOnlyInDms.description),
         restartNeeded: false,
         type: OptionType.BOOLEAN,
         default: false
@@ -80,13 +64,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "IrcColors",
-    description: "Makes username colors in chat unique, like in IRC clients",
+    description: () => t(plugin.ircColors.description),
     authors: [Devs.Grzesiek11, Devs.jamesbt365],
     settings,
-
-    get displayDescription() {
-        return t("plugin.ircColors.description");
-    },
 
     patches: [
         {

@@ -19,7 +19,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { renderPopout } from "@plugins/plexcordToolbox/menu";
@@ -32,12 +32,8 @@ const HeaderBarIcon = findComponentByCodeLazy(".HEADER_BAR_BADGE_TOP:", '.iconBa
 
 export const settings = definePluginSettings({
     showPluginMenu: {
-        get label() {
-            return t("plugin.plexcordToolbox.option.showPluginMenu.label");
-        },
-        get description() {
-            return t("plugin.plexcordToolbox.option.showPluginMenu.description");
-        },
+        label: () => t(plugin.plexcordToolbox.option.showPluginMenu.label),
+        description: () => t(plugin.plexcordToolbox.option.showPluginMenu.description),
         type: OptionType.BOOLEAN,
         default: true,
     }
@@ -70,7 +66,7 @@ function PlexcordPopoutButton() {
                     ref={buttonRef}
                     className="pc-toolbox-btn"
                     onClick={() => setShow(v => !v)}
-                    tooltip={isShown ? null : t("plugin.plexcordToolbox.tooltip")}
+                    tooltip={isShown ? null : t(plugin.plexcordToolbox.tooltip)}
                     icon={() => <Icon isShown={isShown} />}
                     selected={isShown}
                 />
@@ -89,13 +85,8 @@ function renderPlexcordToolboxButton() {
 
 export default definePlugin({
     name: "PlexcordToolbox",
-    description: "Adds a button to the AppBar that houses Plexcord quick actions",
+    description: () => t(plugin.plexcordToolbox.description),
     authors: [Devs.Ven, Devs.AutumnVN, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.plexcordToolbox.description");
-    },
-
     settings,
 
     patches: [

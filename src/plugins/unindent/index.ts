@@ -17,19 +17,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { MessageObject } from "@api/MessageEvents";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "Unindent",
-    description: "Trims leading indentation from codeblocks",
+    description: () => t(plugin.unindent.description),
     authors: [Devs.Ven],
-
-    get displayDescription() {
-        return t("plugin.unindent.description");
-    },
 
     patches: [
         {

@@ -19,7 +19,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -42,23 +42,15 @@ const BlobMask = findComponentByCodeLazy("!1,lowerBadgeSize:");
 
 const settings = definePluginSettings({
     backgroundCheck: {
-        get label() {
-            return t("plugin.betterSessions.option.backgroundCheck.label");
-        },
-        get description() {
-            return t("plugin.betterSessions.option.backgroundCheck.description");
-        },
+        label: () => t(plugin.betterSessions.option.backgroundCheck.label),
+        description: () => t(plugin.betterSessions.option.backgroundCheck.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
     },
     checkInterval: {
-        get label() {
-            return t("plugin.betterSessions.option.checkInterval.label");
-        },
-        get description() {
-            return t("plugin.betterSessions.option.checkInterval.description");
-        },
+        label: () => t(plugin.betterSessions.option.checkInterval.label),
+        description: () => t(plugin.betterSessions.option.checkInterval.description),
         type: OptionType.NUMBER,
         default: 20,
         restartNeeded: true
@@ -67,14 +59,10 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "BetterSessions",
-    description: "Enhances the sessions (devices) menu. Allows you to view exact timestamps, give each session a custom name, and receive notifications about new sessions.",
+    description: () => t(plugin.betterSessions.description),
     authors: [Devs.amia],
 
     settings: settings,
-
-    get displayDescription() {
-        return t("plugin.betterSessions.description");
-    },
 
     patches: [
         {
@@ -124,7 +112,7 @@ export default definePlugin({
                             marginLeft: "2px"
                         }}
                     >
-                        {t("plugin.betterSessions.new")}
+                        {t(plugin.betterSessions.new)}
                     </div>
                 )}
                 <RenameButton session={session} state={state} />
@@ -198,7 +186,7 @@ export default definePlugin({
             savedSessionsCache.set(session.id_hash, { name: "", isNew: true });
             showNotification({
                 title: "BetterSessions",
-                body: `${t("plugin.betterSessions.newSessions")}\n${session.client_info.os} · ${session.client_info.platform} · ${session.client_info.location}`,
+                body: `${t(plugin.betterSessions.newSessions)}\n${session.client_info.os} · ${session.client_info.platform} · ${session.client_info.location}`,
                 permanent: true,
                 onClick: () => UserSettingsModal.open("Sessions")
             });

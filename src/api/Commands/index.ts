@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { i18n, t } from "@api/i18n";
+import { commands as commandsI18n, i18n, t } from "@api/i18n";
 import { CommandArgument, CommandContext, CommandOption } from "@plexcord/discord-types";
 import { Logger } from "@utils/Logger";
 import { makeCodeblock } from "@utils/text";
@@ -81,13 +81,13 @@ export const _handleCommand = function (cmd: PlexcordCommand, args: CommandArgum
         // TODO: cancel send if cmd.inputType === BUILT_IN_TEXT
         const msg = `An Error occurred while executing command "${cmd.name}"`;
         const reason = err instanceof Error ? err.stack || err.message : String(err);
-        const msgErr = t("commands.error.execute", { command: cmd.name });
+        const msgErr = t(commandsI18n.error.execute, { command: cmd.name });
         console.error(msg, err);
         sendBotMessage(ctx.channel.id, {
-            content: `${msgErr}:\n${makeCodeblock(reason)}`,
             author: {
                 username: "Plexcord"
-            }
+            },
+            content: `${msgErr}:\n${makeCodeblock(reason)}`
         });
     };
 
@@ -106,7 +106,7 @@ export const _handleCommand = function (cmd: PlexcordCommand, args: CommandArgum
  */
 export function prepareOption<O extends CommandOption | PlexcordCommand>(opt: O): O {
     opt.displayName ||= opt.name;
-    opt.displayDescription ||= opt.description;
+    opt.displayDescription ||= typeof opt.description === "function" ? opt.description() : opt.description;
     opt.options?.forEach((opt, i, opts) => {
         // See comment above Placeholders
         if (opt === OptPlaceholder) opts[i] = OptionalMessageOption;
@@ -125,7 +125,7 @@ export function updateCommandTranslations() {
         if (cmd.isPlexcordCommand) {
             if (typeof cmd.displayDescription === "undefined" && cmd.untranslatedDescription) {
                 try {
-                    const translatedDescription = t(cmd.untranslatedDescription);
+                    const translatedDescription = t(cmd.untranslatedDescription as any);
                     if (translatedDescription !== cmd.untranslatedDescription) {
                         cmd.displayDescription = translatedDescription;
                     }
@@ -136,7 +136,7 @@ export function updateCommandTranslations() {
 
             if (typeof cmd.displayName === "undefined" && cmd.untranslatedName) {
                 try {
-                    const translatedName = t(cmd.untranslatedName);
+                    const translatedName = t(cmd.untranslatedName as any);
                     if (translatedName !== cmd.untranslatedName) {
                         cmd.displayName = translatedName;
                     }
@@ -189,7 +189,7 @@ export function registerCommand<C extends PlexcordCommand>(command: C, plugin: s
 
     command.isPlexcordCommand = true;
     command.untranslatedName ??= command.name;
-    command.untranslatedDescription ??= command.description;
+    command.untranslatedDescription ??= typeof command.description === "function" ? command.description() : command.description;
     command.id ??= `-${BUILT_IN.length + commandIdOffset + 1}`;
     command.applicationId ??= "-1"; // BUILT_IN;
     command.type ??= ApplicationCommandType.CHAT_INPUT;

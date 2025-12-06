@@ -20,7 +20,7 @@
 import "./style.css";
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { NotesIcon, OpenExternalIcon } from "@components/Icons";
@@ -44,7 +44,7 @@ const guildPopoutPatch: NavContextMenuPatchCallback = (children, { guild }: { gu
     if (!guild) return;
     children.push(
         <Menu.MenuItem
-            label={t("plugin.reviewDB.context.view")}
+            label={t(plugin.reviewDB.context.view)}
             id="pc-rdb-server-reviews"
             icon={OpenExternalIcon}
             action={() => openReviewsModal(guild.id, guild.name, ReviewType.Server)}
@@ -56,7 +56,7 @@ const userContextPatch: NavContextMenuPatchCallback = (children, { user }: { use
     if (!user) return;
     children.push(
         <Menu.MenuItem
-            label={t("plugin.reviewDB.context.view")}
+            label={t(plugin.reviewDB.context.view)}
             id="pc-rdb-user-reviews"
             icon={OpenExternalIcon}
             action={() => openReviewsModal(user.id, user.username, ReviewType.User)}
@@ -66,12 +66,8 @@ const userContextPatch: NavContextMenuPatchCallback = (children, { user }: { use
 
 export default definePlugin({
     name: "ReviewDB",
-    description: "Review other users (Adds a new settings to profiles)",
+    description: () => t(plugin.reviewDB.description),
     authors: [Devs.mantikafasi, Devs.Ven],
-
-    get displayDescription() {
-        return t("plugin.reviewDB.description");
-    },
 
     settings,
     contextMenus: {
@@ -119,14 +115,14 @@ export default definePlugin({
                 if (lastReviewId && lastReviewId < user.lastReviewID) {
                     s.lastReviewId = user.lastReviewID;
                     if (user.lastReviewID !== 0)
-                        showToast(t("plugin.reviewDB.notification.newReview"));
+                        showToast(t(plugin.reviewDB.notification.newReview));
                 }
             }
 
             if (user.notification) {
                 const props = user.notification.type === NotificationType.Ban ? {
-                    cancelText: t("plugin.reviewDB.button.appeal"),
-                    confirmText: t("plugin.reviewDB.button.ok"),
+                    cancelText: t(plugin.reviewDB.button.appeal),
+                    confirmText: t(plugin.reviewDB.button.ok),
                     onCancel: async () =>
                         PlexcordNative.native.openExternal(
                             "https://reviewdb.mantikafasi.dev/api/redirect?"
@@ -155,7 +151,7 @@ export default definePlugin({
 
     BiteSizeReviewsButton: ErrorBoundary.wrap(({ user }: { user: User; }) => {
         return (
-            <TooltipContainer text={t("plugin.reviewDB.context.view")}>
+            <TooltipContainer text={t(plugin.reviewDB.context.view)}>
                 <Button
                     onClick={() => openReviewsModal(user.id, user.username, ReviewType.User)}
                     variant="secondary"

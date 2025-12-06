@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { getCurrentChannel } from "@utils/discord";
 import { isObjectEmpty } from "@utils/misc";
 import { ChannelStore, PermissionsBits, PermissionStore, SelectedChannelStore, Tooltip, useEffect, useStateFromStores, VoiceStateStore } from "@webpack/common";
@@ -81,7 +81,7 @@ export function MemberCount({ isTooltip, tooltipGuildId }: { isTooltip?: true; t
 
     return (
         <div className={cl("widget", { tooltip: isTooltip, "member-list": !isTooltip })}>
-            <Tooltip text={t("plugin.memberCount.online.thisChannel", { formattedOnlineCount })} position="bottom">
+            <Tooltip text={t(plugin.memberCount.onlineThisChannel, { formattedOnlineCount })} position="bottom">
                 {props => (
                     <div {...props} className={cl("container")}>
                         <CircleIcon className={cl("online-count")} />
@@ -89,7 +89,7 @@ export function MemberCount({ isTooltip, tooltipGuildId }: { isTooltip?: true; t
                     </div>
                 )}
             </Tooltip>
-            <Tooltip text={t("plugin.memberCount.totalMembers", { formattedTotalCount: numberFormat(totalCount) })} position="bottom">
+            <Tooltip text={t(plugin.memberCount.totalMembers, { formattedTotalCount: numberFormat(totalCount) })} position="bottom">
                 {props => (
                     <div {...props} className={cl("container")}>
                         <CircleIcon className={cl("total-count")} />
@@ -98,7 +98,7 @@ export function MemberCount({ isTooltip, tooltipGuildId }: { isTooltip?: true; t
                 )}
             </Tooltip>
             {includeVoice && voiceActivityCount > 0 &&
-                <Tooltip text={t("plugin.memberCount.totalVoice", { formattedVoiceCount })} position="bottom">
+                <Tooltip text={t(plugin.memberCount.totalVoice, { formattedVoiceCount })} position="bottom">
                     {props => (
                         <div {...props} className={cl("container")}>
                             <VoiceIcon className={cl("voice-icon")} />

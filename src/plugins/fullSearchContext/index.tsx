@@ -18,7 +18,7 @@
 */
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
@@ -80,12 +80,8 @@ const contextMenuPatch: NavContextMenuPatchCallback = (children, props: MessageA
 
 export default definePlugin({
     name: "FullSearchContext",
-    description: "Makes the message context menu in message search results have all options you'd expect",
+    description: () => t(plugin.fullSearchContext.description),
     authors: [Devs.Ven, Devs.Aria],
-
-    get displayDescription() {
-        return t("plugin.fullSearchContext.description");
-    },
 
     patches: [{
         find: "onClick:this.handleMessageClick,",

@@ -7,16 +7,9 @@
 
 // additional thanks to mwittrien/DevilBro and nexpid for their server hiding plugins, which served as inspiration
 
-import {
-    findGroupChildrenByChildId,
-    NavContextMenuPatchCallback,
-} from "@api/ContextMenu";
-import { t } from "@api/i18n";
-import {
-    addServerListElement,
-    removeServerListElement,
-    ServerListRenderPosition,
-} from "@api/ServerList";
+import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { plugin, t } from "@api/i18n";
+import { addServerListElement, removeServerListElement, ServerListRenderPosition } from "@api/ServerList";
 import { Guild } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -41,7 +34,6 @@ type qsResult = {
     };
 };
 
-
 export const SortedGuildStore = findStoreLazy("SortedGuildStore");
 
 const Patch: NavContextMenuPatchCallback = (
@@ -57,7 +49,7 @@ const Patch: NavContextMenuPatchCallback = (
     group.push(
         <Menu.MenuItem
             id="pc-hide-server"
-            label={isHidden ? t("plugin.hideServers.context.unhide") : t("plugin.hideServers.context.hide")}
+            label={isHidden ? t(plugin.hideServers.context.unhide) : t(plugin.hideServers.context.hide)}
             action={() => {
                 if (isHidden) {
                     HiddenServersStore.removeHiddenGuild(guild.id);
@@ -79,15 +71,11 @@ export function removeIndicator() {
 
 export default definePlugin({
     name: "HideServers",
-    description: "Allows you to hide servers from the guild list and quick switcher by right clicking them",
+    description: () => t(plugin.hideServers.description),
     authors: [PcDevs.bep, PcDevs.MutanPlex],
     tags: ["guild", "server", "hide", "folder"],
-
-    get displayDescription() {
-        return t("plugin.hideServers.description");
-    },
-
     dependencies: ["ServerListAPI"],
+
     contextMenus: {
         "guild-header-popout": Patch,
         "guild-context": (menuItems, props: any) => {
@@ -104,7 +92,7 @@ export default definePlugin({
                 menuItems.push(
                     <Menu.MenuItem
                         id="pc-hide-folder"
-                        label={isHidden ? t("plugin.hideServers.context.folder.unhide") : t("plugin.hideServers.context.folder.hide")}
+                        label={isHidden ? t(plugin.hideServers.context.folder.unhide) : t(plugin.hideServers.context.folder.hide)}
                         action={() => {
                             if (isHidden) {
                                 HiddenServersStore.removeHiddenFolder(folderId, guildIds);
@@ -117,6 +105,7 @@ export default definePlugin({
             }
         },
     },
+
     patches: [
         {
             find: '("guildsnav")',

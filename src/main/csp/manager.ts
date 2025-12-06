@@ -6,7 +6,7 @@
  */
 
 import { NativeSettings } from "@main/settings";
-import { t } from "@main/utils/i18n";
+import { csp, t } from "@main/utils/i18n";
 import { IpcEvents } from "@shared/IpcEvents";
 import { app, dialog, ipcMain, IpcMainInvokeEvent } from "electron";
 
@@ -38,13 +38,13 @@ function validate(url: string, directives: string[]) {
 function getMessage(url: string, directives: string[], callerName: string) {
     const domain = new URL(url).host;
 
-    const message = t("csp.wants.caller", { callerName, domain });
+    const message = t(csp.wants.caller, { callerName, domain });
 
     const appName = app.getName().toLowerCase().includes("discord") ? "Discord" : "Plextron";
 
     let detail =
-        `${t("csp.wants.detail", { domain })}\n\n` +
-        t("csp.wants.restart", { appName });
+        `${t(csp.wants.detail, { domain })}\n\n` +
+        t(csp.wants.restart, { appName });
 
     if (directives.length === 1 && directives[0] === "connect-src") {
         return { message, detail };
@@ -55,11 +55,11 @@ function getMessage(url: string, directives: string[], callerName: string) {
         .map(type => {
             switch (type) {
                 case "img-src":
-                    return t("csp.wants.type.images");
+                    return t(csp.wants.type.images);
                 case "style-src":
-                    return t("csp.wants.type.styles");
+                    return t(csp.wants.type.styles);
                 case "font-src":
-                    return t("csp.wants.type.fonts");
+                    return t(csp.wants.type.fonts);
                 default:
                     throw new Error(`Illegal CSP directive: ${type}`);
             }
@@ -67,7 +67,7 @@ function getMessage(url: string, directives: string[], callerName: string) {
         .sort()
         .join(", ");
 
-    detail = `${t("csp.wants.content", { domain })}:\n${contentTypes}\n\n${detail}`;
+    detail = `${t(csp.wants.content, { domain })}:\n${contentTypes}\n\n${detail}`;
 
     return { message, detail };
 }
@@ -86,11 +86,11 @@ async function addCspRule(_: IpcMainInvokeEvent, url: string, directives: string
     const { checkboxChecked, response } = await dialog.showMessageBox({
         ...getMessage(url, directives, callerName),
         type: callerName ? "info" : "warning",
-        title: "Plexcord " + t("csp.wants.title"),
-        buttons: [t("csp.wants.button.cancel"), t("csp.wants.button.allow")],
+        title: "Plexcord " + t(csp.wants.title),
+        buttons: [t(csp.wants.button.cancel), t(csp.wants.button.allow)],
         defaultId: 0,
         cancelId: 0,
-        checkboxLabel: t("csp.wants.understand", { domain }),
+        checkboxLabel: t(csp.wants.understand, { domain }),
         checkboxChecked: false,
     });
 

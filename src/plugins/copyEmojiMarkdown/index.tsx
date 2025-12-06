@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { copyWithToast } from "@utils/discord";
@@ -44,12 +44,8 @@ function getEmojiMarkdown(target: Target, copyUnicode: boolean): string {
 
 const settings = definePluginSettings({
     copyUnicode: {
-        get label() {
-            return t("plugin.copyEmojiMarkdown.option.copyUnicode.label");
-        },
-        get description() {
-            return t("plugin.copyEmojiMarkdown.option.copyUnicode.description");
-        },
+        label: () => t(plugin.copyEmojiMarkdown.option.copyUnicode.label),
+        description: () => t(plugin.copyEmojiMarkdown.option.copyUnicode.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
@@ -57,13 +53,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "CopyEmojiMarkdown",
-    description: "Allows you to copy emojis as formatted string (<a:blob_pwease:1402403381900742737>)",
+    description: () => t(plugin.copyEmojiMarkdown.description),
     authors: [Devs.HappyEnderman, Devs.Vishnya],
     settings,
-
-    get displayDescription() {
-        return t("plugin.copyEmojiMarkdown.description");
-    },
 
     contextMenus: {
         "expression-picker"(children, { target }: { target: Target; }) {
@@ -72,11 +64,11 @@ export default definePlugin({
             children.push(
                 <Menu.MenuItem
                     id="pc-copy-emoji-markdown"
-                    label={t("plugin.copyEmojiMarkdown.context.copy")}
+                    label={t(plugin.copyEmojiMarkdown.context.copy)}
                     action={() => {
                         copyWithToast(
                             getEmojiMarkdown(target, settings.store.copyUnicode),
-                            t("plugin.copyEmojiMarkdown.toast.success")
+                            t(plugin.copyEmojiMarkdown.toast.success)
                         );
                     }}
                 />

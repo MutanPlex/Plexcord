@@ -5,18 +5,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugins, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "NicknameIconsAPI",
-    description: "API to add icons to the nickname, in profiles",
+    description: () => t(plugins.metadata.api.description.nicknameIcons),
     authors: [Devs.Nuckyz],
-
-    get displayDescription() {
-        return t("plugins.metadata.api.description.nicknameIcons");
-    },
 
     patches: [
         {

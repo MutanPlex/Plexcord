@@ -18,7 +18,7 @@
 */
 
 import { AudioPlayerInterface, createAudioPlayer } from "@api/AudioPlayer";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -119,12 +119,8 @@ function assignSounds(volume: number, pack: "operagx" | "osu") {
 
 const settings = definePluginSettings({
     volume: {
-        get label() {
-            return t("plugin.keyboardSounds.option.volume.label");
-        },
-        get description() {
-            return t("plugin.keyboardSounds.option.volume.description");
-        },
+        label: () => t(plugin.keyboardSounds.option.volume.label),
+        description: () => t(plugin.keyboardSounds.option.volume.description),
         type: OptionType.SLIDER,
         markers: [0, 25, 50, 75, 100],
         stickToMarkers: false,
@@ -132,33 +128,23 @@ const settings = definePluginSettings({
         onChange: value => { assignSounds(value, settings.store.soundPack); }
     },
     soundPack: {
-        get label() {
-            return t("plugin.keyboardSounds.option.soundPack.label");
-        },
-        get description() {
-            return t("plugin.keyboardSounds.option.soundPack.description");
-        },
+        label: () => t(plugin.keyboardSounds.option.soundPack.label),
+        description: () => t(plugin.keyboardSounds.option.soundPack.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.keyboardSounds.option.soundPack.operagx"), value: "operagx" as "operagx", default: true },
-                { label: t("plugin.keyboardSounds.option.soundPack.osu"), value: "osu" as "osu" }
-            ];
-        },
+        options: [
+            { label: () => t(plugin.keyboardSounds.option.soundPack.operagx), value: "operagx" as "operagx", default: true },
+            { label: () => t(plugin.keyboardSounds.option.soundPack.osu), value: "osu" as "osu" }
+        ],
         onChange: value => { assignSounds(settings.store.volume, value); }
     }
 });
 
 export default definePlugin({
     name: "KeyboardSounds",
-    description: "Adds OperaGX or osu! sound effects when typing on your keyboard.",
+    description: () => t(plugin.keyboardSounds.description),
     authors: [Devs.HypedDomi, PcDevs.Etorix],
     dependencies: ["AudioPlayerAPI"],
     settings,
-
-    get displayDescription() {
-        return t("plugin.keyboardSounds.description");
-    },
 
     start() {
         assignSounds(settings.store.volume, settings.store.soundPack);

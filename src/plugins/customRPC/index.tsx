@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t, tJsx } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import { Button } from "@components/Button";
@@ -217,16 +217,12 @@ export async function setRpc(disable?: boolean) {
 
 export default definePlugin({
     name: "CustomRPC",
-    description: "Add a fully customisable Rich Presence (Game status) to your Discord profile",
+    description: () => t(plugin.customRPC.description),
     authors: [Devs.captain, Devs.AutumnVN, Devs.nin0dev],
     dependencies: ["UserSettingsAPI"],
     start: setRpc,
     stop: () => setRpc(true),
     settings,
-
-    get displayDescription() {
-        return t("plugin.customRPC.description");
-    },
 
     patches: [
         {
@@ -251,38 +247,38 @@ export default definePlugin({
                         className={classes(Margins.top16, Margins.bottom16)}
                         style={{ padding: "1em" }}
                     >
-                        <Heading>{t("plugin.customRPC.error.notice")}</Heading>
-                        <Paragraph>{t("plugin.customRPC.error.sharing")}</Paragraph>
+                        <Heading>{t(plugin.customRPC.error.notice)}</Heading>
+                        <Paragraph>{t(plugin.customRPC.error.sharing)}</Paragraph>
 
                         <Button
                             variant="secondary"
                             className={Margins.top8}
                             onClick={() => ShowCurrentGame.updateSetting(true)}
                         >
-                            {t("plugin.customRPC.error.enable")}
+                            {t(plugin.customRPC.error.enable)}
                         </Button>
                     </ErrorCard>
                 )}
 
                 <Flex flexDirection="column" style={{ gap: ".5em" }} className={Margins.top16}>
                     <Paragraph>
-                        {tJsx("plugin.customRPC.goTo", {
+                        {t(plugin.customRPC.goTo, {
                             portal: <Link href="https://discord.com/developers/applications">Discord Developer Portal</Link>
                         })}
                     </Paragraph>
                     <Paragraph>
-                        {t("plugin.customRPC.upload")}
+                        {t(plugin.customRPC.upload)}
                     </Paragraph>
                     <Paragraph>
-                        {tJsx("plugin.customRPC.image", {
+                        {t(plugin.customRPC.image, {
                             imgur: <Link href="https://imgur.com">Imgur</Link>
                         })}
                     </Paragraph>
                     <Paragraph>
-                        {t("plugin.customRPC.button")}
+                        {t(plugin.customRPC.button)}
                     </Paragraph>
                     <Paragraph>
-                        {t("plugin.customRPC.font")}
+                        {t(plugin.customRPC.font)}
                     </Paragraph>
                 </Flex>
 

@@ -21,7 +21,7 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { Channel, Message } from "@plexcord/discord-types";
 import { JSX } from "react";
 
-import { t } from "./i18n";
+import { message, t } from "./i18n";
 
 export interface MessageDecorationProps {
     author: {
@@ -65,7 +65,7 @@ export function __addDecorationsToMessage(props: MessageDecorationProps): JSX.El
     const decorations = Array.from(
         decorationsFactories.entries(),
         ([key, Decoration]) => (
-            <ErrorBoundary noop message={t("message.decoration.error.render", { key })} key={key}>
+            <ErrorBoundary noop message={t(message.decoration.error.render, { key })} key={key}>
                 <Decoration {...props} />
             </ErrorBoundary>
         )

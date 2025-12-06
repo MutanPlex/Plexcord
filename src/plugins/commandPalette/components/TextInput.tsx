@@ -7,7 +7,7 @@
 
 import "./style.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { closeAllModals, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { React, TextInput, useEffect, useState } from "@webpack/common";
 
@@ -43,7 +43,7 @@ export function SimpleTextInput({ modalProps, onSelect, placeholder, info }: Sim
                 value={inputValue}
                 onChange={e => setInputValue(e as unknown as string)}
                 style={{ width: "30vw", borderRadius: "5px" }}
-                placeholder={placeholder ?? t("plugin.commandPalette.type")}
+                placeholder={placeholder ?? t(plugin.commandPalette.type)}
             />
             {info && <div className="pc-command-palette-textinfo">{info}</div>}
         </ModalRoot>

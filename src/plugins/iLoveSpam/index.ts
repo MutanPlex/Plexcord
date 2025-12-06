@@ -17,18 +17,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "ILoveSpam",
-    description: "Do not hide messages from 'likely spammers'",
+    description: () => t(plugin.iLoveSpam.description),
     authors: [Devs.botato, Devs.Nyako],
-
-    get displayDescription() {
-        return t("plugin.iLoveSpam.description");
-    },
 
     patches: [
         {

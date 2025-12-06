@@ -19,7 +19,7 @@
 
 import "./style.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -81,103 +81,65 @@ function filterTreeWithTargetNode(children: any, predicate: (node: any) => boole
 
 export const settings = definePluginSettings({
     sidebar: {
-        get label() {
-            return t("plugin.betterFolders.option.sidebar.label");
-        },
-        get description() {
-            return t("plugin.betterFolders.option.sidebar.description");
-        },
+        label: () => t(plugin.betterFolders.option.sidebar.label),
+        description: () => t(plugin.betterFolders.option.sidebar.description),
         type: OptionType.BOOLEAN,
         restartNeeded: true,
         default: true
     },
     sidebarAnim: {
-        get label() {
-            return t("plugin.betterFolders.option.sidebarAnim.label");
-        },
-        get description() {
-            return t("plugin.betterFolders.option.sidebarAnim.description");
-        },
+        label: () => t(plugin.betterFolders.option.sidebarAnim.label),
+        description: () => t(plugin.betterFolders.option.sidebarAnim.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     closeAllFolders: {
-        get label() {
-            return t("plugin.betterFolders.option.closeAllFolders.label");
-        },
-        get description() {
-            return t("plugin.betterFolders.option.closeAllFolders.description");
-        },
+        label: () => t(plugin.betterFolders.option.closeAllFolders.label),
+        description: () => t(plugin.betterFolders.option.closeAllFolders.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     closeAllHomeButton: {
-        get label() {
-            return t("plugin.betterFolders.option.closeAllHomeButton.label");
-        },
-        get description() {
-            return t("plugin.betterFolders.option.closeAllHomeButton.description");
-        },
+        label: () => t(plugin.betterFolders.option.closeAllHomeButton.label),
+        description: () => t(plugin.betterFolders.option.closeAllHomeButton.description),
         type: OptionType.BOOLEAN,
         restartNeeded: true,
         default: false
     },
     closeOthers: {
-        get label() {
-            return t("plugin.betterFolders.option.closeOthers.label");
-        },
-        get description() {
-            return t("plugin.betterFolders.option.closeOthers.description");
-        },
+        label: () => t(plugin.betterFolders.option.closeOthers.label),
+        description: () => t(plugin.betterFolders.option.closeOthers.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     closeServerFolder: {
-        get label() {
-            return t("plugin.betterFolders.option.closeServerFolder.label");
-        },
-        get description() {
-            return t("plugin.betterFolders.option.closeServerFolder.description");
-        },
+        label: () => t(plugin.betterFolders.option.closeServerFolder.label),
+        description: () => t(plugin.betterFolders.option.closeServerFolder.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     forceOpen: {
-        get label() {
-            return t("plugin.betterFolders.option.forceOpen.label");
-        },
-        get description() {
-            return t("plugin.betterFolders.option.forceOpen.description");
-        },
+        label: () => t(plugin.betterFolders.option.forceOpen.label),
+        description: () => t(plugin.betterFolders.option.forceOpen.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     keepIcons: {
-        get label() {
-            return t("plugin.betterFolders.option.keepIcons.label");
-        },
-        get description() {
-            return t("plugin.betterFolders.option.keepIcons.description");
-        },
+        label: () => t(plugin.betterFolders.option.keepIcons.label),
+        description: () => t(plugin.betterFolders.option.keepIcons.description),
         type: OptionType.BOOLEAN,
         restartNeeded: true,
         default: false
     },
     showFolderIcon: {
-        get label() {
-            return t("plugin.betterFolders.option.showFolderIcon.label");
-        },
-        get description() {
-            return t("plugin.betterFolders.option.showFolderIcon.description");
-        },
+        label: () => t(plugin.betterFolders.option.showFolderIcon.label),
+        description: () => t(plugin.betterFolders.option.showFolderIcon.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.betterFolders.option.showFolderIcon.never"), value: FolderIconDisplay.Never },
-                { label: t("plugin.betterFolders.option.showFolderIcon.always"), value: FolderIconDisplay.Always, default: true },
-                { label: t("plugin.betterFolders.option.showFolderIcon.moreThanOne"), value: FolderIconDisplay.MoreThanOneFolderExpanded }
-            ];
-        },
+        options: [
+            { label: () => t(plugin.betterFolders.option.showFolderIcon.never), value: FolderIconDisplay.Never },
+            { label: () => t(plugin.betterFolders.option.showFolderIcon.always), value: FolderIconDisplay.Always, default: true },
+            { label: () => t(plugin.betterFolders.option.showFolderIcon.moreThanOne), value: FolderIconDisplay.MoreThanOneFolderExpanded }
+        ],
         restartNeeded: true
     }
 });
@@ -188,14 +150,9 @@ const GRID_STYLE_NAME = "pc-betterFolders-sidebar-grid";
 
 export default definePlugin({
     name: "BetterFolders",
-    description: "Shows server folders on dedicated sidebar and adds folder related improvements",
+    description: () => t(plugin.betterFolders.description),
     authors: [Devs.juby, Devs.AutumnVN, Devs.Nuckyz],
-
     settings,
-
-    get displayDescription() {
-        return t("plugin.betterFolders.description");
-    },
 
     patches: [
         {

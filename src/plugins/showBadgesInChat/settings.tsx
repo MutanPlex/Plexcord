@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import { OptionType } from "@utils/types";
@@ -13,100 +13,64 @@ import { useEffect, UserStore, useState } from "@webpack/common";
 
 const settings = definePluginSettings({
     showPlexcordDonor: {
-        get label() {
-            return t("plugin.showBadgesInChat.option.showPlexcordDonor.label");
-        },
-        get description() {
-            return t("plugin.showBadgesInChat.option.showPlexcordDonor.description");
-        },
+        label: () => t(plugin.showBadgesInChat.option.showPlexcordDonor.label),
+        description: () => t(plugin.showBadgesInChat.option.showPlexcordDonor.description),
         type: OptionType.BOOLEAN,
         hidden: true,
         default: true
     },
     plexcordDonorPosition: {
-        get label() {
-            return t("plugin.showBadgesInChat.option.plexcordDonorPosition.label");
-        },
-        get description() {
-            return t("plugin.showBadgesInChat.option.plexcordDonorPosition.description");
-        },
+        label: () => t(plugin.showBadgesInChat.option.plexcordDonorPosition.label),
+        description: () => t(plugin.showBadgesInChat.option.plexcordDonorPosition.description),
         type: OptionType.NUMBER,
         hidden: true,
         default: 0
     },
     showPlexcordContributor: {
-        get label() {
-            return t("plugin.showBadgesInChat.option.showPlexcordContributor.label");
-        },
-        get description() {
-            return t("plugin.showBadgesInChat.option.showPlexcordContributor.description");
-        },
+        label: () => t(plugin.showBadgesInChat.option.showPlexcordContributor.label),
+        description: () => t(plugin.showBadgesInChat.option.showPlexcordContributor.description),
         type: OptionType.BOOLEAN,
         hidden: true,
         default: true
     },
     plexcordContributorPosition: {
-        get label() {
-            return t("plugin.showBadgesInChat.option.plexcordContributorPosition.label");
-        },
-        get description() {
-            return t("plugin.showBadgesInChat.option.plexcordContributorPosition.description");
-        },
+        label: () => t(plugin.showBadgesInChat.option.plexcordContributorPosition.label),
+        description: () => t(plugin.showBadgesInChat.option.plexcordContributorPosition.description),
         type: OptionType.NUMBER,
         hidden: true,
         default: 1
     },
     showDiscordProfile: {
-        get label() {
-            return t("plugin.showBadgesInChat.option.showDiscordProfile.label");
-        },
-        get description() {
-            return t("plugin.showBadgesInChat.option.showDiscordProfile.description");
-        },
+        label: () => t(plugin.showBadgesInChat.option.showDiscordProfile.label),
+        description: () => t(plugin.showBadgesInChat.option.showDiscordProfile.description),
         type: OptionType.BOOLEAN,
         hidden: true,
         default: true
     },
     discordProfilePosition: {
-        get label() {
-            return t("plugin.showBadgesInChat.option.discordProfilePosition.label");
-        },
-        get description() {
-            return t("plugin.showBadgesInChat.option.discordProfilePosition.description");
-        },
+        label: () => t(plugin.showBadgesInChat.option.discordProfilePosition.label),
+        description: () => t(plugin.showBadgesInChat.option.discordProfilePosition.description),
         type: OptionType.NUMBER,
         hidden: true,
         default: 6
     },
     showDiscordNitro: {
-        get label() {
-            return t("plugin.showBadgesInChat.option.showDiscordNitro.label");
-        },
-        get description() {
-            return t("plugin.showBadgesInChat.option.showDiscordNitro.description");
-        },
+        label: () => t(plugin.showBadgesInChat.option.showDiscordNitro.label),
+        description: () => t(plugin.showBadgesInChat.option.showDiscordNitro.description),
         type: OptionType.BOOLEAN,
         hidden: true,
         default: true
     },
     discordNitroPosition: {
-        get label() {
-            return t("plugin.showBadgesInChat.option.discordNitroPosition.label");
-        },
-        get description() {
-            return t("plugin.showBadgesInChat.option.discordNitroPosition.description");
-        },
+        label: () => t(plugin.showBadgesInChat.option.discordNitroPosition.label),
+        description: () => t(plugin.showBadgesInChat.option.discordNitroPosition.description),
         type: OptionType.NUMBER,
         hidden: true,
         default: 7
     },
     badgeSettings: {
-        get label() {
-            return t("plugin.showBadgesInChat.option.badgeSettings.label");
-        },
-        get description() {
-            return t("plugin.showBadgesInChat.option.badgeSettings.description");
-        },
+        label: () => t(plugin.showBadgesInChat.option.badgeSettings.label),
+        description: () => t(plugin.showBadgesInChat.option.badgeSettings.description),
         type: OptionType.COMPONENT,
         component: () => <BadgeSettings />
     }
@@ -116,10 +80,10 @@ export default settings;
 
 const BadgeSettings = () => {
     const [images, setImages] = useState([
-        { src: "https://cdn.nest.rip/uploads/78cb1e77-b7a6-4242-9089-e91f866159bf.png", shown: settings.store.showPlexcordDonor, title: t("plugin.showBadgesInChat.badge.plexcord"), key: "PlexcordDonor", position: settings.store.plexcordDonorPosition },
-        { src: "https://plexcord.club/favicon.png", shown: settings.store.showPlexcordContributor, title: t("plugin.showBadgesInChat.badge.contributor"), key: "PlexcordContributor", position: settings.store.plexcordContributorPosition },
-        { src: "https://cdn.discordapp.com/badge-icons/bf01d1073931f921909045f3a39fd264.png", shown: settings.store.showDiscordProfile, title: t("plugin.showBadgesInChat.badge.discordProfile"), key: "DiscordProfile", position: settings.store.discordProfilePosition },
-        { src: "https://cdn.discordapp.com/badge-icons/2ba85e8026a8614b640c2837bcdfe21b.png", shown: settings.store.showDiscordNitro, title: t("plugin.showBadgesInChat.badge.nitro"), key: "DiscordNitro", position: settings.store.discordNitroPosition }
+        { src: "https://cdn.nest.rip/uploads/78cb1e77-b7a6-4242-9089-e91f866159bf.png", shown: settings.store.showPlexcordDonor, title: t(plugin.showBadgesInChat.badge.plexcord), key: "PlexcordDonor", position: settings.store.plexcordDonorPosition },
+        { src: "https://plexcord.club/favicon.png", shown: settings.store.showPlexcordContributor, title: t(plugin.showBadgesInChat.badge.contributor), key: "PlexcordContributor", position: settings.store.plexcordContributorPosition },
+        { src: "https://cdn.discordapp.com/badge-icons/bf01d1073931f921909045f3a39fd264.png", shown: settings.store.showDiscordProfile, title: t(plugin.showBadgesInChat.badge.discordProfile), key: "DiscordProfile", position: settings.store.discordProfilePosition },
+        { src: "https://cdn.discordapp.com/badge-icons/2ba85e8026a8614b640c2837bcdfe21b.png", shown: settings.store.showDiscordNitro, title: t(plugin.showBadgesInChat.badge.nitro), key: "DiscordNitro", position: settings.store.discordNitroPosition }
     ]);
 
     useEffect(() => {
@@ -182,7 +146,7 @@ const BadgeSettings = () => {
 
     return (
         <>
-            <BaseText>{t("plugin.showBadgesInChat.option.badgeSettings.modal")}</BaseText>
+            <BaseText>{t(plugin.showBadgesInChat.option.badgeSettings.modal)}</BaseText>
             <div className="pc-sbic-badge-settings">
                 <img className="pc-sbic-settings-avatar" src={UserStore.getCurrentUser().getAvatarURL()}></img>
                 <BaseText className="pc-sbic-settings-username">{(UserStore.getCurrentUser() as any).globalName}</BaseText>

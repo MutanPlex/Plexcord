@@ -7,7 +7,7 @@
 
 import "./ui/styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -28,12 +28,8 @@ export interface AvatarDecoration {
 
 export default definePlugin({
     name: "Decor",
-    description: "Create and use your own custom avatar decorations, or pick your favorite from the presets.",
+    description: () => t(plugin.decor.description),
     authors: [Devs.FieryFlames],
-
-    get displayDescription() {
-        return t("plugin.decor.description");
-    },
 
     patches: [
         // Patch MediaResolver to return correct URL for Decor avatar decorations

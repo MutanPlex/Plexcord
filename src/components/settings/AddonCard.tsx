@@ -19,7 +19,7 @@
 
 import "./AddonCard.css";
 
-import { t } from "@api/i18n";
+import { plugins, t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { AddonBadge } from "@components/settings/PluginBadge";
@@ -72,7 +72,7 @@ export function AddonCard({ disabled, isNew, name, infoButton, footer, author, e
                                 {name}
                             </div>
                         </div>
-                        {isNew && <AddonBadge text={t("plugins.new")} color="#ED4245" />}
+                        {isNew && <AddonBadge text={t(plugins.new)} color="#ED4245" />}
                     </BaseText>
 
                     {!!author && (

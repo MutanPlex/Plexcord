@@ -7,7 +7,7 @@
 
 import "./styles.css?managed";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { DataStore } from "@api/index";
 import { addMessagePreSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { Button } from "@components/Button";
@@ -196,12 +196,12 @@ class DataUI {
     }
 
     renderSectionDescription() {
-        return <BaseText>{t("plugin.iRememberYou.section.description")}</BaseText>;
+        return <BaseText>{t(plugin.iRememberYou.section.description)}</BaseText>;
     }
 
     renderUsersCollectionAsRows(usersCollection: Data["usersCollection"]) {
         if (Object.keys(usersCollection).length === 0) {
-            return <BaseText>{t("plugin.iRememberYou.section.empty")}</BaseText>;
+            return <BaseText>{t(plugin.iRememberYou.section.empty)}</BaseText>;
         }
         const elements = Object.entries(usersCollection)
             .map(([_key, { users, name }]) => ({ name, users: Object.values(users) }))
@@ -239,7 +239,7 @@ class DataUI {
     userTooltipText(user: IStorageUser) {
         const { updatedAt } = user.extra || {};
         const updatedAtContent = updatedAt ? new Intl.DateTimeFormat().format(updatedAt) : null;
-        return t("plugin.iRememberYou.section.tooltip", { user: user.username ?? user.tag, updatedAtContent });
+        return t(plugin.iRememberYou.section.tooltip, { user: user.username ?? user.tag, updatedAtContent });
     }
 
     renderUserRow(user: IStorageUser, allowExtra: { owner?: boolean; } = {}) {
@@ -251,7 +251,7 @@ class DataUI {
                     {this.renderUserAvatar(user)}
                     <Tooltip text={this.userTooltipText(user)}>
                         {props =>
-                            <Paragraph {...props} >{user.tag} {allowExtra.owner && user.extra?.isOwner && "(" + t("plugin.iRememberYou.section.owner") + ")"}</Paragraph>
+                            <Paragraph {...props} >{user.tag} {allowExtra.owner && user.extra?.isOwner && "(" + t(plugin.iRememberYou.section.owner) + ")"}</Paragraph>
                         }
                     </Tooltip>
                 </Flex>
@@ -273,8 +273,7 @@ class DataUI {
                         const handleValidate = async () => {
                             try {
                                 const parsed = JSON.parse(jsonText);
-                                const { plugin } = this;
-                                const data = plugin.dataManager as Data;
+                                const data = this.plugin.dataManager as Data;
                                 data.usersCollection = parsed;
                                 await data.updateStorage();
                                 setError(null);
@@ -287,14 +286,14 @@ class DataUI {
                         return <Modal.ModalRoot size={Modal.ModalSize.LARGE} fullscreenOnMobile={true} {...props}>
                             <Modal.ModalHeader separator={false}>
                                 <BaseText color="header-primary" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
-                                    {t("plugin.iRememberYou.modal.title")}
+                                    {t(plugin.iRememberYou.modal.title)}
                                 </BaseText>
                                 <Modal.ModalCloseButton onClick={props.onClose} />
                             </Modal.ModalHeader>
                             <Modal.ModalContent>
                                 <Flex style={{ paddingBlock: "0.5em", gap: "0.75em" }}>
-                                    <Button onClick={handleValidate}>{t("plugin.iRememberYou.modal.button.validate")}</Button>
-                                    <Button variant="secondary" onClick={props.onClose}>{t("plugin.iRememberYou.modal.button.cancel")}</Button>
+                                    <Button onClick={handleValidate}>{t(plugin.iRememberYou.modal.button.validate)}</Button>
+                                    <Button variant="secondary" onClick={props.onClose}>{t(plugin.iRememberYou.modal.button.cancel)}</Button>
                                 </Flex>
                                 {error && <BaseText style={{ color: "var(--text-danger)", marginTop: "0.5em" }}>{error}</BaseText>}
                                 <TextArea
@@ -308,23 +307,21 @@ class DataUI {
                     };
                     return <EditorModal />;
                 })}>
-                    <Button style={{ cursor: "pointer" }}>{t("plugin.iRememberYou.modal.button.openEditor")}</Button>
+                    <Button style={{ cursor: "pointer" }}>{t(plugin.iRememberYou.modal.button.openEditor)}</Button>
                 </Clickable>
 
                 <Button variant="none" onClick={
                     async () => {
-                        const confirmed = confirm(t("plugin.iRememberYou.modal.button.sure"));
+                        const confirmed = confirm(t(plugin.iRememberYou.modal.button.sure));
                         if (!confirmed) {
                             return;
                         }
 
-                        const { plugin } = this;
-                        const data = plugin.dataManager as Data;
+                        const data = this.plugin.dataManager as Data;
                         data.usersCollection = {};
                         await data.updateStorage();
                     }
-                }>{t("plugin.iRememberYou.modal.button.resetData")}
-                </Button>
+                }>{t(plugin.iRememberYou.modal.button.resetData)}</Button>
             </Flex>
         </footer >;
     }
@@ -338,7 +335,7 @@ class DataUI {
         const list = [...map.values()];
 
         return <section style={{ paddingBlock: "1em" }}>
-            <TextInput placeholder={t("plugin.iRememberYou.modal.filter")} name="Filter" onChange={value => setState(value)} />
+            <TextInput placeholder={t(plugin.iRememberYou.modal.filter)} name="Filter" onChange={value => setState(value)} />
             {current &&
                 <Flex flexDirection="column" style={{ gap: "0.5em", paddingTop: "1em" }}>
                     {list.filter(user => user.tag.includes(current) || user.username.includes(current) || user.id.includes(current))
@@ -380,14 +377,9 @@ class DataUI {
 
 export default definePlugin({
     name: "IRememberYou",
-    description: "Locally saves everyone you've been communicating with (including servers), in case of lose",
+    description: () => t(plugin.iRememberYou.description),
     authors: [PcDevs.zoodogood, PcDevs.MutanPlex],
     dependencies: ["MessageEventsAPI"],
-
-    get displayDescription() {
-        return t("plugin.iRememberYou.description");
-    },
-
     patches: [],
 
     async start() {

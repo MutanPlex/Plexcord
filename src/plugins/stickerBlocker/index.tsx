@@ -7,7 +7,7 @@
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import * as DataStore from "@api/DataStore";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -18,45 +18,29 @@ import React, { ReactNode } from "react";
 
 const settings = definePluginSettings({
     showGif: {
-        get label() {
-            return t("plugin.stickerBlocker.option.showGif.label");
-        },
-        get description() {
-            return t("plugin.stickerBlocker.option.showGif.description");
-        },
+        label: () => t(plugin.stickerBlocker.option.showGif.label),
+        description: () => t(plugin.stickerBlocker.option.showGif.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     showMessage: {
-        get label() {
-            return t("plugin.stickerBlocker.option.showMessage.label");
-        },
-        get description() {
-            return t("plugin.stickerBlocker.option.showMessage.description");
-        },
+        label: () => t(plugin.stickerBlocker.option.showMessage.label),
+        description: () => t(plugin.stickerBlocker.option.showMessage.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
     },
     showButton: {
-        get label() {
-            return t("plugin.stickerBlocker.option.showButton.label");
-        },
-        get description() {
-            return t("plugin.stickerBlocker.option.showButton.description");
-        },
+        label: () => t(plugin.stickerBlocker.option.showButton.label),
+        description: () => t(plugin.stickerBlocker.option.showButton.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     blockedStickers: {
-        get label() {
-            return t("plugin.stickerBlocker.option.blockedStickers.label");
-        },
-        get description() {
-            return t("plugin.stickerBlocker.option.blockedStickers.description");
-        },
+        label: () => t(plugin.stickerBlocker.option.blockedStickers.label),
+        description: () => t(plugin.stickerBlocker.option.blockedStickers.description),
         type: OptionType.STRING,
         default: ""
     }
@@ -74,13 +58,13 @@ function blockedComponentRender(sticker) {
 
     if (showMessage) {
         elements.push(
-            <div key="message" id="message-content-1205482612316184657" className={"markup_a7e664 messageContent__21e69"}><span>{t("plugin.stickerBlocker.modal.blocked", { id: sticker.id, name: sticker.name })}</span></div>
+            <div key="message" id="message-content-1205482612316184657" className={"markup_a7e664 messageContent__21e69"}><span>{t(plugin.stickerBlocker.modal.blocked, { id: sticker.id, name: sticker.name })}</span></div>
         );
     }
 
     if (showButton) {
         elements.push(
-            <Button key="button" onClick={() => toggleBlock(sticker.id)} variant="dangerPrimary">{t("plugin.stickerBlocker.modal.unblock", { name: (showMessage) ? "" : sticker.name })}</Button>
+            <Button key="button" onClick={() => toggleBlock(sticker.id)} variant="dangerPrimary">{t(plugin.stickerBlocker.modal.unblock, { name: (showMessage) ? "" : sticker.name })}</Button>
         );
     }
 
@@ -121,7 +105,7 @@ function buildMenuItem(name) {
         <Menu.MenuItem
             id="add-sticker-block"
             key="add-sticker-block"
-            label={(isStickerBlocked(name)) ? t("plugin.stickerBlocker.context.unblockSticker") : t("plugin.stickerBlocker.context.blockSticker")}
+            label={(isStickerBlocked(name)) ? t(plugin.stickerBlocker.context.unblockSticker) : t(plugin.stickerBlocker.context.blockSticker)}
             action={() => toggleBlock(name)}
         />
     );
@@ -149,12 +133,8 @@ function isStickerBlocked(name) {
 
 export default definePlugin({
     name: "StickerBlocker",
-    description: "Allows you to block stickers from being displayed.",
+    description: () => t(plugin.stickerBlocker.description),
     authors: [Devs.Samwich],
-
-    get displayDescription() {
-        return t("plugin.stickerBlocker.description");
-    },
 
     patches: [
         {

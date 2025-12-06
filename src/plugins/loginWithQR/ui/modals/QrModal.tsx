@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import LoginWithQR from "@plugins/loginWithQR";
@@ -468,15 +468,15 @@ function QrModal(props: ModalProps) {
                         </BaseText>
                     ) : state === LoginStateType.Camera ? (
                         <BaseText size="md" weight="semibold" color="header-primary">
-                            {t("plugin.loginWithQR.scanning")}
+                            {t(plugin.loginWithQR.scanning)}
                         </BaseText>
                     ) : (
                         <>
                             <BaseText size="md" weight="semibold" color="header-primary">
-                                {t("plugin.loginWithQR.dragDrop")}
+                                {t(plugin.loginWithQR.dragDrop)}
                             </BaseText>
                             <BaseText size="sm" weight="medium" color="text-muted">
-                                {t("plugin.loginWithQR.orPaste")}
+                                {t(plugin.loginWithQR.orPaste)}
                             </BaseText>
                             <br />
                             <QrCodeIcon />
@@ -511,8 +511,8 @@ function QrModal(props: ModalProps) {
                     }}
                 >
                     {state === LoginStateType.Camera
-                        ? t("plugin.loginWithQR.stopScanning")
-                        : t("plugin.loginWithQR.usingWebcam")}
+                        ? t(plugin.loginWithQR.stopScanning)
+                        : t(plugin.loginWithQR.usingWebcam)}
                 </Button>
             </ModalContent>
         </ModalRoot>

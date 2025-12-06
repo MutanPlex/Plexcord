@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Divider } from "@components/Divider";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
@@ -46,13 +46,15 @@ function LanguageSelect({ settingsKey, includeAuto }: { settingsKey: typeof Lang
     return (
         <section className={Margins.bottom16}>
             <Heading>
-                {settings.def[settingsKey].description}
+                {typeof settings.def[settingsKey].description === "function"
+                    ? settings.def[settingsKey].description()
+                    : settings.def[settingsKey].description}
             </Heading>
 
             <SearchableSelect
                 options={options}
                 value={options.find(o => o.value === currentValue)}
-                placeholder={t("plugin.translate.modal.select")}
+                placeholder={t(plugin.translate.modal.select)}
                 maxVisibleItems={5}
                 closeOnSelect={true}
                 onChange={v => settings.store[settingsKey] = v}
@@ -68,9 +70,11 @@ function AutoTranslateToggle() {
         <FormSwitch
             value={value}
             onChange={v => settings.store.autoTranslate = v}
-            description={settings.def.autoTranslate.description}
+            description={typeof settings.def.autoTranslate.description === "function"
+                ? settings.def.autoTranslate.description()
+                : settings.def.autoTranslate.description}
             hideBorder
-            title={t("plugin.translate.modal.auto")}
+            title={t(plugin.translate.modal.auto)}
         />
 
     );
@@ -82,7 +86,7 @@ export function TranslateModal({ rootProps }: { rootProps: ModalProps; }) {
         <ModalRoot {...rootProps}>
             <ModalHeader className={cl("modal-header")}>
                 <Heading className={cl("modal-title")}>
-                    {t("plugin.translate.modal.title")}
+                    {t(plugin.translate.modal.title)}
                 </Heading>
                 <ModalCloseButton onClick={rootProps.onClose} />
             </ModalHeader>

@@ -6,7 +6,7 @@
  */
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { Message, Sticker } from "@plexcord/discord-types";
 import ExpressionClonerPlugin from "@plugins/expressionCloner";
@@ -33,14 +33,14 @@ function buildMenuItem(sticker: PartialSticker, addBottomSeparator: boolean) {
                 <Menu.MenuItem
                     id="pc-copy-sticker-link"
                     key="pc-copy-sticker-link"
-                    label={t("plugin.copyStickerLinks.context.copy")}
-                    action={() => copyWithToast(getUrl(sticker), t("plugin.copyStickerLinks.toast.success"))}
+                    label={t(plugin.copyStickerLinks.context.copy)}
+                    action={() => copyWithToast(getUrl(sticker), t(plugin.copyStickerLinks.toast.success))}
                 />
 
                 <Menu.MenuItem
                     id="pc-open-sticker-link"
                     key="pc-open-sticker-link"
-                    label={t("plugin.copyStickerLinks.context.open")}
+                    label={t(plugin.copyStickerLinks.context.open)}
                     action={() => PlexcordNative.native.openExternal(getUrl(sticker))}
                 />
             </Menu.MenuGroup>
@@ -76,12 +76,8 @@ const expressionPickerPatch: NavContextMenuPatchCallback = (children, props: { t
 
 export default definePlugin({
     name: "CopyStickerLinks",
-    description: "Adds the ability to copy & open Sticker links",
+    description: () => t(plugin.copyStickerLinks.description),
     authors: [Devs.Ven, PcDevs.Byeoon],
-
-    get displayDescription() {
-        return t("plugin.copyStickerLinks.description");
-    },
 
     contextMenus: {
         "message": messageContextMenuPatch,

@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { addMessagePreSendListener, MessageSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
@@ -13,12 +13,8 @@ import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     blockedWords: {
-        get label() {
-            return t("plugin.writeUpperCase.option.blockedWords.label");
-        },
-        get description() {
-            return t("plugin.writeUpperCase.option.blockedWords.description");
-        },
+        label: () => t(plugin.writeUpperCase.option.blockedWords.label),
+        description: () => t(plugin.writeUpperCase.option.blockedWords.description),
         type: OptionType.STRING,
         default: "http, https, ok"
     }
@@ -41,13 +37,9 @@ const presendObject: MessageSendListener = (_, msg) => {
 
 export default definePlugin({
     name: "WriteUpperCase",
-    description: "Changes the first Letter of each Sentence in Message Inputs to Uppercase",
+    description: () => t(plugin.writeUpperCase.description),
     authors: [Devs.Samwich, PcDevs.KrystalSkull],
     settings,
-
-    get displayDescription() {
-        return t("plugin.writeUpperCase.description");
-    },
 
     start() {
         addMessagePreSendListener(presendObject);

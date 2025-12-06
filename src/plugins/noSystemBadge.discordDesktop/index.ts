@@ -17,18 +17,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "NoSystemBadge",
-    description: "Disables the taskbar and system tray unread count badge.",
+    description: () => t(plugin.noSystemBadge.description),
     authors: [Devs.rushii],
-
-    get displayDescription() {
-        return t("plugin.noSystemBadge.description");
-    },
 
     patches: [
         {

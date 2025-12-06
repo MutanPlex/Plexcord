@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Paragraph } from "@components/Paragraph";
 import { PcDevs } from "@utils/constants";
@@ -14,60 +14,50 @@ import { UserStore } from "@webpack/common";
 
 const settings = definePluginSettings({
     platform: {
-        get label() {
-            return t("plugin.platformSpoofer.option.platform.label");
-        },
-        get description() {
-            return t("plugin.platformSpoofer.option.platform.description");
-        },
+        label: () => t(plugin.platformSpoofer.option.platform.label),
+        description: () => t(plugin.platformSpoofer.option.platform.description),
         type: OptionType.SELECT,
         restartNeeded: true,
-        get options() {
-            return [
-                {
-                    label: t("plugin.platformSpoofer.option.platform.desktop"),
-                    value: "desktop",
-                    default: true
-                },
-                {
-                    label: t("plugin.platformSpoofer.option.platform.web"),
-                    value: "web"
-                },
-                {
-                    label: t("plugin.platformSpoofer.option.platform.android"),
-                    value: "android"
-                },
-                {
-                    label: t("plugin.platformSpoofer.option.platform.ios"),
-                    value: "ios"
-                },
-                {
-                    label: t("plugin.platformSpoofer.option.platform.xbox"),
-                    value: "xbox"
-                },
-                {
-                    label: t("plugin.platformSpoofer.option.platform.playstation"),
-                    value: "playstation"
-                },
-            ];
-        }
+        options: [
+            {
+                label: () => t(plugin.platformSpoofer.option.platform.desktop),
+                value: "desktop",
+                default: true
+            },
+            {
+                label: () => t(plugin.platformSpoofer.option.platform.web),
+                value: "web"
+            },
+            {
+                label: () => t(plugin.platformSpoofer.option.platform.android),
+                value: "android"
+            },
+            {
+                label: () => t(plugin.platformSpoofer.option.platform.ios),
+                value: "ios"
+            },
+            {
+                label: () => t(plugin.platformSpoofer.option.platform.xbox),
+                value: "xbox"
+            },
+            {
+                label: () => t(plugin.platformSpoofer.option.platform.playstation),
+                value: "playstation"
+            },
+        ]
     }
 });
 
 export default definePlugin({
     name: "PlatformSpoofer",
-    description: "Spoof what platform or device you're on",
+    description: () => t(plugin.platformSpoofer.description),
     authors: [PcDevs.Drag, PcDevs.MutanPlex, PcDevs.He4vuc],
     settingsAboutComponent: () => <>
         <Paragraph className="plugin-warning">
-            {t("plugin.platformSpoofer.about")}
+            {t(plugin.platformSpoofer.about)}
         </Paragraph>
     </>,
     settings: settings,
-
-    get displayDescription() {
-        return t("plugin.platformSpoofer.description");
-    },
 
     patches: [
         {

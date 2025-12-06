@@ -19,7 +19,7 @@
 
 import "./style.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -31,26 +31,20 @@ import { conversions, ConverterAccessory, ConvertIcon } from "./ConverterAccesso
 
 export const settings = definePluginSettings({
     myUnits: {
-        get label() {
-            return t("plugin.unitConverter.option.myUnits.label");
-        },
-        get description() {
-            return t("plugin.unitConverter.option.myUnits.description");
-        },
+        label: () => t(plugin.unitConverter.option.myUnits.label),
+        description: () => t(plugin.unitConverter.option.myUnits.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    default: true,
-                    label: t("plugin.unitConverter.option.myUnits.imperial"),
-                    value: "imperial",
-                },
-                {
-                    label: t("plugin.unitConverter.option.myUnits.metric"),
-                    value: "metric"
-                }
-            ];
-        }
+        options: [
+            {
+                default: true,
+                label: () => t(plugin.unitConverter.option.myUnits.imperial),
+                value: "imperial",
+            },
+            {
+                label: () => t(plugin.unitConverter.option.myUnits.metric),
+                value: "metric"
+            }
+        ]
     },
     // invert: {
     //     type: OptionType.BOOLEAN,
@@ -61,14 +55,9 @@ export const settings = definePluginSettings({
 });
 export default definePlugin({
     name: "UnitConverter",
-    description: "Converts metric units to Imperal units and vice versa",
+    description: () => t(plugin.unitConverter.description),
     authors: [Devs.sadan],
     dependencies: ["MessagePopoverAPI"],
-
-    get displayDescription() {
-        return t("plugin.unitConverter.description");
-    },
-
     renderMessageAccessory: props => <ConverterAccessory message={props.message} />,
 
     messagePopoverButton: {
@@ -76,7 +65,7 @@ export default definePlugin({
         render(message) {
             if (!message.content) return null;
             return {
-                label: t("plugin.unitConverter.tooltip"),
+                label: t(plugin.unitConverter.tooltip),
                 icon: ConvertIcon,
                 message,
                 channel: ChannelStore.getChannel(message.channel_id),

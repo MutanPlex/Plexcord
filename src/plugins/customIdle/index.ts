@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { currentNotice, noticesQueue, popNotice, showNotice } from "@api/Notices";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
@@ -14,12 +14,8 @@ import { FluxDispatcher } from "@webpack/common";
 
 const settings = definePluginSettings({
     idleTimeout: {
-        get label() {
-            return t("plugin.customIdle.option.idleTimeout.label");
-        },
-        get description() {
-            return t("plugin.customIdle.option.idleTimeout.description");
-        },
+        label: () => t(plugin.customIdle.option.idleTimeout.label),
+        description: () => t(plugin.customIdle.option.idleTimeout.description),
         type: OptionType.SLIDER,
         markers: makeRange(0, 60, 5),
         default: 10,
@@ -27,12 +23,8 @@ const settings = definePluginSettings({
         restartNeeded: true // Because of the setInterval patch
     },
     remainInIdle: {
-        get label() {
-            return t("plugin.customIdle.option.remainInIdle.label");
-        },
-        get description() {
-            return t("plugin.customIdle.option.remainInIdle.description");
-        },
+        label: () => t(plugin.customIdle.option.remainInIdle.label),
+        description: () => t(plugin.customIdle.option.remainInIdle.description),
         type: OptionType.BOOLEAN,
         default: true
     }
@@ -40,13 +32,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "CustomIdle",
-    description: "Allows you to set the time before Discord goes idle (or disable auto-idle)",
+    description: () => t(plugin.customIdle.description),
     authors: [Devs.newwares],
     settings,
-
-    get displayDescription() {
-        return t("plugin.customIdle.description");
-    },
 
     patches: [
         {
@@ -77,13 +65,13 @@ export default definePlugin({
             return;
         }
 
-        const backOnlineMessage = t("plugin.customIdle.backOnline");
+        const backOnlineMessage = t(plugin.customIdle.backOnline);
         if (
             currentNotice?.[1] === backOnlineMessage ||
             noticesQueue.some(([, noticeMessage]) => noticeMessage === backOnlineMessage)
         ) return;
 
-        showNotice(backOnlineMessage, t("plugin.customIdle.exit"), () => {
+        showNotice(backOnlineMessage, t(plugin.customIdle.exit), () => {
             popNotice();
             FluxDispatcher.dispatch({
                 type: "IDLE",

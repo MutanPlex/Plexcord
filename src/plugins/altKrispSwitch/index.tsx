@@ -5,18 +5,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "AltKrispSwitch",
-    description: "Makes the Noise Suppression Popout switch between None and Krisp instead of Krisp and Standard",
+    description: () => t(plugin.altKrispSwitch.description),
     authors: [Devs.newwares],
 
-    get displayDescription() {
-        return t("plugin.altKrispSwitch.description");
-    },
     patches: [
         {
             find: ",setNoiseCancellation(",

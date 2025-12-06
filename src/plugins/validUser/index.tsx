@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { ProfileBadge } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -31,20 +31,20 @@ import { type ComponentType, type ReactNode } from "react";
 // LYING to the type checker here
 const UserFlags = Constants.UserFlags as Record<string, number>;
 const badges: Record<string, ProfileBadge> = {
-    active_developer: { id: "active_developer", description: t("plugin.validUser.badges.activeDeveloper"), icon: "6bdc42827a38498929a4920da12695d9", link: "https://support-dev.discord.com/hc/en-us/articles/10113997751447" },
-    bug_hunter_level_1: { id: "bug_hunter_level_1", description: t("plugin.validUser.badges.discordBugHunter"), icon: "2717692c7dca7289b35297368a940dd0", link: "https://support.discord.com/hc/en-us/articles/360046057772-Discord-Bugs" },
-    bug_hunter_level_2: { id: "bug_hunter_level_2", description: t("plugin.validUser.badges.discordBugHunter"), icon: "848f79194d4be5ff5f81505cbd0ce1e6", link: "https://support.discord.com/hc/en-us/articles/360046057772-Discord-Bugs" },
-    certified_moderator: { id: "certified_moderator", description: t("plugin.validUser.badges.moderatorProgramsAlumni"), icon: "fee1624003e2fee35cb398e125dc479b", link: "https://discord.com/safety" },
-    discord_employee: { id: "staff", description: t("plugin.validUser.badges.discordStaff"), icon: "5e74e9b61934fc1f67c65515d1f7e60d", link: "https://discord.com/company" },
+    active_developer: { id: "active_developer", description: t(plugin.validUser.badges.activeDeveloper), icon: "6bdc42827a38498929a4920da12695d9", link: "https://support-dev.discord.com/hc/en-us/articles/10113997751447" },
+    bug_hunter_level_1: { id: "bug_hunter_level_1", description: t(plugin.validUser.badges.discordBugHunter), icon: "2717692c7dca7289b35297368a940dd0", link: "https://support.discord.com/hc/en-us/articles/360046057772-Discord-Bugs" },
+    bug_hunter_level_2: { id: "bug_hunter_level_2", description: t(plugin.validUser.badges.discordBugHunter), icon: "848f79194d4be5ff5f81505cbd0ce1e6", link: "https://support.discord.com/hc/en-us/articles/360046057772-Discord-Bugs" },
+    certified_moderator: { id: "certified_moderator", description: t(plugin.validUser.badges.moderatorProgramsAlumni), icon: "fee1624003e2fee35cb398e125dc479b", link: "https://discord.com/safety" },
+    discord_employee: { id: "staff", description: t(plugin.validUser.badges.discordStaff), icon: "5e74e9b61934fc1f67c65515d1f7e60d", link: "https://discord.com/company" },
     get staff() { return this.discord_employee; },
-    hypesquad: { id: "hypesquad", description: t("plugin.validUser.badges.hypeSquadEvents"), icon: "bf01d1073931f921909045f3a39fd264", link: "https://discord.com/hypesquad" },
-    hypesquad_online_house_1: { id: "hypesquad_house_1", description: t("plugin.validUser.badges.bravery"), icon: "8a88d63823d8a71cd5e390baa45efa02", link: "https://discord.com/settings/hypesquad-online" },
-    hypesquad_online_house_2: { id: "hypesquad_house_2", description: t("plugin.validUser.badges.brilliance"), icon: "011940fd013da3f7fb926e4a1cd2e618", link: "https://discord.com/settings/hypesquad-online" },
-    hypesquad_online_house_3: { id: "hypesquad_house_3", description: t("plugin.validUser.badges.balance"), icon: "3aa41de486fa12454c3761e8e223442e", link: "https://discord.com/settings/hypesquad-online" },
-    partner: { id: "partner", description: t("plugin.validUser.badges.partneredServerOwner"), icon: "3f9748e53446a137a052f3454e2de41e", link: "https://discord.com/partners" },
-    premium: { id: "premium", description: t("plugin.validUser.badges.nitro"), icon: "2ba85e8026a8614b640c2837bcdfe21b", link: "https://discord.com/settings/premium" },
-    premium_early_supporter: { id: "early_supporter", description: t("plugin.validUser.badges.earlySupporter"), icon: "7060786766c9c840eb3019e725d2b358", link: "https://discord.com/settings/premium" },
-    verified_developer: { id: "verified_developer", description: t("plugin.validUser.badges.earlyVerifiedBotDeveloper"), icon: "6df5892e0f35b051f8b61eace34f4967" },
+    hypesquad: { id: "hypesquad", description: t(plugin.validUser.badges.hypeSquadEvents), icon: "bf01d1073931f921909045f3a39fd264", link: "https://discord.com/hypesquad" },
+    hypesquad_online_house_1: { id: "hypesquad_house_1", description: t(plugin.validUser.badges.bravery), icon: "8a88d63823d8a71cd5e390baa45efa02", link: "https://discord.com/settings/hypesquad-online" },
+    hypesquad_online_house_2: { id: "hypesquad_house_2", description: t(plugin.validUser.badges.brilliance), icon: "011940fd013da3f7fb926e4a1cd2e618", link: "https://discord.com/settings/hypesquad-online" },
+    hypesquad_online_house_3: { id: "hypesquad_house_3", description: t(plugin.validUser.badges.balance), icon: "3aa41de486fa12454c3761e8e223442e", link: "https://discord.com/settings/hypesquad-online" },
+    partner: { id: "partner", description: t(plugin.validUser.badges.partneredServerOwner), icon: "3f9748e53446a137a052f3454e2de41e", link: "https://discord.com/partners" },
+    premium: { id: "premium", description: t(plugin.validUser.badges.nitro), icon: "2ba85e8026a8614b640c2837bcdfe21b", link: "https://discord.com/settings/premium" },
+    premium_early_supporter: { id: "early_supporter", description: t(plugin.validUser.badges.earlySupporter), icon: "7060786766c9c840eb3019e725d2b358", link: "https://discord.com/settings/premium" },
+    verified_developer: { id: "verified_developer", description: t(plugin.validUser.badges.earlyVerifiedBotDeveloper), icon: "6df5892e0f35b051f8b61eace34f4967" },
 };
 
 const fetching = new Set<string>();
@@ -176,13 +176,9 @@ function MentionWrapper({ data, UserMention, RoleMention, parse, props }: Mentio
 
 export default definePlugin({
     name: "ValidUser",
-    description: "Fix mentions for unknown users showing up as '@unknown-user' (hover over a mention to fix it)",
+    description: () => t(plugin.validUser.description),
     authors: [Devs.Ven, Devs.Dolfies],
     tags: ["MentionCacheFix"],
-
-    get displayDescription() {
-        return t("plugin.validUser.description");
-    },
 
     patches: [
         {

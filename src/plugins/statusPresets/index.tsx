@@ -20,7 +20,7 @@
 import "./style.css";
 
 import * as DataStore from "@api/DataStore";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -158,14 +158,10 @@ const StatusSubMenuComponent = () => {
 
 export default definePlugin({
     name: "StatusPresets",
-    description: "Allows you to remember your statuses and set them later",
+    description: () => t(plugin.statusPresets.description),
     authors: [PcDevs.iamme],
     settings: settings,
     dependencies: ["UserSettingsAPI"],
-
-    get displayDescription() {
-        return t("plugin.statusPresets.description");
-    },
 
     managedStyle,
     patches: [
@@ -199,7 +195,7 @@ export default definePlugin({
                                 className={StatusStyles.customEmojiPlaceholder}
                             />
                         }
-                        label={t("plugin.statusPresets.context.set")}
+                        label={t(plugin.statusPresets.context.set)}
                         renderSubmenu={StatusSubMenuComponent}
                     />
                     :
@@ -218,7 +214,7 @@ export default definePlugin({
                                 />
                             ) : null
                         }
-                        label={t("plugin.statusPresets.context.edit")}
+                        label={t(plugin.statusPresets.context.edit)}
                         renderSubmenu={StatusSubMenuComponent}
                     />}
             </ErrorBoundary>
@@ -226,13 +222,13 @@ export default definePlugin({
     },
     renderRememberButton(status: DiscordStatus) {
         return {
-            text: t("plugin.statusPresets.button.remember"),
+            text: t(plugin.statusPresets.button.remember),
             style: { marginLeft: "20px" },
             onClick: async () => {
                 savedStatusPresets[status.state] = status;
                 await saveStatusPresets();
                 Toasts.show({
-                    message: t("plugin.statusPresets.notification.successfully"),
+                    message: t(plugin.statusPresets.notification.successfully),
                     type: Toasts.Type.SUCCESS,
                     id: Toasts.genId()
                 });

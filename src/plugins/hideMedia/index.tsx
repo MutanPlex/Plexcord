@@ -20,7 +20,7 @@
 import "./styles.css";
 
 import { get, set } from "@api/DataStore";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { updateMessage } from "@api/MessageUpdater";
 import { ImageInvisible, ImageVisible } from "@components/Icons";
 import { Message } from "@plexcord/discord-types";
@@ -53,13 +53,9 @@ async function toggleHide(channelId: string, messageId: string) {
 
 export default definePlugin({
     name: "HideMedia",
-    description: "Hide attachments and embeds for individual messages via hover button",
+    description: () => t(plugin.hideMedia.description),
     authors: [Devs.Ven],
     dependencies: ["MessageUpdaterAPI"],
-
-    get displayDescription() {
-        return t("plugin.hideMedia.description");
-    },
 
     patches: [{
         find: "this.renderAttachments(",
@@ -68,6 +64,7 @@ export default definePlugin({
             replace: "$self.shouldHide($1?.id)?null:$&"
         }
     }],
+
     messagePopoverButton: {
         icon: ImageInvisible,
         render(msg) {
@@ -76,7 +73,7 @@ export default definePlugin({
             const isHidden = hiddenMessages.has(msg.id);
 
             return {
-                label: isHidden ? t("plugin.hideMedia.show") : t("plugin.hideMedia.hide"),
+                label: isHidden ? t(plugin.hideMedia.show) : t(plugin.hideMedia.hide),
                 icon: isHidden ? ImageVisible : ImageInvisible,
                 message: msg,
                 channel: ChannelStore.getChannel(msg.channel_id),
@@ -90,7 +87,7 @@ export default definePlugin({
 
         return (
             <span className={classes("pc-hideAttachments-accessory", !message.content && "pc-hideAttachments-no-content")}>
-                {t("plugin.hideMedia.hidden")}
+                {t(plugin.hideMedia.hidden)}
             </span>
         );
     },

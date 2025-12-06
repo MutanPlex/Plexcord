@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -32,23 +32,15 @@ interface MessageDeleteProps {
 
 const settings = definePluginSettings({
     ignoreMessages: {
-        get label() {
-            return t("plugin.noBlockedMessages.option.ignoreMessages.label");
-        },
-        get description() {
-            return t("plugin.noBlockedMessages.option.ignoreMessages.description");
-        },
+        label: () => t(plugin.noBlockedMessages.option.ignoreMessages.label),
+        description: () => t(plugin.noBlockedMessages.option.ignoreMessages.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
     },
     applyToIgnoredUsers: {
-        get label() {
-            return t("plugin.noBlockedMessages.option.applyToIgnoredUsers.label");
-        },
-        get description() {
-            return t("plugin.noBlockedMessages.option.applyToIgnoredUsers.description");
-        },
+        label: () => t(plugin.noBlockedMessages.option.applyToIgnoredUsers.label),
+        description: () => t(plugin.noBlockedMessages.option.applyToIgnoredUsers.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
@@ -57,13 +49,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "NoBlockedMessages",
-    description: "Hides all blocked/ignored messages from chat completely",
+    description: () => t(plugin.noBlockedMessages.description),
     authors: [Devs.rushii, Devs.Samu, Devs.jamesbt365],
     settings,
-
-    get displayDescription() {
-        return t("plugin.noBlockedMessages.description");
-    },
 
     patches: [
         {

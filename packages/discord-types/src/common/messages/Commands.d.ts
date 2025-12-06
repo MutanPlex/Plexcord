@@ -12,7 +12,7 @@ export interface CommandOption {
     name: string;
     displayName?: string;
     type: ApplicationCommandOptionType;
-    description: string;
+    description: string | (() => string);
     displayDescription?: string;
     required?: boolean;
     options?: CommandOption[];
@@ -50,7 +50,7 @@ export interface Command {
     name: string;
     untranslatedName?: string;
     displayName?: string;
-    description: string;
+    description: string | (() => string);
     untranslatedDescription?: string;
     displayDescription?: string;
 

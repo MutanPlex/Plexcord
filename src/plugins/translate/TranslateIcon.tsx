@@ -18,7 +18,7 @@
 */
 
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Paragraph } from "@components/Paragraph";
 import { classes } from "@utils/misc";
 import { openModal } from "@utils/modal";
@@ -58,15 +58,15 @@ export const TranslateChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
         settings.store.autoTranslate = newState;
         if (newState && settings.store.showAutoTranslateAlert !== false)
             Alerts.show({
-                title: t("plugin.translate.modal.autoTranslateEnabled.title"),
+                title: t(plugin.translate.modal.autoTranslateEnabled.title),
                 body: <>
                     <Paragraph>
-                        {t("plugin.translate.modal.autoTranslateEnabled.body")}
+                        {t(plugin.translate.modal.autoTranslateEnabled.body)}
                     </Paragraph>
                 </>,
-                confirmText: t("plugin.translate.modal.autoTranslateEnabled.confirm"),
-                cancelText: t("plugin.translate.modal.autoTranslateEnabled.cancel"),
-                secondaryConfirmText: t("plugin.translate.modal.autoTranslateEnabled.secondaryConfirm"),
+                confirmText: t(plugin.translate.modal.autoTranslateEnabled.confirm),
+                cancelText: t(plugin.translate.modal.autoTranslateEnabled.cancel),
+                secondaryConfirmText: t(plugin.translate.modal.autoTranslateEnabled.secondaryConfirm),
                 onConfirmSecondary: () => settings.store.showAutoTranslateAlert = false,
                 onConfirm: () => settings.store.autoTranslate = false,
                 // troll
@@ -76,7 +76,7 @@ export const TranslateChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
 
     const button = (
         <ChatBarButton
-            tooltip={t("plugin.translate.context.open")}
+            tooltip={t(plugin.translate.context.open)}
             onClick={e => {
                 if (e.shiftKey) return toggle();
 
@@ -95,7 +95,7 @@ export const TranslateChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
 
     if (shouldShowTranslateEnabledTooltip && settings.store.showAutoTranslateTooltip)
         return (
-            <Tooltip text={t("plugin.translate.context.auto")} forceOpen>
+            <Tooltip text={t(plugin.translate.context.auto)} forceOpen>
                 {() => button}
             </Tooltip>
         );

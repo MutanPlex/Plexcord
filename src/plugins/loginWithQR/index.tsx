@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Paragraph } from "@components/Paragraph";
@@ -22,27 +22,19 @@ import openQrModal from "./ui/modals/QrModal";
 
 export default definePlugin({
     name: "LoginWithQR",
-    description: "Allows you to login to another device by scanning a login QR code, just like on mobile!",
+    description: () => t(plugin.loginWithQR.description),
     authors: [PcDevs.nexpid, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.loginWithQR.description");
-    },
 
     settings: definePluginSettings({
         scanQr: {
-            get label() {
-                return t("plugin.loginWithQR.option.scanQr.label");
-            },
-            get description() {
-                return t("plugin.loginWithQR.option.scanQr.description");
-            },
+            label: () => t(plugin.loginWithQR.option.scanQr.label),
+            description: () => t(plugin.loginWithQR.option.scanQr.description),
             type: OptionType.COMPONENT,
             component() {
                 if (!LoginWithQR.started)
                     return (
                         <Paragraph>
-                            {t("plugin.loginWithQR.option.scanQr.notEnabled")}
+                            {t(plugin.loginWithQR.option.scanQr.notEnabled)}
                         </Paragraph>
                     );
 

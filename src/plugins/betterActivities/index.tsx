@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -17,14 +17,11 @@ import { settings } from "./settings";
 
 export default definePlugin({
     name: "BetterActivities",
-    description: "Shows activity icons in the member list and allows showing all activities",
+    description: () => t(plugin.betterActivities.description),
     authors: [Devs.D3SOX, Devs.Arjix, Devs.AutumnVN, Devs.thororen],
     tags: ["activity"],
 
     settings,
-    get displayDescription() {
-        return t("plugin.betterActivities.description");
-    },
 
     patchActivityList,
 

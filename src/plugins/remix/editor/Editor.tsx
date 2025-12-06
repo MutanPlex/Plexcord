@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { findComponentByCodeLazy } from "@webpack";
 import { useEffect, useState } from "@webpack/common";
 
@@ -32,8 +32,8 @@ export const Editor = (props: { url?: string; }) => {
         <div className="pc-remix-editor">
             {!file && <FileUpload
                 filename={undefined}
-                placeholder={t("plugin.remix.editor.upload")}
-                buttonText={t("plugin.remix.editor.browse")}
+                placeholder={t(plugin.remix.editor.choose)}
+                buttonText={t(plugin.remix.editor.browse)}
                 filters={[{ name: "Image", extensions: ["png", "jpeg"] }]}
                 onFileSelect={(file: File) => setFile(file)}
             />}

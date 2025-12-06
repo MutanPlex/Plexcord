@@ -5,19 +5,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     zoomMultiplier: {
-        get label() {
-            return t("plugin.unlockedAvatarZoom.option.zoomMultiplier.label");
-        },
-        get description() {
-            return t("plugin.unlockedAvatarZoom.option.zoomMultiplier.description");
-        },
+        label: () => t(plugin.unlockedAvatarZoom.option.zoomMultiplier.label),
+        description: () => t(plugin.unlockedAvatarZoom.option.zoomMultiplier.description),
         type: OptionType.SLIDER,
         markers: makeRange(2, 16),
         default: 4,
@@ -26,13 +22,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "UnlockedAvatarZoom",
-    description: "Allows you to zoom in further in the image crop tool when changing your avatar",
+    description: () => t(plugin.unlockedAvatarZoom.description),
     authors: [Devs.nakoyasha],
     settings,
-
-    get displayDescription() {
-        return t("plugin.unlockedAvatarZoom.description");
-    },
 
     patches: [
         {

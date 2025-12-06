@@ -5,19 +5,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     onlySnow: {
-        get label() {
-            return t("plugin.secretRingToneEnabler.option.onlySnow.label");
-        },
-        get description() {
-            return t("plugin.secretRingToneEnabler.option.onlySnow.description");
-        },
+        label: () => t(plugin.secretRingToneEnabler.option.onlySnow.label),
+        description: () => t(plugin.secretRingToneEnabler.option.onlySnow.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
@@ -26,13 +22,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "SecretRingToneEnabler",
-    description: "Always play the secret version of the discord ringtone (except during special ringtone events)",
+    description: () => t(plugin.secretRingToneEnabler.description),
     authors: [Devs.AndrewDLO, Devs.FieryFlames, Devs.RamziAH],
     settings,
-
-    get displayDescription() {
-        return t("plugin.secretRingToneEnabler.description");
-    },
 
     patches: [
         {

@@ -7,11 +7,11 @@
 import { BadgeUserArgs, ProfileBadge } from "@api/Badges";
 import { addContextMenuPatch, removeContextMenuPatch } from "@api/ContextMenu";
 import * as DataStore from "@api/DataStore";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Badges } from "@api/index";
 import { addMemberListDecorator, removeMemberListDecorator } from "@api/MemberListDecorators";
 import { addMessageDecoration, removeMessageDecoration } from "@api/MessageDecorations";
-import { Settings } from "@api/Settings";
+import { definePluginSettings, Settings } from "@api/Settings";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Heading } from "@components/Heading";
@@ -77,9 +77,9 @@ async function setBirthday(userId: string, username: string, birthday: string) {
         savedBirthdays[userId] = birthday;
         await saveBirthdays();
 
-        showToast(t("plugin.cakeDay.toast.success"), Toasts.Type.SUCCESS);
+        showToast(t(plugin.cakeDay.toast.success), Toasts.Type.SUCCESS);
     } else {
-        showToast(t("plugin.cakeDay.toast.invalid"), Toasts.Type.FAILURE);
+        showToast(t(plugin.cakeDay.toast.invalid), Toasts.Type.FAILURE);
     }
 }
 
@@ -88,7 +88,7 @@ async function clearBirthday(userId: string, username: string) {
         delete savedBirthdays[userId];
         await saveBirthdays();
 
-        showToast(t("plugin.cakeDay.toast.cleared"), Toasts.Type.SUCCESS);
+        showToast(t(plugin.cakeDay.toast.cleared), Toasts.Type.SUCCESS);
         logger.info(`Cleared birthday for ${username} (${userId})`);
     }
 }
@@ -100,15 +100,15 @@ function BirthdayModal({ userId, username, modalProps }: { userId: string, usern
     return (
         <ModalRoot {...modalProps} className="pc-cakeday-modal">
             <ModalHeader>
-                <Heading>{t("plugin.cakeDay.modal.title", { username })}</Heading>
+                <Heading>{t(plugin.cakeDay.modal.title, { username })}</Heading>
             </ModalHeader>
             <ModalContent>
                 <section>
                     <Paragraph className={Margins.bottom8}>
-                        {t("plugin.cakeDay.modal.description")}
+                        {t(plugin.cakeDay.modal.description)}
                     </Paragraph>
                     <TextInput
-                        placeholder={t("plugin.cakeDay.modal.placeholder")}
+                        placeholder={t(plugin.cakeDay.modal.placeholder)}
                         value={birthdayInput}
                         onChange={setBirthdayInput}
                         autoFocus
@@ -116,7 +116,7 @@ function BirthdayModal({ userId, username, modalProps }: { userId: string, usern
                     />
                     {savedBirthdays[userId] && (
                         <Paragraph className={Margins.top8}>
-                            {t("plugin.cakeDay.modal.current")} {savedBirthdays[userId]}
+                            {t(plugin.cakeDay.modal.current)} {savedBirthdays[userId]}
                         </Paragraph>
                     )}
                 </section>
@@ -132,7 +132,7 @@ function BirthdayModal({ userId, username, modalProps }: { userId: string, usern
                     }}
                     disabled={loading || !birthdayInput.trim()}
                 >
-                    {t("plugin.cakeDay.modal.set")}
+                    {t(plugin.cakeDay.modal.set)}
                 </Button>
                 <Button
                     variant="primary"
@@ -141,7 +141,7 @@ function BirthdayModal({ userId, username, modalProps }: { userId: string, usern
                     }}
                     disabled={loading}
                 >
-                    {t("plugin.cakeDay.modal.cancel")}
+                    {t(plugin.cakeDay.modal.cancel)}
                 </Button>
             </ModalFooter>
         </ModalRoot>
@@ -150,7 +150,7 @@ function BirthdayModal({ userId, username, modalProps }: { userId: string, usern
 
 function CakeIcon({ width, height, onClick }: { width: number; height: number; onClick?: () => void; }) {
     return (
-        <Tooltip text={t("plugin.cakeDay.modal.birthday")} position="top">
+        <Tooltip text={t(plugin.cakeDay.modal.birthday)} position="top">
             {(tooltipProps: any) => (
                 <div
                     {...tooltipProps}
@@ -192,9 +192,9 @@ function CakeDaySettings() {
     if (Object.keys(birthdays).length === 0) {
         return (
             <section>
-                <Heading>{t("plugin.cakeDay.modal.saved")}</Heading>
+                <Heading>{t(plugin.cakeDay.modal.saved)}</Heading>
                 <Paragraph>
-                    {t("plugin.cakeDay.modal.savedDesc")}
+                    {t(plugin.cakeDay.modal.savedDesc)}
                 </Paragraph>
             </section>
         );
@@ -202,7 +202,7 @@ function CakeDaySettings() {
 
     return (
         <section>
-            <Heading>{t("plugin.cakeDay.modal.saved")}</Heading>
+            <Heading>{t(plugin.cakeDay.modal.saved)}</Heading>
             {Object.entries(birthdays).map(([userId, birthday]) => {
                 const user = UserStore.getUser(userId);
                 const isBirthday = checkBirthday(userId);
@@ -212,14 +212,14 @@ function CakeDaySettings() {
                         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                             <Paragraph>
                                 <strong>{user?.username || "Unknown User"}</strong> - {birthday}
-                                {isBirthday && <span style={{ marginLeft: "8px" }}>🎂 {t("plugin.cakeDay.modal.today")}</span>}
+                                {isBirthday && <span style={{ marginLeft: "8px" }}>🎂 {t(plugin.cakeDay.modal.today)}</span>}
                             </Paragraph>
                             <Button
                                 size="min"
                                 variant="dangerPrimary"
                                 onClick={() => clearBirthday(userId, user?.username || "Unknown")}
                             >
-                                {t("plugin.cakeDay.modal.remove")}
+                                {t(plugin.cakeDay.modal.remove)}
                             </Button>
                         </div>
                     </div>
@@ -231,12 +231,8 @@ function CakeDaySettings() {
 
 const cakeLocations = {
     chat: {
-        get label() {
-            return t("plugin.cakeDay.locations.chat.label");
-        },
-        get description() {
-            return t("plugin.cakeDay.locations.chat.description");
-        },
+        label: () => t(plugin.cakeDay.locations.chat.label),
+        description: () => t(plugin.cakeDay.locations.chat.description),
         onEnable: () => {
             if (Settings.plugins.CakeDay.chat) {
                 addMessageDecoration("pc-cakeday", props => {
@@ -253,12 +249,8 @@ const cakeLocations = {
         onDisable: () => removeMessageDecoration("pc-cakeday")
     },
     memberList: {
-        get label() {
-            return t("plugin.cakeDay.locations.memberList.label");
-        },
-        get description() {
-            return t("plugin.cakeDay.locations.memberList.description");
-        },
+        label: () => t(plugin.cakeDay.locations.memberList.label),
+        description: () => t(plugin.cakeDay.locations.memberList.description),
         onEnable: () => {
             if (Settings.plugins.CakeDay.memberList) {
                 addMemberListDecorator("pc-cakeday", props => {
@@ -276,52 +268,36 @@ const cakeLocations = {
     },
 };
 
-const options = {
+const settings = definePluginSettings({
     chat: {
-        get label() {
-            return t("plugin.cakeDay.option.chat.label");
-        },
-        get description() {
-            return t("plugin.cakeDay.option.chat.description");
-        },
+        label: () => t(plugin.cakeDay.option.chat.label),
+        description: () => t(plugin.cakeDay.option.chat.description),
         type: OptionType.BOOLEAN,
-        restartNeeded: true,
-        default: true
-    } as const,
+        default: true,
+        restartNeeded: true
+    },
     memberList: {
-        get label() {
-            return t("plugin.cakeDay.option.memberList.label");
-        },
-        get description() {
-            return t("plugin.cakeDay.option.memberList.description");
-        },
+        label: () => t(plugin.cakeDay.option.memberList.label),
+        description: () => t(plugin.cakeDay.option.memberList.description),
         type: OptionType.BOOLEAN,
-        restartNeeded: true,
-        default: true
-    } as const,
+        default: true,
+        restartNeeded: true
+    },
     profileBadge: {
-        get label() {
-            return t("plugin.cakeDay.option.profileBadge.label");
-        },
-        get description() {
-            return t("plugin.cakeDay.option.profileBadge.description");
-        },
+        label: () => t(plugin.cakeDay.option.profileBadge.label),
+        description: () => t(plugin.cakeDay.option.profileBadge.description),
         type: OptionType.BOOLEAN,
-        restartNeeded: true,
-        default: true
-    } as const
-};
+        default: true,
+        restartNeeded: true
+    }
+});
 
 export default definePlugin({
     name: "CakeDay",
-    description: "Track and display user birthdays with cake icons",
+    description: () => t(plugin.cakeDay.description),
     authors: [PcDevs.MutanPlex],
 
-    get displayDescription() {
-        return t("plugin.cakeDay.description");
-    },
-
-    options,
+    settings,
     settingsAboutComponent: () => <CakeDaySettings />,
 
     contextMenus: {
@@ -330,12 +306,12 @@ export default definePlugin({
             children.push(
                 <Menu.MenuItem
                     id="cakeday-submenu"
-                    label={t("plugin.cakeDay.context.label")}
+                    label={t(plugin.cakeDay.context.label)}
                     icon={() => <span style={{ fontSize: "14px" }}>🎂</span>}
                 >
                     <Menu.MenuItem
                         id="cakeday-set"
-                        label={t("plugin.cakeDay.context.setBirthday")}
+                        label={t(plugin.cakeDay.context.setBirthday)}
                         action={() => {
                             openModal(modalProps => (
                                 <BirthdayModal
@@ -348,14 +324,14 @@ export default definePlugin({
                     />
                     <Menu.MenuItem
                         id="cakeday-clear"
-                        label={t("plugin.cakeDay.context.clearBirthday")}
+                        label={t(plugin.cakeDay.context.clearBirthday)}
                         action={() => clearBirthday(user.id, user.username)}
                         disabled={!savedBirthdays[user.id]}
                     />
                     {savedBirthdays[user.id] && (
                         <Menu.MenuItem
                             id="cakeday-current"
-                            label={`${t("plugin.cakeDay.context.current")} ${savedBirthdays[user.id]}`}
+                            label={`${t(plugin.cakeDay.context.current)} ${savedBirthdays[user.id]}`}
                             disabled
                         />
                     )}

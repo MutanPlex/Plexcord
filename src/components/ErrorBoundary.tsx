@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { components, t } from "@api/i18n";
 import { LazyComponent, LazyComponentWrapper } from "@utils/lazyReact";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
@@ -45,7 +46,7 @@ const logger = new Logger("React ErrorBoundary", color);
 
 const safeT = (key: string, fallback: string): string => {
     try {
-        const { t } = require("@api/i18n");
+        const { components, t } = require("@api/i18n");
         return t(key) || fallback;
     } catch {
         return fallback;
@@ -106,11 +107,11 @@ const ErrorBoundary = LazyComponent(() => {
                     </this.props.fallback>
                 );
 
-            const msg = this.props.message || safeT("components.error.render", "An error occurred while rendering this Component. More info can be found below and in your console.");
+            const msg = this.props.message || t(components.error.render);
 
             return (
                 <ErrorCard style={{ overflow: "hidden" }}>
-                    <h1>{safeT("components.error.title", "Oh no!")}</h1>
+                    <h1>{t(components.error.title)}</h1>
                     <p>{msg}</p>
                     <code>
                         {this.state.message}

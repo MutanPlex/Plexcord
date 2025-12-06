@@ -18,18 +18,14 @@
 */
 
 import { findOption, OptionalMessageOption } from "@api/Commands";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "MoreKaomoji",
-    description: "Adds more Kaomoji to discord. ヽ(´▽`)/",
+    description: () => t(plugin.moreKaomoji.description),
     authors: [Devs.JacobTm, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.moreKaomoji.description");
-    },
 
     commands: [
         { name: "dissatisfaction", description: " ＞﹏＜" },

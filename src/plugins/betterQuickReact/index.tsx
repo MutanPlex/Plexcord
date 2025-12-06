@@ -7,64 +7,44 @@
 
 import "./style.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 
 export const settings = definePluginSettings({
     frequentEmojis: {
-        get label() {
-            return t("plugin.betterQuickReact.option.frequentEmojis.label");
-        },
-        get description() {
-            return t("plugin.betterQuickReact.option.frequentEmojis.description");
-        },
+        label: () => t(plugin.betterQuickReact.option.frequentEmojis.label),
+        description: () => t(plugin.betterQuickReact.option.frequentEmojis.description),
         type: OptionType.BOOLEAN,
         restartNeeded: true,
         default: true
     },
     rows: {
-        get label() {
-            return t("plugin.betterQuickReact.option.rows.label");
-        },
-        get description() {
-            return t("plugin.betterQuickReact.option.rows.description");
-        },
+        label: () => t(plugin.betterQuickReact.option.rows.label),
+        description: () => t(plugin.betterQuickReact.option.rows.description),
         type: OptionType.SLIDER,
         default: 2,
         markers: makeRange(1, 16, 1),
         stickToMarkers: true
     },
     columns: {
-        get label() {
-            return t("plugin.betterQuickReact.option.columns.label");
-        },
-        get description() {
-            return t("plugin.betterQuickReact.option.columns.description");
-        },
+        label: () => t(plugin.betterQuickReact.option.columns.label),
+        description: () => t(plugin.betterQuickReact.option.columns.description),
         type: OptionType.SLIDER,
         default: 4,
         markers: makeRange(1, 12, 1),
         stickToMarkers: true
     },
     compactMode: {
-        get label() {
-            return t("plugin.betterQuickReact.option.compactMode.label");
-        },
-        get description() {
-            return t("plugin.betterQuickReact.option.compactMode.description");
-        },
+        label: () => t(plugin.betterQuickReact.option.compactMode.label),
+        description: () => t(plugin.betterQuickReact.option.compactMode.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     scroll: {
-        get label() {
-            return t("plugin.betterQuickReact.option.scroll.label");
-        },
-        get description() {
-            return t("plugin.betterQuickReact.option.scroll.description");
-        },
+        label: () => t(plugin.betterQuickReact.option.scroll.label),
+        description: () => t(plugin.betterQuickReact.option.scroll.description),
         type: OptionType.BOOLEAN,
         default: true
     }
@@ -72,13 +52,9 @@ export const settings = definePluginSettings({
 
 export default definePlugin({
     name: "BetterQuickReact",
-    description: "Improves the quick react buttons in the message context menu.",
+    description: () => t(plugin.betterQuickReact.description),
     authors: [Devs.Ven, Devs.Sqaaakoi, PcDevs.MutanPlex],
     settings,
-
-    get displayDescription() {
-        return t("plugin.betterQuickReact.description");
-    },
 
     patches: [
         // Remove favourite emojis from being inserted at the start of the reaction list

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugins, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -25,13 +25,8 @@ import managedStyle from "./style.css?managed";
 
 export default definePlugin({
     name: "MessageDecorationsAPI",
-    description: "API to add decorations to messages",
+    description: () => t(plugins.metadata.api.description.messageDecorations),
     authors: [Devs.TheSun],
-
-    get displayDescription() {
-        return t("plugins.metadata.api.description.messageDecorations");
-    },
-
     managedStyle,
 
     patches: [

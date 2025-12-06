@@ -6,7 +6,7 @@
  */
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { PaintbrushIcon } from "@components/Icons";
 import { PcDevs } from "@utils/constants";
@@ -34,7 +34,7 @@ const UploadContextMenuPatch: NavContextMenuPatchCallback = (children, props) =>
         label={
             <div className={OptionClasses.optionLabel}>
                 <PaintbrushIcon className={OptionClasses.optionIcon} height={24} width={24} />
-                <div className={OptionClasses.optionName}>{t("plugin.remix.label")}</div>
+                <div className={OptionClasses.optionName}>{t(plugin.remix.label)}</div>
             </div>
         }
         action={() => {
@@ -58,7 +58,7 @@ const MessageContextMenuPatch: NavContextMenuPatchCallback = (children, props) =
 
     group.splice(index + 1, 0, <Menu.MenuItem
         id="pc-remix"
-        label={t("plugin.remix.label")}
+        label={t(plugin.remix.label)}
         icon={PaintbrushIcon}
         action={() => {
             const key = openModal(modalProps =>
@@ -80,12 +80,8 @@ export function sendRemix(blob: Blob) {
 
 export default definePlugin({
     name: "Remix",
-    description: "Adds a 'Remix' option to the right-click menu of the file upload button. This option opens an image in a simple image editor and allows you to send the edited image directly into the chat.",
+    description: () => t(plugin.remix.description),
     authors: [PcDevs.MrDiamond, PcDevs.meowabyte],
-
-    get displayDescription() {
-        return t("plugin.remix.description");
-    },
 
     contextMenus: {
         "channel-attach": UploadContextMenuPatch,

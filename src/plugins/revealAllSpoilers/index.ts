@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs, IS_MAC } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findByPropsLazy } from "@webpack";
@@ -27,12 +27,8 @@ const MessagesClasses = findByPropsLazy("messagesWrapper", "navigationDescriptio
 
 export default definePlugin({
     name: "RevealAllSpoilers",
-    description: "Reveal all spoilers in a message by Ctrl-clicking a spoiler, or in the chat with Ctrl+Shift-click",
+    description: () => t(plugin.revealAllSpoilers.description),
     authors: [Devs.whqwert],
-
-    get displayDescription() {
-        return t("plugin.revealAllSpoilers.description");
-    },
 
     patches: [
         {

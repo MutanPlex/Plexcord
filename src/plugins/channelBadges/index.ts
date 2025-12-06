@@ -7,7 +7,7 @@
 
 import "./style.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Channel, Guild } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import { getCurrentGuild } from "@utils/discord";
@@ -38,24 +38,25 @@ function addBadgesToChannel(element: HTMLElement, channelId: string) {
     }
 
     const badgeConditions = [
-        { id: 6101, condition: isPrivate, title: t("plugin.channelBadges.badge.private") },
-        { id: 6100, condition: isNSFW, title: t("plugin.channelBadges.badge.nsfw") },
-        { id: 6102, condition: currentGuild?.rulesChannelId === channel.id, title: t("plugin.channelBadges.badge.rules") },
+        { id: 6101, condition: isPrivate, title: () => t(plugin.channelBadges.badge.private) },
+        { id: 6100, condition: isNSFW, title: () => t(plugin.channelBadges.badge.nsfw) },
+        { id: 6102, condition: currentGuild?.rulesChannelId === channel.id, title: () => t(plugin.channelBadges.badge.rules) },
     ];
 
     badgeConditions.forEach(({ id, condition, title }) => {
         if (condition && isEnabled(id)) addBadge(badgeContainer!, id, title);
     });
 
-    addBadge(badgeContainer!, type, returnChannelBadge(type).label);
+    const channelBadge = returnChannelBadge(type);
+    addBadge(badgeContainer!, type, () => typeof channelBadge.label === "function" ? channelBadge.label() : channelBadge.label);
 }
 
-function addBadge(container: HTMLElement, id: number, title: string) {
+function addBadge(container: HTMLElement, id: number, title: () => string) {
     const { css, label, color } = returnChannelBadge(id);
     const badge = document.createElement("div");
     badge.classList.add("channel-badge", `channel-badge-${css}`);
-    badge.textContent = label;
-    badge.title = title;
+    badge.textContent = typeof label === "function" ? label() : label;
+    badge.title = title();
 
     if (color && color !== "") {
         badge.style.backgroundColor = color;
@@ -120,13 +121,9 @@ function onGuildChange() {
 
 export default definePlugin({
     name: "ChannelBadges",
-    description: "Adds badges to channels based on their type",
+    description: () => t(plugin.channelBadges.description),
     authors: [PcDevs.creations],
     settings,
-
-    get displayDescription() {
-        return t("plugin.channelBadges.description");
-    },
 
     async start() {
         currentGuild = getCurrentGuild();

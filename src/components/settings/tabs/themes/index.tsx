@@ -19,7 +19,7 @@
 
 import "./styles.css";
 
-import { t, tJsx } from "@api/i18n";
+import { t, themes } from "@api/i18n";
 import { Card } from "@components/Card";
 import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
@@ -41,7 +41,7 @@ function ThemesTab() {
     const [currentTab, setCurrentTab] = useState(ThemeTab.LOCAL);
 
     return (
-        <SettingsTab title={t("themes.title")}>
+        <SettingsTab title={t(themes.title)}>
             <TabBar
                 type="top"
                 look="brand"
@@ -53,13 +53,13 @@ function ThemesTab() {
                     className="pc-settings-tab-bar-item"
                     id={ThemeTab.LOCAL}
                 >
-                    {t("themes.local")}
+                    {t(themes.local)}
                 </TabBar.Item>
                 <TabBar.Item
                     className="pc-settings-tab-bar-item"
                     id={ThemeTab.ONLINE}
                 >
-                    {t("themes.online")}
+                    {t(themes.online)}
                 </TabBar.Item>
             </TabBar>
 
@@ -73,13 +73,13 @@ function ThemesTab() {
 
 function UserscriptThemesTab() {
     return (
-        <SettingsTab title={t("themes.title")}>
+        <SettingsTab title={t(themes.title)}>
             <Card variant="danger">
-                <Heading>{t("themes.error.userscript")}</Heading>
+                <Heading>{t(themes.error.userscript)}</Heading>
 
                 <Paragraph>
-                    {tJsx("themes.error.stylus", {
-                        stylus: <Link href={getStylusWebStoreUrl()}>{t("themes.stylus")}</Link>
+                    {t(themes.error.stylus, {
+                        stylus: <Link href={getStylusWebStoreUrl()}>{t(themes.stylus)}</Link>
                     })}
                 </Paragraph>
             </Card>
@@ -88,5 +88,5 @@ function UserscriptThemesTab() {
 }
 
 export default IS_USERSCRIPT
-    ? wrapTab(UserscriptThemesTab, t("themes.title"))
-    : wrapTab(ThemesTab, t("themes.title"));
+    ? wrapTab(UserscriptThemesTab, t(themes.title))
+    : wrapTab(ThemesTab, t(themes.title));

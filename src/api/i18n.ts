@@ -21,6 +21,14 @@ import { Logger } from "@utils/Logger";
 import { FluxDispatcher, useEffect, useState } from "@webpack/common";
 
 import { PlexcordCreateElement } from "../../scripts/build/inject/react.mjs";
+import enTranslations, { changelog, cloud, commands, common, components, csp, memberlist, message, notifications, patchHelper, plugin, plugins, settings, sync, themes, updater, utils, } from "../locales/en";
+import { NestedKeyOf } from "../locales/types";
+
+// Type for translation keys
+export type TranslationKey = NestedKeyOf<typeof enTranslations>;
+
+// Export translation key proxies
+export { changelog, cloud, commands, common, components, csp, memberlist, message, notifications, patchHelper, plugin, plugins, settings, sync, themes, updater, utils };
 
 let Settings: any = null;
 const getSettings = () => {
@@ -313,54 +321,41 @@ class I18nManager {
         this.notifyListeners();
     }
 
-    public t(key: string, params?: Record<string, any>, namespace = "core"): string {
+    public t(key: any, params?: Record<string, any>, namespace?: "core"): string;
+    public t(key: any, params: Record<string, React.ReactNode>, namespace?: "core"): React.ReactNode;
+    public t(key: any, params?: Record<string, any>, namespace = "core"): string | React.ReactNode {
         const { locale } = this.store;
         const fallback = this.store.fallbackLocale;
 
-        let translation = this.getTranslation(key, locale, namespace) ||
-            this.getTranslation(key, fallback, namespace) ||
-            key;
+        // Convert key to string if it's a Proxy object
+        const keyString = String(key);
 
-        if (params) {
-            Object.entries(params).forEach(([param, value]) => {
-                translation = translation.replace(
-                    new RegExp(`\\{\\{${param}\\}\\}`, "g"),
-                    String(value)
-                );
-            });
-        }
-
-        return translation;
-    }
-
-    public tJsx(key: string, params?: Record<string, any>, namespace = "core"): React.ReactNode {
-        const { locale } = this.store;
-        const fallback = this.store.fallbackLocale;
-
-        const translation = this.getTranslation(key, locale, namespace) ||
-            this.getTranslation(key, fallback, namespace) ||
-            key;
+        let translation = this.getTranslation(keyString, locale, namespace) ||
+            this.getTranslation(keyString, fallback, namespace) ||
+            keyString;
 
         if (!params) {
             return translation;
         }
 
+        // Check if any param is a JSX element
         const hasJsxComponents = Object.values(params).some(val =>
             val && typeof val === "object" &&
             (val.$$typeof || val.type || val.props)
         );
 
         if (!hasJsxComponents) {
-            let result = translation;
+            // Simple string replacement
             Object.entries(params).forEach(([param, value]) => {
-                result = result.replace(
+                translation = translation.replace(
                     new RegExp(`\\{\\{${param}\\}\\}`, "g"),
                     String(value)
                 );
             });
-            return result;
+            return translation;
         }
 
+        // Handle JSX elements
         try {
             const { React } = require("@webpack/common");
             let result: React.ReactNode[] = [translation];
@@ -392,14 +387,14 @@ class I18nManager {
 
             return PlexcordCreateElement(React.Fragment, null, ...result);
         } catch (error) {
-            let result = translation;
+            // Fallback to string replacement
             Object.entries(params).forEach(([param, value]) => {
-                result = result.replace(
+                translation = translation.replace(
                     new RegExp(`\\{\\{${param}\\}\\}`, "g"),
                     String(value)
                 );
             });
-            return result;
+            return translation;
         }
     }
 
@@ -507,7 +502,7 @@ export function useTranslation(namespace = "core") {
     const locale = useLocale();
 
     return {
-        t: (key: string, params?: Record<string, any>) => i18n.t(key, params, namespace),
+        t: (key: any, params?: Record<string, any>) => i18n.t(key, params, namespace as any),
         locale,
         isAutoDetect: i18n.isAutoDetectEnabled(),
         setLocale: (newLocale: string) => i18n.setLocale(newLocale),
@@ -566,12 +561,8 @@ export const useGlobalI18n = () => {
     }, []);
 };
 
-export const t = (key: string, params?: Record<string, any>) => {
-    return i18n.t(key, params);
-};
-
-export const tJsx = (key: string, params?: Record<string, any>) => {
-    return i18n.tJsx(key, params);
+export const t = (key: any, params?: Record<string, any>) => {
+    return i18n.t(key as TranslationKey, params);
 };
 
 export const getCurrentLocale = () => currentGlobalLocale;

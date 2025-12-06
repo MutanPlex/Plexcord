@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t, tJsx } from "@api/i18n";
+import { cloud, t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
 import { authorizeCloud, deauthorizeCloud } from "@api/SettingsSync/cloudSetup";
 import { deleteCloudSettings, eraseAllCloudData, getCloudSettings, putCloudSettings } from "@api/SettingsSync/cloudSync";
@@ -38,26 +38,26 @@ function validateUrl(url: string) {
         new URL(url);
         return true;
     } catch {
-        return t("cloud.backend.invalid");
+        return t(cloud.backend.invalid);
     }
 }
 
 function SettingsSyncSection() {
-    const { cloud } = useSettings(["cloud.authenticated", "cloud.settingsSync"]);
-    const sectionEnabled = cloud.authenticated && cloud.settingsSync;
+    const { cloud: cloudSettings } = useSettings(["cloud.authenticated", "cloud.settingsSync"]);
+    const sectionEnabled = cloudSettings.authenticated && cloudSettings.settingsSync;
 
     return (
         <section className={Margins.top16}>
-            <HeadingTertiary>{t("cloud.title")}</HeadingTertiary>
+            <HeadingTertiary>{t(cloud.title)}</HeadingTertiary>
             <Paragraph size="md" className={Margins.bottom20}>
-                {t("cloud.description")}
+                {t(cloud.description)}
             </Paragraph>
             <FormSwitch
                 key="cloud-sync"
-                disabled={!cloud.authenticated}
-                value={cloud.settingsSync}
-                title={t("cloud.title")}
-                onChange={v => { cloud.settingsSync = v; }}
+                disabled={!cloudSettings.authenticated}
+                value={cloudSettings.settingsSync}
+                title={t(cloud.title)}
+                onChange={v => { cloudSettings.settingsSync = v; }}
             />
             <div className="pc-cloud-settings-sync-grid">
                 <Button
@@ -65,9 +65,9 @@ function SettingsSyncSection() {
                     disabled={!sectionEnabled}
                     onClick={() => putCloudSettings(true)}
                 >
-                    {t("cloud.button.to")}
+                    {t(cloud.button.to)}
                 </Button>
-                <Tooltip text={t("cloud.button.fromDescription")}>
+                <Tooltip text={t(cloud.button.fromDescription)}>
                     {({ onMouseLeave, onMouseEnter }) => (
                         <Button
                             onMouseLeave={onMouseLeave}
@@ -77,7 +77,7 @@ function SettingsSyncSection() {
                             disabled={!sectionEnabled}
                             onClick={() => getCloudSettings(true, true)}
                         >
-                            {t("cloud.button.from")}
+                            {t(cloud.button.from)}
                         </Button>
                     )}
                 </Tooltip>
@@ -87,7 +87,7 @@ function SettingsSyncSection() {
                     disabled={!sectionEnabled}
                     onClick={() => deleteCloudSettings()}
                 >
-                    {t("cloud.button.delete")}
+                    {t(cloud.button.delete)}
                 </Button>
             </div>
         </section>
@@ -98,13 +98,13 @@ function CloudTab() {
     const settings = useSettings(["cloud.authenticated", "cloud.url"]);
 
     return (
-        <SettingsTab title={"Plexcord " + t("cloud.text")}>
+        <SettingsTab title={"Plexcord " + t(cloud.text)}>
             <section className={Margins.top16}>
-                <HeadingTertiary>{t("cloud.settings")}</HeadingTertiary>
+                <HeadingTertiary>{t(cloud.settings)}</HeadingTertiary>
                 <Paragraph size="md" className={Margins.bottom20}>
-                    {tJsx("cloud.overview", {
-                        privacy: <Link href="https://api.plexcord.club/privacy">{t("cloud.privacy")}</Link>,
-                        source: <Link href="https://github.com/Plexcord/Backend">{t("cloud.source")}</Link>
+                    {t(cloud.overview, {
+                        privacy: <Link href="https://api.plexcord.club/privacy">{t(cloud.privacy)}</Link>,
+                        source: <Link href="https://github.com/Plexcord/Backend">{t(cloud.source)}</Link>
                     })}
                 </Paragraph>
                 <FormSwitch
@@ -116,12 +116,12 @@ function CloudTab() {
                         else
                             settings.cloud.authenticated = v;
                     }}
-                    description={t("cloud.authorization")}
-                    title={t("cloud.button.enable")}
+                    description={t(cloud.authorization)}
+                    title={t(cloud.button.enable)}
                 />
-                <HeadingTertiary>{t("cloud.backend.title")}</HeadingTertiary>
+                <HeadingTertiary>{t(cloud.backend.title)}</HeadingTertiary>
                 <Paragraph className={Margins.bottom8}>
-                    {t("cloud.backend.description")}
+                    {t(cloud.backend.description)}
                 </Paragraph>
                 <CheckedTextInput
                     key="backendUrl"
@@ -144,22 +144,22 @@ function CloudTab() {
                             await authorizeCloud();
                         }}
                     >
-                        {t("cloud.button.reauthorize")}
+                        {t(cloud.button.reauthorize)}
                     </Button>
                     <Button
                         size="medium"
                         variant="dangerPrimary"
                         disabled={!settings.cloud.authenticated}
                         onClick={() => Alerts.show({
-                            title: t("cloud.button.erase.title"),
-                            body: t("cloud.button.erase.body"),
+                            title: t(cloud.button.erase.title),
+                            body: t(cloud.button.erase.body),
                             onConfirm: eraseAllCloudData,
-                            confirmText: t("cloud.button.erase.confirm"),
+                            confirmText: t(cloud.button.erase.confirm),
                             confirmColor: "pc-cloud-erase-data-danger-btn",
-                            cancelText: t("cloud.button.erase.cancel")
+                            cancelText: t(cloud.button.erase.cancel)
                         })}
                     >
-                        {t("cloud.button.erase.erase")}
+                        {t(cloud.button.erase.erase)}
                     </Button>
                 </Grid>
 
@@ -170,4 +170,4 @@ function CloudTab() {
     );
 }
 
-export default wrapTab(CloudTab, t("cloud.text"));
+export default wrapTab(CloudTab, t(cloud.text));

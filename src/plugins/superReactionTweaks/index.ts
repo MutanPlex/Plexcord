@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -13,32 +13,20 @@ import { OverridePremiumTypeStore } from "@webpack/common";
 
 export const settings = definePluginSettings({
     superReactByDefault: {
-        get label() {
-            return t("plugin.superReactionTweaks.option.superReactByDefault.label");
-        },
-        get description() {
-            return t("plugin.superReactionTweaks.option.superReactByDefault.description");
-        },
+        label: () => t(plugin.superReactionTweaks.option.superReactByDefault.label),
+        description: () => t(plugin.superReactionTweaks.option.superReactByDefault.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     unlimitedSuperReactionPlaying: {
-        get label() {
-            return t("plugin.superReactionTweaks.option.unlimitedSuperReactionPlaying.label");
-        },
-        get description() {
-            return t("plugin.superReactionTweaks.option.unlimitedSuperReactionPlaying.description");
-        },
+        label: () => t(plugin.superReactionTweaks.option.unlimitedSuperReactionPlaying.label),
+        description: () => t(plugin.superReactionTweaks.option.unlimitedSuperReactionPlaying.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     superReactionPlayingLimit: {
-        get label() {
-            return t("plugin.superReactionTweaks.option.superReactionPlayingLimit.label");
-        },
-        get description() {
-            return t("plugin.superReactionTweaks.option.superReactionPlayingLimit.description");
-        },
+        label: () => t(plugin.superReactionTweaks.option.superReactionPlayingLimit.label),
+        description: () => t(plugin.superReactionTweaks.option.superReactionPlayingLimit.description),
         type: OptionType.SLIDER,
         default: 20,
         markers: [0, 5, 10, 20, 40, 60, 80, 100],
@@ -52,12 +40,8 @@ export const settings = definePluginSettings({
 
 export default definePlugin({
     name: "SuperReactionTweaks",
-    description: "Customize the limit of Super Reactions playing at once, and super react by default",
+    description: () => t(plugin.superReactionTweaks.description),
     authors: [Devs.FieryFlames, Devs.ant0n],
-
-    get displayDescription() {
-        return t("plugin.superReactionTweaks.description");
-    },
 
     patches: [
         {

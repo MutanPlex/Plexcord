@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Message } from "@plexcord/discord-types";
@@ -32,51 +32,31 @@ const HiddenVisually = findComponentByCodeLazy(".hiddenVisually]:");
 
 export default definePlugin({
     name: "MessageLatency",
-    description: "Displays an indicator for messages that took ≥n seconds to send",
+    description: () => t(plugin.messageLatency.description),
     authors: [Devs.arHSM],
-
-    get displayDescription() {
-        return t("plugin.messageLatency.description");
-    },
 
     settings: definePluginSettings({
         latency: {
-            get label() {
-                return t("plugin.messageLatency.option.latency.label");
-            },
-            get description() {
-                return t("plugin.messageLatency.option.latency.description");
-            },
+            label: () => t(plugin.messageLatency.option.latency.label),
+            description: () => t(plugin.messageLatency.option.latency.description),
             type: OptionType.NUMBER,
             default: 2
         },
         detectDiscordKotlin: {
-            get label() {
-                return t("plugin.messageLatency.option.detectDiscordKotlin.label");
-            },
-            get description() {
-                return t("plugin.messageLatency.option.detectDiscordKotlin.description");
-            },
+            label: () => t(plugin.messageLatency.option.detectDiscordKotlin.label),
+            description: () => t(plugin.messageLatency.option.detectDiscordKotlin.description),
             type: OptionType.BOOLEAN,
             default: true
         },
         showMillis: {
-            get label() {
-                return t("plugin.messageLatency.option.showMillis.label");
-            },
-            get description() {
-                return t("plugin.messageLatency.option.showMillis.description");
-            },
+            label: () => t(plugin.messageLatency.option.showMillis.label),
+            description: () => t(plugin.messageLatency.option.showMillis.description),
             type: OptionType.BOOLEAN,
             default: false
         },
         ignoreSelf: {
-            get label() {
-                return t("plugin.messageLatency.option.ignoreSelf.label");
-            },
-            get description() {
-                return t("plugin.messageLatency.option.ignoreSelf.description");
-            },
+            label: () => t(plugin.messageLatency.option.ignoreSelf.label),
+            description: () => t(plugin.messageLatency.option.ignoreSelf.description),
             type: OptionType.BOOLEAN,
             default: false
         }
@@ -117,14 +97,14 @@ export default definePlugin({
                 isNonNullish(s)
                     ? (prev !== ""
                         ? (showMillis ? k === "milliseconds" : k === "seconds")
-                            ? ` ${t("plugin.messageLatency.and")} `
+                            ? ` ${t(plugin.messageLatency.and)} `
                             : " "
                         : "") + s
                     : ""
             );
         }, "");
 
-        return ts || `0 ${t("plugin.messageLatency.seconds")}`;
+        return ts || `0 ${t(plugin.messageLatency.seconds)}`;
     },
 
     latencyTooltipData(message: Message) {
@@ -185,9 +165,9 @@ export default definePlugin({
 
             let text: string;
             if (!d.delta) {
-                text = t("plugin.messageLatency.oldKotlinDetected");
+                text = t(plugin.messageLatency.oldKotlinDetected);
             } else {
-                text = (d.ahead ? t("plugin.messageLatency.ahead", { delta: d.delta }) : t("plugin.messageLatency.delay", { delta: d.delta })) + (d.isDiscordKotlin ? t("plugin.messageLatency.oldKotlinDetected") : "");
+                text = (d.ahead ? t(plugin.messageLatency.ahead, { delta: d.delta }) : t(plugin.messageLatency.delay, { delta: d.delta })) + (d.isDiscordKotlin ? t(plugin.messageLatency.oldKotlinDetected) : "");
             }
 
             return <Tooltip
@@ -198,7 +178,7 @@ export default definePlugin({
                     props => <>
                         {<this.Icon delta={d.delta} fill={d.fill} props={props} />}
                         {/* Time Out indicator uses this, I think this is for a11y */}
-                        <HiddenVisually>{t("plugin.messageLatency.delayedMessage")}</HiddenVisually>
+                        <HiddenVisually>{t(plugin.messageLatency.delayedMessage)}</HiddenVisually>
                     </>
                 }
             </Tooltip>;
@@ -226,7 +206,7 @@ export default definePlugin({
             role="img"
             fill="none"
             style={{ marginRight: "8px", verticalAlign: -1 }}
-            aria-label={delta ?? t("plugin.messageLatency.oldAndroidClient")}
+            aria-label={delta ?? t(plugin.messageLatency.oldAndroidClient)}
             aria-hidden="false"
             {...props}
         >

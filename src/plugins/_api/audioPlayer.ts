@@ -5,12 +5,13 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 import { AudioPlayerInternal, AudioPlayerOptions, audioProcessorFunctions, AudioType, identifyAudioType, playAudio } from "@api/AudioPlayer";
+import { plugins, t } from "@api/i18n";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "AudioPlayerAPI",
-    description: "API to play internal Discord audio files or external audio links.",
+    description: () => t(plugins.metadata.api.description.audioPlayer),
     authors: [PcDevs.Etorix],
     AudioType,
     playAudio,

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { addMessageAccessory, removeMessageAccessory } from "@api/MessageAccessories";
 import { updateMessage } from "@api/MessageUpdater";
 import { definePluginSettings } from "@api/Settings";
@@ -77,80 +77,58 @@ const messageFetchQueue = new Queue();
 
 const settings = definePluginSettings({
     messageBackgroundColor: {
-        get label() {
-            return t("plugin.messageLinkEmbeds.option.messageBackgroundColor.label");
-        },
-        get description() {
-            return t("plugin.messageLinkEmbeds.option.messageBackgroundColor.description");
-        },
+        label: () => t(plugin.messageLinkEmbeds.option.messageBackgroundColor.label),
+        description: () => t(plugin.messageLinkEmbeds.option.messageBackgroundColor.description),
         type: OptionType.BOOLEAN
     },
     automodEmbeds: {
-        get label() {
-            return t("plugin.messageLinkEmbeds.option.automodEmbeds.label");
-        },
-        get description() {
-            return t("plugin.messageLinkEmbeds.option.automodEmbeds.description");
-        },
+        label: () => t(plugin.messageLinkEmbeds.option.automodEmbeds.label),
+        description: () => t(plugin.messageLinkEmbeds.option.automodEmbeds.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.messageLinkEmbeds.option.automodEmbeds.always"),
-                    value: "always"
-                },
-                {
-                    label: t("plugin.messageLinkEmbeds.option.automodEmbeds.prefer"),
-                    value: "prefer"
-                },
-                {
-                    label: t("plugin.messageLinkEmbeds.option.automodEmbeds.never"),
-                    value: "never",
-                    default: true
-                }
-            ];
-        }
+        options: [
+            {
+                label: () => t(plugin.messageLinkEmbeds.option.automodEmbeds.always),
+                value: "always"
+            },
+            {
+                label: () => t(plugin.messageLinkEmbeds.option.automodEmbeds.prefer),
+                value: "prefer"
+            },
+            {
+                label: () => t(plugin.messageLinkEmbeds.option.automodEmbeds.never),
+                value: "never",
+                default: true
+            }
+        ]
     },
     listMode: {
-        get label() {
-            return t("plugin.messageLinkEmbeds.option.listMode.label");
-        },
-        get description() {
-            return t("plugin.messageLinkEmbeds.option.listMode.description");
-        },
+        label: () => t(plugin.messageLinkEmbeds.option.listMode.label),
+        description: () => t(plugin.messageLinkEmbeds.option.listMode.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.messageLinkEmbeds.option.listMode.blacklist"),
-                    value: "blacklist",
-                    default: true
-                },
-                {
-                    label: t("plugin.messageLinkEmbeds.option.listMode.whitelist"),
-                    value: "whitelist"
-                }
-            ];
-        }
+        options: [
+            {
+                label: () => t(plugin.messageLinkEmbeds.option.listMode.blacklist),
+                value: "blacklist",
+                default: true
+            },
+            {
+                label: () => t(plugin.messageLinkEmbeds.option.listMode.whitelist),
+                value: "whitelist"
+            }
+        ]
     },
     idList: {
-        get label() {
-            return t("plugin.messageLinkEmbeds.option.idList.label");
-        },
-        get description() {
-            return t("plugin.messageLinkEmbeds.option.idList.description");
-        },
+        label: () => t(plugin.messageLinkEmbeds.option.idList.label),
+        description: () => t(plugin.messageLinkEmbeds.option.idList.description),
         type: OptionType.STRING,
         default: ""
     },
     clearMessageCache: {
-        get label() {
-            return t("plugin.messageLinkEmbeds.option.clearMessageCache.label");
-        },
+        label: () => t(plugin.messageLinkEmbeds.option.clearMessageCache.label),
         type: OptionType.COMPONENT,
         component: () => (
             <Button onClick={() => messageCache.clear()}>
-                {t("plugin.messageLinkEmbeds.option.clearMessageCache.description")}
+                {t(plugin.messageLinkEmbeds.option.clearMessageCache.description)}
             </Button>
         )
     }
@@ -216,9 +194,9 @@ function getImages(message: Message): Attachment[] {
 
 function noContent(attachments: number, embeds: number) {
     if (!attachments && !embeds) return "";
-    if (!attachments) return `[${t("plugin.messageLinkEmbeds.noContent.noAttachments", { count: embeds, s: embeds !== 1 ? "s" : "" })}]`;
-    if (!embeds) return `[${t("plugin.messageLinkEmbeds.noContent.noEmbeds", { count: attachments, s: attachments !== 1 ? "s" : "" })}]`;
-    return `[${t("plugin.messageLinkEmbeds.noContent.both", { attachments, embeds, attachmentsS: attachments !== 1 ? "s" : "", embedsS: embeds !== 1 ? "s" : "" })}]`;
+    if (!attachments) return `[${t(plugin.messageLinkEmbeds.noContent.noAttachments, { count: embeds, s: embeds !== 1 ? "s" : "" })}]`;
+    if (!embeds) return `[${t(plugin.messageLinkEmbeds.noContent.noEmbeds, { count: attachments, s: attachments !== 1 ? "s" : "" })}]`;
+    return `[${t(plugin.messageLinkEmbeds.noContent.both, { attachments, embeds, attachmentsS: attachments !== 1 ? "s" : "", embedsS: embeds !== 1 ? "s" : "" })}]`;
 }
 
 function requiresRichEmbed(message: Message) {
@@ -307,9 +285,9 @@ function MessageEmbedAccessory({ message }: { message: Message; }) {
 }
 
 function getChannelLabelAndIconUrl(channel: Channel) {
-    if (channel.isDM()) return [t("plugin.messageLinkEmbeds.dm"), IconUtils.getUserAvatarURL(UserStore.getUser(channel.recipients[0]))];
-    if (channel.isGroupDM()) return [t("plugin.messageLinkEmbeds.groupDm"), IconUtils.getChannelIconURL(channel)];
-    return [t("plugin.messageLinkEmbeds.server"), IconUtils.getGuildIconURL(GuildStore.getGuild(channel.guild_id))];
+    if (channel.isDM()) return [t(plugin.messageLinkEmbeds.dm), IconUtils.getUserAvatarURL(UserStore.getUser(channel.recipients[0]))];
+    if (channel.isGroupDM()) return [t(plugin.messageLinkEmbeds.groupDm), IconUtils.getChannelIconURL(channel)];
+    return [t(plugin.messageLinkEmbeds.server), IconUtils.getGuildIconURL(GuildStore.getGuild(channel.guild_id))];
 }
 
 function ChannelMessageEmbedAccessory({ message, channel }: MessageEmbedProps): JSX.Element | null {
@@ -394,14 +372,9 @@ function AutomodEmbedAccessory(props: MessageEmbedProps): JSX.Element | null {
 
 export default definePlugin({
     name: "MessageLinkEmbeds",
-    description: "Adds a preview to messages that link another message",
+    description: () => t(plugin.messageLinkEmbeds.description),
     authors: [Devs.TheSun, Devs.Ven, Devs.RyanCaoDev],
     dependencies: ["MessageAccessoriesAPI", "MessageUpdaterAPI", "UserSettingsAPI"],
-
-    get displayDescription() {
-        return t("plugin.messageLinkEmbeds.description");
-    },
-
     settings,
 
     start() {

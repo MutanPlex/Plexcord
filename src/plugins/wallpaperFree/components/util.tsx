@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { WallpaperFreeStore } from "@plugins/wallpaperFree/store";
@@ -28,12 +28,12 @@ export function GlobalDefaultComponent() {
         <>
             <Button onClick={() => {
                 openModal(props => <SetWallpaperModal props={props} onSelect={setGlobal} initialUrl={WallpaperFreeStore.globalDefault} />);
-            }}>{t("plugin.wallpaperFree.modal.global.set")}</Button>
+            }}>{t(plugin.wallpaperFree.modal.global.set)}</Button>
 
             <Button
                 variant="dangerPrimary"
                 onClick={() => setGlobal(void 0)}
-            >{t("plugin.wallpaperFree.modal.global.remove")}</Button>
+            >{t(plugin.wallpaperFree.modal.global.remove)}</Button>
 
             <Button
                 variant="dangerPrimary"
@@ -41,7 +41,7 @@ export function GlobalDefaultComponent() {
                     // @ts-ignore
                     FluxDispatcher.dispatch({ type: "PC_WALLPAPER_FREE_RESET" });
                 }}
-            >{t("plugin.wallpaperFree.modal.global.reset")}</Button>
+            >{t(plugin.wallpaperFree.modal.global.reset)}</Button>
         </>
     );
 }
@@ -70,16 +70,16 @@ export function TipsComponent() {
             {!IS_WEB && (
                 <>
                     <BaseText>
-                        {t("plugin.wallpaperFree.modal.web.info")}
+                        {t(plugin.wallpaperFree.modal.web.info)}
                     </BaseText>
                     <Button onClick={() => PlexcordNative.themes.openFolder()}>
-                        {t("plugin.wallpaperFree.modal.web.open")}
+                        {t(plugin.wallpaperFree.modal.web.open)}
                     </Button>
                 </>
             )}
             {Parser.parse(makeCodeblock(tipText, "css"))}
             <Button onClick={() => PlexcordNative.quickCss.openEditor()}>
-                {t("plugin.wallpaperFree.modal.web.quickCSS")}
+                {t(plugin.wallpaperFree.modal.web.quickCSS)}
             </Button>
         </div>
     );

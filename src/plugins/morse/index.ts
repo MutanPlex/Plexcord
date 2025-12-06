@@ -18,7 +18,7 @@
 */
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType } from "@api/Commands";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -48,28 +48,18 @@ const isMorse = (text: string) => /^[.\-/ ]+$/.test(text);
 
 export default definePlugin({
     name: "Morse",
-    description: "A slash command to translate to/from morse code.",
+    description: () => t(plugin.morse.description),
     authors: [PcDevs.zyqunix],
-
-    get displayDescription() {
-        return t("plugin.morse.description");
-    },
 
     commands: [
         {
             inputType: ApplicationCommandInputType.BUILT_IN_TEXT,
             name: "morse",
-            description: "Translate to or from Morse code",
-            get displayDescription() {
-                return t("plugin.morse.description");
-            },
+            description: () => t(plugin.morse.command.morse.description),
             options: [
                 {
                     name: "text",
-                    description: "Text to convert",
-                    get displayDescription() {
-                        return t("plugin.morse.options.text");
-                    },
+                    description: () => t(plugin.morse.command.morse.message),
                     type: ApplicationCommandOptionType.STRING,
                     required: true
                 }

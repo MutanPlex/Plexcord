@@ -193,7 +193,7 @@ export type TextArea = ComponentType<Omit<HTMLProps<HTMLTextAreaElement>, "onCha
 export interface SelectOption {
     disabled?: boolean;
     value: any;
-    label: string;
+    label: string | (() => string);
     key?: React.Key;
     default?: boolean;
 }

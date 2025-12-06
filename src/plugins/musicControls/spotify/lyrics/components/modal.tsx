@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { SpotifyStore, Track } from "@plugins/musicControls/spotify/SpotifyStore";
 import { openImageModal } from "@utils/discord";
@@ -24,7 +24,7 @@ function ModalHeaderContent({ track }: { track: Track | null; }) {
     if (!track) {
         return (
             <ModalHeader>
-                <BaseText size="sm" weight="semibold">{t("plugin.musicControls.modal.player.noPlaying")}</BaseText>
+                <BaseText size="sm" weight="semibold">{t(plugin.musicControls.modal.player.noPlaying)}</BaseText>
             </ModalHeader>
         );
     }
@@ -45,8 +45,8 @@ function ModalHeaderContent({ track }: { track: Track | null; }) {
                 )}
                 <div>
                     <BaseText size="sm" weight="semibold">{track.name}</BaseText>
-                    <BaseText size="sm">{t("plugin.musicControls.modal.player.artist")} {track.artists.map(a => a.name).join(", ")}</BaseText>
-                    <BaseText size="sm">{t("plugin.musicControls.modal.player.album")} {track.album.name}</BaseText>
+                    <BaseText size="sm">{t(plugin.musicControls.modal.player.artist)} {track.artists.map(a => a.name).join(", ")}</BaseText>
+                    <BaseText size="sm">{t(plugin.musicControls.modal.player.album)} {track.album.name}</BaseText>
                 </div>
             </div>
         </ModalHeader>
@@ -81,7 +81,7 @@ export function LyricsModal({ props }: { props: ModalProps; }) {
                         ))
                     ) : (
                         <BaseText size="sm" weight="normal" className={cl("modal-no-lyrics")}>
-                            {t("plugin.musicControls.modal.player.noLyrics")}
+                            {t(plugin.musicControls.modal.player.noLyrics)}
                         </BaseText>
                     )}
                 </div>

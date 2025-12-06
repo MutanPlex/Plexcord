@@ -20,7 +20,7 @@
 // This plugin is a port from Alyxia's Vendetta plugin
 import "./style.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
@@ -81,19 +81,13 @@ function decode(bio: string): Array<number> | null {
 
 const settings = definePluginSettings({
     nitroFirst: {
-        get label() {
-            return t("plugin.fakeProfileThemes.option.nitroFirst.label");
-        },
-        get description() {
-            return t("plugin.fakeProfileThemes.option.nitroFirst.description");
-        },
+        label: () => t(plugin.fakeProfileThemes.option.nitroFirst.label),
+        description: () => t(plugin.fakeProfileThemes.option.nitroFirst.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.fakeProfileThemes.option.nitroFirst.nitro"), value: true, default: true },
-                { label: t("plugin.fakeProfileThemes.option.nitroFirst.fake"), value: false },
-            ];
-        }
+        options: [
+            { label: () => t(plugin.fakeProfileThemes.option.nitroFirst.nitro), value: true, default: true },
+            { label: () => t(plugin.fakeProfileThemes.option.nitroFirst.fake), value: false },
+        ],
     }
 });
 
@@ -129,26 +123,26 @@ function SettingsAboutComponent() {
 
     return (
         <section>
-            <Heading>{t("plugin.fakeProfileThemes.modal.usage")}</Heading>
+            <Heading>{t(plugin.fakeProfileThemes.modal.usage)}</Heading>
             <Paragraph>
-                {t("plugin.fakeProfileThemes.modal.intro")}
+                {t(plugin.fakeProfileThemes.modal.intro)}
                 <br />
-                {t("plugin.fakeProfileThemes.modal.setColor")}
+                {t(plugin.fakeProfileThemes.modal.setColor)}
                 <ul className={Margins.top8}>
-                    <li>• {t("plugin.fakeProfileThemes.modal.step1")}</li>
-                    <li>• {t("plugin.fakeProfileThemes.modal.step2", { copy: t("plugin.fakeProfileThemes.button.copy") })}</li>
-                    <li>• {t("plugin.fakeProfileThemes.modal.step3")}</li>
+                    <li>• {t(plugin.fakeProfileThemes.modal.step1)}</li>
+                    <li>• {t(plugin.fakeProfileThemes.modal.step2, { copy: t(plugin.fakeProfileThemes.button.copy) })}</li>
+                    <li>• {t(plugin.fakeProfileThemes.modal.step3)}</li>
                 </ul><br />
                 <Divider
                     className={classes(Margins.top8, Margins.bottom8)}
                 />
-                <Heading>{t("plugin.fakeProfileThemes.modal.pickers")}</Heading>
+                <Heading>{t(plugin.fakeProfileThemes.modal.pickers)}</Heading>
                 <Flex gap="1em">
                     <ColorPicker
                         color={color1}
                         label={
                             <BaseText size="xs" weight="normal" style={{ marginTop: "4px" }}>
-                                {t("plugin.fakeProfileThemes.modal.primary")}
+                                {t(plugin.fakeProfileThemes.modal.primary)}
                             </BaseText>
                         }
                         onChange={(color: number) => {
@@ -159,7 +153,7 @@ function SettingsAboutComponent() {
                         color={color2}
                         label={
                             <BaseText size="xs" weight="normal" style={{ marginTop: "4px" }}>
-                                {t("plugin.fakeProfileThemes.modal.accent")}
+                                {t(plugin.fakeProfileThemes.modal.accent)}
                             </BaseText>
                         }
                         onChange={(color: number) => {
@@ -174,13 +168,13 @@ function SettingsAboutComponent() {
                         variant="primary"
                         size="medium"
                     >
-                        {t("plugin.fakeProfileThemes.button.copy")}
+                        {t(plugin.fakeProfileThemes.button.copy)}
                     </Button>
                 </Flex>
                 <Divider
                     className={classes(Margins.top8, Margins.bottom8)}
                 />
-                <Heading>{t("plugin.fakeProfileThemes.modal.preview")}</Heading>
+                <Heading>{t(plugin.fakeProfileThemes.modal.preview)}</Heading>
                 <div className="pc-fpt-preview">
                     <ProfileModal
                         user={UserStore.getCurrentUser()}
@@ -199,12 +193,8 @@ function SettingsAboutComponent() {
 
 export default definePlugin({
     name: "FakeProfileThemes",
-    description: "Allows profile theming by hiding the colors in your bio thanks to invisible 3y3 encoding",
+    description: () => t(plugin.fakeProfileThemes.description),
     authors: [Devs.Alyxia, Devs.Remty],
-
-    get displayDescription() {
-        return t("plugin.fakeProfileThemes.description");
-    },
 
     patches: [
         {
@@ -249,7 +239,7 @@ export default definePlugin({
             variant="primary"
             size="medium"
             style={{ marginBottom: "auto" }}
-        >{t("plugin.fakeProfileThemes.button.copy")}
+        >{t(plugin.fakeProfileThemes.button.copy)}
         </Button >;
     }, { noop: true }),
 });

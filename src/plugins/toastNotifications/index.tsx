@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Channel, Message, User } from "@plexcord/discord-types";
@@ -44,197 +44,133 @@ const USER_MENTION_REGEX = /<@!?(\d{17,20})>|<#(\d{17,20})>|<@&(\d{17,20})>/g; /
 
 export const settings = definePluginSettings({
     position: {
-        get label() {
-            return t("plugin.toastNotifications.option.position.label");
-        },
-        get description() {
-            return t("plugin.toastNotifications.option.position.description");
-        },
+        label: () => t(plugin.toastNotifications.option.position.label),
+        description: () => t(plugin.toastNotifications.option.position.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.toastNotifications.option.position.bottomLeft"),
-                    value: "bottom-left",
-                    default: true
-                },
-                {
-                    label: t("plugin.toastNotifications.option.position.topLeft"),
-                    value: "top-left"
-                },
-                {
-                    label: t("plugin.toastNotifications.option.position.topRight"),
-                    value: "top-right"
-                },
-                {
-                    label: t("plugin.toastNotifications.option.position.bottomRight"),
-                    value: "bottom-right"
-                },
-            ];
-        }
+        options: [
+            {
+                label: () => t(plugin.toastNotifications.option.position.bottomLeft),
+                value: "bottom-left",
+                default: true
+            },
+            {
+                label: () => t(plugin.toastNotifications.option.position.topLeft),
+                value: "top-left"
+            },
+            {
+                label: () => t(plugin.toastNotifications.option.position.topRight),
+                value: "top-right"
+            },
+            {
+                label: () => t(plugin.toastNotifications.option.position.bottomRight),
+                value: "bottom-right"
+            },
+        ]
     },
     timeout: {
-        get label() {
-            return t("plugin.toastNotifications.option.timeout.label");
-        },
-        get description() {
-            return t("plugin.toastNotifications.option.timeout.description");
-        },
+        label: () => t(plugin.toastNotifications.option.timeout.label),
+        description: () => t(plugin.toastNotifications.option.timeout.description),
         type: OptionType.SLIDER,
         default: 5,
         markers: makeRange(1, 15, 1)
     },
     opacity: {
-        get label() {
-            return t("plugin.toastNotifications.option.opacity.label");
-        },
-        get description() {
-            return t("plugin.toastNotifications.option.opacity.description");
-        },
+        label: () => t(plugin.toastNotifications.option.opacity.label),
+        description: () => t(plugin.toastNotifications.option.opacity.description),
         type: OptionType.SLIDER,
         default: 100,
         markers: makeRange(10, 100, 10)
     },
     maxNotifications: {
-        get label() {
-            return t("plugin.toastNotifications.option.maxNotifications.label");
-        },
-        get description() {
-            return t("plugin.toastNotifications.option.maxNotifications.description");
-        },
+        label: () => t(plugin.toastNotifications.option.maxNotifications.label),
+        description: () => t(plugin.toastNotifications.option.maxNotifications.description),
         type: OptionType.SLIDER,
         default: 3,
         markers: makeRange(1, 5, 1)
     },
     determineServerNotifications: {
-        get label() {
-            return t("plugin.toastNotifications.option.determineServerNotifications.label");
-        },
-        get description() {
-            return t("plugin.toastNotifications.option.determineServerNotifications.description");
-        },
+        label: () => t(plugin.toastNotifications.option.determineServerNotifications.label),
+        description: () => t(plugin.toastNotifications.option.determineServerNotifications.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     disableInStreamerMode: {
-        get label() {
-            return t("plugin.toastNotifications.option.disableInStreamerMode.label");
-        },
-        get description() {
-            return t("plugin.toastNotifications.option.disableInStreamerMode.description");
-        },
+        label: () => t(plugin.toastNotifications.option.disableInStreamerMode.label),
+        description: () => t(plugin.toastNotifications.option.disableInStreamerMode.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     renderImages: {
-        get label() {
-            return t("plugin.toastNotifications.option.renderImages.label");
-        },
-        get description() {
-            return t("plugin.toastNotifications.option.renderImages.description");
-        },
+        label: () => t(plugin.toastNotifications.option.renderImages.label),
+        description: () => t(plugin.toastNotifications.option.renderImages.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     directMessages: {
-        get label() {
-            return t("plugin.toastNotifications.option.directMessages.label");
-        },
-        get description() {
-            return t("plugin.toastNotifications.option.directMessages.description");
-        },
+        label: () => t(plugin.toastNotifications.option.directMessages.label),
+        description: () => t(plugin.toastNotifications.option.directMessages.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     groupMessages: {
-        get label() {
-            return t("plugin.toastNotifications.option.groupMessages.label");
-        },
-        get description() {
-            return t("plugin.toastNotifications.option.groupMessages.description");
-        },
+        label: () => t(plugin.toastNotifications.option.groupMessages.label),
+        description: () => t(plugin.toastNotifications.option.groupMessages.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     friendServerNotifications: {
-        get label() {
-            return t("plugin.toastNotifications.option.friendServerNotifications.label");
-        },
-        get description() {
-            return t("plugin.toastNotifications.option.friendServerNotifications.description");
-        },
+        label: () => t(plugin.toastNotifications.option.friendServerNotifications.label),
+        description: () => t(plugin.toastNotifications.option.friendServerNotifications.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     friendActivity: {
-        get label() {
-            return t("plugin.toastNotifications.option.friendActivity.label");
-        },
-        get description() {
-            return t("plugin.toastNotifications.option.friendActivity.description");
-        },
+        label: () => t(plugin.toastNotifications.option.friendActivity.label),
+        description: () => t(plugin.toastNotifications.option.friendActivity.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     streamingTreatment: {
-        get label() {
-            return t("plugin.toastNotifications.option.streamingTreatment.label");
-        },
-        get description() {
-            return t("plugin.toastNotifications.option.streamingTreatment.description");
-        },
+        label: () => t(plugin.toastNotifications.option.streamingTreatment.label),
+        description: () => t(plugin.toastNotifications.option.streamingTreatment.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.toastNotifications.option.streamingTreatment.normal"),
-                    value: StreamingTreatment.NORMAL,
-                    default: true
-                },
-                {
-                    label: t("plugin.toastNotifications.option.streamingTreatment.noContent"),
-                    value: StreamingTreatment.NO_CONTENT
-                },
-                {
-                    label: t("plugin.toastNotifications.option.streamingTreatment.ignore"),
-                    value: StreamingTreatment.IGNORE
-                }
-            ];
-        }
+        options: [
+            {
+                label: () => t(plugin.toastNotifications.option.streamingTreatment.normal),
+                value: StreamingTreatment.NORMAL,
+                default: true
+            },
+            {
+                label: () => t(plugin.toastNotifications.option.streamingTreatment.noContent),
+                value: StreamingTreatment.NO_CONTENT
+            },
+            {
+                label: () => t(plugin.toastNotifications.option.streamingTreatment.ignore),
+                value: StreamingTreatment.IGNORE
+            }
+        ]
     },
     notifyFor: {
-        get label() {
-            return t("plugin.toastNotifications.option.notifyFor.label");
-        },
-        get description() {
-            return t("plugin.toastNotifications.option.notifyFor.description");
-        },
+        label: () => t(plugin.toastNotifications.option.notifyFor.label),
+        description: () => t(plugin.toastNotifications.option.notifyFor.description),
         type: OptionType.STRING,
         onChange: () => { notifyFor = stringToList(settings.store.notifyFor); },
         default: ""
     },
     ignoreUsers: {
-        get label() {
-            return t("plugin.toastNotifications.option.ignoreUsers.label");
-        },
-        get description() {
-            return t("plugin.toastNotifications.option.ignoreUsers.description");
-        },
+        label: () => t(plugin.toastNotifications.option.ignoreUsers.label),
+        description: () => t(plugin.toastNotifications.option.ignoreUsers.description),
         type: OptionType.STRING,
         onChange: () => { ignoredUsers = stringToList(settings.store.ignoreUsers); },
         default: ""
     },
     exampleButton: {
-        get label() {
-            return t("plugin.toastNotifications.option.exampleButton.label");
-        },
-        get description() {
-            return t("plugin.toastNotifications.option.exampleButton.description");
-        },
+        label: () => t(plugin.toastNotifications.option.exampleButton.label),
+        description: () => t(plugin.toastNotifications.option.exampleButton.description),
         type: OptionType.COMPONENT,
         component: () =>
             <Button onClick={showExampleNotification}>
-                {t("plugin.toastNotifications.option.exampleButton.show")}
+                {t(plugin.toastNotifications.option.exampleButton.show)}
             </Button>
     }
 });
@@ -290,13 +226,9 @@ const addMention = (id: string, type: string, guildId?: string): ReactNode => {
 
 export default definePlugin({
     name: "ToastNotifications",
-    description: "Show a toast notification whenever you receive a direct message.",
+    description: () => t(plugin.toastNotifications.description),
     authors: [PcDevs.Skully, Devs.Ethan, PcDevs.Buzzy],
     settings,
-
-    get displayDescription() {
-        return t("plugin.toastNotifications.description");
-    },
 
     flux: {
         async MESSAGE_CREATE({ message }: { message: Message; }) {
@@ -360,7 +292,7 @@ export default definePlugin({
             // Handle specific message types.
             switch (message.type) {
                 case MessageType.CALL: {
-                    Notification.body = t("plugin.toastNotifications.notification.call");
+                    Notification.body = t(plugin.toastNotifications.notification.call);
                     break;
                 }
                 case MessageType.RECIPIENT_ADD: {
@@ -368,7 +300,7 @@ export default definePlugin({
                     const user = message.mentions[0];
                     const targetUser = UserStore.getUser((user as any).id);
 
-                    Notification.body = t("plugin.toastNotifications.notification.recipient.add", { target: getName(targetUser), actor: getName(actor) });
+                    Notification.body = t(plugin.toastNotifications.notification.recipient.add, { target: getName(targetUser), actor: getName(actor) });
                     break;
                 }
                 case MessageType.RECIPIENT_REMOVE: {
@@ -377,34 +309,34 @@ export default definePlugin({
                     const targetUser = UserStore.getUser((user as any).id);
 
                     if (actor.id !== targetUser.id) {
-                        Notification.body = t("plugin.toastNotifications.notification.recipient.remove", { target: getName(targetUser), actor: getName(actor) });
+                        Notification.body = t(plugin.toastNotifications.notification.recipient.remove, { target: getName(targetUser), actor: getName(actor) });
                     } else {
-                        Notification.body = t("plugin.toastNotifications.notification.recipient.left");
+                        Notification.body = t(plugin.toastNotifications.notification.recipient.left);
                     }
                     break;
                 }
                 case MessageType.CHANNEL_NAME_CHANGE: {
-                    Notification.body = t("plugin.toastNotifications.notification.channel.change.name", { name: message.content });
+                    Notification.body = t(plugin.toastNotifications.notification.channel.change.name, { name: message.content });
                     break;
                 }
                 case MessageType.CHANNEL_ICON_CHANGE: {
-                    Notification.body = t("plugin.toastNotifications.notification.channel.change.icon");
+                    Notification.body = t(plugin.toastNotifications.notification.channel.change.icon);
                     break;
                 }
                 case MessageType.CHANNEL_PINNED_MESSAGE: {
-                    Notification.body = t("plugin.toastNotifications.notification.channel.pinned");
+                    Notification.body = t(plugin.toastNotifications.notification.channel.pinned);
                     break;
                 }
             }
 
             // Message contains an embed.
             if (message.embeds?.length !== 0) {
-                Notification.body = notificationText || t("plugin.toastNotifications.notification.sent.embed");
+                Notification.body = notificationText || t(plugin.toastNotifications.notification.sent.embed);
             }
 
             // Message contains a sticker.
             if (message?.stickerItems) {
-                Notification.body = notificationText || t("plugin.toastNotifications.notification.sent.sticker");
+                Notification.body = notificationText || t(plugin.toastNotifications.notification.sent.sticker);
             }
 
             // Message contains an attachment.
@@ -415,7 +347,7 @@ export default definePlugin({
                     Notification.body = notificationText || ""; // Dont show any body
                     Notification.image = images[0].url;
                 } else {
-                    Notification.body += ` [${t("plugin.toastNotifications.notification.sent.attachment")} ${message.attachments[0].filename}]`;
+                    Notification.body += ` [${t(plugin.toastNotifications.notification.sent.attachment)} ${message.attachments[0].filename}]`;
                 }
             }
 
@@ -455,7 +387,7 @@ export default definePlugin({
             Notification.body = limitMessageLength(Notification.body, Notification.attachments > 0);
 
             if (isStreaming && settings.store.streamingTreatment === StreamingTreatment.NO_CONTENT) {
-                Notification.body = t("plugin.toastNotifications.notification.redacted");
+                Notification.body = t(plugin.toastNotifications.notification.redacted);
             }
 
             if (!settings.store.renderImages) {
@@ -551,12 +483,12 @@ async function handleGuildMessage(message: Message) {
     };
 
     if (message.embeds?.length !== 0) {
-        Notification.body = notificationText || t("plugin.toastNotifications.notification.sent.embed");
+        Notification.body = notificationText || t(plugin.toastNotifications.notification.sent.embed);
     }
 
     // Message contains a sticker.
     if (message?.stickerItems) {
-        Notification.body = notificationText || t("plugin.toastNotifications.notification.sent.sticker");
+        Notification.body = notificationText || t(plugin.toastNotifications.notification.sent.sticker);
     }
 
     // Message contains an attachment.
@@ -567,7 +499,7 @@ async function handleGuildMessage(message: Message) {
             Notification.body = notificationText || ""; // Dont show any body
             Notification.image = images[0].url;
         } else {
-            Notification.body += ` [${t("plugin.toastNotifications.notification.sent.attachment")} ${message.attachments[0].filename}]`;
+            Notification.body += ` [${t(plugin.toastNotifications.notification.sent.attachment)} ${message.attachments[0].filename}]`;
         }
     }
 
@@ -609,7 +541,7 @@ async function handleGuildMessage(message: Message) {
     const isStreaming = findStore("ApplicationStreamingStore").getAnyStreamForUser(UserStore.getCurrentUser()?.id);
 
     if (isStreaming && settings.store.streamingTreatment === StreamingTreatment.NO_CONTENT) {
-        Notification.body = t("plugin.toastNotifications.notification.redacted");
+        Notification.body = t(plugin.toastNotifications.notification.redacted);
     }
 
     if (!settings.store.renderImages) {
@@ -637,8 +569,8 @@ async function relationshipAdd(user: User, type: Number) {
     }
 
     if (type === RelationshipType.FRIEND) {
-        Notification.title = t("plugin.toastNotifications.notification.friend.accept", { user: user.username });
-        Notification.body = t("plugin.toastNotifications.notification.friend.acceptBody");
+        Notification.title = t(plugin.toastNotifications.notification.friend.accept, { user: user.username });
+        Notification.body = t(plugin.toastNotifications.notification.friend.acceptBody);
         Notification.onClick = () => switchChannels(null, user.id);
 
 
@@ -646,8 +578,8 @@ async function relationshipAdd(user: User, type: Number) {
 
     } else if (type === RelationshipType.INCOMING_REQUEST) {
 
-        Notification.title = t("plugin.toastNotifications.notification.friend.request", { user: user.username });
-        Notification.body = t("plugin.toastNotifications.notification.friend.requestBody");
+        Notification.title = t(plugin.toastNotifications.notification.friend.request, { user: user.username });
+        Notification.body = t(plugin.toastNotifications.notification.friend.requestBody);
         Notification.onClick = () => switchChannels(null, "");
 
         await showNotification(Notification);
@@ -656,9 +588,9 @@ async function relationshipAdd(user: User, type: Number) {
 
 function showExampleNotification(): Promise<void> {
     const Notification: NotificationData = {
-        title: t("plugin.toastNotifications.notification.example.title"),
+        title: t(plugin.toastNotifications.notification.example.title),
         icon: `https://cdn.discordapp.com/avatars/${UserStore.getCurrentUser().id}/${UserStore.getCurrentUser().avatar}.png?size=128`,
-        body: t("plugin.toastNotifications.notification.example.body"),
+        body: t(plugin.toastNotifications.notification.example.body),
         attachments: 0,
         permanent: false
     };

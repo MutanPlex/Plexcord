@@ -6,7 +6,7 @@
  */
 
 import { addContextMenuPatch, NavContextMenuPatchCallback, removeContextMenuPatch } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { openLogModal } from "@plugins/messageLoggerEnhanced/components/LogsModal";
 import { deleteMessageIDB } from "@plugins/messageLoggerEnhanced/db";
 import { settings } from "@plugins/messageLoggerEnhanced/index";
@@ -59,7 +59,7 @@ function renderOpenLogs(idType: idKeys, props: any) {
     return (
         <Menu.MenuItem
             id={`open-logs-for-${idType.toLowerCase()}`}
-            label={t("plugin.messageLoggerEnhanced.context.openLogsFor", { name: translatedType })}
+            label={t(plugin.messageLoggerEnhanced.context.openLogsFor, { name: translatedType })}
             action={() => openLogModal(`${idType.toLowerCase()}:${id}`)}
         />
     );
@@ -73,7 +73,7 @@ export const contextMenuPath: NavContextMenuPatchCallback = (children, props) =>
             children.push(
                 <Menu.MenuItem
                     id="remove-message"
-                    label={props.message?.deleted ? t("plugin.messageLoggerEnhanced.context.removeMessage") : t("plugin.messageLoggerEnhanced.context.removeMessageHistory")}
+                    label={props.message?.deleted ? t(plugin.messageLoggerEnhanced.context.removeMessage) : t(plugin.messageLoggerEnhanced.context.removeMessageHistory)}
                     color="danger"
                     action={() =>
                         deleteMessageIDB(props.message.id)
@@ -90,7 +90,7 @@ export const contextMenuPath: NavContextMenuPatchCallback = (children, props) =>
                                 }
                             }).catch(() => Toasts.show({
                                 type: Toasts.Type.FAILURE,
-                                message: t("plugin.messageLoggerEnhanced.failedToRemove"),
+                                message: t(plugin.messageLoggerEnhanced.failedToRemove),
                                 id: Toasts.genId()
                             }))
 
@@ -102,12 +102,12 @@ export const contextMenuPath: NavContextMenuPatchCallback = (children, props) =>
         children.push(
             <Menu.MenuItem
                 id="message-logger"
-                label={t("plugin.messageLoggerEnhanced.context.title")}
+                label={t(plugin.messageLoggerEnhanced.context.title)}
             >
 
                 <Menu.MenuItem
                     id="open-logs"
-                    label={t("plugin.messageLoggerEnhanced.context.openLogs")}
+                    label={t(plugin.messageLoggerEnhanced.context.openLogs)}
                     action={() => openLogModal()}
                 />
 
@@ -130,7 +130,7 @@ export const contextMenuPath: NavContextMenuPatchCallback = (children, props) =>
                             <Menu.MenuSeparator />
                             <Menu.MenuItem
                                 id="hide-from-message-loggers"
-                                label={t("plugin.messageLoggerEnhanced.context.deleteMessageHide")}
+                                label={t(plugin.messageLoggerEnhanced.context.deleteMessageHide)}
                                 color="danger"
 
                                 action={async () => {

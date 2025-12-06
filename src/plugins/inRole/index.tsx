@@ -8,7 +8,7 @@
 import "./style.css";
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, sendBotMessage } from "@api/Commands";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { getUserSettingLazy } from "@api/UserSettings";
 import { InfoIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
@@ -35,13 +35,9 @@ function getMembersInRole(roleId: string, guildId: string) {
 
 export default definePlugin({
     name: "InRole",
-    description: "Know who is in a role with the role context menu or /inrole command (read plugin info!)",
+    description: () => t(plugin.inRole.description),
     authors: [Devs.nin0dev],
     dependencies: ["UserSettingsAPI"],
-
-    get displayDescription() {
-        return t("plugin.inRole.description");
-    },
 
     start() {
         // DeveloperMode needs to be enabled for the context menu to be shown
@@ -50,11 +46,11 @@ export default definePlugin({
     settingsAboutComponent: () => {
         return (
             <>
-                <Paragraph style={{ fontSize: "1.2rem", marginTop: "15px", fontWeight: "bold" }}>{Parser.parse(":warning:")} {t("plugin.inRole.modal.about.title")}</Paragraph>
-                <Paragraph style={{ marginTop: "10px", fontWeight: "500" }}>{t("plugin.inRole.modal.about.description")}:</Paragraph>
-                <Paragraph>• {t("plugin.inRole.modal.about.list.one")}</Paragraph>
-                <Paragraph>• {t("plugin.inRole.modal.about.list.two")}</Paragraph>
-                <Paragraph>• {t("plugin.inRole.modal.about.list.three")}</Paragraph>
+                <Paragraph style={{ fontSize: "1.2rem", marginTop: "15px", fontWeight: "bold" }}>{Parser.parse(":warning:")} {t(plugin.inRole.modal.about.title)}</Paragraph>
+                <Paragraph style={{ marginTop: "10px", fontWeight: "500" }}>{t(plugin.inRole.modal.about.description)}:</Paragraph>
+                <Paragraph>• {t(plugin.inRole.modal.about.list.one)}</Paragraph>
+                <Paragraph>• {t(plugin.inRole.modal.about.list.two)}</Paragraph>
+                <Paragraph>• {t(plugin.inRole.modal.about.list.three)}</Paragraph>
             </>
         );
     },
@@ -62,18 +58,12 @@ export default definePlugin({
     commands: [
         {
             name: "inrole",
-            description: "Know who is in a role",
-            get displayDescription() {
-                return t("plugin.inRole.command.inrole.description");
-            },
+            description: () => t(plugin.inRole.command.inrole.description),
             inputType: ApplicationCommandInputType.BUILT_IN,
             options: [
                 {
                     name: "role",
-                    description: "The role",
-                    get displayDescription() {
-                        return t("plugin.inRole.command.inrole.role");
-                    },
+                    description: () => t(plugin.inRole.command.inrole.role),
                     type: ApplicationCommandOptionType.ROLE,
                     required: true
                 },
@@ -81,7 +71,7 @@ export default definePlugin({
             execute: (args, ctx) => {
                 // Guild check
                 if (!ctx.guild) {
-                    return sendBotMessage(ctx.channel.id, { author: { username: "Plexcord" }, content: t("plugin.inRole.command.inrole.noGuild") });
+                    return sendBotMessage(ctx.channel.id, { author: { username: "Plexcord" }, content: t(plugin.inRole.command.inrole.noGuild) });
                 }
                 const role = args[0].value;
                 showInRoleModal(getMembersInRole(role, ctx.guild.id), role, ctx.channel.id);
@@ -102,7 +92,7 @@ export default definePlugin({
             children.push(
                 <Menu.MenuItem
                     id="pc-view-inrole"
-                    label={t("plugin.inRole.context.view")}
+                    label={t(plugin.inRole.context.view)}
                     action={() => {
                         showInRoleModal(getMembersInRole(role.id, guild.id), role.id, channel.id);
                     }}
@@ -128,7 +118,7 @@ export default definePlugin({
             children.push(
                 <Menu.MenuItem
                     id="pc-view-inrole"
-                    label={t("plugin.inRole.context.view")}
+                    label={t(plugin.inRole.context.view)}
                     action={() => {
                         showInRoleModal(getMembersInRole(role.id, guild.id), role.id, channel.id);
                     }}

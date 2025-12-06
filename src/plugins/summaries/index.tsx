@@ -6,7 +6,7 @@
  */
 
 import * as DataStore from "@api/DataStore";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { hasGuildFeature } from "@utils/discord";
@@ -19,12 +19,8 @@ const createSummaryFromServer = findByCodeLazy(".people)),startId:", ".type}");
 
 const settings = definePluginSettings({
     summaryExpiryThresholdDays: {
-        get label() {
-            return t("plugin.summaries.option.summaryExpiryThresholdDays.label");
-        },
-        get description() {
-            return t("plugin.summaries.option.summaryExpiryThresholdDays.description");
-        },
+        label: () => t(plugin.summaries.option.summaryExpiryThresholdDays.label),
+        description: () => t(plugin.summaries.option.summaryExpiryThresholdDays.description),
         type: OptionType.SLIDER,
         markers: [1, 3, 5, 7, 10, 15, 20, 25, 30],
         stickToMarkers: false,
@@ -58,13 +54,9 @@ interface ChannelSummaries {
 
 export default definePlugin({
     name: "Summaries",
-    description: "Enables Discord's experimental Summaries feature on every server, displaying AI generated summaries of conversations",
+    description: () => t(plugin.summaries.description),
     authors: [Devs.mantikafasi],
     settings,
-
-    get displayDescription() {
-        return t("plugin.summaries.description");
-    },
 
     patches: [
         {

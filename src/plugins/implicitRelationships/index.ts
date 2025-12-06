@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
@@ -30,12 +30,8 @@ const UserAffinitiesStore = findStoreLazy("UserAffinitiesV2Store");
 
 export default definePlugin({
     name: "ImplicitRelationships",
-    description: "Shows your implicit relationships in the Friends tab.",
+    description: () => t(plugin.implicitRelationships.description),
     authors: [Devs.Dolfies],
-
-    get displayDescription() {
-        return t("plugin.implicitRelationships.description");
-    },
 
     patches: [
         // Counts header
@@ -115,12 +111,8 @@ export default definePlugin({
     settings: definePluginSettings(
         {
             sortByAffinity: {
-                get label() {
-                    return t("plugin.implicitRelationships.option.sortByAffinity.label");
-                },
-                get description() {
-                    return t("plugin.implicitRelationships.option.sortByAffinity.description");
-                },
+                label: () => t(plugin.implicitRelationships.option.sortByAffinity.label),
+                description: () => t(plugin.implicitRelationships.option.sortByAffinity.description),
                 type: OptionType.BOOLEAN,
                 default: true,
                 restartNeeded: true
@@ -135,7 +127,7 @@ export default definePlugin({
     },
 
     getImplicitLabel() {
-        return t("plugin.implicitRelationships.implicit");
+        return t(plugin.implicitRelationships.implicit);
     },
 
     async fetchImplicitRelationships() {
@@ -187,6 +179,6 @@ export default definePlugin({
     },
 
     start() {
-        Constants.FriendsSections.IMPLICIT = t("plugin.implicitRelationships.implicit");
+        Constants.FriendsSections.IMPLICIT = t(plugin.implicitRelationships.implicit);
     }
 });

@@ -8,7 +8,7 @@
 import "./styles.css";
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Channel, Guild, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -105,7 +105,7 @@ const MakeContextMenu = (id: string, guildId: string | null) => {
     return (
         <Menu.MenuItem
             id={`pc-sidebar-chat-${id}`}
-            label={t("plugin.sidebarChat.context.label")}
+            label={t(plugin.sidebarChat.context.label)}
             action={() => {
                 FluxDispatcher.dispatch({
                     // @ts-ignore
@@ -148,11 +148,7 @@ const handleToggle = () => {
 export default definePlugin({
     name: "SidebarChat",
     authors: [Devs.Joona],
-    description: "Open a another channel or a DM as a sidebar or as a popout",
-
-    get displayDescription() {
-        return t("plugin.sidebarChat.description");
-    },
+    description: () => t(plugin.sidebarChat.description),
 
     patches: [
         {
@@ -182,11 +178,9 @@ export default definePlugin({
         "thread-context": ChannelContextPatch,
         "gdm-context": ChannelContextPatch,
     },
-    get toolboxActions() {
-        return {
-            [t("plugin.sidebarChat.toolbox.label")]: (() => handleToggle())
-        };
-    },
+    toolboxActions: () => ({
+        [t(plugin.sidebarChat.toolbox.label)]: (() => handleToggle())
+    }),
 
     renderSidebar() {
         const { guild, channel /* width*/ } = useStateFromStores(
@@ -321,9 +315,9 @@ const Header = ({ guild, channel }: { guild: Guild; channel: Channel; }) => {
         <HeaderBar
             toolbar={
                 <>
-                    <HeaderBarIcon icon={ArrowsLeftRightIcon} tooltip={t("plugin.sidebarChat.modal.switch")} onClick={switchChannels} />
-                    <HeaderBarIcon icon={WindowLaunchIcon} tooltip={t("plugin.sidebarChat.modal.popout")} onClick={openPopout} />
-                    <HeaderBarIcon icon={XSmallIcon} tooltip={t("plugin.sidebarChat.modal.close")} onClick={closeSidebar} />
+                    <HeaderBarIcon icon={ArrowsLeftRightIcon} tooltip={t(plugin.sidebarChat.modal.switch)} onClick={switchChannels} />
+                    <HeaderBarIcon icon={WindowLaunchIcon} tooltip={t(plugin.sidebarChat.modal.popout)} onClick={openPopout} />
+                    <HeaderBarIcon icon={XSmallIcon} tooltip={t(plugin.sidebarChat.modal.close)} onClick={closeSidebar} />
                 </>
             }
         >

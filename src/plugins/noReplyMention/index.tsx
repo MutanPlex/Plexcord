@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import type { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -26,54 +26,36 @@ import { ChannelStore, GuildMemberStore } from "@webpack/common";
 
 const settings = definePluginSettings({
     userList: {
-        get label() {
-            return t("plugin.noReplyMention.option.userList.label");
-        },
-        get description() {
-            return t("plugin.noReplyMention.option.userList.description");
-        },
+        label: () => t(plugin.noReplyMention.option.userList.label),
+        description: () => t(plugin.noReplyMention.option.userList.description),
         type: OptionType.STRING,
         default: "1234567890123445,1234567890123445",
     },
     roleList: {
-        get label() {
-            return t("plugin.noReplyMention.option.roleList.label");
-        },
-        get description() {
-            return t("plugin.noReplyMention.option.roleList.description");
-        },
+        label: () => t(plugin.noReplyMention.option.roleList.label),
+        description: () => t(plugin.noReplyMention.option.roleList.description),
         type: OptionType.STRING,
         default: "1234567890123445,1234567890123445",
     },
     shouldPingListed: {
-        get label() {
-            return t("plugin.noReplyMention.option.shouldPingListed.label");
-        },
-        get description() {
-            return t("plugin.noReplyMention.option.shouldPingListed.description");
-        },
+        label: () => t(plugin.noReplyMention.option.shouldPingListed.label),
+        description: () => t(plugin.noReplyMention.option.shouldPingListed.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.noReplyMention.option.shouldPingListed.dontPing"),
-                    value: false,
-                },
-                {
-                    label: t("plugin.noReplyMention.option.shouldPingListed.onlyPing"),
-                    value: true,
-                    default: true,
-                },
-            ];
-        },
+        options: [
+            {
+                label: () => t(plugin.noReplyMention.option.shouldPingListed.dontPing),
+                value: false,
+            },
+            {
+                label: () => t(plugin.noReplyMention.option.shouldPingListed.onlyPing),
+                value: true,
+                default: true,
+            },
+        ],
     },
     inverseShiftReply: {
-        get label() {
-            return t("plugin.noReplyMention.option.inverseShiftReply.label");
-        },
-        get description() {
-            return t("plugin.noReplyMention.option.inverseShiftReply.description");
-        },
+        label: () => t(plugin.noReplyMention.option.inverseShiftReply.label),
+        description: () => t(plugin.noReplyMention.option.inverseShiftReply.description),
         type: OptionType.BOOLEAN,
         default: false,
     }
@@ -81,13 +63,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "NoReplyMention",
-    description: "Disables reply pings by default",
+    description: () => t(plugin.noReplyMention.description),
     authors: [Devs.DustyAngel47, Devs.rae, Devs.pylix, Devs.outfoxxed],
     settings,
-
-    get displayDescription() {
-        return t("plugin.noReplyMention.description");
-    },
 
     shouldMention(message: Message, isHoldingShift: boolean) {
         let isListed = settings.store.userList.includes(message.author.id);

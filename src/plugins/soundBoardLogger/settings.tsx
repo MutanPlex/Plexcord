@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
@@ -17,12 +17,8 @@ import { openSoundBoardLog } from "./components/SoundBoardLog";
 
 const settings = definePluginSettings({
     savedIds: {
-        get label() {
-            return t("plugin.soundBoardLogger.option.savedIds.label");
-        },
-        get description() {
-            return t("plugin.soundBoardLogger.option.savedIds.description");
-        },
+        label: () => t(plugin.soundBoardLogger.option.savedIds.label),
+        description: () => t(plugin.soundBoardLogger.option.savedIds.description),
         type: OptionType.COMPONENT,
         component: ({ setValue }) => {
             const value = settings.store.savedIds ?? 50;
@@ -35,9 +31,9 @@ const settings = definePluginSettings({
 
                 if (Number.isNaN(changed) || changed % 1 !== 0 || changed < 0) {
                     let errorMsg = "";
-                    errorMsg += Number.isNaN(changed) ? t("plugin.soundBoardLogger.option.savedIds.notNumber") + "\n" : "";
-                    errorMsg += (changed % 1 !== 0) ? t("plugin.soundBoardLogger.option.savedIds.cantDecimal") + "\n" : "";
-                    errorMsg += (changed < 0) ? t("plugin.soundBoardLogger.option.savedIds.negativeNumber") + "\n" : "";
+                    errorMsg += Number.isNaN(changed) ? t(plugin.soundBoardLogger.option.savedIds.notNumber) + "\n" : "";
+                    errorMsg += (changed % 1 !== 0) ? t(plugin.soundBoardLogger.option.savedIds.cantDecimal) + "\n" : "";
+                    errorMsg += (changed < 0) ? t(plugin.soundBoardLogger.option.savedIds.cantNegative) + "\n" : "";
                     setErrorMessage(errorMsg);
                     return;
                 } else {
@@ -57,15 +53,15 @@ const settings = definePluginSettings({
 
             return (
                 <section>
-                    <Heading>{t("plugin.soundBoardLogger.option.savedIds.heading")}</Heading>
+                    <Heading>{t(plugin.soundBoardLogger.option.savedIds.heading)}</Heading>
                     <TextInput
                         type="number"
                         pattern="-?[0-9]+"
                         value={state}
                         onChange={handleChange}
-                        placeholder={t("plugin.soundBoardLogger.option.savedIds.placeholder")}
+                        placeholder={t(plugin.soundBoardLogger.option.savedIds.placeholder)}
                     />
-                    {shouldShowWarning && <Paragraph style={{ color: "var(--text-danger)" }}>{t("plugin.soundBoardLogger.option.savedIds.warning")}</Paragraph>}
+                    {shouldShowWarning && <Paragraph style={{ color: "var(--text-danger)" }}>{t(plugin.soundBoardLogger.option.savedIds.warning)}</Paragraph>}
                     {errorMessage && <Paragraph style={{ color: "var(--text-danger)" }}>{errorMessage}</Paragraph>}
                 </section>
             );
@@ -73,12 +69,8 @@ const settings = definePluginSettings({
 
     },
     fileType: {
-        get label() {
-            return t("plugin.soundBoardLogger.option.fileType.label");
-        },
-        get description() {
-            return t("plugin.soundBoardLogger.option.fileType.description");
-        },
+        label: () => t(plugin.soundBoardLogger.option.fileType.label),
+        description: () => t(plugin.soundBoardLogger.option.fileType.description),
         type: OptionType.SELECT,
         options: [
             { label: ".ogg", value: ".ogg", default: true },
@@ -87,39 +79,27 @@ const settings = definePluginSettings({
         ],
     },
     openLogs: {
-        get label() {
-            return t("plugin.soundBoardLogger.option.openLogs.label");
-        },
-        get description() {
-            return t("plugin.soundBoardLogger.option.openLogs.description");
-        },
+        label: () => t(plugin.soundBoardLogger.option.openLogs.label),
+        description: () => t(plugin.soundBoardLogger.option.openLogs.description),
         type: OptionType.COMPONENT,
         component: () =>
-            <Button variant="secondary" size="small" onClick={openSoundBoardLog}>{t("plugin.soundBoardLogger.option.openLogs.button")}</Button>
+            <Button variant="secondary" size="small" onClick={openSoundBoardLog}>{t(plugin.soundBoardLogger.option.openLogs.button)}</Button>
     },
     soundVolume: {
-        get label() {
-            return t("plugin.soundBoardLogger.option.soundVolume.label");
-        },
-        get description() {
-            return t("plugin.soundBoardLogger.option.soundVolume.description");
-        },
+        label: () => t(plugin.soundBoardLogger.option.soundVolume.label),
+        description: () => t(plugin.soundBoardLogger.option.soundVolume.description),
         type: OptionType.SLIDER,
         default: 0.5,
         markers: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
     },
     iconLocation: {
-        get label() {
-            return t("plugin.soundBoardLogger.option.iconLocation.label");
-        },
-        get description() {
-            return t("plugin.soundBoardLogger.option.iconLocation.description");
-        },
+        label: () => t(plugin.soundBoardLogger.option.iconLocation.label),
+        description: () => t(plugin.soundBoardLogger.option.iconLocation.description),
         type: OptionType.SELECT,
         get options() {
             return [
-                { label: t("plugin.soundBoardLogger.option.iconLocation.toolbar"), value: "toolbar", default: true },
-                { label: t("plugin.soundBoardLogger.option.iconLocation.chatInput"), value: "chat" }
+                { label: t(plugin.soundBoardLogger.option.iconLocation.toolbar), value: "toolbar", default: true },
+                { label: t(plugin.soundBoardLogger.option.iconLocation.chatInput), value: "chat" }
             ];
         },
         restartNeeded: true

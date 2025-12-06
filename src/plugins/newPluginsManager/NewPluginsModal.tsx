@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, plugins, t } from "@api/i18n";
 import { Settings, useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
@@ -55,30 +55,34 @@ export function NewPluginsModal({ modalProps, newPlugins, newSettings }: { modal
         return o;
     }, []);
 
+    const getName = (p: any) => typeof p.name === "function" ? p.name() : p.name;
+
     const mapPlugins = (array: string[]) => array.map(pn => Plugins[pn])
-        .sort((a, b) => a.name.localeCompare(b.name));
+        .sort((a, b) => getName(a).localeCompare(getName(b)));
 
     const sortedPlugins = useMemo(() => [
         ...mapPlugins([...newPlugins]),
         ...mapPlugins([...newSettings.keys()].filter(p => !newPlugins.has(p)))
     ], []);
 
-    const plugins = [] as JSX.Element[];
+    const pluginCards = [] as JSX.Element[];
     const requiredPlugins = [] as JSX.Element[];
 
     for (const p of sortedPlugins) {
+        const pluginName = getName(p) as string;
+
         if (p.hidden)
             continue;
 
-        const isRequired = p.required || depMap[p.name]?.some(d => settings.plugins[d].enabled);
+        const isRequired = p.required || depMap[pluginName]?.some(d => settings.plugins[d].enabled);
 
         if (isRequired) {
             const tooltipText = p.required
-                ? t("plugins.required.this")
-                : <PluginDependencyList deps={depMap[p.name]?.filter(d => settings.plugins[d].enabled)} />;
+                ? t(plugins.required.this)
+                : <PluginDependencyList deps={depMap[pluginName]?.filter(d => settings.plugins[d].enabled)} />;
 
             requiredPlugins.push(
-                <Tooltip text={tooltipText} key={p.name}>
+                <Tooltip text={tooltipText} key={pluginName}>
                     {({ onMouseLeave, onMouseEnter }) => (
                         <PluginCard
                             onMouseLeave={onMouseLeave}
@@ -89,14 +93,14 @@ export function NewPluginsModal({ modalProps, newPlugins, newSettings }: { modal
                             }}
                             disabled={true}
                             plugin={p}
-                            key={p.name}
-                            isNew={newPlugins.has(p.name)}
+                            key={pluginName}
+                            isNew={newPlugins.has(pluginName)}
                         />
                     )}
                 </Tooltip>
             );
         } else {
-            plugins.push(
+            pluginCards.push(
                 <PluginCard
                     onRestartNeeded={name => {
                         changes.handleChange(name);
@@ -104,8 +108,8 @@ export function NewPluginsModal({ modalProps, newPlugins, newSettings }: { modal
                     }}
                     disabled={false}
                     plugin={p}
-                    key={p.name}
-                    isNew={newPlugins.has(p.name)}
+                    key={pluginName}
+                    isNew={newPlugins.has(pluginName)}
                 />
             );
         }
@@ -114,8 +118,8 @@ export function NewPluginsModal({ modalProps, newPlugins, newSettings }: { modal
 
     return <ModalRoot {...modalProps} size={ModalSize.MEDIUM} >
         <ModalHeader>
-            <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t("plugin.newPluginsManager.modal.title")} ({[...plugins, ...requiredPlugins].length})</BaseText>
-            <Tooltip text={t("plugin.newPluginsManager.modal.tooltip")}>
+            <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t(plugin.newPluginsManager.modal.title)} ({[...pluginCards, ...requiredPlugins].length})</BaseText>
+            <Tooltip text={t(plugin.newPluginsManager.modal.tooltip)}>
                 {tooltipProps =>
                     <div {...tooltipProps}>
                         <ModalCloseButton
@@ -128,7 +132,7 @@ export function NewPluginsModal({ modalProps, newPlugins, newSettings }: { modal
         </ModalHeader>
         <ModalContent>
             <div className={cl("grid")}>
-                {[...plugins, ...requiredPlugins]}
+                {[...pluginCards, ...requiredPlugins]}
             </div>
         </ModalContent>
         <ModalFooter className={cl("new-plugins-footer")}>
@@ -148,7 +152,7 @@ export function NewPluginsModal({ modalProps, newPlugins, newSettings }: { modal
                             Settings.plugins.NewPluginsManager.enabled = !settings?.plugins?.NewPluginsManager?.enabled;
                         }}
                     >
-                        <BaseText>{t("plugin.newPluginsManager.modal.dontShowAgain")}</BaseText>
+                        <BaseText>{t(plugin.newPluginsManager.modal.dontShowAgain)}</BaseText>
                     </Checkbox>
                 </div>
             </Flex>
@@ -162,7 +166,7 @@ function ContinueButton(props: { callback: (update: () => void) => void; changes
     return <Tooltip
         tooltipClassName="pc-newPluginsManager-restart-tooltip"
         text={<>
-            {t("plugins.restart.following")}
+            {t(plugins.restart.following)}
             <div className={Margins.bottom8} />
             <ul className="pc-newPluginsManager-restart-list">
                 {props.changes.map(p => <li key={p}>{p}</li>)}
@@ -179,7 +183,7 @@ function ContinueButton(props: { callback: (update: () => void) => void; changes
                     props.changes.hasChanges ? location.reload() : props.close();
                 }}
             >
-                {props.changes.hasChanges ? t("plugins.restart.button.restart") : t("plugins.restart.button.later")}
+                {props.changes.hasChanges ? t(plugins.restart.button.restart) : t(plugins.restart.button.later)}
             </Button>
         }
     </Tooltip>;

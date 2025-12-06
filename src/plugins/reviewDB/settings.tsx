@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { OptionType } from "@utils/types";
@@ -28,64 +28,44 @@ import { cl } from "./utils";
 
 export const settings = definePluginSettings({
     authorize: {
-        get label() {
-            return t("plugin.reviewDB.option.authorize.label");
-        },
+        label: () => t(plugin.reviewDB.option.authorize.label),
         type: OptionType.COMPONENT,
         component: () => (
             <Button onClick={() => authorize()}>
-                {t("plugin.reviewDB.option.authorize.button")}
+                {t(plugin.reviewDB.option.authorize.button)}
             </Button>
         )
     },
     notifyReviews: {
-        get label() {
-            return t("plugin.reviewDB.option.notifyReviews.label");
-        },
-        get description() {
-            return t("plugin.reviewDB.option.notifyReviews.description");
-        },
+        label: () => t(plugin.reviewDB.option.notifyReviews.label),
+        description: () => t(plugin.reviewDB.option.notifyReviews.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     showWarning: {
-        get label() {
-            return t("plugin.reviewDB.option.showWarning.label");
-        },
-        get description() {
-            return t("plugin.reviewDB.option.showWarning.description");
-        },
+        label: () => t(plugin.reviewDB.option.showWarning.label),
+        description: () => t(plugin.reviewDB.option.showWarning.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     hideTimestamps: {
-        get label() {
-            return t("plugin.reviewDB.option.hideTimestamps.label");
-        },
-        get description() {
-            return t("plugin.reviewDB.option.hideTimestamps.description");
-        },
+        label: () => t(plugin.reviewDB.option.hideTimestamps.label),
+        description: () => t(plugin.reviewDB.option.hideTimestamps.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     hideBlockedUsers: {
-        get label() {
-            return t("plugin.reviewDB.option.hideBlockedUsers.label");
-        },
-        get description() {
-            return t("plugin.reviewDB.option.hideBlockedUsers.description");
-        },
+        label: () => t(plugin.reviewDB.option.hideBlockedUsers.label),
+        description: () => t(plugin.reviewDB.option.hideBlockedUsers.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     buttons: {
-        get label() {
-            return t("plugin.reviewDB.option.buttons.label");
-        },
+        label: () => t(plugin.reviewDB.option.buttons.label),
         type: OptionType.COMPONENT,
         component: () => (
             <div className={cl("button-grid")} >
-                <Button onClick={openBlockModal}>{t("plugin.reviewDB.option.buttons.manageBlocked")}</Button>
+                <Button onClick={openBlockModal}>{t(plugin.reviewDB.option.buttons.manageBlocked)}</Button>
 
                 <Button
                     variant="positive"
@@ -93,7 +73,7 @@ export const settings = definePluginSettings({
                         PlexcordNative.native.openExternal("https://github.com/sponsors/mantikafasi");
                     }}
                 >
-                    {t("plugin.reviewDB.option.buttons.support")}
+                    {t(plugin.reviewDB.option.buttons.support)}
                 </Button>
 
                 <Button onClick={async () => {
@@ -104,14 +84,14 @@ export const settings = definePluginSettings({
 
                     PlexcordNative.native.openExternal(url);
                 }}>
-                    {t("plugin.reviewDB.option.buttons.website")}
+                    {t(plugin.reviewDB.option.buttons.website)}
                 </Button>
 
 
                 <Button onClick={() => {
                     PlexcordNative.native.openExternal("https://discord.gg/eWPBSbvznt");
                 }}>
-                    {t("plugin.reviewDB.option.buttons.server")}
+                    {t(plugin.reviewDB.option.buttons.server)}
                 </Button>
             </div >
         )

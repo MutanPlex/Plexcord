@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Channel, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -25,12 +25,8 @@ import { GuildStore } from "@webpack/common";
 
 export default definePlugin({
     name: "ForceOwnerCrown",
-    description: "Force the owner crown next to usernames even if the server is large.",
+    description: () => t(plugin.forceOwnerCrown.description),
     authors: [Devs.D3SOX, Devs.Nickyux],
-
-    get displayDescription() {
-        return t("plugin.forceOwnerCrown.description");
-    },
 
     patches: [
         {

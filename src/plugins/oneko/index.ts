@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings, migratePluginSettings } from "@api/Settings";
 import OnekoPlugin from "@plugins/oneko";
@@ -26,16 +26,12 @@ import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     speed: {
-        get label() {
-            return t("plugin.oneko.option.speed.label");
-        },
-        get description() {
-            return t("plugin.oneko.option.speed.description");
-        },
+        label: () => t(plugin.oneko.option.speed.label),
+        description: () => t(plugin.oneko.option.speed.description),
         type: OptionType.NUMBER,
         default: 10,
         isValid: (value: number) => {
-            if (value && value < 0) return t("plugin.oneko.option.speed.biggerThan");
+            if (value && value < 0) return t(plugin.oneko.option.speed.biggerThan);
             return true;
         },
         onChange: () => {
@@ -57,14 +53,10 @@ const settings = definePluginSettings({
 migratePluginSettings("Oneko", "oneko");
 export default definePlugin({
     name: "Oneko",
-    description: "cat follow mouse (real)",
+    description: () => t(plugin.oneko.description),
     // Listing adryd here because this literally just evals her script
     authors: [Devs.Ven, Devs.adryd],
     settings,
-
-    get displayDescription() {
-        return t("plugin.oneko.description");
-    },
 
     start() {
         fetch("https://raw.githubusercontent.com/adryd325/oneko.js/c4ee66353b11a44e4a5b7e914a81f8d33111555e/oneko.js")

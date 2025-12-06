@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Logger } from "@utils/Logger";
 import { OptionType } from "@utils/types";
@@ -31,9 +31,7 @@ export function getCurrentVoice(voices = window.speechSynthesis?.getVoices()) {
 
 export const settings = definePluginSettings({
     voice: {
-        get label() {
-            return t("plugin.vcNarrator.option.voice.label");
-        },
+        label: () => t(plugin.vcNarrator.option.voice.label),
         type: OptionType.COMPONENT,
         component: VoiceSettingSection,
         get default() {
@@ -41,116 +39,72 @@ export const settings = definePluginSettings({
         }
     },
     volume: {
-        get label() {
-            return t("plugin.vcNarrator.option.volume.label");
-        },
-        get description() {
-            return t("plugin.vcNarrator.option.volume.description");
-        },
+        label: () => t(plugin.vcNarrator.option.volume.label),
+        description: () => t(plugin.vcNarrator.option.volume.description),
         type: OptionType.SLIDER,
         default: 1,
         markers: [0, 0.25, 0.5, 0.75, 1],
         stickToMarkers: false
     },
     rate: {
-        get label() {
-            return t("plugin.vcNarrator.option.rate.label");
-        },
-        get description() {
-            return t("plugin.vcNarrator.option.rate.description");
-        },
+        label: () => t(plugin.vcNarrator.option.rate.label),
+        description: () => t(plugin.vcNarrator.option.rate.description),
         type: OptionType.SLIDER,
         default: 1,
         markers: [0.1, 0.5, 1, 2, 5, 10],
         stickToMarkers: false
     },
     sayOwnName: {
-        get label() {
-            return t("plugin.vcNarrator.option.sayOwnName.label");
-        },
-        get description() {
-            return t("plugin.vcNarrator.option.sayOwnName.description");
-        },
+        label: () => t(plugin.vcNarrator.option.sayOwnName.label),
+        description: () => t(plugin.vcNarrator.option.sayOwnName.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     latinOnly: {
-        get label() {
-            return t("plugin.vcNarrator.option.latinOnly.label");
-        },
-        get description() {
-            return t("plugin.vcNarrator.option.latinOnly.description");
-        },
+        label: () => t(plugin.vcNarrator.option.latinOnly.label),
+        description: () => t(plugin.vcNarrator.option.latinOnly.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     joinMessage: {
-        get label() {
-            return t("plugin.vcNarrator.option.joinMessage.label");
-        },
-        get description() {
-            return t("plugin.vcNarrator.option.joinMessage.description");
-        },
+        label: () => t(plugin.vcNarrator.option.joinMessage.label),
+        description: () => t(plugin.vcNarrator.option.joinMessage.description),
         type: OptionType.STRING,
         default: "{{USER}} joined"
     },
     leaveMessage: {
-        get label() {
-            return t("plugin.vcNarrator.option.leaveMessage.label");
-        },
-        get description() {
-            return t("plugin.vcNarrator.option.leaveMessage.description");
-        },
+        label: () => t(plugin.vcNarrator.option.leaveMessage.label),
+        description: () => t(plugin.vcNarrator.option.leaveMessage.description),
         type: OptionType.STRING,
         default: "{{USER}} left"
     },
     moveMessage: {
-        get label() {
-            return t("plugin.vcNarrator.option.moveMessage.label");
-        },
-        get description() {
-            return t("plugin.vcNarrator.option.moveMessage.description");
-        },
+        label: () => t(plugin.vcNarrator.option.moveMessage.label),
+        description: () => t(plugin.vcNarrator.option.moveMessage.description),
         type: OptionType.STRING,
         default: "{{USER}} moved to {{CHANNEL}}"
     },
     muteMessage: {
-        get label() {
-            return t("plugin.vcNarrator.option.muteMessage.label");
-        },
-        get description() {
-            return t("plugin.vcNarrator.option.muteMessage.description");
-        },
+        label: () => t(plugin.vcNarrator.option.muteMessage.label),
+        description: () => t(plugin.vcNarrator.option.muteMessage.description),
         type: OptionType.STRING,
         default: "{{USER}} muted"
     },
     unmuteMessage: {
-        get label() {
-            return t("plugin.vcNarrator.option.unmuteMessage.label");
-        },
-        get description() {
-            return t("plugin.vcNarrator.option.unmuteMessage.description");
-        },
+        label: () => t(plugin.vcNarrator.option.unmuteMessage.label),
+        description: () => t(plugin.vcNarrator.option.unmuteMessage.description),
         type: OptionType.STRING,
         default: "{{USER}} unmuted"
     },
     deafenMessage: {
-        get label() {
-            return t("plugin.vcNarrator.option.deafenMessage.label");
-        },
-        get description() {
-            return t("plugin.vcNarrator.option.deafenMessage.description");
-        },
+        label: () => t(plugin.vcNarrator.option.deafenMessage.label),
+        description: () => t(plugin.vcNarrator.option.deafenMessage.description),
         type: OptionType.STRING,
         default: "{{USER}} deafened"
     },
     undeafenMessage: {
-        get label() {
-            return t("plugin.vcNarrator.option.undeafenMessage.label");
-        },
-        get description() {
-            return t("plugin.vcNarrator.option.undeafenMessage.description");
-        },
+        label: () => t(plugin.vcNarrator.option.undeafenMessage.label),
+        description: () => t(plugin.vcNarrator.option.undeafenMessage.description),
         type: OptionType.STRING,
         default: "{{USER}} undeafened"
     }

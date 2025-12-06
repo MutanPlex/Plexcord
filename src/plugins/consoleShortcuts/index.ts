@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import { getCurrentChannel, getCurrentGuild } from "@utils/discord";
 import { runtimeHashMessageKey } from "@utils/intlHash";
@@ -235,13 +235,9 @@ const webpackModulesProbablyLoaded = Webpack.onceReady.then(() => sleep(1000));
 
 export default definePlugin({
     name: "ConsoleShortcuts",
-    description: "Adds shorter Aliases for many things on the window. Run `shortcutList` for a list.",
+    description: () => t(plugin.consoleShortcuts.description),
     authors: [Devs.Ven],
     startAt: StartAt.Init,
-
-    get displayDescription() {
-        return t("plugin.consoleShortcuts.description");
-    },
 
     patches: [
         {

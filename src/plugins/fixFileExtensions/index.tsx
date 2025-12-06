@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Settings } from "@api/Settings";
 import { CloudUpload } from "@plexcord/discord-types";
 import { tarExtMatcher } from "@plugins/anonymiseFileNames";
@@ -29,13 +29,9 @@ export const reverseExtensionMap = Object.entries(extensionMap).reduce((acc, [ta
 
 export default definePlugin({
     name: "FixFileExtensions",
+    description: () => t(plugin.fixFileExtensions.description),
     authors: [Devs.thororen, PcDevs.MutanPlex],
-    description: "Fixes file extensions by renaming them to a compatible supported format if possible",
     reporterTestable: ReporterTestable.None,
-
-    get displayDescription() {
-        return t("plugin.fixFileExtensions.description");
-    },
 
     patches: [
         // Taken from AnonymiseFileNames

@@ -82,7 +82,7 @@ export async function maybePromptToUpdate(confirmMessage: string, checkForDev = 
         const isOutdated = await checkForUpdates();
         if (isOutdated) {
             const wantsUpdate = confirm(confirmMessage);
-            if (wantsUpdate && isNewer) return alert(t("updater.error.local"));
+            if (wantsUpdate && isNewer) return alert(t(updater.github.local));
             if (wantsUpdate) {
                 await update();
                 relaunch();
@@ -90,6 +90,6 @@ export async function maybePromptToUpdate(confirmMessage: string, checkForDev = 
         }
     } catch (err) {
         UpdateLogger.error(err);
-        alert(t("updater.error.failed"));
+        alert(t(updater.error.failed));
     }
 }

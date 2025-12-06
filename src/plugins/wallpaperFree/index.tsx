@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Channel } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -21,19 +21,13 @@ import { WallpaperFreeStore } from "./store";
 
 export const settings = definePluginSettings({
     globalDefault: {
-        get label() {
-            return t("plugin.wallpaperFree.option.globalDefault.label");
-        },
-        get description() {
-            return t("plugin.wallpaperFree.option.globalDefault.description");
-        },
+        label: () => t(plugin.wallpaperFree.option.globalDefault.label),
+        description: () => t(plugin.wallpaperFree.option.globalDefault.description),
         type: OptionType.COMPONENT,
         component: GlobalDefaultComponent
     },
     stylingTips: {
-        get label() {
-            return t("plugin.wallpaperFree.option.stylingTips.label");
-        },
+        label: () => t(plugin.wallpaperFree.option.stylingTips.label),
         type: OptionType.COMPONENT,
         component: TipsComponent,
     },
@@ -41,12 +35,8 @@ export const settings = definePluginSettings({
 
 export default definePlugin({
     name: "WallpaperFree",
+    description: () => t(plugin.wallpaperFree.description),
     authors: [Devs.Joona],
-    description: "Recreation of the old DM wallpaper experiment; Set a background image for any channel, user or server.",
-
-    get displayDescription() {
-        return t("plugin.wallpaperFree.description");
-    },
 
     patches: [
         {

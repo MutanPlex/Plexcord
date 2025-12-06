@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugins, t } from "@api/i18n";
 import { PluginOptionSelect } from "@utils/types";
 import { React, Select, useState } from "@webpack/common";
 
@@ -28,6 +28,15 @@ export function SelectSetting({ option, pluginSettings, definedSettings, onChang
 
     const [state, setState] = useState<any>(def ?? null);
     const [error, setError] = useState<string | null>(null);
+
+    // Resolve function labels to strings
+    const resolvedOptions = React.useMemo(() =>
+        option.options.map(opt => ({
+            ...opt,
+            label: typeof opt.label === "function" ? opt.label() : opt.label
+        })),
+        [option.options]
+    );
 
     function handleChange(newValue: any) {
         const isValid = option.isValid?.call(definedSettings, newValue) ?? true;
@@ -43,8 +52,8 @@ export function SelectSetting({ option, pluginSettings, definedSettings, onChang
     return (
         <SettingsSection name={id} description={option.description} label={option.label} error={error}>
             <Select
-                placeholder={option.placeholder ?? t("plugins.placeholder.select")}
-                options={option.options}
+                placeholder={(option.placeholder ? (typeof option.placeholder === "function" ? option.placeholder() : option.placeholder) : undefined) ?? t(plugins.placeholder.select)}
+                options={resolvedOptions}
                 maxVisibleItems={5}
                 closeOnSelect={true}
                 select={handleChange}

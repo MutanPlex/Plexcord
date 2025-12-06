@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Auth } from "@plugins/reviewDB/auth";
@@ -45,7 +46,7 @@ function Modal({ modalProps, modalKey, discordId, name, type }: { modalProps: an
             <ModalRoot {...modalProps} size={ModalSize.MEDIUM}>
                 <ModalHeader>
                     <BaseText size="lg" weight="semibold" className={cl("modal-header")}>
-                        {name}'s Reviews
+                        {name}{t(plugin.reviewDB.modal.reviews.title)}
                         {!!reviewCount && <span> ({reviewCount} Reviews)</span>}
                     </BaseText>
                     <ModalCloseButton onClick={modalProps.onClose} />

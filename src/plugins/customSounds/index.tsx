@@ -9,7 +9,7 @@ import "./styles.css";
 
 import { addAudioProcessor, AudioProcessor, PreprocessAudioData, removeAudioProcessor } from "@api/AudioPlayer";
 import { get as getFromDataStore } from "@api/DataStore";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
@@ -217,7 +217,7 @@ const soundSettings = Object.fromEntries(
         type.id,
         {
             type: OptionType.STRING,
-            description: t("plugin.customSounds.toast.overrideDescription", { soundName: type.name }),
+            description: t(plugin.customSounds.toast.overrideDescription, { soundName: type.name }),
             default: JSON.stringify(makeEmptyOverride()),
             hidden: true
         }
@@ -248,7 +248,7 @@ const settings = definePluginSettings({
                 });
                 dataUriCache.clear();
                 setResetTrigger(prev => prev + 1);
-                showToast(t("plugin.customSounds.toast.reset"));
+                showToast(t(plugin.customSounds.toast.reset));
             };
 
             const triggerFileUpload = () => {
@@ -280,10 +280,10 @@ const settings = definePluginSettings({
                             }
 
                             setResetTrigger(prev => prev + 1);
-                            showToast(t("plugin.customSounds.toast.imported"));
+                            showToast(t(plugin.customSounds.toast.imported));
                         } catch (error) {
                             console.error("Error importing settings:", error);
-                            showToast(t("plugin.customSounds.toast.importError"));
+                            showToast(t(plugin.customSounds.toast.importError));
                         }
                     };
 
@@ -317,7 +317,7 @@ const settings = definePluginSettings({
                 a.click();
                 URL.revokeObjectURL(url);
 
-                showToast(t("plugin.customSounds.toast.exported", { count: overrides.length }));
+                showToast(t(plugin.customSounds.toast.exported, { count: overrides.length }));
             };
 
             const filteredSoundTypes = allSoundTypes.values.filter(type =>
@@ -328,10 +328,10 @@ const settings = definePluginSettings({
             return (
                 <div>
                     <div className="pc-custom-sounds-buttons">
-                        <Button variant="secondary" onClick={triggerFileUpload}>{t("plugin.customSounds.import")}</Button>
-                        <Button variant="primary" onClick={downloadSettings}>{t("plugin.customSounds.export")}</Button>
-                        <Button variant="dangerPrimary" onClick={resetOverrides}>{t("plugin.customSounds.reset")}</Button>
-                        <Button variant="dangerSecondary" onClick={debugCustomSounds}>{t("plugin.customSounds.debug")}</Button>
+                        <Button variant="secondary" onClick={triggerFileUpload}>{t(plugin.customSounds.import)}</Button>
+                        <Button variant="primary" onClick={downloadSettings}>{t(plugin.customSounds.export)}</Button>
+                        <Button variant="dangerPrimary" onClick={resetOverrides}>{t(plugin.customSounds.reset)}</Button>
+                        <Button variant="dangerSecondary" onClick={debugCustomSounds}>{t(plugin.customSounds.debug)}</Button>
                         <input
                             ref={fileInputRef}
                             type="file"
@@ -342,11 +342,11 @@ const settings = definePluginSettings({
                     </div>
 
                     <div className={cl("search")}>
-                        <Heading>{t("plugin.customSounds.search")}</Heading>
+                        <Heading>{t(plugin.customSounds.search)}</Heading>
                         <TextInput
                             value={searchQuery}
                             onChange={e => setSearchQuery(e)}
-                            placeholder={t("plugin.customSounds.placeholder")}
+                            placeholder={t(plugin.customSounds.placeholder)}
                         />
                     </div>
 
@@ -368,7 +368,7 @@ const settings = definePluginSettings({
                                                 await ensureDataURICached(currentOverride.selectedFileId);
                                             } catch (error) {
                                                 console.error(`[CustomSounds] Failed to cache data URI for ${type.id}:`, error);
-                                                showToast(t("plugin.customSounds.toast.error"));
+                                                showToast(t(plugin.customSounds.toast.error));
                                             }
                                         }
 
@@ -395,13 +395,9 @@ export function findOverride(id: string): SoundOverride | null {
 
 export default definePlugin({
     name: "CustomSounds",
-    description: "Customize Discord's sounds.",
+    description: () => t(plugin.customSounds.description),
     authors: [Devs.ScattrdBlade, Devs.TheKodeToad, PcDevs.MutanPlex],
     dependencies: ["AudioPlayerAPI"],
-
-    get displayDescription() {
-        return t("plugin.customSounds.description");
-    },
 
     settings,
     getCustomSoundURL,

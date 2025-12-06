@@ -5,37 +5,28 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { Tooltip, useRef, useState } from "@webpack/common";
 
-const settings = definePluginSettings(
-    {
-        preservePitch: {
-            get label() {
-                return t("plugin.videoSpeed.option.preservePitch.label");
-            },
-            get description() {
-                return t("plugin.videoSpeed.option.preservePitch.description");
-            },
-            type: OptionType.BOOLEAN,
-            default: false,
-            restartNeeded: true
-        },
-    });
+const settings = definePluginSettings({
+    preservePitch: {
+        label: () => t(plugin.videoSpeed.option.preservePitch.label),
+        description: () => t(plugin.videoSpeed.option.preservePitch.description),
+        type: OptionType.BOOLEAN,
+        default: false,
+        restartNeeded: true
+    },
+});
 
 export default definePlugin({
     name: "VideoSpeed",
-    description: "Allows you to change the speed of videos",
+    description: () => t(plugin.videoSpeed.description),
     authors: [Devs.Samwich, PcDevs.MutanPlex],
     settings,
-
-    get displayDescription() {
-        return t("plugin.videoSpeed.description");
-    },
 
     patches: [
         {

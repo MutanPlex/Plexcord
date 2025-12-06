@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -25,12 +25,8 @@ import StartupTimingPage from "./StartupTimingPage";
 
 export default definePlugin({
     name: "StartupTimings",
-    description: "Adds Startup Timings to the Settings menu",
+    description: () => t(plugin.startupTimings.description),
     authors: [Devs.Megu],
-
-    get displayDescription() {
-        return t("plugin.startupTimings.description");
-    },
 
     patches: [{
         find: "#{intl::ACTIVITY_SETTINGS}",
@@ -46,7 +42,7 @@ export default definePlugin({
 
 
     getStartupTimingsLabel() {
-        return t("plugin.startupTimings.modal.title");
+        return t(plugin.startupTimings.modal.title);
     },
 
     StartupTimingPage

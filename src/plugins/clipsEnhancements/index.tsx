@@ -5,8 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Link } from "@components/Link";
 import { Activity, SelectOption } from "@plexcord/discord-types";
@@ -18,25 +17,17 @@ import { PresenceStore, SettingsRouter, UserStore } from "@webpack/common";
 
 const settings = definePluginSettings({
     richPresenceTagging: {
-        get label() {
-            return t("plugin.clipsEnhancements.option.richPresenceTagging.label");
-        },
-        get description() {
-            return t("plugin.clipsEnhancements.option.richPresenceTagging.description");
-        },
+        label: () => t(plugin.clipsEnhancements.option.richPresenceTagging.label),
+        description: () => t(plugin.clipsEnhancements.option.richPresenceTagging.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.clipsEnhancements.option.richPresenceTagging.always"), value: "always" },
-                { label: t("plugin.clipsEnhancements.option.richPresenceTagging.only"), value: "whenMatched", default: true },
-                { label: t("plugin.clipsEnhancements.option.richPresenceTagging.never"), value: "never" },
-            ];
-        }
+        options: [
+            { label: () => t(plugin.clipsEnhancements.option.richPresenceTagging.always), value: "always" },
+            { label: () => t(plugin.clipsEnhancements.option.richPresenceTagging.only), value: "whenMatched", default: true },
+            { label: () => t(plugin.clipsEnhancements.option.richPresenceTagging.never), value: "never" },
+        ]
     },
     clipsLink: {
-        get label() {
-            return t("plugin.clipsEnhancements.option.clipsLink.label");
-        },
+        label: () => t(plugin.clipsEnhancements.option.clipsLink.label),
         type: OptionType.COMPONENT,
         description: "",
         component: () => {
@@ -48,7 +39,7 @@ const settings = definePluginSettings({
                             ModalAPI.closeAllModals();
                         }}
                     >
-                        {t("plugin.clipsEnhancements.option.clipsLink.link")}
+                        {t(plugin.clipsEnhancements.option.clipsLink.link)}
                     </Link>
                 </>
             );
@@ -58,12 +49,8 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "ClipsEnhancements",
-    description: "Add more Clip FPS and duration options, plus RPC tagging!",
+    description: () => t(plugin.clipsEnhancements.description),
     authors: [Devs.niko],
-
-    get displayDescription() {
-        return t("plugin.clipsEnhancements.description");
-    },
 
     settings,
     patches: [
@@ -93,7 +80,7 @@ export default definePlugin({
         const newTimeslots = [...timeslots];
         const extraTimeslots = [3, 5, 7, 10];
 
-        extraTimeslots.forEach(timeslot => newTimeslots.push({ value: timeslot * 60000, label: `${timeslot} ${t("plugin.clipsEnhancements.minutes")}` }));
+        extraTimeslots.forEach(timeslot => newTimeslots.push({ value: timeslot * 60000, label: `${timeslot} ${t(plugin.clipsEnhancements.minutes)}` }));
 
         return newTimeslots;
     },

@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { GuildMember, Message, User } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
@@ -689,217 +689,133 @@ function removeHoveringReactionPopout(id: string) {
 
 const settings = definePluginSettings({
     messages: {
-        get label() {
-            return t("plugin.showMeYourName.option.messages.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.messages.description");
-        },
+        label: () => t(plugin.showMeYourName.option.messages.label),
+        description: () => t(plugin.showMeYourName.option.messages.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     replies: {
-        get label() {
-            return t("plugin.showMeYourName.option.replies.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.replies.description");
-        },
+        label: () => t(plugin.showMeYourName.option.replies.label),
+        description: () => t(plugin.showMeYourName.option.replies.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     mentions: {
-        get label() {
-            return t("plugin.showMeYourName.option.mentions.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.mentions.description");
-        },
+        label: () => t(plugin.showMeYourName.option.mentions.label),
+        description: () => t(plugin.showMeYourName.option.mentions.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     memberList: {
-        get label() {
-            return t("plugin.showMeYourName.option.memberList.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.memberList.description");
-        },
+        label: () => t(plugin.showMeYourName.option.memberList.label),
+        description: () => t(plugin.showMeYourName.option.memberList.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     profilePopout: {
-        get label() {
-            return t("plugin.showMeYourName.option.profilePopout.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.profilePopout.description");
-        },
+        label: () => t(plugin.showMeYourName.option.profilePopout.label),
+        description: () => t(plugin.showMeYourName.option.profilePopout.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     voiceChannels: {
-        get label() {
-            return t("plugin.showMeYourName.option.voiceChannels.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.voiceChannels.description");
-        },
+        label: () => t(plugin.showMeYourName.option.voiceChannels.label),
+        description: () => t(plugin.showMeYourName.option.voiceChannels.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     reactions: {
-        get label() {
-            return t("plugin.showMeYourName.option.reactions.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.reactions.description");
-        },
+        label: () => t(plugin.showMeYourName.option.reactions.label),
+        description: () => t(plugin.showMeYourName.option.reactions.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     discriminators: {
-        get label() {
-            return t("plugin.showMeYourName.option.discriminators.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.discriminators.description");
-        },
+        label: () => t(plugin.showMeYourName.option.discriminators.label),
+        description: () => t(plugin.showMeYourName.option.discriminators.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     hideDefaultAtSign: {
-        get label() {
-            return t("plugin.showMeYourName.option.hideDefaultAtSign.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.hideDefaultAtSign.description");
-        },
+        label: () => t(plugin.showMeYourName.option.hideDefaultAtSign.label),
+        description: () => t(plugin.showMeYourName.option.hideDefaultAtSign.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     truncateAllNamesWithStreamerMode: {
-        get label() {
-            return t("plugin.showMeYourName.option.truncateAllNamesWithStreamerMode.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.truncateAllNamesWithStreamerMode.description");
-        },
+        label: () => t(plugin.showMeYourName.option.truncateAllNamesWithStreamerMode.label),
+        description: () => t(plugin.showMeYourName.option.truncateAllNamesWithStreamerMode.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     removeDuplicates: {
-        get label() {
-            return t("plugin.showMeYourName.option.removeDuplicates.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.removeDuplicates.description");
-        },
+        label: () => t(plugin.showMeYourName.option.removeDuplicates.label),
+        description: () => t(plugin.showMeYourName.option.removeDuplicates.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     ignoreFonts: {
-        get label() {
-            return t("plugin.showMeYourName.option.ignoreFonts.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.ignoreFonts.description");
-        },
+        label: () => t(plugin.showMeYourName.option.ignoreFonts.label),
+        description: () => t(plugin.showMeYourName.option.ignoreFonts.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     ignoreGradients: {
-        get label() {
-            return t("plugin.showMeYourName.option.ignoreGradients.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.ignoreGradients.description");
-        },
+        label: () => t(plugin.showMeYourName.option.ignoreGradients.label),
+        description: () => t(plugin.showMeYourName.option.ignoreGradients.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     animateGradients: {
-        get label() {
-            return t("plugin.showMeYourName.option.animateGradients.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.animateGradients.description");
-        },
+        label: () => t(plugin.showMeYourName.option.animateGradients.label),
+        description: () => t(plugin.showMeYourName.option.animateGradients.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     nameSeparator: {
-        get label() {
-            return t("plugin.showMeYourName.option.nameSeparator.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.nameSeparator.description");
-        },
+        label: () => t(plugin.showMeYourName.option.nameSeparator.label),
+        description: () => t(plugin.showMeYourName.option.nameSeparator.description),
         type: OptionType.STRING,
         default: " ",
     },
     includedNames: {
-        get label() {
-            return t("plugin.showMeYourName.option.includedNames.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.includedNames.description");
-        },
+        label: () => t(plugin.showMeYourName.option.includedNames.label),
+        description: () => t(plugin.showMeYourName.option.includedNames.description),
         type: OptionType.STRING,
         default: "{friend, nick} [{display}] (@{user})",
         isValid: validTemplate,
     },
     friendNameColor: {
-        get label() {
-            return t("plugin.showMeYourName.option.friendNameColor.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.friendNameColor.description");
-        },
+        label: () => t(plugin.showMeYourName.option.friendNameColor.label),
+        description: () => t(plugin.showMeYourName.option.friendNameColor.description),
         type: OptionType.STRING,
         default: "Role-25",
         isValid: validColor,
     },
     nicknameColor: {
-        get label() {
-            return t("plugin.showMeYourName.option.nicknameColor.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.nicknameColor.description");
-        },
+        label: () => t(plugin.showMeYourName.option.nicknameColor.label),
+        description: () => t(plugin.showMeYourName.option.nicknameColor.description),
         type: OptionType.STRING,
         default: "Role-25",
         isValid: validColor,
     },
     displayNameColor: {
-        get label() {
-            return t("plugin.showMeYourName.option.displayNameColor.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.displayNameColor.description");
-        },
+        label: () => t(plugin.showMeYourName.option.displayNameColor.label),
+        description: () => t(plugin.showMeYourName.option.displayNameColor.description),
         type: OptionType.STRING,
         default: "Role-25",
         isValid: validColor,
     },
     usernameColor: {
-        get label() {
-            return t("plugin.showMeYourName.option.usernameColor.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.usernameColor.description");
-        },
+        label: () => t(plugin.showMeYourName.option.usernameColor.label),
+        description: () => t(plugin.showMeYourName.option.usernameColor.description),
         type: OptionType.STRING,
         default: "Role-25",
         isValid: validColor,
     },
     triggerNameRerender: {
-        get label() {
-            return t("plugin.showMeYourName.option.triggerNameRerender.label");
-        },
-        get description() {
-            return t("plugin.showMeYourName.option.triggerNameRerender.description");
-        },
+        label: () => t(plugin.showMeYourName.option.triggerNameRerender.label),
+        description: () => t(plugin.showMeYourName.option.triggerNameRerender.description),
         type: OptionType.BOOLEAN,
         default: false,
         hidden: true
@@ -908,13 +824,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "ShowMeYourName",
-    description: "Display any permutation of nicknames, display names, and usernames in chat.",
+    description: () => t(plugin.showMeYourName.description),
     authors: [Devs.Rini, Devs.TheKodeToad, PcDevs.Etorix, Devs.sadan],
     settings,
-
-    get displayDescription() {
-        return t("plugin.showMeYourName.description");
-    },
 
     patches: [
         {

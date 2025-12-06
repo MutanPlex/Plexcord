@@ -19,11 +19,8 @@
 
 import "./messageLogger.css";
 
-import {
-    findGroupChildrenByChildId,
-    NavContextMenuPatchCallback,
-} from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { plugin, t } from "@api/i18n";
 import { updateMessage } from "@api/MessageUpdater";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
@@ -126,9 +123,9 @@ const patchMessageContextMenu: NavContextMenuPatchCallback = (
     let label;
 
     if (!isPluginEnabled("MessageLoggerEnhanced")) {
-        label = t("plugin.messageLogger.removeMessage");
+        label = t(plugin.messageLogger.removeMessage);
     } else {
-        label = t("plugin.messageLogger.removeMessageTemporary");
+        label = t(plugin.messageLogger.removeMessageTemporary);
     }
 
     children.push(
@@ -164,7 +161,7 @@ const patchChannelContextMenu: NavContextMenuPatchCallback = (
     group.push(
         <Menu.MenuItem
             id="pc-ml-clear-channel"
-            label={t("plugin.messageLogger.clearMessageLog")}
+            label={t(plugin.messageLogger.clearMessageLog)}
             color="danger"
             action={() => {
                 messages.forEach(msg => {
@@ -337,120 +334,74 @@ export function parseEditContent(content: string, message: Message, previousCont
 
 const settings = definePluginSettings({
     deleteStyle: {
-        get label() {
-            return t("plugin.messageLogger.option.deleteStyle.label");
-        },
-        get description() {
-            return t("plugin.messageLogger.option.deleteStyle.description");
-        },
+        label: () => t(plugin.messageLogger.option.deleteStyle.label),
+        description: () => t(plugin.messageLogger.option.deleteStyle.description),
         type: OptionType.SELECT,
         default: "text",
-        get options() {
-            return [
-                { label: t("plugin.messageLogger.option.deleteStyle.text"), value: "text", default: true },
-                { label: t("plugin.messageLogger.option.deleteStyle.overlay"), value: "overlay" },
-            ];
-        },
+        options: [
+            { label: () => t(plugin.messageLogger.option.deleteStyle.text), value: "text", default: true },
+            { label: () => t(plugin.messageLogger.option.deleteStyle.overlay), value: "overlay" },
+        ],
         onChange: () => addDeleteStyle(),
     },
     logDeletes: {
-        get label() {
-            return t("plugin.messageLogger.option.logDeletes.label");
-        },
-        get description() {
-            return t("plugin.messageLogger.option.logDeletes.description");
-        },
+        label: () => t(plugin.messageLogger.option.logDeletes.label),
+        description: () => t(plugin.messageLogger.option.logDeletes.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     collapseDeleted: {
-        get label() {
-            return t("plugin.messageLogger.option.collapseDeleted.label");
-        },
-        get description() {
-            return t("plugin.messageLogger.option.collapseDeleted.description");
-        },
+        label: () => t(plugin.messageLogger.option.collapseDeleted.label),
+        description: () => t(plugin.messageLogger.option.collapseDeleted.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true,
     },
     logEdits: {
-        get label() {
-            return t("plugin.messageLogger.option.logEdits.label");
-        },
-        get description() {
-            return t("plugin.messageLogger.option.logEdits.description");
-        },
+        label: () => t(plugin.messageLogger.option.logEdits.label),
+        description: () => t(plugin.messageLogger.option.logEdits.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     inlineEdits: {
-        get label() {
-            return t("plugin.messageLogger.option.inlineEdits.label");
-        },
-        get description() {
-            return t("plugin.messageLogger.option.inlineEdits.description");
-        },
+        label: () => t(plugin.messageLogger.option.inlineEdits.label),
+        description: () => t(plugin.messageLogger.option.inlineEdits.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     ignoreBots: {
-        get label() {
-            return t("plugin.messageLogger.option.ignoreBots.label");
-        },
-        get description() {
-            return t("plugin.messageLogger.option.ignoreBots.description");
-        },
+        label: () => t(plugin.messageLogger.option.ignoreBots.label),
+        description: () => t(plugin.messageLogger.option.ignoreBots.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     ignoreSelf: {
-        get label() {
-            return t("plugin.messageLogger.option.ignoreSelf.label");
-        },
-        get description() {
-            return t("plugin.messageLogger.option.ignoreSelf.description");
-        },
+        label: () => t(plugin.messageLogger.option.ignoreSelf.label),
+        description: () => t(plugin.messageLogger.option.ignoreSelf.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     ignoreUsers: {
-        get label() {
-            return t("plugin.messageLogger.option.ignoreUsers.label");
-        },
-        get description() {
-            return t("plugin.messageLogger.option.ignoreUsers.description");
-        },
+        label: () => t(plugin.messageLogger.option.ignoreUsers.label),
+        description: () => t(plugin.messageLogger.option.ignoreUsers.description),
         type: OptionType.STRING,
         default: "",
     },
     ignoreChannels: {
-        get label() {
-            return t("plugin.messageLogger.option.ignoreChannels.label");
-        },
-        get description() {
-            return t("plugin.messageLogger.option.ignoreChannels.description");
-        },
+        label: () => t(plugin.messageLogger.option.ignoreChannels.label),
+        description: () => t(plugin.messageLogger.option.ignoreChannels.description),
         type: OptionType.STRING,
         default: "",
     },
     ignoreGuilds: {
-        get label() {
-            return t("plugin.messageLogger.option.ignoreGuilds.label");
-        },
-        get description() {
-            return t("plugin.messageLogger.option.ignoreGuilds.description");
-        },
+        label: () => t(plugin.messageLogger.option.ignoreGuilds.label),
+        description: () => t(plugin.messageLogger.option.ignoreGuilds.description),
         type: OptionType.STRING,
         default: "",
     },
     showEditDiffs: {
-        get label() {
-            return t("plugin.messageLogger.option.showEditDiffs.label");
-        },
-        get description() {
-            return t("plugin.messageLogger.option.showEditDiffs.description");
-        },
+        label: () => t(plugin.messageLogger.option.showEditDiffs.label),
+        description: () => t(plugin.messageLogger.option.showEditDiffs.description),
         type: OptionType.BOOLEAN,
         default: false,
         onChange: value => {
@@ -460,12 +411,8 @@ const settings = definePluginSettings({
         },
     },
     separatedDiffs: {
-        get label() {
-            return t("plugin.messageLogger.option.separatedDiffs.label");
-        },
-        get description() {
-            return t("plugin.messageLogger.option.separatedDiffs.description");
-        },
+        label: () => t(plugin.messageLogger.option.separatedDiffs.label),
+        description: () => t(plugin.messageLogger.option.separatedDiffs.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
@@ -479,14 +426,10 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "MessageLogger",
-    description: "Temporarily logs deleted and edited messages.",
+    description: () => t(plugin.messageLogger.description),
     authors: [Devs.rushii, Devs.Ven, Devs.AutumnVN, Devs.Nickyux, Devs.Kyuuhachi, PcDevs.justjxke],
     dependencies: ["MessageUpdaterAPI"],
     settings,
-
-    get displayDescription() {
-        return t("plugin.messageLogger.description");
-    },
 
     contextMenus: {
         message: patchMessageContextMenu,

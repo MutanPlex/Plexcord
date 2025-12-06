@@ -6,7 +6,7 @@
  */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { WallpaperFreeStore } from "@plugins/wallpaperFree/store";
 import { openModal } from "@utils/modal";
 import { ChannelStore, FluxDispatcher, Menu } from "@webpack/common";
@@ -31,13 +31,13 @@ const addWallpaperMenu = (channelId?: string, guildId?: string) => {
     return (
         <Menu.MenuItem label="WallpaperFree" key="pc-wpfree-menu" id="pc-wpfree-menu">
             <Menu.MenuItem
-                label={t("plugin.wallpaperFree.context.setWallpaper")}
+                label={t(plugin.wallpaperFree.context.setWallpaper)}
                 id="pc-wpfree-set-wallpaper"
                 action={() => openModal(props => <SetWallpaperModal props={props} onSelect={setWallpaper} initialUrl={initialUrl} />)}
             />
             <Menu.MenuSeparator />
             <Menu.MenuItem
-                label={t("plugin.wallpaperFree.context.removeWallpaper")}
+                label={t(plugin.wallpaperFree.context.removeWallpaper)}
                 id="pc-wpfree-remove-wallpaper"
                 color="danger"
                 disabled={!initialUrl}

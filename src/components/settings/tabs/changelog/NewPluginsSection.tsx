@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { changelog, plugins, t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
@@ -19,6 +19,10 @@ import { useForceUpdater } from "@utils/react";
 import { React, Tooltip } from "@webpack/common";
 
 import Plugins from "~plugins";
+
+function getName(name: string | (() => string)): string {
+    return typeof name === "function" ? name() : name;
+}
 
 const cl = classNameFactory("pc-changelog-");
 
@@ -53,7 +57,7 @@ export function NewPluginsSection({
         array
             .map(pn => Plugins[pn])
             .filter(p => p && !p.hidden)
-            .sort((a, b) => a.name.localeCompare(b.name));
+            .sort((a, b) => getName(a.name).localeCompare(getName(b.name)));
 
     const sortedPlugins = React.useMemo(
         () => mapPlugins(newPlugins),
@@ -68,7 +72,7 @@ export function NewPluginsSection({
         if (!deps) return null;
         return (
             <React.Fragment>
-                <BaseText>{t("plugins.required.by")}</BaseText>
+                <BaseText>{t(plugins.required.by)}</BaseText>
                 {deps.map((dep: string) => (
                     <BaseText key={dep} className="pc-changelog-dep-text">
                         {dep}
@@ -81,32 +85,33 @@ export function NewPluginsSection({
     return (
         <div className={cl("new-plugins-section")}>
             <Heading className={Margins.bottom8}>
-                {t("changelog.newPlugins", { count: sortedPlugins.length })}
+                {t(changelog.newPlugins, { count: sortedPlugins.length })}
             </Heading>
 
             <BaseText className={Margins.bottom16}>
-                {t("changelog.following")}
+                {t(changelog.following)}
             </BaseText>
 
             <div className={cl("new-plugins-grid")}>
                 {sortedPlugins.map(plugin => {
+                    const pluginName = getName(plugin.name);
                     const isRequired =
                         plugin.required ||
-                        depMap[plugin.name]?.some(
+                        depMap[pluginName]?.some(
                             d => settings.plugins[d].enabled,
                         ) ||
-                        plugin.name.endsWith("API");
+                        pluginName.endsWith("API");
                     const tooltipText = plugin.required
-                        ? t("plugins.required.this")
+                        ? t(plugins.required.this)
                         : makeDependencyList(
-                            depMap[plugin.name]?.filter(
+                            depMap[pluginName]?.filter(
                                 d => settings.plugins[d].enabled,
                             ),
                         );
 
                     if (isRequired) {
                         return (
-                            <Tooltip text={tooltipText} key={plugin.name}>
+                            <Tooltip text={tooltipText} key={pluginName}>
                                 {({ onMouseLeave, onMouseEnter }) => (
                                     <Card
                                         className={cl(
@@ -133,7 +138,7 @@ export function NewPluginsSection({
 
                     return (
                         <Card
-                            key={plugin.name}
+                            key={pluginName}
                             className={cl("new-plugin-card")}
                         >
                             <PluginCard
@@ -155,7 +160,7 @@ export function NewPluginsSection({
                     <Tooltip
                         text={
                             <>
-                                {t("plugins.restart.following")}
+                                {t(plugins.restart.following)}
                                 <div className={Margins.bottom8} />
                                 <ul>
                                     {changes.map(p => (
@@ -173,7 +178,7 @@ export function NewPluginsSection({
                                 onClick={() => location.reload()}
                                 className={Margins.top16}
                             >
-                                {t("plugins.restart.required")}
+                                {t(plugins.restart.required)}
                             </Button>
                         )}
                     </Tooltip>
@@ -200,14 +205,15 @@ function CompactPluginCard({
     const plugin = Plugins[pluginName];
     if (!plugin || plugin.hidden) return null;
 
+    const name = getName(plugin.name);
     const isRequired =
         plugin.required ||
-        depMap[plugin.name]?.some(d => settings.plugins[d].enabled);
+        depMap[name]?.some(d => settings.plugins[d].enabled);
 
     const tooltipText = plugin.required
-        ? t("plugins.required.this")
-        : depMap[plugin.name]?.length > 0
-            ? `${t("plugins.required.by")} ${depMap[plugin.name]
+        ? t(plugins.required.this)
+        : depMap[name]?.length > 0
+            ? `${t(plugins.required.by)} ${depMap[name]
                 ?.filter(d => settings.plugins[d].enabled)
                 .join(", ")}`
             : null;
@@ -216,15 +222,15 @@ function CompactPluginCard({
         <div className={`pc-changelog-entry ${isRequired ? "required" : ""}`}>
             <div className="pc-changelog-entry-header">
                 <span className="pc-changelog-entry-hash">
-                    {plugin.name}
+                    {name}
                     {isRequired && " *"}
                 </span>
                 <span className="pc-changelog-entry-author">
-                    {plugin.authors?.[0]?.name || t("plugins.unknown")}
+                    {plugin.authors?.[0]?.name || t(plugins.unknown)}
                 </span>
             </div>
             <div className="pc-changelog-entry-message">
-                {plugin.description || t("plugins.noDescription")}
+                {(typeof plugin.description === "function" ? plugin.description() : plugin.description) || t(plugins.noDescription)}
             </div>
             {tooltipText && (
                 <div className="pc-changelog-dep-text">{tooltipText}</div>
@@ -275,7 +281,7 @@ export function NewPluginsCompact({
                 {hasMore && (
                     <div className="pc-changelog-entry">
                         <div className="pc-changelog-entry-message">
-                            {t("changelog.more", {
+                            {t(changelog.more, {
                                 count: newPlugins.length - maxDisplay,
                             })}
                         </div>

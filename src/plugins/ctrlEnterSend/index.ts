@@ -5,57 +5,47 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, IS_MAC } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
+const settings = definePluginSettings({
+    submitRule: {
+        label: () => t(plugin.ctrlEnterSend.option.submitRule.label),
+        description: () => t(plugin.ctrlEnterSend.option.submitRule.description),
+        type: OptionType.SELECT,
+        options: [
+            {
+                label: () => t(plugin.ctrlEnterSend.option.submitRule.ctrlEnter),
+                value: "ctrl+enter"
+            },
+            {
+                label: () => t(plugin.ctrlEnterSend.option.submitRule.shiftEnter),
+                value: "shift+enter"
+            },
+            {
+                label: () => t(plugin.ctrlEnterSend.option.submitRule.enter),
+                value: "enter"
+            }
+        ],
+        default: "ctrl+enter"
+    },
+    sendMessageInTheMiddleOfACodeBlock: {
+        label: () => t(plugin.ctrlEnterSend.option.sendMessageInTheMiddleOfACodeBlock.label),
+        description: () => t(plugin.ctrlEnterSend.option.sendMessageInTheMiddleOfACodeBlock.description),
+        type: OptionType.BOOLEAN,
+        default: true,
+    }
+});
+
+
 export default definePlugin({
     name: "CtrlEnterSend",
+    description: () => t(plugin.ctrlEnterSend.description),
     authors: [Devs.UlyssesZhan],
-    description: "Use Ctrl+Enter to send messages (customizable)",
+    settings,
 
-    get displayDescription() {
-        return t("plugin.ctrlEnterSend.description");
-    },
-    settings: definePluginSettings({
-        submitRule: {
-            get label() {
-                return t("plugin.ctrlEnterSend.option.submitRule.label");
-            },
-            get description() {
-                return t("plugin.ctrlEnterSend.option.submitRule.description");
-            },
-            type: OptionType.SELECT,
-            get options() {
-                return [
-                    {
-                        label: t("plugin.ctrlEnterSend.option.submitRule.ctrlEnter"),
-                        value: "ctrl+enter"
-                    },
-                    {
-                        label: t("plugin.ctrlEnterSend.option.submitRule.shiftEnter"),
-                        value: "shift+enter"
-                    },
-                    {
-                        label: t("plugin.ctrlEnterSend.option.submitRule.enter"),
-                        value: "enter"
-                    }
-                ];
-            },
-            default: "ctrl+enter"
-        },
-        sendMessageInTheMiddleOfACodeBlock: {
-            get label() {
-                return t("plugin.ctrlEnterSend.option.sendMessageInTheMiddleOfACodeBlock.label");
-            },
-            get description() {
-                return t("plugin.ctrlEnterSend.option.sendMessageInTheMiddleOfACodeBlock.description");
-            },
-            type: OptionType.BOOLEAN,
-            default: true,
-        }
-    }),
     patches: [
         // Only one of the two patches will be at effect; Discord often updates to switch between them.
         // See: https://discord.com/channels/1015060230222131221/1032770730703716362/1261398512017477673
@@ -76,7 +66,7 @@ export default definePlugin({
     ],
     shouldSubmit(event: KeyboardEvent, codeblock: boolean): boolean {
         let result = false;
-        switch (this.settings.store.submitRule) {
+        switch (settings.store.submitRule) {
             case "shift+enter":
                 result = event.shiftKey;
                 break;
@@ -87,7 +77,7 @@ export default definePlugin({
                 result = !event.shiftKey && !event.ctrlKey;
                 break;
         }
-        if (!this.settings.store.sendMessageInTheMiddleOfACodeBlock) {
+        if (!settings.store.sendMessageInTheMiddleOfACodeBlock) {
             result &&= !codeblock;
         }
         return result;

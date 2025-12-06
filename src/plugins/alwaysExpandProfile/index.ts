@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { User } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { openUserProfile } from "@utils/discord";
@@ -13,12 +13,8 @@ import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "AlwaysExpandProfile",
-    description: "Always expands profile popouts to the full modal",
+    description: () => t(plugin.alwaysExpandProfile.description),
     authors: [PcDevs.MutanPlex, Devs.thororen],
-
-    get displayDescription() {
-        return t("plugin.alwaysExpandProfile.description");
-    },
 
     patches: [
         {

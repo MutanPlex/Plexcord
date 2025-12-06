@@ -1,6 +1,6 @@
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugins, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Tooltip } from "@webpack/common";
 
@@ -9,22 +9,22 @@ export function StockPluginsCard({ totalStockPlugins, enabledStockPlugins, total
         <div className="pc-plugin-stats pc-stockplugins-stats-card">
             <div className="pc-plugin-stats-card-container">
                 <div className="pc-plugin-stats-card-section">
-                    <BaseText size="md" weight="bold">{t("plugins.pluginModal.enabledStock")}</BaseText>
+                    <BaseText size="md" weight="bold">{t(plugins.pluginModal.enabledStock)}</BaseText>
                     <BaseText size="xl" weight="bold">{enabledStockPlugins}</BaseText>
                 </div>
                 <div className="pc-plugin-stats-card-divider"></div>
                 <div className="pc-plugin-stats-card-section">
-                    <BaseText size="md" weight="bold">{t("plugins.pluginModal.totalStock")}</BaseText>
+                    <BaseText size="md" weight="bold">{t(plugins.pluginModal.totalStock)}</BaseText>
                     <BaseText size="xl" weight="bold">{totalStockPlugins}</BaseText>
                 </div>
                 <div className="pc-plugin-stats-card-divider"></div>
                 <div className="pc-plugin-stats-card-section">
-                    <BaseText size="md" weight="bold">{t("plugins.pluginModal.enabledUser")}</BaseText>
+                    <BaseText size="md" weight="bold">{t(plugins.pluginModal.enabledUser)}</BaseText>
                     <BaseText size="xl" weight="bold">{enabledUserPlugins}</BaseText>
                 </div>
                 <div className="pc-plugin-stats-card-divider"></div>
                 <div className="pc-plugin-stats-card-section">
-                    <BaseText size="md" weight="bold">{t("plugins.pluginModal.totalUser")}</BaseText>
+                    <BaseText size="md" weight="bold">{t(plugins.pluginModal.totalUser)}</BaseText>
                     {totalUserPlugins === 0 ? (
                         <Tooltip
                             text={

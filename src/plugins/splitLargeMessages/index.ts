@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { addMessagePreSendListener, MessageSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
@@ -77,12 +77,8 @@ const listener: MessageSendListener = async (channelId, msg) => {
 
 const settings = definePluginSettings({
     maxLength: {
-        get label() {
-            return t("plugin.splitLargeMessages.option.maxLength.label");
-        },
-        get description() {
-            return t("plugin.splitLargeMessages.option.maxLength.description");
-        },
+        label: () => t(plugin.splitLargeMessages.option.maxLength.label),
+        description: () => t(plugin.splitLargeMessages.option.maxLength.description),
         type: OptionType.NUMBER,
         default: 0,
         max: 4000,
@@ -92,52 +88,32 @@ const settings = definePluginSettings({
         },
     },
     disableFileConversion: {
-        get label() {
-            return t("plugin.splitLargeMessages.option.disableFileConversion.label");
-        },
-        get description() {
-            return t("plugin.splitLargeMessages.option.disableFileConversion.description");
-        },
+        label: () => t(plugin.splitLargeMessages.option.disableFileConversion.label),
+        description: () => t(plugin.splitLargeMessages.option.disableFileConversion.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     sendDelay: {
-        get label() {
-            return t("plugin.splitLargeMessages.option.sendDelay.label");
-        },
-        get description() {
-            return t("plugin.splitLargeMessages.option.sendDelay.description");
-        },
+        label: () => t(plugin.splitLargeMessages.option.sendDelay.label),
+        description: () => t(plugin.splitLargeMessages.option.sendDelay.description),
         type: OptionType.SLIDER,
         default: 1,
         markers: [1, 2, 3, 5, 10],
     },
     hardSplit: {
-        get label() {
-            return t("plugin.splitLargeMessages.option.hardSplit.label");
-        },
-        get description() {
-            return t("plugin.splitLargeMessages.option.hardSplit.description");
-        },
+        label: () => t(plugin.splitLargeMessages.option.hardSplit.label),
+        description: () => t(plugin.splitLargeMessages.option.hardSplit.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     splitInSlowmode: {
-        get label() {
-            return t("plugin.splitLargeMessages.option.splitInSlowmode.label");
-        },
-        get description() {
-            return t("plugin.splitLargeMessages.option.splitInSlowmode.description");
-        },
+        label: () => t(plugin.splitLargeMessages.option.splitInSlowmode.label),
+        description: () => t(plugin.splitLargeMessages.option.splitInSlowmode.description),
         type: OptionType.BOOLEAN,
     },
     slowmodeMax: {
-        get label() {
-            return t("plugin.splitLargeMessages.option.slowmodeMax.label");
-        },
-        get description() {
-            return t("plugin.splitLargeMessages.option.slowmodeMax.description");
-        },
+        label: () => t(plugin.splitLargeMessages.option.slowmodeMax.label),
+        description: () => t(plugin.splitLargeMessages.option.slowmodeMax.description),
         type: OptionType.NUMBER,
         default: 5,
         min: 1,
@@ -147,14 +123,10 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "SplitLargeMessages",
-    description: "Splits large messages into multiple to fit Discord's message limit.",
+    description: () => t(plugin.splitLargeMessages.description),
     authors: [PcDevs.Reycko],
     dependencies: ["MessageEventsAPI"],
     settings,
-
-    get displayDescription() {
-        return t("plugin.splitLargeMessages.description");
-    },
 
     start() {
         if (settings.store.maxLength === 0) maxLength = autoMaxLength();

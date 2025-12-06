@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -38,7 +38,7 @@ const AccountPanelContextMenu = ErrorBoundary.wrap(() => {
         >
             <Menu.MenuItem
                 id="pc-ap-view-alternate-popout"
-                label={prioritizeServerProfile ? t("plugin.accountPanelServerProfile.context.account") : t("plugin.accountPanelServerProfile.context.server")}
+                label={prioritizeServerProfile ? t(plugin.accountPanelServerProfile.context.account) : t(plugin.accountPanelServerProfile.context.server)}
                 disabled={getCurrentChannel()?.getGuildId() == null}
                 action={e => {
                     if (isPluginEnabled(alwaysExpandProfile.name)) {
@@ -51,7 +51,7 @@ const AccountPanelContextMenu = ErrorBoundary.wrap(() => {
             />
             <Menu.MenuCheckboxItem
                 id="pc-ap-prioritize-server-profile"
-                label={t("plugin.accountPanelServerProfile.context.prioritize")}
+                label={t(plugin.accountPanelServerProfile.context.prioritize)}
                 checked={prioritizeServerProfile}
                 action={() => settings.store.prioritizeServerProfile = !prioritizeServerProfile}
             />
@@ -61,26 +61,18 @@ const AccountPanelContextMenu = ErrorBoundary.wrap(() => {
 
 const settings = definePluginSettings({
     prioritizeServerProfile: {
+        label: () => t(plugin.accountPanelServerProfile.option.prioritizeServerProfile.label),
+        description: () => t(plugin.accountPanelServerProfile.option.prioritizeServerProfile.description),
         type: OptionType.BOOLEAN,
         default: false,
-        get label() {
-            return t("plugin.accountPanelServerProfile.option.prioritizeServerProfile.label");
-        },
-        get description() {
-            return t("plugin.accountPanelServerProfile.option.prioritizeServerProfile.description");
-        }
     }
 });
 
 export default definePlugin({
     name: "AccountPanelServerProfile",
-    description: "Right click your account panel in the bottom left to view your profile in the current server",
+    description: () => t(plugin.accountPanelServerProfile.description),
     authors: [Devs.Nuckyz, Devs.relitrix],
     settings,
-
-    get displayDescription() {
-        return t("plugin.accountPanelServerProfile.description");
-    },
 
     patches: [
         {

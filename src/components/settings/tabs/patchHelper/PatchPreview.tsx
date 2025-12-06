@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { patchHelper, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
@@ -53,12 +53,12 @@ function Match({ matchResult }: { matchResult: RegExpMatchArray | null; }) {
         ? makeCodeblock(matchResult[0], "js")
         : "";
     const groups = matchResult.length > 1
-        ? makeCodeblock(matchResult.slice(1).map((g, i) => `${t("patchHelper.group")} ${i + 1}: ${g}`).join("\n"), "yml")
+        ? makeCodeblock(matchResult.slice(1).map((g, i) => `${t(patchHelper.group)} ${i + 1}: ${g}`).join("\n"), "yml")
         : "";
 
     return (
         <>
-            <Heading>{t("patchHelper.match")}</Heading>
+            <Heading>{t(patchHelper.match)}</Heading>
             <div style={{ userSelect: "text" }}>{Parser.parse(fullMatch)}</div>
             <div style={{ userSelect: "text" }}>{Parser.parse(groups)}</div>
         </>
@@ -88,7 +88,7 @@ function Diff({ diff }: { diff: Change[] | null; }) {
 
     return (
         <>
-            <Heading>{t("patchHelper.diff")}</Heading>
+            <Heading>{t(patchHelper.diff)}</Heading>
             {diffLines}
         </>
     );
@@ -123,7 +123,7 @@ export function PatchPreview({ module, match, replacement, setReplacementError }
 
     return (
         <>
-            <Heading>{t("patchHelper.module")} {id}</Heading>
+            <Heading>{t(patchHelper.module)} {id}</Heading>
 
             <Match matchResult={matchResult} />
             <Diff diff={diff} />
@@ -134,13 +134,13 @@ export function PatchPreview({ module, match, replacement, setReplacementError }
                     onClick={() => {
                         try {
                             Function(patchedCode.replace(/^(?=function\()/, "0,"));
-                            setCompileResult([true, t("patchHelper.compiled")]);
+                            setCompileResult([true, t(patchHelper.compiled)]);
                         } catch (err) {
                             setCompileResult([false, (err as Error).message]);
                         }
                     }}
                 >
-                    {t("patchHelper.compile")}
+                    {t(patchHelper.compile)}
                 </Button>
             )}
 

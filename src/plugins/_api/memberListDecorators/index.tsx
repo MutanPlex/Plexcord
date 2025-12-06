@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugins, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -25,13 +25,8 @@ import managedStyle from "./style.css?managed";
 
 export default definePlugin({
     name: "MemberListDecoratorsAPI",
-    description: "API to add decorators to member list (both in servers and DMs)",
+    description: () => t(plugins.metadata.api.description.memberListDecorators),
     authors: [Devs.TheSun, Devs.Ven],
-
-    get displayDescription() {
-        return t("plugins.metadata.api.description.memberListDecorators");
-    },
-
     managedStyle,
 
     patches: [

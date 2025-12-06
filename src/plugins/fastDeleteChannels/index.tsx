@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -51,43 +51,27 @@ function showIcon() {
 // TY ToggleVideoBind
 const settings = definePluginSettings({
     keyBind: {
-        get label() {
-            return t("plugin.fastDeleteChannels.option.keyBind.label");
-        },
-        get description() {
-            return t("plugin.fastDeleteChannels.option.keyBind.description");
-        },
+        label: () => t(plugin.fastDeleteChannels.option.keyBind.label),
+        description: () => t(plugin.fastDeleteChannels.option.keyBind.description),
         type: OptionType.STRING,
         default: "KeyZ",
         isValid: (value: string) => validKeycodes.includes(value),
     },
     reqCtrl: {
-        get label() {
-            return t("plugin.fastDeleteChannels.option.reqCtrl.label");
-        },
-        get description() {
-            return t("plugin.fastDeleteChannels.option.reqCtrl.description");
-        },
+        label: () => t(plugin.fastDeleteChannels.option.reqCtrl.label),
+        description: () => t(plugin.fastDeleteChannels.option.reqCtrl.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     reqShift: {
-        get label() {
-            return t("plugin.fastDeleteChannels.option.reqShift.label");
-        },
-        get description() {
-            return t("plugin.fastDeleteChannels.option.reqShift.description");
-        },
+        label: () => t(plugin.fastDeleteChannels.option.reqShift.label),
+        description: () => t(plugin.fastDeleteChannels.option.reqShift.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     reqAlt: {
-        get label() {
-            return t("plugin.fastDeleteChannels.option.reqAlt.label");
-        },
-        get description() {
-            return t("plugin.fastDeleteChannels.option.reqAlt.description");
-        },
+        label: () => t(plugin.fastDeleteChannels.option.reqAlt.label),
+        description: () => t(plugin.fastDeleteChannels.option.reqAlt.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
@@ -95,13 +79,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "FastDeleteChannels",
-    description: "Adds a trash icon to delete channels",
+    description: () => t(plugin.fastDeleteChannels.description),
     authors: [Devs.thororen],
     settings,
-
-    get displayDescription() {
-        return t("plugin.fastDeleteChannels.description");
-    },
 
     patches: [
         // TY TypingIndicator

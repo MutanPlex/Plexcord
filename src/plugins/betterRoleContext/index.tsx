@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import { ImageIcon } from "@components/Icons";
@@ -44,12 +44,8 @@ function AppearanceIcon() {
 
 const settings = definePluginSettings({
     roleIconFileFormat: {
-        get label() {
-            return t("plugin.betterRoleContext.option.roleIconFileFormat.label");
-        },
-        get description() {
-            return t("plugin.betterRoleContext.option.roleIconFileFormat.description");
-        },
+        label: () => t(plugin.betterRoleContext.option.roleIconFileFormat.label),
+        description: () => t(plugin.betterRoleContext.option.roleIconFileFormat.description),
         type: OptionType.SELECT,
         options: [
             {
@@ -71,13 +67,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "BetterRoleContext",
-    description: "Adds options to copy role color / edit role / view role icon when right clicking roles in the user profile",
+    description: () => t(plugin.betterRoleContext.description),
     authors: [Devs.Ven, Devs.goodbee],
     dependencies: ["UserSettingsAPI"],
-
-    get displayDescription() {
-        return t("plugin.betterRoleContext.description");
-    },
 
     settings,
 
@@ -98,7 +90,7 @@ export default definePlugin({
                 children.unshift(
                     <Menu.MenuItem
                         id="pc-copy-role-color"
-                        label={t("plugin.betterRoleContext.context.copyColor")}
+                        label={t(plugin.betterRoleContext.context.copyColor)}
                         action={() => copyToClipboard(role.colorString!)}
                         icon={AppearanceIcon}
                     />
@@ -109,7 +101,7 @@ export default definePlugin({
                 children.unshift(
                     <Menu.MenuItem
                         id="pc-edit-role"
-                        label={t("plugin.betterRoleContext.context.editRole")}
+                        label={t(plugin.betterRoleContext.context.editRole)}
                         action={async () => {
                             await GuildSettingsActions.open(guild.id, "ROLES");
                             GuildSettingsActions.selectRole(id);
@@ -123,7 +115,7 @@ export default definePlugin({
                 children.push(
                     <Menu.MenuItem
                         id="pc-view-role-icon"
-                        label={t("plugin.betterRoleContext.context.viewIcon")}
+                        label={t(plugin.betterRoleContext.context.viewIcon)}
                         action={() => {
                             openImageModal({
                                 url: `${location.protocol}//${window.GLOBAL_ENV.CDN_HOST}/role-icons/${role.id}/${role.icon}.${settings.store.roleIconFileFormat}`,

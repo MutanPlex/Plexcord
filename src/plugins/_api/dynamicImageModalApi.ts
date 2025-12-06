@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugins, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -13,11 +13,7 @@ import definePlugin from "@utils/types";
 export default definePlugin({
     name: "DynamicImageModalAPI",
     authors: [Devs.sadan, Devs.Nuckyz],
-    description: "Allows you to omit either width or height when opening an image modal",
-
-    get displayDescription() {
-        return t("plugins.metadata.api.description.dynamicImageModal");
-    },
+    description: () => t(plugins.metadata.api.description.dynamicImageModal),
 
     patches: [
         {

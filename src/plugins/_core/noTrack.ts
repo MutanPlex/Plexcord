@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { WebpackRequire } from "@plexcord/discord-types/webpack";
 import { Devs, PcDevs } from "@utils/constants";
@@ -26,13 +26,9 @@ import definePlugin, { OptionType, StartAt } from "@utils/types";
 
 const settings = definePluginSettings({
     disableAnalytics: {
-        get label() {
-            return t("plugin.noTrack.option.disableAnalytics.label");
-        },
+        label: () => t(plugin.noTrack.option.disableAnalytics.label),
+        description: () => t(plugin.noTrack.option.disableAnalytics.description),
         type: OptionType.BOOLEAN,
-        get description() {
-            return t("plugin.noTrack.option.disableAnalytics.description");
-        },
         default: true,
         restartNeeded: true
     }
@@ -40,18 +36,10 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "NoTrack",
-    description: "Disable Discord's tracking (analytics/'science'), metrics and Sentry crash reporting",
+    description: () => t(plugin.noTrack.description),
     authors: [Devs.Cyn, Devs.Ven, Devs.Nuckyz, Devs.Arrow, PcDevs.MutanPlex],
     required: true,
     settings,
-
-    get displayName() {
-        return t("plugin.noTrack.name");
-    },
-
-    get displayDescription() {
-        return t("plugin.noTrack.description");
-    },
 
     patches: [
         {

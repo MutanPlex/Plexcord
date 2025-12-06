@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { Message } from "@plexcord/discord-types";
@@ -29,7 +29,6 @@ import { Root } from "react-dom/client";
 
 import ReplyNavigator from "./ReplyNavigator";
 import styles from "./styles.css?managed";
-
 
 export const jumper: any = findByPropsLazy("jumpToMessage");
 
@@ -79,34 +78,22 @@ function findReplies(message: Message) {
 
 const settings = definePluginSettings({
     includePings: {
-        get label() {
-            return t("plugin.findReply.option.includePings.label");
-        },
-        get description() {
-            return t("plugin.findReply.option.includePings.description");
-        },
+        label: () => t(plugin.findReply.option.includePings.label),
+        description: () => t(plugin.findReply.option.includePings.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: false
     },
     includeAuthor: {
-        get label() {
-            return t("plugin.findReply.option.includeAuthor.label");
-        },
-        get description() {
-            return t("plugin.findReply.option.includeAuthor.description");
-        },
+        label: () => t(plugin.findReply.option.includeAuthor.label),
+        description: () => t(plugin.findReply.option.includeAuthor.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: false
     },
     hideButtonIfNoReply: {
-        get label() {
-            return t("plugin.findReply.option.hideButtonIfNoReply.label");
-        },
-        get description() {
-            return t("plugin.findReply.option.hideButtonIfNoReply.description");
-        },
+        label: () => t(plugin.findReply.option.hideButtonIfNoReply.label),
+        description: () => t(plugin.findReply.option.hideButtonIfNoReply.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
@@ -115,14 +102,10 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "FindReply",
-    description: "Jumps to the earliest reply to a message in a channel (lets you follow past conversations more easily).",
+    description: () => t(plugin.findReply.description),
     authors: [Devs.newwares],
     dependencies: ["MessagePopoverAPI"],
     settings,
-
-    get displayDescription() {
-        return t("plugin.findReply.description");
-    },
 
     start() {
         enableStyle(styles);
@@ -142,7 +125,7 @@ export default definePlugin({
             if (settings.store.hideButtonIfNoReply && !replies.length) return null;
 
             return {
-                label: t("plugin.findReply.context.jump"),
+                label: t(plugin.findReply.context.jump),
                 icon: FindReplyIcon,
                 message,
                 channel: ChannelStore.getChannel(message.channel_id),
@@ -159,14 +142,14 @@ export default definePlugin({
                         if (replies.length > 1) {
                             Toasts.show({
                                 id: Toasts.genId(),
-                                message: t("plugin.findReply.toast.navigate"),
+                                message: t(plugin.findReply.toast.navigate),
                                 type: Toasts.Type.MESSAGE
                             });
                             const container = document.querySelector("[class^=channelBottomBarArea_]");
                             if (!container) {
                                 Toasts.show({
                                     id: Toasts.genId(),
-                                    message: t("plugin.findReply.toast.container"),
+                                    message: t(plugin.findReply.toast.container),
                                     type: Toasts.Type.FAILURE
                                 });
                                 return;
@@ -182,7 +165,7 @@ export default definePlugin({
                     } else {
                         Toasts.show({
                             id: Toasts.genId(),
-                            message: t("plugin.findReply.toast.noreplies"),
+                            message: t(plugin.findReply.toast.couldntFind),
                             type: Toasts.Type.FAILURE
                         });
                     }

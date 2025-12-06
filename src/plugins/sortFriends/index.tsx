@@ -19,7 +19,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
@@ -45,12 +45,8 @@ function getSince(user: User) {
 
 const settings = definePluginSettings({
     showDates: {
-        get label() {
-            return t("plugin.sortFriends.option.showDates.label");
-        },
-        get description() {
-            return t("plugin.sortFriends.option.showDates.description");
-        },
+        label: () => t(plugin.sortFriends.option.showDates.label),
+        description: () => t(plugin.sortFriends.option.showDates.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
@@ -60,12 +56,8 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "SortFriends",
     authors: [Devs.Megu, PcDevs.CallMeGii],
-    description: "Sorts friend requests by date of receipt",
+    description: () => t(plugin.sortFriends.description),
     settings,
-
-    get displayDescription() {
-        return t("plugin.sortFriends.description");
-    },
 
     patches: [
         {
@@ -128,7 +120,7 @@ export default definePlugin({
                                 clipRule="evenodd"
                             ></path>
                         </svg>
-                        <span>{t("plugin.sortFriends.tooltip", { date: formatter.format(since) })}</span>
+                        <span>{t(plugin.sortFriends.tooltip, { date: formatter.format(since) })}</span>
                     </div>
                 </span>
             </Flex>

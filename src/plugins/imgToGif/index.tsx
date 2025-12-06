@@ -18,7 +18,7 @@
 */
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, sendBotMessage } from "@api/Commands";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { CommandArgument, CommandContext } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -59,7 +59,7 @@ async function resolveImage(options: CommandArgument[], ctx: CommandContext): Pr
                 if (upload) {
                     if (!upload.isImage) {
                         UploadManager.clearAll(ctx.channel.id, DraftType.SlashCommand);
-                        throw t("plugin.imgToGif.error.notImage");
+                        throw t(plugin.imgToGif.error.notImage);
                     }
                     image = upload.item.file;
                 }
@@ -79,51 +79,35 @@ async function resolveImage(options: CommandArgument[], ctx: CommandContext): Pr
 
 export default definePlugin({
     name: "ImgToGif",
-    description: "Adds a /imgtogif slash command to create a gif from any image",
+    description: () => t(plugin.imgToGif.description),
     authors: [PcDevs.zyqunix, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.imgToGif.description");
-    },
 
     commands: [
         {
             inputType: ApplicationCommandInputType.BUILT_IN,
             name: "imgtogif",
-            description: "Allows you to turn an image to a gif",
-            get displayDescription() {
-                return t("plugin.imgToGif.command.imgToGif.description");
-            },
+            description: () => t(plugin.imgToGif.command.imgToGif.description),
             options: [
                 {
                     name: "image",
-                    description: "Image attachment to use",
-                    get displayDescription() {
-                        return t("plugin.imgToGif.command.imgToGif.image");
-                    },
+                    description: () => t(plugin.imgToGif.command.imgToGif.image),
                     type: ApplicationCommandOptionType.ATTACHMENT
                 },
                 {
                     name: "width",
-                    description: "Width of the gif",
-                    get displayDescription() {
-                        return t("plugin.imgToGif.command.imgToGif.width");
-                    },
+                    description: () => t(plugin.imgToGif.command.imgToGif.width),
                     type: ApplicationCommandOptionType.INTEGER
                 },
                 {
                     name: "height",
-                    description: "Height of the gif",
-                    get displayDescription() {
-                        return t("plugin.imgToGif.command.imgToGif.height");
-                    },
+                    description: () => t(plugin.imgToGif.command.imgToGif.height),
                     type: ApplicationCommandOptionType.INTEGER
                 }
             ],
             execute: async (opts, cmdCtx) => {
                 try {
                     const { image, width, height } = await resolveImage(opts, cmdCtx);
-                    if (!image) throw t("plugin.imgToGif.error.noImage");
+                    if (!image) throw t(plugin.imgToGif.error.noImage);
 
                     const avatar = await loadImage(image);
 

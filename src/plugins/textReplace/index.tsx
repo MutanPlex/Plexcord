@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
@@ -47,9 +47,7 @@ const makeEmptyRuleArray = () => [makeEmptyRule()];
 
 const settings = definePluginSettings({
     replace: {
-        get label() {
-            return t("plugin.textReplace.option.replace.label");
-        },
+        label: () => t(plugin.textReplace.option.replace.label),
         type: OptionType.COMPONENT,
         component: () => {
             const { stringRules, regexRules } = settings.use(["stringRules", "regexRules"]);
@@ -57,11 +55,11 @@ const settings = definePluginSettings({
             return (
                 <>
                     <TextReplace
-                        title={t("plugin.textReplace.option.replace.string")}
+                        title={t(plugin.textReplace.option.replace.string)}
                         rulesArray={stringRules}
                     />
                     <TextReplace
-                        title={t("plugin.textReplace.option.replace.regex")}
+                        title={t(plugin.textReplace.option.replace.regex)}
                         rulesArray={regexRules}
                     />
                     <TextReplaceTesting />
@@ -70,22 +68,14 @@ const settings = definePluginSettings({
         }
     },
     stringRules: {
-        get label() {
-            return t("plugin.textReplace.option.stringRules.label");
-        },
-        get description() {
-            return t("plugin.textReplace.option.stringRules.description");
-        },
+        label: () => t(plugin.textReplace.option.stringRules.label),
+        description: () => t(plugin.textReplace.option.stringRules.description),
         type: OptionType.CUSTOM,
         default: makeEmptyRuleArray(),
     },
     regexRules: {
-        get label() {
-            return t("plugin.textReplace.option.regexRules.label");
-        },
-        get description() {
-            return t("plugin.textReplace.option.regexRules.description");
-        },
+        label: () => t(plugin.textReplace.option.regexRules.label),
+        description: () => t(plugin.textReplace.option.regexRules.description),
         type: OptionType.CUSTOM,
         default: makeEmptyRuleArray(),
     }
@@ -136,7 +126,7 @@ function Input({ initialValue, onChange, placeholder }: {
 }
 
 function TextReplace({ title, rulesArray }: TextReplaceProps) {
-    const isRegexRules = title === t("plugin.textReplace.option.replace.regex");
+    const isRegexRules = title === t(plugin.textReplace.option.replace.regex);
 
     async function onClickRemove(index: number) {
         if (index === rulesArray.length - 1) return;
@@ -156,9 +146,9 @@ function TextReplace({ title, rulesArray }: TextReplaceProps) {
     }
 
     const scopeOptions = [
-        { label: t("plugin.textReplace.option.replace.myMessages"), value: "myMessages" },
-        { label: t("plugin.textReplace.option.replace.othersMessages"), value: "othersMessages" },
-        { label: t("plugin.textReplace.option.replace.allMessages"), value: "allMessages" }
+        { label: t(plugin.textReplace.option.replace.myMessages), value: "myMessages" },
+        { label: t(plugin.textReplace.option.replace.othersMessages), value: "othersMessages" },
+        { label: t(plugin.textReplace.option.replace.allMessages), value: "allMessages" }
     ];
 
     return (
@@ -170,17 +160,17 @@ function TextReplace({ title, rulesArray }: TextReplaceProps) {
                         <React.Fragment key={`${rule.find}-${index}`}>
                             <Flex flexDirection="row" style={{ flexGrow: 1, gap: "0.5em" }}>
                                 <Input
-                                    placeholder={t("plugin.textReplace.modal.find")}
+                                    placeholder={t(plugin.textReplace.modal.find)}
                                     initialValue={rule.find}
                                     onChange={e => onChange(e, index, "find")}
                                 />
                                 <Input
-                                    placeholder={t("plugin.textReplace.modal.replace")}
+                                    placeholder={t(plugin.textReplace.modal.replace)}
                                     initialValue={rule.replace}
                                     onChange={e => onChange(e, index, "replace")}
                                 />
                                 <Input
-                                    placeholder={t("plugin.textReplace.modal.includes")}
+                                    placeholder={t(plugin.textReplace.modal.includes)}
                                     initialValue={rule.onlyIfIncludes}
                                     onChange={e => onChange(e, index, "onlyIfIncludes")}
                                 />
@@ -216,9 +206,9 @@ function TextReplaceTesting() {
     const [value, setValue] = useState("");
     return (
         <>
-            <Heading>Test Rules</Heading>
-            <TextInput placeholder={t("plugin.textReplace.modal.type")} onChange={setValue} />
-            <TextInput placeholder={t("plugin.textReplace.modal.applied")} editable={false} value={applyRules(value, "allMessages")} />
+            <Heading>{t(plugin.textReplace.modal.title)}</Heading>
+            <TextInput placeholder={t(plugin.textReplace.modal.type)} onChange={setValue} />
+            <TextInput placeholder={t(plugin.textReplace.modal.applied)} editable={false} value={applyRules(value, "allMessages")} />
         </>
     );
 }
@@ -270,12 +260,8 @@ const TEXT_REPLACE_RULES_EXEMPT_CHANNEL_IDS = [
 
 export default definePlugin({
     name: "TextReplace",
-    description: "Replace text in your messages. You can find pre-made rules in the #textreplace-rules channel in Plexcord's Server",
+    description: () => t(plugin.textReplace.description),
     authors: [Devs.AutumnVN, Devs.TheKodeToad, PcDevs.Etorix],
-
-    get displayDescription() {
-        return t("plugin.textReplace.description");
-    },
 
     settings,
     modifyIncomingMessage,

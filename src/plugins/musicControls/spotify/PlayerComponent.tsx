@@ -19,7 +19,7 @@
 
 import "./spotifyStyles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Settings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Flex } from "@components/Flex";
@@ -81,27 +81,34 @@ function Button(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
 }
 
 function CopyContextMenu({ name, type, path }: { type: string; name: string; path: string; }) {
+    const typeMap: Record<string, string> = {
+        "Song": t(plugin.musicControls.modal.type.song),
+        "Artist": t(plugin.musicControls.modal.type.artist),
+        "Album": t(plugin.musicControls.modal.type.album)
+    };
+    const localizedType = typeMap[type] || type;
+
     return (
         <Menu.Menu
             navId="pc-spotify-menu"
             onClose={ContextMenuApi.closeContextMenu}
-            aria-label={t("plugin.musicControls.context.spotify.type", { type })}
+            aria-label={t(plugin.musicControls.context.spotify.type, { type: localizedType })}
         >
             <Menu.MenuItem
                 id="pc-spotify-copy-name"
-                label={t("plugin.musicControls.context.spotify.copy", { name })}
+                label={t(plugin.musicControls.context.spotify.copy, { type: localizedType })}
                 action={() => copyWithToast(name)}
                 icon={CopyIcon}
             />
             <Menu.MenuItem
                 id="pc-spotify-copy-link"
-                label={t("plugin.musicControls.context.spotify.link", { type })}
+                label={t(plugin.musicControls.context.spotify.link, { type: localizedType })}
                 action={() => copyWithToast("https://open.spotify.com" + path)}
                 icon={LinkIcon}
             />
             <Menu.MenuItem
                 id="pc-spotify-open"
-                label={t("plugin.musicControls.context.spotify.open", { type })}
+                label={t(plugin.musicControls.context.spotify.open, { type: localizedType })}
                 action={() => SpotifyStore.openExternal(path)}
                 icon={OpenExternalIcon}
             />
@@ -193,7 +200,7 @@ function SpotifySeekBar() {
                 size="xs"
                 weight="medium"
                 className={cl("progress-time") + " " + cl("time-left")}
-                aria-label={t("plugin.musicControls.modal.player.progress")}
+                aria-label={t(plugin.musicControls.modal.player.progress)}
             >
                 {msToHuman(position)}
             </Span>
@@ -209,7 +216,7 @@ function SpotifySeekBar() {
                 size="xs"
                 weight="medium"
                 className={cl("progress-time") + " " + cl("time-right")}
-                aria-label={t("plugin.musicControls.modal.player.totalDuration")}
+                aria-label={t(plugin.musicControls.modal.player.totalDuration)}
             >
                 {msToHuman(duration)}
             </Span>
@@ -225,19 +232,19 @@ function AlbumContextMenu({ track }: { track: Track; }) {
         <Menu.Menu
             navId="spotify-album-menu"
             onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-            aria-label={t("plugin.musicControls.context.spotify.album")}
+            aria-label={t(plugin.musicControls.context.spotify.album)}
         >
             <Menu.MenuItem
                 key="open-album"
                 id="open-album"
-                label={t("plugin.musicControls.modal.album.open")}
+                label={t(plugin.musicControls.modal.album.open)}
                 action={() => SpotifyStore.openExternal(`/album/${track.album.id}`)}
                 icon={OpenExternalIcon}
             />
             <Menu.MenuItem
                 key="view-cover"
                 id="view-cover"
-                label={t("plugin.musicControls.modal.album.viewCover")}
+                label={t(plugin.musicControls.modal.album.viewCover)}
                 // trolley
                 action={() => openImageModal(track.album.image)}
                 icon={ImageIcon}
@@ -245,7 +252,7 @@ function AlbumContextMenu({ track }: { track: Track; }) {
             <Menu.MenuControlItem
                 id="spotify-volume"
                 key="spotify-volume"
-                label={t("plugin.musicControls.modal.album.volume")}
+                label={t(plugin.musicControls.modal.album.volume)}
                 control={(props, ref) => (
                     <Menu.MenuSliderControl
                         {...props}
@@ -283,7 +290,7 @@ function Info({ track }: { track: Track; }) {
                 <img
                     id={cl("album-image")}
                     src={img.url}
-                    alt={t("plugin.musicControls.modal.album.image")}
+                    alt={t(plugin.musicControls.modal.album.image)}
                     onClick={() => setCoverExpanded(!coverExpanded)}
                     onContextMenu={e => {
                         ContextMenuApi.openContextMenu(e, () => <AlbumContextMenu track={track} />);
@@ -315,7 +322,7 @@ function Info({ track }: { track: Track; }) {
                 </Paragraph>
                 {track.artists.some(a => a.name) && (
                     <Paragraph className={cl(["ellipoverflow", "secondary-song-info"])}>
-                        <span className={cl("song-info-prefix")}>{t("plugin.musicControls.modal.player.artist")}&nbsp;</span>
+                        <span className={cl("song-info-prefix")}>{t(plugin.musicControls.modal.player.artist)}&nbsp;</span>
                         {track.artists.map((a, i) => (
                             <React.Fragment key={a.name}>
                                 <span
@@ -333,7 +340,7 @@ function Info({ track }: { track: Track; }) {
                 )}
                 {track.album.name && (
                     <Paragraph className={cl(["ellipoverflow", "secondary-song-info"])}>
-                        <span className={cl("song-info-prefix")}>{t("plugin.musicControls.modal.player.album")}&nbsp;</span>
+                        <span className={cl("song-info-prefix")}>{t(plugin.musicControls.modal.player.album)}&nbsp;</span>
                         <span
                             id={cl("album-title")}
                             className={cl("album")}

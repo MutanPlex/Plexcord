@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { GuildMember, Role } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -26,34 +26,22 @@ import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     showTimeouts: {
-        get label() {
-            return t("plugin.showHiddenThings.option.showTimeouts.label");
-        },
-        get description() {
-            return t("plugin.showHiddenThings.option.showTimeouts.description");
-        },
+        label: () => t(plugin.showHiddenThings.option.showTimeouts.label),
+        description: () => t(plugin.showHiddenThings.option.showTimeouts.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     showInvitesPaused: {
-        get label() {
-            return t("plugin.showHiddenThings.option.showInvitesPaused.label");
-        },
-        get description() {
-            return t("plugin.showHiddenThings.option.showInvitesPaused.description");
-        },
+        label: () => t(plugin.showHiddenThings.option.showInvitesPaused.label),
+        description: () => t(plugin.showHiddenThings.option.showInvitesPaused.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     showModView: {
-        get label() {
-            return t("plugin.showHiddenThings.option.showModView.label");
-        },
-        get description() {
-            return t("plugin.showHiddenThings.option.showModView.description");
-        },
+        label: () => t(plugin.showHiddenThings.option.showModView.label),
+        description: () => t(plugin.showHiddenThings.option.showModView.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
@@ -62,14 +50,10 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "ShowHiddenThings",
+    description: () => t(plugin.showHiddenThings.description),
     tags: ["ShowTimeouts", "ShowInvitesPaused", "ShowModView", "DisableDiscoveryFilters"],
-    description: "Displays various hidden & moderator-only things regardless of permissions.",
     authors: [Devs.Dolfies],
     settings,
-
-    get displayDescription() {
-        return t("plugin.showHiddenThings.description");
-    },
 
     patches: [
         {

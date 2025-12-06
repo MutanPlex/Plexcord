@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { SvgOverFlowIcon } from "@plugins/holyNotes/components/icons/overFlowIcon";
 import { classes } from "@utils/misc";
@@ -80,7 +80,7 @@ export function NoteBookTabs({ tabs, selectedTabId, onSelectTab }: { tabs: strin
         return (
             <Menu.Menu
                 navId="notebook-tabs"
-                aria-label={t("plugin.holyNotes.modal.tabs.label")}
+                aria-label={t(plugin.holyNotes.modal.tabs.label)}
                 variant="fixed"
                 onClose={closePopout}
                 onSelect={closePopout}

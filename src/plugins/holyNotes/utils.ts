@@ -7,7 +7,7 @@
 
 import { createStore } from "@api/DataStore";
 import * as DataStore from "@api/DataStore";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Toasts } from "@webpack/common";
 
 import noteHandler, { noteHandlerCache } from "./NoteHandler";
@@ -87,7 +87,7 @@ export async function uploadNotes() {
                     console.error(err);
                     Toasts.show({
                         id: Toasts.genId(),
-                        message: t("plugin.holyNotes.toast.invalid"),
+                        message: t(plugin.holyNotes.toast.invalid),
                         type: Toasts.Type.FAILURE,
                     });
                 }

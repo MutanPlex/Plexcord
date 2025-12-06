@@ -21,7 +21,7 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { Channel, User } from "@plexcord/discord-types";
 import { JSX } from "react";
 
-import { t } from "./i18n";
+import { memberlist, t } from "./i18n";
 
 export type DecoratorProps = {
     type: "guild" | "dm";
@@ -53,7 +53,7 @@ export function __getDecorators(props: DecoratorProps, type: "guild" | "dm"): JS
                 return null;
 
             return (
-                <ErrorBoundary noop key={key} message={t("memberList.error.render", { key })}>
+                <ErrorBoundary noop key={key} message={t(memberlist.error.render, { key })}>
                     <Decorator {...props} type={type} />
                 </ErrorBoundary>
             );

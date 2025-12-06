@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -183,35 +184,35 @@ export function KeybindSettings(): JSX.Element {
         <ErrorBoundary>
             <Divider />
             <div className="channelTabs-keybind-settings">
-                <Heading>Keyboard Shortcuts</Heading>
+                <Heading>{t(plugin.channelTabs.option.keybindsSection.title)}</Heading>
                 <Paragraph>
-                    Click a button and press your desired key combination. Modifiers like CTRL, SHIFT, and ALT are supported.
+                    {t(plugin.channelTabs.option.keybindsSection.description)}
                 </Paragraph>
 
                 <KeybindInput
-                    label="Close Tab"
-                    description="Close the currently active tab"
+                    label={t(plugin.channelTabs.option.keybindsSection.closeTab.label)}
+                    description={t(plugin.channelTabs.option.keybindsSection.closeTab.description)}
                     settingKey="closeTabKeybind"
                     enabledKey="enableCloseTabShortcut"
                 />
 
                 <KeybindInput
-                    label="New Tab"
-                    description="Open a new tab with the current channel"
+                    label={t(plugin.channelTabs.option.keybindsSection.newTab.label)}
+                    description={t(plugin.channelTabs.option.keybindsSection.newTab.description)}
                     settingKey="newTabKeybind"
                     enabledKey="enableNewTabShortcut"
                 />
 
                 <KeybindInput
-                    label="Cycle Tabs Forward"
-                    description="Switch to the next tab (wraps around to first)"
+                    label={t(plugin.channelTabs.option.keybindsSection.cycleTabsForward.label)}
+                    description={t(plugin.channelTabs.option.keybindsSection.cycleTabsForward.description)}
                     settingKey="cycleTabForwardKeybind"
                     enabledKey="enableTabCycleShortcut"
                 />
 
                 <KeybindInput
-                    label="Cycle Tabs Backward"
-                    description="Switch to the previous tab (wraps around to last)"
+                    label={t(plugin.channelTabs.option.keybindsSection.cycleTabsBackward.label)}
+                    description={t(plugin.channelTabs.option.keybindsSection.cycleTabsBackward.description)}
                     settingKey="cycleTabBackwardKeybind"
                     enabledKey="enableTabCycleShortcut"
                 />
@@ -221,7 +222,7 @@ export function KeybindSettings(): JSX.Element {
                         variant="dangerPrimary"
                         onClick={handleResetAll}
                     >
-                        Reset All to Defaults
+                        {t(plugin.channelTabs.option.keybindsSection.reset)}
                     </Button>
                 </div>
             </div>

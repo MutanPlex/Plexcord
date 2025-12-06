@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
@@ -42,15 +42,15 @@ export default function RemixModal({ modalProps, close, url }: Props) {
     return (
         <ModalRoot {...modalProps} size={ModalSize.LARGE}>
             <ModalHeader>
-                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t("plugin.remix.label")}</BaseText>
+                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t(plugin.remix.label)}</BaseText>
                 <ModalCloseButton onClick={() => closeModal(close)} />
             </ModalHeader>
             <ModalContent>
                 <Editor url={url} />
             </ModalContent>
             <ModalFooter className="pc-remix-modal-footer">
-                <Button onClick={() => closeModal(close, true)} className="pc-remix-send"><SendIcon /> {t("plugin.remix.button.send")}</Button>
-                <Button onClick={() => closeModal(close)} variant="dangerPrimary">{t("plugin.remix.button.close")}</Button>
+                <Button onClick={() => closeModal(close, true)} className="pc-remix-send"><SendIcon /> {t(plugin.remix.button.send)}</Button>
+                <Button onClick={() => closeModal(close)} variant="dangerPrimary">{t(plugin.remix.button.close)}</Button>
             </ModalFooter>
         </ModalRoot>
     );

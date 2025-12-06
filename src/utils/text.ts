@@ -52,10 +52,10 @@ const unitMap: Record<Units, string> = {
 };
 
 function getUnitStr(unit: Units, isOne: boolean, short: boolean) {
-    if (short) return t("common.unit.s");
+    if (short) return t(common.unit.s);
 
     const unitKey = unitMap[unit];
-    const translatedUnit = t(`common.unit.${unitKey}`);
+    const translatedUnit = t(common.unit[unitKey]);
     return isOne ? translatedUnit : translatedUnit;
 }
 
@@ -137,11 +137,11 @@ export function formatTimestamp(timestamp: number): string {
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
     if (diffMinutes < 60) {
-        return `${diffMinutes} ${diffMinutes !== 1 ? t("common.unit.minutes") : t("common.unit.minute")} ${t("common.unit.ago")}`;
+        return `${diffMinutes} ${diffMinutes !== 1 ? t(common.unit.minutes) : t(common.unit.minute)} ${t(common.unit.ago)}`;
     } else if (diffHours < 24) {
-        return `${diffHours} ${diffHours !== 1 ? t("common.unit.hours") : t("common.unit.hour")} ${t("common.unit.ago")}`;
+        return `${diffHours} ${diffHours !== 1 ? t(common.unit.hours) : t(common.unit.hour)} ${t(common.unit.ago)}`;
     } else if (diffDays < 7) {
-        return `${diffDays} ${diffDays !== 1 ? t("common.unit.days") : t("common.unit.day")} ${t("common.unit.ago")}`;
+        return `${diffDays} ${diffDays !== 1 ? t(common.unit.days) : t(common.unit.day)} ${t(common.unit.ago)}`;
     } else {
         return date.toLocaleDateString();
     }

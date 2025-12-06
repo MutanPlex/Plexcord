@@ -47,6 +47,10 @@ const logger = new Logger("PluginManager", "#a6d189");
 
 export const PMLogger = logger;
 
+function getName(name: string | (() => string)): string {
+    return typeof name === "function" ? name() : name;
+}
+
 /** Whether we have subscribed to flux events of all the enabled plugins when FluxDispatcher was ready */
 let enabledPluginsSubscribedFlux = false;
 const subscribedFluxEventsPlugins = new Set<string>();
@@ -163,20 +167,21 @@ export function startDependenciesRecursive(p: Plugin) {
 }
 
 export function subscribePluginFluxEvents(p: Plugin, fluxDispatcher: typeof FluxDispatcher) {
-    if (p.flux && !subscribedFluxEventsPlugins.has(p.name) && (!IS_REPORTER || isReporterTestable(p, ReporterTestable.FluxEvents))) {
-        subscribedFluxEventsPlugins.add(p.name);
+    const pluginName = getName(p.name);
+    if (p.flux && !subscribedFluxEventsPlugins.has(pluginName) && (!IS_REPORTER || isReporterTestable(p, ReporterTestable.FluxEvents))) {
+        subscribedFluxEventsPlugins.add(pluginName);
 
-        logger.debug("Subscribing to flux events of plugin", p.name);
+        logger.debug("Subscribing to flux events of plugin", pluginName);
         for (const [event, handler] of Object.entries(p.flux)) {
             const wrappedHandler = p.flux[event] = function () {
-                if (p.name === "Encryptcord" && event === "MESSAGE_CREATE") return;
+                if (pluginName === "Encryptcord" && event === "MESSAGE_CREATE") return;
                 try {
                     const res = handler!.apply(p, arguments as any);
                     return res instanceof Promise
-                        ? res.catch(e => logger.error(`${p.name}: Error while handling ${event}\n`, e))
+                        ? res.catch(e => logger.error(`${pluginName}: Error while handling ${event}\n`, e))
                         : res;
                 } catch (e) {
-                    logger.error(`${p.name}: Error while handling ${event}\n`, e);
+                    logger.error(`${pluginName}: Error while handling ${event}\n`, e);
                 }
             };
 
@@ -186,10 +191,11 @@ export function subscribePluginFluxEvents(p: Plugin, fluxDispatcher: typeof Flux
 }
 
 export function unsubscribePluginFluxEvents(p: Plugin, fluxDispatcher: typeof FluxDispatcher) {
+    const pluginName = getName(p.name);
     if (p.flux) {
-        subscribedFluxEventsPlugins.delete(p.name);
+        subscribedFluxEventsPlugins.delete(pluginName);
 
-        logger.debug("Unsubscribing from flux events of plugin", p.name);
+        logger.debug("Unsubscribing from flux events of plugin", pluginName);
         for (const [event, handler] of Object.entries(p.flux)) {
             fluxDispatcher.unsubscribe(event as FluxEvents, handler!);
         }
@@ -211,17 +217,18 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
         onBeforeMessageEdit, onBeforeMessageSend, onMessageClick,
         chatBarButton, renderMemberListDecorator, renderNicknameIcon, renderMessageAccessory, renderMessageDecoration, messagePopoverButton
     } = p;
+    const pluginName = getName(name);
 
     if (p.start) {
-        logger.info("Starting plugin", name);
+        logger.info("Starting plugin", pluginName);
         if (p.started) {
-            logger.warn(`${name} already started`);
+            logger.warn(`${pluginName} already started`);
             return false;
         }
         try {
             p.start();
         } catch (e) {
-            logger.error(`Failed to start ${name}\n`, e);
+            logger.error(`Failed to start ${pluginName}\n`, e);
             return false;
         }
     }
@@ -229,10 +236,10 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
     p.started = true;
 
     if (commands?.length) {
-        logger.debug("Registering commands of plugin", name);
+        logger.debug("Registering commands of plugin", pluginName);
         for (const cmd of commands) {
             try {
-                registerCommand(cmd, name);
+                registerCommand(cmd, pluginName);
             } catch (e) {
                 logger.error(`Failed to register command ${cmd.name}\n`, e);
                 return false;
@@ -245,7 +252,7 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
     }
 
     if (contextMenus) {
-        logger.debug("Adding context menus patches of plugin", name);
+        logger.debug("Adding context menus patches of plugin", pluginName);
         for (const navId in contextMenus) {
             addContextMenuPatch(navId, contextMenus[navId]);
         }
@@ -260,15 +267,15 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
     if (onBeforeMessageSend) addMessagePreSendListener(onBeforeMessageSend);
     if (onMessageClick) addMessageClickListener(onMessageClick);
 
-    if (chatBarButton) addChatBarButton(name, chatBarButton.render, chatBarButton.icon);
-    if (renderMemberListDecorator) addMemberListDecorator(name, renderMemberListDecorator);
-    if (renderNicknameIcon) addNicknameIcon(name, renderNicknameIcon);
-    if (renderMessageDecoration) addMessageDecoration(name, renderMessageDecoration);
-    if (renderMessageAccessory) addMessageAccessory(name, renderMessageAccessory);
-    if (messagePopoverButton) addMessagePopoverButton(name, messagePopoverButton.render, messagePopoverButton.icon);
+    if (chatBarButton) addChatBarButton(pluginName, chatBarButton.render, chatBarButton.icon);
+    if (renderMemberListDecorator) addMemberListDecorator(pluginName, renderMemberListDecorator);
+    if (renderNicknameIcon) addNicknameIcon(pluginName, renderNicknameIcon);
+    if (renderMessageDecoration) addMessageDecoration(pluginName, renderMessageDecoration);
+    if (renderMessageAccessory) addMessageAccessory(pluginName, renderMessageAccessory);
+    if (messagePopoverButton) addMessagePopoverButton(pluginName, messagePopoverButton.render, messagePopoverButton.icon);
 
     return true;
-}, p => `startPlugin ${p.name}`);
+}, p => `startPlugin ${getName(p.name)}`);
 
 export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plugin) {
     const {
@@ -276,17 +283,18 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
         onBeforeMessageEdit, onBeforeMessageSend, onMessageClick,
         chatBarButton, renderMemberListDecorator, renderNicknameIcon, renderMessageAccessory, renderMessageDecoration, messagePopoverButton
     } = p;
+    const pluginName = getName(name);
 
     if (p.stop) {
-        logger.info("Stopping plugin", name);
+        logger.info("Stopping plugin", pluginName);
         if (!p.started) {
-            logger.warn(`${name} already stopped`);
+            logger.warn(`${pluginName} already stopped`);
             return false;
         }
         try {
             p.stop();
         } catch (e) {
-            logger.error(`Failed to stop ${name}\n`, e);
+            logger.error(`Failed to stop ${pluginName}\n`, e);
             return false;
         }
     }
@@ -294,7 +302,7 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
     p.started = false;
 
     if (commands?.length) {
-        logger.debug("Unregistering commands of plugin", name);
+        logger.debug("Unregistering commands of plugin", pluginName);
         for (const cmd of commands) {
             try {
                 unregisterCommand(cmd.name);
@@ -308,7 +316,7 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
     unsubscribePluginFluxEvents(p, FluxDispatcher);
 
     if (contextMenus) {
-        logger.debug("Removing context menus patches of plugin", name);
+        logger.debug("Removing context menus patches of plugin", pluginName);
         for (const navId in contextMenus) {
             removeContextMenuPatch(navId, contextMenus[navId]);
         }
@@ -323,15 +331,15 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
     if (onBeforeMessageSend) removeMessagePreSendListener(onBeforeMessageSend);
     if (onMessageClick) removeMessageClickListener(onMessageClick);
 
-    if (chatBarButton) removeChatBarButton(name);
-    if (renderMemberListDecorator) removeMemberListDecorator(name);
-    if (renderNicknameIcon) removeNicknameIcon(name);
-    if (renderMessageDecoration) removeMessageDecoration(name);
-    if (renderMessageAccessory) removeMessageAccessory(name);
-    if (messagePopoverButton) removeMessagePopoverButton(name);
+    if (chatBarButton) removeChatBarButton(pluginName);
+    if (renderMemberListDecorator) removeMemberListDecorator(pluginName);
+    if (renderNicknameIcon) removeNicknameIcon(pluginName);
+    if (renderMessageDecoration) removeMessageDecoration(pluginName);
+    if (renderMessageAccessory) removeMessageAccessory(pluginName);
+    if (messagePopoverButton) removeMessagePopoverButton(pluginName);
 
     return true;
-}, p => `stopPlugin ${p.name}`);
+}, p => `stopPlugin ${getName(p.name)}`);
 
 
 export const initPluginManager = onlyOnce(function init() {
@@ -349,12 +357,12 @@ export const initPluginManager = onlyOnce(function init() {
     //
     // FIXME: might need to revisit this if there's ever nested (dependencies of dependencies) dependencies since this only
     // goes for the top level and their children, but for now this works okay with the current API plugins
-    for (const p of pluginsValues) if (isPluginEnabled(p.name)) {
+    for (const p of pluginsValues) if (isPluginEnabled(getName(p.name))) {
         p.dependencies?.forEach(d => {
             const dep = Plugins[d];
 
             if (!dep) {
-                const error = new Error(`Plugin ${p.name} has unresolved dependency ${d}`);
+                const error = new Error(`Plugin ${getName(p.name)} has unresolved dependency ${d}`);
 
                 if (IS_DEV) {
                     throw error;
@@ -401,7 +409,7 @@ export const initPluginManager = onlyOnce(function init() {
         if (p.settings) {
             p.options ??= {};
 
-            p.settings.pluginName = p.name;
+            p.settings.pluginName = getName(p.name);
             for (const name in p.settings.def) {
                 const def = p.settings.def[name];
                 const checks = p.settings.checks?.[name];
@@ -416,15 +424,15 @@ export const initPluginManager = onlyOnce(function init() {
             for (const name in p.options) {
                 const opt = p.options[name];
                 if (opt.onChange != null) {
-                    SettingsStore.addChangeListener(`plugins.${p.name}.${name}`, opt.onChange);
+                    SettingsStore.addChangeListener(`plugins.${getName(p.name)}.${name}`, opt.onChange);
                 }
             }
         }
 
-        if (p.patches && isPluginEnabled(p.name)) {
+        if (p.patches && isPluginEnabled(getName(p.name))) {
             if (!IS_REPORTER || isReporterTestable(p, ReporterTestable.Patches)) {
                 for (const patch of p.patches) {
-                    addPatch(patch, p.name);
+                    addPatch(patch, getName(p.name));
                 }
             }
         }

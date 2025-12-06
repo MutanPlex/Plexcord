@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
@@ -30,39 +30,29 @@ import alignedChatInputFix from "./alignedChatInputFix.css?managed";
 
 const settings = definePluginSettings({
     format: {
-        get label() {
-            return t("plugin.callTimer.option.format.label");
-        },
-        get description() {
-            return t("plugin.callTimer.option.format.description");
-        },
+        label: () => t(plugin.callTimer.option.format.label),
+        description: () => t(plugin.callTimer.option.format.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.callTimer.option.format.stopwatch"),
-                    value: "stopwatch",
-                    default: true
-                },
-                {
-                    label: t("plugin.callTimer.option.format.human"),
-                    value: "human"
-                }
-            ];
-        }
+        options: [
+            {
+                label: () => t(plugin.callTimer.option.format.stopwatch),
+                value: "stopwatch",
+                default: true
+            },
+            {
+                label: () => t(plugin.callTimer.option.format.human),
+                value: "human"
+            }
+        ]
     }
 });
 
 export default definePlugin({
     name: "CallTimer",
-    description: "Adds a timer to vcs",
+    description: () => t(plugin.callTimer.description),
     authors: [Devs.Ven],
     managedStyle: alignedChatInputFix,
     settings,
-
-    get displayDescription() {
-        return t("plugin.callTimer.description");
-    },
 
     startTime: 0,
     interval: void 0 as NodeJS.Timeout | undefined,

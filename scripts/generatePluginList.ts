@@ -21,7 +21,7 @@ import { Dirent, readdirSync, readFileSync, writeFileSync } from "fs";
 import { access, readFile } from "fs/promises";
 import { join, sep } from "path";
 import { normalize as posixNormalize, sep as posixSep } from "path/posix";
-import { BigIntLiteral, createSourceFile, Identifier, isArrayLiteralExpression, isCallExpression, isExportAssignment, isIdentifier, isObjectLiteralExpression, isPropertyAccessExpression, isPropertyAssignment, isSatisfiesExpression, isStringLiteral, isVariableStatement, NamedDeclaration, NodeArray, ObjectLiteralExpression, ScriptTarget, StringLiteral, SyntaxKind } from "typescript";
+import { ArrowFunction, AsExpression, BigIntLiteral, createSourceFile, FunctionExpression, Identifier, isArrowFunction, isArrayLiteralExpression, isAsExpression, isCallExpression, isExportAssignment, isFunctionExpression, isIdentifier, isObjectLiteralExpression, isPropertyAccessExpression, isPropertyAssignment, isSatisfiesExpression, isStringLiteral, isVariableStatement, NamedDeclaration, NodeArray, ObjectLiteralExpression, ScriptTarget, StringLiteral, SyntaxKind } from "typescript";
 
 import { getPluginTarget } from "./utils.mjs";
 
@@ -35,7 +35,7 @@ interface PcDev extends BaseDev { }
 
 interface PluginData {
     name: string;
-    description: string;
+    description: string | (() => string);
     tags: string[];
     authors: BaseDev[];
     dependencies: string[];
@@ -50,6 +50,7 @@ interface PluginData {
 
 const devs = {} as Record<string, Dev>;
 const pcDevs = {} as Record<string, PcDev>;
+let translations: any = {};
 
 function getName(node: NamedDeclaration) {
     return node.name && isIdentifier(node.name) ? node.name.text : undefined;
@@ -63,6 +64,95 @@ function getObjectProp(node: ObjectLiteralExpression, name: string) {
     const prop = node.properties.find(p => hasName(p, name));
     if (prop && isPropertyAssignment(prop)) return prop.initializer;
     return prop;
+}
+
+function extractTranslationFromFunction(fnNode: ArrowFunction | FunctionExpression): string | null {
+    // Function is typically: () => t(plugin.xxx.description)
+    const body = fnNode.body;
+
+    // Check if it's a call expression like t(...)
+    if (isCallExpression(body)) {
+        const arg = body.arguments[0];
+        // Extract the property access chain (e.g., plugin.settings.description)
+        if (isPropertyAccessExpression(arg)) {
+            const parts: string[] = [];
+            let current: any = arg;
+
+            while (isPropertyAccessExpression(current)) {
+                parts.unshift(current.name.text);
+                current = current.expression;
+            }
+
+            if (isIdentifier(current)) {
+                parts.unshift(current.text);
+            }
+
+            console.log("Translation key parts:", parts);
+
+            // Navigate through translations object
+            let value = translations;
+            for (const part of parts) {
+                console.log(`Looking for "${part}" in`, value ? Object.keys(value) : "null");
+                if (value && typeof value === 'object' && part in value) {
+                    value = value[part];
+                } else {
+                    console.log(`Failed to find "${part}"`);
+                    return null;
+                }
+            }
+
+            console.log("Found translation:", value);
+            return typeof value === 'string' ? value : null;
+        }
+    }
+
+    return null;
+}
+
+function loadTranslations() {
+    try {
+        const enFile = createSourceFile("en.ts", readFileSync("src/locales/en.ts", "utf8"), ScriptTarget.Latest);
+
+        for (const statement of enFile.statements) {
+            if (!isVariableStatement(statement)) continue;
+
+            const translationsDecl = statement.declarationList.declarations.find(d => hasName(d, "translations"));
+            if (translationsDecl?.initializer) {
+                let init = translationsDecl.initializer;
+
+                // Handle "as const" or "as Type" expressions
+                if (isAsExpression(init)) {
+                    init = init.expression;
+                }
+
+                if (isObjectLiteralExpression(init)) {
+                    translations = parseObjectLiteral(init);
+                    break;
+                }
+            }
+        }
+    } catch (e) {
+        console.warn("Failed to load translations:", e);
+    }
+}
+
+function parseObjectLiteral(obj: ObjectLiteralExpression): any {
+    const result: any = {};
+
+    for (const prop of obj.properties) {
+        if (!isPropertyAssignment(prop)) continue;
+
+        const key = (prop.name as Identifier).text;
+        const value = prop.initializer;
+
+        if (isStringLiteral(value)) {
+            result[key] = value.text;
+        } else if (isObjectLiteralExpression(value)) {
+            result[key] = parseObjectLiteral(value);
+        }
+    }
+
+    return result;
 }
 
 function parseDevs() {
@@ -145,9 +235,22 @@ async function parseFile(fileName: string) {
 
             switch (key) {
                 case "name":
-                case "description":
                     if (!isStringLiteral(value)) throw fail(`${key} is not a string literal`);
                     data[key] = value.text;
+                    break;
+                case "description":
+                    if (isStringLiteral(value)) {
+                        data.description = value.text;
+                    } else if (isArrowFunction(value) || isFunctionExpression(value)) {
+                        const translation = extractTranslationFromFunction(value);
+                        if (translation) {
+                            data.description = translation;
+                        } else {
+                            throw fail("description function could not be resolved to a translation");
+                        }
+                    } else {
+                        throw fail("description is not a string literal or function");
+                    }
                     break;
                 case "patches":
                     data.hasPatches = true;
@@ -225,6 +328,7 @@ function isPluginFile({ name }: { name: string; }) {
 }
 
 (async () => {
+    loadTranslations();
     parseDevs();
 
     const plugins = [] as PluginData[];

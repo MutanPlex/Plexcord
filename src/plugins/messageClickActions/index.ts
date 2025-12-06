@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import { MessageFlags } from "@plexcord/discord-types/enums";
@@ -37,42 +37,26 @@ const focusChanged = () => !WindowStore.isFocused() && (isDeletePressed = false)
 
 const settings = definePluginSettings({
     enableDeleteOnClick: {
-        get label() {
-            return t("plugin.messageClickActions.option.enableDeleteOnClick.label");
-        },
-        get description() {
-            return t("plugin.messageClickActions.option.enableDeleteOnClick.description");
-        },
+        label: () => t(plugin.messageClickActions.option.enableDeleteOnClick.label),
+        description: () => t(plugin.messageClickActions.option.enableDeleteOnClick.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     enableDoubleClickToEdit: {
-        get label() {
-            return t("plugin.messageClickActions.option.enableDoubleClickToEdit.label");
-        },
-        get description() {
-            return t("plugin.messageClickActions.option.enableDoubleClickToEdit.description");
-        },
+        label: () => t(plugin.messageClickActions.option.enableDoubleClickToEdit.label),
+        description: () => t(plugin.messageClickActions.option.enableDoubleClickToEdit.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     enableDoubleClickToReply: {
-        get label() {
-            return t("plugin.messageClickActions.option.enableDoubleClickToReply.label");
-        },
-        get description() {
-            return t("plugin.messageClickActions.option.enableDoubleClickToReply.description");
-        },
+        label: () => t(plugin.messageClickActions.option.enableDoubleClickToReply.label),
+        description: () => t(plugin.messageClickActions.option.enableDoubleClickToReply.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     requireModifier: {
-        get label() {
-            return t("plugin.messageClickActions.option.requireModifier.label");
-        },
-        get description() {
-            return t("plugin.messageClickActions.option.requireModifier.description");
-        },
+        label: () => t(plugin.messageClickActions.option.requireModifier.label),
+        description: () => t(plugin.messageClickActions.option.requireModifier.description),
         type: OptionType.BOOLEAN,
         default: false
     }
@@ -80,13 +64,8 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "MessageClickActions",
-    description: "Hold Backspace and click to delete, double click to edit/reply",
+    description: () => t(plugin.messageClickActions.description),
     authors: [Devs.Ven],
-
-    get displayDescription() {
-        return t("plugin.messageClickActions.description");
-    },
-
     settings,
 
     start() {

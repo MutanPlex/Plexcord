@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { BasicChannelTabsProps, Bookmark, BookmarkFolder, BookmarkProps, CircleQuestionIcon, DiscoveryIcon, EnvelopeIcon, FriendsIcon, isBookmarkFolder, isTabSelected, navigateToBookmark, NitroIcon, openedTabs, QuestIcon, settings, ShopIcon, switchChannel, useBookmarks } from "@plugins/channelTabs/util";
@@ -163,7 +163,7 @@ function BookmarkFolderOpenMenu(props: BookmarkProps) {
                         <Menu.MenuItem
                             key="edit-bookmark"
                             id="edit-bookmark"
-                            label={t("plugin.channelTabs.bookmark.edit")}
+                            label={t(plugin.channelTabs.bookmark.edit)}
                             action={() => {
                                 const key = openModal(modalProps =>
                                     <EditModal
@@ -183,7 +183,7 @@ function BookmarkFolderOpenMenu(props: BookmarkProps) {
                         <Menu.MenuItem
                             key="delete-bookmark"
                             id="delete-bookmark"
-                            label={t("plugin.channelTabs.bookmark.delete")}
+                            label={t(plugin.channelTabs.bookmark.delete)}
                             action={() => {
                                 methods.deleteBookmark(i, index);
                             }}
@@ -191,7 +191,7 @@ function BookmarkFolderOpenMenu(props: BookmarkProps) {
                         <Menu.MenuItem
                             key="remove-bookmark-from-folder"
                             id="remove-bookmark-from-folder"
-                            label={t("plugin.channelTabs.bookmark.removeFolder")}
+                            label={t(plugin.channelTabs.bookmark.removeFolder)}
                             action={() => {
                                 const newBookmarks = [...bookmark.bookmarks];
                                 newBookmarks.splice(i, 1);
@@ -251,7 +251,7 @@ function FolderBookmarkItem({ bookmark, folderIndex, bookmarkIndex, methods, isC
                         <Menu.MenuItem
                             key="edit-bookmark"
                             id="edit-bookmark"
-                            label={t("plugin.channelTabs.bookmark.edit")}
+                            label={t(plugin.channelTabs.bookmark.edit)}
                             action={() => {
                                 const key = openModal(modalProps =>
                                     <EditModal
@@ -272,13 +272,13 @@ function FolderBookmarkItem({ bookmark, folderIndex, bookmarkIndex, methods, isC
                         <Menu.MenuItem
                             key="delete-bookmark"
                             id="delete-bookmark"
-                            label={t("plugin.channelTabs.bookmark.delete")}
+                            label={t(plugin.channelTabs.bookmark.delete)}
                             action={() => methods.deleteBookmark(bookmarkIndex, folderIndex)}
                         />
                         <Menu.MenuItem
                             key="remove-from-folder"
                             id="remove-from-folder"
-                            label={t("plugin.channelTabs.bookmark.removeFolder")}
+                            label={t(plugin.channelTabs.bookmark.removeFolder)}
                             action={() => {
                                 methods.addBookmark(bookmark);
                                 methods.deleteBookmark(bookmarkIndex, folderIndex);
@@ -564,10 +564,10 @@ export default function BookmarkContainer(props: BasicChannelTabsProps & { userI
         <div className={cl("bookmark-container")}>
             <HorizontalScroller className={classes(cl("bookmarks"), isOver && cl("bookmarks-drop-target"))} customRef={dropRef}>
                 {!bookmarks && <BaseText className={cl("bookmark-placeholder-text")} size="xs">
-                    {t("plugin.channelTabs.bookmark.loading")}
+                    {t(plugin.channelTabs.bookmark.loading)}
                 </BaseText>}
                 {bookmarks && !bookmarks.length && <BaseText className={cl("bookmark-placeholder-text")} size="xs">
-                    {t("plugin.channelTabs.bookmark.noBookmarks")}
+                    {t(plugin.channelTabs.bookmark.noBookmarks)}
                 </BaseText>}
                 {Array.isArray(bookmarks) && bookmarks.length > 0 &&
                     bookmarks.flatMap((bookmark, i) => {
@@ -617,7 +617,7 @@ export default function BookmarkContainer(props: BasicChannelTabsProps & { userI
                 }
             </HorizontalScroller>
 
-            <Tooltip text={isCurrentChannelBookmarked ? t("plugin.channelTabs.bookmark.remove") : t("plugin.channelTabs.bookmark.add")} position="left" >
+            <Tooltip text={isCurrentChannelBookmarked ? t(plugin.channelTabs.bookmark.remove) : t(plugin.channelTabs.bookmark.add)} position="left" >
                 {p => <button className={cl("button")} {...p} onClick={() => {
                     if (isCurrentChannelBookmarked) {
                         if (currentChannelFolderIndex === -1)

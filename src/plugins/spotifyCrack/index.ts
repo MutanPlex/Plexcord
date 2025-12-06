@@ -17,30 +17,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     noSpotifyAutoPause: {
-        get label() {
-            return t("plugin.spotifyCrack.option.noSpotifyAutoPause.label");
-        },
-        get description() {
-            return t("plugin.spotifyCrack.option.noSpotifyAutoPause.description");
-        },
+        label: () => t(plugin.spotifyCrack.option.noSpotifyAutoPause.label),
+        description: () => t(plugin.spotifyCrack.option.noSpotifyAutoPause.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     keepSpotifyActivityOnIdle: {
-        get label() {
-            return t("plugin.spotifyCrack.option.keepSpotifyActivityOnIdle.label");
-        },
-        get description() {
-            return t("plugin.spotifyCrack.option.keepSpotifyActivityOnIdle.description");
-        },
+        label: () => t(plugin.spotifyCrack.option.keepSpotifyActivityOnIdle.label),
+        description: () => t(plugin.spotifyCrack.option.keepSpotifyActivityOnIdle.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
@@ -49,13 +41,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "SpotifyCrack",
-    description: "Free listen along, no auto-pausing in voice chat, and allows activity to continue playing when idling",
+    description: () => t(plugin.spotifyCrack.description),
     authors: [Devs.Cyn, Devs.Nuckyz],
     settings,
-
-    get displayDescription() {
-        return t("plugin.spotifyCrack.description");
-    },
 
     patches: [
         {

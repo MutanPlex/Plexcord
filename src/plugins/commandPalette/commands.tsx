@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t, updater } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { Settings } from "@api/Settings";
 import { copyToClipboard } from "@utils/clipboard";
@@ -28,21 +28,21 @@ export interface ButtonAction {
 }
 
 export const actions: ButtonAction[] = [
-    { id: "openPlexcordSettings", label: () => t("plugin.commandPalette.open.plexcord"), callback: async () => await SettingsRouter.open("PlexcordSettings"), registrar: "Plexcord" },
-    { id: "openPluginSettings", label: () => t("plugin.commandPalette.open.plugin"), callback: () => SettingsRouter.open("PlexcordPlugins"), registrar: "Plexcord" },
-    { id: "openThemesSettings", label: () => t("plugin.commandPalette.open.themes"), callback: () => SettingsRouter.open("PlexcordThemes"), registrar: "Plexcord" },
-    { id: "openUpdaterSettings", label: () => t("plugin.commandPalette.open.updater"), callback: () => SettingsRouter.open("PlexcordUpdater"), registrar: "Plexcord" },
-    { id: "openPlexcordCloudSettings", label: () => t("plugin.commandPalette.open.cloud"), callback: () => SettingsRouter.open("PlexcordCloud"), registrar: "Plexcord" },
-    { id: "openBackupSettings", label: () => t("plugin.commandPalette.open.backup"), callback: () => SettingsRouter.open("PlexcordSettingsSync"), registrar: "Plexcord" },
-    { id: "openChangelogSettings", label: () => t("plugin.commandPalette.open.changelog"), callback: () => SettingsRouter.open("PlexcordChangelog"), registrar: "Plexcord" },
-    { id: "restartClient", label: () => t("plugin.commandPalette.open.restart"), callback: () => relaunch(), registrar: "Plexcord" },
-    { id: "openQuickCSSFile", label: () => t("plugin.commandPalette.open.quickCSS"), callback: () => PlexcordNative.quickCss.openEditor(), registrar: "Plexcord" },
-    { id: "openSettingsFolder", label: () => t("plugin.commandPalette.open.settings"), callback: async () => await PlexcordNative.settings.openFolder(), registrar: "Plexcord" },
-    { id: "openInGithub", label: () => t("plugin.commandPalette.open.github"), callback: async () => PlexcordNative.native.openExternal(await getRepo()), registrar: "Plexcord" },
+    { id: "openPlexcordSettings", label: () => t(plugin.commandPalette.open.plexcord), callback: async () => await SettingsRouter.open("PlexcordSettings"), registrar: "Plexcord" },
+    { id: "openPluginSettings", label: () => t(plugin.commandPalette.open.plugin), callback: () => SettingsRouter.open("PlexcordPlugins"), registrar: "Plexcord" },
+    { id: "openThemesSettings", label: () => t(plugin.commandPalette.open.themes), callback: () => SettingsRouter.open("PlexcordThemes"), registrar: "Plexcord" },
+    { id: "openUpdaterSettings", label: () => t(plugin.commandPalette.open.updater), callback: () => SettingsRouter.open("PlexcordUpdater"), registrar: "Plexcord" },
+    { id: "openPlexcordCloudSettings", label: () => t(plugin.commandPalette.open.cloud), callback: () => SettingsRouter.open("PlexcordCloud"), registrar: "Plexcord" },
+    { id: "openBackupSettings", label: () => t(plugin.commandPalette.open.backup), callback: () => SettingsRouter.open("PlexcordSettingsSync"), registrar: "Plexcord" },
+    { id: "openChangelogSettings", label: () => t(plugin.commandPalette.open.changelog), callback: () => SettingsRouter.open("PlexcordChangelog"), registrar: "Plexcord" },
+    { id: "restartClient", label: () => t(plugin.commandPalette.open.restart), callback: () => relaunch(), registrar: "Plexcord" },
+    { id: "openQuickCSSFile", label: () => t(plugin.commandPalette.open.quickCSS), callback: () => PlexcordNative.quickCss.openEditor(), registrar: "Plexcord" },
+    { id: "openSettingsFolder", label: () => t(plugin.commandPalette.open.settings), callback: async () => await PlexcordNative.settings.openFolder(), registrar: "Plexcord" },
+    { id: "openInGithub", label: () => t(plugin.commandPalette.open.github), callback: async () => PlexcordNative.native.openExternal(await getRepo()), registrar: "Plexcord" },
 
     {
-        id: "openInBrowser", label: () => t("plugin.commandPalette.open.browser"), callback: async () => {
-            const url = await openSimpleTextInput(t("plugin.commandPalette.enter"));
+        id: "openInBrowser", label: () => t(plugin.commandPalette.open.browser), callback: async () => {
+            const url = await openSimpleTextInput(t(plugin.commandPalette.enter));
             const newUrl = url.replace(/(https?:\/\/)?([a-zA-Z0-9-]+)\.([a-zA-Z0-9-]+)/, "https://$2.$3");
 
             try {
@@ -50,7 +50,7 @@ export const actions: ButtonAction[] = [
                 PlexcordNative.native.openExternal(newUrl);
             } catch {
                 Toasts.show({
-                    message: t("plugin.commandPalette.toast.invalid"),
+                    message: t(plugin.commandPalette.toast.invalid),
                     type: Toasts.Type.FAILURE,
                     id: Toasts.genId(),
                     options: {
@@ -62,7 +62,7 @@ export const actions: ButtonAction[] = [
     },
 
     {
-        id: "togglePlugin", label: () => t("plugin.commandPalette.open.togglePlugin"), callback: async () => {
+        id: "togglePlugin", label: () => t(plugin.commandPalette.open.togglePlugin), callback: async () => {
             const plugins = Object.keys(Plugins);
             const options: ButtonAction[] = [];
 
@@ -76,8 +76,8 @@ export const actions: ButtonAction[] = [
             const choice = await openMultipleChoice(options);
 
             const enabled = await openMultipleChoice([
-                { id: "enable", label: () => t("plugin.commandPalette.enable") },
-                { id: "disable", label: () => t("plugin.commandPalette.disable") }
+                { id: "enable", label: () => t(plugin.commandPalette.enable) },
+                { id: "disable", label: () => t(plugin.commandPalette.disable) }
             ]);
 
             if (choice && enabled) {
@@ -87,16 +87,16 @@ export const actions: ButtonAction[] = [
     },
 
     {
-        id: "quickFetch", label: () => t("plugin.commandPalette.open.quickFetch"), callback: async () => {
+        id: "quickFetch", label: () => t(plugin.commandPalette.open.quickFetch), callback: async () => {
             try {
-                const url = await openSimpleTextInput(t("plugin.commandPalette.fetch"));
+                const url = await openSimpleTextInput(t(plugin.commandPalette.fetch));
                 const newUrl = url.replace(/(https?:\/\/)?([a-zA-Z0-9-]+)\.([a-zA-Z0-9-]+)/, "https://$2.$3");
                 const res = (await fetch(newUrl));
                 const text = await res.text();
                 copyToClipboard(text);
 
                 Toasts.show({
-                    message: t("plugin.commandPalette.toast.copied"),
+                    message: t(plugin.commandPalette.toast.copied),
                     type: Toasts.Type.SUCCESS,
                     id: Toasts.genId(),
                     options: {
@@ -106,7 +106,7 @@ export const actions: ButtonAction[] = [
 
             } catch (e) {
                 Toasts.show({
-                    message: t("plugin.commandPalette.issue"),
+                    message: t(plugin.commandPalette.issue),
                     type: Toasts.Type.FAILURE,
                     id: Toasts.genId(),
                     options: {
@@ -118,11 +118,11 @@ export const actions: ButtonAction[] = [
     },
 
     {
-        id: "copyGitInfo", label: () => t("plugin.commandPalette.open.copyGit"), callback: async () => {
+        id: "copyGitInfo", label: () => t(plugin.commandPalette.open.copyGit), callback: async () => {
             copyToClipboard(`gitHash: ${gitHash}\ngitRemote: ${gitRemote}`);
 
             Toasts.show({
-                message: t("plugin.commandPalette.toast.git"),
+                message: t(plugin.commandPalette.toast.git),
                 type: Toasts.Type.SUCCESS,
                 id: Toasts.genId(),
                 options: {
@@ -133,13 +133,13 @@ export const actions: ButtonAction[] = [
     },
 
     {
-        id: "checkForUpdates", label: () => t("plugin.commandPalette.open.check"), callback: async () => {
+        id: "checkForUpdates", label: () => t(plugin.commandPalette.open.check), callback: async () => {
             const isOutdated = await checkForUpdates();
 
             if (isOutdated) {
                 setTimeout(() => showNotification({
-                    title: t("updater.updateAvailable"),
-                    body: t("updater.clickToView"),
+                    title: t(updater.updateAvailable),
+                    body: t(updater.click),
                     permanent: true,
                     noPersist: true,
                     onClick() {
@@ -148,7 +148,7 @@ export const actions: ButtonAction[] = [
                 }), 10_000);
             } else {
                 Toasts.show({
-                    message: t("plugin.commandPalette.toast.noUpdates"),
+                    message: t(plugin.commandPalette.toast.noUpdates),
                     type: Toasts.Type.MESSAGE,
                     id: Toasts.genId(),
                     options: {
@@ -160,7 +160,7 @@ export const actions: ButtonAction[] = [
     },
 
     {
-        id: "navToServer", label: () => t("plugin.commandPalette.open.navigate"), callback: async () => {
+        id: "navToServer", label: () => t(plugin.commandPalette.open.navigate), callback: async () => {
             const allServers = Object.values(GuildStore.getGuilds());
             const options: ButtonAction[] = [];
 
@@ -180,12 +180,12 @@ export const actions: ButtonAction[] = [
     }
 ];
 
-function togglePlugin(plugin: ButtonAction, enabled: boolean) {
+function togglePlugin(selectedPlugin: ButtonAction, enabled: boolean) {
 
-    Settings.plugins[plugin.id].enabled = enabled;
+    Settings.plugins[selectedPlugin.id].enabled = enabled;
 
     Toasts.show({
-        message: enabled ? t("plugin.commandPalette.toast.enabled", { plugin: plugin.id }) : t("plugin.commandPalette.toast.disabled", { plugin: plugin.id }),
+        message: enabled ? t(plugin.commandPalette.toast.enabled, { plugin: selectedPlugin.id }) : t(plugin.commandPalette.toast.disabled, { plugin: selectedPlugin.id }),
         type: Toasts.Type.SUCCESS,
         id: Toasts.genId(),
         options: {

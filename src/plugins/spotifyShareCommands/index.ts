@@ -18,7 +18,7 @@
 */
 
 import { ApplicationCommandInputType, findOption, OptionalMessageOption, sendBotMessage } from "@api/Commands";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Command } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { sendMessage } from "@utils/discord";
@@ -62,10 +62,7 @@ const PendingReplyStore = findByPropsLazy("getPendingReply");
 function makeCommand(name: string, formatUrl: (track: Track) => string): Command {
     return {
         name,
-        description: `Share your current Spotify ${name} in chat`,
-        get displayDescription() {
-            return t("plugin.spotifyShareCommands.command.makeCommand.description", { type: name });
-        },
+        description: () => t(plugin.spotifyShareCommands.command.makeCommand.description, { type: name }),
         inputType: ApplicationCommandInputType.BUILT_IN,
         options: [OptionalMessageOption],
         execute(options, { channel }) {
@@ -75,7 +72,7 @@ function makeCommand(name: string, formatUrl: (track: Track) => string): Command
                     author: {
                         username: "Plexcord"
                     },
-                    content: t("plugin.spotifyShareCommands.command.makeCommand.track")
+                    content: t(plugin.spotifyShareCommands.command.makeCommand.track)
                 });
             }
 
@@ -85,7 +82,7 @@ function makeCommand(name: string, formatUrl: (track: Track) => string): Command
                     author: {
                         username: "Plexcord"
                     },
-                    content: t("plugin.spotifyShareCommands.command.makeCommand.find")
+                    content: t(plugin.spotifyShareCommands.command.makeCommand.find)
                 });
             }
 
@@ -109,12 +106,8 @@ function makeCommand(name: string, formatUrl: (track: Track) => string): Command
 
 export default definePlugin({
     name: "SpotifyShareCommands",
-    description: "Share your current Spotify track, album or artist via slash command (/track, /album, /artist)",
+    description: () => t(plugin.spotifyShareCommands.description),
     authors: [Devs.katlyn],
-
-    get displayDescription() {
-        return t("plugin.spotifyShareCommands.description");
-    },
 
     commands: [
         makeCommand("track", track => `https://open.spotify.com/track/${track.id}`),

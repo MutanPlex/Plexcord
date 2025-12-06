@@ -20,7 +20,7 @@
 import "./styles.css";
 
 import * as DataStore from "@api/DataStore";
-import i18n, { SUPPORTED_LANGUAGES, t, useTranslation } from "@api/i18n";
+import i18n, { plugins, settings, SUPPORTED_LANGUAGES, t, useTranslation } from "@api/i18n";
 import { isPluginEnabled, stopPlugin } from "@api/PluginManager";
 import { Settings, useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
@@ -48,6 +48,10 @@ import { PluginCard } from "./PluginCard";
 import { openWarningModal } from "./PluginModal";
 import { StockPluginsCard } from "./PluginStatCards";
 import { UIElementsButton } from "./UIElements";
+
+function getName(name: string | (() => string)): string {
+    return typeof name === "function" ? name() : name;
+}
 
 export const cl = classNameFactory("pc-plugins-");
 export const logger = new Logger("PluginSettings", "#a6d189");
@@ -82,7 +86,7 @@ function LanguageSelector() {
                 select={handleLocaleChange}
                 isSelected={v => v === locale}
                 closeOnSelect={true}
-                placeholder={t("settings.language.selector.placeholder")}
+                placeholder={t(settings.language.selector.placeholder)}
             />
         </div>
     );
@@ -94,19 +98,19 @@ function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetC
             {required
                 ? (
                     <>
-                        <HeadingTertiary>{t("plugins.restart.required")}</HeadingTertiary>
+                        <HeadingTertiary>{t(plugins.restart.required)}</HeadingTertiary>
                         <Paragraph className={cl("dep-text")}>
-                            {t("plugins.restart.description")}
+                            {t(plugins.restart.description)}
                         </Paragraph>
                         <Button onClick={() => location.reload()} className={cl("restart-button")}>
-                            {t("plugins.restart.button.restart")}
+                            {t(plugins.restart.button.restart)}
                         </Button>
                     </>
                 )
                 : (
                     <>
-                        <Paragraph>{t("plugins.infoModal.description")}</Paragraph>
-                        <Paragraph>{t("plugins.infoModal.settingsInfo")}</Paragraph>
+                        <Paragraph>{t(plugins.infoModal.description)}</Paragraph>
+                        <Paragraph>{t(plugins.infoModal.settingsInfo)}</Paragraph>
                         <Divider className={`${Margins.top8} ${Margins.bottom8}`} />
 
                         <StockPluginsCard
@@ -127,7 +131,7 @@ function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetC
                             return openWarningModal(null, null, null, false, enabledPlugins.length, resetCheckAndDo);
                         }}
                     >
-                        {t("plugins.restart.button.disableAll")}
+                        {t(plugins.restart.button.disableAll)}
                     </Button>
                 )}
             </Flex>
@@ -146,11 +150,11 @@ const enum SearchStatus {
 
 export function getExcludedReasons(): Record<"web" | "discordDesktop" | "plextron" | "desktop" | "dev", string> {
     return {
-        desktop: t("plugins.excluded.desktop"),
-        discordDesktop: t("plugins.excluded.discordDesktop"),
-        plextron: t("plugins.excluded.plextron"),
-        web: t("plugins.excluded.web"),
-        dev: t("plugins.excluded.dev")
+        desktop: t(plugins.excluded.desktop),
+        discordDesktop: t(plugins.excluded.discordDesktop),
+        plextron: t(plugins.excluded.plextron),
+        web: t(plugins.excluded.web),
+        dev: t(plugins.excluded.dev)
     };
 }
 
@@ -166,16 +170,16 @@ function ExcludedPluginsList({ search }: { search: string; }) {
         <Paragraph className={Margins.top16}>
             {matchingExcludedPlugins.length
                 ? <>
-                    <Paragraph>{t("plugins.search.looking")}:</Paragraph>
+                    <Paragraph>{t(plugins.search.looking)}:</Paragraph>
                     <ul>
                         {matchingExcludedPlugins.map(([name, reason]) => (
                             <li key={name}>
-                                <b>{name}</b>: {t("plugins.search.onlyAvailable")} {excludedReasons[reason]}
+                                <b>{name}</b>: {t(plugins.search.onlyAvailable)} {excludedReasons[reason]}
                             </li>
                         ))}
                     </ul>
                 </>
-                : t("plugins.search.noCriteria")
+                : t(plugins.search.noCriteria)
             }
         </Paragraph>
     );
@@ -188,10 +192,10 @@ function PluginSettings() {
     useCleanupEffect(() => {
         if (changes.hasChanges)
             Alerts.show({
-                title: t("plugins.restart.required"),
+                title: t(plugins.restart.required),
                 body: (
                     <>
-                        <p>{t("plugins.restart.following")}</p>
+                        <p>{t(plugins.restart.following)}</p>
                         <div>{changes.map((s, i) => (
                             <>
                                 {i > 0 && ", "}
@@ -200,8 +204,8 @@ function PluginSettings() {
                         ))}</div>
                     </>
                 ),
-                confirmText: t("plugins.restart.button.now"),
-                cancelText: t("plugins.restart.button.later"),
+                confirmText: t(plugins.restart.button.now),
+                cancelText: t(plugins.restart.button.later),
                 onConfirm: () => location.reload()
             });
     }, []);
@@ -209,7 +213,7 @@ function PluginSettings() {
     const depMap = Plexcord.Plugins.calculatePluginDependencyMap();
 
     const sortedPlugins = useMemo(() =>
-        Object.values(Plugins).sort((a, b) => a.name.localeCompare(b.name)),
+        Object.values(Plugins).sort((a, b) => getName(a.name).localeCompare(getName(b.name))),
         []
     );
 
@@ -223,7 +227,8 @@ function PluginSettings() {
 
     const pluginFilter = (plugin: typeof Plugins[keyof typeof Plugins]) => {
         const { status } = searchValue;
-        const enabled = isPluginEnabled(plugin.name);
+        const pluginName = getName(plugin.name);
+        const enabled = isPluginEnabled(pluginName);
 
         switch (status) {
             case SearchStatus.DISABLED:
@@ -233,36 +238,44 @@ function PluginSettings() {
                 if (!enabled) return false;
                 break;
             case SearchStatus.NEW:
-                if (!newPlugins?.includes(plugin.name)) return false;
+                if (!newPlugins?.includes(pluginName)) return false;
                 break;
             case SearchStatus.USER_PLUGINS:
-                if (!PluginMeta[plugin.name]?.userPlugin) return false;
+                if (!PluginMeta[pluginName]?.userPlugin) return false;
                 break;
             case SearchStatus.API_PLUGINS:
-                if (!plugin.name.endsWith("API")) return false;
+                if (!pluginName.endsWith("API")) return false;
                 break;
         }
 
         if (!search.length) return true;
 
+        const displayDesc = plugin.displayDescription;
+        const resolvedDisplayDesc = displayDesc
+            ? (typeof displayDesc === "function" ? displayDesc() : displayDesc)
+            : "";
+
+        const description = typeof plugin.description === "function" ? plugin.description() : plugin.description;
+
         return (
-            plugin.name.toLowerCase().includes(search) ||
-            plugin.description.toLowerCase().includes(search) ||
+            pluginName.toLowerCase().includes(search) ||
+            description.toLowerCase().includes(search) ||
             plugin.tags?.some(t => t.toLowerCase().includes(search)) ||
-            plugin.displayDescription?.toLowerCase().includes(search)
+            resolvedDisplayDesc.toLowerCase().includes(search)
         );
     };
 
     const [newPlugins] = useAwaiter(() => DataStore.get("Plexcord_existingPlugins").then((cachedPlugins: Record<string, number> | undefined) => {
         const now = Date.now() / 1000;
         const existingTimestamps: Record<string, number> = {};
-        const sortedPluginNames = Object.values(sortedPlugins).map(plugin => plugin.name);
+        const sortedPluginNames = Object.values(sortedPlugins).map(plugin => getName(plugin.name));
 
         const newPlugins: string[] = [];
-        for (const { name: p } of sortedPlugins) {
-            const time = existingTimestamps[p] = cachedPlugins?.[p] ?? now;
+        for (const p of sortedPlugins) {
+            const pName = getName(p.name);
+            const time = existingTimestamps[pName] = cachedPlugins?.[pName] ?? now;
             if ((time + 60 * 60 * 24 * 2) > now) {
-                newPlugins.push(p);
+                newPlugins.push(pName);
             }
         }
         DataStore.set("Plexcord_existingPlugins", existingTimestamps);
@@ -270,25 +283,26 @@ function PluginSettings() {
         return lodash.isEqual(newPlugins, sortedPluginNames) ? [] : newPlugins;
     }));
 
-    const plugins = [] as JSX.Element[];
+    const pluginList = [] as JSX.Element[];
     const requiredPlugins = [] as JSX.Element[];
 
     const showApi = searchValue.status === SearchStatus.API_PLUGINS;
     for (const p of sortedPlugins) {
-        if (p.hidden || (!p.options && p.name.endsWith("API") && !showApi))
+        const pluginName = getName(p.name);
+        if (p.hidden || (!p.options && pluginName.endsWith("API") && !showApi))
             continue;
 
         if (!pluginFilter(p)) continue;
 
-        const isRequired = p.required || p.isDependency || depMap[p.name]?.some(d => settings.plugins[d].enabled);
+        const isRequired = p.required || p.isDependency || depMap[pluginName]?.some(d => settings.plugins[d].enabled);
 
         if (isRequired) {
-            const tooltipText = p.required || !depMap[p.name]
-                ? t("plugins.required.this")
-                : <PluginDependencyList deps={depMap[p.name]?.filter(d => settings.plugins[d].enabled)} />;
+            const tooltipText = p.required || !depMap[pluginName]
+                ? t(plugins.required.this)
+                : <PluginDependencyList deps={depMap[pluginName]?.filter(d => settings.plugins[d].enabled)} />;
 
             requiredPlugins.push(
-                <Tooltip text={tooltipText} key={p.name}>
+                <Tooltip text={tooltipText} key={pluginName}>
                     {({ onMouseLeave, onMouseEnter }) => (
                         <PluginCard
                             onMouseLeave={onMouseLeave}
@@ -296,19 +310,19 @@ function PluginSettings() {
                             onRestartNeeded={(name, key) => changes.handleChange(`${name}.${key}`)}
                             disabled={true}
                             plugin={p}
-                            key={p.name}
+                            key={pluginName}
                         />
                     )}
                 </Tooltip>
             );
         } else {
-            plugins.push(
+            pluginList.push(
                 <PluginCard
                     onRestartNeeded={(name, key) => changes.handleChange(`${name}.${key}`)}
                     disabled={false}
                     plugin={p}
-                    isNew={newPlugins?.includes(p.name)}
-                    key={p.name}
+                    isNew={newPlugins?.includes(pluginName)}
+                    key={pluginName}
                 />
             );
         }
@@ -331,7 +345,7 @@ function PluginSettings() {
 
             if (!result) {
                 logger.error(`Error while stopping plugin ${plugin}`);
-                showErrorToast(t("plugins.error.stopping", { plugin }));
+                showErrorToast(t(plugins.error.stopping, { plugin }));
                 continue;
             }
 
@@ -340,15 +354,15 @@ function PluginSettings() {
 
         if (restartNeeded) {
             Alerts.show({
-                title: t("plugins.restart.required"),
+                title: t(plugins.restart.required),
                 body: (
                     <>
-                        <p style={{ textAlign: "center" }}>{t("plugins.restart.fully")}</p>
-                        <p style={{ textAlign: "center" }}>{t("plugins.restart.would")}</p>
+                        <p style={{ textAlign: "center" }}>{t(plugins.restart.fully)}</p>
+                        <p style={{ textAlign: "center" }}>{t(plugins.restart.would)}</p>
                     </>
                 ),
-                confirmText: t("plugins.restart.button.now"),
-                cancelText: t("plugins.restart.button.later"),
+                confirmText: t(plugins.restart.button.now),
+                cancelText: t(plugins.restart.button.later),
                 onConfirm: () => location.reload()
             });
         }
@@ -366,30 +380,30 @@ function PluginSettings() {
     const enabledUserPlugins = enabledPlugins.filter(p => PluginMeta[p].userPlugin).length;
 
     return (
-        <SettingsTab title={t("plugins.title")}>
+        <SettingsTab title={t(plugins.title)}>
 
             <ReloadRequiredCard required={changes.hasChanges} enabledPlugins={enabledPlugins} openWarningModal={openWarningModal} resetCheckAndDo={resetCheckAndDo} enabledStockPlugins={enabledStockPlugins} totalStockPlugins={totalStockPlugins} enabledUserPlugins={enabledUserPlugins} totalUserPlugins={totalUserPlugins} />
 
             <UIElementsButton />
 
             <HeadingTertiary className={classes(Margins.top20, Margins.bottom8)}>
-                {t("plugins.filters.label")}
+                {t(plugins.filters.label)}
             </HeadingTertiary>
 
             <div className={classes(Margins.bottom20, cl("filter-controls"))}>
                 <ErrorBoundary noop>
-                    <TextInput autoFocus value={searchValue.value} placeholder={t("plugins.filters.placeholder")} onChange={onSearch} />
+                    <TextInput autoFocus value={searchValue.value} placeholder={t(plugins.filters.placeholder)} onChange={onSearch} />
                 </ErrorBoundary>
                 <div>
                     <ErrorBoundary noop>
                         <Select
                             options={[
-                                { label: t("plugins.filters.option.all"), value: SearchStatus.ALL, default: true },
-                                { label: t("plugins.filters.option.enabled"), value: SearchStatus.ENABLED },
-                                { label: t("plugins.filters.option.disabled"), value: SearchStatus.DISABLED },
-                                { label: t("plugins.filters.option.new"), value: SearchStatus.NEW },
-                                hasUserPlugins && { label: t("plugins.filters.option.userplugins"), value: SearchStatus.USER_PLUGINS },
-                                IS_DEV && { label: t("plugins.filters.option.api"), value: SearchStatus.API_PLUGINS },
+                                { label: t(plugins.filters.option.all), value: SearchStatus.ALL, default: true },
+                                { label: t(plugins.filters.option.enabled), value: SearchStatus.ENABLED },
+                                { label: t(plugins.filters.option.disabled), value: SearchStatus.DISABLED },
+                                { label: t(plugins.filters.option.new), value: SearchStatus.NEW },
+                                hasUserPlugins && { label: t(plugins.filters.option.userplugins), value: SearchStatus.USER_PLUGINS },
+                                IS_DEV && { label: t(plugins.filters.option.api), value: SearchStatus.API_PLUGINS },
                             ].filter(isTruthy)}
                             serialize={String}
                             select={onStatusChange}
@@ -400,14 +414,14 @@ function PluginSettings() {
                 </div>
             </div>
 
-            <HeadingTertiary className={Margins.top20}>{t("plugins.title")}</HeadingTertiary>
+            <HeadingTertiary className={Margins.top20}>{t(plugins.title)}</HeadingTertiary>
 
-            {plugins.length || requiredPlugins.length
+            {pluginList.length || requiredPlugins.length
                 ? (
                     <div className={cl("grid")}>
-                        {plugins.length
-                            ? plugins
-                            : <BaseText size="md" weight="normal">{t("plugins.search.noCriteria")}</BaseText>
+                        {pluginList.length
+                            ? pluginList
+                            : <BaseText size="md" weight="normal">{t(plugins.search.noCriteria)}</BaseText>
                         }
                     </div>
                 )
@@ -418,12 +432,12 @@ function PluginSettings() {
             <Divider className={Margins.top20} />
 
             <Paragraph className={classes(Margins.top20, Margins.bottom8)}>
-                {t("plugins.required.title")}
+                {t(plugins.required.title)}
             </Paragraph>
             <div className={cl("grid")}>
                 {requiredPlugins.length
                     ? requiredPlugins
-                    : <BaseText size="md" weight="normal">{t("plugins.search.noCriteria")}</BaseText>
+                    : <BaseText size="md" weight="normal">{t(plugins.search.noCriteria)}</BaseText>
                 }
             </div>
         </SettingsTab >
@@ -433,9 +447,9 @@ function PluginSettings() {
 export function PluginDependencyList({ deps }: { deps: string[]; }) {
     return (
         <>
-            <Paragraph>{t("plugins.required.by")}</Paragraph>
+            <Paragraph>{t(plugins.required.by)}</Paragraph>
             {deps.map((dep: string) => <Paragraph key={dep} className={cl("dep-text")}>{dep}</Paragraph>)}
         </>
     );
 }
-export default wrapTab(PluginSettings, t("plugins.title"));
+export default wrapTab(PluginSettings, t(plugins.title));

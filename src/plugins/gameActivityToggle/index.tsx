@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
@@ -36,29 +36,19 @@ const ShowCurrentGame = getUserSettingLazy<boolean>("status", "showCurrentGame")
 
 const settings = definePluginSettings({
     oldIcon: {
-        get label() {
-            return t("plugin.gameActivityToggle.option.oldIcon.label");
-        },
-        get description() {
-            return t("plugin.gameActivityToggle.option.oldIcon.description");
-        },
+        label: () => t(plugin.gameActivityToggle.option.oldIcon.label),
+        description: () => t(plugin.gameActivityToggle.option.oldIcon.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     location: {
-        get label() {
-            return t("plugin.gameActivityToggle.option.location.label");
-        },
-        get description() {
-            return t("plugin.gameActivityToggle.option.location.description");
-        },
+        label: () => t(plugin.gameActivityToggle.option.location.label),
+        description: () => t(plugin.gameActivityToggle.option.location.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.gameActivityToggle.option.location.panel"), value: "PANEL", default: true },
-                { label: t("plugin.gameActivityToggle.option.location.toolbox"), value: "TOOLBOX" }
-            ];
-        },
+        options: [
+            { label: () => t(plugin.gameActivityToggle.option.location.panel), value: "PANEL", default: true },
+            { label: () => t(plugin.gameActivityToggle.option.location.toolbox), value: "TOOLBOX" }
+        ],
         get hidden() {
             return !isPluginEnabled(PlexcordToolboxPlugin.name);
         }
@@ -103,7 +93,7 @@ function GameActivityToggleButton(props: { nameplate?: any; }) {
     return (
         <Button
             className="pc-game-activity"
-            tooltipText={showCurrentGame ? t("plugin.gameActivityToggle.gameActivity.enabled") : t("plugin.gameActivityToggle.gameActivity.disabled")}
+            tooltipText={showCurrentGame ? t(plugin.gameActivityToggle.gameActivity.enabled) : t(plugin.gameActivityToggle.gameActivity.disabled)}
             icon={Icon}
             role="switch"
             aria-checked={!showCurrentGame}
@@ -116,14 +106,10 @@ function GameActivityToggleButton(props: { nameplate?: any; }) {
 
 export default definePlugin({
     name: "GameActivityToggle",
-    description: "Adds a button next to the mic and deafen button to toggle game activity.",
+    description: () => t(plugin.gameActivityToggle.description),
     authors: [Devs.Nuckyz, Devs.RuukuLada],
     dependencies: ["UserSettingsAPI"],
     settings,
-
-    get displayDescription() {
-        return t("plugin.gameActivityToggle.description");
-    },
 
     managedStyle,
 
@@ -146,7 +132,7 @@ export default definePlugin({
         return (
             <Menu.MenuCheckboxItem
                 id="game-activity-toggle-toolbox"
-                label={t("plugin.gameActivityToggle.gameActivity.enabled")}
+                label={t(plugin.gameActivityToggle.gameActivity.enabled)}
                 checked={showCurrentGame}
                 action={() => ShowCurrentGame.updateSetting(old => !old)}
             />

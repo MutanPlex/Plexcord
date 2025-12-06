@@ -63,8 +63,8 @@ async function syncSettings() {
         if (Settings.cloud.authenticated) {
             // User switched to an account that isn't connected to cloud
             showNotification({
-                title: t("cloud.settings"),
-                body: t("cloud.error.connect"),
+                title: t(cloud.settings),
+                body: t(cloud.error.connect),
                 color: "var(--yellow-360)",
                 onClick: () => SettingsRouter.open("PlexcordCloud")
             });
@@ -81,8 +81,8 @@ async function syncSettings() {
     ) {
         // show a notification letting them know and tell them how to fix it
         showNotification({
-            title: t("cloud.notification.title"),
-            body: t("cloud.reauth"),
+            title: t(cloud.notification.title),
+            body: t(cloud.reauth),
             color: "var(--yellow-360)",
             onClick: () => SettingsRouter.open("PlexcordCloud")
         });
@@ -103,8 +103,8 @@ async function syncSettings() {
             // there was an error to notify the user, but besides that we only want to show one notification instead of all
             // of the possible ones it has (such as when your settings are newer).
             showNotification({
-                title: t("cloud.settings"),
-                body: t("cloud.updated"),
+                title: t(cloud.settings),
+                body: t(cloud.updated),
                 color: "var(--green-360)",
                 onClick: relaunch
             });
@@ -147,8 +147,8 @@ async function runUpdateCheck() {
             await update();
             if (Settings.autoUpdateNotification) {
                 notify({
-                    title: "Plexcord " + t("updater.updated"),
-                    body: t("updater.restart"),
+                    title: "Plexcord " + t(updater.updated),
+                    body: t(updater.restart),
                     onClick: relaunch
                 });
             }
@@ -156,8 +156,8 @@ async function runUpdateCheck() {
         }
 
         notify({
-            title: t("updater.updateAvailable"),
-            body: t("updater.click"),
+            title: t(updater.updateAvailable),
+            body: t(updater.click),
             onClick: () => openSettingsTabModal(UpdaterTab!)
         });
     } catch (err) {
@@ -167,13 +167,14 @@ async function runUpdateCheck() {
 
 async function init() {
     await onceReady;
-    startAllPlugins(StartAt.WebpackReady);
 
     try {
         await LocaleLoader.initialize();
     } catch (error) {
         console.error("Failed to initialize i18n system:", error);
     }
+
+    startAllPlugins(StartAt.WebpackReady);
 
     syncSettings();
 

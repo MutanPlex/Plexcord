@@ -6,7 +6,7 @@
  */
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { migratePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Message } from "@plexcord/discord-types";
@@ -115,7 +115,7 @@ const messageCtxPatch: NavContextMenuPatchCallback = (children, { msg }: { msg: 
     group.splice(group.findIndex(c => c?.props?.id === "reply") + 1, 0, (
         <Menu.MenuItem
             id="pc-repeat"
-            label={shift ? t("plugin.repeatMessages.context.repeatAndReply") : t("plugin.repeatMessages.context.repeat")}
+            label={shift ? t(plugin.repeatMessages.context.repeatAndReply) : t(plugin.repeatMessages.context.repeat)}
             icon={RepeatMessageIcon}
             action={async () => repeatMessage(msg)}
         />
@@ -133,13 +133,9 @@ const keydownListener = (event: KeyboardEvent) => {
 migratePluginSettings("RepeatMessages", "RepeatMessage");
 export default definePlugin({
     name: "RepeatMessages",
-    description: "Allows you to repeat messages quickly. If you hold shift while clicking the Repeat option, it will reply to the message.",
+    description: () => t(plugin.repeatMessages.description),
     authors: [PcDevs.Tolgchu, Devs.thororen],
     dependencies: ["MessagePopoverAPI"],
-
-    get displayDescription() {
-        return t("plugin.repeatMessages.description");
-    },
 
     contextMenus: {
         "message": messageCtxPatch
@@ -150,7 +146,7 @@ export default definePlugin({
         render(msg) {
             if (!msg) return null;
             return {
-                label: t("plugin.repeatMessages.button"),
+                label: t(plugin.repeatMessages.button),
                 icon: RepeatMessageIcon,
                 message: msg,
                 channel: ChannelStore.getChannel(msg.channel_id),

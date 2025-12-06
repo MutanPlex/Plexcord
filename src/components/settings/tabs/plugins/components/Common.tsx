@@ -36,20 +36,23 @@ export function resolveError(isValidResult: boolean | string) {
 
 interface SettingsSectionProps extends PropsWithChildren {
     name: string;
-    description: string;
-    label?: string;
+    description: string | (() => string);
+    label?: string | (() => string);
     error?: string | null;
     inlineSetting?: boolean;
     tag?: "label" | "div";
 }
 
 export function SettingsSection({ tag: Tag = "div", name, description, label, error, inlineSetting, children }: SettingsSectionProps) {
+    const resolvedLabel = label ? (typeof label === "function" ? label() : label) : undefined;
+    const resolvedDescription = typeof description === "function" ? description() : description;
+
     return (
         <Tag className={cl("section")}>
             <div className={classes(cl("content"), inlineSetting && cl("inline"))}>
                 <div className={cl("label")}>
-                    {name && <BaseText size="md" weight="medium" className={cl("title")}>{label || wordsToTitle(wordsFromCamel(name))}</BaseText>}
-                    {description && <BaseText size="sm" weight="normal" className={cl("description")}>{description}</BaseText>}
+                    {name && <BaseText size="md" weight="medium" className={cl("title")}>{resolvedLabel || wordsToTitle(wordsFromCamel(name))}</BaseText>}
+                    {resolvedDescription && <BaseText size="sm" weight="normal" className={cl("description")}>{resolvedDescription}</BaseText>}
                 </div>
                 {children}
             </div>

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { settings, t } from "@api/i18n";
 import { Settings } from "@api/Settings";
 import { Queue } from "@utils/Queue";
 import { createRoot, WindowStore } from "@webpack/common";
@@ -38,8 +38,8 @@ window.addEventListener("focus", () => {
     if (!missed) return;
     if (missedCount > 0 && timeout > 0 && useNative === "never") {
         showNotification({
-            title: t("settings.notifications.missed.whileYou"),
-            body: t("settings.notifications.missed.count", { count: missedCount, s: missedCount !== 1 ? t("settings.notifications.missed.s") : "" }),
+            title: t(settings.notifications.missed.whileYou),
+            body: t(settings.notifications.missed.count, { count: missedCount, s: missedCount !== 1 ? t(settings.notifications.missed.s) : "" }),
             onClick: () => openNotificationLogModal(),
         });
         missedCount = 0;

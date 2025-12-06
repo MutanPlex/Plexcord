@@ -5,18 +5,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "SelfForward",
-    description: "Adds the current channel to the forward list popup",
+    description: () => t(plugin.selfForward.description),
     authors: [PcDevs.VillainsRule],
-
-    get displayDescription() {
-        return t("plugin.selfForward.description");
-    },
 
     patches: [
         {

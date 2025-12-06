@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import invisibleChatDesktop, { decrypt } from "@plugins/invisibleChat.desktop/index";
@@ -37,13 +37,13 @@ export function DecModal(props: any) {
     return (
         <ModalRoot {...props}>
             <ModalHeader>
-                <Heading>{t("plugin.invisibleChat.modal.decrypt.title")}</Heading>
+                <Heading>{t(plugin.invisibleChat.modal.decrypt.title)}</Heading>
             </ModalHeader>
 
             <ModalContent>
-                <Heading style={{ marginTop: "10px" }}>{t("plugin.invisibleChat.modal.decrypt.with")}</Heading>
+                <Heading style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.decrypt.with)}</Heading>
                 <TextInput defaultValue={encryptedMessage} disabled={true}></TextInput>
-                <Heading style={{ marginTop: "10px" }}>{t("plugin.invisibleChat.modal.decrypt.password")}</Heading>
+                <Heading style={{ marginTop: "10px" }}>{t(plugin.invisibleChat.modal.decrypt.password)}</Heading>
                 <TextInput
                     style={{ marginBottom: "20px" }}
                     onChange={setPassword}
@@ -59,14 +59,14 @@ export function DecModal(props: any) {
                         invisibleChatDesktop.buildEmbed(props?.message, toSend);
                         props.onClose();
                     }}>
-                    {t("plugin.invisibleChat.modal.decrypt.decrypt")}
+                    {t(plugin.invisibleChat.modal.decrypt.decrypt)}
                 </Button>
                 <Button
                     variant="secondary"
                     style={{ left: 15, position: "absolute" }}
                     onClick={props.onClose}
                 >
-                    {t("plugin.invisibleChat.modal.decrypt.cancel")}
+                    {t(plugin.invisibleChat.modal.decrypt.cancel)}
                 </Button>
             </ModalFooter>
         </ModalRoot>

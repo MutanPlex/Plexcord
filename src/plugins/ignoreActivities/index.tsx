@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import { Button } from "@components/Button";
@@ -87,22 +87,22 @@ function recalculateActivities() {
 function ImportCustomRPCComponent() {
     return (
         <Flex flexDirection="column">
-            <Paragraph>{t("plugin.ignoreActivities.modal.import.title")}</Paragraph>
+            <Paragraph>{t(plugin.ignoreActivities.modal.import.title)}</Paragraph>
             <div>
                 <Button
                     onClick={() => {
                         const id = Settings.plugins.CustomRPC?.appID as string | undefined;
                         if (!id) {
-                            return showToast(t("plugin.ignoreActivities.toast.id.notSet"), Toasts.Type.FAILURE);
+                            return showToast(t(plugin.ignoreActivities.toast.id.notSet), Toasts.Type.FAILURE);
                         }
 
                         const isAlreadyAdded = idsListPushID?.(id);
                         if (isAlreadyAdded) {
-                            showToast(t("plugin.ignoreActivities.toast.id.alreadyAdded"), Toasts.Type.FAILURE);
+                            showToast(t(plugin.ignoreActivities.toast.id.alreadyAdded), Toasts.Type.FAILURE);
                         }
                     }}
                 >
-                    {t("plugin.ignoreActivities.button.import")}
+                    {t(plugin.ignoreActivities.button.import)}
                 </Button>
             </div>
         </Flex>
@@ -137,8 +137,8 @@ function IdsListComponent(props: { setValue: (value: string) => void; }) {
 
     return (
         <section>
-            <Heading>{t("plugin.ignoreActivities.modal.filter.title")}</Heading>
-            <Paragraph className={Margins.bottom8}>{t("plugin.ignoreActivities.modal.filter.description")}</Paragraph>
+            <Heading>{t(plugin.ignoreActivities.modal.filter.title)}</Heading>
+            <Paragraph className={Margins.bottom8}>{t(plugin.ignoreActivities.modal.filter.description)}</Paragraph>
             <TextInput
                 type="text"
                 value={idsList}
@@ -151,39 +151,29 @@ function IdsListComponent(props: { setValue: (value: string) => void; }) {
 
 const settings = definePluginSettings({
     importCustomRPC: {
-        get label() {
-            return t("plugin.ignoreActivities.option.importCustomRPC.label");
-        },
+        label: () => t(plugin.ignoreActivities.option.importCustomRPC.label),
         type: OptionType.COMPONENT,
         component: ImportCustomRPCComponent
     },
     listMode: {
-        get label() {
-            return t("plugin.ignoreActivities.option.listMode.label");
-        },
-        get description() {
-            return t("plugin.ignoreActivities.option.listMode.description");
-        },
+        label: () => t(plugin.ignoreActivities.option.listMode.label),
+        description: () => t(plugin.ignoreActivities.option.listMode.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.ignoreActivities.option.listMode.whitelist"),
-                    value: FilterMode.Whitelist,
-                    default: true
-                },
-                {
-                    label: t("plugin.ignoreActivities.option.listMode.blacklist"),
-                    value: FilterMode.Blacklist,
-                }
-            ];
-        },
+        options: [
+            {
+                label: () => t(plugin.ignoreActivities.option.listMode.whitelist),
+                value: FilterMode.Whitelist,
+                default: true
+            },
+            {
+                label: () => t(plugin.ignoreActivities.option.listMode.blacklist),
+                value: FilterMode.Blacklist,
+            }
+        ],
         onChange: recalculateActivities
     },
     idsList: {
-        get label() {
-            return t("plugin.ignoreActivities.modal.filter.title");
-        },
+        label: () => t(plugin.ignoreActivities.modal.filter.title),
         type: OptionType.COMPONENT,
         default: "",
         onChange(newValue: string) {
@@ -194,64 +184,42 @@ const settings = definePluginSettings({
         component: props => <IdsListComponent setValue={props.setValue} />
     },
     ignorePlaying: {
-        get label() {
-            return t("plugin.ignoreActivities.option.ignorePlaying.label");
-        },
-        get description() {
-            return t("plugin.ignoreActivities.option.ignorePlaying.description");
-        },
+        label: () => t(plugin.ignoreActivities.option.ignorePlaying.label),
+        description: () => t(plugin.ignoreActivities.option.ignorePlaying.description),
         type: OptionType.BOOLEAN,
         default: false,
         onChange: recalculateActivities
     },
     ignoreStreaming: {
-        get label() {
-            return t("plugin.ignoreActivities.option.ignoreStreaming.label");
-        },
-        get description() {
-            return t("plugin.ignoreActivities.option.ignoreStreaming.description");
-        },
+        label: () => t(plugin.ignoreActivities.option.ignoreStreaming.label),
+        description: () => t(plugin.ignoreActivities.option.ignoreStreaming.description),
         type: OptionType.BOOLEAN,
         default: false,
         onChange: recalculateActivities
     },
     ignoreListening: {
-        get label() {
-            return t("plugin.ignoreActivities.option.ignoreListening.label");
-        },
-        get description() {
-            return t("plugin.ignoreActivities.option.ignoreListening.description");
-        },
+        label: () => t(plugin.ignoreActivities.option.ignoreListening.label),
+        description: () => t(plugin.ignoreActivities.option.ignoreListening.description),
         type: OptionType.BOOLEAN,
         default: false,
         onChange: recalculateActivities
     },
     ignoreWatching: {
-        get label() {
-            return t("plugin.ignoreActivities.option.ignoreWatching.label");
-        },
-        get description() {
-            return t("plugin.ignoreActivities.option.ignoreWatching.description");
-        },
+        label: () => t(plugin.ignoreActivities.option.ignoreWatching.label),
+        description: () => t(plugin.ignoreActivities.option.ignoreWatching.description),
         type: OptionType.BOOLEAN,
         default: false,
         onChange: recalculateActivities
     },
     ignoreCompeting: {
-        get label() {
-            return t("plugin.ignoreActivities.option.ignoreCompeting.label");
-        },
-        get description() {
-            return t("plugin.ignoreActivities.option.ignoreCompeting.description");
-        },
+        label: () => t(plugin.ignoreActivities.option.ignoreCompeting.label),
+        description: () => t(plugin.ignoreActivities.option.ignoreCompeting.description),
         type: OptionType.BOOLEAN,
         default: false,
         onChange: recalculateActivities
     },
     ignoredActivities: {
-        get label() {
-            return t("plugin.ignoreActivities.option.idList.label");
-        },
+        label: () => t(plugin.ignoreActivities.option.ignoredActivities.label),
         type: OptionType.CUSTOM,
         default: [] as IgnoredActivity[],
         onChange: recalculateActivities,
@@ -278,13 +246,8 @@ function isActivityTypeIgnored(type: number, id?: string) {
 export default definePlugin({
     name: "IgnoreActivities",
     authors: [Devs.Nuckyz, Devs.Kylie],
-    description: "Ignore activities from showing up on your status ONLY. You can configure which ones are specifically ignored from the Registered Games and Activities tabs, or use the general settings below",
+    description: () => t(plugin.ignoreActivities.description),
     dependencies: ["UserSettingsAPI"],
-
-    get displayDescription() {
-        return t("plugin.ignoreActivities.description");
-    },
-
     settings,
 
     patches: [

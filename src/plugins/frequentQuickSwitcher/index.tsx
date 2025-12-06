@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { ChannelStore, UserSettingsActionCreators } from "@webpack/common";
@@ -38,13 +38,9 @@ function generateSearchResults(query) {
 
 export default definePlugin({
     name: "FrequentQuickSwitcher",
-    description: "Rewrites and filters the quick switcher results to be your most frequent channels",
+    description: () => t(plugin.frequentQuickSwitcher.description),
     authors: [Devs.Samwich],
     generateSearchResults: generateSearchResults,
-
-    get displayDescription() {
-        return t("plugin.frequentQuickSwitcher.description");
-    },
 
     patches: [
         {

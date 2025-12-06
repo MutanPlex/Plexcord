@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { StartAt } from "@utils/types";
@@ -15,7 +15,6 @@ import { React } from "@webpack/common";
 import type { ReactElement } from "react";
 
 import { BlockDisplayType, ColorType, regex, RenderType, replaceRegexp, settings } from "./constants";
-
 
 interface ParsedColorInfo {
     type: "color";
@@ -28,13 +27,9 @@ const requiredFirstCharacters = ["r", "h", "#"].flatMap(v => [v, v.toUpperCase()
 
 export default definePlugin({
     authors: [PcDevs.Hen, PcDevs.MutanPlex],
+    description: () => t(plugin.messageColors.description),
     name: "MessageColors",
-    description: "Displays color codes like #FF0042 inside of messages",
     settings,
-
-    get displayDescription() {
-        return t("plugin.messageColors.description");
-    },
 
     patches: [
         // Create a new markdown rule, so it parses just like any other features

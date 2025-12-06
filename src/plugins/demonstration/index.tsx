@@ -6,7 +6,7 @@
  */
 
 import { playAudio } from "@api/AudioPlayer";
-import { t, tJsx } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
@@ -42,12 +42,8 @@ const validKeycodes = [
 
 const settings = definePluginSettings({
     keyBind: {
-        get label() {
-            return t("plugin.demonstration.option.keyBind.label");
-        },
-        get description() {
-            return t("plugin.demonstration.option.keyBind.description");
-        },
+        label: () => t(plugin.demonstration.option.keyBind.label),
+        description: () => t(plugin.demonstration.option.keyBind.description),
         type: OptionType.STRING,
         default: "F6",
         isValid: (value: string) => {
@@ -58,23 +54,15 @@ const settings = definePluginSettings({
         }
     },
     soundVolume: {
-        get label() {
-            return t("plugin.demonstration.option.soundVolume.label");
-        },
-        get description() {
-            return t("plugin.demonstration.option.soundVolume.description");
-        },
+        label: () => t(plugin.demonstration.option.soundVolume.label),
+        description: () => t(plugin.demonstration.option.soundVolume.description),
         type: OptionType.SLIDER,
         default: 0.5,
         markers: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
     },
     showConfirmationModal: {
-        get label() {
-            return t("plugin.demonstration.option.showConfirmationModal.label");
-        },
-        get description() {
-            return t("plugin.demonstration.option.showConfirmationModal.description");
-        },
+        label: () => t(plugin.demonstration.option.showConfirmationModal.label),
+        description: () => t(plugin.demonstration.option.showConfirmationModal.description),
         type: OptionType.BOOLEAN,
         default: true,
     }
@@ -84,10 +72,10 @@ function ToggleModal() {
     const value = !settings.use(["showConfirmationModal"]).showConfirmationModal;
     return (
         <FormSwitch
-            description={t("plugin.demonstration.switch.note")}
+            description={t(plugin.demonstration.switch.note)}
             value={value}
             onChange={v => { settings.store.showConfirmationModal = !v; }}
-            title={t("plugin.demonstration.switch.disable")} />
+            title={t(plugin.demonstration.switch.disable)} />
     );
 }
 
@@ -110,7 +98,7 @@ function handleToggle() {
                     </ModalHeader>
                     <ModalContent className={cl("content")}>
                         <Paragraph>
-                            {t("plugin.demonstration.shortcut")}
+                            {t(plugin.demonstration.shortcut)}
                         </Paragraph>
                         <BaseText size="xl" weight="bold" style={{ textAlign: "center", width: "100%", paddingTop: "20px", paddingBottom: "20px" }}>
                             {settings.store.keyBind}
@@ -123,7 +111,7 @@ function handleToggle() {
                             injectCSS();
                             playSound("https://github.com/MutanPlex/random-files/raw/main/sounds/demonstration/on.wav");
                         }}
-                    >{t("plugin.demonstration.okay")}</Button>
+                    >{t(plugin.demonstration.okay)}</Button>
                 </ModalRoot>
             ));
         } else {
@@ -150,25 +138,23 @@ async function playSound(url: string) {
 
 export default definePlugin({
     name: "Demonstration",
-    description: "Plugin for taking theme screenshots - censors identifying images and text.",
+    description: () => t(plugin.demonstration.description),
     authors: [Devs.Samwich, PcDevs.Panniku, PcDevs.MutanPlex],
     dependencies: ["AudioPlayerAPI"],
     settings,
 
-    get displayDescription() {
-        return t("plugin.demonstration.description");
-    },
 
-    get toolboxActions() {
-        return {
-            [t("plugin.demonstration.toolbox.toggle")]: (() => handleToggle())
-        };
-    },
+    toolboxActions: () => ({
+        [t(plugin.demonstration.toolbox.toggle)]() {
+            handleToggle();
+        }
+    }),
+
     settingsAboutComponent: () => {
         return (
             <>
-                <BaseText>{tJsx("plugin.demonstration.keycode", {
-                    keycode: <a href="https://www.toptal.com/developers/keycode" target="_blank" rel="noreferrer noopener">{t("plugin.demonstration.this")}</a>
+                <BaseText>{t(plugin.demonstration.keycode, {
+                    keycode: <a href="https://www.toptal.com/developers/keycode" target="_blank" rel="noreferrer noopener">{t(plugin.demonstration.this)}</a>
                 })}</BaseText>
             </>
         );

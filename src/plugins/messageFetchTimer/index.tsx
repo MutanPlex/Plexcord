@@ -6,7 +6,7 @@
  */
 
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import { getCurrentChannel } from "@utils/discord";
@@ -41,32 +41,20 @@ const channelTimings: Map<string, { time: number; timestamp: Date; }> = new Map(
 
 const settings = definePluginSettings({
     showIcon: {
-        get label() {
-            return t("plugin.messageFetchTimer.option.showIcon.label");
-        },
-        get description() {
-            return t("plugin.messageFetchTimer.option.showIcon.description");
-        },
+        label: () => t(plugin.messageFetchTimer.option.showIcon.label),
+        description: () => t(plugin.messageFetchTimer.option.showIcon.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     showMs: {
-        get label() {
-            return t("plugin.messageFetchTimer.option.showMs.label");
-        },
-        get description() {
-            return t("plugin.messageFetchTimer.option.showMs.description");
-        },
+        label: () => t(plugin.messageFetchTimer.option.showMs.label),
+        description: () => t(plugin.messageFetchTimer.option.showMs.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     iconColor: {
-        get label() {
-            return t("plugin.messageFetchTimer.option.iconColor.label");
-        },
-        get description() {
-            return t("plugin.messageFetchTimer.option.iconColor.description");
-        },
+        label: () => t(plugin.messageFetchTimer.option.iconColor.label),
+        description: () => t(plugin.messageFetchTimer.option.iconColor.description),
         type: OptionType.STRING,
         default: "#00d166",
     }
@@ -95,7 +83,7 @@ const FetchTimeButton: ChatBarButtonFactory = ({ isMainChat }) => {
 
     return (
         <ChatBarButton
-            tooltip={t("plugin.messageFetchTimer.loaded", { time: Math.round(time), timeAgo })}
+            tooltip={t(plugin.messageFetchTimer.loaded, { time: Math.round(time), timeAgo })}
             onClick={() => { }}
         >
             <div style={{
@@ -125,13 +113,13 @@ function formatTimeAgo(timestamp: Date): string {
     const days = Math.floor(hours / 24);
 
     if (days > 0) {
-        return `${days} ${t("plugin.messageFetchTimer.day", { s: days > 1 ? "s" : "" })}`;
+        return `${days} ${t(plugin.messageFetchTimer.day, { s: days > 1 ? "s" : "" })}`;
     } else if (hours > 0) {
-        return `${hours} ${t("plugin.messageFetchTimer.hour", { s: hours > 1 ? "s" : "" })}`;
+        return `${hours} ${t(plugin.messageFetchTimer.hour, { s: hours > 1 ? "s" : "" })}`;
     } else if (minutes > 0) {
-        return `${minutes} ${t("plugin.messageFetchTimer.minute", { s: minutes > 1 ? "s" : "" })}`;
+        return `${minutes} ${t(plugin.messageFetchTimer.minute, { s: minutes > 1 ? "s" : "" })}`;
     } else {
-        return t("plugin.messageFetchTimer.justNow");
+        return t(plugin.messageFetchTimer.justNow);
     }
 }
 
@@ -165,14 +153,10 @@ function handleMessageLoad(data: any) {
 
 export default definePlugin({
     name: "MessageFetchTimer",
-    description: "Shows how long it took to fetch messages for the current channel",
+    description: () => t(plugin.messageFetchTimer.description),
     authors: [PcDevs.GroupXyz],
     dependencies: ["ChatInputButtonAPI"],
     settings,
-
-    get displayDescription() {
-        return t("plugin.messageFetchTimer.description");
-    },
 
     start() {
         FluxDispatcher.subscribe("CHANNEL_SELECT", handleChannelSelect);

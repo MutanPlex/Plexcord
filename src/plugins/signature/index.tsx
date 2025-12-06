@@ -8,7 +8,7 @@
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, sendBotMessage } from "@api/Commands";
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { addMessagePreSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
@@ -47,53 +47,33 @@ const SignatureIcon: IconComponent = ({ height = 20, width = 20, className, chil
 const settings = definePluginSettings(
     {
         name: {
-            get label() {
-                return t("plugin.signature.option.name.label");
-            },
-            get description() {
-                return t("plugin.signature.option.name.description");
-            },
+            label: () => t(plugin.signature.option.name.label),
+            description: () => t(plugin.signature.option.name.description),
             type: OptionType.STRING,
             default: "a chronic discord user"
         },
         textHeader: {
-            get label() {
-                return t("plugin.signature.option.textHeader.label");
-            },
-            get description() {
-                return t("plugin.signature.option.textHeader.description");
-            },
+            label: () => t(plugin.signature.option.textHeader.label),
+            description: () => t(plugin.signature.option.textHeader.description),
             type: OptionType.STRING,
             default: ">",
         },
         showIcon: {
-            get label() {
-                return t("plugin.signature.option.showIcon.label");
-            },
-            get description() {
-                return t("plugin.signature.option.showIcon.description");
-            },
+            label: () => t(plugin.signature.option.showIcon.label),
+            description: () => t(plugin.signature.option.showIcon.description),
             type: OptionType.BOOLEAN,
             default: true,
             restartNeeded: true,
         },
         contextMenu: {
-            get label() {
-                return t("plugin.signature.option.contextMenu.label");
-            },
-            get description() {
-                return t("plugin.signature.option.contextMenu.description");
-            },
+            label: () => t(plugin.signature.option.contextMenu.label),
+            description: () => t(plugin.signature.option.contextMenu.description),
             type: OptionType.BOOLEAN,
             default: true
         },
         isEnabled: {
-            get label() {
-                return t("plugin.signature.option.isEnabled.label");
-            },
-            get description() {
-                return t("plugin.signature.option.isEnabled.description");
-            },
+            label: () => t(plugin.signature.option.isEnabled.label),
+            description: () => t(plugin.signature.option.isEnabled.description),
             type: OptionType.BOOLEAN,
             default: true,
         },
@@ -107,7 +87,7 @@ const SignatureToggle: ChatBarButtonFactory = ({ isMainChat }) => {
 
     return (
         <ChatBarButton
-            tooltip={isEnabled ? t("plugin.signature.tooltip.disable") : t("plugin.signature.tooltip.enable")}
+            tooltip={isEnabled ? t(plugin.signature.tooltip.disable) : t(plugin.signature.tooltip.enable)}
             onClick={toggle}
         >
             {isEnabled ? <SignatureIcon /> : <SignatureDisabledIcon />}
@@ -136,7 +116,7 @@ const ChatBarContextCheckbox: NavContextMenuPatchCallback = children => {
     group.splice(idx + 1, 0,
         <Menu.MenuCheckboxItem
             id="pc-Signature"
-            label={t("plugin.signature.context.enable")}
+            label={t(plugin.signature.context.enable)}
             checked={isEnabled}
             action={() => settings.store.isEnabled = !settings.store.isEnabled}
         />
@@ -145,13 +125,9 @@ const ChatBarContextCheckbox: NavContextMenuPatchCallback = children => {
 
 export default definePlugin({
     name: "Signature",
-    description: "Automated fingerprint/end text",
+    description: () => t(plugin.signature.description),
     authors: [Devs.Ven, Devs.Rini, Devs.ImBanana, PcDevs.KrystalSkull, PcDevs.MutanPlex],
     dependencies: ["MessageEventsAPI", "ChatInputButtonAPI"],
-
-    get displayDescription() {
-        return t("plugin.signature.description");
-    },
 
     chatBarButton: {
         icon: SignatureIcon,
@@ -176,18 +152,12 @@ export default definePlugin({
 
     commands: [{
         name: "Signature",
-        description: "Toggle your signature",
-        get displayDescription() {
-            return t("plugin.signature.command.signature.description");
-        },
+        description: () => t(plugin.signature.command.signature.description),
         inputType: ApplicationCommandInputType.BUILT_IN,
         options: [
             {
                 name: "value",
-                description: "Toggle your signature (default is toggle)",
-                get displayDescription() {
-                    return t("plugin.signature.command.signature.value");
-                },
+                description: () => t(plugin.signature.command.signature.toogle),
                 required: false,
                 type: ApplicationCommandOptionType.BOOLEAN,
             },
@@ -198,7 +168,7 @@ export default definePlugin({
                 author: {
                     username: "Plexcord",
                 },
-                content: settings.store.isEnabled ? t("plugin.signature.command.signature.enabled") : t("plugin.signature.command.signature.disabled"),
+                content: settings.store.isEnabled ? t(plugin.signature.command.signature.enabled) : t(plugin.signature.command.signature.disabled),
             });
         },
     }],

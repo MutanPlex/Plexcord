@@ -6,7 +6,7 @@
  */
 
 import * as DataStore from "@api/DataStore";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { settings } from "@plugins/gifCollections/index";
 import { Collection, Gif } from "@plugins/gifCollections/types";
 import { Toasts } from "@webpack/common";
@@ -32,7 +32,7 @@ export const createCollection = async (name: string, gifs: Gif[]): Promise<void>
     const duplicateCollection = collections.find(c => c.name === `${settings.store.collectionPrefix}${name}`);
     if (duplicateCollection)
         return Toasts.show({
-            message: t("plugin.gifCollections.toast.already"),
+            message: t(plugin.gifCollections.toast.already),
             type: Toasts.Type.FAILURE,
             id: Toasts.genId(),
             options: {
@@ -66,7 +66,7 @@ export const addToCollection = async (name: string, gif: Gif): Promise<void> => 
         const isDuplicate = collections[collectionIndex].gifs.some(g => g.url === gif.url);
         if (isDuplicate) {
             return Toasts.show({
-                message: t("plugin.gifCollections.toast.alreadyCollection"),
+                message: t(plugin.gifCollections.toast.alreadyCollection),
                 type: Toasts.Type.FAILURE,
                 id: Toasts.genId(),
                 options: {

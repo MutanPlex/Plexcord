@@ -6,7 +6,7 @@
  */
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Flex } from "@components/Flex";
 import { Devs } from "@utils/constants";
@@ -27,22 +27,14 @@ const DefaultEngines = {
 
 const settings = definePluginSettings({
     customEngineName: {
-        get label() {
-            return t("plugin.replaceGoogleSearch.option.customEngineName.label");
-        },
-        get description() {
-            return t("plugin.replaceGoogleSearch.option.customEngineName.description");
-        },
+        label: () => t(plugin.replaceGoogleSearch.option.customEngineName.label),
+        description: () => t(plugin.replaceGoogleSearch.option.customEngineName.description),
         type: OptionType.STRING,
         placeholder: "Google"
     },
     customEngineURL: {
-        get label() {
-            return t("plugin.replaceGoogleSearch.option.customEngineURL.label");
-        },
-        get description() {
-            return t("plugin.replaceGoogleSearch.option.customEngineURL.description");
-        },
+        label: () => t(plugin.replaceGoogleSearch.option.customEngineURL.label),
+        description: () => t(plugin.replaceGoogleSearch.option.customEngineURL.description),
         type: OptionType.STRING,
         placeholder: "https://google.com/search?q="
     }
@@ -63,7 +55,7 @@ function makeSearchItem(src: string) {
 
     return (
         <Menu.MenuItem
-            label={t("plugin.replaceGoogleSearch.context.label")}
+            label={t(plugin.replaceGoogleSearch.context.label)}
             key="search-text"
             id="pc-search-text"
         >
@@ -108,7 +100,7 @@ const messageContextMenuPatch: NavContextMenuPatchCallback = (children, _props) 
 
 export default definePlugin({
     name: "ReplaceGoogleSearch",
-    description: "Replaces the Google search with different Engines",
+    description: () => t(plugin.replaceGoogleSearch.description),
     authors: [Devs.Moxxie, Devs.Ethan],
 
     settings,

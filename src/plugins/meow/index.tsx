@@ -6,7 +6,7 @@
  */
 
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs, PcDevs } from "@utils/constants";
 import { getCurrentChannel } from "@utils/discord";
 import definePlugin, { IconComponent } from "@utils/types";
@@ -48,7 +48,7 @@ async function handleButtonClick() {
 
 const ChatBarIcon: ChatBarButtonFactory = () => {
     return (
-        <ChatBarButton tooltip={t("plugin.meow.button.meow")} onClick={handleButtonClick}>
+        <ChatBarButton tooltip={t(plugin.meow.button.meow)} onClick={handleButtonClick}>
             <MeowIcon />
         </ChatBarButton>
     );
@@ -56,13 +56,8 @@ const ChatBarIcon: ChatBarButtonFactory = () => {
 
 export default definePlugin({
     name: "Meow",
-    description: "Adds a chatbar button to meow in chat",
+    description: () => t(plugin.meow.description),
     dependencies: ["ChatInputButtonAPI"],
-
-    get displayDescription() {
-        return t("plugin.meow.description");
-    },
-
     authors: [Devs.Samwich, PcDevs.MutanPlex],
 
     chatBarButton: {

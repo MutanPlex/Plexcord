@@ -6,7 +6,7 @@
  */
 
 import { BadgeUserArgs, ProfileBadge } from "@api/Badges";
-import { i18n, t } from "@api/i18n";
+import { i18n, plugin, t } from "@api/i18n";
 import { Badges } from "@api/index";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
@@ -42,44 +42,44 @@ function daysSince(dateString: string): number {
 function getRanks(): rankInfo[] {
     return [
         {
-            title: t("plugin.friendshipRanks.badge.sprout.name"),
-            description: t("plugin.friendshipRanks.badge.sprout.description"),
+            title: t(plugin.friendshipRanks.badge.sprout.name),
+            description: t(plugin.friendshipRanks.badge.sprout.description),
             requirement: 0,
             assetSVG: sproutIcon
         },
         {
-            title: t("plugin.friendshipRanks.badge.blooming.name"),
-            description: t("plugin.friendshipRanks.badge.blooming.description"),
+            title: t(plugin.friendshipRanks.badge.blooming.name),
+            description: t(plugin.friendshipRanks.badge.blooming.description),
             requirement: 30,
             assetSVG: bloomingIcon
         },
         {
-            title: t("plugin.friendshipRanks.badge.burning.name"),
-            description: t("plugin.friendshipRanks.badge.burning.description"),
+            title: t(plugin.friendshipRanks.badge.burning.name),
+            description: t(plugin.friendshipRanks.badge.burning.description),
             requirement: 90,
             assetSVG: burningIcon
         },
         {
-            title: t("plugin.friendshipRanks.badge.fighter.name"),
-            description: t("plugin.friendshipRanks.badge.fighter.description"),
+            title: t(plugin.friendshipRanks.badge.fighter.name),
+            description: t(plugin.friendshipRanks.badge.fighter.description),
             requirement: 182.5,
             assetSVG: fighterIcon
         },
         {
-            title: t("plugin.friendshipRanks.badge.star.name"),
-            description: t("plugin.friendshipRanks.badge.star.description"),
+            title: t(plugin.friendshipRanks.badge.star.name),
+            description: t(plugin.friendshipRanks.badge.star.description),
             requirement: 365,
             assetSVG: starIcon
         },
         {
-            title: t("plugin.friendshipRanks.badge.royal.name"),
-            description: t("plugin.friendshipRanks.badge.royal.description"),
+            title: t(plugin.friendshipRanks.badge.royal.name),
+            description: t(plugin.friendshipRanks.badge.royal.description),
             requirement: 730,
             assetSVG: royalIcon
         },
         {
-            title: t("plugin.friendshipRanks.badge.besties.name"),
-            description: t("plugin.friendshipRanks.badge.besties.description"),
+            title: t(plugin.friendshipRanks.badge.besties.name),
+            description: t(plugin.friendshipRanks.badge.besties.description),
             requirement: 1826.25,
             assetSVG: bestiesIcon
         }
@@ -158,14 +158,9 @@ function reloadBadges() {
 
 export default definePlugin({
     name: "FriendshipRanks",
-    description: "Adds badges showcasing how long you have been friends with a user for",
+    description: () => t(plugin.friendshipRanks.description),
     authors: [Devs.Samwich, PcDevs.MutanPlex],
-
     localeUnsubscribe: null as (() => void) | null,
-
-    get displayDescription() {
-        return t("plugin.friendshipRanks.description");
-    },
 
     start() {
         currentBadges = getBadgesToApply();

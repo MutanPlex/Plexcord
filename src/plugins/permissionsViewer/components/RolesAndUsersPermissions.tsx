@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
@@ -95,14 +95,14 @@ function RolesAndUsersPermissionsComponent({ permissions, guild, modalProps, hea
             size={ModalSize.LARGE}
         >
             <ModalHeader>
-                <BaseText size="lg" weight="semibold" className={cl("modal-title")}>{header} {t("plugin.permissionsViewer.modal.title")}</BaseText>
+                <BaseText size="lg" weight="semibold" className={cl("modal-title")}>{header} {t(plugin.permissionsViewer.modal.title)}</BaseText>
                 <ModalCloseButton onClick={modalProps.onClose} />
             </ModalHeader>
 
             <ModalContent className={cl("modal-content")}>
                 {!selectedItem && (
                     <div className={cl("modal-no-perms")}>
-                        <BaseText size="lg" weight="normal">{t("plugin.permissionsViewer.modal.noPermissions")}</BaseText>
+                        <BaseText size="lg" weight="normal">{t(plugin.permissionsViewer.modal.noPermissions)}</BaseText>
                     </div>
                 )}
 
@@ -168,7 +168,7 @@ function RolesAndUsersPermissionsComponent({ permissions, guild, modalProps, hea
                                                             ? (user != null && getUniqueUsername(user)) ?? "Unknown User"
                                                             : (
                                                                 <Flex style={{ gap: "0.2em" }} alignItems="center">
-                                                                    @{t("plugin.permissionsViewer.modal.owner")}
+                                                                    @{t(plugin.permissionsViewer.modal.owner)}
                                                                     <OwnerCrownIcon height={18} width={18} aria-hidden="true" />
                                                                 </Flex>
                                                             )

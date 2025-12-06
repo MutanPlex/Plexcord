@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button, TextButton } from "@components/Button";
 import { images } from "@plugins/loginWithQR/images";
@@ -161,7 +161,7 @@ function VerifyModal({
                             {getIntlMessage("QR_CODE_LOGIN_CONFIRM")}
                         </BaseText>
                         <BaseText size="md" weight="semibold" color="text-danger">
-                            {t("plugin.loginWithQR.neverScan")}
+                            {t(plugin.loginWithQR.neverScan)}
                         </BaseText>
                         <Button
                             size="medium"
@@ -175,7 +175,7 @@ function VerifyModal({
                             ref={buttonRef}
                             disabled={inProgress}
                         >
-                            {t("plugin.loginWithQR.hold")}
+                            {t(plugin.loginWithQR.hold)}
                         </Button>
                     </>
                 )}

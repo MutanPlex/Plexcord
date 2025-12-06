@@ -20,7 +20,7 @@
 import "./styles.css";
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -52,19 +52,13 @@ const enum MenuItemParentType {
 
 export const settings = definePluginSettings({
     permissionsSortOrder: {
-        get label() {
-            return t("plugin.permissionsViewer.option.permissionsSortOrder.label");
-        },
-        get description() {
-            return t("plugin.permissionsViewer.option.permissionsSortOrder.description");
-        },
+        label: () => t(plugin.permissionsViewer.option.permissionsSortOrder.label),
+        description: () => t(plugin.permissionsViewer.option.permissionsSortOrder.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.permissionsViewer.option.permissionsSortOrder.highest"), value: PermissionsSortOrder.HighestRole, default: true },
-                { label: t("plugin.permissionsViewer.option.permissionsSortOrder.lowest"), value: PermissionsSortOrder.LowestRole }
-            ];
-        }
+        options: [
+            { label: () => t(plugin.permissionsViewer.option.permissionsSortOrder.highest), value: PermissionsSortOrder.HighestRole, default: true },
+            { label: () => t(plugin.permissionsViewer.option.permissionsSortOrder.lowest), value: PermissionsSortOrder.LowestRole }
+        ]
     },
 });
 
@@ -74,7 +68,7 @@ function MenuItem(guildId: string, id?: string, type?: MenuItemParentType) {
     return (
         <Menu.MenuItem
             id="perm-viewer-permissions"
-            label={t("plugin.permissionsViewer.context.permissions")}
+            label={t(plugin.permissionsViewer.context.permissions)}
             action={() => {
                 const guild = GuildStore.getGuild(guildId);
 
@@ -169,13 +163,9 @@ function makeContextMenuPatch(childId: string | string[], type?: MenuItemParentT
 
 export default definePlugin({
     name: "PermissionsViewer",
-    description: "View the permissions a user or channel has, and the roles of a server",
+    description: () => t(plugin.permissionsViewer.description),
     authors: [Devs.Nuckyz, Devs.Ven],
     settings,
-
-    get displayDescription() {
-        return t("plugin.permissionsViewer.description");
-    },
 
     patches: [
         {
@@ -202,7 +192,7 @@ export default definePlugin({
                 )}
             >
                 {popoutProps => (
-                    <TooltipContainer text={t("plugin.permissionsViewer.view")}>
+                    <TooltipContainer text={t(plugin.permissionsViewer.view)}>
                         <Button
                             {...popoutProps}
                             ref={buttonRef}

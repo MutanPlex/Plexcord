@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { openModal } from "@utils/modal";
 import { React } from "@webpack/common";
@@ -25,7 +25,7 @@ export default ({ notebook, setNotebook }: { notebook: string, setNotebook: (not
                     : () => openModal(props => <NotebookCreateModal {...props} />)
             }
         >
-            {isNotMain ? t("plugin.holyNotes.button.delete") : t("plugin.holyNotes.button.create")}
+            {isNotMain ? t(plugin.holyNotes.button.delete) : t(plugin.holyNotes.button.create)}
         </Button>
     );
 };

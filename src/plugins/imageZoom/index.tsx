@@ -18,7 +18,7 @@
 */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
@@ -30,7 +30,6 @@ import type { Root } from "react-dom/client";
 import { Magnifier, MagnifierProps } from "./components/Magnifier";
 import { ELEMENT_ID } from "./constants";
 import managedStyle from "./styles.css?managed";
-
 
 interface ImageMetadata {
     filename: string;
@@ -46,68 +45,44 @@ const DOUBLE_CLICK_THRESHOLD = 300;
 
 export const settings = definePluginSettings({
     saveZoomValues: {
-        get label() {
-            return t("plugin.imageZoom.option.saveZoomValues.label");
-        },
-        get description() {
-            return t("plugin.imageZoom.option.saveZoomValues.description");
-        },
+        label: () => t(plugin.imageZoom.option.saveZoomValues.label),
+        description: () => t(plugin.imageZoom.option.saveZoomValues.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
 
     invertScroll: {
-        get label() {
-            return t("plugin.imageZoom.option.invertScroll.label");
-        },
-        get description() {
-            return t("plugin.imageZoom.option.invertScroll.description");
-        },
+        label: () => t(plugin.imageZoom.option.invertScroll.label),
+        description: () => t(plugin.imageZoom.option.invertScroll.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
 
     nearestNeighbour: {
-        get label() {
-            return t("plugin.imageZoom.option.nearestNeighbour.label");
-        },
-        get description() {
-            return t("plugin.imageZoom.option.nearestNeighbour.description");
-        },
+        label: () => t(plugin.imageZoom.option.nearestNeighbour.label),
+        description: () => t(plugin.imageZoom.option.nearestNeighbour.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
 
     square: {
-        get label() {
-            return t("plugin.imageZoom.option.square.label");
-        },
-        get description() {
-            return t("plugin.imageZoom.option.square.description");
-        },
+        label: () => t(plugin.imageZoom.option.square.label),
+        description: () => t(plugin.imageZoom.option.square.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
 
     zoom: {
-        get label() {
-            return t("plugin.imageZoom.option.zoom.label");
-        },
-        get description() {
-            return t("plugin.imageZoom.option.zoom.description");
-        },
+        label: () => t(plugin.imageZoom.option.zoom.label),
+        description: () => t(plugin.imageZoom.option.zoom.description),
         type: OptionType.SLIDER,
         markers: makeRange(1, 50, 4),
         default: 2,
         stickToMarkers: false,
     },
     size: {
-        get label() {
-            return t("plugin.imageZoom.option.size.label");
-        },
-        get description() {
-            return t("plugin.imageZoom.option.size.description");
-        },
+        label: () => t(plugin.imageZoom.option.size.label),
+        description: () => t(plugin.imageZoom.option.size.description),
         type: OptionType.SLIDER,
         markers: makeRange(50, 1000, 50),
         default: 100,
@@ -115,12 +90,8 @@ export const settings = definePluginSettings({
     },
 
     zoomSpeed: {
-        get label() {
-            return t("plugin.imageZoom.option.zoomSpeed.label");
-        },
-        get description() {
-            return t("plugin.imageZoom.option.zoomSpeed.description");
-        },
+        label: () => t(plugin.imageZoom.option.zoomSpeed.label),
+        description: () => t(plugin.imageZoom.option.zoomSpeed.description),
         type: OptionType.SLIDER,
         markers: makeRange(0.1, 5, 0.2),
         default: 0.5,
@@ -128,12 +99,8 @@ export const settings = definePluginSettings({
     },
 
     showMetadata: {
-        get label() {
-            return t("plugin.imageZoom.option.showMetadata.label");
-        },
-        get description() {
-            return t("plugin.imageZoom.option.showMetadata.description");
-        },
+        label: () => t(plugin.imageZoom.option.showMetadata.label),
+        description: () => t(plugin.imageZoom.option.showMetadata.description),
         type: OptionType.BOOLEAN,
         default: true,
     }
@@ -152,7 +119,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
         <Menu.MenuGroup id="image-zoom">
             <Menu.MenuCheckboxItem
                 id="pc-square"
-                label={t("plugin.imageZoom.context.square")}
+                label={t(plugin.imageZoom.context.square)}
                 checked={square}
                 action={() => {
                     settings.store.square = !square;
@@ -160,7 +127,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
             />
             <Menu.MenuCheckboxItem
                 id="pc-nearest-neighbour"
-                label={t("plugin.imageZoom.context.nearest")}
+                label={t(plugin.imageZoom.context.nearest)}
                 checked={nearestNeighbour}
                 action={() => {
                     settings.store.nearestNeighbour = !nearestNeighbour;
@@ -168,7 +135,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
             />
             <Menu.MenuControlItem
                 id="pc-zoom"
-                label={t("plugin.imageZoom.context.zoom")}
+                label={t(plugin.imageZoom.context.zoom)}
                 control={(props, ref) => (
                     <Menu.MenuSliderControl
                         ref={ref}
@@ -182,7 +149,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
             />
             <Menu.MenuControlItem
                 id="pc-size"
-                label={t("plugin.imageZoom.context.size")}
+                label={t(plugin.imageZoom.context.size)}
                 control={(props, ref) => (
                     <Menu.MenuSliderControl
                         ref={ref}
@@ -196,7 +163,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
             />
             <Menu.MenuControlItem
                 id="pc-zoom-speed"
-                label={t("plugin.imageZoom.context.zoomSpeed")}
+                label={t(plugin.imageZoom.context.zoomSpeed)}
                 control={(props, ref) => (
                     <Menu.MenuSliderControl
                         ref={ref}
@@ -212,7 +179,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
             <Menu.MenuSeparator />
             <Menu.MenuCheckboxItem
                 id="pc-show-metadata"
-                label={t("plugin.imageZoom.context.showImageMetadata")}
+                label={t(plugin.imageZoom.context.showImageMetadata)}
                 checked={showMetadata}
                 action={() => {
                     settings.store.showMetadata = !showMetadata;
@@ -220,7 +187,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
             />
             <Menu.MenuItem
                 id="pc-view-metadata"
-                label={t("plugin.imageZoom.context.view")}
+                label={t(plugin.imageZoom.context.view)}
                 action={() => {
                     const target = props.target as HTMLImageElement;
                     if (target && target.src) {
@@ -295,7 +262,7 @@ function createMetadataDisplay(imgElement: HTMLImageElement) {
     filenameRow.className = "pc-metadata-row";
     const filenameLabel = document.createElement("span");
     filenameLabel.className = "pc-metadata-label";
-    filenameLabel.textContent = t("plugin.imageZoom.context.filename") + ":";
+    filenameLabel.textContent = t(plugin.imageZoom.context.filename) + ":";
     const filenameValue = document.createElement("span");
     filenameValue.textContent = metadata.filename;
     filenameRow.appendChild(filenameLabel);
@@ -306,7 +273,7 @@ function createMetadataDisplay(imgElement: HTMLImageElement) {
     dimensionsRow.className = "pc-metadata-row";
     const dimensionsLabel = document.createElement("span");
     dimensionsLabel.className = "pc-metadata-label";
-    dimensionsLabel.textContent = t("plugin.imageZoom.context.dimensions") + ":";
+    dimensionsLabel.textContent = t(plugin.imageZoom.context.dimensions) + ":";
     const dimensionsValue = document.createElement("span");
     dimensionsValue.textContent = metadata.dimensions;
     dimensionsRow.appendChild(dimensionsLabel);
@@ -317,9 +284,9 @@ function createMetadataDisplay(imgElement: HTMLImageElement) {
     sizeRow.className = "pc-metadata-row";
     const sizeLabel = document.createElement("span");
     sizeLabel.className = "pc-metadata-label";
-    sizeLabel.textContent = t("plugin.imageZoom.context.sizeHTML") + ":";
+    sizeLabel.textContent = t(plugin.imageZoom.context.sizeHTML) + ":";
     const sizeValue = document.createElement("span");
-    sizeValue.textContent = metadata.size || t("plugin.imageZoom.context.loading");
+    sizeValue.textContent = metadata.size || t(plugin.imageZoom.context.loading);
     sizeRow.appendChild(sizeLabel);
     sizeRow.appendChild(sizeValue);
     container.appendChild(sizeRow);
@@ -335,7 +302,7 @@ function getFilenameFromURL(url: string): string {
         const parts = cleanUrl.split("/");
         return decodeURIComponent(parts[parts.length - 1]);
     } catch {
-        return t("plugin.imageZoom.context.unknown");
+        return t(plugin.imageZoom.context.unknown);
     }
 }
 
@@ -358,14 +325,9 @@ function formatFileSize(bytes: number): string {
 
 export default definePlugin({
     name: "ImageZoom",
-    description: "Lets you zoom in to images and gifs as well as displays image metadata. Use scroll wheel to zoom in and shift + scroll wheel to increase lens radius.",
+    description: () => t(plugin.imageZoom.description),
     authors: [Devs.Aria, PcDevs.Campfire],
     tags: ["ImageUtilities"],
-
-    get displayDescription() {
-        return t("plugin.imageZoom.description");
-    },
-
     managedStyle,
 
     patches: [

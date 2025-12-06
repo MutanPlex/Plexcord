@@ -18,7 +18,7 @@
 */
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, sendBotMessage } from "@api/Commands";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { CloudUpload } from "@plexcord/discord-types";
@@ -41,59 +41,37 @@ export const tarExtMatcher = /\.tar\.\w+$/;
 
 const settings = definePluginSettings({
     anonymiseByDefault: {
-        get label() {
-            return t("plugin.anonymiseFileNames.option.anonymiseByDefault.label");
-        },
-        get description() {
-            return t("plugin.anonymiseFileNames.option.anonymiseByDefault.description");
-        },
+        label: () => t(plugin.anonymiseFileNames.option.anonymiseByDefault.label),
+        description: () => t(plugin.anonymiseFileNames.option.anonymiseByDefault.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     spoilerMessages: {
-        get label() {
-            return t("plugin.anonymiseFileNames.option.spoilerMessages.label");
-        },
-        get description() {
-            return t("plugin.anonymiseFileNames.option.spoilerMessages.description");
-        },
+        label: () => t(plugin.anonymiseFileNames.option.spoilerMessages.label),
+        description: () => t(plugin.anonymiseFileNames.option.spoilerMessages.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     method: {
-        get label() {
-            return t("plugin.anonymiseFileNames.option.method.label");
-        },
-        get description() {
-            return t("plugin.anonymiseFileNames.option.method.description");
-        },
+        label: () => t(plugin.anonymiseFileNames.option.method.label),
+        description: () => t(plugin.anonymiseFileNames.option.method.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.anonymiseFileNames.option.method.random"), value: Methods.Random, default: true },
-                { label: t("plugin.anonymiseFileNames.option.method.consistent"), value: Methods.Consistent },
-                { label: t("plugin.anonymiseFileNames.option.method.timestamp"), value: Methods.Timestamp },
-            ];
-        },
+        options: [
+            { label: () => t(plugin.anonymiseFileNames.option.method.random), value: Methods.Random, default: true },
+            { label: () => t(plugin.anonymiseFileNames.option.method.consistent), value: Methods.Consistent },
+            { label: () => t(plugin.anonymiseFileNames.option.method.timestamp), value: Methods.Timestamp },
+        ],
     },
     randomisedLength: {
-        get label() {
-            return t("plugin.anonymiseFileNames.option.randomisedLength.label");
-        },
-        get description() {
-            return t("plugin.anonymiseFileNames.option.randomisedLength.description");
-        },
+        label: () => t(plugin.anonymiseFileNames.option.randomisedLength.label),
+        description: () => t(plugin.anonymiseFileNames.option.randomisedLength.description),
         type: OptionType.NUMBER,
         default: 7,
         disabled: () => settings.store.method !== Methods.Random,
     },
     consistent: {
-        get label() {
-            return t("plugin.anonymiseFileNames.option.consistent.label");
-        },
-        get description() {
-            return t("plugin.anonymiseFileNames.option.consistent.description");
-        },
+        label: () => t(plugin.anonymiseFileNames.option.consistent.label),
+        description: () => t(plugin.anonymiseFileNames.option.consistent.description),
         type: OptionType.STRING,
         default: "image",
         disabled: () => settings.store.method !== Methods.Consistent,
@@ -103,12 +81,8 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "AnonymiseFileNames",
     authors: [Devs.fawn],
-    description: "Anonymise uploaded file names",
+    description: () => t(plugin.anonymiseFileNames.description),
     settings,
-
-    get displayDescription() {
-        return t("plugin.anonymiseFileNames.description");
-    },
 
     patches: [
         {
@@ -139,7 +113,7 @@ export default definePlugin({
 
         return (
             <ActionBarIcon
-                tooltip={anonymise ? t("plugin.anonymiseFileNames.using.anonymous") : t("plugin.anonymiseFileNames.using.spoiler")}
+                tooltip={anonymise ? t(plugin.anonymiseFileNames.using.anonymous) : t(plugin.anonymiseFileNames.using.spoiler)}
                 onClick={onToggleAnonymise}
             >
                 {anonymise
@@ -185,18 +159,12 @@ export default definePlugin({
 
     commands: [{
         name: "Spoiler",
-        description: "Toggle your spoiler",
-        get displayDescription() {
-            return t("plugin.anonymiseFileNames.spoiler.description");
-        },
+        description: () => t(plugin.anonymiseFileNames.spoiler.description),
         inputType: ApplicationCommandInputType.BUILT_IN,
         options: [
             {
                 name: "value",
-                description: "Toggle your Spoiler (default is toggle)",
-                get displayDescription() {
-                    return t("plugin.anonymiseFileNames.spoiler.toggle");
-                },
+                description: () => t(plugin.anonymiseFileNames.spoiler.toggle),
                 required: false,
                 type: ApplicationCommandOptionType.BOOLEAN,
             },
@@ -208,7 +176,7 @@ export default definePlugin({
                 author: {
                     username: "Plexcord"
                 },
-                content: settings.store.spoilerMessages ? t("plugin.anonymiseFileNames.spoiler.enabled") : t("plugin.anonymiseFileNames.spoiler.disabled"),
+                content: settings.store.spoilerMessages ? t(plugin.anonymiseFileNames.spoiler.enabled) : t(plugin.anonymiseFileNames.spoiler.disabled),
             });
         },
     }],

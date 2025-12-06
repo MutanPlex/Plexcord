@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import { insertTextIntoChatInputBox } from "@utils/discord";
 import definePlugin from "@utils/types";
@@ -42,11 +42,7 @@ function Icon({ height = 24, width = 24, className = "icon" }: { height?: number
 export default definePlugin({
     name: "QuickMention",
     authors: [Devs.kemo],
-    description: "Adds a quick mention button to the message actions bar",
-
-    get displayDescription() {
-        return t("plugin.quickMention.description");
-    },
+    description: () => t(plugin.quickMention.description),
 
     messagePopoverButton: {
         icon: Icon,
@@ -55,7 +51,7 @@ export default definePlugin({
             if (channel.guild_id && !PermissionStore.can(PermissionsBits.SEND_MESSAGES, channel)) return null;
 
             return {
-                label: t("plugin.quickMention.tooltip"),
+                label: t(plugin.quickMention.tooltip),
                 icon: Icon,
                 message: msg,
                 channel,

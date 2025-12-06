@@ -8,7 +8,7 @@
 import "./styles.css";
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
@@ -36,7 +36,7 @@ const ContextMenuPatch: NavContextMenuPatchCallback = (children, { channel }: { 
             <Menu.MenuSeparator />
             <Menu.MenuCheckboxItem
                 id="pc-ignore-calls-temp"
-                label={t("plugin.ignoreCalls.button.temporarilyIgnore")}
+                label={t(plugin.ignoreCalls.button.temporarilyIgnore)}
                 checked={tempChecked}
                 action={() => {
                     if (tempChecked)
@@ -49,7 +49,7 @@ const ContextMenuPatch: NavContextMenuPatchCallback = (children, { channel }: { 
             />
             <Menu.MenuCheckboxItem
                 id="pc-ignore-calls-perm"
-                label={t("plugin.ignoreCalls.button.permanentlyIgnore")}
+                label={t(plugin.ignoreCalls.button.permanentlyIgnore)}
                 checked={permChecked}
                 action={() => {
                     let updated = permanentlyIgnoredUsers.slice();
@@ -70,12 +70,8 @@ const ContextMenuPatch: NavContextMenuPatchCallback = (children, { channel }: { 
 
 const settings = definePluginSettings({
     permanentlyIgnoredUsers: {
-        get label() {
-            return t("plugin.ignoreCalls.option.permanentlyIgnoredUsers.label");
-        },
-        get description() {
-            return t("plugin.ignoreCalls.option.permanentlyIgnoredUsers.description");
-        },
+        label: () => t(plugin.ignoreCalls.option.permanentlyIgnoredUsers.label),
+        description: () => t(plugin.ignoreCalls.option.permanentlyIgnoredUsers.description),
         type: OptionType.STRING,
         restartNeeded: true,
         default: "",
@@ -90,13 +86,9 @@ const args = {
 
 export default definePlugin({
     name: "IgnoreCalls",
-    description: "Allows you to ignore calls from specific users or dm groups.",
+    description: () => t(plugin.ignoreCalls.description),
     authors: [PcDevs.TheArmagan, Devs.thororen],
     settings,
-
-    get displayDescription() {
-        return t("plugin.ignoreCalls.description");
-    },
 
     patches: [
         {
@@ -134,7 +126,7 @@ export default definePlugin({
 
         return (
             <ErrorBoundary>
-                <Tooltip text={t("plugin.ignoreCalls.button.ignore")}>
+                <Tooltip text={t(plugin.ignoreCalls.button.ignore)}>
                     {({ onMouseEnter, onMouseLeave }) => (
                         <Button
                             className={cl("button")}

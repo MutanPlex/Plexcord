@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { addMessagePreSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -13,12 +13,8 @@ import { ChannelStore, GuildMemberStore, SelectedChannelStore, SelectedGuildStor
 
 export default definePlugin({
     name: "AtSomeone",
+    description: () => t(plugin.atSomeone.description),
     authors: [Devs.Joona, PcDevs.MutanPlex],
-    description: "Mention someone randomly",
-
-    get displayDescription() {
-        return t("plugin.atSomeone.description");
-    },
 
     patches: [
         {
@@ -26,7 +22,7 @@ export default definePlugin({
             replacement: [
                 {
                     match: /&(\i)\(\)\((\i),\i\(\)\.test\)&&(\i)\.push\(\i\(\)\)/g,
-                    replace: "$&,$1()($2,/someone/.test)&&$3.push({text:'@someone',description:'Mention someone randomly'})"
+                    replace: "$&,$1()($2,/someone/.test)&&$3.push({text:'@someone',description:t(plugin.atSomeone.description)})"
                 },
             ],
         },

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { SessionInfo } from "@plugins/betterSessions/types";
@@ -45,11 +45,11 @@ export function RenameModal({ props, session, state }: { props: ModalProps, sess
     return (
         <ModalRoot {...props}>
             <ModalHeader>
-                <Heading>{t("plugin.betterSessions.rename")}</Heading>
+                <Heading>{t(plugin.betterSessions.rename)}</Heading>
             </ModalHeader>
 
             <ModalContent>
-                <Heading style={{ marginTop: "10px" }}>{t("plugin.betterSessions.newDevice")}</Heading>
+                <Heading style={{ marginTop: "10px" }}>{t(plugin.betterSessions.newDevice)}</Heading>
                 <TextInput
                     style={{ marginBottom: "10px" }}
                     placeholder={getDefaultName(session.client_info)}
@@ -72,7 +72,7 @@ export function RenameModal({ props, session, state }: { props: ModalProps, sess
                     size="min"
                     onClick={() => setValue("")}
                 >
-                    {t("plugin.betterSessions.resetName")}
+                    {t(plugin.betterSessions.resetName)}
                 </Button>
             </ModalContent>
 
@@ -82,13 +82,13 @@ export function RenameModal({ props, session, state }: { props: ModalProps, sess
                         variant="primary"
                         onClick={onSaveClick}
                     >
-                        {t("plugin.betterSessions.save")}
+                        {t(plugin.betterSessions.save)}
                     </Button>
                     <Button
                         variant="primary"
                         onClick={() => props.onClose()}
                     >
-                        {t("plugin.betterSessions.cancel")}
+                        {t(plugin.betterSessions.cancel)}
                     </Button>
                 </div>
             </ModalFooter>

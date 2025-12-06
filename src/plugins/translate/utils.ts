@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { onlyOnce } from "@utils/onlyOnce";
 import { PluginNative } from "@utils/types";
@@ -65,7 +65,7 @@ export async function translate(kind: "received" | "sent", text: string): Promis
     } catch (e) {
         const userMessage = typeof e === "string"
             ? e
-            : t("plugin.translate.modal.wrong");
+            : t(plugin.translate.modal.wrong);
 
         showToast(userMessage, Toasts.Type.FAILURE);
 
@@ -88,7 +88,7 @@ async function googleTranslate(text: string, sourceLang: string, targetLang: str
     const res = await fetch(url);
     if (!res.ok)
         throw new Error(
-            `${t("plugin.translate.utils.to", { text })} (${sourceLang} -> ${targetLang})`
+            `${t(plugin.translate.modal.failed.to, { text })} (${sourceLang} -> ${targetLang})`
             + `\n${res.status} ${res.statusText}`
         );
 
@@ -109,12 +109,12 @@ function fallbackToGoogle(text: string, sourceLang: string, targetLang: string):
 }
 
 const showDeeplApiQuotaToast = onlyOnce(
-    () => showToast(t("plugin.translate.modal.deepl.api"), Toasts.Type.FAILURE)
+    () => showToast(t(plugin.translate.modal.deepl.api), Toasts.Type.FAILURE)
 );
 
 async function deeplTranslate(text: string, sourceLang: string, targetLang: string): Promise<TranslationValue> {
     if (!settings.store.deeplApiKey) {
-        showToast(t("plugin.translate.modal.deepl.apiKey"), Toasts.Type.FAILURE);
+        showToast(t(plugin.translate.modal.deepl.apiKey), Toasts.Type.FAILURE);
 
         settings.store.service = "google";
         resetLanguageDefaults();
@@ -137,9 +137,9 @@ async function deeplTranslate(text: string, sourceLang: string, targetLang: stri
         case 200:
             break;
         case -1:
-            throw t("plugin.translate.modal.connect") + data;
+            throw t(plugin.translate.modal.failed.connect) + data;
         case 403:
-            throw t("plugin.translate.modal.deepl.auth");
+            throw t(plugin.translate.modal.deepl.auth);
         case 456:
             showDeeplApiQuotaToast();
             return fallbackToGoogle(text, sourceLang, targetLang);

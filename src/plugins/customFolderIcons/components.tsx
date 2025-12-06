@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { closeModal, ModalContent, ModalHeader, ModalRoot, openModalLazy } from "@utils/modal";
 import { Menu, Slider, TextInput, useState } from "@webpack/common";
@@ -31,7 +31,7 @@ export function ImageModal(folderProps: folderProp) {
             {data && <>
                 <div style={{
                     color: "#FFF"
-                }}>{t("plugin.customFolderIcons.modal.change")}</div>
+                }}>{t(plugin.customFolderIcons.modal.change)}</div>
                 <Slider
                     initialValue={100}
                     onValueChange={(v: number) => {
@@ -58,7 +58,7 @@ export function ImageModal(folderProps: folderProp) {
                     closeModal("custom-folder-icon");
                 }}
                 >
-                    {t("plugin.customFolderIcons.modal.save")}
+                    {t(plugin.customFolderIcons.modal.save)}
                 </Button>
                 <Button onClick={() => {
                     // INFO: unset button
@@ -68,7 +68,7 @@ export function ImageModal(folderProps: folderProp) {
                     }
                     closeModal("custom-folder-icon");
                 }}>
-                    {t("plugin.customFolderIcons.modal.unset")}
+                    {t(plugin.customFolderIcons.modal.unset)}
                 </Button>
             </div>
         </>
@@ -108,7 +108,7 @@ export function makeContextItem(a: folderProp) {
                                 <div style={{
                                     color: "white"
                                 }}>
-                                    {t("plugin.customFolderIcons.modal.set")}
+                                    {t(plugin.customFolderIcons.modal.set)}
                                 </div>
                             </ModalHeader>
                             <ModalContent>
@@ -118,7 +118,7 @@ export function makeContextItem(a: folderProp) {
                                 color: "white",
                                 margin: "24px",
                             }}>
-                                {t("plugin.customFolderIcons.modal.hover")}
+                                {t(plugin.customFolderIcons.modal.hover)}
                             </div>
                         </ModalRoot>
                     );

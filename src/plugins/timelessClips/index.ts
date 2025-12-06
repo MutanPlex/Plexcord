@@ -5,19 +5,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { makeRange, OptionType, } from "@utils/types";
 
 const settings = definePluginSettings({
     clipLength: {
-        get label() {
-            return t("plugin.timelessClips.option.clipLength.label");
-        },
-        get description() {
-            return t("plugin.timelessClips.option.clipLength.description");
-        },
+        label: () => t(plugin.timelessClips.option.clipLength.label),
+        description: () => t(plugin.timelessClips.option.clipLength.description),
         type: OptionType.SLIDER,
         markers: makeRange(3, 30, 1),
         default: 5,
@@ -27,12 +23,8 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "TimelessClips",
+    description: () => t(plugin.timelessClips.description),
     authors: [Devs.Joona],
-    description: "Add a your own clip length",
-
-    get displayDescription() {
-        return t("plugin.timelessClips.description");
-    },
 
     patches: [
         {

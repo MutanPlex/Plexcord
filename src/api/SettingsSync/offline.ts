@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { sync, t } from "@api/i18n";
 import { PlainSettings } from "@api/Settings";
 import { Logger } from "@utils/Logger";
 import { chooseFile, saveFile } from "@utils/web";
@@ -21,10 +21,10 @@ const toast = (type: string, message: string) =>
     });
 
 const toastSuccess = () =>
-    toast(Toasts.Type.SUCCESS, t("sync.successful"));
+    toast(Toasts.Type.SUCCESS, t(sync.successful));
 
 const toastFailure = (err: any) =>
-    toast(Toasts.Type.FAILURE, t("sync.error.failure", { error: String(err) }));
+    toast(Toasts.Type.FAILURE, t(sync.error.failure, { error: String(err) }));
 
 const logger = new Logger("SettingsSync:Offline", "#39b7e0");
 
@@ -46,7 +46,7 @@ export async function importSettings(data: string) {
 
     if ("dataStore" in parsed) await DataStore.setMany(parsed.dataStore);
 
-    if (!("settings" in parsed || "quickCss" in parsed || "dataStore" in parsed)) throw new Error(t("sync.error.invalid"));
+    if (!("settings" in parsed || "quickCss" in parsed || "dataStore" in parsed)) throw new Error(t(sync.error.invalid));
 }
 
 export async function exportSettings({ minify }: { minify?: boolean; } = {}) {

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { patchHelper, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { CodeBlock } from "@components/CodeBlock";
 import { Divider } from "@components/Divider";
@@ -42,9 +42,9 @@ const findCandidates = debounce(function ({ find, setModule, setError }) {
     const len = keys.length;
 
     if (len === 0)
-        setError(t("patchHelper.error.noMatch"));
+        setError(t(patchHelper.error.noMatch));
     else if (len !== 1)
-        setError(t("patchHelper.error.multipleMatch"));
+        setError(t(patchHelper.error.multipleMatch));
     else
         setModule([keys[0], candidates[keys[0]]]);
 });
@@ -107,8 +107,8 @@ function PatchHelper() {
     }
 
     return (
-        <SettingsTab title={t("patchHelper.title")}>
-            <HeadingTertiary>{t("patchHelper.fullPatch.label")}</HeadingTertiary>
+        <SettingsTab title={t(patchHelper.title)}>
+            <HeadingTertiary>{t(patchHelper.fullPatch.label)}</HeadingTertiary>
             <FullPatchInput
                 setFind={onFindChange}
                 setParsedFind={setParsedFind}
@@ -116,7 +116,7 @@ function PatchHelper() {
                 setReplacement={setReplacement}
             />
 
-            <HeadingTertiary className={Margins.top8}>{t("patchHelper.find")}</HeadingTertiary>
+            <HeadingTertiary className={Margins.top8}>{t(patchHelper.find)}</HeadingTertiary>
             <TextInput
                 type="text"
                 value={find}
@@ -124,7 +124,7 @@ function PatchHelper() {
                 error={findError}
             />
 
-            <HeadingTertiary className={Margins.top8}>{t("patchHelper.match")}</HeadingTertiary>
+            <HeadingTertiary className={Margins.top8}>{t(patchHelper.match)}</HeadingTertiary>
             <TextInput
                 type="text"
                 value={match}
@@ -151,14 +151,14 @@ function PatchHelper() {
 
             {!!(find && match && replacement) && (
                 <>
-                    <HeadingTertiary className={Margins.top20}>{t("patchHelper.code")}</HeadingTertiary>
+                    <HeadingTertiary className={Margins.top20}>{t(patchHelper.code)}</HeadingTertiary>
                     <CodeBlock lang="js" content={code} />
                     <Flex className={Margins.top16}>
                         <Button onClick={() => copyWithToast(code)}>
-                            {t("patchHelper.copy.clipboard")}
+                            {t(patchHelper.copy.clipboard)}
                         </Button>
                         <Button onClick={() => copyWithToast("```ts\n" + code + "\n```")}>
-                            {t("patchHelper.copy.codeblock")}
+                            {t(patchHelper.copy.codeblock)}
                         </Button>
                     </Flex>
                 </>
@@ -167,4 +167,4 @@ function PatchHelper() {
     );
 }
 
-export default IS_DEV ? wrapTab(PatchHelper, t("patchHelper.title")) : null;
+export default IS_DEV ? wrapTab(PatchHelper, t(patchHelper.title)) : null;

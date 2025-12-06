@@ -17,14 +17,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { useTimer } from "@utils/react";
 import { findComponentByCodeLazy } from "@webpack";
 
 import { cl } from "..";
 
 const PREVIEW_IDLE_LABEL = "----";
-const PREVIEW_RECORDING_LABEL = t("plugin.voiceMessages.modal.recording");
+const PREVIEW_RECORDING_LABEL = t(plugin.voiceMessages.modal.recording);
 
 interface VoiceMessageProps {
     src: string;

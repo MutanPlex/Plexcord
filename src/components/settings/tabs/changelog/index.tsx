@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { changelog, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
@@ -88,7 +88,7 @@ function ChangelogCard({
                         />
                     </code>
                     <span className="pc-changelog-entry-author">
-                        {t("changelog.by")} {entry.author}
+                        {t(changelog.by)} {entry.author}
                     </span>
                 </div>
                 <div className="pc-changelog-entry-message">
@@ -129,9 +129,9 @@ function UpdateLogCard({
                         <span>
                             {isRepositoryFetch
                                 ? isUpToDate
-                                    ? `${t("changelog.check")}: ${log.fromHash.slice(0, 7)} (${t("changelog.uptodate")})`
-                                    : `${t("changelog.check")}: ${log.fromHash.slice(0, 7)} → ${log.toHash.slice(0, 7)}`
-                                : `${t("changelog.update")}: ${log.fromHash.slice(0, 7)} → ${log.toHash.slice(0, 7)}`}
+                                    ? `${t(changelog.check)}: ${log.fromHash.slice(0, 7)} (${t(changelog.uptodate)})`
+                                    : `${t(changelog.check)}: ${log.fromHash.slice(0, 7)} → ${log.toHash.slice(0, 7)}`
+                                : `${t(changelog.update)}: ${log.fromHash.slice(0, 7)} → ${log.toHash.slice(0, 7)}`}
                         </span>
                         <Button
                             variant="secondary"
@@ -157,15 +157,15 @@ function UpdateLogCard({
                     <div className="pc-changelog-log-meta">
                         {formatTimestamp(log.timestamp)}
                         {log.commits.length > 0 &&
-                            ` • ${log.commits.length} ${t("changelog.commit.available")}`}
-                        {log.commits.length === 0 && ` • ${t("changelog.commit.no")}`}
+                            ` • ${log.commits.length} ${t(changelog.commit.available)}`}
+                        {log.commits.length === 0 && ` • ${t(changelog.commit.no)}`}
                         {log.newPlugins.length > 0 &&
-                            ` • ${log.newPlugins.length} ${t("changelog.commit.new")}`}
+                            ` • ${log.newPlugins.length} ${t(changelog.commit.new)}`}
                         {log.updatedPlugins.length > 0 &&
-                            ` • ${log.updatedPlugins.length} ${t("changelog.commit.updated")}`}
+                            ` • ${log.updatedPlugins.length} ${t(changelog.commit.updated)}`}
                         {log.newSettings &&
                             getNewSettingsSize(log.newSettings) > 0 &&
-                            ` • ${getNewSettingsEntries(log.newSettings).reduce((sum, [, arr]) => sum + arr.length, 0)} ${t("changelog.commit.settings")}`}
+                            ` • ${getNewSettingsEntries(log.newSettings).reduce((sum, [, arr]) => sum + arr.length, 0)} ${t(changelog.commit.settings)}`}
                     </div>
                 </div>
                 <div
@@ -189,7 +189,7 @@ function UpdateLogCard({
                     {log.updatedPlugins.length > 0 && (
                         <div className="pc-changelog-log-plugins">
                             <Heading className={Margins.bottom8}>
-                                {t("changelog.updatedplugins")}
+                                {t(changelog.updatedPlugins)}
                             </Heading>
                             <NewPluginsCompact
                                 newPlugins={log.updatedPlugins}
@@ -202,7 +202,7 @@ function UpdateLogCard({
                         getNewSettingsSize(log.newSettings) > 0 && (
                             <div className="pc-changelog-log-plugins">
                                 <Heading className={Margins.bottom8}>
-                                    {t("changelog.newSettings")}
+                                    {t(changelog.newSettings)}
                                 </Heading>
                                 <div className="pc-changelog-new-plugins-list">
                                     {getNewSettingsEntries(log.newSettings).map(
@@ -211,7 +211,7 @@ function UpdateLogCard({
                                                 <span
                                                     key={`${pluginName}-${setting}`}
                                                     className="pc-changelog-new-plugin-tag"
-                                                    title={t("changelog.newSettingTooltip", {
+                                                    title={t(changelog.newSettingTooltip, {
                                                         plugin: pluginName,
                                                     })}
                                                 >
@@ -245,9 +245,9 @@ function UpdateLogCard({
 
 function ChangelogContent() {
     const [repo, repoErr, repoPending] = useAwaiter(getRepo, {
-        fallbackValue: t("changelog.loading"),
+        fallbackValue: t(changelog.loading),
     });
-    const [changelog, setChangelog] = React.useState<ChangelogEntry[]>([]);
+    const [changelogEntries, setChangelogEntries] = React.useState<ChangelogEntry[]>([]);
     const [changelogHistory, setChangelogHistory] =
         React.useState<ChangelogHistory>([]);
     const [newPlugins, setNewPlugins] = React.useState<string[]>([]);
@@ -314,7 +314,7 @@ function ChangelogContent() {
 
             await saveUpdateSession(commits, newPlgs, updatedPlgs, newSettings);
 
-            setChangelog(commits);
+            setChangelogEntries(commits);
             setNewPlugins(newPlgs);
             setUpdatedPlugins(updatedPlgs);
             await loadChangelogHistory();
@@ -371,9 +371,9 @@ function ChangelogContent() {
                 setRecentlyChecked(true);
                 const logged = await ensureLocalUpdateLogged();
                 if (!logged) {
-                    setChangelog([]);
+                    setChangelogEntries([]);
                     Toasts.show({
-                        message: t("changelog.toast.already"),
+                        message: t(changelog.toast.already),
                         id: Toasts.genId(),
                         type: Toasts.Type.MESSAGE,
                         options: {
@@ -386,7 +386,7 @@ function ChangelogContent() {
 
             if (updates.ok && updates.value) {
                 if (updates.value.length > 0) {
-                    setChangelog(updates.value);
+                    setChangelogEntries(updates.value);
 
                     const newPlgs = await getNewPlugins();
                     const updatedPlgs = await getUpdatedPlugins();
@@ -405,7 +405,7 @@ function ChangelogContent() {
                     setRecentlyChecked(true);
 
                     Toasts.show({
-                        message: t("changelog.toast.found", { count: updates.value.length, s: updates.value.length === 1 ? "" : "s" }),
+                        message: t(changelog.toast.found, { count: updates.value.length, s: updates.value.length === 1 ? "" : "s" }),
                         id: Toasts.genId(),
                         type: Toasts.Type.SUCCESS,
                         options: {
@@ -417,8 +417,8 @@ function ChangelogContent() {
                     setRecentlyChecked(true);
                     Toasts.show({
                         message: logged
-                            ? t("changelog.toast.yourLatest")
-                            : t("changelog.toast.local"),
+                            ? t(changelog.toast.yourLatest)
+                            : t(changelog.toast.local),
                         id: Toasts.genId(),
                         type: logged ? Toasts.Type.SUCCESS : Toasts.Type.MESSAGE,
                         options: {
@@ -426,7 +426,7 @@ function ChangelogContent() {
                         },
                     });
                     if (!logged) {
-                        setChangelog([]);
+                        setChangelogEntries([]);
                     }
                 }
             } else if (!updates.ok) {
@@ -443,7 +443,7 @@ function ChangelogContent() {
 
             // funny little error toast hopefully doesn't happen!
             Toasts.show({
-                message: t("changelog.toast.failed"),
+                message: t(changelog.toast.failed),
                 id: Toasts.genId(),
                 type: Toasts.Type.FAILURE,
                 options: {
@@ -491,28 +491,28 @@ function ChangelogContent() {
     };
 
     const hasCurrentChanges =
-        changelog.length > 0 ||
+        changelogEntries.length > 0 ||
         newPlugins.length > 0 ||
         updatedPlugins.length > 0;
 
     return (
         <>
             <Paragraph className={Margins.bottom16}>
-                {t("changelog.modal.description")}
+                {t(changelog.modal.description)}
             </Paragraph>
 
-            <Heading>{t("changelog.modal.repository")}</Heading>
+            <Heading>{t(changelog.modal.repository)}</Heading>
             <Paragraph className={Margins.bottom16}>
                 {repoPending ? (
                     repo
                 ) : repoErr ? (
-                    t("changelog.modal.failed")
+                    t(changelog.modal.failed)
                 ) : (
                     <Link href={repo}>
                         {repo.split("/").slice(-2).join("/")}
                     </Link>
                 )}{" "}
-                ({t("changelog.modal.current")}{" "}
+                ({t(changelog.modal.current)}{" "}
                 <span className="pc-changelog-current-hash">
                     {shortGitHash()}
                 </span>
@@ -531,10 +531,10 @@ function ChangelogContent() {
                     }
                 >
                     {isLoading
-                        ? t("changelog.loading")
+                        ? t(changelog.loading)
                         : recentlyChecked
-                            ? t("changelog.repoUptodate")
-                            : t("changelog.fetch")}
+                            ? t(changelog.repoUptodate)
+                            : t(changelog.fetch)}
                 </Button>
 
                 {changelogHistory.length > 0 && (
@@ -549,24 +549,24 @@ function ChangelogContent() {
                             onClick={() => setShowHistory(!showHistory)}
                             style={{ marginLeft: "8px" }}
                         >
-                            {showHistory ? t("changelog.modal.hide") : t("changelog.modal.show")}
+                            {showHistory ? t(changelog.modal.hide) : t(changelog.modal.show)}
                         </Button>
                         <Button
                             size="small"
                             variant="dangerPrimary"
                             onClick={() => {
                                 Alerts.show({
-                                    title: t("changelog.alert.clear.title"),
-                                    body: t("changelog.alert.clear.body"),
-                                    confirmText: t("changelog.alert.clear.confirm"),
-                                    confirmColor: t("changelog.alert.clear.confirmColor"),
-                                    cancelText: t("changelog.alert.clear.cancel"),
+                                    title: t(changelog.alert.clear.title),
+                                    body: t(changelog.alert.clear.body),
+                                    confirmText: t(changelog.alert.clear.confirm),
+                                    confirmColor: t(changelog.alert.clear.confirmColor),
+                                    cancelText: t(changelog.alert.clear.cancel),
                                     onConfirm: async () => {
                                         await clearChangelogHistory();
                                         await loadChangelogHistory();
                                         setShowHistory(false);
                                         Toasts.show({
-                                            message: t("changelog.toast.cleared"),
+                                            message: t(changelog.toast.cleared),
                                             id: Toasts.genId(),
                                             type: Toasts.Type.SUCCESS,
                                             options: {
@@ -579,7 +579,7 @@ function ChangelogContent() {
                             }}
                             style={{ marginLeft: "8px" }}
                         >
-                            {t("changelog.clear")}
+                            {t(changelog.clear)}
                         </Button>
                     </>
                 )}
@@ -594,7 +594,7 @@ function ChangelogContent() {
                             color: "var(--text-muted)",
                         }}
                     >
-                        {t("changelog.internet")}
+                        {t(changelog.internet)}
                     </BaseText>
                 </ErrorCard>
             )}
@@ -605,7 +605,7 @@ function ChangelogContent() {
             {hasCurrentChanges ? (
                 <div className="pc-changelog-current">
                     <Heading className={Margins.bottom8}>
-                        {t("changelog.recent")}
+                        {t(changelog.recent)}
                     </Heading>
 
                     {/* New Plugins Section */}
@@ -624,20 +624,20 @@ function ChangelogContent() {
                     {updatedPlugins.length > 0 && (
                         <div className={Margins.bottom16}>
                             <Heading className={Margins.bottom8}>
-                                ({updatedPlugins.length}) {t("changelog.updatedPlugins")}
+                                ({updatedPlugins.length}) {t(changelog.updatedPlugins)}
                             </Heading>
                             <NewPluginsCompact newPlugins={updatedPlugins} />
                         </div>
                     )}
 
                     {/* Code Changes */}
-                    {changelog.length > 0 && (
+                    {changelogEntries.length > 0 && (
                         <div>
                             <Heading className={Margins.bottom8}>
-                                {t("changelog.codeChanges", { count: changelog.length, s: changelog.length === 1 ? "" : "s" })}
+                                {t(changelog.codeChanges, { count: changelogEntries.length, s: changelogEntries.length === 1 ? "" : "s" })}
                             </Heading>
                             <div className="pc-changelog-commits-list">
-                                {changelog.map(entry => (
+                                {changelogEntries.map(entry => (
                                     <ChangelogCard
                                         key={entry.hash}
                                         entry={entry}
@@ -654,7 +654,7 @@ function ChangelogContent() {
                 !error && (
                     <Card className="pc-changelog-empty">
                         <BaseText>
-                            {t("changelog.noCommit")}
+                            {t(changelog.noCommit)}
                         </BaseText>
                     </Card>
                 )
@@ -668,12 +668,12 @@ function ChangelogContent() {
                         style={{ marginBottom: "1em" }}
                     />
                     <Heading className={Margins.bottom8}>
-                        {t("changelog.updateLogs", {
+                        {t(changelog.updateLogs, {
                             count: changelogHistory.length,
                         })}
                     </Heading>
                     <Paragraph className={Margins.bottom16}>
-                        {t("changelog.previous")}
+                        {t(changelog.previous)}
                     </Paragraph>
 
                     <div className="pc-changelog-history-list">
@@ -687,11 +687,11 @@ function ChangelogContent() {
                                 onToggleExpand={() => toggleLogExpanded(log.id)}
                                 onClearLog={logId => {
                                     Alerts.show({
-                                        title: t("changelog.alert.log.title"),
-                                        body: t("changelog.alert.log.body"),
-                                        confirmText: t("changelog.alert.log.confirm"),
-                                        confirmColor: t("changelog.alert.log.confirmColor"),
-                                        cancelText: t("changelog.alert.log.cancel"),
+                                        title: t(changelog.alert.log.title),
+                                        body: t(changelog.alert.log.body),
+                                        confirmText: t(changelog.alert.log.confirm),
+                                        confirmColor: t(changelog.alert.log.confirmColor),
+                                        cancelText: t(changelog.alert.log.cancel),
                                         onConfirm: async () => {
                                             await clearIndividualLog(logId);
                                             await loadChangelogHistory();
@@ -705,7 +705,7 @@ function ChangelogContent() {
                                                 ),
                                             );
                                             Toasts.show({
-                                                message: t("changelog.toast.logCleared"),
+                                                message: t(changelog.toast.logCleared),
                                                 id: Toasts.genId(),
                                                 type: Toasts.Type.SUCCESS,
                                                 options: {
@@ -727,10 +727,10 @@ function ChangelogContent() {
 
 function ChangelogTab() {
     return (
-        <SettingsTab title={t("changelog.text")}>
+        <SettingsTab title={t(changelog.text)}>
             <ChangelogContent />
         </SettingsTab>
     );
 }
 
-export default wrapTab(ChangelogTab, t("changelog.text"));
+export default wrapTab(ChangelogTab, t(changelog.text));

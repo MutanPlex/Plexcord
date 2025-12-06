@@ -7,7 +7,7 @@
 
 import "./style.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { actions } from "@plugins/commandPalette/commands";
 import { Logger } from "@utils/Logger";
@@ -112,7 +112,7 @@ export function CommandPalette({ modalProps }) {
                     value={queryEh}
                     onChange={e => setQuery(e)}
                     style={{ width: "100%", borderBottomLeftRadius: "0", borderBottomRightRadius: "0", paddingLeft: "0.9rem" }}
-                    placeholder={t("plugin.commandPalette.search")}
+                    placeholder={t(plugin.commandPalette.search)}
                 />
                 <div className={cl("option-container")}>
                     {visibleActions.map((action, index) => (

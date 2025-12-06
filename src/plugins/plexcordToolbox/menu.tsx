@@ -1,6 +1,6 @@
-import { t } from "@api/i18n";
+import { plugin, plugins, t, themes } from "@api/i18n";
 import { openNotificationLogModal } from "@api/Notifications/notificationLog";
-import { isPluginEnabled, plugins } from "@api/PluginManager";
+import { isPluginEnabled, plugins as Plugins } from "@api/PluginManager";
 import { Settings, useSettings } from "@api/Settings";
 import { openPluginModal, openSettingsTabModal, PluginsTab, ThemesTab } from "@components/settings";
 import { getThemeInfo } from "@main/themes";
@@ -10,6 +10,10 @@ import { Menu, showToast, useMemo, useState } from "@webpack/common";
 import type { ReactNode } from "react";
 
 import { settings } from ".";
+
+function getName(name: string | (() => string)): string {
+    return typeof name === "function" ? name() : name;
+}
 
 function buildPluginMenu() {
     const { showPluginMenu } = settings.use(["showPluginMenu"]);
@@ -22,7 +26,7 @@ function buildPluginMenu() {
     return (
         <Menu.MenuItem
             id="plugins"
-            label={t("plugins.title")}
+            label={t(plugins.title)}
             action={() => openSettingsTabModal(PluginsTab)}
         >
             {pluginEntries}
@@ -38,17 +42,18 @@ export function buildPluginMenuEntries(includeEmpty = false) {
     const lowerSearch = search.toLowerCase();
 
     const sortedPlugins = useMemo(() =>
-        Object.values(plugins).sort((a, b) => a.name.localeCompare(b.name)),
+        Object.values(Plugins).sort((a, b) => getName(a.name).localeCompare(getName(b.name))),
         []
     );
 
     const candidates = useMemo(() =>
         sortedPlugins
             .filter(p => {
-                if (!isPluginEnabled(p.name)) return false;
-                if (p.name.endsWith("API")) return false;
+                const pluginName = getName(p.name);
+                if (!isPluginEnabled(pluginName)) return false;
+                if (pluginName.endsWith("API")) return false;
 
-                const name = p.name.toLowerCase();
+                const name = pluginName.toLowerCase();
                 return name.includes(lowerSearch);
             }),
         [lowerSearch]
@@ -72,6 +77,7 @@ export function buildPluginMenuEntries(includeEmpty = false) {
 
             {candidates
                 .map(p => {
+                    const pluginName = getName(p.name);
                     const options = [] as ReactNode[];
 
                     let hasAnyOption = false;
@@ -81,12 +87,12 @@ export function buildPluginMenuEntries(includeEmpty = false) {
 
                         hasAnyOption = true;
 
-                        const s = pluginSettings[p.name];
+                        const s = pluginSettings[pluginName];
 
                         const baseProps = {
-                            id: `${p.name}-${key}`,
+                            id: `${pluginName}-${key}`,
                             key: key,
-                            label: t(`plugin.${p.name.charAt(0).toLowerCase() + p.name.slice(1)}.option.${key}.label`),
+                            label: t(`plugin.${pluginName.charAt(0).toLowerCase() + pluginName.slice(1)}.option.${key}.label`) as string,
                             disabled: "disabled" in option ? option.disabled?.call(p.settings) : false,
                         };
 
@@ -98,7 +104,7 @@ export function buildPluginMenuEntries(includeEmpty = false) {
                                         checked={s[key]}
                                         action={() => {
                                             s[key] = !s[key];
-                                            if (option.restartNeeded) showToast(t("plugins.restart.apply"));
+                                            if (option.restartNeeded) showToast(t(plugins.restart.apply));
                                         }}
                                     />
                                 );
@@ -106,19 +112,22 @@ export function buildPluginMenuEntries(includeEmpty = false) {
                             case OptionType.SELECT:
                                 options.push(
                                     <Menu.MenuItem {...baseProps}>
-                                        {option.options.map(opt => (
-                                            <Menu.MenuRadioItem
-                                                group={`${p.name}-${key}`}
-                                                id={`${p.name}-${key}-${opt.value}`}
-                                                key={opt.label}
-                                                label={opt.label}
-                                                checked={s[key] === opt.value}
-                                                action={() => {
-                                                    s[key] = opt.value;
-                                                    if (option.restartNeeded) showToast(t("plugins.restart.apply"));
-                                                }}
-                                            />
-                                        ))}
+                                        {option.options.map(opt => {
+                                            const optLabel = typeof opt.label === "function" ? opt.label() : opt.label;
+                                            return (
+                                                <Menu.MenuRadioItem
+                                                    group={`${pluginName}-${key}`}
+                                                    id={`${pluginName}-${key}-${opt.value}`}
+                                                    key={optLabel}
+                                                    label={optLabel}
+                                                    checked={s[key] === opt.value}
+                                                    action={() => {
+                                                        s[key] = opt.value;
+                                                        if (option.restartNeeded) showToast(t(plugins.restart.apply));
+                                                    }}
+                                                />
+                                            );
+                                        })}
                                     </Menu.MenuItem>
                                 );
                                 break;
@@ -151,22 +160,22 @@ export function buildPluginMenuEntries(includeEmpty = false) {
 
                     return (
                         <Menu.MenuItem
-                            id={`${p.name}-menu`}
-                            key={p.name}
-                            label={p.name}
+                            id={`${pluginName}-menu`}
+                            key={pluginName}
+                            label={pluginName}
                             action={() => openPluginModal(p)}
                         >
                             {hasVisibleOptions && (
                                 <>
-                                    <Menu.MenuGroup label={p.name}>
+                                    <Menu.MenuGroup label={pluginName}>
                                         {options}
                                     </Menu.MenuGroup>
 
                                     <Menu.MenuSeparator />
 
                                     <Menu.MenuItem
-                                        id={`${p.name}-open`}
-                                        label={t("plugin.plexcordToolbox.context.openSettings")}
+                                        id={`${pluginName}-open`}
+                                        label={t(plugin.plexcordToolbox.context.openSettings)}
                                         action={() => openPluginModal(p)}
                                     />
                                 </>
@@ -183,7 +192,7 @@ export function buildThemeMenu() {
     return (
         <Menu.MenuItem
             id="themes"
-            label={t("themes.title")}
+            label={t(themes.title)}
             action={() => openSettingsTabModal(ThemesTab)}
         >
             {buildThemeMenuEntries()}
@@ -200,19 +209,19 @@ export function buildThemeMenuEntries() {
             <Menu.MenuCheckboxItem
                 id="toggle-quickcss"
                 checked={useQuickCss}
-                label={t("plugin.plexcordToolbox.context.enableQuickCSS")}
+                label={t(plugin.plexcordToolbox.context.enableQuickCSS)}
                 action={() => {
                     Settings.useQuickCss = !useQuickCss;
                 }}
             />
             <Menu.MenuItem
                 id="edit-quickcss"
-                label={t("plugin.plexcordToolbox.context.openQuickCSS")}
+                label={t(plugin.plexcordToolbox.context.openQuickCSS)}
                 action={() => PlexcordNative.quickCss.openEditor()}
             />
             <Menu.MenuItem
                 id="manage-themes"
-                label={t("plugin.plexcordToolbox.context.manageThemes")}
+                label={t(plugin.plexcordToolbox.context.manageThemes)}
                 action={() => openSettingsTabModal(ThemesTab)}
             />
             {!!themes?.length && (
@@ -241,29 +250,34 @@ export function buildThemeMenuEntries() {
 function buildCustomPluginEntries() {
     const pluginEntries = [] as { plugin: Plugin, node: ReactNode; }[];
 
-    for (const plugin of Object.values(plugins)) {
-        if (plugin.toolboxActions && isPluginEnabled(plugin.name)) {
-            const entries = typeof plugin.toolboxActions === "function"
+    for (const plugin of Object.values(Plugins)) {
+        const pluginName = getName(plugin.name);
+        if (plugin.toolboxActions && isPluginEnabled(pluginName)) {
+            const toolboxActionsValue = typeof plugin.toolboxActions === "function"
                 ? plugin.toolboxActions()
-                : Object.entries(plugin.toolboxActions).map(([text, action]) => {
-                    const key = `${plugin.name}-${text}`;
+                : plugin.toolboxActions;
+
+            const entries = typeof toolboxActionsValue === "object" && !Array.isArray(toolboxActionsValue) && toolboxActionsValue !== null
+                ? Object.entries(toolboxActionsValue).map(([text, action]) => {
+                    const key = `${pluginName}-${text}`;
 
                     return (
                         <Menu.MenuItem
                             id={key}
                             key={key}
                             label={text}
-                            action={action}
+                            action={action as () => void}
                         />
                     );
-                });
+                })
+                : toolboxActionsValue;
 
             if (!entries || Array.isArray(entries) && entries.length === 0) continue;
 
             pluginEntries.push({
                 plugin,
                 node:
-                    <Menu.MenuGroup label={plugin.name} key={`${plugin.name}-group`}>
+                    <Menu.MenuGroup label={pluginName} key={`${pluginName}-group`}>
                         {entries}
                     </Menu.MenuGroup>
             });
@@ -277,16 +291,19 @@ function buildCustomPluginEntries() {
     if (pluginEntries.length <= 5)
         return pluginEntries.map(e => e.node);
 
-    const submenuEntries = pluginEntries.map(({ node, plugin }) => (
-        <Menu.MenuItem
-            id={`${plugin.name}-menu`}
-            key={`${plugin.name}-menu`}
-            label={plugin.name}
-            action={() => openPluginModal(plugin)}
-        >
-            {node}
-        </Menu.MenuItem>
-    ));
+    const submenuEntries = pluginEntries.map(({ node, plugin }) => {
+        const pluginName = getName(plugin.name);
+        return (
+            <Menu.MenuItem
+                id={`${pluginName}-menu`}
+                key={`${pluginName}-menu`}
+                label={pluginName}
+                action={() => openPluginModal(plugin)}
+            >
+                {node}
+            </Menu.MenuItem>
+        );
+    });
 
     return <Menu.MenuGroup>{submenuEntries}</Menu.MenuGroup>;
 }
@@ -299,7 +316,7 @@ export function renderPopout(onClose: () => void) {
         >
             <Menu.MenuItem
                 id="notifications"
-                label={t("plugin.plexcordToolbox.context.openLog")}
+                label={t(plugin.plexcordToolbox.context.openLog)}
                 action={openNotificationLogModal}
             />
 

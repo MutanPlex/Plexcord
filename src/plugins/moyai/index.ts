@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Message, ReactionEmoji } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -58,59 +58,37 @@ const MOYAI_URL_HD = "https://github.com/MutanPlex/random-files/raw/main/sounds/
 
 const settings = definePluginSettings({
     volume: {
-        get label() {
-            return t("plugin.moyai.option.volume.label");
-        },
-        get description() {
-            return t("plugin.moyai.option.volume.description");
-        },
+        label: () => t(plugin.moyai.option.volume.label),
+        description: () => t(plugin.moyai.option.volume.description),
         type: OptionType.SLIDER,
         markers: makeRange(0, 1, 0.1),
         default: 0.5,
         stickToMarkers: false
     },
     quality: {
-        get label() {
-            return t("plugin.moyai.option.quality.label");
-        },
-        get description() {
-            return t("plugin.moyai.option.quality.description");
-        },
+        label: () => t(plugin.moyai.option.quality.label),
+        description: () => t(plugin.moyai.option.quality.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.moyai.option.quality.normal"), value: "Normal", default: true },
-                { label: t("plugin.moyai.option.quality.hd"), value: "HD" }
-            ];
-        },
+        options: [
+            { label: () => t(plugin.moyai.option.quality.normal), value: "Normal", default: true },
+            { label: () => t(plugin.moyai.option.quality.hd), value: "HD" }
+        ]
     },
     triggerWhenUnfocused: {
-        get label() {
-            return t("plugin.moyai.option.triggerWhenUnfocused.label");
-        },
-        get description() {
-            return t("plugin.moyai.option.triggerWhenUnfocused.description");
-        },
+        label: () => t(plugin.moyai.option.triggerWhenUnfocused.label),
+        description: () => t(plugin.moyai.option.triggerWhenUnfocused.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     ignoreBots: {
-        get label() {
-            return t("plugin.moyai.option.ignoreBots.label");
-        },
-        get description() {
-            return t("plugin.moyai.option.ignoreBots.description");
-        },
+        label: () => t(plugin.moyai.option.ignoreBots.label),
+        description: () => t(plugin.moyai.option.ignoreBots.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     ignoreBlocked: {
-        get label() {
-            return t("plugin.moyai.option.ignoreBlocked.label");
-        },
-        get description() {
-            return t("plugin.moyai.option.ignoreBlocked.description");
-        },
+        label: () => t(plugin.moyai.option.ignoreBlocked.label),
+        description: () => t(plugin.moyai.option.ignoreBlocked.description),
         type: OptionType.BOOLEAN,
         default: true
     }
@@ -119,12 +97,8 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "Moyai",
     authors: [Devs.Megu, Devs.Nuckyz],
-    description: "🗿🗿🗿🗿🗿🗿🗿🗿",
+    description: () => t(plugin.moyai.description),
     settings,
-
-    get displayDescription() {
-        return t("plugin.moyai.description");
-    },
 
     flux: {
         async MESSAGE_CREATE({ optimistic, type, message, channelId }: IMessageCreate) {

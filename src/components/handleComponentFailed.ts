@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { components, t } from "@api/i18n";
 import { maybePromptToUpdate } from "@utils/updater";
 
 // Safe translation function that won't crash if i18n isn't ready
@@ -30,12 +31,7 @@ const safeT = (key: string, fallback: string): string => {
 };
 
 export function handleComponentFailed() {
-    const message = safeT(
-        "components.componentFailed.message",
-        "Uh Oh! Failed to render this Page." +
-        " However, there is an update available that might fix it." +
-        " Would you like to update and restart now?"
-    );
+    const message = t(components.componentFailed.message);
 
     maybePromptToUpdate(message);
 }

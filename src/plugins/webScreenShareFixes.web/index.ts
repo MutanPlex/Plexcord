@@ -5,19 +5,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "WebScreenShareFixes",
+    description: () => t(plugin.webScreenShareFixes.description),
     authors: [Devs.Kaitlyn],
-    description: "Removes 2500kbps bitrate cap on chromium and Plextron clients.",
     enabledByDefault: true,
-
-    get displayDescription() {
-        return t("plugin.webScreenShareFixes.description");
-    },
 
     patches: [
         {

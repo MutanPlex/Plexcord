@@ -121,7 +121,7 @@ export async function copyWithToast(text: string, toastMessage?: string) {
     const { t } = await import("@api/i18n");
     await copyToClipboard(text);
     Toasts.show({
-        message: toastMessage ?? t("utils.toast.copied"),
+        message: toastMessage ?? t(utils.toast.copied),
         id: Toasts.genId(),
         type: Toasts.Type.SUCCESS
     });

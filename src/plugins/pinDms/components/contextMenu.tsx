@@ -6,7 +6,7 @@
  */
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { addChannelToCategory, canMoveChannelInDirection, currentUserCategories, isPinned, moveChannel, removeChannelFromCategory } from "@plugins/pinDms/data";
 import { PinOrder, settings } from "@plugins/pinDms/index";
 import { Menu } from "@webpack/common";
@@ -19,14 +19,14 @@ function createPinMenuItem(channelId: string) {
     return (
         <Menu.MenuItem
             id="pin-dm"
-            label={t("plugin.pinDMs.context.pin.label")}
+            label={t(plugin.pinDMs.context.pin.label)}
         >
 
             {!pinned && (
                 <>
                     <Menu.MenuItem
                         id="pc-add-category"
-                        label={t("plugin.pinDMs.context.pin.addCategory")}
+                        label={t(plugin.pinDMs.context.pin.addCategory)}
                         color="brand"
                         action={() => openCategoryModal(null, channelId)}
                     />
@@ -49,14 +49,14 @@ function createPinMenuItem(channelId: string) {
                 <>
                     <Menu.MenuItem
                         id="unpin-dm"
-                        label={t("plugin.pinDMs.context.unPin.label")}
+                        label={t(plugin.pinDMs.context.unPin.label)}
                         color="danger"
                         action={() => removeChannelFromCategory(channelId)}
                     />
 
                     <Menu.MenuItem
                         id="move-to-category"
-                        label={t("plugin.pinDMs.context.unPin.move")}
+                        label={t(plugin.pinDMs.context.unPin.move)}
                     >
                         {
                             currentUserCategories
@@ -76,7 +76,7 @@ function createPinMenuItem(channelId: string) {
                         <Menu.MenuSeparator />
                         <Menu.MenuItem
                             id="pc-add-category-move"
-                            label={t("plugin.pinDMs.context.pin.addCategory")}
+                            label={t(plugin.pinDMs.context.pin.addCategory)}
                             color="brand"
                             action={() => openCategoryModal(null, channelId)}
                         />
@@ -87,7 +87,7 @@ function createPinMenuItem(channelId: string) {
                         settings.store.pinOrder === PinOrder.Custom && canMoveChannelInDirection(channelId, -1) && (
                             <Menu.MenuItem
                                 id="move-up"
-                                label={t("plugin.pinDMs.context.category.up")}
+                                label={t(plugin.pinDMs.context.category.up)}
                                 action={() => moveChannel(channelId, -1)}
                             />
                         )
@@ -97,7 +97,7 @@ function createPinMenuItem(channelId: string) {
                         settings.store.pinOrder === PinOrder.Custom && canMoveChannelInDirection(channelId, 1) && (
                             <Menu.MenuItem
                                 id="move-down"
-                                label={t("plugin.pinDMs.context.category.down")}
+                                label={t(plugin.pinDMs.context.category.down)}
                                 action={() => moveChannel(channelId, 1)}
                             />
                         )

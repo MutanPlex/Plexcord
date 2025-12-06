@@ -5,17 +5,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "FixYoutubeEmbeds",
-    description: "Bypasses youtube videos being blocked from display on Discord (for example by UMG)",
-
-    get displayDescription() {
-        return t("plugin.fixYoutubeEmbeds.description");
-    },
-
+    description: () => t(plugin.fixYoutubeEmbeds.description),
     authors: [Devs.coolelectronics]
 });

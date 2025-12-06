@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
@@ -24,7 +24,7 @@ function ReasonsComponent() {
 
     return (
         <section>
-            <Heading>{t("plugin.betterBanReasons.title")}</Heading>
+            <Heading>{t(plugin.betterBanReasons.title)}</Heading>
             {reasons.map((r, i) => (
                 <div
                     key={i}
@@ -36,7 +36,7 @@ function ReasonsComponent() {
                             reasons[i] = v;
                             settings.store.reasons = reasons;
                         }}
-                        placeholder={t("plugin.betterBanReasons.placeholder")}
+                        placeholder={t(plugin.betterBanReasons.placeholder)}
                     />
                     <Button
                         className={cl("remove-button")}
@@ -53,7 +53,7 @@ function ReasonsComponent() {
             ))}
             <div className={cl("reason-wrapper")}>
                 <Button onClick={() => settings.store.reasons.push("")} className={cl("add-button")} size="medium" variant="secondary">
-                    <PlusIcon /> {t("plugin.betterBanReasons.add")}
+                    <PlusIcon /> {t(plugin.betterBanReasons.add)}
                 </Button>
             </div>
         </section>
@@ -62,35 +62,23 @@ function ReasonsComponent() {
 
 const settings = definePluginSettings({
     reasons: {
-        get label() {
-            return t("plugin.betterBanReasons.option.reasons.label");
-        },
-        get description() {
-            return t("plugin.betterBanReasons.option.reasons.description");
-        },
+        label: () => t(plugin.betterBanReasons.option.reasons.label),
+        description: () => t(plugin.betterBanReasons.option.reasons.description),
         type: OptionType.COMPONENT,
         default: [] as string[],
         component: ReasonsComponent,
     },
     isTextInputDefault: {
-        get label() {
-            return t("plugin.betterBanReasons.option.isTextInputDefault.label");
-        },
-        get description() {
-            return t("plugin.betterBanReasons.option.isTextInputDefault.description");
-        },
+        label: () => t(plugin.betterBanReasons.option.isTextInputDefault.label),
+        description: () => t(plugin.betterBanReasons.option.isTextInputDefault.description),
         type: OptionType.BOOLEAN,
     }
 });
 
 export default definePlugin({
     name: "BetterBanReasons",
-    description: "Create custom reasons to use in the Discord ban modal, and/or show a text input by default instead of the options.",
+    description: () => t(plugin.betterBanReasons.description),
     authors: [Devs.Inbestigator, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.betterBanReasons.description");
-    },
 
     patches: [
         {

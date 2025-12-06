@@ -19,7 +19,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -48,31 +48,21 @@ const getSpacingPx = (spacing: Spacing | undefined) => (spacing ?? Spacing.COMPA
 
 const settings = definePluginSettings({
     iconSize: {
-        get label() {
-            return t("plugin.showConnections.option.iconSize.label");
-        },
-        get description() {
-            return t("plugin.showConnections.option.iconSize.description");
-        },
+        label: () => t(plugin.showConnections.option.iconSize.label),
+        description: () => t(plugin.showConnections.option.iconSize.description),
         type: OptionType.NUMBER,
         default: 32
     },
     iconSpacing: {
-        get label() {
-            return t("plugin.showConnections.option.iconSpacing.label");
-        },
-        get description() {
-            return t("plugin.showConnections.option.iconSpacing.description");
-        },
+        label: () => t(plugin.showConnections.option.iconSpacing.label),
+        description: () => t(plugin.showConnections.option.iconSpacing.description),
         type: OptionType.SELECT,
         default: Spacing.COZY,
-        get options() {
-            return [
-                { label: t("plugin.showConnections.option.iconSpacing.compact"), value: Spacing.COMPACT },
-                { label: t("plugin.showConnections.option.iconSpacing.cozy"), value: Spacing.COZY }, // US Spelling :/
-                { label: t("plugin.showConnections.option.iconSpacing.roomy"), value: Spacing.ROOMY }
-            ];
-        }
+        options: [
+            { label: () => t(plugin.showConnections.option.iconSpacing.compact), value: Spacing.COMPACT },
+            { label: () => t(plugin.showConnections.option.iconSpacing.cozy), value: Spacing.COZY }, // US Spelling :/
+            { label: () => t(plugin.showConnections.option.iconSpacing.roomy), value: Spacing.ROOMY }
+        ]
     }
 });
 
@@ -171,13 +161,9 @@ function CompactConnectionComponent({ connection, theme }: { connection: Connect
 
 export default definePlugin({
     name: "ShowConnections",
-    description: "Show connected accounts in user popouts",
+    description: () => t(plugin.showConnections.description),
     authors: [Devs.TheKodeToad],
     settings,
-
-    get displayDescription() {
-        return t("plugin.showConnections.description");
-    },
 
     patches: [
         {

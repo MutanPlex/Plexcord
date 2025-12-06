@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { MediaEngineStore, useState } from "@webpack/common";
 
@@ -75,7 +75,7 @@ export const VoiceRecorderWeb: VoiceRecorder = ({ setAudioBlob, onRecordingChang
     return (
         <>
             <Button onClick={toggleRecording}>
-                {recording ? t("plugin.voiceMessages.modal.stop") : t("plugin.voiceMessages.modal.start")}
+                {recording ? t(plugin.voiceMessages.modal.stop) : t(plugin.voiceMessages.modal.start)}
             </Button>
 
             <Button
@@ -86,7 +86,7 @@ export const VoiceRecorderWeb: VoiceRecorder = ({ setAudioBlob, onRecordingChang
                     else recorder?.pause();
                 }}
             >
-                {paused ? t("plugin.voiceMessages.modal.resume") : t("plugin.voiceMessages.modal.pause")}
+                {paused ? t(plugin.voiceMessages.modal.resume) : t(plugin.voiceMessages.modal.pause)}
             </Button>
         </>
     );

@@ -7,7 +7,7 @@
 
 import "./style.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings, useSettings } from "@api/Settings";
 import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -37,99 +37,51 @@ type TimeRowProps = {
 
 const getTimeFormats = (): Record<string, TimeFormat> => ({
     cozyFormat: {
-        get label() {
-            return t("plugin.customTimestamps.option.cozyFormat.label");
-        },
-        get description() {
-            return t("plugin.customTimestamps.option.cozyFormat.description");
-        },
-        get default() {
-            return "[calendar]";
-        },
+        label: t(plugin.customTimestamps.option.cozyFormat.label),
+        description: t(plugin.customTimestamps.option.cozyFormat.description),
+        default: "[calendar]",
         offset: 0,
     },
     compactFormat: {
-        get label() {
-            return t("plugin.customTimestamps.option.compactFormat.label");
-        },
-        get description() {
-            return t("plugin.customTimestamps.option.compactFormat.description");
-        },
-        get default() {
-            return "LT";
-        },
+        label: t(plugin.customTimestamps.option.compactFormat.label),
+        description: t(plugin.customTimestamps.option.compactFormat.description),
+        default: "LT",
         offset: 0,
     },
     tooltipFormat: {
-        get label() {
-            return t("plugin.customTimestamps.option.tooltipFormat.label");
-        },
-        get description() {
-            return t("plugin.customTimestamps.option.tooltipFormat.description");
-        },
-        get default() {
-            return "LLLL • [relative]";
-        },
+        label: t(plugin.customTimestamps.option.tooltipFormat.label),
+        description: t(plugin.customTimestamps.option.tooltipFormat.description),
+        default: "LLLL • [relative]",
         offset: 0,
     },
     ariaLabelFormat: {
-        get label() {
-            return t("plugin.customTimestamps.option.ariaLabelFormat.label");
-        },
-        get description() {
-            return t("plugin.customTimestamps.option.ariaLabelFormat.description");
-        },
-        get default() {
-            return "[calendar]";
-        },
+        label: t(plugin.customTimestamps.option.ariaLabelFormat.label),
+        description: t(plugin.customTimestamps.option.ariaLabelFormat.description),
+        default: "[calendar]",
         offset: 0,
     },
     sameDayFormat: {
-        get label() {
-            return t("plugin.customTimestamps.option.sameDayFormat.label");
-        },
-        get description() {
-            return t("plugin.customTimestamps.option.sameDayFormat.description");
-        },
-        get default() {
-            return t("plugin.customTimestamps.option.sameDayFormat.default");
-        },
+        label: t(plugin.customTimestamps.option.sameDayFormat.label),
+        description: t(plugin.customTimestamps.option.sameDayFormat.description),
+        default: t(plugin.customTimestamps.option.sameDayFormat.default),
         offset: 0,
     },
     lastDayFormat: {
-        get label() {
-            return t("plugin.customTimestamps.option.lastDayFormat.label");
-        },
-        get description() {
-            return t("plugin.customTimestamps.option.lastDayFormat.description");
-        },
-        get default() {
-            return t("plugin.customTimestamps.option.lastDayFormat.default");
-        },
+        label: t(plugin.customTimestamps.option.lastDayFormat.label),
+        description: t(plugin.customTimestamps.option.lastDayFormat.description),
+        default: t(plugin.customTimestamps.option.lastDayFormat.default),
         offset: -1000 * 60 * 60 * 24,
     },
     lastWeekFormat: {
-        get label() {
-            return t("plugin.customTimestamps.option.lastWeekFormat.label");
-        },
-        get description() {
-            return t("plugin.customTimestamps.option.lastWeekFormat.description");
-        },
-        get default() {
-            return "ddd DD.MM.YYYY HH:mm:ss";
-        },
+        label: t(plugin.customTimestamps.option.lastWeekFormat.label),
+        description: t(plugin.customTimestamps.option.lastWeekFormat.description),
+        default: "ddd DD.MM.YYYY HH:mm:ss",
         offset: -1000 * 60 * 60 * 24 * 6, // setting an offset of a week exactly pushes it into "older date" territory as soon as a second passes
     },
     sameElseFormat: {
-        get label() {
-            return t("plugin.customTimestamps.option.sameElseFormat.label");
-        },
-        get description() {
-            return t("plugin.customTimestamps.option.sameElseFormat.description");
-        },
-        get default() {
-            return "ddd DD.MM.YYYY HH:mm:ss";
-        },
+        label: t(plugin.customTimestamps.option.sameElseFormat.label),
+        description: t(plugin.customTimestamps.option.sameElseFormat.description),
+        default: "ddd DD.MM.YYYY HH:mm:ss",
         offset: -1000 * 60 * 60 * 24 * 31,
     }
 });
@@ -206,7 +158,7 @@ const DemoMessage = (props: { msgId, compact, message, date: Date | undefined, i
     ) : <div className="pc-cmt-demo-message">
         <Paragraph>
             {/* @ts-ignore */}
-            <b>{t("plugin.customTimestamps.modal.preview")}:</b> {CustomTimestampsPlugin.renderTimestamp(date, "cozy")}
+            <b>{t(plugin.customTimestamps.modal.preview)}:</b> {CustomTimestampsPlugin.renderTimestamp(date, "cozy")}
         </Paragraph>
     </div>;
 };
@@ -222,13 +174,13 @@ const DemoMessageContainer = ErrorBoundary.wrap(() => {
     return (
         <div className={"pc-cmt-demo-message-container"} onClick={() => setIsCompact(!isCompact)}>
             <DemoMessage compact={isCompact} msgId={"1337"}
-                message={isCompact ? t("plugin.customTimestamps.demo.cozy") : t("plugin.customTimestamps.demo.compact")} isGroupStart={true}
+                message={isCompact ? t(plugin.customTimestamps.demo.cozy) : t(plugin.customTimestamps.demo.compact)} isGroupStart={true}
                 date={aMonthAgo.current} />
-            <DemoMessage compact={isCompact} msgId={"1338"} message={t("plugin.customTimestamps.demo.lastWeek")}
+            <DemoMessage compact={isCompact} msgId={"1338"} message={t(plugin.customTimestamps.demo.lastWeek)}
                 isGroupStart={true} date={lastWeek.current} />
-            <DemoMessage compact={isCompact} msgId={"1339"} message={t("plugin.customTimestamps.demo.hover")}
+            <DemoMessage compact={isCompact} msgId={"1339"} message={t(plugin.customTimestamps.demo.hover)}
                 isGroupStart={true} date={yesterday.current} />
-            <DemoMessage compact={isCompact} msgId={"1340"} message={t("plugin.customTimestamps.demo.edit")} isGroupStart={true}
+            <DemoMessage compact={isCompact} msgId={"1340"} message={t(plugin.customTimestamps.demo.edit)} isGroupStart={true}
                 date={today.current} />
         </div>
     );
@@ -237,7 +189,7 @@ const DemoMessageContainer = ErrorBoundary.wrap(() => {
 const settings = definePluginSettings({
     formats: {
         type: OptionType.COMPONENT,
-        description: "Customize the timestamp formats",
+        description: () => t(plugin.customTimestamps.option.formats.description),
         component: componentProps => {
             const [settingsState, setSettingsState] = useState(useSettings().plugins?.CustomTimestamps?.formats ?? {});
 
@@ -254,9 +206,9 @@ const settings = definePluginSettings({
                             {key === "sameDayFormat" && (
                                 <div className={Margins.bottom20}>
                                     <Divider style={{ marginBottom: "10px" }} />
-                                    <Heading>{t("plugin.customTimestamps.modal.format")}</Heading>
+                                    <Heading>{t(plugin.customTimestamps.modal.format)}</Heading>
                                     <Paragraph>
-                                        {t("plugin.customTimestamps.modal.howTo")}<br />
+                                        {t(plugin.customTimestamps.modal.howTo)}<br />
                                     </Paragraph>
                                 </div>
                             )}
@@ -286,23 +238,19 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "CustomTimestamps",
-    description: "Custom timestamps on messages and tooltips",
+    description: () => t(plugin.customTimestamps.description),
     authors: [Devs.Rini, PcDevs.nvhhr, PcDevs.Suffocate, Devs.Obsidian],
     settings,
 
-    get displayDescription() {
-        return t("plugin.customTimestamps.description");
-    },
-
     settingsAboutComponent: () => (
         <div className={"pc-cmt-info-card"}>
-            <Heading>{t("plugin.customTimestamps.modal.title")}</Heading>
+            <Heading>{t(plugin.customTimestamps.modal.title)}</Heading>
             <Paragraph>
-                <Link href="https://momentjs.com/docs/#/displaying/format/">{t("plugin.customTimestamps.modal.moment")}</Link>
+                <Link href="https://momentjs.com/docs/#/displaying/format/">{t(plugin.customTimestamps.modal.moment)}</Link>
                 <div className={Margins.top8}>
-                    {t("plugin.customTimestamps.modal.hint")}<br />
-                    <b>[calendar]</b> {t("plugin.customTimestamps.modal.calendar")} &quot;{t("plugin.customTimestamps.modal.today")}&quot; or &quot;{t("plugin.customTimestamps.modal.yesterday")}&quot;.<br />
-                    <b>[relative]</b> {t("plugin.customTimestamps.modal.relative")} &quot;{t("plugin.customTimestamps.modal.relativeTime")}&quot;.<br />
+                    {t(plugin.customTimestamps.modal.hint)}<br />
+                    <b>[calendar]</b> {t(plugin.customTimestamps.modal.calendar)} &quot;{t(plugin.customTimestamps.modal.today)}&quot; or &quot;{t(plugin.customTimestamps.modal.yesterday)}&quot;.<br />
+                    <b>[relative]</b> {t(plugin.customTimestamps.modal.relative)} &quot;{t(plugin.customTimestamps.modal.relativeTime)}&quot;.<br />
                 </div>
             </Paragraph>
         </div>

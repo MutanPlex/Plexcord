@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -41,7 +41,7 @@ export function HistoryModal({ modalProps, message }: { modalProps: ModalProps; 
     return (
         <ModalRoot {...modalProps} size={ModalSize.LARGE}>
             <ModalHeader className={cl("head")}>
-                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t("plugin.messageLogger.modal.edit.title")}</BaseText>
+                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t(plugin.messageLogger.modal.edit.title)}</BaseText>
                 <ModalCloseButton onClick={modalProps.onClose} />
             </ModalHeader>
 
@@ -54,7 +54,7 @@ export function HistoryModal({ modalProps, message }: { modalProps: ModalProps; 
                     onItemSelect={setCurrentTab}
                 >
                     {message.firstEditTimestamp.getTime() !== message.timestamp.getTime() && (
-                        <TooltipContainer text={t("plugin.messageLogger.modal.edit.tooltip")}>
+                        <TooltipContainer text={t(plugin.messageLogger.modal.edit.tooltip)}>
                             <TabBar.Item
                                 className="pc-settings-tab-bar-item"
                                 id={-1}

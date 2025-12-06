@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t, tJsx } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { addMessagePreSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { Paragraph } from "@components/Paragraph";
 import { Devs } from "@utils/constants";
@@ -21,17 +21,17 @@ function escapeRegex(string) {
 function warningEmbedNotice(trigger) {
     return new Promise<boolean>(resolve => {
         Alerts.show({
-            title: t("plugin.dontFilterMe.alert.title"),
+            title: t(plugin.dontFilterMe.alert.title),
             body: <div>
                 <Paragraph>
-                    {tJsx("plugin.dontFilterMe.alert.content", { trigger })}
+                    {t(plugin.dontFilterMe.alert.content, { trigger })}
                 </Paragraph>
                 <Paragraph>
-                    {t("plugin.dontFilterMe.alert.content2")}
+                    {t(plugin.dontFilterMe.alert.content2)}
                 </Paragraph>
             </div>,
-            confirmText: t("plugin.dontFilterMe.alert.confirm"),
-            cancelText: t("plugin.dontFilterMe.alert.cancel"),
+            confirmText: t(plugin.dontFilterMe.alert.confirm),
+            cancelText: t(plugin.dontFilterMe.alert.cancel),
             onConfirm: () => resolve(true),
             onCloseCallback: () => setImmediate(() => resolve(false)),
         });
@@ -60,13 +60,9 @@ const handleMessage = async (channelId, messageObj) => {
 
 export default definePlugin({
     name: "DontFilterMe",
-    description: "Warns you if your message contains a term in the automod preset list",
+    description: () => t(plugin.dontFilterMe.description),
     authors: [Devs.Samwich],
     dependencies: ["MessageEventsAPI"],
-
-    get displayDescription() {
-        return t("plugin.dontFilterMe.description");
-    },
 
     start() {
         addMessagePreSendListener(handleMessage);

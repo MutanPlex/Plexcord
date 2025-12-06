@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
@@ -22,12 +22,8 @@ const Section = findComponentByCodeLazy('"auto":"smooth"', ".section");
 
 export default definePlugin({
     name: "FriendsSince",
-    description: "Shows when you became friends with someone in the user popout",
+    description: () => t(plugin.friendsSince.description),
     authors: [Devs.Elvyra, Devs.Antti],
-
-    get displayDescription() {
-        return t("plugin.friendsSince.description");
-    },
 
     patches: [
         // DM User Sidebar
@@ -63,7 +59,7 @@ export default definePlugin({
         if (!friendsSince) return null;
 
         return (
-            <Section heading={t("plugin.friendsSince.section")}>
+            <Section heading={t(plugin.friendsSince.section)}>
                 {
                     isSidebar ? (
                         <BaseText size="sm" weight="normal">

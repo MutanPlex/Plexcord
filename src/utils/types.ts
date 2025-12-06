@@ -100,9 +100,9 @@ export interface Plugin extends PluginDef {
 export type IconComponent = (props: IconProps & Record<string, any>) => ReactNode;
 export type IconProps = { height?: number | string; width?: number | string; className?: string; };
 export interface PluginDef {
-    name: string;
-    description: string;
-    displayDescription?: string;
+    name: string | (() => string);
+    description: string | (() => string);
+    displayDescription?: string | (() => string);
     authors: PluginAuthor[];
     start?(): void;
     stop?(): void;
@@ -167,14 +167,16 @@ export interface PluginDef {
      * Allows you to add custom actions to the Plexcord Toolbox.
      *
      * Can either be an object mapping labels to action functions or a Function returning Menu components.
+     * For dynamic labels, use a function that returns the object.
      * Please note that you can only use Menu components.
      *
      * @example
      * toolboxActions: {
      * "Click Me": () => { alert("Hi"); }
+     * }
      *
      */
-    toolboxActions?: Record<string, () => void> | (() => ReactNode);
+    toolboxActions?: Record<string, () => void | Promise<void>> | (() => Record<string, () => void | Promise<void>> | ReactNode);
 
     tags?: string[];
 
@@ -261,9 +263,9 @@ export type PluginSettingDef =
     ) & PluginSettingCommon);
 
 export interface PluginSettingCommon {
-    description: string;
-    label?: string;
-    placeholder?: string;
+    description: string | (() => string);
+    label?: string | (() => string);
+    placeholder?: string | (() => string);
     onChange?(newValue: any): void;
     /**
      * Whether changing this setting requires a restart
@@ -296,7 +298,7 @@ interface IsValid<T, D = unknown> {
 
 export interface PluginSettingStringDef {
     type: OptionType.STRING;
-    default?: string;
+    default?: string | (() => string);
 }
 export interface PluginSettingNumberDef {
     type: OptionType.NUMBER;
@@ -317,7 +319,7 @@ export interface PluginSettingSelectDef {
 }
 
 export interface PluginSettingSelectOption {
-    label: string;
+    label: string | (() => string);
     value: string | number | boolean;
     default?: boolean;
 }

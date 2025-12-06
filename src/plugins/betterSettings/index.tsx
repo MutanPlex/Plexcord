@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { buildPluginMenuEntries, buildThemeMenuEntries } from "@plugins/plexcordToolbox/menu";
@@ -25,34 +25,22 @@ waitFor(["animating", "baseLayer", "bg", "layer", "layers"], m => Classes = m);
 
 const settings = definePluginSettings({
     disableFade: {
-        get label() {
-            return t("plugin.betterSettings.option.disableFade.label");
-        },
-        get description() {
-            return t("plugin.betterSettings.option.disableFade.description");
-        },
+        label: () => t(plugin.betterSettings.option.disableFade.label),
+        description: () => t(plugin.betterSettings.option.disableFade.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     organizeMenu: {
-        get label() {
-            return t("plugin.betterSettings.option.organizeMenu.label");
-        },
-        get description() {
-            return t("plugin.betterSettings.option.organizeMenu.description");
-        },
+        label: () => t(plugin.betterSettings.option.organizeMenu.label),
+        description: () => t(plugin.betterSettings.option.organizeMenu.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     eagerLoad: {
-        get label() {
-            return t("plugin.betterSettings.option.eagerLoad.label");
-        },
-        get description() {
-            return t("plugin.betterSettings.option.eagerLoad.description");
-        },
+        label: () => t(plugin.betterSettings.option.eagerLoad.label),
+        description: () => t(plugin.betterSettings.option.eagerLoad.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
@@ -94,13 +82,9 @@ function Layer({ mode, baseLayer = false, ...props }: LayerProps) {
 
 export default definePlugin({
     name: "BetterSettings",
-    description: "Enhances your settings-menu-opening experience",
+    description: () => t(plugin.betterSettings.description),
     authors: [Devs.Kyuuhachi],
     settings,
-
-    get displayDescription() {
-        return t("plugin.betterSettings.description");
-    },
 
     patches: [
         {

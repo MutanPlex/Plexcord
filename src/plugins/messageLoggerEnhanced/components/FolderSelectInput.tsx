@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
@@ -45,8 +45,8 @@ function createDirSelector(settingKey: "logsDir" | "imageCacheDir", successMessa
     };
 }
 
-export const ImageCacheDir = createDirSelector("imageCacheDir", t("plugin.messageLoggerEnhanced.updateImageCacheDir"));
-export const LogsDir = createDirSelector("logsDir", t("plugin.messageLoggerEnhanced.updateLogsDir"));
+export const ImageCacheDir = createDirSelector("imageCacheDir", t(plugin.messageLoggerEnhanced.updateImageCacheDir));
+export const LogsDir = createDirSelector("logsDir", t(plugin.messageLoggerEnhanced.updateLogsDir));
 
 interface Props {
     settingsKey: "imageCacheDir" | "logsDir",
@@ -76,7 +76,7 @@ export function SelectFolderInput({ settingsKey, successMessage }: Props) {
             Toasts.show({
                 id: Toasts.genId(),
                 type: Toasts.Type.FAILURE,
-                message: t("plugin.messageLoggerEnhanced.failedUpdate")
+                message: t(plugin.messageLoggerEnhanced.failedUpdate)
             });
         }
     }
@@ -84,14 +84,14 @@ export function SelectFolderInput({ settingsKey, successMessage }: Props) {
     return (
         <div className={cl("-container")}>
             <div onClick={() => copyWithToast(path)} className={cl("-input")}>
-                {path == null || path === DEFAULT_IMAGE_CACHE_DIR ? t("plugin.messageLoggerEnhanced.button.chooseFolder") : getDirName(path)}
+                {path == null || path === DEFAULT_IMAGE_CACHE_DIR ? t(plugin.messageLoggerEnhanced.button.chooseFolder) : getDirName(path)}
             </div>
             <Button
                 className={cl("-button")}
                 size="small"
                 onClick={onFolderSelect}
             >
-                {t("plugin.messageLoggerEnhanced.button.browse")}
+                {t(plugin.messageLoggerEnhanced.button.browse)}
             </Button>
         </div>
     );

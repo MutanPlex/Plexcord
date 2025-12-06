@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
@@ -94,7 +94,7 @@ function DearrowButton({ component }: { component: Component<Props>; }) {
     if (!embed?.dearrow) return null;
 
     return (
-        <Tooltip text={embed.dearrow.enabled ? t("plugin.dearrow.tooltip.dearrowed") : t("plugin.dearrow.tooltip.dearrow")}>
+        <Tooltip text={embed.dearrow.enabled ? t(plugin.dearrow.tooltip.dearrowed) : t(plugin.dearrow.tooltip.dearrow)}>
             {({ onMouseEnter, onMouseLeave }) => (
                 <button
                     onMouseEnter={onMouseEnter}
@@ -147,40 +147,26 @@ function DearrowButton({ component }: { component: Component<Props>; }) {
 
 const settings = definePluginSettings({
     hideButton: {
-        get label() {
-            return t("plugin.dearrow.option.hideButton.label");
-        },
-        get description() {
-            return t("plugin.dearrow.option.hideButton.description");
-        },
+        label: () => t(plugin.dearrow.option.hideButton.label),
+        description: () => t(plugin.dearrow.option.hideButton.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
     },
     replaceElements: {
-        get label() {
-            return t("plugin.dearrow.option.replaceElements.label");
-        },
-        get description() {
-            return t("plugin.dearrow.option.replaceElements.description");
-        },
+        label: () => t(plugin.dearrow.option.replaceElements.label),
+        description: () => t(plugin.dearrow.option.replaceElements.description),
         type: OptionType.SELECT,
         restartNeeded: true,
-        get options() {
-            return [
-                { label: t("plugin.dearrow.option.replaceElements.everything"), value: ReplaceElements.ReplaceAllElements, default: true },
-                { label: t("plugin.dearrow.option.replaceElements.title"), value: ReplaceElements.ReplaceTitlesOnly },
-                { label: t("plugin.dearrow.option.replaceElements.thumbnail"), value: ReplaceElements.ReplaceThumbnailsOnly },
-            ];
-        }
+        options: [
+            { label: () => t(plugin.dearrow.option.replaceElements.everything), value: ReplaceElements.ReplaceAllElements, default: true },
+            { label: () => t(plugin.dearrow.option.replaceElements.title), value: ReplaceElements.ReplaceTitlesOnly },
+            { label: () => t(plugin.dearrow.option.replaceElements.thumbnail), value: ReplaceElements.ReplaceThumbnailsOnly },
+        ]
     },
     dearrowByDefault: {
-        get label() {
-            return t("plugin.dearrow.option.dearrowByDefault.label");
-        },
-        get description() {
-            return t("plugin.dearrow.option.dearrowByDefault.description");
-        },
+        label: () => t(plugin.dearrow.option.dearrowByDefault.label),
+        description: () => t(plugin.dearrow.option.dearrowByDefault.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
@@ -189,13 +175,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "Dearrow",
-    description: "Makes YouTube embed titles and thumbnails less sensationalist, powered by Dearrow",
+    description: () => t(plugin.dearrow.description),
     authors: [Devs.Ven],
     settings,
-
-    get displayDescription() {
-        return t("plugin.dearrow.description");
-    },
 
     embedDidMount,
     renderButton(component: Component<Props>) {

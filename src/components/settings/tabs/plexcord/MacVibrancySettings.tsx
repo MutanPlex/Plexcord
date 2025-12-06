@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { settings, t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Heading } from "@components/Heading";
@@ -14,71 +14,71 @@ import { identity } from "@utils/misc";
 import { Select } from "@webpack/common";
 
 export function VibrancySettings() {
-    const settings = useSettings(["macosVibrancyStyle"]);
+    const settingsState = useSettings(["macosVibrancyStyle"]);
 
     return (
         <>
-            <Heading tag="h5">{t("settings.macVibrancy.title")}</Heading>
+            <Heading tag="h5">{t(settings.macVibrancy.title)}</Heading>
             <ErrorBoundary noop>
                 <Select
                     className={Margins.bottom20}
-                    placeholder={t("settings.macVibrancy.placeholder")}
+                    placeholder={t(settings.macVibrancy.placeholder)}
                     options={[
                         // Sorted from most opaque to most transparent
                         {
-                            label: t("settings.macVibrancy.style.no"), value: undefined
+                            label: t(settings.macVibrancy.style.no), value: undefined
                         },
                         {
-                            label: t("settings.macVibrancy.style.underPage"),
+                            label: t(settings.macVibrancy.style.underPage),
                             value: "under-page"
                         },
                         {
-                            label: t("settings.macVibrancy.style.content"),
+                            label: t(settings.macVibrancy.style.content),
                             value: "content"
                         },
                         {
-                            label: t("settings.macVibrancy.style.window"),
+                            label: t(settings.macVibrancy.style.window),
                             value: "window"
                         },
                         {
-                            label: t("settings.macVibrancy.style.selection"),
+                            label: t(settings.macVibrancy.style.selection),
                             value: "selection"
                         },
                         {
-                            label: t("settings.macVibrancy.style.titlebar"),
+                            label: t(settings.macVibrancy.style.titlebar),
                             value: "titlebar"
                         },
                         {
-                            label: t("settings.macVibrancy.style.header"),
+                            label: t(settings.macVibrancy.style.header),
                             value: "header"
                         },
                         {
-                            label: t("settings.macVibrancy.style.sidebar"),
+                            label: t(settings.macVibrancy.style.sidebar),
                             value: "sidebar"
                         },
                         {
-                            label: t("settings.macVibrancy.style.tooltip"),
+                            label: t(settings.macVibrancy.style.tooltip),
                             value: "tooltip"
                         },
                         {
-                            label: t("settings.macVibrancy.style.menu"),
+                            label: t(settings.macVibrancy.style.menu),
                             value: "menu"
                         },
                         {
-                            label: t("settings.macVibrancy.style.popover"),
+                            label: t(settings.macVibrancy.style.popover),
                             value: "popover"
                         },
                         {
-                            label: t("settings.macVibrancy.style.fullscreenUI"),
+                            label: t(settings.macVibrancy.style.fullscreenUI),
                             value: "fullscreen-ui"
                         },
                         {
-                            label: t("settings.macVibrancy.style.hud"),
+                            label: t(settings.macVibrancy.style.hud),
                             value: "hud"
                         },
                     ]}
-                    select={v => settings.macosVibrancyStyle = v}
-                    isSelected={v => settings.macosVibrancyStyle === v}
+                    select={v => settingsState.macosVibrancyStyle = v}
+                    isSelected={v => settingsState.macosVibrancyStyle === v}
                     serialize={identity} />
 
             </ErrorBoundary>

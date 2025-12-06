@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t, tJsx } from "@api/i18n";
+import { plugins, t } from "@api/i18n";
 import { showNotice } from "@api/Notices";
 import { isPluginEnabled, startDependenciesRecursive, startPlugin, stopPlugin } from "@api/PluginManager";
 import { CogWheel, InfoIcon } from "@components/Icons";
@@ -18,6 +18,10 @@ import { Settings } from "Plexcord";
 import { cl, logger } from ".";
 import { openPluginModal } from "./PluginModal";
 
+function getName(name: string | (() => string)): string {
+    return typeof name === "function" ? name() : name;
+}
+
 interface PluginCardProps {
     plugin: Plugin;
     disabled?: boolean;
@@ -28,13 +32,17 @@ interface PluginCardProps {
 }
 
 export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, onMouseLeave, isNew }: PluginCardProps) {
-    const settings = Settings.plugins[plugin.name];
+    const pluginName = getName(plugin.name);
+    const settings = Settings.plugins[pluginName];
 
-    const isEnabled = () => isPluginEnabled(plugin.name);
+    const isEnabled = () => isPluginEnabled(pluginName);
 
     // Use translated metadata if available, fallback to original
-    const displayName = (plugin as any).displayName || plugin.name;
-    const displayDescription = (plugin as any).displayDescription || plugin.description;
+    const displayName = (plugin as any).displayName || pluginName;
+    const rawDisplayDescription = (plugin as any).displayDescription;
+    const displayDescription = rawDisplayDescription
+        ? (typeof rawDisplayDescription === "function" ? rawDisplayDescription() : rawDisplayDescription)
+        : (typeof plugin.description === "function" ? plugin.description() : plugin.description);
 
     function toggleEnabled() {
         const wasEnabled = isEnabled();
@@ -44,15 +52,15 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
             const { restartNeeded, failures } = startDependenciesRecursive(plugin);
 
             if (failures.length) {
-                logger.error(`Failed to start dependencies for ${plugin.name}: ${failures.join(", ")}`);
-                showNotice(tJsx("plugins.error.startDependency", { failures: failures.join(", ") }), "Close", () => null);
+                logger.error(`Failed to start dependencies for ${pluginName}: ${failures.join(", ")}`);
+                showNotice(t(plugins.error.startDependency, { failures: failures.join(", ") }), "Close", () => null);
                 return;
             }
 
             if (restartNeeded) {
                 // If any dependencies have patches, don't start the plugin yet.
                 settings.enabled = true;
-                onRestartNeeded(plugin.name, "enabled");
+                onRestartNeeded(pluginName, "enabled");
                 return;
             }
         }
@@ -60,7 +68,7 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
         // if the plugin has patches, dont use stopPlugin/startPlugin. Wait for restart to apply changes.
         if (plugin.patches?.length) {
             settings.enabled = !wasEnabled;
-            onRestartNeeded(plugin.name, "enabled");
+            onRestartNeeded(pluginName, "enabled");
             return;
         }
 
@@ -75,7 +83,7 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
         if (!result) {
             settings.enabled = false;
 
-            const msg = wasEnabled ? t("plugins.error.stopping", { plugin: plugin.name }) : t("plugins.error.starting", { plugin: plugin.name });
+            const msg = wasEnabled ? t(plugins.error.stopping, { plugin: pluginName }) : t(plugins.error.starting, { plugin: pluginName });
             showToast(msg, Toasts.Type.FAILURE, {
                 position: Toasts.Position.BOTTOM,
             });

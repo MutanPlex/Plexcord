@@ -17,10 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
-import {
-    MessageObject
-} from "@api/MessageEvents";
+import { plugin, t } from "@api/i18n";
+import { MessageObject } from "@api/MessageEvents";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -51,12 +49,8 @@ interface RuleSet {
 
 export default definePlugin({
     name: "ClearURLs",
-    description: "Automatically removes tracking elements from URLs you send",
+    description: () => t(plugin.clearURLs.description),
     authors: [Devs.adryd, Devs.thororen, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.clearURLs.description");
-    },
 
     rules: [] as RuleSet[],
 

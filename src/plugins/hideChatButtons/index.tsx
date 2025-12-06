@@ -6,7 +6,7 @@
  */
 
 import { ChatBarButton } from "@api/ChatButtons";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType, StartAt } from "@utils/types";
@@ -17,22 +17,14 @@ let hidechatbuttonsopen: boolean | undefined;
 
 const settings = definePluginSettings({
     color: {
-        get label() {
-            return t("plugin.hideChatButtons.option.color.label");
-        },
-        get description() {
-            return t("plugin.hideChatButtons.option.color.description");
-        },
+        label: () => t(plugin.hideChatButtons.option.color.label),
+        description: () => t(plugin.hideChatButtons.option.color.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     open: {
-        get label() {
-            return t("plugin.hideChatButtons.option.open.label");
-        },
-        get description() {
-            return t("plugin.hideChatButtons.option.open.description");
-        },
+        label: () => t(plugin.hideChatButtons.option.open.label),
+        description: () => t(plugin.hideChatButtons.option.open.description),
         type: OptionType.BOOLEAN,
         default: false,
         onChange: (store: { open: boolean; }) => {
@@ -44,7 +36,7 @@ const settings = definePluginSettings({
 function HideToggleButton(props: { open: boolean | undefined, onClick: MouseEventHandler<HTMLButtonElement>; }) {
     return (<ChatBarButton
         onClick={props.onClick}
-        tooltip={props.open ? t("plugin.hideChatButtons.tooltip.close") : t("plugin.hideChatButtons.tooltip.open")}
+        tooltip={props.open ? t(plugin.hideChatButtons.tooltip.close) : t(plugin.hideChatButtons.tooltip.open)}
     >
         <svg
             fill={settings.store.color && props.open ? "#c32a32" : "currentColor"}
@@ -87,13 +79,9 @@ function ButtonsInnerComponent({ buttons }: { buttons: ReactNode[]; }) {
 
 export default definePlugin({
     name: "HideChatButtons",
-    description: "able to hide the chat buttons",
+    description: () => t(plugin.hideChatButtons.description),
     settings: settings,
     authors: [PcDevs.iamme, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.hideChatButtons.description");
-    },
 
     patches: [
         {

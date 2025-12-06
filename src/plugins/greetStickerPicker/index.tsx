@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Channel, Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -26,29 +26,19 @@ import { findLazy } from "@webpack";
 import { ContextMenuApi, FluxDispatcher, Menu, MessageActions } from "@webpack/common";
 
 const GreetMode = {
-    get Greet() {
-        return t("plugin.greetStickerPicker.mode.greet");
-    },
-    get NormalMessage() {
-        return t("plugin.greetStickerPicker.mode.message");
-    }
+    Greet: t(plugin.greetStickerPicker.mode.greet),
+    NormalMessage: t(plugin.greetStickerPicker.mode.message)
 };
 
 const settings = definePluginSettings({
     greetMode: {
-        get label() {
-            return t("plugin.greetStickerPicker.option.greetMode.label");
-        },
-        get description() {
-            return t("plugin.greetStickerPicker.option.greetMode.description");
-        },
+        label: () => t(plugin.greetStickerPicker.option.greetMode.label),
+        description: () => t(plugin.greetStickerPicker.option.greetMode.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.greetStickerPicker.option.greetMode.greet"), value: GreetMode.Greet, default: true },
-                { label: t("plugin.greetStickerPicker.option.greetMode.message"), value: GreetMode.NormalMessage }
-            ];
-        }
+        options: [
+            { label: () => t(plugin.greetStickerPicker.option.greetMode.greet), value: GreetMode.Greet, default: true },
+            { label: () => t(plugin.greetStickerPicker.option.greetMode.message), value: GreetMode.NormalMessage }
+        ]
     }
 }).withPrivateSettings<{
     multiGreetChoices?: string[];
@@ -89,10 +79,10 @@ function GreetMenu({ channel, message }: { message: Message, channel: Channel; }
         <Menu.Menu
             navId="greet-sticker-picker"
             onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-            aria-label={t("plugin.greetStickerPicker.context.label")}
+            aria-label={t(plugin.greetStickerPicker.context.label)}
         >
             <Menu.MenuGroup
-                label={t("plugin.greetStickerPicker.context.mode")}
+                label={t(plugin.greetStickerPicker.context.mode)}
             >
                 {Object.values(GreetMode).map(mode => (
                     <Menu.MenuRadioItem
@@ -109,7 +99,7 @@ function GreetMenu({ channel, message }: { message: Message, channel: Channel; }
             <Menu.MenuSeparator />
 
             <Menu.MenuGroup
-                label={t("plugin.greetStickerPicker.context.stickers")}
+                label={t(plugin.greetStickerPicker.context.stickers)}
             >
                 {WELCOME_STICKERS.map(sticker => (
                     <Menu.MenuItem
@@ -126,7 +116,7 @@ function GreetMenu({ channel, message }: { message: Message, channel: Channel; }
                     <Menu.MenuSeparator />
 
                     <Menu.MenuItem
-                        label={t("plugin.greetStickerPicker.context.multi")}
+                        label={t(plugin.greetStickerPicker.context.multi)}
                         id="unholy-multi-greet"
                     >
                         {WELCOME_STICKERS.map(sticker => {
@@ -151,7 +141,7 @@ function GreetMenu({ channel, message }: { message: Message, channel: Channel; }
                         <Menu.MenuSeparator />
                         <Menu.MenuItem
                             id="multi-greet-submit"
-                            label={t("plugin.greetStickerPicker.context.send")}
+                            label={t(plugin.greetStickerPicker.context.send)}
                             action={() => greet(channel, message, multiGreetChoices!)}
                             disabled={multiGreetChoices.length === 0}
                         />
@@ -165,13 +155,8 @@ function GreetMenu({ channel, message }: { message: Message, channel: Channel; }
 
 export default definePlugin({
     name: "GreetStickerPicker",
-    description: "Allows you to use any greet sticker instead of only the random one by right-clicking the 'Wave to say hi!' button",
+    description: () => t(plugin.greetStickerPicker.description),
     authors: [Devs.Ven],
-
-    get displayDescription() {
-        return t("plugin.greetStickerPicker.description");
-    },
-
     settings,
 
     patches: [

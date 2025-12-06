@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
@@ -56,13 +56,13 @@ export default function UserModal({ item, user, sounds, closeModal }: { item: So
                 />
                 <Flex justifyContent="space-between" flexDirection="column" style={{ gap: "7px", height: "68px" }}>
                     <BaseText size="md" weight="bold" style={{ height: "20px" }}>{item.soundId}</BaseText>
-                    <BaseText size="md" weight="normal">{t("plugin.soundBoardLogger.modal.played", { time: currentUser.plays.length, s: currentUser.plays.length === 1 ? "" : "s" })}</BaseText>
-                    <BaseText size="md" weight="normal">{t("plugin.soundBoardLogger.modal.last")} <Timestamp timestamp={new Date(moment(currentUser.plays.at(-1)).toDate())} /></BaseText>
+                    <BaseText size="md" weight="normal">{t(plugin.soundBoardLogger.modal.played, { time: currentUser.plays.length, s: currentUser.plays.length === 1 ? "" : "s" })}</BaseText>
+                    <BaseText size="md" weight="normal">{t(plugin.soundBoardLogger.modal.last)} <Timestamp timestamp={new Date(moment(currentUser.plays.at(-1)).toDate())} /></BaseText>
                 </Flex>
             </Flex>
             <div className={classes(cl("also-played"), Margins.bottom8)}>
                 <BaseText size="lg" weight="semibold" tag="h2">
-                    {soundsDoneByCurrentUser.length ? t("plugin.soundBoardLogger.modal.also") : " "}
+                    {soundsDoneByCurrentUser.length ? t(plugin.soundBoardLogger.modal.also) : " "}
                 </BaseText>
                 <Flex justifyContent="space-between">
                     <UserSummaryItem
@@ -99,9 +99,9 @@ export default function UserModal({ item, user, sounds, closeModal }: { item: So
                         )}
                     />
                     <div className={cl("user-buttons")}>
-                        <IconWithTooltip text={t("plugin.soundBoardLogger.modal.download")} icon={<DownloadIcon />} onClick={() => downloadAudio(item.soundId)} />
-                        <IconWithTooltip text={t("plugin.soundBoardLogger.modal.copyId")} icon={<CopyIcon />} onClick={() => copyWithToast(item.soundId, t("plugin.soundBoardLogger.modal.copied"))} />
-                        <IconWithTooltip text={t("plugin.soundBoardLogger.modal.playSound")} icon={<PlayIcon />} onClick={() => playSound(item.soundId)} />
+                        <IconWithTooltip text={t(plugin.soundBoardLogger.modal.download)} icon={<DownloadIcon />} onClick={() => downloadAudio(item.soundId)} />
+                        <IconWithTooltip text={t(plugin.soundBoardLogger.modal.copyId)} icon={<CopyIcon />} onClick={() => copyWithToast(item.soundId, t(plugin.soundBoardLogger.modal.copied))} />
+                        <IconWithTooltip text={t(plugin.soundBoardLogger.modal.playSound)} icon={<PlayIcon />} onClick={() => playSound(item.soundId)} />
                     </div>
                 </Flex>
             </div>

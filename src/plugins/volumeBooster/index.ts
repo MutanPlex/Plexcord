@@ -17,19 +17,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     multiplier: {
-        get label() {
-            return t("plugin.volumeBooster.option.multiplier.label");
-        },
-        get description() {
-            return t("plugin.volumeBooster.option.multiplier.description");
-        },
+        label: () => t(plugin.volumeBooster.option.multiplier.label),
+        description: () => t(plugin.volumeBooster.option.multiplier.description),
         type: OptionType.SLIDER,
         markers: makeRange(1, 5, 0.5),
         default: 2,
@@ -57,12 +53,8 @@ interface StreamData {
 export default definePlugin({
     name: "VolumeBooster",
     authors: [Devs.Nuckyz, Devs.sadan],
-    description: "Allows you to set the user and stream volume above the default maximum",
+    description: () => t(plugin.volumeBooster.description),
     settings,
-
-    get displayDescription() {
-        return t("plugin.volumeBooster.description");
-    },
 
     patches: [
         // Change the max volume for sliders to allow for values above 200

@@ -7,7 +7,7 @@
 
 import "./style.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import type { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -59,12 +59,8 @@ function ReplyTimestamp({
 
 export default definePlugin({
     name: "ReplyTimestamp",
-    description: "Shows a timestamp on replied-message previews",
+    description: () => t(plugin.replyTimestamp.description),
     authors: [Devs.Kyuuhachi],
-
-    get displayDescription() {
-        return t("plugin.replyTimestamp.description");
-    },
 
     patches: [
         {

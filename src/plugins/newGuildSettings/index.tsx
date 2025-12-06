@@ -17,11 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import {
-    findGroupChildrenByChildId,
-    NavContextMenuPatchCallback
-} from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { CogWheel } from "@components/Icons";
 import { Guild } from "@plexcord/discord-types";
@@ -41,89 +38,55 @@ const isOptInEnabledForGuild = findByCodeLazy(".COMMUNITY)||", ".isOptInEnabled(
 
 const settings = definePluginSettings({
     guild: {
-        get label() {
-            return t("plugin.newGuildSettings.option.guild.label");
-        },
-        get description() {
-            return t("plugin.newGuildSettings.option.guild.description");
-        },
+        label: () => t(plugin.newGuildSettings.option.guild.label),
+        description: () => t(plugin.newGuildSettings.option.guild.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     messages: {
-        get label() {
-            return t("plugin.newGuildSettings.option.messages.label");
-        },
-        get description() {
-            return t("plugin.newGuildSettings.option.messages.description");
-        },
+        label: () => t(plugin.newGuildSettings.option.messages.label),
+        description: () => t(plugin.newGuildSettings.option.messages.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.newGuildSettings.option.messages.all"), value: 0 },
-                { label: t("plugin.newGuildSettings.option.messages.mentions"), value: 1 },
-                { label: t("plugin.newGuildSettings.option.messages.nothing"), value: 2 },
-                { label: t("plugin.newGuildSettings.option.messages.default"), value: 3, default: true }
-            ];
-        },
+        options: [
+            { label: () => t(plugin.newGuildSettings.option.messages.all), value: 0 },
+            { label: () => t(plugin.newGuildSettings.option.messages.mentions), value: 1 },
+            { label: () => t(plugin.newGuildSettings.option.messages.nothing), value: 2 },
+            { label: () => t(plugin.newGuildSettings.option.messages.default), value: 3, default: true }
+        ]
     },
     everyone: {
-        get label() {
-            return t("plugin.newGuildSettings.option.everyone.label");
-        },
-        get description() {
-            return t("plugin.newGuildSettings.option.everyone.description");
-        },
+        label: () => t(plugin.newGuildSettings.option.everyone.label),
+        description: () => t(plugin.newGuildSettings.option.everyone.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     role: {
-        get label() {
-            return t("plugin.newGuildSettings.option.role.label");
-        },
-        get description() {
-            return t("plugin.newGuildSettings.option.role.description");
-        },
+        label: () => t(plugin.newGuildSettings.option.role.label),
+        description: () => t(plugin.newGuildSettings.option.role.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     highlights: {
-        get label() {
-            return t("plugin.newGuildSettings.option.highlights.label");
-        },
-        get description() {
-            return t("plugin.newGuildSettings.option.highlights.description");
-        },
+        label: () => t(plugin.newGuildSettings.option.highlights.label),
+        description: () => t(plugin.newGuildSettings.option.highlights.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     events: {
-        get label() {
-            return t("plugin.newGuildSettings.option.events.label");
-        },
-        get description() {
-            return t("plugin.newGuildSettings.option.events.description");
-        },
+        label: () => t(plugin.newGuildSettings.option.events.label),
+        description: () => t(plugin.newGuildSettings.option.events.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     showAllChannels: {
-        get label() {
-            return t("plugin.newGuildSettings.option.showAllChannels.label");
-        },
-        get description() {
-            return t("plugin.newGuildSettings.option.showAllChannels.description");
-        },
+        label: () => t(plugin.newGuildSettings.option.showAllChannels.label),
+        description: () => t(plugin.newGuildSettings.option.showAllChannels.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     mobilePush: {
-        get label() {
-            return t("plugin.newGuildSettings.option.mobilePush.label");
-        },
-        get description() {
-            return t("plugin.newGuildSettings.option.mobilePush.description");
-        },
+        label: () => t(plugin.newGuildSettings.option.mobilePush.label),
+        description: () => t(plugin.newGuildSettings.option.mobilePush.description),
         type: OptionType.BOOLEAN,
         default: true
     }
@@ -135,7 +98,7 @@ const makeContextMenuPatch: (shouldAddIcon: boolean) => NavContextMenuPatchCallb
     const group = findGroupChildrenByChildId("privacy", children);
     group?.push(
         <Menu.MenuItem
-            label={t("plugin.newGuildSettings.context.apply")}
+            label={t(plugin.newGuildSettings.context.apply)}
             id="pc-newguildsettings-apply"
             icon={shouldAddIcon ? CogWheel : void 0}
             action={() => applyDefaultSettings(guild.id)}
@@ -167,13 +130,9 @@ function applyDefaultSettings(guildId: string | null) {
 
 export default definePlugin({
     name: "NewGuildSettings",
-    description: "Automatically mute new servers and change various other settings upon joining",
+    description: () => t(plugin.newGuildSettings.description),
     tags: ["MuteNewGuild", "mute", "server"],
     authors: [Devs.Glitch, Devs.Nuckyz, Devs.carince, Devs.Mopi, Devs.GabiRP],
-
-    get displayDescription() {
-        return t("plugin.newGuildSettings.description");
-    },
 
     contextMenus: {
         "guild-context": makeContextMenuPatch(false),

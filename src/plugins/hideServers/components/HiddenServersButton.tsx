@@ -7,7 +7,7 @@
 
 import "./style.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
 import { HiddenServersStore } from "@plugins/hideServers/HiddenServersStore";
@@ -30,7 +30,7 @@ function HiddenServersButton() {
                     size="min"
                     onClick={() => openHiddenServersModal()}
                 >
-                    {actuallyHidden} {t("plugin.hideServers.button.hidden")}
+                    {actuallyHidden} {t(plugin.hideServers.button.hidden)}
                 </Button>
             ) : null}
         </div >

@@ -18,7 +18,7 @@
 */
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Flex } from "@components/Flex";
 import { OpenExternalIcon } from "@components/Icons";
 import { Devs } from "@utils/constants";
@@ -42,7 +42,7 @@ function search(src: string, engine: string) {
 function makeSearchItem(src: string) {
     return (
         <Menu.MenuItem
-            label={t("plugin.reverseImageSearch.context.label")}
+            label={t(plugin.reverseImageSearch.context.label)}
             key="search-image"
             id="search-image"
         >
@@ -76,7 +76,7 @@ function makeSearchItem(src: string) {
                 label={
                     <Flex alignItems="center" style={{ gap: "0.5em" }}>
                         <OpenExternalIcon height={16} width={16} />
-                        {t("plugin.reverseImageSearch.context.all")}
+                        {t(plugin.reverseImageSearch.context.all)}
                     </Flex>
                 }
                 action={() => Object.values(Engines).forEach(e => search(src, e))}
@@ -103,13 +103,9 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
 
 export default definePlugin({
     name: "ReverseImageSearch",
-    description: "Adds ImageSearch to image context menus",
+    description: () => t(plugin.reverseImageSearch.description),
     authors: [Devs.Ven, Devs.Nuckyz],
     tags: ["ImageUtilities"],
-
-    get displayDescription() {
-        return t("plugin.reverseImageSearch.description");
-    },
 
     patches: [
         {

@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -30,19 +30,13 @@ const enum DisplayStyle {
 
 const settings = definePluginSettings({
     displayStyle: {
-        get label() {
-            return t("plugin.showTimeoutDuration.option.displayStyle.label");
-        },
-        get description() {
-            return t("plugin.showTimeoutDuration.option.displayStyle.description");
-        },
+        label: () => t(plugin.showTimeoutDuration.option.displayStyle.label),
+        description: () => t(plugin.showTimeoutDuration.option.displayStyle.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.showTimeoutDuration.option.displayStyle.tooltip"), value: DisplayStyle.Tooltip },
-                { label: t("plugin.showTimeoutDuration.option.displayStyle.inline"), value: DisplayStyle.Inline, default: true },
-            ];
-        }
+        options: [
+            { label: () => t(plugin.showTimeoutDuration.option.displayStyle.tooltip), value: DisplayStyle.Tooltip },
+            { label: () => t(plugin.showTimeoutDuration.option.displayStyle.inline), value: DisplayStyle.Inline, default: true },
+        ]
     }
 });
 
@@ -76,13 +70,8 @@ function renderTimeout(message: Message, inline: boolean) {
 
 export default definePlugin({
     name: "ShowTimeoutDuration",
-    description: "Shows how much longer a user's timeout will last, either in the timeout icon tooltip or next to it",
+    description: () => t(plugin.showTimeoutDuration.description),
     authors: [Devs.Ven, Devs.Sqaaakoi],
-
-    get displayDescription() {
-        return t("plugin.showTimeoutDuration.description");
-    },
-
     settings,
 
     patches: [

@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
@@ -23,32 +23,20 @@ export const cl = classNameFactory("pc-github-repos-");
 
 export const settings = definePluginSettings({
     showStars: {
-        get label() {
-            return t("plugin.gitHubRepos.option.showStars.label");
-        },
-        get description() {
-            return t("plugin.gitHubRepos.option.showStars.description");
-        },
+        label: () => t(plugin.gitHubRepos.option.showStars.label),
+        description: () => t(plugin.gitHubRepos.option.showStars.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     showLanguage: {
-        get label() {
-            return t("plugin.gitHubRepos.option.showLanguage.label");
-        },
-        get description() {
-            return t("plugin.gitHubRepos.option.showLanguage.description");
-        },
+        label: () => t(plugin.gitHubRepos.option.showLanguage.label),
+        description: () => t(plugin.gitHubRepos.option.showLanguage.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     showInMiniProfile: {
-        get label() {
-            return t("plugin.gitHubRepos.option.showInMiniProfile.label");
-        },
-        get description() {
-            return t("plugin.gitHubRepos.option.showInMiniProfile.description");
-        },
+        label: () => t(plugin.gitHubRepos.option.showInMiniProfile.label),
+        description: () => t(plugin.gitHubRepos.option.showInMiniProfile.description),
         type: OptionType.BOOLEAN,
         default: true
     },
@@ -70,20 +58,16 @@ const ProfilePopoutComponent = ErrorBoundary.wrap(
     {
         noop: true,
         fallback: () => <BaseText size="xs" weight="semibold" className="pc-github-repos-error" style={{ color: "var(--text-danger)" }}>
-            {t("plugin.gitHubRepos.error.render")}
+            {t(plugin.gitHubRepos.error.render)}
         </BaseText>
     }
 );
 
 export default definePlugin({
     name: "GitHubRepos",
-    description: "Displays a user's public GitHub repositories in their profile",
+    description: () => t(plugin.gitHubRepos.description),
     authors: [PcDevs.talhakf, PcDevs.Panniku, PcDevs.MutanPlex],
     settings,
-
-    get displayDescription() {
-        return t("plugin.gitHubRepos.description");
-    },
 
     patches: [
         {

@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import { Devs, PcDevs } from "@utils/constants";
@@ -17,42 +17,32 @@ const StatusSettings = getUserSettingLazy<string>("status", "status")!;
 
 const settings = definePluginSettings({
     statusToSet: {
-        get label() {
-            return t("plugin.autoDNDWhilePlaying.option.statusToSet.label");
-        },
-        get description() {
-            return t("plugin.autoDNDWhilePlaying.option.statusToSet.description");
-        },
+        label: () => t(plugin.autoDNDWhilePlaying.option.statusToSet.label),
+        description: () => t(plugin.autoDNDWhilePlaying.option.statusToSet.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.autoDNDWhilePlaying.option.statusToSet.online"),
-                    value: "online"
-                },
-                {
-                    label: t("plugin.autoDNDWhilePlaying.option.statusToSet.idle"),
-                    value: "idle"
-                },
-                {
-                    label: t("plugin.autoDNDWhilePlaying.option.statusToSet.dnd"),
-                    value: "dnd",
-                    default: true
-                },
-                {
-                    label: t("plugin.autoDNDWhilePlaying.option.statusToSet.invisible"),
-                    value: "invisible"
-                }
-            ];
-        }
+        options: [
+            {
+                label: () => t(plugin.autoDNDWhilePlaying.option.statusToSet.online),
+                value: "online"
+            },
+            {
+                label: () => t(plugin.autoDNDWhilePlaying.option.statusToSet.idle),
+                value: "idle"
+            },
+            {
+                label: () => t(plugin.autoDNDWhilePlaying.option.statusToSet.dnd),
+                value: "dnd",
+                default: true
+            },
+            {
+                label: () => t(plugin.autoDNDWhilePlaying.option.statusToSet.invisible),
+                value: "invisible"
+            }
+        ]
     },
     excludeInvisible: {
-        get label() {
-            return t("plugin.autoDNDWhilePlaying.option.excludeInvisible.label");
-        },
-        get description() {
-            return t("plugin.autoDNDWhilePlaying.option.excludeInvisible.description");
-        },
+        label: () => t(plugin.autoDNDWhilePlaying.option.excludeInvisible.label),
+        description: () => t(plugin.autoDNDWhilePlaying.option.excludeInvisible.description),
         type: OptionType.BOOLEAN,
         default: false
     },
@@ -60,13 +50,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "AutoDNDWhilePlaying",
-    description: "Automatically updates your online status (online, idle, dnd) when launching games",
+    description: () => t(plugin.autoDNDWhilePlaying.description),
     authors: [Devs.thororen, PcDevs.MutanPlex],
     settings,
-
-    get displayDescription() {
-        return t("plugin.autoDNDWhilePlaying.description");
-    },
 
     flux: {
         RUNNING_GAMES_CHANGE({ games }) {

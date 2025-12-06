@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -40,23 +40,15 @@ function setCss() {
 
 const settings = definePluginSettings({
     blurAmount: {
-        get label() {
-            return t("plugin.blurNSFW.option.blurAmount.label");
-        },
-        get description() {
-            return t("plugin.blurNSFW.option.blurAmount.description");
-        },
+        label: () => t(plugin.blurNSFW.option.blurAmount.label),
+        description: () => t(plugin.blurNSFW.option.blurAmount.description),
         type: OptionType.NUMBER,
         default: 10,
         onChange: setCss
     },
     blurAllChannels: {
-        get label() {
-            return t("plugin.blurNSFW.option.blurAllChannels.label");
-        },
-        get description() {
-            return t("plugin.blurNSFW.option.blurAllChannels.description");
-        },
+        label: () => t(plugin.blurNSFW.option.blurAllChannels.label),
+        description: () => t(plugin.blurNSFW.option.blurAllChannels.description),
         type: OptionType.BOOLEAN,
         default: false
     }
@@ -64,13 +56,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "BlurNSFW",
-    description: "Blur attachments in NSFW channels until hovered",
+    description: () => t(plugin.blurNSFW.description),
     authors: [Devs.Ven],
     settings,
-
-    get displayDescription() {
-        return t("plugin.blurNSFW.description");
-    },
 
     patches: [
         {

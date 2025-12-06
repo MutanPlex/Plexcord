@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
 import { getIntlMessage, hasGuildFeature } from "@utils/discord";
@@ -45,13 +45,9 @@ function disableInvites(guildId: string) {
 
 export default definePlugin({
     name: "PauseInvitesForever",
+    description: () => t(plugin.pauseInvitesForever.description),
     tags: ["DisableInvitesForever"],
-    description: "Brings back the option to pause invites indefinitely that stupit Discord removed.",
     authors: [Devs.Dolfies, Devs.amia],
-
-    get displayDescription() {
-        return t("plugin.pauseInvitesForever.description");
-    },
 
     patches: [
         {
@@ -77,7 +73,7 @@ export default definePlugin({
                 {showDisableInvites(guildId) && <a role="button" onClick={() => {
                     setChecked(true);
                     disableInvites(guildId);
-                }}> {t("plugin.pauseInvitesForever.pauseIndefinitely")}</a>}
+                }}> {t(plugin.pauseInvitesForever.pauseIndefinitely)}</a>}
             </div>
         );
     }, { noop: true })

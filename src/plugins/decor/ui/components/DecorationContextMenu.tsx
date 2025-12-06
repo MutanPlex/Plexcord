@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { CopyIcon, DeleteIcon } from "@components/Icons";
 import { Decoration } from "@plugins/decor/lib/api";
 import { useCurrentUserDecorationsStore } from "@plugins/decor/lib/stores/CurrentUserDecorationsStore";
@@ -19,26 +19,26 @@ export default function DecorationContextMenu({ decoration }: { decoration: Deco
     return <Menu.Menu
         navId={cl("decoration-context-menu")}
         onClose={ContextMenuApi.closeContextMenu}
-        aria-label={t("plugin.decor.context.decorationOptions")}
+        aria-label={t(plugin.decor.context.decorationOptions)}
     >
         <Menu.MenuItem
             id={cl("decoration-context-menu-copy-hash")}
-            label={t("plugin.decor.context.copyDecorationHash")}
+            label={t(plugin.decor.context.copyHash)}
             icon={CopyIcon}
             action={() => copyToClipboard(decoration.hash)}
         />
         {decoration.authorId === UserStore.getCurrentUser().id &&
             <Menu.MenuItem
                 id={cl("decoration-context-menu-delete")}
-                label={t("plugin.decor.context.deleteDecoration")}
+                label={t(plugin.decor.context.deleteDecoration)}
                 color="danger"
                 icon={DeleteIcon}
                 action={() => Alerts.show({
-                    title: t("plugin.decor.alert.delete.title"),
-                    body: t("plugin.decor.alert.delete.body", { decoration }),
-                    confirmText: t("plugin.decor.alert.delete.confirm"),
+                    title: t(plugin.decor.alert.delete.title),
+                    body: t(plugin.decor.alert.delete.body, { decoration }),
+                    confirmText: t(plugin.decor.alert.delete.confirm),
                     confirmColor: cl("danger-btn"),
-                    cancelText: t("plugin.decor.alert.delete.cancel"),
+                    cancelText: t(plugin.decor.alert.delete.cancel),
                     onConfirm() {
                         deleteDecoration(decoration);
                     }

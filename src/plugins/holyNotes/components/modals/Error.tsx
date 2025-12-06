@@ -5,9 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { findByProps } from "@webpack";
-
 
 export default ({ error }: { error?: Error; } = {}) => {
     const classes = findByProps("emptyResultsWrap");
@@ -20,7 +19,7 @@ export default ({ error }: { error?: Error; } = {}) => {
                 <div className={classes.emptyResultsContent} style={{ paddingBottom: "0px" }}>
                     <div className={classes.errorImage} />
                     <div className={classes.emptyResultsText}>
-                        {t("plugin.holyNotes.modal.error.generic")}
+                        {t(plugin.holyNotes.modal.error.generic)}
                     </div>
                 </div>
             </div>
@@ -32,7 +31,7 @@ export default ({ error }: { error?: Error; } = {}) => {
                 <div className={classes.emptyResultsContent} style={{ paddingBottom: "0px" }}>
                     <div className={`${classes.noResultsImage} ${classes.alt}`} />
                     <div className={classes.emptyResultsText}>
-                        {t("plugin.holyNotes.modal.error.easter")}
+                        {t(plugin.holyNotes.modal.error.easter)}
                     </div>
                 </div>
             </div>
@@ -44,7 +43,7 @@ export default ({ error }: { error?: Error; } = {}) => {
                 <div className={classes.emptyResultsContent} style={{ paddingBottom: "0px" }}>
                     <div className={classes.noResultsImage} />
                     <div className={classes.emptyResultsText}>
-                        {t("plugin.holyNotes.modal.error.empty")}
+                        {t(plugin.holyNotes.modal.error.empty)}
                     </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
@@ -28,42 +28,26 @@ export const settings = definePluginSettings({
         component: SettingSection,
     },
     includeVideoDevices: {
-        get label() {
-            return t("plugin.instantScreenshare.option.includeVideoDevices.label");
-        },
-        get description() {
-            return t("plugin.instantScreenshare.option.includeVideoDevices.description");
-        },
+        label: () => t(plugin.instantScreenshare.option.includeVideoDevices.label),
+        description: () => t(plugin.instantScreenshare.option.includeVideoDevices.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     autoMute: {
-        get label() {
-            return t("plugin.instantScreenshare.option.autoMute.label");
-        },
-        get description() {
-            return t("plugin.instantScreenshare.option.autoMute.description");
-        },
+        label: () => t(plugin.instantScreenshare.option.autoMute.label),
+        description: () => t(plugin.instantScreenshare.option.autoMute.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     autoDeafen: {
-        get label() {
-            return t("plugin.instantScreenshare.option.autoDeafen.label");
-        },
-        get description() {
-            return t("plugin.instantScreenshare.option.autoDeafen.description");
-        },
+        label: () => t(plugin.instantScreenshare.option.autoDeafen.label),
+        description: () => t(plugin.instantScreenshare.option.autoDeafen.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     toolboxManagement: {
-        get label() {
-            return t("plugin.instantScreenshare.option.toolboxManagement.label");
-        },
-        get description() {
-            return t("plugin.instantScreenshare.option.toolboxManagement.description");
-        },
+        label: () => t(plugin.instantScreenshare.option.toolboxManagement.label),
+        description: () => t(plugin.instantScreenshare.option.toolboxManagement.description),
         type: OptionType.BOOLEAN,
         default: true,
     }
@@ -105,7 +89,7 @@ function StreamSimplePicker({ streamMediaSelection, streamMedia }: PickerProps) 
 
     return (
         <SearchableSelect
-            placeholder={t("plugin.instantScreenshare.option.streamMedia.placeholder")}
+            placeholder={t(plugin.instantScreenshare.option.streamMedia.placeholder)}
             maxVisibleItems={5}
             options={options}
             value={options.find(o => o.value === streamMedia)}
@@ -150,8 +134,8 @@ function ScreenSetting() {
         return () => { active = false; };
     }, [includeVideoDevices]);
 
-    if (loading) return <Paragraph>{t("plugin.instantScreenshare.streamMedia.loading")}</Paragraph>;
-    if (!streamMediaSelection.length) return <Paragraph>{t("plugin.instantScreenshare.streamMedia.none")}</Paragraph>;
+    if (loading) return <Paragraph>{t(plugin.instantScreenshare.option.streamMedia.loading)}</Paragraph>;
+    if (!streamMediaSelection.length) return <Paragraph>{t(plugin.instantScreenshare.option.streamMedia.none)}</Paragraph>;
 
     return <StreamSimplePicker streamMediaSelection={streamMediaSelection} streamMedia={streamMedia} />;
 }
@@ -159,8 +143,8 @@ function ScreenSetting() {
 function SettingSection() {
     return (
         <section>
-            <Heading>{t("plugin.instantScreenshare.option.streamMedia.label")}</Heading>
-            <Paragraph>{t("plugin.instantScreenshare.option.streamMedia.description")}</Paragraph>
+            <Heading>{t(plugin.instantScreenshare.option.streamMedia.label)}</Heading>
+            <Paragraph>{t(plugin.instantScreenshare.option.streamMedia.description)}</Paragraph>
             <ScreenSetting />
         </section>
     );

@@ -17,19 +17,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     maxAccounts: {
-        get label() {
-            return t("plugin.unlimitedAccounts.option.maxAccounts.label");
-        },
-        get description() {
-            return t("plugin.unlimitedAccounts.option.maxAccounts.description");
-        },
+        label: () => t(plugin.unlimitedAccounts.option.maxAccounts.label),
+        description: () => t(plugin.unlimitedAccounts.option.maxAccounts.description),
         default: 0,
         type: OptionType.NUMBER,
         restartNeeded: true,
@@ -38,13 +34,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "UnlimitedAccounts",
-    description: "Increases the amount of accounts you can add.",
+    description: () => t(plugin.unlimitedAccounts.description),
     authors: [Devs.thororen, PcDevs.MutanPlex],
     settings,
-
-    get displayDescription() {
-        return t("plugin.unlimitedAccounts.description");
-    },
 
     patches: [
         {

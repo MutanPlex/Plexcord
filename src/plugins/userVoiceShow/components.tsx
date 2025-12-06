@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
@@ -104,7 +104,7 @@ function VoiceChannelTooltip({ channel, isLocked }: VoiceChannelTooltipProps) {
     const Icon = isLocked ? LockedSpeakerIcon : SpeakerIcon;
     return (
         <>
-            <BaseText size="sm" weight="bold">{t("plugin.userVoiceShow.modal.inVoiceChat")}</BaseText>
+            <BaseText size="sm" weight="bold">{t(plugin.userVoiceShow.modal.inVoiceChat)}</BaseText>
             <BaseText size="sm" weight="bold">{Parser.parse(`<#${channel.id}>`)}</BaseText>
             <div className={cl("pc-members")}>
                 <Icon size={18} />
@@ -159,7 +159,7 @@ export const VoiceChannelIndicator = ErrorBoundary.wrap(({ userId, isProfile, is
 
         if (e.detail > 1) {
             if (!isDM && !PermissionStore.can(PermissionsBits.CONNECT, channel)) {
-                showToast(t("plugin.userVoiceShow.notification.cannotJoin"), Toasts.Type.FAILURE);
+                showToast(t(plugin.userVoiceShow.notification.cannotJoin), Toasts.Type.FAILURE);
                 return;
             }
 

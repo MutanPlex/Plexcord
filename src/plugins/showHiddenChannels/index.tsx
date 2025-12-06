@@ -19,7 +19,7 @@
 
 import "./style.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -45,39 +45,25 @@ const CONNECT = 1n << 20n;
 
 export const settings = definePluginSettings({
     hideUnreads: {
-        get label() {
-            return t("plugin.showHiddenChannels.option.hideUnreads.label");
-        },
-        get description() {
-            return t("plugin.showHiddenChannels.option.hideUnreads.description");
-        },
+        label: () => t(plugin.showHiddenChannels.option.hideUnreads.label),
+        description: () => t(plugin.showHiddenChannels.option.hideUnreads.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     showMode: {
-        get label() {
-            return t("plugin.showHiddenChannels.option.showMode.label");
-        },
-        get description() {
-            return t("plugin.showHiddenChannels.option.showMode.description");
-        },
+        label: () => t(plugin.showHiddenChannels.option.showMode.label),
+        description: () => t(plugin.showHiddenChannels.option.showMode.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.showHiddenChannels.option.showMode.lock"), value: ShowMode.LockIcon, default: true },
-                { label: t("plugin.showHiddenChannels.option.showMode.hidden"), value: ShowMode.HiddenIconWithMutedStyle },
-            ];
-        },
+        options: [
+            { label: () => t(plugin.showHiddenChannels.option.showMode.lock), value: ShowMode.LockIcon, default: true },
+            { label: () => t(plugin.showHiddenChannels.option.showMode.hidden), value: ShowMode.HiddenIconWithMutedStyle },
+        ],
         restartNeeded: true
     },
     defaultAllowedUsersAndRolesDropdownState: {
-        get label() {
-            return t("plugin.showHiddenChannels.option.defaultAllowedUsersAndRolesDropdownState.label");
-        },
-        get description() {
-            return t("plugin.showHiddenChannels.option.defaultAllowedUsersAndRolesDropdownState.description");
-        },
+        label: () => t(plugin.showHiddenChannels.option.defaultAllowedUsersAndRolesDropdownState.label),
+        description: () => t(plugin.showHiddenChannels.option.defaultAllowedUsersAndRolesDropdownState.description),
         type: OptionType.BOOLEAN,
         default: true
     }
@@ -89,13 +75,9 @@ function isUncategorized(objChannel: { channel: Channel; comparator: number; }) 
 
 export default definePlugin({
     name: "ShowHiddenChannels",
-    description: "Show channels that you do not have access to view.",
+    description: () => t(plugin.showHiddenChannels.description),
     authors: [Devs.BigDuck, Devs.AverageReactEnjoyer, Devs.D3SOX, Devs.Ven, Devs.Nuckyz, Devs.Nickyux, Devs.dzshn],
     settings,
-
-    get displayDescription() {
-        return t("plugin.showHiddenChannels.description");
-    },
 
     patches: [
         {
@@ -576,7 +558,7 @@ export default definePlugin({
     ), { noop: true }),
 
     HiddenChannelIcon: ErrorBoundary.wrap(() => (
-        <Tooltip text={t("plugin.showHiddenChannels.tooltip")}>
+        <Tooltip text={t(plugin.showHiddenChannels.tooltip)}>
             {({ onMouseLeave, onMouseEnter }) => (
                 <svg
                     onMouseLeave={onMouseLeave}

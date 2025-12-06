@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t, tJsx } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
@@ -25,7 +25,7 @@ function GuidelinesModal(props: ModalProps) {
     >
         <ModalHeader separator={false} className={cl("modal-header")}>
             <BaseText size="lg" weight="semibold" color="header-primary" tag="h1" style={{ flexGrow: 1 }}>
-                {t("plugin.decor.guidelines.hold")}
+                {t(plugin.decor.guidelines.hold)}
             </BaseText>
             <ModalCloseButton onClick={props.onClose} />
         </ModalHeader>
@@ -33,11 +33,11 @@ function GuidelinesModal(props: ModalProps) {
             scrollbarType="none"
         >
             <Paragraph>
-                {tJsx("plugin.decor.guidelines.suspended", {
+                {t(plugin.decor.guidelines.suspended, {
                     guidelines: <Link
                         href="https://github.com/decor-discord/.github/blob/main/GUIDELINES.md"
                     >
-                        {t("plugin.decor.create.guidelines")}
+                        {t(plugin.decor.create.guidelines)}
                     </Link>
                 })
                 }
@@ -52,13 +52,13 @@ function GuidelinesModal(props: ModalProps) {
                         openCreateDecorationModal();
                     }}
                 >
-                    {t("plugin.decor.button.continue")}
+                    {t(plugin.decor.button.continue)}
                 </Button>
                 <Button
                     onClick={props.onClose}
                     variant="none"
                 >
-                    {t("plugin.decor.button.back")}
+                    {t(plugin.decor.button.back)}
                 </Button>
             </Flex>
         </ModalFooter>

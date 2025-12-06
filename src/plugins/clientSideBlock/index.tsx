@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import { GuildMember } from "@plexcord/discord-types";
@@ -13,121 +13,82 @@ import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { ChannelStore, GuildMemberStore, GuildRoleStore, RelationshipStore, UserStore } from "@webpack/common";
 
-const settings = definePluginSettings(
-    {
-        hideVc: {
-            get label() {
-                return t("plugin.clientSideBlock.option.hideVc.label");
-            },
-            get description() {
-                return t("plugin.clientSideBlock.option.hideVc.description");
-            },
+const settings = definePluginSettings({
+    hideVc: {
+        label: () => t(plugin.clientSideBlock.option.hideVc.label),
+        description: () => t(plugin.clientSideBlock.option.hideVc.description),
+        type: OptionType.BOOLEAN,
+        default: false,
+        restartNeeded: true
+    },
+    usersToBlock: {
+        label: () => t(plugin.clientSideBlock.option.usersToBlock.label),
+        description: () => t(plugin.clientSideBlock.option.usersToBlock.description),
+        type: OptionType.STRING,
+        restartNeeded: true,
+        default: ""
+    },
+    hideBlockedUsers: {
+        label: () => t(plugin.clientSideBlock.option.hideBlockedUsers.label),
+        description: () => t(plugin.clientSideBlock.option.hideBlockedUsers.description),
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: true
+    },
+    hideBlockedMessages: {
+        label: () => t(plugin.clientSideBlock.option.hideBlockedMessages.label),
+        description: () => t(plugin.clientSideBlock.option.hideBlockedMessages.description),
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: true
+    },
+    hideEmptyRoles: {
+        label: () => t(plugin.clientSideBlock.option.hideEmptyRoles.label),
+        description: () => t(plugin.clientSideBlock.option.hideEmptyRoles.description),
+        type: OptionType.BOOLEAN,
+        restartNeeded: true,
+        default: true
+    },
+    /*
+        hideNewUsers: {
             type: OptionType.BOOLEAN,
-            default: false,
-            restartNeeded: true
-        },
-        usersToBlock: {
-            get label() {
-                return t("plugin.clientSideBlock.option.usersToBlock.label");
-            },
-            get description() {
-                return t("plugin.clientSideBlock.option.usersToBlock.description");
-            },
-            type: OptionType.STRING,
-            restartNeeded: true,
-            default: ""
-        },
-        hideBlockedUsers: {
-            get label() {
-                return t("plugin.clientSideBlock.option.hideBlockedUsers.label");
-            },
-            get description() {
-                return t("plugin.clientSideBlock.option.hideBlockedUsers.description");
-            },
-            type: OptionType.BOOLEAN,
-            default: true,
-            restartNeeded: true
-        },
-        hideBlockedMessages: {
-            get label() {
-                return t("plugin.clientSideBlock.option.hideBlockedMessages.label");
-            },
-            get description() {
-                return t("plugin.clientSideBlock.option.hideBlockedMessages.description");
-            },
-            type: OptionType.BOOLEAN,
-            default: true,
-            restartNeeded: true
-        },
-        hideEmptyRoles: {
-            get label() {
-                return t("plugin.clientSideBlock.option.hideEmptyRoles.label");
-            },
-            get description() {
-                return t("plugin.clientSideBlock.option.hideEmptyRoles.description");
-            },
-            type: OptionType.BOOLEAN,
+            description: "Should content from users with the \"I'm new here, say hi!\" badge be blocked\"",
             restartNeeded: true,
             default: true
         },
-        /*
-            hideNewUsers: {
-                type: OptionType.BOOLEAN,
-                description: "Should content from users with the \"I'm new here, say hi!\" badge be blocked\"",
-                restartNeeded: true,
+    */
+    blockedReplyDisplay: {
+        label: () => t(plugin.clientSideBlock.option.blockedReplyDisplay.label),
+        description: () => t(plugin.clientSideBlock.option.blockedReplyDisplay.description),
+        type: OptionType.SELECT,
+        restartNeeded: true,
+        options: [
+            {
+                label: () => t(plugin.clientSideBlock.option.blockedReplyDisplay.displayText),
+                value: "displayText",
                 default: true
             },
-        */
-        blockedReplyDisplay: {
-            get label() {
-                return t("plugin.clientSideBlock.option.blockedReplyDisplay.label");
-            },
-            get description() {
-                return t("plugin.clientSideBlock.option.blockedReplyDisplay.description");
-            },
-            type: OptionType.SELECT,
-            restartNeeded: true,
-            get options() {
-                return [
-                    {
-                        value: "displayText",
-                        get label() {
-                            return t("plugin.clientSideBlock.option.blockedReplyDisplay.displayText");
-                        },
-                        default: true
-                    },
-                    {
-                        value: "hideReply",
-                        get label() {
-                            return t("plugin.clientSideBlock.option.blockedReplyDisplay.hideReply");
-                        }
-                    }
-                ];
+            {
+                label: () => t(plugin.clientSideBlock.option.blockedReplyDisplay.hideReply),
+                value: "hideReply",
             }
-        },
-        guildBlackList: {
-            get label() {
-                return t("plugin.clientSideBlock.option.guildBlackList.label");
-            },
-            get description() {
-                return t("plugin.clientSideBlock.option.guildBlackList.description");
-            },
-            type: OptionType.STRING,
-            restartNeeded: true,
-            default: ""
-        },
-        guildWhiteList: {
-            get label() {
-                return t("plugin.clientSideBlock.option.guildWhiteList.label");
-            },
-            get description() {
-                return t("plugin.clientSideBlock.option.guildWhiteList.description");
-            },
-            type: OptionType.STRING,
-            restartNeeded: true,
-            default: ""
-        }
-    });
+        ]
+    },
+    guildBlackList: {
+        label: () => t(plugin.clientSideBlock.option.guildBlackList.label),
+        description: () => t(plugin.clientSideBlock.option.guildBlackList.description),
+        type: OptionType.STRING,
+        restartNeeded: true,
+        default: ""
+    },
+    guildWhiteList: {
+        label: () => t(plugin.clientSideBlock.option.guildWhiteList.label),
+        description: () => t(plugin.clientSideBlock.option.guildWhiteList.description),
+        type: OptionType.STRING,
+        restartNeeded: true,
+        default: ""
+    }
+});
 
 function isChannelInGuildBlocked(channelID, guild) {
     const guildID = guild ? channelID : ChannelStore.getChannel(channelID)?.guild_id;
@@ -164,7 +125,7 @@ function isRoleAllBlockedMembers(roleId, guildId) {
 function hiddenReplyComponent() {
     switch (settings.store.blockedReplyDisplay) {
         case "displayText":
-            return <BaseText size="sm" tag="p" style={{ marginTop: "0px", marginBottom: "0px" }}><i>↓ {t("plugin.clientSideBlock.replying")}</i></BaseText>;
+            return <BaseText size="sm" tag="p" style={{ marginTop: "0px", marginBottom: "0px" }}><i>↓ {t(plugin.clientSideBlock.replying)}</i></BaseText>;
         case "hideReply":
             return null;
     }
@@ -203,17 +164,16 @@ function activeNowView(cards) {
 
 export default definePlugin({
     name: "ClientSideBlock",
-    description: "Allows you to locally hide almost all content from any user",
+    description: () => t(plugin.clientSideBlock.description),
     tags: ["blocked", "block", "hide", "hidden", "noblockedmessages"],
-    get displayDescription() {
-        return t("plugin.clientSideBlock.description");
-    },
     authors: [Devs.Samwich, PcDevs.MutanPlex, PcDevs.KamiRu],
     settings,
+
     activeNowView,
     shouldHideUser,
     hiddenReplyComponent,
     isRoleAllBlockedMembers,
+
     patches: [
         // message
         {

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { React } from "@webpack/common";
@@ -26,12 +26,8 @@ let ERROR_CODES: Record<string, string> | undefined;
 
 export default definePlugin({
     name: "ReactErrorDecoder",
-    description: 'Replaces "Minifed React Error" with the actual error.',
+    description: () => t(plugin.reactErrorDecoder.description),
     authors: [Devs.Cyn, Devs.maisymoe],
-
-    get displayDescription() {
-        return t("plugin.reactErrorDecoder.description");
-    },
 
     patches: [
         {

@@ -6,7 +6,7 @@
  */
 
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, sendBotMessage } from "@api/Commands";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -14,22 +14,14 @@ import { FluxDispatcher, UserStore } from "@webpack/common";
 
 const settings = definePluginSettings({
     autoFillArguments: {
-        get label() {
-            return t("plugin.betterCommands.option.autoFillArguments.label");
-        },
-        get description() {
-            return t("plugin.betterCommands.option.autoFillArguments.description");
-        },
+        label: () => t(plugin.betterCommands.option.autoFillArguments.label),
+        description: () => t(plugin.betterCommands.option.autoFillArguments.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     allowNewlinesInCommands: {
-        get label() {
-            return t("plugin.betterCommands.option.allowNewlinesInCommands.label");
-        },
-        get description() {
-            return t("plugin.betterCommands.option.allowNewlinesInCommands.description");
-        },
+        label: () => t(plugin.betterCommands.option.allowNewlinesInCommands.label),
+        description: () => t(plugin.betterCommands.option.allowNewlinesInCommands.description),
         type: OptionType.BOOLEAN,
         default: true,
     }
@@ -44,13 +36,9 @@ function fetchIndex(target: object) {
 
 export default definePlugin({
     name: "BetterCommands",
-    description: "Enhances the command system with miscellaneous improvements.",
+    description: () => t(plugin.betterCommands.description),
     authors: [Devs.thororen],
     settings,
-
-    get displayDescription() {
-        return t("plugin.betterCommands.description");
-    },
 
     patches: [
         {
@@ -87,17 +75,11 @@ export default definePlugin({
     commands: [
         {
             name: "refresh",
-            description: "Refreshes Discord application commands locally",
-            get displayDescription() {
-                return t("plugin.betterCommands.command.refresh.description");
-            },
+            description: () => t(plugin.betterCommands.command.refresh.description),
             options: [
                 {
                     name: "user",
-                    description: "specific user to try and refresh",
-                    get displayDescription() {
-                        return t("plugin.betterCommands.command.refresh.user");
-                    },
+                    description: () => t(plugin.betterCommands.command.refresh.user),
                     type: ApplicationCommandOptionType.USER,
                 }
             ],
@@ -111,7 +93,7 @@ export default definePlugin({
                     sendBotMessage(channelId, {
                         author: {
                             username: "Plexcord"
-                        }, content: t("plugin.betterCommands.command.refresh.refreshing")
+                        }, content: t(plugin.betterCommands.command.refresh.refreshing)
                     });
                     fetchIndex({ type: "channel", channelId });
 
@@ -130,7 +112,7 @@ export default definePlugin({
                     sendBotMessage(channelId, {
                         author: {
                             username: "Plexcord"
-                        }, content: t("plugin.betterCommands.command.refresh.refreshed")
+                        }, content: t(plugin.betterCommands.command.refresh.refreshed)
                     });
                 } catch (err) {
                     console.error("[Refresh Command] Error refreshing commands:", err);
@@ -138,7 +120,7 @@ export default definePlugin({
                     sendBotMessage(ctx.channel.id, {
                         author: {
                             username: "Plexcord"
-                        }, content: t("plugin.betterCommands.command.refresh.failed")
+                        }, content: t(plugin.betterCommands.command.refresh.failed)
                     });
                 }
             },

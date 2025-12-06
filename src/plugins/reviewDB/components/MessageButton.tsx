@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { plugin, t } from "@api/i18n";
 import { DeleteIcon } from "@components/Icons";
 import { classes } from "@utils/misc";
 import { findByPropsLazy } from "@webpack";
@@ -26,7 +27,7 @@ const iconClasses = findByPropsLazy("button", "wrapper", "disabled", "separator"
 
 export function DeleteButton({ onClick }: { onClick(): void; }) {
     return (
-        <Tooltip text="Delete Review">
+        <Tooltip text={t(plugin.reviewDB.context.delete)}>
             {props => (
                 <div
                     {...props}
@@ -43,7 +44,7 @@ export function DeleteButton({ onClick }: { onClick(): void; }) {
 
 export function ReportButton({ onClick }: { onClick(): void; }) {
     return (
-        <Tooltip text="Report Review">
+        <Tooltip text={t(plugin.reviewDB.context.report)}>
             {props => (
                 <div
                     {...props}
@@ -65,7 +66,7 @@ export function ReportButton({ onClick }: { onClick(): void; }) {
 
 export function BlockButton({ onClick, isBlocked }: { onClick(): void; isBlocked: boolean; }) {
     return (
-        <Tooltip text={`${isBlocked ? "Unblock" : "Block"} user`}>
+        <Tooltip text={`${isBlocked ? t(plugin.reviewDB.context.unblock) : t(plugin.reviewDB.context.block)}`}>
             {props => (
                 <div
                     {...props}
@@ -87,7 +88,7 @@ export function BlockButton({ onClick, isBlocked }: { onClick(): void; isBlocked
 
 export function ReplyButton({ onClick }: { onClick(): void; }) {
     return (
-        <Tooltip text="Reply Review">
+        <Tooltip text={t(plugin.reviewDB.context.reply)}>
             {props => (
                 <div
                     {...props}

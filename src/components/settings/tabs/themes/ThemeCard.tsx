@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { t, themes } from "@api/i18n";
 import { Flex } from "@components/Flex";
 import { DeleteIcon } from "@components/Icons";
 import { Link } from "@components/Link";
@@ -40,17 +40,17 @@ export function ThemeCard({ theme, enabled, onChange, onDelete }: ThemeCardProps
             }
             footer={
                 <Flex flexDirection="row" style={{ gap: "0.2em", marginTop: "0.5em" }}>
-                    {!!themeInfo.website && <Link href={themeInfo.website}>{t("themes.website")}</Link>}
+                    {!!themeInfo.website && <Link href={themeInfo.website}>{t(themes.website)}</Link>}
                     {!!(themeInfo.website && themeInfo.invite) && " • "}
                     {!!themeInfo.invite && (
                         <Link
                             href={`https://discord.gg/${themeInfo.invite}`}
                             onClick={async e => {
                                 e.preventDefault();
-                                themeInfo.invite != null && openInviteModal(themeInfo.invite).catch(() => showToast(t("themes.error.expired")));
+                                themeInfo.invite != null && openInviteModal(themeInfo.invite).catch(() => showToast(t(themes.error.expired)));
                             }}
                         >
-                            {t("themes.discord")}
+                            {t(themes.discord)}
                         </Link>
                     )}
                 </Flex>

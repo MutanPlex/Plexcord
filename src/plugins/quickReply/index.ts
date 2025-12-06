@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import { Message } from "@plexcord/discord-types";
@@ -39,32 +39,22 @@ const enum MentionOptions {
 
 const settings = definePluginSettings({
     shouldMention: {
-        get label() {
-            return t("plugin.quickReply.option.shouldMention.label");
-        },
-        get description() {
-            return t("plugin.quickReply.option.shouldMention.description");
-        },
+        label: () => t(plugin.quickReply.option.shouldMention.label),
+        description: () => t(plugin.quickReply.option.shouldMention.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.quickReply.option.shouldMention.noReplyMentionPlugin"),
-                    value: MentionOptions.NO_REPLY_MENTION_PLUGIN,
-                    default: true
-                },
-                { label: t("plugin.quickReply.option.shouldMention.enabled"), value: MentionOptions.ENABLED },
-                { label: t("plugin.quickReply.option.shouldMention.disabled"), value: MentionOptions.DISABLED },
-            ];
-        }
+        options: [
+            {
+                label: () => t(plugin.quickReply.option.shouldMention.noReplyMentionPlugin),
+                value: MentionOptions.NO_REPLY_MENTION_PLUGIN,
+                default: true
+            },
+            { label: () => t(plugin.quickReply.option.shouldMention.enabled), value: MentionOptions.ENABLED },
+            { label: () => t(plugin.quickReply.option.shouldMention.disabled), value: MentionOptions.DISABLED },
+        ]
     },
     ignoreBlockedAndIgnored: {
-        get label() {
-            return t("plugin.quickReply.option.ignoreBlockedAndIgnored.label");
-        },
-        get description() {
-            return t("plugin.quickReply.option.ignoreBlockedAndIgnored.description");
-        },
+        label: () => t(plugin.quickReply.option.ignoreBlockedAndIgnored.label),
+        description: () => t(plugin.quickReply.option.ignoreBlockedAndIgnored.description),
         type: OptionType.BOOLEAN,
         default: true
     }
@@ -72,13 +62,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "QuickReply",
+    description: () => t(plugin.quickReply.description),
     authors: [Devs.fawn, Devs.Ven, Devs.pylix],
-    description: "Reply to (ctrl + up/down) and edit (ctrl + shift + up/down) messages via keybinds",
     settings,
-
-    get displayDescription() {
-        return t("plugin.quickReply.description");
-    },
 
     start() {
         document.addEventListener("keydown", onKeydown);

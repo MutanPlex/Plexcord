@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t, tJsx } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
@@ -59,160 +59,108 @@ function setActivity(activity: Activity | null) {
 
 const settings = definePluginSettings({
     username: {
-        get label() {
-            return t("plugin.listenBrainzRPC.option.username.label");
-        },
-        get description() {
-            return t("plugin.listenBrainzRPC.option.username.description");
-        },
+        label: () => t(plugin.listenBrainzRPC.option.username.label),
+        description: () => t(plugin.listenBrainzRPC.option.username.description),
         type: OptionType.STRING,
     },
     mbContact: {
-        get label() {
-            return t("plugin.listenBrainzRPC.option.mbContact.label");
-        },
-        get description() {
-            return t("plugin.listenBrainzRPC.option.mbContact.description");
-        },
+        label: () => t(plugin.listenBrainzRPC.option.mbContact.label),
+        description: () => t(plugin.listenBrainzRPC.option.mbContact.description),
         type: OptionType.STRING,
     },
     shareUsername: {
-        get label() {
-            return t("plugin.listenBrainzRPC.option.shareUsername.label");
-        },
-        get description() {
-            return t("plugin.listenBrainzRPC.option.shareUsername.description");
-        },
+        label: () => t(plugin.listenBrainzRPC.option.shareUsername.label),
+        description: () => t(plugin.listenBrainzRPC.option.shareUsername.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     shareSong: {
-        get label() {
-            return t("plugin.listenBrainzRPC.option.shareSong.label");
-        },
-        get description() {
-            return t("plugin.listenBrainzRPC.option.shareSong.description");
-        },
+        label: () => t(plugin.listenBrainzRPC.option.shareSong.label),
+        description: () => t(plugin.listenBrainzRPC.option.shareSong.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     hideWithSpotify: {
-        get label() {
-            return t("plugin.listenBrainzRPC.option.hideWithSpotify.label");
-        },
-        get description() {
-            return t("plugin.listenBrainzRPC.option.hideWithSpotify.description");
-        },
+        label: () => t(plugin.listenBrainzRPC.option.hideWithSpotify.label),
+        description: () => t(plugin.listenBrainzRPC.option.hideWithSpotify.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     hideWithActivity: {
-        get label() {
-            return t("plugin.listenBrainzRPC.option.hideWithActivity.label");
-        },
-        get description() {
-            return t("plugin.listenBrainzRPC.option.hideWithActivity.description");
-        },
+        label: () => t(plugin.listenBrainzRPC.option.hideWithActivity.label),
+        description: () => t(plugin.listenBrainzRPC.option.hideWithActivity.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     useTimeBar: {
-        get label() {
-            return t("plugin.listenBrainzRPC.option.useTimeBar.label");
-        },
-        get description() {
-            return t("plugin.listenBrainzRPC.option.useTimeBar.description");
-        },
+        label: () => t(plugin.listenBrainzRPC.option.useTimeBar.label),
+        description: () => t(plugin.listenBrainzRPC.option.useTimeBar.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     statusName: {
-        get label() {
-            return t("plugin.listenBrainzRPC.option.statusName.label");
-        },
-        get description() {
-            return t("plugin.listenBrainzRPC.option.statusName.description");
-        },
+        label: () => t(plugin.listenBrainzRPC.option.statusName.label),
+        description: () => t(plugin.listenBrainzRPC.option.statusName.description),
         type: OptionType.STRING,
         default: "some music",
     },
     nameFormat: {
-        get label() {
-            return t("plugin.listenBrainzRPC.option.nameFormat.label");
-        },
-        get description() {
-            return t("plugin.listenBrainzRPC.option.nameFormat.description");
-        },
+        label: () => t(plugin.listenBrainzRPC.option.nameFormat.label),
+        description: () => t(plugin.listenBrainzRPC.option.nameFormat.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.listenBrainzRPC.option.nameFormat.custom"),
-                    value: NameFormat.StatusName,
-                    default: true,
-                },
-                {
-                    label: t("plugin.listenBrainzRPC.option.nameFormat.artistSong"),
-                    value: NameFormat.ArtistFirst,
-                },
-                {
-                    label: t("plugin.listenBrainzRPC.option.nameFormat.songArtist"),
-                    value: NameFormat.SongFirst,
-                },
-                {
-                    label: t("plugin.listenBrainzRPC.option.nameFormat.artistOnly"),
-                    value: NameFormat.ArtistOnly,
-                },
-                {
-                    label: t("plugin.listenBrainzRPC.option.nameFormat.songOnly"),
-                    value: NameFormat.SongOnly,
-                },
-                {
-                    label: t("plugin.listenBrainzRPC.option.nameFormat.albumName"),
-                    value: NameFormat.AlbumName,
-                },
-            ];
-        }
+        options: [
+            {
+                label: () => t(plugin.listenBrainzRPC.option.nameFormat.custom),
+                value: NameFormat.StatusName,
+                default: true,
+            },
+            {
+                label: () => t(plugin.listenBrainzRPC.option.nameFormat.artistSong),
+                value: NameFormat.ArtistFirst,
+            },
+            {
+                label: () => t(plugin.listenBrainzRPC.option.nameFormat.songArtist),
+                value: NameFormat.SongFirst,
+            },
+            {
+                label: () => t(plugin.listenBrainzRPC.option.nameFormat.artistOnly),
+                value: NameFormat.ArtistOnly,
+            },
+            {
+                label: () => t(plugin.listenBrainzRPC.option.nameFormat.songOnly),
+                value: NameFormat.SongOnly,
+            },
+            {
+                label: () => t(plugin.listenBrainzRPC.option.nameFormat.albumName),
+                value: NameFormat.AlbumName,
+            },
+        ]
     },
     useListeningStatus: {
-        get label() {
-            return t("plugin.listenBrainzRPC.option.useListeningStatus.label");
-        },
-        get description() {
-            return t("plugin.listenBrainzRPC.option.useListeningStatus.description");
-        },
+        label: () => t(plugin.listenBrainzRPC.option.useListeningStatus.label),
+        description: () => t(plugin.listenBrainzRPC.option.useListeningStatus.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     missingArt: {
-        get label() {
-            return t("plugin.listenBrainzRPC.option.missingArt.label");
-        },
-        get description() {
-            return t("plugin.listenBrainzRPC.option.missingArt.description");
-        },
+        label: () => t(plugin.listenBrainzRPC.option.missingArt.label),
+        description: () => t(plugin.listenBrainzRPC.option.missingArt.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.listenBrainzRPC.option.missingArt.listenbrainzLogo"),
-                    value: "listenbrainzLogo",
-                    default: true,
-                },
-                {
-                    label: t("plugin.listenBrainzRPC.option.missingArt.generic"),
-                    value: "placeholder",
-                },
-            ];
-        }
+        options: [
+            {
+                label: () => t(plugin.listenBrainzRPC.option.missingArt.listenbrainzLogo),
+                value: "listenbrainzLogo",
+                default: true,
+            },
+            {
+                label: () => t(plugin.listenBrainzRPC.option.missingArt.generic),
+                value: "placeholder",
+            },
+        ]
     },
     useLogo: {
-        get label() {
-            return t("plugin.listenBrainzRPC.option.useLogo.label");
-        },
-        get description() {
-            return t("plugin.listenBrainzRPC.option.useLogo.description");
-        },
+        label: () => t(plugin.listenBrainzRPC.option.useLogo.label),
+        description: () => t(plugin.listenBrainzRPC.option.useLogo.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
@@ -223,20 +171,16 @@ var currentStart = 0;
 
 export default definePlugin({
     name: "ListenBrainzRPC",
-    description: "Little plugin for ListenBrainz rich presence",
+    description: () => t(plugin.listenBrainzRPC.description),
     authors: [PcDevs.qouesm],
-
-    get displayDescription() {
-        return t("plugin.listenBrainzRPC.description");
-    },
 
     settingsAboutComponent: () => (
         <>
-            <Heading>{t("plugin.listenBrainzRPC.about.title")}</Heading>
+            <Heading>{t(plugin.listenBrainzRPC.about.title)}</Heading>
             <Paragraph>
-                {tJsx("plugin.listenBrainzRPC.about.description", {
+                {t(plugin.listenBrainzRPC.about.description, {
                     link: <Link href="https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting#Provide_meaningful_User-Agent_strings">
-                        {t("plugin.listenBrainzRPC.about.userAgent")}
+                        {t(plugin.listenBrainzRPC.about.userAgent)}
                     </Link>
                 })}
             </Paragraph>

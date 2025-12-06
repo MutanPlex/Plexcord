@@ -17,18 +17,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "NoRPC",
-    description: "Disables Discord's RPC server.",
+    description: () => t(plugin.noRPC.description),
     authors: [Devs.Cyn],
-
-    get displayDescription() {
-        return t("plugin.noRPC.description");
-    },
 
     patches: [
         {

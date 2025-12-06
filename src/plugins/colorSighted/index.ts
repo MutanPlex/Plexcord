@@ -17,18 +17,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "ColorSighted",
-    description: "Removes the colorblind-friendly icons from statuses, just like 2015-2017 Discord",
+    description: () => t(plugin.colorSighted.description),
     authors: [Devs.lewisakura],
-
-    get displayDescription() {
-        return t("plugin.colorSighted.description");
-    },
 
     patches: [
         {

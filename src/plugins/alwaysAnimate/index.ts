@@ -17,63 +17,43 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     icons: {
-        get label() {
-            return t("plugin.alwaysAnimate.option.icons.label");
-        },
-        get description() {
-            return t("plugin.alwaysAnimate.option.icons.description");
-        },
+        label: () => t(plugin.alwaysAnimate.option.icons.label),
+        description: () => t(plugin.alwaysAnimate.option.icons.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     statusEmojis: {
-        get label() {
-            return t("plugin.alwaysAnimate.option.statusEmojis.label");
-        },
-        get description() {
-            return t("plugin.alwaysAnimate.option.statusEmojis.description");
-        },
+        label: () => t(plugin.alwaysAnimate.option.statusEmojis.label),
+        description: () => t(plugin.alwaysAnimate.option.statusEmojis.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     serverBanners: {
-        get label() {
-            return t("plugin.alwaysAnimate.option.serverBanners.label");
-        },
-        get description() {
-            return t("plugin.alwaysAnimate.option.serverBanners.description");
-        },
+        label: () => t(plugin.alwaysAnimate.option.serverBanners.label),
+        description: () => t(plugin.alwaysAnimate.option.serverBanners.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     nameplates: {
-        get label() {
-            return t("plugin.alwaysAnimate.option.nameplates.label");
-        },
-        get description() {
-            return t("plugin.alwaysAnimate.option.nameplates.description");
-        },
+        label: () => t(plugin.alwaysAnimate.option.nameplates.label),
+        description: () => t(plugin.alwaysAnimate.option.nameplates.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     roleGradients: {
-        get label() {
-            return t("plugin.alwaysAnimate.option.roleGradients.label");
-        },
-        get description() {
-            return t("plugin.alwaysAnimate.option.roleGradients.description");
-        },
+        label: () => t(plugin.alwaysAnimate.option.roleGradients.label),
+        description: () => t(plugin.alwaysAnimate.option.roleGradients.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
@@ -82,13 +62,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "AlwaysAnimate",
-    description: "Animates anything that can be animated",
+    description: () => t(plugin.alwaysAnimate.description),
     authors: [Devs.FieryFlames],
     settings,
-
-    get displayDescription() {
-        return t("plugin.alwaysAnimate.description");
-    },
 
     patches: [
         {

@@ -17,29 +17,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     noShiftDelete: {
-        get label() {
-            return t("plugin.showAllMessageButtons.option.noShiftDelete.label");
-        },
-        get description() {
-            return t("plugin.showAllMessageButtons.option.noShiftDelete.description");
-        },
+        label: () => t(plugin.showAllMessageButtons.option.noShiftDelete.label),
+        description: () => t(plugin.showAllMessageButtons.option.noShiftDelete.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     noShiftPin: {
-        get label() {
-            return t("plugin.showAllMessageButtons.option.noShiftPin.label");
-        },
-        get description() {
-            return t("plugin.showAllMessageButtons.option.noShiftPin.description");
-        },
+        label: () => t(plugin.showAllMessageButtons.option.noShiftPin.label),
+        description: () => t(plugin.showAllMessageButtons.option.noShiftPin.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
@@ -47,13 +39,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "ShowAllMessageButtons",
-    description: "Always show all message buttons no matter if you are holding the shift key or not.",
+    description: () => t(plugin.showAllMessageButtons.description),
     authors: [Devs.Nuckyz, PcDevs.mochienya],
     settings,
-
-    get displayDescription() {
-        return t("plugin.showAllMessageButtons.description");
-    },
 
     patches: [
         {

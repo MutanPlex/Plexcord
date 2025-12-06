@@ -8,7 +8,7 @@
 import "./style.css";
 
 import * as DataStore from "@api/DataStore";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
@@ -238,7 +238,7 @@ function showRandom() {
     saveToHistory(fact);
 
     showNotification({
-        title: t("plugin.uselessInfo.notification.title"),
+        title: t(plugin.uselessInfo.notification.title),
         body: fact.text,
         icon: "https://cdn.discordapp.com/emojis/1026533090627174460.png",
         onClick: fact.link ? () => window.open(fact.link, "_blank") : undefined,
@@ -311,7 +311,7 @@ function HistoryHotkeyRecorder() {
             className={cl("key-recorder-container")}
         >
             <div>
-                <Heading>{t("plugin.uselessInfo.option.historyHotkey.label")}</Heading>
+                <Heading>{t(plugin.uselessInfo.option.historyHotkey.label)}</Heading>
             </div>
             <div
                 onClick={() => recordKeybind(setIsRecording)}
@@ -324,7 +324,7 @@ function HistoryHotkeyRecorder() {
                     className={`${cl("key-recorder-button")} ${isRecording ? cl("recording-button") : ""}`}
                     disabled={isRecording}
                 >
-                    {isRecording ? t("plugin.uselessInfo.recording") : t("plugin.uselessInfo.record")}
+                    {isRecording ? t(plugin.uselessInfo.recording) : t(plugin.uselessInfo.record)}
                 </button>
             </div>
         </div>
@@ -381,7 +381,7 @@ function RandomFactHotkeyRecorder() {
             className={cl("key-recorder-container")}
         >
             <div>
-                <Heading>{t("plugin.uselessInfo.option.randomFactHotkey.label")}</Heading>
+                <Heading>{t(plugin.uselessInfo.option.randomFactHotkey.label)}</Heading>
             </div>
             <div
                 onClick={() => recordKeybind(setIsRecording)}
@@ -394,7 +394,7 @@ function RandomFactHotkeyRecorder() {
                     className={`${cl("key-recorder-button")} ${isRecording ? cl("recording-button") : ""}`}
                     disabled={isRecording}
                 >
-                    {isRecording ? t("plugin.uselessInfo.recording") : t("plugin.uselessInfo.record")}
+                    {isRecording ? t(plugin.uselessInfo.recording) : t(plugin.uselessInfo.record)}
                 </button>
             </div>
         </div>
@@ -440,13 +440,13 @@ export function UselessModal({ modalProps }) {
     return (
         <ModalRoot {...modalProps} size={ModalSize.LARGE} className={cl("root")}>
             <ModalHeader>
-                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t("plugin.uselessInfo.modal.title")}</BaseText>
+                <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t(plugin.uselessInfo.modal.title)}</BaseText>
             </ModalHeader>
             <ModalContent className={cl("content")}>
                 <section ref={historyRef} className={cl("history")}>
                     {history.length === 0 ? (
                         <div className={cl("no-history")}>
-                            {t("plugin.uselessInfo.modal.history.none")}
+                            {t(plugin.uselessInfo.modal.history.none)}
                         </div>
                     ) : (
                         <ModalContent className={cl("history-list")}>
@@ -461,7 +461,7 @@ export function UselessModal({ modalProps }) {
                                                 rel="noreferrer noopener"
                                                 className={cl("history-link")}
                                             >
-                                                {t("plugin.uselessInfo.modal.history.source")}
+                                                {t(plugin.uselessInfo.modal.history.source)}
                                             </a>
                                         )}
                                     </div>
@@ -470,7 +470,7 @@ export function UselessModal({ modalProps }) {
                     )}
                 </section>
                 <div ref={settingsRef} className={cl("settings")}>
-                    <Heading>{t("plugin.uselessInfo.option.delay.label")}</Heading>
+                    <Heading>{t(plugin.uselessInfo.option.delay.label)}</Heading>
                     <Slider
                         markers={makeRange(0, 90, 5)}
                         initialValue={settings.store.delay}
@@ -488,7 +488,7 @@ export function UselessModal({ modalProps }) {
                     <Divider />
                     <div className={cl("switch")}>
                         <FormSwitch
-                            title={t("plugin.uselessInfo.option.sameFact.label")}
+                            title={t(plugin.uselessInfo.option.sameFact.label)}
                             value={sameFact}
                             onChange={val => {
                                 settings.store.sameFact = val;
@@ -498,7 +498,7 @@ export function UselessModal({ modalProps }) {
                     </div>
                     {!sameFact && (
                         <>
-                            <Heading>{t("plugin.uselessInfo.option.lastNFacts.label")}</Heading>
+                            <Heading>{t(plugin.uselessInfo.option.lastNFacts.label)}</Heading>
                             <Slider
                                 className={Margins.bottom16}
                                 markers={makeRange(0, 50, 5)}
@@ -523,14 +523,14 @@ export function UselessModal({ modalProps }) {
                         showRandom();
                     }}
                 >
-                    {t("plugin.uselessInfo.modal.showRandom")}
+                    {t(plugin.uselessInfo.modal.showRandom)}
                 </Button>
                 <Button
                     className={cl("close-button")}
                     size="small"
                     variant="secondary"
                     onClick={close}>
-                    {t("plugin.uselessInfo.modal.close")}
+                    {t(plugin.uselessInfo.modal.close)}
                 </Button>
             </ModalFooter>
         </ModalRoot>
@@ -541,56 +541,36 @@ const openUselessModal = () => openModal(modalProps => <UselessModal modalProps=
 
 const settings = definePluginSettings({
     delay: {
-        get label() {
-            return t("plugin.uselessInfo.option.delay.label");
-        },
-        get description() {
-            return t("plugin.uselessInfo.option.delay.description");
-        },
+        label: () => t(plugin.uselessInfo.option.delay.label),
+        description: () => t(plugin.uselessInfo.option.delay.description),
         type: OptionType.NUMBER,
         markers: makeRange(1, 180, 1),
         default: 30,
         onChange: () => startFactNotifications(),
     },
     historyHotkey: {
-        get label() {
-            return t("plugin.uselessInfo.option.historyHotkey.label");
-        },
-        get description() {
-            return t("plugin.uselessInfo.option.historyHotkey.description");
-        },
+        label: () => t(plugin.uselessInfo.option.historyHotkey.label),
+        description: () => t(plugin.uselessInfo.option.historyHotkey.description),
         type: OptionType.COMPONENT,
         component: () => <HistoryHotkeyRecorder />,
         default: ["alt", "i"],
     },
     randomFactHotkey: {
-        get label() {
-            return t("plugin.uselessInfo.option.randomFactHotkey.label");
-        },
-        get description() {
-            return t("plugin.uselessInfo.option.randomFactHotkey.description");
-        },
+        label: () => t(plugin.uselessInfo.option.randomFactHotkey.label),
+        description: () => t(plugin.uselessInfo.option.randomFactHotkey.description),
         type: OptionType.COMPONENT,
         component: () => <RandomFactHotkeyRecorder />,
         default: ["alt", "u"],
     },
     sameFact: {
-        get label() {
-            return t("plugin.uselessInfo.option.sameFact.label");
-        },
-        get description() {
-            return t("plugin.uselessInfo.option.sameFact.description");
-        },
+        label: () => t(plugin.uselessInfo.option.sameFact.label),
+        description: () => t(plugin.uselessInfo.option.sameFact.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     lastNFacts: {
-        get label() {
-            return t("plugin.uselessInfo.option.lastNFacts.label");
-        },
-        get description() {
-            return t("plugin.uselessInfo.option.lastNFacts.description");
-        },
+        label: () => t(plugin.uselessInfo.option.lastNFacts.label),
+        description: () => t(plugin.uselessInfo.option.lastNFacts.description),
         type: OptionType.NUMBER,
         markers: makeRange(0, 50, 1),
         default: 5,
@@ -599,13 +579,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "UselessInfo",
-    description: "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
+    description: () => t(plugin.uselessInfo.description),
     authors: [PcDevs.He4vuc],
     settings,
-
-    get displayDescription() {
-        return t("plugin.uselessInfo.description");
-    },
 
     async start() {
         document.addEventListener("keydown", this.event);

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs, PcDevs } from "@utils/constants";
@@ -30,78 +30,50 @@ const useMessageAuthor = findByCodeLazy('"Result cannot be null because the mess
 
 const settings = definePluginSettings({
     chatMentions: {
-        get label() {
-            return t("plugin.roleColorEverywhere.option.chatMentions.label");
-        },
-        get description() {
-            return t("plugin.roleColorEverywhere.option.chatMentions.description");
-        },
+        label: () => t(plugin.roleColorEverywhere.option.chatMentions.label),
+        description: () => t(plugin.roleColorEverywhere.option.chatMentions.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     memberList: {
-        get label() {
-            return t("plugin.roleColorEverywhere.option.memberList.label");
-        },
-        get description() {
-            return t("plugin.roleColorEverywhere.option.memberList.description");
-        },
+        label: () => t(plugin.roleColorEverywhere.option.memberList.label),
+        description: () => t(plugin.roleColorEverywhere.option.memberList.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     voiceUsers: {
-        get label() {
-            return t("plugin.roleColorEverywhere.option.voiceUsers.label");
-        },
-        get description() {
-            return t("plugin.roleColorEverywhere.option.voiceUsers.description");
-        },
+        label: () => t(plugin.roleColorEverywhere.option.voiceUsers.label),
+        description: () => t(plugin.roleColorEverywhere.option.voiceUsers.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     reactorsList: {
-        get label() {
-            return t("plugin.roleColorEverywhere.option.reactorsList.label");
-        },
-        get description() {
-            return t("plugin.roleColorEverywhere.option.reactorsList.description");
-        },
+        label: () => t(plugin.roleColorEverywhere.option.reactorsList.label),
+        description: () => t(plugin.roleColorEverywhere.option.reactorsList.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     pollResults: {
-        get label() {
-            return t("plugin.roleColorEverywhere.option.pollResults.label");
-        },
-        get description() {
-            return t("plugin.roleColorEverywhere.option.pollResults.description");
-        },
+        label: () => t(plugin.roleColorEverywhere.option.pollResults.label),
+        description: () => t(plugin.roleColorEverywhere.option.pollResults.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     colorChatMessages: {
-        get label() {
-            return t("plugin.roleColorEverywhere.option.colorChatMessages.label");
-        },
-        get description() {
-            return t("plugin.roleColorEverywhere.option.colorChatMessages.description");
-        },
+        label: () => t(plugin.roleColorEverywhere.option.colorChatMessages.label),
+        description: () => t(plugin.roleColorEverywhere.option.colorChatMessages.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true,
     },
     messageSaturation: {
-        get label() {
-            return t("plugin.roleColorEverywhere.option.messageSaturation.label");
-        },
-        get description() {
-            return t("plugin.roleColorEverywhere.option.messageSaturation.description");
-        },
+        label: () => t(plugin.roleColorEverywhere.option.messageSaturation.label),
+        description: () => t(plugin.roleColorEverywhere.option.messageSaturation.description),
         type: OptionType.SLIDER,
         markers: makeRange(0, 100, 10),
         default: 30
@@ -110,13 +82,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "RoleColorEverywhere",
+    description: () => t(plugin.roleColorEverywhere.description),
     authors: [Devs.KingFish, Devs.lewisakura, Devs.AutumnVN, Devs.Kyuuhachi, Devs.jamesbt365, PcDevs.MutanPlex],
-    description: "Adds the top role color anywhere possible",
     settings,
-
-    get displayDescription() {
-        return t("plugin.roleColorEverywhere.description");
-    },
 
     patches: [
         // Chat Mentions

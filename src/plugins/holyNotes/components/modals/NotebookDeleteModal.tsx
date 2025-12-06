@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -31,7 +31,7 @@ export default ({ onClose, notebook, onChangeTab, ...props }: ModalProps & { onC
             className="pc-delete-notebook"
             size={ModalSize.LARGE}>
             <ModalHeader>
-                <BaseText tag="h3">{t("plugin.holyNotes.modal.delete.title")}</BaseText>
+                <BaseText tag="h3">{t(plugin.holyNotes.modal.delete.title)}</BaseText>
                 <ModalCloseButton onClick={onClose} />
             </ModalHeader>
             <ModalContent>
@@ -54,7 +54,7 @@ export default ({ onClose, notebook, onChangeTab, ...props }: ModalProps & { onC
                     variant="dangerPrimary"
                     onClick={handleDelete}
                 >
-                    {t("plugin.holyNotes.modal.delete.button")}
+                    {t(plugin.holyNotes.modal.delete.button)}
                 </Button>
             </ModalFooter>
         </ModalRoot>

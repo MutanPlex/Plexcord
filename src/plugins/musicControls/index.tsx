@@ -19,7 +19,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { migratePluginToSetting } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs, PcDevs } from "@utils/constants";
@@ -38,7 +38,7 @@ migratePluginToSetting("MusicControls", "SpotifyLyrics", "showSpotifyLyrics");
 
 export default definePlugin({
     name: "MusicControls",
-    description: "Music Controls and Lyrics for multiple services ",
+    description: () => t(plugin.musicControls.description),
     authors: [Devs.Ven, Devs.afn, Devs.KraXen72, Devs.Av32000, Devs.nin0dev, Devs.thororen, PcDevs.vmohammad, Devs.Joona],
     settings,
     tags: [
@@ -55,10 +55,6 @@ export default definePlugin({
         "YoutubeMusic",
         "YoutubeMusicControls"
     ],
-
-    get displayDescription() {
-        return t("plugin.musicControls.description");
-    },
 
     patches: [
         {
@@ -108,8 +104,8 @@ export default definePlugin({
                 <ErrorBoundary
                     fallback={() => (
                         <div className="pc-tidal-fallback">
-                            <p>{t("plugin.musicControls.error.failed")}</p>
-                            <p>{t("plugin.musicControls.error.checkConsole")}</p>
+                            <p>{t(plugin.musicControls.error.failed)}</p>
+                            <p>{t(plugin.musicControls.error.checkConsole)}</p>
                         </div>
                     )}
                 >

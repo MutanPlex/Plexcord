@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { PcDevs } from "@utils/constants";
 import { getIntlMessage, openUserProfile } from "@utils/discord";
@@ -19,12 +19,8 @@ let updateFunc = (v: any) => { };
 
 export default definePlugin({
     name: "BetterBlockedUsers",
-    description: "Allows you to search in blocked users list and makes names selectable in settings.",
+    description: () => t(plugin.betterBlockedUsers.description),
     authors: [PcDevs.TheArmagan, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.betterBlockedUsers.description");
-    },
 
     patches: [
         {
@@ -58,7 +54,7 @@ export default definePlugin({
         }, []);
 
         return <TextInput
-            placeholder={t("plugin.betterBlockedUsers.placeholder")}
+            placeholder={t(plugin.betterBlockedUsers.placeholder)}
             style={{ width: "200px" }}
             onInput={e => {
                 const search = (e.target as HTMLInputElement).value.toLowerCase().trim();

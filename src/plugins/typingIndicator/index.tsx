@@ -19,7 +19,7 @@
 
 import "./style.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { buildSeveralUsers } from "@plugins/typingTweaks";
@@ -137,72 +137,46 @@ function TypingIndicator({ channelId, guildId }: { channelId: string; guildId: s
 
 const settings = definePluginSettings({
     includeCurrentChannel: {
-        get label() {
-            return t("plugin.typingIndicator.option.includeCurrentChannel.label");
-        },
-        get description() {
-            return t("plugin.typingIndicator.option.includeCurrentChannel.description");
-        },
+        label: () => t(plugin.typingIndicator.option.includeCurrentChannel.label),
+        description: () => t(plugin.typingIndicator.option.includeCurrentChannel.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     includeMutedChannels: {
-        get label() {
-            return t("plugin.typingIndicator.option.includeMutedChannels.label");
-        },
-        get description() {
-            return t("plugin.typingIndicator.option.includeMutedChannels.description");
-        },
+        label: () => t(plugin.typingIndicator.option.includeMutedChannels.label),
+        description: () => t(plugin.typingIndicator.option.includeMutedChannels.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     includeIgnoredUsers: {
-        get label() {
-            return t("plugin.typingIndicator.option.includeIgnoredUsers.label");
-        },
-        get description() {
-            return t("plugin.typingIndicator.option.includeIgnoredUsers.description");
-        },
+        label: () => t(plugin.typingIndicator.option.includeIgnoredUsers.label),
+        description: () => t(plugin.typingIndicator.option.includeIgnoredUsers.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     includeBlockedUsers: {
-        get label() {
-            return t("plugin.typingIndicator.option.includeBlockedUsers.label");
-        },
-        get description() {
-            return t("plugin.typingIndicator.option.includeBlockedUsers.description");
-        },
+        label: () => t(plugin.typingIndicator.option.includeBlockedUsers.label),
+        description: () => t(plugin.typingIndicator.option.includeBlockedUsers.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     indicatorMode: {
-        get label() {
-            return t("plugin.typingIndicator.option.indicatorMode.label");
-        },
-        get description() {
-            return t("plugin.typingIndicator.option.indicatorMode.description");
-        },
+        label: () => t(plugin.typingIndicator.option.indicatorMode.label),
+        description: () => t(plugin.typingIndicator.option.indicatorMode.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.typingIndicator.option.indicatorMode.both"), value: IndicatorMode.Dots | IndicatorMode.Avatars, default: true },
-                { label: t("plugin.typingIndicator.option.indicatorMode.dots"), value: IndicatorMode.Dots },
-                { label: t("plugin.typingIndicator.option.indicatorMode.avatars"), value: IndicatorMode.Avatars },
-            ];
-        },
+        options: [
+            { label: () => t(plugin.typingIndicator.option.indicatorMode.both), value: IndicatorMode.Dots | IndicatorMode.Avatars, default: true },
+            { label: () => t(plugin.typingIndicator.option.indicatorMode.dots), value: IndicatorMode.Dots },
+            { label: () => t(plugin.typingIndicator.option.indicatorMode.avatars), value: IndicatorMode.Avatars },
+        ]
     }
 });
 
 export default definePlugin({
     name: "TypingIndicator",
-    description: "Adds an indicator if someone is typing on a channel.",
+    description: () => t(plugin.typingIndicator.description),
     authors: [Devs.Nuckyz, Devs.fawn, Devs.Sqaaakoi],
     settings,
-
-    get displayDescription() {
-        return t("plugin.typingIndicator.description");
-    },
 
     patches: [
         {

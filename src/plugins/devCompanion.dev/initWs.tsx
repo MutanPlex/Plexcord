@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { popNotice, showNotice } from "@api/Notices";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { getIntlMessageFromHash } from "@utils/discord";
@@ -69,7 +69,7 @@ export function initWs(isManual = false) {
         try {
             if (settings.store.notifyOnAutoConnect || isManual) {
                 Toasts.show({
-                    message: t("plugin.devCompanion.toast.connected"),
+                    message: t(plugin.devCompanion.toast.connected),
                     id: Toasts.genId(),
                     type: Toasts.Type.SUCCESS,
                     options: {
@@ -91,7 +91,7 @@ export function initWs(isManual = false) {
         logger.error("Dev Companion Error:", e);
 
         Toasts.show({
-            message: t("plugin.devCompanion.toast.error"),
+            message: t(plugin.devCompanion.toast.error),
             id: Toasts.genId(),
             type: Toasts.Type.FAILURE,
             options: {
@@ -106,7 +106,7 @@ export function initWs(isManual = false) {
         logger.info("Dev Companion Disconnected:", e.code, e.reason);
 
         Toasts.show({
-            message: t("plugin.devCompanion.toast.disconnected"),
+            message: t(plugin.devCompanion.toast.disconnected),
             id: Toasts.genId(),
             type: Toasts.Type.FAILURE,
             options: {

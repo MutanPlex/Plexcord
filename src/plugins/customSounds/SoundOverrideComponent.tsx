@@ -6,7 +6,7 @@
  */
 
 import { AudioPlayerInterface, playAudio } from "@api/AudioPlayer";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
@@ -71,19 +71,19 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                 const dataUri = await ensureDataURICached(override.selectedFileId);
 
                 if (!dataUri || !dataUri.startsWith("data:audio/")) {
-                    showToast(t("plugin.customSounds.toast.invalidFile"));
+                    showToast(t(plugin.customSounds.toast.invalidFile));
                     return;
                 }
 
                 sound.current = playAudio(dataUri, {
                     volume: override.volume, onError: e => {
                         console.error("[CustomSounds] Error playing custom audio:", e);
-                        showToast(t("plugin.customSounds.toast.playing"));
+                        showToast(t(plugin.customSounds.toast.playing));
                     }
                 });
             } catch (error) {
                 console.error("[CustomSounds] Error in previewSound:", error);
-                showToast(t("plugin.customSounds.toast.previewSound"));
+                showToast(t(plugin.customSounds.toast.previewSound));
             }
         } else if (selectedSound === "default") {
             sound.current = playAudio(type.id);
@@ -98,13 +98,13 @@ export function SoundOverrideComponent({ type, override, onChange }: {
 
         const fileExtension = file.name.split(".").pop()?.toLowerCase();
         if (!fileExtension || !AUDIO_EXTENSIONS.includes(fileExtension)) {
-            showToast(t("plugin.customSounds.toast.invalidExtension"));
+            showToast(t(plugin.customSounds.toast.invalidExtension));
             event.target.value = "";
             return;
         }
 
         try {
-            showToast(t("plugin.customSounds.toast.uploading"));
+            showToast(t(plugin.customSounds.toast.uploading));
             const id = await saveAudio(file);
 
             const savedFiles = await getAllAudio();
@@ -116,10 +116,10 @@ export function SoundOverrideComponent({ type, override, onChange }: {
             await ensureDataURICached(id);
             await saveAndNotify();
 
-            showToast(t("plugin.customSounds.toast.uploaded", { fileName: file.name }));
+            showToast(t(plugin.customSounds.toast.uploaded, { fileName: file.name }));
         } catch (error) {
             console.error("[CustomSounds] Error uploading file:", error);
-            showToast(t("plugin.customSounds.toast.uploadError", { error: error }));
+            showToast(t(plugin.customSounds.toast.uploadedError, { error: error }));
         }
 
         event.target.value = "";
@@ -138,10 +138,10 @@ export function SoundOverrideComponent({ type, override, onChange }: {
             } else {
                 update();
             }
-            showToast(t("plugin.customSounds.toast.deleted"));
+            showToast(t(plugin.customSounds.toast.deleted));
         } catch (error) {
             console.error("[CustomSounds] Error deleting file:", error);
-            showToast(t("plugin.customSounds.toast.deleteError"));
+            showToast(t(plugin.customSounds.toast.deleteError));
         }
     };
 
@@ -166,7 +166,7 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                             await ensureDataURICached(override.selectedFileId);
                         } catch (error) {
                             console.error(`[CustomSounds] Failed to cache data URI for ${type.id}:`, error);
-                            showToast(t("plugin.customSounds.toast.loadingError"));
+                            showToast(t(plugin.customSounds.toast.loadingError));
                         }
                     }
 
@@ -185,17 +185,17 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                             variant="positive"
                             onClick={previewSound}
                         >
-                            {t("plugin.customSounds.button.preview")}
+                            {t(plugin.customSounds.button.preview)}
                         </Button>
                         <Button
                             variant="dangerPrimary"
                             onClick={() => sound.current?.stop()}
                         >
-                            {t("plugin.customSounds.button.stop")}
+                            {t(plugin.customSounds.button.stop)}
                         </Button>
                     </div>
 
-                    <Heading>{t("plugin.customSounds.button.volume")}</Heading>
+                    <Heading>{t(plugin.customSounds.button.volume)}</Heading>
                     <Slider
                         markers={makeRange(0, 100, 10)}
                         initialValue={override.volume}
@@ -208,12 +208,12 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                         disabled={!override.enabled}
                     />
 
-                    <Heading>{t("plugin.customSounds.button.soundSource")}</Heading>
+                    <Heading>{t(plugin.customSounds.button.soundSource)}</Heading>
                     <Select
                         options={[
-                            { value: "default", label: t("plugin.customSounds.option.default") },
+                            { value: "default", label: t(plugin.customSounds.option.default) },
                             ...(type.seasonal?.map(id => ({ value: id, label: capitalizeWords(id) })) ?? []),
-                            { value: "custom", label: t("plugin.customSounds.option.custom") }
+                            { value: "custom", label: t(plugin.customSounds.option.custom) }
                         ]}
                         isSelected={v => v === override.selectedSound}
                         select={async v => {
@@ -224,7 +224,7 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                                     await ensureDataURICached(override.selectedFileId);
                                 } catch (error) {
                                     console.error(`[CustomSounds] Failed to cache data URI for ${type.id}:`, error);
-                                    showToast(t("plugin.customSounds.toast.loadingError"));
+                                    showToast(t(plugin.customSounds.toast.loadingError));
                                 }
                             }
 
@@ -236,10 +236,10 @@ export function SoundOverrideComponent({ type, override, onChange }: {
 
                     {override.selectedSound === "custom" && (
                         <>
-                            <Heading>{t("plugin.customSounds.button.customFile")}</Heading>
+                            <Heading>{t(plugin.customSounds.button.customFile)}</Heading>
                             <Select
                                 options={[
-                                    { value: "", label: t("plugin.customSounds.option.select") },
+                                    { value: "", label: t(plugin.customSounds.option.select) },
                                     ...customFileOptions
                                 ]}
                                 isSelected={v => v === (override.selectedFileId || "")}
@@ -268,7 +268,7 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                                     onClick={() => fileInputRef.current?.click()}
                                     variant="secondary"
                                 >
-                                    {t("plugin.customSounds.button.uploadNew")}
+                                    {t(plugin.customSounds.button.uploadNew)}
                                 </Button>
 
                                 {override.selectedFileId && files[override.selectedFileId] && (
@@ -276,7 +276,7 @@ export function SoundOverrideComponent({ type, override, onChange }: {
                                         variant="dangerPrimary"
                                         onClick={() => deleteFile(override.selectedFileId!)}
                                     >
-                                        {t("plugin.customSounds.button.delete")}
+                                        {t(plugin.customSounds.button.delete)}
                                     </Button>
                                 )}
                             </div>

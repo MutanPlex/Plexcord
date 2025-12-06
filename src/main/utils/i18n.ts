@@ -17,109 +17,70 @@
 */
 
 import { RendererSettings } from "@main/settings";
-import { join } from "path";
-
-import localeEn from "../../locales/en-US.json";
-import localeTr from "../../locales/tr.json";
 
 interface LocaleData {
     [key: string]: string | LocaleData;
 }
 
+// When adding a new language, just create the .ts file in src/locales/
+const AUTO_LOCALE_MAP: Record<string, string> = {
+    "en": "en-US",
+    "tr": "tr"
+};
+
 class MainI18n {
     private translations: Record<string, LocaleData> = {};
-    private currentLocale: string = "en-US";
-    private fallbackLocale: string = "en-US";
-    private localesPath: string;
+    private currentLocale = "en-US";
+    private fallbackLocale = "en-US";
+    private loaded = false;
 
-    constructor() {
-        this.localesPath = join(__dirname, "..", "..", "src", "locales");
+    async loadTranslations(): Promise<void> {
+        if (this.loaded) return;
 
-        // Load hardcoded locales as fallback
-        this.translations["en-US"] = localeEn;
-        this.translations.tr = localeTr;
-
-        console.log("[MainI18n] Constructor: Translations loaded, waiting for settings...");
-        // Don't load settings here - will be done via initialize()
-    }
-
-    private loadCurrentLocale(): void {
         try {
-            const settings = RendererSettings.plain;
-            console.log("[MainI18n] Settings loaded:", JSON.stringify(settings?.language, null, 2));
-            if (settings?.language?.locale) {
-                this.currentLocale = settings.language.locale;
-                console.log("[MainI18n] Set locale from settings:", this.currentLocale);
-            } else {
-                console.log("[MainI18n] No locale in settings, using default:", this.currentLocale);
-            }
-            if (settings?.language?.fallbackLocale) {
-                this.fallbackLocale = settings.language.fallbackLocale;
-                console.log("[MainI18n] Set fallback locale:", this.fallbackLocale);
-            }
+            await Promise.all(
+                Object.entries(AUTO_LOCALE_MAP).map(async ([fileName, localeCode]) => {
+                    try {
+                        const module = await import(`../../locales/${fileName}.ts`);
+                        this.translations[localeCode] = module.default;
+                    } catch (error) {
+                        console.warn(`[MainI18n] Failed to load ${fileName}:`, error);
+                    }
+                })
+            );
+            this.loaded = true;
         } catch (error) {
-            console.warn("[MainI18n] Failed to load locale from settings, using default:", error);
+            console.error("[MainI18n] Failed to load translations:", error);
         }
     }
 
     private getNestedValue(obj: LocaleData, path: string): string | undefined {
-        const keys = path.split(".");
         let current: any = obj;
-
-        for (const key of keys) {
-            if (current && typeof current === "object" && key in current) {
-                current = current[key];
-            } else {
-                return undefined;
-            }
+        for (const key of path.split(".")) {
+            if (current?.[key] === undefined) return undefined;
+            current = current[key];
         }
-
         return typeof current === "string" ? current : undefined;
     }
 
     private replacePlaceholders(text: string, params?: Record<string, any>): string {
         if (!params) return text;
-
-        return text.replace(/\{\{(\w+)\}\}/g, (match, key) => {
-            return params[key] !== undefined ? String(params[key]) : match;
-        });
+        return text.replace(/\{\{(\w+)\}\}/g, (_, key) => params[key] ?? _);
     }
 
-    /**
-     * Translate a key to the current locale
-     * @param key - The translation key (dot notation supported)
-     * @param params - Parameters for placeholder replacement (optional)
-     * @param fallback - Fallback text if translation not found
-     * @returns Translated text or fallback
-     */
-    t(key: string, params?: Record<string, any> | string, fallback?: string): string {
-        let actualParams: Record<string, any> | undefined;
-        let actualFallback: string | undefined;
+    t(key: any, params?: Record<string, any> | string, fallback?: string): string {
+        // Convert key to string if it's a Proxy object
+        const keyString = String(key);
 
-        if (typeof params === "string") {
-            actualFallback = params;
-        } else {
-            actualParams = params;
-            actualFallback = fallback;
-        }
+        const actualParams = typeof params === "object" ? params : undefined;
+        const actualFallback = typeof params === "string" ? params : fallback;
 
-        const currentTranslation = this.translations[this.currentLocale];
-        if (currentTranslation) {
-            const value = this.getNestedValue(currentTranslation, key);
-            if (value) {
-                return this.replacePlaceholders(value, actualParams);
-            }
-        }
+        const translation = this.getNestedValue(this.translations[this.currentLocale], keyString)
+            || this.getNestedValue(this.translations[this.fallbackLocale], keyString)
+            || actualFallback
+            || keyString;
 
-        const fallbackTranslation = this.translations[this.fallbackLocale];
-        if (fallbackTranslation) {
-            const value = this.getNestedValue(fallbackTranslation, key);
-            if (value) {
-                return this.replacePlaceholders(value, actualParams);
-            }
-        }
-
-        return actualFallback || key;
+        return this.replacePlaceholders(translation, actualParams);
     }
 
     getLocale(): string {
@@ -129,16 +90,17 @@ class MainI18n {
     updateLocale(newLocale?: string): void {
         if (newLocale) {
             this.currentLocale = newLocale;
-            console.log(`[MainI18n] Locale updated to: ${newLocale}`);
         } else {
-            this.loadCurrentLocale();
-            console.log(`[MainI18n] Locale reloaded from settings: ${this.currentLocale}`);
+            const settings = RendererSettings.plain?.language;
+            if (settings?.locale) this.currentLocale = settings.locale;
+            if (settings?.fallbackLocale) this.fallbackLocale = settings.fallbackLocale;
         }
     }
 
     initialize(): void {
-        this.loadCurrentLocale();
-        console.log(`[MainI18n] Initialized with locale: ${this.currentLocale}`);
+        this.loadTranslations().then(() => {
+            this.updateLocale();
+        });
     }
 }
 
@@ -148,6 +110,26 @@ if (!IS_WEB) {
     (globalThis as any).__plexcord_main_i18n = mainI18n;
 }
 
-export const t = (key: string, params?: Record<string, any> | string, fallback?: string): string => {
+export const t = (key: any, params?: Record<string, any> | string, fallback?: string): string => {
     return mainI18n.t(key, params, fallback);
 };
+
+export {
+    changelog,
+    cloud,
+    commands,
+    common,
+    components,
+    csp,
+    memberlist,
+    message,
+    notifications,
+    patchHelper,
+    plugin,
+    plugins,
+    settings,
+    sync,
+    themes,
+    updater,
+    utils
+} from "../../locales/en";

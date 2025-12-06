@@ -8,7 +8,7 @@
 import "./UIElements.css";
 
 import { ChatBarButtonMap } from "@api/ChatButtons";
-import { t } from "@api/i18n";
+import { plugins, t } from "@api/i18n";
 import { MessagePopoverButtonMap } from "@api/MessagePopover";
 import { SettingsPluginUiElements, useSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
@@ -31,10 +31,10 @@ export function UIElementsButton() {
             <Card className={cl("button")} defaultPadding>
                 <div className={cl("button-description")}>
                     <Paragraph size="md" weight="semibold">
-                        {t("plugins.uiElements.manage")}
+                        {t(plugins.uiElements.manage)}
                     </Paragraph>
                     <Paragraph size="xs">
-                        {t("plugins.uiElements.allows")}
+                        {t(plugins.uiElements.allows)}
                     </Paragraph>
                 </div>
                 <svg
@@ -91,14 +91,14 @@ function UIElementsModal(props: ModalProps) {
         <ModalRoot {...props} size={ModalSize.MEDIUM}>
             <ModalContent className={cl("modal-content")}>
                 <Section
-                    title={t("plugins.uiElements.section.chatbar.title")}
-                    description={t("plugins.uiElements.section.chatbar.description")}
+                    title={t(plugins.uiElements.section.chatbar.title)}
+                    description={t(plugins.uiElements.section.chatbar.description)}
                     buttonMap={ChatBarButtonMap}
                     settings={uiElements.chatBarButtons}
                 />
                 <Section
-                    title={t("plugins.uiElements.section.messagePopover.title")}
-                    description={t("plugins.uiElements.section.messagePopover.description")}
+                    title={t(plugins.uiElements.section.messagePopover.title)}
+                    description={t(plugins.uiElements.section.messagePopover.description)}
                     buttonMap={MessagePopoverButtonMap}
                     settings={uiElements.messagePopoverButtons}
                 />

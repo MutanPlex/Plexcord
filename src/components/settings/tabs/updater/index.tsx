@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { t, updater } from "@api/i18n";
 import { useSettings } from "@api/Settings";
 import { Divider } from "@components/Divider";
 import { FormSwitch } from "@components/FormSwitch";
@@ -48,29 +48,29 @@ function Updater() {
     };
 
     return (
-        <SettingsTab title={"Plexcord " + t("updater.title")}>
-            <Heading className={Margins.bottom16}>{t("updater.settings")}</Heading>
+        <SettingsTab title={"Plexcord " + t(updater.title)}>
+            <Heading className={Margins.bottom16}>{t(updater.settings)}</Heading>
             <FormSwitch
                 value={settings.autoUpdate}
                 onChange={(v: boolean) => settings.autoUpdate = v}
-                description={t("updater.automatically.description")}
-                title={t("updater.automatically.label")}
+                description={t(updater.automatically.description)}
+                title={t(updater.automatically.label)}
             />
             <FormSwitch
                 value={settings.autoUpdateNotification}
                 onChange={(v: boolean) => settings.autoUpdateNotification = v}
-                description={t("updater.notify.description")}
+                description={t(updater.notify.description)}
                 disabled={!settings.autoUpdate}
-                title={t("updater.notify.label")}
+                title={t(updater.notify.label)}
             />
 
-            <Heading>{t("updater.repo")}</Heading>
+            <Heading>{t(updater.repo)}</Heading>
 
             <Paragraph>
                 {repoPending
                     ? repo
                     : err
-                        ? t("updater.error.retrieve")
+                        ? t(updater.error.retrieve)
                         : (
                             <Link href={repo}>
                                 {repo.split("/").slice(-2).join("/")}
@@ -83,7 +83,7 @@ function Updater() {
 
             <Divider className={Margins.top8 + " " + Margins.bottom8} />
 
-            <Heading>{t("updater.updates")}</Heading>
+            <Heading>{t(updater.updates)}</Heading>
 
             {isNewer
                 ? <Newer {...commonProps} />
@@ -95,4 +95,4 @@ function Updater() {
 
 export default IS_UPDATER_DISABLED
     ? null
-    : wrapTab(Updater, t("updater.title"));
+    : wrapTab(Updater, t(updater.title));

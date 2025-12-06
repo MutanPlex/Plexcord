@@ -5,63 +5,43 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 export const settings = definePluginSettings({
     dms: {
-        get label() {
-            return t("plugin.disCleaner.option.dms.label");
-        },
-        get description() {
-            return t("plugin.disCleaner.option.dms.description");
-        },
+        label: () => t(plugin.disCleaner.option.dms.label),
+        description: () => t(plugin.disCleaner.option.dms.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true,
     },
     serverBoost: {
-        get label() {
-            return t("plugin.disCleaner.option.serverBoost.label");
-        },
-        get description() {
-            return t("plugin.disCleaner.option.serverBoost.description");
-        },
+        label: () => t(plugin.disCleaner.option.serverBoost.label),
+        description: () => t(plugin.disCleaner.option.serverBoost.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true,
     },
     billing: {
-        get label() {
-            return t("plugin.disCleaner.option.billing.label");
-        },
-        get description() {
-            return t("plugin.disCleaner.option.billing.description");
-        },
+        label: () => t(plugin.disCleaner.option.billing.label),
+        description: () => t(plugin.disCleaner.option.billing.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true,
     },
     gift: {
-        get label() {
-            return t("plugin.disCleaner.option.gift.label");
-        },
-        get description() {
-            return t("plugin.disCleaner.option.gift.description");
-        },
+        label: () => t(plugin.disCleaner.option.gift.label),
+        description: () => t(plugin.disCleaner.option.gift.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true,
     },
     emojiList: {
-        get label() {
-            return t("plugin.disCleaner.option.emojiList.label");
-        },
-        get description() {
-            return t("plugin.disCleaner.option.emojiList.description");
-        },
+        label: () => t(plugin.disCleaner.option.emojiList.label),
+        description: () => t(plugin.disCleaner.option.emojiList.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true,
@@ -70,13 +50,9 @@ export const settings = definePluginSettings({
 
 export default definePlugin({
     name: "DisCleaner",
-    description: "Removes shops and other useless things from Discord",
+    description: () => t(plugin.disCleaner.description),
     authors: [Devs.Kyuuhachi, PcDevs.MutanPlex],
     settings,
-
-    get displayDescription() {
-        return t("plugin.disCleaner.description");
-    },
 
     patches: [
         {

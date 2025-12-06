@@ -19,7 +19,7 @@
 
 import "./ytmStyles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Flex } from "@components/Flex";
 import { ImageIcon, LinkIcon, OpenExternalIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
@@ -87,19 +87,19 @@ function CopyContextMenu({ name, path }: { name: string; path: string; }) {
         <Menu.Menu
             navId={`ytm-${name}-menu`}
             onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-            aria-label={t("plugin.musicControls.context.ytm.type", { name })}
+            aria-label={t(plugin.musicControls.context.ytm.type, { name })}
         >
             <Menu.MenuItem
                 key={copyId}
                 id={copyId}
-                label={t("plugin.musicControls.context.ytm.copy", { name })}
+                label={t(plugin.musicControls.context.ytm.copy, { name })}
                 action={() => copyWithToast(`https://music.youtube.com${path}`)}
                 icon={LinkIcon}
             />
             <Menu.MenuItem
                 key={openId}
                 id={openId}
-                label={t("plugin.musicControls.context.ytm.open", { name })}
+                label={t(plugin.musicControls.context.ytm.open, { name })}
                 action={() => YoutubeMusicStore.openExternal(path)}
                 icon={OpenExternalIcon}
             />
@@ -187,7 +187,7 @@ function YtmSeekBar() {
                 size="xs"
                 weight="medium"
                 className={`${cl("progress-time")} ${cl("time-left")}`}
-                aria-label={t("plugin.musicControls.modal.player.progress")}
+                aria-label={t(plugin.musicControls.modal.player.progress)}
             >
                 {msToHuman(position)}
             </Paragraph>
@@ -203,7 +203,7 @@ function YtmSeekBar() {
                 size="xs"
                 weight="medium"
                 className={`${cl("progress-time")} ${cl("time-right")}`}
-                aria-label={t("plugin.musicControls.modal.player.totalDuration")}
+                aria-label={t(plugin.musicControls.modal.player.totalDuration)}
             >
                 {msToHuman(songDuration * 1000)}
             </Paragraph>
@@ -218,7 +218,7 @@ function AlbumContextMenu({ track }: { track: Song; }) {
         <Menu.Menu
             navId="ytm-album-menu"
             onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-            aria-label={t("plugin.musicControls.context.ytm.album")}
+            aria-label={t(plugin.musicControls.context.ytm.album)}
         >
             {/* <Menu.MenuItem
                 key="open-album"
@@ -230,7 +230,7 @@ function AlbumContextMenu({ track }: { track: Song; }) {
             <Menu.MenuItem
                 key="view-cover"
                 id="view-cover"
-                label={t("plugin.musicControls.modal.album.viewCover")}
+                label={t(plugin.musicControls.modal.album.viewCover)}
                 // trolley
                 action={() => track?.imageSrc && openImageModal({ url: track.imageSrc })}
                 icon={ImageIcon}
@@ -238,7 +238,7 @@ function AlbumContextMenu({ track }: { track: Song; }) {
             <Menu.MenuControlItem
                 id="ytm-volume"
                 key="ytm-volume"
-                label={t("plugin.musicControls.modal.album.volume")}
+                label={t(plugin.musicControls.modal.album.volume)}
                 control={(props, ref) => (
                     <Menu.MenuSliderControl
                         {...props}
@@ -253,7 +253,7 @@ function AlbumContextMenu({ track }: { track: Song; }) {
             <Menu.MenuCheckboxItem
                 id="ytm-muted"
                 key="ytm-muted"
-                label={t("plugin.musicControls.context.ytm.muted")}
+                label={t(plugin.musicControls.context.ytm.muted)}
                 checked={muted}
                 action={() => YoutubeMusicStore.toggleMute()}
             />
@@ -282,7 +282,7 @@ function Info({ track }: { track: NonNullable<Song>; }) {
                 <img
                     id={cl("album-image")}
                     src={img}
-                    alt={t("plugin.musicControls.modal.album.image")}
+                    alt={t(plugin.musicControls.modal.album.image)}
                     onClick={() => setCoverExpanded(!coverExpanded)}
                     onContextMenu={e => {
                         ContextMenuApi.openContextMenu(e, () => <AlbumContextMenu track={track} />);
@@ -314,7 +314,7 @@ function Info({ track }: { track: NonNullable<Song>; }) {
                 </Paragraph>
                 {track.artist && (
                     <Paragraph size="sm" weight="normal" className={cl("ellipoverflow")}>
-                        {t("plugin.musicControls.modal.player.artist")}&nbsp;
+                        {t(plugin.musicControls.modal.player.artist)}&nbsp;
                         <span className={cl("artist")} style={{ fontSize: "inherit" }} title={track.artist}>
                             {track.artist}
                         </span>
@@ -322,7 +322,7 @@ function Info({ track }: { track: NonNullable<Song>; }) {
                 )}
                 {track.album && (
                     <Paragraph size="sm" weight="normal" className={cl("ellipoverflow")}>
-                        {t("plugin.musicControls.modal.player.album")}&nbsp;
+                        {t(plugin.musicControls.modal.player.album)}&nbsp;
                         <span
                             id={cl("album-title")}
                             className={cl("album")}

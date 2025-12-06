@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button, TextButton } from "@components/Button";
 import { fetchReposByUserId, fetchReposByUsername, fetchUserInfo, GitHubUserInfo } from "@plugins/githubRepos/githubApi";
@@ -91,10 +91,10 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
     }, [id]);
 
     if (loading) return <BaseText size="xs" weight="semibold" className={cl("loading")}>
-        {t("plugin.gitHubRepos.loading")}</BaseText>;
+        {t(plugin.gitHubRepos.loading)}</BaseText>;
 
     if (error) return <BaseText size="xs" weight="semibold" className={cl("error")}>
-        {t("plugin.gitHubRepos.error.error")}: {error}</BaseText>;
+        {t(plugin.gitHubRepos.error.error)}: {error}</BaseText>;
 
     if (!repos.length) return null;
 
@@ -106,7 +106,7 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
                 variant="secondary"
                 onClick={openReposModal}
             >
-                {t("plugin.gitHubRepos.button.show")}
+                {t(plugin.gitHubRepos.button.show)}
             </Button>
         );
     }
@@ -116,10 +116,10 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
     return (
         <div className={cl("container")}>
             <BaseText size="xs" weight="semibold" className={cl("header")}>
-                {t("plugin.gitHubRepos.button.repositories")}
+                {t(plugin.gitHubRepos.button.repositories)}
                 {userInfo && (
                     <span className={cl("count")}>
-                        {` ${t("plugin.gitHubRepos.button.only", { length: topRepos.length, total: userInfo.totalRepos })}`}
+                        {` ${t(plugin.gitHubRepos.button.only, { length: topRepos.length, total: userInfo.totalRepos })}`}
                     </span>
                 )}
             </BaseText>
@@ -139,7 +139,7 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
                     color="secondary"
                     onClick={openReposModal}
                 >
-                    {t("plugin.gitHubRepos.button.more")}
+                    {t(plugin.gitHubRepos.button.more)}
                 </TextButton>
             </div>
         </div>

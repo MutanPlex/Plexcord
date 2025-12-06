@@ -5,19 +5,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { RestAPI } from "@webpack/common";
 
 export default definePlugin({
     name: "NoOnboarding",
-    description: "Bypasses Discord's onboarding process for quicker server entry.",
+    description: () => t(plugin.noOnboarding.description),
     authors: [PcDevs.omaw, Devs.Glitch],
-
-    get displayDescription() {
-        return t("plugin.noOnboarding.description");
-    },
 
     patches: [
         {

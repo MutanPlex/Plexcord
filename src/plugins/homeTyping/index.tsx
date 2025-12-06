@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findComponentByCodeLazy, findStoreLazy } from "@webpack";
@@ -19,12 +19,8 @@ const PrivateChannelSortStore = findStoreLazy("PrivateChannelSortStore") as { ge
 
 export default definePlugin({
     name: "HomeTyping",
-    description: "Changes the home button to a typing indicator if someone in your dms is typing",
+    description: () => t(plugin.homeTyping.description),
     authors: [Devs.Samwich, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.homeTyping.description");
-    },
 
     TypingIcon() {
         return <ThreeDots dotRadius={3} themed={true} />;

@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { KNOWN_PLUGINS_LEGACY_DATA_KEY, KNOWN_SETTINGS_DATA_KEY } from "@plugins/newPluginsManager/knownSettings";
 import * as KnownSettings from "@plugins/newPluginsManager/knownSettings";
 import { openNewPluginsModal } from "@plugins/newPluginsManager/NewPluginsModal";
@@ -14,12 +14,8 @@ import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "NewPluginsManager",
-    description: "Utility that notifies you when new plugins are added to Plexcord",
+    description: () => t(plugin.newPluginsManager.description),
     authors: [Devs.Sqaaakoi, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.newPluginsManager.description");
-    },
 
     enabledByDefault: true,
     flux: {

@@ -19,7 +19,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { addServerListElement, removeServerListElement, ServerListRenderPosition } from "@api/ServerList";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
@@ -77,7 +77,7 @@ function FriendsIndicator() {
                 </svg>
             }
             <BaseText size="xs" weight="normal" id="pc-friendcount-text">{onlineFriendsCount}</BaseText>
-            {!!settings.store.useCompact && <BaseText size="xs" weight="normal" id="pc-friendcount-text-compact">{t("plugin.serverListIndicators.friends")}</BaseText>}
+            {!!settings.store.useCompact && <BaseText size="xs" weight="normal" id="pc-friendcount-text-compact">{t(plugin.serverListIndicators.friends)}</BaseText>}
         </div>
     );
 }
@@ -110,36 +110,26 @@ function ServersIndicator() {
                 </svg>
             }
             <BaseText size="xs" weight="normal" id="pc-guildcount-text">{guildCount}</BaseText>
-            {!!settings.store.useCompact && <BaseText size="xs" weight="normal" id="pc-guildcount-text-compact">{t("plugin.serverListIndicators.servers")}</BaseText>}
+            {!!settings.store.useCompact && <BaseText size="xs" weight="normal" id="pc-guildcount-text-compact">{t(plugin.serverListIndicators.servers)}</BaseText>}
         </div>
     );
 }
 
 export const settings = definePluginSettings({
     mode: {
-        get label() {
-            return t("plugin.serverListIndicators.option.mode.label");
-        },
-        get description() {
-            return t("plugin.serverListIndicators.option.mode.description");
-        },
+        label: () => t(plugin.serverListIndicators.option.mode.label),
+        description: () => t(plugin.serverListIndicators.option.mode.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.serverListIndicators.option.mode.friend"), value: IndicatorType.FRIEND, default: true },
-                { label: t("plugin.serverListIndicators.option.mode.server"), value: IndicatorType.SERVER },
-                { label: t("plugin.serverListIndicators.option.mode.both"), value: IndicatorType.BOTH },
-            ];
-        },
+        options: [
+            { label: () => t(plugin.serverListIndicators.option.mode.friend), value: IndicatorType.FRIEND, default: true },
+            { label: () => t(plugin.serverListIndicators.option.mode.server), value: IndicatorType.SERVER },
+            { label: () => t(plugin.serverListIndicators.option.mode.both), value: IndicatorType.BOTH },
+        ],
         restartNeeded: true // Restart needed just to force update
     },
     useCompact: {
-        get label() {
-            return t("plugin.serverListIndicators.option.useCompact.label");
-        },
-        get description() {
-            return t("plugin.serverListIndicators.option.useCompact.description");
-        },
+        label: () => t(plugin.serverListIndicators.option.useCompact.label),
+        description: () => t(plugin.serverListIndicators.option.useCompact.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true // Restart needed just to force update
@@ -148,14 +138,10 @@ export const settings = definePluginSettings({
 
 export default definePlugin({
     name: "ServerListIndicators",
-    description: "Add online friend count or server count in the server list",
+    description: () => t(plugin.serverListIndicators.description),
     authors: [Devs.dzshn, PcDevs.Panniku],
     dependencies: ["ServerListAPI"],
     settings,
-
-    get displayDescription() {
-        return t("plugin.serverListIndicators.description");
-    },
 
     renderIndicator: () => {
         const { mode, useCompact } = settings.store;
@@ -163,13 +149,13 @@ export default definePlugin({
         // switch is simply better
         switch (mode) {
             case IndicatorType.BOTH:
-                text = `${onlineFriendsCount} ${t("plugin.serverListIndicators.friends")}, ${guildCount} ${t("plugin.serverListIndicators.servers")}`;
+                text = `${onlineFriendsCount} ${t(plugin.serverListIndicators.friends)}, ${guildCount} ${t(plugin.serverListIndicators.servers)}`;
                 break;
             case IndicatorType.FRIEND:
-                text = `${onlineFriendsCount} ${t("plugin.serverListIndicators.friends")}`;
+                text = `${onlineFriendsCount} ${t(plugin.serverListIndicators.friends)}`;
                 break;
             case IndicatorType.SERVER:
-                text = `${guildCount} ${t("plugin.serverListIndicators.servers")}`;
+                text = `${guildCount} ${t(plugin.serverListIndicators.servers)}`;
                 break;
         }
 

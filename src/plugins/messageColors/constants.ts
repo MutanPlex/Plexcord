@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { OptionType } from "@utils/types";
 
@@ -23,69 +23,53 @@ export const enum BlockDisplayType {
 
 export const settings = definePluginSettings({
     renderType: {
-        get label() {
-            return t("plugin.messageColors.option.renderType.label");
-        },
-        get description() {
-            return t("plugin.messageColors.option.renderType.description");
-        },
+        label: () => t(plugin.messageColors.option.renderType.label),
+        description: () => t(plugin.messageColors.option.renderType.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.messageColors.option.renderType.textColor"),
-                    value: RenderType.FOREGROUND,
-                    default: true,
-                },
-                {
-                    label: t("plugin.messageColors.option.renderType.block"),
-                    value: RenderType.BLOCK,
-                },
-                {
-                    label: t("plugin.messageColors.option.renderType.backgroundColor"),
-                    value: RenderType.BACKGROUND
-                },
-            ];
-        }
+        options: [
+            {
+                label: () => t(plugin.messageColors.option.renderType.textColor),
+                value: RenderType.FOREGROUND,
+                default: true,
+            },
+            {
+                label: () => t(plugin.messageColors.option.renderType.block),
+                value: RenderType.BLOCK,
+            },
+            {
+                label: () => t(plugin.messageColors.option.renderType.backgroundColor),
+                value: RenderType.BACKGROUND
+            },
+        ]
     },
     enableShortHexCodes: {
-        get label() {
-            return t("plugin.messageColors.option.enableShortHexCodes.label");
-        },
-        get description() {
-            return t("plugin.messageColors.option.enableShortHexCodes.description");
-        },
+        label: () => t(plugin.messageColors.option.enableShortHexCodes.label),
+        description: () => t(plugin.messageColors.option.enableShortHexCodes.description),
         type: OptionType.BOOLEAN,
         default: true,
         // Regex are created on the start, so without restart nothing would change
         restartNeeded: true
     },
     blockView: {
-        get label() {
-            return t("plugin.messageColors.option.blockView.label");
-        },
-        get description() {
-            return t("plugin.messageColors.option.blockView.description");
-        },
+        label: () => t(plugin.messageColors.option.blockView.label),
+        description: () => t(plugin.messageColors.option.blockView.description),
         type: OptionType.SELECT,
         disabled: () => settings.store.renderType !== RenderType.BLOCK,
-        get options() {
-            return [
-                {
-                    label: t("plugin.messageColors.option.blockView.right"),
-                    value: BlockDisplayType.RIGHT,
-                    default: true
-                },
-                {
-                    label: t("plugin.messageColors.option.blockView.left"),
-                    value: BlockDisplayType.LEFT
-                },
-                {
-                    label: t("plugin.messageColors.option.blockView.both"),
-                    value: BlockDisplayType.BOTH
-                }
-            ];
-        }
+        options: [
+            {
+                label: () => t(plugin.messageColors.option.blockView.right),
+                value: BlockDisplayType.RIGHT,
+                default: true
+            },
+            {
+                label: () => t(plugin.messageColors.option.blockView.left),
+                value: BlockDisplayType.LEFT
+            },
+            {
+                label: () => t(plugin.messageColors.option.blockView.both),
+                value: BlockDisplayType.BOTH
+            }
+        ]
     }
 });
 

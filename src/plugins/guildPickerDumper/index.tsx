@@ -6,7 +6,7 @@
  */
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import type { Guild } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -22,8 +22,8 @@ const Patch: NavContextMenuPatchCallback = (children, { guild }: { guild: Guild;
     if (group) {
         group.push(
             <>
-                <Menu.MenuItem id="emoji.download" label={t("plugin.guildPickerDumper.context.download.emoji")} action={() => zipGuildAssets(guild, "emojis")}></Menu.MenuItem>
-                <Menu.MenuItem id="sticker.download" label={t("plugin.guildPickerDumper.context.download.sticker")} action={() => zipGuildAssets(guild, "stickers")}></Menu.MenuItem>
+                <Menu.MenuItem id="emoji.download" label={t(plugin.guildPickerDumper.context.download.emoji)} action={() => zipGuildAssets(guild, "emojis")}></Menu.MenuItem>
+                <Menu.MenuItem id="sticker.download" label={t(plugin.guildPickerDumper.context.download.sticker)} action={() => zipGuildAssets(guild, "stickers")}></Menu.MenuItem>
             </>
         );
     }
@@ -96,12 +96,8 @@ async function zipGuildAssets(guild: Guild, type: "emojis" | "stickers") {
 
 export default definePlugin({
     name: "GuildPickerDumper",
-    description: "Context menu to dump and download a server's emojis and stickers.",
+    description: () => t(plugin.guildPickerDumper.description),
     authors: [PcDevs.Cortex, Devs.Samwich, PcDevs.Synth, Devs.thororen],
-
-    get displayDescription() {
-        return t("plugin.guildPickerDumper.description");
-    },
 
     contextMenus: {
         "guild-context": Patch,

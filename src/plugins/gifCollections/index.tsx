@@ -9,7 +9,7 @@ import "./style.css";
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import * as DataStore from "@api/DataStore";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
@@ -51,12 +51,12 @@ const addCollectionContextMenuPatch: NavContextMenuPatchCallback = (children, pr
         if (settings.store.showCopyImageLink) {
             group.push(
                 <Menu.MenuItem
-                    label={t("plugin.gifCollections.context.copyImageLink")}
+                    label={t(plugin.gifCollections.context.copyImageLink)}
                     key="copy-image-link"
                     id="copy-image-link"
                     action={() => {
                         copyToClipboard(gif.url);
-                        showToast(t("plugin.gifCollections.toast.copied"), Toasts.Type.SUCCESS);
+                        showToast(t(plugin.gifCollections.toast.copied), Toasts.Type.SUCCESS);
                     }}
                 />
             );
@@ -64,7 +64,7 @@ const addCollectionContextMenuPatch: NavContextMenuPatchCallback = (children, pr
 
         group.push(
             <Menu.MenuItem
-                label={t("plugin.gifCollections.context.collection.add")}
+                label={t(plugin.gifCollections.context.collection.add)}
                 key="add-to-collection"
                 id="add-to-collection"
             >
@@ -80,7 +80,7 @@ const addCollectionContextMenuPatch: NavContextMenuPatchCallback = (children, pr
                 {collections.length > 0 && <Menu.MenuSeparator key="separator" />}
 
                 <Menu.MenuItem
-                    label={t("plugin.gifCollections.context.collection.create")}
+                    label={t(plugin.gifCollections.context.collection.create)}
                     key="create-collection"
                     id="create-collection"
                     action={() => {
@@ -97,12 +97,8 @@ const addCollectionContextMenuPatch: NavContextMenuPatchCallback = (children, pr
 
 export const settings = definePluginSettings({
     itemPrefix: {
-        get label() {
-            return t("plugin.gifCollections.option.itemPrefix.label");
-        },
-        get description() {
-            return t("plugin.gifCollections.option.itemPrefix.description");
-        },
+        label: () => t(plugin.gifCollections.option.itemPrefix.label),
+        description: () => t(plugin.gifCollections.option.itemPrefix.description),
         type: OptionType.STRING,
         default: "gc-item:",
         onChange: value => {
@@ -115,12 +111,8 @@ export const settings = definePluginSettings({
         restartNeeded: true
     },
     collectionPrefix: {
-        get label() {
-            return t("plugin.gifCollections.option.collectionPrefix.label");
-        },
-        get description() {
-            return t("plugin.gifCollections.option.collectionPrefix.description");
-        },
+        label: () => t(plugin.gifCollections.option.collectionPrefix.label),
+        description: () => t(plugin.gifCollections.option.collectionPrefix.description),
         type: OptionType.STRING,
         default: "gc:",
         onChange: value => {
@@ -133,85 +125,53 @@ export const settings = definePluginSettings({
         restartNeeded: true
     },
     onlyShowCollections: {
-        get label() {
-            return t("plugin.gifCollections.option.onlyShowCollections.label");
-        },
-        get description() {
-            return t("plugin.gifCollections.option.onlyShowCollections.description");
-        },
+        label: () => t(plugin.gifCollections.option.onlyShowCollections.label),
+        description: () => t(plugin.gifCollections.option.onlyShowCollections.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
     },
     stopWarnings: {
-        get label() {
-            return t("plugin.gifCollections.option.stopWarnings.label");
-        },
-        get description() {
-            return t("plugin.gifCollections.option.stopWarnings.description");
-        },
+        label: () => t(plugin.gifCollections.option.stopWarnings.label),
+        description: () => t(plugin.gifCollections.option.stopWarnings.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     showCopyImageLink: {
-        get label() {
-            return t("plugin.gifCollections.option.showCopyImageLink.label");
-        },
-        get description() {
-            return t("plugin.gifCollections.option.showCopyImageLink.description", { copyImageLink: t("plugin.gifCollections.context.copyImageLink") });
-        },
+        label: () => t(plugin.gifCollections.option.showCopyImageLink.label),
+        description: () => t(plugin.gifCollections.option.showCopyImageLink.description, { copyImageLink: t(plugin.gifCollections.context.copyImageLink) }),
         type: OptionType.BOOLEAN,
         default: false,
     },
     preventDuplicates: {
-        get label() {
-            return t("plugin.gifCollections.option.preventDuplicates.label");
-        },
-        get description() {
-            return t("plugin.gifCollections.option.preventDuplicates.description");
-        },
+        label: () => t(plugin.gifCollections.option.preventDuplicates.label),
+        description: () => t(plugin.gifCollections.option.preventDuplicates.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     defaultEmptyCollectionImage: {
-        get label() {
-            return t("plugin.gifCollections.option.defaultEmptyCollectionImage.label");
-        },
-        get description() {
-            return t("plugin.gifCollections.option.defaultEmptyCollectionImage.description");
-        },
+        label: () => t(plugin.gifCollections.option.defaultEmptyCollectionImage.label),
+        description: () => t(plugin.gifCollections.option.defaultEmptyCollectionImage.description),
         type: OptionType.STRING,
         default: "https://c.tenor.com/YEG33HsLEaIAAAAC/parksandrec-oops.gif"
     },
     collectionsSortType: {
-        get label() {
-            return t("plugin.gifCollections.option.collectionsSortType.label");
-        },
-        get description() {
-            return t("plugin.gifCollections.option.collectionsSortType.description");
-        },
+        label: () => t(plugin.gifCollections.option.collectionsSortType.label),
+        description: () => t(plugin.gifCollections.option.collectionsSortType.description),
         type: OptionType.NUMBER,
         default: SortingOptions.NAME,
         hidden: true
     },
     collectionsSortOrder: {
-        get label() {
-            return t("plugin.gifCollections.option.collectionsSortOrder.label");
-        },
-        get description() {
-            return t("plugin.gifCollections.option.collectionsSortOrder.description");
-        },
+        label: () => t(plugin.gifCollections.option.collectionsSortOrder.label),
+        description: () => t(plugin.gifCollections.option.collectionsSortOrder.description),
         type: OptionType.STRING,
         default: "asc",
         hidden: true
     },
     collectionsSort: {
-        get label() {
-            return t("plugin.gifCollections.option.collectionsSort.label");
-        },
-        get description() {
-            return t("plugin.gifCollections.option.collectionsSort.description");
-        },
+        label: () => t(plugin.gifCollections.option.collectionsSort.label),
+        description: () => t(plugin.gifCollections.option.collectionsSort.description),
         type: OptionType.COMPONENT,
         component: () => {
             const [sortType, setSortType] = useState(settings.store.collectionsSortType || SortingOptions.NAME);
@@ -229,14 +189,14 @@ export const settings = definePluginSettings({
 
             return (
                 <div className="collections-sort-container">
-                    <Heading className="collections-sort-title">{t("plugin.gifCollections.option.collectionsSort.title")}</Heading>
+                    <Heading className="collections-sort-title">{t(plugin.gifCollections.option.collectionsSort.title)}</Heading>
                     <Divider className="collections-sort-divider" />
                     <Paragraph className="collections-sort-description">
-                        {t("plugin.gifCollections.option.collectionsSort.sortDescription")}
+                        {t(plugin.gifCollections.option.collectionsSort.sortDescription)}
                     </Paragraph>
                     <Divider className="collections-sort-divider" />
                     <div className="collections-sort-section">
-                        <Paragraph className="collections-sort-section-title">{t("plugin.gifCollections.option.collectionsSort.sortBy")}</Paragraph>
+                        <Paragraph className="collections-sort-section-title">{t(plugin.gifCollections.option.collectionsSort.sortBy)}</Paragraph>
                         <div className="collections-sort-option">
                             <label className="collections-sort-label">
                                 <input
@@ -247,7 +207,7 @@ export const settings = definePluginSettings({
                                     onChange={() => handleSortTypeChange(SortingOptions.NAME)}
                                     className="collections-sort-input"
                                 />
-                                {t("plugin.gifCollections.option.collectionsSort.name")}
+                                {t(plugin.gifCollections.option.collectionsSort.name)}
                             </label>
                         </div>
                         <div className="collections-sort-option">
@@ -260,7 +220,7 @@ export const settings = definePluginSettings({
                                     onChange={() => handleSortTypeChange(SortingOptions.CREATION_DATE)}
                                     className="collections-sort-input"
                                 />
-                                {t("plugin.gifCollections.option.collectionsSort.creationDate")}
+                                {t(plugin.gifCollections.option.collectionsSort.creationDate)}
                             </label>
                         </div>
                         <div className="collections-sort-option">
@@ -273,7 +233,7 @@ export const settings = definePluginSettings({
                                     onChange={() => handleSortTypeChange(SortingOptions.MODIFIED_DATE)}
                                     className="collections-sort-input"
                                 />
-                                {t("plugin.gifCollections.option.collectionsSort.modifiedDate")}
+                                {t(plugin.gifCollections.option.collectionsSort.modifiedDate)}
                             </label>
                         </div>
                     </div>
@@ -290,7 +250,7 @@ export const settings = definePluginSettings({
                                     onChange={() => handleSortOrderChange("asc")}
                                     className="collections-sort-input"
                                 />
-                                {t("plugin.gifCollections.option.collectionsSort.ascending")}
+                                {t(plugin.gifCollections.option.collectionsSort.ascending)}
                             </label>
                         </div>
                         <div className="collections-sort-option">
@@ -303,7 +263,7 @@ export const settings = definePluginSettings({
                                     onChange={() => handleSortOrderChange("desc")}
                                     className="collections-sort-input"
                                 />
-                                {t("plugin.gifCollections.option.collectionsSort.descending")}
+                                {t(plugin.gifCollections.option.collectionsSort.descending)}
                             </label>
                         </div>
                     </div>
@@ -312,73 +272,57 @@ export const settings = definePluginSettings({
         }
     },
     importGifs: {
-        get label() {
-            return t("plugin.gifCollections.option.importGifs.label");
-        },
-        get description() {
-            return t("plugin.gifCollections.option.importGifs.description");
-        },
+        label: () => t(plugin.gifCollections.option.importGifs.label),
+        description: () => t(plugin.gifCollections.option.importGifs.description),
         type: OptionType.COMPONENT,
         component: () =>
             <Button onClick={async () =>
                 (await getCollections()).length ? Alerts.show({
-                    title: t("plugin.gifCollections.alert.import.title"),
-                    body: t("plugin.gifCollections.alert.import.body"),
-                    confirmText: t("plugin.gifCollections.alert.import.confirm"),
+                    title: t(plugin.gifCollections.alert.import.title),
+                    body: t(plugin.gifCollections.alert.import.body),
+                    confirmText: t(plugin.gifCollections.alert.import.confirm),
                     confirmColor: "dangerPrimary",
-                    cancelText: t("plugin.gifCollections.alert.import.cancel"),
+                    cancelText: t(plugin.gifCollections.alert.import.cancel),
                     onConfirm: async () => uploadGifCollections()
                 }) : uploadGifCollections()}>
-                {t("plugin.gifCollections.option.importGifs.button")}
+                {t(plugin.gifCollections.option.importGifs.button)}
             </Button>,
     },
     exportGifs: {
-        get label() {
-            return t("plugin.gifCollections.option.exportGifs.label");
-        },
-        get description() {
-            return t("plugin.gifCollections.option.exportGifs.description");
-        },
+        label: () => t(plugin.gifCollections.option.exportGifs.label),
+        description: () => t(plugin.gifCollections.option.exportGifs.description),
         type: OptionType.COMPONENT,
         component: () =>
             <Button onClick={downloadCollections}>
-                {t("plugin.gifCollections.option.exportGifs.button")}
+                {t(plugin.gifCollections.option.exportGifs.button)}
             </Button>
     },
     resetCollections: {
-        get label() {
-            return t("plugin.gifCollections.option.resetCollections.label");
-        },
-        get description() {
-            return t("plugin.gifCollections.option.resetCollections.description");
-        },
+        label: () => t(plugin.gifCollections.option.resetCollections.label),
+        description: () => t(plugin.gifCollections.option.resetCollections.description),
         type: OptionType.COMPONENT,
         component: () =>
             <Button onClick={() =>
                 Alerts.show({
-                    title: t("plugin.gifCollections.alert.reset.title"),
-                    body: t("plugin.gifCollections.alert.reset.body"),
-                    confirmText: t("plugin.gifCollections.alert.reset.confirm"),
+                    title: t(plugin.gifCollections.alert.reset.title),
+                    body: t(plugin.gifCollections.alert.reset.body),
+                    confirmText: t(plugin.gifCollections.alert.reset.confirm),
                     confirmColor: "dangerPrimary",
-                    cancelText: t("plugin.gifCollections.alert.reset.cancel"),
+                    cancelText: t(plugin.gifCollections.alert.reset.cancel),
                     onConfirm: async () => {
                         await DataStore.set(DATA_COLLECTION_NAME, []);
                         refreshCacheCollection();
                     }
                 })}>
-                {t("plugin.gifCollections.option.resetCollections.button")}
+                {t(plugin.gifCollections.option.resetCollections.button)}
             </Button>
     }
 });
 
 export default definePlugin({
     name: "GifCollections",
-    description: "Allows you to create collections of gifs",
+    description: () => t(plugin.gifCollections.description),
     authors: [Devs.Aria, PcDevs.creations, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.gifCollections.description");
-    },
 
     patches: [
         {
@@ -501,7 +445,7 @@ export default definePlugin({
                 <Menu.Menu
                     navId="gif-collection-id"
                     onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-                    aria-label={t("plugin.gifCollections.context.collection.gif")}
+                    aria-label={t(plugin.gifCollections.context.collection.gif)}
                 >
                     {MenuThingy({ gif: { ...item, id: uuidv4(GIF_ITEM_PREFIX) } })}
                 </Menu.Menu>
@@ -515,14 +459,14 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
     <Menu.Menu
         navId="gif-collection-id"
         onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-        aria-label={type === "collection" ? t("plugin.gifCollections.context.collection.delete") : t("plugin.gifCollections.context.collection.remove")}
+        aria-label={type === "collection" ? t(plugin.gifCollections.context.collection.delete) : t(plugin.gifCollections.context.collection.remove)}
     >
         {type === "collection" && (
             <>
                 <Menu.MenuItem
                     key="collection-information"
                     id="collection-information"
-                    label={t("plugin.gifCollections.context.collection.information")}
+                    label={t(plugin.gifCollections.context.collection.information)}
                     action={() => {
                         const collection = cache_collections.find(c => c.name === nameOrId);
                         if (!collection) return;
@@ -534,30 +478,30 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
                                 className="custom-modal"
                             >
                                 <ModalHeader separator={false} className="custom-modal-header">
-                                    <Paragraph className="custom-modal-title">{t("plugin.gifCollections.context.collection.information")}</Paragraph>
+                                    <Paragraph className="custom-modal-title">{t(plugin.gifCollections.context.collection.information)}</Paragraph>
                                 </ModalHeader>
                                 <ModalContent className="custom-modal-content">
                                     <section>
                                         <Flex className="collection-info">
-                                            <Heading className="collection-info-title">{t("plugin.gifCollections.context.collection.name")}</Heading>
+                                            <Heading className="collection-info-title">{t(plugin.gifCollections.context.collection.name)}</Heading>
                                             <Paragraph className="collection-info-text">{collection.name.replace(/.+?:/, "")}</Paragraph>
                                         </Flex>
                                         <Flex className="collection-info">
-                                            <Heading className="collection-info-title">{t("plugin.gifCollections.context.collection.gifs")}</Heading>
+                                            <Heading className="collection-info-title">{t(plugin.gifCollections.context.collection.gifs)}</Heading>
                                             <Paragraph className="collection-info-text">{collection.gifs.length}</Paragraph>
                                         </Flex>
                                         <Flex className="collection-info">
-                                            <Heading className="collection-info-title">{t("plugin.gifCollections.context.collection.created")}</Heading>
+                                            <Heading className="collection-info-title">{t(plugin.gifCollections.context.collection.created)}</Heading>
                                             <Paragraph className="collection-info-text">{collection.createdAt ? new Date(collection.createdAt).toLocaleString() : "Unknown"}</Paragraph>
                                         </Flex>
                                         <Flex className="collection-info">
-                                            <Heading className="collection-info-title">{t("plugin.gifCollections.context.collection.updated")}</Heading>
+                                            <Heading className="collection-info-title">{t(plugin.gifCollections.context.collection.updated)}</Heading>
                                             <Paragraph className="collection-info-text">{collection.lastUpdated ? new Date(collection.lastUpdated).toLocaleString() : "Unknown"}</Paragraph>
                                         </Flex>
                                     </section>
                                 </ModalContent>
                                 <ModalFooter className="custom-modal-footer">
-                                    <Button onClick={modalProps.onClose} className="custom-modal-button">{t("plugin.gifCollections.context.collection.close")}</Button>
+                                    <Button onClick={modalProps.onClose} className="custom-modal-button">{t(plugin.gifCollections.context.collection.close)}</Button>
                                 </ModalFooter>
                             </ModalRoot>
                         ));
@@ -567,7 +511,7 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
                 <Menu.MenuItem
                     key="rename-collection"
                     id="rename-collection"
-                    label={t("plugin.gifCollections.context.collection.rename")}
+                    label={t(plugin.gifCollections.context.collection.rename)}
                     action={() => openModal(modalProps => (
                         <RenameCollectionModal
                             onClose={modalProps.onClose}
@@ -583,7 +527,7 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
                 <Menu.MenuItem
                     key="gif-information"
                     id="gif-information"
-                    label={t("plugin.gifCollections.context.gif.information")}
+                    label={t(plugin.gifCollections.context.gif.information)}
                     action={() => {
                         const gifInfo = getGifById(nameOrId);
                         if (!gifInfo) return;
@@ -595,26 +539,26 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
                                 className="custom-modal"
                             >
                                 <ModalHeader separator={false} className="custom-modal-header">
-                                    <Paragraph className="custom-modal-title">{t("plugin.gifCollections.context.gif.information")}</Paragraph>
+                                    <Paragraph className="custom-modal-title">{t(plugin.gifCollections.context.gif.information)}</Paragraph>
                                 </ModalHeader>
                                 <ModalContent className="custom-modal-content">
                                     <section>
                                         <Flex className="gif-info">
-                                            <Heading className="gif-info-title">{t("plugin.gifCollections.context.gif.added")}</Heading>
+                                            <Heading className="gif-info-title">{t(plugin.gifCollections.context.gif.added)}</Heading>
                                             <Paragraph className="gif-info-text">{gifInfo.addedAt ? new Date(gifInfo.addedAt).toLocaleString() : "Unknown"}</Paragraph>
                                         </Flex>
                                         <Flex className="gif-info">
-                                            <Heading className="gif-info-title">{t("plugin.gifCollections.context.gif.width")}</Heading>
+                                            <Heading className="gif-info-title">{t(plugin.gifCollections.context.gif.width)}</Heading>
                                             <Paragraph className="gif-info-text">{gifInfo.width}</Paragraph>
                                         </Flex>
                                         <Flex className="gif-info">
-                                            <Heading className="gif-info-title">{t("plugin.gifCollections.context.gif.height")}</Heading>
+                                            <Heading className="gif-info-title">{t(plugin.gifCollections.context.gif.height)}</Heading>
                                             <Paragraph className="gif-info-text">{gifInfo.height}</Paragraph>
                                         </Flex>
                                     </section>
                                 </ModalContent>
                                 <ModalFooter className="custom-modal-footer">
-                                    <Button onClick={modalProps.onClose} className="custom-modal-button">{t("plugin.gifCollections.context.gif.close")}</Button>
+                                    <Button onClick={modalProps.onClose} className="custom-modal-button">{t(plugin.gifCollections.context.gif.close)}</Button>
                                 </ModalFooter>
                             </ModalRoot>
                         ));
@@ -658,18 +602,18 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
                 <Menu.MenuItem
                     key="copy-url"
                     id="copy-url"
-                    label={t("plugin.gifCollections.context.copyUrl")}
+                    label={t(plugin.gifCollections.context.copyUrl)}
                     action={() => {
                         const gifInfo = getGifById(nameOrId);
                         if (!gifInfo) return;
                         copyToClipboard(gifInfo.url);
-                        showToast(t("plugin.gifCollections.toast.urlCopied"), Toasts.Type.SUCCESS);
+                        showToast(t(plugin.gifCollections.toast.urlCopied), Toasts.Type.SUCCESS);
                     }}
                 />
                 <Menu.MenuItem
                     key="move-to-collection"
                     id="move-to-collection"
-                    label={t("plugin.gifCollections.context.collection.move")}
+                    label={t(plugin.gifCollections.context.collection.move)}
                     action={() => {
                         openModal(modalProps => (
                             <ModalRoot
@@ -679,11 +623,11 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
                                 className="custom-modal"
                             >
                                 <ModalHeader separator={false} className="custom-modal-header">
-                                    <Paragraph className="custom-modal-title">{t("plugin.gifCollections.context.collection.move")}</Paragraph>
+                                    <Paragraph className="custom-modal-title">{t(plugin.gifCollections.context.collection.move)}</Paragraph>
                                 </ModalHeader>
                                 <ModalContent className="custom-modal-content">
                                     <Heading className="custom-modal-text">
-                                        {t("plugin.gifCollections.context.collection.select")}
+                                        {t(plugin.gifCollections.context.collection.select)}
                                     </Heading>
                                     <div className="collection-buttons">
                                         {cache_collections
@@ -714,7 +658,7 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
                                     </div>
                                 </ModalContent>
                                 <ModalFooter className="custom-modal-footer">
-                                    <Button onClick={modalProps.onClose} className="custom-modal-button">{t("plugin.gifCollections.context.collection.close")}</Button>
+                                    <Button onClick={modalProps.onClose} className="custom-modal-button">{t(plugin.gifCollections.context.collection.close)}</Button>
                                 </ModalFooter>
                             </ModalRoot>
                         ));
@@ -726,7 +670,7 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
         <Menu.MenuItem
             key="delete-collection"
             id="delete-collection"
-            label={type === "collection" ? t("plugin.gifCollections.context.collection.delete") : t("plugin.gifCollections.context.collection.remove")}
+            label={type === "collection" ? t(plugin.gifCollections.context.collection.delete) : t(plugin.gifCollections.context.collection.remove)}
             action={async () => {
                 if (settings.store.stopWarnings) {
                     const collectionName = getItemCollectionNameFromId(nameOrId);
@@ -747,11 +691,11 @@ const RemoveItemContextMenu = ({ type, nameOrId, instance }) => (
                     return;
                 }
                 Alerts.show({
-                    title: t("plugin.gifCollections.alert.delete.title"),
-                    body: `${type === "collection" ? t("plugin.gifCollections.alert.delete.deleteBody") : t("plugin.gifCollections.alert.delete.removeBody")}`,
-                    confirmText: type === "collection" ? t("plugin.gifCollections.alert.delete.confirm") : t("plugin.gifCollections.alert.delete.remove"),
+                    title: t(plugin.gifCollections.alert.delete.title),
+                    body: `${type === "collection" ? t(plugin.gifCollections.alert.delete.deleteBody) : t(plugin.gifCollections.alert.delete.removeBody)}`,
+                    confirmText: type === "collection" ? t(plugin.gifCollections.alert.delete.confirm) : t(plugin.gifCollections.alert.delete.remove),
                     confirmColor: "dangerPrimary",
-                    cancelText: t("plugin.gifCollections.alert.delete.cancel"),
+                    cancelText: t(plugin.gifCollections.alert.delete.cancel),
                     onConfirm: async () => {
                         const collectionName = type === "collection" ? nameOrId : getItemCollectionNameFromId(nameOrId);
                         if (type === "collection") {
@@ -782,19 +726,19 @@ const MenuThingy = ({ gif }) => {
     if (settings.store.showCopyImageLink) {
         menuItems.push(
             <Menu.MenuItem
-                label={t("plugin.gifCollections.context.copyImageLink")}
+                label={t(plugin.gifCollections.context.copyImageLink)}
                 key="copy-image-link"
                 id="copy-image-link"
                 action={() => {
                     copyToClipboard(gif.url);
-                    showToast(t("plugin.gifCollections.toast.copied"), Toasts.Type.SUCCESS);
+                    showToast(t(plugin.gifCollections.toast.copied), Toasts.Type.SUCCESS);
                 }}
             />
         );
     }
 
     menuItems.push(
-        <Menu.MenuItem label={t("plugin.gifCollections.context.collection.add")} key="add-to-collection" id="add-to-collection">
+        <Menu.MenuItem label={t(plugin.gifCollections.context.collection.add)} key="add-to-collection" id="add-to-collection">
             {collections.map(col => (
                 <Menu.MenuItem
                     key={col.name}
@@ -807,7 +751,7 @@ const MenuThingy = ({ gif }) => {
             <Menu.MenuItem
                 key="create-collection"
                 id="create-collection"
-                label={t("plugin.gifCollections.context.collection.create")}
+                label={t(plugin.gifCollections.context.collection.create)}
                 action={() => openModal(modalProps => (
                     <CreateCollectionModal onClose={modalProps.onClose} gif={gif} modalProps={modalProps} />
                 ))}
@@ -831,10 +775,10 @@ function CreateCollectionModal({ gif, onClose, modalProps }) {
         <ModalRoot {...modalProps}>
             <form onSubmit={onSubmit}>
                 <ModalHeader>
-                    <Paragraph>{t("plugin.gifCollections.modal.create.title")}</Paragraph>
+                    <Paragraph>{t(plugin.gifCollections.modal.create.title)}</Paragraph>
                 </ModalHeader>
                 <ModalContent>
-                    <Heading style={{ marginTop: "10px" }}>{t("plugin.gifCollections.modal.create.name")}</Heading>
+                    <Heading style={{ marginTop: "10px" }}>{t(plugin.gifCollections.modal.create.name)}</Heading>
                     <TextInput onChange={e => setName(e)} />
                 </ModalContent>
                 <div style={{ marginTop: "1rem" }}>
@@ -845,7 +789,7 @@ function CreateCollectionModal({ gif, onClose, modalProps }) {
                             disabled={!name.length}
                             onClick={onSubmit}
                         >
-                            {t("plugin.gifCollections.modal.create.create")}
+                            {t(plugin.gifCollections.modal.create.create)}
                         </Button>
                     </ModalFooter>
                 </div>
@@ -870,12 +814,12 @@ function RenameCollectionModal({ name, onClose, modalProps }) {
         <ModalRoot {...modalProps}>
             <form onSubmit={onSubmit}>
                 <ModalHeader>
-                    <Paragraph>{t("plugin.gifCollections.modal.rename.title")}</Paragraph>
+                    <Paragraph>{t(plugin.gifCollections.modal.rename.title)}</Paragraph>
                 </ModalHeader>
                 <ModalContent>
-                    <Paragraph className="rename-collection-text">{t("plugin.gifCollections.modal.rename.name")}</Paragraph>
+                    <Paragraph className="rename-collection-text">{t(plugin.gifCollections.modal.rename.name)}</Paragraph>
                     <TextInput value={newName} className={`rename-collection-input ${newName.length >= 25 ? "input-warning" : ""}`} onChange={e => setNewName(e)} />
-                    {newName.length >= 25 && <Paragraph className="warning-text">{t("plugin.gifCollections.modal.rename.warning")}</Paragraph>}
+                    {newName.length >= 25 && <Paragraph className="warning-text">{t(plugin.gifCollections.modal.rename.warning)}</Paragraph>}
                 </ModalContent>
                 <div style={{ marginTop: "1rem" }}>
                     <ModalFooter>
@@ -885,7 +829,7 @@ function RenameCollectionModal({ name, onClose, modalProps }) {
                             disabled={!newName.length || newName.length >= 25}
                             onClick={onSubmit}
                         >
-                            {t("plugin.gifCollections.modal.rename.rename")}
+                            {t(plugin.gifCollections.modal.rename.rename)}
                         </Button>
                     </ModalFooter>
                 </div>

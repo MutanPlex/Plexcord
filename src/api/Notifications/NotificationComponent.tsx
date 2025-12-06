@@ -19,7 +19,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { notifications, t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { classes } from "@utils/misc";
@@ -113,7 +113,7 @@ export default ErrorBoundary.wrap(function NotificationComponent({
                                 role="img"
                                 aria-labelledby="pc-notification-dismiss-title"
                             >
-                                <title id="pc-notification-dismiss-title">{t("notifications.dismiss")}</title>
+                                <title id="pc-notification-dismiss-title">{t(notifications.dismiss)}</title>
                                 <path fill="currentColor" d="M18.4 4L12 10.4L5.6 4L4 5.6L10.4 12L4 18.4L5.6 20L12 13.6L18.4 20L20 18.4L13.6 12L20 5.6L18.4 4Z" />
                             </svg>
                         </button>

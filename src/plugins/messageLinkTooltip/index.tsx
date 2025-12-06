@@ -7,7 +7,7 @@
 
 import "./style.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -23,75 +23,52 @@ const ChannelMessage = findComponentByCodeLazy("isFirstMessageInForumPost", "tra
 
 const settings = definePluginSettings({
     onLink: {
-        get label() {
-            return t("plugin.messageLinkTooltip.option.onLink.label");
-        },
-        get description() {
-            return t("plugin.messageLinkTooltip.option.onLink.description");
-        },
+        label: () => t(plugin.messageLinkTooltip.option.onLink.label),
+        description: () => t(plugin.messageLinkTooltip.option.onLink.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true,
     },
     onReply: {
-        get label() {
-            return t("plugin.messageLinkTooltip.option.onReply.label");
-        },
-        get description() {
-            return t("plugin.messageLinkTooltip.option.onReply.description");
-        },
+        label: () => t(plugin.messageLinkTooltip.option.onReply.label),
+        description: () => t(plugin.messageLinkTooltip.option.onReply.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true,
     },
     onForward: {
-        get label() {
-            return t("plugin.messageLinkTooltip.option.onForward.label");
-        },
-        get description() {
-            return t("plugin.messageLinkTooltip.option.onForward.description");
-        },
+        label: () => t(plugin.messageLinkTooltip.option.onForward.label),
+        description: () => t(plugin.messageLinkTooltip.option.onForward.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true,
     },
     display: {
-        get label() {
-            return t("plugin.messageLinkTooltip.option.display.label");
-        },
-        get description() {
-            return t("plugin.messageLinkTooltip.option.display.description");
-        },
+        label: () => t(plugin.messageLinkTooltip.option.display.label),
+        description: () => t(plugin.messageLinkTooltip.option.display.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.messageLinkTooltip.option.display.auto"),
-                    value: "auto",
-                    default: true
-                },
-                {
-                    label: t("plugin.messageLinkTooltip.option.display.compact"),
-                    value: "compact"
-                },
-                {
-                    label: t("plugin.messageLinkTooltip.option.display.cozy"),
-                    value: "cozy"
-                },
-            ];
-        }
+        options: [
+            {
+                label: () => t(plugin.messageLinkTooltip.option.display.auto),
+                value: "auto",
+                default: true
+            },
+            {
+                label: () => t(plugin.messageLinkTooltip.option.display.compact),
+                value: "compact"
+            },
+            {
+                label: () => t(plugin.messageLinkTooltip.option.display.cozy),
+                value: "cozy"
+            },
+        ]
     },
 });
 
 export default definePlugin({
     name: "MessageLinkTooltip",
-    description: "Like MessageLinkEmbed but without taking space",
+    description: () => t(plugin.messageLinkTooltip.description),
     authors: [Devs.Kyuuhachi, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.messageLinkTooltip.description");
-    },
-
     settings,
 
     patches: [
@@ -163,7 +140,7 @@ function MessagePreview({ channelId, messageId }) {
     const compact = settings.store.display === "compact" ? true : settings.store.display === "cozy" ? false : rawCompact;
 
     if (!message) {
-        return <span>{t("plugin.messageLinkTooltip.loading")}</span>;
+        return <span>{t(plugin.messageLinkTooltip.loading)}</span>;
     }
 
     return <ChannelMessage

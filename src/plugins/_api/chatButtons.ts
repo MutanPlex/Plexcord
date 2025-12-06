@@ -5,18 +5,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugins, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "ChatInputButtonAPI",
-    description: "API to add buttons to the chat input",
+    description: () => t(plugins.metadata.api.description.chatInputButtons),
     authors: [Devs.Ven],
-
-    get displayDescription() {
-        return t("plugins.metadata.api.description.chatInputButtons");
-    },
 
     patches: [
         {

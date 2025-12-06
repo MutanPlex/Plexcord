@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t, tJsx } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { definePluginSettings } from "@api/Settings";
 import { Message } from "@plexcord/discord-types";
@@ -15,52 +15,32 @@ import { ChannelStore, Menu, MessageStore, SelectedChannelStore, UserStore } fro
 
 const settings = definePluginSettings({
     maxMessages: {
-        get label() {
-            return t("plugin.exportMessages.option.maxMessages.label");
-        },
-        get description() {
-            return t("plugin.exportMessages.option.maxMessages.description");
-        },
+        label: () => t(plugin.exportMessages.option.maxMessages.label),
+        description: () => t(plugin.exportMessages.option.maxMessages.description),
         type: OptionType.NUMBER,
         default: 1000
     },
     includeAttachments: {
-        get label() {
-            return t("plugin.exportMessages.option.includeAttachments.label");
-        },
-        get description() {
-            return t("plugin.exportMessages.option.includeAttachments.description");
-        },
+        label: () => t(plugin.exportMessages.option.includeAttachments.label),
+        description: () => t(plugin.exportMessages.option.includeAttachments.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     includeEmbeds: {
-        get label() {
-            return t("plugin.exportMessages.option.includeEmbeds.label");
-        },
-        get description() {
-            return t("plugin.exportMessages.option.includeEmbeds.description");
-        },
+        label: () => t(plugin.exportMessages.option.includeEmbeds.label),
+        description: () => t(plugin.exportMessages.option.includeEmbeds.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     includeReactions: {
-        get label() {
-            return t("plugin.exportMessages.option.includeReactions.label");
-        },
-        get description() {
-            return t("plugin.exportMessages.option.includeReactions.description");
-        },
+        label: () => t(plugin.exportMessages.option.includeReactions.label),
+        description: () => t(plugin.exportMessages.option.includeReactions.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     includeComponents: {
-        get label() {
-            return t("plugin.exportMessages.option.includeComponents.label");
-        },
-        get description() {
-            return t("plugin.exportMessages.option.includeComponents.description");
-        },
+        label: () => t(plugin.exportMessages.option.includeComponents.label),
+        description: () => t(plugin.exportMessages.option.includeComponents.description),
         type: OptionType.BOOLEAN,
         default: false
     }
@@ -94,14 +74,14 @@ function formatTimestamp(timestamp: string): string {
 function formatMessage(message: Message): string {
     try {
         const { author } = message;
-        if (!author) return t("plugin.exportMessages.message.invalid");
+        if (!author) return t(plugin.exportMessages.message.invalid);
 
         const parts: string[] = [];
         const timestamp = formatTimestamp(message.timestamp.toString());
         const isBot = author.bot ? " [BOT]" : "";
 
         // Main message line
-        let userDisplay = author.username || t("plugin.exportMessages.message.unknownUser");
+        let userDisplay = author.username || t(plugin.exportMessages.message.unknownUser);
         if (author.discriminator && author.discriminator !== "0") {
             userDisplay += `#${author.discriminator}`;
         }
@@ -111,34 +91,34 @@ function formatMessage(message: Message): string {
         if (!message.content && message.embeds?.length > 0 && author.bot) {
             const embed = message.embeds[0];
             if (embed.rawTitle || embed.rawDescription) {
-                parts[0] += `${t("plugin.exportMessages.message.botEmbed")}`;
+                parts[0] += `${t(plugin.exportMessages.message.botEmbed)}`;
             }
         }
 
         // Attachments (if enabled)
         if (settings.store.includeAttachments && message.attachments?.length > 0) {
-            parts.push(`  ${t("plugin.exportMessages.message.attachments")}:`);
+            parts.push(`  ${t(plugin.exportMessages.message.attachments)}:`);
             parts.push(...message.attachments.map(attachment =>
-                `    - ${attachment.filename || t("plugin.exportMessages.message.unknown")} (${attachment.url || t("plugin.exportMessages.message.noUrl")})`
+                `    - ${attachment.filename || t(plugin.exportMessages.message.unknown)} (${attachment.url || t(plugin.exportMessages.message.noUrl)})`
             ));
         }
 
         // Embeds (if enabled)
         if (settings.store.includeEmbeds && message.embeds?.length > 0) {
-            parts.push(`  ${t("plugin.exportMessages.message.embeds")}:`);
+            parts.push(`  ${t(plugin.exportMessages.message.embeds)}:`);
             message.embeds.forEach((embed, index) => {
-                const embedParts = [`    ${t("plugin.exportMessages.message.embeds")} ${index + 1}:`];
+                const embedParts = [`    ${t(plugin.exportMessages.message.embeds)} ${index + 1}:`];
 
-                if (embed.rawTitle) embedParts.push(`      ${t("plugin.exportMessages.message.title")}: ${embed.rawTitle}`);
-                if (embed.rawDescription) embedParts.push(`      ${t("plugin.exportMessages.message.description")}: ${embed.rawDescription}`);
-                if (embed.url) embedParts.push(`      ${t("plugin.exportMessages.message.url")}: ${embed.url}`);
+                if (embed.rawTitle) embedParts.push(`      ${t(plugin.exportMessages.message.title)}: ${embed.rawTitle}`);
+                if (embed.rawDescription) embedParts.push(`      ${t(plugin.exportMessages.message.description)}: ${embed.rawDescription}`);
+                if (embed.url) embedParts.push(`      ${t(plugin.exportMessages.message.url)}: ${embed.url}`);
 
                 const embedAny = embed as any;
-                if (embedAny.footer?.text) embedParts.push(`      ${t("plugin.exportMessages.message.footer")}: ${embedAny.footer.text}`);
-                if (embedAny.author?.name) embedParts.push(`      ${t("plugin.exportMessages.message.author")}: ${embedAny.author.name}`);
+                if (embedAny.footer?.text) embedParts.push(`      ${t(plugin.exportMessages.message.footer)}: ${embedAny.footer.text}`);
+                if (embedAny.author?.name) embedParts.push(`      ${t(plugin.exportMessages.message.author)}: ${embedAny.author.name}`);
 
                 if (embedAny.fields?.length > 0) {
-                    embedParts.push(`      ${t("plugin.exportMessages.message.fields")}:`);
+                    embedParts.push(`      ${t(plugin.exportMessages.message.fields)}:`);
                     embedParts.push(...embedAny.fields.map((field: any) =>
                         `        ${field.name}: ${field.value}`
                     ));
@@ -151,9 +131,9 @@ function formatMessage(message: Message): string {
         // Components (if enabled)
         const messageAny = message as any;
         if (settings.store.includeComponents && messageAny.components?.length > 0) {
-            parts.push(`  ${t("plugin.exportMessages.message.components")}:`);
+            parts.push(`  ${t(plugin.exportMessages.message.components)}:`);
             parts.push(...messageAny.components.map((_: any, index: number) =>
-                `    ${t("plugin.exportMessages.message.component")} ${index + 1}: [${t("plugin.exportMessages.message.interactiveElement")}]`
+                `    ${t(plugin.exportMessages.message.component)} ${index + 1}: [${t(plugin.exportMessages.message.interactiveElement)}]`
             ));
         }
 
@@ -163,12 +143,12 @@ function formatMessage(message: Message): string {
                 const emoji = reaction.emoji?.name || reaction.emoji?.id || "?";
                 return `${emoji}(${reaction.count})`;
             });
-            parts.push(`  ${t("plugin.exportMessages.message.reactions")}: ${reactionTexts.join(" ")}`);
+            parts.push(`  ${t(plugin.exportMessages.message.reactions)}: ${reactionTexts.join(" ")}`);
         }
 
         return parts.join("\n");
     } catch (error) {
-        return `[${t("plugin.exportMessages.message.errorFormatting")}: ${(error as Error).message || t("plugin.exportMessages.message.unknownError")}]`;
+        return `[${t(plugin.exportMessages.message.errorFormatting)}: ${(error as Error).message || t(plugin.exportMessages.message.unknownError)}]`;
     }
 }
 
@@ -182,8 +162,8 @@ async function exportMessage(message: Message) {
         await saveContent(content, filename, 1);
     } catch (error) {
         showNotification({
-            title: t("plugin.exportMessages.toast.export.title"),
-            body: t("plugin.exportMessages.toast.export.body"),
+            title: t(plugin.exportMessages.toast.export.title),
+            body: t(plugin.exportMessages.toast.export.body),
             icon: "https://discord.com/assets/4f584fe7b12fcf02.svg"
         });
     }
@@ -222,11 +202,11 @@ async function processAndExportMessages(
 
         if (messages.length === 0) {
             const noMessagesText = filterFn ?
-                t("plugin.exportMessages.toast.noMessages.notFoundUser") :
-                t("plugin.exportMessages.toast.noMessages.notFoundChannel");
+                t(plugin.exportMessages.toast.noMessages.notFoundUser) :
+                t(plugin.exportMessages.toast.noMessages.notFoundChannel);
 
             showNotification({
-                title: t("plugin.exportMessages.toast.noMessages.title"),
+                title: t(plugin.exportMessages.toast.noMessages.title),
                 body: noMessagesText,
                 icon: "https://discord.com/assets/c263a344ff649ead.svg"
             });
@@ -238,7 +218,7 @@ async function processAndExportMessages(
 
         // Generate filename and content
         const timestamp = new Date().toISOString().split("T")[0];
-        const displayName = userOrChannel?.username || userOrChannel?.name || t("plugin.exportMessages.message.unknown");
+        const displayName = userOrChannel?.username || userOrChannel?.name || t(plugin.exportMessages.message.unknown);
         const cleanDisplayName = sanitizeFilename(displayName);
         const cleanChannelName = sanitizeFilename(channel.name || "DM");
 
@@ -248,13 +228,13 @@ async function processAndExportMessages(
 
         // Build content efficiently using array join
         const headerParts = [
-            tJsx("plugin.exportMessages.message.header", {
-                titlePrefix: titlePrefix || t("plugin.exportMessages.message.from"),
+            t(plugin.exportMessages.message.header, {
+                titlePrefix: titlePrefix || t(plugin.exportMessages.message.from),
                 displayName,
-                channelName: channel.name || t("plugin.exportMessages.message.direct")
+                channelName: channel.name || t(plugin.exportMessages.message.direct)
             }),
-            `${t("plugin.exportMessages.message.exported")}: ${new Date().toLocaleString()}`,
-            `${t("plugin.exportMessages.message.total")}: ${messagesToExport.length}`,
+            `${t(plugin.exportMessages.message.exported)}: ${new Date().toLocaleString()}`,
+            `${t(plugin.exportMessages.message.total)}: ${messagesToExport.length}`,
             "=" + "=".repeat(50),
             ""
         ];
@@ -270,8 +250,8 @@ async function processAndExportMessages(
     } catch (error) {
         console.error("Export messages error:", error);
         showNotification({
-            title: t("plugin.exportMessages.toast.failed.title"),
-            body: `${t("plugin.exportMessages.toast.failed.body")}: ${(error as Error).message || "Unknown error"}`,
+            title: t(plugin.exportMessages.toast.failed.title),
+            body: `${t(plugin.exportMessages.toast.failed.body)}: ${(error as Error).message || "Unknown error"}`,
             icon: "https://discord.com/assets/4f584fe7b12fcf02.svg"
         });
     }
@@ -281,8 +261,8 @@ async function exportUserMessages(userId: string, channelId: string) {
     const user = UserStore.getUser(userId);
     if (!user) {
         showNotification({
-            title: t("plugin.exportMessages.toast.userNotFound.title"),
-            body: t("plugin.exportMessages.toast.userNotFound.body"),
+            title: t(plugin.exportMessages.toast.userNotFound.title),
+            body: t(plugin.exportMessages.toast.userNotFound.body),
             icon: "https://discord.com/assets/4f584fe7b12fcf02.svg"
         });
         return;
@@ -291,7 +271,7 @@ async function exportUserMessages(userId: string, channelId: string) {
     await processAndExportMessages(
         channelId,
         (msg: Message) => msg.author?.id === userId,
-        t("plugin.exportMessages.message.from"),
+        t(plugin.exportMessages.message.from),
         "messages",
         user
     );
@@ -302,7 +282,7 @@ async function exportChannelMessages(channelId: string) {
     await processAndExportMessages(
         channelId,
         undefined,
-        t("plugin.exportMessages.message.from"),
+        t(plugin.exportMessages.message.from),
         undefined,
         channel
     );
@@ -310,12 +290,12 @@ async function exportChannelMessages(channelId: string) {
 
 // Helper function to show export completion notification
 function showExportSuccessNotification(filename: string, messageCount?: number) {
-    const countText = messageCount ? ` (${messageCount} ${t("plugin.exportMessages.toast.complete.messages")})` : "";
+    const countText = messageCount ? ` (${messageCount} ${t(plugin.exportMessages.toast.complete.messages)})` : "";
     const displayName = filename.split("\\").pop() || filename.split("/").pop() || filename;
 
     showNotification({
-        title: t("plugin.exportMessages.toast.complete.title"),
-        body: `${IS_DISCORD_DESKTOP ? t("plugin.exportMessages.toast.complete.saved") : t("plugin.exportMessages.toast.complete.downloaded")}: ${displayName}${countText}`,
+        title: t(plugin.exportMessages.toast.complete.title),
+        body: `${IS_DISCORD_DESKTOP ? t(plugin.exportMessages.toast.complete.saved) : t(plugin.exportMessages.toast.complete.downloaded)}: ${displayName}${countText}`,
         icon: "https://discord.com/assets/43b7ead1fb91b731.svg"
     });
 }
@@ -400,19 +380,19 @@ const messageContextMenuPatch = (children: Array<React.ReactElement<any> | null>
         <Menu.MenuGroup>
             <Menu.MenuItem
                 id="export-single-message"
-                label={t("plugin.exportMessages.context.exportMessage")}
+                label={t(plugin.exportMessages.context.exportMessage)}
                 icon={ExportIcon}
                 action={() => exportMessage(message)}
             />
             <Menu.MenuItem
                 id="export-user-messages"
-                label={t("plugin.exportMessages.context.exportAll", { user: message.author?.username || t("plugin.exportMessages.context.user") })}
+                label={t(plugin.exportMessages.context.exportAll, { user: message.author?.username || t(plugin.exportMessages.context.user) })}
                 icon={UserExportIcon}
                 action={() => exportUserMessages(message.author?.id, currentChannelId)}
             />
             <Menu.MenuItem
                 id="export-channel-messages"
-                label={t("plugin.exportMessages.context.exportAllChannel")}
+                label={t(plugin.exportMessages.context.exportAllChannel)}
                 icon={ChannelExportIcon}
                 action={() => exportChannelMessages(currentChannelId)}
             />
@@ -432,7 +412,7 @@ const userContextMenuPatch = (children: Array<React.ReactElement<any> | null>, p
     children.push(
         <Menu.MenuItem
             id="export-user-messages-from-context"
-            label={t("plugin.exportMessages.context.exportAll", { user: user.username })}
+            label={t(plugin.exportMessages.context.exportAll, { user: user.username })}
             icon={ExportIcon}
             action={() => exportUserMessages(user.id, currentChannelId)}
         />
@@ -447,7 +427,7 @@ const channelContextMenuPatch = (children: Array<React.ReactElement<any> | null>
     children.push(
         <Menu.MenuItem
             id="export-channel-messages-from-context"
-            label={t("plugin.exportMessages.context.exportAllChannel")}
+            label={t(plugin.exportMessages.context.exportAllChannel)}
             icon={ExportIcon}
             action={() => exportChannelMessages(channel.id)}
         />
@@ -456,13 +436,9 @@ const channelContextMenuPatch = (children: Array<React.ReactElement<any> | null>
 
 export default definePlugin({
     name: "ExportMessages",
-    description: "Allows you to export messages to files - single message, all messages from a user, or all channel messages",
+    description: () => t(plugin.exportMessages.description),
     authors: [PcDevs.MutanPlex],
     settings,
-
-    get displayDescription() {
-        return t("plugin.exportMessages.description");
-    },
 
     contextMenus: {
         "message": messageContextMenuPatch,

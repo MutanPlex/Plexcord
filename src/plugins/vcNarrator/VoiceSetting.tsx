@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { SearchableSelect, useMemo, useState } from "@webpack/common";
@@ -37,7 +37,7 @@ function SimplePicker({ voice, voices }: PickerProps) {
 
     return (
         <SearchableSelect
-            placeholder={t("plugin.vcNarrator.modal.voice")}
+            placeholder={t(plugin.vcNarrator.modal.voice)}
             maxVisibleItems={5}
             options={options}
             value={options.find(o => o.value === voice)}
@@ -89,7 +89,7 @@ function ComplexPicker({ voice, voices }: PickerProps) {
         <>
             <Heading>Language</Heading>
             <SearchableSelect
-                placeholder={t("plugin.vcNarrator.modal.language")}
+                placeholder={t(plugin.vcNarrator.modal.language)}
                 options={languageOptions}
                 value={languageOptions.find(l => l.value === selectedLanguage)}
                 onChange={v => setSelectedLanguage(v)}

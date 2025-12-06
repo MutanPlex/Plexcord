@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { User } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -42,20 +42,16 @@ function formatTime(time: number) {
     const h = Math.floor(diff.asHours());
     const m = Math.floor(diff.asMinutes());
 
-    if (d > 0) return `${d} ${t("plugin.lastOnline.unit.d")}`;
-    if (h > 0) return `${h} ${t("plugin.lastOnline.unit.h")}`;
-    if (m > 0) return `${m} ${t("plugin.lastOnline.unit.m")}`;
-    return `1 ${t("plugin.lastOnline.unit.m")}`;
+    if (d > 0) return `${d} ${t(plugin.lastOnline.unit.d)}`;
+    if (h > 0) return `${h} ${t(plugin.lastOnline.unit.h)}`;
+    if (m > 0) return `${m} ${t(plugin.lastOnline.unit.m)}`;
+    return `1 ${t(plugin.lastOnline.unit.m)}`;
 }
 
 export default definePlugin({
     name: "LastOnline",
-    description: "Adds a last online indicator under usernames in your DM list and guild and GDM member list",
+    description: () => t(plugin.lastOnline.description),
     authors: [PcDevs.MutanPlex, PcDevs.Nick],
-
-    get displayDescription() {
-        return t("plugin.lastOnline.description");
-    },
 
     flux: {
         PRESENCE_UPDATES({ updates }) {
@@ -100,7 +96,7 @@ export default definePlugin({
             : "";
         return (
             <div className={subtext}>
-                <>{t("plugin.lastOnline.online", { formattedTime })}</>
+                <>{t(plugin.lastOnline.online, { formattedTime })}</>
             </div>
         );
     }

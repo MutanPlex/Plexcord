@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
@@ -133,7 +133,7 @@ function GuildInfoModal({ guild }: GuildProps) {
                 >
                     <div style={{ textAlign: "center" }}>
                         <div>
-                            {t("plugin.serverInfo.modal.tab.serverInfo")}
+                            {t(plugin.serverInfo.modal.tab.serverInfo)}
                         </div>
                     </div>
                 </TabBar.Item>
@@ -143,7 +143,7 @@ function GuildInfoModal({ guild }: GuildProps) {
                 >
                     <div style={{ textAlign: "center" }}>
                         <div>
-                            {t("plugin.serverInfo.modal.tab.friends")}
+                            {t(plugin.serverInfo.modal.tab.friends)}
                         </div>
                         {friendCount !== undefined ? ` (${friendCount})` : ""}
                     </div>
@@ -154,7 +154,7 @@ function GuildInfoModal({ guild }: GuildProps) {
                 >
                     <div style={{ textAlign: "center" }}>
                         <div>
-                            {t("plugin.serverInfo.modal.tab.mutualUsers")}
+                            {t(plugin.serverInfo.modal.tab.mutualUsers)}
                         </div>{mutualMembersCount !== undefined ? ` (${mutualMembersCount})` : ""}
                     </div>
                 </TabBar.Item>
@@ -164,7 +164,7 @@ function GuildInfoModal({ guild }: GuildProps) {
                 >
                     <div style={{ textAlign: "center" }}>
                         <div>
-                            {t("plugin.serverInfo.modal.tab.blockedUsers")}
+                            {t(plugin.serverInfo.modal.tab.blockedUsers)}
                         </div>
                         {blockedCount !== undefined ? ` (${blockedCount})` : ""}
                     </div>
@@ -175,7 +175,7 @@ function GuildInfoModal({ guild }: GuildProps) {
                 >
                     <div style={{ textAlign: "center" }}>
                         <div>
-                            {t("plugin.serverInfo.modal.tab.ignoredUsers")}
+                            {t(plugin.serverInfo.modal.tab.ignoredUsers)}
                         </div>
                         {ignoredCount !== undefined ? `(${ignoredCount})` : ""}
 
@@ -231,15 +231,15 @@ function ServerInfoTab({ guild }: GuildProps) {
     });
 
     const Fields = {
-        [t("plugin.serverInfo.modal.owner")]: owner ? Owner(guild.id, owner) : t("plugin.serverInfo.modal.tab.loading"),
-        [t("plugin.serverInfo.modal.createdAt")]: renderTimestamp(SnowflakeUtils.extractTimestamp(guild.id)),
-        [t("plugin.serverInfo.modal.joinedAt")]: guild.joinedAt ? renderTimestamp(guild.joinedAt.getTime()) : "-", // Not available in lurked guild
-        [t("plugin.serverInfo.modal.vanityLink")]: guild.vanityURLCode ? (<a>{`discord.gg/${guild.vanityURLCode}`}</a>) : "-", // Making the anchor href valid would cause Discord to reload
-        [t("plugin.serverInfo.modal.preferredLocale")]: guild.preferredLocale || "-",
-        [t("plugin.serverInfo.modal.verification.level")]: [t("plugin.serverInfo.modal.verification.none"), t("plugin.serverInfo.modal.verification.low"), t("plugin.serverInfo.modal.verification.medium"), t("plugin.serverInfo.modal.verification.high"), t("plugin.serverInfo.modal.verification.highest")][guild.verificationLevel] || "?",
-        [t("plugin.serverInfo.modal.serverBoosts")]: `${guild.premiumSubscriberCount ?? 0} (Level ${guild.premiumTier ?? 0})`,
-        [t("plugin.serverInfo.modal.channels")]: GuildChannelStore.getChannels(guild.id)?.count - 1 || "?", // - null category
-        [t("plugin.serverInfo.modal.roles")]: GuildRoleStore.getSortedRoles(guild.id).length - 1, // - @everyone
+        [t(plugin.serverInfo.modal.owner)]: owner ? Owner(guild.id, owner) : t(plugin.serverInfo.modal.loading),
+        [t(plugin.serverInfo.modal.createdAt)]: renderTimestamp(SnowflakeUtils.extractTimestamp(guild.id)),
+        [t(plugin.serverInfo.modal.joinedAt)]: guild.joinedAt ? renderTimestamp(guild.joinedAt.getTime()) : "-", // Not available in lurked guild
+        [t(plugin.serverInfo.modal.vanityLink)]: guild.vanityURLCode ? (<a>{`discord.gg/${guild.vanityURLCode}`}</a>) : "-", // Making the anchor href valid would cause Discord to reload
+        [t(plugin.serverInfo.modal.preferredLocale)]: guild.preferredLocale || "-",
+        [t(plugin.serverInfo.modal.verification.level)]: [t(plugin.serverInfo.modal.verification.none), t(plugin.serverInfo.modal.verification.low), t(plugin.serverInfo.modal.verification.medium), t(plugin.serverInfo.modal.verification.high), t(plugin.serverInfo.modal.verification.highest)][guild.verificationLevel] || "?",
+        [t(plugin.serverInfo.modal.serverBoosts)]: `${guild.premiumSubscriberCount ?? 0} (Level ${guild.premiumTier ?? 0})`,
+        [t(plugin.serverInfo.modal.channels)]: GuildChannelStore.getChannels(guild.id)?.count - 1 || "?", // - null category
+        [t(plugin.serverInfo.modal.roles)]: GuildRoleStore.getSortedRoles(guild.id).length - 1, // - @everyone
     };
 
     return (

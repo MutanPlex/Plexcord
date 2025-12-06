@@ -5,18 +5,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "BlockKrisp",
-    description: "Prevent Krisp from loading",
+    description: () => t(plugin.blockKrisp.description),
     authors: [Devs.D3SOX],
-
-    get displayDescription() {
-        return t("plugin.blockKrisp.description");
-    },
 
     patches: [
         // Block loading modules on Desktop

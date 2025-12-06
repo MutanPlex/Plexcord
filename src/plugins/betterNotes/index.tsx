@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { canonicalizeMatch } from "@utils/patches";
@@ -25,23 +25,15 @@ import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     hide: {
-        get label() {
-            return t("plugin.betterNotesBox.option.hide.label");
-        },
-        get description() {
-            return t("plugin.betterNotesBox.option.hide.description");
-        },
+        label: () => t(plugin.betterNotesBox.option.hide.label),
+        description: () => t(plugin.betterNotesBox.option.hide.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
     },
     noSpellCheck: {
-        get label() {
-            return t("plugin.betterNotesBox.option.noSpellCheck.label");
-        },
-        get description() {
-            return t("plugin.betterNotesBox.option.noSpellCheck.description");
-        },
+        label: () => t(plugin.betterNotesBox.option.noSpellCheck.label),
+        description: () => t(plugin.betterNotesBox.option.noSpellCheck.description),
         type: OptionType.BOOLEAN,
         disabled: () => Settings.plugins.BetterNotesBox.hide,
         default: false
@@ -50,13 +42,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "BetterNotesBox",
-    description: "Hide notes or disable spellcheck (Configure in settings!!)",
+    description: () => t(plugin.betterNotesBox.description),
     authors: [Devs.Ven],
     settings,
-
-    get displayDescription() {
-        return t("plugin.betterNotesBox.description");
-    },
 
     patches: [
         {

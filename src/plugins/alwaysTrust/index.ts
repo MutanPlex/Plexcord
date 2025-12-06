@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -36,45 +36,29 @@ function GetPropsAndDeleteGuild(id) {
 
 const settings = definePluginSettings({
     domain: {
-        get label() {
-            return t("plugin.alwaysTrust.option.domain.label");
-        },
-        get description() {
-            return t("plugin.alwaysTrust.option.domain.description");
-        },
+        label: () => t(plugin.alwaysTrust.option.domain.label),
+        description: () => t(plugin.alwaysTrust.option.domain.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     file: {
-        get label() {
-            return t("plugin.alwaysTrust.option.file.label");
-        },
-        get description() {
-            return t("plugin.alwaysTrust.option.file.description");
-        },
+        label: () => t(plugin.alwaysTrust.option.file.label),
+        description: () => t(plugin.alwaysTrust.option.file.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     noDeleteSafety: {
-        get label() {
-            return t("plugin.alwaysTrust.option.noDeleteSafety.label");
-        },
-        get description() {
-            return t("plugin.alwaysTrust.option.noDeleteSafety.description");
-        },
+        label: () => t(plugin.alwaysTrust.option.noDeleteSafety.label),
+        description: () => t(plugin.alwaysTrust.option.noDeleteSafety.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     confirmModal: {
-        get label() {
-            return t("plugin.alwaysTrust.option.confirmModal.label");
-        },
-        get description() {
-            return t("plugin.alwaysTrust.option.confirmModal.description");
-        },
+        label: () => t(plugin.alwaysTrust.option.confirmModal.label),
+        description: () => t(plugin.alwaysTrust.option.confirmModal.description),
         type: OptionType.BOOLEAN,
         default: true
     },
@@ -82,12 +66,8 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "AlwaysTrust",
-    description: "Removes the annoying untrusted domain and suspicious file popup",
+    description: () => t(plugin.alwaysTrust.description),
     authors: [Devs.zt, Devs.Trwy],
-
-    get displayDescription() {
-        return t("plugin.alwaysTrust.description");
-    },
 
     patches: [
         {
@@ -118,12 +98,12 @@ export default definePlugin({
     async HandleGuildDeleteModal(server) {
         if (settings.store.confirmModal) {
             return Alerts.show({
-                title: t("plugin.alwaysTrust.alert.title"),
-                body: t("plugin.alwaysTrust.alert.body"),
+                title: t(plugin.alwaysTrust.alert.title),
+                body: t(plugin.alwaysTrust.alert.body),
                 confirmColor: Button.Colors.RED,
-                confirmText: t("plugin.alwaysTrust.alert.confirm"),
+                confirmText: t(plugin.alwaysTrust.alert.confirm),
                 onConfirm: () => GetPropsAndDeleteGuild(server.id),
-                cancelText: t("plugin.alwaysTrust.alert.cancel")
+                cancelText: t(plugin.alwaysTrust.alert.cancel)
             });
         } else {
             return GetPropsAndDeleteGuild(server.id);

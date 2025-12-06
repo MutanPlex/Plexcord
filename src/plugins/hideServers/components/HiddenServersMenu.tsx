@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
@@ -38,7 +38,7 @@ function HiddenServersModal({ modalProps, close }: { modalProps: ModalProps; clo
         <ModalRoot {...modalProps} size={ModalSize.LARGE}>
             <ModalHeader>
                 <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>
-                    {t("plugin.hideServers.button.hiddenServers")}
+                    {t(plugin.hideServers.button.hiddenServers)}
                 </BaseText>
                 <ModalCloseButton onClick={close} />
             </ModalHeader>
@@ -104,7 +104,7 @@ function GuildRow({ guild }) {
                 variant="primary"
                 onClick={() => restoreGuild(guild, SortedGuildStore)}
             >
-                {t("plugin.hideServers.button.remove")}
+                {t(plugin.hideServers.button.remove)}
             </Button>
         </div>
     );
@@ -132,7 +132,7 @@ export function HiddenServersMenu({ guilds }: { guilds: Guild[]; }) {
             return (
                 <div key={folderId} className={cl("folder")}>
                     <div className={cl("folder-header")}>
-                        <BaseText size="sm" weight="medium">{folder.folderName || t("plugin.hideServers.button.folder")}</BaseText>
+                        <BaseText size="sm" weight="medium">{folder.folderName || t(plugin.hideServers.button.folder)}</BaseText>
                         <Button
                             variant="primary"
                             onClick={() => {
@@ -141,7 +141,7 @@ export function HiddenServersMenu({ guilds }: { guilds: Guild[]; }) {
                             size="small"
                             className={cl("restore-all")}
                         >
-                            {t("plugin.hideServers.button.removeAll")}
+                            {t(plugin.hideServers.button.removeAll)}
                         </Button>
                     </div>
                     {folderGuilds.map(guild => (
@@ -154,7 +154,7 @@ export function HiddenServersMenu({ guilds }: { guilds: Guild[]; }) {
             );
         })}
 
-        <BaseText size="sm" weight="medium">{t("plugin.hideServers.button.guilds")}</BaseText>
+        <BaseText size="sm" weight="medium">{t(plugin.hideServers.button.guilds)}</BaseText>
         {guildsWithoutFolder.map(guild => (
             <GuildRow
                 key={guild.id}
@@ -162,7 +162,7 @@ export function HiddenServersMenu({ guilds }: { guilds: Guild[]; }) {
             />
         ))}
 
-        {hiddenGuilds.length === 0 && <BaseText size="sm" weight="medium">{t("plugin.hideServers.button.noHiddenServers")}</BaseText>}
+        {hiddenGuilds.length === 0 && <BaseText size="sm" weight="medium">{t(plugin.hideServers.button.noHiddenServers)}</BaseText>}
     </div>;
 }
 

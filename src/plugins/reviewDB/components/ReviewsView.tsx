@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { plugin, t } from "@api/i18n";
 import { Paragraph } from "@components/Paragraph";
 import { Auth, authorize } from "@plugins/reviewDB/auth";
 import { Review, ReviewType } from "@plugins/reviewDB/entities";
@@ -116,7 +117,7 @@ function ReviewList({ refetch, reviews, hideOwnReview, profileId, type }: { refe
 
             {reviews?.length === 0 && (
                 <Paragraph className={cl("placeholder")}>
-                    Looks like nobody reviewed this {type === ReviewType.User ? "user" : "server"} yet. You could be the first!
+                    {type === ReviewType.User ? t(plugin.reviewDB.modal.reviews.noUser) : t(plugin.reviewDB.modal.reviews.noServer)}
                 </Paragraph>
             )}
         </div>
@@ -138,7 +139,7 @@ export function ReviewsInputComponent(
         <>
             <div onClick={() => {
                 if (!token) {
-                    showToast("Opening authorization window...");
+                    showToast(t(plugin.reviewDB.notification.auth.opening));
                     authorize();
                 }
             }}>
@@ -147,11 +148,11 @@ export function ReviewsInputComponent(
                     channel={channel}
                     placeholder={
                         !token
-                            ? "You need to authorize to review users!"
-                            : repliesTo ? `Reply to @${name}`
+                            ? t(plugin.reviewDB.notification.auth.need)
+                            : repliesTo ? t(plugin.reviewDB.button.reply, { user: name })
                                 : isAuthor
-                                    ? `Update review for @${name}`
-                                    : `Review @${name}`
+                                    ? t(plugin.reviewDB.button.update, { user: name })
+                                    : t(plugin.reviewDB.button.review, { user: name })
                     }
                     type={inputType}
                     disableThemedBackground={true}

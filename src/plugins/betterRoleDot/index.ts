@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { copyWithToast } from "@utils/discord";
@@ -25,23 +25,15 @@ import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     bothStyles: {
-        get label() {
-            return t("plugin.betterRoleDot.option.bothStyles.label");
-        },
-        get description() {
-            return t("plugin.betterRoleDot.option.bothStyles.description");
-        },
+        label: () => t(plugin.betterRoleDot.option.bothStyles.label),
+        description: () => t(plugin.betterRoleDot.option.bothStyles.description),
         type: OptionType.BOOLEAN,
         restartNeeded: true,
         default: false,
     },
     copyRoleColorInProfilePopout: {
-        get label() {
-            return t("plugin.betterRoleDot.option.copyRoleColorInProfilePopout.label");
-        },
-        get description() {
-            return t("plugin.betterRoleDot.option.copyRoleColorInProfilePopout.description");
-        },
+        label: () => t(plugin.betterRoleDot.option.copyRoleColorInProfilePopout.label),
+        description: () => t(plugin.betterRoleDot.option.copyRoleColorInProfilePopout.description),
         type: OptionType.BOOLEAN,
         restartNeeded: true,
         default: false
@@ -50,13 +42,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "BetterRoleDot",
+    description: () => t(plugin.betterRoleDot.description),
     authors: [Devs.Ven, Devs.AutumnVN],
-    description: "Copy role colour on RoleDot (accessibility setting) click. Also allows using both RoleDot and coloured names simultaneously",
     settings,
-
-    get displayDescription() {
-        return t("plugin.betterRoleDot.description");
-    },
 
     patches: [
         {

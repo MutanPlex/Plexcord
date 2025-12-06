@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { Button } from "@components/Button";
 import { Devs, PcDevs } from "@utils/constants";
@@ -22,12 +22,8 @@ import { getListeners } from "./utils";
 export default definePlugin({
     name: "SoundBoardLogger",
     authors: [Devs.Moxxie, PcDevs.Fres, Devs.thororen, PcDevs.MutanPlex],
-    description: "Logs all soundboards that are played in a voice chat and allows you to download them",
+    description: () => t(plugin.soundBoardLogger.description),
     dependencies: ["AudioPlayerAPI", "ChatInputButtonAPI"],
-
-    get displayDescription() {
-        return t("plugin.soundBoardLogger.description");
-    },
 
     patches: [
         {

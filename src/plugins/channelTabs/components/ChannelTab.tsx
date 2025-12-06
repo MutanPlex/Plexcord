@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { Channel, Guild, User } from "@plexcord/discord-types";
@@ -231,15 +231,15 @@ function ChannelTabContent(props: ChannelTabsProps & {
     // handle special synthetic pages
     if (channelId && channelId.startsWith("__")) {
         const specialPagesConfig: Record<string, { label: string, Icon: React.ComponentType<any>; }> = {
-            "__quests__": { label: t("plugin.channelTabs.bookmark.quests"), Icon: QuestIcon },
-            "__message-requests__": { label: t("plugin.channelTabs.bookmark.messageRequests"), Icon: EnvelopeIcon },
-            "__friends__": { label: t("plugin.channelTabs.bookmark.friends"), Icon: FriendsIcon },
-            "__shop__": { label: t("plugin.channelTabs.bookmark.shop"), Icon: ShopIcon },
-            "__library__": { label: t("plugin.channelTabs.bookmark.library"), Icon: () => LibraryIcon(20, 20) },
-            "__discovery__": { label: t("plugin.channelTabs.bookmark.discovery"), Icon: DiscoveryIcon },
-            "__nitro__": { label: t("plugin.channelTabs.bookmark.nitro"), Icon: NitroIcon },
-            "__icymi__": { label: t("plugin.channelTabs.bookmark.icymi"), Icon: ICYMIIcon },
-            "__activity__": { label: t("plugin.channelTabs.bookmark.activity"), Icon: ActivityIcon },
+            "__quests__": { label: t(plugin.channelTabs.bookmark.quests), Icon: QuestIcon },
+            "__message-requests__": { label: t(plugin.channelTabs.bookmark.messageRequests), Icon: EnvelopeIcon },
+            "__friends__": { label: t(plugin.channelTabs.bookmark.friends), Icon: FriendsIcon },
+            "__shop__": { label: t(plugin.channelTabs.bookmark.shop), Icon: ShopIcon },
+            "__library__": { label: t(plugin.channelTabs.bookmark.library), Icon: () => LibraryIcon(20, 20) },
+            "__discovery__": { label: t(plugin.channelTabs.bookmark.discovery), Icon: DiscoveryIcon },
+            "__nitro__": { label: t(plugin.channelTabs.bookmark.nitro), Icon: NitroIcon },
+            "__icymi__": { label: t(plugin.channelTabs.bookmark.icymi), Icon: ICYMIIcon },
+            "__activity__": { label: t(plugin.channelTabs.bookmark.activity), Icon: ActivityIcon },
         };
 
         const pageConfig = specialPagesConfig[channelId];

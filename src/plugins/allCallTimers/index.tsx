@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import roleColorEverywhere from "@plugins/roleColorEverywhere";
@@ -77,56 +77,36 @@ export interface PassiveUpdateState {
 
 export const settings = definePluginSettings({
     showWithoutHover: {
-        get label() {
-            return t("plugin.allCallTimers.option.showWithoutHover.label");
-        },
-        get description() {
-            return t("plugin.allCallTimers.option.showWithoutHover.description");
-        },
+        label: () => t(plugin.allCallTimers.option.showWithoutHover.label),
+        description: () => t(plugin.allCallTimers.option.showWithoutHover.description),
         type: OptionType.BOOLEAN,
         restartNeeded: true,
         default: true
     },
     showRoleColor: {
-        get label() {
-            return t("plugin.allCallTimers.option.showRoleColor.label");
-        },
-        get description() {
-            return t("plugin.allCallTimers.option.showRoleColor.description");
-        },
+        label: () => t(plugin.allCallTimers.option.showRoleColor.label),
+        description: () => t(plugin.allCallTimers.option.showRoleColor.description),
         type: OptionType.BOOLEAN,
         restartNeeded: false,
         default: true
     },
     trackSelf: {
-        get label() {
-            return t("plugin.allCallTimers.option.trackSelf.label");
-        },
-        get description() {
-            return t("plugin.allCallTimers.option.trackSelf.description");
-        },
+        label: () => t(plugin.allCallTimers.option.trackSelf.label),
+        description: () => t(plugin.allCallTimers.option.trackSelf.description),
         type: OptionType.BOOLEAN,
         restartNeeded: false,
         default: true
     },
     showSeconds: {
-        get label() {
-            return t("plugin.allCallTimers.option.showSeconds.label");
-        },
-        get description() {
-            return t("plugin.allCallTimers.option.showSeconds.description");
-        },
+        label: () => t(plugin.allCallTimers.option.showSeconds.label),
+        description: () => t(plugin.allCallTimers.option.showSeconds.description),
         type: OptionType.BOOLEAN,
         restartNeeded: false,
         default: true
     },
     format: {
-        get label() {
-            return t("plugin.allCallTimers.option.format.label");
-        },
-        get description() {
-            return t("plugin.allCallTimers.option.format.description");
-        },
+        label: () => t(plugin.allCallTimers.option.format.label),
+        description: () => t(plugin.allCallTimers.option.format.description),
         type: OptionType.SELECT,
         options: [
             {
@@ -135,31 +115,21 @@ export const settings = definePluginSettings({
                 default: true
             },
             {
-                get label() {
-                    return t("plugin.allCallTimers.option.format.human");
-                },
+                label: () => t(plugin.allCallTimers.option.format.human),
                 value: "human"
             }
         ]
     },
     watchLargeGuilds: {
-        get label() {
-            return t("plugin.allCallTimers.option.watchLargeGuilds.label");
-        },
-        get description() {
-            return t("plugin.allCallTimers.option.watchLargeGuilds.description");
-        },
+        label: () => t(plugin.allCallTimers.option.watchLargeGuilds.label),
+        description: () => t(plugin.allCallTimers.option.watchLargeGuilds.description),
         type: OptionType.BOOLEAN,
         restartNeeded: true,
         default: false
     },
     fixUI: {
-        get label() {
-            return t("plugin.allCallTimers.option.fixUI.label");
-        },
-        get description() {
-            return t("plugin.allCallTimers.option.fixUI.description");
-        },
+        label: () => t(plugin.allCallTimers.option.fixUI.label),
+        description: () => t(plugin.allCallTimers.option.fixUI.description),
         type: OptionType.BOOLEAN,
         restartNeeded: true,
         default: true
@@ -220,13 +190,9 @@ function removeCss() {
 
 export default definePlugin({
     name: "AllCallTimers",
-    description: "Add call timer to all users in a server voice channel.",
+    description: () => t(plugin.allCallTimers.description),
     authors: [Devs.D3SOX, PcDevs.Max, PcDevs.MutanPlex],
     settings,
-
-    get displayDescription() {
-        return t("plugin.allCallTimers.description");
-    },
 
     patches: [
         {

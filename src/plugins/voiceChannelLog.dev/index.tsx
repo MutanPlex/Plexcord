@@ -6,7 +6,7 @@
  */
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Message, User } from "@plexcord/discord-types";
@@ -23,59 +23,36 @@ const createBotMessage = findByCodeLazy('username:"Clyde"');
 
 const settings = definePluginSettings({
     mode: {
-        get label() {
-            return t("plugin.voiceChannelLog.option.mode.label");
-        },
-        get description() {
-            return t("plugin.voiceChannelLog.option.mode.description");
-        },
+        label: () => t(plugin.voiceChannelLog.option.mode.label),
+        description: () => t(plugin.voiceChannelLog.option.mode.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.voiceChannelLog.option.mode.menu"), value: 1, default: true },
-                { label: t("plugin.voiceChannelLog.option.mode.associated"), value: 2 },
-                { label: t("plugin.voiceChannelLog.option.mode.both"), value: 3 },
-            ];
-        }
-
+        options: [
+            { label: () => t(plugin.voiceChannelLog.option.mode.menu), value: 1, default: true },
+            { label: () => t(plugin.voiceChannelLog.option.mode.associated), value: 2 },
+            { label: () => t(plugin.voiceChannelLog.option.mode.both), value: 3 },
+        ]
     },
     voiceChannelChatSelf: {
-        get label() {
-            return t("plugin.voiceChannelLog.option.voiceChannelChatSelf.label");
-        },
-        get description() {
-            return t("plugin.voiceChannelLog.option.voiceChannelChatSelf.description");
-        },
+        label: () => t(plugin.voiceChannelLog.option.voiceChannelChatSelf.label),
+        description: () => t(plugin.voiceChannelLog.option.voiceChannelChatSelf.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     voiceChannelChatSilent: {
-        get label() {
-            return t("plugin.voiceChannelLog.option.voiceChannelChatSilent.label");
-        },
-        get description() {
-            return t("plugin.voiceChannelLog.option.voiceChannelChatSilent.description");
-        },
+        label: () => t(plugin.voiceChannelLog.option.voiceChannelChatSilent.label),
+        description: () => t(plugin.voiceChannelLog.option.voiceChannelChatSilent.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     voiceChannelChatSilentSelf: {
-        get label() {
-            return t("plugin.voiceChannelLog.option.voiceChannelChatSilentSelf.label");
-        },
-        get description() {
-            return t("plugin.voiceChannelLog.option.voiceChannelChatSilentSelf.description");
-        },
+        label: () => t(plugin.voiceChannelLog.option.voiceChannelChatSilentSelf.label),
+        description: () => t(plugin.voiceChannelLog.option.voiceChannelChatSilentSelf.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     ignoreBlockedUsers: {
-        get label() {
-            return t("plugin.voiceChannelLog.option.ignoreBlockedUsers.label");
-        },
-        get description() {
-            return t("plugin.voiceChannelLog.option.ignoreBlockedUsers.description");
-        },
+        label: () => t(plugin.voiceChannelLog.option.ignoreBlockedUsers.label),
+        description: () => t(plugin.voiceChannelLog.option.ignoreBlockedUsers.description),
         type: OptionType.BOOLEAN,
         default: false
     },
@@ -122,7 +99,7 @@ const patchChannelContextMenu: NavContextMenuPatchCallback = (children, { channe
     group.push(
         <Menu.MenuItem
             id="pc-view-voice-channel-logs"
-            label={t("plugin.voiceChannelLog.context.view")}
+            label={t(plugin.voiceChannelLog.context.view)}
             action={() => { openVoiceChannelLog(channel); }}
         />
     );
@@ -137,17 +114,13 @@ let clientOldChannelId: string | undefined;
 
 export default definePlugin({
     name: "VoiceChannelLog",
-    description: "Logs who joins and leaves voice channels",
-
-    get displayDescription() {
-        return t("plugin.voiceChannelLog.description");
-    },
-
+    description: () => t(plugin.voiceChannelLog.description),
     authors: [Devs.Sqaaakoi, Devs.thororen, PcDevs.nyx],
+    settings,
+
     contextMenus: {
         "channel-context": patchChannelContextMenu
     },
-    settings,
     flux: {
         VOICE_STATE_UPDATES({ voiceStates }: { voiceStates: VoiceState[]; }) {
             const clientUserId = UserStore.getCurrentUser().id;
@@ -186,12 +159,12 @@ export default definePlugin({
                     // empty string is to make type checker shut up
                     const targetChannelId = oldChannelId || channelId || "";
                     const selfInChannel = SelectedChannelStore.getVoiceChannelId() === targetChannelId;
-                    sendVoiceStatusMessage(targetChannelId, `${(channelId ? t("plugin.voiceChannelLog.modal.joined", { channel: targetChannelId }) : t("plugin.voiceChannelLog.modal.left", { channel: targetChannelId }))}`, userId, selfInChannel);
+                    sendVoiceStatusMessage(targetChannelId, `${(channelId ? t(plugin.voiceChannelLog.modal.joined, { channel: targetChannelId }) : t(plugin.voiceChannelLog.modal.left, { channel: targetChannelId }))}`, userId, selfInChannel);
                 }
                 // Move between channels
                 if (oldChannelId && channelId) {
-                    sendVoiceStatusMessage(oldChannelId, t("plugin.voiceChannelLog.modal.movedTo", { channel: channelId }), userId, SelectedChannelStore.getVoiceChannelId() === oldChannelId);
-                    sendVoiceStatusMessage(channelId, t("plugin.voiceChannelLog.modal.movedFrom", { channel: oldChannelId }), userId, SelectedChannelStore.getVoiceChannelId() === channelId);
+                    sendVoiceStatusMessage(oldChannelId, t(plugin.voiceChannelLog.modal.movedTo, { channel: channelId }), userId, SelectedChannelStore.getVoiceChannelId() === oldChannelId);
+                    sendVoiceStatusMessage(channelId, t(plugin.voiceChannelLog.modal.movedFrom, { channel: oldChannelId }), userId, SelectedChannelStore.getVoiceChannelId() === channelId);
                 }
 
             });

@@ -9,7 +9,7 @@ export const Native = getNative();
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Devs, PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
@@ -255,13 +255,8 @@ async function processMessageFetch(response: FetchMessagesResponse) {
 export default definePlugin({
     name: "MessageLoggerEnhanced",
     authors: [Devs.Aria, PcDevs.MutanPlex],
-    description: "Enhances the MessageLogger plugin with additional features.",
+    description: () => t(plugin.messageLoggerEnhanced.description),
     dependencies: ["MessageLogger"],
-
-    get displayDescription() {
-        return t("plugin.messageLoggerEnhanced.description");
-    },
-
     patches: [
         {
             find: "_tryFetchMessagesCached",
@@ -348,11 +343,11 @@ export default definePlugin({
     },
     settings,
 
-    toolboxActions: {
+    toolboxActions: () => ({
         "Message Logger"() {
             openLogModal();
         }
-    },
+    }),
 
     processMessageFetch,
     openLogModal,

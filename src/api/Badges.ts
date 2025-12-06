@@ -28,7 +28,7 @@ export const enum BadgePosition {
 
 export interface ProfileBadge {
     /** The tooltip to show on hover. Required for image badges */
-    description?: string;
+    description?: string | ((props: BadgeUserArgs) => string);
     /** Custom component for the badge (tooltip not included) */
     component?: ComponentType<ProfileBadge & BadgeUserArgs>;
     /** The custom image to use */

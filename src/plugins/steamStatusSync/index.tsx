@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -35,96 +35,64 @@ interface SettingsProto {
 
 export const settings = definePluginSettings({
     onlineStatus: {
-        get label() {
-            return t("plugin.steamStatusSync.option.onlineStatus.label");
-        },
-        get description() {
-            return t("plugin.steamStatusSync.option.onlineStatus.description");
-        },
+        label: () => t(plugin.steamStatusSync.option.onlineStatus.label),
+        description: () => t(plugin.steamStatusSync.option.onlineStatus.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.steamStatusSync.status.online"), value: SteamStatus.Online, default: true },
-                { label: t("plugin.steamStatusSync.status.away"), value: SteamStatus.Away },
-                { label: t("plugin.steamStatusSync.status.invisible"), value: SteamStatus.Invisible },
-                { label: t("plugin.steamStatusSync.status.offline"), value: SteamStatus.Offline },
-                { label: t("plugin.steamStatusSync.status.disabled"), value: SteamStatus.None }
-            ];
-        }
+        options: [
+            { label: () => t(plugin.steamStatusSync.status.online), value: SteamStatus.Online, default: true },
+            { label: () => t(plugin.steamStatusSync.status.away), value: SteamStatus.Away },
+            { label: () => t(plugin.steamStatusSync.status.invisible), value: SteamStatus.Invisible },
+            { label: () => t(plugin.steamStatusSync.status.offline), value: SteamStatus.Offline },
+            { label: () => t(plugin.steamStatusSync.status.disabled), value: SteamStatus.None }
+        ],
     },
     idleStatus: {
-        get label() {
-            return t("plugin.steamStatusSync.option.idleStatus.label");
-        },
-        get description() {
-            return t("plugin.steamStatusSync.option.idleStatus.description");
-        },
+        label: () => t(plugin.steamStatusSync.option.idleStatus.label),
+        description: () => t(plugin.steamStatusSync.option.idleStatus.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.steamStatusSync.status.online"), value: SteamStatus.Online },
-                { label: t("plugin.steamStatusSync.status.away"), value: SteamStatus.Away, default: true },
-                { label: t("plugin.steamStatusSync.status.invisible"), value: SteamStatus.Invisible },
-                { label: t("plugin.steamStatusSync.status.offline"), value: SteamStatus.Offline },
-                { label: t("plugin.steamStatusSync.status.disabled"), value: SteamStatus.None }
-            ];
-        }
+        options: [
+            { label: () => t(plugin.steamStatusSync.status.online), value: SteamStatus.Online },
+            { label: () => t(plugin.steamStatusSync.status.away), value: SteamStatus.Away, default: true },
+            { label: () => t(plugin.steamStatusSync.status.invisible), value: SteamStatus.Invisible },
+            { label: () => t(plugin.steamStatusSync.status.offline), value: SteamStatus.Offline },
+            { label: () => t(plugin.steamStatusSync.status.disabled), value: SteamStatus.None }
+        ]
     },
     dndStatus: {
-        get label() {
-            return t("plugin.steamStatusSync.option.dndStatus.label");
-        },
-        get description() {
-            return t("plugin.steamStatusSync.option.dndStatus.description");
-        },
+        label: () => t(plugin.steamStatusSync.option.dndStatus.label),
+        description: () => t(plugin.steamStatusSync.option.dndStatus.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.steamStatusSync.status.online"), value: SteamStatus.Online },
-                { label: t("plugin.steamStatusSync.status.away"), value: SteamStatus.Away },
-                { label: t("plugin.steamStatusSync.status.invisible"), value: SteamStatus.Invisible },
-                { label: t("plugin.steamStatusSync.status.offline"), value: SteamStatus.Offline },
-                { label: t("plugin.steamStatusSync.status.disabled"), value: SteamStatus.None, default: true }
-            ];
-        }
+        options: [
+            { label: () => t(plugin.steamStatusSync.status.online), value: SteamStatus.Online },
+            { label: () => t(plugin.steamStatusSync.status.away), value: SteamStatus.Away },
+            { label: () => t(plugin.steamStatusSync.status.invisible), value: SteamStatus.Invisible },
+            { label: () => t(plugin.steamStatusSync.status.offline), value: SteamStatus.Offline },
+            { label: () => t(plugin.steamStatusSync.status.disabled), value: SteamStatus.None, default: true }
+        ],
     },
     invisibleStatus: {
-        get label() {
-            return t("plugin.steamStatusSync.option.invisibleStatus.label");
-        },
-        get description() {
-            return t("plugin.steamStatusSync.option.invisibleStatus.description");
-        },
+        label: () => t(plugin.steamStatusSync.option.invisibleStatus.label),
+        description: () => t(plugin.steamStatusSync.option.invisibleStatus.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.steamStatusSync.status.online"), value: SteamStatus.Online },
-                { label: t("plugin.steamStatusSync.status.away"), value: SteamStatus.Away },
-                { label: t("plugin.steamStatusSync.status.invisible"), value: SteamStatus.Invisible, default: true },
-                { label: t("plugin.steamStatusSync.status.offline"), value: SteamStatus.Offline },
-                { label: t("plugin.steamStatusSync.status.disabled"), value: SteamStatus.None }
-            ];
-        }
+        options: [
+            { label: () => t(plugin.steamStatusSync.status.online), value: SteamStatus.Online },
+            { label: () => t(plugin.steamStatusSync.status.away), value: SteamStatus.Away },
+            { label: () => t(plugin.steamStatusSync.status.invisible), value: SteamStatus.Invisible, default: true },
+            { label: () => t(plugin.steamStatusSync.status.offline), value: SteamStatus.Offline },
+            { label: () => t(plugin.steamStatusSync.status.disabled), value: SteamStatus.None }
+        ]
     },
     goInvisibleIfActivityIsHidden: {
-        get label() {
-            return t("plugin.steamStatusSync.option.goInvisibleIfActivityIsHidden.label");
-        },
-        get description() {
-            return t("plugin.steamStatusSync.option.goInvisibleIfActivityIsHidden.description");
-        },
+        label: () => t(plugin.steamStatusSync.option.goInvisibleIfActivityIsHidden.label),
+        description: () => t(plugin.steamStatusSync.option.goInvisibleIfActivityIsHidden.description),
         type: OptionType.BOOLEAN,
     }
 });
 
 export default definePlugin({
     name: "SteamStatusSync",
-    description: "Sync your status to Steam!",
+    description: () => t(plugin.steamStatusSync.description),
     authors: [PcDevs.niko],
-
-    get displayDescription() {
-        return t("plugin.steamStatusSync.description");
-    },
 
     settings,
 

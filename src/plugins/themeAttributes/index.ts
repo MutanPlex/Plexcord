@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
@@ -15,12 +15,8 @@ import { UserStore } from "@webpack/common";
 
 export default definePlugin({
     name: "ThemeAttributes",
-    description: "Adds data attributes to various elements for theming purposes",
+    description: () => t(plugin.themeAttributes.description),
     authors: [Devs.Ven, Devs.Board],
-
-    get displayDescription() {
-        return t("plugin.themeAttributes.description");
-    },
 
     patches: [
         // Add data-tab-id to all tab bar items

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
@@ -25,38 +25,28 @@ import definePlugin, { makeRange, OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     limitTo: {
-        get label() {
-            return t("plugin.limitMiddleClickPaste.option.limitTo.label");
-        },
-        get description() {
-            return t("plugin.limitMiddleClickPaste.option.limitTo.description");
-        },
+        label: () => t(plugin.limitMiddleClickPaste.option.limitTo.label),
+        description: () => t(plugin.limitMiddleClickPaste.option.limitTo.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.limitMiddleClickPaste.option.limitTo.active"),
-                    value: "active",
-                    default: true
-                },
-                {
-                    label: t("plugin.limitMiddleClickPaste.option.limitTo.direct"),
-                    value: "direct"
-                },
-                {
-                    label: t("plugin.limitMiddleClickPaste.option.limitTo.never"),
-                    value: "never"
-                }
-            ];
-        }
+        options: [
+            {
+                label: () => t(plugin.limitMiddleClickPaste.option.limitTo.active),
+                value: "active",
+                default: true
+            },
+            {
+                label: () => t(plugin.limitMiddleClickPaste.option.limitTo.direct),
+                value: "direct"
+            },
+            {
+                label: () => t(plugin.limitMiddleClickPaste.option.limitTo.never),
+                value: "never"
+            }
+        ]
     },
     reenableDelay: {
-        get label() {
-            return t("plugin.limitMiddleClickPaste.option.reenableDelay.label");
-        },
-        get description() {
-            return t("plugin.limitMiddleClickPaste.option.reenableDelay.description");
-        },
+        label: () => t(plugin.limitMiddleClickPaste.option.reenableDelay.label),
+        description: () => t(plugin.limitMiddleClickPaste.option.reenableDelay.description),
         type: OptionType.SLIDER,
         markers: makeRange(0, 1000, 500),
         default: 500,
@@ -67,13 +57,8 @@ let containerEl;
 
 export default definePlugin({
     name: "LimitMiddleClickPaste",
-    description: "For middle-click autoscroll users, prevents middle-click from making unwanted pastes.",
+    description: () => t(plugin.limitMiddleClickPaste.description),
     authors: [PcDevs.nobody, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.limitMiddleClickPaste.description");
-    },
-
     settings: settings,
 
     start() {

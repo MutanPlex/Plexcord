@@ -18,7 +18,7 @@
 */
 
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { addMessagePreSendListener, MessageSendListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
@@ -31,31 +31,21 @@ export { lastState };
 
 const settings = definePluginSettings({
     persistState: {
-        get label() {
-            return t("plugin.silentMessageToggle.option.persistState.label");
-        },
-        get description() {
-            return t("plugin.silentMessageToggle.option.persistState.description");
-        },
+        label: () => t(plugin.silentMessageToggle.option.persistState.label),
+        description: () => t(plugin.silentMessageToggle.option.persistState.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.silentMessageToggle.option.persistState.none"), value: "none", default: true },
-                { label: t("plugin.silentMessageToggle.option.persistState.channels"), value: "channels" },
-                { label: t("plugin.silentMessageToggle.option.persistState.restarts"), value: "restarts" }
-            ];
-        },
+        options: [
+            { label: () => t(plugin.silentMessageToggle.option.persistState.none), value: "none", default: true },
+            { label: () => t(plugin.silentMessageToggle.option.persistState.channels), value: "channels" },
+            { label: () => t(plugin.silentMessageToggle.option.persistState.restarts), value: "restarts" }
+        ],
         onChange(newValue: string) {
             lastState = newValue !== "none" && lastState;
         }
     },
     autoDisable: {
-        get label() {
-            return t("plugin.silentMessageToggle.option.autoDisable.label");
-        },
-        get description() {
-            return t("plugin.silentMessageToggle.option.autoDisable.description");
-        },
+        label: () => t(plugin.silentMessageToggle.option.autoDisable.label),
+        description: () => t(plugin.silentMessageToggle.option.autoDisable.description),
         type: OptionType.BOOLEAN,
         default: true
     }
@@ -112,7 +102,7 @@ const SilentMessageToggle: ChatBarButtonFactory = ({ isMainChat }) => {
 
     return (
         <ChatBarButton
-            tooltip={enabled ? t("plugin.silentMessageToggle.tooltip.disable") : t("plugin.silentMessageToggle.tooltip.enable")}
+            tooltip={enabled ? t(plugin.silentMessageToggle.tooltip.disable) : t(plugin.silentMessageToggle.tooltip.enable)}
             onClick={() => setEnabledValue(!enabled)}
         >
             {enabled ? <SilentMessageIcon /> : <SilentMessageDisabledIcon />}
@@ -122,13 +112,9 @@ const SilentMessageToggle: ChatBarButtonFactory = ({ isMainChat }) => {
 
 export default definePlugin({
     name: "SilentMessageToggle",
+    description: () => t(plugin.silentMessageToggle.description),
     authors: [Devs.Nuckyz, Devs.CatNoir],
-    description: "Adds a button to the chat bar to toggle sending a silent message.",
     settings,
-
-    get displayDescription() {
-        return t("plugin.silentMessageToggle.description");
-    },
 
     chatBarButton: {
         icon: SilentMessageIcon,

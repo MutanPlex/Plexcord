@@ -20,7 +20,7 @@
 import "./styles.css";
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t, tJsx } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
@@ -139,7 +139,7 @@ function sendAudio(blob: Blob, meta: AudioMetadata) {
             }
         });
     });
-    upload.on("error", () => showToast(t("plugin.voiceMessages.notification.failed.upload"), Toasts.Type.FAILURE));
+    upload.on("error", () => showToast(t(plugin.voiceMessages.notification.failed.upload), Toasts.Type.FAILURE));
 
     upload.upload();
 }
@@ -165,8 +165,8 @@ const ctxMenuPatch: NavContextMenuPatchCallback = (children, props) => {
                 <div className={OptionClasses.optionLabel}>
                     <Microphone className={OptionClasses.optionIcon} height={24} width={24} />
                     <div className={OptionClasses.optionName}>
-                        {t("plugin.voiceMessages.context.sendVoiceMessage")}
-                        {!hasPermission && <span style={{ fontSize: "smaller", opacity: 0.6 }}> {t("plugin.voiceMessages.context.missingPermissions")}</span>}
+                        {t(plugin.voiceMessages.context.sendVoiceMessage)}
+                        {!hasPermission && <span style={{ fontSize: "smaller", opacity: 0.6 }}> {t(plugin.voiceMessages.context.missingPermissions)}</span>}
                     </div>
                 </div>
             }
@@ -208,7 +208,7 @@ function Modal({ modalProps }: { modalProps: ModalProps; }) {
     return (
         <ModalRoot {...modalProps}>
             <ModalHeader>
-                <Heading>{t("plugin.voiceMessages.modal.record")}</Heading>
+                <Heading>{t(plugin.voiceMessages.modal.record)}</Heading>
             </ModalHeader>
 
             <ModalContent className={cl("modal")}>
@@ -228,13 +228,13 @@ function Modal({ modalProps }: { modalProps: ModalProps; }) {
                             setBlobUrl(file);
                         }
                     }}>
-                        {t("plugin.voiceMessages.modal.upload")}
+                        {t(plugin.voiceMessages.modal.upload)}
                     </Button>
                 </div>
 
-                <Heading>{t("plugin.voiceMessages.modal.preview")}</Heading>
+                <Heading>{t(plugin.voiceMessages.modal.preview)}</Heading>
                 {metaError
-                    ? <Paragraph className={cl("error")}>{t("plugin.voiceMessages.modal.failed")} {metaError.message}</Paragraph>
+                    ? <Paragraph className={cl("error")}>{t(plugin.voiceMessages.modal.failed)} {metaError.message}</Paragraph>
                     : (
                         <VoicePreview
                             src={blobUrl}
@@ -245,10 +245,10 @@ function Modal({ modalProps }: { modalProps: ModalProps; }) {
 
                 {isUnsupportedFormat && (
                     <Card variant="warning" className={Margins.top16} defaultPadding>
-                        <Paragraph>{t("plugin.voiceMessages.modal.oggOpus", { "type": blob.type })}</Paragraph>
+                        <Paragraph>{t(plugin.voiceMessages.modal.oggOpus, { "type": blob.type })}</Paragraph>
 
                         <Paragraph className={Margins.top8}>
-                            {tJsx("plugin.voiceMessages.modal.fix", { link: <Link href="https://convertio.co/mp3-opus/">convertio web converter</Link> })}
+                            {t(plugin.voiceMessages.modal.fix, { link: <Link href="https://convertio.co/mp3-opus/">convertio web converter</Link> })}
                         </Paragraph>
                     </Card>
                 )}
@@ -261,7 +261,7 @@ function Modal({ modalProps }: { modalProps: ModalProps; }) {
                     onClick={() => {
                         sendAudio(blob!, meta ?? EMPTY_META);
                         modalProps.onClose();
-                        showToast(t("plugin.voiceMessages.modal.sending"), Toasts.Type.MESSAGE);
+                        showToast(t(plugin.voiceMessages.modal.sending), Toasts.Type.MESSAGE);
                     }}>
                     Send
                 </Button>
@@ -272,22 +272,14 @@ function Modal({ modalProps }: { modalProps: ModalProps; }) {
 
 export const settings = definePluginSettings({
     noiseSuppression: {
-        get label() {
-            return t("plugin.voiceMessages.option.noiseSuppression.label");
-        },
-        get description() {
-            return t("plugin.voiceMessages.option.noiseSuppression.description");
-        },
+        label: () => t(plugin.voiceMessages.option.noiseSuppression.label),
+        description: () => t(plugin.voiceMessages.option.noiseSuppression.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     echoCancellation: {
-        get label() {
-            return t("plugin.voiceMessages.option.echoCancellation.label");
-        },
-        get description() {
-            return t("plugin.voiceMessages.option.echoCancellation.description");
-        },
+        label: () => t(plugin.voiceMessages.option.echoCancellation.label),
+        description: () => t(plugin.voiceMessages.option.echoCancellation.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
@@ -295,13 +287,9 @@ export const settings = definePluginSettings({
 
 export default definePlugin({
     name: "VoiceMessages",
-    description: "Allows you to send voice messages like on mobile. To do so, right click the upload button and click Send Voice Message.",
+    description: () => t(plugin.voiceMessages.description),
     authors: [Devs.Ven, Devs.Vap, Devs.Nickyux, PcDevs.Z1xus],
     settings,
-
-    get displayDescription() {
-        return t("plugin.voiceMessages.description");
-    },
 
     contextMenus: {
         "channel-attach": ctxMenuPatch

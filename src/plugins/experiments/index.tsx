@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t, tJsx } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -40,12 +40,8 @@ const altKey = IS_MAC ? "opt" : "alt";
 
 const settings = definePluginSettings({
     toolbarDevMenu: {
-        get label() {
-            return t("plugin.experiments.option.toolbarDevMenu.label");
-        },
-        get description() {
-            return t("plugin.experiments.option.toolbarDevMenu.description");
-        },
+        label: () => t(plugin.experiments.option.toolbarDevMenu.label),
+        description: () => t(plugin.experiments.option.toolbarDevMenu.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
@@ -54,7 +50,7 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "Experiments",
-    description: "Enable Access to Experiments & other dev-only features in Discord!",
+    description: () => t(plugin.experiments.description),
     authors: [
         Devs.Megu,
         Devs.Ven,
@@ -63,11 +59,6 @@ export default definePlugin({
         Devs.Nuckyz,
         PcDevs.MutanPlex
     ],
-
-    get displayDescription() {
-        return t("plugin.experiments.description");
-    },
-
     settings,
 
     patches: [
@@ -150,9 +141,9 @@ export default definePlugin({
     settingsAboutComponent: () => {
         return (
             <React.Fragment>
-                <Heading>{t("plugin.experiments.modal.about.title")}</Heading>
+                <Heading>{t(plugin.experiments.modal.about.title)}</Heading>
                 <Paragraph size="md">
-                    {tJsx("plugin.experiments.modal.about.body", {
+                    {t(plugin.experiments.modal.about.body, {
                         key: <div className={KbdStyles.combo} style={{ display: "inline-flex" }}>
                             <kbd className={KbdStyles.key}>{modKey}</kbd> +{" "}
                             <kbd className={KbdStyles.key}>{altKey}</kbd> +{" "}
@@ -166,20 +157,19 @@ export default definePlugin({
 
     WarningCard: ErrorBoundary.wrap(() => (
         <ErrorCard id="pc-experiments-warning-card" className={Margins.bottom16}>
-            <Heading>{t("plugin.experiments.modal.warning.title")}</Heading>
+            <Heading>{t(plugin.experiments.modal.warning.title)}</Heading>
 
             <Paragraph>
-                {t("plugin.experiments.modal.warning.body")}
+                {t(plugin.experiments.modal.warning.body)}
             </Paragraph>
 
             <Paragraph className={Margins.top8}>
-                {t("plugin.experiments.modal.warning.notReponsible")}
-
-                {t("plugin.experiments.modal.warning.useAtOwnRisk")}
+                {t(plugin.experiments.modal.warning.notReponsible)}
+                {t(plugin.experiments.modal.warning.useAtOwnRisk)}
             </Paragraph>
 
             <Paragraph className={Margins.top8}>
-                {t("plugin.experiments.modal.warning.serverSideFeatures")}
+                {t(plugin.experiments.modal.warning.serverSideFeatures)}
             </Paragraph>
         </ErrorCard>
     ), { noop: true })

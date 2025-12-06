@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t, tJsx } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { Button } from "@components/Button";
@@ -31,10 +31,10 @@ export function toggleHoverControls(value: boolean) {
 function InstallInstructions() {
     return (
         <section>
-            <Heading>{t("plugin.musicControls.modal.install.title")}</Heading>
+            <Heading>{t(plugin.musicControls.modal.install.title)}</Heading>
             <Paragraph>
-                {tJsx("plugin.musicControls.modal.install.install", {
-                    link: <MaskedLink href="https://github.com/Inrixia/TidaLuna#installation">{t("plugin.musicControls.modal.install.tidaluna")}</MaskedLink>
+                {t(plugin.musicControls.modal.install.install, {
+                    link: <MaskedLink href="https://github.com/Inrixia/TidaLuna#installation">{t(plugin.musicControls.modal.install.tidaluna)}</MaskedLink>
                 })}
             </Paragraph>
         </section>
@@ -46,47 +46,31 @@ export const settings = definePluginSettings({
         type: OptionType.COMPONENT,
         component: () => (
             <section>
-                <Heading>{t("plugin.musicControls.option.SpotifySectionTitle.label")}</Heading>
+                <Heading>{t(plugin.musicControls.option.SpotifySectionTitle.label)}</Heading>
             </section>
         )
     },
     showSpotifyControls: {
-        get label() {
-            return t("plugin.musicControls.option.showSpotifyControls.label");
-        },
-        get description() {
-            return t("plugin.musicControls.option.showSpotifyControls.description");
-        },
+        label: () => t(plugin.musicControls.option.showSpotifyControls.label),
+        description: () => t(plugin.musicControls.option.showSpotifyControls.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     showSpotifyLyrics: {
-        get label() {
-            return t("plugin.musicControls.option.showSpotifyLyrics.label");
-        },
-        get description() {
-            return t("plugin.musicControls.option.showSpotifyLyrics.description");
-        },
+        label: () => t(plugin.musicControls.option.showSpotifyLyrics.label),
+        description: () => t(plugin.musicControls.option.showSpotifyLyrics.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     useSpotifyUris: {
-        get label() {
-            return t("plugin.musicControls.option.useSpotifyUris.label");
-        },
-        get description() {
-            return t("plugin.musicControls.option.useSpotifyUris.description");
-        },
+        label: () => t(plugin.musicControls.option.useSpotifyUris.label),
+        description: () => t(plugin.musicControls.option.useSpotifyUris.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     previousButtonRestartsTrack: {
-        get label() {
-            return t("plugin.musicControls.option.previousButtonRestartsTrack.label");
-        },
-        get description() {
-            return t("plugin.musicControls.option.previousButtonRestartsTrack.description");
-        },
+        label: () => t(plugin.musicControls.option.previousButtonRestartsTrack.label),
+        description: () => t(plugin.musicControls.option.previousButtonRestartsTrack.description),
         type: OptionType.BOOLEAN,
         default: true
     },
@@ -95,7 +79,7 @@ export const settings = definePluginSettings({
         type: OptionType.COMPONENT,
         component: () => (
             <section>
-                <Heading>{t("plugin.musicControls.option.TidalSectionTitle.label")}</Heading>
+                <Heading>{t(plugin.musicControls.option.TidalSectionTitle.label)}</Heading>
             </section>
         )
     },
@@ -104,22 +88,14 @@ export const settings = definePluginSettings({
         component: () => <InstallInstructions />
     },
     showTidalControls: {
-        get label() {
-            return t("plugin.musicControls.option.showTidalControls.label");
-        },
-        get description() {
-            return t("plugin.musicControls.option.showTidalControls.description");
-        },
+        label: () => t(plugin.musicControls.option.showTidalControls.label),
+        description: () => t(plugin.musicControls.option.showTidalControls.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
     showTidalLyrics: {
-        get label() {
-            return t("plugin.musicControls.option.showTidalLyrics.label");
-        },
-        get description() {
-            return t("plugin.musicControls.option.showTidalLyrics.description");
-        },
+        label: () => t(plugin.musicControls.option.showTidalLyrics.label),
+        description: () => t(plugin.musicControls.option.showTidalLyrics.description),
         type: OptionType.BOOLEAN,
         default: false,
     },
@@ -128,27 +104,19 @@ export const settings = definePluginSettings({
         type: OptionType.COMPONENT,
         component: () => (
             <section>
-                <Heading>{t("plugin.musicControls.option.YtmSectionTitle.label")}</Heading>
+                <Heading>{t(plugin.musicControls.option.YtmSectionTitle.label)}</Heading>
             </section>
         )
     },
     showYoutubeMusicControls: {
-        get label() {
-            return t("plugin.musicControls.option.showYoutubeMusicControls.label");
-        },
-        get description() {
-            return t("plugin.musicControls.option.showYoutubeMusicControls.description");
-        },
+        label: () => t(plugin.musicControls.option.showYoutubeMusicControls.label),
+        description: () => t(plugin.musicControls.option.showYoutubeMusicControls.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     YoutubeMusicApiUrl: {
-        get label() {
-            return t("plugin.musicControls.option.YoutubeMusicApiUrl.label");
-        },
-        get description() {
-            return t("plugin.musicControls.option.YoutubeMusicApiUrl.description");
-        },
+        label: () => t(plugin.musicControls.option.YoutubeMusicApiUrl.label),
+        description: () => t(plugin.musicControls.option.YoutubeMusicApiUrl.description),
         type: OptionType.STRING,
         default: "http://localhost:26538",
         placeholder: "http://localhost:26538",
@@ -156,104 +124,75 @@ export const settings = definePluginSettings({
             if (URL.canParse(value)) {
                 settings.store.YoutubeMusicApiUrl = value;
             } else {
-                showToast(t("plugin.musicControls.error.invalidUrlCustomApi") + ": " + value, Toasts.Type.FAILURE);
+                showToast(t(plugin.musicControls.error.invalidUrlCustomApi) + ": " + value, Toasts.Type.FAILURE);
                 settings.store.YoutubeMusicApiUrl = settings.def.YoutubeMusicApiUrl.default;
             }
         }
     },
     hoverControls: {
-        get label() {
-            return t("plugin.musicControls.option.hoverControls.label");
-        },
-        get description() {
-            return t("plugin.musicControls.option.hoverControls.description");
-        },
+        label: () => t(plugin.musicControls.option.hoverControls.label),
+        description: () => t(plugin.musicControls.option.hoverControls.description),
         type: OptionType.BOOLEAN,
         default: false,
         onChange: v => toggleHoverControls(v)
     },
     ShowMusicNoteOnNoLyrics: {
-        get label() {
-            return t("plugin.musicControls.option.ShowMusicNoteOnNoLyrics.label");
-        },
-        get description() {
-            return t("plugin.musicControls.option.ShowMusicNoteOnNoLyrics.description");
-        },
+        label: () => t(plugin.musicControls.option.ShowMusicNoteOnNoLyrics.label),
+        description: () => t(plugin.musicControls.option.ShowMusicNoteOnNoLyrics.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     LyricsPosition: {
-        get label() {
-            return t("plugin.musicControls.option.LyricsPosition.label");
-        },
-        get description() {
-            return t("plugin.musicControls.option.LyricsPosition.description");
-        },
+        label: () => t(plugin.musicControls.option.LyricsPosition.label),
+        description: () => t(plugin.musicControls.option.LyricsPosition.description),
         type: OptionType.SELECT,
         get options() {
             return [
-                { value: "above", label: t("plugin.musicControls.option.LyricsPosition.above"), },
-                { value: "below", label: t("plugin.musicControls.option.LyricsPosition.below"), default: true },
+                { value: "above", label: t(plugin.musicControls.option.LyricsPosition.above), },
+                { value: "below", label: t(plugin.musicControls.option.LyricsPosition.below), default: true },
             ];
         },
     },
     LyricsProvider: {
-        get label() {
-            return t("plugin.musicControls.option.LyricsProvider.label");
-        },
-        get description() {
-            return t("plugin.musicControls.option.LyricsProvider.description");
-        },
+        label: () => t(plugin.musicControls.option.LyricsProvider.label),
+        description: () => t(plugin.musicControls.option.LyricsProvider.description),
         type: OptionType.SELECT,
         get options() {
             return [
-                { value: Provider.Spotify, label: t("plugin.musicControls.option.LyricsProvider.spotify"), default: true },
-                { value: Provider.Lrclib, label: t("plugin.musicControls.option.LyricsProvider.LRCLIB") },
+                { value: Provider.Spotify, label: t(plugin.musicControls.option.LyricsProvider.spotify), default: true },
+                { value: Provider.Lrclib, label: t(plugin.musicControls.option.LyricsProvider.LRCLIB) },
             ];
         },
     },
     TranslateTo: {
-        get label() {
-            return t("plugin.musicControls.option.TranslateTo.label");
-        },
-        get description() {
-            return t("plugin.musicControls.option.TranslateTo.description");
-        },
+        label: () => t(plugin.musicControls.option.TranslateTo.label),
+        description: () => t(plugin.musicControls.option.TranslateTo.description),
         type: OptionType.SELECT,
         options: languages,
         onChange: async () => {
             await removeTranslations();
-            showToast(t("plugin.musicControls.option.TranslateTo.cleared"), Toasts.Type.SUCCESS);
+            showToast(t(plugin.musicControls.option.TranslateTo.cleared), Toasts.Type.SUCCESS);
         }
     },
     LyricsConversion: {
-        description: "Automatically translate or romanize lyrics",
+        label: () => t(plugin.musicControls.option.LyricsConversion.label),
+        description: () => t(plugin.musicControls.option.LyricsConversion.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { value: Provider.None, label: t("plugin.musicControls.option.LyricsConversion.none"), default: true },
-                { value: Provider.Translated, label: t("plugin.musicControls.option.LyricsConversion.translate") },
-                { value: Provider.Romanized, label: t("plugin.musicControls.option.LyricsConversion.romanize") },
-            ];
-        }
+        options: [
+            { value: Provider.None, label: () => t(plugin.musicControls.option.LyricsConversion.none), default: true },
+            { value: Provider.Translated, label: () => t(plugin.musicControls.option.LyricsConversion.translate) },
+            { value: Provider.Romanized, label: () => t(plugin.musicControls.option.LyricsConversion.romanize) },
+        ],
     },
     FallbackProvider: {
-        get label() {
-            return t("plugin.musicControls.option.FallbackProvider.label");
-        },
-        get description() {
-            return t("plugin.musicControls.option.FallbackProvider.description");
-        },
+        label: () => t(plugin.musicControls.option.FallbackProvider.label),
+        description: () => t(plugin.musicControls.option.FallbackProvider.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     ShowFailedToasts: {
-        get label() {
-            return t("plugin.musicControls.option.ShowFailedToasts.label");
-        },
-        get description() {
-            return t("plugin.musicControls.option.ShowFailedToasts.description");
-        },
+        label: () => t(plugin.musicControls.option.ShowFailedToasts.label),
+        description: () => t(plugin.musicControls.option.ShowFailedToasts.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
@@ -264,22 +203,18 @@ export const settings = definePluginSettings({
         ...sliderOptions
     },
     PurgeLyricsCache: {
-        get label() {
-            return t("plugin.musicControls.option.PurgeLyricsCache.label");
-        },
-        get description() {
-            return t("plugin.musicControls.option.PurgeLyricsCache.description");
-        },
+        label: () => t(plugin.musicControls.option.PurgeLyricsCache.label),
+        description: () => t(plugin.musicControls.option.PurgeLyricsCache.description),
         type: OptionType.COMPONENT,
         component: () => (
             <Button
                 variant="dangerPrimary"
                 onClick={() => {
                     clearLyricsCache();
-                    showToast(t("plugin.musicControls.option.PurgeLyricsCache.cacheLyricsPurged"), Toasts.Type.SUCCESS);
+                    showToast(t(plugin.musicControls.option.PurgeLyricsCache.cacheLyricsPurged), Toasts.Type.SUCCESS);
                 }}
             >
-                {t("plugin.musicControls.option.PurgeLyricsCache.button")}
+                {t(plugin.musicControls.option.PurgeLyricsCache.button)}
             </Button>
         ),
     },

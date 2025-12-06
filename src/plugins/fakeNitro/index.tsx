@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { addMessagePreEditListener, addMessagePreSendListener, removeMessagePreEditListener, removeMessagePreSendListener } from "@api/MessageEvents";
 import { definePluginSettings } from "@api/Settings";
 import { Paragraph } from "@components/Paragraph";
@@ -80,119 +80,75 @@ const hyperLinkRegex = /\[.+?\]\((https?:\/\/.+?)\)/;
 
 const settings = definePluginSettings({
     enableEmojiBypass: {
-        get label() {
-            return t("plugin.fakeNitro.option.enableEmojiBypass.label");
-        },
-        get description() {
-            return t("plugin.fakeNitro.option.enableEmojiBypass.description");
-        },
+        label: () => t(plugin.fakeNitro.option.enableEmojiBypass.label),
+        description: () => t(plugin.fakeNitro.option.enableEmojiBypass.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     emojiSize: {
-        get label() {
-            return t("plugin.fakeNitro.option.emojiSize.label");
-        },
-        get description() {
-            return t("plugin.fakeNitro.option.emojiSize.description");
-        },
+        label: () => t(plugin.fakeNitro.option.emojiSize.label),
+        description: () => t(plugin.fakeNitro.option.emojiSize.description),
         type: OptionType.SLIDER,
         default: 48,
         markers: [32, 48, 64, 96, 128, 160, 256, 512]
     },
     transformEmojis: {
-        get label() {
-            return t("plugin.fakeNitro.option.transformEmojis.label");
-        },
-        get description() {
-            return t("plugin.fakeNitro.option.transformEmojis.description");
-        },
+        label: () => t(plugin.fakeNitro.option.transformEmojis.label),
+        description: () => t(plugin.fakeNitro.option.transformEmojis.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     enableStickerBypass: {
-        get label() {
-            return t("plugin.fakeNitro.option.enableStickerBypass.label");
-        },
-        get description() {
-            return t("plugin.fakeNitro.option.enableStickerBypass.description");
-        },
+        label: () => t(plugin.fakeNitro.option.enableStickerBypass.label),
+        description: () => t(plugin.fakeNitro.option.enableStickerBypass.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     stickerSize: {
-        get label() {
-            return t("plugin.fakeNitro.option.stickerSize.label");
-        },
-        get description() {
-            return t("plugin.fakeNitro.option.stickerSize.description");
-        },
+        label: () => t(plugin.fakeNitro.option.stickerSize.label),
+        description: () => t(plugin.fakeNitro.option.stickerSize.description),
         type: OptionType.SLIDER,
         default: 160,
         markers: [32, 64, 128, 160, 256, 512]
     },
     transformStickers: {
-        get label() {
-            return t("plugin.fakeNitro.option.transformStickers.label");
-        },
-        get description() {
-            return t("plugin.fakeNitro.option.transformStickers.description");
-        },
+        label: () => t(plugin.fakeNitro.option.transformStickers.label),
+        description: () => t(plugin.fakeNitro.option.transformStickers.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     transformCompoundSentence: {
-        get label() {
-            return t("plugin.fakeNitro.option.transformCompoundSentence.label");
-        },
-        get description() {
-            return t("plugin.fakeNitro.option.transformCompoundSentence.description");
-        },
+        label: () => t(plugin.fakeNitro.option.transformCompoundSentence.label),
+        description: () => t(plugin.fakeNitro.option.transformCompoundSentence.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     enableStreamQualityBypass: {
-        get label() {
-            return t("plugin.fakeNitro.option.enableStreamQualityBypass.label");
-        },
-        get description() {
-            return t("plugin.fakeNitro.option.enableStreamQualityBypass.description");
-        },
+        label: () => t(plugin.fakeNitro.option.enableStreamQualityBypass.label),
+        description: () => t(plugin.fakeNitro.option.enableStreamQualityBypass.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
     },
     useHyperLinks: {
-        get label() {
-            return t("plugin.fakeNitro.option.useHyperLinks.label");
-        },
-        get description() {
-            return t("plugin.fakeNitro.option.useHyperLinks.description");
-        },
+        label: () => t(plugin.fakeNitro.option.useHyperLinks.label),
+        description: () => t(plugin.fakeNitro.option.useHyperLinks.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     hyperLinkText: {
-        get label() {
-            return t("plugin.fakeNitro.option.hyperLinkText.label");
-        },
-        get description() {
-            return t("plugin.fakeNitro.option.hyperLinkText.description");
-        },
+        label: () => t(plugin.fakeNitro.option.hyperLinkText.label),
+        description: () => t(plugin.fakeNitro.option.hyperLinkText.description),
         type: OptionType.STRING,
         default: "{{NAME}}"
     },
     disableEmbedPermissionCheck: {
-        get label() {
-            return t("plugin.fakeNitro.option.disableEmbedPermissionCheck.label");
-        },
-        get description() {
-            return t("plugin.fakeNitro.option.disableEmbedPermissionCheck.description");
-        },
+        label: () => t(plugin.fakeNitro.option.disableEmbedPermissionCheck.label),
+        description: () => t(plugin.fakeNitro.option.disableEmbedPermissionCheck.description),
         type: OptionType.BOOLEAN,
         default: false
     }
@@ -233,13 +189,8 @@ function makeBypassPatches(): Omit<Patch, "plugin"> {
 export default definePlugin({
     name: "FakeNitro",
     authors: [Devs.Arjix, Devs.D3SOX, Devs.Ven, Devs.fawn, Devs.captain, Devs.Nuckyz, Devs.AutumnVN, Devs.sadan],
-    description: "Allows you to send fake emojis/stickers, use nitro themes, and stream in nitro quality",
+    description: () => t(plugin.fakeNitro.description),
     dependencies: ["MessageEventsAPI"],
-
-    get displayDescription() {
-        return t("plugin.fakeNitro.description");
-    },
-
     settings,
 
     patches: [
@@ -751,12 +702,12 @@ export default definePlugin({
 
         switch (type) {
             case FakeNoticeType.Sticker: {
-                node.push(" " + t("plugin.fakeNitro.modal.sticker"));
+                node.push(" " + t(plugin.fakeNitro.modal.sticker));
 
                 return node;
             }
             case FakeNoticeType.Emoji: {
-                node.push(" " + t("plugin.fakeNitro.modal.emoji"));
+                node.push(" " + t(plugin.fakeNitro.modal.emoji));
 
                 return node;
             }
@@ -856,18 +807,18 @@ export default definePlugin({
         function cannotEmbedNotice() {
             return new Promise<boolean>(resolve => {
                 Alerts.show({
-                    title: t("plugin.fakeNitro.notice.alert.title"),
+                    title: t(plugin.fakeNitro.alert.notice.title),
                     body: <div>
                         <Paragraph>
-                            {t("plugin.fakeNitro.notice.alert.body")}
+                            {t(plugin.fakeNitro.alert.notice.body)}
                         </Paragraph>
                         <Paragraph>
-                            {t("plugin.fakeNitro.notice.alert.footer")}
+                            {t(plugin.fakeNitro.alert.notice.footer)}
                         </Paragraph>
                     </div>,
-                    confirmText: t("plugin.fakeNitro.notice.alert.confirm"),
-                    cancelText: t("plugin.fakeNitro.notice.alert.cancel"),
-                    secondaryConfirmText: t("plugin.fakeNitro.notice.alert.secondaryConfirm"),
+                    confirmText: t(plugin.fakeNitro.alert.notice.confirm),
+                    cancelText: t(plugin.fakeNitro.alert.notice.cancel),
+                    secondaryConfirmText: t(plugin.fakeNitro.alert.notice.secondaryConfirm),
                     onConfirm: () => resolve(true),
                     onCloseCallback: () => setImmediate(() => resolve(false)),
                     onConfirmSecondary() {
@@ -911,10 +862,10 @@ export default definePlugin({
                 if (sticker.format_type === StickerFormatType.APNG) {
                     if (!hasAttachmentPerms(channelId)) {
                         Alerts.show({
-                            title: t("plugin.fakeNitro.notice.apngSticker.title"),
+                            title: t(plugin.fakeNitro.alert.apngSticker.title),
                             body: <div>
                                 <Paragraph>
-                                    {t("plugin.fakeNitro.notice.apngSticker.body")}
+                                    {t(plugin.fakeNitro.alert.apngSticker.body)}
                                 </Paragraph>
                             </div>
                         });

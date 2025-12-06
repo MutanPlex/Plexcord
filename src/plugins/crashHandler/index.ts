@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
@@ -44,22 +44,14 @@ const { ModalStack, DraftManager } = proxyLazyWebpack(() => {
 
 const settings = definePluginSettings({
     attemptToPreventCrashes: {
-        get label() {
-            return t("plugin.crashHandler.option.attemptToPreventCrashes.label");
-        },
-        get description() {
-            return t("plugin.crashHandler.option.attemptToPreventCrashes.description");
-        },
+        label: () => t(plugin.crashHandler.option.attemptToPreventCrashes.label),
+        description: () => t(plugin.crashHandler.option.attemptToPreventCrashes.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     attemptToNavigateToHome: {
-        get label() {
-            return t("plugin.crashHandler.option.attemptToNavigateToHome.label");
-        },
-        get description() {
-            return t("plugin.crashHandler.option.attemptToNavigateToHome.description");
-        },
+        label: () => t(plugin.crashHandler.option.attemptToNavigateToHome.label),
+        description: () => t(plugin.crashHandler.option.attemptToNavigateToHome.description),
         type: OptionType.BOOLEAN,
         default: false
     }
@@ -71,14 +63,9 @@ let shouldAttemptRecover = true;
 
 export default definePlugin({
     name: "CrashHandler",
-    description: "Utility plugin for handling and possibly recovering from crashes without a restart",
+    description: () => t(plugin.crashHandler.description),
     authors: [Devs.Nuckyz],
     enabledByDefault: true,
-
-    get displayDescription() {
-        return t("plugin.crashHandler.description");
-    },
-
     settings,
 
     patches: [
@@ -106,8 +93,8 @@ export default definePlugin({
                     try {
                         showNotification({
                             color: "#eed202",
-                            title: t("plugin.crashHandler.toast.crashed.title"),
-                            body: t("plugin.crashHandler.toast.crashed.body"),
+                            title: t(plugin.crashHandler.toast.crashed.title),
+                            body: t(plugin.crashHandler.toast.crashed.body),
                             noPersist: true
                         });
                     } catch { }
@@ -123,7 +110,7 @@ export default definePlugin({
             try {
                 if (!hasCrashedOnce) {
                     hasCrashedOnce = true;
-                    maybePromptToUpdate(t("plugin.crashHandler.toast.crashed.update"), true);
+                    maybePromptToUpdate(t(plugin.crashHandler.toast.crashed.update), true);
                 }
             } catch { }
 
@@ -141,8 +128,8 @@ export default definePlugin({
         try {
             showNotification({
                 color: "#eed202",
-                title: t("plugin.crashHandler.toast.crashed.title"),
-                body: t("plugin.crashHandler.toast.crashed.recover"),
+                title: t(plugin.crashHandler.toast.crashed.title),
+                body: t(plugin.crashHandler.toast.crashed.recover),
                 noPersist: true
             });
         } catch { }

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugins, t } from "@api/i18n";
 import { PluginOptionString } from "@utils/types";
 import { React, TextInput, useState } from "@webpack/common";
 
@@ -42,7 +42,7 @@ export function TextSetting({ option, pluginSettings, definedSettings, id, onCha
         <SettingsSection name={id} description={option.description} label={option.label} error={error}>
             <TextInput
                 type="text"
-                placeholder={option.placeholder ?? t("plugins.placeholder.text")}
+                placeholder={(option.placeholder ? (typeof option.placeholder === "function" ? option.placeholder() : option.placeholder) : undefined) ?? t(plugins.placeholder.text)}
                 value={state}
                 onChange={handleChange}
                 maxLength={null}

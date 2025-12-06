@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
 import { useAuthorizationStore } from "@plugins/decor/lib/stores/AuthorizationStore";
@@ -47,14 +47,14 @@ export default function DecorSection({ hideTitle = false, hideDivider = false, n
                 variant="primary"
                 size="small"
             >
-                {t("plugin.decor.button.change")}
+                {t(plugin.decor.button.change)}
             </Button>
             {selectedDecoration && authorization.isAuthorized() && <Button
                 onClick={() => selectDecoration(null)}
                 variant="secondary"
                 size={"small"}
             >
-                {t("plugin.decor.button.remove")}
+                {t(plugin.decor.button.remove)}
             </Button>}
         </Flex>
     </CustomizationSection>;

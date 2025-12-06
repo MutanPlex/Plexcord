@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { cloud, t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { PlainSettings, Settings } from "@api/Settings";
 import { Logger } from "@utils/Logger";
@@ -36,8 +36,8 @@ export async function putCloudSettings(manual?: boolean) {
         if (!res.ok) {
             logger.error(`Failed to sync up, API returned ${res.status}`);
             showNotification({
-                title: t("cloud.settings"),
-                body: t("cloud.error.api.returned.to", { status: res.status }),
+                title: t(cloud.settings),
+                body: t(cloud.error.api.returned.to, { status: res.status }),
                 color: "var(--red-360)"
             });
             return;
@@ -51,16 +51,16 @@ export async function putCloudSettings(manual?: boolean) {
 
         if (manual) {
             showNotification({
-                title: t("cloud.settings"),
-                body: t("cloud.successful"),
+                title: t(cloud.settings),
+                body: t(cloud.successful),
                 noPersist: true,
             });
         }
     } catch (e: any) {
         logger.error("Failed to sync up", e);
         showNotification({
-            title: t("cloud.settings"),
-            body: t("cloud.error.synchronize.to", { error: String(e) }),
+            title: t(cloud.settings),
+            body: t(cloud.error.synchronize.to, { error: String(e) }),
             color: "var(--red-360)"
         });
     }
@@ -82,8 +82,8 @@ export async function getCloudSettings(shouldNotify = true, force = false) {
         if (res.status === 401) {
             // User switched to an account that isn't connected to cloud
             showNotification({
-                title: t("cloud.settings"),
-                body: t("cloud.error.connect"),
+                title: t(cloud.settings),
+                body: t(cloud.error.connect),
                 color: "var(--yellow-360)",
                 onClick: () => SettingsRouter.open("PlexcordCloud")
             });
@@ -96,8 +96,8 @@ export async function getCloudSettings(shouldNotify = true, force = false) {
             logger.info("No settings on the cloud");
             if (shouldNotify)
                 showNotification({
-                    title: t("cloud.settings"),
-                    body: t("cloud.error.noSettings"),
+                    title: t(cloud.settings),
+                    body: t(cloud.error.noSettings),
                     noPersist: true
                 });
             return false;
@@ -107,8 +107,8 @@ export async function getCloudSettings(shouldNotify = true, force = false) {
             logger.info("Settings up to date");
             if (shouldNotify)
                 showNotification({
-                    title: t("cloud.settings"),
-                    body: t("cloud.error.uptodate"),
+                    title: t(cloud.settings),
+                    body: t(cloud.error.uptodate),
                     noPersist: true
                 });
             return false;
@@ -117,8 +117,8 @@ export async function getCloudSettings(shouldNotify = true, force = false) {
         if (!res.ok) {
             logger.error(`Failed to sync down, API returned ${res.status}`);
             showNotification({
-                title: t("cloud.settings"),
-                body: t("cloud.error.api.returned.from", { status: res.status }),
+                title: t(cloud.settings),
+                body: t(cloud.error.api.returned.from, { status: res.status }),
                 color: "var(--red-360)"
             });
             return false;
@@ -131,8 +131,8 @@ export async function getCloudSettings(shouldNotify = true, force = false) {
         if (!force && written < localWritten) {
             if (shouldNotify)
                 showNotification({
-                    title: t("cloud.settings"),
-                    body: t("cloud.error.localNewer"),
+                    title: t(cloud.settings),
+                    body: t(cloud.error.localNewer),
                     noPersist: true,
                 });
             return;
@@ -150,8 +150,8 @@ export async function getCloudSettings(shouldNotify = true, force = false) {
         logger.info("Settings loaded from cloud successfully");
         if (shouldNotify)
             showNotification({
-                title: t("cloud.settings"),
-                body: t("cloud.updated"),
+                title: t(cloud.settings),
+                body: t(cloud.updated),
                 color: "var(--green-360)",
                 onClick: IS_WEB ? () => location.reload() : relaunch,
                 noPersist: true
@@ -161,8 +161,8 @@ export async function getCloudSettings(shouldNotify = true, force = false) {
     } catch (e: any) {
         logger.error("Failed to sync down", e);
         showNotification({
-            title: t("cloud.settings"),
-            body: t("cloud.error.synchronize.from", { error: String(e) }),
+            title: t(cloud.settings),
+            body: t(cloud.error.synchronize.from, { error: String(e) }),
             color: "var(--red-360)"
         });
 
@@ -182,8 +182,8 @@ export async function deleteCloudSettings() {
         if (!res.ok) {
             logger.error(`Failed to delete, API returned ${res.status}`);
             showNotification({
-                title: t("cloud.settings"),
-                body: t("cloud.error.api.returned.delete", { status: res.status }),
+                title: t(cloud.settings),
+                body: t(cloud.error.api.returned.delete, { status: res.status }),
                 color: "var(--red-360)"
             });
             return;
@@ -191,15 +191,15 @@ export async function deleteCloudSettings() {
 
         logger.info("Settings deleted from cloud successfully");
         showNotification({
-            title: t("cloud.settings"),
-            body: t("cloud.deleted"),
+            title: t(cloud.settings),
+            body: t(cloud.deleted),
             color: "var(--green-360)"
         });
     } catch (e: any) {
         logger.error("Failed to delete", e);
         showNotification({
-            title: t("cloud.settings"),
-            body: t("cloud.error.delete", { error: String(e) }),
+            title: t(cloud.settings),
+            body: t(cloud.error.delete, { error: String(e) }),
             color: "var(--red-360)"
         });
     }
@@ -216,8 +216,8 @@ export async function eraseAllCloudData() {
     if (!res.ok) {
         logger.error(`Failed to erase data, API returned ${res.status}`);
         showNotification({
-            title: t("cloud.notifications.title"),
-            body: t("cloud.notifications.erase.failed", { status: res.status }),
+            title: t(cloud.notification.title),
+            body: t(cloud.notification.erase.failed, { status: res.status }),
             color: "var(--red-360)"
         });
         return;
@@ -227,8 +227,8 @@ export async function eraseAllCloudData() {
     await deauthorizeCloud();
 
     showNotification({
-        title: t("cloud.notifications.title"),
-        body: t("cloud.notifications.erase.successful"),
+        title: t(cloud.notification.title),
+        body: t(cloud.notification.erase.successful),
         color: "var(--green-360)"
     });
 }

@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t, tJsx } from "@api/i18n";
+import { csp, plugins, t, themes } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
 import { ErrorCard } from "@components/ErrorCard";
@@ -32,7 +32,7 @@ export function CspErrorCard() {
     const allowUrl = async (url: string) => {
         const { origin: baseUrl, host } = new URL(url);
 
-        const result = await PlexcordNative.csp.requestAddOverride(baseUrl, ["connect-src", "img-src", "style-src", "font-src"], "Plexcord " + t("themes.title"));
+        const result = await PlexcordNative.csp.requestAddOverride(baseUrl, ["connect-src", "img-src", "style-src", "font-src"], "Plexcord " + t(themes.title));
         if (result !== "ok") return;
 
         CspBlockedUrls.forEach(url => {
@@ -44,10 +44,10 @@ export function CspErrorCard() {
         forceUpdate();
 
         Alerts.show({
-            title: t("plugins.restart.required"),
-            body: t("csp.restart"),
-            confirmText: t("plugins.restart.button.now"),
-            cancelText: t("plugins.restart.button.later"),
+            title: t(plugins.restart.required),
+            body: t(csp.restart),
+            confirmText: t(plugins.restart.button.now),
+            cancelText: t(plugins.restart.button.later),
             onConfirm: relaunch
         });
     };
@@ -56,16 +56,16 @@ export function CspErrorCard() {
 
     return (
         <ErrorCard className={Margins.bottom16}>
-            <HeadingTertiary>{t("csp.blocked.resources")}</HeadingTertiary>
-            <Paragraph>{t("csp.blocked.disallowed")}</Paragraph>
-            <Paragraph>{t("csp.blocked.recommended")}</Paragraph>
+            <HeadingTertiary>{t(csp.blocked.resources)}</HeadingTertiary>
+            <Paragraph>{t(csp.blocked.disallowed)}</Paragraph>
+            <Paragraph>{t(csp.blocked.recommended)}</Paragraph>
             <Paragraph>
-                {tJsx("csp.blocked.afterAllow", {
+                {t(csp.blocked.afterAllow, {
                     platform: IS_DISCORD_DESKTOP ? "Discord" : "Plextron"
                 })}
             </Paragraph>
 
-            <HeadingTertiary className={classes(Margins.top16, Margins.bottom8)}>{t("csp.blocked.url")}</HeadingTertiary>
+            <HeadingTertiary className={classes(Margins.top16, Margins.bottom8)}>{t(csp.blocked.url)}</HeadingTertiary>
             <div className="pc-settings-csp-list">
                 {errors.map((url, i) => (
                     <div key={url}>
@@ -73,7 +73,7 @@ export function CspErrorCard() {
                         <div className="pc-settings-csp-row">
                             <Link href={url}>{url}</Link>
                             <Button variant="primary" onClick={() => allowUrl(url)} disabled={isImgurHtmlDomain(url)}>
-                                {t("csp.blocked.allow")}
+                                {t(csp.blocked.allow)}
                             </Button>
                         </div>
                     </div>
@@ -84,9 +84,9 @@ export function CspErrorCard() {
                 <>
                     <Divider className={classes(Margins.top8, Margins.bottom16)} />
                     <Paragraph>
-                        {tJsx("csp.imgur.direct", { etc: <code>https://i.imgur.com/...</code> })}
+                        {t(csp.imgur.direct, { etc: <code>https://i.imgur.com/...</code> })}
                     </Paragraph>
-                    <Paragraph>{t("csp.imgur.copy")}</Paragraph>
+                    <Paragraph>{t(csp.imgur.copy)}</Paragraph>
                 </>
             )}
         </ErrorCard>

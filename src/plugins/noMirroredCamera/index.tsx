@@ -5,18 +5,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "NoMirroredCamera",
-    description: "Prevents the camera from being mirrored on your screen",
+    description: () => t(plugin.noMirroredCamera.description),
     authors: [Devs.nyx, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.noMirroredCamera.description");
-    },
 
     patches: [
         // When focused on voice channel or group chat voice call

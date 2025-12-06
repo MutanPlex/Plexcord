@@ -5,18 +5,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "AmITyping",
-    description: "Shows you if other people can see you typing.",
+    description: () => t(plugin.amITyping.description),
     authors: [PcDevs.MutanPlex, PcDevs.MrDiamond],
-
-    get displayDescription() {
-        return t("plugin.amITyping.description");
-    },
 
     patches: [
         {

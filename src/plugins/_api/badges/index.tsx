@@ -20,7 +20,7 @@
 import "./fixDiscordBadgePadding.css";
 
 import { _getBadges, BadgePosition, BadgeUserArgs, ProfileBadge } from "@api/Badges";
-import { t } from "@api/i18n";
+import { plugins, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
@@ -41,18 +41,14 @@ import { ContextMenuApi, Menu, Toasts, UserStore } from "@webpack/common";
 const CONTRIBUTOR_BADGE = "https://cdn.discordapp.com/emojis/1092089799109775453.png?size=64";
 const PLEXCORD_BADGE = "https://cdn.discordapp.com/emojis/1357527217332031508.webp?size=64";
 const ContributorBadge: ProfileBadge = {
-    get description() {
-        return t("plugins.metadata.badges.contributor.vencord");
-    },
+    description: () => t(plugins.metadata.badges.contributor.vencord),
     iconSrc: CONTRIBUTOR_BADGE,
     position: BadgePosition.START,
     shouldShow: ({ userId }) => shouldShowContributorBadge(userId),
     onClick: (_, { userId }) => openContributorModal(UserStore.getUser(userId))
 };
 const PlexcordBadge: ProfileBadge = {
-    get description() {
-        return t("plugins.metadata.badges.contributor.plexcord");
-    },
+    description: () => t(plugins.metadata.badges.contributor.plexcord),
     iconSrc: PLEXCORD_BADGE,
     position: BadgePosition.START,
     shouldShow: ({ userId }) => shouldShowPcContributorBadge(userId),
@@ -86,19 +82,24 @@ function BadgeContextMenu({ badge }: { badge: ProfileBadge & BadgeUserArgs; }) {
         <Menu.Menu
             navId="pc-badge-context"
             onClose={ContextMenuApi.closeContextMenu}
-            aria-label={t("plugins.metadata.badges.context.title")}
+            aria-label={t(plugins.metadata.badges.context.title)}
         >
             {badge.description && (
                 <Menu.MenuItem
                     id="pc-badge-copy-name"
-                    label={t("plugins.metadata.badges.context.copy.name")}
-                    action={() => copyWithToast(badge.description!)}
+                    label={t(plugins.metadata.badges.context.copy.name)}
+                    action={() => {
+                        const description = typeof badge.description === "function"
+                            ? badge.description(badge)
+                            : badge.description;
+                        if (description) copyWithToast(description);
+                    }}
                 />
             )}
             {badge.iconSrc && (
                 <Menu.MenuItem
                     id="pc-badge-copy-link"
-                    label={t("plugins.metadata.badges.context.copy.link")}
+                    label={t(plugins.metadata.badges.context.copy.link)}
                     action={() => copyWithToast(badge.iconSrc!)}
                 />
             )}
@@ -119,7 +120,7 @@ export function openDonorModal(props: any) {
                 >
                     <Flex justifyContent="center" alignItems="center" style={{ gap: "0.5em" }}>
                         <Heart />
-                        {t("plugins.metadata.badges.modal.title")}
+                        {t(plugins.metadata.badges.modal.title)}
                     </Flex>
                 </Heading>
             </ModalHeader>
@@ -140,10 +141,10 @@ export function openDonorModal(props: any) {
                 </Flex>
                 <div style={{ padding: "1em" }}>
                     <Paragraph>
-                        {t("plugins.metadata.badges.modal.special")}
+                        {t(plugins.metadata.badges.modal.special)}
                     </Paragraph>
                     <Paragraph className={Margins.top20}>
-                        {t("plugins.metadata.badges.modal.description")}
+                        {t(plugins.metadata.badges.modal.description)}
                     </Paragraph>
                 </div>
             </ModalContent>
@@ -160,13 +161,9 @@ let intervalId: any;
 
 export default definePlugin({
     name: "BadgeAPI",
-    description: "API to add badges to users",
+    description: () => t(plugins.metadata.badges.description),
     authors: [Devs.Megu, Devs.Ven, Devs.TheSun, PcDevs.MutanPlex],
     required: true,
-
-    get displayDescription() {
-        return t("plugins.metadata.badges.description");
-    },
 
     patches: [
         {
@@ -208,18 +205,16 @@ export default definePlugin({
         return DonorBadges;
     },
 
-    get toolboxActions() {
-        return {
-            [t("plugins.metadata.badges.context.refetch.button")]: async function () {
-                await loadBadges(true);
-                Toasts.show({
-                    id: Toasts.genId(),
-                    message: t("plugins.metadata.badges.context.refetch.success"),
-                    type: Toasts.Type.SUCCESS
-                });
-            }
-        };
-    },
+    toolboxActions: () => ({
+        [t(plugins.metadata.badges.context.refetch.button)]: async function () {
+            await loadBadges(true);
+            Toasts.show({
+                id: Toasts.genId(),
+                message: t(plugins.metadata.badges.context.refetch.success),
+                type: Toasts.Type.SUCCESS
+            });
+        }
+    }),
 
     userProfileBadge: ContributorBadge,
     userProfileContributorBadge: PlexcordBadge,
@@ -277,8 +272,8 @@ export default definePlugin({
                     transform: "scale(0.9)" // The image is a bit too big compared to default badges
                 }
             },
-            onContextMenu(event, badge) {
-                ContextMenuApi.openContextMenu(event, () => <BadgeContextMenu badge={badge} />);
+            onContextMenu(event, badgeProps) {
+                ContextMenuApi.openContextMenu(event, () => <BadgeContextMenu badge={badgeProps} />);
             },
             onClick() {
                 const modalKey = openModal(props => (

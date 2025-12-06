@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Embed } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
@@ -16,12 +16,8 @@ interface ToggleableDescriptionProps { embed: Embed, original: () => any; }
 
 export default definePlugin({
     name: "YoutubeDescription",
-    description: "Adds descriptions to youtube video embeds",
+    description: () => t(plugin.youtubeDescription.description),
     authors: [Devs.arHSM, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.youtubeDescription.description");
-    },
 
     patches: [
         {

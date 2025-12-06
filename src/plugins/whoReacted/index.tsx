@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { CustomEmoji, Message, ReactionEmoji, User } from "@plexcord/discord-types";
@@ -80,12 +80,8 @@ function handleClickAvatar(event: React.UIEvent<HTMLElement, Event>) {
 
 const settings = definePluginSettings({
     avatarClick: {
-        get label() {
-            return t("plugin.whoReacted.option.avatarClick.label");
-        },
-        get description() {
-            return t("plugin.whoReacted.option.avatarClick.description");
-        },
+        label: () => t(plugin.whoReacted.option.avatarClick.label),
+        description: () => t(plugin.whoReacted.option.avatarClick.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
@@ -94,13 +90,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "WhoReacted",
-    description: "Renders the avatars of users who reacted to a message",
+    description: () => t(plugin.whoReacted.description),
     authors: [Devs.Ven, Devs.KannaDev, Devs.newwares],
     settings,
-
-    get displayDescription() {
-        return t("plugin.whoReacted.description");
-    },
 
     patches: [
         {

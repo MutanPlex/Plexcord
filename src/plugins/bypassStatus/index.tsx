@@ -7,7 +7,7 @@
 
 import { playAudio } from "@api/AudioPlayer";
 import { type NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Notifications } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
 import type { Message } from "@plexcord/discord-types";
@@ -79,7 +79,7 @@ function ContextCallback(name: "guild" | "user" | "channel"): NavContextMenuPatc
             <Menu.MenuGroup>
                 <Menu.MenuItem
                     id={`status-${name}-bypass`}
-                    label={`${enabled ? t("plugin.bypassStatus.context.remove") : t("plugin.bypassStatus.context.add")}`}
+                    label={`${enabled ? t(plugin.bypassStatus.context.remove) : t(plugin.bypassStatus.context.add)}`}
                     icon={() => Icon(enabled)}
                     action={() => {
                         let bypasses: string[] = settings.store[`${name}s`].split(", ");
@@ -95,107 +95,71 @@ function ContextCallback(name: "guild" | "user" | "channel"): NavContextMenuPatc
 
 const settings = definePluginSettings({
     guilds: {
-        get label() {
-            return t("plugin.bypassStatus.option.guilds.label");
-        },
-        get description() {
-            return t("plugin.bypassStatus.option.guilds.description");
-        },
+        label: () => t(plugin.bypassStatus.option.guilds.label),
+        description: () => t(plugin.bypassStatus.option.guilds.description),
         type: OptionType.STRING,
         default: "",
-        get placeholder() {
-            return t("plugin.bypassStatus.option.guilds.placeholder");
-        },
+        placeholder: () => t(plugin.bypassStatus.option.guilds.placeholder),
         onChange: value => settings.store.guilds = processIds(value)
     },
     channels: {
-        get label() {
-            return t("plugin.bypassStatus.option.channels.label");
-        },
-        get description() {
-            return t("plugin.bypassStatus.option.channels.description");
-        },
+        label: () => t(plugin.bypassStatus.option.channels.label),
+        description: () => t(plugin.bypassStatus.option.channels.description),
         type: OptionType.STRING,
         default: "",
-        get placeholder() {
-            return t("plugin.bypassStatus.option.channels.placeholder");
-        },
+        placeholder: () => t(plugin.bypassStatus.option.channels.placeholder),
         onChange: value => settings.store.channels = processIds(value)
     },
     users: {
-        get label() {
-            return t("plugin.bypassStatus.option.users.label");
-        },
-        get description() {
-            return t("plugin.bypassStatus.option.users.description");
-        },
+        label: () => t(plugin.bypassStatus.option.users.label),
+        description: () => t(plugin.bypassStatus.option.users.description),
         type: OptionType.STRING,
         default: "",
-        get placeholder() {
-            return t("plugin.bypassStatus.option.users.placeholder");
-        },
+        placeholder: () => t(plugin.bypassStatus.option.users.placeholder),
         onChange: value => settings.store.users = processIds(value)
     },
     allowOutsideOfDms: {
-        get label() {
-            return t("plugin.bypassStatus.option.allowOutsideOfDms.label");
-        },
-        get description() {
-            return t("plugin.bypassStatus.option.allowOutsideOfDms.description");
-        },
+        label: () => t(plugin.bypassStatus.option.allowOutsideOfDms.label),
+        description: () => t(plugin.bypassStatus.option.allowOutsideOfDms.description),
         type: OptionType.BOOLEAN,
     },
     notificationSound: {
-        get label() {
-            return t("plugin.bypassStatus.option.notificationSound.label");
-        },
-        get description() {
-            return t("plugin.bypassStatus.option.notificationSound.description");
-        },
+        label: () => t(plugin.bypassStatus.option.notificationSound.label),
+        description: () => t(plugin.bypassStatus.option.notificationSound.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
     statusToUse: {
-        get label() {
-            return t("plugin.bypassStatus.option.statusToUse.label");
-        },
-        get description() {
-            return t("plugin.bypassStatus.option.statusToUse.description");
-        },
+        label: () => t(plugin.bypassStatus.option.statusToUse.label),
+        description: () => t(plugin.bypassStatus.option.statusToUse.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.bypassStatus.option.statusToUse.online"),
-                    value: "online",
-                },
-                {
-                    label: t("plugin.bypassStatus.option.statusToUse.idle"),
-                    value: "idle",
-                },
-                {
-                    label: t("plugin.bypassStatus.option.statusToUse.dnd"),
-                    value: "dnd",
-                    default: true
-                },
-                {
-                    label: t("plugin.bypassStatus.option.statusToUse.invisible"),
-                    value: "invisible",
-                }
-            ];
-        }
+        options: [
+            {
+                label: () => t(plugin.bypassStatus.option.statusToUse.online),
+                value: "online",
+            },
+            {
+                label: () => t(plugin.bypassStatus.option.statusToUse.idle),
+                value: "idle",
+            },
+            {
+                label: () => t(plugin.bypassStatus.option.statusToUse.dnd),
+                value: "dnd",
+                default: true
+            },
+            {
+                label: () => t(plugin.bypassStatus.option.statusToUse.invisible),
+                value: "invisible",
+            }
+        ]
     }
 });
 
 export default definePlugin({
     name: "BypassStatus",
-    description: "Still get notifications from specific sources when in do not disturb mode. Right-click on users/channels/guilds to set them to bypass do not disturb mode.",
+    description: () => t(plugin.bypassStatus.description),
     authors: [Devs.Inbestigator],
     dependencies: ["AudioPlayerAPI"],
-
-    get displayDescription() {
-        return t("plugin.bypassStatus.description");
-    },
 
     flux: {
         async MESSAGE_CREATE({ message, guildId, channelId }: IMessageCreate): Promise<void> {

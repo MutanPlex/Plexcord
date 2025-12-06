@@ -7,7 +7,7 @@
 
 import type { Channel, Message, Permissions, User } from "@plexcord/discord-types";
 
-import { tags } from "./consts";
+import { getTags } from "./consts";
 
 export type ITag = {
     // name used for identifying, must be alphanumeric + underscores
@@ -29,5 +29,5 @@ export interface TagSetting {
 }
 
 export type TagSettings = {
-    [k in typeof tags.values[number]["name"]]: TagSetting;
+    [k in ReturnType<typeof getTags>[number]["name"]]: TagSetting;
 };

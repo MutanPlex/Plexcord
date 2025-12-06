@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Message } from "@plexcord/discord-types";
 import { Parser, useEffect, useState } from "@webpack/common";
 
@@ -36,7 +36,7 @@ function Dismiss({ onDismiss }: { onDismiss: () => void; }) {
             onClick={onDismiss}
             className={cl("dismiss")}
         >
-            {t("plugin.translate.modal.dismiss")}
+            {t(plugin.translate.modal.dismiss)}
         </button>
     );
 }
@@ -60,7 +60,7 @@ export function TranslationAccessory({ message }: { message: Message; }) {
             <TranslateIcon width={16} height={16} className={cl("accessory-icon")} />
             {Parser.parse(translation.text)}
             <br />
-            ({t("plugin.translate.modal.translated", { from: translation.sourceLanguage })} - <Dismiss onDismiss={() => setTranslation(undefined)} />)
+            ({t(plugin.translate.modal.translated, { from: translation.sourceLanguage })} - <Dismiss onDismiss={() => setTranslation(undefined)} />)
         </span>
     );
 }

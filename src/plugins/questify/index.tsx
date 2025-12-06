@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { addServerListElement, removeServerListElement, ServerListRenderPosition } from "@api/ServerList";
 import { ErrorBoundary } from "@components/index";
 import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
@@ -93,23 +93,23 @@ export function QuestButton(): JSX.Element {
                 <Menu.Menu
                     navId={q("quest-button-context-menu")}
                     onClose={ContextMenuApi.closeContextMenu}
-                    aria-label={t("plugin.questify.context.quest.label")}
+                    aria-label={t(plugin.questify.context.quest.label)}
                 >
                     <Menu.MenuItem
                         id={q("ignore-quests-option")}
-                        label={t("plugin.questify.context.quest.ignore")}
+                        label={t(plugin.questify.context.quest.ignore)}
                         action={questMenuIgnoreAllClicked}
                         disabled={!unclaimedUnignoredQuests}
                     />
                     <Menu.MenuItem
                         id={q("unignore-quests-option")}
-                        label={t("plugin.questify.context.quest.reset")}
+                        label={t(plugin.questify.context.quest.reset)}
                         action={questMenuUnignoreAllClicked}
                         disabled={!getIgnoredQuestIDs().length}
                     />
                     <Menu.MenuItem
                         id={q("fetch-quests-option")}
-                        label={t("plugin.questify.context.quest.fetch")}
+                        label={t(plugin.questify.context.quest.fetch)}
                         action={() => fetchAndAlertQuests("Questify-ManualFetch", QuestifyLogger)}
                     />
                 </Menu.Menu>
@@ -129,7 +129,7 @@ export function QuestButton(): JSX.Element {
             id={q("quest-button")}
             className={q("quest-button")}
             icon={QuestIcon(26, 26)}
-            tooltip={t("plugin.questify.quests")}
+            tooltip={t(plugin.questify.quests)}
             showPill={true}
             isVisible={showQuestsButton(questButtonDisplay, unclaimedUnignoredQuests, onQuestsPage)}
             isSelected={onQuestsPage}
@@ -246,20 +246,20 @@ function QuestTileContextMenu(children: React.ReactNode[], props: { quest: any; 
         <Menu.MenuGroup>
             <Menu.MenuItem
                 id={q("ignore-quests")}
-                label={t("plugin.questify.context.quest.markAsIgnored")}
+                label={t(plugin.questify.context.quest.markAsIgnored)}
                 disabled={shouldDisableQuestTileOptions(props.quest, false)}
                 action={() => { addIgnoredQuest(props.quest.id); }}
             />
             <Menu.MenuItem
                 id={q("unignore-quests")}
-                label={t("plugin.questify.context.quest.unmarkAsIgnored")}
+                label={t(plugin.questify.context.quest.unmarkAsIgnored)}
                 disabled={shouldDisableQuestTileOptions(props.quest, true)}
                 action={() => { removeIgnoredQuest(props.quest.id); }}
             />
             {activeQuestIntervals.has(props.quest.id) &&
                 <Menu.MenuItem
                     id={q("stop-auto-complete")}
-                    label={t("plugin.questify.context.quest.stopAuto")}
+                    label={t(plugin.questify.context.quest.stopAuto)}
                     action={() => {
                         const interval = activeQuestIntervals.get(props.quest.id);
 
@@ -772,9 +772,9 @@ function getQuestAcceptedButtonText(quest: Quest): string | null {
 
     if (questEnrolledAt && ((playType && completeGameQuestsInBackground) || (watchType && completeVideoQuestsInBackground))) {
         if (!!intervalData) {
-            return timeRemaining ? t("plugin.questify.button.questInProgressWithTime", { remainTime: progressFormatted }) : t("plugin.questify.button.completing");
+            return timeRemaining ? t(plugin.questify.button.questInProgressWithTime, { remainTime: progressFormatted }) : t(plugin.questify.button.completing);
         } else if (watchType || (playType && IS_DISCORD_DESKTOP)) {
-            return t("plugin.questify.button.resume", { remainTime: progressFormatted });
+            return t(plugin.questify.button.resume, { remainTime: progressFormatted });
         }
     }
 
@@ -870,15 +870,11 @@ function getQuestAcceptedButtonProps(quest: Quest, text: string) {
 
 export default definePlugin({
     name: "Questify",
-    description: "Enhance your Quest experience with a suite of features, or disable them entirely if they're not your thing.",
+    description: () => t(plugin.questify.description),
     authors: [PcDevs.Etorix],
     dependencies: ["AudioPlayerAPI", "ServerListAPI"],
     startAt: StartAt.Init, // Needed in order to beat Read All Messages to inserting above the server list.
     settings,
-
-    get displayDescription() {
-        return t("plugin.questify.description");
-    },
 
     sortQuests,
     formatLowerBadge,

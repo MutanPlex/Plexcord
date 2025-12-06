@@ -5,18 +5,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "DisableCameras",
-    description: "Disables cameras in a call by default",
+    description: () => t(plugin.disableCameras.description),
     authors: [Devs.Joona],
-
-    get displayDescription() {
-        return t("plugin.disableCameras.description");
-    },
 
     patches: [
         {

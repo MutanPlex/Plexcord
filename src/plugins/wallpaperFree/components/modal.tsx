@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { ModalContent, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
@@ -24,12 +24,12 @@ export function SetWallpaperModal({ props, onSelect, initialUrl }: Props) {
         <ModalRoot {...props} size={ModalSize.SMALL}>
             <ModalHeader>
                 <BaseText size="lg" weight="normal" style={{ marginBottom: 8 }}>
-                    {t("plugin.wallpaperFree.modal.set")}
+                    {t(plugin.wallpaperFree.modal.set)}
                 </BaseText>
             </ModalHeader>
             <ModalContent>
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                    <BaseText>{t("plugin.wallpaperFree.modal.image")}</BaseText>
+                    <BaseText>{t(plugin.wallpaperFree.modal.image)}</BaseText>
                     <TextInput
                         value={url}
                         onChange={u => {
@@ -51,7 +51,7 @@ export function SetWallpaperModal({ props, onSelect, initialUrl }: Props) {
                         />
                     )}
                     <div style={{ display: "flex", justifyContent: "flex-end", gap: 8 }}>
-                        <Button onClick={props.onClose}>{t("plugin.wallpaperFree.modal.cancel")}</Button>
+                        <Button onClick={props.onClose}>{t(plugin.wallpaperFree.modal.cancel)}</Button>
                         <Button
                             variant="secondary"
                             onClick={() => {
@@ -59,7 +59,7 @@ export function SetWallpaperModal({ props, onSelect, initialUrl }: Props) {
                                 props.onClose();
                             }}
                             disabled={!url}
-                        >{t("plugin.wallpaperFree.modal.apply")}</Button>
+                        >{t(plugin.wallpaperFree.modal.apply)}</Button>
                     </div>
                 </div>
             </ModalContent>

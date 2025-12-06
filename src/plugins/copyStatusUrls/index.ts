@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { User } from "@plexcord/discord-types";
 import { copyToClipboard } from "@utils/clipboard";
 import { Devs } from "@utils/constants";
@@ -24,12 +24,8 @@ const getMetadataFromApi: (activity: any, userId: string) => Promise<any> = find
 
 export default definePlugin({
     name: "CopyStatusUrls",
-    description: "Copy the users status url when you right-click it",
+    description: () => t(plugin.copyStatusUrls.description),
     authors: [Devs.sadan],
-
-    get displayDescription() {
-        return t("plugin.copyStatusUrls.description");
-    },
 
     patches: [
         {
@@ -51,7 +47,7 @@ export default definePlugin({
                 copyToClipboard(button_urls[index]);
                 Toasts.show({
                     id: Toasts.genId(),
-                    message: t("plugin.copyStatusUrls.toast.copied"),
+                    message: t(plugin.copyStatusUrls.toast.copied),
                     type: Toasts.Type.SUCCESS,
                     options: {
                         position: Toasts.Position.TOP
@@ -61,7 +57,7 @@ export default definePlugin({
                 console.error(e);
                 Toasts.show({
                     id: Toasts.genId(),
-                    message: t("plugin.copyStatusUrls.toast.error"),
+                    message: t(plugin.copyStatusUrls.toast.error),
                     type: Toasts.Type.FAILURE,
                     options: {
                         position: Toasts.Position.TOP

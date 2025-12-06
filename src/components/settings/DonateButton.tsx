@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { settings, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Heart } from "@components/Heart";
 
@@ -33,7 +33,7 @@ export default function DonateButton({
             className="pc-donate-button"
         >
             <Heart />
-            {t("settings.specialCards.donations.button")}
+            {t(settings.specialCards.donations.button)}
         </Button>
     );
 }

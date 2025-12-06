@@ -17,68 +17,44 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { OptionType } from "@utils/types";
 
 export default definePluginSettings({
     notices: {
-        get label() {
-            return t("plugin.relationshipNotifier.option.notices.label");
-        },
-        get description() {
-            return t("plugin.relationshipNotifier.option.notices.description");
-        },
+        label: () => t(plugin.relationshipNotifier.option.notices.label),
+        description: () => t(plugin.relationshipNotifier.option.notices.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     offlineRemovals: {
-        get label() {
-            return t("plugin.relationshipNotifier.option.offlineRemovals.label");
-        },
-        get description() {
-            return t("plugin.relationshipNotifier.option.offlineRemovals.description");
-        },
+        label: () => t(plugin.relationshipNotifier.option.offlineRemovals.label),
+        description: () => t(plugin.relationshipNotifier.option.offlineRemovals.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     friends: {
-        get label() {
-            return t("plugin.relationshipNotifier.option.friends.label");
-        },
-        get description() {
-            return t("plugin.relationshipNotifier.option.friends.description");
-        },
+        label: () => t(plugin.relationshipNotifier.option.friends.label),
+        description: () => t(plugin.relationshipNotifier.option.friends.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     friendRequestCancels: {
-        get label() {
-            return t("plugin.relationshipNotifier.option.friendRequestCancels.label");
-        },
-        get description() {
-            return t("plugin.relationshipNotifier.option.friendRequestCancels.description");
-        },
+        label: () => t(plugin.relationshipNotifier.option.friendRequestCancels.label),
+        description: () => t(plugin.relationshipNotifier.option.friendRequestCancels.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     servers: {
-        get label() {
-            return t("plugin.relationshipNotifier.option.servers.label");
-        },
-        get description() {
-            return t("plugin.relationshipNotifier.option.servers.description");
-        },
+        label: () => t(plugin.relationshipNotifier.option.servers.label),
+        description: () => t(plugin.relationshipNotifier.option.servers.description),
         type: OptionType.BOOLEAN,
         default: true
     },
     groups: {
-        get label() {
-            return t("plugin.relationshipNotifier.option.groups.label");
-        },
-        get description() {
-            return t("plugin.relationshipNotifier.option.groups.description");
-        },
+        label: () => t(plugin.relationshipNotifier.option.groups.label),
+        description: () => t(plugin.relationshipNotifier.option.groups.description),
         type: OptionType.BOOLEAN,
         default: true
     }

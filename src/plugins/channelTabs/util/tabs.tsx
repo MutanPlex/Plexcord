@@ -6,7 +6,7 @@
  */
 
 import * as DataStore from "@api/DataStore";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { classNameFactory } from "@api/Styles";
 import { NavigationRouter, SelectedChannelStore, SelectedGuildStore, showToast, Toasts, useEffect, useRef, useState } from "@webpack/common";
@@ -461,27 +461,27 @@ export function openStartupTabs(props: BasicChannelTabsProps & { userId: string;
     highestIdIndex = 0;
 
     if (settings.store.onStartup !== "nothing" && isPluginEnabled("KeepCurrentChannel"))
-        return showToast(t("plugin.channelTabs.toast.notRestoring"), Toasts.Type.FAILURE);
+        return showToast(t(plugin.channelTabs.toast.notRestoring), Toasts.Type.FAILURE);
 
     switch (settings.store.onStartup) {
         case "remember": {
             persistedTabs
                 .then(tabs => {
-                    const t = tabs?.[userId];
-                    if (!t) {
+                    const userTabs = tabs?.[userId];
+                    if (!userTabs) {
                         createTab({ channelId: props.channelId, guildId: props.guildId }, true);
-                        return showToast("Failed to restore tabs", Toasts.Type.FAILURE);
+                        return showToast(t(plugin.channelTabs.toast.failed.restore), Toasts.Type.FAILURE);
                     }
                     replaceArray(openTabs); // empty the array
-                    t.openTabs.forEach(tab => createTab(tab));
-                    currentlyOpenTab = openTabs[t.openTabIndex]?.id ?? 0;
+                    userTabs.openTabs.forEach(tab => createTab(tab));
+                    currentlyOpenTab = openTabs[userTabs.openTabIndex]?.id ?? 0;
 
                     setUserId(userId);
                     moveToTab(currentlyOpenTab);
                 })
                 .catch(error => {
                     logger.error("Failed to load persisted tabs from DataStore", error);
-                    showToast("Failed to load saved tabs", Toasts.Type.FAILURE);
+                    showToast(t(plugin.channelTabs.toast.failed.saved), Toasts.Type.FAILURE);
                     createTab({ channelId: props.channelId, guildId: props.guildId }, true);
                     setUserId(userId);
                 });

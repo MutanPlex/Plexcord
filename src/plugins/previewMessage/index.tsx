@@ -19,7 +19,7 @@
 
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
 import { generateId, sendBotMessage } from "@api/Commands";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { CloudUpload, MessageAttachment } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin, { IconComponent, StartAt } from "@utils/types";
@@ -104,7 +104,7 @@ const PreviewButton: ChatBarButtonFactory = ({ isMainChat, isEmpty, type: { atta
 
     return (
         <ChatBarButton
-            tooltip={t("plugin.previewMessage.tooltip")}
+            tooltip={t(plugin.previewMessage.tooltip)}
             onClick={async () =>
                 sendBotMessage(
                     channelId,
@@ -127,12 +127,8 @@ const PreviewButton: ChatBarButtonFactory = ({ isMainChat, isEmpty, type: { atta
 
 export default definePlugin({
     name: "PreviewMessage",
-    description: "Lets you preview your message before sending it.",
+    description: () => t(plugin.previewMessage.description),
     authors: [Devs.Aria],
-
-    get displayDescription() {
-        return t("plugin.previewMessage.description");
-    },
 
     // start early to ensure we're the first plugin to add our button
     // This makes the popping in less awkward

@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { getUserSettingLazy } from "@api/UserSettings";
 import { HeadingSecondary } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
@@ -55,37 +55,33 @@ async function autoStartStream() {
 
 function handleToggle() {
     settings.store.toolboxManagement = !settings.store.toolboxManagement;
-    showToast(`${t("plugin.instantScreenshare.toolbox.toast", { state: settings.store.toolboxManagement ? t("plugin.instantScreenshare.toolbox.enabled") : t("plugin.instantScreenshare.toolbox.disabled") })}`, Toasts.Type.SUCCESS);
+    showToast(`${t(plugin.instantScreenshare.toolbox.toast, { state: settings.store.toolboxManagement ? t(plugin.instantScreenshare.toolbox.enabled) : t(plugin.instantScreenshare.toolbox.disabled) })}`, Toasts.Type.SUCCESS);
 }
 
 export default definePlugin({
     name: "InstantScreenshare",
-    description: "Instantly screenshare when joining a voice channel with support for desktop sources, windows, and video input devices (cameras, capture cards)",
+    description: () => t(plugin.instantScreenshare.description),
     authors: [Devs.HAHALOSAH, Devs.thororen, PcDevs.mart],
     getCurrentMedia,
     settings,
 
-    get displayDescription() {
-        return t("plugin.instantScreenshare.description");
-    },
-
     settingsAboutComponent: () => (
         <>
-            <HeadingSecondary>{t("plugin.instantScreenshare.modal.linux.title")}</HeadingSecondary>
+            <HeadingSecondary>{t(plugin.instantScreenshare.modal.linux.title)}</HeadingSecondary>
             <Paragraph>
-                {t("plugin.instantScreenshare.modal.linux.body")}
+                {t(plugin.instantScreenshare.modal.linux.body)}
                 <br />
-                {t("plugin.instantScreenshare.modal.linux.bodyTwo")}
+                {t(plugin.instantScreenshare.modal.linux.bodyTwo)}
             </Paragraph>
             <br />
-            <HeadingSecondary>{t("plugin.instantScreenshare.modal.videoDevices.title")}</HeadingSecondary>
+            <HeadingSecondary>{t(plugin.instantScreenshare.modal.videoDevices.title)}</HeadingSecondary>
             <Paragraph>
-                {t("plugin.instantScreenshare.modal.videoDevices.body")}
+                {t(plugin.instantScreenshare.modal.videoDevices.body)}
             </Paragraph>
             <br />
-            <HeadingSecondary>{t("plugin.instantScreenshare.modal.regardingSound.title")}</HeadingSecondary>
+            <HeadingSecondary>{t(plugin.instantScreenshare.modal.regardingSound.title)}</HeadingSecondary>
             <Paragraph>
-                {t("plugin.instantScreenshare.modal.regardingSound.body")}
+                {t(plugin.instantScreenshare.modal.regardingSound.body)}
             </Paragraph>
         </>
     ),
@@ -112,9 +108,7 @@ export default definePlugin({
         }
     },
 
-    get toolboxActions() {
-        return {
-            [t("plugin.instantScreenshare.toolbox.label")]: (() => handleToggle())
-        };
-    }
+    toolboxActions: () => ({
+        [t(plugin.instantScreenshare.toolbox.label)]: (() => handleToggle())
+    })
 });

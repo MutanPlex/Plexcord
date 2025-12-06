@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { OptionType } from "@utils/types";
 
@@ -28,34 +28,24 @@ export const enum PronounsFormat {
 
 export const settings = definePluginSettings({
     pronounsFormat: {
-        get label() {
-            return t("plugin.userMessagesPronouns.option.pronounsFormat.label");
-        },
-        get description() {
-            return t("plugin.userMessagesPronouns.option.pronounsFormat.description");
-        },
+        label: () => t(plugin.userMessagesPronouns.option.pronounsFormat.label),
+        description: () => t(plugin.userMessagesPronouns.option.pronounsFormat.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                {
-                    label: t("plugin.userMessagesPronouns.option.pronounsFormat.lowercase"),
-                    value: PronounsFormat.Lowercase,
-                    default: true
-                },
-                {
-                    label: t("plugin.userMessagesPronouns.option.pronounsFormat.capitalized"),
-                    value: PronounsFormat.Capitalized
-                }
-            ];
-        }
+        options: [
+            {
+                label: () => t(plugin.userMessagesPronouns.option.pronounsFormat.lowercase),
+                value: PronounsFormat.Lowercase,
+                default: true
+            },
+            {
+                label: () => t(plugin.userMessagesPronouns.option.pronounsFormat.capitalized),
+                value: PronounsFormat.Capitalized
+            }
+        ]
     },
     showSelf: {
-        get label() {
-            return t("plugin.userMessagesPronouns.option.showSelf.label");
-        },
-        get description() {
-            return t("plugin.userMessagesPronouns.option.showSelf.description");
-        },
+        label: () => t(plugin.userMessagesPronouns.option.showSelf.label),
+        description: () => t(plugin.userMessagesPronouns.option.showSelf.description),
         type: OptionType.BOOLEAN,
         default: true
     }

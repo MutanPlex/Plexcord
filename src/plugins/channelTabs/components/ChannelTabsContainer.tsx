@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
@@ -351,7 +351,7 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
 
 export function ChannelTabsPreview(p: { setValue: (v: TabSet) => void; }) {
     const id = UserStore.getCurrentUser()?.id;
-    if (!id) return <Paragraph>{t("plugin.channelTabs.error.noLogin")}</Paragraph>;
+    if (!id) return <Paragraph>{t(plugin.channelTabs.error.noLogin)}</Paragraph>;
 
     const { setValue } = p;
     const { tabSet }: { tabSet: TabSet; } = settings.use(["tabSet"]);
@@ -361,7 +361,7 @@ export function ChannelTabsPreview(p: { setValue: (v: TabSet) => void; }) {
 
     return (
         <>
-            <Heading>{t("plugin.channelTabs.tabs.startup")}</Heading>
+            <Heading>{t(plugin.channelTabs.tabs.startup)}</Heading>
             <Flex flexDirection="row" style={{ gap: "2px" }}>
                 {currentTabs.map(t => <>
                     <PreviewTab {...t} />
@@ -373,7 +373,7 @@ export function ChannelTabsPreview(p: { setValue: (v: TabSet) => void; }) {
                         setCurrentTabs([...openedTabs]);
                         setValue({ ...tabSet, [id]: [...openedTabs] });
                     }}
-                >{t("plugin.channelTabs.tabs.startup")}</Button>
+                >{t(plugin.channelTabs.tabs.startup)}</Button>
             </Flex>
         </>
     );

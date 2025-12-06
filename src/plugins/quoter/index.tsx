@@ -6,7 +6,7 @@
  */
 
 import { findGroupChildrenByChildId } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
@@ -24,63 +24,41 @@ import { createQuoteImage, ensureFontLoaded, generateFileNamePreview, getFileExt
 
 const settings = definePluginSettings({
     quoteFont: {
-        get label() {
-            return t("plugin.quoter.option.quoteFont.label");
-        },
-        get description() {
-            return t("plugin.quoter.option.quoteFont.description");
-        },
+        label: () => t(plugin.quoter.option.quoteFont.label),
+        description: () => t(plugin.quoter.option.quoteFont.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.quoter.option.quoteFont.mPlusRounded"), value: QuoteFont.MPlusRounded, default: true },
-                { label: t("plugin.quoter.option.quoteFont.openSans"), value: QuoteFont.OpenSans },
-                { label: t("plugin.quoter.option.quoteFont.momoSignature"), value: QuoteFont.MomoSignature },
-                { label: t("plugin.quoter.option.quoteFont.lora"), value: QuoteFont.Lora },
-                { label: t("plugin.quoter.option.quoteFont.merriWeather"), value: QuoteFont.Merriweather }
-            ];
-        }
+        options: [
+            { label: () => t(plugin.quoter.option.quoteFont.mPlusRounded), value: QuoteFont.MPlusRounded, default: true },
+            { label: () => t(plugin.quoter.option.quoteFont.openSans), value: QuoteFont.OpenSans },
+            { label: () => t(plugin.quoter.option.quoteFont.momoSignature), value: QuoteFont.MomoSignature },
+            { label: () => t(plugin.quoter.option.quoteFont.lora), value: QuoteFont.Lora },
+            { label: () => t(plugin.quoter.option.quoteFont.merriWeather), value: QuoteFont.Merriweather }
+        ]
     },
     watermark: {
-        get label() {
-            return t("plugin.quoter.option.watermark.label");
-        },
-        get description() {
-            return t("plugin.quoter.option.watermark.description");
-        },
+        label: () => t(plugin.quoter.option.watermark.label),
+        description: () => t(plugin.quoter.option.watermark.description),
         type: OptionType.STRING,
         default: "Made with Plexcord",
         hidden: true
     },
     grayscale: {
-        get label() {
-            return t("plugin.quoter.option.grayscale.label");
-        },
-        get description() {
-            return t("plugin.quoter.option.grayscale.description");
-        },
+        label: () => t(plugin.quoter.option.grayscale.label),
+        description: () => t(plugin.quoter.option.grayscale.description),
         type: OptionType.BOOLEAN,
         default: true,
         hidden: true
     },
     showWatermark: {
-        get label() {
-            return t("plugin.quoter.option.showWatermark.label");
-        },
-        get description() {
-            return t("plugin.quoter.option.showWatermark.description");
-        },
+        label: () => t(plugin.quoter.option.showWatermark.label),
+        description: () => t(plugin.quoter.option.showWatermark.description),
         type: OptionType.BOOLEAN,
         default: true,
         hidden: true
     },
     saveAsGif: {
-        get label() {
-            return t("plugin.quoter.option.saveAsGif.label");
-        },
-        get description() {
-            return t("plugin.quoter.option.saveAsGif.description");
-        },
+        label: () => t(plugin.quoter.option.saveAsGif.label),
+        description: () => t(plugin.quoter.option.saveAsGif.description),
         type: OptionType.BOOLEAN,
         default: false,
         hidden: true
@@ -89,13 +67,9 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "Quoter",
-    description: "Adds the ability to create an inspirational quote image from a message",
+    description: () => t(plugin.quoter.description),
     authors: [Devs.Samwich, Devs.thororen, PcDevs.MutanPlex, PcDevs.neoarz, PcDevs.Prism],
     settings,
-
-    get displayDescription() {
-        return t("plugin.quoter.description");
-    },
 
     contextMenus: {
         "message": (children, { message }) => {
@@ -103,7 +77,7 @@ export default definePlugin({
             const buttonElement = (
                 <Menu.MenuItem
                     id="pc-quote"
-                    label={t("plugin.quoter.context.quote")}
+                    label={t(plugin.quoter.context.quote)}
                     icon={QuoteIcon}
                     action={() => openModal(props => <QuoteModal message={message} {...props} />)}
                 />
@@ -204,22 +178,22 @@ function QuoteModal({ message, ...props }: ModalProps & { message: Message; }) {
         <ModalRoot {...props} size={ModalSize.MEDIUM}>
             <ModalHeader separator={false}>
                 <BaseText color="header-primary" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
-                    {t("plugin.quoter.modal.title")}
+                    {t(plugin.quoter.modal.title)}
                 </BaseText>
                 <ModalCloseButton onClick={props.onClose} />
             </ModalHeader>
             <ModalContent scrollbarType="none">
                 <img alt="Quote preview" src="" id="quoterPreview" style={{ borderRadius: "20px", width: "100%", marginBottom: "20px" }} />
-                <FormSwitch title={t("plugin.quoter.modal.grayscale")} value={gray} onChange={setGray} />
+                <FormSwitch title={t(plugin.quoter.modal.grayscale)} value={gray} onChange={setGray} />
                 <FormSwitch
-                    title={t("plugin.quoter.modal.saveAsGIF")}
+                    title={t(plugin.quoter.modal.saveAsGIF)}
                     value={saveAsGif}
                     onChange={setSaveAsGif}
-                    description={t("plugin.quoter.modal.saveDescription")}
+                    description={t(plugin.quoter.modal.saveDescription)}
                 />
                 <div style={{ display: "flex", gap: "8px", marginTop: "16px", marginBottom: "16px" }}>
-                    <Button variant="secondary" size="small" onClick={handleExport}>{t("plugin.quoter.modal.export")}</Button>
-                    <Button variant="secondary" size="small" onClick={handleSendInChat}>{t("plugin.quoter.modal.send")}</Button>
+                    <Button variant="secondary" size="small" onClick={handleExport}>{t(plugin.quoter.modal.export)}</Button>
+                    <Button variant="secondary" size="small" onClick={handleSendInChat}>{t(plugin.quoter.modal.send)}</Button>
                 </div>
             </ModalContent>
         </ModalRoot>

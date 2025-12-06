@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { Channel, Message, User } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
@@ -15,7 +15,7 @@ import { getCurrentChannel, getIntlMessage } from "@utils/discord";
 import definePlugin from "@utils/types";
 import { ChannelStore, GuildStore, PermissionsBits, SelectedChannelStore, UserStore } from "@webpack/common";
 
-import { computePermissions, Tag, tags } from "./consts";
+import { computePermissions, getTags, Tag } from "./consts";
 import { settings } from "./settings";
 import { TagSettings } from "./types";
 
@@ -25,7 +25,7 @@ const genTagTypes = () => {
     let i = 100;
     const obj = {};
 
-    for (const { name } of tags.values) {
+    for (const { name } of getTags()) {
         obj[name] = ++i;
         obj[i] = name;
     }
@@ -35,14 +35,10 @@ const genTagTypes = () => {
 
 export default definePlugin({
     name: "ExpandedUserTags",
-    description: "Adds tags for webhooks and moderative roles (owner, admin, etc.)",
+    description: () => t(plugin.expandedUserTags.description),
     authors: [Devs.Cyn, Devs.TheSun, Devs.RyanCaoDev, Devs.LordElias, Devs.AutumnVN, PcDevs.Hen, PcDevs.MutanPlex],
     dependencies: ["MemberListDecoratorsAPI", "NicknameIconsAPI", "MessageDecorationsAPI"],
     settings,
-
-    get displayDescription() {
-        return t("plugin.expandedUserTags.description");
-    },
 
     patches: [
         // Make discord actually use our tags
@@ -63,11 +59,11 @@ export default definePlugin({
     ],
     start() {
         const tagSettings = settings.store.tagSettings || {} as TagSettings;
-        for (const tag of tags.values) {
+        for (const tag of getTags()) {
             tagSettings[tag.name] ??= {
                 showInChat: true,
                 showInNotChat: true,
-                text: tag.displayName
+                text: ""
             };
         }
 
@@ -122,10 +118,11 @@ export default definePlugin({
 
     getTagText(tagName: string) {
         if (!tagName) return getIntlMessage("APP_TAG");
-        const tag = tags.values.find(({ name }) => tagName === name);
+        const tag = getTags().find(({ name }) => tagName === name);
         if (!tag) return tagName || getIntlMessage("APP_TAG");
 
-        return settings.store.tagSettings?.[tag.name]?.text || tag.displayName;
+        const customText = settings.store.tagSettings?.[tag.name]?.text;
+        return customText || tag.displayName;
     },
 
     getTag({
@@ -148,7 +145,7 @@ export default definePlugin({
 
         const perms = this.getPermissions(user, channel);
 
-        for (const tag of tags.values) {
+        for (const tag of getTags()) {
             if (isChat && !settings.tagSettings[tag.name]?.showInChat)
                 continue;
             if (!isChat && !settings.tagSettings[tag.name]?.showInNotChat)

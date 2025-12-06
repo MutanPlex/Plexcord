@@ -5,18 +5,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "FixImagesQuality",
-    description: "Improves quality of images in chat by forcing png format",
+    description: () => t(plugin.fixImagesQuality.description),
     authors: [Devs.Nuckyz],
-
-    get displayDescription() {
-        return t("plugin.fixImagesQuality.description");
-    },
 
     patches: [
         {

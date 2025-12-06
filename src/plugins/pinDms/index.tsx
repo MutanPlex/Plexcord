@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Channel } from "@plexcord/discord-types";
@@ -41,48 +41,30 @@ export const enum PinOrder {
 
 export const settings = definePluginSettings({
     pinOrder: {
-        get label() {
-            return t("plugin.pinDMs.option.pinOrder.label");
-        },
-        get description() {
-            return t("plugin.pinDMs.option.pinOrder.description");
-        },
+        label: () => t(plugin.pinDMs.option.pinOrder.label),
+        description: () => t(plugin.pinDMs.option.pinOrder.description),
         type: OptionType.SELECT,
-        get options() {
-            return [
-                { label: t("plugin.pinDMs.option.pinOrder.lastMessage"), value: PinOrder.LastMessage, default: true },
-                { label: t("plugin.pinDMs.option.pinOrder.custom"), value: PinOrder.Custom }
-            ];
-        }
+        options: [
+            { label: () => t(plugin.pinDMs.option.pinOrder.lastMessage), value: PinOrder.LastMessage, default: true },
+            { label: () => t(plugin.pinDMs.option.pinOrder.custom), value: PinOrder.Custom }
+        ],
     },
     canCollapseDmSection: {
-        get label() {
-            return t("plugin.pinDMs.option.canCollapseDmSection.label");
-        },
-        get description() {
-            return t("plugin.pinDMs.option.canCollapseDmSection.description");
-        },
+        label: () => t(plugin.pinDMs.option.canCollapseDmSection.label),
+        description: () => t(plugin.pinDMs.option.canCollapseDmSection.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     dmSectionCollapsed: {
-        get label() {
-            return t("plugin.pinDMs.option.dmSectionCollapsed.label");
-        },
-        get description() {
-            return t("plugin.pinDMs.option.dmSectionCollapsed.description");
-        },
+        label: () => t(plugin.pinDMs.option.dmSectionCollapsed.label),
+        description: () => t(plugin.pinDMs.option.dmSectionCollapsed.description),
         type: OptionType.BOOLEAN,
         default: false,
         hidden: true
     },
     userBasedCategoryList: {
-        get label() {
-            return t("plugin.pinDMs.option.userBasedCategoryList.label");
-        },
-        get description() {
-            return t("plugin.pinDMs.option.userBasedCategoryList.description");
-        },
+        label: () => t(plugin.pinDMs.option.userBasedCategoryList.label),
+        description: () => t(plugin.pinDMs.option.userBasedCategoryList.description),
         type: OptionType.CUSTOM,
         default: {} as Record<string, Category[]>
     },
@@ -90,14 +72,10 @@ export const settings = definePluginSettings({
 
 export default definePlugin({
     name: "PinDMs",
-    description: "Allows you to pin private channels to the top of your DM list. To pin/unpin or re-order pins, right click DMs",
+    description: () => t(plugin.pinDMs.description),
     authors: [Devs.Ven, Devs.Aria],
     settings,
     contextMenus,
-
-    get displayDescription() {
-        return t("plugin.pinDMs.description");
-    },
 
     patches: [
         {
@@ -296,11 +274,11 @@ export default definePlugin({
                             navId="pc-pindms-header-menu"
                             onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
                             color="danger"
-                            aria-label={t("plugin.pinDMs.context.category.label")}
+                            aria-label={t(plugin.pinDMs.context.category.label)}
                         >
                             <Menu.MenuItem
                                 id="pc-pindms-edit-category"
-                                label={t("plugin.pinDMs.context.category.edit")}
+                                label={t(plugin.pinDMs.context.category.edit)}
                                 action={() => openCategoryModal(category.id, null)}
                             />
 
@@ -310,14 +288,14 @@ export default definePlugin({
                                         {
                                             canMoveCategoryInDirection(category.id, -1) && <Menu.MenuItem
                                                 id="pc-pindms-move-category-up"
-                                                label={t("plugin.pinDMs.context.category.up")}
+                                                label={t(plugin.pinDMs.context.category.up)}
                                                 action={() => moveCategory(category.id, -1)}
                                             />
                                         }
                                         {
                                             canMoveCategoryInDirection(category.id, 1) && <Menu.MenuItem
                                                 id="pc-pindms-move-category-down"
-                                                label={t("plugin.pinDMs.context.category.down")}
+                                                label={t(plugin.pinDMs.context.category.down)}
                                                 action={() => moveCategory(category.id, 1)}
                                             />
                                         }
@@ -330,7 +308,7 @@ export default definePlugin({
                             <Menu.MenuItem
                                 id="pc-pindms-delete-category"
                                 color="danger"
-                                label={t("plugin.pinDMs.context.category.delete")}
+                                label={t(plugin.pinDMs.context.category.delete)}
                                 action={() => removeCategory(category.id)}
                             />
 
@@ -344,7 +322,7 @@ export default definePlugin({
                     style={{ color: `#${category.color.toString(16).padStart(6, "0")}` }}
                 >
                     <span className={headerClasses.headerText}>
-                        {category?.name ?? t("plugin.pinDMs.context.category.unnamed")}
+                        {category?.name ?? t(plugin.pinDMs.context.category.unnamed)}
                     </span>
                     <svg className="pc-pindms-collapse-icon" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path fill="currentColor" d="M9.3 5.3a1 1 0 0 0 0 1.4l5.29 5.3-5.3 5.3a1 1 0 1 0 1.42 1.4l6-6a1 1 0 0 0 0-1.4l-6-6a1 1 0 0 0-1.42 0Z"></path>

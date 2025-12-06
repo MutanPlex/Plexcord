@@ -5,18 +5,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "IgnoreTerms",
-    description: "Ignore Discord's new terms of service",
+    description: () => t(plugin.ignoreTerms.description),
     authors: [Devs.D3SOX],
-
-    get displayDescription() {
-        return t("plugin.ignoreTerms.description");
-    },
 
     patches: [
         {

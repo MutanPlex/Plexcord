@@ -5,19 +5,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { OverridePremiumTypeStore } from "@webpack/common";
 
 export default definePlugin({
     name: "NoNitroUpsell",
-    description: "Removes ALL of Discord's nitro upsells by tricking the client into thinking you have nitro.",
+    description: () => t(plugin.noNitroUpsell.description),
     authors: [Devs.thororen, PcDevs.MutanPlex],
-
-    get displayDescription() {
-        return t("plugin.noNitroUpsell.description");
-    },
 
     flux: {
         CONNECTION_OPEN() {

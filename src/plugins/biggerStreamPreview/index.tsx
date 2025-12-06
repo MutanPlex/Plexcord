@@ -18,7 +18,7 @@
 */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { ScreenshareIcon } from "@components/Icons";
 import { Channel, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -72,7 +72,7 @@ export const addViewStreamContext: NavContextMenuPatchCallback = (children, { us
 
     const streamPreviewItem = (
         <Menu.MenuItem
-            label={t("plugin.biggerStreamPreview.context.viewPreview")}
+            label={t(plugin.biggerStreamPreview.context.viewPreview)}
             id="view-stream-preview"
             icon={ScreenshareIcon}
             action={() => stream && handleViewPreview(stream)}
@@ -93,13 +93,9 @@ export const userContextPatch: NavContextMenuPatchCallback = (children, { user }
 
 export default definePlugin({
     name: "BiggerStreamPreview",
-    description: "This plugin allows you to enlarge stream previews",
-
-    get displayDescription() {
-        return t("plugin.biggerStreamPreview.description");
-    },
-
+    description: () => t(plugin.biggerStreamPreview.description),
     authors: [Devs.phil],
+
     contextMenus: {
         "user-context": userContextPatch,
         "stream-context": streamContextPatch

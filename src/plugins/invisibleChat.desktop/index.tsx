@@ -18,7 +18,7 @@
 */
 
 import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { updateMessage } from "@api/MessageUpdater";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -51,10 +51,10 @@ const PopOverIcon: IconComponent = ({ height = 24, width = 24, className }) => {
 
 function Indicator() {
     return (
-        <Tooltip text={t("plugin.invisibleChat.tooltip.hidden")}>
+        <Tooltip text={t(plugin.invisibleChat.tooltip.hidden)}>
             {({ onMouseEnter, onMouseLeave }) => (
                 <img
-                    aria-label={t("plugin.invisibleChat.button.hidden")}
+                    aria-label={t(plugin.invisibleChat.button.hidden)}
                     onMouseEnter={onMouseEnter}
                     onMouseLeave={onMouseLeave}
                     src="https://github.com/SammCheese/invisible-chat/raw/NewReplugged/src/assets/lock.png"
@@ -74,7 +74,7 @@ const ChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
 
     return (
         <ChatBarButton
-            tooltip={t("plugin.invisibleChat.button.encrypt")}
+            tooltip={t(plugin.invisibleChat.button.encrypt)}
             onClick={() => buildEncModal()}
             buttonProps={{
                 "aria-haspopup": "dialog",
@@ -96,12 +96,8 @@ const ChatBarIcon: ChatBarButtonFactory = ({ isMainChat }) => {
 
 const settings = definePluginSettings({
     savedPasswords: {
-        get label() {
-            return t("plugin.invisibleChat.option.savedPasswords.label");
-        },
-        get description() {
-            return t("plugin.invisibleChat.option.savedPasswords.description");
-        },
+        label: () => t(plugin.invisibleChat.option.savedPasswords.label),
+        description: () => t(plugin.invisibleChat.option.savedPasswords.description),
         type: OptionType.STRING,
         default: "password, Password",
     }
@@ -109,15 +105,11 @@ const settings = definePluginSettings({
 
 export default definePlugin({
     name: "InvisibleChat",
-    description: "Encrypt your Messages in a non-suspicious way!",
+    description: () => t(plugin.invisibleChat.description),
     authors: [Devs.SammCheese],
     dependencies: ["MessageUpdaterAPI", "MessagePopoverAPI", "ChatInputButtonAPI"],
     reporterTestable: ReporterTestable.Patches,
     settings,
-
-    get displayDescription() {
-        return t("plugin.invisibleChat.description");
-    },
 
     patches: [
         {
@@ -147,7 +139,7 @@ export default definePlugin({
             const plugin = InvisibleChatPlugin;
             return plugin.INV_REGEX.test(message?.content)
                 ? {
-                    label: t("plugin.invisibleChat.button.decrypt"),
+                    label: t(plugin.invisibleChat.button.decrypt),
                     icon: PopOverIcon,
                     message,
                     channel: ChannelStore.getChannel(message.channel_id),
@@ -193,11 +185,11 @@ export default definePlugin({
 
         message.embeds.push({
             type: "rich",
-            rawTitle: t("plugin.invisibleChat.embed.title"),
+            rawTitle: t(plugin.invisibleChat.embed.title),
             color: "#45f5f5",
             rawDescription: revealed,
             footer: {
-                text: t("plugin.invisibleChat.embed.footer"),
+                text: t(plugin.invisibleChat.embed.footer),
             },
         });
 

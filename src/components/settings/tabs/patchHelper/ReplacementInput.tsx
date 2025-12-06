@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { patchHelper, t } from "@api/i18n";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
@@ -13,13 +13,13 @@ import { Margins } from "@utils/margins";
 import { Parser, TextInput, useEffect, useState } from "@webpack/common";
 
 const RegexGuide = {
-    "\\i": "patchHelper.cheatSheet.identifiers",
-    "$$": "patchHelper.cheatSheet.dollar",
-    "$&": "patchHelper.cheatSheet.entireMatch",
-    "$`\u200b": "patchHelper.cheatSheet.beforeMatch",
-    "$'": "patchHelper.cheatSheet.afterMatch",
-    "$n": "patchHelper.cheatSheet.nthGroup",
-    "$self": "patchHelper.cheatSheet.pluginInstance",
+    "\\i": patchHelper.cheatSheet.identifiers,
+    "$$": patchHelper.cheatSheet.dollar,
+    "$&": patchHelper.cheatSheet.entireMatch,
+    "$`\u200b": patchHelper.cheatSheet.beforeMatch,
+    "$'": patchHelper.cheatSheet.afterMatch,
+    "$n": patchHelper.cheatSheet.nthGroup,
+    "$self": patchHelper.cheatSheet.pluginInstance,
 } as const;
 
 export function ReplacementInput({ replacement, setReplacement, replacementError }) {
@@ -36,7 +36,7 @@ export function ReplacementInput({ replacement, setReplacement, replacementError
                     setReplacement(() => func);
 
                 else
-                    setError(t("patchHelper.error.replacementMustFunction"));
+                    setError(t(patchHelper.error.replacementMustFunction));
             } catch (e) {
                 setReplacement(v);
                 setError((e as Error).message);
@@ -56,7 +56,7 @@ export function ReplacementInput({ replacement, setReplacement, replacementError
     return (
         <>
             {/* FormTitle adds a class if className is not set, so we set it to an empty string to prevent that */}
-            <Heading className="">{t("patchHelper.replacement")}</Heading>
+            <Heading className="">{t(patchHelper.replacement)}</Heading>
             <TextInput
                 value={replacement?.toString()}
                 onChange={onChange}
@@ -64,7 +64,7 @@ export function ReplacementInput({ replacement, setReplacement, replacementError
             />
             {!isFunc && (
                 <div>
-                    <Heading className={Margins.top8}>{t("patchHelper.cheatSheet.title")}</Heading>
+                    <Heading className={Margins.top8}>{t(patchHelper.cheatSheet.title)}</Heading>
 
                     {Object.entries(RegexGuide).map(([placeholder, desc]) => (
                         <Paragraph key={placeholder}>
@@ -78,8 +78,8 @@ export function ReplacementInput({ replacement, setReplacement, replacementError
                 className={Margins.top16}
                 value={isFunc}
                 onChange={setIsFunc}
-                title={t("patchHelper.replacementEval.label")}
-                description={t("patchHelper.replacementEval.description")}
+                title={t(patchHelper.replacementEval.label)}
+                description={t(patchHelper.replacementEval.description)}
                 hideBorder
             />
         </>

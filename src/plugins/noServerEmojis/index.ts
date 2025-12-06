@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import type { Channel, Emoji } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -13,33 +13,23 @@ import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     shownEmojis: {
-        get label() {
-            return t("plugin.noServerEmojis.option.shownEmojis.label");
-        },
-        get description() {
-            return t("plugin.noServerEmojis.option.shownEmojis.description");
-        },
+        label: () => t(plugin.noServerEmojis.option.shownEmojis.label),
+        description: () => t(plugin.noServerEmojis.option.shownEmojis.description),
         type: OptionType.SELECT,
         default: "onlyUnicode",
-        get options() {
-            return [
-                { label: t("plugin.noServerEmojis.option.shownEmojis.onlyUnicode"), value: "onlyUnicode" },
-                { label: t("plugin.noServerEmojis.option.shownEmojis.currentServer"), value: "currentServer" },
-                { label: t("plugin.noServerEmojis.option.shownEmojis.all"), value: "all" }
-            ];
-        }
+        options: [
+            { label: () => t(plugin.noServerEmojis.option.shownEmojis.onlyUnicode), value: "onlyUnicode" },
+            { label: () => t(plugin.noServerEmojis.option.shownEmojis.currentServer), value: "currentServer" },
+            { label: () => t(plugin.noServerEmojis.option.shownEmojis.all), value: "all" }
+        ]
     }
 });
 
 export default definePlugin({
     name: "NoServerEmojis",
+    description: () => t(plugin.noServerEmojis.description),
     authors: [Devs.UlyssesZhan],
-    description: "Do not show server emojis in the autocomplete menu.",
     settings,
-
-    get displayDescription() {
-        return t("plugin.noServerEmojis.description");
-    },
 
     patches: [
         {

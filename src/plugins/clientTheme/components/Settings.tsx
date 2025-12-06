@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t, tJsx } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
 import { ErrorCard } from "@components/ErrorCard";
@@ -71,8 +71,8 @@ export function ThemeSettingsComponent() {
         <div className={cl("settings")}>
             <div className={cl("container")}>
                 <div className={cl("settings-labels")}>
-                    <Heading>{t("plugin.clientTheme.title")}</Heading>
-                    <Paragraph>{t("plugin.clientTheme.add")}</Paragraph>
+                    <Heading>{t(plugin.clientTheme.title)}</Heading>
+                    <Paragraph>{t(plugin.clientTheme.add)}</Paragraph>
                 </div>
                 <ColorPicker
                     color={parseInt(settings.store.color, 16)}
@@ -83,14 +83,14 @@ export function ThemeSettingsComponent() {
             </div>
             {(contrastWarning || nitroThemeEnabled) && (<>
                 <ErrorCard className={Margins.top8}>
-                    <Heading>{t("plugin.clientTheme.error.modal.title")}</Heading>
+                    <Heading>{t(plugin.clientTheme.error.modal.title)}</Heading>
 
-                    {contrastWarning && <Paragraph>{">"} {t("plugin.clientTheme.error.modal.contrast")}</Paragraph>}
-                    {nitroThemeEnabled && <Paragraph>{">"} {t("plugin.clientTheme.error.modal.nitro")}</Paragraph>}
+                    {contrastWarning && <Paragraph>{">"} {t(plugin.clientTheme.error.modal.contrast)}</Paragraph>}
+                    {nitroThemeEnabled && <Paragraph>{">"} {t(plugin.clientTheme.error.modal.nitro)}</Paragraph>}
 
                     <div className={cl("buttons-container")}>
-                        {(contrastWarning && fixableContrast) && <Button onClick={() => setDiscordTheme(oppositeTheme)} variant="dangerPrimary">{tJsx("plugin.clientTheme.error.modal.switch", { oppositeTheme })}</Button>}
-                        {(nitroThemeEnabled) && <Button onClick={() => setDiscordTheme(currentTheme)} variant="dangerPrimary">{t("plugin.clientTheme.error.modal.disable")}</Button>}
+                        {(contrastWarning && fixableContrast) && <Button onClick={() => setDiscordTheme(oppositeTheme)} variant="dangerPrimary">{t(plugin.clientTheme.error.modal.switch, { oppositeTheme })}</Button>}
+                        {(nitroThemeEnabled) && <Button onClick={() => setDiscordTheme(currentTheme)} variant="dangerPrimary">{t(plugin.clientTheme.error.modal.disable)}</Button>}
                     </div>
                 </ErrorCard>
             </>)}
@@ -101,7 +101,7 @@ export function ThemeSettingsComponent() {
 export function ResetThemeColorComponent() {
     return (
         <Button onClick={() => onPickColor(0x313338)}>
-            {t("plugin.clientTheme.error.modal.reset")}
+            {t(plugin.clientTheme.error.modal.reset)}
         </Button>
     );
 }

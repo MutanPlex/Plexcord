@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { plugin, t } from "@api/i18n";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { Auth } from "@plugins/reviewDB/auth";
@@ -18,7 +19,7 @@ import { Tooltip, useState } from "@webpack/common";
 
 function UnblockButton(props: { onClick?(): void; }) {
     return (
-        <Tooltip text="Unblock user">
+        <Tooltip text={t(plugin.reviewDB.context.unblock)}>
             {tooltipProps => (
                 <div
                     {...tooltipProps}
@@ -68,9 +69,9 @@ function Modal() {
     if (pending)
         return null;
     if (error)
-        return <Paragraph>Failed to fetch blocks: ${String(error)}</Paragraph>;
+        return <Paragraph>{t(plugin.reviewDB.modal.blocked.fetch)}: ${String(error)}</Paragraph>;
     if (!blocks.length)
-        return <Paragraph>No blocked users.</Paragraph>;
+        return <Paragraph>{t(plugin.reviewDB.modal.blocked.noBlocked)}</Paragraph>;
 
     return (
         <>
@@ -90,11 +91,11 @@ export function openBlockModal() {
     openModal(modalProps => (
         <ModalRoot {...modalProps}>
             <ModalHeader className={cl("block-modal-header")}>
-                <Heading style={{ margin: 0 }}>Blocked Users</Heading>
+                <Heading style={{ margin: 0 }}>{t(plugin.reviewDB.modal.blocked.title)}</Heading>
                 <ModalCloseButton onClick={modalProps.onClose} />
             </ModalHeader>
             <ModalContent className={cl("block-modal")}>
-                {Auth.token ? <Modal /> : <Paragraph>You are not logged into ReviewDB!</Paragraph>}
+                {Auth.token ? <Modal /> : <Paragraph>{t(plugin.reviewDB.modal.blocked.auth)}</Paragraph>}
             </ModalContent>
         </ModalRoot>
     ));

@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { patchHelper, t } from "@api/i18n";
 import { Paragraph } from "@components/Paragraph";
 import { Margins } from "@utils/margins";
 import { Patch, ReplaceFn } from "@utils/types";
@@ -38,18 +38,17 @@ export function FullPatchInput({ setFind, setParsedFind, setMatch, setReplacemen
         try {
             let { find, replacement } = (0, eval)(`([${patch}][0])`) as Patch;
 
-            if (!find) throw new Error(t("patchHelper.error.noFind"));
-            if (!replacement) throw new Error(t("patchHelper.error.noReplacement"));
+            if (!find) throw new Error(t(patchHelper.error.noFind));
+            if (!replacement) throw new Error(t(patchHelper.error.noReplacement));
 
             if (replacement instanceof Array) {
-                if (replacement.length === 0) throw new Error(t("patchHelper.error.invalidReplacement"));
-
+                if (replacement.length === 0) throw new Error(t(patchHelper.error.invalidReplacement));
                 // Only test the first replacement
                 replacement = replacement[0];
             }
 
-            if (!replacement.match) throw new Error(t("patchHelper.error.replacementMatch"));
-            if (replacement.replace == null) throw new Error(t("patchHelper.error.replacementReplace"));
+            if (!replacement.match) throw new Error(t(patchHelper.error.replacementMatch));
+            if (replacement.replace == null) throw new Error(t(patchHelper.error.replacementReplace));
 
             setFind(find instanceof RegExp ? `/${find.source}/` : find);
             setParsedFind(find);
@@ -72,7 +71,7 @@ export function FullPatchInput({ setFind, setParsedFind, setMatch, setReplacemen
     return (
         <>
             <Paragraph className={Margins.bottom8}>
-                {t("patchHelper.fullPatch.description")}
+                {t(patchHelper.fullPatch.description)}
             </Paragraph>
             <TextArea
                 inputRef={textAreaRef}
