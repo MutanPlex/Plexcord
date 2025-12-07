@@ -31,7 +31,6 @@ import { type ComponentType, type ReactNode } from "react";
 // LYING to the type checker here
 const UserFlags = Constants.UserFlags as Record<string, number>;
 const badges: Record<string, ProfileBadge> = {
-    active_developer: { id: "active_developer", description: t(plugin.validUser.badges.activeDeveloper), icon: "6bdc42827a38498929a4920da12695d9", link: "https://support-dev.discord.com/hc/en-us/articles/10113997751447" },
     bug_hunter_level_1: { id: "bug_hunter_level_1", description: t(plugin.validUser.badges.discordBugHunter), icon: "2717692c7dca7289b35297368a940dd0", link: "https://support.discord.com/hc/en-us/articles/360046057772-Discord-Bugs" },
     bug_hunter_level_2: { id: "bug_hunter_level_2", description: t(plugin.validUser.badges.discordBugHunter), icon: "848f79194d4be5ff5f81505cbd0ce1e6", link: "https://support.discord.com/hc/en-us/articles/360046057772-Discord-Bugs" },
     certified_moderator: { id: "certified_moderator", description: t(plugin.validUser.badges.moderatorProgramsAlumni), icon: "fee1624003e2fee35cb398e125dc479b", link: "https://discord.com/safety" },

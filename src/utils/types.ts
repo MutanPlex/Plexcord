@@ -17,9 +17,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { AudioProcessor } from "@api/AudioPlayer";
 import { ProfileBadge } from "@api/Badges";
 import { ChatBarButtonData } from "@api/ChatButtons";
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { HeaderBarButtonFactory } from "@api/HeaderBar";
 import { MemberListDecoratorFactory } from "@api/MemberListDecorators";
 import { MessageAccessoryFactory } from "@api/MessageAccessories";
 import { MessageDecorationFactory } from "@api/MessageDecorations";
@@ -202,6 +204,8 @@ export interface PluginDef {
 
     renderMemberListDecorator?: MemberListDecoratorFactory;
     renderNicknameIcon?: NicknameIconFactory;
+    renderHeaderBarButton?: HeaderBarButtonFactory;
+    onAudioProcessor?: AudioProcessor;
 
     // TODO: Remove eventually
     /**

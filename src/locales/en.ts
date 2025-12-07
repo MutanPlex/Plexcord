@@ -285,6 +285,11 @@ const translations = {
                     serverList: "API required for plugins that modify the server list",
                     userSettings: "Patches Discord's UserSettings to expose their group and name.",
                     audioPlayer: "API to play internal Discord audio files or external audio links."
+                },
+                chatButtons: {
+                    context: {
+                        buttons: "Buttons"
+                    }
                 }
             },
             badges: {
@@ -6133,6 +6138,7 @@ const translations = {
                     dms: "Disable Quests Tab in DMs",
                     fetching: "Disable Fetching Quests",
                     popup: "Disable Popup Above Account Panel",
+                    sponsored: "Disable Sponsored Banner on Quests Page",
                     badge: "Disable Badge on User Profiles",
                     inventory: "Disable Gift Inventory Relocation Notice",
                     friendsList: "Friends List Active Now Promotion",
@@ -6179,6 +6185,10 @@ const translations = {
                 disableQuestsDiscoveryTab: {
                     label: "Disable Discovery Tab",
                     description: "Disable Quest tab in the Discovery page."
+                },
+                disableQuestsPageSponsoredBanner: {
+                    label: "Disable Sponsored Banner on Quests Page",
+                    description: "Disable the sponsored banner on the Quest page."
                 },
                 disableQuestsPopupAboveAccountPanel: {
                     label: "Disable Popup Above Account Panel",
@@ -7078,7 +7088,6 @@ const translations = {
                 brilliance: "HypeSquad Brilliance",
                 balance: "HypeSquad Balance",
                 bugHunter: "Discord Bug Hunter",
-                activeDeveloper: "Active Developer",
                 earlyVerifiedBotDeveloper: "Early Verified Bot Developer",
                 earlySupporter: "Early Supporter",
                 moderatorProgram: "Moderator Program Alumni"
@@ -8057,10 +8066,6 @@ const translations = {
                     label: "Sent Output",
                     description: "Language that your own messages should be translated to"
                 },
-                showChatBarButton: {
-                    label: "Show Chat Bar Button",
-                    description: "Show translate button in chat bar"
-                },
                 service: {
                     label: "Translation Service",
                     description: "DeepL requires a paid API key from DeepL Pro",
@@ -8311,7 +8316,6 @@ const translations = {
             name: "ValidUser",
             description: "Fix mentions for unknown users showing up as '@unknown-user' (hover over a mention to fix it)",
             badges: {
-                activeDeveloper: "Active Developer",
                 discordBugHunter: "Discord Bug Hunter",
                 moderatorProgramsAlumni: "Moderator Programs Alumni",
                 discordStaff: "Discord Staff",

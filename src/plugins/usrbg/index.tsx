@@ -18,9 +18,11 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { definePluginSettings, Settings } from "@api/Settings";
+import { isPluginEnabled } from "@api/PluginManager";
+import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
+import fullVcPfp from "@plugins/fullVcPfp";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
@@ -70,7 +72,7 @@ export default definePlugin({
         },
         {
             find: "data-selenium-video-tile",
-            predicate: () => !Settings.plugins.FullVCPFP.enabled && settings.store.voiceBackground,
+            predicate: () => !isPluginEnabled(fullVcPfp.name) && settings.store.voiceBackground,
             replacement: [
                 {
                     match: /(?<=function\((\i),\i,\i\){"use strict";)/,

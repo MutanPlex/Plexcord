@@ -380,7 +380,7 @@ function PluginSettings() {
     const enabledUserPlugins = enabledPlugins.filter(p => PluginMeta[p].userPlugin).length;
 
     return (
-        <SettingsTab title={t(plugins.title)}>
+        <SettingsTab>
 
             <ReloadRequiredCard required={changes.hasChanges} enabledPlugins={enabledPlugins} openWarningModal={openWarningModal} resetCheckAndDo={resetCheckAndDo} enabledStockPlugins={enabledStockPlugins} totalStockPlugins={totalStockPlugins} enabledUserPlugins={enabledUserPlugins} totalUserPlugins={totalUserPlugins} />
 

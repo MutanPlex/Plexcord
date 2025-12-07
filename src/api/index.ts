@@ -34,6 +34,7 @@ import * as $NicknameIcons from "./NicknameIcons";
 import * as $Notices from "./Notices";
 import * as $Notifications from "./Notifications";
 export * as PluginManager from "./PluginManager";
+import * as $HeaderBar from "./HeaderBar";
 import * as $ServerList from "./ServerList";
 import * as $Settings from "./Settings";
 import * as $Styles from "./Styles";
@@ -124,6 +125,11 @@ export const ContextMenu = $ContextMenu;
  * An API allowing you to add buttons to the chat input
  */
 export const ChatButtons = $ChatButtons;
+
+/**
+ * An API allowing you to add buttons to the header bar.
+ */
+export const HeaderBar = $HeaderBar;
 
 /**
  * An API allowing you to update and re-render messages

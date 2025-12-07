@@ -10,7 +10,7 @@ import { showNotification } from "@api/Notifications";
 import { PlainSettings, Settings } from "@api/Settings";
 import { Logger } from "@utils/Logger";
 import { relaunch } from "@utils/native";
-import { SettingsRouter } from "@webpack/common";
+import { openUserSettingsPanel } from "@webpack/common";
 import { deflateSync, inflateSync } from "fflate";
 
 import { checkCloudUrlCsp, deauthorizeCloud, getCloudAuth, getCloudUrl } from "./cloudSetup";
@@ -85,7 +85,7 @@ export async function getCloudSettings(shouldNotify = true, force = false) {
                 title: t(cloud.settings),
                 body: t(cloud.error.connect),
                 color: "var(--yellow-360)",
-                onClick: () => SettingsRouter.open("PlexcordCloud")
+                onClick: () => openUserSettingsPanel("plexcord_cloud")
             });
             // Disable cloud sync globally
             Settings.cloud.authenticated = false;

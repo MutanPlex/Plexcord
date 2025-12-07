@@ -8,8 +8,10 @@
 import "./styles.css";
 
 import { plugin, t } from "@api/i18n";
-import { definePluginSettings, Settings } from "@api/Settings";
+import { isPluginEnabled } from "@api/PluginManager";
+import { definePluginSettings } from "@api/Settings";
 import { GuildMember, Message, User } from "@plexcord/discord-types";
+import mentionAvatars from "@plugins/mentionAvatars";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy, findStoreLazy } from "@webpack";
@@ -865,7 +867,7 @@ export default definePlugin({
                 {
                     match: /(?<=onContextMenu:\i\},\i\),{children:)/,
                     replace: "showMeYourNameMention??",
-                    predicate: () => !Settings.plugins.MentionAvatars.enabled,
+                    predicate: () => !isPluginEnabled(mentionAvatars.name),
                 }
             ]
         },
@@ -947,7 +949,7 @@ export default definePlugin({
                 },
                 {
                     // Track hovering over reaction popouts.
-                    match: /(return\(0,\i.\i\)\(\i.\i,{className:\i.reactorDefault,)(onContextMenu)/,
+                    match: /(return\(0,\i.\i\)\(\i.\i,{className:\i.reactor,)(onContextMenu)/,
                     replace: "$1onMouseEnter:()=>{$self.addHoveringReactionPopout(arguments[0].user.id)},onMouseLeave:()=>{$self.removeHoveringReactionPopout(arguments[0].user.id)},$2"
                 }
             ]

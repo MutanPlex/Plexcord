@@ -46,7 +46,6 @@ function getDiscordBadges(): readonly [number, string, string][] {
         [8, t(plugin.showBadgesInChat.badge.balance), "3aa41de486fa12454c3761e8e223442e"],
         [3, t(plugin.showBadgesInChat.badge.bugHunter), "2717692c7dca7289b35297368a940dd0"],
         [14, t(plugin.showBadgesInChat.badge.bugHunter), "848f79194d4be5ff5f81505cbd0ce1e6"],
-        [22, t(plugin.showBadgesInChat.badge.activeDeveloper), "6bdc42827a38498929a4920da12695d9"],
         [17, t(plugin.showBadgesInChat.badge.earlyVerifiedBotDeveloper), "6df5892e0f35b051f8b61eace34f4967"],
         [9, t(plugin.showBadgesInChat.badge.earlySupporter), "7060786766c9c840eb3019e725d2b358"],
         [18, t(plugin.showBadgesInChat.badge.moderatorProgram), "fee1624003e2fee35cb398e125dc479b"]

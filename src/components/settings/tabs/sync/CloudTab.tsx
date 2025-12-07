@@ -98,9 +98,8 @@ function CloudTab() {
     const settings = useSettings(["cloud.authenticated", "cloud.url"]);
 
     return (
-        <SettingsTab title={"Plexcord " + t(cloud.text)}>
+        <SettingsTab>
             <section className={Margins.top16}>
-                <HeadingTertiary>{t(cloud.settings)}</HeadingTertiary>
                 <Paragraph size="md" className={Margins.bottom20}>
                     {t(cloud.overview, {
                         privacy: <Link href="https://api.plexcord.club/privacy">{t(cloud.privacy)}</Link>,
@@ -119,7 +118,7 @@ function CloudTab() {
                     description={t(cloud.authorization)}
                     title={t(cloud.button.enable)}
                 />
-                <HeadingTertiary>{t(cloud.backend.title)}</HeadingTertiary>
+                <HeadingTertiary className={Margins.top16}>{t(cloud.backend.title)}</HeadingTertiary>
                 <Paragraph className={Margins.bottom8}>
                     {t(cloud.backend.description)}
                 </Paragraph>

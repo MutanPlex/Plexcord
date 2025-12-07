@@ -216,7 +216,7 @@
 }
 
 .pc-github-repos-error {
-    color: var(--text-danger);
+    color: var(--text-feedback-critical);
 }
 
 .pc-github-repos-link {

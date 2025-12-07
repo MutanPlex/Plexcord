@@ -11,7 +11,7 @@ import { classNameFactory } from "@api/Styles";
 import { Devs } from "@utils/constants";
 import { closeAllModals } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
-import { SettingsRouter, useState } from "@webpack/common";
+import { openUserSettingsPanel, useState } from "@webpack/common";
 
 import { registerAction } from "./commands";
 import { openCommandPalette } from "./components/CommandPalette";
@@ -102,7 +102,7 @@ export default definePlugin({
         registerAction({
             id: "openDevSettings",
             label: () => t(plugin.commandPalette.open.devTab),
-            callback: () => SettingsRouter.open("PlexcordPatchHelper"),
+            callback: () => openUserSettingsPanel("plexcord_patch_helper"),
             registrar: "Plexcord"
         });
     },

@@ -48,8 +48,7 @@ function Updater() {
     };
 
     return (
-        <SettingsTab title={"Plexcord " + t(updater.title)}>
-            <Heading className={Margins.bottom16}>{t(updater.settings)}</Heading>
+        <SettingsTab>
             <FormSwitch
                 value={settings.autoUpdate}
                 onChange={(v: boolean) => settings.autoUpdate = v}

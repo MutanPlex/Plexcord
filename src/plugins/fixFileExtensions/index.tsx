@@ -6,9 +6,9 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { Settings } from "@api/Settings";
+import { isPluginEnabled } from "@api/PluginManager";
 import { CloudUpload } from "@plexcord/discord-types";
-import { tarExtMatcher } from "@plugins/anonymiseFileNames";
+import anonymiseFileNames, { tarExtMatcher } from "@plugins/anonymiseFileNames";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { ReporterTestable } from "@utils/types";
 
@@ -43,7 +43,7 @@ export default definePlugin({
                     replace: "$&$1.forEach($self.fixExt);"
                 }
             ],
-            predicate: () => !Settings.plugins.AnonymiseFileNames.enabled,
+            predicate: () => !isPluginEnabled(anonymiseFileNames.name),
         },
     ],
     fixExt(upload: CloudUpload) {

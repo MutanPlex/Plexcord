@@ -288,6 +288,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     serverList: "Sunucu listesini değiştiren eklentiler için gerekli API",
                     userSettings: "Discord'un kullanıcı ayarlarını, grupları ve isimleri ortaya çıkarmak için yamalar",
                     audioPlayer: "Discord'un dahili ses dosyalarını veya harici ses bağlantılarını oynatmak için API."
+                },
+                chatButtons: {
+                    context: {
+                        buttons: "Butonlar"
+                    }
                 }
             },
             badges: {
@@ -6136,6 +6141,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     dms: "DM'lerde Görevler Sekmesini Devre Dışı Bırak",
                     fetching: "Görev Getirmeyi Devre Dışı Bırak",
                     popup: "Hesap Panelinin Üstündeki Açılır Pencereyi Devre Dışı Bırak",
+                    sponsored: "Görevler Sayfasındaki Sponsorlu Banner'ı Devre Dışı Bırak",
                     badge: "Kullanıcı Profillerindeki Rozeti Devre Dışı Bırak",
                     inventory: "Hediye Envanteri Taşıma Bildirimini Devre Dışı Bırak",
                     friendsList: "Arkadaş Listesi Şu Anda Aktif Tanıtımı",
@@ -6182,6 +6188,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disableQuestsDiscoveryTab: {
                     label: "Keşfet Sekmesini Devre Dışı Bırak",
                     description: "Keşfet sayfasındaki Görev sekmesini devre dışı bırak."
+                },
+                disableQuestsPageSponsoredBanner: {
+                    label: "Görevler Sayfasındaki Sponsorlu Banner'ı Devre Dışı Bırak",
+                    description: "Görevler sayfasındaki sponsorlu banner'ı devre dışı bırak."
                 },
                 disableQuestsPopupAboveAccountPanel: {
                     label: "Hesap Paneli Üstündeki Açılır Pencereyi Devre Dışı Bırak",
@@ -7081,7 +7091,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 brilliance: "HypeSquad Brilliance",
                 balance: "HypeSquad Balance",
                 bugHunter: "Discord Hata Avcısı",
-                activeDeveloper: "Aktif Geliştirici",
                 earlyVerifiedBotDeveloper: "Erken Doğrulanmış Bot Geliştiricisi",
                 earlySupporter: "Erken Destekçi",
                 moderatorProgram: "Moderatör Programı Mezunu"
@@ -8060,10 +8069,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Gönderilen Çıktı",
                     description: "Kendi mesajlarınızın hangi dile çevrileceği"
                 },
-                showChatBarButton: {
-                    label: "Sohbet Çubuğu Butonunu Göster",
-                    description: "Sohbet çubuğunda çeviri butonunu göster"
-                },
                 service: {
                     label: "Çeviri Servisi",
                     description: "DeepL Pro, ücretli bir API anahtarı gerektirir",
@@ -8314,7 +8319,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "ValidUser",
             description: "Bilinmeyen kullanıcılar için '@unknown-user' olarak görünen bahsetmeleri düzeltir (düzeltmek için bahsetmenin üzerine gelin)",
             badges: {
-                activeDeveloper: "Aktif Geliştirici",
                 discordBugHunter: "Discord Hata Avcısı",
                 moderatorProgramsAlumni: "Moderatör Programları Mezunu",
                 discordStaff: "Discord Personeli",

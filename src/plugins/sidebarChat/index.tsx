@@ -8,6 +8,7 @@
 import "./styles.css";
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { HeaderBarButton } from "@api/HeaderBar";
 import { plugin, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Channel, Guild, User } from "@plexcord/discord-types";
@@ -48,14 +49,10 @@ import {
 
 import { settings, SidebarStore } from "./store";
 
-// ??? no clue why this HeaderBarIcon doesnt work, its the same as the one below
-const { HeaderBar, /* HeaderBarIcon*/ } = mapMangledModuleLazy(".themedMobile]:", {
-    HeaderBarIcon: filters.componentByCode('size:"custom",'),
+const { HeaderBar } = mapMangledModuleLazy(".themedMobile]:", {
     HeaderBar: filters.byCode(".themedMobile]:"),
 });
 
-// from toolbox
-const HeaderBarIcon = findComponentByCodeLazy(".HEADER_BAR_BADGE_TOP:", '.iconBadge,"top"');
 
 const { ForumView } = mapMangledModuleLazy("forum-grid-header-section-", {
     ForumView: filters.byCode("sidebarState")
@@ -315,9 +312,9 @@ const Header = ({ guild, channel }: { guild: Guild; channel: Channel; }) => {
         <HeaderBar
             toolbar={
                 <>
-                    <HeaderBarIcon icon={ArrowsLeftRightIcon} tooltip={t(plugin.sidebarChat.modal.switch)} onClick={switchChannels} />
-                    <HeaderBarIcon icon={WindowLaunchIcon} tooltip={t(plugin.sidebarChat.modal.popout)} onClick={openPopout} />
-                    <HeaderBarIcon icon={XSmallIcon} tooltip={t(plugin.sidebarChat.modal.close)} onClick={closeSidebar} />
+                    <HeaderBarButton icon={ArrowsLeftRightIcon} tooltip={t(plugin.sidebarChat.modal.switch)} onClick={switchChannels} />
+                    <HeaderBarButton icon={WindowLaunchIcon} tooltip={t(plugin.sidebarChat.modal.popout)} onClick={openPopout} />
+                    <HeaderBarButton icon={XSmallIcon} tooltip={t(plugin.sidebarChat.modal.close)} onClick={closeSidebar} />
                 </>
             }
         >

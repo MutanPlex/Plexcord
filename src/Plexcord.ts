@@ -49,7 +49,7 @@ import { localStorage } from "./utils/localStorage";
 import { relaunch } from "./utils/native";
 import { checkForUpdates, update, UpdateLogger } from "./utils/updater";
 import { onceReady } from "./webpack";
-import { SettingsRouter } from "./webpack/common";
+import { openUserSettingsPanel } from "./webpack/common";
 import { patches } from "./webpack/patchWebpack";
 
 if (IS_REPORTER) {
@@ -66,7 +66,7 @@ async function syncSettings() {
                 title: t(cloud.settings),
                 body: t(cloud.error.connect),
                 color: "var(--yellow-360)",
-                onClick: () => SettingsRouter.open("PlexcordCloud")
+                onClick: () => openUserSettingsPanel("plexcord_cloud")
             });
             // Disable cloud sync globally
             Settings.cloud.authenticated = false;
@@ -84,7 +84,7 @@ async function syncSettings() {
             title: t(cloud.notification.title),
             body: t(cloud.reauth),
             color: "var(--yellow-360)",
-            onClick: () => SettingsRouter.open("PlexcordCloud")
+            onClick: () => openUserSettingsPanel("plexcord_cloud")
         });
         return;
     }

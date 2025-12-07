@@ -347,7 +347,7 @@ export default function ChannelTab(props: ChannelTabsProps & { index: number; })
     };
 
     const [, drag] = useDrag(() => ({
-        type: "vc_ChannelTab",
+        type: "pc_ChannelTab",
         item: () => {
             setIsDragging(true);
             lastSwapTimeRef.current = Date.now() - SWAP_THROTTLE_MS;
@@ -371,7 +371,7 @@ export default function ChannelTab(props: ChannelTabsProps & { index: number; })
         }
     }), [id, channelId, guildId]);
     const [, drop] = useDrop(() => ({
-        accept: "vc_ChannelTab",
+        accept: "pc_ChannelTab",
         hover: (item, monitor) => {
             if (!ref.current) return;
 

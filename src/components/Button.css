@@ -191,7 +191,7 @@
 }
 
 .pc-text-btn-danger {
-    color: var(--text-feedback-critical, var(--text-danger));
+    color: var(--text-feedback-critical, var(--text-feedback-critical));
 }
 
 .pc-text-btn-link {

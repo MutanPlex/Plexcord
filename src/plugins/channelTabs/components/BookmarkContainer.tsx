@@ -218,7 +218,7 @@ function FolderBookmarkItem({ bookmark, folderIndex, bookmarkIndex, methods, isC
 
     // drag implementation for folder items
     const [, drag] = useDrag(() => ({
-        type: "vc_Bookmark",
+        type: "pc_Bookmark",
         item: () => ({
             index: bookmarkIndex, // index within folder
             folderIndex: folderIndex, // the folder its in
@@ -316,7 +316,7 @@ function Bookmark(props: BookmarkProps & { isExpanded?: boolean; onToggleFolder?
     const ref = useRef<HTMLDivElement>(null);
 
     const [, drag] = useDrag(() => ({
-        type: "vc_Bookmark",
+        type: "pc_Bookmark",
         canDrag: () => !isBookmarkFolder(bookmark), // Don't allow dragging folders
         item: () => {
             // find current index dynamically instead of using stale closure
@@ -338,7 +338,7 @@ function Bookmark(props: BookmarkProps & { isExpanded?: boolean; onToggleFolder?
     }), [bookmarks, bookmark, index]);
 
     const [, drop] = useDrop(() => ({
-        accept: "vc_Bookmark",
+        accept: "pc_Bookmark",
         hover: (item, monitor) => {
             if (!ref.current) return;
 
@@ -363,7 +363,7 @@ function Bookmark(props: BookmarkProps & { isExpanded?: boolean; onToggleFolder?
 
     // separate drop zone for folders to accept tabs and bookmarks (prevents duplicates)
     const [{ isOver: isFolderDropTarget }, folderDrop] = useDrop(() => ({
-        accept: ["vc_ChannelTab", "vc_Bookmark"],
+        accept: ["pc_ChannelTab", "pc_Bookmark"],
         canDrop: () => isBookmarkFolder(bookmark),
         drop: (item: any, monitor) => {
             if (!isBookmarkFolder(bookmark)) return;
@@ -371,7 +371,7 @@ function Bookmark(props: BookmarkProps & { isExpanded?: boolean; onToggleFolder?
             const itemType = monitor.getItemType();
 
             // dropping a tab onto a folder
-            if (itemType === "vc_ChannelTab") {
+            if (itemType === "pc_ChannelTab") {
                 methods.addBookmark({
                     guildId: item.guildId,
                     channelId: item.channelId
@@ -379,7 +379,7 @@ function Bookmark(props: BookmarkProps & { isExpanded?: boolean; onToggleFolder?
             }
 
             // dropping a bookmark onto a folder (reorganize)
-            if (itemType === "vc_Bookmark") {
+            if (itemType === "pc_Bookmark") {
                 const sourceBookmark = item.bookmark || bookmarks[item.index];
 
                 // skip if source is a folder
@@ -523,7 +523,7 @@ export default function BookmarkContainer(props: BasicChannelTabsProps & { userI
     });
 
     const [{ isOver }, dropRef] = useDrop(() => ({
-        accept: ["vc_ChannelTab", "vc_Bookmark"],
+        accept: ["pc_ChannelTab", "pc_Bookmark"],
         drop: (item: any, monitor) => {
             if (!bookmarks) return;
 
@@ -535,14 +535,14 @@ export default function BookmarkContainer(props: BasicChannelTabsProps & { userI
             const itemType = monitor.getItemType();
 
             // if dropping a tab, create bookmark
-            if (itemType === "vc_ChannelTab") {
+            if (itemType === "pc_ChannelTab") {
                 methods.addBookmark({
                     guildId: item.guildId,
                     channelId: item.channelId
                 });
             }
             // if dropping a bookmark, handle based on source
-            else if (itemType === "vc_Bookmark") {
+            else if (itemType === "pc_Bookmark") {
                 if (item.isFromFolder && item.folderIndex !== undefined) {
                     // moving from folder to bar (aka root level)
                     const folder = bookmarks[item.folderIndex];

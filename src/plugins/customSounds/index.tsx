@@ -397,11 +397,9 @@ export default definePlugin({
     name: "CustomSounds",
     description: () => t(plugin.customSounds.description),
     authors: [Devs.ScattrdBlade, Devs.TheKodeToad, PcDevs.MutanPlex],
-    dependencies: ["AudioPlayerAPI"],
-
     settings,
-    getCustomSoundURL,
     startAt: StartAt.Init,
+    onAudioProcessor: getCustomSoundURL,
 
     async start() {
         console.log("[CustomSounds] Plugin starting...");

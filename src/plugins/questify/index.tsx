@@ -178,6 +178,18 @@ function shouldHideDirectMessagesTab(): boolean {
     return disableQuestsDirectMessagesTab || disableQuestsEverything;
 }
 
+function shouldHideSponsoredQuestBanner(): boolean {
+    const {
+        disableQuestsPageSponsoredBanner,
+        disableQuestsEverything
+    } = settings.use([
+        "disableQuestsPageSponsoredBanner",
+        "disableQuestsEverything"
+    ]);
+
+    return disableQuestsPageSponsoredBanner || disableQuestsEverything;
+}
+
 function shouldHideBadgeOnUserProfiles(): boolean {
     const {
         disableQuestsBadgeOnUserProfiles,
@@ -795,7 +807,7 @@ function getQuestPanelOverride(): Quest | null {
         const timeRemaining = interval.duration - interval.progress;
 
         // 3 second buffer to account for per-second rerendering
-        // which could cause flickering if multiple quests were
+        // which could cause flickering if multiple Quests were
         // started at the same time.
         if (timeRemaining < (closestTimeRemaining - 3)) {
             closestTimeRemaining = timeRemaining;
@@ -887,6 +899,7 @@ export default definePlugin({
     shouldHideDirectMessagesTab,
     shouldPreventFetchingQuests,
     shouldHideBadgeOnUserProfiles,
+    shouldHideSponsoredQuestBanner,
     shouldHideGiftInventoryRelocationNotice,
     shouldHideFriendsListActiveNowPromotion,
     shouldHideMembersListActivelyPlayingIcon,
@@ -928,6 +941,21 @@ export default definePlugin({
                 {
                     match: /(?<="family-center"\):null,)(\i)/,
                     replace: "$self.shouldHideDirectMessagesTab()||$1"
+                }
+            ]
+        },
+        {
+            // Hides the sponsored banner on the Quests page.
+            find: "{isInDiscoverQuestHomeTab:",
+            group: true,
+            replacement: [
+                {
+                    match: /(?<=resetSortingFiltering\(\)},\[\]\);)/,
+                    replace: "const shouldHideSponsoredQuestBanner=$self.shouldHideSponsoredQuestBanner();"
+                },
+                {
+                    match: /(?<=if\(null!=\i\))return(.{0,60}?}\))/,
+                    replace: "if(!shouldHideSponsoredQuestBanner)return $1"
                 }
             ]
         },
@@ -1129,7 +1157,7 @@ export default definePlugin({
                 {
                     // Run Questify's sort function every time due to hook requirements but return
                     // early if not applicable. If the sort method is set to "Questify", replace the
-                    // quests with the sorted ones. Also, setup a trigger to rerender the memo.
+                    // Quests with the sorted ones. Also, setup a trigger to rerender the memo.
                     match: /(?<=function \i\((\i),\i\){let \i=\i.useRef.{0,100}?;)(return \i.useMemo\(\(\)=>{)/,
                     replace: "const questRerenderTrigger=$self.useQuestRerender();const questifySorted=$self.sortQuests($1,arguments[1].sortMethod!==\"questify\");$2if(arguments[1].sortMethod===\"questify\"){$1=questifySorted;};"
                 },
@@ -1238,7 +1266,7 @@ export default definePlugin({
                 },
                 {
                     // Add the trigger to the memo for rerendering the progress label.
-                    match: /(\i.intl.string\(\i.\i#{intl::QUESTS_SEE_CODE}\)}\)}},\[)/,
+                    match: /(\i\.intl\.string\(\i\.\i#{intl::QUESTS_SEE_CODE}\)\}\)\}\},\[|\)\}\}\},\[)/,
                     replace: "$1questRerenderTrigger,"
                 },
                 {
@@ -1265,7 +1293,7 @@ export default definePlugin({
             replacement: [
                 {
                     // Initial and subsequent select drop down for picking or changing a platform.
-                    match: /(#{intl::QUEST_MULTIPLATFORM_SELECT_SUBTITLE}.{0,50}select:)(\i)(,serialize:\i=>{)/g,
+                    match: /(select:)(\i)(,serialize:\i=>{)/g,
                     replace: "$1(platform)=>{$self.processQuestForAutoComplete(arguments[0].quest),$2(platform)}$3"
                 },
                 {
@@ -1274,7 +1302,7 @@ export default definePlugin({
                     // The "Quest Accepted" text is changed to "Resume" if the Quest is in progress but not active.
                     // Then, when the Quest Accepted button is clicked, resume the automatic completion of the
                     // Quest and disable the button again.
-                    match: /(?<=fullWidth:!0}\)}\):.{0,200}?secondary",)disabled:!0,text:(.{0,30}?#{intl::QUEST_ACCEPTED}\)),/,
+                    match: /(?<=secondary",)disabled:!0,text:(\i\.intl\.string\(\i\.\i#{intl::QUEST_ACCEPTED}\)),/,
                     replace: "...$self.getQuestAcceptedButtonProps(arguments[0].quest,$1),"
                 },
                 {

@@ -33,6 +33,8 @@ import { FluxEvents } from "@plexcord/discord-types";
 import { makeLazy } from "@utils/lazy";
 import { Logger } from "@utils/Logger";
 export { Plugins as plugins };
+import { addAudioProcessor, removeAudioProcessor } from "@api/AudioPlayer";
+import { addHeaderBarButton, removeHeaderBarButton } from "@api/HeaderBar";
 import { onlyOnce } from "@utils/onlyOnce";
 import { canonicalizeFind, canonicalizeReplacement } from "@utils/patches";
 import { Patch, Plugin, PluginDef, ReporterTestable, StartAt } from "@utils/types";
@@ -215,7 +217,7 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
     const {
         name, commands, contextMenus, managedStyle, userProfileBadge, userProfileContributorBadge,
         onBeforeMessageEdit, onBeforeMessageSend, onMessageClick,
-        chatBarButton, renderMemberListDecorator, renderNicknameIcon, renderMessageAccessory, renderMessageDecoration, messagePopoverButton
+        chatBarButton, renderMemberListDecorator, renderNicknameIcon, renderHeaderBarButton, onAudioProcessor, renderMessageAccessory, renderMessageDecoration, messagePopoverButton
     } = p;
     const pluginName = getName(name);
 
@@ -270,6 +272,8 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
     if (chatBarButton) addChatBarButton(pluginName, chatBarButton.render, chatBarButton.icon);
     if (renderMemberListDecorator) addMemberListDecorator(pluginName, renderMemberListDecorator);
     if (renderNicknameIcon) addNicknameIcon(pluginName, renderNicknameIcon);
+    if (renderHeaderBarButton) addHeaderBarButton(pluginName, renderHeaderBarButton);
+    if (onAudioProcessor) addAudioProcessor(pluginName, onAudioProcessor);
     if (renderMessageDecoration) addMessageDecoration(pluginName, renderMessageDecoration);
     if (renderMessageAccessory) addMessageAccessory(pluginName, renderMessageAccessory);
     if (messagePopoverButton) addMessagePopoverButton(pluginName, messagePopoverButton.render, messagePopoverButton.icon);
@@ -281,7 +285,7 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
     const {
         name, commands, contextMenus, managedStyle, userProfileBadge, userProfileContributorBadge,
         onBeforeMessageEdit, onBeforeMessageSend, onMessageClick,
-        chatBarButton, renderMemberListDecorator, renderNicknameIcon, renderMessageAccessory, renderMessageDecoration, messagePopoverButton
+        chatBarButton, renderMemberListDecorator, renderNicknameIcon, renderHeaderBarButton, onAudioProcessor, renderMessageAccessory, renderMessageDecoration, messagePopoverButton
     } = p;
     const pluginName = getName(name);
 
@@ -334,6 +338,8 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
     if (chatBarButton) removeChatBarButton(pluginName);
     if (renderMemberListDecorator) removeMemberListDecorator(pluginName);
     if (renderNicknameIcon) removeNicknameIcon(pluginName);
+    if (renderHeaderBarButton) removeHeaderBarButton(pluginName);
+    if (onAudioProcessor) removeAudioProcessor(pluginName);
     if (renderMessageDecoration) removeMessageDecoration(pluginName);
     if (renderMessageAccessory) removeMessageAccessory(pluginName);
     if (messagePopoverButton) removeMessagePopoverButton(pluginName);
@@ -348,7 +354,7 @@ export const initPluginManager = onlyOnce(function init() {
 
     const pluginKeysToBind: Array<keyof PluginDef & `${"on" | "render"}${string}`> = [
         "onBeforeMessageEdit", "onBeforeMessageSend", "onMessageClick",
-        "renderChatBarButton", "renderMemberListDecorator", "renderNicknameIcon", "renderMessageAccessory", "renderMessageDecoration", "renderMessagePopoverButton"
+        "renderChatBarButton", "renderMemberListDecorator", "renderNicknameIcon", "renderHeaderBarButton", "onAudioProcessor", "renderMessageAccessory", "renderMessageDecoration", "renderMessagePopoverButton"
     ];
 
     const neededApiPlugins = new Set<string>();
@@ -389,6 +395,8 @@ export const initPluginManager = onlyOnce(function init() {
         if (p.chatBarButton) neededApiPlugins.add("ChatInputButtonAPI");
         if (p.renderMemberListDecorator) neededApiPlugins.add("MemberListDecoratorsAPI");
         if (p.renderNicknameIcon) neededApiPlugins.add("NicknameIconsAPI");
+        if (p.renderHeaderBarButton) neededApiPlugins.add("HeaderBarAPI");
+        if (p.onAudioProcessor) neededApiPlugins.add("AudioPlayerAPI");
         if (p.renderMessageAccessory) neededApiPlugins.add("MessageAccessoriesAPI");
         if (p.renderMessageDecoration) neededApiPlugins.add("MessageDecorationsAPI");
         if (p.messagePopoverButton) neededApiPlugins.add("MessagePopoverAPI");

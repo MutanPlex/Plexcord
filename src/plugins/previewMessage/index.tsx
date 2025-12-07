@@ -24,7 +24,7 @@ import { CloudUpload, MessageAttachment } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import definePlugin, { IconComponent, StartAt } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { DraftStore, DraftType, SelectedChannelStore, UserStore, useStateFromStores } from "@webpack/common";
+import { DraftStore, DraftType, UserStore, useStateFromStores } from "@webpack/common";
 
 const UploadStore = findByPropsLazy("getUploads");
 
@@ -91,11 +91,10 @@ const PreviewIcon: IconComponent = ({ height = 20, width = 20, className }) => {
 };
 
 
-const PreviewButton: ChatBarButtonFactory = ({ isMainChat, isEmpty, type: { attachments } }) => {
-    const channelId = SelectedChannelStore.getChannelId();
+const PreviewButton: ChatBarButtonFactory = ({ isAnyChat, isEmpty, type: { attachments }, channel: { id: channelId } }) => {
     const draft = useStateFromStores([DraftStore], () => getDraft(channelId));
 
-    if (!isMainChat) return null;
+    if (!isAnyChat) return null;
 
     const hasAttachments = attachments && UploadStore.getUploads(channelId, DraftType.ChannelMessage).length > 0;
     const hasContent = !isEmpty && draft?.length > 0;

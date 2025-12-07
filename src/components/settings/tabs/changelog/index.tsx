@@ -727,7 +727,7 @@ function ChangelogContent() {
 
 function ChangelogTab() {
     return (
-        <SettingsTab title={t(changelog.text)}>
+        <SettingsTab>
             <ChangelogContent />
         </SettingsTab>
     );

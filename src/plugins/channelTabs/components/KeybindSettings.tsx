@@ -123,7 +123,7 @@ function KeybindInput({ label, description, settingKey, enabledKey }: KeybindInp
                     {description}
                 </Paragraph>
                 {!isEnabled && (
-                    <Paragraph size="xs" weight="normal" style={{ color: "var(--text-danger)" }}>
+                    <Paragraph size="xs" weight="normal" style={{ color: "var(--text-feedback-critical)" }}>
                         This shortcut is currently disabled
                     </Paragraph>
                 )}

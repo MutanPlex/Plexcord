@@ -36,9 +36,9 @@ export const Forms = {
     /** @deprecated use Paragraph from Plexcord */
     FormText: Paragraph,
     /** @deprecated don't use this */
-    FormSection: "section" as never, // Backwards compat since Vesktop uses this
+    FormSection: "section" as never, // Backwards compat since Plextron uses this
     /** @deprecated use `@components/Divider` */
-    FormDivider: Divider as never, // Backwards compat since Vesktop uses this
+    FormDivider: Divider as never, // Backwards compat since Plextron uses this
 };
 
 // TODO: Stop using this and use Paragraph/Span directly

@@ -466,7 +466,7 @@ export default definePlugin({
             ]
         },
         {
-            find: "#{intl::FORM_LABEL_MUTED}",
+            find: ".invitesDisabledTooltip",
             replacement: {
                 // Make GuildChannelStore.getChannels return hidden channels
                 match: /(?<=getChannels\(\i)(?=\))/,

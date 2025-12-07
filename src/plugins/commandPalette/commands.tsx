@@ -11,7 +11,7 @@ import { Settings } from "@api/Settings";
 import { copyToClipboard } from "@utils/clipboard";
 import { relaunch } from "@utils/native";
 import { checkForUpdates, getRepo } from "@utils/updater";
-import { GuildStore, NavigationRouter, SettingsRouter, Toasts } from "@webpack/common";
+import { GuildStore, NavigationRouter, openUserSettingsPanel, Toasts } from "@webpack/common";
 
 import gitHash from "~git-hash";
 import gitRemote from "~git-remote";
@@ -28,13 +28,13 @@ export interface ButtonAction {
 }
 
 export const actions: ButtonAction[] = [
-    { id: "openPlexcordSettings", label: () => t(plugin.commandPalette.open.plexcord), callback: async () => await SettingsRouter.open("PlexcordSettings"), registrar: "Plexcord" },
-    { id: "openPluginSettings", label: () => t(plugin.commandPalette.open.plugin), callback: () => SettingsRouter.open("PlexcordPlugins"), registrar: "Plexcord" },
-    { id: "openThemesSettings", label: () => t(plugin.commandPalette.open.themes), callback: () => SettingsRouter.open("PlexcordThemes"), registrar: "Plexcord" },
-    { id: "openUpdaterSettings", label: () => t(plugin.commandPalette.open.updater), callback: () => SettingsRouter.open("PlexcordUpdater"), registrar: "Plexcord" },
-    { id: "openPlexcordCloudSettings", label: () => t(plugin.commandPalette.open.cloud), callback: () => SettingsRouter.open("PlexcordCloud"), registrar: "Plexcord" },
-    { id: "openBackupSettings", label: () => t(plugin.commandPalette.open.backup), callback: () => SettingsRouter.open("PlexcordSettingsSync"), registrar: "Plexcord" },
-    { id: "openChangelogSettings", label: () => t(plugin.commandPalette.open.changelog), callback: () => SettingsRouter.open("PlexcordChangelog"), registrar: "Plexcord" },
+    { id: "openPlexcordSettings", label: () => t(plugin.commandPalette.open.plexcord), callback: async () => await openUserSettingsPanel("plexcord_main"), registrar: "Plexcord" },
+    { id: "openPluginSettings", label: () => t(plugin.commandPalette.open.plugin), callback: () => openUserSettingsPanel("plexcord_plugins"), registrar: "Plexcord" },
+    { id: "openThemesSettings", label: () => t(plugin.commandPalette.open.themes), callback: () => openUserSettingsPanel("plexcord_themes"), registrar: "Plexcord" },
+    { id: "openUpdaterSettings", label: () => t(plugin.commandPalette.open.updater), callback: () => openUserSettingsPanel("plexcord_updater"), registrar: "Plexcord" },
+    { id: "openPlexcordCloudSettings", label: () => t(plugin.commandPalette.open.cloud), callback: () => openUserSettingsPanel("plexcord_cloud"), registrar: "Plexcord" },
+    { id: "openBackupSettings", label: () => t(plugin.commandPalette.open.backup), callback: () => openUserSettingsPanel("plexcord_backup_restore"), registrar: "Plexcord" },
+    { id: "openChangelogSettings", label: () => t(plugin.commandPalette.open.changelog), callback: () => openUserSettingsPanel("plexcord_changelog"), registrar: "Plexcord" },
     { id: "restartClient", label: () => t(plugin.commandPalette.open.restart), callback: () => relaunch(), registrar: "Plexcord" },
     { id: "openQuickCSSFile", label: () => t(plugin.commandPalette.open.quickCSS), callback: () => PlexcordNative.quickCss.openEditor(), registrar: "Plexcord" },
     { id: "openSettingsFolder", label: () => t(plugin.commandPalette.open.settings), callback: async () => await PlexcordNative.settings.openFolder(), registrar: "Plexcord" },
@@ -143,7 +143,7 @@ export const actions: ButtonAction[] = [
                     permanent: true,
                     noPersist: true,
                     onClick() {
-                        SettingsRouter.open("PlexcordUpdater");
+                        openUserSettingsPanel("plexcord_updater");
                     }
                 }), 10_000);
             } else {

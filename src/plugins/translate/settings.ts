@@ -50,12 +50,6 @@ export const settings = definePluginSettings({
         default: "en",
         hidden: true
     },
-    showChatBarButton: {
-        label: () => t(plugin.translate.option.showChatBarButton.label),
-        description: () => t(plugin.translate.option.showChatBarButton.description),
-        type: OptionType.BOOLEAN,
-        default: true
-    },
     service: {
         label: () => t(plugin.translate.option.service.label),
         description: () => IS_WEB

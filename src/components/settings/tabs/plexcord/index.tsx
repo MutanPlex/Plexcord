@@ -184,7 +184,7 @@ function PlexcordSettings() {
     const user = UserStore?.getCurrentUser();
 
     return (
-        <SettingsTab title={"Plexcord " + t(settings.title)}>
+        <SettingsTab>
             {isDonor(user?.id)
                 ? (
                     <SpecialCard

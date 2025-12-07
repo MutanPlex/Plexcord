@@ -12,7 +12,7 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { User } from "@plexcord/discord-types";
 import alwaysExpandProfile from "@plugins/alwaysExpandProfile";
 import { Devs } from "@utils/constants";
-import { getCurrentChannel } from "@utils/discord";
+import { fetchUserProfile, getCurrentChannel } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
 import { ContextMenuApi, Menu, UserStore } from "@webpack/common";
@@ -40,10 +40,12 @@ const AccountPanelContextMenu = ErrorBoundary.wrap(() => {
                 id="pc-ap-view-alternate-popout"
                 label={prioritizeServerProfile ? t(plugin.accountPanelServerProfile.context.account) : t(plugin.accountPanelServerProfile.context.server)}
                 disabled={getCurrentChannel()?.getGuildId() == null}
-                action={e => {
+                action={async e => {
                     if (isPluginEnabled(alwaysExpandProfile.name)) {
-                        const user = UserStore.getCurrentUser();
-                        return alwaysExpandProfile.openUserModal(user);
+                        const user = await fetchUserProfile(UserStore.getCurrentUser().id, {
+                            guild_id: getCurrentChannel()?.getGuildId()
+                        }, false);
+                        return alwaysExpandProfile.openUserModal(user!.userId);
                     }
                     openAlternatePopout = true;
                     accountPanelRef.current?.click();

@@ -41,7 +41,7 @@ function ThemesTab() {
     const [currentTab, setCurrentTab] = useState(ThemeTab.LOCAL);
 
     return (
-        <SettingsTab title={t(themes.title)}>
+        <SettingsTab>
             <TabBar
                 type="top"
                 look="brand"
@@ -73,7 +73,7 @@ function ThemesTab() {
 
 function UserscriptThemesTab() {
     return (
-        <SettingsTab title={t(themes.title)}>
+        <SettingsTab>
             <Card variant="danger">
                 <Heading>{t(themes.error.userscript)}</Heading>
 

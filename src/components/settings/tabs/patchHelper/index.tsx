@@ -107,7 +107,7 @@ function PatchHelper() {
     }
 
     return (
-        <SettingsTab title={t(patchHelper.title)}>
+        <SettingsTab>
             <HeadingTertiary>{t(patchHelper.fullPatch.label)}</HeadingTertiary>
             <FullPatchInput
                 setFind={onFindChange}
