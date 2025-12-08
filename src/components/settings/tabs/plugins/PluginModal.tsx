@@ -232,7 +232,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                     <BaseText size="lg" weight="semibold" className={classes(Margins.top16, Margins.bottom8)}>{t(plugins.pluginModal.settings)}</BaseText>
                     {renderSettings()}
                 </section>
-            </ModalContent>;
+            </ModalContent>
             {
                 hasSettings && <ModalFooter>
                     <Flex flexDirection="column" style={{ width: "100%" }}>

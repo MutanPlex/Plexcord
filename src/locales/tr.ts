@@ -130,6 +130,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 right: {
                     bottom: "Aşağı Sağ",
                     top: "Yukarı Sağ"
+                },
+                left: {
+                    bottom: "Aşağı Sol",
+                    top: "Yukarı Sol"
                 }
             },
             missed: {
@@ -146,7 +150,33 @@ const translations: MatchStructure<typeof enTranslations> = {
             logLimit: {
                 label: "Bildirim Günlüğü Limiti",
                 description: "Bildirim günlüğünde saklanacak maksimum bildirim sayısı. Bildirim günlüğünü devre dışı bırakmak için {{disable}} olarak ayarlayın ve eski bildirimleri otomatik olarak kaldırmamak için {{unlimited}} olarak ayarlayın"
-            }
+            },
+            opacity: {
+                label: "Opaklık",
+                description: "Uygulama içi bildirimlerin opaklığı"
+            },
+            maxNotifications: {
+                label: "Maksimum Bildirim",
+                description: "Aynı anda gösterilecek maksimum bildirim sayısı"
+            },
+            behavior: {
+                label: "Bildirim Davranışı",
+            },
+            disableInStreamerMode: {
+                label: "Yayıncı Modunda Devre Dışı Bırak",
+                description: "Yayıncı modundayken bildirimleri devre dışı bırak"
+            },
+            renderImages: {
+                label: "Görüntüleri İşle",
+                description: "Bildirimlerde görüntüleri işle"
+            },
+            streamingTreatment: {
+                label: "Yayıncı Modu Davranışı",
+                description: "Ekranınızı paylaşırken bildirimlerin nasıl işleneceği",
+                normal: "Normal - Bildirimi normal olarak göster",
+                noContent: "İçerik Yok - Bildirim gövdesini gizle",
+                ignore: "Yoksay - Bildirimi hiç gösterme"
+            },
         },
         macVibrancy: {
             title: "Pencere Titreme Stili (Yeniden başlatma gerekli)",
@@ -7656,11 +7686,48 @@ const translations: MatchStructure<typeof enTranslations> = {
                 loading: "Yükleniyor..."
             }
         },
+        statusNotifications: {
+            name: "StatusNotifications",
+            description: "Durum değişiklikleri için bildirim ekler",
+            loading: "Yükleniyor...",
+            option: {
+                notificationsSound: {
+                    label: "Bildirim Sesi",
+                    description: "Durum bildirimleri için bildirim sesi çalınsın mı?"
+                },
+                usersList: {
+                    label: "Kullanıcı Listesi",
+                    description: "Durum değişikliğinde bildirim yapılacak kullanılar",
+                    empty: "İzlenen kullanıcı yok. Bir kullanıcıya sağ tıklayıp 'Durum Bildirimleri' seçeneğini kullanarak ekleyebilirsiniz."
+                }
+            },
+            context: {
+                label: "Durum Bildirimleri",
+                notifications: "Bildirimler",
+                type: {
+                    all: "Tümü",
+                    online: "Çevrimiçi",
+                    offline: "Çevrimdışı",
+                    none: "Hiçbiri"
+                }
+            },
+            notification: {
+                unknownUser: "Kullanıcı",
+                title: "Durum Bildirimleri",
+
+            },
+            status: {
+                online: "Çevrimiçi",
+                idle: "Boşta",
+                dnd: "Rahatsız Etmeyin",
+                offline: "Çevrimdışı",
+            },
+        },
         statusPresets: {
             name: "StatusPresets",
             description: "Durumlarınızı kaydedip daha sonra yeniden ayarlamanıza olanak tanır",
             button: {
-                remember: "Kaydet"
+                remember: "Durumu Hatırla",
             },
             context: {
                 edit: "Özel Ön Ayarları Düzenle",
@@ -7965,21 +8032,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Opaklık",
                     description: "Toast bildiriminin opaklığı"
                 },
-                maxNotifications: {
-                    label: "Maksimum Bildirim",
-                    description: "Aynı anda gösterilecek maksimum bildirim sayısı"
-                },
                 determineServerNotifications: {
                     label: "Sunucu Bildirimlerini Belirle",
                     description: "Sunucu bildirim ayarlarına göre bildirim gösterilip gösterilmeyeceğini belirle"
-                },
-                disableInStreamerMode: {
-                    label: "Yayıncı Modunda Devre Dışı Bırak",
-                    description: "Yayıncı modunda bildirimleri devre dışı bırak"
-                },
-                renderImages: {
-                    label: "Görüntüleri Göster",
-                    description: "Bildirimlerde görüntüleri göster"
                 },
                 directMessages: {
                     label: "Direkt Mesajlar",
@@ -7996,13 +8051,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 friendActivity: {
                     label: "Arkadaş Etkinliği",
                     description: "Arkadaş ekleme veya arkadaşlık isteği alma durumları için bildirim göster"
-                },
-                streamingTreatment: {
-                    label: "Yayın Sırasında Bildirim Davranışı",
-                    description: "Ekran paylaşımı sırasında bildirimlerin nasıl davranacağını belirleyin",
-                    normal: "Normal - Bildirimi normal şekilde göster",
-                    noContent: "İçeriksiz - Bildirimin gövdesini gizle",
-                    ignore: "Yoksay - Bildirimi hiç gösterme"
                 },
                 notifyFor: {
                     label: "Bildirim Alınacak Kanallar",

@@ -18,18 +18,33 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { definePluginSettings } from "@api/Settings";
+import { showNotification } from "@api/Notifications";
+import { definePluginSettings, Settings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Channel, Message, User } from "@plexcord/discord-types";
 import { MessageType } from "@plexcord/discord-types/enums";
 import { Devs, PcDevs } from "@utils/constants";
-import definePlugin, { makeRange, OptionType } from "@utils/types";
+import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy, findStore } from "@webpack";
 import { ChannelStore, GuildRoleStore, NavigationRouter, RelationshipStore, SelectedChannelStore, StreamerModeStore, UserStore } from "@webpack/common";
 import { ReactNode } from "react";
 
-import { NotificationData, showNotification } from "./components/Notifications";
-import { RelationshipType, StreamingTreatment } from "./types";
+import { RelationshipType } from "./types";
+
+interface NotificationData {
+    title: string;
+    body: string;
+    richBody?: ReactNode;
+    icon?: string;
+    image?: string;
+    onClick?(): void;
+    onClose?(): void;
+    color?: string;
+    permanent?: boolean;
+    noPersist?: boolean;
+    dismissOnClick?: boolean;
+    attachments: number;
+}
 
 let ignoredUsers: string[] = [];
 let notifyFor: string[] = [];
@@ -43,66 +58,9 @@ const UserUtils = findByPropsLazy("getGlobalName");
 const USER_MENTION_REGEX = /<@!?(\d{17,20})>|<#(\d{17,20})>|<@&(\d{17,20})>/g; // This regex captures user, channel, and role mentions.
 
 export const settings = definePluginSettings({
-    position: {
-        label: () => t(plugin.toastNotifications.option.position.label),
-        description: () => t(plugin.toastNotifications.option.position.description),
-        type: OptionType.SELECT,
-        options: [
-            {
-                label: () => t(plugin.toastNotifications.option.position.bottomLeft),
-                value: "bottom-left",
-                default: true
-            },
-            {
-                label: () => t(plugin.toastNotifications.option.position.topLeft),
-                value: "top-left"
-            },
-            {
-                label: () => t(plugin.toastNotifications.option.position.topRight),
-                value: "top-right"
-            },
-            {
-                label: () => t(plugin.toastNotifications.option.position.bottomRight),
-                value: "bottom-right"
-            },
-        ]
-    },
-    timeout: {
-        label: () => t(plugin.toastNotifications.option.timeout.label),
-        description: () => t(plugin.toastNotifications.option.timeout.description),
-        type: OptionType.SLIDER,
-        default: 5,
-        markers: makeRange(1, 15, 1)
-    },
-    opacity: {
-        label: () => t(plugin.toastNotifications.option.opacity.label),
-        description: () => t(plugin.toastNotifications.option.opacity.description),
-        type: OptionType.SLIDER,
-        default: 100,
-        markers: makeRange(10, 100, 10)
-    },
-    maxNotifications: {
-        label: () => t(plugin.toastNotifications.option.maxNotifications.label),
-        description: () => t(plugin.toastNotifications.option.maxNotifications.description),
-        type: OptionType.SLIDER,
-        default: 3,
-        markers: makeRange(1, 5, 1)
-    },
     determineServerNotifications: {
         label: () => t(plugin.toastNotifications.option.determineServerNotifications.label),
         description: () => t(plugin.toastNotifications.option.determineServerNotifications.description),
-        type: OptionType.BOOLEAN,
-        default: true
-    },
-    disableInStreamerMode: {
-        label: () => t(plugin.toastNotifications.option.disableInStreamerMode.label),
-        description: () => t(plugin.toastNotifications.option.disableInStreamerMode.description),
-        type: OptionType.BOOLEAN,
-        default: true
-    },
-    renderImages: {
-        label: () => t(plugin.toastNotifications.option.renderImages.label),
-        description: () => t(plugin.toastNotifications.option.renderImages.description),
         type: OptionType.BOOLEAN,
         default: true
     },
@@ -129,26 +87,6 @@ export const settings = definePluginSettings({
         description: () => t(plugin.toastNotifications.option.friendActivity.description),
         type: OptionType.BOOLEAN,
         default: true
-    },
-    streamingTreatment: {
-        label: () => t(plugin.toastNotifications.option.streamingTreatment.label),
-        description: () => t(plugin.toastNotifications.option.streamingTreatment.description),
-        type: OptionType.SELECT,
-        options: [
-            {
-                label: () => t(plugin.toastNotifications.option.streamingTreatment.normal),
-                value: StreamingTreatment.NORMAL,
-                default: true
-            },
-            {
-                label: () => t(plugin.toastNotifications.option.streamingTreatment.noContent),
-                value: StreamingTreatment.NO_CONTENT
-            },
-            {
-                label: () => t(plugin.toastNotifications.option.streamingTreatment.ignore),
-                value: StreamingTreatment.IGNORE
-            }
-        ]
     },
     notifyFor: {
         label: () => t(plugin.toastNotifications.option.notifyFor.label),
@@ -238,11 +176,11 @@ export default definePlugin({
 
             const isStreaming = findStore("ApplicationStreamingStore").getAnyStreamForUser(UserStore.getCurrentUser()?.id);
 
-            const streamerMode = settings.store.disableInStreamerMode;
+            const streamerMode = Settings.notifications.disableInStreamerMode;
             const currentUserStreamerMode = StreamerModeStore.enabled;
 
             if (streamerMode && currentUserStreamerMode) return;
-            if (isStreaming && settings.store.streamingTreatment === StreamingTreatment.IGNORE) return;
+            if (isStreaming && Settings.notifications.streamingTreatment === "ignore") return;
 
             if (
                 (
@@ -335,8 +273,12 @@ export default definePlugin({
             }
 
             // Message contains a sticker.
-            if (message?.stickerItems) {
+            const stickerItems = (message as any).sticker_items;
+            if (stickerItems && stickerItems.length > 0) {
+                const sticker = stickerItems[0];
+                const stickerUrl = `https://cdn.discordapp.com/stickers/${sticker.id}.png?size=160&lossless=true`;
                 Notification.body = notificationText || t(plugin.toastNotifications.notification.sent.sticker);
+                Notification.image = stickerUrl;
             }
 
             // Message contains an attachment.
@@ -386,11 +328,11 @@ export default definePlugin({
 
             Notification.body = limitMessageLength(Notification.body, Notification.attachments > 0);
 
-            if (isStreaming && settings.store.streamingTreatment === StreamingTreatment.NO_CONTENT) {
+            if (isStreaming && Settings.notifications.streamingTreatment === "no-content") {
                 Notification.body = t(plugin.toastNotifications.notification.redacted);
             }
 
-            if (!settings.store.renderImages) {
+            if (!Settings.notifications.renderImages) {
                 Notification.icon = undefined;
             }
 
@@ -487,8 +429,12 @@ async function handleGuildMessage(message: Message) {
     }
 
     // Message contains a sticker.
-    if (message?.stickerItems) {
+    const stickerItems = (message as any).sticker_items;
+    if (stickerItems && stickerItems.length > 0) {
+        const sticker = stickerItems[0];
+        const stickerUrl = `https://cdn.discordapp.com/stickers/${sticker.id}.png?size=160&lossless=true`;
         Notification.body = notificationText || t(plugin.toastNotifications.notification.sent.sticker);
+        Notification.image = stickerUrl;
     }
 
     // Message contains an attachment.
@@ -540,11 +486,11 @@ async function handleGuildMessage(message: Message) {
 
     const isStreaming = findStore("ApplicationStreamingStore").getAnyStreamForUser(UserStore.getCurrentUser()?.id);
 
-    if (isStreaming && settings.store.streamingTreatment === StreamingTreatment.NO_CONTENT) {
+    if (isStreaming && Settings.notifications.streamingTreatment === "no-content") {
         Notification.body = t(plugin.toastNotifications.notification.redacted);
     }
 
-    if (!settings.store.renderImages) {
+    if (!Settings.notifications.renderImages) {
         Notification.icon = undefined;
     }
 
@@ -564,7 +510,7 @@ async function relationshipAdd(user: User, type: Number) {
         attachments: 0,
     };
 
-    if (!settings.store.renderImages) {
+    if (!Settings.notifications.renderImages) {
         Notification.icon = undefined;
     }
 
@@ -595,7 +541,7 @@ function showExampleNotification(): Promise<void> {
         permanent: false
     };
 
-    if (!settings.store.renderImages) {
+    if (!Settings.notifications.renderImages) {
         Notification.icon = undefined;
     }
     return showNotification(Notification);

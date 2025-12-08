@@ -12,6 +12,7 @@ import { Notifications } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
 import type { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
+import { addToStatusGroup } from "@utils/contextMenuHelpers";
 import { getCurrentChannel } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
@@ -29,8 +30,8 @@ function Icon(enabled?: boolean): JSX.Element {
         width="18"
         height="18"
     >
-        <circle cx="9" cy="9" r="8" fill={!enabled ? "var(--status-danger)" : "currentColor"} />
-        <circle cx="9" cy="9" r="3.75" fill={!enabled ? "white" : "black"} />
+        <circle cx="9" cy="9" r="8" fill={!enabled ? "var(--status-positive)" : "var(--status-danger)"} />
+        <circle cx="9" cy="9" r="3.75" fill={!enabled ? "white" : "white"} />
     </svg>;
 }
 
@@ -75,21 +76,20 @@ function ContextCallback(name: "guild" | "user" | "channel"): NavContextMenuPatc
         if (!type) return;
         const enabled = settings.store[`${name}s`].split(", ").includes(type.id);
         if (name === "user" && type.id === UserStore.getCurrentUser().id) return;
-        children.splice(-1, 0, (
-            <Menu.MenuGroup>
-                <Menu.MenuItem
-                    id={`status-${name}-bypass`}
-                    label={`${enabled ? t(plugin.bypassStatus.context.remove) : t(plugin.bypassStatus.context.add)}`}
-                    icon={() => Icon(enabled)}
-                    action={() => {
-                        let bypasses: string[] = settings.store[`${name}s`].split(", ");
-                        if (enabled) bypasses = bypasses.filter(id => id !== type.id);
-                        else bypasses.push(type.id);
-                        settings.store[`${name}s`] = bypasses.filter(id => id.trim() !== "").join(", ");
-                    }}
-                />
-            </Menu.MenuGroup>
-        ));
+
+        addToStatusGroup(children,
+            <Menu.MenuItem
+                id={`status-${name}-bypass`}
+                label={`${enabled ? t(plugin.bypassStatus.context.remove) : t(plugin.bypassStatus.context.add)}`}
+                icon={() => Icon(enabled)}
+                action={() => {
+                    let bypasses: string[] = settings.store[`${name}s`].split(", ");
+                    if (enabled) bypasses = bypasses.filter(id => id !== type.id);
+                    else bypasses.push(type.id);
+                    settings.store[`${name}s`] = bypasses.filter(id => id.trim() !== "").join(", ");
+                }}
+            />
+        );
     };
 }
 

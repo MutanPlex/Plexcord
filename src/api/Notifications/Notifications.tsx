@@ -19,19 +19,24 @@
 
 import { settings, t } from "@api/i18n";
 import { Settings } from "@api/Settings";
-import { Queue } from "@utils/Queue";
-import { createRoot, WindowStore } from "@webpack/common";
+import { createRoot, React, WindowStore } from "@webpack/common";
 import type { ReactNode } from "react";
 import type { Root } from "react-dom/client";
 
 import NotificationComponent from "./NotificationComponent";
 import { openNotificationLogModal, persistNotification } from "./notificationLog";
 
-const NotificationQueue = new Queue();
+interface NotificationItem {
+    id: number;
+    data: NotificationData;
+    height: number;
+}
 
+let activeNotifications: NotificationItem[] = [];
 let reactRoot: Root;
 let id = 42;
 let missedCount = 0;
+const ESTIMATED_NOTIFICATION_HEIGHT = 120;
 
 window.addEventListener("focus", () => {
     const { missed, timeout, useNative } = Settings.notifications;
@@ -79,17 +84,41 @@ export interface NotificationData {
     dismissOnClick?: boolean;
 }
 
-function _showNotification(notification: NotificationData, id: number) {
+function renderNotifications() {
     const root = getRoot();
-    return new Promise<void>(resolve => {
-        root.render(
-            <NotificationComponent key={id} {...notification} onClose={() => {
-                notification.onClose?.();
-                root.render(null);
-                resolve();
-            }} />,
-        );
-    });
+    const { maxNotifications } = Settings.notifications;
+    const notificationsToShow = activeNotifications.slice(-maxNotifications);
+    let cumulativeOffset = 0;
+
+    root.render(
+        <>
+            {notificationsToShow.map((item, index) => {
+                const currentOffset = cumulativeOffset;
+                cumulativeOffset += item.height;
+
+                return (
+                    <NotificationComponent
+                        key={item.id}
+                        index={index}
+                        offsetY={currentOffset}
+                        {...item.data}
+                        onHeightChange={height => {
+                            const notification = activeNotifications.find(n => n.id === item.id);
+                            if (notification && notification.height !== height) {
+                                notification.height = height;
+                                renderNotifications();
+                            }
+                        }}
+                        onClose={() => {
+                            item.data.onClose?.();
+                            activeNotifications = activeNotifications.filter(n => n.id !== item.id);
+                            renderNotifications();
+                        }}
+                    />
+                );
+            })}
+        </>
+    );
 }
 
 function shouldBeNative() {
@@ -124,14 +153,21 @@ export async function showNotification(data: NotificationData) {
 
         if (!WindowStore.isFocused()) missedCount++;
     } else {
-        NotificationQueue.push(() =>
-            _showNotification({
+        const notificationId = id++;
+        const estimatedHeight = data.image ? ESTIMATED_NOTIFICATION_HEIGHT + 100 : ESTIMATED_NOTIFICATION_HEIGHT;
+
+        activeNotifications.push({
+            id: notificationId,
+            height: estimatedHeight,
+            data: {
                 ...data,
                 onClose: () => {
                     data.onClose?.();
                     if (!WindowStore.isFocused()) missedCount++;
                 }
-            }, id++)
-        );
+            }
+        });
+
+        renderNotifications();
     }
 }

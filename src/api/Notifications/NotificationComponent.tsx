@@ -23,7 +23,7 @@ import { notifications, t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { classes } from "@utils/misc";
-import { React, useEffect, useRef, useState } from "@webpack/common";
+import { React, useEffect, useLayoutEffect, useRef, useState } from "@webpack/common";
 
 import { NotificationData } from "./Notifications";
 
@@ -38,15 +38,26 @@ export default ErrorBoundary.wrap(function NotificationComponent({
     image,
     permanent,
     className,
-    dismissOnClick
-}: NotificationData & { className?: string; }) {
-    const { timeout, position } = useSettings(["notifications.timeout", "notifications.position"]).notifications;
+    dismissOnClick,
+    index = 0,
+    offsetY = 0,
+    onHeightChange
+}: NotificationData & { className?: string; index?: number; offsetY?: number; onHeightChange?: (height: number) => void; }) {
+    const { timeout, position, opacity } = useSettings(["notifications.timeout", "notifications.position", "notifications.opacity"]).notifications;
 
     const [isHover, setIsHover] = useState(false);
     const [elapsed, setElapsed] = useState(0);
+    const containerRef = useRef<HTMLButtonElement>(null);
 
     const start = useRef(Date.now());
     const pause = useRef<number | null>(null);
+
+    useLayoutEffect(() => {
+        if (containerRef.current && onHeightChange) {
+            const height = containerRef.current.offsetHeight;
+            onHeightChange(height);
+        }
+    }, [onHeightChange, body, richBody, image]);
 
     useEffect(() => {
         if (timeout === 0 || permanent) return;
@@ -76,10 +87,25 @@ export default ErrorBoundary.wrap(function NotificationComponent({
 
     const timeoutProgress = elapsed / timeout;
 
+    const getPositionStyle = () => {
+        const gap = 10;
+        const basePosition = position.includes("bottom") ? 16 : 48;
+        const totalOffset = basePosition + offsetY + (gap * index);
+
+        if (position === "bottom-right") return { bottom: `${totalOffset}px`, right: "1rem" };
+        if (position === "bottom-left") return { bottom: `${totalOffset}px`, left: "1rem" };
+        if (position === "top-left") return { top: `${totalOffset}px`, left: "1rem" };
+        return { top: `${totalOffset}px`, right: "1rem" };
+    };
+
     return (
         <button
+            ref={containerRef}
             className={classes("pc-notification-root", className)}
-            style={position === "bottom-right" ? { bottom: "1rem" } : { top: "3rem" }}
+            style={{
+                ...getPositionStyle(),
+                opacity: opacity / 100
+            }}
             onClick={() => {
                 onClick?.();
                 if (dismissOnClick !== false)

@@ -91,6 +91,8 @@ function NotificationSettings() {
                 options={[
                     { label: t(settings.notifications.positions.right.bottom), value: "bottom-right", default: true },
                     { label: t(settings.notifications.positions.right.top), value: "top-right" },
+                    { label: t(settings.notifications.positions.left.bottom), value: "bottom-left" },
+                    { label: t(settings.notifications.positions.left.top), value: "top-left" },
                 ] satisfies Array<{ value: typeof settingsState["position"]; } & Record<string, any>>}
                 select={v => settingsState.position = v}
                 isSelected={v => v === settingsState.position}
@@ -132,6 +134,65 @@ function NotificationSettings() {
                 onValueChange={v => settingsState.logLimit = v}
                 onValueRender={v => v === 200 ? "∞" : v}
                 onMarkerRender={v => v === 200 ? "∞" : v}
+            />
+
+            <Heading tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t(settings.notifications.opacity.label)}</Heading>
+            <Paragraph className={Margins.bottom16}>{t(settings.notifications.opacity.description)}</Paragraph>
+            <Slider
+                disabled={settingsState.useNative === "always"}
+                markers={[10, 25, 50, 75, 100]}
+                minValue={10}
+                maxValue={100}
+                initialValue={settingsState.opacity}
+                onValueChange={v => settingsState.opacity = v}
+                onValueRender={v => v + "%"}
+                onMarkerRender={v => v + "%"}
+                stickToMarkers={false}
+            />
+
+            <Heading tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t(settings.notifications.maxNotifications.label)}</Heading>
+            <Paragraph className={Margins.bottom16}>{t(settings.notifications.maxNotifications.description)}</Paragraph>
+            <Slider
+                disabled={settingsState.useNative === "always"}
+                markers={[1, 2, 3, 4, 5]}
+                minValue={1}
+                maxValue={5}
+                stickToMarkers={true}
+                initialValue={settingsState.maxNotifications}
+                onValueChange={v => settingsState.maxNotifications = v}
+                onValueRender={v => v}
+                onMarkerRender={v => v}
+            />
+
+            <Heading tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t(settings.notifications.behavior.label)}</Heading>
+
+            <FormSwitch
+                value={settingsState.disableInStreamerMode}
+                onChange={(v: boolean) => settingsState.disableInStreamerMode = v}
+                title={t(settings.notifications.disableInStreamerMode.description)}
+                description={t(settings.notifications.disableInStreamerMode.description)}
+            />
+
+            <FormSwitch
+                value={settingsState.renderImages}
+                onChange={(v: boolean) => settingsState.renderImages = v}
+                title={t(settings.notifications.renderImages.description)}
+                description={t(settings.notifications.renderImages.description)}
+            />
+
+            <Heading tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t(settings.notifications.streamingTreatment.label)}</Heading>
+            <Paragraph className={Margins.bottom8}>{t(settings.notifications.streamingTreatment.description)}</Paragraph>
+            <Select
+                placeholder={t(settings.notifications.streamingTreatment.label)}
+                options={[
+                    { label: t(settings.notifications.streamingTreatment.normal), value: "normal", default: true },
+                    { label: t(settings.notifications.streamingTreatment.noContent), value: "no-content" },
+                    { label: t(settings.notifications.streamingTreatment.ignore), value: "ignore" },
+                ] satisfies Array<{ value: typeof settingsState["streamingTreatment"]; } & Record<string, any>>}
+                closeOnSelect={true}
+                select={v => settingsState.streamingTreatment = v}
+                isSelected={v => v === settingsState.streamingTreatment}
+                serialize={identity}
             />
         </div>
     );

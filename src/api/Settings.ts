@@ -89,10 +89,15 @@ export interface Settings {
 
     notifications: {
         timeout: number;
-        position: "top-right" | "bottom-right";
+        position: "top-right" | "bottom-right" | "top-left" | "bottom-left";
         useNative: "always" | "never" | "not-focused";
         missed: boolean;
         logLimit: number;
+        opacity: number;
+        maxNotifications: number;
+        disableInStreamerMode: boolean;
+        renderImages: boolean;
+        streamingTreatment: "normal" | "no-content" | "ignore";
     };
 
     cloud: {
@@ -145,7 +150,12 @@ const DefaultSettings: Settings = {
         position: "bottom-right",
         useNative: "not-focused",
         missed: true,
-        logLimit: 50
+        logLimit: 50,
+        opacity: 100,
+        maxNotifications: 3,
+        disableInStreamerMode: true,
+        renderImages: true,
+        streamingTreatment: "normal"
     },
 
     cloud: {

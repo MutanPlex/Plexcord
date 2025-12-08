@@ -126,7 +126,11 @@ const translations = {
                 label: "Notification Position",
                 right: {
                     bottom: "Bottom Right",
-                    top: "Top Right"
+                    top: "Top Right",
+                },
+                left: {
+                    bottom: "Bottom Left",
+                    top: "Top Left",
                 }
             },
             missed: {
@@ -143,7 +147,33 @@ const translations = {
             logLimit: {
                 label: "Notification Log Limit",
                 description: "The maximum number of notifications to keep in the log before old ones are removed. Set to {{disable}} to disable the notification log and {{unlimited}} to never automatically remove old notifications"
-            }
+            },
+            opacity: {
+                label: "Notification Opacity",
+                description: "The opacity of in-app notifications"
+            },
+            maxNotifications: {
+                label: "Max Notifications",
+                description: "Maximum number of notifications displayed at once"
+            },
+            behavior: {
+                label: "Notification Behavior",
+            },
+            disableInStreamerMode: {
+                label: "Disable In Streamer Mode",
+                description: "Disable notifications while in streamer mode"
+            },
+            renderImages: {
+                label: "Render Images",
+                description: "Render images in notifications"
+            },
+            streamingTreatment: {
+                label: "Streaming Treatment",
+                description: "How to treat notifications while sharing your screen",
+                normal: "Normal - Show the notification as normal",
+                noContent: "No Content - Hide the notification body",
+                ignore: "Ignore - Don't show the notification at all"
+            },
         },
         macVibrancy: {
             title: "Window Vibrancy Style (Requires Restart)",
@@ -7653,11 +7683,47 @@ const translations = {
                 loading: "Loading..."
             }
         },
+        statusNotifications: {
+            name: "StatusNotifications",
+            description: "Adds notifications for status changes",
+            loading: "Loading...",
+            option: {
+                notificationsSound: {
+                    label: "Notification Sound",
+                    description: "Play a notification sound for status notifications?"
+                },
+                usersList: {
+                    label: "Users List",
+                    description: "List of users to notify on status change",
+                    empty: "No users tracked. Right-click a user and select 'Status Notifications' to add them."
+                }
+            },
+            context: {
+                label: "Status Notifications",
+                notifications: "Notifications",
+                type: {
+                    all: "All",
+                    online: "Online",
+                    offline: "Offline",
+                    none: "None"
+                }
+            },
+            notification: {
+                unknownUser: "User",
+                title: "Status Notifications"
+            },
+            status: {
+                online: "Online",
+                idle: "Idle",
+                dnd: "Do Not Disturb",
+                offline: "Offline",
+            },
+        },
         statusPresets: {
             name: "StatusPresets",
             description: "Allows you to remember your statuses and set them later",
             button: {
-                remember: "Remember"
+                remember: "Remember Status"
             },
             context: {
                 edit: "Edit Custom Presets",
@@ -7962,21 +8028,10 @@ const translations = {
                     label: "Opacity",
                     description: "The opacity of the toast notification"
                 },
-                maxNotifications: {
-                    label: "Max Notifications",
-                    description: "Maximum number of notifications displayed at once"
-                },
+
                 determineServerNotifications: {
                     label: "Determine Server Notifications",
                     description: "Determine whether to show notifications based on server notification settings"
-                },
-                disableInStreamerMode: {
-                    label: "Disable In Streamer Mode",
-                    description: "Disable notifications while in streamer mode"
-                },
-                renderImages: {
-                    label: "Render Images",
-                    description: "Render images in notifications"
                 },
                 directMessages: {
                     label: "Direct Messages",
@@ -7993,13 +8048,6 @@ const translations = {
                 friendActivity: {
                     label: "Friend Activity",
                     description: "Show notifications for adding someone or receiving a friend request"
-                },
-                streamingTreatment: {
-                    label: "Streaming Treatment",
-                    description: "How to treat notifications while sharing your screen",
-                    normal: "Normal - Show the notification as normal",
-                    noContent: "No Content - Hide the notification body",
-                    ignore: "Ignore - Don't show the notification at all"
                 },
                 notifyFor: {
                     label: "Notify For",
