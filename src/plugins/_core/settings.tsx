@@ -7,7 +7,7 @@
 
 import i18n, { changelog, cloud, patchHelper, plugin, plugins, settings as settingsI18n, SUPPORTED_LANGUAGES, sync, t, themes, updater } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
-import { BackupRestoreIcon, CloudIcon, MainSettingsIcon, PaintbrushIcon, PatchHelperIcon, PlaceholderIcon, PlextronSettingsIcon, PluginsIcon, UpdaterIcon } from "@components/index";
+import { BackupRestoreIcon, ChangelogIcon, CloudIcon, MainSettingsIcon, PaintbrushIcon, PatchHelperIcon, PlaceholderIcon, PlextronSettingsIcon, PluginsIcon, UpdaterIcon } from "@components/index";
 import { BackupAndRestoreTab, ChangelogTab, CloudTab, PatchHelperTab, PlexcordTab, PluginsTab, ThemesTab, UpdaterTab } from "@components/settings/tabs";
 import { Devs, PcDevs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
@@ -164,6 +164,13 @@ export default definePlugin({
                 match: /(\i)\.buildLayout\(\)(?=\.map)/,
                 replace: "$self.buildLayout($1)"
             }
+        },
+        {
+            find: "getWebUserSettingFromSection",
+            replacement: {
+                match: /new Map\(\[(?=\[.{0,10}\.ACCOUNT,.{0,10}\.ACCOUNT_PANEL)/,
+                replace: "new Map([...$self.getSettingsSectionMappings(),"
+            }
         }
     ],
 
@@ -194,6 +201,23 @@ export default definePlugin({
             ]
         });
     },
+
+    getSettingsSectionMappings() {
+        return [
+            ["PlexcordSettings", "plexcord_main_panel"],
+            ["PlexcordPlugins", "plexcord_plugins_panel"],
+            ["PlexcordThemes", "plexcord_themes_panel"],
+            ["PlexcordUpdater", "plexcord_updater_panel"],
+            ["PlexcordChangelog", "plexcord_changelog_panel"],
+            ["PlexcordCloud", "plexcord_cloud_panel"],
+            ["PlexcordBackupAndRestore", "plexcord_backup_restore_panel"],
+            ["PlexcordPatchHelper", "plexcord_patch_helper_panel"],
+            ["PlexcordDiscordIcons", "plexcord_icon_viewer"],
+            ["PlexcordThemeLibrary", "plexcord_theme_library"],
+            ["PlexcordIRememberYou", "plexcord_i_remember_you"],
+        ];
+    },
+
     buildLayout(originalLayoutBuilder: SettingsLayoutBuilder) {
         const layout = originalLayoutBuilder.buildLayout();
         if (originalLayoutBuilder.key !== "$Root") return layout;
@@ -229,6 +253,13 @@ export default definePlugin({
                 panelTitle: t(updater.title),
                 Component: UpdaterTab,
                 Icon: UpdaterIcon
+            }),
+            buildEntry({
+                key: "plexcord_changelog",
+                title: t(changelog.text),
+                panelTitle: t(changelog.text),
+                Component: ChangelogTab,
+                Icon: ChangelogIcon
             }),
             buildEntry({
                 key: "plexcord_cloud",
@@ -308,7 +339,7 @@ export default definePlugin({
                 className: "pc-settings-header"
             },
             {
-                section: "settings/tabs",
+                section: "PlexcordSettings",
                 label: "Plexcord",
                 element: PlexcordTab,
                 className: "pc-settings"
@@ -348,7 +379,7 @@ export default definePlugin({
                 className: "pc-cloud"
             },
             {
-                section: "settings/tabsSync",
+                section: "PlexcordBackupAndRestore",
                 label: t(sync.title),
                 searchableTitles: [t(sync.title)],
                 element: BackupAndRestoreTab,

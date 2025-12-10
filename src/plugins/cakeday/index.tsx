@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { playAudio } from "@api/AudioPlayer";
 import { BadgeUserArgs, ProfileBadge } from "@api/Badges";
 import { addContextMenuPatch, removeContextMenuPatch } from "@api/ContextMenu";
 import * as DataStore from "@api/DataStore";
@@ -11,9 +12,12 @@ import { plugin, t } from "@api/i18n";
 import { Badges } from "@api/index";
 import { addMemberListDecorator, removeMemberListDecorator } from "@api/MemberListDecorators";
 import { addMessageDecoration, removeMessageDecoration } from "@api/MessageDecorations";
+import { showNotification } from "@api/Notifications/Notifications";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { Button } from "@components/Button";
+import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { PcDevs } from "@utils/constants";
@@ -46,13 +50,21 @@ const birthdayBadge: ProfileBadge = {
 const logger = new Logger("CakeDay");
 
 let savedBirthdays: SavedBirthdays = {};
+let birthdayCheckInterval: NodeJS.Timeout | null = null;
+let lastCheckedDate: string | null = null;
+const notifiedToday: Set<string> = new Set();
 
 async function loadBirthdays() {
     savedBirthdays = await DataStore.get("CakeDay_birthdays") ?? {};
+    lastCheckedDate = await DataStore.get("CakeDay_lastCheckedDate") ?? null;
 }
 
 async function saveBirthdays() {
     await DataStore.set("CakeDay_birthdays", savedBirthdays);
+}
+
+async function saveLastCheckedDate(date: string) {
+    await DataStore.set("CakeDay_lastCheckedDate", date);
 }
 
 function checkBirthday(userId: string): boolean {
@@ -74,10 +86,31 @@ function isValidBirthday(birthday: string): boolean {
 
 async function setBirthday(userId: string, username: string, birthday: string) {
     if (isValidBirthday(birthday)) {
+        const oldBirthday = savedBirthdays[userId];
         savedBirthdays[userId] = birthday;
         await saveBirthdays();
 
         showToast(t(plugin.cakeDay.toast.success), Toasts.Type.SUCCESS);
+
+        if (checkBirthday(userId) && !notifiedToday.has(userId)) {
+            const user = UserStore.getUser(userId);
+            const displayName = user?.username || username || "Unknown User";
+            const icon = Settings.notifications.renderImages ? user?.getAvatarURL?.(undefined, 128) : undefined;
+
+            showNotification({
+                title: t(plugin.cakeDay.notification.title),
+                body: t(plugin.cakeDay.notification.body, { username: displayName }),
+                icon,
+                permanent: false,
+                dismissOnClick: true
+            });
+
+            if (settings.store.notificationSound) {
+                playAudio("poggermode_achievement_unlock");
+            }
+            notifiedToday.add(userId);
+            logger.info(`Birthday notification sent for ${displayName} (${userId})`);
+        }
     } else {
         showToast(t(plugin.cakeDay.toast.invalid), Toasts.Type.FAILURE);
     }
@@ -91,6 +124,57 @@ async function clearBirthday(userId: string, username: string) {
         showToast(t(plugin.cakeDay.toast.cleared), Toasts.Type.SUCCESS);
         logger.info(`Cleared birthday for ${username} (${userId})`);
     }
+}
+
+function checkAndNotifyBirthdays(forceNotify = false) {
+    const today = new Date();
+    const currentDate = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+
+    const shouldNotify = lastCheckedDate !== currentDate || forceNotify;
+
+    if (shouldNotify) {
+        if (lastCheckedDate !== currentDate) {
+            lastCheckedDate = currentDate;
+            notifiedToday.clear();
+            saveLastCheckedDate(currentDate);
+        }
+
+        Object.keys(savedBirthdays).forEach(userId => {
+            if (checkBirthday(userId) && !notifiedToday.has(userId)) {
+                const user = UserStore.getUser(userId);
+                const displayName = user?.username || "Unknown User";
+                const icon = Settings.notifications.renderImages ? user?.getAvatarURL?.(undefined, 128) : undefined;
+
+                showNotification({
+                    title: t(plugin.cakeDay.notification.title),
+                    body: t(plugin.cakeDay.notification.body, { username: displayName }),
+                    icon,
+                    permanent: false,
+                    dismissOnClick: true
+                });
+
+                if (settings.store.notificationSound) {
+                    playAudio("poggermode_achievement_unlock");
+                }
+                notifiedToday.add(userId);
+                logger.info(`Birthday notification sent for ${displayName} (${userId})`);
+            }
+        });
+    }
+}
+
+function scheduleMidnightCheck() {
+    const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+
+    const timeUntilMidnight = tomorrow.getTime() - now.getTime();
+
+    setTimeout(() => {
+        checkAndNotifyBirthdays();
+        scheduleMidnightCheck();
+    }, timeUntilMidnight);
 }
 
 function BirthdayModal({ userId, username, modalProps }: { userId: string, username: string, modalProps: any; }) {
@@ -178,53 +262,163 @@ function CakeIcon({ width, height, onClick }: { width: number; height: number; o
     );
 }
 
-function CakeDaySettings() {
-    const [birthdays, setBirthdays] = React.useState(savedBirthdays);
+function UserListModal() {
+    const [, forceUpdate] = React.useReducer(x => x + 1, 0);
+    const [isLoaded, setIsLoaded] = React.useState(false);
+    const [editingUserId, setEditingUserId] = React.useState<string | null>(null);
+    const [editValue, setEditValue] = React.useState("");
+    const [error, setError] = React.useState("");
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setBirthdays({ ...savedBirthdays });
-        }, 1000);
-
-        return () => clearInterval(interval);
+        loadBirthdays().then(() => {
+            setIsLoaded(true);
+            forceUpdate();
+        });
     }, []);
 
-    if (Object.keys(birthdays).length === 0) {
+    if (!isLoaded) {
+        return (
+            <div style={{ color: "var(--text-muted)", fontStyle: "italic", padding: "8px 0" }}>
+                {t(plugin.cakeDay.modal.loading)}
+            </div>
+        );
+    }
+
+    const trackedUserIds = Object.keys(savedBirthdays);
+
+    if (trackedUserIds.length === 0) {
         return (
             <section>
                 <Heading>{t(plugin.cakeDay.modal.saved)}</Heading>
-                <Paragraph>
+                <Paragraph style={{ color: "var(--text-muted)", fontStyle: "italic" }}>
                     {t(plugin.cakeDay.modal.savedDesc)}
                 </Paragraph>
             </section>
         );
     }
 
+    async function handleBirthdayChange(userId: string, newBirthday: string) {
+        if (!isValidBirthday(newBirthday)) {
+            setError(t(plugin.cakeDay.toast.invalid));
+            return;
+        }
+
+        savedBirthdays[userId] = newBirthday;
+        await saveBirthdays();
+        setEditingUserId(null);
+        setEditValue("");
+        setError("");
+        forceUpdate();
+        showToast(t(plugin.cakeDay.toast.success), Toasts.Type.SUCCESS);
+    }
+
+    async function handleRemove(userId: string, username: string) {
+        await clearBirthday(userId, username);
+        forceUpdate();
+    }
+
     return (
         <section>
             <Heading>{t(plugin.cakeDay.modal.saved)}</Heading>
-            {Object.entries(birthdays).map(([userId, birthday]) => {
-                const user = UserStore.getUser(userId);
-                const isBirthday = checkBirthday(userId);
+            <Flex flexDirection="column" gap={"12px"}>
+                {trackedUserIds.map((userId, index) => {
+                    const user = UserStore.getUser(userId);
+                    const displayName = user?.username || "Unknown User";
+                    const isBirthday = checkBirthday(userId);
+                    const isEditing = editingUserId === userId;
 
-                return (
-                    <div key={userId} className={Margins.bottom8}>
-                        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                            <Paragraph>
-                                <strong>{user?.username || "Unknown User"}</strong> - {birthday}
-                                {isBirthday && <span style={{ marginLeft: "8px" }}>🎂 {t(plugin.cakeDay.modal.today)}</span>}
-                            </Paragraph>
-                            <Button
-                                size="min"
-                                variant="dangerPrimary"
-                                onClick={() => clearBirthday(userId, user?.username || "Unknown")}
+                    return (
+                        <React.Fragment key={userId}>
+                            {index > 0 && <Divider />}
+                            <Flex
+                                alignItems="center"
+                                justifyContent="space-between"
+                                gap={"12px"}
+                                style={{ padding: "4px 0" }}
                             >
-                                {t(plugin.cakeDay.modal.remove)}
-                            </Button>
-                        </div>
-                    </div>
-                );
-            })}
+                                <Flex alignItems="center" gap="8px" style={{ flex: 1, minWidth: 0 }}>
+                                    {user && (
+                                        <img
+                                            src={user.getAvatarURL(undefined, 32)}
+                                            alt=""
+                                            style={{
+                                                width: "32px",
+                                                height: "32px",
+                                                borderRadius: "50%",
+                                                flexShrink: 0
+                                            }}
+                                        />
+                                    )}
+                                    <Flex flexDirection="column" gap={"5px"} style={{ flex: 1, minWidth: 0 }}>
+                                        <span style={{ color: "var(--text-default)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontWeight: 500 }}>
+                                            {displayName}
+                                            {isBirthday && <span style={{ marginLeft: "8px" }}>🎂 {t(plugin.cakeDay.modal.today)}</span>}
+                                        </span>
+                                        {isEditing ? (
+                                            <Flex alignItems="center" gap="4px" style={{ marginTop: "4px" }}>
+                                                <TextInput
+                                                    placeholder={t(plugin.cakeDay.modal.placeholder)}
+                                                    value={editValue}
+                                                    onChange={setEditValue}
+                                                    style={{ width: "120px" }}
+                                                    autoFocus
+                                                />
+                                                <Button
+                                                    size="min"
+                                                    onClick={() => handleBirthdayChange(userId, editValue)}
+                                                >
+                                                    {t(plugin.cakeDay.modal.save)}
+                                                </Button>
+                                                <Button
+                                                    size="min"
+                                                    onClick={() => {
+                                                        setEditingUserId(null);
+                                                        setEditValue("");
+                                                        setError("");
+                                                    }}
+                                                >
+                                                    {t(plugin.cakeDay.modal.cancel)}
+                                                </Button>
+                                            </Flex>
+                                        ) : (
+                                            <span style={{ color: "var(--text-default)", fontSize: "14px" }}>
+                                                {savedBirthdays[userId]}
+                                            </span>
+                                        )}
+                                        {error && editingUserId === userId && (
+                                            <span style={{ color: "var(--status-danger)", fontSize: "12px", marginTop: "2px" }}>
+                                                {error}
+                                            </span>
+                                        )}
+                                    </Flex>
+                                </Flex>
+                                <Flex gap="4px">
+                                    {!isEditing && (
+                                        <Button
+                                            size="min"
+                                            onClick={() => {
+                                                setEditingUserId(userId);
+                                                setEditValue(savedBirthdays[userId]);
+                                                setError("");
+                                            }}
+                                        >
+                                            {t(plugin.cakeDay.modal.edit)}
+                                        </Button>
+                                    )}
+                                    <Button
+                                        size="min"
+                                        variant="dangerPrimary"
+                                        onClick={() => handleRemove(userId, displayName)}
+                                        disabled={isEditing}
+                                    >
+                                        {t(plugin.cakeDay.modal.remove)}
+                                    </Button>
+                                </Flex>
+                            </Flex>
+                        </React.Fragment>
+                    );
+                })}
+            </Flex>
         </section>
     );
 }
@@ -234,7 +428,7 @@ const cakeLocations = {
         label: () => t(plugin.cakeDay.locations.chat.label),
         description: () => t(plugin.cakeDay.locations.chat.description),
         onEnable: () => {
-            if (Settings.plugins.CakeDay.chat) {
+            if (settings.store.chat) {
                 addMessageDecoration("pc-cakeday", props => {
                     if (!props.message?.author.id) return null;
                     if (!checkBirthday(props.message?.author.id)) return null;
@@ -252,7 +446,7 @@ const cakeLocations = {
         label: () => t(plugin.cakeDay.locations.memberList.label),
         description: () => t(plugin.cakeDay.locations.memberList.description),
         onEnable: () => {
-            if (Settings.plugins.CakeDay.memberList) {
+            if (settings.store.memberList) {
                 addMemberListDecorator("pc-cakeday", props => {
                     if (!props.user || !props.user.id) return null;
                     if (!checkBirthday(props.user.id)) return null;
@@ -289,6 +483,18 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
+    },
+    notificationSound: {
+        label: () => t(plugin.cakeDay.option.notificationSound.label),
+        description: () => t(plugin.cakeDay.option.notificationSound.description),
+        type: OptionType.BOOLEAN,
+        default: true
+    },
+    userList: {
+        label: () => t(plugin.cakeDay.option.userList.label),
+        description: () => t(plugin.cakeDay.option.userList.description),
+        type: OptionType.COMPONENT,
+        component: UserListModal,
     }
 });
 
@@ -296,9 +502,7 @@ export default definePlugin({
     name: "CakeDay",
     description: () => t(plugin.cakeDay.description),
     authors: [PcDevs.MutanPlex],
-
     settings,
-    settingsAboutComponent: () => <CakeDaySettings />,
 
     contextMenus: {
         "user-context": (children: any[], { user }: { user: any; }) => {
@@ -342,7 +546,11 @@ export default definePlugin({
 
     async start() {
         await loadBirthdays();
-        if (Settings.plugins.CakeDay.profileBadge) {
+
+        checkAndNotifyBirthdays(true);
+        scheduleMidnightCheck();
+
+        if (settings.store.profileBadge) {
             Badges.addProfileBadge(birthdayBadge);
         }
 
@@ -351,12 +559,17 @@ export default definePlugin({
         }
 
         Object.entries(cakeLocations).forEach(([key, value]) => {
-            if (Settings.plugins.CakeDay[key]) value.onEnable();
+            if (settings.store[key]) value.onEnable();
         });
     },
 
     stop() {
-        if (Settings.plugins.CakeDay.profileBadge) {
+        if (birthdayCheckInterval) {
+            clearInterval(birthdayCheckInterval);
+            birthdayCheckInterval = null;
+        }
+
+        if (settings.store.profileBadge) {
             Badges.removeProfileBadge(birthdayBadge);
         }
         if (this.contextMenus && this.contextMenus["user-context"]) {

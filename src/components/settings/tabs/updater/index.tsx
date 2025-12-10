@@ -49,23 +49,35 @@ function Updater() {
 
     return (
         <SettingsTab>
+            <Heading className={Margins.top16}>{t(updater.preferences.title)}</Heading>
+            <Paragraph className={Margins.bottom20}>
+                {t(updater.preferences.description)}
+            </Paragraph>
+
             <FormSwitch
+                title={t(updater.automatically.label)}
+                description={t(updater.automatically.description)}
                 value={settings.autoUpdate}
                 onChange={(v: boolean) => settings.autoUpdate = v}
-                description={t(updater.automatically.description)}
-                title={t(updater.automatically.label)}
+                hideBorder
             />
             <FormSwitch
+                title={t(updater.notify.label)}
+                disabled={!settings.autoUpdate}
                 value={settings.autoUpdateNotification}
                 onChange={(v: boolean) => settings.autoUpdateNotification = v}
                 description={t(updater.notify.description)}
-                disabled={!settings.autoUpdate}
-                title={t(updater.notify.label)}
+                hideBorder
             />
 
-            <Heading>{t(updater.repo)}</Heading>
+            <Divider className={Margins.top20} />
 
-            <Paragraph>
+            <Heading className={Margins.top20}>{t(updater.repo)}</Heading>
+            <Paragraph className={Margins.bottom8}>
+                {t(updater.repoDescription)}
+            </Paragraph>
+
+            <Paragraph color="text-subtle">
                 {repoPending
                     ? repo
                     : err
@@ -80,7 +92,7 @@ function Updater() {
                 (<HashLink hash={gitHash} repo={repo} disabled={repoPending} />)
             </Paragraph>
 
-            <Divider className={Margins.top8 + " " + Margins.bottom8} />
+            <Divider className={Margins.top20} />
 
             <Heading>{t(updater.updates)}</Heading>
 

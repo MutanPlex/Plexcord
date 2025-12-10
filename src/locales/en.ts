@@ -42,30 +42,37 @@ const translations = {
         },
         switches: {
             useQuickCss: {
-                label: "Enable Custom CSS"
+                label: "Enable Custom CSS",
+                description: "Enables the QuickCSS feature to allow custom CSS to be applied to Discord"
             },
             enableReactDevtools: {
-                label: "Enable React Developer Tools"
+                label: "Enable React Developer Tools",
+                description: "Enables the React Developer Tools extension to work with Discord"
             },
             frameless: {
-                label: "Disable the window frame"
+                label: "Disable the window frame",
+                description: "Removes the window frame for a cleaner look. Use with caution as it may affect window controls."
             },
             winNativeTitleBar: {
-                label: "Use Windows' native title bar instead of Discord's custom one"
+                label: "Use Windows' native title bar instead of Discord's custom one",
+                description: "Replaces Discord's custom title bar with the native Windows title bar for better integration with the OS."
             },
             transparent: {
                 label: "Enable window transparency",
                 description: "A theme that supports transparency is required or this will do nothing. Stops the window from being resizable as a side effect"
             },
             winCtrlQ: {
-                label: "Register Ctrl+Q as shortcut to close Discord (Alternative to Alt+F4)"
+                label: "Register Ctrl+Q as shortcut to close Discord (Alternative to Alt+F4)",
+                description: "Allows you to use Ctrl+Q to close Discord, similar to other Windows applications."
             },
             disableMinSize: {
-                label: "Disable minimum window size"
+                label: "Disable minimum window size",
+                description: "Allows you to resize the Discord window to any size, removing the default minimum size restriction."
             }
         },
         quickActions: {
             title: "Quick Actions",
+            description: "Common actions you might want to perform. These shortcuts give you quick access to frequently used features without navigating through menus.",
             notificationLog: "Notification Log",
             editQuickCSS: "Edit QuickCSS",
             relaunchDiscord: "Relaunch Discord",
@@ -177,6 +184,7 @@ const translations = {
         },
         macVibrancy: {
             title: "Window Vibrancy Style (Requires Restart)",
+            description: "Customize the macOS window vibrancy effect. This controls the blur and transparency style of the Discord window. Changes require a restart to take effect.",
             placeholder: "Window vibrancy style",
             style: {
                 no: "No Vibrancy",
@@ -364,6 +372,7 @@ const translations = {
 
     patchHelper: {
         title: "Patch Helper",
+        description: "A developer tool to help you create patches for Plexcord plugins.",
         fullPatch: {
             label: "Full Patch",
             description: "Paste your full JSON patch here to fill in the fields"
@@ -371,7 +380,8 @@ const translations = {
         find: "Find",
         match: "Match",
         replacement: "Replacement",
-        code: "Code",
+        preview: "Preview",
+        generatedCode: "Generated Code",
         group: "Group",
         diff: "Diff",
         module: "Module",
@@ -410,7 +420,7 @@ const translations = {
     sync: {
         title: "Backup & Restore",
         warning: "Warning",
-        warningText: "Importing a settings file will overwrite your current settings.",
+        warningText: "Importing a settings file will overwrite your current settings. Make sure to export a backup first if you want to keep your current configuration.",
         description: "You can import and export your Plexcord settings as a JSON file. This allows you to easily transfer your settings to another device, or recover your settings after reinstalling Plexcord or Discord.",
         successful: "Settings successfully imported. Restart to apply changes!",
         error: {
@@ -424,12 +434,21 @@ const translations = {
             plugins: "Plugin Settings",
             datastores: "Plugin DataStores (e.g Timezones or IRememberYou)"
         },
-        button: {
-            import: "Import Settings",
-            export: "Export Settings",
-            plugins: "Export Plugins",
-            css: "Export CSS",
-            datastores: "Export DataStores"
+        import: {
+            title: "Import Settings",
+            description: "Select a previously exported settings file to restore your configuration. This will replace all your current settings with the ones from the backup.",
+            all: "Import All Settings",
+            plugins: "Import Plugin",
+            css: "Import QuickCSS",
+            datastore: "Import DataStores"
+        },
+        export: {
+            title: "Export Settings",
+            description: "You can export your current Plexcord settings to a file for backup or transfer to another device.",
+            all: "Export All Settings",
+            plugins: "Export Plugin",
+            css: "Export QuickCSS",
+            datastore: "Export DataStores"
         }
     },
 
@@ -648,8 +667,12 @@ const translations = {
         updates: "Updates",
         updated: "has been updated!",
         restart: "Click here to restart",
+        preferences: {
+            title: "Update Preferences",
+            description: "Control how Plexcord keeps itself up to date. You can choose to update automatically in the background or be notified when new updates are available.",
+        },
         github: {
-            local: "Your local copy has more recent commits. Please stash or reset them."
+            local: "Your local copy has more recent commits than the remote repository. This usually happens when you've made local changes. Please stash or reset them before updating."
         },
         error: {
             check: "Failed to check updates. Check the console for more info",
@@ -686,7 +709,8 @@ const translations = {
             label: "Get notified when an automatic update completes",
             description: "Shows a notification when Plexcord automatically updates"
         },
-        repo: "Repo"
+        repo: "Repo",
+        repoDescription: "This is the GitHub repository where Plexcord fetches updates from.",
     },
 
     components: {
@@ -1520,6 +1544,14 @@ const translations = {
                 profileBadge: {
                     label: "Profile Badge",
                     description: "Show cake badge in user profile"
+                },
+                notificationSound: {
+                    label: "Notification Sound",
+                    description: "Play sound when birthday notification is sent"
+                },
+                userList: {
+                    label: "Saved Birthdays",
+                    description: "Manage saved birthdays"
                 }
             },
             locations: {
@@ -1537,6 +1569,10 @@ const translations = {
                 invalid: "Invalid birthday format! Only DD/MM is accepted.",
                 cleared: "Birthday cleared successfully!"
             },
+            notification: {
+                title: "🎂 Birthday Today!",
+                body: "It's {{username}}'s birthday today!"
+            },
             modal: {
                 title: "Set Birthday for {{username}}",
                 description: "Enter the birthday in DD/MM format (e.g. 25/12)",
@@ -1548,7 +1584,10 @@ const translations = {
                 saved: "Saved Birthdays",
                 savedDesc: "No birthdays saved yet. Right-click on users to add their birthdays!",
                 today: "Today",
-                remove: "Remove"
+                remove: "Remove",
+                loading: "Loading...",
+                save: "Save",
+                edit: "Edit"
             }
         },
         callTimer: {
@@ -7642,6 +7681,14 @@ const translations = {
             tooltip: {
                 enable: "Turn on Spotify activity",
                 disable: "Turn off Spotify activity"
+            },
+            option: {
+                location: {
+                    label: "Location",
+                    description: "Where to show the Spotify toggle button",
+                    panel: "Next to Mute/Deafen",
+                    toolbox: "Plexcord Toolbox"
+                }
             }
         },
         spotifyCrack: {

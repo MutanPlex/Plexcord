@@ -22,8 +22,10 @@ import { Button } from "@components/Button";
 import { CodeBlock } from "@components/CodeBlock";
 import { Divider } from "@components/Divider";
 import { Flex } from "@components/Flex";
-import { HeadingTertiary } from "@components/Heading";
+import { Heading, HeadingTertiary } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
+import { Span } from "@components/Span";
 import { debounce } from "@shared/debounce";
 import { copyWithToast } from "@utils/discord";
 import { Margins } from "@utils/margins";
@@ -108,7 +110,13 @@ function PatchHelper() {
 
     return (
         <SettingsTab>
+            <Heading className={Margins.bottom8}>{t(patchHelper.title)}</Heading>
+            <Paragraph className={Margins.bottom16}>{t(patchHelper.description)}</Paragraph>
+
             <HeadingTertiary>{t(patchHelper.fullPatch.label)}</HeadingTertiary>
+            <Paragraph className={Margins.bottom8}>
+                {t(patchHelper.fullPatch.description)}
+            </Paragraph>
             <FullPatchInput
                 setFind={onFindChange}
                 setParsedFind={setParsedFind}
@@ -116,48 +124,60 @@ function PatchHelper() {
                 setReplacement={setReplacement}
             />
 
-            <HeadingTertiary className={Margins.top8}>{t(patchHelper.find)}</HeadingTertiary>
-            <TextInput
-                type="text"
-                value={find}
-                onChange={onFindChange}
-                error={findError}
-            />
-
-            <HeadingTertiary className={Margins.top8}>{t(patchHelper.match)}</HeadingTertiary>
-            <TextInput
-                type="text"
-                value={match}
-                onChange={onMatchChange}
-                error={matchError}
-            />
-
-            <div className={Margins.top8} />
-            <ReplacementInput
-                replacement={replacement}
-                setReplacement={setReplacement}
-                replacementError={replacementError}
-            />
-
-            <Divider />
-            {module && (
-                <PatchPreview
-                    module={module}
-                    match={match}
-                    replacement={replacement}
-                    setReplacementError={setReplacementError}
+            <div className={Margins.top20}>
+                <HeadingTertiary>{t(patchHelper.find)}</HeadingTertiary>
+                <TextInput
+                    type="text"
+                    value={find}
+                    onChange={onFindChange}
+                    error={findError}
                 />
+            </div>
+
+            <div className={Margins.top20}>
+                <HeadingTertiary className={Margins.top8}>{t(patchHelper.match)}</HeadingTertiary>
+                <TextInput
+                    type="text"
+                    value={match}
+                    onChange={onMatchChange}
+                    error={matchError}
+                />
+            </div>
+
+            <div className={Margins.top20}>
+                <ReplacementInput
+                    replacement={replacement}
+                    setReplacement={setReplacement}
+                    replacementError={replacementError}
+                />
+            </div>
+
+
+            {module && (
+                <>
+                    <Divider className={Margins.top16 + " " + Margins.bottom16} />
+                    <Span size="md" weight="bold" color="header-primary">{t(patchHelper.preview)}</Span>
+                    <PatchPreview
+                        module={module}
+                        match={match}
+                        replacement={replacement}
+                        setReplacementError={setReplacementError}
+                    />
+                </>
             )}
 
             {!!(find && match && replacement) && (
                 <>
-                    <HeadingTertiary className={Margins.top20}>{t(patchHelper.code)}</HeadingTertiary>
-                    <CodeBlock lang="js" content={code} />
-                    <Flex className={Margins.top16}>
-                        <Button onClick={() => copyWithToast(code)}>
+                    <Divider className={Margins.top16 + " " + Margins.bottom16} />
+                    <Span size="md" weight="medium" color="header-primary">{t(patchHelper.generatedCode)}</Span>
+                    <div style={{ width: "100%", marginTop: 8 }}>
+                        <CodeBlock lang="js" content={code} />
+                    </div>
+                    <Flex className={Margins.top8} gap="8px">
+                        <Button size="small" onClick={() => copyWithToast(code)}>
                             {t(patchHelper.copy.clipboard)}
                         </Button>
-                        <Button onClick={() => copyWithToast("```ts\n" + code + "\n```")}>
+                        <Button size="small" onClick={() => copyWithToast("```ts\n" + code + "\n```")}>
                             {t(patchHelper.copy.codeblock)}
                         </Button>
                     </Flex>

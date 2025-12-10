@@ -45,30 +45,37 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         switches: {
             useQuickCss: {
-                label: "Özel CSS'yi Etkinleştir"
+                label: "Özel CSS'yi Etkinleştir",
+                description: "Discord'a özel CSS uygulanmasına izin vermek için QuickCSS özelliğini etkinleştirir"
             },
             enableReactDevtools: {
-                label: "React Geliştirici Araçlarını Etkinleştir"
+                label: "React Geliştirici Araçlarını Etkinleştir",
+                description: "React Geliştirici Araçları uzantısının Discord ile çalışmasını sağlar"
             },
             frameless: {
-                label: "Pencere çerçevesini devre dışı bırak"
+                label: "Pencere çerçevesini devre dışı bırak",
+                description: "Daha temiz bir görünüm için pencere çerçevesini kaldırır. Pencere kontrollerini etkileyebileceğinden dikkatli kullanın."
             },
             winNativeTitleBar: {
-                label: "Discord'un özel başlık çubuğu yerine Windows'un yerel başlık çubuğunu kullan"
+                label: "Discord'un özel başlık çubuğu yerine Windows'un yerel başlık çubuğunu kullan",
+                description: "Discord'un özel başlık çubuğunu daha iyi OS entegrasyonu için yerel Windows başlık çubuğuyla değiştirir."
             },
             transparent: {
                 label: "Pencere şeffaflığını etkinleştir",
                 description: "Bu işlem için şeffaflığı destekleyen bir tema gereklidir, aksi takdirde hiçbir etkisi olmaz. Yan etki olarak pencerenin yeniden boyutlandırılmasını engeller."
             },
             winCtrlQ: {
-                label: "Discord'u kapatmak için Ctrl+Q kısayolunu kaydet (Alt+F4'e alternatif)"
+                label: "Discord'u kapatmak için Ctrl+Q kısayolunu kaydet (Alt+F4'e alternatif)",
+                description: "Ctrl+Q kullanarak Discord'u kapatmanızı sağlar, diğer Windows uygulamalarına benzer şekilde."
             },
             disableMinSize: {
-                label: "Minimum pencere boyutunu devre dışı bırak"
+                label: "Minimum pencere boyutunu devre dışı bırak",
+                description: "Discord penceresini herhangi bir boyuta yeniden boyutlandırmanıza izin verir, varsayılan minimum boyut kısıtlamasını kaldırır."
             }
         },
         quickActions: {
             title: "Hızlı İşlemler",
+            description: "Sık kullanmak isteyebileceğiniz yaygın işlemler. Bu kısayollar, menülerde gezinmeden sık kullanılan özelliklere hızlı erişim sağlar.",
             notificationLog: "Bildirim Günlüğü",
             editQuickCSS: "QuickCSS Düzenle",
             relaunchDiscord: "Discord'u Yeniden Başlat",
@@ -180,6 +187,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         macVibrancy: {
             title: "Pencere Titreme Stili (Yeniden başlatma gerekli)",
+            description: "macOS pencere titreme efektini özelleştirin. Bu, Discord penceresinin bulanıklık ve şeffaflık stilini kontrol eder. Değişikliklerin etkili olması için yeniden başlatma gereklidir.",
             placeholder: "Pencere titreme stili",
             style: {
                 no: "Titreme yok",
@@ -367,6 +375,7 @@ const translations: MatchStructure<typeof enTranslations> = {
 
     patchHelper: {
         title: "Yama Yardımcısı",
+        description: "Plexcord eklentileri için yamalar oluşturmanıza yardımcı olan bir geliştirici aracı.",
         fullPatch: {
             label: "Tam Yama",
             description: "Alanları doldurmak için tam JSON yamanızı buraya yapıştırın"
@@ -374,7 +383,8 @@ const translations: MatchStructure<typeof enTranslations> = {
         find: "Bul",
         match: "Eşleşme",
         replacement: "Değiştir",
-        code: "Kod",
+        preview: "Önizleme",
+        generatedCode: "Oluşturulan Kod",
         group: "Grup",
         diff: "Fark",
         module: "Modül",
@@ -413,7 +423,7 @@ const translations: MatchStructure<typeof enTranslations> = {
     sync: {
         title: "Yedekle ve Geri Yükle",
         warning: "Uyarı",
-        warningText: "Bir ayar dosyasını içe aktarmak mevcut ayarlarınızı geçersiz kılacaktır.",
+        warningText: "Bir ayar dosyasını içe aktarmak mevcut ayarlarınızı geçersiz kılacaktır. Mevcut yapılandırmanızı korumak istiyorsanız önce bir yedeği dışa aktardığınızdan emin olun.",
         description: "Plexcord ayarlarınızı bir JSON dosyası olarak içe ve dışa aktarabilirsiniz. Bu sayede ayarlarınızı kolayca başka bir cihaza taşıyabilir veya Plexcord ya da Discord’u yeniden yükledikten sonra ayarlarınızı geri yükleyebilirsiniz.",
         successful: "Ayarlar başarıyla içeri aktarıldı. Değişikliklerin etkili olması için uygulamayı yeniden başlatın!",
         error: {
@@ -427,12 +437,21 @@ const translations: MatchStructure<typeof enTranslations> = {
             plugins: "Eklenti Ayarları",
             datastores: "Eklenti Veri Depoları (örn. Timezones veya IRememberYou)"
         },
-        button: {
-            import: "İçe Aktar",
-            export: "Dışa Aktar",
-            plugins: "Eklentileri Dışa Aktar",
-            css: "CSS'leri Dışa Aktar",
-            datastores: "Veri Depoları Dışa Aktar"
+        import: {
+            title: "Ayarları İçe Aktar",
+            description: "Yapılandırmanızı geri yüklemek için daha önce dışa aktarılan bir ayar dosyası seçin. Bu, mevcut tüm ayarlarınızı yedeğin içindekilerle değiştirecektir.",
+            all: "Tüm Ayarları İçe Aktar",
+            plugins: "Eklentiyi İçe Aktar",
+            css: "QuickCSS'yi İçe Aktar",
+            datastore: "Veri Depolarını İçe Aktar"
+        },
+        export: {
+            title: "Ayarları Dışa Aktar",
+            description: "Mevcut Plexcord ayarlarınızı yedekleme veya başka bir cihaza aktarma için bir dosyaya dışa aktarabilirsiniz.",
+            all: "Tüm Ayarları Dışa Aktar",
+            plugins: "Eklentiyi Dışa Aktar",
+            css: "QuickCSS'yi Dışa Aktar",
+            datastore: "Veri Depolarını Dışa Aktar"
         }
     },
 
@@ -651,8 +670,12 @@ const translations: MatchStructure<typeof enTranslations> = {
         updates: "Güncellemeler",
         updated: "güncellendi!",
         restart: "Buraya tıklayarak yeniden başlatın",
+        preferences: {
+            title: "Güncelleme Tercihleri",
+            description: "Plexcord'un kendini nasıl güncel tuttuğunu kontrol edin. Arka planda otomatik olarak güncellemeyi seçebilir veya yeni güncellemeler mevcut olduğunda bildirim alabilirsiniz.",
+        },
         github: {
-            local: "Yerel kopyanızda daha yeni commitler var. Lütfen bunları stash edin veya reset yapın."
+            local: "Yerel kopyanız uzak depoya göre daha yeni kayıtlara sahip. Bu genellikle yerel değişiklikler yaptığınızda olur. Lütfen güncellemeden önce bunları saklayın veya sıfırlayın."
         },
         error: {
             check: "Güncelleme kontrol edilirken sorun oluştu. Daha fazla bilgi için console'a bakın.",
@@ -689,7 +712,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             label: "Otomatik güncelleme bildirimi göster",
             description: "Plexcord otomatik olarak güncellendiğinde bir bildirim göster"
         },
-        repo: "Depo"
+        repo: "Depo",
+        repoDescription: "Plexcord'un güncellemeleri aldığı GitHub deposu burasıdır.",
     },
 
     components: {
@@ -1523,6 +1547,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 profileBadge: {
                     label: "Profil Rozeti",
                     description: "Kullanıcı profilinde pasta rozetini göster"
+                },
+                notificationSound: {
+                    label: "Bildirim Sesi",
+                    description: "Doğum günü bildirimi gönderildiğinde ses çal"
+                },
+                userList: {
+                    label: "Kaydedilen Doğum Günleri",
+                    description: "Kaydedilen doğum günlerini yönet"
                 }
             },
             locations: {
@@ -1540,6 +1572,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 invalid: "Geçersiz doğum günü formatı! Sadece GG/AA kabul edilir.",
                 cleared: "Doğum günü başarıyla silindi!"
             },
+            notification: {
+                title: "🎂 Bugün Doğum Günü!",
+                body: "Bugün {{username}} kullanıcısının doğum günü!"
+            },
             modal: {
                 title: "{{username}} için Doğum Günü Ayarla",
                 description: "Doğum gününü GG/AA formatında gir (örn. 25/12)",
@@ -1551,7 +1587,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 saved: "Kaydedilen Doğum Günleri",
                 savedDesc: "Henüz kaydedilmiş doğum günü yok. Doğum günlerini eklemek için kullanıcıya sağ tıklayın!",
                 today: "Bugün",
-                remove: "Kaldır"
+                remove: "Kaldır",
+                loading: "Yükleniyor...",
+                save: "Kaydet",
+                edit: "Düzenle"
             }
         },
         callTimer: {
@@ -7645,6 +7684,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             tooltip: {
                 enable: "Spotify etkinliğini aç",
                 disable: "Spotify etkinliğini kapat"
+            },
+            option: {
+                location: {
+                    label: "Konum",
+                    description: "Spotify açma/kapama düğmesinin nerede gösterileceği",
+                    panel: "Sessize Al/Kapat'ın Yanında",
+                    toolbox: "Plexcord Araç Kutusu"
+                }
             }
         },
         spotifyCrack: {

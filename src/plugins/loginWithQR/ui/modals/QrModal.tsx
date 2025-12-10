@@ -463,7 +463,7 @@ function QrModal(props: ModalProps) {
                     ) : state === LoginStateType.Loading ? (
                         <Spinner type={SpinnerTypes.WANDERING_CUBES} />
                     ) : error.current ? (
-                        <BaseText size="md" weight="semibold" color="text-danger">
+                        <BaseText size="md" weight="semibold" color="text-subtle">
                             {error.current}
                         </BaseText>
                     ) : state === LoginStateType.Camera ? (

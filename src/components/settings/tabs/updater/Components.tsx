@@ -12,11 +12,12 @@ import { ErrorCard } from "@components/ErrorCard";
 import { Flex } from "@components/Flex";
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
+import { Span } from "@components/Span";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { relaunch } from "@utils/native";
-import { changes, checkForUpdates, update, updateError } from "@utils/updater";
-import { Alerts, React, Toasts, useState } from "@webpack/common";
+import { changes, update, updateError } from "@utils/updater";
+import { Alerts, React, useState } from "@webpack/common";
 
 import { runWithDispatch } from "./runWithDispatch";
 
@@ -35,25 +36,26 @@ export function HashLink({ repo, hash, disabled = false }: { repo: string, hash:
 
 export function Changes({ updates, repo, repoPending }: CommonProps & { updates: typeof changes; }) {
     return (
-        <Card style={{ padding: "0 0.5em" }} defaultPadding={false}>
-            {updates.map(({ hash, author, message }) => (
+        <Card className={Margins.top16} defaultPadding={false}>
+            {updates.map(({ hash, author, message }, i) => (
                 <div
                     key={hash}
                     style={{
-                        marginTop: "0.5em",
-                        marginBottom: "0.5em"
+                        padding: "12px 16px",
+                        borderBottom: i < updates.length - 1 ? "1px solid var(--border-subtle)" : undefined
                     }}
                 >
-                    <code>
-                        <HashLink {...{ repo, hash }} disabled={repoPending} />
-                    </code>
-
-                    <span style={{
-                        marginLeft: "0.5em",
-                        color: "var(--text-default)"
-                    }}>
-                        {message} - {author}
-                    </span>
+                    <Flex style={{ alignItems: "center", gap: 8 }}>
+                        <code style={{ color: "var(--text-link)" }}>
+                            <HashLink {...{ repo, hash }} disabled={repoPending} />
+                        </code>
+                        <Span size="sm" color="text-default">
+                            {message}
+                        </Span>
+                        <Span size="sm" color="text-subtle">
+                            — {author}
+                        </Span>
+                    </Flex>
                 </div>
             ))}
         </Card>
@@ -63,7 +65,7 @@ export function Changes({ updates, repo, repoPending }: CommonProps & { updates:
 export function Newer(props: CommonProps) {
     return (
         <>
-            <Paragraph className={Margins.bottom8}>
+            <Paragraph>
                 {t(updater.github.local)}
             </Paragraph>
             <Changes {...props} updates={changes} />
@@ -82,22 +84,25 @@ export function Updatable(props: CommonProps) {
         <>
             {!updates && updateError ? (
                 <>
-                    <Paragraph>{t(updater.error.check)}</Paragraph>
-                    <ErrorCard style={{ padding: "1em" }}>
+                    <Span size="md" weight="medium" color="header-primary">{t(updater.error.check)}</Span>
+                    <ErrorCard className={Margins.top8} style={{ padding: "1em" }}>
                         <p>{updateError.stderr || updateError.stdout || t(updater.error.occurred)}</p>
                     </ErrorCard>
                 </>
+            ) : isOutdated ? (
+                <>
+                    <Paragraph>
+                        {(updates.length === 1 ? t(updater.available) : t(updater.available_plural, { count: updates.length }))}
+                    </Paragraph>
+                    <Changes updates={updates} {...props} />
+                </>
             ) : (
-                <Paragraph className={Margins.bottom8}>
-                    {isOutdated ? (updates.length === 1 ? t(updater.available) : t(updater.available_plural, {
-                        count: updates.length
-                    })) : t(updater.current)}
+                <Paragraph>
+                    {t(updater.current)}
                 </Paragraph>
             )}
 
-            {isOutdated && <Changes updates={updates} {...props} />}
-
-            <Flex className={classes(Margins.bottom8, Margins.top8)}>
+            <Flex className={classes(Margins.bottom8)} gap={8}>
                 {isOutdated && (
                     <Button
                         size="small"
@@ -125,30 +130,6 @@ export function Updatable(props: CommonProps) {
                         {t(updater.successful.button.update)}
                     </Button>
                 )}
-                <Button
-                    size="small"
-                    disabled={isUpdating || isChecking}
-                    onClick={runWithDispatch(setIsChecking, async () => {
-                        const outdated = await checkForUpdates();
-
-                        if (outdated) {
-                            setUpdates(changes);
-                        } else {
-                            setUpdates([]);
-
-                            Toasts.show({
-                                message: t(updater.successful.noFound),
-                                id: Toasts.genId(),
-                                type: Toasts.Type.MESSAGE,
-                                options: {
-                                    position: Toasts.Position.BOTTOM
-                                }
-                            });
-                        }
-                    })}
-                >
-                    {t(updater.successful.button.check)}
-                </Button>
             </Flex>
         </>
     );

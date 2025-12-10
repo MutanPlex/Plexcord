@@ -7,7 +7,6 @@
 
 import { patchHelper, t } from "@api/i18n";
 import { Paragraph } from "@components/Paragraph";
-import { Margins } from "@utils/margins";
 import { Patch, ReplaceFn } from "@utils/types";
 import { TextArea, useEffect, useRef, useState } from "@webpack/common";
 
@@ -70,9 +69,6 @@ export function FullPatchInput({ setFind, setParsedFind, setMatch, setReplacemen
 
     return (
         <>
-            <Paragraph className={Margins.bottom8}>
-                {t(patchHelper.fullPatch.description)}
-            </Paragraph>
             <TextArea
                 inputRef={textAreaRef}
                 value={patch}

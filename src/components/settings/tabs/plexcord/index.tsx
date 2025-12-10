@@ -93,23 +93,27 @@ function Switches() {
         {
             key: "useQuickCss",
             title: t(settings.switches.useQuickCss.label),
+            description: t(settings.switches.useQuickCss.description),
             restartRequired: true,
             warning: { enabled: false }
         },
         !IS_WEB && {
             key: "enableReactDevtools",
             title: t(settings.switches.enableReactDevtools.label),
+            description: t(settings.switches.enableReactDevtools.description),
             restartRequired: true,
             warning: { enabled: false }
         },
         !IS_WEB && (!IS_DISCORD_DESKTOP || !IS_WINDOWS ? {
             key: "frameless",
             title: t(settings.switches.frameless.label),
+            description: t(settings.switches.frameless.description),
             restartRequired: true,
             warning: { enabled: false }
         } : {
             key: "winNativeTitleBar",
             title: t(settings.switches.winNativeTitleBar.label),
+            description: t(settings.switches.winNativeTitleBar.description),
             restartRequired: true,
             warning: { enabled: false }
         }),
@@ -123,12 +127,14 @@ function Switches() {
         !IS_WEB && IS_WINDOWS && {
             key: "winCtrlQ",
             title: t(settings.switches.winCtrlQ.label),
+            description: t(settings.switches.winCtrlQ.description),
             restartRequired: false,
             warning: { enabled: false }
         },
         IS_DISCORD_DESKTOP && {
             key: "disableMinSize",
             title: t(settings.switches.disableMinSize.label),
+            description: t(settings.switches.disableMinSize.description),
             restartRequired: false,
             warning: { enabled: false }
         },
@@ -140,23 +146,17 @@ function Switches() {
         warning: { enabled: boolean; message?: string; };
     }>;
 
-    return Switches.map(setting => {
-        if (!setting) {
-            return null;
-        }
-
-        const { key, title, description, restartRequired } = setting;
-
-        return (
+    return Switches.filter((s): s is Exclude<typeof s, false> => !!s).map(
+        (s, i, arr) => (
             <FormSwitch
-                key={key}
-                title={title}
-                description={description}
-                value={settingsState[key]}
+                key={s.key}
+                title={s.title}
+                description={s.description}
+                value={settingsState[s.key]}
                 onChange={v => {
-                    settingsState[key] = v;
+                    settingsState[s.key] = v;
 
-                    if (restartRequired) {
+                    if (s.restartRequired) {
                         Alerts.show({
                             title: t(plugins.restart.required),
                             body: t(plugins.restart.apply),
@@ -166,9 +166,10 @@ function Switches() {
                         });
                     }
                 }}
+                hideBorder={i === arr.length - 1}
             />
-        );
-    });
+        )
+    );
 }
 
 function PlexcordSettings() {
@@ -224,59 +225,59 @@ function PlexcordSettings() {
                 />
             )}
 
-            <section>
-                <Heading tag="h5">{t(settings.quickActions.title)}</Heading>
-                <QuickActionCard>
-                    <QuickAction
-                        Icon={LogIcon}
-                        text={t(settings.quickActions.notificationLog)}
-                        action={openNotificationLogModal}
-                    />
-                    <QuickAction
-                        Icon={PaintbrushIcon}
-                        text={t(settings.quickActions.editQuickCSS)}
-                        action={() => PlexcordNative.quickCss.openEditor()}
-                    />
-                    {!IS_WEB && (
-                        <>
-                            <QuickAction
-                                Icon={RestartIcon}
-                                text={t(settings.quickActions.relaunchDiscord)}
-                                action={relaunch}
-                            />
-                            <QuickAction
-                                Icon={FolderIcon}
-                                text={t(settings.quickActions.openSettingsFolder)}
-                                action={() => PlexcordNative.settings.openFolder()}
-                            />
-                        </>
-                    )}
-                    <QuickAction
-                        Icon={GithubIcon}
-                        text={t(settings.quickActions.viewSourceCode)}
-                        action={() => PlexcordNative.native.openExternal("https://github.com/" + gitRemote)}
-                    />
-                </QuickActionCard>
-            </section>
+            <Heading tag="h5">{t(settings.quickActions.title)}</Heading>
+            <Paragraph className={Margins.bottom16}>
+                {t(settings.quickActions.description)}
+            </Paragraph>
+
+            <QuickActionCard>
+                <QuickAction
+                    Icon={LogIcon}
+                    text={t(settings.quickActions.notificationLog)}
+                    action={openNotificationLogModal}
+                />
+                <QuickAction
+                    Icon={PaintbrushIcon}
+                    text={t(settings.quickActions.editQuickCSS)}
+                    action={() => PlexcordNative.quickCss.openEditor()}
+                />
+                {!IS_WEB && (
+                    <>
+                        <QuickAction
+                            Icon={RestartIcon}
+                            text={t(settings.quickActions.relaunchDiscord)}
+                            action={relaunch}
+                        />
+                        <QuickAction
+                            Icon={FolderIcon}
+                            text={t(settings.quickActions.openSettingsFolder)}
+                            action={() => PlexcordNative.settings.openFolder()}
+                        />
+                    </>
+                )}
+                <QuickAction
+                    Icon={GithubIcon}
+                    text={t(settings.quickActions.viewSourceCode)}
+                    action={() => PlexcordNative.native.openExternal("https://github.com/" + gitRemote)}
+                />
+            </QuickActionCard>
 
             <Divider />
 
-            <section className={Margins.top16}>
-                <Heading tag="h5">{t(settings.settingsSection.title)}</Heading>
-                <Paragraph className={Margins.bottom20} style={{ color: "var(--text-muted)" }}>
-                    {t(settings.settingsSection.hintParts.prefix)}
-                    <a onClick={() => openPluginModal(settingsPlugin)}>
-                        {t(settings.settingsSection.hintParts.linkText)}
-                    </a>
-                    {t(settings.settingsSection.hintParts.suffix)}
-                </Paragraph>
+            <Heading tag="h5" className={Margins.top20}>{t(settings.settingsSection.title)}</Heading>
+            <Paragraph className={Margins.bottom20} style={{ color: "var(--text-subtle)" }}>
+                {t(settings.settingsSection.hintParts.prefix)}
+                <a onClick={() => openPluginModal(settingsPlugin)}>
+                    {t(settings.settingsSection.hintParts.linkText)}
+                </a>
+                {t(settings.settingsSection.hintParts.suffix)}
+            </Paragraph>
 
-                <LanguageSelector />
+            <LanguageSelector />
 
-                <Divider className={classes(Margins.top16, Margins.bottom20)} />
+            <Divider className={classes(Margins.top16, Margins.bottom20)} />
 
-                <Switches />
-            </section>
+            <Switches />
 
 
             {needsVibrancySettings && <VibrancySettings />}

@@ -7,13 +7,11 @@
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { Link } from "@components/Link";
+import { Button } from "@components/Button";
 import { Activity, SelectOption } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
-import { ModalAPI } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
-import { findStoreLazy } from "@webpack";
-import { PresenceStore, SettingsRouter, UserStore } from "@webpack/common";
+import { openUserSettingsPanel, PresenceStore, UserStore } from "@webpack/common";
 
 const settings = definePluginSettings({
     richPresenceTagging: {
@@ -33,14 +31,13 @@ const settings = definePluginSettings({
         component: () => {
             return (
                 <>
-                    <Link
-                        href={findStoreLazy("ExperimentStore").getUserExperimentBucket("2024-04_game_settings_merge") === 1 ? SettingsRouter.open("Settings Clips") : SettingsRouter.open("Settings Clips")}
+                    <Button
                         onClick={() => {
-                            ModalAPI.closeAllModals();
+                            openUserSettingsPanel("clips");
                         }}
                     >
                         {t(plugin.clipsEnhancements.option.clipsLink.link)}
-                    </Link>
+                    </Button>
                 </>
             );
         }
@@ -78,7 +75,7 @@ export default definePlugin({
 
     patchTimeslots(timeslots: SelectOption[]) {
         const newTimeslots = [...timeslots];
-        const extraTimeslots = [3, 5, 7, 10];
+        const extraTimeslots = [3, 5, 7, 10, 15, 20, 25, 30];
 
         extraTimeslots.forEach(timeslot => newTimeslots.push({ value: timeslot * 60000, label: `${timeslot} ${t(plugin.clipsEnhancements.minutes)}` }));
 

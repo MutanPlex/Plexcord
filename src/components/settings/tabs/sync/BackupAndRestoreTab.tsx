@@ -21,6 +21,7 @@ import { sync, t } from "@api/i18n";
 import { downloadSettingsBackup, uploadSettingsBackup } from "@api/SettingsSync/offline";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
+import { Divider } from "@components/Divider";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
@@ -30,55 +31,93 @@ import { Margins } from "@utils/margins";
 function BackupAndRestoreTab() {
     return (
         <SettingsTab>
-            <Flex flexDirection="column" gap="0.5em">
-                <Card variant="warning">
-                    <Heading tag="h4">{t(sync.warning)}</Heading>
-                    <Paragraph>{t(sync.warningText)}</Paragraph>
-                </Card>
-                <Paragraph size="md" weight="normal" className={Margins.bottom8}>
-                    {t(sync.description)}
-                </Paragraph>
-                <Paragraph size="md" weight="normal" className={Margins.bottom8}>
-                    {t(sync.settings.text)}
-                    <ul>
-                        <li>&mdash; {t(sync.settings.quickcss)}</li>
-                        <li>&mdash; {t(sync.settings.theme)}</li>
-                        <li>&mdash; {t(sync.settings.plugins)}</li>
-                        <li>&mdash; {t(sync.settings.datastores)}</li>
-                    </ul>
-                </Paragraph>
-                <Flex>
-                    <Button
-                        onClick={() => uploadSettingsBackup()}
-                        size="small"
-                    >
-                        {t(sync.button.import)}
-                    </Button>
-                    <Button
-                        onClick={() => downloadSettingsBackup("settings")}
-                        size="small"
-                    >
-                        {t(sync.button.export)}
-                    </Button>
-                    <Button
-                        onClick={() => downloadSettingsBackup("plugins")}
-                        size="small"
-                    >
-                        {t(sync.button.plugins)}
-                    </Button>
-                    <Button
-                        onClick={() => downloadSettingsBackup("css")}
-                        size="small"
-                    >
-                        {t(sync.button.css)}
-                    </Button>
-                    <Button
-                        onClick={() => downloadSettingsBackup("datastore")}
-                        size="small"
-                    >
-                        {t(sync.button.datastores)}
-                    </Button>
-                </Flex>
+            <Heading className={Margins.top16}>{t(sync.title)}</Heading>
+            <Paragraph size="md" weight="normal" className={Margins.bottom8}>
+                {t(sync.description)}
+            </Paragraph>
+
+            <Card variant="warning">
+                <Heading tag="h4">{t(sync.warning)}</Heading>
+                <Paragraph>{t(sync.warningText)}</Paragraph>
+            </Card>
+
+            <Paragraph size="md" weight="normal" className={Margins.bottom8}>
+                {t(sync.settings.text)}
+                <ul>
+                    <li>&mdash; {t(sync.settings.quickcss)}</li>
+                    <li>&mdash; {t(sync.settings.theme)}</li>
+                    <li>&mdash; {t(sync.settings.plugins)}</li>
+                    <li>&mdash; {t(sync.settings.datastores)}</li>
+                </ul>
+            </Paragraph>
+
+            <Divider className={Margins.bottom20} />
+
+            <Heading >{t(sync.import.title)}</Heading>
+            <Paragraph size="md" weight="normal" className={Margins.bottom8}>
+                {t(sync.import.description)}
+            </Paragraph>
+
+            <Flex gap="8px" className={Margins.bottom20} style={{ flexWrap: "wrap" }}>
+                <Button
+                    onClick={() => uploadSettingsBackup("all")}
+                    size="small"
+                    variant="secondary"
+                >
+                    {t(sync.import.all)}
+                </Button>
+                <Button
+                    onClick={() => uploadSettingsBackup("plugins")}
+                    size="small"
+                >
+                    {t(sync.import.plugins)}
+                </Button>
+                <Button
+                    onClick={() => uploadSettingsBackup("css")}
+                    size="small"
+                >
+                    {t(sync.import.css)}
+                </Button>
+                <Button
+                    onClick={() => uploadSettingsBackup("datastore")}
+                    size="small"
+                >
+                    {t(sync.import.datastore)}
+                </Button>
+            </Flex>
+
+            <Divider className={Margins.bottom20} />
+            <Heading>{t(sync.export.title)}</Heading>
+            <Paragraph size="md" weight="normal" className={Margins.bottom8}>
+                {t(sync.export.description)}
+            </Paragraph>
+
+            <Flex gap="8px" style={{ flexWrap: "wrap" }}>
+                <Button
+                    onClick={() => downloadSettingsBackup("all")}
+                    size="small"
+                    variant="secondary"
+                >
+                    {t(sync.export.all)}
+                </Button>
+                <Button
+                    onClick={() => downloadSettingsBackup("plugins")}
+                    size="small"
+                >
+                    {t(sync.export.plugins)}
+                </Button>
+                <Button
+                    onClick={() => downloadSettingsBackup("css")}
+                    size="small"
+                >
+                    {t(sync.export.css)}
+                </Button>
+                <Button
+                    onClick={() => downloadSettingsBackup("datastore")}
+                    size="small"
+                >
+                    {t(sync.export.datastore)}
+                </Button>
             </Flex>
         </SettingsTab>
     );

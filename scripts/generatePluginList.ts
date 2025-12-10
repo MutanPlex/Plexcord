@@ -67,13 +67,10 @@ function getObjectProp(node: ObjectLiteralExpression, name: string) {
 }
 
 function extractTranslationFromFunction(fnNode: ArrowFunction | FunctionExpression): string | null {
-    // Function is typically: () => t(plugin.xxx.description)
     const body = fnNode.body;
 
-    // Check if it's a call expression like t(...)
     if (isCallExpression(body)) {
         const arg = body.arguments[0];
-        // Extract the property access chain (e.g., plugin.settings.description)
         if (isPropertyAccessExpression(arg)) {
             const parts: string[] = [];
             let current: any = arg;
@@ -87,21 +84,16 @@ function extractTranslationFromFunction(fnNode: ArrowFunction | FunctionExpressi
                 parts.unshift(current.text);
             }
 
-            console.log("Translation key parts:", parts);
-
             // Navigate through translations object
             let value = translations;
             for (const part of parts) {
-                console.log(`Looking for "${part}" in`, value ? Object.keys(value) : "null");
                 if (value && typeof value === 'object' && part in value) {
                     value = value[part];
                 } else {
-                    console.log(`Failed to find "${part}"`);
                     return null;
                 }
             }
 
-            console.log("Found translation:", value);
             return typeof value === 'string' ? value : null;
         }
     }

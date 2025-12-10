@@ -93,7 +93,7 @@ export default definePlugin({
         return (
             <div className="pc-std-wrapper">
                 <TooltipContainer text={text}>{children}</TooltipContainer>
-                <BaseText size="md" weight="normal" color="status-danger">
+                <BaseText size="md" weight="normal" color="text-danger">
                     {renderTimeout(message, true)} timeout remaining
                 </BaseText>
             </div>

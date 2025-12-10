@@ -1,15 +1,20 @@
-.pc-form-switch-wrapper {
-    margin-bottom: 20px;
-    cursor: pointer;
+.pc-form-switch-container {
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.pc-form-switch-no-border {
+    border-bottom: none;
+    margin-bottom: 0;
 }
 
 .pc-form-switch {
     display: flex;
     width: 100%;
-
-    > :last-child {
-        margin-left: auto;
-    }
+    align-items: flex-start;
+    justify-content: space-between;
+    cursor: pointer;
+    gap: 16px;
 }
 
 .pc-form-switch-disabled {
@@ -18,14 +23,13 @@
     cursor: not-allowed;
 }
 
-
 .pc-form-switch-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 8px;
+    flex: 1;
+    min-width: 0;
+    max-width: 80%;
 }
 
-.pc-form-switch-border {
-    margin-top: 20px;
+.pc-form-switch-control {
+    flex-shrink: 0;
+    padding-top: 2px;
 }

@@ -86,7 +86,7 @@ function CreateDecorationModal(props: ModalProps) {
                 </HelpMessage>
                 <div className={cl("create-decoration-modal-form-preview-container")}>
                     <div className={cl("create-decoration-modal-form")}>
-                        {error !== null && <BaseText size="xs" weight="normal" color="text-danger">{error.message}</BaseText>}
+                        {error !== null && <BaseText size="xs" weight="normal" color="text-subtle">{error.message}</BaseText>}
                         <section>
                             <Heading>{t(plugin.decor.file)}</Heading>
                             <FileUpload

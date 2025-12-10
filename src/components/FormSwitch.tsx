@@ -10,7 +10,7 @@ import "./FormSwitch.css";
 import { classes } from "@utils/misc";
 import type { PropsWithChildren, ReactNode } from "react";
 
-import { Divider } from "./Divider";
+import { Flex } from "./Flex";
 import { Span } from "./Span";
 import { Switch } from "./Switch";
 
@@ -27,24 +27,23 @@ export interface FormSwitchProps {
 
 export function FormSwitch({ onChange, title, value, description, disabled, className, hideBorder }: FormSwitchProps) {
     return (
-        <label className="pc-form-switch-wrapper">
-            <div className={classes("pc-form-switch", className, disabled && "pc-form-switch-disabled")}>
+        <div className={classes("pc-form-switch-container", hideBorder && "pc-form-switch-no-border")}>
+            <label className={classes("pc-form-switch", className, disabled && "pc-form-switch-disabled")}>
                 <div className={"pc-form-switch-text"}>
-                    <Span size="md" weight="medium">{title}</Span>
-                    {description && <Span size="sm" weight="normal">{description}</Span>}
+                    <Flex flexDirection="column" gap="4px">
+                        <Span size="md" weight="medium" color="header-primary">{title}</Span>
+                        {description && <Span size="sm" color="text-subtle">{description}</Span>}
+                    </Flex>
                 </div>
 
-                <Switch checked={value} onChange={onChange} disabled={disabled} />
-            </div>
-            {!hideBorder && <Divider className="pc-form-switch-border" />}
-        </label>
+                <div className="pc-form-switch-control">
+                    <Switch checked={value} onChange={onChange} disabled={disabled} />
+                </div>
+            </label>
+        </div>
     );
 }
-
-// #region Old compatibility
 
 export function FormSwitchCompat({ note, children, ...restProps }: PropsWithChildren<any>) {
     return <FormSwitch title={children ?? ""} description={note} {...restProps} />;
 }
-
-// #endregion

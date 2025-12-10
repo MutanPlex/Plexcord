@@ -10,10 +10,11 @@ import { openNotificationLogModal } from "@api/Notifications/notificationLog";
 import { useSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
+import { Divider } from "@components/Divider";
 import { ErrorCard } from "@components/ErrorCard";
 import { Flex } from "@components/Flex";
 import { FormSwitch } from "@components/FormSwitch";
-import { Heading, HeadingTertiary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { Margins } from "@utils/margins";
 import { identity } from "@utils/misc";
@@ -22,10 +23,12 @@ import { Select, Slider } from "@webpack/common";
 
 export function NotificationSection() {
     return (
-        <section className={Margins.top16}>
-            <HeadingTertiary>{t(settings.notifications.title)}</HeadingTertiary>
+        <>
+            <Divider className={Margins.top20} />
+
+            <Heading>{t(settings.notifications.title)}</Heading>
             <Paragraph className={Margins.bottom8}>{t(settings.notifications.description)}</Paragraph>
-            <Flex>
+            <Flex gap="16px">
                 <Button onClick={openNotificationSettingsModal}>
                     {t(settings.notifications.settings)}
                 </Button>
@@ -33,7 +36,7 @@ export function NotificationSection() {
                     {t(settings.notifications.viewLog)}
                 </Button>
             </Flex>
-        </section>
+        </>
     );
 }
 

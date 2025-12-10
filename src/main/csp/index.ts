@@ -38,6 +38,7 @@ export const CspPolicies: PolicyMap = {
     "*.githack.com": ImageAndCssSrc, // githack (namely raw.githack.com), used by some themes
     "jsdelivr.net": ImageAndCssSrc, // jsDelivr, used by very few themes
 
+    "fonts.google.com": CssSrc, // Google Fonts, used by many themes
     "fonts.googleapis.com": CssSrc, // Google Fonts, used by many themes
     "fonts.gstatic.com": CssSrc, // Google Fonts, used by many themes
 

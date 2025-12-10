@@ -150,7 +150,7 @@ export default definePlugin({
                 },
                 {
                     match: /case \i\.\i\.DEVELOPER_OPTIONS:return \i;/,
-                    replace: "$&case 'EquicordPlugins':return $self.buildPluginMenuEntries(true);$&case 'EquicordThemes':return $self.buildThemeMenuEntries();"
+                    replace: "$&case 'PlexcordPlugins':return $self.buildPluginMenuEntries(true);$&case 'PlexcordThemes':return $self.buildThemeMenuEntries();"
                 }
             ]
         },

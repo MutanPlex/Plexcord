@@ -84,7 +84,7 @@
 }
 
 .pc-plugins-info-icon:not(:hover, :focus) {
-    color: var(--text-muted);
+    color: var(--text-subtle);
 }
 
 .pc-plugins-restart-button {

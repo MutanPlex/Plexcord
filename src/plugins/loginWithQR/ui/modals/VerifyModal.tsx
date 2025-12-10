@@ -130,7 +130,7 @@ function VerifyModal({
                         <BaseText size="xl" weight="bold" color="header-primary" tag="h1" className={cl("device-header")}>
                             {getIntlMessage("QR_CODE_LOGIN_SUCCESS")}
                         </BaseText>
-                        <BaseText size="md" weight="semibold" color="text-normal" style={{ width: "30rem", textAlign: "center" }}>
+                        <BaseText size="md" weight="semibold" color="text-default" style={{ width: "30rem", textAlign: "center" }}>
                             {getIntlMessage("QR_CODE_LOGIN_SUCCESS_FLAVOR")}
                         </BaseText>
                     </>
@@ -145,7 +145,7 @@ function VerifyModal({
                         <BaseText size="xl" weight="bold" color="header-primary" tag="h1" className={cl("device-header")}>
                             {getIntlMessage("QR_CODE_NOT_FOUND")}
                         </BaseText>
-                        <BaseText size="md" weight="semibold" color="text-normal" style={{ width: "30rem" }}>
+                        <BaseText size="md" weight="semibold" color="text-default" style={{ width: "30rem" }}>
                             {getIntlMessage("QR_CODE_NOT_FOUND_DESCRIPTION")}
                         </BaseText>
                     </>

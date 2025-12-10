@@ -6,11 +6,17 @@
  */
 
 import { plugin, t } from "@api/i18n";
+import { isPluginEnabled } from "@api/PluginManager";
+import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
+import plexcordToolbox from "@plugins/plexcordToolbox";
 import { Devs } from "@utils/constants";
-import definePlugin from "@utils/types";
+import definePlugin, { OptionType } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
 import { Constants, React, RestAPI, useEffect, useState } from "@webpack/common";
+
+let spotifyId: string | null = null;
+let showActivity: boolean = false;
 
 const Button = findComponentByCodeLazy(".NONE,disabled:", ".PANEL_BUTTON");
 
@@ -36,39 +42,29 @@ function makeSpotifyIcon(enabled: boolean) {
     );
 }
 
-function SpotifyActivityToggleButton() {
-    const [loading, setLoading] = useState(true);
-    const [id, setId] = useState<string | null>(null);
-    const [showActivity, setShowActivity] = useState<boolean | null>(null);
+function SpotifyActivityToggleButton(props: { nameplate?: any; }) {
+    const { location } = settings.use(["location"]);
+    const [showActivityState, setShowActivityState] = useState(showActivity);
 
     useEffect(() => {
-        (async () => {
-            const { body } = await RestAPI.get({
-                url: Constants.Endpoints.CONNECTIONS,
-            });
-            if (!body) return;
-            const spotifyConn = body.find(c => c.type === "spotify");
-            if (spotifyConn) {
-                setId(spotifyConn.id);
-                setShowActivity(spotifyConn.show_activity);
-            }
-            setLoading(false);
-        })();
+        setShowActivityState(showActivity);
     }, []);
-    if (loading || !id || showActivity === null) return null;
+    if (showActivity === null) return null;
+    if (!spotifyId || location !== "PANEL" && isPluginEnabled(plexcordToolbox.name)) return null;
 
     return (
         <Button
-            tooltipText={showActivity ? t(plugin.spotifyActivityToggle.tooltip.disable) : t(plugin.spotifyActivityToggle.tooltip.enable)}
-            icon={makeSpotifyIcon(showActivity)}
+            tooltipText={showActivityState ? t(plugin.spotifyActivityToggle.tooltip.disable) : t(plugin.spotifyActivityToggle.tooltip.enable)}
+            icon={makeSpotifyIcon(showActivityState)}
             role="switch"
-            aria-checked={showActivity}
-            redGlow={!showActivity}
+            aria-checked={showActivityState}
+            redGlow={!showActivityState}
+            plated={props?.nameplate != null}
             onClick={async () => {
-                const newValue = !showActivity;
-                setShowActivity(newValue);
+                const newValue = !showActivityState;
+                setShowActivityState(newValue);
                 await RestAPI.patch({
-                    url: Constants.Endpoints.CONNECTION("spotify", id),
+                    url: Constants.Endpoints.CONNECTION("spotify", spotifyId),
                     body: {
                         show_activity: newValue,
                     },
@@ -78,19 +74,66 @@ function SpotifyActivityToggleButton() {
     );
 }
 
+const settings = definePluginSettings({
+    location: {
+        label: () => t(plugin.spotifyActivityToggle.option.location.label),
+        description: () => t(plugin.spotifyActivityToggle.option.location.description),
+        type: OptionType.SELECT,
+        options: [
+            { label: () => t(plugin.spotifyActivityToggle.option.location.panel), value: "PANEL", default: true },
+            { label: () => t(plugin.spotifyActivityToggle.option.location.toolbox), value: "TOOLBOX" }
+        ],
+        get hidden() {
+            return !isPluginEnabled(plexcordToolbox.name);
+        }
+    },
+});
+
 export default definePlugin({
     name: "SpotifyActivityToggle",
     description: () => t(plugin.spotifyActivityToggle.description),
     authors: [Devs.thororen],
+    settings,
 
     patches: [
         {
             find: "#{intl::ACCOUNT_SPEAKING_WHILE_MUTED}",
             replacement: {
                 match: /className:\i\.buttons,.{0,50}children:\[/,
-                replace: "$&$self.SpotifyActivityToggleButton(),"
+                replace: "$&$self.SpotifyActivityToggleButton(arguments[0]),"
             }
         }
     ],
+
+    toolboxActions() {
+        const { location } = settings.use(["location"]);
+
+        if (!spotifyId || location !== "TOOLBOX") return null;
+
+        return {
+            [showActivity ? t(plugin.spotifyActivityToggle.tooltip.disable) : t(plugin.spotifyActivityToggle.tooltip.enable)]() {
+                const newValue = !showActivity;
+                showActivity = newValue;
+
+                RestAPI.patch({
+                    url: Constants.Endpoints.CONNECTION("spotify", spotifyId),
+                    body: { show_activity: newValue },
+                });
+            }
+        };
+    },
+
+    async start() {
+        const { body } = await RestAPI.get({
+            url: Constants.Endpoints.CONNECTIONS,
+        });
+        if (!body) return;
+
+        const spotifyConn = body.find(c => c.type === "spotify");
+        if (spotifyConn) {
+            spotifyId = spotifyConn.id;
+            showActivity = spotifyConn.show_activity;
+        }
+    },
     SpotifyActivityToggleButton: ErrorBoundary.wrap(SpotifyActivityToggleButton, { noop: true }),
 });

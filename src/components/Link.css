@@ -1,0 +1,14 @@
+.pc-link {
+    color: var(--text-link);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pc-link:hover {
+    text-decoration: underline;
+}
+
+.pc-link-disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}

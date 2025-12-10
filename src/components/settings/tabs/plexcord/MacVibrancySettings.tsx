@@ -7,8 +7,10 @@
 
 import { settings, t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
+import { Divider } from "@components/Divider";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { Margins } from "@utils/margins";
 import { identity } from "@utils/misc";
 import { Select } from "@webpack/common";
@@ -18,7 +20,12 @@ export function VibrancySettings() {
 
     return (
         <>
+            <Divider className={Margins.top20} />
+
             <Heading tag="h5">{t(settings.macVibrancy.title)}</Heading>
+            <Paragraph className={Margins.bottom20}>
+                {t(settings.macVibrancy.description)}
+            </Paragraph >
             <ErrorBoundary noop>
                 <Select
                     className={Margins.bottom20}
