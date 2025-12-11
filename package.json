@@ -82,7 +82,7 @@
         "typescript-eslint": "^8.48.1",
         "typescript-transform-paths": "^3.5.5"
     },
-    "packageManager": "pnpm@10.23.0",
+    "packageManager": "pnpm@10.25.0",
     "pnpm": {
         "overrides": {
             "@types/react": "19.2.7",

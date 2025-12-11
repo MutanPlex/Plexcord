@@ -688,7 +688,8 @@ function DisableQuestsSetting(): JSX.Element {
         disableMembersListActivelyPlayingIcon,
         makeMobileQuestsDesktopCompatible,
         completeVideoQuestsInBackground,
-        completeGameQuestsInBackground
+        completeGameQuestsInBackground,
+        notifyOnQuestComplete
     } = settings.use([
         "disableQuestsEverything",
         "disableQuestsDiscoveryTab",
@@ -702,7 +703,8 @@ function DisableQuestsSetting(): JSX.Element {
         "disableMembersListActivelyPlayingIcon",
         "makeMobileQuestsDesktopCompatible",
         "completeVideoQuestsInBackground",
-        "completeGameQuestsInBackground"
+        "completeGameQuestsInBackground",
+        "notifyOnQuestComplete"
     ]);
 
     const options: DynamicDropdownSettingOption[] = [
@@ -718,7 +720,8 @@ function DisableQuestsSetting(): JSX.Element {
         { label: t(plugin.questify.settings.disableOptions.membersList), value: "members-list", selected: disableMembersListActivelyPlayingIcon, type: "disable" },
         { label: t(plugin.questify.settings.disableOptions.gameQuests), value: "game-quests-background", selected: completeGameQuestsInBackground, type: "modification" },
         { label: t(plugin.questify.settings.disableOptions.videoQuests), value: "video-quests-background", selected: completeVideoQuestsInBackground, type: "modification" },
-        { label: t(plugin.questify.settings.disableOptions.mobileDesktop), value: "mobile-desktop-compatible", selected: makeMobileQuestsDesktopCompatible, type: "modification" }
+        { label: t(plugin.questify.settings.disableOptions.mobileDesktop), value: "mobile-desktop-compatible", selected: makeMobileQuestsDesktopCompatible, type: "modification" },
+        { label: t(plugin.questify.settings.disableOptions.notifyOnComplete), value: "notify-on-complete", selected: notifyOnQuestComplete, type: "modification" },
     ];
 
     const disableOptions = options.filter(option => option.type === "disable");
@@ -751,6 +754,7 @@ function DisableQuestsSetting(): JSX.Element {
         settings.store.completeGameQuestsInBackground = enabledValues.includes("game-quests-background");
         settings.store.completeVideoQuestsInBackground = enabledValues.includes("video-quests-background");
         settings.store.makeMobileQuestsDesktopCompatible = enabledValues.includes("mobile-desktop-compatible");
+        settings.store.notifyOnQuestComplete = enabledValues.includes("notify-on-complete");
 
         redoAutoFetch ? checkAutoFetchInterval(settings.store.fetchingQuestsInterval) : null;
         setCurrentValue(enabled);
@@ -1732,6 +1736,13 @@ export const settings = definePluginSettings({
                 rerenderQuests();
             }
         },
+    },
+    notifyOnQuestComplete: {
+        label: () => t(plugin.questify.option.notifyOnQuestComplete.label),
+        description: () => t(plugin.questify.option.notifyOnQuestComplete.description),
+        type: OptionType.BOOLEAN,
+        default: true,
+        hidden: true
     },
     questButton: {
         description: () => t(plugin.questify.option.questButton.description),

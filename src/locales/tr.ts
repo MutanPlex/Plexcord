@@ -6217,7 +6217,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     membersList: "Üyeler Listesi Aktif Oynuyor Simgeleri",
                     gameQuests: "Oyun Görevlerini Arka Planda Tamamla",
                     videoQuests: "Video Görevlerini Arka Planda Tamamla",
-                    mobileDesktop: "Mobil Görevleri Masaüstü ile Uyumlu Hale Getir"
+                    mobileDesktop: "Mobil Görevleri Masaüstü ile Uyumlu Hale Getir",
+                    notifyOnComplete: "Görev Tamamlandığında Bildir"
                 },
                 options: {
                     always: "Her Zaman",
@@ -6293,6 +6294,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 completeGameQuestsInBackground: {
                     label: "Oyun Görevlerini Arka Planda Tamamla",
                     description: "Oyun Görevlerini, oyun süresi geçtikten sonra arka planda tamamla."
+                },
+                notifyOnQuestComplete: {
+                    label: "Görev Tamamlandığında Bildir",
+                    description: "Bir Görev otomatik olarak tamamlandığında bildirim göster."
                 },
                 questButton: {
                     description: "Sunucu listesinde bir Görev düğmesi göster."
@@ -6443,6 +6448,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 questInProgressWithTime: "Tamamlanıyor ({{remainTime}})",
                 completing: "Tamamlanıyor",
                 resume: "Devam Et (~{{remainTime}})"
+            },
+            notification: {
+                completed: {
+                    title: "Görev Tamamlandı",
+                    body: "{{questName}} görevi tamamlandı."
+                }
             }
         },
         questionMarkReplacement: {

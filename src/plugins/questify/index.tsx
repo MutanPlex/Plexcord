@@ -8,6 +8,7 @@
 import "./styles.css";
 
 import { plugin, t } from "@api/i18n";
+import { showNotification } from "@api/Notifications";
 import { addServerListElement, removeServerListElement, ServerListRenderPosition } from "@api/ServerList";
 import { ErrorBoundary } from "@components/index";
 import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
@@ -597,6 +598,15 @@ async function startVideoProgressTracking(quest: Quest, questDuration: number): 
 
         if (success) {
             QuestifyLogger.info(`[${getFormattedNow()}] Quest ${questName} completed.`);
+
+            if (settings.store.notifyOnQuestComplete) {
+                showNotification({
+                    title: t(plugin.questify.notification.completed.title),
+                    body: t(plugin.questify.notification.completed.body, { questName }),
+                    dismissOnClick: true,
+                    onClick: () => NavigationRouter.transitionTo(`${questPath}#${quest.id}`)
+                });
+            }
         } else {
             QuestifyLogger.error(`[${getFormattedNow()}] Failed to complete Quest ${questName}.`);
         }
@@ -661,7 +671,7 @@ async function startPlayGameProgressTracking(quest: Quest, questDuration: number
     const initial = await reportPlayGameQuestProgress(quest, false, QuestifyLogger, { attempts: 3, delay: 2500 });
 
     const progressIntervalId = setInterval(async () => {
-        const result = await reportPlayGameQuestProgress(quest, false, QuestifyLogger);
+        const result = await reportPlayGameQuestProgress(quest, false, QuestifyLogger, { attempts: 3, delay: 2500 });
 
         if (result.progress === null) {
             clearInterval(progressIntervalId);
@@ -683,6 +693,15 @@ async function startPlayGameProgressTracking(quest: Quest, questDuration: number
 
             if (success) {
                 QuestifyLogger.info(`[${getFormattedNow()}] Quest ${questName} completed.`);
+
+                if (settings.store.notifyOnQuestComplete) {
+                    showNotification({
+                        title: t(plugin.questify.notification.completed.title),
+                        body: t(plugin.questify.notification.completed.body, { questName }),
+                        dismissOnClick: true,
+                        onClick: () => NavigationRouter.transitionTo(`${questPath}#${quest.id}`),
+                    });
+                }
             } else {
                 QuestifyLogger.error(`[${getFormattedNow()}] Failed to complete Quest ${questName}.`);
             }
@@ -696,6 +715,15 @@ async function startPlayGameProgressTracking(quest: Quest, questDuration: number
 
                 if (success) {
                     QuestifyLogger.info(`[${getFormattedNow()}] Quest ${questName} completed.`);
+
+                    if (settings.store.notifyOnQuestComplete) {
+                        showNotification({
+                            title: t(plugin.questify.notification.completed.title),
+                            body: t(plugin.questify.notification.completed.body, { questName }),
+                            dismissOnClick: true,
+                            onClick: () => NavigationRouter.transitionTo(`${questPath}#${quest.id}`),
+                        });
+                    }
                 } else {
                     QuestifyLogger.error(`[${getFormattedNow()}] Failed to complete Quest ${questName}.`);
                 }
@@ -715,7 +743,7 @@ async function startPlayGameProgressTracking(quest: Quest, questDuration: number
         rerenderQuests();
     }, 1000);
 
-    activeQuestIntervals.set(quest.id, { progressTimeout: progressIntervalId, rerenderTimeout: renderIntervalId, progress: initial?.progress || initialProgress, duration: questDuration, type: "play" });
+    activeQuestIntervals.set(quest.id, { progressTimeout: progressIntervalId, rerenderTimeout: renderIntervalId, progress: initial.progress || initialProgress, duration: questDuration, type: "play" });
 
     if (remaining > 0) {
         QuestifyLogger.info(`[${getFormattedNow()}] Quest ${questName} will be completed in the background in ${remaining} seconds.`);
@@ -1229,14 +1257,6 @@ export default definePlugin({
             ]
         },
         {
-            // Prevent scrolling to a sponsored Quest.
-            find: "Id(\"quest-tile-\".concat",
-            replacement: {
-                match: /(?=document.getElementById)/,
-                replace: "null&&"
-            }
-        },
-        {
             // Whether preloading assets is enabled or not, the placeholders loading
             // before the assets causes a lot of element shifting, whereas if
             // the elements load immediately instead, it doesn't.
@@ -1364,6 +1384,11 @@ export default definePlugin({
         QUESTS_CLAIM_REWARD_SUCCESS(data) {
             QuestifyLogger.info(`[${getFormattedNow()}] [QUESTS_CLAIM_REWARD_SUCCESS]\n`, data);
             fetchAndDispatchQuests("Questify", QuestifyLogger);
+            validateAndOverwriteIgnoredQuests();
+        },
+
+        QUESTS_USER_STATUS_UPDATE(data) {
+            QuestifyLogger.info(`[${getFormattedNow()}] [QUESTS_USER_STATUS_UPDATE]\n`, data);
             validateAndOverwriteIgnoredQuests();
         },
 

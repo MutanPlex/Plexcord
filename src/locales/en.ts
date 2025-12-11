@@ -6214,7 +6214,8 @@ const translations = {
                     membersList: "Members List Actively Playing Icons",
                     gameQuests: "Complete Game Quests in Background",
                     videoQuests: "Complete Video Quests in Background",
-                    mobileDesktop: "Make Mobile Quests Desktop Compatible"
+                    mobileDesktop: "Make Mobile Quests Desktop Compatible",
+                    notifyOnComplete: "Notify on Quest Completion"
                 },
                 options: {
                     always: "Always",
@@ -6290,6 +6291,10 @@ const translations = {
                 completeGameQuestsInBackground: {
                     label: "Complete Game Quests In Background",
                     description: "Complete Game Quests in the background after the game duration has passed."
+                },
+                notifyOnQuestComplete: {
+                    label: "Notify On Quest Completion",
+                    description: "Show a notification when a Quest is completed automatically."
                 },
                 questButton: {
                     description: "Show a Quest button in the server list."
@@ -6440,6 +6445,12 @@ const translations = {
                 questInProgressWithTime: "Completing ({{remainTime}})",
                 completing: "Completing",
                 resume: "Resume (~{{remainTime}})"
+            },
+            notification: {
+                completed: {
+                    title: "Quest Completed",
+                    body: "The {{questName}} Quest has completed."
+                }
             }
         },
         questionMarkReplacement: {
