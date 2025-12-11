@@ -1,6 +1,6 @@
 #pc-ytm-player {
     padding: 12px;
-    background: var(--bg-overlay-floating, var(--background-base-low, var(--background-base-lower-alt)));
+    background: var(--background-base-low);
     margin: 0;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -60,7 +60,7 @@
     margin-top: calc(13px/-2 + var(--bar-offset)/2);
     margin-left: -0.5px;
     border: unset;
-    color: var(--interactive-normal);
+    color: var(--interactive-icon-default, var(--interactive-normal));
     opacity: 0;
     transition: opacity 0.1s;
 }
@@ -86,7 +86,7 @@
     margin: 0 2px;
     border-radius: var(--radius-sm);
     background: none;
-    color: var(--interactive-normal);
+    color: var(--interactive-icon-default, var(--interactive-normal));
     padding: 0;
     width: 32px;
     height: 32px;
@@ -97,8 +97,8 @@
 }
 
 .pc-ytm-button:hover {
-    color: var(--interactive-hover);
-    background-color: var(--background-modifier-selected);
+    color: var(--interactive-icon-hover, var(--interactive-hover));
+    background-color: var(--background-mod-strong, var(--background-modifier-selected));
 }
 
 .pc-ytm-button svg {

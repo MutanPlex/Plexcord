@@ -25,7 +25,7 @@ let LayoutTypes = {
     PANEL: 3,
     PANE: 4
 };
-waitFor(["SECTION", "SIDEBAR_ITEM", "PANEL", "PANE"], v => LayoutTypes = v);
+waitFor(["SECTION", "SIDEBAR_ITEM", "PANEL"], v => LayoutTypes = v);
 
 const FallbackSectionTypes = {
     HEADER: "HEADER",
@@ -177,28 +177,41 @@ export default definePlugin({
     buildEntry(options: EntryOptions): SettingsLayoutNode {
         const { key, title, panelTitle = title, Component, Icon } = options;
 
+        const panel: SettingsLayoutNode = {
+            key: key + "_panel",
+            type: LayoutTypes.PANEL,
+            useTitle: () => panelTitle,
+        };
+
+        const render = {
+            // FIXME
+            StronglyDiscouragedCustomComponent: () => <Component />,
+            render: () => <Component />,
+        };
+
+        // FIXME
+        if (LayoutTypes.PANE) {
+            panel.buildLayout = () => [
+                {
+                    key: key + "_pane",
+                    type: LayoutTypes.PANE,
+                    useTitle: () => panelTitle,
+                    buildLayout: () => [],
+                    ...render
+                }
+            ];
+        } else {
+            Object.assign(panel, render);
+            panel.buildLayout = () => [];
+        }
+
         return ({
             key,
             type: LayoutTypes.SIDEBAR_ITEM,
             legacySearchKey: title.toUpperCase(),
             useTitle: () => title,
             icon: () => <Icon width={20} height={20} />,
-            buildLayout: () => [
-                {
-                    key: key + "_panel",
-                    type: LayoutTypes.PANEL,
-                    useTitle: () => panelTitle,
-                    buildLayout: () => [
-                        {
-                            key: key + "_pane",
-                            type: LayoutTypes.PANE,
-                            buildLayout: () => [],
-                            render: () => <Component />,
-                            useTitle: () => panelTitle
-                        }
-                    ]
-                }
-            ]
+            buildLayout: () => [panel]
         });
     },
 

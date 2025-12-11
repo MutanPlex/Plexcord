@@ -4,13 +4,13 @@
 }
 
 .pc-toolbox-icon {
-    color: var(--interactive-normal);
+    color: var(--interactive-icon-default, var(--interactive-normal));
 }
 
 .pc-toolbox-btn[class*="selected"] .pc-toolbox-icon {
-    color: var(--interactive-active);
+    color: var(--interactive-icon-active, var(--interactive-active));
 }
 
 .pc-toolbox-btn:hover .pc-toolbox-icon {
-    color: var(--interactive-hover);
+    color: var(--interactive-icon-hover, var(--interactive-hover));
 }

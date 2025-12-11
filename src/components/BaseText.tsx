@@ -40,7 +40,7 @@ export const TextColors = {
     "text-default": "var(--text-default)",
     "text-muted": "var(--text-muted)",
     "text-link": "var(--text-link)",
-    "text-danger": "var(--text-feedback-critical)",
+    "text-danger": "var(--redesign-button-danger-background, var(--button-danger-background))",
     "text-brand": "var(--text-brand)",
     "text-strong": "var(--text-strong)",
     "text-subtle": "var(--text-subtle)",

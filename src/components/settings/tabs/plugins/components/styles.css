@@ -31,5 +31,5 @@
 }
 
 .pc-plugins-setting-error {
-    color: var(--text-feedback-critical);
+    color: var(--text-feedback-critical, var(--text-danger, #FF5C5C));
 }

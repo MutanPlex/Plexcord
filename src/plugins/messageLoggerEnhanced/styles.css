@@ -15,7 +15,7 @@
     position: absolute;
     top: -24px;
     right: -24px;
-    color: var(--interactive-normal);
+    color: var(--interactive-icon-default, var(--interactive-normal));
     cursor: pointer;
 }
 
@@ -72,11 +72,11 @@
 }
 
 .pc-log-toolbox-btn svg {
-    color: var(--interactive-normal);
+    color: var(--interactive-icon-default, var(--interactive-normal));
 }
 
 :is(.pc-log-toolbox-btn:hover, .pc-log-toolbox-btn[class*="selected"]) svg {
-    color: var(--interactive-active);
+    color: var(--interactive-icon-active, var(--interactive-active));
 }
 
 .folder-upload-container {
@@ -102,5 +102,5 @@
     width: var(--space-32);
     min-width: 0;
     height: var(--space-32);
-    color: var(--interactive-normal) !important;
+    color: var(--interactive-icon-default, var(--interactive-normal)) !important;
 }

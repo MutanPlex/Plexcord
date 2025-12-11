@@ -1,9 +1,9 @@
 .pc-cfc-button {
-    color: var(--interactive-normal);
+    color: var(--interactive-icon-default, var(--interactive-normal));
     cursor: pointer;
     padding-left: 4px;
 }
 
 .pc-cfc-button:hover {
-    color: var(--interactive-hover);
+    color: var(--interactive-icon-hover, var(--interactive-hover));
 }

@@ -54,7 +54,7 @@
 
 .questify-volume-slider-container {
     margin: 8px 0 0;
-    background-color: var(--input-background);
+    background-color: var(--input-background-default, var(--input-background));
     padding: 7px 12px 7px 7px;
     border-radius: 3px;
     border: 1px solid var(--border-normal);
@@ -77,7 +77,7 @@
 .questify-alert-icon {
     flex: 0;
     place-content: center center;
-    background-color: var(--input-background);
+    background-color: var(--input-background-default, var(--input-background));
     border-radius: 3px;
     padding: 0 10px;
     color: var(--text-default);
@@ -144,7 +144,7 @@
 }
 
 .questify-color-picker-with-buttons {
-    background-color: var(--input-background);
+    background-color: var(--input-background-default, var(--input-background));
     border: 1px solid var(--border-normal);
     border-radius: 3px;
     padding: 8px;

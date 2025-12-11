@@ -128,7 +128,7 @@
 }
 
 .pc-github-repos-table tbody tr:hover {
-    background-color: var(--background-modifier-hover);
+    background-color: var(--background-mod-subtle, var(--background-modifier-hover));
 }
 
 .pc-github-repos-table td {
@@ -216,16 +216,16 @@
 }
 
 .pc-github-repos-error {
-    color: var(--text-feedback-critical);
+    color: var(--text-feedback-critical, var(--text-danger));
 }
 
 .pc-github-repos-link {
     cursor: pointer;
-    fill: var(--interactive-normal);
+    fill: var(--interactive-icon-default, var(--interactive-normal));
 }
 
 .pc-github-repos-name {
-    color: var(--interactive-active);
+    color: var(--interactive-icon-active, var(--interactive-active));
 }
 
 .pc-github-repos-header-repo {

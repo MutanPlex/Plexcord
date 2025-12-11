@@ -140,7 +140,7 @@
 }
 
 .pc-channeltabs-bookmark-star:hover {
-    stroke: var(--interactive-hover);
+    stroke: var(--interactive-icon-hover, var(--interactive-hover));
 }
 
 .pc-channeltabs-bookmark-star-checked {
@@ -367,7 +367,7 @@
 }
 
 .pc-channeltabs-new-button:hover {
-    background-color: var(--background-modifier-hover);
+    background-color: var(--background-mod-subtle, var(--background-modifier-hover));
     transform: scale(1.1);
 }
 
@@ -381,7 +381,7 @@
 }
 
 .pc-channeltabs-new-button:hover svg {
-    color: var(--interactive-hover);
+    color: var(--interactive-icon-hover, var(--interactive-hover));
     animation: pc-channeltabs-plus-spin 0.3s ease-in-out;
 }
 
@@ -409,7 +409,7 @@
 }
 
 .pc-channeltabs-close-button:hover {
-    background-color: var(--background-modifier-hover);
+    background-color: var(--background-mod-subtle, var(--background-modifier-hover));
     transform: rotate(90deg);
 }
 
@@ -455,7 +455,7 @@
 
 /* stylelint-disable-next-line no-descending-specificity */
 .pc-channeltabs-close-button.pc-channeltabs-close-button-compact:hover {
-    background-color: var(--background-modifier-hover);
+    background-color: var(--background-mod-subtle, var(--background-modifier-hover));
     transform: translateX(0) scale(1) rotate(90deg) !important;
     transition:
         opacity 0.3s ease-out 0.2s,
@@ -1048,7 +1048,7 @@
 
 /* Folder expansion */
 .pc-channeltabs-bookmark.pc-channeltabs-folder-expanded {
-    background-color: var(--background-modifier-selected);
+    background-color: var(--background-mod-strong, var(--background-modifier-selected));
 }
 
 /* Folder item styling - indented and visually connected to folder */
@@ -1062,7 +1062,7 @@
 
 .pc-channeltabs-bookmark.pc-channeltabs-folder-item:hover {
     opacity: 1;
-    background-color: var(--background-modifier-hover);
+    background-color: var(--background-mod-subtle, var(--background-modifier-hover));
 }
 
 /* Active bookmark visual indicator */
@@ -1131,7 +1131,7 @@
 }
 
 .channelTabs-keybind-button:hover:not(:disabled) {
-    background-color: var(--background-modifier-hover);
+    background-color: var(--background-mod-subtle, var(--background-modifier-hover));
     border-color: var(--brand-experiment);
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgb(0 0 0 / 20%);
@@ -1171,7 +1171,7 @@
 }
 
 .channelTabs-keybind-conflict {
-    color: var(--text-feedback-critical);
+    color: var(--text-feedback-critical, var(--text-danger));
     font-size: 12px;
     font-weight: 500;
     margin-top: 2px;

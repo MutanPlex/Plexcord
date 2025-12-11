@@ -411,7 +411,7 @@
 }
 
 .visual-refresh .pc-changelog-current-hash {
-    background-color: var(--input-background);
+    background-color: var(--input-background-default, var(--input-background));
     border: 1px solid var(--border-subtle);
 }
 
@@ -565,7 +565,7 @@
 .pc-changelog-delete-button:hover {
     opacity: 1 !important;
     color: var(--status-danger) !important;
-    background-color: var(--background-modifier-hover);
+    background-color: var(--background-mod-subtle, var(--background-modifier-hover));
 }
 
 .pc-changelog-log-header:hover .pc-changelog-delete-button {

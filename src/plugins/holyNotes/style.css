@@ -44,7 +44,7 @@ $modifier: var(--input-border);
     cursor: pointer;
     padding-left: 0px;
     margin: 0px 14px 6px 0px;
-    color: var(--interactive-normal);
+    color: var(--interactive-icon-default, var(--interactive-normal));
     transition: opacity 0.2s ease-in-out;
 }
 
@@ -114,7 +114,7 @@ $modifier: var(--input-border);
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
-    color: var(--interactive-normal);
+    color: var(--interactive-icon-default, var(--interactive-normal));
     border-bottom-width: 2px;
     border-bottom-style: solid;
     /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
@@ -139,7 +139,7 @@ $modifier: var(--input-border);
     width: var(--space-32);
     min-width: 0;
     height: var(--space-32);
-    color: var(--interactive-normal) !important;
+    color: var(--interactive-icon-default, var(--interactive-normal)) !important;
 }
 
 .pc-help-modal-header {
