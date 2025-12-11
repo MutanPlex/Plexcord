@@ -102,7 +102,7 @@ export function Updatable(props: CommonProps) {
                 </Paragraph>
             )}
 
-            <Flex className={classes(Margins.bottom8)} gap={8}>
+            <Flex className={classes(Margins.bottom8)} gap="8px">
                 {isOutdated && (
                     <Button
                         size="small"
