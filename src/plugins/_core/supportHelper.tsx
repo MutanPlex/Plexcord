@@ -117,12 +117,17 @@ async function generateDebugInfoMessage() {
         return `${name} (${navigator.userAgent})`;
     })();
 
+    const spoofInfo = IS_PLEXTRON ? tryOrElse(() => PlextronNative.app.getPlatformSpoofInfo?.(), null) : null;
+    const platformDisplay = spoofInfo?.spoofed
+        ? `${platformName()} (spoofed from ${spoofInfo.originalPlatform})`
+        : platformName();
+
     const info = {
         Plexcord:
             `v${VERSION} • [${gitHash}](<https://github.com/MutanPlex/Plexcord/commit/${gitHash}>)` +
             `${SettingsPlugin.additionalInfo} - ${Intl.DateTimeFormat("en-GB", { dateStyle: "medium" }).format(BUILD_TIMESTAMP)}`,
         Client: `${RELEASE_CHANNEL} ~ ${client}`,
-        Platform: platformName()
+        Platform: platformDisplay
     };
 
     if (IS_DISCORD_DESKTOP) {
@@ -132,6 +137,7 @@ async function generateDebugInfoMessage() {
     const commonIssues = {
         "Activity Sharing disabled": tryOrElse(() => !ShowCurrentGame.getSetting(), false),
         "Plexcord DevBuild": !IS_STANDALONE,
+        "Platform Spoofed": spoofInfo?.spoofed ?? false,
         "Has UserPlugins": Object.values(PluginMeta).some(m => m.userPlugin),
         "More than two weeks out of date": BUILD_TIMESTAMP < Date.now() - 12096e5,
     };

@@ -36,6 +36,7 @@ export let PermissionStore: GenericStore;
 export let GuildChannelStore: t.GuildChannelStore;
 export let ReadStateStore: GenericStore;
 export let PresenceStore: t.PresenceStore;
+export let UploadAttachmentStore: GenericStore;
 export let VoiceStateStore: t.VoiceStateStore;
 
 export let GuildStore: t.GuildStore;
@@ -86,6 +87,7 @@ waitForStore("StickersStore", m => StickersStore = m);
 waitForStore("StreamerModeStore", m => StreamerModeStore = m);
 waitForStore("TypingStore", m => TypingStore = m);
 waitForStore("OverridePremiumTypeStore", m => OverridePremiumTypeStore = m);
+waitForStore("UploadAttachmentStore", m => UploadAttachmentStore = m);
 waitForStore("ThemeStore", m => {
     ThemeStore = m;
     // Importing this directly causes all webpack commons to be imported, which can easily cause circular dependencies.

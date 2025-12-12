@@ -37,7 +37,7 @@ import UserPermissions from "./components/UserPermissions";
 import { getSortedRolesForMember, sortPermissionOverwrites } from "./utils";
 
 const PopoutClasses = findByPropsLazy("container", "scroller", "list");
-const RoleButtonClasses = findByPropsLazy("button", "buttonInner", "icon", "banner");
+const RoleButtonClasses = findByPropsLazy("button", "icon");
 
 export const enum PermissionsSortOrder {
     HighestRole,
@@ -169,15 +169,15 @@ export default definePlugin({
 
     patches: [
         {
-            find: "#{intl::VIEW_ALL_ROLES}",
+            find: "#{intl::COLLAPSE_ROLES}",
             replacement: {
-                match: /\.expandButton,.+?null,/,
-                replace: "$&$self.ViewPermissionsButton(arguments[0]),"
+                match: /className:(\i\.expandButton),.+?null,/,
+                replace: "$&$self.ViewPermissionsButton({className:$1,props:arguments[0]}),"
             }
         }
     ],
 
-    ViewPermissionsButton: ErrorBoundary.wrap(({ guild, guildMember }: { guild: Guild; guildMember: GuildMember; }) => {
+    ViewPermissionsButton: ErrorBoundary.wrap(({ className, props: { guild, guildMember } }: { className: string, props: { guild: Guild; guildMember: GuildMember; }; }) => {
         const buttonRef = useRef(null);
 
         return (
@@ -198,7 +198,7 @@ export default definePlugin({
                             ref={buttonRef}
                             variant="none"
                             size="min"
-                            className={classes(RoleButtonClasses.button, RoleButtonClasses.icon, "pc-permviewer-role-button")}
+                            className={classes(className, "pc-permviewer-role-button")}
                         >
                             <SafetyIcon height="16" width="16" />
                         </Button>

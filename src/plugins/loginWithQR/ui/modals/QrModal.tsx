@@ -375,7 +375,7 @@ function QrModal(props: ModalProps) {
     return (
         <ModalRoot size={ModalSize.DYNAMIC} {...props}>
             <ModalHeader separator={false} className={cl("modal-header")}>
-                <BaseText color="header-primary" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
+                <BaseText color="text-strong" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
                     {getIntlMessage("USER_SETTINGS_SCAN_QR_CODE")}
                 </BaseText>
             </ModalHeader>
@@ -467,12 +467,12 @@ function QrModal(props: ModalProps) {
                             {error.current}
                         </BaseText>
                     ) : state === LoginStateType.Camera ? (
-                        <BaseText size="md" weight="semibold" color="header-primary">
+                        <BaseText size="md" weight="semibold" color="text-strong">
                             {t(plugin.loginWithQR.scanning)}
                         </BaseText>
                     ) : (
                         <>
-                            <BaseText size="md" weight="semibold" color="header-primary">
+                            <BaseText size="md" weight="semibold" color="text-strong">
                                 {t(plugin.loginWithQR.dragDrop)}
                             </BaseText>
                             <BaseText size="sm" weight="medium" color="text-muted">

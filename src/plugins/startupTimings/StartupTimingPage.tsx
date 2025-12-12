@@ -95,11 +95,11 @@ function TimingSection({ title, logs, traceEnd }: TimingSectionProps) {
             <Heading>{title}</Heading>
             <code>
                 {traceEnd && (
-                    <div style={{ color: "var(--header-primary)", marginBottom: 5, userSelect: "text" }}>
+                    <div style={{ color: "var(--text-strong)", marginBottom: 5, userSelect: "text" }}>
                         {t(plugin.startupTimings.modal.ended)} {(new Date(traceEnd)).toTimeString()}
                     </div>
                 )}
-                <div style={{ color: "var(--header-primary)", display: "grid", gridTemplateColumns: "repeat(3, auto) 1fr", gap: "2px 10px", userSelect: "text" }}>
+                <div style={{ color: "var(--text-strong)", display: "grid", gridTemplateColumns: "repeat(3, auto) 1fr", gap: "2px 10px", userSelect: "text" }}>
                     <span>{t(plugin.startupTimings.modal.start)}</span>
                     <span>{t(plugin.startupTimings.modal.interval)}</span>
                     <span>{t(plugin.startupTimings.modal.delta)}</span>
@@ -124,7 +124,7 @@ function ServerTrace({ trace }: ServerTraceProps) {
         <section>
             <Heading>{t(plugin.startupTimings.modal.serverTrace)}</Heading>
             <code>
-                <Flex flexDirection="column" style={{ color: "var(--header-primary)", gap: 5, userSelect: "text" }}>
+                <Flex flexDirection="column" style={{ color: "var(--text-strong)", gap: 5, userSelect: "text" }}>
                     {lines.map((line, idx) => (
                         <span key={idx}>{line}</span>
                     ))}

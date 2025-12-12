@@ -147,7 +147,7 @@ function ChangeDecorationModal(props: ModalProps) {
         className={DecorationModalStyles.modal}
     >
         <ModalHeader separator={false} className={cl("modal-header")}>
-            <BaseText color="header-primary" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
+            <BaseText color="text-strong" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
                 {t(plugin.decor.button.change)}
             </BaseText>
             <ModalCloseButton onClick={props.onClose} />
@@ -205,7 +205,7 @@ function ChangeDecorationModal(props: ModalProps) {
                         <BaseText
                             size="sm"
                             weight="semibold"
-                            color="header-primary"
+                            color="text-strong"
                         >
                             {activeSelectedDecoration?.alt}
                         </BaseText>

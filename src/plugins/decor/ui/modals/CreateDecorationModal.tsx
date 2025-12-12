@@ -69,7 +69,7 @@ function CreateDecorationModal(props: ModalProps) {
         className={DecorationModalStyles.modal}
     >
         <ModalHeader separator={false} className={cl("modal-header")}>
-            <BaseText size="lg" weight="semibold" color="header-primary" tag="h1" style={{ flexGrow: 1 }}>
+            <BaseText size="lg" weight="semibold" color="text-strong" tag="h1" style={{ flexGrow: 1 }}>
                 {t(plugin.decor.create.title)}
             </BaseText>
             <ModalCloseButton onClick={props.onClose} />

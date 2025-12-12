@@ -191,7 +191,7 @@
 .pc-plugins-confirm-reset,
 .pc-plugin-modal-confirm-reset {
     background-color: var(--redesign-button-danger-background, var(--button-danger-background)) !important;
-    color: var(--header-primary);
+    color: var(--text-strong);
 }
 
 .pc-plugins-confirm-reset:hover,

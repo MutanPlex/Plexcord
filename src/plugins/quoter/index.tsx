@@ -177,7 +177,7 @@ function QuoteModal({ message, ...props }: ModalProps & { message: Message; }) {
     return (
         <ModalRoot {...props} size={ModalSize.MEDIUM}>
             <ModalHeader separator={false}>
-                <BaseText color="header-primary" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
+                <BaseText color="text-strong" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
                     {t(plugin.quoter.modal.title)}
                 </BaseText>
                 <ModalCloseButton onClick={props.onClose} />

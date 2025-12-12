@@ -64,7 +64,7 @@
     align-items: center;
     border-radius: 3px;
     background-color: hsl(var(--black-500-hsl) / 10%);
-    color: var(--header-primary);
+    color: var(--text-strong);
     line-height: 22px;
     font-weight: 600;
     padding: 10px 0 10px 10px;

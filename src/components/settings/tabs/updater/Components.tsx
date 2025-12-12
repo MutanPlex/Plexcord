@@ -84,7 +84,7 @@ export function Updatable(props: CommonProps) {
         <>
             {!updates && updateError ? (
                 <>
-                    <Span size="md" weight="medium" color="header-primary">{t(updater.error.check)}</Span>
+                    <Span size="md" weight="medium" color="text-strong">{t(updater.error.check)}</Span>
                     <ErrorCard className={Margins.top8} style={{ padding: "1em" }}>
                         <p>{updateError.stderr || updateError.stdout || t(updater.error.occurred)}</p>
                     </ErrorCard>

@@ -4,7 +4,7 @@
 }
 
 .questify-setting {
-    border-left: 3px solid var(--header-primary);
+    border-left: 3px solid var(--text-strong);
     padding: 3px 0 3px 8px;
     border-radius: 3px;
     user-select: text;
@@ -116,7 +116,7 @@
 }
 
 #questify-dummy-quest-button {
-    border-left: 5px solid var(--header-primary);
+    border-left: 5px solid var(--text-strong);
     border-radius: 4px;
 }
 

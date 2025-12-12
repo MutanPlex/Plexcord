@@ -285,7 +285,7 @@ class DataUI {
 
                         return <Modal.ModalRoot size={Modal.ModalSize.LARGE} fullscreenOnMobile={true} {...props}>
                             <Modal.ModalHeader separator={false}>
-                                <BaseText color="header-primary" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
+                                <BaseText color="text-strong" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
                                     {t(plugin.iRememberYou.modal.title)}
                                 </BaseText>
                                 <Modal.ModalCloseButton onClick={props.onClose} />

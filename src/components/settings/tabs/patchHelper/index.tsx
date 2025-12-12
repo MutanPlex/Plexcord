@@ -156,7 +156,7 @@ function PatchHelper() {
             {module && (
                 <>
                     <Divider className={Margins.top16 + " " + Margins.bottom16} />
-                    <Span size="md" weight="bold" color="header-primary">{t(patchHelper.preview)}</Span>
+                    <Span size="md" weight="bold" color="text-strong">{t(patchHelper.preview)}</Span>
                     <PatchPreview
                         module={module}
                         match={match}
@@ -169,7 +169,7 @@ function PatchHelper() {
             {!!(find && match && replacement) && (
                 <>
                     <Divider className={Margins.top16 + " " + Margins.bottom16} />
-                    <Span size="md" weight="medium" color="header-primary">{t(patchHelper.generatedCode)}</Span>
+                    <Span size="md" weight="medium" color="text-strong">{t(patchHelper.generatedCode)}</Span>
                     <div style={{ width: "100%", marginTop: 8 }}>
                         <CodeBlock lang="js" content={code} />
                     </div>

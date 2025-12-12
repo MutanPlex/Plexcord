@@ -31,7 +31,7 @@ export function FormSwitch({ onChange, title, value, description, disabled, clas
             <label className={classes("pc-form-switch", className, disabled && "pc-form-switch-disabled")}>
                 <div className={"pc-form-switch-text"}>
                     <Flex flexDirection="column" gap="4px">
-                        <Span size="md" weight="medium" color="header-primary">{title}</Span>
+                        <Span size="md" weight="medium" color="text-strong">{title}</Span>
                         {description && <Span size="sm" color="text-subtle">{description}</Span>}
                     </Flex>
                 </div>

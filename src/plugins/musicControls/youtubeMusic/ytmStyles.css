@@ -19,7 +19,7 @@
 
 .pc-ytm-artist,
 .pc-ytm-album {
-    color: var(--header-primary);
+    color: var(--text-strong);
 }
 
 .pc-ytm-secondary-song-info {
@@ -166,7 +166,7 @@
 }
 
 #pc-ytm-song-title {
-    color: var(--header-primary);
+    color: var(--text-strong);
     font-size: 14px;
     font-weight: 600;
 }

@@ -1,6 +1,6 @@
 .pc-h1,
 .pc-h2 {
-    color: var(--header-primary);
+    color: var(--text-strong);
     font-weight: 600;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .pc-h5 {
-    color: var(--header-primary);
+    color: var(--text-strong);
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 8px;

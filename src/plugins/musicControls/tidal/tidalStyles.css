@@ -19,7 +19,7 @@
 
 .pc-tdl-artist,
 .pc-tdl-album {
-    color: var(--header-primary);
+    color: var(--text-strong);
 }
 
 .pc-tdl-secondary-song-info {
@@ -166,7 +166,7 @@
 }
 
 #pc-tdl-song-title {
-    color: var(--header-primary);
+    color: var(--text-strong);
     font-size: 14px;
     font-weight: 600;
 }

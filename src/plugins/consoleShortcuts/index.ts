@@ -37,6 +37,14 @@ const DESKTOP_ONLY = (f: string) => () => {
     throw new Error(`'${f}' is Discord Desktop only.`);
 };
 
+const makePlextronSwitcher = (branch: string) => () => {
+    if (Plextron.Settings.store.discordBranch === branch)
+        throw new Error(`Already on ${branch}`);
+
+    Plextron.Settings.store.discordBranch = branch;
+    PlextronNative.app.relaunch();
+};
+
 const define: typeof Object.defineProperty =
     (obj, prop, desc) => {
         if (Object.hasOwn(desc, "value"))
@@ -182,12 +190,11 @@ function makeShortcuts() {
                 experimentBucket: bucket,
             });
         },
-        switchBranch: (branch: string) => {
-            if (!IS_PLEXTRON) throw new Error("This function only works on plextron.");
-            if (Plextron.Settings.store.discordBranch === branch) throw new Error(`Already on ${branch}.`);
-            Plextron.Settings.store.discordBranch = branch;
-            PlextronNative.app.relaunch();
-        },
+        ...IS_PLEXTRON ? {
+            plextronStable: makePlextronSwitcher("stable"),
+            plextronCanary: makePlextronSwitcher("canary"),
+            plextronPtb: makePlextronSwitcher("ptb"),
+        } : {},
     };
 }
 

@@ -156,7 +156,7 @@ export default definePlugin({
         {
             find: ",reactionVoteCounts",
             replacement: {
-                match: /\.nickname,(?=children:)/,
+                match: /\.name,(?="aria-label)/,
                 replace: "$&style:$self.getColorStyle(arguments[0]?.user?.id,arguments[0]?.channel?.id),className:$self.getPollResultColorClass(arguments[0]?.user?.id,arguments[0]?.channel?.id),"
             },
             predicate: () => settings.store.pollResults
@@ -251,7 +251,7 @@ export default definePlugin({
 
                 return {
                     color: value.replace("{DEFAULT}", "--text-default"),
-                    "--header-primary": value.replace("{DEFAULT}", "--header-primary"),
+                    "--text-strong": value.replace("{DEFAULT}", "--text-strong"),
                     "--text-muted": value.replace("{DEFAULT}", "--text-muted")
                 };
             }
