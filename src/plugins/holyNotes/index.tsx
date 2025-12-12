@@ -21,14 +21,14 @@ import "./style.css";
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import * as DataStore from "@api/DataStore";
+import { HeaderBarButton } from "@api/HeaderBar";
 import { plugin, t } from "@api/i18n";
-import { Button } from "@components/Button";
 import { Message } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import { openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
 import { findByCodeLazy } from "@webpack";
-import { ChannelStore, Menu, Tooltip } from "@webpack/common";
+import { ChannelStore, Menu } from "@webpack/common";
 
 import { Popover as NoteButtonPopover, Popover } from "./components/icons/NoteButton";
 import { NoteModal } from "./components/modals/Notebook";
@@ -36,6 +36,16 @@ import noteHandler, { noteHandlerCache } from "./NoteHandler";
 import { DataStoreToCache, HolyNoteStore } from "./utils";
 
 export const MessageType = findByCodeLazy("isEdited(){");
+
+function HolyNotesButton() {
+    return (
+        <HeaderBarButton
+            tooltip={t(plugin.holyNotes.button.tooltip)}
+            icon={Popover}
+            onClick={() => openModal(props => <NoteModal {...props} />)}
+        />
+    );
+}
 
 const messageContextMenuPatch: NavContextMenuPatchCallback = async (children, { message }: { message: Message; }) => {
     children.push(
@@ -56,32 +66,12 @@ export default definePlugin({
     name: "HolyNotes",
     description: () => t(plugin.holyNotes.description),
     authors: [PcDevs.Wolfie, PcDevs.MutanPlex],
-    dependencies: ["MessagePopoverAPI", "ChatInputButtonAPI"],
+    dependencies: ["HeaderBarAPI", "MessagePopoverAPI", "ChatInputButtonAPI"],
 
-    patches: [
-        {
-            find: '?"BACK_FORWARD_NAVIGATION":',
-            replacement: {
-                match: /canShowReminder:.+?className:(\i).*?\}\),/,
-                replace: "$& $self.renderHolyNotesButton(),"
-            }
-        },
-    ],
-    renderHolyNotesButton() {
-        return (
-            <Tooltip text={t(plugin.holyNotes.button.tooltip)}>
-                {tooltipProps => (
-                    <Button style={{ backgroundColor: "transparent", border: "none" }}
-                        {...tooltipProps}
-                        size="small"
-                        className={"pc-holy-notes-icon"}
-                        onClick={() => openModal(props => <NoteModal {...props} />)}
-                    >
-                        <Popover />
-                    </Button>
-                )}
-            </Tooltip>
-        );
+    headerBarButton: {
+        icon: Popover,
+        render: HolyNotesButton,
+        priority: 600
     },
     toolboxActions: () => ({
         [t(plugin.holyNotes.toolbox.action)]: async () => {

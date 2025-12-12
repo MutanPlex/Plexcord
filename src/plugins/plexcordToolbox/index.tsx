@@ -19,16 +19,14 @@
 
 import "./styles.css";
 
+import { HeaderBarButton } from "@api/HeaderBar";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import ErrorBoundary from "@components/ErrorBoundary";
-import { renderPopout } from "@plugins/plexcordToolbox/menu";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import { findComponentByCodeLazy } from "@webpack";
 import { Popout, useRef, useState } from "@webpack/common";
 
-const HeaderBarIcon = findComponentByCodeLazy(".HEADER_BAR_BADGE_TOP:", '.iconBadge,"top"');
+import { renderPopout } from "./menu";
 
 export const settings = definePluginSettings({
     showPluginMenu: {
@@ -39,9 +37,9 @@ export const settings = definePluginSettings({
     }
 });
 
-function Icon({ isShown }: { isShown: boolean; }) {
+function Icon(isShown: boolean, props: React.SVGProps<SVGSVGElement>) {
     return (
-        <svg viewBox="0 0 27 27" width={24} height={24} className="pc-toolbox-icon">
+        <svg viewBox="0 0 27 27" width={20} height={20} className="pc-toolbox-icon">
             <path fill="currentColor" d={isShown ? "M9 0h1v1h1v2h1v2h3V3h1V1h1V0h1v2h1v2h1v7h-1v-1h-3V9h1V6h-1v4h-3v1h1v-1h2v1h3v1h-1v1h-3v2h1v1h1v1h1v3h-1v4h-2v-1h-1v-4h-1v4h-1v1h-2v-4H9v-3h1v-1h1v-1h1v-2H9v-1H8v-1h3V6h-1v3h1v1H8v1H7V4h1V2h1M5 19h2v1h1v1h1v3H4v-1h2v-1H4v-2h1m15-1h2v1h1v2h-2v1h2v1h-5v-3h1v-1h1m4 3h4v1h-4" : "M0 0h7v1H6v1H5v1H4v1H3v1H2v1h5v1H0V6h1V5h1V4h1V3h1V2h1V1H0m13 2h5v1h-1v1h-1v1h-1v1h3v1h-5V7h1V6h1V5h1V4h-3m8 5h1v5h1v-1h1v1h-1v1h1v-1h1v1h-1v3h-1v1h-2v1h-1v1h1v-1h2v-1h1v2h-1v1h-2v1h-1v-1h-1v1h-6v-1h-1v-1h-1v-2h1v1h2v1h3v1h1v-1h-1v-1h-3v-1h-4v-4h1v-2h1v-1h1v-1h1v2h1v1h1v-1h1v1h-1v1h2v-2h1v-2h1v-1h1M8 14h2v1H9v4h1v2h1v1h1v1h1v1h4v1h-6v-1H5v-1H4v-5h1v-1h1v-2h2m17 3h1v3h-1v1h-1v1h-1v2h-2v-2h2v-1h1v-1h1m1 0h1v3h-1v1h-2v-1h1v-1h1"} />
         </svg>
     );
@@ -54,7 +52,8 @@ function PlexcordPopoutButton() {
     return (
         <Popout
             position="bottom"
-            align="right"
+            align="center"
+            spacing={0}
             animation={Popout.Animation.NONE}
             shouldShow={show}
             onRequestClose={() => setShow(false)}
@@ -62,12 +61,12 @@ function PlexcordPopoutButton() {
             renderPopout={() => renderPopout(() => setShow(false))}
         >
             {(_, { isShown }) => (
-                <HeaderBarIcon
+                <HeaderBarButton
                     ref={buttonRef}
                     className="pc-toolbox-btn"
                     onClick={() => setShow(v => !v)}
                     tooltip={isShown ? null : t(plugin.plexcordToolbox.tooltip)}
-                    icon={() => <Icon isShown={isShown} />}
+                    icon={props => Icon(isShown, props)}
                     selected={isShown}
                 />
             )}
@@ -75,28 +74,17 @@ function PlexcordPopoutButton() {
     );
 }
 
-function renderPlexcordToolboxButton() {
-    return (
-        <ErrorBoundary noop>
-            <PlexcordPopoutButton />
-        </ErrorBoundary>
-    );
-}
-
 export default definePlugin({
     name: "PlexcordToolbox",
     description: () => t(plugin.plexcordToolbox.description),
     authors: [Devs.Ven, Devs.AutumnVN, PcDevs.MutanPlex],
+    dependencies: ["HeaderBarAPI"],
+
     settings,
 
-    patches: [
-        {
-            find: '?"BACK_FORWARD_NAVIGATION":',
-            replacement: {
-                match: /canShowReminder:.+?className:(\i).*?\}\),/,
-                replace: "$& $self.renderPlexcordToolboxButton(),"
-            },
-        },
-    ],
-    renderPlexcordToolboxButton,
+    headerBarButton: {
+        icon: props => Icon(false, props),
+        render: PlexcordPopoutButton,
+        priority: 9999
+    }
 });

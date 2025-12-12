@@ -36,7 +36,7 @@ function BackupAndRestoreTab() {
                 {t(sync.description)}
             </Paragraph>
 
-            <Card variant="warning" className={Margins.bottom20}>
+            <Card variant="warning" className={Margins.bottom20} style={{ padding: "15px" }}>
                 <Heading tag="h4">{t(sync.warning)}</Heading>
                 <Paragraph>{t(sync.warningText)}</Paragraph>
             </Card>

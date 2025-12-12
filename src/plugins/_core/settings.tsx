@@ -311,7 +311,9 @@ export default definePlugin({
         const plexcordSection: SettingsLayoutNode = {
             key: "plexcord_section",
             type: LayoutTypes.SECTION,
-            useLabel: () => "Plexcord",
+            useLabel: () => "Plexcord " + t(settingsI18n.title),
+            legacySearchKey: "Plexcord " + t(settingsI18n.title),
+            useTitle: () => "Plexcord " + t(settingsI18n.title),
             buildLayout: () => plexcordEntries
         };
 

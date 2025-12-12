@@ -84,7 +84,8 @@ const translations = {
                 title: "Donations",
                 subtitle: "Thank you for donating!",
                 description: "You can manage your perks at any time by messaging @mutanplex.",
-                button: "Donate"
+                button: "Donate",
+                invite: "Join our Discord"
             },
             supportProject: {
                 title: "Support the Project",
@@ -7699,6 +7700,10 @@ const translations = {
                     description: "Where to show the Spotify toggle button",
                     panel: "Next to Mute/Deafen",
                     toolbox: "Plexcord Toolbox"
+                },
+                activityStatus: {
+                    label: "Activity Status",
+                    description: "The current status of your Spotify activity"
                 }
             }
         },

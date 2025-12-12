@@ -5,12 +5,12 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import { HeaderBarButton } from "@api/HeaderBar";
 import { plugin, t } from "@api/i18n";
 import { disableStyle, enableStyle } from "@api/Styles";
-import { Button } from "@components/Button";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
-import { FluxDispatcher, Tooltip } from "@webpack/common";
+import { FluxDispatcher } from "@webpack/common";
 
 import { ChatBarIcon, LogIcon } from "./components/Icons";
 import { openSoundBoardLog } from "./components/SoundBoardLog";
@@ -19,39 +19,28 @@ import { updateLoggedSounds } from "./store";
 import styles from "./styles.css?managed";
 import { getListeners } from "./utils";
 
+function SoundBoardLoggerButton() {
+    return (
+        <HeaderBarButton
+            tooltip={t(plugin.soundBoardLogger.tooltip)}
+            icon={LogIcon}
+            onClick={() => openSoundBoardLog()}
+        />
+    );
+}
+
 export default definePlugin({
     name: "SoundBoardLogger",
     authors: [Devs.Moxxie, PcDevs.Fres, Devs.thororen, PcDevs.MutanPlex],
     description: () => t(plugin.soundBoardLogger.description),
-    dependencies: ["AudioPlayerAPI", "ChatInputButtonAPI"],
+    dependencies: ["HeaderBarAPI", "AudioPlayerAPI", "ChatInputButtonAPI"],
 
-    patches: [
-        {
-            predicate: () => settings.store.iconLocation === "toolbar",
-            find: '?"BACK_FORWARD_NAVIGATION":',
-            replacement: {
-                match: /canShowReminder:.+?className:(\i).*?\}\),/,
-                replace: "$& $self.renderSoundBoardLoggerButton(),"
-            },
-        },
-    ],
     settings,
 
-    renderSoundBoardLoggerButton() {
-        return (
-            <Tooltip text="SoundBoardLogger">
-                {tooltipProps => (
-                    <Button style={{ backgroundColor: "transparent", border: "none" }}
-                        {...tooltipProps}
-                        size="small"
-                        className={"pc-soundboard-log-icon"}
-                        onClick={() => openSoundBoardLog()}
-                    >
-                        <LogIcon />
-                    </Button>
-                )}
-            </Tooltip>
-        );
+    headerBarButton: {
+        icon: LogIcon,
+        render: SoundBoardLoggerButton,
+        priority: 500
     },
 
     chatBarButton: {

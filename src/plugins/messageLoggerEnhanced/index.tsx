@@ -9,13 +9,13 @@ export const Native = getNative();
 
 import "./styles.css";
 
+import { HeaderBarButton } from "@api/HeaderBar";
 import { plugin, t } from "@api/i18n";
-import { Button } from "@components/Button";
 import { Devs, PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { IconComponent } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { FluxDispatcher, MessageStore, React, Tooltip, UserStore } from "@webpack/common";
+import { FluxDispatcher, MessageStore, React, UserStore } from "@webpack/common";
 
 import { openLogModal } from "./components/LogsModal";
 import * as idb from "./db";
@@ -252,11 +252,21 @@ async function processMessageFetch(response: FetchMessagesResponse) {
     }
 }
 
+function MessageLogButton() {
+    return (
+        <HeaderBarButton
+            tooltip={t(plugin.messageLoggerEnhanced.context.title)}
+            icon={OpenLogsIcon}
+            onClick={() => openLogModal()}
+        />
+    );
+}
+
 export default definePlugin({
     name: "MessageLoggerEnhanced",
     authors: [Devs.Aria, PcDevs.MutanPlex],
     description: () => t(plugin.messageLoggerEnhanced.description),
-    dependencies: ["MessageLogger"],
+    dependencies: ["HeaderBarAPI", "MessageLogger"],
     patches: [
         {
             find: "_tryFetchMessagesCached",
@@ -279,14 +289,6 @@ export default definePlugin({
                 replace: "deleted:$self.getDeleted(...arguments), editHistory:$self.getEdited(...arguments),"
             }
         },
-        {
-            find: '?"BACK_FORWARD_NAVIGATION":',
-            replacement: {
-                match: /canShowReminder:.+?className:(\i).*?\}\),/,
-                replace: "$& $self.renderMessageLogButton(),"
-            }
-        },
-
         {
             find: "childrenMessageContent:null",
             replacement: {
@@ -325,22 +327,13 @@ export default definePlugin({
             }
         }
     ],
-    renderMessageLogButton() {
-        return (
-            <Tooltip text="MessageLoggerEnhanced">
-                {tooltipProps => (
-                    <Button style={{ backgroundColor: "transparent", border: "none" }}
-                        {...tooltipProps}
-                        size="small"
-                        className={"pc-message-logger-icon"}
-                        onClick={() => openLogModal()}
-                    >
-                        <OpenLogsIcon />
-                    </Button>
-                )}
-            </Tooltip>
-        );
+
+    headerBarButton: {
+        icon: OpenLogsIcon,
+        render: MessageLogButton,
+        priority: 300
     },
+
     settings,
 
     toolboxActions: () => ({

@@ -19,22 +19,38 @@
 
 import { settings, t } from "@api/i18n";
 import { Button } from "@components/Button";
+import { Flex } from "@components/Flex";
 import { Heart } from "@components/Heart";
+import { openInviteModal } from "@utils/discord";
 
 export default function DonateButton({
     ...props
 }) {
     return (
-        <Button
-            {...props}
-            variant="overlayPrimary"
-            size="medium"
-            type="button"
-            onClick={() => PlexcordNative.native.openExternal("https://github.com/sponsors/MutanPlex")}
-            className="pc-donate-button"
-        >
-            <Heart />
-            {t(settings.specialCards.donations.button)}
-        </Button>
+        <Flex alignItems="center" gap="8px">
+            <Button
+                {...props}
+                variant="overlayPrimary"
+                size="medium"
+                type="button"
+                onClick={() => PlexcordNative.native.openExternal("https://github.com/sponsors/MutanPlex")}
+                className="pc-donate-button"
+            >
+                <Heart />
+                {t(settings.specialCards.donations.button)}
+            </Button>
+
+            <Button
+                {...props}
+                variant="overlayPrimary"
+                size="medium"
+                type="button"
+                onClick={() => openInviteModal("HQGYXm5XSh")}
+                className="pc-donate-button"
+            >
+                <Heart fill="#5865f2" />
+                {t(settings.specialCards.donations.invite)}
+            </Button>
+        </Flex>
     );
 }

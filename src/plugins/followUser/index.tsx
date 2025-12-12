@@ -6,13 +6,14 @@
  */
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { HeaderBarButton } from "@api/HeaderBar";
 import { plugin, t, useForceUpdateOnLocaleChange } from "@api/i18n";
 import { definePluginSettings, useSettings } from "@api/Settings";
 import type { Channel, User, VoiceState } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
-import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
+import { findByPropsLazy } from "@webpack";
 import {
     ChannelStore,
     Menu,
@@ -24,64 +25,25 @@ import {
     UserStore,
     VoiceStateStore
 } from "@webpack/common";
-import type { PropsWithChildren } from "react";
 
-const HeaderBarIcon = findComponentByCodeLazy(".HEADER_BAR_BADGE_TOP:", '.iconBadge,"top"');
-
-interface BaseIconProps {
-    viewBox: string;
-    className?: string;
-    height?: string | number;
-    width?: string | number;
-}
-
-interface IconProps {
-    className?: string;
-    height?: string | number;
-    width?: string | number;
-}
-
-function Icon({ height = 24, width = 24, className, children, viewBox }: PropsWithChildren<BaseIconProps>) {
+function Icon(isFollowed: boolean, props: React.SVGProps<SVGSVGElement>) {
     return (
         <svg
-            className={classes(className, "pc-icon")}
+            {...props}
+            className={classes(props.className, isFollowed ? "pc-unfollow-icon" : "pc-follow-icon")}
             role="img"
-            width={width}
-            height={height}
-            viewBox={viewBox}
+            width={24}
+            height={24}
+            viewBox="0 -960 960 960"
         >
-            {children}
+            <path
+                fill="currentColor"
+                d={isFollowed
+                    ? "m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"
+                    : "m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z"
+                }
+            />
         </svg>
-    );
-}
-
-function FollowIcon(props: IconProps) {
-    return (
-        <Icon
-            {...props}
-            className={classes(props.className, "pc-follow-icon")}
-            viewBox="0 -960 960 960"
-        >
-            <path
-                fill="currentColor"
-                d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z"
-            />
-        </Icon>
-    );
-}
-
-function UnfollowIcon(props: IconProps) {
-    return (
-        <Icon
-            {...props}
-            className={classes(props.className, "pc-unfollow-icon")}
-            viewBox="0 -960 960 960"
-        >
-            <path
-                fill="currentColor"
-                d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"
-            />
-        </Icon>
     );
 }
 
@@ -240,7 +202,6 @@ const UserContext: NavContextMenuPatchCallback = (children, { user }: UserContex
     if (!user || user.id === UserStore.getCurrentUser().id) return;
     const isFollowed = settings.store.followUserId === user.id;
     const label = isFollowed ? t(plugin.followUser.context.unfollow) : t(plugin.followUser.context.follow);
-    const icon = isFollowed ? UnfollowIcon : FollowIcon;
 
     children.splice(-1, 0, (
         <Menu.MenuGroup>
@@ -248,27 +209,39 @@ const UserContext: NavContextMenuPatchCallback = (children, { user }: UserContex
                 id="follow-user"
                 label={label}
                 action={() => toggleFollow(user.id)}
-                icon={icon}
+                icon={props => Icon(isFollowed, props)}
             />
         </Menu.MenuGroup>
     ));
 };
 
+function FollowUserIndicator() {
+    const { plugins: { FollowUser: { followUserId } } } = useSettings(["plugins.FollowUser.followUserId"]);
+    useForceUpdateOnLocaleChange();
+    if (!followUserId) return null;
+
+    const followedUser = UserStore.getUser(followUserId);
+    const username = followedUser?.username || t(plugin.followUser.unknownUser);
+    return (
+        <HeaderBarButton
+            tooltip={t(plugin.followUser.indicatorTooltip, { user: username })}
+            icon={props => Icon(true, props)}
+            onClick={() => {
+                triggerFollow();
+            }}
+            onContextMenu={() => {
+                settings.store.followUserId = "";
+            }}
+        />
+    );
+}
+
 export default definePlugin({
     name: "FollowUser",
     description: () => t(plugin.followUser.description),
     authors: [Devs.D3SOX, PcDevs.MutanPlex],
+    dependencies: ["HeaderBarAPI"],
     settings,
-
-    patches: [
-        {
-            find: '?"BACK_FORWARD_NAVIGATION":',
-            replacement: {
-                match: /canShowReminder:.+?className:(\i).*?\}\),/,
-                replace: "$& $self.FollowIndicator(),"
-            }
-        }
-    ],
 
     contextMenus: {
         "user-context": UserContext
@@ -321,26 +294,9 @@ export default definePlugin({
         },
     },
 
-    FollowIndicator() {
-        const { plugins: { FollowUser: { followUserId } } } = useSettings(["plugins.FollowUser.followUserId"]);
-        useForceUpdateOnLocaleChange();
-        if (followUserId) {
-            const followedUser = UserStore.getUser(followUserId);
-            const username = followedUser?.username || t(plugin.followUser.unknownUser);
-            return (
-                <HeaderBarIcon
-                    tooltip={t(plugin.followUser.indicatorTooltip, { user: username })}
-                    icon={UnfollowIcon}
-                    onClick={() => {
-                        triggerFollow();
-                    }}
-                    onContextMenu={() => {
-                        settings.store.followUserId = "";
-                    }}
-                />
-            );
-        }
-
-        return null;
-    },
+    headerBarButton: {
+        icon: props => Icon(true, props),
+        render: FollowUserIndicator,
+        priority: 100
+    }
 });

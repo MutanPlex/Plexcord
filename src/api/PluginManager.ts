@@ -217,7 +217,7 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
     const {
         name, commands, contextMenus, managedStyle, userProfileBadge, userProfileContributorBadge,
         onBeforeMessageEdit, onBeforeMessageSend, onMessageClick,
-        chatBarButton, renderMemberListDecorator, renderNicknameIcon, renderHeaderBarButton, onAudioProcessor, renderMessageAccessory, renderMessageDecoration, messagePopoverButton
+        chatBarButton, renderMemberListDecorator, renderNicknameIcon, headerBarButton, onAudioProcessor, renderMessageAccessory, renderMessageDecoration, messagePopoverButton
     } = p;
     const pluginName = getName(name);
 
@@ -272,7 +272,7 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
     if (chatBarButton) addChatBarButton(pluginName, chatBarButton.render, chatBarButton.icon);
     if (renderMemberListDecorator) addMemberListDecorator(pluginName, renderMemberListDecorator);
     if (renderNicknameIcon) addNicknameIcon(pluginName, renderNicknameIcon);
-    if (renderHeaderBarButton) addHeaderBarButton(pluginName, renderHeaderBarButton);
+    if (headerBarButton) addHeaderBarButton(pluginName, headerBarButton.render, headerBarButton.priority);
     if (onAudioProcessor) addAudioProcessor(pluginName, onAudioProcessor);
     if (renderMessageDecoration) addMessageDecoration(pluginName, renderMessageDecoration);
     if (renderMessageAccessory) addMessageAccessory(pluginName, renderMessageAccessory);
@@ -285,7 +285,7 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
     const {
         name, commands, contextMenus, managedStyle, userProfileBadge, userProfileContributorBadge,
         onBeforeMessageEdit, onBeforeMessageSend, onMessageClick,
-        chatBarButton, renderMemberListDecorator, renderNicknameIcon, renderHeaderBarButton, onAudioProcessor, renderMessageAccessory, renderMessageDecoration, messagePopoverButton
+        chatBarButton, renderMemberListDecorator, renderNicknameIcon, headerBarButton, onAudioProcessor, renderMessageAccessory, renderMessageDecoration, messagePopoverButton
     } = p;
     const pluginName = getName(name);
 
@@ -338,7 +338,7 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
     if (chatBarButton) removeChatBarButton(pluginName);
     if (renderMemberListDecorator) removeMemberListDecorator(pluginName);
     if (renderNicknameIcon) removeNicknameIcon(pluginName);
-    if (renderHeaderBarButton) removeHeaderBarButton(pluginName);
+    if (headerBarButton) removeHeaderBarButton(pluginName);
     if (onAudioProcessor) removeAudioProcessor(pluginName);
     if (renderMessageDecoration) removeMessageDecoration(pluginName);
     if (renderMessageAccessory) removeMessageAccessory(pluginName);
@@ -354,7 +354,7 @@ export const initPluginManager = onlyOnce(function init() {
 
     const pluginKeysToBind: Array<keyof PluginDef & `${"on" | "render"}${string}`> = [
         "onBeforeMessageEdit", "onBeforeMessageSend", "onMessageClick",
-        "renderChatBarButton", "renderMemberListDecorator", "renderNicknameIcon", "renderHeaderBarButton", "onAudioProcessor", "renderMessageAccessory", "renderMessageDecoration", "renderMessagePopoverButton"
+        "renderChatBarButton", "renderMemberListDecorator", "renderNicknameIcon", "onAudioProcessor", "renderMessageAccessory", "renderMessageDecoration", "renderMessagePopoverButton"
     ];
 
     const neededApiPlugins = new Set<string>();
@@ -395,7 +395,7 @@ export const initPluginManager = onlyOnce(function init() {
         if (p.chatBarButton) neededApiPlugins.add("ChatInputButtonAPI");
         if (p.renderMemberListDecorator) neededApiPlugins.add("MemberListDecoratorsAPI");
         if (p.renderNicknameIcon) neededApiPlugins.add("NicknameIconsAPI");
-        if (p.renderHeaderBarButton) neededApiPlugins.add("HeaderBarAPI");
+        if (p.headerBarButton) neededApiPlugins.add("HeaderBarAPI");
         if (p.onAudioProcessor) neededApiPlugins.add("AudioPlayerAPI");
         if (p.renderMessageAccessory) neededApiPlugins.add("MessageAccessoriesAPI");
         if (p.renderMessageDecoration) neededApiPlugins.add("MessageDecorationsAPI");

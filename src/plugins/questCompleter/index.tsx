@@ -19,14 +19,14 @@
 
 import "./style.css";
 
+import { HeaderBarButton } from "@api/HeaderBar";
 import { plugin, t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
-import { Button } from "@components/Button";
 import { Devs, PcDevs } from "@utils/constants";
 import { getTheme, Theme } from "@utils/discord";
 import definePlugin from "@utils/types";
 import { findByPropsLazy, findComponentByCodeLazy, findStoreLazy } from "@webpack";
-import { ChannelStore, FluxDispatcher, GuildChannelStore, NavigationRouter, RestAPI, Tooltip, UserStore } from "@webpack/common";
+import { ChannelStore, FluxDispatcher, GuildChannelStore, NavigationRouter, RestAPI, UserStore } from "@webpack/common";
 
 const QuestIcon = findComponentByCodeLazy("10.47a.76.76");
 const ApplicationStreamingStore = findStoreLazy("ApplicationStreamingStore");
@@ -230,10 +230,21 @@ async function openCompleteQuestUI() {
     }
 }
 
+function QuestButton() {
+    return (
+        <HeaderBarButton
+            tooltip={t(plugin.questCompleter.tooltip)}
+            icon={props => <QuestIcon {...props} width={24} height={24} size="small" />}
+            onClick={openCompleteQuestUI}
+        />
+    );
+}
+
 export default definePlugin({
     name: "QuestCompleter",
     description: () => t(plugin.questCompleter.description),
     authors: [Devs.amia, PcDevs.MutanPlex],
+    dependencies: ["HeaderBarAPI"],
 
     patches: [
         {
@@ -242,15 +253,14 @@ export default definePlugin({
                 match: /(?<=questId:(\i\.id).*?"secondary",)disabled:!0/,
                 replace: "onClick:()=>$self.mobileQuestPatch($1)"
             },
-        },
-        {
-            find: '?"BACK_FORWARD_NAVIGATION":',
-            replacement: {
-                match: /canShowReminder:.+?className:(\i).*?\}\),/,
-                replace: "$& $self.renderQuestButton(),"
-            }
         }
     ],
+
+    headerBarButton: {
+        icon: props => <QuestIcon {...props} width={24} height={24} size="small" />,
+        render: QuestButton,
+        priority: 200
+    },
 
     mobileQuestPatch(questId) {
         if (questId === questIdCheck) return;
@@ -261,22 +271,5 @@ export default definePlugin({
                 location: 11
             }
         });
-    },
-
-    renderQuestButton() {
-        return (
-            <Tooltip text={t(plugin.questCompleter.tooltip)}>
-                {tooltipProps => (
-                    <Button style={{ backgroundColor: "transparent", border: "none" }}
-                        {...tooltipProps}
-                        size="small"
-                        className={"pc-quest-completer-icon"}
-                        onClick={openCompleteQuestUI}
-                    >
-                        <QuestIcon width={24} height={24} size="small" />
-                    </Button>
-                )}
-            </Tooltip>
-        );
     }
 });

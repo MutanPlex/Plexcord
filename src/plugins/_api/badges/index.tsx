@@ -139,7 +139,7 @@ export function openDonorModal(props: any) {
                         style={{ margin: "auto" }}
                     />
                 </Flex>
-                <div style={{ padding: "1em" }}>
+                <div style={{ padding: "1em", textAlign: "center" }}>
                     <Paragraph>
                         {t(plugins.metadata.badges.modal.special)}
                     </Paragraph>

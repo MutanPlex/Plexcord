@@ -87,7 +87,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 title: "Bağışlar",
                 subtitle: "Bağışınız için teşekkürler!",
                 description: "@mutanplex ile mesajlaşarak ayrıcalıklarınızı istediğiniz zaman yönetebilirsiniz.",
-                button: "Bağış"
+                button: "Bağış",
+                invite: "Discordumuza Katıl"
             },
             supportProject: {
                 title: "Projeyi Destekle",
@@ -7702,6 +7703,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Spotify açma/kapama düğmesinin nerede gösterileceği",
                     panel: "Sessize Al/Kapat'ın Yanında",
                     toolbox: "Plexcord Araç Kutusu"
+                },
+                activityStatus: {
+                    label: "Aktivite Durumu",
+                    description: "Spotify etkinliğinizin mevcut durumu"
                 }
             }
         },
