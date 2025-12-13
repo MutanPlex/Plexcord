@@ -16,10 +16,10 @@ export default definePlugin({
 
     patches: [
         {
-            find: "#{intl::USER_PROFILE_LOAD_ERROR}",
+            find: "#{intl::USER_PROFILE_PRONOUNS}",
             replacement: {
-                match: /(\.fetchError.+?\?)null/,
-                replace: (_, rest) => `${rest}Plexcord.Api.NicknameIcons._renderIcons(arguments[0])`
+                match: /(\.nicknameIcons,children:)(\i)/,
+                replace: "$1[...Plexcord.Api.NicknameIcons._renderIcons({userId:arguments[0].user?.id}),$2]"
             }
         }
     ]
