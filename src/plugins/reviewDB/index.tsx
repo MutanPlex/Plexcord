@@ -21,7 +21,6 @@ import "./style.css";
 
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
-import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { NotesIcon, OpenExternalIcon } from "@components/Icons";
 import { Guild, User } from "@plexcord/discord-types";
@@ -29,7 +28,7 @@ import { Devs } from "@utils/constants";
 import { classes } from "@utils/misc";
 import definePlugin from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { Alerts, Menu, Parser, TooltipContainer } from "@webpack/common";
+import { Alerts, Clickable, Menu, Parser, TooltipContainer } from "@webpack/common";
 
 import { Auth, initAuth, updateAuth } from "./auth";
 import { openReviewsModal } from "./components/ReviewModal";
@@ -38,7 +37,7 @@ import { getCurrentUserInfo, readNotification } from "./reviewDbApi";
 import { settings } from "./settings";
 import { showToast } from "./utils";
 
-const RoleButtonClasses = findByPropsLazy("button", "buttonInner", "icon", "banner");
+const BannerButtonClasses = findByPropsLazy("bannerButton");
 
 const guildPopoutPatch: NavContextMenuPatchCallback = (children, { guild }: { guild: Guild, onClose(): void; }) => {
     if (!guild) return;
@@ -152,14 +151,12 @@ export default definePlugin({
     BiteSizeReviewsButton: ErrorBoundary.wrap(({ user }: { user: User; }) => {
         return (
             <TooltipContainer text={t(plugin.reviewDB.context.view)}>
-                <Button
+                <Clickable
                     onClick={() => openReviewsModal(user.id, user.username, ReviewType.User)}
-                    variant="secondary"
-                    size="min"
-                    color={RoleButtonClasses.bannerColor}
-                    className={classes(RoleButtonClasses.button, RoleButtonClasses.icon, RoleButtonClasses.banner, "pc-bite-size-rdb-button")}>
+                    className={classes(BannerButtonClasses.bannerButton)}
+                >
                     <NotesIcon height={16} width={16} />
-                </Button>
+                </Clickable>
             </TooltipContainer>
         );
     }, { noop: true })
