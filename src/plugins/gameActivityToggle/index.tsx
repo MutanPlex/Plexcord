@@ -20,17 +20,12 @@
 import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
+import { UserAreaButton, UserAreaRenderProps } from "@api/UserArea";
 import { getUserSettingLazy } from "@api/UserSettings";
-import ErrorBoundary from "@components/ErrorBoundary";
 import PlexcordToolboxPlugin from "@plugins/plexcordToolbox";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import { findComponentByCodeLazy } from "@webpack";
 import { Menu } from "@webpack/common/menu";
-
-import managedStyle from "./style.css?managed";
-
-const Button = findComponentByCodeLazy(".NONE,disabled:", ".PANEL_BUTTON");
 
 const ShowCurrentGame = getUserSettingLazy<boolean>("status", "showCurrentGame")!;
 
@@ -55,7 +50,7 @@ const settings = definePluginSettings({
     }
 });
 
-function Icon() {
+function Icon({ className }: { className?: string; }) {
     const { oldIcon } = settings.use(["oldIcon"]);
     const showCurrentGame = ShowCurrentGame.useSetting();
 
@@ -68,7 +63,7 @@ function Icon() {
         : "M23.27 4.54 19.46.73 .73 19.46 4.54 23.27 23.27 4.54Z";
 
     return (
-        <svg width="20" height="20" viewBox="0 0 24 24">
+        <svg className={className} width="20" height="20" viewBox="0 0 24 24">
             <path
                 fill={!showCurrentGame && !oldIcon ? "var(--status-danger)" : "currentColor"}
                 mask={!showCurrentGame ? "url(#gameActivityMask)" : void 0}
@@ -85,20 +80,19 @@ function Icon() {
     );
 }
 
-function GameActivityToggleButton(props: { nameplate?: any; }) {
+function GameActivityToggleButton({ iconForeground, hideTooltips, nameplate }: UserAreaRenderProps) {
     const { location } = settings.use(["location"]);
     const showCurrentGame = ShowCurrentGame.useSetting();
 
     if (location !== "PANEL" && isPluginEnabled(PlexcordToolboxPlugin.name)) return null;
     return (
-        <Button
-            className="pc-game-activity"
-            tooltipText={showCurrentGame ? t(plugin.gameActivityToggle.gameActivity.enabled) : t(plugin.gameActivityToggle.gameActivity.disabled)}
-            icon={Icon}
+        <UserAreaButton
+            tooltipText={hideTooltips ? void 0 : showCurrentGame ? t(plugin.gameActivityToggle.gameActivity.enabled) : t(plugin.gameActivityToggle.gameActivity.disabled)}
+            icon={<Icon className={iconForeground} />}
             role="switch"
             aria-checked={!showCurrentGame}
             redGlow={!showCurrentGame}
-            plated={props?.nameplate != null}
+            plated={nameplate != null}
             onClick={() => ShowCurrentGame.updateSetting(old => !old)}
         />
     );
@@ -111,17 +105,10 @@ export default definePlugin({
     dependencies: ["UserSettingsAPI"],
     settings,
 
-    managedStyle,
-
-    patches: [
-        {
-            find: "#{intl::ACCOUNT_SPEAKING_WHILE_MUTED}",
-            replacement: {
-                match: /className:\i\.buttons,.{0,50}children:\[/,
-                replace: "$&$self.GameActivityToggleButton(arguments[0]),"
-            }
-        }
-    ],
+    userAreaButton: {
+        icon: Icon,
+        render: GameActivityToggleButton
+    },
 
     toolboxActions() {
         const { location } = settings.use(["location"]);
@@ -137,8 +124,5 @@ export default definePlugin({
                 action={() => ShowCurrentGame.updateSetting(old => !old)}
             />
         );
-    },
-
-    GameActivityToggleButton: ErrorBoundary.wrap(GameActivityToggleButton, { noop: true }),
-
+    }
 });

@@ -22,7 +22,7 @@
     justify-content: center;
     margin-top: 2px;
     padding-top: 12px;
-    border-top: 1px solid var(--profile-body-divider-color, var(--input-border-default, var(--input-border)));
+    border-top: 1px solid var(--profile-body-divider-color, var(--input-border-default));
 }
 
 .pc-github-repos-button,
@@ -34,7 +34,7 @@
 .pc-github-repos-card {
     padding: 8px;
     border-radius: var(--radius-xs);
-    border: 1px solid var(--profile-body-divider-color, var(--input-border-default, var(--input-border)));
+    border: 1px solid var(--profile-body-divider-color, var(--input-border-default));
 }
 
 .pc-github-repos-header {
@@ -47,8 +47,8 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    color: var(--info-warning-foreground);
-    fill: var(--info-warning-foreground);
+    color: var(--icon-status-idle);
+    fill: var(--icon-status-idle);
 }
 
 .pc-github-repos-language {
@@ -106,7 +106,7 @@
 }
 
 .pc-github-repos-table thead {
-    border-bottom: 2px solid var(--input-border-default, var(--input-border));
+    border-bottom: 2px solid var(--input-border-default);
 }
 
 .pc-github-repos-table th {
@@ -114,7 +114,7 @@
     padding: 10px 16px;
     font-weight: 600;
     color: var(--text-strong);
-    border-bottom: 2px solid var(--input-border-default, var(--input-border));
+    border-bottom: 2px solid var(--input-border-default);
 }
 
 .pc-github-repos-table th:last-child {
@@ -122,19 +122,19 @@
 }
 
 .pc-github-repos-table tbody tr {
-    border-bottom: 1px solid var(--input-border-default, var(--input-border));
+    border-bottom: 1px solid var(--input-border-default);
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
 .pc-github-repos-table tbody tr:hover {
-    background-color: var(--background-mod-subtle, var(--background-modifier-hover));
+    background-color: var(--background-mod-subtle);
 }
 
 .pc-github-repos-table td {
     padding: 12px 16px;
     vertical-align: middle;
-    border-bottom: 1px solid var(--input-border-default, var(--input-border));
+    border-bottom: 1px solid var(--input-border-default);
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -183,8 +183,8 @@
 }
 
 .pc-github-repos-table-star-icon {
-    color: var(--info-warning-foreground);
-    fill: var(--info-warning-foreground);
+    color: var(--icon-status-idle);
+    fill: var(--icon-status-idle);
 }
 
 .pc-github-repos-modal-footer-close {
@@ -216,16 +216,16 @@
 }
 
 .pc-github-repos-error {
-    color: var(--text-feedback-critical, var(--text-danger));
+    color: var(--text-feedback-critical);
 }
 
 .pc-github-repos-link {
     cursor: pointer;
-    fill: var(--interactive-icon-default, var(--interactive-normal));
+    fill: var(--interactive-icon-default);
 }
 
 .pc-github-repos-name {
-    color: var(--interactive-icon-active, var(--interactive-active));
+    color: var(--interactive-icon-active);
 }
 
 .pc-github-repos-header-repo {

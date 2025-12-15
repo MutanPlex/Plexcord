@@ -16,7 +16,7 @@
 }
 
 .pc-clientTheme-container [class^="swatch"] {
-    border: thin solid var(--input-border-default, var(--input-border)) !important;
+    border: thin solid var(--input-border-default) !important;
 }
 
 .pc-clientTheme-buttons-container {

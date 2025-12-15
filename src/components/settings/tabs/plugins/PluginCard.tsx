@@ -7,7 +7,7 @@
 
 import { plugins, t } from "@api/i18n";
 import { showNotice } from "@api/Notices";
-import { isPluginEnabled, startDependenciesRecursive, startPlugin, stopPlugin } from "@api/PluginManager";
+import { isPluginEnabled, pluginRequiresRestart, startDependenciesRecursive, startPlugin, stopPlugin } from "@api/PluginManager";
 import { CogWheel, InfoIcon } from "@components/Icons";
 import { AddonCard } from "@components/settings/AddonCard";
 import { isObjectEmpty } from "@utils/misc";
@@ -65,8 +65,8 @@ export function PluginCard({ plugin, disabled, onRestartNeeded, onMouseEnter, on
             }
         }
 
-        // if the plugin has patches, dont use stopPlugin/startPlugin. Wait for restart to apply changes.
-        if (plugin.patches?.length) {
+        // if the plugin requires a restart, don't use stopPlugin/startPlugin. Wait for restart to apply changes.
+        if (pluginRequiresRestart(plugin)) {
             settings.enabled = !wasEnabled;
             onRestartNeeded(pluginName, "enabled");
             return;

@@ -11,7 +11,7 @@
 }
 
 .pc-googlefonts-card:hover {
-    background: var(--background-mod-subtle, var(--background-modifier-hover));
+    background: var(--background-mod-subtle);
     cursor: pointer !important;
 }
 

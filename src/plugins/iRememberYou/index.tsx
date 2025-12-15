@@ -295,7 +295,7 @@ class DataUI {
                                     <Button onClick={handleValidate}>{t(plugin.iRememberYou.modal.button.validate)}</Button>
                                     <Button variant="secondary" onClick={props.onClose}>{t(plugin.iRememberYou.modal.button.cancel)}</Button>
                                 </Flex>
-                                {error && <BaseText style={{ color: "var(--text-feedback-critical, var(--text-danger))", marginTop: "0.5em" }}>{error}</BaseText>}
+                                {error && <BaseText style={{ color: "var(--text-feedback-critical)", marginTop: "0.5em" }}>{error}</BaseText>}
                                 <TextArea
                                     value={jsonText}
                                     onChange={setJsonText}

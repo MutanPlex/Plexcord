@@ -35,6 +35,7 @@ import { Logger } from "@utils/Logger";
 export { Plugins as plugins };
 import { addAudioProcessor, removeAudioProcessor } from "@api/AudioPlayer";
 import { addHeaderBarButton, removeHeaderBarButton } from "@api/HeaderBar";
+import { addUserAreaButton, removeUserAreaButton } from "@api/UserArea";
 import { onlyOnce } from "@utils/onlyOnce";
 import { canonicalizeFind, canonicalizeReplacement } from "@utils/patches";
 import { Patch, Plugin, PluginDef, ReporterTestable, StartAt } from "@utils/types";
@@ -126,6 +127,10 @@ function isReporterTestable(p: Plugin, part: ReporterTestable) {
         : (p.reporterTestable & part) === part;
 }
 
+export function pluginRequiresRestart(p: Plugin) {
+    return p.requiresRestart !== false && (p.requiresRestart || !!p.patches?.length);
+}
+
 export const startAllPlugins = traceFunction("startAllPlugins", function startAllPlugins(target: StartAt) {
     logger.info(`Starting plugins (stage ${target})`);
     for (const name in Plugins) {
@@ -154,7 +159,7 @@ export function startDependenciesRecursive(p: Plugin) {
             settings[d].enabled = true;
             dep.isDependency = true;
 
-            if (dep.patches) {
+            if (pluginRequiresRestart(dep)) {
                 logger.warn(`Enabling dependency ${d} requires restart.`);
                 restartNeeded = true;
                 return;
@@ -217,7 +222,7 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
     const {
         name, commands, contextMenus, managedStyle, userProfileBadge, userProfileContributorBadge,
         onBeforeMessageEdit, onBeforeMessageSend, onMessageClick,
-        chatBarButton, renderMemberListDecorator, renderNicknameIcon, headerBarButton, onAudioProcessor, renderMessageAccessory, renderMessageDecoration, messagePopoverButton
+        chatBarButton, renderMemberListDecorator, renderNicknameIcon, headerBarButton, onAudioProcessor, userAreaButton, renderMessageAccessory, renderMessageDecoration, messagePopoverButton
     } = p;
     const pluginName = getName(name);
 
@@ -274,6 +279,7 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
     if (renderNicknameIcon) addNicknameIcon(pluginName, renderNicknameIcon);
     if (headerBarButton) addHeaderBarButton(pluginName, headerBarButton.render, headerBarButton.priority);
     if (onAudioProcessor) addAudioProcessor(pluginName, onAudioProcessor);
+    if (userAreaButton) addUserAreaButton(pluginName, userAreaButton.render, userAreaButton.priority);
     if (renderMessageDecoration) addMessageDecoration(pluginName, renderMessageDecoration);
     if (renderMessageAccessory) addMessageAccessory(pluginName, renderMessageAccessory);
     if (messagePopoverButton) addMessagePopoverButton(pluginName, messagePopoverButton.render, messagePopoverButton.icon);
@@ -285,7 +291,7 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
     const {
         name, commands, contextMenus, managedStyle, userProfileBadge, userProfileContributorBadge,
         onBeforeMessageEdit, onBeforeMessageSend, onMessageClick,
-        chatBarButton, renderMemberListDecorator, renderNicknameIcon, headerBarButton, onAudioProcessor, renderMessageAccessory, renderMessageDecoration, messagePopoverButton
+        chatBarButton, renderMemberListDecorator, renderNicknameIcon, headerBarButton, onAudioProcessor, userAreaButton, renderMessageAccessory, renderMessageDecoration, messagePopoverButton
     } = p;
     const pluginName = getName(name);
 
@@ -340,6 +346,7 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
     if (renderNicknameIcon) removeNicknameIcon(pluginName);
     if (headerBarButton) removeHeaderBarButton(pluginName);
     if (onAudioProcessor) removeAudioProcessor(pluginName);
+    if (userAreaButton) removeUserAreaButton(pluginName);
     if (renderMessageDecoration) removeMessageDecoration(pluginName);
     if (renderMessageAccessory) removeMessageAccessory(pluginName);
     if (messagePopoverButton) removeMessagePopoverButton(pluginName);
@@ -397,6 +404,7 @@ export const initPluginManager = onlyOnce(function init() {
         if (p.renderNicknameIcon) neededApiPlugins.add("NicknameIconsAPI");
         if (p.headerBarButton) neededApiPlugins.add("HeaderBarAPI");
         if (p.onAudioProcessor) neededApiPlugins.add("AudioPlayerAPI");
+        if (p.userAreaButton) neededApiPlugins.add("UserAreaAPI");
         if (p.renderMessageAccessory) neededApiPlugins.add("MessageAccessoriesAPI");
         if (p.renderMessageDecoration) neededApiPlugins.add("MessageDecorationsAPI");
         if (p.messagePopoverButton) neededApiPlugins.add("MessagePopoverAPI");

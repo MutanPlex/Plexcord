@@ -22,13 +22,12 @@ import type { Channel, CloudUpload, Guild, GuildFeatures, Message, User } from "
 import { ChannelActionCreators, ChannelStore, ComponentDispatch, Constants, FluxDispatcher, GuildStore, i18n, IconUtils, InviteActions, MessageActions, RestAPI, SelectedChannelStore, SelectedGuildStore, Toasts, UserProfileActions, UserProfileStore, UserSettingsActionCreators, UserUtils } from "@webpack/common";
 import { Except } from "type-fest";
 
-import { runtimeHashMessageKey, runtimeHashMessageKeyLegacy } from "./intlHash";
+import { runtimeHashMessageKey } from "./intlHash";
 import { Logger } from "./Logger";
 import { MediaModalItem, MediaModalProps, openMediaModal } from "./modal";
 
 const IntlManagerLogger = new Logger("IntlManager");
 import { copyToClipboard } from "./clipboard";
-// TODO: remove legacy hashing function once Discord ships new one everywhere for a while
 
 /**
  * Get an internationalized message from a non hashed key
@@ -36,7 +35,7 @@ import { copyToClipboard } from "./clipboard";
  * @param values The values to interpolate, if it's a rich message
  */
 export function getIntlMessage(key: string, values?: Record<PropertyKey, any>): any {
-    return getIntlMessageFromHash(runtimeHashMessageKey(key), values, key) || getIntlMessageFromHash(runtimeHashMessageKeyLegacy(key), values, key);
+    return getIntlMessageFromHash(runtimeHashMessageKey(key), values, key);
 }
 
 /**

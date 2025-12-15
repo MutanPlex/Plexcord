@@ -57,7 +57,7 @@ const ProfilePopoutComponent = ErrorBoundary.wrap(
     },
     {
         noop: true,
-        fallback: () => <BaseText size="xs" weight="semibold" className="pc-github-repos-error" style={{ color: "var(--text-feedback-critical, var(--text-danger))" }}>
+        fallback: () => <BaseText size="xs" weight="semibold" className="pc-github-repos-error" style={{ color: "var(--text-feedback-critical)" }}>
             {t(plugin.gitHubRepos.error.render)}
         </BaseText>
     }

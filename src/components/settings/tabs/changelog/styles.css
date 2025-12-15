@@ -311,7 +311,7 @@
 
 /* Visual refresh support */
 .visual-refresh .pc-changelog-entry {
-    background-color: var(--card-primary-bg);
+    background-color: var(--card-background-default);
     border: 1px solid var(--border-subtle);
 }
 
@@ -329,7 +329,7 @@
 
 .visual-refresh .pc-changelog-entry.required {
     border-left: 4px solid var(--status-warning);
-    background-color: var(--card-primary-bg);
+    background-color: var(--card-background-default);
     border: 1px solid var(--border-subtle);
     padding-left: calc(0.75em - 4px);
 }
@@ -401,22 +401,22 @@
 }
 
 .visual-refresh .pc-changelog-entry:hover {
-    background-color: var(--card-primary-bg);
+    background-color: var(--card-background-default);
     box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
 }
 
 .visual-refresh .pc-changelog-empty {
-    background-color: var(--card-primary-bg);
+    background-color: var(--card-background-default);
     border: 1px solid var(--border-subtle);
 }
 
 .visual-refresh .pc-changelog-current-hash {
-    background-color: var(--input-background-default, var(--input-background));
+    background-color: var(--input-background-default);
     border: 1px solid var(--border-subtle);
 }
 
 .visual-refresh .pc-changelog-new-plugins-section {
-    background-color: var(--card-primary-bg);
+    background-color: var(--card-background-default);
     border: 1px solid var(--border-subtle);
     border-left: 4px solid var(--brand);
 }
@@ -427,7 +427,7 @@
 }
 
 .visual-refresh .pc-changelog-log {
-    background-color: var(--card-primary-bg);
+    background-color: var(--card-background-default);
     border: 1px solid var(--border-subtle);
 }
 
@@ -440,7 +440,7 @@
 }
 
 .visual-refresh .pc-changelog-restart-notice {
-    background-color: var(--card-primary-bg);
+    background-color: var(--card-background-default);
     border: 1px solid var(--status-warning);
     border-left: 4px solid var(--status-warning);
 }
@@ -565,7 +565,7 @@
 .pc-changelog-delete-button:hover {
     opacity: 1 !important;
     color: var(--status-danger) !important;
-    background-color: var(--background-mod-subtle, var(--background-modifier-hover));
+    background-color: var(--background-mod-subtle);
 }
 
 .pc-changelog-log-header:hover .pc-changelog-delete-button {

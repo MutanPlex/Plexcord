@@ -30,16 +30,16 @@
     padding: 0;
     background: transparent;
     margin-right: 8px;
-    color: var(--icon-muted, var(--icon-secondary));
+    color: var(--icon-muted);
     transition: background-color .2s ease;
 
     &:hover {
-        color: var(--interactive-icon-hover, var(--interactive-hover))
+        color: var(--interactive-icon-hover)
     }
 }
 
 .pc-plugins-settings-button:hover {
-    color: var(--interactive-icon-hover, var(--interactive-hover));
+    color: var(--interactive-icon-hover);
 }
 
 .pc-plugins-filter-controls {
@@ -79,8 +79,8 @@
 .pc-plugins-restart-card {
     padding: 1em;
     background: var(--info-warning-background);
-    border: 1px solid var(--info-warning-foreground);
-    color: var(--info-warning-foreground);
+    border: 1px solid var(--icon-status-idle);
+    color: var(--icon-status-idle);
 }
 
 .pc-plugins-info-icon:not(:hover, :focus) {
@@ -88,13 +88,13 @@
 }
 
 .pc-plugins-restart-button {
-    background: var(--icon-status-idle, var(--info-warning-foreground)) !important;
-    border: 1px solid var(--info-warning-foreground) !important;
+    background: var(--icon-status-idle, var(--icon-status-idle)) !important;
+    border: 1px solid var(--icon-status-idle) !important;
     margin-top: 0.5em;
 }
 
 .pc-plugins-restart-button:hover {
-    background-color: var(--info-warning-foreground) !important;
+    background-color: var(--icon-status-idle) !important;
 }
 
 .pc-plugin-stats {
@@ -158,7 +158,7 @@
 }
 
 .text-danger {
-    color: var(--text-feedback-critical, var(--text-danger)) !important;
+    color: var(--text-feedback-critical) !important;
     font-size: 1.2rem;
     font-weight: bold;
 }
@@ -174,29 +174,29 @@
 
 .pc-plugins-disable-warning,
 .pc-plugin-modal-disable-warning {
-    background-color: color-mix(in srgb, var(--redesign-button-danger-background, var(--button-danger-background)) 10%, transparent) !important;
+    background-color: color-mix(in srgb, var(--redesign-button-danger-background) 10%, transparent) !important;
     border-style: solid !important;
     padding: 10px;
     border-width: .1rem !important;
-    border-color: color-mix(in srgb, var(--redesign-button-danger-background, var(--button-danger-background)) 80%, transparent) !important;
+    border-color: color-mix(in srgb, var(--redesign-button-danger-background) 80%, transparent) !important;
     border-radius: 5px !important;
-    color: color-mix(in srgb, var(--redesign-button-danger-background, var(--button-danger-background)) 100%, transparent) !important;
+    color: color-mix(in srgb, var(--redesign-button-danger-background) 100%, transparent) !important;
 }
 
 .pc-plugins-disable-warning:hover,
 .pc-plugin-modal-disable-warning:hover {
-    background-color: color-mix(in srgb, var(--redesign-button-danger-background, var(--button-danger-background-hover)) 40%, transparent) !important;
+    background-color: color-mix(in srgb, var(--redesign-button-danger-background) 40%, transparent) !important;
 }
 
 .pc-plugins-confirm-reset,
 .pc-plugin-modal-confirm-reset {
-    background-color: var(--redesign-button-danger-background, var(--button-danger-background)) !important;
+    background-color: var(--redesign-button-danger-background) !important;
     color: var(--text-strong);
 }
 
 .pc-plugins-confirm-reset:hover,
 .pc-plugin-modal-confirm-reset:hover {
-    background-color: var(--redesign-button-danger-background, var(--button-danger-background-hover)) !important;
+    background-color: var(--redesign-button-danger-background) !important;
     filter: saturate(80%);
 }
 
@@ -225,7 +225,7 @@
 /* Specific to disable all modal */
 
 .warning-text {
-    color: var(--text-feedback-critical, var(--text-danger)) !important;
+    color: var(--text-feedback-critical) !important;
     font-size: 1.2rem !important;
 }
 
@@ -251,20 +251,20 @@
 }
 
 .visual-refresh .pc-plugins-info-card {
-    background-color: var(--card-primary-bg) !important;
+    background-color: var(--card-background-default) !important;
     border: 1px solid var(--border-subtle) !important;
 
     &:hover {
-        background-color: var(--card-primary-bg) !important;
+        background-color: var(--card-background-default) !important;
     }
 }
 
 .visual-refresh .pc-plugin-stats {
-    background-color: var(--card-primary-bg) !important;
+    background-color: var(--card-background-default) !important;
     border: 1px solid var(--border-subtle) !important;
 
     &:hover {
-        background-color: var(--card-primary-bg) !important;
+        background-color: var(--card-background-default) !important;
     }
 }
 

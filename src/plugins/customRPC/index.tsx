@@ -220,17 +220,19 @@ export default definePlugin({
     description: () => t(plugin.customRPC.description),
     authors: [Devs.captain, Devs.AutumnVN, Devs.nin0dev],
     dependencies: ["UserSettingsAPI"],
+    // This plugin's patch is not important for functionality, so don't require a restart
+    requiresRestart: false,
+    settings,
     start: setRpc,
     stop: () => setRpc(true),
-    settings,
 
+    // Discord hides buttons on your own Rich Presence for some reason. This patch disables that behaviour
     patches: [
         {
-            find: ".party?(0",
-            all: true,
+            find: ".buttons.length)>=1",
             replacement: {
-                match: /\i\.id===\i\.id\?null:/,
-                replace: ""
+                match: /.getId\(\)===\i.id/,
+                replace: "$& && false"
             }
         }
     ],
@@ -284,7 +286,7 @@ export default definePlugin({
 
                 <Divider className={Margins.top8} />
 
-                <div style={{ width: "284px", ...profileThemeStyle, marginTop: 8, borderRadius: 8, background: "var(--background-mod-muted, var(--background-mod-faint))" }}>
+                <div style={{ width: "284px", ...profileThemeStyle, marginTop: 8, borderRadius: 8, background: "var(--background-mod-muted)" }}>
                     {activity && <ActivityView
                         activity={activity}
                         user={UserStore.getCurrentUser()}

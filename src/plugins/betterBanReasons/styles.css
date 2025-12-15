@@ -11,7 +11,7 @@
 }
 
 .pc-bbr-remove-button:hover {
-    color: var(--redesign-button-danger-background, var(--button-danger-background-hover));
+    color: var(--redesign-button-danger-background);
 }
 
 .pc-bbr-add-button {

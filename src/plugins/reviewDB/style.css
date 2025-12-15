@@ -15,7 +15,7 @@
     resize: none;
     overflow: hidden;
     background: transparent;
-    border: 1px solid var(--input-border-default, var(--border-muted));
+    border: 1px solid var(--input-border-default);
     box-sizing: border-box;
 }
 
@@ -41,7 +41,7 @@
 
 .pc-rdb-modal-footer .pc-rdb-input {
     margin-bottom: 0;
-    background: var(--input-background-default, var(--input-background));
+    background: var(--input-background-default);
 }
 
 .pc-rdb-modal-footer [class|="pageControlContainer"] {
@@ -63,7 +63,7 @@
 }
 
 .pc-rdb-review-container:hover {
-    background: var(--message-background-hover, var(--background-message-hover)) !important;
+    background: var(--message-background-hover) !important;
     border-radius: 8px;
 }
 

@@ -39,6 +39,7 @@ import * as $ServerList from "./ServerList";
 import * as $Settings from "./Settings";
 import * as $Styles from "./Styles";
 import * as $Themes from "./Themes";
+import * as $UserArea from "./UserArea";
 import * as $UserSettings from "./UserSettings";
 
 /**
@@ -150,6 +151,11 @@ export const NicknameIcons = $NicknameIcons;
  * An API allowing you to play internal Discord audio files or external audio URLs/URIs.
  */
 export const AudioPlayer = $AudioPlayer;
+
+/**
+ * An API allowing you to add buttons to the user area panel.
+ */
+export const UserArea = $UserArea;
 
 /**
  * Don't use this

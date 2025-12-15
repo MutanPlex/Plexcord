@@ -1,5 +1,5 @@
 .pc-card-base {
-    background: var(--card-background-default, var(--card-primary-bg));
+    background: var(--card-background-default);
     border-radius: var(--radius-sm, 8px)
 }
 
@@ -8,11 +8,11 @@
 }
 
 .pc-card-warning {
-    border: 1px solid var(--icon-status-idle, var(--info-warning-foreground));
+    border: 1px solid var(--icon-status-idle);
 }
 
 .pc-card-danger {
-    border: 1px solid var(--icon-status-dnd, var(--info-danger-foreground));
+    border: 1px solid var(--icon-status-dnd);
 }
 
 .pc-card-defaultPadding {

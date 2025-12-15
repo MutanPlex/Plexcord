@@ -20,6 +20,10 @@
     transition: border-radius 0.15s ease-out, background-color 0.15s ease-out;
 }
 
+.custom-theme-background #pc-indicators-indicator-items {
+    background-color: var(--background-mod-strong);
+}
+
 #pc-indicators-indicator-items::before {
     position: absolute;
     content: "";

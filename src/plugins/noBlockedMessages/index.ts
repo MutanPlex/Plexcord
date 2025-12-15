@@ -21,7 +21,7 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Message } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
-import { runtimeHashMessageKey, runtimeHashMessageKeyLegacy } from "@utils/intlHash";
+import { runtimeHashMessageKey } from "@utils/intlHash";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { i18n, RelationshipStore } from "@webpack/common";
@@ -93,7 +93,7 @@ export default definePlugin({
     shouldHide(props: MessageDeleteProps): boolean {
         try {
             const collapsedReason = props.collapsedReason();
-            const is = (key: string) => collapsedReason === i18n.t[runtimeHashMessageKey(key)]() || collapsedReason === i18n.t[runtimeHashMessageKeyLegacy(key)]();
+            const is = (key: string) => collapsedReason === i18n.t[runtimeHashMessageKey(key)]();
 
             return is("BLOCKED_MESSAGE_COUNT") || (settings.store.applyToIgnoredUsers && is("IGNORED_MESSAGE_COUNT"));
         } catch (e) {

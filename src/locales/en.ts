@@ -323,7 +323,8 @@ const translations = {
                     notices: "Fixes notices being automatically dismissed",
                     serverList: "API required for plugins that modify the server list",
                     userSettings: "Patches Discord's UserSettings to expose their group and name.",
-                    audioPlayer: "API to play internal Discord audio files or external audio links."
+                    audioPlayer: "API to play internal Discord audio files or external audio links.",
+                    userArea: "API to add buttons to the user area panel."
                 },
                 chatButtons: {
                     context: {
@@ -3443,7 +3444,21 @@ const translations = {
         },
         fixImagesQuality: {
             name: "FixImagesQuality",
-            description: "Improves quality of images in chat by forcing png format"
+            description: "Improves quality of images by forcing the original source to be used",
+            option: {
+                originalImagesInChat: {
+                    label: "Original Images In Chat",
+                    description: "Also load the original image in Chat"
+                }
+            },
+            modal: {
+                about: {
+                    title: "The default behaviour is the following:",
+                    body: "&mdash; In chat, optimised but full resolution images will be loaded.",
+                    body2: "&mdash; In the image modal, the original image will be loaded.",
+                    warning: "You can also enable original image in chat, but this may cause performance issues!"
+                }
+            }
         },
         fixSpotifyEmbeds: {
             name: "FixSpotifyEmbeds",

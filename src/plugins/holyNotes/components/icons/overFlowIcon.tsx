@@ -7,7 +7,7 @@
 
 import { JSX } from "react";
 
-const OverFlowIcon = ({ width = 24, height = 24, color = "var(--interactive-icon-default, var(--interactive-normal))", className, ...rest }) => (
+const OverFlowIcon = ({ width = 24, height = 24, color = "var(--interactive-icon-default)", className, ...rest }) => (
     <svg
         {...rest}
         width={width}

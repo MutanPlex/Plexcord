@@ -62,7 +62,7 @@
 }
 
 .pc-bactivities-controls [class^="pc-activities-caret-"]:hover:not(.disabled) {
-    background: var(--input-border-default, var(--input-border));
+    background: var(--input-border-default);
 }
 
 .pc-bactivities-controls .carousel {

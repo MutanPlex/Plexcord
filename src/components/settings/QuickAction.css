@@ -14,7 +14,7 @@
 
 .pc-settings-quickActions-pill {
     all: unset;
-    background: var(--redesign-button-secondary-background, var(--button-secondary-background));
+    background: var(--redesign-button-secondary-background);
     color: var(--text-default);
     display: flex;
     align-items: center;
@@ -26,13 +26,13 @@
 }
 
 .pc-settings-quickActions-pill:hover {
-    background: var(--redesign-button-secondary-pressed-background, var(--button-secondary-background-hover));
+    background: var(--redesign-button-secondary-pressed-background);
     transform: translateY(-1px);
     box-shadow: var(--elevation-high);
 }
 
 .pc-settings-quickActions-pill:focus-visible {
-    outline: 2px solid var(--border-focus, var(--focus-primary));
+    outline: 2px solid var(--border-focus);
     outline-offset: 2px;
 }
 

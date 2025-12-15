@@ -75,13 +75,13 @@
     right: 1rem;
     height: 30px;
     color: var(--white-500);
-    background-color: var(--redesign-button-secondary-background, var(--button-secondary-background));
+    background-color: var(--redesign-button-secondary-background);
     border-radius: 10px;
     transition: background-color 0.15s ease;
 }
 
 .pc-useless-info-key-recorder-button:hover {
-    background-color: var(--redesign-button-secondary-pressed-background, var(--button-secondary-background-hover));
+    background-color: var(--redesign-button-secondary-pressed-background);
 }
 
 .pc-useless-info-key-switch .pc-form-switch-wrapper {
@@ -92,7 +92,7 @@
     padding: 8px 12px;
     border-radius: 8px;
     background: rgb(255 255 255 / 8%);
-    color: var(--interactive-icon-default, var(--interactive-normal, #ddd));
+    color: var(--interactive-icon-default, #ddd);
     border: 1px solid rgb(255 255 255 / 12%);
     cursor: pointer;
     font-size: 13px;
@@ -202,7 +202,7 @@
     right: 8px;
     background: transparent;
     border: none;
-    color: var(--interactive-icon-default, var(--interactive-normal));
+    color: var(--interactive-icon-default);
     font-size: 24px;
     cursor: pointer;
     padding: 0;
@@ -217,7 +217,7 @@
 
 .pc-useless-info-panel-close:hover {
     background-color: hsl(var(--white-500-hsl) / 10%);
-    color: var(--interactive-icon-hover, var(--interactive-hover));
+    color: var(--interactive-icon-hover);
 }
 
 .pc-useless-info-random-button,

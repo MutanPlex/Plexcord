@@ -27,5 +27,5 @@
 }
 
 .pc-customRPC-settings-error {
-    color: var(--redesign-button-danger-background, var(--button-danger-background));
+    color: var(--redesign-button-danger-background);
 }

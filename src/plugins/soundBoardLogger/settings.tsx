@@ -61,8 +61,8 @@ const settings = definePluginSettings({
                         onChange={handleChange}
                         placeholder={t(plugin.soundBoardLogger.option.savedIds.placeholder)}
                     />
-                    {shouldShowWarning && <Paragraph style={{ color: "var(--text-feedback-critical, var(--text-danger))" }}>{t(plugin.soundBoardLogger.option.savedIds.warning)}</Paragraph>}
-                    {errorMessage && <Paragraph style={{ color: "var(--text-feedback-critical, var(--text-danger))" }}>{errorMessage}</Paragraph>}
+                    {shouldShowWarning && <Paragraph style={{ color: "var(--text-feedback-critical)" }}>{t(plugin.soundBoardLogger.option.savedIds.warning)}</Paragraph>}
+                    {errorMessage && <Paragraph style={{ color: "var(--text-feedback-critical)" }}>{errorMessage}</Paragraph>}
                 </section>
             );
         }

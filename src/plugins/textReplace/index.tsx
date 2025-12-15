@@ -101,7 +101,7 @@ function renderFindError(find: string) {
         return null;
     } catch (e) {
         return (
-            <span style={{ color: "var(--text-feedback-critical, var(--text-danger))" }}>
+            <span style={{ color: "var(--text-feedback-critical)" }}>
                 {String(e)}
             </span>
         );
@@ -187,7 +187,7 @@ function TextReplace({ title, rulesArray }: TextReplaceProps) {
                                 <Button
                                     size="small"
                                     onClick={() => onClickRemove(index)}
-                                    style={{ flex: 0.10, backgroundColor: "var(--input-background-default, var(--input-background))", border: "1px solid var(--input-border-default, var(--input-border))", color: "var(--status-danger)" }}
+                                    style={{ flex: 0.10, backgroundColor: "var(--input-background-default)", border: "1px solid var(--input-border-default)", color: "var(--status-danger)" }}
                                 >
                                     <DeleteIcon style={{ verticalAlign: "middle" }} />
                                 </Button>

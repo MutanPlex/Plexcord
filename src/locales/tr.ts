@@ -326,7 +326,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     notices: "Bildirimlerin otomatik olarak kapatılmasını düzeltir",
                     serverList: "Sunucu listesini değiştiren eklentiler için gerekli API",
                     userSettings: "Discord'un kullanıcı ayarlarını, grupları ve isimleri ortaya çıkarmak için yamalar",
-                    audioPlayer: "Discord'un dahili ses dosyalarını veya harici ses bağlantılarını oynatmak için API."
+                    audioPlayer: "Discord'un dahili ses dosyalarını veya harici ses bağlantılarını oynatmak için API.",
+                    userArea: "Kullanıcı alanı paneline düğmeler eklemek için API."
                 },
                 chatButtons: {
                     context: {
@@ -3446,7 +3447,22 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fixImagesQuality: {
             name: "FixImagesQuality",
-            description: "Sohbetteki görsellerin kalitesini artırmak için PNG formatını zorlar."
+            description: "Orjinal kaynağın kullanılmasını zorlayarak görüntülerin kalitesini artırır",
+            option: {
+                originalImagesInChat: {
+                    label: "Orjinal Görüntüleri Sohbette Göster",
+                    description: "Orijinal görseli de Sohbette göster"
+                }
+            },
+            modal: {
+                about: {
+                    title: "Varsayılan davranış şu şekildedir:",
+                    body: "&mdash; Sohbette, optimize edilmiş ancak tam çözünürlüklü görseller yüklenecektir.",
+                    body2: "&mdash; Görsel penceresinde (image modal), orijinal görsel yüklenecektir.",
+                    warning: "Sohbette orijinal görseli de etkinleştirebilirsiniz, ancak bu performans sorunlarına yol açabilir!"
+                }
+            }
+
         },
         fixSpotifyEmbeds: {
             name: "FixSpotifyEmbeds",

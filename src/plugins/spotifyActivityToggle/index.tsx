@@ -8,11 +8,10 @@
 import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
-import ErrorBoundary from "@components/ErrorBoundary";
+import { UserAreaButton, UserAreaRenderProps } from "@api/UserArea";
 import plexcordToolbox from "@plugins/plexcordToolbox";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import { findComponentByCodeLazy } from "@webpack";
 import { Constants, React, RestAPI } from "@webpack/common";
 
 const settings = definePluginSettings({
@@ -39,14 +38,12 @@ const settings = definePluginSettings({
 
 let spotifyId: string | null = null;
 
-const Button = findComponentByCodeLazy(".NONE,disabled:", ".PANEL_BUTTON");
-
-function makeSpotifyIcon(enabled: boolean) {
+function SpotifyIcon({ className, enabled }: { className?: string; enabled: boolean; }) {
     const redLinePath = "M48.54 4.54a2.2 2.2 0 0 0-3.08-3.08l-44 44a2.2 2.2 0 1 0 3.08 3.08Z";
     const maskBlackPath = "M50.376 8.248 41.752-.376-.376 41.752 8.248 50.376Z";
 
     return (
-        <svg width="20" height="20" viewBox="0 0 50 50">
+        <svg className={className} width="20" height="20" viewBox="0 0 50 50">
             <path
                 fill={!enabled ? "var(--status-danger)" : "currentColor"}
                 mask={!enabled ? "url(#spotifyActivityMask)" : void 0}
@@ -63,26 +60,24 @@ function makeSpotifyIcon(enabled: boolean) {
     );
 }
 
-function SpotifyActivityToggleButton(props: { nameplate?: any; }) {
+function SpotifyActivityToggleButton({ iconForeground, hideTooltips, nameplate }: UserAreaRenderProps) {
     const { location } = settings.use(["location"]);
     if (!spotifyId || location !== "PANEL" && isPluginEnabled(plexcordToolbox.name)) return null;
 
     return (
-        <Button
+        <UserAreaButton
             tooltipText={settings.store.activityStatus ? t(plugin.spotifyActivityToggle.tooltip.disable) : t(plugin.spotifyActivityToggle.tooltip.enable)}
-            icon={makeSpotifyIcon(settings.store.activityStatus)}
+            icon={<SpotifyIcon className={iconForeground} enabled={settings.store.activityStatus} />}
             role="switch"
             aria-checked={settings.store.activityStatus}
             redGlow={!settings.store.activityStatus}
-            plated={props?.nameplate != null}
+            plated={nameplate != null}
             onClick={async () => {
                 const newValue = !settings.store.activityStatus;
                 settings.store.activityStatus = newValue;
                 await RestAPI.patch({
                     url: Constants.Endpoints.CONNECTION("spotify", spotifyId),
-                    body: {
-                        show_activity: newValue,
-                    },
+                    body: { show_activity: newValue },
                 });
             }}
         />
@@ -95,15 +90,10 @@ export default definePlugin({
     authors: [Devs.thororen],
     settings,
 
-    patches: [
-        {
-            find: "#{intl::ACCOUNT_SPEAKING_WHILE_MUTED}",
-            replacement: {
-                match: /className:\i\.buttons,.{0,50}children:\[/,
-                replace: "$&$self.SpotifyActivityToggleButton(arguments[0]),"
-            }
-        }
-    ],
+    userAreaButton: {
+        icon: (props: { className?: string; }) => <SpotifyIcon {...props} enabled={settings.store.activityStatus} />,
+        render: SpotifyActivityToggleButton
+    },
 
     toolboxActions() {
         const { location } = settings.use(["location"]);
@@ -123,17 +113,16 @@ export default definePlugin({
         };
     },
 
-    async start() {
-        const { body } = await RestAPI.get({
-            url: Constants.Endpoints.CONNECTIONS,
-        });
-        if (!body) return;
+    flux: {
+        async CONNECTION_OPEN() {
+            const { body } = await RestAPI.get({ url: Constants.Endpoints.CONNECTIONS });
+            if (!body) return;
 
-        const spotifyConn = body.find(c => c.type === "spotify");
-        if (spotifyConn) {
-            spotifyId = spotifyConn.id;
-            settings.store.activityStatus = spotifyConn.show_activity;
+            const spotifyConn = body.find(c => c.type === "spotify");
+            if (spotifyConn) {
+                spotifyId = spotifyConn.id;
+                settings.store.activityStatus = spotifyConn.show_activity;
+            }
         }
-    },
-    SpotifyActivityToggleButton: ErrorBoundary.wrap(SpotifyActivityToggleButton, { noop: true }),
+    }
 });
