@@ -58,7 +58,7 @@ export async function importSettings(data: string, type: BackupType = "all", clo
 
     switch (type) {
         case "all": {
-            if (!cloud && (!("settings" in parsed) || !("quickCss" in parsed) || !("dataStore" in parsed)))
+            if (!cloud && (!("settings" in parsed)))
                 throw new Error(t(sync.error.invalid));
             if (parsed.settings) {
                 Object.assign(PlainSettings, parsed.settings);
@@ -69,10 +69,10 @@ export async function importSettings(data: string, type: BackupType = "all", clo
             break;
         }
         case "plugins": {
-            if (!parsed.settings?.settings) throw new Error("Plugin settings missing");
+            if (!parsed.settings) throw new Error("Plugin settings missing");
 
-            Object.assign(PlainSettings, parsed.settings.settings);
-            await PlexcordNative.settings.set(parsed.settings.settings);
+            Object.assign(PlainSettings, parsed.settings);
+            await PlexcordNative.settings.set(parsed.settings);
             break;
         }
         case "css": {
@@ -100,7 +100,7 @@ export async function exportSettings({ syncDataStore = true, type = "all", minif
             return JSON.stringify({ settings, quickCss, ...(syncDataStore && { dataStore }) }, null, minify ? undefined : 4);
         }
         case "plugins": {
-            return JSON.stringify({ settings: { settings } }, null, minify ? undefined : 4);
+            return JSON.stringify({ settings }, null, minify ? undefined : 4);
         }
         case "css": {
             return JSON.stringify({ quickCss }, null, minify ? undefined : 4);
@@ -109,21 +109,6 @@ export async function exportSettings({ syncDataStore = true, type = "all", minif
             return JSON.stringify({ dataStore }, null, minify ? undefined : 4);
         }
     }
-}
-
-export async function exportPlugins({ minify }: { minify?: boolean; } = {}) {
-    const { plugins } = PlexcordNative.settings.get();
-    return JSON.stringify({ settings: { plugins } }, null, minify ? undefined : 4);
-}
-
-export async function exportCSS({ minify }: { minify?: boolean; } = {}) {
-    const quickCss = await PlexcordNative.quickCss.get();
-    return JSON.stringify({ quickCss }, null, minify ? undefined : 4);
-}
-
-export async function exportDataStores({ minify }: { minify?: boolean; } = {}) {
-    const dataStore = await DataStore.entries();
-    return JSON.stringify({ dataStore }, null, minify ? undefined : 4);
 }
 
 export async function downloadSettingsBackup(type: BackupType = "all", { minify }: { minify?: boolean; } = {}) {

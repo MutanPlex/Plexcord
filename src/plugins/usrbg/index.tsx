@@ -17,12 +17,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import "./styles.css";
+
 import { plugin, t } from "@api/i18n";
-import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
-import fullVcPfp from "@plugins/fullVcPfp";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
@@ -71,14 +71,21 @@ export default definePlugin({
             }
         },
         {
-            find: "data-selenium-video-tile",
-            predicate: () => !isPluginEnabled(fullVcPfp.name) && settings.store.voiceBackground,
+            find: "\"data-selenium-video-tile\":",
             replacement: [
                 {
-                    match: /(?<=function\((\i),\i,\i\){"use strict";)/,
-                    replace: "$1.style=$self.getVoiceBackgroundStyles($1);"
+                    match: /(?<=function\((\i),\i\)\{)(?=let.{20,40},style:)/,
+                    replace: "Object.assign($1.style=$1.style||{},$self.getVoiceBackgroundStyles($1));"
                 }
             ]
+        },
+        {
+            find: '"VideoBackground-web"',
+            predicate: () => settings.store.voiceBackground,
+            replacement: {
+                match: /backgroundColor:.{0,25},\{style:(?=\i\?)/,
+                replace: "$&$self.userHasBackground(arguments[0]?.userId)?null:",
+            }
         }
     ],
 
@@ -95,7 +102,7 @@ export default definePlugin({
     ),
 
     getVoiceBackgroundStyles({ className, participantUserId }: any) {
-        if (className.includes("tile_")) {
+        if (className.includes("tile")) {
             if (this.userHasBackground(participantUserId)) {
                 return {
                     backgroundImage: `url(${this.getImageUrl(participantUserId)})`,
