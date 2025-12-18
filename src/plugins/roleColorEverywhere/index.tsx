@@ -23,10 +23,13 @@ import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs, PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
-import { findByCodeLazy } from "@webpack";
+import { findByCodeLazy, findByPropsLazy } from "@webpack";
 import { ChannelStore, GuildMemberStore, GuildRoleStore, GuildStore, UserStore } from "@webpack/common";
 
 const useMessageAuthor = findByCodeLazy('"Result cannot be null because the message is not null"');
+const usernameFont = findByPropsLazy("usernameFont");
+const usernameGradient = findByPropsLazy("usernameGradient");
+const fonts = findByPropsLazy("dnsFont");
 
 const settings = definePluginSettings({
     chatMentions: {
@@ -177,16 +180,16 @@ export default definePlugin({
             const user = UserStore.getUser(userId);
             const fontId = user?.displayNameStyles?.fontId;
 
-            if (!fontId || Number(fontId) === 1) return "";
+            if (!fontId || Number(fontId) === 1) return fonts.dnsFont; // Default font
 
             const fontClasses: Record<number, string> = {
-                2: "zillaSlab__89a31",
-                3: "cherryBomb__89a31",
-                4: "chicle__89a31",
-                5: "museoModerno__89a31",
-                6: "neoCastel__89a31",
-                7: "pixelify__89a31",
-                8: "sinistre__89a31"
+                2: fonts.zillaSlab,
+                3: fonts.cherryBomb,
+                4: fonts.chicle,
+                5: fonts.museoModerno,
+                6: fonts.neoCastel,
+                7: fonts.pixelify,
+                8: fonts.sinistre
             };
 
             return fontClasses[Number(fontId)] || "";
@@ -228,15 +231,15 @@ export default definePlugin({
     getColorClass(userId: string, channelOrGuildId: string) {
         const fontClass = this.getDisplayNameFont(userId);
         const baseClass = this.getColorString(userId, channelOrGuildId)?.secondaryColor
-            ? "usernameFont__07f91 username__07f91 twoColorGradient_e5de78 usernameGradient_e5de78 "
-            : "usernameFont__07f91 username__07f91 ";
+            ? `${usernameFont.usernameFont} ${usernameFont.username} ${usernameGradient.twoColorGradient} ${usernameGradient.usernameGradient} `
+            : `${usernameFont.usernameFont} ${usernameFont.username} `;
         return fontClass ? `${baseClass}${fontClass}` : baseClass;
     },
 
     getPollResultColorClass(userId: string, channelOrGuildId: string) {
         const fontClass = this.getDisplayNameFont(userId);
         const baseClass = this.getColorString(userId, channelOrGuildId)?.secondaryColor
-            ? "twoColorGradient_e5de78 usernameGradient_e5de78 "
+            ? `${usernameGradient.twoColorGradient} ${usernameGradient.usernameGradient} `
             : "";
         return fontClass ? `${baseClass} ${fontClass}`.trim() : baseClass;
     },
@@ -273,7 +276,7 @@ export default definePlugin({
         let className = "";
 
         if (cs) {
-            if (cs.secondaryColor) className = "twoColorGradient_e5de78 usernameGradient_e5de78";
+            if (cs.secondaryColor) className = `${usernameGradient.twoColorGradient} ${usernameGradient.usernameGradient}`;
             style["--custom-gradient-color-1" as any] = cs.primaryColor;
             style["--custom-gradient-color-2" as any] = cs.secondaryColor;
             style["--custom-gradient-color-3" as any] = cs.tertiaryColor ?? cs.primaryColor;
