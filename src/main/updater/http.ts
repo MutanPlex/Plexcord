@@ -21,7 +21,7 @@ import { fetchBuffer, fetchJson } from "@main/utils/http";
 import { IpcEvents } from "@shared/IpcEvents";
 import { PLEXCORD_USER_AGENT } from "@shared/plexcordUserAgent";
 import { ipcMain } from "electron";
-import { writeFileSync as originalWriteFileSync } from "original-fs";
+import { closeSync, fsyncSync, openSync, writeFileSync as originalWriteFileSync } from "original-fs";
 
 import gitHash from "~git-hash";
 import gitRemote from "~git-remote";
@@ -75,6 +75,10 @@ async function applyUpdates() {
 
     const data = await fetchBuffer(PendingUpdate);
     originalWriteFileSync(__dirname, data);
+
+    const fd = openSync(__dirname, "r");
+    fsyncSync(fd);
+    closeSync(fd);
 
     PendingUpdate = null;
 

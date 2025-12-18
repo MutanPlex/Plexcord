@@ -21,7 +21,7 @@
     gap: 1.5rem;
 }
 
-.pc-pindms-modal-content [class^="defaultContainer"] {
+.pc-pindms-modal-content [class*="defaultContainer"] {
     display: none;
 }
 

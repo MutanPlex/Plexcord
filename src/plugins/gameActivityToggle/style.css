@@ -1,4 +1,4 @@
-[class^="panels"] [class^="buttons"] {
+[class*="panels"] [class*="avatarWrapper"] {
     gap: 4px;
 }
 

@@ -1,7 +1,49 @@
-.pc-plugin-modal-info {
-    align-items: center;
+.pc-plugin-modal-header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.pc-plugin-modal-header-trailing {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.pc-plugin-modal-title {
+    color: var(--text-strong);
+    padding-right: 32px;
 }
 
 .pc-plugin-modal-description {
-    flex-grow: 1;
+    color: var(--text-subtle);
+}
+
+.pc-plugin-modal-links {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+}
+
+.pc-plugin-modal-confirm [class*="footer"] {
+    flex-direction: row-reverse;
+    gap: var(--space-8, 8px);
+}
+
+.pc-plugin-modal-confirm [class*="footer"] > button {
+    flex: 1;
+    margin: 0;
+    width: 100%;
+}
+
+.pc-plugin-modal-warning {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-feedback-critical);
 }

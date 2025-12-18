@@ -15,7 +15,7 @@
     justify-content: flex-start;
 }
 
-.pc-clientTheme-container [class^="swatch"] {
+.pc-clientTheme-container [class*="swatch"] {
     border: thin solid var(--input-border-default) !important;
 }
 

@@ -47,7 +47,7 @@
     margin-top: 10px;
 }
 
-.pc-bactivities-controls [class^="pc-activities-caret-"] {
+.pc-bactivities-controls [class*="pc-activities-caret-"] {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -56,12 +56,12 @@
     background-color: #ffffff4d;
 }
 
-.pc-bactivities-controls [class^="pc-activities-caret-"].disabled {
+.pc-bactivities-controls [class*="pc-activities-caret-"].disabled {
     cursor: not-allowed;
     opacity: 0.3;
 }
 
-.pc-bactivities-controls [class^="pc-activities-caret-"]:hover:not(.disabled) {
+.pc-bactivities-controls [class*="pc-activities-caret-"]:hover:not(.disabled) {
     background: var(--input-border-default);
 }
 

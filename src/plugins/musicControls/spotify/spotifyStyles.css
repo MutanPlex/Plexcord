@@ -159,26 +159,26 @@
     margin-bottom: 5px;
 }
 
-#pc-spotify-progress-bar > [class^="slider"] {
+#pc-spotify-progress-bar > [class*="slider"] {
     flex-grow: 1;
     width: 100%;
     padding: 0 !important;
 }
 
-#pc-spotify-progress-bar > [class^="slider"] [class^="bar"] {
+#pc-spotify-progress-bar > [class*="slider"] [class*="bar"] {
     height: 3px !important;
     top: calc(12px - 4px / 2 + var(--bar-offset));
 }
 
-#pc-spotify-progress-bar > [class^="slider"] [class^="barFill"] {
+#pc-spotify-progress-bar > [class*="slider"] [class*="barFill"] {
     background-color: var(--interactive-icon-active);
 }
 
-#pc-spotify-progress-bar > [class^="slider"]:hover [class^="barFill"] {
+#pc-spotify-progress-bar > [class*="slider"]:hover [class*="barFill"] {
     background-color: var(--pc-spotify-green);
 }
 
-#pc-spotify-progress-bar > [class^="slider"] [class^="grabber"] {
+#pc-spotify-progress-bar > [class*="slider"] [class*="grabber"] {
     /* these importants are necessary, it applies a width and height through inline styles */
     height: 16px !important;
     width: 16px !important;
@@ -191,7 +191,7 @@
     transition: opacity 0.1s;
 }
 
-#pc-spotify-progress-bar:hover > [class^="slider"] [class^="grabber"] {
+#pc-spotify-progress-bar:hover > [class*="slider"] [class*="grabber"] {
     opacity: 1;
 }
 

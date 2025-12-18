@@ -44,7 +44,7 @@
     background: var(--input-background-default);
 }
 
-.pc-rdb-modal-footer [class|="pageControlContainer"] {
+.pc-rdb-modal-footer [class*="pageControlContainer"] {
     margin-top: 0;
 }
 

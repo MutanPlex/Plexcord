@@ -26,8 +26,8 @@
     color: var(--text-strong);
 }
 
-.pc-plugins-setting-description {
-    color: var(--text-default);
+.pc-plugins-setting-inline .pc-plugins-setting-description {
+    color: var(--text-subtle);
 }
 
 .pc-plugins-setting-error {

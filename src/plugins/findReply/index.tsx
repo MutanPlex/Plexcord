@@ -145,7 +145,7 @@ export default definePlugin({
                                 message: t(plugin.findReply.toast.navigate),
                                 type: Toasts.Type.MESSAGE
                             });
-                            const container = document.querySelector("[class^=channelBottomBarArea_]");
+                            const container = document.querySelector("[class*=channelBottomBarArea]");
                             if (!container) {
                                 Toasts.show({
                                     id: Toasts.genId(),

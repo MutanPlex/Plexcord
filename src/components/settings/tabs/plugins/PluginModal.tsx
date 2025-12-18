@@ -177,7 +177,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
             </ModalHeader>
             <ModalContent className={Margins.bottom16}>
                 <section>
-                    <Flex className={cl("info")}>
+                    <Flex className={cl("info")} justifyContent="space-between">
                         <Paragraph className={cl("description")}>{displayDescription}</Paragraph>
                         {!pluginMeta.userPlugin && (
                             <div className="pc-settings-modal-links">

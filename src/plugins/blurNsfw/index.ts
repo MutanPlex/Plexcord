@@ -26,8 +26,8 @@ let style: HTMLStyleElement;
 
 function setCss() {
     style.textContent = `
-        .pc-nsfw-img [class^=imageContainer],
-        .pc-nsfw-img [class^=wrapperPaused] {
+        .pc-nsfw-img [class*=imageContainer],
+        .pc-nsfw-img [class*=wrapperPaused] {
             filter: blur(${Settings.plugins.BlurNSFW.blurAmount}px);
             transition: filter 0.2s;
 
