@@ -3448,7 +3448,7 @@ const translations = {
             option: {
                 originalImagesInChat: {
                     label: "Original Images In Chat",
-                    description: "Also load the original image in Chat"
+                    description: "Also load the original image in Chat. WARNING: Read the caveats above"
                 }
             },
             modal: {
@@ -3456,7 +3456,9 @@ const translations = {
                     title: "The default behaviour is the following:",
                     body: "&mdash; In chat, optimised but full resolution images will be loaded.",
                     body2: "&mdash; In the image modal, the original image will be loaded.",
-                    warning: "You can also enable original image in chat, but this may cause performance issues!"
+                    body3: "You can also enable original image in chat, but beware of the following caveats:",
+                    warning: "&mdash; Animated images (GIF, WebP, etc.) in chat will always animate, regardless of if the App is focused.",
+                    warning2: "&mdash; May cause lag.",
                 }
             }
         },

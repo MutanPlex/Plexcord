@@ -197,6 +197,9 @@ export const Magnifier = ErrorBoundary.wrap<MagnifierProps>(({ instance }) => {
     const imageSrc = useMemo(() => {
         try {
             const imageUrl = new URL(instance.props.src);
+            if (imageUrl.pathname.startsWith("/attachments/"))
+                imageUrl.hostname = "cdn.discordapp.com";
+
             imageUrl.searchParams.set("animated", "true");
             return imageUrl.toString();
         } catch {

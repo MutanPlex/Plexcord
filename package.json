@@ -74,6 +74,7 @@
         "standalone-electron-types": "^34.2.0",
         "stylelint": "^16.26.1",
         "stylelint-config-standard": "^39.0.1",
+        "svgo": "^4.0.0",
         "ts-patch": "^3.3.0",
         "ts-pattern": "^5.9.0",
         "tsx": "^4.21.0",
@@ -82,7 +83,7 @@
         "typescript-eslint": "^8.48.1",
         "typescript-transform-paths": "^3.5.5"
     },
-    "packageManager": "pnpm@10.25.0",
+    "packageManager": "pnpm@10.26.1",
     "pnpm": {
         "overrides": {
             "@types/react": "19.2.7",

@@ -9,6 +9,7 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Card } from "@components/Card";
 import { Flex } from "@components/Flex";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
@@ -16,8 +17,9 @@ import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
     originalImagesInChat: {
+        label: () => t(plugin.fixImagesQuality.option.originalImagesInChat.label),
+        description: () => t(plugin.fixImagesQuality.option.originalImagesInChat.description),
         type: OptionType.BOOLEAN,
-        description: "Also load the original image in Chat",
         default: false,
     }
 });
@@ -49,36 +51,47 @@ export default definePlugin({
                             <li>{t(plugin.fixImagesQuality.modal.about.body2)}</li>
                         </ul>
                     </Paragraph>
+                    <Paragraph size="md" weight="semibold" className={Margins.top8}>{t(plugin.fixImagesQuality.modal.about.body3)}</Paragraph>
                     <Paragraph>
-                        {t(plugin.fixImagesQuality.modal.about.warning)}
+                        <ul>
+                            <li>{t(plugin.fixImagesQuality.modal.about.warning)}</li>
+                            <li>{t(plugin.fixImagesQuality.modal.about.warning2)}</li>
+                        </ul>
                     </Paragraph>
                 </Flex>
             </Card>
         );
     },
 
-    getSrc(props: { src: string; mediaLayoutType: string; width: number; height: number; }) {
-        if (!props) return;
+    getSrc(props: { src: string; mediaLayoutType: string; width: number; height: number; contentType: string; }, freeze?: boolean) {
+        if (!props?.src) return;
 
         try {
-            if (!settings.store.originalImagesInChat && props.mediaLayoutType === "MOSAIC") {
+            const { contentType, height, mediaLayoutType, src, width } = props;
+            if (!contentType?.startsWith("image/") || src.startsWith("data:")) return;
+
+            const url = new URL(src);
+            url.searchParams.set("animated", String(!freeze));
+
+            if (!settings.store.originalImagesInChat && mediaLayoutType === "MOSAIC") {
                 // make sure the image is not too large
-                const pixels = props.width * props.height;
+                const pixels = width * height;
                 const limit = 2000 * 1200;
 
-                if (pixels <= limit) return props.src;
+                if (pixels <= limit)
+                    return url.toString();
 
                 const scale = Math.sqrt(pixels / limit);
-                const url = new URL(props.src);
-                url.searchParams.set("width", Math.round(props.width / scale).toString());
-                url.searchParams.set("height", Math.round(props.height / scale).toString());
+                url.searchParams.set("width", Math.round(width / scale).toString());
+                url.searchParams.set("height", Math.round(height / scale).toString());
                 return url.toString();
             }
 
-            return props.src?.replace("https://media.discordapp.net/attachments/", "https://cdn.discordapp.com/attachments/");
+            url.hostname = "cdn.discordapp.com";
+            return url.toString();
         } catch (e) {
             new Logger("FixImagesQuality").error("Failed to make image src", e);
-            return props.src;
+            return;
         }
     }
 });

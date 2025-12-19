@@ -3451,7 +3451,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 originalImagesInChat: {
                     label: "Orjinal Görüntüleri Sohbette Göster",
-                    description: "Orijinal görseli de Sohbette göster"
+                    description: "Orijinal görseli de Sohbette göster. UYARI: Yukarıdaki uyarıları okuyun"
                 }
             },
             modal: {
@@ -3459,7 +3459,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Varsayılan davranış şu şekildedir:",
                     body: "&mdash; Sohbette, optimize edilmiş ancak tam çözünürlüklü görseller yüklenecektir.",
                     body2: "&mdash; Görsel penceresinde (image modal), orijinal görsel yüklenecektir.",
-                    warning: "Sohbette orijinal görseli de etkinleştirebilirsiniz, ancak bu performans sorunlarına yol açabilir!"
+                    body3: "Sohbette orijinal görseli de etkinleştirebilirsiniz, ancak aşağıdaki uyarılara dikkat edin:",
+                    warning: "&mdash; Sohbette animasyonlu görseller (GIF, WebP, vb.) her zaman animasyonlu olacaktır, uygulama odaklanmış olsa bile.",
+                    warning2: "&mdash; Performans sorunlarına yol açabilir."
                 }
             }
 
