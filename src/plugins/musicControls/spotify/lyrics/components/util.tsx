@@ -5,11 +5,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { classNameFactory } from "@api/Styles";
 import { settings } from "@plugins/musicControls/settings";
 import { SpotifyLrcStore } from "@plugins/musicControls/spotify/lyrics/providers/store";
 import { SyncedLyric } from "@plugins/musicControls/spotify/lyrics/providers/types";
 import { SpotifyStore } from "@plugins/musicControls/spotify/SpotifyStore";
+import { classNameFactory } from "@utils/css";
 import { findByPropsLazy } from "@webpack";
 import { React, useEffect, useState, useStateFromStores } from "@webpack/common";
 

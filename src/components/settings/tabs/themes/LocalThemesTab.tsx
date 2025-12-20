@@ -8,7 +8,6 @@
 import { t, themes } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { Settings, useSettings } from "@api/Settings";
-import { classNameFactory } from "@api/Styles";
 import { Card } from "@components/Card";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
@@ -19,6 +18,7 @@ import { QuickAction, QuickActionCard } from "@components/settings/QuickAction";
 import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
 import { UserThemeHeader } from "@main/themes";
 import ClientThemePlugin from "@plugins/clientTheme";
+import { classNameFactory } from "@utils/css";
 import { findLazy } from "@webpack";
 import { useEffect, useRef, useState } from "@webpack/common";
 import type { ComponentType, Ref, SyntheticEvent } from "react";

@@ -7,9 +7,9 @@
 
 import { set } from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
-import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
 import { HeadingPrimary, HeadingSecondary } from "@components/Heading";
+import { classNameFactory } from "@utils/css";
 import { Margins } from "@utils/margins";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
 import { ColorPicker, useState } from "@webpack/common";

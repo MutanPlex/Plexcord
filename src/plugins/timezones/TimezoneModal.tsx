@@ -7,9 +7,9 @@
 
 import * as DataStore from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
-import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
+import { classNameFactory } from "@utils/css";
 import { Margins } from "@utils/margins";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
 import { SearchableSelect, useEffect, useMemo, useState } from "@webpack/common";

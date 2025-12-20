@@ -8,7 +8,7 @@
 import * as DataStore from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
-import { classNameFactory } from "@api/Styles";
+import { classNameFactory } from "@utils/css";
 import { NavigationRouter, SelectedChannelStore, SelectedGuildStore, showToast, Toasts, useEffect, useRef, useState } from "@webpack/common";
 import { JSX } from "react";
 

@@ -5,8 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { classNameFactory } from "@api/Styles";
 import { Activity, Application } from "@plexcord/discord-types";
+import { classNameFactory } from "@utils/css";
 import { findByPropsLazy, findComponentByCodeLazy, findStoreLazy } from "@webpack";
 
 import { settings } from "./settings";

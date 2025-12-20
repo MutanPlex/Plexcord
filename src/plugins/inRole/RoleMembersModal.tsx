@@ -6,10 +6,10 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Paragraph } from "@components/Paragraph";
 import { GuildMember } from "@plexcord/discord-types";
+import { classNameFactory } from "@utils/css";
 import { ModalCloseButton, ModalContent, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { Parser } from "@webpack/common";
 

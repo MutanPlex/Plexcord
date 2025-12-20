@@ -18,12 +18,12 @@
 */
 
 export const enum IpcEvents {
+    INIT_FILE_WATCHERS = "PlexcordInitFileWatchers",
+
     QUICK_CSS_UPDATE = "PlexcordQuickCssUpdate",
     THEME_UPDATE = "PlexcordThemeUpdate",
     GET_QUICK_CSS = "PlexcordGetQuickCss",
     SET_QUICK_CSS = "PlexcordSetQuickCss",
-    UPLOAD_THEME = "PlexcordUploadTheme",
-    DELETE_THEME = "PlexcordDeleteTheme",
     GET_THEMES_DIR = "PlexcordGetThemesDir",
     GET_THEMES_LIST = "PlexcordGetThemesList",
     GET_THEME_DATA = "PlexcordGetThemeData",
@@ -38,11 +38,9 @@ export const enum IpcEvents {
     UPDATE = "PlexcordUpdate",
     BUILD = "PlexcordBuild",
     OPEN_MONACO_EDITOR = "PlexcordOpenMonacoEditor",
+    GET_MONACO_THEME = "PlexcordGetMonacoTheme",
 
     GET_PLUGIN_IPC_METHOD_MAP = "PlexcordGetPluginIpcMethodMap",
-
-    OPEN_IN_APP__RESOLVE_REDIRECT = "PlexcordOIAResolveRedirect",
-    VOICE_MESSAGES_READ_RECORDING = "PlexcordVMReadRecording",
 
     CSP_IS_DOMAIN_ALLOWED = "PlexcordCspIsDomainAllowed",
     CSP_REMOVE_OVERRIDE = "PlexcordCspRemoveOverride",
@@ -51,4 +49,8 @@ export const enum IpcEvents {
     OPEN_SETTINGS_FOLDER = "PlexcordOpenSettingsFolder",
 
     UPDATE_MAIN_LOCALE = "PlexcordUpdateMainLocale",
+
+    GET_RENDERER_CSS = "PlexcordGetRendererCss",
+    RENDERER_CSS_UPDATE = "PlexcordRendererCssUpdate",
+    PRELOAD_GET_RENDERER_JS = "PlexcordPreloadGetRendererJs",
 }

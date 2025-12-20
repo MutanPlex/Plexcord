@@ -9,12 +9,12 @@ import "./settings.css";
 
 import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
-import { classNameFactory } from "@api/Styles";
 import { Divider } from "@components/Divider";
 import { Heading } from "@components/Heading";
 import { resolveError } from "@components/settings/tabs/plugins/components/Common";
 import { ActivityType } from "@plexcord/discord-types/enums";
 import { debounce } from "@shared/debounce";
+import { classNameFactory } from "@utils/css";
 import { Select, Text, TextInput, useState } from "@webpack/common";
 
 import CustomRPCPlugin, { setRpc, settings, TimestampMode } from ".";

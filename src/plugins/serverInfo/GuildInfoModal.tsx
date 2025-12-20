@@ -8,10 +8,10 @@
 import "./styles.css";
 
 import { plugin, t } from "@api/i18n";
-import { classNameFactory } from "@api/Styles";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { Guild, User } from "@plexcord/discord-types";
+import { classNameFactory } from "@utils/css";
 import { getGuildAcronym, openImageModal, openUserProfile } from "@utils/discord";
 import { classes } from "@utils/misc";
 import { ModalRoot, ModalSize, openModal } from "@utils/modal";

@@ -6,9 +6,9 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { BasicChannelTabsProps, Bookmark, BookmarkFolder, BookmarkProps, CircleQuestionIcon, DiscoveryIcon, EnvelopeIcon, FriendsIcon, isBookmarkFolder, isTabSelected, navigateToBookmark, NitroIcon, openedTabs, QuestIcon, settings, ShopIcon, switchChannel, useBookmarks } from "@plugins/channelTabs/util";
+import { classNameFactory } from "@utils/css";
 import { getGuildAcronym, getIntlMessage } from "@utils/discord";
 import { classes } from "@utils/misc";
 import { closeModal, openModal } from "@utils/modal";

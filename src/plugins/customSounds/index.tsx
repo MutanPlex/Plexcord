@@ -11,10 +11,10 @@ import { addAudioProcessor, AudioProcessor, PreprocessAudioData, removeAudioProc
 import { get as getFromDataStore } from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { Devs, PcDevs } from "@utils/constants";
+import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType, StartAt } from "@utils/types";
 import { React, showToast, TextInput, useEffect } from "@webpack/common";
 

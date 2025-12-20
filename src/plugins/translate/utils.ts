@@ -18,7 +18,7 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { classNameFactory } from "@api/Styles";
+import { classNameFactory } from "@utils/css";
 import { onlyOnce } from "@utils/onlyOnce";
 import { PluginNative } from "@utils/types";
 import { showToast, Toasts } from "@webpack/common";

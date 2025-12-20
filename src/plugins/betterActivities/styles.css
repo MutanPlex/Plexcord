@@ -45,6 +45,7 @@
     border-radius: 3px;
     flex: 1 0;
     margin-top: 10px;
+    background-color: var(--user-profile-overlay-background);
 }
 
 .pc-bactivities-controls [class*="pc-activities-caret-"] {
@@ -65,12 +66,12 @@
     background: var(--input-border-default);
 }
 
-.pc-bactivities-controls .carousel {
+.pc-bactivities-controls .pc-bactivities-controls-carousel {
     display: flex;
     align-items: center;
 }
 
-.pc-bactivities-controls .carousel .dot {
+.pc-bactivities-controls .pc-bactivities-controls-carousel .pc-bactivities-controls-dot {
     margin: 0 4px;
     width: 10px;
     cursor: pointer;
@@ -81,11 +82,11 @@
     opacity: 0.6;
 }
 
-.pc-bactivities-controls .carousel .dot:hover:not(.selected) {
+.pc-bactivities-controls .pc-bactivities-controls-carousel .pc-bactivities-controls-dot:hover:not(.pc-bactivities-controls-selected) {
     opacity: 1;
 }
 
-.pc-bactivities-controls .carousel .dot.selected {
+.pc-bactivities-controls .pc-bactivities-controls-carousel .pc-bactivities-controls-dot.pc-bactivities-controls-selected {
     opacity: 1;
     background: var(--dot-color, var(--brand-500));
 }

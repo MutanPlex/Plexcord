@@ -7,11 +7,11 @@
 
 import { AudioPlayerInterface, playAudio } from "@api/AudioPlayer";
 import { plugin, t } from "@api/i18n";
-import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
+import { classNameFactory } from "@utils/css";
 import { Margins } from "@utils/margins";
 import { useForceUpdater } from "@utils/react";
 import { makeRange } from "@utils/types";

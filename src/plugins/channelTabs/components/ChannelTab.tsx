@@ -6,11 +6,11 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { Channel, Guild, User } from "@plexcord/discord-types";
 import { ActivityIcon, ChannelTabsProps, CircleQuestionIcon, closeTab, DiscoveryIcon, EnvelopeIcon, FriendsIcon, ICYMIIcon, isTabSelected, moveDraggedTabs, moveToTab, NitroIcon, openedTabs, QuestIcon, settings, ShopIcon } from "@plugins/channelTabs/util";
 import { activeQuestIntervals } from "@plugins/questify";
+import { classNameFactory } from "@utils/css";
 import { getGuildAcronym, getIntlMessage, getUniqueUsername } from "@utils/discord";
 import { classes } from "@utils/misc";
 import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";

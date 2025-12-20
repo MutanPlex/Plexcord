@@ -8,9 +8,9 @@
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
 import { migratePluginSettings } from "@api/Settings";
-import { classNameFactory } from "@api/Styles";
 import { Message } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
+import { classNameFactory } from "@utils/css";
 import { sendMessage } from "@utils/discord";
 import { useForceUpdater } from "@utils/react";
 import definePlugin, { IconComponent } from "@utils/types";

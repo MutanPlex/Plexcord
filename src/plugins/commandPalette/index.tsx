@@ -7,8 +7,8 @@
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { classNameFactory } from "@api/Styles";
 import { Devs } from "@utils/constants";
+import { classNameFactory } from "@utils/css";
 import { closeAllModals } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
 import { openUserSettingsPanel, useState } from "@webpack/common";

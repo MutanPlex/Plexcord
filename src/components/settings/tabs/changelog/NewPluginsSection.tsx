@@ -7,13 +7,13 @@
 
 import { changelog, plugins, t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
-import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { Heading } from "@components/Heading";
 import { PluginCard } from "@components/settings/tabs/plugins/PluginCard";
 import { ChangeList } from "@utils/ChangeList";
+import { classNameFactory } from "@utils/css";
 import { Margins } from "@utils/margins";
 import { useForceUpdater } from "@utils/react";
 import { React, Tooltip } from "@webpack/common";

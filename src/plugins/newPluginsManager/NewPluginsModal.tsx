@@ -9,7 +9,6 @@ import "./styles.css";
 
 import { plugin, plugins, t } from "@api/i18n";
 import { Settings, useSettings } from "@api/Settings";
-import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -17,6 +16,7 @@ import { Flex } from "@components/Flex";
 import { PluginDependencyList } from "@components/settings/tabs/plugins";
 import { PluginCard } from "@components/settings/tabs/plugins/PluginCard";
 import { ChangeList } from "@utils/ChangeList";
+import { classNameFactory } from "@utils/css";
 import { classes, Margins } from "@utils/index";
 import { closeModal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { useForceUpdater } from "@utils/react";

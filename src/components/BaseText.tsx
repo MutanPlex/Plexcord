@@ -7,8 +7,8 @@
 
 import "./BaseText.css";
 
-import { classNameFactory } from "@api/Styles";
 import type { Text as DiscordText } from "@plexcord/discord-types";
+import { classNameFactory } from "@utils/css";
 import { classes } from "@utils/misc";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 

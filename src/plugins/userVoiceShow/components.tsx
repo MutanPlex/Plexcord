@@ -7,11 +7,11 @@
 
 import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
-import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Channel } from "@plexcord/discord-types";
 import ShowHiddenChannelsPlugin from "@plugins/showHiddenChannels";
+import { classNameFactory } from "@utils/css";
 import { classes } from "@utils/misc";
 import { findByPropsLazy } from "@webpack";
 import { ChannelRouter, ChannelStore, Parser, PermissionsBits, PermissionStore, React, showToast, Toasts, Tooltip, useMemo, UserStore, UserSummaryItem, useStateFromStores, VoiceStateStore } from "@webpack/common";

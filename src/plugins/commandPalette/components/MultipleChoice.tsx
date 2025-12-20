@@ -8,8 +8,8 @@
 import "./style.css";
 
 import { plugin, t } from "@api/i18n";
-import { classNameFactory } from "@api/Styles";
 import { ButtonAction } from "@plugins/commandPalette/commands";
+import { classNameFactory } from "@utils/css";
 import { closeAllModals, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { React, TextInput, useEffect, useState } from "@webpack/common";
 

@@ -18,10 +18,10 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { DEFAULT_IMAGE_CACHE_DIR } from "@plugins/messageLoggerEnhanced/utils/constants";
+import { classNameFactory } from "@utils/css";
 import { copyWithToast } from "@utils/discord";
 import { Toasts } from "@webpack/common";
 

@@ -8,12 +8,12 @@
 import { playAudio } from "@api/AudioPlayer";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { FormSwitch } from "@components/FormSwitch";
 import { Paragraph } from "@components/Paragraph";
 import { Devs, PcDevs } from "@utils/constants";
+import { classNameFactory } from "@utils/css";
 import { closeModal, ModalCloseButton, ModalContent, ModalHeader, ModalRoot, openModal } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
 

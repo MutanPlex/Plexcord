@@ -21,12 +21,12 @@ import "./styles.css";
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
 import { User } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
+import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
 import { DateUtils, RelationshipStore, TooltipContainer } from "@webpack/common";
 import { PropsWithChildren } from "react";

@@ -20,10 +20,10 @@
 import "./AddonCard.css";
 
 import { plugins, t } from "@api/i18n";
-import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { AddonBadge } from "@components/settings/PluginBadge";
 import { Switch } from "@components/Switch";
+import { classNameFactory } from "@utils/css";
 import { useRef } from "@webpack/common";
 import type { MouseEventHandler, ReactNode } from "react";
 

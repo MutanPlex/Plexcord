@@ -17,8 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { classNameFactory } from "@api/Styles";
 import { Guild, GuildMember, Role } from "@plexcord/discord-types";
+import { classNameFactory } from "@utils/css";
 import { findByPropsLazy } from "@webpack";
 import { GuildRoleStore } from "@webpack/common";
 

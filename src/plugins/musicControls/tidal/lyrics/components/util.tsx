@@ -5,11 +5,11 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { classNameFactory } from "@api/Styles";
 import { settings } from "@plugins/musicControls/settings";
 import { TidalLrcStore } from "@plugins/musicControls/tidal/lyrics/providers/store";
 import { EnhancedLyric } from "@plugins/musicControls/tidal/lyrics/types";
 import { TidalStore } from "@plugins/musicControls/tidal/TidalStore";
+import { classNameFactory } from "@utils/css";
 import { findByPropsLazy } from "@webpack";
 import { React, useEffect, useState, useStateFromStores } from "@webpack/common";
 

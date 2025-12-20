@@ -5,8 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { classNameFactory } from "@api/Styles";
 import { questIsIgnored, settings } from "@plugins/questify/settings";
+import { classNameFactory } from "@utils/css";
 import { Logger } from "@utils/Logger";
 import { FluxDispatcher, RestAPI, UserStore } from "@webpack/common";
 import { findByPropsLazy } from "webpack";

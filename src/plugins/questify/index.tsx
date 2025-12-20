@@ -1018,27 +1018,11 @@ export default definePlugin({
         {
             // Hides the Quest icon from members list items when
             // a user is playing a game tied to an active Quest.
-            find: "HANG_STATUS});",
+            find: "),\"activity-\".concat",
             group: true,
             replacement: [
                 {
-                    match: /(?=if\(\(0,.{0,30}?isBlockedOrIgnored)/,
-                    replace: "const shouldHideMembersListActivelyPlayingIcon=$self.shouldHideMembersListActivelyPlayingIcon();"
-                },
-                {
-                    match: /(?<=\i\(\),\i&&)/,
-                    replace: "!shouldHideMembersListActivelyPlayingIcon&&"
-                }
-            ]
-        },
-        {
-            // Same as above, probably? Not sure when
-            // each function is used, so patching both.
-            find: "iconOnly)},",
-            group: true,
-            replacement: [
-                {
-                    match: /(?=if\(\i\)return null;let \i=function)/,
+                    match: /(?<=voiceActivityChannel:\i\?\i:null}\);)/,
                     replace: "const shouldHideMembersListActivelyPlayingIcon=$self.shouldHideMembersListActivelyPlayingIcon();"
                 },
                 {

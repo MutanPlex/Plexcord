@@ -18,8 +18,8 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { classNameFactory } from "@api/Styles";
 import { Message } from "@plexcord/discord-types";
+import { classNameFactory } from "@utils/css";
 import { IconComponent } from "@utils/types";
 import { useState } from "@webpack/common";
 

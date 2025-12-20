@@ -200,14 +200,7 @@ async function addDirectoryToZip(zip, dirPath, zipPath) {
 }
 
 const appendCssRuntime = readFile("dist/Plexcord.user.css", "utf-8").then(content => {
-    const cssRuntime = `
-;document.addEventListener("DOMContentLoaded", () => document.body.insertAdjacentElement("afterend",
-    Object.assign(document.createElement("style"), {
-        textContent: \`${content.replaceAll("`", "\\`")}\`,
-        id: "plexcord-css-core"
-    })
-), { once: true });
-`;
+    const cssRuntime = `unsafeWindow._pcUserScriptRendererCss=\`${content.replaceAll("`", "\\`")}\``;
 
     return appendFile("dist/Plexcord.user.js", cssRuntime);
 });

@@ -8,9 +8,9 @@
 import "./style.css";
 
 import { plugin, t } from "@api/i18n";
-import { classNameFactory } from "@api/Styles";
 import { Button } from "@components/Button";
 import { HiddenServersStore } from "@plugins/hideServers/HiddenServersStore";
+import { classNameFactory } from "@utils/css";
 import { GuildStore, useStateFromStores } from "@webpack/common";
 
 import { openHiddenServersModal } from "./HiddenServersMenu";

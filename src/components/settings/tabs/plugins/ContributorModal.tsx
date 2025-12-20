@@ -9,7 +9,6 @@ import "./ContributorModal.css";
 
 import { plugins, t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
-import { classNameFactory } from "@api/Styles";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { HeadingPrimary } from "@components/Heading";
 import { Link } from "@components/Link";
@@ -17,6 +16,7 @@ import { Paragraph } from "@components/Paragraph";
 import { GithubButton, WebsiteButton } from "@components/settings/tabs/plugins/LinkIconButton";
 import { User } from "@plexcord/discord-types";
 import { DevsById, PcDevsById } from "@utils/constants";
+import { classNameFactory } from "@utils/css";
 import { fetchUserProfile } from "@utils/discord";
 import { classes } from "@utils/misc";
 import { ModalContent, ModalRoot, openModal } from "@utils/modal";

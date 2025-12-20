@@ -7,8 +7,8 @@
 
 import "./Button.css";
 
-import { classNameFactory } from "@api/Styles";
 import type { Button as DiscordButton } from "@plexcord/discord-types";
+import { classNameFactory } from "@utils/css";
 import { classes } from "@utils/misc";
 import type { ComponentPropsWithRef } from "react";
 

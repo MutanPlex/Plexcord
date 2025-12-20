@@ -26,7 +26,7 @@ import monacoHtmlLocal from "file://monacoWin.html?minify";
 import * as DataStore from "@api/DataStore";
 import { debounce } from "@shared/debounce";
 import { localStorage } from "@utils/localStorage";
-import { EXTENSION_BASE_URL } from "@utils/web-metadata";
+import { EXTENSION_BASE_URL, metaReady, RENDERER_CSS_URL } from "@utils/web-metadata";
 import { getTheme, Theme } from "@utils/discord";
 import { getThemeInfo } from "@main/themes";
 import type { Settings } from "@api/Settings";
@@ -58,7 +58,18 @@ window.PlexcordNative = {
 
     native: {
         getVersions: () => ({}),
-        openExternal: async (url) => void open(url, "_blank")
+        openExternal: async (url) => void open(url, "_blank"),
+        getRendererCss: async () => {
+            if (IS_USERSCRIPT)
+                // need to wait for next tick for _vcUserScriptRendererCss to be set
+                return Promise.resolve().then(() => window._vcUserScriptRendererCss);
+
+            await metaReady;
+
+            return fetch(RENDERER_CSS_URL)
+                .then(res => res.text());
+        },
+        onRendererCssUpdate: NOOP,
     },
 
     i18n: {
@@ -99,18 +110,20 @@ window.PlexcordNative = {
                 return;
             }
 
-            const { getTheme, Theme } = require("@utils/discord");
-
             win.baseUrl = EXTENSION_BASE_URL;
             win.setCss = setCssDebounced;
             win.getCurrentCss = () => PlexcordNative.quickCss.get();
-            win.getTheme = () =>
-                getTheme() === Theme.Light
-                    ? "vs-light"
-                    : "vs-dark";
+            win.getTheme = this.getEditorTheme;
 
             win.document.write(monacoHtmlLocal);
         },
+        getEditorTheme: () => {
+            const { getTheme, Theme } = require("@utils/discord");
+
+            return getTheme() === Theme.Light
+                ? "vs-light"
+                : "vs-dark";
+        }
     },
 
     settings: {

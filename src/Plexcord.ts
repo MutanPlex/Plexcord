@@ -32,7 +32,7 @@ export * as Webpack from "./webpack";
 export * as WebpackPatcher from "./webpack/patchWebpack";
 export { PlainSettings, Settings };
 
-import { addPlexcordUiStyles } from "@components/css";
+import { coreStyleRootNode, initStyles } from "@api/Styles";
 import { openSettingsTabModal, UpdaterTab } from "@components/settings";
 import { debounce } from "@shared/debounce";
 import { IS_WINDOWS } from "@utils/constants";
@@ -202,6 +202,7 @@ async function init() {
 }
 
 initPluginManager();
+initStyles();
 startAllPlugins(StartAt.Init);
 init();
 
@@ -214,11 +215,10 @@ init();
 })();
 
 document.addEventListener("DOMContentLoaded", () => {
-    addPlexcordUiStyles();
 
     startAllPlugins(StartAt.DOMContentLoaded);
 
     if (IS_DISCORD_DESKTOP && Settings.winNativeTitleBar && IS_WINDOWS) {
-        createAndAppendStyle("plexcord-native-titlebar-style").textContent = "[class*=titleBar]{display: none!important}";
+        createAndAppendStyle("plexcord-native-titlebar-style", coreStyleRootNode).textContent = "[class*=titleBar]{display: none!important}";
     }
 }, { once: true });

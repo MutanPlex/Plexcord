@@ -6,7 +6,6 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
@@ -17,6 +16,7 @@ import { settings } from "@plugins/messageLoggerEnhanced/index";
 import { LoggedMessage, LoggedMessageJSON } from "@plugins/messageLoggerEnhanced/types";
 import { messageJsonToMessageClass } from "@plugins/messageLoggerEnhanced/utils";
 import { importLogs } from "@plugins/messageLoggerEnhanced/utils/settingsUtils";
+import { classNameFactory } from "@utils/css";
 import { copyWithToast, openUserProfile } from "@utils/discord";
 import { closeAllModals, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { LazyComponent } from "@utils/react";

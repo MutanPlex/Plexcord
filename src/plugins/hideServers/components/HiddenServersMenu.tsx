@@ -6,12 +6,12 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
 import { Guild } from "@plexcord/discord-types";
 import { HiddenServersStore } from "@plugins/hideServers/HiddenServersStore";
+import { classNameFactory } from "@utils/css";
 import { getGuildAcronym } from "@utils/discord";
 import { classes } from "@utils/misc";
 import {

@@ -20,12 +20,12 @@
 import * as DataStore from "@api/DataStore";
 import { notifications, t } from "@api/i18n";
 import { Settings } from "@api/Settings";
-import { classNameFactory } from "@api/Styles";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
 import { Paragraph } from "@components/Paragraph";
 import { openNotificationSettingsModal } from "@components/settings/tabs/plexcord/NotificationSettings";
+import { classNameFactory } from "@utils/css";
 import { closeModal, ModalCloseButton, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { useAwaiter } from "@utils/react";
 import { Alerts, ListScrollerThin, React, Timestamp, useEffect, useReducer, useState } from "@webpack/common";
