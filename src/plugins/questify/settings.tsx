@@ -689,6 +689,7 @@ function DisableQuestsSetting(): JSX.Element {
         makeMobileQuestsDesktopCompatible,
         completeVideoQuestsInBackground,
         completeGameQuestsInBackground,
+        completeAchievementQuestsInBackground,
         notifyOnQuestComplete
     } = settings.use([
         "disableQuestsEverything",
@@ -704,7 +705,8 @@ function DisableQuestsSetting(): JSX.Element {
         "makeMobileQuestsDesktopCompatible",
         "completeVideoQuestsInBackground",
         "completeGameQuestsInBackground",
-        "notifyOnQuestComplete"
+        "completeAchievementQuestsInBackground",
+        "notifyOnQuestComplete",
     ]);
 
     const options: DynamicDropdownSettingOption[] = [
@@ -720,6 +722,7 @@ function DisableQuestsSetting(): JSX.Element {
         { label: t(plugin.questify.settings.disableOptions.membersList), value: "members-list", selected: disableMembersListActivelyPlayingIcon, type: "disable" },
         { label: t(plugin.questify.settings.disableOptions.gameQuests), value: "game-quests-background", selected: completeGameQuestsInBackground, type: "modification" },
         { label: t(plugin.questify.settings.disableOptions.videoQuests), value: "video-quests-background", selected: completeVideoQuestsInBackground, type: "modification" },
+        { label: t(plugin.questify.settings.disableOptions.achievementQuests), value: "achievement-quests-background", selected: completeAchievementQuestsInBackground, type: "modification" },
         { label: t(plugin.questify.settings.disableOptions.mobileDesktop), value: "mobile-desktop-compatible", selected: makeMobileQuestsDesktopCompatible, type: "modification" },
         { label: t(plugin.questify.settings.disableOptions.notifyOnComplete), value: "notify-on-complete", selected: notifyOnQuestComplete, type: "modification" },
     ];
@@ -753,6 +756,7 @@ function DisableQuestsSetting(): JSX.Element {
         settings.store.disableMembersListActivelyPlayingIcon = enabledValues.includes("members-list");
         settings.store.completeGameQuestsInBackground = enabledValues.includes("game-quests-background");
         settings.store.completeVideoQuestsInBackground = enabledValues.includes("video-quests-background");
+        settings.store.completeAchievementQuestsInBackground = enabledValues.includes("achievement-quests-background");
         settings.store.makeMobileQuestsDesktopCompatible = enabledValues.includes("mobile-desktop-compatible");
         settings.store.notifyOnQuestComplete = enabledValues.includes("notify-on-complete");
 
@@ -1712,9 +1716,9 @@ export const settings = definePluginSettings({
                         activeQuestIntervals.delete(questId);
                     }
                 });
-
-                rerenderQuests();
             }
+
+            rerenderQuests();
         }
     },
     completeGameQuestsInBackground: {
@@ -1732,10 +1736,29 @@ export const settings = definePluginSettings({
                         activeQuestIntervals.delete(questId);
                     }
                 });
-
-                rerenderQuests();
             }
+
+            rerenderQuests();
         },
+    },
+    completeAchievementQuestsInBackground: {
+        type: OptionType.BOOLEAN,
+        description: "Complete Achievement in Activity Quests in the background.",
+        default: false,
+        hidden: true,
+        onChange: (value: boolean) => {
+            if (!value) {
+                activeQuestIntervals.forEach((interval, questId) => {
+                    if (interval.type === "achievement") {
+                        clearTimeout(interval.progressTimeout);
+                        clearTimeout(interval.rerenderTimeout);
+                        activeQuestIntervals.delete(questId);
+                    }
+                });
+            }
+
+            rerenderQuests();
+        }
     },
     notifyOnQuestComplete: {
         label: () => t(plugin.questify.option.notifyOnQuestComplete.label),
@@ -1997,5 +2020,3 @@ export const settings = definePluginSettings({
         hidden: true,
     }
 });
-
-

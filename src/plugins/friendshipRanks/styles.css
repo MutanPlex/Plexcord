@@ -1,0 +1,19 @@
+.pc-friendship-ranks-flex {
+    width: 100%;
+    justify-content: center;
+    height: 18px;
+}
+
+.pc-friendship-ranks-img {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    place-content: center center;
+    margin: 0;
+    gap: 4px;
+}
+
+.pc-friendship-ranks-text {
+    padding: 1em;
+    text-align: center;
+}

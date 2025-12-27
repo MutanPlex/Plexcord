@@ -5,6 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import "./styles.css";
+
 import { BadgeUserArgs, ProfileBadge } from "@api/Badges";
 import { i18n, plugin, t } from "@api/i18n";
 import { Badges } from "@api/index";
@@ -13,19 +15,19 @@ import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { Devs, PcDevs } from "@utils/constants";
-import { Margins } from "@utils/margins";
+import { classNameFactory } from "@utils/css";
 import { ModalContent, ModalHeader, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
 import { RelationshipStore } from "@webpack/common";
-
-import { bestiesIcon, bloomingIcon, burningIcon, fighterIcon, royalIcon, sproutIcon, starIcon } from "./icons";
 
 interface rankInfo {
     title: string;
     description: string;
     requirement: number;
-    assetSVG: any;
+    iconSrc: string;
 }
+
+const cl = classNameFactory("pc-friendship-ranks-");
 
 function daysSince(dateString: string): number {
     const date = new Date(dateString);
@@ -38,50 +40,49 @@ function daysSince(dateString: string): number {
     return Math.floor(days);
 }
 
-
 function getRanks(): rankInfo[] {
     return [
         {
             title: t(plugin.friendshipRanks.badge.sprout.name),
             description: t(plugin.friendshipRanks.badge.sprout.description),
             requirement: 0,
-            assetSVG: sproutIcon
+            iconSrc: "https://raw.githubusercontent.com/MutanPlex/random-files/refs/heads/main/icons/friendshipRanks/sprout.png"
         },
         {
             title: t(plugin.friendshipRanks.badge.blooming.name),
             description: t(plugin.friendshipRanks.badge.blooming.description),
             requirement: 30,
-            assetSVG: bloomingIcon
+            iconSrc: "https://raw.githubusercontent.com/MutanPlex/random-files/refs/heads/main/icons/friendshipRanks/blooming.png"
         },
         {
             title: t(plugin.friendshipRanks.badge.burning.name),
             description: t(plugin.friendshipRanks.badge.burning.description),
             requirement: 90,
-            assetSVG: burningIcon
+            iconSrc: "https://raw.githubusercontent.com/MutanPlex/random-files/refs/heads/main/icons/friendshipRanks/burning.png"
         },
         {
             title: t(plugin.friendshipRanks.badge.fighter.name),
             description: t(plugin.friendshipRanks.badge.fighter.description),
             requirement: 182.5,
-            assetSVG: fighterIcon
+            iconSrc: "https://raw.githubusercontent.com/MutanPlex/random-files/refs/heads/main/icons/friendshipRanks/fighter.png"
         },
         {
             title: t(plugin.friendshipRanks.badge.star.name),
             description: t(plugin.friendshipRanks.badge.star.description),
             requirement: 365,
-            assetSVG: starIcon
+            iconSrc: "https://raw.githubusercontent.com/MutanPlex/random-files/refs/heads/main/icons/friendshipRanks/star.png"
         },
         {
             title: t(plugin.friendshipRanks.badge.royal.name),
             description: t(plugin.friendshipRanks.badge.royal.description),
             requirement: 730,
-            assetSVG: royalIcon
+            iconSrc: "https://raw.githubusercontent.com/MutanPlex/random-files/refs/heads/main/icons/friendshipRanks/royal.png"
         },
         {
             title: t(plugin.friendshipRanks.badge.besties.name),
             description: t(plugin.friendshipRanks.badge.besties.description),
             requirement: 1826.25,
-            assetSVG: bestiesIcon
+            iconSrc: "https://raw.githubusercontent.com/MutanPlex/random-files/refs/heads/main/icons/friendshipRanks/besties.png"
         }
     ];
 }
@@ -92,16 +93,16 @@ function openRankModal(rankIndex: number) {
         <ErrorBoundary>
             <ModalRoot {...props} size={ModalSize.DYNAMIC}>
                 <ModalHeader>
-                    <Flex justifyContent="center" style={{ width: "100%" }}>
-                        <Heading style={{ width: "100%", textAlign: "center", margin: 0 }}>
+                    <Flex className={cl("flex")}>
+                        <Heading className={cl("img")} tag="h2">
+                            <img src={rank.iconSrc} alt="rank icon" />
                             {rank.title}
                         </Heading>
                     </Flex>
                 </ModalHeader>
                 <ModalContent>
-                    <div style={{ padding: "1em", textAlign: "center" }}>
-                        <rank.assetSVG height="150px"></rank.assetSVG>
-                        <Paragraph className={Margins.top16}>
+                    <div className={cl("text")}>
+                        <Paragraph>
                             {rank.description}
                         </Paragraph>
                     </div>
@@ -109,18 +110,6 @@ function openRankModal(rankIndex: number) {
             </ModalRoot>
         </ErrorBoundary >
     ));
-}
-
-function getBadgeComponent(rankIndex: number) {
-    const rank = getRanks()[rankIndex];
-    // there may be a better button component to do this with
-    return (
-        <div style={{ transform: "scale(0.80)", marginTop: "3px" }}>
-            <div onClick={() => openRankModal(rankIndex)} style={{ width: "22px", height: "27px" }}>
-                <rank.assetSVG />
-            </div>
-        </div>
-    );
 }
 
 function shouldShowBadge(userId: string, requirement: number, index: number) {
@@ -137,12 +126,12 @@ function shouldShowBadge(userId: string, requirement: number, index: number) {
 function getBadgesToApply() {
     const ranks = getRanks();
     const badgesToApply: ProfileBadge[] = ranks.map((rank, index) => {
-        return (
-            {
-                description: rank.title,
-                component: () => getBadgeComponent(index),
-                shouldShow: (info: BadgeUserArgs) => shouldShowBadge(info.userId, rank.requirement, index),
-            });
+        return ({
+            description: rank.title,
+            iconSrc: rank.iconSrc,
+            onClick: () => openRankModal(index),
+            shouldShow: (info: BadgeUserArgs) => shouldShowBadge(info.userId, rank.requirement, index),
+        });
     });
 
     return badgesToApply;

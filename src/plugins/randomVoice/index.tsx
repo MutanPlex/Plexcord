@@ -267,7 +267,6 @@ function ContextMenu() {
             aria-label={t(plugin.randomVoice.context.label)}
         >
 
-
             <Menu.MenuItem
                 id="servers"
                 label={t(plugin.randomVoice.context.select.servers)}
@@ -735,7 +734,6 @@ function getChannels() {
                 criteriaChannel.push(channelId);
             }
         }
-
 
         if (settings.store.includeStates && !settings.store.avoidStates) {
             if ((settings.store.deafen && !selfDeaf) || (!settings.store.deafen && selfDeaf)) return;

@@ -27,7 +27,6 @@ import { DraftStore, DraftType, UploadAttachmentStore, UserStore, useStateFromSt
 
 const getDraft = (channelId: string) => DraftStore.getDraft(channelId, DraftType.ChannelMessage);
 
-
 const getImageBox = (url: string): Promise<{ width: number, height: number; } | null> =>
     new Promise(res => {
         const img = new Image();
@@ -39,7 +38,6 @@ const getImageBox = (url: string): Promise<{ width: number, height: number; } | 
 
         img.src = url;
     });
-
 
 const getAttachments = async (channelId: string) =>
     await Promise.all(
@@ -86,7 +84,6 @@ const PreviewIcon: IconComponent = ({ height = 20, width = 20, className }) => {
         </svg>
     );
 };
-
 
 const PreviewButton: ChatBarButtonFactory = ({ isAnyChat, isEmpty, type: { attachments }, channel: { id: channelId } }) => {
     const draft = useStateFromStores([DraftStore], () => getDraft(channelId));

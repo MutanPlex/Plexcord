@@ -138,8 +138,6 @@ function ChannelTabContent(props: ChannelTabsProps & {
         showStatusIndicators
     } = settings.use(["noPomeloNames", "showStatusIndicators"]);
 
-
-
     const [isTyping, status, isMobile] = useStateFromStores(
         [TypingStore, PresenceStore],
         () => {

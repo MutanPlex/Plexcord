@@ -5806,6 +5806,10 @@ const translations = {
                 itunes: {
                     label: "iTunes",
                     description: "Open Apple Music links in the iTunes app"
+                },
+                vrcx: {
+                    label: "VRChat",
+                    description: "Open VRChat links in the VRCX app"
                 }
             },
             notification: {
@@ -6090,28 +6094,6 @@ const translations = {
             description: "Lets you preview your message before sending it.",
             tooltip: "Preview Message"
         },
-        questCompleter: {
-            name: "QuestCompleter",
-            description: "A plugin to complete quests without having the game installed.",
-            tooltip: "Complete Quests",
-            alert: {
-                title: "Quest Completer",
-                noQuest: "No Quests To Complete. Click to navigate to the quests tab",
-                completed: "Quest Completed.",
-                spoofingVideo: "Spoofing video for {{applicationName}}",
-                spoofingApplication: "Spoofing application for {{applicationName}}",
-                currentProgress: "Current Progress: {{progress}}/{{goal}} seconds",
-                notStreaming: "You are not streaming",
-                startStreaming: "{{applicationName}} requires you to be streaming. Please stream any window in vc.",
-                onePersonNeeded: "Remember that you need at least 1 other person to be in the vc!",
-                streamMore: "Stream any window in vc for {{seconds}} more minutes."
-            }
-        },
-        questFocused: {
-            name: "QuestFocused",
-            description: "Prevent the quests player from pausing and possibly skip it all together.",
-            about: "You might need to spam left mouse button on the video to skip it."
-        },
         questify: {
             name: "Questify",
             description: "Enhance your Quest experience with a suite of features, or disable them entirely if they're not your thing.",
@@ -6238,8 +6220,9 @@ const translations = {
                     inventory: "Disable Gift Inventory Relocation Notice",
                     friendsList: "Friends List Active Now Promotion",
                     membersList: "Members List Actively Playing Icons",
-                    gameQuests: "Complete Game Quests in Background",
-                    videoQuests: "Complete Video Quests in Background",
+                    gameQuests: "Complete Play Game/Activity Quests in Background",
+                    videoQuests: "Complete Watch Video Quests in Background",
+                    achievementQuests: "Complete Task in Activity Quests in Background",
                     mobileDesktop: "Make Mobile Quests Desktop Compatible",
                     notifyOnComplete: "Notify on Quest Completion"
                 },
@@ -6317,6 +6300,10 @@ const translations = {
                 completeGameQuestsInBackground: {
                     label: "Complete Game Quests In Background",
                     description: "Complete Game Quests in the background after the game duration has passed."
+                },
+                completeAchievementQuestsInBackground: {
+                    label: "Complete Task In Activity Quests In Background",
+                    description: "Complete Achievement in Activity Quests in the background."
                 },
                 notifyOnQuestComplete: {
                     label: "Notify On Quest Completion",
@@ -6470,7 +6457,9 @@ const translations = {
             button: {
                 questInProgressWithTime: "Completing ({{remainTime}})",
                 completing: "Completing",
-                resume: "Resume (~{{remainTime}})"
+                resume: "Resume (~{{remainTime}})",
+                complete: "Complete {{remainTime}}",
+                completeImmediate: "Complete (Immediate)"
             },
             notification: {
                 completed: {
@@ -9005,6 +8994,5 @@ export const message = createKeyProxy(translations.message, ["message"]);
 export const utils = createKeyProxy(translations.utils, ["utils"]);
 export const common = createKeyProxy(translations.common, ["common"]);
 export const plugin = createKeyProxy(translations.plugin, ["plugin"]);
-
 
 export default translations;

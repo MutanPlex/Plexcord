@@ -199,5 +199,3 @@ function QuoteModal({ message, ...props }: ModalProps & { message: Message; }) {
         </ModalRoot>
     );
 }
-
-

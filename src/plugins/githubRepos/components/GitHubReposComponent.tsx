@@ -24,7 +24,6 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
     const [userInfo, setUserInfo] = useState<GitHubUserInfo | null>(null);
     const [returnJustButton, setReturnJustButton] = useState(false);
 
-
     const openReposModal = () => {
         if (!userInfo) return;
 

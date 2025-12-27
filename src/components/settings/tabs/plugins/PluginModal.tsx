@@ -107,7 +107,6 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
         })();
     }, [plugin.authors]);
 
-
     function handleResetClick() {
         openWarningModal(plugin, { onClose, transitionState }, onRestartNeeded);
     }
@@ -296,7 +295,6 @@ function resetSettings(plugin: Plugin, warningModalProps?: ModalProps, pluginMod
             restartNeeded = true;
         }
     }
-
 
     const currentSettings = plugin.settings?.store;
     if (currentSettings) {

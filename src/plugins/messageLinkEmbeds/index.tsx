@@ -134,7 +134,6 @@ const settings = definePluginSettings({
     }
 });
 
-
 async function fetchMessage(channelID: string, messageID: string) {
     const cached = messageCache.get(messageID);
     if (cached) return cached.message;
@@ -163,7 +162,6 @@ async function fetchMessage(channelID: string, messageID: string) {
 
     return message;
 }
-
 
 function getImages(message: Message): Attachment[] {
     const attachments: Attachment[] = [];
@@ -229,7 +227,6 @@ function withEmbeddedBy(message: Message, embeddedBy: string[]) {
         }
     });
 }
-
 
 function MessageEmbedAccessory({ message }: { message: Message; }) {
     // @ts-ignore

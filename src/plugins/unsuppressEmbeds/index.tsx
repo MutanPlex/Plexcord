@@ -25,7 +25,6 @@ import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { Constants, Menu, PermissionsBits, PermissionStore, RestAPI, UserStore } from "@webpack/common";
 
-
 const EMBED_SUPPRESSED = 1 << 2;
 
 const messageContextMenuPatch: NavContextMenuPatchCallback = (

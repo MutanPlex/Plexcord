@@ -108,7 +108,6 @@ function AnimationSettings(): JSX.Element {
     );
 }
 
-
 export const logger = new Logger("ChannelTabs");
 
 export const bookmarkFolderColors = {

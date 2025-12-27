@@ -152,7 +152,6 @@ function PatchHelper() {
                 />
             </div>
 
-
             {module && (
                 <>
                     <Divider className={Margins.top16 + " " + Margins.bottom16} />

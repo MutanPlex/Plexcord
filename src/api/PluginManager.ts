@@ -354,7 +354,6 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
     return true;
 }, p => `stopPlugin ${getName(p.name)}`);
 
-
 export const initPluginManager = onlyOnce(function init() {
     const pluginsValues = Object.values(Plugins);
     const settings = Settings.plugins;

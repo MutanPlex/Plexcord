@@ -483,7 +483,6 @@ export default definePlugin({
         }
     ],
 
-
     swapViewChannelWithConnectPermission(mergedPermissions: bigint, channel: Channel) {
         if (!PermissionStore.can(PermissionsBits.CONNECT, channel)) {
             mergedPermissions &= ~PermissionsBits.VIEW_CHANNEL;

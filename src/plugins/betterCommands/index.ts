@@ -108,7 +108,6 @@ export default definePlugin({
                         );
                     }
 
-
                     sendBotMessage(channelId, {
                         author: {
                             username: "Plexcord"

@@ -428,7 +428,6 @@ function PluginSettings() {
                 : <ExcludedPluginsList search={search} />
             }
 
-
             <Divider className={Margins.top20} />
 
             <Paragraph className={classes(Margins.top20, Margins.bottom8)}>

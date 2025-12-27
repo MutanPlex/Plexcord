@@ -20,7 +20,6 @@ const settings = definePluginSettings({
     },
 });
 
-
 function replaceQuestionMarks(content: string): string {
     const allQuestionMarks = content.split("").every(char => char === "?");
 

@@ -159,7 +159,6 @@ ipcMain.handle(IpcEvents.OPEN_MONACO_EDITOR, async () => {
     await win.loadURL(`data:text/html;base64,${monacoHtml}`);
 });
 
-
 ipcMain.handle(IpcEvents.GET_RENDERER_CSS, () => readFile(RENDERER_CSS_PATH, "utf-8"));
 
 if (IS_DISCORD_DESKTOP) {

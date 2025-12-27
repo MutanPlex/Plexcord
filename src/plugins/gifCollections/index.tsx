@@ -94,7 +94,6 @@ const addCollectionContextMenuPatch: NavContextMenuPatchCallback = (children, pr
     }
 };
 
-
 export const settings = definePluginSettings({
     itemPrefix: {
         label: () => t(plugin.gifCollections.option.itemPrefix.label),

@@ -67,7 +67,6 @@ const ContextMenuPatch: NavContextMenuPatchCallback = (children, { channel }: { 
     );
 };
 
-
 const settings = definePluginSettings({
     permanentlyIgnoredUsers: {
         label: () => t(plugin.ignoreCalls.option.permanentlyIgnoredUsers.label),

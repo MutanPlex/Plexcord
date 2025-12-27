@@ -38,7 +38,6 @@ export const ThreadMemberListStore = findStoreLazy("ThreadMemberListStore") as F
     getMemberListSections(channelId?: string): { [sectionId: string]: { sectionId: string; userIds: string[]; }; };
 };
 
-
 export const settings = definePluginSettings({
     toolTip: {
         label: () => t(plugin.memberCount.option.toolTip.label),

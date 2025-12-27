@@ -147,7 +147,6 @@ export function formatTimestamp(timestamp: number): string {
     }
 }
 
-
 /**
  * Join an array of strings in a human readable way (1, 2 and 3)
  * @param elements Elements

@@ -23,7 +23,6 @@ export function NoteBookTabs({ tabs, selectedTabId, onSelectTab }: { tabs: strin
         return value !== null && value !== undefined;
     }
 
-
     const handleResize = React.useCallback(() => {
         if (!tabBarRef.current) return;
         const overflowed = [] as string[];
@@ -49,7 +48,6 @@ export function NoteBookTabs({ tabs, selectedTabId, onSelectTab }: { tabs: strin
             setOverflowedTabs(overflowed);
         }
     }, [tabs, selectedTabId]);
-
 
     useEffect(() => {
         handleResize();

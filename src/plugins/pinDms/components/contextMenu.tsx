@@ -82,7 +82,6 @@ function createPinMenuItem(channelId: string) {
                         />
                     </Menu.MenuItem>
 
-
                     {
                         settings.store.pinOrder === PinOrder.Custom && canMoveChannelInDirection(channelId, -1) && (
                             <Menu.MenuItem

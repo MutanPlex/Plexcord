@@ -260,7 +260,6 @@ function startFactNotifications() {
     }, delay * 60 * 1000);
 }
 
-
 function HistoryHotkeyRecorder() {
     const [isRecording, setIsRecording] = useState(false);
 

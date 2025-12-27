@@ -33,7 +33,6 @@ function GetPropsAndDeleteGuild(id) {
     DeleteGuild(id, GotGuild.name);
 }
 
-
 const settings = definePluginSettings({
     domain: {
         label: () => t(plugin.alwaysTrust.option.domain.label),

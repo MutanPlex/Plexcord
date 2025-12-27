@@ -53,7 +53,6 @@ export function useMessages(query: string, currentTab: LogTabs, sortNewest: bool
                     countMessagesByStatusIDB(status),
                 ]);
 
-
                 if (isMounted) {
                     setMessages(messages);
                     setStatusTotal(statusTotal);
@@ -93,10 +92,8 @@ export function useMessages(query: string, currentTab: LogTabs, sortNewest: bool
 
     }, [debouncedQuery, sortNewest, numDisplayedMessages, currentTab, pending]);
 
-
     return { messages, statusTotal, total, pending, reset: () => setPending(true) };
 }
-
 
 function getStatus(currentTab: LogTabs) {
     switch (currentTab) {

@@ -39,7 +39,6 @@ const settings = definePluginSettings({
     }
 });
 
-
 export default definePlugin({
     name: "CtrlEnterSend",
     description: () => t(plugin.ctrlEnterSend.description),

@@ -84,7 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.documentElement.append(plexcordRootNode);
 }, { once: true });
 
-
 export function requireStyle(name: string) {
     const style = styleMap.get(name);
     if (!style) throw new Error(`Style "${name}" does not exist`);

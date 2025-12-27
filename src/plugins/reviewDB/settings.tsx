@@ -87,7 +87,6 @@ export const settings = definePluginSettings({
                     {t(plugin.reviewDB.option.buttons.website)}
                 </Button>
 
-
                 <Button onClick={() => {
                     PlexcordNative.native.openExternal("https://discord.gg/eWPBSbvznt");
                 }}>

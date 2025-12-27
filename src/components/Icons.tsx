@@ -590,7 +590,6 @@ export function ChangelogIcon(props: IconProps) {
     );
 }
 
-
 export function PatchHelperIcon(props: IconProps) {
     return (
         <Icon {...props} viewBox="0 0 24 24">

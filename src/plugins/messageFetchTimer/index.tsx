@@ -150,7 +150,6 @@ function handleMessageLoad(data: any) {
     currentFetch = null;
 }
 
-
 export default definePlugin({
     name: "MessageFetchTimer",
     description: () => t(plugin.messageFetchTimer.description),

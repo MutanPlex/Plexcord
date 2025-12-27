@@ -38,7 +38,6 @@ async function fetchImage(url: string) {
     return await res.blob();
 }
 
-
 const settings = definePluginSettings({
     // This needs to be all in one setting because to enable any of these, we need to make Discord use their desktop context
     // menu handler instead of the web one, which breaks the other menus that aren't enabled

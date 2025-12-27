@@ -32,7 +32,6 @@ export interface SoundLogEntry extends SoundEvent {
     users: { id: string, plays: number[]; }[];
 }
 
-
 export const cl = classNameFactory("pc-soundlog-");
 
 export function getEmojiUrl(emoji) {

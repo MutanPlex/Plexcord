@@ -109,7 +109,6 @@ function NotificationSettings() {
                 title={t(settings.notifications.missed.description)}
             />
 
-
             <Heading tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t(settings.notifications.timeout.label)}</Heading>
             <Paragraph className={Margins.bottom16}>{t(settings.notifications.timeout.description)}</Paragraph>
             <Slider

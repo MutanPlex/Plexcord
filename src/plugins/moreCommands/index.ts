@@ -22,7 +22,6 @@ import { plugin, t } from "@api/i18n";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
-
 function mock(input: string): string {
     let output = "";
     for (let i = 0; i < input.length; i++) {

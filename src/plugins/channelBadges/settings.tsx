@@ -230,7 +230,6 @@ const settings = definePluginSettings({
         onChange: reloadBadges,
     },
 
-
     textBadgeColor: {
         label: () => t(plugin.channelBadges.option.textBadgeColor.label),
         description: () => t(plugin.channelBadges.option.textBadgeColor.description),

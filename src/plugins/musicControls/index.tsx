@@ -92,7 +92,6 @@ export default definePlugin({
         },
     ],
 
-
     PanelWrapper({ PlexcordOriginal, ...props }) {
         const { showTidalControls, showTidalLyrics, showSpotifyLyrics, showSpotifyControls, LyricsPosition, showYoutubeMusicControls } = settings.store;
         return (

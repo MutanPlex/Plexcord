@@ -37,7 +37,6 @@ async function safeJsonParse(response: Response): Promise<any> {
     }
 }
 
-
 export async function setUserDatabaseTimezone(userId: string, timezone: string | null) {
     databaseTimezones[userId] = { value: timezone };
 }

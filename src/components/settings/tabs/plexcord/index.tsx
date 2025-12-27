@@ -279,7 +279,6 @@ function PlexcordSettings() {
 
             <Switches />
 
-
             {needsVibrancySettings && <VibrancySettings />}
 
             <NotificationSection />

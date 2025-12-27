@@ -28,7 +28,6 @@ import { ChannelStore } from "@webpack/common";
 import { convert } from "./converter";
 import { conversions, ConverterAccessory, ConvertIcon } from "./ConverterAccessory";
 
-
 export const settings = definePluginSettings({
     myUnits: {
         label: () => t(plugin.unitConverter.option.myUnits.label),

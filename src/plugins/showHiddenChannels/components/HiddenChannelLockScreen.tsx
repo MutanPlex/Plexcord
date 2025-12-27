@@ -83,7 +83,6 @@ const enum ChannelFlags {
     REQUIRE_TAG = 1 << 4
 }
 
-
 const ChatScrollClasses = findByPropsLazy("auto", "managedReactiveScroller");
 const ChannelBeginHeader = findComponentByCodeLazy("#{intl::ROLE_REQUIRED_SINGLE_USER_MESSAGE}");
 const TagComponent = findComponentByCodeLazy("#{intl::FORUM_TAG_A11Y_FILTER_BY_TAG}");

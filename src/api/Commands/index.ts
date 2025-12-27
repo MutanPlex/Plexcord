@@ -99,7 +99,6 @@ export const _handleCommand = function (cmd: PlexcordCommand, args: CommandArgum
     }
 } as never;
 
-
 /**
  * Prepare a Command Option for Discord by filling missing fields
  * @param opt

@@ -135,14 +135,12 @@ async function playSound(url: string) {
     });
 }
 
-
 export default definePlugin({
     name: "Demonstration",
     description: () => t(plugin.demonstration.description),
     authors: [Devs.Samwich, PcDevs.Panniku, PcDevs.MutanPlex],
     dependencies: ["AudioPlayerAPI"],
     settings,
-
 
     toolboxActions: () => ({
         [t(plugin.demonstration.toolbox.toggle)]() {

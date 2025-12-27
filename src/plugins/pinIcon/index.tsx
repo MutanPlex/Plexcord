@@ -17,7 +17,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-
 import { plugin, t } from "@api/i18n";
 import { Message } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";

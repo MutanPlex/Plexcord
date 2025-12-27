@@ -57,6 +57,10 @@ const UrlReplacementRules: Record<string, URLReplacementRule> = {
         match: /^https:\/\/(?:geo\.)?music\.apple\.com\/([a-z]{2}\/)?(album|artist|playlist|song|curator)\/([^/?#]+)\/?([^/?#]+)?(?:\?.*)?(?:#.*)?$/,
         replace: (_, lang, type, name, id) => id ? `itunes://music.apple.com/us/${type}/${name}/${id}` : `itunes://music.apple.com/us/${type}/${name}`
     },
+    vrcx: {
+        match: /^https:\/\/vrchat.com\/home\/(user|avatar|world|group)\/(.+)$/,
+        replace: (_, type, id) => `vrcx://${type}/${id}`,
+    }
 };
 
 const pluginSettings = definePluginSettings(
@@ -74,7 +78,6 @@ const pluginSettings = definePluginSettings(
         return acc;
     }, {} as SettingsDefinition)
 );
-
 
 const Native = PlexcordNative.pluginHelpers.OpenInApp as PluginNative<typeof import("./native")>;
 

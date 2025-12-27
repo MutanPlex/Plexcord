@@ -81,7 +81,6 @@ function isUrlValid(value: string) {
     return true;
 }
 
-
 function isImageKeyValid(value: string) {
     if (/https?:\/\/(cdn|media)\.discordapp\.(com|net)\//.test(value)) return t(plugin.customRPC.error.dontUse);
     if (/https?:\/\/(?!i\.)?imgur\.com\//.test(value)) return t(plugin.customRPC.error.imgur);

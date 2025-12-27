@@ -20,7 +20,6 @@ import css from "./styles.css?managed";
 
 const OptionClasses = findByPropsLazy("optionName", "optionIcon", "optionLabel");
 
-
 const requireCreateStickerModal = extractAndLoadChunksLazy(["stickerInspected]:"]);
 const requireSettingsMenu = extractAndLoadChunksLazy(['name:"UserSettings"'], /createPromise:.{0,20}(\i\.\i\("?.+?"?\).*?).then\(\i\.bind\(\i,"?(.+?)"?\)\).{0,50}"UserSettings"/);
 const PendingReplyStore = findStoreLazy("PendingReplyStore");

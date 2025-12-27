@@ -113,7 +113,6 @@ function PlexcordChatBarButtons(props: ChatBarProps) {
     );
 }
 
-
 export function _injectButtons(buttons: ReactNode[], props: ChatBarProps) {
     if (props.disabled) return;
 

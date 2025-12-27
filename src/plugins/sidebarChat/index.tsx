@@ -53,7 +53,6 @@ const { HeaderBar } = mapMangledModuleLazy(".themedMobile]:", {
     HeaderBar: filters.byCode(".themedMobile]:"),
 });
 
-
 const { ForumView } = mapMangledModuleLazy("forum-grid-header-section-", {
     ForumView: filters.byCode("sidebarState")
 });
@@ -140,7 +139,6 @@ const handleToggle = () => {
         type: "PC_SIDEBAR_CHAT_PREVIOUS",
     });
 };
-
 
 export default definePlugin({
     name: "SidebarChat",

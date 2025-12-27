@@ -171,7 +171,6 @@ export default definePlugin({
         }
     },
 
-
     buildSeveralUsers,
 
     renderTypingUsers: ErrorBoundary.wrap(({ guildId, users, children }: PropsWithChildren<{ guildId: string, users: User[]; }>) => {

@@ -65,7 +65,6 @@ export function initWs(isManual = false) {
             }));
         }
 
-
         try {
             if (settings.store.notifyOnAutoConnect || isManual) {
                 Toasts.show({

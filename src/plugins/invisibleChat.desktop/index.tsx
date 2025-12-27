@@ -48,7 +48,6 @@ const PopOverIcon: IconComponent = ({ height = 24, width = 24, className }) => {
     );
 };
 
-
 function Indicator() {
     return (
         <Tooltip text={t(plugin.invisibleChat.tooltip.hidden)}>

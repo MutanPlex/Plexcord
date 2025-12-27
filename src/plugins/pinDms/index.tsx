@@ -130,7 +130,6 @@ export default definePlugin({
             ]
         },
 
-
         // forceUpdate moment
         // https://regex101.com/r/kDN9fO/1
         {
@@ -311,7 +310,6 @@ export default definePlugin({
                                 label={t(plugin.pinDMs.context.category.delete)}
                                 action={() => removeCategory(category.id)}
                             />
-
 
                         </Menu.Menu>
                     ));

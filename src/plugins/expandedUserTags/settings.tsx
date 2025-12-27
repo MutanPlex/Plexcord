@@ -5,8 +5,6 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-
-
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Card } from "@components/Card";

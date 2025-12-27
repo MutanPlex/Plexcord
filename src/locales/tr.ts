@@ -5810,6 +5810,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 itunes: {
                     label: "iTunes",
                     description: "Apple Music bağlantılarını iTunes uygulamasında aç"
+                },
+                vrcx: {
+                    label: "VRChat",
+                    description: "VRChat bağlantılarını VRChat uygulamasında aç"
                 }
             },
             notification: {
@@ -6094,28 +6098,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Mesajınızı göndermeden önce önizlemenizi sağlar.",
             tooltip: "Mesajı Önizle"
         },
-        questCompleter: {
-            name: "QuestCompleter",
-            description: "Oyunu yüklemeden görevleri tamamlamanı sağlayan bir eklenti.",
-            tooltip: "Görevleri Tamamla",
-            alert: {
-                title: "Görev Tamamlayıcı",
-                noQuest: "Tamamlanacak görev yok. Görevler sekmesine gitmek için tıklayın.",
-                completed: "Görev tamamlandı.",
-                spoofingVideo: "{{applicationName}} için video taklidi yapılıyor",
-                spoofingApplication: "{{applicationName}} için uygulama taklidi yapılıyor",
-                currentProgress: "Mevcut İlerleme: {{progress}}/{{goal}} saniye",
-                notStreaming: "Yayın yapmıyorsun",
-                startStreaming: "{{applicationName}} senin yayın yapmanı gerektiriyor. Lütfen ses kanalında herhangi bir pencereyi yayınla.",
-                onePersonNeeded: "Unutma, ses kanalında en az 1 kişinin daha olması gerekiyor!",
-                streamMore: "Ses kanalında herhangi bir pencereyi {{seconds}} dakika daha yayınla."
-            }
-        },
-        questFocused: {
-            name: "QuestFocused",
-            description: "Görev oynatıcısının duraklamasını engeller ve mümkünse tamamen atlamanı sağlar.",
-            about: "Videoyu atlamak için sol fare tuşuna birkaç kez tıklaman gerekebilir."
-        },
         questify: {
             name: "Questify",
             description: "Görev deneyiminizi bir dizi özellik ile geliştirin veya istediğiniz değilse tamamen devre dışı bırakın.",
@@ -6242,8 +6224,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     inventory: "Hediye Envanteri Taşıma Bildirimini Devre Dışı Bırak",
                     friendsList: "Arkadaş Listesi Şu Anda Aktif Tanıtımı",
                     membersList: "Üyeler Listesi Aktif Oynuyor Simgeleri",
-                    gameQuests: "Oyun Görevlerini Arka Planda Tamamla",
-                    videoQuests: "Video Görevlerini Arka Planda Tamamla",
+                    gameQuests: "Oyun/Aktivite Görevlerini Arka Planda Tamamla",
+                    videoQuests: "Video İzleme Görevlerini Arka Planda Tamamla",
+                    achievementQuests: "Aktivite içindeki Görevlerini Arka Planda Tamamla",
                     mobileDesktop: "Mobil Görevleri Masaüstü ile Uyumlu Hale Getir",
                     notifyOnComplete: "Görev Tamamlandığında Bildir"
                 },
@@ -6321,6 +6304,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 completeGameQuestsInBackground: {
                     label: "Oyun Görevlerini Arka Planda Tamamla",
                     description: "Oyun Görevlerini, oyun süresi geçtikten sonra arka planda tamamla."
+                },
+                completeAchievementQuestsInBackground: {
+                    label: "Aktivite Görevlerini Arka Planda Tamamla",
+                    description: "Aktivite Görevlerini arka planda tamamla."
                 },
                 notifyOnQuestComplete: {
                     label: "Görev Tamamlandığında Bildir",
@@ -6474,7 +6461,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             button: {
                 questInProgressWithTime: "Tamamlanıyor ({{remainTime}})",
                 completing: "Tamamlanıyor",
-                resume: "Devam Et (~{{remainTime}})"
+                resume: "Devam Et (~{{remainTime}})",
+                complete: "Tamamla {{remainTime}}",
+                completeImmediate: "Tamamla (Hemen)"
             },
             notification: {
                 completed: {

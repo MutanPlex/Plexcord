@@ -224,7 +224,6 @@ function SpotifySeekBar() {
     );
 }
 
-
 function AlbumContextMenu({ track }: { track: Track; }) {
     const volume = useStateFromStores([SpotifyStore], () => SpotifyStore.volume);
 

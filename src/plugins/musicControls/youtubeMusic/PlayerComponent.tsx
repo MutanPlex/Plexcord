@@ -349,7 +349,6 @@ export function YtmPlayer() {
     const isPlaying = useStateFromStores([YoutubeMusicStore], () => YoutubeMusicStore.isPlaying);
     const [shouldHide, setShouldHide] = useState(false);
 
-
     useEffect(() => {
         setShouldHide(false);
         if (!isPlaying) {

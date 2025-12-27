@@ -11,7 +11,6 @@ import { GithubIcon, WebsiteIcon } from "@components/Icons";
 import { getTheme, Theme } from "@utils/discord";
 import { MaskedLink, Tooltip } from "@webpack/common";
 
-
 export function GithubLinkIcon() {
     const theme = getTheme() === Theme.Light ? "#000000" : "#FFFFFF";
     return <GithubIcon aria-hidden fill={theme} className={"pc-settings-modal-link-icon"} />;

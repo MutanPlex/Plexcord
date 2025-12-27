@@ -40,7 +40,6 @@ export default definePlugin({
         ]
     }],
 
-
     getStartupTimingsLabel() {
         return t(plugin.startupTimings.modal.title);
     },

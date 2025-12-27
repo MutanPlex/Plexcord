@@ -39,7 +39,6 @@ class NoteHandler {
         };
     }
 
-
     public getNotes(notebook?: string): Record<string, HolyNotes.Note> {
         return noteHandlerCache.get(notebook);
     }
@@ -224,4 +223,3 @@ const noteHandler: {
 } = new NoteHandler();
 
 export default noteHandler;
-

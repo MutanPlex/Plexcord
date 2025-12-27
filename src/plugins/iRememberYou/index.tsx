@@ -216,7 +216,6 @@ class DataUI {
     renderUsersCollectionRows(key: string, users: IStorageUser[]) {
         const usersElements = users.map(user => this.renderUserRow(user));
 
-
         return <aside key={key} >
             <div className={"pc-i-remember-you-user-header-container"}>
                 <BaseText className={Margins.bottom8}>{key.toUpperCase()}</BaseText>
@@ -361,7 +360,6 @@ class DataUI {
                     <Heart />
                 </BaseText>
 
-
                 {this.renderSectionDescription()}
                 <br />
                 {this.renderSearchElement(usersCollection)}
@@ -417,7 +415,6 @@ export default definePlugin({
         ).customSections;
         const i = customSettingsSections.findIndex(s => s({}).id === "IRememberYou");
         if (i !== -1) customSettingsSections.splice(i, 1);
-
 
         removeMessagePreSendListener(dataManager._onMessagePreSend_preSend);
         clearInterval(dataManager._storageAutoSaveProtocol_interval);

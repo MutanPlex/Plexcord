@@ -80,12 +80,10 @@ export async function deleteImage(attachmentId: string): Promise<void> {
     if (idbPath)
         return await del(idbPath, ImageStore);
 
-
     if (IS_WEB) return;
 
     await Native.deleteFileNative(attachmentId);
 }
-
 
 async function downloadAttachmentWeb(attachment: LoggedAttachment, attempts = 0) {
     if (!attachment?.url || !attachment?.id || !attachment?.fileExtension) {

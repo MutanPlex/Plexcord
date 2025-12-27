@@ -16,7 +16,6 @@ import { openUserSettingsPanel, useState } from "@webpack/common";
 import { registerAction } from "./commands";
 import { openCommandPalette } from "./components/CommandPalette";
 
-
 const cl = classNameFactory("pc-command-palette-");
 let isRecordingGlobal: boolean = false;
 
@@ -89,7 +88,6 @@ export const settings = definePluginSettings({
     }
 });
 
-
 export default definePlugin({
     name: "CommandPalette",
     description: () => t(plugin.commandPalette.description),
@@ -110,7 +108,6 @@ export default definePlugin({
     stop() {
         document.removeEventListener("keydown", this.event);
     },
-
 
     event(e: KeyboardEvent) {
 

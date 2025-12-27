@@ -45,7 +45,6 @@ function tokenizeMessage(text: string): string[] {
     return tokens;
 }
 
-
 export function createWordDiff(oldText: string, newText: string): DiffPart[] {
     // suffix shit, if oldText is shorter than newText and newText starts with oldText
     if (oldText.length < newText.length && newText.startsWith(oldText)) {

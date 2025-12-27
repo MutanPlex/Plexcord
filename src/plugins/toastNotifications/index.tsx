@@ -396,8 +396,6 @@ async function handleGuildMessage(message: Message) {
     const all = notifyFor.includes(message.channel_id);
     const friend = settings.store.friendServerNotifications && RelationshipStore.isFriend(message.author.id);
 
-
-
     if (!all && !friend) {
         isAllOrFriend = true;
         const isMention: boolean = message.content.includes(`<@${UserStore.getCurrentUser().id}>`);
@@ -516,7 +514,6 @@ async function relationshipAdd(user: User, type: Number) {
         Notification.title = t(plugin.toastNotifications.notification.friend.accept, { user: user.username });
         Notification.body = t(plugin.toastNotifications.notification.friend.acceptBody);
         Notification.onClick = () => switchChannels(null, user.id);
-
 
         await showNotification(Notification);
 

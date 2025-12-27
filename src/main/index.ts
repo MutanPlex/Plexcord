@@ -71,7 +71,6 @@ if (IS_PLEXTRON || !IS_VANILLA) {
                     .catch(err => console.error("[Plexcord] Failed to install React Developer Tools", err));
         } catch { }
 
-
         initCsp();
     });
 }

@@ -18,7 +18,6 @@ import { ChannelContextPatch, GuildContextPatch, UserContextPatch } from "./comp
 import { GlobalDefaultComponent, TipsComponent } from "./components/util";
 import { WallpaperFreeStore } from "./store";
 
-
 export const settings = definePluginSettings({
     globalDefault: {
         label: () => t(plugin.wallpaperFree.option.globalDefault.label),

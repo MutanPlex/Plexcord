@@ -192,7 +192,6 @@ class YoutubeMusicSocket {
             this.onChange({ position: 0, isPlaying: false, song: undefined });
         });
 
-
         this.socket.addEventListener("message", e => {
             let message: Message;
             try {
@@ -250,7 +249,6 @@ export const YoutubeMusicStore: ReturnType<typeof proxyLazyWebpack<IYoutubeMusic
             // https://music.youtube.com/watch?v=BSHYPb15W-Y
             PlexcordNative.native.openExternal(url);
         }
-
 
         set position(p: number) {
             this.mPosition = p * 1000;

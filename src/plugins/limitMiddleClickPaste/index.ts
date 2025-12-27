@@ -22,7 +22,6 @@ import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 
-
 const settings = definePluginSettings({
     limitTo: {
         label: () => t(plugin.limitMiddleClickPaste.option.limitTo.label),

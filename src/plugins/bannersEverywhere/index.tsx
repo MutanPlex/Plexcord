@@ -47,7 +47,6 @@ const DATASTORE_KEY = "bannersEverywhere";
 
 const UserProfileStore = findStoreLazy("UserProfileStore");
 
-
 export default definePlugin({
     name: "BannersEverywhere",
     description: () => t(plugin.bannersEverywhere.description),

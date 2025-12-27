@@ -42,7 +42,6 @@ export function MultipleChoice({ modalProps, onSelect, choices }: MultipleChoice
         }
     );
 
-
     const visibleActions = filteredActions.slice(startIndex, startIndex + 20);
 
     const totalActions = filteredActions.length;

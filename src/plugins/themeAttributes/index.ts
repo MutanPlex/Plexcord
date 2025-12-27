@@ -12,7 +12,6 @@ import { Logger } from "@utils/Logger";
 import definePlugin from "@utils/types";
 import { UserStore } from "@webpack/common";
 
-
 export default definePlugin({
     name: "ThemeAttributes",
     description: () => t(plugin.themeAttributes.description),

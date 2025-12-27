@@ -166,4 +166,3 @@ export const Themes = $Themes;
  * LocaleLoader for managing plugin translations
  */
 export { definePluginLocales, LocaleLoader } from "./LocaleLoader";
-

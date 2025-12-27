@@ -115,7 +115,6 @@ export function NewPluginsModal({ modalProps, newPlugins, newSettings }: { modal
         }
     }
 
-
     return <ModalRoot {...modalProps} size={ModalSize.MEDIUM} >
         <ModalHeader>
             <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t(plugin.newPluginsManager.modal.title)} ({[...pluginCards, ...requiredPlugins].length})</BaseText>
