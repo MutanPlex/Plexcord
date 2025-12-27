@@ -36,7 +36,6 @@ export let PermissionStore: GenericStore;
 export let GuildChannelStore: t.GuildChannelStore;
 export let ReadStateStore: GenericStore;
 export let PresenceStore: t.PresenceStore;
-export let UploadAttachmentStore: GenericStore;
 export let VoiceStateStore: t.VoiceStateStore;
 
 export let GuildStore: t.GuildStore;
@@ -56,10 +55,12 @@ export let StickersStore: t.StickersStore;
 export let ThemeStore: t.ThemeStore;
 export let WindowStore: t.WindowStore;
 export let DraftStore: t.DraftStore;
-export let MediaEngineStore: t.MediaEngineStore;
 export let StreamerModeStore: t.StreamerModeStore;
+
+export let MediaEngineStore: t.MediaEngineStore;
 export let SpellCheckStore: t.SpellCheckStore;
-export let OverridePremiumTypeStore: GenericStore;
+export let UploadAttachmentStore: t.UploadAttachmentStore;
+export let OverridePremiumTypeStore: t.OverridePremiumTypeStore;
 
 /**
  * @see jsdoc of {@link t.useStateFromStores}

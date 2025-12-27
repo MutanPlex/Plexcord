@@ -7,32 +7,47 @@
 
 import i18n, { changelog, cloud, patchHelper, plugin, plugins, settings as settingsI18n, SUPPORTED_LANGUAGES, sync, t, themes, updater } from "@api/i18n";
 import { definePluginSettings, Settings } from "@api/Settings";
-import { BackupRestoreIcon, ChangelogIcon, CloudIcon, MainSettingsIcon, PaintbrushIcon, PatchHelperIcon, PlaceholderIcon, PlextronSettingsIcon, PluginsIcon, UpdaterIcon } from "@components/index";
+import { BackupRestoreIcon, ChangelogIcon, CloudIcon, MainSettingsIcon, PaintbrushIcon, PatchHelperIcon, PluginsIcon, UpdaterIcon } from "@components/index";
 import { BackupAndRestoreTab, ChangelogTab, CloudTab, PatchHelperTab, PlexcordTab, PluginsTab, ThemesTab, UpdaterTab } from "@components/settings/tabs";
 import { Devs, PcDevs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import { isTruthy } from "@utils/guards";
 import definePlugin, { IconProps, OptionType } from "@utils/types";
-import { waitFor } from "@webpack";
+import { findByPropsLazy } from "@webpack";
 import { React } from "@webpack/common";
 import type { ComponentType, PropsWithChildren, ReactNode } from "react";
 
 import gitHash from "~git-hash";
 
-let LayoutTypes = {
-    SECTION: 1,
-    SIDEBAR_ITEM: 2,
-    PANEL: 3,
-    PANE: 4
-};
-waitFor(["SECTION", "SIDEBAR_ITEM", "PANEL"], v => LayoutTypes = v);
+const enum LayoutType {
+    ROOT = 0,
+    SECTION = 1,
+    SIDEBAR_ITEM = 2,
+    PANEL = 3,
+    SPLIT = 4,
+    CATEGORY = 5,
+    ACCORDION = 6,
+    LIST = 7,
+    RELATED = 8,
+    FIELD_SET = 9,
+    TAB_ITEM = 10,
+    STATIC = 11,
+    BUTTON = 12,
+    TOGGLE = 13,
+    SLIDER = 14,
+    SELECT = 15,
+    RADIO = 16,
+    NAVIGATOR = 17,
+    CUSTOM = 18
+}
 
-const FallbackSectionTypes = {
-    HEADER: "HEADER",
-    DIVIDER: "DIVIDER",
-    CUSTOM: "CUSTOM"
-};
-type SectionTypes = typeof FallbackSectionTypes;
+const LayoutTypes: typeof LayoutType = findByPropsLazy("SECTION", "SIDEBAR_ITEM", "PANEL");
+
+const enum SectionType {
+    HEADER = "HEADER",
+    DIVIDER = "DIVIDER",
+    CUSTOM = "CUSTOM"
+}
 
 type SettingsLocation =
     | "top"
@@ -43,7 +58,7 @@ type SettingsLocation =
     | "bottom";
 
 interface SettingsLayoutNode {
-    type: number;
+    type: LayoutType;
     key?: string;
     legacySearchKey?: string;
     useLabel?(): string;
@@ -51,6 +66,7 @@ interface SettingsLayoutNode {
     buildLayout?(): SettingsLayoutNode[];
     icon?(): ReactNode;
     render?(): ReactNode;
+    StronglyDiscouragedCustomComponent?(): ReactNode;
 }
 
 interface EntryOptions {
@@ -149,12 +165,10 @@ export default definePlugin({
                 },
             ]
         },
-        // Fix the settings cog context menu to work properly
         {
             find: "#{intl::USER_SETTINGS_ACTIONS_MENU_LABEL}",
             replacement: {
-                // Skip the check Discord performs to make sure the section being selected in the user settings context menu is valid
-                match: /(?<=function\((\i),(\i),\i\)\{)(?=let \i=Object.values\(\i\.\i\).+?(\(0,\i\.openUserSettings\))\()/,
+                match: /(?<=function\((\i),(\i),\i\)\{)(?=let \i=Object\.values\(\i\.\i\).+?(\(0,\i\.openUserSettings\))\()/,
                 replace: (_, settingsPanel, section, openUserSettings) => `${openUserSettings}(${settingsPanel},{section:${section}});return;`
             }
         },
@@ -181,38 +195,19 @@ export default definePlugin({
             key: key + "_panel",
             type: LayoutTypes.PANEL,
             useTitle: () => panelTitle,
-        };
-
-        const render = {
-            // FIXME
+            buildLayout: () => [],
             StronglyDiscouragedCustomComponent: () => <Component />,
             render: () => <Component />,
         };
 
-        // FIXME
-        if (LayoutTypes.PANE) {
-            panel.buildLayout = () => [
-                {
-                    key: key + "_pane",
-                    type: LayoutTypes.PANE,
-                    useTitle: () => panelTitle,
-                    buildLayout: () => [],
-                    ...render
-                }
-            ];
-        } else {
-            Object.assign(panel, render);
-            panel.buildLayout = () => [];
-        }
-
-        return ({
+        return {
             key,
             type: LayoutTypes.SIDEBAR_ITEM,
             legacySearchKey: title.toUpperCase(),
             useTitle: () => title,
             icon: () => <Icon width={20} height={20} />,
             buildLayout: () => [panel]
-        });
+        };
     },
 
     getSettingsSectionMappings() {
@@ -293,19 +288,7 @@ export default definePlugin({
                 Component: PatchHelperTab,
                 Icon: PatchHelperIcon
             }),
-            ...this.customEntries.map(buildEntry),
-            // TODO: Remove deprecated customSections in a future update
-            ...this.customSections.map((func, i) => {
-                const { section, element, label } = func(FallbackSectionTypes);
-                if (Object.values(FallbackSectionTypes).includes(section)) return null;
-
-                return buildEntry({
-                    key: `plexcord_deprecated_custom_${section}`,
-                    title: label,
-                    Component: element,
-                    Icon: section === "Plextron" ? PlextronSettingsIcon : PlaceholderIcon
-                });
-            })
+            ...this.customEntries.map(buildEntry)
         ].filter(isTruthy);
 
         const plexcordSection: SettingsLayoutNode = {
@@ -342,11 +325,10 @@ export default definePlugin({
         return layout;
     },
 
-    /** @deprecated Use customEntries */
-    customSections: [] as ((SectionTypes: SectionTypes) => any)[],
+    customSections: [] as ((SectionTypes: Record<string, string>) => { section: string; element: ComponentType; label: string; id?: string; })[],
     customEntries: [] as EntryOptions[],
 
-    makeSettingsCategories(SectionTypes: SectionTypes) {
+    makeSettingsCategories(SectionTypes: Record<string, string>) {
         return [
             {
                 section: SectionTypes.HEADER,
@@ -416,7 +398,6 @@ export default definePlugin({
 
     isRightSpot({ header, settings: s }: { header?: string; settings?: string[]; }) {
         const firstChild = s?.[0];
-        // lowest two elements... sanity backup
         if (firstChild === "LOGOUT" || firstChild === "SOCIAL_LINKS") return true;
 
         const { settingsLocation } = pluginSettings.store;
@@ -445,35 +426,35 @@ export default definePlugin({
 
     patchedSettings: new WeakSet(),
 
-    addSettings(elements: any[], element: { header?: string; settings: string[]; }, sectionTypes: SectionTypes) {
+    addSettings(elements: any[], element: { header?: string; settings: string[]; }, SectionTypes: Record<string, string>,) {
         if (this.patchedSettings.has(elements) || !this.isRightSpot(element)) return;
 
         this.patchedSettings.add(elements);
 
-        elements.push(...this.makeSettingsCategories(sectionTypes));
+        elements.push(...this.makeSettingsCategories(SectionTypes));
     },
 
     wrapSettingsHook(originalHook: (...args: any[]) => Record<string, unknown>[]) {
         return (...args: any[]) => {
             const elements = originalHook(...args);
             if (!this.patchedSettings.has(elements))
-                elements.unshift(...this.makeSettingsCategories(FallbackSectionTypes));
+                elements.unshift(...this.makeSettingsCategories({ HEADER: SectionType.HEADER, DIVIDER: SectionType.DIVIDER, CUSTOM: SectionType.CUSTOM }) as Record<string, unknown>[]);
 
             return elements;
         };
     },
 
     get electronVersion() {
-        return PlexcordNative.native.getVersions().electron || window.legcord?.electron || null;
+        return PlexcordNative.native.getVersions().electron ?? window.legcord?.electron ?? null;
     },
 
     get chromiumVersion() {
         try {
             return PlexcordNative.native.getVersions().chrome
-                // @ts-expect-error Typescript will add userAgentData IMMEDIATELY
-                || navigator.userAgentData?.brands?.find(b => b.brand === "Chromium" || b.brand === "Google Chrome")?.version
-                || null;
-        } catch { // inb4 some stupid browser throws unsupported error for navigator.userAgentData, it's only in chromium
+                // @ts-expect-error userAgentData types
+                ?? navigator.userAgentData?.brands?.find((b: { brand: string; }) => b.brand === "Chromium" || b.brand === "Google Chrome",)?.version
+                ?? null;
+        } catch {
             return null;
         }
     },

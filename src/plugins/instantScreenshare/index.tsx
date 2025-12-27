@@ -22,18 +22,20 @@ const startStream = findByCodeLazy('type:"STREAM_START"');
 const StreamPreviewSettings = getUserSettingLazy("voiceAndVideo", "disableStreamPreviews")!;
 const ApplicationStreamingSettingsStore = findStoreLazy("ApplicationStreamingSettingsStore");
 
-async function autoStartStream() {
+async function autoStartStream(instant = true) {
     const selected = SelectedChannelStore.getVoiceChannelId();
     if (!selected) return;
 
     const channel = ChannelStore.getChannel(selected);
+    if (!channel) return;
+
     const isGuildChannel = !channel.isDM() && !channel.isGroupDM();
 
     if (channel.type === 13 || isGuildChannel && !PermissionStore.can(PermissionsBits.STREAM, channel)) return;
 
-    if (settings.store.autoDeafen && !MediaEngineStore.isSelfDeaf()) {
+    if (settings.store.autoDeafen && !MediaEngineStore.isSelfDeaf() && instant) {
         VoiceActions.toggleSelfDeaf();
-    } else if (settings.store.autoMute && !MediaEngineStore.isSelfMute()) {
+    } else if (settings.store.autoMute && !MediaEngineStore.isSelfMute() && instant) {
         VoiceActions.toggleSelfMute();
     }
 
@@ -62,7 +64,8 @@ export default definePlugin({
     name: "InstantScreenshare",
     description: () => t(plugin.instantScreenshare.description),
     authors: [Devs.HAHALOSAH, Devs.thororen, PcDevs.mart],
-    getCurrentMedia,
+    tags: ["ScreenshareKeybind"],
+    autoStartStream,
     settings,
 
     settingsAboutComponent: () => (
@@ -86,9 +89,28 @@ export default definePlugin({
         </>
     ),
 
+    patches: [
+        {
+            find: "DISCONNECT_FROM_VOICE_CHANNEL]",
+            predicate: () => settings.store.keybindScreenshare,
+            replacement: {
+                match: /\[\i\.\i\.DISCONNECT_FROM_VOICE_CHANNEL/,
+                replace: '["INSTANT_SCREEN_SHARE"]:{onTrigger(){$self.autoStartStream(false)},keyEvents:{keyUp:!1,keyDown:!0,blurred:!1,focused:!0}},$&'
+            },
+        },
+        {
+            find: "keybindActionTypes()",
+            predicate: () => settings.store.keybindScreenshare,
+            replacement: {
+                match: /=\[(\{value:\i\.\i\.UNASSIGNED)/,
+                replace: '=[{value:"INSTANT_SCREEN_SHARE",label:"Instant Screenshare"},$1'
+            }
+        }
+    ],
+
     flux: {
         async VOICE_STATE_UPDATES({ voiceStates }: { voiceStates: VoiceState[]; }) {
-            if (!settings.store.toolboxManagement) return;
+            if (!settings.store.toolboxManagement || !settings.store.instantScreenshare) return;
             const myId = UserStore.getCurrentUser().id;
             for (const state of voiceStates) {
                 const { userId, channelId } = state;

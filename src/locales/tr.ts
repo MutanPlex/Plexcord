@@ -4293,6 +4293,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Otomatik Sağırlaştır",
                     description: "Bir ses kanalına katıldığında otomatik olarak sağırlaştır (aynı zamanda seni de sessize alır)"
                 },
+                instantScreenshare: {
+                    label: "Anında Ekran Paylaşımı",
+                    description: "Otomatik ekran paylaşımı özelliğini etkinleştirir"
+                },
+                keybindScreenshare: {
+                    label: "Kısayol Tuşu ile Ekran Paylaşımı",
+                    description: "Discord kısayol tuşları ayarlarında kısayol tuşu ile ekran paylaşımı yapar"
+                },
                 toolboxManagement: {
                     label: "Araç Kutusu Yönetimi",
                     description: "Anında Ekran Paylaşımını Etkinleştir/Devre Dışı Bırak"

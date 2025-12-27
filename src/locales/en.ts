@@ -4289,6 +4289,14 @@ const translations = {
                     label: "Auto Deafen",
                     description: "Automatically deafen when joining a voice channel (also mutes you)"
                 },
+                instantScreenshare: {
+                    label: "Instant Screenshare",
+                    description: "Enables automatic screenshare feature"
+                },
+                keybindScreenshare: {
+                    label: "Keybind Screenshare",
+                    description: "Screenshare by keybind in discord keybind settings"
+                },
                 toolboxManagement: {
                     label: "Toolbox Management",
                     description: "Enable/Disable Instant Screenshare"

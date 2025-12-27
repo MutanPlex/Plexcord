@@ -18,12 +18,12 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { ChannelType } from "@plexcord/discord-types/enums";
+import { ChannelType, RelationshipType } from "@plexcord/discord-types/enums";
 import { getUniqueUsername, openUserProfile } from "@utils/discord";
 import { UserUtils } from "@webpack/common";
 
 import settings from "./settings";
-import { ChannelDelete, GuildDelete, RelationshipRemove, RelationshipType } from "./types";
+import { ChannelDelete, GuildDelete, RelationshipRemove } from "./types";
 import { deleteGroup, deleteGuild, getGroup, getGuild, GuildAvailabilityStore, notify } from "./utils";
 
 let manuallyRemovedFriend: string | undefined;

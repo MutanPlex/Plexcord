@@ -8,6 +8,7 @@
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Heading } from "@components/Heading";
+import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
 import { Logger } from "@utils/Logger";
 import { OptionType } from "@utils/types";
@@ -43,6 +44,19 @@ export const settings = definePluginSettings({
         label: () => t(plugin.instantScreenshare.option.autoDeafen.label),
         description: () => t(plugin.instantScreenshare.option.autoDeafen.description),
         type: OptionType.BOOLEAN,
+        default: false,
+    },
+    instantScreenshare: {
+        label: () => t(plugin.instantScreenshare.option.instantScreenshare.label),
+        description: () => t(plugin.instantScreenshare.option.instantScreenshare.description),
+        type: OptionType.BOOLEAN,
+        default: true,
+    },
+    keybindScreenshare: {
+        label: () => t(plugin.instantScreenshare.option.keybindScreenshare.label),
+        description: () => t(plugin.instantScreenshare.option.keybindScreenshare.description),
+        type: OptionType.BOOLEAN,
+        restartNeeded: true,
         default: false,
     },
     toolboxManagement: {
@@ -144,7 +158,7 @@ function SettingSection() {
     return (
         <section>
             <Heading>{t(plugin.instantScreenshare.option.streamMedia.label)}</Heading>
-            <Paragraph>{t(plugin.instantScreenshare.option.streamMedia.description)}</Paragraph>
+            <Paragraph className={Margins.bottom20}>{t(plugin.instantScreenshare.option.streamMedia.description)}</Paragraph>
             <ScreenSetting />
         </section>
     );

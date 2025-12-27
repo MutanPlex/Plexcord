@@ -22,14 +22,12 @@ import { showNotification } from "@api/Notifications";
 import { definePluginSettings, Settings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Channel, Message, User } from "@plexcord/discord-types";
-import { MessageType } from "@plexcord/discord-types/enums";
+import { MessageType, RelationshipType } from "@plexcord/discord-types/enums";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy, findStore } from "@webpack";
 import { ChannelStore, GuildRoleStore, NavigationRouter, RelationshipStore, SelectedChannelStore, StreamerModeStore, UserStore } from "@webpack/common";
 import { ReactNode } from "react";
-
-import { RelationshipType } from "./types";
 
 interface NotificationData {
     title: string;

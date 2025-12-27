@@ -17,13 +17,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-export const enum RelationshipType {
-    FRIEND = 1,
-    BLOCKED = 2,
-    INCOMING_REQUEST = 3,
-    OUTGOING_REQUEST = 4,
-}
-
 export const enum StreamingTreatment {
     NORMAL = 0,
     NO_CONTENT = 1,

@@ -10,6 +10,7 @@ export * from "./GuildRoleStore";
 export * from "./GuildStore";
 export * from "./MediaEngineStore";
 export * from "./MessageStore";
+export * from "./OverridePremiumTypeStore";
 export * from "./PresenceStore";
 export * from "./RelationshipStore";
 export * from "./SelectedChannelStore";
@@ -23,6 +24,7 @@ export * from "./UserProfileStore";
 export * from "./UserStore";
 export * from "./VoiceStateStore";
 export * from "./WindowStore";
+export * from "./UploadAttachmentStore";
 
 /**
  * React hook that returns stateful data for one or more stores

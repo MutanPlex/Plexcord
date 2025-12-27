@@ -22,13 +22,13 @@ import { plugin, t } from "@api/i18n";
 import { popNotice, showNotice } from "@api/Notices";
 import { showNotification } from "@api/Notifications";
 import { FluxStore } from "@plexcord/discord-types";
-import { ChannelType } from "@plexcord/discord-types/enums";
+import { ChannelType, RelationshipType } from "@plexcord/discord-types/enums";
 import { getUniqueUsername, openUserProfile } from "@utils/discord";
 import { findStoreLazy } from "@webpack";
 import { ChannelStore, GuildMemberStore, GuildStore, RelationshipStore, UserStore, UserUtils } from "@webpack/common";
 
 import settings from "./settings";
-import { RelationshipType, SimpleGroupChannel, SimpleGuild } from "./types";
+import { SimpleGroupChannel, SimpleGuild } from "./types";
 
 export const GuildAvailabilityStore = findStoreLazy("GuildAvailabilityStore") as FluxStore & {
     totalGuilds: number;
