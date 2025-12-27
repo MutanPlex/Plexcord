@@ -7,7 +7,6 @@
 
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
-import { migratePluginSettings } from "@api/Settings";
 import { Message } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
@@ -130,7 +129,6 @@ const keydownListener = (event: KeyboardEvent) => {
     if (event.key === "Shift") shift = true;
 };
 
-migratePluginSettings("RepeatMessages", "RepeatMessage");
 export default definePlugin({
     name: "RepeatMessages",
     description: () => t(plugin.repeatMessages.description),

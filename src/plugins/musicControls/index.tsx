@@ -20,7 +20,6 @@
 import "./styles.css";
 
 import { plugin, t } from "@api/i18n";
-import { migratePluginToSetting } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
@@ -32,9 +31,6 @@ import { SpotifyPlayer } from "./spotify/PlayerComponent";
 import { TidalLyrics } from "./tidal/lyrics/components/lyrics";
 import { TidalPlayer } from "./tidal/TidalPlayer";
 import { YtmPlayer } from "./youtubeMusic/PlayerComponent";
-
-migratePluginToSetting("MusicControls", "SpotifyControls", "showSpotifyControls");
-migratePluginToSetting("MusicControls", "SpotifyLyrics", "showSpotifyLyrics");
 
 export default definePlugin({
     name: "MusicControls",

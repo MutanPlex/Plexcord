@@ -19,7 +19,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
-import { definePluginSettings, migratePluginSettings } from "@api/Settings";
+import { definePluginSettings } from "@api/Settings";
 import OnekoPlugin from "@plugins/oneko";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
@@ -50,7 +50,6 @@ const settings = definePluginSettings({
     }
 });
 
-migratePluginSettings("Oneko", "oneko");
 export default definePlugin({
     name: "Oneko",
     description: () => t(plugin.oneko.description),
