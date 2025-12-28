@@ -24,11 +24,12 @@ import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
+import { TooltipContainer } from "@components/TooltipContainer";
 import { User } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
-import { DateUtils, RelationshipStore, TooltipContainer } from "@webpack/common";
+import { DateUtils, RelationshipStore } from "@webpack/common";
 import { PropsWithChildren } from "react";
 
 const formatter = new Intl.DateTimeFormat(undefined, {

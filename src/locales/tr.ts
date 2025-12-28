@@ -4433,7 +4433,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Bir kanalın veya özel mesajın başına ya da sonuna atlamak için sağ tık menüsüne seçenekler ekler.",
             context: {
                 top: "İlk Mesaja Git",
-                bottom: "Son Mesaja Git"
+                bottom: "Son Mesaja Git",
+                noMessages: "Bu kanalda bu kullanıcıdan mesaj bulunamadı.",
+                searchFailed: "Mesajlar aranırken hata oluştu."
             }
         },
         keepCurrentChannel: {
@@ -5106,6 +5108,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cacheLimit: {
                     label: "Önbellek Sınırı",
                     description: "Önbellekte tutulacak maksimum mesaj sayısı. Limit aşıldığında eski mesajlar silinir."
+                },
+                timeBasedCleanupMinutes: {
+                    label: "Zamana Dayalı Dakikalık Temizlik",
+                    description: "Mesaj sınırından daha eski mesajların zaman bazlı temizliğinin yapılacağı dakika aralığı."
+                },
+                preserveCurrentChannel: {
+                    label: "Geçerli Kanalı Koru",
+                    description: "Etkinleştirildiğinde, şu anda seçili kanalınızdaki mesajlar zaman bazlı temizlikten etkilenmez."
                 },
                 whitelistedIds: {
                     label: "Beyaz Liste Kimlikleri",
@@ -5916,13 +5926,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     user: "Avatarı resim olarak kullanılacak kullanıcı",
                     noServerPfp: "'user' seçeneğini kullanırken sunucuya özel yerine normal avatarı kullan",
                     error: {
-                        noImage: "Resim belirtilmedi!"
+                        noImage: "Resim belirtilmedi!",
+                        delayTooLow: "Gecikme en az 20 olmalıdır.",
                     }
                 }
             },
             error: {
                 uploadNotImage: "Yüklenen dosya bir resim değil",
-                fetchUserFailed: "Kullanıcı alınamadı. Daha fazla bilgi için konsolu kontrol edin."
+                fetchUserFailed: "Kullanıcı alınamadı. Daha fazla bilgi için konsolu kontrol edin.",
+                fetchImageFailed: "{{url}} yüklenirken bir hata oluştu. Daha fazla bilgi için konsolu kontrol edin."
             }
         },
         pictureInPicture: {
@@ -6110,7 +6122,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     fetch: "Görevleri Getir",
                     markAsIgnored: "Yoksay Olarak İşaretle",
                     unmarkAsIgnored: "Yoksaymayı Kaldır",
-                    stopAuto: "Otomatik Tamamlamayı Durdur"
+                    stopAuto: "Otomatik Tamamlamayı Durdur",
+                    copyQuestID: "Görev ID'sini Kopyala"
                 }
             },
             settings: {

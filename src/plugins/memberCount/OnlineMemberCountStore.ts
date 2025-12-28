@@ -6,7 +6,6 @@
  */
 
 import { proxyLazy } from "@utils/lazy";
-import { Logger } from "@utils/Logger";
 import { sleep } from "@utils/misc";
 import { Queue } from "@utils/Queue";
 import { ChannelActionCreators, Flux, FluxDispatcher, GuildChannelStore } from "@webpack/common";
@@ -24,12 +23,7 @@ export const OnlineMemberCountStore = proxyLazy(() => {
         async _ensureCount(guildId: string) {
             if (onlineMemberMap.has(guildId)) return;
 
-            const channel = GuildChannelStore.getDefaultChannel(guildId);
-            if (!channel) {
-                new Logger("MemberCount/OnlineMemberCountStore").warn(`No default channel found for guild id: ${guildId}`);
-                return;
-            }
-            await ChannelActionCreators.preload(guildId, channel.id);
+            await ChannelActionCreators.preload(guildId, GuildChannelStore.getDefaultChannel(guildId)!.id);
         }
 
         ensureCount(guildId?: string) {

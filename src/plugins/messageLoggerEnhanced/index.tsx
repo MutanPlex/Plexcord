@@ -15,7 +15,7 @@ import { Devs, PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { IconComponent } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { FluxDispatcher, MessageStore, React, UserStore } from "@webpack/common";
+import { FluxDispatcher, MessageStore, React, SelectedChannelStore, UserStore } from "@webpack/common";
 
 import { openLogModal } from "./components/LogsModal";
 import * as idb from "./db";
@@ -114,7 +114,8 @@ async function messageDeleteHandler(payload: MessageDeletePayload & { isBulk: bo
         if (payload.isBulk)
             return message;
 
-        await addMessage(message, ghostPinged ? idb.DBMessageStatus.GHOST_PINGED : idb.DBMessageStatus.DELETED);
+        const currentChannelId = SelectedChannelStore.getChannelId();
+        await addMessage(message, ghostPinged ? idb.DBMessageStatus.GHOST_PINGED : idb.DBMessageStatus.DELETED, currentChannelId);
     }
     finally {
         handledMessageIds.delete(payload.id);
@@ -130,6 +131,17 @@ async function messageDeleteBulkHandler({ channelId, guildId, ids }: MessageDele
     }
 
     await idb.addMessagesBulkIDB(messages);
+
+    if (messages.length > 0 && settings.store.timeBasedCleanupMinutes > 0) {
+        const currentChannelId = SelectedChannelStore.getChannelId();
+        const cutoffTime = new Date(Date.now() - settings.store.timeBasedCleanupMinutes * 60 * 1000).toISOString();
+        const oldGuildMessages = await idb.getOlderThanTimestampForGuildsIDB(cutoffTime, currentChannelId, settings.store.preserveCurrentChannel);
+
+        if (oldGuildMessages.length > 0) {
+            Flogger.info(`Deleting ${oldGuildMessages.length} old server messages older than ${settings.store.timeBasedCleanupMinutes} minutes (bulk cleanup)`);
+            await idb.deleteMessagesBulkIDB(oldGuildMessages.map(m => m.message_id));
+        }
+    }
 }
 
 async function messageUpdateHandler(payload: MessageUpdatePayload) {
@@ -179,7 +191,8 @@ async function messageUpdateHandler(payload: MessageUpdatePayload) {
     if (message == null || message.channel_id == null || message.editHistory == null || message.editHistory.length === 0) return;
 
     // Flogger.log("ADDING MESSAGE (EDITED)", message, payload);
-    await addMessage(message, idb.DBMessageStatus.EDITED);
+    const currentChannelId = SelectedChannelStore.getChannelId();
+    await addMessage(message, idb.DBMessageStatus.EDITED, currentChannelId);
 }
 
 function messageCreateHandler(payload: MessageCreatePayload) {

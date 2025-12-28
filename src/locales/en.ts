@@ -4429,7 +4429,9 @@ const translations = {
             description: "Adds context menu options to jump to the start or bottom of a channel/DM",
             context: {
                 top: "Jump to First Message",
-                bottom: "Jump to Latest Message"
+                bottom: "Jump to Latest Message",
+                noMessages: "No messages found from this user in this channel.",
+                searchFailed: "Failed to search for messages."
             }
         },
         keepCurrentChannel: {
@@ -5102,6 +5104,14 @@ const translations = {
                 cacheLimit: {
                     label: "Cache Limit",
                     description: "Maximum number of messages to keep in the cache. Older messages are deleted when the limit is reached."
+                },
+                timeBasedCleanupMinutes: {
+                    label: "Time Based Cleanup Minutes",
+                    description: "Interval in minutes to perform time based cleanup of messages older than the message limit."
+                },
+                preserveCurrentChannel: {
+                    label: "Preserve Current Channel",
+                    description: "When enabled, messages in your currently selected channel are not affected by time-based cleanup."
                 },
                 whitelistedIds: {
                     label: "Whitelisted IDs",
@@ -5912,13 +5922,15 @@ const translations = {
                     user: "User whose avatar to use as image",
                     noServerPfp: "Use the normal avatar instead of the server specific one when using the 'user' option",
                     error: {
-                        noImage: "No Image specified!"
+                        noImage: "No Image specified!",
+                        delayTooLow: "Delay must be at least 20.",
                     }
                 }
             },
             error: {
                 uploadNotImage: "Upload is not an image",
-                fetchUserFailed: "Failed to fetch user. Check the console for more info."
+                fetchUserFailed: "Failed to fetch user. Check the console for more info.",
+                fetchImageFailed: "An error occurred while loading {{url}}. Check the console for more info."
             }
         },
         pictureInPicture: {
@@ -6106,7 +6118,8 @@ const translations = {
                     fetch: "Fetch Quests",
                     markAsIgnored: "Mark as Ignored",
                     unmarkAsIgnored: "Unmark as Ignored",
-                    stopAuto: "Stop Auto-Complete"
+                    stopAuto: "Stop Auto-Complete",
+                    copyQuestID: "Copy Quest ID"
                 }
             },
             settings: {

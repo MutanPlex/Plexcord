@@ -16,8 +16,8 @@ import { IS_MAC } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { classes } from "@utils/misc";
 import { useForceUpdater } from "@utils/react";
-import { findComponentByCodeLazy, findStoreLazy } from "@webpack";
-import { ContextMenuApi, FluxDispatcher, useCallback, useEffect, useRef, UserStore, useState, useStateFromStores } from "@webpack/common";
+import { findComponentByCodeLazy } from "@webpack";
+import { ChannelRTCStore, ContextMenuApi, FluxDispatcher, useCallback, useEffect, useRef, UserStore, useState, useStateFromStores } from "@webpack/common";
 
 import BookmarkContainer, { HorizontalScroller } from "./BookmarkContainer";
 import ChannelTab, { PreviewTab } from "./ChannelTab";
@@ -26,7 +26,6 @@ import { BasicContextMenu } from "./ContextMenus";
 type TabSet = Record<string, ChannelTabsProps[]>;
 
 const PlusSmallIcon = findComponentByCodeLazy("0v-5h5a1");
-const ChannelRTCStore = findStoreLazy("ChannelRTCStore");
 
 const cl = classNameFactory("pc-channeltabs-");
 

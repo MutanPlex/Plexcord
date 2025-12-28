@@ -188,6 +188,20 @@ export const settings = definePluginSettings({
         type: OptionType.NUMBER
     },
 
+    timeBasedCleanupMinutes: {
+        label: () => t(plugin.messageLoggerEnhanced.option.timeBasedCleanupMinutes.label),
+        description: () => t(plugin.messageLoggerEnhanced.option.timeBasedCleanupMinutes.description),
+        default: 0,
+        type: OptionType.NUMBER,
+    },
+
+    preserveCurrentChannel: {
+        label: () => t(plugin.messageLoggerEnhanced.option.preserveCurrentChannel.label),
+        description: () => t(plugin.messageLoggerEnhanced.option.preserveCurrentChannel.description),
+        default: true,
+        type: OptionType.BOOLEAN,
+    },
+
     whitelistedIds: {
         label: () => t(plugin.messageLoggerEnhanced.option.whitelistedIds.label),
         description: () => t(plugin.messageLoggerEnhanced.option.whitelistedIds.description),

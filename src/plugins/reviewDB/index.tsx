@@ -23,12 +23,13 @@ import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { NotesIcon, OpenExternalIcon } from "@components/Icons";
+import { TooltipContainer } from "@components/TooltipContainer";
 import { Guild, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { classes } from "@utils/misc";
 import definePlugin from "@utils/types";
 import { findByPropsLazy } from "@webpack";
-import { Alerts, Clickable, Menu, Parser, TooltipContainer } from "@webpack/common";
+import { Alerts, Clickable, Menu, Parser } from "@webpack/common";
 
 import { Auth, initAuth, updateAuth } from "./auth";
 import { openReviewsModal } from "./components/ReviewModal";
