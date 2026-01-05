@@ -24,13 +24,11 @@
 // Only import pure modules that don't import other parts of Plexcord.
 import monacoHtmlLocal from "file://monacoWin.html?minify";
 import * as DataStore from "@api/DataStore";
+import type { Settings } from "@api/Settings";
 import { debounce } from "@shared/debounce";
 import { localStorage } from "@utils/localStorage";
-import { EXTENSION_BASE_URL, metaReady, RENDERER_CSS_URL } from "@utils/web-metadata";
-import { getTheme, Theme } from "@utils/discord";
-import { getThemeInfo } from "@main/themes";
-import type { Settings } from "@api/Settings";
 import { getStylusWebStoreUrl } from "@utils/web";
+import { EXTENSION_BASE_URL, metaReady, RENDERER_CSS_URL } from "@utils/web-metadata";
 
 // listeners for ipc.on
 const cssListeners = new Set<(css: string) => void>();
@@ -48,7 +46,7 @@ window.PlexcordNative = {
         deleteTheme: (fileName: string) => DataStore.del(fileName, themeStore),
         getThemesDir: async () => "",
         getThemesList: () => DataStore.entries(themeStore).then(entries =>
-            entries.map(([name, css]) => getThemeInfo(css, name.toString()))
+            entries.map(([name, css]) => ({ fileName: name as string, content: css }))
         ),
         getThemeData: (fileName: string) => DataStore.get(fileName, themeStore),
         getSystemValues: async () => ({}),

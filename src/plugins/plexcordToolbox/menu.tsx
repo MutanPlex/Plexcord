@@ -3,7 +3,6 @@ import { openNotificationLogModal } from "@api/Notifications/notificationLog";
 import { isPluginEnabled, plugins as Plugins } from "@api/PluginManager";
 import { Settings, useSettings } from "@api/Settings";
 import { openPluginModal, openSettingsTabModal, PluginsTab, ThemesTab } from "@components/settings";
-import { getThemeInfo } from "@main/themes";
 import { useAwaiter } from "@utils/react";
 import { OptionType, Plugin } from "@utils/types";
 import { Menu, showToast, useMemo, useState } from "@webpack/common";
@@ -228,9 +227,9 @@ export function buildThemeMenuEntries() {
                 <Menu.MenuGroup>
                     {themes.map(theme => (
                         <Menu.MenuCheckboxItem
-                            id={`theme-${getThemeInfo(theme.content as any, theme.fileName ?? "Unknown Theme").name}`}
-                            key={getThemeInfo(theme.content as any, theme.fileName ?? "Unknown Theme").name}
-                            label={getThemeInfo(theme.content as any, theme.fileName ?? "Unknown Theme").name}
+                            id={`theme-${theme.fileName}`}
+                            key={theme.fileName}
+                            label={theme.fileName}
                             checked={enabledThemes.includes(theme.fileName)}
                             action={() => {
                                 if (enabledThemes.includes(theme.fileName)) {

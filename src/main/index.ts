@@ -27,7 +27,7 @@ import { RendererSettings } from "./settings";
 import { IS_VANILLA, THEMES_DIR } from "./utils/constants";
 import { installExt } from "./utils/extensions";
 
-if (IS_PLEXTRON || !IS_VANILLA) {
+if (!IS_VANILLA && !IS_EXTENSION) {
     app.whenReady().then(() => {
         protocol.handle("plexcord", ({ url: unsafeUrl }) => {
             let url = decodeURI(unsafeUrl).slice("plexcord://".length).replace(/\?v=\d+$/, "");
@@ -51,11 +51,9 @@ if (IS_PLEXTRON || !IS_VANILLA) {
 
             switch (url) {
                 case "renderer.js.map":
-                case "plexcordDesktopRenderer.js.map":
                 case "preload.js.map":
-                case "plexcordDesktopPreload.js.map":
                 case "patcher.js.map":
-                case "plexcordDesktopMain.js.map":
+                case "main.js.map":
                     return net.fetch(pathToFileURL(join(__dirname, url)).toString());
                 default:
                     return new Response(null, {

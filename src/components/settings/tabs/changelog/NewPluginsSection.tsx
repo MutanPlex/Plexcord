@@ -7,10 +7,10 @@
 
 import { changelog, plugins, t } from "@api/i18n";
 import { useSettings } from "@api/Settings";
-import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { PluginCard } from "@components/settings/tabs/plugins/PluginCard";
 import { ChangeList } from "@utils/ChangeList";
 import { classNameFactory } from "@utils/css";
@@ -72,11 +72,11 @@ export function NewPluginsSection({
         if (!deps) return null;
         return (
             <React.Fragment>
-                <BaseText>{t(plugins.required.by)}</BaseText>
+                <Paragraph>{t(plugins.required.by)}</Paragraph>
                 {deps.map((dep: string) => (
-                    <BaseText key={dep} className="pc-changelog-dep-text">
+                    <Paragraph key={dep} className="pc-changelog-dep-text">
                         {dep}
-                    </BaseText>
+                    </Paragraph>
                 ))}
             </React.Fragment>
         );
@@ -88,9 +88,9 @@ export function NewPluginsSection({
                 {t(changelog.newPlugins, { count: sortedPlugins.length })}
             </Heading>
 
-            <BaseText className={Margins.bottom16}>
+            <Paragraph className={Margins.bottom16}>
                 {t(changelog.following)}
-            </BaseText>
+            </Paragraph>
 
             <div className={cl("new-plugins-grid")}>
                 {sortedPlugins.map(plugin => {

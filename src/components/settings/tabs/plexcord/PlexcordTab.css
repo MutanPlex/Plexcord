@@ -1,0 +1,54 @@
+:root {
+    --pc-donatebutton: #ffc1cbc2;
+    --pc-donatebutton-secondary: #f7536fe5;
+}
+
+.pc-donatebutton {
+    background-color: var(--background-base-low) !important;
+    border-color: var(--pc-donatebutton) !important;
+    filter: brightness(1);
+    border-width: .1rem !important;
+    border-style: solid !important;
+}
+
+.pc-donatebutton:hover {
+    background-color: var(--pc-donatebutton) !important;
+    border-color: transparent !important;
+}
+
+
+.pc-joindiscordbutton {
+    background-color: var(--redesign-button-secondary-background) !important;
+}
+
+.pc-joindiscordbutton:hover {
+    background-color: var(--redesign-button-secondary-pressed-background) !important;
+}
+
+.pc-settings-card-buttons {
+    display: flex;
+    gap: 1em !important;
+    margin-left: .2rem;
+    margin-bottom: .2rem;
+}
+
+.pc-settingbuttons {
+    border-radius: 5px !important;
+}
+
+.form-switch-warning {
+    font-size: 16px;
+    background-color: rgb(240 71 71 / 10%);
+    color: rgb(240 71 71);
+    border: 1px solid rgb(240 71 71 / 60%);
+    border-radius: 4px;
+    font-weight: 500;
+    padding: 6px 10px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.pc-plexcord-tab-settings-link {
+    color: var(--text-link);
+    display: inline-block;
+}

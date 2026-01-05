@@ -19,19 +19,21 @@
 */
 
 // @ts-check
+
 import { createPackage } from "@electron/asar";
 import { readdir, writeFile } from "fs/promises";
-import { join, resolve } from "path";
+import { dirname, join, resolve } from "path";
+import { fileURLToPath } from "url";
 
-import { BUILD_TIMESTAMP, commonOpts, exists, globPlugins, IS_ANTI_CRASH_TEST, IS_DEV, IS_COMPANION_TEST, IS_REPORTER, IS_STANDALONE, IS_UPDATER_DISABLED, resolvePluginName, VERSION, commonRendererPlugins, watch, buildOrWatchAll, stringifyValues } from "./common.mjs";
+import { BUILD_TIMESTAMP, commonOpts, exists, globPlugins, IS_DEV, IS_REPORTER, IS_COMPANION_TEST, IS_STANDALONE, IS_UPDATER_DISABLED, resolvePluginName, VERSION, commonRendererPlugins, watch, buildOrWatchAll, stringifyValues, IS_ANTI_CRASH_TEST } from "./common.mjs";
 
 const defines = stringifyValues({
     IS_STANDALONE,
     IS_DEV,
     IS_REPORTER,
-    IS_ANTI_CRASH_TEST,
     IS_COMPANION_TEST,
     IS_UPDATER_DISABLED,
+    IS_ANTI_CRASH_TEST,
     IS_WEB: false,
     IS_EXTENSION: false,
     IS_USERSCRIPT: false,
@@ -122,7 +124,7 @@ const buildConfigs = ([
     // Discord Desktop main & renderer & preload
     {
         ...nodeCommonOpts,
-        entryPoints: ["src/main/index.ts"],
+        entryPoints: [join(dirname(fileURLToPath(import.meta.url)), "../../src/main/index.ts")],
         outfile: "dist/desktop/patcher.js",
         footer: { js: "//# sourceURL=file:///PlexcordPatcher\n" + sourceMapFooter("patcher") },
         sourcemap,
@@ -139,7 +141,7 @@ const buildConfigs = ([
     },
     {
         ...commonOpts,
-        entryPoints: ["src/Plexcord.ts"],
+        entryPoints: [join(dirname(fileURLToPath(import.meta.url)), "../../src/Plexcord.ts")],
         outfile: "dist/desktop/renderer.js",
         format: "iife",
         target: ["esnext"],
@@ -148,7 +150,7 @@ const buildConfigs = ([
         sourcemap,
         plugins: [
             globPlugins("discordDesktop"),
-            ...commonRendererPlugins
+            ...commonOpts.plugins
         ],
         define: {
             ...defines,
@@ -158,7 +160,7 @@ const buildConfigs = ([
     },
     {
         ...nodeCommonOpts,
-        entryPoints: ["src/preload.ts"],
+        entryPoints: [join(dirname(fileURLToPath(import.meta.url)), "../../src/preload.ts")],
         outfile: "dist/desktop/preload.js",
         footer: { js: "//# sourceURL=file:///PlexcordPreload\n" + sourceMapFooter("preload") },
         sourcemap,
@@ -172,9 +174,9 @@ const buildConfigs = ([
     // Plexcord Desktop main & renderer & preload
     {
         ...nodeCommonOpts,
-        entryPoints: ["src/main/index.ts"],
-        outfile: "dist/plextron/plextronMain.js",
-        footer: { js: "//# sourceURL=file:///PlextronMain\n" + sourceMapFooter("plextronMain") },
+        entryPoints: [join(dirname(fileURLToPath(import.meta.url)), "../../src/main/index.ts")],
+        outfile: "dist/plextron/main.js",
+        footer: { js: "//# sourceURL=file:///PlextronMain\n" + sourceMapFooter("main") },
         sourcemap,
         plugins: [
             ...nodeCommonOpts.plugins,
@@ -188,11 +190,11 @@ const buildConfigs = ([
     },
     {
         ...commonOpts,
-        entryPoints: ["src/Plexcord.ts"],
-        outfile: "dist/plextron/plextronRenderer.js",
+        entryPoints: [join(dirname(fileURLToPath(import.meta.url)), "../../src/Plexcord.ts")],
+        outfile: "dist/plextron/renderer.js",
         format: "iife",
         target: ["esnext"],
-        footer: { js: "//# sourceURL=file:///PlextronRenderer\n" + sourceMapFooter("plextronRenderer") },
+        footer: { js: "//# sourceURL=file:///PlextronRenderer\n" + sourceMapFooter("renderer") },
         globalName: "Plexcord",
         sourcemap,
         plugins: [
@@ -207,9 +209,9 @@ const buildConfigs = ([
     },
     {
         ...nodeCommonOpts,
-        entryPoints: ["src/preload.ts"],
-        outfile: "dist/plextron/plextronPreload.js",
-        footer: { js: "//# sourceURL=file:///PlextronPreload\n" + sourceMapFooter("plextronPreload") },
+        entryPoints: [join(dirname(fileURLToPath(import.meta.url)), "../../src/preload.ts")],
+        outfile: "dist/plextron/preload.js",
+        footer: { js: "//# sourceURL=file:///PlextronPreload\n" + sourceMapFooter("preload") },
         sourcemap,
         define: {
             ...defines,
@@ -228,11 +230,11 @@ await Promise.all([
     })),
     writeFile("dist/plextron/package.json", JSON.stringify({
         name: "plextron",
-        main: "plextronMain.js"
+        main: "main.js"
     }))
 ]);
 
 await Promise.all([
-    createPackage("dist/desktop/", "dist/desktop.asar"),
-    createPackage("dist/plextron/", "dist/plextron.asar")
+    createPackage("dist/desktop", "dist/desktop.asar"),
+    createPackage("dist/plextron", "dist/plextron.asar")
 ]);

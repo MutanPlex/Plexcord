@@ -24,7 +24,7 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { PcDevs } from "@utils/constants";
+import { Devs } from "@utils/constants";
 import { proxyLazy } from "@utils/lazy";
 import { classes } from "@utils/misc";
 import { openModalLazy } from "@utils/modal";
@@ -157,7 +157,7 @@ const StatusSubMenuComponent = () => {
 export default definePlugin({
     name: "StatusPresets",
     description: () => t(plugin.statusPresets.description),
-    authors: [PcDevs.iamme],
+    authors: [Devs.iamme],
     settings: settings,
     dependencies: ["UserSettingsAPI"],
 

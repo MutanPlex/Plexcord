@@ -20,9 +20,9 @@
 import "./ErrorCard.css";
 
 import { classes } from "@utils/misc";
-import type { HTMLAttributes } from "react";
+import type { HTMLProps } from "react";
 
-export function ErrorCard(props: React.PropsWithChildren<HTMLAttributes<HTMLDivElement>>) {
+export function ErrorCard(props: React.PropsWithChildren<HTMLProps<HTMLDivElement>>) {
     return (
         <div {...props} className={classes(props.className, "pc-error-card")}>
             {props.children}

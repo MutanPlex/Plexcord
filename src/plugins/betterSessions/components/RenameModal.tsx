@@ -19,7 +19,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
-import { Heading } from "@components/Heading";
+import { Heading, HeadingTertiary } from "@components/Heading";
 import { SessionInfo } from "@plugins/betterSessions/types";
 import { getDefaultName, savedSessionsCache, saveSessionsToDataStore } from "@plugins/betterSessions/utils";
 import { ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot } from "@utils/modal";
@@ -45,7 +45,7 @@ export function RenameModal({ props, session, state }: { props: ModalProps, sess
     return (
         <ModalRoot {...props}>
             <ModalHeader>
-                <Heading>{t(plugin.betterSessions.rename)}</Heading>
+                <HeadingTertiary>{t(plugin.betterSessions.rename)}</HeadingTertiary>
             </ModalHeader>
 
             <ModalContent>

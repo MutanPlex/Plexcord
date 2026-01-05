@@ -29,10 +29,10 @@ import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { filters, findStoreLazy, mapMangledModuleLazy } from "@webpack";
 import { AuthenticationStore, PresenceStore, Tooltip, UserStore, useStateFromStores } from "@webpack/common";
-import desktopIcon from "file://icons/desktopIcon.svg?minify";
-import embeddedIcon from "file://icons/embeddedIcon.svg?minify";
-import mobileIcon from "file://icons/mobileIcon.svg?minify";
-import webIcon from "file://icons/webIcon.svg?minify";
+import desktopIcon from "file://icons/desktopIcon.svg";
+import embeddedIcon from "file://icons/embeddedIcon.svg";
+import mobileIcon from "file://icons/mobileIcon.svg";
+import webIcon from "file://icons/webIcon.svg";
 import type { JSX } from "react";
 
 export interface Session {

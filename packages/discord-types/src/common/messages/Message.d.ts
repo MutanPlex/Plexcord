@@ -4,7 +4,7 @@ import { Embed, EmbedJSON } from './Embed';
 import { DiscordRecord } from "../Record";
 import { ApplicationIntegrationType, MessageFlags, MessageType, StickerFormatType } from "../../../enums";
 
-/**
+/*
  * TODO: looks like discord has moved over to Date instead of Moment;
  */
 export class Message extends DiscordRecord {
@@ -41,7 +41,7 @@ export class Message extends DiscordRecord {
     interaction: {
         id: string;
         name: string;
-        type: MessageType;
+        type: number;
         user: User;
     }[] | undefined;
     interactionData: {
@@ -113,7 +113,7 @@ export class Message extends DiscordRecord {
     stickers: unknown[];
     timestamp: moment.Moment;
     tts: boolean;
-    type: number;
+    type: MessageType;
     webhookId: string | undefined;
 
     /**

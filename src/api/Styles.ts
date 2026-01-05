@@ -21,7 +21,7 @@ import { generateTextCss } from "@components/BaseText";
 import { generateMarginCss } from "@components/margins";
 import { classNameFactory as _classNameFactory, classNameToSelector, createAndAppendStyle } from "@utils/css";
 
-// Backwards compat for Vesktop
+// Backwards compat for Plextron
 /** @deprecated Import this from `@utils/css` instead */
 export const classNameFactory = _classNameFactory;
 
@@ -47,6 +47,7 @@ export const managedStyleRootNode = document.createElement("plexcord-managed-sty
  * Houses the user's themes and quick css
  */
 export const userStyleRootNode = document.createElement("plexcord-user-styles");
+
 plexcordRootNode.style.display = "none";
 plexcordRootNode.append(coreStyleRootNode, managedStyleRootNode, userStyleRootNode);
 
@@ -54,7 +55,7 @@ export function initStyles() {
     const osValuesNode = createAndAppendStyle("plexcord-os-theme-values", coreStyleRootNode);
     createAndAppendStyle("plexcord-text", coreStyleRootNode).textContent = generateTextCss();
     const rendererCssNode = createAndAppendStyle("plexcord-css-core", coreStyleRootNode);
-    const vesktopCssNode = IS_PLEXTRON ? createAndAppendStyle("vesktop-css-core", coreStyleRootNode) : null;
+    const plextronCssNode = IS_PLEXTRON ? createAndAppendStyle("plextron-css-core", coreStyleRootNode) : null;
     createAndAppendStyle("plexcord-margins", coreStyleRootNode).textContent = generateMarginCss();
 
     PlexcordNative.native.getRendererCss().then(css => rendererCssNode.textContent = css);
@@ -65,9 +66,9 @@ export function initStyles() {
     }
 
     if (IS_PLEXTRON && PlextronNative.app.getRendererCss) {
-        PlextronNative.app.getRendererCss().then(css => vesktopCssNode!.textContent = css);
+        PlextronNative.app.getRendererCss().then(css => plextronCssNode!.textContent = css);
         PlextronNative.app.onRendererCssUpdate(newCss => {
-            vesktopCssNode!.textContent = newCss;
+            plextronCssNode!.textContent = newCss;
         });
     }
 

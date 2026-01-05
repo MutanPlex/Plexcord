@@ -10,7 +10,7 @@ import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { Message, Sticker } from "@plexcord/discord-types";
 import ExpressionClonerPlugin from "@plugins/expressionCloner";
-import { Devs, PcDevs } from "@utils/constants";
+import { Devs } from "@utils/constants";
 import { copyWithToast } from "@utils/discord";
 import definePlugin from "@utils/types";
 import { Menu, React, StickersStore } from "@webpack/common";
@@ -77,7 +77,7 @@ const expressionPickerPatch: NavContextMenuPatchCallback = (children, props: { t
 export default definePlugin({
     name: "CopyStickerLinks",
     description: () => t(plugin.copyStickerLinks.description),
-    authors: [Devs.Ven, PcDevs.Byeoon],
+    authors: [Devs.Ven, Devs.Byeoon],
 
     contextMenus: {
         "message": messageContextMenuPatch,

@@ -19,9 +19,9 @@
 
 import { LazyComponent } from "@utils/react";
 import { findByCode } from "@webpack";
-import { SVGAttributes } from "react";
+import { SVGProps } from "react";
 
-export const DiscordIcon = (props: React.PropsWithChildren<SVGAttributes<SVGSVGElement>>) => (
+export const DiscordIcon = (props: React.PropsWithChildren<SVGProps<SVGSVGElement>>) => (
     <svg
         {...props}
         fill="currentColor"
@@ -31,7 +31,7 @@ export const DiscordIcon = (props: React.PropsWithChildren<SVGAttributes<SVGSVGE
     </svg>
 );
 
-export const ChromeIcon = (props: React.PropsWithChildren<SVGAttributes<SVGSVGElement>>) => (
+export const ChromeIcon = (props: React.PropsWithChildren<SVGProps<SVGSVGElement>>) => (
     <svg
         {...props}
         fill="currentColor"
@@ -44,7 +44,7 @@ export const ChromeIcon = (props: React.PropsWithChildren<SVGAttributes<SVGSVGEl
     </svg>
 );
 
-export const EdgeIcon = (props: React.PropsWithChildren<SVGAttributes<SVGSVGElement>>) => (
+export const EdgeIcon = (props: React.PropsWithChildren<SVGProps<SVGSVGElement>>) => (
     <svg
         {...props}
         fill="currentColor"
@@ -54,7 +54,7 @@ export const EdgeIcon = (props: React.PropsWithChildren<SVGAttributes<SVGSVGElem
     </svg>
 );
 
-export const FirefoxIcon = (props: React.PropsWithChildren<SVGAttributes<SVGSVGElement>>) => (
+export const FirefoxIcon = (props: React.PropsWithChildren<SVGProps<SVGSVGElement>>) => (
     <svg
         {...props}
         fill="currentColor"
@@ -64,7 +64,7 @@ export const FirefoxIcon = (props: React.PropsWithChildren<SVGAttributes<SVGSVGE
     </svg>
 );
 
-export const IEIcon = (props: React.PropsWithChildren<SVGAttributes<SVGSVGElement>>) => (
+export const IEIcon = (props: React.PropsWithChildren<SVGProps<SVGSVGElement>>) => (
     <svg
         {...props}
         fill="currentColor"
@@ -74,7 +74,7 @@ export const IEIcon = (props: React.PropsWithChildren<SVGAttributes<SVGSVGElemen
     </svg>
 );
 
-export const OperaIcon = (props: React.PropsWithChildren<SVGAttributes<SVGSVGElement>>) => (
+export const OperaIcon = (props: React.PropsWithChildren<SVGProps<SVGSVGElement>>) => (
     <svg
         {...props}
         fill="currentColor"
@@ -84,7 +84,7 @@ export const OperaIcon = (props: React.PropsWithChildren<SVGAttributes<SVGSVGEle
     </svg>
 );
 
-export const SafariIcon = (props: React.PropsWithChildren<SVGAttributes<SVGSVGElement>>) => (
+export const SafariIcon = (props: React.PropsWithChildren<SVGProps<SVGSVGElement>>) => (
     <svg
         {...props}
         fill="currentColor"
@@ -94,7 +94,7 @@ export const SafariIcon = (props: React.PropsWithChildren<SVGAttributes<SVGSVGEl
     </svg>
 );
 
-export const UnknownIcon = (props: React.PropsWithChildren<SVGAttributes<SVGSVGElement>>) => (
+export const UnknownIcon = (props: React.PropsWithChildren<SVGProps<SVGSVGElement>>) => (
     <svg
         {...props}
         fill="currentColor"

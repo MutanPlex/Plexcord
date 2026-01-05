@@ -36,7 +36,7 @@ function lurk(id: string) {
 export default definePlugin({
     name: "BetterInvites",
     description: () => t(plugin.betterInvites.description),
-    authors: [PcDevs.iamme, PcDevs.MutanPlex, Devs.thororen],
+    authors: [Devs.iamme, PcDevs.MutanPlex, Devs.thororen],
 
     patches: [
         {

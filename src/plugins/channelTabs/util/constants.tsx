@@ -219,8 +219,8 @@ export const settings = definePluginSettings({
         label: () => t(plugin.channelTabs.option.rapidNavigationThreshold.label),
         description: () => t(plugin.channelTabs.option.rapidNavigationThreshold.description),
         type: OptionType.SLIDER,
-        markers: [500, 1000, 1500, 2000, 3000, 5000, 10000],
-        default: 3000,
+        markers: [1, 2, 3, 5, 10, 20, 30, 40, 50, 60],
+        default: 3,
         stickToMarkers: false,
     },
     tabBarPosition: {

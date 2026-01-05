@@ -210,7 +210,19 @@ function PluginSettings() {
             });
     }, []);
 
-    const depMap = Plexcord.Plugins.calculatePluginDependencyMap();
+    const depMap = useMemo(() => {
+        const o = {} as Record<string, string[]>;
+        for (const plugin in Plugins) {
+            const deps = Plugins[plugin].dependencies;
+            if (deps) {
+                for (const dep of deps) {
+                    o[dep] ??= [];
+                    o[dep].push(plugin);
+                }
+            }
+        }
+        return o;
+    }, []);
 
     const sortedPlugins = useMemo(() =>
         Object.values(Plugins).sort((a, b) => getName(a.name).localeCompare(getName(b.name))),

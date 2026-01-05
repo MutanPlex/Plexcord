@@ -21,11 +21,11 @@ import "./SpecialCard.css";
 
 import { Card } from "@components/Card";
 import { Divider } from "@components/Divider";
+import { Heading } from "@components/Heading";
+import { Paragraph } from "@components/Paragraph";
 import { classNameFactory } from "@utils/css";
 import { Clickable } from "@webpack/common";
 import type { PropsWithChildren } from "react";
-
-import { HeadingTertiary, Paragraph } from "..";
 
 const cl = classNameFactory("pc-special-");
 
@@ -50,7 +50,7 @@ export function SpecialCard({ title, subtitle, description, cardImage, backgroun
         <Card className={cl("card", "card-special")} style={cardStyle}>
             <div className={cl("card-flex")}>
                 <div className={cl("card-flex-main")}>
-                    <HeadingTertiary className={cl("title")}>{title}</HeadingTertiary>
+                    <Heading className={cl("title")} tag="h5">{title}</Heading>
                     <Paragraph className={cl("subtitle")}>{subtitle}</Paragraph>
                     <Paragraph className={cl("text")}>{description}</Paragraph>
 

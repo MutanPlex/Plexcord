@@ -37,10 +37,12 @@ import { CommonProps, HashLink, Newer, Updatable } from "./Components";
 function Updater() {
     const settings = useSettings(["autoUpdate", "autoUpdateNotification"]);
 
-    const [repo, err, repoPending] = useAwaiter(getRepo, {
-        fallbackValue: "Loading...",
-        onError: e => UpdateLogger.error("Failed to retrieve repo", err)
-    });
+    const [repo, err, repoPending] = useAwaiter(getRepo, { fallbackValue: t(updater.loading) });
+
+    React.useEffect(() => {
+        if (err)
+            UpdateLogger.error("Failed to retrieve repo", err);
+    }, [err]);
 
     const commonProps: CommonProps = {
         repo,

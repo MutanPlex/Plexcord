@@ -22,20 +22,17 @@ import "./fixDiscordBadgePadding.css";
 import { _getBadges, BadgePosition, BadgeUserArgs, ProfileBadge } from "@api/Badges";
 import { plugins, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
-import { Flex } from "@components/Flex";
-import { Heading } from "@components/Heading";
-import { Heart } from "@components/Heart";
-import { Paragraph } from "@components/Paragraph";
-import DonateButton from "@components/settings/DonateButton";
 import { openContributorModal } from "@components/settings/tabs";
 import { Devs, PcDevs } from "@utils/constants";
 import { copyWithToast } from "@utils/discord";
 import { Logger } from "@utils/Logger";
-import { Margins } from "@utils/margins";
 import { shouldShowContributorBadge, shouldShowPcContributorBadge } from "@utils/misc";
-import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalRoot, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
 import { ContextMenuApi, Menu, Toasts, UserStore } from "@webpack/common";
+
+import Plugins, { PluginMeta } from "~plugins";
+
+import { openDonorModal } from "./modals";
 
 const CONTRIBUTOR_BADGE = "https://cdn.discordapp.com/emojis/1092089799109775453.png?size=64";
 const PLEXCORD_BADGE = "https://cdn.discordapp.com/emojis/1357527217332031508.webp?size=64";
@@ -46,6 +43,7 @@ const ContributorBadge: ProfileBadge = {
     shouldShow: ({ userId }) => shouldShowContributorBadge(userId),
     onClick: (_, { userId }) => openContributorModal(UserStore.getUser(userId))
 };
+
 const PlexcordBadge: ProfileBadge = {
     description: () => t(plugins.metadata.badges.contributor.plexcord),
     iconSrc: PLEXCORD_BADGE,
@@ -54,29 +52,53 @@ const PlexcordBadge: ProfileBadge = {
     onClick: (_, { userId }) => openContributorModal(UserStore.getUser(userId))
 };
 
+const UserPluginContributorBadge: ProfileBadge = {
+    description: "User Plugin Contributor",
+    iconSrc: PLEXCORD_BADGE,
+    position: BadgePosition.START,
+    shouldShow: ({ userId }) => {
+        if (!IS_DEV) return false;
+        const allPlugins = Object.values(Plugins);
+        return allPlugins.some(p => {
+            function getName(name: string | (() => string)): string {
+                return typeof name === "function" ? name() : name;
+            }
+            const pluginMeta = PluginMeta[getName(p.name)];
+            return pluginMeta?.userPlugin && p.authors.some(a => a.id.toString() === userId);
+        });
+    },
+    onClick: (_, { userId }) => openContributorModal(UserStore.getUser(userId)),
+    props: {
+        style: {
+            borderRadius: "50%",
+            transform: "scale(0.9)"
+        }
+    },
+};
+
 let DonorBadges = {} as Record<string, Array<Record<"tooltip" | "badge", string>>>;
-let MutanBadges = {} as Record<string, Array<Record<"tooltip" | "badge", string>>>;
+const MutanBadges = {} as Record<string, Array<Record<"tooltip" | "badge", string>>>;
 
-async function loadBadges(noCache = false) {
-    DonorBadges = {};
-    MutanBadges = {};
-
+async function loadBadges(url: string, noCache = false) {
     const init = {} as RequestInit;
-    if (noCache)
-        init.cache = "no-cache";
+    if (noCache) init.cache = "no-cache";
 
-    DonorBadges = await fetch("https://badges.vencord.dev/badges.json", init)
-        .then(r => r.json());
-    MutanBadges = await fetch("https://badges.plexcord.club/badges.json", init)
-        .then(r => r.json());
+    return await fetch(url, init).then(r => r.json());
+}
+
+async function loadAllBadges(noCache = false) {
+    const donor = await loadBadges("https://badges.vencord.dev/badges.json", noCache);
+    const plexcord = await loadBadges("https://badges.plexcord.club/badges.json", noCache);
 
     DonorBadges = {
-        ...DonorBadges,
-        ...MutanBadges,
+        ...donor,
+        ...plexcord,
     };
 }
 
-function BadgeContextMenu({ badge }: { badge: ProfileBadge & BadgeUserArgs; }) {
+let intervalId: any;
+
+export function BadgeContextMenu({ badge }: { badge: ProfileBadge & BadgeUserArgs; }) {
     return (
         <Menu.Menu
             navId="pc-badge-context"
@@ -105,58 +127,6 @@ function BadgeContextMenu({ badge }: { badge: ProfileBadge & BadgeUserArgs; }) {
         </Menu.Menu>
     );
 }
-
-export function openDonorModal(props: any) {
-    return (
-        <ModalRoot {...props}>
-            <ModalHeader>
-                <Heading
-                    style={{
-                        width: "100%",
-                        textAlign: "center",
-                        margin: 0
-                    }}
-                >
-                    <Flex justifyContent="center" alignItems="center" style={{ gap: "0.5em" }}>
-                        <Heart />
-                        {t(plugins.metadata.badges.modal.title)}
-                    </Flex>
-                </Heading>
-            </ModalHeader>
-            <ModalContent>
-                <Flex>
-                    <img
-                        role="presentation"
-                        src="https://cdn.discordapp.com/emojis/1026533070955872337.png"
-                        alt=""
-                        style={{ margin: "auto" }}
-                    />
-                    <img
-                        role="presentation"
-                        src="https://cdn.discordapp.com/emojis/1026533090627174460.png"
-                        alt=""
-                        style={{ margin: "auto" }}
-                    />
-                </Flex>
-                <div style={{ padding: "1em", textAlign: "center" }}>
-                    <Paragraph>
-                        {t(plugins.metadata.badges.modal.special)}
-                    </Paragraph>
-                    <Paragraph className={Margins.top20}>
-                        {t(plugins.metadata.badges.modal.description)}
-                    </Paragraph>
-                </div>
-            </ModalContent>
-            <ModalFooter>
-                <Flex justifyContent="center" style={{ width: "100%" }}>
-                    <DonateButton />
-                </Flex>
-            </ModalFooter>
-        </ModalRoot>
-    );
-}
-
-let intervalId: any;
 
 export default definePlugin({
     name: "BadgeAPI",
@@ -196,7 +166,7 @@ export default definePlugin({
 
     toolboxActions: () => ({
         [t(plugins.metadata.badges.context.refetch.button)]: async function () {
-            await loadBadges(true);
+            await loadAllBadges(true);
             Toasts.show({
                 id: Toasts.genId(),
                 message: t(plugins.metadata.badges.context.refetch.success),
@@ -205,14 +175,12 @@ export default definePlugin({
         }
     }),
 
-    userProfileBadge: ContributorBadge,
-    userProfileContributorBadge: PlexcordBadge,
+    userProfileBadges: [ContributorBadge, PlexcordBadge, UserPluginContributorBadge],
 
     async start() {
-        await loadBadges();
-
+        await loadAllBadges();
         clearInterval(intervalId);
-        intervalId = setInterval(loadBadges, 1000 * 60 * 30); // 30 minutes
+        intervalId = setInterval(loadAllBadges, 1000 * 60 * 30); // 30 minutes
     },
 
     async stop() {
@@ -264,15 +232,10 @@ export default definePlugin({
                 ContextMenuApi.openContextMenu(event, () => <BadgeContextMenu badge={badgeProps} />);
             },
             onClick() {
-                const modalKey = openModal(props => (
-                    <ErrorBoundary noop onError={() => {
-                        closeModal(modalKey);
-                        PlexcordNative.native.openExternal("https://github.com/sponsors/MutanPlex");
-                    }}>
-                        {openDonorModal(props)}
-                    </ErrorBoundary>
-                ));
+                return openDonorModal();
             },
         } satisfies ProfileBadge));
     }
 });
+
+export { openDonorModal };

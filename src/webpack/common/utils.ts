@@ -189,6 +189,7 @@ export const ChannelActionCreators = findByPropsLazy("openPrivateChannel");
 export const VoiceActions = findByPropsLazy("toggleSelfMute");
 export const GuildActions = findByPropsLazy("setServerMute", "setServerDeaf");
 export const ChannelActions = findByPropsLazy("selectChannel", "selectVoiceChannel");
+
 export const IconUtils: t.IconUtils = findByPropsLazy("getGuildBannerURL", "getUserAvatarURL");
 
 export const ReadStateUtils = mapMangledModuleLazy('type:"ENABLE_AUTOMATIC_ACK",', {
@@ -219,10 +220,11 @@ export const DisplayProfileUtils: t.DisplayProfileUtils = mapMangledModuleLazy(/
 
 export const DateUtils: t.DateUtils = mapMangledModuleLazy("millisecondsInUnit:", {
     calendarFormat: filters.byCode("sameElse"),
-    dateFormat: filters.byCode('":"'),
+    dateFormat: filters.byCode('":'),
     isSameDay: filters.byCode(/Math\.abs\(\i-\i\)/),
     diffAsUnits: filters.byCode("days:0", "millisecondsInUnit")
 });
 
 export const MessageTypeSets: t.MessageTypeSets = findByPropsLazy("REPLYABLE", "FORWARDABLE");
+
 export const fetchApplicationsRPC = findByCodeLazy('"Invalid Origin"', ".application");

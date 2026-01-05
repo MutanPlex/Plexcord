@@ -8,7 +8,7 @@
 import { ChatBarButton } from "@api/ChatButtons";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { PcDevs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType, StartAt } from "@utils/types";
 import { React, useEffect, useState } from "@webpack/common";
 import type { MouseEventHandler, ReactNode } from "react";
@@ -81,7 +81,7 @@ export default definePlugin({
     name: "HideChatButtons",
     description: () => t(plugin.hideChatButtons.description),
     settings: settings,
-    authors: [PcDevs.iamme, PcDevs.MutanPlex],
+    authors: [Devs.iamme, PcDevs.MutanPlex],
 
     patches: [
         {

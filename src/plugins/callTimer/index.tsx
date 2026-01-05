@@ -18,7 +18,7 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { definePluginSettings, Settings } from "@api/Settings";
+import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
 import { useTimer } from "@utils/react";
@@ -77,6 +77,6 @@ export default definePlugin({
             deps: [channelId]
         });
 
-        return <p style={{ margin: 0, fontFamily: "var(--font-code)" }}>{formatDurationMs(time, Settings.plugins.CallTimer.format === "human")}</p>;
+        return <p style={{ margin: 0, fontFamily: "var(--font-code)" }}>{formatDurationMs(time, settings.store.format === "human")}</p>;
     }
 });

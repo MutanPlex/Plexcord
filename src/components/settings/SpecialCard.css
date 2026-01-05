@@ -1,13 +1,71 @@
+.pc-invite-button,
 .pc-donate-button {
     overflow: visible !important;
+    color: black;
+    background-color: color-mix(in srgb, #ED87A9 25%, pink);
 }
 
-.pc-donate-button .pc-heart-icon {
+.pc-invite-button:hover,
+.pc-donate-button:hover {
+    overflow: visible !important;
+    color: black;
+    background-color: color-mix(in srgb, #ED87A9 50%, pink);
+}
+
+.pc-invite-support-button,
+.pc-donate-support-button {
+    overflow: visible !important;
+    color: black;
+    background-color: color-mix(in srgb, #c3a3ce 25%, rgb(240 178 240));
+}
+
+.pc-invite-support-button:hover,
+.pc-donate-support-button:hover {
+    overflow: visible !important;
+    color: black;
+    background-color: color-mix(in srgb, #c3a3ce 50%, rgb(240 178 240));
+}
+
+.pc-invite-link {
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+.pc-contrib-button {
+    overflow: visible !important;
+    margin-top: 1em;
+    color: black;
+    background-color: color-mix(in srgb, #EDCC87 60%, lightyellow);
+}
+
+.pc-contrib-button:hover {
+    color: black;
+    background-color: color-mix(in srgb, #EDCC87 75%, lightyellow);
+}
+
+.pc-contrib-github {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+}
+
+.pc-invite-button .pc-invite-link,
+.pc-contrib-button .pc-contrib-github,
+.pc-donate-button .pc-heart-icon,
+.pc-invite-support-button .pc-invite-link,
+.pc-donate-support-button .pc-heart-icon {
     transition: transform 0.3s;
     margin-right: 0.5em;
 }
 
-.pc-donate-button:hover .pc-heart-icon {
+.pc-invite-button:hover .pc-invite-link,
+.pc-contrib-button:hover .pc-contrib-github,
+.pc-donate-button:hover .pc-heart-icon,
+.pc-invite-support-button:hover .pc-invite-link,
+.pc-donate-support-button:hover .pc-heart-icon {
     transform: scale(1.1);
     z-index: 10;
     position: relative;
@@ -56,19 +114,19 @@
 .pc-special-hyperlink {
     margin-top: 1em;
     cursor: pointer;
+}
 
-    .pc-special-hyperlink-text {
-        color: black;
-        font-size: 1em;
-        font-weight: bold;
-        text-align: center;
-        transition: text-decoration 0.5s;
-        cursor: pointer;
-    }
+.pc-special-hyperlink-text {
+    color: black;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    transition: text-decoration 0.5s;
+    cursor: pointer;
+}
 
-    &:hover .pc-special-hyperlink-text {
-        text-decoration: underline;
-    }
+.pc-special-hyperlink:hover .pc-special-hyperlink-text {
+    text-decoration: underline;
 }
 
 .pc-special-image-container {
@@ -80,7 +138,6 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background-color: white;
 }
 
 .pc-special-image {

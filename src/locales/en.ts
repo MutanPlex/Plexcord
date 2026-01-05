@@ -43,31 +43,33 @@ const translations = {
         switches: {
             useQuickCss: {
                 label: "Enable Custom CSS",
-                description: "Enables the QuickCSS feature to allow custom CSS to be applied to Discord"
+                description: "Load custom CSS from the QuickCSS editor. This allows you to customize Discord's appearance with your own styles."
             },
             enableReactDevtools: {
                 label: "Enable React Developer Tools",
-                description: "Enables the React Developer Tools extension to work with Discord"
+                description: "Enable the React Developer Tools extension for debugging Discord's React components. Useful for plugin development."
             },
             frameless: {
                 label: "Disable the window frame",
-                description: "Removes the window frame for a cleaner look. Use with caution as it may affect window controls."
+                description: "Remove the native window frame for a cleaner look. You can still move the window by dragging the title bar area."
             },
             winNativeTitleBar: {
                 label: "Use Windows' native title bar instead of Discord's custom one",
-                description: "Replaces Discord's custom title bar with the native Windows title bar for better integration with the OS."
+                description: "Replace Discord's custom title bar with the standard Windows title bar. This may improve compatibility with some window management tools."
             },
             transparent: {
                 label: "Enable window transparency",
-                description: "A theme that supports transparency is required or this will do nothing. Stops the window from being resizable as a side effect"
+                description: "Make the Discord window transparent. A theme that supports transparency is required or this will do nothing.",
+                isWindows: "This will stop the window from being resizable and prevents you from snapping the window to screen edges.",
+                notWindows: "This will stop the window from being resizable."
             },
             winCtrlQ: {
                 label: "Register Ctrl+Q as shortcut to close Discord (Alternative to Alt+F4)",
-                description: "Allows you to use Ctrl+Q to close Discord, similar to other Windows applications."
+                description: "Add Ctrl+Q as a keyboard shortcut to close Discord. This provides an alternative to Alt+F4 for quickly closing the application."
             },
             disableMinSize: {
                 label: "Disable minimum window size",
-                description: "Allows you to resize the Discord window to any size, removing the default minimum size restriction."
+                description: "Allow the Discord window to be resized smaller than its default minimum size. Useful for tiling window managers or small screens."
             }
         },
         quickActions: {
@@ -85,7 +87,8 @@ const translations = {
                 subtitle: "Thank you for donating!",
                 description: "You can manage your perks at any time by messaging @mutanplex.",
                 button: "Donate",
-                invite: "Join our Discord"
+                invite: "Join our Discord",
+                invalid: "Invalid or expired invite link."
             },
             supportProject: {
                 title: "Support the Project",
@@ -100,15 +103,15 @@ const translations = {
         },
         settingsSection: {
             title: "Settings",
+            description: "Configure how Plexcord behaves and integrates with Discord. These settings affect the Discord client's appearance and behavior.",
             hintParts: {
-                prefix: "Hint: You can change the position of this settings section in the ",
-                linkText: "settings of the Settings plugin",
-                suffix: "!"
+                prefix: "You can customize where this settings section appears in Discord's settings menu by configuring the {{pluginLink}}",
+                linkText: "Settings Plugin"
             }
         },
         notifications: {
             title: "Notifications",
-            description: "Settings for Notifications sent by Plexcord. This does NOT include Discord notifications (messages, etc.)",
+            description: "Configure how Plexcord handles notifications. You can customize when and how you receive alerts, or view a history of past notifications.",
             settings: "Notification Settings",
             viewLog: "View Notification Log",
             permissions: {
@@ -215,9 +218,11 @@ const translations = {
             required: "Restart required!",
             description: "Restart now to apply new plugins and their settings",
             following: "The following plugins require a restart:",
+            remainingCount: "and {{count}} more",
             fully: "Some plugins require a restart to fully disable",
             would: "Would you like to restart now?",
             resetDefault: "Reset to default settings",
+            failed: "Failed to start dependencies:",
             button: {
                 restart: "Restart",
                 later: "Later!",
@@ -225,7 +230,8 @@ const translations = {
                 cancel: "Cancel",
                 disableWarning: "Disable Warning Forever",
                 disableAll: "Disable All",
-                reset: "Reset"
+                reset: "Reset",
+                close: "Close"
             }
         },
         contributor: {
@@ -271,7 +277,8 @@ const translations = {
         },
         dangerModal: {
             title: "DANGEROUS ACTION",
-            disablePlugins: "WARNING: You are about to disable {{pluginCount}} plugins!",
+            disablePlugins: "Disable Plugins",
+            disableText: "Disable All",
             irreversible: "THIS ACTION IS IRREVERSIBLE!",
             enableBack: "Are you absolutely sure you want to proceed? You can always enable them back later.",
             undone: "This action cannet be undone. Are you sure?",
@@ -279,7 +286,8 @@ const translations = {
             disable: "You are about to disable {{enabledPlugins}} plugins!",
             confirmReset: "Confirm Reset",
             cancel: "Cancel",
-            resetText: "If you are certain you want to proceed, click {{confirmReset}}. Otherwise, click {{cancel}}."
+            resetSettings: "Reset Settings",
+            resetText: "Reset"
         },
         filters: {
             label: "Filters",
@@ -430,7 +438,7 @@ const translations = {
             invalid: "Invalid Settings. Is this even a Plexcord Settings file?"
         },
         settings: {
-            text: "Settings Export contains:",
+            text: "What's included in a backup?",
             quickcss: "Custom QuickCSS",
             theme: "Theme Links",
             plugins: "Plugin Settings",
@@ -458,11 +466,16 @@ const translations = {
         text: "Cloud",
         title: "Settings Sync",
         override: "Cloud Sync",
-        description: "Sync your settings with the cloud. This allows for easy synchronization across multiple devices with minimal effort.",
+        description: "Synchronize your Plexcord settings to the cloud. This makes it easy to keep your configuration consistent across multiple devices without manual import/export.",
+        switchDescription: "When enabled, your settings can be synced to and from the cloud. Use the actions below to manually sync.",
         settings: "Cloud Settings",
         successful: "Synchronized settings to the cloud!",
         updated: "Your settings have been updated! Click here to restart to fully apply changes!",
         deleted: "Settings deleted from cloud!",
+        integration: {
+            title: "Cloud Integration",
+            description: "Plexcord's cloud integration allows you to sync your settings across multiple devices and Discord installations. Your data is securely stored and can be easily restored at any time.",
+        },
         reauth: "We've noticed you have cloud integrations enabled in another client! Due to limitations, you will need to re-authenticate to continue using them. Click here to go to the settings page to do so!",
         error: {
             setup: "Setup failed (couldn't retrieve OAuth configuration).",
@@ -485,6 +498,21 @@ const translations = {
                 from: "Could not synchronize settings from the cloud ({{error}})."
             }
         },
+        warning: {
+            enableCloudIntegration: "Enable cloud integration above to use settings sync features."
+        },
+        danger: {
+            title: "Danger Zone",
+            description: "Permanently delete all your data from the cloud. This action cannot be undone and will remove all synced settings and any other data stored on the cloud backend.",
+            delete: {
+                account: {
+                    title: "Delete Cloud Account",
+                    description: "Are you sure you want to permanently delete your cloud account and all associated data? This action cannot be undone.",
+                    confirm: "Delete Account",
+                    cancel: "Cancel"
+                }
+            }
+        },
         notification: {
             title: "Cloud Integration",
             enabled: "Cloud integration Enabled",
@@ -501,24 +529,27 @@ const translations = {
             delete: "Delete Cloud Data",
             enable: "Enable Cloud Integrations",
             reauthorize: "Reauthorize",
-            erase: {
-                title: "Are you sure?",
-                body: "Once your data is erased, we cannot recover it. There's no going back!",
-                confirm: "Erase it!",
-                cancel: "Nevermind",
-                erase: "Erase All Data"
-            },
             confirm: "Restart now",
             later: "Later!"
         },
         privacy: "respects your privacy",
         source: "source code",
         overview: "Plexcord comes with a cloud integration that adds goodies like settings sync across devices. It {{privacy}}, and the {{source}} is AGPL 3.0 licensed so you can host it yourself.",
-        authorization: "This will request authorization if you have not yet set up cloud integrations.",
+        authorization: "Connect to the cloud backend for settings synchronization. This will request authorization if you haven't set up cloud integration yet.",
         backend: {
-            title: "Backend URL",
-            description: "Which backend to use when using cloud integrations.",
+            title: "Cloud Backend",
+            description: "Choose how your settings are stored in the cloud. By default, Plexcord Cloud is used, but you can also connect your own self-hosted cloud service.",
             invalid: "Invalid URL"
+        },
+        sync: {
+            title: "Sync Rules for This Device",
+            description: "This setting controls how settings move between this device and the cloud. You can let changes flow both ways, or choose one place to be the main source of truth.",
+            direction: {
+                both: "Two-way sync (changes go both directions)",
+                push: "This device is the source (upload only)",
+                pull: "The cloud is the source (download only)",
+                manual: "Do not sync automatically (manual sync via buttons below only)"
+            }
         }
     },
 
@@ -551,7 +582,13 @@ const translations = {
             failed: "Failed to retrieve - check console",
             current: "Current:",
             hide: "Hide logs",
-            show: "Show logs"
+            show: "Show logs",
+            fetch: {
+                title: "Fetch Changes",
+                description: "Check the repository for new commits, plugin updates, and code changes. This will compare your current version with the latest available and show you what's new.",
+                newCommit: "These are the new commits and plugin updates since your last version. You can see what features were added, bugs were fixed, and which plugins received updates.",
+                confirm: "Fetch",
+            }
         },
         commit: {
             available: "commits available",
@@ -625,41 +662,93 @@ const translations = {
 
     themes: {
         title: "Themes",
+        management: "Theme Management",
+        description: "Customize Discord's appearance with themes. Add local .css files or load themes directly from URLs. Themes with a cog wheel icon have customizable settings you can modify.",
         local: "Local Themes",
-        online: "Online Themes",
+        pinned: "Pinned",
         stylus: "Stylus extension",
-        links: "Enter Theme Links...",
-        error: {
-            userscript: "Themes are not supported on the Userscript!",
-            stylus: "You can istead install themes with the {{stylus}}!",
-            expired: "Invalid or expired link"
-        },
-        find: "Find Themes",
         bd: "BetterDiscord Themes",
         github: "Github",
-        download: "If using the BD site, click on 'Download' and place the downloaded .theme.css file into your themes folder.",
-        external: {
-            title: "External Themes",
-            security: "For security reasons, loading resources (styles, fonts, images, ...) from most sites is blocked.",
-            host: "Make sure all your assets are hosted on GitHub, GitLab, Codeberg, Imgur, Discord or Google Fonts."
-        },
+        download: "Looking for themes? Check out {{bd}} or search on {{github}}. When downloading from BetterDiscord, click 'Download' and place the .theme.css file into your themes folder.",
+        add: "Add",
+        reset: "Reset settings to default",
+        notCSS: "Not a CSS file. Remember to use the raw link!",
+        okay: "Okay!",
+        checking: "Checking...",
+        valid: "Valid!",
         upload: "Upload Theme",
         openFolder: "Open Themes Folder",
         loadMissing: "Load Missing Themes",
         editQuickCSS: "Edit QuickCSS",
         editClient: "Edit ClientTheme",
-        advanced: {
-            warning: "This section is for advanced users. If you are having difficulties using it, use the Local Themes tab instead.",
-            paste: "Paste links to css files here",
-            line: "One link per line",
-            prefix: "You can prefix lines with @light or @dark to toggle them based on your Discord theme",
-            direct: "Make sure to use direct links to files (raw or github.io)!"
-        },
-        website: "Website",
+        website: "Open Website",
         discord: "Discord Server",
+        downloadTheme: "Download",
+        refresh: "Refresh",
+        delete: "Delete",
         unknown: {
+            title: "Unknown",
             author: "Unknown Author",
-            description: "A Discord Theme."
+            theme: "A Discord Theme"
+        },
+        required: "The following plugins are required, but aren't enabled: ",
+        homepage: "Homepage",
+        support: "Support",
+        online: {
+            title: "Online Themes",
+            description: "Load themes directly from URLs instead of local files. Online themes auto-update when the source changes, so you always have the latest version without manual downloads.",
+            enable: "Enable Online Themes",
+            enableDescription: "Toggle online theme loading. When disabled, all online themes will be turned off and you won't be able to add new ones."
+        },
+        quickActions: {
+            title: "Quick Actions",
+            description: "Shortcuts for managing your themes. Open your themes folder to add new themes, use QuickCSS for quick style tweaks, or reload themes after making changes."
+        },
+        error: {
+            userscript: "Themes are not supported on the Userscript!",
+            stylus: "You can istead install themes with the {{stylus}}!",
+            expired: "Invalid or expired link",
+            text: "Error:"
+        },
+        copy: {
+            url: "Copy URL",
+            copied: "Theme URL copied!",
+            settings: "Copy theme settings",
+            copiedSettings: "Copied theme settings to clipboard."
+        },
+        paste: {
+            settings: "Paste theme settings",
+            empty: "Your clipboard is empty.",
+            invalid: "Your clipboard doesn't have valid settings data.",
+            pasted: "Pasted theme settings from clipboard."
+        },
+        settings: {
+            for: "Settings for {{themeName}}",
+        },
+        installed: {
+            title: "Installed Themes",
+            description: "Manage your themes here. Local themes load from your themes folder, online themes from URLs. Themes with a cog wheel icon have customizable settings.",
+            count: "{{count}} theme{{s}} installed ({{localCount}} local, {{onlineCount}} online) · {{enabledCount}} enabled",
+            search: "Search for a theme...",
+            loading: "Loading themes...",
+            none: "No themes installed yet. Add theme files to your themes folder or add an online theme above to get started.",
+            noCriteria: "No themes match your search or filter criteria."
+        },
+        filter: {
+            all: "Show All",
+            online: "Online Themes",
+            local: "Local Themes",
+            enabled: "Enabled",
+            disabled: "Disabled"
+        },
+        notification: {
+            refresh: {
+                title: "Theme Refreshed",
+                error: "Failed to refresh theme"
+            },
+            failed: {
+                download: "Failed to download theme"
+            }
         }
     },
 
@@ -713,6 +802,7 @@ const translations = {
         },
         repo: "Repo",
         repoDescription: "This is the GitHub repository where Plexcord fetches updates from.",
+        loading: "Loading...",
     },
 
     components: {
@@ -1152,6 +1242,16 @@ const translations = {
                 }
             }
         },
+        autoZipper: {
+            name: "AutoZipper",
+            description: "Automatically zips specified file types and folders before uploading to Discord",
+            option: {
+                extensions: {
+                    label: "Extensions",
+                    description: "Comma-separated list of file extensions to auto-zip (e.g., .psd,.blend,.exe,.dmg)"
+                }
+            }
+        },
         bannersEverywhere: {
             name: "BannersEverywhere",
             description: "Displays banners in the member list",
@@ -1206,6 +1306,43 @@ const translations = {
                     left: "Left",
                     right: "Right"
                 }
+            }
+        },
+        betterAudioPlayer: {
+            name: "BetterAudioPlayer",
+            description: "Adds a spectrograph and oscilloscope visualizer to audio attachment players",
+            option: {
+                oscilloscope: {
+                    label: "Oscilloscope",
+                    description: "Enable oscilloscope visualizer"
+                },
+                spectrograph: {
+                    label: "Spectrograph",
+                    description: "Enable spectrograph visualizer"
+                },
+                oscilloscopeSolidColor: {
+                    label: "Oscilloscope Solid Color",
+                    description: "Use a solid color for the oscilloscope instead of a gradient"
+                },
+                oscilloscopeColor: {
+                    label: "Oscilloscope Color",
+                    description: "Color of the oscilloscope when solid color is enabled"
+                },
+                spectrographSolidColor: {
+                    label: "Spectrograph Solid Color",
+                    description: "Use a solid color for the spectrograph instead of a gradient"
+                },
+                spectrographColor: {
+                    label: "Spectrograph Color",
+                    description: "Color of the spectrograph when solid color is enabled"
+                },
+                forceMoveBelow: {
+                    label: "Force Move Below",
+                    description: "Force the visualizer to be below the audio controls"
+                }
+            },
+            toast: {
+                invalidColorFormat: "Invalid color format for {{settingKey}}, make sure it's in the format 'R, G, B' or '#RRGGBB'"
             }
         },
         betterBanReasons: {
@@ -1304,7 +1441,13 @@ const translations = {
         },
         betterGifPicker: {
             name: "BetterGifPicker",
-            description: "Makes the gif picker open the favourite category by default"
+            description: "Makes the gif picker open the favourite category by default",
+            option: {
+                keepOpen: {
+                    label: "Keep Open",
+                    description: "Keeps the gif picker open after selecting a gif"
+                }
+            }
         },
         betterInvites: {
             name: "BetterInvites",
@@ -1437,6 +1580,36 @@ const translations = {
             name: "BetterUploadButton",
             description: "Upload with a single click, open menu with right click"
         },
+        betterUserArea: {
+            name: "BetterUserArea",
+            description: "Customize and make the user area more clean.",
+            option: {
+                removeNameplate: {
+                    label: "Remove Nameplate",
+                    description: "Remove nameplate styling."
+                },
+                removeAudioMenus: {
+                    label: "Remove Audio Menus",
+                    description: "Remove menus next to mute and deafen buttons."
+                },
+                alwaysShowUsername: {
+                    label: "Always Show Username",
+                    description: "Always show username instead of status."
+                },
+                removeButtonTooltips: {
+                    label: "Remove Button Tooltips",
+                    description: "Remove button tooltips."
+                },
+                removeAvatarDecoration: {
+                    label: "Remove Avatar Decoration",
+                    description: "Remove avatar decoration."
+                },
+                removeUsernameStyles: {
+                    label: "Remove Username Styles",
+                    description: "Remove username colors and effects."
+                }
+            }
+        },
         biggerStreamPreview: {
             name: "BiggerStreamPreview",
             description: "This plugin allows you to enlarge stream previews",
@@ -1483,6 +1656,10 @@ const translations = {
                     description: "Blur attachments in all channels (not just NSFW)"
                 }
             }
+        },
+        bypassPinPrompt: {
+            name: "BypassPinPrompt",
+            description: "Bypass the pin prompt when using the pin functions"
         },
         bypassStatus: {
             name: "BypassStatus",
@@ -2270,51 +2447,514 @@ const translations = {
         commandPalette: {
             name: "CommandPalette",
             description: "Allows you to navigate the UI with a keyboard.",
-            search: "Search the Command Palette",
-            type: "Type and Press Enter",
-            enter: "Enter a URL",
-            fetch: "Enter URL to fetch (GET only)",
-            issue: "Issue fetching URL",
-            enable: "Enable",
-            disable: "Disable",
-            open: {
-                devTab: "Open Dev Tab",
-                plexcord: "Open Plexcord Tab",
-                plugin: "Open Plugins Tab",
-                themes: "Open Themes Tab",
-                updater: "Open Updater Tab",
-                cloud: "Open Cloud Tab",
-                backup: "Open Backup & Restore Tab",
-                restart: "Restart Plexcord",
-                quickCSS: "Open Quick CSS File",
-                settings: "Open Settings Folder",
-                github: "Open in Github",
-                browser: "Open in Browser",
-                togglePlugin: "Toggle Plugin",
-                quickFetch: "Quick Fetch",
-                copyGit: "Copy Git Info",
-                check: "Check for Updates",
-                navigate: "Navigate to Server",
-                changelog: "Open Changelog Tab"
+            action: {
+                command: {
+                    label: "Run Command",
+                    description: "Alias another palette command by ID. Use the picker if you’re unsure of the identifier."
+                },
+                settings: {
+                    label: "Open Settings Page",
+                    description: "Jump directly to a Discord settings page. Choose a page from the picker."
+                },
+                url: {
+                    label: "Open URL",
+                    description: "Open a link. Use https:// links for best compatibility."
+                },
+                macro: {
+                    label: "Run Macro",
+                    description: "Run a sequence of commands in order. Add steps via the picker."
+                }
+            },
+            category: {
+                auto: "Auto (use default placement)",
+                default: {
+                    label: "Quick Actions",
+                    description: "Common Plexcord shortcuts"
+                },
+                plugins: {
+                    label: "Plugins",
+                    description: "Enable, disable, and configure Plexcord plugins",
+                    enable: {
+                        label: "Enable Plugins"
+                    },
+                    disable: {
+                        label: "Disable Plugins"
+                    },
+                    settings: {
+                        label: "Plugin Settings"
+                    },
+                    toolbox: {
+                        label: "Plugin Actions"
+                    },
+                    chatbar: {
+                        label: "Chat Bar Buttons"
+                    },
+                    changes: {
+                        label: "Plugin Changes"
+                    }
+                },
+                context: {
+                    label: "Current Context",
+                    description: "Actions for the selected channel and guild"
+                },
+                updates: {
+                    label: "Updates",
+                    description: "Stay up to date with Plexcord"
+                },
+                discordSettings: {
+                    label: "Discord Settings",
+                    description: "Jump to Discord configuration pages"
+                },
+                custom: {
+                    label: "Custom Commands",
+                    description: "User-defined command palette entries"
+                },
+                sessions: {
+                    label: "Session Tools",
+                    description: "Utilities for managing your Discord session"
+                },
+                guilds: {
+                    label: "Guilds",
+                    description: "Quickly navigate to your guilds"
+                },
+                friends: {
+                    label: "Friends",
+                    description: "Quickly navigate to your friends"
+                },
+                action: {
+                    label: "Action",
+
+                }
+            },
+            builtIn: {
+                open: {
+                    settings: {
+                        plexcord: "Open Plexcord Settings",
+                        plugin: "Open Plugin Settings"
+                    }
+                },
+                reload: {
+                    label: "Reload Discord",
+                    description: "Reloads the current Discord window"
+                }
+            },
+            command: {
+                enable: "Enable {{pluginName}}",
+                enabled: "Enabled {{pluginName}}",
+                disable: "Disable {{pluginName}}",
+                disabled: "Disabled {{pluginName}}",
+                failed: "Command failed:",
+                toggleFailed: "Failed to toggle {{pluginName}}.",
+                pluginSettings: "{{pluginName}} Settings",
+                untitled: "Untitled Command",
+                new: "New Command",
+                error: {
+                    enter: "Enter a command ID or choose one below.",
+                    noCommand: "No command matches this ID."
+                },
+                discord: {
+                    account: "Open My Account",
+                    privacy: "Open Data & Privacy",
+                    notifications: "Open Notifications",
+                    voice: "Open Voice & Video",
+                    text: "Open Text & Images",
+                    appearance: "Open Appearance",
+                    accessibility: "Open Accessibility",
+                    keybinds: "Open Keybinds",
+                    advanced: "Open Advanced",
+                },
+                updates: {
+                    check: {
+                        label: "Check for Updates",
+                        description: "Check for Plexcord updates",
+                        one: "One update available",
+                        multiple: "{{count}} updates available",
+                        none: "No updates available",
+                        failed: "Failed to check for updates."
+                    },
+                    changelog: {
+                        label: "View Changelog",
+                        description: "Opens the Plexcord changelog"
+                    }
+                },
+                read: {
+                    mark: {
+                        label: "Mark {{channelLabel}} Read"
+                    }
+                },
+                pin: {
+                    open: {
+                        label: "Open Pins for {{channelLabel}}"
+                    },
+                    toggle: {
+                        label: "Toggle Pin on Last Command"
+                    }
+                },
+                channel: {
+                    mute: {
+                        label: "Mute {{channelLabel}}",
+                        oneHour: "Mute {{channelLabel}} for 1 hour",
+                        untilTomorrow: "Mute {{channelLabel}} until tomorrow",
+                    },
+                    unmute: {
+                        label: "Unmute {{channelLabel}}",
+                    },
+                    reopen: {
+                        label: "Reopen Last Closed DM"
+                    },
+                    dm: {
+                        open: {
+                            label: "Open DM with {{userLabel}}"
+                        }
+                    }
+                },
+                guild: {
+                    settings: {
+                        label: "Open Settings for {{guildLabel}}"
+                    },
+                    navigate: {
+                        label: "Navigate to {{guildLabel}}"
+                    }
+                },
+                session: {
+                    thirtyMinutesDnd: "Set Do Not Disturb for 30 minutes",
+                    oneHourDnd: "Set Do Not Disturb for 1 hour",
+                    cancelStatusReset: "Cancel Status Timer"
+                },
+                status: {
+                    set: {
+                        online: "Set Status: Online",
+                        idle: "Set Status: Idle",
+                        dnd: "Set Status: Do Not Disturb",
+                        invisible: "Set Status: Invisible"
+                    }
+                },
+                toggle: {
+                    streamer: "Toggle Streamer Mode",
+                    mute: "Toggle Self Mute",
+                    deafen: "Toggle Self Deafen",
+                },
+                notification: {
+                    clear: {
+                        label: "Clear Desktop Notifications"
+                    }
+                },
+                palette: {
+                    settings: {
+                        label: "Open Command Palette Settings",
+                        description: "Configure the Command Palette plugin"
+                    }
+                },
+                recent: {
+                    label: "Show Recent Commands",
+                    description: "Displays the last executed commands",
+                    rerun: "Re-run Last Command"
+                },
+                plugin: {
+                    reload: {
+                        label: "Reload All Plugins",
+                        description: "Attempts to hot reload every enabled plugin"
+                    },
+                    enable: {
+                        label: "Enable All Plugins"
+                    },
+                    disable: {
+                        label: "Disable All Non-required Plugins"
+                    },
+                    restart: {
+                        label: "Restart Plexcord",
+                        description: "Reloads the Discord client window"
+                    }
+                },
+                quickCSS: {
+                    label: "Toggle Quick CSS"
+                },
+                transparentity: {
+                    label: "Toggle Window Transparency"
+                },
+                theme: {
+                    open: {
+                        label: "Open Client Theme Settings"
+                    }
+                }
+            },
+            modal: {
+                searchPlaceholder: "Search commands",
+                noCommand: "No commands found",
+                add: {
+                    title: "Add Command"
+                },
+                choose: {
+                    title: "Choose Command"
+                },
+                command: {
+                    palette: {
+                        label: "Command Palette",
+                        placeholder: "Type a command",
+                        filtering: "Filtering by {{tags}}",
+                        noCommand: "No commands found",
+                        pin: "Pin command",
+                        unpin: "Unpin command"
+                    },
+                    target: {
+                        label: "Target Command ID",
+                        placeholder: "Enter command ID",
+                        choose: "Choose Command"
+                    },
+                    custom: {
+                        label: "Custom Commands",
+                        description: "1) Name the command · 2) Add optional description/keywords/tags/category · 3) Choose an action and fill its details (IDs should match existing palette commands for aliases and macros).",
+                        auto: "Auto (default)",
+                        expand: "Expand",
+                        collapse: "Collapse",
+                        collapsed: {
+                            label: "Label",
+                            description: "Disaplay Name",
+                            advanced: {
+                                hide: "Hide advanced options",
+                                show: "Show advanced options"
+                            },
+                            subtitle: {
+                                label: "Description",
+                                placeholder: "Optional subtitle"
+                            },
+                            keywords: {
+                                label: "Keywords",
+                                placeholder: "Comma-separated keywords"
+                            },
+                            tags: {
+                                label: "Tags",
+                                placeholder: "Comma-separated tags"
+                            },
+                            suggestion: {
+                                label: "Suggestion"
+                            },
+                            chooseCommand: {
+                                label: "Choose where this command appears in the palette."
+                            },
+                            danger: {
+                                label: "Show as dangerous"
+                            }
+                        },
+                        remove: "Remove Command",
+                        add: "Add Command"
+                    }
+                },
+                settings: {
+                    noSelected: "No page selected",
+                    current: "Current Page",
+                    choose: "Choose Page..."
+                },
+                url: {
+                    url: "URL",
+                    error: "Use http:// or https:// links.",
+                    valid: "Enter a valid URL.",
+                    open: {
+                        external: "Open externally",
+                    }
+                },
+                macro: {
+                    sequence: {
+                        label: "Command Sequence",
+                        placeholder: "command-a, command-b"
+                    },
+                    addStep: "Add Step",
+                    unknownId: "Unknown Command IDs"
+                }
+            },
+            status: {
+                online: "Online",
+                idle: "Idle",
+                dnd: "Do Not Disturb",
+                invisible: "Invisible"
+            },
+            tag: {
+                core: "Core",
+                navigation: "Navigation",
+                utility: "Utility",
+                developer: "Developer",
+                customization: "Customization",
+                plugins: "Plugins",
+                session: "Session",
+                context: "Context",
+                custom: "Custom",
+                guilds: "Guilds",
+                friends: "Friends",
+                other: "Other"
             },
             toast: {
-                invalid: "Invalid URL",
-                copied: "Copied response to clipboard!",
-                git: "Copied git info to clipboard!",
-                noUpdates: "No updates available",
-                enabled: "Successfully enabled {{plugin}}",
-                disabled: "Successfully disabled {{plugin}}"
+                chat: {
+                    button: {
+                        unableToFind: "Unable to find the '{{label}}' chat button.",
+                        failedToTrigger: "Failed to trigger {{label}}.",
+                        activated: "{{label}} activated."
+                    }
+                },
+                channel: {
+                    mute: {
+                        unavailable: "Channel mute controls unavailable",
+                        muted: "Muted channel.",
+                        unmuted: "Unmuted channel.",
+                        failed: "Failed to update channel mute state."
+                    },
+                    dm: {
+                        no: "No DM closures recorded this session.",
+                        reOpened: "Reopened last closed DM.",
+                        noAvailable: "The DM is no longer available."
+                    }
+                },
+                command: {
+                    loop: "Command loop detected in macro execution.",
+                    notFound: "Command {{commandId}} not found.",
+                    unsupported: "Unsupported custom command action.",
+                    failedToRun: "Failed to run {{label}}.",
+                    notMetadata: "Command Palette plugin metadata unavailable."
+                },
+                guild: {
+                    mute: {
+                        unavailable: "Guild mute controls unavailable",
+                        muted: "Muted guild.",
+                        unmuted: "Unmuted guild.",
+                        failed: "Failed to update guild mute state."
+                    },
+                    settings: {
+                        unable: "Unable to open guild settings.",
+                    }
+                },
+                panel: {
+                    pin: {
+                        unable: "Unable to open pins panel.",
+                    }
+                },
+                status: {
+                    reset: {
+                        canceled: "Canceled scheduled status reset.",
+                        unableToChange: "Unable to change status right now.",
+                        reverted: "Status reverted to {{status}}.",
+                        dnd: "Do Not Disturb for {{duration}} minutes."
+                    },
+                    change: {
+                        unableToChange: "Unable to change status right now.",
+                        changed: "Status changed to {{status}}."
+                    }
+                },
+                read: {
+                    marked: "Marked {{channelLabel}} as read.",
+                    failed: "Failed to mark channel as read."
+                },
+                route: {
+                    unable: "Unable to open {{destination}}.",
+                },
+                notification: {
+                    cleared: "Cleared all notifications.",
+                    failed: "Failed to clear notifications.",
+                    notSupported: "Notification clearing not supported."
+                },
+                streamerMode: {
+                    enabled: "Streamer Mode enabled.",
+                    disabled: "Streamer Mode disabled.",
+                },
+                voice: {
+                    micToggle: {
+                        muted: "Microphone muted.",
+                        unmuted: "Microphone unmuted."
+                    },
+                    deafenToggle: {
+                        deafened: "You are now deafened.",
+                        undeafened: "You are no longer deafened."
+                    }
+                },
+                quickCSS: {
+                    enabled: "Quick CSS enabled.",
+                    disabled: "Quick CSS disabled."
+                },
+                transparentity: {
+                    enabled: "Window Transparency enabled.",
+                    disabled: "Window Transparency disabled."
+                },
+                plugin: {
+                    disabled: {
+                        label: "{{pluginName}} is disabled.",
+                        disable: "{{pluginName}} is disabled. Enable the plugin to use this action."
+                    },
+                    required: {
+                        label: "{{pluginName}} requires a restart to reload."
+                    },
+                    stop: {
+                        failed: "Failed to stop {{pluginName}}."
+                    },
+                    restart: {
+                        failed: "Failed to restart {{pluginName}}."
+                    },
+                    reload: {
+                        label: "Reloaded {{pluginName}}.",
+                        noPlugin: "No plugins were reloaded.",
+                        reloaded: "Reloaded {{count}} plugin{{s}}."
+                    },
+                    toggle: {
+                        enabled: "Enabled {{changed}} plugin{{s}}.",
+                        disabled: "Disabled {{changed}} plugin{{s}}.",
+                        noChanged: "No plugins changed state."
+                    },
+                    run: {
+                        failed: {
+                            label: "Failed to run {{pluginName}}: {{actionLabel}}."
+                        }
+                    }
+                }
+            },
+            display: {
+                channel: {
+                    current: "Current Channel",
+                    group: "Group DM",
+                    direct: "Direct Message"
+                },
+                guild: {
+                    current: "Current Guild",
+                }
             },
             option: {
                 hotkey: {
                     label: "Hotkey",
-                    description: "The hotkey to open the command palette",
-                    recording: "Recording...",
-                    record: "Record keybind"
+                    description: "Hotkey used to open the command palette",
+                    recording: "Press any key...",
+                    reset: "Reset"
                 },
-                allowMouseControl: {
-                    label: "Allow Mouse Control",
-                    description: "Allow the mouse to control the command palette."
+                visualStyle: {
+                    label: "Visual Style",
+                    description: "Palette appearance",
+                    classic: "Classic",
+                    polished: "Polished"
+                },
+                showTags: {
+                    label: "Show Tags",
+                    description: "Display tag chips for commands"
+                },
+                enableTagFilter: {
+                    label: "Enable Tag Filter",
+                    description: "Show the tag filter bar"
+                },
+                customCommands: {
+                    label: "Custom Commands",
+                    description: "Manage custom command palette entries"
+                }
+            },
+            template: {
+                alias: {
+                    label: "Alias Command",
+                    description: "Mirror an existing command"
+                },
+                settings: {
+                    label: "Settings",
+                    description: "Open Discord Settings"
+                },
+                url: {
+                    label: "Link",
+                    description: "Open an external URL"
+                },
+                macro: {
+                    label: "Macro",
+                    description: "Run a sequence of commands"
                 }
             }
         },
@@ -6055,6 +6695,10 @@ const translations = {
                 colorMobileIndicator: {
                     label: "Color Mobile Indicator",
                     description: "Whether to make the mobile indicator match the color of the user status."
+                },
+                showBots: {
+                    label: "Show Bots",
+                    description: "Whether to show platform indicators on bots"
                 }
             }
         },

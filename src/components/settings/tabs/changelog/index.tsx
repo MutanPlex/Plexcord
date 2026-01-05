@@ -8,7 +8,6 @@
 import "./styles.css";
 
 import { changelog, t } from "@api/i18n";
-import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Card } from "@components/Card";
 import { Divider } from "@components/Divider";
@@ -18,10 +17,11 @@ import { DeleteIcon } from "@components/Icons";
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
+import { HashLink } from "@components/settings/tabs/updater/Components";
 import { Margins } from "@utils/margins";
 import { useAwaiter } from "@utils/react";
 import { formatTimestamp } from "@utils/text";
-import { getRepo, shortGitHash, UpdateLogger } from "@utils/updater";
+import { getRepo, UpdateLogger } from "@utils/updater";
 import { Alerts, React, Toasts, useEffect } from "@webpack/common";
 
 import gitHash from "~git-hash";
@@ -45,22 +45,6 @@ import {
 } from "./changelogManager";
 import { NewPluginsCompact, NewPluginsSection } from "./NewPluginsSection";
 
-function HashLink({
-    repo,
-    hash,
-    disabled = false,
-}: {
-    repo: string;
-    hash: string;
-    disabled?: boolean;
-}) {
-    return (
-        <Link href={`${repo}/commit/${hash}`} disabled={disabled}>
-            {hash}
-        </Link>
-    );
-}
-
 function ChangelogCard({
     entry,
     repo,
@@ -83,7 +67,7 @@ function ChangelogCard({
                     <code className="pc-changelog-entry-hash">
                         <HashLink
                             repo={repo}
-                            hash={entry.hash.slice(0, 7)}
+                            hash={entry.hash}
                             disabled={repoPending}
                         />
                     </code>
@@ -134,8 +118,8 @@ function UpdateLogCard({
                                 : `${t(changelog.update)}: ${log.fromHash.slice(0, 7)} → ${log.toHash.slice(0, 7)}`}
                         </span>
                         <Button
-                            variant="secondary"
                             size="min"
+                            variant="secondary"
                             className="pc-changelog-delete-button"
                             style={{
                                 padding: "4px",
@@ -497,26 +481,9 @@ function ChangelogContent() {
 
     return (
         <>
+            <Heading className={Margins.top16}>{t(changelog.modal.fetch.title)}</Heading>
             <Paragraph className={Margins.bottom16}>
-                {t(changelog.modal.description)}
-            </Paragraph>
-
-            <Heading>{t(changelog.modal.repository)}</Heading>
-            <Paragraph className={Margins.bottom16}>
-                {repoPending ? (
-                    repo
-                ) : repoErr ? (
-                    t(changelog.modal.failed)
-                ) : (
-                    <Link href={repo}>
-                        {repo.split("/").slice(-2).join("/")}
-                    </Link>
-                )}{" "}
-                ({t(changelog.modal.current)}{" "}
-                <span className="pc-changelog-current-hash">
-                    {shortGitHash()}
-                </span>
-                )
+                {t(changelog.modal.fetch.description)}
             </Paragraph>
 
             <div className="pc-changelog-controls">
@@ -524,11 +491,7 @@ function ChangelogContent() {
                     size="small"
                     disabled={isLoading || repoPending || !!repoErr}
                     onClick={fetchChangelog}
-                    variant={
-                        recentlyChecked
-                            ? "positive"
-                            : "secondary"
-                    }
+                    variant={recentlyChecked ? "positive" : "primary"}
                 >
                     {isLoading
                         ? t(changelog.loading)
@@ -541,11 +504,7 @@ function ChangelogContent() {
                     <>
                         <Button
                             size="small"
-                            variant={
-                                showHistory
-                                    ? "primary"
-                                    : "secondary"
-                            }
+                            variant={showHistory ? "primary" : "secondary"}
                             onClick={() => setShowHistory(!showHistory)}
                             style={{ marginLeft: "8px" }}
                         >
@@ -570,8 +529,7 @@ function ChangelogContent() {
                                             id: Toasts.genId(),
                                             type: Toasts.Type.SUCCESS,
                                             options: {
-                                                position:
-                                                    Toasts.Position.BOTTOM,
+                                                position: Toasts.Position.BOTTOM,
                                             },
                                         });
                                     },
@@ -586,41 +544,55 @@ function ChangelogContent() {
             </div>
 
             {error && (
-                <ErrorCard style={{ padding: "1em", marginBottom: "1em" }}>
-                    <p>{error}</p>
-                    <BaseText
-                        style={{
-                            marginTop: "0.5em",
-                            color: "var(--text-muted)",
-                        }}
-                    >
+                <ErrorCard style={{ padding: "1em", marginTop: "1em" }}>
+                    <Paragraph>{error}</Paragraph>
+                    <Paragraph color="text-subtle" style={{ marginTop: "0.5em" }}>
                         {t(changelog.internet)}
-                    </BaseText>
+                    </Paragraph>
                 </ErrorCard>
             )}
 
-            <Divider className={Margins.bottom16} />
+            <Divider className={Margins.top20} />
 
-            {/* Current Changes Section */}
-            {hasCurrentChanges ? (
-                <div className="pc-changelog-current">
-                    <Heading className={Margins.bottom8}>
-                        {t(changelog.recent)}
-                    </Heading>
+            <Heading>{t(changelog.modal.repository)}</Heading>
 
-                    {/* New Plugins Section */}
+            <Paragraph className={Margins.bottom16}>
+                {t(changelog.modal.description)}
+            </Paragraph>
+
+            <Paragraph color="text-subtle">
+                {repoPending ? (
+                    repo
+                ) : repoErr ? (
+                    t(changelog.modal.failed)
+                ) : (
+                    <Link href={repo}>
+                        {repo.split("/").slice(-2).join("/")}
+                    </Link>
+                )}
+            </Paragraph>
+            <Paragraph color="text-subtle">
+                {t(changelog.modal.current)} (<HashLink repo={repo} hash={gitHash} disabled={repoPending} />)
+            </Paragraph>
+
+            {hasCurrentChanges && (
+                <>
+                    <Divider className={Margins.top20} />
+
+                    <Heading className={Margins.top20}>{t(changelog.recent)}</Heading>
+                    <Paragraph className={Margins.bottom16}>
+                        {t(changelog.modal.fetch.newCommit)}
+                    </Paragraph>
+
                     {newPlugins.length > 0 && (
                         <div className={Margins.bottom16}>
                             <NewPluginsSection
                                 newPlugins={newPlugins}
-                                onPluginToggle={(pluginName, enabled) => {
-                                    // Handle plugin toggle if needed
-                                }}
+                                onPluginToggle={() => { }}
                             />
                         </div>
                     )}
 
-                    {/* Updated Plugins Section */}
                     {updatedPlugins.length > 0 && (
                         <div className={Margins.bottom16}>
                             <Heading className={Margins.bottom8}>
@@ -630,7 +602,6 @@ function ChangelogContent() {
                         </div>
                     )}
 
-                    {/* Code Changes */}
                     {changelogEntries.length > 0 && (
                         <div>
                             <Heading className={Margins.bottom8}>
@@ -648,33 +619,26 @@ function ChangelogContent() {
                             </div>
                         </div>
                     )}
-                </div>
-            ) : (
-                !isLoading &&
-                !error && (
-                    <Card className="pc-changelog-empty">
-                        <BaseText>
-                            {t(changelog.noCommit)}
-                        </BaseText>
-                    </Card>
-                )
+                </>
             )}
 
-            {/* History Section */}
-            {showHistory && changelogHistory.length > 0 && (
-                <div className="pc-changelog-history">
-                    <Divider
-                        className={Margins.top16}
-                        style={{ marginBottom: "1em" }}
-                    />
-                    <Heading className={Margins.bottom8}>
-                        {t(changelog.updateLogs, {
-                            count: changelogHistory.length,
-                        })}
-                    </Heading>
-                    <Paragraph className={Margins.bottom16}>
-                        {t(changelog.previous)}
+            {!hasCurrentChanges && !isLoading && !error && (
+                <>
+                    <Divider className={Margins.top20} />
+                    <Heading className={Margins.top20}>{t(changelog.recent)}</Heading>
+                    <Paragraph color="text-subtle">
+                        {t(changelog.noCommit)}
                     </Paragraph>
+                </>
+            )}
+
+            {showHistory && changelogHistory.length > 0 && (
+                <>
+                    <Divider className={Margins.top20} />
+
+                    <Heading className={Margins.top20}>{t(changelog.updateLogs, { count: changelogHistory.length })}</Heading>
+
+                    <Paragraph className={Margins.bottom16}>{t(changelog.previous)}</Paragraph>
 
                     <div className="pc-changelog-history-list">
                         {changelogHistory.map(log => (
@@ -719,7 +683,7 @@ function ChangelogContent() {
                             />
                         ))}
                     </div>
-                </div>
+                </>
             )}
         </>
     );

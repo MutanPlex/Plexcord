@@ -22,8 +22,8 @@ export function VibrancySettings() {
         <>
             <Divider className={Margins.top20} />
 
-            <Heading tag="h5">{t(settings.macVibrancy.title)}</Heading>
-            <Paragraph className={Margins.bottom20}>
+            <Heading className={Margins.top20}>{t(settings.macVibrancy.title)}</Heading>
+            <Paragraph className={Margins.bottom16}>
                 {t(settings.macVibrancy.description)}
             </Paragraph >
             <ErrorBoundary noop>

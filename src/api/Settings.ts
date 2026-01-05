@@ -47,6 +47,9 @@ export interface Settings {
     eagerPatches: boolean;
     enabledThemes: string[];
     enabledThemeLinks: string[];
+    enableOnlineThemes: boolean;
+    pinnedThemes: string[];
+    themeNames: Record<string, string>;
     enableReactDevtools: boolean;
     themeLinks: string[];
     frameless: boolean;
@@ -124,6 +127,9 @@ const DefaultSettings: Settings = {
     eagerPatches: IS_REPORTER,
     enabledThemes: [],
     enabledThemeLinks: [],
+    enableOnlineThemes: true,
+    pinnedThemes: [],
+    themeNames: {},
     enableReactDevtools: false,
     frameless: false,
     transparent: false,
@@ -290,16 +296,15 @@ export function migratePluginToSettings(newName: string, oldName: string, ...set
     const newPlugin = plugins[newName];
     const oldPlugin = plugins[oldName];
 
-    if (!newPlugin || !oldPlugin) return;
-
-    if (oldPlugin?.enabled) {
+    if (newPlugin && oldPlugin?.enabled) {
         for (const settingName of settingNames) {
             logger.info(`Migrating plugin to setting from old name ${oldName} to ${newName} as ${settingName}`);
             newPlugin[settingName] = true;
-            newPlugin.enabled = true;
-            delete plugins[oldName];
-            SettingsStore.markAsChanged();
         }
+
+        newPlugin.enabled = true;
+        delete plugins[oldName];
+        SettingsStore.markAsChanged();
     }
 }
 

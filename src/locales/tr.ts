@@ -46,31 +46,33 @@ const translations: MatchStructure<typeof enTranslations> = {
         switches: {
             useQuickCss: {
                 label: "Özel CSS'yi Etkinleştir",
-                description: "Discord'a özel CSS uygulanmasına izin vermek için QuickCSS özelliğini etkinleştirir"
+                description: "QuickCSS düzenleyicisinden özel CSS yükleyin. Bu, Discord'un görünümünü kendi stillerinizle özelleştirmenize olanak tanır."
             },
             enableReactDevtools: {
                 label: "React Geliştirici Araçlarını Etkinleştir",
-                description: "React Geliştirici Araçları uzantısının Discord ile çalışmasını sağlar"
+                description: "Discord'un React bileşenlerinde hata ayıklamak için React Geliştirici Araçları uzantısını etkinleştirin. Eklenti geliştirme için kullanışlıdır."
             },
             frameless: {
                 label: "Pencere çerçevesini devre dışı bırak",
-                description: "Daha temiz bir görünüm için pencere çerçevesini kaldırır. Pencere kontrollerini etkileyebileceğinden dikkatli kullanın."
+                description: "Daha temiz bir görünüm için yerel pencere çerçevesini çıkarın. Başlık çubuğu alanını sürükleyerek pencereyi hâlâ taşıyabilirsiniz."
             },
             winNativeTitleBar: {
                 label: "Discord'un özel başlık çubuğu yerine Windows'un yerel başlık çubuğunu kullan",
-                description: "Discord'un özel başlık çubuğunu daha iyi OS entegrasyonu için yerel Windows başlık çubuğuyla değiştirir."
+                description: "Discord'un özel başlık çubuğunu standart Windows başlık çubuğuyla değiştirin. Bu, bazı pencere yönetimi araçlarıyla uyumluluğu geliştirebilir."
             },
             transparent: {
                 label: "Pencere şeffaflığını etkinleştir",
-                description: "Bu işlem için şeffaflığı destekleyen bir tema gereklidir, aksi takdirde hiçbir etkisi olmaz. Yan etki olarak pencerenin yeniden boyutlandırılmasını engeller."
+                description: "Discord penceresini şeffaf yapın. Şeffaflığı destekleyen bir tema gereklidir, aksi takdirde hiçbir şey yapmaz.",
+                isWindows: "Bu, pencerenin yeniden boyutlandırılmasını durduracak ve pencereyi ekran kenarlarına yapıştırmanızı önleyecektir.",
+                notWindows: "Bu, pencerenin yeniden boyutlandırılmasını engelleyecektir."
             },
             winCtrlQ: {
                 label: "Discord'u kapatmak için Ctrl+Q kısayolunu kaydet (Alt+F4'e alternatif)",
-                description: "Ctrl+Q kullanarak Discord'u kapatmanızı sağlar, diğer Windows uygulamalarına benzer şekilde."
+                description: "Discord'u kapatmak için klavye kısayolu olarak Ctrl+Q ekleyin. Bu, uygulamayı hızlı bir şekilde kapatmak için Alt+F4'e bir alternatif sağlar."
             },
             disableMinSize: {
                 label: "Minimum pencere boyutunu devre dışı bırak",
-                description: "Discord penceresini herhangi bir boyuta yeniden boyutlandırmanıza izin verir, varsayılan minimum boyut kısıtlamasını kaldırır."
+                description: "Discord penceresinin varsayılan minimum boyutundan daha küçük yeniden boyutlandırılmasına izin verin. Pencere yöneticilerini veya küçük ekranları döşemek için kullanışlıdır."
             }
         },
         quickActions: {
@@ -88,7 +90,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 subtitle: "Bağışınız için teşekkürler!",
                 description: "@mutanplex ile mesajlaşarak ayrıcalıklarınızı istediğiniz zaman yönetebilirsiniz.",
                 button: "Bağış",
-                invite: "Discordumuza Katıl"
+                invite: "Discordumuza Katıl",
+                invalid: "Geçersiz veya süresi dolmuş davet bağlantısı."
             },
             supportProject: {
                 title: "Projeyi Destekle",
@@ -103,15 +106,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         settingsSection: {
             title: "Ayarlar",
+            description: "Plexcord'un Discord ile nasıl entegre olduğunu ve davrandığını yapılandırın. Bu ayarlar Discord istemcisinin görünümünü ve davranışını etkiler.",
             hintParts: {
-                prefix: "İpucu: Bu ayarlar bölümünün konumunu ",
-                linkText: "Ayarlar eklentisinin ayarlarından",
-                suffix: " değiştirebilirsiniz!"
+                prefix: "{{pluginLink}} ayarlarını yapılandırarak, bu ayarlar bölümünün Discord ayarlar menüsünde nerede görüneceğini özelleştirebilirsiniz.",
+                linkText: "Ayarlar Eklentisinin"
             }
         },
         notifications: {
             title: "Bildirimler",
-            description: "Plexcord tarafından gönderilen bildirimler için ayarlar. Bu, Discord bildirimlerini (mesajlar vb.) içermez.",
+            description: "Plexcord'un bildirimleri nasıl işleyeceğini yapılandırın. Uyarıları ne zaman ve nasıl alacağınızı özelleştirebilir veya geçmiş bildirimlerin geçmişini görüntüleyebilirsiniz.",
             settings: "Bildirim Ayarları",
             viewLog: "Bildirim Geçmişini Görüntüle",
             permissions: {
@@ -220,7 +223,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             following: "Aşağıdaki eklentiler yeniden başlatma gerektiriyor:",
             fully: "Bazı eklentilerin tamamen devre dışı bırakılması için yeniden başlatma gerekir.",
             would: "Yeniden başlatmak ister misiniz?",
+            remainingCount: "ve {{count}} daha",
             resetDefault: "Varsayılan ayarlara sıfırla",
+            failed: "Bağımlılıklar başlatılamadı:",
             button: {
                 restart: "Yeniden Başlat",
                 later: "Sonra!",
@@ -228,7 +233,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cancel: "İptal",
                 disableWarning: "Uyarıları Devre Dışı Bırak",
                 disableAll: "Tümünü Devre Dışı Bırak",
-                reset: "Sıfırla"
+                reset: "Sıfırla",
+                close: "Kapat"
             }
         },
         contributor: {
@@ -274,7 +280,8 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         dangerModal: {
             title: "Tehlikeli Eylem",
-            disablePlugins: "DİKKAT: {{pluginCount}} eklentiyi devre dışı bırakmak üzeresiniz!",
+            disablePlugins: "Eklentileri Devre Dışı Bırak",
+            disableText: "Tümünü Devre Dışı Bırak",
             irreversible: "BU EYLEM GERİ ALINAMAZ!",
             enableBack: "Devam etmek istediğinizden kesinlikle emin misiniz? Daha sonra tekrardan aktifleştirebilirsiniz.",
             undone: "Bu eylem geri alınamaz. Emin misin?",
@@ -282,7 +289,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             disable: "{{enabledPlugins}} eklentiyi devre dışı bırakmak üzeresiniz!",
             confirmReset: "Onayla ve Sıfırla",
             cancel: "İptal",
-            resetText: "Eğer devam etmek istediğinizden eminseniz, {{confirmReset}} butonuna tıklayın. Aksi takdirde, {{cancel}} butonuna tıklayın."
+            resetSettings: "Ayarları Sıfırla",
+            resetText: "Sıfırla"
         },
         filters: {
             label: "Filtreler",
@@ -433,7 +441,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             invalid: "Geçersiz Ayarlar. Bu gerçekten bir Plexcord Ayar dosyası mı?"
         },
         settings: {
-            text: "Dışarı aktarma şu ayarları içerir:",
+            text: "Yedeklemede neler var?",
             quickcss: "Özel QuickCSS",
             theme: "Tema Bağlantıları",
             plugins: "Eklenti Ayarları",
@@ -486,7 +494,13 @@ const translations: MatchStructure<typeof enTranslations> = {
             failed: "Alınamadı - konsolu kontrol edin",
             current: "Mevcut:",
             hide: "Notları gizle",
-            show: "Notları göster"
+            show: "Notları göster",
+            fetch: {
+                title: "Değişiklikleri Getir",
+                description: "Depoda yeni commitleri, eklenti güncellemelerini ve kod değişikliklerini kontrol edin. Bu, mevcut sürümünüzü en son sürümle karşılaştıracak ve size yenilikleri gösterecektir.",
+                newCommit: "Bunlar, son sürümünüzden bu yana yapılan yeni commitler ve eklenti güncellemeleridir. Hangi özelliklerin eklendiğini, hangi hataların düzeltildiğini ve hangi eklentilerin güncellendiğini görebilirsiniz.",
+                confirm: "Getir",
+            }
         },
         commit: {
             available: "commit mevcut",
@@ -529,11 +543,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         text: "Cloud",
         title: "Ayar Senkronizasyonu",
         override: "Bulut Senkronizasyonu",
-        description: "Ayarlarınızı bulutla senkronize edin. Bu, birden fazla cihaz arasında minimum çabayla kolay senkronizasyon sağlar.",
+        description: "Plexcord ayarlarınızı buluta senkronize edin. Bu, manuel içe/dışa aktarma yapmadan yapılandırmanızı birden fazla cihaz arasında tutarlı şekilde korumanızı sağlar.",
+        switchDescription: "Etkinleştirildiğinde, ayarlarınız buluta senkronize edilir. Aşağıdaki eylemleri kullanarak manuel senkronizasyon yapabilirsiniz.",
         settings: "Bulut Ayarları",
         successful: "Ayarlarınız başarıyla buluta senkronize edildi.",
         updated: "Ayarlarınız güncellendi! Değişikliklerin tam olarak uygulanması için buraya tıklayarak yeniden başlatın!",
         deleted: "Ayarlar buluttan silindi!",
+        integration: {
+            title: "Bulut Entegrasyonu",
+            description: "Plexcord'un bulut entegrasyonu, ayarlarınızı birden fazla cihaz ve Discord kurulumu arasında senkronize etmenizi sağlar. Verileriniz güvenli bir şekilde saklanır ve istenildiği zaman kolayca geri yüklenebilir.",
+        },
         reauth: "Başka bir istemcide bulut entegrasyonlarının etkin olduğunu fark ettik! Sınırlamalar nedeniyle, devam etmek için yeniden kimlik doğrulaması yapmanız gerekecek. Devam etmek için ayarlar sayfasına gitmek üzere buraya tıklayın!",
         error: {
             setup: "Kurulum başarısız oldu (OAuth yapılandırması alınamadı).",
@@ -556,6 +575,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                 from: "Ayarlar buluttan senkronize edilemedi ({{error}})."
             }
         },
+        warning: {
+            enableCloudIntegration: "Ayar senkronizasyonu özelliklerini kullanmak için yukarıdan bulut entegrasyonunu etkinleştirin."
+        },
+        danger: {
+            title: "Tehlikeli Bölge",
+            description: "Buluttaki tüm verilerinizi kalıcı olarak silin. Bu işlem geri alınamaz ve senkronize edilmiş tüm ayarları ve bulut altyapısında saklanan diğer tüm verileri kaldırır.",
+            delete: {
+                account: {
+                    title: "Bulut Hesabını Sil",
+                    description: "Bulut hesabınızı ve ilişkili tüm verileri kalıcı olarak silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+                    confirm: "Hesabı Sil",
+                    cancel: "İptal"
+                }
+            }
+        },
         notification: {
             title: "Bulut Entegrasyonu",
             enabled: "Bulut Entegrasyonu Etkinleştirildi",
@@ -572,24 +606,27 @@ const translations: MatchStructure<typeof enTranslations> = {
             delete: "Bulut Verilerini Sil",
             enable: "Bulut Entegrasyonlarını Aktifleştir",
             reauthorize: "Yeniden Yetkilendir",
-            erase: {
-                title: "Emin misiniz?",
-                body: "Verileriniz silindikten sonra, geri yüklenemez. Geri dönüş yok!",
-                confirm: "Sil!",
-                cancel: "Vazgeç",
-                erase: "Tüm Verileri Sil"
-            },
             confirm: "Şimdi Yeniden Başlat",
             later: "Sonra!"
         },
         privacy: "gizliliğinizi korur",
         source: "kaynak kodu",
         overview: "Plexcord, cihazlar arasında ayar senkronizasyonu gibi avantajlar sağlayan bulut entegrasyonu ile birlikte gelir. Bu {{privacy}} ve {{source}}, AGPL 3.0 lisansı ile sunulduğu için kendi sunucunuzda barındırabilirsiniz.",
-        authorization: "Bu, bulut entegrasyonlarını henüz ayarlamadıysanız yetkilendirme isteyecektir.",
+        authorization: "Ayarların senkronizasyonu için buluta bağlanın. Henüz bulut entegrasyonunu ayarlamadıysanız bu, yetkilendirme isteyecektir.",
         backend: {
-            title: "Backend URL",
-            description: "Bulut entegrasyonlarını kullanırken hangi backend'i kullanacaksınız.",
+            title: "Bulut Sağlayıcısı",
+            description: "Ayarlarınızın bulutta nasıl saklanacağını seçin. Varsayılan olarak Plexcord Cloud kullanılır, ancak isterseniz kendi self-hosted bulut servisinizi de yapılandırabilirsiniz.",
             invalid: "Geçersiz URL"
+        },
+        sync: {
+            title: "Bu Cihaz İçin Senkronizasyon Kuralları",
+            description: "Bu ayar, bu cihaz ile bulut arasındaki ayarların nasıl senkronize edileceğini belirler. Değişikliklerin her iki yönde de aktarılmasına izin verebilir veya tek bir tarafı ana kaynak olarak seçebilirsiniz.",
+            direction: {
+                both: "Çift yönlü senkronizasyon (değişiklikler her iki yönde de aktarılır)",
+                push: "Bu cihaz kaynak (yalnızca yükleme)",
+                pull: "Bulut kaynak (yalnızca indirme)",
+                manual: "Otomatik senkronizasyon yapma (yalnızca aşağıdaki butonlar ile manuel senkronizasyon)"
+            }
         }
     },
 
@@ -628,41 +665,93 @@ const translations: MatchStructure<typeof enTranslations> = {
 
     themes: {
         title: "Temalar",
+        management: "Tema Yönetimi",
+        description: "Discord’un görünümünü temalarla özelleştirin. Yerel .css dosyaları ekleyin veya temaları doğrudan URL’lerden yükleyin. Dişli simgesi olan temalarda, değiştirebileceğiniz özelleştirilebilir ayarlar bulunur.",
         local: "Yerel Temalar",
-        online: "Çevrimiçi Temalar",
-        stylus: "Stylus eklentisi",
-        links: "Tema linkleri giriniz...",
-        error: {
-            userscript: "Temalar Userscript'te desteklenmiyor!",
-            stylus: "Bunun yerine {{stylus}} ile temaları yükleyebilirsiniz!",
-            expired: "Geçersiz veya süresi dolmuş davet"
-        },
-        find: "Tema Bul",
+        pinned: "Sabitlenmiş",
+        stylus: "Stylus uzantısı",
         bd: "BetterDiscord Temaları",
         github: "Github",
-        download: "BD sitesini kullanıyorsanız, ‘Download’ butonuna tıklayın ve indirilen .theme.css dosyasını themes klasörünüze yerleştirin.",
-        external: {
-            title: "Harici Kaynaklar",
-            security: "Güvenlik nedeniyle, çoğu siteden kaynakların (stil, font, resim vb.) yüklenmesi engellenmiştir.",
-            host: "Tüm kaynakların GitHub, GitLab, Codeberg, Imgur, Discord veya Google Fonts üzerinde barındırıldığından emin olun.."
-        },
+        download: "Tema mı arıyorsunuz? {{bd}} sitesine göz atın veya {{github}} üzerinde arama yapın. BetterDiscord’tan indirirken “Download” butonuna tıklayın ve .theme.css dosyasını tema klasörünüze yerleştirin.",
+        add: "Ekle",
+        reset: "Ayarları varsayılana sıfırla",
+        notCSS: "CSS dosyası değil. Ham (raw) bağlantıyı kullandığınızdan emin olun!",
+        okay: "Tamam!",
+        checking: "Kontrol ediliyor...",
+        valid: "Geçerli!",
         upload: "Tema Yükle",
         openFolder: "Tema Klasörünü Aç",
-        loadMissing: "Kayıp Temaları Yükle",
-        editQuickCSS: "QuickCSS'i Düzenle",
-        editClient: "ClientTheme'i Düzenle",
-        advanced: {
-            warning: "Bu alan gelişmiş kullanıcılar içindir. Bunu kullanmakta zorluk yaşıyorsanız, bunun yerine Yerel Temalar sekmesini kullanın.",
-            paste: "CSS dosyalarının bağlantılarını buraya yapıştırın",
-            line: "Her satıra bir url yerleştirin",
-            prefix: "Satırların başına @light veya @dark ekleyerek, Discord temanıza göre otomatik olarak açıp kapatabilirsiniz",
-            direct: "Dosyalara doğrudan bağlantılar (raw veya github.io) kullandığınızdan emin olun!"
-        },
-        website: "Website",
+        loadMissing: "Eksik Temaları Yükle",
+        editQuickCSS: "QuickCSS’i Düzenle",
+        editClient: "ClientTheme’i Düzenle",
+        website: "Web Sitesini Aç",
         discord: "Discord Sunucusu",
+        downloadTheme: "İndir",
+        refresh: "Yenile",
+        delete: "Sil",
         unknown: {
+            title: "Bilinmiyor",
             author: "Bilinmeyen Yazar",
-            description: "Bir Discord Teması."
+            theme: "Discord Teması"
+        },
+        required: "Aşağıdaki eklentiler gereklidir ancak etkin değil: ",
+        homepage: "Ana Sayfa",
+        support: "Destek",
+        online: {
+            title: "Çevrimiçi Temalar",
+            description: "Temaları yerel dosyalar yerine doğrudan URL’lerden yükleyin. Çevrimiçi temalar, kaynak değiştiğinde otomatik olarak güncellenir; böylece manuel indirme yapmadan her zaman en güncel sürümü kullanırsınız.",
+            enable: "Çevrimiçi Temaları Etkinleştir",
+            enableDescription: "Çevrimiçi tema yüklemeyi aç/kapat. Devre dışı bırakıldığında tüm çevrimiçi temalar kapatılır ve yeni çevrimiçi tema ekleyemezsiniz."
+        },
+        quickActions: {
+            title: "Hızlı İşlemler",
+            description: "Temalarınızı yönetmek için kısayollar. Yeni temalar eklemek için tema klasörünü açın, hızlı stil düzenlemeleri için QuickCSS kullanın veya değişikliklerden sonra temaları yeniden yükleyin."
+        },
+        error: {
+            userscript: "Userscript üzerinde temalar desteklenmemektedir!",
+            stylus: "Bunun yerine {{stylus}} ile temaları yükleyebilirsiniz!",
+            expired: "Geçersiz veya süresi dolmuş bağlantı",
+            text: "Hata:"
+        },
+        copy: {
+            url: "URL’yi Kopyala",
+            copied: "Tema URL’si kopyalandı!",
+            settings: "Tema ayarlarını kopyala",
+            copiedSettings: "Tema ayarları panoya kopyalandı."
+        },
+        paste: {
+            settings: "Tema ayarlarını yapıştır",
+            empty: "Panonuz boş.",
+            invalid: "Panonuzda geçerli ayar verisi yok.",
+            pasted: "Tema ayarları panodan yapıştırıldı."
+        },
+        settings: {
+            for: "{{themeName}} için ayarlar",
+        },
+        installed: {
+            title: "Yüklü Temalar",
+            description: "Temalarınızı buradan yönetin. Yerel temalar tema klasörünüzden, çevrimiçi temalar URL’lerden yüklenir. Dişli simgesi olan temalarda özelleştirilebilir ayarlar bulunur.",
+            count: "{{count}} tema yüklü ({{localCount}} yerel, {{onlineCount}} çevrimiçi) · {{enabledCount}} etkin",
+            search: "Tema ara...",
+            loading: "Temalar yükleniyor...",
+            none: "Henüz yüklü tema yok. Başlamak için tema dosyalarını tema klasörünüze ekleyin veya yukarıdan bir çevrimiçi tema ekleyin.",
+            noCriteria: "Arama veya filtre kriterlerinize uyan tema bulunamadı."
+        },
+        filter: {
+            all: "Tümünü Göster",
+            online: "Çevrimiçi Temalar",
+            local: "Yerel Temalar",
+            enabled: "Etkin",
+            disabled: "Devre Dışı"
+        },
+        notification: {
+            refresh: {
+                title: "Tema Yenilendi",
+                error: "Tema yenilenemedi"
+            },
+            failed: {
+                download: "Tema indirilemedi"
+            }
         }
     },
 
@@ -716,6 +805,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         repo: "Depo",
         repoDescription: "Plexcord'un güncellemeleri aldığı GitHub deposu burasıdır.",
+        loading: "Yükleniyor...",
     },
 
     components: {
@@ -1155,6 +1245,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        autoZipper: {
+            name: "AutoZipper",
+            description: "Belirtilen dosya türlerini ve klasörleri Discord’a yüklemeden önce otomatik olarak zipler",
+            option: {
+                extensions: {
+                    label: "Uzantılar",
+                    description: "Otomatik olarak ziplenmesi istenen dosya uzantılarının virgülle ayrılmış listesi (örn. .psd,.blend,.exe,.dmg)"
+                }
+            }
+        },
         bannersEverywhere: {
             name: "Banners Everywhere",
             description: "Üye listesinde afişleri görüntüler",
@@ -1209,6 +1309,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     left: "Sol",
                     right: "Sağ"
                 }
+            }
+        },
+        betterAudioPlayer: {
+            name: "BetterAudioPlayer",
+            description: "Ses eki oynatıcılarına spektrograf ve osiloskop görselleştiricisi ekler",
+            option: {
+                oscilloscope: {
+                    label: "Osiloskop",
+                    description: "Osiloskop görselleştiricisini etkinleştir"
+                },
+                spectrograph: {
+                    label: "Spektrograf",
+                    description: "Spektrograf görselleştiricisini etkinleştir"
+                },
+                oscilloscopeSolidColor: {
+                    label: "Osiloskop Düz Renk",
+                    description: "Osiloskop için gradyan yerine düz renk kullan"
+                },
+                oscilloscopeColor: {
+                    label: "Osiloskop Rengi",
+                    description: "Düz renk etkinleştirildiğinde osiloskobun rengi"
+                },
+                spectrographSolidColor: {
+                    label: "Spektrograf Düz Renk",
+                    description: "Spektrograf için gradyan yerine düz renk kullan"
+                },
+                spectrographColor: {
+                    label: "Spektrograf Rengi",
+                    description: "Düz renk etkinleştirildiğinde spektrografın rengi"
+                },
+                forceMoveBelow: {
+                    label: "Alta Taşımaya Zorla",
+                    description: "Görselleştiriciyi ses kontrollerinin altına zorla taşı"
+                }
+            },
+            toast: {
+                invalidColorFormat: "{{settingKey}} için geçersiz renk formatı, 'R, G, B' veya '#RRGGBB' formatında olduğundan emin olun"
             }
         },
         betterBanReasons: {
@@ -1307,7 +1444,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterGifPicker: {
             name: "BetterGifPicker",
-            description: "GIF seçicisinin varsayılan olarak favori kategorisini açmasını sağlar"
+            description: "GIF seçicisinin varsayılan olarak favori kategorisini açmasını sağlar",
+            option: {
+                keepOpen: {
+                    label: "Seçici Açık Kalsın",
+                    description: "GIF seçicisinin bir GIF seçtikten sonra açık kalmasını sağlar"
+                }
+            }
         },
         betterInvites: {
             name: "BetterInvites",
@@ -1440,6 +1583,36 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "BetterUploadButton",
             description: "Tek tıklama ile yükleme yapın, sağ tıklama ile menüyü açın"
         },
+        betterUserArea: {
+            name: "BetterUserArea",
+            description: "Kullanıcı alanını özelleştirir ve daha sade hale getirir.",
+            option: {
+                removeNameplate: {
+                    label: "İsim Plakasını Kaldır",
+                    description: "İsim plakası stilini kaldırır."
+                },
+                removeAudioMenus: {
+                    label: "Ses Menüleri Kaldır",
+                    description: "Sessize alma ve sağırlaştırma düğmelerinin yanındaki menüleri kaldırır."
+                },
+                alwaysShowUsername: {
+                    label: "Kullanıcı Adını Her Zaman Göster",
+                    description: "Durum yerine her zaman kullanıcı adını gösterir."
+                },
+                removeButtonTooltips: {
+                    label: "Buton İpuçlarını Kaldır",
+                    description: "Buton araç ipuçlarını kaldırır."
+                },
+                removeAvatarDecoration: {
+                    label: "Avatar Süslemesini Kaldır",
+                    description: "Avatar süslemesini kaldırır."
+                },
+                removeUsernameStyles: {
+                    label: "Kullanıcı Adı Stillerini Kaldır",
+                    description: "Kullanıcı adı renklerini ve efektlerini kaldırır."
+                }
+            }
+        },
         biggerStreamPreview: {
             name: "BiggerStreamPreview",
             description: "Bu eklenti, yayın önizlemelerini büyütmenizi sağlar",
@@ -1486,6 +1659,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Tüm kanallardaki ekleri bulanıklaştır (sadece NSFW değil)"
                 }
             }
+        },
+        bypassPinPrompt: {
+            name: "BypassPinPrompt",
+            description: "Pin işlevlerini kullanırken pin istemini atlar"
         },
         bypassStatus: {
             name: "BypassStatus",
@@ -2271,53 +2448,516 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Durumlardan renk körlerine uygun simgeleri kaldırır, tıpkı 2015-2017 Discord gibi"
         },
         commandPalette: {
-            name: "CommandPalette",
-            description: "Klavye ile arayüzde gezinmenizi sağlar.",
-            search: "Komut Paletinde Ara",
-            type: "Yazın ve Enter’a basın",
-            enter: "Bir URL girin",
-            fetch: "Getirilecek URL girin (yalnızca GET)",
-            issue: "URL getirilirken sorun oluştu",
-            enable: "Etkinleştir",
-            disable: "Devre Dışı Bırak",
-            open: {
-                devTab: "Geliştirici Sekmesini Aç",
-                plexcord: "Plexcord Sekmesini Aç",
-                plugin: "Eklentiler Sekmesini Aç",
-                themes: "Temalar Sekmesini Aç",
-                updater: "Güncelleyici Sekmesini Aç",
-                cloud: "Cloud Sekmesini Aç",
-                backup: "Yedekleme & Geri Yükleme Sekmesini Aç",
-                restart: "Plexcord’u Yeniden Başlat",
-                quickCSS: "QuickCSS Dosyasını Aç",
-                settings: "Ayarlar Klasörünü Aç",
-                github: "Github’da Aç",
-                browser: "Tarayıcıda Aç",
-                togglePlugin: "Eklentiyi Aç/Kapat",
-                quickFetch: "Hızlı Getir",
-                copyGit: "Git Bilgilerini Kopyala",
-                check: "Güncellemeleri Kontrol Et",
-                navigate: "Sunucuya Git",
-                changelog: "Değişiklik Notları Sekmesini Aç"
+            name: "Komut Paleti",
+            description: "Klavye kullanarak arayüzde gezinmenizi sağlar.",
+            action: {
+                command: {
+                    label: "Komutu Çalıştır",
+                    description: "Başka bir palet komutunu ID ile çalıştırır. Tanımlayıcıdan emin değilseniz seçiciyi kullanın."
+                },
+                settings: {
+                    label: "Ayarlar Sayfasını Aç",
+                    description: "Doğrudan bir Discord ayar sayfasına gider. Seçiciden bir sayfa seçin."
+                },
+                url: {
+                    label: "URL Aç",
+                    description: "Bir bağlantı açar. En iyi uyumluluk için https:// bağlantılarını kullanın."
+                },
+                macro: {
+                    label: "Makro Çalıştır",
+                    description: "Bir dizi komutu sırayla çalıştırır. Seçici aracılığıyla adımlar ekleyin."
+                }
+            },
+            category: {
+                auto: "Otomatik (varsayılan yerleşimi kullan)",
+                default: {
+                    label: "Hızlı İşlemler",
+                    description: "Yaygın Plexcord kısayolları"
+                },
+                plugins: {
+                    label: "Eklentiler",
+                    description: "Plexcord eklentilerini etkinleştirir, devre dışı bırakır ve yapılandırır",
+                    enable: {
+                        label: "Eklentileri Etkinleştir"
+                    },
+                    disable: {
+                        label: "Eklentileri Devre Dışı Bırak"
+                    },
+                    settings: {
+                        label: "Eklenti Ayarları"
+                    },
+                    toolbox: {
+                        label: "Eklenti Eylemleri"
+                    },
+                    chatbar: {
+                        label: "Sohbet Çubuğu Düğmeleri"
+                    },
+                    changes: {
+                        label: "Eklenti Değişiklikleri"
+                    }
+                },
+                context: {
+                    label: "Mevcut Bağlam",
+                    description: "Seçili kanal ve sunucu için işlemler"
+                },
+                updates: {
+                    label: "Güncellemeler",
+                    description: "Plexcord ile güncel kalın"
+                },
+                discordSettings: {
+                    label: "Discord Ayarları",
+                    description: "Discord yapılandırma sayfalarına git"
+                },
+                custom: {
+                    label: "Özel Komutlar",
+                    description: "Kullanıcı tanımlı komut paleti girişleri"
+                },
+                sessions: {
+                    label: "Oturum Araçları",
+                    description: "Discord oturumunuzu yönetmek için araçlar"
+                },
+                guilds: {
+                    label: "Sunucular",
+                    description: "Sunucularınıza hızlıca gidin"
+                },
+                friends: {
+                    label: "Arkadaşlar",
+                    description: "Arkadaşlarınıza hızlıca gidin"
+                },
+                action: {
+                    label: "Eylem",
+
+                }
+            },
+            builtIn: {
+                open: {
+                    settings: {
+                        plexcord: "Plexcord Ayarlarını Aç",
+                        plugin: "Eklenti Ayarlarını Aç"
+                    }
+                },
+                reload: {
+                    label: "Discord'u Yeniden Yükle",
+                    description: "Mevcut Discord penceresini yeniden yükler"
+                }
+            },
+            command: {
+                enable: "{{pluginName}} Etkinleştir",
+                enabled: "{{pluginName}} Etkinleştirildi",
+                disable: "{{pluginName}} Devre Dışı Bırak",
+                disabled: "{{pluginName}} Devre Dışı Bırakıldı",
+                failed: "Komut başarısız oldu:",
+                toggleFailed: "{{pluginName}} değiştirilemedi.",
+                pluginSettings: "{{pluginName}} Ayarları",
+                untitled: "Adsız Komut",
+                new: "Yeni Komut",
+                error: {
+                    enter: "Bir komut ID'si girin veya aşağıdan seçin.",
+                    noCommand: "Bu ID ile eşleşen komut yok."
+                },
+                discord: {
+                    account: "Hesabımı Aç",
+                    privacy: "Veri ve Gizlilik Aç",
+                    notifications: "Bildirimleri Aç",
+                    voice: "Ses ve Görüntü Aç",
+                    text: "Metin ve Resimler Aç",
+                    appearance: "Görünüm Aç",
+                    accessibility: "Erişilebilirlik Aç",
+                    keybinds: "Tuş Atamalarını Aç",
+                    advanced: "Gelişmiş Ayarları Aç",
+                },
+                updates: {
+                    check: {
+                        label: "Güncellemeleri Kontrol Et",
+                        description: "Plexcord güncellemelerini denetle",
+                        one: "Bir güncelleme mevcut",
+                        multiple: "{{count}} güncelleme mevcut",
+                        none: "Güncelleme yok",
+                        failed: "Güncellemeler kontrol edilemedi."
+                    },
+                    changelog: {
+                        label: "Değişiklik Günlüğünü Görüntüle",
+                        description: "Plexcord değişiklik günlüğünü açar"
+                    }
+                },
+                read: {
+                    mark: {
+                        label: "{{channelLabel}} Okundu İşaretle"
+                    }
+                },
+                pin: {
+                    open: {
+                        label: "{{channelLabel}} Sabitlemelerini Aç"
+                    },
+                    toggle: {
+                        label: "Son Komutta Sabitlemeyi Aç/Kapat"
+                    }
+                },
+                channel: {
+                    mute: {
+                        label: "{{channelLabel}} Sustur",
+                        oneHour: "{{channelLabel}} kanalını 1 saatliğine sustur",
+                        untilTomorrow: "{{channelLabel}} kanalını yarına kadar sustur",
+                    },
+                    unmute: {
+                        label: "{{channelLabel}} Susturmasını Kaldır",
+                    },
+                    reopen: {
+                        label: "Son Kapatılan DM'yi Yeniden Aç"
+                    },
+                    dm: {
+                        open: {
+                            label: "{{userLabel}} ile DM Aç"
+                        }
+                    }
+                },
+                guild: {
+                    settings: {
+                        label: "{{guildLabel}} Ayarlarını Aç"
+                    },
+                    navigate: {
+                        label: "{{guildLabel}} Sunucusuna Git"
+                    }
+                },
+                session: {
+                    thirtyMinutesDnd: "30 dakika Rahatsız Etmeyin",
+                    oneHourDnd: "1 saat Rahatsız Etmeyin",
+                    cancelStatusReset: "Durum Zamanlayıcısını İptal Et"
+                },
+                status: {
+                    set: {
+                        online: "Durum Ayarla: Çevrimiçi",
+                        idle: "Durum Ayarla: Boşta",
+                        dnd: "Durum Ayarla: Rahatsız Etmeyin",
+                        invisible: "Durum Ayarla: Görünmez"
+                    }
+                },
+                toggle: {
+                    streamer: "Yayıncı Modunu Aç/Kapat",
+                    mute: "Kendini Susturmayı Aç/Kapat",
+                    deafen: "Kendini Sağırlaştırmayı Aç/Kapat",
+                },
+                notification: {
+                    clear: {
+                        label: "Masaüstü Bildirimlerini Temizle"
+                    }
+                },
+                palette: {
+                    settings: {
+                        label: "Komut Paleti Ayarlarını Aç",
+                        description: "Komut Paleti eklentisini yapılandır"
+                    }
+                },
+                recent: {
+                    label: "Son Komutları Göster",
+                    description: "Son yürütülen komutları görüntüler",
+                    rerun: "Son Komutu Tekrar Çalıştır"
+                },
+                plugin: {
+                    reload: {
+                        label: "Tüm Eklentileri Yeniden Yükle",
+                        description: "Etkin olan her eklentiyi anında yeniden yüklemeyi dener"
+                    },
+                    enable: {
+                        label: "Tüm Eklentileri Etkinleştir"
+                    },
+                    disable: {
+                        label: "Gerekli Olmayan Tüm Eklentileri Devre Dışı Bırak"
+                    },
+                    restart: {
+                        label: "Plexcord'u Yeniden Başlat",
+                        description: "Discord istemci penceresini yeniden yükler"
+                    }
+                },
+                quickCSS: {
+                    label: "Hızlı CSS'i Aç/Kapat"
+                },
+                transparentity: {
+                    label: "Pencere Şeffaflığını Aç/Kapat"
+                },
+                theme: {
+                    open: {
+                        label: "İstemci Tema Ayarlarını Aç"
+                    }
+                }
+            },
+            modal: {
+                searchPlaceholder: "Komut ara",
+                noCommand: "Komut bulunamadı",
+                add: {
+                    title: "Komut Ekle"
+                },
+                choose: {
+                    title: "Komut Seç"
+                },
+                command: {
+                    palette: {
+                        label: "Komut Paleti",
+                        placeholder: "Bir komut yazın",
+                        filtering: "{{tags}} ile filtreleniyor",
+                        noCommand: "Komut bulunamadı",
+                        pin: "Komutu sabitle",
+                        unpin: "Sabitlemeyi kaldır"
+                    },
+                    target: {
+                        label: "Hedef Komut ID'si",
+                        placeholder: "Komut ID'si girin",
+                        choose: "Komut Seç"
+                    },
+                    custom: {
+                        label: "Özel Komutlar",
+                        description: "1) Komutu adlandır · 2) İsteğe bağlı açıklama/anahtar kelime/etiket/kategori ekle · 3) Bir eylem seç ve detayları doldur (Takma adlar ve makrolar için ID'ler mevcut palet komutlarıyla eşleşmelidir).",
+                        auto: "Otomatik (varsayılan)",
+                        expand: "Genişlet",
+                        collapse: "Daralt",
+                        collapsed: {
+                            label: "Etiket",
+                            description: "Görünen Ad",
+                            advanced: {
+                                hide: "Gelişmiş seçenekleri gizle",
+                                show: "Gelişmiş seçenekleri göster"
+                            },
+                            subtitle: {
+                                label: "Açıklama",
+                                placeholder: "İsteğe bağlı alt başlık"
+                            },
+                            keywords: {
+                                label: "Anahtar Kelimeler",
+                                placeholder: "Virgülle ayrılmış anahtar kelimeler"
+                            },
+                            tags: {
+                                label: "Etiketler",
+                                placeholder: "Virgülle ayrılmış etiketler"
+                            },
+                            suggestion: {
+                                label: "Öneri"
+                            },
+                            chooseCommand: {
+                                label: "Bu komutun palette nerede görüneceğini seçin."
+                            },
+                            danger: {
+                                label: "Tehlikeli olarak göster"
+                            }
+                        },
+                        remove: "Komutu Kaldır",
+                        add: "Komut Ekle"
+                    }
+                },
+                settings: {
+                    noSelected: "Sayfa seçilmedi",
+                    current: "Mevcut Sayfa",
+                    choose: "Sayfa Seç..."
+                },
+                url: {
+                    url: "URL",
+                    error: "http:// veya https:// bağlantıları kullanın.",
+                    valid: "Geçerli bir URL girin.",
+                    open: {
+                        external: "Harici olarak aç",
+                    }
+                },
+                macro: {
+                    sequence: {
+                        label: "Komut Dizisi",
+                        placeholder: "komut-a, komut-b"
+                    },
+                    addStep: "Adım Ekle",
+                    unknownId: "Bilinmeyen Komut ID'leri"
+                }
+            },
+            status: {
+                online: "Çevrimiçi",
+                idle: "Boşta",
+                dnd: "Rahatsız Etmeyin",
+                invisible: "Görünmez"
+            },
+            tag: {
+                core: "Çekirdek",
+                navigation: "Gezinme",
+                utility: "Araç",
+                developer: "Geliştirici",
+                customization: "Özelleştirme",
+                plugins: "Eklentiler",
+                session: "Oturum",
+                context: "Bağlam",
+                custom: "Özel",
+                guilds: "Sunucular",
+                friends: "Arkadaşlar",
+                other: "Diğer"
             },
             toast: {
-                invalid: "Geçersiz URL",
-                copied: "Yanıt panoya kopyalandı!",
-                git: "Git bilgileri panoya kopyalandı!",
-                noUpdates: "Hiç güncelleme yok",
-                enabled: "{{plugin}} başarıyla etkinleştirildi",
-                disabled: "{{plugin}} başarıyla devre dışı bırakıldı"
+                chat: {
+                    button: {
+                        unableToFind: "'{{label}}' sohbet butonu bulunamadı.",
+                        failedToTrigger: "{{label}} tetiklenemedi.",
+                        activated: "{{label}} etkinleştirildi."
+                    }
+                },
+                channel: {
+                    mute: {
+                        unavailable: "Kanal susturma kontrolleri kullanılamıyor",
+                        muted: "Kanal susturuldu.",
+                        unmuted: "Kanalın susturması kaldırıldı.",
+                        failed: "Kanal susturma durumu güncellenemedi."
+                    },
+                    dm: {
+                        no: "Bu oturumda kaydedilen DM kapatma işlemi yok.",
+                        reOpened: "Son kapatılan DM yeniden açıldı.",
+                        noAvailable: "DM artık mevcut değil."
+                    }
+                },
+                command: {
+                    loop: "Makro yürütülmesinde komut döngüsü algılandı.",
+                    notFound: "{{commandId}} komutu bulunamadı.",
+                    unsupported: "Desteklenmeyen özel komut eylemi.",
+                    failedToRun: "{{label}} çalıştırılamadı.",
+                    notMetadata: "Komut Paleti eklenti meta verileri kullanılamıyor."
+                },
+                guild: {
+                    mute: {
+                        unavailable: "Sunucu susturma kontrolleri kullanılamıyor",
+                        muted: "Sunucu susturuldu.",
+                        unmuted: "Sunucunun susturması kaldırıldı.",
+                        failed: "Sunucu susturma durumu güncellenemedi."
+                    },
+                    settings: {
+                        unable: "Sunucu ayarları açılamıyor.",
+                    }
+                },
+                panel: {
+                    pin: {
+                        unable: "Sabitleme paneli açılamıyor.",
+                    }
+                },
+                status: {
+                    reset: {
+                        canceled: "Planlanan durum sıfırlaması iptal edildi.",
+                        unableToChange: "Şu anda durum değiştirilemiyor.",
+                        reverted: "Durum {{status}} olarak geri döndürüldü.",
+                        dnd: "{{duration}} dakika boyunca Rahatsız Etmeyin."
+                    },
+                    change: {
+                        unableToChange: "Şu anda durum değiştirilemiyor.",
+                        changed: "Durum {{status}} olarak değiştirildi."
+                    }
+                },
+                read: {
+                    marked: "{{channelLabel}} okundu olarak işaretlendi.",
+                    failed: "Kanal okundu olarak işaretlenemedi."
+                },
+                route: {
+                    unable: "{{destination}} açılamıyor.",
+                },
+                notification: {
+                    cleared: "Tüm bildirimler temizlendi.",
+                    failed: "Bildirimler temizlenemedi.",
+                    notSupported: "Bildirim temizleme desteklenmiyor."
+                },
+                streamerMode: {
+                    enabled: "Yayıncı Modu etkinleştirildi.",
+                    disabled: "Yayıncı Modu devre dışı bırakıldı.",
+                },
+                voice: {
+                    micToggle: {
+                        muted: "Mikrofon susturuldu.",
+                        unmuted: "Mikrofon açıldı."
+                    },
+                    deafenToggle: {
+                        deafened: "Artık sağırsınız.",
+                        undeafened: "Artık sağır değilsiniz."
+                    }
+                },
+                quickCSS: {
+                    enabled: "Hızlı CSS etkinleştirildi.",
+                    disabled: "Hızlı CSS devre dışı bırakıldı."
+                },
+                transparentity: {
+                    enabled: "Pencere Şeffaflığı etkinleştirildi.",
+                    disabled: "Pencere Şeffaflığı devre dışı bırakıldı."
+                },
+                plugin: {
+                    disabled: {
+                        label: "{{pluginName}} devre dışı.",
+                        disable: "{{pluginName}} devre dışı. Bu eylemi kullanmak için eklentiyi etkinleştirin."
+                    },
+                    required: {
+                        label: "{{pluginName}} yeniden yükleme için yeniden başlatma gerektiriyor."
+                    },
+                    stop: {
+                        failed: "{{pluginName}} durdurulamadı."
+                    },
+                    restart: {
+                        failed: "{{pluginName}} yeniden başlatılamadı."
+                    },
+                    reload: {
+                        label: "{{pluginName}} yeniden yüklendi.",
+                        noPlugin: "Hiçbir eklenti yeniden yüklenmedi.",
+                        reloaded: "{{count}} eklenti yeniden yüklendi."
+                    },
+                    toggle: {
+                        enabled: "{{changed}} eklenti etkinleştirildi.",
+                        disabled: "{{changed}} eklenti devre dışı bırakıldı.",
+                        noChanged: "Hiçbir eklentinin durumu değişmedi."
+                    },
+                    run: {
+                        failed: {
+                            label: "{{pluginName}} çalıştırılamadı: {{actionLabel}}."
+                        }
+                    }
+                }
+            },
+            display: {
+                channel: {
+                    current: "Mevcut Kanal",
+                    group: "Grup DM",
+                    direct: "Direkt Mesaj"
+                },
+                guild: {
+                    current: "Mevcut Sunucu",
+                }
             },
             option: {
                 hotkey: {
-                    label: "Kısayol",
-                    description: "Komut paletini açmak için kısayol tuşu",
-                    recording: "Kaydediliyor...",
-                    record: "Tuş kombinasyonunu kaydet"
+                    label: "Kısayol Tuşu",
+                    description: "Komut paletini açmak için kullanılan kısayol tuşu",
+                    recording: "Herhangi bir tuşa basın...",
+                    reset: "Sıfırla"
                 },
-                allowMouseControl: {
-                    label: "Fare Kontrolüne İzin Ver",
-                    description: "Fare ile komut paletini kontrol etmeye izin ver."
+                visualStyle: {
+                    label: "Görsel Stil",
+                    description: "Palet görünümü",
+                    classic: "Klasik",
+                    polished: "Cilalı (Modern)"
+                },
+                showTags: {
+                    label: "Etiketleri Göster",
+                    description: "Komutlar için etiketleri göster"
+                },
+                enableTagFilter: {
+                    label: "Etiket Filtresini Etkinleştir",
+                    description: "Etiket filtreleme çubuğunu göster"
+                },
+                customCommands: {
+                    label: "Özel Komutlar",
+                    description: "Özel komut paleti girişlerini yönet"
+                }
+            },
+            template: {
+                alias: {
+                    label: "Takma Ad Komutu",
+                    description: "Mevcut bir komutu yansıtır"
+                },
+                settings: {
+                    label: "Ayarlar",
+                    description: "Discord Ayarlarını Aç"
+                },
+                url: {
+                    label: "Bağlantı",
+                    description: "Harici bir URL açar"
+                },
+                macro: {
+                    label: "Makro",
+                    description: "Bir dizi komutu çalıştırır"
                 }
             }
         },
@@ -6059,6 +6699,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 colorMobileIndicator: {
                     label: "Mobil Göstergesini Renklendir",
                     description: "Mobil göstergenin kullanıcı durum rengini alıp almamasını belirler."
+                },
+                showBots: {
+                    label: "Botları Göster",
+                    description: "Botlarda platform göstergelerini gösterip göstermemeyi belirler"
                 }
             }
         },

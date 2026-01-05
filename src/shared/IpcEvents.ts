@@ -19,11 +19,12 @@
 
 export const enum IpcEvents {
     INIT_FILE_WATCHERS = "PlexcordInitFileWatchers",
-
     QUICK_CSS_UPDATE = "PlexcordQuickCssUpdate",
-    THEME_UPDATE = "PlexcordThemeUpdate",
+    OPEN_QUICKCSS = "PlexcordOpenQuickCss",
     GET_QUICK_CSS = "PlexcordGetQuickCss",
     SET_QUICK_CSS = "PlexcordSetQuickCss",
+    UPLOAD_THEME = "PlexcordUploadTheme",
+    DELETE_THEME = "PlexcordDeleteTheme",
     GET_THEMES_DIR = "PlexcordGetThemesDir",
     GET_THEMES_LIST = "PlexcordGetThemesList",
     GET_THEME_DATA = "PlexcordGetThemeData",
@@ -31,8 +32,8 @@ export const enum IpcEvents {
     GET_SETTINGS_DIR = "PlexcordGetSettingsDir",
     GET_SETTINGS = "PlexcordGetSettings",
     SET_SETTINGS = "PlexcordSetSettings",
+    THEME_UPDATE = "PlexcordThemeUpdate",
     OPEN_EXTERNAL = "PlexcordOpenExternal",
-    OPEN_QUICKCSS = "PlexcordOpenQuickCss",
     GET_UPDATES = "PlexcordGetUpdates",
     GET_REPO = "PlexcordGetRepo",
     UPDATE = "PlexcordUpdate",
@@ -45,11 +46,9 @@ export const enum IpcEvents {
     CSP_IS_DOMAIN_ALLOWED = "PlexcordCspIsDomainAllowed",
     CSP_REMOVE_OVERRIDE = "PlexcordCspRemoveOverride",
     CSP_REQUEST_ADD_OVERRIDE = "PlexcordCspRequestAddOverride",
+    UPDATE_MAIN_LOCALE = "PlexcordUpdateMainLocale",
     OPEN_THEMES_FOLDER = "PlexcordOpenThemesFolder",
     OPEN_SETTINGS_FOLDER = "PlexcordOpenSettingsFolder",
-
-    UPDATE_MAIN_LOCALE = "PlexcordUpdateMainLocale",
-
     GET_RENDERER_CSS = "PlexcordGetRendererCss",
     RENDERER_CSS_UPDATE = "PlexcordRendererCssUpdate",
     PRELOAD_GET_RENDERER_JS = "PlexcordPreloadGetRendererJs",

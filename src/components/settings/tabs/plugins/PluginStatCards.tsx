@@ -1,3 +1,10 @@
+/*
+ * Plexcord, a modification for Discord's desktop app
+ * Copyright (c) 2025 Vendicated and contributors
+ * Copyright (c) 2025 MutanPlex
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import "./styles.css";
 
 import { plugins, t } from "@api/i18n";
@@ -29,7 +36,7 @@ export function StockPluginsCard({ totalStockPlugins, enabledStockPlugins, total
                         <Tooltip
                             text={
                                 <img
-                                    src="https://discord.com/assets/ab6835d2922224154ddf.svg"
+                                    src="https://discord.com/assets/059679850d492e83.svg"
                                     style={{ width: "40px", height: "40px" }}
                                 />
                             }

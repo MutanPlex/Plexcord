@@ -16,8 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+import { ChannelStore, GuildMemberStore } from "@webpack/common";
 
-import { DevsById, PcDevsById } from "./constants";
+import { DevsById, PcDevsById, PLEXCORD_GUILD_ID, SUPPORT_CHANNEL_ID, SUPPORT_ROLE_ID } from "./constants";
 
 /**
  * Calls .join(" ") on the arguments
@@ -81,6 +82,8 @@ export const isPcPluginDev = (id: string) => Object.hasOwn(PcDevsById, id);
 export const shouldShowContributorBadge = (id: string) => isPluginDev(id) && DevsById[id].badge !== false;
 export const shouldShowPcContributorBadge = (id: string) => isPcPluginDev(id) && PcDevsById[id].badge !== false;
 
+export const isAnyPluginDev = (id: string) => Object.hasOwn(DevsById, id) || Object.hasOwn(PcDevsById, id);
+
 export function pluralise(amount: number, singular: string, plural = singular + "s") {
     return amount === 1 ? `${amount} ${singular}` : `${amount} ${plural}`;
 }
@@ -99,4 +102,23 @@ export function tryOrElse<T>(func: () => T, fallback: T): T {
     } catch {
         return fallback;
     }
+}
+
+export function isPlexcordGuild(id: string | null | undefined, isGuildId: boolean = false): boolean {
+    if (!id) return false;
+    if (isGuildId) return id === PLEXCORD_GUILD_ID;
+    const channel = ChannelStore.getChannel(id);
+    return channel.guild_id === PLEXCORD_GUILD_ID;
+}
+
+export function isSupportChannel(channelId: string | null | undefined): boolean {
+    if (!channelId) return false;
+    return channelId === SUPPORT_CHANNEL_ID;
+}
+
+export function isSupport(userId: string | null | undefined): boolean {
+    if (!userId) return false;
+
+    const member = GuildMemberStore.getMember(PLEXCORD_GUILD_ID, userId);
+    return member?.roles?.includes(SUPPORT_ROLE_ID) ?? false;
 }

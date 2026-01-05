@@ -14,10 +14,9 @@ import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
 import { Span } from "@components/Span";
 import { Margins } from "@utils/margins";
-import { classes } from "@utils/misc";
 import { relaunch } from "@utils/native";
-import { changes, update, updateError } from "@utils/updater";
-import { Alerts, React, useState } from "@webpack/common";
+import { changes, checkForUpdates, update, updateError } from "@utils/updater";
+import { Alerts, React, Toasts, useState } from "@webpack/common";
 
 import { runWithDispatch } from "./runWithDispatch";
 
@@ -29,7 +28,7 @@ export interface CommonProps {
 export function HashLink({ repo, hash, disabled = false }: { repo: string, hash: string, disabled?: boolean; }) {
     return (
         <Link href={`${repo}/commit/${hash}`} disabled={disabled}>
-            {hash}
+            {hash.slice(0, 7)}
         </Link>
     );
 }
@@ -82,30 +81,35 @@ export function Updatable(props: CommonProps) {
 
     return (
         <>
-            {!updates && updateError ? (
-                <>
-                    <Span size="md" weight="medium" color="text-strong">{t(updater.error.check)}</Span>
-                    <ErrorCard className={Margins.top8} style={{ padding: "1em" }}>
-                        <p>{updateError.stderr || updateError.stdout || t(updater.error.occurred)}</p>
-                    </ErrorCard>
-                </>
-            ) : isOutdated ? (
-                <>
-                    <Paragraph>
-                        {(updates.length === 1 ? t(updater.available) : t(updater.available_plural, { count: updates.length }))}
-                    </Paragraph>
-                    <Changes updates={updates} {...props} />
-                </>
-            ) : (
-                <Paragraph>
-                    {t(updater.current)}
-                </Paragraph>
-            )}
+            <Flex className={Margins.bottom8} gap="8px">
+                <Button
+                    size="small"
+                    disabled={isUpdating || isChecking}
+                    onClick={runWithDispatch(setIsChecking, async () => {
+                        const outdated = await checkForUpdates();
 
-            <Flex className={classes(Margins.bottom8)} gap="8px">
+                        if (outdated) {
+                            setUpdates(changes);
+                        } else {
+                            setUpdates([]);
+
+                            Toasts.show({
+                                message: t(updater.successful.noFound),
+                                id: Toasts.genId(),
+                                type: Toasts.Type.MESSAGE,
+                                options: {
+                                    position: Toasts.Position.BOTTOM
+                                }
+                            });
+                        }
+                    })}
+                >
+                    {t(updater.successful.button.check)}
+                </Button>
                 {isOutdated && (
                     <Button
                         size="small"
+                        variant="primary"
                         disabled={isUpdating || isChecking}
                         onClick={runWithDispatch(setIsUpdating, async () => {
                             if (await update()) {
@@ -131,6 +135,25 @@ export function Updatable(props: CommonProps) {
                     </Button>
                 )}
             </Flex>
+            {!updates && updateError ? (
+                <>
+                    <Span size="md" weight="medium" color="text-strong">{t(updater.error.check)}</Span>
+                    <ErrorCard className={Margins.top8} style={{ padding: "1em" }}>
+                        <p>{updateError.stderr || updateError.stdout || t(updater.error.occurred)}</p>
+                    </ErrorCard>
+                </>
+            ) : isOutdated ? (
+                <>
+                    <Paragraph>
+                        {(updates.length === 1 ? t(updater.available) : t(updater.available_plural, { count: updates.length }))}
+                    </Paragraph>
+                    <Changes updates={updates} {...props} />
+                </>
+            ) : (
+                <Paragraph>
+                    {t(updater.current)}
+                </Paragraph>
+            )}
         </>
     );
 }

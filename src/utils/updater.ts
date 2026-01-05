@@ -40,10 +40,6 @@ async function Unwrap<T>(p: Promise<IpcRes<T>>) {
     throw res.error;
 }
 
-export function shortGitHash(length = 7) {
-    return gitHash.slice(0, length);
-}
-
 export async function checkForUpdates() {
     changes = await Unwrap(PlexcordNative.updater.getUpdates());
 

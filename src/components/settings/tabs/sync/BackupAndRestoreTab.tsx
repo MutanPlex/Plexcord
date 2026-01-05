@@ -20,10 +20,10 @@
 import { sync, t } from "@api/i18n";
 import { downloadSettingsBackup, uploadSettingsBackup } from "@api/SettingsSync/offline";
 import { Button } from "@components/Button";
-import { Card } from "@components/Card";
 import { Divider } from "@components/Divider";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
+import { Notice } from "@components/Notice";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { Margins } from "@utils/margins";
@@ -32,17 +32,16 @@ function BackupAndRestoreTab() {
     return (
         <SettingsTab>
             <Heading className={Margins.top16}>{t(sync.title)}</Heading>
-            <Paragraph size="md" weight="normal" className={Margins.bottom8}>
+            <Paragraph className={Margins.bottom8}>
                 {t(sync.description)}
             </Paragraph>
 
-            <Card variant="warning" className={Margins.bottom20} style={{ padding: "15px" }}>
-                <Heading tag="h4">{t(sync.warning)}</Heading>
+            <Notice.Warning className={Margins.bottom20} style={{ padding: "15px" }}>
                 <Paragraph>{t(sync.warningText)}</Paragraph>
-            </Card>
+            </Notice.Warning>
 
-            <Paragraph size="md" weight="normal" className={Margins.bottom8}>
-                {t(sync.settings.text)}
+            <Heading>{t(sync.settings.text)}</Heading>
+            <Paragraph className={Margins.bottom8}>
                 <ul>
                     <li>&mdash; {t(sync.settings.quickcss)}</li>
                     <li>&mdash; {t(sync.settings.theme)}</li>
@@ -54,7 +53,7 @@ function BackupAndRestoreTab() {
             <Divider className={Margins.bottom20} />
 
             <Heading >{t(sync.import.title)}</Heading>
-            <Paragraph size="md" weight="normal" className={Margins.bottom8}>
+            <Paragraph className={Margins.bottom8}>
                 {t(sync.import.description)}
             </Paragraph>
 
@@ -88,7 +87,7 @@ function BackupAndRestoreTab() {
 
             <Divider className={Margins.bottom20} />
             <Heading>{t(sync.export.title)}</Heading>
-            <Paragraph size="md" weight="normal" className={Margins.bottom8}>
+            <Paragraph className={Margins.bottom8}>
                 {t(sync.export.description)}
             </Paragraph>
 

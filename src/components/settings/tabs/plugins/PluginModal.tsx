@@ -21,7 +21,7 @@ import "./PluginModal.css";
 
 import { generateId } from "@api/Commands";
 import { plugins, t, useForceUpdateOnLocaleChange } from "@api/i18n";
-import { Settings, useSettings } from "@api/Settings";
+import { useSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -34,9 +34,9 @@ import { classNameFactory } from "@utils/css";
 import { proxyLazy } from "@utils/lazy";
 import { Margins } from "@utils/margins";
 import { classes, isObjectEmpty } from "@utils/misc";
-import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
+import { ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { OptionType, Plugin } from "@utils/types";
-import { findByPropsLazy } from "@webpack";
+import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
 import { Clickable, FluxDispatcher, React, Toasts, Tooltip, useEffect, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
 import { Constructor } from "type-fest";
 
@@ -49,6 +49,9 @@ import { GithubButton, WebsiteButton } from "./LinkIconButton";
 const cl = classNameFactory("pc-plugin-modal-");
 
 const AvatarStyles = findByPropsLazy("moreUsers", "emptyUser", "avatarContainer", "clickableAvatar");
+const CloseButton = findComponentByCodeLazy("CLOSE_BUTTON_LABEL");
+const ConfirmModal = findComponentByCodeLazy('parentComponent:"ConfirmModal"');
+const WarningIcon = findComponentByCodeLazy("3.15H3.29c-1.74");
 const UserRecord: Constructor<Partial<User>> = proxyLazy(() => UserStore.getCurrentUser().constructor) as any;
 
 function getName(name: string | (() => string)): string {
@@ -66,12 +69,14 @@ export function makeDummyUser(user: { username: string; id?: string; avatar?: st
         id: user.id ?? generateId(),
         avatar: user.avatar,
         /** To stop discord making unwanted requests... */
-        bot: false,
+        bot: true,
     });
+
     FluxDispatcher.dispatch({
         type: "USER_UPDATE",
         user: newUser,
     });
+
     return newUser;
 }
 
@@ -95,12 +100,12 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
             for (const user of plugin.authors.slice(0, 6)) {
                 try {
                     const author = user.id
-                        ? await UserUtils.getUser(`${user.id}`)
+                        ? await UserUtils.getUser(String(user.id))
                             .catch(() => makeDummyUser({ username: user.name }))
                         : makeDummyUser({ username: user.name });
 
                     setAuthors(a => [...a, author]);
-                } catch (error) {
+                } catch (e) {
                     continue;
                 }
             }
@@ -108,7 +113,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
     }, [plugin.authors]);
 
     function handleResetClick() {
-        openWarningModal(plugin, { onClose, transitionState }, onRestartNeeded);
+        openWarningModal(plugin, onRestartNeeded);
     }
 
     function renderSettings() {
@@ -170,35 +175,31 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
 
     return (
         <ModalRoot transitionState={transitionState} size={ModalSize.MEDIUM}>
-            <ModalHeader separator={false} className={Margins.bottom8}>
-                <BaseText size="xl" weight="bold" style={{ flexGrow: 1 }}>{displayName}</BaseText>
-                <ModalCloseButton onClick={onClose} />
+            <ModalHeader separator={false} className={cl("header")}>
+                <div className={cl("header-content")}>
+                    <BaseText size="lg" weight="semibold" className={cl("title")}>{displayName}</BaseText>
+                    <BaseText size="sm" className={cl("description")}>{displayDescription}</BaseText>
+                    {!!plugin.settingsAboutComponent && (
+                        <div className={Margins.top8}>
+                            <ErrorBoundary message={t(plugins.error.infoRender)}>
+                                <plugin.settingsAboutComponent />
+                            </ErrorBoundary>
+                        </div>
+                    )}
+                </div>
+                <div className={cl("header-trailing")}>
+                    <CloseButton onClick={onClose} />
+                </div>
             </ModalHeader>
             <ModalContent className={Margins.bottom16}>
                 <section>
-                    <Flex className={cl("info")} justifyContent="space-between">
-                        <Paragraph className={cl("description")}>{displayDescription}</Paragraph>
-                        {!pluginMeta.userPlugin && (
-                            <div className="pc-settings-modal-links">
-                                <WebsiteButton
-                                    text={t(plugins.pluginModal.info)}
-                                    href={`https://plexcord.club/plugins/${plugin.name}`}
-                                />
-                                <GithubButton
-                                    text={t(plugins.pluginModal.source)}
-                                    href={`https://github.com/${gitRemote}/tree/main/src/plugins/${pluginMeta.folderName}`}
-                                />
-                            </div>
-                        )}
-                    </Flex>
-                    <BaseText size="lg" weight="semibold" className={classes(Margins.top8, Margins.bottom8)}>{t(plugins.pluginModal.authors)}</BaseText>
+                    <BaseText size="lg" weight="semibold" color="text-strong" className={Margins.bottom8}>{t(plugins.pluginModal.authors)}</BaseText>
                     <div style={{ width: "fit-content" }}>
                         <ErrorBoundary noop>
                             <UserSummaryItem
                                 users={authors}
                                 guildId={undefined}
                                 renderIcon={false}
-                                max={6}
                                 showDefaultAvatarsForNullUsers
                                 renderMoreUsers={renderMoreUsers}
                                 renderUser={(user: User) => (
@@ -218,28 +219,22 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                         </ErrorBoundary>
                     </div>
                 </section>
-                {!!plugin.settingsAboutComponent && (
-                    <div className={Margins.top16}>
-                        <section>
-                            <ErrorBoundary message={t(plugins.error.infoRender)}>
-                                <plugin.settingsAboutComponent />
-                            </ErrorBoundary>
-                        </section>
-                    </div>
-                )}
+
                 <section>
-                    <BaseText size="lg" weight="semibold" className={classes(Margins.top16, Margins.bottom8)}>{t(plugins.pluginModal.settings)}</BaseText>
+                    <BaseText size="lg" weight="semibold" color="text-strong" className={classes(Margins.top16, Margins.bottom8)}>{t(plugins.pluginModal.settings)}</BaseText>
                     {renderSettings()}
                 </section>
             </ModalContent>
-            {
-                hasSettings && <ModalFooter>
-                    <Flex flexDirection="column" style={{ width: "100%" }}>
-                        <Flex style={{ justifyContent: "space-between" }}>
+            <ModalFooter>
+                <Flex flexDirection="column" style={{ width: "100%" }}>
+                    <Flex style={{ justifyContent: "space-between", alignItems: "center" }}>
+                        {hasSettings ? (
                             <Tooltip text={t(plugins.restart.resetDefault)} shouldShow={!isObjectEmpty(pluginSettings)}>
                                 {({ onMouseEnter, onMouseLeave }) => (
                                     <Button
+                                        className={cl("disable-warning")}
                                         size="small"
+                                        variant="primary"
                                         onClick={handleResetClick}
                                         onMouseEnter={onMouseEnter}
                                         onMouseLeave={onMouseLeave}
@@ -248,10 +243,22 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                                     </Button>
                                 )}
                             </Tooltip>
-                        </Flex>
+                        ) : <div />}
+                        {!pluginMeta.userPlugin && (
+                            <div className={cl("links")}>
+                                <WebsiteButton
+                                    text={t(plugins.pluginModal.info)}
+                                    href={`https://plexcord.club/plugins/${plugin.name}`}
+                                />
+                                <GithubButton
+                                    text={t(plugins.pluginModal.source)}
+                                    href={`https://github.com/${gitRemote}/tree/main/src/plugins/${pluginMeta.folderName}`}
+                                />
+                            </div>
+                        )}
                     </Flex>
-                </ModalFooter>
-            }
+                </Flex>
+            </ModalFooter>
         </ModalRoot >
     );
 }
@@ -267,14 +274,11 @@ export function openPluginModal(plugin: Plugin, onRestartNeeded?: (pluginName: s
     ));
 }
 
-function resetSettings(plugin: Plugin, warningModalProps?: ModalProps, pluginModalProps?: ModalProps, onRestartNeeded?: (pluginName: string) => void) {
+function resetSettings(plugin: Plugin, onRestartNeeded?: (pluginName: string) => void) {
     const defaultSettings = plugin.settings?.def;
     const pluginName = getName(plugin.name);
 
-    if (!defaultSettings) {
-        console.error(`No default settings found for ${pluginName}`);
-        return;
-    }
+    if (!defaultSettings) return;
 
     const newSettings: Record<string, any> = {};
     let restartNeeded = false;
@@ -313,90 +317,35 @@ function resetSettings(plugin: Plugin, warningModalProps?: ModalProps, pluginMod
             position: Toasts.Position.TOP
         }
     });
-
-    warningModalProps?.onClose();
-    pluginModalProps?.onClose();
 }
 
-export function openWarningModal(plugin?: Plugin | null, pluginModalProps?: ModalProps | null, onRestartNeeded?: (pluginName: string) => void, isPlugin = true, enabledPlugins?: number | null, reset?: any) {
-    if (Settings.ignoreResetWarning && isPlugin) {
-        if (plugin && pluginModalProps) return resetSettings(plugin, pluginModalProps, pluginModalProps, onRestartNeeded);
-        return;
-    } else if (Settings.ignoreResetWarning && !isPlugin) {
-        return reset();
-    }
-
-    const text = isPlugin
-        ? t(plugins.dangerModal.resetDescription, { pluginName: <strong>{plugin ? getName(plugin.name) : ""}</strong> })
-        : t(plugins.dangerModal.disable, { enabledPlugins: <strong>{enabledPlugins}</strong> });
-
-    openModal(warningModalProps => (
-        <ModalRoot
-            {...warningModalProps}
-            size={ModalSize.SMALL}
-            className="pc-text-selectable"
-            transitionState={warningModalProps.transitionState}
+export function openWarningModal(plugin?: Plugin | null, onRestartNeeded?: (pluginName: string) => void, isPlugin = true, enabledPlugins?: number | null, reset?: () => void) {
+    openModal(props => (
+        <ConfirmModal
+            {...props}
+            className={cl("confirm")}
+            header={isPlugin ? t(plugins.dangerModal.resetSettings) : t(plugins.dangerModal.disablePlugins)}
+            confirmText={isPlugin ? t(plugins.dangerModal.resetText) : t(plugins.dangerModal.disableText)}
+            cancelText={t(plugins.dangerModal.cancel)}
+            onConfirm={() => {
+                if (isPlugin && plugin) {
+                    resetSettings(plugin, onRestartNeeded);
+                } else {
+                    reset?.();
+                }
+            }}
+            onCancel={props.onClose}
         >
-            <ModalHeader separator={false}>
-                <BaseText className="text-danger pc-pm-modal-title">{t(plugins.dangerModal.title)}</BaseText>
-                <ModalCloseButton onClick={warningModalProps.onClose} className="pc-modal-close-button" />
-            </ModalHeader>
-            <ModalContent>
-                <section>
-                    <Flex className="pc-warning-info">
-                        <BaseText className="text-normal">
-                            {text}
-                        </BaseText>
-                        <BaseText className="warning-text">
-                            {t(plugins.dangerModal.irreversible)}
-                        </BaseText>
-                        <BaseText className="text-normal margin-bottom">
-                            {t(plugins.dangerModal.resetText, {
-                                confirmReset: <strong>{t(plugins.dangerModal.confirmReset)}</strong>,
-                                cancel: <strong>{t(plugins.dangerModal.cancel)}</strong>,
-                            })}
-                        </BaseText>
-                    </Flex>
-                </section>
-            </ModalContent>
-            <ModalFooter className="pc-modal-footer">
-                <Flex className="pc-button-container">
-                    <Flex className="pc-button-group" style={{ gap: ".2em" }}>
-                        {!Settings.ignoreResetWarning && (
-                            <Button
-                                size="small"
-                                className={cl("disable-warning")}
-                                onClick={() => {
-                                    Settings.ignoreResetWarning = true;
-                                }}
-                            >
-                                {t(plugins.restart.button.disableWarning)}
-                            </Button>
-                        )}
-                        <Button
-                            size="small"
-                            onClick={() => {
-                                if (isPlugin) {
-                                    if (plugin && pluginModalProps)
-                                        resetSettings(plugin, pluginModalProps, pluginModalProps, onRestartNeeded);
-                                } else {
-                                    reset();
-                                }
-                            }}
-                            className={cl("confirm-reset")}
-                        >
-                            {t(plugins.dangerModal.confirmReset)}
-                        </Button>
-                        <Button
-                            size="small"
-                            onClick={warningModalProps.onClose}
-                            variant="none"
-                        >
-                            {t(plugins.restart.button.disableWarning)}
-                        </Button>
-                    </Flex>
-                </Flex>
-            </ModalFooter>
-        </ModalRoot>
+            <Paragraph>
+                {isPlugin
+                    ? t(plugins.dangerModal.resetDescription, { pluginName: <strong>{plugin ? getName(plugin.name) : ""}</strong> })
+                    : t(plugins.dangerModal.disable, { enabledPlugins: <strong>{enabledPlugins}</strong> })
+                }
+            </Paragraph>
+            <div className={classes(Margins.top16, cl("warning"))}>
+                <WarningIcon color="var(--text-feedback-critical)" />
+                <span>{t(plugins.dangerModal.undone)}</span>
+            </div>
+        </ConfirmModal>
     ));
 }

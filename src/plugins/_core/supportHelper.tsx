@@ -30,11 +30,12 @@ import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
 import { openSettingsTabModal, UpdaterTab } from "@components/settings";
 import { Channel } from "@plexcord/discord-types";
+import { gitHashShort } from "@shared/plexcordUserAgent";
 import { BOT_COMMANDS_CHANNEL_ID, CONTRIB_ROLE_ID, Devs, DONOR_ROLE_ID, KNOWN_ISSUES_CHANNEL_ID, PcDevs, PLEXBOT_USER_ID, PLEXCORD_GUILD_ID, REGULAR_ROLE_ID, SUPPORT_CATEGORY_ID, SUPPORT_CHANNEL_ID } from "@utils/constants";
 import { openInviteModal, sendMessage } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
-import { isPcPluginDev, isPluginDev, tryOrElse } from "@utils/misc";
+import { isAnyPluginDev, isPcPluginDev, isPluginDev, tryOrElse } from "@utils/misc";
 import { relaunch } from "@utils/native";
 import { onlyOnce } from "@utils/onlyOnce";
 import { makeCodeblock } from "@utils/text";
@@ -48,7 +49,7 @@ import plugins, { PluginMeta } from "~plugins";
 
 import SettingsPlugin from "./settings";
 
-const CodeBlockRe = /```js\n(.+?)```/s;
+const CodeBlockRe = /```snippet\n(.+?)```/s;
 
 const AdditionalAllowedChannelIds = [
     BOT_COMMANDS_CHANNEL_ID, // Plexcord > #bot-spam
@@ -65,6 +66,7 @@ const AsyncFunction = async function () { }.constructor;
 const ShowCurrentGame = getUserSettingLazy<boolean>("status", "showCurrentGame")!;
 
 const isSupportAllowedChannel = (channel: Channel) => channel.parent_id === SUPPORT_CATEGORY_ID || AdditionalAllowedChannelIds.includes(channel.id);
+const ShowEmbeds = getUserSettingLazy<boolean>("textAndImages", "renderEmbeds")!;
 
 interface clientData {
     name: string;
@@ -131,7 +133,6 @@ export function detectClient(): clientData {
         version: window.legcord.version,
     };
 
-    // @ts-expect-error
     const name = typeof unsafeWindow !== "undefined" ? "UserScript" : "Web";
     return {
         name: name,
@@ -155,7 +156,7 @@ async function generateDebugInfoMessage() {
 
     const info = {
         Plexcord:
-            `v${VERSION} • [${gitHash}](<https://github.com/MutanPlex/Plexcord/commit/${gitHash}>)` +
+            `v${VERSION} • [${gitHashShort}](<https://github.com/MutanPlex/Plexcord/commit/${gitHash}>)` +
             `${SettingsPlugin.additionalInfo} - ${Intl.DateTimeFormat("en-GB", { dateStyle: "medium" }).format(BUILD_TIMESTAMP)}`,
         Client: `${RELEASE_CHANNEL} ~ ${clientString}`,
         Platform: platformDisplay
@@ -167,10 +168,11 @@ async function generateDebugInfoMessage() {
 
     const commonIssues = {
         "Activity Sharing disabled": tryOrElse(() => !ShowCurrentGame.getSetting(), false),
+        "Link Embeds Disabled": tryOrElse(() => !ShowEmbeds.getSetting(), false),
         "Plexcord DevBuild": !IS_STANDALONE,
         "Platform Spoofed": spoofInfo?.spoofed ?? false,
         "Has UserPlugins": Object.values(PluginMeta).some(m => m.userPlugin),
-        "More than two weeks out of date": BUILD_TIMESTAMP < Date.now() - 12096e5,
+        ">2 Weeks Outdated": BUILD_TIMESTAMP < Date.now() - 12096e5,
     };
 
     let content = `>>> ${Object.entries(info).map(([k, v]) => `**${k}**: ${v}`).join("\n")}`;
@@ -242,7 +244,7 @@ export default definePlugin({
             if (!isSupportChannel) return;
 
             const selfId = UserStore.getCurrentUser()?.id;
-            if (!selfId || (isPluginDev(selfId) && isPcPluginDev(selfId))) return;
+            if (!selfId || isAnyPluginDev(selfId)) return;
 
             if (!IS_UPDATER_DISABLED) {
                 await checkForUpdatesOnce().catch(() => { });
@@ -388,8 +390,8 @@ export default definePlugin({
 
     renderContributorDmWarningCard: ErrorBoundary.wrap(({ channel }) => {
         const userId = channel.getRecipientId();
-        if (!isPluginDev(userId) && !isPcPluginDev(userId)) return null;
-        if (RelationshipStore.isFriend(userId) || (isPluginDev(UserStore.getCurrentUser()?.id) && isPcPluginDev(UserStore.getCurrentUser()?.id))) return null;
+        if (!isAnyPluginDev(userId)) return null;
+        if (RelationshipStore.isFriend(userId) || isAnyPluginDev(UserStore.getCurrentUser()?.id)) return null;
 
         const handleJoinServer = async (e: React.MouseEvent) => {
             e.preventDefault();

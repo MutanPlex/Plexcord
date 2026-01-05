@@ -19,38 +19,51 @@
 
 import { settings, t } from "@api/i18n";
 import { Button } from "@components/Button";
-import { Flex } from "@components/Flex";
 import { Heart } from "@components/Heart";
+import { OpenExternalIcon } from "@components/Icons";
+import { ButtonProps } from "@plexcord/discord-types";
 import { openInviteModal } from "@utils/discord";
+import { showToast } from "@webpack/common";
 
-export default function DonateButton({
+export function DonateButton({
+    className,
     ...props
-}) {
+}: Partial<ButtonProps>) {
     return (
-        <Flex alignItems="center" gap="8px">
-            <Button
-                {...props}
-                variant="overlayPrimary"
-                size="medium"
-                type="button"
-                onClick={() => PlexcordNative.native.openExternal("https://github.com/sponsors/MutanPlex")}
-                className="pc-donate-button"
-            >
-                <Heart />
-                {t(settings.specialCards.donations.button)}
-            </Button>
+        <Button
+            {...props}
+            variant="none"
+            size="medium"
+            type="button"
+            onClick={() => PlexcordNative.native.openExternal("https://github.com/sponsors/MutanPlex")}
+            className={className || "pc-donate-button"}
+        >
+            <Heart />
+            {t(settings.specialCards.donations.button)}
+        </Button>
+    );
+}
 
-            <Button
-                {...props}
-                variant="overlayPrimary"
-                size="medium"
-                type="button"
-                onClick={() => openInviteModal("HQGYXm5XSh")}
-                className="pc-donate-button"
-            >
-                <Heart fill="#5865f2" />
-                {t(settings.specialCards.donations.invite)}
-            </Button>
-        </Flex>
+export function InviteButton({
+    className,
+    ...props
+}: Partial<ButtonProps>) {
+    return (
+        <Button
+            {...props}
+            variant="none"
+            size="medium"
+            type="button"
+            onClick={async e => {
+                e.preventDefault();
+                openInviteModal("HQGYXm5XSh").catch(() =>
+                    showToast(t(settings.specialCards.donations.invalid))
+                );
+            }}
+            className={className || "pc-donate-button"}
+        >
+            {t(settings.specialCards.donations.invite)}
+            <OpenExternalIcon className="pc-invite-link" />
+        </Button>
     );
 }

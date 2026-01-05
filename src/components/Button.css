@@ -124,11 +124,11 @@
 }
 
 .pc-btn-positive {
-    background-color: var(--redesign-button-positive-background);
+    background-color: var(--redesign-button-positive-background, var(--green-430));
     color: var(--white);
 
     &:hover {
-        background-color: var(--redesign-button-positive-pressed-background);
+        background-color: var(--redesign-button-positive-pressed-background, var(--green-460));
     }
 }
 
@@ -190,7 +190,7 @@
 }
 
 .pc-text-btn-danger {
-    color: var(--text-feedback-critical, var(--text-feedback-critical));
+    color: var(--text-feedback-critical);
 }
 
 .pc-text-btn-link {

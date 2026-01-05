@@ -18,15 +18,19 @@
 */
 
 export const REACT_GLOBAL = "Plexcord.Webpack.Common.React";
-export const PLEXBOT_USER_ID = "772640437789523978";
+
+export const SUPPORT_CHANNEL_ID = "1344043206286905364";
+export const PLEXTRON_SUPPORT_CHANNEL_ID = "1456384931012935752";
 export const PLEXCORD_GUILD_ID = "1342668210331324476";
 export const DONOR_ROLE_ID = "1344056188374880346";
 export const CONTRIB_ROLE_ID = "1344055789811142798";
 export const REGULAR_ROLE_ID = "1344055889312747520";
-export const SUPPORT_CHANNEL_ID = "1344043206286905364";
+export const SUPPORT_ROLE_ID = "1403533249652981810";
 export const SUPPORT_CATEGORY_ID = "1344043098581504062";
 export const KNOWN_ISSUES_CHANNEL_ID = "1344056436795379824";
 export const BOT_COMMANDS_CHANNEL_ID = "1342669379669594254";
+export const PLEXBOT_USER_ID = "772640437789523978";
+export const SUPPORT_CHANNEL_IDS = [SUPPORT_CHANNEL_ID, PLEXTRON_SUPPORT_CHANNEL_ID];
 
 const platform = navigator.platform.toLowerCase();
 export const IS_WINDOWS = platform.startsWith("win");
@@ -58,6 +62,10 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     Ven: {
         name: "V",
         id: 343383572805058560n
+    },
+    Apexo: {
+        name: "Apexo",
+        id: 228548952687902720n
     },
     Arjix: {
         name: "ArjixWasTaken",
@@ -493,7 +501,11 @@ export const Devs = /* #__PURE__*/ Object.freeze({
         name: "Sqaaakoi",
         id: 259558259491340288n
     },
-    Byron: {
+    iamme: {
+        name: "i am me",
+        id: 984392761929256980n
+    },
+    Byeoon: {
         name: "byeoon",
         id: 1167275288036655133n
     },
@@ -605,10 +617,6 @@ export const Devs = /* #__PURE__*/ Object.freeze({
         name: "samsam",
         id: 400482410279469056n,
     },
-    Apexo: {
-        name: "Apexo",
-        id: 228548952687902720n
-    },
     Cootshk: {
         name: "Cootshk",
         id: 921605971577548820n
@@ -660,10 +668,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     TheArmagan: {
         name: "TheArmagan",
         id: 707309693449535599n
-    },
-    iamme: {
-        name: "i am me",
-        id: 984392761929256980n
     },
     catcraft: {
         name: "catcraft",
@@ -801,10 +805,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "x3rt",
         id: 131602100332396544n
     },
-    Byeoon: {
-        name: "byeoon",
-        id: 1167275288036655133n
-    },
     Suffocate: {
         name: "Suffocate",
         id: 772601756776923187n
@@ -909,6 +909,18 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "KamiRu",
         id: 819191621676695563n
     },
+    SSnowly: {
+        name: "Snowy",
+        id: 1183482753375809537n
+    },
+    Naibuu: {
+        name: "hs50",
+        id: 1120045713867423835n
+    },
+    keyages: {
+        name: "Key",
+        id: 1230319937155760131n
+    }
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>

@@ -30,11 +30,10 @@ import { addNicknameIcon, removeNicknameIcon } from "@api/NicknameIcons";
 import { Settings, SettingsStore } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
 import { FluxEvents } from "@plexcord/discord-types";
-import { makeLazy } from "@utils/lazy";
 import { Logger } from "@utils/Logger";
 export { Plugins as plugins };
 import { addAudioProcessor, removeAudioProcessor } from "@api/AudioPlayer";
-import { addHeaderBarButton, removeHeaderBarButton } from "@api/HeaderBar";
+import { addChannelToolbarButton, addHeaderBarButton, removeChannelToolbarButton, removeHeaderBarButton } from "@api/HeaderBar";
 import { addUserAreaButton, removeUserAreaButton } from "@api/UserArea";
 import { onlyOnce } from "@utils/onlyOnce";
 import { canonicalizeFind, canonicalizeReplacement } from "@utils/patches";
@@ -58,37 +57,17 @@ function getName(name: string | (() => string)): string {
 let enabledPluginsSubscribedFlux = false;
 const subscribedFluxEventsPlugins = new Set<string>();
 
-/**
- * Whether a plugin is required (or dependency of another enabled plugin)
- */
-export function isPluginRequired(name: string) {
-    const p = Plugins[name];
-    if (!p) return false;
-    return p.required || p.isDependency;
-}
-
-/**
- * A map of plugin names to the plugins that depend on them
- */
-export const calculatePluginDependencyMap = makeLazy(() => {
-    const dependencies: Record<string, string[]> = {};
-    for (const plugin in Plugins) {
-        const deps = Plugins[plugin].dependencies;
-        if (deps) {
-            for (const dep of deps) {
-                dependencies[dep] ??= [];
-                dependencies[dep].push(plugin);
-            }
-        }
-    }
-
-    return dependencies;
-});
-
 export function isPluginEnabled(p: string) {
     return (
-        isPluginRequired(p) ||
+        Plugins[p]?.required ||
+        Plugins[p]?.isDependency ||
         Settings.plugins[p]?.enabled
+    ) ?? false;
+}
+
+export function isPluginRequired(p: string) {
+    return (
+        Plugins[p]?.required
     ) ?? false;
 }
 
@@ -220,9 +199,11 @@ export function subscribeAllPluginsFluxEvents(fluxDispatcher: typeof FluxDispatc
 
 export const startPlugin = traceFunction("startPlugin", function startPlugin(p: Plugin) {
     const {
-        name, commands, contextMenus, managedStyle, userProfileBadge, userProfileContributorBadge,
+        name, commands, contextMenus, managedStyle, userProfileBadges,
         onBeforeMessageEdit, onBeforeMessageSend, onMessageClick,
-        chatBarButton, renderMemberListDecorator, renderNicknameIcon, headerBarButton, onAudioProcessor, userAreaButton, renderMessageAccessory, renderMessageDecoration, messagePopoverButton
+        chatBarButton, renderMemberListDecorator, renderMessageAccessory, renderMessageDecoration, messagePopoverButton,
+        // Custom
+        renderNicknameIcon, headerBarButton, audioProcessor, userAreaButton
     } = p;
     const pluginName = getName(name);
 
@@ -267,8 +248,7 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
 
     if (managedStyle) enableStyle(managedStyle);
 
-    if (userProfileBadge) addProfileBadge(userProfileBadge);
-    if (userProfileContributorBadge) addProfileBadge(userProfileContributorBadge);
+    if (userProfileBadges) userProfileBadges.forEach(e => addProfileBadge(e));
 
     if (onBeforeMessageEdit) addMessagePreEditListener(onBeforeMessageEdit);
     if (onBeforeMessageSend) addMessagePreSendListener(onBeforeMessageSend);
@@ -276,12 +256,20 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
 
     if (chatBarButton) addChatBarButton(pluginName, chatBarButton.render, chatBarButton.icon);
     if (renderMemberListDecorator) addMemberListDecorator(pluginName, renderMemberListDecorator);
-    if (renderNicknameIcon) addNicknameIcon(pluginName, renderNicknameIcon);
-    if (headerBarButton) addHeaderBarButton(pluginName, headerBarButton.render, headerBarButton.priority);
-    if (onAudioProcessor) addAudioProcessor(pluginName, onAudioProcessor);
-    if (userAreaButton) addUserAreaButton(pluginName, userAreaButton.render, userAreaButton.priority);
     if (renderMessageDecoration) addMessageDecoration(pluginName, renderMessageDecoration);
     if (renderMessageAccessory) addMessageAccessory(pluginName, renderMessageAccessory);
+    if (renderNicknameIcon) addNicknameIcon(pluginName, renderNicknameIcon);
+
+    // Custom
+    if (headerBarButton) {
+        if (headerBarButton.location === "channeltoolbar") {
+            addChannelToolbarButton(pluginName, headerBarButton.render, headerBarButton.priority);
+        } else {
+            addHeaderBarButton(pluginName, headerBarButton.render, headerBarButton.priority);
+        }
+    }
+    if (audioProcessor) addAudioProcessor(pluginName, audioProcessor);
+    if (userAreaButton) addUserAreaButton(pluginName, userAreaButton.render, userAreaButton.priority);
     if (messagePopoverButton) addMessagePopoverButton(pluginName, messagePopoverButton.render, messagePopoverButton.icon);
 
     return true;
@@ -289,9 +277,11 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
 
 export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plugin) {
     const {
-        name, commands, contextMenus, managedStyle, userProfileBadge, userProfileContributorBadge,
+        name, commands, contextMenus, managedStyle, userProfileBadges,
         onBeforeMessageEdit, onBeforeMessageSend, onMessageClick,
-        chatBarButton, renderMemberListDecorator, renderNicknameIcon, headerBarButton, onAudioProcessor, userAreaButton, renderMessageAccessory, renderMessageDecoration, messagePopoverButton
+        chatBarButton, renderMemberListDecorator, renderMessageAccessory, renderMessageDecoration, messagePopoverButton,
+        // Custom
+        renderNicknameIcon, headerBarButton, audioProcessor, userAreaButton
     } = p;
     const pluginName = getName(name);
 
@@ -334,8 +324,7 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
 
     if (managedStyle) disableStyle(managedStyle);
 
-    if (userProfileBadge) removeProfileBadge(userProfileBadge);
-    if (userProfileContributorBadge) removeProfileBadge(userProfileContributorBadge);
+    if (userProfileBadges) userProfileBadges.forEach(e => removeProfileBadge(e));
 
     if (onBeforeMessageEdit) removeMessagePreEditListener(onBeforeMessageEdit);
     if (onBeforeMessageSend) removeMessagePreSendListener(onBeforeMessageSend);
@@ -343,12 +332,20 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
 
     if (chatBarButton) removeChatBarButton(pluginName);
     if (renderMemberListDecorator) removeMemberListDecorator(pluginName);
-    if (renderNicknameIcon) removeNicknameIcon(pluginName);
-    if (headerBarButton) removeHeaderBarButton(pluginName);
-    if (onAudioProcessor) removeAudioProcessor(pluginName);
-    if (userAreaButton) removeUserAreaButton(pluginName);
     if (renderMessageDecoration) removeMessageDecoration(pluginName);
     if (renderMessageAccessory) removeMessageAccessory(pluginName);
+
+    // Custom
+    if (renderNicknameIcon) removeNicknameIcon(pluginName);
+    if (headerBarButton) {
+        if (headerBarButton.location === "channeltoolbar") {
+            removeChannelToolbarButton(pluginName);
+        } else {
+            removeHeaderBarButton(pluginName);
+        }
+    }
+    if (audioProcessor) removeAudioProcessor(pluginName);
+    if (userAreaButton) removeUserAreaButton(pluginName);
     if (messagePopoverButton) removeMessagePopoverButton(pluginName);
 
     return true;
@@ -360,7 +357,9 @@ export const initPluginManager = onlyOnce(function init() {
 
     const pluginKeysToBind: Array<keyof PluginDef & `${"on" | "render"}${string}`> = [
         "onBeforeMessageEdit", "onBeforeMessageSend", "onMessageClick",
-        "renderChatBarButton", "renderMemberListDecorator", "renderNicknameIcon", "onAudioProcessor", "renderMessageAccessory", "renderMessageDecoration", "renderMessagePopoverButton"
+        "renderChatBarButton", "renderMemberListDecorator", "renderMessageAccessory", "renderMessageDecoration", "renderMessagePopoverButton",
+        // Custom
+        "renderNicknameIcon"
     ];
 
     const neededApiPlugins = new Set<string>();
@@ -388,27 +387,20 @@ export const initPluginManager = onlyOnce(function init() {
             dep.isDependency = true;
         });
 
-        if (p.userProfileBadge) {
-            if (!p.userProfileBadges) {
-                p.userProfileBadges = [p.userProfileBadge];
-            } else {
-                p.userProfileBadges = [p.userProfileBadge, ...p.userProfileBadges];
-            }
-        }
-
         if (p.commands?.length) neededApiPlugins.add("CommandsAPI");
         if (p.onBeforeMessageEdit || p.onBeforeMessageSend || p.onMessageClick) neededApiPlugins.add("MessageEventsAPI");
         if (p.chatBarButton) neededApiPlugins.add("ChatInputButtonAPI");
         if (p.renderMemberListDecorator) neededApiPlugins.add("MemberListDecoratorsAPI");
-        if (p.renderNicknameIcon) neededApiPlugins.add("NicknameIconsAPI");
-        if (p.headerBarButton) neededApiPlugins.add("HeaderBarAPI");
-        if (p.onAudioProcessor) neededApiPlugins.add("AudioPlayerAPI");
-        if (p.userAreaButton) neededApiPlugins.add("UserAreaAPI");
         if (p.renderMessageAccessory) neededApiPlugins.add("MessageAccessoriesAPI");
         if (p.renderMessageDecoration) neededApiPlugins.add("MessageDecorationsAPI");
         if (p.messagePopoverButton) neededApiPlugins.add("MessagePopoverAPI");
         if (p.userProfileBadge) neededApiPlugins.add("BadgeAPI");
-        if (p.userProfileContributorBadge) neededApiPlugins.add("BadgeAPI");
+
+        // Custom
+        if (p.renderNicknameIcon) neededApiPlugins.add("NicknameIconsAPI");
+        if (p.headerBarButton) neededApiPlugins.add("HeaderBarAPI");
+        if (p.audioProcessor) neededApiPlugins.add("AudioPlayerAPI");
+        if (p.userAreaButton) neededApiPlugins.add("UserAreaAPI");
 
         for (const key of pluginKeysToBind) {
             p[key] &&= p[key].bind(p) as any;
@@ -428,10 +420,7 @@ export const initPluginManager = onlyOnce(function init() {
             for (const name in p.settings.def) {
                 const def = p.settings.def[name];
                 const checks = p.settings.checks?.[name];
-                p.options[name] = Object.defineProperties({}, {
-                    ...Object.getOwnPropertyDescriptors(def),
-                    ...Object.getOwnPropertyDescriptors(checks || {})
-                }) as any;
+                p.options[name] = { ...def, ...checks };
             }
         }
 

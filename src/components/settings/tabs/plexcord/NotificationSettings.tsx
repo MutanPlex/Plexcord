@@ -60,10 +60,10 @@ function NotificationSettings() {
 
     return (
         <div style={{ padding: "1em 0" }}>
-            <Heading tag="h5">{t(settings.notifications.style.label)}</Heading>
+            <Heading>{t(settings.notifications.style.label)}</Heading>
             {settingsState.useNative !== "never" && Notification?.permission === "denied" && (
                 <ErrorCard style={{ padding: "1em" }} className={Margins.bottom8}>
-                    <Heading tag="h5">{t(settings.notifications.permissions.denied.title)}</Heading>
+                    <Heading>{t(settings.notifications.permissions.denied.title)}</Heading>
                     <Paragraph>{t(settings.notifications.permissions.denied.label)}</Paragraph>
                 </ErrorCard>
             )}
@@ -87,7 +87,7 @@ function NotificationSettings() {
                 serialize={identity}
             />
 
-            <Heading tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t(settings.notifications.positions.label)}</Heading>
+            <Heading className={Margins.top16 + " " + Margins.bottom8}>{t(settings.notifications.positions.label)}</Heading>
             <Select
                 isDisabled={settingsState.useNative === "always"}
                 placeholder={t(settings.notifications.positions.label)}
@@ -102,14 +102,14 @@ function NotificationSettings() {
                 serialize={identity}
             />
 
-            <Heading tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t(settings.notifications.missed.label)}</Heading>
+            <Heading className={Margins.top16 + " " + Margins.bottom8}>{t(settings.notifications.missed.label)}</Heading>
             <FormSwitch
                 value={settingsState.missed}
                 onChange={(v: boolean) => settingsState.missed = v}
                 title={t(settings.notifications.missed.description)}
             />
 
-            <Heading tag="h5" className={Margins.top16 + " " + Margins.bottom8}>{t(settings.notifications.timeout.label)}</Heading>
+            <Heading className={Margins.top16 + " " + Margins.bottom8}>{t(settings.notifications.timeout.label)}</Heading>
             <Paragraph className={Margins.bottom16}>{t(settings.notifications.timeout.description)}</Paragraph>
             <Slider
                 disabled={settingsState.useNative === "always"}

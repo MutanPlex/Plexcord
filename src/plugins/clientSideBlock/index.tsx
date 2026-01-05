@@ -49,14 +49,6 @@ const settings = definePluginSettings({
         restartNeeded: true,
         default: true
     },
-    /*
-        hideNewUsers: {
-            type: OptionType.BOOLEAN,
-            description: "Should content from users with the \"I'm new here, say hi!\" badge be blocked\"",
-            restartNeeded: true,
-            default: true
-        },
-    */
     blockedReplyDisplay: {
         label: () => t(plugin.clientSideBlock.option.blockedReplyDisplay.label),
         description: () => t(plugin.clientSideBlock.option.blockedReplyDisplay.description),
@@ -106,11 +98,9 @@ function shouldHideUser(userId: string, channelId?: string) {
     if (channelId && isChannelInGuildBlocked(channelId, false)) return true;
     if (RelationshipStore.isBlocked(userId) && settings.store.hideBlockedUsers) return true;
     if (settings.store.usersToBlock.length === 0) return false;
-
     return settings.store.usersToBlock.split(", ").includes(userId);
 }
 
-// This is really horror
 function isRoleAllBlockedMembers(roleId, guildId) {
     const role = GuildRoleStore.getRole(guildId, roleId);
     if (!role) return false;
@@ -203,7 +193,7 @@ export default definePlugin({
         {
             find: "._areActivitiesExperimentallyHidden=(",
             replacement: {
-                match: /NumberFormat\(.{0,50}\]\);(?=.{0,100}\.membersGroup)/,
+                match: /\i.memo\(function\(\i\){/,
                 replace: "$&if($self.isRoleAllBlockedMembers(arguments[0].id, arguments[0].guildId)) return null;"
             },
             predicate: () => settings.store.hideEmptyRoles
@@ -222,8 +212,8 @@ export default definePlugin({
             find: ".GUILD_APPLICATION_PREMIUM_SUBSCRIPTION||",
             replacement: [
                 {
-                    match: /let \i,\{repliedAuthor:/,
-                    replace: "if(arguments[0] != null && arguments[0].referencedMessage.message != null) { if($self.shouldHideUser(arguments[0].referencedMessage.message.author.id, arguments[0].baseMessage.messageReference.channel_id)) { return $self.hiddenReplyComponent(); } }$&"
+                    match: /(?=let \i,\{repliedAuthor:)/,
+                    replace: "if(arguments[0]?.referencedMessage?.message && $self.shouldHideUser(arguments[0].referencedMessage.message.author.id, arguments[0].baseMessage.messageReference.channel_id)) { return $self.hiddenReplyComponent(); }"
                 }
             ]
         },
@@ -250,8 +240,8 @@ export default definePlugin({
         {
             find: "ACTIVE_NOW_COLUMN)",
             replacement: {
-                match: /(\i\.\i),\{\}\)\]/,
-                replace: '"div",{children:$self.activeNowView($1())})]'
+                match: /(\i\.\i),\{(?=\}\)\])/,
+                replace: '"div",{children:$self.activeNowView($1())'
             }
         },
         // mutual friends list in user profile

@@ -19,7 +19,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { Message } from "@plexcord/discord-types";
-import { PcDevs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
 
@@ -27,7 +27,7 @@ const PinIcon = findComponentByCodeLazy("1-.06-.63L6.16");
 export default definePlugin({
     name: "PinIcon",
     description: () => t(plugin.pinIcon.description),
-    authors: [PcDevs.iamme, PcDevs.MutanPlex],
+    authors: [Devs.iamme, PcDevs.MutanPlex],
 
     patches: [
         {

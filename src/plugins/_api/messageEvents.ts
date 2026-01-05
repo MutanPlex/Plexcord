@@ -38,7 +38,7 @@ export default definePlugin({
             }
         },
         {
-            find: ".handleSendMessage,onResize",
+            find: ".handleSendMessage,onResize:",
             replacement: {
                 // https://regex101.com/r/7iswuk/1
                 match: /let (\i)=\i\.\i\.parse\((\i),.+?\.getSendMessageOptions\(\{.+?\}\);(?=.+?(\i)\.flags=)(?<=\)\(({.+?})\)\.then.+?)/,

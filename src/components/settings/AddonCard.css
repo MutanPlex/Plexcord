@@ -1,8 +1,8 @@
 .pc-addon-card {
     background-color: var(--card-background-default);
     color: var(--interactive-icon-active);
-    border-radius: 8px;
     border: 1px solid var(--border-subtle);
+    border-radius: 8px;
     display: block;
     height: 100%;
     padding: 12px;
@@ -41,6 +41,7 @@
     -webkit-box-orient: vertical;
     /* stylelint-disable-next-line property-no-unknown */
     box-orient: vertical;
+    color: var(--text-default);
 }
 
 .pc-addon-name-author {

@@ -76,7 +76,7 @@ export function AddonCard({ disabled, isNew, name, infoButton, footer, author, e
                     </BaseText>
 
                     {!!author && (
-                        <BaseText size="md" weight="normal" className={cl("author")}>
+                        <BaseText size="md" color="text-subtle" className={cl("author")}>
                             {author}
                         </BaseText>
                     )}
@@ -93,7 +93,7 @@ export function AddonCard({ disabled, isNew, name, infoButton, footer, author, e
 
             <BaseText size="sm" weight="normal" className={cl("note")}>{description}</BaseText>
 
-            {footer}
+            {footer && <div className={cl("footer")}>{footer}</div>}
         </div>
     );
 }

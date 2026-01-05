@@ -18,18 +18,22 @@
 */
 
 import { app } from "electron";
+import { copyFileSync, existsSync, readFileSync, writeFileSync } from "fs";
 import { join } from "path";
+
+const suffix = IS_DEV ? "dev" : "";
 
 export const DATA_DIR = process.env.PLEXCORD_USER_DATA_DIR ?? (
     process.env.DISCORD_USER_DATA_DIR
-        ? join(process.env.DISCORD_USER_DATA_DIR, "..", "PlexcordData")
-        : join(app.getPath("userData"), "..", "Plexcord")
+        ? join(process.env.DISCORD_USER_DATA_DIR, "..", "PlexcordData", suffix)
+        : join(app.getPath("userData"), "..", "Plexcord", suffix)
 );
 export const SETTINGS_DIR = join(DATA_DIR, "settings");
 export const THEMES_DIR = join(DATA_DIR, "themes");
 export const QUICK_CSS_PATH = join(SETTINGS_DIR, "quickCss.css");
 export const SETTINGS_FILE = join(SETTINGS_DIR, "settings.json");
 export const NATIVE_SETTINGS_FILE = join(SETTINGS_DIR, "native-settings.json");
+export const DEV_MIGRATED = join(SETTINGS_DIR, "migration");
 export const ALLOWED_PROTOCOLS = [
     "https:",
     "http:",
@@ -42,3 +46,29 @@ export const ALLOWED_PROTOCOLS = [
 ];
 
 export const IS_VANILLA = /* @__PURE__ */ process.argv.includes("--vanilla");
+
+if (IS_DEV) {
+    const prodDir = join(DATA_DIR, "..");
+    const settings = join(prodDir, "settings", "settings.json");
+    const quickCss = join(prodDir, "settings", "quickCss.css");
+
+    let migrated = false;
+    if (existsSync(DEV_MIGRATED)) {
+        const content = readFileSync(DEV_MIGRATED, "utf-8");
+        migrated = content.includes("migrated");
+    }
+
+    if (!migrated) {
+        setTimeout(() => {
+            try {
+                if (existsSync(settings)) copyFileSync(settings, SETTINGS_FILE);
+                if (existsSync(quickCss)) copyFileSync(quickCss, QUICK_CSS_PATH);
+                writeFileSync(DEV_MIGRATED, "migrated");
+                app.relaunch();
+                app.exit(0);
+            } catch (err) {
+                console.error("[Plexcord] Failed to copy prod data:", err);
+            }
+        }, 5000);
+    }
+}

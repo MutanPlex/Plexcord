@@ -1,3 +1,9 @@
+.pc-plugin-modal-header {
+    align-items: flex-start;
+    position: relative;
+    padding: 16px 16px 0 24px;
+}
+
 .pc-plugin-modal-header-content {
     display: flex;
     flex-direction: column;
@@ -22,6 +28,7 @@
 
 .pc-plugin-modal-description {
     color: var(--text-subtle);
+    padding-right: 60px;
 }
 
 .pc-plugin-modal-links {

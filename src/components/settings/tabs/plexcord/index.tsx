@@ -1,29 +1,21 @@
 /*
  * Plexcord, a modification for Discord's desktop app
- * Copyright (c) 2022 Vendicated and contributors
+ * Copyright (c) 2024 Vendicated and contributors
  * Copyright (c) 2025 MutanPlex
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
-import i18n, { plugins, settings, SUPPORTED_LANGUAGES, t, useForceUpdateOnLocaleChange, useTranslation } from "@api/i18n";
+import "./PlexcordTab.css";
+
+import i18n, { settings, SUPPORTED_LANGUAGES, t, useForceUpdateOnLocaleChange, useTranslation } from "@api/i18n";
 import { openNotificationLogModal } from "@api/Notifications/notificationLog";
 import { Settings, useSettings } from "@api/Settings";
+import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
 import { FolderIcon, GithubIcon, LogIcon, PaintbrushIcon, RestartIcon } from "@components/Icons";
+import { Notice } from "@components/Notice";
 import { Paragraph } from "@components/Paragraph";
 import { QuickAction, QuickActionCard } from "@components/settings/QuickAction";
 import { SpecialCard } from "@components/settings/SpecialCard";
@@ -32,13 +24,14 @@ import { openContributorModal } from "@components/settings/tabs/plugins/Contribu
 import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
 import settingsPlugin from "@plugins/_core/settings";
 import { gitRemote } from "@shared/plexcordUserAgent";
-import { IS_MAC, IS_WINDOWS } from "@utils/constants";
+import { DONOR_ROLE_ID, IS_MAC, IS_WINDOWS, PLEXCORD_GUILD_ID } from "@utils/constants";
+import { classNameFactory } from "@utils/css";
 import { Margins } from "@utils/margins";
 import { classes, isPcPluginDev, isPluginDev } from "@utils/misc";
 import { relaunch } from "@utils/native";
-import { Alerts, React, Select, useMemo, UserStore } from "@webpack/common";
+import { Alerts, GuildMemberStore, React, Select, useMemo, UserStore } from "@webpack/common";
 
-import { DonateButtonComponent, isDonor } from "./DonateButton";
+import { DonateButtonComponent } from "./DonateButton";
 import { VibrancySettings } from "./MacVibrancySettings";
 import { NotificationSection } from "./NotificationSettings";
 
@@ -48,6 +41,10 @@ const VENNIE_DONATOR_IMAGE = "https://cdn.discordapp.com/emojis/1238120638020063
 const COZY_CONTRIB_IMAGE = "https://cdn.discordapp.com/emojis/1026533070955872337.png";
 const DONOR_BACKGROUND_IMAGE = "https://media.discordapp.net/stickers/1311070116305436712.png?size=2048";
 const CONTRIB_BACKGROUND_IMAGE = "https://media.discordapp.net/stickers/1311070166481895484.png?size=2048";
+
+import BadgeAPI from "plugins/_api/badges";
+
+const cl = classNameFactory("pc-plexcord-tab-");
 
 type KeysOfType<Object, Type> = {
     [K in keyof Object]: Object[K] extends Type ? K : never;
@@ -122,20 +119,25 @@ function Switches() {
             title: t(settings.switches.transparent.label),
             description: t(settings.switches.transparent.description),
             restartRequired: true,
-            warning: { enabled: false }
+            warning: {
+                enabled: true,
+                message: IS_WINDOWS
+                    ? t(settings.switches.transparent.isWindows)
+                    : t(settings.switches.transparent.notWindows),
+            },
         },
         !IS_WEB && IS_WINDOWS && {
             key: "winCtrlQ",
             title: t(settings.switches.winCtrlQ.label),
             description: t(settings.switches.winCtrlQ.description),
-            restartRequired: false,
+            restartRequired: true,
             warning: { enabled: false }
         },
         IS_DISCORD_DESKTOP && {
             key: "disableMinSize",
             title: t(settings.switches.disableMinSize.label),
             description: t(settings.switches.disableMinSize.description),
-            restartRequired: false,
+            restartRequired: true,
             warning: { enabled: false }
         },
     ] satisfies Array<false | {
@@ -147,11 +149,22 @@ function Switches() {
     }>;
 
     return Switches.filter((s): s is Exclude<typeof s, false> => !!s).map(
-        (s, i, arr) => (
+        s => (
             <FormSwitch
                 key={s.key}
                 title={s.title}
-                description={s.description}
+                description={
+                    s.warning.enabled ? (
+                        <>
+                            {s.description}
+                            <Notice.Warning className={Margins.top8} style={{ width: "100%" }}>
+                                {s.warning.message}
+                            </Notice.Warning>
+                        </>
+                    ) : (
+                        s.description
+                    )
+                }
                 value={settingsState[s.key]}
                 onChange={v => {
                     settingsState[s.key] = v;
@@ -166,9 +179,9 @@ function Switches() {
                         });
                     }
                 }}
-                hideBorder={i === arr.length - 1}
+                hideBorder
             />
-        )
+        ),
     );
 }
 
@@ -196,7 +209,7 @@ function PlexcordSettings() {
                         backgroundImage={DONOR_BACKGROUND_IMAGE}
                         backgroundColor="#ED87A9"
                     >
-                        <DonateButtonComponent />
+                        <DonateButtonComponent donated={true} />
                     </SpecialCard>
                 )
                 : (
@@ -220,9 +233,18 @@ function PlexcordSettings() {
                     cardImage={COZY_CONTRIB_IMAGE}
                     backgroundImage={CONTRIB_BACKGROUND_IMAGE}
                     backgroundColor="#EDCC87"
-                    buttonTitle={t(settings.specialCards.contributions.buttonTitle)}
-                    buttonOnClick={() => openContributorModal(user)}
-                />
+                >
+                    <Button
+                        variant="none"
+                        size="medium"
+                        type="button"
+                        onClick={() => openContributorModal(user)}
+                        className="pc-contrib-button"
+                    >
+                        <GithubIcon aria-hidden fill={"#000000"} className={"pc-contrib-github"} />
+                        {t(settings.specialCards.contributions.buttonTitle)}
+                    </Button>
+                </SpecialCard>
             )}
 
             <Heading tag="h5">{t(settings.quickActions.title)}</Heading>
@@ -262,16 +284,19 @@ function PlexcordSettings() {
                 />
             </QuickActionCard>
 
-            <Divider />
+            <Divider className={Margins.top20} />
 
             <Heading tag="h5" className={Margins.top20}>{t(settings.settingsSection.title)}</Heading>
-            <Paragraph className={Margins.bottom20} style={{ color: "var(--text-subtle)" }}>
-                {t(settings.settingsSection.hintParts.prefix)}
-                <a onClick={() => openPluginModal(settingsPlugin)}>
-                    {t(settings.settingsSection.hintParts.linkText)}
-                </a>
-                {t(settings.settingsSection.hintParts.suffix)}
+            <Paragraph className={Margins.bottom16}>
+                {t(settings.settingsSection.description)}
             </Paragraph>
+            <Notice.Info className={Margins.bottom20} style={{ width: "100%" }}>
+                {t(settings.settingsSection.hintParts.prefix, {
+                    pluginLink: <a onClick={() => openPluginModal(settingsPlugin)}>
+                        {t(settings.settingsSection.hintParts.linkText)}
+                    </a>
+                })}
+            </Notice.Info>
 
             <LanguageSelector />
 
@@ -287,3 +312,8 @@ function PlexcordSettings() {
 }
 
 export default wrapTab(PlexcordSettings, "Plexcord " + t(settings.title));
+
+export function isDonor(userId: string): boolean {
+    const donorBadges = BadgeAPI.getDonorBadges(userId);
+    return GuildMemberStore.getMember(PLEXCORD_GUILD_ID, userId)?.roles.includes(DONOR_ROLE_ID) || !!donorBadges;
+}

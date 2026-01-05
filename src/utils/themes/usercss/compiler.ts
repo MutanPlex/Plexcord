@@ -1,0 +1,113 @@
+/*
+ * Plexcord, a modification for Discord's desktop app
+ * Copyright (c) 2022 Vendicated and contributors
+ * Copyright (c) 2025 MutanPlex
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+import { Settings } from "@api/Settings";
+import { getLess, getStylus } from "@utils/dependencies";
+import { Logger } from "@utils/Logger";
+
+import { usercssParse } from ".";
+
+const UserCSSLogger = new Logger("UserCSS:Compiler", "#d2acf5");
+
+const preprocessors: { [preprocessor: string]: (text: string, vars: Record<string, string>) => Promise<string>; } = {
+    async default(text: string, vars: Record<string, string>) {
+        const variables = Object.entries(vars)
+            .map(([name, value]) => `--${name}: ${value}`)
+            .join("; ");
+
+        return `/* ==Plexcord== */\n:root{${variables}}\n/* ==/Plexcord== */${text}`;
+    },
+
+    async uso(text: string, vars: Record<string, string>) {
+        for (const [k, v] of Object.entries(vars)) {
+            text = text.replace(new RegExp(`\\/\\*\\[\\[${k}\\]\\]\\*\\/`, "g"), v);
+        }
+
+        return text;
+    },
+
+    async stylus(text: string, vars: Record<string, string>) {
+        const StylusRenderer = await getStylus();
+
+        const variables = Object.entries(vars)
+            .map(([name, value]) => `${name} = ${value}`)
+            .join("\n");
+
+        const stylusDoc = `// ==Plexcord==\n${variables}\n// ==/Plexcord==\n${text}`;
+
+        return new StylusRenderer(stylusDoc).render();
+    },
+
+    async less(text: string, vars: Record<string, string>) {
+        const less = await getLess();
+
+        const variables = Object.entries(vars)
+            .map(([name, value]) => `@${name}: ${value};`)
+            .join("\n");
+
+        const lessDoc = `// ==Plexcord==\n${variables}\n// ==/Plexcord==\n${text}`;
+
+        return less.render(lessDoc).then(r => r.css);
+    }
+};
+
+export async function compileUsercss(fileName: string) {
+    const themeData = await PlexcordNative.themes.getThemeData(fileName);
+
+    if (!themeData) return null;
+
+    // UserCSS preprocessor order look like this:
+    // - use the preprocessor defined
+    // - if variables are set, `uso`
+    // - otherwise, `default`
+    const { vars = {}, preprocessor = Object.keys(vars).length > 0 ? "uso" : "default", id } = await usercssParse(themeData, fileName);
+
+    const preprocessorFn = preprocessors[preprocessor];
+
+    if (!preprocessorFn) {
+        UserCSSLogger.error("File", fileName, "requires preprocessor", preprocessor, "which isn't known to Plexcord");
+        return null;
+    }
+
+    const varsToPass = {
+        plexcord: "true"
+    };
+
+    for (const [k, v] of Object.entries(vars)) {
+        varsToPass[k] = Settings.userCssVars[id]?.[k] ?? v.default;
+
+        switch (v.type) {
+            case "checkbox": {
+                if (["less", "stylus"].includes(preprocessor)) {
+                    varsToPass[k] = varsToPass[k] === "1" ? "true" : "false";
+                }
+                break;
+            }
+
+            case "range": {
+                varsToPass[k] = `${varsToPass[k]}${v.units ?? "px"}`;
+                break;
+            }
+
+            case "text": {
+                if (preprocessor === "stylus") {
+                    varsToPass[k] = `"${varsToPass[k].replace(/"/g, "\" + '\"' + \"")}"`;
+                } else {
+                    varsToPass[k] = `"${varsToPass[k].replace(/\//g, "\\\\").replace(/"/g, '\\"')}"`;
+                }
+                break;
+            }
+        }
+    }
+
+    try {
+        return await preprocessorFn(themeData, varsToPass);
+    } catch (error) {
+        UserCSSLogger.error("File", fileName, "failed to compile with preprocessor", preprocessor, error);
+        return null;
+    }
+}

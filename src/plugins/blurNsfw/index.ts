@@ -18,7 +18,7 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { definePluginSettings, Settings } from "@api/Settings";
+import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
@@ -28,7 +28,7 @@ function setCss() {
     style.textContent = `
         .pc-nsfw-img [class*=imageContainer],
         .pc-nsfw-img [class*=wrapperPaused] {
-            filter: blur(${Settings.plugins.BlurNSFW.blurAmount}px);
+            filter: blur(${settings.store.blurAmount}px);
             transition: filter 0.2s;
 
             &:hover {

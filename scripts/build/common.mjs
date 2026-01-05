@@ -27,15 +27,13 @@ import esbuild, { build, context } from "esbuild";
 import { constants as FsConstants, readFileSync } from "fs";
 import { access, readdir, readFile } from "fs/promises";
 import { minify as minifyHtml } from "html-minifier-terser";
-import { optimize as optimizeSvg } from 'svgo';
-import { join, relative, resolve } from "path";
+import { dirname, join, relative, resolve } from "path";
+import { fileURLToPath } from "url";
 import { promisify } from "util";
 
 import { getPluginTarget } from "../utils.mjs";
-import { builtinModules } from "module";
 
-/** @type {import("../../package.json")} */
-const PackageJSON = JSON.parse(readFileSync("package.json", "utf-8"));
+const PackageJSON = JSON.parse(readFileSync(join(dirname(fileURLToPath(import.meta.url)), "../../package.json"), "utf-8"));
 
 export const VERSION = PackageJSON.version;
 // https://reproducible-builds.org/docs/source-date-epoch/
@@ -50,9 +48,8 @@ export const IS_COMPANION_TEST = IS_REPORTER && process.argv.includes("--compani
 if (!IS_COMPANION_TEST && process.argv.includes("--companion-test"))
     console.error("--companion-test must be run with --reporter for any effect");
 
-
 export const IS_UPDATER_DISABLED = process.argv.includes("--disable-updater");
-export const gitHash = process.env.PLEXCORD_HASH || execSync("git rev-parse --short HEAD", { encoding: "utf-8" }).trim();
+export const gitHash = process.env.PLEXCORD_HASH || execSync("git rev-parse HEAD", { encoding: "utf-8" }).trim();
 
 export const banner = {
     js: `
@@ -166,6 +163,7 @@ export const globPlugins = kind => ({
                     const fileName = file.name;
                     if (fileName.startsWith("_") || fileName.startsWith(".")) continue;
                     if (fileName === "index.ts") continue;
+                    if (/\.(zip|rar|7z|tar|gz|bz2)/.test(fileName)) continue;
 
                     const target = getPluginTarget(fileName);
 
@@ -184,7 +182,7 @@ export const globPlugins = kind => ({
                         }
                     }
 
-                    const folderName = `src/${dir}/${fileName}`.replace(/^src\/plugins\//, "");
+                    const folderName = `src/${dir}/${fileName}`;
 
                     const mod = `p${i}`;
                     code += `import ${mod} from "./${dir}/${fileName.replace(/\.tsx?$/, "")}";\n`;
@@ -284,12 +282,6 @@ export const fileUrlPlugin = {
                         removeStyleLinkTypeAttributes: true,
                         useShortDoctype: true
                     });
-                } else if (path.endsWith(".svg")) {
-                    content = optimizeSvg(await readFile(path, "utf-8"), {
-                        datauri: base64 ? "base64" : void 0,
-                        multipass: true,
-                        floatPrecision: 2,
-                    }).data;
                 } else if (/[mc]?[jt]sx?$/.test(path)) {
                     const res = await esbuild.build({
                         entryPoints: [path],
@@ -312,7 +304,20 @@ export const fileUrlPlugin = {
     }
 };
 
-const styleModule = readFileSync("./scripts/build/module/style.js", "utf-8");
+/**
+ * @type {(filter: RegExp, message: string) => import("esbuild").Plugin}
+ */
+export const banImportPlugin = (filter, message) => ({
+    name: "ban-imports",
+    setup: build => {
+        build.onResolve({ filter }, () => {
+            return { errors: [{ text: message }] };
+        });
+    }
+});
+
+const styleModule = readFileSync(join(dirname(fileURLToPath(import.meta.url)), "module/style.js"), "utf-8");
+
 /**
  * @type {import("esbuild").Plugin}
  */
@@ -338,18 +343,6 @@ export const stylePlugin = {
 };
 
 /**
- * @type {(filter: RegExp, message: string) => import("esbuild").Plugin}
- */
-export const banImportPlugin = (filter, message) => ({
-    name: "ban-imports",
-    setup: build => {
-        build.onResolve({ filter }, () => {
-            return { errors: [{ text: message }] };
-        });
-    }
-});
-
-/**
  * @type {import("esbuild").BuildOptions}
  */
 export const commonOpts = {
@@ -361,19 +354,13 @@ export const commonOpts = {
     banner,
     plugins: [fileUrlPlugin, gitHashPlugin, gitRemotePlugin, stylePlugin],
     external: ["~plugins", "~git-hash", "~git-remote", "/assets/*"],
-    inject: ["./scripts/build/inject/react.mjs"],
+    inject: [join(dirname(fileURLToPath(import.meta.url)), "inject/react.mjs")],
     jsx: "transform",
     jsxFactory: "PlexcordCreateElement",
     jsxFragment: "PlexcordFragment"
 };
 
-const escapedBuiltinModules = builtinModules
-    .map(m => m.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&"))
-    .join("|");
-const builtinModuleRegex = new RegExp(`^(node:)?(${escapedBuiltinModules})$`);
-
 export const commonRendererPlugins = [
-    banImportPlugin(builtinModuleRegex, "Cannot import node inbuilt modules in browser code. You need to use a native.ts file"),
     banImportPlugin(/^react$/, "Cannot import from react. React and hooks should be imported from @webpack/common"),
     banImportPlugin(/^electron(\/.*)?$/, "Cannot import electron in browser code. You need to use a native.ts file"),
     banImportPlugin(/^ts-pattern$/, "Cannot import from ts-pattern. match and P should be imported from @webpack/common"),

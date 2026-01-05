@@ -31,12 +31,15 @@
         "lint": "eslint",
         "lint-styles": "stylelint \"src/**/*.css\" --ignore-pattern src/userplugins",
         "lint:fix": "pnpm lint --fix",
-        "test": "pnpm buildStandalone && pnpm testTsc && pnpm lint && pnpm lint-styles && pnpm generatePluginJson",
+        "test": "pnpm buildStandalone && pnpm testTsc && pnpm lint:fix && pnpm lint-styles && pnpm generatePluginJson",
         "testWeb": "pnpm lint && pnpm buildWeb && pnpm testTsc",
         "testTsc": "tsc --noEmit"
     },
     "dependencies": {
         "@intrnl/xxhash64": "^0.1.2",
+        "@types/less": "^3.0.8",
+        "@types/stylus": "^0.48.42",
+        "@types/tinycolor2": "^1.4.6",
         "@vap/core": "0.0.12",
         "@vap/shiki": "0.10.5",
         "fflate": "^0.8.2",
@@ -45,7 +48,9 @@
         "jsqr": "^1.4.0",
         "monaco-editor": "^0.55.1",
         "nanoid": "^5.1.6",
-        "virtual-merge": "^1.0.2"
+        "usercss-meta": "^0.12.0",
+        "virtual-merge": "^1.0.2",
+        "zip-local": "^0.3.5"
     },
     "devDependencies": {
         "@electron/asar": "^4.0.1",
@@ -83,7 +88,7 @@
         "typescript-eslint": "^8.50.1",
         "typescript-transform-paths": "^3.5.5"
     },
-    "packageManager": "pnpm@10.26.2",
+    "packageManager": "pnpm@10.27.0",
     "pnpm": {
         "overrides": {
             "@types/react": "19.2.7",

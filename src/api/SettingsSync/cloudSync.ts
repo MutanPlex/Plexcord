@@ -18,6 +18,12 @@ import { exportSettings, importSettings } from "./offline";
 
 const logger = new Logger("SettingsSync:Cloud", "#39b7e0");
 
+export function shouldCloudSync(direction: "push" | "pull") {
+    const localDirection = localStorage.Plexcord_cloudSyncDirection;
+
+    return localDirection === direction || localDirection === "both";
+}
+
 export async function putCloudSettings(manual?: boolean) {
     const settings = await exportSettings({ syncDataStore: false, minify: true });
 

@@ -88,16 +88,17 @@ const IGNORED_DISCORD_ERRORS = [
 function toCodeBlock(s: string, indentation = 0, isDiscord = false) {
     s = s.replace(/```/g, "`\u200B`\u200B`");
 
-    const indentationStr = Array(!isDiscord ? indentation : 0).fill(" ").join("");
-    return `\`\`\`\n${s.split("\n").map(s => indentationStr + s).join("\n")}\n${indentationStr}\`\`\``;
+    s = s.replace(/\\x([0-9A-Fa-f]{2})/g, (_, hex) =>
+        String.fromCharCode(parseInt(hex, 16))
+    );
+
+    const indentationStr = " ".repeat(!isDiscord ? indentation : 0);
+    const content = s.split("\n").map(s => indentationStr + s).join("\n");
+
+    return `\`\`\`\n${content}\n${indentationStr}\`\`\``;
 }
 
 async function printReport() {
-    const filePath = join("dist", (CANARY ? "reporter-canary.json" : "reporter-stable.json"));
-    writeFileSync(filePath, JSON.stringify(report, null, 2));
-
-    console.log();
-
     console.log("# Plexcord Report" + (CANARY ? " (Canary)" : ""));
 
     console.log();
@@ -193,7 +194,7 @@ async function printReport() {
         if (embeds.length === 1) {
             embeds.push({
                 title: "No issues found",
-                description: "Seems like everything is working fine (for now) <a:wooww:1402405432852742164>",
+                description: "Seems like everything is working fine (for now)",
                 color: 0x00ff00
             });
         }
@@ -345,21 +346,20 @@ page.on("console", async e => {
 
 page.on("error", e => logStderr("[Error]", e.message));
 page.on("pageerror", (e: any) => {
-    const message = (e as Error).message;
-    if (message.includes("Sentry successfully disabled")) return;
+    if (e.message.includes("Sentry successfully disabled")) return;
 
-    if (!message.startsWith("Object") && !message.includes("Cannot find module") && !/^.{1,2}$/.test(message)) {
-        logStderr("[Page Error]", message);
-        report.otherErrors.push(message);
+    if (!e.message.startsWith("Object") && !e.message.includes("Cannot find module") && !/^.{1,2}$/.test(e.message)) {
+        logStderr("[Page Error]", e.message);
+        report.otherErrors.push(e.message);
     } else {
-        report.ignoredErrors.push(message);
+        report.ignoredErrors.push(e.message);
     }
 });
 
 await page.evaluateOnNewDocument(`
     if (location.host.endsWith("discord.com")) {
-        ${readFileSync("./dist/browser.js", "utf-8")};
+        ${readFileSync("./dist/browser/browser.js", "utf-8")};
     }
 `);
 
-await page.goto(CANARY ? "https://canary.discord.com/login" : "https://discord.com/login");
+await page.goto(CANARY ? "https://canary.discord.com/login" : "https://discord.com/login", { timeout: 120000 });

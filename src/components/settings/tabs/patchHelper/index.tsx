@@ -22,7 +22,7 @@ import { Button } from "@components/Button";
 import { CodeBlock } from "@components/CodeBlock";
 import { Divider } from "@components/Divider";
 import { Flex } from "@components/Flex";
-import { Heading, HeadingTertiary } from "@components/Heading";
+import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
 import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
 import { Span } from "@components/Span";
@@ -113,7 +113,7 @@ function PatchHelper() {
             <Heading className={Margins.bottom8}>{t(patchHelper.title)}</Heading>
             <Paragraph className={Margins.bottom16}>{t(patchHelper.description)}</Paragraph>
 
-            <HeadingTertiary>{t(patchHelper.fullPatch.label)}</HeadingTertiary>
+            <Heading>{t(patchHelper.fullPatch.label)}</Heading>
             <Paragraph className={Margins.bottom8}>
                 {t(patchHelper.fullPatch.description)}
             </Paragraph>
@@ -125,7 +125,7 @@ function PatchHelper() {
             />
 
             <div className={Margins.top20}>
-                <HeadingTertiary>{t(patchHelper.find)}</HeadingTertiary>
+                <Heading>{t(patchHelper.find)}</Heading>
                 <TextInput
                     type="text"
                     value={find}
@@ -135,7 +135,7 @@ function PatchHelper() {
             </div>
 
             <div className={Margins.top20}>
-                <HeadingTertiary className={Margins.top8}>{t(patchHelper.match)}</HeadingTertiary>
+                <Heading>{t(patchHelper.match)}</Heading>
                 <TextInput
                     type="text"
                     value={match}
@@ -155,7 +155,7 @@ function PatchHelper() {
             {module && (
                 <>
                     <Divider className={Margins.top16 + " " + Margins.bottom16} />
-                    <Span size="md" weight="bold" color="text-strong">{t(patchHelper.preview)}</Span>
+                    <Span size="md" weight="medium" color="text-strong">{t(patchHelper.preview)}</Span>
                     <PatchPreview
                         module={module}
                         match={match}

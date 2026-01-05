@@ -4,6 +4,7 @@
  * Copyright (c) 2025 MutanPlex
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
+
 import { AudioPlayerInternal, AudioPlayerOptions, audioProcessorFunctions, AudioType, identifyAudioType, playAudio } from "@api/AudioPlayer";
 import { plugins, t } from "@api/i18n";
 import { PcDevs } from "@utils/constants";

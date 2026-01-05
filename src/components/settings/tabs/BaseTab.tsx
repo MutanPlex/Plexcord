@@ -45,7 +45,7 @@ export function openSettingsTabModal(Tab: ComponentType<any>) {
     try {
         openModal(wrapTab((modalProps: ModalProps) => (
             <ModalRoot {...modalProps} size={ModalSize.MEDIUM}>
-                <ModalContent className="pc-settings-modal-">
+                <ModalContent className="pc-settings-modal">
                     <ModalCloseButton onClick={modalProps.onClose} className="pc-settings-modal-close" />
                     <Tab />
                 </ModalContent>

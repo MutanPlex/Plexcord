@@ -62,6 +62,7 @@ declare global {
     export var DiscordNative: any;
     export var Plextron: any;
     export var PlextronNative: any;
+    export var unsafeWindow: any;
 
     interface Window extends Record<PropertyKey, any> { }
 }

@@ -26,7 +26,7 @@ import { IpcEvents } from "@shared/IpcEvents";
 import { BrowserWindow, ipcMain, nativeTheme, shell, systemPreferences } from "electron";
 import monacoHtml from "file://monacoWin.html?minify&base64";
 import { FSWatcher, mkdirSync, readFileSync, watch, writeFileSync } from "fs";
-import { open, readdir, readFile } from "fs/promises";
+import { open, readdir, readFile, unlink } from "fs/promises";
 import { join, normalize } from "path";
 
 import { registerCspIpcHandlers } from "./csp/manager";
@@ -34,7 +34,7 @@ import { ALLOWED_PROTOCOLS, QUICK_CSS_PATH, SETTINGS_DIR, THEMES_DIR } from "./u
 import { makeLinksOpenExternally } from "./utils/externalLinks";
 import { mainI18n } from "./utils/i18n";
 
-const RENDERER_CSS_PATH = join(__dirname, IS_PLEXTRON ? "plexcordDesktopRenderer.css" : "renderer.css");
+const RENDERER_CSS_PATH = join(__dirname, "renderer.css");
 
 mkdirSync(THEMES_DIR, { recursive: true });
 
@@ -51,11 +51,13 @@ function readCss() {
     return readFile(QUICK_CSS_PATH, "utf-8").catch(() => "");
 }
 
-function listThemes(): Promise<{ fileName: string; content: string; }[]> {
-    return readdir(THEMES_DIR)
-        .then(files =>
-            Promise.all(files.map(async fileName => ({ fileName, content: await getThemeData(fileName) }))))
-        .catch(() => []);
+async function listThemes(): Promise<{ fileName: string; content: string; }[]> {
+    try {
+        const files = await readdir(THEMES_DIR);
+        return await Promise.all(files.map(async fileName => ({ fileName, content: await getThemeData(fileName) })));
+    } catch {
+        return [];
+    }
 }
 
 function getThemeData(fileName: string) {
@@ -87,6 +89,11 @@ ipcMain.handle(IpcEvents.SET_QUICK_CSS, (_, css) =>
 ipcMain.handle(IpcEvents.GET_THEMES_DIR, () => THEMES_DIR);
 ipcMain.handle(IpcEvents.GET_THEMES_LIST, () => listThemes());
 ipcMain.handle(IpcEvents.GET_THEME_DATA, (_, fileName) => getThemeData(fileName));
+ipcMain.handle(IpcEvents.DELETE_THEME, (_, fileName) => {
+    const safePath = ensureSafePath(THEMES_DIR, fileName);
+    if (!safePath) return Promise.reject(`Unsafe path ${fileName}`);
+    return unlink(safePath);
+});
 ipcMain.handle(IpcEvents.GET_THEME_SYSTEM_VALUES, () => {
     let accentColor = systemPreferences.getAccentColor?.() ?? "";
 
@@ -147,7 +154,7 @@ ipcMain.handle(IpcEvents.OPEN_MONACO_EDITOR, async () => {
         autoHideMenuBar: true,
         darkTheme: true,
         webPreferences: {
-            preload: join(__dirname, IS_DISCORD_DESKTOP ? "preload.js" : "plexcordDesktopPreload.js"),
+            preload: join(__dirname, "preload.js"),
             contextIsolation: true,
             nodeIntegration: false,
             sandbox: false

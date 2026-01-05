@@ -40,7 +40,13 @@
     border-radius: 50%;
 }
 
+.pc-author-modal-root + [class*="footer"] {
+    padding: 16px;
+}
+
 .pc-author-modal-links {
+    display: flex;
+    gap: 4px;
     margin-left: auto;
 }
 

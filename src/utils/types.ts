@@ -18,20 +18,20 @@
 */
 
 import { AudioProcessor } from "@api/AudioPlayer";
-import { ProfileBadge } from "@api/Badges";
-import { ChatBarButtonData } from "@api/ChatButtons";
-import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import type { ProfileBadge } from "@api/Badges";
+import type { ChatBarButtonData, ChatBarButtonFactory } from "@api/ChatButtons";
+import type { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { HeaderBarButtonData } from "@api/HeaderBar";
-import { MemberListDecoratorFactory } from "@api/MemberListDecorators";
-import { MessageAccessoryFactory } from "@api/MessageAccessories";
-import { MessageDecorationFactory } from "@api/MessageDecorations";
-import { MessageClickListener, MessageEditListener, MessageSendListener } from "@api/MessageEvents";
-import { MessagePopoverButtonData } from "@api/MessagePopover";
-import { NicknameIconFactory } from "@api/NicknameIcons";
-import { UserAreaButtonData } from "@api/UserArea";
-import { Command, FluxEvents } from "@plexcord/discord-types";
-import { ReactNode } from "react";
-import { LiteralUnion } from "type-fest";
+import type { MemberListDecoratorFactory } from "@api/MemberListDecorators";
+import type { MessageAccessoryFactory } from "@api/MessageAccessories";
+import type { MessageDecorationFactory } from "@api/MessageDecorations";
+import type { MessageClickListener, MessageEditListener, MessageSendListener } from "@api/MessageEvents";
+import type { MessagePopoverButtonData, MessagePopoverButtonFactory } from "@api/MessagePopover";
+import type { NicknameIconFactory } from "@api/NicknameIcons";
+import type { UserAreaButtonData } from "@api/UserArea";
+import type { Command, FluxEvents } from "@plexcord/discord-types";
+import type { ReactNode } from "react";
+import type { LiteralUnion } from "type-fest";
 
 // exists to export default definePlugin({...})
 export default function definePlugin<P extends PluginDef>(p: P & Record<PropertyKey, any>) {
@@ -207,21 +207,22 @@ export interface PluginDef {
     renderMessageAccessory?: MessageAccessoryFactory;
     renderMessageDecoration?: MessageDecorationFactory;
 
+    // Custom
     renderMemberListDecorator?: MemberListDecoratorFactory;
     renderNicknameIcon?: NicknameIconFactory;
     headerBarButton?: HeaderBarButtonData;
-    onAudioProcessor?: AudioProcessor;
+    audioProcessor?: AudioProcessor;
     userAreaButton?: UserAreaButtonData;
 
     // TODO: Remove eventually
     /**
      * @deprecated Use {@link chatBarButton} instead
      */
-    renderChatBarButton?: never;
+    renderChatBarButton?: ChatBarButtonFactory;
     /**
      * @deprecated Use {@link messagePopoverButton} instead
      */
-    renderMessagePopoverButton?: never;
+    renderMessagePopoverButton?: MessagePopoverButtonFactory;
 }
 
 export const enum StartAt {

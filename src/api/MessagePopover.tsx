@@ -23,8 +23,9 @@ import { Logger } from "@utils/Logger";
 import { IconComponent } from "@utils/types";
 import type { ComponentType, MouseEventHandler } from "react";
 
-const logger = new Logger("MessagePopover");
 import { useSettings } from "./Settings";
+
+const logger = new Logger("MessagePopover");
 
 export interface MessagePopoverButtonItem {
     key?: string,

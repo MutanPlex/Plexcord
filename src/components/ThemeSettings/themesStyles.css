@@ -1,0 +1,82 @@
+.pc-settings-theme-grid {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.pc-settings-theme-link-row {
+    display: grid;
+    height: 40px;
+    gap: 8px;
+    grid-template-columns: 1fr auto;
+}
+
+.pc-settings-theme-filter-row {
+    display: grid;
+    height: 40px;
+    gap: 8px;
+    grid-template-columns: 1fr 150px;
+}
+
+.pc-settings-theme-error-card {
+    padding: 16px;
+}
+
+.pc-settings-csp-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pc-settings-usercss-ie-buttons > div {
+    color: var(--interactive-icon-default, var(--interactive-normal));
+    opacity: 0.5;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.pc-settings-usercss-ie-buttons > div:hover {
+    color: var(--interactive-icon-hover, var(--interactive-hover));
+    opacity: 1;
+}
+
+.pc-settings-csp-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+}
+
+.pc-settings-csp-row a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+}
+
+.pc-settings-theme-menu-button {
+    cursor: pointer;
+    color: var(--interactive-icon-default, var(--interactive-normal));
+    display: flex;
+    align-items: center;
+    height: 24px;
+}
+
+.pc-settings-theme-menu-button:hover {
+    color: var(--interactive-icon-hover, var(--interactive-hover));
+}
+
+.pc-settings-theme-footer-pin-icon {
+    display: flex;
+}
+
+.pc-settings-theme-footer-pin-icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+.pc-settings-theme-footer-pin-icon svg path {
+    fill: var(--text-muted);
+}

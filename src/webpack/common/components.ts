@@ -50,12 +50,13 @@ export const Text = TextCompat;
 export const Button = ButtonCompat;
 /** @deprecated Use FormSwitch from Plexcord */
 export const Switch = FormSwitchCompat as never;
+
 /** @deprecated Use Card from Plexcord */
 export const Card = waitForComponent<never>("Card", filters.componentByCode(".editable),", ".outline:"));
 export const Checkbox = waitForComponent<t.Checkbox>("Checkbox", filters.componentByCode(".checkboxWrapperDisabled:"));
 
 export const Tooltip = waitForComponent<t.Tooltip>("Tooltip", m => m.prototype?.shouldShowTooltip && m.prototype.render, TooltipFallback);
-/** @deprecated import from @vencord/components */
+/** @deprecated import from @plexcord/components */
 export const TooltipContainer = TooltipContainerComponent as never;
 
 export const TextInput = waitForComponent<t.TextInput>("TextInput", filters.componentByCode("#{intl::MAXIMUM_LENGTH_ERROR}", '"input"'));
@@ -88,6 +89,7 @@ waitFor(m => m.thin && m.auto && !m.customTheme, m => listScrollerClasses = m);
 export const ScrollerNone = LazyComponent(() => createScroller(scrollerClasses.none, scrollerClasses.fade, scrollerClasses.customTheme));
 export const ScrollerThin = LazyComponent(() => createScroller(scrollerClasses.thin, scrollerClasses.fade, scrollerClasses.customTheme));
 export const ScrollerAuto = LazyComponent(() => createScroller(scrollerClasses.auto, scrollerClasses.fade, scrollerClasses.customTheme));
+
 export const ListScrollerNone = LazyComponent(() => createListScroller(listScrollerClasses.none, listScrollerClasses.fade, "", ResizeObserver));
 export const ListScrollerThin = LazyComponent(() => createListScroller(listScrollerClasses.thin, listScrollerClasses.fade, "", ResizeObserver));
 export const ListScrollerAuto = LazyComponent(() => createListScroller(listScrollerClasses.auto, listScrollerClasses.fade, "", ResizeObserver));

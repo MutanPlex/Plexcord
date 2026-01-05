@@ -59,6 +59,7 @@
     line-height: 16px;
     color: var(--white-500);
     text-align: center;
+    margin-right: 8px;
 }
 
 .pc-plugins-dep-name {
@@ -78,9 +79,9 @@
 
 .pc-plugins-restart-card {
     padding: 1em;
-    background: var(--info-warning-background);
-    border: 1px solid var(--icon-status-idle);
-    color: var(--icon-status-idle);
+    background: var(--icon-status-idle) !important;
+    border: 1px solid var(--icon-status-idle) !important;
+    color: var(--text-status-idle);
 }
 
 .pc-plugins-info-icon:not(:hover, :focus) {
@@ -88,13 +89,13 @@
 }
 
 .pc-plugins-restart-button {
-    background: var(--icon-status-idle, var(--icon-status-idle)) !important;
-    border: 1px solid var(--icon-status-idle) !important;
+    background-color: var(--background-base-low) !important;
+    border: 1px solid var(--text-status-idle) !important;
     margin-top: 0.5em;
 }
 
 .pc-plugins-restart-button:hover {
-    background-color: var(--icon-status-idle) !important;
+    background-color: var(--text-status-idle) !important;
 }
 
 .pc-plugin-stats {
@@ -110,7 +111,8 @@
     transition-property: box-shadow, transform, background, opacity;
 }
 
-.pc-plugins-info-card:hover {
+.pc-plugins-info-card:hover,
+.pc-plugin-stats:hover {
     background-color: var(--background-base-low) !important;
     transform: translateY(-1px);
     box-shadow: var(--elevation-high);
@@ -176,7 +178,6 @@
 .pc-plugin-modal-disable-warning {
     background-color: color-mix(in srgb, var(--redesign-button-danger-background) 10%, transparent) !important;
     border-style: solid !important;
-    padding: 10px;
     border-width: .1rem !important;
     border-color: color-mix(in srgb, var(--redesign-button-danger-background) 80%, transparent) !important;
     border-radius: 5px !important;
@@ -191,13 +192,13 @@
 .pc-plugins-confirm-reset,
 .pc-plugin-modal-confirm-reset {
     background-color: var(--redesign-button-danger-background) !important;
-    color: var(--text-strong);
+    color: var(--redesign-button-danger-pressed-text);
 }
 
 .pc-plugins-confirm-reset:hover,
 .pc-plugin-modal-confirm-reset:hover {
-    background-color: var(--redesign-button-danger-background) !important;
-    filter: saturate(80%);
+    background-color: var(--redesign-button-danger-pressed-background) !important;
+    color: var(--redesign-button-danger-pressed-text);
 }
 
 .pc-modal-close-button {
@@ -206,7 +207,6 @@
 
 .pc-modal-align-reset {
     align-self: end;
-    height: 45px;
 }
 
 .pc-modal-footer {
@@ -251,20 +251,20 @@
 }
 
 .visual-refresh .pc-plugins-info-card {
-    background-color: var(--card-background-default) !important;
+    background-color: var(--background-surface-high) !important;
     border: 1px solid var(--border-subtle) !important;
 
     &:hover {
-        background-color: var(--card-background-default) !important;
+        background-color: var(--background-surface-high) !important;
     }
 }
 
 .visual-refresh .pc-plugin-stats {
-    background-color: var(--card-background-default) !important;
+    background-color: var(--background-surface-high) !important;
     border: 1px solid var(--border-subtle) !important;
 
     &:hover {
-        background-color: var(--card-background-default) !important;
+        background-color: var(--background-surface-high) !important;
     }
 }
 
@@ -282,13 +282,11 @@
     gap: 8px;
 }
 
-.pc-button-group {
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.pc-pm-modal-title {
-    padding: 5px 0 20px;
+.pc-plugins-source {
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    margin-right: 8px;
 }
 
 .pc-plugins-stats-container {

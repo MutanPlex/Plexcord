@@ -39,12 +39,12 @@ export const TextColors = {
     "text-default": "var(--text-default)",
     "text-muted": "var(--text-muted)",
     "text-link": "var(--text-link)",
-    "text-danger": "var(--redesign-button-danger-background)",
+    "text-danger": "var(--text-feedback-critical)",
     "text-brand": "var(--text-brand)",
     "text-strong": "var(--text-strong)",
     "text-subtle": "var(--text-subtle)",
     "control-text-critical": "var(--control-text-critical-secondary-default)",
-    "control-text-primary": "var(--control-primary-text-default)",
+    "control-text-primary": "var(--control-text-primary-default)",
 } as const;
 
 export function generateTextCss() {
@@ -77,8 +77,8 @@ export function BaseText<T extends TextTag = "div">(props: BaseTextProps<T>): Re
     const {
         size = "md",
         weight = "normal",
-        tag: Tag = "div",
         color,
+        tag: Tag = "div",
         children,
         className,
         style,

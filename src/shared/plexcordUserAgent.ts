@@ -10,4 +10,6 @@ import gitRemote from "~git-remote";
 
 export { gitHash, gitRemote };
 
+export const gitHashShort = gitHash.slice(0, 7);
 export const PLEXCORD_USER_AGENT = `Plexcord/${gitHash}${gitRemote ? ` (https://github.com/${gitRemote})` : ""}`;
+export const PLEXCORD_USER_AGENT_HASHLESS = `Plexcord${gitRemote ? ` (https://github.com/${gitRemote})` : ""}`;

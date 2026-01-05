@@ -9,6 +9,7 @@ import i18n, { changelog, cloud, patchHelper, plugin, plugins, settings as setti
 import { definePluginSettings, Settings } from "@api/Settings";
 import { BackupRestoreIcon, ChangelogIcon, CloudIcon, MainSettingsIcon, PaintbrushIcon, PatchHelperIcon, PluginsIcon, UpdaterIcon } from "@components/index";
 import { BackupAndRestoreTab, ChangelogTab, CloudTab, PatchHelperTab, PlexcordTab, PluginsTab, ThemesTab, UpdaterTab } from "@components/settings/tabs";
+import { gitHashShort } from "@shared/plexcordUserAgent";
 import { Devs, PcDevs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import { isTruthy } from "@utils/guards";
@@ -16,8 +17,6 @@ import definePlugin, { IconProps, OptionType } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
 import { React } from "@webpack/common";
 import type { ComponentType, PropsWithChildren, ReactNode } from "react";
-
-import gitHash from "~git-hash";
 
 const enum LayoutType {
     ROOT = 0,
@@ -61,6 +60,7 @@ interface SettingsLayoutNode {
     type: LayoutType;
     key?: string;
     legacySearchKey?: string;
+    getLegacySearchKey?(): string;
     useLabel?(): string;
     useTitle?(): string;
     buildLayout?(): SettingsLayoutNode[];
@@ -70,12 +70,13 @@ interface SettingsLayoutNode {
 }
 
 interface EntryOptions {
-    key: string,
-    title: string,
-    panelTitle?: string,
-    Component: ComponentType<{}>,
+    key: string;
+    title: string;
+    panelTitle?: string;
+    Component: ComponentType<{}>;
     Icon: ComponentType<IconProps>;
 }
+
 interface SettingsLayoutBuilder {
     key?: string;
     buildLayout(): SettingsLayoutNode[];
@@ -124,6 +125,10 @@ export default definePlugin({
             find: ".versionHash",
             replacement: [
                 {
+                    match: /\.RELEASE_CHANNEL/,
+                    replace: "$&.replace(/^./, c => c.toUpperCase())"
+                },
+                {
                     match: /\.compactInfo.+?(?=null!=(\i)&&(.{0,20}\i\.Text.{0,200}?,children:).{0,15}?("span"),({className:\i\.versionHash,children:\["Build Override: ",\1\.id\]\})\)\}\))/,
                     replace: (m, _buildOverride, makeRow, component, props) => {
                         props = props.replace(/children:\[.+\]/, "");
@@ -154,15 +159,6 @@ export default definePlugin({
                     match: /({(?=.+?function (\i).{0,160}(\i)=\i\.useMemo.{0,140}return \i\.useMemo\(\(\)=>\i\(\3).+?\(\)=>)\2/,
                     replace: (_, rest, settingsHook) => `${rest}$self.wrapSettingsHook(${settingsHook})`
                 }
-            ]
-        },
-        {
-            find: ".DEVELOPER_SECTION,",
-            replacement: [
-                {
-                    match: /\i\.\i\.isDeveloper/,
-                    replace: "true"
-                },
             ]
         },
         {
@@ -239,7 +235,7 @@ export default definePlugin({
             buildEntry({
                 key: "plexcord_main",
                 title: "Plexcord",
-                panelTitle: "Plexcord",
+                panelTitle: "Plexcord" + t(settingsI18n.title),
                 Component: PlexcordTab,
                 Icon: MainSettingsIcon
             }),
@@ -361,7 +357,8 @@ export default definePlugin({
                 searchableTitles: [t(updater.title)],
                 element: UpdaterTab,
                 className: "pc-updater"
-            }, {
+            },
+            {
                 section: "PlexcordChangelog",
                 label: t(changelog.text),
                 searchableTitles: [t(changelog.text)],
@@ -459,18 +456,21 @@ export default definePlugin({
         }
     },
 
-    get additionalInfo() {
-        if (IS_DEV) return " (Dev)";
-        if (IS_WEB) return " (Web)";
-        if (IS_PLEXTRON) return ` (Plextron v${PlextronNative.app.getVersion()})`;
-        if (IS_STANDALONE) return " (Standalone)";
-        return "";
+    getVersionInfo(support = true) {
+        let version = "";
+
+        if (IS_DEV) version = "Dev";
+        if (IS_WEB) version = "Web";
+        if (IS_PLEXTRON) version = `Plextron v${PlextronNative.app.getVersion()}`;
+        if (IS_STANDALONE) version = "Standalone";
+
+        return support && version ? ` (${version})` : version;
     },
 
     getInfoRows() {
-        const { electronVersion, chromiumVersion, additionalInfo } = this;
+        const { electronVersion, chromiumVersion, getVersionInfo } = this;
 
-        const rows = [`Plexcord ${gitHash}${additionalInfo}`];
+        const rows = [`Plexcord ${gitHashShort}${getVersionInfo}`];
 
         if (electronVersion) rows.push(`Electron ${electronVersion}`);
         if (chromiumVersion) rows.push(`Chromium ${chromiumVersion}`);

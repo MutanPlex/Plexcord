@@ -17,7 +17,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { plugins, t } from "@api/i18n";
+import { showNotice } from "@api/Notices";
+import { Settings } from "@api/Settings";
+import { showErrorToast } from "@components/settings/tabs/plugins";
 import { filters, findByCodeLazy, mapMangledModuleLazy } from "@webpack";
+import { Alerts } from "@webpack/common";
 import type { ComponentType, PropsWithChildren, ReactNode, Ref } from "react";
 
 import { LazyComponent } from "./react";
@@ -172,5 +177,87 @@ export const ModalAPI: ModalAPI = mapMangledModuleLazy(".modalKey?", {
     closeModal: filters.byCode(".onCloseCallback()"),
     closeAllModals: filters.byCode(".getState();for")
 });
+
+function restartPrompt(): Promise<boolean> {
+    return new Promise(resolve => {
+        Alerts.show({
+            title: t(plugins.restart.required),
+            body: (
+                <>
+                    <p style={{ textAlign: "center" }}>
+                        {t(plugins.restart.fully)}
+                    </p>
+                    <p style={{ textAlign: "center" }}>{t(plugins.restart.would)}</p>
+                </>
+            ),
+            confirmText: t(plugins.restart.button.now),
+            cancelText: t(plugins.restart.button.later),
+            onConfirm: () => resolve(true),
+            onCancel: () => resolve(false),
+        });
+    });
+}
+
+export async function toggleEnabled(name: string) {
+    let restartNeeded = false;
+    function onRestartNeeded() {
+        restartNeeded = true;
+    }
+
+    async function beforeReturn(settings: any, wasEnabled: boolean) {
+        if (restartNeeded) {
+            const confirmed = await restartPrompt();
+            if (!confirmed) return false;
+
+            settings.enabled = !wasEnabled;
+            location.reload();
+            return true;
+        }
+
+        return true;
+    }
+
+    const plugin = Plexcord.Plugins.plugins[name];
+    const pluginName = typeof plugin.name === "function" ? plugin.name() : plugin.name;
+    const settings = Settings.plugins[pluginName];
+    const isEnabled = () => settings.enabled ?? false;
+    const wasEnabled = isEnabled();
+
+    if (!wasEnabled) {
+        const { restartNeeded, failures } = Plexcord.Plugins.startDependenciesRecursive(plugin);
+        if (failures.length) {
+            console.error(`Failed to start dependencies for ${plugin.name}: ${failures.join(", ")}`);
+            showNotice(t(plugins.restart.failed) + failures.join(", "), t(plugins.restart.button.close), () => null);
+            return false;
+        } else if (restartNeeded) {
+            settings.enabled = true;
+            onRestartNeeded();
+            return await beforeReturn(settings, wasEnabled);
+        }
+    }
+
+    if (plugin.patches?.length) {
+        onRestartNeeded();
+        return await beforeReturn(settings, wasEnabled);
+    }
+
+    if (wasEnabled && !plugin.started) {
+        settings.enabled = !wasEnabled;
+        return await beforeReturn(settings, wasEnabled);
+    }
+
+    const result = wasEnabled ? Plexcord.Plugins.stopPlugin(plugin) : Plexcord.Plugins.startPlugin(plugin);
+
+    if (!result) {
+        settings.enabled = false;
+        const msg = wasEnabled ? t(plugins.error.stopping, { plugin: plugin.name }) : t(plugins.error.starting, { plugin: plugin.name });
+        console.error(msg);
+        showErrorToast(msg);
+        return false;
+    }
+
+    settings.enabled = !wasEnabled;
+    return await beforeReturn(settings, wasEnabled);
+}
 
 export const { openModalLazy, openModal, closeModal, closeAllModals } = ModalAPI;

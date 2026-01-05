@@ -33,7 +33,7 @@ export function patchActivityList({ activities, user, hideTooltip }: ActivityLis
         });
         for (const appIcon of uniqueIcons) {
             icons.push({
-                iconElement: <img {...(appIcon.image as React.ImgHTMLAttributes<HTMLImageElement>)} />,
+                iconElement: <img {...appIcon.image} />,
                 tooltip: <ActivityTooltip activity={appIcon.activity} application={appIcon.application} user={user} />
             });
         }

@@ -5,36 +5,21 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import "./styles.css";
-
 import { plugin, t } from "@api/i18n";
-import { addMessageDecoration, removeMessageDecoration } from "@api/MessageDecorations";
-import ErrorBoundary from "@components/ErrorBoundary";
-import { openContributorModal } from "@components/settings/tabs";
 import { User } from "@plexcord/discord-types";
 import badges, { openDonorModal } from "@plugins/_api/badges";
 import { Devs, PcDevs } from "@utils/constants";
-import { isPcPluginDev } from "@utils/misc";
-import { closeModal, openModal } from "@utils/modal";
-import definePlugin from "@utils/types";
 import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
+const roleIconClassName = findByPropsLazy("roleIcon", "separator").roleIcon;
+const RoleIconComponent = findComponentByCodeLazy("#{intl::ROLE_ICON_ALT_TEXT}");
+import "./styles.css";
+
+import { openContributorModal } from "@components/settings";
+import { isPcPluginDev } from "@utils/misc";
+import definePlugin from "@utils/types";
 import { JSX } from "react";
 
 import settings from "./settings";
-
-const roleIconClassName = findByPropsLazy("roleIcon", "separator").roleIcon;
-const RoleIconComponent = findComponentByCodeLazy("#{intl::ROLE_ICON_ALT_TEXT}");
-
-function openDonorsModal() {
-    const modalKey = openModal(props => (
-        <ErrorBoundary noop onError={() => {
-            closeModal(modalKey);
-            PlexcordNative.native.openExternal("https://github.com/sponsors/MutanPlex");
-        }}>
-            {openDonorModal(props)}
-        </ErrorBoundary>
-    ));
-}
 
 function getDiscordBadges(): readonly [number, string, string][] {
     return [
@@ -56,27 +41,23 @@ function CheckBadge({ badge, author }: { badge: string; author: User; }): JSX.El
 
     switch (badge) {
         case "PlexcordDonor":
-            const plexcordDonorBadges = badges.getDonorBadges(author.id)?.slice(0, 12);
-            if (!plexcordDonorBadges || plexcordDonorBadges.length === 0) return null;
-
             return (
-                <span style={{ order: settings.store.plexcordDonorPosition, display: "flex", gap: "4px" }}>
-                    {plexcordDonorBadges.map((badge: any, index: number) => (
+                <span style={{ order: settings.store.plexcordDonorPosition }}>
+                    {badges.getDonorBadges(author.id)?.map(badge => (
                         <RoleIconComponent
-                            key={`${author.id}-${index}`}
+                            key={author.id}
                             className={roleIconClassName}
                             name={badge.description}
                             size={20}
                             src={badge.iconSrc}
-                            onClick={openDonorsModal}
+                            onClick={openDonorModal}
                             style={{ cursor: "pointer" }}
                         />
                     ))}
                 </span>
             );
         case "PlexcordContributor":
-            const isContributor = isPcPluginDev(author.id);
-            return isContributor ? (
+            return isPcPluginDev(author.id) ? (
                 <span style={{ order: settings.store.plexcordContributorPosition }}>
                     <RoleIconComponent
                         className={roleIconClassName}
@@ -141,13 +122,9 @@ export default definePlugin({
     name: "ShowBadgesInChat",
     authors: [Devs.Inbestigator, PcDevs.KrystalSkull, PcDevs.MutanPlex],
     description: () => t(plugin.showBadgesInChat.description),
-    dependencies: ["MessageDecorationsAPI"],
     settings,
 
-    start: () => {
-        addMessageDecoration("pc-show-badges-in-chat", props => props.message?.author ? <ChatBadges author={props.message.author} /> : null);
-    },
-    stop: () => {
-        removeMessageDecoration("pc-show-badges-in-chat");
+    renderMessageDecoration(props) {
+        return props.message?.author ? <ChatBadges author={props.message.author} /> : null;
     }
 });

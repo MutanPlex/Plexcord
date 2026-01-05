@@ -25,7 +25,7 @@ import { Logger } from "@utils/Logger";
 import { canonicalizeMatch } from "@utils/patches";
 
 import { traceFunction } from "../debug/Tracer";
-import { AnyModuleFactory, AnyWebpackRequire } from "./types";
+import type { AnyModuleFactory, AnyWebpackRequire } from "./types";
 
 const logger = new Logger("Webpack");
 
@@ -62,7 +62,7 @@ export const filters = {
 
     byCode: (...code: CodeFilter): FilterFn => {
         const parsedCode = code.map(canonicalizeMatch);
-        const filter = (m: any) => {
+        const filter = m => {
             if (typeof m !== "function") return false;
             return stringMatches(Function.prototype.toString.call(m), parsedCode);
         };
@@ -75,7 +75,7 @@ export const filters = {
 
     componentByCode: (...code: CodeFilter): FilterFn => {
         const byCodeFilter = filters.byCode(...code);
-        const filter = m => {
+        const filter = (m: any) => {
             let inner = m;
 
             while (inner != null) {

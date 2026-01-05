@@ -2,7 +2,7 @@
  * BetterDiscord addon meta parser
  * Copyright 2023 BetterDiscord contributors
  * Copyright 2023 Vendicated and Vencord contributors
- * Copyright 2025 MutanPlex
+ * Copyright 2025 MutanPlex and Plexcord contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import { t, themes } from "@api/i18n";
 
 const splitRegex = /[^\S\r\n]*?\r?(?:\r\n|\n)[^\S\r\n]*?\*[^\S\r\n]?/;
 const escapedAtRegex = /^\\@/;
@@ -31,14 +33,15 @@ export interface UserThemeHeader {
     website?: string;
     invite?: string;
     content?: string;
+    customName?: string;
 }
 
 function makeHeader(fileName: string, opts: Partial<UserThemeHeader> = {}): UserThemeHeader {
     return {
         fileName,
         name: opts.name ?? fileName.replace(/\.css$/i, ""),
-        author: opts.author ?? "Unknown Author",
-        description: opts.description ?? "A Discord Theme.",
+        author: opts.author ?? t(themes.unknown.author),
+        description: opts.description ?? t(themes.unknown.theme),
         version: opts.version,
         license: opts.license,
         source: opts.source,
