@@ -82,7 +82,7 @@ function getRanks(): rankInfo[] {
             title: t(plugin.friendshipRanks.badge.besties.name),
             description: t(plugin.friendshipRanks.badge.besties.description),
             requirement: 1826.25,
-            iconSrc: "https://raw.githubusercontent.com/MutanPlex/random-files/refs/heads/main/icons/friendshipRanks/besties.png"
+            iconSrc: "https://raw.githubusercontent.com/MutanPlex/random-files/refs/heads/main/icons/friendshipRanks/bestie.png"
         }
     ];
 }
