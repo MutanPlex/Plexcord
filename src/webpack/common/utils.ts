@@ -190,6 +190,9 @@ export const VoiceActions = findByPropsLazy("toggleSelfMute");
 export const GuildActions = findByPropsLazy("setServerMute", "setServerDeaf");
 export const ChannelActions = findByPropsLazy("selectChannel", "selectVoiceChannel");
 
+export const DraftActions = findByPropsLazy("saveDraft", "changeDraft");
+export const PinActions = findByPropsLazy("pinMessage", "unpinMessage");
+
 export const IconUtils: t.IconUtils = findByPropsLazy("getGuildBannerURL", "getUserAvatarURL");
 
 export const ReadStateUtils = mapMangledModuleLazy('type:"ENABLE_AUTOMATIC_ACK",', {

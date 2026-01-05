@@ -8,10 +8,9 @@
 import { playAudio } from "@api/AudioPlayer";
 import type { User } from "@plexcord/discord-types";
 import { classNameFactory } from "@utils/css";
-import { proxyLazy } from "@utils/lazy";
 import { LazyComponent } from "@utils/react";
 import { saveFile } from "@utils/web";
-import { findByCode, findByProps, findByPropsLazy } from "@webpack";
+import { findByCode, findByPropsLazy } from "@webpack";
 
 import settings from "./settings";
 
@@ -33,11 +32,11 @@ export interface SoundLogEntry extends SoundEvent {
 }
 
 export const cl = classNameFactory("pc-soundlog-");
+const EmojiManager = findByPropsLazy("getEmojiColors", "getURL");
 
 export function getEmojiUrl(emoji) {
-    const { getURL } = proxyLazy(() => findByProps("getEmojiColors", "getURL"));
-    if (!emoji) return getURL("❓"); // If the sound doesn't have a related emoji
-    return emoji.id ? `https://cdn.discordapp.com/emojis/${emoji.id}.png?size=32` : getURL(emoji.name);
+    if (!emoji) return EmojiManager.getURL("❓"); // If the sound doesn't have a related emoji
+    return emoji.id ? `https://cdn.discordapp.com/emojis/${emoji.id}.png?size=32` : EmojiManager.getURL(emoji.name);
 }
 
 export const playSound = id => {
