@@ -21,7 +21,8 @@ import { plugin, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { HeadingTertiary } from "@components/Heading";
 import { BaseText } from "@components/index";
-import type { Guild, GuildMember } from "@plexcord/discord-types";
+import type { Guild, GuildMember, RoleOrUserPermission } from "@plexcord/discord-types";
+import { PermissionOverwriteType } from "@plexcord/discord-types/enums";
 import { cl, getGuildPermissionSpecMap, getSortedRolesForMember, sortUserRoles } from "@plugins/permissionsViewer/utils";
 import { getIntlMessage } from "@utils/discord";
 import { classes } from "@utils/misc";
@@ -29,7 +30,7 @@ import { filters, findBulk, proxyLazyWebpack } from "@webpack";
 import { PermissionsBits, Tooltip, useMemo, UserStore } from "@webpack/common";
 
 import { PermissionsSortOrder, settings } from "..";
-import openRolesAndUsersPermissionsModal, { PermissionType, type RoleOrUserPermission } from "./RolesAndUsersPermissions";
+import openRolesAndUsersPermissionsModal from "./RolesAndUsersPermissions";
 
 interface UserPermission {
     permission: string;
@@ -98,13 +99,13 @@ function UserPermissionsComponent({ guild, guildMember, closePopout }: { guild: 
         const userRoles = getSortedRolesForMember(guild, guildMember);
 
         const rolePermissions: Array<RoleOrUserPermission> = userRoles.map(role => ({
-            type: PermissionType.Role,
+            type: PermissionOverwriteType.ROLE,
             ...role
         }));
 
         if (guild.ownerId === guildMember.userId) {
             rolePermissions.push({
-                type: PermissionType.Owner,
+                type: PermissionOverwriteType.OWNER,
                 permissions: Object.values(PermissionsBits).reduce((prev, curr) => prev | curr, 0n)
             });
 

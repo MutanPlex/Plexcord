@@ -22,9 +22,10 @@ import { isPluginEnabled } from "@api/PluginManager";
 import { Settings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
-import type { Channel } from "@plexcord/discord-types";
+import type { Channel, RoleOrUserPermission } from "@plexcord/discord-types";
+import { ChannelFlags, ChannelType, ForumLayout, PermissionOverwriteType, VideoQualityMode } from "@plexcord/discord-types/enums";
 import PermissionsViewerPlugin from "@plugins/permissionsViewer";
-import openRolesAndUsersPermissionsModal, { PermissionType, RoleOrUserPermission } from "@plugins/permissionsViewer/components/RolesAndUsersPermissions";
+import openRolesAndUsersPermissionsModal from "@plugins/permissionsViewer/components/RolesAndUsersPermissions";
 import { sortPermissionOverwrites } from "@plugins/permissionsViewer/utils";
 import { classes } from "@utils/misc";
 import { formatDuration } from "@utils/text";
@@ -38,51 +39,6 @@ const enum SortOrderTypes {
     CREATION_DATE = 1
 }
 
-const enum ForumLayoutTypes {
-    DEFAULT = 0,
-    LIST = 1,
-    GRID = 2
-}
-
-interface DefaultReaction {
-    emojiId: string | null;
-    emojiName: string | null;
-}
-
-interface Tag {
-    id: string;
-    name: string;
-    emojiId: string | null;
-    emojiName: string | null;
-    moderated: boolean;
-}
-
-interface ExtendedChannel extends Channel {
-    defaultThreadRateLimitPerUser?: number;
-    defaultSortOrder?: SortOrderTypes | null;
-    defaultForumLayout?: ForumLayoutTypes;
-    defaultReactionEmoji?: DefaultReaction | null;
-    availableTags?: Array<Tag>;
-}
-
-const enum ChannelTypes {
-    GUILD_TEXT = 0,
-    GUILD_VOICE = 2,
-    GUILD_ANNOUNCEMENT = 5,
-    GUILD_STAGE_VOICE = 13,
-    GUILD_FORUM = 15
-}
-
-const enum VideoQualityModes {
-    AUTO = 1,
-    FULL = 2
-}
-
-const enum ChannelFlags {
-    PINNED = 1 << 1,
-    REQUIRE_TAG = 1 << 4
-}
-
 const ChatScrollClasses = findByPropsLazy("auto", "managedReactiveScroller");
 const ChannelBeginHeader = findComponentByCodeLazy("#{intl::ROLE_REQUIRED_SINGLE_USER_MESSAGE}");
 const TagComponent = findComponentByCodeLazy("#{intl::FORUM_TAG_A11Y_FILTER_BY_TAG}");
@@ -90,13 +46,13 @@ const TagComponent = findComponentByCodeLazy("#{intl::FORUM_TAG_A11Y_FILTER_BY_T
 const EmojiParser = findByPropsLazy("convertSurrogateToName");
 const EmojiUtils = findByPropsLazy("getURL", "getEmojiColors");
 
-const getChannelTypeName = (type: ChannelTypes) => {
+const getChannelTypeName = (type: ChannelType) => {
     switch (type) {
-        case ChannelTypes.GUILD_TEXT: return t(plugin.showHiddenChannels.channelType.text);
-        case ChannelTypes.GUILD_ANNOUNCEMENT: return t(plugin.showHiddenChannels.channelType.announcement);
-        case ChannelTypes.GUILD_FORUM: return t(plugin.showHiddenChannels.channelType.forum);
-        case ChannelTypes.GUILD_VOICE: return t(plugin.showHiddenChannels.channelType.voice);
-        case ChannelTypes.GUILD_STAGE_VOICE: return t(plugin.showHiddenChannels.channelType.stage);
+        case ChannelType.GUILD_TEXT: return t(plugin.showHiddenChannels.channelType.text);
+        case ChannelType.GUILD_ANNOUNCEMENT: return t(plugin.showHiddenChannels.channelType.announcement);
+        case ChannelType.GUILD_FORUM: return t(plugin.showHiddenChannels.channelType.forum);
+        case ChannelType.GUILD_VOICE: return t(plugin.showHiddenChannels.channelType.voice);
+        case ChannelType.GUILD_STAGE_VOICE: return t(plugin.showHiddenChannels.channelType.stage);
         default: return t(plugin.showHiddenChannels.modal.unknown);
     }
 };
@@ -109,19 +65,19 @@ const getSortOrderName = (order: SortOrderTypes) => {
     }
 };
 
-const getForumLayoutName = (layout: ForumLayoutTypes) => {
+const getForumLayoutName = (layout: ForumLayout) => {
     switch (layout) {
-        case ForumLayoutTypes.DEFAULT: return t(plugin.showHiddenChannels.forumLayout.default);
-        case ForumLayoutTypes.LIST: return t(plugin.showHiddenChannels.forumLayout.list);
-        case ForumLayoutTypes.GRID: return t(plugin.showHiddenChannels.forumLayout.grid);
+        case ForumLayout.DEFAULT: return t(plugin.showHiddenChannels.forumLayout.default);
+        case ForumLayout.LIST: return t(plugin.showHiddenChannels.forumLayout.list);
+        case ForumLayout.GRID: return t(plugin.showHiddenChannels.forumLayout.grid);
         default: return t(plugin.showHiddenChannels.modal.unknown);
     }
 };
 
-const getVideoQualityName = (quality: VideoQualityModes) => {
+const getVideoQualityName = (quality: VideoQualityMode) => {
     switch (quality) {
-        case VideoQualityModes.AUTO: return t(plugin.showHiddenChannels.videoQuality.auto);
-        case VideoQualityModes.FULL: return t(plugin.showHiddenChannels.videoQuality.full);
+        case VideoQualityMode.AUTO: return t(plugin.showHiddenChannels.videoQuality.auto);
+        case VideoQualityMode.FULL: return t(plugin.showHiddenChannels.videoQuality.full);
         default: return t(plugin.showHiddenChannels.modal.unknown);
     }
 };
@@ -129,7 +85,7 @@ const getVideoQualityName = (quality: VideoQualityModes) => {
 // Icon from the modal when clicking a message link you don't have access to view
 const HiddenChannelLogo = "/assets/433e3ec4319a9d11b0cbe39342614982.svg";
 
-function HiddenChannelLockScreen({ channel }: { channel: ExtendedChannel; }) {
+function HiddenChannelLockScreen({ channel }: { channel: Channel; }) {
     const { defaultAllowedUsersAndRolesDropdownState } = settings.use(["defaultAllowedUsersAndRolesDropdownState"]);
     const [permissions, setPermissions] = useState<RoleOrUserPermission[]>([]);
 
@@ -175,7 +131,7 @@ function HiddenChannelLockScreen({ channel }: { channel: ExtendedChannel; }) {
 
         if (Settings.plugins.PermissionsViewer.enabled) {
             setPermissions(sortPermissionOverwrites(Object.values(permissionOverwrites).map(overwrite => ({
-                type: overwrite.type as PermissionType,
+                type: overwrite.type as PermissionOverwriteType,
                 id: overwrite.id,
                 overwriteAllow: overwrite.allow,
                 overwriteDeny: overwrite.deny
@@ -247,7 +203,7 @@ function HiddenChannelLockScreen({ channel }: { channel: ExtendedChannel; }) {
                     <BaseText size="md" weight="normal">{t(plugin.showHiddenChannels.modal.region)} {rtcRegion ?? t(plugin.showHiddenChannels.modal.automatic)}</BaseText>
                 }
                 {(channel.isGuildVoice() || channel.isGuildStageVoice()) &&
-                    <BaseText size="md" weight="normal">{t(plugin.showHiddenChannels.modal.videoQuality)} {getVideoQualityName(videoQualityMode ?? VideoQualityModes.AUTO)}</BaseText>
+                    <BaseText size="md" weight="normal">{t(plugin.showHiddenChannels.modal.videoQuality)} {getVideoQualityName(videoQualityMode ?? VideoQualityMode.AUTO)}</BaseText>
                 }
                 {(defaultAutoArchiveDuration ?? 0) > 0 &&
                     <BaseText size="md" weight="normal">

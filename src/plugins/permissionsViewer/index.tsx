@@ -26,14 +26,15 @@ import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { SafetyIcon } from "@components/Icons";
 import { TooltipContainer } from "@components/TooltipContainer";
-import type { Guild, GuildMember } from "@plexcord/discord-types";
+import type { Guild, GuildMember, RoleOrUserPermission } from "@plexcord/discord-types";
+import { PermissionOverwriteType } from "@plexcord/discord-types/enums";
 import { Devs } from "@utils/constants";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
 import { ChannelStore, Dialog, GuildMemberStore, GuildRoleStore, GuildStore, match, Menu, PermissionsBits, Popout, useRef, UserStore } from "@webpack/common";
 import { findByPropsLazy } from "webpack";
 
-import openRolesAndUsersPermissionsModal, { PermissionType, RoleOrUserPermission } from "./components/RolesAndUsersPermissions";
+import openRolesAndUsersPermissionsModal from "./components/RolesAndUsersPermissions";
 import UserPermissions from "./components/UserPermissions";
 import { getSortedRolesForMember, sortPermissionOverwrites } from "./utils";
 
@@ -80,13 +81,13 @@ function MenuItem(guildId: string, id?: string, type?: MenuItemParentType) {
 
                         const permissions: RoleOrUserPermission[] = getSortedRolesForMember(guild, member)
                             .map(role => ({
-                                type: PermissionType.Role,
+                                type: PermissionOverwriteType.ROLE,
                                 ...role
                             }));
 
                         if (guild.ownerId === id) {
                             permissions.push({
-                                type: PermissionType.Owner,
+                                type: PermissionOverwriteType.OWNER,
                                 permissions: Object.values(PermissionsBits).reduce((prev, curr) => prev | curr, 0n)
                             });
                         }
@@ -100,7 +101,7 @@ function MenuItem(guildId: string, id?: string, type?: MenuItemParentType) {
                         const channel = ChannelStore.getChannel(id!);
 
                         const permissions = sortPermissionOverwrites(Object.values(channel.permissionOverwrites).map(({ id, allow, deny, type }) => ({
-                            type: type as PermissionType,
+                            type,
                             id,
                             overwriteAllow: allow,
                             overwriteDeny: deny
@@ -113,7 +114,7 @@ function MenuItem(guildId: string, id?: string, type?: MenuItemParentType) {
                     })
                     .otherwise(() => {
                         const permissions = GuildRoleStore.getSortedRoles(guild.id).map(role => ({
-                            type: PermissionType.Role,
+                            type: PermissionOverwriteType.ROLE,
                             ...role
                         }));
 

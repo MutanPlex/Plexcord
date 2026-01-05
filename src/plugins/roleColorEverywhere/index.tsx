@@ -178,7 +178,7 @@ export default definePlugin({
     getDisplayNameFont(userId: string) {
         try {
             const user = UserStore.getUser(userId);
-            const fontId = user?.displayNameStyles?.fontId;
+            const fontId = user?.displayNameStyles?.font_id;
 
             if (!fontId || Number(fontId) === 1) return fonts.dnsFont; // Default font
 
