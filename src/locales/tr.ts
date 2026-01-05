@@ -1096,10 +1096,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cancel: "İptal"
             }
         },
-        amITyping: {
-            name: "AmITyping",
-            description: "Diğer insanların yazdığınızı görüp görmediğini gösterir."
-        },
         anonymiseFileNames: {
             name: "AnonymiseFileNames",
             description: "Yüklenen dosya adlarını anonimleştirir.",
@@ -8943,6 +8939,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 alternativeFormatting: {
                     label: "Alternatif Biçim",
                     description: "Birden fazla kişi yazıyor olduğunda daha kullanışlı bir mesaj göster"
+                },
+                amITyping: {
+                    label: "Ben Yazıyor Muyum?",
+                    description: "Diğer insanların yazdığınızı görüp görmediğini gösterir"
                 }
             },
             others: {

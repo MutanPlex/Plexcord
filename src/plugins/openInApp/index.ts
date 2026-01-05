@@ -50,7 +50,7 @@ const UrlReplacementRules: Record<string, URLReplacementRule> = {
         replace: (_, id) => `com.epicgames.launcher://store/${id}`
     },
     tidal: {
-        match: /^https:\/\/(?:listen\.)?tidal\.com\/(?:browse\/)?(track|album|artist|playlist|user|video|mix)\/([a-f0-9-]+).*$/,
+        match: /^https:\/\/(?:listen\.)?tidal\.com\/(?:browse\/)?(track|album|artist|playlist|user|video|mix)\/([a-f0-9-]+).*/,
         replace: (_, type, id) => `tidal://${type}/${id}`
     },
     itunes: {

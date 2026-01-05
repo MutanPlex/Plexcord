@@ -6,6 +6,8 @@
  */
 
 import { plugins, t } from "@api/i18n";
+import { isPluginEnabled } from "@api/PluginManager";
+import betterUserArea from "@plugins/betterUserArea";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
@@ -33,6 +35,6 @@ export default definePlugin({
     },
 
     shouldHideTooltips() {
-        return Plexcord.Plugins.isPluginEnabled("BetterUserArea") && Plexcord.Plugins.plugins.BetterUserArea.settings?.store?.removeButtonTooltips;
+        return isPluginEnabled("BetterUserArea") && betterUserArea.settings.store.removeButtonTooltips;
     }
 });

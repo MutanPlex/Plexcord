@@ -7,7 +7,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { DataStore } from "@api/index";
-import { isPluginEnabled } from "@api/PluginManager";
+import { isPluginEnabled, plugins, startPlugin, stopPlugin } from "@api/PluginManager";
 import { SettingsStore } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import { openPluginModal } from "@components/settings/tabs";
@@ -19,6 +19,8 @@ import { findByPropsLazy, findStoreLazy } from "@webpack";
 import { ChannelActionCreators, ChannelRouter, ChannelStore, ComponentDispatch, FluxDispatcher, GuildStore, MediaEngineStore, NavigationRouter, openUserSettingsPanel, React, ReadStateUtils, RelationshipStore, SelectedChannelStore, SelectedGuildStore, StreamerModeStore, Toasts, useEffect, UserStore, VoiceActions } from "@webpack/common";
 import { Settings } from "Plexcord";
 import type { FC, ReactElement, ReactNode } from "react";
+
+import commandPalette from ".";
 
 type CommandHandler = () => void | Promise<void>;
 
@@ -1626,11 +1628,8 @@ function refreshPluginToggleCommand(plexcordPlugin: Plugin) {
 }
 
 function registerPluginToggleCommands() {
-    const { plugins } = Plexcord.Plugins;
-    const pluginMap = plugins as Record<string, Plugin>;
-
-    for (const plugin of Object.values(pluginMap)) {
-        refreshPluginToggleCommand(plugin);
+    for (const plexcordPlugin of Object.values(plugins)) {
+        refreshPluginToggleCommand(plexcordPlugin);
     }
 
     if (!pluginToggleSettingsUnsubscribe) {
@@ -1638,8 +1637,7 @@ function registerPluginToggleCommands() {
             if (typeof path !== "string" || !path.startsWith("plugins.")) return;
             if (!path.endsWith(".enabled")) return;
             const pluginName = path.slice("plugins.".length, -".enabled".length);
-            const currentPlugins = Plexcord.Plugins.plugins as Record<string, Plugin>;
-            const target = currentPlugins[pluginName];
+            const target = plugins[pluginName];
             if (!target) return;
             refreshPluginToggleCommand(target);
         };
@@ -1655,10 +1653,7 @@ function registerPluginToggleCommands() {
 }
 
 function registerPluginSettingsCommands() {
-    const { plugins } = Plexcord.Plugins;
-    const pluginMap = plugins as Record<string, Plugin>;
-
-    for (const plexcordPlugin of Object.values(pluginMap)) {
+    for (const plexcordPlugin of Object.values(plugins)) {
         const pluginName = typeof plexcordPlugin.name === "function" ? plexcordPlugin.name() : plexcordPlugin.name;
         const pluginDesc = plexcordPlugin.description ? (typeof plexcordPlugin.description === "function" ? plexcordPlugin.description() : plexcordPlugin.description) : undefined;
         const keywords = createPluginKeywords(plexcordPlugin);
@@ -2316,15 +2311,6 @@ function registerFriendCommands() {
     });
 }
 
-function ensurePalettePlugin(): Plugin | null {
-    const plugins = Plexcord.Plugins.plugins[COMMAND_PALETTE_PLUGIN_NAME] as Plugin | undefined;
-    if (!plugins) {
-        showToast(t(plugin.commandPalette.toast.command.notMetadata), Toasts.Type.FAILURE);
-        return null;
-    }
-    return plugins;
-}
-
 function setPresenceStatus(status: "online" | "idle" | "dnd" | "invisible") {
     if (!StatusSetting) {
         showToast(t(plugin.commandPalette.toast.status.change.unableToChange), Toasts.Type.FAILURE);
@@ -2383,9 +2369,7 @@ function registerCommandPaletteUtilities() {
         categoryId: DEFAULT_CATEGORY_ID,
         tags: [TAG_NAVIGATION(), TAG_DEVELOPER()],
         handler: () => {
-            const plugin = ensurePalettePlugin();
-            if (!plugin) return;
-            openPluginModal(plugin);
+            openPluginModal(commandPalette);
         }
     });
 
@@ -2532,13 +2516,13 @@ function hotReloadPlugin(plexcordPlugin: Plugin) {
         return false;
     }
 
-    const stopped = Plexcord.Plugins.stopPlugin(plexcordPlugin);
+    const stopped = stopPlugin(plexcordPlugin);
     if (!stopped) {
         showToast(t(plugin.commandPalette.toast.plugin.stop.failed, { pluginName }), Toasts.Type.FAILURE);
         return false;
     }
 
-    const started = Plexcord.Plugins.startPlugin(plexcordPlugin);
+    const started = startPlugin(plexcordPlugin);
     if (!started) {
         showToast(t(plugin.commandPalette.toast.plugin.restart.failed, { pluginName }), Toasts.Type.FAILURE);
         return false;
@@ -2549,7 +2533,7 @@ function hotReloadPlugin(plexcordPlugin: Plugin) {
 }
 
 async function reloadAllPlugins() {
-    const entries = Object.values(Plexcord.Plugins.plugins) as Plugin[];
+    const entries = Object.values(plugins);
     let count = 0;
     for (const plugin of entries) {
         const pluginName = typeof plugin.name === "function" ? plugin.name() : plugin.name;
@@ -2565,7 +2549,6 @@ async function reloadAllPlugins() {
 }
 
 async function setAllPluginsEnabled(enabled: boolean) {
-    const { plugins } = Plexcord.Plugins;
     let changed = 0;
     for (const plugin of Object.values(plugins) as Plugin[]) {
         const pluginName = typeof plugin.name === "function" ? plugin.name() : plugin.name;
@@ -2636,7 +2619,6 @@ function slugifyActionLabel(label: string) {
 }
 
 function createPluginToolboxCommands(): CommandEntry[] {
-    const { plugins } = Plexcord.Plugins;
     const pluginMap = plugins as Record<string, Plugin>;
     const entries: CommandEntry[] = [];
     const usedIds = new Set<string>();

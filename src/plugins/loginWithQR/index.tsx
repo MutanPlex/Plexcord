@@ -6,10 +6,10 @@
  */
 
 import { plugin, t } from "@api/i18n";
+import { plugins } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Paragraph } from "@components/Paragraph";
-import LoginWithQR from "@plugins/loginWithQR";
 import { PcDevs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
@@ -31,7 +31,7 @@ export default definePlugin({
             description: () => t(plugin.loginWithQR.option.scanQr.description),
             type: OptionType.COMPONENT,
             component() {
-                if (!LoginWithQR.started)
+                if (!plugins.LoginWithQR.started)
                     return (
                         <Paragraph>
                             {t(plugin.loginWithQR.option.scanQr.notEnabled)}

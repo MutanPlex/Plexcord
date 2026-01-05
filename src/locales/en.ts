@@ -1093,10 +1093,6 @@ const translations = {
                 cancel: "Cancel"
             }
         },
-        amITyping: {
-            name: "AmITyping",
-            description: "Shows you if other people can see you typing."
-        },
         anonymiseFileNames: {
             name: "AnonymiseFileNames",
             description: "Anonymise uploaded file names",
@@ -8939,6 +8935,10 @@ const translations = {
                 alternativeFormatting: {
                     label: "Alternative Formatting",
                     description: "Show a more useful message when several users are typing"
+                },
+                amITyping: {
+                    label: "Am I Typing",
+                    description: "Shows you if other people can see you typing"
                 }
             },
             others: {

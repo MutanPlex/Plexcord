@@ -21,10 +21,10 @@ import { ChatBarButton, ChatBarButtonFactory } from "@api/ChatButtons";
 import { ApplicationCommandInputType, ApplicationCommandOptionType, findOption, sendBotMessage } from "@api/Commands";
 import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
+import { plugins } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
 import { Channel } from "@plexcord/discord-types";
-import SilentTyping from "@plugins/silentTyping";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { IconComponent, OptionType } from "@utils/types";
 import { ChannelStore, FluxDispatcher, Menu, React } from "@webpack/common";
@@ -193,7 +193,7 @@ const SilentTypingChatToggle: ChatBarButtonFactory = ({ channel, type }) => {
                 channel.guild_id ? toggleLocation(channel.guild_id, effectiveList, defaultHidden) : null;
                 break;
             case "settings":
-                openPluginModal(SilentTyping);
+                openPluginModal(plugins.SilentTyping);
                 break;
         }
     }

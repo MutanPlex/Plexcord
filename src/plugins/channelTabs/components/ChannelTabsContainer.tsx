@@ -10,7 +10,7 @@ import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
-import ChannelTabsPlugin from "@plugins/channelTabs";
+import channelTabs from "@plugins/channelTabs";
 import { BasicChannelTabsProps, ChannelTabsProps, clearStaleNavigationContext, closeTab, createTab, handleChannelSwitch, isNavigationFromSource, isTabSelected, moveToTab, openedTabs, openStartupTabs, saveTabs, settings, setUpdaterFunction, useGhostTabs } from "@plugins/channelTabs/util";
 import { IS_MAC } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
@@ -128,7 +128,7 @@ export default function ChannelsTabsContainer(props: BasicChannelTabsProps) {
     useEffect(() => {
         if (ref.current) {
             try {
-                ChannelTabsPlugin.containerHeight = ref.current.clientHeight;
+                channelTabs.containerHeight = ref.current.clientHeight;
             } catch { }
         }
     }, [userId, showBookmarkBar, tabBarPosition]);

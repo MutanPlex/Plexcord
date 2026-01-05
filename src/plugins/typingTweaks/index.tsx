@@ -18,11 +18,11 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { definePluginSettings, Settings } from "@api/Settings";
+import { definePluginSettings, migratePluginToSettings, Settings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Channel, User } from "@plexcord/discord-types";
 import { getCustomColorString } from "@plugins/customUserColors";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import { openUserProfile } from "@utils/discord";
 import { isNonNullish } from "@utils/guards";
 import { Logger } from "@utils/Logger";
@@ -50,6 +50,13 @@ const settings = definePluginSettings({
         description: () => t(plugin.typingTweaks.option.alternativeFormatting.description),
         type: OptionType.BOOLEAN,
         default: true
+    },
+    amITyping: {
+        label: () => t(plugin.typingTweaks.option.amITyping.label),
+        description: () => t(plugin.typingTweaks.option.amITyping.description),
+        type: OptionType.BOOLEAN,
+        default: false,
+        restartNeeded: true
     }
 });
 
@@ -109,10 +116,11 @@ const TypingUser = ErrorBoundary.wrap(function TypingUser({ user, guildId }: Typ
     );
 }, { noop: true });
 
+migratePluginToSettings(true, "TypingTweaks", "AmITyping", "amITyping");
 export default definePlugin({
     name: "TypingTweaks",
     description: () => t(plugin.typingTweaks.description),
-    authors: [Devs.zt, Devs.sadan],
+    authors: [Devs.zt, Devs.sadan, PcDevs.MrDiamond, PcDevs.MutanPlex],
     settings,
 
     managedStyle,
@@ -145,6 +153,14 @@ export default definePlugin({
                     predicate: () => settings.store.alternativeFormatting
                 }
             ]
+        },
+        {
+            find: "\"handleDismissInviteEducation\"",
+            predicate: () => settings.store.amITyping,
+            replacement: {
+                match: /\i\.default\.getCurrentUser\(\)/,
+                replace: "\"\""
+            }
         }
     ],
 

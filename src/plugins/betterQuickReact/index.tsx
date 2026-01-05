@@ -82,7 +82,7 @@ export default definePlugin({
                 // Add a custom class to identify the quick reactions have been modified and a CSS variable for the number of columns to display
                 {
                     match: /className:(\i)\.wrapper,/,
-                    replace: "className:\"pc-better-quick-react \"+(Plexcord.Settings.plugins.BetterQuickReact.compactMode?\"pc-better-quick-react-compact \":\"\")+$1.wrapper,style:{\"--pc-better-quick-react-columns\":$self.settings.store.columns},"
+                    replace: "className:\"pc-better-quick-react \"+($self.settings.store.compactMode?\"pc-better-quick-react-compact \":\"\")+$1.wrapper,style:{\"--pc-better-quick-react-columns\":$self.settings.store.columns},"
                 },
                 // Scroll handler + Apply the emoji count limit from earlier with custom logic
                 {

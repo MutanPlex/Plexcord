@@ -7,6 +7,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { showNotice } from "@api/Notices";
+import { plugins, startDependenciesRecursive, startPlugin, stopPlugin } from "@api/PluginManager";
 import { Settings } from "@api/Settings";
 import { canonicalizeMatch } from "@utils/patches";
 import { CodeFilter, stringMatches, wreq } from "@webpack";
@@ -149,7 +150,7 @@ export function toggleEnabled(name: string, beforeReload: (error?: string) => vo
             });
         }
     }
-    const targetPlugin = Plexcord.Plugins.plugins[name];
+    const targetPlugin = plugins[name];
 
     const settings = Settings.plugins[getName(targetPlugin.name)];
 
@@ -159,7 +160,7 @@ export function toggleEnabled(name: string, beforeReload: (error?: string) => vo
 
     // If we're enabling a plugin, make sure all deps are enabled recursively.
     if (!wasEnabled) {
-        const { restartNeeded, failures } = Plexcord.Plugins.startDependenciesRecursive(targetPlugin);
+        const { restartNeeded, failures } = startDependenciesRecursive(targetPlugin);
         if (failures.length) {
             console.error(`Failed to start dependencies for ${targetPlugin.name}: ${failures.join(", ")}`);
             showNotice(t(plugin.devCompanion.toast.failed) + " " + failures.join(", "), t(plugin.devCompanion.toast.close), () => null);
@@ -189,7 +190,7 @@ export function toggleEnabled(name: string, beforeReload: (error?: string) => vo
         return;
     }
 
-    const result = wasEnabled ? Plexcord.Plugins.stopPlugin(targetPlugin) : Plexcord.Plugins.startPlugin(targetPlugin);
+    const result = wasEnabled ? stopPlugin(targetPlugin) : startPlugin(targetPlugin);
 
     if (!result) {
         settings.enabled = false;

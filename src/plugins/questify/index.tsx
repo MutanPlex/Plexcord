@@ -9,11 +9,11 @@ import "./styles.css";
 
 import { plugin, t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
+import { plugins } from "@api/PluginManager";
 import { addServerListElement, removeServerListElement, ServerListRenderPosition } from "@api/ServerList";
 import { migratePluginToSettings } from "@api/Settings";
 import { ErrorBoundary } from "@components/index";
 import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
-import Questify from "@plugins/questify";
 import { copyToClipboard } from "@utils/clipboard";
 import { PcDevs } from "@utils/constants";
 import definePlugin, { PluginNative, StartAt } from "@utils/types";
@@ -91,7 +91,7 @@ export function QuestButton(): JSX.Element {
         if (todo === "open-quests") {
             NavigationRouter.transitionTo(questPath);
         } else if (todo === "plugin-settings") {
-            openPluginModal(Questify);
+            openPluginModal(plugins.Questify);
         } else if (todo === "context-menu") {
             ContextMenuApi.openContextMenu(event, () => (
                 <Menu.Menu
@@ -1102,7 +1102,7 @@ function getQuestAcceptedButtonProps(quest: Quest, text: string, disabled: boole
 }
 
 // Drop support for QuestCompleter and migrate to Questify settings.
-migratePluginToSettings("Questify", "QuestCompleter", "completeVideoQuestsInBackground", "completeGameQuestsInBackground", "completeAchievementQuestsInBackground");
+migratePluginToSettings(true, "Questify", "QuestCompleter", "completeVideoQuestsInBackground", "completeGameQuestsInBackground", "completeAchievementQuestsInBackground");
 
 export default definePlugin({
     name: "Questify",
