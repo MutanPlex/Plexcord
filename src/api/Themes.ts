@@ -20,8 +20,9 @@
 import { Settings, SettingsStore } from "@api/Settings";
 import { ThemeStore } from "@plexcord/discord-types";
 import { createAndAppendStyle } from "@utils/css";
+import { PopoutWindowStore } from "@webpack/common";
 
-import { userStyleRootNode } from "./Styles";
+import { plexcordRootNode, userStyleRootNode } from "./Styles";
 
 let style: HTMLStyleElement;
 let themesStyle: HTMLStyleElement;
@@ -77,6 +78,25 @@ async function initThemes() {
     }
 
     themesStyle.textContent = links.map(link => `@import url("${link.trim()}");`).join("\n");
+    updatePopoutWindows();
+}
+
+function applyToPopout(popoutWindow: Window | undefined) {
+    if (!popoutWindow?.document) return;
+
+    const doc = popoutWindow.document;
+
+    doc.querySelector("plexcord-root")?.remove();
+
+    doc.documentElement.appendChild(plexcordRootNode.cloneNode(true));
+}
+
+function updatePopoutWindows() {
+    const windowKeys = PopoutWindowStore.getWindowKeys();
+    for (const key of windowKeys) {
+        const popoutWindow = PopoutWindowStore.getWindow(key);
+        applyToPopout(popoutWindow);
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -89,6 +109,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     SettingsStore.addChangeListener("enabledThemeLinks", initThemes);
     SettingsStore.addChangeListener("enabledThemes", initThemes);
+
+    window.addEventListener("message", event => {
+        const { discordPopoutEvent } = event.data || {};
+        if (discordPopoutEvent?.type !== "loaded") return;
+
+        const popoutWindow = PopoutWindowStore.getWindow(discordPopoutEvent.key);
+        applyToPopout(popoutWindow);
+    });
 
     if (!IS_WEB) {
         PlexcordNative.quickCss.addThemeChangeListener(initThemes);

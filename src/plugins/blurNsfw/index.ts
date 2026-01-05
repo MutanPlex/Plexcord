@@ -19,7 +19,9 @@
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { managedStyleRootNode } from "@api/Styles";
 import { Devs } from "@utils/constants";
+import { createAndAppendStyle } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
 
 let style: HTMLStyleElement;
@@ -71,9 +73,7 @@ export default definePlugin({
     ],
 
     start() {
-        style = document.createElement("style");
-        style.id = "PcBlurNsfw";
-        document.head.appendChild(style);
+        style = createAndAppendStyle("PcBlurNsfw", managedStyleRootNode);
 
         setCss();
     },
