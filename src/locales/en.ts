@@ -344,7 +344,8 @@ const translations = {
                 description: "API to add badges to users",
                 contributor: {
                     plexcord: "Plexcord Contributor",
-                    vencord: "Vencord Contributor"
+                    vencord: "Vencord Contributor",
+                    userPlugin: "User Plugin Contributor"
                 },
                 context: {
                     title: "Badges Options",

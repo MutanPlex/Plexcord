@@ -347,7 +347,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 description: "Kullanıcılara rozet eklemek için API",
                 contributor: {
                     plexcord: "Plexcord Katılımcısı",
-                    vencord: "Vencord Katılımcısı"
+                    vencord: "Vencord Katılımcısı",
+                    userPlugin: "Kullanıcı Eklentisi Katılımcısı"
                 },
                 context: {
                     title: "Rozet Seçenekleri",

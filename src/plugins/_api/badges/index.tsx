@@ -37,7 +37,9 @@ import { openDonorModal } from "./modals";
 const CONTRIBUTOR_BADGE = "https://cdn.discordapp.com/emojis/1092089799109775453.png?size=64";
 const PLEXCORD_BADGE = "https://cdn.discordapp.com/emojis/1357527217332031508.webp?size=64";
 const ContributorBadge: ProfileBadge = {
-    description: () => t(plugins.metadata.badges.contributor.vencord),
+    get description() {
+        return t(plugins.metadata.badges.contributor.vencord);
+    },
     iconSrc: CONTRIBUTOR_BADGE,
     position: BadgePosition.START,
     shouldShow: ({ userId }) => shouldShowContributorBadge(userId),
@@ -45,7 +47,9 @@ const ContributorBadge: ProfileBadge = {
 };
 
 const PlexcordBadge: ProfileBadge = {
-    description: () => t(plugins.metadata.badges.contributor.plexcord),
+    get description() {
+        return t(plugins.metadata.badges.contributor.plexcord);
+    },
     iconSrc: PLEXCORD_BADGE,
     position: BadgePosition.START,
     shouldShow: ({ userId }) => shouldShowPcContributorBadge(userId),
@@ -53,7 +57,9 @@ const PlexcordBadge: ProfileBadge = {
 };
 
 const UserPluginContributorBadge: ProfileBadge = {
-    description: "User Plugin Contributor",
+    get description() {
+        return t(plugins.metadata.badges.contributor.userPlugin);
+    },
     iconSrc: PLEXCORD_BADGE,
     position: BadgePosition.START,
     shouldShow: ({ userId }) => {
