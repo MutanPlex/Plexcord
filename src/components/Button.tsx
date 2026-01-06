@@ -18,9 +18,8 @@ import { Link } from "./Link";
 const btnCls = classNameFactory("pc-btn-");
 const textBtnCls = classNameFactory("pc-text-btn-");
 
-export type ButtonVariant =
-    "primary" | "secondary" | "dangerPrimary" | "dangerSecondary" | "overlayPrimary" | "positive" | "link" | "none";
-export type ButtonSize = "min" | "xs" | "small" | "medium";
+export type ButtonVariant = "primary" | "secondary" | "dangerPrimary" | "dangerSecondary" | "overlayPrimary" | "positive" | "link" | "none";
+export type ButtonSize = "min" | "xs" | "small" | "medium" | "iconOnly";
 
 export type ButtonProps = ComponentPropsWithRef<"button"> & {
     variant?: ButtonVariant;
