@@ -3646,11 +3646,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         disCleaner: {
             name: "DisCleaner",
-            description: "Discord'dan mağazaları ve diğer gereksiz şeyleri kaldırır",
+            description: "Nitro ve mağaza ile ilgili çeşitli özellikleri gizler",
             option: {
                 dms: {
                     label: "DM'ler",
                     description: "DM listesinin üstündeki mağazaları kaldır"
+                },
+                quests: {
+                    label: "Görevler",
+                    description: "DM listesinin üstündeki görevleri kaldır"
                 },
                 serverBoost: {
                     label: "Sunucu Boost",

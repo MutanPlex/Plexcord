@@ -3643,11 +3643,15 @@ const translations = {
         },
         disCleaner: {
             name: "DisCleaner",
-            description: "Removes shops and other useless things from Discord",
+            description: "Hides various features related to nitro and the store",
             option: {
                 dms: {
                     label: "DMs",
                     description: "Remove shops above DMs list"
+                },
+                quests: {
+                    label: "Quests",
+                    description: "Remove quests above DMs list",
                 },
                 serverBoost: {
                     label: "Server Boost",

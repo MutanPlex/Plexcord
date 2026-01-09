@@ -249,29 +249,24 @@ function shouldHideMembersListActivelyPlayingIcon(): boolean {
     return disableMembersListActivelyPlayingIcon || disableQuestsEverything;
 }
 
-function shouldDisableQuestTileOptions(quest: Quest, shouldBeIgnored: boolean): boolean {
-    const isIgnored = questIsIgnored(quest.id);
-
-    return !(
-        (shouldBeIgnored ? isIgnored : !isIgnored)
-    );
-}
-
 function QuestTileContextMenu(children: React.ReactNode[], props: { quest: any; }) {
+    const isIgnored = questIsIgnored(props.quest.id);
+
     children.unshift((
         <Menu.MenuGroup>
-            <Menu.MenuItem
-                id={q("ignore-quests")}
-                label={t(plugin.questify.context.quest.markAsIgnored)}
-                disabled={shouldDisableQuestTileOptions(props.quest, false)}
-                action={() => { addIgnoredQuest(props.quest.id); }}
-            />
-            <Menu.MenuItem
-                id={q("unignore-quests")}
-                label={t(plugin.questify.context.quest.unmarkAsIgnored)}
-                disabled={shouldDisableQuestTileOptions(props.quest, true)}
-                action={() => { removeIgnoredQuest(props.quest.id); }}
-            />
+            {!isIgnored ? (
+                <Menu.MenuItem
+                    id={q("ignore-quests")}
+                    label={t(plugin.questify.context.quest.markAsIgnored)}
+                    action={() => { addIgnoredQuest(props.quest.id); }}
+                />
+            ) : (
+                <Menu.MenuItem
+                    id={q("unignore-quests")}
+                    label={t(plugin.questify.context.quest.unmarkAsIgnored)}
+                    action={() => { removeIgnoredQuest(props.quest.id); }}
+                />
+            )}
             {activeQuestIntervals.has(props.quest.id) &&
                 <Menu.MenuItem
                     id={q("stop-auto-complete")}
@@ -1164,8 +1159,8 @@ export default definePlugin({
             find: "QUEST_HOME_V2):",
             replacement: [
                 {
-                    match: /(?<="family-center"\):null,)(\i)/,
-                    replace: "$self.shouldHideDirectMessagesTab()||$1"
+                    match: /(?<="family-center"\):null,)/,
+                    replace: "$self.shouldHideDirectMessagesTab()||"
                 }
             ]
         },

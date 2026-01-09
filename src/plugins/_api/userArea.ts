@@ -35,6 +35,6 @@ export default definePlugin({
     },
 
     shouldHideTooltips() {
-        return isPluginEnabled("BetterUserArea") && betterUserArea.settings.store.removeButtonTooltips;
+        return isPluginEnabled(betterUserArea.name) && betterUserArea.settings.store.removeButtonTooltips;
     }
 });

@@ -42,8 +42,8 @@ export default definePlugin({
                     replace: "Plexcord.Api.ServerList.renderAll(Plexcord.Api.ServerList.ServerListRenderPosition.In).concat($&)"
                 },
                 {
-                    match: /lastTargetNode.{0,50}\{\}\)\]/,
-                    replace: "$&.concat(Plexcord.Api.ServerList.renderAll(Plexcord.Api.ServerList.ServerListRenderPosition.Below))"
+                    match: /lastTargetNode.{0,25}\?null:\i,/,
+                    replace: "$&...Plexcord.Api.ServerList.renderAll(Plexcord.Api.ServerList.ServerListRenderPosition.Below),"
                 }
             ]
         }

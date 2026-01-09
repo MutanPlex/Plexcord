@@ -13,6 +13,7 @@ import { plugin, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Channel, Guild, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
+import { classNameFactory } from "@utils/css";
 import { getCurrentChannel } from "@utils/discord";
 import definePlugin from "@utils/types";
 import {
@@ -21,7 +22,6 @@ import {
     filters,
     findByPropsLazy,
     findComponentByCodeLazy,
-    findLazy,
     findStoreLazy,
     mapMangledModuleLazy
 } from "@webpack";
@@ -48,6 +48,8 @@ import {
 } from "@webpack/common";
 
 import { settings, SidebarStore } from "./store";
+
+const cl = classNameFactory("pc-sidebar-chat-");
 
 const { HeaderBar } = mapMangledModuleLazy(".themedMobile]:", {
     HeaderBar: filters.byCode(".themedMobile]:"),
@@ -80,8 +82,6 @@ const PopoutWindow = findComponentByCodeLazy("Missing guestWindow reference");
 const FullChannelView = findComponentByCodeLazy("showFollowButton:(null");
 const WanderingCubesLoading = findComponentByCodeLazy('="wanderingCubes"');
 
-// love
-const ppStyle = findLazy(m => m?.popoutContent && Object.keys(m).length === 1);
 const ChatInputTypes = findByPropsLazy("FORM", "NORMAL");
 const Sidebars = findByPropsLazy("ThreadSidebar", "MessageRequestSidebar");
 const ChatClasses = findByPropsLazy("threadSidebarOpen");
@@ -334,7 +334,7 @@ const RenderPopout = ErrorBoundary.wrap(({ channel, name }: { channel: Channel; 
             windowKey={`DISCORD_PC_SC-${channel.id}`}
             title={name || "Plexcord"}
             channelId={channel.id}
-            contentClassName={ppStyle.popoutContent}
+            contentClassName={cl("popout")}
         >
             <FullChannelView providedChannel={channel} />
         </PopoutWindow>

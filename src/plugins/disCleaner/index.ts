@@ -18,6 +18,13 @@ export const settings = definePluginSettings({
         default: true,
         restartNeeded: true,
     },
+    quests: {
+        label: () => t(plugin.disCleaner.option.quests.label),
+        description: () => t(plugin.disCleaner.option.quests.description),
+        type: OptionType.BOOLEAN,
+        default: false,
+        restartNeeded: true,
+    },
     serverBoost: {
         label: () => t(plugin.disCleaner.option.serverBoost.label),
         description: () => t(plugin.disCleaner.option.serverBoost.description),
@@ -60,15 +67,16 @@ export default definePlugin({
             find: 'tutorialId:"direct-messages"',
             replacement: [
                 {
-                    match: /NAVIGATION_LINK\}\}\}\)(?=,\i(&&\(|\]))/,
+                    match: /"nitro-tab-group"\)/,
                     replace: "$&&&undefined",
+                    predicate: () => settings.store.dms
                 },
                 {
-                    match: /NAVIGATION_LINK\}\}\}.{0,20}\)(?=,\i&&!\i)/,
+                    match: /"discord-shop"\)/,
                     replace: "$&&&undefined",
+                    predicate: () => settings.store.dms
                 },
             ],
-            predicate: () => settings.store.dms,
         },
         {
             // Channel list server boost progress bar
