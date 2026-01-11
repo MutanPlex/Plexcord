@@ -9482,7 +9482,13 @@ const translations = {
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
-            description: "Removes 2500kbps bitrate cap on chromium and Plextron clients."
+            description: "Removes 2500kbps bitrate cap on chromium and Plextron clients.",
+            option: {
+                experimentalAV1Support: {
+                    label: "Experimental AV1 Support",
+                    description: "Enable AV1 codec support. May cause issues like infinitely loading streams"
+                }
+            }
         },
         whoReacted: {
             name: "WhoReacted",

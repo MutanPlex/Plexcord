@@ -9486,7 +9486,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
-            description: "Chromium ve Plextron istemcilerindeki 2500 kbps ekran paylaşımı bitrate sınırını kaldırır."
+            description: "Chromium ve Plextron istemcilerindeki 2500 kbps ekran paylaşımı bitrate sınırını kaldırır.",
+            option: {
+                experimentalAV1Support: {
+                    label: "Deneysel AV1 Desteği",
+                    description: "AV1 codec desteğini etkinleştirir. Sonsuz yüklenen akışlar gibi sorunlara neden olabilir"
+                }
+            }
         },
         whoReacted: {
             name: "WhoReacted",

@@ -19,13 +19,11 @@
 
 import "./style.css";
 
-import { addProfileBadge, BadgePosition, BadgeUserArgs, ProfileBadge, removeProfileBadge } from "@api/Badges";
 import { plugin, t } from "@api/i18n";
-import { addMemberListDecorator, removeMemberListDecorator } from "@api/MemberListDecorators";
-import { addMessageDecoration, removeMessageDecoration } from "@api/MessageDecorations";
-import { Settings } from "@api/Settings";
-import { DiscordPlatform, OnlineStatus, User } from "@plexcord/discord-types";
+import { definePluginSettings, Settings } from "@api/Settings";
+import { DiscordPlatform, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
+import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
 import { filters, findStoreLazy, mapMangledModuleLazy } from "@webpack";
 import { AuthenticationStore, PresenceStore, Tooltip, UserStore, useStateFromStores } from "@webpack/common";
@@ -95,7 +93,7 @@ function getPlatformTooltip(platform: DiscordPlatform): string {
         : platform[0].toUpperCase() + platform.slice(1);
 }
 
-const PlatformIcon = ({ platform, status, small }: { platform: DiscordPlatform, status: OnlineStatus; small: boolean; }) => {
+const PlatformIcon = ({ platform, status, small }) => {
     const tooltip = getPlatformTooltip(platform as DiscordPlatform);
 
     const Icon = (Icons[platform] ?? Icons.desktop).component;
@@ -103,145 +101,127 @@ const PlatformIcon = ({ platform, status, small }: { platform: DiscordPlatform, 
     return <Icon color={useStatusFillColor(status)} tooltip={tooltip} small={small} />;
 };
 
-function ensureOwnStatus(user: User) {
-    if (user.id === AuthenticationStore.getId()) {
-        const sessions = SessionsStore.getSessions();
-        if (typeof sessions !== "object") return null;
-        const sortedSessions = Object.values(sessions).sort(({ status: a }, { status: b }) => {
-            if (a === b) return 0;
-            if (a === "online") return 1;
-            if (b === "online") return -1;
-            if (a === "idle") return 1;
-            if (b === "idle") return -1;
-            return 0;
-        });
-
-        const ownStatus = Object.values(sortedSessions).reduce((acc, curr) => {
-            if (curr.clientInfo.client !== "unknown")
-                acc[curr.clientInfo.client] = curr.status;
-            return acc;
-        }, {});
-
-        const { clientStatuses } = PresenceStore.getState();
-        clientStatuses[AuthenticationStore.getId()] = ownStatus;
+function useEnsureOwnStatus(user: User) {
+    if (user.id !== AuthenticationStore.getId()) {
+        return;
     }
-}
 
-function getBadges({ userId }: BadgeUserArgs): ProfileBadge[] {
-    const colorMap = {
-        online: useStatusFillColor("online"),
-        idle: useStatusFillColor("idle"),
-        dnd: useStatusFillColor("dnd"),
-        offline: useStatusFillColor("offline"),
-        streaming: useStatusFillColor("streaming"),
-    };
-
-    const user = UserStore.getUser(userId);
-
-    if (!user || user.bot) return [];
-
-    ensureOwnStatus(user);
-
-    const status = PresenceStore.getClientStatus(user.id);
-    if (!status) return [];
-
-    return Object.entries(status).map(([platform, status]) => {
-        const tooltip = getPlatformTooltip(platform as DiscordPlatform);
-
-        const icon = Icons[platform as DiscordPlatform] ?? Icons.desktop;
-
-        return {
-            description: tooltip,
-            iconSrc: "data:image/svg+xml;utf8," + encodeURIComponent(icon.svg.replace("#123456", colorMap[status] ?? colorMap.offline)),
-            props: {
-                style: { width: icon.size, height: icon.size },
-            },
-            key: `pc-platform-indicator-${platform}`,
-        } satisfies ProfileBadge;
+    const sessions = useStateFromStores([SessionsStore], () => SessionsStore.getSessions());
+    if (typeof sessions !== "object") return null;
+    const sortedSessions = Object.values(sessions).sort(({ status: a }, { status: b }) => {
+        if (a === b) return 0;
+        if (a === "online") return 1;
+        if (b === "online") return -1;
+        if (a === "idle") return 1;
+        if (b === "idle") return -1;
+        return 0;
     });
+
+    const ownStatus = Object.values(sortedSessions).reduce((acc, curr) => {
+        if (curr.clientInfo.client !== "unknown")
+            acc[curr.clientInfo.client] = curr.status;
+        return acc;
+    }, {});
+
+    const { clientStatuses } = PresenceStore.getState();
+    clientStatuses[UserStore.getCurrentUser().id] = ownStatus;
+}
+interface PlatformIndicatorProps {
+    user: User;
+    isProfile?: boolean;
+    isMessage?: boolean;
+    isMemberList?: boolean;
 }
 
-const PlatformIndicator = ({ user, small = false }: { user: User; small?: boolean; }) => {
-    ensureOwnStatus(user);
+const PlatformIndicator = ({ user, isProfile, isMessage, isMemberList }: PlatformIndicatorProps) => {
+    if (user == null || (user.bot && !Settings.plugins.PlatformIndicators.showBots)) return null;
+    useEnsureOwnStatus(user);
 
     const status = useStateFromStores([PresenceStore], () => PresenceStore.getClientStatus(user.id));
     if (!status) return null;
 
-    const icons = Object.entries(status).map(([platform, status]) => (
+    const icons = Array.from(Object.entries(status), ([platform, status]) => (
         <PlatformIcon
             key={platform}
             platform={platform as DiscordPlatform}
             status={status}
-            small={small}
+            small={isProfile || isMemberList}
         />
     ));
 
-    if (!icons.length) return null;
+    if (!icons.length) {
+        return null;
+    }
 
     return (
         <span
-            className="pc-platform-indicator"
-            style={{ gap: "2px" }}
+            className={classes("pc-platform-indicator", isProfile && "pc-platform-indicator-profile", isMessage && "pc-platform-indicator-message")}
+            style={{ marginLeft: isMemberList ? "4px" : undefined }}
         >
             {icons}
         </span>
     );
 };
-
-const badge: ProfileBadge = {
-    getBadges,
-    position: BadgePosition.START,
-};
-
-const indicatorLocations = {
+const settings = definePluginSettings({
     list: {
         label: () => t(plugin.platformIndicators.option.list.label),
         description: () => t(plugin.platformIndicators.option.list.description),
-        onEnable: () => addMemberListDecorator("platform-indicator", ({ user }) =>
-            user && !user.bot ? <PlatformIndicator user={user} small={true} /> : null
-        ),
-        onDisable: () => removeMemberListDecorator("platform-indicator")
+        type: OptionType.BOOLEAN,
+        default: true,
     },
     badges: {
         label: () => t(plugin.platformIndicators.option.badges.label),
         description: () => t(plugin.platformIndicators.option.badges.description),
-        onEnable: () => addProfileBadge(badge),
-        onDisable: () => removeProfileBadge(badge)
+        type: OptionType.BOOLEAN,
+        default: true,
     },
     messages: {
         label: () => t(plugin.platformIndicators.option.messages.label),
         description: () => t(plugin.platformIndicators.option.messages.description),
-        onEnable: () => addMessageDecoration("platform-indicator", props => {
-            const user = props.message?.author;
-            return user && !user.bot ? <PlatformIndicator user={props.message?.author} /> : null;
-        }),
-        onDisable: () => removeMessageDecoration("platform-indicator")
+        type: OptionType.BOOLEAN,
+        default: true,
+    },
+    colorMobileIndicator: {
+        label: () => t(plugin.platformIndicators.option.colorMobileIndicator.label),
+        description: () => t(plugin.platformIndicators.option.colorMobileIndicator.description),
+        type: OptionType.BOOLEAN,
+        default: true,
+    },
+    showBots: {
+        label: () => t(plugin.platformIndicators.option.showBots.label),
+        description: () => t(plugin.platformIndicators.option.showBots.description),
+        type: OptionType.BOOLEAN,
+        default: true,
     }
-};
+});
 
 export default definePlugin({
     name: "PlatformIndicators",
     description: () => t(plugin.platformIndicators.description),
     authors: [Devs.kemo, Devs.TheSun, Devs.Nuckyz, Devs.Ven],
     dependencies: ["MessageDecorationsAPI", "MemberListDecoratorsAPI"],
+    settings,
 
-    start() {
-        const settings = Settings.plugins.PlatformIndicators;
-        Object.entries(indicatorLocations).forEach(([key, value]) => {
-            if (settings[key]) value.onEnable();
-        });
+    renderNicknameIcon(props) {
+        if (!settings.store.badges) return null;
+        return (
+            <PlatformIndicator user={UserStore.getUser(props.userId)} isProfile />
+        );
     },
+    renderMemberListDecorator(props) {
+        if (!settings.store.list) return null;
+        return <PlatformIndicator user={props.user} isMemberList />;
 
-    stop() {
-        Object.entries(indicatorLocations).forEach(([_, value]) => {
-            value.onDisable();
-        });
+    },
+    renderMessageDecoration(props) {
+        if (!settings.store.messages) return null;
+        return <PlatformIndicator user={props.message?.author} isMessage />;
     },
 
     patches: [
         {
             find: ".Masks.STATUS_ONLINE_MOBILE",
-            predicate: () => Settings.plugins.PlatformIndicators.colorMobileIndicator,
+            predicate: () => settings.store.colorMobileIndicator,
             replacement: [
                 {
                     // Return the STATUS_ONLINE_MOBILE mask if the user is on mobile, no matter the status
@@ -257,7 +237,7 @@ export default definePlugin({
         },
         {
             find: ".AVATAR_STATUS_MOBILE_16;",
-            predicate: () => Settings.plugins.PlatformIndicators.colorMobileIndicator,
+            predicate: () => settings.store.colorMobileIndicator,
             replacement: [
                 {
                     // Return the AVATAR_STATUS_MOBILE size mask if the user is on mobile, no matter the status
@@ -278,34 +258,12 @@ export default definePlugin({
         },
         {
             find: "}isMobileOnline(",
-            predicate: () => Settings.plugins.PlatformIndicators.colorMobileIndicator,
+            predicate: () => settings.store.colorMobileIndicator,
             replacement: {
                 // Make isMobileOnline return true no matter what is the user status
                 match: /(?<=\i\[\i\.\i\.MOBILE\])===\i\.\i\.ONLINE/,
                 replace: "!= null"
             }
         }
-    ],
-
-    options: {
-        ...Object.fromEntries(
-            Object.entries(indicatorLocations).map(([key, value]) => {
-                return [key, {
-                    label: () => t(plugin.platformIndicators.option[key].label),
-                    description: () => t(plugin.platformIndicators.option[key].description),
-                    type: OptionType.BOOLEAN,
-                    // onChange doesn't give any way to know which setting was changed, so restart required
-                    restartNeeded: true,
-                    default: true
-                }];
-            })
-        ),
-        colorMobileIndicator: {
-            label: () => t(plugin.platformIndicators.option.colorMobileIndicator.label),
-            description: () => t(plugin.platformIndicators.option.colorMobileIndicator.description),
-            type: OptionType.BOOLEAN,
-            default: true,
-            restartNeeded: true
-        }
-    }
+    ]
 });
