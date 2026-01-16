@@ -4938,6 +4938,10 @@ const translations = {
                     label: "Keybind Screenshare",
                     description: "Screenshare by keybind in discord keybind settings"
                 },
+                focusDiscord: {
+                    label: "Focus Discord",
+                    description: "Only start screenshare with keybind when Discord is focused"
+                },
                 toolboxManagement: {
                     label: "Toolbox Management",
                     description: "Enable/Disable Instant Screenshare"
@@ -5143,18 +5147,17 @@ const translations = {
         },
         limitMiddleClickPaste: {
             name: "LimitMiddleClickPaste",
-            description: "For middle-click autoscroll users, prevents middle-click from making unwanted pastes.",
+            description: "Prevent middle click pasting either always or just when a text area is not focused.",
             option: {
-                limitTo: {
-                    label: "Limit To",
-                    description: "Allow middle click pastes:",
-                    never: "Never",
-                    direct: "Only when clicking on a text box",
-                    active: "Whenever a text box is active"
+                scope: {
+                    label: "Scope",
+                    description: "Situations in which to prevent middle click from pasting.",
+                    always: "Always Prevent Middle Click Pasting",
+                    focus: "Only Prevent When Text Area Not Focused"
                 },
-                reenableDelay: {
-                    label: "Re-enable Delay",
-                    description: "Milliseconds until re-enabling global paste events after middle click."
+                threshold: {
+                    label: "Threshold",
+                    description: "Milliseconds until pasting is enabled again after a middle click."
                 }
             }
         },
@@ -9420,7 +9423,8 @@ const translations = {
                 start: "Start recording",
                 resume: "Resume recording",
                 pause: "Pause recording",
-                recording: "RECORDING"
+                recording: "RECORDING",
+                send: "Send",
             }
         },
         volumeBooster: {

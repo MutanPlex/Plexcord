@@ -20,39 +20,37 @@
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { PcDevs } from "@utils/constants";
-import definePlugin, { makeRange, OptionType } from "@utils/types";
+import definePlugin, { OptionType } from "@utils/types";
+
+const MIDDLE_CLICK = 1;
+
+let lastMiddleClickUp = 0;
 
 const settings = definePluginSettings({
-    limitTo: {
-        label: () => t(plugin.limitMiddleClickPaste.option.limitTo.label),
-        description: () => t(plugin.limitMiddleClickPaste.option.limitTo.description),
+    scope: {
+        label: () => t(plugin.limitMiddleClickPaste.option.scope.label),
+        description: () => t(plugin.limitMiddleClickPaste.option.scope.description),
         type: OptionType.SELECT,
         options: [
             {
-                label: () => t(plugin.limitMiddleClickPaste.option.limitTo.active),
-                value: "active",
+                label: () => t(plugin.limitMiddleClickPaste.option.scope.always),
+                value: "always",
                 default: true
             },
             {
-                label: () => t(plugin.limitMiddleClickPaste.option.limitTo.direct),
-                value: "direct"
+                label: () => t(plugin.limitMiddleClickPaste.option.scope.focus),
+                value: "focus"
             },
-            {
-                label: () => t(plugin.limitMiddleClickPaste.option.limitTo.never),
-                value: "never"
-            }
         ]
     },
-    reenableDelay: {
-        label: () => t(plugin.limitMiddleClickPaste.option.reenableDelay.label),
-        description: () => t(plugin.limitMiddleClickPaste.option.reenableDelay.description),
-        type: OptionType.SLIDER,
-        markers: makeRange(0, 1000, 500),
-        default: 500,
+    threshold: {
+        label: () => t(plugin.limitMiddleClickPaste.option.threshold.label),
+        description: () => t(plugin.limitMiddleClickPaste.option.threshold.description),
+        type: OptionType.NUMBER,
+        default: 100,
+        onChange(newValue) { if (newValue < 1) { settings.store.threshold = 1; } },
     },
 });
-
-let containerEl;
 
 export default definePlugin({
     name: "LimitMiddleClickPaste",
@@ -60,65 +58,53 @@ export default definePlugin({
     authors: [PcDevs.nobody, PcDevs.MutanPlex],
     settings: settings,
 
+    isPastingDisabled(isInput: boolean) {
+        const pasteBlocked = Date.now() - lastMiddleClickUp < Math.max(settings.store.threshold, 1);
+        const { scope } = settings.store;
+
+        if (!pasteBlocked) return false;
+        if (scope === "always") return true;
+        if (scope === "focus" && !isInput) return true;
+
+        return false;
+    },
+
+    onMouseUp: (e: MouseEvent) => {
+        if (e.button === MIDDLE_CLICK) lastMiddleClickUp = Date.now();
+    },
+
     start() {
-        // Discord adds it's paste listeners to #app-mount. We can intercept them
-        // by attaching listeners a child element.
-        containerEl = document.querySelector("[class*=appAsidePanelWrapper]")!;
-        containerEl?.addEventListener("paste", blockPastePropogation);
-
-        // Also add them to body to intercept the event listeners on document
-        document?.body?.addEventListener("paste", blockPastePropogation);
-
-        document?.body?.addEventListener("mousedown", disablePasteOnMousedown);
+        document.addEventListener("mouseup", this.onMouseUp);
     },
 
     stop() {
-        containerEl?.removeEventListener("paste", blockPastePropogation);
-
-        document?.body?.removeEventListener("paste", blockPastePropogation);
-
-        document?.body?.removeEventListener("mousedown", disablePasteOnMousedown);
-        pasteDisabled = false;
+        document.removeEventListener("mouseup", this.onMouseUp);
     },
+
+    patches: [
+        {
+            // Detects paste events triggered by the "browser" outside of input fields.
+            find: "document.addEventListener(\"paste\",",
+            replacement: {
+                match: /(?<=paste",(\i)=>{)/,
+                replace: "if($1.target.tagName===\"BUTTON\"||$self.isPastingDisabled(false)){$1.preventDefault?.();$1.stopPropagation?.();return;};"
+            }
+        },
+        {
+            // Detects paste events triggered inside of Discord's text input.
+            find: ",origin:\"clipboard\"});",
+            replacement: {
+                match: /(?<="handlePaste",(\i)=>{)(?=var)/,
+                replace: "if($self.isPastingDisabled(true)){$1.preventDefault?.();$1.stopPropagation?.();return;}"
+            }
+        },
+        {
+            // Detects paste events triggered inside of Discord's search box.
+            find: "props.handlePastedText&&",
+            replacement: {
+                match: /(?<=clipboardData\);)/,
+                replace: "if($self.isPastingDisabled(true)){arguments[1].preventDefault?.();arguments[1].stopPropagation?.();return;};"
+            }
+        },
+    ],
 });
-
-let pasteDisabled: boolean = false;
-let timeoutID: number | undefined;
-
-function blockPastePropogation(e: ClipboardEvent) {
-    if (pasteDisabled) {
-        e.stopImmediatePropagation();
-    }
-}
-
-function disablePasteOnMousedown(e: MouseEvent) {
-    if (e.button !== 1) return;
-    let testEl: HTMLElement | null = null;
-    switch (settings.store.limitTo) {
-        case "active":
-            testEl = document.activeElement as HTMLElement;
-            break;
-        case "direct":
-            testEl = e.target as HTMLElement;
-            break;
-        case "never":
-            testEl = null;
-            break;
-    }
-    if (settings.store.limitTo !== "never" && maybeEditable(testEl)) return;
-    window.clearTimeout(timeoutID);
-    pasteDisabled = true;
-    timeoutID = window.setTimeout(() => {
-        pasteDisabled = false;
-    }, settings.store.reenableDelay);
-}
-
-function maybeEditable(el: HTMLElement | null): boolean {
-    if (!el) return false;
-    if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") return true;
-    let parent: HTMLElement | null;
-    for (parent = el; parent; parent = parent.parentElement) {
-        if (parent.isContentEditable) return true;
-    }
-    return false;
-}

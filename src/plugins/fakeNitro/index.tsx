@@ -89,7 +89,7 @@ const settings = definePluginSettings({
         description: () => t(plugin.fakeNitro.option.emojiSize.description),
         type: OptionType.SLIDER,
         default: 48,
-        markers: [32, 48, 64, 96, 128, 160, 256, 512]
+        markers: [32, 48, 56, 64, 96, 128, 160, 256, 512]
     },
     transformEmojis: {
         label: () => t(plugin.fakeNitro.option.transformEmojis.label),
@@ -872,6 +872,7 @@ export default definePlugin({
 
                     const url = new URL(link);
                     url.searchParams.set("name", sticker.name);
+                    url.searchParams.set("lossless", "true");
 
                     const linkText = s.hyperLinkText.replaceAll("{{NAME}}", sticker.name);
 
@@ -891,6 +892,7 @@ export default definePlugin({
                     const url = new URL(IconUtils.getEmojiURL({ id: emoji.id, animated: emoji.animated, size: s.emojiSize }));
                     url.searchParams.set("size", s.emojiSize.toString());
                     url.searchParams.set("name", emoji.name);
+                    url.searchParams.set("lossless", "true");
 
                     const linkText = s.hyperLinkText.replaceAll("{{NAME}}", emoji.name);
 
@@ -924,6 +926,7 @@ export default definePlugin({
                 const url = new URL(IconUtils.getEmojiURL({ id: emoji.id, animated: emoji.animated, size: s.emojiSize }));
                 url.searchParams.set("size", s.emojiSize.toString());
                 url.searchParams.set("name", emoji.name);
+                url.searchParams.set("lossless", "true");
 
                 const linkText = s.hyperLinkText.replaceAll("{{NAME}}", emoji.name);
 

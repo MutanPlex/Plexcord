@@ -7,7 +7,7 @@
 
 import "./styles.css";
 
-import { BadgeUserArgs, ProfileBadge } from "@api/Badges";
+import { BadgePosition, BadgeUserArgs, ProfileBadge } from "@api/Badges";
 import { i18n, plugin, t } from "@api/i18n";
 import { Badges } from "@api/index";
 import ErrorBoundary from "@components/ErrorBoundary";
@@ -129,8 +129,15 @@ function getBadgesToApply() {
         return ({
             description: rank.title,
             iconSrc: rank.iconSrc,
+            position: BadgePosition.END,
             onClick: () => openRankModal(index),
             shouldShow: (info: BadgeUserArgs) => shouldShowBadge(info.userId, rank.requirement, index),
+            props: {
+                style: {
+                    borderRadius: "50%",
+                    transform: "scale(0.9)"
+                }
+            }
         });
     });
 

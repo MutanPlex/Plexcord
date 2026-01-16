@@ -113,6 +113,20 @@ const pluginSettings = definePluginSettings({
     },
 });
 
+export const settingsSectionMap: [string, string][] = [
+    ["PlexcordSettings", "plexcord_main_panel"],
+    ["PlexcordPlugins", "plexcord_plugins_panel"],
+    ["PlexcordThemes", "plexcord_themes_panel"],
+    ["PlexcordUpdater", "plexcord_updater_panel"],
+    ["PlexcordChangelog", "plexcord_changelog_panel"],
+    ["PlexcordCloud", "plexcord_cloud_panel"],
+    ["PlexcordBackupAndRestore", "plexcord_backup_restore_panel"],
+    ["PlexcordPatchHelper", "plexcord_patch_helper_panel"],
+    ["PlexcordDiscordIcons", "plexcord_icon_viewer"],
+    ["PlexcordThemeLibrary", "plexcord_theme_library"],
+    ["PlexcordIRememberYou", "plexcord_i_remember_you"],
+];
+
 export default definePlugin({
     name: "Settings",
     description: () => t(plugin.settings.description),
@@ -207,19 +221,7 @@ export default definePlugin({
     },
 
     getSettingsSectionMappings() {
-        return [
-            ["PlexcordSettings", "plexcord_main_panel"],
-            ["PlexcordPlugins", "plexcord_plugins_panel"],
-            ["PlexcordThemes", "plexcord_themes_panel"],
-            ["PlexcordUpdater", "plexcord_updater_panel"],
-            ["PlexcordChangelog", "plexcord_changelog_panel"],
-            ["PlexcordCloud", "plexcord_cloud_panel"],
-            ["PlexcordBackupAndRestore", "plexcord_backup_restore_panel"],
-            ["PlexcordPatchHelper", "plexcord_patch_helper_panel"],
-            ["PlexcordDiscordIcons", "plexcord_icon_viewer"],
-            ["PlexcordThemeLibrary", "plexcord_theme_library"],
-            ["PlexcordIRememberYou", "plexcord_i_remember_you"],
-        ];
+        return settingsSectionMap;
     },
 
     buildLayout(originalLayoutBuilder: SettingsLayoutBuilder) {

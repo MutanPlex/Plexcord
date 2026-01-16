@@ -59,6 +59,12 @@ export const settings = definePluginSettings({
         restartNeeded: true,
         default: false,
     },
+    focusDiscord: {
+        label: () => t(plugin.instantScreenshare.option.focusDiscord.label),
+        description: () => t(plugin.instantScreenshare.option.focusDiscord.description),
+        type: OptionType.BOOLEAN,
+        default: true,
+    },
     toolboxManagement: {
         label: () => t(plugin.instantScreenshare.option.toolboxManagement.label),
         description: () => t(plugin.instantScreenshare.option.toolboxManagement.description),

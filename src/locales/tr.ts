@@ -4942,6 +4942,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Kısayol Tuşu ile Ekran Paylaşımı",
                     description: "Discord kısayol tuşları ayarlarında kısayol tuşu ile ekran paylaşımı yapar"
                 },
+                focusDiscord: {
+                    label: "Discord'a Odaklanınca",
+                    description: "Ekran paylaşımını yalnızca Discord odaklandığında tuş atamasıyla başlat"
+                },
                 toolboxManagement: {
                     label: "Araç Kutusu Yönetimi",
                     description: "Anında Ekran Paylaşımını Etkinleştir/Devre Dışı Bırak"
@@ -5147,18 +5151,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         limitMiddleClickPaste: {
             name: "LimitMiddleClickPaste",
-            description: "Orta tıklama ile otomatik kaydırma kullananlar için, istenmeyen yapıştırma işlemlerini engeller.",
+            description: "Orta tıklama ile yapıştırmayı her zaman ya da yalnızca bir metin alanı odaklı değilken engeller.",
             option: {
-                limitTo: {
-                    label: "Sınırlama",
-                    description: "Orta tıklama ile yapıştırmaya izin ver:",
-                    never: "Asla",
-                    direct: "Sadece bir metin kutusuna tıklanırken",
-                    active: "Bir metin kutusu aktifken"
+                scope: {
+                    label: "Kapsam",
+                    description: "Orta tıklama ile yapıştırmanın engelleneceği durumlar.",
+                    always: "Orta Tık ile Yapıştırmayı Her Zaman Engelle",
+                    focus: "Yalnızca Metin Alanı Odaklı Değilken Engelle"
                 },
-                reenableDelay: {
-                    label: "Yeniden Etkinleştirme Gecikmesi",
-                    description: "Orta tıklamadan sonra genel yapıştırma olaylarının yeniden etkinleştirilmesi için milisaniye cinsinden süre."
+                threshold: {
+                    label: "Eşik",
+                    description: "Orta tıklamadan sonra yapıştırmanın yeniden etkinleştirilmesine kadar geçen milisaniye."
                 }
             }
         },
@@ -9424,7 +9427,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 start: "Kaydı başlat",
                 resume: "Kaydı sürdür",
                 pause: "Kaydı duraklat",
-                recording: "KAYIT YAPILIYOR"
+                recording: "KAYIT YAPILIYOR",
+                send: "Gönder"
             }
         },
         volumeBooster: {

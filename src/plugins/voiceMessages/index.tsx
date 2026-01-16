@@ -263,7 +263,7 @@ function Modal({ modalProps }: { modalProps: ModalProps; }) {
                         modalProps.onClose();
                         showToast(t(plugin.voiceMessages.modal.sending), Toasts.Type.MESSAGE);
                     }}>
-                    Send
+                    {t(plugin.voiceMessages.modal.send)}
                 </Button>
             </ModalFooter>
         </ModalRoot>

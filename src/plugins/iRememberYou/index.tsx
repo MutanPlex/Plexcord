@@ -15,7 +15,7 @@ import { Flex } from "@components/Flex";
 import { Heart } from "@components/Heart";
 import { BaseText, Margins, Paragraph } from "@components/index";
 import { Guild, User } from "@plexcord/discord-types";
-import settings from "@plugins/_core/settings";
+import settings, { settingsSectionMap } from "@plugins/_core/settings";
 import { PcDevs } from "@utils/constants";
 import { openUserProfile } from "@utils/discord";
 import * as Modal from "@utils/modal";
@@ -381,6 +381,7 @@ export default definePlugin({
     patches: [],
 
     async start() {
+        settingsSectionMap.push(["PlexcordIRememberYou", "plexcord_i_remember_you"]);
         const data = (this.dataManager = await new Data().withStart());
         const ui = (this.uiManager = await new DataUI(this).start());
 
