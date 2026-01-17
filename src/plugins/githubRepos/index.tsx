@@ -72,15 +72,15 @@ export default definePlugin({
         {
             find: ".hasAvatarForGuild(null==",
             replacement: {
-                match: /currentUser:\i,guild:\i.{0,15}\}\).{0,100}(?=\])/,
-                replace: "$&,$self.ProfilePopoutComponent({ user: arguments[0].user, displayProfile: arguments[0].displayProfile })"
+                match: /userId:\i\.id,guild:\i.{0,15}\}\).{0,100}(?=\])/,
+                replace: "$&,$self.ProfilePopoutComponent(arguments[0])"
             }
         },
         {
             find: ".connections,userId:",
             replacement: {
                 match: /user:(\i).{0,15}displayProfile:(\i).*?application\.id\)\)\}\)/,
-                replace: "$&,$self.ProfilePopoutComponent({ user: arguments[0].user, displayProfile: arguments[0].displayProfile }),"
+                replace: "$&,$self.ProfilePopoutComponent(arguments[0]),"
             }
         },
         {

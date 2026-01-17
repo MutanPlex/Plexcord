@@ -26,7 +26,7 @@ import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { SafetyIcon } from "@components/Icons";
 import { TooltipContainer } from "@components/TooltipContainer";
-import type { Guild, GuildMember, RoleOrUserPermission } from "@plexcord/discord-types";
+import type { Guild, RoleOrUserPermission } from "@plexcord/discord-types";
 import { PermissionOverwriteType } from "@plexcord/discord-types/enums";
 import { Devs } from "@utils/constants";
 import { classes } from "@utils/misc";
@@ -172,13 +172,15 @@ export default definePlugin({
         {
             find: "#{intl::COLLAPSE_ROLES}",
             replacement: {
-                match: /className:(\i\.expandButton),.+?null,/,
-                replace: "$&$self.ViewPermissionsButton({className:$1,props:arguments[0]}),"
+                match: /(?<=\i\.id\)\),\i\(\))(?=,\i\?)/,
+                replace: ",$self.ViewPermissionsButton(arguments[0])"
             }
         }
     ],
 
-    ViewPermissionsButton: ErrorBoundary.wrap(({ className, props: { guild, guildMember } }: { className: string, props: { guild: Guild; guildMember: GuildMember; }; }) => {
+    ViewPermissionsButton: ErrorBoundary.wrap(({ className, guild, userId }: { className: string; guild: Guild; userId: string; }) => {
+        const guildMember = GuildMemberStore.getMember(guild.id, userId);
+        if (!guildMember) return null;
         const buttonRef = useRef(null);
 
         return (
