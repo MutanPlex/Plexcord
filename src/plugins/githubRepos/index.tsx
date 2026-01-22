@@ -40,6 +40,12 @@ export const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: true
     },
+    showRepositoryTab: {
+        label: () => t(plugin.gitHubRepos.option.showRepositoryTab.label),
+        description: () => t(plugin.gitHubRepos.option.showRepositoryTab.description),
+        type: OptionType.BOOLEAN,
+        default: true
+    },
 });
 
 const getProfileThemeProps = findByCodeLazy(".getPreviewThemeColors", "primaryColor:");
@@ -60,6 +66,20 @@ const ProfilePopoutComponent = ErrorBoundary.wrap(
             {t(plugin.gitHubRepos.error.render)}
         </BaseText>
     }
+);
+
+const ProfileRepositoriesTab = ErrorBoundary.wrap(
+    (props: { user: User; displayProfile?: any; }) => {
+        return (
+            <GitHubReposComponent
+                {...props}
+                id={props.user.id}
+                theme={getProfileThemeProps(props).theme}
+                variant="tab"
+            />
+        );
+    },
+    { noop: true }
 );
 
 export default definePlugin({
@@ -87,9 +107,28 @@ export default definePlugin({
             find: ".MODAL_V2,onClose:",
             replacement: {
                 match: /displayProfile:(\i).*?profileAppConnections\}\)\}\)/,
-                replace: "$&,$self.ProfilePopoutComponent({ user: arguments[0].user, displayProfile: $1 }),"
+                replace: "$&,$self.ProfilePopoutComponent({ user: arguments[0].user, displayProfile: $1 }),",
+                predicate: () => !settings.store.showRepositoryTab,
+            }
+        },
+        // User Profile Modal v2 tab bar
+        {
+            find: "#{intl::USER_PROFILE_ACTIVITY}",
+            replacement: {
+                match: /\.MUTUAL_GUILDS\}\)\)(?=,(\i))/,
+                replace: '$&,$1.push({text:"GitHub",section:"GITHUB"})',
+                predicate: () => settings.store.showRepositoryTab,
+            }
+        },
+        // User Profile Modal v2 tab content
+        {
+            find: ".WIDGETS?",
+            replacement: {
+                match: /(\i)===\i\.\i\.WISHLIST/,
+                replace: '$1==="GITHUB"?$self.ProfileRepositoriesTab(arguments[0]):$&'
             }
         }
     ],
-    ProfilePopoutComponent
+    ProfilePopoutComponent,
+    ProfileRepositoriesTab
 });

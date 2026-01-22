@@ -10,10 +10,13 @@
 }
 
 /* stylelint-disable-next-line selector-class-pattern */
-.biteSize_c0bea0 .pc-github-repos-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.pc-github-repos-star-icon {
+    color: var(--text-status-idle);
+    fill: var(--text-status-idle);
+}
+
+.pc-github-repos-lang-name {
+    font-size: 12px;
 }
 
 .pc-github-repos-footer {
@@ -67,7 +70,7 @@
 }
 
 .pc-github-repos-modal {
-    width: 90%;
+    width: 100%;
     max-width: 900px;
     background-color: var(--background-base-lower);
 }
@@ -76,7 +79,6 @@
     color: var(--text-strong);
     font-size: 20px;
     font-weight: 600;
-    margin: 0;
 }
 
 .pc-github-repos-modal-content {
@@ -182,11 +184,6 @@
     text-align: center;
 }
 
-.pc-github-repos-table-star-icon {
-    color: var(--icon-status-idle);
-    fill: var(--icon-status-idle);
-}
-
 .pc-github-repos-modal-footer-close {
     margin-right: 5px;
 }
@@ -209,6 +206,7 @@
 
 .pc-github-repos-loading {
     color: var(--text-default);
+    margin-top: 10px;
 }
 
 .pc-github-repos-count {
@@ -217,6 +215,7 @@
 
 .pc-github-repos-error {
     color: var(--text-feedback-critical);
+    margin-top: 10px;
 }
 
 .pc-github-repos-link {
@@ -242,4 +241,55 @@
 
 .pc-github-repos-header-stars {
     width: 10%
+}
+
+/* Tab variant styles */
+
+.pc-github-repos-container.pc-github-repos-tab {
+    margin-top: 10px;
+    padding: 8px 12px;
+    height: 97%;
+    width: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.pc-github-repos-container.pc-github-repos-tab .pc-github-repos-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+    overflow: hidden scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thin-thumb) var(--scrollbar-thin-track);
+    align-content: start;
+}
+
+.pc-github-repos-container.pc-github-repos-tab .pc-github-repos-card {
+    padding: 4px 6px;
+    cursor: pointer;
+}
+
+.pc-github-repos-container.pc-github-repos-tab .pc-github-repos-language-color {
+    width: 8px;
+    height: 8px;
+}
+
+.pc-github-repos-container.pc-github-repos-tab .pc-github-repos-name {
+    font-size: 14px;
+    line-height: 1.1;
+}
+
+.pc-github-repos-container.pc-github-repos-tab .pc-github-repos-language,
+.pc-github-repos-container.pc-github-repos-tab .pc-github-repos-stars {
+    font-size: 11px;
+    line-height: 1.1;
+    gap: 3px;
+}
+
+.pc-github-repos-container.pc-github-repos-tab .pc-github-repos-star-icon,
+.pc-github-repos-container.pc-github-repos-tab .pc-github-repos-stars {
+    margin-left: 2px;
 }

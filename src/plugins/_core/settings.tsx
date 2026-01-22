@@ -461,7 +461,7 @@ export default definePlugin({
     getVersionInfo(support = true) {
         let version = "";
 
-        if (IS_DEV) version = "Dev";
+        if (IS_DEV) version = "Dev Build";
         if (IS_WEB) version = "Web";
         if (IS_PLEXTRON) version = `Plextron v${PlextronNative.app.getVersion()}`;
         if (IS_STANDALONE) version = "Standalone";

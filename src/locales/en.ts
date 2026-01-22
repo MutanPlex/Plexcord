@@ -1374,7 +1374,7 @@ const translations = {
                 },
                 allowNewlinesInCommands: {
                     label: "Allow Newlines in Commands",
-                    description: "Allow newlines in command inputs (Shift + Enter)"
+                    description: "Allow newlines in command inputs (CTRL + Shift + Enter)"
                 }
             },
             command: {
@@ -1472,32 +1472,6 @@ const translations = {
         betterPlusReacts: {
             name: "BetterPlusReacts",
             description: "The amount of plus before :emoji: is the message to add it to"
-        },
-        betterQuickReact: {
-            name: "BetterQuickReact",
-            description: "Improves the quick react buttons in the message context menu.",
-            option: {
-                frequentEmojis: {
-                    label: "Frequent Emojis",
-                    description: "Use frequently used emojis instead of favourite emojis"
-                },
-                rows: {
-                    label: "Rows",
-                    description: "Rows of quick reactions to display"
-                },
-                columns: {
-                    label: "Columns",
-                    description: "Columns of quick reactions to display"
-                },
-                compactMode: {
-                    label: "Compact Mode",
-                    description: "Scales the buttons to 75% of their original scale, whilst increasing the inner emoji to 125% scale. Emojis will be 93.75% of the original size. Recommended to have a minimum of 5 columns"
-                },
-                scroll: {
-                    label: "Scroll",
-                    description: "Enable scrolling the list of emojis"
-                }
-            }
         },
         betterRoleContext: {
             name: "BetterRoleContext",
@@ -2430,6 +2404,18 @@ const translations = {
                     always: "Always",
                     only: "Only when beginning or end of activity name matches",
                     never: "Never"
+                },
+                enableScreenshotKeybind: {
+                    label: "Enable Screenshot Keybind",
+                    description: "Enable the screenshot keybind feature"
+                },
+                enableVoiceOnlyClips: {
+                    label: "Enable Voice-Only Clips",
+                    description: "Enable voice-only clips (audio without video)"
+                },
+                enableAdvancedSignals: {
+                    label: "Enable Advanced Signals",
+                    description: "Enable advanced clip signals (auto-clip triggers)"
                 },
                 clipsLink: {
                     label: "Clips Link",
@@ -4462,6 +4448,10 @@ const translations = {
                 showInMiniProfile: {
                     label: "Show in Mini Profile",
                     description: "Show repositories in the mini profile popout"
+                },
+                showRepositoryTab: {
+                    label: "Show Repository Tab",
+                    description: "Show repositories tab in profile modal (hides button in connections when enabled)"
                 }
             },
             error: {
@@ -5946,6 +5936,36 @@ const translations = {
         moreKaomoji: {
             name: "MoreKaomoji",
             description: "Adds more Kaomoji to discord. ヽ(´▽`)/"
+        },
+        moreQuickReactions: {
+            name: "MoreQuickReactions",
+            description: "Improves the quick react buttons in the message context menu.",
+            option: {
+                reactionCount: {
+                    label: "Reaction Count",
+                    description: "Number of reactions (0-42)"
+                },
+                frequentEmojis: {
+                    label: "Frequent Emojis",
+                    description: "Use frequently used emojis instead of favourite emojis"
+                },
+                rows: {
+                    label: "Rows",
+                    description: "Rows of quick reactions to display"
+                },
+                columns: {
+                    label: "Columns",
+                    description: "Columns of quick reactions to display"
+                },
+                compactMode: {
+                    label: "Compact Mode",
+                    description: "Scales the buttons to 75% of their original scale, whilst increasing the inner emoji to 125% scale. Emojis will be 93.75% of the original size. Recommended to have a minimum of 5 columns"
+                },
+                scroll: {
+                    label: "Scroll",
+                    description: "Enable scrolling the list of emojis"
+                }
+            }
         },
         morse: {
             name: "Morse",
@@ -8611,16 +8631,6 @@ const translations = {
         themeAttributes: {
             name: "ThemeAttributes",
             description: "Adds data attributes to various elements for theming purposes"
-        },
-        timelessClips: {
-            name: "TimelessClips",
-            description: "Add a your own clip length",
-            option: {
-                clipLength: {
-                    label: "Clip Length",
-                    description: "Add clip length option in minutes"
-                }
-            }
         },
         timezones: {
             name: "Timezones",

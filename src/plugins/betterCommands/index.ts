@@ -59,7 +59,7 @@ export default definePlugin({
                     match: /case (\i\.\i)\.TAB:if\(null!=(\i).selection&&\i\((\i)(?=.{0,300}(\i\.\i\.insertText))/,
                     replace: (orig, keys, editor, event, insertText) => {
                         return `case ${keys}.ENTER:
-                                    if(${event}.shiftKey){
+                                    if(${event}.shiftKey && ${event}.ctrlKey){
                                         ${event}.preventDefault();
                                         ${event}.stopPropagation();
                                         ${insertText}(${editor},'\\n');

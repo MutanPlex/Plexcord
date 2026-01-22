@@ -1377,7 +1377,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 allowNewlinesInCommands: {
                     label: "Komutlarda Yeni Satırları İzin Ver",
-                    description: "Komut girişlerinde yeni satırlara izin ver (Shift + Enter)"
+                    description: "Komut girişlerinde yeni satırlara izin ver (CTRL + Shift + Enter)"
                 }
             },
             command: {
@@ -1475,32 +1475,6 @@ const translations: MatchStructure<typeof enTranslations> = {
         betterPlusReacts: {
             name: "BetterPlusReacts",
             description: ":emoji: öncesindeki artı işareti sayısı, emojinin ekleneceği mesajı belirtir"
-        },
-        betterQuickReact: {
-            name: "BetterQuickReact",
-            description: "Mesaj bağlam menüsündeki hızlı tepki butonlarını geliştirir.",
-            option: {
-                frequentEmojis: {
-                    label: "Sık Kullanılan Emojiler",
-                    description: "Favori emojiler yerine sık kullanılan emojileri kullan"
-                },
-                rows: {
-                    label: "Satırlar",
-                    description: "Gösterilecek hızlı tepkilerin satır sayısı"
-                },
-                columns: {
-                    label: "Sütunlar",
-                    description: "Gösterilecek hızlı tepkilerin sütun sayısı"
-                },
-                compactMode: {
-                    label: "Kompakt Mod",
-                    description: "Butonları orijinal boyutlarının %75’ine ölçeklerken içteki emojiyi %125’e büyütür. Emojiler orijinal boyutun %93.75’i olacaktır. En az 5 sütun kullanmanız önerilir"
-                },
-                scroll: {
-                    label: "Kaydırma",
-                    description: "Emoji listesini kaydırmayı etkinleştir"
-                }
-            }
         },
         betterRoleContext: {
             name: "BetterRoleContext",
@@ -2433,6 +2407,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     always: "Her zaman",
                     only: "Yalnızca etkinlik adının başı veya sonu eşleştiğinde",
                     never: "Asla"
+                },
+                enableScreenshotKeybind: {
+                    label: "Ekran Görüntüsü Kısayol Tuşunu Etkinleştir",
+                    description: "Ekran görüntüsü kısayol tuşu özelliğini etkinleştir"
+                },
+                enableVoiceOnlyClips: {
+                    label: "Sadece Sesli Klipleri Etkinleştir",
+                    description: "Sadece sesli klipleri etkinleştir (video olmadan ses)"
+                },
+                enableAdvancedSignals: {
+                    label: "Gelişmiş Sinyalleri Etkinleştir",
+                    description: "Gelişmiş klip sinyallerini etkinleştir (otomatik klip tetikleyicileri)"
                 },
                 clipsLink: {
                     label: "Klipler Bağlantısı",
@@ -4466,6 +4452,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showInMiniProfile: {
                     label: "Mini Profilde Göster",
                     description: "Depoları mini profil penceresinde göster"
+                },
+                showRepositoryTab: {
+                    label: "Depo Sekmesini Göster",
+                    description: "Profil modalında depo sekmesini göster (etkinleştirildiğinde bağlantılardaki düğmeyi gizler)"
                 }
             },
             error: {
@@ -5950,6 +5940,36 @@ const translations: MatchStructure<typeof enTranslations> = {
         moreKaomoji: {
             name: "MoreKaomoji",
             description: "Discord'a daha fazla Kaomoji ekler. ヽ(´▽`)/"
+        },
+        moreQuickReactions: {
+            name: "MoreQuickReactions",
+            description: "Mesaj bağlam menüsündeki hızlı tepki butonlarını geliştirir.",
+            option: {
+                reactionCount: {
+                    label: "Tepki Sayısı",
+                    description: "Gösterilecek tepki sayısı (0-42)"
+                },
+                frequentEmojis: {
+                    label: "Sık Kullanılan Emojiler",
+                    description: "Favori emojiler yerine sık kullanılan emojileri kullan"
+                },
+                rows: {
+                    label: "Satırlar",
+                    description: "Gösterilecek hızlı tepkilerin satır sayısı"
+                },
+                columns: {
+                    label: "Sütunlar",
+                    description: "Gösterilecek hızlı tepkilerin sütun sayısı"
+                },
+                compactMode: {
+                    label: "Kompakt Mod",
+                    description: "Butonları orijinal boyutlarının %75’ine ölçeklerken içteki emojiyi %125’e büyütür. Emojiler orijinal boyutun %93.75’i olacaktır. En az 5 sütun kullanmanız önerilir"
+                },
+                scroll: {
+                    label: "Kaydırma",
+                    description: "Emoji listesini kaydırmayı etkinleştir"
+                }
+            }
         },
         morse: {
             name: "Morse",
@@ -8616,16 +8636,6 @@ const translations: MatchStructure<typeof enTranslations> = {
         themeAttributes: {
             name: "ThemeAttributes",
             description: "Tema oluşturma amacıyla çeşitli öğelere veri öznitelikleri ekler"
-        },
-        timelessClips: {
-            name: "TimelessClips",
-            description: "Kendi klip uzunluğunuzu ekleyin",
-            option: {
-                clipLength: {
-                    label: "Klip Uzunluğu",
-                    description: "Dakika cinsinden klip uzunluğu seçeneği ekleyin"
-                }
-            }
         },
         timezones: {
             name: "Timezones",

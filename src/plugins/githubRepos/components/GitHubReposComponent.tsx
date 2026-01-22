@@ -17,7 +17,7 @@ import { cl, settings } from "..";
 import { RepoCard } from "./RepoCard";
 import { ReposModal } from "./ReposModal";
 
-export function GitHubReposComponent({ id, theme }: { id: string, theme: string; }) {
+export function GitHubReposComponent({ id, theme, variant = "popout" }: { id: string, theme: string; variant?: "popout" | "tab"; }) {
     const [repos, setRepos] = useState<GitHubRepo[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -66,7 +66,7 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
 
                 const githubId = githubConnection.id;
 
-                if (!settings.store.showInMiniProfile) setReturnJustButton(true);
+                if (!settings.store.showInMiniProfile && variant !== "tab") setReturnJustButton(true);
 
                 // Try to fetch by ID first, fall back to username
                 const reposById = await fetchReposByUserId(githubId);
@@ -89,11 +89,15 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
         fetchData();
     }, [id]);
 
-    if (loading) return <BaseText size="xs" weight="semibold" className={cl("loading")}>
-        {t(plugin.gitHubRepos.loading)}</BaseText>;
+    if (loading) return;
+    <BaseText size="xs" weight="semibold" className={cl("loading")} >
+        {t(plugin.gitHubRepos.loading)}
+    </BaseText>;
 
-    if (error) return <BaseText size="xs" weight="semibold" className={cl("error")}>
-        {t(plugin.gitHubRepos.error.error)}: {error}</BaseText>;
+    if (error) return;
+    <BaseText size="xs" weight="semibold" className={cl("error")}>
+        {t(plugin.gitHubRepos.error.error)}: {error}
+    </BaseText>;
 
     if (!repos.length) return null;
 
@@ -110,15 +114,18 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
         );
     }
 
-    const topRepos = repos.slice(0, 4);
+    const topRepos = variant === "tab" ? repos : repos.slice(0, 4);
 
     return (
-        <div className={cl("container")}>
+        <div className={variant === "tab" ? `${cl("container")} ${cl("tab")}` : cl("container")}>
             <BaseText size="xs" weight="semibold" className={cl("header")}>
                 {t(plugin.gitHubRepos.button.repositories)}
                 {userInfo && (
                     <span className={cl("count")}>
-                        {` ${t(plugin.gitHubRepos.button.only, { length: topRepos.length, total: userInfo.totalRepos })}`}
+                        {variant === "tab"
+                            ? ` (${repos.length})`
+                            : ` ${t(plugin.gitHubRepos.button.only, { length: topRepos.length, total: userInfo.totalRepos })}`
+                        }
                     </span>
                 )}
             </BaseText>
@@ -129,18 +136,21 @@ export function GitHubReposComponent({ id, theme }: { id: string, theme: string;
                         repo={repo}
                         showStars={settings.store.showStars}
                         showLanguage={settings.store.showLanguage}
+                        variant={variant}
                     />))
                 }
             </div>
-            <div className={cl("footer")}>
-                <TextButton
-                    className={cl("show-more")}
-                    color="secondary"
-                    onClick={openReposModal}
-                >
-                    {t(plugin.gitHubRepos.button.more)}
-                </TextButton>
-            </div>
+            {variant !== "tab" && (
+                <div className={cl("footer")}>
+                    <TextButton
+                        className={cl("show-more")}
+                        color="secondary"
+                        onClick={openReposModal}
+                    >
+                        {t(plugin.gitHubRepos.button.more)}
+                    </TextButton>
+                </div>
+            )}
         </div>
     );
 }
