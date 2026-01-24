@@ -74,7 +74,7 @@ interface DiscordStatus {
     status: "online" | "dnd" | "idle" | "invisible";
 }
 
-const StatusStyles = findCssClassesLazy("statusItem", "clearCustomStatusHint", "customEmojiPlaceholder", "menuDivider", "status");
+const StatusStyles = findCssClassesLazy("statusItem", "menuItemIcon", "status");
 // TODO: find clearCustomStatusHint original css/svg or replace
 const PMenu = findComponentByCodeLazy("#{intl::MORE_OPTIONS}", ".ChevronSmallRightIcon");
 const EmojiComponent = findComponentByCodeLazy(/\.translateSurrogatesToInlineEmoji\(\i\.name\);/);
@@ -104,12 +104,12 @@ function setStatus(status: DiscordStatus) {
     });
 }
 
-const ClearStatusButton = () => <Clickable className={StatusStyles.clearCustomStatusHint} onClick={e => { e.stopPropagation(); CustomStatusSettings?.updateSetting(null); }}><PlusSmallIcon className={"pc-sp-icon"} /></Clickable>;
+const ClearStatusButton = () => <Clickable className={StatusStyles.menuItemIcon} onClick={e => { e.stopPropagation(); CustomStatusSettings?.updateSetting(null); }}><PlusSmallIcon className={"pc-sp-icon"} /></Clickable>;
 
 function StatusIcon({ isHovering, status }: { isHovering: boolean; status: DiscordStatus; }) {
     return <div className={StatusStyles.status}>{isHovering ?
         <PlusSmallIcon className={"pc-sp-icon"} />
-        : (status.emoji != null ? <EmojiComponent emoji={status.emoji} animate={true} hideTooltip={false} size="24px" /> : <div className={StatusStyles.customEmojiPlaceholder} />)}</div>;
+        : (status.emoji != null ? <EmojiComponent emoji={status.emoji} animate={true} hideTooltip={false} size="24px" /> : <div className={StatusStyles.menuItemIcon} />)}</div>;
 }
 
 const RenderStatusMenuItem = ({ status, update, disabled }: { status: DiscordStatus; update: () => void; disabled: boolean; }) => {
@@ -182,7 +182,6 @@ export default definePlugin({
         const status = CustomStatusSettings.getSetting();
         return (
             <ErrorBoundary>
-                <div className={StatusStyles.menuDivider} />
                 {status == null ?
                     <PMenu
                         id="sp-custom/presets-status"
@@ -190,7 +189,7 @@ export default definePlugin({
                         onClick={openCustomStatusModalLazy}
                         icon={
                             () => <div
-                                className={StatusStyles.customEmojiPlaceholder}
+                                className={StatusStyles.menuItemIcon}
                             />
                         }
                         label={t(plugin.statusPresets.context.set)}
