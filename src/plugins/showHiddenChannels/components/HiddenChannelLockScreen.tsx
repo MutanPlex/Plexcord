@@ -29,7 +29,7 @@ import openRolesAndUsersPermissionsModal from "@plugins/permissionsViewer/compon
 import { sortPermissionOverwrites } from "@plugins/permissionsViewer/utils";
 import { classes } from "@utils/misc";
 import { formatDuration } from "@utils/text";
-import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
+import { findByPropsLazy, findComponentByCodeLazy, findCssClassesLazy } from "@webpack";
 import { EmojiStore, FluxDispatcher, GuildMemberStore, GuildStore, Parser, PermissionsBits, PermissionStore, SnowflakeUtils, Timestamp, Tooltip, useEffect, useState } from "@webpack/common";
 
 import { cl, settings } from "..";
@@ -39,7 +39,7 @@ const enum SortOrderTypes {
     CREATION_DATE = 1
 }
 
-const ChatScrollClasses = findByPropsLazy("auto", "managedReactiveScroller");
+const ChatScrollClasses = findCssClassesLazy("auto", "managedReactiveScroller", "customTheme");
 const ChannelBeginHeader = findComponentByCodeLazy("#{intl::ROLE_REQUIRED_SINGLE_USER_MESSAGE}");
 const TagComponent = findComponentByCodeLazy("#{intl::FORUM_TAG_A11Y_FILTER_BY_TAG}");
 

@@ -6,7 +6,7 @@
  */
 
 import { addPatch } from "@api/PluginManager";
-import { initWs } from "@plugins/devCompanion.dev/initWs";
+import { initWs } from "@plugins/devCompanion.dev";
 import { Logger } from "@utils/Logger";
 import * as Webpack from "@webpack";
 import { getBuildNumber, patches, patchTimings } from "@webpack/patcher";

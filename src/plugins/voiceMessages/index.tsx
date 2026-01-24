@@ -38,7 +38,7 @@ import { ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, openModa
 import { useAwaiter } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { chooseFile } from "@utils/web";
-import { findByPropsLazy, findLazy, findStoreLazy } from "@webpack";
+import { findCssClassesLazy, findLazy, findStoreLazy } from "@webpack";
 import { Constants, FluxDispatcher, lodash, Menu, MessageActions, PermissionsBits, PermissionStore, RestAPI, SelectedChannelStore, showToast, SnowflakeUtils, Toasts, useEffect, useState } from "@webpack/common";
 
 import { VoiceRecorderDesktop } from "./components/DesktopRecorder";
@@ -61,7 +61,7 @@ const EMPTY_META: AudioMetadata = {
 
 const CloudUploadConstructor = findLazy(m => m.prototype?.trackUploadFinished) as typeof CloudUpload;
 const PendingReplyStore = findStoreLazy("PendingReplyStore");
-const OptionClasses = findByPropsLazy("optionName", "optionIcon", "optionLabel");
+const OptionClasses = findCssClassesLazy("optionName", "optionIcon", "optionLabel");
 
 export const cl = classNameFactory("pc-vmsg-");
 

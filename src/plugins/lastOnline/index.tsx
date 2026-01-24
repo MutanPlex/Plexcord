@@ -6,10 +6,10 @@
  */
 
 import { plugin, t } from "@api/i18n";
+import { BaseText } from "@components/BaseText";
 import { User } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
-import { findByProps } from "@webpack";
 import { moment } from "@webpack/common";
 
 interface PresenceStatus {
@@ -88,16 +88,12 @@ export default definePlugin({
     buildRecentlyOffline(user: User) {
         if (!user) return <></>;
 
-        const { subtext } = findByProps("interactiveSelected", "subtext");
-
         const presenceStatus = recentlyOnlineList.get(user.id);
         const formattedTime = presenceStatus && presenceStatus.lastOffline !== null
             ? formatTime(presenceStatus.lastOffline)
             : "";
         return (
-            <div className={subtext}>
-                <>{t(plugin.lastOnline.online, { formattedTime })}</>
-            </div>
+            <BaseText size="xs">{t(plugin.lastOnline.online, { formattedTime })}</BaseText>
         );
     }
 });

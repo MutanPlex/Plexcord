@@ -7,22 +7,21 @@
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { classNameFactory, disableStyle, enableStyle } from "@api/Styles";
+import { disableStyle, enableStyle } from "@api/Styles";
 import { buildPluginMenuEntries, buildThemeMenuEntries } from "@plugins/plexcordToolbox/menu";
 import { Devs } from "@utils/constants";
+import { classNameFactory } from "@utils/css";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
-import { waitFor } from "@webpack";
+import { findCssClassesLazy } from "@webpack";
 import { ComponentDispatch, FocusLock, Menu, useEffect, useRef } from "@webpack/common";
 import type { HTMLAttributes, ReactElement } from "react";
 
 import fullHeightStyle from "./fullHeightContext.css?managed";
 
-type SettingsEntry = { section: string, label: string; };
-
 const cl = classNameFactory("");
-let Classes: Record<string, string>;
-waitFor(["animating", "baseLayer", "bg", "layer", "layers"], m => Classes = m);
+type SettingsEntry = { section: string, label: string; };
+const Classes = findCssClassesLazy("animating", "baseLayer", "bg", "layer", "layers");
 
 const settings = definePluginSettings({
     disableFade: {
@@ -144,8 +143,8 @@ export default definePlugin({
             find: "#{intl::USER_SETTINGS_ACTIONS_MENU_LABEL}",
             replacement: [
                 {
-                    match: /=\[\];if\((\i)(?=\.forEach.{0,100}"logout"!==\i.{0,30}(\i)\.get\(\i\))/,
-                    replace: "=$self.wrapMap([]);if($self.transformSettingsEntries($1,$2)",
+                    match: /=\[\];(\i)(?=\.forEach.{0,100}"logout"!==\i.{0,30}(\i)\.get\(\i\))/,
+                    replace: "=$self.wrapMap([]);$self.transformSettingsEntries($1,$2)",
                     predicate: () => settings.store.organizeMenu
                 },
                 {
@@ -165,7 +164,7 @@ export default definePlugin({
     // Thus, we sanity check webpack modules
     Layer(props: LayerProps) {
         try {
-            [FocusLock.$$plexcordGetWrappedComponent(), ComponentDispatch, Classes].forEach(e => e.test);
+            [FocusLock.$$plexcordGetWrappedComponent(), ComponentDispatch, Classes.layer].forEach(e => e.test);
         } catch {
             new Logger("BetterSettings").error("Failed to find some components");
             return props.children;

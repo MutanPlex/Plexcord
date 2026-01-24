@@ -11,7 +11,7 @@ import definePlugin from "@utils/types";
 import { findComponentByCodeLazy, findStoreLazy } from "@webpack";
 import { UserStore, useStateFromStores } from "@webpack/common";
 
-const ThreeDots = findComponentByCodeLazy(".dots,", "dotRadius:");
+const ThreeDots = findComponentByCodeLazy("Math.min(1,Math.max(", "dotRadius:");
 
 const TypingStore = findStoreLazy("TypingStore");
 

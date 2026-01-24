@@ -12,9 +12,14 @@ import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Devs } from "@utils/constants";
+import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
+import { findCssClassesLazy } from "@webpack";
 import { Menu } from "@webpack/common";
 import React, { ReactNode } from "react";
+
+const CodeContainerClasses = findCssClassesLazy("markup", "codeContainer");
+const MessageContentClasses = findCssClassesLazy("messageContent", "messageContentTrailingIcon");
 
 const settings = definePluginSettings({
     showGif: {
@@ -58,7 +63,7 @@ function blockedComponentRender(sticker) {
 
     if (showMessage) {
         elements.push(
-            <div key="message" id="message-content-1205482612316184657" className={"markup_a7e664 messageContent__21e69"}><span>{t(plugin.stickerBlocker.modal.blocked, { id: sticker.id, name: sticker.name })}</span></div>
+            <div key="message" id="pc-blocked-sticker" className={classes(CodeContainerClasses.markup, MessageContentClasses.messageContent)}><span>{t(plugin.stickerBlocker.modal.blocked, { id: sticker.id, name: sticker.name })}</span></div>
         );
     }
 

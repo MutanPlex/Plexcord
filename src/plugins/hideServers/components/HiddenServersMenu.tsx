@@ -24,13 +24,13 @@ import {
     ModalSize,
     openModal,
 } from "@utils/modal";
-import { findByPropsLazy } from "@webpack";
+import { findCssClassesLazy } from "@webpack";
 import { IconUtils, useStateFromStores } from "@webpack/common";
 
 import { SortedGuildStore } from "..";
 
 const cl = classNameFactory("pc-hideservers-");
-const IconClasses = findByPropsLazy("icon", "acronym", "childWrapper");
+const IconClasses = findCssClassesLazy("icon", "acronym", "childWrapper");
 
 function HiddenServersModal({ modalProps, close }: { modalProps: ModalProps; close(): void; }) {
     const guilds = useStateFromStores([HiddenServersStore], () => HiddenServersStore.hiddenGuildsDetail());

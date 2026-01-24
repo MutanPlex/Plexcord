@@ -10,13 +10,12 @@ import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
+import { statusTagGreen } from "@plugins/holyNotes";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
 import { downloadNotes, uploadNotes } from "@plugins/holyNotes/utils";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
-import { findByProps } from "@webpack";
 
 export default ({ onClose, ...modalProps }: ModalProps & { onClose: () => void; }) => {
-    const { statusTagGreen } = findByProps("statusTagGreen");
 
     return (
         <ModalRoot {...modalProps} className="pc-help-modal" size={ModalSize.LARGE}>

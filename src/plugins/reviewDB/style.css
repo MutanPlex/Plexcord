@@ -56,7 +56,7 @@
     margin-top: 16px;
 }
 
-.pc-rdb-review-container {
+.pc-rdb-review {
     padding-top: var(--pc-rdb-spacing-size) !important;
     padding-bottom: var(--pc-rdb-spacing-size) !important;
     padding-right: 32px !important;

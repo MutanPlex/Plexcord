@@ -7,13 +7,13 @@
 
 import { cl } from "@plugins/decor/ui";
 import { classes } from "@utils/misc";
-import { findByPropsLazy } from "@webpack";
 import { React } from "@webpack/common";
 import { JSX } from "react";
+import { findCssClassesLazy } from "webpack";
 
 import Grid, { GridProps } from "./Grid";
 
-const ScrollerClasses = findByPropsLazy("managedReactiveScroller");
+const ScrollerClasses = findCssClassesLazy("managedReactiveScroller", "thin");
 
 type Section<SectionT, ItemT> = SectionT & {
     items: Array<ItemT>;

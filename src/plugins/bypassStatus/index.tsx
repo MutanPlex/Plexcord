@@ -25,6 +25,8 @@ interface IMessageCreate {
     message: Message;
 }
 
+const SILENT_PING_FLAG = 1 << 12;
+
 function Icon(enabled?: boolean): JSX.Element {
     return <svg
         width="18"
@@ -129,6 +131,12 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: true,
     },
+    respectSilentPings: {
+        label: () => t(plugin.bypassStatus.option.respectSilentPings.label),
+        description: () => t(plugin.bypassStatus.option.respectSilentPings.description),
+        type: OptionType.BOOLEAN,
+        default: true
+    },
     statusToUse: {
         label: () => t(plugin.bypassStatus.option.statusToUse.label),
         description: () => t(plugin.bypassStatus.option.statusToUse.description),
@@ -170,6 +178,7 @@ export default definePlugin({
                 if (message.state === "SENDING" || message.content === "" || message.author.id === currentUser.id || (channelId === currentChannelId && WindowStore.isFocused()) || userStatus !== settings.store.statusToUse) {
                     return;
                 }
+                if (settings.store.respectSilentPings && (message.flags & SILENT_PING_FLAG)) { return; }
                 const mentioned = MessageStore.getMessage(channelId, message.id)?.mentioned;
                 if ((settings.store.guilds.split(", ").includes(guildId) || settings.store.channels.split(", ").includes(channelId)) && mentioned) {
                     await showNotification(message, guildId);

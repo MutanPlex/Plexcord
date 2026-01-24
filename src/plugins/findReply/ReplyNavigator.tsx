@@ -9,13 +9,13 @@ import "./styles.css";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Message } from "@plexcord/discord-types";
 import { ModalCloseButton } from "@utils/modal";
-import { findByPropsLazy } from "@webpack";
+import { findCssClassesLazy } from "@webpack";
 import { Paginator, React, useEffect, useRef, useState } from "@webpack/common";
 import { MutableRefObject } from "react";
 
 import { jumper } from "./index";
 
-const containerStyles = findByPropsLazy("containerBottom", "containerTop");
+const containerStyles = findCssClassesLazy("containerBottom", "containerTop");
 
 export default function ReplyNavigator({ replies }: { replies: Message[]; }) {
     const [page, setPage] = useState(1);

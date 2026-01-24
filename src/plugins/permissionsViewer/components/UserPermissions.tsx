@@ -26,7 +26,7 @@ import { PermissionOverwriteType } from "@plexcord/discord-types/enums";
 import { cl, getGuildPermissionSpecMap, getSortedRolesForMember, sortUserRoles } from "@plugins/permissionsViewer/utils";
 import { getIntlMessage } from "@utils/discord";
 import { classes } from "@utils/misc";
-import { filters, findBulk, proxyLazyWebpack } from "@webpack";
+import { findCssClassesLazy } from "@webpack";
 import { PermissionsBits, Tooltip, useMemo, UserStore } from "@webpack/common";
 
 import { PermissionsSortOrder, settings } from "..";
@@ -41,14 +41,8 @@ interface UserPermission {
 
 type UserPermissions = Array<UserPermission>;
 
-const { RoleClasses, RoleBorderClasses } = proxyLazyWebpack(() => {
-    const [RoleClasses, RoleBorderClasses] = findBulk(
-        filters.byProps("root", "role", "roleRemoveButton", "roleName"),
-        filters.byProps("roleCircle", "dotBorderColor")
-    ) as Record<string, string>[];
-
-    return { RoleClasses, RoleBorderClasses };
-});
+const RoleClasses = findCssClassesLazy("role", "roleName", "roleRemoveButton", "roleNameOverflow", "root");
+const RoleBorderClasses = findCssClassesLazy("roleCircle", "dot", "dotBorderColor");
 
 interface FakeRoleProps extends React.HTMLAttributes<HTMLDivElement> {
     text: string;
@@ -60,7 +54,7 @@ function FakeRole({ text, color, ...props }: FakeRoleProps) {
         <div {...props} className={classes(RoleClasses.role)}>
             <div className={RoleClasses.roleRemoveButton}>
                 <span
-                    className={classes(RoleBorderClasses.roleCircle, RoleClasses.roleCircle)}
+                    className={RoleBorderClasses.roleCircle}
                     style={{ backgroundColor: color }}
                 />
             </div>

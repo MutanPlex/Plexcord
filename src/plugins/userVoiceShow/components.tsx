@@ -13,7 +13,7 @@ import { Channel } from "@plexcord/discord-types";
 import ShowHiddenChannelsPlugin from "@plugins/showHiddenChannels";
 import { classNameFactory } from "@utils/css";
 import { classes } from "@utils/misc";
-import { findByPropsLazy } from "@webpack";
+import { findByPropsLazy, findCssClassesLazy } from "@webpack";
 import { ChannelRouter, ChannelStore, Parser, PermissionsBits, PermissionStore, React, showToast, Toasts, Tooltip, useMemo, UserStore, UserSummaryItem, useStateFromStores, VoiceStateStore } from "@webpack/common";
 import { PropsWithChildren } from "react";
 
@@ -21,7 +21,7 @@ const cl = classNameFactory("pc-uvs-");
 
 const { selectVoiceChannel } = findByPropsLazy("selectVoiceChannel", "selectChannel");
 
-const ActionButtonClasses = findByPropsLazy("actionButton", "highlight");
+const ActionButtonClasses = findCssClassesLazy("actionButton", "highlight");
 
 type IconProps = Omit<React.ComponentPropsWithoutRef<"div">, "children"> & {
     size?: number;

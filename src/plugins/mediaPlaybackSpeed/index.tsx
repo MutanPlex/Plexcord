@@ -56,6 +56,33 @@ export default definePlugin({
     authors: [Devs.D3SOX, PcDevs.MutanPlex],
     settings,
 
+    patches: [
+        // replace voice message embed speed control because ours provides more speeds
+        {
+            find: "\"--:--\"",
+            replacement: {
+                match: /\(0,\i\.jsxs?\)\(.{0,50}\.\i,onClick:\(\).+?\}\)\}\)(?<=playbackCacheKey:\i\}=\i,(\i).+?)/,
+                replace: "$self.renderPlaybackSpeedComponent({mediaRef:$1})"
+            }
+        },
+        // audio & video embeds
+        {
+            // need to pass media ref via props to make it easily accessible from inside controls
+            find: "renderControls(){",
+            replacement: {
+                match: /onToggleMuted:this.toggleMuted,/,
+                replace: "$&mediaRef:this.mediaRef,"
+            }
+        },
+        {
+            find: "AUDIO:\"AUDIO\"",
+            replacement: {
+                match: /sliderWrapperClassName:\i.\i\}\)\}\),/,
+                replace: "$&$self.renderPlaybackSpeedComponent({mediaRef:this?.props?.mediaRef}),"
+            }
+        }
+    ],
+
     renderPlaybackSpeedComponent: ErrorBoundary.wrap(({ mediaRef }: { mediaRef: MediaRef; }) => {
         const changeSpeed = (speed: number) => {
             const media = mediaRef?.current;
@@ -113,32 +140,5 @@ export default definePlugin({
                 )}
             </Tooltip>
         );
-    }),
-
-    patches: [
-        // replace voice message embed speed control because ours provides more speeds
-        {
-            find: "\"--:--\"",
-            replacement: {
-                match: /\(0,\i\.jsxs?\)\(.{0,50}\.playbackRateContainer.+?}\)}\)(?<=playbackCacheKey:\i\}=\i,(\i).+?)/,
-                replace: "$self.renderPlaybackSpeedComponent({mediaRef:$1})"
-            }
-        },
-        // audio & video embeds
-        {
-            // need to pass media ref via props to make it easily accessible from inside controls
-            find: "renderControls(){",
-            replacement: {
-                match: /onToggleMuted:this.toggleMuted,/,
-                replace: "$&mediaRef:this.mediaRef,"
-            }
-        },
-        {
-            find: "AUDIO:\"AUDIO\"",
-            replacement: {
-                match: /\i.volumeSliderWrapper\}\)\}\),/,
-                replace: "$&$self.renderPlaybackSpeedComponent({mediaRef:this?.props?.mediaRef}),"
-            }
-        }
-    ]
+    })
 });

@@ -30,7 +30,7 @@ import { getNewPlugins, getNewSettings, KnownPluginSettingsMap, writeKnownSettin
 
 const cl = classNameFactory("pc-plugins-");
 
-const Checkbox = findComponentByCodeLazy(".checkboxWrapperDisabled:");
+const Checkbox = findComponentByCodeLazy('"data-toggleable-component":"checkbox');
 
 let hasSeen = false;
 

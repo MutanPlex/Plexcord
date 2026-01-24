@@ -370,7 +370,6 @@ function validateQuestButtonSetting() {
 
 function validateDisableQuestSetting() {
     const {
-        disableQuestsEverything,
         disableQuestsDiscoveryTab,
         disableQuestsFetchingQuests,
         disableQuestsDirectMessagesTab,

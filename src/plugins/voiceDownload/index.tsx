@@ -18,10 +18,10 @@ export default definePlugin({
 
     patches: [
         {
-            find: "rippleContainer,children",
+            find: "#{intl::LgCPMt::raw}",
             replacement: {
-                match: /\(0,\i\.jsx\).{0,150},children:.{0,50}\("source",{src:(\i)}\)}\)/,
-                replace: "[$&, $self.renderDownload($1)]"
+                match: /(?<=onVolumeHide:\i\}\))/,
+                replace: ",$self.renderDownload(arguments[0].src)"
             }
         }
     ],

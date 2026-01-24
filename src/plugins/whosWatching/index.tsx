@@ -18,7 +18,7 @@ import { getIntlMessage, openUserProfile } from "@utils/discord";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
-import { findByPropsLazy, findComponentByCodeLazy, findStoreLazy } from "@webpack";
+import { findComponentByCodeLazy, findCssClassesLazy, findStoreLazy } from "@webpack";
 import { Clickable, RelationshipStore, Tooltip, UserStore, useStateFromStores } from "@webpack/common";
 import { JSX } from "react";
 
@@ -71,7 +71,7 @@ function Watching({ userIds, guildId }: WatchingProps): JSX.Element {
 const ApplicationStreamingStore = findStoreLazy("ApplicationStreamingStore");
 
 const UserSummaryItem = findComponentByCodeLazy("defaultRenderUser", "showDefaultAvatarsForNullUsers");
-const AvatarStyles = findByPropsLazy("moreUsers", "emptyUser", "avatarContainer", "clickableAvatar");
+const AvatarStyles = findCssClassesLazy("moreUsers", "emptyUser", "avatarContainer", "clickableAvatar", "avatar");
 
 export default definePlugin({
     name: "WhosWatching",

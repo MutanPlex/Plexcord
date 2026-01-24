@@ -67,19 +67,20 @@ export default definePlugin({
                 match: /\}\)\.sortBy\((.+?)\)\.value\(\)/,
                 replace: "}).sortBy(row => $self.wrapSort(($1), row)).value()"
             }
-        }, {
-            find: "#{intl::FRIEND_REQUEST_CANCEL}",
-            replacement: {
-                predicate: () => settings.store.showDates,
-                match: /(?<=\.listItemContents,children:\[)\(0,.+?(?=,\(0)(?<=user:(\i).+?)/,
-                replace: (children, user) => `$self.WrapperDateComponent({user:${user},children:${children}})`
-            }
         },
         {
             find: "peopleListItemRef",
             replacement: {
                 match: /(?<=children:.*user:(\i),.*subText:).+?(?=,hovered:\i,showAccountIdentifier)/,
                 replace: "$self.makeSubtext($1, $&)"
+            }
+        },
+        {
+            find: "#{intl::FRIEND_REQUEST_CANCEL}",
+            replacement: {
+                predicate: () => settings.store.showDates,
+                match: /(?<=children:\[)\(0,.{0,100}user:\i,hovered:\i.+?(?=,\(0)(?<=user:(\i).+?)/,
+                replace: (children, user) => `$self.WrapperDateComponent({user:${user},children:${children}})`
             }
         }
     ],

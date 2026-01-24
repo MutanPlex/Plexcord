@@ -1663,6 +1663,10 @@ const translations = {
                     label: "Notification Sound",
                     description: "Whether the notification sound should be played"
                 },
+                respectSilentPings: {
+                    label: "Respect Silent Pings",
+                    description: "Respect silent pings (@silent / suppress notifications)"
+                },
                 statusToUse: {
                     label: "Status to Use",
                     description: "Status to use for whitelist",
@@ -3598,17 +3602,10 @@ const translations = {
                 notifyOnAutoConnect: {
                     label: "Notify on Auto Connect",
                     description: "Whether to notify when Dev Companion has automatically connected."
-                },
-                usePatchedModule: {
-                    label: "Use Patched Module",
-                    description: "On extract requests, reply with the current patched module (if it is patched) instead of the original."
-                },
-                reloadAfterToggle: {
-                    label: "Reload After Toggle",
-                    description: "Reload after a disable/enable plugin command is received."
                 }
             },
             toast: {
+                title: "Dev Companion Connected",
                 connected: "Connected to WebSocket",
                 disconnected: "Dev Companion Disconnected",
                 error: "Dev Companion Error",
@@ -3616,7 +3613,9 @@ const translations = {
                 failed: "Failed to start dependencies:",
                 close: "Close",
                 stopping: "Error while stopping plugin {{plugin}}",
-                starting: "Error while starting plugin {{plugin}}"
+                starting: "Error while starting plugin {{plugin}}",
+                noMessage: "No Error Message",
+                noReason: "No Reason Provided"
             }
         },
         disableCallIdle: {
@@ -7142,6 +7141,11 @@ const translations = {
                 complete: "Complete {{remainTime}}",
                 completeImmediate: "Complete (Immediate)"
             },
+            reward: {
+                orbs: "{{completingText}} for {{orbQuantity}} Orbs.",
+                article: "{{completingText}} for {{itemName}}.",
+                unrecognized: "{{completingText}} for an unrecognized reward type."
+            },
             notification: {
                 completed: {
                     title: "Quest Completed",
@@ -9195,16 +9199,6 @@ const translations = {
                 dontHaveEnglish: "You don't have any English voices installed, so the narrator might sound weird",
                 customiseMessages: "You can customise the spoken messages below. You can disable specific messages by setting them to nothing",
                 placeholdersInfo: "The special placeholders {{USER}}, {{DISPLAY_NAME}}, {{NICKNAME}} and {{CHANNEL}} will be replaced with the user's name (nothing if it's yourself), the user's display name, the user's nickname on current server and the channel's name respectively"
-            }
-        },
-        videoSpeed: {
-            name: "VideoSpeed",
-            description: "Allows you to change the speed of videos",
-            option: {
-                preservePitch: {
-                    label: "Preserve Pitch",
-                    description: "Should pitch be preserved when changing speed?"
-                }
             }
         },
         viewIcons: {

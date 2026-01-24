@@ -31,7 +31,7 @@ export default definePlugin({
 
     patches: [
         {
-            find: ".lostPermission)",
+            find: "#{intl::GUILD_OWNER}),children:",
             replacement: [
                 {
                     match: /children:\[(?=.{0,300},lostPermissionTooltipText:)/,
@@ -42,7 +42,7 @@ export default definePlugin({
         {
             find: "PrivateChannel.renderAvatar",
             replacement: {
-                match: /decorators:(\i\.isSystemDM\(\)\?.+?:null)/,
+                match: /decorators:(\i\.isSystemDM\(\)\?.{0,100}:null)/,
                 replace: "decorators:[Plexcord.Api.MemberListDecorators.__getDecorators(arguments[0],'dm'),$1]"
             }
         }

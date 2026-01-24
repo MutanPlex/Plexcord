@@ -20,10 +20,10 @@
 import { plugin, t } from "@api/i18n";
 import { DeleteIcon } from "@components/Icons";
 import { classes } from "@utils/misc";
-import { findByPropsLazy } from "@webpack";
+import { findCssClassesLazy } from "@webpack";
 import { Tooltip } from "@webpack/common";
 
-const iconClasses = findByPropsLazy("button", "wrapper", "disabled", "separator");
+const iconClasses = findCssClassesLazy("button", "wrapper", "disabled", "separator", "dangerous");
 
 export function DeleteButton({ onClick }: { onClick(): void; }) {
     return (

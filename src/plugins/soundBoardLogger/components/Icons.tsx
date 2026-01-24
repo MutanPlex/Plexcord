@@ -12,7 +12,7 @@ import settings from "@plugins/soundBoardLogger/settings";
 import { cl } from "@plugins/soundBoardLogger/utils";
 import { classes } from "@utils/misc";
 import { IconComponent } from "@utils/types";
-import { ButtonWrapperClasses, Tooltip } from "@webpack/common";
+import { Tooltip } from "@webpack/common";
 
 import { openSoundBoardLog } from "./SoundBoardLog";
 
@@ -58,11 +58,11 @@ export function IconWithTooltip({ text, icon, onClick }) {
                     variant="secondary"
                     onMouseEnter={onMouseEnter}
                     onMouseLeave={onMouseLeave}
-                    className={ButtonWrapperClasses.button}
+                    className={cl("discord-button")}
                     onClick={onClick}
                     style={{ padding: "0 4px" }}
                 >
-                    <div className={ButtonWrapperClasses.buttonWrapper}>
+                    <div className={cl("button-wrapper")}>
                         {icon}
                     </div>
                 </Button>

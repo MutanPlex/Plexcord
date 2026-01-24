@@ -25,17 +25,17 @@ export default definePlugin({
         },
         // Popout camera when not focused on voice channel
         {
-            find: ".mirror]:",
+            find: "this.handleReady})",
             replacement: {
-                match: /\[(\i).mirror]:\i/,
-                replace: "[$1.mirror]:!1"
+                match: /(\[\i\.\i\]:)\i/,
+                replace: "$1!1"
             }
         },
         // Overriding css on Preview Camera/Change Video Background popup
         {
-            find: ".cameraPreview,",
+            find: ".PREVIEW_CAMERA_MODAL,",
             replacement: {
-                match: /className:\i.camera,/,
+                match: /className:\i.\i,(?=children:\()/,
                 replace: "$&style:{transform: \"scalex(1)\"},"
             }
         }

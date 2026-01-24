@@ -28,7 +28,7 @@ import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy } from "@webpack";
 import { useState } from "@webpack/common";
 
-const ActionBarIcon = findByCodeLazy(".actionBarIcon)");
+const ActionBarIcon = findByCodeLazy("Children.map", "isValidElement", "dangerous:");
 
 const enum Methods {
     Random,

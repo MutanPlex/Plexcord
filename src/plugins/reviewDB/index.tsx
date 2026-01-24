@@ -26,9 +26,8 @@ import { NotesIcon, OpenExternalIcon } from "@components/Icons";
 import { TooltipContainer } from "@components/TooltipContainer";
 import { Guild, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
-import { classes } from "@utils/misc";
 import definePlugin from "@utils/types";
-import { findByPropsLazy } from "@webpack";
+import { findCssClassesLazy } from "@webpack";
 import { Alerts, Clickable, Menu, Parser } from "@webpack/common";
 
 import { Auth, initAuth, updateAuth } from "./auth";
@@ -38,7 +37,7 @@ import { getCurrentUserInfo, readNotification } from "./reviewDbApi";
 import { settings } from "./settings";
 import { showToast } from "./utils";
 
-const BannerButtonClasses = findByPropsLazy("bannerButton");
+const BannerButtonClasses = findCssClassesLazy("bannerButton");
 
 const guildPopoutPatch: NavContextMenuPatchCallback = (children, { guild }: { guild: Guild, onClose(): void; }) => {
     if (!guild) return;
@@ -154,7 +153,7 @@ export default definePlugin({
             <TooltipContainer text={t(plugin.reviewDB.context.view)}>
                 <Clickable
                     onClick={() => openReviewsModal(user.id, user.username, ReviewType.User)}
-                    className={classes(BannerButtonClasses.bannerButton)}
+                    className={BannerButtonClasses.bannerButton}
                 >
                     <NotesIcon height={16} width={16} />
                 </Clickable>

@@ -384,18 +384,8 @@ function ThemesTab() {
     }, []);
 
     async function updateThemes() {
-        await changeThemeLibraryURLs();
         refreshLocalThemes();
         refreshOnlineThemes();
-    }
-
-    async function changeThemeLibraryURLs() {
-        settings.themeLinks = settings.themeLinks.map(link => {
-            if (link.startsWith("https://themes-delta.vercel.app/api")) {
-                return link.replace("https://themes-delta.vercel.app/api", "https://discord-themes.com/api");
-            }
-            return link;
-        });
     }
 
     async function refreshLocalThemes() {

@@ -10,7 +10,7 @@ import type { User } from "@plexcord/discord-types";
 import { classNameFactory } from "@utils/css";
 import { LazyComponent } from "@utils/react";
 import { saveFile } from "@utils/web";
-import { findByCode, findByPropsLazy } from "@webpack";
+import { findByCode, findByPropsLazy, findCssClassesLazy } from "@webpack";
 
 import settings from "./settings";
 
@@ -70,4 +70,4 @@ export function removeListener(fn): void {
 }
 
 export const UserSummaryItem = LazyComponent(() => findByCode("defaultRenderUser", "showDefaultAvatarsForNullUsers"));
-export const AvatarStyles = findByPropsLazy("moreUsers", "emptyUser", "avatarContainer", "clickableAvatar");
+export const AvatarStyles = findCssClassesLazy("moreUsers", "emptyUser", "avatarContainer", "clickableAvatar", "avatar");

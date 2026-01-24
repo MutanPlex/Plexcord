@@ -22,7 +22,7 @@ import { ELEMENT_ID } from "@plugins/imageZoom/constants";
 import { settings } from "@plugins/imageZoom/index";
 import { waitFor } from "@plugins/imageZoom/utils/waitFor";
 import { classNameFactory } from "@utils/css";
-import { FluxDispatcher, useEffect, useLayoutEffect, useMemo, useRef, useState } from "@webpack/common";
+import { FluxDispatcher, useLayoutEffect, useMemo, useRef, useState } from "@webpack/common";
 
 interface Vec2 {
     x: number,
@@ -110,25 +110,19 @@ export const Magnifier = ErrorBoundary.wrap<MagnifierProps>(({ instance }) => {
         const onMouseUp = () => {
             isMouseDownRef.current = false;
             setOpacity(0);
-            if (settings.store.saveZoomValues) {
-                if (settings.store.zoom !== zoom.current) {
-                    settings.store.zoom = zoom.current;
-                }
-                if (settings.store.size !== size.current) {
-                    settings.store.size = size.current;
-                }
-            }
         };
 
         const onWheel = async (e: WheelEvent) => {
             if (isMouseOverRef.current && isMouseDownRef.current && !isShiftDown.current) {
                 const val = zoom.current + ((e.deltaY / 100) * (settings.store.invertScroll ? -1 : 1)) * settings.store.zoomSpeed;
                 zoom.current = val <= 1 ? 1 : val;
+                if (settings.store.saveZoomValues) settings.store.zoom = zoom.current;
                 updateMousePosition(e);
             }
             if (isMouseOverRef.current && isMouseDownRef.current && isShiftDown.current) {
                 const val = size.current + (e.deltaY * (settings.store.invertScroll ? -1 : 1)) * settings.store.zoomSpeed;
                 size.current = val <= 50 ? 50 : val;
+                if (settings.store.saveZoomValues) settings.store.size = size.current;
                 updateMousePosition(e);
             }
         };
@@ -159,38 +153,6 @@ export const Magnifier = ErrorBoundary.wrap<MagnifierProps>(({ instance }) => {
             document.removeEventListener("mousedown", onMouseDown);
             document.removeEventListener("mouseup", onMouseUp);
             document.removeEventListener("wheel", onWheel);
-        };
-    }, []);
-
-    useEffect(() => {
-        if (!ready || !element.current) return;
-
-        const elem = element.current;
-        const handleMouseEnter = () => isMouseOverRef.current = true;
-        const handleMouseLeave = () => {
-            isMouseOverRef.current = false;
-            isMouseDownRef.current = false;
-        };
-
-        elem.addEventListener("mouseenter", handleMouseEnter);
-        elem.addEventListener("mouseleave", handleMouseLeave);
-
-        return () => {
-            elem.removeEventListener("mouseenter", handleMouseEnter);
-            elem.removeEventListener("mouseleave", handleMouseLeave);
-        };
-    }, [ready]);
-
-    useLayoutEffect(() => {
-        return () => {
-            if (settings.store.saveZoomValues) {
-                if (settings.store.zoom !== zoom.current) {
-                    settings.store.zoom = zoom.current;
-                }
-                if (settings.store.size !== size.current) {
-                    settings.store.size = size.current;
-                }
-            }
         };
     }, []);
 

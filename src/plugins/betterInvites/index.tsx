@@ -14,10 +14,10 @@ import { Devs, PcDevs } from "@utils/constants";
 import { openUserProfile } from "@utils/discord";
 import { classes } from "@utils/misc";
 import definePlugin, { StartAt } from "@utils/types";
-import { findByPropsLazy } from "@webpack";
+import { findByPropsLazy, findCssClassesLazy } from "@webpack";
 import { Parser, Tooltip, UserStore } from "@webpack/common";
 
-const AvatarStyles = findByPropsLazy("avatar", "zalgo");
+const AvatarStyles = findCssClassesLazy("avatar", "zalgo", "clickable");
 const GuildManager = findByPropsLazy("joinGuild");
 
 interface User {
@@ -40,20 +40,20 @@ export default definePlugin({
 
     patches: [
         {
-            find: ".hideDetailsButtonContainer,",
+            find: "#{intl::xdCLeM::raw}",
             replacement: [
                 {
-                    match: /banner\}\),.{0,25}profile:\i\}\),.{0,15}profile:\i/,
+                    match: /profile:\i\}\),.{0,15}profile:\i/,
                     replace: "$&,invite:arguments[0].invite"
                 }
             ]
         },
         {
-            find: ".guildNameContainer,onClick:",
+            find: "onlineCount})})]",
             replacement: [
                 {
                     // make the button clickable
-                    match: /children:(\i)\.name\}\).{0,100}\.guildNameContainer/,
+                    match: /children:(\i)\.name\}\)\}\)\}\)/,
                     replace: "onClick:$self.Lurkable($1),$&"
                 },
                 {

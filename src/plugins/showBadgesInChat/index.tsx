@@ -5,14 +5,15 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import "./styles.css";
+
 import { plugin, t } from "@api/i18n";
 import { User } from "@plexcord/discord-types";
 import badges, { openDonorModal } from "@plugins/_api/badges";
 import { Devs, PcDevs } from "@utils/constants";
-import { findByPropsLazy, findComponentByCodeLazy } from "@webpack";
-const roleIconClassName = findByPropsLazy("roleIcon", "separator").roleIcon;
+import { findComponentByCodeLazy, findCssClassesLazy } from "@webpack";
+const { roleIcon } = findCssClassesLazy("roleIcon", "separator");
 const RoleIconComponent = findComponentByCodeLazy("#{intl::ROLE_ICON_ALT_TEXT}");
-import "./styles.css";
 
 import { openContributorModal } from "@components/settings";
 import { isPcPluginDev } from "@utils/misc";
@@ -46,7 +47,7 @@ function CheckBadge({ badge, author }: { badge: string; author: User; }): JSX.El
                     {badges.getDonorBadges(author.id)?.map(badge => (
                         <RoleIconComponent
                             key={author.id}
-                            className={roleIconClassName}
+                            className={roleIcon}
                             name={badge.description}
                             size={20}
                             src={badge.iconSrc}
@@ -60,7 +61,7 @@ function CheckBadge({ badge, author }: { badge: string; author: User; }): JSX.El
             return isPcPluginDev(author.id) ? (
                 <span style={{ order: settings.store.plexcordContributorPosition }}>
                     <RoleIconComponent
-                        className={roleIconClassName}
+                        className={roleIcon}
                         name={t(plugin.showBadgesInChat.modal.plexcordContributor)}
                         size={20}
                         src={"https://plexcord.club/favicon.png"}
@@ -77,7 +78,7 @@ function CheckBadge({ badge, author }: { badge: string; author: User; }): JSX.El
 
                     <RoleIconComponent
                         key={author.id}
-                        className={roleIconClassName}
+                        className={roleIcon}
                         name={badge[1]}
                         size={20}
                         src={`https://cdn.discordapp.com/badge-icons/${badge[2]}.png`}
@@ -92,7 +93,7 @@ function CheckBadge({ badge, author }: { badge: string; author: User; }): JSX.El
             return (author?.premiumType ?? 0) > 0 ? (
                 <span style={{ order: settings.store.discordNitroPosition }}>
                     <RoleIconComponent
-                        className={roleIconClassName}
+                        className={roleIcon}
                         name={
                             t(plugin.showBadgesInChat.modal.discordNitro) +
                             (author.premiumType === 3 ? " " + t(plugin.showBadgesInChat.modal.basic) : author.premiumType === 1 ? " " + t(plugin.showBadgesInChat.modal.classic) : "")

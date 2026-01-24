@@ -1666,6 +1666,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Bildirim Sesi",
                     description: "Bildirim sesinin çalınıp çalınmayacağını belirler"
                 },
+                respectSilentPings: {
+                    label: "Sessiz Pinglere Saygı Göster",
+                    description: "Sessiz pinglere saygı göster (@silent / bildirimleri bastır)"
+                },
                 statusToUse: {
                     label: "Kullanılacak Durum",
                     description: "Beyaz liste için kullanılacak durum",
@@ -3601,17 +3605,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 notifyOnAutoConnect: {
                     label: "Otomatik Bağlantıda Bildir",
                     description: "Dev Companion otomatik olarak bağlandığında bildirim gösterilsin mi?"
-                },
-                usePatchedModule: {
-                    label: "Yamalanmış Modülü Kullan",
-                    description: "İstekler çıkarıldığında, orijinal yerine mevcut yamalanmış modül (eğer yamalıysa) ile yanıtla."
-                },
-                reloadAfterToggle: {
-                    label: "Değiştirdikten Sonra Yeniden Yükle",
-                    description: "Bir eklenti etkinleştirme/devre dışı bırakma komutu alındığında yeniden yükle."
                 }
             },
             toast: {
+                title: "Dev Companion Bağlandı",
                 connected: "WebSocket'e bağlandı",
                 disconnected: "Dev Companion Bağlantısı Kesildi",
                 error: "Dev Companion Hatası",
@@ -3619,7 +3616,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 failed: "Bağımlılıklar başlatılamadı:",
                 close: "Kapat",
                 stopping: "{{plugin}} eklentisi durdurulurken hata oluştu",
-                starting: "{{plugin}} eklentisi başlatılırken hata oluştu"
+                starting: "{{plugin}} eklentisi başlatılırken hata oluştu",
+                noMessage: "Hata Mesajı Yok",
+                noReason: "Sebep Sağlanmadı"
             }
         },
         disableCallIdle: {
@@ -7146,6 +7145,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 complete: "Tamamla {{remainTime}}",
                 completeImmediate: "Tamamla (Hemen)"
             },
+            reward: {
+                orbs: "{{orbQuantity}} Orbs için {{completingText}}.",
+                article: "{{itemName}} için {{completingText}}.",
+                unrecognized: "Tanınmayan bir ödül türü için {{completingText}}."
+            },
             notification: {
                 completed: {
                     title: "Görev Tamamlandı",
@@ -9199,16 +9203,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 dontHaveEnglish: "Hiç İngilizce ses yüklememişsiniz, bu yüzden anlatıcı garip gelebilir",
                 customiseMessages: "Aşağıdaki konuşulan mesajları özelleştirebilirsiniz. Boş bırakırsanız belirli mesajları devre dışı bırakabilirsiniz",
                 placeholdersInfo: "Özel yer tutucular {{USER}}, {{DISPLAY_NAME}}, {{NICKNAME}} ve {{CHANNEL}} sırasıyla kullanıcının adı (kendinizseniz boş), görüntü adı, sunucudaki takma adı ve kanal adıyla değiştirilir"
-            }
-        },
-        videoSpeed: {
-            name: "VideoSpeed",
-            description: "Videoların hızını değiştirmenize olanak tanır",
-            option: {
-                preservePitch: {
-                    label: "Perdeyi Koru",
-                    description: "Hız değiştirildiğinde ses perdesi korunmalı mı?"
-                }
             }
         },
         viewIcons: {

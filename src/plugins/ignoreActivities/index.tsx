@@ -264,28 +264,18 @@ export default definePlugin({
                 replace: (m, runningGames) => `${m}${runningGames}=${runningGames}.filter(({id,name})=>$self.isActivityNotIgnored({type:0,application_id:id,name}));`
             }
         },
-
-        // FIXME(Bundler minifier change related): Remove the non used compability once enough time has passed
         {
             find: "#{intl::SETTINGS_GAMES_TOGGLE_OVERLAY}",
             replacement: {
-                match: /#{intl::SETTINGS_GAMES_TOGGLE_OVERLAY}.+?}\(\),(?<=nowPlaying:(\i)=!1,.+?overlay:\i,[^}]+?\}=(\i).+?)/,
-                replace: (m, nowPlaying, props) => `${m}$self.renderToggleGameActivityButton(${props},${nowPlaying}),`,
-                noWarn: true,
+                match: /(\i)&&!\i\|\|\i\?null(?<=return (\i)\.verified.+?)/,
+                replace: "$self.renderToggleGameActivityButton($2,$1),$&"
             }
         },
         {
-            find: "#{intl::SETTINGS_GAMES_TOGGLE_OVERLAY}",
+            find: "#{intl::EMBEDDED_ACTIVITIES_DEVELOPER_ACTIVITY}",
             replacement: {
-                match: /\.gameNameLastPlayed.+?,\i\(\),(?<=nowPlaying:(\i)=!1,.+?overlay:\i,[^}]+?\}=(\i).+?)(?=\1&&)/,
-                replace: (m, nowPlaying, props) => `${m}$self.renderToggleGameActivityButton(${props},${nowPlaying}),`,
-            }
-        },
-        {
-            find: ".promotedLabelWrapperNonBanner,children",
-            replacement: {
-                match: /\.appDetailsHeaderContainer.+?children:\i.*?}\),(?<=application:(\i).+?)/,
-                replace: (m, props) => `${m}$self.renderToggleActivityButton(${props}),`
+                match: /lineClamp:1.{0,50}?(?=!\i&&\i\?.+?application:(\i))/,
+                replace: "$&$self.renderToggleActivityButton($1),"
             }
         }
     ],

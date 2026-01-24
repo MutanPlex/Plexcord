@@ -12,15 +12,15 @@ import { PaintbrushIcon } from "@components/Icons";
 import { PcDevs } from "@utils/constants";
 import { closeModal, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
-import { extractAndLoadChunksLazy, findByPropsLazy, findStoreLazy } from "@webpack";
+import { extractAndLoadChunksLazy, findCssClassesLazy, findStoreLazy } from "@webpack";
 import { ChannelStore, DraftType, FluxDispatcher, Menu, SelectedChannelStore, UploadHandler } from "@webpack/common";
 
 import RemixModal from "./RemixModal";
 import css from "./styles.css?managed";
 
-const OptionClasses = findByPropsLazy("optionName", "optionIcon", "optionLabel");
+const OptionClasses = findCssClassesLazy("optionName", "optionIcon", "optionLabel");
 
-const requireCreateStickerModal = extractAndLoadChunksLazy(["stickerInspected]:"]);
+const requireCreateStickerModal = extractAndLoadChunksLazy([".CREATE_STICKER_MODAL,", "isDisplayingIndividualStickers"]);
 const requireSettingsMenu = extractAndLoadChunksLazy(['name:"UserSettings"'], /createPromise:.{0,20}(\i\.\i\("?.+?"?\).*?).then\(\i\.bind\(\i,"?(.+?)"?\)\).{0,50}"UserSettings"/);
 const PendingReplyStore = findStoreLazy("PendingReplyStore");
 const validMediaTypes = ["image/png", "image/jpeg", "image/jpg", "image/webp"];

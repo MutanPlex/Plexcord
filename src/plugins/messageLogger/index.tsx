@@ -32,7 +32,7 @@ import { getIntlMessage } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import { classes } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
-import { findByPropsLazy } from "@webpack";
+import { findCssClassesLazy } from "@webpack";
 import { ChannelStore, FluxDispatcher, Menu, MessageStore, Parser, React, SelectedChannelStore, Timestamp, UserStore, useStateFromStores } from "@webpack/common";
 
 import overlayStyle from "./deleteStyleOverlay.css?managed";
@@ -47,7 +47,7 @@ interface MLMessage extends Message {
     diffViewDisabled?: boolean;
 }
 
-const styles = findByPropsLazy("edited", "communicationDisabled", "isSystemMessage");
+const MessageClasses = findCssClassesLazy("edited", "communicationDisabled", "isSystemMessage");
 
 // track messages where the user disabled diffs for this session
 const disabledDiffMessages = new Set<string>();
@@ -186,9 +186,9 @@ function applyAggregatedCustomContent(message: Message, key: string, nodes: Reac
     const payload = {
         __messageloggerDiff: true,
         __messageloggerDiffKey: key,
-        content: <React.Fragment key={key}>
+        content: <div key={key}>
             {nodes}
-        </React.Fragment>
+        </div>
     };
 
     const existingKey = (message as any).customRenderedContent?.__messageloggerDiffKey;
@@ -504,7 +504,7 @@ export default definePlugin({
                 applyAggregatedCustomContent(message, aggregatedState.key, aggregatedState.aggregatedNodes);
 
                 return (
-                    <React.Fragment key={`diff-aggregated-${messageId}`}>
+                    <div key={`diff-aggregated-${messageId}`}>
                         <div className="messagelogger-edited" key="ml-aggregated-original">
                             {aggregatedState.originalNodes}
                             <Timestamp
@@ -512,10 +512,10 @@ export default definePlugin({
                                 isEdited={true}
                                 isInline={false}
                             >
-                                <span className={styles.edited}>{" "}({getIntlMessage("MESSAGE_EDITED")})</span>
+                                <span className={MessageClasses.edited}>{" "}({getIntlMessage("MESSAGE_EDITED")})</span>
                             </Timestamp>
                         </div>
-                    </React.Fragment>
+                    </div>
                 );
             }
 
@@ -528,7 +528,7 @@ export default definePlugin({
             }
 
             return inlineEdits && (
-                <React.Fragment key={disabledDiffMessages.has(messageId) ? `diff-off-${messageId}` : `diff-on-${messageId}`}>
+                <div key={disabledDiffMessages.has(messageId) ? `diff-off-${messageId}` : `diff-on-${messageId}`}>
                     {history.map((edit, idx) => {
                         const nextContent = idx === history.length - 1
                             ? message.content
@@ -542,12 +542,12 @@ export default definePlugin({
                                     isEdited={true}
                                     isInline={false}
                                 >
-                                    <span className={styles.edited}>{" "}({getIntlMessage("MESSAGE_EDITED")})</span>
+                                    <span className={MessageClasses.edited}>{" "}({getIntlMessage("MESSAGE_EDITED")})</span>
                                 </Timestamp>
                             </div>
                         );
                     })}
-                </React.Fragment>
+                </div>
             );
         }, { noop: true }),
 
@@ -770,11 +770,11 @@ export default definePlugin({
 
         {
             // Attachment renderer
-            find: ".removeMosaicItemHoverButton",
+            find: "#{intl::REMOVE_ATTACHMENT_TOOLTIP_TEXT}",
             replacement: [
                 {
-                    match: /\[\i\.obscured\]:.+?,(?<=item:(\i).+?)/,
-                    replace: '$&"messagelogger-deleted-attachment":$1.originalItem?.deleted,'
+                    match: /\.SPOILER,(?=\[\i\.\i\]:)/,
+                    replace: '$&"messagelogger-deleted-attachment":arguments[0]?.item?.originalItem?.deleted,'
                 }
             ]
         },
@@ -797,7 +797,7 @@ export default definePlugin({
             find: ".SEND_FAILED,",
             replacement: {
                 // Render editHistory behind the message content
-                match: /\.isFailed]:.+?children:\[/,
+                match: /\]:\i.isUnsupported.{0,20}?,children:\[/,
                 replace: "$&arguments[0]?.message?.editHistory?.length>0&&$self.renderEdits(arguments[0]),"
             }
         },
@@ -806,8 +806,8 @@ export default definePlugin({
             find: "#{intl::MESSAGE_EDITED}",
             replacement: {
                 // Make edit marker clickable
-                match: /"span",\{(?=className:\i\.edited,)/,
-                replace: "$self.EditMarker,{message:arguments[0].message,"
+                match: /(isInline:!1,children:.{0,50}?)"span",\{(?=className:)/,
+                replace: "$1$self.EditMarker,{message:arguments[0].message,"
             }
         },
 

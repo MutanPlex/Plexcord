@@ -27,7 +27,7 @@ import { Message } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
 import { openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
-import { findByCodeLazy } from "@webpack";
+import { findByCodeLazy, findComponentByCodeLazy, findCssClassesLazy } from "@webpack";
 import { ChannelStore, Menu } from "@webpack/common";
 
 import { Popover as NoteButtonPopover, Popover } from "./components/icons/NoteButton";
@@ -36,6 +36,14 @@ import noteHandler, { noteHandlerCache } from "./NoteHandler";
 import { DataStoreToCache, HolyNoteStore } from "./utils";
 
 export const MessageType = findByCodeLazy("isEdited(){");
+
+export const { statusTagGreen } = findCssClassesLazy("statusTagGreen");
+export const iconClasses = findCssClassesLazy("iconWrapper", "clickable");
+export const resultsClasses = findCssClassesLazy("emptyResultsWrap", "emptyResultsContent", "errorImage", "emptyResultsText", "noResultsImage", "alt");
+export const quickSelectClasses = findCssClassesLazy("quickSelect", "quickSelectLabel", "quickSelectClick", "quickSelectValue", "quickSelectArrow");
+export const messageClasses = findCssClassesLazy("message", "groupStart", "cozyMessage");
+export const Channel = findByCodeLazy("computeLurkerPermissionsAllowList(){");
+export const ChannelMessage = findComponentByCodeLazy("Message must not be a thread");
 
 function HolyNotesButton() {
     return (

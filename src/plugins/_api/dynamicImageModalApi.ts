@@ -16,7 +16,7 @@ export default definePlugin({
 
     patches: [
         {
-            find: ".dimensionlessImage,",
+            find: ".renderLinkComponent)?",
             replacement: {
                 // widthAndHeightPassed = w != null && w !== 0 && h == null || h === 0
                 match: /(?<=\i=)(null!=\i&&0!==\i)&&(null!=\i&&0!==\i)/,
