@@ -24,12 +24,12 @@ import { Devs, PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 import { findByCodeLazy, findCssClassesLazy } from "@webpack";
-import { ChannelStore, GuildMemberStore, GuildRoleStore, GuildStore } from "@webpack/common";
+import { ChannelStore, GuildMemberStore, GuildRoleStore, GuildStore, UserStore } from "@webpack/common";
 
 const useMessageAuthor = findByCodeLazy('"Result cannot be null because the message is not null"');
 const usernameFont = findCssClassesLazy("usernameFont", "username");
 const usernameGradient = findCssClassesLazy("usernameGradient", "twoColorGradient");
-const fonts = findCssClassesLazy("dnsFont", "zillaSlab", "cherryBomb", "chicle", "museoModerno", "neoCastel", "pixelify", "sinistre", "usernameFont");
+const fonts = findCssClassesLazy("dnsFont", "zillaSlab", "cherryBomb", "chicle", "museoModerno", "neoCastel", "pixelify", "sinistre", "safari");
 
 const settings = definePluginSettings({
     chatMentions: {
@@ -139,8 +139,8 @@ export default definePlugin({
             find: "#{intl::GUEST_NAME_SUFFIX})]",
             replacement: [
                 {
-                    match: /#{intl::GUEST_NAME_SUFFIX}.{0,50}?"".{0,100}\](?=\}\))(?<=guildId:(\i),.{0,50}?user:(\i).+?)/,
-                    replace: "$&,style:$self.getColorStyle($2.id,$1),"
+                    match: /#{intl::GUEST_NAME_SUFFIX}.{0,50}?"".{0,100}\](?=\}\))(?<=guildId:(\i),.+?user:(\i).+?)/,
+                    replace: "$&,style:$self.getColorStyle($2.id,$1),className:$self.getColorClass($2.id,$1),"
                 }
             ],
             predicate: () => settings.store.voiceUsers
@@ -175,13 +175,52 @@ export default definePlugin({
         }
     ],
 
-    getColorString(userId: string, channelOrGuildId: string) {
+    getDisplayNameFont(userId: string) {
         try {
+            const user = UserStore.getUser(userId);
+            const fontId = user?.displayNameStyles?.font_id;
+
+            if (!fontId || Number(fontId) === 1) return fonts.dnsFont; // Default font
+
+            const fontClasses: Record<number, string> = {
+                2: fonts.zillaSlab,
+                3: fonts.cherryBomb,
+                4: fonts.chicle,
+                5: fonts.museoModerno,
+                6: fonts.neoCastel,
+                7: fonts.pixelify,
+                8: fonts.sinistre
+            };
+
+            return fontClasses[Number(fontId)] || "";
+        } catch (e) {
+            new Logger("RoleColorEverywhere").error("Failed to get display name font", e);
+        }
+
+        return "";
+    },
+
+    getColorString(userId: string, channelOrGuildId: string | null | undefined) {
+        try {
+            if (!channelOrGuildId) {
+                new Logger("RoleColorEverywhere").warn("channelOrGuildId is null/undefined for user:", userId);
+                return null;
+            }
+
             const guildId = ChannelStore.getChannel(channelOrGuildId)?.guild_id ?? GuildStore.getGuild(channelOrGuildId)?.id;
-            if (guildId == null) return null;
+            if (guildId == null) {
+                new Logger("RoleColorEverywhere").warn("guildId is null for channelOrGuildId:", channelOrGuildId, "user:", userId);
+                return null;
+            }
 
             const member = GuildMemberStore.getMember(guildId, userId);
-            return member?.colorStrings ?? (member?.colorString ? { primaryColor: member.colorString, secondaryColor: null, tertiaryColor: null } : null);
+            const result = member?.colorStrings ?? (member?.colorString ? { primaryColor: member.colorString, secondaryColor: null, tertiaryColor: null } : null);
+
+            if (!result && member) {
+                new Logger("RoleColorEverywhere").warn("No color found for user:", userId, "in guild:", guildId, "member:", member);
+            }
+
+            return result;
         } catch (e) {
             new Logger("RoleColorEverywhere").error("Failed to get color string", e);
         }
@@ -189,7 +228,8 @@ export default definePlugin({
         return null;
     },
 
-    getColorInt(userId: string, channelOrGuildId: string) {
+    getColorInt(userId: string, channelOrGuildId: string | null | undefined) {
+        if (!channelOrGuildId) return undefined;
         const colorString = this.getColorString(userId, channelOrGuildId);
         return colorString && colorString.primaryColor && parseInt(colorString.primaryColor.slice(1), 16);
     },
@@ -206,18 +246,20 @@ export default definePlugin({
 
     getColorClass(userId: string, channelOrGuildId: string | null | undefined) {
         if (!channelOrGuildId) return `${usernameFont.usernameFont} ${usernameFont.username}`;
+        const fontClass = this.getDisplayNameFont(userId);
         const baseClass = this.getColorString(userId, channelOrGuildId)?.secondaryColor
             ? `${usernameFont.usernameFont} ${usernameFont.username} ${usernameGradient.twoColorGradient} ${usernameGradient.usernameGradient} `
             : `${usernameFont.usernameFont} ${usernameFont.username} `;
-        return baseClass;
+        return fontClass ? `${baseClass}${fontClass}` : baseClass;
     },
 
     getPollResultColorClass(userId: string, channelOrGuildId: string | null | undefined) {
         if (!channelOrGuildId) return "";
+        const fontClass = this.getDisplayNameFont(userId);
         const baseClass = this.getColorString(userId, channelOrGuildId)?.secondaryColor
             ? `${usernameGradient.twoColorGradient} ${usernameGradient.usernameGradient} `
             : "";
-        return baseClass;
+        return fontClass ? `${baseClass} ${fontClass}`.trim() : baseClass;
     },
 
     useMessageColorsStyle(message: any) {
@@ -226,7 +268,7 @@ export default definePlugin({
             const author = useMessageAuthor(message);
 
             // Do not apply role color if the send fails, otherwise it becomes indistinguishable
-            if (message.state !== "SEND_FAILED") return;
+            if (message.state === "SEND_FAILED") return;
 
             if (author.colorString != null && messageSaturation !== 0) {
                 const value = `color-mix(in oklab, ${author.colorString} ${messageSaturation}%, var({DEFAULT}))`;
