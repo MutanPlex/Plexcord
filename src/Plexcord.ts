@@ -28,6 +28,7 @@ export * as QuickCss from "./api/Themes";
 export * as Components from "./components";
 export * as Util from "./utils";
 export * as Updater from "./utils/updater";
+import { showNotice } from "./api/Notices";
 export * as Webpack from "./webpack";
 export * as WebpackPatcher from "./webpack/patchWebpack";
 export { PlainSettings, Settings };
@@ -149,20 +150,26 @@ async function runUpdateCheck() {
         if (Settings.autoUpdate) {
             await update();
             if (Settings.autoUpdateNotification) {
-                notify({
-                    title: "Plexcord " + t(updater.updated),
-                    body: t(updater.restart),
-                    onClick: relaunch
-                });
+                if (notifiedForUpdatesThisSession) return;
+                notifiedForUpdatesThisSession = true;
+
+                showNotice(
+                    "Plexcord " + t(updater.updated),
+                    t(updater.restart),
+                    () => openSettingsTabModal(UpdaterTab!)
+                );
             }
             return;
         }
 
-        notify({
-            title: t(updater.updateAvailable),
-            body: t(updater.click),
-            onClick: () => openSettingsTabModal(UpdaterTab!)
-        });
+        if (notifiedForUpdatesThisSession) return;
+        notifiedForUpdatesThisSession = true;
+
+        showNotice(
+            t(updater.updateAvailable),
+            t(updater.click),
+            () => openSettingsTabModal(UpdaterTab!)
+        );
     } catch (err) {
         UpdateLogger.error("Failed to check for updates", err);
     }

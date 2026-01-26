@@ -176,29 +176,29 @@
 
 .pc-plugins-disable-warning,
 .pc-plugin-modal-disable-warning {
-    background-color: color-mix(in srgb, var(--redesign-button-danger-background) 10%, transparent) !important;
+    background-color: color-mix(in srgb, var(--status-danger) 10%, transparent) !important;
     border-style: solid !important;
     border-width: .1rem !important;
-    border-color: color-mix(in srgb, var(--redesign-button-danger-background) 80%, transparent) !important;
+    border-color: color-mix(in srgb, var(--status-danger) 80%, transparent) !important;
     border-radius: 5px !important;
-    color: color-mix(in srgb, var(--redesign-button-danger-background) 100%, transparent) !important;
+    color: color-mix(in srgb, var(--status-danger) 100%, transparent) !important;
 }
 
 .pc-plugins-disable-warning:hover,
 .pc-plugin-modal-disable-warning:hover {
-    background-color: color-mix(in srgb, var(--redesign-button-danger-background) 40%, transparent) !important;
+    background-color: color-mix(in srgb, var(--status-danger) 40%, transparent) !important;
 }
 
 .pc-plugins-confirm-reset,
 .pc-plugin-modal-confirm-reset {
-    background-color: var(--redesign-button-danger-background) !important;
-    color: var(--redesign-button-danger-pressed-text);
+    background-color: var(--status-danger) !important;
+    color: var(--text-default);
 }
 
 .pc-plugins-confirm-reset:hover,
 .pc-plugin-modal-confirm-reset:hover {
-    background-color: var(--redesign-button-danger-pressed-background) !important;
-    color: var(--redesign-button-danger-pressed-text);
+    background-color: var(--text-feedback-critical) !important;
+    color: var(--text-default);
 }
 
 .pc-modal-close-button {

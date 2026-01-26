@@ -18,11 +18,11 @@
 
 
 .pc-joindiscordbutton {
-    background-color: var(--redesign-button-secondary-background) !important;
+    background-color: var(--channeltextarea-background) !important;
 }
 
 .pc-joindiscordbutton:hover {
-    background-color: var(--redesign-button-secondary-pressed-background) !important;
+    background-color: var(--redesign-button-tertiary-pressed-background) !important;
 }
 
 .pc-settings-card-buttons {

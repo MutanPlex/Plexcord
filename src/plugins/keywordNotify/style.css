@@ -15,7 +15,7 @@
     cursor: pointer;
 }
 
-.pc-keywordnotify-switch {
+.pc-keywordnotify-ignoreCaseSwitch {
     margin-top: 0.5em;
     margin-right: 40px;
 }

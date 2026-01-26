@@ -75,13 +75,13 @@
     right: 1rem;
     height: 30px;
     color: var(--white-500);
-    background-color: var(--redesign-button-secondary-background);
+    background-color: var(--channeltextarea-background);
     border-radius: 10px;
     transition: background-color 0.15s ease;
 }
 
 .pc-useless-info-key-recorder-button:hover {
-    background-color: var(--redesign-button-secondary-pressed-background);
+    background-color: var(--channeltextarea-background);
 }
 
 .pc-useless-info-key-switch .pc-form-switch-wrapper {

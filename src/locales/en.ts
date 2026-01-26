@@ -2421,6 +2421,10 @@ const translations = {
                     label: "Enable Advanced Signals",
                     description: "Enable advanced clip signals (auto-clip triggers)"
                 },
+                ignorePlatformRestriction: {
+                    label: "Ignore Platform Restriction",
+                    description: "Allow Platform Restricted Clipping (may cause save errors)"
+                },
                 clipsLink: {
                     label: "Clips Link",
                     link: "Change FPS and duration options in Clips settings!"

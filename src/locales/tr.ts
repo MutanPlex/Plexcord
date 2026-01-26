@@ -2424,6 +2424,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Gelişmiş Sinyalleri Etkinleştir",
                     description: "Gelişmiş klip sinyallerini etkinleştir (otomatik klip tetikleyicileri)"
                 },
+                ignorePlatformRestriction: {
+                    label: "Platform Kısıtlamalarını Yoksay",
+                    description: "Platforma Özel Kliplemeye İzin Ver (kaydetme hatalarına neden olabilir)"
+                },
                 clipsLink: {
                     label: "Klipler Bağlantısı",
                     link: "Klipler ayarlarında FPS ve süre seçeneklerini değiştirin!"

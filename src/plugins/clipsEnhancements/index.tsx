@@ -49,6 +49,13 @@ const settings = definePluginSettings({
         default: true,
         restartNeeded: true
     },
+    ignorePlatformRestriction: {
+        label: () => t(plugin.clipsEnhancements.option.ignorePlatformRestriction.label),
+        description: () => t(plugin.clipsEnhancements.option.ignorePlatformRestriction.description),
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: true
+    },
     clipsLink: {
         label: () => t(plugin.clipsEnhancements.option.clipsLink.label),
         type: OptionType.COMPONENT,
@@ -103,7 +110,7 @@ export default definePlugin({
             find: "2022-11_clips_experiment",
             replacement: {
                 match: /defaultConfig:\{enableClips:!\d,ignorePlatformRestriction:!\d,showClipsHeaderEntrypoint:!\d,enableScreenshotKeybind:!\d,enableVoiceOnlyClips:!\d,enableAdvancedSignals:!\d\}/,
-                replace: "defaultConfig:{enableClips:!0,ignorePlatformRestriction:!0,showClipsHeaderEntrypoint:!0,enableScreenshotKeybind:$self.settings.store.enableScreenshotKeybind,enableVoiceOnlyClips:$self.settings.store.enableVoiceOnlyClips,enableAdvancedSignals:$self.settings.store.enableAdvancedSignals}"
+                replace: "defaultConfig:{enableClips:!0,ignorePlatformRestriction:$self.settings.store.ignorePlatformRestriction,showClipsHeaderEntrypoint:!0,enableScreenshotKeybind:$self.settings.store.enableScreenshotKeybind,enableVoiceOnlyClips:$self.settings.store.enableVoiceOnlyClips,enableAdvancedSignals:$self.settings.store.enableAdvancedSignals}"
             }
         },
         {
@@ -115,7 +122,7 @@ export default definePlugin({
         }
     ],
 
-    patchTimeslots(timeslots) {
+    patchTimeslots(timeslots: { id: string; value: number; label: string; }[]) {
         const newTimeslots = [...timeslots];
 
         extraTimeslots.forEach(timeslot => newTimeslots.push({
@@ -126,10 +133,10 @@ export default definePlugin({
             })
         }));
 
-        return newTimeslots.toSorted();
+        return newTimeslots.sort((a, b) => a.value - b.value);
     },
 
-    patchFramerates(framerates) {
+    patchFramerates(framerates: { id: string; value: number; label: string; }[]) {
         const newFramerates = [...framerates];
 
         // Lower framerates than 15FPS have adverse affects on compression, 3 minute clips at 10FPS skyrocket the filesize to 200mb!!
@@ -137,11 +144,11 @@ export default definePlugin({
             id: `${framerate}fps`,
             value: framerate,
             label: getIntlMessage("SCREENSHARE_FPS_ABBREVIATED", {
-                count: framerate
+                fps: framerate
             })
         }));
 
-        return newFramerates.toSorted();
+        return newFramerates.sort((a, b) => a.value - b.value);
     },
 
     getApplicationId(activityName: string) {
