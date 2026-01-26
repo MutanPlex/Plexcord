@@ -20,7 +20,7 @@
 // DO NOT REMOVE UNLESS YOU WISH TO FACE THE WRATH OF THE CIRCULAR DEPENDENCY DEMON!!!!!!!
 import "~plugins";
 
-import { i18n, t } from "./api/i18n";
+import { i18n, t, updater } from "./api/i18n";
 
 export * as Api from "./api";
 export * as Plugins from "./api/PluginManager";
