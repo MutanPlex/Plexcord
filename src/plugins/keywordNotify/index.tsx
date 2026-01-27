@@ -7,8 +7,8 @@
 
 import "./style.css";
 
-import * as DataStore from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
+import { DataStore } from "@api/index";
 import { definePluginSettings } from "@api/Settings";
 import { Button, TextButton } from "@components/Button";
 import { Flex } from "@components/Flex";
@@ -24,9 +24,9 @@ import { useForceUpdater } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy, findCssClassesLazy } from "@webpack";
 import { ChannelStore, FluxDispatcher, Select, SelectedChannelStore, TabBar, TextInput, Tooltip, UserStore, useState } from "@webpack/common";
-import type { PropsWithChildren, SVGAttributes } from "react";
+import type { JSX, PropsWithChildren } from "react";
 
-type IconProps = SVGAttributes<SVGElement>;
+type IconProps = JSX.IntrinsicElements["svg"];
 type KeywordEntry = { regex: string, listIds: Array<string>, listType: ListType, ignoreCase: boolean; };
 
 let keywordEntries: Array<KeywordEntry> = [];
@@ -75,7 +75,7 @@ function highlightKeywords(str: string, entries: Array<KeywordEntry>) {
     let regexes: Array<RegExp>;
     try {
         regexes = entries.map(e => new RegExp(e.regex, "g" + (e.ignoreCase ? "i" : "")));
-    } catch {
+    } catch (err) {
         return [str];
     }
 
@@ -226,12 +226,12 @@ function KeywordEntries() {
                         </Button>
                     </Flex>
                     <FormSwitch
+                        title={t(plugin.keywordNotify.ignoreCase)}
+                        className={cl("ignoreCaseSwitch")}
                         value={values[i].ignoreCase}
                         onChange={() => {
                             setIgnoreCase(i, !values[i].ignoreCase);
                         }}
-                        className={cl("ignoreCaseSwitch")}
-                        title={t(plugin.keywordNotify.ignoreCase)}
                     />
                     <Heading tag="h5">{t(plugin.keywordNotify.whiteblackLabel)}</Heading>
                     <Flex flexDirection="row">
@@ -376,11 +376,11 @@ export default definePlugin({
         interceptor = (e: any) => {
             return this.modify(e);
         };
+
         FluxDispatcher.subscribe("MESSAGE_CREATE", interceptor);
         FluxDispatcher.subscribe("MESSAGE_UPDATE", interceptor);
         FluxDispatcher.subscribe("LOAD_MESSAGES_SUCCESS", interceptor);
     },
-
     stop() {
         FluxDispatcher.unsubscribe("MESSAGE_CREATE", interceptor);
         FluxDispatcher.unsubscribe("MESSAGE_UPDATE", interceptor);
@@ -398,7 +398,7 @@ export default definePlugin({
             let listed = entry.listIds.some(id => id.trim() === m.channel_id || id === m.author.id);
             if (!listed) {
                 const channel = ChannelStore.getChannel(m.channel_id);
-                if (channel !== null) {
+                if (channel != null) {
                     listed = entry.listIds.some(id => id.trim() === channel.guild_id);
                 }
             }
@@ -424,7 +424,7 @@ export default definePlugin({
                     if (safeMatchesRegex(embed.description, entry.regex, flags) || safeMatchesRegex(embed.title, entry.regex, flags)) {
                         matches = true;
                         break;
-                    } else if (embed.fields !== null) {
+                    } else if (embed.fields != null) {
                         for (const field of embed.fields as Array<{ name: string, value: string; }>) {
                             if (safeMatchesRegex(field.value, entry.regex, flags) || safeMatchesRegex(field.name, entry.regex, flags)) {
                                 matches = true;

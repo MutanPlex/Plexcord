@@ -12,15 +12,33 @@ import type { AnchorHTMLAttributes, PropsWithChildren } from "react";
 
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
     disabled?: boolean;
+    useDefaultUnderlineStyles?: boolean;
 }
 
-export function Link({ disabled, className, children, ...restProps }: PropsWithChildren<LinkProps>) {
+export function Link({
+    disabled,
+    useDefaultUnderlineStyles = true,
+    href,
+    rel,
+    target,
+    className,
+    children,
+    ...restProps
+}: PropsWithChildren<LinkProps>) {
+    const isInternal = href && /^(?:discord:\/)?\/[a-zA-Z0-9_-]/.test(href);
+    const needsSafeAttrs = href && !isInternal;
     return (
         <a
             role="link"
-            target="_blank"
-            rel="noreferrer noopener"
-            className={classes("pc-link", disabled && "pc-link-disabled", className)}
+            href={href}
+            target={target ?? (needsSafeAttrs ? "_blank" : undefined)}
+            rel={rel ?? (needsSafeAttrs ? "noreferrer noopener" : undefined)}
+            className={classes(
+                "pc-link",
+                useDefaultUnderlineStyles && "pc-link-underline-on-hover",
+                disabled && "pc-link-disabled",
+                className
+            )}
             aria-disabled={disabled}
             {...restProps}
         >

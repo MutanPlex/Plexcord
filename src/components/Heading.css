@@ -1,51 +1,40 @@
 .pc-h1,
-.pc-h2 {
-    color: var(--text-strong);
-    font-weight: 600;
-}
-
+.pc-h2,
 .pc-h3,
 .pc-h4,
 .pc-h5 {
     color: var(--text-strong);
+    font-family: var(--font-display);
 }
 
 .pc-h1 {
     font-size: 20px;
-    line-height: 24px
+    font-weight: 600;
+    line-height: 1.2;
 }
 
 .pc-h2 {
     font-size: 16px;
-    line-height: 20px
+    font-weight: 600;
+    line-height: 1.25;
 }
 
 .pc-h3 {
-    font-weight: 500;
-    line-height: 24px
-}
-
-.pc-h3,
-.pc-h4 {
-    font-size: 16px
-}
-
-.pc-h4 {
-    font-weight: 600;
-    letter-spacing: .3px
-}
-
-.pc-h4,
-.pc-h5 {
-    line-height: 20px
-}
-
-.pc-h5 {
-    color: var(--text-strong);
     font-size: 16px;
     font-weight: 500;
-    margin-bottom: 8px;
-    text-transform: unset
+    line-height: 1.25;
+}
+
+.pc-h4 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.pc-h5 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.25;
 }
 
 .pc-h1-defaultMargin,

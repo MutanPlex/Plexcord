@@ -92,10 +92,7 @@ function ConnectionsComponent({ id, theme }: { id: string, theme: string; }) {
         return null;
 
     return (
-        <Flex style={{
-            gap: getSpacingPx(settings.store.iconSpacing),
-            flexWrap: "wrap"
-        }}>
+        <Flex gap={getSpacingPx(settings.store.iconSpacing)} flexWrap="wrap">
             {connections.map(connection => <CompactConnectionComponent connection={connection} theme={theme} key={connection.id} />)}
         </Flex>
     );
@@ -149,7 +146,13 @@ function CompactConnectionComponent({ connection, theme }: { connection: Connect
                     : <button
                         {...tooltipProps}
                         className="pc-user-connection"
-                        onClick={() => copyWithToast(connection.name)}
+                        onClick={() => {
+                            if (connection.type === "xbox") {
+                                PlexcordNative.native.openExternal(`https://www.xbox.com/en-US/play/user/${encodeURIComponent(connection.name)}`);
+                            } else {
+                                copyWithToast(connection.name);
+                            }
+                        }}
                     >
                         {img}
                     </button>

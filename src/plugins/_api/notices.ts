@@ -36,8 +36,14 @@ export default definePlugin({
                     replace: "if(Plexcord.Api.Notices.currentNotice)return false;$&"
                 },
                 {
+                    match: /(?<=,NOTICE_DISMISS:function\(\i\){)return null!=(\i)/,
+                    replace: (m, notice) => `if(${notice}?.id=="PlexcordNotice")return(${notice}=null,Plexcord.Api.Notices.nextNotice(),true);${m}`
+                },
+                // FIXME(Bundler agressive inline): Remove the non used compability once enough time has passed
+                {
                     match: /(?<=function (\i)\(\i\){)return null!=(\i)(?=.+?NOTICE_DISMISS:\1)/,
-                    replace: (m, _, notice) => `if(${notice}?.id=="PlexcordNotice")return(${notice}=null,Plexcord.Api.Notices.nextNotice(),true);${m}`
+                    replace: (m, _, notice) => `if(${notice}?.id=="PlexcordNotice")return(${notice}=null,Plexcord.Api.Notices.nextNotice(),true);${m}`,
+                    noWarn: true
                 }
             ]
         }

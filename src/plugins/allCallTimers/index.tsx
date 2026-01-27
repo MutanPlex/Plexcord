@@ -194,7 +194,7 @@ export default definePlugin({
 
     patches: [
         {
-            find: "VOICE_PANEL}};",
+            find: "VOICE_PANEL}}",
             replacement: [
                 {
                     match: /user:(\i).*?\.EMBEDDED.{0,25};(?=return 0!==(\i)\.length)/,

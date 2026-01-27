@@ -1,0 +1,114 @@
+.pc-notice-container {
+    border-radius: var(--radius-sm, 8px);
+    box-sizing: border-box;
+    display: grid;
+    font-weight: 500;
+    grid-template-rows: 1fr;
+    padding: 8px;
+    width: 100%;
+    transition-duration: var(--expand-structural-duration, 0.2s);
+    transition-property: grid-template-rows, padding-bottom, padding-top, border-width;
+    transition-timing-function: var(--expand-easing-function, ease);
+}
+
+.pc-notice-hidden {
+    border-width: 0;
+    grid-template-rows: 0fr;
+    padding-bottom: 0;
+    padding-top: 0;
+    transition-delay: var(--collapse-fade-duration, 0.1s);
+    transition-duration: var(--collapse-structural-duration, 0.2s);
+    transition-timing-function: var(--collapse-easing-function, ease);
+}
+
+.pc-notice-inner {
+    display: flex;
+    min-height: 0;
+    opacity: 1;
+    overflow: hidden;
+    transition: opacity var(--expand-fade-duration, 0.1s) var(--expand-easing-function, ease) var(--expand-structural-duration, 0.2s);
+}
+
+.pc-notice-hidden .pc-notice-inner {
+    opacity: 0;
+    transition-delay: 0s;
+    transition-duration: var(--collapse-fade-duration, 0.1s);
+    transition-timing-function: var(--collapse-easing-function, ease);
+}
+
+.pc-notice-icon-wrapper {
+    display: flex;
+}
+
+.pc-notice-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.pc-notice-text {
+    align-self: center;
+    flex: 1 1 0%;
+    margin-left: var(--space-8, 8px);
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2857;
+    color: var(--text-default);
+}
+
+.pc-notice-text p {
+    margin: 0;
+}
+
+.pc-notice-text p ~ p {
+    margin-top: 8px;
+}
+
+.pc-notice-action {
+    margin: auto 0 auto 16px;
+}
+
+/* Info variant */
+.pc-notice-info {
+    background: var(--background-feedback-info);
+    border: 1px solid var(--icon-feedback-info);
+    color: var(--text-feedback-info);
+}
+
+.pc-notice-info .pc-notice-icon {
+    color: var(--icon-feedback-info);
+}
+
+/* Warning variant */
+.pc-notice-warning {
+    background: var(--background-feedback-warning);
+    border: 1px solid var(--icon-feedback-warning);
+    color: var(--text-feedback-warning);
+}
+
+.pc-notice-warning .pc-notice-icon {
+    color: var(--icon-feedback-warning);
+}
+
+/* Danger variant */
+.pc-notice-danger {
+    background: var(--background-feedback-critical);
+    border: 1px solid var(--icon-feedback-critical);
+    color: var(--text-feedback-critical);
+}
+
+.pc-notice-danger .pc-notice-icon {
+    color: var(--icon-feedback-critical);
+}
+
+/* Positive variant */
+.pc-notice-positive {
+    background: var(--background-feedback-positive);
+    border: 1px solid var(--icon-feedback-positive);
+    color: var(--text-feedback-positive);
+}
+
+.pc-notice-positive .pc-notice-icon {
+    color: var(--icon-feedback-positive);
+}

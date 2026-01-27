@@ -42,7 +42,7 @@ export default definePlugin({
 
     settingsAboutComponent() {
         return (
-            <Card variant="normal">
+            <Card variant="primary">
                 <Flex flexDirection="column" gap="4px">
                     <Paragraph size="md" weight="semibold">{t(plugin.fixImagesQuality.modal.about.title)}</Paragraph>
                     <Paragraph>

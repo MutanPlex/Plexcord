@@ -23,7 +23,7 @@ export default definePlugin({
 
     patches: [
         {
-            find: ".VOICE_PANEL}};",
+            find: ".VOICE_PANEL}}",
             replacement: [
                 {
                     match: /\[\i\.\i\]:\i\}\),children:\[/,
