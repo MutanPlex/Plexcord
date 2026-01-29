@@ -202,23 +202,11 @@ export default definePlugin({
 
     getColorString(userId: string, channelOrGuildId: string | null | undefined) {
         try {
-            if (!channelOrGuildId) {
-                new Logger("RoleColorEverywhere").warn("channelOrGuildId is null/undefined for user:", userId);
-                return null;
-            }
 
-            const guildId = ChannelStore.getChannel(channelOrGuildId)?.guild_id ?? GuildStore.getGuild(channelOrGuildId)?.id;
-            if (guildId == null) {
-                new Logger("RoleColorEverywhere").warn("guildId is null for channelOrGuildId:", channelOrGuildId, "user:", userId);
-                return null;
-            }
+            const guildId = ChannelStore.getChannel(channelOrGuildId!)?.guild_id ?? GuildStore.getGuild(channelOrGuildId!)?.id;
 
             const member = GuildMemberStore.getMember(guildId, userId);
             const result = member?.colorStrings ?? (member?.colorString ? { primaryColor: member.colorString, secondaryColor: null, tertiaryColor: null } : null);
-
-            if (!result && member) {
-                new Logger("RoleColorEverywhere").warn("No color found for user:", userId, "in guild:", guildId, "member:", member);
-            }
 
             return result;
         } catch (e) {
