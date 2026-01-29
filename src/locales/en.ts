@@ -377,7 +377,8 @@ const translations = {
                     title: "Message Popover Buttons",
                     description: "These are the floating buttons on the right when you hover over a message"
                 }
-            }
+            },
+            button: "Buttons of enabled plugins will appear here."
         }
     },
 
@@ -759,6 +760,8 @@ const translations = {
         updates: "Updates",
         updated: "has been updated!",
         restart: "Click here to restart",
+        repaired: "Plexcord has been repaired!",
+        ok: "Ok",
         preferences: {
             title: "Update Preferences",
             description: "Control how Plexcord keeps itself up to date. You can choose to update automatically in the background or be notified when new updates are available.",
@@ -2963,7 +2966,7 @@ const translations = {
                 },
                 whitelistedLoggers: {
                     label: "Whitelisted Loggers",
-                    description: "Semi colon separated list of loggers to allow even if others are hidden"
+                    description: "Semicolon (;) separated list of loggers to allow even if others are hidden"
                 },
                 allowLevel: {
                     label: "Allow Level",
@@ -4638,7 +4641,10 @@ const translations = {
                 notebook: {
                     title: "NOTEBOOK",
                     search: "Search for a message...",
+                    options: "Sort Options",
                     label: "Sort Menu",
+                    filteredOf: "{{filteredCount}} of {{noteCount}} note{{s}}",
+                    note: "{{noteCount}} note{{s}}",
                     ada: "Ascending / Date Added",
                     amd: "Ascending / Message Date",
                     dda: "Descending / Date Added",
@@ -6790,7 +6796,8 @@ const translations = {
                     markAsIgnored: "Mark as Ignored",
                     unmarkAsIgnored: "Unmark as Ignored",
                     stopAuto: "Stop Auto-Complete",
-                    copyQuestID: "Copy Quest ID"
+                    copyQuestID: "Copy Quest ID",
+                    startAuto: "Start Auto-Complete"
                 }
             },
             settings: {
@@ -7143,7 +7150,8 @@ const translations = {
                 completing: "Completing",
                 resume: "Resume (~{{remainTime}})",
                 complete: "Complete {{remainTime}}",
-                completeImmediate: "Complete (Immediate)"
+                completeImmediate: "Complete (Immediate)",
+                completed: "Completed"
             },
             reward: {
                 orbs: "{{completingText}} for {{orbQuantity}} Orbs.",

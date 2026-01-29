@@ -21,6 +21,14 @@
     gap: 4px;
 }
 
+.pc-settings-modal-content {
+    padding-bottom: 24px;
+}
+
+.pc-plugin-modal-info {
+    align-items: center;
+}
+
 .pc-plugin-modal-title {
     color: var(--text-strong);
     padding-right: 32px;

@@ -12,13 +12,11 @@ import { PaintbrushIcon } from "@components/Icons";
 import { PcDevs } from "@utils/constants";
 import { closeModal, openModal } from "@utils/modal";
 import definePlugin from "@utils/types";
-import { extractAndLoadChunksLazy, findCssClassesLazy, findStoreLazy } from "@webpack";
+import { extractAndLoadChunksLazy, findStoreLazy } from "@webpack";
 import { ChannelStore, DraftType, FluxDispatcher, Menu, SelectedChannelStore, UploadHandler } from "@webpack/common";
 
 import RemixModal from "./RemixModal";
 import css from "./styles.css?managed";
-
-const OptionClasses = findCssClassesLazy("optionName", "optionIcon", "optionLabel");
 
 const requireCreateStickerModal = extractAndLoadChunksLazy([".CREATE_STICKER_MODAL,", "isDisplayingIndividualStickers"]);
 const requireSettingsMenu = extractAndLoadChunksLazy(['name:"UserSettings"'], /createPromise:.{0,20}(\i\.\i\("?.+?"?\).*?).then\(\i\.bind\(\i,"?(.+?)"?\)\).{0,50}"UserSettings"/);
@@ -30,12 +28,12 @@ const UploadContextMenuPatch: NavContextMenuPatchCallback = (children, props) =>
 
     children.push(<Menu.MenuItem
         id="pc-remix"
-        label={
-            <div className={OptionClasses.optionLabel}>
-                <PaintbrushIcon className={OptionClasses.optionIcon} height={24} width={24} />
-                <div className={OptionClasses.optionName}>{t(plugin.remix.label)}</div>
-            </div>
-        }
+        iconLeft={PaintbrushIcon}
+        leadingAccessory={{
+            type: "icon",
+            icon: PaintbrushIcon
+        }}
+        label={t(plugin.remix.label)}
         action={() => {
             const key = openModal(props =>
                 <RemixModal modalProps={props} close={() => closeModal(key)} />

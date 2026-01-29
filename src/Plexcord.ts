@@ -28,7 +28,7 @@ export * as QuickCss from "./api/Themes";
 export * as Components from "./components";
 export * as Util from "./utils";
 export * as Updater from "./utils/updater";
-import { showNotice } from "./api/Notices";
+import { popNotice, showNotice } from "./api/Notices";
 export * as Webpack from "./webpack";
 export * as WebpackPatcher from "./webpack/patchWebpack";
 export { PlainSettings, Settings };
@@ -48,7 +48,7 @@ import { PlainSettings, Settings, SettingsStore } from "./api/Settings";
 import { getCloudSettings, putCloudSettings, shouldCloudSync } from "./api/SettingsSync/cloudSync";
 import { localStorage } from "./utils/localStorage";
 import { relaunch } from "./utils/native";
-import { checkForUpdates, update, UpdateLogger } from "./utils/updater";
+import { checkForUpdates, isOutdated as getIsOutdated, update, UpdateLogger } from "./utils/updater";
 import { onceReady } from "./webpack";
 import { openUserSettingsPanel } from "./webpack/common";
 import { patches } from "./webpack/patchWebpack";
@@ -145,6 +145,7 @@ async function runUpdateCheck() {
 
     try {
         const isOutdated = await checkForUpdates();
+        if (IS_DISCORD_DESKTOP) PlexcordNative.tray.setUpdateState(isOutdated);
         if (!isOutdated) return;
 
         if (Settings.autoUpdate) {
@@ -175,6 +176,39 @@ async function runUpdateCheck() {
     }
 }
 
+function initTrayIpc() {
+    if (IS_WEB || IS_UPDATER_DISABLED) return;
+
+    PlexcordNative.tray.onCheckUpdates(async () => {
+        try {
+            const isOutdated = await checkForUpdates();
+            PlexcordNative.tray.setUpdateState(isOutdated);
+
+            if (isOutdated) {
+                showNotice(t(updater.updateAvailable), t(updater.click), () => openSettingsTabModal(UpdaterTab!));
+            } else {
+                showNotice(t(updater.current), t(updater.ok), popNotice);
+            }
+        } catch (err) {
+            UpdateLogger.error("Failed to check for updates from tray", err);
+            showNotice(t(updater.error.check), t(updater.ok), popNotice);
+        }
+    });
+
+    PlexcordNative.tray.onRepair(async () => {
+        try {
+            const res = await PlexcordNative.updater.rebuild();
+            if (!res.ok) throw res.error;
+
+            showNotice(t(updater.repaired), t(updater.restart), relaunch);
+        } catch (err) {
+            UpdateLogger.error("Failed to repair Plexcord", err);
+        }
+    });
+
+    PlexcordNative.tray.setUpdateState(getIsOutdated);
+}
+
 async function init() {
     await onceReady;
 
@@ -187,6 +221,7 @@ async function init() {
     startAllPlugins(StartAt.WebpackReady);
 
     syncSettings();
+    initTrayIpc();
 
     if (!IS_WEB && !IS_UPDATER_DISABLED) {
         runUpdateCheck();

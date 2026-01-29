@@ -38,7 +38,7 @@ import { ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, openModa
 import { useAwaiter } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { chooseFile } from "@utils/web";
-import { findCssClassesLazy, findLazy, findStoreLazy } from "@webpack";
+import { findLazy, findStoreLazy } from "@webpack";
 import { Constants, FluxDispatcher, lodash, Menu, MessageActions, PermissionsBits, PermissionStore, RestAPI, SelectedChannelStore, showToast, SnowflakeUtils, Toasts, useEffect, useState } from "@webpack/common";
 
 import { VoiceRecorderDesktop } from "./components/DesktopRecorder";
@@ -61,7 +61,6 @@ const EMPTY_META: AudioMetadata = {
 
 const CloudUploadConstructor = findLazy(m => m.prototype?.trackUploadFinished) as typeof CloudUpload;
 const PendingReplyStore = findStoreLazy("PendingReplyStore");
-const OptionClasses = findCssClassesLazy("optionName", "optionIcon", "optionLabel");
 
 export const cl = classNameFactory("pc-vmsg-");
 
@@ -161,15 +160,12 @@ const ctxMenuPatch: NavContextMenuPatchCallback = (children, props) => {
     children.push(
         <Menu.MenuItem
             id="pc-send-vmsg"
-            label={
-                <div className={OptionClasses.optionLabel}>
-                    <Microphone className={OptionClasses.optionIcon} height={24} width={24} />
-                    <div className={OptionClasses.optionName}>
-                        {t(plugin.voiceMessages.context.sendVoiceMessage)}
-                        {!hasPermission && <span style={{ fontSize: "smaller", opacity: 0.6 }}> {t(plugin.voiceMessages.context.missingPermissions)}</span>}
-                    </div>
-                </div>
-            }
+            iconLeft={Microphone}
+            leadingAccessory={{
+                type: "icon",
+                icon: Microphone
+            }}
+            label={t(plugin.voiceMessages.context.sendVoiceMessage)}
             action={() => openModal(modalProps => <Modal modalProps={modalProps} />)}
             disabled={!hasPermission}
         />

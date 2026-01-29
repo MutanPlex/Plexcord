@@ -27,7 +27,7 @@ import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import { wordsToTitle } from "@utils/text";
 import definePlugin, { ReporterTestable } from "@utils/types";
-import { ChannelStore, GuildMemberStore, SelectedChannelStore, SelectedGuildStore, useMemo, UserStore, VoiceStateStore } from "@webpack/common";
+import { AuthenticationStore, ChannelStore, GuildMemberStore, SelectedChannelStore, SelectedGuildStore, useMemo, UserStore, VoiceStateStore } from "@webpack/common";
 import { ReactElement } from "react";
 
 import { getCurrentVoice, settings } from "./settings";
@@ -40,6 +40,7 @@ interface VoiceStateChangeEvent {
     mute: boolean;
     selfDeaf: boolean;
     selfMute: boolean;
+    sessionId: string;
 }
 
 // Mute/Deaf for other people than you is commented out, because otherwise someone can spam it and it will be annoying
@@ -159,6 +160,7 @@ export default definePlugin({
             for (const state of voiceStates) {
                 const { userId, channelId, oldChannelId } = state;
                 const isMe = userId === myId;
+                if (isMe && state.sessionId !== AuthenticationStore.getSessionId()) continue;
                 if (!isMe) {
                     if (!myChanId) continue;
                     if (channelId !== myChanId && oldChannelId !== myChanId) continue;

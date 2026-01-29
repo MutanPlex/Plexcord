@@ -121,7 +121,8 @@ const settings = definePluginSettings({
         label: () => t(plugin.messageLinkEmbeds.option.idList.label),
         description: () => t(plugin.messageLinkEmbeds.option.idList.description),
         type: OptionType.STRING,
-        default: ""
+        default: "",
+        multiline: true,
     },
     clearMessageCache: {
         label: () => t(plugin.messageLinkEmbeds.option.clearMessageCache.label),

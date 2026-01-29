@@ -30,7 +30,7 @@ import { classes } from "@utils/misc";
 import { openModalLazy } from "@utils/modal";
 import { useForceUpdater } from "@utils/react";
 import definePlugin, { StartAt } from "@utils/types";
-import { extractAndLoadChunksLazy, findComponentByCodeLazy, findCssClassesLazy, findModuleId, wreq } from "@webpack";
+import { extractAndLoadChunksLazy, findComponentByCodeLazy, findModuleId, wreq } from "@webpack";
 import { Clickable, Menu, OverridePremiumTypeStore, Toasts, useState } from "@webpack/common";
 
 import managedStyle from "./fixActionBar.css?managed";
@@ -74,7 +74,6 @@ interface DiscordStatus {
     status: "online" | "dnd" | "idle" | "invisible";
 }
 
-const StatusStyles = findCssClassesLazy("statusItem", "menuItemIcon", "status");
 // TODO: find clearCustomStatusHint original css/svg or replace
 const PMenu = findComponentByCodeLazy("#{intl::MORE_OPTIONS}", ".ChevronSmallRightIcon");
 const EmojiComponent = findComponentByCodeLazy(/\.translateSurrogatesToInlineEmoji\(\i\.name\);/);
@@ -104,12 +103,12 @@ function setStatus(status: DiscordStatus) {
     });
 }
 
-const ClearStatusButton = () => <Clickable className={StatusStyles.menuItemIcon} onClick={e => { e.stopPropagation(); CustomStatusSettings?.updateSetting(null); }}><PlusSmallIcon className={"pc-sp-icon"} /></Clickable>;
+const ClearStatusButton = () => <Clickable onClick={e => { e.stopPropagation(); CustomStatusSettings?.updateSetting(null); }}><PlusSmallIcon className={"pc-sp-icon"} /></Clickable>;
 
 function StatusIcon({ isHovering, status }: { isHovering: boolean; status: DiscordStatus; }) {
-    return <div className={StatusStyles.status}>{isHovering ?
+    return <div>{isHovering ?
         <PlusSmallIcon className={"pc-sp-icon"} />
-        : (status.emoji != null ? <EmojiComponent emoji={status.emoji} animate={true} hideTooltip={false} size="24px" /> : <div className={StatusStyles.menuItemIcon} />)}</div>;
+        : (status.emoji != null ? <EmojiComponent emoji={status.emoji} animate={true} hideTooltip={false} size="24px" /> : <div />)}</div>;
 }
 
 const RenderStatusMenuItem = ({ status, update, disabled }: { status: DiscordStatus; update: () => void; disabled: boolean; }) => {
@@ -122,7 +121,7 @@ const RenderStatusMenuItem = ({ status, update, disabled }: { status: DiscordSta
         setIsHovering(false);
     };
 
-    return <div className={classes(StatusStyles.statusItem, "pc-sp-item", disabled ? "pc-sp-disabled" : null)}
+    return <div className={classes("pc-sp-item", disabled ? "pc-sp-disabled" : null)}
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}>
         <Clickable
@@ -132,7 +131,7 @@ const RenderStatusMenuItem = ({ status, update, disabled }: { status: DiscordSta
                 await saveStatusPresets();
                 update();
             }}><StatusIcon isHovering={isHovering} status={status} /></Clickable>
-        <div className={StatusStyles.status} style={{ marginLeft: "2px" }}>{status.state}</div>
+        <div style={{ marginLeft: "2px" }}>{status.state}</div>
     </div >;
 };
 
@@ -188,9 +187,7 @@ export default definePlugin({
                         action="PRESS_SET_STATUS"
                         onClick={openCustomStatusModalLazy}
                         icon={
-                            () => <div
-                                className={StatusStyles.menuItemIcon}
-                            />
+                            () => <div />
                         }
                         label={t(plugin.statusPresets.context.set)}
                         renderSubmenu={StatusSubMenuComponent}

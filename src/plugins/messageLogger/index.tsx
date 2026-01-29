@@ -386,18 +386,21 @@ const settings = definePluginSettings({
         description: () => t(plugin.messageLogger.option.ignoreUsers.description),
         type: OptionType.STRING,
         default: "",
+        multiline: true
     },
     ignoreChannels: {
         label: () => t(plugin.messageLogger.option.ignoreChannels.label),
         description: () => t(plugin.messageLogger.option.ignoreChannels.description),
         type: OptionType.STRING,
         default: "",
+        multiline: true
     },
     ignoreGuilds: {
         label: () => t(plugin.messageLogger.option.ignoreGuilds.label),
         description: () => t(plugin.messageLogger.option.ignoreGuilds.description),
         type: OptionType.STRING,
         default: "",
+        multiline: true
     },
     showEditDiffs: {
         label: () => t(plugin.messageLogger.option.showEditDiffs.label),

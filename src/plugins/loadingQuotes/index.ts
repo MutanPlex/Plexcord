@@ -51,6 +51,7 @@ const settings = definePluginSettings({
         description: () => t(plugin.loadingQuotes.option.additionalQuotes.description),
         type: OptionType.STRING,
         default: "",
+        multiline: true
     },
     additionalQuotesDelimiter: {
         label: () => t(plugin.loadingQuotes.option.additionalQuotesDelimiter.label),

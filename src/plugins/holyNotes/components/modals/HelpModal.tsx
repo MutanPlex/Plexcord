@@ -10,7 +10,6 @@ import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Margins } from "@components/margins";
 import { Paragraph } from "@components/Paragraph";
-import { statusTagGreen } from "@plugins/holyNotes";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
 import { downloadNotes, uploadNotes } from "@plugins/holyNotes/utils";
 import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
@@ -25,13 +24,13 @@ export default ({ onClose, ...modalProps }: ModalProps & { onClose: () => void; 
             </ModalHeader>
             <ModalContent>
                 <div className="pc-help-markdown">
-                    <BaseText>{t(plugin.holyNotes.modal.help.addingNotes)}</BaseText>
+                    <BaseText size="md">{t(plugin.holyNotes.modal.help.addingNotes)}</BaseText>
                     <Paragraph>
                         {t(plugin.holyNotes.modal.help.addingNotesText)}
 
                     </Paragraph>
                     <div className={Margins.top16}>
-                        <span className={statusTagGreen}>
+                        <span className="pc-help-protip">
                             {t(plugin.holyNotes.modal.help.prototype)}:
                         </span>{" "}
                     </div>
@@ -39,17 +38,17 @@ export default ({ onClose, ...modalProps }: ModalProps & { onClose: () => void; 
                         {t(plugin.holyNotes.modal.help.noteMessage)}
                     </Paragraph>
                     <hr />
-                    <BaseText>{t(plugin.holyNotes.modal.help.deletingNotes)}</BaseText>
+                    <BaseText size="md">{t(plugin.holyNotes.modal.help.deletingNotes)}</BaseText>
                     <Paragraph>
                         {t(plugin.holyNotes.modal.help.deletingNotesText)}
                     </Paragraph>
                     <hr />
-                    <BaseText>{t(plugin.holyNotes.modal.help.movingNotes)}</BaseText>
+                    <BaseText size="md">{t(plugin.holyNotes.modal.help.movingNotes)}</BaseText>
                     <Paragraph>
                         {t(plugin.holyNotes.modal.help.movingNotesText)}
                     </Paragraph>
                     <hr />
-                    <BaseText>{t(plugin.holyNotes.modal.help.jumpToMessage)}</BaseText>
+                    <BaseText size="md">{t(plugin.holyNotes.modal.help.jumpToMessage)}</BaseText>
                     <Paragraph>
                         {t(plugin.holyNotes.modal.help.jumpToMessageText)}
                     </Paragraph>

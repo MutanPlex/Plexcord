@@ -380,7 +380,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Mesaj Açılır Butonları",
                     description: "Bunlar, bir mesajın üzerine geldiğinizde sağda beliren yüzen butonlardır"
                 }
-            }
+            },
+            button: "Etkinleştirilen eklentilerin butonları burada görünecektir."
         }
     },
 
@@ -762,6 +763,8 @@ const translations: MatchStructure<typeof enTranslations> = {
         updates: "Güncellemeler",
         updated: "güncellendi!",
         restart: "Buraya tıklayarak yeniden başlatın",
+        repaired: "Plexcord onarıldı!",
+        ok: "Tamam",
         preferences: {
             title: "Güncelleme Tercihleri",
             description: "Plexcord'un kendini nasıl güncel tuttuğunu kontrol edin. Arka planda otomatik olarak güncellemeyi seçebilir veya yeni güncellemeler mevcut olduğunda bildirim alabilirsiniz.",
@@ -2966,7 +2969,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 whitelistedLoggers: {
                     label: "Beyaz Listeye Alınmış Logger’lar",
-                    description: "Diğerleri gizlense bile izin verilecek logger’ların noktalı virgülle ayrılmış listesi"
+                    description: "Diğerleri gizlense bile izin verilecek logger’ların noktalı virgülle (;) ayrılmış listesi"
                 },
                 allowLevel: {
                     label: "İzin Verilen Seviye",
@@ -4642,7 +4645,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 notebook: {
                     title: "NOT DEFTERİ",
                     search: "Bir mesaj ara...",
+                    options: "Sıralama Seçenekleri",
                     label: "Sıralama Menüsü",
+                    filteredOf: "{{filteredCount}}/{{noteCount}} not",
+                    note: "{{noteCount}} not",
                     ada: "Artan / Eklenme Tarihi",
                     amd: "Artan / Mesaj Tarihi",
                     dda: "Azalan / Eklenme Tarihi",
@@ -6794,7 +6800,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     markAsIgnored: "Yoksay Olarak İşaretle",
                     unmarkAsIgnored: "Yoksaymayı Kaldır",
                     stopAuto: "Otomatik Tamamlamayı Durdur",
-                    copyQuestID: "Görev ID'sini Kopyala"
+                    copyQuestID: "Görev ID'sini Kopyala",
+                    startAuto: "Otomatik Tamamlamayı Başlat"
                 }
             },
             settings: {
@@ -7147,7 +7154,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 completing: "Tamamlanıyor",
                 resume: "Devam Et (~{{remainTime}})",
                 complete: "Tamamla {{remainTime}}",
-                completeImmediate: "Tamamla (Hemen)"
+                completeImmediate: "Tamamla (Hemen)",
+                completed: "Tamamlandı"
             },
             reward: {
                 orbs: "{{orbQuantity}} Orbs için {{completingText}}.",

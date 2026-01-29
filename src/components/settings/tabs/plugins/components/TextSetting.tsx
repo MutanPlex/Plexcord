@@ -19,7 +19,7 @@
 
 import { plugins, t } from "@api/i18n";
 import { PluginOptionString } from "@utils/types";
-import { React, TextInput, useState } from "@webpack/common";
+import { React, TextArea, TextInput, useState } from "@webpack/common";
 
 import { resolveError, SettingProps, SettingsSection } from "./Common";
 
@@ -40,15 +40,23 @@ export function TextSetting({ option, pluginSettings, definedSettings, id, onCha
 
     return (
         <SettingsSection name={id} description={option.description} label={option.label} error={error}>
-            <TextInput
-                type="text"
-                placeholder={(option.placeholder ? (typeof option.placeholder === "function" ? option.placeholder() : option.placeholder) : undefined) ?? t(plugins.placeholder.text)}
-                value={state}
-                onChange={handleChange}
-                maxLength={null}
-                disabled={option.disabled?.call(definedSettings) ?? false}
-                {...option.componentProps}
-            />
+            {option.multiline
+                ? <TextArea
+                    placeholder={(option.placeholder ? (typeof option.placeholder === "function" ? option.placeholder() : option.placeholder) : undefined) ?? t(plugins.placeholder.text)}
+                    value={state}
+                    onChange={handleChange}
+                    disabled={option.disabled?.call(definedSettings) ?? false}
+                    {...option.componentProps} />
+                : <TextInput
+                    type="text"
+                    placeholder={(option.placeholder ? (typeof option.placeholder === "function" ? option.placeholder() : option.placeholder) : undefined) ?? t(plugins.placeholder.text)}
+                    value={state}
+                    onChange={handleChange}
+                    maxLength={null}
+                    disabled={option.disabled?.call(definedSettings) ?? false}
+                    {...option.componentProps}
+                />
+            }
         </SettingsSection>
     );
 }

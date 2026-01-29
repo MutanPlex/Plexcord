@@ -30,12 +30,14 @@ const settings = definePluginSettings({
         description: () => t(plugin.noReplyMention.option.userList.description),
         type: OptionType.STRING,
         default: "1234567890123445,1234567890123445",
+        multiline: true,
     },
     roleList: {
         label: () => t(plugin.noReplyMention.option.roleList.label),
         description: () => t(plugin.noReplyMention.option.roleList.description),
         type: OptionType.STRING,
         default: "1234567890123445,1234567890123445",
+        multiline: true
     },
     shouldPingListed: {
         label: () => t(plugin.noReplyMention.option.shouldPingListed.label),

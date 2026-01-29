@@ -90,6 +90,7 @@ const settings = definePluginSettings({
         description: () => t(plugin.consoleJanitor.option.whitelistedLoggers.description),
         type: OptionType.STRING,
         default: "GatewaySocket; Routing/Utils",
+        multiline: true,
         onChange(newVal: string) {
             logAllow.clear();
             newVal.split(";").map(x => x.trim()).forEach(logAllow.add.bind(logAllow));

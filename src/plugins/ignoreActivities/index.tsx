@@ -16,7 +16,7 @@ import { Paragraph } from "@components/Paragraph";
 import { Devs } from "@utils/constants";
 import { Margins } from "@utils/margins";
 import definePlugin, { OptionType } from "@utils/types";
-import { RunningGameStore, showToast, TextInput, Toasts, Tooltip, useEffect, useState } from "@webpack/common";
+import { RunningGameStore, showToast, TextArea, Toasts, Tooltip, useEffect, useState } from "@webpack/common";
 
 const enum ActivitiesTypes {
     Game,
@@ -136,7 +136,7 @@ function IdsListComponent(props: { setValue: (value: string) => void; }) {
         <section>
             <Heading>{t(plugin.ignoreActivities.modal.filter.title)}</Heading>
             <Paragraph className={Margins.bottom8}>{t(plugin.ignoreActivities.modal.filter.description)}</Paragraph>
-            <TextInput
+            <TextArea
                 type="text"
                 value={idsList}
                 onChange={handleChange}

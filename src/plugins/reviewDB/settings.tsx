@@ -20,6 +20,7 @@
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
+import { openInviteModal } from "@utils/discord";
 import { OptionType } from "@utils/types";
 
 import { authorize, getToken } from "./auth";
@@ -76,7 +77,7 @@ export const settings = definePluginSettings({
                     {t(plugin.reviewDB.option.buttons.support)}
                 </Button>
 
-                <Button onClick={async () => {
+                <Button variant="link" onClick={async () => {
                     let url = "https://reviewdb.mantikafasi.dev";
                     const token = await getToken();
                     if (token)
@@ -87,9 +88,7 @@ export const settings = definePluginSettings({
                     {t(plugin.reviewDB.option.buttons.website)}
                 </Button>
 
-                <Button onClick={() => {
-                    PlexcordNative.native.openExternal("https://discord.gg/eWPBSbvznt");
-                }}>
+                <Button variant="link" onClick={() => openInviteModal("eWPBSbvznt")}>
                     {t(plugin.reviewDB.option.buttons.server)}
                 </Button>
             </div >
