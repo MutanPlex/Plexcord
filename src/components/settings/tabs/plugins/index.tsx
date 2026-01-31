@@ -94,7 +94,7 @@ function LanguageSelector() {
 
 function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetCheckAndDo, enabledStockPlugins, totalStockPlugins, enabledUserPlugins, totalUserPlugins }) {
     return (
-        <Card variant={required ? "warning" : "normal"} className={cl("info-card")}>
+        <Card variant={required ? "warning" : "primary"} className={cl("info-card")}>
             {required
                 ? (
                     <>
