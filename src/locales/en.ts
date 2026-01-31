@@ -4605,7 +4605,8 @@ const translations = {
             button: {
                 tooltip: "Holy Notes",
                 save: "Save Note",
-                addNote: "Add Note",
+                cancel: "Cancel",
+                noteMessage: "Note Message",
                 refresh: "Refresh Avatars",
                 import: "Import Notes",
                 export: "Export Notes",
@@ -4621,12 +4622,13 @@ const translations = {
             },
             modal: {
                 error: {
-                    generic: "There was an error parsing your notes! The issue was logged in your console, press CTRL + I to access it! Please visit the support server if you need extra help!",
+                    generic: "There was an error parsing your notes. Check the console for details.",
                     easter: "No notes were found. Empathy banana is here for you.",
                     empty: "No notes were found saved in this notebook."
                 },
                 help: {
-                    title: "Help Modal",
+                    title: "Help",
+                    description: "Learn how to use Holy Notes",
                     addingNotes: "Adding Notes",
                     addingNotesText: "To add a note right click on a message then hover over the 'Note Message' item and click the button with the notebook name you would like to note the message to.",
                     prototype: "Prototype",
@@ -4657,10 +4659,12 @@ const translations = {
                 },
                 create: {
                     title: "Create Notebook",
+                    description: "Enter a name for your new notebook",
                     placeholder: "Notebook Name"
                 },
                 delete: {
-                    title: "Confirm Deletion",
+                    title: "Delete {{notebookName}}?",
+                    description: "{{noteCount}} note{{s}} will be deleted permanently",
                     button: "Delete"
                 },
                 tabs: {
@@ -4677,7 +4681,7 @@ const translations = {
                 refreshed: "Successfully refreshed avatars.",
                 deletedAll: "Successfully deleted all notes.",
                 imported: "Successfully imported notes.",
-                invalid: "Invalid JSON."
+                invalid: "Failed to import notes."
             },
             toolbox: {
                 action: "Open Notes"

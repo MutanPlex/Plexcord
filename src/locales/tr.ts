@@ -4609,7 +4609,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             button: {
                 tooltip: "Holy Notes",
                 save: "Notu Kaydet",
-                addNote: "Notlara Ekle",
+                cancel: "İptal",
+                noteMessage: "Mesajı Not Et",
                 refresh: "Avatarları Yenile",
                 import: "Notları İçe Aktar",
                 export: "Notları Dışa Aktar",
@@ -4625,12 +4626,13 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             modal: {
                 error: {
-                    generic: "Notların işlenirken bir hata oluştu! Hata konsoluna kaydedildi, CTRL + I tuşuna basarak erişebilirsin! Ek yardım için destek sunucusuna katıl!",
+                    generic: "Notların işlenirken bir hata oluştu. Detaylar için konsolu kontrol edin.",
                     easter: "Hiç not bulunamadı. Empati muzu seninle.",
                     empty: "Bu not defterinde kayıtlı not yok."
                 },
                 help: {
-                    title: "Yardım Penceresi",
+                    title: "Yardım",
+                    description: "Holy Notes nasıl kullanılır öğren",
                     addingNotes: "Not Ekleme",
                     addingNotesText: "Bir not eklemek için bir mesaja sağ tıkla, 'Mesajı Not Et' seçeneğinin üzerine gel ve notu eklemek istediğin defteri seç.",
                     prototype: "Prototip",
@@ -4661,10 +4663,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 create: {
                     title: "Not Defteri Oluştur",
+                    description: "Yeni not defterinin adını gir",
                     placeholder: "Not Defteri Adı"
                 },
                 delete: {
-                    title: "Silmeyi Onayla",
+                    title: "{{notebookName}} Silinsin Mi?",
+                    description: "{{noteCount}} not kalıcı olarak silinecek",
                     button: "Sil"
                 },
                 tabs: {
@@ -4681,7 +4685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 refreshed: "Avatarlar başarıyla yenilendi.",
                 deletedAll: "Tüm notlar başarıyla silindi.",
                 imported: "Notlar başarıyla içe aktarıldı.",
-                invalid: "Geçersiz JSON."
+                invalid: "Notlar içe aktarılamadı."
             },
             toolbox: {
                 action: "Notları Aç"

@@ -106,7 +106,8 @@ export default {
     tray: {
         setUpdateState: (available: boolean) => ipcRenderer.send(IpcEvents.SET_TRAY_UPDATE_STATE, available),
         onCheckUpdates: (cb: () => void) => { ipcRenderer.on(IpcEvents.TRAY_CHECK_UPDATES, cb); },
-        onRepair: (cb: () => void) => { ipcRenderer.on(IpcEvents.TRAY_REPAIR_PLEXCORD, cb); },
+        onRepair: (cb: () => void) => { ipcRenderer.on(IpcEvents.TRAY_REPAIR, cb); },
+        onAbout: (cb: () => void) => { ipcRenderer.on(IpcEvents.TRAY_ABOUT, cb); },
     },
 
     pluginHelpers: PluginHelpers

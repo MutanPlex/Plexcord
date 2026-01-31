@@ -54,6 +54,7 @@ export const enum IpcEvents {
     PRELOAD_GET_RENDERER_JS = "PlexcordPreloadGetRendererJs",
 
     SET_TRAY_UPDATE_STATE = "PlexcordSetTrayUpdateState",
-    TRAY_REPAIR_PLEXCORD = "PlexcordTrayRepairPlexcord",
+    TRAY_REPAIR = "PlexcordTrayRepair",
     TRAY_CHECK_UPDATES = "PlexcordTrayCheckUpdates",
+    TRAY_ABOUT = "PlexcordTrayAbout",
 }

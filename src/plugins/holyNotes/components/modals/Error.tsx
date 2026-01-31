@@ -8,14 +8,13 @@
 import { plugin, t } from "@api/i18n";
 import { resultsClasses } from "@plugins/holyNotes";
 
-export default ({ error }: { error?: Error; } = {}) => {
+export default function EmptyNotebook({ error }: { error?: Error; } = {}) {
 
     if (error) {
-        // Error
-        console.log(error);
+        console.error("[HolyNotes] Error:", error);
         return (
             <div className={resultsClasses.emptyResultsWrap}>
-                <div className={resultsClasses.emptyResultsContent} style={{ paddingBottom: "0px" }}>
+                <div className={resultsClasses.emptyResultsContent} style={{ paddingBottom: 0 }}>
                     <div className={resultsClasses.errorImage} />
                     <div className={resultsClasses.emptyResultsText}>
                         {t(plugin.holyNotes.modal.error.generic)}
@@ -23,28 +22,20 @@ export default ({ error }: { error?: Error; } = {}) => {
                 </div>
             </div>
         );
-    } else if (Math.floor(Math.random() * 100) <= 10)
-        // Easter egg
-        return (
-            <div className={resultsClasses.emptyResultsWrap}>
-                <div className={resultsClasses.emptyResultsContent} style={{ paddingBottom: "0px" }}>
-                    <div className={`${resultsClasses.noResultsImage} ${resultsClasses.alt}`} />
-                    <div className={resultsClasses.emptyResultsText}>
-                        {t(plugin.holyNotes.modal.error.easter)}
-                    </div>
+    }
+
+    const isEasterEgg = Math.random() < 0.1;
+
+    return (
+        <div className={resultsClasses.emptyResultsWrap}>
+            <div className={resultsClasses.emptyResultsContent} style={{ paddingBottom: 0 }}>
+                <div className={`${resultsClasses.noResultsImage}${isEasterEgg ? ` ${resultsClasses.alt}` : ""}`} />
+                <div className={resultsClasses.emptyResultsText}>
+                    {isEasterEgg
+                        ? t(plugin.holyNotes.modal.error.easter)
+                        : t(plugin.holyNotes.modal.error.empty)}
                 </div>
             </div>
-        );
-    // Empty notebook
-    else
-        return (
-            <div className={resultsClasses.emptyResultsWrap}>
-                <div className={resultsClasses.emptyResultsContent} style={{ paddingBottom: "0px" }}>
-                    <div className={resultsClasses.noResultsImage} />
-                    <div className={resultsClasses.emptyResultsText}>
-                        {t(plugin.holyNotes.modal.error.empty)}
-                    </div>
-                </div>
-            </div>
-        );
-};
+        </div>
+    );
+}

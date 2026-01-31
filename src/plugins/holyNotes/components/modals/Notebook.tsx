@@ -7,267 +7,182 @@
 
 import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
+import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
-import { quickSelectClasses } from "@plugins/holyNotes";
-import HelpIcon from "@plugins/holyNotes/components/icons/HelpIcon";
-import NoteButton from "@plugins/holyNotes/components/icons/NoteButton";
+import { BookmarkIcon, CircleQuestionIcon, cl } from "@plugins/holyNotes";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
-import { HolyNotes } from "@plugins/holyNotes/types";
-import { classes } from "@utils/misc";
-import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
-import { ContextMenuApi, FluxDispatcher, Menu, React, TextInput } from "@webpack/common";
+import { Note, Notebook } from "@plugins/holyNotes/types";
+import { CloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
+import { Clickable, React, Select, TextInput, Tooltip, useState } from "@webpack/common";
 
 import Errors from "./Error";
 import HelpModal from "./HelpModal";
-import ManageNotebookButton from "./ManageNotebookButton";
-import { CreateTabBar } from "./NoteBookTab";
+import NotebookCreateModal from "./NotebookCreateModal";
+import NotebookDeleteModal from "./NotebookDeleteModal";
 import { RenderMessage } from "./RenderMessage";
 
-const renderNotebook = ({
-    notes, notebook, updateParent, sortDirection, sortType, searchInput, closeModal
-}: {
-    notes: Record<string, HolyNotes.Note>;
-    notebook: string;
-    updateParent: () => void;
-    sortDirection: boolean;
-    sortType: boolean;
-    searchInput: string;
-    closeModal: () => void;
-}) => {
-    let notesArray = Object.values(notes);
+const enum SortOption {
+    NewestAdded,
+    OldestAdded,
+    NewestMessage,
+    OldestMessage
+}
 
-    if (searchInput) {
-        const searchLower = searchInput.toLowerCase();
-        notesArray = notesArray.filter(note =>
-            note.content?.toLowerCase().includes(searchLower)
-        );
-    }
-
-    if (!notesArray.length) return <Errors />;
-
-    if (sortType) {
-        notesArray.sort((a, b) =>
-            new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-        );
-    }
-
-    if (sortDirection) notesArray.reverse();
-
-    return notesArray.map(note => (
-        <RenderMessage
-            key={note.id || notebook}
-            note={note}
-            notebook={notebook}
-            updateParent={updateParent}
-            fromDeleteModal={false}
-            closeModal={closeModal}
-        />
-    ));
-};
-
-export const NoteModal = (props: ModalProps & { onClose: () => void; }) => {
-    const [sortType, setSortType] = React.useState(true);
-    const [searchInput, setSearch] = React.useState("");
-    const [sortDirection, setSortDirection] = React.useState(true);
-    const [currentNotebook, setCurrentNotebook] = React.useState("Main");
-
-    const forceUpdate = React.useReducer(() => ({}), {})[1] as () => void;
-
-    const handleTabChange = React.useCallback((newNotebook: string) => {
-        setCurrentNotebook(newNotebook);
-        setSearch("");
-        setSortType(true);
-        setSortDirection(true);
-        forceUpdate();
-    }, [forceUpdate]);
-
-    const notes = noteHandler.getNotes(currentNotebook);
-    if (!notes) return <></>;
-
-    const notesArray = Object.values(notes);
-    const noteCount = notesArray.length;
-
-    // Filter notes for display count
-    let filteredCount = noteCount;
-    if (searchInput) {
-        const searchLower = searchInput.toLowerCase();
-        filteredCount = notesArray.filter(note =>
-            note.content?.toLowerCase().includes(searchLower)
-        ).length;
-    }
-
-    const { TabBar, selectedTab } = CreateTabBar({
-        tabs: noteHandler.getAllNotes(),
-        firstSelectedTab: currentNotebook,
-        onChangeTab: setCurrentNotebook
-    });
+function NotebookTabs({ notebooks, selected, onSelect }: {
+    notebooks: string[];
+    selected: string;
+    onSelect: (tab: string) => void;
+}) {
+    const sorted = [...notebooks].sort((a, b) =>
+        a === "Main" ? -1 : b === "Main" ? 1 : a.localeCompare(b)
+    );
 
     return (
-        <ErrorBoundary>
-            <ModalRoot {...props} className={classes("pc-notebook")} size={ModalSize.LARGE}>
-                <Flex className={classes("pc-notebook-flex")} style={{ width: "100%", height: "100%" }}>
-                    <div className={classes("pc-notebook-top-section")}>
-                        <ModalHeader className={classes("pc-notebook-header-main")}>
-                            <Flex alignItems="center" style={{ gap: "8px", flex: 1 }}>
-                                <NoteButton className={classes("pc-notebook-icon")} />
-                                <Flex flexDirection="column" style={{ gap: "4px", flex: 1 }}>
-                                    <BaseText
-                                        size="lg"
-                                        weight="semibold"
-                                        className={classes("pc-notebook-heading")}>
-                                        {t(plugin.holyNotes.modal.notebook.title)}
-                                    </BaseText>
-                                    <BaseText
-                                        size="sm"
-                                        className={classes("pc-notebook-count")}>
-                                        {searchInput
-                                            ? t(plugin.holyNotes.modal.notebook.filteredOf, {
-                                                filteredCount: filteredCount,
-                                                noteCount: noteCount,
-                                                s: filteredCount === 1 ? "" : "s"
-                                            })
-                                            : t(plugin.holyNotes.modal.notebook.note, {
-                                                noteCount: noteCount,
-                                                s: noteCount === 1 ? "" : "s"
-                                            })
-                                        }
-                                    </BaseText>
-                                </Flex>
-                                <div
-                                    className={classes("pc-notebook-help-button")}
-                                    onClick={() => openModal(HelpModal)}
-                                    role="button"
-                                    tabIndex={0}
-                                    aria-label="Help"
-                                    onKeyDown={e => {
-                                        if (e.key === "Enter" || e.key === " ") {
-                                            e.preventDefault();
-                                            openModal(HelpModal);
-                                        }
-                                    }}>
-                                    <HelpIcon />
-                                </div>
-                                <ModalCloseButton onClick={props.onClose} />
-                            </Flex>
-                        </ModalHeader>
-                        <div className={classes("pc-notebook-search-container")}>
-                            <TextInput
-                                autoFocus={false}
-                                placeholder={t(plugin.holyNotes.modal.notebook.search)}
-                                value={searchInput}
-                                onChange={e => setSearch(e)}
-                                className={classes("pc-notebook-search-input")}
-                            />
-                        </div>
-                        <div className={classes("pc-notebook-tabbar-container")}>
-                            {TabBar}
-                        </div>
-                    </div>
-                    <ModalContent className={classes("pc-notebook-content")}
-                        style={{
-                            flex: 1,
-                            overflowY: "auto",
-                            overflowX: "hidden",
-                            scrollBehavior: "smooth"
-                        }}>
-                        <ErrorBoundary>
-                            {renderNotebook({
-                                notes,
-                                notebook: currentNotebook,
-                                updateParent: () => forceUpdate(),
-                                sortDirection: sortDirection,
-                                sortType: sortType,
-                                searchInput: searchInput,
-                                closeModal: props.onClose,
-                            })}
-                        </ErrorBoundary>
-                    </ModalContent>
-                </Flex>
-                <ModalFooter className={classes("pc-notebook-footer")}>
-                    <Flex style={{ width: "100%", justifyContent: "space-between", alignItems: "center" }}>
-                        <ManageNotebookButton notebook={currentNotebook} setNotebook={setCurrentNotebook} />
-                        <div className={classes("sort-button-container", "pc-notebook-display-left")}>
-                            <Flex
-                                alignItems="center"
-                                className={quickSelectClasses.quickSelect}
-                                role="button"
-                                tabIndex={0}
-                                aria-label={t(plugin.holyNotes.modal.notebook.label)}
-                                onClick={(event: React.MouseEvent<HTMLDivElement>) => {
-                                    ContextMenuApi.openContextMenu(event, () => (
-                                        <Menu.Menu
-                                            navId="sort-menu"
-                                            onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-                                            aria-label={t(plugin.holyNotes.modal.notebook.label)}
-                                        >
-                                            <Menu.MenuItem
-                                                label={t(plugin.holyNotes.modal.notebook.ada)}
-                                                id="ada"
-                                                action={() => {
-                                                    setSortDirection(true);
-                                                    setSortType(true);
-                                                }} /><Menu.MenuItem
-                                                label={t(plugin.holyNotes.modal.notebook.amd)}
-                                                id="amd"
-                                                action={() => {
-                                                    setSortDirection(true);
-                                                    setSortType(false);
-                                                }} /><Menu.MenuItem
-                                                label={t(plugin.holyNotes.modal.notebook.dda)}
-                                                id="dda"
-                                                action={() => {
-                                                    setSortDirection(false);
-                                                    setSortType(true);
-                                                }} /><Menu.MenuItem
-                                                label={t(plugin.holyNotes.modal.notebook.dmd)}
-                                                id="dmd"
-                                                action={() => {
-                                                    setSortDirection(false);
-                                                    setSortType(false);
-                                                }} />
-                                        </Menu.Menu>
-
-                                    ));
-                                }}
-                                onKeyDown={e => {
-                                    if (e.key === "Enter" || e.key === " ") {
-                                        e.preventDefault();
-                                        const el = e.currentTarget as HTMLElement;
-                                        const rect = el.getBoundingClientRect();
-                                        const evt = {
-                                            clientX: rect.left + rect.width / 2,
-                                            clientY: rect.top + rect.height / 2
-                                        } as any;
-
-                                        ContextMenuApi.openContextMenu(evt, () => (
-                                            <Menu.Menu
-                                                navId="sort-menu"
-                                                onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-                                                aria-label={t(plugin.holyNotes.modal.notebook.options)}
-                                            >
-                                                <Menu.MenuItem label={t(plugin.holyNotes.modal.notebook.ascending) + " / " + t(plugin.holyNotes.modal.notebook.dateAdded)} id="ada" action={() => { setSortDirection(true); setSortType(true); }} />
-                                                <Menu.MenuItem label={t(plugin.holyNotes.modal.notebook.ascending) + " / " + t(plugin.holyNotes.modal.notebook.messageDate)} id="amd" action={() => { setSortDirection(true); setSortType(false); }} />
-                                                <Menu.MenuItem label={t(plugin.holyNotes.modal.notebook.descending) + " / " + t(plugin.holyNotes.modal.notebook.dateAdded)} id="dda" action={() => { setSortDirection(false); setSortType(true); }} />
-                                                <Menu.MenuItem label={t(plugin.holyNotes.modal.notebook.descending) + " / " + t(plugin.holyNotes.modal.notebook.messageDate)} id="dmd" action={() => { setSortDirection(false); setSortType(false); }} />
-                                            </Menu.Menu>
-                                        ));
-                                    }
-                                }}
-                            >
-                                <BaseText className={quickSelectClasses.quickSelectLabel}>{t(plugin.holyNotes.modal.notebook.change)}:</BaseText>
-                                <Flex style={{ flexGrow: 0 }} alignItems="center" className={quickSelectClasses.quickSelectClick}>
-                                    <BaseText className={quickSelectClasses.quickSelectValue}>
-                                        {sortDirection ? t(plugin.holyNotes.modal.notebook.ascending) : t(plugin.holyNotes.modal.notebook.descending)} /{" "}
-                                        {sortType ? t(plugin.holyNotes.modal.notebook.dateAdded) : t(plugin.holyNotes.modal.notebook.messageDate)}
-                                    </BaseText>
-                                    <div className={quickSelectClasses.quickSelectArrow} aria-hidden="true" />
-                                </Flex>
-                            </Flex>
-                        </div>
-                    </Flex>
-                </ModalFooter>
-            </ModalRoot>
-        </ErrorBoundary>
+        <div className={cl("tabs")}>
+            {sorted.map(name => (
+                <Clickable
+                    key={name}
+                    className={cl("tab", selected === name && "tab-selected")}
+                    onClick={() => onSelect(name)}
+                >
+                    {name}
+                </Clickable>
+            ))}
+        </div>
     );
-};
+}
+
+function sortNotes(notes: Note[], sort: SortOption): Note[] {
+    const sorted = [...notes];
+    switch (sort) {
+        case SortOption.NewestAdded:
+            return sorted;
+        case SortOption.OldestAdded:
+            return sorted.reverse();
+        case SortOption.NewestMessage:
+            return sorted.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+        case SortOption.OldestMessage:
+            return sorted.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
+    }
+}
+
+function filterNotes(notes: Notebook, search: string): Note[] {
+    const arr = Object.values(notes);
+    if (!search) return arr;
+    const q = search.toLowerCase();
+    return arr.filter(n => n.content?.toLowerCase().includes(q));
+}
+
+export function NoteModal({ onClose, transitionState }: ModalProps) {
+    const [sort, setSort] = useState(SortOption.NewestAdded);
+    const [search, setSearch] = useState("");
+    const [notebook, setNotebook] = useState("Main");
+    const [, forceUpdate] = React.useReducer(x => x + 1, 0);
+
+    const notes = noteHandler.getNotes(notebook);
+    if (!notes) return null;
+
+    const filtered = filterNotes(notes, search);
+    const sorted = sortNotes(filtered, sort);
+    const total = Object.keys(notes).length;
+    const isMain = notebook === "Main";
+
+    return (
+
+        <ModalRoot transitionState={transitionState} size={ModalSize.LARGE}>
+            <ModalHeader separator={false} className={cl("header")}>
+                <div className={cl("header-content")}>
+                    <Flex alignItems="center" style={{ gap: "12px" }}>
+                        <BookmarkIcon size="md" />
+                        <BaseText tag="h2" size="lg" weight="semibold" className={cl("title")}>{t(plugin.holyNotes.modal.notebook.title)}</BaseText>
+                    </Flex>
+
+                    <BaseText size="sm" className={cl("description")}>
+                        {search
+                            ? t(plugin.holyNotes.modal.notebook.filteredOf, {
+                                filteredCount: filtered.length,
+                                noteCount: total,
+                                s: filtered.length === 1 ? "" : "s"
+                            })
+                            : t(plugin.holyNotes.modal.notebook.note, {
+                                noteCount: total,
+                                s: total === 1 ? "" : "s"
+                            })
+                        }
+                    </BaseText>
+                </div>
+                <div className={cl("header-trailing")}>
+                    <CloseButton onClick={onClose} />
+                </div>
+            </ModalHeader>
+
+            <div className={cl("controls")}>
+                <TextInput
+                    placeholder={t(plugin.holyNotes.modal.notebook.search)}
+                    value={search}
+                    onChange={setSearch}
+                />
+                <Select
+                    options={[
+                        { label: t(plugin.holyNotes.modal.notebook.ascending), value: SortOption.NewestAdded, default: true },
+                        { label: t(plugin.holyNotes.modal.notebook.descending), value: SortOption.OldestAdded },
+                        { label: t(plugin.holyNotes.modal.notebook.dateAdded), value: SortOption.NewestMessage },
+                        { label: t(plugin.holyNotes.modal.notebook.messageDate), value: SortOption.OldestMessage },
+                    ]}
+                    serialize={String}
+                    select={setSort}
+                    isSelected={v => v === sort}
+                    closeOnSelect
+                />
+            </div>
+
+            <NotebookTabs
+                notebooks={Object.keys(noteHandler.getAllNotes())}
+                selected={notebook}
+                onSelect={setNotebook}
+            />
+
+            <ModalContent className={cl("content")}>
+                <ErrorBoundary>
+                    {sorted.length ? sorted.map(note => (
+                        <RenderMessage
+                            key={note.id}
+                            note={note}
+                            notebook={notebook}
+                            updateParent={forceUpdate}
+                            fromDeleteModal={false}
+                            closeModal={onClose}
+                        />
+                    )) : <Errors />}
+                </ErrorBoundary>
+            </ModalContent>
+
+            <ModalFooter>
+                <Flex style={{ justifyContent: "space-between", alignItems: "center", width: "100%" }}>
+                    <Tooltip text={t(plugin.holyNotes.modal.help.title)} position="top">
+                        {({ onMouseEnter, onMouseLeave }) => (
+                            <Clickable
+                                className={cl("icon-button")}
+                                onClick={() => openModal(props => <HelpModal {...props} />)}
+                                onMouseEnter={onMouseEnter}
+                                onMouseLeave={onMouseLeave}
+                            >
+                                <CircleQuestionIcon size="sm" />
+                            </Clickable>
+                        )}
+                    </Tooltip>
+                    <Button
+                        variant={isMain ? "primary" : "dangerPrimary"}
+                        onClick={() => isMain
+                            ? openModal(props => <NotebookCreateModal {...props} />)
+                            : openModal(props => <NotebookDeleteModal {...props} notebook={notebook} onChangeTab={setNotebook} />)
+                        }
+                    >
+                        {isMain ? t(plugin.holyNotes.button.create) : t(plugin.holyNotes.button.delete)}
+                    </Button>
+                </Flex>
+            </ModalFooter>
+        </ModalRoot>
+    );
+}

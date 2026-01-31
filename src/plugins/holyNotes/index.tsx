@@ -25,39 +25,40 @@ import { HeaderBarButton } from "@api/HeaderBar";
 import { plugin, t } from "@api/i18n";
 import { Message } from "@plexcord/discord-types";
 import { PcDevs } from "@utils/constants";
+import { classNameFactory } from "@utils/css";
 import { openModal } from "@utils/modal";
-import definePlugin from "@utils/types";
-import { findByCodeLazy, findComponentByCodeLazy, findCssClassesLazy } from "@webpack";
+import definePlugin, { IconComponent } from "@utils/types";
+import { findByCodeLazy, findComponentByCodeLazy, findCssClassesLazy, findExportedComponentLazy } from "@webpack";
 import { ChannelStore, Menu } from "@webpack/common";
 
-import { Popover as NoteButtonPopover, Popover } from "./components/icons/NoteButton";
 import { NoteModal } from "./components/modals/Notebook";
 import noteHandler, { noteHandlerCache } from "./NoteHandler";
 import { DataStoreToCache, HolyNoteStore } from "./utils";
 
-export const MessageType = findByCodeLazy("isEdited(){");
-
-export const iconClasses = findCssClassesLazy("iconWrapper", "clickable");
-export const resultsClasses = findCssClassesLazy("emptyResultsWrap", "emptyResultsContent", "errorImage", "emptyResultsText", "noResultsImage", "alt");
-export const quickSelectClasses = findCssClassesLazy("quickSelect", "quickSelectLabel", "quickSelectClick", "quickSelectValue", "quickSelectArrow");
+export const cl = classNameFactory("pc-notebook-");
+export const CircleQuestionIcon = findExportedComponentLazy("CircleQuestionIcon");
+export const BookmarkIconLazy = findExportedComponentLazy("BookmarkIcon");
+export const BookmarkIcon: IconComponent = props => <BookmarkIconLazy {...props} />;
+export const MessageRecord = findByCodeLazy("isEdited(){");
 export const messageClasses = findCssClassesLazy("message", "groupStart", "cozyMessage");
-export const Channel = findByCodeLazy("computeLurkerPermissionsAllowList(){");
+export const resultsClasses = findCssClassesLazy("emptyResultsWrap", "emptyResultsContent", "errorImage", "emptyResultsText", "noResultsImage", "alt");
+export const ChannelRecord = findByCodeLazy("computeLurkerPermissionsAllowList(){");
 export const ChannelMessage = findComponentByCodeLazy("Message must not be a thread");
 
 function HolyNotesButton() {
     return (
         <HeaderBarButton
             tooltip={t(plugin.holyNotes.button.tooltip)}
-            icon={Popover}
+            icon={BookmarkIcon}
             onClick={() => openModal(props => <NoteModal {...props} />)}
         />
     );
 }
 
-const messageContextMenuPatch: NavContextMenuPatchCallback = async (children, { message }: { message: Message; }) => {
+const messageContextMenuPatch: NavContextMenuPatchCallback = (children, { message }: { message: Message; }) => {
     children.push(
-        <Menu.MenuItem label={t(plugin.holyNotes.button.addNote)} id="add-message-to-note">
-            {Object.keys(noteHandler.getAllNotes()).map((notebook: string, index: number) => (
+        <Menu.MenuItem label={t(plugin.holyNotes.button.noteMessage)} id="note-message">
+            {Object.keys(noteHandler.getAllNotes()).map(notebook => (
                 <Menu.MenuItem
                     key={notebook}
                     label={notebook}
@@ -76,7 +77,7 @@ export default definePlugin({
     dependencies: ["HeaderBarAPI", "MessagePopoverAPI", "ChatInputButtonAPI"],
 
     headerBarButton: {
-        icon: Popover,
+        icon: BookmarkIcon,
         render: HolyNotesButton,
         priority: 600
     },
@@ -87,20 +88,24 @@ export default definePlugin({
     }),
 
     contextMenus: {
-        "message": messageContextMenuPatch
+        message: messageContextMenuPatch
     },
 
     async start() {
-        if (await DataStore.keys(HolyNoteStore).then(keys => !keys.includes("Main"))) return noteHandler.newNoteBook("Main");
+        const keys = await DataStore.keys(HolyNoteStore);
+        if (!keys.includes("Main")) {
+            noteHandler.newNoteBook("Main");
+            return;
+        }
         if (!noteHandlerCache.has("Main")) await DataStoreToCache();
     },
 
     messagePopoverButton: {
-        icon: NoteButtonPopover,
+        icon: BookmarkIcon,
         render(message) {
             return {
                 label: t(plugin.holyNotes.button.save),
-                icon: NoteButtonPopover,
+                icon: BookmarkIcon,
                 message,
                 channel: ChannelStore.getChannel(message.channel_id),
                 onClick: () => noteHandler.addNote(message, "Main")

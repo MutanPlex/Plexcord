@@ -7,17 +7,11 @@
 
 import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
-import { Button } from "@components/Button";
+import { wrapTab } from "@components/settings";
 import loginWithQR from "@plugins/loginWithQR";
 import { images } from "@plugins/loginWithQR/images";
-import { getIntlMessage } from "@utils/discord";
 import {
-    ModalContent,
-    ModalHeader,
     ModalProps,
-    ModalRoot,
-    ModalSize,
-    openModal,
 } from "@utils/modal";
 import { findByPropsLazy } from "@webpack";
 import {
@@ -34,8 +28,7 @@ import openVerifyModal from "./VerifyModal";
 
 enum LoginStateType {
     Idle,
-    Loading,
-    Camera,
+    Loading
 }
 
 interface Preview {
@@ -53,7 +46,6 @@ interface QrModalProps {
         media: HTMLImageElement | HTMLVideoElement | null,
         location?: QRCode["location"]
     ) => Promise<void>;
-    closeMain: () => void;
 }
 type QrModalPropsRef = MutableRefObject<QrModalProps>;
 
@@ -93,8 +85,7 @@ const verifyUrl = async (
                 url: "/users/@me/remote-auth/cancel",
                 body: { handshake_token: handshake },
             });
-        },
-        modalProps.closeMain
+        }
     );
 };
 
@@ -247,7 +238,6 @@ function QrModal(props: ModalProps) {
                     setTimeout(res, 500 + 300 + 300);
                 }
             }),
-        closeMain: props.onClose,
     });
 
     useEffect(() => {
@@ -286,237 +276,124 @@ function QrModal(props: ModalProps) {
         return () => document.removeEventListener("paste", callback);
     }, [state]);
 
-    useEffect(() => {
-        if (state !== LoginStateType.Camera) return;
-
-        const video = document.createElement("video");
-        video.width = 1280;
-        video.height = 720;
-        const canvas = document.createElement("canvas");
-        canvas.width = video.width;
-        canvas.height = video.height;
-        const ctx = canvas.getContext("2d", { willReadFrequently: true })!;
-
-        let stream: MediaStream;
-        let snapshotTimeout: number;
-        let stopped = false;
-
-        const stop = (stream: MediaStream) => (
-            stream.getTracks().forEach(track => track.stop()),
-            modalProps.current.exit(null)
-        );
-
-        const snapshot = () => {
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            const { data, width, height } = ctx.getImageData(
-                0,
-                0,
-                canvas.width,
-                canvas.height
-            );
-            const code = jsQR(data, width, height);
-
-            const token = code?.data.match(tokenRegex)?.[1];
-            if (token) {
-                const img = new Image();
-                img.addEventListener("load", () =>
-                    modalProps.current
-                        .setPreview(img, code.location)
-                        .then(
-                            () => (
-                                img.remove(),
-                                verifyUrl(token, modalProps).catch(e =>
-                                    modalProps.current.exit(e?.message)
-                                )
-                            )
-                        )
-                );
-                canvas.toBlob(blob => blob && (img.src = URL.createObjectURL(blob)));
-            } else snapshotTimeout = setTimeout(snapshot, 1e3) as any;
-        };
-
-        navigator.mediaDevices
-            .getUserMedia({
-                audio: false,
-                video: {
-                    deviceId: getVideoDeviceId(),
-                    width: canvas.width,
-                    height: canvas.height,
-                    frameRate: 30,
-                },
-            })
-            .then(str => {
-                if (stopped) return stop(str);
-
-                stream = str;
-                video.srcObject = str;
-                video.addEventListener("loadedmetadata", () => {
-                    if (stopped) return stop(str);
-
-                    video.play();
-                    modalProps.current.setPreview(video);
-                    snapshot();
-                });
-            })
-            .catch(() => setState(LoginStateType.Idle));
-
-        return () => {
-            stopped = true;
-            clearTimeout(snapshotTimeout);
-            if (stream) stop(stream);
-
-            video.remove();
-            canvas.remove();
-        };
-    }, [state]);
-
     return (
-        <ModalRoot size={ModalSize.DYNAMIC} {...props}>
-            <ModalHeader separator={false} className={cl("modal-header")}>
-                <BaseText color="text-strong" size="lg" weight="semibold" tag="h1" style={{ flexGrow: 1 }}>
-                    {getIntlMessage("USER_SETTINGS_SCAN_QR_CODE")}
-                </BaseText>
-            </ModalHeader>
-            <ModalContent scrollbarType="none">
-                <div
-                    className={cl(
-                        "modal-filepaste",
-                        state === LoginStateType.Camera &&
-                        !preview?.source &&
-                        "modal-filepaste-disabled",
-                        preview?.source && "modal-filepaste-preview",
-                        preview?.crosses && "modal-filepaste-crosses"
-                    )}
-                    onClick={() =>
-                        state === LoginStateType.Idle && inputRef.current?.click()
-                    }
-                    onDragEnter={e =>
-                        e.currentTarget.classList.add(cl("modal-filepaste-drop"))
-                    }
-                    onDragLeave={e =>
-                        e.currentTarget.classList.remove(cl("modal-filepaste-drop"))
-                    }
-                    onDrop={e => {
-                        e.preventDefault();
-                        e.currentTarget.classList.remove(cl("modal-filepaste-drop"));
+        <div className={cl("modal-container")}>
+            <div
+                className={cl(
+                    "modal-filepaste",
+                    preview?.source && "modal-filepaste-preview",
+                    preview?.crosses && "modal-filepaste-crosses"
+                )}
+                onClick={() =>
+                    state === LoginStateType.Idle && inputRef.current?.click()
+                }
+                onDragEnter={e =>
+                    e.currentTarget.classList.add(cl("modal-filepaste-drop"))
+                }
+                onDragLeave={e =>
+                    e.currentTarget.classList.remove(cl("modal-filepaste-drop"))
+                }
+                onDrop={e => {
+                    e.preventDefault();
+                    e.currentTarget.classList.remove(cl("modal-filepaste-drop"));
 
-                        if (state !== LoginStateType.Idle) return;
+                    if (state !== LoginStateType.Idle) return;
 
-                        for (const item of e.dataTransfer.files) {
-                            if (item.type.startsWith("image/")) {
-                                setState(LoginStateType.Loading);
-                                handleProcessImage(item, modalProps);
-                                break;
-                            }
+                    for (const item of e.dataTransfer.files) {
+                        if (item.type.startsWith("image/")) {
+                            setState(LoginStateType.Loading);
+                            handleProcessImage(item, modalProps);
+                            break;
                         }
-                    }}
-                    role="button"
-                    style={
-                        preview?.size
-                            ? {
-                                width: `${preview.size.width}rem`,
-                                height: `${preview.size.height}rem`,
-                            }
-                            : {}
+
                     }
-                >
-                    {preview?.source ? (
-                        <div
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                position: "relative",
-                                ["--scale" as any]: preview.crosses
-                                    ? Math.max(preview.crosses[0].size * 0.9, 1)
-                                    : undefined,
-                                ["--offset-x" as any]: preview.crosses
-                                    ? `${-(preview.crosses.reduce((i, { x }) => i + x, 0) /
-                                        preview.crosses.length -
-                                        50)}%`
-                                    : undefined,
-                                ["--offset-y" as any]: preview.crosses
-                                    ? `${-(preview.crosses.reduce((i, { y }) => i + y, 0) /
-                                        preview.crosses.length -
-                                        50)}%`
-                                    : undefined,
-                            }}
-                            className={cl(preview?.crosses && "preview-crosses")}
-                        >
-                            {preview.source}
-                            {preview.crosses?.map(({ x, y, rot, size }) => (
-                                <span
-                                    key={cl("preview-cross")}
-                                    className={cl("preview-cross")}
-                                    style={{
-                                        left: `${x}%`,
-                                        top: `${y}%`,
-                                        ["--size" as any]: `${size}rem`,
-                                        ["--rot" as any]: `${rot}deg`,
-                                    }}
-                                >
-                                    <img src={images.cross} draggable={false} />
-                                </span>
-                            ))}
-                        </div>
-                    ) : state === LoginStateType.Loading ? (
-                        <Spinner type={SpinnerTypes.WANDERING_CUBES} />
-                    ) : error.current ? (
-                        <BaseText size="md" weight="semibold" color="text-subtle">
-                            {error.current}
-                        </BaseText>
-                    ) : state === LoginStateType.Camera ? (
+                }}
+                role="button"
+                style={
+                    preview?.size
+                        ? {
+                            width: `${preview.size.width}rem`,
+                            height: `${preview.size.height}rem`,
+                        }
+                        : {}
+                }
+            >
+                {preview?.source ? (
+                    <div
+                        style={{
+                            width: "100%",
+                            height: "100%",
+                            position: "relative",
+                            ["--scale" as any]: preview.crosses
+                                ? Math.max(preview.crosses[0].size * 0.9, 1)
+                                : undefined,
+                            ["--offset-x" as any]: preview.crosses
+                                ? `${-(preview.crosses.reduce((i, { x }) => i + x, 0) /
+                                    preview.crosses.length -
+                                    50)}%`
+                                : undefined,
+                            ["--offset-y" as any]: preview.crosses
+                                ? `${-(preview.crosses.reduce((i, { y }) => i + y, 0) /
+                                    preview.crosses.length -
+                                    50)}%`
+                                : undefined,
+                        }}
+                        className={cl(preview?.crosses && "preview-crosses")}
+                    >
+                        {preview.source}
+                        {preview.crosses?.map(({ x, y, rot, size }) => (
+                            <span
+                                key={cl("preview-cross")}
+                                className={cl("preview-cross")}
+                                style={{
+                                    left: `${x}%`,
+                                    top: `${y}%`,
+                                    ["--size" as any]: `${size}rem`,
+                                    ["--rot" as any]: `${rot}deg`,
+                                }}
+                            >
+                                <img src={images.cross} draggable={false} />
+                            </span>
+                        ))}
+                    </div>
+                ) : state === LoginStateType.Loading ? (
+                    <Spinner type={SpinnerTypes.WANDERING_CUBES} />
+                ) : error.current ? (
+                    <BaseText size="md" weight="semibold" color="text-danger">
+                        {error.current}
+                    </BaseText>
+                ) : (
+                    <>
                         <BaseText size="md" weight="semibold" color="text-strong">
-                            {t(plugin.loginWithQR.scanning)}
+                            {t(plugin.loginWithQR.dragDrop)}
                         </BaseText>
-                    ) : (
-                        <>
-                            <BaseText size="md" weight="semibold" color="text-strong">
-                                {t(plugin.loginWithQR.dragDrop)}
-                            </BaseText>
-                            <BaseText size="sm" weight="medium" color="text-muted">
-                                {t(plugin.loginWithQR.orPaste)}
-                            </BaseText>
-                            <br />
-                            <QrCodeIcon />
-                        </>
-                    )}
-                </div>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={e => {
-                        if (!e.target.files || state !== LoginStateType.Idle) return;
+                        <BaseText size="sm" weight="medium" color="text-muted">
+                            {t(plugin.loginWithQR.orPaste)}
+                        </BaseText>
+                        <br />
+                        <QrCodeIcon />
+                    </>
+                )}
+            </div>
+            <input
+                type="file"
+                accept="image/*"
+                onChange={e => {
+                    if (!e.target.files || state !== LoginStateType.Idle) return;
 
-                        for (const item of e.target.files) {
-                            if (item.type.startsWith("image/")) {
-                                setState(LoginStateType.Loading);
-                                handleProcessImage(item, modalProps);
-                                break;
-                            }
+                    for (const item of e.target.files) {
+                        if (item.type.startsWith("image/")) {
+                            setState(LoginStateType.Loading);
+                            handleProcessImage(item, modalProps);
+                            break;
                         }
-                    }}
-                    ref={inputRef}
-                    style={{ display: "none" }}
-                />
-                <Button
-                    size="medium"
-                    className={cl("modal-button")}
-                    disabled={state === LoginStateType.Loading}
-                    onClick={() => {
-                        if (state === LoginStateType.Idle) setState(LoginStateType.Camera);
-                        else if (state === LoginStateType.Camera)
-                            modalProps.current.exit(null);
-                    }}
-                >
-                    {state === LoginStateType.Camera
-                        ? t(plugin.loginWithQR.stopScanning)
-                        : t(plugin.loginWithQR.usingWebcam)}
-                </Button>
-            </ModalContent>
-        </ModalRoot>
+                    }
+                }}
+                ref={inputRef}
+                style={{ display: "none" }}
+            />
+        </div>
     );
 }
 
-export default function openQrModal() {
-    return openModal(props => <QrModal {...props} />);
-}
+export default wrapTab(QrModal, "Scan QR Code");

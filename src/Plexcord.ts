@@ -197,10 +197,8 @@ function initTrayIpc() {
 
     PlexcordNative.tray.onRepair(async () => {
         try {
-            const res = await PlexcordNative.updater.rebuild();
-            if (!res.ok) throw res.error;
-
-            showNotice(t(updater.repaired), t(updater.restart), relaunch);
+            await update();
+            relaunch();
         } catch (err) {
             UpdateLogger.error("Failed to repair Plexcord", err);
         }

@@ -21,7 +21,7 @@ import { plugins, t } from "@api/i18n";
 import { showNotice } from "@api/Notices";
 import { Settings } from "@api/Settings";
 import { showErrorToast } from "@components/settings/tabs/plugins";
-import { filters, findByCodeLazy, mapMangledModuleLazy } from "@webpack";
+import { filters, findByCodeLazy, findComponentByCodeLazy, mapMangledModuleLazy } from "@webpack";
 import { Alerts } from "@webpack/common";
 import type { ComponentType, PropsWithChildren, ReactNode, Ref } from "react";
 
@@ -120,6 +120,7 @@ export const ModalHeader = LazyComponent(() => Modals.ModalHeader);
 export const ModalContent = LazyComponent(() => Modals.ModalContent);
 export const ModalFooter = LazyComponent(() => Modals.ModalFooter);
 export const ModalCloseButton = LazyComponent(() => Modals.ModalCloseButton);
+export const CloseButton = findComponentByCodeLazy("CLOSE_BUTTON_LABEL");
 
 export type MediaModalItem = {
     url: string;

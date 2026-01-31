@@ -34,7 +34,7 @@ import { classNameFactory } from "@utils/css";
 import { proxyLazy } from "@utils/lazy";
 import { Margins } from "@utils/margins";
 import { classes, isObjectEmpty } from "@utils/misc";
-import { ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
+import { CloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { OptionType, Plugin } from "@utils/types";
 import { findComponentByCodeLazy, findCssClassesLazy } from "@webpack";
 import { Clickable, FluxDispatcher, React, Toasts, Tooltip, useEffect, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
@@ -49,7 +49,6 @@ import { GithubButton, WebsiteButton } from "./LinkIconButton";
 const cl = classNameFactory("pc-plugin-modal-");
 
 const AvatarStyles = findCssClassesLazy("moreUsers", "avatar", "clickableAvatar");
-const CloseButton = findComponentByCodeLazy("CLOSE_BUTTON_LABEL");
 const ConfirmModal = findComponentByCodeLazy('parentComponent:"ConfirmModal"');
 const WarningIcon = findComponentByCodeLazy("3.15H3.29c-1.74");
 const UserRecord: Constructor<Partial<User>> = proxyLazy(() => UserStore.getCurrentUser().constructor) as any;
@@ -94,10 +93,13 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
 
     const hasSettings = Boolean(pluginSettings && plugin.options && !isObjectEmpty(plugin.options));
     // prefill dummy user to avoid layout shift
-    const [authors, setAuthors] = useState<Partial<User>[]>(() => [makeDummyUser({ username: "Loading...", id: "-1465912127305809920" })]);
+    const dummyAuthor = makeDummyUser({ username: "Loading...", id: "-1465912127305809920" });
+    const [authors, setAuthors] = useState<Partial<User>[]>(() => [dummyAuthor]);
 
     useEffect(() => {
         (async () => {
+            const loadedAuthors: Partial<User>[] = [];
+
             for (const user of plugin.authors.slice(0, 6)) {
                 try {
                     const author = user.id
@@ -105,11 +107,12 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                             .catch(() => makeDummyUser({ username: user.name }))
                         : makeDummyUser({ username: user.name });
 
-                    setAuthors(a => [...a, author]);
+                    loadedAuthors.push(author);
                 } catch (e) {
                     continue;
                 }
             }
+            setAuthors(loadedAuthors.length ? loadedAuthors : [dummyAuthor]);
         })();
     }, [plugin.authors]);
 

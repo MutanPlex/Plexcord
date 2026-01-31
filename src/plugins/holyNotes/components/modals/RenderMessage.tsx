@@ -7,91 +7,89 @@
 
 import { plugin, t } from "@api/i18n";
 import { CopyIcon, DeleteIcon, IDIcon, LinkIcon, OpenExternalIcon } from "@components/Icons";
-import { Channel, ChannelMessage, messageClasses, MessageType } from "@plugins/holyNotes";
+import { ChannelMessage, ChannelRecord, messageClasses, MessageRecord } from "@plugins/holyNotes";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
-import { HolyNotes } from "@plugins/holyNotes/types";
+import { Note } from "@plugins/holyNotes/types";
 import { copyToClipboard } from "@utils/clipboard";
 import { fetchUserProfile } from "@utils/discord";
 import { proxyLazy } from "@utils/lazy";
 import { classes } from "@utils/misc";
-import { ModalProps } from "@utils/modal";
-import { ContextMenuApi, FluxDispatcher, Menu, NavigationRouter, React, useEffect, UserStore } from "@webpack/common";
+import { ContextMenuApi, FluxDispatcher, Menu, NavigationRouter, useEffect, useReducer, useRef, UserStore } from "@webpack/common";
 
 const UserRecord = proxyLazy(() => UserStore.getCurrentUser().constructor) as any;
 
-export const RenderMessage = ({
-    note,
-    notebook,
-    updateParent,
-    fromDeleteModal,
-    closeModal,
-}: {
-    note: HolyNotes.Note;
+interface Props {
+    note: Note;
     notebook: string;
     updateParent?: () => void;
     fromDeleteModal: boolean;
     closeModal?: () => void;
-}) => {
-    const isHoldingDeleteRef = React.useRef(false);
-    const [, forceUpdate] = React.useReducer(x => x + 1, 0);
+}
+export function RenderMessage({ note, notebook, updateParent, fromDeleteModal, closeModal }: Props) {
+    const isHoldingDeleteRef = useRef(false);
+    const [, forceUpdate] = useReducer(x => x + 1, 0);
 
     useEffect(() => {
-        const user = UserStore.getUser(note.author.id);
-        if (!user) {
+        if (!UserStore.getUser(note.author.id)) {
             fetchUserProfile(note.author.id);
         }
     }, [note.author.id]);
 
-    const author = UserStore.getUser(note.author.id) ?? note.author;
-
     useEffect(() => {
-        const deleteHandler = (e: KeyboardEvent) => {
-            if (e.key.toLowerCase() !== "delete") return;
-            const newState = e.type === "keydown";
-            if (isHoldingDeleteRef.current !== newState) {
-                isHoldingDeleteRef.current = newState;
+        const handleKey = (e: KeyboardEvent) => {
+            if (e.key !== "Delete") return;
+            const isDown = e.type === "keydown";
+            if (isHoldingDeleteRef.current !== isDown) {
+                isHoldingDeleteRef.current = isDown;
                 forceUpdate();
             }
         };
 
-        document.addEventListener("keydown", deleteHandler);
-        document.addEventListener("keyup", deleteHandler);
+        document.addEventListener("keydown", handleKey);
+        document.addEventListener("keyup", handleKey);
 
         return () => {
-            document.removeEventListener("keydown", deleteHandler);
-            document.removeEventListener("keyup", deleteHandler);
+            document.removeEventListener("keydown", handleKey);
+            document.removeEventListener("keyup", handleKey);
         };
     }, []);
+
+    const author = UserStore.getUser(note.author.id) ?? note.author;
+
+    const handleClick = () => {
+        if (isHoldingDeleteRef.current && !fromDeleteModal) {
+            noteHandler.deleteNote(note.id, notebook);
+            updateParent?.();
+        }
+    };
+
+    const handleContextMenu = (e: React.MouseEvent) => {
+        if (fromDeleteModal) return;
+        ContextMenuApi.openContextMenu(e, () => (
+            <NoteContextMenu
+                note={note}
+                notebook={notebook}
+                updateParent={updateParent}
+                closeModal={closeModal}
+            />
+        ));
+    };
+
+    const message = new MessageRecord({
+        ...note,
+        author: new UserRecord({ ...author, bot: true }),
+        timestamp: new Date(note.timestamp),
+        embeds: note.embeds?.map(embed =>
+            embed.timestamp ? { ...embed, timestamp: new Date(embed.timestamp) } : embed
+        ),
+    });
 
     return (
         <div
             className="pc-holy-note"
-            style={{
-                marginBottom: "8px",
-                marginTop: "8px",
-                paddingTop: "4px",
-                paddingBottom: "4px",
-            }}
-            onClick={() => {
-                if (isHoldingDeleteRef.current && !fromDeleteModal) {
-                    noteHandler.deleteNote(note.id, notebook);
-                    updateParent?.();
-                }
-            }}
-            onContextMenu={(event: any) => {
-                if (!fromDeleteModal)
-                    // @ts-ignore
-                    return ContextMenuApi.openContextMenu(event, (props: any) => (
-                        // @ts-ignore
-                        <NoteContextMenu
-                            {...Object.assign({}, props, { onClose: close })}
-                            note={note}
-                            notebook={notebook}
-                            updateParent={updateParent}
-                            closeModal={closeModal}
-                        />
-                    ));
-            }}
+            style={{ margin: "8px 0", padding: "4px 0" }}
+            onClick={handleClick}
+            onContextMenu={handleContextMenu}
         >
             <ChannelMessage
                 className={classes("pc-holy-render", messageClasses?.message, messageClasses?.groupStart, messageClasses?.cozyMessage)}
@@ -102,41 +100,23 @@ export const RenderMessage = ({
                 isHighlight={false}
                 isLastItem={false}
                 renderContentOnly={false}
-                // @ts-ignore
-                channel={new Channel({ id: "holy-notes" })}
-                message={
-                    new MessageType(
-                        Object.assign(
-                            { ...note },
-                            {
-                                author: new UserRecord({ ...author, bot: true }),
-                                timestamp: new Date(note?.timestamp),
-                                // @ts-ignore
-                                embeds: note?.embeds?.map((embed: { timestamp: string | number | Date; }) =>
-                                    embed.timestamp
-                                        ? Object.assign(embed, {
-                                            timestamp: new Date(embed.timestamp),
-                                        })
-                                        : embed,
-                                ),
-                            },
-                        ),
-                    )
-                }
+                channel={new ChannelRecord({ id: "holy-notes" })}
+                message={message}
             />
 
         </div>
     );
-};
+}
 
-const NoteContextMenu = (
-    props: ModalProps & {
-        updateParent?: () => void;
-        notebook: string;
-        note: HolyNotes.Note;
-        closeModal?: () => void;
-    }) => {
-    const { note, notebook, updateParent, closeModal } = props;
+interface ContextMenuProps {
+    note: Note;
+    notebook: string;
+    updateParent?: () => void;
+    closeModal?: () => void;
+}
+
+function NoteContextMenu({ note, notebook, updateParent, closeModal }: ContextMenuProps) {
+    const allNotebooks = Object.keys(noteHandler.getAllNotes());
 
     return (
         <Menu.Menu
@@ -147,11 +127,11 @@ const NoteContextMenu = (
             <Menu.MenuItem
                 label={t(plugin.holyNotes.modal.help.jumpToMessage)}
                 id="jump"
+                icon={OpenExternalIcon}
                 action={() => {
-                    NavigationRouter.transitionTo(`/channels/${note.guild_id ?? "@me"}/${note.channel_id}/${note.id}`);
+                    NavigationRouter.transitionTo(`/channels/${note.guild_id || "@me"}/${note.channel_id}/${note.id}`);
                     closeModal?.();
                 }}
-                icon={OpenExternalIcon}
             />
             <Menu.MenuItem
                 label={t(plugin.holyNotes.button.copyText)}
@@ -159,41 +139,35 @@ const NoteContextMenu = (
                 action={() => copyToClipboard(note.content)}
                 icon={CopyIcon}
             />
-            {note?.attachments.length ? (
+            {note.attachments.length > 0 && (
                 <Menu.MenuItem
                     label={t(plugin.holyNotes.button.copyAttachment)}
                     id="copy-url"
                     action={() => copyToClipboard(note.attachments[0].url)}
                     icon={LinkIcon}
-                />) : null}
+                />
+            )}
             <Menu.MenuItem
                 label={t(plugin.holyNotes.button.copyId)}
                 id="copy-id"
                 action={() => copyToClipboard(note.id)}
                 icon={IDIcon}
             />
-            {Object.keys(noteHandler.getAllNotes()).length !== 1 ? (
-                <Menu.MenuItem
-                    label={t(plugin.holyNotes.button.moveNote)}
-                    id="move-note"
-                >
-                    {Object.keys(noteHandler.getAllNotes()).map((key: string) => {
-                        if (key !== notebook) {
-                            return (
-                                <Menu.MenuItem
-                                    key={key}
-                                    label={t(plugin.holyNotes.button.moveTo, { key })}
-                                    id={key}
-                                    action={() => {
-                                        noteHandler.moveNote(note, notebook, key);
-                                        updateParent?.();
-                                    }}
-                                />
-                            );
-                        }
-                    })}
+            {allNotebooks.length > 1 && (
+                <Menu.MenuItem label={t(plugin.holyNotes.button.moveNote)} id="move-note">
+                    {allNotebooks.filter(k => k !== notebook).map(k => (
+                        <Menu.MenuItem
+                            key={k}
+                            label={t(plugin.holyNotes.button.moveTo, { key: k })}
+                            id={k}
+                            action={() => {
+                                noteHandler.moveNote(note, notebook, k);
+                                updateParent?.();
+                            }}
+                        />
+                    ))}
                 </Menu.MenuItem>
-            ) : null}
+            )}
             <Menu.MenuItem
                 color="danger"
                 label={t(plugin.holyNotes.button.deleteNote)}
@@ -207,4 +181,4 @@ const NoteContextMenu = (
         </Menu.Menu>
     );
 
-};
+}

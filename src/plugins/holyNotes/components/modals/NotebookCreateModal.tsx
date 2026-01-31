@@ -8,36 +8,43 @@
 import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
+import { cl } from "@plugins/holyNotes";
 import noteHandler from "@plugins/holyNotes/NoteHandler";
-import { ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
-import { React, TextInput } from "@webpack/common";
+import { CloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize } from "@utils/modal";
+import { React, TextInput, useState } from "@webpack/common";
 
-export default (props: ModalProps & { onClose: () => void; }) => {
-    const [notebookName, setNotebookName] = React.useState("");
+export default function NotebookCreateModal({ onClose, transitionState }: ModalProps) {
+    const [name, setName] = useState("");
 
-    const handleCreateNotebook = React.useCallback(() => {
-        if (notebookName !== "") noteHandler.newNoteBook(notebookName);
-        props.onClose();
-    }, [notebookName]);
+    const handleCreate = () => {
+        if (!name.trim()) return;
+        noteHandler.newNoteBook(name.trim());
+        onClose();
+    };
 
     return (
         <div>
-            <ModalRoot className="pc-create-notebook" size={ModalSize.SMALL} {...props}>
-                <ModalHeader className="pc-notebook-header">
-                    <BaseText tag="h3">{t(plugin.holyNotes.modal.create.title)}</BaseText>
-                    <ModalCloseButton onClick={props.onClose} />
+            <ModalRoot transitionState={transitionState} size={ModalSize.SMALL} className={cl("create-modal")}>
+                <ModalHeader separator={false} className={cl("header")}>
+                    <div className={cl("header-content")}>
+                        <BaseText tag="h2" size="lg" weight="semibold" className={cl("title")}>{t(plugin.holyNotes.modal.create.title)}</BaseText>
+                        <BaseText size="sm" className={cl("description")}>{t(plugin.holyNotes.modal.create.description)}</BaseText>
+                    </div>
+                    <div className={cl("header-trailing")}>
+                        <CloseButton onClick={onClose} />
+                    </div>
                 </ModalHeader>
-                <ModalContent>
+                <ModalContent className={cl("content")}>
                     <TextInput
-                        value={notebookName}
+                        value={name}
                         placeholder={t(plugin.holyNotes.modal.create.placeholder)}
-                        onChange={value => setNotebookName(value)}
-                        style={{ marginBottom: "10px" }} />
+                        onChange={value => setName(value)} />
                 </ModalContent>
                 <ModalFooter>
-                    <Button onClick={handleCreateNotebook} variant="positive">{t(plugin.holyNotes.button.create)}</Button>
+                    <Button variant="primary" onClick={handleCreate}>{t(plugin.holyNotes.button.create)}</Button>
+                    <Button variant="secondary" onClick={onClose}>{t(plugin.holyNotes.button.cancel)}</Button>
                 </ModalFooter>
             </ModalRoot>
         </div>
     );
-};
+}
