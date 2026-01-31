@@ -20,6 +20,7 @@
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { debounce } from "@shared/debounce";
 import { Devs, PcDevs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
@@ -142,7 +143,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
                         minValue={1}
                         maxValue={50}
                         value={settings.store.zoom}
-                        onChange={(value: number) => settings.store.zoom = value}
+                        onChange={debounce((value: number) => settings.store.zoom = value, 100)}
                     />
                 )}
             />
@@ -156,7 +157,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
                         minValue={50}
                         maxValue={1000}
                         value={settings.store.size}
-                        onChange={(value: number) => settings.store.size = value}
+                        onChange={debounce((value: number) => settings.store.size = value, 100)}
                     />
                 )}
             />
@@ -170,7 +171,7 @@ const imageContextMenuPatch: NavContextMenuPatchCallback = (children, props) => 
                         minValue={0.1}
                         maxValue={5}
                         value={settings.store.zoomSpeed}
-                        onChange={(value: number) => settings.store.zoomSpeed = value}
+                        onChange={debounce((value: number) => settings.store.zoomSpeed = value, 100)}
                         renderValue={(value: number) => `${value.toFixed(3)}x`}
                     />
                 )}
@@ -343,6 +344,7 @@ export default definePlugin({
                 }
             ]
         },
+        // Make media viewer options not hide when zoomed in with the default Discord feature
         {
             find: '="FOCUS_SENSITIVE",',
             replacement: {
@@ -364,6 +366,10 @@ export default definePlugin({
                 {
                     match: /componentWillUnmount\(\){/,
                     replace: "$&$self.unMountMagnifier();"
+                },
+                {
+                    match: /componentDidUpdate\(\i\){/,
+                    replace: "$&$self.updateMagnifier(this);"
                 }
             ]
         }
@@ -374,11 +380,12 @@ export default definePlugin({
         "image-context": imageContextMenuPatch
     },
 
+    // to stop from rendering twice /shrug
     currentMagnifierElement: null as React.FunctionComponentElement<MagnifierProps & JSX.IntrinsicAttributes> | null,
     element: null as HTMLDivElement | null,
+
     Magnifier,
     root: null as Root | null,
-
     makeProps(instance) {
         return {
             onMouseOver: () => this.onMouseOver(instance),
@@ -410,12 +417,16 @@ export default definePlugin({
                     this.root = createRoot(this.element!);
                 }
 
-                this.currentMagnifierElement = <Magnifier instance={instance} />;
+                this.currentMagnifierElement = <Magnifier size={settings.store.size} zoom={settings.store.zoom} instance={instance} />;
                 this.root.render(this.currentMagnifierElement);
             }
         } catch (error) {
             new Logger("ImageZoom").error("Failed to render magnifier:", error);
         }
+    },
+
+    updateMagnifier(instance) {
+        this.renderMagnifier(instance);
     },
 
     unMountMagnifier() {

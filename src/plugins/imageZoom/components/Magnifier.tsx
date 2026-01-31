@@ -18,8 +18,8 @@
 */
 
 import ErrorBoundary from "@components/ErrorBoundary";
+import { settings } from "@plugins/imageZoom";
 import { ELEMENT_ID } from "@plugins/imageZoom/constants";
-import { settings } from "@plugins/imageZoom/index";
 import { waitFor } from "@plugins/imageZoom/utils/waitFor";
 import { classNameFactory } from "@utils/css";
 import { FluxDispatcher, useLayoutEffect, useMemo, useRef, useState } from "@webpack/common";
@@ -30,35 +30,29 @@ interface Vec2 {
 }
 
 export interface MagnifierProps {
+    zoom: number;
+    size: number,
     instance: any;
 }
 
 const cl = classNameFactory("pc-imgzoom-");
 
-export const Magnifier = ErrorBoundary.wrap<MagnifierProps>(({ instance }) => {
+export const Magnifier = ErrorBoundary.wrap<MagnifierProps>(({ instance, size: initialSize, zoom: initalZoom }) => {
     const [ready, setReady] = useState(false);
 
     const [lensPosition, setLensPosition] = useState<Vec2>({ x: 0, y: 0 });
     const [imagePosition, setImagePosition] = useState<Vec2>({ x: 0, y: 0 });
     const [opacity, setOpacity] = useState(0);
 
-    const isMouseOverRef = useRef(false);
-    const isMouseDownRef = useRef(false);
-
     const isShiftDown = useRef(false);
 
-    const { zoom: settingsZoom, size: settingsSize } = settings.use(["zoom", "size"]);
-
-    const zoom = useRef(settingsZoom);
-    const size = useRef(settingsSize);
+    const zoom = useRef(initalZoom);
+    const size = useRef(initialSize);
 
     const element = useRef<HTMLDivElement | null>(null);
     const currentVideoElementRef = useRef<HTMLVideoElement | null>(null);
     const originalVideoElementRef = useRef<HTMLVideoElement | null>(null);
     const imageRef = useRef<HTMLImageElement | null>(null);
-
-    zoom.current = settingsZoom;
-    size.current = settingsSize;
 
     // since we accessing document im gonna use useLayoutEffect
     useLayoutEffect(() => {
@@ -80,7 +74,7 @@ export const Magnifier = ErrorBoundary.wrap<MagnifierProps>(({ instance }) => {
         const updateMousePosition = (e: MouseEvent) => {
             if (!element.current) return;
 
-            if (isMouseOverRef.current && isMouseDownRef.current) {
+            if (instance.state.mouseOver && instance.state.mouseDown) {
                 const offset = size.current / 2;
                 const pos = { x: e.pageX, y: e.pageY };
                 const x = -((pos.x - element.current.getBoundingClientRect().left) * zoom.current - offset);
@@ -95,8 +89,10 @@ export const Magnifier = ErrorBoundary.wrap<MagnifierProps>(({ instance }) => {
         };
 
         const onMouseDown = (e: MouseEvent) => {
-            if (isMouseOverRef.current && e.button === 0) {
-                isMouseDownRef.current = true;
+            if (instance.state.mouseOver && e.button === 0 /* left click */) {
+                zoom.current = settings.store.zoom;
+                size.current = settings.store.size;
+
                 // close context menu if open
                 if (document.getElementById("image-context")) {
                     FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" });
@@ -108,18 +104,17 @@ export const Magnifier = ErrorBoundary.wrap<MagnifierProps>(({ instance }) => {
         };
 
         const onMouseUp = () => {
-            isMouseDownRef.current = false;
             setOpacity(0);
         };
 
         const onWheel = async (e: WheelEvent) => {
-            if (isMouseOverRef.current && isMouseDownRef.current && !isShiftDown.current) {
+            if (instance.state.mouseOver && instance.state.mouseDown && !isShiftDown.current) {
                 const val = zoom.current + ((e.deltaY / 100) * (settings.store.invertScroll ? -1 : 1)) * settings.store.zoomSpeed;
                 zoom.current = val <= 1 ? 1 : val;
                 if (settings.store.saveZoomValues) settings.store.zoom = zoom.current;
                 updateMousePosition(e);
             }
-            if (isMouseOverRef.current && isMouseDownRef.current && isShiftDown.current) {
+            if (instance.state.mouseOver && instance.state.mouseDown && isShiftDown.current) {
                 const val = size.current + (e.deltaY * (settings.store.invertScroll ? -1 : 1)) * settings.store.zoomSpeed;
                 size.current = val <= 50 ? 50 : val;
                 if (settings.store.saveZoomValues) settings.store.size = size.current;

@@ -72,11 +72,11 @@ A powerful, lightweight Discord client modification that enhances your Discord e
 
 ### Browser
 
-Install via extension or UserScript - see our [browser installation guide](https://docs.plexcord.club/installing/browser)
+Install via extension or UserScript - see our [browser installation guide](https://plexcord.club/download)
 
 ### Manual Installation
 
-For advanced users, see the [development setup guide](https://docs.plexcord.club/installing/manual)
+For advanced users, see the [development setup guide](https://docs.plexcord.club/docs/installing/plexcord)
 
 ## Support the Project
 
