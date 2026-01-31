@@ -1,25 +1,98 @@
+<div align="center">
+
 # Plexcord
 
-Taking Discord to the Next Level!
+**Taking Discord to the Next Level!**
 
-## Features
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/MutanPlex?style=for-the-badge&logo=github&color=pink)](https://github.com/sponsors/MutanPlex)
+[![Discord](https://img.shields.io/discord/1342668210331324476?style=for-the-badge&logo=discord&logoColor=white&label=Discord)](https://discord.gg/HQGYXm5XSh)
+[![GitHub Stars](https://img.shields.io/github/stars/MutanPlex/Plexcord?style=for-the-badge&logo=github)](https://github.com/MutanPlex/Plexcord/stargazers)
+[![License](https://img.shields.io/github/license/MutanPlex/Plexcord?style=for-the-badge)](LICENSE)
 
--   Super easy to install (Download Installer, open, click install button, done)
--   100+ plugins built in: [See a list](https://plexcord.club/plugins)
-    -   Some highlights: SpotifyControls, MessageLogger, Experiments, GameActivityToggle, Translate, NoTrack, QuickReply, Free Emotes/Stickers, PermissionsViewer, CustomCommands, ShowHiddenChannels, PronounDB
--   Fairly lightweight despite the many inbuilt plugins
--   Excellent Browser Support: Run Plexcord in your Browser via extension or UserScript
--   Works on any Discord branch: Stable, Canary or PTB all work (though for the best experience I recommend stable!)
--   Custom CSS and Themes: Inbuilt css editor with support to import any css files (including BetterDiscord themes)
--   Privacy friendly: blocks Discord analytics & crash reporting out of the box and has no telemetry
--   Maintained very actively, broken plugins are usually fixed within 12 hours
--   Settings sync: Keep your plugins and their settings synchronised between devices / apps (optional)
+A powerful, lightweight Discord client modification that enhances your Discord experience with 300+ built-in plugins, custom themes, and privacy-focused features.
 
-## Join our Support/Community Server
+[Features](#features) • [Installation](#installation) • [Documentation](https://docs.plexcord.club) • [Support Server](https://discord.gg/HQGYXm5XSh) • [Contributing](CONTRIBUTING.md)
 
-https://discord.gg/HQGYXm5XSh
+</div>
 
-## Star History
+---
+
+## ✨ Features
+
+### 🚀 Easy Installation & Setup
+
+- **One-Click Installation**: Download the installer, click install, and you're done!
+- **Cross-Platform Support**: Works on Windows, macOS, and Linux
+- **Browser Extension**: Run Plexcord in your browser via extension or UserScript
+- **Multi-Branch Support**: Compatible with Discord Stable, Canary, and PTB
+
+### 🔌 Powerful Plugin System
+
+- **300+ Built-in Plugins**: [Browse all plugins](https://plexcord.club/plugins)
+- **Popular Plugins Include**:
+    - 🎵 **MusicControls** - Control Spotify, Youtube Music and Tidal directly from Discord
+    - 📝 **MessageLogger** - Never lose a deleted message
+    - 🧪 **Experiments** - Access Discord's experimental features
+    - 🎮 **GameActivityToggle** - Quickly toggle game activity
+    - 🌍 **Translate** - Translate messages on the fly
+    - 🚫 **NoTrack** - Block Discord tracking
+    - 💬 **QuickReply** - Reply to messages faster
+    - 😀 **Free Emotes/Stickers** - Use emotes and stickers for free
+    - 🔐 **PermissionsViewer** - View detailed permissions
+    - ⌨️ **CustomCommands** - Create your own commands
+    - 👁️ **ShowHiddenChannels** - See hidden channels
+- **Lightweight Performance**: Despite many plugins, remains fast and efficient
+
+### 🎨 Customization
+
+- **Custom CSS Editor**: Built-in CSS editor with syntax highlighting
+- **Theme Support**: Import any CSS files, including BetterDiscord themes
+- **Monaco Editor Integration**: Professional code editing experience
+
+### 🔒 Privacy & Security
+
+- **No Telemetry**: Zero data collection from Plexcord
+- **Analytics Blocking**: Blocks Discord analytics & crash reporting by default
+- **Privacy-First Design**: Your data stays on your device
+
+### 🔄 Advanced Features
+
+- **Settings Sync**: Keep plugins and settings synchronized across devices (optional)
+- **Active Maintenance**: Broken plugins typically fixed within 12 hours
+- **Developer Friendly**: Comprehensive [documentation](https://docs.plexcord.club) and APIs
+
+## 📥 Installation
+
+### Desktop
+
+1. Download the latest installer from [Releases](https://github.com/MutanPlex/Plexcord/releases)
+2. Run the installer
+3. Click the install button
+4. Restart Discord
+
+### Browser
+
+Install via extension or UserScript - see our [browser installation guide](https://docs.plexcord.club/installing/browser)
+
+### Manual Installation
+
+For advanced users, see the [development setup guide](https://docs.plexcord.club/installing/manual)
+
+## Support the Project
+
+If you enjoy using Plexcord, please consider supporting the development:
+
+[![Sponsor MutanPlex](https://img.shields.io/badge/Sponsor-MutanPlex-pink?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/MutanPlex)
+
+Your support helps maintain and improve Plexcord!
+
+## 🌐 Join our Support/Community Server
+
+Join our community for support, updates, and discussions:
+
+[![Discord Server](https://discord.com/api/guilds/1342668210331324476/widget.png?style=banner2)](https://discord.gg/HQGYXm5XSh)
+
+<div align="center">
 
 <a href="https://star-history.com/#MutanPlex/Plexcord&Timeline">
   <picture>
@@ -29,20 +102,36 @@ https://discord.gg/HQGYXm5XSh
   </picture>
 </a>
 
-## Disclaimer
+<br>
 
-Discord is trademark of Discord Inc. and solely mentioned for the sake of descriptivity.
+**Discord** is a trademark of Discord Inc. and solely mentioned for the sake of descriptivity.
 Mention of it does not imply any affiliation with or endorsement by Discord Inc.
 
 <details>
-<summary>Using Plexcord violates Discord's terms of service</summary>
+<summary>⚠️ Using Plexcord violates Discord's Terms of Service</summary>
 
-Client modifications are against Discord’s Terms of Service.
+<br>
 
-However, Discord is pretty indifferent about them and there are no known cases of users getting banned for using client mods! So you should generally be fine as long as you don’t use any plugins that implement abusive behaviour. But no worries, all inbuilt plugins are safe to use!
+**Client modifications are against Discord's Terms of Service.**
 
-Regardless, if your account is very important to you and it getting disabled would be a disaster for you, you should probably not use any client mods (not exclusive to Plexcord), just to be safe
+However, Discord is generally indifferent about client modifications and there are **no known cases** of users getting banned for using client mods! You should be safe as long as you don't use plugins that implement abusive behavior. All built-in Plexcord plugins are safe to use.
 
-Additionally, make sure not to post screenshots with Plexcord in a server where you might get banned for it
+**That said:**
+
+- If your account is very important to you and getting it disabled would be catastrophic, consider the risks of using **any** client mod (not just Plexcord)
+- Avoid posting screenshots showing Plexcord in servers where client mods might result in a ban
+- Use common sense and don't abuse Discord's systems
+
+**Use at your own discretion.**
 
 </details>
+
+---
+
+<div align="center">
+
+**Made with ❤️ by [MutanPlex](https://github.com/MutanPlex) and [contributors](https://github.com/MutanPlex/Plexcord/graphs/contributors)**
+
+If you find Plexcord useful, please consider [sponsoring](https://github.com/sponsors/MutanPlex) ⭐
+
+</div>

@@ -148,8 +148,8 @@ export const settings = definePluginSettings({
         type: OptionType.SELECT,
         get options() {
             return [
-                { value: "above", label: t(plugin.musicControls.option.LyricsPosition.above), },
-                { value: "below", label: t(plugin.musicControls.option.LyricsPosition.below), default: true },
+                { value: "above", label: () => t(plugin.musicControls.option.LyricsPosition.above), },
+                { value: "below", label: () => t(plugin.musicControls.option.LyricsPosition.below), default: true },
             ];
         },
     },
@@ -159,8 +159,8 @@ export const settings = definePluginSettings({
         type: OptionType.SELECT,
         get options() {
             return [
-                { value: Provider.Spotify, label: t(plugin.musicControls.option.LyricsProvider.spotify), default: true },
-                { value: Provider.Lrclib, label: t(plugin.musicControls.option.LyricsProvider.LRCLIB) },
+                { value: Provider.Spotify, label: () => t(plugin.musicControls.option.LyricsProvider.spotify), default: true },
+                { value: Provider.Lrclib, label: () => t(plugin.musicControls.option.LyricsProvider.LRCLIB) },
             ];
         },
     },
