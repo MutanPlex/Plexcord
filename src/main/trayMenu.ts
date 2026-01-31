@@ -118,7 +118,8 @@ export function patchTrayMenu(): void {
     const originalBuildFromTemplate = Menu.buildFromTemplate;
 
     Menu.buildFromTemplate = function (template: MenuItemConstructorOptions[]) {
-        if (isTrayMenu(template)) {
+        const alreadyPatched = template.some(item => item.label === "Plexcord");
+        if (isTrayMenu(template) && !alreadyPatched) {
             const insertIndex = findInsertIndex(template);
             const plexcordItems = createPlexcordMenuItems();
             template.splice(insertIndex, 0, ...plexcordItems);
