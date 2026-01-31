@@ -5343,23 +5343,89 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MessageClickActions",
             description: "Backspace tuşunu basılı tutup tıklayarak silmeyi, çift tıklayarak düzenleme veya yanıtlamayı sağlar.",
             option: {
-                enableDeleteOnClick: {
-                    label: "Tıklamayla Silmeyi Etkinleştir",
-                    description: "Backspace tuşunu basılı tutarken tıklamayla silmeyi etkinleştir"
+                reactEmoji: {
+                    label: "Reaksiyon Emojisi",
+                    description: "Reaksiyon eylemleri için kullanılacak emoji"
                 },
-                enableDoubleClickToEdit: {
-                    label: "Çift Tıklamayla Düzenlemeyi Etkinleştir",
-                    description: "Çift tıklamayla düzenlemeyi etkinleştir"
+                singleClickAction: {
+                    label: "Tek Tıklama Eylemi",
+                    description: "Modifikatör ile tek tıklama eylemi"
                 },
-                enableDoubleClickToReply: {
-                    label: "Çift Tıklamayla Yanıtlamayı Etkinleştir",
-                    description: "Çift tıklamayla yanıtlamayı etkinleştir"
+                singleClickModifier: {
+                    label: "Tek Tıklama Modifikatörü",
+                    description: "Tek tıklama eylemi için gereken modifikatör"
                 },
-                requireModifier: {
-                    label: "Değiştirici Tuş Gerekli",
-                    description: "Yalnızca shift/ctrl tuşu basılıyken çift tıklama eylemlerini gerçekleştir"
+                doubleClickAction: {
+                    label: "Çift Tıklama Eylemi",
+                    description: "Kendi mesajlarınızda çift tıklama eylemi"
+                },
+                doubleClickOthersAction: {
+                    label: "Çift Tıklama Eylemi (Diğerleri)",
+                    description: "Diğerlerinin mesajlarında çift tıklama eylemi"
+                },
+                doubleClickModifier: {
+                    label: "Çift Tıklama Modifikatörü",
+                    description: "Çift tıklama eylemi için gereken modifikatör"
+                },
+                tripleClickAction: {
+                    label: "Üç Tıklama Eylemi",
+                    description: "Üç tıklama eylemi"
+                },
+                tripleClickModifier: {
+                    label: "Üç Tıklama Modifikatörü",
+                    description: "Üç tıklama eylemi için gereken modifikatör"
+                },
+                disableInDms: {
+                    label: "DM'lerde Devre Dışı Bırak",
+                    description: "Tüm tıklama eylemlerini doğrudan mesajlarda devre dışı bırak"
+                },
+                disableInSystemDms: {
+                    label: "Sistem DM'lerinde Devre Dışı Bırak",
+                    description: "Tüm tıklama eylemlerini sistem DM'lerinde devre dışı bırak"
+                },
+                clickTimeout: {
+                    label: "Tıklama Zaman Aşımı",
+                    description: "Çift/üçlü tıklamaları ayırt etmek için zaman aşımı (ms)"
+                },
+                selectionHoldTimeout: {
+                    label: "Seçim Tutma Zaman Aşımı",
+                    description: "Metin seçimine izin vermek için zaman aşımı (ms)"
+                },
+                quoteWithReply: {
+                    label: "Alıntı ile Yanıtla",
+                    description: "Alıntı yaparken, mesaja da yanıt ver"
+                },
+                useSelectionForQuote: {
+                    label: "Alıntı için Seçimi Kullan",
+                    description: "Alıntı yaparken, seçili metni kullan (varsa)"
                 }
-            }
+            },
+            actions: {
+                none: "Yok",
+                delete: "Sil",
+                copyLink: "Bağlantıyı Kopyala",
+                copyID: "ID'yi Kopyala",
+                copyContent: "İçeriği Kopyala",
+                copyUserID: "Kullanıcı ID'sini Kopyala",
+                edit: "Düzenle",
+                reply: "Yanıtla",
+                react: "Tepki Ver",
+                openThread: "Konuyu Aç",
+                openTab: "Sekmede Aç",
+                quote: "Alıntıla",
+                pin: "Sabitle"
+            },
+            missingPermissions: {
+                react: "Tepki verilemiyor: Eksik izinler",
+                pin: "Sabitlenemiyor: Eksik izinler",
+            },
+            cannotQuote: "Bu mesaj türü alıntılanamaz",
+            copy: {
+                messageId: "Mesaj ID'si kopyalandı!",
+                messageContent: "Mesaj içeriği kopyalandı!",
+                userId: "Kullanıcı ID'si kopyalandı!"
+            },
+            linkCopied: "Bağlantı kopyalandı!"
         },
         messageColors: {
             name: "MessageColors",

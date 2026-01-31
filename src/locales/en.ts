@@ -5339,23 +5339,89 @@ const translations = {
             name: "MessageClickActions",
             description: "Hold Backspace and click to delete, double click to edit/reply",
             option: {
-                enableDeleteOnClick: {
-                    label: "Enable Delete on Click",
-                    description: "Enable delete on click while holding backspace"
+                reactEmoji: {
+                    label: "React Emoji",
+                    description: "Emoji to use for react actions"
                 },
-                enableDoubleClickToEdit: {
-                    label: "Enable Double Click to Edit",
-                    description: "Enable double click to edit"
+                singleClickAction: {
+                    label: "Single Click Action",
+                    description: "Action on single click with modifier"
                 },
-                enableDoubleClickToReply: {
-                    label: "Enable Double Click to Reply",
-                    description: "Enable double click to reply"
+                singleClickModifier: {
+                    label: "Single Click Modifier",
+                    description: "Modifier required for single click action"
                 },
-                requireModifier: {
-                    label: "Require Modifier",
-                    description: "Only do double click actions when shift/ctrl is held"
+                doubleClickAction: {
+                    label: "Double Click Action",
+                    description: "Action on double-click (your messages)"
+                },
+                doubleClickOthersAction: {
+                    label: "Double Click Action (Others)",
+                    description: "Action on double-click (others' messages)"
+                },
+                doubleClickModifier: {
+                    label: "Double Click Modifier",
+                    description: "Modifier required for double-click action"
+                },
+                tripleClickAction: {
+                    label: "Triple Click Action",
+                    description: "Action on triple-click"
+                },
+                tripleClickModifier: {
+                    label: "Triple Click Modifier",
+                    description: "Modifier required for triple-click action"
+                },
+                disableInDms: {
+                    label: "Disable in DMs",
+                    description: "Disable all click actions in direct messages"
+                },
+                disableInSystemDms: {
+                    label: "Disable in System DMs",
+                    description: "Disable all click actions in system DMs"
+                },
+                clickTimeout: {
+                    label: "Click Timeout",
+                    description: "Timeout to distinguish double/triple clicks (ms)"
+                },
+                selectionHoldTimeout: {
+                    label: "Selection Hold Timeout",
+                    description: "Timeout to allow text selection (ms)"
+                },
+                quoteWithReply: {
+                    label: "Quote with Reply",
+                    description: "When quoting, also reply to the message"
+                },
+                useSelectionForQuote: {
+                    label: "Use Selection for Quote",
+                    description: "When quoting, use selected text if available"
                 }
-            }
+            },
+            actions: {
+                none: "None",
+                delete: "Delete",
+                copyLink: "Copy Link",
+                copyID: "Copy ID",
+                copyContent: "Copy Content",
+                copyUserID: "Copy User ID",
+                edit: "Edit",
+                reply: "Reply",
+                react: "React",
+                openThread: "Open Thread",
+                openTab: "Open Tab",
+                quote: "Quote",
+                pin: "Pin"
+            },
+            missingPermissions: {
+                react: "Cannot react: Missing permissions",
+                pin: "Cannot pin: Missing permissions",
+            },
+            cannotQuote: "Cannot quote this message type",
+            copy: {
+                messageId: "Message ID copied!",
+                messageContent: "Message content copied!",
+                userId: "User ID copied!"
+            },
+            linkCopied: "Link copied!"
         },
         messageColors: {
             name: "MessageColors",
