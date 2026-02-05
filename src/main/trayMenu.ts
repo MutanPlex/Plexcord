@@ -72,6 +72,16 @@ function openAboutWindow() {
         width
     });
 
+    aboutWindow.webContents.setWindowOpenHandler(({ url }) => {
+        shell.openExternal(url);
+        return { action: "deny" };
+    });
+
+    aboutWindow.webContents.on("will-navigate", (e, url) => {
+        e.preventDefault();
+        shell.openExternal(url);
+    });
+
     const aboutParams = aboutHtml
         .replaceAll("{{VERSION}}", VERSION)
         .replaceAll("{{GIT_HASH}}", gitHashShort);

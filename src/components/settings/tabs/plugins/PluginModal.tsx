@@ -37,7 +37,7 @@ import { classes, isObjectEmpty } from "@utils/misc";
 import { CloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { OptionType, Plugin } from "@utils/types";
 import { findComponentByCodeLazy, findCssClassesLazy } from "@webpack";
-import { Clickable, FluxDispatcher, React, Toasts, Tooltip, useEffect, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
+import { Clickable, FluxDispatcher, React, Toasts, Tooltip, useEffect, useMemo, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
 import { Constructor } from "type-fest";
 
 import { PluginMeta } from "~plugins";
@@ -92,27 +92,24 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
         : (typeof plugin.description === "function" ? plugin.description() : plugin.description);
 
     const hasSettings = Boolean(pluginSettings && plugin.options && !isObjectEmpty(plugin.options));
-    // prefill dummy user to avoid layout shift
-    const dummyAuthor = makeDummyUser({ username: "Loading...", id: "-1465912127305809920" });
-    const [authors, setAuthors] = useState<Partial<User>[]>(() => [dummyAuthor]);
+    // avoid layout shift by showing dummy users while loading users
+    const fallbackAuthors = useMemo(() => [makeDummyUser({ username: "Loading...", id: "-1465912127305809920" })], []);
+    const [authors, setAuthors] = useState<Partial<User>[]>([]);
 
     useEffect(() => {
         (async () => {
-            const loadedAuthors: Partial<User>[] = [];
-
-            for (const user of plugin.authors.slice(0, 6)) {
+            for (const [index, user] of plugin.authors.slice(0, 6).entries()) {
                 try {
                     const author = user.id
                         ? await UserUtils.getUser(String(user.id))
                             .catch(() => makeDummyUser({ username: user.name }))
                         : makeDummyUser({ username: user.name });
 
-                    loadedAuthors.push(author);
+                    setAuthors(a => [...a, author]);
                 } catch (e) {
                     continue;
                 }
             }
-            setAuthors(loadedAuthors.length ? loadedAuthors : [dummyAuthor]);
         })();
     }, [plugin.authors]);
 
@@ -201,7 +198,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                     <div style={{ width: "fit-content" }}>
                         <ErrorBoundary noop>
                             <UserSummaryItem
-                                users={authors}
+                                users={authors.length ? authors : fallbackAuthors}
                                 guildId={undefined}
                                 renderIcon={false}
                                 showDefaultAvatarsForNullUsers

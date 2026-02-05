@@ -74,7 +74,8 @@ export default definePlugin({
             label: getIntlMessage("USER_SETTINGS_SCAN_QR_CODE"),
             searchableTitles: [getIntlMessage("USER_SETTINGS_SCAN_QR_CODE")],
             element: openQrModal,
-            className: "pc-patch-helper"
+            className: "pc-patch-helper",
+            id: "PlexcordLoginWithQR",
         }));
 
         settingsSectionMap.push(["PlexcordLoginWithQR", "plexcord_login_with_qr"]);
@@ -82,6 +83,14 @@ export default definePlugin({
     },
 
     stop() {
+        const { customEntries, customSections } = SettingsPlugin;
+        const entry = customEntries.findIndex(entry => entry.key === "plexcord_login_with_qr");
+        if (entry !== -1) customEntries.splice(entry, 1);
+        const section = customSections.findIndex(section => section({} as any).id === "PlexcordLoginWithQR");
+        if (section !== -1) customSections.splice(section, 1);
+        const map = settingsSectionMap.findIndex(entry => entry[1] === "plexcord_login_with_qr");
+        if (map !== -1) settingsSectionMap.splice(map, 1);
+
         unload();
     },
 });

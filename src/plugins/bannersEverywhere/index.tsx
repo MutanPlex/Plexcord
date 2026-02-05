@@ -14,7 +14,7 @@ import { User } from "@plexcord/discord-types";
 import USRBGPlugin from "@plugins/usrbg";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
-import { findStoreLazy } from "@webpack";
+import { UserProfileStore } from "@webpack/common";
 
 import style from "./style.css?managed";
 
@@ -44,8 +44,6 @@ const settings = definePluginSettings({
 });
 
 const DATASTORE_KEY = "bannersEverywhere";
-
-const UserProfileStore = findStoreLazy("UserProfileStore");
 
 export default definePlugin({
     name: "BannersEverywhere",
