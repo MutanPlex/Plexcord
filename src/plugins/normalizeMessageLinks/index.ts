@@ -18,8 +18,8 @@ export default definePlugin({
         {
             find: "#{intl::COPY_MESSAGE_LINK}",
             replacement: {
-                match: /\.concat\(location\.host\)/,
-                replace: ".concat($self.normalizeHost(location.host))",
+                match: /(?<=\/\/\$\{)location\.host/,
+                replace: "$self.normalizeHost(location.host)",
             },
         },
     ],

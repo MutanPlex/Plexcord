@@ -28,7 +28,7 @@ export let colors: Record<string, string> = {};
 })();
 
 // needed for color picker to be available without opening settings (ty pindms!!)
-const requireSettingsMenu = extractAndLoadChunksLazy(['name:"UserSettings"'], /createPromise:.{0,20}(\i\.\i\("?.+?"?\).*?).then\(\i\.bind\(\i,"?(.+?)"?\)\).{0,50}"UserSettings"/);
+const requireSettingsMenu = extractAndLoadChunksLazy(['type:"USER_SETTINGS_MODAL_OPEN"']);
 const ColorIcon = () => {
     return (
         <svg

@@ -40,7 +40,7 @@ function SimplePicker({ voice, voices }: PickerProps) {
             placeholder={t(plugin.vcNarrator.modal.voice)}
             maxVisibleItems={5}
             options={options}
-            value={options.find(o => o.value === voice)}
+            value={options.find(o => o.value === voice)?.value}
             onChange={v => settings.store.voice = v}
             closeOnSelect
         />
@@ -87,16 +87,16 @@ function ComplexPicker({ voice, voices }: PickerProps) {
 
     return (
         <>
-            <Heading>Language</Heading>
+            <Heading>{t(plugin.vcNarrator.modal.languageTitle)}</Heading>
             <SearchableSelect
                 placeholder={t(plugin.vcNarrator.modal.language)}
                 options={languageOptions}
-                value={languageOptions.find(l => l.value === selectedLanguage)}
+                value={languageOptions.find(l => l.value === selectedLanguage)?.value}
                 onChange={v => setSelectedLanguage(v)}
                 maxVisibleItems={5}
                 closeOnSelect
             />
-            <Heading>Voice</Heading>
+            <Heading>{t(plugin.vcNarrator.modal.voiceTitle)}</Heading>
             <SimplePicker
                 voice={voice}
                 voices={voicesForLanguage}

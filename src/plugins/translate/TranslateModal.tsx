@@ -53,7 +53,7 @@ function LanguageSelect({ settingsKey, includeAuto }: { settingsKey: typeof Lang
 
             <SearchableSelect
                 options={options}
-                value={options.find(o => o.value === currentValue)}
+                value={options.find(o => o.value === currentValue)?.value}
                 placeholder={t(plugin.translate.modal.select)}
                 maxVisibleItems={5}
                 closeOnSelect={true}

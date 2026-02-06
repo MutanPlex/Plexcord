@@ -29,7 +29,7 @@ export default definePlugin({
 
     patches: [
         {
-            find: ':"text":',
+            find: '"text":"locked"',
             replacement: {
                 match: /(hidePersonalInformation\).+?)(if\(null!=\i\){.+?return \i)(?=})/,
                 replace: "$1return $self.UserMentionComponent({...arguments[0],originalComponent:()=>{$2}});"

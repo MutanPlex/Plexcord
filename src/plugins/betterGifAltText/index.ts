@@ -28,7 +28,7 @@ export default definePlugin({
 
     patches: [
         {
-            find: '"onCloseImage",',
+            find: ".modalContext})};",
             replacement: {
                 match: /(return.{0,10}\.jsx.{0,50}isWindowFocused)/,
                 replace:

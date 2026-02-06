@@ -20,7 +20,7 @@
 // DO NOT REMOVE UNLESS YOU WISH TO FACE THE WRATH OF THE CIRCULAR DEPENDENCY DEMON!!!!!!!
 import "~plugins";
 
-import { i18n, t, updater } from "./api/i18n";
+import { cloud, i18n, t, updater } from "./api/i18n";
 
 export * as Api from "./api";
 export * as Plugins from "./api/PluginManager";
@@ -32,13 +32,13 @@ import { popNotice, showNotice } from "./api/Notices";
 export * as Webpack from "./webpack";
 export * as WebpackPatcher from "./webpack/patchWebpack";
 export { PlainSettings, Settings };
-
 import { coreStyleRootNode, initStyles } from "@api/Styles";
 import { openSettingsTabModal, UpdaterTab } from "@components/settings";
 import { debounce } from "@shared/debounce";
 import { IS_WINDOWS } from "@utils/constants";
 import { createAndAppendStyle } from "@utils/css";
 import { StartAt } from "@utils/types";
+import { SettingsRouter } from "@webpack/common";
 
 import { get as dsGet } from "./api/DataStore";
 import { LocaleLoader } from "./api/LocaleLoader";
@@ -50,7 +50,6 @@ import { localStorage } from "./utils/localStorage";
 import { relaunch } from "./utils/native";
 import { checkForUpdates, isOutdated as getIsOutdated, update, UpdateLogger } from "./utils/updater";
 import { onceReady } from "./webpack";
-import { openUserSettingsPanel } from "./webpack/common";
 import { patches } from "./webpack/patchWebpack";
 
 if (IS_REPORTER) {
@@ -71,7 +70,7 @@ async function syncSettings() {
                 title: t(cloud.settings),
                 body: t(cloud.error.connect),
                 color: "var(--yellow-360)",
-                onClick: () => openUserSettingsPanel("plexcord_cloud")
+                onClick: () => SettingsRouter.openUserSettings("plexcord_cloud_panel")
             });
             // Disable cloud sync globally
             Settings.cloud.authenticated = false;
@@ -89,7 +88,7 @@ async function syncSettings() {
             title: t(cloud.notification.title),
             body: t(cloud.reauth),
             color: "var(--yellow-360)",
-            onClick: () => openUserSettingsPanel("plexcord_cloud")
+            onClick: () => SettingsRouter.openUserSettings("plexcord_cloud_panel")
         });
         return;
     }

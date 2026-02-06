@@ -1454,7 +1454,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterInvites: {
             name: "BetterInvites",
-            description: "Davetlerin bitiş tarihini gör, davet edenin profilini görüntüle ve adına tıklayarak keşfedilebilir sunucuları katılmadan önce önizle.",
+            description: "Davetlerin son kullanma tarihini gör, davet edenin profilini görüntüle ve katılmadan önce sunucuları önizle (isme tıklayarak)",
             render: {
                 tip: "Bu davet {{time}} sonra sona erecek",
                 header: "{{name}} seni {{server}} sunucusuna davet etti",
@@ -6513,7 +6513,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         onePingPerDM: {
             name: "OnePingPerDM",
-            description: "Bir kullanıcı DM’lerde art arda okunmamış mesajlar gönderse bile yalnızca bir sesli bildirim alırsınız. Limiti sıfırlamak için mesajları okuyun.",
+            description: "Bir kullanıcı DM’lerde art arda okunmamış mesajlar gönderse bile yalnızca bir sesli bildirim alırsınız.",
             option: {
                 channelToAffect: {
                     label: "Etkilenecek Kanal Türü",
@@ -9277,7 +9277,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             modal: {
                 title: "Örnek Sesleri Oynat",
+                voiceTitle: "Ses",
                 voice: "Bir ses seçin",
+                languageTitle: "Dil",
                 language: "Bir dil seçin",
                 noVoice: "Anlatıcı sesi bulunamadı.",
                 linuxNote: "speech-dispatcher veya espeak kurun ve Discord'u --enable-speech-dispatcher parametresiyle çalıştırın",

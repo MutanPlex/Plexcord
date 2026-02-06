@@ -865,7 +865,7 @@ export default definePlugin({
                     replace: "const showMeYourNameMention=$self.getMentionNameElement(arguments[0]);$1"
                 },
                 {
-                    match: /(?<=onContextMenu:\i\},\i\),{children:)/,
+                    match: /(?<=onContextMenu:\i,\.\.\.\i,children:)/,
                     replace: "showMeYourNameMention??",
                     predicate: () => !isPluginEnabled(mentionAvatars.name),
                 }
@@ -916,7 +916,7 @@ export default definePlugin({
             // Replace names in reaction tooltips.
             find: "reactionTooltip1,",
             replacement: {
-                match: /(\i.\i.getName\((\i),null==(?:.{0,15}?)(\i)\))/,
+                match: /(\i.\i.getName\((\i),\i\?\.id,(\i)\))/,
                 replace: "$self.getMemberListProfilesReactionsVoiceNameText({user:$3,guildId:$2,type:\"reactionsTooltip\"})??($1)"
             }
         },

@@ -80,10 +80,10 @@ export default definePlugin({
 
     patches: [
         {
-            find: '"_channelMessages",{})',
+            find: "_channelMessages={}",
             predicate: () => settings.store.blockedWords !== "",
             replacement: {
-                match: /static commit\((.{1,2})\){/g,
+                match: /static commit\((\i)\)\{/g,
                 replace: "$&$1=$self.blockMessagesWithKeywords($1);"
             }
         },

@@ -55,7 +55,7 @@ export default definePlugin({
             },
         },
         {
-            find: '"displayName","SpotifyStore")',
+            find: "}getPlayableComputerDevices(){",
             replacement: [
                 {
                     predicate: () => settings.store.noSpotifyAutoPause,

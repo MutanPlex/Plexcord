@@ -17,7 +17,7 @@ export default definePlugin({
     patches: [
         // When focused on voice channel or group chat voice call
         {
-            find: /\i\?\i.\i.SELF_VIDEO/,
+            find: ".STATUS_WARNING_BACKGROUND})})",
             replacement: {
                 match: /mirror:\i/,
                 replace: "mirror:!1"

@@ -1451,7 +1451,7 @@ const translations = {
         },
         betterInvites: {
             name: "BetterInvites",
-            description: "See invites expiration date, view inviter profile and preview discoverable servers before joining by clicking their name",
+            description: "See invites expiration date, view inviter profile and preview servers before joining by clicking the name",
             render: {
                 tip: "This invite will expire {{time}}",
                 header: "{{name}} invited you to {{server}}",
@@ -6509,7 +6509,7 @@ const translations = {
         },
         onePingPerDM: {
             name: "OnePingPerDM",
-            description: "If unread messages are sent by a user in DMs multiple times, you'll only receive one audio ping. Read the messages to reset the limit",
+            description: "If unread messages are sent by a user in DMs multiple times, you'll only receive one audio ping.",
             option: {
                 channelToAffect: {
                     label: "Channel to Affect",
@@ -9273,7 +9273,9 @@ const translations = {
             },
             modal: {
                 title: "Play Example Sounds",
+                voiceTitle: "Voice",
                 voice: "Select a voice",
+                languageTitle: "Language",
                 language: "Select a language",
                 noVoice: "No narrator voices found. ",
                 linuxNote: "Install speech-dispatcher or espeak and run Discord with the --enable-speech-dispatcher flag",

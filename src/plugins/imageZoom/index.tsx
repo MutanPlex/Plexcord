@@ -332,7 +332,7 @@ export default definePlugin({
 
     patches: [
         {
-            find: ".renderLinkComponent)?",
+            find: "disableArrowKeySeek:!0",
             replacement: [
                 {
                     match: /useFullWidth:!0,shouldLink:/,
