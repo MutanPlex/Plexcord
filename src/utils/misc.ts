@@ -108,6 +108,7 @@ export function isPlexcordGuild(id: string | null | undefined, isGuildId: boolea
     if (!id) return false;
     if (isGuildId) return id === PLEXCORD_GUILD_ID;
     const channel = ChannelStore.getChannel(id);
+    if (!channel) return false;
     return channel.guild_id === PLEXCORD_GUILD_ID;
 }
 
@@ -120,5 +121,11 @@ export function isSupport(userId: string | null | undefined): boolean {
     if (!userId) return false;
 
     const member = GuildMemberStore.getMember(PLEXCORD_GUILD_ID, userId);
-    return member?.roles?.includes(SUPPORT_ROLE_ID) ?? false;
+    if (!member) return false;
+    return member.roles.includes(SUPPORT_ROLE_ID) ?? false;
+}
+
+export function removeFromArray<T>(arr: T[], predicate: (e: T) => boolean) {
+    const idx = arr.findIndex(predicate);
+    if (idx !== -1) arr.splice(idx, 1);
 }

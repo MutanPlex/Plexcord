@@ -10,7 +10,7 @@ import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { OptionType } from "@utils/types";
-import { Alerts } from "@webpack/common";
+import { Alerts, useState } from "@webpack/common";
 import { Settings } from "Plexcord";
 
 import { Native } from ".";
@@ -20,6 +20,46 @@ import { clearMessagesIDB } from "./db";
 import { blockedExts } from "./list";
 import { DEFAULT_IMAGE_CACHE_DIR } from "./utils/constants";
 import { exportLogs, importLogs } from "./utils/settingsUtils";
+
+function ImportLogsButton() {
+    const [loading, setLoading] = useState(false);
+
+    return (
+        <Button
+            disabled={loading}
+            onClick={async () => {
+                setLoading(true);
+                try {
+                    await importLogs();
+                } finally {
+                    setLoading(false);
+                }
+            }}
+        >
+            {loading ? t(plugin.messageLoggerEnhanced.importing) : t(plugin.messageLoggerEnhanced.importLogs)}
+        </Button>
+    );
+}
+
+function ExportLogsButton() {
+    const [loading, setLoading] = useState(false);
+
+    return (
+        <Button
+            disabled={loading}
+            onClick={async () => {
+                setLoading(true);
+                try {
+                    await exportLogs();
+                } finally {
+                    setLoading(false);
+                }
+            }}
+        >
+            {loading ? t(plugin.messageLoggerEnhanced.exporting) : t(plugin.messageLoggerEnhanced.exportLogs)}
+        </Button>
+    );
+}
 
 export const settings = definePluginSettings({
     saveMessages: {
@@ -110,6 +150,13 @@ export const settings = definePluginSettings({
         label: () => t(plugin.messageLoggerEnhanced.option.alwaysLogCurrentChannel.label),
         description: () => t(plugin.messageLoggerEnhanced.option.alwaysLogCurrentChannel.description),
         default: true,
+        type: OptionType.BOOLEAN
+    },
+
+    permanentlyRemoveLogByDefault: {
+        label: () => t(plugin.messageLoggerEnhanced.option.permanentlyRemoveLogByDefault.label),
+        description: () => t(plugin.messageLoggerEnhanced.option.permanentlyRemoveLogByDefault.description),
+        default: false,
         type: OptionType.BOOLEAN
     },
 
@@ -234,20 +281,15 @@ export const settings = definePluginSettings({
         label: () => t(plugin.messageLoggerEnhanced.option.importLogs.label),
         description: () => t(plugin.messageLoggerEnhanced.option.importLogs.description),
         type: OptionType.COMPONENT,
-        component: () =>
-            <Button onClick={importLogs}>
-                {t(plugin.messageLoggerEnhanced.option.importLogs.label)}
-            </Button>
+
+        component: ImportLogsButton
     },
 
     exportLogs: {
         label: () => t(plugin.messageLoggerEnhanced.option.exportLogs.label),
         description: () => t(plugin.messageLoggerEnhanced.option.exportLogs.description),
         type: OptionType.COMPONENT,
-        component: () =>
-            <Button onClick={exportLogs}>
-                {t(plugin.messageLoggerEnhanced.option.exportLogs.label)}
-            </Button>
+        component: ExportLogsButton
     },
 
     openLogs: {
@@ -286,11 +328,12 @@ export const settings = definePluginSettings({
                 onClick={() => Alerts.show({
                     title: t(plugin.messageLoggerEnhanced.option.clearLogs.title),
                     body: t(plugin.messageLoggerEnhanced.option.clearLogs.body),
-                    confirmColor: "dangerPrimary",
+                    // @ts-expect-error not typed
+                    confirmVariant: "critical-primary",
                     confirmText: t(plugin.messageLoggerEnhanced.option.clearLogs.confirmText),
                     cancelText: t(plugin.messageLoggerEnhanced.option.clearLogs.cancel),
-                    onConfirm: () => {
-                        clearMessagesIDB();
+                    onConfirm: async () => {
+                        await clearMessagesIDB();
                     },
                 })}
             >

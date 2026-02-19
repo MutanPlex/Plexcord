@@ -5,7 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { ErrorBoundary } from "@components/index";
+import ErrorBoundary from "@components/ErrorBoundary";
+import { settings } from "@plugins/questify/settings";
 import { findComponentByCodeLazy } from "@webpack";
 import { SearchableSelect, useState } from "@webpack/common";
 import { JSX } from "react";
@@ -19,6 +20,19 @@ export const ServerListItemLowerBadgeComponent = findComponentByCodeLazy("BADGE_
 export const ServerListItemUpperBadgeComponent = findComponentByCodeLazy("{icon:", ".ROUND,disableColor");
 export const RadioGroup = findComponentByCodeLazy(",{label:", ",description:", ",required:", ",errorMessage:", ",children:");
 export const QuestTile = findComponentByCodeLazy(".rowIndex,trackGuildAndChannelMetadata");
+
+export class ActiveQuestIntervalsMap extends Map<string, { progressTimeout: NodeJS.Timeout; rerenderTimeout: NodeJS.Timeout; progress: number; type: string; }> {
+    set(key: string, value: { progressTimeout: NodeJS.Timeout; rerenderTimeout: NodeJS.Timeout; progress: number; type: string; }): this {
+        settings.store.resumeQuestIDs[value.type].push(key);
+        return super.set(key, value);
+    }
+
+    delete(key: string): boolean {
+        const types = Object.keys(settings.def.resumeQuestIDs.default);
+        for (const type of types) { settings.store.resumeQuestIDs[type] = settings.store.resumeQuestIDs[type].filter((id: string) => id !== key); }
+        return super.delete(key);
+    }
+}
 
 export enum QuestRewardType {
     UNKNOWN = 0,

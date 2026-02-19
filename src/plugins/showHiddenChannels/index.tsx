@@ -410,7 +410,7 @@ export default definePlugin({
                 },
                 {
                     // Remove the open chat button for the HiddenChannelLockScreen
-                    match: /(?<="participants-list-button"\),!\i&&)\(0,\i\.jsxs?\).{0,280}?iconClassName:/,
+                    match: /(?<=numRequestToSpeak:\i\}\)\}\):null,!\i&&)\(0,\i\.jsxs?\).{0,280}?iconClassName:/,
                     replace: "!$self.isHiddenChannel(arguments[0]?.channel,true)&&$&"
                 }
             ]
@@ -440,10 +440,10 @@ export default definePlugin({
             },
         },
         {
-            find: 'className:"channelMention",children:',
+            find: '"channel_mention"});',
             replacement: {
                 // Show inside voice channel instead of trying to join them when clicking on a channel mention
-                match: /(?<=getChannel\(\i\);null!=(\i))(?=.{0,100}?selectVoiceChannel)/,
+                match: /(?<=getChannel\(\i\);if\(null!=(\i))(?=.{0,150}?selectVoiceChannel)/,
                 replace: (_, channel) => `&&!$self.isHiddenChannel(${channel})`
             }
         },

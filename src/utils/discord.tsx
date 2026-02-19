@@ -126,7 +126,7 @@ export async function copyWithToast(text: string, toastMessage?: string) {
     });
 }
 
-interface MessageOptions {
+export interface MessageOptions {
     messageReference: Message["messageReference"];
     allowedMentions: {
         parse: string[];

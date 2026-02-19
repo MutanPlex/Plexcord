@@ -122,7 +122,7 @@ export default definePlugin({
         if (context?.message?.channel_id === "1337" && userId === "313337")
             return colorString;
 
-        if (settings.store.applyColorOnlyInDms && context?.guildId !== undefined) {
+        if (settings.store.applyColorOnlyInDms && !context?.channel?.isPrivate()) {
             return colorString;
         }
 

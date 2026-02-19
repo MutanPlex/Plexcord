@@ -1,17 +1,17 @@
-.msg-logger-modal-root {
+.pc-msg-logger-enhanced-modal-root {
     max-height: 80vh;
     min-height: 80vh;
     min-width: 85vw;
     max-width: 85vw;
 }
 
-.msg-logger-modal-empty-logs {
+.pc-msg-logger-enhanced-modal-empty-logs {
     display: grid;
     place-content: center;
     height: 100%;
 }
 
-.msg-logger-modal-info-icon {
+.pc-msg-logger-enhanced-modal-info-icon {
     position: absolute;
     top: -24px;
     right: -24px;
@@ -19,46 +19,46 @@
     cursor: pointer;
 }
 
-.msg-logger-modal-header {
+.pc-msg-logger-enhanced-modal-header {
     flex-direction: column;
 
     /* width: 100%; */
 }
 
-.msg-logger-modal-content-container {
+.pc-msg-logger-enhanced-modal-content-container {
     /* max-height: 80vh; */
     overflow: hidden;
     height: 100%;
     transition: opacity 100ms ease-in;
 }
 
-.msg-logger-modal-content {
+.pc-msg-logger-enhanced-modal-content {
     padding-bottom: 20px;
     height: 100%;
 }
 
-.msg-logger-modal-content-inner {
+.pc-msg-logger-enhanced-modal-content-inner {
     padding-top: 1rem;
     padding-bottom: 1rem;
     height: 100%;
 }
 
-.msg-logger-modal-header > div:has(input) {
+.pc-msg-logger-enhanced-modal-header > div:has(input) {
     width: 100%;
 }
 
-.msg-logger-modal-tab-bar-item {
+.pc-msg-logger-enhanced-modal-tab-bar-item {
     padding-bottom: 16px;
     margin-bottom: -2px;
 }
 
-.msg-logger-modal-tab-bar {
+.pc-msg-logger-enhanced-modal-tab-bar {
     margin-top: 20px;
     width: 100%;
     justify-content: space-around;
 }
 
-.msg-logger-modal-from {
+.pc-msg-logger-enhanced-modal-from {
     font-size: 14px;
     margin-left: 12px;
 }
@@ -67,40 +67,45 @@
     color: var(--status-danger);
 }
 
-.msg-logger-modal-from-edited {
+.pc-msg-logger-enhanced-modal-from-edited {
     color: var(--white-600);
 }
 
-.pc-log-toolbox-btn svg {
+.pc-msg-logger-enhanced-toolbox-btn svg {
     color: var(--interactive-icon-default);
 }
 
-:is(.pc-log-toolbox-btn:hover, .pc-log-toolbox-btn[class*="selected"]) svg {
+:is(.pc-msg-logger-enhanced-toolbox-btn:hover, .pc-msg-logger-enhanced-toolbox-btn[class*="selected"]) svg {
     color: var(--interactive-icon-active);
 }
 
-.folder-upload-container {
+.pc-msg-logger-enhanced-folder-upload-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0;
     background-color: var(--background-secondary-alt);
 }
 
-.folder-upload-input {
+.pc-msg-logger-enhanced-folder-upload-input {
     cursor: pointer;
     padding: 10px 0 10px 10px;
     color: var(--text-default);
 }
 
-.folder-upload-button {
+.pc-msg-logger-enhanced-folder-upload-button {
     margin: 6px;
     padding: 4px 8px;
 }
 
-.pc-message-logger-icon {
+.pc-msg-logger-enhanced-message-icon {
     padding: 0;
     width: var(--space-32);
     min-width: 0;
     height: var(--space-32);
     color: var(--interactive-icon-default) !important;
+}
+
+.pc-updater-modal-content {
+    padding: 1rem 2rem;
 }

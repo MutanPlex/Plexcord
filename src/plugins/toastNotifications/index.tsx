@@ -26,7 +26,7 @@ import { MessageType, RelationshipType } from "@plexcord/discord-types/enums";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByPropsLazy, findStore } from "@webpack";
-import { ChannelStore, GuildRoleStore, NavigationRouter, RelationshipStore, SelectedChannelStore, StreamerModeStore, UserStore } from "@webpack/common";
+import { ChannelStore, GuildRoleStore, IconUtils, NavigationRouter, RelationshipStore, SelectedChannelStore, StreamerModeStore, UserStore } from "@webpack/common";
 import { ReactNode } from "react";
 
 interface NotificationData {
@@ -198,7 +198,7 @@ export default definePlugin({
             // Prepare the notification.
             const Notification: NotificationData = {
                 title: getName(message.author),
-                icon: `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=128`,
+                icon: IconUtils.getUserAvatarURL(message.author),
                 body: message.content,
                 attachments: message.attachments?.length,
                 richBody: null,
@@ -412,7 +412,7 @@ async function handleGuildMessage(message: Message) {
     // Prepare the notification.
     const Notification: NotificationData = {
         title: `${getName(message.author)} (#${channel.name})`,
-        icon: `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.png?size=128`,
+        icon: IconUtils.getUserAvatarURL(message.author),
         body: message.content,
         attachments: message.attachments?.length,
         richBody: null,
@@ -501,7 +501,7 @@ async function relationshipAdd(user: User, type: Number) {
 
     const Notification: NotificationData = {
         title: "",
-        icon: user.getAvatarURL(),
+        icon: IconUtils.getUserAvatarURL(user),
         body: "",
         attachments: 0,
     };
@@ -530,7 +530,7 @@ async function relationshipAdd(user: User, type: Number) {
 function showExampleNotification(): Promise<void> {
     const Notification: NotificationData = {
         title: t(plugin.toastNotifications.notification.example.title),
-        icon: `https://cdn.discordapp.com/avatars/${UserStore.getCurrentUser().id}/${UserStore.getCurrentUser().avatar}.png?size=128`,
+        icon: IconUtils.getUserAvatarURL(UserStore.getCurrentUser()),
         body: t(plugin.toastNotifications.notification.example.body),
         attachments: 0,
         permanent: false

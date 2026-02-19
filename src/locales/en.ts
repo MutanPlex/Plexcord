@@ -437,7 +437,10 @@ const translations = {
         successful: "Settings successfully imported. Restart to apply changes!",
         error: {
             failure: "Failed to import settings: {{error}}",
-            invalid: "Invalid Settings. Is this even a Plexcord Settings file?"
+            failedExport: "Failed to export settings, check console",
+            invalid: "Invalid Settings. Is this even a Plexcord Settings file?",
+            tooLarge: "DataStore too large - excluded from backup. Use 'Export DataStores' if needed.",
+            clearSomeDate: "DataStore too large. Please clear some plugin data and try again."
         },
         settings: {
             text: "What's included in a backup?",
@@ -969,10 +972,21 @@ const translations = {
             toast: {
                 success: "Success!",
                 failed: "Failed to run snippet :(",
-                failedOpenInvite: "Failed to open invite please check console :("
+                failedOpenInvite: "Failed to open invite please check console :(",
+                upload: "Plugin list uploaded successfully!",
+                failedUpload: "Failed to upload plugin list file. Please try again.",
+                unableGenerate: "Failed to generate plugin list."
             },
             dm: {
                 warning: "Please do not private message Plexcord plugin developers for support!{{br}}Instead, you can join the {{support}} server and use the Plexcord support channel: {{channel}}"
+            },
+            alert: {
+                title: "Warning: High Plugin Count",
+                paragraph1: "You have more than 100 plugins enabled.",
+                paragraph2: "Due to the sheer amount of plugins, you may not receive support.",
+                paragraph3: "Your issue is likely caused by plugin conflicts.",
+                paragraph4: "Please consider disabling some plugins to troubleshoot.",
+                paragraph5: "Your plugin list will be sent as a text file.",
             }
         },
         accountPanelServerProfile: {
@@ -3066,9 +3080,10 @@ const translations = {
             toast: {
                 crashed: {
                     title: "Discord has crashed!",
-                    body: "Awn :( Discord has crashed two times rapidly, not attempting to recover.",
+                    body: "Awn :( Discord has crashed two times rapidly, not attempting to recover. Click here to join our support server!",
                     update: "Uh oh, Discord has just crashed... but good news, there is a Plexcord update available that might fix this issue! Would you like to update now?",
-                    recover: "Attempting to recover..."
+                    recover: "Attempting to recover... Click here to join our support server!",
+                    invalid: "Invalid or expired invite link."
                 }
             }
         },
@@ -4025,7 +4040,44 @@ const translations = {
         },
         favoriteEmojiFirst: {
             name: "FavoriteEmojiFirst",
-            description: "Puts your favorite emoji first in the emoji autocomplete."
+            description: "Puts your favorite emoji first in the emoji autocomplete and also has emoji alias.",
+            option: {
+                aliases: {
+                    label: "Aliases",
+                    description: "Manage your emoji aliases."
+                },
+                clearAll: {
+                    label: "Clear All",
+                    description: "Delete all aliases."
+                }
+            },
+            modal: {
+                clear: {
+                    title: "Delete All Aliases",
+                    description: "This will remove every emoji alias you saved.",
+                    confirm: "Delete all aliases"
+                },
+                set: {
+                    title: "Set Alias",
+                    description: "Set an alias for {{emoji}}",
+                    placeholder: "Alias, e.g. 'happy'",
+                    save: "Save",
+                    error: "Duplicate alias"
+                }
+            },
+            toast: {
+                set: "Alias set for {{emoji}}",
+                clearAll: "Deleted all emoji aliases",
+                failedDeleted: "Failed to delete aliases",
+                removed: "Removed alias: {{alias}}",
+                failedRemove: "Failed to remove alias",
+                duplicate: "Duplicate alias",
+                failedSave: "Failed to save alias."
+            },
+            button: {
+                edit: "Edit alias",
+                set: "Set alias"
+            }
         },
         favoriteGifSearch: {
             name: "FavoriteGifSearch",
@@ -4494,6 +4546,10 @@ const translations = {
                     label: "Hyperlink",
                     description: "If the sent link should hyperlink with the query as the label"
                 },
+                embed: {
+                    label: "Embed",
+                    description: "If the sent link should render an embed"
+                },
                 defaultEngine: {
                     label: "Default Engine",
                     description: "The search engine to use"
@@ -4764,10 +4820,6 @@ const translations = {
                 temporarilyIgnore: "Temporarily Ignore Calls",
                 permanentlyIgnore: "Permanently Ignore Calls"
             }
-        },
-        ignoreTerms: {
-            name: "IgnoreTerms",
-            description: "Ignore Discord's new terms of service"
         },
         iLoveSpam: {
             name: "ILoveSpam",
@@ -5345,11 +5397,19 @@ const translations = {
                 },
                 singleClickAction: {
                     label: "Single Click Action",
-                    description: "Action on single click with modifier"
+                    description: "Action on single click (your messages)"
                 },
                 singleClickModifier: {
                     label: "Single Click Modifier",
-                    description: "Modifier required for single click action"
+                    description: "Modifier required for single click action (your messages)"
+                },
+                singleClickOthersAction: {
+                    label: "Single Click Action (Others)",
+                    description: "Action on single click (others' messages)"
+                },
+                singleClickOthersModifier: {
+                    label: "Single Click Modifier (Others)",
+                    description: "Modifier required for single click action (others' messages)"
                 },
                 doubleClickAction: {
                     label: "Double Click Action",
@@ -5549,7 +5609,7 @@ const translations = {
         },
         messageLinkTooltip: {
             name: "MessageLinkTooltip",
-            description: "Like MessageLinkEmbed but without taking space",
+            description: "Adds a tooltip with a message preview when hovering over message links, replies, and forwarded messages.",
             loading: "Loading...",
             option: {
                 onLink: {
@@ -5649,6 +5709,10 @@ const translations = {
             failedToRemove: "Failed to remove message",
             successfullyImported: "Successfully imported logs",
             errorImportingLogs: "Error importing logs. Check the console for more information",
+            importing: "Importing...",
+            importLogs: "Import Logs",
+            exporting: "Exporting...",
+            exportLogs: "Export Logs",
             alert: {
                 clearLogs: {
                     title: "Clear Logs",
@@ -5661,7 +5725,8 @@ const translations = {
                     body: "Are you sure you want to clear {{messages}} logs",
                     confirmText: "Clear",
                     cancel: "Cancel"
-                }
+                },
+                cleared: "Message log database and cache cleared."
             },
             context: {
                 title: "Message Logger",
@@ -5781,6 +5846,10 @@ const translations = {
                 alwaysLogCurrentChannel: {
                     label: "Always Log Current Channel",
                     description: "Always log current selected channel. Blacklisted channels/users will still be ignored."
+                },
+                permanentlyRemoveLogByDefault: {
+                    label: "Permanently Remove Log by Default",
+                    description: "Base MessageLogger remove log button wiil delete logs permanently"
                 },
                 hideMessageFromMessageLoggers: {
                     label: "Hide Message From Message Loggers",
@@ -6119,7 +6188,8 @@ const translations = {
                     description: "Show lyrics for Tidal"
                 },
                 YtmSectionTitle: {
-                    label: "YouTube Music"
+                    label: "YouTube Music",
+                    description: "{{app}} is required for these settings"
                 },
                 showYoutubeMusicControls: {
                     label: "Show YouTube Music Controls",
@@ -7213,6 +7283,10 @@ const translations = {
                 ignoredQuestIDs: {
                     label: "Ignored Quest IDs",
                     description: "An array of Quest IDs that are ignored."
+                },
+                resumeQuestIDs: {
+                    label: "Resume Quest IDs",
+                    description: "An array of Quest IDs that are being auto-completed in the background."
                 }
             },
             button: {
@@ -8084,7 +8158,7 @@ const translations = {
         },
         showMeYourName: {
             name: "ShowMeYourName",
-            description: "Display any permutation of nicknames, display names, and usernames in chat.",
+            description: "Display any permutation of custom nicknames, friend nicknames, server nicknames, display names, and usernames in chat.",
             option: {
                 messages: {
                     label: "Messages",
@@ -8097,6 +8171,10 @@ const translations = {
                 mentions: {
                     label: "Mentions",
                     description: "Display custom name format in mentions."
+                },
+                typingIndicator: {
+                    label: "Typing Indicator",
+                    description: "Display the first available name listed in your custom name format in the typing indicator."
                 },
                 memberList: {
                     label: "Member List",
@@ -8146,9 +8224,21 @@ const translations = {
                     label: "Name Separator",
                     description: "The separator to use between names. The default is a single space."
                 },
+                friendNameOnlyInDirectMessages: {
+                    label: "Friend Name Only In Direct Messages",
+                    description: "Only display friend names when in DMs, and not in servers."
+                },
+                customNameOnlyInDirectMessages: {
+                    label: "Custom Name Only In Direct Messages",
+                    description: "Only display custom names when in DMs, and not in servers."
+                },
                 includedNames: {
                     label: "Included Names",
                     description: "The order to display usernames, display names, nicknames, and friend names. Use the following placeholders: {user}, {display}, {nick}, {friend}. You can provide multiple name options to use as fallbacks if one is unavailable by separating them with commas as such: {friend, nick, display}. You can have up to three prefixes and three suffixes per name."
+                },
+                customNameColor: {
+                    label: "Custom Name Color",
+                    description: "The color to use for the custom name you assigned a user if it's not the first displayed. Leave blank for default. Accepts hex(a), rgb(a), or hsl(a) input. Use 'Role' to follow the user's top role color. Use 'Role+-#' to adjust the brightness by that percentage (ex: 'Role+15')"
                 },
                 friendNameColor: {
                     label: "Friend Name Color",
@@ -8170,6 +8260,18 @@ const translations = {
                     label: "Trigger Name Rerender",
                     description: "Trigger a name rerender by toggling this setting."
                 }
+            },
+            modal: {
+                change: {
+                    title: "Change SMYN Nickname"
+                },
+                add: {
+                    title: "Add SMYN Nickname"
+                },
+                setCustom: "Set a custom SMYN nickname for this user. Make use of it by specifying {custom} in the SMYN template settings.",
+                nickname: "SMYN Nickname",
+                reset: "Reset SMYN Nickname",
+                cancel: "Cancel"
             }
         },
         showTimeoutDuration: {
@@ -8579,7 +8681,7 @@ const translations = {
         },
         steamStatusSync: {
             name: "SteamStatusSync",
-            description: "Sync your status to Steam!",
+            description: "Sync your status to Steam! (Online, Away, Invisible, or Offline.)",
             option: {
                 onlineStatus: {
                     label: "Online Status",

@@ -18,27 +18,12 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import SettingsPlugin, { settingsSectionMap } from "@plugins/_core/settings";
+import { ClockIcon } from "@components/index";
+import SettingsPlugin from "@plugins/_core/settings";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 import StartupTimingPage from "./StartupTimingPage";
-
-export const ClockIcon = (props?: any) => {
-    return (
-
-        <svg
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            width="20"
-            height="20"
-            fill="currentColor"
-            {...props}
-        >
-            <path fillRule="evenodd" d="M12 23a11 11 0 1 0 0-22 11 11 0 0 0 0 22Zm1-18a1 1 0 1 0-2 0v7c0 .27.1.52.3.7l3 3a1 1 0 0 0 1.4-1.4L13 11.58V5Z" clipRule="evenodd"></path>
-        </svg>
-    );
-};
 
 export default definePlugin({
     name: "StartupTimings",
@@ -46,30 +31,22 @@ export default definePlugin({
     authors: [Devs.Megu],
 
     start() {
-        const { customEntries, customSections } = SettingsPlugin;
-        customEntries.push({
+
+        SettingsPlugin.customEntries.push({
             key: "plexcord_startup_timings",
             title: t(plugin.startupTimings.modal.title),
             Component: StartupTimingPage,
             Icon: ClockIcon
         });
-        customSections.push(() => ({
-            section: "PlexcordStartupTimings",
-            label: t(plugin.startupTimings.modal.title),
-            searchableTitles: [t(plugin.startupTimings.modal.title)],
-            element: StartupTimingPage,
-            id: "PlexcordStartupTimings",
-        }));
 
-        settingsSectionMap.push(["PlexcordStartupTimings", "plexcord_startup_timings"]);
+        SettingsPlugin.settingsSectionMap.push(["PlexcordStartupTimings", "plexcord_startup_timings"]);
     },
     stop() {
-        const { customEntries, customSections } = SettingsPlugin;
-        const entryIdx = customEntries.findIndex(e => e.key === "plexcord_startup_timings");
-        if (entryIdx !== -1) customEntries.splice(entryIdx, 1);
-        const section = customSections.findIndex(section => section({} as any).id === "PlexcordStartupTimings");
-        if (section !== -1) customSections.splice(section, 1);
-        const map = settingsSectionMap.findIndex(entry => entry[1] === "plexcord_startup_timings");
-        if (map !== -1) customEntries.splice(map, 1);
+        function removeFromArray<T>(arr: T[], predicate: (e: T) => boolean) {
+            const idx = arr.findIndex(predicate);
+            if (idx !== -1) arr.splice(idx, 1);
+        }
+        removeFromArray(SettingsPlugin.customEntries, e => e.key === "plexcord_startup_timings");
+        removeFromArray(SettingsPlugin.settingsSectionMap, entry => entry[1] === "plexcord_startup_timings");
     },
 });

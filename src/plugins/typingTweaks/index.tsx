@@ -127,7 +127,7 @@ export default definePlugin({
 
     patches: [
         {
-            find: "#{intl::THREE_USERS_TYPING}",
+            find: "#{intl::Q8lUnE::raw}",
             group: true,
             replacement: [
                 {

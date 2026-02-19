@@ -159,10 +159,10 @@ export default definePlugin({
                 break;
         }
 
-        const cl = useCompact ? classNameFactory("pc-indicators-compact") : classNameFactory("pc-indicators");
+        const cl = useCompact ? classNameFactory("pc-indicators-compact-") : classNameFactory("pc-indicators-");
 
         return <ErrorBoundary noop>
-            <div id={cl("-container")}>
+            <div id={cl("container")}>
                 <Tooltip text={text} position="right">
                     {({ onMouseEnter, onMouseLeave }) => (
                         <div

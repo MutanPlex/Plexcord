@@ -10,8 +10,8 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
+import ErrorBoundary from "@components/ErrorBoundary";
 import { Heading } from "@components/Heading";
-import { ErrorBoundary } from "@components/index";
 import { Paragraph } from "@components/Paragraph";
 import { Logger } from "@utils/Logger";
 import { makeRange, OptionType } from "@utils/types";
@@ -2028,5 +2028,12 @@ export const settings = definePluginSettings({
         description: () => t(plugin.questify.option.ignoredQuestIDs.description),
         default: {} as Record<string, string[]>,
         hidden: true,
-    }
+    },
+    resumeQuestIDs: {
+        type: OptionType.CUSTOM,
+        label: () => t(plugin.questify.option.resumeQuestIDs.label),
+        description: () => t(plugin.questify.option.resumeQuestIDs.description),
+        default: { "watch": [], "play": [], "achievement": [] } as Record<"watch" | "play" | "achievement", string[]>, // Type to Quest ID
+        hidden: true,
+    },
 });

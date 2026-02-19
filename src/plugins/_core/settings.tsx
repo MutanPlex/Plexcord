@@ -11,7 +11,6 @@ import { BackupRestoreIcon, ChangelogIcon, CloudIcon, MainSettingsIcon, Paintbru
 import { BackupAndRestoreTab, ChangelogTab, CloudTab, PatchHelperTab, PlexcordTab, PluginsTab, ThemesTab, UpdaterTab } from "@components/settings/tabs";
 import { gitHashShort } from "@shared/plexcordUserAgent";
 import { Devs, PcDevs } from "@utils/constants";
-import { getIntlMessage } from "@utils/discord";
 import { isTruthy } from "@utils/guards";
 import definePlugin, { IconProps, OptionType } from "@utils/types";
 import { findByPropsLazy } from "@webpack";
@@ -113,7 +112,7 @@ const pluginSettings = definePluginSettings({
     },
 });
 
-export const settingsSectionMap: [string, string][] = [
+const settingsSectionMap: [string, string][] = [
     ["PlexcordSettings", "plexcord_main_panel"],
     ["PlexcordPlugins", "plexcord_plugins_panel"],
     ["PlexcordThemes", "plexcord_themes_panel"],
@@ -133,6 +132,7 @@ export default definePlugin({
     authors: [Devs.Ven, Devs.Megu, PcDevs.MutanPlex],
     required: true,
     settings: pluginSettings,
+    settingsSectionMap,
 
     patches: [
         {
@@ -159,19 +159,6 @@ export default definePlugin({
                 {
                     match: /copyValue:\i\.join\(" "\)/g,
                     replace: "$& + $self.getInfoString()"
-                }
-            ]
-        },
-        {
-            find: ".SEARCH_NO_RESULTS&&0===",
-            replacement: [
-                {
-                    match: /(?<=section:(.{0,50})\.DIVIDER\}\))([,;])(?=.{0,200}(\i)\.push.{0,100}label:(\i)\.header)/,
-                    replace: (_, sectionTypes, commaOrSemi, elements, element) => `${commaOrSemi} $self.addSettings(${elements}, ${element}, ${sectionTypes}) ${commaOrSemi}`
-                },
-                {
-                    match: /({(?=.+?function (\i).{0,160}(\i)=\i\.useMemo.{0,140}return \i\.useMemo\(\(\)=>\i\(\3).+?\(\)=>)\2/,
-                    replace: (_, rest, settingsHook) => `${rest}$self.wrapSettingsHook(${settingsHook})`
                 }
             ]
         },
@@ -325,123 +312,6 @@ export default definePlugin({
 
     customSections: [] as ((SectionTypes: Record<string, string>) => { section: string; element: ComponentType; label: string; id?: string; })[],
     customEntries: [] as EntryOptions[],
-
-    makeSettingsCategories(SectionTypes: Record<string, string>) {
-        return [
-            {
-                section: SectionTypes.HEADER,
-                label: "Plexcord",
-                className: "pc-settings-header"
-            },
-            {
-                section: "PlexcordSettings",
-                label: "Plexcord",
-                element: PlexcordTab,
-                className: "pc-settings"
-            },
-            {
-                section: "PlexcordPlugins",
-                label: t(plugins.title),
-                searchableTitles: [t(plugins.title)],
-                element: PluginsTab,
-                className: "pc-plugins"
-            },
-            {
-                section: "PlexcordThemes",
-                label: t(themes.title),
-                searchableTitles: [t(themes.title)],
-                element: ThemesTab,
-                className: "pc-themes"
-            },
-            !IS_UPDATER_DISABLED && {
-                section: "PlexcordUpdater",
-                label: t(updater.title),
-                searchableTitles: [t(updater.title)],
-                element: UpdaterTab,
-                className: "pc-updater"
-            },
-            {
-                section: "PlexcordChangelog",
-                label: t(changelog.text),
-                searchableTitles: [t(changelog.text)],
-                element: ChangelogTab,
-                className: "pc-changelog",
-            },
-            {
-                section: "PlexcordCloud",
-                label: t(cloud.text),
-                searchableTitles: [t(cloud.text)],
-                element: CloudTab,
-                className: "pc-cloud"
-            },
-            {
-                section: "PlexcordBackupAndRestore",
-                label: t(sync.title),
-                searchableTitles: [t(sync.title)],
-                element: BackupAndRestoreTab,
-                className: "pc-backup-restore"
-            },
-            IS_DEV && {
-                section: "PlexcordPatchHelper",
-                label: t(patchHelper.title),
-                searchableTitles: [t(patchHelper.title)],
-                element: PatchHelperTab,
-                className: "pc-patch-helper"
-            },
-            ...this.customSections.map(func => func(SectionTypes)),
-            {
-                section: SectionTypes.DIVIDER
-            }
-        ].filter(Boolean);
-    },
-
-    isRightSpot({ header, settings: s }: { header?: string; settings?: string[]; }) {
-        const firstChild = s?.[0];
-        if (firstChild === "LOGOUT" || firstChild === "SOCIAL_LINKS") return true;
-
-        const { settingsLocation } = pluginSettings.store;
-
-        if (settingsLocation === "bottom") return firstChild === "LOGOUT";
-        if (settingsLocation === "belowActivity") return firstChild === "CHANGELOG";
-
-        if (!header) return;
-
-        try {
-            const names: Record<Exclude<SettingsLocation, "bottom" | "belowActivity">, string> = {
-                top: getIntlMessage("USER_SETTINGS"),
-                aboveNitro: getIntlMessage("BILLING_SETTINGS"),
-                belowNitro: getIntlMessage("APP_SETTINGS"),
-                aboveActivity: getIntlMessage("ACTIVITY_SETTINGS")
-            };
-
-            if (!names[settingsLocation] || names[settingsLocation].endsWith("_SETTINGS"))
-                return firstChild === "PREMIUM";
-
-            return header === names[settingsLocation];
-        } catch {
-            return firstChild === "PREMIUM";
-        }
-    },
-
-    patchedSettings: new WeakSet(),
-
-    addSettings(elements: any[], element: { header?: string; settings: string[]; }, SectionTypes: Record<string, string>,) {
-        if (this.patchedSettings.has(elements) || !this.isRightSpot(element)) return;
-
-        this.patchedSettings.add(elements);
-
-        elements.push(...this.makeSettingsCategories(SectionTypes));
-    },
-
-    wrapSettingsHook(originalHook: (...args: any[]) => Record<string, unknown>[]) {
-        return (...args: any[]) => {
-            const elements = originalHook(...args);
-            if (!this.patchedSettings.has(elements))
-                elements.unshift(...this.makeSettingsCategories({ HEADER: SectionType.HEADER, DIVIDER: SectionType.DIVIDER, CUSTOM: SectionType.CUSTOM }) as Record<string, unknown>[]);
-
-            return elements;
-        };
-    },
 
     get electronVersion() {
         return PlexcordNative.native.getVersions().electron ?? window.legcord?.electron ?? null;

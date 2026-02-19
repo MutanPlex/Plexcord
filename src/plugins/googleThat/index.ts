@@ -20,8 +20,14 @@ function getMessage(opts) {
         queryURL = "" + [settings.store.customEngineURL] + encodeURIComponent(inputOption);
     }
 
-    if (settings.store.hyperlink) {
+    if (settings.store.hyperlink && !settings.store.embed) {
+        return `[${inputOption}](<${queryURL}>)`;
+    }
+    else if (settings.store.hyperlink) {
         return `[${inputOption}](${queryURL})`;
+    }
+    else if (!settings.store.embed) {
+        return `<${queryURL}>`;
     }
     else {
         return queryURL;
@@ -47,6 +53,12 @@ const settings = definePluginSettings({
         description: () => t(plugin.googleThat.option.hyperlink.description),
         type: OptionType.BOOLEAN,
         default: false
+    },
+    embed: {
+        label: () => t(plugin.googleThat.option.embed.label),
+        description: () => t(plugin.googleThat.option.embed.description),
+        type: OptionType.BOOLEAN,
+        default: true
     },
     defaultEngine: {
         label: () => t(plugin.googleThat.option.defaultEngine.label),

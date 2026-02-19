@@ -10,13 +10,13 @@ import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
 import { InfoIcon } from "@components/Icons";
+import { Link } from "@components/index";
 import { User } from "@plexcord/discord-types";
 import { clearMessagesIDB, DBMessageRecord, deleteMessageIDB, deleteMessagesBulkIDB } from "@plugins/messageLoggerEnhanced/db";
-import { settings } from "@plugins/messageLoggerEnhanced/index";
+import { cl, settings } from "@plugins/messageLoggerEnhanced/index";
 import { LoggedMessage, LoggedMessageJSON } from "@plugins/messageLoggerEnhanced/types";
 import { messageJsonToMessageClass } from "@plugins/messageLoggerEnhanced/utils";
 import { importLogs } from "@plugins/messageLoggerEnhanced/utils/settingsUtils";
-import { classNameFactory } from "@utils/css";
 import { copyWithToast, openUserProfile } from "@utils/discord";
 import { closeAllModals, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { LazyComponent } from "@utils/react";
@@ -57,8 +57,6 @@ const PrivateChannelRecord = findByCodeLazy(".is_message_request_timestamp,");
 const MessagePreview = LazyComponent<MessagePreviewProps>(() => find(m => m?.type?.toString().includes("previewLinkTarget:") && !m?.type?.toString().includes("HAS_THREAD")));
 const ChildrenAccessories = LazyComponent<ChildrenAccProops>(() => findByCode("channelMessageProps:{message:"));
 
-const cl = classNameFactory("msg-logger-modal-");
-
 export enum LogTabs {
     DELETED = "DELETED",
     EDITED = "EDITED",
@@ -80,46 +78,45 @@ export function LogsModal({ modalProps, initalQuery }: Props) {
     const { messages, total, statusTotal, pending, reset } = useMessages(queryEh, currentTab, sortNewest, numDisplayedMessages);
 
     return (
-        <ModalRoot className={cl("root")} {...modalProps} size={ModalSize.LARGE}>
-            <ModalHeader className={cl("header")}>
+        <ModalRoot className={cl("modal-root")} {...modalProps} size={ModalSize.LARGE}>
+            <ModalHeader className={cl("modal-header")}>
                 <TextInput value={queryEh} onChange={e => setQuery(e)} style={{ width: "100%" }} placeholder={t(plugin.messageLoggerEnhanced.modal.title)} />
                 <TabBar
                     type="top"
                     look="brand"
-                    className={cl("tab-bar")}
+                    className={cl("modal-tab-bar")}
                     selectedItem={currentTab}
                     onItemSelect={e => {
                         setCurrentTab(e);
                         setNumDisplayedMessages(settings.store.messagesToDisplayAtOnceInLogs);
                         contentRef.current?.firstElementChild?.scrollTo(0, 0);
-                        // forceUpdate();
                     }}
                 >
                     <TabBar.Item
-                        className={cl("tab-bar-item")}
+                        className={cl("modal-tab-bar-item")}
                         id={LogTabs.DELETED}
                     >
                         {t(plugin.messageLoggerEnhanced.modal.deleted)}
                     </TabBar.Item>
                     <TabBar.Item
-                        className={cl("tab-bar-item")}
+                        className={cl("modal-tab-bar-item")}
                         id={LogTabs.EDITED}
                     >
                         {t(plugin.messageLoggerEnhanced.modal.edited)}
                     </TabBar.Item>
                     <TabBar.Item
-                        className={cl("tab-bar-item")}
+                        className={cl("modal-tab-bar-item")}
                         id={LogTabs.GHOST_PING}
                     >
                         {t(plugin.messageLoggerEnhanced.modal.ghostPing)}
                     </TabBar.Item>
                 </TabBar>
             </ModalHeader>
-            <div style={{ opacity: modalProps.transitionState === 1 ? "1" : "0" }} className={cl("content-container")} ref={contentRef}>
+            <div style={{ opacity: modalProps.transitionState === 1 ? "1" : "0" }} className={cl("modal-content-container")} ref={contentRef}>
                 {
                     modalProps.transitionState === 1 &&
                     <ModalContent
-                        className={cl("content")}
+                        className={cl("modal-content")}
                     >
                         {messages != null && total === 0 && (
                             <EmptyLogs
@@ -141,14 +138,15 @@ export function LogsModal({ modalProps, initalQuery }: Props) {
                     </ModalContent>
                 }
             </div>
-            <ModalFooter>
+            <ModalFooter className={cl("footer")}>
                 <Button
                     variant="dangerPrimary"
                     onClick={() => Alerts.show({
                         title: t(plugin.messageLoggerEnhanced.alert.clearLogs.title),
                         body: t(plugin.messageLoggerEnhanced.alert.clearLogs.body),
                         confirmText: t(plugin.messageLoggerEnhanced.alert.clearLogs.confirmText),
-                        confirmColor: "dangerPrimary",
+                        // @ts-expect-error not typed
+                        confirmVariant: "critical-primary",
                         cancelText: t(plugin.messageLoggerEnhanced.alert.clearLogs.cancel),
                         onConfirm: async () => {
                             await clearMessagesIDB();
@@ -167,7 +165,8 @@ export function LogsModal({ modalProps, initalQuery }: Props) {
                         title: t(plugin.messageLoggerEnhanced.alert.clearVisibleLogs.title),
                         body: t(plugin.messageLoggerEnhanced.alert.clearVisibleLogs.body, { messages: messages.length }),
                         confirmText: t(plugin.messageLoggerEnhanced.alert.clearVisibleLogs.confirmText),
-                        confirmColor: "dangerPrimary",
+                        // @ts-expect-error not typed
+                        confirmVariant: "critical-primary",
                         cancelText: t(plugin.messageLoggerEnhanced.alert.clearVisibleLogs.cancel),
                         onConfirm: async () => {
                             await deleteMessagesBulkIDB(messages.map(e => e.message_id));
@@ -177,9 +176,8 @@ export function LogsModal({ modalProps, initalQuery }: Props) {
                 >
                     {t(plugin.messageLoggerEnhanced.button.clearVisibleLogs)}
                 </Button>
-                <Button
-                    style={{ marginRight: "16px" }}
-                    variant="primary"
+                <Link
+                    style={{ marginRight: "1rem" }}
                     onClick={() => {
                         setSortNewest(e => {
                             const val = !e;
@@ -190,7 +188,7 @@ export function LogsModal({ modalProps, initalQuery }: Props) {
                     }}
                 >
                     {sortNewest ? t(plugin.messageLoggerEnhanced.button.sortOldest) : t(plugin.messageLoggerEnhanced.button.sortNewest)}
-                </Button>
+                </Link>
             </ModalFooter>
         </ModalRoot>
     );
@@ -210,7 +208,7 @@ function LogsContent({ visibleMessages, canLoadMore, sortNewest, tab, reset, han
         return <NoResults tab={tab} />;
 
     return (
-        <div className={cl("content-inner")}>
+        <div className={cl("modal-content-inner")}>
             {visibleMessages
                 .map(({ message }, i) => (
                     <LMessage
@@ -265,7 +263,7 @@ function NoResults({ tab }: { tab: LogTabs; }) {
     const { nextTab, lastTab } = generateSuggestedTabs(tab);
 
     return (
-        <div className={cl("empty-logs", "content-inner")} style={{ textAlign: "center" }}>
+        <div className={cl("modal-empty-logs", "modal-content-inner")} style={{ textAlign: "center" }}>
             <BaseText size="lg" weight="normal">
                 {t(plugin.messageLoggerEnhanced.button.noResults, { tab: getTabLabel(tab) })}
             </BaseText>
@@ -278,7 +276,7 @@ function NoResults({ tab }: { tab: LogTabs; }) {
 
 function EmptyLogs({ hasQuery, reset: forceUpdate }: { hasQuery: boolean; reset: () => void; }) {
     return (
-        <div className={cl("empty-logs", "content-inner")} style={{ textAlign: "center" }}>
+        <div className={cl("modal-empty-logs", "modal-content-inner")} style={{ textAlign: "center" }}>
             <Flex flexDirection="column" style={{ position: "relative" }}>
 
                 <BaseText size="lg" weight="normal">
@@ -290,7 +288,7 @@ function EmptyLogs({ hasQuery, reset: forceUpdate }: { hasQuery: boolean; reset:
                         <Tooltip text={t(plugin.messageLoggerEnhanced.modal.importLogs)}>
                             {({ onMouseEnter, onMouseLeave }) => (
                                 <div
-                                    className={cl("info-icon")}
+                                    className={cl("modal-info-icon")}
                                     onMouseEnter={onMouseEnter}
                                     onMouseLeave={onMouseLeave}
                                 >
@@ -317,8 +315,6 @@ interface LMessageProps {
 }
 function LMessage({ log, isGroupStart, reset, }: LMessageProps) {
     const message = useMemo(() => messageJsonToMessageClass(log), [log]);
-
-    // console.log(message);
 
     if (!message) return null;
 
@@ -408,7 +404,7 @@ function LMessage({ log, isGroupStart, reset, }: LMessageProps) {
                 );
             }}>
             <MessagePreview
-                className={`${cl("msg-preview")} ${message.deleted ? "messagelogger-deleted" : ""}`}
+                className={`${cl("modal-msg-preview")} ${message.deleted ? "messagelogger-deleted" : ""}`}
                 author={message.author}
                 message={message}
                 compact={false}
@@ -435,13 +431,13 @@ function LMessage({ log, isGroupStart, reset, }: LMessageProps) {
                 }
             />
             {settings.store.showWhereMessageIsFrom && channel?.isDM() && message?.author && (
-                <span className={`${cl("from")} ${message.deleted ? cl("from-deleted") : cl("from-edited")}`}>{t(plugin.messageLoggerEnhanced.context.fromUsernameDm, { username: message.author.username })}</span>
+                <span className={`${cl("modal-from")} ${message.deleted ? cl("modal-from-deleted") : cl("modal-from-edited")}`}>{t(plugin.messageLoggerEnhanced.context.fromUsernameDm, { username: message.author.username })}</span>
             )}
             {settings.store.showWhereMessageIsFrom && channel?.isGroupDM() && channel?.name && (
-                <span className={`${cl("from")} ${message.deleted ? cl("from-deleted") : cl("from-edited")}`}>{t(plugin.messageLoggerEnhanced.context.fromGroupDm, { channelName: channel.name })}</span>
+                <span className={`${cl("modal-from")} ${message.deleted ? cl("modal-from-deleted") : cl("modal-from-edited")}`}>{t(plugin.messageLoggerEnhanced.context.fromGroupDm, { channelName: channel.name })}</span>
             )}
             {settings.store.showWhereMessageIsFrom && !channel?.isDM() && !channel?.isGroupDM() && channel?.name && guild?.name && (
-                <span className={`${cl("from")} ${message.deleted ? cl("from-deleted") : cl("from-edited")}`}>{t(plugin.messageLoggerEnhanced.context.fromServerChannel, { channelName: channel.name, serverName: guild.name })}</span>
+                <span className={`${cl("modal-from")} ${message.deleted ? cl("modal-from-deleted") : cl("modal-from-edited")}`}>{t(plugin.messageLoggerEnhanced.context.fromServerChannel, { channelName: channel.name, serverName: guild.name })}</span>
             )}
         </div>
     );

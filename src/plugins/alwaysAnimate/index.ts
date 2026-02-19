@@ -110,24 +110,6 @@ export default definePlugin({
             },
         },
         {
-            // Gradient roles in chat
-            find: "=!1,contentOnly:",
-            predicate: () => settings.store.roleGradients,
-            replacement: {
-                match: /animate:\i/,
-                replace: "animate:!0"
-            }
-        },
-        {
-            // Gradient roles in member list
-            find: '="left",className:',
-            predicate: () => settings.store.roleGradients,
-            replacement: {
-                match: /,animateGradient:[^)]+\)/,
-                replace: ",animateGradient:!0"
-            }
-        },
-        {
             // Role Gradients
             find: "animateGradient:",
             predicate: () => settings.store.roleGradients,
@@ -141,6 +123,6 @@ export default definePlugin({
                     return m;
                 }
             }
-        }
+        },
     ]
 });

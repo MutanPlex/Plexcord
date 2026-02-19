@@ -12,7 +12,7 @@ import { PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findCssClassesLazy } from "@webpack";
 
-const { iconForeground } = findCssClassesLazy("iconForeground", "autocompleteRowContent");
+const { iconForeground } = findCssClassesLazy("iconForeground", "accountPopoutButtonWrapper");
 
 export default definePlugin({
     name: "UserAreaAPI",
@@ -21,11 +21,18 @@ export default definePlugin({
 
     patches: [
         {
-            find: "#{intl::ACCOUNT_SPEAKING_WHILE_MUTED}",
-            replacement: {
-                match: /(?<=className:(\i)\.\i,style:\i,)children:\[/,
-                replace: "children:[...$self.renderButtons(arguments[0],$1),"
-            }
+            find: ".NITRO_PRIVACY_PERK_BETA_COACHMARK));",
+            replacement: [
+                {
+                    match: /(?<=className:(\i)\.\i,style:\i,)children:\[/,
+                    replace: "children:[...$self.renderButtons(arguments[0],$1),"
+                },
+                // fix discord weird shrink with extra buttons
+                {
+                    match: /(?<=\{ref:\i,)style:(\i)/,
+                    replace: "style:{...$1,minWidth:0}"
+                }
+            ]
         }
     ],
 

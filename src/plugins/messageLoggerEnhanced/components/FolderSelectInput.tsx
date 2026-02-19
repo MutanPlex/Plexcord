@@ -20,14 +20,13 @@
 import { plugin, t } from "@api/i18n";
 import { Button } from "@components/Button";
 import { Heading } from "@components/Heading";
+import { cl, Native, settings } from "@plugins/messageLoggerEnhanced/index";
 import { DEFAULT_IMAGE_CACHE_DIR } from "@plugins/messageLoggerEnhanced/utils/constants";
-import { classNameFactory } from "@utils/css";
 import { copyWithToast } from "@utils/discord";
+import { classes } from "@utils/misc";
+import { findCssClassesLazy } from "@webpack";
 import { Toasts } from "@webpack/common";
-
-import { Native, settings } from "..";
-
-const cl = classNameFactory("folder-upload");
+const inputClasses = findCssClassesLazy("input", "inputWrapper", "editable") as Record<string, string>;
 
 function createDirSelector(settingKey: "logsDir" | "imageCacheDir", successMessage: string) {
     return function DirSelector({ option }) {
@@ -35,7 +34,7 @@ function createDirSelector(settingKey: "logsDir" | "imageCacheDir", successMessa
 
         return (
             <section>
-                <Heading>{option.description}</Heading>
+                <Heading tag="h5">{option.description}</Heading>
                 <SelectFolderInput
                     settingsKey={settingKey}
                     successMessage={successMessage}
@@ -82,12 +81,12 @@ export function SelectFolderInput({ settingsKey, successMessage }: Props) {
     }
 
     return (
-        <div className={cl("-container")}>
-            <div onClick={() => copyWithToast(path)} className={cl("-input")}>
+        <div className={classes(cl("folder-upload-container"), inputClasses.input)}>
+            <div onClick={() => copyWithToast(path)} className={cl("folder-upload-input")}>
                 {path == null || path === DEFAULT_IMAGE_CACHE_DIR ? t(plugin.messageLoggerEnhanced.button.chooseFolder) : getDirName(path)}
             </div>
             <Button
-                className={cl("-button")}
+                className={cl("folder-upload-button")}
                 size="small"
                 onClick={onFolderSelect}
             >

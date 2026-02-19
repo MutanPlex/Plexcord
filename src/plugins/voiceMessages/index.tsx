@@ -28,7 +28,6 @@ import { Heading } from "@components/Heading";
 import { Microphone } from "@components/Icons";
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
-import { CloudUpload } from "@plexcord/discord-types";
 import { CloudUploadPlatform } from "@plexcord/discord-types/enums";
 import { lastState as silentMessageEnabled } from "@plugins/silentMessageToggle";
 import { Devs, PcDevs } from "@utils/constants";
@@ -38,8 +37,7 @@ import { ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, openModa
 import { useAwaiter } from "@utils/react";
 import definePlugin, { OptionType } from "@utils/types";
 import { chooseFile } from "@utils/web";
-import { findLazy, findStoreLazy } from "@webpack";
-import { Constants, FluxDispatcher, lodash, Menu, MessageActions, PermissionsBits, PermissionStore, RestAPI, SelectedChannelStore, showToast, SnowflakeUtils, Toasts, useEffect, useState } from "@webpack/common";
+import { CloudUploader, Constants, FluxDispatcher, lodash, Menu, MessageActions, PendingReplyStore, PermissionsBits, PermissionStore, RestAPI, SelectedChannelStore, showToast, SnowflakeUtils, Toasts, useEffect, useState } from "@webpack/common";
 
 import { VoiceRecorderDesktop } from "./components/DesktopRecorder";
 import { VoicePreview } from "./components/VoicePreview";
@@ -58,9 +56,6 @@ const EMPTY_META: AudioMetadata = {
     waveform: DEFAULT_WAVEFORM,
     duration: DEFAULT_DURATION,
 };
-
-const CloudUploadConstructor = findLazy(m => m.prototype?.trackUploadFinished) as typeof CloudUpload;
-const PendingReplyStore = findStoreLazy("PendingReplyStore");
 
 export const cl = classNameFactory("pc-vmsg-");
 
@@ -111,7 +106,7 @@ function sendAudio(blob: Blob, meta: AudioMetadata) {
     const reply = PendingReplyStore.getPendingReply(channelId);
     if (reply) FluxDispatcher.dispatch({ type: "DELETE_PENDING_REPLY", channelId });
 
-    const upload = new CloudUploadConstructor({
+    const upload = new CloudUploader({
         file: new File([blob], "voice-message.ogg", { type: "audio/ogg; codecs=opus" }),
         isThumbnail: false,
         platform: CloudUploadPlatform.WEB,
@@ -154,8 +149,7 @@ function useObjectUrl() {
 }
 
 const ctxMenuPatch: NavContextMenuPatchCallback = (children, props) => {
-    const hasPermission = !props.channel.guild_id
-        || (PermissionStore.can(PermissionsBits.SEND_VOICE_MESSAGES, props.channel) && PermissionStore.can(PermissionsBits.SEND_MESSAGES, props.channel));
+    if (props.channel.guild_id && !(PermissionStore.can(PermissionsBits.SEND_VOICE_MESSAGES, props.channel) && PermissionStore.can(PermissionsBits.SEND_MESSAGES, props.channel))) return;
 
     children.push(
         <Menu.MenuItem
@@ -167,7 +161,6 @@ const ctxMenuPatch: NavContextMenuPatchCallback = (children, props) => {
             }}
             label={t(plugin.voiceMessages.context.sendVoiceMessage)}
             action={() => openModal(modalProps => <Modal modalProps={modalProps} />)}
-            disabled={!hasPermission}
         />
     );
 };

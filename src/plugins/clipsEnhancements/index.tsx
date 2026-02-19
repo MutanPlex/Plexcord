@@ -12,7 +12,7 @@ import { Activity } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { getIntlMessage } from "@utils/index";
 import definePlugin, { OptionType } from "@utils/types";
-import { openUserSettingsPanel, PresenceStore, UserStore } from "@webpack/common";
+import { PresenceStore, SettingsRouter, UserStore } from "@webpack/common";
 
 const extraTimeslots = [3, 4, 5, 6, 7, 10, 15, 20, 25, 30];
 const extraFramerates = [45, 90, 120, 144, 165, 240];
@@ -65,7 +65,7 @@ const settings = definePluginSettings({
                 <>
                     <Button
                         onClick={() => {
-                            openUserSettingsPanel("clips");
+                            SettingsRouter.openUserSettings("clips_panel");
                         }}
                     >
                         {t(plugin.clipsEnhancements.option.clipsLink.link)}

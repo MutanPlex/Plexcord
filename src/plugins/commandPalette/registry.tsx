@@ -16,7 +16,7 @@ import { toggleEnabled } from "@utils/modal";
 import type { Plugin } from "@utils/types";
 import { changes, checkForUpdates } from "@utils/updater";
 import { findByPropsLazy, findStoreLazy } from "@webpack";
-import { ChannelActionCreators, ChannelRouter, ChannelStore, ComponentDispatch, FluxDispatcher, GuildStore, MediaEngineStore, NavigationRouter, openUserSettingsPanel, React, ReadStateUtils, RelationshipStore, SelectedChannelStore, SelectedGuildStore, StreamerModeStore, Toasts, useEffect, UserStore, VoiceActions } from "@webpack/common";
+import { ChannelActionCreators, ChannelRouter, ChannelStore, ComponentDispatch, FluxDispatcher, GuildStore, MediaEngineStore, NavigationRouter, React, ReadStateUtils, RelationshipStore, SelectedChannelStore, SelectedGuildStore, SettingsRouter, StreamerModeStore, Toasts, useEffect, UserStore, VoiceActions } from "@webpack/common";
 import { Settings } from "Plexcord";
 import type { FC, ReactElement, ReactNode } from "react";
 
@@ -1285,7 +1285,7 @@ const BUILT_IN_COMMANDS = (): CommandEntry[] => [
         keywords: ["settings", "plexcord"],
         categoryId: DEFAULT_CATEGORY_ID,
         tags: [TAG_NAVIGATION(), TAG_CORE()],
-        handler: () => openUserSettingsPanel("plexcord_main")
+        handler: () => SettingsRouter.openUserSettings("plexcord_main_panel")
     },
     {
         id: "open-plugin-settings",
@@ -1293,7 +1293,7 @@ const BUILT_IN_COMMANDS = (): CommandEntry[] => [
         keywords: ["settings", "plugins"],
         categoryId: DEFAULT_CATEGORY_ID,
         tags: [TAG_NAVIGATION(), TAG_PLUGINS()],
-        handler: () => openUserSettingsPanel("plexcord_plugins")
+        handler: () => SettingsRouter.openUserSettings("plexcord_plugins_panel")
     },
     {
         id: "reload-windows",
@@ -1307,15 +1307,15 @@ const BUILT_IN_COMMANDS = (): CommandEntry[] => [
 ];
 
 const DISCORD_SETTINGS_COMMANDS: Array<{ id: string; label: () => string; route: string; keywords: string[]; description?: () => string; }> = [
-    { id: "settings-account", label: () => t(plugin.commandPalette.command.discord.account), route: "my_account", keywords: ["account", "profile"] },
-    { id: "settings-privacy", label: () => t(plugin.commandPalette.command.discord.privacy), route: "data_and_privacy", keywords: ["privacy", "safety", "data"] },
-    { id: "settings-notifications", label: () => t(plugin.commandPalette.command.discord.notifications), route: "legacy_notifications_settings", keywords: ["notifications"] },
-    { id: "settings-voice", label: () => t(plugin.commandPalette.command.discord.voice), route: "voice_and_video", keywords: ["voice", "video", "audio"] },
-    { id: "settings-text", label: () => t(plugin.commandPalette.command.discord.text), route: "text_and_images", keywords: ["text", "images"] },
-    { id: "settings-appearance", label: () => t(plugin.commandPalette.command.discord.appearance), route: "appearance", keywords: ["appearance", "theme"] },
-    { id: "settings-accessibility", label: () => t(plugin.commandPalette.command.discord.accessibility), route: "accessibility", keywords: ["accessibility"] },
-    { id: "settings-keybinds", label: () => t(plugin.commandPalette.command.discord.keybinds), route: "keybinds", keywords: ["keybinds", "shortcuts"] },
-    { id: "settings-advanced", label: () => t(plugin.commandPalette.command.discord.advanced), route: "advanced", keywords: ["advanced"] }
+    { id: "settings-account", label: () => t(plugin.commandPalette.command.discord.account), route: "my_account_panel", keywords: ["account", "profile"] },
+    { id: "settings-privacy", label: () => t(plugin.commandPalette.command.discord.privacy), route: "data_and_privacy_panel", keywords: ["privacy", "safety", "data"] },
+    { id: "settings-notifications", label: () => t(plugin.commandPalette.command.discord.notifications), route: "notifications_panel", keywords: ["notifications"] },
+    { id: "settings-voice", label: () => t(plugin.commandPalette.command.discord.voice), route: "voice_and_video_panel", keywords: ["voice", "video", "audio"] },
+    { id: "settings-text", label: () => t(plugin.commandPalette.command.discord.text), route: "text_and_images_panel", keywords: ["text", "images"] },
+    { id: "settings-appearance", label: () => t(plugin.commandPalette.command.discord.appearance), route: "appearance_panel", keywords: ["appearance", "theme"] },
+    { id: "settings-accessibility", label: () => t(plugin.commandPalette.command.discord.accessibility), route: "accessibility_panel", keywords: ["accessibility"] },
+    { id: "settings-keybinds", label: () => t(plugin.commandPalette.command.discord.keybinds), route: "keybinds_panel", keywords: ["keybinds", "shortcuts"] },
+    { id: "settings-advanced", label: () => t(plugin.commandPalette.command.discord.advanced), route: "advanced_panel", keywords: ["advanced"] }
 ];
 
 const settingsCommandsById = new Map<string, typeof DISCORD_SETTINGS_COMMANDS[number]>();
@@ -1701,7 +1701,7 @@ function registerUpdateCommands() {
         keywords: ["updates", "changelog"],
         categoryId: "updates",
         tags: [TAG_DEVELOPER(), TAG_NAVIGATION()],
-        handler: () => openUserSettingsPanel("plexcord_changelog")
+        handler: () => SettingsRouter.openUserSettings("plexcord_changelog_panel")
     });
 }
 
@@ -1720,13 +1720,13 @@ function registerDiscordSettingsCommands() {
             categoryId: "discord-settings",
             tags: [TAG_NAVIGATION()],
             handler: async () => {
-                const fallbackRoute = command.id === "settings-privacy" ? "privacy_and_safety" : null;
+                const fallbackRoute = command.id === "settings-privacy" ? "privacy_and_safety_panel" : null;
 
                 try {
-                    await openUserSettingsPanel(command.route);
+                    await SettingsRouter.openUserSettings(command.route);
                 } catch (error) {
                     if (fallbackRoute) {
-                        await openUserSettingsPanel(fallbackRoute);
+                        await SettingsRouter.openUserSettings(fallbackRoute);
                     } else {
                         console.error("CommandPalette", "Failed to open Discord settings", command.route, error);
                         showToast(t(plugin.commandPalette.toast.route.unable, { destination: command.label }), Toasts.Type.FAILURE);
@@ -2021,7 +2021,7 @@ async function executeCustomCommand(command: CustomCommandDefinition) {
                 await runCommandById(action.commandId, new Set([command.id]));
                 break;
             case "settings":
-                openUserSettingsPanel(action.route);
+                SettingsRouter.openUserSettings(action.route);
                 break;
             case "url": {
                 const external = (window as any)?.DiscordNative?.app?.openExternalURL;
@@ -2722,7 +2722,7 @@ function registerCustomizationCommands() {
         keywords: ["theme", "library"],
         categoryId: DEFAULT_CATEGORY_ID,
         tags: [TAG_CUSTOMIZATION(), TAG_NAVIGATION()],
-        handler: () => openUserSettingsPanel("plexcord_themes")
+        handler: () => SettingsRouter.openUserSettings("plexcord_themes_panel")
     });
 }
 

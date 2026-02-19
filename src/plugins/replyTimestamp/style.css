@@ -1,3 +1,4 @@
 .pc-reply-timestamp {
+    width: fit-content !important;
     margin-right: 0.25em;
 }

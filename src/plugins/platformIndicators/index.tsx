@@ -20,7 +20,7 @@
 import "./style.css";
 
 import { plugin, t } from "@api/i18n";
-import { definePluginSettings, Settings } from "@api/Settings";
+import { definePluginSettings } from "@api/Settings";
 import { DiscordPlatform, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { classes } from "@utils/misc";
@@ -134,7 +134,7 @@ interface PlatformIndicatorProps {
 }
 
 const PlatformIndicator = ({ user, isProfile, isMessage, isMemberList }: PlatformIndicatorProps) => {
-    if (user == null || (user.bot && !Settings.plugins.PlatformIndicators.showBots)) return null;
+    if (user == null || (user.bot && !settings.store.showBots)) return null;
     useEnsureOwnStatus(user);
 
     const status = useStateFromStores([PresenceStore], () => PresenceStore.getClientStatus(user.id));

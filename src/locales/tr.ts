@@ -440,7 +440,10 @@ const translations: MatchStructure<typeof enTranslations> = {
         successful: "Ayarlar başarıyla içeri aktarıldı. Değişikliklerin etkili olması için uygulamayı yeniden başlatın!",
         error: {
             failure: "Ayarları içe aktarma başarısız oldu: {{error}}",
-            invalid: "Geçersiz Ayarlar. Bu gerçekten bir Plexcord Ayar dosyası mı?"
+            failedExport: "Ayarları dışa aktarma başarısız oldu, konsolu kontrol edin",
+            invalid: "Geçersiz Ayarlar. Bu gerçekten bir Plexcord Ayar dosyası mı?",
+            tooLarge: "DataStore çok büyük - yedeklemede hariç tutuldu. Gerekirse 'Veri Depolarını Dışa Aktar' özelliğini kullanın.",
+            clearSomeDate: "DataStore çok büyük. Lütfen bazı eklenti verilerini temizleyip tekrar deneyin."
         },
         settings: {
             text: "Yedeklemede neler var?",
@@ -972,10 +975,21 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 success: "Başarılı!",
                 failed: "Kod parçası çalıştırılamadı :(",
-                failedOpenInvite: "Davet açılamadı, lütfen konsolu kontrol edin :("
+                failedOpenInvite: "Davet açılamadı, lütfen konsolu kontrol edin :(",
+                upload: "Eklenti listesi başarıyla yüklendi!",
+                failedUpload: "Eklenti listesi dosyası yüklenemedi. Lütfen tekrar deneyin.",
+                unableGenerate: "Eklenti listesi oluşturulamadı."
             },
             dm: {
                 warning: "Lütfen destek için Plexcord eklenti geliştiricilerine özel mesaj göndermeyin!{{br}}Bunun yerine {{support}} sunucusuna katılarak Plexcord destek kanalını kullanabilirsiniz: {{channel}}"
+            },
+            alert: {
+                title: "Uyarı: Çok Fazla Eklenti",
+                paragraph1: "100'den fazla eklentinin etkinleştirildiğini fark ettik.",
+                paragraph2: "Eklentilerin sayısı nedeniyle destek alamayabilirsiniz.",
+                paragraph3: "Sorununuz büyük olasılıkla eklenti çakışmalarından kaynaklanıyor olabilir.",
+                paragraph4: "Sorunu çözmek için bazı eklentileri devre dışı bırakmayı düşünün.",
+                paragraph5: "Eklenti listeniz bir metin dosyası olarak gönderilecek.",
             }
         },
         accountPanelServerProfile: {
@@ -3069,9 +3083,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 crashed: {
                     title: "Discord çöktü!",
-                    body: "Tüh :( Discord kısa sürede iki kez çöktü, kurtarma denemesi yapılmayacak.",
+                    body: "Tüh :( Discord kısa sürede iki kez çöktü, kurtarma denemesi yapılmayacak. Buraya tıkla ve destek sunucusuna katıl!",
                     update: "Ah hayır, Discord yeni çöktü... ama güzel haber, bu sorunu düzeltebilecek bir Plexcord güncellemesi mevcut! Şimdi güncellemek ister misiniz?",
-                    recover: "Kurtarılmaya çalışılıyor..."
+                    recover: "Kurtarılmaya çalışılıyor... Buraya tıklayın ve destek sunucusuna katılın!",
+                    invalid: "Geçersiz veya süresi geçmiş davet bağlantısı."
                 }
             }
         },
@@ -4028,7 +4043,44 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         favoriteEmojiFirst: {
             name: "FavoriteEmojiFirst",
-            description: "Favori emojinizi emoji otomatik tamamlama listesinin en üstüne koyar."
+            description: "Favori emojinizi emoji otomatik tamamlama listesinin en üstüne koyar ve emoji takma adı da sağlar.",
+            option: {
+                aliases: {
+                    label: "Takma Adlar",
+                    description: "Emoji takma adlarınızı yönetin."
+                },
+                clearAll: {
+                    label: "Tümünü Temizle",
+                    description: "Tüm takma adları siler."
+                }
+            },
+            modal: {
+                clear: {
+                    title: "Tüm Takma Adları Sil",
+                    description: "Bu işlem, kaydettiğiniz tüm emoji takma adlarını kaldıracaktır.",
+                    confirm: "Tüm takma adları sil"
+                },
+                set: {
+                    title: "Takma Ad Ayarla",
+                    description: "{{emoji}} için bir takma ad ayarla",
+                    placeholder: "Takma ad, örn. 'mutlu'",
+                    save: "Kaydet",
+                    error: "Yinelenen takma ad"
+                }
+            },
+            toast: {
+                set: "{{emoji}} için takma ad ayarlandı",
+                clearAll: "Tüm emoji takma adları silindi",
+                failedDeleted: "Takma adları silme başarısız oldu",
+                removed: "{{alias}} için takma ad silindi",
+                failedRemove: "Takma ad kaldırma başarısız oldu",
+                duplicate: "Yinelenen takma ad",
+                failedSave: "Takma ad kaydedilemedi"
+            },
+            button: {
+                edit: "Takma Adı Düzenle",
+                set: "Takma Ad Ayarla"
+            }
         },
         favoriteGifSearch: {
             name: "FavoriteGifSearch",
@@ -4498,6 +4550,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Köprü",
                     description: "Gönderilen bağlantının, sorgu etiketiyle köprü olarak gönderilip gönderilmeyeceği"
                 },
+                embed: {
+                    label: "Gömülü İçerik",
+                    description: "Gönderilen bağlantının gömülü içerik olarak görüntülenip görüntülenmeyeceği"
+                },
                 defaultEngine: {
                     label: "Varsayılan Arama Motoru",
                     description: "Kullanılacak arama motoru"
@@ -4768,10 +4824,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 temporarilyIgnore: "Geçici Olarak Yoksay",
                 permanentlyIgnore: "Kalıcı Olarak Yoksay"
             }
-        },
-        ignoreTerms: {
-            name: "IgnoreTerms",
-            description: "Discord'un yeni hizmet şartlarını yok say"
         },
         iLoveSpam: {
             name: "ILoveSpam",
@@ -5349,11 +5401,19 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 singleClickAction: {
                     label: "Tek Tıklama Eylemi",
-                    description: "Modifikatör ile tek tıklama eylemi"
+                    description: "Tek tıklama eylemi (kendi mesajlarınızda)"
                 },
                 singleClickModifier: {
                     label: "Tek Tıklama Modifikatörü",
-                    description: "Tek tıklama eylemi için gereken modifikatör"
+                    description: "Tek tıklama eylemi için gereken modifikatör (kendi mesajlarınızda)"
+                },
+                singleClickOthersAction: {
+                    label: "Tek Tıklama Eylemi (Diğerleri)",
+                    description: "Tek tıklama eylemi (diğerlerinin mesajlarında)"
+                },
+                singleClickOthersModifier: {
+                    label: "Tek Tıklama Modifikatörü (Diğerleri)",
+                    description: "Tek tıklama eylemi için gereken modifikatör (diğerlerinin mesajlarında)"
                 },
                 doubleClickAction: {
                     label: "Çift Tıklama Eylemi",
@@ -5553,7 +5613,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         messageLinkTooltip: {
             name: "MessageLinkTooltip",
-            description: "MessageLinkEmbed gibi ama yer kaplamadan çalışır.",
+            description: "Mesaj bağlantıları, yanıtlar ve iletilen mesajlar üzerine gelindiğinde bir araç ipucu ve mesaj önizlemesi ekler.",
             loading: "Yükleniyor...",
             option: {
                 onLink: {
@@ -5653,6 +5713,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             failedToRemove: "Mesaj kaldırılamadı",
             successfullyImported: "Günlükler başarıyla içe aktarıldı.",
             errorImportingLogs: "Günlükler içe aktarılırken bir hata oluştu. Daha fazla bilgi için konsolu kontrol edin.",
+            importing: "İçe Aktarılıyor...",
+            importLogs: "Günlükleri İçe Aktar",
+            exporting: "Dışa Aktarılıyor...",
+            exportLogs: "Günlükleri Dışa Aktar",
             alert: {
                 clearLogs: {
                     title: "Günlükleri Temizle",
@@ -5665,7 +5729,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     body: "{{messages}} günlükleri temizlemek istediğinizden emin misiniz?",
                     confirmText: "Temizle",
                     cancel: "İptal"
-                }
+                },
+                cleared: "Mesaj günlük veritabanı ve önbelleği temizlendi."
             },
             context: {
                 title: "Mesaj Günlüğü",
@@ -5785,6 +5850,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 alwaysLogCurrentChannel: {
                     label: "Geçerli Kanalı Her Zaman Kaydet",
                     description: "Geçerli kanalı her zaman kaydeder. Kara listedeki kanallar/kullanıcılar hariç tutulur."
+                },
+                permanentlyRemoveLogByDefault: {
+                    label: "Varsayılan Olarak Günlüğü Kalıcı Olarak Sil",
+                    description: "Ana MessageLogger bağlam menüsünde, mesaj günlüğünden kaldırma seçeneği varsayılan olarak kalıcı olarak silme olarak değiştirilir."
                 },
                 hideMessageFromMessageLoggers: {
                     label: "Mesajı Günlükleyicilerden Gizle",
@@ -6123,7 +6192,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Tidal için şarkı sözlerini göster"
                 },
                 YtmSectionTitle: {
-                    label: "YouTube Music"
+                    label: "YouTube Music",
+                    description: "{{app}} bu ayar için gerekli"
                 },
                 showYoutubeMusicControls: {
                     label: "YouTube Music Kontrollerini Göster",
@@ -7217,6 +7287,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoredQuestIDs: {
                     label: "Yoksayılan Görev Kimlikleri",
                     description: "Yoksayılan Görev kimliklerinin dizisi."
+                },
+                resumeQuestIDs: {
+                    label: "Devam Edilen Görev Kimlikleri",
+                    description: "Arka planda otomatik tamamlanan Görev kimliklerinin dizisi."
                 }
             },
             button: {
@@ -8088,7 +8162,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showMeYourName: {
             name: "ShowMeYourName",
-            description: "Sohbette takma adların, görünen adların ve kullanıcı adlarının herhangi bir kombinasyonunu görüntüleyin.",
+            description: "Sohbette özel takma adların, arkadaş takma adlarının, sunucu takma adlarının, görünen adların ve kullanıcı adlarının herhangi bir permütasyonunu görüntüleyin.",
             option: {
                 messages: {
                     label: "Mesajlar",
@@ -8105,6 +8179,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 memberList: {
                     label: "Üye Listesi",
                     description: "Üye listesinde özel ad formatınızda listelenen ilk kullanılabilir adı göster."
+                },
+                typingIndicator: {
+                    label: "Yazma Göstergesi",
+                    description: "Yazma göstergesinde özel ad formatınızda listelenen ilk kullanılabilir adı göster."
                 },
                 profilePopout: {
                     label: "Profil Açılır Kartı",
@@ -8150,9 +8228,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Ad Ayırıcı",
                     description: "Adlar arasında kullanılacak ayırıcı. Varsayılan tek boşluktur."
                 },
+                friendNameOnlyInDirectMessages: {
+                    label: "Arkadaş Adı Sadece Özel Mesajlarda Göster",
+                    description: "Sadece özel mesajlarda arkadaş adlarını göster, sunucularda değil."
+                },
+                customNameOnlyInDirectMessages: {
+                    label: "Özel Ad Sadece Özel Mesajlarda Göster",
+                    description: "Sadece özel mesajlarda özel adları göster, sunucularda değil."
+                },
                 includedNames: {
                     label: "Dahil Edilen Adlar",
                     description: "Kullanıcı adlarının, görünen adların, takma adların ve arkadaş adlarının görüntülenme sırası. Şu yer tutucuları kullanın: {user}, {display}, {nick}, {friend}. Bir ad mevcut değilse kullanılacak alternatifleri virgülle ayırarak yazabilirsiniz: {friend, nick, display}. Her bir ad için üç ön ek ve üç son ek ekleyebilirsiniz."
+                },
+                customNameColor: {
+                    label: "Özel Ad Rengi",
+                    description: "İlk görüntülenen değilse, bir kullanıcıya atadığınız özel ad için kullanılacak renk. Varsayılan için boş bırakın. Hex(a), rgb(a) veya hsl(a) formatını kabul eder. Kullanıcının en yüksek rol rengini takip etmek için 'Role' kullanın. Parlaklığı yüzde olarak ayarlamak için 'Role+-#' kullanın (örnek: 'Role+15')."
                 },
                 friendNameColor: {
                     label: "Arkadaş Adı Rengi",
@@ -8174,6 +8264,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Adı Yeniden Oluşturmayı Tetikle",
                     description: "Bu ayarı değiştirerek adın yeniden oluşturulmasını tetikler."
                 }
+            },
+            modal: {
+                change: {
+                    title: "SMYN Kullanıcı Adını Değiştir",
+                },
+                add: {
+                    title: "SMYN Takma Adı Ekle"
+                },
+                setCustom: "Bu kullanıcı için özel bir SMYN takma adı ayarlayın. SMYN şablon ayarlarında {custom} belirterek kullanın.",
+                nickname: "SMYN Takma Adı",
+                reset: "SMYN Takma Adını Sıfırla",
+                cancel: "İptal Et"
             }
         },
         showTimeoutDuration: {
@@ -8584,7 +8686,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         steamStatusSync: {
             name: "SteamStatusSync",
-            description: "Durumunuzu Steam ile senkronize edin!",
+            description: "Durumunuzu Steam ile senkronize edin! (Çevrimiçi, Uzakta, Görünmez veya Çevrimdışı.)",
             option: {
                 onlineStatus: {
                     label: "Çevrimiçi Durumu",

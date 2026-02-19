@@ -6,9 +6,12 @@
  */
 
 import { plugins, t } from "@api/i18n";
+import ErrorBoundary from "@components/ErrorBoundary";
 import { Flex } from "@components/Flex";
+import { HeadingPrimary } from "@components/Heading";
 import { Heart } from "@components/Heart";
-import { DonateButton, ErrorBoundary, HeadingPrimary, Paragraph } from "@components/index";
+import { Paragraph } from "@components/Paragraph";
+import { DonateButton } from "@components/settings";
 import { Margins } from "@utils/margins";
 import { closeModal, ModalContent, ModalFooter, ModalHeader, ModalRoot, openModal } from "@utils/modal";
 

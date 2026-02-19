@@ -10,34 +10,42 @@ import { plugin, t } from "@api/i18n";
 import { openLogModal } from "@plugins/messageLoggerEnhanced/components/LogsModal";
 import { deleteMessageIDB } from "@plugins/messageLoggerEnhanced/db";
 import { settings } from "@plugins/messageLoggerEnhanced/index";
+import { findStoreLazy } from "@webpack";
 import { FluxDispatcher, Menu, MessageActions, React, Toasts, UserStore } from "@webpack/common";
 
 import { addToXAndRemoveFromOpposite, ListType, removeFromX } from ".";
 
+const SortedGuildStore = findStoreLazy("SortedGuildStore");
+
 const idFunctions = {
+    Folder: props =>
+        props?.folderId &&
+        SortedGuildStore?.getGuildFolders?.().find(f => f?.folderId === props.folderId)?.guildIds,
     Server: props => props?.guild?.id,
     User: props => props?.message?.author?.id || props?.user?.id,
     Channel: props => props.message?.channel_id || props.channel?.id
-} as const;
+} as Record<string, (props: any) => string | string[] | null | undefined>;
 
 type idKeys = keyof typeof idFunctions;
 
 function renderListOption(listType: ListType, IdType: idKeys, props: any) {
-    const id = idFunctions[IdType](props);
-    if (!id) return null;
+    const rawId = idFunctions[IdType](props);
+    if (!rawId) return null;
 
-    const isBlocked = settings.store[listType].includes(id);
+    const ids = Array.isArray(rawId) ? rawId : [rawId];
+
+    const isBlocked = ids.every(id => settings.store[listType].includes(id));
     const oppositeListType = listType === "blacklistedIds" ? "whitelistedIds" : "blacklistedIds";
-    const isOppositeBlocked = settings.store[oppositeListType].includes(id);
+    const isOppositeBlocked = ids.some(id => settings.store[oppositeListType].includes(id));
     const translatedType = t(`plugin.messageLoggerEnhanced.type.${IdType.toLowerCase()}`);
     const listAction = listType === "blacklistedIds" ? "blacklist" : "whitelist";
 
-    const addToList = () => addToXAndRemoveFromOpposite(listType, id);
-    const removeFromList = () => removeFromX(listType, id);
+    const addToList = () => ids.forEach(id => addToXAndRemoveFromOpposite(listType, id));
+    const removeFromList = () => ids.forEach(id => removeFromX(listType, id));
 
     return (
         <Menu.MenuItem
-            id={`${listType}-${IdType}-${id}`}
+            id={`${listType}-${IdType}-${ids[0]}`}
             label={
                 isOppositeBlocked
                     ? t(`plugin.messageLoggerEnhanced.context.move${IdType}To${listAction === "blacklist" ? "Blacklist" : "Whitelist"}`)
@@ -52,7 +60,8 @@ function renderListOption(listType: ListType, IdType: idKeys, props: any) {
 
 function renderOpenLogs(idType: idKeys, props: any) {
     const id = idFunctions[idType](props);
-    if (!id) return null;
+    // TODO: rewrite logs modal to accept arrays
+    if (!id || Array.isArray(id)) return null;
 
     const translatedType = t(`plugin.messageLoggerEnhanced.type.${idType.toLowerCase()}`);
 
@@ -69,37 +78,8 @@ export const contextMenuPath: NavContextMenuPatchCallback = (children, props) =>
     if (!props) return;
 
     if (!children.some(child => child?.props?.id === "message-logger")) {
-        if (props.navId === "message" && (props.message?.deleted || props.message?.editHistory?.length > 0)) {
-            children.push(
-                <Menu.MenuItem
-                    id="remove-message"
-                    label={props.message?.deleted ? t(plugin.messageLoggerEnhanced.context.removeMessage) : t(plugin.messageLoggerEnhanced.context.removeMessageHistory)}
-                    color="danger"
-                    action={() =>
-                        deleteMessageIDB(props.message.id)
-                            .then(() => {
-                                if (props.message.deleted) {
-                                    FluxDispatcher.dispatch({
-                                        type: "MESSAGE_DELETE",
-                                        channelId: props.message.channel_id,
-                                        id: props.message.id,
-                                        mlDeleted: true
-                                    });
-                                } else {
-                                    props.message.editHistory = [];
-                                }
-                            }).catch(() => Toasts.show({
-                                type: Toasts.Type.FAILURE,
-                                message: t(plugin.messageLoggerEnhanced.failedToRemove),
-                                id: Toasts.genId()
-                            }))
-
-                    }
-                />
-            );
-        }
-
         children.push(
+            <Menu.MenuSeparator />,
             <Menu.MenuItem
                 id="message-logger"
                 label={t(plugin.messageLoggerEnhanced.context.title)}
@@ -120,7 +100,43 @@ export const contextMenuPath: NavContextMenuPatchCallback = (children, props) =>
                         {renderListOption("blacklistedIds", IdType as idKeys, props)}
                         {renderListOption("whitelistedIds", IdType as idKeys, props)}
                     </React.Fragment>
-                ))}{
+                ))}
+
+                {
+                    props.navId === "message"
+                    && (props.message?.deleted || props.message?.editHistory?.length > 0)
+                    && (
+                        <>
+                            <Menu.MenuSeparator />
+                            <Menu.MenuItem
+                                id="remove-message"
+                                label={props.message?.deleted ? t(plugin.messageLoggerEnhanced.context.removeMessage) : t(plugin.messageLoggerEnhanced.context.removeMessageHistory)}
+                                color="danger"
+                                action={() =>
+                                    deleteMessageIDB(props.message.id)
+                                        .then(() => {
+                                            if (props.message.deleted) {
+                                                FluxDispatcher.dispatch({
+                                                    type: "MESSAGE_DELETE",
+                                                    channelId: props.message.channel_id,
+                                                    id: props.message.id,
+                                                    mlDeleted: true
+                                                });
+                                            } else {
+                                                props.message.editHistory = [];
+                                            }
+                                        }).catch(() => Toasts.show({
+                                            type: Toasts.Type.FAILURE,
+                                            message: t(plugin.messageLoggerEnhanced.failedToRemove),
+                                            id: Toasts.genId()
+                                        }))
+                                }
+                            />
+                        </>
+                    )
+                }
+
+                {
                     settings.store.hideMessageFromMessageLoggers
                     && props.navId === "message"
                     && props.message?.author?.id === UserStore.getCurrentUser().id
@@ -142,7 +158,6 @@ export const contextMenuPath: NavContextMenuPatchCallback = (children, props) =>
                                         "validNonShortcutEmojis": []
                                     }, { nonce: props.message.id });
                                 }}
-
                             />
                         </>
                     )

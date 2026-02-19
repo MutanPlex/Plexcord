@@ -78,6 +78,7 @@ export default definePlugin({
     },
 
     patches: [
+        // In the user popout. eg: when clicking the name in chat
         {
             find: ".POPOUT,user:",
             replacement: {
@@ -86,9 +87,9 @@ export default definePlugin({
             }
         },
         {
-            find: '"UserProfileSidebar"',
+            find: ".SIDEBAR,disableToolbar:",
             replacement: {
-                match: /children:\[(?=[^[]+?\.SIDEBAR)/,
+                match: /children:\[(?=[^[]+?\.SIDEBAR}\),\i\.bot)/,
                 replace: "$&$self.BiteSizeReviewsButton({user:arguments[0].user}),"
             }
         }

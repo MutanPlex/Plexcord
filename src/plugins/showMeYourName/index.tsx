@@ -5,49 +5,92 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import "./styles.css";
+import "./style.css";
 
+import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
+import { DataStore } from "@api/index";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
+import { Button } from "@components/Button";
+import ErrorBoundary from "@components/ErrorBoundary";
+import { Heading, TextButton } from "@components/index";
 import { GuildMember, Message, User } from "@plexcord/discord-types";
+import ircColors from "@plugins/ircColors";
 import mentionAvatars from "@plugins/mentionAvatars";
 import { Devs, PcDevs } from "@utils/constants";
+import { classNameFactory, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, openModal } from "@utils/index";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy, findStoreLazy } from "@webpack";
-import { ChannelStore, GuildMemberStore, GuildStore, MessageStore, RelationshipStore, StreamerModeStore, useEffect, UserStore } from "@webpack/common";
+import { ChannelStore, GuildMemberStore, GuildStore, Menu, MessageStore, RelationshipStore, StreamerModeStore, TextInput, useEffect, useState } from "@webpack/common";
 import { JSX } from "react";
 
+const SMYNC = classNameFactory();
+const UserStore = findStoreLazy("UserStore");
 const wrapEmojis = findByCodeLazy("lastIndex;return");
+const adjustColor = findByCodeLazy("light1", "dark1", "toonStroke");
 const AccessibilityStore = findStoreLazy("AccessibilityStore");
-const colorPattern = /^#(?:[\da-f]{3}){1,2}$|^#(?:[\da-f]{4}){1,2}$|(rgb|hsl)a?\((\s*-?\d+%?\s*,){2}(\s*-?\d+%?\s*)\)|(rgb|hsl)a?\((\s*-?\d+%?\s*,){3}\s*(0|(0?\.\d+)|1)\)$/iu;
+
 const roleColorPattern = /^role((?:\+|-)\d{0,4})?$/iu;
 const symbolPattern = /^[\p{S}\p{P}]{1,3}$/iu;
-const templatePattern = /(?:\{(?:friend|nick|display|user)(?:,\s*(?:friend|nick|display|user))*\})/iu;
+const templatePattern = /(?:\{(?:custom|friend|nick|display|user)(?:,\s*(?:custom|friend|nick|display|user))*\})/iu;
 
-function adjustHex(color: string, percent: number): string {
-    let hex = color.replace("#", "");
+type CustomNicknameData = Record<string, string>;
+let customNicknames: CustomNicknameData = {};
 
-    if (hex.length === 3) {
-        hex = hex.split("").map(c => c + c).join("");
-    }
+let toCSSCache: Map<string, string | null> | null = null;
+let toCSSProbe: HTMLDivElement | null = null;
 
-    const num = parseInt(hex, 16);
-    let r = (num >> 16) & 0xFF;
-    let g = (num >> 8) & 0xFF;
-    let b = num & 0xFF;
+function toCSS(color: string | number | null | undefined): string | null {
+    if (color == null) return null;
+    if (typeof color === "number") return `#${color.toString(16).padStart(6, "0")}`;
+    if (!color) return null;
 
+    const cached = toCSSCache?.get(color);
+    if (cached !== undefined) return cached ?? null;
+
+    if (!toCSSProbe) return null;
+
+    toCSSProbe.style.color = "";
+    toCSSProbe.style.color = color;
+    const result = toCSSProbe.style.color !== "" ? color : null;
+    toCSSCache?.set(color, result);
+    return result;
+}
+
+let convertToRGBCanvas: HTMLCanvasElement | null = null;
+let convertToRGBCtx: CanvasRenderingContext2D | null = null;
+let convertToRGBCache: Map<string, [number, number, number] | null> | null = null;
+
+function convertToRGB(color: string): [number, number, number] | null {
+    const cached = convertToRGBCache?.get(color);
+    if (cached !== undefined) return cached ?? null;
+
+    if (!convertToRGBCanvas || !convertToRGBCtx) return null;
+
+    convertToRGBCtx.fillStyle = "#000000";
+    convertToRGBCtx.clearRect(0, 0, 1, 1);
+    convertToRGBCtx.fillStyle = color;
+    convertToRGBCtx.fillRect(0, 0, 1, 1);
+    const [r, g, b] = convertToRGBCtx.getImageData(0, 0, 1, 1).data;
+    const result: [number, number, number] = [r, g, b];
+    convertToRGBCache?.set(color, result);
+    return result;
+}
+
+function adjustBrightness(color: string, percent: number): string {
+    const rgb = convertToRGB(color);
+    if (!rgb) return color;
+
+    let [r, g, b] = rgb;
     r = Math.max(0, Math.min(255, r + Math.round(r * (percent / 100))));
     g = Math.max(0, Math.min(255, g + Math.round(g * (percent / 100))));
     b = Math.max(0, Math.min(255, b + Math.round(b * (percent / 100))));
 
-    const newColor = ((r << 16) | (g << 8) | b).toString(16).padStart(6, "0");
+    const hex = `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, "0")}`;
+    if (hex === "#ffffff" || hex === "#000000") return color;
 
-    if (newColor === "ffffff" || newColor === "000000") {
-        return color;
-    }
-
-    return `#${newColor}`;
+    return hex;
 }
 
 function validColor(color: string) {
@@ -62,75 +105,50 @@ function validColor(color: string) {
         return !isNaN(percentage) && percentage <= 100 && percentage >= -100;
     }
 
-    const colorTestDiv = document.createElement("div");
-    colorTestDiv.style.borderColor = color;
-
-    const isValid = colorTestDiv.style.borderColor !== "" && colorPattern.test(color);
-    colorTestDiv.remove();
-
-    return isValid;
+    return !!toCSS(color);
 }
 
-function resolveColor(user: User | GuildMember, savedColor: string, fallbackColor: string, canUseGradient: boolean): any {
-    const fallbackReturn = {
-        normal: {
-            original: {
-                color: fallbackColor,
-                "text-decoration-color": fallbackColor,
-            },
-            adjusted: {
-                color: fallbackColor,
-                "text-decoration-color": fallbackColor,
-            }
-        },
-        gradient: null
-    };
-
-    if (!savedColor.trim()) { return fallbackReturn; }
+function resolveColor(
+    colorStrings: colorStringsType,
+    displayNameStyles: { effectId: number; colors: number[]; } | null | undefined,
+    savedColor: string,
+    canUseGradient: boolean,
+    inGuild: boolean,
+    forceDefault: boolean
+): Record<string, any> | null {
+    if (!savedColor.trim()) { return null; }
 
     let gradient: any = null;
-    let primaryColor: any = savedColor;
-    let secondaryColor: any = savedColor;
-    let tertiaryColor: any = savedColor;
-    let primaryAdjusted: any = savedColor;
-    let secondaryAdjusted: any = savedColor;
-    let tertiaryAdjusted: any = savedColor;
+    let primaryColor: any = null;
+    let secondaryColor: any = null;
+    let tertiaryColor: any = null;
+    let primaryAdjusted: any = null;
+    let secondaryAdjusted: any = null;
+    let tertiaryAdjusted: any = null;
 
     if (savedColor.toLowerCase().includes("role")) {
         const percentage = roleColorPattern.exec(savedColor)?.[1] || "";
-        if (percentage && isNaN(parseInt(percentage))) return fallbackReturn;
+        if (percentage && isNaN(parseInt(percentage))) return null;
 
-        const colorStrings = (user as any)?.colorStrings || {};
-        primaryColor = colorStrings.primaryColor || null;
-        secondaryColor = colorStrings.secondaryColor || null;
-        tertiaryColor = colorStrings.tertiaryColor || null;
-        primaryAdjusted = primaryColor;
-        secondaryAdjusted = secondaryColor;
-        tertiaryAdjusted = tertiaryColor;
+        primaryColor = forceDefault ? toCSS("var(--text-strong)") : (toCSS(colorStrings?.primaryColor) || (!inGuild && toCSS(displayNameStyles?.colors?.[0])) || toCSS("var(--text-strong)"));
+        secondaryColor = forceDefault ? null : (toCSS(colorStrings?.secondaryColor) || (!inGuild && toCSS(displayNameStyles?.colors?.[1])) || null);
+        tertiaryColor = forceDefault ? null : (toCSS(colorStrings?.tertiaryColor) || (!inGuild && toCSS(displayNameStyles?.colors?.[2])) || null);
 
-        if (!primaryColor) { return fallbackReturn; }
-
-        if (primaryColor && percentage) {
-            primaryAdjusted = adjustHex(primaryColor, parseInt(percentage));
-        }
-
-        if (secondaryColor && percentage) {
-            secondaryAdjusted = adjustHex(secondaryColor, parseInt(percentage));
-        }
-
-        if (tertiaryColor && percentage) {
-            tertiaryAdjusted = adjustHex(tertiaryColor, parseInt(percentage));
-        }
+        primaryAdjusted = percentage ? adjustBrightness(primaryColor, parseInt(percentage)) : primaryColor;
+        secondaryAdjusted = secondaryColor && percentage ? adjustBrightness(secondaryColor, parseInt(percentage)) : secondaryColor;
+        tertiaryAdjusted = tertiaryColor && percentage ? adjustBrightness(tertiaryColor, parseInt(percentage)) : tertiaryColor;
+    } else {
+        primaryColor = savedColor;
     }
 
-    gradient = !canUseGradient || !secondaryColor
+    gradient = !canUseGradient || !secondaryColor || forceDefault
         ? null
         : tertiaryColor
             ? "linear-gradient(to right,var(--custom-gradient-color-1),var(--custom-gradient-color-2),var(--custom-gradient-color-3),var(--custom-gradient-color-1))"
             : "linear-gradient(to right,var(--custom-gradient-color-1),var(--custom-gradient-color-2),var(--custom-gradient-color-1))";
 
     const baseNormalStyle = {
-        "isolation": "isolate",
+        "isolation": "isolate"
     };
 
     const baseGradientStyle = {
@@ -138,7 +156,7 @@ function resolveColor(user: User | GuildMember, savedColor: string, fallbackColo
         "background-size": "100px auto",
         "-webkit-text-fill-color": "transparent",
         "-webkit-background-clip": "text",
-        "isolation": "isolate",
+        "isolation": "isolate"
     };
 
     return {
@@ -155,7 +173,7 @@ function resolveColor(user: User | GuildMember, savedColor: string, fallbackColo
                 "--custom-gradient-color-2": secondaryColor || primaryColor,
                 "--custom-gradient-color-3": tertiaryColor || primaryColor,
                 "background-image": gradient,
-                "animation": "show-me-your-name-animation 1.5s linear infinite"
+                "animation": "smyn-animation var(--smyn-gradient-duration) linear infinite"
             },
             static: {
                 original: {
@@ -212,8 +230,8 @@ function validTemplate(value: string) {
             suffix.length > 3 ||
             (!!prefix && !symbolPattern.test(prefix)) ||
             (!!suffix && !symbolPattern.test(suffix)) ||
-            targetProcessedNames.length > 4 ||
-            targetProcessedNames.some(name => !["friend", "nick", "display", "user"].includes(name.trim()))
+            targetProcessedNames.length > 5 ||
+            targetProcessedNames.some(name => !["custom", "friend", "nick", "display", "user"].includes(name.trim()))
         );
     });
 
@@ -222,7 +240,20 @@ function validTemplate(value: string) {
     }
 }
 
-function getProcessedNames(author: any, truncateAllNamesWithStreamerMode: boolean, discriminators: boolean): [string | null, string | null, string | null, string | null] {
+function getProcessedNames(
+    author: any,
+    truncateAllNamesWithStreamerMode: boolean,
+    discriminators: boolean,
+    inGuild: boolean,
+    friendNameOnlyInDirectMessages: boolean,
+    customNameOnlyInDirectMessages: boolean
+): {
+    username: string | null;
+    display: string | null;
+    nick: string | null;
+    friend: string | null;
+    custom: string | null;
+} {
     let discriminator: string | null = null;
 
     if (discriminators) {
@@ -252,13 +283,19 @@ function getProcessedNames(author: any, truncateAllNamesWithStreamerMode: boolea
             ? author.nick[0] + "..."
             : author.nick as string;
 
-    const friendName: string | null = author ? RelationshipStore.getNickname(author.id) || null : null;
+    const friendName: string | null = (author && !(inGuild && friendNameOnlyInDirectMessages)) ? RelationshipStore.getNickname(author.id) || null : null;
     const friend: string | null = !friendName ? null
         : StreamerModeStore.enabled && (truncateAllNamesWithStreamerMode || friendName.toLowerCase() === author.username.toLowerCase())
             ? friendName[0] + "..."
             : friendName as string;
 
-    return [username, display, nick, friend];
+    const customName: string | null = (author && !(inGuild && customNameOnlyInDirectMessages)) ? customNicknames[author.id] || null : null;
+    const custom: string | null = !customName ? null
+        : StreamerModeStore.enabled && (truncateAllNamesWithStreamerMode || customName.toLowerCase() === author.username.toLowerCase())
+            ? customName[0] + "..."
+            : customName;
+
+    return { username, display, nick, friend, custom };
 }
 
 interface mentionProps {
@@ -271,51 +308,55 @@ interface mentionProps {
 }
 
 interface messageProps {
-    message: Message;
+    message: Message | null | undefined;
+    colorString?: string;
+    colorStrings: colorStringsType;
     userOverride?: User;
     isRepliedMessage?: boolean;
     withMentionPrefix?: boolean;
 }
 
 interface memberListProfileReactionProps {
-    user: User;
-    type: "membersList" | "profilesPopout" | "profilesTooltip" | "reactionsTooltip" | "reactionsPopout" | "voiceChannel";
+    user: User | null | undefined;
+    type: "typingIndicator" | "membersList" | "profilesPopout" | "profilesTooltip" | "reactionsTooltip" | "reactionsPopout" | "voiceChannel";
     guildId?: string;
     tags?: any;
 }
 
-function getMemberListProfilesReactionsVoiceName(
+type colorStringsType = { primaryColor: string | null, secondaryColor: string | null, tertiaryColor: string | null; } | null | undefined;
+
+function getTypingMemberListProfilesReactionsVoiceName(
     props: memberListProfileReactionProps,
 ): [string | null, JSX.Element | null, string | null] {
     const { user, type } = props;
     // props.guildId for member list & preview profile, props.tags.props.displayProfile.guildId
     // for full guild profile and main profile, which is indicated by whether it is null or not.
     const guildId = props.guildId || props.tags?.props?.displayProfile?.guildId || null;
-    const member = guildId ? GuildMemberStore.getMember(guildId, user.id) : null;
+    const member = guildId && user ? GuildMemberStore.getMember(guildId, user.id) : null;
     const author = user && member ? { ...user, ...member } : user || member || null;
-    const shouldHookless = type === "reactionsTooltip" || type === "profilesTooltip";
-    return renderUsername(author, null, null, type, "", shouldHookless);
+    const shouldHookless = ["typingIndicator", "reactionsTooltip", "profilesTooltip"].includes(type);
+    return renderUsername(author, null, null, type, "", shouldHookless, !!guildId);
 }
 
-function getMemberListProfilesReactionsVoiceNameText(props: memberListProfileReactionProps): string | null {
-    return getMemberListProfilesReactionsVoiceName(props)[2];
+function getTypingMemberListProfilesReactionsVoiceNameText(props: memberListProfileReactionProps): string | null {
+    return getTypingMemberListProfilesReactionsVoiceName(props)[2];
 }
 
-function getMemberListProfilesReactionsVoiceNameElement(props: memberListProfileReactionProps): JSX.Element | null {
-    return getMemberListProfilesReactionsVoiceName(props)[1];
+function getTypingMemberListProfilesReactionsVoiceNameElement(props: memberListProfileReactionProps): JSX.Element | null {
+    return getTypingMemberListProfilesReactionsVoiceName(props)[1];
 }
 
 function getMessageName(props: messageProps): [string | null, JSX.Element | null, string | null] {
     const { hideDefaultAtSign, replies } = settings.use(["hideDefaultAtSign", "replies"]);
     const { message, userOverride, isRepliedMessage, withMentionPrefix } = props;
-    const isWebhook = !!message.webhookId && !message.interaction;
-    const channel = ChannelStore.getChannel(message.channel_id) || {};
-    const target = userOverride || message.author;
-    const user = isWebhook ? target : UserStore.getUser(target.id);
-    const member = isWebhook ? null : GuildMemberStore.getMember(channel.guild_id, target.id);
+    const isWebhook = !!message?.webhookId && !message?.interaction;
+    const channel = message ? ChannelStore.getChannel(message.channel_id) || null : null;
+    const target = userOverride || message?.author;
+    const user = isWebhook ? target : target ? UserStore.getUser(target.id) : null;
+    const member = isWebhook ? null : target && channel ? GuildMemberStore.getMember(channel.guild_id, target.id) : null;
     const author = user && member ? { ...user, ...member } : user || member || null;
     const mentionSymbol = hideDefaultAtSign && (!isRepliedMessage || replies) ? "" : withMentionPrefix ? "@" : "";
-    return renderUsername(author, channel.id, message.id, isRepliedMessage ? "replies" : "messages", mentionSymbol);
+    return renderUsername(author, channel?.id || null, message?.id || null, isRepliedMessage ? "replies" : "messages", mentionSymbol, false, !!channel?.guild_id, props.colorString, props.colorStrings);
 }
 
 function getMessageNameElement(props: messageProps): JSX.Element | null {
@@ -326,7 +367,7 @@ function getMessageNameText(props: messageProps): string | null {
     return getMessageName(props)[0];
 }
 
-export function getMentionNameElement(props: mentionProps): JSX.Element | null {
+function getMentionNameElement(props: mentionProps): JSX.Element | null {
     const { hideDefaultAtSign, mentions } = settings.use(["hideDefaultAtSign", "mentions"]);
     const { channelId, userId, props: nestedProps } = props;
     const channel = channelId ? ChannelStore.getChannel(channelId) || null : null;
@@ -334,20 +375,72 @@ export function getMentionNameElement(props: mentionProps): JSX.Element | null {
     const member = channel ? GuildMemberStore.getMember(channel.guild_id, userId) : null;
     const author = user && member ? { ...user, ...member } : user || member || null;
     const mentionSymbol = hideDefaultAtSign && mentions ? "" : "@";
-    return renderUsername(author, channelId || null, nestedProps?.messageId || null, "mentions", mentionSymbol)[1];
+    let colorString: string | undefined = undefined;
+    let colorStrings: colorStringsType = undefined;
+
+    if (isPluginEnabled(ircColors.name)) {
+        const color = ircColors.calculateNameColorForMessageContext({ message: { author: { id: userId } }, channel });
+
+        if (color) {
+            colorString = color;
+            colorStrings = { primaryColor: color, secondaryColor: null, tertiaryColor: null };
+        }
+    }
+
+    return renderUsername(author, channelId || null, nestedProps?.messageId || null, "mentions", mentionSymbol, false, !!channel?.guild_id, colorString, colorStrings)[1];
+}
+
+function getEffectType(effectId: number | null | undefined): string | null {
+    switch (effectId) {
+        case 1: return "solid";
+        // Delegate gradient effect handling to the guild
+        // gradient handler. This adds animation to DM
+        // gradients which are usually static.
+        // case 2: return "gradient";
+        case 3: return "neon";
+        case 4: return "toon";
+        case 5: return "pop";
+        default: return null;
+    }
+}
+
+function computeEffectCSSVars(styles: any): Record<string, string> {
+    if (!styles?.colors?.length) return {};
+
+    const toHex = (n: number) => `#${(n >>> 0).toString(16).padStart(6, "0")}`;
+    const primary = toHex(styles.colors[0]);
+    const secondary = styles.colors.length > 1 ? toHex(styles.colors[1]) : primary;
+    const adjusted = adjustColor(primary);
+
+    return {
+        "--smyn-effect-main-color": adjusted.main,
+        "--smyn-effect-gradient-start": primary,
+        "--smyn-effect-gradient-end": secondary,
+        "--smyn-effect-light-1": adjusted.light1,
+        "--smyn-effect-light-2": adjusted.light2,
+        "--smyn-effect-dark-1": adjusted.dark1,
+        "--smyn-effect-dark-2": adjusted.dark2,
+        "--smyn-effect-neon-stroke": adjusted.neonStroke,
+        "--smyn-effect-neon-flicker": `hsl(from ${adjusted.main} h calc(min(1, s) * ((s * 1.1) + 10)) 85)`,
+        "--smyn-effect-toon-stroke": adjusted.toonStroke,
+    };
 }
 
 function renderUsername(
     author: User | GuildMember | null,
     channelId: string | null,
     messageId: string | null,
-    type: "messages" | "replies" | "mentions" | "membersList" | "profilesPopout" | "profilesTooltip" | "reactionsTooltip" | "reactionsPopout" | "voiceChannel",
+    type: "messages" | "replies" | "typingIndicator" | "mentions" | "membersList" | "profilesPopout" | "profilesTooltip" | "reactionsTooltip" | "reactionsPopout" | "voiceChannel",
     mentionSymbol: string,
-    hookless = false
+    hookless: boolean,
+    inGuild: boolean,
+    colorString?: string,
+    colorStrings?: { primaryColor: string | null, secondaryColor: string | null, tertiaryColor: string | null; } | null
 ): [string | null, JSX.Element | null, string | null] {
     const isMessage = type === "messages";
     const isReply = type === "replies";
     const isMention = type === "mentions";
+    const isTyping = type === "typingIndicator";
     const isMember = type === "membersList";
     const isProfile = type === "profilesPopout";
     const isReactionsPopout = type === "reactionsPopout";
@@ -355,24 +448,62 @@ function renderUsername(
     const isReaction = isReactionsTooltip || isReactionsPopout;
     const isVoice = type === "voiceChannel";
 
-    const config = hookless ? settings.store : settings.use(["messages", "replies", "mentions", "memberList", "profilePopout", "reactions", "discriminators", "hideDefaultAtSign", "truncateAllNamesWithStreamerMode", "removeDuplicates", "ignoreGradients", "ignoreFonts", "animateGradients", "includedNames", "friendNameColor", "nicknameColor", "displayNameColor", "usernameColor", "nameSeparator", "triggerNameRerender"]);
-    const { messages, replies, mentions, memberList, profilePopout, reactions, discriminators, hideDefaultAtSign, truncateAllNamesWithStreamerMode, removeDuplicates, ignoreGradients, ignoreFonts, animateGradients, includedNames, friendNameColor, nicknameColor, displayNameColor, usernameColor, nameSeparator, triggerNameRerender } = config;
+    const config = hookless ? settings.store : settings.use(["messages", "replies", "mentions", "typingIndicator", "memberList", "profilePopout", "reactions", "friendNameOnlyInDirectMessages", "customNameOnlyInDirectMessages", "discriminators", "hideDefaultAtSign", "truncateAllNamesWithStreamerMode", "removeDuplicates", "ignoreGradients", "ignoreFonts", "animateGradients", "includedNames", "customNameColor", "friendNameColor", "nicknameColor", "displayNameColor", "usernameColor", "nameSeparator", "triggerNameRerender"]);
+    const { messages, replies, mentions, typingIndicator, memberList, profilePopout, reactions, friendNameOnlyInDirectMessages, customNameOnlyInDirectMessages, discriminators, truncateAllNamesWithStreamerMode, removeDuplicates, ignoreGradients, ignoreFonts, animateGradients, includedNames, customNameColor, friendNameColor, nicknameColor, displayNameColor, usernameColor, nameSeparator, triggerNameRerender } = config;
 
-    const canUseGradient = ((author as GuildMember)?.guildId ? (GuildStore.getGuild((author as GuildMember).guildId) ?? {}).premiumFeatures?.features.includes("ENHANCED_ROLE_COLORS") : false);
+    const channel = channelId ? ChannelStore.getChannel(channelId) || null : null;
+    const message = channelId && messageId ? MessageStore.getMessage(channelId, messageId) : null;
+    const groupId = (message as any)?.showMeYourNameGroupId || null;
+
+    const isHovering = (isMessage || isMention)
+        ? ((messageId && hoveringMessageMap.has(messageId)) || (groupId && hoveringMessageMap.has(groupId)))
+        : isReply
+            ? (messageId && hoveringRepliesMap.has(messageId)) || (groupId && hoveringRepliesMap.has(groupId))
+            : isReactionsPopout
+                ? hoveringReactionPopoutSet.has((author as User).id)
+                : false;
+
+    if (colorString && !colorStrings) {
+        colorStrings = {
+            primaryColor: colorString,
+            secondaryColor: null,
+            tertiaryColor: null
+        };
+    }
+
+    const ircColorsEnabled = isPluginEnabled(ircColors.name);
+
+    const authorColorStrings = colorStrings || (author as any)?.colorStrings || null;
+    const authorDisplayNameStyles = (!inGuild && !ircColorsEnabled && (author as any)?.displayNameStyles) || null;
+    const effectType = authorDisplayNameStyles ? getEffectType(authorDisplayNameStyles.effectId) : null;
+    const effectCSSVars = authorDisplayNameStyles ? computeEffectCSSVars(authorDisplayNameStyles) : {};
+    const hasEffect = !!effectType;
+    const needsEffectDataAttr = effectType === "neon" || effectType === "toon" || effectType === "pop";
+    const shouldShowEffect = hasEffect && isHovering;
+    const shouldAnimateEffect = shouldShowEffect && !AccessibilityStore.useReducedMotion;
+    const shouldUseDMDefault = !inGuild && !ircColorsEnabled && !isHovering;
+
+    const canUseGradient = ((author as GuildMember)?.guildId ? (GuildStore.getGuild((author as GuildMember).guildId) ?? {}).premiumFeatures?.features.includes("ENHANCED_ROLE_COLORS") : !inGuild);
+    const useTopRoleStyle = isMention || isReactionsPopout || channel?.isDM() || channel?.isGroupDM();
+    const topRoleStyle = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, "Role", canUseGradient, inGuild, shouldUseDMDefault) : null;
+    const hasGradient = !!topRoleStyle?.gradient && Object.keys(topRoleStyle.gradient).length > 0;
+
     const textMutedValue = getComputedStyle(document.documentElement)?.getPropertyValue("--text-muted")?.trim() || "#72767d";
     const options = splitTemplate(includedNames);
-    const resolvedUsernameColor = author ? resolveColor(author, usernameColor.trim(), "", canUseGradient) : null;
-    const resolvedDisplayNameColor = author ? resolveColor(author, displayNameColor.trim(), "", canUseGradient) : null;
-    const resolvedNicknameColor = author ? resolveColor(author, nicknameColor.trim(), "", canUseGradient) : null;
-    const resolvedFriendNameColor = author ? resolveColor(author, friendNameColor.trim(), "", canUseGradient) : null;
+    const resolvedUsernameColor = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, usernameColor.trim(), canUseGradient, inGuild, shouldUseDMDefault) : null;
+    const resolvedDisplayNameColor = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, displayNameColor.trim(), canUseGradient, inGuild, shouldUseDMDefault) : null;
+    const resolvedNicknameColor = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, nicknameColor.trim(), canUseGradient, inGuild, shouldUseDMDefault) : null;
+    const resolvedFriendNameColor = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, friendNameColor.trim(), canUseGradient, inGuild, shouldUseDMDefault) : null;
+    const resolvedCustomNameColor = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, customNameColor.trim(), canUseGradient, inGuild, shouldUseDMDefault) : null;
     const affixColor = { color: textMutedValue, "-webkit-text-fill-color": textMutedValue, isolation: "isolate", "white-space": "pre", "font-family": "var(--font-primary)", "letter-spacing": "normal" };
-    const [username, display, nick, friend] = getProcessedNames(author, truncateAllNamesWithStreamerMode, discriminators);
+    const { username, display, nick, friend, custom } = getProcessedNames(author, truncateAllNamesWithStreamerMode, discriminators, inGuild, friendNameOnlyInDirectMessages, customNameOnlyInDirectMessages);
 
     const names: Record<string, [string | null, object | null]> = {
         user: [username, resolvedUsernameColor],
         display: [display, resolvedDisplayNameColor],
         nick: [nick, resolvedNicknameColor],
         friend: [friend, resolvedFriendNameColor],
+        custom: [custom, resolvedCustomNameColor]
     };
 
     const outputs: any[] = [];
@@ -397,7 +528,7 @@ function renderUsername(
             }
         }
 
-        if (!chosenName || !chosenStyle) {
+        if (!chosenName) {
             continue;
         }
 
@@ -407,7 +538,7 @@ function renderUsername(
             wrapped: chosenName,
             type: chosenType,
             suffix: suffix || "",
-            style: chosenStyle as React.CSSProperties
+            style: chosenStyle
         });
     }
 
@@ -425,6 +556,7 @@ function renderUsername(
     let second = outputs.shift();
     let third = outputs.shift();
     let fourth = outputs.shift();
+    let fifth = outputs.shift();
 
     const firstValueWrapped = hookless ?
         (first.name || "")
@@ -442,16 +574,23 @@ function renderUsername(
         ((fourth ?? {}).name || "")
         : wrapEmojis((fourth ?? {}).name || "");
 
+    const fifthValueWrapped = hookless ?
+        ((fifth ?? {}).name || "")
+        : wrapEmojis((fifth ?? {}).name || "");
+
     first.wrapped = firstValueWrapped;
     second && (second.wrapped = secondValueWrapped);
     third && (third.wrapped = thirdValueWrapped);
     fourth && (fourth.wrapped = fourthValueWrapped);
+    fifth && (fifth.wrapped = fifthValueWrapped);
 
     if (isMessage && !messages) {
         return [null, null, null];
     } else if (isReply && !replies) {
         return [null, null, null];
     } else if (isMention && !mentions) {
+        return [null, null, null];
+    } else if (isTyping && !typingIndicator) {
         return [null, null, null];
     } else if (isMember && !memberList) {
         return [null, null, null];
@@ -462,14 +601,17 @@ function renderUsername(
     } else if (isVoice && !reactions) {
         return [null, null, null];
     } else if (!author || !username) {
-        const fallbackText = `${mentionSymbol}Unknown`;
-        return [fallbackText, <>{fallbackText}</>, fallbackText];
+        return [null, null, null];
     }
 
-    const prioritizeUsername = (new Set([first, second, third, fourth].filter(Boolean).map(pos => pos.name.toLowerCase())).size > 1);
+    const prioritizeUsername = (new Set([first, second, third, fourth, fifth].filter(Boolean).map(pos => pos.name.toLowerCase())).size > 1);
 
     if (removeDuplicates) {
         // Remove duplicates from back to front. Prioritize the earlier name, unless it's the username and there's more than one unique option, then prioritize it.
+        fifth && fourth && fifth.name.toLowerCase() === fourth.name.toLowerCase() ? fifth.type === "user" && prioritizeUsername ? fourth = null : fifth = null : null;
+        fifth && third && fifth.name.toLowerCase() === third.name.toLowerCase() ? fifth.type === "user" && prioritizeUsername ? third = null : fifth = null : null;
+        fifth && second && fifth.name.toLowerCase() === second.name.toLowerCase() ? fifth.type === "user" && prioritizeUsername ? second = null : fifth = null : null;
+        fifth && first && fifth.name.toLowerCase() === first.name.toLowerCase() ? fifth.type === "user" && prioritizeUsername ? first = null : fifth = null : null;
         fourth && third && fourth.name.toLowerCase() === third.name.toLowerCase() ? fourth.type === "user" && prioritizeUsername ? third = null : fourth = null : null;
         fourth && second && fourth.name.toLowerCase() === second.name.toLowerCase() ? fourth.type === "user" && prioritizeUsername ? second = null : fourth = null : null;
         fourth && first && fourth.name.toLowerCase() === first.name.toLowerCase() ? fourth.type === "user" && prioritizeUsername ? first = null : fourth = null : null;
@@ -478,70 +620,79 @@ function renderUsername(
         second && first && second.name.toLowerCase() === first.name.toLowerCase() ? second.type === "user" && prioritizeUsername ? first = null : second = null : null;
     }
 
-    const remainingNames = [first, second, third, fourth].filter(Boolean);
+    const remainingNames = [first, second, third, fourth, fifth].filter(Boolean);
     first = remainingNames.shift();
     second = remainingNames.shift();
     third = remainingNames.shift();
     fourth = remainingNames.shift();
-
-    const useTopRoleStyle = isMention || isReactionsPopout;
-    const topRoleStyle = resolveColor(author, "Role", "", canUseGradient);
-    const hasGradient = !!topRoleStyle?.gradient && Object.keys(topRoleStyle.gradient).length > 0;
-    const message = channelId && messageId ? MessageStore.getMessage(channelId, messageId) : null;
-    const groupId = (message as any)?.showMeYourNameGroupId || null;
-    const isHovering = (isMessage || isReply || isMention)
-        ? ((messageId && hoveringMessageMap.has(messageId)) || (groupId && hoveringMessageMap.has(groupId)))
-        : isReactionsPopout
-            ? hoveringReactionPopoutSet.has((author as User).id)
-            : false;
+    fifth = remainingNames.shift();
 
     const shouldGradientGlow = isHovering && hasGradient;
     const shouldAnimateGradients = shouldGradientGlow && !AccessibilityStore.useReducedMotion;
     const shouldAnimateSecondaryNames = animateGradients && !ignoreGradients;
 
     const firstDataText = mentionSymbol + first.name;
-    const secondDataText = second && shouldAnimateSecondaryNames ? (second.prefix + second.name + second.suffix) : "";
-    const thirdDataText = third && shouldAnimateSecondaryNames ? (third.prefix + third.name + third.suffix) : "";
-    const fourthDataText = fourth && shouldAnimateSecondaryNames ? (fourth.prefix + fourth.name + fourth.suffix) : "";
-    const allDataText = [firstDataText, secondDataText, thirdDataText, fourthDataText].filter(Boolean).join(nameSeparator).trim();
+    const secondDataText = second && shouldAnimateSecondaryNames ? second.name : "";
+    const thirdDataText = third && shouldAnimateSecondaryNames ? third.name : "";
+    const fourthDataText = fourth && shouldAnimateSecondaryNames ? fourth.name : "";
+    const fifthDataText = fifth && shouldAnimateSecondaryNames ? fifth.name : "";
+    const allDataText = [firstDataText, secondDataText, thirdDataText, fourthDataText, fifthDataText].filter(Boolean).join(nameSeparator).trim();
 
     // Only mentions and reactions popouts should patch in the gradient glow or else a double glow will appear on messages.
-    const hoveringClass = (isHovering ? " show-me-your-name-gradient-hovered" : "");
+    const hoveringClass = (isHovering ? " smyn-gradient-hovered" : "");
     const gradientClasses = useTopRoleStyle
-        ? "show-me-your-name-gradient show-me-your-name-gradient-inherit-bg" + hoveringClass
-        : "show-me-your-name-gradient show-me-your-name-gradient-unset-bg" + hoveringClass;
+        ? "smyn-gradient smyn-gradient-inherit-bg" + hoveringClass
+        : "smyn-gradient smyn-gradient-unset-bg" + hoveringClass;
 
-    const firstGroupClasses = "show-me-your-name-name-group show-me-your-name-first-name-group";
-    const secondGroupClasses = "show-me-your-name-name-group show-me-your-name-second-name-group";
-    const thirdGroupClasses = "show-me-your-name-name-group show-me-your-name-third-name-group";
-    const fourthGroupClasses = "show-me-your-name-name-group show-me-your-name-fourth-name-group";
-    const firstNameClasses = "show-me-your-name-name show-me-your-name-first-name";
-    const secondNameClasses = "show-me-your-name-name show-me-your-name-second-name";
-    const thirdNameClasses = "show-me-your-name-name show-me-your-name-third-name";
-    const fourthNameClasses = "show-me-your-name-name show-me-your-name-fourth-name";
-    const prefixClasses = "show-me-your-name-affix show-me-your-name-prefix";
-    const suffixClasses = "show-me-your-name-affix show-me-your-name-suffix";
+    const firstGroupClasses = "smyn-name-group smyn-first-name-group";
+    const secondGroupClasses = "smyn-name-group smyn-second-name-group";
+    const thirdGroupClasses = "smyn-name-group smyn-third-name-group";
+    const fourthGroupClasses = "smyn-name-group smyn-fourth-name-group";
+    const fifthGroupClasses = "smyn-name-group smyn-fifth-name-group";
+    const firstNameClasses = "smyn-name smyn-first-name";
+    const secondNameClasses = "smyn-name smyn-second-name";
+    const thirdNameClasses = "smyn-name smyn-third-name";
+    const fourthNameClasses = "smyn-name smyn-fourth-name";
+    const fifthNameClasses = "smyn-name smyn-fifth-name";
+    const prefixClasses = "smyn-affix smyn-prefix";
+    const suffixClasses = "smyn-affix smyn-suffix";
+
+    const animationDuration = Math.max(1, 1.5 * (first.name.length / 12));
 
     const topLevelStyle = {
         // Allows names to wrap in reaction popouts.
         ...(isReactionsPopout
             ? { display: "flex", flexWrap: "wrap", lineHeight: "1.1em", fontSize: "0.9em" }
             : {}),
+        ...(hasEffect ? effectCSSVars : {}),
+        "--smyn-gradient-duration": `${animationDuration}s`
     } as React.CSSProperties;
 
     const nameElement = (
-        <span style={topLevelStyle} className="show-me-your-name-container">
+        <span
+            style={{
+                ...topLevelStyle,
+                ...(topRoleStyle?.normal.original || {})
+            }}
+            className="smyn-container"
+        >
             {mentionSymbol && <span>{mentionSymbol}</span>}
             {(
                 <span
-                    className={(shouldGradientGlow ? (gradientClasses + " " + firstGroupClasses) : firstGroupClasses)}
+                    className={SMYNC(firstGroupClasses, { [gradientClasses]: shouldGradientGlow })}
                     data-text={shouldGradientGlow ? firstDataText : undefined}
                     style={(shouldGradientGlow && useTopRoleStyle && topRoleStyle ? topRoleStyle.gradient.animated : undefined) as React.CSSProperties}
                 >
                     <span
-                        className={firstNameClasses}
-                        style={
-                            topRoleStyle ?
+                        className={SMYNC(firstNameClasses, {
+                            "smyn-effect-container": shouldShowEffect,
+                            [`smyn-effect-${effectType}`]: shouldShowEffect,
+                            "smyn-effect-animated": shouldAnimateEffect
+                        })}
+                        data-username-with-effects={needsEffectDataAttr && shouldShowEffect ? first.name : undefined}
+                        style={shouldShowEffect
+                            ? undefined
+                            : topRoleStyle ?
                                 shouldAnimateGradients && topRoleStyle.gradient
                                     ? topRoleStyle.gradient.animated
                                     : topRoleStyle.gradient
@@ -552,85 +703,46 @@ function renderUsername(
                         {first.wrapped}</span>
                 </span>
             )}
-            {second && (
+            {[
+                { name: second, dataText: secondDataText, groupClass: secondGroupClasses, nameClass: secondNameClasses, position: "second" },
+                { name: third, dataText: thirdDataText, groupClass: thirdGroupClasses, nameClass: thirdNameClasses, position: "third" },
+                { name: fourth, dataText: fourthDataText, groupClass: fourthGroupClasses, nameClass: fourthNameClasses, position: "fourth" },
+                { name: fifth, dataText: fifthDataText, groupClass: fifthGroupClasses, nameClass: fifthNameClasses, position: "fifth" }
+            ].map(({ name, dataText, groupClass, nameClass, position }) => name && (
                 <span
-                    className={(shouldGradientGlow && shouldAnimateSecondaryNames ? (gradientClasses + " " + secondGroupClasses) : secondGroupClasses)}
-                    data-text={shouldGradientGlow && secondDataText ? secondDataText : undefined}
-                    style={(shouldGradientGlow && shouldAnimateSecondaryNames ? second.style.gradient.animated : undefined) as React.CSSProperties}
+                    key={position}
+                    className={SMYNC(groupClass)}
                 >
                     <span style={affixColor as React.CSSProperties} className={prefixClasses}>
                         <span>{nameSeparator}</span>
-                        {second.prefix}</span>
+                        {name.prefix}</span>
                     <span
-                        // On non-primary names, allow disabling the gradients completely, or just their animation & glow.
-                        className={secondNameClasses}
+                        // On non-primary names, allow disabling the effects completely, or just their animation & glow.
+                        className={SMYNC(nameClass, {
+                            [gradientClasses]: shouldGradientGlow && shouldAnimateSecondaryNames,
+                            "smyn-effect-container": shouldShowEffect && !ignoreGradients,
+                            [`smyn-effect-${effectType}`]: shouldShowEffect && !ignoreGradients,
+                            "smyn-effect-animated": shouldAnimateEffect && shouldAnimateSecondaryNames
+                        })}
+                        data-text={shouldGradientGlow && dataText ? dataText : undefined}
+                        data-username-with-effects={needsEffectDataAttr && shouldShowEffect && !ignoreGradients ? name.name : undefined}
                         style={{
                             ...(ignoreFonts ? { "font-family": "var(--font-primary)", "letter-spacing": "normal" } : {}),
-                            ...(ignoreGradients
-                                ? second.style.normal.adjusted
-                                : shouldAnimateGradients && shouldAnimateSecondaryNames && second.style.gradient
-                                    ? second.style.gradient.animated
-                                    : second.style.gradient
-                                        ? second.style.gradient.static.original
-                                        : second.style.normal.adjusted)
+                            ...(name.style
+                                ? ignoreGradients
+                                    ? name.style.normal.adjusted
+                                    : shouldAnimateGradients && shouldAnimateSecondaryNames && name.style.gradient
+                                        ? name.style.gradient.animated
+                                        : name.style.gradient
+                                            ? name.style.gradient.static.original
+                                            : name.style.normal.adjusted
+                                : {})
                         }}>
-                        {second.wrapped}</span>
+                        {name.wrapped}</span>
                     <span style={affixColor as React.CSSProperties} className={suffixClasses}>
-                        {second.suffix}</span>
+                        {name.suffix}</span>
                 </span>
-            )}
-            {third && (
-                <span
-                    className={(shouldGradientGlow && shouldAnimateSecondaryNames ? (gradientClasses + " " + thirdGroupClasses) : thirdGroupClasses)}
-                    data-text={shouldGradientGlow && thirdDataText ? thirdDataText : undefined}
-                    style={(shouldGradientGlow && shouldAnimateSecondaryNames ? third.style.gradient.animated : undefined) as React.CSSProperties}
-                >
-                    <span style={affixColor as React.CSSProperties} className={prefixClasses}>
-                        <span>{nameSeparator}</span>
-                        {third.prefix}</span>
-                    <span
-                        className={thirdNameClasses}
-                        style={{
-                            ...(ignoreFonts ? { "font-family": "var(--font-primary)", "letter-spacing": "normal" } : {}),
-                            ...(ignoreGradients
-                                ? third.style.normal.adjusted
-                                : shouldAnimateGradients && shouldAnimateSecondaryNames && third.style.gradient
-                                    ? third.style.gradient.animated
-                                    : third.style.gradient
-                                        ? third.style.gradient.static.original
-                                        : third.style.normal.adjusted)
-                        }}>
-                        {third.wrapped}</span>
-                    <span style={affixColor as React.CSSProperties} className={suffixClasses}>
-                        {third.suffix}</span>
-                </span>
-            )}
-            {fourth && (
-                <span
-                    className={(shouldGradientGlow && shouldAnimateSecondaryNames ? (gradientClasses + " " + fourthGroupClasses) : fourthGroupClasses)}
-                    data-text={shouldGradientGlow && fourthDataText ? fourthDataText : undefined}
-                    style={(shouldGradientGlow && shouldAnimateSecondaryNames ? fourth.style.gradient.animated : undefined) as React.CSSProperties}
-                >
-                    <span style={affixColor as React.CSSProperties} className={prefixClasses}>
-                        <span>{nameSeparator}</span>
-                        {fourth.prefix}</span>
-                    <span
-                        className={fourthNameClasses}
-                        style={{
-                            ...(ignoreFonts ? { "font-family": "var(--font-primary)", "letter-spacing": "normal" } : {}),
-                            ...(ignoreGradients
-                                ? fourth.style.normal.adjusted
-                                : shouldAnimateGradients && shouldAnimateSecondaryNames && fourth.style.gradient
-                                    ? fourth.style.gradient.animated
-                                    : fourth.style.gradient
-                                        ? fourth.style.gradient.static.original
-                                        : fourth.style.normal.adjusted)
-                        }}>
-                        {fourth.wrapped}</span>
-                    <span style={affixColor as React.CSSProperties} className={suffixClasses}>
-                        {fourth.suffix}</span>
-                </span>
-            )}
+            ))}
         </span>
     );
 
@@ -638,10 +750,12 @@ function renderUsername(
 }
 
 const hoveringMessageMap = new Map<string, number>();
+const hoveringRepliesMap = new Map<string, number>();
 const hoveringReactionPopoutSet = new Set<string>();
 
 function handleHoveringMessage(message: any, isHovering: boolean) {
     const messageId = message?.id;
+    const repliedId = message?.messageReference?.message_id;
     const groupId = message?.showMeYourNameGroupId ?? "";
 
     useEffect(() => {
@@ -650,15 +764,18 @@ function handleHoveringMessage(message: any, isHovering: boolean) {
         if (isHovering) {
             addHoveringMessage(messageId);
             addHoveringMessage(groupId);
+            addHoveringReply(repliedId);
         } else {
             removeHoveringMessage(messageId);
             removeHoveringMessage(groupId);
+            removeHoveringReply(repliedId);
         }
     }, [messageId, groupId, isHovering]);
 }
 
 function addHoveringMessage(id: string) {
     if (!id) return;
+
     const currentCount = hoveringMessageMap.get(id) || 0;
     hoveringMessageMap.set(id, currentCount + 1);
 
@@ -669,6 +786,7 @@ function addHoveringMessage(id: string) {
 
 function removeHoveringMessage(id: string) {
     if (!id) return;
+
     const currentCount = hoveringMessageMap.get(id) || 0;
 
     if (currentCount <= 1) {
@@ -676,6 +794,30 @@ function removeHoveringMessage(id: string) {
         settings.store.triggerNameRerender = !settings.store.triggerNameRerender;
     } else {
         hoveringMessageMap.set(id, currentCount - 1);
+    }
+}
+
+function addHoveringReply(id: string) {
+    if (!id) return;
+
+    const currentCount = hoveringRepliesMap.get(id) || 0;
+    hoveringRepliesMap.set(id, currentCount + 1);
+
+    if (currentCount === 0) {
+        settings.store.triggerNameRerender = !settings.store.triggerNameRerender;
+    }
+}
+
+function removeHoveringReply(id: string) {
+    if (!id) return;
+
+    const currentCount = hoveringRepliesMap.get(id) || 0;
+
+    if (currentCount <= 1) {
+        hoveringRepliesMap.delete(id);
+        settings.store.triggerNameRerender = !settings.store.triggerNameRerender;
+    } else {
+        hoveringRepliesMap.set(id, currentCount - 1);
     }
 }
 
@@ -688,6 +830,98 @@ function removeHoveringReactionPopout(id: string) {
     hoveringReactionPopoutSet.delete(id);
     settings.store.triggerNameRerender = !settings.store.triggerNameRerender;
 }
+
+function CustomNicknameModal({ modalProps, user }: { modalProps: ModalProps; user: User; }) {
+    const [value, setValue] = useState(customNicknames[user.id] ?? "");
+
+    return (
+        <ModalRoot {...modalProps}>
+            <ModalHeader>
+                <Heading tag="h1" style={{ flexGrow: 1, margin: 0 }}>
+                    {customNicknames[user.id] ? t(plugin.showMeYourName.modal.change.title) : t(plugin.showMeYourName.modal.add.title)}
+                </Heading>
+                <ModalCloseButton onClick={modalProps.onClose} />
+            </ModalHeader>
+            <ModalContent>
+                <Heading tag="h3" style={{ marginBottom: 8, fontSize: "16px", fontWeight: "400", lineHeight: "1.25", color: "var(--text-subtle)" }}>
+                    {t(plugin.showMeYourName.modal.setCustom)}
+                </Heading>
+                <div style={{ paddingTop: "10px", flexGrow: 0 }}></div>
+                <Heading tag="h3" style={{ marginBottom: 8, fontSize: "14px", fontWeight: 600 }}>
+                    {t(plugin.showMeYourName.modal.nickname)}
+                </Heading>
+                <TextInput
+                    value={value}
+                    maxLength={32}
+                    onChange={setValue}
+                    placeholder={user.globalName ?? user.username}
+                    style={{ width: "100%" }}
+                />
+                <TextButton
+                    className="smyn-reset-button"
+                    onClick={async () => {
+                        setValue("");
+                        delete customNicknames[user.id];
+                        await DataStore.set("SMYNCustomNicknames", customNicknames);
+                        settings.store.triggerNameRerender = !settings.store.triggerNameRerender;
+                    }}
+                >
+                    {t(plugin.showMeYourName.modal.reset)}
+                </TextButton>
+                <div style={{ paddingTop: "10px", flexGrow: 0 }}></div>
+            </ModalContent>
+            <ModalFooter className="smyn-modal-footer-container">
+                <Button
+                    variant="primary"
+                    onClick={async () => {
+                        const trimmed = value.trim().slice(0, 32).trim();
+
+                        if (trimmed) {
+                            customNicknames[user.id] = trimmed;
+                        } else {
+                            delete customNicknames[user.id];
+                        }
+
+                        await DataStore.set("SMYNCustomNicknames", customNicknames);
+                        settings.store.triggerNameRerender = !settings.store.triggerNameRerender;
+                        modalProps.onClose();
+                    }}
+                >
+                    Save
+                </Button>
+                <Button
+                    variant="secondary"
+                    style={{ marginRight: "8px" }}
+                    onClick={modalProps.onClose}
+                >
+                    {t(plugin.showMeYourName.modal.cancel)}
+                </Button>
+            </ModalFooter>
+        </ModalRoot>
+    );
+}
+
+const userContextPatch: NavContextMenuPatchCallback = (children, { user }) => {
+    if (!user) return;
+
+    const currentUser = UserStore.getCurrentUser();
+    if (!currentUser || user.id === currentUser.id) return;
+
+    const group = findGroupChildrenByChildId("user-profile", children);
+
+    !group && children.push(<Menu.MenuSeparator />);
+    (group || children).push(
+        <Menu.MenuItem
+            id="smyn-custom-nickname"
+            label={customNicknames[user.id] ? t(plugin.showMeYourName.modal.change.title) : t(plugin.showMeYourName.modal.add.title)}
+            action={() => openModal(props => (
+                <ErrorBoundary>
+                    <CustomNicknameModal modalProps={props} user={user} />
+                </ErrorBoundary>
+            ))}
+        />
+    );
+};
 
 const settings = definePluginSettings({
     messages: {
@@ -705,6 +939,12 @@ const settings = definePluginSettings({
     mentions: {
         label: () => t(plugin.showMeYourName.option.mentions.label),
         description: () => t(plugin.showMeYourName.option.mentions.description),
+        type: OptionType.BOOLEAN,
+        default: true,
+    },
+    typingIndicator: {
+        label: () => t(plugin.showMeYourName.option.typingIndicator.label),
+        description: () => t(plugin.showMeYourName.option.typingIndicator.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
@@ -780,12 +1020,31 @@ const settings = definePluginSettings({
         type: OptionType.STRING,
         default: " ",
     },
+    friendNameOnlyInDirectMessages: {
+        label: () => t(plugin.showMeYourName.option.friendNameOnlyInDirectMessages.label),
+        description: () => t(plugin.showMeYourName.option.friendNameOnlyInDirectMessages.description),
+        type: OptionType.BOOLEAN,
+        default: false,
+    },
+    customNameOnlyInDirectMessages: {
+        label: () => t(plugin.showMeYourName.option.customNameOnlyInDirectMessages.label),
+        description: () => t(plugin.showMeYourName.option.customNameOnlyInDirectMessages.description),
+        type: OptionType.BOOLEAN,
+        default: false,
+    },
     includedNames: {
         label: () => t(plugin.showMeYourName.option.includedNames.label),
         description: () => t(plugin.showMeYourName.option.includedNames.description),
         type: OptionType.STRING,
-        default: "{friend, nick} [{display}] (@{user})",
+        default: "{custom, friend, nick} [{display}] (@{user})",
         isValid: validTemplate,
+    },
+    customNameColor: {
+        label: () => t(plugin.showMeYourName.option.customNameColor.label),
+        description: () => t(plugin.showMeYourName.option.customNameColor.description),
+        type: OptionType.STRING,
+        default: "Role-25",
+        isValid: validColor,
     },
     friendNameColor: {
         label: () => t(plugin.showMeYourName.option.friendNameColor.label),
@@ -827,8 +1086,10 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "ShowMeYourName",
     description: () => t(plugin.showMeYourName.description),
-    authors: [Devs.Rini, Devs.TheKodeToad, PcDevs.Etorix, Devs.sadan],
+    authors: [Devs.Rini, Devs.TheKodeToad, PcDevs.Etorix, Devs.sadan, PcDevs.MutanPlex],
     settings,
+
+    UserStore,
 
     patches: [
         {
@@ -837,8 +1098,8 @@ export default definePlugin({
             replacement: [
                 {
                     // Replace names in messages and replies.
-                    match: /(onContextMenu:\i,children:)(.{0,250}?),"data-text":(\i\+\i)/,
-                    replace: "$1$self.getMessageNameElement(arguments[0])??($2),\"data-text\":$self.getMessageNameText(arguments[0])??($3)"
+                    match: /(?<=colorString:(\i),colorStrings:(\i).{0,900}?)style:.{0,120}?,(onClick:\i,onContextMenu:\i,children:)(.{0,250}?),"data-text":(\i\+\i)/,
+                    replace: "$3$self.getMessageNameElement({...arguments[0],colorString:$1,colorStrings:$2})??($4),\"data-text\":$self.getMessageNameText(arguments[0])??($5)"
                 },
                 {
                     // Pass the message object to the should-animate checker.
@@ -846,6 +1107,47 @@ export default definePlugin({
                     replace: "$1message:arguments[0].message,$2"
                 }
             ]
+        },
+        {
+            // Replace names in the typing indicator.
+            find: "activityInviteEducationActivity:",
+            replacement: {
+                match: /(?=\i.\i.getName\((\i.guild_id),\i.id,(\i)\))/,
+                replace: "$self.getTypingMemberListProfilesReactionsVoiceNameText({user:$2,type:\"typingIndicator\",guildId:$1})??"
+            },
+        },
+        {
+            // Replace names in DMs list.
+            find: "ImpressionNames.DM_LIST_RIGHT_CLICK_MENU_SHOWN",
+            replacement: {
+                match: /(?<=getMentionCount\(\i.id\)>0\),\i=)/,
+                replace: "$self.getTypingMemberListProfilesReactionsVoiceNameText({...arguments[0],type:\"membersList\"})??"
+            },
+        },
+        {
+            // Replace names in the friends list.
+            find: "hasUniqueUsername()}),usernameClass",
+            replacement: {
+                match: /(?<=nick:)(\i)/,
+                replace: "$self.getTypingMemberListProfilesReactionsVoiceNameText({user:arguments[0].user,type:\"membersList\"})??$1"
+            },
+        },
+        {
+            // Don't block name style in friends list just
+            // because the name is the same as the username.
+            find: "location:\"DiscordTag\"});",
+            replacement: {
+                match: /(?<=forceUsername:(\i),.{0,550}?displayNameStyles:)\i!==\i\?(\i.displayNameStyles):null/,
+                replace: "!$1?$2:null"
+            },
+        },
+        {
+            // Replace name in solo DM title bar and tooltip.
+            find: "channel.isSystemDM(),",
+            replacement: {
+                match: /(?<=}\);)(return.{0,500}?{text:)(\i,position:"bottom",children:.{0,40}?children:)(\i\?\?\i.\i.getName\(\i\))/,
+                replace: "const smynName=arguments[0].channel.recipients.length===1?$self.getTypingMemberListProfilesReactionsVoiceNameText({user:$self.UserStore.getUser(arguments[0].channel.recipients[0]),type:\"profilesPopout\"})??null:null;$1smynName??$2smynName??$3"
+            },
         },
         {
             // Track hovering on messages to animate gradients.
@@ -885,7 +1187,7 @@ export default definePlugin({
             find: "let{colorRoleName:",
             replacement: {
                 match: /(let{colorRoleName:\i,colorString:\i,colorStrings:\i,)name:(\i)/,
-                replace: "$1showMeYourNameName:$2=$self.getMemberListProfilesReactionsVoiceNameText({...arguments[0],type:\"membersList\"})??(arguments[0].name)"
+                replace: "$1showMeYourNameName:$2=$self.getTypingMemberListProfilesReactionsVoiceNameText({...arguments[0],type:\"membersList\"})??(arguments[0].name)"
             }
         },
         {
@@ -893,7 +1195,7 @@ export default definePlugin({
             find: "shouldWrap:!0,loop:!0,inProfile:!0",
             replacement: {
                 match: /(tags:\i,)nickname:(\i)/,
-                replace: "$1showMeYourNameNickname:$2=$self.getMemberListProfilesReactionsVoiceNameText({...arguments[0],type:\"profilesPopout\"})??(arguments[0].nickname)"
+                replace: "$1showMeYourNameNickname:$2=$self.getTypingMemberListProfilesReactionsVoiceNameText({...arguments[0],type:\"profilesPopout\"})??(arguments[0].nickname)"
             },
         },
         {
@@ -904,11 +1206,11 @@ export default definePlugin({
             replacement: [
                 {
                     match: /(displayName:)(\i.\i.getName\(void 0,void 0,\i\))/,
-                    replace: "$1$self.getMemberListProfilesReactionsVoiceNameText({user:arguments[0].user,guildId:null,type:\"profilesTooltip\"})??($2)"
+                    replace: "$1$self.getTypingMemberListProfilesReactionsVoiceNameText({user:arguments[0].user,guildId:null,type:\"profilesTooltip\"})??($2)"
                 },
                 {
                     match: /(displayName:)(\i.\i.getName\(\i,\i,\i\))/,
-                    replace: "$1$self.getMemberListProfilesReactionsVoiceNameText({user:arguments[0].user,guildId:arguments[0].guildId,type:\"profilesTooltip\"})??($2)"
+                    replace: "$1$self.getTypingMemberListProfilesReactionsVoiceNameText({user:arguments[0].user,guildId:arguments[0].guildId,type:\"profilesTooltip\"})??($2)"
                 }
             ]
         },
@@ -917,22 +1219,22 @@ export default definePlugin({
             find: "reactionTooltip1,",
             replacement: {
                 match: /(\i.\i.getName\((\i),\i\?\.id,(\i)\))/,
-                replace: "$self.getMemberListProfilesReactionsVoiceNameText({user:$3,guildId:$2,type:\"reactionsTooltip\"})??($1)"
+                replace: "$self.getTypingMemberListProfilesReactionsVoiceNameText({user:$3,guildId:$2,type:\"reactionsTooltip\"})??($1)"
             }
         },
         {
-            find: "MESSAGE,userId:",
+            find: ".MESSAGE,userId:",
             group: true,
             replacement: [
                 {
                     // Track hovering over reaction popouts.
-                    match: /(?<=return\(0,\i.\i\)\(\i.\i,{className:\i.\i,)(?=onContextMenu:\i=>)/,
-                    replace: "onMouseEnter:()=>{$self.addHoveringReactionPopout(arguments[0].user.id)},onMouseLeave:()=>{$self.removeHoveringReactionPopout(arguments[0].user.id)},$2"
+                    match: /(?<=\(0,\i.\i\)\(\i.\i,{className:\i.\i,)(?=(?:align:\i\.\i\.\i\.CENTER|onContextMenu:\i=>))/g,
+                    replace: "onMouseEnter:()=>{$self.addHoveringReactionPopout(arguments[0].user.id)},onMouseLeave:()=>{$self.removeHoveringReactionPopout(arguments[0].user.id)},"
                 },
                 {
                     // Replace names in reaction popouts.
-                    match: /(?<=Child,{className:\i.\i,children:)/,
-                    replace: "($self.getMemberListProfilesReactionsVoiceNameElement({user:arguments[0].user,guildId:arguments[0].guildId,type:\"reactionsPopout\"}))??"
+                    match: /(?<=Child,{className:\i.\i,children:)/g,
+                    replace: "($self.getTypingMemberListProfilesReactionsVoiceNameElement({user:arguments[0].user,guildId:arguments[0].guildId,type:\"reactionsPopout\"}))??"
                 }
             ]
         },
@@ -941,10 +1243,36 @@ export default definePlugin({
             find: ",connectUserDragSource:",
             replacement: {
                 match: /(serverDeaf:\i,)nick:(\i)/,
-                replace: "$1showMeYourNameVoice:$2=$self.getMemberListProfilesReactionsVoiceNameText({user:arguments[0].user,guildId:arguments[0].channel.guild_id,type:\"voiceChannel\"})??(arguments[0].nick)"
+                replace: "$1showMeYourNameVoice:$2=$self.getTypingMemberListProfilesReactionsVoiceNameText({user:arguments[0].user,guildId:arguments[0].channel.guild_id,type:\"voiceChannel\"})??(arguments[0].nick)"
             }
         }
     ],
+
+    async start() {
+        toCSSCache = new Map();
+        toCSSProbe = document.createElement("div");
+        convertToRGBCanvas = document.createElement("canvas");
+        convertToRGBCanvas.width = convertToRGBCanvas.height = 1;
+        convertToRGBCtx = convertToRGBCanvas.getContext("2d", { willReadFrequently: true });
+        convertToRGBCache = new Map();
+
+        const data = await DataStore.get<CustomNicknameData>("SMYNCustomNicknames");
+        customNicknames = data ?? {};
+    },
+
+    stop() {
+        toCSSCache?.clear();
+        toCSSCache = null;
+        toCSSProbe = null;
+        convertToRGBCache?.clear();
+        convertToRGBCache = null;
+        convertToRGBCanvas = null;
+        convertToRGBCtx = null;
+    },
+
+    contextMenus: {
+        "user-context": userContextPatch
+    },
 
     flux: {
         RELATIONSHIP_UPDATE(data) {
@@ -973,9 +1301,10 @@ export default definePlugin({
     handleHoveringMessage,
     addHoveringReactionPopout,
     removeHoveringReactionPopout,
+    getMessageName,
     getMessageNameText,
     getMessageNameElement,
     getMentionNameElement,
-    getMemberListProfilesReactionsVoiceNameText,
-    getMemberListProfilesReactionsVoiceNameElement
+    getTypingMemberListProfilesReactionsVoiceNameText,
+    getTypingMemberListProfilesReactionsVoiceNameElement
 });

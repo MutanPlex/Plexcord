@@ -13,11 +13,12 @@ import { addMessagePreSendListener, removeMessagePreSendListener } from "@api/Me
 import { Button } from "@components/Button";
 import { Flex } from "@components/Flex";
 import { Heart } from "@components/Heart";
-import { BaseText, Margins, Paragraph } from "@components/index";
+import { BaseText, EyeIcon, Margins, Paragraph } from "@components/index";
 import { Guild, User } from "@plexcord/discord-types";
-import settings, { settingsSectionMap } from "@plugins/_core/settings";
+import settings from "@plugins/_core/settings";
 import { PcDevs } from "@utils/constants";
 import { openUserProfile } from "@utils/discord";
+import { removeFromArray } from "@utils/index";
 import * as Modal from "@utils/modal";
 import definePlugin from "@utils/types";
 import { Avatar, ChannelStore, Clickable, GuildMemberStore, GuildStore, MessageStore, React, TextArea, TextInput, Tooltip, UserStore, } from "@webpack/common";
@@ -381,7 +382,7 @@ export default definePlugin({
     patches: [],
 
     async start() {
-        settingsSectionMap.push(["PlexcordIRememberYou", "plexcord_i_remember_you"]);
+        settings.settingsSectionMap.push(["PlexcordIRememberYou", "plexcord_i_remember_you"]);
         const data = (this.dataManager = await new Data().withStart());
         const ui = (this.uiManager = await new DataUI(this).start());
 
@@ -393,30 +394,19 @@ export default definePlugin({
         );
         data.storageAutoSaveProtocol();
 
-        const customSettingsSections = (
-            settings as any as {
-                customSections: ((ID: Record<string, unknown>) => any)[];
-            }
-        ).customSections;
-
-        customSettingsSections.push(_ => ({
-            section: "irememberyou.display-data",
-            label: "IRememberYou",
-            id: "IRememberYou",
-            element: () => ui.toElement(data.usersCollection),
-        }));
+        settings.customEntries.push({
+            key: "plexcord_i_remember_you",
+            title: "I Remember You",
+            Component: () => ui.toElement(data.usersCollection),
+            Icon: EyeIcon
+        });
     },
 
     stop() {
-        const dataManager = this.dataManager as Data;
-        const customSettingsSections = (
-            settings as any as {
-                customSections: ((ID: Record<string, unknown>) => any)[];
-            }
-        ).customSections;
-        const i = customSettingsSections.findIndex(s => s({}).id === "IRememberYou");
-        if (i !== -1) customSettingsSections.splice(i, 1);
+        removeFromArray(settings.customEntries, e => e.key === "plexcord_i_remember_you");
+        removeFromArray(settings.settingsSectionMap, entry => entry[1] === "plexcord_i_remember_you");
 
+        const dataManager = this.dataManager as Data;
         removeMessagePreSendListener(dataManager._onMessagePreSend_preSend);
         clearInterval(dataManager._storageAutoSaveProtocol_interval);
     },

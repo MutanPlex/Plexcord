@@ -11,8 +11,8 @@ import { plugin, t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { plugins } from "@api/PluginManager";
 import { addServerListElement, removeServerListElement, ServerListRenderPosition } from "@api/ServerList";
-import { migratePluginToSettings } from "@api/Settings";
-import { ErrorBoundary } from "@components/index";
+import { migratePluginToSettings, Settings } from "@api/Settings";
+import ErrorBoundary from "@components/ErrorBoundary";
 import { openPluginModal } from "@components/settings/tabs/plugins/PluginModal";
 import { copyToClipboard } from "@utils/clipboard";
 import { PcDevs } from "@utils/constants";
@@ -22,12 +22,13 @@ import { ContextMenuApi, Menu, NavigationRouter, RestAPI, useEffect, useState } 
 import { JSX } from "react";
 
 import { addIgnoredQuest, addRerenderCallback, autoFetchCompatible, fetchAndAlertQuests, maximumAutoFetchIntervalValue, minimumAutoFetchIntervalValue, questIsIgnored, removeIgnoredQuest, rerenderQuests, settings, startAutoFetchingQuests, stopAutoFetchingQuests, validateAndOverwriteIgnoredQuests } from "./settings";
-import { ExcludedQuestMap, GuildlessServerListItem, Quest, QuestIcon, QuestMap, QuestStatus, QuestTaskType, RGB } from "./utils/components";
+import { ActiveQuestIntervalsMap, ExcludedQuestMap, GuildlessServerListItem, Quest, QuestIcon, QuestMap, QuestStatus, QuestTaskType, RGB } from "./utils/components";
 import { adjustRGB, decimalToRGB, fetchAndDispatchQuests, formatLowerBadge, getFormattedNow, getIgnoredQuestIDs, getQuestProgress, getQuestStatus, getQuestTarget, getQuestTask, isDarkish, leftClick, middleClick, normalizeQuestName, q, QuestifyLogger, questPath, QuestsStore, refreshQuest, reportPlayGameQuestProgress, reportVideoQuestProgress, rightClick, setIgnoredQuestIDs, videoQuestLeeway, waitUntilEnrolled } from "./utils/misc";
 
+let initialQuestDataFetched = false;
 const QuestifyNative = PlexcordNative.pluginHelpers.Questify as PluginNative<typeof import("./native")>;
 const patchedMobileQuests = new Set<string>();
-export const activeQuestIntervals = new Map<string, { progressTimeout: NodeJS.Timeout; rerenderTimeout: NodeJS.Timeout; progress: number; type: string; }>();
+export const activeQuestIntervals = new ActiveQuestIntervalsMap();
 
 function questMenuUnignoreAllClicked(): void {
     validateAndOverwriteIgnoredQuests([]);
@@ -1290,8 +1291,8 @@ export default definePlugin({
             // Fixes the progress tracking for auto-completing Quests.
             find: ",{progressTextAnimation:",
             replacement: {
-                match: /(?<=children:\i}=)(\i)/,
-                replace: "Object.assign({},$1,$self.getQuestPanelPercentComplete($1))"
+                match: /(let{percentComplete:.{0,115}?children:\i}=)(\i)/,
+                replace: "const questifyProgress=$self.getQuestPanelPercentComplete({...$2,quest:$2.children?.props?.quest});$1Object.assign({},$2,questifyProgress??{})"
             }
         },
         {
@@ -1299,7 +1300,7 @@ export default definePlugin({
             // useful information for Quests being auto-completed.
             find: '"progress-title"',
             replacement: {
-                match: /(?<=return.{0,150}?quest:(\i),percentComplete:\i.{0,280}?"progress-title",children.{0,115}?children:)(\i.{0,50}"progress-subtitle",isTextTransition:!0,children.{0,115}?children:)/,
+                match: /(?<={quest:(\i).{0,250}?return.{0,150}?,percentComplete:\i.{0,280}?"progress-title",children.{0,115}?children:)(\i.{0,50}"progress-subtitle",isTextTransition:!0,children.{0,115}?children:)/,
                 replace: "$self.getQuestPanelTitleText($1)??$2$self.getQuestPanelSubtitleText($1)??"
             }
         },
@@ -1495,8 +1496,8 @@ export default definePlugin({
                     // Run Questify's sort function every time due to hook requirements but return
                     // early if not applicable. If the sort method is set to "Questify", replace the
                     // Quests with the sorted ones. Also, setup a trigger to rerender the memo.
-                    match: /(?<=function \i\((\i),\i\){let \i=\i.useRef.{0,100}?;)(return \i.useMemo\(\(\)=>{)/,
-                    replace: "const questRerenderTrigger=$self.useQuestRerender();const questifySorted=$self.sortQuests($1,arguments[1].sortMethod!==\"questify\");$2if(arguments[1].sortMethod===\"questify\"){$1=questifySorted;};"
+                    match: /(return \i.useMemo\(\(\)=>{)(?=if\(0===(\i).length\))/,
+                    replace: "const questRerenderTrigger=$self.useQuestRerender();const questifySorted=$self.sortQuests($2,arguments[1].sortMethod!==\"questify\");$1if(arguments[1].sortMethod===\"questify\"){$2=questifySorted;};"
                 },
                 {
                     // Account for Quest status changes.
@@ -1505,8 +1506,8 @@ export default definePlugin({
                 },
                 {
                     // If we already applied Questify's sort, skip further sorting.
-                    match: /(?<=sortMethod:(\i).{0,100}?\)\);)(return )((\i).sort)/,
-                    replace: "$2$1===\"questify\"?$4:$3"
+                    match: /(?<=sortMethod:(\i).{0,115}?return )((\i).sort)/,
+                    replace: "$1===\"questify\"?$3:$2"
                 },
                 {
                     // Add the trigger to the memo for rerendering Quests order due to progress changes, etc.
@@ -1674,6 +1675,7 @@ export default definePlugin({
         },
 
         QUESTS_FETCH_CURRENT_QUESTS_SUCCESS(data) {
+            initialQuestDataFetched = true;
             const source = data.source ? ` [${data.source}]` : "";
             QuestifyLogger.info(`[${getFormattedNow()}] [QUESTS_FETCH_CURRENT_QUESTS_SUCCESS]${source}\n`, data);
             validateAndOverwriteIgnoredQuests(undefined, data.quests);
@@ -1743,11 +1745,49 @@ export default definePlugin({
         if (!!intervalValid && autoFetchCompatible()) {
             startAutoFetchingQuests();
         }
+        const wasReload = window?.navigation?.activation?.navigationType === "reload";
+        const maybeResumable = !(settings.store.disableQuestsEverything || settings.store.disableQuestsFetchingQuests);
+
+        if (!wasReload || !maybeResumable) {
+            settings.store.resumeQuestIDs = settings.def.resumeQuestIDs.default;
+            return;
+        }
+
+        onceReady.then(() => {
+            const interval = setInterval(() => {
+                if (initialQuestDataFetched) {
+                    clearInterval(interval);
+
+                    const playResume = settings.store.resumeQuestIDs.play.map(id => QuestsStore.getQuest(id)).filter(Boolean);
+                    const watchResume = settings.store.resumeQuestIDs.watch.map(id => QuestsStore.getQuest(id)).filter(Boolean);
+                    const achievementResume = settings.store.resumeQuestIDs.achievement.map(id => QuestsStore.getQuest(id)).filter(Boolean);
+
+                    settings.store.resumeQuestIDs.play = playResume.map(quest => quest!.id);
+                    settings.store.resumeQuestIDs.watch = watchResume.map(quest => quest!.id);
+                    settings.store.resumeQuestIDs.achievement = achievementResume.map(quest => quest!.id);
+
+                    if (!playResume.length && !watchResume.length && !achievementResume.length) {
+                        return;
+                    }
+
+                    QuestifyLogger.info(`[${getFormattedNow()}] Resuming background completion for Quests:`, {
+                        play: playResume.map(q => q.config.messages.questName),
+                        watch: watchResume.map(q => q.config.messages.questName),
+                        achievement: achievementResume.map(q => q.config.messages.questName)
+                    });
+
+                    [...playResume, ...watchResume, ...achievementResume].forEach(quest => quest && processQuestForAutoComplete(quest));
+                }
+            }, 100);
+        });
     },
 
     stop() {
         removeServerListElement(ServerListRenderPosition.Above, this.renderQuestifyButton);
         stopAutoFetchingQuests();
+        if (!Settings.plugins.Questify.enabled) {
+            settings.store.resumeQuestIDs = settings.def.resumeQuestIDs.default;
+        }
 
         activeQuestIntervals.forEach((intervalData, questId) => {
             clearInterval(intervalData.progressTimeout);

@@ -1,11 +1,12 @@
 /*
  * Plexcord, a modification for Discord's desktop app
  * Copyright (c) 2024 Vendicated and contributors
- * Copyright (c) 2025 MutanPlex
+ * Copyright (c) 2026 MutanPlex
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { ChannelStore } from "@webpack/common";
+import { plugin, t } from "@api/i18n";
+import { ChannelStore, Toasts } from "@webpack/common";
 import { DBSchema, IDBPDatabase, openDB } from "idb";
 
 import { LoggedMessageJSON } from "./types";
@@ -109,6 +110,30 @@ export async function getMessagesByStatusIDB(status: DBMessageStatus) {
 
 export async function getOldestMessagesIDB(limit: number) {
     return cacheRecords(await db.getAllFromIndex("messages", "by_timestamp", undefined, limit));
+}
+
+export async function* iterateAllMessagesIDB(batchSize = 100) {
+    let lastId: string | undefined;
+    while (true) {
+        const batch: DBMessageRecord[] = [];
+        // new transaction for each batch to avoid timeouts during yield
+        const tx = db.transaction("messages");
+        const range = lastId ? IDBKeyRange.lowerBound(lastId, true) : undefined;
+        let cursor = await tx.store.openCursor(range);
+
+        while (cursor && batch.length < batchSize) {
+            batch.push(cursor.value);
+            cursor = await cursor.continue();
+        }
+
+        if (batch.length === 0) break;
+
+        lastId = batch[batch.length - 1].message_id;
+
+        yield await cacheRecords(batch);
+
+        if (batch.length < batchSize) break;
+    }
 }
 
 export async function getOlderThanTimestampIDB(timestamp: string) {
@@ -228,4 +253,9 @@ export async function deleteMessagesBulkIDB(message_ids: string[]) {
 export async function clearMessagesIDB() {
     await db.clear("messages");
     cachedMessages.clear();
+    Toasts.show({
+        type: Toasts.Type.MESSAGE,
+        message: t(plugin.messageLoggerEnhanced.alert.cleared),
+        id: Toasts.genId()
+    });
 }

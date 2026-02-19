@@ -917,7 +917,7 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "hs50",
         id: 1120045713867423835n
     },
-    keyages: {
+    keircn: {
         name: "Key",
         id: 1230319937155760131n
     }

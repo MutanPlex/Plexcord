@@ -30,6 +30,7 @@ import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
 import { openSettingsTabModal, UpdaterTab } from "@components/settings";
 import { Channel } from "@plexcord/discord-types";
+import { CloudUploadPlatform } from "@plexcord/discord-types/enums";
 import { gitHashShort } from "@shared/plexcordUserAgent";
 import { BOT_COMMANDS_CHANNEL_ID, CONTRIB_ROLE_ID, Devs, DONOR_ROLE_ID, KNOWN_ISSUES_CHANNEL_ID, PcDevs, PLEXBOT_USER_ID, PLEXCORD_GUILD_ID, REGULAR_ROLE_ID, SUPPORT_CATEGORY_ID, SUPPORT_CHANNEL_ID } from "@utils/constants";
 import { openInviteModal, sendMessage } from "@utils/discord";
@@ -41,7 +42,7 @@ import { onlyOnce } from "@utils/onlyOnce";
 import { makeCodeblock } from "@utils/text";
 import definePlugin from "@utils/types";
 import { checkForUpdates, isOutdated, update } from "@utils/updater";
-import { Alerts, ChannelRouter, ChannelStore, GuildMemberStore, Parser, PermissionsBits, PermissionStore, RelationshipStore, showToast, Toasts, UserStore } from "@webpack/common";
+import { Alerts, ChannelRouter, ChannelStore, CloudUploader, Constants, GuildMemberStore, Parser, PermissionsBits, PermissionStore, RelationshipStore, RestAPI, SelectedChannelStore, showToast, SnowflakeUtils, Toasts, UserStore } from "@webpack/common";
 import { JSX } from "react";
 
 import gitHash from "~git-hash";
@@ -183,6 +184,36 @@ async function generateDebugInfoMessage() {
     return content.trim();
 }
 
+async function uploadPluginListFile(channelId: string, fileContent: string, filename: string) {
+    const file = new File([fileContent], filename, { type: "text/plain" });
+    const upload = new CloudUploader({ file, platform: CloudUploadPlatform.WEB }, channelId);
+
+    return new Promise<void>((resolve, reject) => {
+        upload.on("complete", () => {
+            RestAPI.post({
+                url: Constants.Endpoints.MESSAGES(channelId),
+                body: {
+                    flags: 0,
+                    channel_id: channelId,
+                    content: `⚠️ Plugin list attached as file due to high plugin count (${fileContent.split("\n").filter(l => l.startsWith("  -")).length} plugins enabled)`,
+                    nonce: SnowflakeUtils.fromTimestamp(Date.now()),
+                    sticker_ids: [],
+                    type: 0,
+                    attachments: [{
+                        id: "0",
+                        filename: upload.filename,
+                        uploaded_filename: upload.uploadedFilename,
+                    }],
+                }
+            }).then(() => resolve()).catch(reject);
+        });
+
+        upload.on("error", () => reject(new Error("Failed to upload file")));
+
+        upload.upload();
+    });
+}
+
 function generatePluginList() {
     const isApiPlugin = (plugin: string) => plugin.endsWith("API") || plugins[plugin].required;
 
@@ -191,6 +222,50 @@ function generatePluginList() {
 
     const enabledStockPlugins = enabledPlugins.filter(p => !PluginMeta[p].userPlugin).sort();
     const enabledUserPlugins = enabledPlugins.filter(p => PluginMeta[p].userPlugin).sort();
+
+    const user = UserStore.getCurrentUser();
+
+    if (enabledPlugins.length > 100 && !isAnyPluginDev(user.id)) {
+        Alerts.show({
+            title: t(plugin.supportHelper.alert.title),
+            body: <div>
+                <div style={{ display: "flex", justifyContent: "center", marginBottom: "1rem" }}>
+                    <img src="https://media.tenor.com/QtGqjwBpRzwAAAAi/wumpus-dancing.gif" />
+                </div>
+                <Paragraph>{t(plugin.supportHelper.alert.paragraph1)}</Paragraph>
+                <Paragraph>{t(plugin.supportHelper.alert.paragraph2)}</Paragraph>
+                <Paragraph>{t(plugin.supportHelper.alert.paragraph3)}</Paragraph>
+                <Paragraph>{t(plugin.supportHelper.alert.paragraph4)}</Paragraph>
+                <Paragraph className={Margins.top8}>{t(plugin.supportHelper.alert.paragraph5)}</Paragraph>
+            </div>
+        });
+
+        const fileContent = [
+            `Enabled Stock Plugins (${enabledStockPlugins.length}):`,
+            ...enabledStockPlugins.map(p => `  - ${p}`),
+            "",
+        ];
+
+        if (enabledUserPlugins.length) {
+            fileContent.push(
+                `Enabled User Plugins (${enabledUserPlugins.length}):`,
+                ...enabledUserPlugins.map(p => `  - ${p}`),
+                ""
+            );
+        }
+
+        fileContent.push(
+            "---",
+            `Total Enabled Plugins: ${enabledPlugins.length}`,
+            "Warning: Due to the high number of enabled plugins, support may be limited."
+        );
+
+        return {
+            uploadFile: true,
+            fileContent: fileContent.join("\n"),
+            filename: `${user.username}-plugins.txt`
+        };
+    }
 
     let content = `**Enabled Plugins (${enabledStockPlugins.length}):**\n${makeCodeblock(enabledStockPlugins.join(", "))}`;
 
@@ -234,7 +309,23 @@ export default definePlugin({
             name: "plexcord-plugins",
             description: () => t(plugin.supportHelper.commands.description.plugins),
             predicate: ctx => (isPluginDev(UserStore.getCurrentUser()?.id) && isPcPluginDev(UserStore.getCurrentUser()?.id)) || isSupportAllowedChannel(ctx.channel),
-            execute: () => ({ content: generatePluginList() })
+            execute: async () => {
+                const channelId = SelectedChannelStore.getChannelId();
+                const pluginList = generatePluginList();
+
+                if (typeof pluginList === "string") {
+                    return { content: pluginList };
+                } else if (pluginList && typeof pluginList === "object" && pluginList.uploadFile) {
+                    try {
+                        await uploadPluginListFile(channelId, pluginList.fileContent, pluginList.filename);
+                        return { content: "" }; // Empty return since file was already sent
+                    } catch (e) {
+                        new Logger("SupportHelper").error("Failed to upload plugin list:", e);
+                        return { content: t(plugin.supportHelper.toast.failedUpload) };
+                    }
+                }
+                return { content: t(plugin.supportHelper.toast.unableGenerate) };
+            }
         }
     ],
 
@@ -353,7 +444,20 @@ export default definePlugin({
                     <Button
                         key="pc-plg-list"
                         variant="primary"
-                        onClick={async () => sendMessage(props.channel.id, { content: generatePluginList() })}
+                        onClick={async () => {
+                            const pluginList = generatePluginList();
+                            if (typeof pluginList === "string") {
+                                sendMessage(props.channel.id, { content: pluginList });
+                            } else if (pluginList && typeof pluginList === "object" && pluginList.uploadFile) {
+                                try {
+                                    await uploadPluginListFile(props.channel.id, pluginList.fileContent, pluginList.filename);
+                                    showToast(t(plugin.supportHelper.toast.upload), Toasts.Type.SUCCESS);
+                                } catch (e) {
+                                    new Logger("SupportHelper").error("Failed to upload plugin list:", e);
+                                    showToast(t(plugin.supportHelper.toast.failedUpload), Toasts.Type.FAILURE);
+                                }
+                            }
+                        }}
                     >
                         {t(plugin.supportHelper.button.plugins)}
                     </Button>

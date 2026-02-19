@@ -21,12 +21,13 @@ import { plugin, t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { definePluginSettings } from "@api/Settings";
 import { Devs } from "@utils/constants";
+import { openInviteModal } from "@utils/discord";
 import { Logger } from "@utils/Logger";
 import { closeAllModals } from "@utils/modal";
 import definePlugin, { OptionType } from "@utils/types";
 import { maybePromptToUpdate } from "@utils/updater";
 import { filters, findBulk, proxyLazyWebpack } from "@webpack";
-import { DraftType, ExpressionPickerStore, FluxDispatcher, NavigationRouter, SelectedChannelStore } from "@webpack/common";
+import { DraftType, ExpressionPickerStore, FluxDispatcher, NavigationRouter, SelectedChannelStore, showToast } from "@webpack/common";
 
 const CrashHandlerLogger = new Logger("CrashHandler");
 
@@ -102,7 +103,10 @@ export default definePlugin({
                             color: "#eed202",
                             title: t(plugin.crashHandler.toast.crashed.title),
                             body: t(plugin.crashHandler.toast.crashed.body),
-                            noPersist: true
+                            noPersist: true,
+                            onClick: () => openInviteModal("HQGYXm5XSh").catch(() =>
+                                showToast(t(plugin.crashHandler.toast.crashed.invalid))
+                            )
                         });
                     } catch { }
 
@@ -137,7 +141,10 @@ export default definePlugin({
                 color: "#eed202",
                 title: t(plugin.crashHandler.toast.crashed.title),
                 body: t(plugin.crashHandler.toast.crashed.recover),
-                noPersist: true
+                noPersist: true,
+                onClick: () => openInviteModal("HQGYXm5XSh").catch(() =>
+                    showToast(t(plugin.crashHandler.toast.crashed.invalid))
+                )
             });
         } catch { }
 
