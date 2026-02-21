@@ -130,7 +130,6 @@ export default definePlugin({
             <BlobMask
                 isFolder
                 style={{ cursor: "unset" }}
-                size={48}
                 selected={false}
                 lowerBadge={
                     <div

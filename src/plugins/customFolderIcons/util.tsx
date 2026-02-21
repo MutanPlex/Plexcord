@@ -1,3 +1,10 @@
+/*
+ * Plexcord, a modification for Discord's desktop app
+ * Copyright (c) 2024 sadan
+ * Copyright (c) 2025 MutanPlex
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 import { folderIcon, folderIconsData, settings } from "./settings";
 
 export async function setFolderData(props: folderProp, newData: folderIcon) {

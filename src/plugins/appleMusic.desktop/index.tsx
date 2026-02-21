@@ -15,7 +15,7 @@ import definePlugin, { OptionType, PluginNative, ReporterTestable } from "@utils
 import { ApplicationAssetUtils, FluxDispatcher } from "@webpack/common";
 
 const Native = PlexcordNative.pluginHelpers.AppleMusicRichPresence as PluginNative<typeof import("./native")>;
-let updateInterval: NodeJS.Timeout | undefined;
+
 export interface TrackData {
     name: string;
     album?: string;
@@ -38,6 +38,8 @@ const enum AssetImageType {
 }
 
 const applicationId = "1239490006054207550";
+
+let updateInterval: NodeJS.Timeout | undefined;
 
 function setActivity(activity: Activity | null) {
     FluxDispatcher.dispatch({

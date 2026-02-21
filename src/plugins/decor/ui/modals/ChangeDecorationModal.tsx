@@ -274,7 +274,7 @@ function ChangeDecorationModal(props: ModalProps) {
                             props.onClose();
                         }
                     })}
-                    variant="primary"
+                    variant="dangerSecondary"
                 >
                     {t(plugin.decor.alert.logout.title)}
                 </NewButton>

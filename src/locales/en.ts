@@ -1005,41 +1005,6 @@ const translations = {
                 prioritize: "Prioritize Server Profile"
             }
         },
-        allCallTimers: {
-            name: "AllCallTimers",
-            description: "Shows call timers in all voice calls",
-            option: {
-                showWithoutHover: {
-                    label: "Show Without Hover",
-                    description: "Always show the timer without needing to hover"
-                },
-                showRoleColor: {
-                    label: "Show Role Color",
-                    description: "Display in the user’s role color (if the ShowRoleColor plugin is enabled)"
-                },
-                trackSelf: {
-                    label: "Track Yourself",
-                    description: "Also show your own timer"
-                },
-                showSeconds: {
-                    label: "Show Seconds",
-                    description: "Display seconds in the timer"
-                },
-                format: {
-                    label: "Format",
-                    description: "Compact or human-readable format",
-                    human: "30d 23h 00m 42s"
-                },
-                watchLargeGuilds: {
-                    label: "Watch Large Guilds",
-                    description: "Track users in large guilds. This may cause lag if you're in a lot of large guilds with active voice users. Tested with up to 2000 active voice users with no issues."
-                },
-                fixUI: {
-                    label: "UI Fix",
-                    description: "In some cases the timer may break the user interface. Enable this option to fix it."
-                }
-            }
-        },
         altKrispSwitch: {
             name: "AltKrispSwitch",
             description: "Makes the Noise Suppression Popout switch between None and Krisp instead of Krisp and Standard"
@@ -1798,13 +1763,40 @@ const translations = {
         },
         callTimer: {
             name: "CallTimer",
-            description: "Adds a timer to vcs",
+            description: "Shows call timers in all voice calls",
             option: {
                 format: {
                     label: "Format",
-                    description: "The timer format. This can be any valid moment.js format",
-                    stopwatch: "30d 23:00:42",
+                    description: "Compact or human-readable format",
                     human: "30d 23h 00m 42s"
+                },
+                allCallTimers: {
+                    label: "Tüm Çağrı Zamanlayıcıları",
+                    description: "Sunuculardaki tüm kullanıcılar için çağrı zamanlayıcılarını göster"
+                },
+                showWithoutHover: {
+                    label: "Show Without Hover",
+                    description: "Always show the timer without needing to hover"
+                },
+                showRoleColor: {
+                    label: "Show Role Color",
+                    description: "Display in the user’s role color (if the ShowRoleColor plugin is enabled)"
+                },
+                trackSelf: {
+                    label: "Track Yourself",
+                    description: "Also show your own timer"
+                },
+                showSeconds: {
+                    label: "Show Seconds",
+                    description: "Display seconds in the timer"
+                },
+                watchLargeGuilds: {
+                    label: "Watch Large Guilds",
+                    description: "Track users in large guilds. This may cause lag if you're in a lot of large guilds with active voice users. Tested with up to 2000 active voice users with no issues."
+                },
+                fixUI: {
+                    label: "UI Fix",
+                    description: "In some cases the timer may break the user interface. Enable this option to fix it."
                 }
             }
         },
@@ -2375,6 +2367,10 @@ const translations = {
                     description: "Turn on or off color effects for getting close to the character limit"
                 }
             }
+        },
+        cleanChannelGroups: {
+            name: "CleanChannelGroups",
+            description: "Hides all channels in collapsed categories, even if they have unread messages."
         },
         cleanChannelName: {
             name: "CleanChannelName",
@@ -3066,6 +3062,16 @@ const translations = {
             large: "File too large to copy.",
             copyFileContents: "Copy File Contents"
         },
+        copyProfileColors: {
+            name: "CopyProfileColors",
+            description: "A plugin to copy people's profile gradient colors to clipboard.",
+            copy: "Copy Profile Colors",
+            toast: {
+                noColor: "No profile colors found!",
+                copied: "Profile colors copied to clipboard!",
+                error: "Error copying profile colors!"
+            }
+        },
         copyStatusUrls: {
             name: "CopyStatusUrls",
             description: "Copy the users status url when you right-click it",
@@ -3136,6 +3142,63 @@ const translations = {
                 sendMessageInTheMiddleOfACodeBlock: {
                     label: "Send Message In The Middle Of A Code Block",
                     description: "Whether to send a message in the middle of a code block"
+                }
+            }
+        },
+        cursorBuddy: {
+            name: "CursorBuddy",
+            description: "Adds a sprite that follows your cursor.",
+            modal: {
+                furColor: "Fur Color",
+                outlineColor: "Outline Color"
+            },
+            option: {
+                buddy: {
+                    label: "Buddy",
+                    description: "Pick a cursor buddy",
+                    oneko: "Oneko",
+                    fathorse: "Fatass Horse"
+                },
+                speed: {
+                    label: "Speed",
+                    description: "Speed of your buddy",
+                    invalid: "Speed must be bigger than 0"
+                },
+                fps: {
+                    label: "Framerate",
+                    description: "Framerate of your buddy",
+                    invalid: "Framerate must be bigger than 0"
+                },
+                onekoSection: {
+                    label: "Oneko"
+                },
+                furColor: {
+                    label: "Fur Color",
+                    description: "Fur hex color for Oneko"
+                },
+                outlineColor: {
+                    label: "Outline Color",
+                    description: "Outline hex color for Oneko"
+                },
+                fathorseSection: {
+                    label: "Fatass Horse"
+                },
+                size: {
+                    label: "Size",
+                    description: "Size of the fatass horse",
+                    invalid: "Size must be bigger than 0"
+                },
+                fade: {
+                    label: "Fade",
+                    description: "If the horse should fade when the cursor is near"
+                },
+                freeroam: {
+                    label: "Freeroam",
+                    description: "If the horse should roam freely when idle"
+                },
+                shake: {
+                    label: "Shake",
+                    description: "If the horse should shake the window when it's walking"
                 }
             }
         },
@@ -3659,6 +3722,14 @@ const translations = {
                 notifyOnAutoConnect: {
                     label: "Notify on Auto Connect",
                     description: "Whether to notify when Dev Companion has automatically connected."
+                },
+                usePatchedModule: {
+                    label: "Use Patched Module",
+                    description: "On extract requests, reply with the current patched module (if it is patched) instead of the original."
+                },
+                reloadAfterToggle: {
+                    label: "Reload After Toggle",
+                    description: "Reload after a disable/enable plugin command is recived."
                 }
             },
             toast: {
@@ -3667,7 +3738,7 @@ const translations = {
                 disconnected: "Dev Companion Disconnected",
                 error: "Dev Companion Error",
                 reload: "Reload Needed",
-                failed: "Failed to start dependencies:",
+                failed: "Failed to start dependencies: {{failures}}",
                 close: "Close",
                 stopping: "Error while stopping plugin {{plugin}}",
                 starting: "Error while starting plugin {{plugin}}",
@@ -6604,17 +6675,6 @@ const translations = {
         noUnblockToJump: {
             name: "NoUnblockToJump",
             description: "Allows you to jump to messages of blocked or ignored users and likely spammers without unblocking them."
-        },
-        oneko: {
-            name: "Oneko",
-            description: "cat follow mouse (real)",
-            option: {
-                speed: {
-                    label: "Speed",
-                    description: "Speed of Da Cat :3",
-                    biggerThan: "The number must be bigger than 0"
-                }
-            }
         },
         onePingPerDM: {
             name: "OnePingPerDM",

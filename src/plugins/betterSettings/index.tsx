@@ -20,7 +20,6 @@ import type { HTMLAttributes, ReactElement } from "react";
 
 import fullHeightStyle from "./fullHeightContext.css?managed";
 
-const cl = classNameFactory("");
 type SettingsEntry = {
     ariaLabel?: string;
     element?: any;
@@ -32,6 +31,8 @@ type SettingsEntry = {
     section: string,
     tabPredicate?: () => boolean;
 };
+
+const cl = classNameFactory("");
 const Classes = findCssClassesLazy("animating", "baseLayer", "bg", "layer", "layers");
 
 const settings = definePluginSettings({
@@ -142,7 +143,7 @@ export default definePlugin({
             predicate: () => settings.store.disableFade
         },
         { // Load menu TOC eagerly
-            find: ".NITRO_PRIVACY_PERK_BETA_COACHMARK));",
+            find: "handleOpenSettingsContextMenu=",
             replacement: {
                 match: /(?=handleOpenSettingsContextMenu=.{0,100}?null!=\i&&.{0,100}?(await [^};]*?\)\)))/,
                 replace: "_plexcordBetterSettingsEagerLoad=(async ()=>$1)();"

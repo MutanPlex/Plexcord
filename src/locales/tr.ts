@@ -1008,41 +1008,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 prioritize: "Sunucu Profilini Önceliklendir"
             }
         },
-        allCallTimers: {
-            name: "AllCallTimers",
-            description: "Tüm sesli aramalarda çağrı zamanlayıcılarını gösterir",
-            option: {
-                showWithoutHover: {
-                    label: "Üzerine Gelmeden Göster",
-                    description: "Üzerine gelmeye gerek kalmadan her zaman zamanlayıcıyı göster"
-                },
-                showRoleColor: {
-                    label: "Rol Rengini Göster",
-                    description: "Kullanıcının rol renginde göster (ShowRoleColor eklentisi etkinse)"
-                },
-                trackSelf: {
-                    label: "Kendini Takip Et",
-                    description: "Kendi zamanlayıcını da göster"
-                },
-                showSeconds: {
-                    label: "Saniyeleri Göster",
-                    description: "Zamanlayıcıda saniyeleri de göster"
-                },
-                format: {
-                    label: "Format",
-                    description: "Kompakt veya insan tarafından okunabilir format",
-                    human: "30g 23s 00d 42s"
-                },
-                watchLargeGuilds: {
-                    label: "Büyük Sunucuları İzle",
-                    description: "Büyük sunuculardaki kullanıcıları takip et. Çok sayıda aktif sesli kullanıcıya sahip büyük sunucularda bulunuyorsan bu gecikmeye neden olabilir. 2000’e kadar aktif sesli kullanıcıyla test edildi ve herhangi bir sorun yaşanmadı."
-                },
-                fixUI: {
-                    label: "Kullanıcı Arayüzü Düzeltmesi",
-                    description: "Bazı durumlarda zamanlayıcı kullanıcı arayüzünü bozabilir. Bu seçeneği etkinleştirerek bunu düzeltebilirsiniz."
-                }
-            }
-        },
         altKrispSwitch: {
             name: "AltKrispSwitch",
             description: "Gürültü Önleme Açılır Penceresinin, Krisp ve Standart yerine Hiçbiri ve Krisp arasında geçiş yapmasını sağlar."
@@ -1801,13 +1766,40 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         callTimer: {
             name: "CallTimer",
-            description: "Sesli aramalara bir sayaç ekler",
+            description: "Tüm sesli aramalarda çağrı zamanlayıcılarını gösterir",
             option: {
                 format: {
-                    label: "Biçim",
-                    description: "Zamanlayıcı biçimi. Bu, geçerli herhangi bir moment.js formatı olabilir",
-                    stopwatch: "30g 23:00:42",
-                    human: "30g 23s 00d 42sn"
+                    label: "Format",
+                    description: "Kompakt veya insan tarafından okunabilir format",
+                    human: "30g 23s 00d 42s"
+                },
+                allCallTimers: {
+                    label: "Tüm Çağrı Zamanlayıcıları",
+                    description: "Sunuculardaki tüm kullanıcılar için çağrı zamanlayıcılarını göster"
+                },
+                showWithoutHover: {
+                    label: "Üzerine Gelmeden Göster",
+                    description: "Üzerine gelmeye gerek kalmadan her zaman zamanlayıcıyı göster"
+                },
+                showRoleColor: {
+                    label: "Rol Rengini Göster",
+                    description: "Kullanıcının rol renginde göster (ShowRoleColor eklentisi etkinse)"
+                },
+                trackSelf: {
+                    label: "Kendini Takip Et",
+                    description: "Kendi zamanlayıcını da göster"
+                },
+                showSeconds: {
+                    label: "Saniyeleri Göster",
+                    description: "Zamanlayıcıda saniyeleri de göster"
+                },
+                watchLargeGuilds: {
+                    label: "Büyük Sunucuları İzle",
+                    description: "Büyük sunuculardaki kullanıcıları takip et. Çok sayıda aktif sesli kullanıcıya sahip büyük sunucularda bulunuyorsan bu gecikmeye neden olabilir. 2000’e kadar aktif sesli kullanıcıyla test edildi ve herhangi bir sorun yaşanmadı."
+                },
+                fixUI: {
+                    label: "Kullanıcı Arayüzü Düzeltmesi",
+                    description: "Bazı durumlarda zamanlayıcı kullanıcı arayüzünü bozabilir. Bu seçeneği etkinleştirerek bunu düzeltebilirsiniz."
                 }
             }
         },
@@ -2378,6 +2370,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Karakter sınırına yaklaşırken renk efektlerini aç veya kapat"
                 }
             }
+        },
+        cleanChannelGroups: {
+            name: "CleanChannelGroups",
+            description: "Sadece daraltılmış kategorilerdeki tüm kanalları gizler, okunmamış mesajlar olsa bile."
         },
         cleanChannelName: {
             name: "CleanChannelName",
@@ -3069,6 +3065,16 @@ const translations: MatchStructure<typeof enTranslations> = {
             large: "Dosya kopyalanamayacak kadar büyük.",
             copyFileContents: "Dosya İçeriğini Kopyala"
         },
+        copyProfileColors: {
+            name: "CopyProfileColors",
+            description: "Kullanıcıların profil gradyan renklerini panoya kopyalayan bir eklenti.",
+            copy: "Profil Renklerini Kopyala",
+            toast: {
+                noColor: "Profil renkleri bulunamadı!",
+                copied: "Profil renkleri panoya kopyalandı!",
+                error: "Profil renkleri kopyalanırken hata oluştu!"
+            }
+        },
         copyStatusUrls: {
             name: "CopyStatusUrls",
             description: "Bir kullanıcının durum URL’sini sağ tıkladığınızda kopyalayın",
@@ -3139,6 +3145,63 @@ const translations: MatchStructure<typeof enTranslations> = {
                 sendMessageInTheMiddleOfACodeBlock: {
                     label: "Kod Bloğunun Ortasında Mesaj Gönder",
                     description: "Bir kod bloğunun ortasında mesaj gönderilsin mi"
+                }
+            }
+        },
+        cursorBuddy: {
+            name: "CursorBuddy",
+            description: "İmlecinizi takip eden bir sprite ekler.",
+            modal: {
+                furColor: "Kürk Rengi",
+                outlineColor: "Anahat Rengi"
+            },
+            option: {
+                buddy: {
+                    label: "Buddy",
+                    description: "Bir imleç arkadaşı seçin",
+                    oneko: "Oneko",
+                    fathorse: "Şişman At"
+                },
+                speed: {
+                    label: "Hız",
+                    description: "Buddy'nizin hızı",
+                    invalid: "Hız 0'dan büyük olmalıdır"
+                },
+                fps: {
+                    label: "Kare Hızı (FPS)",
+                    description: "Buddy'nizin kare hızı",
+                    invalid: "Kare hızı 0'dan büyük olmalıdır"
+                },
+                onekoSection: {
+                    label: "Oneko"
+                },
+                furColor: {
+                    label: "Kürk Rengi",
+                    description: "Oneko için kürk hex rengi"
+                },
+                outlineColor: {
+                    label: "Anahat Rengi",
+                    description: "Oneko için anahat hex rengi"
+                },
+                fathorseSection: {
+                    label: "Şişman At"
+                },
+                size: {
+                    label: "Boyut",
+                    description: "Şişman atın boyutu",
+                    invalid: "Boyut 0'dan büyük olmalıdır"
+                },
+                fade: {
+                    label: "Solma",
+                    description: "İmleç yaklaştığında atın solup solmayacağı"
+                },
+                freeroam: {
+                    label: "Serbest Dolaşım",
+                    description: "Boştayken atın serbestçe dolaşıp dolaşmayacağı"
+                },
+                shake: {
+                    label: "Sallama",
+                    description: "Yürürken atın pencereyi sallayıp sallamayacağı"
                 }
             }
         },
@@ -3662,6 +3725,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 notifyOnAutoConnect: {
                     label: "Otomatik Bağlantıda Bildir",
                     description: "Dev Companion otomatik olarak bağlandığında bildirim gösterilsin mi?"
+                },
+                usePatchedModule: {
+                    label: "Yama Modülünü Kullan",
+                    description: "Çıkarma isteklerinde, orijinal yerine mevcut yamalı modülle (yamalıysa) yanıt verin."
+                },
+                reloadAfterToggle: {
+                    label: "Yeniden Yükleme Sonrası",
+                    description: "Disable/enable plugin komutu alındıktan sonra yeniden yükle."
                 }
             },
             toast: {
@@ -3670,7 +3741,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disconnected: "Dev Companion Bağlantısı Kesildi",
                 error: "Dev Companion Hatası",
                 reload: "Yeniden Yükleme Gerekli",
-                failed: "Bağımlılıklar başlatılamadı:",
+                failed: "Bağımlılıklar başlatılamadı: {{failures}}",
                 close: "Kapat",
                 stopping: "{{plugin}} eklentisi durdurulurken hata oluştu",
                 starting: "{{plugin}} eklentisi başlatılırken hata oluştu",
@@ -6608,17 +6679,6 @@ const translations: MatchStructure<typeof enTranslations> = {
         noUnblockToJump: {
             name: "NoUnblockToJump",
             description: "Engellenen veya yok sayılan kullanıcıların (ve muhtemelen spam göndericilerin) mesajlarına, onları engelini kaldırmadan atlamanıza izin verir."
-        },
-        oneko: {
-            name: "Oneko",
-            description: "fareyi takip eden kedi (gerçek)",
-            option: {
-                speed: {
-                    label: "Hız",
-                    description: "Kedinin hızı :3",
-                    biggerThan: "Sayı 0'dan büyük olmalıdır"
-                }
-            }
         },
         onePingPerDM: {
             name: "OnePingPerDM",

@@ -53,7 +53,7 @@ function AllowLevelSetting({ settingKey }: AllowLevelSettingProps) {
             onChange={(_, newValue) => settings.store.allowLevel[settingKey] = newValue}
             size={20}
         >
-            <BaseText size="sm" weight="normal">{settingKey[0].toUpperCase() + settingKey.slice(1)}</BaseText>
+            <BaseText size="sm">{settingKey[0].toUpperCase() + settingKey.slice(1)}</BaseText>
         </Checkbox>
     );
 }

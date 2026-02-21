@@ -81,7 +81,7 @@
 .pc-channeltabs-separator {
     width: 98%;
     height: 1px;
-    background: var(--input-border-default);
+    background: var(--input-border-default, var(--input-border));
     margin: 4px auto;
 }
 
@@ -479,7 +479,7 @@
     padding: 0.125rem 0;
     min-width: 0;
     border-radius: 0.25rem;
-    border: 1px solid var(--input-border-default);
+    border: 1px solid var(--input-border-default, var(--input-border));
 }
 
 .pc-channeltabs-preview-tab-compact {
@@ -1082,7 +1082,7 @@
 .channelTabs-keybind-button {
     padding: 8px 16px;
     background-color: var(--background-base-low);
-    border: 2px solid var(--input-border-default);
+    border: 2px solid var(--input-border-default, var(--input-border));
     border-radius: 8px;
     cursor: pointer;
     min-width: 140px;

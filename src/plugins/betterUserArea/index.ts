@@ -105,7 +105,6 @@ export default definePlugin({
                     predicate: () => settings.store.removeAudioMenus
                 },
             ],
-            predicate: () => settings.store.removeAudioMenus
         },
         {
             find: "#{intl::f+DDY/::raw},{outputDeviceName",

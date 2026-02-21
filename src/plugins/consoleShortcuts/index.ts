@@ -38,9 +38,9 @@ const DESKTOP_ONLY = (f: string) => () => {
 };
 
 const makePlextronSwitcher = (branch: string) => () => {
-    if (Plextron.Settings.store.discordBranch === branch)
-        throw new Error(`Already on ${branch}`);
+    if (!IS_PLEXTRON) throw new Error("This function only works on plextron.");
 
+    if (Plextron.Settings.store.discordBranch === branch) throw new Error(`Already on ${branch}`);
     Plextron.Settings.store.discordBranch = branch;
     PlextronNative.app.relaunch();
 };

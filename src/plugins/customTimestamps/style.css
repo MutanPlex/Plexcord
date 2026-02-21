@@ -1,6 +1,6 @@
 .pc-cmt-info-card {
-    background-color: var(--info-help-background);
-    border: 1px solid var(--info-help-foreground);
+    background-color: var(--background-feedback-info);
+    border: 1px solid var(--icon-feedback-info);
     padding: 8px;
     border-radius: var(--radius-xs);
     margin: 10px 0;

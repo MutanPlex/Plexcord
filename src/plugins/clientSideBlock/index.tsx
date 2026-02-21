@@ -155,7 +155,6 @@ function activeNowView(cards) {
 export default definePlugin({
     name: "ClientSideBlock",
     description: () => t(plugin.clientSideBlock.description),
-    tags: ["blocked", "block", "hide", "hidden", "noblockedmessages"],
     authors: [Devs.Samwich, PcDevs.MutanPlex, PcDevs.KamiRu],
     settings,
 

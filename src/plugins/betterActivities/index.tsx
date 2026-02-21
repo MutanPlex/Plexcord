@@ -19,12 +19,9 @@ export default definePlugin({
     name: "BetterActivities",
     description: () => t(plugin.betterActivities.description),
     authors: [Devs.D3SOX, Devs.Arjix, Devs.AutumnVN, Devs.thororen],
-    tags: ["activity"],
-
     settings,
 
     patchActivityList,
-
     showAllActivitiesComponent,
 
     patches: [
@@ -42,7 +39,7 @@ export default definePlugin({
                     replace: ",$self.patchActivityList($1)]",
                     predicate: () => settings.store.memberList,
                 }
-            ]
+            ],
         },
         {
             // Show all activities in the user popout/sidebar
@@ -52,6 +49,6 @@ export default definePlugin({
                 replace: "$1$self.showAllActivitiesComponent({ activity: $2, user: $3 })"
             },
             predicate: () => settings.store.userPopout
-        }
+        },
     ],
 });

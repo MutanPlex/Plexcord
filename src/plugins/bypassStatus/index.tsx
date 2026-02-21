@@ -33,7 +33,7 @@ function Icon(enabled?: boolean): JSX.Element {
         height="18"
     >
         <circle cx="9" cy="9" r="8" fill={!enabled ? "var(--status-positive)" : "var(--status-danger)"} />
-        <circle cx="9" cy="9" r="3.75" fill={!enabled ? "white" : "white"} />
+        <circle cx="9" cy="9" r="3.75" fill="white" />
     </svg>;
 }
 

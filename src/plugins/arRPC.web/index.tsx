@@ -84,14 +84,16 @@ export default definePlugin({
 
         const connectionSuccessful = await new Promise(res => setTimeout(() => res(ws.readyState === WebSocket.OPEN), 5000)); // check if open after 5s
         if (!connectionSuccessful) {
-            showNotice(t(plugin.arRpc.toast.failed), t(plugin.arRpc.toast.retry), () => { // show notice about failure to connect, with retry/ignore
+            showNotice(t(plugin.arRpc.toast.failed), t(plugin.arRpc.toast.retry), () => {
+                // show notice about failure to connect, with retry/ignore
                 popNotice();
                 this.start();
             });
             return;
         }
 
-        Toasts.show({ // show toast on success
+        Toasts.show({
+            // show toast on success
             message: t(plugin.arRpc.toast.connected),
             type: Toasts.Type.SUCCESS,
             id: Toasts.genId(),

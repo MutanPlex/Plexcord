@@ -63,10 +63,10 @@ export function RenameModal({ props, session, state }: { props: ModalProps, sess
                 />
                 <Button
                     style={{
-                        marginBottom: "20px",
-                        paddingLeft: "1px",
-                        paddingRight: "1px",
-                        opacity: 0.6
+                        marginBottom: "10px",
+                        paddingLeft: "5px",
+                        paddingRight: "5px",
+                        opacity: 1
                     }}
                     variant="primary"
                     size="min"
