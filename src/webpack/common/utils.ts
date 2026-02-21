@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+
 import type * as t from "@plexcord/discord-types";
 import { _resolveReady, filters, findByCodeLazy, findByPropsLazy, findLazy, mapMangledModuleLazy, waitFor } from "@webpack";
 import type * as TSPattern from "ts-pattern";
@@ -83,6 +84,7 @@ const ToastType = {
     BOOKMARK: "bookmark",
     CLOCK: "clock"
 };
+
 const ToastPosition = {
     TOP: 0,
     BOTTOM: 1
@@ -184,7 +186,6 @@ export const ChannelActionCreators = findByPropsLazy("openPrivateChannel");
 export const VoiceActions = findByPropsLazy("toggleSelfMute");
 export const GuildActions = findByPropsLazy("setServerMute", "setServerDeaf");
 export const ChannelActions = findByPropsLazy("selectChannel", "selectVoiceChannel");
-
 export const DraftActions = findByPropsLazy("saveDraft", "changeDraft");
 export const PinActions = findByPropsLazy("pinMessage", "unpinMessage");
 

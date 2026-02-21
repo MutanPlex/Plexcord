@@ -76,16 +76,12 @@ export default definePlugin({
                     replace: "$&&&undefined",
                     predicate: () => settings.store.dms
                 },
+                {
+                    match: /"quests"\)/,
+                    replace: "$&&&undefined",
+                    predicate: () => settings.store.quests
+                },
             ],
-        },
-        {
-            // Channel list server boost progress bar
-            find: "useGuildActionRow",
-            replacement: {
-                match: /(GUILD_NEW_MEMBER_ACTIONS_PROGRESS_BAR\)):(\i(?:\.premiumProgressBarEnabled)?)/,
-                replace: "$1:null"
-            },
-            predicate: () => settings.store.serverBoost,
         },
         {
             // Above DMs, keyboard nav
@@ -101,6 +97,15 @@ export default definePlugin({
                 },
             ],
             predicate: () => settings.store.dms,
+        },
+        {
+            // Channel list server boost progress bar
+            find: "useGuildActionRow",
+            replacement: {
+                match: /(GUILD_NEW_MEMBER_ACTIONS_PROGRESS_BAR\)):(\i(?:\.premiumProgressBarEnabled)?)/,
+                replace: "$1:null"
+            },
+            predicate: () => settings.store.serverBoost,
         },
         {
             // Settings, sidebar

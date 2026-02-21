@@ -5,13 +5,13 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { PcDevs } from "@utils/constants";
+import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "HeaderBarAPI",
     description: "API to add buttons to the header bar.",
-    authors: [PcDevs.Prism],
+    authors: [Devs.prism],
 
     patches: [
         {

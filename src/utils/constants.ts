@@ -90,7 +90,7 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     fawn: {
         name: "fawn",
-        id: 336678828233588736n,
+        id: 336678828233588736n
     },
     rushii: {
         name: "rushii",
@@ -102,7 +102,7 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     Samu: {
         name: "Samu",
-        id: 702973430449832038n,
+        id: 702973430449832038n
     },
     Nyako: {
         name: "nyako",
@@ -122,7 +122,7 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     nea: {
         name: "nea",
-        id: 310702108997320705n,
+        id: 310702108997320705n
     },
     Nuckyz: {
         name: "Nuckyz",
@@ -210,7 +210,7 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     Commandtechno: {
         name: "Commandtechno",
-        id: 296776625432035328n,
+        id: 296776625432035328n
     },
     TheSun: {
         name: "sunnie",
@@ -263,7 +263,7 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     Aria: {
         name: "Syncxv",
-        id: 549244932213309442n,
+        id: 549244932213309442n
     },
     TheKodeToad: {
         name: "TheKodeToad",
@@ -311,7 +311,7 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     RyanCaoDev: {
         name: "RyanCaoDev",
-        id: 952235800110694471n,
+        id: 952235800110694471n
     },
     FieryFlames: {
         name: "Fiery",
@@ -339,7 +339,7 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     UwUDev: {
         name: "UwU",
-        id: 691413039156690994n,
+        id: 691413039156690994n
     },
     amia: {
         name: "amia",
@@ -379,19 +379,19 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     bb010g: {
         name: "bb010g",
-        id: 72791153467990016n,
+        id: 72791153467990016n
     },
     Dolfies: {
         name: "Dolfies",
-        id: 852892297661906993n,
+        id: 852892297661906993n
     },
     RuukuLada: {
         name: "RuukuLada",
-        id: 119705748346241027n,
+        id: 119705748346241027n
     },
     blahajZip: {
         name: "blahaj.zip",
-        id: 683954422241427471n,
+        id: 683954422241427471n
     },
     archeruwu: {
         name: "archer_uwu",
@@ -411,7 +411,7 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     Board: {
         name: "BoardTM",
-        id: 285475344817848320n,
+        id: 285475344817848320n
     },
     philipbry: {
         name: "philipbry",
@@ -423,7 +423,7 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     maisymoe: {
         name: "maisy",
-        id: 257109471589957632n,
+        id: 257109471589957632n
     },
     Lexi: {
         name: "Lexi",
@@ -435,27 +435,27 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     Grzesiek11: {
         name: "Grzesiek11",
-        id: 368475654662127616n,
+        id: 368475654662127616n
     },
     Samwich: {
         name: "Samwich",
-        id: 976176454511509554n,
+        id: 976176454511509554n
     },
     coolelectronics: {
         name: "coolelectronics",
-        id: 696392247205298207n,
+        id: 696392247205298207n
     },
     Av32000: {
         name: "Av32000",
-        id: 593436735380127770n,
+        id: 593436735380127770n
     },
     Noxillio: {
         name: "Noxillio",
-        id: 138616536502894592n,
+        id: 138616536502894592n
     },
     Kyuuhachi: {
         name: "Kyuuhachi",
-        id: 236588665420251137n,
+        id: 236588665420251137n
     },
     nin0dev: {
         name: "nin0dev",
@@ -463,7 +463,7 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     Elvyra: {
         name: "Elvyra",
-        id: 708275751816003615n,
+        id: 708275751816003615n
     },
     HappyEnderman: {
         name: "Happy enderman",
@@ -543,11 +543,11 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     Moxxie: {
         name: "Moxxie",
-        id: 712653921692155965n,
+        id: 712653921692155965n
     },
     Ethan: {
         name: "Ethan",
-        id: 721717126523781240n,
+        id: 721717126523781240n
     },
     nyx: {
         name: "verticalsync.",
@@ -567,7 +567,7 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     sadan: {
         name: "sadan",
-        id: 521819891141967883n,
+        id: 521819891141967883n
     },
     Kylie: {
         name: "Cookie",
@@ -583,39 +583,39 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     },
     Lumap: {
         name: "Lumap",
-        id: 585278686291427338n,
+        id: 585278686291427338n
     },
     Obsidian: {
         name: "Obsidian",
-        id: 683171006717755446n,
+        id: 683171006717755446n
     },
     SerStars: {
         name: "SerStars",
-        id: 861631850681729045n,
+        id: 861631850681729045n
     },
     niko: {
         name: "niko",
-        id: 341377368075796483n,
+        id: 341377368075796483n
     },
     relitrix: {
         name: "Relitrix",
-        id: 423165393901715456n,
+        id: 423165393901715456n
     },
     RamziAH: {
         name: "RamziAH",
-        id: 1279957227612147747n,
+        id: 1279957227612147747n
     },
     SomeAspy: {
         name: "SomeAspy",
-        id: 516750892372852754n,
+        id: 516750892372852754n
     },
     jamesbt365: {
         name: "jamesbt365",
-        id: 158567567487795200n,
+        id: 158567567487795200n
     },
     samsam: {
         name: "samsam",
-        id: 400482410279469056n,
+        id: 400482410279469056n
     },
     Cootshk: {
         name: "Cootshk",
@@ -624,6 +624,22 @@ export const Devs = /* #__PURE__*/ Object.freeze({
     thororen: {
         name: "thororen",
         id: 848339671629299742n
+    },
+    alfred: {
+        name: "alfred",
+        id: 1038466644353232967n
+    },
+    vv: {
+        name: "VV",
+        id: 254866377087778816n
+    },
+    u32: {
+        name: "u32",
+        id: 1063237286818488351n,
+    },
+    prism: {
+        name: "prism",
+        id: 390884143749136386n,
     },
 } satisfies Record<string, Dev>);
 
@@ -653,10 +669,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "MisleadingName",
         id: 892072557988151347n
     },
-    Exotic: {
-        name: "Exotic",
-        id: 287667540178501634n
-    },
     MrDiamond: {
         name: "MrDiamond",
         id: 523338295644782592n
@@ -684,10 +696,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     Cortex: {
         name: "Cortex",
         id: 913205935319691335n
-    },
-    SpikeHD: {
-        name: "SpikeHD",
-        id: 221757857836564485n
     },
     nvhhr: {
         name: "nvhhr",
@@ -733,10 +741,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "Nexpid",
         id: 853550207039832084n
     },
-    Colorman: {
-        name: "colorman",
-        id: 298842558610800650n
-    },
     Hen: {
         name: "Hen",
         id: 279266228151779329n
@@ -748,10 +752,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     Drag: {
         name: "dragalt_",
         id: 1189903210564038697n
-    },
-    bhop: {
-        name: "femeie",
-        id: 442626774841556992n
     },
     meowabyte: {
         name: "meowabyte",
@@ -776,10 +776,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     Fres: {
         name: "fres",
         id: 843448897737064448n
-    },
-    ItsAlex: {
-        name: "ItsAlex",
-        id: 551023598203043840n
     },
     bep: {
         name: "bep",
@@ -809,10 +805,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "Suffocate",
         id: 772601756776923187n
     },
-    seth: {
-        name: "S€th",
-        id: 1273447359417942128n
-    },
     Campfire: {
         name: "Campfire",
         id: 376414446840578081n
@@ -829,10 +821,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "Z1xus",
         id: 377450600797044746n
     },
-    Oggetto: {
-        name: "Oggetto",
-        id: 619203349954166804n
-    },
     niko: {
         name: "niko",
         id: 341377368075796483n
@@ -840,10 +828,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     davidkra230: {
         name: "davidkra230",
         id: 652699312631054356n
-    },
-    secp192k1: {
-        name: "secp192k1",
-        id: 477497542205243392n
     },
     VillainsRule: {
         name: "VillainsRule",
@@ -868,10 +852,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     xijexo: {
         name: "xijexo",
         id: 1284113557201620995n
-    },
-    port22exposed: {
-        name: "port",
-        id: 1318383159645311009n
     },
     nicola02nb: {
         name: "nicola02nb",
@@ -901,10 +881,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "neoarz",
         id: 1015372540937502851n
     },
-    Prism: {
-        name: "Prism",
-        id: 390884143749136386n
-    },
     KamiRu: {
         name: "KamiRu",
         id: 819191621676695563n
@@ -912,10 +888,6 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     SSnowly: {
         name: "Snowy",
         id: 1183482753375809537n
-    },
-    Naibuu: {
-        name: "hs50",
-        id: 1120045713867423835n
     },
     keircn: {
         name: "Key",

@@ -5,9 +5,10 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { plugin, t } from "@api/i18n";
+import { changelog, cloud, patchHelper, plugin, plugins, settings as settingsLang, sync, t, themes, updater } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
+import SettingsPlugin from "@plugins/_core/settings";
 import { buildPluginMenuEntries, buildThemeMenuEntries } from "@plugins/plexcordToolbox/menu";
 import { Devs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
@@ -20,7 +21,17 @@ import type { HTMLAttributes, ReactElement } from "react";
 import fullHeightStyle from "./fullHeightContext.css?managed";
 
 const cl = classNameFactory("");
-type SettingsEntry = { section: string, label: string; };
+type SettingsEntry = {
+    ariaLabel?: string;
+    element?: any;
+    label?: () => string | string;
+    newIndicator?: any;
+    newIndicatorDismissibleContentTypes?: number[];
+    predicate?: () => boolean;
+    searchableTitles?: string[];
+    section: string,
+    tabPredicate?: () => boolean;
+};
 const Classes = findCssClassesLazy("animating", "baseLayer", "bg", "layer", "layers");
 
 const settings = definePluginSettings({
@@ -149,7 +160,7 @@ export default definePlugin({
                 },
                 {
                     match: /case \i\.\i\.DEVELOPER_OPTIONS:return \i;/,
-                    replace: "$&case 'PlexcordPlugins':return $self.buildPluginMenuEntries(true);$&case 'PlexcordThemes':return $self.buildThemeMenuEntries();"
+                    replace: "$&case 'PlexcordPlugins':return $self.buildPluginMenuEntries(true);case 'PlexcordThemes':return $self.buildThemeMenuEntries();"
                 }
             ]
         },
@@ -177,13 +188,38 @@ export default definePlugin({
         const items = [] as TransformedSettingsEntry[];
 
         for (const item of list) {
+            if (!item.label || item.predicate != null && !item.predicate()) continue;
+
             if (item.section === "HEADER") {
-                keyMap.set(item.label, item.label);
-                items.push({ section: item.label, items: [] });
+                const label = typeof item.label === "function" ? item.label() : item.label;
+                keyMap.set(label, label);
+                items.push({ section: label, items: [] });
             } else if (item.section !== "DIVIDER" && keyMap.has(item.section)) {
                 items.at(-1)?.items.push(item);
             }
         }
+
+        keyMap.set("Plexcord", "Plexcord");
+        const plexcordItems: SettingsEntry[] = [
+            { section: "PlexcordSettings", label: () => t(settingsLang.title) },
+            { section: "PlexcordPlugins", label: () => t(plugins.title) },
+            { section: "PlexcordThemes", label: () => t(themes.title) },
+            { section: "PlexcordUpdater", label: () => t(updater.title) },
+            { section: "PlexcordChangelog", label: () => t(changelog.title) },
+            { section: "PlexcordCloud", label: () => t(cloud.text) },
+            { section: "PlexcordBackupAndRestore", label: () => t(sync.title) },
+            { section: "PlexcordPatchHelper", label: () => t(patchHelper.title) },
+        ];
+
+        for (const [section, key] of SettingsPlugin.settingsSectionMap) {
+            const entry = SettingsPlugin.customEntries.find(e => key.endsWith(e.key));
+            if (entry) plexcordItems.push({ section, label: () => entry.title });
+        }
+
+        items.push({
+            section: "Plexcord",
+            items: plexcordItems
+        });
 
         return items;
     },

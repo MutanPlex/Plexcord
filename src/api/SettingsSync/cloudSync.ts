@@ -8,6 +8,7 @@
 import { cloud, t } from "@api/i18n";
 import { showNotification } from "@api/Notifications";
 import { PlainSettings, Settings } from "@api/Settings";
+import { localStorage } from "@utils/localStorage";
 import { Logger } from "@utils/Logger";
 import { relaunch } from "@utils/native";
 import { SettingsRouter } from "@webpack/common";
@@ -62,6 +63,8 @@ export async function putCloudSettings(manual?: boolean) {
                 noPersist: true,
             });
         }
+
+        delete localStorage.Plexcord_settingsDirty;
     } catch (e: any) {
         logger.error("Failed to sync up", e);
         showNotification({
@@ -162,6 +165,8 @@ export async function getCloudSettings(shouldNotify = true, force = false) {
                 onClick: IS_WEB ? () => location.reload() : relaunch,
                 noPersist: true
             });
+
+        delete localStorage.Plexcord_settingsDirty;
 
         return true;
     } catch (e: any) {

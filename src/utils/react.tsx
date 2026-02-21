@@ -154,7 +154,6 @@ export function useTimer({ interval = 1000, deps = [] }: TimerOpts) {
 
     return time;
 }
-
 interface FixedTimerOpts {
     interval?: number;
     initialTime?: number;

@@ -118,10 +118,10 @@ function CloudTab() {
                 onChange={v => changeUrl(v)}
                 className={Margins.bottom16}
                 closeOnSelect={true}
-                renderOptionPrefix={o => o?.value?.includes("plexcord") ? <PlexcordIcon /> : null}
+                renderOptionPrefix={o => o?.value?.includes("plexcord") && <PlexcordIcon />}
             />
 
-            <Flex gap="8px" alignItems="center">
+            <Flex gap="8px" alignItems="center" className={Margins.top8}>
                 <div style={{ flex: 1 }}>
                     <CheckedTextInput
                         key={`backendUrl-${inputKey}`}

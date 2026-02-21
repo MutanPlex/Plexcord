@@ -51,12 +51,12 @@ export function SettingsSection({ tag: Tag = "div", name, description, label, er
         <Tag className={cl("section")}>
             <div className={classes(cl("content"), inlineSetting && cl("inline"))}>
                 <div className={cl("label")}>
-                    {name && <BaseText size="md" weight="medium" className={cl("title")}>{resolvedLabel || wordsToTitle(wordsFromCamel(name))}</BaseText>}
-                    {resolvedDescription && <BaseText size="sm" weight="normal" className={cl("description")}>{resolvedDescription}</BaseText>}
+                    {name && <BaseText className={cl("title")} size="md" weight="medium">{resolvedLabel || wordsToTitle(wordsFromCamel(name))}</BaseText>}
+                    {resolvedDescription && <BaseText className={cl("description")} size="sm">{resolvedDescription}</BaseText>}
                 </div>
                 {children}
             </div>
-            {error && <BaseText size="sm" weight="normal" className={cl("error")}>{error}</BaseText>}
+            {error && <BaseText className={cl("error")} size="sm">{error}</BaseText>}
         </Tag>
     );
 }

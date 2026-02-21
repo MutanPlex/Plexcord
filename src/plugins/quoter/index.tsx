@@ -68,7 +68,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "Quoter",
     description: () => t(plugin.quoter.description),
-    authors: [Devs.Samwich, Devs.thororen, PcDevs.MutanPlex, PcDevs.neoarz, PcDevs.Prism],
+    authors: [Devs.Samwich, Devs.thororen, PcDevs.MutanPlex, PcDevs.neoarz, Devs.prism],
     settings,
 
     contextMenus: {

@@ -8,6 +8,7 @@
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { PassiveUpdateState, VoiceState } from "@plexcord/discord-types";
 import roleColorEverywhere from "@plugins/roleColorEverywhere";
 import { Devs, PcDevs } from "@utils/constants";
 import { useFixedTimer } from "@utils/react";
@@ -24,55 +25,6 @@ const fixCss = `
         padding: 0px var(--space-xs);
     }
 `;
-export interface VoiceState {
-    userId: string;
-    channelId?: string;
-    oldChannelId?: string;
-    guildId?: string;
-    deaf: boolean;
-    mute: boolean;
-    selfDeaf: boolean;
-    selfMute: boolean;
-    selfStream: boolean;
-    selfVideo: boolean;
-    sessionId: string;
-    suppress: boolean;
-    requestToSpeakTimestamp: string | null;
-}
-
-export interface PassiveUpdateState {
-    type: string;
-    guildId: string;
-    members?: ({
-        user: {
-            avatar: null | string;
-            communication_disabled_until: null | string;
-            deaf: boolean;
-            flags: number;
-            joined_at: string;
-            mute: boolean;
-            nick: string;
-            pending: boolean;
-            premium_since: null | string;
-        };
-        roles: (string)[];
-        premium_since: null | string;
-        pending: boolean;
-        nick: string | null;
-        mute: boolean;
-        joined_at: string;
-        flags: number;
-        deaf: boolean;
-        communication_disabled_until: null | string;
-        avatar: null | string;
-    })[];
-    channels: ({
-        lastPinTimestamp?: string;
-        lastMessageId: string;
-        id: string;
-    })[];
-    voiceStates?: VoiceState[];
-}
 
 export const settings = definePluginSettings({
     showWithoutHover: {
@@ -400,7 +352,6 @@ export function TimerText({ text, className, style }: Readonly<{ text: string; c
         fontFamily: "monospace",
         fontSize: 11,
         lineHeight: "7px",
-        position: "relative",
         ...style
     }}>{text}</div>;
 }

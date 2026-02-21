@@ -103,6 +103,7 @@ export function HeaderBarButton(props: HeaderBarButtonProps & { ref?: React.RefO
                 <Clickable
                     {...{ innerRef: ref } as any}
                     className={classes(HeaderBarClasses.clickable, HeaderBarClasses.withHighlight, className)}
+                    style={{ width: iconSize, boxSizing: "content-box", justifyContent: "center" }}
                     onClick={onClick}
                     onContextMenu={onContextMenu}
                     onMouseEnter={onMouseEnter}

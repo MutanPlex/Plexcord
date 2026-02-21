@@ -18,7 +18,7 @@ export default definePlugin({
         {
             find: "#{intl::USER_PROFILE_PRONOUNS}",
             replacement: {
-                match: /(?<=isVerifiedBot\(\)}\).{0,60})children:(\i)/,
+                match: /(?<=shouldUnderlineOnHover:null.{0,150})children:(\i)/,
                 replace: "children:[...Plexcord.Api.NicknameIcons._renderIcons({userId:arguments[0].user?.id}),$1]"
             }
         }

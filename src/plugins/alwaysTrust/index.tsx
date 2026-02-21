@@ -67,6 +67,7 @@ export default definePlugin({
     name: "AlwaysTrust",
     description: () => t(plugin.alwaysTrust.description),
     authors: [Devs.zt, Devs.Trwy],
+    settings,
 
     patches: [
         {
@@ -108,5 +109,4 @@ export default definePlugin({
             return GetPropsAndDeleteGuild(server.id);
         }
     },
-    settings
 });

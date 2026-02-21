@@ -7,7 +7,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { PcDevs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
 const settings = definePluginSettings({
@@ -58,7 +58,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "BetterUserArea",
     description: () => t(plugin.betterUserArea.description),
-    authors: [PcDevs.Prism, PcDevs.MutanPlex],
+    authors: [Devs.prism, PcDevs.MutanPlex],
     settings,
     patches: [
         {

@@ -673,6 +673,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         management: "Tema Yönetimi",
         description: "Discord’un görünümünü temalarla özelleştirin. Yerel .css dosyaları ekleyin veya temaları doğrudan URL’lerden yükleyin. Dişli simgesi olan temalarda, değiştirebileceğiniz özelleştirilebilir ayarlar bulunur.",
         local: "Yerel Temalar",
+        new: "YENİ",
         pinned: "Sabitlenmiş",
         stylus: "Stylus uzantısı",
         bd: "BetterDiscord Temaları",
@@ -1072,8 +1073,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        alwaysExpandProfile: {
-            name: "AlwaysExpandProfile",
+        alwaysExpandProfiles: {
+            name: "alwaysExpandProfiles",
             description: "Kullanıcı profillerini her zaman genişletilmiş olarak açar"
         },
         alwaysExpandRoles: {
@@ -4095,6 +4096,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     hostandpath: "Host ve Yol (tenor.com somegif.gif)"
                 }
             }
+        },
+        fileDownloadButton: {
+            name: "FileDownloadButton",
+            description: "Dosyaların sağ üst köşesine indirme düğmesi ekler"
         },
         findReply: {
             name: "FindReply",

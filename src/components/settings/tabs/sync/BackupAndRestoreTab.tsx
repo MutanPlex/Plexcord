@@ -32,7 +32,7 @@ function BackupAndRestoreTab() {
     return (
         <SettingsTab>
             <Heading className={Margins.top16}>{t(sync.title)}</Heading>
-            <Paragraph className={Margins.bottom8}>
+            <Paragraph className={Margins.bottom20}>
                 {t(sync.description)}
             </Paragraph>
 
@@ -41,19 +41,19 @@ function BackupAndRestoreTab() {
             </Notice.Warning>
 
             <Heading>{t(sync.settings.text)}</Heading>
-            <Paragraph className={Margins.bottom8}>
+            <Paragraph className={Margins.bottom20}>
                 <ul>
-                    <li>&mdash; {t(sync.settings.quickcss)}</li>
-                    <li>&mdash; {t(sync.settings.theme)}</li>
-                    <li>&mdash; {t(sync.settings.plugins)}</li>
-                    <li>&mdash; {t(sync.settings.datastores)}</li>
+                    <li>• {t(sync.settings.quickcss)}</li>
+                    <li>• {t(sync.settings.theme)}</li>
+                    <li>• {t(sync.settings.plugins)}</li>
+                    <li>• {t(sync.settings.datastores)}</li>
                 </ul>
             </Paragraph>
 
             <Divider className={Margins.bottom20} />
 
-            <Heading >{t(sync.import.title)}</Heading>
-            <Paragraph className={Margins.bottom8}>
+            <Heading>{t(sync.import.title)}</Heading>
+            <Paragraph className={Margins.bottom16}>
                 {t(sync.import.description)}
             </Paragraph>
 
@@ -86,8 +86,9 @@ function BackupAndRestoreTab() {
             </Flex>
 
             <Divider className={Margins.bottom20} />
+
             <Heading>{t(sync.export.title)}</Heading>
-            <Paragraph className={Margins.bottom8}>
+            <Paragraph className={Margins.bottom16}>
                 {t(sync.export.description)}
             </Paragraph>
 

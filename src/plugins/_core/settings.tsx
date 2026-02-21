@@ -120,10 +120,7 @@ const settingsSectionMap: [string, string][] = [
     ["PlexcordChangelog", "plexcord_changelog_panel"],
     ["PlexcordCloud", "plexcord_cloud_panel"],
     ["PlexcordBackupAndRestore", "plexcord_backup_restore_panel"],
-    ["PlexcordPatchHelper", "plexcord_patch_helper_panel"],
-    ["PlexcordDiscordIcons", "plexcord_icon_viewer"],
-    ["PlexcordThemeLibrary", "plexcord_theme_library"],
-    ["PlexcordIRememberYou", "plexcord_i_remember_you"],
+    ["PlexcordPatchHelper", "plexcord_patch_helper_panel"]
 ];
 
 export default definePlugin({

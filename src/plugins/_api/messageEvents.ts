@@ -52,7 +52,7 @@ export default definePlugin({
             replacement: {
                 match: /let\{id:\i}=(\i),{id:\i}=(\i);return \i\.useCallback\((\i)=>\{/,
                 replace: (m, message, channel, event) =>
-                    `const vcMsg=${message},vcChan=${channel};${m}Plexcord.Api.MessageEvents._handleClick(vcMsg,vcChan,${event});`
+                    `const pcMsg=${message},pcChan=${channel};${m}Plexcord.Api.MessageEvents._handleClick(pcMsg,pcChan,${event});`
             }
         }
     ]

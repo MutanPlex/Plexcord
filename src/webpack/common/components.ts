@@ -76,6 +76,7 @@ export const UserSummaryItem = waitForComponent("UserSummaryItem", filters.compo
 
 export let createScroller: (scrollbarClassName: string, fadeClassName: string, customThemeClassName: string) => t.ScrollerThin;
 export let createListScroller: (scrollBarClassName: string, fadeClassName: string, someOtherClassIdkMan: string, resizeObserverClass: typeof ResizeObserver) => t.ListScrollerThin;
+
 const listScrollerClassnames = ["thin", "auto", "fade"] as const;
 export const scrollerClasses = findCssClassesLazy("thin", "auto", "fade", "customTheme", "none");
 

@@ -192,6 +192,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                     <CloseButton onClick={onClose} />
                 </div>
             </ModalHeader>
+
             <ModalContent className={"pc-settings-modal-content"}>
                 <section>
                     <BaseText size="lg" weight="semibold" color="text-strong" className={Margins.bottom8}>{t(plugins.pluginModal.authors)}</BaseText>

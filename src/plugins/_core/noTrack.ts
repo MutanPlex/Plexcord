@@ -80,7 +80,7 @@ export default definePlugin({
         TRACK(event) {
             event?.resolve?.();
         }
-    } as any,
+    },
 
     startAt: StartAt.Init,
     start() {

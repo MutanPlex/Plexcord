@@ -117,7 +117,7 @@ export function insertTextIntoChatInputBox(text: string) {
 }
 
 export async function copyWithToast(text: string, toastMessage?: string) {
-    const { t } = await import("@api/i18n");
+    const { t, utils } = await import("@api/i18n");
     await copyToClipboard(text);
     Toasts.show({
         message: toastMessage ?? t(utils.toast.copied),

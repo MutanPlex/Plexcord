@@ -94,48 +94,52 @@ function LanguageSelector() {
 
 function ReloadRequiredCard({ required, enabledPlugins, openWarningModal, resetCheckAndDo, enabledStockPlugins, totalStockPlugins, enabledUserPlugins, totalUserPlugins }) {
     return (
-        <Card variant={required ? "warning" : "primary"} className={cl("info-card")}>
-            {required
-                ? (
-                    <>
-                        <HeadingTertiary>{t(plugins.restart.required)}</HeadingTertiary>
-                        <Paragraph className={cl("dep-text")}>
-                            {t(plugins.restart.description)}
-                        </Paragraph>
-                        <Button onClick={() => location.reload()} className={cl("restart-button")}>
-                            {t(plugins.restart.button.restart)}
-                        </Button>
-                    </>
-                )
-                : (
-                    <>
-                        <Paragraph>{t(plugins.infoModal.description)}</Paragraph>
-                        <Paragraph>{t(plugins.infoModal.settingsInfo)}</Paragraph>
-                        <Divider className={`${Margins.top8} ${Margins.bottom8}`} />
-
-                        <StockPluginsCard
-                            enabledStockPlugins={enabledStockPlugins}
-                            totalStockPlugins={totalStockPlugins}
-                            enabledUserPlugins={enabledUserPlugins}
-                            totalUserPlugins={totalUserPlugins}
-                        />
-                    </>
-                )}
-            <Flex justifyContent="space-between" alignItems="center" flexDirection="row" className={Margins.top16}>
-                <LanguageSelector />
-                {enabledPlugins.length > 0 && !required && (
-                    <Button
-                        size="small"
-                        className={"pc-plugins-disable-warning pc-modal-align-reset"}
-                        onClick={() => {
-                            return openWarningModal(null, null, null, false, enabledPlugins.length, resetCheckAndDo);
-                        }}
-                    >
-                        {t(plugins.restart.button.disableAll)}
+        <>
+            {required && (
+                <Card className={classes(cl("info-card"), "pc-warning-card", Margins.bottom16)}>
+                    <HeadingTertiary>{t(plugins.restart.required)}</HeadingTertiary>
+                    <Paragraph className={cl("dep-text")}>
+                        {t(plugins.restart.description)}
+                    </Paragraph>
+                    <Button variant="primary" className={cl("restart-button")} onClick={() => location.reload()}>
+                        {t(plugins.restart.button.restart)}
                     </Button>
-                )}
-            </Flex>
-        </Card>
+                </Card>
+            )}
+            <Card className={classes(cl("info-card"), required && "pc-warning-card")}>
+                <>
+                    <Paragraph>{t(plugins.infoModal.description)}</Paragraph>
+                    <Paragraph className={Margins.bottom16}>{t(plugins.infoModal.settingsInfo)}</Paragraph>
+
+                    <StockPluginsCard
+                        enabledStockPlugins={enabledStockPlugins}
+                        totalStockPlugins={totalStockPlugins}
+                        enabledUserPlugins={enabledUserPlugins}
+                        totalUserPlugins={totalUserPlugins}
+                    />
+                </>
+
+                <div className={cl("ui-elements")}>
+                    <UIElementsButton />
+                </div>
+
+                <Flex justifyContent="space-between" alignItems="center" flexDirection="row" className={Margins.top16}>
+                    <LanguageSelector />
+                    {enabledPlugins.length > 0 && (
+                        <Button
+                            variant="secondary"
+                            size="small"
+                            className={"pc-plugins-disable-warning pc-modal-align-reset"}
+                            onClick={() => {
+                                return openWarningModal(null, undefined, false, enabledPlugins.length, resetCheckAndDo);
+                            }}
+                        >
+                            {t(plugins.restart.button.disableAll)}
+                        </Button>
+                    )}
+                </Flex>
+            </Card>
+        </>
     );
 }
 
@@ -395,8 +399,6 @@ function PluginSettings() {
         <SettingsTab>
 
             <ReloadRequiredCard required={changes.hasChanges} enabledPlugins={enabledPlugins} openWarningModal={openWarningModal} resetCheckAndDo={resetCheckAndDo} enabledStockPlugins={enabledStockPlugins} totalStockPlugins={totalStockPlugins} enabledUserPlugins={enabledUserPlugins} totalUserPlugins={totalUserPlugins} />
-
-            <UIElementsButton />
 
             <HeadingTertiary className={classes(Margins.top20, Margins.bottom8)}>
                 {t(plugins.filters.label)}

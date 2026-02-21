@@ -661,11 +661,7 @@ function ChangelogContent() {
                                             await loadChangelogHistory();
                                             setExpandedLogs(
                                                 new Set(
-                                                    Array.from(
-                                                        expandedLogs,
-                                                    ).filter(
-                                                        id => id !== logId,
-                                                    ),
+                                                    Array.from(expandedLogs).filter(id => id !== logId),
                                                 ),
                                             );
                                             Toasts.show({
@@ -673,8 +669,7 @@ function ChangelogContent() {
                                                 id: Toasts.genId(),
                                                 type: Toasts.Type.SUCCESS,
                                                 options: {
-                                                    position:
-                                                        Toasts.Position.BOTTOM,
+                                                    position: Toasts.Position.BOTTOM,
                                                 },
                                             });
                                         },

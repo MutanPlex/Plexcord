@@ -54,10 +54,10 @@ export default definePlugin({
 
     patches: [
         {
-            find: ".NITRO_PRIVACY_PERK_BETA_COACHMARK));",
+            find: ".WIDGETS_RTC_UPSELL_COACHMARK),",
             replacement: {
                 // react.jsx)(AccountPanel, { ..., showTaglessAccountPanel: blah })
-                match: /(?<=\i\.jsxs?\)\()(\i),{(?=[^}]*?userTag:\i,(occluded|hidePrivateData):)/,
+                match: /(?<=\i\.jsxs?\)\()(\i),{(?=[^}]*?userTag:\i,occluded:)/,
                 // react.jsx(WrapperComponent, { PlexcordOriginal: AccountPanel, ...
                 replace: "$self.PanelWrapper,{PlexcordOriginal:$1,"
             },

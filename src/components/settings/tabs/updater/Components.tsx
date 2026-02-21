@@ -35,7 +35,7 @@ export function HashLink({ repo, hash, disabled = false }: { repo: string, hash:
 
 export function Changes({ updates, repo, repoPending }: CommonProps & { updates: typeof changes; }) {
     return (
-        <Card className={Margins.top16} defaultPadding={false}>
+        <Card className={Margins.top16} style={{ padding: 0 }} defaultPadding={false}>
             {updates.map(({ hash, author, message }, i) => (
                 <div
                     key={hash}

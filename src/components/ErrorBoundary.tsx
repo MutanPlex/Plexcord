@@ -44,15 +44,6 @@ const color = "#e78284";
 
 const logger = new Logger("React ErrorBoundary", color);
 
-const safeT = (key: string, fallback: string): string => {
-    try {
-        const { components, t } = require("@api/i18n");
-        return t(key) || fallback;
-    } catch {
-        return fallback;
-    }
-};
-
 const NO_ERROR = {};
 
 // We might want to import this in a place where React isn't ready yet.

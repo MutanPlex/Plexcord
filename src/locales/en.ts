@@ -670,6 +670,7 @@ const translations = {
         management: "Theme Management",
         description: "Customize Discord's appearance with themes. Add local .css files or load themes directly from URLs. Themes with a cog wheel icon have customizable settings you can modify.",
         local: "Local Themes",
+        new: "NEW",
         pinned: "Pinned",
         stylus: "Stylus extension",
         bd: "BetterDiscord Themes",
@@ -1069,9 +1070,9 @@ const translations = {
                 }
             }
         },
-        alwaysExpandProfile: {
-            name: "AlwaysExpandProfile",
-            description: "Always expands profile popouts to the full modal"
+        alwaysExpandProfiles: {
+            name: "AlwaysExpandProfiles",
+            description: "Always expands profiles popouts to the full modal"
         },
         alwaysExpandRoles: {
             name: "AlwaysExpandRoles",
@@ -4092,6 +4093,10 @@ const translations = {
                     hostandpath: "Host & Path (tenor.com somgif.gif)"
                 }
             }
+        },
+        fileDownloadButton: {
+            name: "FileDownloadButton",
+            description: "Adds Download Button to top right corner of files"
         },
         findReply: {
             name: "FindReply",

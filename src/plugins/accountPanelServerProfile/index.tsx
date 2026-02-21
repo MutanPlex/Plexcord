@@ -10,7 +10,7 @@ import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { User } from "@plexcord/discord-types";
-import alwaysExpandProfile from "@plugins/alwaysExpandProfile";
+import alwaysExpandProfiles from "@plugins/alwaysExpandProfiles";
 import { Devs } from "@utils/constants";
 import { fetchUserProfile, getCurrentChannel } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
@@ -41,11 +41,11 @@ const AccountPanelContextMenu = ErrorBoundary.wrap(() => {
                 label={prioritizeServerProfile ? t(plugin.accountPanelServerProfile.context.account) : t(plugin.accountPanelServerProfile.context.server)}
                 disabled={getCurrentChannel()?.getGuildId() == null}
                 action={async e => {
-                    if (isPluginEnabled(alwaysExpandProfile.name)) {
+                    if (isPluginEnabled(alwaysExpandProfiles.name)) {
                         const user = await fetchUserProfile(UserStore.getCurrentUser().id, {
                             guild_id: getCurrentChannel()?.getGuildId()
                         }, false);
-                        return alwaysExpandProfile.openUserModal(user!.userId);
+                        return alwaysExpandProfiles.openUserModal(user!.userId);
                     }
                     openAlternatePopout = true;
                     accountPanelRef.current?.click();
@@ -78,7 +78,7 @@ export default definePlugin({
 
     patches: [
         {
-            find: ".NITRO_PRIVACY_PERK_BETA_COACHMARK));",
+            find: ".WIDGETS_RTC_UPSELL_COACHMARK)",
             group: true,
             replacement: [
                 {

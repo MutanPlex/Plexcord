@@ -31,6 +31,7 @@ export function waitForComponent<T extends ComponentType<any> = ComponentType<an
 
     const lazyComponent = LazyComponent(() => {
         if (myValue) return myValue;
+
         const error = new Error(`Plexcord could not find the ${name} Component`);
         logger.error(error);
 

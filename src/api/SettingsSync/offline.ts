@@ -62,13 +62,13 @@ function isSafeObject(obj: any) {
 }
 
 export async function importSettings(data: string, type: BackupType = "all", cloud = false) {
-    let parsed: any;
     try {
-        parsed = JSON.parse(data);
+        var parsed = JSON.parse(data);
     } catch (err) {
         console.log(data);
         throw new Error("Failed to parse JSON: " + String(err));
     }
+
     if (!isSafeObject(parsed))
         throw new Error("Unsafe Settings");
 

@@ -8,7 +8,7 @@
 import { plugins, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import betterUserArea from "@plugins/betterUserArea";
-import { PcDevs } from "@utils/constants";
+import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findCssClassesLazy } from "@webpack";
 
@@ -17,11 +17,11 @@ const { iconForeground } = findCssClassesLazy("iconForeground", "accountPopoutBu
 export default definePlugin({
     name: "UserAreaAPI",
     description: () => t(plugins.metadata.api.description.userArea),
-    authors: [PcDevs.Prism],
+    authors: [Devs.prism],
 
     patches: [
         {
-            find: ".NITRO_PRIVACY_PERK_BETA_COACHMARK));",
+            find: ".WIDGETS_RTC_UPSELL_COACHMARK),",
             replacement: [
                 {
                     match: /(?<=className:(\i)\.\i,style:\i,)children:\[/,

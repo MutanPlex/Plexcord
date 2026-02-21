@@ -36,6 +36,8 @@
         "testTsc": "tsc --noEmit"
     },
     "dependencies": {
+        "@ffmpeg/ffmpeg": "^0.12.10",
+        "@ffmpeg/util": "^0.12.1",
         "@intrnl/xxhash64": "^0.1.2",
         "@streamparser/json": "^0.0.22",
         "@types/less": "^3.0.8",
@@ -68,7 +70,6 @@
         "esbuild": "^0.27.3",
         "eslint": "9.39.2",
         "eslint-import-resolver-alias": "^1.1.2",
-        "eslint-plugin-path-alias": "2.1.0",
         "eslint-plugin-react": "^7.37.5",
         "eslint-plugin-simple-header": "^1.2.2",
         "eslint-plugin-simple-import-sort": "^12.1.1",
@@ -81,7 +82,6 @@
         "standalone-electron-types": "^34.2.0",
         "stylelint": "^17.1.1",
         "stylelint-config-standard": "^40.0.0",
-        "svgo": "^4.0.0",
         "ts-patch": "^3.3.0",
         "ts-pattern": "^5.9.0",
         "tsx": "^4.21.0",
@@ -92,24 +92,14 @@
     },
     "packageManager": "pnpm@10.30.0",
     "pnpm": {
-        "overrides": {
-            "@types/react": "19.2.7",
-            "@types/react-dom": "19.2.3",
-            "jszip": "^3.10.1",
-            "@eslint/plugin-kit": "^0.3.4",
-            "dompurify": "^3.3.0"
-        },
         "patchedDependencies": {
-            "eslint-plugin-path-alias@2.1.0": "patches/eslint-plugin-path-alias@2.1.0.patch"
+            "@types/less@3.0.8": "patches/@types__less@3.0.8.patch"
         },
         "peerDependencyRules": {
             "ignoreMissing": [
                 "eslint-plugin-import",
                 "eslint"
-            ],
-            "allowedVersions": {
-                "eslint": "9"
-            }
+            ]
         },
         "allowedDeprecatedVersions": {
             "source-map-resolve": "*",
@@ -120,7 +110,14 @@
         },
         "onlyBuiltDependencies": [
             "esbuild"
-        ]
+        ],
+        "overrides": {
+            "@types/react": "19.2.7",
+            "@types/react-dom": "19.2.3",
+            "jszip": "^3.10.1",
+            "dompurify": "^3.3.0",
+            "@eslint/plugin-kit@<0.3.4": ">=0.3.4"
+        }
     },
     "engines": {
         "node": ">=18"

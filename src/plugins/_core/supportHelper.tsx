@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { sendBotMessage } from "@api/Commands";
 import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
@@ -472,7 +473,14 @@ export default definePlugin({
                             key="pc-run-snippet"
                             onClick={async () => {
                                 try {
-                                    await AsyncFunction(match[1])();
+                                    const result = await AsyncFunction(match[1])();
+                                    const stringed = String(result);
+                                    if (stringed) {
+                                        await sendBotMessage(SelectedChannelStore.getChannelId(), {
+                                            author: { username: "Plexcord" },
+                                            content: stringed
+                                        });
+                                    }
                                     showToast(t(plugin.supportHelper.toast.success), Toasts.Type.SUCCESS);
                                 } catch (e) {
                                     new Logger(t(plugin.supportHelper.name)).error("Error while running snippet:", e);

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { t } from "@api/i18n";
+import { t, updater } from "@api/i18n";
 
 import gitHash from "~git-hash";
 

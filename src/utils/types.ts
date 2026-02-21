@@ -207,8 +207,9 @@ export interface PluginDef {
     renderMessageAccessory?: MessageAccessoryFactory;
     renderMessageDecoration?: MessageDecorationFactory;
 
-    // Custom
     renderMemberListDecorator?: MemberListDecoratorFactory;
+
+    // Custom
     renderNicknameIcon?: NicknameIconFactory;
     headerBarButton?: HeaderBarButtonData;
     audioProcessor?: AudioProcessor;

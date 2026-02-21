@@ -11,8 +11,8 @@ import { openUserProfile } from "@utils/discord";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
-    name: "AlwaysExpandProfile",
-    description: () => t(plugin.alwaysExpandProfile.description),
+    name: "AlwaysExpandProfiles",
+    description: () => t(plugin.alwaysExpandProfiles.description),
     authors: [PcDevs.MutanPlex, Devs.thororen],
 
     patches: [

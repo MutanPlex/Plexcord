@@ -111,13 +111,6 @@
     transition-property: box-shadow, transform, background, opacity;
 }
 
-.pc-plugins-info-card:hover,
-.pc-plugin-stats:hover {
-    background-color: var(--background-base-low) !important;
-    transform: translateY(-1px);
-    box-shadow: var(--elevation-high);
-}
-
 .pc-plugin-stats-card-container {
     display: flex;
     justify-content: space-between;

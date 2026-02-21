@@ -24,7 +24,7 @@ import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
 import { Link } from "@components/Link";
 import { Paragraph } from "@components/Paragraph";
-import { SettingsTab, wrapTab } from "@components/settings/tabs/BaseTab";
+import { SettingsTab, wrapTab } from "@components/settings";
 import { Margins } from "@utils/margins";
 import { useAwaiter } from "@utils/react";
 import { getRepo, isNewer, UpdateLogger } from "@utils/updater";
@@ -65,14 +65,14 @@ function Updater() {
             />
             <FormSwitch
                 title={t(updater.notify.label)}
-                disabled={!settings.autoUpdate}
+                description={t(updater.notify.description)}
                 value={settings.autoUpdateNotification}
                 onChange={(v: boolean) => settings.autoUpdateNotification = v}
-                description={t(updater.notify.description)}
+                disabled={!settings.autoUpdate}
                 hideBorder
             />
 
-            <Divider className={Margins.top20} />
+            <Divider />
 
             <Heading className={Margins.top20}>{t(updater.repo)}</Heading>
             <Paragraph className={Margins.bottom8}>
@@ -90,22 +90,16 @@ function Updater() {
                             </Link>
                         )
                 }
-                {" "}
-                (<HashLink hash={gitHash} repo={repo} disabled={repoPending} />)
+                {" "}(<HashLink hash={gitHash} repo={repo} disabled={repoPending} />)
             </Paragraph>
 
             <Divider className={Margins.top20} />
 
-            <Heading>{t(updater.updates)}</Heading>
+            <Heading className={Margins.top20}>{t(updater.updates)}</Heading>
 
-            {isNewer
-                ? <Newer {...commonProps} />
-                : <Updatable {...commonProps} />
-            }
+            {isNewer ? <Newer {...commonProps} /> : <Updatable {...commonProps} />}
         </SettingsTab>
     );
 }
 
-export default IS_UPDATER_DISABLED
-    ? null
-    : wrapTab(Updater, t(updater.title));
+export default IS_UPDATER_DISABLED ? null : wrapTab(Updater, t(updater.title));

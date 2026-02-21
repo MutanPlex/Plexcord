@@ -19,6 +19,7 @@
 
 import "./AddonCard.css";
 
+import { t, themes } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Switch } from "@components/settings";
 import { AddonBadge } from "@components/settings/PluginBadge";
@@ -102,7 +103,7 @@ export function OnlineThemeCard({
                                 )}
                             </div>
                         </div>
-                        {isNew && <AddonBadge text="NEW" color="#ED4245" />}
+                        {isNew && <AddonBadge text={t(themes.new)} color="#ED4245" />}
                     </BaseText>
 
                     {!!author && (

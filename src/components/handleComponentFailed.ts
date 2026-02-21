@@ -20,16 +20,6 @@
 import { components, t } from "@api/i18n";
 import { maybePromptToUpdate } from "@utils/updater";
 
-// Safe translation function that won't crash if i18n isn't ready
-const safeT = (key: string, fallback: string): string => {
-    try {
-        const { t } = require("@api/i18n");
-        return t(key) || fallback;
-    } catch {
-        return fallback;
-    }
-};
-
 export function handleComponentFailed() {
     const message = t(components.componentFailed.message);
 

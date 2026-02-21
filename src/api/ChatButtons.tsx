@@ -17,7 +17,7 @@ import { Clickable, Menu, Tooltip } from "@webpack/common";
 import { HTMLProps, JSX, MouseEventHandler, ReactNode } from "react";
 
 import { addContextMenuPatch, findGroupChildrenByChildId } from "./ContextMenu";
-import { t } from "./i18n";
+import { plugins, t } from "./i18n";
 import { useSettings } from "./Settings";
 
 const ButtonWrapperClasses = findCssClassesLazy("button", "buttonWrapper", "notificationDot");

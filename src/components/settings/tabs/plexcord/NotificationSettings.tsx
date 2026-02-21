@@ -28,7 +28,7 @@ export function NotificationSection() {
 
             <Heading>{t(settings.notifications.title)}</Heading>
             <Paragraph className={Margins.bottom8}>{t(settings.notifications.description)}</Paragraph>
-            <Flex gap="16px">
+            <Flex gap="16px" className={Margins.top8}>
                 <Button onClick={openNotificationSettingsModal}>
                     {t(settings.notifications.settings)}
                 </Button>
