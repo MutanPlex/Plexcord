@@ -1087,6 +1087,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        animalese: {
+            name: "Animalese",
+            description: "Gönderilen her mesaj için animalese sesi çalar (çok fazla yaparlar)",
+            option: {
+                volume: {
+                    label: "Ses Seviyesi",
+                    description: "Animalese sesinin seviyesi"
+                },
+                speed: {
+                    label: "Hız",
+                    description: "Animalese sesinin hızı"
+                },
+                pitch: {
+                    label: "Ton",
+                    description: "Ton çarpanı"
+                },
+                messageLengthLimit: {
+                    label: "Mesaj Uzunluğu Sınırı",
+                    description: "İşlenecek maksimum mesaj uzunluğu"
+                },
+                processOwnMessages: {
+                    label: "Kendi Mesajlarını İşle",
+                    description: "Kendi mesajlarını da seslendirmek için etkinleştir"
+                },
+                soundQuality: {
+                    label: "Ses Kalitesi",
+                    description: "Kullanılacak ses kalitesi",
+                    high: "Yüksek",
+                    med: "Orta",
+                    low: "Düşük",
+                    lowest: "En Düşük"
+                }
+            }
+        },
         alwaysTrust: {
             name: "AlwaysTrust",
             description: "Kötü niyetli alan ve şüpheli dosya açılır penceresini kaldırır",

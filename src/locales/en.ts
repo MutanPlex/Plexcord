@@ -1084,6 +1084,40 @@ const translations = {
                 }
             }
         },
+        animalese: {
+            name: "Animalese",
+            description: "Plays animal crossing animalese for every message sent (they yap a lot)",
+            option: {
+                volume: {
+                    label: "Volume",
+                    description: "Volume of the animalese sound"
+                },
+                speed: {
+                    label: "Speed",
+                    description: "Speed of the animalese sound"
+                },
+                pitch: {
+                    label: "Pitch",
+                    description: "Pitch multiplier"
+                },
+                messageLengthLimit: {
+                    label: "Message Length Limit",
+                    description: "Maximum length of message to process"
+                },
+                processOwnMessages: {
+                    label: "Process Own Messages",
+                    description: "Enable to yap your own messages too"
+                },
+                soundQuality: {
+                    label: "Sound Quality",
+                    description: "Quality of sound to use",
+                    high: "High",
+                    med: "Medium",
+                    low: "Low",
+                    lowest: "Lowest"
+                }
+            }
+        },
         alwaysTrust: {
             name: "AlwaysTrust",
             description: "Removes the annoying untrusted domain and suspicious file popup",

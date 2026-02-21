@@ -892,7 +892,15 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     keircn: {
         name: "Key",
         id: 1230319937155760131n
-    }
+    },
+    ryanamay: {
+        name: "ryanamay",
+        id: 1262793452236570667n
+    },
+    Mocha: {
+        name: "Mocha",
+        id: 808802000224518264n
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>
