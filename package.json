@@ -116,7 +116,9 @@
             "@types/react-dom": "19.2.3",
             "jszip": "^3.10.1",
             "dompurify": "^3.3.0",
-            "@eslint/plugin-kit@<0.3.4": ">=0.3.4"
+            "@eslint/plugin-kit@<0.3.4": ">=0.3.4",
+            "@isaacs/brace-expansion": ">=6.0.0",
+            "minimatch": ">=10.1.2"
         }
     },
     "engines": {
