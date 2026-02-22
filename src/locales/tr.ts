@@ -3934,6 +3934,57 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        elementHighlighter: {
+            name: "ElementHighlighter",
+            description: "Öğeleri kolayca vurgulayın ve denetleyin.",
+            modal: {
+                recording: "Kaydediliyor...",
+                reset: "Sıfırla"
+            },
+            option: {
+                keybind: {
+                    label: "Tuş Ataması",
+                    description: "Vurgulayıcıyı aç/kapat"
+                },
+                showClasses: {
+                    label: "Sınıfları Göster",
+                    description: "Öğenin CSS sınıf (class) isimlerini ipucunda görüntüler"
+                },
+                showId: {
+                    label: "ID Göster",
+                    description: "Öğenin ID özniteliğini ipucunda görüntüler"
+                },
+                showFont: {
+                    label: "Yazı Tipini Göster",
+                    description: "Hesaplanmış yazı tipi ailesini ve boyutunu görüntüler"
+                },
+                showPadding: {
+                    label: "İç Boşluğu (Padding) Göster",
+                    description: "Öğenin iç boşluk değerlerini görüntüler"
+                },
+                showMargin: {
+                    label: "Dış Boşluğu (Margin) Göster",
+                    description: "Öğenin dış boşluk değerlerini görüntüler"
+                },
+                showBorderRadius: {
+                    label: "Kenar Yuvarlaklığını Göster",
+                    description: "Öğenin kenar yuvarlaklığı (border radius) değerlerini görüntüler"
+                },
+                showPosition: {
+                    label: "Konumu Göster",
+                    description: "Öğenin CSS konum türünü ve z-index değerini görüntüler"
+                },
+                showDisplay: {
+                    label: "Görünümü (Display) Göster",
+                    description: "Öğenin görünüm türünü flex veya grid özellikleri ile birlikte görüntüler"
+                }
+            },
+            toast: {
+                copied: {
+                    color: "Renk panoya kopyalandı!",
+                }
+            }
+        },
         expandedUserTags: {
             name: "ExpandedUserTags",
             description: "Webhook'lar ve moderasyon rolleri (sahip, admin vb.) için etiketler ekler",

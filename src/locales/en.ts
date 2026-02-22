@@ -3931,6 +3931,57 @@ const translations = {
                 }
             }
         },
+        elementHighlighter: {
+            name: "ElementHighlighter",
+            description: "Highlight and inspect elements easily.",
+            modal: {
+                recording: "Recording...",
+                reset: "Reset"
+            },
+            option: {
+                keybind: {
+                    label: "Key Bind",
+                    description: "Toggle Highlighter"
+                },
+                showClasses: {
+                    label: "Show Classes",
+                    description: "Display the element's CSS class names in the tooltip"
+                },
+                showId: {
+                    label: "Show ID",
+                    description: "Display the element's ID attribute in the tooltip"
+                },
+                showFont: {
+                    label: "Show Font",
+                    description: "Display the computed font family and font size"
+                },
+                showPadding: {
+                    label: "Show Padding",
+                    description: "Display the element's padding values"
+                },
+                showMargin: {
+                    label: "Show Margin",
+                    description: "Display the element's margin values"
+                },
+                showBorderRadius: {
+                    label: "Show Border Radius",
+                    description: "Display the element's border radius values"
+                },
+                showPosition: {
+                    label: "Show Position",
+                    description: "Display the element's CSS position type and z-index"
+                },
+                showDisplay: {
+                    label: "Show Display",
+                    description: "Display the element's display type along with flex or grid properties"
+                }
+            },
+            toast: {
+                copied: {
+                    color: "Copied color to clipboard!",
+                }
+            }
+        },
         expandedUserTags: {
             name: "ExpandedUserTags",
             description: "Adds tags for webhooks and moderative roles (owner, admin, etc.)",
