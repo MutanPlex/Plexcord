@@ -3784,6 +3784,56 @@ const translations = {
                 }
             }
         },
+        discordDevBanner: {
+            name: "DiscordDevBanner",
+            description: "Enables the Discord developer banner, in which displays the build-ID",
+            about: "The format for the Discord Dev Banner. You can use the following variables:",
+            preview: "Preview:",
+            empty: "Format cannot be empty.",
+            variables: {
+                discord: {
+                    title: "Discord Variables",
+                    icon: "Discord icon",
+                    banner: "Dev banner icon",
+                    channel: "Discord build channel (e.g. Stable)",
+                    build: "Discord build number (e.g. 123456)",
+                    hash: "Discord build hash (e.g. 123456)"
+                },
+                plexcord: {
+                    title: "Plexcord Variables",
+                    icon: "Plexcord icon",
+                    name: "Name of Plexcord",
+                    version: "Version of Plexcord (e.g. 1.0.0)",
+                    hash: "Plexcord build hash (e.g. 123456)",
+                    platform: "Platform Plexcord is running on (e.g. Dev Build)"
+                },
+                plextron: {
+                    title: "Plextron Specific Variables",
+                    hashShort: "Plextron build hash (e.g. 123456789)",
+                    platformType: "Platform Plextron is running on (e.g. Dev Build)"
+                },
+                client: {
+                    title: "Client Variables",
+                    icon: "Desktop icon",
+                    name: "The name of the client (e.g. Discord Canary)",
+                    version: "The version of the client (e.g. 1.0.0)",
+                },
+                electron: {
+                    title: "Electron Variables",
+                    icon: "Electron icon",
+                    version: "Electron version (e.g. 25.0.0)"
+                },
+                chromium: {
+                    title: "Chromium Variables",
+                    icon: "Chromium icon",
+                    version: "Chromium engine version (e.g. 125.0.0.0)"
+                },
+                misc: {
+                    title: "Miscellaneous Variables",
+                    newline: "Newline character"
+                }
+            }
+        },
         dontFilterMe: {
             name: "DontFilterMe",
             description: "Warns you if your message contains a term in the automod preset list",

@@ -3787,6 +3787,56 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        discordDevBanner: {
+            name: "DiscordDevBanner",
+            description: "Build-ID (Yapım Numarası) bilgisini gösteren Discord geliştirici banner'ını etkinleştirir.",
+            about: "Discord Geliştirici Banner'ı formatı. Aşağıdaki değişkenleri kullanabilirsiniz:",
+            preview: "Önizleme:",
+            empty: "Format boş olamaz.",
+            variables: {
+                discord: {
+                    title: "Discord Değişkenleri",
+                    icon: "Discord simgesi",
+                    banner: "Geliştirici banner simgesi",
+                    channel: "Discord yapı kanalı (örn. Stable)",
+                    build: "Discord yapı numarası (örn. 123456)",
+                    hash: "Discord yapı hash'i (örn. 123456)"
+                },
+                plexcord: {
+                    title: "Plexcord Değişkenleri",
+                    icon: "Plexcord simgesi",
+                    name: "Plexcord adı",
+                    version: "Plexcord sürümü (örn. 1.0.0)",
+                    hash: "Plexcord yapı hash'i (örn. 123456)",
+                    platform: "Plexcord'un çalıştığı platform (örn. Dev Build)"
+                },
+                plextron: {
+                    title: "Plextron Özel Değişkenleri",
+                    hashShort: "Plextron kısa yapı karması (örn. 123456789)",
+                    platformType: "Plextron'un çalıştığı platform tipi (örn. Dev Build)"
+                },
+                client: {
+                    title: "İstemci Değişkenleri",
+                    icon: "Masaüstü simgesi",
+                    name: "İstemci adı (örn. Discord Canary)",
+                    version: "İstemci sürümü (örn. 1.0.0)",
+                },
+                electron: {
+                    title: "Electron Değişkenleri",
+                    icon: "Electron simgesi",
+                    version: "Electron sürümü (örn. 25.0.0)"
+                },
+                chromium: {
+                    title: "Chromium Değişkenleri",
+                    icon: "Chromium simgesi",
+                    version: "Chromium motor sürümü (örn. 125.0.0.0)"
+                },
+                misc: {
+                    title: "Çeşitli Değişkenler",
+                    newline: "Yeni satır karakteri"
+                }
+            }
+        },
         dontFilterMe: {
             name: "DontFilterMe",
             description: "Mesajınız otomatik moderasyon hazır listesinde bulunan bir terim içeriyorsa sizi uyarır",
