@@ -3856,6 +3856,84 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "DragFavoriteEmotes",
             description: "Favori emojilerin sırasını değiştirmek için sürükle-bırak özelliğini ekler"
         },
+        dragify: {
+            name: "Dragify",
+            description: "Bahsetme veya davet eklemek için kullanıcıları, kanalları veya sunucuları sohbete sürükleyip bırakın.",
+            option: {
+                userOutput: {
+                    label: "Kullanıcı Çıktısı",
+                    description: "Kullanıcı bırakma çıktısı.",
+                    mention: "Bahsetme",
+                    id: "Kullanıcı Kimliği (ID)"
+                },
+                channelOutput: {
+                    label: "Kanal Çıktısı",
+                    description: "Kanal bırakma çıktısı.",
+                    mention: "#kanal Bahsetme",
+                    link: "Kanal Bağlantısı",
+                },
+                inviteExpireAfter: {
+                    label: "Davet Süresi",
+                    description: "Davet bağlantısının geçerlilik süresi.",
+                    never: "Asla",
+                    thirtyMinutes: "30 Dakika",
+                    oneHour: "1 Saat",
+                    sixHours: "6 Saat",
+                    twelveHours: "12 Saat",
+                    oneDay: "1 Gün",
+                    sevenDays: "7 Gün"
+                },
+                inviteMaxUses: {
+                    label: "Maksimum Kullanım Sayısı",
+                    description: "Davetin maksimum kullanılma sınırı.",
+                    noLimit: "Sınır Yok",
+                    one: "1 Kullanım",
+                    five: "5 Kullanım",
+                    ten: "10 Kullanım",
+                    twentyFive: "25 Kullanım",
+                    fifty: "50 Kullanım",
+                    hundred: "100 Kullanım"
+                },
+                inviteTemporaryMembership: {
+                    label: "Geçici Üyelik Sağla",
+                    description: "Davet edilenlere geçici üyelik verir.",
+                },
+                reuseExistingInvites: {
+                    label: "Mevcut Daveti Yeniden Kullan",
+                    description: "Yeni bir tane oluşturmak yerine mevcut daveti kullanır."
+                },
+                allowChatBodyDrop: {
+                    label: "Sohbet Gövdesine Bırakmaya İzin Ver",
+                    description: "Metin eklemek için doğrudan sohbet alanına bırakmaya izin verir."
+                }
+            },
+            toast: {
+                failed: {
+                    drop: "Dragify işlemi gerçekleştiremedi.",
+                },
+                invite: {
+                    created: "Davet oluşturuldu.",
+                    unable: "Davet oluşturulamıyor.",
+                    noChannel: "Davet oluşturmak için uygun kanal yok.",
+                }
+            },
+            ghost: {
+                user: "Kullanıcı",
+                server: "Sunucu",
+                dm: "Direkt Mesajlar",
+                badge: {
+                    channel: "kanal",
+                    thread: "başlık",
+                    voice: "ses",
+                    forum: "forum",
+                    media: "medya",
+                    announcement: "duyuru",
+                    dm: "dm",
+                    user: "kullanıcı",
+                    server: "sunucu"
+                }
+            }
+        },
         expandedUserTags: {
             name: "ExpandedUserTags",
             description: "Webhook'lar ve moderasyon rolleri (sahip, admin vb.) için etiketler ekler",

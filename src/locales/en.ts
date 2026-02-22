@@ -3853,6 +3853,84 @@ const translations = {
             name: "DragFavoriteEmotes",
             description: "Adds drag and drop functionality to favorite emotes"
         },
+        dragify: {
+            name: "Dragify",
+            description: "Drop users, channels, or servers into chat to insert mentions or invites.",
+            option: {
+                userOutput: {
+                    label: "User Output",
+                    description: "User drop output.",
+                    mention: "Mention",
+                    id: "User ID"
+                },
+                channelOutput: {
+                    label: "Channel Output",
+                    description: "Channel drop output.",
+                    mention: "#channel Mention",
+                    link: "Channel Link",
+                },
+                inviteExpireAfter: {
+                    label: "Invite Expire After",
+                    description: "Invite expiration",
+                    never: "Never",
+                    thirtyMinutes: "30 Minutes",
+                    oneHour: "1 Hour",
+                    sixHours: "6 Hours",
+                    twelveHours: "12 Hours",
+                    oneDay: "1 Day",
+                    sevenDays: "7 Days"
+                },
+                inviteMaxUses: {
+                    label: "Invite Max Uses",
+                    description: "Max uses for invite",
+                    noLimit: "No Limit",
+                    one: "1 Use",
+                    five: "5 Uses",
+                    ten: "10 Uses",
+                    twentyFive: "25 Uses",
+                    fifty: "50 Uses",
+                    hundred: "100 Uses"
+                },
+                inviteTemporaryMembership: {
+                    label: "Invite Temporary Membership",
+                    description: "Grant temporary membership.",
+                },
+                reuseExistingInvites: {
+                    label: "Reuse Existing Invite",
+                    description: "Reuse existing invite instead of creating a new one."
+                },
+                allowChatBodyDrop: {
+                    label: "Allow Chat Body Drop",
+                    description: "Allow dropping into the main chat body to insert text."
+                }
+            },
+            toast: {
+                failed: {
+                    drop: "Dragify failed to handle drop.",
+                },
+                invite: {
+                    created: "Invite created.",
+                    unable: "Unable to create invite.",
+                    noChannel: "No channel available for invites.",
+                }
+            },
+            ghost: {
+                user: "User",
+                server: "Server",
+                dm: "Direct Messages",
+                badge: {
+                    channel: "channel",
+                    thread: "thread",
+                    voice: "voice",
+                    forum: "forum",
+                    media: "media",
+                    announcement: "announcement",
+                    dm: "dm",
+                    user: "user",
+                    server: "server"
+                }
+            }
+        },
         expandedUserTags: {
             name: "ExpandedUserTags",
             description: "Adds tags for webhooks and moderative roles (owner, admin, etc.)",
