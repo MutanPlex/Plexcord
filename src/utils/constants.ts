@@ -913,6 +913,14 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "PWall",
         id: 0n,
     },
+    davri: {
+        name: "Davri",
+        id: 457579346282938368n,
+    },
+    Fafa: {
+        name: "Fafa",
+        id: 428188716641812481n
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>

@@ -4347,6 +4347,10 @@ const translations = {
                 }
             }
         },
+        favouriteAnything: {
+            name: "FavouriteAnything",
+            description: "Favourite any image"
+        },
         fileDownloadButton: {
             name: "FileDownloadButton",
             description: "Adds Download Button to top right corner of files"
@@ -4498,6 +4502,20 @@ const translations = {
             name: "ForceOwnerCrown",
             description: "Force the owner crown next to usernames even if the server is large."
         },
+        forwardAnywhere: {
+            name: "ForwardAnywhere",
+            description: "If a forward fails send it as a normal message also allows nsfw forwards",
+            option: {
+                forwardPreface: {
+                    label: "Forward Preface",
+                    description: "What should forwarded from be prefaced with"
+                }
+            },
+            context: {
+                attachments: "Attachments",
+                forwarded: "Forwarded from"
+            }
+        },
         freaky: {
             name: "Freaky",
             description: "Allows you to send your message in a weird font using the /freaky command.",
@@ -4515,6 +4533,20 @@ const translations = {
         frequentQuickSwitcher: {
             name: "Frequent Quick Switcher",
             description: "Rewrites and filters the quick switcher results to be your most frequent channels."
+        },
+        friendCloud: {
+            name: "FriendCloud",
+            description: "Adds a /friendcloud command to visualize the users you most interact with",
+            command: {
+                friendcloud: {
+                    description: "Visualize your friend cloud",
+                    count: "Number of users to display",
+                    mustHigher: "The count must be 1 or higher!",
+                    noAffinities: "No affinities found. Check your [privacy settings](<https://support.discord.com/hc/en-us/articles/21864805694999-Data-Used-to-Improve-Discord>).",
+                    noValid: "No valid users found in affinities. Check your [privacy settings](<https://support.discord.com/hc/en-us/articles/21864805694999-Data-Used-to-Improve-Discord>).",
+                    genFailed: "Couldn't generate the image :c"
+                }
+            }
         },
         friendInvites: {
             name: "FriendInvites",

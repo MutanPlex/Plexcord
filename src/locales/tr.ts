@@ -4350,6 +4350,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        favouriteAnything: {
+            name: "FavouriteAnything",
+            description: "Herhangi bir resmi favorile"
+        },
         fileDownloadButton: {
             name: "FileDownloadButton",
             description: "Dosyaların sağ üst köşesine indirme düğmesi ekler"
@@ -4502,6 +4506,20 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "ForceOwnerCrown",
             description: "Sunucu büyük olsa bile, kullanıcı adlarının yanında sunucu sahibi tacını zorla gösterir."
         },
+        forwardAnywhere: {
+            name: "ForwardAnywhere",
+            description: "İletme işlemi başarısız olursa mesajı normal bir mesaj olarak gönderir; ayrıca NSFW içeriklerin iletilmesine olanak tanır.",
+            option: {
+                forwardPreface: {
+                    label: "İletme Ön Eki",
+                    description: "İletilen mesajın başına hangi ifade eklenmeli?"
+                }
+            },
+            context: {
+                attachments: "Ekler",
+                forwarded: "Şuradan iletildi:"
+            }
+        },
         freaky: {
             name: "Freaky",
             description: "/freaky komutu ile mesajını garip bir fontla göndermene olanak tanır.",
@@ -4519,6 +4537,20 @@ const translations: MatchStructure<typeof enTranslations> = {
         frequentQuickSwitcher: {
             name: "Frequent Quick Switcher",
             description: "Hızlı geçiş penceresindeki sonuçları en sık kullandığın kanallarla değiştirir ve filtreler."
+        },
+        friendCloud: {
+            name: "FriendCloud",
+            description: "En çok etkileşimde bulunduğunuz kullanıcıları görselleştirmek için bir /friendcloud komutu ekler.",
+            command: {
+                friendcloud: {
+                    description: "Arkadaş bulutunuzu görselleştirin",
+                    count: "Görüntülenecek kullanıcı sayısı",
+                    mustHigher: "Sayı 1 veya daha yüksek olmalıdır!",
+                    noAffinities: "Yakınlık verisi bulunamadı. [Gizlilik ayarlarınızı](<https://support.discord.com/hc/en-us/articles/21864805694999-Data-Used-to-Improve-Discord>) kontrol edin.",
+                    noValid: "Yakınlıklarda geçerli kullanıcı bulunamadı. [Gizlilik ayarlarınızı](<https://support.discord.com/hc/en-us/articles/21864805694999-Data-Used-to-Improve-Discord>) kontrol edin.",
+                    genFailed: "Görüntü oluşturulamadı :c"
+                }
+            }
         },
         friendInvites: {
             name: "FriendInvites",
