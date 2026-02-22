@@ -3849,6 +3849,10 @@ const translations = {
             name: "DontRoundMyTimestamps",
             description: "Always rounds relative timestamps down, so 7.6y becomes 7y instead of 8y"
         },
+        dragFavoriteEmotes: {
+            name: "DragFavoriteEmotes",
+            description: "Adds drag and drop functionality to favorite emotes"
+        },
         expandedUserTags: {
             name: "ExpandedUserTags",
             description: "Adds tags for webhooks and moderative roles (owner, admin, etc.)",

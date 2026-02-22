@@ -3852,6 +3852,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "DontRoundMyTimestamps",
             description: "Göreli zaman damgalarını her zaman aşağı yuvarlar, böylece 7.6y 8y yerine 7y olur"
         },
+        dragFavoriteEmotes: {
+            name: "DragFavoriteEmotes",
+            description: "Favori emojilerin sırasını değiştirmek için sürükle-bırak özelliğini ekler"
+        },
         expandedUserTags: {
             name: "ExpandedUserTags",
             description: "Webhook'lar ve moderasyon rolleri (sahip, admin vb.) için etiketler ekler",

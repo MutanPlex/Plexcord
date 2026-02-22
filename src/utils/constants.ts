@@ -909,6 +909,10 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "ZcraftElite",
         id: 926788037785047050n
     },
+    PWall: {
+        name: "PWall",
+        id: 0n,
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>
