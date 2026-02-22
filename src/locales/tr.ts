@@ -4169,9 +4169,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Yayın Kalitesi Atlamayı Etkinleştir",
                     description: "Nitro kalitesinde yayın yapmaya izin verir"
                 },
-                useHyperLinks: {
-                    label: "Köprü Kullan",
-                    description: "Sahte emoji ve sticker gönderirken köprü kullanılıp kullanılmayacağını belirler"
+                useStickerHyperLinks: {
+                    label: "Sticker Köprülerini Kullan",
+                    description: "Sahte sticker gönderirken köprü kullanılıp kullanılmayacağını belirler"
+                },
+                useEmojiHyperLinks: {
+                    label: "Emoji Köprülerini Kullan",
+                    description: "Sahte emoji gönderirken köprü kullanılıp kullanılmayacağını belirler"
                 },
                 hyperLinkText: {
                     label: "Köprü Metni",

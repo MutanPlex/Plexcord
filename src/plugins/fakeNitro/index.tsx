@@ -132,9 +132,15 @@ const settings = definePluginSettings({
         default: true,
         restartNeeded: true
     },
-    useHyperLinks: {
-        label: () => t(plugin.fakeNitro.option.useHyperLinks.label),
-        description: () => t(plugin.fakeNitro.option.useHyperLinks.description),
+    useStickerHyperLinks: {
+        label: () => t(plugin.fakeNitro.option.useStickerHyperLinks.label),
+        description: () => t(plugin.fakeNitro.option.useStickerHyperLinks.description),
+        type: OptionType.BOOLEAN,
+        default: true
+    },
+    useEmojiHyperLinks: {
+        label: () => t(plugin.fakeNitro.option.useEmojiHyperLinks.label),
+        description: () => t(plugin.fakeNitro.option.useEmojiHyperLinks.description),
         type: OptionType.BOOLEAN,
         default: true
     },
@@ -876,7 +882,7 @@ export default definePlugin({
 
                     const linkText = s.hyperLinkText.replaceAll("{{NAME}}", sticker.name);
 
-                    messageObj.content += `${getWordBoundary(messageObj.content, messageObj.content.length - 1)}${s.useHyperLinks ? `[${linkText}](${url})` : url}`;
+                    messageObj.content += `${getWordBoundary(messageObj.content, messageObj.content.length - 1)}${s.useStickerHyperLinks ? `[${linkText}](${url})` : url}`;
                     extra.stickers!.length = 0;
                 }
             }
@@ -894,10 +900,12 @@ export default definePlugin({
                     url.searchParams.set("name", emoji.name);
                     url.searchParams.set("lossless", "true");
 
+                    if (emoji.animated) url.pathname = url.pathname.replace(".webp", ".gif");
+
                     const linkText = s.hyperLinkText.replaceAll("{{NAME}}", emoji.name);
 
                     messageObj.content = messageObj.content.replace(emojiString, (match, offset, origStr) => {
-                        return `${getWordBoundary(origStr, offset - 1)}${s.useHyperLinks ? `[${linkText}](${url})` : url}${getWordBoundary(origStr, offset + match.length)}`;
+                        return `${getWordBoundary(origStr, offset - 1)}${s.useEmojiHyperLinks ? `[${linkText}](${url})` : url}${getWordBoundary(origStr, offset + match.length)}`;
                     });
                 }
             }
@@ -930,7 +938,7 @@ export default definePlugin({
 
                 const linkText = s.hyperLinkText.replaceAll("{{NAME}}", emoji.name);
 
-                return `${getWordBoundary(origStr, offset - 1)}${s.useHyperLinks ? `[${linkText}](${url})` : url}${getWordBoundary(origStr, offset + emojiStr.length)}`;
+                return `${getWordBoundary(origStr, offset - 1)}${s.useEmojiHyperLinks ? `[${linkText}](${url})` : url}${getWordBoundary(origStr, offset + emojiStr.length)}`;
             });
 
             if (hasBypass && !s.disableEmbedPermissionCheck && !hasEmbedPerms(channelId)) {

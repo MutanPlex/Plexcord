@@ -4166,9 +4166,13 @@ const translations = {
                     label: "Enable Stream Quality Bypass",
                     description: "Allow streaming in nitro quality"
                 },
-                useHyperLinks: {
-                    label: "Use Hyper Links",
-                    description: "Whether to use hyperlinks when sending fake emojis and stickers"
+                useStickerHyperLinks: {
+                    label: "Use Sticker Hyper Links",
+                    description: "Whether to use hyperlinks when sending fake stickers"
+                },
+                useEmojiHyperLinks: {
+                    label: "Use Emoji Hyper Links",
+                    description: "Whether to use hyperlinks when sending fake emojis"
                 },
                 hyperLinkText: {
                     label: "Hyper Link Text",
