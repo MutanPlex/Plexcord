@@ -1,0 +1,17 @@
+.pc-exitsounds-input-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.pc-exitsounds-input-wrapper {
+    flex: 1;
+}
+
+.pc-exitsounds-guild-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    margin-right: 8px;
+    vertical-align: middle;
+}

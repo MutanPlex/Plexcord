@@ -3982,6 +3982,26 @@ const translations = {
                 }
             }
         },
+        exitSounds: {
+            name: "ExitSounds",
+            description: "Play soundboard sounds when you disconnect from voice.",
+            button: "Set as global exit sound",
+            toast: {
+                failedToPlay: "Oops! Something went wrong."
+            },
+            option: {
+                soundGuildId: {
+                    label: "Sound Guild ID",
+                    description: "Select the server containing the sound.",
+                    placeholder: "Select a server..."
+                },
+                soundId: {
+                    label: "Sound ID",
+                    description: "Enter the ID of the sound you want to play.",
+                    placeholder: "Enter sound ID..."
+                }
+            }
+        },
         expandedUserTags: {
             name: "ExpandedUserTags",
             description: "Adds tags for webhooks and moderative roles (owner, admin, etc.)",

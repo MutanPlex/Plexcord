@@ -3985,6 +3985,26 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        exitSounds: {
+            name: "ExitSounds",
+            description: "Ses kanalından ayrıldığınızda ses panelinden bir ses çalar.",
+            button: "Global çıkış sesi olarak ayarla",
+            toast: {
+                failedToPlay: "Hay aksi! Bir şeyler ters gitti."
+            },
+            option: {
+                soundGuildId: {
+                    label: "Ses Sunucusu Kimliği (ID)",
+                    description: "Sesin bulunduğu sunucuyu seçin.",
+                    placeholder: "Bir sunucu seç..."
+                },
+                soundId: {
+                    label: "Ses Kimliği (ID)",
+                    description: "Çalmak istediğiniz sesin kimliğini (ID) girin.",
+                    placeholder: "Ses kimliğini girin..."
+                }
+            }
+        },
         expandedUserTags: {
             name: "ExpandedUserTags",
             description: "Webhook'lar ve moderasyon rolleri (sahip, admin vb.) için etiketler ekler",
