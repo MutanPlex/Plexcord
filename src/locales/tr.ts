@@ -4005,65 +4005,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        expandedUserTags: {
-            name: "ExpandedUserTags",
-            description: "Webhook'lar ve moderasyon rolleri (sahip, admin vb.) için etiketler ekler",
-            tag: {
-                webhook: {
-                    name: "Webhook",
-                    description: "Bu kullanıcı bir webhook"
-                },
-                owner: {
-                    name: "Sahip",
-                    description: "Sunucunun sahibi"
-                },
-                admin: {
-                    name: "Admin",
-                    description: "Yönetici yetkisine sahip"
-                },
-                staff: {
-                    name: "Yetkili",
-                    description: "Sunucuyu, kanalları veya rolleri yönetebilir"
-                },
-                mod: {
-                    name: "Mod",
-                    description: "Mesajları yönetebilir veya kişileri atabilir/banlayabilir"
-                },
-                vcmod: {
-                    name: "Ses Mod",
-                    description: "Sesli sohbetleri yönetebilir"
-                },
-                chatmod: {
-                    name: "Sohbet Mod",
-                    description: "Mesajları yönetebilir"
-                }
-            },
-            modal: {
-                example: "Örnek",
-                tag: "Etiket",
-                customTextPlaceholder: "Etiket üzerindeki metin (varsayılan: {{displayName}})",
-                messages: "Mesajlarda göster",
-                memberList: "Üye listesinde ve profillerde göster"
-            },
-            option: {
-                dontShowForBots: {
-                    label: "Botlar için gösterme",
-                    description: "Botlar için ekstra etiketleri gösterme (webhook'lar hariç)"
-                },
-                dontShowBotTag: {
-                    label: "Bot etiketini gösterme",
-                    description: "Sadece ekstra etiketleri göster / [APP] yazısını gizle"
-                },
-                showWebhookTagFully: {
-                    label: "Webhook etiketini tam göster",
-                    description: "Webhook etiketini takip edilen kanallarda (ör. duyurular) tam göster"
-                },
-                tagSettings: {
-                    label: "Etiket Ayarları",
-                    description: "doldurulacak"
-                }
-            }
-        },
         experiments: {
             name: "Experiments",
             description: "Discord'da Deneyler ve diğer yalnızca geliştiriciye özel özelliklere erişim sağlar!",
@@ -6429,6 +6370,65 @@ const translations: MatchStructure<typeof enTranslations> = {
                 scroll: {
                     label: "Kaydırma",
                     description: "Emoji listesini kaydırmayı etkinleştir"
+                }
+            }
+        },
+        moreUserTags: {
+            name: "MoreUserTags",
+            description: "Webhook'lar ve moderasyon rolleri (sahip, admin vb.) için etiketler ekler",
+            tag: {
+                webhook: {
+                    name: "Webhook",
+                    description: "Bu kullanıcı bir webhook"
+                },
+                owner: {
+                    name: "Sahip",
+                    description: "Sunucunun sahibi"
+                },
+                admin: {
+                    name: "Admin",
+                    description: "Yönetici yetkisine sahip"
+                },
+                staff: {
+                    name: "Yetkili",
+                    description: "Sunucuyu, kanalları veya rolleri yönetebilir"
+                },
+                mod: {
+                    name: "Mod",
+                    description: "Mesajları yönetebilir veya kişileri atabilir/banlayabilir"
+                },
+                vcmod: {
+                    name: "Ses Mod",
+                    description: "Sesli sohbetleri yönetebilir"
+                },
+                chatmod: {
+                    name: "Sohbet Mod",
+                    description: "Mesajları yönetebilir"
+                }
+            },
+            modal: {
+                example: "Örnek",
+                tag: "Etiket",
+                customTextPlaceholder: "Etiket üzerindeki metin (varsayılan: {{displayName}})",
+                messages: "Mesajlarda göster",
+                memberList: "Üye listesinde ve profillerde göster"
+            },
+            option: {
+                dontShowForBots: {
+                    label: "Botlar için gösterme",
+                    description: "Botlar için ekstra etiketleri gösterme (webhook'lar hariç)"
+                },
+                dontShowBotTag: {
+                    label: "Bot etiketini gösterme",
+                    description: "Sadece ekstra etiketleri göster / [APP] yazısını gizle"
+                },
+                showWebhookTagFully: {
+                    label: "Webhook etiketini tam göster",
+                    description: "Webhook etiketini takip edilen kanallarda (ör. duyurular) tam göster"
+                },
+                tagSettings: {
+                    label: "Etiket Ayarları",
+                    description: "doldurulacak"
                 }
             }
         },

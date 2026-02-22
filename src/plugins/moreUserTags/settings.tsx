@@ -12,7 +12,7 @@ import { Flex } from "@components/Flex";
 import { FormSwitch } from "@components/FormSwitch";
 import { Heading } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";
-import ExpandedUserTagsPlugin from "@plugins/expandedUserTags";
+import MoreUserTagsPlugin from "@plugins/moreUserTags";
 import { Margins } from "@utils/margins";
 import { OptionType } from "@utils/types";
 import { TextInput, Tooltip } from "@webpack/common";
@@ -22,7 +22,7 @@ import { TagSettings } from "./types";
 
 function SettingsComponent() {
     const tagSettings = (settings.store.tagSettings ??= {} as TagSettings);
-    const { localTags } = ExpandedUserTagsPlugin;
+    const { localTags } = MoreUserTagsPlugin;
 
     getTags().forEach(tag => {
         if (!tagSettings[tag.name]) {
@@ -55,7 +55,7 @@ function SettingsComponent() {
                                         onMouseEnter={onMouseEnter}
                                         onMouseLeave={onMouseLeave}
                                     >
-                                        {tag.displayName} {t(plugin.expandedUserTags.modal.tag)}
+                                        {tag.displayName} {t(plugin.moreUserTags.modal.tag)}
                                     </div>
                                 )}
                             </Tooltip>
@@ -63,7 +63,7 @@ function SettingsComponent() {
 
                         <div style={{ marginBottom: "10px" }}>
                             <Paragraph style={{ fontSize: "13px" }}>
-                                {t(plugin.expandedUserTags.modal.example)}:
+                                {t(plugin.moreUserTags.modal.example)}:
                             </Paragraph>
                             <Tag type={localTags[tag.name]} />
                         </div>
@@ -71,7 +71,7 @@ function SettingsComponent() {
                         <TextInput
                             type="text"
                             value={tagSettings[tag.name]?.text || ""}
-                            placeholder={t(plugin.expandedUserTags.modal.customTextPlaceholder, { displayName: tag.displayName })}
+                            placeholder={t(plugin.moreUserTags.modal.customTextPlaceholder, { displayName: tag.displayName })}
                             onChange={v => tagSettings[tag.name].text = v}
                             className={Margins.bottom16}
                         />
@@ -80,14 +80,14 @@ function SettingsComponent() {
                             value={tagSettings[tag.name]?.showInChat ?? true}
                             onChange={v => tagSettings[tag.name].showInChat = v}
                             hideBorder
-                            title={t(plugin.expandedUserTags.modal.messages)}
+                            title={t(plugin.moreUserTags.modal.messages)}
                         />
 
                         <FormSwitch
                             value={tagSettings[tag.name]?.showInNotChat ?? true}
                             onChange={v => tagSettings[tag.name].showInNotChat = v}
                             hideBorder
-                            title={t(plugin.expandedUserTags.modal.memberList)}
+                            title={t(plugin.moreUserTags.modal.memberList)}
                         />
                     </Card>
                 ))}
@@ -98,27 +98,27 @@ function SettingsComponent() {
 
 export const settings = definePluginSettings({
     dontShowForBots: {
-        label: () => t(plugin.expandedUserTags.option.dontShowForBots.label),
-        description: () => t(plugin.expandedUserTags.option.dontShowForBots.description),
+        label: () => t(plugin.moreUserTags.option.dontShowForBots.label),
+        description: () => t(plugin.moreUserTags.option.dontShowForBots.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     dontShowBotTag: {
-        label: () => t(plugin.expandedUserTags.option.dontShowBotTag.label),
-        description: () => t(plugin.expandedUserTags.option.dontShowBotTag.description),
+        label: () => t(plugin.moreUserTags.option.dontShowBotTag.label),
+        description: () => t(plugin.moreUserTags.option.dontShowBotTag.description),
         type: OptionType.BOOLEAN,
         default: false,
         restartNeeded: true
     },
     showWebhookTagFully: {
-        label: () => t(plugin.expandedUserTags.option.showWebhookTagFully.label),
-        description: () => t(plugin.expandedUserTags.option.showWebhookTagFully.description),
+        label: () => t(plugin.moreUserTags.option.showWebhookTagFully.label),
+        description: () => t(plugin.moreUserTags.option.showWebhookTagFully.description),
         type: OptionType.BOOLEAN,
         default: false
     },
     tagSettings: {
-        label: () => t(plugin.expandedUserTags.option.tagSettings.label),
-        description: () => t(plugin.expandedUserTags.option.tagSettings.description),
+        label: () => t(plugin.moreUserTags.option.tagSettings.label),
+        description: () => t(plugin.moreUserTags.option.tagSettings.description),
         type: OptionType.COMPONENT,
         component: SettingsComponent
     },

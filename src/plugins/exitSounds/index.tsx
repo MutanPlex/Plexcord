@@ -131,7 +131,24 @@ export default definePlugin({
                             source_guild_id: soundGuildId
                         }
                     });
-                    await new Promise(r => setTimeout(r, 500));
+
+                    let duration = 5000;
+                    try {
+                        const audio = new Audio(`https://${window.GLOBAL_ENV.CDN_HOST}/soundboard-sounds/${soundId}`);
+                        await new Promise<void>(resolve => {
+                            audio.addEventListener("loadedmetadata", () => {
+                                resolve();
+                            });
+                            setTimeout(resolve, 2000);
+                        });
+                        if (audio.duration && !isNaN(audio.duration) && isFinite(audio.duration)) {
+                            duration = Math.ceil(audio.duration * 1000);
+                        }
+                    } catch {
+                        // Ignore errors, just use default duration
+                    }
+
+                    await new Promise(r => setTimeout(r, duration));
                 } catch {
                     Toasts.show({
                         message: t(plugin.exitSounds.toast.failedToPlay),

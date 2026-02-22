@@ -4002,65 +4002,6 @@ const translations = {
                 }
             }
         },
-        expandedUserTags: {
-            name: "ExpandedUserTags",
-            description: "Adds tags for webhooks and moderative roles (owner, admin, etc.)",
-            tag: {
-                webhook: {
-                    name: "Webhook",
-                    description: "This user is a webhook"
-                },
-                owner: {
-                    name: "Owner",
-                    description: "Owns the server"
-                },
-                admin: {
-                    name: "Admin",
-                    description: "Has the administrator permission"
-                },
-                staff: {
-                    name: "Staff",
-                    description: "Can manage the server, channels or roles"
-                },
-                mod: {
-                    name: "Mod",
-                    description: "Can manage messages or kick/ban people"
-                },
-                vcmod: {
-                    name: "VC Mod",
-                    description: "Can manage voice chats"
-                },
-                chatmod: {
-                    name: "Chat Mod",
-                    description: "Can manage messages"
-                }
-            },
-            modal: {
-                example: "Example",
-                tag: "Tag",
-                customTextPlaceholder: "Text on tag (default: {{displayName}})",
-                messages: "Show in messages",
-                memberList: "Show in member list and profiles"
-            },
-            option: {
-                dontShowForBots: {
-                    label: "Don't show for bots",
-                    description: "Don't show extra tags for bots (excluding webhooks)"
-                },
-                dontShowBotTag: {
-                    label: "Don't show bot tag",
-                    description: "Only show extra tags for bots / Hide [APP] text"
-                },
-                showWebhookTagFully: {
-                    label: "Show webhook tag fully",
-                    description: "Show Webhook tag in followed channels like announcements"
-                },
-                tagSettings: {
-                    label: "Tag Settings",
-                    description: "fill me"
-                }
-            }
-        },
         experiments: {
             name: "Experiments",
             description: "Enable Access to Experiments & other dev-only features in Discord!",
@@ -6425,6 +6366,65 @@ const translations = {
                 scroll: {
                     label: "Scroll",
                     description: "Enable scrolling the list of emojis"
+                }
+            }
+        },
+        moreUserTags: {
+            name: "MoreUserTags",
+            description: "Adds tags for webhooks and moderative roles (owner, admin, etc.)",
+            tag: {
+                webhook: {
+                    name: "Webhook",
+                    description: "This user is a webhook"
+                },
+                owner: {
+                    name: "Owner",
+                    description: "Owns the server"
+                },
+                admin: {
+                    name: "Admin",
+                    description: "Has the administrator permission"
+                },
+                staff: {
+                    name: "Staff",
+                    description: "Can manage the server, channels or roles"
+                },
+                mod: {
+                    name: "Mod",
+                    description: "Can manage messages or kick/ban people"
+                },
+                vcmod: {
+                    name: "VC Mod",
+                    description: "Can manage voice chats"
+                },
+                chatmod: {
+                    name: "Chat Mod",
+                    description: "Can manage messages"
+                }
+            },
+            modal: {
+                example: "Example",
+                tag: "Tag",
+                customTextPlaceholder: "Text on tag (default: {{displayName}})",
+                messages: "Show in messages",
+                memberList: "Show in member list and profiles"
+            },
+            option: {
+                dontShowForBots: {
+                    label: "Don't show for bots",
+                    description: "Don't show extra tags for bots (excluding webhooks)"
+                },
+                dontShowBotTag: {
+                    label: "Don't show bot tag",
+                    description: "Only show extra tags for bots / Hide [APP] text"
+                },
+                showWebhookTagFully: {
+                    label: "Show webhook tag fully",
+                    description: "Show Webhook tag in followed channels like announcements"
+                },
+                tagSettings: {
+                    label: "Tag Settings",
+                    description: "fill me"
                 }
             }
         },

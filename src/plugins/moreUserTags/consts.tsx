@@ -21,44 +21,44 @@ export const isWebhook = (message: Message, user: User) => {
 export const getTags = (): ITag[] => [
     {
         name: "WEBHOOK",
-        displayName: t(plugin.expandedUserTags.tag.webhook.name),
-        description: t(plugin.expandedUserTags.tag.webhook.description),
+        displayName: t(plugin.moreUserTags.tag.webhook.name),
+        description: t(plugin.moreUserTags.tag.webhook.description),
         condition: isWebhook
     },
     {
         name: "OWNER",
-        displayName: t(plugin.expandedUserTags.tag.owner.name),
-        description: t(plugin.expandedUserTags.tag.owner.description),
+        displayName: t(plugin.moreUserTags.tag.owner.name),
+        description: t(plugin.moreUserTags.tag.owner.description),
         condition: (_, user, channel) => GuildStore.getGuild(channel?.guild_id)?.ownerId === user.id
     },
     {
         name: "ADMINISTRATOR",
-        displayName: t(plugin.expandedUserTags.tag.admin.name),
-        description: t(plugin.expandedUserTags.tag.admin.description),
+        displayName: t(plugin.moreUserTags.tag.admin.name),
+        description: t(plugin.moreUserTags.tag.admin.description),
         permissions: ["ADMINISTRATOR"]
     },
     {
         name: "MODERATOR_STAFF",
-        displayName: t(plugin.expandedUserTags.tag.staff.name),
-        description: t(plugin.expandedUserTags.tag.staff.description),
+        displayName: t(plugin.moreUserTags.tag.staff.name),
+        description: t(plugin.moreUserTags.tag.staff.description),
         permissions: ["MANAGE_GUILD", "MANAGE_CHANNELS", "MANAGE_ROLES"]
     },
     {
         name: "MODERATOR",
-        displayName: t(plugin.expandedUserTags.tag.mod.name),
-        description: t(plugin.expandedUserTags.tag.mod.description),
+        displayName: t(plugin.moreUserTags.tag.mod.name),
+        description: t(plugin.moreUserTags.tag.mod.description),
         permissions: ["MANAGE_MESSAGES", "KICK_MEMBERS", "BAN_MEMBERS"]
     },
     {
         name: "VOICE_MODERATOR",
-        displayName: t(plugin.expandedUserTags.tag.vcmod.name),
-        description: t(plugin.expandedUserTags.tag.vcmod.description),
+        displayName: t(plugin.moreUserTags.tag.vcmod.name),
+        description: t(plugin.moreUserTags.tag.vcmod.description),
         permissions: ["MOVE_MEMBERS", "MUTE_MEMBERS", "DEAFEN_MEMBERS"]
     },
     {
         name: "CHAT_MODERATOR",
-        displayName: t(plugin.expandedUserTags.tag.chatmod.name),
-        description: t(plugin.expandedUserTags.tag.chatmod.description),
+        displayName: t(plugin.moreUserTags.tag.chatmod.name),
+        description: t(plugin.moreUserTags.tag.chatmod.description),
         permissions: ["MODERATE_MEMBERS"]
     }
 ];
