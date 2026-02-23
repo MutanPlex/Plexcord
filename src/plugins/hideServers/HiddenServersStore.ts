@@ -31,9 +31,9 @@ export const HiddenServersStore: ReturnType<typeof proxyLazyWebpack<IHiddenServe
 
     const SortedGuildStore = findStoreLazy("SortedGuildStore");
     const DB_KEY = "HideServers_servers";
-
     class HiddenServersStore extends Store {
         public _hiddenGuilds: Set<string> = new Set();
+
         public get hiddenGuilds() { return this._hiddenGuilds; }
 
         public async load() {
@@ -42,6 +42,7 @@ export const HiddenServersStore: ReturnType<typeof proxyLazyWebpack<IHiddenServe
                 this._hiddenGuilds = data;
             }
         }
+
         public unload() {
             this._hiddenGuilds.clear();
         }
@@ -53,6 +54,7 @@ export const HiddenServersStore: ReturnType<typeof proxyLazyWebpack<IHiddenServe
         public addHiddenGuild(id: string) {
             this._hiddenGuilds.add(id);
             this.save();
+            this.emitChange();
         }
 
         public removeHiddenGuild(id: string) {
@@ -80,6 +82,7 @@ export const HiddenServersStore: ReturnType<typeof proxyLazyWebpack<IHiddenServe
             DataStore.del(DB_KEY);
             this.emitChange();
         }
+
         public hiddenGuildsDetail(): Guild[] {
             const sortedGuildIds = SortedGuildStore.getFlattenedGuildIds() as string[];
             // otherwise the list is in order of increasing id number which is confusing

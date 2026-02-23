@@ -96,7 +96,10 @@ export default definePlugin({
     buttonsInner(buttons: ReactNode[]) {
         return <ButtonsInnerComponent buttons={buttons} />;
     },
-    async start() {
+    start() {
         hidechatbuttonsopen = settings.store.open;
+    },
+    stop() {
+        hidechatbuttonsopen = undefined;
     }
 });
