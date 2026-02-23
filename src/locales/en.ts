@@ -4548,6 +4548,21 @@ const translations = {
                 }
             }
         },
+        friendCodes: {
+            name: "FriendCodes",
+            description: "Generate FriendCodes to easily add friends",
+            card: {
+                expires: "Expires <t:{{expiration}}:R> • {{uses}}/{{maxUses}} uses",
+                copy: "Copy",
+                copied: "Copied!",
+                codes: "Your Friend Codes",
+                count: "Friend Codes - {{invites}}",
+                create: "Create Friend Code",
+                revoke: "Revoke All Friend Codes",
+                loading: "Loading...",
+                dontHave: "You don't have any friend codes."
+            }
+        },
         friendInvites: {
             name: "FriendInvites",
             description: "Create and manage friend invite links via slash commands (/create friend invite, /view friend invites, /revoke friend invites).",
@@ -4605,6 +4620,26 @@ const translations = {
             name: "FriendsSince",
             description: "Shows when you became friends with someone in the user popout",
             section: "Friends Since"
+        },
+        friendTags: {
+            name: "FriendTags",
+            description: "Allows you to filter by custom tags in the quick switcher by starting a search with &",
+            modal: {
+                name: "Name",
+                users: "Users (Seperated by comma)",
+                userlist: "User List (Click a user to remove)",
+                remove: "Remove",
+                add: "Add",
+                tag: "Tag",
+                removeFrom: "Remove from",
+                addTo: "Add to"
+            },
+            option: {
+                tagConfiguration: {
+                    label: "Tag Configuration",
+                    description: "The tag configuration component"
+                }
+            }
         },
         fullSearchContext: {
             name: "FullSearchContext",

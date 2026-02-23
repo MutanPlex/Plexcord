@@ -22,7 +22,7 @@ export function RepoCard({ repo, showStars, showLanguage, variant }: RepoCardPro
         return (
             <div className={cl("stars")}>
                 <Star className={cl("star-icon")} />
-                <BaseText size="sm" weight="normal">{repo.stargazers_count.toLocaleString()}</BaseText>
+                <BaseText size="sm">{repo.stargazers_count.toLocaleString()}</BaseText>
             </div>
         );
     };

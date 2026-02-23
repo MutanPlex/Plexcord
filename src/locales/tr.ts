@@ -4552,6 +4552,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        friendCodes: {
+            name: "FriendCodes",
+            description: "Kolayca arkadaş eklemek için Arkadaşlık Kodları oluşturun",
+            card: {
+                expires: "Süre sonu: <t:{{expiration}}:R> • {{uses}}/{{maxUses}} kullanım",
+                copy: "Kopyala",
+                copied: "Kopyalandı!",
+                codes: "Arkadaşlık Kodların",
+                count: "Arkadaşlık Kodları - {{invites}}",
+                create: "Arkadaşlık Kodu Oluştur",
+                revoke: "Tüm Arkadaşlık Kodlarını İptal Et",
+                loading: "Yükleniyor...",
+                dontHave: "Hiç arkadaşlık kodunuz yok."
+            }
+        },
         friendInvites: {
             name: "FriendInvites",
             description: "Slash komutları ile arkadaş davet bağlantıları oluştur ve yönet (/create friend invite, /view friend invites, /revoke friend invites).",
@@ -4609,6 +4624,26 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "FriendsSince",
             description: "Kullanıcı açılır penceresinde biriyle ne zaman arkadaş olduğunu gösterir.",
             section: "Arkadaş Olunan Tarih"
+        },
+        friendTags: {
+            name: "FriendTags",
+            description: "Aramanıza & ile başlayarak hızlı geçiş menüsünde özel etiketlere göre filtreleme yapmanıza olanak tanır.",
+            modal: {
+                name: "İsim",
+                users: "Kullanıcılar (Virgülle ayırın)",
+                userlist: "Kullanıcı Listesi (Kaldırmak için bir kullanıcıya tıklayın)",
+                remove: "Kaldır",
+                add: "Ekle",
+                tag: "Etiket",
+                removeFrom: "Şuradan kaldır:",
+                addTo: "Şuraya ekle:"
+            },
+            option: {
+                tagConfiguration: {
+                    label: "Etiket Yapılandırması",
+                    description: "Etiket yapılandırma bileşeni"
+                }
+            }
         },
         fullSearchContext: {
             name: "FullSearchContext",

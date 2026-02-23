@@ -1,0 +1,11 @@
+.pc-permviewer-user-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.pc-permviewer-user-header-btns {
+    display: flex;
+    gap: 8px;
+}
