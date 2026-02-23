@@ -18,14 +18,15 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { definePluginSettings } from "@api/Settings";
+import { definePluginSettings, Settings } from "@api/Settings";
 import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
-import presetQuotesText from "file://quotes.txt";
+import presetQuotesTextEn from "file://quotes-en.txt";
+import presetQuotesTextTr from "file://quotes-tr.txt";
 
-const presetQuotes = presetQuotesText.split("\n").map(quote => /^\s*[^#\s]/.test(quote) && quote.trim()).filter(Boolean) as string[];
-const noQuotesQuote = "Did you really disable all loading quotes? What a buffoon you are...";
+const presetQuotesEn = presetQuotesTextEn.split("\n").map(quote => /^\s*[^#\s]/.test(quote) && quote.trim()).filter(Boolean) as string[];
+const presetQuotesTr = presetQuotesTextTr.split("\n").map(quote => /^\s*[^#\s]/.test(quote) && quote.trim()).filter(Boolean) as string[];
 
 const settings = definePluginSettings({
     replaceEvents: {
@@ -91,13 +92,27 @@ export default definePlugin({
             if (!enableDiscordPresetQuotes)
                 quotes.length = 0;
 
-            if (enablePluginPresetQuotes)
-                quotes.push(...presetQuotes);
+            if (enablePluginPresetQuotes) {
+                const lang = Settings.language.locale;
+                if (lang === "tr") {
+                    quotes.push(...presetQuotesTr);
+                } else {
+                    quotes.push(...presetQuotesEn);
+                }
+            }
 
             quotes.push(...additionalQuotes.split(additionalQuotesDelimiter).filter(Boolean));
 
-            if (!quotes.length)
-                quotes.push(noQuotesQuote);
+            if (!quotes.length) {
+                if (Settings.language.locale.startsWith("tr")) {
+                    quotes.push("Tüm yükleme alıntılarını gerçekten devre dışı mı bıraktınız? Ne aptalca bir hareket...");
+                } else {
+                    quotes.push("Did you really disable all loading quotes? What a buffoon you are...");
+                }
+            }
+
+            console.log(quotes);
+
         } catch (e) {
             new Logger("LoadingQuotes").error("Failed to mutate quotes", e);
         }
