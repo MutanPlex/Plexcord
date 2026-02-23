@@ -5138,6 +5138,45 @@ const translations = {
             name: "HomeTyping",
             description: "Changes the home button to a typing indicator if someone in your dms is typing"
         },
+        iconViewer: {
+            name: "IconViewer",
+            description: "Adds a new tab to settings to preview all icons.",
+            toolbox: "Open Icons Tab",
+            iconFinder: "Icon Finder",
+            about: {
+                title: "Features",
+                preview: "Preview Icons",
+                list: {
+                    copy: "Copy icon names and CSS variables",
+                    download: "Download icons in different formats (SVG, PNG, GIF, etc.)",
+                    premade: "Copy pre-made icon finds for your plugins",
+                    find: "Find icons by function context",
+                    search: "Search for colors by right-clicking the color name",
+                    special: "Special thanks"
+                }
+            },
+            context: {
+                icon: {
+                    options: "Icon Options",
+                    log: "Log to Console",
+                    save: "Save as...",
+                    rightClick: "Right-click icon to change",
+                    usage: "Usage",
+                    click: "Click to copy",
+                    copied: "Copied!",
+                    actions: "Actions"
+                }
+            },
+            modal: {
+                label: "Search by function context",
+                search: "Search {{count}} icons...",
+                function: "Function",
+                iconViewer: {
+                    colors: "Icon Viewer Colors",
+                    unknown: "unknown",
+                }
+            }
+        },
         ignoreActivities: {
             name: "IgnoreActivities",
             description: "Ignore activities from showing up on your status ONLY. You can configure which ones are specifically ignored from the Registered Games and Activities tabs, or use the general settings below",

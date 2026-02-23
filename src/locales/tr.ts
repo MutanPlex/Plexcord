@@ -5142,6 +5142,45 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "HomeTyping",
             description: "DM’lerinde biri yazı yazıyorsa, ana sayfa butonunu yazıyor göstergesine dönüştürür."
         },
+        iconViewer: {
+            name: "IconViewer",
+            description: "Tüm simgeleri önizlemek için ayarlara yeni bir sekme ekler.",
+            toolbox: "Simgeler Sekmesini Aç",
+            iconFinder: "Simge Bulucu",
+            about: {
+                title: "Özellikler",
+                preview: "Simgeleri Önizle",
+                list: {
+                    copy: "Simge adlarını ve CSS değişkenlerini kopyalayın",
+                    download: "Simgeleri farklı formatlarda indirin (SVG, PNG, GIF, vb.)",
+                    premade: "Eklentileriniz için hazır simge bulgularını kopyalayın",
+                    find: "Simgeleri işlev bağlamına göre bulun",
+                    search: "Renk adına sağ tıklayarak renkleri arayın",
+                    special: "Özel teşekkürler"
+                }
+            },
+            context: {
+                icon: {
+                    options: "Simge Seçenekleri",
+                    log: "Konsola Yazdır (Log)",
+                    save: "Farklı kaydet...",
+                    rightClick: "Değiştirmek için simgeye sağ tıklayın",
+                    usage: "Kullanım",
+                    click: "Kopyalamak için tıklayın",
+                    copied: "Kopyalandı!",
+                    actions: "Eylemler"
+                }
+            },
+            modal: {
+                label: "İşlev bağlamına göre ara",
+                search: "{{count}} simge içinde ara...",
+                function: "İşlev (Function)",
+                iconViewer: {
+                    colors: "Icon Viewer Renkleri",
+                    unknown: "bilinmiyor",
+                }
+            }
+        },
         ignoreActivities: {
             name: "IgnoreActivities",
             description: "Etkinliklerin yalnızca durumunda görünmesini engeller. Kayıtlı Oyunlar ve Etkinlikler sekmelerinden hangilerinin yok sayılacağını belirleyebilir veya aşağıdaki genel ayarları kullanabilirsin.",
