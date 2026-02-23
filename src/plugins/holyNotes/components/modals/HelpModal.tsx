@@ -34,9 +34,9 @@ export default function HelpModal({ onClose, transitionState }: ModalProps) {
                     <BaseText size="sm" className={cl("description")}>
                         {t(plugin.holyNotes.modal.help.description)}
                     </BaseText>
-                    <div className={cl("header-trailing")}>
-                        <CloseButton onClick={onClose} />
-                    </div>
+                </div>
+                <div className={cl("header-trailing")}>
+                    <CloseButton onClick={onClose} />
                 </div>
             </ModalHeader>
             <ModalContent className={cl("content")}>

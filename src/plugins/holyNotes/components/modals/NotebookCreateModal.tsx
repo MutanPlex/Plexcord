@@ -23,28 +23,35 @@ export default function NotebookCreateModal({ onClose, transitionState }: ModalP
     };
 
     return (
-        <div>
-            <ModalRoot transitionState={transitionState} size={ModalSize.SMALL} className={cl("create-modal")}>
-                <ModalHeader separator={false} className={cl("header")}>
-                    <div className={cl("header-content")}>
-                        <BaseText tag="h2" size="lg" weight="semibold" className={cl("title")}>{t(plugin.holyNotes.modal.create.title)}</BaseText>
-                        <BaseText size="sm" className={cl("description")}>{t(plugin.holyNotes.modal.create.description)}</BaseText>
-                    </div>
-                    <div className={cl("header-trailing")}>
-                        <CloseButton onClick={onClose} />
-                    </div>
-                </ModalHeader>
-                <ModalContent className={cl("content")}>
-                    <TextInput
-                        value={name}
-                        placeholder={t(plugin.holyNotes.modal.create.placeholder)}
-                        onChange={value => setName(value)} />
-                </ModalContent>
-                <ModalFooter>
-                    <Button variant="primary" onClick={handleCreate}>{t(plugin.holyNotes.button.create)}</Button>
-                    <Button variant="secondary" onClick={onClose}>{t(plugin.holyNotes.button.cancel)}</Button>
-                </ModalFooter>
-            </ModalRoot>
-        </div>
+        <ModalRoot transitionState={transitionState} size={ModalSize.SMALL} className={cl("create-modal")}>
+            <ModalHeader separator={false} className={cl("header")}>
+                <div className={cl("header-content")}>
+                    <BaseText tag="h2" size="lg" weight="semibold" className={cl("title")}>
+                        {t(plugin.holyNotes.modal.create.title)}
+                    </BaseText>
+                    <BaseText size="sm" className={cl("description")}>
+                        {t(plugin.holyNotes.modal.create.description)}
+                    </BaseText>
+                </div>
+                <div className={cl("header-trailing")}>
+                    <CloseButton onClick={onClose} />
+                </div>
+            </ModalHeader>
+            <ModalContent className={cl("content")}>
+                <TextInput
+                    value={name}
+                    placeholder={t(plugin.holyNotes.modal.create.placeholder)}
+                    onChange={setName}
+                />
+            </ModalContent>
+            <ModalFooter>
+                <Button variant="primary" onClick={handleCreate}>
+                    {t(plugin.holyNotes.button.create)}
+                </Button>
+                <Button variant="secondary" onClick={onClose}>
+                    {t(plugin.holyNotes.button.cancel)}
+                </Button>
+            </ModalFooter>
+        </ModalRoot>
     );
 }
