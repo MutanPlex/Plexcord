@@ -5659,22 +5659,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             online: "{{formattedTime}} önce çevrimiçiydi"
         },
-        limitMiddleClickPaste: {
-            name: "LimitMiddleClickPaste",
-            description: "Orta tıklama ile yapıştırmayı her zaman ya da yalnızca bir metin alanı odaklı değilken engeller.",
-            option: {
-                scope: {
-                    label: "Kapsam",
-                    description: "Orta tıklama ile yapıştırmanın engelleneceği durumlar.",
-                    always: "Orta Tık ile Yapıştırmayı Her Zaman Engelle",
-                    focus: "Yalnızca Metin Alanı Odaklı Değilken Engelle"
-                },
-                threshold: {
-                    label: "Eşik",
-                    description: "Orta tıklamadan sonra yapıştırmanın yeniden etkinleştirilmesine kadar geçen milisaniye."
-                }
-            }
-        },
         listenBrainzRPC: {
             name: "ListenBrainzRPC",
             description: "ListenBrainz rich presence için küçük bir eklenti.",
@@ -6439,6 +6423,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                             name: "Önizlenecek etiketin adı"
                         }
                     }
+                }
+            }
+        },
+        middleClickTweaks: {
+            name: "MiddleClickTweaks",
+            description: "Yapıştırma ve bağlantı açma gibi çeşitli orta tık (farenin tekerleği) iyileştirmeleri.",
+            option: {
+                openScope: {
+                    label: "Açma Kapsamı",
+                    description: "Bu içerik türlerine orta tıklandığında açılmalarını engeller.",
+                    links: "Bağlantılar",
+                    media: "Medya",
+                    linksAndMedia: "Bağlantılar ve Medya",
+                    none: "Hiçbiri"
+                },
+                pasteScope: {
+                    label: "Yapıştırma Kapsamı",
+                    description: "Belirli durumlarda orta tık ile yapıştırma işlemini engeller.",
+                    always: "Orta Tık ile Yapıştırmayı Her Zaman Engelle",
+                    focus: "Sadece Metin Alanı Odaklanmadığında Engelle",
+                },
+                pasteThreshold: {
+                    label: "Yapıştırma Eşiği",
+                    description: "Orta tık sonrasında yapıştırmanın tekrar etkinleşmesi için gereken milisaniye."
                 }
             }
         },

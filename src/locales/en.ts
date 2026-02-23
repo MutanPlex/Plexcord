@@ -5655,22 +5655,6 @@ const translations = {
             },
             online: "Online {{formattedTime}} ago"
         },
-        limitMiddleClickPaste: {
-            name: "LimitMiddleClickPaste",
-            description: "Prevent middle click pasting either always or just when a text area is not focused.",
-            option: {
-                scope: {
-                    label: "Scope",
-                    description: "Situations in which to prevent middle click from pasting.",
-                    always: "Always Prevent Middle Click Pasting",
-                    focus: "Only Prevent When Text Area Not Focused"
-                },
-                threshold: {
-                    label: "Threshold",
-                    description: "Milliseconds until pasting is enabled again after a middle click."
-                }
-            }
-        },
         listenBrainzRPC: {
             name: "ListenBrainzRPC",
             description: "Little plugin for ListenBrainz rich presence",
@@ -6435,6 +6419,30 @@ const translations = {
                             name: "The name of the tag to preview"
                         }
                     }
+                }
+            }
+        },
+        middleClickTweaks: {
+            name: "MiddleClickTweaks",
+            description: "Various middle click tweaks, such as with pasting and link opening.",
+            option: {
+                openScope: {
+                    label: "Open Scope",
+                    description: "Prevent middle clicking on these content types from opening them.",
+                    links: "Links",
+                    media: "Media",
+                    linksAndMedia: "Links and Media",
+                    none: "None"
+                },
+                pasteScope: {
+                    label: "Paste Scope",
+                    description: "Prevent middle click from pasting during these situations.",
+                    always: "Always Prevent Middle Click Pasting",
+                    focus: "Only Prevent When Text Area Not Focused",
+                },
+                pasteThreshold: {
+                    label: "Paste Threshold",
+                    description: "Milliseconds until pasting is enabled again after a middle click."
                 }
             }
         },
