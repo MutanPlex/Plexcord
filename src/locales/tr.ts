@@ -4678,6 +4678,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        ghosted: {
+            name: "Ghosted",
+            description: "DM'lerine cevap vermediğiniz kişilerin yanında sevimli bir hayalet belirir.",
+            modal: {
+                title: "Ghostlanan Kullanıcılar",
+                no: "Ghostlanan Kullanıcı Yok",
+                unghost: "hayaleti kaldır",
+                unknown: "Bilinmiyor",
+                unnamedGroup: "İsimsiz Grup",
+                unknownUser: "Bilinmeyen Kullanıcı",
+                clearAll: "Tümünü Temizle",
+                noGhost: "Burada hayalet yok!",
+                clear: "Temizle"
+            },
+            option: {
+                showIndicator: {
+                    label: "Göstergeyi Göster",
+                    description: "Sunucu listesinin en üstünde hayalet sayacını gösterir."
+                },
+                showDmIcons: {
+                    label: "DM Simgelerini Göster",
+                    description: "Bireysel DM'lerin yanında hayalet simgelerini gösterir."
+                },
+                ignoreGroupDms: {
+                    label: "Grup DM'lerini Yoksay",
+                    description: "Tüm grup mesajlarını hayalet listesinin dışında tutar."
+                },
+                exemptedChannels: {
+                    label: "Muaf Tutulan Kanallar",
+                    description: "Hayalet listesine dahil edilmeyecek kanal kimliklerinin (ID) virgülle ayrılmış listesi (ID'yi kopyalamak için bir DM kanalına sağ tıklayın)."
+                },
+                ignoreBots: {
+                    label: "Botları Yoksay",
+                    description: "Botlardan gelen DM'leri görmezden gelir."
+                }
+            }
+        },
         gifCollections: {
             name: "GifCollection",
             description: "GIF koleksiyonları oluşturmanı sağlar.",

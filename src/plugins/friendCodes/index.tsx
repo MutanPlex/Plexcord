@@ -6,7 +6,7 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 import FriendCodesPanel from "./FriendCodesPanel";
@@ -14,7 +14,7 @@ import FriendCodesPanel from "./FriendCodesPanel";
 export default definePlugin({
     name: "FriendCodes",
     description: () => t(plugin.friendCodes.description),
-    authors: [Devs.HypedDomi],
+    authors: [Devs.HypedDomi, PcDevs.MutanPlex],
     patches: [
         {
             find: "#{intl::ADD_FRIEND})}),(",

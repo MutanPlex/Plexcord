@@ -10,7 +10,7 @@ import "./style.css";
 import { plugin, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { CopyIcon, NoEntrySignIcon } from "@components/Icons";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import { copyWithToast } from "@utils/discord";
 import definePlugin from "@utils/types";
 import { Tooltip, useState } from "@webpack/common";
@@ -24,7 +24,7 @@ const CheckMarkIcon = () => {
 export default definePlugin({
     name: "CopyFileContents",
     description: () => t(plugin.copyFileContents.description),
-    authors: [Devs.Obsidian, Devs.Nuckyz],
+    authors: [Devs.Obsidian, Devs.Nuckyz, PcDevs.MutanPlex],
 
     patches: [
         {

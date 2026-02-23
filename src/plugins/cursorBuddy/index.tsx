@@ -246,7 +246,7 @@ migratePluginSettings("CursorBuddy", "Oneko", "oneko");
 export default definePlugin({
     name: "CursorBuddy",
     description: () => t(plugin.cursorBuddy.description),
-    authors: [Devs.Ven, Devs.adryd, PcDevs.nexpid, PcDevs.ZcraftElite],
+    authors: [Devs.Ven, Devs.adryd, PcDevs.nexpid, PcDevs.ZcraftElite, PcDevs.MutanPlex],
     settings,
 
     start: load,

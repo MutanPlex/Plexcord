@@ -921,6 +921,14 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "Fafa",
         id: 428188716641812481n
     },
+    vei: {
+        name: "Vei",
+        id: 239414094799699968n
+    },
+    iamme: {
+        name: "i am me",
+        id: 984392761929256980n
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>

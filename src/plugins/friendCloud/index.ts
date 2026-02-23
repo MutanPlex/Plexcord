@@ -42,7 +42,7 @@ interface UserPosition {
 export default definePlugin({
     name: "FriendCloud",
     description: () => t(plugin.friendCloud.description),
-    authors: [PcDevs.Fafa],
+    authors: [PcDevs.Fafa, PcDevs.MutanPlex],
     commands: [
         {
             inputType: ApplicationCommandInputType.BUILT_IN,

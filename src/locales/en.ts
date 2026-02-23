@@ -4674,6 +4674,43 @@ const translations = {
                 }
             }
         },
+        ghosted: {
+            name: "Ghosted",
+            description: "A cute ghost will appear if you don't answer their DMs",
+            modal: {
+                title: "Ghosted Users",
+                no: "No Ghosted Users",
+                unghost: "unghost",
+                unknown: "Unknown",
+                unnamedGroup: "Unnamed Group",
+                unknownUser: "Unknown User",
+                clearAll: "Clear All",
+                noGhost: "No ghosts here!",
+                clear: "Clear"
+            },
+            option: {
+                showIndicator: {
+                    label: "Show Indicator",
+                    description: "Show the ghost counter at the top of the server list"
+                },
+                showDmIcons: {
+                    label: "Show DM Icons",
+                    description: "Show ghost icons next to individual DMs"
+                },
+                ignoreGroupDms: {
+                    label: "Ignore Group DMs",
+                    description: "Exclude all group dms from ghosting"
+                },
+                exemptedChannels: {
+                    label: "Exempted Channels",
+                    description: "Comma-separated list of channel IDs to exempt from ghosting (right-click a DM channel to copy its ID)"
+                },
+                ignoreBots: {
+                    label: "Ignore Bots",
+                    description: "Ignore DMs from bots"
+                }
+            }
+        },
         gifCollections: {
             name: "GifCollection",
             description: "Allows you to create collections of gifs",

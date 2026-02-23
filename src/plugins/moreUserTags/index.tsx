@@ -36,7 +36,7 @@ const genTagTypes = () => {
 export default definePlugin({
     name: "MoreUserTags",
     description: () => t(plugin.moreUserTags.description),
-    authors: [Devs.Cyn, Devs.TheSun, Devs.RyanCaoDev, Devs.LordElias, Devs.AutumnVN, PcDevs.Hen, PcDevs.MutanPlex],
+    authors: [Devs.Cyn, Devs.TheSun, Devs.RyanCaoDev, PcDevs.MutanPlex, Devs.LordElias, Devs.AutumnVN, PcDevs.Hen],
     dependencies: ["MemberListDecoratorsAPI", "NicknameIconsAPI", "MessageDecorationsAPI"],
     settings,
 

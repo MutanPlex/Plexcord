@@ -47,7 +47,7 @@ const EmbedContext = proxyLazyWebpack(() => React.createContext<null | Embed>(nu
 export default definePlugin({
     name: "FavouriteAnything",
     description: () => t(plugin.favouriteAnything.description),
-    authors: [Devs.nin0dev, PcDevs.davri],
+    authors: [Devs.nin0dev, PcDevs.davri, PcDevs.MutanPlex],
     patches: [
         {
             find: "static isAnimated",

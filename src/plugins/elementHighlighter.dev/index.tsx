@@ -10,7 +10,7 @@ import "./styles.css";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
-import { Devs, IS_MAC } from "@utils/constants";
+import { Devs, IS_MAC, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import { copyWithToast } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
@@ -460,7 +460,7 @@ function onToggle(e: KeyboardEvent) {
 export default definePlugin({
     name: "ElementHighlighter",
     description: () => t(plugin.elementHighlighter.description),
-    authors: [Devs.prism],
+    authors: [Devs.prism, PcDevs.MutanPlex],
     settings,
 
     start() {

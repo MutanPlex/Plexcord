@@ -12,7 +12,7 @@ import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
@@ -108,7 +108,7 @@ let original: typeof ChannelActions.selectVoiceChannel;
 export default definePlugin({
     name: "ExitSounds",
     description: () => t(plugin.exitSounds.description),
-    authors: [Devs.prism],
+    authors: [Devs.prism, PcDevs.MutanPlex],
     dependencies: ["AudioPlayerAPI"],
     settings,
 

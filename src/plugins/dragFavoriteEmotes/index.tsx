@@ -34,7 +34,7 @@ type EmojiDescriptor = {
 export default definePlugin({
     name: "DragFavoriteEmotes",
     description: () => t(plugin.dragFavoriteEmotes.description),
-    authors: [PcDevs.PWall],
+    authors: [PcDevs.PWall, PcDevs.MutanPlex],
 
     patches: [
         {

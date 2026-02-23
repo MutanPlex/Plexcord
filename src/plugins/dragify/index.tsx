@@ -169,7 +169,7 @@ const inviteCache = new Map<string, { code: string; expiresAt: number | null; ma
 export default definePlugin({
     name: "Dragify",
     description: () => t(plugin.dragify.description),
-    authors: [PcDevs.justjxke],
+    authors: [PcDevs.justjxke, PcDevs.MutanPlex],
     settings,
 
     patches: [

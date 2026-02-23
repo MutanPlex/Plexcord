@@ -8,7 +8,7 @@
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { Channel, Message } from "@plexcord/discord-types";
-import { Devs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import { sendMessage } from "@utils/discord";
 import definePlugin, { OptionType } from "@utils/types";
 
@@ -28,7 +28,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "ForwardAnywhere",
     description: () => t(plugin.forwardAnywhere.description),
-    authors: [Devs.thororen],
+    authors: [Devs.thororen, PcDevs.MutanPlex],
     settings,
     patches: [
         {
