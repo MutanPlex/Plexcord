@@ -57,7 +57,7 @@ export function RepoCard({ repo, showStars, showLanguage, variant }: RepoCardPro
                     className={cl("language-color")}
                     style={{ backgroundColor: getLanguageColor(repo.language) }}
                 />
-                <BaseText size="sm" weight="normal" className={cl("lang-name")}>{repo.language}</BaseText>
+                <BaseText size="sm" className={cl("lang-name")}>{repo.language}</BaseText>
                 {renderStars()}
             </div >
         );

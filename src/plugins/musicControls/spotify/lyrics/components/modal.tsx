@@ -80,7 +80,7 @@ export function LyricsModal({ props }: { props: ModalProps; }) {
                             </BaseText>
                         ))
                     ) : (
-                        <BaseText size="sm" weight="normal" className={cl("modal-no-lyrics")}>
+                        <BaseText size="sm" className={cl("modal-no-lyrics")}>
                             {t(plugin.musicControls.modal.player.noLyrics)}
                         </BaseText>
                     )}

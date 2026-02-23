@@ -9,7 +9,6 @@
     gap: 16px;
 }
 
-/* stylelint-disable-next-line selector-class-pattern */
 .pc-github-repos-star-icon {
     color: var(--text-status-idle);
     fill: var(--text-status-idle);
@@ -25,7 +24,7 @@
     justify-content: center;
     margin-top: 2px;
     padding-top: 12px;
-    border-top: 1px solid var(--profile-body-divider-color, var(--input-border-default));
+    border-top: 1px solid var(--profile-body-divider-color, var(--input-border-default, var(--input-border)));
 }
 
 .pc-github-repos-button,
@@ -37,7 +36,7 @@
 .pc-github-repos-card {
     padding: 8px;
     border-radius: var(--radius-xs);
-    border: 1px solid var(--profile-body-divider-color, var(--input-border-default));
+    border: 1px solid var(--profile-body-divider-color, var(--input-border-default, var(--input-border)));
 }
 
 .pc-github-repos-header {
@@ -108,7 +107,7 @@
 }
 
 .pc-github-repos-table thead {
-    border-bottom: 2px solid var(--input-border-default);
+    border-bottom: 2px solid var(--input-border-default, var(--input-border));
 }
 
 .pc-github-repos-table th {
@@ -116,7 +115,7 @@
     padding: 10px 16px;
     font-weight: 600;
     color: var(--text-strong);
-    border-bottom: 2px solid var(--input-border-default);
+    border-bottom: 2px solid var(--input-border-default, var(--input-border));
 }
 
 .pc-github-repos-table th:last-child {
@@ -124,7 +123,7 @@
 }
 
 .pc-github-repos-table tbody tr {
-    border-bottom: 1px solid var(--input-border-default);
+    border-bottom: 1px solid var(--input-border-default, var(--input-border));
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
@@ -136,7 +135,7 @@
 .pc-github-repos-table td {
     padding: 12px 16px;
     vertical-align: middle;
-    border-bottom: 1px solid var(--input-border-default);
+    border-bottom: 1px solid var(--input-border-default, var(--input-border));
     overflow: hidden;
     text-overflow: ellipsis;
 }

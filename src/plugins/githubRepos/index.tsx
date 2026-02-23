@@ -85,10 +85,11 @@ const ProfileRepositoriesTab = ErrorBoundary.wrap(
 export default definePlugin({
     name: "GitHubRepos",
     description: () => t(plugin.gitHubRepos.description),
-    authors: [PcDevs.talhakf, PcDevs.Panniku, PcDevs.MutanPlex],
+    authors: [PcDevs.talhakf, PcDevs.Panniku, PcDevs.benjii, PcDevs.MutanPlex],
     settings,
 
     patches: [
+        // User Popout
         {
             find: /onOpenUserProfileModal:\i\}\),\i/,
             replacement: {
@@ -96,13 +97,7 @@ export default definePlugin({
                 replace: "$&,$self.ProfilePopoutComponent(arguments[0])"
             }
         },
-        {
-            find: ",applicationRoleConnection:",
-            replacement: {
-                match: /user:(\i).{0,15}displayProfile:(\i).*?application\.id\)\)\}\)/,
-                replace: "$&,$self.ProfilePopoutComponent(arguments[0]),"
-            }
-        },
+        // User Profile Modal v2
         {
             find: ".MODAL_V2,onClose:",
             replacement: {

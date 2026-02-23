@@ -66,7 +66,7 @@ export function LyricsModal({ rootProps }: { rootProps: ModalProps; }) {
                             </BaseText>
                         ))
                     ) : (
-                        <BaseText size="sm" weight="normal" className={cl("modal-no-lyrics")}>{t(plugin.musicControls.modal.player.noLyrics)}</BaseText>
+                        <BaseText size="sm" className={cl("modal-no-lyrics")}>{t(plugin.musicControls.modal.player.noLyrics)}</BaseText>
                     )}
                 </div>
             </ModalContent>

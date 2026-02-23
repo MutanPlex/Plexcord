@@ -91,7 +91,7 @@ export function AddonCard({ disabled, isNew, name, infoButton, footer, author, e
                 />
             </div>
 
-            <BaseText size="sm" weight="normal" className={cl("note")}>{description}</BaseText>
+            <BaseText size="sm" className={cl("note")}>{description}</BaseText>
 
             {footer && <div className={cl("footer")}>{footer}</div>}
         </div>

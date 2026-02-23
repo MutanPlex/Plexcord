@@ -95,7 +95,7 @@ function KeybindRecorder() {
         <div className="pc-command-palette-keybind-input">
             <div className="pc-command-palette-keybind-info">
                 <BaseText size="md" weight="semibold">{t(plugin.commandPalette.option.hotkey.label)}</BaseText>
-                <BaseText size="sm" weight="normal" style={{ color: "var(--text-muted)" }}>
+                <BaseText size="sm" style={{ color: "var(--text-muted)" }}>
                     {t(plugin.commandPalette.option.hotkey.description)}
                 </BaseText>
                 {error && (
@@ -112,7 +112,7 @@ function KeybindRecorder() {
                     onClick={() => setIsListening(true)}
                 >
                     {isListening ? (
-                        <BaseText size="sm" weight="normal" style={{ color: "var(--white)", opacity: 0.8 }}>
+                        <BaseText size="sm" style={{ color: "var(--white)", opacity: 0.8 }}>
                             {t(plugin.commandPalette.option.hotkey.recording)}
                         </BaseText>
                     ) : (
