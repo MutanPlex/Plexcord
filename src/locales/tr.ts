@@ -5181,6 +5181,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        idleAutoRestart: {
+            name: "IdleAutoRestart",
+            description: "Belirlenen bir süre boyunca boşta kaldığınızda uygulamayı otomatik olarak yeniden başlatır, ancak ses kanalındayken yeniden başlatmayı engeller.",
+            option: {
+                isEnabled: {
+                    label: "Etkin",
+                    description: "Boşta kaldıktan sonra otomatik yeniden başlatmayı etkinleştirir"
+                },
+                idleMinutes: {
+                    label: "Boşta Kalma Süresi (Dakika)",
+                    description: "Yeniden başlatmadan önce geçmesi gereken hareketsizlik süresi (ses kanalında değilken)"
+                }
+            },
+            toolbox: {
+                disable: "Otomatik Yeniden Başlatmayı Devre Dışı Bırak",
+                enable: "Otomatik Yeniden Başlatmayı Etkinleştir"
+            }
+        },
         ignoreActivities: {
             name: "IgnoreActivities",
             description: "Etkinliklerin yalnızca durumunda görünmesini engeller. Kayıtlı Oyunlar ve Etkinlikler sekmelerinden hangilerinin yok sayılacağını belirleyebilir veya aşağıdaki genel ayarları kullanabilirsin.",

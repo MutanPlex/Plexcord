@@ -5177,6 +5177,24 @@ const translations = {
                 }
             }
         },
+        idleAutoRestart: {
+            name: "IdleAutoRestart",
+            description: "Automatically restarts the client after being idle for a configurable amount of time, but avoids restarting while you are in VC.",
+            option: {
+                isEnabled: {
+                    label: "Is Enabled",
+                    description: "Enable automatic restart after idle"
+                },
+                idleMinutes: {
+                    label: "Idle Minutes",
+                    description: "Minutes of inactivity before restarting (when not in VC)"
+                }
+            },
+            toolbox: {
+                disable: "Disable Idle Auto Restart",
+                enable: "Enable Idle Auto Restart"
+            }
+        },
         ignoreActivities: {
             name: "IgnoreActivities",
             description: "Ignore activities from showing up on your status ONLY. You can configure which ones are specifically ignored from the Registered Games and Activities tabs, or use the general settings below",
