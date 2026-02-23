@@ -1,10 +1,78 @@
-.pc-i-remember-you-user-header-container {
+.pc-i-remember-you-header-container {
+    display: contents;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+    flex-direction: column;
 }
 
-.pc-i-remember-you-user-header-btns {
-    display: none;
+.pc-i-remember-you-header-name {
+    margin-top: 16px;
+}
+
+.pc-i-remember-you-header-btns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 350px));
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.pc-i-remember-you-header {
+    color: var(--text-default);
+}
+
+.pc-i-remember-you-rows {
+    gap: 5px;
+    flex-direction: column;
+}
+
+.pc-i-remember-you-search {
+    margin-top: 10px;
+}
+
+.pc-i-remember-you-search-user {
+    flex-direction: column;
+    padding-top: 18px;
+}
+
+.pc-i-remember-you-user-avatar {
+    cursor: pointer;
+    margin-right: 0;
+}
+
+.pc-i-remember-you-user-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 4px;
+    align-items: flex-start;
+}
+
+.pc-i-remember-you-user-id {
+    align-self: flex-start;
+    opacity: 0.75;
+    height: min-content;
+    cursor: pointer;
+}
+
+.pc-i-remember-you-user-id:hover {
+    opacity: 1;
+}
+
+.pc-i-remember-you-user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     gap: 8px;
+    width: 100%;
+    margin-top: 0;
+}
+
+.pc-i-remember-you-user-username {
+    margin-top: 2px;
+}
+
+.pc-i-remember-you-user-tooltip {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }

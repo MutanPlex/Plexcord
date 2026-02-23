@@ -5558,7 +5558,14 @@ const translations = {
                 description: "Provides a list of users you have mentioned or replied to, or those who own the servers you belong to (user owner*), or are members of your guild",
                 empty: "It's empty right now.",
                 tooltip: "{{user}}, updated at {{updatedAtContent}}",
-                owner: "Server Owner"
+                owner: "Server Owner",
+                iRememberYou: "I Remember You"
+            },
+            context: {
+                user: "User Options",
+                copy: "Copy User ID",
+                copyToast: "User ID copied to clipboard",
+                view: "View Profile"
             },
             modal: {
                 title: "Editor",

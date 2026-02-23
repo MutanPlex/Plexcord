@@ -5562,7 +5562,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 description: "Bahsettiğin, yanıtladığın, üyesi olduğun sunucuların sahipleri (sunucu sahibi*) veya bulunduğun sunuculardaki üyelerin listesini gösterir.",
                 empty: "Şu anda boş.",
                 tooltip: "{{user}}, {{updatedAtContent}} tarihinde güncellendi",
-                owner: "Sunucu Sahibi"
+                owner: "Sunucu Sahibi",
+                iRememberYou: "Seni Hatırlıyorum"
+            },
+            context: {
+                user: "Kullanıcı Seçenekleri",
+                copy: "Kullanıcı Kimliğini Kopyala",
+                copyToast: "Kullanıcı kimliği panoya kopyalandı",
+                view: "Profili Görüntüle"
             },
             modal: {
                 title: "Düzenleyici",
