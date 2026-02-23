@@ -4852,6 +4852,21 @@ const translations = {
             name: "GifPaste",
             description: "Allows you to paste gifs directly into the chatbox"
         },
+        gifRoulette: {
+            name: "GifRoulette",
+            description: "Adds a command to send a random gif from your favourites, and a one in ten chance to ping the owner of the server",
+            command: {
+                gifRoulette: {
+                    description: "Tempt fate and send a gif"
+                }
+            },
+            option: {
+                pingOwnerChance: {
+                    label: "Ping Owner Chance",
+                    description: "If there should be a 1 in 10 change to ping the owner of the guild (oh no)"
+                }
+            }
+        },
         gitHubRepos: {
             name: "GitHubRepos",
             description: "Displays a user's public GitHub repositories in their profile",

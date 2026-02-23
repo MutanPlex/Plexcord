@@ -4856,6 +4856,21 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GifPaste",
             description: "GIF'leri doğrudan sohbet kutusuna yapıştırmana olanak tanır."
         },
+        gifRoulette: {
+            name: "GifRoulette",
+            description: "Favorilerinizden rastgele bir GIF gönderen bir komut ekler; sunucu sahibini etiketleme ihtimali %10'dur!",
+            command: {
+                gifRoulette: {
+                    description: "Şansını dene ve rastgele bir GIF gönder"
+                }
+            },
+            option: {
+                pingOwnerChance: {
+                    label: "Sunucu Sahibini Etiketleme Şansı",
+                    description: "Sunucu sahibini etiketleme ihtimalinin 10'da 1 olması durumunu ayarlar (eyvah!)"
+                }
+            }
+        },
         gitHubRepos: {
             name: "GitHubRepos",
             description: "Kullanıcının herkese açık GitHub depolarını profilinde gösterir.",
