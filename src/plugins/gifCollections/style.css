@@ -14,7 +14,7 @@
 
 .collections-sort-divider {
     margin: 10px 0;
-    border-top: 1px solid var(--input-border-default);
+    border-top: 1px solid var(--input-border-default, var(--input-border));
 }
 
 .collections-sort-description,

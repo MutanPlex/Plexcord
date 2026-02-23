@@ -18,7 +18,9 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { Devs } from "@utils/constants";
+import { isPluginEnabled } from "@api/PluginManager";
+import betterGifPicker from "@plugins/betterGifPicker";
+import { Devs, PcDevs } from "@utils/constants";
 import { insertTextIntoChatInputBox } from "@utils/discord";
 import definePlugin from "@utils/types";
 import { ExpressionPickerStore } from "@webpack/common";
@@ -26,7 +28,7 @@ import { ExpressionPickerStore } from "@webpack/common";
 export default definePlugin({
     name: "GifPaste",
     description: () => t(plugin.gifPaste.description),
-    authors: [Devs.Ven],
+    authors: [Devs.Ven, PcDevs.MutanPlex],
 
     patches: [{
         find: "handleSelectGIF=",
@@ -39,7 +41,10 @@ export default definePlugin({
     handleSelect(gif?: { url: string; }) {
         if (gif) {
             insertTextIntoChatInputBox(gif.url + " ");
-            ExpressionPickerStore.closeExpressionPicker();
+
+            if (!(isPluginEnabled(betterGifPicker.name) && betterGifPicker.settings.store.keepOpen)) {
+                ExpressionPickerStore.closeExpressionPicker();
+            }
         }
     }
 });
