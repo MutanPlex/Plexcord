@@ -8,12 +8,15 @@
 import "./styles.css";
 
 import { plugin, t } from "@api/i18n";
+import { isPluginEnabled } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { User } from "@plexcord/discord-types";
+import showMeYourName from "@plugins/showMeYourName";
 import { Devs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 import { GuildRoleStore, SelectedGuildStore, useState } from "@webpack/common";
+import { JSX } from "react";
 
 const settings = definePluginSettings({
     showAtSymbol: {
@@ -75,23 +78,26 @@ export default definePlugin({
 
     settings,
 
-    renderUsername: ErrorBoundary.wrap((props: { user: User, username: string; }) => {
-        const { user, username } = props;
+    renderUsername: ErrorBoundary.wrap(({ user, username, showMeYourNameMention }: { user: User, username: string, showMeYourNameMention: JSX.Element | null | undefined; }) => {
         const [isHovering, setIsHovering] = useState(false);
 
-        if (!user) return <>{getUsernameString(username)}</>;
+        const nameContent = isPluginEnabled(showMeYourName.name) && showMeYourNameMention
+            ? showMeYourNameMention : <>{getUsernameString(username)}</>;
 
         return (
             <span
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
+                className="vc-mentionAvatars-container"
             >
-                <img
-                    src={user.getAvatarURL(SelectedGuildStore.getGuildId(), 16, isHovering)}
-                    className="pc-mentionAvatars-icon"
-                    style={{ borderRadius: "50%" }}
-                />
-                {getUsernameString(username)}
+                {user && (
+                    <img
+                        src={user.getAvatarURL(SelectedGuildStore.getGuildId(), 16, isHovering)}
+                        className="vc-mentionAvatars-icon"
+                        style={{ borderRadius: "50%" }}
+                    />
+                )}
+                {nameContent}
             </span>
         );
     }, { noop: true }),

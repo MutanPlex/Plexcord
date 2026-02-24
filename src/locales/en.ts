@@ -5882,6 +5882,14 @@ const translations = {
                     label: "Click Timeout",
                     description: "Timeout to distinguish double/triple clicks (ms)"
                 },
+                doubleClickHoldThreshold: {
+                    label: "Double Click Hold Threshold",
+                    description: "Max hold time for double-click actions (ms). Holding longer allows text selection"
+                },
+                deferDoubleClickForTriple: {
+                    label: "Defer Double Click for Triple",
+                    description: "Delay double-click to allow triple-click actions (disables triple-click when off)"
+                },
                 selectionHoldTimeout: {
                     label: "Selection Hold Timeout",
                     description: "Timeout to allow text selection (ms)"

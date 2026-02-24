@@ -1,21 +1,9 @@
 /*
  * Plexcord, a modification for Discord's desktop app
- * Copyright (c) 2023 Vendicated and contributors
- * Copyright (c) 2025 MutanPlex
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+ * Copyright (c) 2026 Vendicated and contributors
+ * Copyright (c) 2026 MutanPlex
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
 import { plugin, t } from "@api/i18n";
 import { isPluginEnabled } from "@api/PluginManager";
@@ -26,7 +14,7 @@ import NoReplyMentionPlugin from "@plugins/noReplyMention";
 import { Devs, PcDevs } from "@utils/constants";
 import { copyWithToast, insertTextIntoChatInputBox } from "@utils/discord";
 import { Logger } from "@utils/Logger";
-import definePlugin, { OptionType } from "@utils/types";
+import definePlugin, { makeRange, OptionType } from "@utils/types";
 import { AuthenticationStore, Constants, EditMessageStore, FluxDispatcher, MessageActions, MessageTypeSets, PermissionsBits, PermissionStore, PinActions, RestAPI, Toasts, WindowStore } from "@webpack/common";
 
 type Modifier = "NONE" | "SHIFT" | "CTRL" | "ALT" | "BACKSPACE" | "DELETE";
@@ -107,7 +95,20 @@ const focusChanged = () => {
 
 let lastMouseDownTime = 0;
 const onMouseDown = () => {
-    lastMouseDownTime = Date.now();
+    const now = Date.now();
+
+    // TODO: this logic is messy but it works so eh
+    if (mouseDownCount >= 1 && now - lastMouseDownTime < settings.store.clickTimeout) {
+        if (singleClickTimeout) {
+            clearTimeout(singleClickTimeout);
+            singleClickTimeout = null;
+        }
+        doubleClickDetected = true;
+        secondMouseDownTime = now;
+    }
+
+    mouseDownCount++;
+    lastMouseDownTime = now;
 };
 
 function modifierFromKey(e: KeyboardEvent): Modifier | null {
@@ -125,6 +126,11 @@ function isModifierPressed(modifier: Modifier): boolean {
 let doubleClickTimeout: ReturnType<typeof setTimeout> | null = null;
 let singleClickTimeout: ReturnType<typeof setTimeout> | null = null;
 let pendingDoubleClickAction: (() => void) | null = null;
+let doubleClickFired = false;
+
+let mouseDownCount = 0;
+let doubleClickDetected = false;
+let secondMouseDownTime = 0;
 
 const settings = definePluginSettings({
     reactEmoji: {
@@ -213,6 +219,19 @@ const settings = definePluginSettings({
         description: () => t(plugin.messageClickActions.option.clickTimeout.description),
         type: OptionType.NUMBER,
         default: 300
+    },
+    doubleClickHoldThreshold: {
+        label: () => t(plugin.messageClickActions.option.doubleClickHoldThreshold.label),
+        description: () => t(plugin.messageClickActions.option.doubleClickHoldThreshold.description),
+        type: OptionType.NUMBER,
+        markers: makeRange(50, 500, 50),
+        default: 150
+    },
+    deferDoubleClickForTriple: {
+        label: () => t(plugin.messageClickActions.option.deferDoubleClickForTriple.label),
+        description: () => t(plugin.messageClickActions.option.deferDoubleClickForTriple.description),
+        type: OptionType.BOOLEAN,
+        default: true
     },
     selectionHoldTimeout: {
         label: () => t(plugin.messageClickActions.option.selectionHoldTimeout.label),
@@ -510,6 +529,9 @@ export default definePlugin({
             singleClickTimeout = null;
         }
         pendingDoubleClickAction = null;
+        mouseDownCount = 0;
+        doubleClickDetected = false;
+        secondMouseDownTime = 0;
     },
 
     onMessageClick(msg, channel, event) {
@@ -541,7 +563,13 @@ export default definePlugin({
         const isDoubleClick = event.detail === 2;
         const isTripleClick = event.detail === 3;
 
-        if (Date.now() - lastMouseDownTime > settings.store.selectionHoldTimeout) return;
+        if (Date.now() - lastMouseDownTime > settings.store.selectionHoldTimeout) {
+            pressedModifiers.clear();
+            mouseDownCount = 0;
+            doubleClickDetected = false;
+            secondMouseDownTime = 0;
+            return;
+        }
 
         if (singleClickTimeout) {
             clearTimeout(singleClickTimeout);
@@ -549,6 +577,12 @@ export default definePlugin({
         }
 
         if (isTripleClick) {
+            if (!settings.store.deferDoubleClickForTriple) {
+                mouseDownCount = 0;
+                doubleClickDetected = false;
+                secondMouseDownTime = 0;
+                return;
+            }
             if (doubleClickTimeout) {
                 clearTimeout(doubleClickTimeout);
                 doubleClickTimeout = null;
@@ -557,28 +591,44 @@ export default definePlugin({
 
             if (isModifierPressed(tripleClickModifier) && tripleClickAction !== "NONE") {
                 executeAction(tripleClickAction, msg, channel, event);
+                pressedModifiers.clear();
             }
+            doubleClickFired = false;
+            mouseDownCount = 0;
+            doubleClickDetected = false;
+            secondMouseDownTime = 0;
             return;
         }
 
         const canDoubleClick = (isModifierPressed(doubleClickModifier) || doubleClickModifier === "NONE") && doubleClickAction !== "NONE";
-        const canTripleClick = isModifierPressed(tripleClickModifier) && tripleClickAction !== "NONE";
+        const canTripleClick =
+            settings.store.deferDoubleClickForTriple &&
+            isModifierPressed(tripleClickModifier) &&
+            tripleClickAction !== "NONE";
+        const shouldDeferDoubleClick =
+            canDoubleClick &&
+            canTripleClick &&
+            doubleClickModifier === tripleClickModifier;
 
         if (isDoubleClick) {
+            doubleClickFired = true;
+
             if (singleClickTimeout) {
                 clearTimeout(singleClickTimeout);
                 singleClickTimeout = null;
             }
 
+            const isQuickDoubleClick = !doubleClickDetected || (Date.now() - secondMouseDownTime < settings.store.doubleClickHoldThreshold);
             const executeDoubleClick = () => {
                 if (!canSend(channel)) return;
                 if (msg.deleted === true) return;
-                if (canDoubleClick) {
+                if (canDoubleClick && isQuickDoubleClick) {
                     executeAction(doubleClickAction, msg, channel, event);
+                    pressedModifiers.clear();
                 }
             };
 
-            if (canTripleClick && canDoubleClick) {
+            if (shouldDeferDoubleClick) {
                 if (doubleClickTimeout) {
                     clearTimeout(doubleClickTimeout);
                 }
@@ -591,19 +641,34 @@ export default definePlugin({
             } else {
                 executeDoubleClick();
             }
-            event.preventDefault();
+
+            if (isQuickDoubleClick) {
+                event.preventDefault();
+            }
+
+            mouseDownCount = 0;
+            doubleClickDetected = false;
+            secondMouseDownTime = 0;
             return;
         }
 
         if (isSingleClick) {
-            const shouldExecuteSingle = isModifierPressed(singleClickModifier) && singleClickAction !== "NONE";
+            doubleClickFired = false;
+
             const executeSingleClick = () => {
-                if (shouldExecuteSingle) {
+                if (!doubleClickFired && !doubleClickDetected && isModifierPressed(singleClickModifier) && singleClickAction !== "NONE") {
                     executeAction(singleClickAction, msg, channel, event);
+                    pressedModifiers.clear();
                 }
+                mouseDownCount = 0;
+                doubleClickDetected = false;
+                secondMouseDownTime = 0;
             };
 
-            if (canDoubleClick && shouldExecuteSingle && singleClickModifier === "NONE") {
+            const canDoubleClickWithCurrentModifier =
+                doubleClickAction !== "NONE" &&
+                (doubleClickModifier === "NONE" || isModifierPressed(doubleClickModifier));
+            if (canDoubleClickWithCurrentModifier && singleClickModifier === "NONE") {
                 singleClickTimeout = setTimeout(() => {
                     executeSingleClick();
                     singleClickTimeout = null;

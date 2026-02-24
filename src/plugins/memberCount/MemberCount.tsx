@@ -31,8 +31,7 @@ export function MemberCount({ isTooltip, tooltipGuildId }: { isTooltip?: true; t
             if (!voiceStates) return 0;
 
             return Object.values(voiceStates)
-                .filter((voiceState: any) => {
-                    const { channelId } = voiceState;
+                .filter(({ channelId }) => {
                     if (!channelId) return false;
                     const channel = ChannelStore.getChannel(channelId);
                     return channel && PermissionStore.can(PermissionsBits.VIEW_CHANNEL, channel);

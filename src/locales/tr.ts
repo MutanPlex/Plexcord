@@ -5886,6 +5886,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Tıklama Zaman Aşımı",
                     description: "Çift/üçlü tıklamaları ayırt etmek için zaman aşımı (ms)"
                 },
+                doubleClickHoldThreshold: {
+                    label: "Çift Tıklama Tutma Eşiği",
+                    description: "Çift tıklama eylemleri için maksimum tutma süresi (ms). Daha uzun tutmak metin seçimi izin verir"
+                },
+                deferDoubleClickForTriple: {
+                    label: "Üçlü Tıklama İçin Çift Tıklamayı Geciktir",
+                    description: "Üçlü tıklama eylemlerini izin vermek için çift tıklamayı geciktir (kapalıysa üçlü tıklama devre dışı bırakılır)"
+                },
                 selectionHoldTimeout: {
                     label: "Seçim Tutma Zaman Aşımı",
                     description: "Metin seçimine izin vermek için zaman aşımı (ms)"
