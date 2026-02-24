@@ -6981,6 +6981,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 mobilePush: {
                     label: "Mobil Bildirimleri Sessize Al",
                     description: "Mobil bildirimleri otomatik olarak sessize al"
+                },
+                voiceChannels: {
+                    label: "Sesli Kanallar",
+                    description: "Sesli kanallarda isimleri otomatik olarak gizle"
                 }
             }
         },

@@ -6977,6 +6977,10 @@ const translations = {
                 mobilePush: {
                     label: "Mute Mobile Push Notifications",
                     description: "Mute Mobile Push Notifications automatically"
+                },
+                voiceChannels: {
+                    label: "Voice Channels",
+                    description: "Hide names in Voice channels automatically"
                 }
             }
         },
