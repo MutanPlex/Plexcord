@@ -6486,6 +6486,11 @@ const translations = {
                 }
             }
         },
+        micLoopbackTester: {
+            name: "MicLoopbackTester",
+            description: "Adds mic loopback test icon to the user panel",
+            button: "Mic Test Loopback"
+        },
         middleClickTweaks: {
             name: "MiddleClickTweaks",
             description: "Various middle click tweaks, such as with pasting and link opening.",

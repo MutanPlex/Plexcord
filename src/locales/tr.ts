@@ -6490,6 +6490,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        micLoopbackTester: {
+            name: "MicLoopbackTester",
+            description: "Kullanıcı paneline mikrofon döngü test simgesi ekler",
+            button: "Mikrofon Test Döngüsü"
+        },
         middleClickTweaks: {
             name: "MiddleClickTweaks",
             description: "Yapıştırma ve bağlantı açma gibi çeşitli orta tık (farenin tekerleği) iyileştirmeleri.",
