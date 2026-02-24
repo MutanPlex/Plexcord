@@ -8,15 +8,18 @@
 import { plugin, t } from "@api/i18n";
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
-export default definePlugin({
-    name: "NoBulletPoints",
-    description: () => t(plugin.noBulletPoints.description),
-    authors: [Devs.Samwich],
-    onBeforeMessageSend(channelId, msg) {
-        msg.content = textProcessing(msg.content);
-    },
-});
 
-function textProcessing(text: string): string {
-    return text.replace(/(^|\n)(\s*)([*+-])\s+/g, "$1$2\\$3 ");
-}
+export default definePlugin({
+    name: "NoRoleHeaders",
+    description: () => t(plugin.noRoleHeaders.description),
+    authors: [Devs.Samwich],
+    patches: [
+        {
+            find: "._areActivitiesExperimentallyHidden=(",
+            replacement: {
+                match: /return \i===\i\.\i\.UNKNOWN/,
+                replace: "return null;$&"
+            }
+        }
+    ]
+});

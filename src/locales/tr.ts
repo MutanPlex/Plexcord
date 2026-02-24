@@ -7127,6 +7127,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "NormalizeMessageLinks",
             description: "Mesaj bağlantılarından canary/ptb öneklerini kaldırır."
         },
+        noRoleHeaders: {
+            name: "NoRoleHeaders",
+            description: "Hepimiz eşitiz!! Üye listesindeki rol başlıklarını kaldırır."
+        },
         noRPC: {
             name: "NoRPC",
             description: "Discord Rich Presence'ı devre dışı bırakır."

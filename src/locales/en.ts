@@ -7123,6 +7123,10 @@ const translations = {
             name: "NormalizeMessageLinks",
             description: "Strip canary/ptb from message links"
         },
+        noRoleHeaders: {
+            name: "NoRoleHeaders",
+            description: "We are all equal!! Removes the role headers in the member list."
+        },
         noRPC: {
             name: "NoRPC",
             description: "Disables Discord Rich Presence"
