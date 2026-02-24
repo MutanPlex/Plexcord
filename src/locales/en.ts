@@ -6930,6 +6930,11 @@ const translations = {
             noGroup: "No group dms in common",
             header: "Mutual Groups"
         },
+        neverPausePreviews: {
+            name: "NeverPausePreviews",
+            description: "Prevents in-call/PiP previews (screenshare, streams, etc) from pausing even if the client loses focus",
+            about: "This plugin will cause discord to use more resources than normal"
+        },
         newGuildSettings: {
             name: "NewGuildSettings",
             description: "Automatically mute new servers and change various other settings upon joining",

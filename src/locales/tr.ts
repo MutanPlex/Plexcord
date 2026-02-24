@@ -6934,6 +6934,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             noGroup: "Ortak grup DM'i yok",
             header: "Ortak Gruplar"
         },
+        neverPausePreviews: {
+            name: "NeverPausePreviews",
+            description: "Uygulama odağını kaybetse bile arama içi/PiP önizlemelerinin (ekran paylaşımı, yayınlar vb.) duraklatılmasını engeller.",
+            about: "Bu eklenti, Discord'un normalden daha fazla kaynak tüketmesine neden olur."
+        },
         newGuildSettings: {
             name: "NewGuildSettings",
             description: "Yeni sunuculara katıldığında otomatik olarak sessize alır ve çeşitli diğer ayarları değiştirir",

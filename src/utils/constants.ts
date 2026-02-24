@@ -949,6 +949,10 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "port",
         id: 1318383159645311009n
     },
+    vappstar: {
+        name: "vappstar",
+        id: 747192967311261748n
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>
