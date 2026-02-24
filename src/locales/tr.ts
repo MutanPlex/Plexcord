@@ -5830,6 +5830,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                 meow: "Miyav"
             }
         },
+        messageBurst: {
+            name: "MessageBurst",
+            description: "Sizden önce başka biri mesaj göndermediği sürece, belirli bir süre içinde gönderilen mesajları önceki mesajınızla birleştirir.",
+            option: {
+                timePeriod: {
+                    label: "Zaman Aralığı",
+                    description: "Birleştirme süresi (saniye cinsinden)."
+                },
+                shouldMergeWithAttachment: {
+                    label: "Eklerle Birleştir",
+                    description: "Son mesajda bir ek (dosya/görsel) varsa mesajlar birleştirilsin mi?"
+                },
+                useSpace: {
+                    label: "Boşluk Kullan",
+                    description: "Birleştirme sırasında yeni satıra geçmek yerine mesajlar arasına boşluk eklenip eklenmeyeceği."
+                }
+            }
+        },
         messageClickActions: {
             name: "MessageClickActions",
             description: "Backspace tuşunu basılı tutup tıklayarak silmeyi, çift tıklayarak düzenleme veya yanıtlamayı sağlar.",
@@ -6403,6 +6421,28 @@ const translations: MatchStructure<typeof enTranslations> = {
                 title: "{{username}} bir mesaj gönderdi",
                 body: "{{locationName}} konumuna gitmek için tıkla"
             }
+        },
+        messagePeek: {
+            name: "MessagePeek",
+            description: "Direkt Mesajlar listesinde son mesajın önizlemesini ve zaman damgasını gösterir.",
+            option: {
+                hideMuted: {
+                    label: "Sessize Alınanları Gizle",
+                    description: "Sessize alınmış DM'ler ve grup sohbetleri için mesaj önizlemelerini ve zaman damgalarını gizle."
+                }
+            },
+            attachment: {
+                gif: "GIF",
+                image: "görsel",
+                video: "video",
+                file: "dosya"
+            },
+            sentGif: "bir GIF gönderdi",
+            voiceMessage: "sesli mesaj",
+            systemDM: "Resmi Discord Mesajı",
+            members: "Üyeler",
+            you: "Siz",
+            separator: ": "
         },
         messageTags: {
             name: "MessageTags",

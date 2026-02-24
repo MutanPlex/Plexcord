@@ -5826,6 +5826,24 @@ const translations = {
                 meow: "Meow"
             }
         },
+        messageBurst: {
+            name: "MessageBurst",
+            description: "Merges messages sent within a time period with your previous sent message if no one else sends a message before you.",
+            option: {
+                timePeriod: {
+                    label: "Time Period",
+                    description: "The duration of bursts (in seconds)."
+                },
+                shouldMergeWithAttachment: {
+                    label: "Merge with Attachments",
+                    description: "Should the message be merged if the last message has an attachment?"
+                },
+                useSpace: {
+                    label: "Use Space",
+                    description: "Whether to add a space between messages when merging instead of new lines."
+                }
+            }
+        },
         messageClickActions: {
             name: "MessageClickActions",
             description: "Hold Backspace and click to delete, double click to edit/reply",
@@ -6399,6 +6417,28 @@ const translations = {
                 title: "{{username}} sent a message",
                 body: "Click to jump to {{locationName}}"
             }
+        },
+        messagePeek: {
+            name: "MessagePeek",
+            description: "Shows the last message preview and timestamp in the Direct Messages list.",
+            option: {
+                hideMuted: {
+                    label: "Hide Muted",
+                    description: "Hide message previews and timestamps for muted DMs and group chats."
+                }
+            },
+            attachment: {
+                gif: "GIF",
+                image: "image",
+                video: "video",
+                file: "file"
+            },
+            sentGif: "sent a GIF",
+            voiceMessage: "voice message",
+            systemDM: "Official Discord Message",
+            members: "Members",
+            you: "You",
+            separator: ": "
         },
         messageTags: {
             name: "MessageTags",

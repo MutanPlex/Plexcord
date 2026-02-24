@@ -945,6 +945,10 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "cassie",
         id: 280411966126948353n
     },
+    port22exposed: {
+        name: "port",
+        id: 1318383159645311009n
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>
