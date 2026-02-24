@@ -21,20 +21,6 @@ interface FetchTiming {
     timestamp?: Date;
 }
 
-const TimerIcon: IconComponent = ({ height = 16, width = 16, className }) => {
-    return (
-        <svg
-            width={width}
-            height={height}
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className={className}
-        >
-            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z" />
-        </svg>
-    );
-};
-
 let currentFetch: FetchTiming | null = null;
 let currentChannelId: string | null = null;
 const channelTimings: Map<string, { time: number; timestamp: Date; }> = new Map();
@@ -91,7 +77,7 @@ const FetchTimeButton: ChatBarButtonFactory = ({ isMainChat }) => {
                 alignItems: "center",
                 gap: "4px"
             }}>
-                <TimerIcon />
+                <FetchTimeIcon />
                 <span style={{
                     fontSize: "12px",
                     color: iconColor,
@@ -101,6 +87,20 @@ const FetchTimeButton: ChatBarButtonFactory = ({ isMainChat }) => {
                 </span>
             </div>
         </ChatBarButton>
+    );
+};
+
+const FetchTimeIcon: IconComponent = ({ height = 16, width = 16, className }) => {
+    return (
+        <svg
+            width={width}
+            height={height}
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className={className}
+        >
+            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z" />
+        </svg>
     );
 };
 
@@ -157,6 +157,11 @@ export default definePlugin({
     dependencies: ["ChatInputButtonAPI"],
     settings,
 
+    chatBarButton: {
+        icon: FetchTimeIcon,
+        render: FetchTimeButton
+    },
+
     start() {
         FluxDispatcher.subscribe("CHANNEL_SELECT", handleChannelSelect);
         FluxDispatcher.subscribe("LOAD_MESSAGES_SUCCESS", handleMessageLoad);
@@ -176,10 +181,5 @@ export default definePlugin({
         currentFetch = null;
         channelTimings.clear();
         currentChannelId = null;
-    },
-
-    chatBarButton: {
-        icon: TimerIcon,
-        render: FetchTimeButton
     }
 });
