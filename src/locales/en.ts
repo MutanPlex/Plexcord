@@ -6384,6 +6384,22 @@ const translations = {
                 }
             }
         },
+        messageNotifier: {
+            name: "MessageNotifier",
+            description: "Get toasts for when chosen users send a message",
+            dm: "their dms",
+            option: {
+                users: {
+                    label: "Users",
+                    description: "Comma separated list of user ids to get message toasts for",
+                    invalidId: "{{id}} isn't a valid user id"
+                }
+            },
+            notification: {
+                title: "{{username}} sent a message",
+                body: "Click to jump to {{locationName}}"
+            }
+        },
         messageTags: {
             name: "MessageTags",
             description: "Allows you to save messages and to use them with a simple command.",

@@ -6388,6 +6388,22 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        messageNotifier: {
+            name: "MessageNotifier",
+            description: "Seçilen kullanıcılar mesaj gönderdiğinde bildirim al",
+            dm: "özel mesaj",
+            option: {
+                users: {
+                    label: "Kullanıcılar",
+                    description: "Mesaj bildirimi alınacak kullanıcı kimliklerinin (ID) virgülle ayrılmış listesi",
+                    invalidId: "{{id}} geçerli bir kullanıcı kimliği değil"
+                }
+            },
+            notification: {
+                title: "{{username}} bir mesaj gönderdi",
+                body: "{{locationName}} konumuna gitmek için tıkla"
+            }
+        },
         messageTags: {
             name: "MessageTags",
             description: "Mesajları kaydetmenizi ve basit bir komutla kullanmanızı sağlar.",
