@@ -1,8 +1,3 @@
-:root {
-    --pc-rdb-avatar-size: 40px;
-    --pc-rdb-spacing-size: 8px;
-}
-
 .pc-rdb-badge {
     vertical-align: middle;
     margin-left: 4px;
@@ -15,7 +10,7 @@
     resize: none;
     overflow: hidden;
     background: transparent;
-    border: 1px solid var(--input-border-default);
+    border: 1px solid var(--input-border-default, var(--border-muted));
     box-sizing: border-box;
 }
 
@@ -57,12 +52,12 @@
 }
 
 .pc-rdb-review {
-    padding-top: var(--pc-rdb-spacing-size) !important;
-    padding-bottom: var(--pc-rdb-spacing-size) !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
     padding-right: 32px !important;
 }
 
-.pc-rdb-review-container:hover {
+.pc-rdb-review:hover {
     background: var(--message-background-hover) !important;
     border-radius: 8px;
 }
@@ -135,10 +130,4 @@
 
 .pc-rdb-block-modal-unblock {
     cursor: pointer;
-}
-
-.pc-bite-size-rdb-button,
-.pc-bite-size-rdb-button:hover {
-    background: var(--redesign-button-overlay-alpha-background);
-    border-radius: 50%;
 }

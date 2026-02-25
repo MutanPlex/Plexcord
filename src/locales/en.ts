@@ -8402,10 +8402,17 @@ const translations = {
                 customEngineURL: {
                     label: "Custom Engine URL",
                     description: "The URL of your Engine"
+                },
+                replacementEngine: {
+                    label: "Replacement Engine",
+                    description: "Replace with a specific search engine instead of adding a menu",
+                    off: "Off",
+                    custom: "Custom Engine",
                 }
             },
             context: {
-                label: "Search Text"
+                label: "Search Text",
+                searchWith: "Search with {{name}}"
             }
         },
         replyPingControl: {
@@ -8540,6 +8547,11 @@ const translations = {
                     server: "ReviewDB Support server"
                 }
             }
+        },
+        richMagnetLinks: {
+            name: "RichMagnetLinks",
+            description: "Renders magnet links like message links",
+            unknown: "unknown filename"
         },
         roleColorEverywhere: {
             name: "RoleColorEverywhere",

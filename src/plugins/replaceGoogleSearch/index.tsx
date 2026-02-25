@@ -26,6 +26,11 @@ const DefaultEngines = {
     Startpage: "https://www.startpage.com/sp/search?query="
 } as const;
 
+const enum ReplacementEngineValue {
+    OFF = "off",
+    CUSTOM = "custom",
+}
+
 const settings = definePluginSettings({
     customEngineName: {
         label: () => t(plugin.replaceGoogleSearch.option.customEngineName.label),
@@ -38,6 +43,16 @@ const settings = definePluginSettings({
         description: () => t(plugin.replaceGoogleSearch.option.customEngineURL.description),
         type: OptionType.STRING,
         placeholder: "https://google.com/search?q="
+    },
+    replacementEngine: {
+        label: () => t(plugin.replaceGoogleSearch.option.replacementEngine.label),
+        description: () => t(plugin.replaceGoogleSearch.option.replacementEngine.description),
+        type: OptionType.SELECT,
+        options: [
+            { label: () => t(plugin.replaceGoogleSearch.option.replacementEngine.off), value: ReplacementEngineValue.OFF, default: true },
+            { label: () => t(plugin.replaceGoogleSearch.option.replacementEngine.custom), value: ReplacementEngineValue.CUSTOM },
+            ...Object.keys(DefaultEngines).map(engine => ({ label: engine, value: engine }))
+        ]
     }
 });
 
@@ -46,13 +61,31 @@ function search(src: string, engine: string) {
 }
 
 function makeSearchItem(src: string) {
-    let Engines = {};
+    const { customEngineName, customEngineURL, replacementEngine } = settings.store;
 
-    if (settings.store.customEngineName && settings.store.customEngineURL) {
-        Engines[settings.store.customEngineName] = settings.store.customEngineURL;
+    const hasCustomEngine = Boolean(customEngineName && customEngineURL);
+    const hasValidReplacementEngine = replacementEngine !== ReplacementEngineValue.OFF && !(replacementEngine === ReplacementEngineValue.CUSTOM && !hasCustomEngine);
+
+    const Engines = { ...DefaultEngines };
+
+    if (hasCustomEngine) {
+        Engines[customEngineName!] = customEngineURL;
     }
 
-    Engines = { ...Engines, ...DefaultEngines };
+    if (hasValidReplacementEngine) {
+        const name = replacementEngine === ReplacementEngineValue.CUSTOM && hasCustomEngine
+            ? customEngineName
+            : replacementEngine;
+
+        return (
+            <Menu.MenuItem
+                label={t(plugin.replaceGoogleSearch.context.searchWith, { name })}
+                key="search-custom-engine"
+                id="pc-search-custom-engine"
+                action={() => search(src, Engines[name!])}
+            />
+        );
+    }
 
     return (
         <Menu.MenuItem

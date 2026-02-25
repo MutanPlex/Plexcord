@@ -8406,10 +8406,17 @@ const translations: MatchStructure<typeof enTranslations> = {
                 customEngineURL: {
                     label: "Özel Motor URL'si",
                     description: "Arama motorunuzun URL’si"
+                },
+                replacementEngine: {
+                    label: "Yedek Arama Motoru",
+                    description: "Yedek arama motorunu belirli bir arama motoruyla değiştirir (menü ekleme yerine)",
+                    off: "Kapalı",
+                    custom: "Özel Motor",
                 }
             },
             context: {
-                label: "Metni Ara"
+                label: "Metni Ara",
+                searchWith: "{{name}} ile Ara"
             }
         },
         replyPingControl: {
@@ -8544,6 +8551,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                     server: "ReviewDB Destek Sunucusu"
                 }
             }
+        },
+        richMagnetLinks: {
+            name: "RichMagnetLinks",
+            description: "Magnet bağlantılarını, mesaj bağlantıları gibi (önizlemeli) şekilde işler",
+            unknown: "bilinmeyen dosya adı"
         },
         roleColorEverywhere: {
             name: "RoleColorEverywhere",
