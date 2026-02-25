@@ -1632,6 +1632,7 @@ export const settings = definePluginSettings({
     disableQuests: {
         type: OptionType.COMPONENT,
         component: DisableQuestsSetting,
+        label: () => t(plugin.questify.option.disableQuests.label),
         description: () => t(plugin.questify.option.disableQuests.description)
     },
     disableQuestsEverything: {
@@ -1778,6 +1779,7 @@ export const settings = definePluginSettings({
         hidden: true
     },
     questButton: {
+        label: () => t(plugin.questify.option.questButton.label),
         description: () => t(plugin.questify.option.questButton.description),
         type: OptionType.COMPONENT,
         component: QuestButtonSettings,
@@ -1860,6 +1862,7 @@ export const settings = definePluginSettings({
         hidden: true
     },
     fetchingQuests: {
+        label: () => t(plugin.questify.option.fetchingQuests.label),
         description: () => t(plugin.questify.option.fetchingQuests.description),
         type: OptionType.COMPONENT,
         component: FetchingQuestsSetting
@@ -1886,6 +1889,7 @@ export const settings = definePluginSettings({
         hidden: true
     },
     restyleQuests: {
+        label: () => t(plugin.questify.option.restyleQuests.label),
         description: () => t(plugin.questify.option.restyleQuests.description),
         type: OptionType.COMPONENT,
         component: RestyleQuestsSetting
@@ -1933,6 +1937,7 @@ export const settings = definePluginSettings({
         hidden: true
     },
     reorderQuests: {
+        label: () => t(plugin.questify.option.reorderQuests.label),
         description: () => t(plugin.questify.option.reorderQuests.description),
         type: OptionType.COMPONENT,
         default: defaultQuestOrder,

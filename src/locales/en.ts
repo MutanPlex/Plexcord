@@ -7574,6 +7574,43 @@ const translations = {
             description: "Lets you preview your message before sending it.",
             tooltip: "Preview Message"
         },
+        profileSets: {
+            name: "ProfileSets",
+            description: "Allows you to save and load different profile presets, via the Profile Section in Settings.",
+            toast: {
+                importFailed: "Failed to import profile sets. The file may be invalid.",
+            },
+            option: {
+                avatarSize: {
+                    label: "Avatar Size",
+                    description: "Avatar size in preset list"
+                }
+            },
+            modal: {
+                override: "Override",
+                merge: "Merge",
+                cancel: "Cancel",
+                timestamp: "{{formattedDate}} at {{formattedTime}}",
+                rename: "Rename",
+                update: "Update",
+                moveUp: "Move Up",
+                moveDown: "Move Down",
+                moveTo: "Move to Page 1",
+                delete: "Delete",
+                importProfiles: "Import Profiles",
+                importText: "You have {{existingCount}} existing profiles in this section. Do you want to override them or merge with imported profiles?",
+                heading: "Saved Profiles",
+                searchProfiles: "Search Profiles...",
+                profileName: "Profile Name",
+                saving: "Saving...",
+                save: "Save Profile",
+                cancelSearch: "Cancel Search",
+                search: "Search",
+                random: "Random",
+                import: "Import",
+                exportAll: "Export All"
+            }
+        },
         questify: {
             name: "Questify",
             description: "Enhance your Quest experience with a suite of features, or disable them entirely if they're not your thing.",
@@ -7729,6 +7766,7 @@ const translations = {
             },
             option: {
                 disableQuests: {
+                    label: "Disable Quests",
                     description: "Select which Quest features to disable."
                 },
                 disableQuestsEverything: {
@@ -7792,6 +7830,7 @@ const translations = {
                     description: "Show a notification when a Quest is completed automatically."
                 },
                 questButton: {
+                    label: "Quest Button",
                     description: "Show a Quest button in the server list."
                 },
                 questButtonDisplay: {
@@ -7839,6 +7878,7 @@ const translations = {
                     description: "The action to perform when right-clicking the Quest button in the server list."
                 },
                 fetchingQuests: {
+                    label: "Fetching Quests",
                     description: "Fetch Quests from Discord."
                 },
                 fetchingQuestsInterval: {
@@ -7854,6 +7894,7 @@ const translations = {
                     description: "The volume of the alert sound when new Quests are detected."
                 },
                 restyleQuests: {
+                    label: "Restyle Quests",
                     description: "Customize the appearance of Quest tiles in the Quests page."
                 },
                 restyleQuestsUnclaimed: {
@@ -7881,6 +7922,7 @@ const translations = {
                     description: "Attempt to preload the assets for the Quest tiles."
                 },
                 reorderQuests: {
+                    label: "Reorder Quests",
                     description: "Sort Quests by their status. Leave empty for default sorting. Comma-separated list must contain all of: UNCLAIMED, CLAIMED, IGNORED, EXPIRED."
                 },
                 unclaimedSubsort: {
@@ -7989,6 +8031,47 @@ const translations = {
                 ignoreBlockedAndIgnored: {
                     label: "Ignore Block And Ignored",
                     description: "Ignore messages by blocked/ignored users when navigating"
+                }
+            }
+        },
+        quickThemeSwitcher: {
+            name: "QuickThemeSwitcher",
+            description: "Quickly switch between themes using keyboard shortcuts.",
+            about: {
+                title: "Bindings",
+                description: "Use Ctrl/Cmd+Shift+Arrows to navigate (Left/Right: cycle themes, Up: enable, Down: disable).",
+                reload: "Press Ctrl/Cmd+Shift+Alt to reload the theme list."
+            },
+            modal: {
+                added: "Added {{count}} theme{{s}}",
+                removed: "Removed {{count}} theme{{s}}",
+                reloaded: "Reloaded {{themeCount}} themes",
+                addedLocal: "Added {{count}} local theme{{s}}",
+                removedLocal: "Removed {{count}} local theme{{s}}",
+            },
+            option: {
+                includeLocal: {
+                    label: "Include Local",
+                    description: "Include local themes"
+                },
+                includeOnline: {
+                    label: "Include Online",
+                    description: "Include online themes"
+                },
+                sortOrder: {
+                    label: "Sort Order",
+                    description: "Sort method",
+                    asc: "A-Z",
+                    desc: "Z-A",
+                    recent: "Recent"
+                },
+                autoRefresh: {
+                    label: "Auto Refresh",
+                    description: "Auto-refresh theme list when changes are detected"
+                },
+                showNotifications: {
+                    label: "Show Notifications",
+                    description: "Show notifications when themes are added/removed"
                 }
             }
         },

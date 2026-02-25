@@ -7578,6 +7578,43 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Mesajınızı göndermeden önce önizlemenizi sağlar.",
             tooltip: "Mesajı Önizle"
         },
+        profileSets: {
+            name: "ProfileSets",
+            description: "Profil önayarlarını kaydetmenize ve Ayarlar'daki Profil Bölümü üzerinden yüklemenize olanak tanır.",
+            toast: {
+                importFailed: "Profil önayarları içe aktarılamadı. Dosya geçersiz olabilir.",
+            },
+            option: {
+                avatarSize: {
+                    label: "Avatar Boyutu",
+                    description: "Profil önayarları listesinde avatar boyutu"
+                },
+            },
+            modal: {
+                override: "Override",
+                merge: "Merge",
+                cancel: "Cancel",
+                timestamp: "{{formattedDate}} at {{formattedTime}}",
+                rename: "Rename",
+                update: "Update",
+                moveUp: "Move Up",
+                moveDown: "Move Down",
+                moveTo: "Move to Page 1",
+                delete: "Delete",
+                importProfiles: "Import Profiles",
+                importText: "You have {{existingCount}} existing profiles in this section. Do you want to override them or merge with imported profiles?",
+                heading: "Saved Profiles",
+                searchProfiles: "Search Profiles...",
+                profileName: "Profile Name",
+                saving: "Saving...",
+                save: "Save Profile",
+                cancelSearch: "Cancel Search",
+                search: "Search",
+                random: "Random",
+                import: "Import",
+                exportAll: "Export All"
+            }
+        },
         questify: {
             name: "Questify",
             description: "Görev deneyiminizi bir dizi özellik ile geliştirin veya istediğiniz değilse tamamen devre dışı bırakın.",
@@ -7733,6 +7770,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 disableQuests: {
+                    label: "Görevleri Devre Dışı Bırak",
                     description: "Hangi Görev özelliklerini devre dışı bırakacağınızı seçin."
                 },
                 disableQuestsEverything: {
@@ -7796,6 +7834,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Bir Görev otomatik olarak tamamlandığında bildirim göster."
                 },
                 questButton: {
+                    label: "Görev Düğmesi",
                     description: "Sunucu listesinde bir Görev düğmesi göster."
                 },
                 questButtonDisplay: {
@@ -7843,6 +7882,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Sunucu listesindeki Görev düğmesine sağ tıklanınca yapılacak işlem."
                 },
                 fetchingQuests: {
+                    label: "Görevleri Getirme",
                     description: "Discord'dan Görev getir."
                 },
                 fetchingQuestsInterval: {
@@ -7858,6 +7898,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Yeni Görevler tespit edildiğinde çalınacak sesin hacmi."
                 },
                 restyleQuests: {
+                    label: "Görevleri Yeniden Biçimlendir",
                     description: "Görevler sayfasındaki Görev kutucuklarının görünümünü özelleştir."
                 },
                 restyleQuestsUnclaimed: {
@@ -7885,6 +7926,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Görev kutucukları için varlıkları önceden yüklemeyi dene."
                 },
                 reorderQuests: {
+                    label: "Görevleri Yeniden Sırala",
                     description: "Görevleri durumlarına göre sırala. Varsayılan sıralama için boş bırak. Virgülle ayrılmış liste şunların hepsini içermelidir: UNCLAIMED, CLAIMED, IGNORED, EXPIRED."
                 },
                 unclaimedSubsort: {
@@ -7993,6 +8035,47 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreBlockedAndIgnored: {
                     label: "Engellenen ve Yoksayılanları Yoksay",
                     description: "Gezinirken engellenmiş/yoksayılmış kullanıcıların mesajlarını yoksay"
+                }
+            }
+        },
+        quickThemeSwitcher: {
+            name: "QuickThemeSwitcher",
+            description: "Klavye kısayollarını kullanarak temalar arasında hızlıca geçiş yapın.",
+            about: {
+                title: "Kısayol Tuşları",
+                description: "Gezinmek için Ctrl/Cmd+Shift+Ok Tuşlarını kullanın (Sol/Sağ: Temalar arası döngü, Yukarı: Etkinleştir, Aşağı: Devre dışı bırak).",
+                reload: "Tema listesini yenilemek için Ctrl/Cmd+Shift+Alt tuşlarına basın."
+            },
+            modal: {
+                added: "{{count}} yeni tema eklendi",
+                removed: "{{count}} tema kaldırıldı",
+                reloaded: "{{themeCount}} tema yeniden yüklendi",
+                addedLocal: "{{count}} yerel tema eklendi",
+                removedLocal: "{{count}} yerel tema kaldırıldı",
+            },
+            option: {
+                includeLocal: {
+                    label: "Yerel Temaları Dahil Et",
+                    description: "Cihazınızdaki yerel temaları listeye dahil eder"
+                },
+                includeOnline: {
+                    label: "Çevrimiçi Temaları Dahil Et",
+                    description: "Çevrimiçi temaları listeye dahil eder"
+                },
+                sortOrder: {
+                    label: "Sıralama Ölçütü",
+                    description: "Sıralama yöntemi",
+                    asc: "A'dan Z'ye",
+                    desc: "Z'den A'ya",
+                    recent: "En Son"
+                },
+                autoRefresh: {
+                    label: "Otomatik Yenile",
+                    description: "Değişiklik algılandığında tema listesini otomatik olarak yeniler"
+                },
+                showNotifications: {
+                    label: "Bildirimleri Göster",
+                    description: "Temalar eklendiğinde veya kaldırıldığında bildirim gösterir"
                 }
             }
         },
