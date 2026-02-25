@@ -56,8 +56,8 @@ export default function UserModal({ item, user, sounds, closeModal }: { item: So
                 />
                 <Flex justifyContent="space-between" flexDirection="column" style={{ gap: "7px", height: "68px" }}>
                     <BaseText size="md" weight="bold" style={{ height: "20px" }}>{item.soundId}</BaseText>
-                    <BaseText size="md" weight="normal">{t(plugin.soundBoardLogger.modal.played, { time: currentUser.plays.length, s: currentUser.plays.length === 1 ? "" : "s" })}</BaseText>
-                    <BaseText size="md" weight="normal">{t(plugin.soundBoardLogger.modal.last)} <Timestamp timestamp={new Date(moment(currentUser.plays.at(-1)).toDate())} /></BaseText>
+                    <BaseText size="md">{t(plugin.soundBoardLogger.modal.played, { time: currentUser.plays.length, s: currentUser.plays.length === 1 ? "" : "s" })}</BaseText>
+                    <BaseText size="md">{t(plugin.soundBoardLogger.modal.last)} <Timestamp timestamp={new Date(moment(currentUser.plays.at(-1)).toDate())} /></BaseText>
                 </Flex>
             </Flex>
             <div className={classes(cl("also-played"), Margins.bottom8)}>

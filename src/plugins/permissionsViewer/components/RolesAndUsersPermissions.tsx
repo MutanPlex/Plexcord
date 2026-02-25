@@ -89,7 +89,7 @@ function RolesAndUsersPermissionsComponent({ permissions, guild, modalProps, hea
             <ModalContent className={cl("modal-content")}>
                 {!selectedItem && (
                     <div className={cl("modal-no-perms")}>
-                        <BaseText size="lg" weight="normal">{t(plugin.permissionsViewer.modal.noPermissions)}</BaseText>
+                        <BaseText size="lg">{t(plugin.permissionsViewer.modal.noPermissions)}</BaseText>
                     </div>
                 )}
 
@@ -147,7 +147,7 @@ function RolesAndUsersPermissionsComponent({ permissions, guild, modalProps, hea
                                                     src={user.getAvatarURL(void 0, void 0, false)}
                                                 />
                                             )}
-                                            <BaseText size="md" weight="normal" className={cl("modal-list-item-text")}>
+                                            <BaseText size="md" className={cl("modal-list-item-text")}>
                                                 {
                                                     permission.type === PermissionOverwriteType.ROLE
                                                         ? role?.name ?? "Unknown Role"
@@ -187,7 +187,7 @@ function RolesAndUsersPermissionsComponent({ permissions, guild, modalProps, hea
                                             return PermissionDefaultIcon();
                                         })()}
                                     </div>
-                                    <BaseText size="md" weight="normal">{guildPermissionSpecMap[String(bit)].title}</BaseText>
+                                    <BaseText size="md">{guildPermissionSpecMap[String(bit)].title}</BaseText>
 
                                     <Tooltip text={
                                         (() => {

@@ -6993,21 +6993,45 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Plexcord’a yeni eklentiler eklendiğinde sizi bilgilendiren yardımcı araç",
             modal: {
                 title: "Yeni Eklentiler ve Ayarlar",
+                description: "Son ziyaretinizden bu yana yeni eklentiler ve ayarlar eklenmiştir. Lütfen aşağıda yeni eklenenleri inceleyin.",
                 tooltip: "Bu oturum için kapat",
-                dontShowAgain: "Bir daha gösterme"
+                dontShowAgain: "Bir daha gösterme",
+                restartRequired: "Aşağıdaki eklentiler yeniden başlatma gerektiriyor",
+                restart: "Yeniden Başlat",
+                continue: "Devam Et"
             }
+        },
+        noAppsAllowed: {
+            name: "NoAppsAllowed",
+            description: "Botların Bot etiketini geri getirir"
         },
         noBlockedMessages: {
             name: "NoBlockedMessages",
-            description: "Sohbetten engellenmiş/yok sayılmış tüm mesajları tamamen gizler",
+            description: "Engellenmiş/yok sayılmış tüm mesajları sohbetten tamamen gizler",
             option: {
-                ignoreMessages: {
-                    label: "Mesajları Yoksay",
-                    description: "Engellenmiş ve (etkinse) yok sayılmış kullanıcılardan gelen mesajları tamamen yok sayar"
+                alsoHideIgnoredUsers: {
+                    label: "Yok Sayılan Kullanıcıları da Gizle",
+                    description: "Yok sayılan kullanıcılardan gelen mesajları da gizle."
                 },
-                applyToIgnoredUsers: {
-                    label: "Yok Sayılmış Kullanıcılara Uygula",
-                    description: "Ek olarak 'yok sayılmış' kullanıcılara da uygular"
+                disableNotifications: {
+                    label: "Bildirimleri Devre Dışı Bırak",
+                    description: "Engellenen kullanıcılar için yeni mesaj bildirimlerini gizle. Eğer aşağıdaki 'Varsayılan Kullanıcı Gizleme' özelliği etkinse ve bildirimi tetikleyen kullanıcı 'İstisna Kullanıcılar' listesinde değilse her zaman geçerli olur."
+                },
+                allowAutoModMessages: {
+                    label: "AutoMod Mesajlarına İzin Ver",
+                    description: "AutoMod tarafından gönderilen mesajların filtrelenmeden geçmesine izin ver."
+                },
+                hideBlockedUserReplies: {
+                    label: "Engellenen Kullanıcı Yanıtlarını Gizle",
+                    description: "Daha önce katıldığınız başlıklardaki (thread) engellenmiş kullanıcılardan gelen mesajları gizle."
+                },
+                defaultHideUsers: {
+                    label: "Varsayılan Kullanıcı Gizleme",
+                    description: "Etkinleştirilirse, engellenen kullanıcılardan gelen mesajlar tamamen gizlenir ve istisna listesindeki kullanıcı kimliklerinden gelen mesajlar ise bunun yerine daraltılır (varsayılan Discord davranışı). Devre dışı bırakılırsa, engellenen kullanıcıların mesajları daraltılır ve istisna listesindeki kullanıcı kimliklerinden gelen mesajlar tamamen gizlenir."
+                },
+                overrideUsers: {
+                    label: "İstisna Kullanıcılar",
+                    description: "Yukarıda seçilen varsayılan davranış yerine, gizlenecek veya daraltılacak kullanıcı kimliklerinin (ID) virgülle ayrılmış listesi."
                 }
             }
         },
@@ -7512,6 +7536,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showPluginMenu: {
                     label: "Eklenti Menüsünü Göster",
                     description: "Plexcord Araç Kutusunda eklentiler menüsünü göster"
+                }
+            }
+        },
+        polishWording: {
+            name: "PolishWording",
+            description: "Mesajlarınızın daha hoş görünmesi ve daha iyi bir dilbilgisine sahip olması için ufak düzenlemeler yapar. Ayarlara göz atın",
+            option: {
+                quickDisable: {
+                    label: "Hızlı Devre Dışı Bırak",
+                    description: "Hızlı devre dışı bırakma. Uygulamayı yeniden başlatmaya gerek kalmadan mesaj düzenlemeyi kapatır."
+                },
+                blockedWords: {
+                    label: "Engellenen Kelimeler",
+                    description: "Büyük harfe çevrilmeyecek kelimeler (virgülle ayırın)."
+                },
+                fixApostrophes: {
+                    label: "Kesme İşaretlerini Düzelt",
+                    description: "Kısaltmaların kesme işareti içerdiğinden emin olur."
+                },
+                expandContractions: {
+                    label: "Kısaltmaları Aç",
+                    description: "Kısaltılmış kelimeleri açık hallerine getirir (Don't -> Do not gibi)."
+                },
+                fixCapitalization: {
+                    label: "Büyük Harf Düzenleme",
+                    description: "Cümlelerin büyük harfle başlamasını sağlar."
+                },
+                fixPunctuation: {
+                    label: "Noktalama İşaretlerini Düzelt",
+                    description: "Noktalama işaretlerinin etrafındaki boşlukları düzenler."
+                },
+                fixPunctuationFrequency: {
+                    label: "Noktalama İşareti Sıklığı",
+                    description: "Cümle sonuna nokta koyma sıklığı yüzdesi (bu özellik bazı insanları oldukça rahatsız edebilir).",
                 }
             }
         },

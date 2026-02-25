@@ -6989,21 +6989,45 @@ const translations = {
             description: "Utility that notifies you when new plugins are added to Plexcord",
             modal: {
                 title: "New Plugins and Settings",
+                description: "New plugins and settings have been added since your last visit. Please review the new additions below.",
                 tooltip: "Dismiss for this session",
-                dontShowAgain: "Don't show this again"
+                dontShowAgain: "Don't show this again",
+                restartRequired: "Restart required to apply changes",
+                restart: "Restart",
+                continue: "Continue"
             }
+        },
+        noAppsAllowed: {
+            name: "NoAppsAllowed",
+            description: "Returns the bot's tag back to its original form"
         },
         noBlockedMessages: {
             name: "NoBlockedMessages",
             description: "Hides all blocked/ignored messages from chat completely",
             option: {
-                ignoreMessages: {
-                    label: "Ignore Messages",
-                    description: "Completely ignores incoming messages from blocked and ignored (if enabled) users"
+                alsoHideIgnoredUsers: {
+                    label: "Also Hide Ignored Users",
+                    description: "Also hide messages from ignored users."
                 },
-                applyToIgnoredUsers: {
-                    label: "Apply to Ignored Users",
-                    description: "Additionally apply to 'ignored' users"
+                disableNotifications: {
+                    label: "Disable Notifications",
+                    description: "Hide new message notifications for blocked users. Always true if 'Default Hide Users' is enabled below and the user triggering the notification is not exempted in 'Override Users'."
+                },
+                allowAutoModMessages: {
+                    label: "Allow AutoMod Messages",
+                    description: "Allow messages sent by AutoMod to bypass filtering."
+                },
+                hideBlockedUserReplies: {
+                    label: "Hide Blocked User Replies",
+                    description: "Hide messages from blocked users in threads if you have participated in the thread."
+                },
+                defaultHideUsers: {
+                    label: "Default Hide Users",
+                    description: "If enabled, messages from blocked users will be completely hidden and any messages from user IDs in the override list will be collapsed (default Discord behavior) instead. If disabled, messages from blocked users will be collapsed and any messages from user IDs in the override list will be completely hidden instead."
+                },
+                overrideUsers: {
+                    label: "Override Users",
+                    description: "Comma separated list of user IDs which will be hidden or collapsed instead of the default behavior selected above."
                 }
             }
         },
@@ -7508,6 +7532,40 @@ const translations = {
                 showPluginMenu: {
                     label: "Show Plugin Menu",
                     description: "Show the plugin menu in the Plexcord Toolbox"
+                }
+            }
+        },
+        polishWording: {
+            name: "PolishWording",
+            description: "Tweaks your messages to make them look nicer and have better grammar. See settings",
+            option: {
+                quickDisable: {
+                    label: "Quick Disable",
+                    description: "Quick disable. Turns off message modifying without requiring a client reload."
+                },
+                blockedWords: {
+                    label: "Blocked Words",
+                    description: "Words that will not be capitalized (comma separated)."
+                },
+                fixApostrophes: {
+                    label: "Fix Apostrophes",
+                    description: "Ensure contractions contain apostrophes."
+                },
+                expandContractions: {
+                    label: "Expand Contractions",
+                    description: "Expand contractions"
+                },
+                fixCapitalization: {
+                    label: "Fix Capitalization",
+                    description: "Capitalize sentences."
+                },
+                fixPunctuation: {
+                    label: "Fix Punctuation",
+                    description: "Fix spacing around punctuation."
+                },
+                fixPunctuationFrequency: {
+                    label: "Fix Punctuation Frequency",
+                    description: "Percent period frequency (this majorly annoys some people).",
                 }
             }
         },

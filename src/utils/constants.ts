@@ -953,6 +953,10 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
         name: "vappstar",
         id: 747192967311261748n
     },
+    WKoA: {
+        name: "WKoA",
+        id: 724416180097384498n
+    },
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>

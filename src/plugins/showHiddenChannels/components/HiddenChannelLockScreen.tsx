@@ -167,7 +167,7 @@ function HiddenChannelLockScreen({ channel }: { channel: Channel; }) {
                 </div>
 
                 {(!channel.isGuildVoice() && !channel.isGuildStageVoice()) && (
-                    <BaseText size="lg" weight="normal">
+                    <BaseText size="lg">
                         {t(plugin.showHiddenChannels.modal.canNotSee, { type: channel.isForumChannel() ? t(plugin.showHiddenChannels.modal.posts) : t(plugin.showHiddenChannels.modal.messages) })}
                         {channel.isForumChannel() && topic && topic.length > 0 && " " + t(plugin.showHiddenChannels.modal.guidelines)}
                     </BaseText>
@@ -180,46 +180,46 @@ function HiddenChannelLockScreen({ channel }: { channel: Channel; }) {
                 )}
 
                 {lastMessageId &&
-                    <BaseText size="md" weight="normal">
+                    <BaseText size="md">
                         {t(plugin.showHiddenChannels.modal.lastCreated, { type: channel.isForumChannel() ? t(plugin.showHiddenChannels.modal.post) : t(plugin.showHiddenChannels.modal.message) })}
                         <Timestamp timestamp={new Date(SnowflakeUtils.extractTimestamp(lastMessageId))} />
                     </BaseText>
                 }
                 {lastPinTimestamp &&
-                    <BaseText size="md" weight="normal">{t(plugin.showHiddenChannels.modal.lastPin)} <Timestamp timestamp={new Date(lastPinTimestamp)} /></BaseText>
+                    <BaseText size="md">{t(plugin.showHiddenChannels.modal.lastPin)} <Timestamp timestamp={new Date(lastPinTimestamp)} /></BaseText>
                 }
                 {(rateLimitPerUser ?? 0) > 0 &&
-                    <BaseText size="md" weight="normal">{t(plugin.showHiddenChannels.modal.slowmode)} {formatDuration(rateLimitPerUser!, "seconds")}</BaseText>
+                    <BaseText size="md">{t(plugin.showHiddenChannels.modal.slowmode)} {formatDuration(rateLimitPerUser!, "seconds")}</BaseText>
                 }
                 {(defaultThreadRateLimitPerUser ?? 0) > 0 &&
-                    <BaseText size="md" weight="normal">
+                    <BaseText size="md">
                         {t(plugin.showHiddenChannels.modal.threadSlowmode)} {formatDuration(defaultThreadRateLimitPerUser!, "seconds")}
                     </BaseText>
                 }
                 {((channel.isGuildVoice() || channel.isGuildStageVoice()) && bitrate != null) &&
-                    <BaseText size="md" weight="normal">{t(plugin.showHiddenChannels.modal.bitrate)} {bitrate} bits</BaseText>
+                    <BaseText size="md">{t(plugin.showHiddenChannels.modal.bitrate)} {bitrate} bits</BaseText>
                 }
                 {rtcRegion !== undefined &&
-                    <BaseText size="md" weight="normal">{t(plugin.showHiddenChannels.modal.region)} {rtcRegion ?? t(plugin.showHiddenChannels.modal.automatic)}</BaseText>
+                    <BaseText size="md">{t(plugin.showHiddenChannels.modal.region)} {rtcRegion ?? t(plugin.showHiddenChannels.modal.automatic)}</BaseText>
                 }
                 {(channel.isGuildVoice() || channel.isGuildStageVoice()) &&
-                    <BaseText size="md" weight="normal">{t(plugin.showHiddenChannels.modal.videoQuality)} {getVideoQualityName(videoQualityMode ?? VideoQualityMode.AUTO)}</BaseText>
+                    <BaseText size="md">{t(plugin.showHiddenChannels.modal.videoQuality)} {getVideoQualityName(videoQualityMode ?? VideoQualityMode.AUTO)}</BaseText>
                 }
                 {(defaultAutoArchiveDuration ?? 0) > 0 &&
-                    <BaseText size="md" weight="normal">
+                    <BaseText size="md">
                         {t(plugin.showHiddenChannels.modal.inactiveArchiveDuration, { type: channel.isForumChannel() ? t(plugin.showHiddenChannels.modal.posts) : t(plugin.showHiddenChannels.modal.threads) })}
                         {" " + formatDuration(defaultAutoArchiveDuration!, "minutes")}
                     </BaseText>
                 }
                 {defaultForumLayout != null &&
-                    <BaseText size="md" weight="normal">{t(plugin.showHiddenChannels.modal.defaultLayout)} {getForumLayoutName(defaultForumLayout)}</BaseText>
+                    <BaseText size="md">{t(plugin.showHiddenChannels.modal.defaultLayout)} {getForumLayoutName(defaultForumLayout)}</BaseText>
                 }
                 {defaultSortOrder != null &&
-                    <BaseText size="md" weight="normal">{t(plugin.showHiddenChannels.modal.defaultSort)} {getSortOrderName(defaultSortOrder)}</BaseText>
+                    <BaseText size="md">{t(plugin.showHiddenChannels.modal.defaultSort)} {getSortOrderName(defaultSortOrder)}</BaseText>
                 }
                 {defaultReactionEmoji != null &&
                     <div className={cl("default-emoji-container")}>
-                        <BaseText size="md" weight="normal">{t(plugin.showHiddenChannels.modal.defaultReaction)}</BaseText>
+                        <BaseText size="md">{t(plugin.showHiddenChannels.modal.defaultReaction)}</BaseText>
                         {Parser.defaultRules[defaultReactionEmoji.emojiName ? "emoji" : "customEmoji"].react({
                             name: defaultReactionEmoji.emojiName
                                 ? EmojiParser.convertSurrogateToName(defaultReactionEmoji.emojiName)
@@ -233,7 +233,7 @@ function HiddenChannelLockScreen({ channel }: { channel: Channel; }) {
                     </div>
                 }
                 {channel.hasFlag(ChannelFlags.REQUIRE_TAG) &&
-                    <BaseText size="md" weight="normal">{t(plugin.showHiddenChannels.modal.requireTag)}</BaseText>
+                    <BaseText size="md">{t(plugin.showHiddenChannels.modal.requireTag)}</BaseText>
                 }
                 {availableTags && availableTags.length > 0 &&
                     <div className={cl("tags-container")}>

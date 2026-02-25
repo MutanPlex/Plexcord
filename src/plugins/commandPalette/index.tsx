@@ -99,7 +99,7 @@ function KeybindRecorder() {
                     {t(plugin.commandPalette.option.hotkey.description)}
                 </BaseText>
                 {error && (
-                    <BaseText size="xs" weight="normal" className="pc-command-palette-keybind-conflict">
+                    <BaseText size="xs" className="pc-command-palette-keybind-conflict">
                         {error}
                     </BaseText>
                 )}

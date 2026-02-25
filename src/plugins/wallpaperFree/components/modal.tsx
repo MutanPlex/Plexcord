@@ -23,7 +23,7 @@ export function SetWallpaperModal({ props, onSelect, initialUrl }: Props) {
     return (
         <ModalRoot {...props} size={ModalSize.SMALL}>
             <ModalHeader>
-                <BaseText size="lg" weight="normal" style={{ marginBottom: 8 }}>
+                <BaseText size="lg" style={{ marginBottom: 8 }}>
                     {t(plugin.wallpaperFree.modal.set)}
                 </BaseText>
             </ModalHeader>

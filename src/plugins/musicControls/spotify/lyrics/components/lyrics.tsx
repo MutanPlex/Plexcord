@@ -45,7 +45,7 @@ function LyricsDisplay({ scroll = true }: { scroll?: boolean; }) {
         >
             {currentLyrics ? currentLyrics.map((line, i) => (
                 <div ref={lyricRefs[i]} key={i}>
-                    <BaseText size={currLrcIndex === i ? "sm" : "xs"} weight="normal" className={makeClassName(i)}>
+                    <BaseText size={currLrcIndex === i ? "sm" : "xs"} className={makeClassName(i)}>
                         {line.text || NoteSvg()}
                     </BaseText>
                 </div>

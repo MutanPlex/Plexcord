@@ -141,7 +141,7 @@ function SettingsAboutComponent() {
                     <ColorPicker
                         color={color1}
                         label={
-                            <BaseText size="xs" weight="normal" style={{ marginTop: "4px" }}>
+                            <BaseText size="xs" style={{ marginTop: "4px" }}>
                                 {t(plugin.fakeProfileThemes.modal.primary)}
                             </BaseText>
                         }
@@ -152,7 +152,7 @@ function SettingsAboutComponent() {
                     <ColorPicker
                         color={color2}
                         label={
-                            <BaseText size="xs" weight="normal" style={{ marginTop: "4px" }}>
+                            <BaseText size="xs" style={{ marginTop: "4px" }}>
                                 {t(plugin.fakeProfileThemes.modal.accent)}
                             </BaseText>
                         }

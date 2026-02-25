@@ -435,7 +435,7 @@ function PluginSettings() {
                     <div className={cl("grid")}>
                         {pluginList.length
                             ? pluginList
-                            : <BaseText size="md" weight="normal">{t(plugins.search.noCriteria)}</BaseText>
+                            : <BaseText size="md">{t(plugins.search.noCriteria)}</BaseText>
                         }
                     </div>
                 )
@@ -450,7 +450,7 @@ function PluginSettings() {
             <div className={cl("grid")}>
                 {requiredPlugins.length
                     ? requiredPlugins
-                    : <BaseText size="md" weight="normal">{t(plugins.search.noCriteria)}</BaseText>
+                    : <BaseText size="md">{t(plugins.search.noCriteria)}</BaseText>
                 }
             </div>
         </SettingsTab >

@@ -17,29 +17,32 @@ import { PluginDependencyList } from "@components/settings/tabs/plugins";
 import { PluginCard } from "@components/settings/tabs/plugins/PluginCard";
 import { ChangeList } from "@utils/ChangeList";
 import { classNameFactory } from "@utils/css";
-import { classes, Margins } from "@utils/index";
-import { closeModal, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
+import { CloseButton, closeModal, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { useForceUpdater } from "@utils/react";
 import { findComponentByCodeLazy } from "@webpack";
-import { React, Tooltip, useMemo } from "@webpack/common";
-import { JSX } from "react";
+import { Tooltip, useMemo } from "@webpack/common";
+import { ReactNode } from "react";
 
 import Plugins from "~plugins";
 
 import { getNewPlugins, getNewSettings, KnownPluginSettingsMap, writeKnownSettings } from "./knownSettings";
 
-const cl = classNameFactory("pc-plugins-");
+const cl = classNameFactory("pc-new-plugins-");
 
 const Checkbox = findComponentByCodeLazy('"data-toggleable-component":"checkbox');
 
 let hasSeen = false;
 
-// Most of this was stolen from PluginSettings directly.
+interface ModalComponentProps {
+    modalProps: ModalProps;
+    newPlugins: Set<string>;
+    newSettings: KnownPluginSettingsMap;
+}
 
-export function NewPluginsModal({ modalProps, newPlugins, newSettings }: { modalProps: ModalProps; newPlugins: Set<string>; newSettings: KnownPluginSettingsMap; }) {
+function NewPluginsModal({ modalProps, newPlugins, newSettings }: ModalComponentProps) {
     const settings = useSettings();
     const changes = useMemo(() => new ChangeList<string>(), []);
-    let updateContinueButton = () => { };
+    const forceUpdate = useForceUpdater();
 
     const depMap = useMemo(() => {
         const o = {} as Record<string, string[]>;
@@ -57,22 +60,26 @@ export function NewPluginsModal({ modalProps, newPlugins, newSettings }: { modal
 
     const getName = (p: any) => typeof p.name === "function" ? p.name() : p.name;
 
-    const mapPlugins = (array: string[]) => array.map(pn => Plugins[pn])
-        .sort((a, b) => getName(a).localeCompare(getName(b)));
+    const sortedPlugins = useMemo(() => {
+        const mapPlugins = (array: string[]) => array.map(pn => Plugins[pn]).sort((a, b) => getName(a).localeCompare(getName(b)));
+        return [
+            ...mapPlugins([...newPlugins]),
+            ...mapPlugins([...newSettings.keys()].filter(p => !newPlugins.has(p)))
+        ];
+    }, []);
 
-    const sortedPlugins = useMemo(() => [
-        ...mapPlugins([...newPlugins]),
-        ...mapPlugins([...newSettings.keys()].filter(p => !newPlugins.has(p)))
-    ], []);
+    const onRestartNeeded = (name: string) => {
+        changes.handleChange(name);
+        forceUpdate();
+    };
 
-    const pluginCards = [] as JSX.Element[];
-    const requiredPlugins = [] as JSX.Element[];
+    const pluginCards: ReactNode[] = [];
+    const requiredPluginCards: ReactNode[] = [];
 
     for (const p of sortedPlugins) {
         const pluginName = getName(p) as string;
 
-        if (p.hidden)
-            continue;
+        if (p.hidden) continue;
 
         const isRequired = p.required || depMap[pluginName]?.some(d => settings.plugins[d].enabled);
 
@@ -81,19 +88,15 @@ export function NewPluginsModal({ modalProps, newPlugins, newSettings }: { modal
                 ? t(plugins.required.this)
                 : <PluginDependencyList deps={depMap[pluginName]?.filter(d => settings.plugins[d].enabled)} />;
 
-            requiredPlugins.push(
+            requiredPluginCards.push(
                 <Tooltip text={tooltipText} key={pluginName}>
                     {({ onMouseLeave, onMouseEnter }) => (
                         <PluginCard
                             onMouseLeave={onMouseLeave}
                             onMouseEnter={onMouseEnter}
-                            onRestartNeeded={name => {
-                                changes.handleChange(name);
-                                updateContinueButton();
-                            }}
+                            onRestartNeeded={onRestartNeeded}
                             disabled={true}
                             plugin={p}
-                            key={pluginName}
                             isNew={newPlugins.has(pluginName)}
                         />
                     )}
@@ -102,10 +105,7 @@ export function NewPluginsModal({ modalProps, newPlugins, newSettings }: { modal
         } else {
             pluginCards.push(
                 <PluginCard
-                    onRestartNeeded={name => {
-                        changes.handleChange(name);
-                        updateContinueButton();
-                    }}
+                    onRestartNeeded={onRestartNeeded}
                     disabled={false}
                     plugin={p}
                     key={pluginName}
@@ -115,35 +115,63 @@ export function NewPluginsModal({ modalProps, newPlugins, newSettings }: { modal
         }
     }
 
-    return <ModalRoot {...modalProps} size={ModalSize.MEDIUM} >
-        <ModalHeader>
-            <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>{t(plugin.newPluginsManager.modal.title)} ({[...pluginCards, ...requiredPlugins].length})</BaseText>
-            <Tooltip text={t(plugin.newPluginsManager.modal.tooltip)}>
-                {tooltipProps =>
-                    <div {...tooltipProps}>
-                        <ModalCloseButton
-                            onClick={modalProps.onClose}
-                            className={classes(cl("close"), "pc-newPluginsManager-close")}
-                        />
-                    </div>
-                }
-            </Tooltip>
-        </ModalHeader>
-        <ModalContent>
-            <div className={cl("grid")}>
-                {[...pluginCards, ...requiredPlugins]}
-            </div>
-        </ModalContent>
-        <ModalFooter className={cl("new-plugins-footer")}>
-            <Flex flexDirection="row-reverse">
-                <ContinueButton
-                    close={modalProps.onClose}
-                    changes={changes}
-                    callback={(v: () => void) => updateContinueButton = v}
-                />
-            </Flex>
-            <Flex flexDirection="row">
-                <div className="pc-newPluginsManager-disable-wrapper">
+    const totalCount = pluginCards.length + requiredPluginCards.length;
+
+    const handleContinue = async () => {
+        await writeKnownSettings();
+        if (changes.hasChanges) {
+            location.reload();
+        } else {
+            modalProps.onClose();
+        }
+    };
+
+    return (
+        <ModalRoot {...modalProps} size={ModalSize.MEDIUM}>
+            <ModalHeader separator={false} className={cl("header")}>
+                <div className={cl("header-content")}>
+                    <BaseText size="lg" weight="semibold" style={{ flexGrow: 1 }}>
+                        {t(plugin.newPluginsManager.modal.title)} ({totalCount})
+                    </BaseText>
+                    <BaseText size="sm" className={cl("description")}>
+                        {t(plugin.newPluginsManager.modal.description)}
+                    </BaseText>
+                </div>
+                <div className={cl("header-trailing")}>
+                    <CloseButton onClick={modalProps.onClose} />
+                </div>
+            </ModalHeader>
+
+            <ModalContent>
+                <div className={cl("grid")}>
+                    {pluginCards}
+                    {requiredPluginCards}
+                </div>
+            </ModalContent>
+
+            <ModalFooter>
+                <Flex className={cl("footer")}>
+                    <Tooltip
+                        text={
+                            <>
+                                {t(plugin.newPluginsManager.modal.restartRequired)}
+                                <ul className={cl("restart-list")}>
+                                    {changes.map(p => <li key={p}>{p}</li>)}
+                                </ul>
+                            </>
+                        }
+                        shouldShow={changes.hasChanges}
+                    >
+                        {tooltipProps => (
+                            <Button
+                                {...tooltipProps}
+                                onClick={handleContinue}
+                            >
+                                {changes.hasChanges ? t(plugin.newPluginsManager.modal.restart) : t(plugin.newPluginsManager.modal.continue)}
+                            </Button>
+                        )}
+                    </Tooltip>
+
                     <Checkbox
                         type="inverted"
                         value={!settings?.plugins?.NewPluginsManager?.enabled}
@@ -153,39 +181,10 @@ export function NewPluginsModal({ modalProps, newPlugins, newSettings }: { modal
                     >
                         <BaseText>{t(plugin.newPluginsManager.modal.dontShowAgain)}</BaseText>
                     </Checkbox>
-                </div>
-            </Flex>
-        </ModalFooter>
-    </ModalRoot>;
-}
-
-function ContinueButton(props: { callback: (update: () => void) => void; changes: ChangeList<string>; close: () => any; }) {
-    const update = useForceUpdater();
-    props.callback(update);
-    return <Tooltip
-        tooltipClassName="pc-newPluginsManager-restart-tooltip"
-        text={<>
-            {t(plugins.restart.following)}
-            <div className={Margins.bottom8} />
-            <ul className="pc-newPluginsManager-restart-list">
-                {props.changes.map(p => <li key={p}>{p}</li>)}
-            </ul>
-        </>}
-        shouldShow={props.changes.hasChanges}
-    >
-        {tooltipProps =>
-            <Button
-                {...tooltipProps}
-                variant="positive"
-                onClick={async () => {
-                    await writeKnownSettings();
-                    props.changes.hasChanges ? location.reload() : props.close();
-                }}
-            >
-                {props.changes.hasChanges ? t(plugins.restart.button.restart) : t(plugins.restart.button.later)}
-            </Button>
-        }
-    </Tooltip>;
+                </Flex>
+            </ModalFooter>
+        </ModalRoot>
+    );
 }
 
 export async function openNewPluginsModal() {
@@ -193,12 +192,14 @@ export async function openNewPluginsModal() {
     const newSettings = await getNewSettings();
     if ((newPlugins.size || newSettings.size) && !hasSeen) {
         hasSeen = true;
-        const modalKey = openModal(modalProps => <ErrorBoundary noop onError={() => { closeModal(modalKey); }}>
-            <NewPluginsModal
-                modalProps={modalProps}
-                newPlugins={newPlugins}
-                newSettings={newSettings}
-            />
-        </ErrorBoundary>);
+        const modalKey = openModal(modalProps => (
+            <ErrorBoundary noop onError={() => closeModal(modalKey)}>
+                <NewPluginsModal
+                    modalProps={modalProps}
+                    newPlugins={newPlugins}
+                    newSettings={newSettings}
+                />
+            </ErrorBoundary>
+        ));
     }
 }

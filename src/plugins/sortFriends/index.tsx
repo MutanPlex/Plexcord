@@ -136,7 +136,7 @@ export default definePlugin({
             {children}
             {!isNaN(since.getTime()) && (
                 <TooltipContainer text={DateUtils.dateFormat(since, "LLLL")} tooltipClassName={cl("tooltip")}>
-                    <BaseText size="xs" weight="normal" className={cl("date")}>{formatter.format(since)}</BaseText>
+                    <BaseText size="xs" className={cl("date")}>{formatter.format(since)}</BaseText>
                 </TooltipContainer>
             )}
         </div>;

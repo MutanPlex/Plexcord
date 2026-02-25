@@ -22,6 +22,6 @@ export default function DecorationGridCreate(props: DecorationGridCreateProps) {
         isSelected={false}
     >
         <PlusIcon />
-        <BaseText size="xs" weight="normal" color="text-strong">{getIntlMessage("CREATE")}</BaseText>
+        <BaseText size="xs" color="text-strong">{getIntlMessage("CREATE")}</BaseText>
     </DecorationGridItem>;
 }

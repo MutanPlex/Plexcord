@@ -313,7 +313,7 @@ function Info({ track }: { track: NonNullable<Song>; }) {
                     {track?.title}
                 </Paragraph>
                 {track.artist && (
-                    <Paragraph size="sm" weight="normal" className={cl("ellipoverflow")}>
+                    <Paragraph size="sm" className={cl("ellipoverflow")}>
                         {t(plugin.musicControls.modal.player.artist)}&nbsp;
                         <span className={cl("artist")} style={{ fontSize: "inherit" }} title={track.artist}>
                             {track.artist}
@@ -321,7 +321,7 @@ function Info({ track }: { track: NonNullable<Song>; }) {
                     </Paragraph>
                 )}
                 {track.album && (
-                    <Paragraph size="sm" weight="normal" className={cl("ellipoverflow")}>
+                    <Paragraph size="sm" className={cl("ellipoverflow")}>
                         {t(plugin.musicControls.modal.player.album)}&nbsp;
                         <span
                             id={cl("album-title")}

@@ -76,8 +76,8 @@ function FriendsIndicator() {
                     </path>
                 </svg>
             }
-            <BaseText size="xs" weight="normal" id="pc-friendcount-text">{onlineFriendsCount}</BaseText>
-            {!!settings.store.useCompact && <BaseText size="xs" weight="normal" id="pc-friendcount-text-compact">{t(plugin.serverListIndicators.friends)}</BaseText>}
+            <BaseText size="xs" id="pc-friendcount-text">{onlineFriendsCount}</BaseText>
+            {!!settings.store.useCompact && <BaseText size="xs" id="pc-friendcount-text-compact">{t(plugin.serverListIndicators.friends)}</BaseText>}
         </div>
     );
 }
@@ -109,8 +109,8 @@ function ServersIndicator() {
                     </path>
                 </svg>
             }
-            <BaseText size="xs" weight="normal" id="pc-guildcount-text">{guildCount}</BaseText>
-            {!!settings.store.useCompact && <BaseText size="xs" weight="normal" id="pc-guildcount-text-compact">{t(plugin.serverListIndicators.servers)}</BaseText>}
+            <BaseText size="xs" id="pc-guildcount-text">{guildCount}</BaseText>
+            {!!settings.store.useCompact && <BaseText size="xs" id="pc-guildcount-text-compact">{t(plugin.serverListIndicators.servers)}</BaseText>}
         </div>
     );
 }

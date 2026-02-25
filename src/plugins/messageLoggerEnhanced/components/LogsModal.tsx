@@ -264,10 +264,10 @@ function NoResults({ tab }: { tab: LogTabs; }) {
 
     return (
         <div className={cl("modal-empty-logs", "modal-content-inner")} style={{ textAlign: "center" }}>
-            <BaseText size="lg" weight="normal">
+            <BaseText size="lg">
                 {t(plugin.messageLoggerEnhanced.button.noResults, { tab: getTabLabel(tab) })}
             </BaseText>
-            <BaseText size="lg" weight="normal" style={{ marginTop: "0.2rem" }}>
+            <BaseText size="lg" style={{ marginTop: "0.2rem" }}>
                 {t(plugin.messageLoggerEnhanced.button.tryOtherTabs, { nextTab, lastTab })}
             </BaseText>
         </div>
@@ -279,7 +279,7 @@ function EmptyLogs({ hasQuery, reset: forceUpdate }: { hasQuery: boolean; reset:
         <div className={cl("modal-empty-logs", "modal-content-inner")} style={{ textAlign: "center" }}>
             <Flex flexDirection="column" style={{ position: "relative" }}>
 
-                <BaseText size="lg" weight="normal">
+                <BaseText size="lg">
                     {t(plugin.messageLoggerEnhanced.modal.empty)}
                 </BaseText>
 
