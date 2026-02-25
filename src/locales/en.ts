@@ -8587,6 +8587,99 @@ const translations = {
                 }
             }
         },
+        rpcEditor: {
+            name: "RPCEditor",
+            description: "Edit the type and content of any Rich Presence",
+            option: {
+                replacedAppIds: {
+                    label: "Replaced App IDs",
+                }
+            },
+            modal: {
+                tutorial: {
+                    title: "IDs of currently running activities",
+                    noRunning: "No running activities",
+                    available: "Available variables",
+                    variableText: "In all fields (except stream URL), you can put in variables that'll automatically be replaced by their original content:",
+                    more: "More details",
+                    details: {
+                        leave: "Leave a field empty to leave it as is.",
+                        set: "Set a field to 'null' to hide it on the presence.",
+                        reload: "You may need to reload Discord for changes to apply."
+
+                    }
+                },
+                settings: {
+                    applyEdits: "Apply edits to app",
+                    addNewApp: "Add new application",
+                    appId: "Application ID",
+                    invalidAppId: "Invalid application ID",
+                    newActivityType: "New activity type",
+                    activityTypes: {
+                        playing: "Playing",
+                        watching: "Watching",
+                        listening: "Listening",
+                        competing: "Competing",
+                        streaming: "Streaming"
+                    },
+                    streamUrl: "Stream URL (must be YouTube or Twitch)",
+                    invalidStreamUrl: "Invalid stream URL",
+                    newName: "New name",
+                    newDetails: "New details",
+                    newState: "New state",
+                    largeImage: "Large image",
+                    smallImage: "Small image",
+                    text: "Text",
+                    url: "URL",
+                    firstLine: "(first line)",
+                    secondLine: "(second line)",
+                    thirdLine: "(third line)",
+                    alsoThirdLine: "(also third line)",
+                    hideAssets: "Hide assets (large & small images)",
+                    hideTimestamps: "Hide timestamps"
+                }
+            },
+        },
+        rpcStats: {
+            name: "RPCStats",
+            description: "Displays stats about your activity as an rpc",
+            option: {
+                assetURL: {
+                    label: "Asset URL",
+                    description: "The image to use for your rpc. Your profile picture is used if left blank"
+                },
+                rpcTitle: {
+                    label: "RPC Title",
+                    description: "The title of your rpc"
+                },
+                statDisplay: {
+                    label: "Stat Display",
+                    description: "What should the rpc display? (you can only have one line i'm pretty sure)",
+                    today: "The amount of messages sent today",
+                    alltime: "The amount of messages sent all time",
+                    listened: "Your most listened album for the week"
+                },
+                lastFMApiKey: {
+                    label: "Last.fm API Key",
+                    description: "Your last.fm API key"
+                },
+                lastFMUsername: {
+                    label: "Last.fm Username",
+                    description: "Your last.fm username"
+                },
+                albumCoverImage: {
+                    label: "Album Cover Image",
+                    description: "Should the album cover image be used as the rpc image? (if you have the last fm display chosen)"
+                },
+                lastFMStatFormat: {
+                    label: "Last.fm Stat Format",
+                    description: "How should the last fm stat be formatted? $album is replaced with the album name, and $artist is replaced with the artist name"
+                }
+            },
+            noInfo: "No info right now :(",
+            messagesToday: "Messages sent today: {{count}}",
+            messagesAllTime: "Messages sent all time: {{count}}"
+        },
         searchFix: {
             name: "SearchFix",
             description: "Fixes the annoying 'We dropped the magnifying glass!' error.",

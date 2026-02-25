@@ -8591,6 +8591,98 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        rpcEditor: {
+            name: "RPCEditor",
+            description: "Herhangi bir Rich Presence içeriğini ve tipini düzenleyin",
+            option: {
+                replacedAppIds: {
+                    label: "Değiştirilen Uygulama Kimlikleri (ID)",
+                }
+            },
+            modal: {
+                tutorial: {
+                    title: "Şu an çalışan etkinliklerin ID'leri",
+                    noRunning: "Çalışan etkinlik yok",
+                    available: "Kullanılabilir değişkenler",
+                    variableText: "Tüm alanlara (yayın URL'si hariç), otomatik olarak orijinal içeriğiyle değiştirilecek değişkenler koyabilirsiniz:",
+                    more: "Daha fazla detay",
+                    details: {
+                        leave: "Bir alanı olduğu gibi bırakmak için boş bırakın.",
+                        set: "Bir alanı durum göstergesinde gizlemek için 'null' yazın.",
+                        reload: "Değişikliklerin uygulanması için Discord'u yeniden başlatmanız gerekebilir."
+                    }
+                },
+                settings: {
+                    applyEdits: "Düzenlemeleri uygulamaya uygula",
+                    addNewApp: "Yeni uygulama ekle",
+                    appId: "Uygulama ID'si",
+                    invalidAppId: "Geçersiz uygulama ID'si",
+                    newActivityType: "Yeni etkinlik tipi",
+                    activityTypes: {
+                        playing: "Oynuyor",
+                        watching: "İzliyor",
+                        listening: "Dinliyor",
+                        competing: "Yarışıyor",
+                        streaming: "Yayında"
+                    },
+                    streamUrl: "Yayın URL'si (YouTube veya Twitch olmalıdır)",
+                    invalidStreamUrl: "Geçersiz yayın URL'si",
+                    newName: "Yeni isim",
+                    newDetails: "Yeni detaylar",
+                    newState: "Yeni durum",
+                    largeImage: "Büyük resim",
+                    smallImage: "Küçük resim",
+                    text: "Metin",
+                    url: "URL",
+                    firstLine: "(birinci satır)",
+                    secondLine: "(ikinci satır)",
+                    thirdLine: "(üçüncü satır)",
+                    alsoThirdLine: "(ayrıca üçüncü satır)",
+                    hideAssets: "Görselleri gizle (büyük ve küçük resimler)",
+                    hideTimestamps: "Zaman damgalarını gizle"
+                }
+            },
+        },
+        rpcStats: {
+            name: "RPCStats",
+            description: "Etkinliğinizle ilgili istatistikleri bir Rich Presence olarak görüntüler",
+            option: {
+                assetURL: {
+                    label: "Görsel URL'si",
+                    description: "RPC için kullanılacak görsel. Boş bırakılırsa profil resminiz kullanılır"
+                },
+                rpcTitle: {
+                    label: "RPC Başlığı",
+                    description: "RPC'nizin başlığı"
+                },
+                statDisplay: {
+                    label: "İstatistik Görüntüleme",
+                    description: "RPC neyi görüntülemeli? (Muhtemelen sadece tek satır hakkınız var)",
+                    today: "Bugün gönderilen mesaj miktarı",
+                    alltime: "Tüm zamanlarda gönderilen mesaj miktarı",
+                    listened: "Haftanın en çok dinlenen albümü"
+                },
+                lastFMApiKey: {
+                    label: "Last.fm API Anahtarı",
+                    description: "Last.fm API anahtarınız"
+                },
+                lastFMUsername: {
+                    label: "Last.fm Kullanıcı Adı",
+                    description: "Last.fm kullanıcı adınız"
+                },
+                albumCoverImage: {
+                    label: "Albüm Kapağı Görseli",
+                    description: "Albüm kapağı RPC görseli olarak kullanılsın mı? (Last.fm gösterimi seçiliyse)"
+                },
+                lastFMStatFormat: {
+                    label: "Last.fm İstatistik Formatı",
+                    description: "Last.fm istatistiği nasıl formatlanmalı? $album albüm adıyla, $artist ise sanatçı adıyla değiştirilir"
+                }
+            },
+            noInfo: "Şu an bilgi yok :(",
+            messagesToday: "Bugün gönderilen mesajlar: {{count}}",
+            messagesAllTime: "Tüm zamanlarda gönderilen mesajlar: {{count}}"
+        },
         searchFix: {
             name: "SearchFix",
             description: "Sinir bozucu 'Büyüteci düşürdük!' hatasını düzeltir.",
