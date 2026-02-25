@@ -8273,6 +8273,54 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Tüm bildirimleri tek bir tıklamayla okunmuş olarak işaretlemek için bildirim paneline bir düğme ekler.",
             button: "Hepsini Oku"
         },
+        recentDMSwitcher: {
+            name: "RecentDMSwitcher",
+            description: "En son kullanılan DM'ler arasında Ctrl+Tab ile geçiş yapın (Ctrl+Shift+Tab tersine çevirir)",
+            option: {
+                visualStyle: {
+                    label: "Görsel Stil",
+                    description: "Geçiş yaparken görünen görsel gösterge stili",
+                    overlay: "Katman (Alt+Tab stili)",
+                    toast: "Bildirim (Durum mesajı)",
+                    off: "Kapalı"
+                },
+                overlayMode: {
+                    label: "Katman Modu",
+                    description: "Katman içeriği",
+                    row: "Son görüşmeler satırı",
+                    current: "Sadece mevcut olan",
+                },
+                amountOfUsers: {
+                    label: "Kullanıcı Sayısı",
+                    description: "Katman üzerinde gösterilecek kullanıcı sayısı"
+                },
+                overlayRowLength: {
+                    label: "Katman Satır Uzunluğu",
+                    description: "Satırda gösterilecek son DM'lerin sayısı"
+                },
+                overlayShowAvatars: {
+                    label: "Katman Profil Resimlerini Göster",
+                    description: "Katman üzerinde kullanıcı profil resimlerini gösterir"
+                },
+                toastDurationMs: {
+                    label: "Bildirim Süresi (ms)",
+                    description: "Katman üzerinde profil resimlerini göster"
+                },
+                clearRdms: {
+                    label: "RDMS Listesini Temizle",
+                    description: "Test aracı: RDMs listesini temizler",
+                    toast: "RDMS geçmişi temizlendi",
+                    button: "RDMs Geçmişini Temizle"
+                }
+            },
+            modal: {
+                unknown: "Bilinmeyen",
+                dm: "DM",
+                group: "Grup DM",
+                channel: "Kanal",
+                switchingTo: "Şuna geçiliyor: {{name}}"
+            }
+        },
         relationshipNotifier: {
             name: "RelationshipNotifier",
             description: "Bir arkadaş, grup sohbeti veya sunucu seni kaldırdığında bildirir.",

@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings, Settings, SettingsStore } from "@api/Settings";
 import { HeadingSecondary } from "@components/Heading";
 import { Paragraph } from "@components/Paragraph";

@@ -5,7 +5,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { ProfilePreset } from "@plexcord/discord-types";
 import { isNonNullish } from "@utils/guards";
 import { findStoreLazy } from "@webpack";

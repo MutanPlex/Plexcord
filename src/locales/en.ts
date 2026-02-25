@@ -8269,6 +8269,54 @@ const translations = {
             description: "Read all server notifications with a single button click!",
             button: "Read All"
         },
+        recentDMSwitcher: {
+            name: "RecentDMSwitcher",
+            description: "Ctrl+Tab between most recently used DMs (Ctrl+Shift+Tab reverse)",
+            option: {
+                visualStyle: {
+                    label: "Visual Style",
+                    description: "Visual indicator style while cycling",
+                    overlay: "Overlay (Alt+Tab style)",
+                    toast: "Toast (status message)",
+                    off: "Off"
+                },
+                overlayMode: {
+                    label: "Overlay Mode",
+                    description: "Overlay content",
+                    row: "Row of recent",
+                    current: "Current only",
+                },
+                amountOfUsers: {
+                    label: "Amount of Users",
+                    description: "Number of users to show in overlay"
+                },
+                overlayRowLength: {
+                    label: "Overlay Row Length",
+                    description: "Number of recent DMs to show in row"
+                },
+                overlayShowAvatars: {
+                    label: "Overlay Show Avatars",
+                    description: "Show user avatars in overlay"
+                },
+                toastDurationMs: {
+                    label: "Toast Duration (ms)",
+                    description: "Show avatars in overlay"
+                },
+                clearRdms: {
+                    label: "Clear RDMS List",
+                    description: "Testing utility: Clear RDMs list",
+                    toast: "Cleared RMDS history",
+                    button: "Clear RDMs History"
+                }
+            },
+            modal: {
+                unknown: "Bilinmeyen",
+                dm: "DM",
+                group: "Group DM",
+                channel: "Channel",
+                switchingTo: "Switching to: {{name}}"
+            }
+        },
         relationshipNotifier: {
             name: "RelationshipNotifier",
             description: "Notifies you when a friend, group chat, or server removes you.",
