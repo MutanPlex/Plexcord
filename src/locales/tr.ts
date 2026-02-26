@@ -8683,6 +8683,107 @@ const translations: MatchStructure<typeof enTranslations> = {
             messagesToday: "Bugün gönderilen mesajlar: {{count}}",
             messagesAllTime: "Tüm zamanlarda gönderilen mesajlar: {{count}}"
         },
+        saveFavoriteGIFs: {
+            name: "SaveFavoriteGIFs",
+            description: "Favoriye eklenen GIF bağlantılarını dışa aktarır",
+            toolbox: "Favori GIF'leri Kaydet",
+            title: "Favori GIF'leri Kaydet",
+            command: {
+                savegifs: {
+                    description: "Tüm favori GIF bağlantılarını bir metin dosyasına kaydeder"
+                },
+                saveworkinggifs: {
+                    description: "Tüm favori GIF'leri test eder ve sadece hala çalışanları kaydeder"
+                }
+            },
+            option: {
+                showToolboxButton: {
+                    label: "Araç Kutusu Butonunu Göster",
+                    description: "Plexcord Araç Kutusu'nda 'Favori GIF'leri Kaydet' butonunu gösterir (Yeniden Başlatma Gerektirir)"
+                }
+            },
+            toast: {
+                save: "GIF'ler başarıyla {{filename}} adıyla kaydedildi",
+                failed: "GIF'ler kaydedilemedi",
+                no: "Favori GIF bulunamadı!",
+                testing: "{{count}} GIF test ediliyor, bu biraz zaman alabilir...",
+                noneWorking: "Kaydedilmiş GIF'lerinizin hiçbiri çalışıyor gibi görünmüyor.",
+                saved: "{{broken}} adet muhtemelen bozuk GIF filtrelendi. {{saved}} adet çalışan GIF kaydedildi."
+            }
+        },
+        scheduledMessages: {
+            name: "ScheduledMessages",
+            description: "Mesajları belirli bir zamanda veya belirli bir gecikmeden sonra gönderilecek şekilde planlayın.",
+            toolbox: {
+                toggle: "Planlanmış Mesajları Görüntüle"
+            },
+            option: {
+                maxMessagesPerMinute: {
+                    label: "Dakika Başına Maksimum Mesaj",
+                    description: "Aynı dakika içinde bir kanalda gönderilebilecek maksimum planlanmış mesaj sayısı."
+                },
+                checkIntervalSeconds: {
+                    label: "Kontrol Aralığı (Saniye)",
+                    description: "Eklentinin gönderilecek mesaj olup olmadığını ne kadar sıklıkla kontrol edeceği."
+                },
+                showNotifications: {
+                    label: "Bildirimleri Göster",
+                    description: "Mesajlar gönderildiğinde bildirim (toast) gösterir."
+                },
+                showPhantomMessages: {
+                    label: "Hayalet Mesajları Göster",
+                    description: "Planlanmış mesajları sohbette hayalet (geçici) mesaj olarak gösterir."
+                }
+            },
+            channelType: {
+                unknown: "Bilinmeyen",
+                dm: "DM",
+                groupDm: "Grup DM",
+                channel: "Kanal"
+            },
+            toast: {
+                messageSent: "Planlanmış mesaj {{channel}} kanalına gönderildi",
+                messageFailed: "Planlanmış mesaj gönderilemedi",
+                maxMessagesReached: "Kanal başına dakikada maksimum {{max}} mesaj sınırına ulaşıldı",
+                messageScheduled: "Mesaj planlandı!",
+                messageRemoved: "Planlanmış mesaj kaldırıldı",
+                allCleared: "Tüm planlanmış mesajlar temizlendi"
+            },
+            button: {
+                tooltipOn: "Planlama Modu AÇIK (devre dışı bırakmak için tıklayın, liste için sağ tıklayın)",
+                tooltipOff: "Planlama Modu KAPALI (etkinleştirmek için tıklayın, liste için sağ tıklayın)"
+            },
+            accessory: {
+                scheduledFor: "{{date}} için planlandı {{timeLeft}}",
+                remaining: {
+                    days: "{{days}}g {{hours}}s kaldı",
+                    hours: "{{hours}}s {{minutes}}dk kaldı",
+                    minutes: "{{minutes}}dk kaldı"
+                }
+            },
+            scheduleModal: {
+                title: "Mesajı Planla",
+                schedulingFor: "Planlanan kanal: {{channel}}",
+                scheduleType: "Planlama Türü",
+                delay: "Gecikme",
+                specificTime: "Belirli Zaman",
+                delayMinutes: "Gecikme (dakika)",
+                dateTime: "Tarih ve Saat",
+                error: {
+                    invalidDelay: "Lütfen geçerli bir gecikme süresi girin (minimum 1 dakika)",
+                    invalidDateTime: "Lütfen gelecekteki bir tarih ve saat seçin"
+                },
+                schedule: "Planla",
+                cancel: "İptal"
+            },
+            viewModal: {
+                title: "Planlanmış Mesajlar",
+                clearAll: "Tümünü Temizle",
+                noMessages: "Planlanmış mesaj yok",
+                delete: "Sil",
+                close: "Kapat"
+            }
+        },
         searchFix: {
             name: "SearchFix",
             description: "Sinir bozucu 'Büyüteci düşürdük!' hatasını düzeltir.",

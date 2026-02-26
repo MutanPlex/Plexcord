@@ -8680,6 +8680,107 @@ const translations = {
             messagesToday: "Messages sent today: {{count}}",
             messagesAllTime: "Messages sent all time: {{count}}"
         },
+        saveFavoriteGIFs: {
+            name: "SaveFavoriteGIFs",
+            description: "Export favorited GIF urls",
+            toolbox: "Save Favorite GIFs",
+            title: "Save Favorite GIFs",
+            command: {
+                savegifs: {
+                    description: "Save all favorite GIF urls to a text file"
+                },
+                saveworkinggifs: {
+                    description: "Test all favorite GIFs and only save the ones that are still working"
+                }
+            },
+            option: {
+                showToolboxButton: {
+                    label: "Show Toolbox Button",
+                    description: "Show 'Save Favorite GIFs' button in Plexcord Toolbox (Requires Reload)"
+                }
+            },
+            toast: {
+                save: "Saved GIFs successfully as {{filename}}",
+                failed: "Failed to save GIFs",
+                no: "No favorite GIFs found!",
+                testing: "Testing {{count}} GIFs, This may take a moment...",
+                noneWorking: "None of your saved GIFs appear to be working.",
+                saved: "Filtered {{broken}} possibly broken GIFs. Saved {{saved}} working GIFs."
+            }
+        },
+        scheduledMessages: {
+            name: "ScheduledMessages",
+            description: "Schedule messages to be sent at a specific time or after a delay.",
+            toolbox: {
+                toggle: "View Scheduled Messages"
+            },
+            option: {
+                maxMessagesPerMinute: {
+                    label: "Max Messages Per Minute",
+                    description: "Max scheduled messages per channel that can fire in the same minute."
+                },
+                checkIntervalSeconds: {
+                    label: "Check Interval (Seconds)",
+                    description: "How often the plugin checks for messages to send."
+                },
+                showNotifications: {
+                    label: "Show Notifications",
+                    description: "Show toast notifications when messages are sent."
+                },
+                showPhantomMessages: {
+                    label: "Show Phantom Messages",
+                    description: "Show scheduled messages as phantom messages in chat."
+                }
+            },
+            channelType: {
+                unknown: "Unknown",
+                dm: "DM",
+                groupDm: "Group DM",
+                channel: "Channel"
+            },
+            toast: {
+                messageSent: "Scheduled message sent to {{channel}}",
+                messageFailed: "Failed to send scheduled message",
+                maxMessagesReached: "Maximum of {{max}} messages per channel per minute reached",
+                messageScheduled: "Message scheduled!",
+                messageRemoved: "Scheduled message removed",
+                allCleared: "All scheduled messages cleared"
+            },
+            button: {
+                tooltipOn: "Schedule Mode ON (click to disable, right-click for list)",
+                tooltipOff: "Schedule Mode OFF (click to enable, right-click for list)"
+            },
+            accessory: {
+                scheduledFor: "Scheduled for {date}{timeLeft}",
+                remaining: {
+                    days: "{{days}}d {{hours}}h remaining",
+                    hours: "{{hours}}h {{minutes}}m remaining",
+                    minutes: "{{minutes}}m remaining"
+                }
+            },
+            scheduleModal: {
+                title: "Schedule Message",
+                schedulingFor: "Scheduling for: {{channel}}",
+                scheduleType: "Schedule Type",
+                delay: "Delay",
+                specificTime: "Specific Time",
+                delayMinutes: "Delay (minutes)",
+                dateTime: "Date & Time",
+                error: {
+                    invalidDelay: "Please enter a valid delay (minimum 1 minute)",
+                    invalidDateTime: "Please select a future date and time"
+                },
+                schedule: "Schedule",
+                cancel: "Cancel"
+            },
+            viewModal: {
+                title: "Scheduled Messages",
+                clearAll: "Clear All",
+                noMessages: "No scheduled messages",
+                delete: "Delete",
+                close: "Close"
+            }
+        },
         searchFix: {
             name: "SearchFix",
             description: "Fixes the annoying 'We dropped the magnifying glass!' error.",
