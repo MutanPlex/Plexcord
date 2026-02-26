@@ -383,13 +383,6 @@ function drawAuthorInfo(
     const authorX = config.quoteAreaX + (config.quoteAreaWidth - ctx.measureText(authorText).width) / 2;
     const authorY = startY + SPACING.authorTop;
     ctx.fillText(authorText, authorX, authorY);
-
-    ctx.font = `300 ${calculation.usernameFontSize}px 'M PLUS Rounded 1c', sans-serif`;
-    ctx.fillStyle = "#888";
-    const username = `@${author.username}`;
-    const usernameX = config.quoteAreaX + (config.quoteAreaWidth - ctx.measureText(username).width) / 2;
-    const usernameY = authorY + SPACING.username + calculation.usernameFontSize;
-    ctx.fillText(username, usernameX, usernameY);
 }
 
 function drawWatermark(
