@@ -9479,6 +9479,36 @@ const translations = {
                 }
             }
         },
+        snowfall: {
+            name: "Snowfall",
+            description: "Let it snow on Discord!",
+            about: {
+                title: "Information",
+                paragraph: "This plugin adds a christmas-y snowfall effect on top of Discord's interface. You can change the type of snow in the settings below.",
+                note: "NOTE: While on most computers this plugin will not impact performance any more than your average Plexcord extension, it may cause some lag on lower end systems."
+            },
+            option: {
+                typeOfSnow: {
+                    label: "Type of Snow",
+                    description: "Change the type of snow displayed (Affects performance).",
+                    solid: "Solid (Highest Performance)",
+                    text: "Text (Medium Performance)",
+                    emoji: "Image (Lowest Performance)"
+                },
+                maxSize: {
+                    label: "Max Size",
+                    description: "Maximum snowflake size"
+                },
+                speed: {
+                    label: "Speed",
+                    description: "Snowfall speed (higher = faster fall)"
+                },
+                flakesPerSecond: {
+                    label: "Flakes Per Second",
+                    description: "Snowflakes per second (higher = denser snowfall)"
+                }
+            }
+        },
         sortFriendRequests: {
             name: "SortFriendRequests",
             description: "Sorts friend requests by date of receipt",

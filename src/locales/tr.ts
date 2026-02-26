@@ -9482,6 +9482,36 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
+        snowfall: {
+            name: "Snowfall",
+            description: "Discord'da kar yağsın!",
+            about: {
+                title: "Bilgi",
+                paragraph: "Bu eklenti, Discord arayüzünün üzerine Noel temalı bir kar yağışı efekti ekler. Kar tipini aşağıdaki ayarlardan değiştirebilirsiniz.",
+                note: "NOT: Bu eklenti çoğu bilgisayarda ortalama bir Plexcord eklentisinden daha fazla performans etkisi yaratmasa da, düşük segment sistemlerde bazı kasmalar/gecikmeler (lag) yapabilir."
+            },
+            option: {
+                typeOfSnow: {
+                    label: "Kar Tipi",
+                    description: "Görüntülenen karın tipini değiştirir (Performansı etkiler).",
+                    solid: "Düz Renk (En Yüksek Performans)",
+                    text: "Metin (Orta Performans)",
+                    emoji: "Görsel (En Düşük Performans)"
+                },
+                maxSize: {
+                    label: "Maksimum Boyut",
+                    description: "Maksimum kar tanesi boyutu"
+                },
+                speed: {
+                    label: "Hız",
+                    description: "Karın yağış hızı (yüksek = daha hızlı düşüş)"
+                },
+                flakesPerSecond: {
+                    label: "Saniye Başına Kar Tanesi",
+                    description: "Saniyede düşen kar tanesi miktarı (yüksek = daha yoğun yağış)"
+                }
+            }
+        },
         sortFriendRequests: {
             name: "SortFriendRequests",
             description: "Arkadaş isteklerini alınma tarihine göre sıralar",

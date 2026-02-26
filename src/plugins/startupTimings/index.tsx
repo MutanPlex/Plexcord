@@ -21,6 +21,7 @@ import { plugin, t } from "@api/i18n";
 import { ClockIcon } from "@components/index";
 import SettingsPlugin from "@plugins/_core/settings";
 import { Devs } from "@utils/constants";
+import { removeFromArray } from "@utils/misc";
 import definePlugin from "@utils/types";
 
 import StartupTimingPage from "./StartupTimingPage";
@@ -42,10 +43,6 @@ export default definePlugin({
         SettingsPlugin.settingsSectionMap.push(["PlexcordStartupTimings", "plexcord_startup_timings"]);
     },
     stop() {
-        function removeFromArray<T>(arr: T[], predicate: (e: T) => boolean) {
-            const idx = arr.findIndex(predicate);
-            if (idx !== -1) arr.splice(idx, 1);
-        }
         removeFromArray(SettingsPlugin.customEntries, e => e.key === "plexcord_startup_timings");
         removeFromArray(SettingsPlugin.settingsSectionMap, entry => entry[1] === "plexcord_startup_timings");
     },
