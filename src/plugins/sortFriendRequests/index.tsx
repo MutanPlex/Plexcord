@@ -38,7 +38,7 @@ const formatter = new Intl.DateTimeFormat(undefined, {
     year: "numeric",
 });
 
-const cl = classNameFactory("pc-sortFriends-");
+const cl = classNameFactory("pc-sortFriendRequests-");
 
 function getSince(user: User) {
     return new Date(RelationshipStore.getSince(user.id));
@@ -46,8 +46,8 @@ function getSince(user: User) {
 
 const settings = definePluginSettings({
     showDates: {
-        label: () => t(plugin.sortFriends.option.showDates.label),
-        description: () => t(plugin.sortFriends.option.showDates.description),
+        label: () => t(plugin.sortFriendRequests.option.showDates.label),
+        description: () => t(plugin.sortFriendRequests.option.showDates.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: true
@@ -55,9 +55,9 @@ const settings = definePluginSettings({
 });
 
 export default definePlugin({
-    name: "SortFriends",
+    name: "SortFriendsRequests",
     authors: [Devs.Megu, PcDevs.CallMeGii],
-    description: () => t(plugin.sortFriends.description),
+    description: () => t(plugin.sortFriendRequests.description),
     settings,
 
     patches: [
@@ -71,6 +71,7 @@ export default definePlugin({
         {
             find: "peopleListItemRef",
             replacement: {
+                predicate: () => settings.store.showDates,
                 match: /(?<=children:.*user:(\i),.*subText:).+?(?=,hovered:\i,showAccountIdentifier)/,
                 replace: "$self.makeSubtext($1, $&)"
             }
@@ -122,7 +123,7 @@ export default definePlugin({
                                 clipRule="evenodd"
                             ></path>
                         </svg>
-                        <span>{t(plugin.sortFriends.tooltip, { date: formatter.format(since) })}</span>
+                        <span>{t(plugin.sortFriendRequests.tooltip, { date: formatter.format(since) })}</span>
                     </div>
                 </span>
             </Flex>

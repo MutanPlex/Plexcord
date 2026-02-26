@@ -9479,8 +9479,8 @@ const translations = {
                 }
             }
         },
-        sortFriends: {
-            name: "SortFriends",
+        sortFriendRequests: {
+            name: "SortFriendRequests",
             description: "Sorts friend requests by date of receipt",
             tooltip: "Added &mdash; {{date}}",
             option: {

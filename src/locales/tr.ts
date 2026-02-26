@@ -9482,8 +9482,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             }
         },
-        sortFriends: {
-            name: "SortFriends",
+        sortFriendRequests: {
+            name: "SortFriendRequests",
             description: "Arkadaş isteklerini alınma tarihine göre sıralar",
             tooltip: "Eklendi — {{date}}",
             option: {
