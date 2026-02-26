@@ -9045,15 +9045,20 @@ const translations = {
             description: "Show channels that you do not have access to view.",
             tooltip: "Hidden Channel",
             option: {
-                hideUnreads: {
-                    label: "Hide Unreads",
-                    description: "Hide Unreads"
+                channelStyle: {
+                    label: "Channel Style",
+                    description: "The style used to display hidden channels.",
+                    classic: "Classic",
+                    muted: "Muted",
+                    showUnreads: "Show Unreads",
+                    mutedWithUnreads: "Muted and Show Unreads"
                 },
                 showMode: {
                     label: "Show Mode",
                     description: "The mode used to display hidden channels.",
                     lock: "Plain style with Lock Icon instead",
-                    hidden: "Muted style with hidden eye icon on the right"
+                    hidden: "Muted style with hidden eye icon on the right",
+                    lockIconRight: "Lock icon on the right"
                 },
                 defaultAllowedUsersAndRolesDropdownState: {
                     label: "Default Allowed Users And Roles Dropdown State",

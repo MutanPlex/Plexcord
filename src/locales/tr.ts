@@ -9048,15 +9048,20 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Erişim izniniz olmayan kanalları gösterir.",
             tooltip: "Gizli Kanal",
             option: {
-                hideUnreads: {
-                    label: "Okunmamışları Gizle",
-                    description: "Okunmamışları gizle"
+                channelStyle: {
+                    label: "Kanal Stili",
+                    description: "Gizli kanalların görüntülenmesinde kullanılan stil.",
+                    classic: "Klasik",
+                    muted: "Sessiz",
+                    showUnreads: "Okunmamışları Göster",
+                    mutedWithUnreads: "Sessiz ve Okunmamışları Göster"
                 },
                 showMode: {
                     label: "Gösterim Modu",
                     description: "Gizli kanalların görüntülenmesinde kullanılan mod.",
                     lock: "Kilit ikonu ile sade stil",
-                    hidden: "Sağda gizli göz ikonu ile sessize alınmış stil"
+                    hidden: "Sağda gizli göz ikonu ile sessize alınmış stil",
+                    lockIconRight: "Sağda kilit ikonu"
                 },
                 defaultAllowedUsersAndRolesDropdownState: {
                     label: "Varsayılan İzinli Kullanıcılar ve Roller Açılır Durumu",
