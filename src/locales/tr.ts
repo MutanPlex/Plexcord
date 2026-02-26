@@ -9270,6 +9270,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cancel: "İptal Et"
             }
         },
+        showResourceChannels: {
+            name: "ShowResourceChannels",
+            description: "Sunucu kaynakları arkasında gizlenmiş kanalları kanal listesinde gösterir"
+        },
+        showSongName: {
+            name: "ShowSongName",
+            description: "Spotify etkinliği için şarkı adını sanatçı yerine gösterir"
+        },
         showTimeoutDuration: {
             name: "ShowTimeoutDuration",
             description: "Bir kullanıcının zaman aşımının ne kadar daha süreceğini, zaman aşımı ikonu araç ipucunda veya yanında gösterir",

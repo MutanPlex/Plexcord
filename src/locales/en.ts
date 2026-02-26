@@ -9279,6 +9279,14 @@ const translations = {
                 }
             }
         },
+        showResourceChannels: {
+            name: "ShowResourceChannels",
+            description: "Shows the channels hidden behind the server resources in the channel list"
+        },
+        showSongName: {
+            name: "ShowSongName",
+            description: "Shows song name instead of artist for Spotify activity"
+        },
         sidebarChat: {
             name: "SidebarChat",
             description: "Open a another channel or a DM as a sidebar or as a popout",
