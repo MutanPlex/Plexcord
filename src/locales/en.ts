@@ -7534,7 +7534,8 @@ const translations = {
                 ios: "Discord iOS",
                 android: "Discord Android",
                 xbox: "Discord Embedded",
-                playstation: "Discord Embedded"
+                playstation: "Discord Embedded",
+                vr: "VR"
             },
             option: {
                 platform: {
@@ -7545,7 +7546,8 @@ const translations = {
                     android: "Android",
                     ios: "iOS",
                     xbox: "Xbox",
-                    playstation: "PlayStation"
+                    playstation: "PlayStation",
+                    vr: "VR"
                 }
             }
         },
@@ -10554,6 +10556,12 @@ const translations = {
                     global: "Global Name",
                     username: "Username",
                     both: "Both"
+                },
+                buttonPosition: {
+                    label: "Button Position",
+                    description: "Choose where the buttons will be displayed.",
+                    left: "Left",
+                    right: "Right",
                 }
             },
             tooltip: {

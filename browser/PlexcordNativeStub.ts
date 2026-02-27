@@ -144,6 +144,5 @@ window.PlexcordNative = {
         setUpdateState: NOOP,
         onCheckUpdates: NOOP,
         onRepair: NOOP,
-        onAbout: NOOP,
     },
 };

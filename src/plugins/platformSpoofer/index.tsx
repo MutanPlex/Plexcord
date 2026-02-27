@@ -44,6 +44,10 @@ const settings = definePluginSettings({
                 label: () => t(plugin.platformSpoofer.option.platform.playstation),
                 value: "playstation"
             },
+            {
+                label: () => t(plugin.platformSpoofer.option.platform.vr),
+                value: "vr",
+            },
         ]
     }
 });
@@ -99,6 +103,8 @@ export default definePlugin({
                     return { os: "Xbox", browser: "Discord Embedded", vcIcon: 2 };
                 case "playstation":
                     return { os: "PlayStation", browser: "Discord Embedded", vcIcon: 3 };
+                case "vr":
+                    return { os: "VR", browser: "Discord VR", vcIcon: 4 };
                 default:
                     return null;
             }

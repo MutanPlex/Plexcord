@@ -7,6 +7,15 @@
     padding-right: 4px;
 }
 
+.voice-user-buttons-left {
+    order: -1;
+}
+
+.voice-user-buttons-right {
+    order: 1;
+    margin-left: 4px;
+}
+
 div[class*='list'][class*='collapsed'] .voice-user-buttons {
     display: none;
 }

@@ -142,6 +142,28 @@ export default definePlugin({
             ],
             predicate: () => settings.store.disableFade
         },
+        { // Disable fade animations for settings menu
+            find: '"data-mana-component":"layer-modal"',
+            replacement: [
+                {
+                    match: /(\i)\.animated\.div(?=,\{"data-mana-component":"layer-modal")/,
+                    replace: '"div"'
+                },
+                {
+                    match: /(?<="data-mana-component":"layer-modal"[^}]*?)style:\i,/,
+                    replace: "style:{},"
+                }
+            ],
+            predicate: () => settings.store.disableFade
+        },
+        { // Disable initial and exit delay for settings menu
+            find: "headerId:void 0,headerIdIsManaged:!1",
+            replacement: {
+                match: /let (\i)=300/,
+                replace: "let $1=0"
+            },
+            predicate: () => settings.store.disableFade
+        },
         { // Load menu TOC eagerly
             find: "handleOpenSettingsContextMenu=",
             replacement: {
@@ -150,14 +172,12 @@ export default definePlugin({
             },
             predicate: () => settings.store.eagerLoad
         },
-        {
-            // Settings cog context menu
+        { // Settings cog context menu
             find: "#{intl::USER_SETTINGS_ACTIONS_MENU_LABEL}",
             replacement: [
                 {
                     match: /=\[\];(\i)(?=\.forEach.{0,200}?"logout"===\i.{0,100}?(\i)\.get\(\i\))/,
-                    replace: "=$self.wrapMap([]);$self.transformSettingsEntries($1,$2)",
-                    predicate: () => settings.store.organizeMenu
+                    replace: "=$self.wrapMap([]);$self.transformSettingsEntries($1,$2)"
                 },
                 {
                     match: /case \i\.\i\.DEVELOPER_OPTIONS:return \i;/,
@@ -186,21 +206,7 @@ export default definePlugin({
     },
 
     transformSettingsEntries(list: SettingsEntry[], keyMap: Map<string, string>) {
-        const items = [] as TransformedSettingsEntry[];
-
-        for (const item of list) {
-            if (!item.label || item.predicate != null && !item.predicate()) continue;
-
-            if (item.section === "HEADER") {
-                const label = typeof item.label === "function" ? item.label() : item.label;
-                keyMap.set(label, label);
-                items.push({ section: label, items: [] });
-            } else if (item.section !== "DIVIDER" && keyMap.has(item.section)) {
-                items.at(-1)?.items.push(item);
-            }
-        }
-
-        keyMap.set("Plexcord", "Plexcord");
+        const items: any[] = [];
         const plexcordItems: SettingsEntry[] = [
             { section: "PlexcordSettings", label: () => t(settingsLang.title) },
             { section: "PlexcordPlugins", label: () => t(plugins.title) },
@@ -217,15 +223,33 @@ export default definePlugin({
             if (entry) plexcordItems.push({ section, label: () => entry.title });
         }
 
-        items.push({
-            section: "Plexcord",
-            items: plexcordItems
-        });
+        if (settings.store.organizeMenu) {
+            for (const item of list) {
+                if (!item.label || item.predicate != null && !item.predicate()) continue;
+
+                if (item.section === "HEADER") {
+                    const label = typeof item.label === "function" ? item.label() : item.label;
+                    keyMap.set(label, label);
+                    items.push({ section: label, items: [] });
+                } else if (item.section !== "DIVIDER" && keyMap.has(item.section)) {
+                    items.at(-1)?.items.push(item);
+                }
+            }
+
+            keyMap.set("Plexcord", "Plexcord");
+            items.push({
+                section: "Plexcord",
+                items: plexcordItems
+            });
+        } else {
+            items.push(...list, ...plexcordItems);
+        }
 
         return items;
     },
 
     wrapMap(toWrap: TransformedSettingsEntry[]) {
+        if (!settings.store.organizeMenu) return toWrap;
         // @ts-expect-error
         toWrap.map = function (render: (item: SettingsEntry) => ReactElement<any>) {
             return this

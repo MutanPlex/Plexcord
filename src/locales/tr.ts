@@ -7538,7 +7538,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ios: "Discord iOS",
                 android: "Discord Android",
                 xbox: "Gömülü Discord",
-                playstation: "Gömülü Discord"
+                playstation: "Gömülü Discord",
+                vr: "VR"
             },
             option: {
                 platform: {
@@ -7549,7 +7550,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     android: "Android",
                     ios: "iOS",
                     xbox: "Xbox",
-                    playstation: "PlayStation"
+                    playstation: "PlayStation",
+                    vr: "VR"
                 }
             }
         },
@@ -10557,6 +10559,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     global: "Global İsim",
                     username: "Kullanıcı Adı",
                     both: "Her İkisi"
+                },
+                buttonPosition: {
+                    label: "Buton Konumu",
+                    description: "Butonların nerede gösterileceğini seçin.",
+                    left: "Sol",
+                    right: "Sağ",
                 }
             },
             tooltip: {

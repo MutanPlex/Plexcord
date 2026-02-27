@@ -36,28 +36,24 @@ export const settings = definePluginSettings({
         description: () => t(plugin.voiceButtons.option.muteSoundboard.description),
         type: OptionType.BOOLEAN,
         default: true,
-        restartNeeded: false,
     },
     disableVideo: {
         label: () => t(plugin.voiceButtons.option.disableVideo.label),
         description: () => t(plugin.voiceButtons.option.disableVideo.description),
         type: OptionType.BOOLEAN,
         default: true,
-        restartNeeded: false,
     },
     useServer: {
         label: () => t(plugin.voiceButtons.option.useServer.label),
         description: () => t(plugin.voiceButtons.option.useServer.description),
         type: OptionType.BOOLEAN,
         default: false,
-        restartNeeded: false,
     },
     serverSelf: {
         label: () => t(plugin.voiceButtons.option.serverSelf.label),
         description: () => t(plugin.voiceButtons.option.serverSelf.description),
         type: OptionType.BOOLEAN,
         default: false,
-        restartNeeded: false,
     },
     showButtonsSelf: {
         label: () => t(plugin.voiceButtons.option.showButtonsSelf.label),
@@ -66,7 +62,7 @@ export const settings = definePluginSettings({
         default: "display",
         restartNeeded: true,
         options: [
-            { label: () => t(plugin.voiceButtons.option.showButtonsSelf.display), value: "display" },
+            { label: () => t(plugin.voiceButtons.option.showButtonsSelf.display), value: "display", default: true },
             { label: () => t(plugin.voiceButtons.option.showButtonsSelf.hide), value: "hide" },
             { label: () => t(plugin.voiceButtons.option.showButtonsSelf.disable), value: "disable" },
         ],
@@ -75,13 +71,20 @@ export const settings = definePluginSettings({
         label: () => t(plugin.voiceButtons.option.whichNameToShow.label),
         description: () => t(plugin.voiceButtons.option.whichNameToShow.description),
         type: OptionType.SELECT,
-        default: "both",
-        restartNeeded: false,
         options: [
+            { label: () => t(plugin.voiceButtons.option.whichNameToShow.both), value: "both", default: true },
             { label: () => t(plugin.voiceButtons.option.whichNameToShow.global), value: "global" },
             { label: () => t(plugin.voiceButtons.option.whichNameToShow.username), value: "username" },
-            { label: () => t(plugin.voiceButtons.option.whichNameToShow.both), value: "both" },
         ]
+    },
+    buttonPosition: {
+        label: () => t(plugin.voiceButtons.option.buttonPosition.label),
+        description: () => t(plugin.voiceButtons.option.buttonPosition.description),
+        type: OptionType.SELECT,
+        options: [
+            { label: () => t(plugin.voiceButtons.option.buttonPosition.left), value: "left", default: true },
+            { label: () => t(plugin.voiceButtons.option.buttonPosition.right), value: "right" },
+        ],
     }
 }, {
     useServer: {
