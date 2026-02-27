@@ -823,6 +823,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         componentFailed: {
             message: "Ah! Bu sayfa render edilemedi. Ancak, bunu düzeltebilecek bir güncelleme mevcut. Şimdi güncellemek ve yeniden başlatmak ister misiniz?"
+        },
+        quickCSS: {
+            title: "QuickCSS Düzenleyicisini Açık",
+            message: "QuickCSS düzenleyicisi arka planda hala açık.",
+            detail: "Discord'u yine de kapatmak istiyor musunuz? Bu işlem QuickCSS düzenleyiciyi de kapatacaktır.",
+            cancel: "İptal",
+            close: "Yine de Kapat"
         }
     },
 
@@ -5013,6 +5020,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             hide: "Medyayı Gizle",
             hidden: "Medya Gizlendi"
         },
+        hideMessages: {
+            name: "HideMessages",
+            description: "Yeniden başlatana kadar mesajları geçici olarak gizler.",
+            button: {
+                hide: "Gizle"
+            },
+            option: {
+                hidePopoverButton: {
+                    label: "Popover Butonunu Gizle",
+                    description: "Mesaj popover'ında gizle butonunu gizler."
+                }
+            }
+        },
         hideServers: {
             name: "HideServers",
             description: "Sunucuları sunucu listesinden gizler",
@@ -5852,10 +5872,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MessageClickActions",
             description: "Backspace tuşunu basılı tutup tıklayarak silmeyi, çift tıklayarak düzenleme veya yanıtlamayı sağlar.",
             option: {
-                reactEmoji: {
-                    label: "Reaksiyon Emojisi",
-                    description: "Reaksiyon eylemleri için kullanılacak emoji"
-                },
                 singleClickAction: {
                     label: "Tek Tıklama Eylemi",
                     description: "Tek tıklama eylemi (kendi mesajlarınızda)"
@@ -5891,6 +5907,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 tripleClickModifier: {
                     label: "Üç Tıklama Modifikatörü",
                     description: "Üç tıklama eylemi için gereken modifikatör"
+                },
+                reactEmoji: {
+                    label: "Reaksiyon Emojisi",
+                    description: "Reaksiyon eylemleri için kullanılacak emoji"
+                },
+                addAdditionalReacts: {
+                    label: "Ek Reaksiyonları Ekle",
+                    description: "Ayrıca yapılandırılmış ek reaksiyon emojilerini ekle"
+                },
+                additionalReactEmojis: {
+                    label: "Ek Reaksiyon Emojileri",
+                    description: "Reaksiyon eylemi kullanılırken eklenecek ek emojiler (virgül/enter ile ayrılmış, maks {{count}})"
                 },
                 disableInDms: {
                     label: "DM'lerde Devre Dışı Bırak",
@@ -7122,6 +7150,10 @@ const translations: MatchStructure<typeof enTranslations> = {
         noProfileThemes: {
             name: "NoProfileThemes",
             description: "Nitro profil temalarını, kendiniz hariç herkes için tamamen kaldırır."
+        },
+        noPushToTalk: {
+            name: "NoPushToTalk",
+            description: "Zorunlu kılan kanallarda ses etkinliği için bas-konuş gereksinimini atlar."
         },
         noReplyMention: {
             name: "NoReplyMention",
@@ -9210,7 +9242,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 ignoreGradients: {
                     label: "Gradyanları Yoksay",
-                    description: "İkinci, üçüncü ve dördüncü adlar için rolün gradyanı varsa bunu yok sayıp aşağıdaki değeri kullan."
+                    description: "Birincil olmayan adlar için, rolün bir degradesi varsa ve aşağıdaki renk 'Role+-#' olarak ayarlanmışsa degradenin tamamı yerine ana rengi kullanın ve nitro efekti varsa onu tamamen yok sayın."
                 },
                 animateGradients: {
                     label: "Gradyanları Animasyonlu Yap",
@@ -9234,23 +9266,23 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 customNameColor: {
                     label: "Özel Ad Rengi",
-                    description: "İlk görüntülenen değilse, bir kullanıcıya atadığınız özel ad için kullanılacak renk. Varsayılan için boş bırakın. Hex(a), rgb(a) veya hsl(a) formatını kabul eder. Kullanıcının en yüksek rol rengini takip etmek için 'Role' kullanın. Parlaklığı yüzde olarak ayarlamak için 'Role+-#' kullanın (örnek: 'Role+15')."
+                    description: "İlk görüntülenen değilse, kullanıcıya atadığınız özel ad için kullanılacak renk. Geçerli herhangi bir CSS girişini kabul eder. Kullanıcının üst rol renklerini, nitro efekt renklerini veya IRCColors rengini (etkinleştirilmişse) takip etmek için 'Rol'ü kullanın. Parlaklığı bu yüzdeye göre ayarlamak için 'Role+-#' kullanın (ör. 'Rol+15')"
                 },
                 friendNameColor: {
                     label: "Arkadaş Adı Rengi",
-                    description: "Arkadaş adının ilk görüntülenen ad olmadığı durumlarda kullanılacak renk. Boş bırakılırsa varsayılan kullanılır. Hex(a), rgb(a) veya hsl(a) kabul eder. 'Role' kullanıcının en yüksek rol rengine uyar. 'Role+-#' parlaklığı belirtilen yüzde kadar artırır/azaltır (örn: 'Role+15')."
+                    description: "Arkadaş adının ilk görüntülenen ad olmadığı durumlarda kullanılacak renk. Geçerli herhangi bir CSS girişini kabul eder. Kullanıcının üst rol renklerini, nitro efekt renklerini veya IRCColors rengini (etkinleştirilmişse) takip etmek için 'Role' kullanın. Parlaklığı bu yüzdeye göre ayarlamak için 'Role+-#' kullanın (ör: 'Role+15')"
                 },
                 nicknameColor: {
                     label: "Takma Ad Rengi",
-                    description: "Takma ad ilk görüntülenen ad değilse kullanılacak renk. Aynı renk formatı kuralları geçerlidir."
+                    description: "Takma adın ilk görüntülenen ad olmadığı durumlarda kullanılacak renk. Geçerli herhangi bir CSS girişini kabul eder. Kullanıcının üst rol renklerini, nitro efekt renklerini veya IRCColors rengini (etkinleştirilmişse) takip etmek için 'Role' kullanın. Parlaklığı bu yüzdeye göre ayarlamak için 'Role+-#' kullanın (ör: 'Role+15')"
                 },
                 displayNameColor: {
                     label: "Görünen Ad Rengi",
-                    description: "Görünen ad ilk görüntülenen ad değilse kullanılacak renk. Aynı renk formatı kuralları geçerlidir."
+                    description: "Görünen adın ilk görüntülenen ad olmadığı durumlarda kullanılacak renk. Geçerli herhangi bir CSS girişini kabul eder. Kullanıcının üst rol renklerini, nitro efekt renklerini veya IRCColors rengini (etkinleştirilmişse) takip etmek için 'Role' kullanın. Parlaklığı bu yüzdeye göre ayarlamak için 'Role+-#' kullanın (ör: 'Role+15')"
                 },
                 usernameColor: {
                     label: "Kullanıcı Adı Rengi",
-                    description: "Kullanıcı adı ilk görüntülenen ad değilse kullanılacak renk. Aynı renk formatı kuralları geçerlidir."
+                    description: "Kullanıcı adının ilk görüntülenen ad olmadığı durumlarda kullanılacak renk. Geçerli herhangi bir CSS girişini kabul eder. Kullanıcının üst rol renklerini, nitro efekt renklerini veya IRCColors rengini (etkinleştirilmişse) takip etmek için 'Role' kullanın. Parlaklığı bu yüzdeye göre ayarlamak için 'Role+-#' kullanın (ör: 'Role+15')"
                 },
                 triggerNameRerender: {
                     label: "Adı Yeniden Oluşturmayı Tetikle",
@@ -10596,6 +10628,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             context: {
                 voiceTools: "Ses Araçları",
+                mentionAll: "Tüm Kullanıcıları Etiketle",
                 disconnectAll: "Herkesin Bağlantısını Kes",
                 muteAll: "Herkesi Sessize Al",
                 unmuteAll: "Herkesi Sessizden Çıkar",

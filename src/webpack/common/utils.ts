@@ -251,3 +251,7 @@ export const MessageTypeSets: t.MessageTypeSets = findByPropsLazy("REPLYABLE", "
 export const fetchApplicationsRPC = findByCodeLazy('"Invalid Origin"', ".application");
 
 export const CloudUploader = findLazy(m => m.prototype?.trackUploadFinished) as typeof t.CloudUpload;
+
+export const URLUtils: t.URLUtils = findByPropsLazy("URL_REGEX", "makeUrl", "isDiscordUrl");
+export const Humanize: t.Humanize = findByPropsLazy("filesize", "relativeTime", "ordinal");
+export const EmojiUtils: t.EmojiUtils = findByPropsLazy("getEmojiColors", "getURL");

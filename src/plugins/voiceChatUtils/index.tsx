@@ -10,6 +10,7 @@ import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import type { Channel } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
+import { insertTextIntoChatInputBox } from "@utils/discord";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 import { GuildChannelStore, Menu, React, RestAPI, UserStore, VoiceStateStore } from "@webpack/common";
 
@@ -50,6 +51,17 @@ function sendPatch(channel: Channel, body: Record<string, any>, bypass = false) 
     });
 }
 
+function mentionVoiceUsers(channel: Channel) {
+    const currentUserId = UserStore.getCurrentUser()?.id;
+    const mentions = Object.values(VoiceStateStore.getVoiceStatesForChannel(channel.id))
+        .map(state => state.userId)
+        .filter((userId, index, arr) => userId && userId !== currentUserId && arr.indexOf(userId) === index)
+        .map(userId => `<@${userId}>`);
+
+    if (mentions.length === 0) return;
+    insertTextIntoChatInputBox(`${mentions.join(" ")} `);
+}
+
 interface VoiceChannelContextProps {
     channel: Channel;
 }
@@ -71,6 +83,13 @@ const VoiceChannelContext: NavContextMenuPatchCallback = (children, { channel }:
             key="voice-tools"
             id="voice-tools"
         >
+            <Menu.MenuItem
+                key="voice-tools-mention-all"
+                id="voice-tools-mention-all"
+                label={t(plugin.voiceChatUtilities.context.mentionAll)}
+                action={() => mentionVoiceUsers(channel)}
+            />
+
             <Menu.MenuItem
                 key="voice-tools-disconnect-all"
                 id="voice-tools-disconnect-all"

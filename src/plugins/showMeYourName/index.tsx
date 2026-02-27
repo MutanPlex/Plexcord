@@ -22,7 +22,7 @@ import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, openModal } from "@utils/index";
 import definePlugin, { OptionType } from "@utils/types";
 import { findByCodeLazy, findStoreLazy } from "@webpack";
-import { ChannelStore, GuildMemberStore, GuildStore, Menu, MessageStore, RelationshipStore, StreamerModeStore, TextInput, useEffect, useState } from "@webpack/common";
+import { ChannelStore, GuildMemberStore, GuildRoleStore, GuildStore, Menu, MessageStore, RelationshipStore, StreamerModeStore, TextInput, useEffect, useState } from "@webpack/common";
 import { JSX } from "react";
 
 const SMYNC = classNameFactory();
@@ -114,9 +114,16 @@ function resolveColor(
     savedColor: string,
     canUseGradient: boolean,
     inGuild: boolean,
-    forceDefault: boolean
+    ircColorsEnabled: boolean,
+    isHovering: boolean,
 ): Record<string, any> | null {
-    if (!savedColor.trim()) { return null; }
+    const defaultColor = getComputedStyle(document.documentElement).getPropertyValue("--text-strong").trim() || null;
+
+    if (!defaultColor) { return null; }
+
+    savedColor = savedColor.trim() || defaultColor;
+    const isRoleColor = savedColor.toLowerCase().includes("role");
+    const forceDefault = !inGuild && !ircColorsEnabled && (isRoleColor ? !isHovering : false);
 
     let gradient: any = null;
     let primaryColor: any = null;
@@ -125,9 +132,8 @@ function resolveColor(
     let primaryAdjusted: any = null;
     let secondaryAdjusted: any = null;
     let tertiaryAdjusted: any = null;
-    const defaultColor = toCSS("var(--text-strong)");
 
-    if (savedColor.toLowerCase().includes("role")) {
+    if (isRoleColor) {
         const percentage = roleColorPattern.exec(savedColor)?.[1] || "";
         if (percentage && isNaN(parseInt(percentage))) return null;
 
@@ -475,7 +481,9 @@ function renderUsername(
 
     const ircColorsEnabled = isPluginEnabled(ircColors.name);
 
-    const authorColorStrings = colorStrings || (author as any)?.colorStrings || null;
+    const authorTopRole = (author as GuildMember)?.guildId && (author as any)?.highestRoleId;
+    const authorTopRoleColor = authorTopRole && GuildRoleStore.getRole((author as GuildMember).guildId, authorTopRole)?.colorStrings;
+    const authorColorStrings = colorStrings || (author as any)?.colorStrings || authorTopRoleColor || null;
     const authorDisplayNameStyles = (!inGuild && !ircColorsEnabled && (author as any)?.displayNameStyles) || null;
     const effectType = authorDisplayNameStyles ? getEffectType(authorDisplayNameStyles.effectId) : null;
     const effectCSSVars = authorDisplayNameStyles ? computeEffectCSSVars(authorDisplayNameStyles) : {};
@@ -483,20 +491,19 @@ function renderUsername(
     const needsEffectDataAttr = effectType === "neon" || effectType === "toon" || effectType === "pop";
     const shouldShowEffect = hasEffect && isHovering;
     const shouldAnimateEffect = shouldShowEffect && !AccessibilityStore.useReducedMotion;
-    const shouldUseDMDefault = !inGuild && !ircColorsEnabled && !isHovering;
 
     const canUseGradient = ((author as GuildMember)?.guildId ? (GuildStore.getGuild((author as GuildMember).guildId) ?? {}).premiumFeatures?.features.includes("ENHANCED_ROLE_COLORS") : !inGuild);
-    const useTopRoleStyle = isMention || isReactionsPopout || channel?.isDM() || channel?.isGroupDM();
-    const topRoleStyle = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, "Role", canUseGradient, inGuild, shouldUseDMDefault) : null;
-    const hasGradient = !!topRoleStyle?.gradient && Object.keys(topRoleStyle.gradient).length > 0;
+    const useTopStyle = isMention || isReactionsPopout || channel?.isDM() || channel?.isGroupDM();
+    const topStyle = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, "Role", canUseGradient, inGuild, ircColorsEnabled, isHovering) : null;
+    const hasGradient = !!topStyle?.gradient && Object.keys(topStyle.gradient).length > 0;
 
     const textMutedValue = getComputedStyle(document.documentElement)?.getPropertyValue("--text-muted")?.trim() || "#72767d";
     const options = splitTemplate(includedNames);
-    const resolvedUsernameColor = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, usernameColor.trim(), canUseGradient, inGuild, shouldUseDMDefault) : null;
-    const resolvedDisplayNameColor = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, displayNameColor.trim(), canUseGradient, inGuild, shouldUseDMDefault) : null;
-    const resolvedNicknameColor = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, nicknameColor.trim(), canUseGradient, inGuild, shouldUseDMDefault) : null;
-    const resolvedFriendNameColor = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, friendNameColor.trim(), canUseGradient, inGuild, shouldUseDMDefault) : null;
-    const resolvedCustomNameColor = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, customNameColor.trim(), canUseGradient, inGuild, shouldUseDMDefault) : null;
+    const resolvedUsernameColor = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, usernameColor.trim(), canUseGradient, inGuild, ircColorsEnabled, isHovering) : null;
+    const resolvedDisplayNameColor = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, displayNameColor.trim(), canUseGradient, inGuild, ircColorsEnabled, isHovering) : null;
+    const resolvedNicknameColor = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, nicknameColor.trim(), canUseGradient, inGuild, ircColorsEnabled, isHovering) : null;
+    const resolvedFriendNameColor = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, friendNameColor.trim(), canUseGradient, inGuild, ircColorsEnabled, isHovering) : null;
+    const resolvedCustomNameColor = author ? resolveColor(authorColorStrings, authorDisplayNameStyles, customNameColor.trim(), canUseGradient, inGuild, ircColorsEnabled, isHovering) : null;
     const affixColor = { color: textMutedValue, "-webkit-text-fill-color": textMutedValue, isolation: "isolate", "white-space": "pre", "font-family": "var(--font-primary)", "letter-spacing": "normal" };
     const { username, display, nick, friend, custom } = getProcessedNames(author, truncateAllNamesWithStreamerMode, discriminators, inGuild, friendNameOnlyInDirectMessages, customNameOnlyInDirectMessages);
 
@@ -642,7 +649,7 @@ function renderUsername(
 
     // Only mentions and reactions popouts should patch in the gradient glow or else a double glow will appear on messages.
     const hoveringClass = (isHovering ? " smyn-gradient-hovered" : "");
-    const gradientClasses = useTopRoleStyle
+    const gradientClasses = useTopStyle
         ? "smyn-gradient smyn-gradient-inherit-bg" + hoveringClass
         : "smyn-gradient smyn-gradient-unset-bg" + hoveringClass;
 
@@ -674,7 +681,7 @@ function renderUsername(
         <span
             style={{
                 ...topLevelStyle,
-                ...(topRoleStyle?.normal.original || {})
+                ...(topStyle?.normal.original || {})
             }}
             className="smyn-container"
         >
@@ -683,7 +690,7 @@ function renderUsername(
                 <span
                     className={SMYNC(firstGroupClasses, { [gradientClasses]: shouldGradientGlow })}
                     data-text={shouldGradientGlow ? firstDataText : undefined}
-                    style={(shouldGradientGlow && useTopRoleStyle && topRoleStyle ? topRoleStyle.gradient.animated : undefined) as React.CSSProperties}
+                    style={(shouldGradientGlow && useTopStyle && topStyle ? topStyle.gradient.animated : undefined) as React.CSSProperties}
                 >
                     <span
                         className={SMYNC(firstNameClasses, {
@@ -694,12 +701,12 @@ function renderUsername(
                         data-username-with-effects={needsEffectDataAttr && shouldShowEffect ? first.name : undefined}
                         style={shouldShowEffect
                             ? undefined
-                            : topRoleStyle ?
-                                shouldAnimateGradients && topRoleStyle.gradient
-                                    ? topRoleStyle.gradient.animated
-                                    : topRoleStyle.gradient
-                                        ? topRoleStyle.gradient.static.original
-                                        : topRoleStyle.normal.original
+                            : topStyle ?
+                                shouldAnimateGradients && topStyle.gradient
+                                    ? topStyle.gradient.animated
+                                    : topStyle.gradient
+                                        ? topStyle.gradient.static.original
+                                        : topStyle.normal.original
                                 : undefined
                         }>
                         {first.wrapped}</span>

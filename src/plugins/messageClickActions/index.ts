@@ -17,8 +17,13 @@ import { Logger } from "@utils/Logger";
 import definePlugin, { makeRange, OptionType } from "@utils/types";
 import { AuthenticationStore, Constants, EditMessageStore, FluxDispatcher, MessageActions, MessageTypeSets, PermissionsBits, PermissionStore, PinActions, RestAPI, Toasts, WindowStore } from "@webpack/common";
 
+import { AdditionalReactEmojisSetting, MAX_ADDITIONAL_REACT_EMOJIS, ReactEmojiSetting } from "./ReactEmojiSetting";
+
 type Modifier = "NONE" | "SHIFT" | "CTRL" | "ALT" | "BACKSPACE" | "DELETE";
 type ClickAction = "NONE" | "DELETE" | "COPY_LINK" | "COPY_ID" | "COPY_CONTENT" | "COPY_USER_ID" | "EDIT" | "REPLY" | "REACT" | "OPEN_THREAD" | "OPEN_TAB" | "EDIT_REPLY" | "QUOTE" | "PIN";
+
+const logger = new Logger("MessageClickActions");
+const ADDITIONAL_REACTION_DELAY_MS = 300; // discord seems to rate limit this for 300ms but that might not be constant
 
 const actions: { label: () => string; value: ClickAction; }[] = [
     { label: () => t(plugin.messageClickActions.actions.none), value: "NONE" },
@@ -132,13 +137,7 @@ let mouseDownCount = 0;
 let doubleClickDetected = false;
 let secondMouseDownTime = 0;
 
-const settings = definePluginSettings({
-    reactEmoji: {
-        label: () => t(plugin.messageClickActions.option.reactEmoji.label),
-        description: () => t(plugin.messageClickActions.option.reactEmoji.description),
-        type: OptionType.STRING,
-        default: "💀"
-    },
+export const settings = definePluginSettings({
     singleClickAction: {
         label: () => t(plugin.messageClickActions.option.singleClickAction.label),
         description: () => t(plugin.messageClickActions.option.singleClickAction.description),
@@ -202,6 +201,29 @@ const settings = definePluginSettings({
         options: modifiers,
         default: "NONE"
     },
+    reactEmoji: {
+        label: () => t(plugin.messageClickActions.option.reactEmoji.label),
+        description: () => t(plugin.messageClickActions.option.reactEmoji.description),
+        type: OptionType.STRING,
+        component: ReactEmojiSetting,
+        default: "💀"
+    },
+    addAdditionalReacts: {
+        label: () => t(plugin.messageClickActions.option.addAdditionalReacts.label),
+        description: () => t(plugin.messageClickActions.option.addAdditionalReacts.description),
+        type: OptionType.BOOLEAN,
+        default: false
+    },
+    additionalReactEmojis: {
+        label: () => t(plugin.messageClickActions.option.additionalReactEmojis.label),
+        description: () => t(plugin.messageClickActions.option.additionalReactEmojis.description, { count: MAX_ADDITIONAL_REACT_EMOJIS }),
+        type: OptionType.COMPONENT,
+        component: AdditionalReactEmojisSetting,
+        get hidden() {
+            return !settings.store.addAdditionalReacts;
+        },
+        default: ""
+    },
     disableInDms: {
         label: () => t(plugin.messageClickActions.option.disableInDms.label),
         description: () => t(plugin.messageClickActions.option.disableInDms.description),
@@ -231,7 +253,7 @@ const settings = definePluginSettings({
         label: () => t(plugin.messageClickActions.option.deferDoubleClickForTriple.label),
         description: () => t(plugin.messageClickActions.option.deferDoubleClickForTriple.description),
         type: OptionType.BOOLEAN,
-        default: true
+        default: false
     },
     selectionHoldTimeout: {
         label: () => t(plugin.messageClickActions.option.selectionHoldTimeout.label),
@@ -264,6 +286,51 @@ function showWarning(message: string) {
     });
 }
 
+function clearClickTimeouts() {
+    if (doubleClickTimeout) {
+        clearTimeout(doubleClickTimeout);
+        doubleClickTimeout = null;
+    }
+    if (singleClickTimeout) {
+        clearTimeout(singleClickTimeout);
+        singleClickTimeout = null;
+    }
+}
+
+function resetClickState() {
+    mouseDownCount = 0;
+    doubleClickDetected = false;
+    secondMouseDownTime = 0;
+}
+
+function normalizeEmoji(emoji: string): string | null {
+    const trimmed = emoji.trim();
+    if (!trimmed) return null;
+
+    const customMatch = trimmed.match(/^:?([\w-]+):(\d+)$/);
+    if (customMatch) {
+        return `${customMatch[1]}:${customMatch[2]}`;
+    }
+
+    return trimmed;
+}
+
+function getConfiguredReactionEmojis() {
+    const baseEmoji = normalizeEmoji(settings.store.reactEmoji);
+    const configured = [baseEmoji];
+
+    if (settings.store.addAdditionalReacts) {
+        const extra = settings.store.additionalReactEmojis
+            .split(/[\n,]/g)
+            .map(normalizeEmoji)
+            .filter((emoji): emoji is string => Boolean(emoji))
+            .slice(0, MAX_ADDITIONAL_REACT_EMOJIS);
+        configured.push(...extra);
+    }
+
+    return Array.from(new Set(configured.filter((emoji): emoji is string => Boolean(emoji))));
+}
+
 const canSend = (channel: Channel) =>
     !channel.guild_id || PermissionStore.can(PermissionsBits.SEND_MESSAGES, channel);
 
@@ -278,18 +345,13 @@ const canReply = (msg: Message) =>
     MessageTypeSets.REPLYABLE.has(msg.type) && !msg.hasFlag(MessageFlags.EPHEMERAL);
 
 async function toggleReaction(channelId: string, messageId: string, emoji: string, channel: Channel, msg: Message) {
-    const trimmed = emoji.trim();
-    if (!trimmed) return;
+    const emojiParam = normalizeEmoji(emoji);
+    if (!emojiParam) return;
 
     if (channel.guild_id && (!PermissionStore.can(PermissionsBits.ADD_REACTIONS, channel) || !PermissionStore.can(PermissionsBits.READ_MESSAGE_HISTORY, channel))) {
         showWarning(t(plugin.messageClickActions.missingPermissions.react));
         return;
     }
-
-    const customMatch = trimmed.match(/^:?([\w-]+):(\d+)$/);
-    const emojiParam = customMatch
-        ? `${customMatch[1]}:${customMatch[2]}`
-        : trimmed;
 
     const hasReacted = msg.reactions?.some(r => {
         const reactionEmoji = r.emoji.id
@@ -309,12 +371,47 @@ async function toggleReaction(channelId: string, messageId: string, emoji: strin
             });
         }
     } catch (e) {
-        new Logger("MessageClickActions").error("Failed to toggle reaction:", e);
+        logger.error("Failed to toggle reaction:", e);
     }
 }
 
+async function addReaction(channelId: string, messageId: string, emoji: string, channel: Channel) {
+    const emojiParam = normalizeEmoji(emoji);
+    if (!emojiParam) return;
+
+    if (channel.guild_id && (!PermissionStore.can(PermissionsBits.ADD_REACTIONS, channel) || !PermissionStore.can(PermissionsBits.READ_MESSAGE_HISTORY, channel))) {
+        showWarning("Cannot react: Missing permissions");
+        return;
+    }
+
+    try {
+        await RestAPI.put({
+            url: Constants.Endpoints.REACTION(channelId, messageId, emojiParam, "@me")
+        });
+    } catch (e) {
+        logger.error("Failed to add reaction:", e);
+    }
+}
+
+async function reactWithConfiguredEmojis(channel: Channel, msg: Message) {
+    const [primaryEmoji, ...additionalEmojis] = getConfiguredReactionEmojis();
+    if (!primaryEmoji) return;
+
+    await toggleReaction(channel.id, msg.id, primaryEmoji, channel, msg);
+
+    for (const emoji of additionalEmojis) {
+        await new Promise<void>(resolve => setTimeout(resolve, ADDITIONAL_REACTION_DELAY_MS));
+        await addReaction(channel.id, msg.id, emoji, channel);
+    }
+}
+
+function getMessageLink(msg: Message, channel: Channel) {
+    const guildId = channel.guild_id ?? "@me";
+    return `${window.location.origin}/channels/${guildId}/${channel.id}/${msg.id}`;
+}
+
 function copyLink(msg: Message, channel: Channel) {
-    copyWithToast(`https://discord.com/channels/${channel.guild_id ?? "@me"}/${channel.id}/${msg.id}`, t(plugin.messageClickActions.linkCopied));
+    copyWithToast(getMessageLink(msg, channel), "Link copied!");
 }
 
 function togglePin(channel: Channel, msg: Message) {
@@ -361,9 +458,7 @@ function quoteMessage(channel: Channel, msg: Message) {
 }
 
 function openInNewTab(msg: Message, channel: Channel) {
-    const guildId = channel.guild_id ?? "@me";
-    const link = `https://discord.com/channels/${guildId}/${channel.id}/${msg.id}`;
-    PlexcordNative.native.openExternal(link);
+    PlexcordNative.native.openExternal(getMessageLink(msg, channel));
 }
 
 function openInThread(msg: Message, channel: Channel) {
@@ -480,7 +575,7 @@ async function executeAction(
             break;
 
         case "REACT":
-            await toggleReaction(channel.id, msg.id, settings.store.reactEmoji, channel, msg);
+            await reactWithConfiguredEmojis(channel, msg);
             event.preventDefault();
             break;
 
@@ -502,8 +597,7 @@ async function executeAction(
 export default definePlugin({
     name: "MessageClickActions",
     description: () => t(plugin.messageClickActions.description),
-    authors: [Devs.Ven, PcDevs.keircn],
-    isModified: true,
+    authors: [Devs.Ven, PcDevs.keircn, PcDevs.omaw, PcDevs.MutanPlex],
 
     settings,
 
@@ -520,18 +614,9 @@ export default definePlugin({
         document.removeEventListener("mousedown", onMouseDown);
         WindowStore.removeChangeListener(focusChanged);
 
-        if (doubleClickTimeout) {
-            clearTimeout(doubleClickTimeout);
-            doubleClickTimeout = null;
-        }
-        if (singleClickTimeout) {
-            clearTimeout(singleClickTimeout);
-            singleClickTimeout = null;
-        }
+        clearClickTimeouts();
         pendingDoubleClickAction = null;
-        mouseDownCount = 0;
-        doubleClickDetected = false;
-        secondMouseDownTime = 0;
+        resetClickState();
     },
 
     onMessageClick(msg, channel, event) {
@@ -565,9 +650,7 @@ export default definePlugin({
 
         if (Date.now() - lastMouseDownTime > settings.store.selectionHoldTimeout) {
             pressedModifiers.clear();
-            mouseDownCount = 0;
-            doubleClickDetected = false;
-            secondMouseDownTime = 0;
+            resetClickState();
             return;
         }
 
@@ -578,9 +661,7 @@ export default definePlugin({
 
         if (isTripleClick) {
             if (!settings.store.deferDoubleClickForTriple) {
-                mouseDownCount = 0;
-                doubleClickDetected = false;
-                secondMouseDownTime = 0;
+                resetClickState();
                 return;
             }
             if (doubleClickTimeout) {
@@ -594,9 +675,7 @@ export default definePlugin({
                 pressedModifiers.clear();
             }
             doubleClickFired = false;
-            mouseDownCount = 0;
-            doubleClickDetected = false;
-            secondMouseDownTime = 0;
+            resetClickState();
             return;
         }
 
@@ -646,9 +725,7 @@ export default definePlugin({
                 event.preventDefault();
             }
 
-            mouseDownCount = 0;
-            doubleClickDetected = false;
-            secondMouseDownTime = 0;
+            resetClickState();
             return;
         }
 
@@ -660,9 +737,7 @@ export default definePlugin({
                     executeAction(singleClickAction, msg, channel, event);
                     pressedModifiers.clear();
                 }
-                mouseDownCount = 0;
-                doubleClickDetected = false;
-                secondMouseDownTime = 0;
+                resetClickState();
             };
 
             const canDoubleClickWithCurrentModifier =

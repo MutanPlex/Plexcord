@@ -820,6 +820,13 @@ const translations = {
         },
         componentFailed: {
             message: "Uh Oh! Failed to render this Page. However, there is an update available that might fix it. Would you like to update and restart now?"
+        },
+        quickCSS: {
+            title: "QuickCSS Editor Open",
+            message: "QuickCSS editor is still open in the background.",
+            detail: "Do you want to close Discord anyway? This will also close the QuickCSS editor.",
+            cancel: "Cancel",
+            close: "Close Anyway"
         }
     },
 
@@ -5009,6 +5016,19 @@ const translations = {
             hide: "Hide Media",
             hidden: "Media Hidden"
         },
+        hideMessages: {
+            name: "HideMessages",
+            description: "A plugin to temporarily hide messages until you restart.",
+            button: {
+                hide: "Hide"
+            },
+            option: {
+                hidePopoverButton: {
+                    label: "Hide Popover Button",
+                    description: "Hide the hide button in the message popover."
+                }
+            }
+        },
         hideServers: {
             name: "HideServers",
             description: "Hides servers from the server list",
@@ -5848,10 +5868,6 @@ const translations = {
             name: "MessageClickActions",
             description: "Hold Backspace and click to delete, double click to edit/reply",
             option: {
-                reactEmoji: {
-                    label: "React Emoji",
-                    description: "Emoji to use for react actions"
-                },
                 singleClickAction: {
                     label: "Single Click Action",
                     description: "Action on single click (your messages)"
@@ -5887,6 +5903,18 @@ const translations = {
                 tripleClickModifier: {
                     label: "Triple Click Modifier",
                     description: "Modifier required for triple-click action"
+                },
+                reactEmoji: {
+                    label: "React Emoji",
+                    description: "Emoji to use for react actions"
+                },
+                addAdditionalReacts: {
+                    label: "Add Additional Reacts",
+                    description: "Also add additional configured reaction emojis"
+                },
+                additionalReactEmojis: {
+                    label: "Additional React Emojis",
+                    description: "Additional emojis to add when using React action (comma/newline separated, max {{count}}"
                 },
                 disableInDms: {
                     label: "Disable in DMs",
@@ -7118,6 +7146,10 @@ const translations = {
         noProfileThemes: {
             name: "NoProfileThemes",
             description: "Completely removes Nitro profile themes from everyone but yourself."
+        },
+        noPushToTalk: {
+            name: "NoPushToTalk",
+            description: "Bypasses the push-to-talk requirement for voice activity in channels that enforce it."
         },
         noReplyMention: {
             name: "NoReplyMention",
@@ -9207,7 +9239,7 @@ const translations = {
                 },
                 ignoreGradients: {
                     label: "Ignore Gradients",
-                    description: "For the second, third, and fourth names, if the role has a gradient, ignore it in favor of the value below."
+                    description: "For the non-primary names, if the role has a gradient and the color below is set to 'Role+-#', use the primary color instead of the whole gradient, and if it has a nitro effect, ignore it entirely."
                 },
                 animateGradients: {
                     label: "Animate Gradients",
@@ -9231,23 +9263,23 @@ const translations = {
                 },
                 customNameColor: {
                     label: "Custom Name Color",
-                    description: "The color to use for the custom name you assigned a user if it's not the first displayed. Leave blank for default. Accepts hex(a), rgb(a), or hsl(a) input. Use 'Role' to follow the user's top role color. Use 'Role+-#' to adjust the brightness by that percentage (ex: 'Role+15')"
+                    description: "The color to use for the custom name you assigned a user if it's not the first displayed. Accepts any valid CSS input. Use 'Role' to follow the user's top role colors, nitro effect colors, or IRCColors color if enabled. Use 'Role+-#' to adjust the brightness by that percentage (ex: 'Role+15')"
                 },
                 friendNameColor: {
                     label: "Friend Name Color",
-                    description: "The color to use for a friend's nickname if it's not the first displayed. Leave blank for default. Accepts hex(a), rgb(a), or hsl(a) input. Use 'Role' to follow the user's top role color. Use 'Role+-#' to adjust the brightness by that percentage (ex: 'Role+15')"
+                    description: "The color to use for a friend's nickname if it's not the first displayed. Accepts any valid CSS input. Use 'Role' to follow the user's top role colors, nitro effect colors, or IRCColors color if enabled. Use 'Role+-#' to adjust the brightness by that percentage (ex: 'Role+15')"
                 },
                 nicknameColor: {
                     label: "Nickname Color",
-                    description: "The color to use for the nickname if it's not the first displayed. Leave blank for default. Accepts hex(a), rgb(a), or hsl(a) input. Use 'Role' to follow the user's top role color. Use 'Role+-#' to adjust the brightness by that percentage (ex: 'Role+15')"
+                    description: "The color to use for the nickname if it's not the first displayed. Accepts any valid CSS input. Use 'Role' to follow the user's top role colors, nitro effect colors, or IRCColors color if enabled. Use 'Role+-#' to adjust the brightness by that percentage (ex: 'Role+15')"
                 },
                 displayNameColor: {
                     label: "Display Name Color",
-                    description: "The color to use for the display name if it's not the first displayed. Leave blank for default. Accepts hex(a), rgb(a), or hsl(a) input. Use 'Role' to follow the user's top role color. Use 'Role+-#' to adjust the brightness by that percentage (ex: 'Role+15')"
+                    description: "The color to use for the display name if it's not the first displayed. Accepts any valid CSS input. Use 'Role' to follow the user's top role colors, nitro effect colors, or IRCColors color if enabled. Use 'Role+-#' to adjust the brightness by that percentage (ex: 'Role+15')"
                 },
                 usernameColor: {
                     label: "Username Color",
-                    description: "The color to use for the username if it's not the first displayed. Leave blank for default. Accepts hex(a), rgb(a), or hsl(a) input. Use 'Role' to follow the user's top role color. Use 'Role+-#' to adjust the brightness by that percentage (ex: 'Role+15')"
+                    description: "The color to use for the username if it's not the first displayed. Accepts any valid CSS input. Use 'Role' to follow the user's top role colors, nitro effect colors, or IRCColors color if enabled. Use 'Role+-#' to adjust the brightness by that percentage (ex: 'Role+15')"
                 },
                 triggerNameRerender: {
                     label: "Trigger Name Rerender",
@@ -10593,6 +10625,7 @@ const translations = {
             },
             context: {
                 voiceTools: "Voice Tools",
+                mentionAll: "Mention All Users",
                 disconnectAll: "Disconnect All",
                 muteAll: "Mute All",
                 unmuteAll: "Unmute All",
