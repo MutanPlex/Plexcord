@@ -118,7 +118,7 @@
             "dompurify": "^3.3.0",
             "@eslint/plugin-kit@<0.3.4": ">=0.3.4",
             "@isaacs/brace-expansion": ">=6.0.0",
-            "minimatch": ">=10.1.2",
+            "minimatch": ">=10.2.3",
             "basic-ftp": ">=5.1.1"
         }
     },
