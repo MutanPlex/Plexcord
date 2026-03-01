@@ -238,7 +238,8 @@ export default definePlugin({
             replacement: {
                 match: /,subText:(\i)\.isSystemDM\(\).{0,500}:null,(?=name:)/,
                 replace: ",subText:$self.getSubText(arguments[0]),"
-            }
+            },
+            noWarn: true
         }
     ],
 

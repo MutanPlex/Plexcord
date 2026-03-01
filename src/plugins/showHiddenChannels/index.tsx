@@ -115,7 +115,8 @@ export default definePlugin({
                     match: /(getRenderLevel\(\i\){.+?return)!\i\.\i\.can\(\i\.\i\.VIEW_CHANNEL,this\.record\)\|\|/,
                     replace: (_, rest) => `${rest} `
                 }
-            ]
+            ],
+            noWarn: true
         },
         {
             find: "VoiceChannel, transitionTo: Channel does not have a guildId",

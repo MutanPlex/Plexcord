@@ -97,7 +97,8 @@ export default definePlugin({
                     match: /(?<=\i\)\({avatarDecoration:)\i(?=,)(?<=currentUser:(\i).+?)/,
                     replace: "$self.useUserDecorAvatarDecoration($1)??$&"
                 }
-            ]
+            ],
+            noWarn: true
         },
         ...[
             '"Message Username"', // Messages
