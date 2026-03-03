@@ -7,6 +7,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
+import { QrCodeIcon } from "@components/Icons";
 import { wrapTab } from "@components/settings";
 import loginWithQR from "@plugins/loginWithQR";
 import { images } from "@plugins/loginWithQR/images";
@@ -23,7 +24,7 @@ import {
 import jsQR, { QRCode } from "jsqr";
 import { MutableRefObject, ReactElement } from "react";
 
-import { cl, QrCodeIcon, Spinner, SpinnerTypes } from "..";
+import { cl, Spinner, SpinnerTypes } from "..";
 import openVerifyModal from "./VerifyModal";
 
 enum LoginStateType {

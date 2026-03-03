@@ -231,7 +231,7 @@ function LogsContent({ visibleMessages, canLoadMore, sortNewest, tab, reset, han
     );
 }
 
-const LogsContentMemo = LazyComponent(() => React.memo(LogsContent));
+const LogsContentMemo = LazyComponent(() => LogsContent);
 
 function NoResults({ tab }: { tab: LogTabs; }) {
     const getTabLabel = (tab: LogTabs) => {

@@ -8,9 +8,9 @@
 import "./Link.css";
 
 import { classes } from "@utils/misc";
-import type { AnchorHTMLAttributes, PropsWithChildren } from "react";
+import type { AnchorHTMLAttributes, DetailedHTMLProps, PropsWithChildren } from "react";
 
-export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface LinkProps extends DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> {
     disabled?: boolean;
     useDefaultUnderlineStyles?: boolean;
 }

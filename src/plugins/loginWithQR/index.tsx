@@ -9,6 +9,7 @@ import { plugin, t } from "@api/i18n";
 import { plugins } from "@api/PluginManager";
 import { definePluginSettings } from "@api/Settings";
 import { Button } from "@components/Button";
+import { QrCodeIcon } from "@components/Icons";
 import { Paragraph } from "@components/Paragraph";
 import SettingsPlugin from "@plugins/_core/settings";
 import { PcDevs } from "@utils/constants";
@@ -17,7 +18,6 @@ import { removeFromArray } from "@utils/misc";
 import definePlugin, { OptionType } from "@utils/types";
 
 import { preload, unload } from "./images";
-import { QrCodeIcon } from "./ui";
 import openQrModal from "./ui/modals/QrModal";
 
 const settings = definePluginSettings({

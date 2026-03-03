@@ -1575,36 +1575,6 @@ const translations = {
             name: "BetterUploadButton",
             description: "Upload with a single click, open menu with right click"
         },
-        betterUserArea: {
-            name: "BetterUserArea",
-            description: "Customize and make the user area more clean.",
-            option: {
-                removeNameplate: {
-                    label: "Remove Nameplate",
-                    description: "Remove nameplate styling."
-                },
-                removeAudioMenus: {
-                    label: "Remove Audio Menus",
-                    description: "Remove menus next to mute and deafen buttons."
-                },
-                alwaysShowUsername: {
-                    label: "Always Show Username",
-                    description: "Always show username instead of status."
-                },
-                removeButtonTooltips: {
-                    label: "Remove Button Tooltips",
-                    description: "Remove button tooltips."
-                },
-                removeAvatarDecoration: {
-                    label: "Remove Avatar Decoration",
-                    description: "Remove avatar decoration."
-                },
-                removeUsernameStyles: {
-                    label: "Remove Username Styles",
-                    description: "Remove username colors and effects."
-                }
-            }
-        },
         biggerStreamPreview: {
             name: "BiggerStreamPreview",
             description: "This plugin allows you to enlarge stream previews",
@@ -3586,6 +3556,77 @@ const translations = {
                 dearrow: "Click to dearrow"
             }
         },
+        declutter: {
+            name: "Declutter",
+            description: "Declutter discord ui by removing unwanted elements such as profile customizations, shops, quests and more.",
+            option: {
+                userProfileHeader: {
+                    label: "User Profile"
+                },
+                removeAvatarDecoration: {
+                    label: "Remove Avatar Decoration",
+                    description: "Remove avatar decorations."
+                },
+                removeNameplate: {
+                    label: "Remove Nameplate",
+                    description: "Remove nameplates."
+                },
+                removeProfileEffect: {
+                    label: "Remove Profile Effect",
+                    description: "Remove profile animation effects on open."
+                },
+                removeClanTag: {
+                    label: "Remove Clan Tag",
+                    description: "Remove clan tags."
+                },
+                alwaysShowUsername: {
+                    label: "Always Show Username",
+                    description: "Always show username instead of status."
+                },
+                removeUsernameStyles: {
+                    label: "Remove Username Styles",
+                    description: "Remove username colors and effects."
+                },
+                friendsListHeader: {
+                    label: "Above Friends/DMs List"
+                },
+                removeShopAboveDM: {
+                    label: "Remove Shop Above DMs",
+                    description: "Remove shops above DMs list."
+                },
+                removeQuestsAboveDM: {
+                    label: "Remove Quests Above DMs",
+                    description: "Remove quests above DMs list."
+                },
+                miscHeader: {
+                    label: "Misc"
+                },
+                removeServerBoostInfo: {
+                    label: "Remove Server Boost Info",
+                    description: "Remove server boost info above channel list."
+                },
+                removeBillingSettings: {
+                    label: "Remove Billing Settings",
+                    description: "Remove billing settings."
+                },
+                removeGiftButton: {
+                    label: "Remove Gift Button",
+                    description: "Remove gift button."
+                },
+                removeUnavailableEmojiPicker: {
+                    label: "Remove Unavailable Emoji Picker",
+                    description: "Remove unavailable categories from the emoji picker."
+                },
+                removeAudioMenus: {
+                    label: "Remove Audio Menus",
+                    description: "Remove menus next to mute and deafen buttons."
+                },
+                removeButtonTooltips: {
+                    label: "Remove Button Tooltips",
+                    description: "Remove button tooltips."
+                }
+            }
+        },
         decodeBase64: {
             name: "DecodeBase64",
             description: "Decode base64 content of any message and copy the decoded content.",
@@ -3760,36 +3801,6 @@ const translations = {
         disableCameras: {
             name: "DisableCameras",
             description: "Disables cameras in a call by default"
-        },
-        disCleaner: {
-            name: "DisCleaner",
-            description: "Hides various features related to nitro and the store",
-            option: {
-                dms: {
-                    label: "DMs",
-                    description: "Remove shops above DMs list"
-                },
-                quests: {
-                    label: "Quests",
-                    description: "Remove quests above DMs list",
-                },
-                serverBoost: {
-                    label: "Server Boost",
-                    description: "Remove server boost info above channel list"
-                },
-                billing: {
-                    label: "Billing",
-                    description: "Remove billing settings"
-                },
-                gift: {
-                    label: "Gift",
-                    description: "Remove gift button"
-                },
-                emojiList: {
-                    label: "Emoji List",
-                    description: "Remove unavailable categories from the emoji picker"
-                }
-            }
         },
         discordDevBanner: {
             name: "DiscordDevBanner",
@@ -4658,7 +4669,13 @@ const translations = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Makes avatars take up the entire vc tile"
+            description: "Makes avatars take up the entire vc tile",
+            option: {
+                useServerProfileAvatars: {
+                    label: "Use Server Profile Avatars",
+                    description: "Use server profile avatars in guild voice channels when available."
+                }
+            }
         },
         gameActivityToggle: {
             name: "GameActivityToggle",

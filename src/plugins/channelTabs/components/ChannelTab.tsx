@@ -14,7 +14,7 @@ import { classNameFactory } from "@utils/css";
 import { getGuildAcronym, getIntlMessage, getUniqueUsername } from "@utils/discord";
 import { classes } from "@utils/misc";
 import { findComponentByCodeLazy, findCssClassesLazy } from "@webpack";
-import { Avatar, ChannelStore, ContextMenuApi, GuildStore, PresenceStore, ReadStateStore, TypingStore, useDrag, useDrop, useEffect, useRef, UserStore, useState, useStateFromStores } from "@webpack/common";
+import { Avatar, ChannelStore, ContextMenuApi, GuildStore, PresenceStore, ReadStateStore, ThemeStore, TypingStore, useDrag, useDrop, useEffect, useRef, UserStore, useState, useStateFromStores } from "@webpack/common";
 import { JSX } from "react";
 
 import { TabContextMenu } from "./ContextMenus";
@@ -429,17 +429,19 @@ export default function ChannelTab(props: ChannelTabsProps & { index: number; })
     const hasActiveQuests = activeQuestIntervals.size > 0;
 
     return <div
-        className={cl("tab", {
-            "tab-compact": compact,
-            "tab-selected": isTabSelected(id),
-            "tab-entering": isEntering,
-            "tab-closing": isClosing,
-            "tab-dragging": isDragging,
-            "tab-drop-target": isDropTarget,
-            "tab-nitro": channelId === "__nitro__",
-            "tab-quests-active": channelId === "__quests__" && hasActiveQuests,
-            wider: settings.store.widerTabsAndBookmarks
-        })}
+        className={cl("tab",
+            ThemeStore.theme === "light" ? "light-theme" : "dark-theme",
+            {
+                "tab-compact": compact,
+                "tab-selected": isTabSelected(id),
+                "tab-entering": isEntering,
+                "tab-closing": isClosing,
+                "tab-dragging": isDragging,
+                "tab-drop-target": isDropTarget,
+                "tab-nitro": channelId === "__nitro__",
+                "tab-quests-active": channelId === "__quests__" && hasActiveQuests,
+                wider: settings.store.widerTabsAndBookmarks
+            })}
         key={index}
         ref={ref}
         onMouseEnter={() => setIsHovered(true)}

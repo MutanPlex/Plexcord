@@ -32,6 +32,4 @@ type Spinner = ComponentType<Omit<HTMLAttributes<HTMLDivElement>, "children"> & 
 
 export const Spinner = findComponentByCodeLazy('"pulsingEllipsis"') as unknown as Spinner;
 
-export const QrCodeIcon = findComponentByCodeLazy("0v3ZM20");
-
 export const cl = classNameFactory("qrlogin-");

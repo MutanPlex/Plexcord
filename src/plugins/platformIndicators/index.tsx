@@ -30,6 +30,7 @@ import { AuthenticationStore, PresenceStore, Tooltip, UserStore, useStateFromSto
 import desktopIcon from "file://icons/desktopIcon.svg";
 import embeddedIcon from "file://icons/embeddedIcon.svg";
 import mobileIcon from "file://icons/mobileIcon.svg";
+import vrIcon from "file://icons/vrIcon.svg";
 import webIcon from "file://icons/webIcon.svg";
 import type { JSX } from "react";
 
@@ -50,6 +51,11 @@ const SessionsStore = findStoreLazy("SessionsStore") as {
 const { useStatusFillColor } = mapMangledModuleLazy([".5625*", "translate"], {
     useStatusFillColor: filters.byCode(".hex")
 });
+
+const platformMap = {
+    embedded: "Console",
+    vr: "VR"
+};
 
 function Icon(svg: string, size = 20) {
     return ({ color, tooltip, small }: { color: string; tooltip: string; small: boolean; }) => (
@@ -77,6 +83,7 @@ const Icons: Record<DiscordPlatform, IconData> = {
     web: iconData(webIcon),
     mobile: iconData(mobileIcon),
     embedded: iconData(embeddedIcon),
+    vr: iconData(vrIcon)
 };
 
 function iconData(svg: string, size: number = 20): IconData {

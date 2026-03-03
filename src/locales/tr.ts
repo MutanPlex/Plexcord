@@ -1578,36 +1578,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "BetterUploadButton",
             description: "Tek tıklama ile yükleme yapın, sağ tıklama ile menüyü açın"
         },
-        betterUserArea: {
-            name: "BetterUserArea",
-            description: "Kullanıcı alanını özelleştirir ve daha sade hale getirir.",
-            option: {
-                removeNameplate: {
-                    label: "İsim Plakasını Kaldır",
-                    description: "İsim plakası stilini kaldırır."
-                },
-                removeAudioMenus: {
-                    label: "Ses Menüleri Kaldır",
-                    description: "Sessize alma ve sağırlaştırma düğmelerinin yanındaki menüleri kaldırır."
-                },
-                alwaysShowUsername: {
-                    label: "Kullanıcı Adını Her Zaman Göster",
-                    description: "Durum yerine her zaman kullanıcı adını gösterir."
-                },
-                removeButtonTooltips: {
-                    label: "Buton İpuçlarını Kaldır",
-                    description: "Buton araç ipuçlarını kaldırır."
-                },
-                removeAvatarDecoration: {
-                    label: "Avatar Süslemesini Kaldır",
-                    description: "Avatar süslemesini kaldırır."
-                },
-                removeUsernameStyles: {
-                    label: "Kullanıcı Adı Stillerini Kaldır",
-                    description: "Kullanıcı adı renklerini ve efektlerini kaldırır."
-                }
-            }
-        },
         biggerStreamPreview: {
             name: "BiggerStreamPreview",
             description: "Bu eklenti, yayın önizlemelerini büyütmenizi sağlar",
@@ -3589,6 +3559,77 @@ const translations: MatchStructure<typeof enTranslations> = {
                 dearrow: "Dearrow uygulamak için tıklayın"
             }
         },
+        declutter: {
+            name: "Declutter",
+            description: "Profil özelleştirmeleri, mağazalar, görevler ve daha fazlası gibi istenmeyen öğeleri kaldırarak Discord arayüzünü sadeleştirin.",
+            option: {
+                userProfileHeader: {
+                    label: "Kullanıcı Profili"
+                },
+                removeAvatarDecoration: {
+                    label: "Profil Dekorasyonunu Kaldır",
+                    description: "Avatar dekorasyonlarını kaldırır."
+                },
+                removeNameplate: {
+                    label: "İsim Levhasını Kaldır",
+                    description: "İsim levhalarını kaldırır."
+                },
+                removeProfileEffect: {
+                    label: "Profil Efektini Kaldır",
+                    description: "Profil açıldığında ortaya çıkan animasyon efektlerini kaldırır."
+                },
+                removeClanTag: {
+                    label: "Klan Etiketini Kaldır",
+                    description: "Klan etiketlerini kaldırır."
+                },
+                alwaysShowUsername: {
+                    label: "Her Zaman Kullanıcı Adını Göster",
+                    description: "Durum yerine her zaman kullanıcı adını gösterir."
+                },
+                removeUsernameStyles: {
+                    label: "Kullanıcı Adı Stillerini Kaldır",
+                    description: "Kullanıcı adı renklerini ve efektlerini kaldırır."
+                },
+                friendsListHeader: {
+                    label: "Arkadaş/DM Listesi Üstü"
+                },
+                removeShopAboveDM: {
+                    label: "DM Listesi Üstündeki Mağazayı Kaldır",
+                    description: "DM listesinin üzerinde bulunan mağaza butonunu kaldırır."
+                },
+                removeQuestsAboveDM: {
+                    label: "DM Listesi Üstündeki Görevleri Kaldır",
+                    description: "DM listesinin üzerinde bulunan görevler butonunu kaldırır."
+                },
+                miscHeader: {
+                    label: "Çeşitli"
+                },
+                removeServerBoostInfo: {
+                    label: "Sunucu Takviye Bilgisini Kaldır",
+                    description: "Kanal listesinin üstündeki sunucu takviye bilgisini kaldırır."
+                },
+                removeBillingSettings: {
+                    label: "Ödeme Ayarlarını Kaldır",
+                    description: "Ödeme (fatura) ayarlarını kaldırır."
+                },
+                removeGiftButton: {
+                    label: "Hediye Butonunu Kaldır",
+                    description: "Hediye gönderme butonunu kaldırır."
+                },
+                removeUnavailableEmojiPicker: {
+                    label: "Kullanılamayan Emoji Seçiciyi Kaldır",
+                    description: "Emoji seçicideki erişilemeyen kategorileri kaldırır."
+                },
+                removeAudioMenus: {
+                    label: "Ses Menülerini Kaldır",
+                    description: "Sustur ve sağırlaştır butonlarının yanındaki ok menülerini kaldırır."
+                },
+                removeButtonTooltips: {
+                    label: "Buton İpuçlarını Kaldır",
+                    description: "Butonların üzerinde çıkan bilgi yazılarını (tooltip) kaldırır."
+                }
+            }
+        },
         decodeBase64: {
             name: "DecodeBase64",
             description: "Herhangi bir mesajın base64 içeriğini çöz ve çözülen içeriği kopyala.",
@@ -3763,36 +3804,6 @@ const translations: MatchStructure<typeof enTranslations> = {
         disableCameras: {
             name: "DisableCameras",
             description: "Varsayılan olarak aramalarda kameraları devre dışı bırakır"
-        },
-        disCleaner: {
-            name: "DisCleaner",
-            description: "Nitro ve mağaza ile ilgili çeşitli özellikleri gizler",
-            option: {
-                dms: {
-                    label: "DM'ler",
-                    description: "DM listesinin üstündeki mağazaları kaldır"
-                },
-                quests: {
-                    label: "Görevler",
-                    description: "DM listesinin üstündeki görevleri kaldır"
-                },
-                serverBoost: {
-                    label: "Sunucu Boost",
-                    description: "Sunucu boost bilgilerini kanal listesinin üstünden kaldır"
-                },
-                billing: {
-                    label: "Faturalandırma",
-                    description: "Faturalandırma ayarlarını kaldır"
-                },
-                gift: {
-                    label: "Hediye",
-                    description: "Hediye butonunu kaldır"
-                },
-                emojiList: {
-                    label: "Emoji Listesi",
-                    description: "Emoji seçicisindeki kullanılamayan kategorileri kaldır"
-                }
-            }
         },
         discordDevBanner: {
             name: "DiscordDevBanner",
@@ -4662,7 +4673,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Avatarların sesli sohbet kutucuğunun tamamını kaplamasını sağlar."
+            description: "Avatarların sesli sohbet kutucuğunun tamamını kaplamasını sağlar.",
+            option: {
+                useServerProfileAvatars: {
+                    label: "Sunucu Profil Avatarlarını Kullan",
+                    description: "Sesli sohbet kutucuklarında sunucu profil avatarlarını kullanır (varsa)"
+                }
+            }
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
