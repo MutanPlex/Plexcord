@@ -1,7 +1,7 @@
 {
     "name": "@plexcord/types",
     "private": false,
-    "version": "1.20.6",
+    "version": "1.20.7",
     "description": "",
     "types": "index.d.ts",
     "scripts": {
