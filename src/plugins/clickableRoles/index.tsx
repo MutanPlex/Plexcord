@@ -7,7 +7,7 @@
 
 import "./style.css";
 
-import { t } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import ErrorBoundary from "@components/ErrorBoundary";
 import type { Role } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
