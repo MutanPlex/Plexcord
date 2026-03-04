@@ -3558,14 +3558,10 @@ const translations = {
         },
         declutter: {
             name: "Declutter",
-            description: "Declutter discord ui by removing unwanted elements such as profile customizations, shops, quests and more.",
+            description: "Cleans up Discord by removing non-essential UI elements like profile effects, shop tabs, boosts, and more.",
             option: {
                 userProfileHeader: {
                     label: "User Profile"
-                },
-                removeAvatarDecoration: {
-                    label: "Remove Avatar Decoration",
-                    description: "Remove avatar decorations."
                 },
                 removeNameplate: {
                     label: "Remove Nameplate",
@@ -3583,9 +3579,9 @@ const translations = {
                     label: "Always Show Username",
                     description: "Always show username instead of status."
                 },
-                removeUsernameStyles: {
-                    label: "Remove Username Styles",
-                    description: "Remove username colors and effects."
+                accessibilityNotice: {
+                    label: "Accessibility Notice",
+                    description: "Discord already has a built-in username style option in Accessibility settings."
                 },
                 friendsListHeader: {
                     label: "Above Friends/DMs List"

@@ -3561,14 +3561,10 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         declutter: {
             name: "Declutter",
-            description: "Profil özelleştirmeleri, mağazalar, görevler ve daha fazlası gibi istenmeyen öğeleri kaldırarak Discord arayüzünü sadeleştirin.",
+            description: "Profil efektleri, mağaza sekmeleri, güçlendirmeler ve daha fazlası gibi gerekli olmayan kullanıcı arayüzü öğelerini kaldırarak Discord'u temizler.",
             option: {
                 userProfileHeader: {
                     label: "Kullanıcı Profili"
-                },
-                removeAvatarDecoration: {
-                    label: "Profil Dekorasyonunu Kaldır",
-                    description: "Avatar dekorasyonlarını kaldırır."
                 },
                 removeNameplate: {
                     label: "İsim Levhasını Kaldır",
@@ -3586,9 +3582,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Her Zaman Kullanıcı Adını Göster",
                     description: "Durum yerine her zaman kullanıcı adını gösterir."
                 },
-                removeUsernameStyles: {
-                    label: "Kullanıcı Adı Stillerini Kaldır",
-                    description: "Kullanıcı adı renklerini ve efektlerini kaldırır."
+                accessibilityNotice: {
+                    label: "Erişilebilirlik Uyarısı",
+                    description: "Discord'un Erişilebilirlik ayarlarında zaten yerleşik bir kullanıcı adı stili seçeneği var."
                 },
                 friendsListHeader: {
                     label: "Arkadaş/DM Listesi Üstü"

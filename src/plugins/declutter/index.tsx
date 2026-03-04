@@ -5,10 +5,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import "./style.css";
+
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings, migratePluginSetting, migratePluginSettings } from "@api/Settings";
+import { Divider } from "@components/Divider";
 import { HeadingSecondary } from "@components/Heading";
-import { Devs, PcDevs } from "@utils/index";
+import { Notice } from "@components/Notice";
+import { classNameFactory, Devs, PcDevs } from "@utils/index";
 import definePlugin, { OptionType } from "@utils/types";
 
 migratePluginSettings("Declutter", "BetterUserArea", "Anammox");
@@ -26,18 +30,13 @@ for (const [oldKey, newKey] of migrationsDiscleaner) {
     migratePluginSetting("Declutter", newKey, oldKey);
 }
 
+const cl = classNameFactory("pc-declutter");
+
 export const settings = definePluginSettings({
     userProfileHeader: {
         label: () => t(plugin.declutter.option.userProfileHeader.label),
         type: OptionType.COMPONENT,
         component: () => SectionSeparator(t(plugin.declutter.option.userProfileHeader.label)),
-    },
-    removeAvatarDecoration: {
-        label: () => t(plugin.declutter.option.removeAvatarDecoration.label),
-        description: () => t(plugin.declutter.option.removeAvatarDecoration.description),
-        type: OptionType.BOOLEAN,
-        default: true,
-        restartNeeded: true,
     },
     removeNameplate: {
         label: () => t(plugin.declutter.option.removeNameplate.label),
@@ -67,12 +66,14 @@ export const settings = definePluginSettings({
         default: true,
         restartNeeded: true
     },
-    removeUsernameStyles: {
-        label: () => t(plugin.declutter.option.removeUsernameStyles.label),
-        description: () => t(plugin.declutter.option.removeUsernameStyles.description),
-        type: OptionType.BOOLEAN,
-        default: true,
-        restartNeeded: true
+    accessibilityNotice: {
+        label: () => t(plugin.declutter.option.accessibilityNotice.label),
+        type: OptionType.COMPONENT,
+        component: () => (
+            <Notice.Info className={cl("accessibility-notice")}>
+                {t(plugin.declutter.option.accessibilityNotice.description)}
+            </Notice.Info>
+        )
     },
     friendsListHeader: {
         type: OptionType.COMPONENT,
@@ -107,7 +108,7 @@ export const settings = definePluginSettings({
         label: () => t(plugin.declutter.option.removeBillingSettings.label),
         description: () => t(plugin.declutter.option.removeBillingSettings.description),
         type: OptionType.BOOLEAN,
-        default: true,
+        default: false,
         restartNeeded: true,
     },
     removeGiftButton: {
@@ -142,11 +143,12 @@ export const settings = definePluginSettings({
 
 function SectionSeparator(title: string) {
     return (
-        <>
-            <hr style={{ width: "100%" }} />
-            <HeadingSecondary>{title}</HeadingSecondary>
-            <hr style={{ width: "100%" }} />
-        </>
+        <div className={cl("section-separator")}>
+            <Divider />
+            <HeadingSecondary className={cl("section-title")}>
+                {title}
+            </HeadingSecondary>
+        </div>
     );
 }
 
@@ -156,15 +158,6 @@ export default definePlugin({
     authors: [PcDevs.Leon135, Devs.prism, Devs.Kyuuhachi],
     settings,
     patches: [
-        {
-            // Avatar decoration
-            find: "getAvatarDecorationURL:",
-            replacement: {
-                match: /(?<=function \i\((\i)\){)(?=.{0,150}let{avatarDecoration)/,
-                replace: "$&return null;"
-            },
-            predicate: () => settings.store.removeAvatarDecoration,
-        },
         {
             // Nameplate
             find: "#{intl::AVATAR_MALLOW}",
@@ -193,20 +186,13 @@ export default definePlugin({
             predicate: () => settings.store.removeClanTag,
         },
         {
-            // Username styles and allways show username
+            // Always show username
             find: ".NITRO_PRIVACY_PERK_BETA_COACHMARK));",
-            replacement: [
-                {
-                    match: /displayNameStyles:(\i),/,
-                    replace: "displayNameStyles:void 0,",
-                    predicate: () => settings.store.removeUsernameStyles
-                },
-                {
-                    match: /hoverText:(\i),forceHover:\i,children:/g,
-                    replace: "hoverText:$1,forceHover:!0,children:",
-                    predicate: () => settings.store.alwaysShowUsername
-                },
-            ],
+            replacement: {
+                match: /hoverText:(\i),forceHover:\i,children:/g,
+                replace: "hoverText:$1,forceHover:!0,children:"
+            },
+            predicate: () => settings.store.alwaysShowUsername
         },
         {
             // Button tooltips in user area

@@ -20,6 +20,9 @@
 import "./style.css";
 
 import { plugin, t } from "@api/i18n";
+import { addMemberListDecorator, removeMemberListDecorator } from "@api/MemberListDecorators";
+import { addMessageDecoration, removeMessageDecoration } from "@api/MessageDecorations";
+import { addNicknameIcon, removeNicknameIcon } from "@api/NicknameIcons";
 import { definePluginSettings } from "@api/Settings";
 import { DiscordPlatform, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
@@ -51,11 +54,6 @@ const SessionsStore = findStoreLazy("SessionsStore") as {
 const { useStatusFillColor } = mapMangledModuleLazy([".5625*", "translate"], {
     useStatusFillColor: filters.byCode(".hex")
 });
-
-const platformMap = {
-    embedded: "Console",
-    vr: "VR"
-};
 
 function Icon(svg: string, size = 20) {
     return ({ color, tooltip, small }: { color: string; tooltip: string; small: boolean; }) => (
@@ -96,8 +94,8 @@ function iconData(svg: string, size: number = 20): IconData {
 
 function getPlatformTooltip(platform: DiscordPlatform): string {
     return platform === "embedded"
-        ? t(plugin.platformIndicators.embeddedTooltip)
-        : platform[0].toUpperCase() + platform.slice(1);
+        ? t(plugin.platformIndicators.embeddedTooltip) : platform === "vr"
+            ? t(plugin.platformIndicators.vrTooltip) : platform[0].toUpperCase() + platform.slice(1);
 }
 
 const PlatformIcon = ({ platform, status, small }) => {
@@ -209,20 +207,22 @@ export default definePlugin({
     dependencies: ["MessageDecorationsAPI", "MemberListDecoratorsAPI"],
     settings,
 
-    renderNicknameIcon(props) {
-        if (!settings.store.badges) return null;
-        return (
-            <PlatformIndicator user={UserStore.getUser(props.userId)} isProfile />
-        );
+    start() {
+        if (settings.store.badges) {
+            addNicknameIcon("PlatformIndicators", ({ userId }) => <PlatformIndicator user={UserStore.getUser(userId)} isProfile />);
+        }
+        if (settings.store.list) {
+            addMemberListDecorator("PlatformIndicators", ({ user }) => <PlatformIndicator user={user} isMemberList />);
+        }
+        if (settings.store.messages) {
+            addMessageDecoration("PlatformIndicators", ({ message }) => <PlatformIndicator user={message?.author} isMessage />);
+        }
     },
-    renderMemberListDecorator(props) {
-        if (!settings.store.list) return null;
-        return <PlatformIndicator user={props.user} isMemberList />;
 
-    },
-    renderMessageDecoration(props) {
-        if (!settings.store.messages) return null;
-        return <PlatformIndicator user={props.message?.author} isMessage />;
+    stop() {
+        removeNicknameIcon("PlatformIndicators");
+        removeMemberListDecorator("PlatformIndicators");
+        removeMessageDecoration("PlatformIndicators");
     },
 
     patches: [

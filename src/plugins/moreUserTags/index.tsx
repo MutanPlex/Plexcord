@@ -8,6 +8,9 @@
 import "./styles.css";
 
 import { plugin, t } from "@api/i18n";
+import { addMemberListDecorator } from "@api/MemberListDecorators";
+import { addMessageDecoration } from "@api/MessageDecorations";
+import { addNicknameIcon } from "@api/NicknameIcons";
 import { Channel, Message, User } from "@plexcord/discord-types";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
@@ -58,6 +61,50 @@ export default definePlugin({
         }
     ],
     start() {
+        addNicknameIcon("MoreUserTags", props => {
+            const tagId = this.getTag({
+                user: UserStore.getUser(props.userId),
+                channel: getCurrentChannel(),
+                channelId: this.getChannelId(),
+                isChat: false
+            });
+
+            return tagId && <Tag
+                type={tagId}
+                verified={false}>
+            </Tag>;
+        });
+
+        addMessageDecoration("MoreUserTags", props => {
+            const tagId = this.getTag({
+                message: props.message,
+                user: UserStore.getUser(props.message.author.id),
+                channelId: props.message.channel_id,
+                isChat: true
+            });
+
+            return tagId != null ? <Tag
+                useRemSizes={true}
+                className={cl("message-tag", props.message.author.isVerifiedBot() && "message-verified")}
+                type={tagId}
+                verified={false}>
+            </Tag> : null;
+        });
+
+        addMemberListDecorator("MoreUserTags", props => {
+            const tagId = this.getTag({
+                user: props.user,
+                channel: getCurrentChannel(),
+                channelId: this.getChannelId(),
+                isChat: false
+            });
+
+            return tagId ? <Tag
+                type={tagId}
+                verified={false}>
+            </Tag> : null;
+        });
+
         const tagSettings = settings.store.tagSettings || {} as TagSettings;
         for (const tag of getTags()) {
             tagSettings[tag.name] ??= {
@@ -72,48 +119,6 @@ export default definePlugin({
     localTags: genTagTypes(),
     getChannelId() {
         return SelectedChannelStore.getChannelId();
-    },
-    renderNicknameIcon(props) {
-        const tagId = this.getTag({
-            user: UserStore.getUser(props.userId),
-            channel: getCurrentChannel(),
-            channelId: this.getChannelId(),
-            isChat: false
-        });
-
-        return tagId && <Tag
-            type={tagId}
-            verified={false}>
-        </Tag>;
-
-    },
-    renderMessageDecoration(props) {
-        const tagId = this.getTag({
-            message: props.message,
-            user: UserStore.getUser(props.message.author.id),
-            channelId: props.message.channel_id,
-            isChat: true
-        });
-
-        return tagId && <Tag
-            useRemSizes={true}
-            className={cl("message-tag", props.message.author.isVerifiedBot() && "message-verified")}
-            type={tagId}
-            verified={false}>
-        </Tag>;
-    },
-    renderMemberListDecorator(props) {
-        const tagId = this.getTag({
-            user: props.user,
-            channel: getCurrentChannel(),
-            channelId: this.getChannelId(),
-            isChat: false
-        });
-
-        return tagId && <Tag
-            type={tagId}
-            verified={false}>
-        </Tag>;
     },
 
     getTagText(tagName: string) {

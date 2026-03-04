@@ -61,15 +61,6 @@ export default definePlugin({
     settings,
 
     patches: [
-        // Friends List
-        {
-            find: "#{intl::USER_PROFILE_PRONOUNS}",
-            replacement: {
-                match: /(?<=children:\[\i," ",\i)(?=\])/,
-                replace: ",$self.VoiceChannelIndicator({userId:arguments[0]?.user?.id,isProfile:true})"
-            },
-            predicate: () => settings.store.showInUserProfileModal
-        },
         {
             find: "null!=this.peopleListItemRef.current",
             replacement: {
