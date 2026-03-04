@@ -2357,6 +2357,15 @@ const translations = {
             name: "ClearURLs",
             description: "Automatically removes tracking elements from URLs you send"
         },
+        clickableRoles: {
+            name: "ClickableRoles",
+            description: "Click on roles in user profiles and the member list to see which members have them.",
+            modal: {
+                loading: "Loading members...",
+                noMembers: "No members found.",
+                unknown: "Unknown Role"
+            }
+        },
         clientSideBlock: {
             name: "ClientSideBlock",
             description: "Allows you to locally hide almost all content from any user",

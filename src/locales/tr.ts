@@ -2360,6 +2360,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "ClearURLs",
             description: "Gönderdiğiniz URL'lerden izleme öğelerini otomatik olarak kaldırır"
         },
+        clickableRoles: {
+            name: "ClickableRoles",
+            description: "Kullanıcı profillerinde ve üye listesinde roller üzerinde tıklayarak üyelerin hangi rolleri aldığını görebilirsiniz.",
+            modal: {
+                loading: "Üyeler yükleniyor...",
+                noMembers: "Hiç üye bulunamadı.",
+                unknown: "Bilinmeyen Rol"
+            }
+        },
         clientSideBlock: {
             name: "ClientSideBlock",
             description: "Herhangi bir kullanıcıdan gelen neredeyse tüm içerikleri yerel olarak gizlemenizi sağlar",
