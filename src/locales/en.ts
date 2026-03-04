@@ -7514,6 +7514,7 @@ const translations = {
             name: "PlatformIndicators",
             description: "Adds platform indicators (Desktop, Mobile, Web...) to users",
             embeddedTooltip: "Console",
+            vrTooltip: "VR",
             option: {
                 list: {
                     label: "List",

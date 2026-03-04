@@ -7518,6 +7518,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "PlatformIndicators",
             description: "Kullanıcılara platform göstergeleri (Masaüstü, Mobil, Web...) ekler.",
             embeddedTooltip: "Konsol",
+            vrTooltip: "VR",
             option: {
                 list: {
                     label: "Liste",
