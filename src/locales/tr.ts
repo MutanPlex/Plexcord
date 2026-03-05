@@ -52,6 +52,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "React Geliştirici Araçlarını Etkinleştir",
                 description: "Discord'un React bileşenlerinde hata ayıklamak için React Geliştirici Araçları uzantısını etkinleştirin. Eklenti geliştirme için kullanışlıdır."
             },
+            mainWindowFrameless: {
+                label: "Ana Pencere Çerçevesini Devre Dışı Bırak",
+                description: "Daha temiz bir görünüm için yerel pencere çerçevesini çıkarın. Başlık çubuğu alanını sürükleyerek pencereyi hâlâ taşıyabilirsiniz."
+            },
             frameless: {
                 label: "Pencere çerçevesini devre dışı bırak",
                 description: "Daha temiz bir görünüm için yerel pencere çerçevesini çıkarın. Başlık çubuğu alanını sürükleyerek pencereyi hâlâ taşıyabilirsiniz."

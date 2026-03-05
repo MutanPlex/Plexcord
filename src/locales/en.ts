@@ -49,6 +49,10 @@ const translations = {
                 label: "Enable React Developer Tools",
                 description: "Enable the React Developer Tools extension for debugging Discord's React components. Useful for plugin development."
             },
+            mainWindowFrameless: {
+                label: "Disable the Main Window Frame",
+                description: "Remove the native window frame for a cleaner look. You can still move the window by dragging the title bar area."
+            },
             frameless: {
                 label: "Disable the window frame",
                 description: "Remove the native window frame for a cleaner look. You can still move the window by dragging the title bar area."

@@ -112,7 +112,7 @@ function StreamSimplePicker({ streamMediaSelection, streamMedia }: PickerProps) 
             placeholder={t(plugin.instantScreenshare.option.streamMedia.placeholder)}
             maxVisibleItems={5}
             options={options}
-            value={options.find(o => o.value === streamMedia)}
+            value={options.find(o => o.value === streamMedia)?.value}
             onChange={v => settings.store.streamMedia = v}
             closeOnSelect
         />

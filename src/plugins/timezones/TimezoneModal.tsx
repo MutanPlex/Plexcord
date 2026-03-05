@@ -59,7 +59,7 @@ export function SetTimezoneModal({ userId, modalProps, database }: { userId: str
 
                     <SearchableSelect
                         options={options}
-                        value={options.find(o => o.value === currentValue)}
+                        value={options.find(o => o.value === currentValue)?.value}
                         placeholder={t(plugin.timezones.modal.selectPlaceholder)}
                         maxVisibleItems={5}
                         closeOnSelect={true}

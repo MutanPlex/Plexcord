@@ -35,7 +35,7 @@ const settings = definePluginSettings({
         label: () => t(plugin.freaky.option.addFreakyEnding.label),
         description: () => t(plugin.freaky.option.addFreakyEnding.description),
         type: OptionType.BOOLEAN,
-        default: true
+        default: false
     }
 });
 

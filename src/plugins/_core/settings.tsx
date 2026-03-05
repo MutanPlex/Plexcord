@@ -160,13 +160,6 @@ export default definePlugin({
             ]
         },
         {
-            find: "#{intl::USER_SETTINGS_ACTIONS_MENU_LABEL}",
-            replacement: {
-                match: /null!=\(\i=Object.values\(\i\.\i\).{0,50}?&&(?=\(0,\i\.openUserSettings\)\(\i,\{section:\i)/,
-                replace: ""
-            }
-        },
-        {
             find: ".buildLayout().map",
             replacement: {
                 match: /(\i)\.buildLayout\(\)(?=\.map)/,

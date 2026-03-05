@@ -101,6 +101,13 @@ function Switches() {
             restartRequired: true,
             warning: { enabled: false }
         },
+        (!IS_WEB && !IS_DISCORD_DESKTOP || !IS_WINDOWS) && {
+            key: "mainWindowFrameless",
+            title: t(settings.switches.mainWindowFrameless.label),
+            description: t(settings.switches.mainWindowFrameless.description),
+            restartRequired: true,
+            warning: { enabled: false },
+        },
         !IS_WEB && (!IS_DISCORD_DESKTOP || !IS_WINDOWS ? {
             key: "frameless",
             title: t(settings.switches.frameless.label),

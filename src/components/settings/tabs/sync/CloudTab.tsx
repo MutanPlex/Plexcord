@@ -112,14 +112,15 @@ function CloudTab() {
             <Heading className={Margins.top20}>{t(cloud.backend.title)}</Heading>
             <Paragraph className={Margins.bottom16}>{t(cloud.backend.description)}</Paragraph>
 
-            <SearchableSelect
-                options={cloudBackendOptions}
-                value={cloudBackendOptions.find(o => o.value === cloudSettings.url)}
-                onChange={v => changeUrl(v)}
-                className={Margins.bottom16}
-                closeOnSelect={true}
-                renderOptionPrefix={o => o?.value?.includes("plexcord") && <PlexcordIcon />}
-            />
+            <div className={Margins.bottom8}>
+                <SearchableSelect
+                    options={cloudBackendOptions}
+                    value={cloudBackendOptions.find(o => o.value === cloudSettings.url)}
+                    onChange={v => changeUrl(v)}
+                    closeOnSelect={true}
+                    renderOptionPrefix={o => o?.value?.includes("plexcord") && <PlexcordIcon />}
+                />
+            </div>
 
             <Flex gap="8px" alignItems="center" className={Margins.top8}>
                 <div style={{ flex: 1 }}>

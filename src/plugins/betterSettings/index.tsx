@@ -5,10 +5,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { changelog, cloud, patchHelper, plugin, plugins, settings as settingsLang, sync, t, themes, updater } from "@api/i18n";
+import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { disableStyle, enableStyle } from "@api/Styles";
-import SettingsPlugin from "@plugins/_core/settings";
 import { buildPluginMenuEntries, buildThemeMenuEntries } from "@plugins/plexcordToolbox/menu";
 import { Devs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
@@ -16,7 +15,7 @@ import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { findCssClassesLazy } from "@webpack";
 import { ComponentDispatch, FocusLock, Menu, useEffect, useRef } from "@webpack/common";
-import type { HTMLAttributes, ReactElement } from "react";
+import type { HTMLAttributes } from "react";
 
 import fullHeightStyle from "./fullHeightContext.css?managed";
 
@@ -176,12 +175,8 @@ export default definePlugin({
             find: "#{intl::USER_SETTINGS_ACTIONS_MENU_LABEL}",
             replacement: [
                 {
-                    match: /=\[\];(\i)(?=\.forEach.{0,200}?"logout"===\i.{0,100}?(\i)\.get\(\i\))/,
-                    replace: "=$self.wrapMap([]);$self.transformSettingsEntries($1,$2)"
-                },
-                {
-                    match: /case \i\.\i\.DEVELOPER_OPTIONS:return \i;/,
-                    replace: "$&case 'PlexcordPlugins':return $self.buildPluginMenuEntries(true);case 'PlexcordThemes':return $self.buildThemeMenuEntries();"
+                    match: /(\i)=(.{0,20}openUserSettings\)\(\i\)\));/,
+                    replace: "$1=$self.transformSettingsElements($2);",
                 }
             ]
         },
@@ -205,72 +200,33 @@ export default definePlugin({
         return <Layer {...props} />;
     },
 
-    transformSettingsEntries(list: SettingsEntry[], keyMap: Map<string, string>) {
+    transformSettingsElements(list) {
         const items: any[] = [];
-        const plexcordItems: SettingsEntry[] = [
-            { section: "PlexcordSettings", label: () => t(settingsLang.title) },
-            { section: "PlexcordPlugins", label: () => t(plugins.title) },
-            { section: "PlexcordThemes", label: () => t(themes.title) },
-            { section: "PlexcordUpdater", label: () => t(updater.title) },
-            { section: "PlexcordChangelog", label: () => t(changelog.title) },
-            { section: "PlexcordCloud", label: () => t(cloud.text) },
-            { section: "PlexcordBackupAndRestore", label: () => t(sync.title) },
-            { section: "PlexcordPatchHelper", label: () => t(patchHelper.title) },
-        ];
+        for (const item of list) {
+            const { key, props } = item;
+            if (!props) continue;
 
-        for (const [section, key] of SettingsPlugin.settingsSectionMap) {
-            const entry = SettingsPlugin.customEntries.find(e => key.endsWith(e.key));
-            if (entry) plexcordItems.push({ section, label: () => entry.title });
-        }
+            if (key === "plexcord_plugins" || key === "plexcord_themes") {
+                const children = key === "plexcord_plugins"
+                    ? buildPluginMenuEntries()
+                    : buildThemeMenuEntries();
 
-        if (settings.store.organizeMenu) {
-            for (const item of list) {
-                if (!item.label || item.predicate != null && !item.predicate()) continue;
-
-                if (item.section === "HEADER") {
-                    const label = typeof item.label === "function" ? item.label() : item.label;
-                    keyMap.set(label, label);
-                    items.push({ section: label, items: [] });
-                } else if (item.section !== "DIVIDER" && keyMap.has(item.section)) {
-                    items.at(-1)?.items.push(item);
-                }
+                items.push(
+                    <Menu.MenuItem key={key} label={props.label} id={props.label} {...props}>
+                        {children}
+                    </Menu.MenuItem>
+                );
+            } else if (key.endsWith("_section") && props.label) {
+                items.push(
+                    <Menu.MenuItem key={key} label={props.label} id={props.label}>
+                        {this.transformSettingsElements(props.children)}
+                    </Menu.MenuItem>
+                );
+            } else {
+                items.push(item);
             }
-
-            keyMap.set("Plexcord", "Plexcord");
-            items.push({
-                section: "Plexcord",
-                items: plexcordItems
-            });
-        } else {
-            items.push(...list, ...plexcordItems);
         }
 
         return items;
-    },
-
-    wrapMap(toWrap: TransformedSettingsEntry[]) {
-        if (!settings.store.organizeMenu) return toWrap;
-        // @ts-expect-error
-        toWrap.map = function (render: (item: SettingsEntry) => ReactElement<any>) {
-            return this
-                .filter(a => a.items.length > 0)
-                .map(({ section, items }) => {
-                    const children = items.map(render);
-                    if (section) {
-                        return (
-                            <Menu.MenuItem
-                                key={section}
-                                id={section.replace(/\W/, "_")}
-                                label={section}
-                            >
-                                {children}
-                            </Menu.MenuItem>
-                        );
-                    } else {
-                        return children;
-                    }
-                });
-        };
-        return toWrap;
     }
 });

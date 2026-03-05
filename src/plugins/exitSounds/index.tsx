@@ -32,7 +32,7 @@ function GuildSelector() {
     return (
         <SearchableSelect
             options={options}
-            value={options.find(o => o.value === soundGuildId)}
+            value={options.find(o => o.value === soundGuildId)?.value}
             placeholder={t(plugin.exitSounds.option.soundGuildId.placeholder)}
             maxVisibleItems={6}
             closeOnSelect={true}
