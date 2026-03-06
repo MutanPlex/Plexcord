@@ -6476,28 +6476,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 body: "{{locationName}} konumuna gitmek için tıkla"
             }
         },
-        messagePeek: {
-            name: "MessagePeek",
-            description: "Direkt Mesajlar listesinde son mesajın önizlemesini ve zaman damgasını gösterir.",
-            option: {
-                hideMuted: {
-                    label: "Sessize Alınanları Gizle",
-                    description: "Sessize alınmış DM'ler ve grup sohbetleri için mesaj önizlemelerini ve zaman damgalarını gizle."
-                }
-            },
-            attachment: {
-                gif: "GIF",
-                image: "görsel",
-                video: "video",
-                file: "dosya"
-            },
-            sentGif: "bir GIF gönderdi",
-            voiceMessage: "sesli mesaj",
-            systemDM: "Resmi Discord Mesajı",
-            members: "Üyeler",
-            you: "Siz",
-            separator: ": "
-        },
         messageTags: {
             name: "MessageTags",
             description: "Mesajları kaydetmenizi ve basit bir komutla kullanmanızı sağlar.",

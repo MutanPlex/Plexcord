@@ -74,8 +74,8 @@ export default definePlugin({
         {
             find: "PrivateChannel.renderAvatar",
             replacement: {
-                match: /({id:(\i).id.{0,1500}subText:)/,
-                replace: "$1$self.shouldShowRecentlyOffline($2.recipients.length === 1 ? { id: $2.recipients[0] } : null)?$self.buildRecentlyOffline({ id: $2.recipients[0] }):"
+                match: /(\{user:(\i),activities:\i,voiceChannel:\i,applicationStream:\i.{0,200}\})\):null(,\w+:\(0,)/,
+                replace: "$1):$self.shouldShowRecentlyOffline($2)?$self.buildRecentlyOffline($2):null$3"
             }
         }
     ],

@@ -6472,28 +6472,6 @@ const translations = {
                 body: "Click to jump to {{locationName}}"
             }
         },
-        messagePeek: {
-            name: "MessagePeek",
-            description: "Shows the last message preview and timestamp in the Direct Messages list.",
-            option: {
-                hideMuted: {
-                    label: "Hide Muted",
-                    description: "Hide message previews and timestamps for muted DMs and group chats."
-                }
-            },
-            attachment: {
-                gif: "GIF",
-                image: "image",
-                video: "video",
-                file: "file"
-            },
-            sentGif: "sent a GIF",
-            voiceMessage: "voice message",
-            systemDM: "Official Discord Message",
-            members: "Members",
-            you: "You",
-            separator: ": "
-        },
         messageTags: {
             name: "MessageTags",
             description: "Allows you to save messages and to use them with a simple command.",
