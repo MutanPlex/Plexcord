@@ -103,7 +103,7 @@ function extractTranslationFromFunction(fnNode: ArrowFunction | FunctionExpressi
 
 function loadTranslations() {
     try {
-        const enFile = createSourceFile("en.ts", readFileSync("src/locales/en.ts", "utf8"), ScriptTarget.Latest);
+        const enFile = createSourceFile("en-US.ts", readFileSync("src/locales/en-US.ts", "utf8"), ScriptTarget.Latest);
 
         for (const statement of enFile.statements) {
             if (!isVariableStatement(statement)) continue;

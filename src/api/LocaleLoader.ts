@@ -23,8 +23,19 @@ import i18n, { LocaleData } from "./i18n";
 const logger = new Logger("LocaleLoader");
 
 const coreLocales: Record<string, () => Promise<{ default: LocaleData; }>> = {
-    "en-US": () => import("../locales/en"),
-    "tr": () => import("../locales/tr")
+    "en-US": () => import("../locales/en-US"),
+    "en-GB": () => import("../locales/en-GB"),
+    "tr": () => import("../locales/tr"),
+    "de": () => import("../locales/de"),
+    "fr": () => import("../locales/fr"),
+    "es-ES": () => import("../locales/es-ES"),
+    "es-419": () => import("../locales/es-419"),
+    "pt-BR": () => import("../locales/pt-BR"),
+    "pt-PT": () => import("../locales/pt-PT"),
+    "ru": () => import("../locales/ru"),
+    "uk": () => import("../locales/uk"),
+    "pl": () => import("../locales/pl"),
+    "ro": () => import("../locales/ro")
 };
 
 const pluginLocales: Record<string, Record<string, () => Promise<{ default: LocaleData; }>>> = {};

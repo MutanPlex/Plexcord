@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import type enTranslations from "./en";
+import type enTranslations from "./en-US";
 
 /**
  * Translation key proxy that allows accessing keys without quotes

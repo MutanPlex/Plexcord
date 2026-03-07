@@ -21,7 +21,7 @@ import { Logger } from "@utils/Logger";
 import { FluxDispatcher, useEffect, useState } from "@webpack/common";
 
 import { PlexcordCreateElement } from "../../scripts/build/inject/react.mjs";
-import enTranslations, { changelog, cloud, commands, common, components, csp, memberlist, message, notifications, patchHelper, plugin, plugins, settings, sync, themes, updater, utils, } from "../locales/en";
+import enTranslations, { changelog, cloud, commands, common, components, csp, memberlist, message, notifications, patchHelper, plugin, plugins, settings, sync, themes, updater, utils, } from "../locales/en-US";
 import { NestedKeyOf } from "../locales/types";
 
 // Type for translation keys
@@ -58,10 +58,76 @@ export const SUPPORTED_LANGUAGES: Record<string, LanguageInfo> = {
         code: "en-US",
         direction: "ltr"
     },
+    "en-GB": {
+        name: "English (UK)",
+        nativeName: "English (UK)",
+        code: "en-GB",
+        direction: "ltr"
+    },
     "tr": {
         name: "Turkish",
         nativeName: "Türkçe",
         code: "tr",
+        direction: "ltr"
+    },
+    "de": {
+        name: "German",
+        nativeName: "Deutsch",
+        code: "de",
+        direction: "ltr"
+    },
+    "fr": {
+        name: "French",
+        nativeName: "Français",
+        code: "fr",
+        direction: "ltr"
+    },
+    "es-ES": {
+        name: "Spanish",
+        nativeName: "Español (España)",
+        code: "es-ES",
+        direction: "ltr"
+    },
+    "es-419": {
+        name: "Spanish",
+        nativeName: "Español (Latinoamérica)",
+        code: "es-419",
+        direction: "ltr"
+    },
+    "pt-BR": {
+        name: "Portuguese",
+        nativeName: "Português (Brasil)",
+        code: "pt-BR",
+        direction: "ltr"
+    },
+    "pt-PT": {
+        name: "Portuguese",
+        nativeName: "Português (Portugal)",
+        code: "pt-PT",
+        direction: "ltr"
+    },
+    "ru": {
+        name: "Russian",
+        nativeName: "Русский",
+        code: "ru",
+        direction: "ltr"
+    },
+    "uk": {
+        name: "Ukrainian",
+        nativeName: "Українська",
+        code: "uk",
+        direction: "ltr"
+    },
+    "pl": {
+        name: "Polish",
+        nativeName: "Polski",
+        code: "pl",
+        direction: "ltr"
+    },
+    "ro": {
+        name: "Romanian",
+        nativeName: "Română",
+        code: "ro",
         direction: "ltr"
     }
 };

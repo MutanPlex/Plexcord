@@ -24,8 +24,19 @@ interface LocaleData {
 
 // When adding a new language, just create the .ts file in src/locales/
 const AUTO_LOCALE_MAP: Record<string, string> = {
-    "en": "en-US",
-    "tr": "tr"
+    "en-US": "en-US",
+    "en-GB": "en-GB",
+    "tr": "tr",
+    "de": "de",
+    "fr": "fr",
+    "es-ES": "es-ES",
+    "es-419": "es-419",
+    "pt-BR": "pt-BR",
+    "pt-PT": "pt-PT",
+    "ru": "ru",
+    "uk": "uk",
+    "pl": "pl",
+    "ro": "ro"
 };
 
 class MainI18n {
@@ -132,4 +143,4 @@ export {
     themes,
     updater,
     utils
-} from "../../locales/en";
+} from "../../locales/en-US";

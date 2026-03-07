@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import type enTranslations from "./en";
+import type enTranslations from "./en-US";
 import type { MatchStructure } from "./types";
 
 const translations: MatchStructure<typeof enTranslations> = {
@@ -474,80 +474,6 @@ const translations: MatchStructure<typeof enTranslations> = {
         }
     },
 
-    changelog: {
-        text: "Değişiklik Notları",
-        title: "Değişiklik Notları",
-        description: "Plexcord’daki en son değişiklikleri ve güncellemeleri burada bulabilirsiniz.",
-        by: "yazar",
-        check: "Depoyu kontrol et",
-        uptodate: "güncel",
-        update: "Güncelle",
-        noMessage: "Mesaj yok",
-        unknown: "Bilinmiyor",
-        updatedPlugins: "Güncellenen Eklentiler",
-        newSettings: "Yeni Ayarlar",
-        newSettingTooltip: "{{plugin}} için yeni ayar",
-        loading: "Yükleniyor...",
-        repoUptodate: "Depo güncel",
-        fetch: "Depodan Getir",
-        clear: "Tüm Notları Temizle",
-        internet: "İnternet bağlantınız olduğundan emin olun ve tekrar deneyin.",
-        recent: "Son Değişiklikler",
-        codeChanges: "Kod Değişiklikleri {{count}} yeni commit",
-        updateLogs: "{{count}} Güncelleme Notu",
-        noCommit: "Mevcut sürümünüzden ileriye dönük commit bulunamadı. Yeni değişiklikleri kontrol etmek için 'Depodan Getir'e tıklayın.",
-        previous: "Önceki güncelleme oturumları, commit geçmişleri ve eklenti değişiklikleriyle birlikte.",
-        modal: {
-            description: "Plexcord’daki en son değişiklikleri görüntüleyin. Bu işlem, depodan commitleri doğrudan getirerek yenilikleri size gösterir.",
-            repository: "Depo",
-            failed: "Alınamadı - konsolu kontrol edin",
-            current: "Mevcut:",
-            hide: "Notları gizle",
-            show: "Notları göster",
-            fetch: {
-                title: "Değişiklikleri Getir",
-                description: "Depoda yeni commitleri, eklenti güncellemelerini ve kod değişikliklerini kontrol edin. Bu, mevcut sürümünüzü en son sürümle karşılaştıracak ve size yenilikleri gösterecektir.",
-                newCommit: "Bunlar, son sürümünüzden bu yana yapılan yeni commitler ve eklenti güncellemeleridir. Hangi özelliklerin eklendiğini, hangi hataların düzeltildiğini ve hangi eklentilerin güncellendiğini görebilirsiniz.",
-                confirm: "Getir",
-            }
-        },
-        commit: {
-            available: "commit mevcut",
-            no: "Yeni commit yok",
-            new: "yeni eklentiler",
-            updated: "güncellenen eklentiler",
-            settings: "yeni ayarlar"
-        },
-        toast: {
-            already: "Depo zaten güncel",
-            found: "Depodan {{count}} yeni commit bulundu",
-            local: "Depo, yerel kopyanızla güncel",
-            failed: "Depodan getirilemedi :(",
-            cleared: "Tüm notlar temizlendi",
-            logCleared: "Not temizlendi",
-            yourLatest: "Son güncellemenizden kaydedilen commitler"
-        },
-        alert: {
-            clear: {
-                title: "Tüm Notları Temizle",
-                body: "Tüm notları temizlemek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
-                confirm: "Tümünü Temizle",
-                confirmColor: "danger",
-                cancel: "İptal"
-            },
-            log: {
-                title: "Günlüğü Temizle",
-                body: "Bu günlüğü temizlemek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
-                confirm: "Günlüğü Temizle",
-                confirmColor: "danger",
-                cancel: "İptal"
-            }
-        },
-        newPlugins: "{{count}} Yeni Eklenti",
-        following: "Son güncellemelerde aşağıdaki eklentiler eklendi:",
-        more: "+{{count}} yeni eklenti"
-    },
-
     cloud: {
         text: "Cloud",
         title: "Ayar Senkronizasyonu",
@@ -637,6 +563,80 @@ const translations: MatchStructure<typeof enTranslations> = {
                 manual: "Otomatik senkronizasyon yapma (yalnızca aşağıdaki butonlar ile manuel senkronizasyon)"
             }
         }
+    },
+
+    changelog: {
+        text: "Değişiklik Notları",
+        title: "Değişiklik Notları",
+        description: "Plexcord’daki en son değişiklikleri ve güncellemeleri burada bulabilirsiniz.",
+        by: "yazar",
+        check: "Depoyu kontrol et",
+        uptodate: "güncel",
+        update: "Güncelle",
+        noMessage: "Mesaj yok",
+        unknown: "Bilinmiyor",
+        updatedPlugins: "Güncellenen Eklentiler",
+        newSettings: "Yeni Ayarlar",
+        newSettingTooltip: "{{plugin}} için yeni ayar",
+        loading: "Yükleniyor...",
+        repoUptodate: "Depo güncel",
+        fetch: "Depodan Getir",
+        clear: "Tüm Notları Temizle",
+        internet: "İnternet bağlantınız olduğundan emin olun ve tekrar deneyin.",
+        recent: "Son Değişiklikler",
+        codeChanges: "Kod Değişiklikleri {{count}} yeni commit",
+        updateLogs: "{{count}} Güncelleme Notu",
+        noCommit: "Mevcut sürümünüzden ileriye dönük commit bulunamadı. Yeni değişiklikleri kontrol etmek için 'Depodan Getir'e tıklayın.",
+        previous: "Önceki güncelleme oturumları, commit geçmişleri ve eklenti değişiklikleriyle birlikte.",
+        modal: {
+            description: "Plexcord’daki en son değişiklikleri görüntüleyin. Bu işlem, depodan commitleri doğrudan getirerek yenilikleri size gösterir.",
+            repository: "Depo",
+            failed: "Alınamadı - konsolu kontrol edin",
+            current: "Mevcut:",
+            hide: "Notları gizle",
+            show: "Notları göster",
+            fetch: {
+                title: "Değişiklikleri Getir",
+                description: "Depoda yeni commitleri, eklenti güncellemelerini ve kod değişikliklerini kontrol edin. Bu, mevcut sürümünüzü en son sürümle karşılaştıracak ve size yenilikleri gösterecektir.",
+                newCommit: "Bunlar, son sürümünüzden bu yana yapılan yeni commitler ve eklenti güncellemeleridir. Hangi özelliklerin eklendiğini, hangi hataların düzeltildiğini ve hangi eklentilerin güncellendiğini görebilirsiniz.",
+                confirm: "Getir",
+            }
+        },
+        commit: {
+            available: "commit mevcut",
+            no: "Yeni commit yok",
+            new: "yeni eklentiler",
+            updated: "güncellenen eklentiler",
+            settings: "yeni ayarlar"
+        },
+        toast: {
+            already: "Depo zaten güncel",
+            found: "Depodan {{count}} yeni commit bulundu",
+            local: "Depo, yerel kopyanızla güncel",
+            failed: "Depodan getirilemedi :(",
+            cleared: "Tüm notlar temizlendi",
+            logCleared: "Not temizlendi",
+            yourLatest: "Son güncellemenizden kaydedilen commitler"
+        },
+        alert: {
+            clear: {
+                title: "Tüm Notları Temizle",
+                body: "Tüm notları temizlemek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+                confirm: "Tümünü Temizle",
+                confirmColor: "danger",
+                cancel: "İptal"
+            },
+            log: {
+                title: "Günlüğü Temizle",
+                body: "Bu günlüğü temizlemek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+                confirm: "Günlüğü Temizle",
+                confirmColor: "danger",
+                cancel: "İptal"
+            }
+        },
+        newPlugins: "{{count}} Yeni Eklenti",
+        following: "Son güncellemelerde aşağıdaki eklentiler eklendi:",
+        more: "+{{count}} yeni eklenti"
     },
 
     csp: {
@@ -2555,7 +2555,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 action: {
                     label: "Eylem",
-
                 }
             },
             builtIn: {
@@ -4438,7 +4437,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     warning2: "&mdash; Performans sorunlarına yol açabilir."
                 }
             }
-
         },
         fixSpotifyEmbeds: {
             name: "FixSpotifyEmbeds",
@@ -9730,7 +9728,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             notification: {
                 unknownUser: "Kullanıcı",
                 title: "Durum Bildirimleri",
-
             },
             status: {
                 online: "Çevrimiçi",
