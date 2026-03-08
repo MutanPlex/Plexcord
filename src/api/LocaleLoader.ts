@@ -35,7 +35,16 @@ const coreLocales: Record<string, () => Promise<{ default: LocaleData; }>> = {
     "ru": () => import("../locales/ru"),
     "uk": () => import("../locales/uk"),
     "pl": () => import("../locales/pl"),
-    "ro": () => import("../locales/ro")
+    "ro": () => import("../locales/ro"),
+    "vi": () => import("../locales/vi"),
+    "zh-CN": () => import("../locales/zh-CN"),
+    "zh-TW": () => import("../locales/zh-TW"),
+    "ja": () => import("../locales/ja"),
+    "ko": () => import("../locales/ko"),
+    "da": () => import("../locales/da"),
+    "sv-SE": () => import("../locales/sv-SE"),
+    "nl": () => import("../locales/nl"),
+    "it": () => import("../locales/it")
 };
 
 const pluginLocales: Record<string, Record<string, () => Promise<{ default: LocaleData; }>>> = {};

@@ -129,6 +129,60 @@ export const SUPPORTED_LANGUAGES: Record<string, LanguageInfo> = {
         nativeName: "Română",
         code: "ro",
         direction: "ltr"
+    },
+    "vi": {
+        name: "Vietnamese",
+        nativeName: "Tiếng Việt",
+        code: "vi",
+        direction: "ltr"
+    },
+    "zh-CN": {
+        name: "Chinese, Simplified",
+        nativeName: "中文",
+        code: "zh-CN",
+        direction: "ltr"
+    },
+    "zh-TW": {
+        name: "Chinese, Traditional",
+        nativeName: "繁體中文",
+        code: "zh-TW",
+        direction: "ltr"
+    },
+    "ja": {
+        name: "Japanese",
+        nativeName: "日本語",
+        code: "ja",
+        direction: "ltr"
+    },
+    "ko": {
+        name: "Korean",
+        nativeName: "한국어",
+        code: "ko",
+        direction: "ltr"
+    },
+    "da": {
+        name: "Danish",
+        nativeName: "Dansk",
+        code: "da",
+        direction: "ltr"
+    },
+    "sv-SE": {
+        name: "Swedish",
+        nativeName: "Svenska",
+        code: "sv-SE",
+        direction: "ltr"
+    },
+    "nl": {
+        name: "Dutch",
+        nativeName: "Nederlands",
+        code: "nl",
+        direction: "ltr"
+    },
+    "it": {
+        name: "Italian",
+        nativeName: "Italiano",
+        code: "it",
+        direction: "ltr"
     }
 };
 

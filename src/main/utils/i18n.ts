@@ -36,7 +36,16 @@ const AUTO_LOCALE_MAP: Record<string, string> = {
     "ru": "ru",
     "uk": "uk",
     "pl": "pl",
-    "ro": "ro"
+    "ro": "ro",
+    "vi": "vi",
+    "zh-CN": "zh-CN",
+    "zh-TW": "zh-TW",
+    "ja": "ja",
+    "ko": "ko",
+    "da": "da",
+    "sv-SE": "sv-SE",
+    "nl": "nl",
+    "it": "it"
 };
 
 class MainI18n {
