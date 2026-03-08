@@ -72,13 +72,6 @@ export default definePlugin({
             }
         },
         {
-            find: "#{intl::POPOUT_STAY_ON_TOP}),icon:",
-            replacement: {
-                match: /(?<=CallTile.{0,15}\.memo\((\i)=>\{)/,
-                replace: "$1.platform = $self.getPlatform(false, $1?.participantUserId)?.vcIcon || $1?.platform;"
-            }
-        },
-        {
             find: '("AppSkeleton");',
             replacement: {
                 match: /(?<=\.isPlatformEmbedded.{0,50}\i\)\)\}.{0,30})\i\?\i\.\i\.set\(.{0,10}:/,
@@ -92,19 +85,19 @@ export default definePlugin({
         if (bypass || userId === UserStore.getCurrentUser().id) {
             switch (platform) {
                 case "desktop":
-                    return { os: "Windows", browser: "Discord Client", vcIcon: 0 };
+                    return { os: "Windows", browser: "Discord Client" };
                 case "web":
-                    return { os: "Windows", browser: "Chrome", vcIcon: 0 };
+                    return { os: "Windows", browser: "Chrome" };
                 case "ios":
-                    return { os: "iOS", browser: "Discord iOS", vcIcon: 1 };
+                    return { os: "iOS", browser: "Discord iOS" };
                 case "android":
-                    return { os: "Android", browser: "Discord Android", vcIcon: 1 };
+                    return { os: "Android", browser: "Discord Android" };
                 case "xbox":
-                    return { os: "Xbox", browser: "Discord Embedded", vcIcon: 2 };
+                    return { os: "Xbox", browser: "Discord Embedded" };
                 case "playstation":
-                    return { os: "PlayStation", browser: "Discord Embedded", vcIcon: 3 };
+                    return { os: "PlayStation", browser: "Discord Embedded" };
                 case "vr":
-                    return { os: "VR", browser: "Discord VR", vcIcon: 4 };
+                    return { os: "VR", browser: "Discord VR" };
                 default:
                     return null;
             }
