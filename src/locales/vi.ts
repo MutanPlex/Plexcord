@@ -21,27 +21,27 @@ import type { MatchStructure } from "./types";
 
 const translations: MatchStructure<typeof enTranslations> = {
     settings: {
-        title: "cài đặt",
+        title: "Cài đặt",
         language: {
             selector: {
-                label: "Dil",
+                label: "Ngôn ngữ",
                 description: "Chọn ngôn ngữ ưa thích của bạn cho Plexcord.",
                 placeholder: "Chọn ngôn ngữ"
             }
         },
         location: {
             label: "Cài đặt Vị trí",
-            description: "Plexcord xác định nơi đặt phần cài đặt",
-            top: "lên đỉnh",
+            description: "Nơi đặt phần cài đặt Plexcord",
+            top: "Ở trên cùng",
             nitro: {
-                above: "Trên đầu phần nitro",
-                below: "dưới phần nitro"
+                above: "Phía trên phần Nitro",
+                below: "Bên dưới phần Nitro"
             },
             activity: {
-                above: "Cài đặt sự kiện ở trên",
-                below: "Trong Cài đặt sự kiện"
+                above: "Cài đặt hoạt động trên",
+                below: "Bên dưới Cài đặt hoạt động"
             },
-            bottom: "trên cao"
+            bottom: "Ở dưới cùng"
         },
         switches: {
             useQuickCss: {
@@ -53,12 +53,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 description: "Kích hoạt tiện ích mở rộng Công cụ dành cho nhà phát triển React để gỡ lỗi các thành phần React của Discord. Hữu ích cho việc phát triển plugin."
             },
             mainWindowFrameless: {
-                label: "Tắt khung cửa sổ chính",
-                description: "Loại bỏ khung cửa sổ cục bộ để có cái nhìn rõ ràng hơn. Bạn vẫn có thể di chuyển cửa sổ bằng cách kéo vùng thanh tiêu đề."
+                label: "Vô hiệu hóa khung cửa sổ chính",
+                description: "Loại bỏ khung cửa sổ gốc để có cái nhìn rõ ràng hơn. Bạn vẫn có thể di chuyển cửa sổ bằng cách kéo vùng thanh tiêu đề."
             },
             frameless: {
                 label: "Tắt khung cửa sổ",
-                description: "Loại bỏ khung cửa sổ cục bộ để có cái nhìn rõ ràng hơn. Bạn vẫn có thể di chuyển cửa sổ bằng cách kéo vùng thanh tiêu đề."
+                description: "Loại bỏ khung cửa sổ gốc để có cái nhìn rõ ràng hơn. Bạn vẫn có thể di chuyển cửa sổ bằng cách kéo vùng thanh tiêu đề."
             },
             winNativeTitleBar: {
                 label: "Sử dụng thanh tiêu đề gốc của Windows thay vì thanh tiêu đề tùy chỉnh của Discord",
@@ -66,36 +66,36 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             transparent: {
                 label: "Kích hoạt độ trong suốt của cửa sổ",
-                description: "Làm cho cửa sổ Discord trong suốt. Cần có một chủ đề hỗ trợ tính minh bạch, nếu không nó sẽ không làm được gì cả.",
-                isWindows: "Điều này sẽ ngăn cửa sổ thay đổi kích thước và ngăn bạn gắn cửa sổ vào các cạnh màn hình.",
-                notWindows: "Điều này sẽ ngăn cửa sổ bị thay đổi kích thước."
+                description: "Làm cho cửa sổ Discord trong suốt. Cần phải có một chủ đề hỗ trợ tính minh bạch, nếu không điều này sẽ không có tác dụng gì.",
+                isWindows: "Điều này sẽ ngăn không cho cửa sổ có thể thay đổi kích thước và ngăn bạn gắn cửa sổ vào các cạnh màn hình.",
+                notWindows: "Điều này sẽ ngăn không cho cửa sổ có thể thay đổi kích thước."
             },
             winCtrlQ: {
-                label: "Lưu phím tắt Ctrl+Q để đóng Discord (thay thế cho Alt+F4)",
+                label: "Đăng ký Ctrl+Q làm phím tắt để đóng Discord (Thay thế cho Alt+F4)",
                 description: "Thêm Ctrl+Q làm phím tắt để đóng Discord. Điều này cung cấp một giải pháp thay thế cho Alt+F4 để đóng ứng dụng nhanh chóng."
             },
             disableMinSize: {
                 label: "Vô hiệu hóa kích thước cửa sổ tối thiểu",
-                description: "Cho phép cửa sổ Discord thay đổi kích thước nhỏ hơn kích thước tối thiểu mặc định của nó. Hữu ích cho việc sắp xếp các trình quản lý cửa sổ hoặc màn hình nhỏ."
+                description: "Cho phép thay đổi kích thước cửa sổ Discord nhỏ hơn kích thước tối thiểu mặc định của nó. Hữu ích cho việc sắp xếp các trình quản lý cửa sổ hoặc màn hình nhỏ."
             }
         },
         quickActions: {
-            title: "Giao dịch nhanh",
-            description: "Các thao tác phổ biến có thể bạn muốn sử dụng thường xuyên. Những phím tắt này giúp truy cập nhanh vào các tính năng được sử dụng thường xuyên mà không cần điều hướng menu.",
+            title: "Thao tác nhanh",
+            description: "Những hành động phổ biến mà bạn có thể muốn thực hiện. Những phím tắt này giúp bạn truy cập nhanh vào các tính năng được sử dụng thường xuyên mà không cần điều hướng qua các menu.",
             notificationLog: "Nhật ký thông báo",
             editQuickCSS: "Chỉnh sửa QuickCSS",
-            relaunchDiscord: "Khởi động lại sự bất hòa",
+            relaunchDiscord: "Khởi chạy lại Discord",
             openSettingsFolder: "Mở thư mục cài đặt",
             viewSourceCode: "Xem mã nguồn"
         },
         specialCards: {
             donations: {
                 title: "Đóng góp",
-                subtitle: "Cảm ơn vì sự đóng góp của bạn!",
+                subtitle: "Cảm ơn bạn đã quyên góp!",
                 description: "Bạn có thể quản lý các đặc quyền của mình bất cứ lúc nào bằng cách nhắn tin cho @mutanplex.",
-                button: "Đóng góp",
-                invite: "Tham gia vào sự bất hòa của chúng tôi",
-                invalid: "Liên kết lời mời không hợp lệ hoặc đã hết hạn."
+                button: "Quyên tặng",
+                invite: "Tham gia Discord của chúng tôi",
+                invalid: "Liên kết mời không hợp lệ hoặc đã hết hạn."
             },
             supportProject: {
                 title: "Hỗ trợ dự án",
@@ -103,16 +103,16 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             contributions: {
                 title: "Đóng góp",
-                subtitle: "Cảm ơn sự đóng góp của bạn!",
-                description: "Bây giờ bạn đã có một huy hiệu tuyệt vời để đóng góp cho Plexcord!",
+                subtitle: "Cảm ơn bạn đã đóng góp!",
+                description: "Vì bạn đã đóng góp cho Plexcord nên giờ đây bạn có một huy hiệu mới thú vị!",
                 buttonTitle: "Xem những gì bạn đã đóng góp"
             }
         },
         settingsSection: {
             title: "Cài đặt",
-            description: "Định cấu hình cách Plexcord tích hợp và hoạt động với Discord. Các cài đặt này ảnh hưởng đến giao diện và hoạt động của ứng dụng khách Discord.",
+            description: "Định cấu hình cách Plexcord hoạt động và tích hợp với Discord. Các cài đặt này ảnh hưởng đến giao diện và hoạt động của ứng dụng khách Discord.",
             hintParts: {
-                prefix: "Bằng cách định cấu hình cài đặt {{pluginLink}}, bạn có thể tùy chỉnh vị trí xuất hiện của phần cài đặt này trong menu cài đặt Discord.",
+                prefix: "Bạn có thể tùy chỉnh vị trí phần cài đặt này xuất hiện trong menu cài đặt của Discord bằng cách định cấu hình {{pluginLink}}",
                 linkText: "Plugin cài đặt"
             }
         },
@@ -120,11 +120,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "Thông báo",
             description: "Định cấu hình cách Plexcord xử lý thông báo. Bạn có thể tùy chỉnh thời điểm và cách thức nhận thông báo hoặc xem lịch sử các thông báo trước đây.",
             settings: "Cài đặt thông báo",
-            viewLog: "Xem lịch sử thông báo",
+            viewLog: "Xem nhật ký thông báo",
             permissions: {
                 denied: {
                     title: "Quyền thông báo trên màn hình bị từ chối",
-                    label: "Bạn đã từ chối Quyền thông báo. Thông báo trên màn hình sẽ không hoạt động!"
+                    label: "Bạn đã từ chối quyền thông báo. Thông báo trên màn hình sẽ không hoạt động!"
                 }
             },
             style: {
@@ -133,7 +133,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 plexcord: "Thông báo Plexcord",
                 plexcordDesc: "Đây là những thông báo trong ứng dụng",
                 desktop: "Thông báo trên màn hình",
-                desktopDesc: "Thông báo trên Màn hình cục bộ (chẳng hạn như khi bạn nhận được ping)",
+                desktopDesc: "Thông báo gốc trên màn hình (chẳng hạn như khi bạn nhận được ping)",
                 onlyWhenNotFocused: "Chỉ sử dụng thông báo trên Màn hình khi Discord không được tập trung",
                 always: {
                     desktop: "Luôn sử dụng thông báo trên màn hình",
@@ -143,73 +143,73 @@ const translations: MatchStructure<typeof enTranslations> = {
             positions: {
                 label: "Vị trí thông báo",
                 right: {
-                    bottom: "Xuống bên phải",
-                    top: "Lên bên phải"
+                    bottom: "Dưới cùng bên phải",
+                    top: "Trên cùng bên phải",
                 },
                 left: {
-                    bottom: "Xuống bên trái",
-                    top: "Lên trái"
+                    bottom: "Dưới cùng bên trái",
+                    top: "Trên cùng bên trái",
                 }
             },
             missed: {
-                label: "Số thông báo bị bỏ lỡ",
-                description: "Khi bạn tập trung lại vào Discord, một thông báo sẽ bật lên về bất kỳ thông báo nào bạn đã bỏ lỡ.",
-                whileYou: "trong khi bạn đi vắng",
-                count: "Đã nhận được {{count}} thông báo{{s}}",
-                s: " "
+                label: "Số lượng thông báo bị bỏ lỡ",
+                description: "Khi tập trung lại Discord, một thông báo sẽ bật lên cho biết bạn đã bỏ lỡ bao nhiêu",
+                whileYou: "Trong khi bạn đi vắng",
+                count: "{{count}} thông báo{{s}} đã nhận được",
+                s: "S"
             },
             timeout: {
                 label: "Hết thời gian thông báo",
-                description: "Khoảng thời gian thông báo hiển thị trên màn hình trước khi tự động biến mất (tính bằng giây)"
+                description: "Khoảng thời gian (tính bằng giây) mà thông báo sẽ hiển thị trên màn hình trước khi tự động biến mất"
             },
             logLimit: {
                 label: "Giới hạn nhật ký thông báo",
-                description: "Số lượng thông báo tối đa được lưu trữ trong nhật ký thông báo. Đặt thành {{disable}} để tắt ghi nhật ký thông báo và đặt thành {{unlimited}} để không tự động xóa thông báo cũ"
+                description: "Số lượng thông báo tối đa cần lưu trong nhật ký trước khi xóa những thông báo cũ. Đặt thành {{disable}} để tắt nhật ký thông báo và {{unlimited}} để không bao giờ tự động xóa thông báo cũ"
             },
             opacity: {
-                label: "Độ mờ",
+                label: "Độ mờ thông báo",
                 description: "Độ mờ của thông báo trong ứng dụng"
             },
             maxNotifications: {
                 label: "Thông báo tối đa",
-                description: "Số lượng thông báo tối đa hiển thị đồng thời"
+                description: "Số lượng thông báo tối đa được hiển thị cùng một lúc"
             },
             behavior: {
                 label: "Hành vi thông báo",
             },
             disableInStreamerMode: {
-                label: "Tắt ở Chế độ phát sóng",
-                description: "Tắt thông báo khi ở chế độ phát sóng"
+                label: "Tắt ở chế độ Streamer",
+                description: "Tắt thông báo khi ở chế độ truyền phát"
             },
             renderImages: {
-                label: "Xử lý hình ảnh",
+                label: "Kết xuất hình ảnh",
                 description: "Hiển thị hình ảnh trong thông báo"
             },
             streamingTreatment: {
-                label: "Hành vi của chế độ phát sóng",
+                label: "Điều trị trực tuyến",
                 description: "Cách xử lý thông báo khi chia sẻ màn hình của bạn",
-                normal: "Bình thường - Hiển thị thông báo bình thường",
+                normal: "Bình thường - Hiển thị thông báo như bình thường",
                 noContent: "Không có nội dung - Ẩn nội dung thông báo",
-                ignore: "Bỏ qua – Hoàn toàn không hiển thị thông báo"
+                ignore: "Bỏ qua - Hoàn toàn không hiển thị thông báo"
             },
         },
         macVibrancy: {
-            title: "Kiểu nhấp nháy cửa sổ (Yêu cầu khởi động lại)",
-            description: "Tùy chỉnh hiệu ứng nhấp nháy cửa sổ macOS. Điều này kiểm soát kiểu mờ và trong suốt của cửa sổ Discord. Cần phải khởi động lại để những thay đổi có hiệu lực.",
-            placeholder: "Kiểu cửa sổ nhấp nháy",
+            title: "Kiểu sống động của cửa sổ (Yêu cầu khởi động lại)",
+            description: "Tùy chỉnh hiệu ứng rung của cửa sổ macOS. Điều này kiểm soát kiểu mờ và trong suốt của cửa sổ Discord. Những thay đổi yêu cầu khởi động lại để có hiệu lực.",
+            placeholder: "Phong cách sống động của cửa sổ",
             style: {
-                no: "không rung chuyển",
-                underPage: "Bên dưới trang (Tông màu cửa sổ)",
+                no: "Không có sự sống động",
+                underPage: "Dưới trang (Tông màu cửa sổ)",
                 content: "Nội dung",
                 window: "Cửa sổ",
-                selection: "Bỏ phiếu",
-                titlebar: "thanh tiêu đề",
-                header: "Tiêu đề",
-                sidebar: "thanh bên",
-                tooltip: "mẹo công cụ",
-                menu: "thực đơn",
-                popover: "cửa sổ bật lên",
-                fullscreenUI: "Giao diện người dùng toàn màn hình (trong suốt nhưng hơi mờ)",
+                selection: "Lựa chọn",
+                titlebar: "Thanh tiêu đề",
+                header: "tiêu đề",
+                sidebar: "Thanh bên",
+                tooltip: "Chú giải công cụ",
+                menu: "Thực đơn",
+                popover: "Cửa sổ bật lên",
+                fullscreenUI: "Giao diện người dùng toàn màn hình (Trong suốt nhưng hơi mờ)",
                 hud: "HUD (Minh bạch nhất)"
             }
         }
@@ -217,47 +217,47 @@ const translations: MatchStructure<typeof enTranslations> = {
 
     plugins: {
         title: "Plugin",
-        new: "Mới",
+        new: "MỚI",
         unknown: "Không xác định",
-        noDescription: "Mô tả không có sẵn.",
+        noDescription: "Không có mô tả có sẵn.",
         restart: {
             apply: "Hãy khởi động lại để áp dụng các thay đổi!",
             required: "Yêu cầu khởi động lại!",
-            description: "Khởi động lại ngay bây giờ để áp dụng các plugin và cài đặt mới",
+            description: "Khởi động lại ngay bây giờ để áp dụng các plugin mới và cài đặt của chúng",
             following: "Các plugin sau yêu cầu khởi động lại:",
-            fully: "Một số plugin yêu cầu khởi động lại để tắt hoàn toàn.",
-            would: "Bạn có muốn khởi động lại không?",
-            remainingCount: "và {{count}} nữa",
+            remainingCount: "và {{count}} hơn thế nữa",
+            fully: "Một số plugin yêu cầu khởi động lại để tắt hoàn toàn",
+            would: "Bạn có muốn khởi động lại bây giờ không?",
             resetDefault: "Đặt lại về cài đặt mặc định",
-            failed: "Không khởi tạo được phần phụ thuộc:",
+            failed: "Không thể bắt đầu phụ thuộc:",
             button: {
                 restart: "Khởi động lại",
                 later: "Sau đó!",
                 now: "Khởi động lại ngay bây giờ",
                 cancel: "Hủy bỏ",
-                disableWarning: "Tắt cảnh báo",
-                disableAll: "Tắt tất cả",
-                reset: "cài lại",
-                close: "Một phần tư"
+                disableWarning: "Tắt cảnh báo vĩnh viễn",
+                disableAll: "Vô hiệu hóa tất cả",
+                reset: "Cài lại",
+                close: "Đóng"
             }
         },
         contributor: {
             contributed: "đóng góp",
             modal: {
-                contributionsInfo: "{{userName}} {{contributionCount}} {{continuedLink}} bằng cách phát triển plugin.",
-                noContributions: "{{userName}} chưa phát triển bất kỳ plugin nào. Rất có thể là {{contributedLink}} theo những cách khác nhau!"
+                contributionsInfo: "{{userName}} có {{continuedLink}} đến {{contributionCount}} plugin{{s}}.",
+                noContributions: "{{userName}} chưa tạo bất kỳ plugin nào. Họ có thể {{contributedLink}} theo những cách khác!"
             }
         },
         infoModal: {
-            description: "Bạn có thể biết thêm thông tin về plugin bằng cách nhấn vào biểu tượng bánh răng hoặc thông tin",
-            settingsInfo: "Các plugin có bánh răng có các cài đặt mà bạn có thể thay đổi!",
+            description: "Nhấn vào biểu tượng bánh răng hoặc thông tin để biết thêm thông tin về plugin",
+            settingsInfo: "Các plugin có bánh xe răng cưa có các cài đặt mà bạn có thể sửa đổi!",
             disableAll: "Vô hiệu hóa tất cả các plugin"
         },
         error: {
             invalidInput: "Đã cung cấp thông tin đầu vào không hợp lệ",
-            stopping: "Đã xảy ra sự cố khi dừng plugin {{plugin}}",
-            starting: "Đã xảy ra sự cố khi khởi chạy plugin {{plugin}}",
-            startDependency: "Đã xảy ra sự cố khi khởi tạo các phần phụ thuộc: {{failures}}",
+            stopping: "Lỗi khi dừng plugin {{plugin}}",
+            starting: "Lỗi khi khởi động plugin {{plugin}}",
+            startDependency: "Lỗi khi khởi động phần phụ thuộc: {{failures}}",
             infoRender: "Đã xảy ra lỗi khi hiển thị Thành phần thông tin tùy chỉnh của plugin này"
         },
         placeholder: {
@@ -268,77 +268,77 @@ const translations: MatchStructure<typeof enTranslations> = {
         excluded: {
             desktop: "Ứng dụng Discord Desktop hoặc Plextron",
             discordDesktop: "Ứng dụng Discord dành cho máy tính để bàn",
-            plextron: "Ứng dụng Plextron",
+            plextron: "ứng dụng Plextron",
             web: "Ứng dụng Plextron và phiên bản Web của Discord",
             dev: "Phiên bản dành cho nhà phát triển của Plexcord"
         },
         search: {
-            looking: "Đây có phải là thứ bạn đang tìm kiếm",
-            onlyAvailable: "Chỉ có ở đây ->",
-            noCriteria: "Không tìm thấy plugin nào phù hợp với tiêu chí tìm kiếm của bạn"
+            looking: "Bạn đang tìm kiếm",
+            onlyAvailable: "Chỉ có sẵn trên",
+            noCriteria: "Không có plugin nào đáp ứng tiêu chí tìm kiếm."
         },
         required: {
             title: "Plugin bắt buộc",
             this: "Cần có plugin này để Plexcord hoạt động.",
-            by: "Plugin này là cần thiết để những thứ sau hoạt động:"
+            by: "Plugin này được yêu cầu bởi:"
         },
         dangerModal: {
-            title: "Hành động nguy hiểm",
+            title: "HÀNH ĐỘNG NGUY HIỂM",
             disablePlugins: "Tắt plugin",
-            disableText: "Tắt tất cả",
-            irreversible: "HÀNH ĐỘNG NÀY KHÔNG THỂ HOÀN LẠI!",
-            enableBack: "Bạn có chắc chắn muốn tiếp tục không? Bạn có thể kích hoạt lại nó sau.",
+            disableText: "Vô hiệu hóa tất cả",
+            irreversible: "HÀNH ĐỘNG NÀY LÀ KHÔNG THỂ ĐẢO NGƯỢC!",
+            enableBack: "Bạn có chắc chắn muốn tiếp tục không? Bạn luôn có thể kích hoạt lại chúng sau.",
             undone: "Không thể hoàn tác hành động này. Bạn có chắc không?",
-            resetDescription: "Bạn sắp đặt lại cài đặt plugin {{pluginName}} về giá trị mặc định.",
+            resetDescription: "Bạn sắp đặt lại tất cả cài đặt cho {{pluginName}} về giá trị mặc định.",
             disable: "Bạn sắp tắt plugin {{enabledPlugins}}!",
-            confirmReset: "Xác nhận và đặt lại",
+            confirmReset: "Xác nhận đặt lại",
             cancel: "Hủy bỏ",
             resetSettings: "Đặt lại cài đặt",
-            resetText: "cài lại"
+            resetText: "Cài lại"
         },
         filters: {
             label: "Bộ lọc",
             placeholder: "Tìm kiếm plugin...",
             option: {
-                all: "Tất cả",
-                enabled: "Tích cực",
-                disabled: "Tàn tật",
-                new: "mới",
-                userplugins: "Plugin người dùng",
-                api: "Plugin API"
+                all: "Hiển thị tất cả",
+                enabled: "Hiển thị đã bật",
+                disabled: "Hiển thị bị vô hiệu hóa",
+                new: "Hiển thị mới",
+                userplugins: "Hiển thị plugin của người dùng",
+                api: "Hiển thị plugin API"
             }
         },
         pluginModal: {
-            noSettings: "Plugin này không có cài đặt mà bạn có thể thay đổi.",
+            noSettings: "Không có cài đặt cho plugin này.",
             authors: "tác giả",
             settings: "Cài đặt",
-            successfulReset: "Cài đặt của plugin {{plugin}} đã được đặt lại thành công.",
-            enabledStock: "Tiện ích bổ sung chứng khoán đang hoạt động",
-            totalStock: "Tổng số tiện ích bổ sung",
-            enabledUser: "Plugin người dùng đang hoạt động",
-            totalUser: "Tổng số tiện ích bổ sung của người dùng",
+            successfulReset: "Cài đặt cho {{plugin}} đã được đặt lại.",
+            enabledStock: "Đã bật plugin chứng khoán",
+            totalStock: "Tổng số plugin có sẵn",
+            enabledUser: "Plugin người dùng đã bật",
+            totalUser: "Tổng số plugin người dùng",
             info: "Xem thêm thông tin",
             source: "Xem mã nguồn"
         },
         metadata: {
             api: {
                 description: {
-                    memberListDecorators: "API để thêm trang trí vào danh sách thành viên (cả trên máy chủ và DM)",
-                    messageAccessories: "API để thêm đạo cụ vào tin nhắn",
-                    messageDecorations: "API để thêm trang trí vào bài viết",
-                    chatInputButtons: "API để thêm nút vào mục trò chuyện",
-                    commands: "API cần thiết cho bất kỳ thứ gì sử dụng lệnh",
-                    contextMenu: "API để thêm/xóa các mục khỏi menu ngữ cảnh",
+                    memberListDecorators: "API để thêm trang trí vào danh sách thành viên (cả trong máy chủ và DM)",
+                    messageAccessories: "API để thêm phụ kiện vào tin nhắn",
+                    messageDecorations: "API để thêm trang trí vào tin nhắn",
+                    chatInputButtons: "API để thêm nút vào đầu vào trò chuyện",
+                    commands: "API được yêu cầu bởi mọi thứ sử dụng lệnh",
+                    contextMenu: "API để thêm/xóa các mục vào/khỏi menu ngữ cảnh.",
                     dynamicImageModal: "Cho phép bạn bỏ qua chiều rộng hoặc chiều cao khi mở chế độ hình ảnh",
-                    menuItemDemangler: "Làm cho mục menu Discord dễ đọc hơn",
-                    messageEvents: "Bất kỳ thứ gì sử dụng sự kiện tin nhắn đều cần có API",
+                    menuItemDemangler: "Mô-đun Mục menu của Demanles Discord",
+                    messageEvents: "API được yêu cầu bởi bất kỳ thứ gì sử dụng sự kiện tin nhắn",
                     messagePopover: "API để thêm nút vào cửa sổ bật lên tin nhắn",
-                    messageUpdater: "API để cập nhật và xử lý lại tin nhắn",
-                    nicknameIcons: "API để thêm biểu tượng vào tên người dùng trong hồ sơ",
-                    notices: "Sửa lỗi tự động loại bỏ thông báo",
+                    messageUpdater: "API để cập nhật và hiển thị lại tin nhắn",
+                    nicknameIcons: "API để thêm biểu tượng vào biệt hiệu, trong hồ sơ",
+                    notices: "Sửa lỗi thông báo tự động bị loại bỏ",
                     serverList: "Cần có API cho các plugin sửa đổi danh sách máy chủ",
-                    userSettings: "Các bản vá để tiết lộ cài đặt, nhóm và tên người dùng của Discord",
-                    audioPlayer: "API để phát các tệp âm thanh bên trong của Discord hoặc các liên kết âm thanh bên ngoài.",
+                    userSettings: "Vá cài đặt người dùng của Discord để hiển thị nhóm và tên của họ.",
+                    audioPlayer: "API để phát các tệp âm thanh Discord nội bộ hoặc liên kết âm thanh bên ngoài.",
                     userArea: "API để thêm các nút vào bảng khu vực người dùng."
                 },
                 chatButtons: {
@@ -350,27 +350,27 @@ const translations: MatchStructure<typeof enTranslations> = {
             badges: {
                 description: "API để thêm huy hiệu cho người dùng",
                 contributor: {
-                    plexcord: "Người tham gia Plexcord",
-                    vencord: "Người tham gia Vencord",
+                    plexcord: "Cộng tác viên Plexcord",
+                    vencord: "Cộng tác viên Vencord",
                     userPlugin: "Người đóng góp plugin người dùng"
                 },
                 context: {
                     title: "Tùy chọn huy hiệu",
                     copy: {
-                        name: "Sao chép tên huy hiệu",
-                        link: "Sao chép liên kết hình ảnh của huy hiệu"
+                        name: "Copy Badge Name",
+                        link: "Sao chép liên kết hình ảnh huy hiệu"
                     },
                     refetch: {
-                        button: "Làm mới huy hiệu",
-                        success: "Huy hiệu đã được gia hạn thành công!"
+                        button: "Tải lại huy hiệu",
+                        success: "Huy hiệu đã được tải lại thành công!"
                     }
                 },
                 modal: {
-                    title: "Người hỗ trợ Plexcord",
-                    special: "Huy hiệu này là một đặc quyền dành cho các nhà tài trợ Plexcord.",
-                    description: "Vui lòng cân nhắc hỗ trợ sự phát triển của Plexcord bằng cách trở thành nhà tài trợ. Điều này sẽ rất có giá trị đối với chúng tôi!!"
+                    title: "Nhà tài trợ Plexcord",
+                    special: "Huy hiệu này là một lợi ích đặc biệt dành cho Nhà tài trợ Plexcord",
+                    description: "Vui lòng cân nhắc hỗ trợ sự phát triển của Plexcord bằng cách trở thành nhà tài trợ. Nó sẽ có ý nghĩa rất nhiều!"
                 }
-            }
+            },
         },
         uiElements: {
             manage: "Quản lý các thành phần giao diện người dùng",
@@ -378,90 +378,90 @@ const translations: MatchStructure<typeof enTranslations> = {
             section: {
                 chatbar: {
                     title: "Nút thanh trò chuyện",
-                    description: "Đây là các nút ở bên phải thanh nhập cuộc trò chuyện"
+                    description: "Đây là các nút ở bên phải thanh nhập liệu trò chuyện"
                 },
                 messagePopover: {
                     title: "Nút bật lên tin nhắn",
-                    description: "Đây là các nút nổi xuất hiện ở bên phải khi bạn di chuột qua tin nhắn"
+                    description: "Đây là các nút nổi ở bên phải khi bạn di chuột qua tin nhắn"
                 }
             },
-            button: "Các nút kích hoạt plugin sẽ xuất hiện ở đây."
+            button: "Các nút của plugin đã bật sẽ xuất hiện ở đây."
         }
     },
 
     patchHelper: {
-        title: "Trợ lý bản vá",
+        title: "Người trợ giúp bản vá",
         description: "Một công cụ dành cho nhà phát triển giúp bạn tạo các bản vá cho plugin Plexcord.",
         fullPatch: {
-            label: "Tam Yama",
+            label: "Bản vá đầy đủ",
             description: "Dán bản vá JSON đầy đủ của bạn vào đây để điền vào các trường"
         },
-        find: "Bul",
-        match: "cuộc thi đấu",
-        replacement: "Thay đổi",
+        find: "Tìm thấy",
+        match: "Cuộc thi đấu",
+        replacement: "thay thế",
         preview: "Xem trước",
         generatedCode: "Mã được tạo",
         group: "Nhóm",
-        diff: "Sự khác biệt",
+        diff: "Khác biệt",
         module: "mô-đun",
-        compile: "Derle",
+        compile: "Biên dịch",
         compiled: "Biên dịch thành công",
         copy: {
             clipboard: "Sao chép vào Clipboard",
             codeblock: "Sao chép dưới dạng khối mã"
         },
         error: {
-            noMatch: "Không tìm thấy kết quả phù hợp. Có lẽ mô-đun đó đang tải chậm.",
-            multipleMatch: "Nhiều hơn một trận đấu được tìm thấy. Vui lòng sử dụng mẫu tìm kiếm cụ thể hơn.",
-            noFind: "Không có trường 'tìm'.",
-            noReplacement: "Không có trường 'Thay đổi'.",
-            invalidReplacement: "Trường thay thế không hợp lệ",
-            replacementMatch: "Trường 'replacement.match' không tồn tại",
-            replacementReplace: "Trường 'replacement.replace' không tồn tại",
-            replacementMustFunction: "Sự thay thế phải là một chức năng"
+            noMatch: "Không tìm thấy kết quả phù hợp. Mô-đun này có thể được tải lười biếng?",
+            multipleMatch: "Đã tìm thấy nhiều kết quả phù hợp. Vui lòng sử dụng mẫu tìm kiếm cụ thể hơn.",
+            noFind: "Trường 'Tìm' bị thiếu.",
+            noReplacement: "Trường 'Thay thế' bị thiếu.",
+            invalidReplacement: "Trường 'Thay thế' không hợp lệ",
+            replacementMatch: "Trường 'replacement.match' bị thiếu",
+            replacementReplace: "Trường 'replacement.replace' bị thiếu",
+            replacementMustFunction: "'Thay thế' phải là một chức năng"
         },
         cheatSheet: {
             title: "Bảng gian lận",
-            identifiers: "Mã nhận dạng khớp với chuỗi thoát biểu thức chính quy tùy chỉnh (tên biến, tên lớp, v.v.)",
-            dollar: "thêm $",
-            entireMatch: "Thêm tất cả trận đấu",
-            beforeMatch: "Thêm chuỗi con trước trận đấu",
-            afterMatch: "Thêm chuỗi con sau trận đấu",
-            nthGroup: "Thêm nhóm chụp thứ n ($1, $2...)",
-            pluginInstance: "Thêm phiên bản plugin"
+            identifiers: "Chuỗi thoát biểu thức chính quy đặc biệt khớp với các mã định danh (tên biến thể, tên lớp, v.v.)",
+            dollar: "Chèn $",
+            entireMatch: "Chèn toàn bộ trận đấu",
+            beforeMatch: "Chèn chuỗi con trước trận đấu",
+            afterMatch: "Chèn chuỗi con sau trận đấu",
+            nthGroup: "Chèn nhóm chụp thứ n ($1, $2...)",
+            pluginInstance: "Chèn phiên bản plugin"
         },
         replacementEval: {
-            label: "Quá trình thay thế dưới dạng chức năng",
-            description: "'Thay thế' sẽ được coi là một chức năng khi tính năng này được bật."
+            label: "Coi thay thế là chức năng",
+            description: "'Thay thế' sẽ được đánh giá là một chức năng nếu tính năng này được bật"
         }
     },
 
     sync: {
-        title: "Sao lưu và khôi phục",
+        title: "Sao lưu & Khôi phục",
         warning: "Cảnh báo",
-        warningText: "Nhập tệp cài đặt sẽ ghi đè cài đặt hiện tại của bạn. Nếu bạn muốn giữ cấu hình hiện tại của mình, trước tiên hãy nhớ xuất bản sao lưu.",
-        description: "Bạn có thể nhập và xuất cài đặt Plexcord của mình dưới dạng tệp JSON. Bằng cách này, bạn có thể dễ dàng di chuyển cài đặt của mình sang thiết bị khác hoặc khôi phục cài đặt của mình sau khi cài đặt lại Plexcord hoặc Discord.",
-        successful: "Các cài đặt đã được nhập thành công. Khởi động lại ứng dụng để những thay đổi có hiệu lực!",
+        warningText: "Nhập tệp cài đặt sẽ ghi đè cài đặt hiện tại của bạn. Đảm bảo xuất bản sao lưu trước nếu bạn muốn giữ cấu hình hiện tại của mình.",
+        description: "Bạn có thể nhập và xuất cài đặt Plexcord của mình dưới dạng tệp JSON. Điều này cho phép bạn dễ dàng chuyển cài đặt của mình sang thiết bị khác hoặc khôi phục cài đặt sau khi cài đặt lại Plexcord hoặc Discord.",
+        successful: "Cài đặt đã được nhập thành công. Hãy khởi động lại để áp dụng các thay đổi!",
         error: {
-            failure: "Nhập cài đặt không thành công: {{error}}",
-            failedExport: "Xuất cài đặt không thành công, hãy kiểm tra bảng điều khiển",
-            invalid: "Cài đặt không hợp lệ. Đây có thực sự là tệp Điều chỉnh Plexcord không?",
-            tooLarge: "DataStore quá lớn - bị loại khỏi bản sao lưu. Sử dụng tính năng 'Xuất kho dữ liệu' nếu cần.",
-            clearSomeDate: "DataStore rất lớn. Vui lòng xóa một số dữ liệu plugin và thử lại."
+            failure: "Không nhập được cài đặt: {{error}}",
+            failedExport: "Không xuất được cài đặt, hãy kiểm tra bảng điều khiển",
+            invalid: "Cài đặt không hợp lệ. Đây có phải là tệp Cài đặt Plexcord không?",
+            tooLarge: "DataStore quá lớn - bị loại khỏi bản sao lưu. Sử dụng 'Xuất DataStores' nếu cần.",
+            clearSomeDate: "DataStore quá lớn. Vui lòng xóa một số dữ liệu plugin và thử lại."
         },
         settings: {
-            text: "Có gì trong bản sao lưu?",
+            text: "Những gì được bao gồm trong một bản sao lưu?",
             quickcss: "CSS nhanh tùy chỉnh",
             theme: "Liên kết chủ đề",
             plugins: "Cài đặt plugin",
-            datastores: "Kho lưu trữ bổ trợ (ví dụ: Múi giờ hoặc IRememberYou)"
+            datastores: "Kho dữ liệu plugin (ví dụ: Múi giờ hoặc IRememberYou)"
         },
         import: {
             title: "Cài đặt nhập",
             description: "Chọn tệp cài đặt đã xuất trước đó để khôi phục cấu hình của bạn. Thao tác này sẽ thay thế tất cả cài đặt hiện tại của bạn bằng cài đặt từ bản sao lưu.",
             all: "Nhập tất cả cài đặt",
-            plugins: "Eklentiyi Iche Aktar",
-            css: "QuickCSS sẽ được thêm vào",
+            plugins: "Nhập plugin",
+            css: "Nhập QuickCSS",
             datastore: "Nhập kho dữ liệu"
         },
         export: {
@@ -478,29 +478,29 @@ const translations: MatchStructure<typeof enTranslations> = {
         text: "Đám mây",
         title: "Đồng bộ hóa cài đặt",
         override: "Đồng bộ đám mây",
-        description: "Đồng bộ hóa cài đặt Plexcord của bạn với đám mây. Điều này cho phép bạn duy trì cấu hình của mình một cách nhất quán trên nhiều thiết bị mà không cần nhập/xuất thủ công.",
-        switchDescription: "Sau khi được bật, cài đặt của bạn sẽ được đồng bộ hóa với đám mây. Bạn có thể đồng bộ hóa thủ công bằng cách thực hiện các thao tác sau.",
+        description: "Đồng bộ hóa cài đặt Plexcord của bạn với đám mây. Điều này giúp bạn dễ dàng duy trì cấu hình nhất quán trên nhiều thiết bị mà không cần nhập/xuất thủ công.",
+        switchDescription: "Khi được bật, cài đặt của bạn có thể được đồng bộ hóa với và từ đám mây. Hãy thực hiện các thao tác bên dưới để đồng bộ hóa theo cách thủ công.",
         settings: "Cài đặt đám mây",
-        successful: "Cài đặt của bạn đã được đồng bộ hóa thành công với đám mây.",
-        updated: "Cài đặt của bạn đã được cập nhật! Bấm vào đây để khởi động lại để những thay đổi có hiệu lực đầy đủ!",
+        successful: "Cài đặt được đồng bộ hóa lên đám mây!",
+        updated: "Cài đặt của bạn đã được cập nhật! Bấm vào đây để khởi động lại để áp dụng đầy đủ các thay đổi!",
         deleted: "Cài đặt đã bị xóa khỏi đám mây!",
         integration: {
             title: "Tích hợp đám mây",
             description: "Tích hợp đám mây của Plexcord cho phép bạn đồng bộ hóa cài đặt của mình trên nhiều thiết bị và cài đặt Discord. Dữ liệu của bạn được lưu trữ an toàn và có thể dễ dàng khôi phục bất cứ lúc nào.",
         },
-        reauth: "Chúng tôi nhận thấy rằng một khách hàng khác đã bật tích hợp đám mây! Do những hạn chế, bạn sẽ cần phải xác thực lại để tiếp tục. Bấm vào đây để đến trang cài đặt và tiếp tục!",
+        reauth: "Chúng tôi nhận thấy bạn đã bật tích hợp đám mây trong một ứng dụng khách khác! Do những hạn chế, bạn sẽ cần phải ủy quyền lại để tiếp tục sử dụng chúng. Bấm vào đây để đến trang cài đặt để thực hiện việc này!",
         error: {
             setup: "Thiết lập không thành công (không thể truy xuất cấu hình OAuth).",
-            secret: "Thiết lập không thành công (không có khóa bí mật nào được trả về).",
-            string: "Cài đặt không thành công ({{error}}).",
-            connect: "Đồng bộ hóa đám mây đã bị tắt vì tài khoản này không được kết nối với Ứng dụng đám mây Plexcord. Bạn có thể kích hoạt lại tài khoản này bằng cách kết nối nó trong Cài đặt đám mây. (lưu ý: sẽ lưu trữ riêng các tùy chọn của bạn)",
-            noSettings: "Không tìm thấy cài đặt nào trên đám mây.",
+            secret: "Thiết lập không thành công (không trả lại bí mật nào).",
+            string: "Thiết lập không thành công ({{error}}).",
+            connect: "Đồng bộ hóa đám mây đã bị tắt vì tài khoản này không được kết nối với Ứng dụng đám mây Plexcord. Bạn có thể kích hoạt lại nó bằng cách kết nối tài khoản này trong Cài đặt đám mây. (lưu ý: nó sẽ lưu trữ riêng các tùy chọn của bạn)",
+            noSettings: "Không có cài đặt nào trên đám mây.",
             uptodate: "Cài đặt của bạn đã được cập nhật.",
             localNewer: "Cài đặt cục bộ của bạn mới hơn cài đặt đám mây.",
-            delete: "Không xóa được cài đặt ({{error}}).",
+            delete: "Không thể xóa cài đặt ({{error}}).",
             api: {
                 returned: {
-                    delete: "Không xóa được cài đặt (API trả về {{status}}).",
+                    delete: "Không thể xóa cài đặt (API trả về {{status}}).",
                     to: "Không thể đồng bộ hóa cài đặt với đám mây (API trả về {{status}}).",
                     from: "Không thể đồng bộ hóa cài đặt từ đám mây (API trả về {{status}})."
                 }
@@ -511,11 +511,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         warning: {
-            enableCloudIntegration: "Để sử dụng các tính năng đồng bộ hóa cài đặt, hãy bật tích hợp đám mây ở trên."
+            enableCloudIntegration: "Kích hoạt tích hợp đám mây ở trên để sử dụng các tính năng đồng bộ hóa cài đặt."
         },
         danger: {
             title: "Vùng nguy hiểm",
-            description: "Xóa vĩnh viễn tất cả dữ liệu của bạn trên đám mây. Hành động này không thể đảo ngược và sẽ xóa tất cả cài đặt đã đồng bộ hóa cũng như mọi dữ liệu khác được lưu trữ trong cơ sở hạ tầng đám mây.",
+            description: "Xóa vĩnh viễn tất cả dữ liệu của bạn khỏi đám mây. Không thể hoàn tác hành động này và sẽ xóa tất cả cài đặt đã đồng bộ hóa cũng như mọi dữ liệu khác được lưu trữ trên phần phụ trợ đám mây.",
             delete: {
                 account: {
                     title: "Xóa tài khoản đám mây",
@@ -528,78 +528,78 @@ const translations: MatchStructure<typeof enTranslations> = {
         notification: {
             title: "Tích hợp đám mây",
             enabled: "Đã bật tích hợp đám mây",
-            host: "Miền {{host}} đã được thêm vào danh sách cấp phép. Khởi động lại ứng dụng để những thay đổi có hiệu lực.",
+            host: "{{host}} đã được thêm vào danh sách trắng. Vui lòng khởi động lại ứng dụng để những thay đổi có hiệu lực.",
             erase: {
                 successful: "Dữ liệu đám mây đã được xóa thành công",
-                failed: "Không xóa được tất cả dữ liệu (API trả về {{status}}), vui lòng liên hệ với bộ phận hỗ trợ."
+                failed: "Không thể xóa tất cả dữ liệu (API {{status}} được trả về), vui lòng liên hệ với bộ phận hỗ trợ."
             }
         },
         button: {
             to: "Đồng bộ hóa với đám mây",
             from: "Đồng bộ hóa từ đám mây",
-            fromDescription: "Thao tác này sẽ ghi đè cài đặt hiện tại của bạn bằng cài đặt từ đám mây. Hãy sử dụng nó một cách khôn ngoan!",
+            fromDescription: "Thao tác này sẽ ghi đè cài đặt cục bộ của bạn bằng cài đặt trên đám mây. Hãy sử dụng một cách khôn ngoan!",
             delete: "Xóa dữ liệu đám mây",
             enable: "Kích hoạt tích hợp đám mây",
             reauthorize: "Ủy quyền lại",
             confirm: "Khởi động lại ngay bây giờ",
             later: "Sau đó!"
         },
-        privacy: "bảo vệ sự riêng tư của bạn",
+        privacy: "tôn trọng quyền riêng tư của bạn",
         source: "mã nguồn",
-        overview: "Plexcord đi kèm với tích hợp đám mây, mang lại những lợi ích như đồng bộ hóa cài đặt trên các thiết bị. Vì những {{privacy}} và {{source}} này được cung cấp với giấy phép AGPL 3.0 nên bạn có thể lưu trữ chúng trên máy chủ của riêng mình.",
-        authorization: "Kết nối với đám mây để đồng bộ hóa cài đặt. Nếu bạn chưa thiết lập tích hợp đám mây, thao tác này sẽ yêu cầu ủy quyền.",
+        overview: "Plexcord đi kèm với tích hợp đám mây để bổ sung các tính năng bổ sung như đồng bộ hóa cài đặt trên các thiết bị. Nó {{privacy}} và {{source}} được cấp phép AGPL 3.0 nên bạn có thể tự lưu trữ nó.",
+        authorization: "Kết nối với phần phụ trợ đám mây để đồng bộ hóa cài đặt. Điều này sẽ yêu cầu ủy quyền nếu bạn chưa thiết lập tích hợp đám mây.",
         backend: {
-            title: "Nhà cung cấp đám mây",
-            description: "Chọn cách cài đặt của bạn sẽ được lưu trữ trên đám mây. Theo mặc định, Plexcord Cloud được sử dụng nhưng bạn cũng có thể định cấu hình dịch vụ đám mây tự lưu trữ của riêng mình nếu muốn.",
+            title: "Phần cuối đám mây",
+            description: "Chọn cách lưu trữ cài đặt của bạn trên đám mây. Theo mặc định, Plexcord Cloud được sử dụng nhưng bạn cũng có thể kết nối dịch vụ đám mây tự lưu trữ của riêng mình.",
             invalid: "URL không hợp lệ"
         },
         sync: {
             title: "Quy tắc đồng bộ hóa cho thiết bị này",
-            description: "Cài đặt này xác định cách đồng bộ hóa cài đặt giữa thiết bị này và đám mây. Bạn có thể cho phép các thay đổi được truyền theo cả hai hướng hoặc chọn một bên làm nguồn chính.",
+            description: "Cài đặt này kiểm soát cách di chuyển cài đặt giữa thiết bị này và đám mây. Bạn có thể để những thay đổi diễn ra theo cả hai hướng hoặc chọn một nơi làm nguồn thông tin chính xác.",
             direction: {
-                both: "Đồng bộ hóa hai chiều (các thay đổi được truyền theo cả hai hướng)",
+                both: "Đồng bộ hai chiều (các thay đổi diễn ra theo cả hai hướng)",
                 push: "Thiết bị này là nguồn (chỉ tải lên)",
-                pull: "Nguồn đám mây (chỉ tải xuống)",
-                manual: "Đồng bộ hóa tự động (chỉ đồng bộ hóa thủ công với các nút bên dưới)"
+                pull: "Đám mây là nguồn (chỉ tải xuống)",
+                manual: "Không đồng bộ tự động (chỉ đồng bộ thủ công qua các nút bên dưới)"
             }
         }
     },
 
     changelog: {
-        text: "Thay đổi ghi chú",
-        title: "Thay đổi ghi chú",
+        text: "Nhật ký thay đổi",
+        title: "Nhật ký thay đổi",
         description: "Bạn có thể tìm thấy những thay đổi và cập nhật mới nhất cho Plexcord tại đây.",
-        by: "nhà văn",
-        check: "Kiểm tra kho",
-        uptodate: "hiện hành",
+        by: "qua",
+        check: "Kiểm tra kho lưu trữ",
+        uptodate: "cập nhật",
         update: "Cập nhật",
-        noMessage: "không có tin nhắn",
-        unknown: "không rõ",
+        noMessage: "Không có tin nhắn",
+        unknown: "Không xác định",
         updatedPlugins: "Plugin được cập nhật",
         newSettings: "Cài đặt mới",
-        newSettingTooltip: "Cài đặt mới cho {{plugin}}",
+        newSettingTooltip: "Cài đặt mới trong {{plugin}}",
         loading: "Đang tải...",
-        repoUptodate: "Kho hàng cập nhật",
-        fetch: "Mang từ kho về",
-        clear: "Xóa tất cả ghi chú",
+        repoUptodate: "Kho lưu trữ được cập nhật",
+        fetch: "Tìm nạp từ kho lưu trữ",
+        clear: "Xóa tất cả nhật ký",
         internet: "Hãy đảm bảo bạn có kết nối Internet và thử lại.",
         recent: "Những thay đổi gần đây",
-        codeChanges: "Thay đổi mã {{count}} cam kết mới",
-        updateLogs: "{{count}} Ghi chú cập nhật",
-        noCommit: "Không tìm thấy cam kết chuyển tiếp nào từ phiên bản hiện tại của bạn. Nhấp vào 'Tìm nạp từ Kho lưu trữ' để kiểm tra các thay đổi mới.",
-        previous: "Cùng với các phiên cập nhật trước đó, lịch sử cam kết và các thay đổi của plugin.",
+        codeChanges: "Thay đổi mã {{count}} cam kết mới{{s}}",
+        updateLogs: "Nhật ký cập nhật ({{count}})",
+        noCommit: "Không có cam kết nào trước phiên bản hiện tại của bạn. Nhấp vào 'Tìm nạp từ Kho lưu trữ' để kiểm tra các thay đổi mới.",
+        previous: "Các phiên cập nhật trước đó với lịch sử cam kết và các thay đổi về plugin.",
         modal: {
-            description: "Xem những thay đổi mới nhất đối với Plexcord. Quá trình này cho bạn biết có gì mới bằng cách tìm nạp các cam kết trực tiếp từ kho lưu trữ.",
-            repository: "kho lưu trữ",
-            failed: "Không nhận được - hãy kiểm tra bảng điều khiển",
-            current: "Có sẵn:",
-            hide: "ẩn ghi chú",
-            show: "Hiển thị ghi chú",
+            description: "Xem những thay đổi gần đây nhất đối với Plexcord. Việc tìm nạp này sẽ trực tiếp từ kho lưu trữ để hiển thị cho bạn những gì mới.",
+            repository: "Kho lưu trữ",
+            failed: "Không truy xuất được - hãy kiểm tra bảng điều khiển",
+            current: "Hiện hành:",
+            hide: "Ẩn nhật ký",
+            show: "Hiển thị nhật ký",
             fetch: {
-                title: "Mang theo những thay đổi",
-                description: "Kiểm tra các cam kết mới, cập nhật plugin và thay đổi mã trong kho lưu trữ. Điều này sẽ so sánh phiên bản hiện tại của bạn với phiên bản mới nhất và hiển thị cho bạn những tính năng mới.",
-                newCommit: "Đây là các cam kết và cập nhật plugin mới kể từ bản phát hành gần đây nhất của bạn. Bạn có thể xem những tính năng nào đã được thêm vào, lỗi nào đã được sửa và plugin nào đã được cập nhật.",
-                confirm: "Có thể",
+                title: "Tìm nạp các thay đổi",
+                description: "Kiểm tra kho lưu trữ để biết các cam kết mới, cập nhật plugin và thay đổi mã. Điều này sẽ so sánh phiên bản hiện tại của bạn với phiên bản mới nhất hiện có và hiển thị cho bạn những tính năng mới.",
+                newCommit: "Đây là các cam kết và cập nhật plugin mới kể từ phiên bản trước của bạn. Bạn có thể xem những tính năng nào đã được thêm vào, các lỗi đã được sửa và plugin nào đã nhận được bản cập nhật.",
+                confirm: "Tìm về",
             }
         },
         commit: {
@@ -610,157 +610,157 @@ const translations: MatchStructure<typeof enTranslations> = {
             settings: "cài đặt mới"
         },
         toast: {
-            already: "Kho lưu trữ đã được cập nhật",
-            found: "{{count}} cam kết mới được tìm thấy từ kho lưu trữ",
+            already: "Đã cập nhật với kho lưu trữ",
+            found: "Đã tìm thấy {{count}} cam kết mới{{s}} từ kho lưu trữ",
             local: "Kho lưu trữ được cập nhật với bản sao cục bộ của bạn",
-            failed: "Không thể mang nó từ kho :(",
-            cleared: "Đã xóa tất cả ghi chú",
-            logCleared: "Đã xóa ghi chú",
-            yourLatest: "Đã lưu cam kết từ lần cập nhật gần đây nhất của bạn"
+            failed: "Không thể tìm nạp từ kho lưu trữ :(",
+            cleared: "Tất cả nhật ký đã bị xóa",
+            logCleared: "Nhật ký đã bị xóa",
+            yourLatest: "Cam kết đã ghi từ bản cập nhật mới nhất của bạn"
         },
         alert: {
             clear: {
-                title: "Xóa tất cả ghi chú",
-                body: "Bạn có chắc chắn muốn xóa tất cả ghi chú không? Không thể hoàn tác hành động này.",
+                title: "Xóa tất cả nhật ký",
+                body: "Bạn có chắc chắn muốn xóa tất cả nhật ký không? Điều này không thể hoàn tác được.",
                 confirm: "Xóa tất cả",
                 confirmColor: "sự nguy hiểm",
                 cancel: "Hủy bỏ"
             },
             log: {
                 title: "Xóa nhật ký",
-                body: "Bạn có chắc chắn muốn xóa nhật ký này không? Không thể hoàn tác hành động này.",
+                body: "Bạn có chắc chắn muốn xóa nhật ký này không? Điều này không thể hoàn tác được.",
                 confirm: "Xóa nhật ký",
                 confirmColor: "sự nguy hiểm",
                 cancel: "Hủy bỏ"
             }
         },
-        newPlugins: "{{count}} Plugin mới",
+        newPlugins: "{{count}} Plugin mới{{s}}",
         following: "Các plugin sau đã được thêm vào trong các bản cập nhật gần đây:",
-        more: "+{{count}} plugin mới"
+        more: "+{{count}} plugin khác"
     },
 
     csp: {
         restart: "Cần phải khởi động lại để áp dụng thay đổi này",
         blocked: {
             resources: "Tài nguyên bị chặn",
-            disallowed: "Một số hình ảnh, kiểu hoặc phông chữ đã bị chặn vì chúng đến từ các miền trái phép.",
-            recommended: "Chúng tôi khuyên bạn nên chuyển chúng sang GitHub hoặc Imgur. Tuy nhiên, bạn cũng có thể cho phép các miền nếu bạn hoàn toàn tin tưởng chúng.",
-            afterAllow: "Sau khi cấp quyền cho một không gian, bạn phải tắt hoàn toàn và khởi động lại {{platform}} (từ khay hệ thống / trình quản lý tác vụ) để áp dụng thay đổi.",
+            disallowed: "Một số hình ảnh, kiểu hoặc phông chữ đã bị chặn vì chúng đến từ các miền không được phép.",
+            recommended: "Chúng tôi khuyên bạn nên chuyển chúng sang GitHub hoặc Imgur. Nhưng bạn cũng có thể cho phép các miền nếu bạn hoàn toàn tin tưởng chúng.",
+            afterAllow: "Sau khi cho phép miền, bạn phải đóng hoàn toàn (từ khay / trình quản lý tác vụ) và khởi động lại {{platform}} để áp dụng thay đổi.",
             allow: "Cho phép",
             url: "URL bị chặn"
         },
         imgur: {
-            direct: "Liên kết Imgur phải là liên kết trực tiếp ở định dạng {{etc}}.",
-            copy: "Để lấy link trực tiếp, nhấp chuột phải vào hình ảnh và chọn 'Sao chép địa chỉ hình ảnh'."
+            direct: "Liên kết Imgur phải là liên kết trực tiếp ở dạng {{etc}}",
+            copy: "Để lấy liên kết trực tiếp, nhấp chuột phải vào hình ảnh và chọn 'Sao chép địa chỉ hình ảnh'."
         },
         wants: {
             caller: "{{callerName}} muốn cho phép kết nối với {{domain}}",
-            detail: "Nếu bạn không nhận ra và hoàn toàn tin tưởng {{domain}}, bạn nên hủy yêu cầu này!",
-            restart: "Bạn phải đóng hoàn toàn và khởi động lại {{appName}} để các thay đổi có hiệu lực.",
+            detail: "Trừ khi bạn nhận ra và hoàn toàn tin tưởng {{domain}}, bạn nên hủy yêu cầu này!",
+            restart: "Bạn sẽ phải đóng hoàn toàn và khởi động lại {{appName}} để các thay đổi có hiệu lực.",
             type: {
-                images: "hình ảnh",
-                styles: "CSS và Chủ đề",
+                images: "Hình ảnh",
+                styles: "CSS & Chủ đề",
                 fonts: "Phông chữ"
             },
-            content: "Các loại nội dung sau sẽ được phép tải lên từ {{domain}}:",
-            understand: "Tôi hoàn toàn tin tưởng {{domain}} và hiểu những rủi ro khi cho phép liên kết.",
+            content: "Các loại nội dung sau sẽ được phép tải từ {{domain}}:",
+            understand: "Tôi hoàn toàn tin tưởng {{domain}} và hiểu những rủi ro khi cho phép kết nối với nó.",
             button: {
                 cancel: "Hủy bỏ",
                 allow: "Cho phép"
             },
-            title: "Quyền đối với tên miền"
+            title: "Quyền của máy chủ"
         }
     },
 
     themes: {
         title: "Chủ đề",
         management: "Quản lý chủ đề",
-        description: "Tùy chỉnh giao diện của Discord bằng các chủ đề. Thêm tệp .css cục bộ hoặc cài đặt chủ đề trực tiếp từ URL. Chủ đề có biểu tượng bánh răng có các cài đặt tùy chỉnh mà bạn có thể thay đổi.",
+        description: "Tùy chỉnh giao diện của Discord bằng các chủ đề. Thêm tệp .css cục bộ hoặc tải chủ đề trực tiếp từ URL. Các chủ đề có biểu tượng bánh răng cưa có các cài đặt tùy chỉnh mà bạn có thể sửa đổi.",
         local: "Chủ đề địa phương",
         new: "MỚI",
-        pinned: "được ghim",
+        pinned: "Đã ghim",
         stylus: "Phần mở rộng bút cảm ứng",
         bd: "Chủ đề BetterDiscord",
-        github: "Github",
-        download: "Bạn đang tìm kiếm một chủ đề? Hãy xem {{bd}} hoặc tìm kiếm trên {{github}}. Khi tải xuống từ BetterDiscord, hãy nhấp vào nút “Tải xuống” và đặt tệp .theme.css vào thư mục chủ đề của bạn.",
+        github: "GitHub",
+        download: "Bạn đang tìm kiếm chủ đề? Hãy xem {{bd}} hoặc tìm kiếm trên {{github}}. Khi tải xuống từ BetterDiscord, hãy nhấp vào 'Tải xuống' và đặt tệp .theme.css vào thư mục chủ đề của bạn.",
         add: "Thêm vào",
         reset: "Đặt lại cài đặt về mặc định",
-        notCSS: "Đây không phải là tệp CSS. Hãy chắc chắn rằng bạn sử dụng liên kết thô!",
+        notCSS: "Không phải là tệp CSS. Hãy nhớ sử dụng liên kết thô!",
         okay: "Được rồi!",
         checking: "Đang kiểm tra...",
         valid: "Có hiệu lực!",
         upload: "Tải chủ đề lên",
         openFolder: "Mở thư mục chủ đề",
-        loadMissing: "Cài đặt chủ đề bị thiếu",
+        loadMissing: "Tải chủ đề bị thiếu",
         editQuickCSS: "Chỉnh sửa QuickCSS",
         editClient: "Chỉnh sửa chủ đề khách hàng",
         website: "Mở trang web",
         discord: "Máy chủ bất hòa",
         downloadTheme: "Tải xuống",
         refresh: "Làm cho khỏe lại",
-        delete: "Sil",
+        delete: "Xóa bỏ",
         unknown: {
-            title: "không rõ",
+            title: "Không xác định",
             author: "Tác giả không xác định",
-            theme: "Chủ đề bất hòa"
+            theme: "Một chủ đề bất hòa"
         },
-        required: "Các plugin sau được yêu cầu nhưng không hoạt động:",
+        required: "Các plugin sau là bắt buộc nhưng chưa được bật:",
         homepage: "Trang chủ",
         support: "Ủng hộ",
         online: {
             title: "Chủ đề trực tuyến",
-            description: "Cài đặt chủ đề trực tiếp từ URL thay vì tệp cục bộ. Các chủ đề trực tuyến được cập nhật tự động khi nguồn thay đổi; để bạn luôn có phiên bản mới nhất mà không cần tải xuống thủ công.",
+            description: "Tải chủ đề trực tiếp từ URL thay vì tệp cục bộ. Các chủ đề trực tuyến tự động cập nhật khi nguồn thay đổi, do đó bạn luôn có phiên bản mới nhất mà không cần tải xuống thủ công.",
             enable: "Kích hoạt chủ đề trực tuyến",
-            enableDescription: "Chuyển đổi tải lên chủ đề trực tuyến. Khi bị tắt, tất cả các chủ đề trực tuyến sẽ bị tắt và bạn sẽ không thể thêm các chủ đề trực tuyến mới."
+            enableDescription: "Chuyển đổi tải chủ đề trực tuyến. Khi bị tắt, tất cả chủ đề trực tuyến sẽ bị tắt và bạn sẽ không thể thêm chủ đề mới."
         },
         quickActions: {
-            title: "Giao dịch nhanh",
-            description: "Các phím tắt để quản lý chủ đề của bạn. Mở thư mục chủ đề để thêm chủ đề mới, sử dụng QuickCSS để chỉnh sửa kiểu nhanh chóng hoặc tải lại chủ đề sau khi thay đổi."
+            title: "Thao tác nhanh",
+            description: "Các phím tắt để quản lý chủ đề của bạn. Mở thư mục chủ đề của bạn để thêm chủ đề mới, sử dụng QuickCSS để chỉnh sửa nhanh kiểu hoặc tải lại chủ đề sau khi thực hiện thay đổi."
         },
         error: {
-            userscript: "Các chủ đề trên Userscript không được hỗ trợ!",
-            stylus: "Thay vào đó, bạn có thể cài đặt chủ đề bằng {{stylus}}!",
+            userscript: "Chủ đề không được hỗ trợ trên Userscript!",
+            stylus: "Thay vào đó, bạn có thể cài đặt các chủ đề bằng {{stylus}}!",
             expired: "Liên kết không hợp lệ hoặc đã hết hạn",
-            text: "Thậm chí:"
+            text: "Lỗi:"
         },
         copy: {
             url: "Sao chép URL",
             copied: "Đã sao chép URL chủ đề!",
             settings: "Sao chép cài đặt chủ đề",
-            copiedSettings: "Cài đặt chủ đề đã được sao chép vào bảng nhớ tạm."
+            copiedSettings: "Đã sao chép cài đặt chủ đề vào bảng nhớ tạm."
         },
         paste: {
             settings: "Dán cài đặt chủ đề",
             empty: "Clipboard của bạn trống.",
-            invalid: "Không có dữ liệu cài đặt hợp lệ trong clipboard của bạn.",
-            pasted: "Cài đặt chủ đề đã được dán từ bảng nhớ tạm."
+            invalid: "Clipboard của bạn không có dữ liệu cài đặt hợp lệ.",
+            pasted: "Đã dán cài đặt chủ đề từ bảng nhớ tạm."
         },
         settings: {
             for: "Cài đặt cho {{themeName}}",
         },
         installed: {
             title: "Chủ đề đã cài đặt",
-            description: "Quản lý chủ đề của bạn ở đây. Chủ đề cục bộ được tải từ thư mục chủ đề của bạn, chủ đề trực tuyến được tải từ URL. Chủ đề có biểu tượng bánh răng có cài đặt tùy chỉnh.",
-            count: "Đã cài đặt {{count}} chủ đề ({{localCount}} cục bộ, {{onlineCount}} trực tuyến) đã bật {{enabledCount}}",
-            search: "Chủ đề thậm chí...",
-            loading: "Chủ đề đang tải...",
-            none: "Chưa có chủ đề nào được cài đặt. Để bắt đầu, hãy thêm các tệp chủ đề vào thư mục chủ đề của bạn hoặc thêm chủ đề trực tuyến từ phía trên.",
-            noCriteria: "Không tìm thấy chủ đề nào phù hợp với tiêu chí tìm kiếm hoặc bộ lọc của bạn."
+            description: "Quản lý chủ đề của bạn ở đây. Chủ đề cục bộ tải từ thư mục chủ đề của bạn, chủ đề trực tuyến từ URL. Các chủ đề có biểu tượng bánh răng cưa có các cài đặt có thể tùy chỉnh.",
+            count: "{{count}} chủ đề{{s}} đã cài đặt ({{localCount}} cục bộ, {{onlineCount}} trực tuyến) · Đã bật {{enabledCount}}",
+            search: "Tìm kiếm chủ đề...",
+            loading: "Đang tải chủ đề...",
+            none: "Chưa có chủ đề nào được cài đặt. Thêm tệp chủ đề vào thư mục chủ đề của bạn hoặc thêm chủ đề trực tuyến ở trên để bắt đầu.",
+            noCriteria: "Không có chủ đề nào phù hợp với tiêu chí tìm kiếm hoặc bộ lọc của bạn."
         },
         filter: {
             all: "Hiển thị tất cả",
             online: "Chủ đề trực tuyến",
             local: "Chủ đề địa phương",
-            enabled: "Hiệu quả",
+            enabled: "Đã bật",
             disabled: "Tàn tật"
         },
         notification: {
             refresh: {
-                title: "Chủ đề được đổi mới",
-                error: "Không thể làm mới chủ đề"
+                title: "Đã làm mới chủ đề",
+                error: "Không làm mới được chủ đề"
             },
             failed: {
-                download: "Chủ đề Indirilemedi"
+                download: "Không tải được chủ đề xuống"
             }
         }
     },
@@ -769,69 +769,69 @@ const translations: MatchStructure<typeof enTranslations> = {
         title: "Trình cập nhật",
         settings: "Cài đặt trình cập nhật",
         updates: "Cập nhật",
-        updated: "đã cập nhật!",
-        restart: "Khởi động lại bằng cách nhấp vào đây",
+        updated: "đã được cập nhật!",
+        restart: "Bấm vào đây để khởi động lại",
         repaired: "Plexcord đã được sửa chữa!",
-        ok: "Được rồi",
+        ok: "ĐƯỢC RỒI",
         preferences: {
             title: "Cập nhật tùy chọn",
-            description: "Hãy xem cách Plexcord tự cập nhật. Bạn có thể chọn cập nhật tự động trong nền hoặc nhận thông báo khi có bản cập nhật mới.",
+            description: "Kiểm soát cách Plexcord luôn cập nhật. Bạn có thể chọn cập nhật tự động trong nền hoặc được thông báo khi có bản cập nhật mới.",
         },
         github: {
-            local: "Bản sao cục bộ của bạn có bản ghi mới hơn kho lưu trữ từ xa. Điều này thường xảy ra khi bạn thực hiện thay đổi cục bộ. Vui lòng giữ lại hoặc đặt lại chúng trước khi cập nhật."
+            local: "Bản sao cục bộ của bạn có nhiều cam kết gần đây hơn kho lưu trữ từ xa. Điều này thường xảy ra khi bạn thực hiện các thay đổi cục bộ. Vui lòng cất giữ hoặc đặt lại chúng trước khi cập nhật."
         },
         error: {
-            check: "Đã xảy ra sự cố khi kiểm tra bản cập nhật. Xem bảng điều khiển để biết thêm thông tin.",
-            occurred: "Đã xảy ra lỗi",
-            retrieve: "Đã xảy ra sự cố khi truy xuất thông tin cập nhật - Check Console",
-            title: "Không!",
-            tryAgain: "Đã xảy ra lỗi. Vui lòng thử lại hoặc xem bảng điều khiển để biết thêm thông tin.",
-            command: "Không tìm thấy lệnh {{path}}. Tải xuống cái này hoặc thử lại.",
-            code: "Mã {{mã}}. Xem bảng điều khiển để biết thêm thông tin.",
-            running: "Đã xảy ra sự cố khi thực thi {{cmd}}: {{error}}",
-            failed: "Điều này cũng không thành công :( Vui lòng thử cập nhật hoặc cài đặt lại bằng trình cài đặt!"
+            check: "Không thể kiểm tra cập nhật. Kiểm tra bảng điều khiển để biết thêm thông tin",
+            occurred: "Đã xảy ra lỗi không xác định",
+            retrieve: "Không truy xuất được - hãy kiểm tra bảng điều khiển",
+            title: "Ối!",
+            tryAgain: "Đã xảy ra lỗi không xác định. Vui lòng thử lại hoặc xem bảng điều khiển để biết thêm thông tin.",
+            command: "Lệnh {{path}} không tìm thấy. Vui lòng cài đặt nó và thử lại.",
+            code: "Mã {{code}}. Xem bảng điều khiển để biết thêm thông tin.",
+            running: "Đã xảy ra lỗi khi chạy {{cmd}}: {{error}}",
+            failed: "Điều đó cũng không thành công :( Hãy thử cập nhật hoặc cài đặt lại bằng trình cài đặt!"
         },
         available: "Có 1 bản cập nhật",
         updateAvailable: "Đã có bản cập nhật Plexcord!",
         click: "Bấm vào đây để xem bản cập nhật",
-        available_plural: "Có sẵn bản cập nhật {{count}}",
-        current: "Hiện hành!",
+        available_plural: "Có {{count}} cập nhật",
+        current: "Cập nhật!",
         successful: {
             title: "Cập nhật thành công!",
-            body: "Đã cập nhật thành công. Khởi động lại để lưu thay đổi!",
+            body: "Đã cập nhật thành công. Khởi động lại ngay bây giờ để áp dụng các thay đổi?",
             button: {
                 confirm: "Khởi động lại",
                 cancel: "Không phải bây giờ!",
                 update: "Cập nhật ngay",
                 check: "Kiểm tra cập nhật"
             },
-            noFound: "Không tìm thấy bản cập nhật"
+            noFound: "Không tìm thấy bản cập nhật nào"
         },
         automatically: {
             label: "Tự động cập nhật",
-            description: "Plexcord tự động tải xuống và cài đặt các bản cập nhật mà không cần xác nhận"
+            description: "Tự động cập nhật Plexcord mà không cần lời nhắc xác nhận"
         },
         notify: {
-            label: "Hiển thị thông báo cập nhật tự động",
+            label: "Nhận thông báo khi quá trình cập nhật tự động hoàn tất",
             description: "Hiển thị thông báo khi Plexcord tự động cập nhật"
         },
-        repo: "kho lưu trữ",
-        repoDescription: "Đây là kho lưu trữ GitHub nơi Plexcord nhận các bản cập nhật.",
+        repo: "Repo",
+        repoDescription: "Đây là kho lưu trữ GitHub nơi Plexcord tìm nạp các bản cập nhật từ đó.",
         loading: "Đang tải...",
     },
 
     components: {
         error: {
             title: "Ồ không!",
-            render: "Đã xảy ra lỗi khi hiển thị thành phần này. Tìm thêm thông tin bên dưới và trên bảng điều khiển của bạn."
+            render: "Đã xảy ra lỗi khi hiển thị Thành phần này. Thông tin thêm có thể được tìm thấy bên dưới và trong bảng điều khiển của bạn."
         },
         componentFailed: {
-            message: "À! Không thể hiển thị trang này. Tuy nhiên, có một bản cập nhật có thể khắc phục điều này. Bạn có muốn cập nhật và khởi động lại ngay bây giờ không?"
+            message: "Ờ ồ! Không thể hiển thị Trang này. Tuy nhiên, có một bản cập nhật có thể khắc phục được sự cố đó. Bạn có muốn cập nhật và khởi động lại ngay bây giờ không?"
         },
         quickCSS: {
-            title: "Mở trình soạn thảo QuickCSS",
-            message: "Trình chỉnh sửa QuickCSS vẫn đang mở ở chế độ nền.",
-            detail: "Bạn vẫn muốn đóng Discord? Thao tác này cũng sẽ đóng trình soạn thảo QuickCSS.",
+            title: "Trình soạn thảo QuickCSS mở",
+            message: "Trình soạn thảo QuickCSS vẫn đang mở ở chế độ nền.",
+            detail: "Bạn có muốn đóng Discord không? Thao tác này cũng sẽ đóng trình soạn thảo QuickCSS.",
             cancel: "Hủy bỏ",
             close: "Vẫn đóng"
         }
@@ -839,41 +839,41 @@ const translations: MatchStructure<typeof enTranslations> = {
 
     commands: {
         error: {
-            execute: "Đã xảy ra lỗi khi thực thi lệnh '{{command}}'"
+            execute: "Đã xảy ra lỗi khi thực hiện lệnh '{{command}}'"
         }
     },
 
     notifications: {
-        dismiss: "Đóng thông báo",
+        dismiss: "Loại bỏ thông báo",
         noYet: "Chưa có thông báo nào",
         settings: "Cài đặt thông báo",
         log: {
             title: "Nhật ký thông báo",
             clear: "Xóa nhật ký thông báo",
             sure: "Bạn có chắc không?",
-            permamently: "{{count}} thông báo sẽ bị xóa vĩnh viễn. Không thể hoàn tác hành động này.",
+            permamently: "Thao tác này sẽ xóa vĩnh viễn {{count}} thông báo{{s}}. Không thể hoàn tác hành động này.",
             button: {
-                confirm: "Được rồi",
-                cancel: "Hủy bỏ"
+                confirm: "Làm đi!",
+                cancel: "Đừng bận tâm"
             }
         }
     },
 
     memberlist: {
         error: {
-            render: "Đã xảy ra lỗi khi hiển thị Trình trang trí danh sách thành viên {{key}}"
+            render: "Không thể hiển thị {{key}} Trang trí danh sách thành viên"
         }
     },
 
     message: {
         accessory: {
             error: {
-                render: "Đã xảy ra lỗi khi hiển thị Phụ kiện thông báo {{key}}"
+                render: "Không thể hiển thị {{key}} Phụ kiện tin nhắn"
             }
         },
         decoration: {
             error: {
-                render: "Đã xảy ra lỗi khi hiển thị trang trí thông báo {{key}}"
+                render: "Không thể hiển thị {{key}} Trang trí tin nhắn"
             }
         }
     },
@@ -888,50 +888,50 @@ const translations: MatchStructure<typeof enTranslations> = {
         unit: {
             year: "năm",
             years: "năm",
-            month: "là",
-            months: "là",
+            month: "tháng",
+            months: "tháng",
             week: "tuần",
             weeks: "tuần",
             day: "ngày",
             days: "ngày",
-            hour: "chốc lát",
-            hours: "chốc lát",
+            hour: "giờ",
+            hours: "giờ",
             minute: "phút",
             minutes: "phút",
             second: "thứ hai",
-            seconds: "thứ hai",
-            ago: "trước",
-            s: " "
+            seconds: "giây",
+            ago: "trước kia",
+            s: "S"
         }
     },
 
     plugin: {
         noTrack: {
-            name: "Không theo dõi",
+            name: "NoTrack",
             description: "Tắt tính năng theo dõi của Discord (phân tích/'khoa học'), số liệu và báo cáo sự cố Sentry",
             option: {
                 disableAnalytics: {
-                    label: "Đóng phân tích",
-                    description: "Tắt các chỉ số theo dõi (phân tích/'khoa học') của Discord và báo cáo sự cố Sentry"
+                    label: "Vô hiệu hóa phân tích",
+                    description: "Tắt tính năng theo dõi của Discord (phân tích/'khoa học'), số liệu và báo cáo sự cố Sentry"
                 }
             }
         },
         settings: {
-            name: "Cài đặt",
-            description: "Thêm giao diện cài đặt và thông tin gỡ lỗi",
+            name: "Settings",
+            description: "Thêm giao diện người dùng cài đặt và thông tin gỡ lỗi",
             option: {
                 language: {
-                    label: "Dil",
+                    label: "Ngôn ngữ",
                     description: "Chọn ngôn ngữ ưa thích của bạn cho Plexcord."
                 },
                 settingsLocation: {
                     label: "Cài đặt Vị trí",
-                    description: "Plexcord xác định nơi đặt phần cài đặt"
+                    description: "Xác định vị trí của phần cài đặt Plexcord."
                 }
             }
         },
         supportHelper: {
-            name: "Trợ lý hỗ trợ",
+            name: "Support Helper",
             description: "Giúp chúng tôi cung cấp hỗ trợ cho bạn",
             commands: {
                 description: {
@@ -941,8 +941,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             modals: {
                 outdated: {
-                    title: "Chờ đợi!",
-                    body: "Bạn đang sử dụng phiên bản cũ của Plexcord! Rất có thể vấn đề của bạn đã được giải quyết.",
+                    title: "Giữ lấy!",
+                    body: "Bạn đang sử dụng phiên bản Plexcord đã lỗi thời! Rất có thể sự cố của bạn đã được khắc phục.",
                     footer: "Vui lòng cập nhật trước khi yêu cầu hỗ trợ!",
                     button: {
                         cancel: "Xem cập nhật",
@@ -951,9 +951,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     }
                 },
                 updater: {
-                    title: "Chờ đợi!",
-                    body: "Bạn đang sử dụng phiên bản cập nhật bên ngoài của Plexcord, chúng tôi không cung cấp hỗ trợ cho phiên bản này!",
-                    footer: "Vui lòng {{officially}} hoặc liên hệ với nhà cung cấp gói của bạn để được hỗ trợ.",
+                    title: "Giữ lấy!",
+                    body: "Bạn đang sử dụng phiên bản Plexcord được cập nhật bên ngoài mà chúng tôi không hỗ trợ!",
+                    footer: "Vui lòng chuyển sang {{officially}} hoặc liên hệ với nhà bảo trì gói của bạn để được hỗ trợ.",
                     officially: "phiên bản được hỗ trợ chính thức của Plexcord",
                     button: {
                         cancel: "Hủy bỏ",
@@ -967,94 +967,94 @@ const translations: MatchStructure<typeof enTranslations> = {
                     }
                 },
                 custom: {
-                    title: "Chờ đợi!",
-                    header: "Bạn đang sử dụng phiên bản Plexcord độc quyền, chúng tôi không cung cấp hỗ trợ cho phiên bản này!",
-                    body: "Chúng tôi chỉ cung cấp hỗ trợ cho {{officialBuild}}. {{switch}} hoặc tự mình giải quyết vấn đề.",
-                    footer: "Nếu bạn bỏ qua quy tắc này, quyền nhận hỗ trợ của bạn sẽ bị thu hồi.",
-                    official: "phát hành chính thức",
-                    switch: "nâng cấp lên phiên bản chính thức",
+                    title: "Giữ lấy!",
+                    header: "Bạn đang sử dụng bản dựng Plexcord tùy chỉnh mà chúng tôi không cung cấp hỗ trợ!",
+                    body: "Chúng tôi chỉ cung cấp hỗ trợ cho {{officialBuild}}. {{switch}} hoặc tự mình tìm ra vấn đề.",
+                    footer: "Bạn sẽ bị cấm nhận hỗ trợ nếu bỏ qua quy định này.",
+                    official: "bản dựng chính thức",
+                    switch: "chuyển sang bản dựng chính thức",
                     button: {
-                        confirm: "Tôi hiểu",
-                        secondaryConfirm: "Đừng hiển thị lại"
+                        confirm: "đã hiểu",
+                        secondaryConfirm: "Không hiển thị lại"
                     }
                 }
             },
             button: {
-                debug: "chạy/gỡ lỗi plexcord",
-                plugins: "chạy /plexcord-plugin",
+                debug: "Chạy/gỡ lỗi plexcord",
+                plugins: "Chạy /plexcord-plugin",
                 snippet: "Chạy đoạn mã"
             },
             toast: {
                 success: "Thành công!",
-                failed: "Không thể chạy đoạn mã :(",
+                failed: "Không chạy được đoạn mã :(",
                 failedOpenInvite: "Không mở được lời mời, vui lòng kiểm tra bảng điều khiển :(",
-                upload: "Danh sách plugin đã được tải thành công!",
-                failedUpload: "Không thể tải tệp danh sách plugin. Vui lòng thử lại.",
+                upload: "Danh sách plugin được tải lên thành công!",
+                failedUpload: "Không thể tải lên tệp danh sách plugin. Vui lòng thử lại.",
                 unableGenerate: "Không tạo được danh sách plugin."
             },
             dm: {
-                warning: "Vui lòng không gửi tin nhắn riêng tư tới các nhà phát triển plugin Plexcord để được hỗ trợ!{{br}}Thay vào đó, bạn có thể sử dụng kênh hỗ trợ Plexcord bằng cách tham gia máy chủ {{support}}: {{channel}}"
+                warning: "Vui lòng không nhắn tin riêng cho nhà phát triển plugin Plexcord để được hỗ trợ!{{br}}Thay vào đó, bạn có thể tham gia máy chủ {{support}} và sử dụng kênh hỗ trợ Plexcord: {{channel}}"
             },
             alert: {
-                title: "Cảnh báo: Quá nhiều Plugin",
-                paragraph1: "Chúng tôi nhận thấy hơn 100 plugin đã được kích hoạt.",
-                paragraph2: "Bạn có thể không nhận được hỗ trợ do số lượng plugin.",
-                paragraph3: "Vấn đề của bạn rất có thể là do xung đột plugin.",
-                paragraph4: "Hãy cân nhắc việc vô hiệu hóa một số plugin để khắc phục sự cố.",
+                title: "Cảnh báo: Số lượng plugin cao",
+                paragraph1: "Bạn đã kích hoạt hơn 100 plugin.",
+                paragraph2: "Do số lượng plugin quá lớn nên bạn có thể không nhận được hỗ trợ.",
+                paragraph3: "Vấn đề của bạn có thể là do xung đột plugin.",
+                paragraph4: "Vui lòng xem xét việc vô hiệu hóa một số plugin để khắc phục sự cố.",
                 paragraph5: "Danh sách plugin của bạn sẽ được gửi dưới dạng tệp văn bản.",
             }
         },
         accountPanelServerProfile: {
-            name: "Hồ sơ máy chủ AccountPanel",
-            description: "Nhấp chuột trái vào bảng tài khoản của bạn và nhấp chuột phải để xem hồ sơ máy chủ của bạn",
+            name: "AccountPanelServerProfile",
+            description: "Nhấp chuột phải vào bảng tài khoản của bạn ở phía dưới bên trái để xem hồ sơ của bạn trong máy chủ hiện tại",
             option: {
                 prioritizeServerProfile: {
                     label: "Ưu tiên hồ sơ máy chủ",
-                    description: "Ưu tiên hồ sơ máy chủ khi bạn nhấp chuột trái vào bảng tài khoản của mình"
+                    description: "Ưu tiên Hồ sơ Máy chủ khi nhấp chuột trái vào bảng tài khoản của bạn"
                 }
             },
             context: {
-                account: "Hiển thị hồ sơ tài khoản",
-                server: "Hiển thị hồ sơ máy chủ",
+                account: "Xem hồ sơ tài khoản",
+                server: "Xem hồ sơ máy chủ",
                 prioritize: "Ưu tiên hồ sơ máy chủ"
             }
         },
         altKrispSwitch: {
-            name: "AltKrispChuyển đổi",
-            description: "Làm cho Cửa sổ bật lên khử tiếng ồn chuyển đổi giữa Không có và Krisp thay vì Krisp và Tiêu chuẩn."
+            name: "AltKrispSwitch",
+            description: "Làm cho Cửa sổ bật lên loại bỏ tiếng ồn chuyển đổi giữa Không có và Krisp thay vì Krisp và Tiêu chuẩn"
         },
         alwaysAnimate: {
-            name: "Luôn luôn hoạt hình",
-            description: "Nó hoạt hình bất cứ thứ gì có thể hoạt hình.",
+            name: "AlwaysAnimate",
+            description: "Hoạt hình bất cứ thứ gì có thể hoạt hình",
             option: {
                 icons: {
-                    label: "biểu tượng",
-                    description: "Làm sinh động các biểu tượng máy chủ, hình đại diện, đồ trang trí và nhiều thứ khác bất cứ lúc nào."
+                    label: "Biểu tượng",
+                    description: "Luôn tạo hiệu ứng động cho các biểu tượng máy chủ, hình đại diện, trang trí và hơn thế nữa"
                 },
                 statusEmojis: {
                     label: "Biểu tượng cảm xúc trạng thái",
-                    description: "Luôn làm sống động các biểu tượng cảm xúc trạng thái."
+                    description: "Luôn tạo hiệu ứng cho biểu tượng cảm xúc trạng thái"
                 },
                 serverBanners: {
                     label: "Biểu ngữ máy chủ",
-                    description: "Luôn làm động các biểu ngữ máy chủ."
+                    description: "Luôn làm động các biểu ngữ máy chủ"
                 },
                 nameplates: {
                     label: "Bảng tên",
-                    description: "Luôn làm sống động các bảng tên."
+                    description: "Luôn tạo ảnh động cho bảng tên"
                 },
                 roleGradients: {
-                    label: "Chuyển đổi vai trò",
-                    description: "Luôn tạo hiệu ứng chuyển tiếp màu của vai trò."
+                    label: "Chuyển màu vai trò",
+                    description: "Luôn tạo hiệu ứng chuyển màu vai trò"
                 }
             }
         },
         alwaysExpandProfiles: {
-            name: "luônMở rộngHồ sơ",
-            description: "Luôn mở rộng hồ sơ người dùng"
+            name: "AlwaysExpandProfiles",
+            description: "Luôn mở rộng cửa sổ bật lên của hồ sơ sang chế độ đầy đủ"
         },
         alwaysExpandRoles: {
-            name: "LuônMở rộngVai trò",
+            name: "AlwaysExpandRoles",
             description: "Luôn mở rộng danh sách vai trò trong cửa sổ bật lên hồ sơ",
             option: {
                 hideArrow: {
@@ -1064,28 +1064,28 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         animalese: {
-            name: "Động vật",
-            description: "Phát âm thanh động vật cho mỗi tin nhắn được gửi (họ làm rất nhiều)",
+            name: "Animalese",
+            description: "Chơi trò động vật vượt qua động vật đối với mỗi tin nhắn được gửi (chúng ngáp rất nhiều)",
             option: {
                 volume: {
-                    label: "Mức âm thanh",
-                    description: "Âm lượng giọng nói của động vật"
+                    label: "Âm lượng",
+                    description: "Âm lượng của âm thanh động vật"
                 },
                 speed: {
                     label: "Tốc độ",
-                    description: "Tốc độ giọng nói của động vật"
+                    description: "Tốc độ của âm thanh động vật"
                 },
                 pitch: {
-                    label: "Tôn",
-                    description: "nhân giai điệu"
+                    label: "Sân bóng đá",
+                    description: "Hệ số sân"
                 },
                 messageLengthLimit: {
                     label: "Giới hạn độ dài tin nhắn",
-                    description: "Độ dài tin nhắn tối đa để xử lý"
+                    description: "Độ dài tối đa của tin nhắn cần xử lý"
                 },
                 processOwnMessages: {
-                    label: "Xử lý tin nhắn của riêng bạn",
-                    description: "Cho phép nói tin nhắn của riêng bạn quá"
+                    label: "Xử lý tin nhắn riêng",
+                    description: "Cho phép gửi tin nhắn của riêng bạn"
                 },
                 soundQuality: {
                     label: "Chất lượng âm thanh",
@@ -1098,44 +1098,44 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         alwaysTrust: {
-            name: "Luôn tin tưởng",
-            description: "Loại bỏ miền độc hại và cửa sổ bật lên tệp đáng ngờ",
+            name: "AlwaysTrust",
+            description: "Loại bỏ tên miền không đáng tin cậy gây phiền nhiễu và cửa sổ bật lên tệp đáng ngờ",
             option: {
                 domain: {
-                    label: "tên miền",
-                    description: "Loại bỏ cửa sổ bật lên 'tên miền độc hại'"
+                    label: "Lãnh địa",
+                    description: "Loại bỏ cửa sổ bật lên tên miền không đáng tin cậy khi mở liên kết"
                 },
                 file: {
                     label: "Tài liệu",
-                    description: "Loại bỏ cửa sổ bật lên tải xuống 'có thể nguy hiểm'"
+                    description: "Xóa cửa sổ bật lên 'Tải xuống có thể nguy hiểm' khi mở liên kết"
                 },
                 noDeleteSafety: {
-                    label: "Không Xóa Bảo mật",
-                    description: "Loại bỏ nhu cầu nhập tên máy chủ khi xóa máy chủ"
+                    label: "Không Xóa An Toàn",
+                    description: "Loại bỏ yêu cầu nhập tên máy chủ khi xóa máy chủ"
                 },
                 confirmModal: {
-                    label: "Cửa sổ bật lên xác nhận",
-                    description: "'Bạn có chắc chắn muốn xác nhận giao dịch này không?' xóa cửa sổ bật lên"
+                    label: "Xác nhận phương thức",
+                    description: "Chế độ 'bạn có chắc chắn muốn xóa' có nên được hiển thị không?"
                 }
             },
             alert: {
                 title: "Xóa máy chủ?",
-                body: "Quá trình này là vĩnh viễn, hãy để chúng tôi nêu rõ nếu nó không rõ ràng!",
-                confirm: "Sil",
+                body: "Nó là vĩnh viễn, nếu điều đó không rõ ràng.",
+                confirm: "Xóa bỏ",
                 cancel: "Hủy bỏ"
             }
         },
         anonymiseFileNames: {
-            name: "Ẩn danhTên tệp",
-            description: "Ẩn danh tên tập tin được tải lên.",
+            name: "AnonymiseFileNames",
+            description: "Ẩn danh tên tập tin đã tải lên",
             option: {
                 anonymiseByDefault: {
                     label: "Ẩn danh theo mặc định",
-                    description: "Ẩn danh tên tập tin theo mặc định. Bạn có thể tắt nó trong cửa sổ bật lên tải lên tệp nếu muốn."
+                    description: "Ẩn danh tên tập tin theo mặc định. Bạn có thể tắt tính năng này trong cửa sổ bật lên tải lên nếu cần."
                 },
                 spoilerMessages: {
                     label: "Tin nhắn tiết lộ",
-                    description: "Ẩn danh tên của các tập tin được đánh dấu là tiết lộ thông tin."
+                    description: "Ẩn danh tên tập tin được đánh dấu là tiết lộ nội dung."
                 },
                 method: {
                     label: "Phương pháp",
@@ -1149,35 +1149,35 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Độ dài ký tự ngẫu nhiên"
                 },
                 consistent: {
-                    label: "Ẩn danh nhất quán",
-                    description: "Khóa bí mật để ẩn danh nhất quán"
+                    label: "Nhất quán",
+                    description: "Bí mật ẩn danh nhất quán"
                 }
             },
             using: {
-                anonymous: "Tên tệp ẩn danh được sử dụng",
-                spoiler: "Tên tập tin bình thường được sử dụng"
+                anonymous: "Sử dụng tên tệp ẩn danh",
+                spoiler: "Sử dụng tên tập tin bình thường"
             },
             spoiler: {
-                description: "Bật hoặc tắt spoiler cho các tập tin của bạn",
-                toggle: "Bật hoặc tắt spoiler cho các tập tin của bạn (bật mặc định)",
-                enabled: "Đã kích hoạt spoiler!",
-                disabled: "spoilers bị vô hiệu hóa!"
+                description: "Chuyển đổi spoiler cho các tập tin của bạn",
+                toggle: "Chuyển đổi spoiler cho các tập tin của bạn (bật mặc định)",
+                enabled: "Đã bật spoiler!",
+                disabled: "Đã vô hiệu hóa spoiler!"
             }
         },
         appleMusic: {
-            name: "Sự hiện diện phong phú của Apple Music",
-            description: "Apple Music hiển thị trạng thái nghe dưới dạng Discord Rich Presence",
-            about: "Đối với các chuỗi định dạng sự kiện có thể tùy chỉnh, bạn có thể sử dụng một số chuỗi tùy chỉnh để thêm dữ liệu theo dõi vào các sự kiện! {{name}} được thay thế bằng tên bài hát, {{artist}} bằng (các) tên nghệ sĩ và {{album}} bằng tên album.",
+            name: "AppleMusicRichPresence",
+            description: "Sự hiện diện phong phú của Discord cho Apple Music của bạn!",
+            about: "Đối với các chuỗi định dạng hoạt động có thể tùy chỉnh, bạn có thể sử dụng một số chuỗi đặc biệt để đưa dữ liệu theo dõi vào hoạt động! {{name}} được thay thế bằng tên bản nhạc; {{artist}} được thay thế bằng tên của (các) nghệ sĩ; và {{album}} được thay thế bằng tên album.",
             button: {
-                listen: "Apple Music't Dinle",
+                listen: "Nghe trên Apple Music",
                 songLink: "Xem trên SongLink"
             },
             option: {
                 activityType: {
                     label: "Loại hoạt động",
-                    description: "Loại hoạt động nào sẽ được hiển thị",
-                    listening: "lắng nghe",
-                    playing: "đang chơi"
+                    description: "Loại hoạt động nào",
+                    listening: "Nghe",
+                    playing: "Đang chơi"
                 },
                 statusDisplayType: {
                     label: "Loại hiển thị trạng thái",
@@ -1188,11 +1188,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 refreshInterval: {
                     label: "Khoảng thời gian làm mới",
-                    description: "Khoảng thời gian làm mới sự kiện (giây)"
+                    description: "Khoảng thời gian giữa các lần làm mới hoạt động (giây)"
                 },
                 enableTimestamps: {
                     label: "Bật dấu thời gian",
-                    description: "Có bật dấu thời gian hay không"
+                    description: "Có hay không bật dấu thời gian"
                 },
                 enableButtons: {
                     label: "Bật nút",
@@ -1200,103 +1200,103 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 nameString: {
                     label: "Chuỗi tên",
-                    description: "Chuỗi định dạng tên sự kiện"
+                    description: "Chuỗi định dạng tên hoạt động"
                 },
                 detailsString: {
                     label: "Chuỗi chi tiết",
-                    description: "Chuỗi định dạng chi tiết sự kiện"
+                    description: "Chuỗi định dạng chi tiết hoạt động"
                 },
                 stateString: {
                     label: "Chuỗi trạng thái",
-                    description: "Chuỗi định dạng trạng thái sự kiện"
+                    description: "Chuỗi định dạng trạng thái hoạt động"
                 },
                 largeImageType: {
                     label: "Loại hình ảnh lớn",
-                    description: "Nội dung sự kiện loại hình ảnh lớn",
-                    album: "ảnh bìa album",
-                    artist: "nghệ sĩ vẽ tranh",
-                    disabled: "tàn tật"
+                    description: "Nội dung hoạt động loại hình ảnh lớn",
+                    album: "Album ảnh nghệ thuật",
+                    artist: "Tác phẩm nghệ thuật của nghệ sĩ",
+                    disabled: "Tàn tật"
                 },
                 largeTextString: {
                     label: "Chuỗi văn bản lớn",
-                    description: "Thực thể sự kiện chuỗi định dạng văn bản lớn"
+                    description: "Nội dung hoạt động chuỗi định dạng văn bản lớn"
                 },
                 smallImageType: {
-                    label: "Loại hình thu nhỏ",
-                    description: "Loại hình thu nhỏ nội dung sự kiện",
-                    album: "Logo của Apple Music",
-                    artist: "nghệ sĩ vẽ tranh",
-                    disabled: "tàn tật"
+                    label: "Loại hình ảnh nhỏ",
+                    description: "Nội dung hoạt động loại hình ảnh nhỏ",
+                    album: "Biểu tượng Apple Music",
+                    artist: "Tác phẩm nghệ thuật của nghệ sĩ",
+                    disabled: "Tàn tật"
                 },
                 smallTextString: {
                     label: "Chuỗi văn bản nhỏ",
-                    description: "Thực thể sự kiện chuỗi định dạng văn bản nhỏ"
+                    description: "Nội dung hoạt động chuỗi định dạng văn bản nhỏ"
                 }
             }
         },
         arRpc: {
-            name: "WebRichPresence (arRPC)",
-            description: "Plugin máy khách arRPC để kích hoạt RPC trên Discord Web (thử nghiệm)",
+            name: "WebRichPresence(arRPC)",
+            description: "Plugin máy khách cho arRPC để kích hoạt RPC trên Discord Web (thử nghiệm)",
             use: {
                 title: "Cách sử dụng arRPC",
-                enable: "{{link}} để chạy máy chủ và sau đó kích hoạt plugin.",
+                enable: "{{link}} để máy chủ chạy, sau đó kích hoạt plugin.",
                 link: "Làm theo hướng dẫn trong kho GitHub"
             },
             toast: {
                 connected: "Đã kết nối với arRPC",
-                failed: "Không thể kết nối với arRPC, nó có hoạt động không?",
+                failed: "Không kết nối được với arRPC, nó có đang chạy không?",
                 retry: "Thử lại"
             }
         },
         atSomeone: {
-            name: "tại ai đó",
-            description: "Cho phép bạn gắn thẻ một người ngẫu nhiên với @someone"
+            name: "AtSomeone",
+            description: "Với @someone bạn có thể đề cập đến ai đó một cách ngẫu nhiên"
         },
         autoDNDWhilePlaying: {
-            name: "AutoDndTrong KhiChơi",
-            description: "Tự động cập nhật trạng thái trực tuyến (online, không hoạt động, không làm phiền) khi game khởi chạy",
+            name: "AutoDndWhilePlaying",
+            description: "Tự động cập nhật trạng thái trực tuyến của bạn (trực tuyến, nhàn rỗi, dnd) khi khởi chạy trò chơi",
             option: {
                 statusToSet: {
                     label: "Trạng thái cần đặt",
-                    description: "Trạng thái được đặt khi trò chơi bắt đầu",
-                    online: "trực tuyến",
+                    description: "Trạng thái cần đặt khi khởi chạy trò chơi",
+                    online: "Trực tuyến",
                     dnd: "Đừng làm phiền",
-                    idle: "nhàn rỗi",
+                    idle: "Nhàn rỗi",
                     invisible: "Vô hình"
                 },
                 excludeInvisible: {
                     label: "Loại trừ ẩn",
-                    description: "Ngăn thay đổi trạng thái tự động khi trạng thái của bạn được đặt thành ẩn"
+                    description: "Ngăn chặn thay đổi trạng thái tự động trong khi trạng thái của bạn được đặt ở chế độ ẩn"
                 }
             }
         },
         autoZipper: {
             name: "AutoZipper",
-            description: "Tự động nén các loại tệp và thư mục được chỉ định trước khi tải chúng lên Discord",
+            description: "Tự động nén các loại tệp và thư mục được chỉ định trước khi tải lên Discord",
             option: {
                 extensions: {
                     label: "Tiện ích mở rộng",
-                    description: "Danh sách các phần mở rộng tệp được phân tách bằng dấu phẩy sẽ được nén tự động (ví dụ: .psd,.blend,.exe,.dmg)"
+                    description: "Danh sách các phần mở rộng tệp được phân tách bằng dấu phẩy để tự động nén (ví dụ: .psd,.blend,.exe,.dmg)"
                 }
             }
         },
         bannersEverywhere: {
-            name: "Biểu ngữ ở mọi nơi",
+            name: "BannersEverywhere",
             description: "Hiển thị banner trong danh sách thành viên",
             option: {
                 animate: {
-                    label: "Hoạt hình",
-                    description: "Làm banner hoạt hình"
+                    label: "hoạt hình",
+                    description: "Biểu ngữ động"
                 },
                 preferNameplate: {
-                    label: "Chọn bảng tên",
-                    description: "Chọn bảng tên thay vì banner"
+                    label: "Ưu tiên bảng tên",
+                    description: "Thích bảng tên hơn banner"
                 }
             }
         },
         betterActivities: {
-            name: "Hoạt động tốt hơn",
-            description: "Hiển thị biểu tượng hoạt động trong danh sách thành viên và cho phép hiển thị tất cả các sự kiện",
+            name: "BetterActivities",
+            description: "Hiển thị biểu tượng hoạt động trong danh sách thành viên và cho phép hiển thị tất cả các hoạt động",
             option: {
                 memberList: {
                     label: "Danh sách thành viên",
@@ -1304,45 +1304,45 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 iconSize: {
                     label: "Kích thước biểu tượng",
-                    description: "Kích thước của biểu tượng sự kiện"
+                    description: "Kích thước của các biểu tượng hoạt động"
                 },
                 specialFirst: {
-                    label: "Ưu đãi đầu tiên",
-                    description: "Hiển thị các sự kiện đặc biệt trước tiên (Hiện tại là Spotify và Twitch)"
+                    label: "Đặc biệt đầu tiên",
+                    description: "Hiển thị các hoạt động đặc biệt trước tiên (Hiện tại là Spotify và Twitch)"
                 },
                 renderGifs: {
-                    label: "GIF'yere Make it",
+                    label: "Kết xuất ảnh GIF",
                     description: "Cho phép hiển thị ảnh GIF"
                 },
                 removeGameActivityStatus: {
-                    label: "Xóa trạng thái trò chơi",
-                    description: "Xóa biểu tượng và trạng thái trò chơi"
+                    label: "Xóa trạng thái 'Hoạt động trò chơi'",
+                    description: "Xóa biểu tượng và trạng thái hoạt động trò chơi"
                 },
                 userPopout: {
                     label: "Cửa sổ bật lên của người dùng",
-                    description: "Hiển thị tất cả các hoạt động trong cửa sổ bật lên/thanh bên hồ sơ"
+                    description: "Hiển thị tất cả các hoạt động trong cửa sổ bật lên/thanh bên của hồ sơ"
                 },
                 hideTooltip: {
-                    label: "Ẩn mẹo công cụ",
+                    label: "Ẩn chú giải công cụ",
                     description: "Ẩn các hoạt động ở nhiều nơi khác nhau"
                 },
                 allActivitiesStyle: {
-                    label: "Tất cả sự kiện",
-                    description: "Hiển thị tất cả kiểu sự kiện",
+                    label: "Tất cả hoạt động",
+                    description: "Phong cách để hiển thị tất cả các hoạt động",
                     list: "Danh sách",
-                    carousel: "thanh trượt",
-                    left: "Sol",
+                    carousel: "băng chuyền",
+                    left: "Bên trái",
                     right: "Phải"
                 }
             }
         },
         betterAudioPlayer: {
             name: "BetterAudioPlayer",
-            description: "Thêm máy quang phổ và máy hiển thị dao động vào trình phát tệp đính kèm âm thanh",
+            description: "Thêm trình hiển thị quang phổ và dao động ký vào trình phát tệp đính kèm âm thanh",
             option: {
                 oscilloscope: {
                     label: "Máy hiện sóng",
-                    description: "Bật trình hiển thị phạm vi"
+                    description: "Bật trình hiển thị dao động"
                 },
                 spectrograph: {
                     label: "máy quang phổ",
@@ -1350,23 +1350,23 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 oscilloscopeSolidColor: {
                     label: "Máy hiện sóng màu đồng nhất",
-                    description: "Sử dụng màu đồng nhất thay vì độ dốc cho phạm vi"
+                    description: "Sử dụng màu đồng nhất cho máy hiện sóng thay vì chuyển màu"
                 },
                 oscilloscopeColor: {
-                    label: "Máy hiện sóng Rengi",
+                    label: "Màu dao động",
                     description: "Màu của máy hiện sóng khi bật màu đồng nhất"
                 },
                 spectrographSolidColor: {
                     label: "Máy quang phổ màu rắn",
-                    description: "Sử dụng màu đồng nhất thay vì độ dốc cho máy quang phổ"
+                    description: "Sử dụng màu đồng nhất cho máy quang phổ thay vì chuyển màu"
                 },
                 spectrographColor: {
                     label: "Màu quang phổ",
                     description: "Màu của máy quang phổ khi bật màu đồng nhất"
                 },
                 forceMoveBelow: {
-                    label: "Buộc di chuyển xuống dưới cùng",
-                    description: "Buộc di chuyển trình hiển thị bên dưới điều khiển âm lượng"
+                    label: "Buộc di chuyển xuống dưới",
+                    description: "Buộc trình hiển thị ở bên dưới bộ điều khiển âm thanh"
                 }
             },
             toast: {
@@ -1374,143 +1374,143 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         betterBanReasons: {
-            name: "Tốt hơnCấmLý do",
-            description: "Tạo lý do tùy chỉnh để sử dụng trong cửa sổ cấm Discord và/hoặc hiển thị kiểu nhập văn bản thay vì tùy chọn theo mặc định.",
+            name: "BetterBanReasons",
+            description: "Tạo lý do tùy chỉnh để sử dụng trong chế độ cấm Discord và/hoặc hiển thị kiểu nhập văn bản theo mặc định thay vì các tùy chọn.",
             option: {
                 reasons: {
-                    label: "lý do",
-                    description: "lý do đặc biệt của bạn"
+                    label: "Lý do",
+                    description: "Lý do tùy chỉnh của bạn"
                 },
                 isTextInputDefault: {
-                    label: "Nhập văn bản mặc định",
-                    description: "Theo mặc định, nó hiển thị kiểu nhập văn bản thay vì menu lựa chọn. (Tương đương với việc nhấn vào More)"
+                    label: "Nhập văn bản là mặc định",
+                    description: "Hiển thị kiểu nhập văn bản thay vì menu chọn theo mặc định. (Tương đương với việc nhấp vào tùy chọn 'Khác')"
                 }
             },
-            title: "lý do",
-            placeholder: "Từ đâu",
+            title: "Lý do",
+            placeholder: "Lý do",
             add: "Thêm một lý do khác"
         },
         betterBlockedUsers: {
-            name: "Người dùng bị chặn tốt hơn",
-            description: "Nó cho phép bạn tìm kiếm danh sách người dùng bị chặn và đặt tên có thể chọn được trong cài đặt.",
+            name: "BetterBlockedUsers",
+            description: "Cho phép bạn tìm kiếm trong danh sách người dùng bị chặn và có thể chọn tên trong cài đặt.",
             placeholder: "Tìm kiếm người dùng..."
         },
         betterCommands: {
-            name: "Lệnh tốt hơn",
-            description: "Nó tăng cường hệ thống chỉ huy với nhiều cải tiến khác nhau.",
+            name: "BetterCommands",
+            description: "Tăng cường hệ thống chỉ huy với những cải tiến linh tinh.",
             option: {
                 autoFillArguments: {
                     label: "Tự động điền đối số",
-                    description: "Tự động điền lệnh với tất cả các đối số, không chỉ các đối số được yêu cầu"
+                    description: "Tự động điền lệnh với tất cả các đối số thay vì chỉ những đối số bắt buộc"
                 },
                 allowNewlinesInCommands: {
                     label: "Cho phép dòng mới trong lệnh",
-                    description: "Cho phép dòng mới trong mục lệnh (CTRL + Shift + Enter)"
+                    description: "Cho phép dòng mới trong đầu vào lệnh (CTRL + Shift + Enter)"
                 }
             },
             command: {
                 refresh: {
-                    description: "Discord làm mới các lệnh ứng dụng nguyên bản",
-                    user: "người dùng cụ thể cố gắng gia hạn",
-                    refreshing: "Các lệnh ứng dụng đang được đổi mới...",
+                    description: "Làm mới cục bộ các lệnh ứng dụng Discord",
+                    user: "người dùng cụ thể để thử và làm mới",
+                    refreshing: "Đang làm mới các lệnh ứng dụng...",
                     refreshed: "Lệnh được làm mới thành công!",
-                    failed: "Lệnh làm mới không thành công. Kiểm tra bảng điều khiển để biết chi tiết."
+                    failed: "Không thể làm mới lệnh. Kiểm tra bảng điều khiển để biết chi tiết."
                 }
             }
         },
         betterFolders: {
-            name: "Thư mục tốt hơn",
-            description: "Hiển thị các thư mục máy chủ trong thanh bên tùy chỉnh và thêm các cải tiến liên quan đến thư mục",
+            name: "BetterFolders",
+            description: "Hiển thị các thư mục máy chủ trên thanh bên chuyên dụng và thêm các cải tiến liên quan đến thư mục",
             option: {
                 sidebar: {
                     label: "Thanh bên",
-                    description: "Hiển thị máy chủ trong thư mục trong thanh bên tùy chỉnh"
+                    description: "Hiển thị máy chủ từ thư mục trên thanh bên chuyên dụng"
                 },
                 sidebarAnim: {
                     label: "Hoạt ảnh thanh bên",
-                    description: "Sử dụng hình ảnh động khi mở thanh bên thư mục"
+                    description: "Hoạt hình mở thanh bên thư mục"
                 },
                 closeAllFolders: {
                     label: "Đóng tất cả thư mục",
                     description: "Đóng tất cả các thư mục khi chọn máy chủ không có trong thư mục"
                 },
                 closeAllHomeButton: {
-                    label: "Đóng tất cả trên nút Home",
+                    label: "Đóng tất cả nút Home",
                     description: "Đóng tất cả các thư mục khi nhấp vào nút home"
                 },
                 closeOthers: {
-                    label: "Đóng phần khác",
-                    description: "Đóng các thư mục khác khi một thư mục được mở"
+                    label: "Đóng những thứ khác",
+                    description: "Đóng các thư mục khác khi mở một thư mục"
                 },
                 closeServerFolder: {
                     label: "Đóng thư mục máy chủ",
-                    description: "Đóng thư mục khi máy chủ trong thư mục được chọn"
+                    description: "Đóng thư mục khi chọn máy chủ trong thư mục đó"
                 },
                 forceOpen: {
                     label: "Buộc mở",
-                    description: "Buộc mở một thư mục khi chuyển sang máy chủ của thư mục"
+                    description: "Buộc mở một thư mục khi chuyển sang máy chủ của thư mục đó"
                 },
                 keepIcons: {
-                    label: "Bảo vệ biểu tượng",
-                    description: "Tiếp tục hiển thị các biểu tượng máy chủ trong thư mục thanh máy chủ chính khi thư mục được mở trong thanh bên BetterFolders"
+                    label: "Giữ biểu tượng",
+                    description: "Tiếp tục hiển thị các biểu tượng bang hội trong thư mục thanh bang hội chính khi nó được mở trong thanh bên BetterFolders"
                 },
                 showFolderIcon: {
                     label: "Hiển thị biểu tượng thư mục",
-                    description: "Hiển thị biểu tượng thư mục phía trên máy chủ thư mục trong thanh bên BetterFolders",
+                    description: "Hiển thị biểu tượng thư mục phía trên các bang hội thư mục trong thanh bên BetterFolders",
                     never: "Không bao giờ",
                     always: "Luôn luôn",
-                    moreThanOne: "Khi nhiều thư mục được mở rộng"
+                    moreThanOne: "Khi có nhiều thư mục được mở rộng"
                 }
             }
         },
         betterGifAltText: {
-            name: "Tốt hơnGifAltText",
-            description: "Thay đổi văn bản thay thế GIF từ chỉ 'GIF' để bao gồm thẻ/tên tệp gif"
+            name: "BetterGifAltText",
+            description: "Thay đổi văn bản thay thế GIF từ chỉ đơn giản là 'GIF' sang chứa thẻ gif/tên tệp"
         },
         betterGifPicker: {
-            name: "Tốt hơnGifPicker",
-            description: "Làm cho bộ chọn GIF mở danh mục yêu thích theo mặc định",
+            name: "BetterGifPicker",
+            description: "Làm cho bộ chọn gif mở danh mục yêu thích theo mặc định",
             option: {
                 keepOpen: {
-                    label: "Giữ bộ chọn mở",
-                    description: "Cho phép bộ chọn GIF vẫn mở sau khi chọn GIF"
+                    label: "Giữ mở",
+                    description: "Giữ bộ chọn gif mở sau khi chọn gif"
                 }
             }
         },
         betterInvites: {
-            name: "Tốt hơnMời",
-            description: "Xem ngày hết hạn của lời mời, xem hồ sơ của người mời và xem trước máy chủ trước khi tham gia (bằng cách nhấp vào tên)",
+            name: "BetterInvites",
+            description: "Xem ngày hết hạn của lời mời, xem hồ sơ người mời và xem trước máy chủ trước khi tham gia bằng cách nhấp vào tên",
             render: {
-                tip: "Lời mời này sẽ hết hạn sau {{time}}",
+                tip: "Lời mời này sẽ hết hạn {{time}}",
                 header: "{{name}} đã mời bạn tham gia {{server}}",
-                never: "không bao giờ"
+                never: "không hết hạn"
             }
         },
         betterNotesBox: {
-            name: "Tốt hơnGhi chúHộp",
-            description: "Ẩn ghi chú hoặc tắt kiểm tra chính tả (Định cấu hình trong Cài đặt!!)",
+            name: "BetterNotesBox",
+            description: "Ẩn ghi chú hoặc tắt tính năng kiểm tra chính tả (Định cấu hình trong cài đặt!!)",
             option: {
                 hide: {
                     label: "Ẩn ghi chú",
                     description: "Ẩn hộp ghi chú trong cửa sổ bật lên của người dùng"
                 },
                 noSpellCheck: {
-                    label: "Tắt kiểm tra chính tả",
+                    label: "Không kiểm tra chính tả",
                     description: "Vô hiệu hóa kiểm tra chính tả trong ghi chú"
                 }
             }
         },
         betterPlusReacts: {
             name: "BetterPlusReacts",
-            description: "Số dấu cộng trước :emoji: cho biết tin nhắn sẽ thêm biểu tượng cảm xúc vào"
+            description: "Số dấu cộng trước :emoji: là thông báo để thêm vào"
         },
         betterRoleContext: {
-            name: "Bối cảnh tốt hơnVai trò",
-            description: "Thêm tùy chọn sao chép màu vai trò/chỉnh sửa vai trò/hiển thị biểu tượng vai trò khi nhấp chuột phải vào vai trò trong hồ sơ người dùng",
+            name: "BetterRoleContext",
+            description: "Thêm tùy chọn sao chép màu vai trò/chỉnh sửa vai trò/xem biểu tượng vai trò khi nhấp chuột phải vào vai trò trong hồ sơ người dùng",
             option: {
                 roleIconFileFormat: {
                     label: "Định dạng tệp biểu tượng vai trò",
-                    description: "Định dạng tệp để sử dụng khi hiển thị biểu tượng vai trò"
+                    description: "Định dạng tệp để sử dụng khi xem biểu tượng vai trò"
                 }
             },
             context: {
@@ -1520,22 +1520,22 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         betterRoleDot: {
-            name: "Tốt hơnVai tròDot",
-            description: "RoleDot (cài đặt khả năng truy cập) sao chép màu vai trò khi được nhấp vào. Nó cũng cho phép sử dụng đồng thời RoleDot và tên màu.",
+            name: "BetterRoleDot",
+            description: "Sao chép màu vai trò trên RoleDot (cài đặt khả năng truy cập) nhấp chuột. Cũng cho phép sử dụng đồng thời cả tên RoleDot và tên màu.",
             option: {
                 bothStyles: {
-                    label: "Đây İki Stil",
-                    description: "Hiển thị cả điểm vai trò và tên màu"
+                    label: "Cả hai phong cách",
+                    description: "Hiển thị cả vai trò dấu chấm và tên màu"
                 },
                 copyRoleColorInProfilePopout: {
                     label: "Sao chép màu vai trò trong cửa sổ bật lên hồ sơ",
-                    description: "Cho phép sao chép màu vai trò bằng cách nhấp vào dấu chấm vai trò trong cửa sổ bật lên hồ sơ"
+                    description: "Cho phép nhấp vào dấu chấm vai trò trong cửa sổ bật lên của hồ sơ để sao chép màu vai trò"
                 }
             }
         },
         betterSessions: {
-            name: "Phiên tốt hơn",
-            description: "Cải thiện menu Phiên (thiết bị). Nó cho phép bạn xem dấu thời gian chính xác, đặt cho mỗi phiên một tên duy nhất và nhận thông báo về các phiên mới.",
+            name: "BetterSessions",
+            description: "Tăng cường menu phiên (thiết bị). Cho phép bạn xem dấu thời gian chính xác, đặt tên tùy chỉnh cho mỗi phiên và nhận thông báo về các phiên mới.",
             new: "MỚI",
             newSessions: "Phiên mới:",
             rename: "Đổi tên",
@@ -1546,29 +1546,29 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 backgroundCheck: {
                     label: "Kiểm tra lý lịch",
-                    description: "Kiểm tra các phiên mới ở chế độ nền và hiển thị thông báo khi được phát hiện"
+                    description: "Kiểm tra các phiên mới ở chế độ nền và hiển thị thông báo khi chúng được phát hiện"
                 },
                 checkInterval: {
-                    label: "Phạm vi kiểm soát",
+                    label: "Khoảng thời gian kiểm tra",
                     description: "Tần suất kiểm tra các phiên mới ở chế độ nền (nếu được bật), tính bằng phút"
                 }
             }
         },
         betterSettings: {
-            name: "Cài đặt tốt hơn",
-            description: "Cải thiện trải nghiệm mở menu cài đặt",
+            name: "BetterSettings",
+            description: "Nâng cao trải nghiệm mở menu cài đặt của bạn",
             option: {
                 disableFade: {
-                    label: "Tắt hiệu ứng chuyển tiếp",
+                    label: "Vô hiệu hóa mờ dần",
                     description: "Tắt hoạt ảnh xen kẽ"
                 },
                 organizeMenu: {
-                    label: "Chỉnh sửa thực đơn",
-                    description: "Cài đặt chia menu biểu tượng bánh răng thành các danh mục"
+                    label: "Sắp xếp thực đơn",
+                    description: "Sắp xếp menu ngữ cảnh bánh răng cài đặt thành các danh mục"
                 },
                 eagerLoad: {
-                    label: "Tải nhanh",
-                    description: "Loại bỏ độ trễ tải khi menu được mở lần đầu tiên"
+                    label: "Háo hức tải",
+                    description: "Loại bỏ độ trễ tải khi mở menu lần đầu tiên"
                 }
             },
             alert: {
@@ -1579,107 +1579,107 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         betterUploadButton: {
-            name: "Nút Tải Lên Tốt Hơn",
-            description: "Cài đặt bằng một cú nhấp chuột, mở menu bằng nhấp chuột phải"
+            name: "BetterUploadButton",
+            description: "Tải lên chỉ bằng một cú nhấp chuột, mở menu bằng nhấp chuột phải"
         },
         biggerStreamPreview: {
-            name: "Xem trước luồng lớn hơn",
-            description: "Plugin này cho phép bạn phóng to các bản xem trước phát sóng",
+            name: "BiggerStreamPreview",
+            description: "Plugin này cho phép bạn phóng to bản xem trước luồng",
             context: {
-                viewPreview: "Xem bản xem trước bản phát hành"
+                viewPreview: "Xem bản xem trước luồng"
             }
         },
         blockKeywords: {
-            name: "Chặn từ khóa",
-            description: "Chặn các tin nhắn chứa một số từ khóa do người dùng xác định như thể người dùng gửi đã bị chặn.",
+            name: "BlockKeywords",
+            description: "Chặn các tin nhắn chứa các từ khóa cụ thể do người dùng xác định, như thể người dùng gửi chúng đã bị chặn.",
             option: {
                 blockedWords: {
                     label: "từ bị chặn",
                     description: "Danh sách các từ cần chặn được phân tách bằng dấu phẩy"
                 },
                 useRegex: {
-                    label: "Regex Kullan",
+                    label: "Sử dụng Regex",
                     description: "Sử dụng từng giá trị làm biểu thức chính quy khi kiểm tra nội dung thư (nâng cao)"
                 },
                 caseSensitive: {
                     label: "Phân biệt chữ hoa chữ thường",
-                    description: "Sử dụng tìm kiếm phân biệt chữ hoa chữ thường?"
+                    description: "Có nên sử dụng tìm kiếm phân biệt chữ hoa chữ thường hay không"
                 },
                 ignoreBlockedMessages: {
                     label: "Bỏ qua tin nhắn bị chặn",
-                    description: "Hoàn toàn bỏ qua thanh tin nhắn mới (tin nhắn gần đây)"
+                    description: "Hoàn toàn bỏ qua thanh tin nhắn mới (gần đây)"
                 }
             }
         },
         blockKrisp: {
-            name: "khốiKrisp",
-            description: "Ngăn chặn cài đặt Krisp"
+            name: "BlockKrisp",
+            description: "Ngăn chặn tải Krisp"
         },
         blurNSFW: {
             name: "BlurNSFW",
-            description: "Làm mờ các tệp đính kèm trong các kênh NSFW cho đến khi được di chuột qua",
+            description: "Làm mờ tệp đính kèm trong các kênh NSFW cho đến khi được di chuột",
             option: {
                 blurAmount: {
-                    label: "Lượng mờ",
-                    description: "Mức độ mờ (tính bằng pixel)"
+                    label: "Số lượng mờ",
+                    description: "Số lượng mờ (tính bằng pixel)"
                 },
                 blurAllChannels: {
                     label: "Làm mờ tất cả các kênh",
-                    description: "Làm mờ tệp đính kèm trên tất cả các kênh (không chỉ NSFW)"
+                    description: "Làm mờ tệp đính kèm ở tất cả các kênh (không chỉ NSFW)"
                 }
             }
         },
         bypassPinPrompt: {
-            name: "Bỏ QuaPinNhắc",
+            name: "BypassPinPrompt",
             description: "Bỏ qua lời nhắc ghim khi sử dụng chức năng ghim"
         },
         bypassStatus: {
-            name: "Bỏ quaTrạng thái",
-            description: "Vẫn nhận được thông báo từ một số nguồn nhất định khi ở chế độ Không làm phiền. Bạn có thể nhấp chuột phải vào người dùng/kênh/máy chủ để bỏ qua chế độ Không làm phiền.",
+            name: "BypassStatus",
+            description: "Vẫn nhận được thông báo từ các nguồn cụ thể khi ở chế độ không làm phiền. Nhấp chuột phải vào người dùng/kênh/bang hội để đặt họ bỏ qua chế độ không làm phiền.",
             context: {
                 remove: "Xóa bỏ qua trạng thái",
-                add: "Thêm trạng thái Bỏ qua"
+                add: "Thêm bỏ qua trạng thái"
             },
             option: {
                 guilds: {
-                    label: "Máy chủ",
-                    description: "Máy chủ được phép nhảy (nhận thông báo khi được ping ở bất kỳ đâu trên máy chủ)",
+                    label: "Bang hội",
+                    description: "Bang hội được phép bỏ qua (được thông báo khi được ping ở bất kỳ đâu trong bang hội)",
                     placeholder: "Phân cách bằng dấu phẩy"
                 },
                 channels: {
                     label: "Kênh",
-                    description: "Các kênh được phép bỏ qua (nhận thông báo khi được ping trên kênh đó)",
+                    description: "Các kênh được phép bỏ qua (được thông báo khi được ping trong kênh đó)",
                     placeholder: "Phân cách bằng dấu phẩy"
                 },
                 users: {
                     label: "Người dùng",
-                    description: "Người dùng được phép bỏ qua (nhận thông báo cho tất cả tin nhắn được gửi trong DM)",
+                    description: "Người dùng cho phép bỏ qua (được thông báo cho tất cả tin nhắn được gửi trong DM)",
                     placeholder: "Phân cách bằng dấu phẩy"
                 },
                 allowOutsideOfDms: {
-                    label: "Cho phép DM bên ngoài",
-                    description: "Cho phép người dùng được chọn bỏ qua các trạng thái không phải DM (hoạt động giống như bỏ qua kênh/máy chủ nhưng áp dụng cho tất cả tin nhắn do người dùng đã chọn gửi)"
+                    label: "Cho phép bên ngoài DM",
+                    description: "Cho phép người dùng được chọn bỏ qua trạng thái bên ngoài DM (hoạt động giống như bỏ qua kênh/bang hội, nhưng dành cho tất cả tin nhắn được gửi bởi người dùng đã chọn)"
                 },
                 notificationSound: {
                     label: "Âm thanh thông báo",
-                    description: "Xác định xem có phát âm thanh thông báo hay không"
+                    description: "Có nên phát âm thanh thông báo hay không"
                 },
                 respectSilentPings: {
                     label: "Tôn trọng Ping im lặng",
-                    description: "Tôn trọng ping im lặng (@silent/ngăn chặn thông báo)"
+                    description: "Tôn trọng ping im lặng (@silent / ngăn chặn thông báo)"
                 },
                 statusToUse: {
-                    label: "Trường hợp sử dụng",
+                    label: "Tình trạng sử dụng",
                     description: "Trạng thái sử dụng cho danh sách trắng",
-                    online: "trực tuyến",
-                    idle: "nhàn rỗi",
+                    online: "Trực tuyến",
+                    idle: "Nhàn rỗi",
                     dnd: "Đừng làm phiền",
                     invisible: "Vô hình"
                 }
             }
         },
         cakeDay: {
-            name: "BánhNgày",
+            name: "CakeDay",
             description: "Theo dõi và hiển thị ngày sinh nhật của người dùng bằng biểu tượng chiếc bánh",
             context: {
                 label: "Sinh nhật",
@@ -1690,7 +1690,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 chat: {
                     label: "Trò chuyện",
-                    description: "Hiển thị biểu tượng hình tròn bên cạnh tên người dùng trong cuộc trò chuyện"
+                    description: "Hiển thị biểu tượng chiếc bánh bên cạnh tên người dùng trong cuộc trò chuyện"
                 },
                 memberList: {
                     label: "Danh sách thành viên",
@@ -1698,7 +1698,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 profileBadge: {
                     label: "Huy hiệu hồ sơ",
-                    description: "Hiển thị huy hiệu bánh trên hồ sơ người dùng"
+                    description: "Hiển thị huy hiệu bánh trong hồ sơ người dùng"
                 },
                 notificationSound: {
                     label: "Âm thanh thông báo",
@@ -1712,32 +1712,32 @@ const translations: MatchStructure<typeof enTranslations> = {
             locations: {
                 chat: {
                     label: "Trò chuyện",
-                    description: "Bên cạnh tên người dùng trong cuộc trò chuyện"
+                    description: "bên cạnh tên người dùng trong cuộc trò chuyện"
                 },
                 memberList: {
                     label: "Danh sách thành viên",
-                    description: "Trong danh sách thành viên"
+                    description: "trong danh sách thành viên"
                 }
             },
             toast: {
                 success: "Đặt sinh nhật thành công!",
                 invalid: "Định dạng sinh nhật không hợp lệ! Chỉ DD/MM được chấp nhận.",
-                cleared: "Đã xóa ngày sinh thành công!"
+                cleared: "Xóa sinh nhật thành công!"
             },
             notification: {
-                title: "🎂 Hôm nay là sinh nhật!",
+                title: "🎂 Sinh nhật hôm nay!",
                 body: "Hôm nay là sinh nhật của {{username}}!"
             },
             modal: {
                 title: "Đặt ngày sinh cho {{username}}",
-                description: "Nhập ngày sinh của bạn ở định dạng DD/MM (ví dụ: 25/12)",
-                placeholder: "đại bàng 25/12",
+                description: "Nhập ngày sinh ở định dạng DD/MM (ví dụ: 25/12)",
+                placeholder: "ví dụ. 25/12",
                 current: "Ngày sinh hiện tại:",
                 set: "Đặt ngày sinh nhật",
                 cancel: "Hủy bỏ",
                 birthday: "Hôm nay là sinh nhật của tôi! 🎂",
                 saved: "Sinh nhật đã lưu",
-                savedDesc: "Chưa có ngày sinh nhật nào được ghi lại. Nhấp chuột phải vào người dùng để thêm ngày sinh nhật!",
+                savedDesc: "Chưa lưu ngày sinh nhật nào. Nhấp chuột phải vào người dùng để thêm ngày sinh nhật của họ!",
                 today: "Hôm nay",
                 remove: "Di dời",
                 loading: "Đang tải...",
@@ -1746,50 +1746,50 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         callTimer: {
-            name: "Cuộc gọi hẹn giờ",
-            description: "Hiển thị bộ hẹn giờ cuộc gọi trên tất cả các cuộc gọi thoại",
+            name: "CallTimer",
+            description: "Hiển thị bộ hẹn giờ cuộc gọi trong tất cả các cuộc gọi thoại",
             option: {
                 format: {
                     label: "Định dạng",
                     description: "Định dạng nhỏ gọn hoặc có thể đọc được",
-                    human: "30g 23s 00d 42s"
+                    human: "30d 23h 00m 42s"
                 },
                 allCallTimers: {
                     label: "Tất cả bộ hẹn giờ cuộc gọi",
-                    description: "Hiển thị bộ hẹn giờ cuộc gọi cho tất cả người dùng trên máy chủ"
+                    description: "Hiển thị bộ hẹn giờ cuộc gọi cho tất cả người dùng trong máy chủ"
                 },
                 showWithoutHover: {
-                    label: "Hiển thị mà không di chuột",
-                    description: "Luôn hiển thị bộ đếm thời gian mà không cần di chuột"
+                    label: "Hiển thị không di chuột",
+                    description: "Luôn hiển thị đồng hồ mà không cần di chuột"
                 },
                 showRoleColor: {
                     label: "Hiển thị màu vai trò",
                     description: "Hiển thị màu vai trò của người dùng (nếu plugin ShowRoleColor được bật)"
                 },
                 trackSelf: {
-                    label: "Theo dõi chính bạn",
-                    description: "Hiển thị bộ đếm thời gian của riêng bạn"
+                    label: "Theo dõi chính mình",
+                    description: "Đồng thời hiển thị bộ đếm thời gian của riêng bạn"
                 },
                 showSeconds: {
                     label: "Hiển thị giây",
-                    description: "Cũng hiển thị giây trong bộ đếm thời gian"
+                    description: "Hiển thị giây trong bộ đếm thời gian"
                 },
                 watchLargeGuilds: {
-                    label: "Xem các máy chủ lớn",
-                    description: "Theo dõi người dùng trên các máy chủ lớn. Nếu bạn đang sử dụng các máy chủ lớn có nhiều người dùng giọng nói đang hoạt động thì điều này có thể gây ra hiện tượng lag. Đã thử nghiệm với tối đa 2000 người dùng giọng nói đang hoạt động và không có sự cố nào xảy ra."
+                    label: "Xem các bang hội lớn",
+                    description: "Theo dõi người dùng trong các bang hội lớn. Điều này có thể gây ra hiện tượng lag nếu bạn tham gia nhiều bang hội lớn có người dùng giọng nói tích cực. Đã thử nghiệm với tối đa 2000 người dùng giọng nói đang hoạt động mà không gặp vấn đề gì."
                 },
                 fixUI: {
-                    label: "Sửa lỗi giao diện người dùng",
-                    description: "Trong một số trường hợp, bộ hẹn giờ có thể làm hỏng giao diện người dùng. Bạn có thể khắc phục điều này bằng cách kích hoạt tùy chọn này."
+                    label: "Sửa giao diện người dùng",
+                    description: "Trong một số trường hợp, bộ hẹn giờ có thể làm hỏng giao diện người dùng. Kích hoạt tùy chọn này để sửa nó."
                 }
             }
         },
         channelBadges: {
-            name: "Huy hiệu kênh",
+            name: "ChannelBadges",
             description: "Thêm huy hiệu vào các kênh dựa trên loại của chúng",
             badge: {
                 private: "Kênh này đã bị khóa.",
-                nsfw: "Kênh này được đánh dấu NSFW.",
+                nsfw: "Kênh này được đánh dấu là NSFW.",
                 rules: "Kênh này là kênh quy tắc máy chủ."
             },
             option: {
@@ -1803,31 +1803,31 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 showVoiceBadge: {
                     label: "Hiển thị huy hiệu giọng nói",
-                    description: "Hiển thị huy hiệu âm thanh"
+                    description: "Hiển thị huy hiệu giọng nói"
                 },
                 showCategoryBadge: {
                     label: "Hiển thị Huy hiệu Danh mục",
-                    description: "Hiển thị huy hiệu danh mục"
+                    description: "Hiển thị huy hiệu Danh mục"
                 },
                 showDirectoryBadge: {
-                    label: "Hiển thị huy hiệu chỉ mục",
-                    description: "Hiển thị huy hiệu chỉ mục"
+                    label: "Hiển thị huy hiệu thư mục",
+                    description: "Hiển thị huy hiệu Thư mục"
                 },
                 showAnnouncementThreadBadge: {
                     label: "Hiển thị huy hiệu chủ đề thông báo",
-                    description: "Hiển thị huy hiệu chủ đề thông báo"
+                    description: "Hiển thị huy hiệu Chủ đề Thông báo"
                 },
                 showPublicThreadBadge: {
-                    label: "Hiển thị huy hiệu chủ đề chung",
-                    description: "Hiển thị huy hiệu chủ đề công khai"
+                    label: "Hiển thị huy hiệu chủ đề công khai",
+                    description: "Hiển thị huy hiệu Chủ đề công khai"
                 },
                 showPrivateThreadBadge: {
-                    label: "Hiển thị huy hiệu chủ đề đặc biệt",
-                    description: "Hiển thị huy hiệu chủ đề tùy chỉnh"
+                    label: "Hiển thị huy hiệu chủ đề riêng tư",
+                    description: "Hiển thị huy hiệu Chủ đề riêng tư"
                 },
                 showStageBadge: {
                     label: "Hiển thị huy hiệu sân khấu",
-                    description: "Hiển thị huy hiệu sân khấu"
+                    description: "Hiển thị huy hiệu Sân khấu"
                 },
                 showAnnouncementBadge: {
                     label: "Hiển thị huy hiệu thông báo",
@@ -1839,33 +1839,33 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 showMediaBadge: {
                     label: "Hiển thị huy hiệu truyền thông",
-                    description: "Hiển thị huy hiệu truyền thông"
+                    description: "Hiển thị huy hiệu Phương tiện"
                 },
                 showNSFWBadge: {
-                    label: "Hiển thị Huy hiệu NSFW của bạn",
+                    label: "Hiển thị Huy hiệu NSFW",
                     description: "Hiển thị huy hiệu NSFW"
                 },
                 showLockedBadge: {
                     label: "Hiển thị huy hiệu bị khóa",
-                    description: "Hiển thị huy hiệu đã khóa của bạn"
+                    description: "Hiển thị huy hiệu Đã khóa"
                 },
                 showRulesBadge: {
                     label: "Hiển thị huy hiệu quy tắc",
-                    description: "Hiển thị huy hiệu quy tắc"
+                    description: "Hiển thị huy hiệu Quy tắc"
                 },
                 showUnknownBadge: {
                     label: "Hiển thị huy hiệu không xác định",
-                    description: "Hiển thị huy hiệu không xác định"
+                    description: "Hiển thị huy hiệu Không xác định"
                 },
                 textBadgeLabel: {
                     label: "Nhãn huy hiệu văn bản",
-                    description: "nhãn huy hiệu văn bản",
+                    description: "Nhãn huy hiệu văn bản",
                     default: "Chữ"
                 },
                 voiceBadgeLabel: {
-                    label: "Nhãn huy hiệu âm thanh",
-                    description: "nhãn huy hiệu âm thanh",
-                    default: "Ses"
+                    label: "Nhãn huy hiệu giọng nói",
+                    description: "Nhãn huy hiệu giọng nói",
+                    default: "Tiếng nói"
                 },
                 categoryBadgeLabel: {
                     label: "Nhãn huy hiệu danh mục",
@@ -1873,34 +1873,34 @@ const translations: MatchStructure<typeof enTranslations> = {
                     default: "Loại"
                 },
                 announcementBadgeLabel: {
-                    label: "Nhãn huy hiệu thông báo",
-                    description: "Nhãn huy hiệu thông báo",
-                    default: "Đồ may vá"
+                    label: "Nhãn huy hiệu chủ đề thông báo",
+                    description: "Thông báo Nhãn huy hiệu chủ đề",
+                    default: "Tin tức"
                 },
                 announcementThreadBadgeLabel: {
                     label: "Nhãn huy hiệu chủ đề thông báo",
-                    description: "Nhãn huy hiệu chủ đề thông báo",
+                    description: "Thông báo Nhãn huy hiệu chủ đề",
                     default: "chủ đề tin tức"
                 },
                 publicThreadBadgeLabel: {
-                    label: "Nhãn huy hiệu chủ đề chung",
-                    description: "Nhãn huy hiệu chủ đề chung",
-                    default: "Chủ thể"
+                    label: "Nhãn huy hiệu chủ đề công khai",
+                    description: "Nhãn huy hiệu Chủ đề công khai",
+                    default: "Chủ đề"
                 },
                 privateThreadBadgeLabel: {
-                    label: "Nhãn huy hiệu chủ đề đặc biệt",
-                    description: "Nhãn huy hiệu chủ đề tùy chỉnh",
-                    default: "Chủ đề đặc biệt"
+                    label: "Nhãn huy hiệu chủ đề riêng tư",
+                    description: "Nhãn huy hiệu Chủ đề riêng tư",
+                    default: "Chủ đề riêng tư"
                 },
                 stageBadgeLabel: {
                     label: "Nhãn huy hiệu sân khấu",
                     description: "Nhãn huy hiệu sân khấu",
-                    default: "Bối cảnh"
+                    default: "Sân khấu"
                 },
                 directoryBadgeLabel: {
-                    label: "Nhãn huy hiệu chỉ mục",
-                    description: "Nhãn huy hiệu chỉ mục",
-                    default: "chỉ mục"
+                    label: "Nhãn huy hiệu thư mục",
+                    description: "Nhãn huy hiệu thư mục",
+                    default: "Thư mục"
                 },
                 forumBadgeLabel: {
                     label: "Nhãn huy hiệu diễn đàn",
@@ -1918,8 +1918,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     default: "NSFW"
                 },
                 lockedBadgeLabel: {
-                    label: "Khóa thẻ huy hiệu",
-                    description: "thẻ huy hiệu khóa",
+                    label: "Nhãn huy hiệu bị khóa",
+                    description: "Nhãn huy hiệu bị khóa",
                     default: "Đã khóa"
                 },
                 rulesBadgeLabel: {
@@ -1937,36 +1937,36 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Màu huy hiệu văn bản"
                 },
                 voiceBadgeColor: {
-                    label: "Màu huy hiệu âm thanh",
-                    description: "Màu huy hiệu âm thanh"
+                    label: "Màu huy hiệu giọng nói",
+                    description: "Màu huy hiệu giọng nói"
                 },
                 categoryBadgeColor: {
                     label: "Màu huy hiệu danh mục",
                     description: "Màu huy hiệu danh mục"
                 },
                 announcementBadgeColor: {
-                    label: "Màu huy hiệu thông báo",
-                    description: "Màu huy hiệu thông báo"
+                    label: "Màu huy hiệu chủ đề thông báo",
+                    description: "Màu huy hiệu chủ đề thông báo"
                 },
                 announcementThreadBadgeColor: {
                     label: "Màu huy hiệu chủ đề thông báo",
                     description: "Màu huy hiệu chủ đề thông báo"
                 },
                 publicThreadBadgeColor: {
-                    label: "Màu huy hiệu chủ đề chung",
-                    description: "Màu huy hiệu chủ đề chung"
+                    label: "Màu huy hiệu chủ đề công khai",
+                    description: "Màu huy hiệu Chủ đề công khai"
                 },
                 privateThreadBadgeColor: {
-                    label: "Màu huy hiệu chủ đề đặc biệt",
-                    description: "Màu huy hiệu chủ đề tùy chỉnh"
+                    label: "Màu huy hiệu chủ đề riêng tư",
+                    description: "Màu huy hiệu Chủ đề riêng tư"
                 },
                 stageBadgeColor: {
                     label: "Màu huy hiệu sân khấu",
                     description: "Màu huy hiệu sân khấu"
                 },
                 directoryBadgeColor: {
-                    label: "Màu huy hiệu chỉ mục",
-                    description: "Màu huy hiệu chỉ mục"
+                    label: "Màu huy hiệu thư mục",
+                    description: "Màu huy hiệu thư mục"
                 },
                 forumBadgeColor: {
                     label: "Màu huy hiệu diễn đàn",
@@ -1995,14 +1995,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             badges: {
                 text: "Chữ",
-                voice: "Ses",
+                voice: "Tiếng nói",
                 category: "Loại",
-                announcement: "Đồ may vá",
+                announcement: "Tin tức",
                 announcementThread: "chủ đề tin tức",
-                publicThread: "Chủ thể",
-                privateThread: "Chủ đề đặc biệt",
-                stage: "Bối cảnh",
-                directory: "chỉ mục",
+                publicThread: "Chủ đề",
+                privateThread: "Chủ đề riêng tư",
+                stage: "Sân khấu",
+                directory: "Thư mục",
                 forum: "diễn đàn",
                 media: "Phương tiện truyền thông",
                 nsfw: "NSFW",
@@ -2012,44 +2012,44 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             tooltip: {
                 locked: "Kênh này đã bị khóa.",
-                nsfw: "Kênh này được đánh dấu NSFW."
+                nsfw: "Kênh này được đánh dấu là NSFW."
             }
         },
         channelTabs: {
-            name: "Tab kênh",
-            description: "Nhóm các kênh bạn thường xuyên truy cập vào các tab giống như trong trình duyệt",
+            name: "ChannelTabs",
+            description: "Nhóm các kênh bạn thường truy cập vào các tab, giống như một trình duyệt",
             open: "Mở trong tab mới",
             animation: {
                 title: "Điều khiển hoạt ảnh",
-                description: "Bật hoặc tắt hoạt ảnh cụ thể cho tab kênh. Mỗi tùy chọn có thể được bật hoặc tắt độc lập.",
+                description: "Bật hoặc tắt hoạt ảnh cụ thể cho tab kênh. Mỗi tùy chọn có thể được chuyển đổi độc lập.",
                 placeholder: "Chọn hoạt ảnh nào sẽ bật...",
-                tabHover: "Hiệu ứng di chuột qua tab (xóa + chia tỷ lệ)",
+                tabHover: "Hiệu ứng di chuột qua tab (nâng + tỷ lệ)",
                 tabSelection: "Hoạt ảnh nâng tab đã chọn",
                 tabDragDrop: "Tab Kéo & Thả (ma + sắp xếp lại)",
-                tabEnterExit: "Cuộn vào/ra tab (tạo + đóng)",
-                tabIconPop: "Icon Pop (tăng trưởng bầu cử)",
-                closeRotation: "Nút đóng Quay lại",
-                plusPulse: "Hiệu ứng xung nút cộng",
-                mentionGlow: "Huy hiệu đề cập lấp lánh",
+                tabEnterExit: "Tab Vào/Thoát slide (tạo + đóng)",
+                tabIconPop: "Biểu tượng bật lên khi lựa chọn (mở rộng biểu tượng)",
+                closeRotation: "Xoay nút đóng",
+                plusPulse: "Xung nút cộng",
+                mentionGlow: "Huy hiệu đề cập phát sáng",
                 compactExpand: "Mở rộng chế độ nhỏ gọn",
                 selectedBorder: "Tab đã chọn Viền xanh",
                 selectedBackground: "Màu nền của tab đã chọn",
                 tabShadows: "Hiệu ứng đổ bóng tab",
-                tabRepositioning: "Định vị lại tab (chuyển đổi mềm)",
+                tabRepositioning: "Định vị lại tab (thay đổi vị trí mượt mà)",
                 resizeHandle: "Thay đổi kích thước xử lý mờ dần",
-                questActivate: "Độ dốc nhiệm vụ tích cực"
+                questActivate: "Độ dốc nhiệm vụ hoạt động"
             },
             bookmark: {
-                label: "Yer İmi",
+                label: "Đánh dấu",
                 unknown: "Người dùng không xác định",
                 folder: "Thư mục",
                 add: "Thêm vào dấu trang",
                 edit: "Chỉnh sửa dấu trang",
-                delete: "Yer İmini Sil",
+                delete: "Xóa dấu trang",
                 remove: "Xóa khỏi Dấu trang",
                 removeFolder: "Xóa dấu trang khỏi thư mục",
                 loading: "Đang tải dấu trang...",
-                noBookmarks: "Bạn không có bất kỳ dấu trang nào. Bạn có thể thêm một tab đang mở hoặc ẩn nó bằng cách nhấp chuột phải.",
+                noBookmarks: "Bạn không có dấu trang nào. Bạn có thể thêm một tab đang mở hoặc ẩn nó bằng cách nhấp chuột phải vào nó",
                 quests: "Nhiệm vụ",
                 messageRequests: "Yêu cầu tin nhắn",
                 friends: "Bạn",
@@ -2063,7 +2063,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             button: {
                 save: "Cứu",
-                delete: "Sil",
+                delete: "Xóa bỏ",
                 cancel: "Hủy bỏ"
             },
             context: {
@@ -2084,31 +2084,31 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             error: {
-                noLogin: "Bạn chưa có tài khoản đăng nhập?"
+                noLogin: "Không có tài khoản đăng nhập?"
             },
             modal: {
                 add: {
                     title: "Thêm dấu trang vào thư mục",
                     select: "Chọn một thư mục",
-                    create: "Tạo mới"
+                    create: "Tạo một cái"
                 },
                 edit: {
                     title: "Chỉnh sửa dấu trang",
-                    name: "Tên dấu trang",
+                    name: "Bookmark Name",
                     folder: "Màu thư mục"
                 },
                 delete: {
                     title: "Bạn có chắc không?",
-                    description: "Xóa thư mục dấu trang cũng xóa tất cả dấu trang trong đó."
+                    description: "Xóa thư mục dấu trang cũng sẽ xóa tất cả dấu trang trong đó."
                 }
             },
             option: {
                 onStartup: {
-                    label: "Ban đầu",
-                    description: "Chọn việc cần làm với các tab khi khởi động",
-                    nothing: "Không làm gì cả (mở tab bạn bè)",
+                    label: "Khi khởi động",
+                    description: "Phải làm gì với các tab khi khởi động",
+                    nothing: "Không làm gì cả (mở trên tab bạn bè)",
                     remember: "Ghi nhớ các tab từ phiên trước",
-                    open: "Mở các tab cụ thể"
+                    open: "Mở trên một nhóm tab cụ thể"
                 },
                 tabSet: {
                     label: "Bộ tab"
@@ -2125,262 +2125,262 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Hiển thị thanh dấu trang"
                 },
                 bookmarkNotificationDot: {
-                    label: "Đánh dấu điểm thông báo",
+                    label: "Dấu chấm thông báo đánh dấu",
                     description: "Hiển thị dấu chấm thông báo cho dấu trang"
                 },
                 widerTabsAndBookmarks: {
-                    label: "Tab lớn và dấu trang",
-                    description: "Mở rộng tab và dấu trang trên màn hình lớn hơn"
+                    label: "Tab và dấu trang rộng hơn",
+                    description: "Mở rộng độ dài của tab và dấu trang cho màn hình lớn hơn"
                 },
                 tabWidthScale: {
                     label: "Tỷ lệ chiều rộng tab",
                     description: "Tỷ lệ chiều rộng tab (phần trăm) - có thể điều chỉnh bằng cách kéo các cạnh tab"
                 },
                 renderAllTabs: {
-                    label: "Giữ tất cả các tab trong bộ nhớ",
-                    description: "Giữ tất cả các tab trong bộ nhớ để chuyển đổi nhanh hơn giữa các tab (cuộn và trạng thái được lưu vào bộ đệm)"
+                    label: "Kết xuất tất cả các tab",
+                    description: "Giữ tất cả các tab được lưu trong bộ nhớ để chuyển đổi nhanh hơn (lưu vị trí và trạng thái cuộn bộ đệm)"
                 },
                 switchToExistingTab: {
                     label: "Chuyển sang tab hiện có",
-                    description: "Nếu đã có một tab cho kênh bạn đang duyệt, hãy chuyển sang tab đó"
+                    description: "Chuyển sang tab nếu nó đã tồn tại cho kênh bạn đang điều hướng tới"
                 },
                 createNewTabIfNotExists: {
-                    label: "Nếu chưa có tab thì tạo nó",
-                    description: "Nếu không có tab cho kênh, hãy tạo tab mới"
+                    label: "Tạo tab mới nếu không tồn tại",
+                    description: "Tạo một tab mới nếu tab này không tồn tại cho kênh bạn đang điều hướng tới"
                 },
                 enableRapidNavigation: {
                     label: "Bật điều hướng nhanh",
-                    description: "Khi các thay đổi kênh được thực hiện nhanh chóng, tab hiện tại sẽ thay đổi thay vì tab mới."
+                    description: "Bật hành vi điều hướng nhanh - điều hướng nhanh giữa các kênh sẽ thay thế tab hiện tại thay vì tạo tab mới"
                 },
                 rapidNavigationThreshold: {
                     label: "Ngưỡng điều hướng nhanh",
-                    description: "Khoảng thời gian tính bằng mili giây. Nếu một kênh mới được mở trong khoảng thời gian này, tab hiện tại sẽ được thay đổi."
+                    description: "Cửa sổ thời gian (tính bằng mili giây) để điều hướng nhanh chóng. Trong thời gian này, các kênh mới sẽ thay thế tab hiện tại thay vì tạo tab mới."
                 },
                 tabBarPosition: {
                     label: "Vị trí thanh tab",
-                    description: "Vị trí thanh tab",
+                    description: "Vị trí của thanh tab",
                     top: "Đứng đầu",
-                    bottom: "thay thế"
+                    bottom: "Đáy"
                 },
                 enableNumberKeySwitching: {
-                    label: "Chuyển đổi tab bằng phím số",
-                    description: "Bật chuyển đổi tab bằng các phím 1–9"
+                    label: "Bật tính năng chuyển đổi phím số",
+                    description: "Kích hoạt các phím số (1-9) để chuyển tab"
                 },
                 numberKeySwitchCount: {
-                    label: "Số Tab Phím Số",
-                    description: "Số tab có thể truy cập bằng phím số (1–9)"
+                    label: "Số lần chuyển đổi phím số",
+                    description: "Số tab có thể truy cập bằng phím số (1-9)"
                 },
                 enableCloseTabShortcut: {
-                    label: "Phím tắt Đóng tab",
+                    label: "Bật phím tắt Đóng tab",
                     description: "Bật phím tắt đóng tab"
                 },
                 enableNewTabShortcut: {
-                    label: "Phím tắt tab mới",
-                    description: "Bật phím tắt mở tab mới"
+                    label: "Bật phím tắt tab mới",
+                    description: "Bật phím tắt tab mới"
                 },
                 enableTabCycleShortcut: {
-                    label: "Phím tắt vòng lặp tab",
-                    description: "Bật phím tắt để chuyển đổi giữa các tab"
+                    label: "Bật phím tắt chu kỳ tab",
+                    description: "Bật phím tắt chuyển đổi tab"
                 },
                 keybindsSection: {
-                    label: "Phím tắt",
-                    description: "Nhấp vào nút và nhấn tổ hợp phím mong muốn. Các công cụ sửa đổi như CTRL, SHIFT và ALT được hỗ trợ.",
+                    label: "Tổ hợp phím",
+                    description: "Nhấp vào nút và nhấn tổ hợp phím mong muốn của bạn. Các công cụ sửa đổi như CTRL, SHIFT và ALT được hỗ trợ.",
                     title: "Phím tắt",
                     reset: "Đặt lại tất cả về mặc định",
                     closeTab: {
                         label: "Đóng tab",
-                        description: "Phím tắt để đóng tab hiện tại"
+                        description: "Bàn phím tab hiện đang hoạt động"
                     },
                     newTab: {
                         label: "Tab mới",
-                        description: "Phím tắt để mở tab mới với kênh hiện tại"
+                        description: "Mở tab mới với kênh hiện tại"
                     },
                     cycleTabsForward: {
-                        label: "Vòng lặp tab chuyển tiếp",
-                        description: "Phím tắt để chuyển đến tab tiếp theo (chuyển đến tab đầu tiên)"
+                        label: "Chuyển tiếp các tab theo chu kỳ",
+                        description: "Chuyển sang tab tiếp theo (cuộn quanh tab đầu tiên)"
                     },
                     cycleTabsBackward: {
-                        label: "Vòng lặp trả lại",
-                        description: "Phím tắt để chuyển đến tab trước (chuyển đến tab cuối cùng)"
+                        label: "Chu kỳ các tab lùi",
+                        description: "Chuyển sang tab trước (cuối vòng đến cuối)"
                     }
                 },
                 closeTabKeybind: {
-                    label: "Phím tắt Đóng tab",
+                    label: "Đóng liên kết phím tab",
                     description: "Phím tắt để đóng tab hiện tại"
                 },
                 newTabKeybind: {
-                    label: "Phím tắt tab mới",
-                    description: "Phím tắt mở tab mới"
+                    label: "Liên kết phím tab mới",
+                    description: "Phím tắt để mở tab mới"
                 },
                 cycleTabForwardKeybind: {
-                    label: "Vòng lặp tab chuyển tiếp",
-                    description: "Phím tắt để chuyển đến tab tiếp theo"
+                    label: "Liên kết phím chuyển tiếp tab theo chu kỳ",
+                    description: "Phím tắt để chuyển sang tab tiếp theo"
                 },
                 cycleTabBackwardKeybind: {
-                    label: "Vòng lặp trả lại",
-                    description: "Phím tắt để chuyển đến tab trước"
+                    label: "Liên kết phím ngược của tab chu kỳ",
+                    description: "Phím tắt để chuyển sang tab trước"
                 },
                 showTabNumbers: {
                     label: "Hiển thị số tab",
-                    description: "Hiển thị huy hiệu số trên tab để hiển thị phím tắt"
+                    description: "Hiển thị huy hiệu được đánh số trên tab để biểu thị phím tắt"
                 },
                 tabNumberPosition: {
                     label: "Vị trí số tab",
-                    description: "Vị trí của huy hiệu số trên tab",
-                    left: "Bên trái (biểu tượng trước)",
-                    right: "Đúng (đăng nội dung)"
+                    description: "Nơi hiển thị huy hiệu được đánh số trên tab",
+                    left: "Bên trái (trước biểu tượng)",
+                    right: "Bên phải (sau nội dung)"
                 },
                 animations: {
                     label: "Hoạt hình"
                 },
                 animationHover: {
-                    label: "Hoạt ảnh di chuột",
-                    description: "Bật hiệu ứng nâng và phóng to khi di chuột"
+                    label: "Hoạt ảnh trên Hover",
+                    description: "Bật hiệu ứng nâng và chia tỷ lệ khi di chuột"
                 },
                 animationSelection: {
-                    label: "Lựa chọn hoạt hình",
-                    description: "Bật hoạt ảnh ánh sáng/khung hình tại thời điểm lựa chọn"
+                    label: "Hoạt ảnh khi được lựa chọn",
+                    description: "Bật hoạt ảnh lựa chọn (đường viền sáng, nâng)"
                 },
                 animationDragDrop: {
-                    label: "Hoạt ảnh kéo và thả",
-                    description: "Bật hiệu ứng ma khi kéo"
+                    label: "Hoạt hình khi kéo và thả",
+                    description: "Kích hoạt tính năng kéo thả hiệu ứng ma quái"
                 },
                 animationEnterExit: {
-                    label: "Hoạt ảnh vào/ra",
-                    description: "Cuộn hình động khi tạo/đóng tab"
+                    label: "Hoạt ảnh khi vào/ra",
+                    description: "Bật hoạt ảnh tạo/đóng tab"
                 },
                 animationIconPop: {
-                    label: "Biểu tượng Hoạt hình Pop",
-                    description: "Bật hoạt ảnh tăng trưởng biểu tượng trong khi chọn"
+                    label: "Hoạt hình trên Icon Pop",
+                    description: "Bật hoạt ảnh tăng tỷ lệ biểu tượng khi chọn"
                 },
                 animationCloseRotation: {
-                    label: "Trả lại nút tiêu diệt",
-                    description: "Thêm hoạt ảnh xoay vào biểu tượng tắt máy"
+                    label: "Hoạt ảnh khi Đóng Xoay",
+                    description: "Bật hoạt ảnh xoay cho các nút đóng"
                 },
                 animationPlusPulse: {
-                    label: "Xung nút cộng",
-                    description: "Bật hoạt ảnh xung cho nút tab mới"
+                    label: "Hoạt ảnh trên xung nút Plus",
+                    description: "Bật hoạt ảnh xung cho nút dấu cộng"
                 },
                 animationMentionGlow: {
-                    label: "đề cập đến lấp lánh",
-                    description: "Bật hoạt ảnh phát sáng màu đỏ trên huy hiệu đề cập"
+                    label: "Hoạt ảnh trên Mention Glow",
+                    description: "Bật ánh sáng đỏ rực cho các lượt đề cập"
                 },
                 animationCompactExpand: {
-                    label: "Hoạt ảnh mở rộng nhỏ gọn",
-                    description: "Cho phép mở rộng mượt mà các tab thu gọn"
+                    label: "Hoạt ảnh trên Thu gọn/Mở rộng",
+                    description: "Cho phép mở rộng mượt mà cho các tab nhỏ gọn"
                 },
                 animationSelectedBorder: {
-                    label: "Hoạt ảnh viền tab đã chọn",
-                    description: "Bật hoạt ảnh kiểu đường viền và ánh sáng cho tab đã chọn"
+                    label: "Hoạt ảnh trên đường viền đã chọn",
+                    description: "Bật kiểu đường viền và ánh sáng cho các tab đã chọn"
                 },
                 animationSelectedBackground: {
-                    label: "Hoạt ảnh nền của tab đã chọn",
-                    description: "Cho phép thay đổi hoạt hình màu nền của tab đã chọn"
+                    label: "Hoạt ảnh trên nền đã chọn",
+                    description: "Bật thay đổi màu nền cho các tab đã chọn"
                 },
                 animationTabShadows: {
-                    label: "Tab bóng hoạt hình",
+                    label: "Hoạt ảnh trên Tab Shadows",
                     description: "Bật hiệu ứng đổ bóng trên tab"
                 },
                 animationTabPositioning: {
-                    label: "Hoạt ảnh định vị tab",
-                    description: "Hoạt ảnh chuyển tiếp mượt mà khi chuyển tab"
+                    label: "Định vị tab hoạt hình",
+                    description: "Cho phép chuyển tiếp mượt mà khi tab di chuyển vị trí"
                 },
                 animationResizeHandle: {
-                    label: "Thay đổi kích thước hoạt ảnh",
-                    description: "Bật hoạt ảnh mờ dần của bộ điều khiển định cỡ"
+                    label: "Xử lý thay đổi kích thước hoạt ảnh",
+                    description: "Bật hoạt ảnh mờ dần để điều khiển thay đổi kích thước"
                 },
                 animationQuestsActive: {
-                    label: "Hoạt hình nhiệm vụ tích cực",
-                    description: "Bật hoạt ảnh chuyển màu trong tab khi tác vụ đang hoạt động"
+                    label: "Nhiệm vụ hoạt hình đang hoạt động",
+                    description: "Bật hoạt ảnh chuyển màu trên tab Nhiệm vụ khi nhiệm vụ đang chạy tích cực"
                 },
                 compactAutoExpandSelected: {
-                    label: "Tự động mở rộng khi được chọn",
-                    description: "Tự động mở rộng các tab thu gọn khi được chọn"
+                    label: "Tự động mở rộng thu gọn đã chọn",
+                    description: "Tự động mở rộng tab thu gọn khi chọn để hiển thị tên kênh đầy đủ"
                 },
                 compactAutoExpandOnHover: {
-                    label: "Tự động mở rộng khi di chuột",
-                    description: "Tự động mở rộng các tab thu gọn khi di chuột"
+                    label: "Tự động mở rộng nhỏ gọn khi di chuột",
+                    description: "Tự động mở rộng các tab thu gọn khi di chuột để hiển thị tên kênh đầy đủ"
                 },
                 openInNewTabAutoSwitch: {
-                    label: "Tự động chuyển đổi khi mở trong tab mới",
-                    description: "Tự động chuyển sang tab mới khi mở tab"
+                    label: "Mở trong tab mới Tự động chuyển đổi",
+                    description: "Tự động chuyển sang các tab mới được mở từ menu ngữ cảnh 'Mở trong tab mới'"
                 },
                 bookmarksIndependentFromTabs: {
-                    label: "Dấu trang độc lập",
-                    description: "Dấu trang điều hướng độc lập mà không ảnh hưởng đến thanh tab"
+                    label: "Dấu trang độc lập với tab",
+                    description: "Dấu trang điều hướng độc lập mà không ảnh hưởng đến thanh tab đang hoạt động"
                 },
                 showResizeHandle: {
-                    label: "Hiển thị tay cầm định cỡ",
-                    description: "Hiển thị tay cầm để điều chỉnh độ rộng của tab"
+                    label: "Hiển thị phần điều khiển thay đổi kích thước",
+                    description: "Hiển thị tay cầm thay đổi kích thước khi di chuột qua các tab để điều chỉnh độ rộng của tab"
                 },
                 openNewTabsInCompactMode: {
-                    label: "Mở tab mới một cách gọn gàng",
-                    description: "Các tab mới mở được mở ở chế độ thu gọn theo mặc định"
+                    label: "Mở tab mới ở chế độ thu gọn",
+                    description: "Mặc định mở tất cả các tab mới tạo ở chế độ thu gọn"
                 },
                 newTabButtonBehavior: {
                     label: "Hành vi nút tab mới",
-                    description: "Nút tab mới (+) theo sau các tab thay vì cố định ở bên phải"
+                    description: "Nút tab mới (+) theo sau các tab thay vì được ghim ở bên phải"
                 },
                 oneTabPerServer: {
-                    label: "Tab đơn cho mỗi máy chủ",
-                    description: "Hãy để chỉ có một bước nhảy cho một máy chủ; Sử dụng cùng một tab khi mở kênh mới"
+                    label: "Một tab trên mỗi máy chủ",
+                    description: "Giới hạn ở một tab cho mỗi máy chủ, do đó, việc mở một kênh mới trong máy chủ đó sẽ sử dụng tab hiện có."
                 },
                 maxOpenTabs: {
                     label: "Tab mở tối đa",
-                    description: "Số lượng tab tối đa có thể mở cùng lúc (0 = không giới hạn)"
+                    description: "Số lượng tab mở tối đa (0 = không giới hạn)"
                 }
             },
             tabs: {
-                startup: "Tab Trang chủ",
-                currently: "Đặt các tab hiện đang mở"
+                startup: "Tab khởi động",
+                currently: "Đặt thành các tab hiện đang mở"
             },
             toast: {
-                notRestoring: "Các tab không khôi phục vì KeepCurrentChannel được bật",
+                notRestoring: "Không khôi phục các tab khi KeepCurrentChannel được bật",
                 failed: {
                     restore: "Không thể khôi phục các tab",
-                    saved: "Các tab đã lưu không tải được"
+                    saved: "Không tải được các tab đã lưu"
                 }
             }
         },
         characterCounter: {
-            name: "Nhân vậtQuầy cập",
-            description: "Hiển thị bộ đếm ký tự trong hộp thông báo",
+            name: "CharacterCounter",
+            description: "Hiển thị bộ đếm ký tự trong hộp tin nhắn",
             option: {
                 colorEffects: {
                     label: "Hiệu ứng màu sắc",
-                    description: "Bật hoặc tắt hiệu ứng màu khi đạt đến giới hạn ký tự"
+                    description: "Bật hoặc tắt hiệu ứng màu để đạt gần giới hạn ký tự"
                 }
             }
         },
         cleanChannelGroups: {
-            name: "Nhóm kênh sạch",
-            description: "Nó chỉ ẩn tất cả các kênh trong danh mục thu gọn, ngay cả khi có tin nhắn chưa đọc."
+            name: "CleanChannelGroups",
+            description: "Ẩn tất cả các kênh trong danh mục thu gọn, ngay cả khi chúng có tin nhắn chưa đọc."
         },
         cleanChannelName: {
-            name: "Tên kênh sạch",
-            description: "Xóa tất cả biểu tượng cảm xúc và các chi tiết trang trí ngớ ngẩn khỏi tên kênh"
+            name: "CleanChannelName",
+            description: "Xóa tất cả biểu tượng cảm xúc và nội dung trang trí khỏi tên kênh"
         },
         clearURLs: {
-            name: "Xóa URL",
+            name: "ClearURLs",
             description: "Tự động xóa các yếu tố theo dõi khỏi URL bạn gửi"
         },
         clickableRoles: {
-            name: "Vai trò có thể nhấp",
-            description: "Bạn có thể xem các thành viên có vai trò gì bằng cách nhấp vào vai trò trong hồ sơ người dùng và danh sách thành viên.",
+            name: "ClickableRoles",
+            description: "Nhấp vào vai trò trong hồ sơ người dùng và danh sách thành viên để xem thành viên nào có chúng.",
             modal: {
-                loading: "Các thành viên đang tải...",
+                loading: "Đang tải thành viên...",
                 noMembers: "Không tìm thấy thành viên nào",
                 unknown: "Vai trò không xác định"
             }
         },
         clientSideBlock: {
-            name: "Khối phía khách hàng",
-            description: "Cho phép bạn ẩn cục bộ hầu hết mọi nội dung khỏi bất kỳ người dùng nào",
+            name: "ClientSideBlock",
+            description: "Cho phép bạn ẩn cục bộ gần như tất cả nội dung khỏi bất kỳ người dùng nào",
             replying: "Trả lời tin nhắn bị chặn",
             option: {
                 hideVc: {
-                    label: "Ẩn khỏi các kênh thoại",
-                    description: "Ẩn các kênh thoại chứa người dùng bị chặn"
+                    label: "Ẩn kênh thoại",
+                    description: "Ẩn các kênh thoại có chứa người dùng bị chặn."
                 },
                 usersToBlock: {
                     label: "Người dùng cần chặn",
@@ -2388,35 +2388,35 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 hideBlockedUsers: {
                     label: "Ẩn người dùng bị chặn",
-                    description: "Ẩn hoàn toàn người dùng bị chặn ở mọi nơi"
+                    description: "Nên người dùng bị chặn cũng bị ẩn ở mọi nơi"
                 },
                 hideBlockedMessages: {
                     label: "Ẩn tin nhắn bị chặn",
-                    description: "Ẩn hoàn toàn tin nhắn khỏi người dùng bị chặn (giống như plugin noblockedmessages cũ)"
+                    description: "Tin nhắn từ người dùng bị chặn có bị ẩn hoàn toàn không (giống như plugin noblockedmessages cũ)"
                 },
                 hideEmptyRoles: {
                     label: "Ẩn vai trò trống",
-                    description: "Ẩn chức danh vai trò nếu tất cả thành viên bị chặn"
+                    description: "Có nên ẩn tiêu đề vai trò nếu tất cả thành viên của họ bị chặn"
                 },
                 blockedReplyDisplay: {
-                    label: "Chế độ xem phản hồi bị chặn",
-                    description: "Điều gì xuất hiện thay vì tin nhắn khi bạn trả lời người mà bạn đã ẩn",
-                    displayText: "Hiển thị văn bản cho biết trả lời tin nhắn ẩn",
-                    hideReply: "không hiển thị bất cứ điều gì"
+                    label: "Hiển thị trả lời bị chặn",
+                    description: "Nội dung nào sẽ hiển thị thay vì tin nhắn khi ai đó trả lời người mà bạn đã ẩn",
+                    displayText: "Hiển thị văn bản cho biết tin nhắn ẩn đã được trả lời",
+                    hideReply: "Nghĩa đen là không có gì"
                 },
                 guildBlackList: {
-                    label: "Danh sách đen máy chủ",
-                    description: "ID máy chủ nơi chức năng sẽ bị tắt"
+                    label: "Danh sách đen bang hội",
+                    description: "ID bang hội để vô hiệu hóa chức năng trong"
                 },
                 guildWhiteList: {
-                    label: "Danh sách trắng máy chủ",
-                    description: "ID máy chủ nơi chức năng sẽ được kích hoạt"
+                    label: "Danh sách trắng của bang hội",
+                    description: "ID bang hội để kích hoạt chức năng trong"
                 }
             }
         },
         clientTheme: {
-            name: "Chủ đề khách hàng",
-            description: "Làm lại thử nghiệm chủ đề khách hàng cũ. Thêm màu vào chủ đề ứng dụng khách Discord của bạn",
+            name: "ClientTheme",
+            description: "Giải trí thử nghiệm chủ đề khách hàng cũ. Thêm màu vào chủ đề ứng dụng khách Discord của bạn",
             title: "Màu chủ đề",
             add: "Thêm màu vào chủ đề ứng dụng khách Discord của bạn",
             option: {
@@ -2429,8 +2429,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             error: {
                 modal: {
-                    title: "Chủ đề của bạn sẽ trông không đẹp!",
-                    contrast: "Màu được chọn sẽ không tương phản tốt với văn bản",
+                    title: "Chủ đề của bạn sẽ không đẹp!",
+                    contrast: "Màu đã chọn sẽ không tương phản tốt với văn bản",
                     nitro: "Chủ đề Nitro không được hỗ trợ",
                     switch: "Chuyển sang chế độ {{oppositeTheme}}",
                     disable: "Tắt chủ đề Nitro",
@@ -2439,32 +2439,32 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         clipsEnhancements: {
-            name: "ClipCải tiến",
+            name: "ClipsEnhancements",
             description: "Thêm nhiều tùy chọn Clip FPS và thời lượng, cùng với tính năng gắn thẻ RPC!",
-            minutes: "Một phút",
+            minutes: "Phút",
             option: {
                 richPresenceTagging: {
                     label: "Gắn thẻ hiện diện phong phú",
-                    description: "Khi nào các clip nên được gắn thẻ với Sự hiện diện phong phú hiện có?",
+                    description: "Khi nào clip nên được gắn thẻ với Sự hiện diện phong phú hiện tại?",
                     always: "Luôn luôn",
-                    only: "Chỉ khi phần đầu hoặc phần cuối của tên sự kiện trùng khớp",
+                    only: "Chỉ khi tên bắt đầu hoặc kết thúc của hoạt động trùng khớp",
                     never: "Không bao giờ"
                 },
                 enableScreenshotKeybind: {
-                    label: "Bật phím nóng chụp ảnh màn hình",
-                    description: "Kích hoạt tính năng phím nóng ảnh chụp màn hình"
+                    label: "Bật liên kết khóa ảnh chụp màn hình",
+                    description: "Kích hoạt tính năng keybind ảnh chụp màn hình"
                 },
                 enableVoiceOnlyClips: {
-                    label: "Chỉ bật clip âm thanh",
-                    description: "Bật clip chỉ có âm thanh (âm thanh không có video)"
+                    label: "Bật clip chỉ có giọng nói",
+                    description: "Bật clip chỉ có giọng nói (âm thanh không có video)"
                 },
                 enableAdvancedSignals: {
                     label: "Kích hoạt tín hiệu nâng cao",
-                    description: "Bật tín hiệu clip nâng cao (kích hoạt clip tự động)"
+                    description: "Bật tín hiệu clip nâng cao (trình kích hoạt clip tự động)"
                 },
                 ignorePlatformRestriction: {
-                    label: "Bỏ qua các hạn chế về nền tảng",
-                    description: "Cho phép cắt theo nền tảng cụ thể (có thể gây ra lỗi lưu)"
+                    label: "Bỏ qua hạn chế nền tảng",
+                    description: "Cho phép cắt hạn chế nền tảng (có thể gây ra lỗi lưu)"
                 },
                 clipsLink: {
                     label: "Liên kết clip",
@@ -2473,34 +2473,34 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         colorSighted: {
-            name: "Màu sắcSighted",
-            description: "Loại bỏ các biểu tượng thân thiện với người mù màu khỏi các tình huống, giống như Discord 2015-2017"
+            name: "ColorSighted",
+            description: "Xóa các biểu tượng thân thiện với người mù màu khỏi trạng thái, giống như Discord 2015-2017"
         },
         commandPalette: {
-            name: "Bảng lệnh",
-            description: "Nó cho phép bạn điều hướng giao diện bằng bàn phím.",
+            name: "CommandPalette",
+            description: "Cho phép bạn điều hướng giao diện người dùng bằng bàn phím.",
             action: {
                 command: {
                     label: "Chạy lệnh",
-                    description: "Chạy lệnh bảng màu khác có ID. Nếu bạn không chắc chắn về mã định danh, hãy sử dụng bộ chọn."
+                    description: "Bí danh một lệnh bảng màu khác theo ID. Sử dụng bộ chọn nếu bạn không chắc chắn về mã định danh."
                 },
                 settings: {
                     label: "Mở trang cài đặt",
-                    description: "Nó đi thẳng đến trang cài đặt Discord. Chọn một trang từ bộ chọn."
+                    description: "Chuyển trực tiếp đến trang cài đặt Discord. Chọn một trang từ bộ chọn."
                 },
                 url: {
                     label: "Mở URL",
-                    description: "Mở một liên kết. Để có khả năng tương thích tốt nhất, hãy sử dụng liên kết https://."
+                    description: "Mở một liên kết. Sử dụng liên kết https:// để có khả năng tương thích tốt nhất."
                 },
                 macro: {
                     label: "Chạy macro",
-                    description: "Chạy một loạt lệnh tuần tự. Thêm các bước thông qua bộ chọn."
+                    description: "Chạy một chuỗi lệnh theo thứ tự. Thêm các bước thông qua bộ chọn."
                 }
             },
             category: {
-                auto: "Tự động (sử dụng bố cục mặc định)",
+                auto: "Tự động (sử dụng vị trí mặc định)",
                 default: {
-                    label: "Giao dịch nhanh",
+                    label: "Thao tác nhanh",
                     description: "Các phím tắt Plexcord phổ biến"
                 },
                 plugins: {
@@ -2527,7 +2527,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 context: {
                     label: "Bối cảnh hiện tại",
-                    description: "Hành động cho kênh và máy chủ đã chọn"
+                    description: "Hành động cho kênh và bang hội đã chọn"
                 },
                 updates: {
                     label: "Cập nhật",
@@ -2538,23 +2538,23 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Chuyển đến trang cấu hình Discord"
                 },
                 custom: {
-                    label: "Lệnh đặc biệt",
+                    label: "Lệnh tùy chỉnh",
                     description: "Các mục trong bảng lệnh do người dùng xác định"
                 },
                 sessions: {
                     label: "Công cụ phiên",
-                    description: "Công cụ quản lý phiên Discord của bạn"
+                    description: "Tiện ích để quản lý phiên Discord của bạn"
                 },
                 guilds: {
-                    label: "Máy chủ",
-                    description: "Điều hướng nhanh đến máy chủ của bạn"
+                    label: "Bang hội",
+                    description: "Nhanh chóng điều hướng đến bang hội của bạn"
                 },
                 friends: {
                     label: "Bạn",
-                    description: "Nhanh chóng đi đến chỗ bạn bè của bạn"
+                    description: "Điều hướng nhanh đến bạn bè của bạn"
                 },
                 action: {
-                    label: "Hoạt động",
+                    label: "Hoạt động"
                 }
             },
             builtIn: {
@@ -2565,7 +2565,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     }
                 },
                 reload: {
-                    label: "Cài đặt lại Discord",
+                    label: "Tải lại sự bất hòa",
                     description: "Tải lại cửa sổ Discord hiện tại"
                 }
             },
@@ -2573,59 +2573,59 @@ const translations: MatchStructure<typeof enTranslations> = {
                 enable: "Bật {{pluginName}}",
                 enabled: "Đã bật {{pluginName}}",
                 disable: "Tắt {{pluginName}}",
-                disabled: "{{pluginName}} Đã tắt",
+                disabled: "Đã tắt {{pluginName}}",
                 failed: "Lệnh không thành công:",
-                toggleFailed: "Không thể thay đổi {{pluginName}}.",
-                pluginSettings: "Cài đặt {{pluginName}}",
-                untitled: "Lệnh ẩn danh",
+                toggleFailed: "Không chuyển đổi được {{pluginName}}.",
+                pluginSettings: "{{pluginName}} Cài đặt",
+                untitled: "Lệnh không có tiêu đề",
                 new: "Lệnh mới",
                 error: {
-                    enter: "Nhập ID lệnh hoặc chọn bên dưới.",
+                    enter: "Nhập ID lệnh hoặc chọn một ID bên dưới.",
                     noCommand: "Không có lệnh nào khớp với ID này."
                 },
                 discord: {
                     account: "Mở tài khoản của tôi",
-                    privacy: "Dữ liệu và Quyền riêng tư Mở",
-                    notifications: "Bật thông báo",
-                    voice: "Bật âm thanh và video",
+                    privacy: "Dữ liệu mở và quyền riêng tư",
+                    notifications: "Mở thông báo",
+                    voice: "Mở giọng nói và video",
                     text: "Mở văn bản và hình ảnh",
-                    appearance: "Mở chế độ xem",
+                    appearance: "Giao diện mở",
                     accessibility: "Mở khả năng truy cập",
-                    keybinds: "Bật ràng buộc phím",
-                    advanced: "Mở Cài đặt nâng cao",
+                    keybinds: "Mở tổ hợp phím",
+                    advanced: "Mở nâng cao",
                 },
                 updates: {
                     check: {
                         label: "Kiểm tra cập nhật",
                         description: "Kiểm tra bản cập nhật Plexcord",
-                        one: "Đã có bản cập nhật",
-                        multiple: "Có sẵn bản cập nhật {{count}}",
-                        none: "không cập nhật",
+                        one: "Một bản cập nhật có sẵn",
+                        multiple: "{{count}} có bản cập nhật",
+                        none: "Không có bản cập nhật nào",
                         failed: "Không thể kiểm tra cập nhật."
                     },
                     changelog: {
                         label: "Xem nhật ký thay đổi",
-                        description: "Plexcord mở nhật ký thay đổi"
+                        description: "Mở nhật ký thay đổi Plexcord"
                     }
                 },
                 read: {
                     mark: {
-                        label: "{{channelLabel}} Đánh dấu là đã đọc"
+                        label: "Đánh dấu {{channelLabel}} đã đọc"
                     }
                 },
                 pin: {
                     open: {
-                        label: "Bật Ghim {{channelLabel}}"
+                        label: "Mở Ghim cho {{channelLabel}}"
                     },
                     toggle: {
-                        label: "Chuyển đổi ghim trên lệnh cuối cùng"
+                        label: "Chuyển đổi Ghim trên lệnh cuối cùng"
                     }
                 },
                 channel: {
                     mute: {
-                        label: "{{channelLabel}} Duy trì",
-                        oneHour: "Tắt tiếng kênh {{channelLabel}} trong 1 giờ",
-                        untilTomorrow: "Tắt tiếng kênh {{channelLabel}} cho đến ngày mai",
+                        label: "Tắt tiếng {{channelLabel}}",
+                        oneHour: "Tắt tiếng {{channelLabel}} trong 1 giờ",
+                        untilTomorrow: "Tắt tiếng {{channelLabel}} cho đến ngày mai",
                     },
                     unmute: {
                         label: "Bật tiếng {{channelLabel}}",
@@ -2641,15 +2641,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 guild: {
                     settings: {
-                        label: "Mở cài đặt {{guildLabel}}"
+                        label: "Mở Cài đặt cho {{guildLabel}}"
                     },
                     navigate: {
-                        label: "Đi tới máy chủ {{guildLabel}}"
+                        label: "Điều hướng tới {{guildLabel}}"
                     }
                 },
                 session: {
-                    thirtyMinutesDnd: "30 phút Không làm phiền",
-                    oneHourDnd: "1 giờ Không làm phiền",
+                    thirtyMinutesDnd: "Đặt chế độ Không làm phiền trong 30 phút",
+                    oneHourDnd: "Đặt chế độ Không làm phiền trong 1 giờ",
                     cancelStatusReset: "Hủy hẹn giờ trạng thái"
                 },
                 status: {
@@ -2678,13 +2678,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 recent: {
                     label: "Hiển thị các lệnh gần đây",
-                    description: "Hiển thị các lệnh được thực hiện gần đây",
+                    description: "Hiển thị các lệnh được thực hiện cuối cùng",
                     rerun: "Chạy lại lệnh cuối cùng"
                 },
                 plugin: {
                     reload: {
-                        label: "Cài đặt lại tất cả các plugin",
-                        description: "Cố gắng tải lại ngay lập tức mọi plugin đang hoạt động"
+                        label: "Tải lại tất cả các plugin",
+                        description: "Cố gắng tải lại nóng mọi plugin đã bật"
                     },
                     enable: {
                         label: "Kích hoạt tất cả các plugin"
@@ -2710,8 +2710,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             modal: {
-                searchPlaceholder: "Tìm kiếm lệnh",
-                noCommand: "Lệnh không tìm thấy",
+                searchPlaceholder: "Lệnh tìm kiếm",
+                noCommand: "Không tìm thấy lệnh nào",
                 add: {
                     title: "Thêm lệnh"
                 },
@@ -2723,9 +2723,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                         label: "Bảng lệnh",
                         placeholder: "Nhập lệnh",
                         filtering: "Lọc theo {{tags}}",
-                        noCommand: "Lệnh không tìm thấy",
-                        pin: "lệnh ghim",
-                        unpin: "Bỏ ghim"
+                        noCommand: "Không tìm thấy lệnh nào",
+                        pin: "Lệnh ghim",
+                        unpin: "Lệnh bỏ ghim"
                     },
                     target: {
                         label: "ID lệnh mục tiêu",
@@ -2733,21 +2733,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                         choose: "Chọn lệnh"
                     },
                     custom: {
-                        label: "Lệnh đặc biệt",
-                        description: "1) Đặt tên cho lệnh · 2) Thêm mô tả/từ khóa/thẻ/danh mục tùy chọn · 3) Chọn một hành động và điền thông tin chi tiết (ID cho bí danh và macro phải khớp với các lệnh bảng màu hiện có).",
+                        label: "Lệnh tùy chỉnh",
+                        description: "1) Đặt tên cho lệnh · 2) Thêm mô tả/từ khóa/thẻ/danh mục tùy chọn · 3) Chọn một hành động và điền thông tin chi tiết của nó (ID phải khớp với các lệnh bảng màu hiện có cho bí danh và macro).",
                         auto: "Tự động (mặc định)",
                         expand: "Mở rộng",
                         collapse: "Sụp đổ",
                         collapsed: {
-                            label: "Vé",
+                            label: "Nhãn",
                             description: "Tên hiển thị",
                             advanced: {
                                 hide: "Ẩn tùy chọn nâng cao",
                                 show: "Hiển thị tùy chọn nâng cao"
                             },
                             subtitle: {
-                                label: "Giải thích",
-                                placeholder: "Tiêu đề phụ tùy chọn"
+                                label: "Sự miêu tả",
+                                placeholder: "Phụ đề tùy chọn"
                             },
                             keywords: {
                                 label: "Từ khóa",
@@ -2772,7 +2772,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     }
                 },
                 settings: {
-                    noSelected: "Trang chưa được chọn",
+                    noSelected: "Không có trang nào được chọn",
                     current: "Trang hiện tại",
                     choose: "Chọn trang..."
                 },
@@ -2781,12 +2781,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     error: "Sử dụng liên kết http:// hoặc https://.",
                     valid: "Nhập một URL hợp lệ.",
                     open: {
-                        external: "mở bên ngoài",
+                        external: "Mở bên ngoài",
                     }
                 },
                 macro: {
                     sequence: {
-                        label: "Kịch bản",
+                        label: "Chuỗi lệnh",
                         placeholder: "lệnh-a, lệnh-b"
                     },
                     addStep: "Thêm bước",
@@ -2794,22 +2794,22 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             status: {
-                online: "trực tuyến",
-                idle: "nhàn rỗi",
+                online: "Trực tuyến",
+                idle: "Nhàn rỗi",
                 dnd: "Đừng làm phiền",
                 invisible: "Vô hình"
             },
             tag: {
-                core: "Hạt hướng dương",
-                navigation: "Đi dạo",
-                utility: "Phương tiện giao thông",
+                core: "Cốt lõi",
+                navigation: "Điều hướng",
+                utility: "Tính thiết thực",
                 developer: "Nhà phát triển",
-                customization: "tùy biến",
+                customization: "Tùy chỉnh",
                 plugins: "Plugin",
                 session: "Phiên họp",
                 context: "Bối cảnh",
-                custom: "Đặc biệt",
-                guilds: "Máy chủ",
+                custom: "Phong tục",
+                guilds: "Bang hội",
                 friends: "Bạn",
                 other: "Khác"
             },
@@ -2817,115 +2817,115 @@ const translations: MatchStructure<typeof enTranslations> = {
                 chat: {
                     button: {
                         unableToFind: "Không tìm thấy nút trò chuyện '{{label}}'.",
-                        failedToTrigger: "{{nhãn}} không thể được kích hoạt.",
-                        activated: "{{nhãn}} được kích hoạt."
+                        failedToTrigger: "Không thể kích hoạt {{label}}.",
+                        activated: "{{label}} đã được kích hoạt."
                     }
                 },
                 channel: {
                     mute: {
                         unavailable: "Điều khiển tắt tiếng kênh không khả dụng",
-                        muted: "Kênh đã bị im lặng.",
-                        unmuted: "Kênh đã bị tắt tiếng.",
-                        failed: "Không thể cập nhật trạng thái tắt tiếng của kênh."
+                        muted: "Kênh bị tắt tiếng.",
+                        unmuted: "Kênh không bị tắt tiếng.",
+                        failed: "Không cập nhật được trạng thái tắt tiếng kênh."
                     },
                     dm: {
                         no: "Không có lần đóng DM nào được ghi lại trong phiên này.",
-                        reOpened: "DM đóng cuối cùng đã được mở lại.",
+                        reOpened: "Đã mở lại DM đã đóng gần đây nhất.",
                         noAvailable: "DM không còn nữa."
                     }
                 },
                 command: {
                     loop: "Vòng lặp lệnh được phát hiện trong quá trình thực thi macro.",
-                    notFound: "Không tìm thấy lệnh {{commandId}}.",
+                    notFound: "Lệnh {{commandId}} không tìm thấy.",
                     unsupported: "Hành động lệnh tùy chỉnh không được hỗ trợ.",
-                    failedToRun: "Không chạy được {{nhãn}}.",
+                    failedToRun: "Không chạy được {{label}}.",
                     notMetadata: "Siêu dữ liệu plugin Bảng lệnh không có sẵn."
                 },
                 guild: {
                     mute: {
-                        unavailable: "Điều khiển tắt tiếng máy chủ không khả dụng",
-                        muted: "Máy chủ đã bị im lặng.",
-                        unmuted: "Việc tắt tiếng máy chủ đã bị xóa.",
-                        failed: "Không thể cập nhật trạng thái tắt tiếng của máy chủ."
+                        unavailable: "Điều khiển tắt tiếng của bang hội không có sẵn",
+                        muted: "Bang hội bị tắt tiếng.",
+                        unmuted: "Bang hội không bị tắt tiếng.",
+                        failed: "Không thể cập nhật trạng thái tắt tiếng của bang hội."
                     },
                     settings: {
-                        unable: "Không thể mở cài đặt máy chủ.",
+                        unable: "Không thể mở cài đặt bang hội.",
                     }
                 },
                 panel: {
                     pin: {
-                        unable: "Bảng cố định không thể mở được.",
+                        unable: "Không thể mở bảng ghim.",
                     }
                 },
                 status: {
                     reset: {
-                        canceled: "Việc đặt lại trạng thái theo kế hoạch đã bị hủy.",
-                        unableToChange: "Trạng thái không thể thay đổi vào lúc này.",
-                        reverted: "Trạng thái được trả về là {{status}}.",
+                        canceled: "Đã hủy thiết lập lại trạng thái theo lịch trình.",
+                        unableToChange: "Không thể thay đổi trạng thái ngay bây giờ.",
+                        reverted: "Trạng thái được hoàn nguyên về {{status}}.",
                         dnd: "Không làm phiền trong {{duration}} phút."
                     },
                     change: {
-                        unableToChange: "Trạng thái không thể thay đổi vào lúc này.",
+                        unableToChange: "Không thể thay đổi trạng thái ngay bây giờ.",
                         changed: "Trạng thái đã thay đổi thành {{status}}."
                     }
                 },
                 read: {
-                    marked: "{{channelLabel}} được đánh dấu là đã đọc.",
-                    failed: "Không thể đánh dấu kênh này là đã đọc."
+                    marked: "Đã đánh dấu {{channelLabel}} là đã đọc.",
+                    failed: "Không đánh dấu được kênh là đã đọc."
                 },
                 route: {
                     unable: "Không thể mở {{destination}}.",
                 },
                 notification: {
                     cleared: "Đã xóa tất cả thông báo.",
-                    failed: "Không thể xóa thông báo.",
+                    failed: "Không xóa được thông báo.",
                     notSupported: "Xóa thông báo không được hỗ trợ."
                 },
                 streamerMode: {
-                    enabled: "Chế độ phát sóng được bật.",
-                    disabled: "Chế độ phát sóng bị tắt.",
+                    enabled: "Đã bật Chế độ phát trực tiếp.",
+                    disabled: "Chế độ phát trực tuyến bị tắt.",
                 },
                 voice: {
                     micToggle: {
-                        muted: "Micrô đã im lặng.",
-                        unmuted: "Micrô đã được bật."
+                        muted: "Micrô bị tắt tiếng.",
+                        unmuted: "Đã bật tiếng micrô."
                     },
                     deafenToggle: {
-                        deafened: "Bây giờ bạn bị điếc.",
+                        deafened: "Bây giờ bạn đã bị điếc.",
                         undeafened: "Bạn không còn bị điếc nữa."
                     }
                 },
                 quickCSS: {
-                    enabled: "CSS nhanh được kích hoạt.",
+                    enabled: "Đã bật CSS nhanh.",
                     disabled: "CSS nhanh bị vô hiệu hóa."
                 },
                 transparentity: {
-                    enabled: "Tính năng trong suốt của cửa sổ được bật.",
-                    disabled: "Tính trong suốt của cửa sổ bị tắt."
+                    enabled: "Đã bật tính năng trong suốt của cửa sổ.",
+                    disabled: "Tính năng trong suốt của cửa sổ bị tắt."
                 },
                 plugin: {
                     disabled: {
                         label: "{{pluginName}} bị vô hiệu hóa.",
-                        disable: "{{pluginName}} bị vô hiệu hóa. Để sử dụng hành động này, hãy kích hoạt plugin."
+                        disable: "{{pluginName}} bị vô hiệu hóa. Kích hoạt plugin để sử dụng hành động này."
                     },
                     required: {
-                        label: "{{pluginName}} yêu cầu khởi động lại để cài đặt lại."
+                        label: "{{pluginName}} yêu cầu khởi động lại để tải lại."
                     },
                     stop: {
-                        failed: "Không thể dừng {{pluginName}}."
+                        failed: "Không dừng được {{pluginName}}."
                     },
                     restart: {
                         failed: "Không khởi động lại được {{pluginName}}."
                     },
                     reload: {
-                        label: "{{pluginName}} đã được tải lại.",
-                        noPlugin: "Không có plugin nào được cài đặt lại.",
-                        reloaded: "Đã cài đặt lại {{count}} plugin."
+                        label: "Đã tải lại {{pluginName}}.",
+                        noPlugin: "Không có plugin nào được tải lại.",
+                        reloaded: "Đã tải lại {{count}} plugin{{s}}."
                     },
                     toggle: {
-                        enabled: "Đã kích hoạt plugin {{changed}}.",
-                        disabled: "Plugin {{changed}} đã bị vô hiệu hóa.",
-                        noChanged: "Trạng thái của bất kỳ plugin nào không thay đổi."
+                        enabled: "Đã bật plugin {{changed}}{{s}}.",
+                        disabled: "Đã tắt plugin {{changed}}{{s}}.",
+                        noChanged: "Không có plugin nào thay đổi trạng thái."
                     },
                     run: {
                         failed: {
@@ -2941,7 +2941,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     direct: "Tin nhắn trực tiếp"
                 },
                 guild: {
-                    current: "Máy chủ hiện tại",
+                    current: "Bang hội hiện tại",
                 }
             },
             option: {
@@ -2949,48 +2949,48 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Phím nóng",
                     description: "Phím nóng dùng để mở bảng lệnh",
                     recording: "Nhấn phím bất kỳ...",
-                    reset: "cài lại"
+                    reset: "Cài lại"
                 },
                 visualStyle: {
                     label: "Phong cách trực quan",
-                    description: "chế độ xem bảng màu",
+                    description: "Xuất hiện bảng màu",
                     classic: "Cổ điển",
-                    polished: "Đánh bóng (Hiện đại)"
+                    polished: "đánh bóng"
                 },
                 showTags: {
                     label: "Hiển thị thẻ",
-                    description: "Hiển thị nhãn cho lệnh"
+                    description: "Hiển thị chip thẻ cho lệnh"
                 },
                 enableTagFilter: {
                     label: "Bật bộ lọc thẻ",
                     description: "Hiển thị thanh bộ lọc thẻ"
                 },
                 customCommands: {
-                    label: "Lệnh đặc biệt",
+                    label: "Lệnh tùy chỉnh",
                     description: "Quản lý các mục bảng lệnh tùy chỉnh"
                 }
             },
             template: {
                 alias: {
-                    label: "Lệnh biệt danh",
-                    description: "Phản ánh một lệnh hiện có"
+                    label: "Lệnh bí danh",
+                    description: "Phản chiếu lệnh hiện có"
                 },
                 settings: {
                     label: "Cài đặt",
                     description: "Mở cài đặt Discord"
                 },
                 url: {
-                    label: "Sự liên quan",
+                    label: "liên kết",
                     description: "Mở một URL bên ngoài"
                 },
                 macro: {
                     label: "Vĩ mô",
-                    description: "Chạy một loạt lệnh"
+                    description: "Chạy một chuỗi lệnh"
                 }
             }
         },
         consoleJanitor: {
-            name: "Bảng điều khiểnNgười gác cổng",
+            name: "ConsoleJanitor",
             description: "Tắt các thông báo/lỗi bảng điều khiển gây phiền nhiễu",
             option: {
                 disableLoggers: {
@@ -2999,44 +2999,44 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 disableSpotifyLogger: {
                     label: "Vô hiệu hóa Spotify Logger",
-                    description: "Tắt trình ghi nhật ký Spotify làm rò rỉ thông tin tài khoản và khóa truy cập"
+                    description: "Tắt trình ghi nhật ký Spotify, làm rò rỉ thông tin tài khoản và mã thông báo truy cập"
                 },
                 whitelistedLoggers: {
                     label: "Trình ghi nhật ký được đưa vào danh sách trắng",
-                    description: "Danh sách các trình ghi nhật ký được phân tách bằng dấu chấm phẩy (;) sẽ được phép ngay cả khi các trình ghi nhật ký khác bị ẩn"
+                    description: "Danh sách logger được phân tách bằng dấu chấm phẩy (;) để cho phép ngay cả khi những cái khác bị ẩn"
                 },
                 allowLevel: {
-                    label: "Cấp độ cho phép",
+                    label: "Cho phép cấp độ",
                     description: "Luôn cho phép logger thuộc loại này",
                     filter: "Danh sách bộ lọc"
                 }
             }
         },
         consoleShortcuts: {
-            name: "Phím tắt bảng điều khiển",
-            description: "Thêm phím tắt ngắn hơn cho nhiều thứ trên cửa sổ. Chạy `shortcutList` cho danh sách."
+            name: "Console Shortcuts",
+            description: "Thêm Bí danh ngắn hơn cho nhiều thứ trên cửa sổ. Chạy `shortcutList` để có danh sách."
         },
         contentWarning: {
-            name: "Nội dungCảnh báo",
-            description: "Cho phép làm mờ một số từ kích hoạt nhất định theo mặc định. Nhấp vào nội dung mờ sẽ hiển thị nội dung đó.",
+            name: "ContentWarning",
+            description: "Cho phép bạn chỉ định một số từ kích hoạt nhất định sẽ bị làm mờ theo mặc định. Bấm vào nội dung bị mờ sẽ hiện ra.",
             option: {
                 flagged: {
-                    label: "đánh dấu",
-                    flagged: "từ được đánh dấu",
+                    label: "Đã gắn cờ",
+                    flagged: "Từ được gắn cờ",
                     placeholder: "Từ"
                 },
                 onClick: {
-                    label: "Bấm vào nó",
-                    description: "Hiển thị nội dung khi nhấp chuột, không chỉ khi di chuột qua"
+                    label: "Khi nhấp chuột",
+                    description: "Chỉ hiển thị nội dung kích hoạt khi nhấp chuột thay vì di chuột"
                 }
             }
         },
         copyEmojiMarkdown: {
-            name: "Sao chépEmojiMarkdown",
-            description: "Cho phép bạn sao chép biểu tượng cảm xúc dưới dạng văn bản được định dạng (<a:blob_pwease:1402403381900742737>)",
+            name: "CopyEmojiMarkdown",
+            description: "Cho phép bạn sao chép biểu tượng cảm xúc dưới dạng chuỗi được định dạng (<a:blob_pwease:1402403381900742737>)",
             option: {
                 copyUnicode: {
-                    label: "Bản sao Unicode",
+                    label: "Sao chép Unicode",
                     description: "Sao chép ký tự unicode thô thay vì :name: cho biểu tượng cảm xúc mặc định (👽)"
                 }
             },
@@ -3044,19 +3044,19 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copy: "Sao chép đánh dấu biểu tượng cảm xúc"
             },
             toast: {
-                success: "Thành công! Đánh dấu của biểu tượng cảm xúc đã được sao chép."
+                success: "Thành công! Đã sao chép đánh dấu biểu tượng cảm xúc."
             }
         },
         copyFileContents: {
-            name: "CopyFileNội dung",
+            name: "CopyFileContents",
             description: "Thêm nút vào tệp đính kèm tệp văn bản để sao chép nội dung của chúng",
             copied: "Đã sao chép!",
             large: "Tệp quá lớn để sao chép.",
             copyFileContents: "Sao chép nội dung tập tin"
         },
         copyProfileColors: {
-            name: "Sao chépHồ sơMàu sắc",
-            description: "Một plugin sao chép màu gradient trong hồ sơ của người dùng vào bảng tạm.",
+            name: "CopyProfileColors",
+            description: "Một plugin để sao chép màu gradient trong hồ sơ của mọi người vào khay nhớ tạm.",
             copy: "Sao chép màu hồ sơ",
             toast: {
                 noColor: "Không tìm thấy màu hồ sơ!",
@@ -3065,16 +3065,16 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         copyStatusUrls: {
-            name: "CopyStatusUrl",
-            description: "Sao chép URL trạng thái của người dùng khi bạn nhấp chuột phải",
+            name: "CopyStatusUrls",
+            description: "Sao chép URL trạng thái của người dùng khi bạn nhấp chuột phải vào nó",
             toast: {
-                copied: "Đã sao chép URL",
-                error: "Lỗi sao chép URL, kiểm tra bảng điều khiển để biết thêm thông tin"
+                copied: "URL đã sao chép",
+                error: "Lỗi sao chép URL, hãy kiểm tra bảng điều khiển để biết thêm thông tin"
             }
         },
         copyStickerLinks: {
-            name: "CopyStickerLiên kết",
-            description: "Thêm khả năng sao chép và mở liên kết nhãn dán",
+            name: "CopyStickerLinks",
+            description: "Thêm khả năng sao chép và mở liên kết Nhãn dán",
             context: {
                 copy: "Sao chép liên kết",
                 open: "Mở liên kết"
@@ -3084,14 +3084,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         copyUserMention: {
-            name: "Sao chépNgười dùngĐề cập",
-            description: "Thêm một nút vào menu ngữ cảnh của người dùng để sao chép đề cập của người dùng. Hoạt động tốt nhất với ValidUser.",
+            name: "CopyUserMention",
+            description: "Thêm nút để sao chép đề cập của người dùng trên menu ngữ cảnh của người dùng, hoạt động tốt nhất với ValidUser.",
             context: {
                 copy: "Sao chép đề cập của người dùng"
             }
         },
         copyUserURLs: {
-            name: "Sao chépURL người dùng",
+            name: "CopyUserURLs",
             description: "Thêm tùy chọn 'Sao chép URL người dùng' vào menu ngữ cảnh của người dùng.",
             context: {
                 copy: "Sao chép URL người dùng"
@@ -3099,33 +3099,33 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         crashHandler: {
             name: "CrashHandler",
-            description: "Plugin trợ giúp để quản lý và nếu có thể, khôi phục sau sự cố mà không cần phải khởi động lại",
+            description: "Plugin tiện ích để xử lý và có thể khôi phục sau sự cố mà không cần khởi động lại",
             option: {
                 attemptToPreventCrashes: {
                     label: "Cố gắng ngăn chặn sự cố",
-                    description: "Cố gắng ngăn chặn sự cố Discord?"
+                    description: "Có nên cố gắng ngăn chặn sự cố Discord hay không."
                 },
                 attemptToNavigateToHome: {
-                    label: "Cố gắng chuyển hướng đến trang chủ",
-                    description: "Cố gắng chuyển hướng đến tab chính trong quá trình khôi phục sau sự cố."
+                    label: "Cố gắng điều hướng đến Trang chủ",
+                    description: "Có cố gắng điều hướng đến tab trang chủ khi khắc phục sự cố hay không."
                 }
             },
             toast: {
                 crashed: {
-                    title: "Sự bất hòa đã sụp đổ!",
-                    body: "Rất tiếc :( Discord bị lỗi hai lần trong một thời gian ngắn, sẽ không có nỗ lực khôi phục nào được thực hiện. Nhấp vào đây và tham gia máy chủ hỗ trợ!",
-                    update: "Ồ không, Discord vừa gặp sự cố… nhưng tin tốt là có bản cập nhật Plexcord có thể khắc phục sự cố này! Bạn có muốn cập nhật ngay bây giờ không?",
-                    recover: "Đang cố gắng khôi phục... Nhấp vào đây và tham gia máy chủ hỗ trợ!",
-                    invalid: "Liên kết lời mời không hợp lệ hoặc đã hết hạn."
+                    title: "Discord đã bị hỏng!",
+                    body: "Awn :( Discord đã gặp sự cố nhanh chóng hai lần, không thể khôi phục. Nhấp vào đây để tham gia máy chủ hỗ trợ của chúng tôi!",
+                    update: "Uh ồ, Discord vừa gặp sự cố... nhưng tin tốt là đã có bản cập nhật Plexcord có thể khắc phục sự cố này! Bạn có muốn cập nhật ngay bây giờ không?",
+                    recover: "Đang cố gắng khôi phục... Nhấp vào đây để tham gia máy chủ hỗ trợ của chúng tôi!",
+                    invalid: "Liên kết mời không hợp lệ hoặc đã hết hạn."
                 }
             }
         },
         ctrlEnterSend: {
-            name: "CtrlNhậpGửi",
+            name: "CtrlEnterSend",
             description: "Sử dụng Ctrl+Enter để gửi tin nhắn (có thể tùy chỉnh)",
             option: {
                 submitRule: {
-                    label: "Quy tắc đăng bài",
+                    label: "Gửi quy tắc",
                     description: "Cách gửi tin nhắn",
                     ctrlEnter: "Ctrl+Enter (Enter hoặc Shift+Enter cho dòng mới) (cmd+enter trên macOS)",
                     shiftEnter: "Shift+Enter (Nhập cho dòng mới)",
@@ -3133,131 +3133,131 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 sendMessageInTheMiddleOfACodeBlock: {
                     label: "Gửi tin nhắn ở giữa khối mã",
-                    description: "Gửi tin nhắn ở giữa một khối mã"
+                    description: "Có nên gửi tin nhắn ở giữa khối mã hay không"
                 }
             }
         },
         cursorBuddy: {
-            name: "Con trỏBuddy",
+            name: "CursorBuddy",
             description: "Thêm một sprite đi theo con trỏ của bạn.",
             modal: {
                 furColor: "Màu lông",
-                outlineColor: "Anahat Rengi"
+                outlineColor: "Màu phác thảo"
             },
             option: {
                 buddy: {
                     label: "Bạn bè",
-                    description: "Chọn một người bạn con trỏ",
-                    oneko: "Tốt",
-                    fathorse: "Ngựa béo"
+                    description: "Chọn một con trỏ đi bạn ơi",
+                    oneko: "Oneko",
+                    fathorse: "Ngựa Béo"
                 },
                 speed: {
                     label: "Tốc độ",
-                    description: "Tốc độ của bạn anh",
+                    description: "Tốc độ của bạn thân",
                     invalid: "Tốc độ phải lớn hơn 0"
                 },
                 fps: {
-                    label: "Tốc độ khung hình (FPS)",
+                    label: "Tốc độ khung hình",
                     description: "Tốc độ khung hình của bạn bè bạn",
                     invalid: "Tốc độ khung hình phải lớn hơn 0"
                 },
                 onekoSection: {
-                    label: "Tốt"
+                    label: "Oneko"
                 },
                 furColor: {
                     label: "Màu lông",
-                    description: "màu lông lục giác cho oneko"
+                    description: "Màu lông lục giác cho Oneko"
                 },
                 outlineColor: {
-                    label: "Anahat Rengi",
+                    label: "Màu phác thảo",
                     description: "Phác thảo màu hex cho Oneko"
                 },
                 fathorseSection: {
-                    label: "Ngựa béo"
+                    label: "Ngựa Béo"
                 },
                 size: {
-                    label: "Kích thước",
+                    label: "Kích cỡ",
                     description: "Kích thước của ngựa béo",
                     invalid: "Kích thước phải lớn hơn 0"
                 },
                 fade: {
-                    label: "Phai dần",
-                    description: "Liệu con ngựa có mờ đi khi con trỏ đến gần không"
+                    label: "Phai",
+                    description: "Nếu con ngựa mờ dần khi con trỏ ở gần"
                 },
                 freeroam: {
-                    label: "Đi lang thang miễn phí",
-                    description: "Liệu con ngựa có thể tự do dạo chơi khi nhàn rỗi không"
+                    label: "tự do",
+                    description: "Nếu con ngựa có thể đi lang thang tự do khi nhàn rỗi"
                 },
                 shake: {
-                    label: "Sa thải",
-                    description: "Liệu con ngựa có lắc cửa sổ khi đi bộ không"
+                    label: "Lắc",
+                    description: "Nếu con ngựa lắc cửa sổ khi nó đang đi"
                 }
             }
         },
         customFolderIcons: {
-            name: "Biểu tượng thư mục tùy chỉnh",
-            description: "Tùy chỉnh biểu tượng thư mục với bất kỳ png nào",
+            name: "CustomFolderIcons",
+            description: "Tùy chỉnh biểu tượng thư mục với bất kỳ PNG nào",
             option: {
                 solidIcon: {
-                    label: "Biểu tượng phẳng",
-                    description: "Sử dụng nền đơn giản cho nền hình ảnh của bạn"
+                    label: "Biểu tượng rắn",
+                    description: "Sử dụng nền đồng nhất trên nền ảnh"
                 },
                 folderIcons: {
                     label: "Biểu tượng thư mục",
-                    description: "Cài đặt biểu tượng thư mục"
+                    description: "cài đặt biểu tượng thư mục"
                 }
             },
             modal: {
-                change: "Thay đổi kích thước biểu tượng thư mục",
+                change: "Thay đổi kích thước của biểu tượng thư mục",
                 save: "Cứu",
-                unset: "Di dời",
+                unset: "Bỏ đặt",
                 set: "Đặt biểu tượng mới",
-                hover: "Bạn có thể cần phải di chuột qua thư mục sau khi đặt nó ở chế độ làm mới."
+                hover: "Bạn có thể phải di chuột qua thư mục sau khi cài đặt để làm mới nó."
             }
         },
         customIdle: {
-            name: "tùy chỉnh không hoạt động",
-            description: "Cho phép bạn đặt khoảng thời gian trước khi Discord chuyển sang chế độ không hoạt động (hoặc tắt chế độ không hoạt động tự động)",
+            name: "CustomIdle",
+            description: "Cho phép bạn đặt thời gian trước khi Discord không hoạt động (hoặc tắt tính năng tự động không hoạt động)",
             backOnline: "Chào mừng trở lại! Bấm vào nút để truy cập trực tuyến. Nhấp vào X để ở chế độ chờ cho đến khi tải lại.",
             exit: "Thoát khỏi chế độ chờ",
             option: {
                 idleTimeout: {
                     label: "Hết thời gian chờ",
-                    description: "Số phút trước khi Discord chuyển sang chế độ không hoạt động (0 để tắt chế độ không hoạt động tự động)"
+                    description: "Vài phút trước khi Discord không hoạt động (0 để tắt chế độ tự động không hoạt động)"
                 },
                 remainInIdle: {
-                    label: "Ở nhàn rỗi",
-                    description: "Khi bạn quay lại Discord, hãy ở chế độ chờ cho đến khi bạn xác nhận rằng bạn muốn trực tuyến"
+                    label: "Vẫn ở trạng thái nhàn rỗi",
+                    description: "Khi bạn quay lại Discord, hãy giữ nguyên trạng thái chờ cho đến khi bạn xác nhận rằng mình muốn trực tuyến"
                 }
             }
         },
         customRPC: {
-            name: "RPC tùy chỉnh",
-            description: "Thêm Hiện diện phong phú có thể tùy chỉnh hoàn toàn vào hồ sơ Discord của bạn",
-            goTo: "Tạo một ứng dụng bằng cách truy cập {{portal}} và lấy ID ứng dụng.",
-            upload: "Nhận khóa hình ảnh bằng cách tải hình ảnh lên từ tab Hiện diện phong phú.",
-            image: "Nếu bạn muốn sử dụng liên kết hình ảnh, hãy tải hình ảnh của bạn xuống và tải lên {{imgur}}, sau đó nhấp chuột phải vào hình ảnh và sử dụng 'Sao chép địa chỉ hình ảnh' để lấy liên kết.",
-            button: "Bạn không thể nhìn thấy các nút của chính mình trên hồ sơ của mình nhưng những người khác có thể nhìn thấy chúng một cách bình thường.",
-            font: "Một số chữ cái unicode lạ ('𝖇ö𝖞𝖑𝖊 𝖞𝖆𝖟ı𝖑𝖆𝖗') có thể khiến Rich Presence không xuất hiện, thay vào đó hãy thử sử dụng các chữ cái bình thường.",
+            name: "CustomRPC",
+            description: "Thêm Hiện diện phong phú có thể tùy chỉnh hoàn toàn (Trạng thái trò chơi) vào hồ sơ Discord của bạn",
+            goTo: "Đi tới {{portal}} để tạo ứng dụng và lấy ID ứng dụng.",
+            upload: "Tải hình ảnh lên tab Hiện diện phong phú để nhận khóa hình ảnh.",
+            image: "Nếu bạn muốn sử dụng liên kết hình ảnh, hãy tải xuống hình ảnh của bạn và tải lại hình ảnh lên {{imgur}} và lấy liên kết hình ảnh bằng cách nhấp chuột phải vào hình ảnh và chọn 'Sao chép địa chỉ hình ảnh'.",
+            button: "Bạn không thể nhìn thấy các nút của riêng mình trên hồ sơ của mình nhưng những người khác vẫn có thể nhìn thấy chúng.",
+            font: "Một số văn bản unicode kỳ lạ ('phông chữ' 𝖑𝖎𝖐𝖊 𝖙𝖍𝖎𝖘) có thể khiến sự hiện diện phong phú không hiển thị, thay vào đó hãy thử sử dụng các chữ cái bình thường.",
             placeholder: "Nhập một giá trị",
             select: "Chọn một tùy chọn",
             error: {
-                appIdInvalid: "ID ứng dụng không phải là số hợp lệ.",
-                notice: "Cảnh báo",
-                sharing: "Chia sẻ sự kiện không được bật, mọi người sẽ không thể nhìn thấy Sự hiện diện phong phú riêng tư của bạn!",
-                enable: "kích hoạt",
-                validStream: "Liên kết bài viết phải là một URL hợp lệ.",
-                mustBeURL: "Nó phải là một URL hợp lệ.",
-                streamCharacters: "Liên kết bài viết không được dài hơn 512 ký tự.",
+                appIdInvalid: "ID ứng dụng phải là số hợp lệ.",
+                notice: "Để ý",
+                sharing: "Chia sẻ hoạt động không được bật, mọi người sẽ không thể thấy sự hiện diện phong phú tùy chỉnh của bạn!",
+                enable: "Cho phép",
+                validStream: "Liên kết phát trực tuyến phải là một URL hợp lệ.",
+                mustBeURL: "Phải là một URL hợp lệ.",
+                streamCharacters: "Liên kết phát trực tuyến không được dài quá 512 ký tự.",
                 dontUse: "Không sử dụng liên kết Discord. Thay vào đó hãy sử dụng liên kết hình ảnh Imgur.",
-                imgur: "Liên kết Imgur phải trực tiếp tới hình ảnh (ví dụ: https://i.imgur.com/...). Nhấp chuột phải vào hình ảnh và nhấp vào 'Sao chép địa chỉ hình ảnh'.",
-                tenor: "Liên kết Tenor phải trực tiếp tới hình ảnh (ví dụ: https://media.tenor.com/...). Nhấp chuột phải vào GIF và nhấp vào 'Sao chép địa chỉ hình ảnh'.",
+                imgur: "Liên kết Imgur phải là liên kết trực tiếp tới hình ảnh (ví dụ: https://i.imgur.com/...). Nhấp chuột phải vào hình ảnh và nhấp vào 'Sao chép địa chỉ hình ảnh'",
+                tenor: "Liên kết tenor phải là liên kết trực tiếp tới hình ảnh (ví dụ: https://media.tenor.com/...). Nhấp chuột phải vào GIF và nhấp vào 'Sao chép địa chỉ hình ảnh'",
                 required: "Trường này là bắt buộc.",
-                tooLong: "Nó không được dài hơn {{maxLength}} ký tự.",
-                mustBeNumber: "Nó phải là một con số.",
-                mustBePositive: "Nó phải là một số dương.",
-                startTimeInvalid: "Thời gian bắt đầu phải lớn hơn 0.",
-                endTimeInvalid: "Thời gian kết thúc phải lớn hơn 0."
+                tooLong: "Không được dài hơn {{maxLength}} ký tự.",
+                mustBeNumber: "Phải là một con số.",
+                mustBePositive: "Phải là số dương.",
+                startTimeInvalid: "Dấu thời gian bắt đầu phải lớn hơn 0.",
+                endTimeInvalid: "Dấu thời gian kết thúc phải lớn hơn 0."
             },
             option: {
                 appId: {
@@ -3274,169 +3274,169 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 detailsURL: {
                     label: "URL chi tiết",
-                    description: "URL có thể nhấp để biết chi tiết"
+                    description: "URL có thể nhấp chi tiết"
                 },
                 state: {
-                    label: "cứng",
-                    description: "Trạng thái (dòng 2)"
+                    label: "Tình trạng",
+                    description: "Bang (dòng 2)"
                 },
                 stateURL: {
-                    label: "URL trạng thái",
-                    description: "URL có thể nhấp để biết trạng thái"
+                    label: "URL tiểu bang",
+                    description: "Nêu rõ URL có thể nhấp"
                 },
                 partySize: {
-                    label: "Quy mô nhóm",
-                    description: "Quy mô nhóm hiện tại (phải được sử dụng cùng với Quy mô nhóm tối đa)"
+                    label: "Quy mô bữa tiệc",
+                    description: "Quy mô nhóm hiện tại (phải được sử dụng với Quy mô nhóm tối đa)"
                 },
                 partyMax: {
-                    label: "Kích thước nhóm tối đa",
-                    description: "Kích thước nhóm tối đa (phải được sử dụng với Kích thước nhóm hiện tại)"
+                    label: "Quy mô bữa tiệc tối đa",
+                    description: "Quy mô nhóm tối đa (phải được sử dụng với Quy mô nhóm hiện tại)"
                 },
                 type: {
-                    label: "Loại sự kiện",
-                    description: "Loại sự kiện",
-                    playing: "đang chơi",
-                    streaming: "Phát sóng",
-                    listening: "lắng nghe",
-                    watching: "đang xem",
-                    competing: "cuộc đua"
+                    label: "Loại hoạt động",
+                    description: "Loại hoạt động",
+                    playing: "Đang chơi",
+                    streaming: "Truyền phát",
+                    listening: "Nghe",
+                    watching: "Đang xem",
+                    competing: "Cạnh tranh"
                 },
                 streamLink: {
-                    label: "Đăng liên kết",
-                    description: "Liên kết tới Twitch.tv hoặc Youtube.com (chỉ dành cho loại sự kiện Phát sóng)"
+                    label: "Liên kết luồng",
+                    description: "Liên kết Twitch.tv hoặc YouTube.com (chỉ dành cho loại hoạt động Phát trực tuyến)"
                 },
                 timestampMode: {
                     label: "Chế độ dấu thời gian",
-                    description: "Dấu thời gian sẽ chỉ ra điều gì",
+                    description: "Dấu thời gian sẽ hiển thị gì",
                     none: "Không có",
-                    sinceDiscordOpen: "Kể từ khi Discord mở ra",
-                    sameAsCurrentTime: "Giống như thời gian hiện tại của bạn (không đặt lại sau 24 giờ)",
-                    custom: "Giờ đặc biệt"
+                    sinceDiscordOpen: "Kể từ khi Discord mở",
+                    sameAsCurrentTime: "Giống như thời gian hiện tại của bạn (không được đặt lại sau 24h)",
+                    custom: "Thời gian tùy chỉnh"
                 },
                 startTime: {
                     label: "Thời gian bắt đầu (tính bằng mili giây)",
-                    description: "Dấu thời gian bắt đầu (chỉ dành cho chế độ thời gian tùy chỉnh)"
+                    description: "Dấu thời gian bắt đầu tính bằng mili giây (chỉ dành cho chế độ dấu thời gian tùy chỉnh)"
                 },
                 endTime: {
                     label: "Thời gian kết thúc (tính bằng mili giây)",
-                    description: "Dấu thời gian kết thúc (chỉ dành cho chế độ thời gian tùy chỉnh)"
+                    description: "Dấu thời gian kết thúc tính bằng mili giây (chỉ dành cho chế độ dấu thời gian tùy chỉnh)"
                 },
                 imageBig: {
-                    label: "Chìa khóa hình ảnh lớn",
-                    description: "Phím trực quan lớn (phải được cài đặt trong tab Hiện diện phong phú)"
+                    label: "Khóa hình ảnh lớn",
+                    description: "Key hình ảnh lớn (phải được tải lên trong tab Hiện diện phong phú)"
                 },
                 imageBigTooltip: {
-                    label: "Manh mối trực quan lớn",
-                    description: "Mẹo xuất hiện khi di chuột qua hình ảnh lớn hơn"
+                    label: "Chú giải công cụ lớn về hình ảnh",
+                    description: "Chú giải công cụ hình ảnh lớn"
                 },
                 imageBigURL: {
                     label: "URL hình ảnh lớn",
                     description: "URL có thể nhấp vào hình ảnh lớn"
                 },
                 imageSmall: {
-                    label: "Công tắc trực quan nhỏ",
-                    description: "Phím trực quan nhỏ (phải được cài đặt trong tab Hiện diện phong phú)"
+                    label: "Khóa hình ảnh nhỏ",
+                    description: "Key hình ảnh nhỏ (phải được tải lên trong tab Hiện diện phong phú)"
                 },
                 imageSmallTooltip: {
-                    label: "Manh mối trực quan nhỏ",
-                    description: "Mẹo xuất hiện khi di chuột qua hình ảnh thu nhỏ"
+                    label: "Chú giải công cụ nhỏ về hình ảnh",
+                    description: "Chú giải công cụ hình ảnh nhỏ"
                 },
                 imageSmallURL: {
-                    label: "URL hình ảnh thu nhỏ",
+                    label: "URL hình ảnh nhỏ",
                     description: "URL có thể nhấp vào hình ảnh nhỏ"
                 },
                 buttonOneText: {
-                    label: "Buton 1 Metni",
-                    description: "Nút 1"
+                    label: "Văn bản nút 1",
+                    description: "Văn bản nút 1"
                 },
                 buttonOneURL: {
                     label: "URL của nút 1",
-                    description: "Kết nối nút 1"
+                    description: "URL của nút 1"
                 },
                 buttonTwoText: {
-                    label: "Buton 2 Metni",
-                    description: "Nút 2"
+                    label: "Văn bản nút 2",
+                    description: "Văn bản nút 2"
                 },
                 buttonTwoURL: {
                     label: "URL của nút 2",
-                    description: "Kết nối nút 2"
+                    description: "URL của nút 2"
                 }
             }
         },
         customSounds: {
-            name: "Âm thanh tùy chỉnh",
+            name: "CustomSounds",
             description: "Tùy chỉnh âm thanh của Discord.",
             search: "Tìm kiếm âm thanh",
             placeholder: "Tìm kiếm theo tên hoặc ID",
-            import: "Iche Aktar",
+            import: "Nhập khẩu",
             export: "Xuất khẩu",
             reset: "Đặt lại tất cả",
             debug: "Gỡ lỗi",
             toast: {
                 error: "Lỗi tải tập tin âm thanh tùy chỉnh",
-                exported: "Đã xuất {{count}} cài đặt (không bao gồm tệp âm thanh)",
+                exported: "Đã xuất cài đặt {{count}} (không bao gồm tệp âm thanh)",
                 imported: "Cài đặt đã được nhập thành công",
-                importError: "Đã xảy ra lỗi khi nhập cài đặt. Kiểm tra bảng điều khiển để biết chi tiết.",
-                reset: "Tất cả âm thanh đã được thiết lập lại thành công!",
-                overrideDescription: "Âm thanh {{soundName}} đã thay đổi",
-                previewSound: "Đã xảy ra lỗi khi phát âm thanh.",
-                playing: "Không thể phát âm thanh tùy chỉnh. Tập tin có thể bị hỏng.",
-                invalidFile: "Không có tệp âm thanh tùy chỉnh để xem trước",
+                importError: "Lỗi khi nhập cài đặt. Kiểm tra bảng điều khiển để biết chi tiết.",
+                reset: "Tất cả ghi đè được thiết lập lại thành công!",
+                overrideDescription: "Ghi đè cho {{soundName}}",
+                previewSound: "Lỗi phát âm thanh.",
+                playing: "Lỗi phát âm thanh tùy chỉnh. Tập tin có thể bị hỏng.",
+                invalidFile: "Không có tệp âm thanh tùy chỉnh nào có sẵn để xem trước",
                 uploaded: "Tệp đã được tải lên thành công: {{fileName}}",
-                uploadedError: "Đã xảy ra lỗi khi tải tệp lên: {{error}}",
+                uploadedError: "Lỗi tải tập tin lên: {{error}}",
                 invalidExtension: "Loại tệp không hợp lệ. Vui lòng tải lên một tập tin âm thanh.",
-                uploading: "Đang tải tập tin...",
-                deleted: "Tập tin đã được xóa thành công",
-                deleteError: "Đã xảy ra lỗi khi xóa tệp.",
+                uploading: "Đang tải tệp lên...",
+                deleted: "Đã xóa tệp thành công",
+                deleteError: "Lỗi xóa tập tin.",
                 loadingError: "Lỗi tải tập tin âm thanh tùy chỉnh"
             },
             button: {
                 preview: "Xem trước",
-                stop: "Chảy",
-                volume: "Ses",
+                stop: "Dừng lại",
+                volume: "Âm lượng",
                 soundSource: "Nguồn âm thanh",
-                customFile: "Tệp đặc biệt",
+                customFile: "Tệp tùy chỉnh",
                 uploadNew: "Tải lên mới",
                 delete: "Xóa tệp đã chọn"
             },
             option: {
                 default: "Mặc định",
-                custom: "Đặc biệt",
+                custom: "Phong tục",
                 select: "Chọn một tập tin..."
             },
             type: {
-                activityEnd: "Sự kiện đã kết thúc",
-                activityLaunch: "Sự kiện đã bắt đầu",
-                activityUserJoin: "Người dùng đã tham gia sự kiện",
-                activityUserLeft: "Người dùng đã rời khỏi sự kiện",
+                activityEnd: "Kết thúc hoạt động",
+                activityLaunch: "Khởi động hoạt động",
+                activityUserJoin: "Hoạt động Người dùng Tham gia",
+                activityUserLeft: "Hoạt động của người dùng còn lại",
                 asmrMessage: "Tin nhắn ASMR",
                 bitMessage: "Tin nhắn bit",
                 bopMessage: "Tin nhắn Bop",
-                callCalling: "Đang tiến hành tìm kiếm",
+                callCalling: "Gọi gọi",
                 callRinging: "Đổ chuông cuộc gọi",
                 clipError: "Lỗi clip",
-                clipSave: "Đã lưu đoạn phim",
+                clipSave: "Lưu clip",
                 ddrDown: "Giảm DDR",
-                ddrLeft: "DDR Sol",
+                ddrLeft: "DDR trái",
                 ddrRight: "DDR phải",
                 ddrUp: "Tăng DDR",
-                deafen: "làm điếc tai",
-                discodo: "Đĩa",
-                disconnect: "Đã ngắt kết nối",
+                deafen: "Điếc",
+                discodo: "sàn nhảy",
+                disconnect: "Ngắt kết nối",
                 duckyMessage: "Tin nhắn Ducky",
-                hangStatusSelect: "Tạm dừng lựa chọn trạng thái",
-                highfiveClap: "Tiếng vỗ tay cao năm",
-                highfiveWhistle: "Tiếng còi cao năm",
-                humanMan: "con người",
+                hangStatusSelect: "Chọn trạng thái treo",
+                highfiveClap: "Vỗ tay đập tay",
+                highfiveWhistle: "tiếng huýt sáo",
+                humanMan: "Con Người",
                 lofiMessage: "Tin nhắn LoFi",
                 mention1: "Đề cập đến 1 (@role)",
                 mention2: "Đề cập đến 2 (@mọi người)",
                 mention3: "Đề cập đến 3 (@here)",
                 message1: "Tin nhắn 1 (Chung)",
-                message2: "Tin nhắn 2 (Phản hồi trên máy chủ)",
+                message2: "Tin nhắn 2 (Trả lời trên máy chủ)",
                 message3: "Tin nhắn 3 (DM và DM nhóm)",
                 mute: "Tắt tiếng",
-                overlayUnlock: "Đã mở khóa lớp",
+                overlayUnlock: "Mở khóa lớp phủ",
                 poggermodeAchievement: "Thành tích Poggermode",
                 poggermodeApplause: "Tiếng vỗ tay của Poggermode",
                 poggermodeEnabled: "Đã bật chế độ Pogger",
@@ -3444,136 +3444,136 @@ const translations: MatchStructure<typeof enTranslations> = {
                 pttStart: "Bắt đầu PTT",
                 pttStop: "Dừng PTT",
                 reconnect: "Kết nối lại",
-                robotMan: "Robot Adam",
-                stageWaiting: "Cảnh chờ",
-                streamEnded: "Đã kết thúc phát sóng",
-                streamStarted: "Đã bắt đầu phát sóng",
-                streamUserJoined: "Người dùng đã tham gia chương trình phát sóng",
-                streamUserLeft: "Người dùng đã rời khỏi chương trình phát sóng",
+                robotMan: "Người máy",
+                stageWaiting: "Giai đoạn chờ đợi",
+                streamEnded: "Luồng đã kết thúc",
+                streamStarted: "Đã bắt đầu phát trực tuyến",
+                streamUserJoined: "Người dùng phát trực tuyến đã tham gia",
+                streamUserLeft: "Truyền trực tuyến người dùng còn lại",
                 success: "Thành công",
-                undeafen: "Loại bỏ điếc",
-                unmute: "Xóa im lặng",
-                userJoin: "Người dùng đã tham gia",
-                userLeave: "Người dùng còn lại",
+                undeafen: "Undeafen",
+                unmute: "Bật tiếng",
+                userJoin: "Người dùng tham gia",
+                userLeave: "Người dùng nghỉ phép",
                 userMoved: "Người dùng đã di chuyển",
-                vibingWumpus: "Wumpus bị mắc kẹt"
+                vibingWumpus: "Vibing Wumpus"
             }
         },
         customTimestamps: {
-            name: "Dấu thời gian tùy chỉnh",
+            name: "CustomTimestamps",
             description: "Dấu thời gian tùy chỉnh trên tin nhắn và chú giải công cụ",
             demo: {
-                cozy: "Nhấp vào tôi để chuyển sang định dạng thông thường",
-                compact: "Bấm vào tôi để chuyển sang định dạng nhỏ gọn",
+                cozy: "Nhấp vào tôi để chuyển sang định dạng Ấm cúng",
+                compact: "Nhấp vào tôi để chuyển sang định dạng Nhỏ gọn",
                 lastWeek: "Tin nhắn này đã được gửi vào tuần trước",
-                hover: "Bạn có thể xem các định dạng chú giải công cụ bằng cách di chuột qua dấu thời gian",
-                edit: "Chỉnh sửa các định dạng bên dưới, xem chúng được cập nhật trực tiếp tại đây"
+                hover: "Di chuột qua dấu thời gian để xem các định dạng chú giải công cụ",
+                edit: "Chỉnh sửa các định dạng bên dưới để xem chúng cập nhật trực tiếp tại đây"
             },
             modal: {
                 title: "Cách sử dụng:",
                 moment: "Tài liệu định dạng Moment.js",
-                hint: "Ngoài ra, bạn có thể sử dụng thông tin sau trong mục nhập của mình:",
-                calendar: "cho phép định dạng ngày động, ví dụ",
+                hint: "Ngoài ra, bạn có thể sử dụng những thứ này trong đầu vào của mình:",
+                calendar: "cho phép định dạng ngày động như",
                 today: "Hôm nay",
                 yesterday: "Hôm qua",
-                relative: "mang đến cho bạn những lúc như:",
+                relative: "mang lại cho bạn những thời điểm như",
                 relativeTime: "4 giờ trước",
                 preview: "Xem trước",
-                format: "định dạng lịch",
-                howTo: "Dưới đây là cách định dạng giá trị [calendar] khi được sử dụng trong dấu thời gian ở trên."
+                format: "Định dạng lịch",
+                howTo: "Cách định dạng giá trị [lịch] nếu được sử dụng trong các dấu thời gian trên."
             },
             option: {
                 formats: {
                     label: "Định dạng",
-                    description: "Tùy chỉnh định dạng dấu thời gian",
+                    description: "Tùy chỉnh các định dạng dấu thời gian",
                 },
                 cozyFormat: {
-                    label: "mod cứu trợ",
-                    description: "Định dạng thời gian sử dụng cho chế độ thư giãn trong tin nhắn"
+                    label: "Chế độ ấm cúng",
+                    description: "Định dạng thời gian để sử dụng trong tin nhắn ở chế độ ấm cúng"
                 },
                 compactFormat: {
-                    label: "Chế độ nhỏ gọn",
-                    description: "Định dạng thời gian để sử dụng ở chế độ thu gọn và khi di chuột qua tin nhắn"
+                    label: "Chế độ thu gọn",
+                    description: "Định dạng thời gian ở chế độ thu gọn và di chuột qua tin nhắn"
                 },
                 tooltipFormat: {
-                    label: "mẹo công cụ",
-                    description: "Định dạng thời gian để sử dụng trong chú giải công cụ"
+                    label: "Chú giải công cụ",
+                    description: "Định dạng thời gian để sử dụng trên chú giải công cụ"
                 },
                 ariaLabelFormat: {
                     label: "Nhãn Aria",
-                    description: "Định dạng thời gian để sử dụng trong thẻ Aria"
+                    description: "Định dạng thời gian để sử dụng trên nhãn aria"
                 },
                 sameDayFormat: {
-                    label: "cùng ngày",
+                    label: "Cùng ngày",
                     description: "[lịch] định dạng cho ngày hôm nay",
-                    default: "[Lỗi] HH:mm:ss"
+                    default: "[Hôm nay lúc] HH:mm:ss"
                 },
                 lastDayFormat: {
-                    label: "Hôm qua",
+                    label: "Ngày cuối cùng",
                     description: "[lịch] định dạng cho ngày hôm qua",
-                    default: "[Mỏng] HH:mm:ss"
+                    default: "[Ngày hôm qua lúc] HH:mm:ss"
                 },
                 lastWeekFormat: {
                     label: "Tuần trước",
                     description: "định dạng [lịch] cho tuần trước"
                 },
                 sameElseFormat: {
-                    label: "lớn hơn",
+                    label: "Cũ hơn",
                     description: "định dạng [lịch] cho ngày cũ hơn"
                 }
             }
         },
         customUserColors: {
-            name: "Màu sắc người dùng tùy chỉnh",
+            name: "CustomUserColors",
             description: "Cho phép bạn thêm màu tùy chỉnh cho bất kỳ người dùng nào, ở bất cứ đâu! Rất khuyến khích sử dụng với TypingTweaks và roleColorEverywhere",
             option: {
                 dmList: {
                     label: "Danh sách tin nhắn trực tiếp",
-                    description: "Tên người dùng được gán màu đặc biệt sẽ được tô màu trong danh sách DM"
+                    description: "Người dùng được xác định màu tùy chỉnh sẽ có tên trong danh sách DM được tô màu"
                 },
                 colorInServers: {
-                    label: "Màu trên máy chủ",
-                    description: "Có nên thay đổi màu tên trên máy chủ không?"
+                    label: "Màu sắc trong máy chủ",
+                    description: "Nếu màu tên nên được thay đổi trong máy chủ"
                 }
             },
             context: {
-                setColor: "Điều chỉnh màu"
+                setColor: "Đặt màu"
             },
             modal: {
                 custom: "Màu tùy chỉnh",
-                pick: "chọn một màu",
-                delete: "Xóa bản ghi",
+                pick: "Chọn một màu",
+                delete: "Xóa mục nhập",
                 save: "Cứu"
             }
         },
         dearrow: {
-            name: "thân yêu",
-            description: "Làm cho tiêu đề và hình thu nhỏ nhúng của YouTube ít giật gân hơn, được cung cấp bởi Dearrow",
+            name: "DeArrow",
+            description: "Làm cho tiêu đề và hình thu nhỏ nhúng của YouTube bớt giật gân hơn, được cung cấp bởi DeArrow",
             option: {
                 hideButton: {
                     label: "Nút Ẩn",
-                    description: "Ẩn nút Dearrow khỏi nội dung nhúng trên YouTube"
+                    description: "Ẩn nút DeArrow khỏi nội dung nhúng trên YouTube"
                 },
                 replaceElements: {
-                    label: "Thay đổi mục",
-                    description: "Chọn thành phần nào của phần nhúng để thay thế",
+                    label: "Thay thế phần tử",
+                    description: "Chọn thành phần nào của phần nhúng sẽ được thay thế",
                     everything: "Mọi thứ (Tiêu đề & Hình thu nhỏ)",
                     title: "Tiêu đề",
                     thumbnail: "Hình thu nhỏ"
                 },
                 dearrowByDefault: {
-                    label: "Dearrow theo mặc định",
-                    description: "Tự động thu nhỏ video"
+                    label: "DeArrow theo mặc định",
+                    description: "DeArrow video tự động"
                 }
             },
             tooltip: {
-                dearrowed: "Dearrow đã được áp dụng cho nội dung nhúng này, nhấp để khôi phục",
-                dearrow: "Nhấn vào đây để áp dụng"
+                dearrowed: "Nội dung nhúng này đã được DeArrowed; bấm vào để khôi phục",
+                dearrow: "Bấm vào DeArrow"
             }
         },
         declutter: {
-            name: "dọn dẹp",
-            description: "Dọn dẹp Discord bằng cách loại bỏ các thành phần UI không cần thiết như hiệu ứng hồ sơ, tab cửa hàng, tăng sức mạnh, v.v.",
+            name: "Declutter",
+            description: "Dọn dẹp Discord bằng cách xóa các thành phần UI không cần thiết như hiệu ứng hồ sơ, tab cửa hàng, tăng cường, v.v.",
             option: {
                 userProfileHeader: {
                     label: "Hồ sơ người dùng"
@@ -3584,97 +3584,97 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 removeProfileEffect: {
                     label: "Xóa hiệu ứng hồ sơ",
-                    description: "Loại bỏ các hiệu ứng hoạt hình xuất hiện khi mở hồ sơ."
+                    description: "Loại bỏ các hiệu ứng hoạt hình hồ sơ khi mở."
                 },
                 removeClanTag: {
                     label: "Xóa thẻ bang hội",
-                    description: "Loại bỏ thẻ clan."
+                    description: "Xóa thẻ bang hội."
                 },
                 alwaysShowUsername: {
                     label: "Luôn hiển thị tên người dùng",
-                    description: "Nó luôn hiển thị tên người dùng thay vì trạng thái."
+                    description: "Luôn hiển thị tên người dùng thay vì trạng thái."
                 },
                 accessibilityNotice: {
-                    label: "Cảnh báo khả năng truy cập",
+                    label: "Thông báo về khả năng tiếp cận",
                     description: "Discord đã có sẵn tùy chọn kiểu tên người dùng trong cài đặt Trợ năng."
                 },
                 friendsListHeader: {
                     label: "Trên danh sách bạn bè/DM"
                 },
                 removeShopAboveDM: {
-                    label: "Xóa cửa hàng trên danh sách DM",
-                    description: "Xóa nút lưu trữ phía trên danh sách DM."
+                    label: "Xóa cửa hàng trên DM",
+                    description: "Xóa các cửa hàng nằm trên danh sách DM."
                 },
                 removeQuestsAboveDM: {
-                    label: "Xóa nhiệm vụ khỏi danh sách DM",
-                    description: "Xóa nút nhiệm vụ phía trên danh sách DM."
+                    label: "Xóa nhiệm vụ trên DM",
+                    description: "Xóa các nhiệm vụ phía trên danh sách DM."
                 },
                 miscHeader: {
-                    label: "Nhiều"
+                    label: "linh tinh"
                 },
                 removeServerBoostInfo: {
                     label: "Xóa thông tin tăng cường máy chủ",
-                    description: "Xóa thông tin củng cố máy chủ ở đầu danh sách kênh."
+                    description: "Xóa thông tin tăng cường máy chủ phía trên danh sách kênh."
                 },
                 removeBillingSettings: {
                     label: "Xóa cài đặt thanh toán",
-                    description: "Xóa cài đặt thanh toán (hóa đơn)."
+                    description: "Xóa cài đặt thanh toán."
                 },
                 removeGiftButton: {
                     label: "Nút xóa quà tặng",
-                    description: "Loại bỏ nút gửi quà tặng."
+                    description: "Tháo nút quà tặng."
                 },
                 removeUnavailableEmojiPicker: {
-                    label: "Xóa Bộ chọn biểu tượng cảm xúc không khả dụng",
-                    description: "Loại bỏ các danh mục không thể truy cập trong bộ chọn biểu tượng cảm xúc."
+                    label: "Xóa Bộ chọn biểu tượng cảm xúc không có sẵn",
+                    description: "Xóa các danh mục không có sẵn khỏi bộ chọn biểu tượng cảm xúc."
                 },
                 removeAudioMenus: {
                     label: "Xóa menu âm thanh",
-                    description: "Loại bỏ các menu mũi tên bên cạnh nút tắt tiếng và điếc."
+                    description: "Loại bỏ các menu bên cạnh nút tắt tiếng và tắt tiếng."
                 },
                 removeButtonTooltips: {
-                    label: "Xóa gợi ý nút",
-                    description: "Nó loại bỏ các chú giải công cụ xuất hiện trên các nút."
+                    label: "Xóa chú giải công cụ nút",
+                    description: "Xóa chú giải công cụ nút."
                 }
             }
         },
         decodeBase64: {
-            name: "Giải mãBase64",
-            description: "Giải mã nội dung base64 của bất kỳ tin nhắn nào và sao chép nội dung được giải mã.",
+            name: "DecodeBase64",
+            description: "Giải mã nội dung Base64 của bất kỳ tin nhắn nào và sao chép nội dung được giải mã.",
             right: {
-                decode: "Sao chép đã giải quyết (Nhấp chuột trái) / Giải quyết Base64 (Nhấp chuột phải)",
-                copy: "Giải mã Base64 (Nhấp chuột trái) / Giải mã sao chép (Nhấp chuột phải)"
+                decode: "Sao chép Đã giải mã (Click chuột trái) / Giải mã Base64 (Click chuột phải)",
+                copy: "Giải mã Base64 (Click chuột trái) / Sao chép được giải mã (Click chuột phải)"
             },
             option: {
                 clickMethod: {
                     label: "Bấm vào phương pháp",
-                    description: "Thay đổi hành vi của nút để giải mã nội dung base64 của bất kỳ tin nhắn nào.",
-                    left: "Nhấp chuột trái để giải mã nội dung Base64.",
+                    description: "Thay đổi nút để giải mã nội dung Base64 của bất kỳ tin nhắn nào.",
+                    left: "Nhấn chuột trái để giải mã nội dung Base64.",
                     right: "Nhấp chuột phải để giải mã nội dung Base64."
                 }
             },
             modal: {
                 title: "Nội dung Base64 được giải mã",
-                content: "Nội dung hòa tan",
-                copy: "Sao chép nội dung đã giải quyết {{index}}",
-                copied: "Đã giải quyết nội dung được sao chép vào clipboard!"
+                content: "Nội dung được giải mã",
+                copy: "Sao chép nội dung đã giải mã {{index}}",
+                copied: "Nội dung được giải mã được sao chép vào clipboard!"
             }
         },
         decor: {
-            name: "Thiết kế nội thất",
+            name: "Decor",
             description: "Tạo và sử dụng trang trí hình đại diện tùy chỉnh của riêng bạn hoặc chọn mục yêu thích của bạn từ các cài đặt trước.",
-            presetPart: "Một phần của cài đặt trước {{name}}",
+            presetPart: "Một phần của cài đặt sẵn {{name}}",
             createdBy: "Được tạo bởi {{author}}",
             copy: "Sao chép ID đặt trước",
             file: "Tài liệu",
             your: {
-                title: "đồ trang trí",
-                subtitle: "Bạn có thể xóa đồ trang trí của riêng mình bằng cách nhấp chuột phải."
+                title: "Đồ trang trí của bạn",
+                subtitle: "Bạn có thể xóa đồ trang trí của riêng mình bằng cách nhấp chuột phải vào chúng."
             },
             option: {
                 changeDecoration: {
-                    label: "Thay đổi đồ trang trí",
-                    description: "Để thay đổi trang trí hình đại diện của bạn, hãy bật Trang trí và khởi động lại ứng dụng khách của bạn.",
+                    label: "Thay đổi trang trí",
+                    description: "Bật Trang trí và khởi động lại ứng dụng khách của bạn để thay đổi trang trí hình đại diện của bạn.",
                     also: "Bạn cũng có thể truy cập trang trí Trang trí từ trang {{profiles}}.",
                     profiles: "Hồ sơ"
                 },
@@ -3683,8 +3683,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "URL API trang trí"
                 },
                 agreedToGuidelines: {
-                    label: "Tôi đã chấp nhận các quy tắc",
-                    description: "Quy tắc được chấp nhận"
+                    label: "Đồng ý với Nguyên tắc",
+                    description: "Đồng ý với hướng dẫn"
                 }
             },
             context: {
@@ -3695,128 +3695,128 @@ const translations: MatchStructure<typeof enTranslations> = {
             alert: {
                 delete: {
                     title: "Xóa trang trí",
-                    body: "Bạn có chắc chắn muốn xóa trang trí {{trang trí}} không?",
-                    confirm: "Sil",
+                    body: "Bạn có chắc chắn muốn xóa {{decoration}} không?",
+                    confirm: "Xóa bỏ",
                     cancel: "Hủy bỏ"
                 },
                 logout: {
                     title: "Đăng xuất",
-                    body: "Bạn có chắc chắn muốn đăng xuất khỏi Dekor không?",
+                    body: "Bạn có chắc chắn muốn đăng xuất khỏi Decor không?",
                     confirm: "Đăng xuất",
                     cancel: "Hủy bỏ"
                 }
             },
             button: {
-                change: "Thay đổi đồ trang trí",
+                change: "Thay đổi trang trí",
                 remove: "Xóa trang trí",
                 apply: "Áp dụng",
                 cancel: "Hủy bỏ",
                 browse: "Duyệt qua",
                 submit: "Gửi để xem xét",
-                continue: "Devam Et",
+                continue: "Tiếp tục",
                 back: "Quay lại"
             },
             tooltip: {
-                pendingReview: "Bạn đã có một đồ trang trí đang được xem xét",
+                pendingReview: "Bạn đã có một đồ trang trí đang chờ xem xét",
                 pending: "Đang chờ xem xét"
             },
             join: {
-                tooltip: "Tham gia máy chủ Discord của Decor để xem lại trang trí của bạn và nhận thông báo khi các cài đặt trước mới được phát hành",
+                tooltip: "Tham gia máy chủ Discord của Decor để nhận thông báo về đánh giá trang trí của bạn và khi các cài đặt trước mới được phát hành",
                 button: "Máy chủ bất hòa"
             },
             create: {
-                title: "Tạo đồ trang trí",
-                notViolate: "Đảm bảo phần trang trí của bạn không vi phạm {{guidelines}} trước khi gửi.",
-                guidelines: "quy tắc",
+                title: "Tạo trang trí",
+                notViolate: "Đảm bảo trang trí của bạn không vi phạm {{guidelines}} trước khi gửi.",
+                guidelines: "các hướng dẫn",
                 file: "Tệp phải là PNG hoặc PNG.",
                 fileHolder: "Chọn một tập tin",
-                name: "Tên này sẽ được sử dụng khi đề cập đến vật trang trí này.",
+                name: "This name will be used when referring to this decoration.",
                 nameHolder: "Khối đồng hành",
-                nameTitle: "Quảng cáo"
+                nameTitle: "Tên"
             },
             help: {
-                update: "Tham gia {{server}} và cho phép tin nhắn trực tiếp nhận thông tin cập nhật về đánh giá trang trí của bạn.",
-                server: "Trang trí bất hòa"
+                update: "Để nhận thông tin cập nhật về bài đánh giá trang trí của bạn, hãy tham gia {{server}} và cho phép nhắn tin trực tiếp.",
+                server: "Máy chủ Discord của Decor"
             },
             guidelines: {
-                hold: "Chờ đợi",
-                suspended: "Bằng cách gửi đồ trang trí, bạn đồng ý với {{guidelines}}. Việc không đọc các quy tắc này có thể dẫn đến việc bạn bị đình chỉ quyền tạo thêm đồ trang trí trong tương lai.",
-                guidelines: "quy tắc"
+                hold: "Giữ lấy",
+                suspended: "Bằng cách gửi đồ trang trí, bạn đồng ý với {{guidelines}}. Việc không đọc những nguyên tắc này có thể khiến tài khoản của bạn bị đình chỉ tạo thêm đồ trang trí trong tương lai.",
+                guidelines: "các hướng dẫn"
             }
         },
         demonstration: {
-            name: "Biểu tình",
+            name: "Demonstration",
             description: "Plugin chụp ảnh màn hình chủ đề - người kiểm duyệt xác định hình ảnh và văn bản.",
             toolbox: {
-                toggle: "bị kiểm duyệt"
+                toggle: "Chuyển đổi trình diễn"
             },
-            keycode: "Hãy xem {{keycode}} để thay đổi phím nóng của bạn!",
-            this: "của chiếc xe này",
+            keycode: "Để thay đổi mã khóa của bạn, hãy xem {{keycode}}!",
+            this: "công cụ này",
             okay: "Được rồi!",
             option: {
                 keyBind: {
-                    label: "Phím nóng",
-                    description: "Nút sẽ bật và tắt chủ đề khi nhấn"
+                    label: "Liên kết khóa",
+                    description: "Phím chuyển đổi chủ đề khi nhấn"
                 },
                 soundVolume: {
-                    label: "Mức âm thanh",
-                    description: "Âm lượng bật/tắt âm thanh (0 = tắt)"
+                    label: "Âm lượng",
+                    description: "Âm thanh chuyển đổi lớn đến mức nào (0 để tắt)"
                 },
                 showConfirmationModal: {
-                    label: "Hiển thị cửa sổ xác nhận",
-                    description: "Hiện cửa sổ nhắc nhở lối tắt"
+                    label: "Hiển thị phương thức xác nhận",
+                    description: "Hiển thị một phương thức để nhắc bạn về phím tắt"
                 }
             },
             switch: {
                 note: "Bạn có thể bật lại cài đặt này sau",
-                disable: "Tắt cửa sổ xác nhận?"
+                disable: "Vô hiệu hóa phương thức?"
             },
-            shortcut: "Điều này sẽ kiểm duyệt tất cả các văn bản! Hãy nhớ phím tắt để tắt tính năng này:"
+            shortcut: "Điều này sẽ kiểm duyệt tất cả văn bản! Để tắt tính năng này, hãy nhớ phím tắt:"
         },
         devCompanion: {
-            name: "đồng hành cùng nhà phát triển",
-            description: "Plugin trợ lý nhà phát triển. Nếu bạn thấy điều gì đó không hoạt động hoặc có hành động kỳ lạ (rất có thể là lỗi), hãy báo cáo điều đó cho MutanPlex, gắn thẻ hoặc gửi tin nhắn cho nó, cảm ơn!",
+            name: "DevCompanion",
+            description: "Plugin đồng hành của Dev. Vui lòng báo cáo bất kỳ điều gì không hoạt động hoặc hoạt động kỳ lạ (rất có thể là lỗi) cho MutanPlex, bằng ping hoặc DM. Cảm ơn!",
             reconnect: "Kết nối lại",
             option: {
                 notifyOnAutoConnect: {
                     label: "Thông báo về Tự động kết nối",
-                    description: "Hiển thị thông báo khi Dev Companion tự động kết nối?"
+                    description: "Có thông báo khi Dev Companion tự động kết nối hay không."
                 },
                 usePatchedModule: {
-                    label: "Sử dụng mô-đun bản vá",
-                    description: "Đối với các yêu cầu xóa, hãy phản hồi bằng mô-đun đã vá hiện có (nếu được vá) thay vì mô-đun gốc."
+                    label: "Sử dụng mô-đun đã vá",
+                    description: "Đối với các yêu cầu giải nén, hãy trả lời bằng mô-đun đã vá hiện tại (nếu nó được vá) thay vì mô-đun gốc."
                 },
                 reloadAfterToggle: {
-                    label: "Sau khi cài đặt lại",
-                    description: "Cài đặt lại sau khi nhận được lệnh tắt/bật plugin."
+                    label: "Tải lại sau khi chuyển đổi",
+                    description: "Tải lại sau khi nhận được lệnh 'tắt/bật plugin'."
                 }
             },
             toast: {
                 title: "Đã kết nối đồng hành với nhà phát triển",
-                connected: "đã kết nối với WebSocket",
+                connected: "Đã kết nối với WebSocket",
                 disconnected: "Đồng hành Dev bị ngắt kết nối",
                 error: "Lỗi đồng hành với Dev",
-                reload: "Yêu cầu cài đặt lại",
-                failed: "Không khởi tạo được phần phụ thuộc: {{failures}}",
-                close: "Một phần tư",
-                stopping: "Lỗi dừng plugin {{plugin}}",
-                starting: "Lỗi khi khởi tạo plugin {{plugin}}",
+                reload: "Cần tải lại",
+                failed: "Không khởi động được phần phụ thuộc: {{failures}}",
+                close: "Đóng",
+                stopping: "Lỗi khi dừng plugin {{plugin}}",
+                starting: "Lỗi khi khởi động plugin {{plugin}}",
                 noMessage: "Không có thông báo lỗi",
-                noReason: "Lý do không được cung cấp"
+                noReason: "Không có lý do nào được cung cấp"
             }
         },
         disableCallIdle: {
-            name: "Vô hiệu hóa cuộc gọi không hoạt động",
-            description: "Tắt tính năng tự động thoát khỏi cuộc gọi thoại DM sau 3 phút và chuyển sang kênh thoại AFK."
+            name: "DisableCallIdle",
+            description: "Tắt tính năng tự động bị loại khỏi cuộc gọi thoại DM sau 3 phút và được chuyển sang kênh thoại AFK."
         },
         disableCameras: {
-            name: "Vô hiệu hóa Máy ảnh",
+            name: "DisableCameras",
             description: "Theo mặc định, tắt camera trong cuộc gọi"
         },
         discordDevBanner: {
-            name: "DiscordDevBiểu ngữ",
-            description: "Bật biểu ngữ nhà phát triển Discord hiển thị thông tin Build-ID.",
-            about: "Định dạng biểu ngữ dành cho nhà phát triển Discord. Bạn có thể sử dụng các biến sau:",
+            name: "DiscordDevBanner",
+            description: "Bật biểu ngữ nhà phát triển Discord, hiển thị ID bản dựng",
+            about: "Định dạng cho Discord Dev Banner. Bạn có thể sử dụng các biến sau:",
             preview: "Xem trước:",
             empty: "Định dạng không được để trống.",
             variables: {
@@ -3831,21 +3831,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                 plexcord: {
                     title: "Biến Plexcord",
                     icon: "Biểu tượng Plexcord",
-                    name: "Tên Plexcord",
+                    name: "Name of Plexcord",
                     version: "Phiên bản Plexcord (ví dụ: 1.0.0)",
-                    hash: "Băm cấu trúc Plexcord (ví dụ: 123456)",
-                    platform: "Nền tảng Plexcord chạy trên (ví dụ: Dev Build)"
+                    hash: "Băm xây dựng Plexcord (ví dụ: 123456)",
+                    platform: "Nền tảng Plexcord đang chạy (ví dụ: Dev Build)"
                 },
                 plextron: {
-                    title: "Biến tùy chỉnh Plextron",
-                    hashShort: "Hàm băm cấu trúc ngắn Plextron (ví dụ: 123456789)",
-                    platformType: "Loại nền tảng Plextron chạy trên (ví dụ: Dev Build)"
+                    title: "Các biến cụ thể của Plextron",
+                    hashShort: "Hàm băm xây dựng Plextron (ví dụ: 123456789)",
+                    platformType: "Nền tảng Plextron đang chạy (ví dụ: Dev Build)"
                 },
                 client: {
                     title: "Biến khách hàng",
-                    icon: "biểu tượng máy tính để bàn",
-                    name: "Tên khách hàng (ví dụ: Discord Canary)",
-                    version: "Phiên bản máy khách (ví dụ: 1.0.0)",
+                    icon: "Biểu tượng trên màn hình",
+                    name: "The name of the client (e.g. Discord Canary)",
+                    version: "Phiên bản của máy khách (ví dụ: 1.0.0)",
                 },
                 electron: {
                     title: "Biến điện tử",
@@ -3859,117 +3859,117 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 misc: {
                     title: "Các biến khác",
-                    newline: "ký tự dòng mới"
+                    newline: "Ký tự dòng mới"
                 }
             }
         },
         dontFilterMe: {
-            name: "ĐừngFilterMe",
-            description: "Cảnh báo bạn nếu tin nhắn của bạn chứa một thuật ngữ nằm trong danh sách sẵn sàng tự động kiểm duyệt",
+            name: "DontFilterMe",
+            description: "Cảnh báo bạn nếu tin nhắn của bạn chứa một thuật ngữ trong danh sách cài sẵn AutoMod",
             alert: {
-                title: "Đợi một chút!",
-                content: "Thư của bạn có chứa một thuật ngữ nằm trong danh sách sẵn sàng kiểm duyệt tự động. (Thuật ngữ '{{kích hoạt}}')",
-                content2: "Khả năng cao tin nhắn của bạn sẽ bị người kiểm duyệt máy chủ chặn và xử lý.",
+                title: "Giữ lấy!",
+                content: "Tin nhắn của bạn chứa một thuật ngữ trong danh sách cài sẵn AutoMod (Thuật ngữ: '{{trigger}}').",
+                content2: "Có khả năng cao thư của bạn sẽ bị người kiểm duyệt máy chủ chặn và có thể kiểm duyệt.",
                 confirm: "Vẫn gửi",
                 cancel: "Hủy bỏ"
             }
         },
         dontRoundMyTimestamps: {
             name: "DontRoundMyTimestamps",
-            description: "Luôn làm tròn dấu thời gian tương đối xuống để 7,6y trở thành 7y thay vì 8y"
+            description: "Luôn làm tròn dấu thời gian tương đối xuống, do đó 7,6y trở thành 7y thay vì 8y"
         },
         dragFavoriteEmotes: {
-            name: "KéoYêu thíchBiểu tượng cảm xúc",
-            description: "Thêm tính năng kéo và thả để thay đổi thứ tự các biểu tượng cảm xúc yêu thích"
+            name: "DragFavoriteEmotes",
+            description: "Thêm chức năng kéo và thả vào các biểu tượng cảm xúc yêu thích"
         },
         dragify: {
-            name: "Kéo",
-            description: "Kéo và thả người dùng, kênh hoặc người thuyết trình vào cuộc trò chuyện để thêm đề cập hoặc lời mời.",
+            name: "Dragify",
+            description: "Đưa người dùng, kênh hoặc máy chủ vào cuộc trò chuyện để chèn đề cập hoặc lời mời.",
             option: {
                 userOutput: {
                     label: "Đầu ra của người dùng",
-                    description: "Đầu ra bỏ học của người dùng.",
-                    mention: "đừng đề cập đến",
-                    id: "Danh tính người dùng (ID)"
+                    description: "Người dùng thả đầu ra.",
+                    mention: "Đề cập đến",
+                    id: "ID người dùng"
                 },
                 channelOutput: {
                     label: "Đầu ra kênh",
-                    description: "Đầu ra phát hành kênh.",
+                    description: "Đầu ra giảm kênh.",
                     mention: "#channel Đề cập",
-                    link: "Kết nối kênh",
+                    link: "Liên kết kênh",
                 },
                 inviteExpireAfter: {
-                    label: "Thời lượng lời mời",
-                    description: "Thời hạn hiệu lực của liên kết lời mời.",
+                    label: "Lời mời hết hạn sau",
+                    description: "Lời mời hết hạn",
                     never: "Không bao giờ",
                     thirtyMinutes: "30 phút",
-                    oneHour: "1 khoảnh khắc",
-                    sixHours: "6 khoảnh khắc",
-                    twelveHours: "12 khoảnh khắc",
+                    oneHour: "1 giờ",
+                    sixHours: "6 giờ",
+                    twelveHours: "12 giờ",
                     oneDay: "1 ngày",
                     sevenDays: "7 ngày"
                 },
                 inviteMaxUses: {
-                    label: "Số lần sử dụng tối đa",
-                    description: "Giới hạn sử dụng tối đa của lời mời.",
+                    label: "Mời sử dụng tối đa",
+                    description: "Số lần sử dụng tối đa cho lời mời",
                     noLimit: "Không giới hạn",
-                    one: "1 Cách sử dụng",
-                    five: "5 Cách sử dụng",
-                    ten: "10 Cách sử dụng",
-                    twentyFive: "25 Cách sử dụng",
+                    one: "1 lần sử dụng",
+                    five: "5 công dụng",
+                    ten: "10 công dụng",
+                    twentyFive: "25 công dụng",
                     fifty: "50 công dụng",
                     hundred: "100 công dụng"
                 },
                 inviteTemporaryMembership: {
-                    label: "Cung cấp tư cách thành viên tạm thời",
-                    description: "Nó cấp quyền thành viên tạm thời cho những người được mời.",
+                    label: "Mời thành viên tạm thời",
+                    description: "Cấp thành viên tạm thời.",
                 },
                 reuseExistingInvites: {
                     label: "Sử dụng lại lời mời hiện có",
-                    description: "Nó sử dụng lời mời hiện có thay vì tạo lời mời mới."
+                    description: "Sử dụng lại lời mời hiện có thay vì tạo lời mời mới."
                 },
                 allowChatBodyDrop: {
-                    label: "Cho phép thả vào nội dung trò chuyện",
-                    description: "Cho phép thả văn bản trực tiếp vào khu vực trò chuyện để thêm vào."
+                    label: "Cho phép thả nội dung trò chuyện",
+                    description: "Cho phép thả vào nội dung trò chuyện chính để chèn văn bản."
                 }
             },
             toast: {
                 failed: {
-                    drop: "Dragify không thể thực hiện thao tác.",
+                    drop: "Kéo không thể xử lý thả.",
                 },
                 invite: {
-                    created: "Lời mời đã được tạo.",
+                    created: "Đã tạo lời mời.",
                     unable: "Không thể tạo lời mời.",
-                    noChannel: "Không có kênh nào để tạo lời mời.",
+                    noChannel: "Không có kênh nào có sẵn cho lời mời.",
                 }
             },
             ghost: {
                 user: "người dùng",
-                server: "Người trình bày",
+                server: "Máy chủ",
                 dm: "Tin nhắn trực tiếp",
                 badge: {
                     channel: "kênh",
-                    thread: "tiêu đề",
-                    voice: "ses",
+                    thread: "chủ đề",
+                    voice: "tiếng nói",
                     forum: "diễn đàn",
                     media: "phương tiện truyền thông",
                     announcement: "thông báo",
                     dm: "dm",
                     user: "người dùng",
-                    server: "người dẫn chương trình"
+                    server: "máy chủ"
                 }
             }
         },
         elementHighlighter: {
-            name: "phần tử tô sáng",
-            description: "Dễ dàng đánh dấu và kiểm tra các mục.",
+            name: "ElementHighlighter",
+            description: "Làm nổi bật và kiểm tra các yếu tố một cách dễ dàng.",
             modal: {
                 recording: "Đang ghi...",
-                reset: "cài lại"
+                reset: "Cài lại"
             },
             option: {
                 keybind: {
-                    label: "Bài tập chính",
+                    label: "Liên kết khóa",
                     description: "Chuyển đổi công cụ đánh dấu"
                 },
                 showClasses: {
@@ -3982,27 +3982,27 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 showFont: {
                     label: "Hiển thị phông chữ",
-                    description: "Hiển thị họ và kích thước phông chữ được tính toán"
+                    description: "Hiển thị họ phông chữ và kích thước phông chữ được tính toán"
                 },
                 showPadding: {
                     label: "Hiển thị phần đệm",
-                    description: "Hiển thị các giá trị khoảng cách bên trong của phần tử"
+                    description: "Hiển thị giá trị đệm của phần tử"
                 },
                 showMargin: {
-                    label: "Hiển thị lề ngoài",
-                    description: "Hiển thị các giá trị không gian bên ngoài của phần tử"
+                    label: "Hiển thị ký quỹ",
+                    description: "Hiển thị giá trị lề của phần tử"
                 },
                 showBorderRadius: {
-                    label: "Hiển thị độ tròn của cạnh",
+                    label: "Hiển thị bán kính đường viền",
                     description: "Hiển thị giá trị bán kính đường viền của phần tử"
                 },
                 showPosition: {
                     label: "Hiển thị vị trí",
-                    description: "Hiển thị loại vị trí CSS và giá trị chỉ mục z của phần tử"
+                    description: "Hiển thị loại vị trí CSS và chỉ mục z của phần tử"
                 },
                 showDisplay: {
-                    label: "Hiển thị chế độ xem",
-                    description: "Hiển thị kiểu xem của phần tử cùng với thuộc tính flex hoặc lưới của nó"
+                    label: "Hiển thị màn hình",
+                    description: "Hiển thị kiểu hiển thị của phần tử cùng với thuộc tính flex hoặc lưới"
                 }
             },
             toast: {
@@ -4012,119 +4012,119 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         exitSounds: {
-            name: "ThoátÂm thanh",
-            description: "Khi bạn rời khỏi kênh âm thanh, âm thanh sẽ phát từ bảng âm thanh.",
-            button: "Đặt làm âm thanh đầu ra chung",
+            name: "ExitSounds",
+            description: "Phát âm thanh soundboard khi bạn ngắt kết nối với giọng nói.",
+            button: "Đặt làm âm thanh thoát chung",
             toast: {
-                failedToPlay: "Chúa ơi, không! Đã xảy ra lỗi."
+                failedToPlay: "Ối! Đã xảy ra lỗi."
             },
             option: {
                 soundGuildId: {
-                    label: "Nhận dạng máy chủ thoại (ID)",
-                    description: "Chọn máy chủ nơi chứa âm thanh.",
+                    label: "ID hội âm thanh",
+                    description: "Chọn máy chủ chứa âm thanh.",
                     placeholder: "Chọn máy chủ..."
                 },
                 soundId: {
-                    label: "Nhận dạng giọng nói (ID)",
+                    label: "ID âm thanh",
                     description: "Nhập ID của âm thanh bạn muốn phát.",
-                    placeholder: "Nhập ID giọng nói..."
+                    placeholder: "Nhập ID âm thanh..."
                 }
             }
         },
         experiments: {
-            name: "Thí nghiệm",
-            description: "Cung cấp quyền truy cập vào Thử nghiệm và các tính năng khác chỉ dành cho nhà phát triển trong Discord!",
+            name: "Experiments",
+            description: "Cho phép truy cập vào các thử nghiệm và các tính năng khác chỉ dành cho nhà phát triển trong Discord!",
             modal: {
                 about: {
                     title: "Thêm thông tin",
-                    body: "Bạn có thể mở Công cụ dành cho nhà phát triển của Discord bằng {{key}}"
+                    body: "Bạn có thể mở DevTools của Discord thông qua {{key}}"
                 },
                 warning: {
-                    title: "Chú ý!!",
-                    body: "Thử nghiệm là các tính năng Discord chưa được phát hành. Chúng có thể không hoạt động hoặc thậm chí có thể làm hỏng ứng dụng khách của bạn hoặc khiến tài khoản của bạn bị vô hiệu hóa.",
-                    notReponsible: "Chỉ sử dụng các thử nghiệm nếu bạn biết bạn đang làm gì. Plexcord không chịu trách nhiệm về bất kỳ thiệt hại nào có thể xảy ra khi kích hoạt thử nghiệm.",
-                    useAtOwnRisk: "Nếu bạn không biết thử nghiệm làm gì, hãy bỏ qua nó. Đừng hỏi chúng tôi họ làm gì, có lẽ chúng tôi cũng không biết.",
+                    title: "Giữ lấy!!",
+                    body: "Thử nghiệm là các tính năng Discord chưa được phát hành. Chúng có thể không hoạt động hoặc thậm chí làm hỏng ứng dụng khách của bạn hoặc khiến tài khoản của bạn bị vô hiệu hóa.",
+                    notReponsible: "Chỉ sử dụng các thử nghiệm nếu bạn biết mình đang làm gì. Plexcord không chịu trách nhiệm về bất kỳ thiệt hại nào do việc kích hoạt thử nghiệm gây ra.",
+                    useAtOwnRisk: "Nếu bạn không biết thử nghiệm làm gì, hãy bỏ qua nó. Đừng hỏi chúng tôi thí nghiệm làm gì; có lẽ chúng ta không biết.",
                     serverSideFeatures: "Không, bạn không thể sử dụng các tính năng phía máy chủ như đánh dấu vào ô 'Gửi cho Khách hàng'."
                 }
             },
             option: {
                 toolbarDevMenu: {
-                    label: "Menu nhà phát triển thanh công cụ",
-                    description: "Thay thế nút thanh công cụ trợ giúp (?) (trên cùng bên phải của trò chuyện) bằng menu nhà phát triển của Discord"
+                    label: "Menu phát triển của thanh công cụ",
+                    description: "Thay đổi nút thanh công cụ Trợ giúp (?) (trên cùng bên phải trong trò chuyện) thành menu nhà phát triển của Discord"
                 }
             }
         },
         exportMessages: {
-            name: "Xuất tin nhắn",
-            description: "Cho phép bạn xuất tin nhắn thành tập tin - một tin nhắn, tất cả tin nhắn của một người dùng hoặc tất cả tin nhắn của một kênh",
+            name: "ExportMessages",
+            description: "Cho phép bạn xuất tin nhắn thành tệp - tin nhắn đơn lẻ, tất cả tin nhắn từ người dùng hoặc tất cả tin nhắn kênh",
             option: {
                 maxMessages: {
                     label: "Tin nhắn tối đa",
-                    description: "Số lượng tin nhắn tối đa cần chuyển (0 = không giới hạn)"
+                    description: "Số lượng tin nhắn tối đa để xuất (0 = không giới hạn)"
                 },
                 includeAttachments: {
                     label: "Bao gồm tệp đính kèm",
-                    description: "Bao gồm thông tin đính kèm trong chuyển khoản"
+                    description: "Bao gồm thông tin đính kèm trong xuất khẩu"
                 },
                 includeEmbeds: {
-                    label: "Embedleri Dahil Et",
-                    description: "Bao gồm thông tin nhúng trong chuyển khoản"
+                    label: "Bao gồm nhúng",
+                    description: "Bao gồm thông tin nhúng trong xuất khẩu"
                 },
                 includeReactions: {
                     label: "Bao gồm các phản ứng",
-                    description: "Bao gồm thông tin phản ứng trong chuyển giao"
+                    description: "Bao gồm thông tin phản ứng trong xuất khẩu"
                 },
                 includeComponents: {
                     label: "Bao gồm các thành phần",
-                    description: "Bao gồm thông tin thành phần trong nhập khẩu"
+                    description: "Bao gồm thông tin thành phần trong xuất khẩu"
                 }
             },
             message: {
                 invalid: "Tin nhắn không hợp lệ - không có tác giả",
                 unknownUser: "Người dùng không xác định",
                 botEmbed: "Tin nhắn nhúng Bot",
-                attachments: "tệp đính kèm",
+                attachments: "Tệp đính kèm",
                 unknown: "Không xác định",
-                noUrl: "không có URL",
-                embeds: "Trình nhúng",
+                noUrl: "Không có URL",
+                embeds: "Nhúng",
                 title: "Tiêu đề",
-                description: "Giải thích",
+                description: "Sự miêu tả",
                 url: "URL",
-                footer: "thay thế",
-                author: "Nhà văn",
+                footer: "Chân trang",
+                author: "Tác giả",
                 fields: "Trường",
                 components: "Linh kiện",
                 component: "Thành phần",
                 interactiveElement: "Yếu tố tương tác",
                 reactions: "phản ứng",
                 errorFormatting: "Thông báo lỗi định dạng",
-                unknownError: "lỗi không xác định",
-                header: "{{titlePrefix}} {{displayName}}, {{channelName}} kanalında",
-                from: "Tin nhắn -",
+                unknownError: "Lỗi không xác định",
+                header: "{{titlePrefix}} {{displayName}} trong {{channelName}}",
+                from: "Tin nhắn từ",
                 direct: "Tin nhắn trực tiếp",
-                exported: "Ngày xuất",
+                exported: "Xuất trên",
                 total: "Tổng số tin nhắn"
             },
             toast: {
                 export: {
                     title: "Xuất tin nhắn",
-                    body: "Xuất tin nhắn không thành công"
+                    body: "Không xuất được tin nhắn"
                 },
                 noMessages: {
                     title: "Xuất tin nhắn",
-                    notFoundUser: "Không tìm thấy tin nhắn cho người dùng này",
+                    notFoundUser: "Không tìm thấy tin nhắn từ người dùng này trong kênh này",
                     notFoundChannel: "Không tìm thấy tin nhắn nào trong kênh này"
                 },
                 failed: {
                     title: "Xuất tin nhắn",
-                    body: "Đã xảy ra lỗi khi xuất tin nhắn"
+                    body: "Không thể xuất tin nhắn"
                 },
                 userNotFound: {
                     title: "Xuất tin nhắn",
                     body: "Không tìm thấy người dùng"
                 },
                 complete: {
-                    title: "Đã xuất xong",
+                    title: "Xuất hoàn tất",
                     saved: "Đã lưu tệp",
                     downloaded: "Tệp đã tải xuống",
                     messages: "tin nhắn"
@@ -4132,36 +4132,36 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             context: {
                 exportMessage: "Xuất tin nhắn này",
-                exportAll: "Xuất tất cả tin nhắn của {{user}}",
+                exportAll: "Xuất tất cả tin nhắn từ {{user}}",
                 user: "người dùng",
-                exportAllChannel: "Xuất tất cả tin nhắn của kênh"
+                exportAllChannel: "Xuất tất cả tin nhắn kênh"
             }
         },
         expressionCloner: {
-            name: "Biểu thức nhân bản",
-            description: "Cho phép bạn sao chép Biểu tượng cảm xúc và Nhãn dán vào máy chủ của riêng bạn (nhấp chuột phải)",
+            name: "ExpressionCloner",
+            description: "Cho phép bạn sao chép biểu tượng cảm xúc và nhãn dán vào máy chủ của riêng bạn (nhấp chuột phải vào chúng)",
             modal: {
-                title: "Danh từ riêng",
+                title: "Tên tùy chỉnh",
                 invalidName: "Tên phải dài từ 2 đến 32 ký tự và chỉ chứa các ký tự chữ và số"
             },
             toast: {
-                success: "{{name}} đã được sao chép thành công vào máy chủ {{guild}}!",
+                success: "Đã sao chép thành công {{name}} thành {{guild}}!",
                 yourServer: "máy chủ của bạn",
-                failed: "Nhân bản không thành công:",
+                failed: "Không sao chép được:",
                 console: "Đã xảy ra lỗi (kiểm tra bảng điều khiển!)"
             },
             context: {
-                clone: "{{type}} Bản sao",
-                cloneName: "{{dữ liệu}} Bản sao"
+                clone: "Nhân bản {{type}}",
+                cloneName: "Nhân bản {{data}}"
             }
         },
         f8break: {
-            name: "F8Nghỉ",
-            description: "Khi DevTools (+ điểm dừng) mở, việc nhấn F8 sẽ tạm dừng ứng dụng khách."
+            name: "F8Break",
+            description: "Tạm dừng ứng dụng khách khi bạn nhấn F8 khi đang mở DevTools (+ điểm dừng)."
         },
         fakeNitro: {
-            name: "Nitro giả",
-            description: "Cho phép bạn gửi biểu tượng cảm xúc/nhãn dán giả, sử dụng chủ đề nitro và phát trực tuyến với chất lượng nitro",
+            name: "FakeNitro",
+            description: "Cho phép bạn gửi biểu tượng cảm xúc/nhãn dán giả, sử dụng chủ đề Nitro và phát trực tuyến ở chất lượng Nitro",
             option: {
                 enableEmojiBypass: {
                     label: "Bật bỏ qua biểu tượng cảm xúc",
@@ -4169,337 +4169,337 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 emojiSize: {
                     label: "Kích thước biểu tượng cảm xúc",
-                    description: "Kích thước sử dụng khi gửi biểu tượng cảm xúc"
+                    description: "Kích thước của biểu tượng cảm xúc khi gửi"
                 },
                 transformEmojis: {
-                    label: "Chuyển đổi biểu tượng cảm xúc",
-                    description: "Xác định xem biểu tượng cảm xúc giả có được chuyển đổi thành biểu tượng cảm xúc thật hay không"
+                    label: "Biến đổi biểu tượng cảm xúc",
+                    description: "Có nên biến biểu tượng cảm xúc giả thành biểu tượng cảm xúc thật hay không"
                 },
                 enableStickerBypass: {
-                    label: "Bật hình dán Bỏ qua",
+                    label: "Bật bỏ qua nhãn dán",
                     description: "Cho phép gửi nhãn dán giả (cũng bỏ qua việc thiếu quyền sử dụng nhãn dán)"
                 },
                 stickerSize: {
                     label: "Kích thước nhãn dán",
-                    description: "Kích thước sử dụng khi gửi nhãn dán"
+                    description: "Kích thước của nhãn dán khi gửi"
                 },
                 transformStickers: {
-                    label: "Chuyển đổi nhãn dán",
-                    description: "Xác định xem nhãn dán giả có được chuyển đổi thành nhãn dán thật hay không"
+                    label: "Nhãn dán biến đổi",
+                    description: "Có nên biến nhãn dán giả thành nhãn dán thật không"
                 },
                 transformCompoundSentence: {
                     label: "Chuyển đổi câu ghép",
-                    description: "Xác định xem biểu tượng cảm xúc và hình dán giả trong câu ghép (các câu chứa nhiều nội dung hơn chỉ liên kết biểu tượng cảm xúc hoặc hình dán giả) có được chuyển đổi hay không"
+                    description: "Có chuyển đổi nhãn dán và biểu tượng cảm xúc giả thành câu ghép hay không (các câu có nhiều nội dung hơn chỉ là liên kết biểu tượng cảm xúc hoặc nhãn dán giả)"
                 },
                 enableStreamQualityBypass: {
-                    label: "Bật bỏ qua chất lượng phát sóng",
-                    description: "Cho phép phát trực tuyến ở chất lượng nitro"
+                    label: "Bật bỏ qua chất lượng luồng",
+                    description: "Cho phép phát trực tuyến ở chất lượng Nitro"
                 },
                 useStickerHyperLinks: {
-                    label: "Sử dụng cầu dán nhãn dán",
-                    description: "Xác định xem có nên sử dụng siêu liên kết khi gửi nhãn dán giả mạo hay không"
+                    label: "Sử dụng siêu liên kết nhãn dán",
+                    description: "Có nên sử dụng siêu liên kết khi gửi nhãn dán giả mạo hay không"
                 },
                 useEmojiHyperLinks: {
-                    label: "Sử dụng cầu nối biểu tượng cảm xúc",
-                    description: "Xác định xem có nên sử dụng siêu liên kết khi gửi biểu tượng cảm xúc giả mạo hay không"
+                    label: "Sử dụng siêu liên kết biểu tượng cảm xúc",
+                    description: "Có nên sử dụng siêu liên kết khi gửi biểu tượng cảm xúc giả mạo hay không"
                 },
                 hyperLinkText: {
-                    label: "siêu văn bản",
-                    description: "Văn bản sẽ sử dụng trong siêu liên kết. {{NAME}} sẽ được thay thế bằng tên biểu tượng cảm xúc/nhãn dán."
+                    label: "Văn bản siêu liên kết",
+                    description: "Văn bản nào siêu liên kết nên sử dụng. {{NAME}} sẽ được thay thế bằng tên biểu tượng cảm xúc/nhãn dán."
                 },
                 disableEmbedPermissionCheck: {
                     label: "Tắt kiểm tra quyền nhúng",
-                    description: "Xác định xem có tắt tính năng kiểm tra quyền nhúng khi gửi biểu tượng cảm xúc và nhãn dán giả hay không"
+                    description: "Có tắt tính năng kiểm tra quyền nhúng khi gửi biểu tượng cảm xúc và nhãn dán giả hay không"
                 }
             },
             modal: {
-                sticker: "Đây là nhãn dán FakeNitro và nó trông giống như nhãn dán thực sự chỉ dành cho bạn. Nó xuất hiện dưới dạng liên kết dành cho những người không sử dụng plugin.",
-                emoji: "Đây là biểu tượng cảm xúc FakeNitro và nó trông giống như biểu tượng cảm xúc thực sự chỉ dành cho bạn. Nó xuất hiện dưới dạng liên kết dành cho những người không sử dụng plugin."
+                sticker: "Đây là nhãn dán FakeNitro và hiển thị giống như nhãn dán thực sự chỉ dành cho bạn. Xuất hiện dưới dạng liên kết tới người dùng không sử dụng plugin.",
+                emoji: "Đây là biểu tượng cảm xúc FakeNitro và hiển thị giống như biểu tượng cảm xúc thực sự chỉ dành cho bạn. Xuất hiện dưới dạng liên kết tới người dùng không sử dụng plugin."
             },
             alert: {
                 notice: {
-                    title: "Chú ý!",
-                    body: "Bạn đang cố gắng gửi/chỉnh sửa tin nhắn có chứa biểu tượng cảm xúc hoặc nhãn dán FakeNitro nhưng bạn không có quyền nhúng liên kết vào kênh này. Bạn có chắc chắn muốn gửi tin nhắn này? Các mục FakeNitro của bạn sẽ chỉ xuất hiện dưới dạng liên kết.",
+                    title: "Giữ lấy!",
+                    body: "Bạn đang cố gắng gửi/chỉnh sửa tin nhắn có chứa biểu tượng cảm xúc hoặc nhãn dán FakeNitro; tuy nhiên, bạn không có quyền nhúng liên kết vào kênh hiện tại. Bạn có chắc chắn muốn gửi tin nhắn này? Các mục FakeNitro của bạn sẽ chỉ xuất hiện dưới dạng liên kết.",
                     footer: "Bạn có thể tắt cảnh báo này trong cài đặt FakeNitro",
                     confirm: "Vẫn gửi",
                     cancel: "Hủy bỏ",
-                    secondaryConfirm: "Đừng hiện lại lần nữa"
+                    secondaryConfirm: "Không hiển thị lại"
                 },
                 apngSticker: {
-                    title: "Chú ý!",
-                    body: "Bạn không thể gửi tin nhắn này vì nó chứa nhãn dán FakeNitro hoạt hình và bạn không có quyền thêm tệp vào kênh này. Bạn phải gỡ bỏ nhãn dán để tiếp tục."
+                    title: "Giữ lấy!",
+                    body: "Bạn không thể gửi tin nhắn này vì nó chứa nhãn dán FakeNitro hoạt hình và bạn không có quyền đính kèm tệp trong kênh hiện tại. Vui lòng gỡ nhãn dán để tiếp tục."
                 }
             }
         },
         fakeProfileThemes: {
-            name: "Chủ đề FakeProfile",
-            description: "Cung cấp chủ đề hồ sơ; Nó thêm các màu ẩn vào sinh học nhờ mã hóa 3y3 vô hình.",
+            name: "FakeProfileThemes",
+            description: "Cho phép tạo chủ đề hồ sơ bằng cách ẩn màu sắc trong tiểu sử của bạn nhờ mã hóa 3y3 vô hình",
             button: {
                 copy: "Sao chép 3y3"
             },
             modal: {
-                usage: "Sử dụng",
+                usage: "Cách sử dụng",
                 preview: "Xem trước",
-                intro: "Khi bạn kích hoạt plugin này, bạn sẽ thấy màu tùy chỉnh trên hồ sơ của những người khác sử dụng plugin tương thích.",
-                setColor: "Để đặt màu của riêng bạn:",
-                step1: "• chọn màu của bạn bằng cách sử dụng bộ chọn màu bên dưới",
+                intro: "Sau khi kích hoạt plugin này, bạn sẽ thấy màu tùy chỉnh trong hồ sơ của những người khác sử dụng plugin tương thích.",
+                setColor: "Để thiết lập màu sắc của riêng bạn:",
+                step1: "• Sử dụng công cụ chọn màu bên dưới để chọn màu của bạn",
                 step2: "• Nhấp vào nút {{copy}}",
-                step3: "• dán văn bản vô hình vào bất cứ đâu trong phần giới thiệu",
+                step3: "• Dán văn bản vô hình vào bất cứ đâu trong tiểu sử của bạn",
                 pickers: "Bộ chọn màu",
                 primary: "Sơ đẳng",
-                accent: "Nhấn mạnh"
+                accent: "Giọng"
             },
             option: {
                 nitroFirst: {
                     label: "Nitro đầu tiên",
-                    description: "Nguồn màu mặc định nếu cả hai đều có sẵn",
+                    description: "Nguồn màu mặc định nếu có cả hai",
                     nitro: "Màu nitơ",
-                    fake: "màu sắc giả"
+                    fake: "Màu giả"
                 }
             }
         },
         fakeProfileThemesAndEffects: {
-            name: "FakeProfileThemeAndEffects",
-            description: "Cho phép bạn thêm chủ đề hồ sơ và hiệu ứng hồ sơ; Nhờ mã hóa 3y3 vô hình, các màu sắc và hiệu ứng ẩn sẽ được thêm vào tiểu sử.",
+            name: "FakeProfileThemesAndEffects",
+            description: "Cho phép tạo chủ đề hồ sơ và hiệu ứng hồ sơ bằng cách ẩn màu sắc và hiệu ứng trong tiểu sử của bạn nhờ mã hóa 3y3 vô hình",
             option: {
                 prioritizeNitro: {
                     label: "Ưu tiên Nitro",
-                    description: "Nguồn lực cần ưu tiên",
+                    description: "Nguồn ưu tiên",
                     nitro: "Nitơ",
-                    aboutMe: "về tôi"
+                    aboutMe: "Giới thiệu về tôi"
                 },
                 hideBuilder: {
-                    label: "Ẩn người sáng tạo",
-                    description: "Ẩn FPTE Creator trong trang cài đặt Hồ sơ người dùng và Hồ sơ máy chủ"
+                    label: "Ẩn Trình tạo",
+                    description: "Ẩn FPTE Builder trong trang cài đặt Hồ sơ người dùng và Hồ sơ máy chủ"
                 }
             },
             modal: {
                 primary: "Sơ đẳng",
-                accent: "Nhấn mạnh",
+                accent: "Giọng",
                 effect: "Tác dụng",
                 usage: {
-                    title: "Sử dụng",
-                    intro: "Khi bạn kích hoạt plugin này, bạn sẽ thấy màu sắc và hiệu ứng chủ đề tùy chỉnh trên hồ sơ của những người khác sử dụng plugin này.",
+                    title: "Cách sử dụng",
+                    intro: "Sau khi kích hoạt plugin này, bạn sẽ thấy màu sắc và hiệu ứng chủ đề tùy chỉnh trong hồ sơ của những người khác sử dụng plugin này.",
                     setColor: "Để đặt màu sắc và hiệu ứng của riêng bạn:",
-                    step1: "Đi tới cài đặt hồ sơ",
-                    step2: "Sử dụng FPTE Creator để chọn màu sắc và hiệu ứng chủ đề hồ sơ",
+                    step1: "Đi tới cài đặt hồ sơ của bạn",
+                    step2: "Sử dụng FPTE Builder để chọn màu sắc và hiệu ứng chủ đề hồ sơ của bạn",
                     step3: "Nhấp vào nút {{copy}}",
-                    step4: "Dán văn bản vô hình vào bất cứ nơi nào bạn muốn trong tiểu sử của mình"
+                    step4: "Dán văn bản vô hình vào bất cứ đâu trong tiểu sử của bạn"
                 }
             },
             toast: {
                 copied: "FPTE đã sao chép vào clipboard!",
-                empty: "Máy phát điện FPTE trống; Không có gì để sao chép!"
+                empty: "FPTE Builder trống; không có gì để sao chép!"
             },
             button: {
-                copyFPTE: "Bản sao FPTE",
-                reset: "cài lại",
-                preview: "Bản xem trước của FPTE Creator",
-                buildBackwards: "Tạo FPTE tương thích ngược",
-                moreCharacters: "Nhiều ký tự hơn sẽ được sử dụng"
+                copyFPTE: "Sao chép FPTE",
+                reset: "Cài lại",
+                preview: "Bản xem trước của FPTE Builder",
+                buildBackwards: "Xây dựng FPTE tương thích ngược",
+                moreCharacters: "Sẽ sử dụng nhiều ký tự hơn"
             }
         },
         fastDeleteChannels: {
-            name: "Xóa nhanhKênh",
+            name: "FastDeleteChannels",
             description: "Thêm biểu tượng thùng rác để xóa kênh",
             option: {
                 keyBind: {
-                    label: "Phím nóng",
-                    description: "Chìa khóa dùng để mở và đóng thùng rác."
+                    label: "Liên kết khóa",
+                    description: "Phím chuyển đổi thùng rác khi nhấn."
                 },
                 reqCtrl: {
-                    label: "Cần có phím Ctrl",
-                    description: "Yêu cầu giữ phím Ctrl để mở thùng rác."
+                    label: "Yêu cầu kiểm soát",
+                    description: "Yêu cầu giữ phím Control."
                 },
                 reqShift: {
-                    label: "Cần có phím Shift",
-                    description: "Mở thùng rác yêu cầu giữ phím Shift."
+                    label: "Yêu cầu Ca",
+                    description: "Yêu cầu giữ phím Shift."
                 },
                 reqAlt: {
-                    label: "Cần có phím Alt",
-                    description: "Mở thùng rác yêu cầu giữ phím Alt."
+                    label: "Yêu cầu Alt",
+                    description: "Yêu cầu giữ phím Alt."
                 }
             }
         },
         favoriteEmojiFirst: {
-            name: "Biểu tượng cảm xúc yêu thíchĐầu tiên",
-            description: "Nó đặt biểu tượng cảm xúc yêu thích của bạn ở đầu danh sách tự động hoàn thành biểu tượng cảm xúc và cũng cung cấp biệt hiệu biểu tượng cảm xúc.",
+            name: "FavouriteEmojiFirst",
+            description: "Đặt biểu tượng cảm xúc yêu thích của bạn lên hàng đầu trong tính năng tự động hoàn thành biểu tượng cảm xúc và cũng cung cấp bí danh biểu tượng cảm xúc.",
             option: {
                 aliases: {
-                    label: "Biệt danh",
-                    description: "Quản lý biệt hiệu biểu tượng cảm xúc của bạn."
+                    label: "Bí danh",
+                    description: "Quản lý bí danh biểu tượng cảm xúc của bạn."
                 },
                 clearAll: {
                     label: "Xóa tất cả",
-                    description: "Xóa tất cả biệt hiệu."
+                    description: "Xóa tất cả bí danh."
                 }
             },
             modal: {
                 clear: {
                     title: "Xóa tất cả bí danh",
-                    description: "Thao tác này sẽ xóa mọi biệt hiệu biểu tượng cảm xúc mà bạn đã lưu.",
-                    confirm: "Xóa tất cả biệt danh"
+                    description: "Thao tác này sẽ xóa mọi bí danh biểu tượng cảm xúc mà bạn đã lưu.",
+                    confirm: "Xóa tất cả bí danh"
                 },
                 set: {
-                    title: "Đặt biệt hiệu",
-                    description: "Đặt biệt hiệu cho {{emoji}}",
-                    placeholder: "Biệt hiệu, ví dụ: 'Vui mừng'",
+                    title: "Đặt bí danh",
+                    description: "Đặt bí danh cho {{emoji}}",
+                    placeholder: "Bí danh, ví dụ: 'vui mừng'",
                     save: "Cứu",
-                    error: "Biệt hiệu trùng lặp"
+                    error: "Bí danh trùng lặp"
                 }
             },
             toast: {
-                set: "Biệt hiệu được đặt cho {{emoji}}",
-                clearAll: "Tất cả biệt hiệu biểu tượng cảm xúc đã bị xóa",
-                failedDeleted: "Xóa bí danh không thành công",
-                removed: "​​Bí danh cho {{alias}} đã bị xóa",
-                failedRemove: "Xóa bí danh không thành công",
-                duplicate: "Biệt hiệu trùng lặp",
-                failedSave: "Không thể đăng ký biệt hiệu"
+                set: "Bí danh được đặt cho {{emoji}}",
+                clearAll: "Đã xóa tất cả bí danh biểu tượng cảm xúc",
+                failedDeleted: "Không thể xóa bí danh",
+                removed: "Bí danh đã xóa: {{alias}}",
+                failedRemove: "Không xóa được bí danh",
+                duplicate: "Bí danh trùng lặp",
+                failedSave: "Không lưu được bí danh."
             },
             button: {
-                edit: "Chỉnh sửa biệt hiệu",
-                set: "Đặt biệt hiệu"
+                edit: "Chỉnh sửa bí danh",
+                set: "Đặt bí danh"
             }
         },
         favoriteGifSearch: {
-            name: "Yêu thíchGifTìm kiếm",
+            name: "FavouriteGifSearch",
             description: "Thêm thanh tìm kiếm vào ảnh GIF yêu thích.",
             placeholder: "Tìm kiếm ảnh GIF yêu thích",
             option: {
                 searchOption: {
                     label: "Tùy chọn tìm kiếm",
-                    description: "Phần nào của URL bạn muốn tìm kiếm",
-                    url: "Tất cả URL",
+                    description: "Phần URL bạn muốn tìm kiếm",
+                    url: "Toàn bộ URL",
                     path: "Chỉ đường dẫn (/somegif.gif)",
-                    hostandpath: "Máy chủ và đường dẫn (tenor.com somegif.gif)"
+                    hostandpath: "Máy chủ & Đường dẫn (tenor.com somgif.gif)"
                 }
             }
         },
         favouriteAnything: {
-            name: "Yêu thíchBất cứ điều gì",
+            name: "FavouriteAnything",
             description: "Yêu thích bất kỳ hình ảnh"
         },
         fileDownloadButton: {
-            name: "Nút Tải xuống Tệp",
-            description: "Thêm nút tải xuống vào góc trên bên phải của tệp"
+            name: "FileDownloadButton",
+            description: "Thêm nút Tải xuống vào góc trên cùng bên phải của tệp"
         },
         findReply: {
-            name: "Tìm câu trả lời",
-            description: "Chuyển tới câu trả lời cũ nhất cho tin nhắn trong một kênh (giúp theo dõi các cuộc hội thoại trước đây dễ dàng hơn).",
+            name: "FindReply",
+            description: "Chuyển tới câu trả lời sớm nhất cho tin nhắn trong một kênh (cho phép bạn theo dõi các cuộc hội thoại trước đây dễ dàng hơn).",
             context: {
-                jump: "Đi tới Trả lời"
+                jump: "Chuyển đến Trả lời"
             },
             toast: {
-                navigate: "Sử dụng bảng điều khiển phía dưới để điều hướng qua các câu trả lời.",
-                container: "Không tìm thấy phần tử vùng chứa.",
-                couldntFind: "Không tìm thấy tin nhắn phản hồi."
+                navigate: "Sử dụng bảng điều khiển phía dưới để điều hướng giữa các câu trả lời.",
+                container: "Không thể tìm thấy phần tử vùng chứa.",
+                couldntFind: "Không thể tìm thấy tin nhắn trả lời."
             },
             option: {
                 includePings: {
-                    label: "Bao gồm các đề cập",
-                    description: "Nó cũng tìm kiếm các tin nhắn được gửi trực tiếp đến tác giả."
+                    label: "Bao gồm Ping",
+                    description: "Cũng sẽ tìm kiếm các tin nhắn mà @ tác giả trực tiếp"
                 },
                 includeAuthor: {
                     label: "Bao gồm tác giả",
-                    description: "Tìm kiếm câu trả lời không chỉ cho bài viết cụ thể mà còn cho tác giả nói chung"
+                    description: "Cũng sẽ tìm kiếm những tin nhắn trả lời tác giả nói chung chứ không chỉ chính xác tin nhắn đó"
                 },
                 hideButtonIfNoReply: {
-                    label: "Nút Ẩn Nếu Không Phản Hồi",
+                    label: "Nút Ẩn Nếu Không Trả Lời",
                     description: "Ẩn nút nếu không có phản hồi cho tin nhắn"
                 }
             }
         },
         fixCodeblockGap: {
             name: "FixCodeblockGap",
-            description: "Xóa khoảng cách giữa các khối mã và văn bản bên dưới chúng"
+            description: "Loại bỏ khoảng cách giữa các khối mã và văn bản bên dưới chúng"
         },
         fixFileExtensions: {
             name: "FixFileExtensions",
             description: "Sửa các phần mở rộng tệp bằng cách đổi tên chúng thành định dạng được hỗ trợ tương thích nếu có thể"
         },
         fixImagesQuality: {
-            name: "FixHình ảnhChất lượng",
+            name: "FixImagesQuality",
             description: "Cải thiện chất lượng hình ảnh bằng cách buộc sử dụng nguồn gốc",
             option: {
                 originalImagesInChat: {
-                    label: "Hiển thị hình ảnh gốc trong trò chuyện",
-                    description: "Đồng thời hiển thị hình ảnh gốc trong Trò chuyện. CẢNH BÁO: Đọc các cảnh báo ở trên"
+                    label: "Hình ảnh gốc trong trò chuyện",
+                    description: "Đồng thời tải hình ảnh gốc trong trò chuyện. CẢNH BÁO: Đọc lưu ý ở trên"
                 }
             },
             modal: {
                 about: {
-                    title: "Hành vi mặc định như sau:",
-                    body: "&mdash; Hình ảnh được tối ưu hóa nhưng có độ phân giải đầy đủ sẽ được tải trong cuộc trò chuyện.",
-                    body2: "&mdash; Trong cửa sổ hình ảnh (phương thức hình ảnh), hình ảnh gốc sẽ được tải.",
-                    body3: "Bạn cũng có thể bật hình ảnh gốc trong cuộc trò chuyện nhưng hãy lưu ý những điều sau:",
-                    warning: "&mdash; Hình ảnh động (GIF, WebP, v.v.) trong trò chuyện sẽ luôn ở dạng động, ngay cả khi ứng dụng có tiêu điểm.",
-                    warning2: "&mdash; Nó có thể gây ra vấn đề về hiệu suất."
+                    title: "Hành vi mặc định là như sau:",
+                    body: "— Trong trò chuyện, hình ảnh được tối ưu hóa nhưng có độ phân giải đầy đủ sẽ được tải.",
+                    body2: "— Ở chế độ hình ảnh, hình ảnh gốc sẽ được tải.",
+                    body3: "Bạn cũng có thể bật hình ảnh gốc trong cuộc trò chuyện nhưng hãy cẩn thận với những lưu ý sau:",
+                    warning: "— Hình ảnh động (GIF, WebP, v.v.) trong trò chuyện sẽ luôn hoạt hình, bất kể ứng dụng có được tập trung hay không.",
+                    warning2: "- Có thể gây lag.",
                 }
             }
         },
         fixSpotifyEmbeds: {
-            name: "FixSpotifyNhúng",
-            description: "Sửa lỗi nhúng Spotify quá to, cho phép bạn tùy chỉnh âm lượng",
+            name: "FixSpotifyEmbeds",
+            description: "Khắc phục lỗi nhúng Spotify quá to bằng cách cho phép bạn tùy chỉnh âm lượng",
             option: {
                 volume: {
-                    label: "Mức âm thanh",
-                    description: "Phần trăm âm lượng để điều chỉnh cho nội dung nhúng Spotify. Trên 10% sẽ là quá cao"
+                    label: "Âm lượng",
+                    description: "% âm lượng cần đặt cho nội dung nhúng Spotify. Bất cứ điều gì trên 10% đều rất ồn ào"
                 }
             }
         },
         fixYoutubeEmbeds: {
-            name: "Sửa chữaYoutubeNhúng",
-            description: "Bỏ qua việc chặn xem video YouTube trong Discord (ví dụ: bởi UMG)"
+            name: "FixYoutubeEmbeds",
+            description: "Bỏ qua các video YouTube bị chặn hiển thị trên Discord (ví dụ: bởi UMG)"
         },
         followUser: {
-            name: "Theo dõiNgười dùng",
-            description: "Thêm tùy chọn theo dõi vào menu ngữ cảnh của người dùng; đảm bảo bạn luôn ở trên cùng một kênh thoại",
-            indicatorTooltip: "{{user}} đang được theo dõi (nhấp để kích hoạt thủ công, nhấp chuột phải để hủy theo dõi)",
+            name: "FollowUser",
+            description: "Thêm tùy chọn Theo dõi trong menu ngữ cảnh của người dùng để luôn ở cùng một VC với họ",
+            indicatorTooltip: "Đang theo dõi {{user}} (nhấp để kích hoạt thủ công, nhấp chuột phải để hủy theo dõi)",
             unknownUser: "Người dùng không xác định",
             option: {
                 executeOnFollow: {
-                    label: "Áp dụng khi bạn theo dõi",
-                    description: "Khi theo dõi người dùng, hãy đảm bảo họ ở trên cùng một kênh thoại"
+                    label: "Thực hiện theo dõi",
+                    description: "Đảm bảo ở cùng một VC khi theo dõi người dùng"
                 },
                 onlyManualTrigger: {
                     label: "Chỉ kích hoạt thủ công",
                     description: "Chỉ kích hoạt khi nhấp vào chỉ báo"
                 },
                 followLeave: {
-                    label: "Khi Theo Lá",
-                    description: "Khi người dùng được theo dõi rời đi, hãy rời đi"
+                    label: "Theo dõi",
+                    description: "Cũng rời đi khi người dùng được theo dõi rời đi"
                 },
                 autoMoveBack: {
                     label: "Tự động di chuyển trở lại",
-                    description: "Tự động chuyển về kênh thoại của người dùng đang theo dõi khi bạn di chuyển"
+                    description: "Tự động quay lại VC của người dùng được theo dõi khi bạn di chuyển"
                 },
                 followUserId: {
-                    label: "ID người dùng đã theo dõi",
+                    label: "Theo dõi ID người dùng",
                     description: "ID người dùng đã theo dõi"
                 },
                 channelFull: {
                     label: "Kênh đầy đủ",
-                    description: "Nếu kênh không còn đầy nữa, hãy thử chuyển bạn đến đó"
+                    description: "Cố gắng chuyển bạn đến kênh khi kênh không còn đầy"
                 }
             },
             toast: {
-                channelFull: "kênh đầy đủ",
-                newVc: "Người dùng được theo dõi đã chuyển sang kênh thoại mới",
+                channelFull: "Kênh đã đầy",
+                newVc: "Người dùng đã theo dõi vào kênh thoại mới",
                 insufficientPermissions: "Không đủ quyền để vào kênh thoại",
-                sameVc: "Bạn đã ở trên cùng một kênh",
-                disconnect: "Người dùng đã theo dõi đã rời khỏi, đã ngắt kết nối",
-                notFollowing: "Người dùng được theo dõi đã rời đi nhưng bạn không hủy theo dõi",
-                notVc: "Người dùng được theo dõi không có trên kênh thoại"
+                sameVc: "Bạn đã ở trong cùng một kênh",
+                disconnect: "Người dùng đã theo dõi còn lại; bị ngắt kết nối",
+                notFollowing: "Người dùng đã theo dõi đã rời đi nhưng không theo dõi và ngắt kết nối",
+                notVc: "Người dùng được theo dõi không ở trong kênh thoại"
             },
             context: {
-                follow: "Theo",
-                unfollow: "Hủy theo dõi"
+                follow: "Theo dõi người dùng",
+                unfollow: "Hủy theo dõi người dùng"
             }
         },
         fontLoader: {
-            name: "Trình tải phông chữ",
-            description: "Cài đặt bất kỳ phông chữ nào qua Google Fonts",
+            name: "FontLoader",
+            description: "Tải bất kỳ phông chữ nào từ Google Fonts",
             option: {
                 selectedFont: {
                     label: "Phông chữ đã chọn",
@@ -4507,10 +4507,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 fontSearch: {
                     label: "Tìm kiếm phông chữ",
-                    description: "Tìm kiếm và chọn font chữ qua Google Fonts"
+                    description: "Tìm kiếm và chọn Google Fonts"
                 },
                 applyOnCodeBlocks: {
-                    label: "Áp dụng cho khối mã",
+                    label: "Áp dụng trên khối mã",
                     description: "Áp dụng phông chữ cho khối mã"
                 }
             },
@@ -4519,149 +4519,149 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             modal: {
                 settings: {
-                    title: "Google Fonts'ta Ara",
-                    description: "Chọn một phông chữ để áp dụng",
+                    title: "Tìm kiếm phông chữ của Google",
+                    description: "Chọn một phông chữ để áp dụng nó",
                     placeholder: "Tìm kiếm phông chữ...",
-                    previewText: "Bệnh nhân mặc đồ ngủ nhanh chóng tin tưởng tài xế dầu nhớt",
-                    authors: "bởi {{tác giả}}"
+                    previewText: "Cáo nâu nhanh nhẹn nhảy qua chó lười",
+                    authors: "Bởi {{authors}}"
                 }
             }
         },
         forceOwnerCrown: {
-            name: "BuộcChủ Sở HữuVương Miện",
-            description: "Ngay cả khi máy chủ lớn, nó vẫn buộc hiển thị vương miện của chủ sở hữu máy chủ bên cạnh tên người dùng."
+            name: "ForceOwnerCrown",
+            description: "Buộc chủ sở hữu phải đặt tên bên cạnh tên người dùng ngay cả khi máy chủ lớn."
         },
         forwardAnywhere: {
-            name: "Chuyển tiếp mọi nơi",
-            description: "Nếu chuyển tiếp không thành công, nó sẽ gửi tin nhắn như một tin nhắn bình thường; Nó cũng cho phép truyền tải nội dung NSFW.",
+            name: "ForwardAnywhere",
+            description: "Nếu chuyển tiếp không thành công, hãy gửi nó dưới dạng tin nhắn bình thường; cũng cho phép chuyển tiếp NSFW",
             option: {
                 forwardPreface: {
-                    label: "Tiền tố chuyển tiếp",
-                    description: "Câu lệnh nào nên được thêm vào phần đầu của tin nhắn được truyền đi?"
+                    label: "Lời tựa chuyển tiếp",
+                    description: "Nội dung được chuyển tiếp nên được mở đầu bằng gì"
                 }
             },
             context: {
-                attachments: "tệp đính kèm",
-                forwarded: "Được chuyển tiếp từ:"
+                attachments: "Tệp đính kèm",
+                forwarded: "Chuyển tiếp từ"
             }
         },
         freaky: {
-            name: "kỳ dị",
-            description: "Lệnh /freaky cho phép bạn gửi tin nhắn bằng phông chữ lạ.",
+            name: "Freaky",
+            description: "Cho phép bạn gửi tin nhắn của mình bằng phông chữ lạ bằng lệnh /freaky.",
             command: {
-                freaky: "Thật kỳ lạ.",
-                message: "Gửi tin nhắn của bạn bằng phông chữ lạ"
+                freaky: "Thật quái đản.",
+                message: "Làm cho tin nhắn của bạn trở nên kỳ dị"
             },
             option: {
                 addFreakyEnding: {
-                    label: "Thêm cái kết kỳ lạ",
+                    label: "Thêm cái kết kỳ quái",
                     description: "Thêm 👅 hoặc ❤️ vào cuối"
                 }
             }
         },
         frequentQuickSwitcher: {
-            name: "Bộ chuyển đổi nhanh thường xuyên",
-            description: "Nó thay thế và lọc kết quả trong cửa sổ chuyển đổi nhanh bằng các kênh bạn sử dụng thường xuyên nhất."
+            name: "Frequent Quick Switcher",
+            description: "Viết lại và lọc các kết quả của Trình chuyển đổi nhanh thành các kênh bạn thường xuyên sử dụng nhất."
         },
         friendCloud: {
-            name: "Bạn BèĐám Mây",
-            description: "Thêm lệnh /friendcloud để trực quan hóa những người dùng mà bạn tương tác nhiều nhất.",
+            name: "FriendCloud",
+            description: "Thêm lệnh /friendcloud để trực quan hóa những người dùng mà bạn tương tác nhiều nhất",
             command: {
                 friendcloud: {
                     description: "Hình dung đám mây bạn bè của bạn",
                     count: "Số lượng người dùng hiển thị",
-                    mustHigher: "Số phải bằng 1 hoặc cao hơn!",
-                    noAffinities: "Không tìm thấy dữ liệu lân cận. Kiểm tra [cài đặt quyền riêng tư](<https://support.discord.com/hc/en-us/articles/21864805694999-Data-Used-to-Improve-Discord>).",
-                    noValid: "Không tìm thấy người dùng hợp lệ trong proxy. Kiểm tra [cài đặt quyền riêng tư](<https://support.discord.com/hc/en-us/articles/21864805694999-Data-Used-to-Improve-Discord>).",
-                    genFailed: "Không thể tạo được hình ảnh :c"
+                    mustHigher: "Số lượng phải là 1 hoặc cao hơn!",
+                    noAffinities: "Không tìm thấy mối quan hệ nào. Kiểm tra [cài đặt quyền riêng tư](<https://support.discord.com/hc/en-us/articles/21864805694999-Data-Used-to-Improve-Discord>).",
+                    noValid: "Không tìm thấy người dùng hợp lệ nào trong mối quan hệ. Kiểm tra [cài đặt quyền riêng tư](<https://support.discord.com/hc/en-us/articles/21864805694999-Data-Used-to-Improve-Discord>).",
+                    genFailed: "Không tạo được ảnh :c"
                 }
             }
         },
         friendCodes: {
-            name: "Mã bạn bè",
-            description: "Tạo Mã Bạn bè để dễ dàng thêm bạn bè",
+            name: "FriendCodes",
+            description: "Tạo mã bạn bè để dễ dàng thêm bạn bè",
             card: {
-                expires: "Hết hạn: <t:{{expiration}}:R> • Mức sử dụng {{uses}}/{{maxUses}}",
-                copy: "sao chép",
+                expires: "Hết hạn <t:{{expiration}}:R> • {{uses}}/{{maxUses}} sử dụng",
+                copy: "Sao chép",
                 copied: "Đã sao chép!",
-                codes: "Mã tình bạn của bạn",
-                count: "Mã bạn bè - {{invites}}",
-                create: "Tạo mã tình bạn",
-                revoke: "Hủy tất cả mã bạn bè",
+                codes: "Mã bạn bè của bạn",
+                count: "Mã Bạn Bè - {{invites}}",
+                create: "Tạo mã bạn bè",
+                revoke: "Thu hồi tất cả mã bạn bè",
                 loading: "Đang tải...",
                 dontHave: "Bạn không có bất kỳ mã bạn bè nào."
             }
         },
         friendInvites: {
-            name: "Lời mời bạn bè",
-            description: "Tạo và quản lý các liên kết mời bạn bè bằng các lệnh Slash (/tạo lời mời kết bạn,/xem lời mời kết bạn,/thu hồi lời mời kết bạn).",
+            name: "FriendInvites",
+            description: "Tạo và quản lý các liên kết mời kết bạn thông qua các lệnh gạch chéo (/tạo lời mời kết bạn, /xem lời mời kết bạn, /thu hồi lời mời kết bạn).",
             command: {
                 create: {
                     description: "Tạo liên kết mời bạn bè.",
-                    message: "discord.gg/{{code}}`\n· Hết hạn: <t:{{expiration}}:R>\n· Mức sử dụng tối đa: {{uses}}"
+                    message: "discord.gg/{{code}}`\n· Hết hạn <t:{{expiration}}:R>\n· Số lần sử dụng tối đa: {{uses}}"
                 },
                 view: {
-                    description: "Xem tất cả các liên kết mời bạn bè đã tạo.",
-                    message: "_discord.gg/{{code}__\n· Hết hạn: <t:{{expiration}}:R> \n· Số lần sử dụng: {{uses}}/{{maxUses}}",
-                    noInvites: "Bạn không có liên kết mời bạn bè đang hoạt động."
+                    description: "Xem danh sách tất cả lời mời kết bạn được tạo.",
+                    message: "_discord.gg/{{code}}_ \n· Hết hạn: <t:{{expiration}}:R> \n· Số lần sử dụng: {{uses}}/{{maxUses}}",
+                    noInvites: "Bạn không có lời mời kết bạn nào đang hoạt động."
                 },
                 revoke: {
-                    description: "Hủy mọi liên kết lời mời kết bạn đã được tạo.",
-                    message: "Tất cả các liên kết mời bạn bè đã bị hủy."
+                    description: "Thu hồi tất cả lời mời kết bạn đã tạo.",
+                    message: "Tất cả lời mời kết bạn đã bị thu hồi."
                 }
             }
         },
         friendshipRanks: {
-            name: "Thứ hạng tình bạn",
-            description: "Thêm huy hiệu cho biết bạn đã làm bạn với một người dùng được bao lâu.",
+            name: "FriendshipRanks",
+            description: "Thêm huy hiệu cho biết bạn đã làm bạn với người dùng được bao lâu",
             badge: {
                 sprout: {
-                    name: "Mầm",
-                    description: "Tình bạn của bạn đang nở rộ."
+                    name: "Sprout",
+                    description: "Tình bạn của bạn chỉ mới bắt đầu"
                 },
                 blooming: {
-                    name: "nở hoa",
-                    description: "Tình bạn của bạn đang được cải thiện! (1 tháng)"
+                    name: "Blooming",
+                    description: "Tình bạn của bạn đang đến đó! (1 tháng)"
                 },
                 burning: {
-                    name: "Rực rỡ",
-                    description: "Tình bạn của bạn đã đạt đến đỉnh cao. (3 tháng)"
+                    name: "Burning",
+                    description: "Tình bạn của bạn đã đạt đến tốc độ cuối cùng (3 tháng)"
                 },
                 fighter: {
-                    name: "máy bay chiến đấu",
-                    description: "Tình bạn của bạn rất bền chặt. (6 tháng)"
+                    name: "Fighter",
+                    description: "Tình bạn của bạn rất bền chặt (6 tháng)"
                 },
                 star: {
-                    name: "Ngôi sao",
-                    description: "Tình bạn của bạn đã diễn ra trong một thời gian dài. (1 năm)"
+                    name: "Star",
+                    description: "Tình bạn của bạn đã kéo dài được một thời gian (1 năm)"
                 },
                 royal: {
-                    name: "Kết quả",
-                    description: "Tình bạn của bạn đã vượt qua mọi thử thách - 2 năm!"
+                    name: "Royal",
+                    description: "Tình bạn của bạn đã trải qua nhiều thăng trầm - suốt 2 năm!"
                 },
                 besties: {
-                    name: "Người Bạn Thân Nhất",
-                    description: "Làm thế nào để bạn đạt được điều này??? (5 Năm)"
+                    name: "Besties",
+                    description: "Làm thế nào để bạn thậm chí quản lý điều này ??? (5 năm)"
                 }
             }
         },
         friendsSince: {
-            name: "Bạn bèKể từ",
-            description: "Nó hiển thị khi người dùng kết bạn với ai đó trong cửa sổ bật lên.",
-            section: "Ngày hẹn hò"
+            name: "FriendsSince",
+            description: "Hiển thị khi bạn trở thành bạn bè với ai đó trong cửa sổ bật lên của người dùng",
+            section: "Bạn bè kể từ"
         },
         friendTags: {
-            name: "Thẻ bạn bè",
-            description: "Bắt đầu tìm kiếm của bạn bằng & cho phép bạn lọc theo thẻ tùy chỉnh trong menu nhảy nhanh.",
+            name: "FriendTags",
+            description: "Cho phép bạn lọc theo thẻ tùy chỉnh trong Trình chuyển đổi nhanh bằng cách bắt đầu tìm kiếm với &",
             modal: {
-                name: "Tên",
-                users: "Người dùng (Phân tách bằng dấu phẩy)",
-                userlist: "Danh sách người dùng (Click vào người dùng để xóa)",
+                name: "Name",
+                users: "Người dùng (cách nhau bằng dấu phẩy)",
+                userlist: "Danh sách người dùng (nhấp vào người dùng để xóa)",
                 remove: "Di dời",
                 add: "Thêm vào",
-                tag: "Vé",
-                removeFrom: "Xóa khỏi:",
-                addTo: "Thêm vào:"
+                tag: "Nhãn",
+                removeFrom: "Xóa khỏi",
+                addTo: "Thêm vào"
             },
             option: {
                 tagConfiguration: {
@@ -4671,84 +4671,84 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         fullSearchContext: {
-            name: "Bối cảnh tìm kiếm đầy đủ",
-            description: "Nó làm cho menu ngữ cảnh thư trong kết quả tìm kiếm thư hoàn chỉnh với tất cả các tùy chọn mà bạn mong đợi."
+            name: "FullSearchContext",
+            description: "Làm cho menu ngữ cảnh thư trong kết quả tìm kiếm thư có tất cả các tùy chọn mà bạn mong đợi"
         },
         fullUserInChatbox: {
-            name: "Toàn bộ người dùng trong Chatbox",
-            description: "Thêm chức năng bổ sung như nhấp chuột trái/phải vào thẻ người dùng trong hộp trò chuyện."
+            name: "FullUserInChatbox",
+            description: "Làm cho đề cập của người dùng trong hộp trò chuyện có nhiều chức năng hơn, như nhấp chuột trái/phải"
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Cho phép hình đại diện bao trùm toàn bộ hộp trò chuyện thoại.",
+            description: "Làm cho hình đại diện chiếm toàn bộ ô VC",
             option: {
                 useServerProfileAvatars: {
                     label: "Sử dụng Avatar hồ sơ máy chủ",
-                    description: "Sử dụng hình đại diện của hồ sơ người thuyết trình trong hộp trò chuyện thoại (nếu có)"
+                    description: "Sử dụng hình đại diện hồ sơ máy chủ trong các kênh thoại của bang hội khi có sẵn."
                 }
             }
         },
         gameActivityToggle: {
-            name: "Hoạt động trò chơiChuyển đổi",
-            description: "Thêm nút chuyển vào cửa sổ bật lên của người dùng để hiển thị hoặc ẩn hoạt động chơi trò chơi của bạn.",
-            tooltip: "Thay đổi sự kiện trò chơi",
+            name: "GameActivityToggle",
+            description: "Thêm nút bật tắt vào cửa sổ bật lên của người dùng để hiển thị/ẩn hoạt động trò chơi của bạn",
+            tooltip: "Chuyển đổi hoạt động trò chơi",
             gameActivity: {
-                enabled: "Đã bật sự kiện trò chơi",
-                disabled: "Sự kiện trò chơi đã bị vô hiệu hóa"
+                enabled: "Đã bật hoạt động trò chơi",
+                disabled: "Hoạt động trò chơi bị vô hiệu hóa"
             },
             option: {
                 oldIcon: {
-                    label: "biểu tượng cổ xưa",
+                    label: "Biểu tượng cũ",
                     description: "Sử dụng kiểu biểu tượng cũ trước khi thiết kế lại biểu tượng Discord"
                 },
                 location: {
-                    label: "Phụ nữ",
-                    description: "Nơi hiển thị khóa sự kiện trò chơi",
-                    panel: "Bên cạnh Tắt tiếng/Tắt micrô",
-                    toolbox: "Plexcord trong Hộp công cụ"
+                    label: "Vị trí",
+                    description: "Nơi hiển thị nút chuyển đổi hoạt động trò chơi",
+                    panel: "Bên cạnh Tắt tiếng/Điếc",
+                    toolbox: "Hộp công cụ Plexcord"
                 }
             }
         },
         ghosted: {
-            name: "ma quái",
-            description: "Một hồn ma dễ thương xuất hiện bên cạnh những người mà bạn chưa trả lời tin nhắn trực tiếp.",
+            name: "Ghosted",
+            description: "Một con ma dễ thương sẽ xuất hiện nếu bạn không trả lời DM của họ",
             modal: {
                 title: "Người dùng bị ma",
                 no: "Không có người dùng bị ma",
-                unghost: "loại bỏ bóng ma",
-                unknown: "không rõ",
-                unnamedGroup: "Nhóm ẩn danh",
+                unghost: "không lưu trữ",
+                unknown: "Không xác định",
+                unnamedGroup: "Nhóm không tên",
                 unknownUser: "Người dùng không xác định",
                 clearAll: "Xóa tất cả",
                 noGhost: "Không có ma ở đây!",
-                clear: "thông thoáng"
+                clear: "Thông thoáng"
             },
             option: {
                 showIndicator: {
                     label: "Hiển thị chỉ báo",
-                    description: "Hiển thị bộ đếm ma ở đầu danh sách máy chủ."
+                    description: "Hiển thị bộ đếm ghost ở đầu danh sách máy chủ"
                 },
                 showDmIcons: {
                     label: "Hiển thị biểu tượng DM",
-                    description: "Hiển thị biểu tượng ma bên cạnh từng DM riêng lẻ."
+                    description: "Hiển thị biểu tượng ma bên cạnh từng DM riêng lẻ"
                 },
                 ignoreGroupDms: {
                     label: "Bỏ qua DM nhóm",
-                    description: "Giữ tất cả các tin nhắn nhóm ra khỏi danh sách ma."
+                    description: "Loại trừ tất cả DM nhóm khỏi bóng ma"
                 },
                 exemptedChannels: {
-                    label: "Kênh miễn trừ",
-                    description: "Danh sách ID kênh (ID) được phân tách bằng dấu phẩy sẽ không được đưa vào danh sách ma (nhấp chuột phải vào kênh DM để sao chép ID)."
+                    label: "Kênh được miễn",
+                    description: "Danh sách ID kênh được phân tách bằng dấu phẩy để tránh hiện tượng bóng ma (nhấp chuột phải vào kênh DM để sao chép ID của kênh đó)"
                 },
                 ignoreBots: {
                     label: "Bỏ qua Bot",
-                    description: "Bỏ qua DM từ bot."
+                    description: "Bỏ qua DM từ bot"
                 }
             }
         },
         gifCollections: {
-            name: "Bộ sưu tập Gif",
-            description: "Cho phép bạn tạo bộ sưu tập GIF.",
+            name: "GifCollection",
+            description: "Cho phép bạn tạo bộ sưu tập ảnh GIF",
             context: {
                 copyImageLink: "Sao chép liên kết hình ảnh",
                 copyUrl: "Sao chép URL",
@@ -4759,27 +4759,27 @@ const translations: MatchStructure<typeof enTranslations> = {
                     create: "Tạo bộ sưu tập",
                     remove: "Di dời",
                     information: "Thông tin thu thập",
-                    name: "Tên",
-                    gifs: "Tát",
-                    created: "Ngày tạo",
+                    name: "Name",
+                    gifs: "GIF",
+                    created: "Được tạo tại",
                     updated: "Cập nhật lần cuối",
-                    close: "Một phần tư",
+                    close: "Đóng",
                     rename: "Đổi tên",
                     move: "Chuyển đến Bộ sưu tập",
-                    select: "Chọn bộ sưu tập để di chuyển"
+                    select: "Chọn một bộ sưu tập để di chuyển mục tới"
                 },
                 gif: {
                     information: "Thông tin",
-                    added: "Ngày thêm",
+                    added: "Đã thêm vào lúc",
                     width: "Chiều rộng",
                     height: "Chiều cao",
-                    close: "Một phần tư"
+                    close: "Đóng"
                 }
             },
             option: {
                 itemPrefix: {
                     label: "Tiền tố mục",
-                    description: "Tiền tố cho các phần tử GIF"
+                    description: "Tiền tố cho các mục GIF"
                 },
                 collectionPrefix: {
                     label: "Tiền tố bộ sưu tập",
@@ -4794,35 +4794,35 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Dừng cảnh báo xóa"
                 },
                 showCopyImageLink: {
-                    label: "Hiển thị tùy chọn liên kết hình ảnh sao chép",
-                    description: "Hiển thị {{copyImageLink}} trong menu ngữ cảnh"
+                    label: "Hiển thị liên kết hình ảnh sao chép",
+                    description: "Hiển thị tùy chọn {{copyImageLink}} trong menu ngữ cảnh"
                 },
                 preventDuplicates: {
-                    label: "Ngăn ngừa tái phát",
+                    label: "Ngăn chặn trùng lặp",
                     description: "Ngăn chặn việc thêm cùng một GIF vào bộ sưu tập nhiều lần"
                 },
                 defaultEmptyCollectionImage: {
                     label: "Hình ảnh bộ sưu tập trống mặc định",
-                    description: "Hình ảnh/GIF hiển thị khi không có hình ảnh/GIF nào trong bộ sưu tập"
+                    description: "Hình ảnh/GIF sẽ được hiển thị khi bộ sưu tập không có hình ảnh/GIF"
                 },
                 collectionsSortType: {
                     label: "Loại sắp xếp bộ sưu tập",
-                    description: "Sắp xếp loại bộ sưu tập"
+                    description: "Kiểu sắp xếp cho bộ sưu tập"
                 },
                 collectionsSortOrder: {
                     label: "Thứ tự sắp xếp bộ sưu tập",
-                    description: "Sắp xếp thứ tự các bộ sưu tập"
+                    description: "Thứ tự sắp xếp của các bộ sưu tập"
                 },
                 collectionsSort: {
                     label: "Sắp xếp bộ sưu tập",
-                    description: "Xác định cách sắp xếp các bộ sưu tập",
+                    description: "Quyết định cách sắp xếp các bộ sưu tập",
                     title: "Sắp xếp bộ sưu tập",
-                    sortDescription: "Chọn sắp xếp theo bộ sưu tập của bạn",
+                    sortDescription: "Chọn tiêu chí sắp xếp cho bộ sưu tập của bạn",
                     sortBy: "Sắp xếp theo",
-                    name: "Tên",
+                    name: "Name",
                     creationDate: "Ngày tạo",
                     modifiedDate: "Ngày sửa đổi",
-                    ascending: "Đang phát triển",
+                    ascending: "Tăng dần",
                     descending: "Giảm dần"
                 },
                 importGifs: {
@@ -4837,25 +4837,25 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 resetCollections: {
                     label: "Đặt lại bộ sưu tập",
-                    description: "Đặt lại bộ sưu tập về mặc định (xóa tất cả bộ sưu tập)",
+                    description: "Đặt lại bộ sưu tập về mặc định (xóa tất cả bộ sưu tập của bạn)",
                     button: "Đặt lại bộ sưu tập"
                 }
             },
             toast: {
                 copied: "Đã sao chép liên kết hình ảnh vào clipboard!",
                 urlCopied: "Đã sao chép URL vào khay nhớ tạm!",
-                already: "Bộ sưu tập này đã tồn tại",
-                alreadyCollection: "GIF này đã tồn tại trong bộ sưu tập"
+                already: "Bộ sưu tập đó đã tồn tại",
+                alreadyCollection: "GIF đó đã có trong bộ sưu tập đó"
             },
             modal: {
                 create: {
                     title: "Tạo bộ sưu tập",
-                    name: "Tên bộ sưu tập",
+                    name: "Collection Name",
                     create: "Tạo nên"
                 },
                 rename: {
                     title: "Đổi tên bộ sưu tập",
-                    name: "Tên bộ sưu tập mới",
+                    name: "New Collection Name",
                     warning: "Tên không thể dài hơn 24 ký tự",
                     rename: "Đổi tên"
                 }
@@ -4863,141 +4863,141 @@ const translations: MatchStructure<typeof enTranslations> = {
             alert: {
                 import: {
                     title: "Bạn có chắc không?",
-                    body: "Nhập bộ sưu tập sẽ ghi đè bộ sưu tập hiện có.",
-                    confirm: "Iche Aktar",
-                    cancel: "Hủy bỏ"
+                    body: "Nhập bộ sưu tập sẽ ghi đè bộ sưu tập hiện tại của bạn.",
+                    confirm: "Nhập khẩu",
+                    cancel: "Đừng bận tâm"
                 },
                 reset: {
                     title: "Bạn có chắc không?",
-                    body: "Việc đặt lại bộ sưu tập sẽ xóa tất cả các bộ sưu tập.",
-                    confirm: "cài lại",
-                    cancel: "Hủy bỏ"
+                    body: "Việc đặt lại bộ sưu tập sẽ xóa tất cả bộ sưu tập của bạn.",
+                    confirm: "Cài lại",
+                    cancel: "Đừng bận tâm"
                 },
                 delete: {
                     title: "Bạn có chắc không?",
                     deleteBody: "Bạn có thực sự muốn xóa bộ sưu tập này?",
                     removeBody: "Bạn có thực sự muốn xóa mục này?",
-                    confirm: "Sil",
+                    confirm: "Xóa bỏ",
                     remove: "Di dời",
-                    cancel: "Hủy bỏ"
+                    cancel: "Đừng bận tâm"
                 }
             }
         },
         gifPaste: {
-            name: "GifDán",
-            description: "Nó cho phép bạn dán ảnh GIF trực tiếp vào hộp trò chuyện."
+            name: "GifPaste",
+            description: "Cho phép bạn dán ảnh GIF trực tiếp vào hộp trò chuyện"
         },
         gifRoulette: {
             name: "GifRoulette",
-            description: "Thêm lệnh gửi ảnh GIF ngẫu nhiên từ mục yêu thích của bạn; Có 10% cơ hội gắn thẻ chủ sở hữu máy chủ!",
+            description: "Thêm lệnh gửi ảnh GIF ngẫu nhiên từ mục yêu thích của bạn, với cơ hội 1/10 để ping chủ sở hữu máy chủ",
             command: {
                 gifRoulette: {
-                    description: "Hãy thử vận ​​may của bạn và gửi một ảnh GIF ngẫu nhiên"
+                    description: "Cám dỗ số phận và gửi ảnh GIF"
                 }
             },
             option: {
                 pingOwnerChance: {
-                    label: "Cơ hội gắn thẻ chủ sở hữu máy chủ",
-                    description: "Đặt cơ hội gắn thẻ chủ sở hữu máy chủ là 1 trên 10 (đúng vậy!)"
+                    label: "Cơ hội sở hữu Ping",
+                    description: "Có nên có 1/10 cơ hội ping chủ guild không (ồ không)"
                 }
             }
         },
         gitHubRepos: {
             name: "GitHubRepos",
-            description: "Hiển thị kho GitHub công khai của người dùng trên hồ sơ của họ.",
-            loading: "Kho lưu trữ đang tải...",
+            description: "Hiển thị kho GitHub công khai của người dùng trong hồ sơ của họ",
+            loading: "Đang tải kho lưu trữ...",
             option: {
                 showStars: {
                     label: "Hiển thị các ngôi sao",
-                    description: "Hiển thị sao kho"
+                    description: "Hiển thị sao kho lưu trữ"
                 },
                 showLanguage: {
                     label: "Hiển thị ngôn ngữ",
-                    description: "Hiển thị ngôn ngữ lập trình chính của kho lưu trữ"
+                    description: "Hiển thị ngôn ngữ chính của kho lưu trữ"
                 },
                 showInMiniProfile: {
                     label: "Hiển thị trong Hồ sơ nhỏ",
-                    description: "Hiển thị kho lưu trữ trong cửa sổ hồ sơ nhỏ"
+                    description: "Hiển thị các kho lưu trữ trong cửa sổ bật lên hồ sơ nhỏ"
                 },
                 showRepositoryTab: {
                     label: "Hiển thị tab kho lưu trữ",
-                    description: "Hiển thị tab kho lưu trữ trong chế độ hồ sơ (nút ẩn trên các liên kết khi được bật)"
+                    description: "Hiển thị tab kho lưu trữ trong chế độ hồ sơ (ẩn nút trong các kết nối khi được bật)"
                 }
             },
             error: {
-                error: "Thậm chí",
-                render: "Lỗi: GithubRepos không thể hiển thị"
+                error: "Lỗi",
+                render: "Lỗi: Không thể hiển thị GitHubRepos"
             },
             button: {
                 show: "Hiển thị kho lưu trữ GitHub",
                 repositories: "Kho GitHub",
                 more: "Hiển thị thêm",
-                only: "Chỉ hiển thị {{length}}/{{total}} tốt nhất"
+                only: "Chỉ hiển thị hàng đầu {{length}}/{{total}}"
             },
             modal: {
                 title: "Kho lưu trữ GitHub của {{user}}",
-                repository: "kho lưu trữ",
-                description: "Giải thích",
-                language: "Dil",
+                repository: "Kho lưu trữ",
+                description: "Sự miêu tả",
+                language: "Ngôn ngữ",
                 stars: "Ngôi sao",
                 viewOnGitHub: "Xem trên GitHub",
-                close: "Một phần tư"
+                close: "Đóng"
             }
         },
         googleThat: {
-            name: "GoogleCái đó",
-            description: "Thêm lệnh cho phép bạn gửi kết nối tìm kiếm trên Internet.",
+            name: "GoogleThat",
+            description: "Thêm lệnh gửi liên kết tìm kiếm trên internet",
             command: {
                 googleThat: {
                     description: "Gửi liên kết công cụ tìm kiếm",
-                    query: "truy vấn tìm kiếm"
+                    query: "Truy vấn tìm kiếm"
                 }
             },
             option: {
                 hyperlink: {
-                    label: "Cầu",
-                    description: "Liệu liên kết đã gửi có được gửi dưới dạng siêu liên kết với thẻ truy vấn hay không"
+                    label: "Siêu liên kết",
+                    description: "Liên kết đã gửi có nên siêu liên kết với truy vấn dưới dạng nhãn hay không"
                 },
                 embed: {
-                    label: "Nội dung nhúng",
-                    description: "Có hiển thị liên kết đã gửi dưới dạng nội dung được nhúng hay không"
+                    label: "Nhúng",
+                    description: "Liên kết đã gửi có hiển thị nội dung nhúng hay không"
                 },
                 defaultEngine: {
-                    label: "Công cụ tìm kiếm mặc định",
+                    label: "Công cụ mặc định",
                     description: "Công cụ tìm kiếm để sử dụng"
                 },
                 customEngineURL: {
-                    label: "URL công cụ tìm kiếm tùy chỉnh",
-                    description: "URL của công cụ tìm kiếm bạn muốn sử dụng"
+                    label: "URL công cụ tùy chỉnh",
+                    description: "URL của công cụ bạn muốn sử dụng"
                 }
             }
         },
         greetStickerPicker: {
-            name: "Chào hỏiStickerPicker",
-            description: "'Vẫy tay và nói xin chào!' Nhấp chuột phải vào nút sẽ cho phép bạn sử dụng nhãn dán chào mừng mà bạn muốn thay vì nhãn dán ngẫu nhiên.",
+            name: "GreetStickerPicker",
+            description: "Cho phép bạn sử dụng bất kỳ nhãn dán chào mừng nào thay vì chỉ nhãn dán ngẫu nhiên bằng cách nhấp chuột phải vào 'Vẫy chào để chào!' cái nút",
             mode: {
-                greet: "Xin chào",
+                greet: "Chào hỏi",
                 message: "Tin nhắn"
             },
             option: {
                 greetMode: {
                     label: "Chế độ chào hỏi",
                     description: "Chọn chế độ chào",
-                    greet: "Lời chào (bạn chỉ có thể gửi lời chào 3 lần)",
-                    message: "Tin nhắn (bạn có thể gửi lời chào không giới hạn)"
+                    greet: "Chào (chỉ được chào 3 lần)",
+                    message: "Tin nhắn (bạn có thể chào thư rác)"
                 }
             },
             context: {
-                label: "Bộ chọn nhãn dán lời chào",
+                label: "Bộ chọn hình dán chào hỏi",
                 mode: "Chế độ chào hỏi",
-                stickers: "Nhãn dán lời chào",
-                multi: "Nhiều lời chào",
+                stickers: "Nhãn dán chào hỏi",
+                multi: "Lời chào đa năng không thánh thiện",
                 send: "Gửi lời chào"
             }
         },
         guildPickerDumper: {
             name: "GuildPickerDumper",
-            description: "Thêm menu ngữ cảnh cho phép bạn xuất và tải xuống biểu tượng cảm xúc và nhãn dán của máy chủ.",
+            description: "Menu ngữ cảnh để kết xuất và tải xuống biểu tượng cảm xúc và nhãn dán của máy chủ.",
             context: {
                 download: {
                     emoji: "Tải xuống biểu tượng cảm xúc",
@@ -5006,49 +5006,49 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         guildTagSettings: {
-            name: "GuildTagCài đặt",
-            description: "Thêm cài đặt thẻ máy chủ, chẳng hạn như ẩn thẻ máy chủ hoặc tắt lời nhắc sử dụng thẻ.",
+            name: "GuildTagSettings",
+            description: "Thêm một số cài đặt cho thẻ bang hội, chẳng hạn như ẩn chúng hoặc tắt lời nhắc chấp nhận chúng.",
             option: {
                 hideTags: {
                     label: "Ẩn thẻ",
-                    description: "Làm cho thẻ máy chủ trở nên vô hình"
+                    description: "Ẩn thẻ"
                 },
                 disableAdoptTagPrompt: {
-                    label: "Đóng cảnh báo xác nhận quyền sở hữu thẻ",
-                    description: "Tắt lời nhắc sử dụng (yêu cầu) thẻ máy chủ"
+                    label: "Vô hiệu hóa lời nhắc thẻ thông qua",
+                    description: "Tắt lời nhắc chấp nhận thẻ"
                 }
             }
         },
         hideChatButtons: {
-            name: "Ẩn nút trò chuyện",
-            description: "Cho phép bạn ẩn các nút trò chuyện.",
+            name: "HideChatButtons",
+            description: "Có thể ẩn các nút trò chuyện",
             tooltip: {
-                close: "Một phần tư",
-                open: "Đói bụng"
+                close: "Đóng",
+                open: "Mở"
             },
             option: {
                 color: {
                     label: "Màu sắc",
-                    description: "Hiển thị màu đỏ khi bật"
+                    description: "Tô màu đỏ khi mở"
                 },
                 open: {
                     label: "Mở",
-                    description: "Bật theo mặc định"
+                    description: "Được mở theo mặc định"
                 }
             }
         },
         hideMedia: {
-            name: "Ẩn phương tiện",
-            description: "Nó cho phép bạn ẩn tệp đính kèm và nội dung được nhúng trong một số tin nhắn nhất định bằng một nút xuất hiện khi di chuột qua.",
+            name: "HideMedia",
+            description: "Ẩn tệp đính kèm và nội dung nhúng cho từng tin nhắn thông qua nút di chuột",
             show: "Hiển thị phương tiện",
             hide: "Ẩn phương tiện",
             hidden: "Phương tiện ẩn"
         },
         hideMessages: {
-            name: "Ẩn tin nhắn",
-            description: "Tạm thời ẩn tin nhắn cho đến khi bạn khởi động lại.",
+            name: "HideMessages",
+            description: "Một plugin để tạm thời ẩn tin nhắn cho đến khi bạn khởi động lại.",
             button: {
-                hide: "trốn"
+                hide: "Trốn"
             },
             option: {
                 hidePopoverButton: {
@@ -5058,28 +5058,28 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         hideServers: {
-            name: "Máy chủ ẩn",
+            name: "HideServers",
             description: "Ẩn máy chủ khỏi danh sách máy chủ",
             context: {
                 hide: "Ẩn máy chủ",
-                unhide: "Hiển thị máy chủ",
+                unhide: "Hiện máy chủ",
                 folder: {
                     hide: "Ẩn thư mục",
-                    unhide: "Hiển thị thư mục"
+                    unhide: "Bỏ ẩn thư mục"
                 }
             },
             option: {
                 showIndicator: {
-                    label: "Hiển thị chỉ số",
-                    description: "Hiển thị menu ở phía dưới để hiển thị các máy chủ ẩn trong danh sách"
+                    label: "Hiển thị chỉ báo",
+                    description: "Hiển thị menu để hiện máy chủ ở cuối danh sách"
                 },
                 guildsList: {
-                    label: "Danh sách máy chủ",
+                    label: "Danh sách bang hội",
                     description: "Xóa máy chủ ẩn"
                 },
                 resetHidden: {
-                    label: "Đặt lại máy chủ ẩn",
-                    description: "Xóa tất cả các máy chủ ẩn khỏi danh sách",
+                    label: "Đặt lại ẩn",
+                    description: "Xóa tất cả các bang hội ẩn khỏi danh sách",
                     button: "Đặt lại máy chủ ẩn"
                 }
             },
@@ -5089,14 +5089,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 remove: "Di dời",
                 folder: "Thư mục",
                 removeAll: "Xóa tất cả",
-                guilds: "Máy chủ",
+                guilds: "Bang hội",
                 noHiddenServers: "Không có máy chủ ẩn"
             }
         },
         holyNotes: {
-            name: "ThánhNotes",
+            name: "HolyNotes",
             description: "Holy Notes cho phép bạn lưu tin nhắn",
-            main: "Tốt",
+            main: "Chủ yếu",
             button: {
                 tooltip: "Thánh ghi chú",
                 save: "Lưu ghi chú",
@@ -5110,72 +5110,72 @@ const translations: MatchStructure<typeof enTranslations> = {
                 create: "Tạo sổ tay",
                 copyText: "Sao chép văn bản",
                 copyAttachment: "Sao chép URL đính kèm",
-                deleteNote: "Notu Sil",
+                deleteNote: "Xóa ghi chú",
                 moveNote: "Di chuyển ghi chú",
                 moveTo: "Di chuyển đến {{key}}",
                 copyId: "Sao chép giấy tờ tùy thân"
             },
             modal: {
                 error: {
-                    generic: "Đã xảy ra lỗi khi xử lý điểm của bạn. Kiểm tra bảng điều khiển để biết chi tiết.",
-                    easter: "Không tìm thấy ghi chú nào. Quả chuối đồng cảm đang ở bên bạn.",
-                    empty: "Không có ghi chú nào được lưu trong sổ tay này."
+                    generic: "Đã xảy ra lỗi khi phân tích ghi chú của bạn. Kiểm tra bảng điều khiển để biết chi tiết.",
+                    easter: "Không có ghi chú nào được tìm thấy. Đồng cảm Banana ở đây dành cho bạn.",
+                    empty: "Không tìm thấy ghi chú nào được lưu trong sổ tay này."
                 },
                 help: {
                     title: "Giúp đỡ",
                     description: "Tìm hiểu cách sử dụng Holy Notes",
                     addingNotes: "Thêm ghi chú",
-                    addingNotesText: "Để thêm ghi chú, hãy nhấp chuột phải vào tin nhắn, trỏ tới 'Tin nhắn ghi chú' và chọn sổ ghi chép bạn muốn thêm ghi chú vào.",
+                    addingNotesText: "Để thêm ghi chú, nhấp chuột phải vào tin nhắn, sau đó di chuột qua mục 'Tin nhắn ghi chú' và nhấp vào nút có tên sổ ghi chép mà bạn muốn ghi chú vào tin nhắn.",
                     prototype: "Nguyên mẫu",
-                    noteMessage: "Một cú nhấp chuột vào nút 'Thông báo ghi chú' sẽ thêm nó vào Sổ cái chính theo mặc định!",
-                    deletingNotes: "Không phải Silme",
-                    deletingNotesText: "Để xóa ghi chú, bạn có thể nhấp chuột phải và chọn 'Xóa ghi chú' hoặc giữ phím 'DELETE' trên bàn phím và nhấp vào ghi chú.",
-                    movingNotes: "Di chuyển một ghi chú",
-                    movingNotesText: "Để di chuyển ghi chú, nhấp chuột phải và chọn sổ ghi chép bạn muốn di chuyển từ tùy chọn 'Di chuyển ghi chú'.",
-                    jumpToMessage: "Đi tới Tin nhắn",
-                    jumpToMessageText: "Để đi tới tin nhắn chứa ghi chú, hãy nhấp chuột phải vào ghi chú đó và chọn 'Chuyển đến Tin nhắn'."
+                    noteMessage: "Mặc định bấm vào nút 'Note Message' sẽ ghi chú vào Main!",
+                    deletingNotes: "Xóa ghi chú",
+                    deletingNotesText: "Lưu ý: bạn có thể nhấp chuột phải vào ghi chú và nhấn 'Xóa ghi chú' hoặc bạn có thể giữ phím 'DELETE' trên bàn phím và nhấp vào ghi chú; nó giống như phép thuật vậy!",
+                    movingNotes: "Di chuyển ghi chú",
+                    movingNotesText: "Để di chuyển ghi chú, nhấp chuột phải vào ghi chú và di chuột qua mục 'Di chuyển ghi chú' rồi nhấp vào nút tương ứng với sổ ghi chú bạn muốn di chuyển ghi chú tới.",
+                    jumpToMessage: "Chuyển tới tin nhắn",
+                    jumpToMessageText: "Để chuyển đến vị trí ban đầu của ghi chú, chỉ cần nhấp chuột phải vào ghi chú và nhấn 'Chuyển đến tin nhắn'."
                 },
                 notebook: {
                     title: "SỔ TAY",
                     search: "Tìm kiếm tin nhắn...",
                     options: "Tùy chọn sắp xếp",
-                    label: "Trình đơn sắp xếp",
-                    filteredOf: "{{filteredCount}}/{{noteCount}} không",
-                    note: "{{noteCount}} không",
-                    ada: "Ngày tăng dần/thêm",
+                    label: "Thực đơn sắp xếp",
+                    filteredOf: "{{filteredCount}} trong số {{noteCount}} ghi chú{{s}}",
+                    note: "{{noteCount}} lưu ý{{s}}",
+                    ada: "Tăng dần/Ngày thêm",
                     amd: "Tăng dần/Ngày nhắn tin",
-                    dda: "Ngày giảm dần/thêm",
+                    dda: "Giảm dần/Ngày thêm",
                     dmd: "Giảm dần / Ngày nhắn tin",
                     change: "Thay đổi sắp xếp",
-                    ascending: "Đang phát triển",
+                    ascending: "Tăng dần",
                     descending: "Giảm dần",
                     dateAdded: "Ngày thêm",
                     messageDate: "Ngày tin nhắn"
                 },
                 create: {
                     title: "Tạo sổ tay",
-                    description: "Nhập tên của sổ ghi chép mới",
+                    description: "Nhập tên cho sổ ghi chép mới của bạn",
                     placeholder: "Tên sổ ghi chép"
                 },
                 delete: {
-                    title: "{{notebookName}} Silinsin Mi?",
-                    description: "{{noteCount}} ghi chú sẽ bị xóa vĩnh viễn",
-                    button: "Sil"
+                    title: "Xóa {{notebookName}}?",
+                    description: "{{noteCount}} lưu ý{{s}} sẽ bị xóa vĩnh viễn",
+                    button: "Xóa bỏ"
                 },
                 tabs: {
                     label: "Tab sổ tay"
                 }
             },
             toast: {
-                saved: "Tin nhắn đã được thêm thành công vào {{notebook}}.",
-                deleted: "Ghi chú đã được xóa thành công khỏi {{notebook}}.",
-                moved: "Ghi chú đã được di chuyển thành công từ sổ ghi chép {{from}} sang sổ ghi chép {{to}}.",
-                exists: "Sổ tay có tên {{notebookName}} đã tồn tại.",
-                created: "{{notebookName}} đã được tạo thành công.",
-                deletedNotebook: "{{notebookName}} đã được xóa thành công.",
-                refreshed: "Avatar đã được làm mới thành công.",
-                deletedAll: "Tất cả các ghi chú đã được xóa thành công.",
-                imported: "Ghi chú đã được nhập thành công.",
+                saved: "Đã thêm tin nhắn thành công vào {{notebook}}",
+                deleted: "Đã xóa thành công ghi chú khỏi {{notebook}}",
+                moved: "Đã chuyển thành công ghi chú từ {{from}} sang {{to}}.",
+                exists: "Sổ ghi chép {{notebookName}} đã tồn tại.",
+                created: "Đã tạo thành công {{notebookName}}.",
+                deletedNotebook: "Đã xóa thành công {{notebookName}}.",
+                refreshed: "Đã làm mới avatar thành công.",
+                deletedAll: "Đã xóa thành công tất cả ghi chú.",
+                imported: "Đã nhập ghi chú thành công.",
                 invalid: "Không thể nhập ghi chú."
             },
             toolbox: {
@@ -5183,12 +5183,12 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         homeTyping: {
-            name: "Trang chủĐánh máy",
-            description: "Nếu ai đó đang viết trong tin nhắn trực tiếp của bạn, nó sẽ biến nút home thành chỉ báo đang viết."
+            name: "HomeTyping",
+            description: "Thay đổi nút home thành chỉ báo đang gõ nếu ai đó trong DM của bạn đang gõ"
         },
         iconViewer: {
-            name: "Trình xem biểu tượng",
-            description: "Thêm tab mới trong cài đặt để xem trước tất cả các biểu tượng.",
+            name: "IconViewer",
+            description: "Thêm tab mới vào cài đặt để xem trước tất cả các biểu tượng.",
             toolbox: "Mở tab biểu tượng",
             iconFinder: "Trình tìm biểu tượng",
             about: {
@@ -5197,19 +5197,19 @@ const translations: MatchStructure<typeof enTranslations> = {
                 list: {
                     copy: "Sao chép tên biểu tượng và biến CSS",
                     download: "Tải xuống các biểu tượng ở các định dạng khác nhau (SVG, PNG, GIF, v.v.)",
-                    premade: "Sao chép các biểu tượng được tạo sẵn cho plugin của bạn",
+                    premade: "Sao chép các tìm kiếm biểu tượng được tạo sẵn cho plugin của bạn",
                     find: "Tìm biểu tượng theo ngữ cảnh chức năng",
-                    search: "Tìm kiếm màu bằng cách nhấp chuột phải vào tên màu",
-                    special: "lời cảm ơn đặc biệt"
+                    search: "Tìm kiếm màu bằng cách nhấn chuột phải vào tên màu",
+                    special: "Cảm ơn đặc biệt"
                 }
             },
             context: {
                 icon: {
                     options: "Tùy chọn biểu tượng",
-                    log: "In ra bảng điều khiển (Nhật ký)",
+                    log: "Đăng nhập vào bảng điều khiển",
                     save: "Lưu dưới dạng...",
-                    rightClick: "Nhấp chuột phải vào biểu tượng để thay thế",
-                    usage: "Sử dụng",
+                    rightClick: "Nhấn chuột phải vào biểu tượng để thay đổi",
+                    usage: "Cách sử dụng",
                     click: "Bấm để sao chép",
                     copied: "Đã sao chép!",
                     actions: "hành động"
@@ -5217,7 +5217,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             modal: {
                 label: "Tìm kiếm theo ngữ cảnh chức năng",
-                search: "Tìm kiếm trong {{count}} ký hiệu...",
+                search: "Tìm kiếm biểu tượng {{count}}...",
                 function: "Chức năng",
                 iconViewer: {
                     colors: "Màu sắc của trình xem biểu tượng",
@@ -5226,33 +5226,33 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         idleAutoRestart: {
-            name: "Nhàn rỗiTự độngKhởi động lại",
-            description: "Nó tự động khởi động lại ứng dụng khi bạn không sử dụng trong một khoảng thời gian nhất định nhưng ngăn việc khởi động lại khi bạn đang ở kênh âm thanh.",
+            name: "IdleAutoRestart",
+            description: "Tự động khởi động lại máy khách sau khi không hoạt động trong một khoảng thời gian có thể định cấu hình nhưng tránh khởi động lại khi bạn đang ở trong VC.",
             option: {
                 isEnabled: {
-                    label: "Hiệu quả",
-                    description: "Cho phép tự động khởi động lại sau khi không hoạt động"
+                    label: "Đã bật",
+                    description: "Bật tự động khởi động lại sau khi không hoạt động"
                 },
                 idleMinutes: {
-                    label: "Thời gian nhàn rỗi (Phút)",
-                    description: "Thời gian không hoạt động trước khi khởi động lại (không phải trên kênh âm thanh)"
+                    label: "Phút nhàn rỗi",
+                    description: "Số phút không hoạt động trước khi khởi động lại (khi không ở trong VC)"
                 }
             },
             toolbox: {
-                disable: "Tắt tự động khởi động lại",
-                enable: "Bật tự động khởi động lại"
+                disable: "Vô hiệu hóa Tự động khởi động lại khi không hoạt động",
+                enable: "Bật Tự động khởi động lại khi không hoạt động"
             }
         },
         ignoreActivities: {
-            name: "Bỏ qua các hoạt động",
-            description: "Ngăn chặn các sự kiện chỉ xuất hiện trong trạng thái. Bạn có thể chỉ định những trò chơi nào cần bỏ qua trong tab Trò chơi và Sự kiện đã lưu hoặc sử dụng cài đặt chung bên dưới.",
+            name: "IgnoreActivities",
+            description: "Bỏ qua các hoạt động CHỈ hiển thị trên trạng thái của bạn. Bạn có thể định cấu hình những trò chơi nào bị bỏ qua cụ thể từ tab Trò chơi và Hoạt động đã đăng ký hoặc sử dụng cài đặt chung bên dưới",
             modal: {
                 import: {
                     title: "Nhập ID ứng dụng của plugin CustomRPC vào danh sách bộ lọc"
                 },
                 filter: {
                     title: "Danh sách bộ lọc",
-                    description: "Danh sách ID sự kiện được phân tách bằng dấu phẩy để lọc (Hữu ích để lọc các sự kiện RPC cụ thể và CustomRPC)"
+                    description: "Danh sách ID hoạt động được phân tách bằng dấu phẩy để lọc (hữu ích để lọc các hoạt động RPC cụ thể và CustomRPC)"
                 }
             },
             toast: {
@@ -5266,162 +5266,162 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 importCustomRPC: {
-                    label: "CustomRPC'yi Thêm"
+                    label: "Nhập RPC tùy chỉnh"
                 },
                 listMode: {
                     label: "Chế độ danh sách",
                     description: "Chọn cách áp dụng danh sách bộ lọc",
-                    blacklist: "Danh sách đen (Chỉ bỏ qua những người trong danh sách)",
-                    whitelist: "Danh sách trắng (Bỏ qua tất cả trừ những thứ trong danh sách)"
+                    blacklist: "Danh sách đen (chỉ bỏ qua những gì có trong danh sách)",
+                    whitelist: "Danh sách trắng (bỏ qua mọi thứ trừ những gì có trong danh sách)"
                 },
                 idList: {
                     label: "Danh sách ID"
                 },
                 ignorePlaying: {
-                    label: "Bỏ qua những gì đang chơi",
-                    description: "Bỏ qua tất cả các sự kiện đã chơi (Thông thường là các sự kiện trò chơi và RPC)"
+                    label: "Bỏ qua việc chơi",
+                    description: "Bỏ qua mọi hoạt động chơi (thường là hoạt động game và RPC)"
                 },
                 ignoreStreaming: {
-                    label: "Bỏ qua bài viết",
-                    description: "Bỏ qua tất cả các sự kiện phát sóng"
+                    label: "Bỏ qua phát trực tuyến",
+                    description: "Bỏ qua mọi hoạt động phát trực tuyến"
                 },
                 ignoreListening: {
-                    label: "Bỏ qua người nghe",
-                    description: "Bỏ qua tất cả các sự kiện nghe (Thường là sự kiện Spotify)"
+                    label: "Bỏ qua việc nghe",
+                    description: "Bỏ qua mọi hoạt động nghe (đây thường là hoạt động Spotify)"
                 },
                 ignoreWatching: {
-                    label: "Bỏ qua Đã xem",
-                    description: "Bỏ qua tất cả các sự kiện theo dõi"
+                    label: "Bỏ qua việc xem",
+                    description: "Bỏ qua mọi hoạt động xem"
                 },
                 ignoreCompeting: {
-                    label: "Bỏ qua các sự kiện cạnh tranh",
-                    description: "Bỏ qua tất cả các sự kiện (cạnh tranh) cạnh tranh (Thường là các sự kiện trò chơi tùy chỉnh)"
+                    label: "Bỏ qua việc cạnh tranh",
+                    description: "Bỏ qua tất cả các hoạt động cạnh tranh (đây thường là những hoạt động trò chơi đặc biệt)"
                 },
                 ignoredActivities: {
-                    label: "Sự kiện bị bỏ qua"
+                    label: "Hoạt động bị bỏ qua"
                 }
             }
         },
         ignoreCalls: {
-            name: "Bỏ qua cuộc gọi",
+            name: "IgnoreCalls",
             description: "Cho phép bạn bỏ qua cuộc gọi từ người dùng hoặc nhóm DM cụ thể.",
             option: {
                 permanentlyIgnoredUsers: {
                     label: "Người dùng bị bỏ qua vĩnh viễn",
-                    description: "ID người dùng (virgül + boşluk) nên bị bỏ qua vĩnh viễn"
+                    description: "ID người dùng (dấu phẩy + dấu cách) sẽ bị bỏ qua vĩnh viễn"
                 }
             },
             button: {
-                ignore: "Yoksay",
-                temporarilyIgnore: "Bỏ qua tạm thời",
-                permanentlyIgnore: "Bỏ qua vĩnh viễn"
+                ignore: "Phớt lờ",
+                temporarilyIgnore: "Tạm thời bỏ qua cuộc gọi",
+                permanentlyIgnore: "Bỏ qua cuộc gọi vĩnh viễn"
             }
         },
         iLoveSpam: {
-            name: "ILoveThư rác",
-            description: "Ẩn tin nhắn khỏi 'những kẻ gửi thư rác tiềm năng'."
+            name: "ILoveSpam",
+            description: "Không ẩn tin nhắn khỏi 'có thể là kẻ gửi thư rác'"
         },
         imageFilename: {
-            name: "Tên tệp hình ảnh",
-            description: "Hiển thị tên tệp dưới dạng chú giải công cụ khi di chuột qua hình ảnh và ảnh GIF.",
+            name: "ImageFilename",
+            description: "Hiển thị tên tệp hình ảnh & GIF dưới dạng chú giải công cụ khi di chuột qua chúng",
             option: {
                 showFullUrl: {
                     label: "Hiển thị URL đầy đủ",
-                    description: "Nó hiển thị URL đầy đủ của hình ảnh thay vì chỉ tên tệp. Tính năng này luôn được bật cho ảnh GIF vì chúng thường không có tên tệp có ý nghĩa."
+                    description: "Hiển thị URL đầy đủ của hình ảnh thay vì chỉ tên tệp. Luôn bật cho ảnh GIF vì chúng thường không có tên tệp có ý nghĩa"
                 }
             }
         },
         imageLink: {
-            name: "Liên kết hình ảnh",
-            description: "Nó không bao giờ ẩn các liên kết trực quan, ngay cả khi chỉ có một liên kết hình ảnh trong tin nhắn."
+            name: "ImageLink",
+            description: "Không bao giờ ẩn link hình ảnh trong tin nhắn, ngay cả khi đó là nội dung duy nhất"
         },
         imageZoom: {
-            name: "Hình ảnhZoom",
-            description: "Nó cho phép bạn phóng to hình ảnh và GIF, cũng như xem siêu dữ liệu hình ảnh. Phóng to bằng bánh xe chuột, tăng bán kính ống kính bằng Shift + bánh xe chuột.",
+            name: "ImageZoom",
+            description: "Cho phép bạn phóng to hình ảnh và GIF cũng như hiển thị siêu dữ liệu hình ảnh. Sử dụng bánh xe cuộn để phóng to và bánh xe cuộn Shift + để tăng bán kính ống kính.",
             option: {
                 saveZoomValues: {
                     label: "Lưu giá trị thu phóng",
-                    description: "Xác định xem giá trị thu phóng và kích thước ống kính có được lưu hay không"
+                    description: "Có lưu giá trị thu phóng và kích thước ống kính hay không"
                 },
                 invertScroll: {
-                    label: "Cuộn ngược",
-                    description: "Đảo ngược hướng cuộn chuột"
+                    label: "Đảo ngược cuộn",
+                    description: "Đảo ngược cuộn"
                 },
                 nearestNeighbour: {
                     label: "Hàng xóm gần nhất",
                     description: "Sử dụng Nội suy lân cận gần nhất khi chia tỷ lệ hình ảnh"
                 },
                 square: {
-                    label: "Bảo vệ",
-                    description: "Biến ống kính thành hình vuông"
+                    label: "Quảng trường",
+                    description: "Làm cho ống kính vuông"
                 },
                 zoom: {
                     label: "Phóng",
-                    description: "Tỷ lệ zoom của ống kính"
+                    description: "Thu phóng ống kính"
                 },
                 size: {
-                    label: "Kích thước",
-                    description: "Bán kính/kích thước ống kính"
+                    label: "Kích cỡ",
+                    description: "Bán kính/Kích thước của ống kính"
                 },
                 zoomSpeed: {
                     label: "Tốc độ thu phóng",
-                    description: "Xác định tốc độ thay đổi kích thước zoom/ống kính"
+                    description: "Tốc độ thay đổi kích thước zoom/ống kính"
                 },
                 showMetadata: {
                     label: "Hiển thị siêu dữ liệu",
-                    description: "Hiển thị siêu dữ liệu khi nhấp đúp vào hình ảnh đã chọn"
+                    description: "Hiển thị siêu dữ liệu hình ảnh khi nhấp đúp vào hình ảnh đã chọn"
                 }
             },
             context: {
                 square: "Ống kính vuông",
-                nearest: "Phóng to pixel",
+                nearest: "Hàng xóm gần nhất",
                 zoom: "Phóng",
                 size: "Kích thước ống kính",
                 zoomSpeed: "Tốc độ thu phóng",
                 showImageMetadata: "Hiển thị siêu dữ liệu hình ảnh",
                 view: "Xem siêu dữ liệu",
                 loading: "Đang tải...",
-                unknown: "không rõ",
-                sizeHTML: "Kích thước",
+                unknown: "Không xác định",
+                sizeHTML: "Kích cỡ",
                 dimensions: "Kích thước",
-                filename: "Tên tập tin"
+                filename: "Tên tệp"
             }
         },
         imgToGif: {
             name: "ImgToGif",
-            description: "Thêm lệnh /imgtogif để chuyển đổi bất kỳ hình ảnh nào sang GIF",
+            description: "Thêm lệnh gạch chéo /imgtogif để tạo ảnh GIF từ bất kỳ hình ảnh nào",
             command: {
                 imgToGif: {
-                    description: "Cho phép bạn chuyển đổi hình ảnh thành GIF",
-                    image: "Tệp đính kèm trực quan để sử dụng",
-                    width: "chiều rộng GIF",
-                    height: "chiều cao gif"
+                    description: "Cho phép bạn biến hình ảnh thành GIF",
+                    image: "Đính kèm hình ảnh để sử dụng",
+                    width: "Chiều rộng của GIF",
+                    height: "Chiều cao của GIF"
                 }
             },
             error: {
                 noImage: "Không có hình ảnh được chỉ định!",
-                notImage: "Tệp được tải lên không phải là hình ảnh"
+                notImage: "Tải lên không phải là hình ảnh"
             }
         },
         implicitRelationships: {
-            name: "Mối quan hệ ngầm",
-            description: "Hiển thị các mối quan hệ gián tiếp của bạn trong tab Bạn bè.",
+            name: "ImplicitRelationships",
+            description: "Hiển thị các mối quan hệ tiềm ẩn của bạn trong tab Bạn bè.",
             option: {
                 sortByAffinity: {
-                    label: "Sắp xếp theo mức độ gần gũi",
-                    description: "Xác định xem các mối quan hệ gián tiếp có được sắp xếp theo mức độ gần gũi của chúng với bạn hay không."
+                    label: "Sắp xếp theo sở thích",
+                    description: "Có nên sắp xếp các mối quan hệ ngầm theo mối quan hệ của chúng với bạn hay không."
                 }
             },
-            implicit: "gián tiếp"
+            implicit: "ngầm"
         },
         inRole: {
-            name: "trong vai trò",
-            description: "Tìm hiểu xem ai có vai trò bằng cách sử dụng menu ngữ cảnh vai trò hoặc lệnh /inrole (đọc thông tin plugin!)",
+            name: "InRole",
+            description: "Biết ai có vai trò bằng menu ngữ cảnh vai trò hoặc lệnh /inrole (đọc thông tin plugin!)",
             command: {
                 inrole: {
-                    description: "Tìm hiểu xem ai là người có vai trò",
+                    description: "Biết ai đang đóng một vai trò nào đó",
                     role: "Vai trò",
-                    noGuild: "Hãy chắc chắn rằng bạn đang ở trên một máy chủ."
+                    noGuild: "Hãy chắc chắn rằng bạn đang ở trong một máy chủ."
                 }
             },
             context: {
@@ -5430,44 +5430,44 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 about: {
                     title: "Hạn chế",
-                    description: "Nếu bạn không có quyền kiểm duyệt trên máy chủ và máy chủ lớn (hơn 100 thành viên), plugin có thể bị hạn chế theo những cách sau:",
+                    description: "Nếu bạn không có quyền mod trên máy chủ và máy chủ đó lớn (trên 100 thành viên), plugin có thể bị hạn chế theo những cách sau",
                     list: {
                         one: "Thành viên ngoại tuyến sẽ không được liệt kê",
-                        two: "Theo mặc định, tối đa 100 thành viên sẽ được liệt kê. Kéo xuống danh sách thành viên để xem thêm thành viên.",
-                        three: "Nhưng bạn bè của bạn sẽ luôn được hiển thị bất kể trạng thái của họ."
+                        two: "Tối đa 100 thành viên sẽ được liệt kê theo mặc định. Để có thêm, hãy cuộn xuống danh sách thành viên để tải thêm thành viên.",
+                        three: "Tuy nhiên, bạn bè sẽ luôn được hiển thị bất kể trạng thái của họ."
                     }
                 },
                 member: {
-                    title: "Các thành viên trong vai trò",
-                    noMembers: "Không tìm thấy thành viên nào được lưu trong bộ nhớ đệm trực tuyến có vai trò này. Hãy thử cuộn xuống danh sách thành viên của bạn để lưu vào bộ nhớ đệm nhiều người dùng hơn!"
+                    title: "Vai trò Thành viên",
+                    noMembers: "Có vẻ như không tìm thấy thành viên nào được lưu trong bộ nhớ đệm trực tuyến có vai trò đó. Hãy thử cuộn xuống danh sách thành viên của bạn để lưu vào bộ nhớ đệm nhiều người dùng hơn!"
                 }
             }
         },
         instantScreenshare: {
-            name: "Chia sẻ màn hình tức thì",
-            description: "Khi bạn tham gia một kênh âm thanh, nó cho phép bạn chia sẻ màn hình ngay lập tức với sự hỗ trợ cho các nguồn máy tính để bàn, cửa sổ và thiết bị đầu vào video (máy ảnh, thẻ chụp).",
+            name: "InstantScreenshare",
+            description: "Chia sẻ màn hình ngay lập tức khi tham gia kênh thoại có hỗ trợ nguồn máy tính để bàn, cửa sổ và thiết bị đầu vào video (máy ảnh, thẻ chụp)",
             modal: {
                 linux: {
                     title: "Dành cho Linux",
-                    body: "Nếu bạn đang sử dụng Wayland, nó chỉ bật tùy chọn chia sẻ màn hình.",
-                    bodyTwo: "Nó có thể hoạt động hoặc không hoạt động với X11 :srug:"
+                    body: "Đối với Wayland, nó chỉ bật lên phần chọn chia sẻ màn hình",
+                    bodyTwo: "Đối với X11 nó có thể hoạt động hoặc không :srug:"
                 },
                 videoDevices: {
                     title: "Thiết bị đầu vào video",
-                    body: "Hỗ trợ máy ảnh và thẻ chụp (ví dụ: Elgato HD60X) khi được bật trong cài đặt."
+                    body: "Hỗ trợ máy ảnh và thẻ chụp (như Elgato HD60X) khi được bật trong cài đặt"
                 },
                 regardingSound: {
-                    title: "Giới thiệu về cài đặt âm thanh và xem trước",
-                    body: "Chúng tôi sử dụng cùng cài đặt mà Discord sử dụng để xem trước luồng và quyết định có bật âm thanh hay không."
+                    title: "Về cài đặt âm thanh và xem trước",
+                    body: "Chúng tôi sử dụng các cài đặt do Discord thiết lập và sử dụng để quyết định xem có nên bật âm thanh và xem trước luồng hay không"
                 }
             },
             option: {
                 streamMedia: {
-                    label: "Nguồn phương tiện truyền thông sẽ được phát hành",
-                    description: "Nếu không tìm thấy, nó sẽ reset về màn hình chính.",
+                    label: "Nguồn phương tiện truyền phát",
+                    description: "Đặt lại về màn hình chính nếu không tìm thấy",
                     loading: "Đang tải nguồn phương tiện...",
                     none: "Không tìm thấy nguồn phương tiện nào",
-                    placeholder: "Chọn nguồn phương tiện để xuất bản"
+                    placeholder: "Chọn nguồn phương tiện để truyền phát"
                 },
                 includeVideoDevices: {
                     label: "Bao gồm các thiết bị video",
@@ -5478,40 +5478,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Tự động tắt tiếng micrô của bạn khi tham gia kênh thoại"
                 },
                 autoDeafen: {
-                    label: "Tự động làm điếc",
-                    description: "Tự động tắt tiếng khi bạn tham gia kênh thoại (nó cũng tắt tiếng bạn)"
+                    label: "Tự động điếc",
+                    description: "Tự động bị điếc khi tham gia kênh thoại (cũng tắt tiếng của bạn)"
                 },
                 instantScreenshare: {
                     label: "Chia sẻ màn hình tức thì",
                     description: "Bật tính năng chia sẻ màn hình tự động"
                 },
                 keybindScreenshare: {
-                    label: "Chia sẻ màn hình bằng phím nóng",
-                    description: "Chia sẻ màn hình với phím nóng trong cài đặt phím nóng Discord"
+                    label: "Chia sẻ màn hình Keybind",
+                    description: "Chia sẻ màn hình bằng keybind trong cài đặt keybind Discord"
                 },
                 focusDiscord: {
-                    label: "Tập trung vào sự bất hòa",
-                    description: "Chỉ bắt đầu chia sẻ màn hình bằng cách bấm phím khi Discord đã tập trung"
+                    label: "Tập trung bất hòa",
+                    description: "Chỉ bắt đầu chia sẻ màn hình bằng keybind khi Discord được tập trung"
                 },
                 toolboxManagement: {
                     label: "Quản lý hộp công cụ",
-                    description: "Bật/Tắt chia sẻ màn hình tức thì"
+                    description: "Bật/Tắt tính năng chia sẻ màn hình tức thì"
                 }
             },
             toolbox: {
                 label: "Chia sẻ màn hình tức thì",
                 toast: "Chia sẻ màn hình tức thì {{state}}",
-                enabled: "Hiệu quả",
+                enabled: "Đã bật",
                 disabled: "Tàn tật"
             }
         },
         invisibleChat: {
-            name: "Trò chuyện vô hình",
-            description: "Mã hóa tin nhắn của bạn mà không thu hút sự nghi ngờ!",
+            name: "InvisibleChat",
+            description: "Mã hóa tin nhắn của bạn theo cách không đáng ngờ!",
             option: {
                 savedPasswords: {
                     label: "Mật khẩu đã lưu",
-                    description: "Mật khẩu đã lưu (được phân tách bằng dấu phẩy)"
+                    description: "Mật khẩu đã lưu (được phân tách bằng dấu , )"
                 }
             },
             button: {
@@ -5520,49 +5520,49 @@ const translations: MatchStructure<typeof enTranslations> = {
                 hidden: "Chỉ báo tin nhắn ẩn (InvisibleChat)"
             },
             tooltip: {
-                hidden: "Có một tin nhắn ẩn trong tin nhắn này! (Trò chuyện vô hình)"
+                hidden: "Tin nhắn này có một tin nhắn ẩn! (Trò chuyện vô hình)"
             },
             embed: {
                 title: "Tin nhắn được giải mã",
-                footer: "Đã gửi qua Trò chuyện vô hình"
+                footer: "Đã gửi bằng Trò chuyện vô hình"
             },
             modal: {
                 encrypt: {
                     title: "Mã hóa tin nhắn",
-                    secret: "Tin nhắn bí mật",
+                    secret: "Bí mật",
                     cover: "Bìa (2 từ trở lên!!)",
                     password: "Mật khẩu",
-                    dontUseCover: "Sử dụng bìa",
+                    dontUseCover: "Không sử dụng nắp",
                     send: "Gửi",
                     cancel: "Hủy bỏ"
                 },
                 decrypt: {
                     title: "Giải mã tin nhắn",
-                    with: "Tin nhắn được mã hóa",
+                    with: "Tin nhắn có mã hóa",
                     password: "Mật khẩu",
-                    decrypt: "giải mã",
+                    decrypt: "Giải mã",
                     cancel: "Hủy bỏ"
                 }
             }
         },
         inviteDefaults: {
-            name: "MờiMặc định",
+            name: "InviteDefaults",
             description: "Cho phép bạn chỉnh sửa các giá trị mặc định khi tạo lời mời máy chủ.",
             option: {
                 inviteDuration: {
-                    label: "Thời lượng lời mời",
+                    label: "Thời lượng mời",
                     description: "Thời lượng mặc định cho lời mời máy chủ",
                     thirtyMinutes: "30 phút",
-                    oneHour: "1 khoảnh khắc",
-                    sixHours: "6 khoảnh khắc",
-                    twelveHours: "12 khoảnh khắc",
+                    oneHour: "1 giờ",
+                    sixHours: "6 giờ",
+                    twelveHours: "12 giờ",
                     oneDay: "1 ngày",
                     sevenDays: "7 ngày",
-                    forever: "không xác định"
+                    forever: "Mãi mãi"
                 },
                 maxUses: {
-                    label: "Mức sử dụng tối đa",
-                    description: "Mức sử dụng tối đa mặc định cho lời mời máy chủ",
+                    label: "Sử dụng tối đa",
+                    description: "Số lần sử dụng tối đa mặc định cho lời mời máy chủ",
                     unlimited: "Không giới hạn",
                     one: "1",
                     five: "5",
@@ -5573,41 +5573,41 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 temporaryMembership: {
                     label: "Tư cách thành viên tạm thời",
-                    description: "Cài đặt thành viên tạm thời mặc định cho lời mời máy chủ"
+                    description: "Tư cách thành viên tạm thời mặc định cho lời mời máy chủ"
                 }
             }
         },
         ircColors: {
-            name: "IrcMàu sắc",
-            description: "Làm cho màu sắc của tên người dùng trong cuộc trò chuyện trở nên độc đáo, giống như trong ứng dụng khách IRC.",
+            name: "IrcColors",
+            description: "Làm cho màu tên người dùng trong cuộc trò chuyện trở nên độc đáo, giống như trong ứng dụng khách IRC",
             option: {
                 lightness: {
-                    label: "Sáng",
-                    description: "Tỷ lệ độ sáng (%). Nếu màu sắc có vẻ quá sáng hoặc tối, hãy thay đổi chúng."
+                    label: "Độ nhẹ",
+                    description: "Độ sáng, tính bằng %. Thay đổi nếu màu quá nhạt hoặc quá tối"
                 },
                 memberListColors: {
                     label: "Màu danh sách thành viên",
-                    description: "Thay đổi màu vai trò trong danh sách thành viên."
+                    description: "Thay thế màu vai trò trong danh sách thành viên"
                 },
                 applyColorOnlyToUsersWithoutColor: {
-                    label: "Chỉ áp dụng cho người dùng không có màu",
-                    description: "Áp dụng màu cho người dùng có màu không được xác định trước."
+                    label: "Chỉ áp dụng màu cho người dùng không có màu",
+                    description: "Chỉ áp dụng màu cho những người dùng không có màu được xác định trước"
                 },
                 applyColorOnlyInDms: {
-                    label: "Chỉ áp dụng trong tin nhắn riêng tư",
-                    description: "Chỉ áp dụng màu cho tin nhắn riêng tư; ứng dụng trên các máy chủ."
+                    label: "Chỉ áp dụng màu trong DM",
+                    description: "Chỉ áp dụng màu trong tin nhắn trực tiếp; không áp dụng màu sắc trong máy chủ."
                 }
             }
         },
         iRememberYou: {
-            name: "tôi nhớ bạn",
-            description: "Nó ghi lại cục bộ tất cả những người bạn liên lạc (bao gồm cả máy chủ), bảo vệ khỏi mất mát.",
+            name: "IRememberYou",
+            description: "Lưu cục bộ mọi người mà bạn đã liên lạc (bao gồm cả máy chủ), trong trường hợp bị mất",
             section: {
-                description: "Nó hiển thị danh sách chủ sở hữu của các máy chủ mà bạn đã đề cập, đã trả lời, là thành viên của (chủ sở hữu máy chủ*) hoặc thành viên của các máy chủ mà bạn đang sử dụng.",
-                empty: "Hiện đang trống.",
-                tooltip: "{{user}} đã cập nhật vào {{updatedAtContent}}",
+                description: "Cung cấp danh sách người dùng mà bạn đã đề cập hoặc trả lời hoặc những người sở hữu máy chủ mà bạn sở hữu (chủ sở hữu máy chủ*) hoặc là thành viên trong bang hội của bạn",
+                empty: "Hiện giờ nó đang trống rỗng.",
+                tooltip: "{{user}}, cập nhật lúc {{updatedAtContent}}",
                 owner: "Chủ sở hữu máy chủ",
-                iRememberYou: "tôi nhớ bạn"
+                iRememberYou: "Tôi nhớ bạn"
             },
             context: {
                 user: "Tùy chọn người dùng",
@@ -5616,38 +5616,38 @@ const translations: MatchStructure<typeof enTranslations> = {
                 view: "Xem hồ sơ"
             },
             modal: {
-                title: "Bộ điều chỉnh",
-                filter: "Lọc theo thẻ, tên người dùng hoặc ID",
+                title: "Biên tập viên",
+                filter: "Lọc theo thẻ, tên người dùng, ID",
                 button: {
-                    validate: "Xác minh và lưu",
+                    validate: "Xác thực và lưu",
                     cancel: "Hủy bỏ",
                     openEditor: "Mở trình chỉnh sửa",
-                    resetData: "Đặt lại dữ liệu",
+                    resetData: "Đặt lại bộ nhớ",
                     sure: "Bạn có chắc không?"
                 }
             }
         },
         jumpTo: {
-            name: "Chuyển tới",
-            description: "Thêm tùy chọn vào menu chuột phải để chuyển đến đầu hoặc cuối kênh hoặc tin nhắn riêng tư.",
+            name: "JumpTo",
+            description: "Thêm tùy chọn menu ngữ cảnh để chuyển về đầu hoặc cuối kênh/DM",
             context: {
-                top: "Đi tới bài viết đầu tiên",
-                bottom: "Đi tới bài viết cuối cùng",
-                noMessages: "Không tìm thấy tin nhắn nào từ người dùng này trong kênh này.",
-                searchFailed: "Đã xảy ra lỗi khi tìm kiếm tin nhắn."
+                top: "Chuyển đến tin nhắn đầu tiên",
+                bottom: "Chuyển đến tin nhắn mới nhất",
+                noMessages: "Không tìm thấy tin nhắn từ người dùng này trong kênh này.",
+                searchFailed: "Không thể tìm kiếm tin nhắn."
             }
         },
         keepCurrentChannel: {
-            name: "Giữ kênh hiện tại",
-            description: "Khi chuyển đổi tài khoản hoặc tải Discord, nó sẽ cố gắng quay lại kênh bạn đang xem."
+            name: "KeepCurrentChannel",
+            description: "Cố gắng điều hướng đến kênh bạn đã tham gia trước khi chuyển đổi tài khoản hoặc tải Discord."
         },
         keyboardSounds: {
-            name: "Âm thanh bàn phím",
-            description: "OperaGX hoặc osu khi gõ bằng bàn phím! Thêm hiệu ứng âm thanh.",
+            name: "KeyboardSounds",
+            description: "Thêm OperaGX hoặc osu! hiệu ứng âm thanh khi gõ trên bàn phím của bạn.",
             option: {
                 volume: {
-                    label: "Mức âm thanh",
-                    description: "Âm lượng bàn phím"
+                    label: "Âm lượng",
+                    description: "Âm lượng của bàn phím"
                 },
                 soundPack: {
                     label: "Gói âm thanh",
@@ -5658,19 +5658,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         keywordNotify: {
-            name: "Từ khóaThông báo",
-            description: "Gửi thông báo về các tin nhắn khớp với các từ khóa hoặc biểu thức chính quy nhất định.",
+            name: "KeywordNotify",
+            description: "Gửi thông báo nếu một tin nhắn nhất định khớp với các từ khóa hoặc biểu thức chính quy nhất định",
             idHolder: "NHẬN DẠNG",
             keywordEntry: "Nhập từ khóa",
             regexHolder: "ví dụ|regex",
-            ignoreCase: "Không phân biệt chữ hoa chữ thường",
-            whiteblackLabel: "Danh sách trắng / Danh sách đen",
+            ignoreCase: "Bỏ qua trường hợp",
+            whiteblackLabel: "Danh sách trắng/Danh sách đen",
             tab: {
                 title: "Từ khóa",
                 clearAll: "Xóa tất cả"
             },
             button: {
-                addId: "ID Ekle",
+                addId: "Thêm giấy tờ tùy thân",
                 addKeyword: "Thêm mục nhập từ khóa"
             },
             listTypeSelector: {
@@ -5684,8 +5684,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Bỏ qua tin nhắn từ bot"
                 },
                 amountToKeep: {
-                    label: "Số tiền cần tiết kiệm",
-                    description: "Số tin nhắn cần lưu trong nhật ký"
+                    label: "Số tiền cần giữ",
+                    description: "Số lượng tin nhắn cần lưu trong nhật ký"
                 },
                 keywords: {
                     label: "Từ khóa",
@@ -5694,22 +5694,22 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         lastOnline: {
-            name: "Cuối cùngTrực tuyến",
-            description: "Thêm chỉ báo trực tuyến cuối cùng dưới tên người dùng trong danh sách DM, máy chủ và danh sách thành viên DM nhóm của bạn.",
+            name: "LastOnline",
+            description: "Thêm chỉ báo trực tuyến cuối cùng dưới tên người dùng trong danh sách DM và danh sách thành viên bang hội và GDM của bạn",
             unit: {
                 d: "ngày",
-                h: "chốc lát",
+                h: "giờ",
                 m: "phút"
             },
-            online: "{{formattedTime}} trước đây đã trực tuyến"
+            online: "Trực tuyến {{formattedTime}} trước"
         },
         listenBrainzRPC: {
             name: "ListenBrainzRPC",
-            description: "ListenBrainz là một plugin nhỏ mang lại sự hiện diện phong phú.",
+            description: "Plugin nhỏ cho sự hiện diện phong phú của ListenBrainz",
             about: {
                 title: "Giới thiệu về API MusicBrainz",
-                description: "API MusicBrainz không yêu cầu khóa API nhưng lại yêu cầu {{link}}. Đối với hầu hết người dùng, một địa chỉ email là đủ.",
-                userAgent: "một chuỗi tác nhân người dùng có ý nghĩa"
+                description: "API MusicBrainz không yêu cầu khóa API nhưng yêu cầu {{link}}. Đối với hầu hết, một địa chỉ email là đủ.",
+                userAgent: "chuỗi tác nhân người dùng có ý nghĩa"
             },
             option: {
                 username: {
@@ -5718,77 +5718,77 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 mbContact: {
                     label: "Liên hệ MB",
-                    description: "Thông tin liên hệ ListenBrainz"
+                    description: "ListenBrainz liên hệ"
                 },
                 shareUsername: {
                     label: "Chia sẻ tên người dùng",
-                    description: "Hiển thị liên kết hồ sơ ListenBrainz (chỉ hiển thị với người dùng khác)"
+                    description: "Hiển thị liên kết tới hồ sơ ListenBrainz (chỉ có thể hiển thị với những người dùng khác)"
                 },
                 shareSong: {
                     label: "Chia sẻ bài hát",
-                    description: "Hiển thị liên kết tới bài hát hiện tại trên ListenBrainz (chỉ hiển thị với người dùng khác)"
+                    description: "Hiển thị liên kết đến bài hát hiện tại trên ListenBrainz (chỉ những người dùng khác mới có thể nhìn thấy)"
                 },
                 hideWithSpotify: {
-                    label: "Ẩn khi Spotify đang hoạt động",
-                    description: "Ẩn trạng thái ListenBrainz nếu Spotify đang chạy"
+                    label: "Ẩn với Spotify",
+                    description: "Ẩn sự hiện diện của ListenBrainz nếu Spotify đang chạy"
                 },
                 hideWithActivity: {
-                    label: "Ẩn nếu có sự kiện khác",
-                    description: "Ẩn trạng thái ListenBrainz nếu bạn có trạng thái khác"
+                    label: "Ẩn với hoạt động",
+                    description: "Ẩn sự hiện diện ListenBrainz nếu bạn có bất kỳ sự hiện diện nào khác"
                 },
                 useTimeBar: {
                     label: "Sử dụng thanh thời gian",
-                    description: "Hiển thị thời lượng bản nhạc dưới dạng thanh thời gian (Phải sử dụng trạng thái nghe)"
+                    description: "Sử dụng thời lượng bản nhạc để hiển thị thanh thời gian (phải sử dụng trạng thái Nghe)"
                 },
                 statusName: {
                     label: "Tên trạng thái",
-                    description: "Văn bản ngoại lệ"
+                    description: "Văn bản trạng thái tùy chỉnh"
                 },
                 nameFormat: {
                     label: "Định dạng tên",
-                    description: "Cách hiển thị tên bài hát và nghệ sĩ trong tên trạng thái",
-                    custom: "Sử dụng văn bản trạng thái tùy chỉnh",
-                    artistSong: "sử dụng định dạng 'nghệ sĩ - bài hát'",
-                    songArtist: "sử dụng định dạng 'bài hát - nghệ sĩ'",
-                    artistOnly: "Chỉ cần sử dụng tên nghệ sĩ",
-                    songOnly: "Chỉ cần sử dụng tên bài hát",
-                    albumName: "Sử dụng tên album (trả về văn bản ngoại lệ nếu bài hát không có album)"
+                    description: "Hiển thị tên bài hát và nghệ sĩ ở tên trạng thái",
+                    custom: "Sử dụng tên trạng thái tùy chỉnh",
+                    artistSong: "Sử dụng định dạng 'nghệ sĩ - bài hát'",
+                    songArtist: "Sử dụng định dạng 'bài hát - nghệ sĩ'",
+                    artistOnly: "Chỉ sử dụng tên nghệ sĩ",
+                    songOnly: "Chỉ sử dụng tên bài hát",
+                    albumName: "Sử dụng tên album (quay lại văn bản trạng thái tùy chỉnh nếu bài hát không có album)"
                 },
                 useListeningStatus: {
                     label: "Sử dụng trạng thái nghe",
                     description: "Hiển thị trạng thái 'Đang nghe' thay vì 'Đang phát'"
                 },
                 missingArt: {
-                    label: "Thiếu ảnh bìa",
+                    label: "Thiếu nghệ thuật",
                     description: "Khi album hoặc ảnh bìa album bị thiếu",
                     listenbrainzLogo: "Sử dụng logo ListenBrainz lớn",
                     generic: "Sử dụng trình giữ chỗ chung"
                 },
                 useLogo: {
-                    label: "Logo Kullan",
-                    description: "Hiển thị logo ListenBrainz trên bìa album"
+                    label: "Sử dụng biểu tượng",
+                    description: "Hiển thị logo ListenBrainz trên ảnh bìa album"
                 }
             }
         },
         loadingQuotes: {
-            name: "Đang tảiBáo giá",
-            description: "Thay đổi trích dẫn tải của Discord",
+            name: "LoadingQuotes",
+            description: "Thay thế trích dẫn tải của Discord",
             option: {
                 replaceEvents: {
-                    label: "Thay đổi sự kiện",
-                    description: "Có nên áp dụng plugin này trong các sự kiện có trích dẫn theo chủ đề sự kiện đặc biệt không? (ví dụ: Halloween)"
+                    label: "Thay thế sự kiện",
+                    description: "Plugin này có nên áp dụng trong các sự kiện có trích dẫn theo chủ đề sự kiện đặc biệt không? (ví dụ: Halloween)"
                 },
                 enablePluginPresetQuotes: {
-                    label: "Bật trích dẫn plugin",
-                    description: "Bật trích dẫn được chuẩn bị bởi plugin này"
+                    label: "Bật báo giá cài sẵn plugin",
+                    description: "Kích hoạt các trích dẫn được cài sẵn bởi plugin này"
                 },
                 enableDiscordPresetQuotes: {
-                    label: "Bật trích dẫn bất hòa",
-                    description: "Bật trích dẫn soạn sẵn của Discord (bao gồm trích dẫn sự kiện, trong các sự kiện)"
+                    label: "Bật báo giá cài sẵn Discord",
+                    description: "Bật các trích dẫn đặt trước của Discord (bao gồm các trích dẫn sự kiện, trong các sự kiện)"
                 },
                 additionalQuotes: {
                     label: "Báo giá bổ sung",
-                    description: "Các trích dẫn đặc biệt bổ sung có thể xuất hiện được phân tách bằng dấu phân cách sau"
+                    description: "Các trích dẫn tùy chỉnh bổ sung có thể xuất hiện, được phân tách bằng dấu phân cách bên dưới"
                 },
                 additionalQuotesDelimiter: {
                     label: "Dấu phân cách trích dẫn bổ sung",
@@ -5797,8 +5797,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         loginWithQR: {
-            name: "Đăng nhậpVớiQR",
-            description: "Cũng giống như trên thiết bị di động, quét mã QR đăng nhập cho phép bạn đăng nhập trên thiết bị khác!",
+            name: "LoginWithQR",
+            description: "Cho phép bạn đăng nhập vào thiết bị khác bằng cách quét mã QR đăng nhập, giống như trên thiết bị di động!",
             option: {
                 scanQr: {
                     label: "Quét mã QR",
@@ -5807,23 +5807,23 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             neverScan: "Không bao giờ quét mã QR đăng nhập từ người dùng hoặc ứng dụng khác.",
-            hold: "Nhấn và giữ để xác nhận nhập",
+            hold: "Giữ để xác nhận đăng nhập",
             scanning: "Đang quét...",
             stopScanning: "Dừng quét",
             usingWebcam: "Quét bằng webcam",
             dragDrop: "Kéo và thả hình ảnh vào đây hoặc nhấp để chọn hình ảnh",
-            orPaste: "Hoặc dán một hình ảnh từ clipboard!"
+            orPaste: "Hoặc dán hình ảnh từ clipboard của bạn!"
         },
         mediaPlaybackSpeed: {
-            name: "MediaPlaybackTốc độ",
-            description: "Cho phép bạn thay đổi tốc độ phát lại (mặc định) của nội dung nhúng phương tiện.",
+            name: "MediaPlaybackSpeed",
+            description: "Cho phép thay đổi tốc độ phát lại (mặc định) của phương tiện nhúng",
             playbackSpeed: "Tốc độ phát lại",
             context: {
                 label: "Kiểm soát tốc độ phát lại"
             },
             option: {
                 defaultVoiceMessageSpeed: {
-                    label: "Tỷ lệ thư thoại mặc định",
+                    label: "Tốc độ tin nhắn thoại mặc định",
                     description: "Tin nhắn thoại"
                 },
                 defaultVideoSpeed: {
@@ -5832,109 +5832,109 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 defaultAudioSpeed: {
                     label: "Tốc độ âm thanh mặc định",
-                    description: "tập tin âm thanh"
+                    description: "Âm thanh"
                 }
             }
         },
         memberCount: {
-            name: "Số lượng thành viên",
-            description: "Hiển thị số lượng thành viên trực tuyến trên máy chủ, tổng số thành viên và người dùng trong các kênh thoại — trong danh sách thành viên và chú giải công cụ.",
+            name: "MemberCount",
+            description: "Hiển thị số lượng thành viên trực tuyến, tổng số thành viên và người dùng trong các kênh thoại trên máy chủ — trong danh sách thành viên và chú giải công cụ.",
             option: {
                 toolTip: {
-                    label: "Mẹo công cụ",
-                    description: "Hiển thị số lượng thành viên trong chú giải công cụ máy chủ"
+                    label: "Chú giải công cụ",
+                    description: "Hiển thị số lượng thành viên trên chú giải công cụ máy chủ"
                 },
                 memberList: {
                     label: "Danh sách thành viên",
-                    description: "Hiển thị số lượng thành viên ở đầu danh sách thành viên"
+                    description: "Hiển thị số lượng thành viên trong tiêu đề danh sách thành viên"
                 },
                 voiceActivity: {
                     label: "Hoạt động bằng giọng nói",
-                    description: "Hiển thị số lượng người dùng trên các kênh thoại"
+                    description: "Hiển thị số lượng người dùng trong các kênh thoại"
                 }
             },
-            onlineThisChannel: "{{formattedOnlineCount}} đang trực tuyến trên kênh này",
-            totalMembers: "Tổng số {{formattedTotalCount}} thành viên trên máy chủ",
-            totalVoice: "Thành viên trên kênh thoại {{formattedVoiceCount}}"
+            onlineThisChannel: "{{formattedOnlineCount}} trực tuyến trên kênh này",
+            totalMembers: "{{formattedTotalCount}} tổng số thành viên máy chủ",
+            totalVoice: "{{formattedVoiceCount}} thành viên lên tiếng"
         },
         mentionAvatars: {
-            name: "đề cập đếnAvatar",
-            description: "Hiển thị hình đại diện và biểu tượng vai trò của người dùng trong các đề cập.",
+            name: "MentionAvatars",
+            description: "Hiển thị hình đại diện và biểu tượng vai trò của người dùng bên trong các đề cập",
             option: {
                 showAtSymbol: {
                     label: "Hiển thị biểu tượng @",
-                    description: "Xác định xem biểu tượng @ có được hiển thị trong đề cập của người dùng hay không."
+                    description: "Liệu biểu tượng @ có được hiển thị khi người dùng đề cập hay không"
                 }
             }
         },
         meow: {
-            name: "Meo",
-            description: "Thêm một nút vào thanh trò chuyện để kêu meo meo trong trò chuyện.",
+            name: "Meow",
+            description: "Thêm nút thanh trò chuyện để kêu meo meo trong trò chuyện",
             button: {
-                meow: "Miyav"
+                meow: "Meo"
             }
         },
         messageBurst: {
-            name: "Tin nhắnBurst",
-            description: "Nó hợp nhất các tin nhắn được gửi trong một khoảng thời gian nhất định với tin nhắn trước đó của bạn, trừ khi có người khác gửi tin nhắn trước bạn.",
+            name: "MessageBurst",
+            description: "Hợp nhất các tin nhắn được gửi trong một khoảng thời gian với tin nhắn đã gửi trước đó của bạn nếu không có ai khác gửi tin nhắn trước bạn.",
             option: {
                 timePeriod: {
-                    label: "Phạm vi thời gian",
-                    description: "Thời gian hợp nhất (tính bằng giây)."
+                    label: "Khoảng thời gian",
+                    description: "Thời lượng của các vụ nổ (tính bằng giây)."
                 },
                 shouldMergeWithAttachment: {
-                    label: "Kết hợp với tệp đính kèm",
-                    description: "Có nên hợp nhất tin nhắn nếu có tệp đính kèm (tệp/hình ảnh) trong tin nhắn cuối cùng không?"
+                    label: "Hợp nhất với tệp đính kèm",
+                    description: "Có nên hợp nhất tin nhắn nếu tin nhắn cuối cùng có tệp đính kèm?"
                 },
                 useSpace: {
                     label: "Sử dụng không gian",
-                    description: "Có thêm dấu cách giữa các tin nhắn thay vì chuyển sang dòng mới khi hợp nhất hay không."
+                    description: "Có thêm dấu cách giữa các tin nhắn khi hợp nhất thay vì dòng mới hay không."
                 }
             }
         },
         messageClickActions: {
-            name: "Tin nhắnClickHành động",
-            description: "Giữ phím Backspace và nhấp chuột cho phép bạn xóa, nhấp đúp để chỉnh sửa hoặc trả lời.",
+            name: "MessageClickActions",
+            description: "Giữ Backspace và bấm để xóa, bấm đúp để chỉnh sửa/trả lời",
             option: {
                 singleClickAction: {
-                    label: "Hành động một cú nhấp chuột",
-                    description: "Hành động nhấp chuột duy nhất (trên tin nhắn của riêng bạn)"
+                    label: "Hành động nhấp chuột một lần",
+                    description: "Hành động chỉ bằng một cú nhấp chuột (tin nhắn của bạn)"
                 },
                 singleClickModifier: {
                     label: "Công cụ sửa đổi một cú nhấp chuột",
-                    description: "Cần có công cụ sửa đổi cho hành động bằng một cú nhấp chuột (trong tin nhắn của riêng bạn)"
+                    description: "Cần có công cụ sửa đổi cho hành động nhấp chuột bằng một cú nhấp chuột (tin nhắn của bạn)"
                 },
                 singleClickOthersAction: {
-                    label: "Hành động một cú nhấp chuột (Khác)",
-                    description: "Hành động nhấp chuột một lần (trên tin nhắn của người khác)"
+                    label: "Hành động nhấp chuột một lần (Khác)",
+                    description: "Hành động chỉ bằng một cú nhấp chuột (tin nhắn của người khác)"
                 },
                 singleClickOthersModifier: {
-                    label: "Công cụ sửa đổi một cú nhấp chuột (Khác)",
-                    description: "Cần có công cụ sửa đổi cho hành động nhấp chuột bằng một cú nhấp chuột (trong bài đăng của người khác)"
+                    label: "Công cụ sửa đổi một lần nhấp (Khác)",
+                    description: "Cần có công cụ sửa đổi cho hành động nhấp chuột bằng một cú nhấp chuột (tin nhắn của người khác)"
                 },
                 doubleClickAction: {
                     label: "Hành động nhấp đúp",
-                    description: "Nhấp đúp vào hành động trên tin nhắn của riêng bạn"
+                    description: "Hành động khi nhấp đúp (tin nhắn của bạn)"
                 },
                 doubleClickOthersAction: {
                     label: "Hành động nhấp đúp (Khác)",
-                    description: "Thao tác nhấn đúp vào tin nhắn của người khác"
+                    description: "Hành động khi nhấp đúp (tin nhắn của người khác)"
                 },
                 doubleClickModifier: {
                     label: "Công cụ sửa đổi nhấp đúp",
                     description: "Cần có công cụ sửa đổi cho hành động nhấp đúp"
                 },
                 tripleClickAction: {
-                    label: "Hành động ba cú nhấp chuột",
-                    description: "Hành động ba cú nhấp chuột"
+                    label: "Hành động nhấp ba lần",
+                    description: "Hành động khi nhấp ba lần"
                 },
                 tripleClickModifier: {
-                    label: "Công cụ sửa đổi ba lần nhấp",
-                    description: "Cần có công cụ sửa đổi cho ba hành động nhấp chuột"
+                    label: "Công cụ sửa đổi nhấp chuột ba lần",
+                    description: "Cần có công cụ sửa đổi cho hành động nhấp ba lần"
                 },
                 reactEmoji: {
-                    label: "Biểu tượng cảm xúc phản ứng",
-                    description: "Biểu tượng cảm xúc để sử dụng cho hành động phản ứng"
+                    label: "Phản ứng biểu tượng cảm xúc",
+                    description: "Biểu tượng cảm xúc để sử dụng cho các hành động phản ứng"
                 },
                 addAdditionalReacts: {
                     label: "Thêm phản ứng bổ sung",
@@ -5942,7 +5942,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 additionalReactEmojis: {
                     label: "Biểu tượng cảm xúc phản ứng bổ sung",
-                    description: "Các biểu tượng cảm xúc bổ sung sẽ được thêm vào khi sử dụng hành động phản ứng (được phân tách bằng dấu phẩy/enter, tối đa {{count}})"
+                    description: "Các biểu tượng cảm xúc bổ sung cần thêm khi sử dụng tác vụ React (được phân tách bằng dấu phẩy/dòng mới, tối đa {{count}})"
                 },
                 disableInDms: {
                     label: "Vô hiệu hóa trong DM",
@@ -5954,32 +5954,32 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 clickTimeout: {
                     label: "Nhấp vào Hết thời gian",
-                    description: "Thời gian chờ (ms) để phân biệt nhấp đúp/ba lần"
+                    description: "Hết thời gian chờ để phân biệt nhấp đúp/ba lần (ms)"
                 },
                 doubleClickHoldThreshold: {
-                    label: "Ngưỡng duy trì nhấp đúp",
-                    description: "Thời gian giữ tối đa (ms) cho hành động nhấp đúp. Cho phép lựa chọn văn bản để giữ lâu hơn"
+                    label: "Ngưỡng giữ nhấp đúp",
+                    description: "Thời gian giữ tối đa cho hành động nhấp đúp (ms). Giữ lâu hơn cho phép chọn văn bản"
                 },
                 deferDoubleClickForTriple: {
-                    label: "Trì hoãn nhấp đúp để nhấp ba lần",
-                    description: "Trì hoãn nhấp đúp để cho phép hành động nhấp ba lần (nhấp ba lần sẽ bị tắt nếu tắt)"
+                    label: "Trì hoãn nhấp đúp cho ba lần",
+                    description: "Trì hoãn nhấp đúp để cho phép thao tác nhấp ba lần (tắt thao tác nhấp ba lần khi tắt)"
                 },
                 selectionHoldTimeout: {
                     label: "Hết thời gian giữ lựa chọn",
-                    description: "Thời gian chờ (ms) để cho phép chọn văn bản"
+                    description: "Hết thời gian chờ để cho phép chọn văn bản (ms)"
                 },
                 quoteWithReply: {
-                    label: "Trả lời kèm trích dẫn",
+                    label: "Trích dẫn kèm câu trả lời",
                     description: "Khi trích dẫn cũng trả lời tin nhắn"
                 },
                 useSelectionForQuote: {
                     label: "Sử dụng lựa chọn để báo giá",
-                    description: "Khi trích dẫn hãy sử dụng văn bản đã chọn (nếu có)"
+                    description: "Khi trích dẫn, hãy sử dụng văn bản đã chọn nếu có"
                 }
             },
             actions: {
                 none: "Không có",
-                delete: "Sil",
+                delete: "Xóa bỏ",
                 copyLink: "Sao chép liên kết",
                 copyID: "Sao chép giấy tờ tùy thân",
                 copyContent: "Sao chép nội dung",
@@ -5988,53 +5988,53 @@ const translations: MatchStructure<typeof enTranslations> = {
                 reply: "Hồi đáp",
                 react: "Phản ứng",
                 openThread: "Mở chủ đề",
-                openTab: "Mở trong tab",
-                quote: "trích dẫn",
-                pin: "Ghim nó"
+                openTab: "Mở tab",
+                quote: "Trích dẫn",
+                pin: "Ghim"
             },
             missingPermissions: {
-                react: "Không thể phản hồi: Thiếu quyền",
-                pin: "Không thể khắc phục: Thiếu quyền",
+                react: "Không thể phản ứng: Thiếu quyền",
+                pin: "Không thể ghim: Thiếu quyền",
             },
-            cannotQuote: "Loại tin nhắn này không thể được trích dẫn",
+            cannotQuote: "Không thể trích dẫn loại tin nhắn này",
             copy: {
-                messageId: "ID tin nhắn đã được sao chép!",
+                messageId: "Đã sao chép ID tin nhắn!",
                 messageContent: "Đã sao chép nội dung tin nhắn!",
                 userId: "ID người dùng đã được sao chép!"
             },
             linkCopied: "Đã sao chép liên kết!"
         },
         messageColors: {
-            name: "Tin nhắnMàu sắc",
-            description: "Hiển thị mã màu trong tin nhắn, chẳng hạn như #FF0042.",
+            name: "MessageColors",
+            description: "Hiển thị mã màu như #FF0042 bên trong tin nhắn",
             option: {
                 renderType: {
-                    label: "Loại trực quan",
-                    description: "Xác định cách hiển thị màu sắc",
-                    textColor: "màu văn bản",
-                    block: "chặn bên cạnh",
-                    backgroundColor: "màu nền"
+                    label: "Loại kết xuất",
+                    description: "Cách hiển thị màu sắc",
+                    textColor: "Màu văn bản",
+                    block: "Chặn lân cận",
+                    backgroundColor: "Màu nền"
                 },
                 enableShortHexCodes: {
                     label: "Kích hoạt mã Hex ngắn",
-                    description: "Kích hoạt mã hex gồm 3 ký tự như #39f"
+                    description: "Kích hoạt mã hex 3 char như #39f"
                 },
                 blockView: {
                     label: "Loại xem khối",
-                    description: "Xác định cách hiển thị các khối màu",
+                    description: "Cách hiển thị khối màu",
                     right: "Bên phải",
                     left: "Bên trái",
-                    both: "cả hai bên"
+                    both: "Cả hai bên"
                 }
             }
         },
         messageFetchTimer: {
-            name: "Bộ đếm thời gian tìm nạp tin nhắn",
-            description: "Hiển thị thời gian tải tin nhắn của kênh hiện tại.",
+            name: "MessageFetchTimer",
+            description: "Hiển thị mất bao lâu để tìm nạp tin nhắn cho kênh hiện tại",
             option: {
                 showIcon: {
                     label: "Hiển thị biểu tượng",
-                    description: "Hiển thị biểu tượng thời gian tải trên thanh tin nhắn"
+                    description: "Hiển thị biểu tượng thời gian tìm nạp trên thanh thông báo"
                 },
                 showMs: {
                     label: "Hiển thị mili giây",
@@ -6045,35 +6045,35 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Màu biểu tượng (giá trị màu CSS)"
                 }
             },
-            loaded: "Tin nhắn được tải sau {{time}}ms ({{timeAgo}})",
-            day: "ngày trước",
-            hour: "giờ trước",
-            minute: "phút trước",
-            justNow: "Hiện nay"
+            loaded: "Tin nhắn được tải trong {{time}}ms ({{timeAgo}})",
+            day: "ngày{{s}} trước",
+            hour: "giờ{{s}} trước",
+            minute: "phút{{s}} trước",
+            justNow: "ngay bây giờ"
         },
         messageLatency: {
-            name: "Tin nhắnĐộ trễ",
-            description: "Thêm chỉ báo cho các tin nhắn mất ≥n giây để gửi.",
+            name: "MessageLatency",
+            description: "Hiển thị chỉ báo cho các tin nhắn mất ≥n giây để gửi",
             day: "ngày",
             days: "ngày",
-            hour: "chốc lát",
-            hours: "chốc lát",
+            hour: "giờ",
+            hours: "giờ",
             minute: "phút",
             minutes: "phút",
             second: "thứ hai",
-            seconds: "thứ hai",
+            seconds: "giây",
             millisecond: "mili giây",
             milliseconds: "mili giây",
-            and: "đã",
-            oldKotlinDetected: "Người dùng bị nghi ngờ đang sử dụng ứng dụng khách Discord Android đã lỗi thời.",
-            ahead: "Thời gian của người dùng này còn trước {{delta}}.",
+            and: "Và",
+            oldKotlinDetected: "Người dùng bị nghi ngờ đang sử dụng ứng dụng khách Discord Android cũ.",
+            ahead: "Đồng hồ của người dùng này đang chạy trước {{delta}}.",
             delay: "Tin nhắn này được gửi với độ trễ {{delta}}.",
             delayedMessage: "Tin nhắn bị trì hoãn",
-            oldAndroidClient: "Ứng dụng khách Android Discord kế thừa",
+            oldAndroidClient: "Ứng dụng khách Discord Android cũ",
             option: {
                 latency: {
-                    label: "Trì hoãn",
-                    description: "Giá trị ngưỡng tính bằng giây cho chỉ báo độ trễ"
+                    label: "Độ trễ",
+                    description: "Ngưỡng tính bằng giây cho chỉ báo độ trễ"
                 },
                 detectDiscordKotlin: {
                     label: "Phát hiện sự bất hòa Kotlin",
@@ -6085,117 +6085,117 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 ignoreSelf: {
                     label: "Bỏ qua bản thân",
-                    description: "Thêm chỉ báo vào tin nhắn của riêng bạn"
+                    description: "Đừng thêm chỉ báo vào tin nhắn của riêng bạn"
                 }
             }
         },
         messageLinkEmbeds: {
-            name: "Tin nhắnLiên kếtNhúng",
-            description: "Thêm bản xem trước cho các tin nhắn có chứa liên kết đến một tin nhắn khác.",
+            name: "MessageLinkEmbeds",
+            description: "Thêm bản xem trước vào các tin nhắn liên kết một tin nhắn khác",
             option: {
                 messageBackgroundColor: {
                     label: "Màu nền tin nhắn",
                     description: "Màu nền cho thư ở dạng nhúng phong phú"
                 },
                 automodEmbeds: {
-                    label: "chôn cất tự động",
-                    description: "Sử dụng nội dung nhúng tự động thay vì nội dung nhúng phong phú (nhỏ hơn nhưng chứa ít thông tin hơn)",
+                    label: "Nhúng Automod",
+                    description: "Sử dụng nội dung nhúng tự động thay vì nội dung nhúng phong phú (nhỏ hơn nhưng ít thông tin hơn)",
                     always: "Luôn sử dụng nhúng automod",
-                    prefer: "Thích nhúng Automod hơn, nhưng sử dụng nhúng phong phú nếu một số nội dung không thể được hiển thị",
+                    prefer: "Thích nhúng tự động sửa đổi nhưng sử dụng nhúng phong phú nếu một số nội dung không thể hiển thị",
                     never: "Không bao giờ sử dụng nhúng automod"
                 },
                 listMode: {
                     label: "Chế độ danh sách",
-                    description: "Xác định xem danh sách ID sẽ được sử dụng làm danh sách đen hay danh sách trắng",
+                    description: "Nên sử dụng danh sách ID làm danh sách đen hay danh sách trắng",
                     blacklist: "Danh sách đen",
                     whitelist: "Danh sách trắng"
                 },
                 idList: {
                     label: "Danh sách ID",
-                    description: "ID máy chủ/kênh/người dùng sẽ được thêm vào danh sách đen hoặc danh sách trắng (cách nhau bằng dấu phẩy)"
+                    description: "ID bang hội/kênh/người dùng vào danh sách đen hoặc danh sách trắng (phân tách bằng dấu phẩy)"
                 },
                 clearMessageCache: {
                     label: "Xóa bộ nhớ đệm tin nhắn",
-                    description: "Xóa bộ nhớ đệm của tin nhắn được liên kết"
+                    description: "Xóa bộ đệm tin nhắn được liên kết"
                 }
             },
             noContent: {
-                noAttachments: "không có nội dung {{count}} tin nhắn nhúng",
-                noEmbeds: "không có nội dung bổ sung {{count}}",
-                both: "không có nội dung, tệp đính kèm {{attachments}} và tin nhắn nhúng {{embeds}}"
+                noAttachments: "không có nội dung {{count}} nhúng{{s}}",
+                noEmbeds: "không có nội dung {{count}} đính kèm{{s}}",
+                both: "không có nội dung, {{attachments}} tệp đính kèm{{attachmentsS}} và {{embeds}} nhúng{{embedsS}}"
             },
-            dm: "Tin nhắn riêng",
-            groupDm: "Tin nhắn nhóm",
-            server: "Người trình bày"
+            dm: "Tin nhắn trực tiếp",
+            groupDm: "Nhóm DM",
+            server: "Máy chủ"
         },
         messageLinkTooltip: {
-            name: "Chú giải công cụ liên kết tin nhắn",
-            description: "Thêm chú giải công cụ và bản xem trước tin nhắn khi di chuột qua các liên kết tin nhắn, câu trả lời và tin nhắn được chuyển tiếp.",
+            name: "MessageLinkTooltip",
+            description: "Thêm chú giải công cụ có bản xem trước tin nhắn khi di chuột qua các liên kết tin nhắn, câu trả lời và tin nhắn được chuyển tiếp.",
             loading: "Đang tải...",
             option: {
                 onLink: {
                     label: "Trên liên kết",
-                    description: "Hiển thị chú giải công cụ khi di chuột qua các liên kết tin nhắn"
+                    description: "Hiển thị chú giải công cụ khi di chuột qua liên kết tin nhắn"
                 },
                 onReply: {
-                    label: "Đang phản hồi",
+                    label: "Khi trả lời",
                     description: "Hiển thị chú giải công cụ khi di chuột qua thư trả lời"
                 },
                 onForward: {
-                    label: "Trên tin nhắn đã truyền",
+                    label: "Về phía trước",
                     description: "Hiển thị chú giải công cụ khi di chuột qua các tin nhắn được chuyển tiếp"
                 },
                 display: {
-                    label: "Vẻ bề ngoài",
-                    description: "Phong cách ngoại hình",
+                    label: "Trưng bày",
+                    description: "Kiểu hiển thị",
                     auto: "Tương tự như tin nhắn",
                     compact: "Nhỏ gọn",
-                    cozy: "Thoải mái"
+                    cozy: "Ấm áp"
                 }
             }
         },
         messageLogger: {
             name: "MessageLogger",
-            description: "Tạm thời lưu các tin nhắn đã xóa và chỉnh sửa.",
+            description: "Tạm thời ghi lại các tin nhắn đã xóa và chỉnh sửa.",
             removeMessage: "Xóa lịch sử tin nhắn",
             removeMessageTemporary: "Xóa tin nhắn (Tạm thời)",
             clearMessageLog: "Xóa nhật ký tin nhắn",
             modal: {
                 edit: {
                     title: "Lịch sử chỉnh sửa tin nhắn",
-                    tooltip: "Trạng thái chỉnh sửa này không thể hiển thị vì nó chưa được lưu."
+                    tooltip: "Trạng thái chỉnh sửa này chưa được ghi lại nên không thể hiển thị."
                 }
             },
             option: {
                 deleteStyle: {
                     label: "Xóa kiểu",
-                    description: "Phong cách xuất hiện của tin nhắn đã xóa",
-                    text: "văn bản màu đỏ",
-                    overlay: "lớp phủ màu đỏ"
+                    description: "Phong cách của tin nhắn đã xóa",
+                    text: "Văn bản màu đỏ",
+                    overlay: "Lớp phủ màu đỏ"
                 },
                 logDeletes: {
-                    label: "Lưu Đã xóa",
-                    description: "Xác định tin nhắn đã xóa có được lưu hay không"
+                    label: "Xóa nhật ký",
+                    description: "Có ghi lại các tin nhắn đã xóa hay không"
                 },
                 collapseDeleted: {
                     label: "Đã xóa thu gọn",
-                    description: "Tinh chỉnh các tin nhắn đã xóa tương tự như tin nhắn bị chặn"
+                    description: "Có thu gọn tin nhắn đã xóa hay không, tương tự như tin nhắn bị chặn"
                 },
                 logEdits: {
-                    label: "Lưu đã chỉnh sửa",
-                    description: "Xác định có lưu tin nhắn đã chỉnh sửa hay không"
+                    label: "Nhật ký chỉnh sửa",
+                    description: "Có ghi lại các tin nhắn đã chỉnh sửa hay không"
                 },
                 inlineEdits: {
                     label: "Chỉnh sửa nội tuyến",
-                    description: "Hiển thị lịch sử chỉnh sửa như một phần nội dung tin nhắn"
+                    description: "Có hiển thị lịch sử chỉnh sửa như một phần nội dung tin nhắn hay không"
                 },
                 ignoreBots: {
                     label: "Bỏ qua Bot",
-                    description: "Bỏ qua tin nhắn được gửi bởi bot"
+                    description: "Có bỏ qua tin nhắn của bot hay không"
                 },
                 ignoreSelf: {
                     label: "Bỏ qua bản thân",
-                    description: "Bỏ qua tin nhắn của chính mình"
+                    description: "Có nên tự mình bỏ qua tin nhắn hay không"
                 },
                 ignoreUsers: {
                     label: "Bỏ qua người dùng",
@@ -6206,30 +6206,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Danh sách ID kênh được phân tách bằng dấu phẩy cần bỏ qua"
                 },
                 ignoreGuilds: {
-                    label: "Bỏ qua máy chủ",
-                    description: "Danh sách ID máy chủ được phân tách bằng dấu phẩy cần bỏ qua"
+                    label: "Bỏ qua Bang hội",
+                    description: "Danh sách ID bang hội được phân tách bằng dấu phẩy để bỏ qua"
                 },
                 showEditDiffs: {
-                    label: "Hiển thị chỉnh sửa sự khác biệt",
-                    description: "Hiển thị sự khác biệt giữa các phiên bản tin nhắn đã chỉnh sửa"
+                    label: "Hiển thị chỉnh sửa khác biệt",
+                    description: "Hiển thị sự khác biệt trực quan giữa các phiên bản tin nhắn đã chỉnh sửa"
                 },
                 separatedDiffs: {
-                    label: "Chia sự khác biệt",
-                    description: "Cung cấp chế độ xem dễ đọc hơn bằng cách hiển thị các phần bổ sung và xóa riêng biệt trong các khác biệt"
+                    label: "Khác biệt riêng biệt",
+                    description: "Tách riêng phần bổ sung và loại bỏ trong các khác biệt để có sự khác biệt dễ đọc hơn"
                 }
             }
         },
         messageLoggerEnhanced: {
-            name: "MessageLoggerTăng cường",
-            description: "Nó tăng cường plugin MessageLogger với các tính năng bổ sung.",
-            updateImageCacheDir: "Thư mục bộ nhớ đệm trực quan đã được cập nhật thành công.",
-            updateLogsDir: "Thư mục nhật ký đã được cập nhật thành công.",
+            name: "MessageLoggerEnhanced",
+            description: "Cải tiến plugin MessageLogger với các tính năng bổ sung.",
+            updateImageCacheDir: "Đã cập nhật thành công thư mục bộ đệm hình ảnh.",
+            updateLogsDir: "Đã cập nhật thành công thư mục nhật ký.",
             failedUpdate: "Không thể cập nhật thư mục.",
             blacklist: "Danh sách đen",
             whitelist: "Danh sách trắng",
             failedToRemove: "Không thể xóa tin nhắn",
-            successfullyImported: "Nhật ký đã được nhập thành công.",
-            errorImportingLogs: "Đã xảy ra lỗi khi nhập nhật ký. Kiểm tra bảng điều khiển để biết thêm thông tin.",
+            successfullyImported: "Đã nhập nhật ký thành công",
+            errorImportingLogs: "Lỗi khi nhập nhật ký. Kiểm tra bảng điều khiển để biết thêm thông tin",
             importing: "Đang nhập khẩu...",
             importLogs: "Nhập nhật ký",
             exporting: "Đang xuất...",
@@ -6238,20 +6238,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                 clearLogs: {
                     title: "Xóa nhật ký",
                     body: "Bạn có chắc chắn muốn xóa tất cả nhật ký không?",
-                    confirmText: "thông thoáng",
+                    confirmText: "Thông thoáng",
                     cancel: "Hủy bỏ"
                 },
                 clearVisibleLogs: {
                     title: "Xóa nhật ký hiển thị",
                     body: "Bạn có chắc chắn muốn xóa nhật ký {{messages}} không?",
-                    confirmText: "thông thoáng",
+                    confirmText: "Thông thoáng",
                     cancel: "Hủy bỏ"
                 },
-                cleared: "Cơ sở dữ liệu nhật ký tin nhắn và bộ đệm đã bị xóa."
+                cleared: "Đã xóa cơ sở dữ liệu nhật ký tin nhắn và bộ nhớ đệm."
             },
             context: {
-                title: "Nhật ký tin nhắn",
-                jumpToMessage: "Đi tới Tin nhắn",
+                title: "Trình ghi tin nhắn",
+                jumpToMessage: "Chuyển tới tin nhắn",
                 openUserProfile: "Mở hồ sơ người dùng",
                 copyContent: "Sao chép nội dung",
                 copyUserId: "Sao chép ID người dùng",
@@ -6260,9 +6260,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copyServerId: "Sao chép ID máy chủ",
                 deleteLog: "Xóa nhật ký",
                 fromUsernameDm: "Từ DM của {{username}}",
-                fromGroupDm: "Tin nhắn trực tiếp của nhóm {{channelName}}",
-                fromServerChannel: "Từ kênh {{channelName}} trên máy chủ {{serverName}}",
-                moveTypeTo: "Di chuyển {{type}} đến {{destination}}",
+                fromGroupDm: "Từ {{channelName}} Nhóm DM",
+                fromServerChannel: "Từ {{channelName}} ở {{serverName}}",
+                moveTypeTo: "Di chuyển {{type}} tới {{destination}}",
                 removeTypeFrom: "Xóa {{type}} khỏi {{list}}",
                 openLogsFor: "Mở Nhật ký cho {{name}}",
                 openLogs: "Nhật ký mở",
@@ -6289,207 +6289,207 @@ const translations: MatchStructure<typeof enTranslations> = {
                 moveChannelToWhitelist: "Chuyển kênh vào danh sách trắng"
             },
             type: {
-                server: "Người trình bày",
+                server: "Máy chủ",
                 user: "người dùng",
                 channel: "Kênh"
             },
             button: {
                 chooseFolder: "Chọn thư mục",
-                browse: "Gozat",
+                browse: "Duyệt qua",
                 clearLogs: "Xóa tất cả nhật ký",
                 clearVisibleLogs: "Xóa nhật ký hiển thị",
-                sortOldest: "Sắp xếp cũ nhất đến mới nhất",
-                sortNewest: "Sắp xếp mới nhất đến cũ nhất",
+                sortOldest: "Sắp xếp cũ nhất trước",
+                sortNewest: "Sắp xếp mới nhất đầu tiên",
                 loadMore: "Tải thêm",
-                noResults: "Không có kết quả nào trong tab {{tab}}",
-                tryOtherTabs: "Hãy thử tab {{nextTab}} hoặc {{lastTab}}",
+                noResults: "Không có kết quả nào trong {{tab}}",
+                tryOtherTabs: "Có thể thử {{nextTab}} hoặc {{lastTab}}",
                 importLogs: "Nhập nhật ký"
             },
             modal: {
                 title: "Lọc tin nhắn",
                 deleted: "Đã xóa",
-                edited: "Được tổ chức",
-                ghostPing: "Ping vô hình",
-                empty: "Trống rỗng nhỉ",
-                importLogs: "ML Nâng cao hiện lưu nhật ký vào IndexedDB. Bạn cần nhập nhật ký cũ của mình từ thư mục nhật ký. Việc nhập không thay đổi nhật ký hiện có."
+                edited: "Đã chỉnh sửa",
+                ghostPing: "ma ping",
+                empty: "trống rỗng à",
+                importLogs: "ML Nâng cao hiện lưu trữ nhật ký trong indexeddb. Bạn cần nhập nhật ký cũ của mình từ thư mục nhật ký. Quá trình nhập sẽ không ghi đè nhật ký hiện có"
             },
             clear: {
                 title: "Xóa nhật ký",
                 description: "Bạn có chắc chắn muốn xóa tất cả nhật ký không?",
-                confirm: "thông thoáng",
+                confirm: "Thông thoáng",
                 cancel: "Hủy bỏ"
             },
             option: {
                 saveMessages: {
                     label: "Lưu tin nhắn",
-                    description: "Xác định xem tin nhắn đã xóa và chỉnh sửa có được lưu hay không."
+                    description: "Có lưu lại tin nhắn đã xóa và chỉnh sửa hay không."
                 },
                 saveImages: {
                     label: "Lưu hình ảnh",
                     description: "Lưu các tệp đính kèm đã xóa."
                 },
                 sortNewest: {
-                    label: "Sắp xếp mới nhất đến cũ nhất",
+                    label: "Sắp xếp mới nhất đầu tiên",
                     description: "Sắp xếp nhật ký theo mới nhất."
                 },
                 cacheMessagesFromServers: {
                     label: "Tin nhắn bộ nhớ đệm từ máy chủ",
-                    description: "Thông thường, trình ghi nhật ký chỉ ghi lại ID và DM nằm trong danh sách cho phép, việc bật tùy chọn này cũng sẽ ghi lại tin nhắn trên tất cả các máy chủ. Tuy nhiên, điều này có thể vượt quá giới hạn bộ đệm và khiến một số tin nhắn bị bỏ qua."
+                    description: "Thông thường, trình ghi nhật ký tin nhắn chỉ ghi nhật ký từ các ID và DM nằm trong danh sách trắng, việc bật tính năng này có nghĩa là nó cũng sẽ ghi nhật ký tin nhắn từ tất cả các máy chủ. Lưu ý rằng điều này có thể khiến bộ đệm vượt quá giới hạn, dẫn đến một số thư bị bỏ sót. Nếu bạn đang ở trong nhiều máy chủ, điều này có thể làm tăng đáng kể khả năng thư được ghi lại, điều này có thể dẫn đến bản ghi thư lớn và bao gồm các thư không liên quan."
                 },
                 ignoreBots: {
                     label: "Bỏ qua Bot",
-                    description: "Bỏ qua tin nhắn bot."
+                    description: "Có bỏ qua tin nhắn của bot hay không"
                 },
                 ignoreWebhooks: {
-                    label: "Webhookları Yoksay",
-                    description: "Bỏ qua tin nhắn webhook."
+                    label: "Bỏ qua Webhooks",
+                    description: "Có bỏ qua tin nhắn của webhooks hay không"
                 },
                 ignoreSelf: {
                     label: "Bỏ qua bản thân",
-                    description: "Bỏ qua tin nhắn của riêng bạn."
+                    description: "Có nên tự mình bỏ qua tin nhắn hay không"
                 },
                 ignoreMutedGuilds: {
-                    label: "Bỏ qua máy chủ bị tắt tiếng",
-                    description: "Tin nhắn trên máy chủ bị tắt tiếng không được ghi lại. Tuy nhiên, người dùng/kênh trong danh sách trắng vẫn được ghi lại."
+                    label: "Bỏ qua các bang hội bị tắt tiếng",
+                    description: "Tin nhắn trong các bang hội bị tắt tiếng sẽ không được ghi lại. Người dùng/kênh trong danh sách trắng trong bang hội bị tắt tiếng sẽ vẫn được ghi lại."
                 },
                 ignoreMutedCategories: {
                     label: "Bỏ qua các danh mục bị tắt tiếng",
-                    description: "Tin nhắn trong các kênh thuộc danh mục bị tắt tiếng sẽ không được ghi lại."
+                    description: "Tin nhắn trong các kênh thuộc danh mục bị tắt tiếng sẽ không được ghi lại. Người dùng/kênh trong danh sách trắng trong bang hội bị tắt tiếng sẽ vẫn được ghi lại."
                 },
                 ignoreMutedChannels: {
                     label: "Bỏ qua các kênh bị tắt tiếng",
-                    description: "Tin nhắn trên các kênh bị tắt tiếng sẽ không được ghi lại."
+                    description: "Tin nhắn trong các kênh bị tắt tiếng sẽ không được ghi lại. Người dùng/kênh trong danh sách trắng trong bang hội bị tắt tiếng sẽ vẫn được ghi lại."
                 },
                 alwaysLogDirectMessages: {
-                    label: "Luôn lưu DM",
-                    description: "Luôn lưu tin nhắn trực tiếp."
+                    label: "Luôn ghi lại tin nhắn trực tiếp",
+                    description: "Luôn đăng nhập DM"
                 },
                 alwaysLogCurrentChannel: {
-                    label: "Luôn lưu kênh hiện tại",
-                    description: "Luôn lưu kênh hiện tại. Các kênh/người dùng trong danh sách đen bị loại trừ."
+                    label: "Luôn ghi lại kênh hiện tại",
+                    description: "Luôn ghi lại kênh đã chọn hiện tại. Các kênh/người dùng nằm trong danh sách đen vẫn sẽ bị bỏ qua."
                 },
                 permanentlyRemoveLogByDefault: {
                     label: "Xóa vĩnh viễn nhật ký theo mặc định",
-                    description: "Trong menu ngữ cảnh MessageLogger chính, tùy chọn xóa khỏi nhật ký tin nhắn mặc định là xóa vĩnh viễn."
+                    description: "Nút xóa nhật ký Base MessageLogger sẽ xóa nhật ký vĩnh viễn"
                 },
                 hideMessageFromMessageLoggers: {
-                    label: "Ẩn tin nhắn từ người ghi nhật ký",
-                    description: "Khi được bật, nó sẽ thêm tùy chọn menu ngữ cảnh để ẩn tin nhắn khỏi các trình ghi nhật ký khác. Nó có thể không an toàn, sử dụng có nguy cơ của riêng bạn."
+                    label: "Ẩn tin nhắn khỏi trình ghi tin nhắn",
+                    description: "Khi được bật, nút menu ngữ cảnh sẽ được thêm vào tin nhắn để cho phép bạn xóa tin nhắn mà không bị các trình ghi nhật ký khác ghi lại. Có thể không an toàn, hãy tự chịu rủi ro khi sử dụng."
                 },
                 showLogsButton: {
-                    label: "Hiển thị nút nhật ký",
-                    description: "Chuyển đổi xem thanh công cụ có được hiển thị hay không."
+                    label: "Nút Hiển thị nhật ký",
+                    description: "Chuyển sang bất cứ khi nào hiển thị hộp công cụ hay không"
                 },
                 showWhereMessageIsFrom: {
-                    label: "Hiển thị nguồn tin nhắn",
-                    description: "Hiển thị kênh/tác giả và tên máy chủ của tin nhắn."
+                    label: "Hiển thị tin nhắn đến từ đâu",
+                    description: "Hiển thị kênh tin nhắn/tên tác giả và tên máy chủ"
                 },
                 messagesToDisplayAtOnceInLogs: {
-                    label: "Số lượng tin nhắn hiển thị đồng thời trong nhật ký",
-                    description: "Xác định số lượng tin nhắn hiển thị trong nhật ký tại một thời điểm và số lượng tin nhắn sẽ được thêm vào khi tải nhiều tin nhắn hơn."
+                    label: "Tin nhắn sẽ hiển thị cùng một lúc trong nhật ký",
+                    description: "Số lượng tin nhắn hiển thị cùng một lúc trong nhật ký và số lượng tin nhắn cần tải khi tải thêm tin nhắn trong nhật ký."
                 },
                 hideMessageFromMessageLoggersDeletedMessage: {
-                    label: "Nội dung tin nhắn bị ẩn khỏi Trình ghi nhật ký tin nhắn",
-                    description: "Nội dung để thay thế tin nhắn khi ẩn khỏi trình ghi nhật ký tin nhắn được sử dụng."
+                    label: "Ẩn tin nhắn khỏi trình ghi nhật ký tin nhắn Đã xóa tin nhắn",
+                    description: "Nội dung tin nhắn cần thay thế khi sử dụng tính năng ẩn tin nhắn khỏi trình ghi nhật ký tin nhắn."
                 },
                 messageLimit: {
                     label: "Giới hạn tin nhắn",
-                    description: "Số lượng tin nhắn tối đa để lưu. Khi vượt quá giới hạn, tin nhắn cũ sẽ bị xóa. 0 = không giới hạn."
+                    description: "Số lượng tin nhắn tối đa để lưu. Tin nhắn cũ hơn sẽ bị xóa khi đạt đến giới hạn. 0 có nghĩa là không có giới hạn"
                 },
                 attachmentSizeLimitInMegabytes: {
-                    label: "Giới hạn kích thước tệp đính kèm (MB)",
-                    description: "Kích thước tối đa (tính bằng MB) của tệp đính kèm cần lưu. Các tệp đính kèm lớn hơn giá trị này sẽ không được lưu."
+                    label: "Giới hạn kích thước tệp đính kèm tính bằng Megabyte",
+                    description: "Kích thước tối đa của tệp đính kèm tính bằng megabyte cần lưu. Các tệp đính kèm lớn hơn kích thước này sẽ không được lưu."
                 },
                 attachmentFileExtensions: {
-                    label: "Phần mở rộng tệp bổ sung",
-                    description: "Danh sách các phần mở rộng tệp được phân tách bằng dấu phẩy để lưu. Nếu để trống, tất cả các tệp đính kèm sẽ được lưu."
+                    label: "Phần mở rộng tệp đính kèm",
+                    description: "Danh sách các phần mở rộng tệp được phân tách bằng dấu phẩy để lưu. Các tệp đính kèm có phần mở rộng tệp không có trong danh sách này sẽ không được lưu. Để trống để lưu tất cả các tệp đính kèm."
                 },
                 cacheLimit: {
                     label: "Giới hạn bộ nhớ đệm",
-                    description: "Số lượng tin nhắn tối đa để giữ trong bộ nhớ cache. Khi vượt quá giới hạn, tin nhắn cũ sẽ bị xóa."
+                    description: "Số lượng tin nhắn tối đa để giữ trong bộ nhớ cache. Tin nhắn cũ hơn sẽ bị xóa khi đạt đến giới hạn."
                 },
                 timeBasedCleanupMinutes: {
-                    label: "Làm sạch phút theo thời gian",
-                    description: "Khoảng thời gian phút trong đó việc dọn dẹp các tin nhắn cũ hơn giới hạn tin nhắn sẽ được thực hiện theo thời gian."
+                    label: "Số phút dọn dẹp dựa trên thời gian",
+                    description: "Khoảng thời gian tính bằng phút để thực hiện dọn dẹp các tin nhắn cũ hơn giới hạn tin nhắn dựa trên thời gian."
                 },
                 preserveCurrentChannel: {
-                    label: "Giữ kênh hiện tại",
-                    description: "Khi được bật, các tin nhắn trên kênh hiện được chọn của bạn sẽ không bị ảnh hưởng bởi việc dọn dẹp theo thời gian."
+                    label: "Bảo toàn kênh hiện tại",
+                    description: "Khi được bật, các tin nhắn trong kênh hiện được chọn của bạn sẽ không bị ảnh hưởng bởi việc dọn dẹp theo thời gian."
                 },
                 whitelistedIds: {
-                    label: "ID danh sách trắng",
-                    description: "ID máy chủ, kênh hoặc ID người dùng được đưa vào danh sách trắng."
+                    label: "ID thuộc danh sách trắng",
+                    description: "Máy chủ, kênh hoặc ID người dùng được đưa vào danh sách trắng."
                 },
                 blacklistedIds: {
-                    label: "ID danh sách đen",
+                    label: "ID bị liệt vào danh sách đen",
                     description: "Máy chủ, kênh hoặc ID người dùng bị liệt vào danh sách đen."
                 },
                 imageCacheDir: {
-                    label: "Thư mục bộ nhớ đệm trực quan",
-                    description: "Chọn thư mục hình ảnh đã lưu."
+                    label: "Thư mục bộ đệm hình ảnh",
+                    description: "Chọn thư mục hình ảnh đã lưu"
                 },
                 logsDir: {
-                    label: "Chỉ mục nhật ký",
-                    description: "Chọn thư mục nơi nhật ký sẽ được lưu."
+                    label: "Thư mục nhật ký",
+                    description: "Chọn thư mục nhật ký"
                 },
                 importLogs: {
                     label: "Nhập nhật ký",
-                    description: "Nhập nhật ký từ tập tin."
+                    description: "Nhập nhật ký từ tệp"
                 },
                 exportLogs: {
                     label: "Xuất nhật ký",
-                    description: "Xuất nhật ký từ IndexedDB."
+                    description: "Xuất nhật ký từ IndexedDB"
                 },
                 openLogs: {
                     label: "Nhật ký mở",
-                    description: "Mở nhật ký."
+                    description: "Nhật ký mở"
                 },
                 openImageCacheFolder: {
-                    label: "Mở thư mục bộ nhớ đệm trực quan",
-                    description: "Mở thư mục bộ đệm trực quan."
+                    label: "Mở thư mục bộ đệm hình ảnh",
+                    description: "Mở thư mục bộ đệm hình ảnh"
                 },
                 clearLogs: {
                     label: "Xóa nhật ký",
-                    description: "Xóa nhật ký.",
+                    description: "Xóa nhật ký",
                     title: "Xóa nhật ký",
                     body: "Bạn có chắc chắn muốn xóa tất cả nhật ký không?",
-                    confirmText: "thông thoáng",
+                    confirmText: "Thông thoáng",
                     cancel: "Hủy bỏ"
                 }
             }
         },
         messageNotifier: {
-            name: "Trình thông báo tin nhắn",
-            description: "Nhận thông báo khi người dùng được chọn gửi tin nhắn",
-            dm: "tin nhắn riêng tư",
+            name: "MessageNotifier",
+            description: "Nâng cốc chúc mừng khi người dùng được chọn gửi tin nhắn",
+            dm: "DM của họ",
             option: {
                 users: {
                     label: "Người dùng",
-                    description: "Danh sách ID người dùng được phân tách bằng dấu phẩy để nhận thông báo tin nhắn",
+                    description: "Danh sách ID người dùng được phân tách bằng dấu phẩy để nhận thông báo chúc mừng cho",
                     invalidId: "{{id}} không phải là ID người dùng hợp lệ"
                 }
             },
             notification: {
-                title: "{{tên người dùng}} đã gửi tin nhắn",
-                body: "Nhấp để đi tới {{locationName}}"
+                title: "{{username}} đã gửi tin nhắn",
+                body: "Bấm để chuyển tới {{locationName}}"
             }
         },
         messageTags: {
-            name: "Tin nhắnThẻ",
-            description: "Nó cho phép bạn lưu tin nhắn và sử dụng chúng bằng một lệnh đơn giản.",
-            notExist: "Thẻ **{{tagname}}** không còn tồn tại! Khởi động lại Discord để khắc phục :)",
+            name: "MessageTags",
+            description: "Cho phép bạn lưu tin nhắn và sử dụng chúng bằng một lệnh đơn giản.",
+            notExist: "Thẻ **{{tagname}}** không tồn tại nữa! Vui lòng tải lại Discord của bạn để khắc phục :)",
             alreadyExist: "Thẻ có tên **{{tagname}}** đã tồn tại!",
             sentTag: "Thẻ **{{tagname}}** đã được gửi!",
-            successCreate: "**{{tagname}}** thẻ đã được tạo thành công!",
-            allTags: "Tất cả các thẻ:",
-            noTags: "Up! Chưa có thẻ nào, hãy sử dụng /tag create để tạo chúng!",
-            noDeleteTag: "Không tìm thấy thẻ có tên **{{tagname}}** nên không thể xóa được!",
-            successDelete: "Thẻ **{{name}}** Đã xóa thành công!",
+            successCreate: "Thẻ **{{tagname}}** đã được tạo!",
+            allTags: "Tất cả các thẻ của bạn:",
+            noTags: "Rất tiếc! Chưa có thẻ nào, hãy sử dụng /tag create để tạo một thẻ!",
+            noDeleteTag: "Thẻ **{{tagname}}** không tồn tại nên không thể xóa được!",
+            successDelete: "Đã xóa thẻ thành công **{{name}}**!",
             tagPreview: "Thẻ có tên **{{name}}** không tồn tại!",
             option: {
                 clyde: {
-                    label: "Tin nhắn của Clyde trong bài viết",
-                    description: "Sau khi được bật, Clyde sẽ gửi cho bạn một tin nhắn tạm thời khi thẻ được sử dụng."
+                    label: "Tin nhắn Clyde đang gửi",
+                    description: "Nếu được bật, Clyde sẽ gửi cho bạn một tin nhắn tạm thời khi thẻ được sử dụng."
                 },
                 tagsList: {
                     label: "Danh sách thẻ",
@@ -6498,23 +6498,23 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             command: {
                 tags: {
-                    description: "Quản lý thẻ của riêng bạn",
+                    description: "Quản lý tất cả các thẻ cho chính mình",
                     option: {
                         create: {
-                            description: "Tạo nhãn mới",
-                            name: "Tên của thẻ sẽ kích hoạt phản hồi",
-                            message: "Tin nhắn sẽ được gửi khi bạn sử dụng hashtag này"
+                            description: "Tạo một thẻ mới",
+                            name: "The name of the tag to trigger the response",
+                            message: "Thông điệp bạn sẽ gửi khi sử dụng thẻ này"
                         },
                         list: {
-                            description: "Liệt kê tất cả các thẻ"
+                            description: "Liệt kê tất cả các thẻ từ chính bạn"
                         },
                         delete: {
-                            description: "Xóa thẻ",
-                            name: "Tên tag cần xóa"
+                            description: "Xóa thẻ khỏi chính bạn",
+                            name: "The name of the tag to remove"
                         },
                         preview: {
-                            description: "Xem trước thẻ mà không đăng công khai",
-                            name: "Tên của thẻ để xem trước"
+                            description: "Xem trước thẻ mà không gửi công khai",
+                            name: "The name of the tag to preview"
                         }
                     }
                 }
@@ -6522,167 +6522,167 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         micLoopbackTester: {
             name: "MicLoopbackTester",
-            description: "Thêm biểu tượng kiểm tra vòng lặp micrô vào bảng người dùng",
-            button: "Chu kỳ kiểm tra micrô"
+            description: "Thêm biểu tượng kiểm tra vòng lặp mic vào bảng người dùng",
+            button: "Kiểm tra mic lặp lại"
         },
         middleClickTweaks: {
-            name: "MiddleClickTinh chỉnh",
-            description: "Nhiều cải tiến về nhấp chuột giữa (bánh xe chuột) như dán và mở liên kết.",
+            name: "MiddleClickTweaks",
+            description: "Nhiều chỉnh sửa nhấp chuột giữa khác nhau, chẳng hạn như dán và mở liên kết.",
             option: {
                 openScope: {
                     label: "Phạm vi mở",
-                    description: "Nó ngăn các loại nội dung này mở khi nhấp chuột giữa.",
+                    description: "Ngăn chặn việc nhấp chuột giữa vào các loại nội dung này để mở chúng.",
                     links: "Liên kết",
                     media: "Phương tiện truyền thông",
                     linksAndMedia: "Liên kết và phương tiện truyền thông",
                     none: "Không có"
                 },
                 pasteScope: {
-                    label: "Phạm vi liên kết",
-                    description: "Trong một số trường hợp nhất định, nhấp chuột giữa sẽ ngăn cản việc dán.",
-                    always: "Luôn chặn dán bằng cách nhấp chuột giữa",
-                    focus: "Chỉ chặn khi vùng văn bản không được tập trung",
+                    label: "Dán phạm vi",
+                    description: "Ngăn chặn nhấp chuột giữa dán trong những tình huống này.",
+                    always: "Luôn ngăn chặn việc dán nhấp chuột giữa",
+                    focus: "Chỉ ngăn chặn khi vùng văn bản không được tập trung",
                 },
                 pasteThreshold: {
-                    label: "Ngưỡng liên kết",
-                    description: "Một phần nghìn giây cần thiết để dán để kích hoạt lại sau khi nhấp chuột giữa."
+                    label: "Dán ngưỡng",
+                    description: "Một phần nghìn giây cho đến khi tính năng dán được bật lại sau lần nhấp chuột giữa."
                 }
             }
         },
         moreCommands: {
-            name: "Thêmlệnh",
+            name: "MoreCommands",
             description: "Echo, Lenny, Mock và hơn thế nữa",
             command: {
                 echo: {
-                    description: "Gửi tin nhắn dưới dạng Clyde (địa phương)"
+                    description: "Gửi tin nhắn dưới dạng Clyde (cục bộ)"
                 },
                 lenny: {
-                    description: "Gửi một khuôn mặt Lenny"
+                    description: "Gửi một khuôn mặt lenny"
                 },
                 mock: {
-                    description: "Làm trò cười cho mọi người (mOcK PeOpLe)"
+                    description: "người dân mock"
                 },
                 wordcount: {
-                    description: "Tính số từ trong tin nhắn",
+                    description: "Đếm số từ trong tin nhắn",
                     response: "Tin nhắn chứa {{count}} từ."
                 },
                 flipcoin: {
-                    description: "Lật đồng xu và trả về kết quả",
-                    heads: "Viết",
-                    tails: "Tura",
-                    response: "Số tiền {{result}} đã đến."
+                    description: "Lật một đồng xu và trả lại mặt ngửa hoặc mặt sấp",
+                    heads: "đầu",
+                    tails: "Đuôi",
+                    response: "Đồng xu đã rơi vào {{result}}."
                 },
                 ask: {
-                    description: "Hỏi và trả lời các câu hỏi có/không",
+                    description: "Đặt câu hỏi có/không và nhận được câu trả lời",
                     yes: "Đúng",
                     no: "KHÔNG",
                     maybe: "Có lẽ",
-                    askAgain: "hỏi lại sau",
-                    definitelyNot: "Tuyệt đối không",
-                    itIsCertain: "Hoàn toàn có"
+                    askAgain: "Hỏi lại sau",
+                    definitelyNot: "Chắc chắn là không",
+                    itIsCertain: "Đó là điều chắc chắn"
                 },
                 randomanimal: {
-                    description: "Trả về hình ảnh động vật ngẫu nhiên",
+                    description: "Nhận một hình ảnh động vật ngẫu nhiên",
                     animal: "chọn con vật của bạn",
                     cat: "con mèo",
                     dog: "chó",
-                    response: "Xin lỗi, không thể lấy hình ảnh động vật vào thời điểm này"
+                    response: "Rất tiếc, hiện không thể tải hình ảnh động vật"
                 },
                 randomnumber: {
                     description: "Tạo một số ngẫu nhiên giữa hai giá trị",
-                    min: "tối thiểu",
-                    max: "giá trị tối đa",
+                    min: "Giá trị tối thiểu",
+                    max: "Giá trị tối đa",
                     response: "Số ngẫu nhiên giữa {{min}} và {{max}}: {{number}}"
                 },
                 choose: {
-                    description: "Chọn ngẫu nhiên một trong số các tùy chọn đã cho",
-                    option: "Danh sách tùy chọn được phân tách bằng dấu phẩy",
-                    response: "Lựa chọn của tôi: {{choice}}"
+                    description: "Chọn ngẫu nhiên từ các tùy chọn được cung cấp",
+                    option: "Danh sách lựa chọn được phân tách bằng dấu phẩy",
+                    response: "Tôi chọn: {{choice}}"
                 },
                 systeminfo: {
                     description: "Hiển thị thông tin hệ thống",
                     platform: "Nền tảng",
                     deviceType: "Loại thiết bị",
                     mobile: "Điện thoại di động",
-                    desktop: "máy tính để bàn",
-                    browser: "Máy quét",
+                    desktop: "Máy tính để bàn",
+                    browser: "Trình duyệt",
                     cpuCores: "lõi CPU",
                     memory: "Ký ức",
                     screen: "Màn hình",
-                    languages: "Dil",
-                    network: "Trắng",
-                    online: "trực tuyến",
-                    offline: "ngoại tuyến",
-                    failedToFetch: "Không thể truy xuất thông tin hệ thống",
-                    unknown: "không rõ"
+                    languages: "Ngôn ngữ",
+                    network: "Mạng",
+                    online: "Trực tuyến",
+                    offline: "Ngoại tuyến",
+                    failedToFetch: "Không thể tìm nạp thông tin hệ thống",
+                    unknown: "Không xác định"
                 },
                 getuptime: {
-                    description: "Hiển thị thời gian hoạt động của khách hàng",
+                    description: "Nhận thời gian hoạt động của khách hàng",
                     response: "**Thời gian hoạt động của khách hàng**: {{uptime}} phút"
                 },
                 gettime: {
-                    description: "Hiển thị thời gian hiện tại",
-                    response: "Thời gian hiện tại: {{time}}"
+                    description: "Lấy thời gian hiện tại",
+                    response: "Thời gian hiện tại là {{time}}"
                 },
                 transform: {
-                    description: "Chuyển đổi văn bản theo tùy chọn đã chỉ định",
+                    description: "Chuyển đổi văn bản của bạn với tùy chọn được chỉ định",
                     transformation: {
-                        description: "Kiểu chuyển đổi áp dụng cho văn bản",
+                        description: "Chuyển đổi để áp dụng cho văn bản của bạn",
                         lowercase: "Chuyển văn bản sang chữ thường",
                         uppercase: "Chuyển văn bản thành chữ hoa",
-                        localeLowercase: "Chuyển đổi văn bản thành chữ thường gốc",
-                        localeUppercase: "Chuyển đổi văn bản thành chữ hoa gốc",
-                        same: "cứ để vậy đi"
+                        localeLowercase: "Chuyển đổi văn bản thành chữ thường của miền địa phương",
+                        localeUppercase: "Chuyển văn bản thành chữ hoa của miền địa phương",
+                        same: "Vẫn như cũ"
                     },
-                    repeat: "Nó sẽ được lặp lại bao nhiêu lần?",
-                    reverse: "Có đảo ngược văn bản hay không",
+                    repeat: "lặp lại bao nhiêu lần",
+                    reverse: "có nên đảo ngược văn bản không",
                     normalize: {
-                        description: "Định dạng chuẩn hóa văn bản",
-                        nfc: "Định dạng chuẩn hóa C (NFC)",
+                        description: "Biểu mẫu chuẩn hóa văn bản",
+                        nfc: "Mẫu chuẩn hóa C (NFC)",
                         nfd: "Mẫu chuẩn hóa D (NFD)",
-                        nfkc: "Định dạng chuẩn hóa KC (NFKC)",
-                        nfkd: "Định dạng chuẩn hóa KD (NFKD)"
+                        nfkc: "Mẫu chuẩn hóa KC (NFKC)",
+                        nfkd: "Mẫu chuẩn hóa KD (NFKD)"
                     },
-                    text: "Văn bản cần chuyển đổi"
+                    text: "Chuyển đổi văn bản này"
                 }
             }
         },
         moreKaomoji: {
-            name: "Thêm Kaomoji",
+            name: "MoreKaomoji",
             description: "Thêm nhiều Kaomoji vào Discord. ヽ(`▽`)/"
         },
         moreQuickReactions: {
-            name: "ThêmPhản ứng nhanh",
-            description: "Cải thiện các nút phản hồi nhanh trong menu ngữ cảnh tin nhắn.",
+            name: "MoreQuickReactions",
+            description: "Cải thiện các nút phản ứng nhanh trong menu ngữ cảnh tin nhắn.",
             option: {
                 reactionCount: {
                     label: "Số lượng phản ứng",
-                    description: "Số lượng phản ứng hiển thị (0-42)"
+                    description: "Số lượng phản ứng (0-42)"
                 },
                 frequentEmojis: {
-                    label: "Biểu tượng cảm xúc thường được sử dụng",
+                    label: "Biểu tượng cảm xúc thường xuyên",
                     description: "Sử dụng biểu tượng cảm xúc được sử dụng thường xuyên thay vì biểu tượng cảm xúc yêu thích"
                 },
                 rows: {
-                    label: "Họ bán",
-                    description: "Số dòng phản ứng nhanh để hiển thị"
+                    label: "Hàng",
+                    description: "Hàng phản ứng nhanh để hiển thị"
                 },
                 columns: {
                     label: "Cột",
-                    description: "Số cột phản ứng nhanh để hiển thị"
+                    description: "Cột phản ứng nhanh để hiển thị"
                 },
                 compactMode: {
-                    label: "Mod nhỏ gọn",
-                    description: "Nó chia tỷ lệ các nút thành 75% kích thước ban đầu trong khi phóng to biểu tượng cảm xúc bên trong lên 125%. Biểu tượng cảm xúc sẽ có kích thước bằng 93,75% kích thước ban đầu. Nên sử dụng ít nhất 5 cột"
+                    label: "Chế độ nhỏ gọn",
+                    description: "Chia tỷ lệ các nút lên 75% tỷ lệ ban đầu, đồng thời tăng biểu tượng cảm xúc bên trong lên tỷ lệ 125%. Biểu tượng cảm xúc sẽ có kích thước bằng 93,75% kích thước ban đầu. Nên có tối thiểu 5 cột"
                 },
                 scroll: {
-                    label: "cuộn",
-                    description: "Bật danh sách biểu tượng cảm xúc cuộn"
+                    label: "Cuộn",
+                    description: "Cho phép cuộn danh sách biểu tượng cảm xúc"
                 }
             }
         },
         moreUserTags: {
-            name: "ThêmThẻ người dùng",
+            name: "MoreUserTags",
             description: "Thêm thẻ cho webhooks và vai trò kiểm duyệt (chủ sở hữu, quản trị viên, v.v.)",
             tag: {
                 webhook: {
@@ -6690,82 +6690,82 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Người dùng này là một webhook"
                 },
                 owner: {
-                    name: "Người sở hữu",
-                    description: "Chủ sở hữu máy chủ"
+                    name: "Owner",
+                    description: "Sở hữu máy chủ"
                 },
                 admin: {
-                    name: "Quản trị viên",
-                    description: "Có quyền quản trị viên"
+                    name: "Admin",
+                    description: "Có sự cho phép của quản trị viên"
                 },
                 staff: {
-                    name: "Chính thức",
+                    name: "Staff",
                     description: "Có thể quản lý máy chủ, kênh hoặc vai trò"
                 },
                 mod: {
-                    name: "mod",
-                    description: "Có thể quản lý tin nhắn hoặc khóa/cấm liên hệ"
+                    name: "Mod",
+                    description: "Có thể quản lý tin nhắn hoặc đá/cấm người"
                 },
                 vcmod: {
-                    name: "Xem Chế độ",
+                    name: "VC Mod",
                     description: "Có thể quản lý cuộc trò chuyện thoại"
                 },
                 chatmod: {
-                    name: "Chế độ trò chuyện",
+                    name: "Chat Mod",
                     description: "Có thể quản lý tin nhắn"
                 }
             },
             modal: {
                 example: "Ví dụ",
-                tag: "Vé",
-                customTextPlaceholder: "Văn bản trên nhãn (mặc định: {{displayName}})",
+                tag: "Nhãn",
+                customTextPlaceholder: "Văn bản trên thẻ (mặc định: {{displayName}})",
                 messages: "Hiển thị trong tin nhắn",
                 memberList: "Hiển thị trong danh sách thành viên và hồ sơ"
             },
             option: {
                 dontShowForBots: {
                     label: "Không hiển thị cho bot",
-                    description: "Hiển thị các thẻ bổ sung cho bot (ngoại trừ webhook)"
+                    description: "Không hiển thị thêm thẻ cho bot (ngoại trừ webhook)"
                 },
                 dontShowBotTag: {
-                    label: "Hiển thị thẻ bot",
-                    description: "Chỉ hiển thị các thẻ bổ sung / Ẩn [APP]"
+                    label: "Không hiển thị thẻ bot",
+                    description: "Chỉ hiển thị các thẻ bổ sung cho bot / Ẩn văn bản [APP]"
                 },
                 showWebhookTagFully: {
-                    label: "Hiển thị thẻ webhook đầy đủ",
-                    description: "Hiển thị thẻ webhook đầy đủ trong các kênh được theo dõi (ví dụ: thông báo)"
+                    label: "Hiển thị đầy đủ thẻ webhook",
+                    description: "Hiển thị thẻ Webhook trong các kênh được theo dõi như thông báo"
                 },
                 tagSettings: {
                     label: "Cài đặt thẻ",
-                    description: "được lấp đầy"
+                    description: "lấp đầy tôi"
                 }
             }
         },
         morse: {
             name: "Morse",
-            description: "Lệnh dịch sang hoặc từ mã morse.",
+            description: "Lệnh gạch chéo để dịch sang/từ mã morse.",
             command: {
                 morse: {
-                    description: "Dịch sang hoặc từ mã morse",
+                    description: "Dịch sang hoặc từ mã Morse",
                     message: "Văn bản cần chuyển đổi"
                 }
             }
         },
         moyai: {
-            name: "moyai",
+            name: "Moyai",
             description: "🗿🗿🗿🗿🗿🗿🗿🗿",
             option: {
                 volume: {
                     label: "Âm lượng",
-                    description: "🗿🗿🗿 âm lượng"
+                    description: "Khối lượng của 🗿🗿🗿"
                 },
                 quality: {
                     label: "Chất lượng",
-                    description: "🗿🗿🗿 chất lượng",
+                    description: "Chất lượng của 🗿🗿🗿",
                     normal: "Bình thường",
                     hd: "HD"
                 },
                 triggerWhenUnfocused: {
-                    label: "Kích hoạt khi mất nét",
+                    label: "Kích hoạt khi không tập trung",
                     description: "Kích hoạt 🗿 ngay cả khi cửa sổ không được lấy nét"
                 },
                 ignoreBots: {
@@ -6779,7 +6779,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         musicControls: {
-            name: "Điều khiển âm nhạc",
+            name: "MusicControls",
             description: "Điều khiển nhạc và lời bài hát cho nhiều dịch vụ",
             option: {
                 SpotifySectionTitle: {
@@ -6795,11 +6795,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 useSpotifyUris: {
                     label: "Sử dụng URI Spotify",
-                    description: "Spotify mở URI thay vì URL. Chỉ hoạt động nếu Spotify được cài đặt và có thể không hoạt động trên tất cả các nền tảng"
+                    description: "Mở URI Spotify thay vì URL Spotify. Sẽ chỉ hoạt động nếu bạn đã cài đặt Spotify và có thể không hoạt động trên tất cả các nền tảng"
                 },
                 previousButtonRestartsTrack: {
-                    label: "Nút trước Khởi động lại bài hát",
-                    description: "Nếu thời gian phát lại lớn hơn 3 giây, nhấn nút trước đó sẽ phát lại bài hát hiện tại từ đầu"
+                    label: "Nút trước Khởi động lại theo dõi",
+                    description: "Khởi động lại bản nhạc hiện đang phát khi nhấn nút trước đó nếu thời gian phát >3 giây"
                 },
                 TidalSectionTitle: {
                     label: "Thủy triều"
@@ -6814,14 +6814,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 YtmSectionTitle: {
                     label: "YouTube Âm nhạc",
-                    description: "Cần có {{app}} cho cài đặt này"
+                    description: "{{app}} là bắt buộc đối với các cài đặt này"
                 },
                 showYoutubeMusicControls: {
                     label: "Hiển thị điều khiển âm nhạc trên YouTube",
                     description: "Hiển thị các nút điều khiển nhạc cho YouTube Music"
                 },
                 YoutubeMusicApiUrl: {
-                    label: "URL API YouTube Music",
+                    label: "URL API âm nhạc của YouTube",
                     description: "URL của máy chủ API YouTube Music bạn đang sử dụng"
                 },
                 hoverControls: {
@@ -6829,8 +6829,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Hiển thị điều khiển khi di chuột"
                 },
                 ShowMusicNoteOnNoLyrics: {
-                    label: "Hiển thị ghi chú nếu không có lời bài hát",
-                    description: "Hiển thị biểu tượng ghi chú khi không tìm thấy lời bài hát"
+                    label: "Hiển thị nốt nhạc trên No Lyrics",
+                    description: "Hiển thị biểu tượng nốt nhạc khi không tìm thấy lời bài hát"
                 },
                 LyricsPosition: {
                     label: "Vị trí lời bài hát",
@@ -6840,42 +6840,42 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 LyricsProvider: {
                     label: "Nhà cung cấp lời bài hát",
-                    description: "Nguồn lời bài hát",
-                    spotify: "Spotify (Trận đấu âm nhạc)",
+                    description: "Lời bài hát được lấy từ đâu",
+                    spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
                 TranslateTo: {
-                    label: "Dịch sang ngôn ngữ của bạn",
-                    description: "Dịch lời bài hát — Thay đổi điều này sẽ xóa các bản dịch hiện có",
-                    cleared: "Đã làm sạch bản dịch"
+                    label: "Dịch sang",
+                    description: "Dịch lời bài hát sang - Thay đổi điều này sẽ xóa các bản dịch hiện có",
+                    cleared: "Đã xóa bản dịch"
                 },
                 LyricsConversion: {
                     label: "Chuyển đổi lời bài hát",
                     description: "Tự động dịch hoặc La-tinh hóa lời bài hát",
                     none: "Không có",
-                    translate: "Chuyển thành",
-                    romanize: "La Mã hóa Et"
+                    translate: "Dịch",
+                    romanize: "La Mã hóa"
                 },
                 FallbackProvider: {
                     label: "Nhà cung cấp dự phòng",
-                    description: "Nếu một nhà cung cấp lời bài hát không thành công, hãy thử một nhà cung cấp lời bài hát khác"
+                    description: "Khi nhà cung cấp lời bài hát không thành công, hãy thử các nhà cung cấp khác"
                 },
                 ShowFailedToasts: {
-                    label: "Hiển thị thông báo lỗi",
-                    description: "Hiển thị thông báo khi lời bài hát không tải được"
+                    label: "Hiển thị lời chúc mừng không thành công",
+                    description: "Hiển thị nâng ly khi lời bài hát không tải được"
                 },
                 PurgeLyricsCache: {
                     label: "Xóa bộ nhớ đệm lời bài hát",
                     description: "Xóa tất cả lời bài hát và bản dịch được lưu trong bộ nhớ đệm",
                     button: "Xóa bộ nhớ đệm",
-                    cacheLyricsPurged: "Đã xóa bộ nhớ đệm lời bài hát"
+                    cacheLyricsPurged: "Bộ nhớ đệm lời bài hát đã bị xóa"
                 }
             },
             context: {
                 spotify: {
                     label: "Menu lời bài hát Spotify",
-                    type: "Menu Spotify {{type}}",
-                    copy: "Sao chép tên {{type}}",
+                    type: "Spotify {{type}} Thực đơn",
+                    copy: "Sao chép {{type}} Tên",
                     link: "Sao chép liên kết {{type}}",
                     open: "Mở {{type}} trong Spotify",
                     album: "Menu Album Spotify"
@@ -6883,22 +6883,22 @@ const translations: MatchStructure<typeof enTranslations> = {
                 tidal: {
                     label: "Menu lời bài hát thủy triều",
                     lyrics: "Lời bài hát thủy triều",
-                    type: "Thực đơn thủy triều {{name}}",
-                    copy: "Sao chép tên {{name}}",
-                    open: "Mở {{name}} trên Tidal",
+                    type: "Thủy triều {{name}} Thực đơn",
+                    copy: "Sao chép {{name}} Tên",
+                    open: "Mở {{name}} trong Tidal",
                     album: "Thực đơn album thủy triều"
                 },
                 ytm: {
-                    type: "YouTube Music {{name}} Trình đơn",
-                    copy: "Sao chép tên {{name}}",
-                    open: "{{name}}’i YouTube Music’te Aç",
+                    type: "Menu YouTube Âm nhạc {{name}}",
+                    copy: "Sao chép {{name}} Tên",
+                    open: "Mở {{name}} trong YouTube Music",
                     album: "Menu Album nhạc trên YouTube",
                     muted: "Đã tắt tiếng"
                 },
                 lyrics: {
                     provider: "Nhà cung cấp lời bài hát",
-                    saved: "ghi lại",
-                    notFound: "Không tìm thấy lời bài hát đồng bộ"
+                    saved: "đã lưu",
+                    notFound: "Không tìm thấy lời bài hát được đồng bộ hóa"
                 },
                 copy: {
                     currentLyrics: "Sao chép lời bài hát hiện tại"
@@ -6906,32 +6906,32 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             alert: {
                 lyricCopied: "Lời bài hát đã được sao chép vào clipboard!",
-                noLyrics: "không có lời bài hát",
-                noLyricsTo: "Không có lời bài hát cho {{dịch}}",
-                translate: "dịch thuật",
-                romanize: "đừng La Mã hoá",
-                lyricsFetchFailed: "Không thể tìm thấy lời bài hát",
-                failedToFetchLyrics: "{{dịch}} không thể truy xuất được",
+                noLyrics: "Không có lời bài hát",
+                noLyricsTo: "Không có lời bài hát cho {{translated}}",
+                translate: "dịch",
+                romanize: "La-tinh hóa",
+                lyricsFetchFailed: "Tải lời bài hát không thành công",
+                failedToFetchLyrics: "Không tìm nạp được {{translated}}",
                 translation: "dịch thuật",
                 romanization: "sự La-tinh hóa",
-                failedToFetchTranslation: "Không thể dịch lời bài hát {{dịch}}"
+                failedToFetchTranslation: "Không tìm nạp được {{translated}} lời bài hát"
             },
             modal: {
                 install: {
                     title: "Cách cài đặt",
-                    install: "{{link}} cài đặt từ đây, sau đó đi tới cài đặt TidaLuna → Cửa hàng tiện ích bổ sung → cài đặt @vmohammad/api",
-                    tidaluna: "không có mặt trăng"
+                    install: "Cài đặt {{link}} từ đây, sau đó đi tới cài đặt TidalLuna → Cửa hàng plugin → Cài đặt @vmohammad/api",
+                    tidaluna: "TidaLuna"
                 },
                 player: {
                     noPlaying: "Không có bản nhạc nào đang phát",
                     artist: "Nghệ sĩ:",
                     album: "Anbum:",
-                    noLyrics: "Không tìm thấy lời bài hát :(",
+                    noLyrics: "Chưa có lời bài hát :(",
                     progress: "Tiến triển",
                     totalDuration: "Tổng thời lượng"
                 },
                 type: {
-                    song: "Bài hát",
+                    song: "bài hát",
                     artist: "Nghệ sĩ",
                     album: "Album"
                 },
@@ -6950,47 +6950,47 @@ const translations: MatchStructure<typeof enTranslations> = {
                 none: "Không có"
             },
             error: {
-                failed: "Không tạo được cửa sổ :(",
+                failed: "Không thể hiển thị Phương thức :(",
                 checkConsole: "Kiểm tra bảng điều khiển để tìm lỗi",
-                invalidUrlCustomApi: "Định dạng URL máy chủ API tùy chỉnh không hợp lệ"
+                invalidUrlCustomApi: "Định dạng URL không hợp lệ cho URL máy chủ API tùy chỉnh"
             }
         },
         mutualGroupDMs: {
-            name: "DM nhóm chung",
-            description: "Hiển thị DM nhóm được chia sẻ trên hồ sơ",
+            name: "MutualGroupDMs",
+            description: "Hiển thị DM nhóm chung trong hồ sơ",
             no: "Không có nhóm chung",
-            mutualGroup: "{{count}} Nhóm chung",
+            mutualGroup: "{{count}} Nhóm tương hỗ{{s}}",
             members: "Thành viên",
-            noGroup: "Không có DM nhóm công khai",
-            header: "Nhóm chung"
+            noGroup: "Không có DM nhóm chung",
+            header: "Nhóm tương hỗ"
         },
         neverPausePreviews: {
-            name: "Không bao giờTạm dừngXem trước",
-            description: "Ngăn việc tạm dừng các bản xem trước trong cuộc gọi/PiP (chia sẻ màn hình, chương trình phát sóng, v.v.) ngay cả khi ứng dụng mất tiêu điểm.",
-            about: "Tiện ích bổ sung này khiến Discord tiêu tốn nhiều tài nguyên hơn bình thường."
+            name: "NeverPausePreviews",
+            description: "Ngăn chặn việc tạm dừng bản xem trước trong cuộc gọi/PiP (chia sẻ màn hình, luồng, v.v.) ngay cả khi khách hàng mất tiêu điểm",
+            about: "Plugin này sẽ khiến Discord sử dụng nhiều tài nguyên hơn bình thường"
         },
         newGuildSettings: {
-            name: "Cài đặt bang hội mới",
-            description: "Tự động tắt tiếng và thay đổi nhiều cài đặt khác khi tham gia máy chủ mới",
+            name: "NewGuildSettings",
+            description: "Tự động tắt tiếng máy chủ mới và thay đổi nhiều cài đặt khác khi tham gia",
             context: {
-                apply: "Áp dụng cài đặt máy chủ mới"
+                apply: "Áp dụng Cài đặt bang hội mới"
             },
             option: {
                 guild: {
-                    label: "Tắt tiếng máy chủ",
-                    description: "Tự động tắt tiếng máy chủ"
+                    label: "Hội câm",
+                    description: "Tự động tắt tiếng Guild"
                 },
                 messages: {
                     label: "Cài đặt thông báo máy chủ",
                     description: "Cài đặt thông báo máy chủ",
                     all: "Tất cả tin nhắn",
-                    mentions: "chỉ @đề cập",
-                    nothing: "Không có",
+                    mentions: "Chỉ @đề cập",
+                    nothing: "Không có gì",
                     default: "Máy chủ mặc định"
                 },
                 everyone: {
                     label: "Ngăn chặn @everyone và @here",
-                    description: "Loại bỏ thông báo @everyone và @here"
+                    description: "Ngăn chặn @everyone và @here"
                 },
                 role: {
                     label: "Loại bỏ tất cả các @đề cập đến vai trò",
@@ -7002,42 +7002,42 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 events: {
                     label: "Tắt tiếng sự kiện mới",
-                    description: "Tự động tắt tiếng các sự kiện mới"
+                    description: "Tự động tắt tiếng sự kiện mới"
                 },
                 showAllChannels: {
                     label: "Hiển thị tất cả các kênh",
                     description: "Tự động hiển thị tất cả các kênh"
                 },
                 mobilePush: {
-                    label: "Tắt tiếng thông báo trên thiết bị di động",
-                    description: "Tự động tắt tiếng thông báo trên thiết bị di động"
+                    label: "Tắt tiếng thông báo đẩy trên thiết bị di động",
+                    description: "Tự động tắt thông báo đẩy trên thiết bị di động"
                 },
                 voiceChannels: {
                     label: "Kênh thoại",
-                    description: "Tự động ẩn tên trong kênh thoại"
+                    description: "Tự động ẩn tên trong các kênh Thoại"
                 }
             }
         },
         newPluginsManager: {
-            name: "Trình quản lý plugin mới",
-            description: "Công cụ hữu ích thông báo cho bạn khi có plugin mới được thêm vào Plexcord",
+            name: "NewPluginsManager",
+            description: "Tiện ích thông báo cho bạn khi có plugin mới được thêm vào Plexcord",
             modal: {
                 title: "Plugin và cài đặt mới",
                 description: "Các plugin và cài đặt mới đã được thêm vào kể từ lần truy cập trước của bạn. Vui lòng xem lại các bổ sung mới bên dưới.",
-                tooltip: "Đóng phiên này",
-                dontShowAgain: "Đừng hiển thị lại",
-                restartRequired: "Các plugin sau yêu cầu khởi động lại",
+                tooltip: "Loại bỏ phiên này",
+                dontShowAgain: "Đừng hiển thị lại điều này",
+                restartRequired: "Cần phải khởi động lại để áp dụng các thay đổi",
                 restart: "Khởi động lại",
-                continue: "Devam Et"
+                continue: "Tiếp tục"
             }
         },
         noAppsAllowed: {
-            name: "Không có ứng dụng nào được phép",
-            description: "Mang lại thẻ Bot cho bot"
+            name: "NoAppsAllowed",
+            description: "Trả thẻ của bot về dạng ban đầu"
         },
         noBlockedMessages: {
-            name: "Không có tin nhắn bị chặn",
-            description: "Ẩn hoàn toàn tất cả tin nhắn bị chặn/bỏ qua khỏi cuộc trò chuyện",
+            name: "NoBlockedMessages",
+            description: "Ẩn hoàn toàn tất cả các tin nhắn bị chặn/bỏ qua khỏi cuộc trò chuyện",
             option: {
                 alsoHideIgnoredUsers: {
                     label: "Đồng thời ẩn người dùng bị bỏ qua",
@@ -7045,95 +7045,95 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 disableNotifications: {
                     label: "Tắt thông báo",
-                    description: "Ẩn thông báo tin nhắn mới cho người dùng bị chặn. Những điều sau đây sẽ luôn áp dụng nếu tính năng 'Ẩn người dùng mặc định' được bật và người dùng đã kích hoạt thông báo không có trong danh sách 'Người dùng ngoại lệ'."
+                    description: "Ẩn thông báo tin nhắn mới cho người dùng bị chặn. Luôn đúng nếu 'Ẩn người dùng mặc định' được bật bên dưới và người dùng kích hoạt thông báo không được miễn trong 'Ghi đè người dùng'."
                 },
                 allowAutoModMessages: {
                     label: "Cho phép tin nhắn AutoMod",
-                    description: "Cho phép tin nhắn được gửi bởi AutoMod đi qua mà không được lọc."
+                    description: "Cho phép tin nhắn được gửi bởi AutoMod bỏ qua việc lọc."
                 },
                 hideBlockedUserReplies: {
                     label: "Ẩn câu trả lời của người dùng bị chặn",
-                    description: "Ẩn tin nhắn từ những người dùng bị chặn trong các chủ đề bạn đã tham gia trước đó."
+                    description: "Ẩn tin nhắn từ những người dùng bị chặn trong chủ đề nếu bạn đã tham gia chủ đề này."
                 },
                 defaultHideUsers: {
                     label: "Ẩn người dùng mặc định",
-                    description: "Nếu được bật, tin nhắn từ người dùng bị chặn sẽ bị ẩn hoàn toàn và thay vào đó, tin nhắn từ ID người dùng trong danh sách ngoại lệ sẽ được thu gọn (hành vi Discord mặc định). Nếu bị tắt, tin nhắn từ người dùng bị chặn sẽ bị thu gọn và tin nhắn từ ID người dùng trong danh sách ngoại lệ sẽ bị ẩn hoàn toàn."
+                    description: "Nếu được bật, tin nhắn từ những người dùng bị chặn sẽ bị ẩn hoàn toàn và thay vào đó, mọi tin nhắn từ ID người dùng trong danh sách ghi đè sẽ bị thu gọn (hành vi Discord mặc định). Nếu bị tắt, tin nhắn từ người dùng bị chặn sẽ bị thu gọn và thay vào đó mọi tin nhắn từ ID người dùng trong danh sách ghi đè sẽ bị ẩn hoàn toàn."
                 },
                 overrideUsers: {
-                    label: "Người dùng ngoại lệ",
-                    description: "Danh sách ID người dùng được phân tách bằng dấu phẩy để ẩn hoặc thu gọn, thay vì hành vi mặc định đã chọn ở trên."
+                    label: "Ghi đè người dùng",
+                    description: "Danh sách ID người dùng được phân tách bằng dấu phẩy sẽ bị ẩn hoặc thu gọn thay vì hành vi mặc định đã chọn ở trên."
                 }
             }
         },
         noBulletPoints: {
-            name: "Không có điểm đạn",
-            description: "Dấu đầu dòng Markdown (^, ​​-, *) khiến bạn không thể viết được (thói quen xấu)"
+            name: "NoBulletPoints",
+            description: "Ngăn bạn gõ dấu đầu dòng đánh dấu (hôi thối)"
         },
         noDeepLinks: {
-            name: "Vô hiệu hóaDeepLinks",
-            description: "Vô hiệu hóa tính năng liên kết sâu khó chịu cố gắng buộc mở ứng dụng máy tính để bàn của Discord"
+            name: "DisableDeepLinks",
+            description: "Vô hiệu hóa tính năng liên kết sâu dư thừa của Discord nhằm buộc bạn sử dụng Ứng dụng máy tính để bàn của họ"
         },
         noDeleteSafety: {
-            name: "KhôngXóaAn toàn",
-            description: "Loại bỏ yêu cầu 'gõ tên máy chủ' khi xóa máy chủ",
+            name: "NoDeleteSafety",
+            description: "Loại bỏ yêu cầu 'nhập tên máy chủ' khi xóa máy chủ",
             option: {
                 confirmModal: {
-                    label: "Cửa sổ xác nhận",
-                    description: "'Bạn có chắc chắn muốn xóa máy chủ này không?' Hiển thị cửa sổ xác nhận?"
+                    label: "Xác nhận phương thức",
+                    description: "Chế độ 'Bạn có chắc chắn muốn xóa' có nên được hiển thị không?"
                 }
             },
             modal: {
                 title: "Xóa máy chủ?",
-                body: "Nó sẽ là vĩnh viễn, nếu điều đó chưa rõ ràng.",
-                confirm: "Sil",
+                body: "Nó là vĩnh viễn, nếu điều đó không rõ ràng.",
+                confirm: "Xóa bỏ",
                 cancel: "Hủy bỏ"
             }
         },
         noDevtoolsWarning: {
-            name: "NoDevtoolsCảnh báo",
-            description: "Tắt biểu ngữ cảnh báo 'LET'S HIT' trên bảng điều khiển. Là một tác dụng phụ, nó cũng ngăn Discord ẩn mã thông báo của nó, điều này ngăn cản việc đăng xuất ngẫu nhiên."
+            name: "NoDevtoolsWarning",
+            description: "Tắt biểu ngữ 'HOLD UP' trong bảng điều khiển. Là một tác dụng phụ, nó cũng ngăn Discord ẩn mã thông báo của bạn, điều này ngăn cản việc đăng xuất ngẫu nhiên."
         },
         noF1: {
-            name: "Số F1",
-            description: "F1 tắt phím tắt trợ giúp."
+            name: "NoF1",
+            description: "Vô hiệu hóa liên kết trợ giúp F1."
         },
         noMaskedUrlPaste: {
-            name: "Không có mặt nạUrlDán",
-            description: "Khi một liên kết được dán với văn bản đã chọn, nó sẽ ngăn việc dán liên kết đó dưới dạng URL bị ẩn."
+            name: "NoMaskedUrlPaste",
+            description: "Dán liên kết trong khi đang chọn văn bản sẽ không dán dưới dạng URL bị ẩn"
         },
         noMirroredCamera: {
-            name: "Không có máy ảnh nhân đôi",
-            description: "Nó ngăn máy ảnh phản chiếu màn hình."
+            name: "NoMirroredCamera",
+            description: "Ngăn không cho máy ảnh được phản chiếu trên màn hình của bạn"
         },
         noModalAnimation: {
-            name: "NoModalHoạt hình",
-            description: "Tắt hoạt ảnh mở/đóng trong tất cả các cửa sổ phương thức."
+            name: "NoModalAnimation",
+            description: "Loại bỏ hoạt ảnh dài 300ms khi mở hoặc đóng các chế độ"
         },
         noMosaic: {
-            name: "Không có khảm",
-            description: "Xóa bố cục khảm trực quan của Discord.",
+            name: "NoMosaic",
+            description: "Loại bỏ khảm hình ảnh Discord",
             option: {
                 inlineVideo: {
                     label: "Video nội tuyến",
-                    description: "Phát video mà không lặp lại phương thức."
+                    description: "Phát video không có chế độ quay vòng"
                 }
             }
         },
         noNitroUpsell: {
-            name: "Không có NitroUpsell",
-            description: "Xóa TẤT CẢ thông báo bán Nitro khỏi Discord bằng cách lừa khách hàng nghĩ rằng bạn sở hữu Nitro."
+            name: "NoNitroUpsell",
+            description: "Loại bỏ TẤT CẢ các sản phẩm bán thêm Nitro của Discord bằng cách lừa khách hàng nghĩ rằng bạn có Nitro."
         },
         noOnboarding: {
-            name: "Không giới thiệu",
-            description: "Nó cho phép đăng nhập nhanh hơn bằng cách bỏ qua quá trình tham gia máy chủ của Discord."
+            name: "NoOnboarding",
+            description: "Bỏ qua quá trình giới thiệu của Discord để truy cập máy chủ nhanh hơn."
         },
         noOnboardingDelay: {
-            name: "Không có sự chậm trễ giới thiệu",
-            description: "Bỏ qua sự chậm trễ khi tham gia máy chủ chậm và khó chịu."
+            name: "NoOnboardingDelay",
+            description: "Bỏ qua độ trễ khi cài đặt chậm và khó chịu"
         },
         noPendingCount: {
-            name: "Không có số lượng đang chờ xử lý",
-            description: "Loại bỏ số lượng thông báo về yêu cầu kết bạn, yêu cầu tin nhắn và ưu đãi Nitro.",
+            name: "NoPendingCount",
+            description: "Loại bỏ số ping của các yêu cầu kết bạn, yêu cầu tin nhắn và ưu đãi Nitro.",
             option: {
                 hideFriendRequestsCount: {
                     label: "Ẩn số lượng yêu cầu kết bạn",
@@ -7144,126 +7144,126 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Ẩn số lượng yêu cầu tin nhắn"
                 },
                 hidePremiumOffersCount: {
-                    label: "Ẩn số lượng ưu đãi Nitro",
-                    description: "Ẩn số lượng ưu đãi nitro"
+                    label: "Ẩn số lượng ưu đãi cao cấp",
+                    description: "Ẩn số lượng ưu đãi Nitro"
                 }
             }
         },
         noProfileThemes: {
-            name: "Không có hồ sơChủ đề",
-            description: "Nó loại bỏ hoàn toàn chủ đề hồ sơ Nitro cho tất cả mọi người ngoại trừ chính bạn."
+            name: "NoProfileThemes",
+            description: "Loại bỏ hoàn toàn các chủ đề hồ sơ Nitro khỏi mọi người trừ chính bạn."
         },
         noPushToTalk: {
-            name: "Không Đẩy Để Nói",
-            description: "Bỏ qua yêu cầu nhấn để nói đối với hoạt động bằng giọng nói trên các kênh yêu cầu điều đó."
+            name: "NoPushToTalk",
+            description: "Bỏ qua yêu cầu nhấn để nói đối với hoạt động bằng giọng nói trong các kênh thực thi yêu cầu đó."
         },
         noReplyMention: {
-            name: "Không Trả lờiĐề cập",
-            description: "Tắt ping trả lời theo mặc định.",
+            name: "NoReplyMention",
+            description: "Tắt ping trả lời theo mặc định",
             option: {
                 userList: {
                     label: "Danh sách người dùng",
-                    description: "Danh sách người dùng sẽ được phép hoặc miễn ping (phải cách nhau bằng dấu phẩy hoặc dấu cách)"
+                    description: "Danh sách người dùng được phép hoặc miễn ping (cách nhau bằng dấu phẩy hoặc dấu cách)"
                 },
                 roleList: {
                     label: "Danh sách vai trò",
-                    description: "Danh sách các vai trò sẽ cho phép hoặc miễn ping (phải phân tách bằng dấu phẩy hoặc dấu cách)"
+                    description: "Danh sách các vai trò cho phép hoặc miễn ping (phân tách bằng dấu phẩy hoặc dấu cách)"
                 },
                 shouldPingListed: {
-                    label: "Ping được liệt kê",
+                    label: "Nên liệt kê Ping",
                     description: "Hành vi",
-                    dontPing: "Ping người dùng/vai trò được liệt kê",
-                    onlyPing: "Ping chỉ liệt kê người dùng/vai trò"
+                    dontPing: "Không ping người dùng/vai trò được liệt kê",
+                    onlyPing: "Chỉ ping người dùng/vai trò được liệt kê"
                 },
                 inverseShiftReply: {
-                    label: "Hành vi phản ứng chuyển số ngược",
-                    description: "Đảo ngược hành vi trả lời ca của Discord (đề cập đến người dùng khi trả lời ca khi được bật)"
+                    label: "Trả lời dịch chuyển ngược",
+                    description: "Đảo ngược hành vi trả lời theo ca của Discord (cho phép người dùng đề cập đến trả lời theo ca)"
                 }
             }
         },
         normalizeMessageLinks: {
-            name: "Bình thường hóaMessageLinks",
-            description: "Xóa tiền tố canary/ptb khỏi liên kết tin nhắn."
+            name: "NormalizeMessageLinks",
+            description: "Loại bỏ canary/ptb khỏi các liên kết tin nhắn"
         },
         noRoleHeaders: {
-            name: "Không có tiêu đề",
-            description: "Tất cả chúng ta đều bình đẳng!! Xóa chức danh vai trò khỏi danh sách thành viên."
+            name: "NoRoleHeaders",
+            description: "Tất cả chúng ta đều bình đẳng!! Loại bỏ các tiêu đề vai trò trong danh sách thành viên."
         },
         noRPC: {
             name: "NoRPC",
-            description: "Discord vô hiệu hóa sự hiện diện phong phú."
+            description: "Vô hiệu hóa sự hiện diện phong phú của Discord"
         },
         noServerEmojis: {
-            name: "Biểu tượng cảm xúc từ máy chủ",
-            description: "Máy chủ không hiển thị biểu tượng cảm xúc trong menu tự động hoàn thành.",
+            name: "NoServerEmojis",
+            description: "Không hiển thị biểu tượng cảm xúc của máy chủ trong menu tự động hoàn thành.",
             option: {
                 shownEmojis: {
                     label: "Biểu tượng cảm xúc được hiển thị",
                     description: "Chọn biểu tượng cảm xúc nào sẽ hiển thị trong menu tự động hoàn thành",
-                    onlyUnicode: "Chỉ biểu tượng cảm xúc Unicode",
-                    currentServer: "Biểu tượng cảm xúc và biểu tượng cảm xúc Unicode trên máy chủ hiện tại",
+                    onlyUnicode: "Chỉ biểu tượng cảm xúc unicode",
+                    currentServer: "Biểu tượng cảm xúc Unicode và biểu tượng cảm xúc máy chủ từ máy chủ hiện tại",
                     all: "Biểu tượng cảm xúc Unicode và tất cả biểu tượng cảm xúc của máy chủ (Mặc định Discord)"
                 }
             }
         },
         noSystemBadge: {
-            name: "Không có huy hiệu hệ thống",
-            description: "Tắt huy hiệu thông báo chưa đọc trên thanh tác vụ và khay hệ thống."
+            name: "NoSystemBadge",
+            description: "Vô hiệu hóa biểu tượng số lượng chưa đọc trên thanh tác vụ và khay hệ thống."
         },
         notificationTitle: {
-            name: "Tiêu đề thông báo",
-            description: "Làm cho thông báo trên màn hình có nhiều thông tin hơn."
+            name: "NotificationTitle",
+            description: "Làm cho thông báo trên màn hình có nhiều thông tin hơn"
         },
         notificationVolume: {
-            name: "Khối lượng thông báo",
-            description: "Đặt âm lượng tùy chỉnh cho thông báo Discord.",
+            name: "NotificationVolume",
+            description: "Đặt âm lượng tùy chỉnh cho thông báo Discord",
             option: {
                 notificationVolume: {
-                    label: "Âm thanh thông báo",
+                    label: "Khối lượng thông báo",
                     description: "Khối lượng thông báo"
                 }
             }
         },
         noTypingAnimation: {
-            name: "Không Đánh MáyHoạt Hình",
-            description: "Tắt hoạt ảnh gõ trong cuộc trò chuyện."
+            name: "NoTypingAnimation",
+            description: "Tắt hoạt ảnh gõ trong trò chuyện"
         },
         noUnblockToJump: {
-            name: "KhôngBỏ chặnĐểNhảy",
-            description: "Nó cho phép bạn bỏ qua tin nhắn từ những người dùng bị chặn hoặc bị bỏ qua (và có thể cả những kẻ gửi thư rác) mà không cần bỏ chặn chúng."
+            name: "NoUnblockToJump",
+            description: "Cho phép bạn chuyển tới tin nhắn của những người dùng bị chặn hoặc bị bỏ qua và có thể là những người gửi thư rác mà không cần bỏ chặn họ."
         },
         onePingPerDM: {
             name: "OnePingPerDM",
-            description: "Ngay cả khi người dùng gửi liên tiếp các tin nhắn chưa đọc trong DM, bạn sẽ chỉ nhận được một thông báo bằng âm thanh.",
+            description: "Nếu tin nhắn chưa đọc được người dùng gửi trong DM nhiều lần, bạn sẽ chỉ nhận được một ping âm thanh.",
             option: {
                 channelToAffect: {
-                    label: "Loại kênh bị ảnh hưởng",
-                    description: "Chọn loại DM mà plugin sẽ ảnh hưởng",
+                    label: "Kênh ảnh hưởng",
+                    description: "Chọn loại DM để plugin tác động",
                     both: "Cả hai",
                     user: "DM của người dùng",
                     group: "DM nhóm"
                 },
                 allowMentions: {
-                    label: "@AllowMentions",
-                    description: "Nhận thông báo bằng âm thanh cho lượt đề cập @"
+                    label: "Cho phép đề cập",
+                    description: "Nhận ping âm thanh cho @đề cập"
                 },
                 allowEveryone: {
-                    label: "Cho phép @mọi người",
-                    description: "Nhận thông báo âm thanh cho @everyone và @here trong DM nhóm"
+                    label: "Cho phép mọi người",
+                    description: "Nhận ping âm thanh cho @everyone và @here trong DM nhóm"
                 },
                 ignoreUsers: {
-                    label: "Người dùng bỏ qua",
-                    description: "ID người dùng KHÔNG BAO GIỜ giới hạn thông báo (phân tách bằng dấu phẩy + dấu cách)"
+                    label: "Bỏ qua người dùng",
+                    description: "ID người dùng (dấu phẩy + dấu cách) có ping KHÔNG BAO GIỜ được điều chỉnh"
                 },
                 alwaysPlaySound: {
                     label: "Luôn phát âm thanh",
-                    description: "Phát âm thanh ngay cả khi âm thanh thông báo bị tắt"
+                    description: "Phát âm thanh thông báo tin nhắn ngay cả khi nó bị tắt"
                 }
             }
         },
         openInApp: {
-            name: "Mở trong ứng dụng",
-            description: "Mở liên kết trong các ứng dụng liên quan thay vì trình duyệt",
+            name: "OpenInApp",
+            description: "Mở liên kết trong ứng dụng tương ứng thay vì trình duyệt của bạn",
             option: {
                 spotify: {
                     label: "Spotify",
@@ -7287,7 +7287,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 vrcx: {
                     label: "VRChat",
-                    description: "Mở liên kết VRChat trong ứng dụng VRChat"
+                    description: "Mở liên kết VRChat trong ứng dụng VRCX"
                 }
             },
             notification: {
@@ -7295,30 +7295,30 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         overrideForumDefaults: {
-            name: "Ghi đè Diễn đànMặc định",
-            description: "Cho phép bạn ghi đè thứ tự sắp xếp/bố cục diễn đàn mặc định. Bạn vẫn có thể thực hiện thay đổi theo từng kênh.",
+            name: "OverrideForumDefaults",
+            description: "Cho phép bạn ghi đè thứ tự sắp xếp/bố cục diễn đàn mặc định. Bạn vẫn có thể thay đổi tùy theo từng kênh",
             option: {
                 defaultLayout: {
-                    label: "Bố cục mặc định",
-                    description: "Chọn bố cục sẽ sử dụng làm mặc định",
+                    label: "Thẻ mặc định",
+                    description: "Bố cục nào sẽ được sử dụng làm mặc định",
                     list: "Danh sách",
                     gallery: "Phòng trưng bày"
                 },
                 defaultSortOrder: {
                     label: "Thứ tự sắp xếp mặc định",
-                    description: "Chọn thứ tự sắp xếp sẽ sử dụng theo mặc định",
-                    recentlyActive: "Hoạt động lần cuối",
+                    description: "Thứ tự sắp xếp nào sẽ được sử dụng làm mặc định",
+                    recentlyActive: "Hoạt động gần đây",
                     datePosted: "Ngày đăng"
                 }
             }
         },
         partyMode: {
-            name: "Chế độ tiệc tùng",
+            name: "PartyMode",
             description: "Cho phép bạn sử dụng chế độ nhóm vì bữa tiệc không bao giờ kết thúc ✨",
             option: {
                 superIntensePartyMode: {
                     label: "Chế độ tiệc tùng siêu mãnh liệt",
-                    description: "Mật độ đảng",
+                    description: "Cường độ tiệc tùng",
                     normal: "Bình thường",
                     better: "Tốt hơn",
                     projectX: "Dự án X"
@@ -7326,38 +7326,38 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         pauseInvitesForever: {
-            name: "Tạm dừngLời mờiMãi mãi",
-            description: "Nó mang lại tùy chọn 'tạm dừng lời mời vô thời hạn' mà Discord đã loại bỏ một cách ngu ngốc.",
+            name: "PauseInvitesForever",
+            description: "Mang lại tùy chọn tạm dừng vô thời hạn các lời mời mà Discord đã xóa một cách dư thừa.",
             pauseIndefinitely: "Tạm dừng vô thời hạn"
         },
         permissionFreeWill: {
-            name: "Giấy phépMiễn phíÝ chí",
-            description: "Vô hiệu hóa các hạn chế phía máy khách trong quản lý quyền của kênh.",
+            name: "PermissionFreeWill",
+            description: "Vô hiệu hóa các hạn chế phía máy khách đối với việc quản lý quyền của kênh.",
             option: {
                 lockout: {
-                    label: "sự bế tắc",
-                    description: "Bỏ qua bảo vệ sự cố quyền ('Bạn có chắc chắn muốn thực hiện việc này không?')"
+                    label: "Khóa",
+                    description: "Bỏ qua việc ngăn chặn khóa quyền ('Khá chắc chắn rằng bạn không muốn làm điều này')"
                 },
                 onboarding: {
-                    label: "Yêu cầu bắt đầu",
-                    description: "Bỏ qua các yêu cầu cài đặt có thể khiến máy chủ không tương thích ('Thay đổi này có thể khiến máy chủ của bạn không tương thích […]')"
+                    label: "Giới thiệu",
+                    description: "Bỏ qua các yêu cầu tích hợp ('Thực hiện thay đổi này sẽ khiến máy chủ của bạn không tương thích […]')"
                 }
             }
         },
         permissionsViewer: {
-            name: "QuyềnViewer",
-            description: "Cho phép bạn xem các quyền mà người dùng hoặc kênh có và vai trò của máy chủ.",
+            name: "PermissionsViewer",
+            description: "Xem các quyền mà người dùng hoặc kênh có và vai trò của máy chủ",
             view: "Xem quyền",
             option: {
                 permissionsSortOrder: {
                     label: "Thứ tự sắp xếp quyền",
-                    description: "Phương pháp sắp xếp được sử dụng để xác định cách một vai trò cấp quyền cụ thể cho người dùng",
+                    description: "Phương thức sắp xếp được sử dụng để xác định vai trò nào cấp cho người dùng một quyền nhất định",
                     highest: "Vai trò cao nhất",
                     lowest: "Vai trò thấp nhất"
                 }
             },
             icon: {
-                denied: "vật bị loại bỏ",
+                denied: "Từ chối",
                 allowed: "Cho phép",
                 notOverwritten: "Không bị ghi đè"
             },
@@ -7368,27 +7368,27 @@ const translations: MatchStructure<typeof enTranslations> = {
                 title: "Quyền",
                 noPermissions: "Không có quyền hiển thị!",
                 owner: "người sở hữu",
-                grantedBy: "cho phép",
+                grantedBy: "Được cấp bởi",
                 serverOwner: "Chủ sở hữu máy chủ",
                 ownerRole: "Người sở hữu",
-                sortingBy: "{{method}} được sắp xếp theo mức độ ưu tiên",
+                sortingBy: "Sắp xếp theo {{method}}",
                 highest: "Vai trò cao nhất",
                 lowest: "Vai trò thấp nhất",
                 details: "Chi tiết vai trò"
             }
         },
         petpet: {
-            name: "Thú cưngThú cưng",
-            description: "Thêm lệnh /petpet để tạo gif petpet từ bất kỳ hình ảnh nào",
+            name: "PetPet",
+            description: "Thêm lệnh gạch chéo /petpet để tạo ảnh GIF tai nghe từ bất kỳ hình ảnh nào",
             command: {
                 petpet: {
-                    description: "Tạo một gif thú cưng. Bạn chỉ có thể chỉ định một trong các tùy chọn hình ảnh",
+                    description: "Tạo ảnh GIF thú cưng. Bạn chỉ có thể chỉ định một trong các tùy chọn hình ảnh",
                     delay: "Độ trễ giữa mỗi khung hình. Mặc định là 20.",
-                    resolution: "Độ phân giải cho gif. Mặc định là 120. Nếu bạn nhập một số điên và Discord bị treo thì đó là lỗi của bạn.",
+                    resolution: "Độ phân giải cho GIF. Mặc định là 120. Nếu bạn nhập một số điên rồ và nó đóng băng Discord thì đó là lỗi của bạn.",
                     image: "Đính kèm hình ảnh để sử dụng",
-                    url: "URL để lấy hình ảnh",
-                    user: "Người dùng có hình đại diện sẽ được sử dụng làm hình ảnh",
-                    noServerPfp: "Sử dụng hình đại diện bình thường thay vì máy chủ cụ thể khi sử dụng tùy chọn 'người dùng'",
+                    url: "URL để lấy hình ảnh từ",
+                    user: "Người dùng có hình đại diện được sử dụng làm hình ảnh",
+                    noServerPfp: "Sử dụng hình đại diện bình thường thay vì hình đại diện dành riêng cho máy chủ khi sử dụng tùy chọn 'người dùng'",
                     error: {
                         noImage: "Không có hình ảnh được chỉ định!",
                         delayTooLow: "Độ trễ phải ít nhất là 20.",
@@ -7396,37 +7396,37 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             error: {
-                uploadNotImage: "Tệp được tải lên không phải là hình ảnh",
-                fetchUserFailed: "Không thể truy xuất người dùng. Kiểm tra bảng điều khiển để biết thêm thông tin.",
+                uploadNotImage: "Tải lên không phải là hình ảnh",
+                fetchUserFailed: "Không tìm nạp được người dùng. Kiểm tra bảng điều khiển để biết thêm thông tin.",
                 fetchImageFailed: "Đã xảy ra lỗi khi tải {{url}}. Kiểm tra bảng điều khiển để biết thêm thông tin."
             }
         },
         pictureInPicture: {
-            name: "Hình ẢnhTrong Hình Ảnh",
-            description: "Thêm tính năng ảnh trong ảnh vào video (bên cạnh nút Tải xuống)",
-            tooltip: "Chuyển đổi hình ảnh trong hình ảnh",
+            name: "PictureInPicture",
+            description: "Thêm Ảnh trong ảnh vào video (bên cạnh nút Tải xuống)",
+            tooltip: "Chuyển đổi hình trong hình",
             option: {
                 loop: {
                     label: "Vòng lặp",
-                    description: "Có lặp lại video PiP hay không"
+                    description: "Có nên tạo vòng lặp video PiP hay không"
                 }
             }
         },
         pinDMs: {
-            name: "PinDM",
-            description: "Cho phép bạn ghim các kênh riêng tư (DM) vào đầu danh sách DM của bạn. Bạn có thể nhấp chuột phải vào DM để ghim/xóa hoặc thay đổi thứ tự DM.",
+            name: "PinDMs",
+            description: "Cho phép bạn ghim các kênh riêng tư vào đầu danh sách DM của mình. Để ghim/bỏ ghim hoặc sắp xếp lại các ghim, hãy nhấp chuột phải vào DM",
             context: {
                 category: {
-                    label: "Menu danh mục DM",
+                    label: "Menu danh mục ghim DM",
                     edit: "Chỉnh sửa danh mục",
                     up: "Di chuyển lên",
                     down: "Di chuyển xuống",
                     delete: "Xóa danh mục",
-                    unnamed: "vô danh"
+                    unnamed: "ồ ồ"
                 },
                 pin: {
-                    label: "DM Sabitle",
-                    addCategory: "Chuyên mục Kinh tởm"
+                    label: "Ghim DM",
+                    addCategory: "Thêm danh mục"
                 },
                 unPin: {
                     label: "Bỏ ghim DM",
@@ -7435,17 +7435,17 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 pinOrder: {
-                    label: "Sửa đơn hàng",
+                    label: "Ghim thứ tự",
                     description: "DM được ghim sẽ hiển thị theo thứ tự nào?",
-                    lastMessage: "Đến ngày nhắn tin cuối cùng",
-                    custom: "Riêng tư (thay đổi thứ tự bằng cách nhấp chuột phải vào kênh)"
+                    lastMessage: "Tin nhắn gần đây nhất",
+                    custom: "Tùy chỉnh (nhấp chuột phải vào các kênh để sắp xếp lại)"
                 },
                 canCollapseDmSection: {
-                    label: "Phần cố định có thể gập lại",
-                    description: "Làm cho phần DM chưa được phân loại có thể thu gọn được"
+                    label: "Phần được ghim có thể thu gọn",
+                    description: "Cho phép thu gọn phần DM chưa được phân loại"
                 },
                 dmSectionCollapsed: {
-                    label: "Phần DM bị thu hẹp",
+                    label: "Phần DM đã được thu gọn",
                     description: "Thu gọn phần DM"
                 },
                 userBasedCategoryList: {
@@ -7458,7 +7458,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     pin: "Ghim danh mục",
                     edit: "Chỉnh sửa danh mục",
                     new: "Danh mục mới",
-                    name: "Tên",
+                    name: "Name",
                     color: "Màu sắc",
                     save: "Cứu",
                     create: "Tạo nên"
@@ -7466,46 +7466,46 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         pingNotifications: {
-            name: "PingThông báo",
-            description: "Thông báo có thể tùy chỉnh và định dạng đề cập được cải thiện",
+            name: "PingNotifications",
+            description: "Thông báo có thể tùy chỉnh với định dạng đề cập được cải thiện",
             option: {
                 friends: {
                     label: "Bạn",
-                    description: "Nhận thông báo khi bạn bè của bạn gửi tin nhắn trên máy chủ"
+                    description: "Thông báo khi bạn bè gửi tin nhắn trên máy chủ"
                 },
                 mentions: {
                     label: "Đề cập",
-                    description: "Nhận thông báo khi ai đó @đề cập trực tiếp đến bạn"
+                    description: "Thông báo khi ai đó @đề cập trực tiếp đến bạn"
                 },
                 dms: {
-                    label: "DM'ler",
-                    description: "Nhận thông báo cho tin nhắn trực tiếp (DM)"
+                    label: "DM",
+                    description: "Thông báo về tin nhắn trực tiếp (DM)"
                 },
                 showInActive: {
-                    label: "Hiển thị trên các kênh đang hoạt động",
-                    description: "Hiển thị thông báo ngay cả đối với các kênh hiện đang hoạt động"
+                    label: "Hiển thị đang hoạt động",
+                    description: "Hiển thị thông báo ngay cả đối với kênh hiện đang hoạt động"
                 },
                 ignoreMuted: {
                     label: "Bỏ qua Tắt tiếng",
                     description: "Bỏ qua thông báo từ máy chủ, kênh hoặc người dùng bị tắt tiếng"
                 }
             },
-            unknown: "không rõ",
+            unknown: "Không xác định",
             dm: "DM",
             groupDM: "Nhóm DM",
-            title: "{{username}} trên kênh {{channelName}}"
+            title: "{{username}} trong {{channelName}}"
         },
         pinIcon: {
-            name: "PinBiểu Tượng",
-            description: "Thêm biểu tượng ghim vào tin nhắn đã ghim."
+            name: "PinIcon",
+            description: "Thêm biểu tượng ghim vào tin nhắn đã ghim"
         },
         plainFolderIcon: {
-            name: "PlainThư MụcBiểu Tượng",
-            description: "Nó không hiển thị các biểu tượng máy chủ nhỏ trong các thư mục."
+            name: "PlainFolderIcon",
+            description: "Không hiển thị biểu tượng bang hội nhỏ trong thư mục"
         },
         platformIndicators: {
-            name: "Nền tảngChỉ báo",
-            description: "Thêm chỉ báo nền tảng (Desktop, Mobile, Web...) cho người dùng.",
+            name: "PlatformIndicators",
+            description: "Thêm chỉ báo nền tảng (Desktop, Mobile, Web...) cho người dùng",
             embeddedTooltip: "Bảng điều khiển",
             vrTooltip: "thực tế ảo",
             option: {
@@ -7514,41 +7514,41 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Hiển thị các chỉ số trong danh sách thành viên"
                 },
                 badges: {
-                    label: "phù hiệu",
-                    description: "Hiển thị các chỉ báo dưới dạng huy hiệu trên hồ sơ người dùng"
+                    label: "Huy hiệu",
+                    description: "Hiển thị các chỉ báo trong hồ sơ người dùng dưới dạng huy hiệu"
                 },
                 messages: {
                     label: "Tin nhắn",
                     description: "Hiển thị các chỉ báo bên trong tin nhắn"
                 },
                 colorMobileIndicator: {
-                    label: "Tô màu màn hình điện thoại di động của bạn",
-                    description: "Xác định xem chỉ báo di động có màu trạng thái người dùng hay không."
+                    label: "Chỉ báo di động màu",
+                    description: "Có làm cho chỉ báo trên thiết bị di động khớp với màu của trạng thái người dùng hay không."
                 },
                 showBots: {
                     label: "Hiển thị Bot",
-                    description: "Xác định xem có hiển thị chỉ báo nền tảng trong bot hay không"
+                    description: "Có hiển thị chỉ báo nền tảng trên bot hay không"
                 }
             }
         },
         platformSpoofer: {
-            name: "Nền tảng giả mạo",
-            description: "Mô phỏng bất kỳ nền tảng hoặc thiết bị nào bạn đang sử dụng",
-            about: "Chúng tôi không thể đảm bảo rằng tiện ích bổ sung này sẽ bảo vệ bạn khỏi bị cảnh báo hoặc cấm.",
+            name: "PlatformSpoofer",
+            description: "Giả mạo nền tảng hoặc thiết bị bạn đang sử dụng",
+            about: "Chúng tôi không thể đảm bảo plugin này sẽ không khiến bạn bị cảnh báo hoặc bị cấm.",
             platform: {
                 desktop: "Ứng dụng khách bất hòa",
                 web: "Web bất hòa",
                 ios: "Bất hòa iOS",
                 android: "Bất hòa Android",
-                xbox: "Sự bất hòa nhúng",
-                playstation: "Sự bất hòa nhúng",
+                xbox: "Bất hòa nhúng",
+                playstation: "Bất hòa nhúng",
                 vr: "thực tế ảo"
             },
             option: {
                 platform: {
                     label: "Nền tảng",
-                    description: "Bạn muốn xuất hiện với tư cách là nền tảng nào?",
-                    desktop: "máy tính để bàn",
+                    description: "Nền tảng nào sẽ hiển thị dưới dạng",
+                    desktop: "Máy tính để bàn",
                     web: "Web",
                     android: "Android",
                     ios: "iOS",
@@ -7559,13 +7559,13 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         plexcordToolbox: {
-            name: "Hộp công cụ Plexcord",
-            description: "Thêm nút vào thanh ứng dụng để lưu trữ các hành động nhanh của Plexcord.",
+            name: "PlexcordToolbox",
+            description: "Thêm một nút vào AppBar chứa các hành động nhanh của Plexcord",
             tooltip: "Hộp công cụ Plexcord",
             context: {
                 openLog: "Mở nhật ký thông báo",
                 enableQuickCSS: "Kích hoạt QuickCSS",
-                openQuickCSS: "Mở QuickCSS",
+                openQuickCSS: "Chỉnh sửa QuickCSS",
                 openSettings: "Mở cài đặt",
                 manageThemes: "Quản lý chủ đề"
             },
@@ -7577,61 +7577,61 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         polishWording: {
-            name: "Tiếng Ba LanTừ ngữ",
-            description: "Nó thực hiện các chỉnh sửa nhỏ để làm cho tin nhắn của bạn trông đẹp hơn và có ngữ pháp tốt hơn. Kiểm tra các cài đặt",
+            name: "PolishWording",
+            description: "Tinh chỉnh tin nhắn của bạn để làm cho chúng trông đẹp hơn và có ngữ pháp tốt hơn. Xem cài đặt",
             option: {
                 quickDisable: {
                     label: "Tắt nhanh",
-                    description: "Vô hiệu hóa nhanh chóng. Tắt tính năng chỉnh sửa tin nhắn mà không cần phải khởi động lại ứng dụng."
+                    description: "Vô hiệu hóa nhanh chóng. Tắt sửa đổi tin nhắn mà không yêu cầu tải lại ứng dụng khách."
                 },
                 blockedWords: {
                     label: "từ bị chặn",
-                    description: "Các từ không viết hoa (phân cách bằng dấu phẩy)."
+                    description: "Các từ không được viết hoa (cách nhau bằng dấu phẩy)."
                 },
                 fixApostrophes: {
                     label: "Sửa dấu nháy đơn",
-                    description: "Đảm bảo các chữ viết tắt có dấu nháy đơn."
+                    description: "Đảm bảo các từ viết tắt có chứa dấu nháy đơn."
                 },
                 expandContractions: {
-                    label: "Mở từ viết tắt",
-                    description: "Nó chuyển đổi các từ viết tắt thành dạng rõ ràng của chúng (chẳng hạn như Don't -> Do not)."
+                    label: "Mở rộng các cơn co thắt",
+                    description: "Mở rộng các cơn co thắt"
                 },
                 fixCapitalization: {
-                    label: "Chỉnh sửa viết hoa",
-                    description: "Cho phép câu bắt đầu bằng chữ in hoa."
+                    label: "Sửa lỗi viết hoa",
+                    description: "Viết hoa các câu."
                 },
                 fixPunctuation: {
-                    label: "Dấu câu đúng",
-                    description: "Chỉnh sửa khoảng trắng xung quanh dấu chấm câu."
+                    label: "Sửa dấu câu",
+                    description: "Sửa khoảng cách xung quanh dấu câu."
                 },
                 fixPunctuationFrequency: {
-                    label: "Tần số chấm câu",
-                    description: "Tỷ lệ tần suất đặt dấu chấm ở cuối câu (tính năng này có thể khiến một số người khó chịu).",
+                    label: "Sửa tần số chấm câu",
+                    description: "Tần suất phần trăm trong khoảng thời gian (điều này chủ yếu gây khó chịu cho một số người).",
                 }
             }
         },
         previewMessage: {
-            name: "Xem trướcTin nhắn",
-            description: "Nó cho phép bạn xem trước tin nhắn của mình trước khi gửi.",
+            name: "PreviewMessage",
+            description: "Cho phép bạn xem trước tin nhắn của mình trước khi gửi nó.",
             tooltip: "Xem trước tin nhắn"
         },
         profileSets: {
-            name: "Bộ hồ sơ",
-            description: "Nó cho phép bạn lưu các cài đặt trước của hồ sơ và tải chúng thông qua Phần Hồ sơ trong Cài đặt.",
+            name: "ProfileSets",
+            description: "Cho phép bạn lưu và tải các cài đặt trước hồ sơ khác nhau thông qua phần Hồ sơ trong Cài đặt.",
             toast: {
-                importFailed: "Không thể nhập cài đặt trước hồ sơ. Tệp có thể không hợp lệ.",
+                importFailed: "Không thể nhập bộ hồ sơ. Tệp có thể không hợp lệ.",
             },
             option: {
                 avatarSize: {
                     label: "Kích thước hình đại diện",
-                    description: "Kích thước avatar trong danh sách cài đặt trước hồ sơ"
-                },
+                    description: "Kích thước avatar trong danh sách đặt trước"
+                }
             },
             modal: {
                 override: "ghi đè",
                 merge: "Hợp nhất",
                 cancel: "Hủy bỏ",
-                timestamp: "{{formattedDate}} vào lúc {{formattedTime}}",
+                timestamp: "{{formattedDate}} tại {{formattedTime}}",
                 rename: "Đổi tên",
                 update: "Cập nhật",
                 moveUp: "Di chuyển lên",
@@ -7639,7 +7639,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 moveTo: "Chuyển đến trang 1",
                 delete: "Xóa bỏ",
                 importProfiles: "Nhập hồ sơ",
-                importText: "Bạn hiện có {{currentCount}} hồ sơ trong phần này. Bạn có muốn ghi đè chúng hoặc hợp nhất với các cấu hình đã nhập không?",
+                importText: "Bạn hiện có {{existingCount}} hồ sơ trong phần này. Bạn có muốn ghi đè chúng hoặc hợp nhất với các cấu hình đã nhập không?",
                 heading: "Hồ sơ đã lưu",
                 searchProfiles: "Tìm kiếm hồ sơ...",
                 profileName: "Tên hồ sơ",
@@ -7647,95 +7647,95 @@ const translations: MatchStructure<typeof enTranslations> = {
                 save: "Lưu hồ sơ",
                 cancelSearch: "Hủy tìm kiếm",
                 search: "Tìm kiếm",
-                random: "ngẫu nhiên",
+                random: "Ngẫu nhiên",
                 import: "Nhập khẩu",
                 exportAll: "Xuất tất cả"
             }
         },
         questify: {
-            name: "Hỏi đáp",
-            description: "Nâng cao trải nghiệm nhiệm vụ của bạn với một loạt tính năng hoặc vô hiệu hóa chúng hoàn toàn nếu chúng không phải là thứ bạn muốn.",
+            name: "Questify",
+            description: "Nâng cao trải nghiệm Quest của bạn với một bộ tính năng hoặc tắt chúng hoàn toàn nếu chúng không phù hợp với bạn.",
             quests: "Nhiệm vụ",
             context: {
                 quest: {
-                    label: "Menu nút tác vụ",
-                    ignore: "Đánh dấu bỏ qua tất cả",
-                    reset: "Đặt lại danh sách bỏ qua",
+                    label: "Menu nút nhiệm vụ",
+                    ignore: "Đánh dấu tất cả đã bỏ qua",
+                    reset: "Đặt lại danh sách bị bỏ qua",
                     fetch: "Tìm nạp nhiệm vụ",
-                    markAsIgnored: "Đánh dấu là Bỏ qua",
-                    unmarkAsIgnored: "Xóa Bỏ qua",
+                    markAsIgnored: "Đánh dấu là đã bỏ qua",
+                    unmarkAsIgnored: "Bỏ đánh dấu là đã bỏ qua",
                     stopAuto: "Dừng tự động hoàn thành",
-                    copyQuestID: "Sao chép ID tác vụ",
-                    startAuto: "Bắt đầu Tự động Hoàn tất"
+                    copyQuestID: "Sao chép ID nhiệm vụ",
+                    startAuto: "Bắt đầu tự động hoàn thành"
                 }
             },
             settings: {
                 questButton: {
-                    title: "Nút tác vụ",
-                    description: "Hiển thị nút Nhiệm vụ với chỉ báo tùy chọn cho các Nhiệm vụ chưa được nhận trong danh sách máy chủ.",
+                    title: "Nút nhiệm vụ",
+                    description: "Hiển thị nút Nhiệm vụ trong danh sách máy chủ với chỉ báo tùy chọn cho các Nhiệm vụ chưa được nhận.",
                     leftClick: "Hành động nhấp chuột trái",
                     middleClick: "Hành động nhấp chuột giữa",
                     rightClick: "Hành động nhấp chuột phải",
                     visibility: "Hiển thị nút",
-                    unclaimedIndicator: "Chỉ báo không được yêu cầu",
+                    unclaimedIndicator: "Chỉ báo chưa được xác nhận",
                     badgeColor: "Màu huy hiệu",
-                    rewardDisplay: "Hiển thị giải thưởng",
-                    includedRewardTypes: "Các loại phần thưởng bao gồm",
-                    includedRewardTypesDesc: "Khi phát khả năng hiển thị nút, số lượng huy hiệu và âm thanh cảnh báo, chỉ tính các Nhiệm vụ có các loại phần thưởng này là chưa được nhận.",
-                    selectRewardTypes: "Chọn loại phần thưởng để đưa vào số lượng không có người nhận...",
-                    noRewardType: "Không có tính năng Tác vụ được hỗ trợ với tên này.",
+                    rewardDisplay: "Hiển thị phần thưởng",
+                    includedRewardTypes: "Các loại phần thưởng đi kèm",
+                    includedRewardTypesDesc: "Chỉ tính Nhiệm vụ có các loại phần thưởng này là chưa được nhận khi xác định mức độ hiển thị của nút, số lượng huy hiệu và khi phát âm thanh cảnh báo.",
+                    selectRewardTypes: "Chọn loại phần thưởng để đưa vào số lượng chưa được nhận...",
+                    noRewardType: "Không có tính năng Quest được hỗ trợ với tên đó.",
                     default: "Mặc định",
                     disable: "Vô hiệu hóa"
                 },
                 questFeatures: {
                     title: "Tính năng nhiệm vụ",
-                    description: "Thay đổi thuộc tính nhiệm vụ cụ thể.",
-                    popupWarning: "Tùy chọn {{disablePopup}} sẽ bị bỏ qua khi hoàn thành Nhiệm vụ và theo dõi tiến trình Nhiệm vụ.",
-                    videoQuestInfo: "Tùy chọn {{completeVideo}} sẽ đợi trong suốt thời gian thực hiện Nhiệm vụ video và tự động đánh dấu nhiệm vụ đó là đã hoàn thành.",
-                    gameQuestInfo: "Tương tự, tùy chọn {{completeGame}} sẽ chờ trong suốt thời gian của Nhiệm vụ trò chơi và tự động đánh dấu nó là đã hoàn thành. Tùy chọn này chỉ được hỗ trợ trong máy tính để bàn chính thức.",
-                    manualStartWarning: "Bạn phải bắt đầu nhiệm vụ theo cách thủ công. Nhấp chuột đầu tiên sẽ khởi chạy Nhiệm vụ ở chế độ nền. Đối với Tác vụ video, các lần nhấp tiếp theo sẽ mở chế độ video như bình thường. Để hủy nhiệm vụ, bạn có thể mở menu ngữ cảnh trong ô Nhiệm vụ và chọn {{stopAuto}}.",
-                    tosWarning: "Việc sử dụng bất kỳ tùy chọn nào trong số này đều vi phạm Điều khoản dịch vụ của Discord. Sử dụng có nguy cơ của riêng bạn.",
-                    selectFeatures: "Chọn thuộc tính nhiệm vụ cần thay đổi.",
-                    disablePopup: "Tắt cửa sổ bật lên tác vụ trên bảng tài khoản",
+                    description: "Sửa đổi các tính năng Quest cụ thể.",
+                    popupWarning: "Tùy chọn {{disablePopup}} sẽ bị bỏ qua đối với các Nhiệm vụ đã hoàn thành và theo dõi tiến trình Nhiệm vụ.",
+                    videoQuestInfo: "Tùy chọn {{completeVideo}} sẽ đợi trong suốt thời gian của Nhiệm vụ video và tự động đánh dấu nó là đã hoàn thành.",
+                    gameQuestInfo: "Tương tự, tùy chọn {{completeGame}} sẽ đợi trong suốt thời gian của Nhiệm vụ trò chơi và tự động đánh dấu nó là đã hoàn thành. Tùy chọn này chỉ được hỗ trợ trên máy tính để bàn chính thức.",
+                    manualStartWarning: "Bạn vẫn phải bắt đầu Nhiệm vụ theo cách thủ công. Lần nhấp đầu tiên sẽ bắt đầu Nhiệm vụ ở chế độ nền. Đối với Nhiệm vụ video, các lần nhấp tiếp theo sẽ mở chế độ video như bình thường. Để hủy Nhiệm vụ, bạn có thể mở menu ngữ cảnh trên ô Nhiệm vụ và chọn {{stopAuto}}.",
+                    tosWarning: "Sử dụng một trong các tùy chọn đó là trái với Điều khoản dịch vụ của Discord. Sử dụng có nguy cơ của riêng bạn.",
+                    selectFeatures: "Chọn những tính năng của Quest cần sửa đổi.",
+                    disablePopup: "Tắt cửa sổ bật lên nhiệm vụ trên bảng tài khoản",
                     completeVideo: "Hoàn thành nhiệm vụ video trong nền",
                     completeGame: "Hoàn thành nhiệm vụ chơi trò chơi trong nền",
                     stopAuto: "Dừng tự động hoàn thành"
                 },
                 restyleQuests: {
-                    title: "Nhiệm vụ định dạng lại",
-                    description: "Đánh dấu Nhiệm vụ bằng màu chủ đề tùy chọn để dễ nhìn.",
-                    precedenceNote: "Kiểu Nhiệm vụ đã Yêu cầu và Đã Hết hạn sẽ được ưu tiên ngay cả khi Nhiệm vụ bị bỏ qua.",
-                    gradientStyle: "Màu gradient",
-                    assetPreload: "Trình tải khởi động nội dung",
-                    unclaimed: "Không được yêu cầu",
-                    claimed: "Đã yêu cầu",
-                    ignored: "bỏ qua",
+                    title: "Nhiệm vụ thay đổi phong cách",
+                    description: "Làm nổi bật Nhiệm vụ bằng màu sắc chủ đề tùy chọn để dễ nhìn.",
+                    precedenceNote: "Kiểu Nhiệm vụ đã xác nhận và Đã hết hạn sẽ được ưu tiên ngay cả khi Nhiệm vụ bị bỏ qua.",
+                    gradientStyle: "Kiểu chuyển màu",
+                    assetPreload: "Tải trước nội dung",
+                    unclaimed: "Chưa được xác nhận",
+                    claimed: "Đã xác nhận quyền sở hữu",
+                    ignored: "Đã bỏ qua",
                     expired: "Hết hạn",
-                    intenseGradient: "Độ dốc đúc lại dày đặc",
-                    defaultGradient: "Chuyển đổi màu mặc định",
+                    intenseGradient: "Chuyển đổi phong cách mạnh mẽ",
+                    defaultGradient: "Chuyển đổi kiểu mặc định",
                     blackGradient: "Màu đen tinh tế",
                     noGradient: "Không có độ dốc",
                     loadAllAssets: "Tải tất cả nội dung nhiệm vụ khi tải trang",
-                    loadDuringScroll: "Tải nội dung tác vụ trong khi cuộn trang"
+                    loadDuringScroll: "Tải nội dung nhiệm vụ trong khi cuộn trang"
                 },
                 reorderQuests: {
                     title: "Sắp xếp lại nhiệm vụ",
-                    description: "Sắp xếp nhiệm vụ theo trạng thái của họ. Áp dụng khi tùy chọn sắp xếp \"Questify\" được chọn trên trang nhiệm vụ.",
-                    formatNote: "Danh sách được phân tách bằng dấu phẩy phải chứa tất cả các mục sau: {{items}}.",
-                    placeholder: "Bạn phải thêm UNCLAIMED, YÊU CẦU, BỎ QUA, HẾT HẠN tất cả",
+                    description: "Sắp xếp các nhiệm vụ theo trạng thái của chúng. Áp dụng khi tùy chọn sắp xếp \"Questify\" được chọn trên trang Nhiệm vụ.",
+                    formatNote: "Danh sách được phân tách bằng dấu phẩy phải chứa tất cả: {{items}}.",
+                    placeholder: "Bạn phải bao gồm tất cả KHÔNG ĐƯỢC CHẤP NHẬN, ĐƯỢC YÊU CẦU, BỎ QUA, HẾT HẠN",
                     invalidFormat: "Định dạng không hợp lệ.",
-                    unclaimedSubsort: "Xếp hạng phụ chưa được xác nhận",
-                    claimedSubsort: "Xếp hạng phụ được xác nhận",
-                    ignoredSubsort: "Đơn hàng phụ bị bỏ qua",
-                    expiredSubsort: "Xếp hạng phụ đã hết hạn",
+                    unclaimedSubsort: "Phân loại phụ chưa được xác nhận quyền sở hữu",
+                    claimedSubsort: "Phân loại phụ được yêu cầu",
+                    ignoredSubsort: "Phân loại bị bỏ qua",
+                    expiredSubsort: "Phân loại đã hết hạn",
                     addedNewest: "Đã thêm (Mới nhất)",
-                    addedOldest: "Bổ sung (Cũ nhất)",
-                    expiredRecent: "Đã hết hạn (Mới nhất)",
-                    expiredLeast: "Đã hết hạn (Ít nhất là mới nhất)",
-                    expiringSoon: "Hết hạn (Gần nhất)",
+                    addedOldest: "Đã thêm (Cũ nhất)",
+                    expiredRecent: "Đã hết hạn (Gần đây nhất)",
+                    expiredLeast: "Đã hết hạn (Ít nhất gần đây)",
+                    expiringSoon: "Hết hạn (Sớm nhất)",
                     expiringLate: "Hết hạn (Mới nhất)",
-                    claimedRecent: "Đã yêu cầu (Mới nhất)",
-                    claimedLeast: "Đã yêu cầu (Ít nhất là mới nhất)",
+                    claimedRecent: "Đã xác nhận quyền sở hữu (Gần đây nhất)",
+                    claimedLeast: "Đã xác nhận quyền sở hữu (Ít nhất gần đây)",
                     ignoredQuestProfile: "Hồ sơ nhiệm vụ bị bỏ qua",
                     sharedProfile: "Đã chia sẻ: Tất cả tài khoản trên khách hàng này đều bị bỏ qua.",
                     privateProfile: "Riêng tư: Tất cả tài khoản trên khách hàng này đều có chế độ bỏ qua riêng.",
@@ -7743,164 +7743,164 @@ const translations: MatchStructure<typeof enTranslations> = {
                     rememberFilter: "Ghi nhớ lựa chọn bộ lọc",
                     yes: "Đúng",
                     no: "KHÔNG",
-                    rememberNote: "Lựa chọn sắp xếp và lọc này đề cập đến các tùy chọn sắp xếp và lọc tích hợp trên trang Nhiệm vụ. Cách sắp xếp tùy chỉnh ở trên chỉ áp dụng khi tùy chọn sắp xếp \"Questify\" được chọn trên trang Nhiệm vụ. Nếu việc thu hồi bị tắt, các tùy chọn sắp xếp hoặc lọc sẽ được đặt lại mỗi khi bạn mở trang Nhiệm vụ."
+                    rememberNote: "Lựa chọn sắp xếp và lọc này đề cập đến các tùy chọn sắp xếp và lọc tích hợp trên trang Nhiệm vụ. Việc sắp xếp tùy chỉnh ở trên chỉ được áp dụng khi tùy chọn sắp xếp \"Questify\" được chọn trên trang Nhiệm vụ. Nếu tính năng ghi nhớ bị tắt, các tùy chọn sắp xếp hoặc lọc sẽ được đặt lại mỗi khi bạn mở trang Nhiệm vụ."
                 },
                 fetchingQuests: {
                     title: "Tìm nạp nhiệm vụ",
-                    description: "Định cấu hình tần suất Nhiệm vụ được tìm nạp từ Discord và đặt cảnh báo cho Nhiệm vụ mới.",
-                    defaultBehavior: "Theo mặc định, Discord chỉ hiển thị Nhiệm vụ khi chúng được cài đặt và bạn truy cập trang Nhiệm vụ. Điều này có nghĩa là nếu không có khoảng thời gian tìm nạp được xác định bên dưới, plugin này sẽ không được thông báo về các Nhiệm vụ mới được thêm vào trong ngày.",
-                    requirement: "Điều này phụ thuộc vào việc Nút Nhiệm vụ đang hoạt động và được đặt thành {{unclaimed}} hay được đặt thành {{always}} và các chỉ báo {{pill}}, {{badge}} hoặc {{both}} chưa được xác nhận được bật. Nếu không, không cần phải tìm nạp Nhiệm vụ định kỳ.",
+                    description: "Định cấu hình tần suất tìm nạp Nhiệm vụ từ Discord và thiết lập cảnh báo cho Nhiệm vụ mới.",
+                    defaultBehavior: "Theo mặc định, Discord chỉ tìm nạp Nhiệm vụ khi tải và khi truy cập trang Nhiệm vụ. Điều này có nghĩa là nếu không có khoảng thời gian tìm nạp được xác định bên dưới, plugin này sẽ không biết về các Nhiệm vụ mới được thêm vào trong ngày.",
+                    requirement: "Điều này phụ thuộc vào việc Nút Nhiệm vụ được bật và đặt thành {{unclaimed}} hoặc được đặt thành {{always}} với các chỉ báo {{pill}}, {{badge}} hoặc {{both}} chưa được xác nhận đã bật. Nếu không, không có lý do gì để tìm Nhiệm vụ định kỳ.",
                     blockWarning: "Ngoài ra, nếu {{fetchingQuests}} bị chặn trong cài đặt {{questFeatures}} thì thao tác này sẽ không hoạt động.",
-                    fetchInterval: "Phạm vi tìm nạp",
+                    fetchInterval: "Khoảng thời gian tìm nạp",
                     alertSound: "Âm thanh cảnh báo",
                     intervalPlaceholder: "Chọn hoặc nhập khoảng thời gian từ 30 phút đến 12 giờ.",
-                    intervalFeedback: "Khoảng thời gian nên từ 30 phút đến 12 giờ.",
+                    intervalFeedback: "Khoảng thời gian phải từ 30 phút đến 12 giờ.",
                     soundPlaceholder: "Chọn âm thanh hoặc cung cấp URL âm thanh tùy chỉnh.",
                     soundFeedback: "Không tìm thấy âm thanh hoặc URL không thuộc miền được hỗ trợ.",
                     disabled: "Tàn tật",
-                    minutes: "Một phút",
-                    minute: "Một phút",
-                    hours: "Chốc lát",
-                    hour: "Chốc lát",
+                    minutes: "Phút",
+                    minute: "Phút",
+                    hours: "Giờ",
+                    hour: "Giờ",
                     thirtyMinutes: "30 phút",
-                    oneHour: "1 khoảnh khắc",
-                    threeHours: "3 khoảnh khắc",
-                    sixHours: "6 khoảnh khắc",
-                    twelveHours: "12 khoảnh khắc",
+                    oneHour: "1 giờ",
+                    threeHours: "3 giờ",
+                    sixHours: "6 giờ",
+                    twelveHours: "12 giờ",
                     customSound: "ÂM THANH TÙY CHỈNH"
                 },
                 disableOptions: {
                     everything: "Vô hiệu hóa mọi thứ",
-                    discovery: "Tắt tab Khám phá",
+                    discovery: "Vô hiệu hóa tab khám phá",
                     dms: "Vô hiệu hóa tab nhiệm vụ trong DM",
-                    fetching: "Tắt tính năng tìm nạp tác vụ",
+                    fetching: "Vô hiệu hóa nhiệm vụ tìm nạp",
                     popup: "Tắt cửa sổ bật lên phía trên bảng tài khoản",
-                    sponsored: "Vô hiệu hóa biểu ngữ được tài trợ trên trang nhiệm vụ",
+                    sponsored: "Tắt biểu ngữ được tài trợ trên trang nhiệm vụ",
                     badge: "Tắt huy hiệu trên hồ sơ người dùng",
-                    inventory: "Tắt thông báo vận chuyển hàng tồn kho quà tặng",
-                    friendsList: "Danh sách bạn bè hiện đang hoạt động Khuyến mãi",
-                    membersList: "Danh sách thành viên Biểu tượng đang chơi",
-                    gameQuests: "Hoàn thành các thử thách trò chơi/hoạt động trong nền",
+                    inventory: "Tắt thông báo di dời kho quà tặng",
+                    friendsList: "Danh sách bạn bè Đang hoạt động Khuyến mãi",
+                    membersList: "Danh sách thành viên tích cực chơi biểu tượng",
+                    gameQuests: "Hoàn thành nhiệm vụ chơi trò chơi/hoạt động trong nền",
                     videoQuests: "Hoàn thành nhiệm vụ xem video trong nền",
-                    achievementQuests: "Hoàn thành nhiệm vụ hoạt động trong nền",
-                    mobileDesktop: "Làm cho các tác vụ di động tương thích với máy tính để bàn",
-                    notifyOnComplete: "Thông báo cho tôi khi nhiệm vụ hoàn thành"
+                    achievementQuests: "Hoàn thành nhiệm vụ trong Nhiệm vụ hoạt động trong nền",
+                    mobileDesktop: "Làm cho nhiệm vụ di động tương thích với máy tính để bàn",
+                    notifyOnComplete: "Thông báo khi hoàn thành nhiệm vụ"
                 },
                 options: {
                     always: "Luôn luôn",
-                    unclaimed: "Không được yêu cầu",
+                    unclaimed: "Chưa được xác nhận",
                     never: "Không bao giờ",
-                    pill: "Hap",
+                    pill: "Thuốc viên",
                     badge: "Huy hiệu",
-                    both: "Cả hai người họ",
+                    both: "Cả hai",
                     none: "Không có",
                     openQuests: "Nhiệm vụ mở",
                     contextMenu: "Trình đơn ngữ cảnh",
                     pluginSettings: "Cài đặt plugin",
                     nothing: "Không có gì",
-                    orbs: "quả cầu",
+                    orbs: "Quả cầu",
                     nitroCodes: "Mã Nitro",
                     rewardCodes: "Mã thưởng",
                     inGameItems: "Vật phẩm trong trò chơi",
-                    profileCollectibles: "Bộ sưu tập hồ sơ"
+                    profileCollectibles: "Hồ sơ sưu tầm"
                 }
             },
             option: {
                 disableQuests: {
                     label: "Vô hiệu hóa nhiệm vụ",
-                    description: "Chọn tính năng Tác vụ nào cần tắt."
+                    description: "Chọn những tính năng của Quest để tắt."
                 },
                 disableQuestsEverything: {
                     label: "Vô hiệu hóa mọi thứ",
-                    description: "Vô hiệu hóa tất cả các tính năng của Tác vụ."
+                    description: "Vô hiệu hóa tất cả các tính năng của Quest."
                 },
                 disableQuestsFetchingQuests: {
-                    label: "Tắt tính năng tìm nạp tác vụ",
-                    description: "Tắt tính năng tìm nạp tác vụ từ Discord."
+                    label: "Vô hiệu hóa nhiệm vụ tìm nạp",
+                    description: "Vô hiệu hóa việc tìm nạp Nhiệm vụ từ Discord."
                 },
                 disableQuestsDirectMessagesTab: {
-                    label: "Tắt tab tác vụ trong DM",
-                    description: "Tắt tab Tác vụ trên trang Tin nhắn trực tiếp."
+                    label: "Vô hiệu hóa tab nhiệm vụ trong DM",
+                    description: "Tắt tab Nhiệm vụ trong trang Tin nhắn Trực tiếp."
                 },
                 disableQuestsDiscoveryTab: {
-                    label: "Tắt tab Khám phá",
-                    description: "Tắt tab Nhiệm vụ trên trang Khám phá."
+                    label: "Vô hiệu hóa tab khám phá",
+                    description: "Tắt tab Nhiệm vụ trong trang Khám phá."
                 },
                 disableQuestsPageSponsoredBanner: {
-                    label: "Vô hiệu hóa biểu ngữ được tài trợ trên trang nhiệm vụ",
-                    description: "Tắt biểu ngữ được tài trợ trên trang Nhiệm vụ."
+                    label: "Tắt biểu ngữ được tài trợ trên trang nhiệm vụ",
+                    description: "Vô hiệu hóa biểu ngữ được tài trợ trên trang Quest."
                 },
                 disableQuestsPopupAboveAccountPanel: {
-                    label: "Tắt cửa sổ bật lên trên bảng tài khoản",
-                    description: "Tắt cửa sổ bật lên Tác vụ ở đầu bảng tài khoản của bạn."
+                    label: "Tắt cửa sổ bật lên phía trên bảng tài khoản",
+                    description: "Tắt cửa sổ bật lên Quest phía trên bảng tài khoản của bạn."
                 },
                 disableQuestsBadgeOnUserProfiles: {
-                    label: "Tắt huy hiệu trên hồ sơ người dùng",
-                    description: "Tắt huy hiệu Nhiệm vụ trên hồ sơ người dùng."
+                    label: "Vô hiệu hóa huy hiệu trên hồ sơ người dùng",
+                    description: "Vô hiệu hóa huy hiệu Nhiệm vụ trên hồ sơ người dùng."
                 },
                 disableQuestsGiftInventoryRelocationNotice: {
-                    label: "Tắt thông báo di chuyển kho quà tặng",
-                    description: "Kho quà tặng Tắt thông báo di chuyển nhiệm vụ."
+                    label: "Tắt thông báo di dời kho quà tặng",
+                    description: "Vô hiệu hóa kho quà tặng Thông báo di dời Quest."
                 },
                 disableFriendsListActiveNowPromotion: {
-                    label: "Tắt danh sách bạn bè hiện đang hoạt động",
-                    description: "Tắt quảng cáo Quest cho các trò chơi do bạn bè chơi."
+                    label: "Tắt danh sách bạn bè Đang hoạt động Khuyến mãi",
+                    description: "Vô hiệu hóa việc quảng bá Nhiệm vụ cho các trò chơi do bạn bè chơi."
                 },
                 disableMembersListActivelyPlayingIcons: {
-                    label: "Tắt biểu tượng Active Play trong danh sách thành viên",
-                    description: "Tắt các biểu tượng phát đang hoạt động trong danh sách thành viên."
+                    label: "Vô hiệu hóa các biểu tượng danh sách thành viên đang phát tích cực",
+                    description: "Tắt các biểu tượng đang phát trong danh sách thành viên."
                 },
                 makeMobileQuestsDesktopCompatible: {
-                    label: "Làm cho các tác vụ di động tương thích với máy tính để bàn",
-                    description: "Làm cho Nhiệm vụ chỉ dành cho thiết bị di động tương thích với máy tính để bàn."
+                    label: "Làm cho nhiệm vụ di động tương thích với máy tính để bàn",
+                    description: "Làm cho các Nhiệm vụ chỉ dành cho thiết bị di động tương thích với máy tính để bàn."
                 },
                 completeVideoQuestsInBackground: {
                     label: "Hoàn thành nhiệm vụ video trong nền",
-                    description: "Hoàn thành Nhiệm vụ Video ở chế độ nền sau khi thời gian video trôi qua."
+                    description: "Hoàn thành Nhiệm vụ video ở chế độ nền sau khi hết thời lượng video."
                 },
                 completeGameQuestsInBackground: {
                     label: "Hoàn thành nhiệm vụ trò chơi trong nền",
-                    description: "Hoàn thành Nhiệm vụ của trò chơi ở chế độ nền sau khi thời gian trò chơi trôi qua."
+                    description: "Hoàn thành Nhiệm vụ trò chơi ở chế độ nền sau khi thời gian trò chơi trôi qua."
                 },
                 completeAchievementQuestsInBackground: {
-                    label: "Hoàn thành nhiệm vụ hoạt động trong nền",
-                    description: "Hoàn thành các thử thách hoạt động trong nền."
+                    label: "Hoàn thành nhiệm vụ trong nhiệm vụ hoạt động trong nền",
+                    description: "Hoàn thành thành tích trong Nhiệm vụ hoạt động ở chế độ nền."
                 },
                 notifyOnQuestComplete: {
-                    label: "Thông báo cho tôi khi nhiệm vụ hoàn thành",
+                    label: "Thông báo khi hoàn thành nhiệm vụ",
                     description: "Hiển thị thông báo khi Nhiệm vụ được hoàn thành tự động."
                 },
                 questButton: {
-                    label: "Nút tác vụ",
+                    label: "Nút nhiệm vụ",
                     description: "Hiển thị nút Nhiệm vụ trong danh sách máy chủ."
                 },
                 questButtonDisplay: {
-                    label: "Giao diện nút tác vụ",
-                    description: "Loại hiển thị nào sẽ sử dụng cho nút Tác vụ trong danh sách máy chủ."
+                    label: "Hiển thị nút nhiệm vụ",
+                    description: "Loại hiển thị nào sẽ sử dụng cho nút Nhiệm vụ trong danh sách máy chủ."
                 },
                 questRewardIncludeRewardCode: {
                     label: "Bao gồm mã thưởng",
-                    description: "Bao gồm các Nhiệm vụ kèm theo Mã Phần thưởng khi xem số lượng nhiệm vụ."
+                    description: "Bao gồm các Nhiệm vụ kèm theo Mã Phần thưởng khi hiển thị số lượng Nhiệm vụ."
                 },
                 questRewardIncludeNitroCode: {
                     label: "Bao gồm mã Nitro",
-                    description: "Bao gồm các nhiệm vụ được mã hóa Nitro khi xem số lượng nhiệm vụ."
+                    description: "Bao gồm các Nhiệm vụ với Mã Nitro khi hiển thị số lượng Nhiệm vụ."
                 },
                 questRewardIncludeInGame: {
                     label: "Bao gồm phần thưởng trong trò chơi",
-                    description: "Bao gồm các Nhiệm vụ với phần thưởng trong trò chơi khi xem số lượng Nhiệm vụ."
+                    description: "Bao gồm các Nhiệm vụ với phần thưởng trong trò chơi khi hiển thị số lượng Nhiệm vụ."
                 },
                 questRewardIncludeCollectibles: {
-                    label: "Bao gồm các bộ sưu tập",
-                    description: "Bao gồm các Nhiệm vụ với Vật phẩm sưu tầm khi xem số lượng nhiệm vụ."
+                    label: "Bao gồm sưu tầm",
+                    description: "Bao gồm các Nhiệm vụ có Đồ sưu tầm khi hiển thị số lượng Nhiệm vụ."
                 },
                 questRewardIncludeOrbs: {
                     label: "Bao gồm các quả cầu",
-                    description: "Bao gồm các Nhiệm vụ giành được Quả cầu khi xem số lượng Nhiệm vụ."
+                    description: "Bao gồm các Nhiệm vụ có Quả cầu khi hiển thị số lượng Nhiệm vụ."
                 },
                 questButtonUnclaimed: {
                     label: "Chỉ báo chưa được xác nhận của nút nhiệm vụ",
-                    description: "Loại hiển thị nào sẽ được sử dụng cho chỉ báo chưa được xác nhận trên nút Tác vụ trong danh sách máy chủ."
+                    description: "Loại hiển thị nào sẽ được sử dụng cho chỉ báo chưa được xác nhận trên nút Nhiệm vụ trong danh sách máy chủ."
                 },
                 questButtonBadgeColor: {
                     label: "Màu huy hiệu nút nhiệm vụ",
@@ -7908,170 +7908,170 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 questButtonLeftClickAction: {
                     label: "Hành động nhấp chuột trái",
-                    description: "Hành động cần thực hiện khi nhấp chuột trái vào nút Tác vụ trong danh sách máy chủ."
+                    description: "Hành động cần thực hiện khi nhấn chuột trái vào nút Quest trong danh sách máy chủ."
                 },
                 questButtonMiddleClickAction: {
                     label: "Hành động nhấp chuột giữa",
-                    description: "Hành động được thực hiện khi nhấp chuột giữa vào nút Tác vụ trong danh sách máy chủ."
+                    description: "Hành động cần thực hiện khi nhấp chuột giữa vào nút Nhiệm vụ trong danh sách máy chủ."
                 },
                 questButtonRightClickAction: {
                     label: "Hành động nhấp chuột phải",
-                    description: "Hành động cần thực hiện khi nhấp chuột phải vào nút Tác vụ trong danh sách máy chủ."
+                    description: "Hành động cần thực hiện khi nhấn chuột phải vào nút Quest trong danh sách máy chủ."
                 },
                 fetchingQuests: {
                     label: "Tìm nạp nhiệm vụ",
-                    description: "Mang nhiệm vụ từ Discord."
+                    description: "Tìm nạp nhiệm vụ từ Discord."
                 },
                 fetchingQuestsInterval: {
-                    label: "Phạm vi tìm nạp nhiệm vụ",
-                    description: "Khoảng thời gian (tính bằng giây) để tìm nạp Nhiệm vụ từ Discord."
+                    label: "Khoảng thời gian tìm nạp nhiệm vụ",
+                    description: "Khoảng thời gian tính bằng giây để tìm nạp Nhiệm vụ từ Discord."
                 },
                 fetchingQuestsAlert: {
-                    label: "Cảnh báo tìm nạp nhiệm vụ",
-                    description: "Âm thanh sẽ được phát khi phát hiện Nhiệm vụ mới."
+                    label: "Đang tìm nạp thông báo nhiệm vụ",
+                    description: "Âm thanh phát ra khi phát hiện Nhiệm vụ mới."
                 },
                 fetchingQuestsAlertVolume: {
-                    label: "Khối lượng thông báo tìm nạp nhiệm vụ",
-                    description: "Âm lượng âm thanh sẽ được phát khi phát hiện Nhiệm vụ mới."
+                    label: "Đang tìm nạp khối lượng cảnh báo nhiệm vụ",
+                    description: "Âm lượng của âm thanh cảnh báo khi phát hiện Nhiệm vụ mới."
                 },
                 restyleQuests: {
-                    label: "Nhiệm vụ định dạng lại",
-                    description: "Tùy chỉnh giao diện của ô Nhiệm vụ trên trang Nhiệm vụ."
+                    label: "Nhiệm vụ thay đổi phong cách",
+                    description: "Tùy chỉnh giao diện của các ô Nhiệm vụ trong trang Nhiệm vụ."
                 },
                 restyleQuestsUnclaimed: {
-                    label: "Nhiệm vụ định dạng lại - Không được yêu cầu",
-                    description: "Màu của các ô Nhiệm vụ chưa được nhận trên trang Nhiệm vụ."
+                    label: "Nhiệm vụ làm lại phong cách chưa được nhận",
+                    description: "Màu của các ô Nhiệm vụ chưa được nhận trong trang Nhiệm vụ."
                 },
                 restyleQuestsClaimed: {
-                    label: "Nhiệm vụ định dạng lại - Đã yêu cầu",
-                    description: "Màu của ô Nhiệm vụ được xác nhận trên trang Nhiệm vụ."
+                    label: "Nhiệm vụ Restyle được yêu cầu",
+                    description: "Màu của các ô Nhiệm vụ được xác nhận trong trang Nhiệm vụ."
                 },
                 restyleQuestsIgnored: {
-                    label: "Nhiệm vụ định dạng lại - Bỏ qua",
-                    description: "Màu của ô Nhiệm vụ bị bỏ qua trên trang Nhiệm vụ."
+                    label: "Nhiệm vụ Restyle bị bỏ qua",
+                    description: "Màu của các ô Nhiệm vụ bị bỏ qua trong trang Nhiệm vụ."
                 },
                 restyleQuestsExpired: {
-                    label: "Nhiệm vụ định dạng lại - Đã hết hạn",
-                    description: "Màu của ô Nhiệm vụ đã hết hạn trên trang Nhiệm vụ."
+                    label: "Nhiệm vụ Restyle đã hết hạn",
+                    description: "Màu của các ô Nhiệm vụ đã hết hạn trong trang Nhiệm vụ."
                 },
                 restyleQuestsGradient: {
-                    label: "Nhiệm vụ định dạng lại - gradient",
-                    description: "Kiểu chuyển màu được sử dụng trong các ô tác vụ."
+                    label: "Thay đổi phong cách nhiệm vụ gradient",
+                    description: "Kiểu chuyển màu được sử dụng trong các ô Nhiệm vụ."
                 },
                 restyleQuestsPreload: {
-                    label: "Nhiệm vụ định dạng lại - Bootloader",
-                    description: "Hãy thử tải trước nội dung cho ô nhiệm vụ."
+                    label: "Tải lại nhiệm vụ Restyle",
+                    description: "Cố gắng tải trước nội dung cho các ô Nhiệm vụ."
                 },
                 reorderQuests: {
                     label: "Sắp xếp lại nhiệm vụ",
-                    description: "Sắp xếp nhiệm vụ theo trạng thái của họ. Để trống để sắp xếp mặc định. Danh sách được phân tách bằng dấu phẩy phải chứa tất cả các mục sau: KHÔNG ĐƯỢC CHẤP NHẬN, ĐƯỢC YÊU CẦU, BỎ QUA, HẾT HẠN."
+                    description: "Sắp xếp các nhiệm vụ theo trạng thái của chúng. Để trống để sắp xếp mặc định. Danh sách được phân tách bằng dấu phẩy phải chứa tất cả: KHÔNG ĐƯỢC CHẤP NHẬN, ĐƯỢC YÊU CẦU, BỎ QUA, HẾT HẠN."
                 },
                 unclaimedSubsort: {
-                    label: "Xếp hạng phụ chưa được xác nhận",
-                    description: "Phương pháp phân loại phụ cho các Nhiệm vụ chưa được xác nhận."
+                    label: "Phân loại phụ chưa được xác nhận quyền sở hữu",
+                    description: "Phương pháp phân loại cho các Nhiệm vụ chưa được nhận."
                 },
                 claimedSubsort: {
-                    label: "Xếp hạng phụ được xác nhận",
-                    description: "Phương pháp sắp xếp phụ cho các Nhiệm vụ được yêu cầu."
+                    label: "Phân loại phụ được yêu cầu",
+                    description: "Phương pháp phân loại cho các Nhiệm vụ được xác nhận."
                 },
                 ignoredSubsort: {
-                    label: "Đơn hàng phụ bị bỏ qua",
-                    description: "Phương pháp sắp xếp phụ cho các tác vụ bị bỏ qua."
+                    label: "Phân loại bị bỏ qua",
+                    description: "Phương pháp phân loại cho các Nhiệm vụ bị bỏ qua."
                 },
                 expiredSubsort: {
-                    label: "Xếp hạng phụ đã hết hạn",
-                    description: "Phương pháp sắp xếp ngược cho các Nhiệm vụ đã hết hạn."
+                    label: "Phân loại đã hết hạn",
+                    description: "Phương pháp phân loại cho các Nhiệm vụ đã hết hạn."
                 },
                 unclaimedUnignoredQuests: {
-                    label: "Nhiệm vụ không được yêu cầu Không bị bỏ qua",
+                    label: "Nhiệm vụ chưa được xác nhận",
                     description: "Theo dõi số lượng Nhiệm vụ chưa được nhận và chưa được bỏ qua."
                 },
                 onQuestsPage: {
-                    label: "Trên trang Nhiệm vụ",
+                    label: "Trên trang nhiệm vụ",
                     description: "Liệu người dùng hiện có ở trang Nhiệm vụ hay không."
                 },
                 triggerQuestsRerender: {
-                    label: "Kích hoạt nhiệm vụ kết xuất lại",
-                    description: "Kích hoạt kết xuất lại trang Nhiệm vụ bằng cách thay đổi cài đặt này."
+                    label: "Kết xuất lại nhiệm vụ kích hoạt",
+                    description: "Kích hoạt hiển thị lại trang Nhiệm vụ bằng cách chuyển đổi cài đặt này."
                 },
                 ignoredQuestProfile: {
                     label: "Hồ sơ nhiệm vụ bị bỏ qua",
-                    description: "Hồ sơ được sử dụng cho Nhiệm vụ bị bỏ qua."
+                    description: "Hồ sơ được sử dụng cho các Nhiệm vụ bị bỏ qua."
                 },
                 rememberQuestPageSort: {
                     label: "Ghi nhớ sắp xếp trang nhiệm vụ",
-                    description: "Ghi nhớ trình tự được sử dụng lần cuối trên trang Nhiệm vụ."
+                    description: "Hãy nhớ cách sắp xếp được sử dụng lần cuối trên trang Nhiệm vụ."
                 },
                 rememberQuestPageFilters: {
                     label: "Ghi nhớ bộ lọc trang nhiệm vụ",
-                    description: "Ghi nhớ các bộ lọc được sử dụng lần cuối trên trang Nhiệm vụ."
+                    description: "Ghi nhớ các bộ lọc được sử dụng gần đây nhất trên trang Nhiệm vụ."
                 },
                 lastQuestPageSort: {
-                    label: "Xếp hạng trang nhiệm vụ mới nhất",
-                    description: "Ghi nhớ trình tự được sử dụng lần cuối trên trang Nhiệm vụ."
+                    label: "Sắp xếp trang nhiệm vụ cuối cùng",
+                    description: "Hãy nhớ cách sắp xếp được sử dụng lần cuối trên trang Nhiệm vụ."
                 },
                 lastQuestPageFilters: {
-                    label: "Bộ lọc trang nhiệm vụ mới nhất",
-                    description: "Ghi nhớ các bộ lọc được sử dụng lần cuối trên trang Nhiệm vụ."
+                    label: "Bộ lọc trang nhiệm vụ cuối cùng",
+                    description: "Ghi nhớ các bộ lọc được sử dụng gần đây nhất trên trang Nhiệm vụ."
                 },
                 ignoredQuestIDs: {
-                    label: "ID tác vụ bị bỏ qua",
-                    description: "Mảng ID tác vụ bị bỏ qua."
+                    label: "ID nhiệm vụ bị bỏ qua",
+                    description: "Một mảng ID nhiệm vụ bị bỏ qua."
                 },
                 resumeQuestIDs: {
-                    label: "ID nhiệm vụ đang tiến hành",
-                    description: "Mảng ID tác vụ tự động hoàn thành ở chế độ nền."
+                    label: "Tiếp tục ID nhiệm vụ",
+                    description: "Một mảng ID nhiệm vụ đang được tự động hoàn thành ở chế độ nền."
                 }
             },
             button: {
                 questInProgressWithTime: "Đang hoàn thành ({{remainTime}})",
                 completing: "Đang hoàn thiện",
-                resume: "Devam Và (~{{remainTime}})",
+                resume: "Tiếp tục (~{{remainTime}})",
                 complete: "Hoàn thành {{remainTime}}",
                 completeImmediate: "Hoàn thành (Ngay lập tức)",
-                completed: "hoàn thành"
+                completed: "Hoàn thành"
             },
             reward: {
-                orbs: "{{orbQuantity}} Quả cầu trong {{completingText}}.",
+                orbs: "{{completingText}} cho {{orbQuantity}} Quả cầu.",
                 article: "{{completingText}} cho {{itemName}}.",
-                unrecognized: "{{completingText}} dành cho loại phần thưởng không được công nhận."
+                unrecognized: "{{completingText}} đối với loại phần thưởng không được công nhận."
             },
             notification: {
                 completed: {
-                    title: "Công việc đã xong",
+                    title: "Nhiệm vụ đã hoàn thành",
                     body: "Nhiệm vụ {{questName}} đã hoàn thành."
                 }
             }
         },
         questionMarkReplacement: {
-            name: "Dấu hỏiThay thế",
-            description: "Nếu thông báo chỉ bao gồm các dấu chấm hỏi, nó sẽ thay thế tất cả các dấu chấm hỏi bằng chuỗi đã chọn.",
+            name: "QuestionMarkReplacement",
+            description: "Thay thế tất cả các dấu chấm hỏi bằng chuỗi đã chọn nếu tin nhắn chỉ chứa dấu chấm hỏi.",
             option: {
                 replace: {
-                    label: "Thay đổi",
+                    label: "Thay thế",
                     description: "Thay thế bằng"
                 }
             }
         },
         quickMention: {
-            name: "Đề cập nhanh",
-            description: "Thêm nút đề cập nhanh vào thanh tác vụ tin nhắn.",
-            tooltip: "Đặt cược nhanh"
+            name: "QuickMention",
+            description: "Thêm nút đề cập nhanh vào thanh tác vụ tin nhắn",
+            tooltip: "Đề cập nhanh"
         },
         quickReply: {
-            name: "Trả lời nhanh",
-            description: "Trả lời (ctrl + up/down) và chỉnh sửa tin nhắn (ctrl + shift + up/down) bằng phím nóng.",
+            name: "QuickReply",
+            description: "Trả lời tin nhắn (Ctrl+Up/Down) và chỉnh sửa (Ctrl+Shift+Up/Down) thông qua tổ hợp phím",
             option: {
                 shouldMention: {
-                    label: "Tôi có nên đề cập đến",
-                    description: "Ping phản hồi theo mặc định",
+                    label: "Nên Nhắc Đến",
+                    description: "Ping trả lời theo mặc định",
                     noReplyMentionPlugin: "Theo dõi plugin NoReplyMention (nếu được bật)",
-                    enabled: "Hiệu quả",
+                    enabled: "Đã bật",
                     disabled: "Tàn tật"
                 },
                 ignoreBlockedAndIgnored: {
-                    label: "Bỏ qua Bị chặn và bỏ qua",
-                    description: "Bỏ qua tin nhắn từ người dùng bị chặn/bỏ qua khi duyệt web"
+                    label: "Bỏ qua Bị chặn và Bỏ qua",
+                    description: "Bỏ qua tin nhắn của người dùng bị chặn/bỏ qua khi điều hướng"
                 }
             }
         },
@@ -8079,32 +8079,32 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "QuickThemeSwitcher",
             description: "Chuyển đổi nhanh giữa các chủ đề bằng phím tắt.",
             about: {
-                title: "Phím nóng",
-                description: "Sử dụng Ctrl/Cmd+Shift+Phím mũi tên để điều hướng (Trái/Phải: Chuyển đổi giữa các chủ đề, Lên: Bật, Xuống: Tắt).",
-                reload: "Nhấn Ctrl/Cmd+Shift+Alt để làm mới danh sách chủ đề."
+                title: "Ràng buộc",
+                description: "Sử dụng Ctrl/Cmd+Shift+Mũi tên để điều hướng (Trái/Phải: xoay chủ đề, Lên: bật, Xuống: tắt).",
+                reload: "Nhấn Ctrl/Cmd+Shift+Alt để tải lại danh sách chủ đề."
             },
             modal: {
-                added: "Đã thêm {{count}} chủ đề mới",
-                removed: "Đã xóa {{count}} chủ đề",
+                added: "Đã thêm chủ đề {{count}}{{s}}",
+                removed: "Đã xóa {{count}} chủ đề{{s}}",
                 reloaded: "Đã tải lại chủ đề {{themeCount}}",
-                addedLocal: "Đã thêm {{count}} chủ đề địa phương",
-                removedLocal: "Đã xóa {{count}} chủ đề gốc",
+                addedLocal: "Đã thêm {{count}} chủ đề địa phương{{s}}",
+                removedLocal: "Đã xóa {{count}} chủ đề địa phương{{s}}",
             },
             option: {
                 includeLocal: {
-                    label: "Bao gồm các chủ đề gốc",
-                    description: "Bao gồm các chủ đề gốc trên thiết bị của bạn trong danh sách"
+                    label: "Bao gồm địa phương",
+                    description: "Bao gồm các chủ đề địa phương"
                 },
                 includeOnline: {
-                    label: "Bao gồm các chủ đề trực tuyến",
-                    description: "Bao gồm các chủ đề trực tuyến trong danh sách"
+                    label: "Bao gồm trực tuyến",
+                    description: "Bao gồm các chủ đề trực tuyến"
                 },
                 sortOrder: {
-                    label: "Sắp xếp theo",
+                    label: "Sắp xếp thứ tự",
                     description: "Phương pháp sắp xếp",
-                    asc: "A'dan Z'ye",
-                    desc: "Z'den A'ya",
-                    recent: "Ở Sơn"
+                    asc: "A-Z",
+                    desc: "Z-A",
+                    recent: "Gần đây"
                 },
                 autoRefresh: {
                     label: "Tự động làm mới",
@@ -8112,30 +8112,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 showNotifications: {
                     label: "Hiển thị thông báo",
-                    description: "Hiển thị thông báo khi chủ đề được thêm hoặc xóa"
+                    description: "Hiển thị thông báo khi chủ đề được thêm/xóa"
                 }
             }
         },
         quoter: {
-            name: "Người trích dẫn",
-            description: "Cho phép bạn tạo hình ảnh trích dẫn đầy cảm hứng từ tin nhắn",
+            name: "Quoter",
+            description: "Thêm khả năng tạo hình ảnh trích dẫn đầy cảm hứng từ tin nhắn",
             context: {
                 quote: "Trích dẫn"
             },
             modal: {
-                title: "4K'da Yakala",
-                grayscale: "Đen-Trắng",
+                title: "Bắt chúng trong 4k",
+                grayscale: "Thang màu xám",
                 export: "Xuất khẩu",
                 send: "Gửi",
                 saveAsGIF: "Lưu dưới dạng GIF",
-                saveDescription: "Lưu/gửi hình ảnh dưới dạng GIF thay vì PNG",
+                saveDescription: "Lưu/Gửi hình ảnh dưới dạng GIF thay vì PNG",
                 showWatermark: "Hiển thị hình mờ",
-                watermarkText: "Filigran Metni (tối đa 32 ký tự)"
+                watermarkText: "Văn bản hình mờ (tối đa 32 ký tự)"
             },
             option: {
                 quoteFont: {
                     label: "Phông chữ trích dẫn",
-                    description: "Phông chữ cho văn bản trích dẫn (tác giả/tên người dùng luôn sử dụng M PLUS Rounded 1c)",
+                    description: "Phông chữ cho văn bản trích dẫn (tác giả/tên người dùng luôn sử dụng M PLUS Làm tròn 1c)",
                     mPlusRounded: "M PLUS Làm tròn 1c",
                     openSans: "Mở Sans",
                     momoSignature: "Chữ ký Momo",
@@ -8143,51 +8143,51 @@ const translations: MatchStructure<typeof enTranslations> = {
                     merriWeather: "Merriweather"
                 },
                 watermark: {
-                    label: "đồ chạm khắc",
+                    label: "Hình mờ",
                     description: "Văn bản hình mờ tùy chỉnh (tối đa 32 ký tự)"
                 },
                 grayscale: {
-                    label: "Đen-Trắng",
-                    description: "Bật đen trắng theo mặc định"
+                    label: "Thang màu xám",
+                    description: "Bật thang độ xám theo mặc định"
                 },
                 showWatermark: {
                     label: "Hiển thị hình mờ",
                     description: "Hiển thị hình mờ theo mặc định"
                 },
                 saveAsGif: {
-                    label: "Lưu dưới dạng GIF",
+                    label: "Lưu dưới dạng Gif",
                     description: "Lưu dưới dạng GIF theo mặc định"
                 }
             }
         },
         randomVoice: {
-            name: "Ngẫu nhiênVoice",
-            description: "Thêm nút tham gia cuộc gọi thoại ngẫu nhiên bên cạnh nút tắt tiếng.",
+            name: "RandomVoice",
+            description: "Thêm nút gần nút Tắt tiếng để tham gia cuộc gọi thoại ngẫu nhiên.",
             tooltip: "Giọng nói ngẫu nhiên",
             context: {
-                label: "điều hòa âm thanh",
-                amountLabel: "SỐ LƯỢNG NGƯỜI DÙNG",
-                spacesLabel: "VỊ TRÍ CÒN TRỐNG",
-                voiceLabel: "SES LİMİTİ",
-                selfLabel: "CÀI ĐẶT RIÊNG CỦA BẠN",
+                label: "Công cụ sửa đổi trạng thái giọng nói",
+                amountLabel: "SỐ TIỀN NGƯỜI DÙNG",
+                spacesLabel: "CÁC KHOẢNG TRÁI",
+                voiceLabel: "GIỚI HẠN GIỌNG NÓI",
+                selfLabel: "TỰ CÀI ĐẶT",
                 select: {
                     servers: "Chọn máy chủ",
                     list: "Chọn danh sách",
                     filters: "Chọn bộ lọc",
                     amount: "Số lượng người dùng",
-                    userAmount: "{{số tiền}} người dùng",
+                    userAmount: "{{amount}} người dùng{{s}}",
                     parameters: "Thông số",
-                    moreThan: "nhiều hơn",
-                    lessThan: "Ít hơn thế",
-                    equalTo: "bằng",
-                    spaces: "Vị trí còn trống",
-                    voice: "Giới hạn của nó"
+                    moreThan: "Hơn",
+                    lessThan: "Ít hơn",
+                    equalTo: "bằng với",
+                    spaces: "Khoảng trống còn lại",
+                    voice: "Giới hạn giọng nói"
                 },
                 filter: {
-                    muted: "im lặng",
+                    muted: "Đã tắt tiếng",
                     deafened: "bị điếc",
                     camera: "Máy ảnh",
-                    stream: "Phát sóng",
+                    stream: "Suối",
                     includeFilters: "Bao gồm bộ lọc",
                     avoidFilters: "Tránh bộ lọc"
                 },
@@ -8195,158 +8195,158 @@ const translations: MatchStructure<typeof enTranslations> = {
                     list: "Đặt lại danh sách"
                 },
                 voice: {
-                    label: "Cài đặt âm thanh",
+                    label: "Tùy chọn giọng nói",
                     auto: {
                         mute: "Tự động tắt tiếng",
-                        deafen: "Tự động làm điếc",
+                        deafen: "Tự động điếc",
                         camera: "Máy ảnh tự động",
-                        stream: "Phát sóng tự động",
-                        leaveWhenEmpty: "Rời đi khi bạn rảnh",
+                        stream: "Tự động phát trực tuyến",
+                        leaveWhenEmpty: "Để lại khi trống rỗng",
                         navigate: "Tự động điều hướng",
-                        stage: "Tránh các kênh sân khấu",
-                        afk: "Tránh các kênh AFK"
+                        stage: "Tránh sân khấu",
+                        afk: "Tránh AFK"
                     }
                 },
                 invalid: {
-                    server: "máy chủ không hợp lệ"
+                    server: "Máy chủ không hợp lệ"
                 }
             },
             option: {
                 userAmountOperation: {
-                    label: "Giao dịch đếm người dùng",
-                    description: "Chọn một hành động cho số lượng người dùng"
+                    label: "Hoạt động số lượng người dùng",
+                    description: "Chọn thao tác cho số lượng người dùng"
                 },
                 userAmount: {
                     label: "Số lượng người dùng",
                     description: "Chọn số lượng người dùng"
                 },
                 spacesLeftOperation: {
-                    label: "Quy trình tuyển dụng",
-                    description: "Chọn một hành động cho số lượng người dùng tối đa"
+                    label: "Khoảng trống còn lại Hoạt động",
+                    description: "Chọn một hoạt động cho số lượng người dùng tối đa"
                 },
                 spacesLeft: {
-                    label: "Vị trí còn trống",
-                    description: "Chọn dung lượng trống"
+                    label: "Khoảng trống còn lại",
+                    description: "Chọn số lượng người dùng tối đa"
                 },
                 vcLimitOperation: {
-                    label: "Hoạt động giới hạn kênh âm thanh",
-                    description: "Chọn một hành động cho giới hạn kênh âm thanh."
+                    label: "Hoạt động giới hạn kênh thoại",
+                    description: "Chọn thao tác cho kênh thoại."
                 },
                 vcLimit: {
-                    label: "Giới hạn kênh âm thanh",
-                    description: "Chọn giới hạn kênh âm thanh"
+                    label: "Giới hạn kênh thoại",
+                    description: "Chọn giới hạn kênh thoại"
                 },
                 servers: {
                     label: "Máy chủ",
-                    description: "Máy chủ bao gồm"
+                    description: "Các máy chủ được bao gồm"
                 },
                 autoNavigate: {
                     label: "Tự động điều hướng",
-                    description: "Nó tự động chuyển sang kênh âm thanh."
+                    description: "Tự động điều hướng đến kênh thoại."
                 },
                 autoCamera: {
                     label: "Máy ảnh tự động",
                     description: "Tự động bật camera"
                 },
                 autoStream: {
-                    label: "Phát sóng tự động",
-                    description: "Tự động bắt đầu phát sóng"
+                    label: "Tự động phát trực tuyến",
+                    description: "Tự động bật luồng"
                 },
                 selfMute: {
                     label: "Tự động tắt tiếng",
-                    description: "Nó tự động tắt tiếng micrô của bạn khi bạn tham gia kênh âm thanh."
+                    description: "Tự động tắt tiếng micrô của bạn khi tham gia kênh thoại."
                 },
                 selfDeafen: {
-                    label: "Tự động làm điếc",
-                    description: "Nó tự động làm bạn bị điếc khi bạn tham gia kênh thoại."
+                    label: "Tự động điếc",
+                    description: "Tự động làm điếc âm thanh của bạn khi tham gia kênh thoại."
                 },
                 leaveEmpty: {
-                    label: "Rời đi khi bạn rảnh",
-                    description: "Khi kênh thoại trống, nó sẽ ngẫu nhiên tìm thấy một cuộc gọi khác."
+                    label: "Để lại khi trống rỗng",
+                    description: "Tìm một cuộc gọi ngẫu nhiên khi cuộc trò chuyện thoại trống."
                 },
                 avoidStages: {
-                    label: "Tránh các kênh sân khấu",
-                    description: "Tránh tham gia các kênh âm thanh kiểu sân khấu."
+                    label: "Tránh sân khấu",
+                    description: "Tránh tham gia các kênh thoại sân khấu."
                 },
                 avoidAfk: {
-                    label: "Tránh các kênh AFK",
-                    description: "AFK tránh nối các kênh âm thanh."
+                    label: "Tránh AFK",
+                    description: "Tránh tham gia các kênh thoại AFK."
                 },
                 video: {
                     label: "Băng hình",
-                    description: "Tìm kiếm người dùng có camera đang bật"
+                    description: "Tìm kiếm người dùng có video của họ trên"
                 },
                 stream: {
-                    label: "Phát sóng",
-                    description: "Tìm kiếm người dùng đang phát sóng"
+                    label: "Suối",
+                    description: "Tìm kiếm người dùng đang phát trực tuyến"
                 },
                 mute: {
-                    label: "im lặng",
+                    label: "Tắt tiếng",
                     description: "Tìm kiếm người dùng bị tắt tiếng"
                 },
                 deafen: {
-                    label: "bị điếc",
+                    label: "Điếc",
                     description: "Tìm kiếm người dùng bị điếc"
                 },
                 includeStates: {
                     label: "Bao gồm bộ lọc",
-                    description: "Cho phép bao gồm các trạng thái người dùng cụ thể"
+                    description: "Tùy chọn để bao gồm các trạng thái"
                 },
                 avoidStates: {
                     label: "Tránh bộ lọc",
-                    description: "Cho phép tránh một số tình huống người dùng nhất định"
+                    description: "Tùy chọn để tránh trạng thái"
                 }
             },
             alert: {
-                failed: "Không tìm thấy Kênh Âm thanh!"
+                failed: "Không tìm thấy Kênh Thoại!"
             }
         },
         reactErrorDecoder: {
-            name: "ReactErrorBộ giải mã",
-            description: "React chuyển đổi mã lỗi thành thông báo mà con người có thể đọc được."
+            name: "ReactErrorDecoder",
+            description: "Giải mã mã lỗi React thành thông báo mà con người có thể đọc được."
         },
         readAllNotificationsButton: {
-            name: "Nút đọc tất cả thông báo",
-            description: "Thêm một nút vào bảng thông báo để đánh dấu tất cả thông báo là đã đọc chỉ bằng một cú nhấp chuột.",
+            name: "ReadAllNotificationsButton",
+            description: "Đọc tất cả các thông báo máy chủ chỉ bằng một nút bấm!",
             button: "Đọc tất cả"
         },
         recentDMSwitcher: {
-            name: "Gần đâyDMSswitcher",
-            description: "Chuyển đổi giữa các DM được sử dụng gần đây bằng Ctrl+Tab (Ctrl+Shift+Tab đảo ngược)",
+            name: "RecentDMSwitcher",
+            description: "Ctrl+Tab giữa các DM được sử dụng gần đây nhất (Ctrl+Shift+Tab đảo ngược)",
             option: {
                 visualStyle: {
                     label: "Phong cách trực quan",
-                    description: "Kiểu chỉ báo trực quan xuất hiện khi chuyển đổi",
-                    overlay: "Lớp (kiểu Alt+Tab)",
-                    toast: "Thông báo (Thông báo trạng thái)",
-                    off: "Đã đóng"
+                    description: "Kiểu chỉ báo trực quan trong khi đạp xe",
+                    overlay: "Lớp phủ (kiểu Alt+Tab)",
+                    toast: "Bánh mì nướng (thông báo trạng thái)",
+                    off: "Tắt"
                 },
                 overlayMode: {
-                    label: "Chế độ lớp",
-                    description: "Lớp nội dung",
-                    row: "Dòng trò chuyện cuối cùng",
-                    current: "chỉ có sẵn",
+                    label: "Chế độ lớp phủ",
+                    description: "Nội dung lớp phủ",
+                    row: "Hàng gần đây",
+                    current: "Chỉ hiện tại",
                 },
                 amountOfUsers: {
                     label: "Số lượng người dùng",
-                    description: "Số lượng người dùng hiển thị trên lớp"
+                    description: "Số lượng người dùng hiển thị trong lớp phủ"
                 },
                 overlayRowLength: {
-                    label: "Chiều dài hàng lớp",
+                    label: "Độ dài hàng lớp phủ",
                     description: "Số lượng DM gần đây sẽ hiển thị trong hàng"
                 },
                 overlayShowAvatars: {
-                    label: "Hiển thị hình ảnh hồ sơ lớp",
-                    description: "Hiển thị hình ảnh hồ sơ người dùng trên lớp"
+                    label: "Lớp phủ Hiển thị Hình đại diện",
+                    description: "Hiển thị hình đại diện của người dùng trong lớp phủ"
                 },
                 toastDurationMs: {
-                    label: "Thời gian thông báo (ms)",
-                    description: "Hiển thị hình ảnh hồ sơ trên lớp"
+                    label: "Thời lượng bánh mì nướng (ms)",
+                    description: "Thời lượng của thông báo trạng thái"
                 },
                 clearRdms: {
                     label: "Xóa danh sách RDMS",
-                    description: "Công cụ kiểm tra: Xóa danh sách RDM",
-                    toast: "Đã xóa lịch sử RDMS",
+                    description: "Tiện ích kiểm tra: Xóa danh sách RDM",
+                    toast: "Đã xóa lịch sử RMDS",
                     button: "Xóa lịch sử RDM"
                 }
             },
@@ -8355,28 +8355,28 @@ const translations: MatchStructure<typeof enTranslations> = {
                 dm: "DM",
                 group: "Nhóm DM",
                 channel: "Kênh",
-                switchingTo: "Đang chuyển sang {{name}}"
+                switchingTo: "Đang chuyển sang: {{name}}"
             }
         },
         relationshipNotifier: {
-            name: "Trình thông báo mối quan hệ",
+            name: "RelationshipNotifier",
             description: "Thông báo cho bạn khi một người bạn, cuộc trò chuyện nhóm hoặc máy chủ loại bỏ bạn.",
             option: {
                 notices: {
                     label: "Thông báo",
-                    description: "Hiển thị thông báo ở đầu màn hình khi bị xóa (sử dụng thông báo này nếu bạn không muốn bỏ lỡ bất kỳ thông báo nào)."
+                    description: "Đồng thời hiển thị thông báo ở đầu màn hình của bạn khi bị xóa (sử dụng thông báo này nếu bạn không muốn bỏ lỡ bất kỳ thông báo nào)."
                 },
                 offlineRemovals: {
                     label: "Xóa ngoại tuyến",
-                    description: "Gửi thông báo nếu bạn bị xóa khi ngoại tuyến khi mở Discord."
+                    description: "Thông báo cho bạn khi bắt đầu Discord nếu bạn bị xóa khi ngoại tuyến."
                 },
                 friends: {
                     label: "Bạn",
-                    description: "Thông báo cho tôi khi một người bạn xóa bạn khỏi danh sách của họ"
+                    description: "Thông báo khi một người bạn loại bỏ bạn"
                 },
                 friendRequestCancels: {
                     label: "Hủy yêu cầu kết bạn",
-                    description: "Thông báo cho tôi khi yêu cầu kết bạn bị hủy"
+                    description: "Thông báo khi yêu cầu kết bạn bị hủy"
                 },
                 servers: {
                     label: "Máy chủ",
@@ -8384,57 +8384,57 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 groups: {
                     label: "Nhóm",
-                    description: "Thông báo cho tôi khi bị xóa khỏi cuộc trò chuyện nhóm"
+                    description: "Thông báo khi bị xóa khỏi cuộc trò chuyện nhóm"
                 }
             },
             notification: {
-                removedFriend: "{{user}} đã hủy kết bạn với bạn.",
-                cancelledFriendRequest: "Yêu cầu kết bạn do {{user}} gửi đã bị hủy.",
-                removedFromServer: "Bạn đã bị xóa khỏi {{server}}.",
-                removedFromGroup: "Bạn đã bị xóa khỏi {{group}}.",
-                noLongerGroup: "Bạn không còn ở trong {{group}}.",
-                noLongerServer: "Bạn không còn ở trên {{server}} nữa.",
-                noLongerFriend: "Bạn không còn là bạn với {{user}} nữa.",
-                friendRequestRevoked: "Yêu cầu kết bạn do {{user}} gửi đã bị rút lại.",
-                ok: "Được rồi"
+                removedFriend: "{{user}} đã xóa bạn khỏi danh sách bạn bè.",
+                cancelledFriendRequest: "Yêu cầu kết bạn từ {{user}} đã bị xóa.",
+                removedFromServer: "Bạn đã bị xóa khỏi máy chủ {{server}}.",
+                removedFromGroup: "Bạn đã bị xóa khỏi nhóm {{group}}.",
+                noLongerGroup: "Bạn không còn ở trong nhóm {{group}}.",
+                noLongerServer: "Bạn không còn ở trong máy chủ {{server}}.",
+                noLongerFriend: "Bạn không còn là bạn với {{user}}.",
+                friendRequestRevoked: "Yêu cầu kết bạn từ {{user}} đã bị thu hồi.",
+                ok: "ĐƯỢC RỒI"
             }
         },
         remix: {
-            name: "phối lại",
-            description: "Thêm tùy chọn 'Remix' vào menu chuột phải của nút gửi tệp. Thao tác này sẽ mở hình ảnh trong trình chỉnh sửa hình ảnh đơn giản và cung cấp cho bạn tùy chọn gửi hình ảnh đã chỉnh sửa trực tiếp vào cuộc trò chuyện.",
+            name: "Remix",
+            description: "Thêm tùy chọn 'Remix' vào menu chuột phải của nút tải tệp lên. Tùy chọn này mở hình ảnh trong trình chỉnh sửa hình ảnh đơn giản và cho phép bạn gửi hình ảnh đã chỉnh sửa trực tiếp vào cuộc trò chuyện.",
             label: "phối lại",
             button: {
                 send: "Gửi",
-                close: "Một phần tư",
+                close: "Đóng",
                 brush: "Chải",
-                erase: "khăn lau bụi",
+                erase: "Xóa",
                 crop: "Mùa vụ",
                 shape: "Hình dạng",
-                reset: "cài lại",
-                clear: "thông thoáng"
+                reset: "Cài lại",
+                clear: "Thông thoáng"
             },
             editor: {
                 choose: "Chọn một hình ảnh",
-                browse: "Gozat",
+                browse: "Duyệt qua",
                 rectangle: "Hình chữ nhật",
                 ellipse: "hình elip",
                 line: "Đường kẻ",
-                arrow: "Được rồi",
-                fill: "đổ đầy"
+                arrow: "Mũi tên",
+                fill: "Đổ đầy"
             }
         },
         repeatMessages: {
-            name: "Tin nhắn lặp lại",
-            description: "Nó cho phép bạn nhanh chóng gửi lại tin nhắn. Nếu bạn giữ phím Shift trong khi bấm vào Lặp lại, nó sẽ gửi nó dưới dạng trả lời tin nhắn.",
+            name: "RepeatMessages",
+            description: "Cho phép bạn lặp lại tin nhắn một cách nhanh chóng. Nếu bạn giữ phím Shift trong khi nhấp vào tùy chọn Lặp lại, nó sẽ trả lời tin nhắn.",
             button: "Lặp lại (Nhấp chuột) / Lặp lại và Trả lời (Shift + Nhấp chuột)",
             context: {
-                repeat: "lặp lại",
+                repeat: "Lặp lại",
                 repeatAndReply: "Lặp lại và trả lời"
             }
         },
         replaceGoogleSearch: {
-            name: "Thay thếGoogleTìm kiếm",
-            description: "Nó thay thế tìm kiếm của Google bằng các công cụ tìm kiếm khác nhau.",
+            name: "ReplaceGoogleSearch",
+            description: "Thay thế tìm kiếm Google bằng các công cụ khác nhau.",
             option: {
                 customEngineName: {
                     label: "Tên công cụ tùy chỉnh",
@@ -8442,69 +8442,69 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 customEngineURL: {
                     label: "URL công cụ tùy chỉnh",
-                    description: "URL công cụ tìm kiếm của bạn"
+                    description: "URL công cụ của bạn"
                 },
                 replacementEngine: {
-                    label: "Công cụ tìm kiếm sao lưu",
-                    description: "Thay thế công cụ tìm kiếm dự phòng bằng một công cụ tìm kiếm cụ thể (thay vì thêm menu)",
-                    off: "Đã đóng",
-                    custom: "Động cơ đặc biệt",
+                    label: "Động cơ thay thế",
+                    description: "Thay thế bằng một công cụ tìm kiếm cụ thể thay vì thêm menu",
+                    off: "Tắt",
+                    custom: "Công cụ tùy chỉnh",
                 }
             },
             context: {
-                label: "Metni Ara",
-                searchWith: "Nhà của {{name}} Ara"
+                label: "Tìm kiếm văn bản",
+                searchWith: "Tìm kiếm với {{name}}"
             }
         },
         replyPingControl: {
-            name: "Trả lờiPingControl",
-            description: "Cho phép bạn kiểm soát luôn hoặc không bao giờ ping khi trả lời tin nhắn, cũng bao gồm tính năng danh sách trắng",
+            name: "ReplyPingControl",
+            description: "Kiểm soát việc luôn luôn hay không bao giờ nhận được ping khi trả lời tin nhắn bằng tính năng danh sách trắng",
             option: {
                 alwaysPingOnReply: {
-                    label: "Luôn trả lời Ping",
-                    description: "Nhận ping mỗi khi ai đó trả lời tin nhắn của bạn"
+                    label: "Luôn Ping khi trả lời",
+                    description: "Luôn nhận được ping khi ai đó trả lời tin nhắn của bạn"
                 },
                 replyPingWhitelist: {
-                    label: "Danh sách trắng Ping phản hồi",
-                    description: "Nhập ID của người dùng mà bạn muốn luôn nhận được ping phản hồi, phân tách bằng dấu phẩy."
+                    label: "Trả lời Danh sách trắng Ping",
+                    description: "Danh sách ID người dùng được phân tách bằng dấu phẩy để luôn nhận được ping trả lời từ"
                 }
             }
         },
         replyTimestamp: {
-            name: "Trả lờiDấu thời gian",
-            description: "Hiển thị dấu thời gian trong bản xem trước tin nhắn đã trả lời"
+            name: "ReplyTimestamp",
+            description: "Hiển thị dấu thời gian trên bản xem trước tin nhắn đã trả lời"
         },
         revealAllSpoilers: {
-            name: "Tiết LộTất CảSpoilers",
-            description: "Ctrl-nhấp vào phần tiết lộ nội dung để hiển thị tất cả nội dung tiết lộ nội dung trong tin nhắn, Ctrl+Shift để hiển thị tất cả nội dung tiết lộ nội dung trong toàn bộ cuộc trò chuyện"
+            name: "RevealAllSpoilers",
+            description: "Tiết lộ tất cả phần tiết lộ nội dung trong tin nhắn bằng cách nhấp Ctrl vào phần tiết lộ nội dung hoặc trong cuộc trò chuyện bằng cách nhấn Ctrl+Shift-nhấp"
         },
         reverseImageSearch: {
-            name: "Tìm kiếm hình ảnh ngược",
-            description: "Thêm tùy chọn Tìm kiếm hình ảnh ngược vào menu nhấp chuột phải vào hình ảnh",
+            name: "ReverseImageSearch",
+            description: "Thêm ImageSearch vào menu ngữ cảnh hình ảnh",
             context: {
                 label: "Tìm kiếm hình ảnh",
                 all: "Tìm kiếm tất cả"
             }
         },
         reviewDB: {
-            name: "Đánh giáDB",
-            description: "Đánh giá người dùng khác (Thêm phần cài đặt mới vào Hồ sơ)",
+            name: "ReviewDB",
+            description: "Đánh giá những người dùng khác (Thêm phần mới vào hồ sơ)",
             notification: {
-                newReview: "Có những đánh giá mới trên hồ sơ của bạn!",
+                newReview: "Bạn có đánh giá mới trên hồ sơ của bạn!",
                 auth: {
-                    error: "Đã xảy ra lỗi trong quá trình ủy quyền",
+                    error: "Đã xảy ra lỗi khi ủy quyền",
                     successfully: "Đăng nhập thành công!",
-                    failed: "Ủy quyền không thành công",
+                    failed: "Không thể ủy quyền",
                     review: "Vui lòng ủy quyền để thêm đánh giá.",
-                    opening: "Cửa sổ ủy quyền sẽ mở ra...",
-                    need: "Bạn cần có sự cho phép để đánh giá!"
+                    opening: "Đang mở cửa sổ ủy quyền...",
+                    need: "Bạn cần ủy quyền để đánh giá người dùng!"
                 },
                 error: {
-                    fast: "Bạn đang đưa ra yêu cầu quá nhanh. Đợi vài giây và thử lại.",
-                    fetching: "Đã xảy ra lỗi khi truy xuất bài đánh giá.",
+                    fast: "Bạn đang gửi yêu cầu quá nhanh. Wait a few seconds and try again.",
+                    fetching: "Đã xảy ra lỗi khi tìm nạp bài đánh giá.",
                     action: {
-                        failed: "Không thể liên lạc được với người dùng {{action}}",
-                        success: "Người dùng đã {{action}} thành công"
+                        failed: "Không thể {{action}} người dùng",
+                        success: "Đã {{action}}ed người dùng thành công"
                     }
                 }
             },
@@ -8512,40 +8512,40 @@ const translations: MatchStructure<typeof enTranslations> = {
                 delete: {
                     title: "Bạn có chắc không?",
                     description: "Bạn có thực sự muốn xóa đánh giá này?",
-                    confirm: "Sil",
-                    cancel: "Hủy bỏ",
+                    confirm: "Xóa bỏ",
+                    cancel: "Đừng bận tâm",
                     error: "Bạn phải đăng nhập để xóa đánh giá.",
                 },
                 report: {
                     title: "Bạn có chắc không?",
                     description: "Bạn có thực sự muốn báo cáo đánh giá này?",
-                    confirm: "Tuyên ngôn",
-                    cancel: "Hủy bỏ",
-                    error: "Bạn phải đăng nhập để gửi đánh giá.",
+                    confirm: "Báo cáo",
+                    cancel: "Đừng bận tâm",
+                    error: "Bạn phải đăng nhập để báo cáo đánh giá.",
                 },
                 block: {
                     title: "Bạn có chắc không?",
-                    description: "Bạn có thực sự muốn chặn người dùng này? Bạn sẽ không còn thấy đánh giá của họ nữa.",
-                    confirm: "khối",
-                    cancel: "Hủy bỏ",
+                    description: "Bạn có thực sự muốn chặn người dùng này? Bạn sẽ không nhìn thấy đánh giá của họ nữa.",
+                    confirm: "Khối",
+                    cancel: "Đừng bận tâm",
                     error: "Bạn phải đăng nhập để chặn người dùng.",
                 },
                 blocked: {
                     title: "Người dùng bị chặn",
-                    auth: "Bạn chưa đăng nhập vào ReviewDB.",
+                    auth: "Bạn chưa đăng nhập vào ReviewDB!",
                     noBlocked: "Không có người dùng nào bị chặn.",
-                    fetch: "Đã xảy ra lỗi khi truy xuất người dùng bị chặn"
+                    fetch: "Đã xảy ra lỗi khi tìm nạp người dùng bị chặn."
                 },
                 reviews: {
-                    title: "Đánh giá của người dùng",
+                    title: "Bài đánh giá của",
                     noUser: "Có vẻ như chưa có ai đánh giá người dùng này. Bạn có thể là người đầu tiên!",
                     noServer: "Có vẻ như chưa có ai đánh giá máy chủ này. Bạn có thể là người đầu tiên!"
                 }
             },
             button: {
-                appeal: "Phản đối",
-                ok: "Được rồi",
-                more: "Hơn",
+                appeal: "Bắt mắt",
+                ok: "ĐƯỢC RỒI",
+                more: "Đọc thêm",
                 reply: "Trả lời @{{user}}",
                 update: "Cập nhật đánh giá cho @{{user}}",
                 review: "Đánh giá @{{user}}"
@@ -8557,7 +8557,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 report: "Đánh giá báo cáo",
                 block: "Chặn người dùng",
                 unblock: "Bỏ chặn người dùng",
-                reply: "Trả lời đánh giá"
+                reply: "Trả lời Đánh giá"
             },
             option: {
                 authorize: {
@@ -8566,11 +8566,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 notifyReviews: {
                     label: "Thông báo đánh giá",
-                    description: "Thông báo đánh giá mới khi khởi động"
+                    description: "Thông báo về đánh giá mới khi khởi động"
                 },
                 showWarning: {
                     label: "Hiển thị cảnh báo",
-                    description: "Hiển thị cảnh báo tôn trọng trên phiếu tự đánh giá"
+                    description: "Hiển thị cảnh báo tôn trọng ở đầu danh sách đánh giá"
                 },
                 hideTimestamps: {
                     label: "Ẩn dấu thời gian",
@@ -8578,7 +8578,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 hideBlockedUsers: {
                     label: "Ẩn người dùng bị chặn",
-                    description: "Ẩn đánh giá từ người dùng mà bạn đã chặn"
+                    description: "Ẩn đánh giá từ người dùng bị chặn"
                 },
                 buttons: {
                     label: "Nút",
@@ -8590,21 +8590,21 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         richMagnetLinks: {
-            name: "RichMagnetLiên Kết",
-            description: "Xử lý các liên kết nam châm như liên kết tin nhắn (có bản xem trước)",
+            name: "RichMagnetLinks",
+            description: "Hiển thị liên kết nam châm giống như liên kết tin nhắn",
             unknown: "tên tệp không xác định"
         },
         roleColorEverywhere: {
-            name: "Vai tròMàu sắcMọi nơi",
-            description: "Hiển thị màu vai trò hàng đầu bất cứ khi nào có thể",
+            name: "RoleColorEverywhere",
+            description: "Thêm màu vai trò hàng đầu bất cứ nơi nào có thể",
             option: {
                 chatMentions: {
                     label: "Đề cập trò chuyện",
-                    description: "Hiển thị màu sắc vai trò trong đề cập trò chuyện (bao gồm cả hộp tin nhắn)"
+                    description: "Hiển thị màu sắc vai trò trong đề cập trò chuyện (bao gồm cả trong hộp tin nhắn)"
                 },
                 memberList: {
                     label: "Danh sách thành viên",
-                    description: "Hiển thị màu vai trò trong chức danh danh sách thành viên"
+                    description: "Hiển thị màu vai trò trong tiêu đề vai trò của danh sách thành viên"
                 },
                 voiceUsers: {
                     label: "Người dùng giọng nói",
@@ -8612,15 +8612,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 reactorsList: {
                     label: "Danh sách lò phản ứng",
-                    description: "Hiển thị màu vai trò trong danh sách người dùng bằng biểu tượng cảm xúc"
+                    description: "Hiển thị màu vai trò trong danh sách lò phản ứng"
                 },
                 pollResults: {
-                    label: "Kết quả khảo sát",
-                    description: "Hiển thị màu sắc vai trò trong kết quả khảo sát"
+                    label: "Kết quả thăm dò ý kiến",
+                    description: "Hiển thị màu sắc vai trò trong kết quả thăm dò ý kiến"
                 },
                 colorChatMessages: {
-                    label: "Tô màu tin nhắn trò chuyện của bạn",
-                    description: "Tô màu tin nhắn trò chuyện theo màu vai trò của tác giả"
+                    label: "Tin nhắn trò chuyện màu",
+                    description: "Màu tin nhắn trò chuyện dựa trên màu vai trò của tác giả"
                 },
                 messageSaturation: {
                     label: "Độ bão hòa tin nhắn",
@@ -8630,23 +8630,23 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         rpcEditor: {
             name: "RPCEditor",
-            description: "Chỉnh sửa bất kỳ nội dung và loại Hiện diện phong phú nào",
+            description: "Chỉnh sửa loại và nội dung của bất kỳ Sự hiện diện phong phú nào",
             option: {
                 replacedAppIds: {
-                    label: "Nhận dạng ứng dụng (ID) đã thay đổi",
+                    label: "ID ứng dụng được thay thế",
                 }
             },
             modal: {
                 tutorial: {
-                    title: "ID của các sự kiện hiện đang chạy",
-                    noRunning: "Không có sự kiện đang diễn ra",
+                    title: "ID của các hoạt động hiện đang chạy",
+                    noRunning: "Không có hoạt động chạy bộ",
                     available: "Các biến có sẵn",
-                    variableText: "Trong tất cả các trường (ngoại trừ URL bài đăng), bạn có thể đặt các biến sẽ tự động được thay thế bằng nội dung gốc của chúng:",
+                    variableText: "Trong tất cả các trường (ngoại trừ URL luồng), bạn có thể đặt các biến sẽ tự động được thay thế bằng nội dung gốc của chúng:",
                     more: "Thêm chi tiết",
                     details: {
-                        leave: "Để giữ nguyên một trường, hãy để trống.",
-                        set: "Nhập 'null' để ẩn trường trong chỉ báo trạng thái.",
-                        reload: "Bạn có thể cần phải khởi động lại Discord để áp dụng các thay đổi."
+                        leave: "Để trống một trường để giữ nguyên như vậy.",
+                        set: "Đặt trường thành 'null' để ẩn trường đó khi hiện diện.",
+                        reload: "Bạn có thể cần tải lại Discord để áp dụng các thay đổi."
                     }
                 },
                 settings: {
@@ -8654,47 +8654,47 @@ const translations: MatchStructure<typeof enTranslations> = {
                     addNewApp: "Thêm ứng dụng mới",
                     appId: "ID ứng dụng",
                     invalidAppId: "ID ứng dụng không hợp lệ",
-                    newActivityType: "Loại sự kiện mới",
+                    newActivityType: "Loại hoạt động mới",
                     activityTypes: {
-                        playing: "đang chơi",
-                        watching: "đang xem",
-                        listening: "lắng nghe",
-                        competing: "cuộc đua",
-                        streaming: "trên sóng"
+                        playing: "Đang chơi",
+                        watching: "Đang xem",
+                        listening: "Nghe",
+                        competing: "Cạnh tranh",
+                        streaming: "Truyền phát"
                     },
                     streamUrl: "URL luồng (phải là YouTube hoặc Twitch)",
-                    invalidStreamUrl: "URL bài đăng không hợp lệ",
-                    newName: "tên mới",
-                    newDetails: "chi tiết mới",
-                    newState: "tình hình mới",
-                    largeImage: "bức tranh lớn",
-                    smallImage: "clip nghệ thuật",
+                    invalidStreamUrl: "URL luồng không hợp lệ",
+                    newName: "Tên mới",
+                    newDetails: "Chi tiết mới",
+                    newState: "Tiểu bang mới",
+                    largeImage: "Hình ảnh lớn",
+                    smallImage: "Hình ảnh nhỏ",
                     text: "Chữ",
                     url: "URL",
                     firstLine: "(dòng đầu tiên)",
                     secondLine: "(dòng thứ hai)",
                     thirdLine: "(dòng thứ ba)",
                     alsoThirdLine: "(cũng là dòng thứ ba)",
-                    hideAssets: "Ẩn hình ảnh (hình ảnh lớn và nhỏ)",
+                    hideAssets: "Ẩn nội dung (hình ảnh lớn và nhỏ)",
                     hideTimestamps: "Ẩn dấu thời gian"
                 }
             },
         },
         rpcStats: {
             name: "RPCStats",
-            description: "Hiển thị số liệu thống kê về hoạt động của bạn với tư cách là Sự hiện diện phong phú",
+            description: "Hiển thị số liệu thống kê về hoạt động của bạn dưới dạng RPC",
             option: {
                 assetURL: {
-                    label: "URL trực quan",
-                    description: "Hình ảnh được sử dụng cho RPC. Nếu để trống, ảnh hồ sơ của bạn sẽ được sử dụng"
+                    label: "URL nội dung",
+                    description: "Hình ảnh để sử dụng cho RPC của bạn. Ảnh hồ sơ của bạn sẽ được sử dụng nếu để trống"
                 },
                 rpcTitle: {
                     label: "Tiêu đề RPC",
                     description: "Tiêu đề RPC của bạn"
                 },
                 statDisplay: {
-                    label: "Xem số liệu thống kê",
-                    description: "RPC nên hiển thị những gì? (Có thể bạn chỉ được phép có một dòng)",
+                    label: "Hiển thị thống kê",
+                    description: "RPC nên hiển thị những gì? (Bạn chỉ có thể có một dòng, tôi khá chắc chắn)",
                     today: "Số lượng tin nhắn được gửi hôm nay",
                     alltime: "Số lượng tin nhắn được gửi mọi lúc",
                     listened: "Album được nghe nhiều nhất trong tuần"
@@ -8709,67 +8709,67 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 albumCoverImage: {
                     label: "Ảnh bìa album",
-                    description: "Sử dụng bìa album làm hình ảnh RPC? (Nếu hiển thị Last.fm được chọn)"
+                    description: "Có nên sử dụng ảnh bìa album làm ảnh RPC không? (Nếu bạn đã chọn màn hình Last.fm)"
                 },
                 lastFMStatFormat: {
                     label: "Định dạng thống kê Last.fm",
-                    description: "Số liệu thống kê Last.fm nên được định dạng như thế nào? $album được thay thế bằng tên album, $artist được thay thế bằng tên nghệ sĩ"
+                    description: "Chỉ số Last.fm nên được định dạng như thế nào? $album được thay thế bằng tên album và $artist được thay thế bằng tên nghệ sĩ"
                 }
             },
             noInfo: "Hiện chưa có thông tin :(",
             messagesToday: "Tin nhắn đã gửi hôm nay: {{count}}",
-            messagesAllTime: "Tin nhắn luôn được gửi: {{count}}"
+            messagesAllTime: "Tin nhắn đã gửi mọi lúc: {{count}}"
         },
         saveFavoriteGIFs: {
-            name: "LưuGIF yêu thích",
-            description: "Xuất liên kết GIF yêu thích",
+            name: "SaveFavouritedGIFs",
+            description: "Xuất URL GIF yêu thích",
             toolbox: "Lưu ảnh GIF yêu thích",
             title: "Lưu ảnh GIF yêu thích",
             command: {
                 savegifs: {
-                    description: "Lưu tất cả các liên kết GIF yêu thích vào một tệp văn bản"
+                    description: "Lưu tất cả các URL GIF yêu thích vào một tệp văn bản"
                 },
                 saveworkinggifs: {
-                    description: "Kiểm tra tất cả các ảnh GIF yêu thích của bạn và chỉ lưu những ảnh vẫn hoạt động"
+                    description: "Kiểm tra tất cả các ảnh GIF yêu thích và chỉ lưu những ảnh vẫn đang hoạt động"
                 }
             },
             option: {
                 showToolboxButton: {
                     label: "Hiển thị nút hộp công cụ",
-                    description: "Hiển thị nút 'Lưu ảnh GIF yêu thích' trong Hộp công cụ Plexcord (Yêu cầu khởi động lại)"
+                    description: "Hiển thị nút 'Lưu ảnh GIF yêu thích' trong Hộp công cụ Plexcord (Yêu cầu tải lại)"
                 }
             },
             toast: {
-                save: "Đã lưu thành công ảnh GIF dưới dạng {{filename}}",
-                failed: "Không thể lưu ảnh GIF",
-                no: "Không tìm thấy GIF yêu thích!",
-                testing: "{{count}} ảnh GIF đang được thử nghiệm, quá trình này có thể mất chút thời gian...",
+                save: "Đã lưu GIF thành công dưới dạng {{filename}}",
+                failed: "Không lưu được ảnh GIF",
+                no: "Không tìm thấy ảnh GIF yêu thích nào!",
+                testing: "Đang kiểm tra {{count}} GIF, quá trình này có thể mất chút thời gian...",
                 noneWorking: "Không có ảnh GIF đã lưu nào của bạn có vẻ đang hoạt động.",
-                saved: "{{broken}} ảnh GIF có khả năng bị hỏng đã được lọc ra. Đã lưu {{saved}} ảnh GIF đang hoạt động."
+                saved: "Đã lọc {{broken}} ảnh GIF có thể bị hỏng. Đã lưu {{saved}} ảnh GIF đang hoạt động."
             }
         },
         scheduledMessages: {
-            name: "Tin nhắn đã lên lịch",
-            description: "Lên lịch gửi tin nhắn vào một thời điểm nhất định hoặc sau một khoảng thời gian trễ nhất định.",
+            name: "ScheduledMessages",
+            description: "Lên lịch gửi tin nhắn vào một thời điểm cụ thể hoặc sau một thời gian trì hoãn.",
             toolbox: {
                 toggle: "Xem tin nhắn đã lên lịch"
             },
             option: {
                 maxMessagesPerMinute: {
-                    label: "Tin nhắn tối đa mỗi phút",
-                    description: "Số lượng tin nhắn được lên lịch tối đa có thể được gửi trên một kênh trong cùng một phút."
+                    label: "Số tin nhắn tối đa mỗi phút",
+                    description: "Số tin nhắn được lên lịch tối đa cho mỗi kênh có thể kích hoạt trong cùng một phút."
                 },
                 checkIntervalSeconds: {
-                    label: "Khoảng thời gian kiểm soát (Giây)",
-                    description: "Tần suất plugin sẽ kiểm tra xem có tin nhắn nào cần gửi hay không."
+                    label: "Khoảng thời gian kiểm tra (Giây)",
+                    description: "Tần suất plugin kiểm tra tin nhắn cần gửi."
                 },
                 showNotifications: {
                     label: "Hiển thị thông báo",
-                    description: "Hiển thị thông báo (bánh mì nướng) khi tin nhắn được gửi."
+                    description: "Hiển thị thông báo chúc mừng khi tin nhắn được gửi."
                 },
                 showPhantomMessages: {
-                    label: "Hiển thị tin nhắn ma",
-                    description: "Hiển thị các tin nhắn đã lên lịch dưới dạng tin nhắn ma (tạm thời) trong cuộc trò chuyện."
+                    label: "Hiển thị tin nhắn ảo",
+                    description: "Hiển thị tin nhắn đã lên lịch dưới dạng tin nhắn ảo trong cuộc trò chuyện."
                 }
             },
             channelType: {
@@ -8779,61 +8779,61 @@ const translations: MatchStructure<typeof enTranslations> = {
                 channel: "Kênh"
             },
             toast: {
-                messageSent: "Đã gửi tin nhắn theo lịch tới {{channel}}",
-                messageFailed: "Không thể gửi tin nhắn đã lên lịch",
-                maxMessagesReached: "Đã đạt đến giới hạn tối đa {{max}} tin nhắn mỗi phút trên mỗi kênh",
-                messageScheduled: "Tin nhắn đã được lên kế hoạch!",
+                messageSent: "Tin nhắn đã lên lịch gửi tới {{channel}}",
+                messageFailed: "Không gửi được tin nhắn theo lịch",
+                maxMessagesReached: "Đã đạt tới tối đa {{max}} tin nhắn trên mỗi kênh mỗi phút",
+                messageScheduled: "Đã lên lịch tin nhắn!",
                 messageRemoved: "Đã xóa tin nhắn theo lịch trình",
                 allCleared: "Đã xóa tất cả tin nhắn đã lên lịch"
             },
             button: {
-                tooltipOn: "Chế độ lập kế hoạch BẬT (nhấp để tắt, nhấp chuột phải để xem danh sách)",
-                tooltipOff: "Chế độ lập kế hoạch TẮT (nhấp để bật, nhấp chuột phải để xem danh sách)"
+                tooltipOn: "Chế độ lịch trình BẬT (nhấp để tắt, nhấp chuột phải để xem danh sách)",
+                tooltipOff: "Chế độ lịch trình TẮT (nhấp để bật, nhấp chuột phải để xem danh sách)"
             },
             accessory: {
-                scheduledFor: "Đã lên lịch vào {{date}} {{timeLeft}}",
+                scheduledFor: "Đã lên lịch vào {date}{timeLeft}",
                 remaining: {
-                    days: "Còn lại {{days}}g {{hours}} giây",
-                    hours: "Còn lại {{hours}} giây {{phút}}phút",
-                    minutes: "Còn {{phút}} phút"
+                    days: "{{days}}d {{hours}}h còn lại",
+                    hours: "{{hours}}h {{minutes}}m còn lại",
+                    minutes: "{{minutes}}m còn lại"
                 }
             },
             scheduleModal: {
-                title: "tin nhắn kế hoạch",
-                schedulingFor: "Kênh dự kiến: {{channel}}",
-                scheduleType: "Loại quy hoạch",
+                title: "Lên lịch tin nhắn",
+                schedulingFor: "Đang lên lịch cho: {{channel}}",
+                scheduleType: "Loại lịch trình",
                 delay: "Trì hoãn",
                 specificTime: "Thời gian cụ thể",
                 delayMinutes: "Độ trễ (phút)",
-                dateTime: "Ngày và Giờ",
+                dateTime: "Ngày & Giờ",
                 error: {
-                    invalidDelay: "Vui lòng nhập thời gian trễ hợp lệ (tối thiểu 1 phút)",
+                    invalidDelay: "Vui lòng nhập độ trễ hợp lệ (tối thiểu 1 phút)",
                     invalidDateTime: "Vui lòng chọn ngày và giờ trong tương lai"
                 },
-                schedule: "Đã lên kế hoạch",
+                schedule: "Lịch trình",
                 cancel: "Hủy bỏ"
             },
             viewModal: {
                 title: "Tin nhắn đã lên lịch",
                 clearAll: "Xóa tất cả",
                 noMessages: "Không có tin nhắn theo lịch trình",
-                delete: "Sil",
-                close: "Một phần tư"
+                delete: "Xóa bỏ",
+                close: "Đóng"
             }
         },
         searchFix: {
-            name: "Tìm kiếmFix",
-            description: "Câu nói khó chịu 'Chúng tôi đã đánh rơi kính lúp!' sửa lỗi.",
-            notPerfect: "Cách khắc phục này không hoàn hảo nên bạn có thể cần phải tải lại thanh tìm kiếm để khắc phục sự cố.",
-            paragraph1: "Discord chỉ cho phép độ lệch tối đa là 5000 (đây là nguyên nhân gây ra lỗi kính lúp).",
-            paragraph2: "Điều này có nghĩa là bạn có thể xem chính xác 5000 tin nhắn trong quá khứ và 5000 tin nhắn trong tương lai (được sắp xếp theo cũ nhất).",
-            paragraph3: "Plugin này chuyển sang phương pháp sắp xếp ngược lại để vượt qua hạn chế của Discord,",
-            paragraph4: "nhưng nếu có một kết quả tìm kiếm lớn và bạn cố gắng hiển thị thông báo không thể truy cập được bằng bất kỳ phương pháp sắp xếp nào,",
-            paragraph5: "plugin chỉ hiển thị offset 0 (tin nhắn mới nhất hoặc cũ nhất tùy thuộc vào phương pháp sắp xếp)."
+            name: "SearchFix",
+            description: "Khắc phục sự cố khó chịu 'Chúng tôi đã đánh rơi kính lúp!' lỗi.",
+            notPerfect: "Bản sửa lỗi này chưa hoàn hảo nên bạn có thể phải tải lại thanh tìm kiếm để khắc phục sự cố.",
+            paragraph1: "Discord chỉ cho phép offset tối đa là 5000 (đây là nguyên nhân gây ra lỗi kính lúp).",
+            paragraph2: "Điều này có nghĩa là bạn chỉ có thể xem chính xác 5000 tin nhắn trong quá khứ và 5000 tin nhắn trong tương lai (khi sắp xếp theo cũ).",
+            paragraph3: "Plugin này chỉ chuyển sang phương pháp sắp xếp ngược lại để cố gắng vượt qua hạn chế của Discord,",
+            paragraph4: "nhưng nếu có một kết quả tìm kiếm lớn và bạn cố xem một thư không thể lấy được bằng cả hai phương pháp sắp xếp,",
+            paragraph5: "plugin sẽ chỉ hiển thị offset 0 (tin nhắn mới nhất hoặc cũ nhất tùy thuộc vào phương pháp sắp xếp)."
         },
         secretRingToneEnabler: {
             name: "SecretRingToneEnabler",
-            description: "Discord luôn phát phiên bản bí mật của nhạc chuông (trừ các sự kiện nhạc chuông đặc biệt)",
+            description: "Luôn phát phiên bản bí mật của nhạc chuông Discord (ngoại trừ trong các sự kiện nhạc chuông đặc biệt)",
             option: {
                 onlySnow: {
                     label: "Chỉ trong sự kiện nhạc chuông tuyết",
@@ -8842,45 +8842,45 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         summaries: {
-            name: "Tóm tắt",
-            description: "Bật tính năng Tóm tắt thử nghiệm của Discord trên tất cả các máy chủ và hiển thị tóm tắt các cuộc hội thoại do AI tạo",
+            name: "Summaries",
+            description: "Kích hoạt tính năng Tóm tắt thử nghiệm của Discord trên mọi máy chủ, hiển thị các bản tóm tắt cuộc hội thoại do AI tạo",
             option: {
                 summaryExpiryThresholdDays: {
-                    label: "Ngưỡng xóa tóm tắt (Ngày)",
-                    description: "Số ngày thông báo có hiệu lực trước khi bị xóa. Lưu ý rằng tối đa 50 bản tóm tắt được lưu trữ trên mỗi kênh"
+                    label: "Ngưỡng hết hạn tóm tắt (Ngày)",
+                    description: "Thời gian tính bằng ngày trước khi bản tóm tắt bị xóa. Lưu ý rằng chỉ có tối đa 50 bản tóm tắt được lưu giữ trên mỗi kênh"
                 }
             }
         },
         selfForward: {
-            name: "Tự chuyển tiếp",
+            name: "SelfForward",
             description: "Thêm kênh hiện tại vào cửa sổ bật lên danh sách chuyển tiếp"
         },
         sendTimestamps: {
-            name: "GửiDấu thời gian",
-            description: "Dễ dàng gửi dấu thời gian bằng nút hộp trò chuyện và phím tắt văn bản. Đọc mô tả mở rộng!",
+            name: "SendTimestamps",
+            description: "Gửi dấu thời gian dễ dàng thông qua nút hộp trò chuyện và phím tắt văn bản. Đọc mô tả mở rộng!",
             sample: {
-                paragraph1: "Để nhanh chóng gửi dấu thời gian chỉ có thời gian, hãy thêm dấu thời gian ở định dạng `HH:MM` (bao gồm cả dấu ngoặc kép!) vào tin nhắn của bạn",
-                paragraph2: "Xem các ví dụ bên dưới.\nNếu bạn cần thông tin cụ thể hơn, hãy sử dụng nút Ngày trong thanh trò chuyện!",
+                paragraph1: "Để nhanh chóng gửi dấu thời gian chỉ có thời gian, hãy đưa dấu thời gian được định dạng là `HH:MM` (bao gồm cả dấu ngược!) vào tin nhắn của bạn",
+                paragraph2: "Xem ví dụ bên dưới.\nNếu bạn cần điều gì cụ thể hơn, hãy sử dụng nút Ngày trong thanh trò chuyện!",
                 examples: "Ví dụ:"
             },
             modal: {
                 title: "Bộ chọn dấu thời gian",
-                light: "Mở",
+                light: "Ánh sáng",
                 dark: "Tối tăm",
                 format: "Định dạng dấu thời gian",
                 preview: "Xem trước",
-                insert: "Thêm vào",
-                insertTimestamp: "Thêm dấu thời gian"
+                insert: "Chèn",
+                insertTimestamp: "Chèn dấu thời gian"
             },
             option: {
                 replaceMessageContents: {
-                    label: "Thay đổi nội dung tin nhắn",
-                    description: "Thay đổi dấu thời gian trong nội dung tin nhắn"
+                    label: "Thay thế nội dung tin nhắn",
+                    description: "Thay thế dấu thời gian trong nội dung tin nhắn"
                 }
             }
         },
         serverInfo: {
-            name: "Thông tin máy chủ",
+            name: "ServerInfo",
             description: "Cho phép bạn xem thông tin về máy chủ",
             context: {
                 serverInfo: "Thông tin máy chủ"
@@ -8888,26 +8888,26 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 sorting: {
                     label: "Sắp xếp",
-                    description: "Tên người dùng hoặc Tên hiển thị nếu có",
+                    description: "Tên người dùng hoặc, nếu có, Tên hiển thị",
                     username: "Tên người dùng",
                     displayname: "Tên hiển thị",
-                    none: "Sắp xếp"
+                    none: "Đừng sắp xếp"
                 }
             },
             modal: {
                 tab: {
                     serverInfo: "Thông tin máy chủ",
                     friends: "Bạn",
-                    mutualUsers: "Người dùng thông thường",
+                    mutualUsers: "Người dùng chung",
                     blockedUsers: "Người dùng bị chặn",
                     ignoredUsers: "Người dùng bị bỏ qua"
                 },
                 owner: "Chủ sở hữu máy chủ",
                 loading: "Đang tải...",
-                createdAt: "Ngày tạo",
-                joinedAt: "Ngày tham gia",
-                vanityLink: "Liên kết mời đặc biệt",
-                preferredLocale: "Vùng ưa thích",
+                createdAt: "Được tạo tại",
+                joinedAt: "Đã tham gia tại",
+                vanityLink: "Liên kết phù phiếm",
+                preferredLocale: "Ngôn ngữ ưa thích",
                 verification: {
                     level: "Cấp độ xác minh",
                     none: "Không có",
@@ -8918,96 +8918,96 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 serverBoosts: "Tăng cường máy chủ",
                 channels: "Kênh",
-                roles: "Con lăn"
+                roles: "Vai trò"
             }
         },
         serverListIndicators: {
-            name: "Danh sách máy chủChỉ báo",
-            description: "Thêm số lượng bạn bè trực tuyến hoặc số lượng máy chủ vào danh sách máy chủ",
-            friends: "Bạn bè",
-            servers: "Người trình bày",
+            name: "ServerListIndicators",
+            description: "Thêm số lượng bạn bè trực tuyến hoặc số lượng máy chủ trong danh sách máy chủ",
+            friends: "Bạn",
+            servers: "Máy chủ",
             option: {
                 mode: {
-                    label: "mod",
+                    label: "Cách thức",
                     description: "Chế độ hiển thị trong danh sách máy chủ",
-                    friend: "Chỉ số lượng bạn bè trực tuyến",
-                    server: "Chỉ số lượng máy chủ",
-                    both: "Số lượng cả máy chủ và bạn bè trực tuyến"
+                    friend: "Chỉ tính bạn bè trực tuyến",
+                    server: "Chỉ tính máy chủ",
+                    both: "Cả máy chủ và số bạn bè trực tuyến đều được tính"
                 },
                 useCompact: {
-                    label: "Modu Kullan nhỏ gọn",
-                    description: "Làm cho chú giải chỉ xuất hiện với văn bản"
+                    label: "Sử dụng Chế độ thu gọn",
+                    description: "Làm cho chỉ báo chỉ xuất hiện với văn bản"
                 }
             }
         },
         serverSearch: {
-            name: "Tìm kiếm máy chủ",
+            name: "ServerSearch",
             description: "Điều hướng máy chủ của bạn tốt hơn bằng nút tìm kiếm nhanh",
-            tooltip: "Chúng tôi mua"
+            tooltip: "Tìm kiếm"
         },
         shikiCodeblocks: {
             name: "ShikiCodeblocks",
-            description: "Đưa các khối mã kiểu VSCode do Shiki cung cấp vào Discord",
+            description: "Đưa các khối mã kiểu VS Code vào Discord, được cung cấp bởi Shiki",
             option: {
                 theme: {
-                    label: "Anh ta",
+                    label: "chủ đề",
                     description: "Chủ đề mặc định"
                 },
                 customTheme: {
                     label: "Chủ đề tùy chỉnh",
-                    description: "Liên kết đến chủ đề VSCode tùy chỉnh",
+                    description: "Liên kết đến chủ đề VS Code tùy chỉnh",
                     mustURL: "Phải là một URL hợp lệ",
                     mustJSON: "Phải là tệp JSON"
                 },
                 tryHljs: {
-                    label: "Sao lưu vào Hljs",
-                    description: "Sử dụng chủ đề và màu sắc Discord mặc định nhẹ hơn.",
+                    label: "Dự phòng cho Hljs",
+                    description: "Sử dụng chủ đề và công cụ đánh dấu Discord mặc định nhẹ hơn.",
                     never: "Không bao giờ",
-                    secondary: "Chọn Shiki thay vì Highlight.js",
-                    primary: "Chọn Highlight.js thay vì Shiki",
+                    secondary: "Thích Shiki thay vì Highlight.js",
+                    primary: "Thích Highlight.js thay vì Shiki",
                     always: "Luôn luôn"
                 },
                 useDevIcon: {
                     label: "Sử dụng Devicon cho biểu tượng ngôn ngữ",
-                    description: "Cách hiển thị biểu tượng ngôn ngữ trong khối mã",
+                    description: "Cách hiển thị biểu tượng ngôn ngữ trên codeblocks",
                     disabled: "Tàn tật",
                     colorless: "không màu",
-                    colored: "đầy màu sắc"
+                    colored: "màu"
                 },
                 bgOpacity: {
                     label: "Độ mờ nền",
-                    description: "độ mờ nền"
+                    description: "Độ mờ nền"
                 }
             },
             button: {
-                copy: "sao chép",
+                copy: "Sao chép",
                 copied: "Đã sao chép!"
             }
         },
         showAllMessageButtons: {
-            name: "Hiển thị tất cả tin nhắnNút",
-            description: "Nó luôn hiển thị tất cả các nút tin nhắn, cho dù bạn có nhấn phím Shift hay không.",
+            name: "ShowAllMessageButtons",
+            description: "Luôn hiển thị tất cả các nút tin nhắn bất kể bạn có đang giữ phím shift hay không.",
             option: {
                 noShiftDelete: {
-                    label: "Xóa không cần Shift",
-                    description: "Loại bỏ nhu cầu nhấn phím shift để xóa tin nhắn."
+                    label: "Không có ca Xóa",
+                    description: "Loại bỏ yêu cầu giữ shift để xóa tin nhắn."
                 },
                 noShiftPin: {
-                    label: "Sửa lỗi không cần Shift",
-                    description: "Loại bỏ nhu cầu nhấn phím shift để ghim tin nhắn."
+                    label: "Không có phím Shift",
+                    description: "Loại bỏ yêu cầu giữ phím shift để ghim tin nhắn."
                 }
             }
         },
         showBadgesInChat: {
-            name: "Hiển thịHuy hiệuTrongTrò chuyện",
-            description: "Hiển thị huy hiệu bên cạnh tên tác giả tin nhắn trong cuộc trò chuyện.",
+            name: "ShowBadgesInChat",
+            description: "Hiển thị huy hiệu của tác giả tin nhắn bên cạnh tên của họ trong cuộc trò chuyện.",
             option: {
                 showPlexcordDonor: {
-                    label: "Hiển thị Huy hiệu nhà tài trợ Plexcord của bạn",
+                    label: "Hiển thị Huy hiệu Nhà tài trợ Plexcord",
                     description: "Cho phép hiển thị huy hiệu Nhà tài trợ Plexcord trong cuộc trò chuyện."
                 },
                 plexcordDonorPosition: {
-                    label: "Vị trí huy hiệu nhà tài trợ Plexcord",
+                    label: "Vị trí Huy hiệu Nhà tài trợ Plexcord",
                     description: "Vị trí của huy hiệu Nhà tài trợ Plexcord."
                 },
                 showPlexcordContributor: {
@@ -9036,17 +9036,17 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 badgeSettings: {
                     label: "Cài đặt huy hiệu",
-                    description: "Định cấu hình vị trí của các huy hiệu khác được hiển thị trong cuộc trò chuyện.",
-                    modal: "Kéo để sắp xếp lại huy hiệu; Nhấp để bật/tắt một loại huy hiệu cụ thể."
+                    description: "Định cấu hình vị trí của các huy hiệu khác được hiển thị trong trò chuyện.",
+                    modal: "Kéo các huy hiệu để sắp xếp lại chúng; bạn có thể nhấp để bật/tắt một loại huy hiệu cụ thể."
                 }
             },
             badge: {
-                plexcord: "Huy hiệu hỗ trợ Plexcord",
-                contributor: "Huy hiệu người tham gia Plexcord",
-                discordProfile: "Hồ sơ bất hòa rozetleri (HypeSquad, Nhân viên Discord, Nhà phát triển tích cực vb.)",
-                nitro: "huy hiệu nitro",
+                plexcord: "Huy hiệu nhà tài trợ Plexcord",
+                contributor: "Huy hiệu cộng tác viên Plexcord",
+                discordProfile: "Huy hiệu hồ sơ Discord (HypeSquad, Nhân viên Discord, Nhà phát triển đang hoạt động, v.v.)",
+                nitro: "Huy hiệu Nitro",
                 staff: "Nhân viên bất hòa",
-                partner: "Chủ sở hữu máy chủ đối tác",
+                partner: "Chủ sở hữu máy chủ hợp tác",
                 events: "Sự kiện HypeSquad",
                 bravery: "Sự dũng cảm của Biệt đội Hype",
                 brilliance: "HypeSquad rực rỡ",
@@ -9054,72 +9054,72 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bugHunter: "Thợ săn lỗi bất hòa",
                 earlyVerifiedBotDeveloper: "Nhà phát triển Bot đã được xác minh sớm",
                 earlySupporter: "Người ủng hộ sớm",
-                moderatorProgram: "Người điều hành chương trình tốt nghiệp"
+                moderatorProgram: "Cựu sinh viên chương trình điều hành"
             },
             modal: {
-                plexcordContributor: "Người tham gia Plexcord",
+                plexcordContributor: "Cộng tác viên Plexcord",
                 discordNitro: "Bất hòa Nitro",
                 basic: "Nền tảng",
                 classic: "Cổ điển"
             }
         },
         showConnections: {
-            name: "Hiển thị kết nối",
-            description: "Hiển thị các tài khoản được liên kết trong thẻ bật lên của người dùng",
+            name: "ShowConnections",
+            description: "Hiển thị các tài khoản được kết nối trong cửa sổ bật lên của người dùng",
             option: {
                 iconSize: {
                     label: "Kích thước biểu tượng",
                     description: "Kích thước biểu tượng (px)"
                 },
                 iconSpacing: {
-                    label: "Không gian biểu tượng",
-                    description: "lề biểu tượng",
+                    label: "Khoảng cách biểu tượng",
+                    description: "Lề biểu tượng",
                     compact: "Nhỏ gọn",
-                    cozy: "Thoải mái",
-                    roomy: "Rộng"
+                    cozy: "Ấm áp",
+                    roomy: "rộng rãi"
                 }
             }
         },
         showHiddenChannels: {
-            name: "Hiển thịKênh ẩn",
-            description: "Hiển thị các kênh mà bạn không có quyền truy cập.",
-            tooltip: "Kênh bí mật",
+            name: "ShowHiddenChannels",
+            description: "Hiển thị các kênh mà bạn không có quyền truy cập để xem.",
+            tooltip: "Kênh ẩn",
             option: {
                 channelStyle: {
                     label: "Kiểu kênh",
                     description: "Kiểu được sử dụng để hiển thị các kênh ẩn.",
                     classic: "Cổ điển",
-                    muted: "Im lặng",
-                    showUnreads: "Hiển thị chưa đọc",
-                    mutedWithUnreads: "Hiển thị bị tắt tiếng và chưa đọc"
+                    muted: "Đã tắt tiếng",
+                    showUnreads: "Hiển thị bài chưa đọc",
+                    mutedWithUnreads: "Tắt tiếng và hiển thị nội dung chưa đọc"
                 },
                 showMode: {
                     label: "Chế độ hiển thị",
                     description: "Chế độ được sử dụng để hiển thị các kênh ẩn.",
-                    lock: "phong cách đơn giản với biểu tượng khóa",
+                    lock: "Phong cách đơn giản với Biểu tượng khóa thay thế",
                     hidden: "Kiểu tắt tiếng với biểu tượng con mắt ẩn ở bên phải",
                     lockIconRight: "Biểu tượng khóa bên phải"
                 },
                 defaultAllowedUsersAndRolesDropdownState: {
                     label: "Trạng thái thả xuống vai trò và người dùng được phép mặc định",
-                    description: "Theo mặc định, menu vai trò và người dùng được phép có được mở trong các kênh riêng tư hay không"
+                    description: "Theo mặc định, danh sách thả xuống vai trò và người dùng được phép trên các kênh ẩn có nên được mở hay không"
                 }
             },
             channelType: {
                 text: "chữ",
                 announcement: "thông báo",
                 forum: "diễn đàn",
-                voice: "ses",
-                stage: "bối cảnh"
+                voice: "tiếng nói",
+                stage: "sân khấu"
             },
             sortOrder: {
-                latestActivity: "Sự kiện mới nhất",
+                latestActivity: "Hoạt động mới nhất",
                 creationDate: "Ngày tạo"
             },
             forumLayout: {
                 default: "Chưa đặt",
                 list: "Chế độ xem danh sách",
-                grid: "xem thư viện"
+                grid: "Chế độ xem thư viện"
             },
             videoQuality: {
                 auto: "Tự động",
@@ -9134,23 +9134,23 @@ const translations: MatchStructure<typeof enTranslations> = {
                 post: "bưu kiện",
                 message: "tin nhắn",
                 unknown: "không rõ",
-                permissionDetails: "Chi tiết giấy phép",
+                permissionDetails: "Chi tiết quyền",
                 thisIsA: "Đây là kênh {{status}} {{channelType}}",
-                canNotSee: "Bạn không thể xem phần {{type}} của kênh này.",
-                guidelines: "Nhưng bạn có thể xem hướng dẫn của họ:",
-                lastCreated: "Lần tạo cuối cùng {{type}}:",
-                lastPin: "Bài đăng cuối cùng được ghim:",
-                threadSlowmode: "Chế độ chậm của luồng mặc định:",
+                canNotSee: "Bạn không thể xem {{type}} của kênh này.",
+                guidelines: "Tuy nhiên, bạn có thể thấy hướng dẫn của nó:",
+                lastCreated: "{{type}} được tạo lần cuối:",
+                lastPin: "Mã pin tin nhắn cuối cùng:",
+                threadSlowmode: "Chủ đề chậm mặc định:",
                 slowmode: "Chế độ chậm:",
                 bitrate: "Tốc độ bit:",
-                region: "Khu vực:",
+                region: "Vùng đất:",
                 automatic: "Tự động",
                 videoQuality: "Chế độ chất lượng video:",
                 inactiveArchiveDuration: "Khoảng thời gian không hoạt động mặc định trước khi lưu trữ {{type}}",
                 defaultLayout: "Bố cục mặc định:",
-                defaultSort: "Sắp xếp mặc định:",
+                defaultSort: "Thứ tự sắp xếp mặc định:",
                 defaultReaction: "Biểu tượng cảm xúc phản ứng mặc định:",
-                requireTag: "Việc gắn thẻ cho các bài viết trong diễn đàn này là bắt buộc.",
+                requireTag: "Bài viết trên diễn đàn này yêu cầu phải đặt thẻ.",
                 availableTags: "Thẻ có sẵn:",
                 allowedUsersAndRoles: "Người dùng và vai trò được phép:",
                 hideAllowedUsersAndRoles: "Ẩn người dùng và vai trò được phép",
@@ -9158,26 +9158,26 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         showHiddenThings: {
-            name: "Hiển thịNhững điều ẩn giấu",
-            description: "Nó hiển thị nhiều thứ ẩn và chỉ dành cho người kiểm duyệt bất kể quyền.",
+            name: "ShowHiddenThings",
+            description: "Hiển thị nhiều thứ ẩn và chỉ dành cho người kiểm duyệt bất kể quyền.",
             option: {
                 showTimeouts: {
                     label: "Hiển thị thời gian chờ của thành viên trong cuộc trò chuyện",
                     description: "Hiển thị biểu tượng thời gian chờ của thành viên trong cuộc trò chuyện."
                 },
                 showInvitesPaused: {
-                    label: "Hiển thị thông tin lời mời bị tạm dừng",
-                    description: "Hiển thị rằng lời mời đã bị tạm dừng trong danh sách máy chủ."
+                    label: "Hiển thị lời mời bị tạm dừng",
+                    description: "Hiển thị chú giải công cụ lời mời bị tạm dừng trong danh sách máy chủ."
                 },
                 showModView: {
                     label: "Hiển thị chế độ xem mod",
-                    description: "Hiển thị tùy chọn menu ngữ cảnh xem chế độ thành viên trên tất cả các máy chủ."
+                    description: "Hiển thị mục menu ngữ cảnh chế độ xem mod thành viên trong tất cả các máy chủ."
                 }
             }
         },
         showMessageEmbeds: {
-            name: "Hiển thịTin nhắnNhúng",
-            description: "Thêm tùy chọn hiển thị nhúng vào menu ngữ cảnh cho các liên kết không có phần nhúng",
+            name: "ShowMessageEmbeds",
+            description: "Thêm tùy chọn menu ngữ cảnh để hiển thị nội dung nhúng cho các liên kết chưa có",
             context: {
                 embed: {
                     show: "Hiển thị nhúng",
@@ -9185,13 +9185,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             error: {
-                failed: "Không thể truy xuất nội dung nhúng",
-                noEmbed: "Không tìm thấy nhúng"
+                failed: "Không nhúng được",
+                noEmbed: "Không tìm thấy nội dung nhúng nào"
             }
         },
         showMeYourName: {
-            name: "Cho tôi biết tên của bạn",
-            description: "Xem bất kỳ hoán vị nào của biệt hiệu tùy chỉnh, biệt hiệu của bạn bè, biệt hiệu máy chủ, tên hiển thị và tên người dùng trong cuộc trò chuyện.",
+            name: "ShowMeYourName",
+            description: "Hiển thị bất kỳ hoán vị nào của biệt hiệu tùy chỉnh, biệt hiệu của bạn bè, biệt hiệu máy chủ, tên hiển thị và tên người dùng trong cuộc trò chuyện.",
             option: {
                 messages: {
                     label: "Tin nhắn",
@@ -9199,137 +9199,137 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 replies: {
                     label: "Trả lời",
-                    description: "Xem định dạng tên tùy chỉnh trong thư trả lời."
+                    description: "Hiển thị định dạng tên tùy chỉnh trong thư trả lời."
                 },
                 mentions: {
                     label: "Đề cập",
                     description: "Hiển thị định dạng tên tùy chỉnh trong đề cập."
                 },
+                typingIndicator: {
+                    label: "Chỉ báo gõ",
+                    description: "Hiển thị tên khả dụng đầu tiên được liệt kê ở định dạng tên tùy chỉnh của bạn trong chỉ báo nhập."
+                },
                 memberList: {
                     label: "Danh sách thành viên",
                     description: "Hiển thị tên khả dụng đầu tiên được liệt kê ở định dạng tên tùy chỉnh của bạn trong danh sách thành viên."
                 },
-                typingIndicator: {
-                    label: "Chỉ báo viết",
-                    description: "Hiển thị tên khả dụng đầu tiên được liệt kê ở định dạng tên tùy chỉnh của bạn trong chỉ báo nhập."
-                },
                 profilePopout: {
-                    label: "Thẻ bật lên hồ sơ",
-                    description: "Hiển thị tên khả dụng đầu tiên được liệt kê ở định dạng tên tùy chỉnh của bạn trong thẻ bật lên hồ sơ."
+                    label: "Hồ sơ bật lên",
+                    description: "Hiển thị tên khả dụng đầu tiên được liệt kê ở định dạng tên tùy chỉnh của bạn trong cửa sổ bật lên hồ sơ."
                 },
                 voiceChannels: {
-                    label: "Kênh âm thanh",
-                    description: "Hiển thị tên khả dụng đầu tiên được liệt kê ở định dạng tên tùy chỉnh của bạn trên các kênh âm thanh."
+                    label: "Kênh thoại",
+                    description: "Hiển thị tên khả dụng đầu tiên được liệt kê ở định dạng tên tùy chỉnh của bạn trong các kênh thoại."
                 },
                 reactions: {
                     label: "phản ứng",
-                    description: "Hiển thị tên khả dụng đầu tiên được liệt kê ở định dạng tên tùy chỉnh của bạn trong chú giải công cụ phản ứng và hiển thị tên đầy đủ trong cửa sổ bật lên phản ứng."
+                    description: "Hiển thị tên khả dụng đầu tiên được liệt kê ở định dạng tên tùy chỉnh của bạn trong chú giải công cụ phản ứng và tên đầy đủ trong cửa sổ bật lên phản ứng."
                 },
                 discriminators: {
-                    label: "Hiển thị trình phân tích cú pháp",
-                    description: "Thêm trình phân tích cú pháp vào tên người dùng bot. Trình phân tích cú pháp đã bị xóa đối với người dùng thông thường nhưng vẫn được sử dụng cho bot. Theo mặc định, tên người dùng của bot tương đương với tên chung của người dùng và do đó nhiều bot có thể có cùng tên người dùng. Việc thêm các trình phân tích cú pháp sẽ làm cho chúng trở nên độc đáo trở lại."
+                    label: "người phân biệt đối xử",
+                    description: "Thêm các yếu tố phân biệt đối xử vào tên người dùng cho bot. Trình phân biệt đối xử không còn được dùng đối với người dùng nhưng vẫn được sử dụng cho bot. Theo mặc định, tên người dùng của bot tương đương với tên chung của người dùng, do đó nhiều bot có thể có cùng tên người dùng. Việc bổ sung các yếu tố phân biệt đối xử làm cho chúng trở nên độc đáo trở lại."
                 },
                 hideDefaultAtSign: {
-                    label: "Ẩn mặc định @ Ký",
-                    description: "Ẩn ký hiệu '@' mặc định ở đầu tên trong các đề cập và câu trả lời. Chỉ áp dụng nếu tính năng liên quan được bật."
+                    label: "Ẩn mặc định tại dấu hiệu",
+                    description: "Ẩn ký hiệu '@' mặc định trước tên trong đề cập và trả lời. Chỉ áp dụng nếu một trong hai tính năng được bật."
                 },
                 truncateAllNamesWithStreamerMode: {
-                    label: "Rút ngắn tất cả tên trong chế độ nhà xuất bản",
-                    description: "Khi ở Chế độ phát sóng, hãy rút ngắn tất cả các tên, không chỉ tên người dùng."
+                    label: "Cắt bớt tất cả tên với chế độ truyền phát",
+                    description: "Cắt ngắn tất cả tên, không chỉ tên người dùng, khi ở Chế độ phát trực tiếp."
                 },
                 removeDuplicates: {
                     label: "Xóa trùng lặp",
-                    description: "Nếu bất kỳ hai tên nào giống nhau, hãy loại bỏ các tên trùng lặp, chỉ để lại những tên duy nhất."
+                    description: "Nếu bất kỳ tên nào tương đương, hãy xóa chúng, chỉ để lại những tên duy nhất."
                 },
                 ignoreFonts: {
                     label: "Bỏ qua phông chữ",
-                    description: "Đối với tên thứ hai, thứ ba và thứ tư, hãy sử dụng GG SANS, bỏ qua phông chữ tùy chỉnh của người dùng."
+                    description: "Đối với tên thứ hai, thứ ba và thứ tư, hãy sử dụng gg sans bất kể phông chữ tùy chỉnh của người dùng."
                 },
                 ignoreGradients: {
                     label: "Bỏ qua các gradient",
-                    description: "Đối với các tên không chính, nếu vai trò có dải màu và màu sau được đặt thành 'Vai trò+-#', hãy sử dụng màu chính thay vì toàn bộ dải màu và nếu có hiệu ứng nitro, hãy bỏ qua hoàn toàn."
+                    description: "Đối với các tên không chính, nếu vai trò có dải màu và màu bên dưới được đặt thành 'Vai trò+-#', hãy sử dụng màu chính thay vì toàn bộ dải màu và nếu nó có hiệu ứng Nitro, hãy bỏ qua hoàn toàn."
                 },
                 animateGradients: {
-                    label: "Tạo hiệu ứng chuyển màu",
-                    description: "Hiển thị hoạt ảnh nếu tên thứ hai, thứ ba và thứ tư có dải màu vai trò. Bị tắt nếu 'Bỏ qua độ dốc' được bật hoặc giảm chuyển động được bật."
+                    label: "Chuyển màu sinh động",
+                    description: "Đối với tên thứ hai, thứ ba và thứ tư, nếu vai trò có độ chuyển màu, hãy tạo hoạt ảnh cho nó. Tính năng này bị vô hiệu hóa bởi 'Bỏ qua độ dốc' và giảm chuyển động."
                 },
                 nameSeparator: {
                     label: "Dấu phân cách tên",
-                    description: "Dấu phân cách để sử dụng giữa các tên. Mặc định là không gian đơn."
+                    description: "Dấu phân cách để sử dụng giữa các tên. Mặc định là một khoảng trắng."
                 },
                 friendNameOnlyInDirectMessages: {
-                    label: "Tên bạn bè chỉ hiển thị trong tin nhắn riêng tư",
-                    description: "Chỉ hiển thị tên bạn bè trong tin nhắn riêng tư, không hiển thị trên máy chủ."
+                    label: "Chỉ tên bạn bè trong tin nhắn trực tiếp",
+                    description: "Chỉ hiển thị tên bạn bè khi ở trong DM chứ không phải trên máy chủ."
                 },
                 customNameOnlyInDirectMessages: {
-                    label: "Tên tùy chỉnh Chỉ hiển thị trong tin nhắn riêng tư",
-                    description: "Chỉ hiển thị tên tùy chỉnh trong tin nhắn riêng tư, không hiển thị trên máy chủ."
+                    label: "Chỉ tên tùy chỉnh trong tin nhắn trực tiếp",
+                    description: "Chỉ hiển thị tên tùy chỉnh khi ở trong DM chứ không phải trong máy chủ."
                 },
                 includedNames: {
                     label: "Tên bao gồm",
-                    description: "Thứ tự hiển thị tên người dùng, tên hiển thị, biệt hiệu và tên bạn bè. Sử dụng các phần giữ chỗ sau: {user}, {display}, {nick}, {friend}. Nếu không có tên, bạn có thể viết các tên thay thế sẽ được sử dụng, phân tách bằng dấu phẩy: {friend, nick, display}. Bạn có thể thêm ba tiền tố và ba hậu tố cho mỗi tên."
+                    description: "Thứ tự hiển thị tên người dùng, tên hiển thị, biệt hiệu và tên bạn bè. Sử dụng các phần giữ chỗ sau: {user}, {display}, {nick}, {friend}. Bạn có thể cung cấp nhiều tùy chọn tên để sử dụng làm tên dự phòng nếu không có tùy chọn tên bằng cách phân tách chúng bằng dấu phẩy, chẳng hạn như: {friend, nick, display}. Bạn có thể có tối đa ba tiền tố và ba hậu tố cho mỗi tên."
                 },
                 customNameColor: {
                     label: "Màu tên tùy chỉnh",
-                    description: "Màu sử dụng cho tên tùy chỉnh mà bạn gán cho người dùng, nếu đó không phải là tên đầu tiên được hiển thị. Nó chấp nhận mọi đầu vào CSS hợp lệ. Sử dụng 'Vai trò' để theo dõi màu vai trò chính của người dùng, màu hiệu ứng nitro hoặc màu IRCColors (nếu được bật). Sử dụng 'Vai trò+-#' để điều chỉnh độ sáng theo tỷ lệ phần trăm này (ví dụ: 'Vai trò+15')"
+                    description: "Màu sử dụng cho tên tùy chỉnh mà bạn đã gán cho người dùng nếu nó không phải là tên được hiển thị đầu tiên. Chấp nhận mọi đầu vào CSS hợp lệ. Sử dụng 'Vai trò' để theo dõi các màu vai trò hàng đầu của người dùng, màu hiệu ứng Nitro hoặc màu IRCColors nếu được bật. Sử dụng 'Vai trò+-#' để điều chỉnh độ sáng theo tỷ lệ phần trăm đó (ví dụ: 'Vai trò+15')"
                 },
                 friendNameColor: {
                     label: "Màu tên bạn bè",
-                    description: "Màu được sử dụng khi tên của người bạn không phải là tên đầu tiên được hiển thị. Nó chấp nhận mọi đầu vào CSS hợp lệ. Sử dụng 'Vai trò' để theo dõi màu vai trò chính của người dùng, màu hiệu ứng nitro hoặc màu IRCColors (nếu được bật). Sử dụng 'Vai trò+-#' để điều chỉnh độ sáng theo tỷ lệ phần trăm này (ví dụ: 'Vai trò+15')"
+                    description: "Màu dùng cho biệt hiệu của bạn bè nếu đó không phải là màu được hiển thị đầu tiên. Chấp nhận mọi đầu vào CSS hợp lệ. Sử dụng 'Vai trò' để theo dõi các màu vai trò hàng đầu của người dùng, màu hiệu ứng Nitro hoặc màu IRCColors nếu được bật. Sử dụng 'Vai trò+-#' để điều chỉnh độ sáng theo tỷ lệ phần trăm đó (ví dụ: 'Vai trò+15')"
                 },
                 nicknameColor: {
-                    label: "Màu biệt hiệu",
-                    description: "Màu sử dụng khi biệt hiệu không phải là tên hiển thị đầu tiên. Nó chấp nhận mọi đầu vào CSS hợp lệ. Sử dụng 'Vai trò' để theo dõi màu vai trò chính của người dùng, màu hiệu ứng nitro hoặc màu IRCColors (nếu được bật). Sử dụng 'Vai trò+-#' để điều chỉnh độ sáng theo tỷ lệ phần trăm này (ví dụ: 'Vai trò+15')"
+                    label: "Màu biệt danh",
+                    description: "Màu sử dụng cho biệt hiệu nếu nó không phải là màu hiển thị đầu tiên. Chấp nhận mọi đầu vào CSS hợp lệ. Sử dụng 'Vai trò' để theo dõi các màu vai trò hàng đầu của người dùng, màu hiệu ứng Nitro hoặc màu IRCColors nếu được bật. Sử dụng 'Vai trò+-#' để điều chỉnh độ sáng theo tỷ lệ phần trăm đó (ví dụ: 'Vai trò+15')"
                 },
                 displayNameColor: {
                     label: "Màu tên hiển thị",
-                    description: "Màu được sử dụng khi tên hiển thị không phải là tên hiển thị đầu tiên. Nó chấp nhận mọi đầu vào CSS hợp lệ. Sử dụng 'Vai trò' để theo dõi màu vai trò chính của người dùng, màu hiệu ứng nitro hoặc màu IRCColors (nếu được bật). Sử dụng 'Vai trò+-#' để điều chỉnh độ sáng theo tỷ lệ phần trăm này (ví dụ: 'Vai trò+15')"
+                    description: "Màu sử dụng cho tên hiển thị nếu nó không phải là màu được hiển thị đầu tiên. Accepts any valid CSS input. Sử dụng 'Vai trò' để theo dõi các màu vai trò hàng đầu của người dùng, màu hiệu ứng Nitro hoặc màu IRCColors nếu được bật. Sử dụng 'Vai trò+-#' để điều chỉnh độ sáng theo tỷ lệ phần trăm đó (ví dụ: 'Vai trò+15')"
                 },
                 usernameColor: {
                     label: "Màu tên người dùng",
-                    description: "Màu được sử dụng khi tên người dùng không phải là tên đầu tiên được hiển thị. Nó chấp nhận mọi đầu vào CSS hợp lệ. Sử dụng 'Vai trò' để theo dõi màu vai trò chính của người dùng, màu hiệu ứng nitro hoặc màu IRCColors (nếu được bật). Sử dụng 'Vai trò+-#' để điều chỉnh độ sáng theo tỷ lệ phần trăm này (ví dụ: 'Vai trò+15')"
+                    description: "Màu sử dụng cho tên người dùng nếu nó không phải là màu được hiển thị đầu tiên. Chấp nhận mọi đầu vào CSS hợp lệ. Sử dụng 'Vai trò' để theo dõi các màu vai trò hàng đầu của người dùng, màu hiệu ứng Nitro hoặc màu IRCColors nếu được bật. Sử dụng 'Vai trò+-#' để điều chỉnh độ sáng theo tỷ lệ phần trăm đó (ví dụ: 'Vai trò+15')"
                 },
                 triggerNameRerender: {
-                    label: "Tái tạo tên kích hoạt",
-                    description: "Việc thay đổi cài đặt này sẽ kích hoạt tên được tạo lại."
+                    label: "Trình kết xuất tên kích hoạt",
+                    description: "Kích hoạt hiển thị lại tên bằng cách chuyển đổi cài đặt này."
                 }
             },
             modal: {
                 change: {
-                    title: "Thay đổi tên người dùng SMYN",
+                    title: "Thay đổi biệt danh SMYN"
                 },
                 add: {
                     title: "Thêm biệt hiệu SMYN"
                 },
-                setCustom: "Đặt biệt hiệu SMYN tùy chỉnh cho người dùng này. Sử dụng bằng cách chỉ định {custom} trong cài đặt mẫu SMYN.",
+                setCustom: "Đặt biệt hiệu SMYN tùy chỉnh cho người dùng này. Hãy tận dụng nó bằng cách chỉ định {custom} trong cài đặt mẫu SMYN.",
                 nickname: "Biệt danh SMYN",
-                reset: "Đặt lại biệt hiệu SMYN",
+                reset: "Đặt lại biệt danh SMYN",
                 cancel: "Hủy bỏ"
             }
         },
-        showResourceChannels: {
-            name: "Hiển thịTài nguyênKênh",
-            description: "Hiển thị các kênh ẩn đằng sau tài nguyên máy chủ trong danh sách kênh"
-        },
-        showSongName: {
-            name: "Hiển thịTên bài hát",
-            description: "Hiển thị tên bài hát thay vì nghệ sĩ cho sự kiện Spotify"
-        },
         showTimeoutDuration: {
-            name: "Hiển thịHết thời gian",
-            description: "Cho biết người dùng sẽ hết thời gian chờ trong chú giải công cụ biểu tượng thời gian chờ hoặc bên cạnh nó",
+            name: "ShowTimeoutDuration",
+            description: "Hiển thị thời gian chờ của người dùng sẽ kéo dài bao lâu, trong chú giải công cụ biểu tượng thời gian chờ hoặc bên cạnh nó",
             option: {
                 displayStyle: {
                     label: "Kiểu hiển thị",
-                    description: "Cách xem khoảng thời gian chờ",
+                    description: "Cách hiển thị thời gian chờ",
                     tooltip: "Trong chú giải công cụ",
                     inline: "Bên cạnh biểu tượng hết thời gian chờ"
                 }
             }
         },
+        showResourceChannels: {
+            name: "ShowResourceChannels",
+            description: "Hiển thị các kênh ẩn đằng sau tài nguyên máy chủ trong danh sách kênh"
+        },
+        showSongName: {
+            name: "ShowSongName",
+            description: "Hiển thị tên bài hát thay vì nghệ sĩ cho hoạt động Spotify"
+        },
         sidebarChat: {
-            name: "Thanh bênTrò chuyện",
-            description: "Mở kênh hoặc DM khác dưới dạng thanh bên hoặc cửa sổ bật lên",
+            name: "SidebarChat",
+            description: "Mở một kênh hoặc DM khác dưới dạng thanh bên hoặc dưới dạng cửa sổ bật lên",
             toolbox: {
                 label: "Mở cuộc trò chuyện trước đó"
             },
@@ -9337,43 +9337,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "Mở trò chuyện thanh bên"
             },
             modal: {
-                switch: "Thay đổi kênh",
-                popout: "Mở Trò chuyện dưới dạng Cửa sổ bật lên",
+                switch: "Chuyển kênh",
+                popout: "Trò chuyện bật ra",
                 close: "Đóng trò chuyện ở thanh bên"
             },
             option: {
                 persistSidebar: {
-                    label: "Đặt trò chuyện trên thanh bên vĩnh viễn",
-                    description: "Cho phép trò chuyện ở thanh bên vẫn mở khi Discord được khởi động lại"
+                    label: "Trò chuyện trên thanh bên liên tục",
+                    description: "Giữ cuộc trò chuyện ở thanh bên luôn mở khi Discord khởi động lại"
                 },
                 patchCommunity: {
-                    label: "Áp dụng bản vá cộng đồng",
-                    description: "Vá các mục trên máy chủ cộng đồng, chẳng hạn như Trình duyệt kênh hoặc tab Thành viên."
+                    label: "Cộng đồng vá lỗi",
+                    description: "Các tính năng vá lỗi như tab Trình duyệt kênh hoặc Thành viên mà máy chủ cộng đồng có."
                 }
             }
         },
         signature: {
-            name: "Chữ ký",
-            description: "Tự động ký/kết thúc nội dung tin nhắn",
+            name: "Signature",
+            description: "Tự động lấy dấu vân tay/kết thúc văn bản",
             option: {
                 name: {
-                    label: "Chữ ký",
-                    description: "Văn bản chữ ký sẽ được thêm vào cuối tin nhắn của bạn"
+                    label: "Tên",
+                    description: "Chữ ký sẽ được thêm vào cuối tin nhắn của bạn"
                 },
                 textHeader: {
                     label: "Tiêu đề văn bản",
-                    description: "Tiêu đề cần được thêm vào đầu văn bản"
+                    description: "Tiêu đề nào để mở đầu văn bản"
                 },
                 showIcon: {
                     label: "Hiển thị biểu tượng",
-                    description: "Hiển thị biểu tượng trên thanh trò chuyện để bật và tắt plugin"
+                    description: "Hiển thị biểu tượng để chuyển đổi plugin trong thanh trò chuyện"
                 },
                 contextMenu: {
                     label: "Trình đơn ngữ cảnh",
-                    description: "Thêm tùy chọn chuyển đổi chức năng trên menu ngữ cảnh đăng nhập trò chuyện"
+                    description: "Thêm tùy chọn chuyển đổi chức năng trong menu ngữ cảnh nhập trò chuyện"
                 },
                 isEnabled: {
-                    label: "Hiệu quả",
+                    label: "Đã bật",
                     description: "Chuyển đổi chức năng"
                 }
             },
@@ -9386,28 +9386,28 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             command: {
                 signature: {
-                    name: "Chữ ký",
-                    description: "Bật và tắt chữ ký của bạn",
-                    toogle: "Thay đổi chữ ký của bạn (hành vi mặc định: thay đổi)",
+                    name: "Signature",
+                    description: "Chuyển đổi chữ ký của bạn",
+                    toogle: "Chuyển đổi chữ ký của bạn (mặc định là chuyển đổi)",
                     enabled: "Đã bật chữ ký",
                     disabled: "Chữ ký bị vô hiệu hóa"
                 }
             }
         },
         silentMessageToggle: {
-            name: "SilentMessageChuyển đổi",
-            description: "Thêm một nút vào thanh trò chuyện để bật và tắt tính năng gửi tin nhắn im lặng.",
+            name: "SilentMessageToggle",
+            description: "Thêm một nút vào thanh trò chuyện để chuyển đổi việc gửi tin nhắn im lặng.",
             option: {
                 persistState: {
-                    label: "Đặt trạng thái vĩnh viễn",
-                    description: "Xác định cách duy trì trạng thái chuyển đổi tin nhắn im lặng",
-                    none: "Nó không phải là vĩnh viễn (cần được đặt lại khi kênh được thay đổi)",
-                    channels: "Làm cho nó liên tục trên các kênh",
-                    restarts: "Kiên trì trên các kênh và khởi động lại Discord"
+                    label: "Trạng thái kiên trì",
+                    description: "Cách duy trì trạng thái chuyển đổi tin nhắn im lặng",
+                    none: "Đừng tiếp tục (đặt lại khi thay đổi kênh)",
+                    channels: "Kiên trì giữa các kênh",
+                    restarts: "Kiên trì giữa các kênh và khởi động lại"
                 },
                 autoDisable: {
                     label: "Tự động tắt",
-                    description: "Tự động tắt tính năng lại sau khi gửi tin nhắn im lặng"
+                    description: "Tự động tắt tính năng chuyển đổi tin nhắn im lặng một lần nữa sau khi gửi một tin nhắn"
                 }
             },
             tooltip: {
@@ -9416,124 +9416,124 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         silentTyping: {
-            name: "Đánh máy im lặng",
+            name: "SilentTyping",
             description: "Ẩn chỉ báo gõ của bạn khỏi cuộc trò chuyện.",
             command: {
                 silentTyping: {
-                    name: "Đánh máy im lặng",
+                    name: "SilentTyping",
                     description: "Ẩn chỉ báo gõ của bạn khỏi cuộc trò chuyện.",
                     toggle: {
-                        name: "chuyển đổi",
-                        description: "Chuyển đổi chức năng trên toàn cầu, trên mỗi kênh hoặc trên mỗi máy chủ.",
+                        name: "toggle",
+                        description: "Chuyển đổi chức năng trên toàn cầu, cho kênh hoặc cho bang hội.",
                         global: "Toàn cầu",
                         channel: "Kênh",
-                        guild: "Người trình bày"
+                        guild: "bang hội"
                     },
                     chatBarIndicator: {
-                        name: "chatBarChỉ báo",
-                        description: "Ẩn chỉ báo đang gõ của người dùng khác ở đầu thanh trò chuyện."
+                        name: "chatBarIndicator",
+                        description: "Ẩn chỉ báo gõ của người dùng khác phía trên thanh trò chuyện."
                     },
                     membersListIndicator: {
-                        name: "thành viênListIndicator",
+                        name: "membersListIndicator",
                         description: "Ẩn chỉ báo gõ của người dùng khác khỏi danh sách thành viên."
                     },
                     chatIcon: {
-                        name: "biểu tượng trò chuyện",
-                        description: "Hiển thị biểu tượng trên thanh trò chuyện để bật và tắt plugin nhanh chóng."
+                        name: "chatIcon",
+                        description: "Hiển thị biểu tượng trong thanh trò chuyện để chuyển đổi plugin khi đang di chuyển."
                     },
                     chatContextMenu: {
-                        name: "trò chuyệnContextMenu",
-                        description: "Thêm menu thả xuống vào menu ngữ cảnh trò chuyện để thay đổi nhanh cài đặt plugin."
+                        name: "chatContextMenu",
+                        description: "Hiển thị danh sách thả xuống trong menu ngữ cảnh trò chuyện để chuyển đổi cài đặt plugin khi đang di chuyển."
                     },
                     defaultHidden: {
-                        name: "mặc địnhẨn",
-                        description: "Xác định xem thông tin ghi trong DM/kênh/máy chủ có bị ẩn theo mặc định hay không."
+                        name: "defaultHidden",
+                        description: "Có ẩn nội dung nhập trong DM/kênh/bang hội theo mặc định hay không."
                     }
                 }
             },
             content: {
-                updated: "Cài đặt gõ im lặng đã được cập nhật.",
-                noChanges: "Không có thay đổi nào được thực hiện đối với cài đặt gõ im lặng."
+                updated: "Đã cập nhật cài đặt gõ im lặng.",
+                noChanges: "Không có thay đổi nào được thực hiện đối với cài đặt nhập im lặng."
             },
             tooltip: {
-                hidden: "Nó báo Ẩn ({{location}})",
-                visible: "Viết có thể nhìn thấy ({{location}})",
-                global: "Viết có thể nhìn thấy (Toàn cầu)"
+                hidden: "Đang gõ ẩn ({{location}})",
+                visible: "Đang gõ hiển thị ({{location}})",
+                global: "Đang gõ có thể nhìn thấy (Toàn cầu)"
             },
             option: {
                 enabledGlobally: {
-                    label: "Hoạt động toàn cầu",
-                    description: "Bật/tắt chỉ báo viết của riêng bạn trên toàn cầu."
+                    label: "Đã bật trên toàn cầu",
+                    description: "Chuyển đổi chức năng của chỉ báo gõ của riêng bạn trên toàn cầu."
                 },
                 hideChatBoxTypingIndicators: {
-                    label: "Ẩn chỉ báo viết trong hộp trò chuyện",
-                    description: "Ẩn chỉ báo đang gõ ở đầu hộp trò chuyện của người dùng khác."
+                    label: "Ẩn chỉ báo gõ hộp trò chuyện",
+                    description: "Ẩn chỉ báo gõ của người dùng khác phía trên thanh trò chuyện."
                 },
                 hideMembersListTypingIndicators: {
-                    label: "Ẩn chỉ báo viết danh sách thành viên",
-                    description: "Ẩn chỉ báo gõ trong danh sách thành viên của người dùng khác."
+                    label: "Ẩn chỉ báo gõ danh sách thành viên",
+                    description: "Ẩn chỉ báo gõ của người dùng khác khỏi danh sách thành viên."
                 },
                 chatIcon: {
                     label: "Biểu tượng trò chuyện",
-                    description: "Hiển thị biểu tượng trên thanh trò chuyện để nhanh chóng chuyển đổi plugin."
+                    description: "Hiển thị biểu tượng trong thanh trò chuyện để sửa đổi plugin khi đang di chuyển."
                 },
                 chatIconLeftClickAction: {
                     label: "Biểu tượng trò chuyện Hành động nhấp chuột trái",
-                    description: "Xác định những việc cần làm khi nhấn chuột trái vào biểu tượng trò chuyện.",
-                    global: "Thay đổi trạng thái viết chung",
-                    channel: "Thay đổi trạng thái ghi cho kênh",
-                    guild: "Thay đổi trạng thái ghi vào máy chủ",
+                    description: "Phải làm gì khi nhấp chuột trái vào biểu tượng trò chuyện.",
+                    global: "Chuyển đổi cách gõ trên toàn cầu",
+                    channel: "Chuyển đổi cách nhập cho kênh",
+                    guild: "Chuyển đổi cách gõ cho Bang hội",
                     settings: "Mở cài đặt plugin"
                 },
                 chatIconMiddleClickAction: {
                     label: "Biểu tượng trò chuyện Hành động nhấp chuột giữa",
-                    description: "Xác định những việc cần làm khi nhấp chuột giữa vào biểu tượng trò chuyện.",
-                    global: "Thay đổi trạng thái viết chung",
-                    channel: "Thay đổi trạng thái ghi cho kênh",
-                    guild: "Thay đổi trạng thái ghi vào máy chủ",
+                    description: "Phải làm gì khi nhấp chuột giữa vào biểu tượng trò chuyện.",
+                    global: "Chuyển đổi cách gõ trên toàn cầu",
+                    channel: "Chuyển đổi cách nhập cho kênh",
+                    guild: "Chuyển đổi cách gõ cho Bang hội",
                     settings: "Mở cài đặt plugin"
                 },
                 chatIconRightClickAction: {
                     label: "Biểu tượng trò chuyện Hành động nhấp chuột phải",
-                    description: "Xác định những việc cần làm khi nhấp chuột phải vào biểu tượng trò chuyện.",
-                    global: "Thay đổi trạng thái viết chung",
-                    channel: "Thay đổi trạng thái ghi cho kênh",
-                    guild: "Thay đổi trạng thái ghi vào máy chủ",
+                    description: "Phải làm gì khi nhấp chuột phải vào biểu tượng trò chuyện.",
+                    global: "Chuyển đổi cách gõ trên toàn cầu",
+                    channel: "Chuyển đổi cách nhập cho kênh",
+                    guild: "Chuyển đổi cách gõ cho Bang hội",
                     settings: "Mở cài đặt plugin"
                 },
                 chatContextMenu: {
                     label: "Menu ngữ cảnh trò chuyện",
-                    description: "Thêm menu thả xuống vào menu ngữ cảnh trò chuyện để thay đổi nhanh cài đặt plugin."
+                    description: "Hiển thị danh sách thả xuống trong menu ngữ cảnh trò chuyện để sửa đổi cài đặt plugin khi đang di chuyển."
                 },
                 defaultHidden: {
                     label: "Mặc định Ẩn",
-                    description: "Nếu được bật, chỉ báo của bạn sẽ bị ẩn khỏi những người dùng khác trên tất cả DM/kênh/máy chủ không được liệt kê trong danh sách 'Vị trí bị vô hiệu hóa' bên dưới. Nếu tính năng này bị tắt, chỉ báo của bạn sẽ xuất hiện ở những nơi không có trong danh sách 'Vị trí Hoạt động'."
+                    description: "If enabled, the plugin will hide your typing from others in any DMs/channels/guilds not listed in 'Disabled Locations' below. Nếu bị tắt, plugin sẽ hiển thị nội dung bạn nhập cho người khác đối với bất kỳ DM/kênh/bang hội nào không được liệt kê trong 'Vị trí đã bật' bên dưới."
                 },
                 enabledLocations: {
-                    label: "Địa điểm đang hoạt động",
-                    description: "Kích hoạt chức năng cho các ID này. Nó chấp nhận ID DM, ID kênh và ID máy chủ được phân tách bằng dấu phẩy. Chỉ được sử dụng nếu 'Riêng tư mặc định' bị tắt."
+                    label: "Vị trí đã bật",
+                    description: "Kích hoạt chức năng cho các ID này. Chấp nhận danh sách ID DM, ID kênh và ID bang hội được phân tách bằng dấu phẩy. Chỉ được sử dụng nếu 'Ẩn mặc định' bị tắt."
                 },
                 disabledLocations: {
                     label: "Vị trí bị vô hiệu hóa",
-                    description: "Vô hiệu hóa chức năng cho các ID này. Nó chấp nhận ID DM, ID kênh và ID máy chủ được phân tách bằng dấu phẩy. Chỉ được sử dụng nếu 'Riêng tư mặc định' được bật."
+                    description: "Tắt chức năng cho các ID này. Chấp nhận danh sách ID DM, ID kênh và ID bang hội được phân tách bằng dấu phẩy. Chỉ được sử dụng nếu 'Ẩn mặc định' được bật."
                 }
             }
         },
         snowfall: {
-            name: "Tuyết rơi",
+            name: "Snowfall",
             description: "Hãy để tuyết rơi trên Discord!",
             about: {
                 title: "Thông tin",
-                paragraph: "Plugin này thêm hiệu ứng tuyết rơi theo chủ đề Giáng sinh trên giao diện Discord. Bạn có thể thay đổi loại tuyết từ các cài đặt bên dưới.",
-                note: "LƯU Ý: Mặc dù plugin này không tạo ra bất kỳ tác động hiệu suất nào hơn so với plug-in Plexcord trung bình trên hầu hết các máy tính, nhưng nó có thể gây ra một số độ trễ trên các hệ thống cấp thấp."
+                paragraph: "Plugin này thêm hiệu ứng tuyết rơi Giáng sinh trên giao diện của Discord. Bạn có thể thay đổi loại tuyết trong cài đặt bên dưới.",
+                note: "LƯU Ý: Mặc dù trên hầu hết các máy tính, plugin này sẽ không ảnh hưởng đến hiệu suất nhiều hơn tiện ích mở rộng Plexcord thông thường của bạn, nhưng nó có thể gây ra một số độ trễ trên các hệ thống cấp thấp hơn."
             },
             option: {
                 typeOfSnow: {
-                    label: "loại xe",
+                    label: "Loại tuyết",
                     description: "Thay đổi loại tuyết hiển thị (ảnh hưởng đến hiệu suất).",
-                    solid: "Màu đồng nhất (Hiệu suất cao nhất)",
-                    text: "Metin (Hiệu suất trung bình)",
-                    emoji: "Trực quan (Hiệu suất kém nhất)"
+                    solid: "Rắn (Hiệu suất cao nhất)",
+                    text: "Văn bản (Hiệu suất trung bình)",
+                    emoji: "Hình ảnh (Hiệu suất thấp nhất)"
                 },
                 maxSize: {
                     label: "Kích thước tối đa",
@@ -9541,43 +9541,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 speed: {
                     label: "Tốc độ",
-                    description: "Tỷ lệ tuyết rơi (cao hơn = rơi nhanh hơn)"
+                    description: "Tốc độ tuyết rơi (cao hơn = rơi nhanh hơn)"
                 },
                 flakesPerSecond: {
-                    label: "Bông tuyết mỗi giây",
-                    description: "Lượng bông tuyết rơi mỗi giây (cao hơn = lượng mưa lớn hơn)"
+                    label: "Mảnh mỗi giây",
+                    description: "Bông tuyết mỗi giây (cao hơn = tuyết rơi dày đặc hơn)"
                 }
             }
         },
         sortFriendRequests: {
-            name: "Sắp xếp yêu cầu kết bạn",
-            description: "Sắp xếp lời mời kết bạn theo ngày nhận được",
+            name: "SortFriendRequests",
+            description: "Sắp xếp lời mời kết bạn theo ngày nhận",
             tooltip: "Đã thêm — {{date}}",
             option: {
                 showDates: {
                     label: "Hiển thị ngày",
-                    description: "Hiển thị ngày trong yêu cầu kết bạn"
+                    description: "Hiển thị ngày trên yêu cầu kết bạn"
                 }
             }
         },
         soundBoardLogger: {
             name: "SoundBoardLogger",
-            description: "Ghi lại tất cả âm thanh soundboard được phát trong cuộc trò chuyện thoại và cho phép bạn tải chúng xuống",
+            description: "Ghi lại tất cả các soundboard được phát trong cuộc trò chuyện thoại và cho phép bạn tải chúng xuống",
             tooltip: "Mở nhật ký SoundBoard",
             option: {
                 savedIds: {
                     label: "ID bảng âm thanh đã lưu",
-                    description: "Số lượng ID soundboard bạn muốn lưu tại một thời điểm (0 cho phép bạn lưu không giới hạn)",
+                    description: "Số lượng ID soundboard bạn muốn lưu tại một thời điểm (0 cho phép bạn lưu vô hạn)",
                     notNumber: "Giá trị không phải là một con số.",
                     cantDecimal: "Giá trị không thể là số thập phân.",
                     cantNegative: "Giá trị không thể là số âm.",
-                    heading: "Số lượng ID soundboard bạn muốn lưu tại một thời điểm (0 cho phép bạn lưu không giới hạn)",
+                    heading: "Số lượng ID soundboard bạn muốn lưu tại một thời điểm (0 cho phép bạn lưu vô hạn)",
                     warning: "Cảnh báo! Đặt số thành giá trị thấp hơn sẽ đặt lại nhật ký!",
                     placeholder: "Nhập một số"
                 },
                 fileType: {
                     label: "Loại tệp",
-                    description: "Định dạng bạn muốn lưu tệp của mình vào"
+                    description: "Định dạng mà bạn muốn lưu tệp của mình"
                 },
                 openLogs: {
                     label: "Nhật ký mở",
@@ -9585,74 +9585,74 @@ const translations: MatchStructure<typeof enTranslations> = {
                     button: "Nhật ký mở"
                 },
                 soundVolume: {
-                    label: "Mức âm thanh",
-                    description: "Âm lượng bật/tắt âm thanh (0 tắt)"
+                    label: "Âm lượng",
+                    description: "Âm thanh chuyển đổi lớn đến mức nào (0 để tắt)"
                 },
                 iconLocation: {
                     label: "Vị trí biểu tượng",
-                    description: "Chọn nơi xuất hiện biểu tượng Nhật ký SoundBoard (yêu cầu khởi động lại)",
+                    description: "Chọn nơi hiển thị biểu tượng Nhật ký SoundBoard (yêu cầu khởi động lại)",
                     toolbar: "Thanh công cụ",
-                    chatInput: "Trò chuyện Đăng nhập"
+                    chatInput: "Đầu vào trò chuyện"
                 }
             },
             modal: {
                 title: "Nhật ký SoundBoard",
                 loading: "Đang tải âm thanh...",
-                noLogs: "Chưa có âm thanh nào được ghi lại. Tham gia trò chuyện thoại để đăng nhập!",
+                noLogs: "Chưa có âm thanh nào được ghi lại. Tham gia trò chuyện thoại để bắt đầu đăng nhập!",
                 clearLogs: "Xóa nhật ký",
-                played: "Đã chơi {{time}} lần",
+                played: "Đã chơi {{time}} lần{{s}}",
                 last: "Chơi lần cuối:",
-                also: "Anh ta cũng đã ăn trộm:",
+                also: "Cũng đã chơi:",
                 download: "Tải xuống",
                 copyId: "Sao chép giấy tờ tùy thân",
                 copied: "Đã sao chép ID vào clipboard!",
                 playSound: "Phát âm thanh",
-                moreUsers: "Những người khác cũng sử dụng âm thanh này...",
+                moreUsers: "Những người khác đã sử dụng âm thanh này...",
                 volume: "Âm lượng của soundboard"
             }
         },
         splitLargeMessages: {
-            name: "Chia tin nhắn lớn",
-            description: "Chia tin nhắn lớn thành nhiều tin nhắn để phù hợp với giới hạn tin nhắn của Discord.",
+            name: "SplitLargeMessages",
+            description: "Chia các tin nhắn lớn thành nhiều phần để phù hợp với giới hạn tin nhắn của Discord.",
             option: {
                 maxLength: {
                     label: "Độ dài tin nhắn tối đa",
-                    description: "Độ dài tối đa mà một tin nhắn có thể có trước khi được chia nhỏ. Đặt thành 0 để tự động phát hiện."
+                    description: "Độ dài tối đa của tin nhắn trước khi được chia nhỏ. Đặt thành 0 để tự động phát hiện."
                 },
                 disableFileConversion: {
                     label: "Tắt chuyển đổi tệp",
-                    description: "Nếu được bật, sẽ tắt chuyển đổi tệp cho các tin nhắn lớn."
+                    description: "Nếu đúng, hãy tắt tính năng chuyển đổi tệp đối với các thư lớn."
                 },
                 sendDelay: {
-                    label: "Trì hoãn vận chuyển",
-                    description: "Thời gian chờ tính bằng giây giữa mỗi bản nhạc."
+                    label: "Gửi trễ",
+                    description: "Độ trễ giữa mỗi đoạn tính bằng giây."
                 },
                 hardSplit: {
-                    label: "Phân vùng rắn",
-                    description: "Nếu được bật, nó sẽ tách khỏi ký tự cuối cùng thay vì dấu cách/dòng mới."
+                    label: "Chia cứng",
+                    description: "Nếu đúng, phân tách ở ký tự cuối cùng thay vì dấu cách/dòng mới cuối cùng."
                 },
                 splitInSlowmode: {
                     label: "Chia ở chế độ chậm",
-                    description: "Chia nhỏ tin nhắn nếu bật chế độ chậm trên kênh?"
+                    description: "Có nên chia nhỏ tin nhắn nếu kênh đã bật chế độ chậm không?"
                 },
                 slowmodeMax: {
                     label: "Chế độ chậm tối đa",
-                    description: "Thời gian chế độ chậm tối đa cho phép khi chia ở chế độ chậm."
+                    description: "Thời gian làm chậm tối đa nếu tách ở chế độ chậm."
                 }
             }
         },
         spotifyActivityToggle: {
-            name: "SpotifyHoạt độngChuyển đổi",
+            name: "SpotifyActivityToggle",
             description: "Thêm nút chuyển đổi để hiển thị hoạt động Spotify.",
             tooltip: {
-                enable: "Mở hoạt động Spotify",
+                enable: "Bật hoạt động Spotify",
                 disable: "Tắt hoạt động Spotify"
             },
             option: {
                 location: {
-                    label: "Phụ nữ",
-                    description: "Nơi hiển thị nút bật/tắt Spotify",
-                    panel: "Bên cạnh Tắt tiếng/Tắt tiếng",
+                    label: "Vị trí",
+                    description: "Nơi hiển thị nút chuyển đổi Spotify",
+                    panel: "Bên cạnh Tắt tiếng/Điếc",
                     toolbox: "Hộp công cụ Plexcord"
                 },
                 activityStatus: {
@@ -9662,46 +9662,46 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         spotifyCrack: {
-            name: "Spotify Crack",
-            description: "Cho phép cùng nghe miễn phí, chặn tự động tạm dừng trong trò chuyện thoại và tiếp tục phát hoạt động Spotify khi không hoạt động",
+            name: "SpotifyCrack",
+            description: "Nghe miễn phí, không tự động tạm dừng trong trò chuyện thoại và cho phép hoạt động tiếp tục phát khi không hoạt động",
             option: {
                 noSpotifyAutoPause: {
-                    label: "Tắt Tự động tạm dừng Spotify",
+                    label: "Không có tính năng Tự động tạm dừng Spotify",
                     description: "Tắt tính năng tự động tạm dừng của Spotify."
                 },
                 keepSpotifyActivityOnIdle: {
-                    label: "Tiếp tục hoạt động Spotify khi không hoạt động",
-                    description: "Cho phép hoạt động Spotify tiếp tục phát khi không hoạt động"
+                    label: "Giữ hoạt động Spotify ở chế độ rảnh",
+                    description: "Tiếp tục phát hoạt động Spotify khi không hoạt động"
                 }
             }
         },
         spotifyShareCommands: {
-            name: "Lệnh chia sẻ Spotify",
-            description: "Chia sẻ bài hát, album hoặc nghệ sĩ Spotify hiện tại của bạn bằng lệnh gạch chéo (/track, /album, /artist)",
+            name: "SpotifyShareCommands",
+            description: "Chia sẻ bản nhạc, album hoặc nghệ sĩ Spotify hiện tại của bạn thông qua lệnh gạch chéo (/track, /album, /artist)",
             command: {
                 makeCommand: {
                     description: "Chia sẻ Spotify {{type}} hiện tại của bạn trong cuộc trò chuyện",
-                    track: "Bạn hiện không nghe bất kỳ bài hát nào trên Spotify.",
-                    find: "Không thể tìm thấy bài hát trên Spotify."
+                    track: "Bạn hiện không nghe bất kỳ bản nhạc nào trên Spotify.",
+                    find: "Không tìm thấy bản nhạc trên Spotify."
                 }
             }
         },
         startupTimings: {
-            name: "Thời gian khởi động",
-            description: "Thêm Thời gian bắt đầu vào menu Cài đặt",
+            name: "StartupTimings",
+            description: "Thêm Thời gian khởi động vào menu Cài đặt",
             modal: {
-                title: "Thời gian bắt đầu",
-                ended: "Thời gian kết thúc xem:",
+                title: "Thời gian khởi động",
+                ended: "Dấu vết kết thúc lúc:",
                 start: "Bắt đầu",
-                interval: "Tháng 12",
+                interval: "Khoảng thời gian",
                 delta: "Đồng bằng",
-                event: "Olay",
-                serverTrace: "Giám sát máy chủ",
+                event: "Sự kiện",
+                serverTrace: "Theo dõi máy chủ",
                 loading: "Đang tải..."
             }
         },
         statusNotifications: {
-            name: "Thông báo trạng thái",
+            name: "StatusNotifications",
             description: "Thêm thông báo thay đổi trạng thái",
             loading: "Đang tải...",
             option: {
@@ -9711,8 +9711,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 usersList: {
                     label: "Danh sách người dùng",
-                    description: "Người dùng sẽ được thông báo khi thay đổi trạng thái xảy ra",
-                    empty: "Không có người dùng nào được theo dõi. Bạn có thể thêm người dùng bằng cách nhấp chuột phải vào họ và sử dụng tùy chọn 'Thông báo trạng thái'."
+                    description: "Danh sách người dùng cần thông báo về việc thay đổi trạng thái",
+                    empty: "Không có người dùng nào được theo dõi. Nhấp chuột phải vào người dùng và chọn 'Thông báo trạng thái' để thêm họ."
                 }
             },
             context: {
@@ -9720,80 +9720,80 @@ const translations: MatchStructure<typeof enTranslations> = {
                 notifications: "Thông báo",
                 type: {
                     all: "Tất cả",
-                    online: "trực tuyến",
-                    offline: "ngoại tuyến",
+                    online: "Trực tuyến",
+                    offline: "Ngoại tuyến",
                     none: "Không có"
                 }
             },
             notification: {
                 unknownUser: "người dùng",
-                title: "Thông báo trạng thái",
+                title: "Thông báo trạng thái"
             },
             status: {
-                online: "trực tuyến",
-                idle: "nhàn rỗi",
+                online: "Trực tuyến",
+                idle: "Nhàn rỗi",
                 dnd: "Đừng làm phiền",
-                offline: "ngoại tuyến",
+                offline: "Ngoại tuyến",
             },
         },
         statusPresets: {
-            name: "Trạng thái cài sẵn",
-            description: "Cho phép bạn lưu trạng thái của mình và điều chỉnh chúng sau",
+            name: "StatusPresets",
+            description: "Cho phép bạn ghi nhớ trạng thái của mình và đặt chúng sau",
             button: {
-                remember: "Ghi nhớ trạng thái",
+                remember: "Ghi nhớ trạng thái"
             },
             context: {
                 edit: "Chỉnh sửa cài đặt trước tùy chỉnh",
-                set: "Đặt ngoại lệ"
+                set: "Đặt trạng thái tùy chỉnh"
             },
             notification: {
-                successfully: "Đã lưu trạng thái thành công"
+                successfully: "Trạng thái đã lưu thành công"
             }
         },
         steamStatusSync: {
-            name: "Đồng bộ hóa trạng thái Steam",
-            description: "Đồng bộ trạng thái của bạn với Steam! (Trực tuyến, Đi, Vô hình hoặc Ngoại tuyến.)",
+            name: "SteamStatusSync",
+            description: "Đồng bộ trạng thái của bạn với Steam! (Trực tuyến, Đi, Ẩn hoặc Ngoại tuyến.)",
             option: {
                 onlineStatus: {
                     label: "Trạng thái trực tuyến",
-                    description: "Trạng thái Steam khi Discord Online"
+                    description: "Trạng thái Steam khi trực tuyến"
                 },
                 idleStatus: {
                     label: "Trạng thái nhàn rỗi",
-                    description: "Trạng thái Steam khi Discord ở chế độ chờ"
+                    description: "Trạng thái hơi nước khi không hoạt động"
                 },
                 dndStatus: {
                     label: "Trạng thái không làm phiền",
-                    description: "Trạng thái Steam trong khi Discord Không làm phiền"
+                    description: "Trạng thái Steam khi ở chế độ Không làm phiền"
                 },
                 invisibleStatus: {
                     label: "Trạng thái vô hình",
-                    description: "Trạng thái Steam khi Discord Invisible"
+                    description: "Trạng thái Steam khi ở chế độ Vô hình"
                 },
                 goInvisibleIfActivityIsHidden: {
-                    label: "Trở nên vô hình nếu sự kiện là riêng tư",
+                    label: "Trở nên ẩn nếu hoạt động bị ẩn",
                     description: "Đặt trạng thái Steam thành Ẩn khi hoạt động Discord bị ẩn"
                 }
             },
             status: {
-                online: "trực tuyến",
+                online: "Trực tuyến",
                 away: "Xa",
                 invisible: "Vô hình",
-                offline: "Ngoại tuyến (Ngắt kết nối khỏi trò chuyện Steam)",
+                offline: "Ngoại tuyến (Ngắt kết nối trò chuyện Steam)",
                 disabled: "Tàn tật"
             }
         },
         stickerBlocker: {
-            name: "Nhãn dánChặn",
-            description: "Cho phép bạn ngăn chặn việc hiển thị nhãn dán.",
+            name: "StickerBlocker",
+            description: "Cho phép bạn chặn hiển thị nhãn dán.",
             option: {
                 showGif: {
                     label: "Hiển thị ảnh GIF",
-                    description: "Có hiển thị ảnh GIF mèo thú vị hay không."
+                    description: "Có hiển thị ảnh GIF mèo hấp dẫn hay không."
                 },
                 showMessage: {
                     label: "Hiển thị tin nhắn",
-                    description: "Có hiển thị thông báo cho biết ID nào bị chặn hay không"
+                    description: "Có hiển thị thông báo nêu chi tiết ID nào đã bị chặn hay không"
                 },
                 showButton: {
                     label: "Nút hiển thị",
@@ -9814,16 +9814,16 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         stickerPaste: {
-            name: "Nhãn dánDán",
-            description: "Khi bạn chọn một nhãn dán trong bộ chọn nhãn dán, nó sẽ thêm nhãn dán đó vào hộp trò chuyện thay vì gửi ngay lập tức"
+            name: "StickerPaste",
+            description: "Làm cho việc chọn nhãn dán trong bộ chọn nhãn dán chèn nhãn dán đó vào hộp trò chuyện thay vì gửi ngay lập tức"
         },
         streamerModeOnStream: {
             name: "StreamerModeOnStream",
-            description: "Tự động bật chế độ truyền phát khi bạn bắt đầu phát trên Discord"
+            description: "Tự động bật Chế độ phát trực tuyến khi bạn bắt đầu phát trực tuyến trong Discord"
         },
         streamingCodecDisabler: {
             name: "StreamingCodecDisabler",
-            description: "Vô hiệu hóa codec phát trực tuyến mong muốn của bạn",
+            description: "Vô hiệu hóa codec để phát trực tuyến theo lựa chọn của bạn",
             option: {
                 disableAv1Codec: {
                     label: "Tắt Codec AV1",
@@ -9840,38 +9840,38 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         superReactionTweaks: {
-            name: "SuperReactionTinh chỉnh",
-            description: "Tùy chỉnh giới hạn Siêu phản ứng được phát đồng thời và sử dụng siêu phản ứng theo mặc định",
+            name: "SuperReactionTweaks",
+            description: "Tùy chỉnh giới hạn Super Reactions phát cùng lúc và Super React theo mặc định",
             option: {
                 superReactByDefault: {
                     label: "Siêu phản ứng theo mặc định",
-                    description: "Bộ chọn phản ứng sử dụng Siêu phản ứng theo mặc định"
+                    description: "Bộ chọn phản ứng sẽ mặc định là Siêu phản ứng"
                 },
                 unlimitedSuperReactionPlaying: {
-                    label: "Lượt chơi siêu phản ứng không giới hạn",
-                    description: "Loại bỏ giới hạn Super Reaction khi phát lại đồng thời"
+                    label: "Chơi siêu phản ứng không giới hạn",
+                    description: "Loại bỏ giới hạn chơi Super Reactions cùng một lúc"
                 },
                 superReactionPlayingLimit: {
-                    label: "Giới hạn phát lại siêu phản ứng",
-                    description: "Số lượng Siêu phản ứng tối đa để chơi cùng lúc. 0 vô hiệu hóa Super Reactions khi phát"
+                    label: "Giới hạn chơi siêu phản ứng",
+                    description: "Max Super Reactions để chơi cùng một lúc. Đặt thành 0 để tắt phát Super Reactions"
                 }
             }
         },
         textReplace: {
-            name: "Thay thế văn bản",
-            description: "Thay đổi văn bản trong tin nhắn của bạn. Bạn có thể tìm thấy các quy tắc được tạo sẵn trong kênh #textreplace-rules trên máy chủ Plexcord",
+            name: "TextReplace",
+            description: "Thay thế văn bản trong tin nhắn của bạn. Bạn có thể tìm thấy các quy tắc được tạo sẵn trong kênh #textreplace-rules trong Máy chủ của Plexcord",
             option: {
                 replace: {
-                    label: "Thay đổi",
-                    string: "Sử dụng văn bản thuần túy",
+                    label: "Thay thế",
+                    string: "Sử dụng chuỗi",
                     regex: "Sử dụng Regex",
-                    myMessages: "Áp dụng cho tin nhắn của riêng bạn (hiển thị cho mọi người)",
+                    myMessages: "Áp dụng cho tin nhắn của bạn (hiển thị cho mọi người)",
                     othersMessages: "Áp dụng cho tin nhắn của người khác (chỉ hiển thị với bạn)",
                     allMessages: "Áp dụng cho tất cả tin nhắn"
                 },
                 stringRules: {
-                    label: "Quy tắc văn bản thuần túy",
-                    description: "Quy tắc thay thế văn bản bằng cách sử dụng kết hợp văn bản gốc."
+                    label: "Quy tắc chuỗi",
+                    description: "Quy tắc thay thế văn bản bằng cách sử dụng kết hợp chuỗi."
                 },
                 regexRules: {
                     label: "Quy tắc Regex",
@@ -9879,23 +9879,23 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             modal: {
-                title: "Kiểm tra các quy tắc",
-                find: "Bul",
-                replace: "Thay đổi",
-                includes: "Chỉ khi nó chứa",
-                type: "Viết tin nhắn",
+                title: "Quy tắc kiểm tra",
+                find: "Tìm thấy",
+                replace: "Thay thế",
+                includes: "Chỉ khi bao gồm",
+                type: "Nhập tin nhắn",
                 applied: "Tin nhắn có áp dụng quy tắc"
             }
         },
         themeAttributes: {
-            name: "Chủ đềThuộc tính",
+            name: "ThemeAttributes",
             description: "Thêm thuộc tính dữ liệu vào các thành phần khác nhau cho mục đích tạo chủ đề"
         },
         timezones: {
-            name: "Múi giờ",
-            description: "Hiển thị giờ địa phương của người dùng trong hồ sơ và chuỗi tin nhắn",
+            name: "Timezones",
+            description: "Hiển thị giờ địa phương của người dùng trong hồ sơ và tiêu đề thư",
             button: {
-                wantToSave: "Bạn có muốn lưu múi giờ của mình vào cơ sở dữ liệu không? Nhấn vào đây để thiết lập.",
+                wantToSave: "Bạn muốn lưu múi giờ của mình vào cơ sở dữ liệu? Nhấn vào đây để thiết lập nó.",
                 yourLocalTimezone: "(Múi giờ địa phương của bạn)"
             },
             context: {
@@ -9903,17 +9903,17 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             toast: {
                 refresh: {
-                    successfully: "Múi giờ đã được gia hạn thành công!",
-                    failed: "Múi giờ không thể được làm mới!",
-                    failedTo: "Múi giờ không thể được làm mới."
+                    successfully: "Đã làm mới múi giờ thành công!",
+                    failed: "Múi giờ không thể làm mới!",
+                    failedTo: "Không thể làm mới múi giờ."
                 },
                 update: {
                     successfully: "Múi giờ được cập nhật thành công!",
-                    failed: "Không thể đặt múi giờ."
+                    failed: "Không đặt được múi giờ."
                 },
                 delete: {
                     successfully: "Múi giờ đã được xóa thành công!",
-                    failed: "Không thể xóa múi giờ."
+                    failed: "Không xóa được múi giờ."
                 },
                 auth: {
                     failed: "Xác thực không thành công.",
@@ -9926,20 +9926,20 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 showOwnTimezone: {
-                    label: "Hiển thị múi giờ của bạn",
-                    description: "Hiển thị múi giờ của bạn trên hồ sơ và chuỗi tin nhắn của bạn"
+                    label: "Hiển thị múi giờ riêng",
+                    description: "Hiển thị múi giờ của riêng bạn trong hồ sơ và tiêu đề thư"
                 },
                 twentyFourHourTime: {
-                    label: "Định dạng 24 giờ",
+                    label: "Thời gian 24 giờ",
                     description: "Hiển thị thời gian ở định dạng 24 giờ"
                 },
                 showTimezoneInfo: {
                     label: "Hiển thị thông tin múi giờ",
-                    description: "Hiển thị thông tin múi giờ ngoài đồng hồ"
+                    description: "Hiển thị thông tin múi giờ bên cạnh thời gian"
                 },
                 showMessageHeaderTime: {
                     label: "Hiển thị thời gian tiêu đề tin nhắn",
-                    description: "Hiển thị thời gian trong chuỗi tin nhắn"
+                    description: "Hiển thị thời gian trong tiêu đề tin nhắn"
                 },
                 showProfileTime: {
                     label: "Hiển thị thời gian hồ sơ",
@@ -9947,11 +9947,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 useDatabase: {
                     label: "Sử dụng múi giờ cơ sở dữ liệu",
-                    description: "Sử dụng cơ sở dữ liệu để lấy múi giờ của người dùng"
+                    description: "Kích hoạt cơ sở dữ liệu để nhận múi giờ của người dùng"
                 },
                 preferDatabaseOverLocal: {
                     label: "Thích cơ sở dữ liệu hơn cục bộ",
-                    description: "Ưu tiên cơ sở dữ liệu hơn bộ nhớ cục bộ trên các múi giờ"
+                    description: "Ưu tiên cơ sở dữ liệu hơn bộ nhớ cục bộ cho các múi giờ"
                 },
                 databaseUrl: {
                     label: "URL cơ sở dữ liệu",
@@ -9959,17 +9959,17 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 setDatabaseTimezone: {
                     label: "Đặt múi giờ cơ sở dữ liệu",
-                    description: "Đặt múi giờ của bạn trong cơ sở dữ liệu",
-                    setTimezone: "Đặt múi giờ trong cơ sở dữ liệu"
+                    description: "Đặt múi giờ của bạn trên cơ sở dữ liệu",
+                    setTimezone: "Đặt múi giờ trên cơ sở dữ liệu"
                 },
                 resetDatabaseTimezone: {
                     label: "Đặt lại múi giờ cơ sở dữ liệu",
-                    description: "Đặt lại múi giờ của bạn trong cơ sở dữ liệu",
+                    description: "Đặt lại múi giờ của bạn trên cơ sở dữ liệu",
                     failed: "Không thể đặt lại múi giờ cơ sở dữ liệu"
                 },
                 askedTimezone: {
                     label: "Múi giờ được hỏi",
-                    description: "Cho biết liệu người dùng có được nhắc về múi giờ của họ hay không"
+                    description: "Người dùng có được yêu cầu đặt múi giờ của họ hay không"
                 }
             },
             modal: {
@@ -9981,62 +9981,62 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         toastNotifications: {
-            name: "Thông báo bánh mì nướng",
-            description: "Hiển thị thông báo chúc mừng khi bạn nhận được tin nhắn trực tiếp.",
+            name: "ToastNotifications",
+            description: "Hiển thị thông báo chúc mừng bất cứ khi nào bạn nhận được tin nhắn trực tiếp.",
             notification: {
-                call: "Bắt đầu tìm kiếm với bạn!",
+                call: "Đã bắt đầu cuộc gọi với bạn!",
                 recipient: {
                     add: "{{target}} đã được thêm vào nhóm bởi {{actor}}.",
-                    remove: "{{target}} đã bị xóa khỏi nhóm bởi {{actor}}.",
-                    left: "Anh ấy đã rời nhóm."
+                    remove: "{{target}} đã bị {{actor}} xóa khỏi nhóm.",
+                    left: "Đã rời nhóm."
                 },
                 channel: {
                     change: {
-                        name: "Tên kênh đã đổi thành {{name}}.",
-                        icon: "Biểu tượng kênh đã được thay đổi."
+                        name: "Changed the channel name to {{name}}.",
+                        icon: "Đã thay đổi biểu tượng kênh."
                     },
                     pinned: "Đã ghim một tin nhắn."
                 },
                 sent: {
-                    embed: "Anh ấy đã gửi một bản nhúng.",
-                    sticker: "Anh ấy đã gửi một nhãn dán.",
-                    attachment: "Tài liệu:"
+                    embed: "Đã gửi một phần nhúng.",
+                    sticker: "Đã gửi một nhãn dán.",
+                    attachment: "Tệp đính kèm:"
                 },
-                redacted: "Nội dung tin nhắn đã bị ẩn.",
+                redacted: "Nội dung tin nhắn đã được biên tập lại.",
                 friend: {
                     accept: "{{user}} hiện là bạn của bạn",
-                    acceptBody: "Bây giờ bạn có thể gửi tin nhắn trực tiếp cho anh ấy.",
+                    acceptBody: "Bây giờ bạn có thể nhắn tin trực tiếp cho họ.",
                     request: "{{user}} đã gửi cho bạn lời mời kết bạn.",
-                    requestBody: "Bạn có thể chấp nhận hoặc từ chối điều này từ tab Bạn bè."
+                    requestBody: "Bạn có thể chấp nhận hoặc từ chối nó trong tab Bạn bè."
                 },
                 example: {
                     title: "Thông báo mẫu",
-                    body: "Đây là một văn bản thông báo mẫu."
+                    body: "Đây là một nội dung thông báo mẫu."
                 }
             },
             modal: {
-                dismiss: "Đóng thông báo",
-                attachments: "Đã gửi {{đính kèm}} tệp."
+                dismiss: "Loại bỏ thông báo",
+                attachments: "{{attachments}} tệp đính kèm{{s}} {{were}} đã gửi."
             },
             option: {
                 position: {
-                    label: "Phụ nữ",
-                    description: "Vị trí thông báo Toast",
+                    label: "Chức vụ",
+                    description: "Vị trí của thông báo bánh mì nướng",
                     topRight: "Trên cùng bên phải",
                     topLeft: "Trên cùng bên trái",
                     bottomRight: "Dưới cùng bên phải",
-                    bottomLeft: "Sol Alt"
+                    bottomLeft: "Dưới cùng bên trái"
                 },
                 timeout: {
-                    label: "Giờ đóng cửa",
-                    description: "Bao nhiêu giây để hiển thị thông báo"
+                    label: "Hết giờ",
+                    description: "Thông báo thời gian tính bằng giây sẽ được hiển thị cho"
                 },
                 opacity: {
                     label: "Độ mờ",
-                    description: "Độ mờ của thông báo Toast"
+                    description: "Độ mờ của thông báo bánh mì nướng"
                 },
                 determineServerNotifications: {
-                    label: "Đặt thông báo máy chủ",
+                    label: "Xác định thông báo máy chủ",
                     description: "Xác định xem có hiển thị thông báo dựa trên cài đặt thông báo của máy chủ hay không"
                 },
                 directMessages: {
@@ -10048,82 +10048,82 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Hiển thị thông báo cho tin nhắn nhóm"
                 },
                 friendServerNotifications: {
-                    label: "Thông báo về bạn bè và máy chủ",
-                    description: "Hiển thị thông báo khi bạn bè gửi tin nhắn trên máy chủ công cộng"
+                    label: "Thông báo về Bạn bè & Máy chủ",
+                    description: "Hiển thị thông báo khi bạn bè gửi tin nhắn trong máy chủ họ chia sẻ với bạn"
                 },
                 friendActivity: {
-                    label: "Sự kiện kết bạn",
-                    description: "Hiển thị thông báo thêm bạn bè hoặc nhận yêu cầu kết bạn"
+                    label: "Hoạt động của bạn bè",
+                    description: "Hiển thị thông báo để thêm ai đó hoặc nhận yêu cầu kết bạn"
                 },
                 notifyFor: {
-                    label: "Các kênh nhận thông báo",
-                    description: "Nhập ID kênh để nhận thông báo (phân cách bằng dấu phẩy)"
+                    label: "Thông báo cho",
+                    description: "Tạo danh sách ID kênh để nhận thông báo (phân tách bằng dấu phẩy)"
                 },
                 ignoreUsers: {
-                    label: "Người dùng bỏ qua",
-                    description: "Nhập ID người dùng có thông báo sẽ bị bỏ qua (phân tách bằng dấu phẩy)"
+                    label: "Bỏ qua người dùng",
+                    description: "Tạo danh sách ID người dùng để bỏ qua tất cả các thông báo của họ (phân tách bằng dấu phẩy)"
                 },
                 exampleButton: {
-                    label: "Nút mẫu",
+                    label: "Nút ví dụ",
                     description: "Hiển thị một ví dụ về thông báo nâng ly chúc mừng.",
                     show: "Hiển thị thông báo mẫu"
                 }
             }
         },
         toggleVideoBind: {
-            name: "Chuyển đổiVideoRàng buộc",
-            description: "Thêm một phím nóng có thể tùy chỉnh để bật và tắt webcam của bạn.",
+            name: "ToggleVideoBind",
+            description: "Thêm liên kết có thể tùy chỉnh để chuyển đổi webcam.",
             option: {
                 keyBind: {
-                    label: "Phím nóng",
-                    description: "Nút sẽ bật và tắt webcam khi nhấn."
+                    label: "Liên kết phím",
+                    description: "Phím chuyển đổi webcam khi nhấn."
                 },
                 reqCtrl: {
-                    label: "Ctrl Gerekli",
-                    description: "Buộc nhấn phím Ctrl."
+                    label: "Yêu cầu Ctrl",
+                    description: "Yêu cầu phải giữ quyền Kiểm soát."
                 },
                 reqShift: {
-                    label: "Yêu cầu ca",
-                    description: "Buộc nhấn phím Shift."
+                    label: "Yêu cầu Ca",
+                    description: "Yêu cầu giữ phím Shift."
                 },
                 reqAlt: {
-                    label: "Yêu cầu phụ",
-                    description: "Buộc nhấn phím Alt."
+                    label: "Yêu cầu Alt",
+                    description: "Yêu cầu giữ Alt."
                 }
             }
         },
         translate: {
-            name: "Dịch",
+            name: "Translate",
             description: "Dịch tin nhắn bằng Google Translate hoặc DeepL",
             tooltip: {
-                label: "Chuyển thành"
+                label: "Dịch"
             },
             context: {
-                translate: "Chuyển thành",
-                open: "Mở cửa sổ dịch",
-                auto: "Đã bật dịch tự động"
+                translate: "Dịch",
+                open: "Mở phương thức dịch",
+                auto: "Đã bật tính năng dịch tự động"
             },
             option: {
                 receivedInput: {
                     label: "Đầu vào đã nhận",
-                    description: "Ngôn ngữ mà tin nhắn nhận được sẽ được dịch"
+                    description: "Ngôn ngữ nhận tin nhắn phải được dịch từ"
                 },
                 receivedOutput: {
                     label: "Đầu ra đã nhận",
-                    description: "Tin nhắn nhận được sẽ được dịch sang ngôn ngữ nào?"
+                    description: "Ngôn ngữ nhận được tin nhắn phải được dịch sang"
                 },
                 sentInput: {
-                    label: "Đầu vào đã gửi",
-                    description: "Ngôn ngữ mà tin nhắn của bạn sẽ được dịch sang"
+                    label: "Đã gửi đầu vào",
+                    description: "Ngôn ngữ mà tin nhắn của bạn nên được dịch từ đó"
                 },
                 sentOutput: {
                     label: "Đầu ra đã gửi",
-                    description: "Tin nhắn của bạn sẽ được dịch sang ngôn ngữ nào"
+                    description: "Ngôn ngữ mà tin nhắn của bạn nên được dịch sang"
                 },
                 service: {
                     label: "Dịch vụ dịch thuật",
-                    description: "DeepL Pro yêu cầu khóa API trả phí",
-                    descriptionWeb: "Dịch vụ dịch thuật (Không được hỗ trợ trên web!)",
+                    description: "DeepL yêu cầu khóa API trả phí từ DeepL Pro",
+                    descriptionWeb: "Dịch vụ dịch thuật (Không được hỗ trợ trên Web!)",
                     google: "Google Dịch",
                     deepl: "DeepL miễn phí",
                     deeplPro: "DeepL Pro"
@@ -10131,45 +10131,45 @@ const translations: MatchStructure<typeof enTranslations> = {
                 deeplApiKey: {
                     label: "Khóa API DeepL",
                     description: "Khóa API DeepL",
-                    placeholder: "Nhận khóa API của bạn tại https://deepl.com/your-account"
+                    placeholder: "Nhận khóa API của bạn từ https://deepl.com/your-account"
                 },
                 autoTranslate: {
-                    label: "Dịch tự động",
-                    description: "Nó tự động dịch tin nhắn của bạn trước khi gửi chúng. Bạn cũng có thể dịch chuyển hoặc nhấp chuột phải vào nút dịch để bật hoặc tắt tính năng này."
+                    label: "Tự động dịch",
+                    description: "Tự động dịch tin nhắn của bạn trước khi gửi. Bạn cũng có thể dịch chuyển/nhấp chuột phải vào nút dịch để chuyển đổi nút này"
                 },
                 showAutoTranslateTooltip: {
-                    label: "Hiển thị mô tả dịch tự động",
-                    description: "Hiển thị mô tả trong nút thanh trò chuyện khi tin nhắn được dịch tự động"
+                    label: "Hiển thị chú giải công cụ dịch tự động",
+                    description: "Hiển thị chú giải công cụ trên nút ChatBar bất cứ khi nào tin nhắn được dịch tự động"
                 }
             },
             modal: {
-                title: "Dịch thuật",
+                title: "Dịch",
                 select: "Chọn một ngôn ngữ",
-                auto: "Dịch tự động",
-                dismiss: "Một phần tư",
-                translated: "Đã dịch từ {{from}}",
+                auto: "Tự động dịch",
+                dismiss: "Miễn nhiệm",
+                translated: "được dịch từ {{from}}",
                 failed: {
-                    to: "Bản dịch {{văn bản}} không thành công",
-                    connect: "Kết nối API DeepL không thành công:"
+                    to: "Không dịch được {{text}}",
+                    connect: "Không thể kết nối với API DeepL:"
                 },
-                wrong: "Đã xảy ra lỗi. Nếu sự cố vẫn tiếp diễn, vui lòng kiểm tra bảng điều khiển hoặc yêu cầu trợ giúp từ máy chủ hỗ trợ.",
+                wrong: "Đã xảy ra lỗi. Nếu sự cố này vẫn tiếp diễn, vui lòng kiểm tra bảng điều khiển hoặc yêu cầu trợ giúp từ máy chủ hỗ trợ.",
                 deepl: {
-                    api: "Đã vượt quá hạn ngạch API DeepL. Đang chuyển sang Google Dịch.",
-                    apiKey: "Khóa API DeepL chưa được đặt. Trở lại Google.",
+                    api: "Đã vượt quá hạn ngạch API DeepL. Quay trở lại với Google Dịch.",
+                    apiKey: "Khóa API DeepL chưa được đặt. Đặt lại vào Google",
                     auth: "Phiên bản hoặc khóa API DeepL không hợp lệ"
                 },
                 autoTranslateEnabled: {
                     title: "Đã bật dịch tự động Plexcord",
-                    body: "Bạn vừa kích hoạt Dịch tự động! Tất cả tin nhắn bạn gửi sẽ được dịch tự động trước khi gửi.",
-                    confirm: "Tắt dịch tự động",
-                    cancel: "Tôi hiểu",
-                    secondaryConfirm: "Đừng hiển thị lại"
+                    body: "Bạn vừa bật Tự động dịch! Mọi tin nhắn sẽ tự động được dịch trước khi gửi đi.",
+                    confirm: "Tắt tính năng tự động dịch",
+                    cancel: "Hiểu rồi",
+                    secondaryConfirm: "Không hiển thị lại"
                 }
             }
         },
         typingIndicator: {
-            name: "Chỉ báo đánh máy",
-            description: "Thêm chỉ báo khi ai đó đang nhập kênh.",
+            name: "TypingIndicator",
+            description: "Thêm chỉ báo nếu ai đó đang gõ trên một kênh.",
             option: {
                 includeCurrentChannel: {
                     label: "Bao gồm kênh hiện tại",
@@ -10188,20 +10188,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Có hiển thị chỉ báo nhập cho người dùng bị chặn hay không."
                 },
                 indicatorMode: {
-                    label: "Chế độ hiển thị",
-                    description: "Làm thế nào để hiển thị chỉ báo?",
+                    label: "Chế độ chỉ báo",
+                    description: "Chỉ báo nên được hiển thị như thế nào?",
                     both: "Hình đại diện và dấu chấm hoạt hình",
-                    dots: "dấu chấm hoạt hình",
-                    avatars: "hình đại diện"
+                    dots: "chấm hoạt hình",
+                    avatars: "Hình đại diện"
                 }
             }
         },
         typingTweaks: {
-            name: "TypingTinh chỉnh",
-            description: "Hiển thị hình đại diện và màu vai trò trong chỉ báo nhập",
+            name: "TypingTweaks",
+            description: "Hiển thị hình đại diện và màu vai trò trong chỉ báo gõ",
             option: {
                 showAvatars: {
-                    label: "Hiển thị nhiều người dùng",
+                    label: "Hiển thị một số người dùng",
                     description: "Hiển thị hình đại diện trong chỉ báo gõ"
                 },
                 showRoleColors: {
@@ -10210,49 +10210,49 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 alternativeFormatting: {
                     label: "Định dạng thay thế",
-                    description: "Hiển thị tin nhắn hữu ích hơn khi có nhiều người cùng gõ"
+                    description: "Hiển thị thông báo hữu ích hơn khi có nhiều người dùng đang nhập"
                 },
                 amITyping: {
-                    label: "Tôi đang viết à?",
-                    description: "Cho biết người khác có thấy những gì bạn viết hay không"
+                    label: "Tôi đang gõ phím",
+                    description: "Hiển thị cho bạn biết liệu người khác có thể thấy bạn đang gõ hay không"
                 }
             },
             others: {
-                areTyping: "và {{count}} người nữa viết..."
+                areTyping: "và {{count}} những người khác đang gõ..."
             }
         },
         unindent: {
-            name: "Bỏ thụt lề",
-            description: "Loại bỏ thụt lề ở đầu khối mã"
+            name: "Unindent",
+            description: "Cắt bớt phần thụt đầu dòng từ codeblocks"
         },
         unitConverter: {
-            name: "Bộ chuyển đổi đơn vị",
-            description: "Chuyển đổi đơn vị Metric sang đơn vị Imperial và ngược lại",
+            name: "UnitConverter",
+            description: "Chuyển đổi đơn vị mét sang đơn vị Imperial và ngược lại",
             tooltip: "Chuyển đổi đơn vị",
             option: {
                 myUnits: {
                     label: "Đơn vị của tôi",
-                    description: "Đơn vị bạn sử dụng và muốn chuyển đổi sang. Mặc định: đế quốc",
-                    imperial: "Đế chế",
+                    description: "Đơn vị bạn sử dụng và muốn mọi thứ được chuyển đổi thành. Mặc định là Imperial",
+                    imperial: "hoàng gia",
                     metric: "Số liệu"
                 }
             },
             button: {
-                dismiss: "Một phần tư"
+                dismiss: "Miễn nhiệm"
             }
         },
         unlimitedAccounts: {
-            name: "Không giới hạnTài khoản",
+            name: "UnlimitedAccounts",
             description: "Tăng số lượng tài khoản bạn có thể thêm.",
             option: {
                 maxAccounts: {
                     label: "Tài khoản tối đa",
-                    description: "Số lượng tài khoản có thể thêm vào, nhập 0 là không giới hạn"
+                    description: "Số lượng tài khoản có thể được thêm hoặc 0 không giới hạn"
                 }
             }
         },
         unlockedAvatarZoom: {
-            name: "Đã mở khóaAvatarZoom",
+            name: "UnlockedAvatarZoom",
             description: "Cho phép bạn phóng to hơn nữa trong công cụ cắt ảnh khi thay đổi hình đại diện",
             option: {
                 zoomMultiplier: {
@@ -10262,204 +10262,204 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         unsuppressEmbeds: {
-            name: "Hủy bỏ nhúng",
-            description: "Cho phép bạn bỏ chặn nội dung được nhúng trong tin nhắn",
+            name: "UnsuppressEmbeds",
+            description: "Cho phép bạn hủy chặn các nội dung nhúng trong tin nhắn",
             context: {
-                unsuppress: "Loại bỏ tính năng ngăn chặn nhúng",
-                suppress: "In nhúng"
+                unsuppress: "Bỏ chặn nhúng",
+                suppress: "Ngăn chặn nhúng"
             }
         },
         uselessInfo: {
-            name: "Thông tin vô dụng",
-            description: "Hiển thị thông tin vô dụng ngẫu nhiên trong Discord; các phím tắt và cài đặt khoảng thời gian có thể được thực hiện.",
+            name: "UselessInfo",
+            description: "Hiển thị thông tin vô dụng ngẫu nhiên trong Discord; các phím tắt và khoảng cách có thể điều chỉnh được.",
             recording: "Đang ghi...",
-            record: "Cứu",
+            record: "Ghi",
             option: {
                 delay: {
                     label: "Khoảng thời gian thông báo",
-                    description: "Khoảng thời gian hiển thị thông báo (tính bằng phút)"
+                    description: "Khoảng thời gian hiển thị thông báo tính bằng phút"
                 },
                 historyHotkey: {
                     label: "Phím tắt bảng lịch sử",
-                    description: "Phím nóng để mở lịch sử thông tin được hiển thị trước đó"
+                    description: "Phím nóng để hiển thị lịch sử của các sự kiện được hiển thị trước đó"
                 },
                 randomFactHotkey: {
-                    label: "Phím tắt thông tin ngẫu nhiên",
+                    label: "Phím tắt thực tế ngẫu nhiên",
                     description: "Phím nóng để mở bảng thông tin ngẫu nhiên"
                 },
                 sameFact: {
-                    label: "Tránh lặp lại thông tin giống nhau",
-                    description: "Ngăn chặn việc hiển thị cùng một thông tin nhiều lần mà không hiển thị tất cả thông tin"
+                    label: "Tránh hiển thị các mục giống nhau",
+                    description: "Tránh hiển thị cùng một thông tin nhiều lần cho đến khi tất cả thông tin đã được hiển thị"
                 },
                 lastNFacts: {
-                    label: "Thông tin mới nhất không được lặp lại",
-                    description: "Số thông tin cuối cùng không được hiển thị lại (0 = tất cả các lần)"
+                    label: "Cần tránh bao nhiêu lần gần đây",
+                    description: "Số sự kiện được hiển thị gần đây nhất để tránh lặp lại (0 = mọi lúc)"
                 }
             },
             modal: {
                 title: "Thông tin vô dụng",
                 history: {
-                    none: "Chưa có thông tin. Sử dụng phím tắt hoặc chờ đợi.",
+                    none: "Chưa có sự thật nào. Sử dụng phím tắt hoặc chờ đợi.",
                     source: "Nguồn"
                 },
                 showRandom: "Hiển thị ngẫu nhiên",
-                close: "Một phần tư"
+                close: "Đóng"
             },
             notification: {
                 title: "Bạn có biết không?"
             }
         },
         userMessagesPronouns: {
-            name: "Thông điệp của người dùngĐại từ",
+            name: "UserMessagesPronouns",
             description: "Hiển thị đại từ người dùng trong tiêu đề thư",
             option: {
                 pronounsFormat: {
-                    label: "Mẫu đại từ",
-                    description: "Cách đại từ xuất hiện trong cuộc trò chuyện",
+                    label: "Định dạng đại từ",
+                    description: "Định dạng đại từ xuất hiện trong trò chuyện",
                     lowercase: "Chữ thường",
-                    capitalized: "chữ cái viết hoa đầu tiên"
+                    capitalized: "Viết hoa"
                 },
                 showSelf: {
-                    label: "Thể hiện bản thân",
-                    description: "Bật hoặc tắt hiển thị đại từ của riêng bạn"
+                    label: "thể hiện bản thân",
+                    description: "Bật hoặc tắt hiển thị đại từ cho chính bạn"
                 }
             }
         },
         userVoiceShow: {
-            name: "Người dùngVoiceHiển thị",
-            description: "Hiển thị chỉ báo khi người dùng đang sử dụng kênh thoại",
+            name: "UserVoiceShow",
+            description: "Hiển thị chỉ báo khi người dùng đang ở Kênh Thoại",
             option: {
                 showInUserProfileModal: {
-                    label: "Hiển thị trong hồ sơ người dùng",
-                    description: "Hiển thị chỉ báo kênh thoại bên cạnh tên trong hồ sơ người dùng"
+                    label: "Hiển thị trong phương thức hồ sơ người dùng",
+                    description: "Hiển thị chỉ báo Kênh Thoại của người dùng trong hồ sơ của họ bên cạnh tên"
                 },
                 showInMemberList: {
                     label: "Hiển thị trong danh sách thành viên",
-                    description: "Hiển thị chỉ báo kênh thoại trong danh sách thành viên và DM"
+                    description: "Hiển thị chỉ báo Kênh Thoại của người dùng trong danh sách thành viên và DM"
                 },
                 showInMessages: {
-                    label: "Hiển thị trong Tin nhắn",
-                    description: "Hiển thị chỉ báo kênh thoại trong tin nhắn"
+                    label: "Hiển thị trong tin nhắn",
+                    description: "Hiển thị chỉ báo Kênh Thoại của người dùng trong tin nhắn"
                 }
             },
             modal: {
                 inVoiceChat: "Trong trò chuyện thoại"
             },
             notification: {
-                cannotJoin: "Bạn không thể tham gia kênh thoại của người dùng."
+                cannotJoin: "Bạn không thể tham gia Kênh Thoại của người dùng."
             }
         },
         uSRBG: {
             name: "USRBG",
-            description: "Hiển thị biểu ngữ người dùng từ USRBG để bất kỳ ai cũng có thể sử dụng biểu ngữ mà không cần Nitro",
+            description: "Hiển thị biểu ngữ người dùng từ USRBG, cho phép mọi người nhận biểu ngữ mà không cần Nitro",
             option: {
                 nitroFirst: {
                     label: "Nitro đầu tiên",
-                    description: "Nếu tồn tại cả hai biểu ngữ Nitro và USRBG, hãy xác định nên sử dụng biểu ngữ nào",
+                    description: "Biểu ngữ sẽ sử dụng nếu có cả biểu ngữ Nitro và USRBG",
                     nitro: "Biểu ngữ Nitro",
                     usrbg: "Biểu ngữ USRBG"
                 },
                 voiceBackground: {
-                    label: "Nền âm thanh",
-                    description: "Sử dụng biểu ngữ USRBG làm nền trò chuyện thoại"
+                    label: "Nền giọng nói",
+                    description: "Sử dụng biểu ngữ USRBG làm hình nền trò chuyện thoại"
                 }
             },
             button: "Nhận biểu ngữ USRBG của riêng bạn"
         },
         validReply: {
-            name: "Trả lời hợp lệ",
-            description: "Sửa lỗi 'Không tải được tin nhắn' khi di chuột qua phần trả lời"
+            name: "ValidReply",
+            description: "Sửa lỗi 'Không thể tải tin nhắn' khi di chuột qua câu trả lời"
         },
         validUser: {
-            name: "Người dùng hợp lệ",
-            description: "Sửa các đề cập xuất hiện dưới dạng '@unknown-user' đối với người dùng không xác định (di chuột qua đề cập để sửa)",
+            name: "ValidUser",
+            description: "Sửa các đề cập cho những người dùng không xác định hiển thị dưới dạng '@unknown-user' (di chuột qua một đề cập để sửa nó)",
             badges: {
                 discordBugHunter: "Thợ săn lỗi bất hòa",
-                moderatorProgramsAlumni: "Tốt nghiệp chương trình điều hành viên",
+                moderatorProgramsAlumni: "Cựu sinh viên chương trình điều hành",
                 discordStaff: "Nhân viên bất hòa",
                 hypeSquadEvents: "Sự kiện HypeSquad",
-                bravery: "HypeSquad Cesaret",
-                brilliance: "Độ sáng của đội HypeSquad",
-                balance: "HypeSquad Denge",
-                partneredServerOwner: "Đồng chủ sở hữu máy chủ",
+                bravery: "Sự dũng cảm của Biệt đội Hype",
+                brilliance: "HypeSquad rực rỡ",
+                balance: "Số dư đội hình cường điệu",
+                partneredServerOwner: "Chủ sở hữu máy chủ hợp tác",
                 nitro: "Bất hòa Nitro",
                 earlySupporter: "Người ủng hộ sớm",
                 earlyVerifiedBotDeveloper: "Nhà phát triển Bot đã được xác minh sớm"
             }
         },
         voiceChatDoubleClick: {
-            name: "Trò chuyện bằng giọng nóiNhấp đúp chuột",
-            description: "Cho phép bạn tham gia trò chuyện thoại bằng cách nhấp đúp thay vì nhấp một lần"
+            name: "VoiceChatDoubleClick",
+            description: "Tham gia trò chuyện thoại bằng cách nhấp đúp thay vì nhấp một lần"
         },
         vcNarrator: {
-            name: "VCnarrator",
-            description: "Thông báo qua trình tường thuật khi người dùng tham gia, rời khỏi hoặc di chuyển các kênh thoại",
+            name: "VCNarrator",
+            description: "Thông báo khi người dùng tham gia, rời khỏi hoặc di chuyển các kênh thoại thông qua trình tường thuật",
             option: {
                 voice: {
-                    label: "Ses"
+                    label: "Tiếng nói"
                 },
                 volume: {
-                    label: "Mức âm thanh",
-                    description: "Mức độ giọng nói của người kể chuyện"
+                    label: "Âm lượng",
+                    description: "Âm lượng của người kể chuyện"
                 },
                 rate: {
-                    label: "Tốc độ",
-                    description: "Tốc độ nói của người kể chuyện"
+                    label: "Tỷ lệ",
+                    description: "Tốc độ của người kể chuyện"
                 },
                 sayOwnName: {
-                    label: "Nói tên của bạn",
-                    description: "Người kể chuyện có nói tên bạn không"
+                    label: "Nói tên riêng",
+                    description: "Nói tên riêng"
                 },
                 latinOnly: {
-                    label: "chỉ tiếng Latinh",
-                    description: "Xóa các ký tự không phải tiếng Latinh trong tên trước khi đọc"
+                    label: "Chỉ tiếng Latinh",
+                    description: "Loại bỏ các ký tự không phải tiếng Latinh khỏi tên trước khi nói chúng"
                 },
                 joinMessage: {
                     label: "Tham gia tin nhắn",
                     description: "Tham gia tin nhắn"
                 },
                 leaveMessage: {
-                    label: "Tin nhắn chia tay",
-                    description: "để lại tin nhắn"
+                    label: "Để lại tin nhắn",
+                    description: "Để lại tin nhắn"
                 },
                 moveMessage: {
-                    label: "Tin nhắn di chuyển",
-                    description: "tin nhắn di chuyển"
+                    label: "Di chuyển tin nhắn",
+                    description: "Di chuyển tin nhắn"
                 },
                 muteMessage: {
                     label: "Tắt tin nhắn",
-                    description: "Tắt tiếng tin nhắn (bây giờ chỉ có chính bạn)"
+                    description: "Tắt tiếng tin nhắn (bây giờ chỉ có bản thân)"
                 },
                 unmuteMessage: {
                     label: "Bật tiếng tin nhắn",
-                    description: "Bật tiếng tin nhắn (bây giờ chỉ có chính bạn)"
+                    description: "Bật tiếng tin nhắn (bây giờ chỉ có bản thân)"
                 },
                 deafenMessage: {
-                    label: "Tin nhắn chói tai",
-                    description: "Tin nhắn chói tai (bây giờ chỉ có chính bạn)"
+                    label: "Tin nhắn điếc tai",
+                    description: "Tin nhắn điếc tai (hiện tại chỉ có bản thân)"
                 },
                 undeafenMessage: {
-                    label: "Tin nhắn chói tai",
-                    description: "Tin nhắn chói tai (bây giờ chỉ có chính bạn)"
+                    label: "Tin nhắn hủy điếc",
+                    description: "Tin nhắn Undeafen (chỉ bản thân bây giờ)"
                 }
             },
             modal: {
                 title: "Chơi âm thanh mẫu",
-                voiceTitle: "Ses",
-                voice: "Chọn một âm thanh",
-                languageTitle: "Dil",
+                voiceTitle: "Tiếng nói",
+                voice: "Chọn một giọng nói",
+                languageTitle: "Ngôn ngữ",
                 language: "Chọn một ngôn ngữ",
                 noVoice: "Không tìm thấy giọng nói của người kể chuyện.",
-                linuxNote: "Cài đặt bộ điều phối lời nói hoặc đặc biệt và chạy Discord với tham số --enable-speech-dispatcher",
-                someNarrator: "Hãy thử cài đặt một số giọng nói từ cài đặt Trình tường thuật trong hệ điều hành của bạn",
-                dontHaveEnglish: "Bạn chưa tải lên bất kỳ âm thanh tiếng Anh nào, vì vậy người kể chuyện có thể nghe kỳ lạ",
-                customiseMessages: "Bạn có thể tùy chỉnh các tin nhắn nói bên dưới. Nếu bạn để trống, bạn có thể tắt một số tin nhắn nhất định",
-                placeholdersInfo: "Các phần giữ chỗ tùy chỉnh {{USER}}, {{DISPLAY_NAME}}, {{NICKNAME}} và {{CHANNEL}} lần lượt được thay thế bằng tên người dùng (để trống nếu bạn là chính bạn), tên hiển thị, biệt hiệu trên máy chủ và tên kênh"
+                linuxNote: "Cài đặt bộ điều phối giọng nói hoặc đặc biệt và chạy Discord với cờ --enable-speech-dispatcher",
+                someNarrator: "Hãy thử cài đặt một số trong cài đặt Trình tường thuật của Hệ điều hành của bạn",
+                dontHaveEnglish: "Bạn chưa cài giọng tiếng Anh nên nghe có vẻ lạ",
+                customiseMessages: "Bạn có thể tùy chỉnh các tin nhắn nói bên dưới. Bạn có thể tắt các tin nhắn cụ thể bằng cách đặt chúng thành không có gì",
+                placeholdersInfo: "Các phần giữ chỗ đặc biệt {{USER}}, {{DISPLAY_NAME}}, {{NICKNAME}} và {{CHANNEL}} sẽ được thay thế bằng tên người dùng (không có gì nếu đó là chính bạn), tên hiển thị của người dùng, biệt hiệu của người dùng trên máy chủ hiện tại và tên kênh tương ứng"
             }
         },
         viewIcons: {
-            name: "XemBiểu tượng",
-            description: "Làm cho hình ảnh đại diện và biểu ngữ trong hồ sơ người dùng có thể nhấp vào được; Thêm tùy chọn Hiển thị hình đại diện/Biểu ngữ vào menu ngữ cảnh kênh người dùng, máy chủ và nhóm.",
+            name: "ViewIcons",
+            description: "Làm cho hình đại diện và biểu ngữ trong hồ sơ người dùng có thể nhấp vào được, thêm các mục Xem hình đại diện/Biểu ngữ trong menu ngữ cảnh kênh người dùng, máy chủ và nhóm.",
             context: {
                 view: {
                     avatar: "Xem hình đại diện",
@@ -10471,7 +10471,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 format: {
                     label: "Định dạng",
-                    description: "Chọn định dạng hình ảnh để sử dụng cho hình ảnh không chuyển động. Hình ảnh động luôn sử dụng định dạng .gif"
+                    description: "Chọn định dạng hình ảnh để sử dụng cho hình ảnh không hoạt hình. Hình ảnh động sẽ luôn sử dụng .gif"
                 },
                 imgSize: {
                     label: "Kích thước hình ảnh",
@@ -10480,30 +10480,30 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         viewRaw: {
-            name: "Xem bản thô",
-            description: "Sao chép và xem nội dung/dữ liệu thô của bất kỳ tin nhắn, kênh hoặc máy chủ nào",
+            name: "ViewRaw",
+            description: "Sao chép và xem nội dung/dữ liệu thô của bất kỳ tin nhắn, kênh hoặc bang hội nào",
             context: {
-                copyLeft: "Sao chép dữ liệu thô (Nhấp chuột trái) / Xem dữ liệu thô (Nhấp chuột phải)",
-                copyRight: "Sao chép dữ liệu thô (Nhấp chuột phải) / Xem dữ liệu thô (Nhấp chuột trái)",
-                view: "Xem dữ liệu thô"
+                copyLeft: "Sao chép thô (Click chuột trái) / Xem Raw (Click chuột phải)",
+                copyRight: "Sao chép thô (Nhấp chuột phải) / Xem Nguyên (Nhấp chuột trái)",
+                view: "Xem bản thô"
             },
             option: {
                 popoverButton: {
-                    label: "Nút menu bật lên",
+                    label: "Nút bật lên",
                     description: "Hiển thị một nút trong cửa sổ bật lên của tin nhắn để xem nội dung/dữ liệu thô của tin nhắn."
                 },
                 clickMethod: {
                     label: "Bấm vào phương pháp",
-                    description: "Thay đổi phương pháp nhấp chuột sẽ sử dụng để xem nội dung/dữ liệu thô của bất kỳ tin nhắn nào.",
+                    description: "Thay đổi nút để xem nội dung/dữ liệu thô của bất kỳ tin nhắn nào.",
                     left: "Nhấp chuột trái để xem nội dung thô.",
                     right: "Nhấp chuột phải để xem nội dung thô."
                 }
             },
             modal: {
-                title: "Hàm Veri",
+                title: "Xem bản thô",
                 content: "Nội dung",
-                data: "{{type}} Xác thực",
-                copied: "Đã sao chép dữ liệu {{type}} vào bảng nhớ tạm!",
+                data: "{{type}} Dữ liệu",
+                copied: "{{type}} dữ liệu đã được sao chép vào bảng nhớ tạm!",
                 copy: "Sao chép {{type}} JSON",
                 copiedContent: "Nội dung được sao chép vào clipboard!",
                 copyContent: "Sao chép nội dung thô"
@@ -10511,152 +10511,152 @@ const translations: MatchStructure<typeof enTranslations> = {
             types: {
                 message: "Tin nhắn",
                 channel: "Kênh",
-                guild: "Người trình bày",
+                guild: "bang hội",
                 role: "Vai trò",
                 user: "người dùng"
             }
         },
         voiceButtons: {
-            name: "Nút giọng nói",
-            description: "Nhanh chóng DM, tắt tiếng hoặc làm điếc bất kỳ người dùng nào khỏi bảng cuộc gọi thoại.",
+            name: "VoiceButtons",
+            description: "Nhanh chóng DM, tắt tiếng hoặc làm điếc bất kỳ người dùng nào ngay từ bảng điều khiển cuộc gọi thoại.",
             option: {
                 showChatButton: {
                     label: "Hiển thị nút trò chuyện",
-                    description: "Có hiển thị nút trò chuyện hay không"
+                    description: "Bạn có muốn hiển thị nút trò chuyện hay không"
                 },
                 showMuteButton: {
                     label: "Hiển thị nút tắt tiếng",
-                    description: "Có hiển thị nút tắt tiếng hay không"
+                    description: "Cho dù bạn muốn hiển thị nút tắt tiếng"
                 },
                 showDeafenButton: {
                     label: "Hiển thị nút điếc",
-                    description: "Có hiển thị nút điếc không"
+                    description: "Cho dù bạn muốn hiển thị nút điếc"
                 },
                 muteSoundboard: {
-                    label: "Soundboard'u Sessize Al",
-                    description: "Khi nhấp vào nút điếc, nó sẽ bật và tắt soundboard của người dùng."
+                    label: "Tắt tiếng Soundboard",
+                    description: "Chuyển đổi soundboard của họ khi nhấp vào nút Điếc."
                 },
                 disableVideo: {
                     label: "Tắt video",
-                    description: "Khi nhấp vào nút điếc, nó sẽ bật và tắt video của người dùng."
+                    description: "Chuyển đổi video của họ khi nhấp vào nút Điếc."
                 },
                 useServer: {
                     label: "Sử dụng máy chủ",
-                    description: "Sử dụng tính năng tắt tiếng/làm chói máy chủ thay vì cục bộ nếu bạn được phép."
+                    description: "Sử dụng máy chủ tắt tiếng/điếc thay vì cục bộ khi bạn được phép."
                 },
                 serverSelf: {
-                    label: "Tự tắt tiếng trên máy chủ",
-                    description: "Tắt tiếng/tắt tiếng sẽ tắt tiếng hoặc làm điếc chính bạn trên máy chủ khi sử dụng."
+                    label: "Máy chủ tự",
+                    description: "Điếc/Tắt tiếng trên máy chủ khi sử dụng tắt tiếng/điếc."
                 },
                 showButtonsSelf: {
-                    label: "Hiển thị các nút cho chính bạn",
-                    description: "Có hiển thị các nút cho người dùng của riêng bạn hay không. Nó có chức năng tương tự; Bảng điều khiển DM mở ra và tự tắt tiếng/điếc.",
-                    display: "Trình diễn",
-                    hide: "trốn",
-                    disable: "Tàn tật"
+                    label: "Hiển thị các nút trên chính nó",
+                    description: "Cho dù bạn muốn hiển thị các nút cho người dùng của riêng bạn. Chức năng tương tự như (các) nút khác, ngoại trừ nó sẽ mở bảng DM và tự tắt tiếng/điếc khi nhấp vào (các) nút.",
+                    display: "Trưng bày",
+                    hide: "Trốn",
+                    disable: "Vô hiệu hóa"
                 },
                 whichNameToShow: {
-                    label: "Tên nào nên xuất hiện?",
-                    description: "Hiển thị tên người dùng, tên chung hoặc cả hai trong chú giải công cụ?",
+                    label: "Tên nào để hiển thị",
+                    description: "Chọn hiển thị biệt hiệu hoặc tên người dùng trong chú giải công cụ.",
                     global: "Tên toàn cầu",
                     username: "Tên người dùng",
                     both: "Cả hai"
                 },
                 buttonPosition: {
                     label: "Vị trí nút",
-                    description: "Chọn nơi hiển thị các nút.",
-                    left: "Sol",
+                    description: "Chọn nơi các nút sẽ được hiển thị.",
+                    left: "Bên trái",
                     right: "Phải",
                 }
             },
             tooltip: {
-                navigate: "Đi tới DM",
+                navigate: "Điều hướng đến DM",
                 open: "Mở DM bằng {{username}}",
                 yourself: "bản thân bạn",
-                serverMute: "Tắt tiếng trên máy chủ",
-                serverDeafen: "Điếc trên máy chủ",
+                serverMute: "Tắt tiếng máy chủ",
+                serverDeafen: "Máy chủ điếc",
                 mute: "Tắt tiếng",
-                deafen: "làm điếc tai",
+                deafen: "Điếc",
                 unmute: "Bật tiếng",
-                undeafen: "Loại bỏ khỏi điếc",
-                serverUnmute: "Bật tiếng trên máy chủ",
-                serverUndeafen: "Xóa điếc trên máy chủ"
+                undeafen: "Undeafen",
+                serverUnmute: "Bật tiếng máy chủ",
+                serverUndeafen: "Máy chủ Undeafen"
             }
         },
         voiceChannelLog: {
-            name: "Giọng nóiKênhNhật ký",
-            description: "Ghi lại những người tham gia và rời khỏi kênh âm thanh",
+            name: "VoiceChannelLog",
+            description: "Nhật ký những người tham gia và rời khỏi kênh thoại",
             context: {
                 view: "Xem nhật ký kênh"
             },
             modal: {
-                joined: "Đã tham gia kênh <#{{channel}}>",
-                left: "Kênh trái <#{{channel}}>",
-                movedTo: "Đã chuyển sang kênh <#{{channel}}>",
+                joined: "Đã tham gia <#{{channel}}>",
+                left: "Còn lại <#{{channel}}>",
+                movedTo: "Đã chuyển đến <#{{channel}}>",
                 movedFrom: "Đã chuyển từ <#{{channel}}>",
                 noLogs: "Không có nhật ký để hiển thị.",
-                logs: "nhật ký {{kênh}}"
+                logs: "{{channel}} nhật ký"
             },
             option: {
                 mode: {
-                    label: "mod",
-                    description: "Cách hiển thị nhật ký kênh âm thanh",
+                    label: "Cách thức",
+                    description: "Cách hiển thị nhật ký kênh thoại",
                     menu: "Trình đơn nhật ký",
-                    associated: "Đăng nhập trực tiếp vào kênh trò chuyện có liên quan",
-                    both: "Đăng nhập vào cả kênh trò chuyện và menu nhật ký"
+                    associated: "Đăng nhập trực tiếp vào cuộc trò chuyện được liên kết",
+                    both: "Đăng nhập vào menu trò chuyện và đăng nhập"
                 },
                 voiceChannelChatSelf: {
-                    label: "Trò chuyện kênh thoại (Chính bạn)",
-                    description: "Đăng nhập hoạt động kênh thoại của riêng bạn trong các kênh thoại"
+                    label: "Tự trò chuyện kênh thoại",
+                    description: "Ghi lại các sự kiện kênh thoại của riêng bạn trong các kênh thoại"
                 },
                 voiceChannelChatSilent: {
-                    label: "Trò chuyện kênh giọng nói im lặng",
-                    description: "Tin nhắn tham gia/rời khỏi/di chuyển bị tắt tiếng trong cuộc trò chuyện kênh thoại"
+                    label: "Trò chuyện kênh thoại Im lặng",
+                    description: "Tham gia/rời khỏi/di chuyển tin nhắn trong các cuộc trò chuyện trên kênh thoại sẽ ở chế độ im lặng"
                 },
                 voiceChannelChatSilentSelf: {
-                    label: "Trò chuyện kênh giọng nói im lặng (Chính bạn)",
-                    description: "Nếu bạn đang sử dụng kênh thoại, các tin nhắn nối/rời/di chuyển sẽ ở chế độ im lặng"
+                    label: "Trò chuyện kênh thoại Im lặng",
+                    description: "Tham gia/rời khỏi/di chuyển tin nhắn trong cuộc trò chuyện trên kênh thoại sẽ ở chế độ im lặng nếu bạn đang ở trong kênh thoại"
                 },
                 ignoreBlockedUsers: {
                     label: "Bỏ qua người dùng bị chặn",
-                    description: "Ghi nhật ký người dùng bạn đã chặn"
+                    description: "Không đăng nhập người dùng bị chặn"
                 }
             }
         },
         voiceChatUtilities: {
-            name: "Tiện ích VoiceChat",
-            description: "Plugin này cho phép bạn thực hiện nhiều hành động (di chuyển, tắt tiếng, ngắt kết nối, v.v.) trên toàn bộ kênh (ban đầu là dutake)",
+            name: "VoiceChatUtilities",
+            description: "Plugin này cho phép bạn thực hiện nhiều hành động trên toàn bộ kênh (di chuyển, tắt tiếng, ngắt kết nối, v.v.) (ban đầu là dutake)",
             option: {
                 waitAfter: {
                     label: "Chờ Sau Khi Hành Động",
-                    description: "Số lượng giao dịch API được thực hiện trước khi chờ đợi (để tránh giới hạn tỷ lệ)"
+                    description: "Số lượng hành động API cần thực hiện trước khi chờ đợi (để tránh giới hạn tốc độ)"
                 },
                 waitSeconds: {
-                    label: "Thời gian chờ đợi",
-                    description: "Thời gian chờ giữa mỗi thao tác (tính bằng giây)"
+                    label: "Đợi giây",
+                    description: "Thời gian chờ giữa mỗi hành động (tính bằng giây)"
                 }
             },
             context: {
-                voiceTools: "Công cụ âm thanh",
-                mentionAll: "Gắn thẻ tất cả người dùng",
-                disconnectAll: "Ngắt kết nối mọi người",
-                muteAll: "Tắt tiếng mọi người",
-                unmuteAll: "Bật tiếng mọi người",
-                deafenAll: "Điếc Mọi người",
-                undeafenAll: "Hãy ra ngoài mà không làm điếc tai mọi người",
-                moveAll: "Di chuyển mọi người"
+                voiceTools: "Công cụ giọng nói",
+                mentionAll: "Đề cập đến tất cả người dùng",
+                disconnectAll: "Ngắt kết nối tất cả",
+                muteAll: "Tắt tiếng tất cả",
+                unmuteAll: "Bật tiếng tất cả",
+                deafenAll: "Làm điếc tất cả",
+                undeafenAll: "Tất cả",
+                moveAll: "Di chuyển tất cả"
             }
         },
         voiceDownload: {
-            name: "Giọng nóiTải xuống",
-            description: "Thêm tùy chọn tải xuống vào tin nhắn thoại. (Mở tab trình duyệt mới)",
+            name: "VoiceDownload",
+            description: "Thêm phần tải xuống vào tin nhắn thoại. (Mở tab trình duyệt mới)",
             context: {
-                download: "Tải xuống thư thoại"
+                download: "Tải xuống tin nhắn thoại"
             }
         },
         voiceMessages: {
-            name: "Tin nhắn bằng giọng nói",
-            description: "Nó cho phép bạn gửi tin nhắn thoại giống như trên điện thoại di động. Để thực hiện việc này, nhấp chuột phải vào nút tải lên và chọn 'Gửi tin nhắn thoại'.",
+            name: "VoiceMessages",
+            description: "Cho phép bạn gửi tin nhắn thoại như trên điện thoại di động. Để làm như vậy, hãy nhấp chuột phải vào nút tải lên và nhấp vào Gửi tin nhắn thoại.",
             option: {
                 noiseSuppression: {
                     label: "Khử tiếng ồn",
@@ -10669,9 +10669,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             notification: {
                 failed: {
-                    upload: "Không thể tải thư thoại.",
+                    upload: "Không thể tải lên tin nhắn thoại.",
                     start: "Không thể bắt đầu ghi.",
-                    finish: "Việc đăng ký không thể hoàn tất."
+                    finish: "Không thể hoàn tất quá trình ghi."
                 }
             },
             context: {
@@ -10683,37 +10683,37 @@ const translations: MatchStructure<typeof enTranslations> = {
                 upload: "Tải tệp lên",
                 preview: "Xem trước",
                 failed: "Không thể phân tích cú pháp tệp âm thanh đã chọn:",
-                oggOpus: "Tin nhắn thoại phải ở định dạng OggOpus để phát trên iOS. Không thể phát tệp này trên iOS vì nó ở định dạng {{type}}.",
-                fix: "Để khắc phục điều này, trước tiên hãy chuyển đổi tệp sang định dạng OggOpus. Ví dụ: bạn có thể sử dụng {{link}}.",
-                sending: "Đang gửi thư thoại... Vui lòng đợi.",
-                stop: "dừng ghi âm",
-                start: "bắt đầu ghi âm",
-                resume: "Tiếp tục đăng ký",
+                oggOpus: "Tin nhắn thoại phải là OggOpus để có thể phát trên iOS. Tệp này là {{type}} nên sẽ không thể phát được trên iOS.",
+                fix: "Để khắc phục, trước tiên hãy chuyển đổi nó thành OggOpus, ví dụ như sử dụng {{link}}",
+                sending: "Hiện đang gửi tin nhắn thoại... Xin hãy kiên nhẫn.",
+                stop: "Dừng ghi",
+                start: "Bắt đầu ghi",
+                resume: "Tiếp tục ghi âm",
                 pause: "Tạm dừng ghi",
-                recording: "ĐANG ĐĂNG KÝ",
-                send: "Gửi"
+                recording: "GHI ÂM",
+                send: "Gửi",
             }
         },
         volumeBooster: {
-            name: "tăng cường âm lượng",
-            description: "Cho phép bạn tăng lượng người dùng và khối lượng phát sóng trên mức tối đa mặc định",
+            name: "VolumeBooster",
+            description: "Cho phép bạn đặt người dùng và âm lượng luồng trên mức tối đa mặc định",
             option: {
                 multiplier: {
                     label: "Số nhân",
-                    description: "Hệ số âm thanh"
+                    description: "Hệ số nhân khối lượng"
                 }
             }
         },
         wallpaperFree: {
-            name: "Hình NềnMiễn Phí",
-            description: "Phiên bản làm lại của thử nghiệm hình nền DM cũ; Đặt hình nền cho bất kỳ kênh, người dùng hoặc máy chủ nào.",
+            name: "WallpaperFree",
+            description: "Giải trí thử nghiệm hình nền DM cũ; Đặt hình nền cho bất kỳ kênh, người dùng hoặc máy chủ nào.",
             option: {
                 globalDefault: {
-                    label: "Mặc định chung",
+                    label: "Mặc định toàn cầu",
                     description: "Đặt hình nền mặc định chung cho tất cả các kênh."
                 },
                 stylingTips: {
-                    label: "Mẹo về phong cách"
+                    label: "Mẹo tạo kiểu"
                 }
             },
             context: {
@@ -10721,99 +10721,99 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeWallpaper: "Xóa hình nền"
             },
             modal: {
-                set: "đặt hình nền",
+                set: "Đặt hình nền",
                 image: "URL hình ảnh",
                 cancel: "Hủy bỏ",
                 apply: "Áp dụng",
                 global: {
-                    set: "Đặt hình nền công khai",
+                    set: "Đặt hình nền toàn cầu",
                     remove: "Xóa hình nền mặc định toàn cầu",
                     reset: "Đặt lại dữ liệu hình nền"
                 },
                 web: {
-                    info: "Bạn có thể sử dụng các tệp cục bộ bằng cách đặt chúng vào thư mục chủ đề plexcord và sử dụng url plexcord:///themes/filename.ext.",
+                    info: "Bạn có thể sử dụng các tệp cục bộ bằng cách đặt chúng trong thư mục chủ đề Plexcord và sử dụng URL plexcord:///themes/filename.ext",
                     open: "Mở thư mục chủ đề",
                     quickCSS: "Mở QuickCSS"
                 }
             }
         },
         webContextMenus: {
-            name: "WebContextMenu",
-            description: "Thêm lại các menu ngữ cảnh bị thiếu trong phiên bản web của Discord: Liên kết và Hình ảnh (Sao chép hoặc Mở liên kết/Hình ảnh), Vùng văn bản (Sao chép, Cắt, Dán, Kiểm tra chính tả)",
+            name: "WebContextMenus",
+            description: "Thêm lại các menu ngữ cảnh bị thiếu trong phiên bản web của Discord: Liên kết & Hình ảnh (Sao chép/Mở liên kết/Hình ảnh), Vùng văn bản (Sao chép, Cắt, Dán, Kiểm tra chính tả)",
             option: {
                 addBack: {
                     label: "Thêm trở lại",
-                    description: "Thêm lại menu ngữ cảnh Discord cho hình ảnh, liên kết và thanh mục trò chuyện"
+                    description: "Thêm lại menu ngữ cảnh Discord cho hình ảnh, liên kết và thanh nhập trò chuyện"
                 }
             }
         },
         webKeybinds: {
             name: "WebKeybinds",
-            description: "Nó bổ sung lại các phím nóng bị thiếu trong phiên bản web của Discord: ctrl+t, ctrl+shift+t, ctrl+tab, ctrl+shift+tab, ctrl+1-9, ctrl+,. Theo nghĩa đen, nó chỉ hoạt động trên Plextron/Legcord chứ không hoạt động trên trình duyệt."
+            description: "Thêm lại các tổ hợp phím bị thiếu trong phiên bản web của Discord: Ctrl+T, Ctrl+Shift+T, Ctrl+Tab, Ctrl+Shift+Tab, Ctrl+1-9, Ctrl+,. Chỉ hoạt động hoàn toàn trên Plextron/Legcord, không hoạt động trong trình duyệt của bạn"
         },
         webScreenShareFixes: {
-            name: "WebScreenShareSửa lỗi",
-            description: "Loại bỏ giới hạn tốc độ bit chia sẻ màn hình 2500 kbps trên máy khách Chrome và Plextron.",
+            name: "WebScreenShareFixes",
+            description: "Loại bỏ giới hạn tốc độ bit 2500kbps trên máy khách Chrome và Plextron.",
             option: {
                 experimentalAV1Support: {
                     label: "Hỗ trợ AV1 thử nghiệm",
-                    description: "Cho phép hỗ trợ codec AV1. Luồng tải vô hạn có thể gây ra sự cố như"
+                    description: "Kích hoạt hỗ trợ codec AV1. Có thể gây ra sự cố như tải luồng vô hạn"
                 }
             }
         },
         whoReacted: {
-            name: "Ai đã phản ứng",
-            description: "Hiển thị hình đại diện của người dùng phản ứng với tin nhắn",
+            name: "WhoReacted",
+            description: "Hiển thị hình đại diện của người dùng đã phản ứng với tin nhắn",
             option: {
                 avatarClick: {
                     label: "Bấm vào hình đại diện",
-                    description: "Chuyển đổi khả năng nhấp của hình đại diện trong phản ứng"
+                    description: "Chuyển đổi cách nhấp vào hình đại diện trong phản ứng"
                 }
             }
         },
         whosWatching: {
-            name: "Ai đang xem",
-            description: "Xem người dùng đang xem chương trình phát sóng của bạn bằng cách di chuột qua biểu tượng chia sẻ màn hình",
+            name: "WhosWatching",
+            description: "Di chuột qua biểu tượng chia sẻ màn hình để xem nội dung người dùng đang xem luồng của bạn",
             modal: {
-                noSpectator: "không có khán giả"
+                noSpectator: "Không có khán giả"
             },
             option: {
                 showPanel: {
                     label: "Hiển thị bảng điều khiển",
-                    description: "Hiển thị người xem bên dưới bảng chia sẻ màn hình"
+                    description: "Hiển thị người xem dưới bảng chia sẻ màn hình"
                 }
             }
         },
         writeUpperCase: {
-            name: "ViếtUpperCase",
-            description: "Chuyển đổi chữ cái đầu tiên của mỗi câu thành chữ hoa trong mục nhập tin nhắn.",
+            name: "WriteUpperCase",
+            description: "Thay đổi chữ cái đầu tiên của mỗi câu trong tin nhắn đầu vào thành chữ hoa",
             option: {
                 blockedWords: {
                     label: "từ bị chặn",
-                    description: "Các biểu thức không được viết hoa (phân tách bằng dấu phẩy)"
+                    description: "Các chuỗi không viết hoa (phân tách bằng dấu phẩy)"
                 }
             }
         },
         xSOverlay: {
             name: "XSOverlay",
-            description: "Đẩy thông báo Discord lên XSOverlay để dễ dàng xem trong VR",
+            description: "Chuyển tiếp thông báo Discord tới XSOverlay để dễ dàng xem trong VR",
             notification: {
                 call: {
-                    title: "{{user}} đang tìm kiếm bạn.",
-                    content: "cuộc gọi đến"
+                    title: "{{user}} đang gọi cho bạn.",
+                    content: "Cuộc gọi đến"
                 },
                 message: {
-                    reply: "(phản ứng)",
+                    reply: "(hồi đáp)",
                     embed: "[nhúng]",
-                    onlyEmbed: "(các) tin nhắn nhúng đã gửi",
+                    onlyEmbed: "(Các) tin nhắn đã gửi",
                     sticker: "[nhãn dán]",
-                    onlySticker: "đã gửi nhãn dán",
+                    onlySticker: "Đã gửi nhãn dán",
                     image: "hình ảnh",
-                    attachment: "TÔI"
+                    attachment: "tập tin đính kèm"
                 },
                 test: {
-                    title: "Plexcord'và lặn!",
-                    content: "Đây là thông báo thử nghiệm! nổ tung",
+                    title: "Xin chào từ Plexcord!",
+                    content: "Đây là thông báo thử nghiệm! *Bùng nổ*",
                     button: "Gửi thông báo kiểm tra"
                 }
             },
@@ -10823,8 +10823,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Cổng WebSocket"
                 },
                 preferUDP: {
-                    label: "UDP Tercih Et",
-                    description: "Nếu bạn đang sử dụng các phiên bản XSOverlay cũ hơn và không thể kết nối qua WebSocket, hãy bật nó. Cài đặt này bị bỏ qua trên web."
+                    label: "Ưu tiên UDP",
+                    description: "Bật nếu bạn sử dụng bản dựng XSOverlay cũ hơn không thể kết nối thông qua WebSockets. Cài đặt này bị bỏ qua trên web."
                 },
                 botNotifications: {
                     label: "Thông báo của bot",
@@ -10836,7 +10836,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 dmNotifications: {
                     label: "Thông báo DM",
-                    description: "Cho phép thông báo tin nhắn riêng tư"
+                    description: "Cho phép thông báo bằng tin nhắn trực tiếp"
                 },
                 groupDmNotifications: {
                     label: "Thông báo DM nhóm",
@@ -10847,12 +10847,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Cho phép thông báo cuộc gọi"
                 },
                 pingColor: {
-                    label: "Ping Rengi",
-                    description: "Màu gắn thẻ người dùng"
+                    label: "Màu Ping",
+                    description: "Người dùng đề cập đến màu sắc"
                 },
                 channelPingColor: {
-                    label: "Kênh Ping màu",
-                    description: "Màu ghi nhãn kênh"
+                    label: "Màu Ping kênh",
+                    description: "Màu đề cập kênh"
                 },
                 soundPath: {
                     label: "Đường dẫn âm thanh",
@@ -10863,25 +10863,25 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Thời lượng thông báo (giây)"
                 },
                 lengthBasedTimeout: {
-                    label: "Thời lượng dựa trên độ dài tin nhắn",
-                    description: "Kéo dài thời lượng theo độ dài tin nhắn"
+                    label: "Thời gian chờ dựa trên độ dài",
+                    description: "Kéo dài thời lượng với độ dài tin nhắn"
                 },
                 opacity: {
                     label: "Độ mờ",
                     description: "Độ mờ thông báo"
                 },
                 volume: {
-                    label: "Ses",
-                    description: "mức âm thanh"
+                    label: "Âm lượng",
+                    description: "Âm lượng"
                 }
             }
         },
         youtubeAdblock: {
-            name: "Khối quảng cáo YouTube",
-            description: "Chặn quảng cáo trên các nội dung nhúng trên YouTube và hoạt động WatchTogether bằng AdGuard"
+            name: "YouTubeAdblock",
+            description: "Chặn quảng cáo trong nội dung nhúng trên YouTube và hoạt động Xem cùng nhau qua AdGuard"
         },
         youtubeDescription: {
-            name: "Mô tả YouTube",
+            name: "YouTubeDescription",
             description: "Thêm mô tả vào video nhúng trên YouTube"
         }
     }

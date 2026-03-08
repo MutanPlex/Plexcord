@@ -21,27 +21,27 @@ import type { MatchStructure } from "./types";
 
 const translations: MatchStructure<typeof enTranslations> = {
     settings: {
-        title: "inställningar",
+        title: "Inställningar",
         language: {
             selector: {
-                label: "Dil",
+                label: "Språk",
                 description: "Välj önskat språk för Plexcord.",
                 placeholder: "Välj Språk"
             }
         },
         location: {
             label: "Inställningar Plats",
-            description: "Plexcord bestämmer var inställningssektionen ska placeras",
-            top: "till toppen",
+            description: "Var du ska placera avsnittet om Plexcord-inställningar",
+            top: "Allra högst upp",
             nitro: {
-                above: "Ovanpå nitrosektionen",
-                below: "under nitrosektionen"
+                above: "Ovanför Nitro-sektionen",
+                below: "Nedanför avsnittet Nitro"
             },
             activity: {
-                above: "Ovan händelseinställningar",
-                below: "Under Händelseinställningar"
+                above: "Ovan Aktivitetsinställningar",
+                below: "Nedan Aktivitetsinställningar"
             },
-            bottom: "på hög"
+            bottom: "Allra längst ner"
         },
         switches: {
             useQuickCss: {
@@ -53,37 +53,37 @@ const translations: MatchStructure<typeof enTranslations> = {
                 description: "Aktivera tillägget React Developer Tools för att felsöka Discords React-komponenter. Användbar för pluginutveckling."
             },
             mainWindowFrameless: {
-                label: "Inaktivera huvudfönsterram",
-                description: "Ta bort den lokala fönsterramen för ett renare utseende. Du kan fortfarande flytta fönstret genom att dra i namnlistens område."
+                label: "Inaktivera huvudfönsterramen",
+                description: "Ta bort den inbyggda fönsterramen för ett renare utseende. Du kan fortfarande flytta fönstret genom att dra i namnlistens område."
             },
             frameless: {
-                label: "Inaktivera fönsterram",
-                description: "Ta bort den lokala fönsterramen för ett renare utseende. Du kan fortfarande flytta fönstret genom att dra i namnlistens område."
+                label: "Inaktivera fönsterramen",
+                description: "Ta bort den inbyggda fönsterramen för ett renare utseende. Du kan fortfarande flytta fönstret genom att dra i namnlistens område."
             },
             winNativeTitleBar: {
-                label: "Använd Windows inbyggda namnlist istället för Discords anpassade namnlist",
+                label: "Använd Windows inbyggda namnlist istället för Discords anpassade",
                 description: "Ersätt Discords anpassade namnlist med standardnamnlisten i Windows. Detta kan förbättra kompatibiliteten med vissa fönsterhanteringsverktyg."
             },
             transparent: {
                 label: "Aktivera fönstertransparens",
-                description: "Gör Discord-fönstret genomskinligt. Ett tema som stöder transparens krävs, annars gör det ingenting.",
-                isWindows: "Detta hindrar fönstret från att ändra storlek och förhindrar att du fäster fönstret mot skärmens kanter.",
-                notWindows: "Detta förhindrar att storleken på fönstret ändras."
+                description: "Gör Discord-fönstret genomskinligt. Ett tema som stöder transparens krävs annars gör det ingenting.",
+                isWindows: "Detta hindrar fönstret från att ändra storlek och förhindrar att du fäster fönstret mot skärmkanterna.",
+                notWindows: "Detta kommer att stoppa fönstret från att ändra storlek."
             },
             winCtrlQ: {
-                label: "Spara Ctrl+Q genväg för att stänga Discord (alternativ till Alt+F4)",
+                label: "Registrera Ctrl+Q som genväg för att stänga Discord (alternativ till Alt+F4)",
                 description: "Lägg till Ctrl+Q som kortkommando för att stänga Discord. Detta ger ett alternativ till Alt+F4 för att snabbt stänga programmet."
             },
             disableMinSize: {
                 label: "Inaktivera minsta fönsterstorlek",
-                description: "Tillåt Discord-fönstret att ändra storleken mindre än dess standardminimistorlek. Användbar för kakelsättning av fönsterhanterare eller små skärmar."
+                description: "Tillåt att storleken på Discord-fönstret ändras mindre än dess standardminimistorlek. Användbar för kakelsättning av fönsterhanterare eller små skärmar."
             }
         },
         quickActions: {
-            title: "Snabba transaktioner",
-            description: "Vanliga operationer som du kanske vill använda ofta. Dessa genvägar ger snabb åtkomst till ofta använda funktioner utan att navigera i menyer.",
+            title: "Snabba åtgärder",
+            description: "Vanliga åtgärder du kanske vill utföra. Dessa genvägar ger dig snabb åtkomst till ofta använda funktioner utan att behöva navigera genom menyer.",
             notificationLog: "Aviseringslogg",
-            editQuickCSS: "QuickCSS Redigera",
+            editQuickCSS: "Redigera QuickCSS",
             relaunchDiscord: "Starta om Discord",
             openSettingsFolder: "Öppna mappen Inställningar",
             viewSourceCode: "Se källkoden"
@@ -91,10 +91,10 @@ const translations: MatchStructure<typeof enTranslations> = {
         specialCards: {
             donations: {
                 title: "Donationer",
-                subtitle: "Tack för din donation!",
-                description: "Du kan hantera dina privilegier när som helst genom att skicka ett meddelande till @mutanplex.",
-                button: "Donation",
-                invite: "Gå med i vår discord",
+                subtitle: "Tack för att du donerar!",
+                description: "Du kan hantera dina förmåner när som helst genom att skicka ett meddelande till @mutanplex.",
+                button: "Donera",
+                invite: "Gå med i vår Discord",
                 invalid: "Ogiltig eller utgången inbjudningslänk."
             },
             supportProject: {
@@ -103,24 +103,24 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             contributions: {
                 title: "Bidrag",
-                subtitle: "Tack för ditt bidrag!",
-                description: "Du har nu ett coolt märke för att bidra till Plexcord!",
-                buttonTitle: "Se vad du bidragit med"
+                subtitle: "Tack för att du bidrar!",
+                description: "Eftersom du har bidragit till Plexcord har du nu ett coolt nytt märke!",
+                buttonTitle: "Se vad du har bidragit till"
             }
         },
         settingsSection: {
             title: "Inställningar",
-            description: "Konfigurera hur Plexcord integrerar och beter sig med Discord. Dessa inställningar påverkar utseendet och beteendet hos Discord-klienten.",
+            description: "Konfigurera hur Plexcord beter sig och integreras med Discord. Dessa inställningar påverkar Discord-klientens utseende och beteende.",
             hintParts: {
-                prefix: "Genom att konfigurera inställningarna för {{pluginLink}} kan du anpassa var detta inställningsavsnitt visas i menyn Discord-inställningar.",
-                linkText: "Inställningsplugin"
+                prefix: "Du kan anpassa var denna inställningssektion visas i Discords inställningsmeny genom att konfigurera {{pluginLink}}",
+                linkText: "Plugin för inställningar"
             }
         },
         notifications: {
             title: "Aviseringar",
             description: "Konfigurera hur Plexcord hanterar aviseringar. Du kan anpassa när och hur du får varningar eller se en historik över tidigare aviseringar.",
             settings: "Aviseringsinställningar",
-            viewLog: "Visa meddelandehistorik",
+            viewLog: "Visa meddelandelogg",
             permissions: {
                 denied: {
                     title: "Skrivbordsaviseringsbehörighet nekad",
@@ -129,11 +129,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             style: {
                 label: "Aviseringsstil",
-                description: "Vissa plugins kan visa dig aviseringar. Dessa finns i två stilar:",
+                description: "Vissa plugins kan visa aviseringar till dig. Dessa finns i två stilar:",
                 plexcord: "Plexcord-meddelanden",
                 plexcordDesc: "Dessa är aviseringar i appen",
                 desktop: "Skrivbordsmeddelanden",
-                desktopDesc: "Lokala skrivbordsaviseringar (som när du får en ping)",
+                desktopDesc: "Native Desktop-aviseringar (som när du får en ping)",
                 onlyWhenNotFocused: "Använd endast skrivbordsaviseringar när Discord inte är fokuserat",
                 always: {
                     desktop: "Använd alltid skrivbordsaviseringar",
@@ -143,73 +143,73 @@ const translations: MatchStructure<typeof enTranslations> = {
             positions: {
                 label: "Aviseringsposition",
                 right: {
-                    bottom: "Ner höger",
-                    top: "Upp höger"
+                    bottom: "Nederst till höger",
+                    top: "Överst till höger",
                 },
                 left: {
-                    bottom: "Ned till vänster",
-                    top: "Upp till vänster"
+                    bottom: "Längst ner till vänster",
+                    top: "Överst till vänster",
                 }
             },
             missed: {
                 label: "Antal missade aviseringar",
-                description: "När du åter fokuserar på Discord kommer ett meddelande upp om eventuella aviseringar du missat.",
-                whileYou: "medan du är borta",
-                count: "{{count}} aviseringar{{s}} har tagits emot",
-                s: " "
+                description: "När du fokuserar om Discord kommer ett meddelande att dyka upp med hur många du missat",
+                whileYou: "Medan du var borta",
+                count: "{{count}} avisering{{s}} mottagen",
+                s: "s"
             },
             timeout: {
-                label: "Timeout för meddelande",
-                description: "Hur länge aviseringar stannar på skärmen innan de försvinner automatiskt (i sekunder)"
+                label: "Tidsgräns för meddelande",
+                description: "Mängden tid (i sekunder) som aviseringar stannar på skärmen innan de försvinner automatiskt"
             },
             logLimit: {
                 label: "Aviseringslogggräns",
-                description: "Maximalt antal aviseringar som ska lagras i aviseringsloggen. Ställ in på {{disable}} för att inaktivera aviseringsloggning och ställ in på {{unlimited}} för att inte ta bort gamla aviseringar automatiskt"
+                description: "Det maximala antalet aviseringar att behålla i loggen innan gamla tas bort. Ställ in på {{disable}} för att inaktivera aviseringsloggen och {{unlimited}} för att aldrig automatiskt ta bort gamla aviseringar"
             },
             opacity: {
-                label: "Opacitet",
-                description: "Opacitet för aviseringar i appen"
+                label: "Opacitet för meddelanden",
+                description: "Opaciteten för aviseringar i appen"
             },
             maxNotifications: {
-                label: "Maximal avisering",
-                description: "Maximalt antal aviseringar som ska visas samtidigt"
+                label: "Max aviseringar",
+                description: "Maximalt antal aviseringar som visas på en gång"
             },
             behavior: {
                 label: "Aviseringsbeteende",
             },
             disableInStreamerMode: {
-                label: "Inaktivera i sändningsläge",
-                description: "Inaktivera aviseringar i sändningsläge"
+                label: "Inaktivera i streamerläge",
+                description: "Inaktivera aviseringar i streamerläge"
             },
             renderImages: {
-                label: "Bearbeta bilder",
+                label: "Rendera bilder",
                 description: "Återge bilder i aviseringar"
             },
             streamingTreatment: {
-                label: "Broadcaster Mode Beteende",
-                description: "Hur du hanterar aviseringar när du delar din skärm",
-                normal: "Normal - Visa meddelande normalt",
-                noContent: "Inget innehåll - Dölj meddelandetext",
-                ignore: "Ignorera – Visa inte meddelanden alls"
+                label: "Streaming behandling",
+                description: "Hur man hanterar aviseringar när du delar din skärm",
+                normal: "Normal - Visa meddelandet som normalt",
+                noContent: "Inget innehåll - Göm meddelandekroppen",
+                ignore: "Ignorera - Visa inte aviseringen alls"
             },
         },
         macVibrancy: {
-            title: "Fönsterflimmerstil (Omstart krävs)",
-            description: "Anpassa macOS-fönsterflimmereffekt. Detta styr discord-fönstrets oskärpa och transparensstil. En omstart krävs för att ändringarna ska träda i kraft.",
-            placeholder: "Fönster flimmer stil",
+            title: "Window Vibrancy Style (kräver omstart)",
+            description: "Anpassa macOS-fönstereffekten. Detta styr discord-fönstrets oskärpa och transparensstil. Ändringar kräver en omstart för att träda i kraft.",
+            placeholder: "Fönster vibrerande stil",
             style: {
-                no: "ingen skakning",
-                underPage: "Nedanför sidan (Fönsterfärgning)",
+                no: "Ingen Vibrans",
+                underPage: "Under sida (Fönsterfärgning)",
                 content: "Innehåll",
                 window: "Fönster",
-                selection: "Rösta",
-                titlebar: "titelraden",
-                header: "Titel",
-                sidebar: "sidofältet",
-                tooltip: "verktygsspets",
-                menu: "meny",
-                popover: "popup-fönster",
-                fullscreenUI: "Helskärmsgränssnitt (transparent men lite tråkigt)",
+                selection: "Urval",
+                titlebar: "Titelfält",
+                header: "Rubrik",
+                sidebar: "Sidofält",
+                tooltip: "Verktygstips",
+                menu: "Meny",
+                popover: "Popover",
+                fullscreenUI: "Helskärmsgränssnitt (Transparent men något suddigt)",
                 hud: "HUD (mest transparent)"
             }
         }
@@ -217,48 +217,48 @@ const translations: MatchStructure<typeof enTranslations> = {
 
     plugins: {
         title: "Plugins",
-        new: "Ny",
+        new: "NY",
         unknown: "Okänd",
-        noDescription: "Beskrivning inte tillgänglig.",
+        noDescription: "Ingen beskrivning tillgänglig.",
         restart: {
             apply: "Börja om för att tillämpa ändringar!",
             required: "Omstart krävs!",
-            description: "Starta om nu för att tillämpa nya plugins och inställningar",
+            description: "Starta om nu för att tillämpa nya plugins och deras inställningar",
             following: "Följande plugins kräver omstart:",
-            fully: "Vissa plugins kräver en omstart för att vara helt inaktiverade.",
-            would: "Vill du starta om?",
             remainingCount: "och {{count}} till",
+            fully: "Vissa plugins kräver en omstart för att helt inaktivera",
+            would: "Vill du starta om nu?",
             resetDefault: "Återställ till standardinställningar",
-            failed: "Det gick inte att initiera beroenden:",
+            failed: "Det gick inte att starta beroenden:",
             button: {
                 restart: "Starta om",
-                later: "Sedan!",
+                later: "Senare!",
                 now: "Starta om nu",
                 cancel: "Avboka",
-                disableWarning: "Inaktivera varningar",
+                disableWarning: "Inaktivera varning för alltid",
                 disableAll: "Inaktivera alla",
-                reset: "återställa",
-                close: "Kvartal"
+                reset: "Återställa",
+                close: "Nära"
             }
         },
         contributor: {
             contributed: "bidragit",
             modal: {
-                contributionsInfo: "{{userName}} {{contributionCount}} {{continuedLink}} genom att utveckla plugin.",
-                noContributions: "{{userName}} har inte utvecklat några plugins än. Mest troligt {{contributedLink}} på olika sätt!"
+                contributionsInfo: "{{userName}} har {{continuedLink}} till {{contributionCount}} plugin{{s}}.",
+                noContributions: "{{userName}} har inte gjort några plugins. De {{contributedLink}} förmodligen på andra sätt!"
             }
         },
         infoModal: {
-            description: "Du kan få mer information om ett plugin genom att trycka på kugghjulet eller informationsikonen",
-            settingsInfo: "Plugins med kugghjul har inställningar du kan ändra!",
+            description: "Tryck på kugghjulet eller infoikonen för att få mer information om ett plugin",
+            settingsInfo: "Plugins med kugghjul har inställningar som du kan ändra!",
             disableAll: "Inaktivera alla plugins"
         },
         error: {
             invalidInput: "Ogiltig inmatning har angetts",
-            stopping: "Det uppstod ett problem när plugin-programmet {{plugin}} skulle stoppas",
-            starting: "Det uppstod ett problem med att initiera plugin-programmet {{plugin}}",
-            startDependency: "Det uppstod ett problem med att initiera beroenden: {{failures}}",
-            infoRender: "Ett fel uppstod vid rendering av denna plugins anpassade informationskomponent"
+            stopping: "Fel när plugin {{plugin}} stoppades",
+            starting: "Fel vid start av plugin {{plugin}}",
+            startDependency: "Fel vid start av beroenden: {{failures}}",
+            infoRender: "Ett fel uppstod vid rendering av denna plugins anpassade infokomponent"
         },
         placeholder: {
             number: "Ange ett nummer",
@@ -267,78 +267,78 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         excluded: {
             desktop: "Discord Desktop-app eller Plextron",
-            discordDesktop: "Discord Desktop-app",
-            plextron: "Plextron-applikation",
+            discordDesktop: "Discord Desktop-appen",
+            plextron: "Plextron app",
             web: "Plextron-appen och webbversionen av Discord",
             dev: "Utvecklarversion av Plexcord"
         },
         search: {
-            looking: "Är det detta du letar efter",
-            onlyAvailable: "Endast tillgänglig här ->",
-            noCriteria: "Inga plugins som matchar dina sökkriterier hittades"
+            looking: "Letar du efter",
+            onlyAvailable: "Endast tillgänglig på",
+            noCriteria: "Inga plugins uppfyller sökkriterierna."
         },
         required: {
             title: "Nödvändiga plugins",
             this: "Denna plugin krävs för att Plexcord ska fungera.",
-            by: "Denna plugin krävs för att följande ska fungera:"
+            by: "Denna plugin krävs av:"
         },
         dangerModal: {
-            title: "Farlig handling",
+            title: "FARLIG HANDLING",
             disablePlugins: "Inaktivera plugins",
             disableText: "Inaktivera alla",
-            irreversible: "DEN HÄR ÅTGÄRDEN KAN INTE ÅTERställas!",
-            enableBack: "Är du helt säker på att du vill fortsätta? Du kan aktivera den igen senare.",
+            irreversible: "DENNA HANDLING ÄR OÅTERSTÄLLBAR!",
+            enableBack: "Är du helt säker på att du vill fortsätta? Du kan alltid aktivera dem igen senare.",
             undone: "Denna åtgärd kan inte ångras. Är du säker?",
-            resetDescription: "Du är på väg att återställa plugin-inställningarna för {{pluginName}} till deras standardvärden.",
+            resetDescription: "Du är på väg att återställa alla inställningar för {{pluginName}} till deras standardvärden.",
             disable: "Du är på väg att inaktivera {{enabledPlugins}} plugins!",
-            confirmReset: "Bekräfta och återställ",
+            confirmReset: "Bekräfta återställning",
             cancel: "Avboka",
             resetSettings: "Återställ inställningar",
-            resetText: "återställa"
+            resetText: "Återställa"
         },
         filters: {
             label: "Filter",
-            placeholder: "Sök efter plugins...",
+            placeholder: "Sök efter ett plugin...",
             option: {
-                all: "Alla",
-                enabled: "Aktiv",
-                disabled: "Inaktiverad",
-                new: "ny",
-                userplugins: "Användarplugins",
-                api: "API-plugins"
+                all: "Visa alla",
+                enabled: "Visa aktiverat",
+                disabled: "Visa inaktiverad",
+                new: "Visa ny",
+                userplugins: "Visa användarinsticksprogram",
+                api: "Visa API-plugins"
             }
         },
         pluginModal: {
-            noSettings: "Detta plugin har inga inställningar som du kan ändra.",
+            noSettings: "Det finns inga inställningar för detta plugin.",
             authors: "Författare",
             settings: "Inställningar",
-            successfulReset: "{{plugin}}-pluginens inställningar har återställts.",
-            enabledStock: "Aktiva aktietillägg",
-            totalStock: "Totala lagertillägg",
-            enabledUser: "Aktiva användarinsticksprogram",
-            totalUser: "Totalt antal användartillägg",
-            info: "Se mer information",
+            successfulReset: "Inställningarna för {{plugin}} har återställts.",
+            enabledStock: "Aktiverade aktieplugins",
+            totalStock: "Totala lager plugins",
+            enabledUser: "Aktiverade användarinsticksprogram",
+            totalUser: "Totalt antal användarinsticksprogram",
+            info: "Se mer info",
             source: "Se källkoden"
         },
         metadata: {
             api: {
                 description: {
-                    memberListDecorators: "API för att lägga till dekoratörer till medlemslistan (både på servrar och DM)",
-                    messageAccessories: "API för att lägga till rekvisita till meddelanden",
-                    messageDecorations: "API för att lägga till dekoratörer till inlägg",
-                    chatInputButtons: "API för att lägga till knapp för att chatta",
-                    commands: "API behövs av allt som använder kommandon",
-                    contextMenu: "API för att lägga till/ta bort objekt från snabbmenyn",
-                    dynamicImageModal: "Låter dig hoppa över bredden eller höjden när du öppnar bildmodalen",
-                    menuItemDemangler: "Gör Discord-menyalternativet mer läsbart",
-                    messageEvents: "API behövs av allt som använder meddelandehändelser",
-                    messagePopover: "API för att lägga till knapp till meddelande popup",
-                    messageUpdater: "API för uppdatering och bearbetning av meddelanden",
-                    nicknameIcons: "API för att lägga till ikoner till användarnamn i profiler",
-                    notices: "Åtgärdar automatisk avvisning av meddelanden",
+                    memberListDecorators: "API för att lägga till dekoratörer till medlemslistan (både i servrar och DM)",
+                    messageAccessories: "API för att lägga till tillbehör till meddelanden",
+                    messageDecorations: "API för att lägga till dekorationer i meddelanden",
+                    chatInputButtons: "API för att lägga till knappar till chattinmatningen",
+                    commands: "API krävs av allt som använder kommandon",
+                    contextMenu: "API för att lägga till/ta bort objekt till/från snabbmenyer.",
+                    dynamicImageModal: "Låter dig utelämna antingen bredd eller höjd när du öppnar en bildmodal",
+                    menuItemDemangler: "Demonterar Discords menyobjektmodul",
+                    messageEvents: "API krävs av allt som använder meddelandehändelser",
+                    messagePopover: "API för att lägga till knappar till popover-meddelanden",
+                    messageUpdater: "API för uppdatering och återrendering av meddelanden",
+                    nicknameIcons: "API för att lägga till ikoner till smeknamnet, i profiler",
+                    notices: "Åtgärdar meddelanden som automatiskt avvisas",
                     serverList: "API krävs för plugins som ändrar serverlistan",
-                    userSettings: "Patchar för att avslöja Discords användarinställningar, grupper och namn",
-                    audioPlayer: "API för att spela Discords interna ljudfiler eller externa ljudlänkar.",
+                    userSettings: "Patchar Discords användarinställningar för att exponera deras grupp och namn.",
+                    audioPlayer: "API för att spela interna Discord-ljudfiler eller externa ljudlänkar.",
                     userArea: "API för att lägga till knappar i användarområdespanelen."
                 },
                 chatButtons: {
@@ -350,39 +350,39 @@ const translations: MatchStructure<typeof enTranslations> = {
             badges: {
                 description: "API för att lägga till märken till användare",
                 contributor: {
-                    plexcord: "Plexcord-deltagare",
-                    vencord: "Vencord-deltagare",
+                    plexcord: "Plexcord-bidragsgivare",
+                    vencord: "Vencord-bidragsgivare",
                     userPlugin: "User Plugin Contributor"
                 },
                 context: {
-                    title: "Märkealternativ",
+                    title: "Alternativ för märken",
                     copy: {
-                        name: "Kopiera märkets namn",
-                        link: "Kopiera märkets bildlänk"
+                        name: "Copy Badge Name",
+                        link: "Kopiera märkesbildlänk"
                     },
                     refetch: {
-                        button: "Uppdatera märken",
-                        success: "Märken har förnyats framgångsrikt!"
+                        button: "Återhämta märken",
+                        success: "Märken har återhämtats!"
                     }
                 },
                 modal: {
-                    title: "Plexcord-supporter",
-                    special: "Detta märke är ett speciellt privilegium för Plexcord-givare.",
-                    description: "Överväg att stödja utvecklingen av Plexcord genom att bli donator. Detta skulle vara mycket värdefullt för oss!!"
+                    title: "Plexcord donator",
+                    special: "Detta märke är en speciell förmån för Plexcord-givare",
+                    description: "Överväg att stödja utvecklingen av Plexcord genom att bli donator. Det skulle betyda mycket!"
                 }
-            }
+            },
         },
         uiElements: {
             manage: "Hantera UI-element",
             allows: "Låter dig dölja knappar du inte gillar",
             section: {
                 chatbar: {
-                    title: "Chattfältsknappar",
+                    title: "Chatbar-knappar",
                     description: "Det här är knapparna på höger sida av chattfältet"
                 },
                 messagePopover: {
-                    title: "Meddelande popup-knappar",
-                    description: "Dessa är flytande knappar som visas till höger när du håller muspekaren över ett meddelande"
+                    title: "Meddelande Popover-knappar",
+                    description: "Dessa är de flytande knapparna till höger när du håller muspekaren över ett meddelande"
                 }
             },
             button: "Knappar för aktiverade plugins kommer att visas här."
@@ -390,78 +390,78 @@ const translations: MatchStructure<typeof enTranslations> = {
     },
 
     patchHelper: {
-        title: "Patchassistent",
+        title: "Patch Helper",
         description: "Ett utvecklarverktyg som hjälper dig att skapa patchar för Plexcord-plugins.",
         fullPatch: {
-            label: "Tam Yama",
+            label: "Full patch",
             description: "Klistra in din fullständiga JSON-patch här för att fylla i fälten"
         },
-        find: "Bul",
-        match: "match",
-        replacement: "Ändra",
+        find: "Hitta",
+        match: "Match",
+        replacement: "Ersättning",
         preview: "Förhandsvisning",
         generatedCode: "Genererad kod",
         group: "Grupp",
-        diff: "Skillnad",
+        diff: "Diff",
         module: "Modul",
-        compile: "Derle",
+        compile: "Sammanställa",
         compiled: "Sammanställningen lyckades",
         copy: {
             clipboard: "Kopiera till Urklipp",
             codeblock: "Kopiera som kodblock"
         },
         error: {
-            noMatch: "Ingen matchning hittades. Kanske den modulen laddar lat.",
-            multipleMatch: "Mer än en matchning hittades. Använd ett mer specifikt sökmönster.",
-            noFind: "Det finns inget \"hitta\"-fält.",
-            noReplacement: "Det finns inget \"Ändra\"-fält.",
-            invalidReplacement: "Ersätt fältet är ogiltigt",
-            replacementMatch: "'replacement.match'-fältet finns inte",
-            replacementReplace: "'replacement.replace'-fältet finns inte",
-            replacementMustFunction: "Byte måste vara en funktion"
+            noMatch: "Ingen matchning hittades. Den här modulen kan vara lata laddad?",
+            multipleMatch: "Flera matchningar hittades. Använd ett mer specifikt sökmönster.",
+            noFind: "\"Sök\"-fältet saknas.",
+            noReplacement: "Fältet \"Ersättning\" saknas.",
+            invalidReplacement: "Fältet \"Ersättning\" är ogiltigt",
+            replacementMatch: "'replacement.match'-fältet saknas",
+            replacementReplace: "'replacement.replace'-fältet saknas",
+            replacementMustFunction: "'Ersättning' måste vara en funktion"
         },
         cheatSheet: {
             title: "Fuskblad",
-            identifiers: "Anpassade escape-sekvensmatchande identifierare för regex (variabelnamn, klassnamn, etc.)",
-            dollar: "lägger till $",
-            entireMatch: "Lägger till all matchning",
-            beforeMatch: "Lägger till delsträngen innan matchen",
-            afterMatch: "Lägger till delsträngen efter matchen",
-            nthGroup: "Lägger till den n:e fångstgruppen ($1, $2...)",
-            pluginInstance: "Lägger till plugin-instans"
+            identifiers: "Särskild regex escape-sekvens som matchar identifierare (varnames, klassnamn, etc.)",
+            dollar: "Sätt in en $",
+            entireMatch: "Sätt in hela tändstickan",
+            beforeMatch: "Sätt in delsträngen innan matchen",
+            afterMatch: "Sätt in delsträngen efter matchen",
+            nthGroup: "Infoga den n:e fångstgruppen ($1, $2...)",
+            pluginInstance: "Sätt in plugin-instansen"
         },
         replacementEval: {
-            label: "Processersättning som funktion",
-            description: "'Ersättning' kommer att behandlas som en funktion när detta är aktiverat."
+            label: "Behandla ersättning som funktion",
+            description: "'Ersättning' kommer att utvärderas som en funktion om detta är aktiverat"
         }
     },
 
     sync: {
         title: "Säkerhetskopiera och återställa",
         warning: "Varning",
-        warningText: "Att importera en inställningsfil kommer att åsidosätta dina nuvarande inställningar. Om du vill behålla din nuvarande konfiguration, se till att exportera en säkerhetskopia först.",
-        description: "Du kan importera och exportera dina Plexcord-inställningar som en JSON-fil. På så sätt kan du enkelt flytta dina inställningar till en annan enhet eller återställa dina inställningar efter att du har installerat om Plexcord eller Discord.",
-        successful: "Inställningarna har importerats. Starta om appen för att ändringarna ska träda i kraft!",
+        warningText: "Om du importerar en inställningsfil kommer dina nuvarande inställningar att skrivas över. Make sure to export a backup first if you want to keep your current configuration.",
+        description: "Du kan importera och exportera dina Plexcord-inställningar som en JSON-fil. Detta gör att du enkelt kan överföra dina inställningar till en annan enhet, eller återställa dina inställningar efter att du har installerat om Plexcord eller Discord.",
+        successful: "Inställningarna har importerats. Börja om för att tillämpa ändringar!",
         error: {
-            failure: "Import av inställningar misslyckades: {{error}}",
-            failedExport: "Inställningsexport misslyckades, kontrollera konsolen",
-            invalid: "Ogiltiga inställningar. Är detta verkligen en Plexcord Tuning-fil?",
-            tooLarge: "DataStore är för stort - utesluten från säkerhetskopiering. Använd funktionen \"Exportera databutiker\" om det behövs.",
-            clearSomeDate: "DataStore är enormt. Rensa några plugin-data och försök igen."
+            failure: "Det gick inte att importera inställningar: {{error}}",
+            failedExport: "Det gick inte att exportera inställningar, kontrollera konsolen",
+            invalid: "Ogiltiga inställningar. Är det här ens en Plexcord Settings-fil?",
+            tooLarge: "DataStore för stort - utesluten från säkerhetskopiering. Använd \"Exportera databutiker\" om det behövs.",
+            clearSomeDate: "DataStore för stort. Rensa några plugin-data och försök igen."
         },
         settings: {
-            text: "Vad finns i säkerhetskopian?",
+            text: "Vad ingår i en säkerhetskopia?",
             quickcss: "Anpassad QuickCSS",
             theme: "Temalänkar",
             plugins: "Plugin-inställningar",
-            datastores: "Tilläggsarkiv (t.ex. Tidszoner eller IRememberYou)"
+            datastores: "Plugin DataStores (t.ex. Tidszoner eller IRememberYou)"
         },
         import: {
             title: "Importera inställningar",
-            description: "Välj en tidigare exporterad inställningsfil för att återställa din konfiguration. Detta kommer att ersätta alla dina nuvarande inställningar med dem från säkerhetskopian.",
+            description: "Välj en tidigare exporterad inställningsfil för att återställa din konfiguration. Detta kommer att ersätta alla dina nuvarande inställningar med de från säkerhetskopian.",
             all: "Importera alla inställningar",
-            plugins: "Eklentiyi Iche Aktar",
-            css: "QuickCSS'yi İçe Mer",
+            plugins: "Importera plugin",
+            css: "Importera QuickCSS",
             datastore: "Importera databutiker"
         },
         export: {
@@ -476,46 +476,46 @@ const translations: MatchStructure<typeof enTranslations> = {
 
     cloud: {
         text: "Moln",
-        title: "Inställningar Synkronisering",
-        override: "Molnsynkronisering",
-        description: "Synkronisera dina Plexcord-inställningar till molnet. Detta gör att du kan underhålla din konfiguration konsekvent över flera enheter utan manuell import/export.",
-        switchDescription: "När de är aktiverade synkroniseras dina inställningar till molnet. Du kan synkronisera manuellt med följande åtgärder.",
+        title: "Inställningar Synk",
+        override: "Cloud Sync",
+        description: "Synkronisera dina Plexcord-inställningar till molnet. Detta gör det enkelt att hålla din konfiguration konsekvent över flera enheter utan manuell import/export.",
+        switchDescription: "När det är aktiverat kan dina inställningar synkroniseras till och från molnet. Använd åtgärderna nedan för att synkronisera manuellt.",
         settings: "Molninställningar",
-        successful: "Dina inställningar har synkroniserats till molnet.",
-        updated: "Dina inställningar har uppdaterats! Klicka här för att starta om för att ändringarna ska få full effekt!",
+        successful: "Synkroniserade inställningar till molnet!",
+        updated: "Dina inställningar har uppdaterats! Klicka här för att starta om för att tillämpa ändringarna helt!",
         deleted: "Inställningar raderade från molnet!",
         integration: {
             title: "Molnintegration",
             description: "Plexcords molnintegration låter dig synkronisera dina inställningar över flera enheter och Discord-installationer. Dina data lagras säkert och kan enkelt återställas när som helst.",
         },
-        reauth: "Vi märkte att en annan klient hade molnintegrationer aktiverade! På grund av begränsningar måste du autentisera på nytt för att fortsätta. Klicka här för att gå till inställningssidan för att fortsätta!",
+        reauth: "Vi har märkt att du har molnintegrationer aktiverade i en annan klient! På grund av begränsningar måste du återauktorisera för att fortsätta använda dem. Klicka här för att gå till inställningssidan för att göra det!",
         error: {
-            setup: "Installationen misslyckades (det gick inte att hämta OAuth-konfigurationen).",
-            secret: "Installationen misslyckades (ingen hemlig nyckel returnerades).",
-            string: "Installationen misslyckades ({{error}}).",
-            connect: "Molnsynkronisering har inaktiverats eftersom det här kontot inte är anslutet till Plexcord Cloud-appen. Du kan återaktivera det här kontot genom att ansluta det i molninställningarna. (Obs: kommer att lagra dina inställningar separat)",
-            noSettings: "Inga inställningar hittades i molnet.",
+            setup: "Konfigurationen misslyckades (det gick inte att hämta OAuth-konfigurationen).",
+            secret: "Installationen misslyckades (ingen hemlighet returnerades).",
+            string: "Konfigurationen misslyckades ({{error}}).",
+            connect: "Molnsynkronisering inaktiverades eftersom det här kontot inte är anslutet till Plexcord Cloud-appen. Du kan aktivera det igen genom att ansluta det här kontot i molninställningarna. (obs: det kommer att lagra dina inställningar separat)",
+            noSettings: "Det finns inga inställningar i molnet.",
             uptodate: "Dina inställningar är uppdaterade.",
-            localNewer: "Dina lokala inställningar är nyare än molninställningarna.",
-            delete: "Det gick inte att ta bort inställningar ({{error}}).",
+            localNewer: "Dina lokala inställningar är nyare än molnet.",
+            delete: "Kunde inte radera inställningar ({{error}}).",
             api: {
                 returned: {
-                    delete: "Det gick inte att radera inställningar (API returnerade {{status}}).",
-                    to: "Det gick inte att synkronisera inställningar till molnet (API returnerade {{status}}).",
-                    from: "Det gick inte att synkronisera inställningar från molnet (API returnerade {{status}})."
+                    delete: "Kunde inte ta bort inställningar (API returnerade {{status}}).",
+                    to: "Kunde inte synkronisera inställningar till molnet (API returnerade {{status}}).",
+                    from: "Kunde inte synkronisera inställningar från molnet (API returnerade {{status}})."
                 }
             },
             synchronize: {
-                to: "Inställningarna kunde inte synkroniseras till molnet ({{error}}).",
-                from: "Inställningarna kunde inte synkroniseras från molnet ({{error}})."
+                to: "Det gick inte att synkronisera inställningarna till molnet ({{error}}).",
+                from: "Kunde inte synkronisera inställningar från molnet ({{error}})."
             }
         },
         warning: {
-            enableCloudIntegration: "Om du vill använda funktionerna för synkronisering av inställningar, aktivera molnintegrering ovan."
+            enableCloudIntegration: "Aktivera molnintegrering ovan för att använda funktioner för synkronisering av inställningar."
         },
         danger: {
             title: "Riskzon",
-            description: "Ta bort all din data permanent i molnet. Denna åtgärd är oåterkallelig och tar bort alla synkroniserade inställningar och all annan data som lagras i molninfrastrukturen.",
+            description: "Ta bort all din data permanent från molnet. Den här åtgärden kan inte ångras och kommer att ta bort alla synkroniserade inställningar och all annan data lagrad på molnets backend.",
             delete: {
                 account: {
                     title: "Ta bort molnkonto",
@@ -528,239 +528,239 @@ const translations: MatchStructure<typeof enTranslations> = {
         notification: {
             title: "Molnintegration",
             enabled: "Molnintegration aktiverad",
-            host: "Domänen {{host}} har lagts till i behörighetslistan. Starta om programmet för att ändringarna ska träda i kraft.",
+            host: "{{host}} har lagts till i vitlistan. Starta om appen för att ändringarna ska träda i kraft.",
             erase: {
                 successful: "Molndata har raderats",
-                failed: "Det gick inte att radera all data (API returnerade {{status}}), kontakta supporten."
+                failed: "Det gick inte att radera all data (API {{status}} returnerades), kontakta supporten."
             }
         },
         button: {
             to: "Synkronisera till molnet",
             from: "Synkronisera från molnet",
-            fromDescription: "Detta kommer att skriva över dina nuvarande inställningar med de från molnet. Använd det klokt!",
+            fromDescription: "Detta kommer att skriva över dina lokala inställningar med de i molnet. Använd klokt!",
             delete: "Ta bort molndata",
             enable: "Aktivera molnintegrationer",
             reauthorize: "Auktorisera på nytt",
             confirm: "Starta om nu",
-            later: "Sedan!"
+            later: "Senare!"
         },
-        privacy: "skyddar din integritet",
+        privacy: "respekterar din integritet",
         source: "källkod",
-        overview: "Plexcord kommer med molnintegration, vilket ger fördelar som att synkronisera inställningar mellan enheter. Eftersom dessa {{privacy}} och {{source}} erbjuds med AGPL 3.0-licens kan du vara värd för dem på din egen server.",
-        authorization: "Anslut till molnet för att synkronisera inställningar. Om du inte har ställt in molnintegration än kommer detta att be om auktorisering.",
+        overview: "Plexcord kommer med en molnintegration som lägger till godsaker som synkronisering av inställningar mellan enheter. Den {{privacy}} och {{source}} är AGPL 3.0 licensierad så att du kan vara värd för den själv.",
+        authorization: "Anslut till molnets backend för synkronisering av inställningar. Detta kommer att begära auktorisering om du inte har konfigurerat molnintegration ännu.",
         backend: {
-            title: "Molnleverantör",
-            description: "Välj hur dina inställningar ska lagras i molnet. Som standard används Plexcord Cloud, men du kan även konfigurera din egen värdbaserade molntjänst om du vill.",
+            title: "Cloud Backend",
+            description: "Välj hur dina inställningar lagras i molnet. Som standard används Plexcord Cloud, men du kan även ansluta din egen självvärdade molntjänst.",
             invalid: "Ogiltig URL"
         },
         sync: {
             title: "Synkroniseringsregler för den här enheten",
-            description: "Den här inställningen avgör hur inställningarna synkroniseras mellan den här enheten och molnet. Du kan tillåta att ändringar överförs i båda riktningarna eller välja en enskild sida som huvudkälla.",
+            description: "Den här inställningen styr hur inställningarna flyttas mellan den här enheten och molnet. Du kan låta förändringar flöda åt båda hållen, eller välja en plats som den huvudsakliga källan till sanning.",
             direction: {
-                both: "Dubbelriktad synkronisering (ändringar överförs i båda riktningarna)",
+                both: "Tvåvägssynkronisering (ändringar går åt båda hållen)",
                 push: "Den här enheten är källan (endast uppladdning)",
-                pull: "Molnkälla (endast nedladdning)",
-                manual: "Automatisk synkronisering (manuell synkronisering endast med knapparna nedan)"
+                pull: "Molnet är källan (endast nedladdning)",
+                manual: "Synkronisera inte automatiskt (endast manuell synkronisering via knapparna nedan)"
             }
         }
     },
 
     changelog: {
-        text: "Ändra anteckningar",
-        title: "Ändra anteckningar",
+        text: "Ändra logg",
+        title: "Ändra logg",
         description: "Du kan hitta de senaste ändringarna och uppdateringarna av Plexcord här.",
-        by: "författare",
-        check: "Kontrollera lager",
-        uptodate: "nuvarande",
+        by: "av",
+        check: "Förvarskontroll",
+        uptodate: "uppdaterad",
         update: "Uppdatera",
-        noMessage: "inget meddelande",
-        unknown: "okänd",
+        noMessage: "Inget meddelande",
+        unknown: "Okänd",
         updatedPlugins: "Uppdaterade plugins",
         newSettings: "Nya inställningar",
-        newSettingTooltip: "Ny inställning för {{plugin}}",
+        newSettingTooltip: "Ny inställning i {{plugin}}",
         loading: "Belastning...",
-        repoUptodate: "Lager uppdaterat",
-        fetch: "Ta med från lager",
-        clear: "Rensa alla anteckningar",
+        repoUptodate: "Förvaret uppdaterat",
+        fetch: "Hämta från arkivet",
+        clear: "Rensa alla loggar",
         internet: "Se till att du har en internetanslutning och försök igen.",
         recent: "Senaste ändringar",
-        codeChanges: "Kodändringar {{count}} ny commit",
-        updateLogs: "{{count}} Uppdatera notering",
-        noCommit: "Inga vidarebefordran hittades från din nuvarande version. Klicka på \"Hämta från arkivet\" för att leta efter nya ändringar.",
-        previous: "Tillsammans med tidigare uppdateringssessioner, commit-historik och plugin-ändringar.",
+        codeChanges: "Kodändringar {{count}} new commit{{s}}",
+        updateLogs: "Uppdatera loggar ({{count}})",
+        noCommit: "Inga bindningar tillgängliga före din nuvarande version. Klicka på \"Hämta från arkivet\" för att leta efter nya ändringar.",
+        previous: "Tidigare uppdateringssessioner med deras commit-historik och plugin-ändringar.",
         modal: {
-            description: "Se de senaste ändringarna av Plexcord. Den här processen visar dig vad som är nytt genom att hämta commits direkt från förvaret.",
-            repository: "Depo",
-            failed: "Det gick inte att ta emot - kontrollera konsolen",
-            current: "Tillgänglig:",
-            hide: "dölja anteckningar",
-            show: "Visa anteckningar",
+            description: "Se de senaste ändringarna av Plexcord. Detta hämtar commits direkt från arkivet för att visa dig vad som är nytt.",
+            repository: "Förvar",
+            failed: "Det gick inte att hämta - kontrollera konsolen",
+            current: "Nuvarande:",
+            hide: "Göm loggar",
+            show: "Visa loggar",
             fetch: {
-                title: "Ta med ändringar",
-                description: "Kontrollera om det finns nya commits, plugin-uppdateringar och kodändringar i arkivet. Detta kommer att jämföra din nuvarande version med den senaste versionen och visa dig vad som är nytt.",
-                newCommit: "Dessa är nya commits och pluginuppdateringar sedan din senaste utgåva. Du kan se vilka funktioner som har lagts till, vilka buggar som har åtgärdats och vilka plugins som har uppdaterats.",
-                confirm: "Burk",
+                title: "Hämta ändringar",
+                description: "Kontrollera arkivet för nya bekräftelser, plugin-uppdateringar och kodändringar. Detta kommer att jämföra din nuvarande version med den senaste tillgängliga och visa dig vad som är nytt.",
+                newCommit: "Det här är de nya commits och plugin-uppdateringarna sedan din senaste version. Du kan se vilka funktioner som lades till, buggar fixades och vilka plugins som fick uppdateringar.",
+                confirm: "Hämta",
             }
         },
         commit: {
-            available: "begå tillgängligt",
+            available: "åtaganden tillgängliga",
             no: "Inga nya commits",
             new: "nya plugins",
             updated: "uppdaterade plugins",
             settings: "nya inställningar"
         },
         toast: {
-            already: "Förvaret är redan uppdaterat",
-            found: "{{count}} nya commits hittades från arkivet",
-            local: "Förvaret är uppdaterat med din lokala kopia",
-            failed: "Kunde inte ta med den från lagret :(",
-            cleared: "Alla anteckningar raderade",
-            logCleared: "Anteckning rensad",
-            yourLatest: "Åtgärder sparade från din senaste uppdatering"
+            already: "Redan uppdaterad med repository",
+            found: "Hittade {{count}} ny commit{{s}} från arkivet",
+            local: "Lagret är uppdaterat med din lokala kopia",
+            failed: "Det gick inte att hämta från arkivet :(",
+            cleared: "Alla loggar har rensats",
+            logCleared: "Loggen har rensats",
+            yourLatest: "Loggade åtaganden från din senaste uppdatering"
         },
         alert: {
             clear: {
-                title: "Rensa alla anteckningar",
-                body: "Är du säker på att du vill rensa alla anteckningar? Denna åtgärd kan inte ångras.",
+                title: "Rensa alla loggar",
+                body: "Är du säker på att du vill rensa alla loggar? Detta kan inte ångras.",
                 confirm: "Rensa alla",
                 confirmColor: "fara",
                 cancel: "Avboka"
             },
             log: {
                 title: "Rensa logg",
-                body: "Är du säker på att du vill rensa den här loggen? Denna åtgärd kan inte ångras.",
+                body: "Är du säker på att du vill rensa den här loggen? Detta kan inte ångras.",
                 confirm: "Rensa logg",
                 confirmColor: "fara",
                 cancel: "Avboka"
             }
         },
-        newPlugins: "{{count}} Ny plugin",
+        newPlugins: "{{count}} Ny plugin{{s}}",
         following: "Följande plugins har lagts till i de senaste uppdateringarna:",
-        more: "+{{count}} nya plugins"
+        more: "+{{count}} fler plugins"
     },
 
     csp: {
         restart: "En omstart krävs för att tillämpa denna ändring",
         blocked: {
             resources: "Blockerade resurser",
-            disallowed: "Vissa bilder, stilar eller typsnitt har blockerats eftersom de kommer från obehöriga domäner.",
-            recommended: "Det rekommenderas starkt att du flyttar dem till GitHub eller Imgur. Du kan dock också tillåta domäner om du litar på dem helt.",
-            afterAllow: "Efter att ha beviljat tillstånd till ett utrymme måste du stänga av och starta om {{plattform}} (från systemfältet/aktivitetshanteraren) för att tillämpa ändringen.",
+            disallowed: "Vissa bilder, stilar eller typsnitt blockerades eftersom de kommer från otillåtna domäner.",
+            recommended: "Det rekommenderas starkt att flytta dem till GitHub eller Imgur. Men du kan också tillåta domäner om du litar på dem fullt ut.",
+            afterAllow: "När du har tillåtit en domän måste du stänga helt (från fack/uppgiftshanteraren) och starta om {{platform}} för att tillämpa ändringen.",
             allow: "Tillåta",
             url: "Blockerade webbadresser"
         },
         imgur: {
-            direct: "Imgur-länkar måste vara direktlänkar i formatet {{etc}}.",
-            copy: "För att få en direktlänk högerklickar du på bilden och väljer 'Kopiera bildadress'."
+            direct: "Imgur-länkar bör vara direktlänkar i form av {{etc}}",
+            copy: "För att få en direktlänk, högerklicka på bilden och välj \"Kopiera bildadress\"."
         },
         wants: {
-            caller: "{{callerName}} vill tillåta anslutningar till {{domän}}",
-            detail: "Om du inte känner igen och helt litar på {{domän}} bör du avbryta denna begäran!",
+            caller: "{{callerName}} vill tillåta anslutningar till {{domain}}",
+            detail: "Om du inte känner igen och helt litar på {{domain}}, bör du avbryta denna begäran!",
             restart: "Du måste stänga och starta om {{appName}} helt för att ändringarna ska träda i kraft.",
             type: {
-                images: "bilder",
+                images: "Bilder",
                 styles: "CSS och teman",
                 fonts: "Teckensnitt"
             },
-            content: "Följande typer av innehåll kommer att tillåtas laddas upp från {{domän}}:",
-            understand: "Jag litar helt på {{domän}} och förstår riskerna med att tillåta länkar.",
+            content: "Följande typer av innehåll kommer att tillåtas att laddas från {{domain}}:",
+            understand: "Jag litar fullt ut på {{domain}} och förstår riskerna med att tillåta anslutningar till den.",
             button: {
                 cancel: "Avboka",
                 allow: "Tillåta"
             },
-            title: "Domännamnsbehörigheter"
+            title: "Värdbehörigheter"
         }
     },
 
     themes: {
         title: "teman",
         management: "Temahantering",
-        description: "Anpassa Discords utseende med teman. Lägg till lokala .css-filer eller installera teman direkt från webbadresser. Teman med en kugghjulsikon har anpassningsbara inställningar som du kan ändra.",
+        description: "Customise Discord's appearance with themes. Lägg till lokala .css-filer eller ladda teman direkt från webbadresser. Teman med en kugghjulsikon har anpassningsbara inställningar som du kan ändra.",
         local: "Lokala teman",
         new: "NY",
-        pinned: "fäst",
+        pinned: "Fäst",
         stylus: "Pennförlängning",
         bd: "BetterDiscord-teman",
-        github: "Github",
-        download: "Letar du efter ett tema? Kolla in {{bd}} eller sök på {{github}}. När du laddar ner från BetterDiscord, klicka på knappen \"Ladda ner\" och placera .theme.css-filen i din temamapp.",
+        github: "GitHub",
+        download: "Letar du efter teman? Kolla in {{bd}} eller sök på {{github}}. När du laddar ner från BetterDiscord, klicka på \"Ladda ner\" och placera .theme.css-filen i din temamapp.",
         add: "Tillägga",
         reset: "Återställ inställningarna till standard",
-        notCSS: "Det är inte en CSS-fil. Se till att du använder rålänken!",
+        notCSS: "Inte en CSS-fil. Kom ihåg att använda rålänken!",
         okay: "Okej!",
-        checking: "Kontrolleras...",
+        checking: "Kontroll...",
         valid: "Giltig!",
         upload: "Ladda upp tema",
-        openFolder: "Öppna temamappen",
-        loadMissing: "Installera saknade teman",
+        openFolder: "Öppna mappen Teman",
+        loadMissing: "Ladda saknade teman",
         editQuickCSS: "Redigera QuickCSS",
         editClient: "Redigera klienttema",
         website: "Öppna webbplatsen",
         discord: "Discord-server",
         downloadTheme: "Ladda ner",
         refresh: "Uppdatera",
-        delete: "Sil",
+        delete: "Radera",
         unknown: {
-            title: "okänd",
+            title: "Okänd",
             author: "Okänd författare",
-            theme: "Discord-tema"
+            theme: "Ett discord-tema"
         },
-        required: "Följande plugins krävs men är inte aktiva:",
+        required: "Följande plugins krävs, men är inte aktiverade:",
         homepage: "Hemsida",
         support: "Stöd",
         online: {
             title: "Onlineteman",
-            description: "Installera teman direkt från webbadresser istället för lokala filer. Onlineteman uppdateras automatiskt när källan ändras; så att du alltid har den senaste versionen utan manuell nedladdning.",
+            description: "Ladda teman direkt från webbadresser istället för lokala filer. Onlineteman uppdateras automatiskt när källan ändras, så att du alltid har den senaste versionen utan manuella nedladdningar.",
             enable: "Aktivera onlineteman",
-            enableDescription: "Växla online-temauppladdning. När det är inaktiverat kommer alla onlineteman att stängas av och du kommer inte att kunna lägga till nya onlineteman."
+            enableDescription: "Växla inläsning av onlinetema. När det är inaktiverat kommer alla onlineteman att stängas av och du kommer inte att kunna lägga till nya."
         },
         quickActions: {
-            title: "Snabba transaktioner",
-            description: "Genvägar för att hantera dina teman. Öppna temamappen för att lägga till nya teman, använd QuickCSS för snabba stilredigeringar eller ladda om teman efter ändringar."
+            title: "Snabba åtgärder",
+            description: "Genvägar för att hantera dina teman. Öppna din teman-mapp för att lägga till nya teman, använd QuickCSS för snabba stiljusteringar eller ladda om teman efter att du har gjort ändringar."
         },
         error: {
-            userscript: "Teman på Userscript stöds inte!",
-            stylus: "Du kan installera teman med {{stylus}} istället!",
+            userscript: "Teman stöds inte på Userscript!",
+            stylus: "Du kan istället installera teman med {{stylus}}!",
             expired: "Ogiltig eller utgången länk",
-            text: "Även:"
+            text: "Fel:"
         },
         copy: {
             url: "Kopiera URL",
             copied: "Tema URL kopierad!",
             settings: "Kopiera temainställningar",
-            copiedSettings: "Temainställningar har kopierats till urklipp."
+            copiedSettings: "Kopierade temainställningar till urklipp."
         },
         paste: {
             settings: "Klistra in temainställningar",
             empty: "Ditt urklipp är tomt.",
-            invalid: "Det finns inga giltiga inställningsdata i ditt urklipp.",
-            pasted: "Temainställningar klistrades in från urklipp."
+            invalid: "Ditt urklipp har inte giltiga inställningsdata.",
+            pasted: "Klistrade in temainställningar från urklipp."
         },
         settings: {
             for: "Inställningar för {{themeName}}",
         },
         installed: {
             title: "Installerade teman",
-            description: "Hantera dina teman här. Lokala teman laddas från din temamapp, onlineteman laddas från webbadresser. Teman med en kugghjulsikon har anpassningsbara inställningar.",
-            count: "{{count}} teman installerade ({{localCount}} lokalt, {{onlineCount}} online) {{enabledCount}} aktiverade",
-            search: "Tema till och med...",
-            loading: "Teman laddas...",
-            none: "Det finns inga teman installerade än. För att komma igång, lägg till temafilerna i din temamapp eller lägg till ett onlinetema ovanifrån.",
-            noCriteria: "Inga teman hittades som matchade dina sök- eller filterkriterier."
+            description: "Hantera dina teman här. Lokala teman laddas från din temamapp, onlineteman från webbadresser. Teman med en kugghjulsikon har anpassningsbara inställningar.",
+            count: "{{count}} tema{{s}} installerat ({{localCount}} lokalt, {{onlineCount}} online) · {{enabledCount}} aktiverat",
+            search: "Sök efter ett tema...",
+            loading: "Laddar teman...",
+            none: "Inga teman installerade ännu. Lägg till temafiler i din temamapp eller lägg till ett onlinetema ovan för att komma igång.",
+            noCriteria: "Inga teman matchar dina sök- eller filterkriterier."
         },
         filter: {
             all: "Visa alla",
             online: "Onlineteman",
             local: "Lokala teman",
-            enabled: "Effektiv",
+            enabled: "Aktiverad",
             disabled: "Inaktiverad"
         },
         notification: {
             refresh: {
-                title: "Temat förnyat",
-                error: "Temat kunde inte uppdateras"
+                title: "Temat uppdaterat",
+                error: "Det gick inte att uppdatera temat"
             },
             failed: {
-                download: "Indirilemedi tema"
+                download: "Det gick inte att ladda ner temat"
             }
         }
     },
@@ -769,69 +769,69 @@ const translations: MatchStructure<typeof enTranslations> = {
         title: "Uppdaterare",
         settings: "Uppdateringsinställningar",
         updates: "Uppdateringar",
-        updated: "uppdaterad!",
-        restart: "Starta om genom att klicka här",
-        repaired: "Plexcord reparerad!",
-        ok: "ok",
+        updated: "har uppdaterats!",
+        restart: "Klicka här för att starta om",
+        repaired: "Plexcord har reparerats!",
+        ok: "OK",
         preferences: {
             title: "Uppdatera inställningar",
-            description: "Kolla in hur Plexcord håller sig uppdaterad. Du kan välja att uppdatera automatiskt i bakgrunden eller få aviseringar när nya uppdateringar är tillgängliga.",
+            description: "Kontrollera hur Plexcord håller sig uppdaterad. Du kan välja att uppdatera automatiskt i bakgrunden eller få ett meddelande när nya uppdateringar är tillgängliga.",
         },
         github: {
-            local: "Din lokala kopia har nyare poster än fjärrförvaret. Detta händer vanligtvis när du gör lokala ändringar. Behåll eller återställ dem innan du uppdaterar."
+            local: "Din lokala kopia har nyare commits än fjärrarkivet. Detta händer vanligtvis när du har gjort lokala ändringar. Vänligen spara eller återställ dem innan du uppdaterar."
         },
         error: {
-            check: "Det gick inte att söka efter en uppdatering. Se konsolen för mer information.",
-            occurred: "Ett fel uppstod",
-            retrieve: "Det uppstod ett problem med att hämta uppdateringsinformation - Kontrollera konsolen",
-            title: "Nej!",
-            tryAgain: "Ett fel har uppstått. Försök igen eller se konsolen för mer information.",
-            command: "{{path}}-kommandot hittades inte. Ladda ner detta eller försök igen.",
+            check: "Det gick inte att kontrollera uppdateringar. Kontrollera konsolen för mer information",
+            occurred: "Ett okänt fel uppstod",
+            retrieve: "Det gick inte att hämta - kontrollera konsolen",
+            title: "hoppsan!",
+            tryAgain: "Ett okänt fel uppstod. Försök igen eller se konsolen för mer information.",
+            command: "Kommandot {{path}} hittades inte. Installera det och försök igen.",
             code: "Kod {{code}}. Se konsolen för mer information.",
-            running: "Det uppstod ett problem när {{cmd}} kördes: {{error}}",
-            failed: "Detta misslyckades också :( Försök att uppdatera eller installera om med installationsprogrammet!"
+            running: "Ett fel uppstod när {{cmd}} kördes: {{error}}",
+            failed: "Det misslyckades också :( Försök att uppdatera eller installera om med installationsprogrammet!"
         },
-        available: "1 uppdatering tillgänglig",
-        updateAvailable: "Plexcord-uppdatering tillgänglig!",
+        available: "Det finns 1 uppdatering",
+        updateAvailable: "En Plexcord-uppdatering är tillgänglig!",
         click: "Klicka här för att se uppdateringen",
-        available_plural: "{{count}} uppdateringar tillgängliga",
-        current: "Nuvarande!",
+        available_plural: "Det finns {{count}} uppdateringar",
+        current: "Uppdaterad!",
         successful: {
-            title: "Uppdateringen lyckades!",
-            body: "Uppdaterades framgångsrikt. Starta om för att spara ändringar!",
+            title: "Uppdatering lyckats!",
+            body: "Uppdaterades framgångsrikt. Starta om nu för att tillämpa ändringarna?",
             button: {
                 confirm: "Starta om",
                 cancel: "Inte nu!",
                 update: "Uppdatera nu",
                 check: "Sök efter uppdateringar"
             },
-            noFound: "Ingen uppdatering hittades"
+            noFound: "Inga uppdateringar hittades"
         },
         automatically: {
-            label: "Automatisk uppdatering",
-            description: "Plexcord laddar ner och installerar automatiskt uppdateringar utan bekräftelse"
+            label: "Uppdatera automatiskt",
+            description: "Uppdatera Plexcord automatiskt utan bekräftelse"
         },
         notify: {
-            label: "Visa automatisk uppdateringsavisering",
-            description: "Visa ett meddelande när Plexcord uppdateras automatiskt"
+            label: "Få ett meddelande när en automatisk uppdatering slutförs",
+            description: "Visar ett meddelande när Plexcord uppdateras automatiskt"
         },
-        repo: "Depo",
-        repoDescription: "Detta är GitHub-förvaret där Plexcord tar emot uppdateringar.",
+        repo: "Repo",
+        repoDescription: "Detta är GitHub-förrådet där Plexcord hämtar uppdateringar från.",
         loading: "Belastning...",
     },
 
     components: {
         error: {
             title: "nej då!",
-            render: "Ett fel uppstod när den här komponenten renderades. Hitta mer information nedan och på din konsol."
+            render: "Ett fel uppstod när den här komponenten renderades. Mer information finns nedan och i din konsol."
         },
         componentFailed: {
-            message: "Ah! Den här sidan kunde inte renderas. Det finns dock en uppdatering tillgänglig som kan fixa detta. Vill du uppdatera och starta om nu?"
+            message: "Åh Åh! Det gick inte att rendera denna sida. Det finns dock en uppdatering tillgänglig som kan fixa det. Vill du uppdatera och starta om nu?"
         },
         quickCSS: {
-            title: "Öppna QuickCSS Editor",
+            title: "QuickCSS Editor Öppna",
             message: "QuickCSS-redigeraren är fortfarande öppen i bakgrunden.",
-            detail: "Vill du fortfarande stänga Discord? Detta kommer också att stänga QuickCSS-redigeraren.",
+            detail: "Vill du stänga Discord ändå? Detta kommer också att stänga QuickCSS-redigeraren.",
             cancel: "Avboka",
             close: "Stäng i alla fall"
         }
@@ -844,36 +844,36 @@ const translations: MatchStructure<typeof enTranslations> = {
     },
 
     notifications: {
-        dismiss: "Stäng avisering",
+        dismiss: "Avvisa meddelande",
         noYet: "Inga aviseringar än",
         settings: "Aviseringsinställningar",
         log: {
             title: "Aviseringslogg",
             clear: "Rensa aviseringslogg",
             sure: "Är du säker?",
-            permamently: "{{count}} aviseringar kommer att tas bort permanent. Denna åtgärd kan inte ångras.",
+            permamently: "Detta kommer att permanent ta bort {{count}} notification{{s}}. Denna åtgärd kan inte ångras.",
             button: {
-                confirm: "ok",
-                cancel: "Avboka"
+                confirm: "Gör det!",
+                cancel: "Strunt i det"
             }
         }
     },
 
     memberlist: {
         error: {
-            render: "Ett fel uppstod när {{key}} medlemslistadekoratören renderades"
+            render: "Det gick inte att återge {{key}} Medlemslistadekoratör"
         }
     },
 
     message: {
         accessory: {
             error: {
-                render: "Ett fel uppstod när {{nyckel}} meddelandetillbehöret renderades"
+                render: "Det gick inte att återge {{key}} meddelandetillbehör"
             }
         },
         decoration: {
             error: {
-                render: "Ett fel uppstod vid rendering av {{nyckel}} meddelandedekoration"
+                render: "Det gick inte att återge {{key}} meddelandedekoration"
             }
         }
     },
@@ -888,50 +888,50 @@ const translations: MatchStructure<typeof enTranslations> = {
         unit: {
             year: "år",
             years: "år",
-            month: "är",
-            months: "är",
+            month: "månad",
+            months: "månader",
             week: "vecka",
-            weeks: "vecka",
+            weeks: "veckor",
             day: "dag",
-            days: "dag",
-            hour: "ögonblick",
-            hours: "ögonblick",
-            minute: "minuter",
+            days: "dagar",
+            hour: "timme",
+            hours: "timmar",
+            minute: "minut",
             minutes: "minuter",
             second: "andra",
-            seconds: "andra",
-            ago: "före",
-            s: " "
+            seconds: "sekunder",
+            ago: "sedan",
+            s: "s"
         }
     },
 
     plugin: {
         noTrack: {
             name: "NoTrack",
-            description: "Inaktiverar Discords spårning (analytics/'vetenskap'), mätvärden och Sentry-kraschrapportering",
+            description: "Inaktivera Discords spårning (analytics/'vetenskap'), mätvärden och Sentry-kraschrapportering",
             option: {
                 disableAnalytics: {
-                    label: "Stäng analys",
-                    description: "Inaktivera Discords spårnings (analytics/'vetenskap') mätvärden och Sentry-kraschrapportering"
+                    label: "Inaktivera Analytics",
+                    description: "Inaktivera Discords spårning (analytics/'vetenskap'), mätvärden och Sentry-kraschrapportering"
                 }
             }
         },
         settings: {
-            name: "Inställningar",
-            description: "Lägger till inställningsgränssnitt och felsökningsinformation",
+            name: "Settings",
+            description: "Lägger till Inställningar UI och felsökningsinformation",
             option: {
                 language: {
-                    label: "Dil",
+                    label: "Språk",
                     description: "Välj önskat språk för Plexcord."
                 },
                 settingsLocation: {
                     label: "Inställningar Plats",
-                    description: "Plexcord bestämmer var inställningssektionen ska placeras"
+                    description: "Bestämmer var avsnittet Plexcord-inställningar kommer att finnas."
                 }
             }
         },
         supportHelper: {
-            name: "Supportassistent",
+            name: "Support Helper",
             description: "Hjälper oss att ge dig stöd",
             commands: {
                 description: {
@@ -941,19 +941,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             modals: {
                 outdated: {
-                    title: "Vänta!",
-                    body: "Du använder en gammal version av Plexcord! Troligtvis har dina problem redan lösts.",
-                    footer: "Uppdatera innan du ber om support!",
+                    title: "Hålla fast!",
+                    body: "Du använder en föråldrad version av Plexcord! Chansen är stor att ditt problem redan är åtgärdat.",
+                    footer: "Uppdatera först innan du ber om support!",
                     button: {
-                        cancel: "Se Uppdateringar",
+                        cancel: "Visa uppdateringar",
                         confirm: "Uppdatera och starta om nu",
                         secondaryConfirm: "Jag vet vad jag gör eller så kan jag inte uppdatera"
                     }
                 },
                 updater: {
-                    title: "Vänta!",
-                    body: "Du använder en externt uppdaterad version av Plexcord, vi tillhandahåller inte support för denna version!",
-                    footer: "Vänligen antingen {{officiellt}} ​​eller kontakta din paketleverantör för support.",
+                    title: "Hålla fast!",
+                    body: "Du använder en externt uppdaterad Plexcord-version, som vi inte tillhandahåller support för!",
+                    footer: "Byt antingen till en {{officially}} eller kontakta din paketansvarig för support istället.",
                     officially: "officiellt stödd version av Plexcord",
                     button: {
                         cancel: "Avboka",
@@ -961,56 +961,56 @@ const translations: MatchStructure<typeof enTranslations> = {
                         now: "Uppdatera nu"
                     },
                     toast: {
-                        success: "Framgångsrik! Startar om...",
+                        success: "Framgång! Startar om...",
                         already: "Redan uppdaterad!",
-                        failed: "Uppdateringen misslyckades :("
+                        failed: "Det gick inte att uppdatera :("
                     }
                 },
                 custom: {
-                    title: "Vänta!",
-                    header: "Du använder en proprietär version av Plexcord, vi tillhandahåller inte support för denna version!",
-                    body: "Vi tillhandahåller endast support för {{officialBuild}}. Antingen {{switch}} eller ta itu med problemet själv.",
-                    footer: "Om du ignorerar denna regel kommer din rätt att få stöd att återkallas.",
-                    official: "officiella releaser",
-                    switch: "uppgradera till en officiell version",
+                    title: "Hålla fast!",
+                    header: "Du använder en anpassad version av Plexcord, som vi inte tillhandahåller support för!",
+                    body: "Vi tillhandahåller endast support för {{officialBuild}}. Antingen {{switch}} eller ta reda på problemet själv.",
+                    footer: "Du kommer att förbjudas att ta emot support om du ignorerar denna regel.",
+                    official: "officiella konstruktioner",
+                    switch: "byta till en officiell konstruktion",
                     button: {
-                        confirm: "Jag förstår",
-                        secondaryConfirm: "Visa det inte igen"
+                        confirm: "Förstått",
+                        secondaryConfirm: "Visa inte igen"
                     }
                 }
             },
             button: {
-                debug: "kör /plexcord-debug",
-                plugins: "kör /plexcord-plugins",
-                snippet: "Kör kodavsnitt"
+                debug: "Kör /plexcord-debug",
+                plugins: "Kör /plexcord-plugins",
+                snippet: "Kör Snippet"
             },
             toast: {
-                success: "Framgångsrik!",
-                failed: "Kunde inte köra kodavsnitt :(",
+                success: "Framgång!",
+                failed: "Det gick inte att köra utdrag :(",
                 failedOpenInvite: "Det gick inte att öppna inbjudan, kolla konsolen :(",
-                upload: "Pluginlistan har laddats!",
-                failedUpload: "Filen med pluginlistan kunde inte laddas. Försök igen.",
+                upload: "Pluginlistan har laddats upp!",
+                failedUpload: "Det gick inte att ladda upp fil med pluginlistan. Försök igen.",
                 unableGenerate: "Det gick inte att skapa plugin-listan."
             },
             dm: {
-                warning: "Vänligen skicka inte privata meddelanden till Plexcord plugin-utvecklare för support!{{br}}Istället kan du använda Plexcords supportkanal genom att gå med i {{support}}-servern: {{channel}}"
+                warning: "Vänligen skicka inte privata meddelanden till Plexcord-pluginutvecklare för support!{{br}}Istället kan du gå med i {{support}}-servern och använda Plexcord-supportkanalen: {{channel}}"
             },
             alert: {
-                title: "Varning: För många plugins",
-                paragraph1: "Vi märkte att mer än 100 plugins aktiverades.",
-                paragraph2: "Du kanske inte får support på grund av antalet plugins.",
+                title: "Varning: Högt antal plugin-program",
+                paragraph1: "Du har mer än 100 plugins aktiverade.",
+                paragraph2: "På grund av den stora mängden plugins kanske du inte får support.",
                 paragraph3: "Ditt problem orsakas troligen av plugin-konflikter.",
-                paragraph4: "Överväg att inaktivera några plugins för att åtgärda problemet.",
+                paragraph4: "Vänligen överväg att inaktivera några plugins för att felsöka.",
                 paragraph5: "Din plugin-lista kommer att skickas som en textfil.",
             }
         },
         accountPanelServerProfile: {
             name: "AccountPanelServerProfile",
-            description: "Vänsterklicka på din kontopanel och högerklicka för att se din serverprofil",
+            description: "Högerklicka på din kontopanel längst ner till vänster för att se din profil på den aktuella servern",
             option: {
                 prioritizeServerProfile: {
                     label: "Prioritera serverprofil",
-                    description: "Prioritera serverprofilen när du vänsterklickar på din kontopanel"
+                    description: "Prioritera serverprofil när du vänsterklickar på din kontopanel"
                 }
             },
             context: {
@@ -1021,71 +1021,71 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         altKrispSwitch: {
             name: "AltKrispSwitch",
-            description: "Får brusreduceringspopupen att växla mellan Ingen och Krisp istället för Krisp och Standard."
+            description: "Får brusreduceringen att växla mellan Ingen och Krisp istället för Krisp och Standard"
         },
         alwaysAnimate: {
-            name: "Animera alltid",
-            description: "Den animerar allt som kan animeras.",
+            name: "AlwaysAnimate",
+            description: "Animerar allt som kan animeras",
             option: {
                 icons: {
-                    label: "ikoner",
-                    description: "Animera serverikoner, avatarer, dekorationer och mer när som helst."
+                    label: "Ikoner",
+                    description: "Animera alltid serverikoner, avatarer, dekor och mer"
                 },
                 statusEmojis: {
                     label: "Status Emojis",
-                    description: "Liva alltid upp statusemojis."
+                    description: "Animera alltid statusemojis"
                 },
                 serverBanners: {
                     label: "Server banners",
-                    description: "Animera alltid serverbanners."
+                    description: "Animera alltid serverbanners"
                 },
                 nameplates: {
                     label: "Namnskyltar",
-                    description: "Animera alltid namnskyltar."
+                    description: "Animera alltid namnskyltar"
                 },
                 roleGradients: {
-                    label: "Rollövergångar",
-                    description: "Animera alltid rollfärgsövergångar."
+                    label: "Rollgradienter",
+                    description: "Animera alltid rollgradienter"
                 }
             }
         },
         alwaysExpandProfiles: {
-            name: "alwaysExpandProfiles",
-            description: "Öppnar alltid användarprofiler utökade"
+            name: "AlwaysExpandProfiles",
+            description: "Expanderar alltid profiler som popouts till full modal"
         },
         alwaysExpandRoles: {
-            name: "Expandera alltid roller",
-            description: "Utökar alltid rolllistan i profilpopups",
+            name: "AlwaysExpandRoles",
+            description: "Utökar alltid rolllistor i profilfönster",
             option: {
                 hideArrow: {
-                    label: "Göm pilar",
-                    description: "Dölj pilar"
+                    label: "Göm pil",
+                    description: "Dölj pil"
                 }
             }
         },
         animalese: {
             name: "Animalese",
-            description: "Spelar animaliskt ljud för varje meddelande som skickas (de gör mycket)",
+            description: "Spelar animal crossing animalese för varje meddelande som skickas (de tjatar mycket)",
             option: {
                 volume: {
-                    label: "Ljudnivå",
-                    description: "Animalese röstvolym"
+                    label: "Volym",
+                    description: "Volymen på det animaliska ljudet"
                 },
                 speed: {
                     label: "Hastighet",
-                    description: "Animalese rösthastighet"
+                    description: "Det animaliska ljudets hastighet"
                 },
                 pitch: {
-                    label: "Ton",
-                    description: "tonmultiplikator"
+                    label: "Tonhöjd",
+                    description: "Pitch multiplikator"
                 },
                 messageLengthLimit: {
                     label: "Meddelandelängdsgräns",
-                    description: "Maximal meddelandelängd att bearbeta"
+                    description: "Maximal längd på meddelande att bearbeta"
                 },
                 processOwnMessages: {
-                    label: "Bearbeta dina egna meddelanden",
-                    description: "Aktivera även rösta dina egna meddelanden"
+                    label: "Bearbeta egna meddelanden",
+                    description: "Gör det möjligt att yap dina egna meddelanden också"
                 },
                 soundQuality: {
                     label: "Ljudkvalitet",
@@ -1098,44 +1098,44 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         alwaysTrust: {
-            name: "Alltid lita på",
-            description: "Tar bort skadlig domän och popup-fönster för misstänkta filer",
+            name: "AlwaysTrust",
+            description: "Tar bort den irriterande opålitliga domänen och misstänkt fil-popup",
             option: {
                 domain: {
-                    label: "domännamn",
-                    description: "Tar bort \"skadlig domän\" popup"
+                    label: "Domän",
+                    description: "Ta bort popup-fönstret för opålitlig domän när du öppnar länkar"
                 },
                 file: {
                     label: "Fil",
-                    description: "Tar bort \"potentiellt farligt\" nedladdningspopup"
+                    description: "Ta bort popupen \"Potentiellt farlig nedladdning\" när du öppnar länkar"
                 },
                 noDeleteSafety: {
                     label: "Ingen raderingssäkerhet",
-                    description: "Tar bort behovet av att ange servernamnet när en server tas bort"
+                    description: "Tar bort kravet på ange servernamn när en server tas bort"
                 },
                 confirmModal: {
-                    label: "Bekräftelse popup",
-                    description: "\"Är du säker på att du vill bekräfta den här transaktionen?\" tar bort popup"
+                    label: "Bekräfta Modal",
+                    description: "Bör en \"är du säker på att du vill ta bort\"-modal visas?"
                 }
             },
             alert: {
                 title: "Ta bort server?",
-                body: "Denna process är permanent, låt oss säga det om det inte är uppenbart!",
-                confirm: "Sil",
+                body: "Det är permanent, om det inte var uppenbart.",
+                confirm: "Radera",
                 cancel: "Avboka"
             }
         },
         anonymiseFileNames: {
-            name: "Anonymisera filnamn",
-            description: "Anonymiserar uppladdade filnamn.",
+            name: "AnonymiseFileNames",
+            description: "Anonymisera uppladdade filnamn",
             option: {
                 anonymiseByDefault: {
                     label: "Anonymisera som standard",
-                    description: "Anonymiserar filnamn som standard. Du kan inaktivera det i popup-fönstret för filuppladdning om du vill."
+                    description: "Anonymisera filnamn som standard. Du kan inaktivera detta i uppladdningspopupen om det behövs."
                 },
                 spoilerMessages: {
                     label: "Spoilermeddelanden",
-                    description: "Anonymiserar namnen på filer markerade som spoilers."
+                    description: "Anonymisera filnamn som är markerade som spoilers."
                 },
                 method: {
                     label: "Metod",
@@ -1145,158 +1145,158 @@ const translations: MatchStructure<typeof enTranslations> = {
                     timestamp: "Tidsstämpel"
                 },
                 randomisedLength: {
-                    label: "Randomiseringslängd",
-                    description: "Slumpmässig teckenlängd"
+                    label: "Randomiserad längd",
+                    description: "Randomiserad teckenlängd"
                 },
                 consistent: {
-                    label: "Konsekvent anonymisering",
-                    description: "Hemlig nyckel för konsekvent anonymisering"
+                    label: "Konsekvent",
+                    description: "Konsekvent anonymiseringshemlighet"
                 }
             },
             using: {
-                anonymous: "Anonymt filnamn används",
-                spoiler: "Normalt filnamn används"
+                anonymous: "Använder anonymt filnamn",
+                spoiler: "Använder normalt filnamn"
             },
             spoiler: {
-                description: "Slå på eller av spoiler för dina filer",
-                toggle: "Slå på eller av spoiler för dina filer (standard på)",
+                description: "Växla spoiler för dina filer",
+                toggle: "Växla spoiler för dina filer (standard på)",
                 enabled: "Spoiler aktiverad!",
-                disabled: "Spoilers inaktiverade!"
+                disabled: "Spoiler inaktiverad!"
             }
         },
         appleMusic: {
-            name: "Apple Music Rik närvaro",
-            description: "Apple Music visar lyssningsstatus som Discord Rich Presence",
-            about: "För anpassningsbara händelseformatsträngar kan du använda några anpassade strängar för att lägga till spårdata till händelser! {{name}} ersätts med spårnamnet, {{artist}} med artistnamnet och {{album}} med albumnamnet.",
+            name: "AppleMusicRichPresence",
+            description: "Discord rik närvaro för din Apple Music!",
+            about: "För de anpassningsbara aktivitetsformatsträngarna kan du använda flera specialsträngar för att inkludera spårdata i aktiviteter! {{name}} ersätts med spårnamnet; {{artist}} ersätts med artistens/konstnärernas namn; och {{album}} ersätts med albumnamnet.",
             button: {
-                listen: "Apple Music'te Dinle",
+                listen: "Lyssna på Apple Music",
                 songLink: "Se på SongLink"
             },
             option: {
                 activityType: {
                     label: "Aktivitetstyp",
-                    description: "Vilken typ av aktivitet kommer att visas",
-                    listening: "lyssnande",
-                    playing: "spelar"
+                    description: "Vilken typ av aktivitet",
+                    listening: "Lyssnande",
+                    playing: "Spelar"
                 },
                 statusDisplayType: {
                     label: "Statusvisningstyp",
-                    description: "Visa spår/artistnamn i medlemslistan",
-                    off: "Visa inte (visar allmänt lyssningsmeddelande)",
+                    description: "Visa spåret/artistnamnet i medlemslistan",
+                    off: "Visa inte (visar generiskt avlyssningsmeddelande)",
                     artist: "Visa artistnamn",
                     track: "Visa spårnamn"
                 },
                 refreshInterval: {
                     label: "Uppdateringsintervall",
-                    description: "Händelseuppdateringsintervall (sekunder)"
+                    description: "Intervallet mellan aktivitetsuppdateringar (sekunder)"
                 },
                 enableTimestamps: {
                     label: "Aktivera tidsstämplar",
-                    description: "Om tidsstämplar ska aktiveras"
+                    description: "Om tidsstämplar ska aktiveras eller inte"
                 },
                 enableButtons: {
                     label: "Aktivera knappar",
-                    description: "Om knappar ska aktiveras"
+                    description: "Om knappar ska aktiveras eller inte"
                 },
                 nameString: {
                     label: "Namnsträng",
-                    description: "Händelsenamnformatsträng"
+                    description: "Aktivitetsnamnformatsträng"
                 },
                 detailsString: {
                     label: "Detaljer String",
-                    description: "Händelseinformation formatsträng"
+                    description: "Aktivitetsinformation formatsträng"
                 },
                 stateString: {
-                    label: "Statussträng",
-                    description: "Händelsestatusformatsträng"
+                    label: "State String",
+                    description: "Aktivitetstillståndsformatsträng"
                 },
                 largeImageType: {
                     label: "Stor bildtyp",
-                    description: "Händelsetillgångar stor bildtyp",
-                    album: "skivomslag",
-                    artist: "konstnärsmålning",
-                    disabled: "funktionshindrade"
+                    description: "Aktivitetstillgångar stor bildtyp",
+                    album: "Albumkonstverk",
+                    artist: "Konstnär konstverk",
+                    disabled: "Inaktiverad"
                 },
                 largeTextString: {
                     label: "Stor textsträng",
-                    description: "Händelseenheter stor textformatsträng"
+                    description: "Aktivitetstillgångar stor textformatsträng"
                 },
                 smallImageType: {
-                    label: "Typ av miniatyrbild",
-                    description: "Händelsetillgångars miniatyrtyp",
+                    label: "Liten bildtyp",
+                    description: "Aktivitetstillgångar liten bildtyp",
                     album: "Apple Music-logotyp",
-                    artist: "konstnärsmålning",
-                    disabled: "funktionshindrade"
+                    artist: "Konstnär konstverk",
+                    disabled: "Inaktiverad"
                 },
                 smallTextString: {
                     label: "Liten textsträng",
-                    description: "Händelseenheter liten textformatsträng"
+                    description: "Aktivitetstillgångar liten textformatsträng"
                 }
             }
         },
         arRpc: {
-            name: "WebRichPresence (arRPC)",
-            description: "arRPC-klientplugin för att aktivera RPC på Discord Web (experimentell)",
+            name: "WebRichPresence(arRPC)",
+            description: "Klientplugin för arRPC för att aktivera RPC på Discord Web (experimentell)",
             use: {
                 title: "Hur man använder arRPC",
                 enable: "{{link}} för att köra servern och aktivera sedan plugin-programmet.",
-                link: "Följ instruktionerna i GitHub-förvaret"
+                link: "Följ instruktionerna i GitHub-repo"
             },
             toast: {
                 connected: "Ansluten till arRPC",
-                failed: "Det gick inte att ansluta till arRPC, fungerar det?",
-                retry: "Försök igen"
+                failed: "Det gick inte att ansluta till arRPC, körs den?",
+                retry: "Försöka igen"
             }
         },
         atSomeone: {
-            name: "Hos någon",
-            description: "Låter dig tagga en slumpmässig person med @någon"
+            name: "AtSomeone",
+            description: "Med @någon kan du nämna någon slumpmässigt"
         },
         autoDNDWhilePlaying: {
             name: "AutoDndWhilePlaying",
-            description: "Uppdaterar onlinestatus automatiskt (online, inaktiv, stör ej) när spelet startar",
+            description: "Uppdaterar automatiskt din onlinestatus (online, inaktiv, dnd) när du startar spel",
             option: {
                 statusToSet: {
                     label: "Status att ställa in",
-                    description: "Status att ställa in när ett spel startas",
-                    online: "online",
+                    description: "Statusen som ska ställas in när ett spel startas",
+                    online: "Online",
                     dnd: "Stör ej",
-                    idle: "på tomgång",
+                    idle: "På tomgång",
                     invisible: "Osynlig"
                 },
                 excludeInvisible: {
                     label: "Uteslut Osynlig",
-                    description: "Förhindra automatiska statusändringar när din status är inställd på osynlig"
+                    description: "Förhindra automatiska statusändringar medan din status är inställd på osynlig"
                 }
             }
         },
         autoZipper: {
             name: "AutoZipper",
-            description: "ZIPar automatiskt specificerade filtyper och mappar innan de laddas upp till Discord",
+            description: "ZIPar automatiskt specificerade filtyper och mappar innan uppladdning till Discord",
             option: {
                 extensions: {
                     label: "Tillägg",
-                    description: "Kommaseparerad lista över filtillägg som ska zippas automatiskt (t.ex. .psd,.blend,.exe,.dmg)"
+                    description: "Kommaseparerad lista över filtillägg för auto-zip (t.ex. .psd,.blend,.exe,.dmg)"
                 }
             }
         },
         bannersEverywhere: {
-            name: "Banderoller överallt",
+            name: "BannersEverywhere",
             description: "Visar banners i medlemslistan",
             option: {
                 animate: {
-                    label: "Animation",
-                    description: "Gör bannern animerad"
+                    label: "Animera",
+                    description: "Animera banner"
                 },
                 preferNameplate: {
-                    label: "Välj Namnskylt",
-                    description: "Välj namnskylt istället för banderoll"
+                    label: "Föredrar namnskylt",
+                    description: "Föredrar namnskylt framför banderoll"
                 }
             }
         },
         betterActivities: {
             name: "BetterActivities",
-            description: "Visar aktivitetsikoner i medlemslistan och gör det möjligt att visa alla händelser",
+            description: "Visar aktivitetsikoner i medlemslistan och tillåter att visa alla aktiviteter",
             option: {
                 memberList: {
                     label: "Medlemslista",
@@ -1304,45 +1304,45 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 iconSize: {
                     label: "Ikonstorlek",
-                    description: "Storlek på händelseikoner"
+                    description: "Storleken på aktivitetsikonerna"
                 },
                 specialFirst: {
-                    label: "Specialerbjudanden först",
-                    description: "Visa specialevenemang först (för närvarande Spotify och Twitch)"
+                    label: "Special först",
+                    description: "Visa specialaktiviteter först (för närvarande Spotify och Twitch)"
                 },
                 renderGifs: {
-                    label: "GIF'yere Gör det",
+                    label: "Återge GIF-filer",
                     description: "Tillåt rendering av GIF-filer"
                 },
                 removeGameActivityStatus: {
-                    label: "Ta bort Game State",
-                    description: "Ta bort spelets statusikon och status"
+                    label: "Ta bort statusen \"Spelaktivitet\".",
+                    description: "Ta bort spelaktivitetsikon och status"
                 },
                 userPopout: {
-                    label: "Användar popup",
-                    description: "Visa alla aktiviteter i profilens popup/sidofält"
+                    label: "Användar popout",
+                    description: "Visa alla aktiviteter i profilens popout/sidofält"
                 },
                 hideTooltip: {
                     label: "Dölj verktygstips",
                     description: "Döljer aktiviteter på olika platser"
                 },
                 allActivitiesStyle: {
-                    label: "Alla evenemang stil",
-                    description: "Visa alla händelser stil",
+                    label: "Alla aktiviteter stil",
+                    description: "Stil för att visa alla aktiviteter",
                     list: "Lista",
-                    carousel: "reglaget",
-                    left: "Sol",
+                    carousel: "Karusell",
+                    left: "Vänster",
                     right: "Rätt"
                 }
             }
         },
         betterAudioPlayer: {
             name: "BetterAudioPlayer",
-            description: "Lägger till spektrograf och oscilloskopvisualiserare till spelare för ljudtillbehör",
+            description: "Lägger till en spektrograf och en oscilloskopvisualiserare till ljudtillbehörsspelare",
             option: {
                 oscilloscope: {
                     label: "Oscilloskop",
-                    description: "Aktivera scope visualizer"
+                    description: "Aktivera oscilloskopvisualiserare"
                 },
                 spectrograph: {
                     label: "Spektrograf",
@@ -1350,69 +1350,69 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 oscilloscopeSolidColor: {
                     label: "Oscilloskop enfärgad",
-                    description: "Använd solid färg istället för gradient för omfattning"
+                    description: "Använd en enfärgad färg för oscilloskopet istället för en gradient"
                 },
                 oscilloscopeColor: {
-                    label: "Rengi oscilloskop",
+                    label: "Oscilloskop färg",
                     description: "Färg på oscilloskopet när solid färg är aktiverat"
                 },
                 spectrographSolidColor: {
                     label: "Spectrograph Solid Color",
-                    description: "Använd solid färg istället för gradient för spektrograf"
+                    description: "Använd en enfärgad färg för spektrografen istället för en gradient"
                 },
                 spectrographColor: {
                     label: "Spektrograffärg",
                     description: "Färg på spektrografen när solid färg är aktiverat"
                 },
                 forceMoveBelow: {
-                    label: "Tvinga Flytta till Botten",
-                    description: "Tvinga flytta visualizer under volymkontrollerna"
+                    label: "Tvinga Flytta Nedan",
+                    description: "Tvinga visualiseraren att vara under ljudkontrollerna"
                 }
             },
             toast: {
-                invalidColorFormat: "Ogiltigt färgformat för {{settingKey}}, se till att det är i formatet 'R, G, B' eller '#RRGGBB'"
+                invalidColorFormat: "Ogiltigt färgformat för {{settingKey}}, se till att det är i formatet \"R, G, B\" eller \"#RRGGBB\""
             }
         },
         betterBanReasons: {
             name: "BetterBanReasons",
-            description: "Skapa anpassade skäl att använda i Discord-förbudsfönstret och/eller visa en textinmatning istället för alternativ som standard.",
+            description: "Skapa anpassade skäl att använda i Discord-förbudsmodalen och/eller visa en textinmatning som standard istället för alternativen.",
             option: {
                 reasons: {
-                    label: "skäl",
-                    description: "dina särskilda skäl"
+                    label: "Skäl",
+                    description: "Dina anpassade skäl"
                 },
                 isTextInputDefault: {
-                    label: "Standardinmatning av text",
-                    description: "Som standard visar den en textinmatning istället för en valmeny. (Motsvarar att klicka på Mer)"
+                    label: "Är textinmatning som standard",
+                    description: "Visar en textinmatning istället för en valmeny som standard. (Motsvarar att klicka på alternativet \"Övrigt\")"
                 }
             },
-            title: "skäl",
-            placeholder: "Varifrån",
+            title: "Skäl",
+            placeholder: "Resonera",
             add: "Lägg till ytterligare ett skäl"
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
-            description: "Det låter dig söka i listan över blockerade användare och göra namn valbara i inställningarna.",
-            placeholder: "Sök efter användare..."
+            description: "Låter dig söka i listan med blockerade användare och gör namn valbara i inställningarna.",
+            placeholder: "Sök användare..."
         },
         betterCommands: {
-            name: "Bättre kommandon",
-            description: "Det förbättrar kommandosystemet med olika förbättringar.",
+            name: "BetterCommands",
+            description: "Förbättrar kommandosystemet med diverse förbättringar.",
             option: {
                 autoFillArguments: {
                     label: "Autofyll-argument",
-                    description: "Fyller automatiskt kommandot med alla argument, inte bara de nödvändiga argumenten"
+                    description: "Fyll kommandot automatiskt med alla argument istället för bara nödvändiga"
                 },
                 allowNewlinesInCommands: {
                     label: "Tillåt nya rader i kommandon",
-                    description: "Tillåt nyrader i kommandoposter (CTRL + Shift + Enter)"
+                    description: "Tillåt nyrader i kommandoinmatningar (CTRL + Shift + Enter)"
                 }
             },
             command: {
                 refresh: {
-                    description: "Discord uppdaterar appkommandon inbyggt",
-                    user: "specifik användare att försöka förnya",
-                    refreshing: "Programkommandon förnyas...",
+                    description: "Uppdaterar Discord-applikationens kommandon lokalt",
+                    user: "specifika användare att försöka uppdatera",
+                    refreshing: "Uppdaterar programkommandon...",
                     refreshed: "Kommandon har uppdaterats framgångsrikt!",
                     failed: "Det gick inte att uppdatera kommandon. Kontrollera konsolen för detaljer."
                 }
@@ -1420,97 +1420,97 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterFolders: {
             name: "BetterFolders",
-            description: "Visar servermappar i ett anpassat sidofält och lägger till mapprelaterade förbättringar",
+            description: "Visar servermappar på dedikerad sidofält och lägger till mapprelaterade förbättringar",
             option: {
                 sidebar: {
                     label: "Sidofält",
-                    description: "Visa servrar i mapp i anpassad sidofält"
+                    description: "Visa servrar från mappen på dedikerad sidofält"
                 },
                 sidebarAnim: {
                     label: "Sidofältsanimering",
-                    description: "Använd animering när du öppnar sidofältet för mapparna"
+                    description: "Animera öppna mappens sidofält"
                 },
                 closeAllFolders: {
                     label: "Stäng alla mappar",
-                    description: "Stäng alla mappar när en server som inte finns i en mapp är vald"
+                    description: "Stäng alla mappar när du väljer en server som inte finns i en mapp"
                 },
                 closeAllHomeButton: {
-                    label: "Stäng allt på hemknappen",
+                    label: "Stäng alla Hem-knapp",
                     description: "Stäng alla mappar när du klickar på hemknappen"
                 },
                 closeOthers: {
                     label: "Stäng andra",
-                    description: "Stäng andra mappar när en mapp öppnas"
+                    description: "Stäng andra mappar när du öppnar en mapp"
                 },
                 closeServerFolder: {
                     label: "Stäng servermappen",
-                    description: "Stäng mappen när en server i mappen är vald"
+                    description: "Stäng mappen när du väljer en server i den mappen"
                 },
                 forceOpen: {
                     label: "Force Open",
-                    description: "Tvinga upp en mapp när du byter till en mapps server"
+                    description: "Tvinga en mapp att öppna när du byter till en server för den mappen"
                 },
                 keepIcons: {
-                    label: "Skydda ikoner",
-                    description: "Fortsätt visa serverikoner i huvudmappen på serverfältet när mappen är öppen i BetterFolders sidofält"
+                    label: "Behåll ikoner",
+                    description: "Fortsätt visa guild-ikoner i den primära guildbar-mappen när den är öppen i BetterFolders sidofält"
                 },
                 showFolderIcon: {
                     label: "Visa mappikon",
-                    description: "Visa mappikonen ovanför mappservrarna i BetterFolders sidofält",
+                    description: "Visa mappikonen ovanför mappgillen i BetterFolders sidofält",
                     never: "Aldrig",
                     always: "Alltid",
-                    moreThanOne: "När flera mappar expanderas"
+                    moreThanOne: "När mer än en mapp utökas"
                 }
             }
         },
         betterGifAltText: {
             name: "BetterGifAltText",
-            description: "Ändrar GIF alt-text från bara \"GIF\" för att inkludera gif-taggar/filnamn"
+            description: "Ändra GIF alt-text från att bara vara \"GIF\" till att innehålla gif-taggar / filnamn"
         },
         betterGifPicker: {
             name: "BetterGifPicker",
-            description: "Får GIF-väljaren att öppna favoritkategorin som standard",
+            description: "Får gif-väljaren att öppna favoritkategorin som standard",
             option: {
                 keepOpen: {
-                    label: "Håll väljaren öppen",
-                    description: "Gör det möjligt för GIF-väljaren att förbli öppen efter att ha valt en GIF"
+                    label: "Håll öppet",
+                    description: "Håller gif-väljaren öppen efter att ha valt en gif"
                 }
             }
         },
         betterInvites: {
             name: "BetterInvites",
-            description: "Se inbjudningars utgångsdatum, se inbjudarens profil och förhandsgranska servrar innan du går med (genom att klicka på namnet)",
+            description: "Se inbjudningars utgångsdatum, se inbjudarens profil och förhandsgranska servrar innan du går med genom att klicka på namnet",
             render: {
-                tip: "Den här inbjudan upphör att gälla efter {{time}}",
+                tip: "Den här inbjudan upphör att gälla {{time}}",
                 header: "{{name}} bjöd in dig till {{server}}",
-                never: "aldrig"
+                never: "inte löpa ut"
             }
         },
         betterNotesBox: {
             name: "BetterNotesBox",
-            description: "Dölj anteckningar eller inaktivera stavningskontroll (Konfigurera i Inställningar!!)",
+            description: "Dölj anteckningar eller inaktivera stavningskontroll (Konfigurera i inställningarna!!)",
             option: {
                 hide: {
                     label: "Dölj anteckningar",
-                    description: "Dölj anteckningsrutan i användarens popup-fönster"
+                    description: "Dölj anteckningsrutan i användarens popoutfönster"
                 },
                 noSpellCheck: {
-                    label: "Stäng av stavningskontrollen",
+                    label: "Ingen stavningskontroll",
                     description: "Inaktivera stavningskontroll i anteckningar"
                 }
             }
         },
         betterPlusReacts: {
             name: "BetterPlusReacts",
-            description: "Antalet plustecken före :emoji: indikerar meddelandet som emojin kommer att läggas till"
+            description: "Mängden plus före :emoji: är meddelandet att lägga till det"
         },
         betterRoleContext: {
             name: "BetterRoleContext",
-            description: "Lägger till alternativ för att kopiera rollfärg / redigera roll / visa rollikon när du högerklickar på roller i användarprofiler",
+            description: "Lägger till alternativ för att kopiera rollfärg / redigera roll / visa rollikon när du högerklickar på roller i användarprofilen",
             option: {
                 roleIconFileFormat: {
                     label: "Rollikon Filformat",
-                    description: "Filformat att använda när rollikoner visas"
+                    description: "Filformat att använda när du visar rollikoner"
                 }
             },
             context: {
@@ -1521,23 +1521,23 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterRoleDot: {
             name: "BetterRoleDot",
-            description: "RoleDot (tillgänglighetsinställning) kopierar rollfärgen när den klickas. Det tillåter också samtidig användning av RoleDot och färgnamn.",
+            description: "Kopiera rollfärg på RoleDot (tillgänglighetsinställning) klick. Gör det också möjligt att använda både RoleDot och färgade namn samtidigt.",
             option: {
                 bothStyles: {
-                    label: "Här İki Stil",
-                    description: "Visa både rollpunkt och färgade namn"
+                    label: "Båda stilarna",
+                    description: "Visa både rollprickar och färgade namn"
                 },
                 copyRoleColorInProfilePopout: {
-                    label: "Kopiera rollfärg i profilpopup",
-                    description: "Tillåt kopiering av rollfärg genom att klicka på rollprick i profilens popup-fönster"
+                    label: "Kopiera rollfärg i profilfönster",
+                    description: "Tillåt att klicka på rollprick i profilens popout för att kopiera rollfärg"
                 }
             }
         },
         betterSessions: {
             name: "BetterSessions",
-            description: "Förbättrar menyn Sessioner (enheter). Den låter dig se exakta tidsstämplar, ge varje session ett unikt namn och få aviseringar om nya sessioner.",
+            description: "Förbättrar sessionsmenyn (enheter). Låter dig se exakta tidsstämplar, ge varje session ett anpassat namn och få aviseringar om nya sessioner.",
             new: "NY",
-            newSessions: "Ny session:",
+            newSessions: "Nya sessioner:",
             rename: "Döpa om",
             newDevice: "Nytt enhetsnamn",
             resetName: "Återställ namn",
@@ -1549,148 +1549,148 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Leta efter nya sessioner i bakgrunden och visa aviseringar när de upptäcks"
                 },
                 checkInterval: {
-                    label: "Kontrollområde",
+                    label: "Kontrollera intervall",
                     description: "Hur ofta du ska leta efter nya sessioner i bakgrunden (om aktiverat), i minuter"
                 }
             }
         },
         betterSettings: {
-            name: "Bättre inställningar",
-            description: "Förbättrar upplevelsen av att öppna inställningsmenyn",
+            name: "BetterSettings",
+            description: "Förbättrar din upplevelse för inställningar-menyöppning",
             option: {
                 disableFade: {
-                    label: "Inaktivera övergångseffekt",
-                    description: "Inaktivera crossfade-animering"
+                    label: "Inaktivera Tona",
+                    description: "Inaktivera crossfade-animeringen"
                 },
                 organizeMenu: {
-                    label: "Redigera meny",
-                    description: "Inställningar delar upp kugghjulsikonmenyn i kategorier"
+                    label: "Ordna menyn",
+                    description: "Ordnar inställningskuggens snabbmeny i kategorier"
                 },
                 eagerLoad: {
-                    label: "Snabb laddning",
-                    description: "Tar bort laddningsfördröjning när menyn öppnas första gången"
+                    label: "Ivrig last",
+                    description: "Tar bort laddningsfördröjningen när menyn öppnas för första gången"
                 }
             },
             alert: {
                 title: "Omstart krävs",
-                restart: "Du ändrade inställningar som kräver omstart.",
+                restart: "Du har ändrat inställningar som kräver omstart.",
                 confirm: "Starta om nu",
                 cancel: "Senare!"
             }
         },
         betterUploadButton: {
             name: "BetterUploadButton",
-            description: "Installera med ett klick, öppna menyn med högerklick"
+            description: "Ladda upp med ett enda klick, öppna menyn med högerklick"
         },
         biggerStreamPreview: {
             name: "BiggerStreamPreview",
-            description: "Denna plugin låter dig förstora sändningsförhandsvisningar",
+            description: "Denna plugin låter dig förstora förhandsvisningar av stream",
             context: {
-                viewPreview: "Se Release Preview"
+                viewPreview: "Visa Stream Preview"
             }
         },
         blockKeywords: {
             name: "BlockKeywords",
-            description: "Blockerar meddelanden som innehåller vissa användardefinierade nyckelord som om den avsändande användaren var blockerad.",
+            description: "Blockerar meddelanden som innehåller specifika användardefinierade nyckelord, som om användaren som skickade dem var blockerad.",
             option: {
                 blockedWords: {
                     label: "Blockerade ord",
                     description: "Kommaseparerad lista över ord att blockera"
                 },
                 useRegex: {
-                    label: "Regex Kullan",
+                    label: "Använd Regex",
                     description: "Använd varje värde som ett reguljärt uttryck när du kontrollerar meddelandeinnehåll (avancerat)"
                 },
                 caseSensitive: {
                     label: "Skiftlägeskänslig",
-                    description: "Använd skiftlägeskänslig sökning?"
+                    description: "Om man ska använda skiftlägeskänslig sökning eller inte"
                 },
                 ignoreBlockedMessages: {
                     label: "Ignorera blockerade meddelanden",
-                    description: "ignorerar helt det nya meddelandefältet (senaste meddelanden)"
+                    description: "Ignorar helt (senaste) nya meddelandefält"
                 }
             }
         },
         blockKrisp: {
             name: "BlockKrisp",
-            description: "Hindrar Krisp från att installera"
+            description: "Förhindra Krisp från att ladda"
         },
         blurNSFW: {
             name: "BlurNSFW",
-            description: "Gör bilagor i NSFW-kanaler suddiga tills pekaren hålls över",
+            description: "Sudda bifogade filer i NSFW-kanaler tills du håller muspekaren",
             option: {
                 blurAmount: {
-                    label: "Mängd oskärpa",
-                    description: "Mängd oskärpa (i pixlar)"
+                    label: "Oskärpa mängd",
+                    description: "Oskärpa (i pixlar)"
                 },
                 blurAllChannels: {
                     label: "Oskärpa alla kanaler",
-                    description: "Oskärpa bilagor på alla kanaler (inte bara NSFW)"
+                    description: "Oskärpa bilagor i alla kanaler (inte bara NSFW)"
                 }
             }
         },
         bypassPinPrompt: {
             name: "BypassPinPrompt",
-            description: "Hoppa över stiftuppmaning när stiftfunktioner används"
+            description: "Förbigå stiftmeddelandet när du använder stiftfunktionerna"
         },
         bypassStatus: {
             name: "BypassStatus",
-            description: "Får fortfarande aviseringar från vissa källor i Stör ej-läge. Du kan högerklicka på användare/kanaler/servrar för att kringgå Stör ej-läget.",
+            description: "Få fortfarande aviseringar från specifika källor när du är i stör ej-läge. Högerklicka på användare/kanaler/skrån för att ställa in dem på att kringgå stör ej-läge.",
             context: {
-                remove: "Ta bort statushopp",
-                add: "Lägg till status Hoppa över"
+                remove: "Ta bort Status Bypass",
+                add: "Lägg till Status Bypass"
             },
             option: {
                 guilds: {
-                    label: "Servrar",
-                    description: "Servrar tillåts hoppa (ta emot aviseringar när de pingas var som helst på servern)",
+                    label: "Skrån",
+                    description: "Guilds att låta kringgå (meddelas när man pingar någonstans i guilden)",
                     placeholder: "Separera med kommatecken"
                 },
                 channels: {
                     label: "Kanaler",
-                    description: "Kanaler där det är tillåtet att hoppa över (få aviseringar när pingats på den kanalen)",
+                    description: "Kanaler att låta kringgå (meddelas när pingats i den kanalen)",
                     placeholder: "Separera med kommatecken"
                 },
                 users: {
                     label: "Användare",
-                    description: "Användare som får hoppa över (få aviseringar för alla meddelanden som skickas i DM)",
+                    description: "Användare att låta förbigå (meddelas för alla meddelanden som skickas i DM)",
                     placeholder: "Separera med kommatecken"
                 },
                 allowOutsideOfDms: {
-                    label: "Tillåt Outside DM",
-                    description: "Tillåt valda användare att hoppa över icke-DM-statusar (fungerar som att hoppa över kanal/server, men gäller alla meddelanden som skickas av valda användare)"
+                    label: "Tillåt utanför DM",
+                    description: "Tillåt utvalda användare att kringgå status utanför DM också (fungerar som en kanal/guild-bypass, men det är för alla meddelanden som skickas av de valda användarna)"
                 },
                 notificationSound: {
                     label: "Aviseringsljud",
-                    description: "Bestämmer om aviseringsljud ska spelas upp"
+                    description: "Om aviseringsljudet ska spelas upp"
                 },
                 respectSilentPings: {
                     label: "Respektera Silent Pings",
-                    description: "Respektera tysta pingar (@tysta/undertrycka aviseringar)"
+                    description: "Respektera tysta pingar (@tyst / undertryck aviseringar)"
                 },
                 statusToUse: {
-                    label: "Användningsfall",
-                    description: "Status att använda för vitlistning",
-                    online: "online",
-                    idle: "på tomgång",
+                    label: "Status att använda",
+                    description: "Status att använda för vitlista",
+                    online: "Online",
+                    idle: "På tomgång",
                     dnd: "Stör ej",
                     invisible: "Osynlig"
                 }
             }
         },
         cakeDay: {
-            name: "Tårtdagen",
+            name: "CakeDay",
             description: "Spåra och visa användarfödelsedagar med tårtikoner",
             context: {
                 label: "Födelsedag",
                 setBirthday: "Ställ in födelsedag",
-                clearBirthday: "Ta bort födelsedag",
+                clearBirthday: "Klar födelsedag",
                 current: "Nuvarande:"
             },
             option: {
                 chat: {
                     label: "Chatta",
-                    description: "Visa pajikoner bredvid användarnamn i chatten"
+                    description: "Visa tårtikoner bredvid användarnamn i chatten"
                 },
                 memberList: {
                     label: "Medlemslista",
@@ -1698,7 +1698,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 profileBadge: {
                     label: "Profilmärke",
-                    description: "Visa tårtmärket på användarprofilen"
+                    description: "Visa tårtmärket i användarprofilen"
                 },
                 notificationSound: {
                     label: "Aviseringsljud",
@@ -1712,32 +1712,32 @@ const translations: MatchStructure<typeof enTranslations> = {
             locations: {
                 chat: {
                     label: "Chatta",
-                    description: "Bredvid användarnamn i chatten"
+                    description: "bredvid användarnamn i chatten"
                 },
                 memberList: {
                     label: "Medlemslista",
-                    description: "I medlemslistan"
+                    description: "i medlemslistan"
                 }
             },
             toast: {
                 success: "Födelsedagsuppsättning framgångsrikt!",
                 invalid: "Ogiltigt födelsedagsformat! Endast DD/MM accepteras.",
-                cleared: "Födelsedagen har raderats!"
+                cleared: "Födelsedagen klarades av framgångsrikt!"
             },
             notification: {
-                title: "🎂 Det är födelsedag idag!",
-                body: "Idag är det {{username}} som fyller år!"
+                title: "🎂 Födelsedag idag!",
+                body: "Det är {{username}}s födelsedag idag!"
             },
             modal: {
-                title: "Ange födelsedag för {{användarnamn}}",
-                description: "Ange din födelsedag i DD/MM-format (t.ex. 25/12)",
-                placeholder: "örn 25/12",
+                title: "Ange födelsedag för {{username}}",
+                description: "Ange födelsedagen i DD/MM-format (t.ex. 25/12)",
+                placeholder: "till exempel 25/12",
                 current: "Aktuell födelsedag:",
                 set: "Ställ in födelsedag",
                 cancel: "Avboka",
-                birthday: "Idag är det min födelsedag! 🎂",
+                birthday: "Det är min födelsedag! 🎂",
                 saved: "Sparade födelsedagar",
-                savedDesc: "Inga födelsedagar har registrerats ännu. Högerklicka på användaren för att lägga till födelsedagar!",
+                savedDesc: "Inga födelsedagar sparade ännu. Högerklicka på användare för att lägga till deras födelsedagar!",
                 today: "I dag",
                 remove: "Ta bort",
                 loading: "Belastning...",
@@ -1747,40 +1747,40 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         callTimer: {
             name: "CallTimer",
-            description: "Visar samtalstimer för alla röstsamtal",
+            description: "Visar samtalstimer i alla röstsamtal",
             option: {
                 format: {
                     label: "Formatera",
                     description: "Kompakt eller läsbart format",
-                    human: "30g 23s 00d 42s"
+                    human: "30d 23h 00m 42s"
                 },
                 allCallTimers: {
                     label: "Alla samtalstimer",
                     description: "Visa samtalstimer för alla användare på servrar"
                 },
                 showWithoutHover: {
-                    label: "Visa utan att sväva",
+                    label: "Visa utan hover",
                     description: "Visa alltid timern utan att behöva hovra"
                 },
                 showRoleColor: {
                     label: "Visa rollfärg",
-                    description: "Visa i användarens rollfärg (om ShowRoleColor-plugin är aktiverat)"
+                    description: "Visas i användarens rollfärg (om insticksprogrammet ShowRoleColor är aktiverat)"
                 },
                 trackSelf: {
-                    label: "Följ dig själv",
-                    description: "Visa din egen timer också"
+                    label: "Spåra dig själv",
+                    description: "Visa även din egen timer"
                 },
                 showSeconds: {
                     label: "Visa sekunder",
-                    description: "Visa även sekunder i timer"
+                    description: "Visa sekunder i timern"
                 },
                 watchLargeGuilds: {
-                    label: "Titta på Big Servers",
-                    description: "Spåra användare på stora servrar. Om du är på stora servrar med många aktiva röstanvändare kan detta orsaka fördröjning. Testad med upp till 2000 aktiva röstanvändare och inga problem uppstod."
+                    label: "Titta på Large Guilds",
+                    description: "Spåra användare i stora skrån. Detta kan orsaka fördröjning om du är i många stora guilder med aktiva röstanvändare. Testad med upp till 2000 aktiva röstanvändare utan problem."
                 },
                 fixUI: {
-                    label: "Användargränssnittsfix",
-                    description: "I vissa fall kan timern bryta användargränssnittet. Du kan fixa detta genom att aktivera det här alternativet."
+                    label: "UI Fix",
+                    description: "I vissa fall kan timern bryta användargränssnittet. Aktivera det här alternativet för att fixa det."
                 }
             }
         },
@@ -1789,7 +1789,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Lägger till märken till kanaler baserat på deras typ",
             badge: {
                 private: "Denna kanal är låst.",
-                nsfw: "Denna kanal är märkt NSFW.",
+                nsfw: "Denna kanal är markerad som NSFW.",
                 rules: "Denna kanal är kanalen för serverregler."
             },
             option: {
@@ -1803,31 +1803,31 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 showVoiceBadge: {
                     label: "Visa röstmärke",
-                    description: "Visa ljudmärke"
+                    description: "Visa Voice-märket"
                 },
                 showCategoryBadge: {
                     label: "Visa kategorimärke",
-                    description: "Visa kategorimärket"
+                    description: "Visa kategorimärke"
                 },
                 showDirectoryBadge: {
-                    label: "Visa indexmärke",
-                    description: "Visa indexmärke"
+                    label: "Visa katalogmärke",
+                    description: "Visa katalogmärket"
                 },
                 showAnnouncementThreadBadge: {
-                    label: "Visa tillkännagivande ämnesmärke",
-                    description: "Visa meddelandets ämnesmärke"
+                    label: "Visa meddelandetrådsmärke",
+                    description: "Visa meddelandetrådsmärke"
                 },
                 showPublicThreadBadge: {
-                    label: "Visa allmänt ämnesmärke",
-                    description: "Visa offentligt ämnesmärke"
+                    label: "Visa allmän trådmärke",
+                    description: "Visa allmän tråd-märke"
                 },
                 showPrivateThreadBadge: {
-                    label: "Visa specialämnesmärke",
-                    description: "Visa anpassat ämnesmärke"
+                    label: "Visa privat trådmärke",
+                    description: "Visa märket för privat tråd"
                 },
                 showStageBadge: {
                     label: "Visa scenmärke",
-                    description: "Visa scenmärke"
+                    description: "Visa scenmärket"
                 },
                 showAnnouncementBadge: {
                     label: "Visa meddelandemärke",
@@ -1842,30 +1842,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Visa mediamärke"
                 },
                 showNSFWBadge: {
-                    label: "Visa ditt NSFW-märke",
+                    label: "Visa NSFW-märket",
                     description: "Visa NSFW-märket"
                 },
                 showLockedBadge: {
                     label: "Visa låst märke",
-                    description: "Visa ditt låsta märke"
+                    description: "Visa låst märke"
                 },
                 showRulesBadge: {
                     label: "Visa reglermärke",
-                    description: "Visa reglermärket"
+                    description: "Visa regler-märket"
                 },
                 showUnknownBadge: {
                     label: "Visa okänt märke",
-                    description: "Visa okänd märke"
+                    description: "Visa okänt märke"
                 },
                 textBadgeLabel: {
-                    label: "Textmärkesetikett",
-                    description: "text märke etikett",
+                    label: "Text märkesetikett",
+                    description: "Textmärkesetikett",
                     default: "Text"
                 },
                 voiceBadgeLabel: {
-                    label: "Ljudmärkesetikett",
-                    description: "ljudmärkesetikett",
-                    default: "Ses"
+                    label: "Röstmärkesetikett",
+                    description: "Röstmärkesetikett",
+                    default: "Röst"
                 },
                 categoryBadgeLabel: {
                     label: "Kategori märkesetikett",
@@ -1873,34 +1873,34 @@ const translations: MatchStructure<typeof enTranslations> = {
                     default: "Kategori"
                 },
                 announcementBadgeLabel: {
-                    label: "Meddelande märkesetikett",
-                    description: "Meddelande märke etikett",
-                    default: "Haber"
+                    label: "Etikett för meddelandetråd",
+                    description: "Meddelande Trådmärkesetikett",
+                    default: "Nyheter"
                 },
                 announcementThreadBadgeLabel: {
-                    label: "Tillkännagivande Ämne Märkeetikett",
-                    description: "Etikett för meddelandeämne",
-                    default: "Nyheter ämne"
+                    label: "Etikett för meddelandetråd",
+                    description: "Meddelande Trådmärkesetikett",
+                    default: "Nyhetstråd"
                 },
                 publicThreadBadgeLabel: {
-                    label: "Allmänt ämne märkesetikett",
-                    description: "Etikett för allmänt ämne",
-                    default: "Ämne"
+                    label: "Offentlig trådmärkesetikett",
+                    description: "Märket för offentlig tråd",
+                    default: "Tråd"
                 },
                 privateThreadBadgeLabel: {
-                    label: "Märkeetikett för specialämne",
-                    description: "Anpassad etikett för ämnesmärke",
-                    default: "Speciellt ämne"
+                    label: "Privat trådmärkesetikett",
+                    description: "Märket för privat tråd",
+                    default: "Privat tråd"
                 },
                 stageBadgeLabel: {
                     label: "Scenmärkesetikett",
                     description: "Scenmärkesetikett",
-                    default: "Scen"
+                    default: "Etapp"
                 },
                 directoryBadgeLabel: {
-                    label: "Indexmärkesetikett",
-                    description: "Indexmärkesetikett",
-                    default: "index"
+                    label: "Katalogmärkesetikett",
+                    description: "Katalogmärkesetikett",
+                    default: "Katalog"
                 },
                 forumBadgeLabel: {
                     label: "Forummärkesetikett",
@@ -1918,8 +1918,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     default: "NSFW"
                 },
                 lockedBadgeLabel: {
-                    label: "Lås märkesetikett",
-                    description: "låsbricka",
+                    label: "Låst märkesetikett",
+                    description: "Låst märkesetikett",
                     default: "Låst"
                 },
                 rulesBadgeLabel: {
@@ -1937,36 +1937,36 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Färg på textmärket"
                 },
                 voiceBadgeColor: {
-                    label: "Ljudmärkesfärg",
-                    description: "Färg på ljudmärket"
+                    label: "Röstmärkesfärg",
+                    description: "Röstmärkesfärg"
                 },
                 categoryBadgeColor: {
                     label: "Kategori märkesfärg",
                     description: "Kategorimärkets färg"
                 },
                 announcementBadgeColor: {
-                    label: "Tillkännagivande märkesfärg",
-                    description: "Färg på meddelandemärket"
+                    label: "Färg för meddelandetrådemblem",
+                    description: "Meddelande Trådmärkets färg"
                 },
                 announcementThreadBadgeColor: {
-                    label: "Tillkännagivande Ämne Badge Färg",
-                    description: "Färg på meddelandets ämnesmärke"
+                    label: "Färg för meddelandetrådemblem",
+                    description: "Meddelande Trådmärkets färg"
                 },
                 publicThreadBadgeColor: {
-                    label: "Allmänt trådmärkesfärg",
-                    description: "Allmänt ämnesmärkesfärg"
+                    label: "Offentlig trådmärkesfärg",
+                    description: "Offentlig tråd-märkesfärg"
                 },
                 privateThreadBadgeColor: {
-                    label: "Special Emne Badge Color",
-                    description: "Anpassad färg för ämnesmärket"
+                    label: "Färg för privat trådmärke",
+                    description: "Privat trådmärkesfärg"
                 },
                 stageBadgeColor: {
                     label: "Scenmärkesfärg",
                     description: "Scenmärkets färg"
                 },
                 directoryBadgeColor: {
-                    label: "Indexmärkesfärg",
-                    description: "Färg på indexmärket"
+                    label: "Katalogmärkesfärg",
+                    description: "Katalogmärkets färg"
                 },
                 forumBadgeColor: {
                     label: "Forummärkesfärg",
@@ -1995,14 +1995,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             badges: {
                 text: "Text",
-                voice: "Ses",
+                voice: "Röst",
                 category: "Kategori",
-                announcement: "Haber",
-                announcementThread: "Nyheter ämne",
-                publicThread: "Ämne",
-                privateThread: "Speciellt ämne",
-                stage: "Scen",
-                directory: "index",
+                announcement: "Nyheter",
+                announcementThread: "Nyhetstråd",
+                publicThread: "Tråd",
+                privateThread: "Privat tråd",
+                stage: "Etapp",
+                directory: "Katalog",
                 forum: "Forum",
                 media: "Media",
                 nsfw: "NSFW",
@@ -2012,48 +2012,48 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             tooltip: {
                 locked: "Denna kanal är låst.",
-                nsfw: "Denna kanal är märkt NSFW."
+                nsfw: "Denna kanal är markerad som NSFW."
             }
         },
         channelTabs: {
-            name: "Kanalflikar",
-            description: "Gruppera dina ofta besökta kanaler i flikar som i en webbläsare",
+            name: "ChannelTabs",
+            description: "Gruppera dina ofta besökta kanaler i flikar, som en webbläsare",
             open: "Öppna i Ny flik",
             animation: {
                 title: "Animationskontroller",
-                description: "Aktivera eller inaktivera specifika animationer för kanalflikar. Varje alternativ kan slås på eller av oberoende av varandra.",
-                placeholder: "Välj vilka animationer du vill aktivera...",
-                tabHover: "Tab Hover-effekter (ta bort + skala)",
+                description: "Aktivera eller inaktivera specifika animationer för kanalflikar. Varje alternativ kan växlas oberoende.",
+                placeholder: "Välj vilka animationer som ska aktiveras...",
+                tabHover: "Tab Hover-effekter (lyft + skala)",
                 tabSelection: "Vald Tab Lift Animation",
                 tabDragDrop: "Tabb Dra och släpp (spöke + omordning)",
-                tabEnterExit: "Tab In/Out rullar (skapa + stäng)",
-                tabIconPop: "Ikonpop (valtillväxt)",
-                closeRotation: "Stäng knapp Återgå",
-                plusPulse: "Plus-knapp pulseffekt",
-                mentionGlow: "Nämn Badge Sparkle",
+                tabEnterExit: "Tab Enter/Exit Slides (skapande + stängning)",
+                tabIconPop: "Ikon poppar vid val (ikonuppskalning)",
+                closeRotation: "Stäng knapprotation",
+                plusPulse: "Plusknappspuls",
+                mentionGlow: "Nämn Badge Glow",
                 compactExpand: "Kompakt lägesexpansion",
                 selectedBorder: "Vald flik Blå kant",
                 selectedBackground: "Vald flikbakgrundsfärg",
                 tabShadows: "Tabskuggeffekter",
-                tabRepositioning: "Flikompositionering (mjuk övergång)",
+                tabRepositioning: "Flikompositionering (smidiga positionsändringar)",
                 resizeHandle: "Ändra storlek Handtag Tona",
-                questActivate: "Aktiv arbetsgradient"
+                questActivate: "Aktiv Quest Gradient"
             },
             bookmark: {
-                label: "Yer İmi",
+                label: "Bokmärke",
                 unknown: "Okänd användare",
                 folder: "Mapp",
                 add: "Lägg till i bokmärken",
                 edit: "Redigera bokmärke",
-                delete: "Yer İmini Sil",
+                delete: "Ta bort bokmärke",
                 remove: "Ta bort från bokmärken",
                 removeFolder: "Ta bort bokmärke från mapp",
                 loading: "Laddar bokmärken...",
-                noBookmarks: "Du har inga bokmärken. Du kan lägga till en öppen flik eller dölja den genom att högerklicka.",
+                noBookmarks: "Du har inga bokmärken. Du kan lägga till en öppen flik eller dölja den genom att högerklicka på den",
                 quests: "Uppdrag",
                 messageRequests: "Meddelandeförfrågningar",
                 friends: "Vänner",
-                shop: "Lagra",
+                shop: "Handla",
                 library: "Bibliotek",
                 discovery: "Upptäckt",
                 nitro: "Nitro",
@@ -2063,7 +2063,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             button: {
                 save: "Spara",
-                delete: "Sil",
+                delete: "Radera",
                 cancel: "Avboka"
             },
             context: {
@@ -2084,17 +2084,17 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             error: {
-                noLogin: "Har du inte ett konto inloggat?"
+                noLogin: "Finns det inget inloggat konto?"
             },
             modal: {
                 add: {
                     title: "Lägg till bokmärke i mapp",
                     select: "Välj en mapp",
-                    create: "Skapa nytt"
+                    create: "Skapa en"
                 },
                 edit: {
                     title: "Redigera bokmärke",
-                    name: "Bokmärkes namn",
+                    name: "Bookmark Name",
                     folder: "Mappfärg"
                 },
                 delete: {
@@ -2104,11 +2104,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 onStartup: {
-                    label: "Initialt",
-                    description: "Välj vad du vill göra med flikarna vid start",
-                    nothing: "Gör ingenting (öppna fliken vänner)",
+                    label: "Vid uppstart",
+                    description: "Vad man ska göra med flikar vid start",
+                    nothing: "Gör ingenting (öppna på fliken vänner)",
                     remember: "Kom ihåg flikar från förra sessionen",
-                    open: "Öppna specifika flikar"
+                    open: "Öppna på en specifik uppsättning flikar"
                 },
                 tabSet: {
                     label: "Flikuppsättning"
@@ -2125,219 +2125,219 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Visa bokmärkesfältet"
                 },
                 bookmarkNotificationDot: {
-                    label: "Bokmärke Notification Point",
-                    description: "Visa aviseringsprick för bokmärken"
+                    label: "Bokmärke Notification Dot",
+                    description: "Visa meddelandeprick för bokmärken"
                 },
                 widerTabsAndBookmarks: {
-                    label: "Stora flikar och bokmärken",
-                    description: "Expandera flikar och bokmärken på större bildskärmar"
+                    label: "Bredare flikar och bokmärken",
+                    description: "Förläng längden på flikar och bokmärken för större bildskärmar"
                 },
                 tabWidthScale: {
                     label: "Tabbbreddskala",
-                    description: "Flikbreddskala (procent) – justerbar genom att dra flikkanterna"
+                    description: "Flikbreddskala (procent) - justerbar genom att dra flikkanterna"
                 },
                 renderAllTabs: {
-                    label: "Håll alla flikar i minnet",
-                    description: "Behåll alla flikar i minnet för snabbare växling mellan flikar (rullning och status cachelagras)"
+                    label: "Rendera alla flikar",
+                    description: "Behåll alla flikar cachade i minnet för snabbare växling (caches rullningsposition och status)"
                 },
                 switchToExistingTab: {
                     label: "Växla till befintlig flik",
-                    description: "Om det redan finns en flik för kanalen du bläddrar i, byt till den"
+                    description: "Byt till flik om den redan finns för kanalen du navigerar till"
                 },
                 createNewTabIfNotExists: {
-                    label: "Om det inte finns någon flik, skapa den",
-                    description: "Om det inte finns någon flik för en kanal, skapa en ny flik"
+                    label: "Skapa ny flik om den inte finns",
+                    description: "Skapa en ny flik om det inte finns någon för kanalen du navigerar till"
                 },
                 enableRapidNavigation: {
-                    label: "Aktivera snabbnavigering",
-                    description: "När kanaländringar görs snabbt ändras den aktuella fliken istället för den nya fliken."
+                    label: "Aktivera snabb navigering",
+                    description: "Aktivera snabbt navigeringsbeteende – snabb navigering mellan kanaler kommer att ersätta den nuvarande fliken istället för att skapa nya"
                 },
                 rapidNavigationThreshold: {
-                    label: "Snabbnavigeringströskel",
-                    description: "Tidsintervall i millisekunder. Om en ny kanal öppnas under denna period ändras den befintliga fliken."
+                    label: "Tröskel för snabb navigering",
+                    description: "Tidsfönster (i millisekunder) för snabb navigering. Inom denna tid ersätter nya kanaler den nuvarande fliken istället för att skapa nya."
                 },
                 tabBarPosition: {
-                    label: "Flikfältets plats",
-                    description: "Flikfältets plats",
+                    label: "Tabbar position",
+                    description: "Placering av flikfältet",
                     top: "Bästa",
-                    bottom: "Alt"
+                    bottom: "Botten"
                 },
                 enableNumberKeySwitching: {
-                    label: "Växla flikar med siffertangenter",
-                    description: "Aktivera flikväxling med knapparna 1–9"
+                    label: "Aktivera sifferknappsväxling",
+                    description: "Aktivera siffertangenter (1-9) för att byta flik"
                 },
                 numberKeySwitchCount: {
-                    label: "Nummerknapp Fliknummer",
-                    description: "Antal flikar tillgängliga via siffertangenter (1–9)"
+                    label: "Antal nyckelbrytare",
+                    description: "Antal flikar tillgängliga via siffertangenter (1-9)"
                 },
                 enableCloseTabShortcut: {
-                    label: "Flik Stäng Genväg",
-                    description: "Aktivera flikstängning kortkommando"
+                    label: "Aktivera Stäng flikgenväg",
+                    description: "Aktivera tangentbordsgenväg med stäng flik"
                 },
                 enableNewTabShortcut: {
-                    label: "Ny flik genväg",
-                    description: "Aktivera ny flik öppen genväg"
+                    label: "Aktivera genväg för ny flik",
+                    description: "Aktivera ny flik kortkommando"
                 },
                 enableTabCycleShortcut: {
-                    label: "Tab Loop Genväg",
-                    description: "Aktivera genväg för att växla mellan flikar"
+                    label: "Aktivera genväg till flikcykel",
+                    description: "Aktivera kortkommandon för flikcykling"
                 },
                 keybindsSection: {
-                    label: "Kortkommandon",
+                    label: "Keybinds",
                     description: "Klicka på en knapp och tryck på önskad tangentkombination. Modifierare som CTRL, SHIFT och ALT stöds.",
                     title: "Kortkommandon",
                     reset: "Återställ alla till standard",
                     closeTab: {
                         label: "Stäng flik",
-                        description: "Kortkommando för att stänga den aktuella fliken"
+                        description: "Tangentbord den för närvarande aktiva fliken"
                     },
                     newTab: {
                         label: "Ny flik",
-                        description: "Kortkommando för att öppna en ny flik med den aktuella kanalen"
+                        description: "Öppna en ny flik med den aktuella kanalen"
                     },
                     cycleTabsForward: {
-                        label: "Framåt Tab Loop",
-                        description: "Genväg för att gå till nästa flik (går till första flik)"
+                        label: "Cykla flikar framåt",
+                        description: "Växla till nästa flik (omsluter till första)"
                     },
                     cycleTabsBackward: {
-                        label: "Back Bounce Loop",
-                        description: "Genväg för att gå till föregående flik (går till sista flik)"
+                        label: "Cykla flikarna bakåt",
+                        description: "Växla till föregående flik (omsluter till sist)"
                     }
                 },
                 closeTabKeybind: {
-                    label: "Flik Stäng Genväg",
-                    description: "Genväg för att stänga aktuell flik"
+                    label: "Stäng Tab Keybind",
+                    description: "Kortkommando för att stänga den aktuella fliken"
                 },
                 newTabKeybind: {
-                    label: "Ny flik genväg",
-                    description: "Ny flik öppen genväg"
+                    label: "Ny fliktangentbindning",
+                    description: "Kortkommando för att öppna en ny flik"
                 },
                 cycleTabForwardKeybind: {
-                    label: "Framåt Tab Loop",
-                    description: "Genväg för att gå till nästa flik"
+                    label: "Cycle Tab Forward Keybind",
+                    description: "Kortkommando för att gå till nästa flik"
                 },
                 cycleTabBackwardKeybind: {
-                    label: "Back Bounce Loop",
-                    description: "Genväg för att gå till föregående flik"
+                    label: "Cycle Tab Backward Keybind",
+                    description: "Kortkommando för att gå till föregående flik"
                 },
                 showTabNumbers: {
                     label: "Visa fliknummer",
-                    description: "Visa nummermärken på flikarna för att visa genvägar"
+                    description: "Visa numrerade märken på flikarna för att indikera kortkommandon"
                 },
                 tabNumberPosition: {
-                    label: "Plats för fliknummer",
-                    description: "Placering av nummerbrickor på flikar",
-                    left: "Vänster (för-ikon)",
-                    right: "Höger (inläggets innehåll)"
+                    label: "Fliknummerposition",
+                    description: "Var ska det numrerade märket visas på flikar",
+                    left: "Vänster sida (före-ikon)",
+                    right: "Höger sida (efter innehåll)"
                 },
                 animations: {
                     label: "Animationer"
                 },
                 animationHover: {
-                    label: "Hover Animation",
-                    description: "Aktivera lyft och förstora effekter medan du svävar"
+                    label: "Animation på Hover",
+                    description: "Aktivera svävningslyft och skalningseffekter"
                 },
                 animationSelection: {
-                    label: "Urvalsanimering",
-                    description: "Aktivera ljus-/ram-animationer vid urvalstillfället"
+                    label: "Animation på urval",
+                    description: "Aktivera urvalsanimationer (kantglöd, lyft)"
                 },
                 animationDragDrop: {
-                    label: "Dra-och-släpp-animering",
-                    description: "Aktivera spökeffekt medan du drar"
+                    label: "Animation på dra och släpp",
+                    description: "Aktivera dra och släpp spökeffekter"
                 },
                 animationEnterExit: {
-                    label: "Entry/Exit Animation",
-                    description: "Rulla animationer när du skapar/stänger flikar"
+                    label: "Animation vid Enter/Exit",
+                    description: "Aktivera flikskapande/stängande bildanimeringar"
                 },
                 animationIconPop: {
-                    label: "Ikon Pop Animation",
-                    description: "Aktivera animering av ikontillväxt under valet"
+                    label: "Animation på Icon Pop",
+                    description: "Aktivera ikonuppskalningsanimering vid val"
                 },
                 animationCloseRotation: {
-                    label: "Kill Button Return",
-                    description: "Lägg till snurranimering till avstängningsikonen"
+                    label: "Animation på nära rotation",
+                    description: "Aktivera rotationsanimering för stängningsknappar"
                 },
                 animationPlusPulse: {
-                    label: "Plusknappspuls",
-                    description: "Aktivera pulsanimering för ny flikknapp"
+                    label: "Animation på plusknappspuls",
+                    description: "Aktivera pulsanimering för plusknappen"
                 },
                 animationMentionGlow: {
-                    label: "Nämn Sparkle",
-                    description: "Aktivera animering av röd glöd på märket"
+                    label: "Animation på Mention Glow",
+                    description: "Aktivera pulserande rött sken för omnämnanden"
                 },
                 animationCompactExpand: {
-                    label: "Kompakt expansionsanimation",
-                    description: "Möjliggör smidig expansion av kompakta flikar"
+                    label: "Animation på Compact/Expand",
+                    description: "Aktivera smidig expansion för kompakta flikar"
                 },
                 animationSelectedBorder: {
-                    label: "Vald flikkantanimering",
-                    description: "Aktivera kant- och glödanimationer för vald flik"
+                    label: "Animation på vald kant",
+                    description: "Aktivera kant- och glödstil för valda flikar"
                 },
                 animationSelectedBackground: {
-                    label: "Vald flikbakgrundsanimering",
-                    description: "Aktivera animerad ändring av bakgrundsfärgen för den valda fliken"
+                    label: "Animation på vald bakgrund",
+                    description: "Aktivera förändring av bakgrundsfärg för valda flikar"
                 },
                 animationTabShadows: {
-                    label: "Tab Shadow Animation",
+                    label: "Animation på Tab Shadows",
                     description: "Aktivera skuggeffekter på flikar"
                 },
                 animationTabPositioning: {
-                    label: "Animation för flikpositionering",
-                    description: "Smidiga övergångsanimationer när du byter flik"
+                    label: "Animation Tab Positionering",
+                    description: "Aktivera mjuka övergångar när flikar flyttar positioner"
                 },
                 animationResizeHandle: {
-                    label: "Ändra storlek på animering",
-                    description: "Aktivera tona animering för storlekshandtag"
+                    label: "Handtag för animering av storleksändring",
+                    description: "Aktivera tona animering för att ändra storlek på handtaget"
                 },
                 animationQuestsActive: {
-                    label: "Active Duty Animation",
-                    description: "Aktivera övertoningsanimationer på fliken när uppgifter är aktiva"
+                    label: "Animationsuppdrag aktiva",
+                    description: "Aktivera gradientanimationer på fliken Uppdrag när uppdrag körs aktivt"
                 },
                 compactAutoExpandSelected: {
-                    label: "Expandera automatiskt när det är valt",
-                    description: "Expandera kompakta flikar automatiskt när de väljs"
+                    label: "Kompakt automatisk expandering har valts",
+                    description: "Expandera kompakta flikar automatiskt när de väljs för att visa hela kanalnamnet"
                 },
                 compactAutoExpandOnHover: {
-                    label: "Expandera automatiskt vid muspekaren",
-                    description: "Expandera kompakta flikar automatiskt när du svävar"
+                    label: "Kompakt autoexpandera vid hovring",
+                    description: "Expandera kompakta flikar automatiskt när du håller muspekaren för att visa hela kanalnamnet"
                 },
                 openInNewTabAutoSwitch: {
-                    label: "Automatiskt byte vid öppning i ny flik",
-                    description: "Växla automatiskt till en ny flik när den öppnas"
+                    label: "Öppna i New Tab Auto-Switch",
+                    description: "Växla automatiskt till nya flikar som öppnas från snabbmenyn \"Öppna i ny flik\"."
                 },
                 bookmarksIndependentFromTabs: {
-                    label: "Bokmärken oberoende",
-                    description: "Bokmärken navigerar oberoende utan att flikfältet påverkas"
+                    label: "Bokmärken oberoende av flikar",
+                    description: "Bokmärken navigerar oberoende utan att påverka den aktiva flikraden"
                 },
                 showResizeHandle: {
-                    label: "Visa storlekshandtag",
-                    description: "Visa handtag för att justera bredden på flikarna"
+                    label: "Visa storleksändringshandtag",
+                    description: "Visa storlekshandtaget när du håller muspekaren över flikar för att justera flikbredden"
                 },
                 openNewTabsInCompactMode: {
-                    label: "Öppna nya flikar kompakt",
-                    description: "Nyöppnade flikar öppnas i kompakt läge som standard"
+                    label: "Öppna nya flikar i kompaktläge",
+                    description: "Öppna alla nyskapade flikar i kompakt läge som standard"
                 },
                 newTabButtonBehavior: {
                     label: "Nytt flikknappbeteende",
-                    description: "Knappen ny flik (+) följer flikar istället för att vara fixerad till höger"
+                    description: "Knappen Ny flik (+) följer flikarna istället för att förbli fästad till höger"
                 },
                 oneTabPerServer: {
                     label: "En flik per server",
-                    description: "Låt det bara finnas ett hopp för en server; Använd samma flik när en ny kanal öppnas"
+                    description: "Begränsa till en flik per server, så att öppna en ny kanal på den servern kommer att använda den befintliga fliken."
                 },
                 maxOpenTabs: {
-                    label: "Maximalt antal öppna flikar",
-                    description: "Maximalt antal flikar som kan vara öppna samtidigt (0 = obegränsat)"
+                    label: "Max öppna flikar",
+                    description: "Maximalt antal öppna flikar (0 = obegränsat)"
                 }
             },
             tabs: {
-                startup: "Hem-flikar",
-                currently: "Ställ in för närvarande öppna flikar"
+                startup: "Startflikar",
+                currently: "Ställ in på för närvarande öppna flikar"
             },
             toast: {
-                notRestoring: "Flikar återställs inte eftersom KeepCurrentChannel är aktiverat",
+                notRestoring: "Återställer inte flikar eftersom KeepCurrentChannel är aktiverat",
                 failed: {
-                    restore: "Flikar kunde inte återställas",
+                    restore: "Det gick inte att återställa flikarna",
                     saved: "Det gick inte att läsa in sparade flikar"
                 }
             }
@@ -2348,39 +2348,39 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 colorEffects: {
                     label: "Färgeffekter",
-                    description: "Slå på eller av färgeffekter när du närmar dig teckengränsen"
+                    description: "Slå på eller av färgeffekter för att komma nära teckengränsen"
                 }
             }
         },
         cleanChannelGroups: {
             name: "CleanChannelGroups",
-            description: "Den döljer bara alla kanaler i kollapsade kategorier, även om det finns olästa meddelanden."
+            description: "Döljer alla kanaler i komprimerade kategorier, även om de har olästa meddelanden."
         },
         cleanChannelName: {
             name: "CleanChannelName",
-            description: "Ta bort alla emojier och fåniga utsmyckningar från kanalnamn"
+            description: "Ta bort all emoji och dekorskit från kanalnamn"
         },
         clearURLs: {
-            name: "Rensa webbadresser",
-            description: "Tar automatiskt bort spårningselement från webbadresser du skickar in"
+            name: "ClearURLs",
+            description: "Tar automatiskt bort spårningselement från webbadresser du skickar"
         },
         clickableRoles: {
-            name: "Klickbara roller",
-            description: "Du kan se vilka roller medlemmar har genom att klicka på rollerna i användarprofilerna och medlemslistan.",
+            name: "ClickableRoles",
+            description: "Klicka på roller i användarprofiler och medlemslistan för att se vilka medlemmar som har dem.",
             modal: {
-                loading: "Medlemmar laddar...",
+                loading: "Laddar medlemmar...",
                 noMembers: "Inga medlemmar hittades.",
                 unknown: "Okänd roll"
             }
         },
         clientSideBlock: {
             name: "ClientSideBlock",
-            description: "Låter dig dölja nästan allt innehåll från alla användare lokalt",
+            description: "Gör att du kan dölja nästan allt innehåll från alla användare lokalt",
             replying: "Svarar på blockerat meddelande",
             option: {
                 hideVc: {
-                    label: "Dölj från röstkanaler",
-                    description: "Dölj röstkanaler som innehåller blockerade användare"
+                    label: "Dölj röstkanaler",
+                    description: "Dölj röstkanaler som innehåller blockerade användare."
                 },
                 usersToBlock: {
                     label: "Användare att blockera",
@@ -2388,35 +2388,35 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 hideBlockedUsers: {
                     label: "Dölj blockerade användare",
-                    description: "Göm blockerade användare helt överallt"
+                    description: "Skulle blockerade användare också döljas överallt"
                 },
                 hideBlockedMessages: {
                     label: "Dölj blockerade meddelanden",
-                    description: "Dölj meddelanden helt från blockerade användare (samma som gamla noblockedmessages-plugin)"
+                    description: "Skulle meddelanden från blockerade användare döljas helt (samma som det gamla plugin-programmet noblockedmessages)"
                 },
                 hideEmptyRoles: {
-                    label: "Dölj lediga roller",
-                    description: "Dölj rolltitlar om alla medlemmar är blockerade"
+                    label: "Dölj tomma roller",
+                    description: "Bör rollrubriker döljas om alla deras medlemmar är blockerade"
                 },
                 blockedReplyDisplay: {
-                    label: "Blockerad svarsvy",
-                    description: "Vad som visas istället för ett meddelande när du svarar någon du har gömt",
-                    displayText: "Visa text som anger svar på ett dolt meddelande",
-                    hideReply: "visa ingenting"
+                    label: "Blockerad svarsvisning",
+                    description: "Vad ska visas istället för meddelandet när någon svarar någon du har gömt",
+                    displayText: "Displaytext som säger att ett dolt meddelande besvarades",
+                    hideReply: "Bokstavligen ingenting"
                 },
                 guildBlackList: {
-                    label: "Serversvartlista",
-                    description: "Server-ID där funktionen kommer att inaktiveras"
+                    label: "Guild Blacklist",
+                    description: "Guild ID:n för att inaktivera funktionalitet i"
                 },
                 guildWhiteList: {
-                    label: "Server vitlista",
-                    description: "Server-ID:n där funktionen kommer att aktiveras"
+                    label: "Guild Whitelist",
+                    description: "Guild ID för att aktivera funktionalitet i"
                 }
             }
         },
         clientTheme: {
-            name: "Klienttema",
-            description: "Remake av gammalt klienttemaexperiment. Lägg till en färg till ditt Discord-klienttema",
+            name: "ClientTheme",
+            description: "Återskapande av det gamla klienttemaexperimentet. Lägg till en färg till ditt Discord-klienttema",
             title: "Tema färg",
             add: "Lägg till en färg till ditt Discord-klienttema",
             option: {
@@ -2429,42 +2429,42 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             error: {
                 modal: {
-                    title: "Ditt tema kommer inte att se bra ut!",
-                    contrast: "Den valda färgen kommer inte att kontrastera bra med texten",
+                    title: "Your theme won't look good!",
+                    contrast: "Vald färg kommer inte att kontrastera bra med text",
                     nitro: "Nitro-teman stöds inte",
-                    switch: "Växla till läget {{oppositeTheme}}",
+                    switch: "Växla till läge {{oppositeTheme}}",
                     disable: "Inaktivera Nitro-tema",
                     reset: "Återställ temafärg"
                 }
             }
         },
         clipsEnhancements: {
-            name: "Klippförbättringar",
+            name: "ClipsEnhancements",
             description: "Lägg till fler FPS- och varaktighetsalternativ för klipp, plus RPC-taggning!",
-            minutes: "En minut",
+            minutes: "Minuter",
             option: {
                 richPresenceTagging: {
                     label: "Rich närvarotaggning",
-                    description: "När ska klipp taggas med befintlig Rich Presence?",
+                    description: "When should clips be tagged with the current Rich Presence?",
                     always: "Alltid",
-                    only: "Endast när början eller slutet av händelsenamnet matchar",
+                    only: "Endast när början eller slutet av aktivitetens namn matchar",
                     never: "Aldrig"
                 },
                 enableScreenshotKeybind: {
-                    label: "Aktivera snabbtangenten för skärmdump",
-                    description: "Aktivera funktionen för snabbkommandon för skärmdumpar"
+                    label: "Aktivera Screenshot Keybind",
+                    description: "Aktivera tangentbindningsfunktionen för skärmdump"
                 },
                 enableVoiceOnlyClips: {
-                    label: "Aktivera endast ljudklipp",
-                    description: "Aktivera endast ljudklipp (ljud utan video)"
+                    label: "Aktivera endast röstklipp",
+                    description: "Aktivera endast röstklipp (ljud utan video)"
                 },
                 enableAdvancedSignals: {
                     label: "Aktivera avancerade signaler",
-                    description: "Aktivera avancerade klippsignaler (automatiska klipputlösare)"
+                    description: "Aktivera avancerade klippsignaler (autoklipputlösare)"
                 },
                 ignorePlatformRestriction: {
-                    label: "Ignorera plattformsbegränsningar",
-                    description: "Tillåt plattformsspecifik klippning (kan orsaka lagringsfel)"
+                    label: "Ignorera plattformsbegränsning",
+                    description: "Tillåt plattformsbegränsad klippning (kan orsaka lagringsfel)"
                 },
                 clipsLink: {
                     label: "Klipplänk",
@@ -2473,39 +2473,39 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         colorSighted: {
-            name: "Färgsynt",
-            description: "Tar bort färgblinda vänliga ikoner från situationer, precis som 2015-2017 Discord"
+            name: "ColorSighted",
+            description: "Tar bort de färgblindvänliga ikonerna från status, precis som 2015-2017 Discord"
         },
         commandPalette: {
-            name: "Kommandopalett",
-            description: "Det låter dig navigera i gränssnittet med hjälp av tangentbordet.",
+            name: "CommandPalette",
+            description: "Låter dig navigera i användargränssnittet med ett tangentbord.",
             action: {
                 command: {
                     label: "Kör kommando",
-                    description: "Kör ett annat palettkommando med ID. Om du inte är säker på identifieraren, använd väljaren."
+                    description: "Alias ​​ett annat palettkommando efter ID. Använd väljaren om du är osäker på identifieraren."
                 },
                 settings: {
                     label: "Öppna sidan Inställningar",
-                    description: "Den går direkt till en Discord-inställningssida. Välj en sida från väljaren."
+                    description: "Hoppa direkt till en Discord-inställningssida. Välj en sida från väljaren."
                 },
                 url: {
                     label: "Öppna URL",
-                    description: "Öppnar en länk. För bästa kompatibilitet, använd https://-länkar."
+                    description: "Öppna en länk. Använd https://-länkar för bästa kompatibilitet."
                 },
                 macro: {
                     label: "Kör makro",
-                    description: "Kör en serie kommandon sekventiellt. Lägg till steg via väljaren."
+                    description: "Kör en sekvens av kommandon i ordning. Lägg till steg via väljaren."
                 }
             },
             category: {
-                auto: "Automatisk (använd standardlayout)",
+                auto: "Auto (använd standardplacering)",
                 default: {
-                    label: "Snabba transaktioner",
+                    label: "Snabba åtgärder",
                     description: "Vanliga Plexcord-genvägar"
                 },
                 plugins: {
                     label: "Plugins",
-                    description: "Aktiverar, inaktiverar och konfigurerar Plexcord-plugins",
+                    description: "Aktivera, inaktivera och konfigurera Plexcord-plugins",
                     enable: {
                         label: "Aktivera plugins"
                     },
@@ -2527,7 +2527,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 context: {
                     label: "Aktuell kontext",
-                    description: "Åtgärder för den valda kanalen och servern"
+                    description: "Åtgärder för vald kanal och guild"
                 },
                 updates: {
                     label: "Uppdateringar",
@@ -2535,10 +2535,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 discordSettings: {
                     label: "Discord-inställningar",
-                    description: "Gå till Discord-konfigurationssidor"
+                    description: "Hoppa till Discord-konfigurationssidor"
                 },
                 custom: {
-                    label: "Specialkommandon",
+                    label: "Anpassade kommandon",
                     description: "Användardefinierade kommandopalettposter"
                 },
                 sessions: {
@@ -2546,15 +2546,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Verktyg för att hantera din Discord-session"
                 },
                 guilds: {
-                    label: "Servrar",
-                    description: "Navigera snabbt till dina servrar"
+                    label: "Skrån",
+                    description: "Navigera snabbt till dina guilder"
                 },
                 friends: {
                     label: "Vänner",
-                    description: "Gå snabbt till dina vänner"
+                    description: "Navigera snabbt till dina vänner"
                 },
                 action: {
-                    label: "Handling",
+                    label: "Handling"
                 }
             },
             builtIn: {
@@ -2565,70 +2565,70 @@ const translations: MatchStructure<typeof enTranslations> = {
                     }
                 },
                 reload: {
-                    label: "Installera om Discord",
+                    label: "Ladda om Discord",
                     description: "Laddar om det aktuella Discord-fönstret"
                 }
             },
             command: {
                 enable: "Aktivera {{pluginName}}",
-                enabled: "{{pluginName}} aktiverad",
+                enabled: "Aktiverad {{pluginName}}",
                 disable: "Inaktivera {{pluginName}}",
-                disabled: "{{pluginName}} inaktiverad",
+                disabled: "Inaktiverad {{pluginName}}",
                 failed: "Kommandot misslyckades:",
-                toggleFailed: "{{pluginName}} kunde inte ändras.",
-                pluginSettings: "Inställningar för {{pluginName}}",
-                untitled: "Anonymt kommando",
+                toggleFailed: "Det gick inte att växla {{pluginName}}.",
+                pluginSettings: "{{pluginName}} Inställningar",
+                untitled: "Namnlöst kommando",
                 new: "Nytt kommando",
                 error: {
-                    enter: "Ange ett kommando-ID eller välj nedan.",
-                    noCommand: "Det finns inget kommando som matchar detta ID."
+                    enter: "Ange ett kommando-ID eller välj ett nedan.",
+                    noCommand: "Inget kommando matchar detta ID."
                 },
                 discord: {
                     account: "Öppna Mitt konto",
-                    privacy: "Data och integritet öppen",
-                    notifications: "Aktivera aviseringar",
-                    voice: "Slå på ljud och video",
-                    text: "Öppna text och bilder",
-                    appearance: "Öppna vy",
+                    privacy: "Öppna Data & Sekretess",
+                    notifications: "Öppna Aviseringar",
+                    voice: "Öppna Röst och video",
+                    text: "Öppna Text och bilder",
+                    appearance: "Öppet utseende",
                     accessibility: "Öppen tillgänglighet",
-                    keybinds: "Slå på nyckelbindningar",
-                    advanced: "Öppna Avancerade inställningar",
+                    keybinds: "Öppna Keybinds",
+                    advanced: "Öppna Avancerat",
                 },
                 updates: {
                     check: {
                         label: "Sök efter uppdateringar",
                         description: "Sök efter Plexcord-uppdateringar",
-                        one: "En uppdatering är tillgänglig",
+                        one: "En uppdatering tillgänglig",
                         multiple: "{{count}} uppdateringar tillgängliga",
-                        none: "ingen uppdatering",
+                        none: "Inga uppdateringar tillgängliga",
                         failed: "Det gick inte att söka efter uppdateringar."
                     },
                     changelog: {
                         label: "Visa ändringslogg",
-                        description: "Plexcord öppnar ändringslogg"
+                        description: "Öppnar Plexcord-ändringsloggen"
                     }
                 },
                 read: {
                     mark: {
-                        label: "{{channelLabel}} Markera som läst"
+                        label: "Markera {{channelLabel}} Läst"
                     }
                 },
                 pin: {
                     open: {
-                        label: "Aktivera {{channelLabel}} Pins"
+                        label: "Öppna pins för {{channelLabel}}"
                     },
                     toggle: {
-                        label: "Växla låsning på sista kommandot"
+                        label: "Växla Pin på sista kommandot"
                     }
                 },
                 channel: {
                     mute: {
-                        label: "{{channelLabel}} Sustur",
-                        oneHour: "Stäng av kanalen {{channelLabel}} i 1 timme",
-                        untilTomorrow: "Stäng av kanalen {{channelLabel}} tills imorgon",
+                        label: "Stäng av ljudet {{channelLabel}}",
+                        oneHour: "Stäng av ljudet för {{channelLabel}} i 1 timme",
+                        untilTomorrow: "Stäng av ljudet för {{channelLabel}} tills imorgon",
                     },
                     unmute: {
-                        label: "Slå på ljudet för {{channelLabel}}",
+                        label: "Slå på ljudet {{channelLabel}}",
                     },
                     reopen: {
                         label: "Öppna senast stängt DM igen"
@@ -2641,15 +2641,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 guild: {
                     settings: {
-                        label: "Öppna {{guildLabel}} Inställningar"
+                        label: "Öppna Inställningar för {{guildLabel}}"
                     },
                     navigate: {
-                        label: "Gå till {{guildLabel}}-servern"
+                        label: "Navigera till {{guildLabel}}"
                     }
                 },
                 session: {
-                    thirtyMinutesDnd: "30 minuter Stör ej",
-                    oneHourDnd: "1 timme Stör ej",
+                    thirtyMinutesDnd: "Ställ in Stör ej i 30 minuter",
+                    oneHourDnd: "Ställ in Stör ej i 1 timme",
                     cancelStatusReset: "Avbryt Status Timer"
                 },
                 status: {
@@ -2663,7 +2663,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 toggle: {
                     streamer: "Växla Streamer-läge",
                     mute: "Växla Self Mute",
-                    deafen: "Växla självbedövande",
+                    deafen: "Växla självdöva",
                 },
                 notification: {
                     clear: {
@@ -2673,24 +2673,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                 palette: {
                     settings: {
                         label: "Öppna kommandopalettinställningar",
-                        description: "Konfigurera kommandopalett-plugin"
+                        description: "Konfigurera kommandopalettens plugin"
                     }
                 },
                 recent: {
                     label: "Visa senaste kommandon",
-                    description: "Visar nyligen utförda kommandon",
+                    description: "Visar de senast utförda kommandona",
                     rerun: "Kör senaste kommandot igen"
                 },
                 plugin: {
                     reload: {
-                        label: "Installera om alla plugins",
-                        description: "Försöker omedelbart att ladda om varje aktiv plugin"
+                        label: "Ladda om alla plugins",
+                        description: "Försöker att ladda om varje aktiverat plugin"
                     },
                     enable: {
                         label: "Aktivera alla plugins"
                     },
                     disable: {
-                        label: "Inaktivera alla onödiga plugins"
+                        label: "Inaktivera alla ej nödvändiga plugins"
                     },
                     restart: {
                         label: "Starta om Plexcord",
@@ -2710,8 +2710,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             modal: {
-                searchPlaceholder: "Sök efter kommando",
-                noCommand: "Kommandot hittades inte",
+                searchPlaceholder: "Sökkommandon",
+                noCommand: "Inga kommandon hittades",
                 add: {
                     title: "Lägg till kommando"
                 },
@@ -2723,9 +2723,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                         label: "Kommandopalett",
                         placeholder: "Skriv ett kommando",
                         filtering: "Filtrera efter {{tags}}",
-                        noCommand: "Kommandot hittades inte",
-                        pin: "pin-kommando",
-                        unpin: "Lossa"
+                        noCommand: "Inga kommandon hittades",
+                        pin: "Fäst kommando",
+                        unpin: "Lossa kommandot"
                     },
                     target: {
                         label: "Målkommando-ID",
@@ -2733,21 +2733,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                         choose: "Välj Kommando"
                     },
                     custom: {
-                        label: "Specialkommandon",
-                        description: "1) Namnge kommandot · 2) Lägg till valfri beskrivning/sökord/tagg/kategori · 3) Välj en åtgärd och fyll i detaljerna (ID:n för alias och makron måste matcha befintliga palettkommandon).",
+                        label: "Anpassade kommandon",
+                        description: "1) Namnge kommandot · 2) Lägg till valfri beskrivning/sökord/taggar/kategori · 3) Välj en åtgärd och fyll i dess detaljer (ID:n ska matcha befintliga palettkommandon för alias och makron).",
                         auto: "Auto (standard)",
                         expand: "Expandera",
                         collapse: "Kollapsa",
                         collapsed: {
-                            label: "Biljett",
+                            label: "Märka",
                             description: "Visningsnamn",
                             advanced: {
                                 hide: "Dölj avancerade alternativ",
                                 show: "Visa avancerade alternativ"
                             },
                             subtitle: {
-                                label: "Förklaring",
-                                placeholder: "Valfri underrubrik"
+                                label: "Beskrivning",
+                                placeholder: "Valfri undertext"
                             },
                             keywords: {
                                 label: "Nyckelord",
@@ -2772,7 +2772,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     }
                 },
                 settings: {
-                    noSelected: "Sidan är inte vald",
+                    noSelected: "Ingen sida har valts",
                     current: "Aktuell sida",
                     choose: "Välj sida..."
                 },
@@ -2781,12 +2781,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     error: "Använd länkarna http:// eller https://.",
                     valid: "Ange en giltig URL.",
                     open: {
-                        external: "öppna externt",
+                        external: "Öppna externt",
                     }
                 },
                 macro: {
                     sequence: {
-                        label: "Manus",
+                        label: "Kommandosekvens",
                         placeholder: "kommando-a, kommando-b"
                     },
                     addStep: "Lägg till steg",
@@ -2794,43 +2794,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             status: {
-                online: "online",
-                idle: "på tomgång",
+                online: "Online",
+                idle: "På tomgång",
                 dnd: "Stör ej",
                 invisible: "Osynlig"
             },
             tag: {
-                core: "Solrosfrö",
-                navigation: "Promenerar",
-                utility: "Fordon",
+                core: "Kärna",
+                navigation: "Navigering",
+                utility: "Nytta",
                 developer: "Framkallare",
-                customization: "anpassning",
+                customization: "Anpassning",
                 plugins: "Plugins",
                 session: "Session",
                 context: "Sammanhang",
-                custom: "Särskild",
-                guilds: "Servrar",
+                custom: "Beställnings",
+                guilds: "Skrån",
                 friends: "Vänner",
                 other: "Andra"
             },
             toast: {
                 chat: {
                     button: {
-                        unableToFind: "Chattknappen '{{label}}' hittades inte.",
-                        failedToTrigger: "{{label}} kunde inte utlösas.",
-                        activated: "{{label}} är aktiverad."
+                        unableToFind: "Det gick inte att hitta chattknappen '{{label}}'.",
+                        failedToTrigger: "Det gick inte att utlösa {{label}}.",
+                        activated: "{{label}} aktiverad."
                     }
                 },
                 channel: {
                     mute: {
                         unavailable: "Kanalavstängningskontroller är inte tillgängliga",
-                        muted: "Kanalen har tystats.",
-                        unmuted: "Kanalen har stängts av.",
-                        failed: "Kanalens avstängningsstatus kunde inte uppdateras."
+                        muted: "Avstängd kanal.",
+                        unmuted: "Avstängd kanal.",
+                        failed: "Det gick inte att uppdatera kanalens avstängningsläge."
                     },
                     dm: {
-                        no: "Det finns inga DM-avslutningar registrerade i denna session.",
-                        reOpened: "Senast stängda DM har öppnats igen.",
+                        no: "Inga DM-stängningar spelade in den här sessionen.",
+                        reOpened: "Återöppnade senast stängda DM.",
                         noAvailable: "DM är inte längre tillgängligt."
                     }
                 },
@@ -2843,89 +2843,89 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 guild: {
                     mute: {
-                        unavailable: "Serverns avstängningskontroller är inte tillgängliga",
-                        muted: "Servern har tystats.",
-                        unmuted: "Serveravstängning har tagits bort.",
-                        failed: "Serverns tystnadsstatus kunde inte uppdateras."
+                        unavailable: "Guild mute-kontroller är inte tillgängliga",
+                        muted: "Dämpad guild.",
+                        unmuted: "Ej dämpad guild.",
+                        failed: "Det gick inte att uppdatera guild mute-tillstånd."
                     },
                     settings: {
-                        unable: "Det går inte att öppna serverinställningarna.",
+                        unable: "Det går inte att öppna guildinställningarna.",
                     }
                 },
                 panel: {
                     pin: {
-                        unable: "Fästpanelen kan inte öppnas.",
+                        unable: "Det går inte att öppna stiftpanelen.",
                     }
                 },
                 status: {
                     reset: {
-                        canceled: "Den planerade statusåterställningen har avbrutits.",
-                        unableToChange: "Statusen kan inte ändras för närvarande.",
-                        reverted: "Statusen returneras som {{status}}.",
+                        canceled: "Avbruten schemalagd statusåterställning.",
+                        unableToChange: "Det går inte att ändra status just nu.",
+                        reverted: "Status återställd till {{status}}.",
                         dnd: "Stör ej i {{duration}} minuter."
                     },
                     change: {
-                        unableToChange: "Statusen kan inte ändras för närvarande.",
+                        unableToChange: "Det går inte att ändra status just nu.",
                         changed: "Status ändrad till {{status}}."
                     }
                 },
                 read: {
-                    marked: "{{channelLabel}} är markerad som läst.",
-                    failed: "Kanalen kunde inte markeras som läst."
+                    marked: "Markerade {{channelLabel}} som läst.",
+                    failed: "Det gick inte att markera kanalen som läst."
                 },
                 route: {
-                    unable: "Det gick inte att öppna {{destination}}.",
+                    unable: "Unable to open {{destination}}.",
                 },
                 notification: {
-                    cleared: "Alla aviseringar raderade.",
+                    cleared: "Rensat alla aviseringar.",
                     failed: "Det gick inte att rensa aviseringar.",
                     notSupported: "Aviseringsrensning stöds inte."
                 },
                 streamerMode: {
-                    enabled: "Sändningsläge är aktiverat.",
-                    disabled: "Sändningsläge är inaktiverat.",
+                    enabled: "Streamerläge aktiverat.",
+                    disabled: "Streamerläge inaktiverat.",
                 },
                 voice: {
                     micToggle: {
-                        muted: "Mikrofonen tystades.",
-                        unmuted: "Mikrofonen är påslagen."
+                        muted: "Mikrofon avstängd.",
+                        unmuted: "Mikrofon avstängd."
                     },
                     deafenToggle: {
-                        deafened: "Du är nu döv.",
-                        undeafened: "Du är inte längre döv."
+                        deafened: "Du är nu dövad.",
+                        undeafened: "Du är inte längre dövad."
                     }
                 },
                 quickCSS: {
-                    enabled: "Snabb CSS är aktiverad.",
-                    disabled: "Snabb CSS är inaktiverad."
+                    enabled: "Snabb CSS aktiverad.",
+                    disabled: "Snabb CSS inaktiverad."
                 },
                 transparentity: {
-                    enabled: "Fönstertransparens är aktiverad.",
-                    disabled: "Fönstertransparens är inaktiverad."
+                    enabled: "Fönstertransparens aktiverad.",
+                    disabled: "Fönstertransparens inaktiverad."
                 },
                 plugin: {
                     disabled: {
                         label: "{{pluginName}} är inaktiverad.",
-                        disable: "{{pluginName}} är inaktiverad. För att använda den här åtgärden, aktivera insticksprogrammet."
+                        disable: "{{pluginName}} är inaktiverad. Aktivera plugin-programmet för att använda den här åtgärden."
                     },
                     required: {
-                        label: "{{pluginName}} kräver en omstart för att installera om."
+                        label: "{{pluginName}} kräver en omstart för att ladda om."
                     },
                     stop: {
-                        failed: "{{pluginName}} kunde inte stoppas."
+                        failed: "Det gick inte att stoppa {{pluginName}}."
                     },
                     restart: {
                         failed: "Det gick inte att starta om {{pluginName}}."
                     },
                     reload: {
-                        label: "{{pluginName}} har laddats om.",
-                        noPlugin: "Inga plugins installerades om.",
-                        reloaded: "{{count}} plugins har installerats om."
+                        label: "Laddade om {{pluginName}}.",
+                        noPlugin: "Inga plugins laddades om.",
+                        reloaded: "Laddade om {{count}} plugin{{s}}."
                     },
                     toggle: {
-                        enabled: "{{changed}} plugin aktiverad.",
-                        disabled: "{{changed}} plugin är inaktiverad.",
-                        noChanged: "Statusen för några plugins har inte ändrats."
+                        enabled: "Aktiverad {{changed}} plugin{{s}}.",
+                        disabled: "Inaktiverad {{changed}} plugin{{s}}.",
+                        noChanged: "Inga plugins ändrade tillstånd."
                     },
                     run: {
                         failed: {
@@ -2941,7 +2941,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     direct: "Direktmeddelande"
                 },
                 guild: {
-                    current: "Aktuell server",
+                    current: "Nuvarande Guild",
                 }
             },
             option: {
@@ -2949,48 +2949,48 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Snabbtangent",
                     description: "Snabbtangent används för att öppna kommandopaletten",
                     recording: "Tryck på valfri tangent...",
-                    reset: "återställa"
+                    reset: "Återställa"
                 },
                 visualStyle: {
-                    label: "Görsel Stil",
-                    description: "palettvy",
+                    label: "Visuell stil",
+                    description: "Palett utseende",
                     classic: "Klassisk",
-                    polished: "Polerad (modern)"
+                    polished: "Polerad"
                 },
                 showTags: {
                     label: "Visa taggar",
-                    description: "Visa etiketter för kommandon"
+                    description: "Visa taggchips för kommandon"
                 },
                 enableTagFilter: {
                     label: "Aktivera taggfilter",
                     description: "Visa taggfilterfältet"
                 },
                 customCommands: {
-                    label: "Specialkommandon",
+                    label: "Anpassade kommandon",
                     description: "Hantera anpassade kommandopalettposter"
                 }
             },
             template: {
                 alias: {
-                    label: "Smeknamn Kommando",
-                    description: "Återspeglar ett befintligt kommando"
+                    label: "Alias ​​kommando",
+                    description: "Spegla ett befintligt kommando"
                 },
                 settings: {
                     label: "Inställningar",
                     description: "Öppna Discord-inställningar"
                 },
                 url: {
-                    label: "Förbindelse",
-                    description: "Öppnar en extern URL"
+                    label: "Länk",
+                    description: "Öppna en extern URL"
                 },
                 macro: {
                     label: "Makro",
-                    description: "Kör en rad kommandon"
+                    description: "Kör en sekvens av kommandon"
                 }
             }
         },
         consoleJanitor: {
-            name: "Konsolvaktmästare",
+            name: "ConsoleJanitor",
             description: "Inaktiverar irriterande konsolmeddelanden/fel",
             option: {
                 disableLoggers: {
@@ -2999,52 +2999,52 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 disableSpotifyLogger: {
                     label: "Inaktivera Spotify Logger",
-                    description: "Inaktiverar Spotify-logger som läcker kontoinformation och åtkomstnyckel"
+                    description: "Inaktivera Spotify-loggern, som läcker kontoinformation och åtkomsttoken"
                 },
                 whitelistedLoggers: {
                     label: "Vitlistade Loggers",
-                    description: "Semikolon (;) separerad lista över loggare som kommer att tillåtas även om andra är dolda"
+                    description: "Semikolon (;) separerad lista med loggare för att tillåta även om andra är dolda"
                 },
                 allowLevel: {
-                    label: "Tillåten nivå",
+                    label: "Tillåt nivå",
                     description: "Tillåt alltid loggare av dessa typer",
                     filter: "Filterlista"
                 }
             }
         },
         consoleShortcuts: {
-            name: "Konsolgenvägar",
-            description: "Lägger till kortare genvägar för många saker på fönstret. Kör \"shortcutList\" för listan."
+            name: "Console Shortcuts",
+            description: "Lägger till kortare alias för många saker på fönstret. Kör \"shortcutList\" för en lista."
         },
         contentWarning: {
-            name: "Innehållsvarning",
-            description: "Gör att vissa triggerord blir suddiga som standard. Genom att klicka på suddigt innehåll blir det synligt.",
+            name: "ContentWarning",
+            description: "Låter dig ange vissa triggerord som kommer att vara suddiga som standard. Om du klickar på det suddiga innehållet visas det.",
             option: {
                 flagged: {
-                    label: "märke",
-                    flagged: "Markerade ord",
+                    label: "Flaggat",
+                    flagged: "Flaggade ord",
                     placeholder: "Ord"
                 },
                 onClick: {
-                    label: "Klicka på den",
-                    description: "Visa innehåll genom att klicka, inte bara på musen över"
+                    label: "På klick",
+                    description: "Visa bara triggerinnehåll vid klick istället för att hålla muspekaren"
                 }
             }
         },
         copyEmojiMarkdown: {
             name: "CopyEmojiMarkdown",
-            description: "Låter dig kopiera emojis som formaterad text (<a:blob_pwease:1402403381900742737>)",
+            description: "Låter dig kopiera emojis som formaterad sträng (<a:blob_pwease:1402403381900742737>)",
             option: {
                 copyUnicode: {
-                    label: "Unicode-kopior",
-                    description: "Kopierar det råa unicode-tecknet istället för :name: för standardemojis (👽)"
+                    label: "Kopiera Unicode",
+                    description: "Kopiera det råa unicode-tecknet istället för :name: för standardemojis (👽)"
                 }
             },
             context: {
                 copy: "Kopiera Emoji Markdown"
             },
             toast: {
-                success: "Framgångsrik! Emojis markering har kopierats."
+                success: "Framgång! Kopierade emoji-markering."
             }
         },
         copyFileContents: {
@@ -3056,25 +3056,25 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         copyProfileColors: {
             name: "CopyProfileColors",
-            description: "Ett plugin som kopierar användarnas profilgradientfärger till urklippet.",
+            description: "Ett plugin för att kopiera människors profilgradientfärger till urklipp.",
             copy: "Kopiera profilfärger",
             toast: {
-                noColor: "Profilfärger hittades inte!",
+                noColor: "Inga profilfärger hittades!",
                 copied: "Profilfärger kopierade till urklipp!",
                 error: "Fel vid kopiering av profilfärger!"
             }
         },
         copyStatusUrls: {
             name: "CopyStatusUrls",
-            description: "Kopiera en användares status-URL när du högerklickar",
+            description: "Kopiera användarens status-URL när du högerklickar på den",
             toast: {
-                copied: "URL kopierad",
-                error: "Det gick inte att kopiera URL. Kontrollera konsolen för mer information"
+                copied: "Kopierad URL",
+                error: "Det gick inte att kopiera URL, kolla konsolen för mer information"
             }
         },
         copyStickerLinks: {
             name: "CopyStickerLinks",
-            description: "Lägger till möjligheten att kopiera och öppna klistermärkeslänkar",
+            description: "Lägger till möjligheten att kopiera och öppna Sticker-länkar",
             context: {
                 copy: "Kopiera länk",
                 open: "Öppna länken"
@@ -3085,7 +3085,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         copyUserMention: {
             name: "CopyUserMention",
-            description: "Lägger till en knapp i användarens sammanhangsberoende meny för att kopiera användarens omnämnande. Fungerar bäst med ValidUser.",
+            description: "Lägger till en knapp för att kopiera användarens omnämnande på användarens snabbmeny, fungerar bäst med ValidUser.",
             context: {
                 copy: "Kopiera användarnamn"
             }
@@ -3099,41 +3099,41 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         crashHandler: {
             name: "CrashHandler",
-            description: "Hjälpprogram för att hantera och, om möjligt, återställa från krascher utan att behöva starta om",
+            description: "Verktygsplugin för att hantera och eventuellt återställa från krascher utan omstart",
             option: {
                 attemptToPreventCrashes: {
                     label: "Försök att förhindra krascher",
-                    description: "Försöka förhindra Discord-krascher?"
+                    description: "Om man ska försöka förhindra Discord-krascher."
                 },
                 attemptToNavigateToHome: {
-                    label: "Försök att omdirigera till hemsidan",
-                    description: "Försök att omdirigera till huvudfliken i återställning efter krasch."
+                    label: "Försök att navigera till hemmet",
+                    description: "Om du ska försöka navigera till startfliken vid kraschåterställning."
                 }
             },
             toast: {
                 crashed: {
-                    title: "Discord kraschade!",
-                    body: "Hoppsan :( Discord kraschade två gånger på kort tid, inget återställningsförsök kommer att göras. Klicka här och gå med i supportservern!",
-                    update: "Åh nej, Discord kraschade precis... men goda nyheter, det finns en Plexcord-uppdatering som kan fixa det här problemet! Vill du uppdatera nu?",
-                    recover: "Försöker återställa... Klicka här och gå med i supportservern!",
+                    title: "Discord har kraschat!",
+                    body: "Awn :( Discord har kraschat två gånger snabbt, försöker inte återhämta sig. Klicka här för att gå med i vår supportserver!",
+                    update: "Åh, Discord har precis kraschat... men goda nyheter, det finns en Plexcord-uppdatering tillgänglig som kan fixa det här problemet! Vill du uppdatera nu?",
+                    recover: "Försöker återställa... Klicka här för att gå med i vår supportserver!",
                     invalid: "Ogiltig eller utgången inbjudningslänk."
                 }
             }
         },
         ctrlEnterSend: {
             name: "CtrlEnterSend",
-            description: "Använd Ctrl+Enter för att skicka meddelande (anpassningsbart)",
+            description: "Använd Ctrl+Retur för att skicka meddelanden (kan anpassas)",
             option: {
                 submitRule: {
-                    label: "Inläggsregel",
-                    description: "Hur ett meddelande skickas",
+                    label: "Skicka in regel",
+                    description: "Sättet att skicka ett meddelande",
                     ctrlEnter: "Ctrl+Enter (Enter eller Shift+Enter för ny rad) (cmd+enter på macOS)",
                     shiftEnter: "Skift+Enter (Enter för ny rad)",
                     enter: "Enter (Skift+Enter för ny rad; Discord standard)"
                 },
                 sendMessageInTheMiddleOfACodeBlock: {
-                    label: "Skicka meddelande i mitten av kodblocket",
-                    description: "Skicka meddelande mitt i ett kodblock"
+                    label: "Skicka meddelande mitt i ett kodblock",
+                    description: "Om ett meddelande ska skickas mitt i ett kodblock"
                 }
             }
         },
@@ -3141,15 +3141,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "CursorBuddy",
             description: "Lägger till en sprite som följer din markör.",
             modal: {
-                furColor: "Päls färg",
-                outlineColor: "Anahat Rengi"
+                furColor: "Pälsfärg",
+                outlineColor: "Konturfärg"
             },
             option: {
                 buddy: {
                     label: "Kompis",
-                    description: "Välj en vän med markören",
-                    oneko: "bra",
-                    fathorse: "Fet häst"
+                    description: "Välj en markörkompis",
+                    oneko: "Oneko",
+                    fathorse: "Fatass häst"
                 },
                 speed: {
                     label: "Hastighet",
@@ -3157,673 +3157,673 @@ const translations: MatchStructure<typeof enTranslations> = {
                     invalid: "Hastigheten måste vara större än 0"
                 },
                 fps: {
-                    label: "Bildfrekvens (FPS)",
-                    description: "Din kompis bildfrekvens",
-                    invalid: "Bildfrekvensen måste vara större än 0"
+                    label: "Framerate",
+                    description: "Framerate av din kompis",
+                    invalid: "Framerate måste vara större än 0"
                 },
                 onekoSection: {
-                    label: "bra"
+                    label: "Oneko"
                 },
                 furColor: {
-                    label: "Päls färg",
-                    description: "päls hex färg för oneko"
+                    label: "Pälsfärg",
+                    description: "Päls hex färg för Oneko"
                 },
                 outlineColor: {
-                    label: "Anahat Rengi",
+                    label: "Konturfärg",
                     description: "Kontur hex-färg för Oneko"
                 },
                 fathorseSection: {
-                    label: "Fet häst"
+                    label: "Fatass häst"
                 },
                 size: {
-                    label: "Dimensionera",
-                    description: "Storlek på fet häst",
+                    label: "Storlek",
+                    description: "Storleken på fatasshästen",
                     invalid: "Storleken måste vara större än 0"
                 },
                 fade: {
-                    label: "Fading",
-                    description: "Om hästen bleknar när markören närmar sig"
+                    label: "Blekna",
+                    description: "Om hästen skulle blekna när markören är nära"
                 },
                 freeroam: {
-                    label: "Gratis roaming",
-                    description: "Om hästen kan ströva fritt på tomgång"
+                    label: "Freeroam",
+                    description: "Om hästen ska ströva fritt på tomgång"
                 },
                 shake: {
-                    label: "Entledigande",
-                    description: "Om hästen kommer att skaka fönstret när den går"
+                    label: "Skaka",
+                    description: "Om hästen ska skaka fönstret när den går"
                 }
             }
         },
         customFolderIcons: {
             name: "CustomFolderIcons",
-            description: "Anpassa mappikoner med valfri png",
+            description: "Anpassa mappikoner med valfri PNG",
             option: {
                 solidIcon: {
-                    label: "Platt ikon",
-                    description: "Använd en vanlig bakgrund för bakgrunden till din bild"
+                    label: "Solid ikon",
+                    description: "Använd en solid bakgrund på bakgrunden av bilden"
                 },
                 folderIcons: {
                     label: "Mappikoner",
-                    description: "Inställningar för mappikon"
+                    description: "mappikoninställningar"
                 }
             },
             modal: {
-                change: "Ändra storlek på mappikonen",
+                change: "Ändra storleken på mappikonen",
                 save: "Spara",
-                unset: "Ta bort",
+                unset: "Avaktiverad",
                 set: "Ställ in en ny ikon",
-                hover: "Du kan behöva föra muspekaren över mappen efter att du har ställt in den på att uppdatera."
+                hover: "Du kanske måste hålla muspekaren över mappen efter inställningen för att den ska uppdateras."
             }
         },
         customIdle: {
             name: "CustomIdle",
-            description: "Låter dig ställa in hur lång tid det tar innan Discord går in i viloläge (eller inaktivera automatiskt viloläge)",
-            backOnline: "Välkommen tillbaka! Klicka på knappen för att gå online. Klicka på X för att förbli inaktiv tills den laddas om.",
+            description: "Låter dig ställa in tiden innan Discord går i viloläge (eller inaktivera automatisk tomgång)",
+            backOnline: "Välkommen tillbaka! Klicka på knappen för att gå online. Klicka på X för att förbli inaktiv tills du laddar om.",
             exit: "Avsluta tomgång",
             option: {
                 idleTimeout: {
                     label: "Timeout för tomgång",
-                    description: "Antal minuter innan Discord går in i viloläge (0 för att inaktivera automatiskt viloläge)"
+                    description: "Minuter innan Discord går i viloläge (0 för att inaktivera automatisk tomgång)"
                 },
                 remainInIdle: {
-                    label: "Håll dig ledig",
-                    description: "När du återvänder till Discord, förbli inaktiv tills du bekräftar att du vill gå online"
+                    label: "Förbli i tomgång",
+                    description: "När du kommer tillbaka till Discord, förbli inaktiv tills du bekräftar att du vill gå online"
                 }
             }
         },
         customRPC: {
             name: "CustomRPC",
-            description: "Lägg till en helt anpassningsbar Rich Presence till din Discord-profil",
-            goTo: "Skapa en applikation genom att gå till {{portal}} och hämta applikations-ID.",
-            upload: "Få bildnycklar genom att ladda upp bilder från fliken Rich Presence.",
-            image: "Om du vill använda en bildlänk, ladda ner din bild och ladda upp den till {{imgur}}, högerklicka sedan på bilden och använd 'Kopiera bildadress' för att få länken.",
-            button: "Du kan inte se dina egna knappar på din profil, men alla andra kan se dem normalt.",
-            font: "Vissa konstiga unicode-bokstäver ('𝖇ö𝖞𝖑𝖊 𝖞𝖆𝖟ı𝖑𝖆𝖗') kan göra att Rich Presence inte visas, försök använda vanliga bokstäver istället.",
+            description: "Lägg till en helt anpassningsbar Rich Presence (spelstatus) till din Discord-profil",
+            goTo: "Gå till {{portal}} för att skapa en applikation och hämta applikations-ID.",
+            upload: "Ladda upp bilder på fliken Rich Presence för att hämta bildnycklarna.",
+            image: "Om du vill använda en bildlänk, ladda ner din bild och ladda upp bilden igen till {{imgur}} och få bildlänken genom att högerklicka på bilden och välja 'Kopiera bildadress'.",
+            button: "Du kan inte se dina egna knappar på din profil, men alla andra kan se dem bra.",
+            font: "En del konstig unicode-text ('fonts' 𝖑𝖎𝖐𝖊 𝖙𝖍𝖎𝖘) kan göra att den rika närvaron inte dyker upp, försök använda vanliga bokstäver istället.",
             placeholder: "Ange ett värde",
             select: "Välj ett alternativ",
             error: {
-                appIdInvalid: "Applikations-ID är inte ett giltigt nummer.",
-                notice: "Varning",
-                sharing: "Händelsedelning är inte aktiverat, andra kommer inte att kunna se din privata rika närvaro!",
-                enable: "aktivera",
-                validStream: "Inläggslänken måste vara en giltig URL.",
-                mustBeURL: "Det måste vara en giltig URL.",
-                streamCharacters: "Inläggslänken får inte vara längre än 512 tecken.",
+                appIdInvalid: "App-ID måste vara ett giltigt nummer.",
+                notice: "Varsel",
+                sharing: "Aktivitetsdelning är inte aktiverat, andra kommer inte att kunna se din anpassade rika närvaro!",
+                enable: "Aktivera",
+                validStream: "Strömmande länk måste vara en giltig URL.",
+                mustBeURL: "Måste vara en giltig webbadress.",
+                streamCharacters: "Strömmande länk får inte vara längre än 512 tecken.",
                 dontUse: "Använd inte en Discord-länk. Använd en Imgur-bildlänk istället.",
-                imgur: "Imgur-länken måste vara direkt till bilden (till exempel: https://i.imgur.com/...). Högerklicka på bilden och klicka på \"Kopiera bildadress\".",
-                tenor: "Tenor-länken måste vara direkt till bilden (till exempel: https://media.tenor.com/...). Högerklicka på GIF-filen och klicka på \"Kopiera bildadress\".",
+                imgur: "Imgur-länken måste vara en direktlänk till bilden (t.ex. https://i.imgur.com/...). Högerklicka på bilden och klicka på \"Kopiera bildadress\"",
+                tenor: "Tenorlänk måste vara en direktlänk till bilden (t.ex. https://media.tenor.com/...). Högerklicka på GIF-filen och klicka på \"Kopiera bildadress\"",
                 required: "Detta fält är obligatoriskt.",
-                tooLong: "Den får inte vara längre än {{maxLength}} tecken.",
-                mustBeNumber: "Det måste vara ett nummer.",
-                mustBePositive: "Det måste vara ett positivt tal.",
-                startTimeInvalid: "Starttiden måste vara större än 0.",
-                endTimeInvalid: "Sluttiden måste vara större än 0."
+                tooLong: "Får inte vara längre än {{maxLength}} tecken.",
+                mustBeNumber: "Måste vara ett nummer.",
+                mustBePositive: "Måste vara ett positivt tal.",
+                startTimeInvalid: "Starttidsstämpeln måste vara större än 0.",
+                endTimeInvalid: "Sluttidsstämpeln måste vara större än 0."
             },
             option: {
                 appId: {
-                    label: "Applikations-ID",
-                    description: "App-id (obligatoriskt)"
+                    label: "App-ID",
+                    description: "Applikations-ID (obligatoriskt)"
                 },
                 appName: {
-                    label: "Applikationsnamn",
-                    description: "Appnamn (obligatoriskt)"
+                    label: "Appens namn",
+                    description: "Programnamn (obligatoriskt)"
                 },
                 details: {
-                    label: "Detalj",
+                    label: "Detaljer",
                     description: "Detaljer (rad 1)"
                 },
                 detailsURL: {
                     label: "Detaljer URL",
-                    description: "Klickabar URL för detaljer"
+                    description: "Detaljerad klickbar URL"
                 },
                 state: {
-                    label: "Durum",
-                    description: "Status (rad 2)"
+                    label: "Ange",
+                    description: "Tillstånd (rad 2)"
                 },
                 stateURL: {
-                    label: "Status URL",
-                    description: "Klickabar URL för status"
+                    label: "Ange URL",
+                    description: "Ange klickbar URL"
                 },
                 partySize: {
-                    label: "Gruppstorlek",
-                    description: "Aktuell gruppstorlek (måste användas tillsammans med maximal gruppstorlek)"
+                    label: "Feststorlek",
+                    description: "Aktuell partistorlek (måste användas med Max Party Size)"
                 },
                 partyMax: {
-                    label: "Maximal gruppstorlek",
-                    description: "Maximal gruppstorlek (måste användas med aktuell gruppstorlek)"
+                    label: "Max partystorlek",
+                    description: "Max partistorlek (måste användas med nuvarande partistorlek)"
                 },
                 type: {
-                    label: "Händelsetyp",
-                    description: "Händelsetyp",
-                    playing: "spelar",
-                    streaming: "Broadcasting",
-                    listening: "lyssnande",
-                    watching: "tittar på",
-                    competing: "racing"
+                    label: "Aktivitetstyp",
+                    description: "Aktivitetstyp",
+                    playing: "Spelar",
+                    streaming: "Streaming",
+                    listening: "Lyssnande",
+                    watching: "Tittar på",
+                    competing: "Tävlande"
                 },
                 streamLink: {
-                    label: "Postlänk",
-                    description: "Länk till Twitch.tv eller Youtube.com (endast för typ av sändningsevenemang)"
+                    label: "Streamlänk",
+                    description: "Twitch.tv eller YouTube.com-länk (endast för streamingaktivitetstyp)"
                 },
                 timestampMode: {
                     label: "Tidsstämpelläge",
-                    description: "Vad tidsstämpeln ska ange",
+                    description: "Vad tidsstämpeln ska visa",
                     none: "Ingen",
                     sinceDiscordOpen: "Sedan Discord öppnade",
                     sameAsCurrentTime: "Samma som din nuvarande tid (återställs inte efter 24 timmar)",
-                    custom: "Speciell tid"
+                    custom: "Anpassad tid"
                 },
                 startTime: {
                     label: "Starttid (i millisekunder)",
-                    description: "Starttidsstämpel (endast för anpassat tidsläge)"
+                    description: "Starttidsstämpel i millisekunder (endast för anpassat tidsstämpelläge)"
                 },
                 endTime: {
                     label: "Sluttid (i millisekunder)",
-                    description: "Sluttidsstämpel (endast för anpassat tidsläge)"
+                    description: "Sluttidsstämpel i millisekunder (endast för anpassat tidsstämpelläge)"
                 },
                 imageBig: {
-                    label: "Stor visuell nyckel",
-                    description: "Stor visuell nyckel (måste installeras på fliken Rich Presence)"
+                    label: "Stor bildnyckel",
+                    description: "Stor bildnyckel (måste laddas upp på fliken Rich Presence)"
                 },
                 imageBigTooltip: {
-                    label: "Stor visuell ledtråd",
-                    description: "Tips som visas när du håller muspekaren över den större bilden"
+                    label: "Bild Stort verktygstips",
+                    description: "Stor bild verktygstips"
                 },
                 imageBigURL: {
                     label: "Stor bild-URL",
                     description: "Klickbar URL för stor bild"
                 },
                 imageSmall: {
-                    label: "Liten visuell switch",
-                    description: "Liten visuell nyckel (måste installeras på fliken Rich Presence)"
+                    label: "Liten bildnyckel",
+                    description: "Liten bildnyckel (måste laddas upp på fliken Rich Presence)"
                 },
                 imageSmallTooltip: {
-                    label: "Liten visuell ledtråd",
-                    description: "Tips som visas när du håller muspekaren över en miniatyrbild"
+                    label: "Bild Litet verktygstips",
+                    description: "Verktygstips för liten bild"
                 },
                 imageSmallURL: {
-                    label: "Webbadress för miniatyrbild",
+                    label: "Liten bild-URL",
                     description: "Liten bild klickbar URL"
                 },
                 buttonOneText: {
-                    label: "Knapp 1 Metni",
-                    description: "Knapp 1 metni"
+                    label: "Knapp 1 Text",
+                    description: "Knapp 1 text"
                 },
                 buttonOneURL: {
                     label: "Knapp 1 URL",
-                    description: "Knapp 1 anslutning"
+                    description: "Knapp 1 URL"
                 },
                 buttonTwoText: {
-                    label: "Knapp 2 Metni",
-                    description: "Knapp 2 metni"
+                    label: "Knapp 2 Text",
+                    description: "Knapp 2 text"
                 },
                 buttonTwoURL: {
                     label: "Knapp 2 URL",
-                    description: "Knapp 2 anslutning"
+                    description: "Knapp 2 URL"
                 }
             }
         },
         customSounds: {
             name: "CustomSounds",
             description: "Anpassa Discords ljud.",
-            search: "Sök efter ljud",
+            search: "Sök ljud",
             placeholder: "Sök på namn eller ID",
-            import: "Iche Aktar",
+            import: "Importera",
             export: "Exportera",
             reset: "Återställ alla",
             debug: "Felsökning",
             toast: {
-                error: "Det gick inte att ladda anpassad ljudfil",
-                exported: "{{count}} inställningar exporterade (ljudfiler ingår inte)",
+                error: "Det gick inte att läsa in anpassad ljudfil",
+                exported: "Exporterade {{count}}-inställningar (ljudfiler ingår inte)",
                 imported: "Inställningarna har importerats",
-                importError: "Ett fel uppstod vid import av inställningar. Kontrollera konsolen för detaljer.",
-                reset: "Alla ljud har återställts!",
-                overrideDescription: "{{soundName}}-ljudet har ändrats",
-                previewSound: "Ett fel uppstod när ljudet spelades upp.",
-                playing: "Det anpassade ljudet kunde inte spelas upp. Filen kan vara korrupt.",
-                invalidFile: "Ingen anpassad ljudfil för förhandsvisning",
+                importError: "Fel vid import av inställningar. Kontrollera konsolen för detaljer.",
+                reset: "Alla åsidosättningar har återställts framgångsrikt!",
+                overrideDescription: "Åsidosätt för {{soundName}}",
+                previewSound: "Det gick inte att spela upp ljudet.",
+                playing: "Det gick inte att spela upp anpassat ljud. Filen kan vara skadad.",
+                invalidFile: "Ingen anpassad ljudfil tillgänglig för förhandsvisning",
                 uploaded: "Filen laddades upp: {{fileName}}",
-                uploadedError: "Ett fel uppstod när filen laddades upp: {{error}}",
+                uploadedError: "Fel vid uppladdning av fil: {{error}}",
                 invalidExtension: "Ogiltig filtyp. Ladda upp en ljudfil.",
-                uploading: "Laddar fil...",
-                deleted: "Filen raderades framgångsrikt",
-                deleteError: "Ett fel uppstod när filen skulle raderas.",
-                loadingError: "Det gick inte att ladda anpassad ljudfil"
+                uploading: "Laddar upp fil...",
+                deleted: "Filen har raderats",
+                deleteError: "Det gick inte att ta bort filen.",
+                loadingError: "Det gick inte att läsa in anpassad ljudfil"
             },
             button: {
                 preview: "Förhandsvisning",
-                stop: "Flöde",
-                volume: "Ses",
+                stop: "Stopp",
+                volume: "Volym",
                 soundSource: "Ljudkälla",
-                customFile: "Specialfil",
-                uploadNew: "Ny uppladdning",
+                customFile: "Anpassad fil",
+                uploadNew: "Ladda upp ny",
                 delete: "Ta bort vald fil"
             },
             option: {
                 default: "Standard",
-                custom: "Särskild",
+                custom: "Beställnings",
                 select: "Välj en fil..."
             },
             type: {
-                activityEnd: "Eventet är över",
-                activityLaunch: "Eventet startat",
-                activityUserJoin: "Användare deltog i evenemanget",
-                activityUserLeft: "Användare lämnade händelsen",
+                activityEnd: "Aktivitet slut",
+                activityLaunch: "Aktivitetsstart",
+                activityUserJoin: "Aktivitet Användare Gå med",
+                activityUserLeft: "Aktivitet Användare vänster",
                 asmrMessage: "ASMR-meddelande",
                 bitMessage: "Bitmeddelande",
                 bopMessage: "Bop meddelande",
-                callCalling: "Sökning pågår",
+                callCalling: "Ring Ringer",
                 callRinging: "Samtal ringer",
                 clipError: "Klippfel",
-                clipSave: "Klipp sparat",
+                clipSave: "Klipp Spara",
                 ddrDown: "DDR nere",
-                ddrLeft: "DDR Sol",
+                ddrLeft: "DDR vänster",
                 ddrRight: "DDR höger",
                 ddrUp: "DDR upp",
-                deafen: "döva",
-                discodo: "Skiva",
-                disconnect: "Osammanhängande",
+                deafen: "Döva",
+                discodo: "Discodo",
+                disconnect: "Koppla från",
                 duckyMessage: "Ducky meddelande",
-                hangStatusSelect: "Suspend Status Selection",
-                highfiveClap: "High Five-applåder",
-                highfiveWhistle: "High Five Whistle",
-                humanMan: "mänsklig man",
+                hangStatusSelect: "Häng Status Välj",
+                highfiveClap: "Highfive klapp",
+                highfiveWhistle: "Highfive Whistle",
+                humanMan: "Mänsklig man",
                 lofiMessage: "LoFi meddelande",
                 mention1: "Nämn 1 (@roll)",
                 mention2: "Nämn 2 (@alla)",
                 mention3: "Nämn 3 (@här)",
                 message1: "Meddelande 1 (Allmänt)",
-                message2: "Meddelande 2 (svar på server)",
+                message2: "Meddelande 2 (Svara i server)",
                 message3: "Meddelande 3 (DM och grupp-DM)",
                 mute: "Stum",
-                overlayUnlock: "Lager upplåst",
+                overlayUnlock: "Lås upp överlägg",
                 poggermodeAchievement: "Poggermode Achievement",
                 poggermodeApplause: "Poggermode-applåder",
                 poggermodeEnabled: "Poggermode aktiverat",
                 poggermodeMessage: "Poggermode meddelande",
-                pttStart: "Starta PTT",
+                pttStart: "PTT Start",
                 pttStop: "PTT Stopp",
                 reconnect: "Återanslut",
-                robotMan: "Robot Adam",
-                stageWaiting: "Väntar på scen",
-                streamEnded: "Sändningen avslutad",
-                streamStarted: "Sändningen har startat",
-                streamUserJoined: "Användare gick med i sändningen",
-                streamUserLeft: "Användare lämnade sändningen",
-                success: "Framgångsrik",
-                undeafen: "Ta bort öronbedövande",
-                unmute: "Ta bort tystnad",
-                userJoin: "Användare gick med",
-                userLeave: "Användare vänster",
+                robotMan: "Robotman",
+                stageWaiting: "Stage väntar",
+                streamEnded: "Strömmen avslutad",
+                streamStarted: "Strömmen startade",
+                streamUserJoined: "Streamanvändare gick med",
+                streamUserLeft: "Streama användare vänster",
+                success: "Framgång",
+                undeafen: "Odöva",
+                unmute: "Slå på ljudet",
+                userJoin: "Användare Gå med",
+                userLeave: "Användarledighet",
                 userMoved: "Användare flyttad",
-                vibingWumpus: "Wumpus fastnade"
+                vibingWumpus: "Vibbar Wumpus"
             }
         },
         customTimestamps: {
             name: "CustomTimestamps",
             description: "Anpassade tidsstämplar på meddelanden och verktygstips",
             demo: {
-                cozy: "Klicka på mig för att byta till casual format",
+                cozy: "Klicka på mig för att byta till Cozy-format",
                 compact: "Klicka på mig för att byta till kompakt format",
-                lastWeek: "Detta meddelande skickades förra veckan",
-                hover: "Du kan se verktygstipsformat genom att hålla muspekaren över tidsstämplar",
-                edit: "Redigera format nedan, se dem uppdaterade live här"
+                lastWeek: "Detta meddelande skickades under den senaste veckan",
+                hover: "Håll muspekaren över tidsstämplar för att se verktygstipsformat",
+                edit: "Redigera formaten nedan för att se dem liveuppdatering här"
             },
             modal: {
                 title: "Hur man använder:",
                 moment: "Moment.js formateringsdokumentation",
-                hint: "Dessutom kan du använda följande i dina inlägg:",
-                calendar: "möjliggör dynamisk datumformatering, till exempel",
+                hint: "Dessutom kan du använda dessa i dina ingångar:",
+                calendar: "möjliggör dynamisk datumformatering som t.ex",
                 today: "I dag",
                 yesterday: "I går",
-                relative: "ger dig tider som:",
+                relative: "ger dig tider som t.ex",
                 relativeTime: "4 timmar sedan",
                 preview: "Förhandsvisning",
-                format: "kalenderformat",
-                howTo: "Så här formaterar du [kalender]-värdet när det används i tidsstämplarna ovan."
+                format: "Kalenderformat",
+                howTo: "Hur man formaterar [kalender]-värdet om det används i ovanstående tidsstämplar."
             },
             option: {
                 formats: {
                     label: "Format",
-                    description: "Anpassa tidsstämpelformat",
+                    description: "Anpassa tidsstämpelformaten",
                 },
                 cozyFormat: {
-                    label: "lättnad mod",
-                    description: "Tidsformat att använda för avslappnat läge i meddelanden"
+                    label: "Mysigt läge",
+                    description: "Tidsformat att använda i meddelanden i mysigt läge"
                 },
                 compactFormat: {
-                    label: "Kompakt mod",
-                    description: "Tidsformat att använda i kompakt läge och när du håller muspekaren över meddelanden"
+                    label: "Kompakt läge",
+                    description: "Tidsformat i kompakt läge och svävande över meddelanden"
                 },
                 tooltipFormat: {
-                    label: "verktygsspets",
-                    description: "Tidsformat att använda i verktygstips"
+                    label: "Verktygstips",
+                    description: "Tidsformat att använda på verktygstips"
                 },
                 ariaLabelFormat: {
-                    label: "Aria-etiketter",
-                    description: "Tidsformat att använda i Aria-taggar"
+                    label: "Aria etikett",
+                    description: "Tidsformat att använda på ariaetiketter"
                 },
                 sameDayFormat: {
-                    label: "samma dag",
+                    label: "Samma dag",
                     description: "[kalender] format för idag",
-                    default: "[Bugün] HH:mm:ss"
+                    default: "[Idag kl.] HH:mm:ss"
                 },
                 lastDayFormat: {
-                    label: "I går",
+                    label: "Sista dagen",
                     description: "[kalender] format för gårdagen",
-                    default: "[Tunn] TT:mm:ss"
+                    default: "[Igår kl] HH:mm:ss"
                 },
                 lastWeekFormat: {
                     label: "Förra veckan",
                     description: "[kalender]-format för förra veckan"
                 },
                 sameElseFormat: {
-                    label: "äldre",
+                    label: "Äldre annars",
                     description: "[kalender] format för äldre datum"
                 }
             }
         },
         customUserColors: {
             name: "CustomUserColors",
-            description: "Låter dig lägga till en anpassad färg till vilken användare som helst, var som helst! Rekommenderas starkt att använda med typingTweaks och roleColorEverywhere",
+            description: "Låter dig lägga till en anpassad färg till vilken användare som helst, var som helst! Rekommenderar starkt att använda med typingTweaks och roleColorEverywhere",
             option: {
                 dmList: {
                     label: "DM lista",
-                    description: "Namn på användare som tilldelats specialfärger kommer att färgas i DM-listan"
+                    description: "Användare med anpassade färger kommer att få sitt namn färgat i DM-listan"
                 },
                 colorInServers: {
-                    label: "Färg på servrar",
-                    description: "Bör namnfärger ändras på servrar också?"
+                    label: "Färg i servrar",
+                    description: "Om namnfärger ska ändras inom servrar"
                 }
             },
             context: {
-                setColor: "Justera färg"
+                setColor: "Ställ in färg"
             },
             modal: {
                 custom: "Anpassad färg",
-                pick: "välj en färg",
+                pick: "Välj en färg",
                 delete: "Ta bort post",
                 save: "Spara"
             }
         },
         dearrow: {
-            name: "Dearrow",
-            description: "Gör YouTube inbäddade titlar och miniatyrer mindre sensationella, driven av Dearrow",
+            name: "DeArrow",
+            description: "Gör YouTube inbäddade titlar och miniatyrer mindre sensationella, driven av DeArrow",
             option: {
                 hideButton: {
                     label: "Göm knapp",
-                    description: "Döljer Dearrow-knappen från YouTube-inbäddningar"
+                    description: "Döljer DeArrow-knappen från YouTube-inbäddningar"
                 },
                 replaceElements: {
-                    label: "Ändra objekt",
+                    label: "Byt ut element",
                     description: "Välj vilka element i inbäddningen som ska ersättas",
                     everything: "Allt (titlar och miniatyrer)",
                     title: "Titlar",
                     thumbnail: "Miniatyrer"
                 },
                 dearrowByDefault: {
-                    label: "Dearrow som standard",
-                    description: "Dearrow videor automatiskt"
+                    label: "DeArrow som standard",
+                    description: "DeArrow-videor automatiskt"
                 }
             },
             tooltip: {
-                dearrowed: "Dearrow har tillämpats på denna inbäddning, klicka för att återställa",
-                dearrow: "Klicka för att tillämpa dearrow"
+                dearrowed: "Denna inbäddning har deArrowed; klicka för att återställa",
+                dearrow: "Klicka för att DeArrow"
             }
         },
         declutter: {
             name: "Declutter",
-            description: "Rensar upp Discord genom att ta bort icke-väsentliga UI-element som profileffekter, butiksflikar, power-ups och mer.",
+            description: "Rensar upp Discord genom att ta bort icke-väsentliga UI-element som profileffekter, butiksflikar, boosts och mer.",
             option: {
                 userProfileHeader: {
                     label: "Användarprofil"
                 },
                 removeNameplate: {
                     label: "Ta bort namnskylten",
-                    description: "Tar bort namnskyltar."
+                    description: "Ta bort namnskyltar."
                 },
                 removeProfileEffect: {
                     label: "Ta bort profileffekt",
-                    description: "Tar bort animationseffekter som visas när profilen öppnas."
+                    description: "Ta bort profilanimeringseffekter vid öppning."
                 },
                 removeClanTag: {
                     label: "Ta bort Clan Tag",
-                    description: "Tar bort klantaggar."
+                    description: "Ta bort klantaggar."
                 },
                 alwaysShowUsername: {
                     label: "Visa alltid användarnamn",
-                    description: "Den visar alltid användarnamnet istället för statusen."
+                    description: "Visa alltid användarnamn istället för status."
                 },
                 accessibilityNotice: {
-                    label: "Tillgänglighetsvarning",
-                    description: "Discord har redan ett inbyggt användarnamnstilalternativ i sina tillgänglighetsinställningar."
+                    label: "Tillgänglighetsmeddelande",
+                    description: "Discord har redan ett inbyggt alternativ för användarnamnstil i tillgänglighetsinställningarna."
                 },
                 friendsListHeader: {
-                    label: "Ovanför vän-/DM-listan"
+                    label: "Ovanför listan över vänner/DM"
                 },
                 removeShopAboveDM: {
-                    label: "Ta bort butik ovanför DM-listan",
-                    description: "Tar bort butiksknappen ovanför DM-listan."
+                    label: "Ta bort Shop Above DM",
+                    description: "Ta bort butiker ovanför DM-listan."
                 },
                 removeQuestsAboveDM: {
-                    label: "Ta bort uppgifter från DM-listan",
-                    description: "Tar bort uppgiftsknappen ovanför DM-listan."
+                    label: "Ta bort uppdrag ovanför DM",
+                    description: "Ta bort uppdrag ovanför DM-listan."
                 },
                 miscHeader: {
-                    label: "Olika"
+                    label: "Övrigt"
                 },
                 removeServerBoostInfo: {
-                    label: "Ta bort Server Boost Information",
-                    description: "Tar bort serverförstärkningsinformation överst på kanallistan."
+                    label: "Ta bort Server Boost Info",
+                    description: "Ta bort serverförstärkningsinformation ovanför kanallistan."
                 },
                 removeBillingSettings: {
-                    label: "Ta bort betalningsinställningar",
-                    description: "Tar bort betalningsinställningar (faktura)."
+                    label: "Ta bort faktureringsinställningar",
+                    description: "Ta bort faktureringsinställningar."
                 },
                 removeGiftButton: {
                     label: "Ta bort presentknapp",
-                    description: "Tar bort knappen skicka present."
+                    description: "Ta bort presentknappen."
                 },
                 removeUnavailableEmojiPicker: {
                     label: "Ta bort otillgänglig emojiväljare",
-                    description: "Tar bort otillgängliga kategorier i emojiväljaren."
+                    description: "Ta bort otillgängliga kategorier från emojiväljaren."
                 },
                 removeAudioMenus: {
                     label: "Ta bort ljudmenyer",
-                    description: "Tar bort pilmenyerna bredvid mute- och dövknapparna."
+                    description: "Ta bort menyer bredvid mute- och dövknapparna."
                 },
                 removeButtonTooltips: {
-                    label: "Ta bort knapptips",
-                    description: "Den tar bort verktygstipsen som visas på knapparna."
+                    label: "Ta bort knappverktygstips",
+                    description: "Ta bort knappverktygstips."
                 }
             }
         },
         decodeBase64: {
             name: "DecodeBase64",
-            description: "Avkoda base64-innehållet i alla meddelanden och kopiera det avkodade innehållet.",
+            description: "Avkoda Base64-innehållet i alla meddelanden och kopiera det avkodade innehållet.",
             right: {
-                decode: "Copy Solved (vänsterklick) / Base64 Solve (högerklick)",
-                copy: "Base64 Avkoda (vänsterklick) / Kopiera avkodad (högerklick)"
+                decode: "Kopiera avkodad (vänsterklick) / Avkoda Base64 (högerklick)",
+                copy: "Avkoda Base64 (vänsterklick) / Kopiera avkodad (högerklick)"
             },
             option: {
                 clickMethod: {
                     label: "Klicka på Metod",
-                    description: "Ändra beteendet för knappen för att avkoda base64-innehållet i ett meddelande.",
-                    left: "Vänsterklicka för att avkoda Base64-innehåll.",
-                    right: "Högerklicka för att avkoda Base64-innehåll."
+                    description: "Ändra knappen för att avkoda Base64-innehållet i ett meddelande.",
+                    left: "Vänsterklicka för att avkoda Base64-innehållet.",
+                    right: "Högerklicka för att avkoda Base64-innehållet."
                 }
             },
             modal: {
                 title: "Avkodat Base64-innehåll",
-                content: "Upplöst innehåll",
-                copy: "Kopiera löst innehåll {{index}}",
-                copied: "Löst innehåll kopieras till urklipp!"
+                content: "Avkodat innehåll",
+                copy: "Kopiera avkodat innehåll {{index}}",
+                copied: "Avkodat innehåll kopierat till urklipp!"
             }
         },
         decor: {
-            name: "Dekor",
-            description: "Skapa och använd dina egna anpassade avatardekorationer eller välj din favorit bland förinställningarna.",
+            name: "Decor",
+            description: "Skapa och använd dina egna avatardekorationer, eller välj din favorit bland förinställningarna.",
             presetPart: "En del av förinställningen {{name}}",
             createdBy: "Skapad av {{author}}",
             copy: "Kopiera förinställt ID",
             file: "Fil",
             your: {
-                title: "dekorationer",
-                subtitle: "Du kan ta bort dina egna dekorationer genom att högerklicka."
+                title: "Dina dekorationer",
+                subtitle: "Du kan ta bort dina egna dekorationer genom att högerklicka på dem."
             },
             option: {
                 changeDecoration: {
-                    label: "Byt prydnad",
-                    description: "För att ändra din avatardekoration, aktivera Dekoration och starta om din klient.",
-                    also: "Du kan också komma åt dekorationsdekorationer från sidan {{profiler}}.",
+                    label: "Byt dekoration",
+                    description: "Aktivera Decor och starta om din klient för att ändra din avatardekoration.",
+                    also: "Du kan också komma åt Dekordekorationer från sidan {{profiles}}.",
                     profiles: "Profiler"
                 },
                 baseUrl: {
                     label: "Bas-URL",
-                    description: "Dekor API URL:er"
+                    description: "Decor API URL"
                 },
                 agreedToGuidelines: {
-                    label: "Jag accepterade reglerna",
-                    description: "Regler accepterade"
+                    label: "Godkände riktlinjer",
+                    description: "Godkände riktlinjer"
                 }
             },
             context: {
                 decorationOptions: "Dekorationsalternativ",
                 copyHash: "Kopiera dekorationshash",
-                deleteDecoration: "Ta bort prydnad"
+                deleteDecoration: "Ta bort dekoration"
             },
             alert: {
                 delete: {
-                    title: "Ta bort prydnad",
-                    body: "Är du säker på att du vill ta bort {{decoration}}-dekorationen?",
-                    confirm: "Sil",
+                    title: "Ta bort dekoration",
+                    body: "Är du säker på att du vill ta bort {{decoration}}?",
+                    confirm: "Radera",
                     cancel: "Avboka"
                 },
                 logout: {
                     title: "Logga ut",
-                    body: "Är du säker på att du vill logga ut från Dekor?",
+                    body: "Är du säker på att du vill logga ut från Decor?",
                     confirm: "Logga ut",
                     cancel: "Avboka"
                 }
             },
             button: {
-                change: "Byt prydnad",
+                change: "Byt dekoration",
                 remove: "Ta bort dekoration",
                 apply: "Tillämpas",
                 cancel: "Avboka",
                 browse: "Bläddra",
                 submit: "Skicka in för granskning",
-                continue: "Devam Et",
+                continue: "Fortsätta",
                 back: "Gå tillbaka"
             },
             tooltip: {
-                pendingReview: "Du har redan en prydnad under granskning",
+                pendingReview: "Du har redan en dekoration som väntar på granskning",
                 pending: "Väntar på granskning"
             },
             join: {
-                tooltip: "Gå med i Decors Discord-server för att granska din dekoration och få meddelanden när nya förinställningar släpps",
+                tooltip: "Gå med i Decors Discord-server för aviseringar om din dekorationsrecension och när nya förinställningar släpps",
                 button: "Discord-server"
             },
             create: {
-                title: "Skapa prydnad",
-                notViolate: "Se till att din utsmyckning inte bryter mot {{riktlinjer}} innan du skickar in.",
-                guidelines: "regler",
-                file: "Filen måste vara APNG eller PNG.",
+                title: "Skapa dekoration",
+                notViolate: "Se till att din dekoration inte bryter mot {{guidelines}} innan du skickar in den.",
+                guidelines: "riktlinjerna",
+                file: "Filen ska vara APNG eller PNG.",
                 fileHolder: "Välj en fil",
-                name: "Detta namn kommer att användas när man hänvisar till denna prydnad.",
+                name: "This name will be used when referring to this decoration.",
                 nameHolder: "Companion Cube",
-                nameTitle: "Ad"
+                nameTitle: "Namn"
             },
             help: {
-                update: "Gå med i {{server}} och tillåt direktmeddelanden att få uppdateringar om din dekorationsrecension.",
-                server: "Decor’un Discord"
+                update: "För att få uppdateringar om din dekorationsrecension, gå med i {{server}} och tillåt direktmeddelanden.",
+                server: "Decor's Discord Server"
             },
             guidelines: {
-                hold: "vänta",
-                suspended: "Genom att skicka in en dekoration godkänner du {{guidelines}}. Underlåtenhet att läsa dessa regler kan leda till att din rätt att skapa fler dekorationer i framtiden upphävs.",
-                guidelines: "regler"
+                hold: "Hålla fast",
+                suspended: "Genom att skicka in en dekoration godkänner du {{guidelines}}. Att inte läsa dessa riktlinjer kan leda till att ditt konto stängs av från att skapa fler dekorationer i framtiden.",
+                guidelines: "riktlinjerna"
             }
         },
         demonstration: {
             name: "Demonstration",
             description: "Plugin för att ta temaskärmdumpar - censorer som identifierar bilder och text.",
             toolbox: {
-                toggle: "censurerade"
+                toggle: "Växla demonstration"
             },
-            keycode: "Kolla in {{keycode}} för att ändra din snabbtangent!",
-            this: "av detta fordon",
+            keycode: "För att ändra din nyckelkod, kolla in {{keycode}}!",
+            this: "detta verktyg",
             okay: "Okej!",
             option: {
                 keyBind: {
-                    label: "Snabbtangent",
-                    description: "Knapp som slår på och av temat när du trycker på den"
+                    label: "Nyckelbindning",
+                    description: "Knappen för att växla tema när den trycks ned"
                 },
                 soundVolume: {
-                    label: "Ljudnivå",
-                    description: "Volym av på/av-ljud (0 = av)"
+                    label: "Ljudvolym",
+                    description: "Hur högt växlingsljudet är (0 för att inaktivera)"
                 },
                 showConfirmationModal: {
-                    label: "Visa bekräftelsefönster",
-                    description: "Visa fönster för att påminna genväg"
+                    label: "Visa Confirmation Modal",
+                    description: "Visa en modal för att påminna dig om genvägen"
                 }
             },
             switch: {
                 note: "Du kan återaktivera den här inställningen senare",
-                disable: "Inaktivera bekräftelsefönstret?"
+                disable: "Inaktivera modal?"
             },
-            shortcut: "Detta kommer att censurera alla texter! Kom ihåg genvägen för att inaktivera detta:"
+            shortcut: "Detta kommer att censurera all text! För att inaktivera detta, kom ihåg genvägen:"
         },
         devCompanion: {
             name: "DevCompanion",
-            description: "Plugin för utvecklareassistent. Om du ser något som inte fungerar eller fungerar konstigt (mest troligt en bugg) rapportera det till MutanPlex, antingen tagga eller dm det, tack!",
+            description: "Dev Companion plugin. Vänligen rapportera allt som inte fungerar eller beter sig konstigt (förmodligen en bugg) till MutanPlex, antingen genom ping eller DM. Tack!",
             reconnect: "Återanslut",
             option: {
                 notifyOnAutoConnect: {
                     label: "Meddela på Auto-Connect",
-                    description: "Visa avisering när Dev Companion ansluter automatiskt?"
+                    description: "Om du ska meddela när Dev Companion har anslutit automatiskt."
                 },
                 usePatchedModule: {
-                    label: "Använd patchmodul",
-                    description: "För begäranden om borttagning, svara med den befintliga korrigerade modulen (om korrigerad) istället för originalet."
+                    label: "Använd patchad modul",
+                    description: "På extraktförfrågningar, svara med den aktuella patchade modulen (om den är patchad) istället för originalet."
                 },
                 reloadAfterToggle: {
-                    label: "Efter ominstallation",
-                    description: "Installera om efter att ha mottagit kommandot disable/enable plugin."
+                    label: "Ladda om efter växling",
+                    description: "Ladda om efter att ett \"inaktivera/aktivera plugin\"-kommando har tagits emot."
                 }
             },
             toast: {
                 title: "Dev Companion ansluten",
-                connected: "ansluten till WebSocket",
+                connected: "Ansluten till WebSocket",
                 disconnected: "Dev Companion frånkopplad",
                 error: "Dev Companion-fel",
-                reload: "Ominstallation krävs",
-                failed: "Det gick inte att initiera beroenden: {{failures}}",
-                close: "Kvartal",
-                stopping: "Ett fel uppstod när plugin-programmet {{plugin}} skulle stoppas",
-                starting: "Fel vid initialisering av plugin-programmet {{plugin}}",
+                reload: "Omladdning behövs",
+                failed: "Det gick inte att starta beroenden: {{failures}}",
+                close: "Nära",
+                stopping: "Fel när plugin {{plugin}} stoppades",
+                starting: "Fel vid start av plugin {{plugin}}",
                 noMessage: "Inget felmeddelande",
-                noReason: "Anledning ej angiven"
+                noReason: "Ingen anledning ges"
             }
         },
         disableCallIdle: {
             name: "DisableCallIdle",
-            description: "Inaktiverar att automatiskt kastas ut från DM-röstsamtalet efter 3 minuter och flyttas till AFK-röstkanalen."
+            description: "Inaktiverar att automatiskt sparkas från ett DM-röstsamtal efter 3 minuter och flyttas till en AFK-röstkanal."
         },
         disableCameras: {
-            name: "Inaktivera kameror",
-            description: "Inaktiverar kameror i samtal som standard"
+            name: "DisableCameras",
+            description: "Inaktiverar kameror i ett samtal som standard"
         },
         discordDevBanner: {
             name: "DiscordDevBanner",
-            description: "Aktiverar Discord-utvecklarbannern som visar Build-ID-information.",
-            about: "Discord Developer Banner-format. Du kan använda följande variabler:",
+            description: "Aktiverar Discord-utvecklarbannern, som visar bygg-ID",
+            about: "Formatet för Discord Dev Banner. Du kan använda följande variabler:",
             preview: "Förhandsvisning:",
             empty: "Formatet får inte vara tomt.",
             variables: {
                 discord: {
                     title: "Discord-variabler",
-                    icon: "Discord ikon",
-                    banner: "Utvecklare banner ikon",
+                    icon: "Discord-ikonen",
+                    banner: "Dev banner ikon",
                     channel: "Discord-byggkanal (t.ex. stabil)",
                     build: "Discord-byggnummer (t.ex. 123456)",
                     hash: "Discord build-hash (t.ex. 123456)"
@@ -3831,21 +3831,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                 plexcord: {
                     title: "Plexcord-variabler",
                     icon: "Plexcord ikon",
-                    name: "Plexcord namn",
-                    version: "Plexcord-version (t.ex. 1.0.0)",
-                    hash: "Plexcord-strukturhash (t.ex. 123456)",
+                    name: "Name of Plexcord",
+                    version: "Version av Plexcord (t.ex. 1.0.0)",
+                    hash: "Plexcord build-hash (t.ex. 123456)",
                     platform: "Plattform Plexcord körs på (t.ex. Dev Build)"
                 },
                 plextron: {
-                    title: "Plextron anpassade variabler",
-                    hashShort: "Plextron kort struktur hash (t.ex. 123456789)",
-                    platformType: "Plattformstyp Plextron körs på (t.ex. Dev Build)"
+                    title: "Plextron-specifika variabler",
+                    hashShort: "Plextron build-hash (t.ex. 123456789)",
+                    platformType: "Plattform Plextron körs på (t.ex. Dev Build)"
                 },
                 client: {
                     title: "Klientvariabler",
-                    icon: "skrivbordsikon",
-                    name: "Klientnamn (t.ex. Discord Canary)",
-                    version: "Klientversion (t.ex. 1.0.0)",
+                    icon: "Skrivbordsikon",
+                    name: "The name of the client (e.g. Discord Canary)",
+                    version: "Klientens version (t.ex. 1.0.0)",
                 },
                 electron: {
                     title: "Elektronvariabler",
@@ -3859,238 +3859,238 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 misc: {
                     title: "Diverse variabler",
-                    newline: "nyradstecken"
+                    newline: "Newline karaktär"
                 }
             }
         },
         dontFilterMe: {
-            name: "Filtrera mig inte",
-            description: "Varnar dig om ditt meddelande innehåller en term som finns på redo-listan för automatisk moderering",
+            name: "DontFilterMe",
+            description: "Varnar dig om ditt meddelande innehåller en term i AutoMod-förinställningslistan",
             alert: {
-                title: "vänta ett ögonblick!",
-                content: "Ditt meddelande innehåller en term som finns på listan för automatisk moderering. (Term '{{trigger}}')",
-                content2: "Det finns en stor sannolikhet att ditt meddelande kommer att blockeras och bearbetas av en servermoderator.",
+                title: "Hålla fast!",
+                content: "Ditt meddelande innehåller en term i AutoMod-förinställningslistan (Term: '{{trigger}}').",
+                content2: "Det finns en stor chans att ditt meddelande kommer att blockeras och eventuellt modereras av en servermoderator.",
                 confirm: "Skicka ändå",
                 cancel: "Avboka"
             }
         },
         dontRoundMyTimestamps: {
             name: "DontRoundMyTimestamps",
-            description: "Avrundar alltid relativa tidsstämplar nedåt så 7,6y blir 7y istället för 8y"
+            description: "Avrundar alltid relativa tidsstämplar nedåt, så 7,6y blir 7y istället för 8y"
         },
         dragFavoriteEmotes: {
-            name: "DragFavoritEmotes",
-            description: "Lägger till dra-och-släpp-funktion för att ändra ordningen på favorit-emojis"
+            name: "DragFavoriteEmotes",
+            description: "Lägger till dra-och-släpp-funktioner till favoritkänslor"
         },
         dragify: {
             name: "Dragify",
-            description: "Dra och släpp användare, kanaler eller presentatörer till chatten för att lägga till omnämnanden eller inbjudningar.",
+            description: "Släpp användare, kanaler eller servrar i chatten för att infoga omnämnanden eller inbjudningar.",
             option: {
                 userOutput: {
                     label: "Användarutgång",
-                    description: "Utgång för bortfall av användare.",
-                    mention: "nämn inte",
-                    id: "Användaridentitet (ID)"
+                    description: "Användarens utgång.",
+                    mention: "Nämna",
+                    id: "Användar-ID"
                 },
                 channelOutput: {
                     label: "Kanalutgång",
-                    description: "Kanalfrisläppningsutgång.",
+                    description: "Kanalavgångsutgång.",
                     mention: "#kanal Omnämnande",
-                    link: "Kanalanslutning",
+                    link: "Kanallänk",
                 },
                 inviteExpireAfter: {
-                    label: "Inbjudan varaktighet",
-                    description: "Giltighetstiden för inbjudningslänken.",
+                    label: "Inbjudan löper ut efter",
+                    description: "Inbjudan löper ut",
                     never: "Aldrig",
                     thirtyMinutes: "30 minuter",
-                    oneHour: "1 ögonblick",
-                    sixHours: "6 ögonblick",
-                    twelveHours: "12 ögonblick",
+                    oneHour: "1 timme",
+                    sixHours: "6 timmar",
+                    twelveHours: "12 timmar",
                     oneDay: "1 dag",
                     sevenDays: "7 dagar"
                 },
                 inviteMaxUses: {
-                    label: "Maximalt antal användningar",
-                    description: "Maximal användningsgräns för inbjudan.",
-                    noLimit: "Inga gränser",
-                    one: "1 Användning",
-                    five: "5 Användning",
-                    ten: "10 Användning",
-                    twentyFive: "25 Användning",
+                    label: "Bjud in Max Uses",
+                    description: "Maximal användning för inbjudan",
+                    noLimit: "Ingen gräns",
+                    one: "1 Använd",
+                    five: "5 användningsområden",
+                    ten: "10 användningsområden",
+                    twentyFive: "25 användningsområden",
                     fifty: "50 användningsområden",
                     hundred: "100 användningsområden"
                 },
                 inviteTemporaryMembership: {
-                    label: "Tillhandahålla tillfälligt medlemskap",
-                    description: "Den ger tillfälligt medlemskap till de inbjudna.",
+                    label: "Bjud in tillfälligt medlemskap",
+                    description: "Bevilja tillfälligt medlemskap.",
                 },
                 reuseExistingInvites: {
                     label: "Återanvänd befintlig inbjudan",
-                    description: "Den använder den befintliga inbjudan istället för att skapa en ny."
+                    description: "Återanvänd en befintlig inbjudan istället för att skapa en ny."
                 },
                 allowChatBodyDrop: {
-                    label: "Tillåt Drop to Chat Body",
-                    description: "Tillåter att släppa text direkt i chattområdet för att lägga till den."
+                    label: "Tillåt Chat Body Drop",
+                    description: "Tillåt att du släpper in i chatthuvudet för att infoga text."
                 }
             },
             toast: {
                 failed: {
-                    drop: "Dragify kunde inte utföra åtgärden.",
+                    drop: "Dragify kunde inte hantera släpp.",
                 },
                 invite: {
                     created: "Inbjudan har skapats.",
                     unable: "Det gick inte att skapa inbjudan.",
-                    noChannel: "Det finns inga tillgängliga kanaler för att skapa en inbjudan.",
+                    noChannel: "Ingen kanal tillgänglig för inbjudningar.",
                 }
             },
             ghost: {
                 user: "Användare",
-                server: "Presentatör",
+                server: "Server",
                 dm: "Direktmeddelanden",
                 badge: {
                     channel: "kanal",
-                    thread: "titel",
-                    voice: "ses",
+                    thread: "tråd",
+                    voice: "röst",
                     forum: "forum",
                     media: "media",
                     announcement: "meddelande",
                     dm: "dm",
                     user: "användare",
-                    server: "presentatör"
+                    server: "server"
                 }
             }
         },
         elementHighlighter: {
             name: "ElementHighlighter",
-            description: "Markera och inspektera enkelt föremål.",
+            description: "Markera och inspektera element enkelt.",
             modal: {
                 recording: "Inspelning...",
-                reset: "återställa"
+                reset: "Återställa"
             },
             option: {
                 keybind: {
-                    label: "Nyckeluppgift",
+                    label: "Nyckelbindning",
                     description: "Växla överstrykningspenna"
                 },
                 showClasses: {
                     label: "Visa klasser",
-                    description: "Visar elementets CSS-klassnamn i verktygstipset"
+                    description: "Visa elementets CSS-klassnamn i verktygstipset"
                 },
                 showId: {
                     label: "Visa ID",
-                    description: "Visar elementets ID-attribut i verktygstipset"
+                    description: "Visa elementets ID-attribut i verktygstipset"
                 },
                 showFont: {
                     label: "Visa teckensnitt",
-                    description: "Visar den beräknade teckensnittsfamiljen och storleken"
+                    description: "Visa den beräknade teckensnittsfamiljen och teckenstorleken"
                 },
                 showPadding: {
                     label: "Visa stoppning",
-                    description: "Visar elementets interna avståndsvärden"
+                    description: "Visa elementets utfyllnadsvärden"
                 },
                 showMargin: {
-                    label: "Visa yttre marginal",
-                    description: "Visar elementets yttre rymdvärden"
+                    label: "Visa marginal",
+                    description: "Visa elementets marginalvärden"
                 },
                 showBorderRadius: {
-                    label: "Visa kantrundhet",
-                    description: "Visar elementets kantradievärden"
+                    label: "Visa kantradie",
+                    description: "Visa elementets ramradievärden"
                 },
                 showPosition: {
-                    label: "Visa plats",
-                    description: "Visar elementets CSS-positionstyp och z-indexvärde"
+                    label: "Visa position",
+                    description: "Visa elementets CSS-positionstyp och z-index"
                 },
                 showDisplay: {
-                    label: "Visa vy",
-                    description: "Visar elementets vytyp tillsammans med dess flex- eller rutegenskaper"
+                    label: "Visa Display",
+                    description: "Visa elementets visningstyp tillsammans med flex- eller rutnätsegenskaper"
                 }
             },
             toast: {
                 copied: {
-                    color: "Färg kopierad till urklipp!",
+                    color: "Kopierade färg till urklipp!",
                 }
             }
         },
         exitSounds: {
             name: "ExitSounds",
-            description: "När du lämnar ljudkanalen spelas ett ljud upp från ljudpanelen.",
-            button: "Ställ in som globalt utgående ljud",
+            description: "Spela soundboardljud när du kopplar från rösten.",
+            button: "Ställ in som globalt utgångsljud",
             toast: {
-                failedToPlay: "Kristus nej! Något gick fel."
+                failedToPlay: "hoppsan! Något gick fel."
             },
             option: {
                 soundGuildId: {
-                    label: "Röstserveridentitet (ID)",
-                    description: "Välj servern där ljudet finns.",
+                    label: "Sound Guild ID",
+                    description: "Välj servern som innehåller ljudet.",
                     placeholder: "Välj en server..."
                 },
                 soundId: {
-                    label: "Röstidentitet (ID)",
+                    label: "Ljud-ID",
                     description: "Ange ID för ljudet du vill spela.",
-                    placeholder: "Ange röst-ID..."
+                    placeholder: "Ange ljud-ID..."
                 }
             }
         },
         experiments: {
-            name: "Experiment",
-            description: "Ger tillgång till Experiment och andra funktioner endast för utvecklare i Discord!",
+            name: "Experiments",
+            description: "Aktivera åtkomst till experiment och andra funktioner endast för utvecklare i Discord!",
             modal: {
                 about: {
                     title: "Mer information",
-                    body: "Du kan öppna Discords utvecklarverktyg med {{key}}"
+                    body: "Du kan öppna Discords DevTools via {{key}}"
                 },
                 warning: {
-                    title: "Uppmärksamhet!!",
-                    body: "Experiment är ej släppta Discord-funktioner. De kanske inte fungerar, eller kan till och med skada din klient eller göra att ditt konto inaktiveras.",
-                    notReponsible: "Använd bara experiment om du vet vad du gör. Plexcord ansvarar inte för skador som kan uppstå genom att aktivera experiment.",
-                    useAtOwnRisk: "Om du inte vet vad ett experiment gör, ignorera det. Fråga oss inte vad de gör, det vet vi nog inte heller.",
-                    serverSideFeatures: "Nej, du kan inte använda funktioner på serversidan som att markera rutan 'Skicka till klient'."
+                    title: "Hålla fast!!",
+                    body: "Experiment är ej släppta Discord-funktioner. De kanske inte fungerar, eller till och med bryter din klient eller får ditt konto inaktiverat.",
+                    notReponsible: "Använd bara experiment om du vet vad du gör. Plexcord ansvarar inte för eventuella skador som orsakats av aktivering av experiment.",
+                    useAtOwnRisk: "Om du inte vet vad ett experiment gör, ignorera det. Fråga oss inte heller vad experiment gör; vi vet nog inte.",
+                    serverSideFeatures: "Nej, du kan inte använda funktioner på serversidan som att markera rutan \"Skicka till klient\"."
                 }
             },
             option: {
                 toolbarDevMenu: {
-                    label: "Verktygsfältets utvecklarmeny",
-                    description: "Ersätter hjälp(?) verktygsfältsknappen (överst till höger i chatten) med Discords utvecklarmeny"
+                    label: "Verktygsfältets Dev-meny",
+                    description: "Ändra verktygsfältsknappen Hjälp (?) (överst till höger i chatten) till Discords utvecklarmeny"
                 }
             }
         },
         exportMessages: {
             name: "ExportMessages",
-            description: "Låter dig exportera meddelanden till filer - ett enda meddelande, alla meddelanden från en användare eller alla meddelanden från en kanal",
+            description: "Låter dig exportera meddelanden till filer – ett enda meddelande, alla meddelanden från en användare eller alla kanalmeddelanden",
             option: {
                 maxMessages: {
-                    label: "Maximalt meddelande",
-                    description: "Maximalt antal meddelanden att överföra (0 = obegränsat)"
+                    label: "Max meddelanden",
+                    description: "Maximalt antal meddelanden att exportera (0 = obegränsat)"
                 },
                 includeAttachments: {
                     label: "Inkludera bilagor",
-                    description: "Inkludera bifogad information i överföringar"
+                    description: "Inkludera bilagainformation i exporter"
                 },
                 includeEmbeds: {
-                    label: "Embedleri Dahil Et",
-                    description: "Inkludera bädda in information i överföringar"
+                    label: "Inkludera inbäddningar",
+                    description: "Inkludera inbäddningsinformation i exporter"
                 },
                 includeReactions: {
                     label: "Inkludera reaktioner",
-                    description: "Inkludera reaktionsinformation i överföringar"
+                    description: "Inkludera reaktionsinformation i export"
                 },
                 includeComponents: {
                     label: "Inkludera komponenter",
-                    description: "Inkludera komponentinformation i importer"
+                    description: "Inkludera komponentinformation i exporter"
                 }
             },
             message: {
-                invalid: "Ogiltigt meddelande - ingen författare",
+                invalid: "Ogiltigt meddelande — ingen författare",
                 unknownUser: "Okänd användare",
                 botEmbed: "Bot Bädda in meddelande",
-                attachments: "bilagor",
+                attachments: "Bilagor",
                 unknown: "Okänd",
-                noUrl: "ingen URL",
-                embeds: "Inbäddningsmaskin",
+                noUrl: "Ingen URL",
+                embeds: "Bädda in",
                 title: "Titel",
-                description: "Förklaring",
+                description: "Beskrivning",
                 url: "URL",
-                footer: "Altbilgi",
+                footer: "Sidfot",
                 author: "Författare",
                 fields: "Fält",
                 components: "Komponenter",
@@ -4098,205 +4098,205 @@ const translations: MatchStructure<typeof enTranslations> = {
                 interactiveElement: "Interaktivt element",
                 reactions: "Reaktioner",
                 errorFormatting: "Fel vid formatering av meddelandet",
-                unknownError: "okänt fel",
-                header: "{{titlePrefix}} {{displayName}}, {{channelName}} kanalında",
-                from: "Meddelanden -",
+                unknownError: "Okänt fel",
+                header: "{{titlePrefix}} {{displayName}} i {{channelName}}",
+                from: "Meddelanden från",
                 direct: "Direktmeddelanden",
-                exported: "Exportdatum",
+                exported: "Exporterad på",
                 total: "Totalt antal meddelanden"
             },
             toast: {
                 export: {
                     title: "Exportera meddelanden",
-                    body: "Meddelandeexport misslyckades"
+                    body: "Det gick inte att exportera meddelandet"
                 },
                 noMessages: {
                     title: "Exportera meddelanden",
-                    notFoundUser: "Inga meddelanden hittades för denna användare",
+                    notFoundUser: "Inga meddelanden hittades från denna användare i den här kanalen",
                     notFoundChannel: "Inga meddelanden hittades i den här kanalen"
                 },
                 failed: {
                     title: "Exportera meddelanden",
-                    body: "Ett fel uppstod vid export av meddelanden"
+                    body: "Det gick inte att exportera meddelanden"
                 },
                 userNotFound: {
                     title: "Exportera meddelanden",
                     body: "Användaren hittades inte"
                 },
                 complete: {
-                    title: "Exporten slutförd",
+                    title: "Exporten är klar",
                     saved: "Filen sparad",
                     downloaded: "Fil nedladdad",
-                    messages: "meddelande"
+                    messages: "meddelanden"
                 }
             },
             context: {
                 exportMessage: "Exportera detta meddelande",
                 exportAll: "Exportera alla meddelanden från {{user}}",
                 user: "Användare",
-                exportAllChannel: "Exportera alla meddelanden från kanalen"
+                exportAllChannel: "Exportera alla kanalmeddelanden"
             }
         },
         expressionCloner: {
             name: "ExpressionCloner",
-            description: "Låter dig klona emojis och klistermärken till din egen server (högerklicka)",
+            description: "Låter dig klona emotes och klistermärken till din egen server (högerklicka på dem)",
             modal: {
-                title: "Egen substantiv",
+                title: "Anpassat namn",
                 invalidName: "Namnet måste vara mellan 2 och 32 tecken och endast innehålla alfanumeriska tecken"
             },
             toast: {
-                success: "{{name}} har klonats till {{guild}}-servern!",
+                success: "Klonad {{name}} till {{guild}} framgångsrikt!",
                 yourServer: "din server",
-                failed: "Kloning misslyckades:",
+                failed: "Det gick inte att klona:",
                 console: "Något gick fel (kolla konsolen!)"
             },
             context: {
-                clone: "{{typ}} Klona",
-                cloneName: "{{data}} Klona"
+                clone: "Klona {{type}}",
+                cloneName: "Klona {{data}}"
             }
         },
         f8break: {
-            name: "F8 Break",
-            description: "När DevTools (+ brytpunkter) är öppna pausar klienten genom att trycka på F8."
+            name: "F8Break",
+            description: "Pausa klienten när du trycker på F8 med DevTools (+ brytpunkter) öppna."
         },
         fakeNitro: {
             name: "FakeNitro",
-            description: "Låter dig skicka falska emojis/klistermärken, använda nitroteman och streama i nitrokvalitet",
+            description: "Låter dig skicka falska emojis/klistermärken, använda Nitro-teman och streama i Nitro-kvalitet",
             option: {
                 enableEmojiBypass: {
-                    label: "Aktivera Emoji Skip",
-                    description: "Tillåter sändning av falska emoji (förbigår även bristen på behörighet att använda anpassad emoji)"
+                    label: "Aktivera Emoji Bypass",
+                    description: "Tillåter att falska emojis skickas (förbigår även saknad behörighet att använda anpassade emojis)"
                 },
                 emojiSize: {
                     label: "Emoji storlek",
-                    description: "Storlek att använda när du skickar emojis"
+                    description: "Storleken på emojierna vid sändning"
                 },
                 transformEmojis: {
                     label: "Förvandla emojis",
-                    description: "Avgör om falska emojis kommer att konverteras till riktiga emojis"
+                    description: "Om falska emojis ska förvandlas till riktiga"
                 },
                 enableStickerBypass: {
-                    label: "Aktivera klistermärkeshopp",
-                    description: "Tillåter sändning av falska klistermärken (förbigår även bristen på tillåtelse att använda klistermärken)"
+                    label: "Aktivera Sticker Bypass",
+                    description: "Tillåter sändning av falska klistermärken (förbigår även saknad behörighet att använda klistermärken)"
                 },
                 stickerSize: {
                     label: "Klistermärkesstorlek",
-                    description: "Storlek att använda när du skickar klistermärke"
+                    description: "Storlek på klistermärkena vid sändning"
                 },
                 transformStickers: {
-                    label: "Konvertera klistermärken",
-                    description: "Avgör om falska klistermärken kommer att omvandlas till riktiga klistermärken"
+                    label: "Förvandla klistermärken",
+                    description: "Om falska klistermärken ska förvandlas till riktiga"
                 },
                 transformCompoundSentence: {
-                    label: "Konvertera sammansatta meningar",
-                    description: "Avgör om falska emoji och klistermärken i sammansatta meningar (meningar som innehåller mer innehåll än bara den falska emojin eller dekallänken) konverteras"
+                    label: "Förvandla sammansatt mening",
+                    description: "Om falska klistermärken och emojis ska förvandlas till sammansatta meningar (meningar med mer innehåll än bara den falska emojin eller dekallänken)"
                 },
                 enableStreamQualityBypass: {
-                    label: "Aktivera Hoppa över sändningskvalitet",
-                    description: "Tillåter streaming i nitrokvalitet"
+                    label: "Aktivera förbikoppling av strömkvalitet",
+                    description: "Tillåt streaming i Nitro-kvalitet"
                 },
                 useStickerHyperLinks: {
-                    label: "Använd Sticker Bridges",
-                    description: "Avgör om en hyperlänk ska användas när du skickar falska klistermärken"
+                    label: "Använd klistermärkeshyperlänkar",
+                    description: "Om man ska använda hyperlänkar när man skickar falska klistermärken"
                 },
                 useEmojiHyperLinks: {
-                    label: "Använd Emoji Bridges",
-                    description: "Bestämmer om hyperlänkar ska användas när du skickar falska emojis"
+                    label: "Använd Emoji-hyperlänkar",
+                    description: "Om du ska använda hyperlänkar när du skickar falska emojis"
                 },
                 hyperLinkText: {
-                    label: "Hypertext",
-                    description: "Texten som ska användas i hyperlänken. {{NAME}} kommer att ersättas med emoji-/dekalnamnet."
+                    label: "Hyperlänktext",
+                    description: "Vilken text hyperlänken ska använda. {{NAME}} kommer att ersättas med emoji-/dekalnamnet."
                 },
                 disableEmbedPermissionCheck: {
                     label: "Inaktivera kontroll av inbäddningsbehörighet",
-                    description: "Avgör om kontroll av inbäddningsbehörighet ska inaktiveras när falska emojis och dekaler skickas"
+                    description: "Om du ska inaktivera kontrollen av inbäddningstillstånd när du skickar falska emojis och klistermärken"
                 }
             },
             modal: {
-                sticker: "Detta är ett FakeNitro-klistermärke och det ser ut som ett riktigt klistermärke bara för dig. Den visas som en länk för de som inte använder plugin.",
-                emoji: "Det här är en FakeNitro-emoji och den ser ut som en riktig emoji bara för dig. Den visas som en länk för de som inte använder plugin."
+                sticker: "Detta är ett FakeNitro-klistermärke och återges som ett riktigt klistermärke bara för dig. Visas som en länk till icke-pluginanvändare.",
+                emoji: "Detta är en FakeNitro-emoji och återges som en riktig emoji bara för dig. Visas som en länk till icke-pluginanvändare."
             },
             alert: {
                 notice: {
-                    title: "Uppmärksamhet!",
-                    body: "Du försöker skicka/redigera ett meddelande som innehåller en FakeNitro-emoji eller klistermärke, men du har inte behörighet att bädda in länkar i den här kanalen. Är du säker på att du vill skicka det här meddelandet? Dina FakeNitro-objekt visas endast som länkar.",
+                    title: "Hålla fast!",
+                    body: "Du försöker skicka/redigera ett meddelande som innehåller en FakeNitro-emoji eller klistermärke; du har dock inte behörighet att bädda in länkar i den aktuella kanalen. Är du säker på att du vill skicka det här meddelandet? Dina FakeNitro-föremål visas endast som en länk.",
                     footer: "Du kan inaktivera denna varning i FakeNitro-inställningarna",
                     confirm: "Skicka ändå",
                     cancel: "Avboka",
-                    secondaryConfirm: "Visa det inte igen"
+                    secondaryConfirm: "Visa inte igen"
                 },
                 apngSticker: {
-                    title: "Uppmärksamhet!",
-                    body: "Du kan inte skicka det här meddelandet eftersom det innehåller en animerad FakeNitro-dekal och du inte har behörighet att lägga till filer i den här kanalen. Du måste ta bort dekalen för att fortsätta."
+                    title: "Hålla fast!",
+                    body: "Du kan inte skicka det här meddelandet eftersom det innehåller ett animerat FakeNitro-klistermärke och du har inte behörighet att bifoga filer i den aktuella kanalen. Ta bort dekalen för att fortsätta."
                 }
             }
         },
         fakeProfileThemes: {
             name: "FakeProfileThemes",
-            description: "Ger profiltema; Den lägger till dolda färger till bion tack vare den osynliga 3y3-kodningen.",
+            description: "Tillåter profiltema genom att dölja färgerna i din bio tack vare osynlig 3y3-kodning",
             button: {
-                copy: "3y3 Kopiera"
+                copy: "Kopiera 3y3"
             },
             modal: {
-                usage: "Använda",
+                usage: "Användande",
                 preview: "Förhandsvisning",
-                intro: "När du aktiverar detta plugin kommer du att se anpassade färger på profilerna för andra personer som använder kompatibla plugins.",
+                intro: "När du har aktiverat detta plugin kommer du att se anpassade färger i profilerna för andra personer som använder kompatibla plugins.",
                 setColor: "Så här ställer du in dina egna färger:",
-                step1: "• välj dina färger med hjälp av färgväljarna nedan",
+                step1: "• Använd färgväljarna nedan för att välja dina färger",
                 step2: "• Klicka på knappen {{copy}}",
-                step3: "• klistra in den osynliga texten var som helst i avsnittet Om",
+                step3: "• Klistra in den osynliga texten var som helst i din biografi",
                 pickers: "Färgväljare",
                 primary: "Primär",
-                accent: "Betoning"
+                accent: "Accent"
             },
             option: {
                 nitroFirst: {
                     label: "Nitro först",
-                    description: "Standardfärgkälla om båda är tillgängliga",
+                    description: "Standardfärgkälla om båda finns",
                     nitro: "Nitro färger",
-                    fake: "falska färger"
+                    fake: "Falska färger"
                 }
             }
         },
         fakeProfileThemesAndEffects: {
             name: "FakeProfileThemesAndEffects",
-            description: "Låter dig lägga till profilteman och profileffekter; Tack vare osynlig 3y3-kodning läggs dolda färger och effekter till i bion.",
+            description: "Tillåter profiltema och profileffekter genom att dölja färgerna och effekterna i din bio tack vare osynlig 3y3-kodning",
             option: {
                 prioritizeNitro: {
                     label: "Prioritera Nitro",
-                    description: "Resurs att prioritera",
+                    description: "Källa att prioritera",
                     nitro: "Nitro",
-                    aboutMe: "om mig"
+                    aboutMe: "Om mig"
                 },
                 hideBuilder: {
-                    label: "Göm skapare",
-                    description: "Göm FPTE Creator på inställningarna för användarprofil och serverprofil"
+                    label: "Hide Builder",
+                    description: "Göm FPTE Builder på inställningssidorna för användarprofil och serverprofiler"
                 }
             },
             modal: {
                 primary: "Primär",
-                accent: "Betoning",
+                accent: "Accent",
                 effect: "Effekt",
                 usage: {
-                    title: "Använda",
-                    intro: "När du aktiverar detta plugin kommer du att se anpassade temafärger och effekter på profilerna för andra personer som använder detta plugin.",
+                    title: "Användande",
+                    intro: "Efter att ha aktiverat detta plugin kommer du att se anpassade temafärger och effekter i profilerna för andra som använder detta plugin.",
                     setColor: "Så här ställer du in dina egna färger och effekter:",
-                    step1: "Gå till profilinställningar",
-                    step2: "Använd FPTE Creator för att välja profiltemafärger och effekt",
+                    step1: "Gå till dina profilinställningar",
+                    step2: "Använd FPTE Builder för att välja färger och effekt för ditt profiltema",
                     step3: "Klicka på knappen {{copy}}",
-                    step4: "Klistra in osynlig text var du vill i din bio"
+                    step4: "Klistra in den osynliga texten var som helst i din bio"
                 }
             },
             toast: {
                 copied: "FPTE kopierad till urklipp!",
-                empty: "FPTE Generator är tom; Det finns inget att kopiera!"
+                empty: "FPTE Builder är tom; inget att kopiera!"
             },
             button: {
-                copyFPTE: "FPTE-kopia",
-                reset: "återställa",
-                preview: "FPTE Creator Preview",
-                buildBackwards: "Skapa bakåtkompatibel FPTE",
-                moreCharacters: "Fler tecken kommer att användas"
+                copyFPTE: "Kopiera FPTE",
+                reset: "Återställa",
+                preview: "FPTE Builder Preview",
+                buildBackwards: "Bygg bakåtkompatibel FPTE",
+                moreCharacters: "Kommer att använda fler tecken"
             }
         },
         fastDeleteChannels: {
@@ -4304,115 +4304,115 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Lägger till en papperskorgsikon för att radera kanaler",
             option: {
                 keyBind: {
-                    label: "Snabbtangent",
-                    description: "Nyckeln att använda för att öppna och stänga papperskorgen."
+                    label: "Nyckelbindning",
+                    description: "Knappen för att växla papperskorgen när den trycks ned."
                 },
                 reqCtrl: {
-                    label: "Ctrl-tangent krävs",
-                    description: "Kräver att du håller ned Ctrl-tangenten för att öppna papperskorgen."
+                    label: "Kräv kontroll",
+                    description: "Kräv att kontrolltangenten hålls inne."
                 },
                 reqShift: {
-                    label: "Skifttangent krävs",
-                    description: "Att öppna papperskorgen kräver att du håller ned Skift-tangenten."
+                    label: "Kräv Shift",
+                    description: "Kräv att Shift-tangenten hålls nedtryckt."
                 },
                 reqAlt: {
-                    label: "Alt-tangent krävs",
-                    description: "Att öppna papperskorgen kräver att du håller ned Alt-tangenten."
+                    label: "Kräv Alt",
+                    description: "Kräv att Alt-tangenten hålls inne."
                 }
             }
         },
         favoriteEmojiFirst: {
-            name: "FavoritemojiFirst",
-            description: "Den placerar din favorit-emoji högst upp på emoji-autokompletteringslistan och ger även emoji-smeknamn.",
+            name: "FavouriteEmojiFirst",
+            description: "Sätter din favorit-emoji först i emoji-autokompletteringen och tillhandahåller även emoji-alias.",
             option: {
                 aliases: {
-                    label: "Smeknamn",
-                    description: "Hantera dina emoji smeknamn."
+                    label: "Alias",
+                    description: "Hantera dina emoji-alias."
                 },
                 clearAll: {
                     label: "Rensa alla",
-                    description: "Tar bort alla smeknamn."
+                    description: "Ta bort alla alias."
                 }
             },
             modal: {
                 clear: {
                     title: "Ta bort alla alias",
-                    description: "Detta tar bort alla emoji smeknamn som du har sparat.",
-                    confirm: "Ta bort alla smeknamn"
+                    description: "Detta tar bort alla emoji-alias du har sparat.",
+                    confirm: "Ta bort alla alias"
                 },
                 set: {
-                    title: "Ange smeknamn",
-                    description: "Ange ett smeknamn för {{emoji}}",
-                    placeholder: "Smeknamn, t.ex. 'Glad'",
+                    title: "Ställ in Alias",
+                    description: "Ange ett alias för {{emoji}}",
+                    placeholder: "Alias, t.ex. 'glad'",
                     save: "Spara",
-                    error: "Dubblett smeknamn"
+                    error: "Duplicera alias"
                 }
             },
             toast: {
-                set: "Smeknamn inställt för {{emoji}}",
-                clearAll: "Alla emoji smeknamn raderade",
+                set: "Alias ​​inställt för {{emoji}}",
+                clearAll: "Raderade alla emoji-alias",
                 failedDeleted: "Det gick inte att ta bort alias",
-                removed: "Alias ​​för {{alias}} raderat",
+                removed: "Borttaget alias: {{alias}}",
                 failedRemove: "Det gick inte att ta bort alias",
-                duplicate: "Dubblett smeknamn",
-                failedSave: "Smeknamn kunde inte registreras"
+                duplicate: "Duplicera alias",
+                failedSave: "Det gick inte att spara aliaset."
             },
             button: {
-                edit: "Redigera smeknamn",
-                set: "Ange smeknamn"
+                edit: "Redigera alias",
+                set: "Ange alias"
             }
         },
         favoriteGifSearch: {
-            name: "FavoriteGifSearch",
+            name: "FavouriteGifSearch",
             description: "Lägger till ett sökfält till favorit-GIF-filer.",
             placeholder: "Sök efter favorit-GIF-filer",
             option: {
                 searchOption: {
                     label: "Sökalternativ",
-                    description: "Vilken del av webbadressen du vill söka efter",
-                    url: "Alla URL",
+                    description: "Den del av webbadressen du vill söka efter",
+                    url: "Hela webbadressen",
                     path: "Endast sökväg (/somegif.gif)",
-                    hostandpath: "Värd och väg (tenor.com somegif.gif)"
+                    hostandpath: "Host & Path (tenor.com somgif.gif)"
                 }
             }
         },
         favouriteAnything: {
-            name: "Favorit Vad som helst",
+            name: "FavouriteAnything",
             description: "Favorita vilken bild som helst"
         },
         fileDownloadButton: {
-            name: "FileDownload Button",
+            name: "FileDownloadButton",
             description: "Lägger till en nedladdningsknapp i det övre högra hörnet av filer"
         },
         findReply: {
             name: "FindReply",
-            description: "Hoppar till det äldsta svaret på ett meddelande i en kanal (gör det lättare att hålla reda på tidigare konversationer).",
+            description: "Hoppar till det tidigaste svaret på ett meddelande i en kanal (låter dig följa tidigare konversationer lättare).",
             context: {
-                jump: "Gå till Svara"
+                jump: "Hoppa till svar"
             },
             toast: {
-                navigate: "Använd den nedre panelen för att navigera genom svaren.",
-                container: "Behållarelement hittades inte.",
-                couldntFind: "Inget svarsmeddelande hittades."
+                navigate: "Använd den nedre panelen för att navigera mellan svaren.",
+                container: "Det gick inte att hitta behållarelementet.",
+                couldntFind: "Kunde inte hitta svarsmeddelandet."
             },
             option: {
                 includePings: {
-                    label: "Inkludera omnämnanden",
-                    description: "Den söker också efter meddelanden som skickas direkt till författaren."
+                    label: "Inkludera Pings",
+                    description: "Kommer också att söka efter meddelanden som @ författaren direkt"
                 },
                 includeAuthor: {
                     label: "Inkludera författare",
-                    description: "Söker efter svar inte bara på det specifika inlägget utan även till författaren i allmänhet"
+                    description: "Kommer också att söka efter meddelanden som svarar till författaren i allmänhet, inte bara det exakta meddelandet"
                 },
                 hideButtonIfNoReply: {
                     label: "Dölj knapp om inget svar",
-                    description: "Döljer knappen om det inte finns något svar på meddelandet"
+                    description: "Döljer knappen om det inte finns några svar på meddelandet"
                 }
             }
         },
         fixCodeblockGap: {
             name: "FixCodeblockGap",
-            description: "Tar bort mellanslag mellan kodblock och texten under dem"
+            description: "Tar bort gapet mellan kodblock och texten under dem"
         },
         fixFileExtensions: {
             name: "FixFileExtensions",
@@ -4420,86 +4420,86 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fixImagesQuality: {
             name: "FixImagesQuality",
-            description: "Förbättrar kvaliteten på bilderna genom att tvinga fram originalkällan",
+            description: "Förbättrar kvaliteten på bilderna genom att tvinga originalkällan att användas",
             option: {
                 originalImagesInChat: {
-                    label: "Visa originalbilder i chatt",
-                    description: "Visa även originalbilden i Chat. VARNING: Läs varningarna ovan"
+                    label: "Originalbilder i chatt",
+                    description: "Ladda även in originalbilden i chatten. VARNING: Läs varningarna ovan"
                 }
             },
             modal: {
                 about: {
-                    title: "Standardbeteendet är som följer:",
-                    body: "&mdash; Optimerade men fullupplösta bilder kommer att laddas i chatten.",
-                    body2: "&mdash; I bildfönstret (bildmodal) kommer originalbilden att laddas.",
-                    body3: "Du kan också aktivera originalbilden i chatten, men var medveten om följande varningar:",
-                    warning: "&mdash; Animerade bilder (GIF, WebP, etc.) i chatten kommer alltid att vara animerade, även om applikationen har fokus.",
-                    warning2: "&mdash; Det kan orsaka prestandaproblem."
+                    title: "Standardbeteendet är följande:",
+                    body: "— I chatten kommer optimerade men fullupplösta bilder att laddas.",
+                    body2: "— I bildmodal kommer originalbilden att laddas.",
+                    body3: "Du kan också aktivera originalbilder i chatten, men akta dig för följande varningar:",
+                    warning: "— Animerade bilder (GIF, WebP, etc.) i chatten kommer alltid att animeras, oavsett om appen är fokuserad.",
+                    warning2: "— Kan orsaka eftersläpning.",
                 }
             }
         },
         fixSpotifyEmbeds: {
             name: "FixSpotifyEmbeds",
-            description: "Fixar att Spotify-inbäddningar är för högljudda, låter dig anpassa volymen",
+            description: "Fixar att Spotify-inbäddningar blir otroligt högljudda genom att låta dig anpassa volymen",
             option: {
                 volume: {
-                    label: "Ljudnivå",
-                    description: "Volymprocent för att justera för Spotify-inbäddningar. Över 10 % skulle vara för högt"
+                    label: "Volym",
+                    description: "Volymen % som ska ställas in för Spotify-inbäddningar. Allt över 10 % är väldigt högt"
                 }
             }
         },
         fixYoutubeEmbeds: {
             name: "FixYoutubeEmbeds",
-            description: "Går förbi blockering av YouTube-videor från visning i Discord (t.ex. av UMG)"
+            description: "Förbigår YouTube-videor som blockeras från visning på Discord (till exempel av UMG)"
         },
         followUser: {
-            name: "Följ Användare",
-            description: "Lägger till ett följningsalternativ till användarens snabbmeny; säkerställer att du alltid är på samma röstkanal",
-            indicatorTooltip: "{{user}} följs (klicka för att utlösa manuellt, högerklicka för att sluta följa)",
+            name: "FollowUser",
+            description: "Lägger till ett Följ-alternativ i användarens snabbmeny för att alltid vara i samma VC som dem",
+            indicatorTooltip: "Efter {{user}} (klicka för att utlösa manuellt, högerklicka för att sluta följa)",
             unknownUser: "Okänd användare",
             option: {
                 executeOnFollow: {
-                    label: "Ansök när du följer",
-                    description: "När du följer en användare, se till att de är på samma röstkanal"
+                    label: "Kör på Följ",
+                    description: "Se till att vara i samma VC när du följer en användare"
                 },
                 onlyManualTrigger: {
-                    label: "Endast manuell utlösning",
-                    description: "Utlösas endast när indikatorn klickas"
+                    label: "Endast manuell trigger",
+                    description: "Aktivera endast vid klick på indikatorn"
                 },
                 followLeave: {
-                    label: "När följt lämnar",
-                    description: "När den efterföljande användaren lämnar, lämna också"
+                    label: "Följ Leave",
+                    description: "Lämna också när den efterföljande användaren lämnar"
                 },
                 autoMoveBack: {
                     label: "Auto Flytta tillbaka",
-                    description: "Växla automatiskt tillbaka till den efterföljande användarens röstkanal när du flyttar"
+                    description: "Flytta automatiskt tillbaka till VC för den följe användaren när du flyttas"
                 },
                 followUserId: {
-                    label: "Följt användar-ID",
+                    label: "Följ användar-ID",
                     description: "Följt användar-ID"
                 },
                 channelFull: {
                     label: "Kanalen är full",
-                    description: "Om kanalen inte längre är full, försök att flytta dig dit"
+                    description: "Försök att flytta dig till kanalen när den inte längre är full"
                 }
             },
             toast: {
-                channelFull: "kanal full",
-                newVc: "Följd användare bytte till en ny röstkanal",
-                insufficientPermissions: "Otillräcklig behörighet för att komma in i röstkanalen",
-                sameVc: "Du är redan på samma kanal",
-                disconnect: "Följde användare vänster, frånkopplad",
-                notFollowing: "Den följe användaren lämnade, men du slutade inte följa",
-                notVc: "Följd användare finns inte på röstkanalen"
+                channelFull: "Kanalen är full",
+                newVc: "Följde användare till en ny röstkanal",
+                insufficientPermissions: "Otillräckliga behörigheter för att komma in i röstkanalen",
+                sameVc: "Du är redan i samma kanal",
+                disconnect: "Följt användare vänster; osammanhängande",
+                notFollowing: "Följd användare vänster, men följer inte frånkoppling",
+                notVc: "Följd användare finns inte i en röstkanal"
             },
             context: {
-                follow: "Följa",
-                unfollow: "Sluta följa"
+                follow: "Följ användare",
+                unfollow: "Sluta följa användare"
             }
         },
         fontLoader: {
             name: "FontLoader",
-            description: "Installerar alla typsnitt via Google Fonts",
+            description: "Laddar alla teckensnitt från Google Fonts",
             option: {
                 selectedFont: {
                     label: "Valt teckensnitt",
@@ -4507,11 +4507,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 fontSearch: {
                     label: "Teckensnittssökning",
-                    description: "Sök och välj typsnitt via Google Fonts"
+                    description: "Sök och välj Google Fonts"
                 },
                 applyOnCodeBlocks: {
                     label: "Applicera på kodblock",
-                    description: "Tillämpa teckensnitt på kodblock"
+                    description: "Använd teckensnittet på kodblock"
                 }
             },
             toast: {
@@ -4519,61 +4519,61 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             modal: {
                 settings: {
-                    title: "Google Fonts'ta Ara",
-                    description: "Välj ett teckensnitt att använda",
+                    title: "Sök på Google Fonts",
+                    description: "Välj ett teckensnitt för att tillämpa det",
                     placeholder: "Sök teckensnitt...",
-                    previewText: "Den pyjamasklädda patienten litade snabbt på den oljiga föraren",
-                    authors: "av {{författare}}"
+                    previewText: "Den kvicka bruna räven hoppar över den lata hunden",
+                    authors: "Av {{authors}}"
                 }
             }
         },
         forceOwnerCrown: {
             name: "ForceOwnerCrown",
-            description: "Även om servern är stor visar den med tvång serverns ägares krona bredvid användarnamn."
+            description: "Tvinga ägarkronan bredvid användarnamn även om servern är stor."
         },
         forwardAnywhere: {
             name: "ForwardAnywhere",
-            description: "Om vidarebefordran misslyckas skickas meddelandet som ett normalt meddelande; Det tillåter också överföring av NSFW-innehåll.",
+            description: "Om en vidarebefordran misslyckas, skicka den som ett vanligt meddelande; tillåter också NSFW forwards",
             option: {
                 forwardPreface: {
-                    label: "Vidarebefordran prefix",
-                    description: "Vilket uttalande ska läggas till i början av det överförda meddelandet?"
+                    label: "Framåt Förord",
+                    description: "Vad ska det vidarebefordrade innehållet inledas med"
                 }
             },
             context: {
-                attachments: "bilagor",
-                forwarded: "Vidarebefordrat från:"
+                attachments: "Bilagor",
+                forwarded: "Vidarebefordrat från"
             }
         },
         freaky: {
             name: "Freaky",
-            description: "Kommandot /freaky låter dig skicka ditt meddelande i ett konstigt teckensnitt.",
+            description: "Låter dig skicka ditt meddelande i ett konstigt teckensnitt med kommandot /freaky.",
             command: {
-                freaky: "Det var konstigt.",
-                message: "Skicka ditt meddelande i ett konstigt teckensnitt"
+                freaky: "Det är galet.",
+                message: "Gör ditt meddelande galet"
             },
             option: {
                 addFreakyEnding: {
-                    label: "Lägg till konstigt slut",
+                    label: "Lägg till Freaky Ending",
                     description: "Lägg till 👅 eller ❤️ i slutet"
                 }
             }
         },
         frequentQuickSwitcher: {
-            name: "Frekvent snabbväxling",
-            description: "Den ersätter och filtrerar resultaten i snabbväxlingsfönstret med de kanaler du använder oftast."
+            name: "Frequent Quick Switcher",
+            description: "Skriver om och filtrerar snabbväxlingsresultaten för att vara dina vanligaste kanaler."
         },
         friendCloud: {
             name: "FriendCloud",
-            description: "Lägger till ett /friendcloud-kommando för att visualisera de användare du interagerar mest med.",
+            description: "Lägger till ett /friendcloud-kommando för att visualisera de användare du interagerar mest med",
             command: {
                 friendcloud: {
                     description: "Visualisera ditt vänmoln",
                     count: "Antal användare att visa",
-                    mustHigher: "Siffran måste vara 1 eller högre!",
-                    noAffinities: "Inga närhetsdata hittades. Kontrollera dina [sekretessinställningar](<https://support.discord.com/hc/en-us/articles/21864805694999-Data-Used-to-Improve-Discord>).",
-                    noValid: "Inga giltiga användare hittades i proxyservrar. Kontrollera dina [sekretessinställningar](<https://support.discord.com/hc/en-us/articles/21864805694999-Data-Used-to-Improve-Discord>).",
-                    genFailed: "Bilden kunde inte skapas :c"
+                    mustHigher: "Antalet måste vara 1 eller högre!",
+                    noAffinities: "Inga affiniteter hittades. Kontrollera dina [sekretessinställningar](<https://support.discord.com/hc/en-us/articles/21864805694999-Data-Used-to-Improve-Discord>).",
+                    noValid: "Inga giltiga användare hittades i affiniteter. Kontrollera dina [sekretessinställningar](<https://support.discord.com/hc/en-us/articles/21864805694999-Data-Used-to-Improve-Discord>).",
+                    genFailed: "Kunde inte skapa bilden :c"
                 }
             }
         },
@@ -4581,174 +4581,174 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "FriendCodes",
             description: "Skapa vänkoder för att enkelt lägga till vänner",
             card: {
-                expires: "Expiration: <t:{{expiration}}:R> • {{uses}}/{{maxUses}} användning",
-                copy: "kopiera",
+                expires: "Går ut <t:{{expiration}}:R> • {{uses}}/{{maxUses}} använder",
+                copy: "Kopiera",
                 copied: "Kopierade!",
-                codes: "Dina vänskapskoder",
+                codes: "Dina vänkoder",
                 count: "Vänkoder - {{invites}}",
-                create: "Skapa vänskapskod",
-                revoke: "Avbryt alla vänkoder",
+                create: "Skapa vänkod",
+                revoke: "Återkalla alla vänkoder",
                 loading: "Belastning...",
                 dontHave: "Du har inga vänkoder."
             }
         },
         friendInvites: {
-            name: "Väninbjudningar",
-            description: "Skapa och hantera länkar för väninbjudningar med Slash-kommandon (/skapa väninbjudan, /visa väninbjudningar, /återkalla väninbjudningar).",
+            name: "FriendInvites",
+            description: "Skapa och hantera länkar för väninbjudningar via snedstreckkommandon (/skapa väninbjudan, /visa väninbjudningar, /återkalla väninbjudningar).",
             command: {
                 create: {
                     description: "Genererar en väninbjudningslänk.",
-                    message: "discord.gg/{{code}}`\n· Upphör att gälla: <t:{{expiration}}:R>\n· Maximal användning: {{uses}}"
+                    message: "discord.gg/{{code}}`\n· Upphör <t:{{expiration}}:R>\n· Max användningsområden: {{uses}}"
                 },
                 view: {
-                    description: "Visa alla skapade länkar för väninbjudningar.",
-                    message: "_discord.gg/{{code}}_\n· Utgår: <t:{{expiration}}:R> \n· Antal användningar: {{uses}}/{{maxUses}}",
-                    noInvites: "Du har inte en aktiv väninbjudningslänk."
+                    description: "Visa en lista över alla genererade väninbjudningar.",
+                    message: "_discord.gg/{{code}}_ \n· Upphör att gälla: <t:{{expiration}}:R> \n· Använda tider: {{uses}}/{{maxUses}}",
+                    noInvites: "Du har inga aktiva väninbjudningar."
                 },
                 revoke: {
-                    description: "Avbryter alla väninbjudningslänkar som har skapats.",
-                    message: "Alla väninbjudningslänkar har avbrutits."
+                    description: "Återkallar alla genererade väninbjudningar.",
+                    message: "Alla väninbjudningar har återkallats."
                 }
             }
         },
         friendshipRanks: {
             name: "FriendshipRanks",
-            description: "Lägger till märken som visar hur länge du har varit vän med en användare.",
+            description: "Lägger till märken som visar hur länge du har varit vän med en användare",
             badge: {
                 sprout: {
-                    name: "Gro",
-                    description: "Din vänskap bara blommar ut."
+                    name: "Sprout",
+                    description: "Din vänskap har precis börjat"
                 },
                 blooming: {
-                    name: "Blomning",
-                    description: "Din vänskap förbättras! (1 månad)"
+                    name: "Blooming",
+                    description: "Din vänskap närmar sig! (1 månad)"
                 },
                 burning: {
-                    name: "Flammande",
-                    description: "Din vänskap har nått sin topp. (3 månader)"
+                    name: "Burning",
+                    description: "Din vänskap har nått terminal hastighet (3 månader)"
                 },
                 fighter: {
-                    name: "Kämpe",
-                    description: "Din vänskap är stark. (6 månader)"
+                    name: "Fighter",
+                    description: "Din vänskap är stark (6 månader)"
                 },
                 star: {
-                    name: "Stjärna",
-                    description: "Din vänskap har pågått länge. (1 år)"
+                    name: "Star",
+                    description: "Din vänskap har pågått ett tag (1 år)"
                 },
                 royal: {
-                    name: "Resultat",
-                    description: "Din vänskap har övervunnit varje utmaning - 2 år!"
+                    name: "Royal",
+                    description: "Din vänskap har gått igenom tjockt och tunt - hela 2 år!"
                 },
                 besties: {
-                    name: "Bästa vän",
-                    description: "Hur uppnår man detta??? (5 år)"
+                    name: "Besties",
+                    description: "Hur klarar du ens detta??? (5 år)"
                 }
             }
         },
         friendsSince: {
-            name: "Vänner sedan",
-            description: "Det visar när användaren är vän med någon i popup-fönstret.",
-            section: "Dejting datum"
+            name: "FriendsSince",
+            description: "Visar när du blev vän med någon i användarens popout",
+            section: "Vänner sedan"
         },
         friendTags: {
             name: "FriendTags",
-            description: "Genom att börja din sökning med & kan du filtrera efter anpassade taggar i snabbhoppsmenyn.",
+            description: "Låter dig filtrera efter anpassade taggar i Quick Switcher genom att starta en sökning med &",
             modal: {
-                name: "Namn",
-                users: "Användare (separera med kommatecken)",
-                userlist: "Användarlista (Klicka på en användare för att ta bort)",
+                name: "Name",
+                users: "Användare (avgränsade med komma)",
+                userlist: "Användarlista (klicka på en användare för att ta bort)",
                 remove: "Ta bort",
                 add: "Tillägga",
-                tag: "Biljett",
-                removeFrom: "Ta bort från:",
-                addTo: "Lägg till i:"
+                tag: "Märka",
+                removeFrom: "Ta bort från",
+                addTo: "Lägg till"
             },
             option: {
                 tagConfiguration: {
                     label: "Taggkonfiguration",
-                    description: "Taggkonfigurationskomponent"
+                    description: "Taggkonfigurationskomponenten"
                 }
             }
         },
         fullSearchContext: {
             name: "FullSearchContext",
-            description: "Det gör meddelandekontextmenyn i meddelandesökresultat komplett med alla alternativ du kan förvänta dig."
+            description: "Gör att meddelandekontextmenyn i meddelandesökresultat har alla alternativ du kan förvänta dig"
         },
         fullUserInChatbox: {
             name: "FullUserInChatbox",
-            description: "Lägger till ytterligare funktionalitet som vänster/högerklicka på användartaggen i chattrutan."
+            description: "Får användaromnämnanden i chatboxen att ha fler funktioner, som att vänster-/högerklicka"
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Gör det möjligt för avatarer att täcka hela röstchattboxen.",
+            description: "Får avatarer att ta upp hela VC-brickan",
             option: {
                 useServerProfileAvatars: {
                     label: "Använd serverprofilavatarer",
-                    description: "Använder presentatörsprofilavatarer i röstchattrutor (om tillgängligt)"
+                    description: "Använd serverprofilavatarer i guild-röstkanaler när de är tillgängliga."
                 }
             }
         },
         gameActivityToggle: {
-            name: "GameActivity Toggle",
-            description: "Lägger till en switch till användarens popup för att visa eller dölja din spelaktivitet.",
-            tooltip: "Ändra spelhändelse",
+            name: "GameActivityToggle",
+            description: "Lägger till en växling till användarens popout för att visa/dölja din spelaktivitet",
+            tooltip: "Växla spelaktivitet",
             gameActivity: {
-                enabled: "Spelhändelse aktiverad",
-                disabled: "Spelhändelse inaktiverad"
+                enabled: "Spelaktivitet aktiverad",
+                disabled: "Spelaktivitet inaktiverad"
             },
             option: {
                 oldIcon: {
-                    label: "gammal ikon",
-                    description: "Använd gammal ikonstil innan Discord-ikonen görs om"
+                    label: "Gammal ikon",
+                    description: "Använd den gamla ikonstilen från innan Discord-ikonens redesign"
                 },
                 location: {
-                    label: "Kvinnor",
-                    description: "Var ska du visa spelhändelsnyckeln",
-                    panel: "Bredvid Mute/Mic Off",
-                    toolbox: "Plexcord i verktygslådan"
+                    label: "Plats",
+                    description: "Var ska du visa växlingsknappen för spelaktivitet",
+                    panel: "Bredvid Mute/Deafen",
+                    toolbox: "Plexcord verktygslåda"
                 }
             }
         },
         ghosted: {
             name: "Ghosted",
-            description: "Ett gulligt spöke dyker upp bredvid personer vars DM du inte har svarat på.",
+            description: "Ett sött spöke dyker upp om du inte svarar på deras DM",
             modal: {
                 title: "Spökade användare",
                 no: "Inga spökade användare",
-                unghost: "ta bort spöket",
-                unknown: "okänd",
-                unnamedGroup: "Anonym grupp",
+                unghost: "unghost",
+                unknown: "Okänd",
+                unnamedGroup: "Namnlös grupp",
                 unknownUser: "Okänd användare",
                 clearAll: "Rensa alla",
-                noGhost: "Det finns inga spöken här!",
-                clear: "rensa"
+                noGhost: "Inga spöken här!",
+                clear: "Rensa"
             },
             option: {
                 showIndicator: {
                     label: "Visa indikator",
-                    description: "Visar spökräknaren överst i serverlistan."
+                    description: "Visa spökräknaren överst i serverlistan"
                 },
                 showDmIcons: {
                     label: "Visa DM-ikoner",
-                    description: "Visar spökikoner bredvid individuella DM."
+                    description: "Visa spökikoner bredvid enskilda DM"
                 },
                 ignoreGroupDms: {
                     label: "Ignorera grupp-DM",
-                    description: "Håller alla gruppmeddelanden borta från spöklistan."
+                    description: "Uteslut alla grupp-DM från spökbilder"
                 },
                 exemptedChannels: {
                     label: "Undantagna kanaler",
-                    description: "Kommaseparerad lista över kanal-ID:n (ID) som inte kommer att inkluderas i spöklistan (högerklicka på en DM-kanal för att kopiera ID:n)."
+                    description: "Kommaseparerad lista över kanal-ID:n som ska undantas från spökbilder (högerklicka på en DM-kanal för att kopiera dess ID)"
                 },
                 ignoreBots: {
                     label: "Ignorera bots",
-                    description: "Ignorerar DM från bots."
+                    description: "Ignorera DM från bots"
                 }
             }
         },
         gifCollections: {
             name: "GifCollection",
-            description: "Låter dig skapa GIF-samlingar.",
+            description: "Låter dig skapa samlingar av GIF-filer",
             context: {
                 copyImageLink: "Kopiera bildlänk",
                 copyUrl: "Kopiera URL",
@@ -4758,72 +4758,72 @@ const translations: MatchStructure<typeof enTranslations> = {
                     delete: "Ta bort samling",
                     create: "Skapa samling",
                     remove: "Ta bort",
-                    information: "Samlingsinformation",
-                    name: "Namn",
-                    gifs: "Slag",
-                    created: "Skapandedatum",
-                    updated: "Senaste uppdatering",
-                    close: "Kvartal",
+                    information: "Insamlingsinformation",
+                    name: "Name",
+                    gifs: "GIF-filer",
+                    created: "Skapad på",
+                    updated: "Senast uppdaterad",
+                    close: "Nära",
                     rename: "Döpa om",
                     move: "Flytta till samling",
-                    select: "Välj den samling som ska flyttas"
+                    select: "Välj en samling att flytta objektet till"
                 },
                 gif: {
                     information: "Information",
-                    added: "Datum tillagt",
+                    added: "Lades till kl",
                     width: "Bredd",
                     height: "Höjd",
-                    close: "Kvartal"
+                    close: "Nära"
                 }
             },
             option: {
                 itemPrefix: {
                     label: "Artikelprefix",
-                    description: "Prefix för GIF-element"
+                    description: "Prefixet för GIF-objekt"
                 },
                 collectionPrefix: {
                     label: "Samlingsprefix",
-                    description: "Prefix för samlingar"
+                    description: "Prefixet för samlingar"
                 },
                 onlyShowCollections: {
                     label: "Visa endast samlingar",
                     description: "Visa endast samlingar"
                 },
                 stopWarnings: {
-                    label: "Stoppa varningar",
-                    description: "Stoppa raderingsvarningar"
+                    label: "Stoppvarningar",
+                    description: "Stoppa borttagningsvarningar"
                 },
                 showCopyImageLink: {
-                    label: "Visa alternativet Kopiera bildlänk",
-                    description: "Visa {{copyImageLink}} i snabbmenyer"
+                    label: "Visa länken Kopiera bild",
+                    description: "Visa alternativet {{copyImageLink}} i snabbmenyer"
                 },
                 preventDuplicates: {
-                    label: "Förhindra återfall",
+                    label: "Förhindra dubbletter",
                     description: "Förhindra att samma GIF läggs till i en samling flera gånger"
                 },
                 defaultEmptyCollectionImage: {
                     label: "Standard tom samlingsbild",
-                    description: "Bild/GIF för att visa när det inte finns några bilder/GIF i samlingen"
+                    description: "Bilden/GIF:en som kommer att visas när en samling inte har några bilder/GIF:er"
                 },
                 collectionsSortType: {
-                    label: "Sorteringstyp för samling",
-                    description: "Sorteringstyp av samlingar"
+                    label: "Sorteringstyp för samlingar",
+                    description: "Typen av sortering för samlingar"
                 },
                 collectionsSortOrder: {
-                    label: "Sorteringsordning för samling",
-                    description: "Sorteringsordning på samlingar"
+                    label: "Sorteringsordning för samlingar",
+                    description: "Sorteringsordningen för samlingar"
                 },
                 collectionsSort: {
-                    label: "Sortera samlingar",
-                    description: "Bestäm hur samlingar ska sorteras",
+                    label: "Samlingar Sortera",
+                    description: "Bestäm hur du ska sortera samlingar",
                     title: "Sortera samlingar",
-                    sortDescription: "Välj en sortering efter dina samlingar",
+                    sortDescription: "Välj ett sorteringskriterium för dina samlingar",
                     sortBy: "Sortera efter",
-                    name: "Namn",
+                    name: "Name",
                     creationDate: "Skapandedatum",
                     modifiedDate: "Ändrat datum",
-                    ascending: "Växande",
-                    descending: "Minskar"
+                    ascending: "Stigande",
+                    descending: "Fallande"
                 },
                 importGifs: {
                     label: "Importera GIF-filer",
@@ -4837,25 +4837,25 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 resetCollections: {
                     label: "Återställ samlingar",
-                    description: "Återställ samlingar till standardvärden (tar bort alla samlingar)",
+                    description: "Återställ samlingar till standard (tar bort alla dina samlingar)",
                     button: "Återställ samlingar"
                 }
             },
             toast: {
                 copied: "Bildlänk kopierad till urklipp!",
                 urlCopied: "URL kopierad till urklipp!",
-                already: "Den här samlingen finns redan",
-                alreadyCollection: "Denna GIF finns redan i samlingen"
+                already: "Den samlingen finns redan",
+                alreadyCollection: "Den GIF finns redan i den samlingen"
             },
             modal: {
                 create: {
                     title: "Skapa samling",
-                    name: "Samlingens namn",
+                    name: "Collection Name",
                     create: "Skapa"
                 },
                 rename: {
                     title: "Byt namn på samlingen",
-                    name: "Nytt samlingsnamn",
+                    name: "New Collection Name",
                     warning: "Namnet får inte vara längre än 24 tecken",
                     rename: "Döpa om"
                 }
@@ -4863,141 +4863,141 @@ const translations: MatchStructure<typeof enTranslations> = {
             alert: {
                 import: {
                     title: "Är du säker?",
-                    body: "Att importera samlingar skriver över befintliga samlingar.",
-                    confirm: "Iche Aktar",
-                    cancel: "Avboka"
+                    body: "När du importerar samlingar kommer dina nuvarande samlingar att skrivas över.",
+                    confirm: "Importera",
+                    cancel: "Strunt i det"
                 },
                 reset: {
                     title: "Är du säker?",
-                    body: "Om du återställer samlingar tas alla samlingar bort.",
-                    confirm: "återställa",
-                    cancel: "Avboka"
+                    body: "Om du återställer samlingar tas alla dina samlingar bort.",
+                    confirm: "Återställa",
+                    cancel: "Strunt i det"
                 },
                 delete: {
                     title: "Är du säker?",
                     deleteBody: "Vill du verkligen ta bort den här samlingen?",
                     removeBody: "Vill du verkligen ta bort det här objektet?",
-                    confirm: "Sil",
+                    confirm: "Radera",
                     remove: "Ta bort",
-                    cancel: "Avboka"
+                    cancel: "Strunt i det"
                 }
             }
         },
         gifPaste: {
             name: "GifPaste",
-            description: "Det låter dig klistra in GIF-filer direkt i chattrutan."
+            description: "Låter dig klistra in GIF-filer direkt i chattrutan"
         },
         gifRoulette: {
             name: "GifRoulette",
-            description: "Lägger till ett kommando som skickar en slumpmässig GIF från dina favoriter; Det finns 10 % chans att tagga serverägaren!",
+            description: "Lägger till ett kommando för att skicka en slumpmässig GIF från dina favoriter, med en av tio chans att pinga serverns ägare",
             command: {
                 gifRoulette: {
-                    description: "Prova lyckan och skicka en slumpmässig GIF"
+                    description: "Fresta ödet och skicka en GIF"
                 }
             },
             option: {
                 pingOwnerChance: {
-                    label: "Chans att tagga serverägaren",
-                    description: "Ställer in chansen att tagga serverägaren till 1 av 10 (yikes!)"
+                    label: "Ping Ägarchans",
+                    description: "Om det ska finnas en chans på 1 på 10 att pinga ägaren till guilden (å nej)"
                 }
             }
         },
         gitHubRepos: {
             name: "GitHubRepos",
-            description: "Visar användarens offentliga GitHub-förråd på sin profil.",
-            loading: "Lagrar laddas...",
+            description: "Visar en användares offentliga GitHub-arkiv i deras profil",
+            loading: "Laddar arkiv...",
             option: {
                 showStars: {
-                    label: "Visa stjärnorna",
-                    description: "Visa lagerstjärnor"
+                    label: "Visa stjärnor",
+                    description: "Visa förrådsstjärnor"
                 },
                 showLanguage: {
                     label: "Visa språk",
-                    description: "Visa huvudprogrammeringsspråket för repositories"
+                    description: "Visa förvarets primära språk"
                 },
                 showInMiniProfile: {
                     label: "Visa i miniprofil",
-                    description: "Visa förråd i miniprofilfönster"
+                    description: "Visa förråd i miniprofilens popout"
                 },
                 showRepositoryTab: {
                     label: "Visa arkivfliken",
-                    description: "Visa arkivfliken i profilmodal (dölj knapp på länkar när den är aktiverad)"
+                    description: "Visa arkivfliken i profilmodal (döljer knappen i anslutningar när den är aktiverad)"
                 }
             },
             error: {
-                error: "Även",
-                render: "Fel: GithubRepos kunde inte visas"
+                error: "Fel",
+                render: "Fel: Det gick inte att rendera GitHubRepos"
             },
             button: {
                 show: "Visa GitHub-förråd",
                 repositories: "GitHub Repositories",
                 more: "Visa mer",
-                only: "Visar bara de bästa {{length}}/{{total}}"
+                only: "Visar endast topp {{length}}/{{total}}"
             },
             modal: {
                 title: "{{user}}s GitHub-förråd",
-                repository: "Depo",
-                description: "Förklaring",
-                language: "Dil",
-                stars: "Stjärna",
+                repository: "Förvar",
+                description: "Beskrivning",
+                language: "Språk",
+                stars: "Stjärnor",
                 viewOnGitHub: "Visa på GitHub",
-                close: "Kvartal"
+                close: "Nära"
             }
         },
         googleThat: {
-            name: "Googla det",
-            description: "Lägger till ett kommando som låter dig skicka en internetsökningsanslutning.",
+            name: "GoogleThat",
+            description: "Lägger till ett kommando för att skicka en söklänk på internet",
             command: {
                 googleThat: {
-                    description: "Skicka in en sökmotorlänk",
-                    query: "sökfråga"
+                    description: "Skicka en sökmotorlänk",
+                    query: "Sökfrågan"
                 }
             },
             option: {
                 hyperlink: {
-                    label: "Bro",
-                    description: "Om den skickade länken kommer att skickas som en hyperlänk med frågetaggen"
+                    label: "Hyperlänk",
+                    description: "Om den skickade länken ska hyperlänka med frågan som etikett"
                 },
                 embed: {
-                    label: "Inbäddat innehåll",
-                    description: "Om den skickade länken ska visas som inbäddat innehåll"
+                    label: "Bädda in",
+                    description: "Om den skickade länken ska rendera en inbäddning"
                 },
                 defaultEngine: {
-                    label: "Standardsökmotor",
-                    description: "Sökmotor att använda"
+                    label: "Standardmotor",
+                    description: "Sökmotorn att använda"
                 },
                 customEngineURL: {
-                    label: "URL för anpassad sökmotor",
-                    description: "URL till sökmotorn du vill använda"
+                    label: "URL för anpassad motor",
+                    description: "URL:en till motorn du vill använda"
                 }
             }
         },
         greetStickerPicker: {
             name: "GreetStickerPicker",
-            description: "\"Vina och säg hej!\" Genom att högerklicka på knappen kan du använda välkomstetiketten du vill ha istället för den slumpmässiga.",
+            description: "Låter dig använda valfri hälsningsdekal istället för bara den slumpmässiga genom att högerklicka på \"Våga för att säga hej!\" knapp",
             mode: {
-                greet: "Hej",
+                greet: "Hälsa",
                 message: "Meddelande"
             },
             option: {
                 greetMode: {
                     label: "Hälsningsläge",
                     description: "Välj hälsningsläge",
-                    greet: "Hälsning (du kan bara skicka hälsning 3 gånger)",
-                    message: "Meddelande (du kan skicka obegränsade hälsningar)"
+                    greet: "Hälsa (du kan bara hälsa 3 gånger)",
+                    message: "Meddelande (du kan hälsa spam)"
                 }
             },
             context: {
-                label: "Hälsningsdekalväljare",
+                label: "Hälsning Dekalväljare",
                 mode: "Hälsningsläge",
                 stickers: "Hälsning klistermärken",
-                multi: "Flera hälsningar",
-                send: "Skicka hej"
+                multi: "Oheliga Multi-Greet",
+                send: "Skicka hälsningar"
             }
         },
         guildPickerDumper: {
             name: "GuildPickerDumper",
-            description: "Lägger till en snabbmeny som låter dig exportera och ladda ner en servers emoji och klistermärken.",
+            description: "Snabbmeny för att dumpa och ladda ner en servers emojis och klistermärken.",
             context: {
                 download: {
                     emoji: "Ladda ner emojis",
@@ -5007,53 +5007,53 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         guildTagSettings: {
             name: "GuildTagSettings",
-            description: "Lägger till servertaggarinställningar, som att dölja servertaggar eller inaktivera uppmaningen att använda taggar.",
+            description: "Lägger till vissa inställningar för guild-taggar, som att dölja dem eller inaktivera uppmaningen att använda dem.",
             option: {
                 hideTags: {
                     label: "Dölj taggar",
-                    description: "Gör servertaggar osynliga"
+                    description: "Dölj taggar"
                 },
                 disableAdoptTagPrompt: {
-                    label: "Stäng Tag Claim Warning",
-                    description: "Inaktiverar uppmaningen att använda (anspråka) servertaggen"
+                    label: "Inaktivera Adopt Tag Prompt",
+                    description: "Inaktivera uppmaningen att anta taggar"
                 }
             }
         },
         hideChatButtons: {
             name: "HideChatButtons",
-            description: "Låter dig dölja chattknappar.",
+            description: "Kan dölja chattknapparna",
             tooltip: {
-                close: "Kvartal",
-                open: "Hungrig"
+                close: "Nära",
+                open: "Öppna"
             },
             option: {
                 color: {
                     label: "Färg",
-                    description: "Visas i rött när den är på"
+                    description: "Färga den röd vid öppning"
                 },
                 open: {
                     label: "Öppna",
-                    description: "På som standard"
+                    description: "Öppnas som standard"
                 }
             }
         },
         hideMedia: {
             name: "HideMedia",
-            description: "Det låter dig dölja bilagor och inbäddat innehåll i vissa meddelanden med en knapp som visas när du håller muspekaren över.",
+            description: "Dölj bilagor och inbäddningar för enskilda meddelanden via svävningsknappen",
             show: "Visa media",
             hide: "Dölj media",
             hidden: "Media dolda"
         },
         hideMessages: {
             name: "HideMessages",
-            description: "Döljer meddelanden tillfälligt tills du startar om.",
+            description: "Ett plugin för att tillfälligt dölja meddelanden tills du startar om.",
             button: {
-                hide: "dölja"
+                hide: "Dölja"
             },
             option: {
                 hidePopoverButton: {
-                    label: "Dölj popover-knappen",
-                    description: "Döljer knappen dölj i meddelandefönstret."
+                    label: "Göm popover-knappen",
+                    description: "Göm dölj-knappen i meddelandefönstret."
                 }
             }
         },
@@ -5070,16 +5070,16 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 showIndicator: {
-                    label: "Visa indikatorer",
-                    description: "Visa menyn längst ner för att visa dolda servrar i listan"
+                    label: "Visa indikator",
+                    description: "Visa meny för att visa servrar längst ner i listan"
                 },
                 guildsList: {
-                    label: "Serverlista",
+                    label: "Guilds List",
                     description: "Ta bort dolda servrar"
                 },
                 resetHidden: {
-                    label: "Återställ dolda servrar",
-                    description: "Ta bort alla dolda servrar från listan",
+                    label: "Återställ dolda",
+                    description: "Ta bort alla dolda guilds från listan",
                     button: "Återställ dolda servrar"
                 }
             },
@@ -5089,14 +5089,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 remove: "Ta bort",
                 folder: "Mapp",
                 removeAll: "Ta bort alla",
-                guilds: "Servrar",
+                guilds: "Skrån",
                 noHiddenServers: "Inga dolda servrar"
             }
         },
         holyNotes: {
             name: "HolyNotes",
             description: "Holy Notes låter dig spara meddelanden",
-            main: "Väl",
+            main: "Main",
             button: {
                 tooltip: "Heliga anteckningar",
                 save: "Spara anteckning",
@@ -5110,70 +5110,70 @@ const translations: MatchStructure<typeof enTranslations> = {
                 create: "Skapa anteckningsbok",
                 copyText: "Kopiera text",
                 copyAttachment: "Kopiera bifogad URL",
-                deleteNote: "Notu Sil",
+                deleteNote: "Ta bort anteckning",
                 moveNote: "Flytta anteckning",
                 moveTo: "Flytta till {{key}}",
                 copyId: "Kopiera ID"
             },
             modal: {
                 error: {
-                    generic: "Ett fel uppstod när dina betyg bearbetades. Kontrollera konsolen för detaljer.",
-                    easter: "Inga anteckningar hittades. Empati banan är med dig.",
-                    empty: "Det finns inga anteckningar sparade i den här anteckningsboken."
+                    generic: "Det uppstod ett fel när dina anteckningar analyserades. Kontrollera konsolen för detaljer.",
+                    easter: "Inga anteckningar hittades. Empathy Banana är här för dig.",
+                    empty: "Inga anteckningar hittades sparade i den här anteckningsboken."
                 },
                 help: {
                     title: "Hjälp",
                     description: "Lär dig hur du använder heliga anteckningar",
                     addingNotes: "Lägga till anteckningar",
-                    addingNotesText: "För att lägga till en anteckning, högerklicka på ett meddelande, peka på \"Anteckningsmeddelande\" och välj den anteckningsbok du vill lägga till anteckningen i.",
+                    addingNotesText: "För att lägga till en anteckning, högerklicka på ett meddelande, för sedan muspekaren över \"Anteckningsmeddelande\" och klicka på knappen med anteckningsbokens namn som du vill anteckna meddelandet till.",
                     prototype: "Prototyp",
-                    noteMessage: "Ett klick på knappen 'Notera meddelande' lägger till det i huvudboken som standard!",
-                    deletingNotes: "Inte Silme",
-                    deletingNotesText: "För att radera en anteckning kan du högerklicka och välja 'Radera anteckning' eller hålla ned 'DELETE'-tangenten på ditt tangentbord och klicka på anteckningen.",
-                    movingNotes: "Flytta en anteckning",
-                    movingNotesText: "För att flytta en anteckning, högerklicka och välj den anteckningsbok du vill flytta från alternativet \"Flytta anteckning\".",
-                    jumpToMessage: "Gå till meddelande",
-                    jumpToMessageText: "För att gå till meddelandet som en anteckning tillhör, högerklicka på anteckningen och välj \"Gå till meddelande\"."
+                    noteMessage: "Om du klickar på knappen \"Notera meddelande\" kommer du som standard att notera till Main!",
+                    deletingNotes: "Ta bort anteckningar",
+                    deletingNotesText: "Obs: du kan antingen högerklicka på anteckningen och trycka på \"Radera anteckning\" eller så kan du hålla ned \"DELETE\"-tangenten på ditt tangentbord och klicka på en anteckning; det är som magi!",
+                    movingNotes: "Flytta anteckningar",
+                    movingNotesText: "För att flytta en anteckning högerklickar du på en anteckning och håller muspekaren över objektet 'Flytta anteckning' och klickar på knappen som motsvarar den anteckningsbok du vill flytta anteckningen till.",
+                    jumpToMessage: "Hoppa till meddelande",
+                    jumpToMessageText: "För att hoppa till platsen där anteckningen ursprungligen fanns, högerklicka bara på anteckningen och tryck på \"Hoppa till meddelande\"."
                 },
                 notebook: {
                     title: "ANTECKNINGSBOK",
                     search: "Sök efter ett meddelande...",
                     options: "Sorteringsalternativ",
-                    label: "Sorteringsmeny",
-                    filteredOf: "{{filteredCount}}/{{noteCount}} inte",
-                    note: "{{noteCount}} inte",
-                    ada: "Stigande/tillagt datum",
+                    label: "Sortera meny",
+                    filteredOf: "{{filteredCount}} av {{noteCount}} not{{s}}",
+                    note: "{{noteCount}} not{{s}}",
+                    ada: "Stigande / Tillagt datum",
                     amd: "Stigande/meddelandedatum",
-                    dda: "Fallande/tillagt datum",
+                    dda: "Fallande / Tillagt datum",
                     dmd: "Fallande / meddelandedatum",
                     change: "Ändra sortering",
-                    ascending: "Växande",
-                    descending: "Minskar",
-                    dateAdded: "Tillagt datum",
+                    ascending: "Stigande",
+                    descending: "Fallande",
+                    dateAdded: "Datum tillagt",
                     messageDate: "Meddelandedatum"
                 },
                 create: {
                     title: "Skapa anteckningsbok",
-                    description: "Ange namnet på den nya anteckningsboken",
+                    description: "Ange ett namn för din nya anteckningsbok",
                     placeholder: "Anteckningsbokens namn"
                 },
                 delete: {
-                    title: "{{notebookName}} Silinsin Mi?",
-                    description: "{{noteCount}} anteckning kommer att raderas permanent",
-                    button: "Sil"
+                    title: "Ta bort {{notebookName}}?",
+                    description: "{{noteCount}} note{{s}} kommer att raderas permanent",
+                    button: "Radera"
                 },
                 tabs: {
-                    label: "Anteckningsbok flikar"
+                    label: "Notebook flikar"
                 }
             },
             toast: {
-                saved: "Meddelandet har lagts till i {{anteckningsbok}}.",
-                deleted: "Anteckningen har raderats från {{anteckningsbok}}.",
-                moved: "Anteckningen har flyttats från {{from}}-anteckningsboken till {{to}}-anteckningsboken.",
-                exists: "Anteckningsbok med namnet {{notebookName}} finns redan.",
+                saved: "Meddelandet har lagts till i {{notebook}}",
+                deleted: "Anteckning från {{notebook}} har raderats",
+                moved: "Anteckningen har flyttats från {{from}} till {{to}}.",
+                exists: "Notebook {{notebookName}} finns redan.",
                 created: "{{notebookName}} har skapats.",
-                deletedNotebook: "{{notebookName}} har raderats.",
-                refreshed: "Avatarer har uppdaterats framgångsrikt.",
+                deletedNotebook: "{{notebookName}} har tagits bort.",
+                refreshed: "Uppdaterade avatarer framgångsrikt.",
                 deletedAll: "Alla anteckningar har raderats.",
                 imported: "Anteckningar har importerats.",
                 invalid: "Det gick inte att importera anteckningar."
@@ -5184,7 +5184,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         homeTyping: {
             name: "HomeTyping",
-            description: "Om någon skriver i dina DM:s förvandlar det hemknappen till en skrivindikator."
+            description: "Ändrar hemknappen till en skrivindikator om någon i dina DM:n skriver"
         },
         iconViewer: {
             name: "IconViewer",
@@ -5200,16 +5200,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                     premade: "Kopiera färdiga ikonfynd för dina plugins",
                     find: "Hitta ikoner efter funktionskontext",
                     search: "Sök efter färger genom att högerklicka på färgnamnet",
-                    special: "speciellt tack"
+                    special: "Speciellt tack"
                 }
             },
             context: {
                 icon: {
                     options: "Ikon Alternativ",
-                    log: "Skriv ut till konsol (logg)",
+                    log: "Logga till konsolen",
                     save: "Spara som...",
-                    rightClick: "Högerklicka på ikonen för att ersätta",
-                    usage: "Använda",
+                    rightClick: "Högerklicka på ikonen för att ändra",
+                    usage: "Användande",
                     click: "Klicka för att kopiera",
                     copied: "Kopierade!",
                     actions: "Åtgärder"
@@ -5217,42 +5217,42 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             modal: {
                 label: "Sök efter funktionskontext",
-                search: "Sök inom {{count}} symboler...",
+                search: "Sök efter {{count}} ikoner...",
                 function: "Fungera",
                 iconViewer: {
-                    colors: "Icon Viewer färger",
+                    colors: "Ikon Viewer färger",
                     unknown: "okänd",
                 }
             }
         },
         idleAutoRestart: {
             name: "IdleAutoRestart",
-            description: "Den startar automatiskt om appen när du är inaktiv under en viss tid, men förhindrar omstart när du är i ljudkanalen.",
+            description: "Startar om klienten automatiskt efter att ha varit inaktiv under en konfigurerbar tid, men undviker att starta om medan du är i VC.",
             option: {
                 isEnabled: {
-                    label: "Effektiv",
-                    description: "Aktiverar automatisk omstart efter tomgång"
+                    label: "är aktiverad",
+                    description: "Aktivera automatisk omstart efter tomgång"
                 },
                 idleMinutes: {
-                    label: "Inaktiv tid (minuter)",
-                    description: "Tid för inaktivitet innan omstart (inte på ljudkanal)"
+                    label: "Inaktiva minuter",
+                    description: "Minuter av inaktivitet före omstart (när det inte finns i VC)"
                 }
             },
             toolbox: {
-                disable: "Inaktivera automatisk omstart",
-                enable: "Aktivera automatisk omstart"
+                disable: "Inaktivera inaktiv automatisk omstart",
+                enable: "Aktivera inaktiv automatisk omstart"
             }
         },
         ignoreActivities: {
-            name: "Ignorera aktiviteter",
-            description: "Förhindrar att händelser endast visas i staten. Du kan ange vilka som ska ignoreras på flikarna Sparade spel och evenemang, eller använd de allmänna inställningarna nedan.",
+            name: "IgnoreActivities",
+            description: "Ignorera att aktiviteter ENDAST visas på din status. Du kan konfigurera vilka som specifikt ignoreras från flikarna Registrerade spel och aktiviteter, eller använda de allmänna inställningarna nedan",
             modal: {
                 import: {
-                    title: "Importera CustomRPC-plugins app-ID till filterlistan"
+                    title: "Importera applikations-ID för CustomRPC-plugin till filterlistan"
                 },
                 filter: {
                     title: "Filterlista",
-                    description: "Kommaseparerad lista över händelse-ID att filtrera (användbart för att filtrera specifika RPC-händelser och CustomRPC)"
+                    description: "Kommaseparerad lista över aktivitets-ID:n att filtrera (användbart för att filtrera specifika RPC-aktiviteter och CustomRPC)"
                 }
             },
             toast: {
@@ -5266,161 +5266,161 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 importCustomRPC: {
-                    label: "CustomRPC'yi Mer"
+                    label: "Importera CustomRPC"
                 },
                 listMode: {
                     label: "Listläge",
-                    description: "Välj hur du vill använda filterlistan",
-                    blacklist: "Svartlista (Ignorera bara de på listan)",
-                    whitelist: "Vit lista (Ignorera alla utom de i listan)"
+                    description: "Välj hur filterlistan ska tillämpas",
+                    blacklist: "Svartlista (ignorera bara det som finns i listan)",
+                    whitelist: "Vitlista (ignorera allt utom det som finns i listan)"
                 },
                 idList: {
                     label: "ID-lista"
                 },
                 ignorePlaying: {
-                    label: "Ignorera vad som spelas",
-                    description: "Ignorera alla spelade händelser (vanligtvis spel- och RPC-händelser)"
+                    label: "Ignorera att spela",
+                    description: "Ignorera alla spelaktiviteter (dessa är vanligtvis spel- och RPC-aktiviteter)"
                 },
                 ignoreStreaming: {
-                    label: "Ignorera inlägg",
-                    description: "Ignorera alla sändningshändelser"
+                    label: "Ignorera Streaming",
+                    description: "Ignorera alla streamingaktiviteter"
                 },
                 ignoreListening: {
-                    label: "Ignorera lyssnare",
-                    description: "Ignorera alla lyssningshändelser (vanligtvis Spotify-händelser)"
+                    label: "Ignorera att lyssna",
+                    description: "Ignorera alla lyssningsaktiviteter (dessa är vanligtvis Spotify-aktiviteter)"
                 },
                 ignoreWatching: {
-                    label: "Ignorera Visat",
-                    description: "Ignorera alla spårningshändelser"
+                    label: "Ignorera tittar",
+                    description: "Ignorera alla tittande aktiviteter"
                 },
                 ignoreCompeting: {
-                    label: "Ignorera tävlingsevenemang",
-                    description: "Ignorera alla tävlingsevenemang (vanligtvis anpassade spelhändelser)"
+                    label: "Ignorera att tävla",
+                    description: "Ignorera alla tävlande aktiviteter (dessa är normalt speciella spelaktiviteter)"
                 },
                 ignoredActivities: {
-                    label: "Ignorerade händelser"
+                    label: "Ignorerade aktiviteter"
                 }
             }
         },
         ignoreCalls: {
-            name: "Ignorera samtal",
+            name: "IgnoreCalls",
             description: "Låter dig ignorera samtal från specifika användare eller DM-grupper.",
             option: {
                 permanentlyIgnoredUsers: {
                     label: "Permanent ignorerade användare",
-                    description: "Användar-ID (virgül + boşluk) som ska ignoreras permanent"
+                    description: "Användar-ID (komma + blanksteg) som ska ignoreras permanent"
                 }
             },
             button: {
-                ignore: "Yoksay",
-                temporarilyIgnore: "Ignorera tillfälligt",
-                permanentlyIgnore: "Ignorera permanent"
+                ignore: "Ignorera",
+                temporarilyIgnore: "Ignorera samtal tillfälligt",
+                permanentlyIgnore: "Ignorera samtal permanent"
             }
         },
         iLoveSpam: {
             name: "ILoveSpam",
-            description: "Döljer meddelanden från \"potentiella spammare\"."
+            description: "Dölj inte meddelanden från \"sannolika spammare\""
         },
         imageFilename: {
-            name: "Bildfilnamn",
-            description: "Visar filnamnet som ett verktygstips när du håller muspekaren över bilder och GIF-filer.",
+            name: "ImageFilename",
+            description: "Visa filnamnet på bilder och GIF som ett verktygstips när du håller muspekaren över dem",
             option: {
                 showFullUrl: {
                     label: "Visa fullständig URL",
-                    description: "Den visar bildens fullständiga URL istället för bara filnamnet. Det är alltid aktiverat för GIF-filer eftersom de vanligtvis inte har ett meningsfullt filnamn."
+                    description: "Visa hela webbadressen till bilden istället för bara filnamnet. Alltid aktiverat för GIF eftersom de vanligtvis inte har något meningsfullt filnamn"
                 }
             }
         },
         imageLink: {
             name: "ImageLink",
-            description: "Den döljer aldrig visuella länkar, även om det bara finns en bildlänk i meddelandena."
+            description: "Göm aldrig bildlänkar i meddelanden, även om det är det enda innehållet"
         },
         imageZoom: {
             name: "ImageZoom",
-            description: "Det låter dig zooma in på bilder och GIF, samt se bildmetadata. Zooma in med mushjulet, öka linsradien med Shift + mushjul.",
+            description: "Låter dig zooma in på bilder och GIF samt visar bildmetadata. Använd scrollhjulet för att zooma in och Shift + scrollhjulet för att öka objektivradien.",
             option: {
                 saveZoomValues: {
                     label: "Spara zoomvärden",
-                    description: "Bestämmer om zoom- och objektivstorleksvärden sparas"
+                    description: "Om zoom- och objektivstorleksvärden ska sparas"
                 },
                 invertScroll: {
-                    label: "Omvänd rullning",
-                    description: "Vänder om musens rullningsriktning"
+                    label: "Invertera rullning",
+                    description: "Invertera rullning"
                 },
                 nearestNeighbour: {
                     label: "Närmaste granne",
-                    description: "Använder närmaste granne-interpolation vid skalning av bilder"
+                    description: "Använd Nearest Neighbor Interpolation när du skalar bilder"
                 },
                 square: {
-                    label: "Skydda",
-                    description: "Förvandlar linsen till en fyrkantig form"
+                    label: "Fyrkant",
+                    description: "Gör linsen fyrkantig"
                 },
                 zoom: {
                     label: "Zoom",
-                    description: "Zoomförhållande för objektivet"
+                    description: "Zoom av linsen"
                 },
                 size: {
-                    label: "Dimensionera",
-                    description: "Linsradie/storlek"
+                    label: "Storlek",
+                    description: "Radie / Storlek på linsen"
                 },
                 zoomSpeed: {
                     label: "Zoomhastighet",
-                    description: "Bestämmer hastigheten för förändring av zoom/objektivstorlek"
+                    description: "Hur snabbt zoomen/objektivets storlek ändras"
                 },
                 showMetadata: {
                     label: "Visa metadata",
-                    description: "Visar metadata när du dubbelklickar på den valda bilden"
+                    description: "Visa bildmetadata när du dubbelklickar på den valda bilden"
                 }
             },
             context: {
                 square: "Fyrkantig lins",
-                nearest: "Pixelerad förstoring",
+                nearest: "Närmaste granne",
                 zoom: "Zoom",
                 size: "Linsstorlek",
                 zoomSpeed: "Zoomhastighet",
                 showImageMetadata: "Visa bildmetadata",
                 view: "Visa metadata",
                 loading: "Belastning...",
-                unknown: "okänd",
-                sizeHTML: "Dimensionera",
+                unknown: "Okänd",
+                sizeHTML: "Storlek",
                 dimensions: "Mått",
                 filename: "Filnamn"
             }
         },
         imgToGif: {
             name: "ImgToGif",
-            description: "Lägger till /imgtogif-kommandot för att konvertera alla bilder till GIF",
+            description: "Lägger till ett /imgtogif snedstreck kommando för att skapa en GIF från valfri bild",
             command: {
                 imgToGif: {
-                    description: "Låter dig konvertera en bild till GIF",
-                    image: "Visuell fäste att använda",
-                    width: "GIF-bredd",
-                    height: "gif höjd"
+                    description: "Låter dig förvandla en bild till en GIF",
+                    image: "Bildbilaga att använda",
+                    width: "GIF:ens bredd",
+                    height: "Höjden på GIF"
                 }
             },
             error: {
                 noImage: "Ingen bild specificerad!",
-                notImage: "Den uppladdade filen är inte en bild"
+                notImage: "Ladda upp är inte en bild"
             }
         },
         implicitRelationships: {
-            name: "Implicita relationer",
-            description: "Visar dina indirekta relationer på fliken Vänner.",
+            name: "ImplicitRelationships",
+            description: "Visar dina implicita relationer på fliken Vänner.",
             option: {
                 sortByAffinity: {
-                    label: "Sortera efter närhet",
-                    description: "Avgör om indirekta relationer sorteras efter deras närhet till dig."
+                    label: "Sortera efter Affinitet",
+                    description: "Om man ska sortera implicita relationer efter deras affinitet till dig."
                 }
             },
-            implicit: "Indirekt"
+            implicit: "Implicit"
         },
         inRole: {
             name: "InRole",
-            description: "Ta reda på vem som har en roll med hjälp av rollkontextmenyn eller /inrole-kommandot (läs plugininfo!)",
+            description: "Vet vem som är i en roll med rollkontextmenyn eller /inrole-kommandot (läs plugininfo!)",
             command: {
                 inrole: {
-                    description: "Ta reda på vem som har en roll",
-                    role: "Roll",
+                    description: "Vet vem som är i en roll",
+                    role: "Rollen",
                     noGuild: "Se till att du är på en server."
                 }
             },
@@ -5430,44 +5430,44 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 about: {
                     title: "Begränsningar",
-                    description: "Om du inte har modereringsbehörighet på servern och servern är stor (mer än 100 medlemmar) kan plugin-programmet begränsas på följande sätt:",
+                    description: "Om du inte har mod-behörigheter på servern och den servern är stor (över 100 medlemmar) kan plugin-programmet begränsas på följande sätt",
                     list: {
-                        one: "Medlemmar offline kommer inte att listas",
-                        two: "Som standard kommer maximalt 100 medlemmar att listas. Scrolla ner i medlemslistan för att se fler medlemmar.",
-                        three: "Men dina vänner kommer alltid att visas oavsett deras status."
+                        one: "Offlinemedlemmar kommer inte att listas",
+                        two: "Upp till 100 medlemmar kommer att listas som standard. För att få fler, scrolla ner i medlemslistan för att ladda fler medlemmar.",
+                        three: "Men vänner kommer alltid att visas oavsett deras status."
                     }
                 },
                 member: {
-                    title: "Medlemmar i rollen",
-                    noMembers: "Inga onlinecachade medlemmar med den här rollen hittades. Försök att scrolla ner i medlemslistan för att cachelagra fler användare!"
+                    title: "Rollmedlemmar",
+                    noMembers: "Det verkar som att inga onlinecachade medlemmar med den rollen hittades. Testa att scrolla ner på din medlemslista för att cachelagra fler användare!"
                 }
             }
         },
         instantScreenshare: {
             name: "InstantScreenshare",
-            description: "När du går med i en ljudkanal låter den dig omedelbart dela skärmen med stöd för skrivbordskällor, fönster och videoingångsenheter (kameror, inspelningskort).",
+            description: "Skärmdelning direkt när du går med i en röstkanal med stöd för skrivbordskällor, fönster och videoingångsenheter (kameror, inspelningskort)",
             modal: {
                 linux: {
                     title: "För Linux",
-                    body: "Om du använder Wayland aktiveras bara alternativet för skärmdelning.",
-                    bodyTwo: "Det kanske fungerar eller inte fungerar för X11 :shrug:"
+                    body: "För Wayland dyker det bara upp skärmdelningsvalet",
+                    bodyTwo: "För X11 kanske det fungerar eller inte fungerar :shrug:"
                 },
                 videoDevices: {
                     title: "Videoingångsenheter",
-                    body: "Stöder kameror och inspelningskort (t.ex. Elgato HD60X) när de är aktiverade i inställningarna."
+                    body: "Stöder kameror och inspelningskort (som Elgato HD60X) när de är aktiverade i inställningarna"
                 },
                 regardingSound: {
-                    title: "Om ljud- och förhandsgranskningsinställningar",
-                    body: "Vi använder samma inställningar som Discord använder för att förhandsgranska strömmen och besluta om ljud ska aktiveras."
+                    title: "Angående ljud- och förhandsvisningsinställningar",
+                    body: "Vi använder inställningarna som ställts in och används av Discord för att bestämma om förhandsvisning av stream och ljud ska aktiveras eller inte"
                 }
             },
             option: {
                 streamMedia: {
-                    label: "Mediekälla kommer att släppas",
-                    description: "Om den inte hittas återställs den till huvudskärmen.",
+                    label: "Mediakälla att streama",
+                    description: "Återställs till huvudskärmen om den inte hittas",
                     loading: "Laddar mediekällor...",
                     none: "Inga mediekällor hittades",
-                    placeholder: "Välj en mediekälla att publicera"
+                    placeholder: "Välj en mediekälla att streama"
                 },
                 includeVideoDevices: {
                     label: "Inkludera videoenheter",
@@ -5479,90 +5479,90 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 autoDeafen: {
                     label: "Auto Deafen",
-                    description: "Automatiskt döva när du går med i en röstkanal (den tystar dig också)"
+                    description: "Automatiskt döva när du går med i en röstkanal (stänger också av dig)"
                 },
                 instantScreenshare: {
                     label: "Omedelbar skärmdelning",
-                    description: "Aktiverar funktionen för automatisk skärmdelning"
+                    description: "Aktiverar automatisk skärmdelningsfunktion"
                 },
                 keybindScreenshare: {
-                    label: "Skärmdelning med snabbtangent",
-                    description: "Delar skärm med snabbtangent i Discord-snabbtangentinställningar"
+                    label: "Keybind Screenshare",
+                    description: "Skärmdelning med tangentbindning i Discord-nyckelbindningsinställningar"
                 },
                 focusDiscord: {
-                    label: "Fokus på Discord",
-                    description: "Starta skärmdelning med tangentbindning endast när Discord har fokus"
+                    label: "Fokus Discord",
+                    description: "Starta bara skärmdelning med tangentbindning när Discord är fokuserat"
                 },
                 toolboxManagement: {
                     label: "Verktygslådanhantering",
-                    description: "Aktivera/inaktivera Instant Screen Sharing"
+                    description: "Aktivera/inaktivera Instant Screenshare"
                 }
             },
             toolbox: {
                 label: "Omedelbar skärmdelning",
-                toast: "Direkt skärmdelning {{state}}",
-                enabled: "Effektiv",
+                toast: "Omedelbar skärmdelning {{state}}",
+                enabled: "Aktiverad",
                 disabled: "Inaktiverad"
             }
         },
         invisibleChat: {
             name: "InvisibleChat",
-            description: "Kryptera dina meddelanden utan att väcka misstankar!",
+            description: "Kryptera dina meddelanden på ett icke-misstänkt sätt!",
             option: {
                 savedPasswords: {
                     label: "Sparade lösenord",
-                    description: "Sparade lösenord (kommaseparerade)"
+                    description: "Sparade lösenord (avgränsade med , )"
                 }
             },
             button: {
                 encrypt: "Kryptera meddelande",
-                decrypt: "Dechiffrera meddelandet",
+                decrypt: "Dekryptera meddelande",
                 hidden: "Hidden Message Indicator (InvisibleChat)"
             },
             tooltip: {
-                hidden: "Det finns ett dolt meddelande i detta meddelande! (InvisibleChat)"
+                hidden: "Detta meddelande har ett dolt meddelande! (InvisibleChat)"
             },
             embed: {
                 title: "Dekrypterat meddelande",
-                footer: "Skickat via InvisibleChat"
+                footer: "Skickat med InvisibleChat"
             },
             modal: {
                 encrypt: {
                     title: "Kryptera meddelande",
-                    secret: "Hemligt meddelande",
+                    secret: "Hemlighet",
                     cover: "Omslag (2 eller fler ord!!)",
                     password: "Lösenord",
-                    dontUseCover: "Använda ett lock",
+                    dontUseCover: "Använd inte ett skydd",
                     send: "Skicka",
                     cancel: "Avboka"
                 },
                 decrypt: {
-                    title: "Dechiffrera meddelandet",
-                    with: "Krypterat meddelande",
+                    title: "Dekryptera meddelande",
+                    with: "Meddelande med kryptering",
                     password: "Lösenord",
-                    decrypt: "Dechiffrera",
+                    decrypt: "Dekryptera",
                     cancel: "Avboka"
                 }
             }
         },
         inviteDefaults: {
             name: "InviteDefaults",
-            description: "Låter dig redigera standardvärden när du skapar serverinbjudningar.",
+            description: "Låter dig redigera standardvärdena när du skapar serverinbjudningar.",
             option: {
                 inviteDuration: {
                     label: "Inbjudan varaktighet",
                     description: "Standardvaraktighet för serverinbjudningar",
                     thirtyMinutes: "30 minuter",
-                    oneHour: "1 ögonblick",
-                    sixHours: "6 ögonblick",
-                    twelveHours: "12 ögonblick",
+                    oneHour: "1 timme",
+                    sixHours: "6 timmar",
+                    twelveHours: "12 timmar",
                     oneDay: "1 dag",
                     sevenDays: "7 dagar",
-                    forever: "Obestämd"
+                    forever: "Evigt"
                 },
                 maxUses: {
-                    label: "Maximal användning",
-                    description: "Standard maximal användning för serverinbjudningar",
+                    label: "Max användningsområden",
+                    description: "Förinställd maximal användning för serverinbjudningar",
                     unlimited: "Obegränsat",
                     one: "1",
                     five: "5",
@@ -5573,39 +5573,39 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 temporaryMembership: {
                     label: "Tillfälligt medlemskap",
-                    description: "Standardinställning för tillfälligt medlemskap för serverinbjudningar"
+                    description: "Tillfälligt standardmedlemskap för serverinbjudningar"
                 }
             }
         },
         ircColors: {
             name: "IrcColors",
-            description: "Gör färgerna på användarnamn i chatten unika, som i IRC-klienter.",
+            description: "Gör användarnamnsfärger i chatten unika, som i IRC-klienter",
             option: {
                 lightness: {
-                    label: "Ljus",
-                    description: "Ljusstyrka (%). Om färgerna verkar för ljusa eller mörka, ändra dem."
+                    label: "Lätthet",
+                    description: "Lätthet, i %. Ändra om färgerna är för ljusa eller för mörka"
                 },
                 memberListColors: {
-                    label: "Medlemslista Färger",
-                    description: "Ändra rollfärger i medlemslistan."
+                    label: "Färger på medlemslistan",
+                    description: "Ersätt rollfärger i medlemslistan"
                 },
                 applyColorOnlyToUsersWithoutColor: {
-                    label: "Använd endast för användare utan färg",
-                    description: "Tillämpa färg på användare vars färg inte är fördefinierad."
+                    label: "Använd endast färg på användare utan färg",
+                    description: "Tillämpa färger endast på användare som inte har en fördefinierad färg"
                 },
                 applyColorOnlyInDms: {
-                    label: "Ansök endast i privata meddelanden",
-                    description: "Tillämpa färger endast på privata meddelanden; applikation på servrar."
+                    label: "Applicera endast färg i DM",
+                    description: "Använd endast färger i direktmeddelanden; applicera inte färger på servrar."
                 }
             }
         },
         iRememberYou: {
-            name: "Jag kommer ihåg dig",
-            description: "Den registrerar lokalt alla du kommunicerar med (inklusive servrar), vilket skyddar mot förlust.",
+            name: "IRememberYou",
+            description: "Lokalt sparar alla du har kommunicerat med (inklusive servrar), i händelse av förlust",
             section: {
-                description: "Den visar listan över ägarna till servrarna du nämnde, svarade på, är medlemmar av (serverägare*) eller medlemmarna på servrarna du är på.",
-                empty: "För närvarande tomt.",
-                tooltip: "{{user}} uppdaterad på {{updatedAtContent}}",
+                description: "Tillhandahåller en lista över användare som du har nämnt eller svarat på, eller de som äger servrarna du tillhör (serverägare*), eller är medlemmar i din guild",
+                empty: "Det är tomt just nu.",
+                tooltip: "{{user}}, uppdaterad vid {{updatedAtContent}}",
                 owner: "Serverägare",
                 iRememberYou: "Jag minns dig"
             },
@@ -5616,38 +5616,38 @@ const translations: MatchStructure<typeof enTranslations> = {
                 view: "Visa profil"
             },
             modal: {
-                title: "Regulator",
-                filter: "Filtrera efter tagg, användarnamn eller ID",
+                title: "Redaktör",
+                filter: "Filtrera efter tagg, användarnamn, ID",
                 button: {
-                    validate: "Verifiera och spara",
+                    validate: "Validera och spara",
                     cancel: "Avboka",
                     openEditor: "Öppna Editor",
-                    resetData: "Återställ data",
+                    resetData: "Återställ lagring",
                     sure: "Är du säker?"
                 }
             }
         },
         jumpTo: {
-            name: "Hoppa till",
-            description: "Lägger till alternativ i högerklicksmenyn för att hoppa till början eller slutet av en kanal eller ett privat meddelande.",
+            name: "JumpTo",
+            description: "Lägger till snabbmenyalternativ för att hoppa till början eller botten av en kanal/DM",
             context: {
-                top: "Gå till första inlägget",
-                bottom: "Gå till Senaste inlägget",
+                top: "Hoppa till första meddelandet",
+                bottom: "Hoppa till senaste meddelandet",
                 noMessages: "Inga meddelanden hittades från denna användare i den här kanalen.",
-                searchFailed: "Ett fel uppstod vid sökning efter meddelanden."
+                searchFailed: "Det gick inte att söka efter meddelanden."
             }
         },
         keepCurrentChannel: {
             name: "KeepCurrentChannel",
-            description: "När du byter konto eller laddar Discord försöker den återgå till kanalen du var på."
+            description: "Försök att navigera till kanalen du var i innan du bytte konto eller laddade Discord."
         },
         keyboardSounds: {
-            name: "Tangentbordsljud",
-            description: "OperaGX eller osu när du skriver med tangentbordet! Lägger till ljudeffekter.",
+            name: "KeyboardSounds",
+            description: "Lägger till OperaGX eller osu! ljudeffekter när du skriver på tangentbordet.",
             option: {
                 volume: {
-                    label: "Ljudnivå",
-                    description: "Volym på tangentbordet"
+                    label: "Volym",
+                    description: "Volymen på tangentbordet låter"
                 },
                 soundPack: {
                     label: "Ljudpaket",
@@ -5658,19 +5658,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         keywordNotify: {
-            name: "Keyword Notify",
-            description: "Skickar aviseringar om meddelanden som matchar vissa nyckelord eller regexuttryck.",
+            name: "KeywordNotify",
+            description: "Skickar ett meddelande om ett givet meddelande matchar vissa nyckelord eller regexes",
             idHolder: "ID",
             keywordEntry: "Nyckelordsinmatning",
             regexHolder: "exempel|regex",
-            ignoreCase: "Skiftlägesokänslig",
-            whiteblackLabel: "White List / Black List",
+            ignoreCase: "Ignorera fallet",
+            whiteblackLabel: "Vitlista/svartlista",
             tab: {
                 title: "Nyckelord",
                 clearAll: "Rensa alla"
             },
             button: {
-                addId: "ID Ekle",
+                addId: "Lägg till ID",
                 addKeyword: "Lägg till nyckelord"
             },
             listTypeSelector: {
@@ -5684,8 +5684,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Ignorera meddelanden från bots"
                 },
                 amountToKeep: {
-                    label: "Belopp att spara",
-                    description: "Antal meddelanden att behålla i loggen"
+                    label: "Belopp att behålla",
+                    description: "Antal meddelanden att spara i loggen"
                 },
                 keywords: {
                     label: "Nyckelord",
@@ -5695,21 +5695,21 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         lastOnline: {
             name: "LastOnline",
-            description: "Lägger till en sista online-indikator under användarnamn i din DM-lista, server- och grupp-DM-medlemslistor.",
+            description: "Lägger till en sista online-indikator under användarnamn i din DM-lista och guild och GDM-medlemslista",
             unit: {
                 d: "dag",
-                h: "ögonblick",
-                m: "minuter"
+                h: "timme",
+                m: "minut"
             },
-            online: "{{formattedTime}} var online tidigare"
+            online: "Online för {{formattedTime}} sedan"
         },
         listenBrainzRPC: {
-            name: "Lyssna BrainzRPC",
-            description: "ListenBrainz är ett litet plugin för rik närvaro.",
+            name: "ListenBrainzRPC",
+            description: "Litet plugin för ListenBrainz rik närvaro",
             about: {
                 title: "Om MusicBrainz API",
-                description: "MusicBrainz API kräver ingen API-nyckel, men det kräver en {{länk}}. För de flesta användare räcker det med en e-postadress.",
-                userAgent: "en meningsfull user-agent-sträng"
+                description: "MusicBrainz API kräver ingen API-nyckel, men det kräver en {{link}}. För de flesta borde det räcka med en e-postadress.",
+                userAgent: "meningsfull användaragentsträng"
             },
             option: {
                 username: {
@@ -5718,87 +5718,87 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 mbContact: {
                     label: "MB kontakt",
-                    description: "ListenBrainz kontaktinformation"
+                    description: "LyssnaBrainz kontakt"
                 },
                 shareUsername: {
                     label: "Dela användarnamn",
-                    description: "Visa ListenBrainz profillänk (endast synlig för andra användare)"
+                    description: "Visa länk till ListenBrainz profil (kan bara vara synlig för andra användare)"
                 },
                 shareSong: {
-                    label: "Dela låten",
-                    description: "Visa länk till aktuell låt på ListenBrainz (endast synlig för andra användare)"
+                    label: "Dela låt",
+                    description: "Visa länk till aktuell låt på ListenBrainz (kan bara vara synlig för andra användare)"
                 },
                 hideWithSpotify: {
-                    label: "Göm medan Spotify är aktivt",
-                    description: "Dölj ListenBrainz-status om Spotify körs"
+                    label: "Göm dig med Spotify",
+                    description: "Dölj ListenBrainz närvaro om Spotify körs"
                 },
                 hideWithActivity: {
-                    label: "Dölj om det finns andra händelser",
-                    description: "Dölj ListenBrainz-status om du har en annan status"
+                    label: "Göm med aktivitet",
+                    description: "Dölj ListenBrainz närvaro om du har någon annan närvaro"
                 },
                 useTimeBar: {
                     label: "Använd Time Bar",
-                    description: "Visa spårets längd som tidsfält (lyssningsstatus måste användas)"
+                    description: "Använd spårets längd för att visa en tidsindikator (måste använda lyssningsstatus)"
                 },
                 statusName: {
                     label: "Status Namn",
-                    description: "Undantagstext"
+                    description: "Anpassad statustext"
                 },
                 nameFormat: {
                     label: "Namnformat",
-                    description: "Hur man visar låt och artistnamn i statusnamn",
-                    custom: "Använd anpassad statustext",
-                    artistSong: "använd \"artist - sång\"-format",
-                    songArtist: "använd formatet \"låt - artist\".",
-                    artistOnly: "Använd bara artistnamnet",
-                    songOnly: "Använd bara låtens namn",
-                    albumName: "Använd albumnamn (returerar undantagstext om låten inte har ett album)"
+                    description: "Visa namn på låt och artist i statusnamn",
+                    custom: "Använd anpassat statusnamn",
+                    artistSong: "Använd formatet 'artist - sång'",
+                    songArtist: "Använd formatet \"låt - artist\"",
+                    artistOnly: "Använd endast artistnamn",
+                    songOnly: "Använd endast låtens namn",
+                    albumName: "Använd albumnamn (faller tillbaka till anpassad statustext om låten inte har något album)"
                 },
                 useListeningStatus: {
                     label: "Använd Lyssningsstatus",
-                    description: "Visa \"Lyssnar\"-status istället för \"Spelar\""
+                    description: "Visa statusen \"Lyssnar på\" istället för \"Spelar\""
                 },
                 missingArt: {
-                    label: "Omslagsbild saknas",
-                    description: "När albumet eller albumomslaget saknas",
+                    label: "Saknade konst",
+                    description: "När album eller albumomslag saknas",
                     listenbrainzLogo: "Använd den stora ListenBrainz-logotypen",
-                    generic: "Använd en allmän platshållare"
+                    generic: "Använd generisk platshållare"
                 },
                 useLogo: {
-                    label: "Kullan logotyp",
-                    description: "Visa ListenBrainz logotyp på skivomslaget"
+                    label: "Använd logotyp",
+                    description: "Visa ListenBrainz logotyp på albumomslaget"
                 }
             }
         },
         loadingQuotes: {
-            name: "Laddar citat",
-            description: "Ändrar Discords laddningscitat",
+            name: "LoadingQuotes",
+            description: "Ersätt Discords laddningscitat",
             option: {
                 replaceEvents: {
-                    label: "Ändra händelser",
-                    description: "Bör detta plugin också tillämpas under evenemang med speciella evenemangstema citat? (t.ex. Halloween)"
+                    label: "Ersätt händelser",
+                    description: "Bör detta plugin också gälla under evenemang med speciella evenemangstema citat? (t.ex. Halloween)"
                 },
                 enablePluginPresetQuotes: {
-                    label: "Aktivera plugin-citat",
-                    description: "Aktivera offerter som utarbetats av detta plugin"
+                    label: "Aktivera förinställda citat för plugin",
+                    description: "Aktivera citattecken förinställda av detta plugin"
                 },
                 enableDiscordPresetQuotes: {
-                    label: "Aktivera Discord-citat",
-                    description: "Aktivera Discord-bearbetade citat (inklusive evenemangscitat, under evenemang)"
+                    label: "Aktivera Discord förinställda citat",
+                    description: "Aktivera Discords förinställda citat (inklusive evenemangscitat, under evenemang)"
                 },
                 additionalQuotes: {
                     label: "Ytterligare citat",
-                    description: "Ytterligare speciella citat som kan förekomma separeras av följande avgränsare"
+                    description: "Ytterligare anpassade citat kan eventuellt visas, åtskilda av avgränsaren nedan"
                 },
                 additionalQuotesDelimiter: {
-                    label: "Ytterligare offertavskiljare",
-                    description: "Separator för ytterligare offerter"
+                    label: "Ytterligare citatavgränsare",
+                    description: "Avgränsare för ytterligare offerter"
                 }
             }
         },
         loginWithQR: {
-            name: "Logga inMedQR",
-            description: "Precis som på mobilen kan du logga in på en annan enhet genom att skanna QR-koden för inloggning!",
+            name: "LoginWithQR",
+            description: "Låter dig logga in på en annan enhet genom att skanna en QR-kod för inloggning, precis som på mobilen!",
             option: {
                 scanQr: {
                     label: "Skanna QR-koden",
@@ -5806,24 +5806,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                     notEnabled: "Aktivera plugin-programmet och starta om din klient för att skanna en QR-kod för inloggning"
                 }
             },
-            neverScan: "Skanna aldrig en QR-kod för inloggning från en annan användare eller app.",
-            hold: "Tryck och håll ned för att bekräfta inmatningen",
+            neverScan: "Skanna aldrig en QR-kod för inloggning från en annan användare eller applikation.",
+            hold: "Håll ned för att bekräfta inloggningen",
             scanning: "Scanning...",
             stopScanning: "Sluta skanna",
             usingWebcam: "Skanna med webbkamera",
-            dragDrop: "Dra och släpp en bild här eller klicka för att välja en bild",
-            orPaste: "Eller klistra in en bild från urklippet!"
+            dragDrop: "Dra och släpp en bild här, eller klicka för att välja en bild",
+            orPaste: "Eller klistra in en bild från ditt urklipp!"
         },
         mediaPlaybackSpeed: {
-            name: "MediaPlayback Speed",
-            description: "Låter dig ändra (standard) uppspelningshastighet för mediainbäddningar.",
+            name: "MediaPlaybackSpeed",
+            description: "Tillåter att ändra (standard) uppspelningshastighet för mediainbäddningar",
             playbackSpeed: "Uppspelningshastighet",
             context: {
                 label: "Uppspelningshastighetskontroll"
             },
             option: {
                 defaultVoiceMessageSpeed: {
-                    label: "Standardpris för röstmeddelanden",
+                    label: "Standardhastighet för röstmeddelande",
                     description: "Röstmeddelanden"
                 },
                 defaultVideoSpeed: {
@@ -5832,108 +5832,108 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 defaultAudioSpeed: {
                     label: "Standardljudhastighet",
-                    description: "ljudfiler"
+                    description: "Ljud"
                 }
             }
         },
         memberCount: {
-            name: "Antal medlemmar",
-            description: "Visar antalet onlinemedlemmar på servern, totalt antal medlemmar och användare i röstkanaler — i medlemslistan och verktygstipset.",
+            name: "MemberCount",
+            description: "Visar antalet onlinemedlemmar, totalt antal medlemmar och användare i röstkanaler på servern — i medlemslistan och verktygstipset.",
             option: {
                 toolTip: {
                     label: "Verktygstips",
-                    description: "Visa medlemsantal i serververktygstips"
+                    description: "Visa medlemsantal på serververktygstipset"
                 },
                 memberList: {
                     label: "Medlemslista",
-                    description: "Visa antalet medlemmar högst upp i medlemslistan"
+                    description: "Visa medlemsantal i medlemslistans rubrik"
                 },
                 voiceActivity: {
                     label: "Röstaktivitet",
-                    description: "Visa antalet användare på röstkanaler"
+                    description: "Visa antalet användare i röstkanaler"
                 }
             },
-            onlineThisChannel: "{{formattedOnlineCount}} är online på den här kanalen",
-            totalMembers: "Totalt {{formattedTotalCount}} medlemmar på servern",
-            totalVoice: "Medlem på {{formattedVoiceCount}} röstkanaler"
+            onlineThisChannel: "{{formattedOnlineCount}} online i den här kanalen",
+            totalMembers: "{{formattedTotalCount}} totalt servermedlemmar",
+            totalVoice: "{{formattedVoiceCount}} medlemmar i rösten"
         },
         mentionAvatars: {
-            name: "NämnAvatarer",
-            description: "Visar användaravatarer och rollikoner i omnämnanden.",
+            name: "MentionAvatars",
+            description: "Visar användaravatarer och rollikoner i omnämnanden",
             option: {
                 showAtSymbol: {
-                    label: "Visa @-ikonen",
-                    description: "Bestämmer om @-symbolen visas i användarnamn."
+                    label: "Visa @ Symbol",
+                    description: "Om @-symbolen ska visas på användarnas uppgifter"
                 }
             }
         },
         meow: {
-            name: "Mjau",
-            description: "Lägger till en knapp i chattfältet för att jama i chatten.",
+            name: "Meow",
+            description: "Lägger till en chatbar-knapp för att jama i chatten",
             button: {
-                meow: "Miyav"
+                meow: "Mjau"
             }
         },
         messageBurst: {
             name: "MessageBurst",
-            description: "Den slår samman meddelanden som skickats inom en viss tidsperiod med ditt tidigare meddelande, om inte någon annan har skickat ett meddelande före dig.",
+            description: "Slår samman meddelanden som skickats inom en tidsperiod med ditt tidigare skickade meddelande om ingen annan skickar ett meddelande före dig.",
             option: {
                 timePeriod: {
-                    label: "Tidsintervall",
-                    description: "Sammanfogningstid (i sekunder)."
+                    label: "Tidsperiod",
+                    description: "Varaktigheten av skurar (i sekunder)."
                 },
                 shouldMergeWithAttachment: {
-                    label: "Kombinera med bilagor",
-                    description: "Ska meddelanden slås samman om det finns en bilaga (fil/bild) i det sista meddelandet?"
+                    label: "Slå samman med bilagor",
+                    description: "Ska meddelandet slås samman om det sista meddelandet har en bilaga?"
                 },
                 useSpace: {
                     label: "Använd Space",
-                    description: "Om du vill lägga till mellanslag mellan meddelanden istället för att flytta till en ny rad vid sammanslagning."
+                    description: "Om du vill lägga till ett mellanslag mellan meddelanden vid sammanslagning istället för nya rader."
                 }
             }
         },
         messageClickActions: {
             name: "MessageClickActions",
-            description: "Om du håller ner backstegstangenten och klickar kan du ta bort, dubbelklicka för att redigera eller svara.",
+            description: "Håll ned Backsteg och klicka för att ta bort, dubbelklicka för att redigera/svara",
             option: {
                 singleClickAction: {
-                    label: "Åtgärd med ett klick",
-                    description: "Enkelklicksåtgärd (på dina egna meddelanden)"
+                    label: "Enkla klickåtgärd",
+                    description: "Åtgärd vid ett enda klick (dina meddelanden)"
                 },
                 singleClickModifier: {
-                    label: "One Click Modifier",
-                    description: "Modifierare krävs för åtgärd med ett klick (i dina egna meddelanden)"
+                    label: "Single Click Modifier",
+                    description: "Modifierare krävs för enkelklicksåtgärd (dina meddelanden)"
                 },
                 singleClickOthersAction: {
-                    label: "Enklicksåtgärd (Övriga)",
-                    description: "Enkelklicksåtgärd (på andras meddelanden)"
+                    label: "Åtgärd med enkla klick (Övriga)",
+                    description: "Åtgärd vid enkelklick (andras meddelanden)"
                 },
                 singleClickOthersModifier: {
-                    label: "One Click Modifier (Andra)",
-                    description: "Modifierare krävs för en klickåtgärd (i andras inlägg)"
+                    label: "Single Click Modifier (Andra)",
+                    description: "Modifierare krävs för enkelklicksåtgärd (andras meddelanden)"
                 },
                 doubleClickAction: {
                     label: "Dubbelklicka Åtgärd",
-                    description: "Dubbelklicka på dina egna meddelanden"
+                    description: "Åtgärd vid dubbelklick (dina meddelanden)"
                 },
                 doubleClickOthersAction: {
                     label: "Dubbelklicksåtgärd (Andra)",
-                    description: "Dubbeltryck på åtgärder på andras meddelanden"
+                    description: "Åtgärd vid dubbelklick (andras meddelanden)"
                 },
                 doubleClickModifier: {
                     label: "Dubbelklicka Modifierare",
-                    description: "Modifierare krävs för dubbelklick"
+                    description: "Modifierare krävs för dubbelklicksåtgärder"
                 },
                 tripleClickAction: {
-                    label: "Treklicksåtgärd",
-                    description: "Treklicksåtgärd"
+                    label: "Triple Click Action",
+                    description: "Åtgärd vid trippelklick"
                 },
                 tripleClickModifier: {
-                    label: "Treklicksmodifierare",
-                    description: "Modifierare krävs för tre klickåtgärder"
+                    label: "Triple Click Modifier",
+                    description: "Modifierare krävs för trippelklick"
                 },
                 reactEmoji: {
-                    label: "Reaktion Emoji",
+                    label: "Reagera Emoji",
                     description: "Emoji att använda för reaktionsåtgärder"
                 },
                 addAdditionalReacts: {
@@ -5941,8 +5941,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Lägg också till ytterligare konfigurerade reaktions-emojis"
                 },
                 additionalReactEmojis: {
-                    label: "Ytterligare reaktions-emojis",
-                    description: "Ytterligare emojis som ska läggas till när reaktionsåtgärden används (avgränsade med kommatecken/enter, max {{count}})"
+                    label: "Ytterligare React Emojis",
+                    description: "Ytterligare emojis att lägga till när du använder React action (komma/nyrad separerad, max {{count}})"
                 },
                 disableInDms: {
                     label: "Inaktivera i DM",
@@ -5954,32 +5954,32 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 clickTimeout: {
                     label: "Klicka på Timeout",
-                    description: "Timeout (ms) för att skilja mellan dubbel- och trippelklick"
+                    description: "Timeout för att skilja dubbel- och trippelklick (ms)"
                 },
                 doubleClickHoldThreshold: {
-                    label: "Dubbelklicka på retentionströskel",
-                    description: "Maximal hålltid (ms) för dubbelklicksåtgärder. Tillåter att textvalet förblir längre"
+                    label: "Dubbelklicka på Håll tröskel",
+                    description: "Max hålltid för dubbelklicksåtgärder (ms). Om du håller längre kan du välja text"
                 },
                 deferDoubleClickForTriple: {
-                    label: "Fördröj dubbelklick för trippelklick",
-                    description: "Fördröj dubbelklick för att tillåta trippelklick (trippelklick är inaktiverat om av)"
+                    label: "Förskjut dubbelklick för trippel",
+                    description: "Fördröj dubbelklick för att tillåta trippelklick (inaktiverar trippelklick när av)"
                 },
                 selectionHoldTimeout: {
                     label: "Val Håll Timeout",
-                    description: "Timeout (ms) för att tillåta textval"
+                    description: "Timeout för att tillåta textval (ms)"
                 },
                 quoteWithReply: {
-                    label: "Svara med citat",
+                    label: "Citat med svar",
                     description: "När du citerar, svara också på meddelandet"
                 },
                 useSelectionForQuote: {
                     label: "Använd urval för offert",
-                    description: "När du citerar, använd vald text (om tillgänglig)"
+                    description: "När du citerar, använd vald text om tillgänglig"
                 }
             },
             actions: {
                 none: "Ingen",
-                delete: "Sil",
+                delete: "Radera",
                 copyLink: "Kopiera länk",
                 copyID: "Kopiera ID",
                 copyContent: "Kopiera innehåll",
@@ -5987,54 +5987,54 @@ const translations: MatchStructure<typeof enTranslations> = {
                 edit: "Redigera",
                 reply: "Svar",
                 react: "Reagera",
-                openThread: "Öppna ämne",
-                openTab: "Öppna i Tab",
-                quote: "citationstecken",
-                pin: "Fäst den"
+                openThread: "Öppna tråden",
+                openTab: "Öppna flik",
+                quote: "Citationstecken",
+                pin: "Stift"
             },
             missingPermissions: {
-                react: "Det går inte att reagera: Behörigheter saknas",
-                pin: "Kan inte fixa: Saknade behörigheter",
+                react: "Kan inte reagera: Behörigheter saknas",
+                pin: "Det går inte att fästa: Behörigheter saknas",
             },
-            cannotQuote: "Denna meddelandetyp kan inte citeras",
+            cannotQuote: "Det går inte att citera den här meddelandetypen",
             copy: {
-                messageId: "Meddelande-ID kopierades!",
+                messageId: "Meddelande-ID har kopierats!",
                 messageContent: "Meddelandets innehåll har kopierats!",
-                userId: "Användar-ID kopierades!"
+                userId: "Användar-ID kopierat!"
             },
             linkCopied: "Länken kopierad!"
         },
         messageColors: {
-            name: "Meddelandefärger",
-            description: "Visar färgkoder i meddelanden, till exempel #FF0042.",
+            name: "MessageColors",
+            description: "Visar färgkoder som #FF0042 inuti meddelanden",
             option: {
                 renderType: {
-                    label: "Visualiseringstyp",
-                    description: "Bestämmer hur färger visas",
-                    textColor: "textfärg",
-                    block: "block bredvid",
-                    backgroundColor: "bakgrundsfärg"
+                    label: "Rendertyp",
+                    description: "Hur man återger färger",
+                    textColor: "Textfärg",
+                    block: "Block i närheten",
+                    backgroundColor: "Bakgrundsfärg"
                 },
                 enableShortHexCodes: {
                     label: "Aktivera korta hex-koder",
-                    description: "Aktivera hexadecimala koder med tre tecken som #39f"
+                    description: "Aktivera hex-kod med tre tecken som #39f"
                 },
                 blockView: {
                     label: "Blockvisningstyp",
-                    description: "Bestämmer hur färgblock visas",
+                    description: "Hur man visar färgblock",
                     right: "Höger sida",
-                    left: "Vänster",
-                    both: "båda sidor"
+                    left: "Vänster sida",
+                    both: "Båda sidor"
                 }
             }
         },
         messageFetchTimer: {
             name: "MessageFetchTimer",
-            description: "Visar hur lång tid det tar för den aktuella kanalens meddelanden att laddas.",
+            description: "Visar hur lång tid det tog att hämta meddelanden för den aktuella kanalen",
             option: {
                 showIcon: {
                     label: "Visa ikon",
-                    description: "Visa ikonen för laddningstid i meddelandefältet"
+                    description: "Visa ikonen för hämtningstid i meddelandefältet"
                 },
                 showMs: {
                     label: "Visa millisekunder",
@@ -6045,35 +6045,35 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Ikonfärg (CSS-färgvärde)"
                 }
             },
-            loaded: "Meddelanden laddade om {{time}} ms ({{timeAgo}})",
-            day: "dagar sedan",
-            hour: "timmar sedan",
-            minute: "minuter sedan",
-            justNow: "Nu"
+            loaded: "Meddelanden laddade om {{time}}ms ({{timeAgo}})",
+            day: "dag{{s}} sedan",
+            hour: "timme{{s}} sedan",
+            minute: "minut{{s}} sedan",
+            justNow: "just nu"
         },
         messageLatency: {
             name: "MessageLatency",
-            description: "Lägger till en indikator för meddelanden som tar ≥n sekunder att skicka.",
+            description: "Visar en indikator för meddelanden som tog ≥n sekunder att skicka",
             day: "dag",
-            days: "dag",
-            hour: "ögonblick",
-            hours: "ögonblick",
-            minute: "minuter",
+            days: "dagar",
+            hour: "timme",
+            hours: "timmar",
+            minute: "minut",
             minutes: "minuter",
             second: "andra",
-            seconds: "andra",
+            seconds: "sekunder",
             millisecond: "millisekund",
-            milliseconds: "millisekund",
-            and: "ve",
-            oldKotlinDetected: "Användaren misstänks använda en föråldrad Discord Android-klient.",
-            ahead: "Den här användarens tid är {{delta}} före.",
-            delay: "Detta meddelande skickades med {{delta}} fördröjning.",
+            milliseconds: "millisekunder",
+            and: "och",
+            oldKotlinDetected: "Användaren misstänks vara på en gammal Discord Android-klient.",
+            ahead: "Den här användarens klocka är {{delta}} före.",
+            delay: "Det här meddelandet skickades med en fördröjning på {{delta}}.",
             delayedMessage: "Försenat meddelande",
-            oldAndroidClient: "Legacy Discord Android-klient",
+            oldAndroidClient: "Gammal Discord Android-klient",
             option: {
                 latency: {
-                    label: "Dröjsmål",
-                    description: "Tröskelvärde i sekunder för fördröjningsindikatorn"
+                    label: "Latens",
+                    description: "Tröskel i sekunder för latensindikator"
                 },
                 detectDiscordKotlin: {
                     label: "Upptäck Discord Kotlin",
@@ -6084,53 +6084,53 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Visa millisekunder"
                 },
                 ignoreSelf: {
-                    label: "Ignorera mig själv",
-                    description: "Lägg till indikatorer i dina egna meddelanden"
+                    label: "Ignorera självet",
+                    description: "Lägg inte till indikator i dina egna meddelanden"
                 }
             }
         },
         messageLinkEmbeds: {
             name: "MessageLinkEmbeds",
-            description: "Lägger till en förhandsgranskning av meddelanden som innehåller en länk till ett annat meddelande.",
+            description: "Lägger till en förhandsvisning av meddelanden som länkar till ett annat meddelande",
             option: {
                 messageBackgroundColor: {
                     label: "Meddelande bakgrundsfärg",
                     description: "Bakgrundsfärg för meddelanden i rika inbäddningar"
                 },
                 automodEmbeds: {
-                    label: "Automod Begravningar",
-                    description: "Använd automod-inbäddningar istället för rika inbäddningar (mindre men innehåller mindre information)",
+                    label: "Automod inbäddar",
+                    description: "Använd automod-inbäddningar istället för rika inbäddningar (mindre men mindre info)",
                     always: "Använd alltid automod embeds",
-                    prefer: "Föredrar Automod-inbäddningar, men använd rika inbäddningar om visst innehåll inte kan visas",
+                    prefer: "Föredrar automod-inbäddningar, men använd rika inbäddningar om visst innehåll inte kan visas",
                     never: "Använd aldrig automod-inbäddningar"
                 },
                 listMode: {
                     label: "Listläge",
-                    description: "Bestäm om ID-listan ska användas som en svartlista eller vitlista",
+                    description: "Om ID-listan ska användas som svartlista eller vitlista",
                     blacklist: "Svartlista",
                     whitelist: "Vitlista"
                 },
                 idList: {
                     label: "ID-lista",
-                    description: "Server/kanal/användar-ID:n som ska läggas till i svartlistan eller vitlistan (avgränsade med komma)"
+                    description: "Guild/kanal/användar-ID:n att svartlista eller vitlista (separera med komma)"
                 },
                 clearMessageCache: {
                     label: "Rensa meddelandecache",
-                    description: "Rensa länkat meddelandecache"
+                    description: "Rensa den länkade meddelandecachen"
                 }
             },
             noContent: {
-                noAttachments: "inget innehåll {{count}} inbäddat meddelande",
-                noEmbeds: "inget innehåll {{count}} tillägg",
-                both: "inget innehåll, {{attachments}} bilagor och {{embeds}} inbäddade meddelanden"
+                noAttachments: "inget innehåll {{count}} bädda in{{s}}",
+                noEmbeds: "inget innehåll {{count}} bilaga{{s}}",
+                both: "inget innehåll, {{attachments}} bilaga{{attachmentsS}} och {{embeds}} inbädda{{embedsS}}"
             },
-            dm: "Privat meddelande",
-            groupDm: "Gruppmeddelande",
-            server: "Presentatör"
+            dm: "Direktmeddelande",
+            groupDm: "Grupp DM",
+            server: "Server"
         },
         messageLinkTooltip: {
             name: "MessageLinkTooltip",
-            description: "Lägger till ett verktygstips och meddelandeförhandsvisning när du håller muspekaren över meddelandelänkar, svar och vidarebefordrade meddelanden.",
+            description: "Lägger till ett verktygstips med en förhandsgranskning av meddelanden när du håller muspekaren över meddelandelänkar, svar och vidarebefordrade meddelanden.",
             loading: "Belastning...",
             option: {
                 onLink: {
@@ -6142,60 +6142,60 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Visa verktygstips när du håller muspekaren över meddelandesvar"
                 },
                 onForward: {
-                    label: "På det överförda meddelandet",
+                    label: "På Framåt",
                     description: "Visa verktygstips när du håller muspekaren över vidarebefordrade meddelanden"
                 },
                 display: {
-                    label: "Utseende",
-                    description: "Utseende stil",
+                    label: "Visa",
+                    description: "Visa stil",
                     auto: "Samma som meddelande",
                     compact: "Kompakt",
-                    cozy: "Bekväm"
+                    cozy: "Mysig"
                 }
             }
         },
         messageLogger: {
             name: "MessageLogger",
-            description: "Sparar tillfälligt raderade och redigerade meddelanden.",
+            description: "Loggar tillfälligt borttagna och redigerade meddelanden.",
             removeMessage: "Ta bort meddelandehistorik",
             removeMessageTemporary: "Ta bort meddelande (tillfälligt)",
             clearMessageLog: "Rensa meddelandelogg",
             modal: {
                 edit: {
                     title: "Meddelande Redigera historik",
-                    tooltip: "Denna redigeringsstatus kan inte visas eftersom den inte har sparats."
+                    tooltip: "Detta redigeringstillstånd loggades inte så det kan inte visas."
                 }
             },
             option: {
                 deleteStyle: {
-                    label: "Radera stil",
-                    description: "Utseendestil för raderade meddelanden",
-                    text: "röd text",
-                    overlay: "röd beläggning"
+                    label: "Ta bort stil",
+                    description: "Stilen på raderade meddelanden",
+                    text: "Röd text",
+                    overlay: "Rött överlägg"
                 },
                 logDeletes: {
-                    label: "Spara raderade",
-                    description: "Avgör om raderade meddelanden sparas eller inte"
+                    label: "Logga bort",
+                    description: "Om raderade meddelanden ska loggas"
                 },
                 collapseDeleted: {
                     label: "Komprimera borttaget",
-                    description: "Förfina raderade meddelanden som liknar blockerade meddelanden"
+                    description: "Om raderade meddelanden ska komprimeras, liknande blockerade meddelanden"
                 },
                 logEdits: {
-                    label: "Spara redigerad",
-                    description: "Bestämmer om redigerade meddelanden ska sparas"
+                    label: "Loggredigeringar",
+                    description: "Om redigerade meddelanden ska loggas"
                 },
                 inlineEdits: {
                     label: "Inline redigeringar",
-                    description: "Visa redigeringshistorik som en del av meddelandeinnehåll"
+                    description: "Om redigeringshistorik ska visas som en del av meddelandeinnehållet"
                 },
                 ignoreBots: {
                     label: "Ignorera bots",
-                    description: "Ignorera meddelanden som skickas av bots"
+                    description: "Om meddelanden från bots ska ignoreras"
                 },
                 ignoreSelf: {
-                    label: "Ignorera mig själv",
-                    description: "Ignorera egna meddelanden"
+                    label: "Ignorera självet",
+                    description: "Om du ska ignorera meddelanden själv"
                 },
                 ignoreUsers: {
                     label: "Ignorera användare",
@@ -6206,30 +6206,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Kommaseparerad lista med kanal-ID:n att ignorera"
                 },
                 ignoreGuilds: {
-                    label: "Ignorera servrar",
-                    description: "Kommaseparerad lista över server-ID:n att ignorera"
+                    label: "Ignorera Guilds",
+                    description: "Kommaseparerad lista med guild-ID:n att ignorera"
                 },
                 showEditDiffs: {
-                    label: "Visa redigeringsskillnader",
-                    description: "Visa skillnader mellan redigerade meddelandeversioner"
+                    label: "Visa Redigera skillnader",
+                    description: "Visa visuella skillnader mellan redigerade meddelandeversioner"
                 },
                 separatedDiffs: {
-                    label: "Dela skillnader",
-                    description: "Ger en mer läsbar vy genom att visa tillägg och raderingar separat i skillnaderna"
+                    label: "Separerade Diff",
+                    description: "Separat tillägg och borttagningar i diff för en mer läsbar differential"
                 }
             }
         },
         messageLoggerEnhanced: {
             name: "MessageLoggerEnhanced",
-            description: "Det förbättrar MessageLogger-pluginen med ytterligare funktioner.",
-            updateImageCacheDir: "Den visuella cachekatalogen har uppdaterats framgångsrikt.",
+            description: "Förbättrar insticksprogrammet MessageLogger med ytterligare funktioner.",
+            updateImageCacheDir: "Framgångsrikt uppdaterad bildcachekatalog.",
             updateLogsDir: "Loggkatalogen har uppdaterats framgångsrikt.",
-            failedUpdate: "Katalogen kunde inte uppdateras.",
+            failedUpdate: "Det gick inte att uppdatera katalogen.",
             blacklist: "Svartlista",
             whitelist: "Vitlista",
-            failedToRemove: "Meddelandet kunde inte tas bort",
-            successfullyImported: "Loggar importerades framgångsrikt.",
-            errorImportingLogs: "Ett fel uppstod vid import av loggar. Kontrollera konsolen för mer information.",
+            failedToRemove: "Det gick inte att ta bort meddelandet",
+            successfullyImported: "Loggar har importerats",
+            errorImportingLogs: "Fel vid import av loggar. Kontrollera konsolen för mer information",
             importing: "Importerar...",
             importLogs: "Importera loggar",
             exporting: "Exporterar...",
@@ -6238,20 +6238,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                 clearLogs: {
                     title: "Rensa loggar",
                     body: "Är du säker på att du vill rensa alla loggar?",
-                    confirmText: "rensa",
+                    confirmText: "Rensa",
                     cancel: "Avboka"
                 },
                 clearVisibleLogs: {
                     title: "Rensa synliga loggar",
-                    body: "Är du säker på att du vill rensa {{meddelanden}} loggar?",
-                    confirmText: "rensa",
+                    body: "Är du säker på att du vill rensa {{messages}}-loggar?",
+                    confirmText: "Rensa",
                     cancel: "Avboka"
                 },
-                cleared: "Meddelandeloggdatabasen och cachen har rensats."
+                cleared: "Meddelandeloggdatabas och cacheminne rensades."
             },
             context: {
-                title: "Meddelandelogg",
-                jumpToMessage: "Gå till meddelande",
+                title: "Meddelandelogger",
+                jumpToMessage: "Hoppa till meddelande",
                 openUserProfile: "Öppna användarprofil",
                 copyContent: "Kopiera innehåll",
                 copyUserId: "Kopiera användar-ID",
@@ -6260,9 +6260,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copyServerId: "Kopiera server-ID",
                 deleteLog: "Ta bort logg",
                 fromUsernameDm: "Från {{username}}s DM",
-                fromGroupDm: "{{channelName}} grupp DM",
-                fromServerChannel: "Från kanal {{channelName}} på servern {{serverName}}",
-                moveTypeTo: "Flytta {{typ}} till {{destination}}",
+                fromGroupDm: "Från {{channelName}} Grupp DM",
+                fromServerChannel: "Från {{channelName}} i {{serverName}}",
+                moveTypeTo: "Flytta {{type}} till {{destination}}",
                 removeTypeFrom: "Ta bort {{type}} från {{list}}",
                 openLogsFor: "Öppna loggar för {{name}}",
                 openLogs: "Öppna Loggar",
@@ -6289,207 +6289,207 @@ const translations: MatchStructure<typeof enTranslations> = {
                 moveChannelToWhitelist: "Flytta kanal till vitlista"
             },
             type: {
-                server: "Presentatör",
+                server: "Server",
                 user: "Användare",
                 channel: "Kanal"
             },
             button: {
                 chooseFolder: "Välj Mapp",
-                browse: "Gozat",
+                browse: "Bläddra",
                 clearLogs: "Rensa alla loggar",
                 clearVisibleLogs: "Rensa synliga loggar",
-                sortOldest: "Sortera äldst till nyaste",
-                sortNewest: "Sortera Nyast till Äldst",
+                sortOldest: "Sortera äldst först",
+                sortNewest: "Sortera nyaste först",
                 loadMore: "Ladda mer",
-                noResults: "Inga resultat på fliken {{tab}}",
-                tryOtherTabs: "Prova flikarna {{nextTab}} eller {{lastTab}}",
+                noResults: "Inga resultat i {{tab}}",
+                tryOtherTabs: "Kanske prova {{nextTab}} eller {{lastTab}}",
                 importLogs: "Importera loggar"
             },
             modal: {
                 title: "Filtrera meddelanden",
                 deleted: "Raderad",
-                edited: "Organiserad",
-                ghostPing: "Osynlig ping",
-                empty: "Tom, va",
-                importLogs: "ML Enhanced sparar nu loggar till IndexedDB. Du måste importera dina gamla loggar från loggkatalogen. Importen ändrar inte befintliga loggar."
+                edited: "Redigerat",
+                ghostPing: "Spöke plingade",
+                empty: "Tomt va",
+                importLogs: "ML Enhanced lagrar nu loggar i indexeddb. Du måste importera dina gamla loggar från loggkatalogen. Importering kommer inte att skriva över befintliga loggar"
             },
             clear: {
                 title: "Rensa loggar",
                 description: "Är du säker på att du vill rensa alla loggar?",
-                confirm: "rensa",
+                confirm: "Rensa",
                 cancel: "Avboka"
             },
             option: {
                 saveMessages: {
                     label: "Spara meddelanden",
-                    description: "Bestämmer om raderade och redigerade meddelanden sparas eller inte."
+                    description: "Om de raderade och redigerade meddelandena ska sparas."
                 },
                 saveImages: {
                     label: "Spara bilder",
                     description: "Spara borttagna bilagor."
                 },
                 sortNewest: {
-                    label: "Sortera Nyast till Äldst",
+                    label: "Sortera nyaste först",
                     description: "Sortera loggar efter senaste."
                 },
                 cacheMessagesFromServers: {
                     label: "Cachemeddelanden från servrar",
-                    description: "Vanligtvis registrerar loggeren bara vitlistade ID:n och DM:n, om du aktiverar detta alternativ kommer även meddelanden att spelas in på alla servrar. Detta kan dock överskrida cachegränsen och göra att vissa meddelanden hoppas över."
+                    description: "Vanligtvis loggar meddelandeloggaren bara från vitlistade ID:n och DM:n, vilket skulle innebära att det också loggar meddelanden från alla servrar. Observera att detta kan göra att cachen överskrider sin gräns, vilket resulterar i att vissa meddelanden missas. Om du är på många servrar kan detta avsevärt öka chanserna för att meddelanden loggas, vilket kan resultera i en stor meddelandepost och inkludering av irrelevanta meddelanden."
                 },
                 ignoreBots: {
                     label: "Ignorera bots",
-                    description: "Ignorera botmeddelanden."
+                    description: "Om meddelanden från bots ska ignoreras"
                 },
                 ignoreWebhooks: {
-                    label: "Webhookları Yoksay",
-                    description: "Ignorera webhook-meddelanden."
+                    label: "Ignorera Webhooks",
+                    description: "Om du ska ignorera meddelanden via webhooks"
                 },
                 ignoreSelf: {
-                    label: "Ignorera mig själv",
-                    description: "Ignorera dina egna meddelanden."
+                    label: "Ignorera självet",
+                    description: "Om du ska ignorera meddelanden själv"
                 },
                 ignoreMutedGuilds: {
-                    label: "Ignorera avstängda servrar",
-                    description: "Meddelanden på tystade servrar spelas inte in. Vitlistade användare/kanaler spelas dock fortfarande in."
+                    label: "Ignorera Muted Guilds",
+                    description: "Meddelanden i tystade guilds kommer inte att loggas. Vitlistade användare/kanaler i tystade guilds kommer fortfarande att loggas."
                 },
                 ignoreMutedCategories: {
                     label: "Ignorera dämpade kategorier",
-                    description: "Meddelanden i kanaler som hör till avstängda kategorier spelas inte in."
+                    description: "Meddelanden i kanaler som tillhör avstängda kategorier kommer inte att loggas. Vitlistade användare/kanaler i tystade guilds kommer fortfarande att loggas."
                 },
                 ignoreMutedChannels: {
                     label: "Ignorera avstängda kanaler",
-                    description: "Meddelanden på tysta kanaler spelas inte in."
+                    description: "Meddelanden i avstängda kanaler kommer inte att loggas. Vitlistade användare/kanaler i tystade guilds kommer fortfarande att loggas."
                 },
                 alwaysLogDirectMessages: {
-                    label: "Spara alltid DM",
-                    description: "Spara alltid direktmeddelanden."
+                    label: "Logga alltid direktmeddelanden",
+                    description: "Logga alltid DM"
                 },
                 alwaysLogCurrentChannel: {
-                    label: "Spara alltid aktuell kanal",
-                    description: "Sparar alltid den aktuella kanalen. Svartlistade kanaler/användare är exkluderade."
+                    label: "Logga alltid aktuell kanal",
+                    description: "Logga alltid aktuell vald kanal. Svartlistade kanaler/användare kommer fortfarande att ignoreras."
                 },
                 permanentlyRemoveLogByDefault: {
                     label: "Ta bort logg permanent som standard",
-                    description: "I huvudmenyn för MessageLogger är alternativet att ta bort från meddelandeloggen som standard till permanent radering."
+                    description: "Base MessageLogger ta bort loggknapp kommer att radera loggar permanent"
                 },
                 hideMessageFromMessageLoggers: {
-                    label: "Dölj meddelande från Loggers",
-                    description: "När den är aktiverad lägger den till ett snabbmenyalternativ för att dölja meddelanden från andra loggare. Det kanske inte är säkert, använd på egen risk."
+                    label: "Dölj meddelande från meddelandeloggare",
+                    description: "När den är aktiverad kommer en snabbmenyknapp att läggas till meddelanden så att du kan radera meddelanden utan att de loggas av andra loggare. Kanske inte är säkert, använd på egen risk."
                 },
                 showLogsButton: {
-                    label: "Visa loggknapp",
-                    description: "Växlar om verktygsfältet visas eller inte."
+                    label: "Knappen Visa loggar",
+                    description: "Växla till när som helst visa verktygslådan eller inte"
                 },
                 showWhereMessageIsFrom: {
-                    label: "Visa meddelandekälla",
-                    description: "Visa meddelandets kanal/författare och servernamn."
+                    label: "Visa var meddelandet kommer ifrån",
+                    description: "Visa meddelandekanal/författarnamn och servernamn"
                 },
                 messagesToDisplayAtOnceInLogs: {
-                    label: "Antal meddelanden som ska visas samtidigt i loggar",
-                    description: "Bestämmer antalet meddelanden som ska visas i loggarna åt gången och mängden som ska läggas till när fler meddelanden laddas."
+                    label: "Meddelanden som ska visas på en gång i loggar",
+                    description: "Antal meddelanden som ska visas på en gång i loggar & antal meddelanden som ska laddas när fler meddelanden laddas i loggar."
                 },
                 hideMessageFromMessageLoggersDeletedMessage: {
-                    label: "Meddelandeinnehåll dolt från meddelandeloggare",
-                    description: "Innehåll för att ersätta meddelandet när det gömmer sig från meddelandeloggare används."
+                    label: "Dölj meddelande från meddelandeloggare borttaget meddelande",
+                    description: "Meddelandeinnehållet att ersätta meddelandet med när du använder funktionen för att dölja meddelande från meddelandeloggare."
                 },
                 messageLimit: {
                     label: "Meddelandegräns",
-                    description: "Maximalt antal meddelanden att spara. När gränsen överskrids raderas gamla meddelanden. 0 = obegränsat."
+                    description: "Maximalt antal meddelanden att spara. Äldre meddelanden raderas när gränsen nås. 0 betyder att det inte finns någon gräns"
                 },
                 attachmentSizeLimitInMegabytes: {
-                    label: "Storleksgräns för bilaga (MB)",
-                    description: "Maximal storlek (i MB) för bilagor att spara. Bilagor som är större än detta värde kommer inte att sparas."
+                    label: "Storleksgräns för bilagor i megabyte",
+                    description: "Maximal storlek på en bilaga i megabyte att spara. Bilagor som är större än denna storlek kommer inte att sparas."
                 },
                 attachmentFileExtensions: {
-                    label: "Ytterligare filtillägg",
-                    description: "En kommaseparerad lista över filtillägg att spara. Om det lämnas tomt sparas alla bilagor."
+                    label: "Bifogade filtillägg",
+                    description: "Kommaseparerad lista över filtillägg att spara. Bilagor med filtillägg som inte finns i den här listan kommer inte att sparas. Lämna tomt för att spara alla bilagor."
                 },
                 cacheLimit: {
                     label: "Cachegräns",
-                    description: "Maximalt antal meddelanden att behålla i cacheminnet. När gränsen överskrids raderas gamla meddelanden."
+                    description: "Maximalt antal meddelanden att behålla i cachen. Äldre meddelanden raderas när gränsen nås."
                 },
                 timeBasedCleanupMinutes: {
-                    label: "Tidsbaserad minutrengöring",
-                    description: "Minutintervall under vilket tidsbaserad rengöring av meddelanden som är äldre än meddelandegränsen kommer att utföras."
+                    label: "Tidsbaserade rengöringsminuter",
+                    description: "Intervall i minuter för att utföra tidsbaserad rensning av meddelanden som är äldre än meddelandegränsen."
                 },
                 preserveCurrentChannel: {
-                    label: "Behåll aktuell kanal",
-                    description: "När det är aktiverat påverkas inte meddelanden på din för närvarande valda kanal av tidsbaserad rengöring."
+                    label: "Bevara aktuell kanal",
+                    description: "När det är aktiverat påverkas inte meddelanden i din för närvarande valda kanal av tidsbaserad rensning."
                 },
                 whitelistedIds: {
-                    label: "Vitlista ID:n",
+                    label: "Vitlistade ID",
                     description: "Vitlistade server, kanal eller användar-ID."
                 },
                 blacklistedIds: {
-                    label: "Svartlista ID:n",
-                    description: "Svartlistade server, kanal eller användar-ID."
+                    label: "Svartlistade ID",
+                    description: "Svartlistade server-, kanal- eller användar-ID."
                 },
                 imageCacheDir: {
-                    label: "Visual Cache Directory",
-                    description: "Välj katalogen med sparade bilder."
+                    label: "Bildcachekatalog",
+                    description: "Välj katalog för sparade bilder"
                 },
                 logsDir: {
-                    label: "Loggindex",
-                    description: "Välj katalogen där loggarna ska sparas."
+                    label: "Loggar katalog",
+                    description: "Välj loggkatalog"
                 },
                 importLogs: {
                     label: "Importera loggar",
-                    description: "Importera loggar från filen."
+                    description: "Importera loggar från fil"
                 },
                 exportLogs: {
                     label: "Exportera loggar",
-                    description: "Exportera loggar från IndexedDB."
+                    description: "Exportera loggar från IndexedDB"
                 },
                 openLogs: {
                     label: "Öppna Loggar",
-                    description: "Öppna loggarna."
+                    description: "Öppna Loggar"
                 },
                 openImageCacheFolder: {
-                    label: "Öppna mappen Visual Cache",
-                    description: "Öppnar den visuella cachekatalogen."
+                    label: "Öppna mappen Image Cache",
+                    description: "Öppnar bildcachekatalogen"
                 },
                 clearLogs: {
                     label: "Rensa loggar",
-                    description: "Rensa loggar.",
+                    description: "Rensa loggar",
                     title: "Rensa loggar",
                     body: "Är du säker på att du vill rensa alla loggar?",
-                    confirmText: "rensa",
+                    confirmText: "Rensa",
                     cancel: "Avboka"
                 }
             }
         },
         messageNotifier: {
             name: "MessageNotifier",
-            description: "Få meddelanden när utvalda användare skickar meddelanden",
-            dm: "privat meddelande",
+            description: "Få skålar för när utvalda användare skickar ett meddelande",
+            dm: "deras DM",
             option: {
                 users: {
                     label: "Användare",
-                    description: "Kommaseparerad lista över användar-ID för att ta emot meddelandeaviseringar",
+                    description: "Kommaseparerad lista med användar-ID:n att få meddelandetoaster för",
                     invalidId: "{{id}} är inte ett giltigt användar-ID"
                 }
             },
             notification: {
                 title: "{{username}} skickade ett meddelande",
-                body: "Klicka för att gå till {{locationName}}"
+                body: "Klicka för att hoppa till {{locationName}}"
             }
         },
         messageTags: {
             name: "MessageTags",
-            description: "Det låter dig spara meddelanden och använda dem med ett enkelt kommando.",
-            notExist: "Taggen **{{tagname}}** är inte längre tillgänglig! Starta om Discord för att fixa det :)",
+            description: "Låter dig spara meddelanden och använda dem med ett enkelt kommando.",
+            notExist: "Taggen **{{tagname}}** finns inte längre! Ladda om din Discord för att fixa :)",
             alreadyExist: "En tagg med namnet **{{tagname}}** finns redan!",
-            sentTag: "**{{tagname}}**-taggen har skickats!",
-            successCreate: "**{{tagname}}**-taggen skapad framgångsrikt!",
-            allTags: "Alla taggar:",
-            noTags: "Ups! Det finns inga taggar än, använd /tag create för att skapa dem!",
-            noDeleteTag: "En tagg med namnet **{{tagname}}** hittades inte, så den kan inte tas bort!",
-            successDelete: "Taggen **{{name}}** har raderats!",
-            tagPreview: "En tagg som heter **{{name}}** finns inte!",
+            sentTag: "Taggen **{{tagname}}** har skickats!",
+            successCreate: "Taggen **{{tagname}}** har skapats!",
+            allTags: "Alla dina taggar:",
+            noTags: "Hoppsan! Det finns inga taggar än, använd /tag create för att skapa en!",
+            noDeleteTag: "En tagg **{{tagname}}** finns inte, så den kan inte tas bort!",
+            successDelete: "Taggen **{{name}}** har tagits bort!",
+            tagPreview: "En tagg med namnet **{{name}}** finns inte!",
             option: {
                 clyde: {
-                    label: "Clyde meddelande i inlägget",
-                    description: "När det är aktiverat kommer Clyde att skicka ett tillfälligt meddelande till dig när en tagg används."
+                    label: "Clyde meddelande vid sändning",
+                    description: "Om aktiverat kommer Clyde att skicka ett kortvarigt meddelande till dig när en tagg användes."
                 },
                 tagsList: {
                     label: "Tagglista",
@@ -6498,23 +6498,23 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             command: {
                 tags: {
-                    description: "Hantera dina egna taggar",
+                    description: "Hantera alla taggar själv",
                     option: {
                         create: {
-                            description: "Skapa en ny etikett",
-                            name: "Namnet på taggen som utlöser svaret",
-                            message: "Meddelandet som kommer att skickas när du använder denna hashtag"
+                            description: "Skapa en ny tagg",
+                            name: "The name of the tag to trigger the response",
+                            message: "Meddelandet som du kommer att skicka när du använder den här taggen"
                         },
                         list: {
-                            description: "Lista alla taggar"
+                            description: "Lista alla taggar från dig själv"
                         },
                         delete: {
-                            description: "Ta bort en tagg",
-                            name: "Namn på taggen som ska raderas"
+                            description: "Ta bort en tagg från dig själv",
+                            name: "The name of the tag to remove"
                         },
                         preview: {
-                            description: "Förhandsgranska en tagg utan att publicera den offentligt",
-                            name: "Namn på taggen som ska förhandsgranskas"
+                            description: "Förhandsgranska en tagg utan att skicka den offentligt",
+                            name: "The name of the tag to preview"
                         }
                     }
                 }
@@ -6522,251 +6522,251 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         micLoopbackTester: {
             name: "MicLoopbackTester",
-            description: "Lägger till testikon för mikrofonslinga på användarpanelen",
-            button: "Mikrofontestcykel"
+            description: "Lägger till ikon för test av återkoppling av mikrofon till användarpanelen",
+            button: "Mic Test Loopback"
         },
         middleClickTweaks: {
             name: "MiddleClickTweaks",
-            description: "Olika förbättringar i mittenklick (mushjul) såsom inklistring och länköppning.",
+            description: "Olika mellanklicksjusteringar, som med inklistring och länköppning.",
             option: {
                 openScope: {
-                    label: "Öppnande omfattning",
-                    description: "Det förhindrar att dessa innehållstyper öppnas när du klickar på mitten.",
+                    label: "Öppna omfattning",
+                    description: "Förhindra mellanklickning på dessa innehållstyper från att öppna dem.",
                     links: "Länkar",
                     media: "Media",
                     linksAndMedia: "Länkar och media",
                     none: "Ingen"
                 },
                 pasteScope: {
-                    label: "Bindningsomfång",
-                    description: "I vissa fall förhindrar mittklick inklistring.",
-                    always: "Blockera alltid med mellanklick",
-                    focus: "Blockera endast när textområdet inte är fokuserat",
+                    label: "Klistra in omfattning",
+                    description: "Förhindra att mittklick klistras in under dessa situationer.",
+                    always: "Förhindra alltid att klistra in mellanklick",
+                    focus: "Förhindra endast när textområdet inte är fokuserat",
                 },
                 pasteThreshold: {
-                    label: "Bindningströskel",
-                    description: "De millisekunder som krävs för att klistra in för att återaktiveras efter mittklick."
+                    label: "Klistra in tröskel",
+                    description: "Millisekunder tills inklistring aktiveras igen efter ett mittklick."
                 }
             }
         },
         moreCommands: {
-            name: "Fler kommandon",
+            name: "MoreCommands",
             description: "Echo, Lenny, Mock och mer",
             command: {
                 echo: {
-                    description: "Skickar ett meddelande som Clyde (lokal)"
+                    description: "Skickar ett meddelande som Clyde (lokalt)"
                 },
                 lenny: {
-                    description: "Skickar ett Lenny-ansikte"
+                    description: "Skickar ett lenny-ansikte"
                 },
                 mock: {
-                    description: "Gör narr av människor (håna människor)"
+                    description: "håna människor"
                 },
                 wordcount: {
-                    description: "Beräknar antalet ord i ett meddelande",
+                    description: "Räknar antalet ord i ett meddelande",
                     response: "Meddelandet innehåller {{count}} ord."
                 },
                 flipcoin: {
-                    description: "Vänder ett mynt och returnerar resultatet",
-                    heads: "Handstil",
-                    tails: "Tura",
-                    response: "Pengarna {{result}} anlände."
+                    description: "Vänder ett mynt och returnerar huvuden eller svansar",
+                    heads: "Huvuden",
+                    tails: "Svansar",
+                    response: "Myntet landade på {{result}}."
                 },
                 ask: {
-                    description: "Frågar och svarar ja/nej frågor",
+                    description: "Ställ en ja/nej-fråga och få svar",
                     yes: "Ja",
                     no: "Inga",
                     maybe: "Kanske",
-                    askAgain: "fråga igen senare",
-                    definitelyNot: "Absolut inte",
-                    itIsCertain: "Absolut ja"
+                    askAgain: "Fråga igen senare",
+                    definitelyNot: "Definitivt inte",
+                    itIsCertain: "Det är säkert"
                 },
                 randomanimal: {
-                    description: "Returnerar en slumpmässig djurbild",
+                    description: "Få en slumpmässig djurbild",
                     animal: "välj ditt djur",
                     cat: "katt",
                     dog: "hund",
-                    response: "Tyvärr, inga djurbilder kan hämtas just nu"
+                    response: "Tyvärr, det gick inte att hämta en djurbild just nu"
                 },
                 randomnumber: {
                     description: "Genererar ett slumptal mellan två värden",
-                    min: "Minimum",
-                    max: "högsta värde",
+                    min: "Minsta värde",
+                    max: "Maximalt värde",
                     response: "Slumptal mellan {{min}} och {{max}}: {{number}}"
                 },
                 choose: {
-                    description: "Väljer en slumpmässigt bland de givna alternativen",
-                    option: "Kommaseparerad lista med alternativ",
-                    response: "Mitt val: {{choice}}"
+                    description: "Väljer slumpmässigt bland tillhandahållna alternativ",
+                    option: "Kommaseparerad lista med val",
+                    response: "Jag väljer: {{choice}}"
                 },
                 systeminfo: {
                     description: "Visar systeminformation",
                     platform: "Plattform",
                     deviceType: "Enhetstyp",
                     mobile: "Mobil",
-                    desktop: "skrivbordet",
-                    browser: "Scanner",
+                    desktop: "Skrivbord",
+                    browser: "Webbläsare",
                     cpuCores: "CPU-kärnor",
                     memory: "Minne",
                     screen: "Skärm",
-                    languages: "Dil",
-                    network: "Vit",
-                    online: "online",
-                    offline: "off-line",
-                    failedToFetch: "Systeminformationen kunde inte hämtas",
-                    unknown: "okänd"
+                    languages: "Språk",
+                    network: "Nätverk",
+                    online: "Online",
+                    offline: "Off-line",
+                    failedToFetch: "Det gick inte att hämta systeminformation",
+                    unknown: "Okänd"
                 },
                 getuptime: {
-                    description: "Visar klientens drifttid",
-                    response: "**Upptid för klient**: {{upptid}} minuter"
+                    description: "Får kundens drifttid",
+                    response: "**Upptid för klient**: {{uptime}} minuter"
                 },
                 gettime: {
-                    description: "Visar aktuell tid",
-                    response: "Aktuell tid: {{time}}"
+                    description: "Hämtar aktuell tid",
+                    response: "Aktuell tid är {{time}}"
                 },
                 transform: {
-                    description: "Omvandlar text enligt det angivna alternativet",
+                    description: "Förvandla din text med det angivna alternativet",
                     transformation: {
-                        description: "Den typ av omvandling som ska tillämpas på texten",
+                        description: "Transformation för att tillämpa på din text",
                         lowercase: "Konvertera text till gemener",
                         uppercase: "Konvertera text till versaler",
-                        localeLowercase: "Konvertera text till inbyggda gemener",
-                        localeUppercase: "Konvertera text till inbyggda versaler",
-                        same: "lämna det samma"
+                        localeLowercase: "Konvertera text till lokal gemener",
+                        localeUppercase: "Konvertera text till lokal versaler",
+                        same: "Förbli densamma"
                     },
-                    repeat: "Hur många gånger kommer det att upprepas?",
-                    reverse: "Om text ska vändas",
+                    repeat: "hur många gånger att upprepa",
+                    reverse: "om texten ska vändas",
                     normalize: {
-                        description: "Textnormaliseringsformat",
-                        nfc: "Normaliseringsformat C (NFC)",
+                        description: "Form för normalisering av text",
+                        nfc: "Normaliseringsformulär C (NFC)",
                         nfd: "Normaliseringsform D (NFD)",
-                        nfkc: "Normaliseringsformat KC (NFKC)",
-                        nfkd: "Normaliseringsformat KD (NFKD)"
+                        nfkc: "Normaliseringsformulär KC (NFKC)",
+                        nfkd: "Normaliseringsformulär KD (NFKD)"
                     },
-                    text: "Text att konvertera"
+                    text: "Förvandla denna text"
                 }
             }
         },
         moreKaomoji: {
-            name: "Mer Kaomoji",
+            name: "MoreKaomoji",
             description: "Lägger till mer Kaomoji till Discord. ヽ(´▽`)/"
         },
         moreQuickReactions: {
-            name: "Fler snabba reaktioner",
-            description: "Förbättrar snabbsvarsknapparna i meddelandekontextmenyn.",
+            name: "MoreQuickReactions",
+            description: "Förbättrar snabbreaktionsknapparna i meddelandekontextmenyn.",
             option: {
                 reactionCount: {
                     label: "Antal reaktioner",
-                    description: "Antal reaktioner att visa (0-42)"
+                    description: "Antal reaktioner (0-42)"
                 },
                 frequentEmojis: {
-                    label: "Ofta använda emojis",
+                    label: "Frekventa emojis",
                     description: "Använd ofta använda emojis istället för favoritemojis"
                 },
                 rows: {
-                    label: "De säljer",
-                    description: "Antal rader med snabba reaktioner att visa"
+                    label: "Rader",
+                    description: "Rader med snabba reaktioner att visa"
                 },
                 columns: {
                     label: "Kolumner",
-                    description: "Antal kolumner med snabba reaktioner att visa"
+                    description: "Kolumner med snabba reaktioner att visa"
                 },
                 compactMode: {
-                    label: "Kompakt Mod",
-                    description: "Den skalar knapparna till 75 % av deras ursprungliga storlek samtidigt som den förstorar den inre emojin till 125 %. Emojis kommer att vara 93,75 % av originalstorleken. Det rekommenderas att använda minst 5 kolumner"
+                    label: "Kompakt läge",
+                    description: "Skalar knapparna till 75 % av deras ursprungliga skala, samtidigt som den inre emojin ökar till 125 % skala. Emojis kommer att vara 93,75 % av originalstorleken. Rekommenderas att ha minst 5 kolumner"
                 },
                 scroll: {
-                    label: "rulla",
-                    description: "Aktivera rullande emoji-lista"
+                    label: "Rulla",
+                    description: "Aktivera rullning av listan med emojis"
                 }
             }
         },
         moreUserTags: {
             name: "MoreUserTags",
-            description: "Lägger till taggar för webhooks och modereringsroller (ägare, admin, etc.)",
+            description: "Lägger till taggar för webhooks och moderativa roller (ägare, admin, etc.)",
             tag: {
                 webhook: {
                     name: "Webhook",
                     description: "Denna användare är en webhook"
                 },
                 owner: {
-                    name: "Ägare",
-                    description: "Ägare av servern"
+                    name: "Owner",
+                    description: "Äger servern"
                 },
                 admin: {
-                    name: "Administration",
-                    description: "Har administratörsbefogenhet"
+                    name: "Admin",
+                    description: "Har administratörsbehörighet"
                 },
                 staff: {
-                    name: "Officiell",
+                    name: "Staff",
                     description: "Kan hantera server, kanaler eller roller"
                 },
                 mod: {
                     name: "Mod",
-                    description: "Kan hantera meddelanden eller sparka/förbjuda kontakter"
+                    description: "Kan hantera meddelanden eller sparka/banna personer"
                 },
                 vcmod: {
-                    name: "Se Mod",
+                    name: "VC Mod",
                     description: "Kan hantera röstchatt"
                 },
                 chatmod: {
-                    name: "Chattläge",
+                    name: "Chat Mod",
                     description: "Kan hantera meddelanden"
                 }
             },
             modal: {
                 example: "Exempel",
-                tag: "Biljett",
-                customTextPlaceholder: "Text på etikett (standard: {{displayName}})",
+                tag: "Märka",
+                customTextPlaceholder: "Text på tagg (standard: {{displayName}})",
                 messages: "Visas i meddelanden",
                 memberList: "Visa i medlemslista och profiler"
             },
             option: {
                 dontShowForBots: {
                     label: "Visa inte för bots",
-                    description: "Visa extra taggar för bots (förutom webhooks)"
+                    description: "Visa inte extra taggar för bots (exklusive webhooks)"
                 },
                 dontShowBotTag: {
-                    label: "Visa bot-tagg",
-                    description: "Visa endast extra taggar / Göm [APP]"
+                    label: "Visa inte bot-taggen",
+                    description: "Visa endast extra taggar för bots / Göm [APP] text"
                 },
                 showWebhookTagFully: {
-                    label: "Visa hela webhook-taggen",
-                    description: "Visa hela webhook-taggen i följda kanaler (t.ex. meddelanden)"
+                    label: "Visa webhook-taggen helt",
+                    description: "Visa Webhook-taggen i följda kanaler som tillkännagivanden"
                 },
                 tagSettings: {
                     label: "Tagginställningar",
-                    description: "att fyllas"
+                    description: "fyll mig"
                 }
             }
         },
         morse: {
             name: "Morse",
-            description: "Ett kommando för att översätta till eller från morsekod.",
+            description: "Ett snedstreck kommando för att översätta till/från morsekod.",
             command: {
                 morse: {
-                    description: "Översätter till eller från morsekod",
+                    description: "Översätt till eller från morsekod",
                     message: "Text att konvertera"
                 }
             }
         },
         moyai: {
-            name: "moyai",
+            name: "Moyai",
             description: "🗿🗿🗿🗿🗿🗿🗿🗿",
             option: {
                 volume: {
                     label: "Volym",
-                    description: "🗿🗿🗿 volym"
+                    description: "Volym av 🗿🗿🗿"
                 },
                 quality: {
                     label: "Kvalitet",
-                    description: "🗿🗿🗿 kvalitet",
+                    description: "Kvaliteten på 🗿🗿🗿",
                     normal: "Normal",
                     hd: "HD"
                 },
                 triggerWhenUnfocused: {
-                    label: "Utlösare när den inte är i fokus",
-                    description: "Trigger 🗿 även om fönstret inte är i fokus"
+                    label: "Utlösare när ofokuserad",
+                    description: "Aktivera 🗿 även när fönstret är ofokuserat"
                 },
                 ignoreBots: {
                     label: "Ignorera bots",
@@ -6779,7 +6779,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         musicControls: {
-            name: "Musikkontroller",
+            name: "MusicControls",
             description: "Musikkontroller och texter för flera tjänster",
             option: {
                 SpotifySectionTitle: {
@@ -6795,11 +6795,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 useSpotifyUris: {
                     label: "Använd Spotify URI:er",
-                    description: "Spotify öppnar URI:er istället för URL:er. Fungerar bara om Spotify är installerat och kanske inte fungerar på alla plattformar"
+                    description: "Öppna Spotify URI:er istället för Spotify URL:er. Fungerar bara om du har Spotify installerat och kanske inte fungerar på alla plattformar"
                 },
                 previousButtonRestartsTrack: {
-                    label: "Föregående knapp Startar om låten",
-                    description: "Om uppspelningstiden är mer än 3 sekunder, startar den aktuella låten från början genom att trycka på föregående knapp"
+                    label: "Föregående knapp Startar om spår",
+                    description: "Starta om det spår som spelas när du trycker på föregående knapp om speltiden är >3s"
                 },
                 TidalSectionTitle: {
                     label: "Tidvattens"
@@ -6814,119 +6814,119 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 YtmSectionTitle: {
                     label: "YouTube Music",
-                    description: "{{app}} krävs för den här inställningen"
+                    description: "{{app}} krävs för dessa inställningar"
                 },
                 showYoutubeMusicControls: {
                     label: "Visa YouTube Music-kontroller",
                     description: "Visa musikkontroller för YouTube Music"
                 },
                 YoutubeMusicApiUrl: {
-                    label: "YouTube Music API URL:s",
-                    description: "URL:en till YouTube Music API-servern du använder"
+                    label: "YouTube Music API URL",
+                    description: "URL:en för YouTube Music API-servern du använder"
                 },
                 hoverControls: {
                     label: "Hover kontroller",
                     description: "Visa kontroller när du håller muspekaren"
                 },
                 ShowMusicNoteOnNoLyrics: {
-                    label: "Visa anteckningar om det inte finns några sångtexter",
-                    description: "Visa anteckningsikon när texten inte hittas"
+                    label: "Show Music Note On No Lyrics",
+                    description: "Visa en notikon när ingen text hittas"
                 },
                 LyricsPosition: {
-                    label: "Lyrisk plats",
-                    description: "Plats för textpanelen",
+                    label: "Lyrics Position",
+                    description: "Placering av textpanelen",
                     above: "Ovan spelare",
                     below: "Nedanstående spelare"
                 },
                 LyricsProvider: {
                     label: "Textleverantör",
-                    description: "Källa till texter",
+                    description: "Där texterna hämtas ifrån",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
                 TranslateTo: {
-                    label: "Översätt till ditt språk",
-                    description: "Översätt texter — Om du ändrar detta rensas befintliga översättningar",
+                    label: "Översätt till",
+                    description: "Översätt texter till - Om du ändrar detta rensas befintliga översättningar",
                     cleared: "Översättning rensad"
                 },
                 LyricsConversion: {
-                    label: "Lyrisk konvertering",
+                    label: "Textkonvertering",
                     description: "Översätt eller romanisera texter automatiskt",
                     none: "Ingen",
-                    translate: "Konvertera",
-                    romanize: "Romanisera Et"
+                    translate: "Översätta",
+                    romanize: "romanisera"
                 },
                 FallbackProvider: {
-                    label: "Säkerhetskopieringsleverantör",
-                    description: "Om en textleverantör misslyckas, prova en annan"
+                    label: "Reservleverantör",
+                    description: "När en textleverantör misslyckas, prova andra leverantörer"
                 },
                 ShowFailedToasts: {
-                    label: "Visa felmeddelanden",
-                    description: "Visa avisering när sångtexter inte kan laddas"
+                    label: "Visa misslyckade skålar",
+                    description: "Visa skålar när texterna inte laddas"
                 },
                 PurgeLyricsCache: {
-                    label: "Rensa Lyric Cache",
-                    description: "Ta bort alla cachade texter och översättningar",
+                    label: "Rensa textcache",
+                    description: "Rensa alla cachade texter och översättningar",
                     button: "Rensa cache",
-                    cacheLyricsPurged: "Lyrisk cache rensad"
+                    cacheLyricsPurged: "Textens cache har rensats"
                 }
             },
             context: {
                 spotify: {
                     label: "Spotify Lyrics Meny",
-                    type: "Spotify {{typ}}-menyn",
-                    copy: "Kopiera {{type}} namn",
-                    link: "Kopiera länken {{typ}}",
-                    open: "Öppna {{typ}} i Spotify",
+                    type: "Spotify {{type}} Meny",
+                    copy: "Kopiera {{type}} Namn",
+                    link: "Kopiera {{type}} länk",
+                    open: "Öppna {{type}} i Spotify",
                     album: "Spotify albummeny"
                 },
                 tidal: {
                     label: "Tidal Lyrics Meny",
                     lyrics: "Tidal texter",
-                    type: "Tidal {{name}} Meny",
-                    copy: "Kopiera namn {{name}}",
-                    open: "Öppna {{name}} på Tidal",
+                    type: "Tidvatten {{name}} Meny",
+                    copy: "Kopiera {{name}} Namn",
+                    open: "Öppna {{name}} i Tidal",
                     album: "Tidal Album Meny"
                 },
                 ytm: {
-                    type: "YouTube Music {{name}} Menüsü",
-                    copy: "Kopiera namn {{name}}",
-                    open: "{{name}}'i YouTube Music'te Aç",
+                    type: "YouTube Music {{name}} Meny",
+                    copy: "Kopiera {{name}} Namn",
+                    open: "Öppna {{name}} i YouTube Music",
                     album: "YouTube Music Album Meny",
                     muted: "Dämpad"
                 },
                 lyrics: {
                     provider: "Textleverantör",
-                    saved: "inspelad",
-                    notFound: "Synkrona texter hittades inte"
+                    saved: "sparat",
+                    notFound: "Inga synkroniserade texter hittades"
                 },
                 copy: {
                     currentLyrics: "Kopiera aktuella texter"
                 }
             },
             alert: {
-                lyricCopied: "Texten har kopierats till urklipp!",
-                noLyrics: "inga texter",
-                noLyricsTo: "Inga texter för {{translated}}",
-                translate: "översättning",
-                romanize: "romanisera inte",
-                lyricsFetchFailed: "Det gick inte att hitta texten",
-                failedToFetchLyrics: "{{translated}} kunde inte hämtas",
+                lyricCopied: "Lyric kopierad till urklipp!",
+                noLyrics: "Inga texter",
+                noLyricsTo: "Ingen text till {{translated}}",
+                translate: "översätta",
+                romanize: "romanisera",
+                lyricsFetchFailed: "Det gick inte att hämta texter",
+                failedToFetchLyrics: "Det gick inte att hämta {{translated}}",
                 translation: "översättning",
                 romanization: "romanisering",
-                failedToFetchTranslation: "Det gick inte att hämta {{translated}} textöversättning"
+                failedToFetchTranslation: "Det gick inte att hämta {{translated}} sångtexter"
             },
             modal: {
                 install: {
                     title: "Hur man installerar",
-                    install: "{{link}} installera härifrån, gå sedan till TidaLuna-inställningar → Tilläggsbutiker → installera @vmohammad/api",
-                    tidaluna: "Nej Luna"
+                    install: "Installera {{link}} härifrån och gå sedan till TidalLuna-inställningar → Plugin-butiker → Installera @vmohammad/api",
+                    tidaluna: "TidaLuna"
                 },
                 player: {
-                    noPlaying: "Det spelas inget spår",
+                    noPlaying: "Inget spår spelas",
                     artist: "Konstnär:",
                     album: "Album:",
-                    noLyrics: "Texten hittades inte :(",
+                    noLyrics: "Inga texter tillgängliga :(",
                     progress: "Framsteg",
                     totalDuration: "Total varaktighet"
                 },
@@ -6950,94 +6950,94 @@ const translations: MatchStructure<typeof enTranslations> = {
                 none: "Ingen"
             },
             error: {
-                failed: "Det gick inte att skapa fönster :(",
+                failed: "Det gick inte att återge Modal :(",
                 checkConsole: "Kontrollera konsolen för fel",
-                invalidUrlCustomApi: "Ogiltigt URL-format för anpassad API-server"
+                invalidUrlCustomApi: "Ogiltigt URL-format för Custom API Server URL"
             }
         },
         mutualGroupDMs: {
             name: "MutualGroupDMs",
-            description: "Visar delade grupp-DM:ar på profiler",
-            no: "Inga gemensamma grupper",
-            mutualGroup: "{{count}} gemensam grupp",
-            members: "Medlem",
-            noGroup: "Inga offentliga grupp-DM:n",
-            header: "Gemensamma grupper"
+            description: "Visar ömsesidiga grupp-DM i profiler",
+            no: "Inga ömsesidiga grupper",
+            mutualGroup: "{{count}} Ömsesidig grupp{{s}}",
+            members: "Medlemmar",
+            noGroup: "Inga grupp-DM:n gemensamt",
+            header: "Ömsesidiga grupper"
         },
         neverPausePreviews: {
             name: "NeverPausePreviews",
-            description: "Förhindrar att förhandsvisningar under samtal/PiP (skärmdelning, sändningar etc.) pausas även om appen tappar fokus.",
-            about: "Detta tillägg gör att Discord förbrukar mer resurser än vanligt."
+            description: "Förhindrar förhandsvisningar under samtal/PiP (skärmdelning, strömmar, etc.) från att pausas även om klienten tappar fokus",
+            about: "Denna plugin kommer att få Discord att använda mer resurser än vanligt"
         },
         newGuildSettings: {
             name: "NewGuildSettings",
-            description: "Stänger automatiskt av och ändrar olika andra inställningar när du går med i nya servrar",
+            description: "Stäng automatiskt av nya servrar och ändra olika andra inställningar när du går med",
             context: {
-                apply: "Tillämpa nya serverinställningar"
+                apply: "Använd NewGuildSettings"
             },
             option: {
                 guild: {
-                    label: "Stäng av servern",
-                    description: "Stäng av servern automatiskt"
+                    label: "Mute Guild",
+                    description: "Stäng av Guild automatiskt"
                 },
                 messages: {
                     label: "Servermeddelandeinställningar",
-                    description: "Inställningar för serveraviseringar",
+                    description: "Servermeddelandeinställningar",
                     all: "Alla meddelanden",
-                    mentions: "endast @nämner",
-                    nothing: "Ingen",
+                    mentions: "Endast @nämner",
+                    nothing: "Ingenting",
                     default: "Server standard"
                 },
                 everyone: {
-                    label: "Undertryck @alla och @här",
-                    description: "Undertryck @alla och @här-aviseringar"
+                    label: "Förtryck @alla och @här",
+                    description: "Förtryck @alla och @här"
                 },
                 role: {
                     label: "Undertryck alla roll@omnämnanden",
-                    description: "Undertryck alla roll @omnämnanden"
+                    description: "Undertryck alla roll@omnämnanden"
                 },
                 highlights: {
                     label: "Dämpa höjdpunkter",
-                    description: "Stäng automatiskt av högdagrar"
+                    description: "Dämpa högdagrar automatiskt"
                 },
                 events: {
                     label: "Stäng av nya händelser",
-                    description: "Stäng automatiskt av nya händelser"
+                    description: "Stäng av nya händelser automatiskt"
                 },
                 showAllChannels: {
                     label: "Visa alla kanaler",
                     description: "Visa alla kanaler automatiskt"
                 },
                 mobilePush: {
-                    label: "Stäng av mobilaviseringar",
-                    description: "Stäng automatiskt av mobilaviseringar"
+                    label: "Stäng av mobila push-meddelanden",
+                    description: "Stäng av mobila push-meddelanden automatiskt"
                 },
                 voiceChannels: {
                     label: "Röstkanaler",
-                    description: "Göm automatiskt namn i röstkanaler"
+                    description: "Dölj namn i röstkanaler automatiskt"
                 }
             }
         },
         newPluginsManager: {
             name: "NewPluginsManager",
-            description: "Användbart verktyg som meddelar dig när nya plugins läggs till Plexcord",
+            description: "Verktyg som meddelar dig när nya plugins läggs till Plexcord",
             modal: {
                 title: "Nya plugins och inställningar",
                 description: "Nya plugins och inställningar har lagts till sedan ditt senaste besök. Vänligen granska de nya tilläggen nedan.",
-                tooltip: "Stäng för denna session",
-                dontShowAgain: "Visa det inte igen",
-                restartRequired: "Följande plugins kräver omstart",
+                tooltip: "Avvisa för denna session",
+                dontShowAgain: "Visa inte detta igen",
+                restartRequired: "Omstart krävs för att tillämpa ändringar",
                 restart: "Starta om",
-                continue: "Devam Et"
+                continue: "Fortsätta"
             }
         },
         noAppsAllowed: {
-            name: "Inga appar tillåtna",
-            description: "Tar tillbaka Bot-taggen för bots"
+            name: "NoAppsAllowed",
+            description: "Återställer botens tagg till sin ursprungliga form"
         },
         noBlockedMessages: {
             name: "NoBlockedMessages",
-            description: "Döljer helt alla blockerade/ignorerade meddelanden från chatten",
+            description: "Döljer alla blockerade/ignorerade meddelanden från chatten helt",
             option: {
                 alsoHideIgnoredUsers: {
                     label: "Dölj även ignorerade användare",
@@ -7045,95 +7045,95 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 disableNotifications: {
                     label: "Inaktivera aviseringar",
-                    description: "Dölj nya meddelandeaviseringar för blockerade användare. Följande kommer alltid att gälla om funktionen \"Göm för standardanvändare\" är aktiverad och användaren som utlöste meddelandet inte finns i listan \"Undantagsanvändare\"."
+                    description: "Dölj nya meddelandeaviseringar för blockerade användare. Alltid sant om \"Standarddölj användare\" är aktiverat nedan och användaren som utlöser aviseringen inte är undantagen i \"Åsidosätt användare\"."
                 },
                 allowAutoModMessages: {
                     label: "Tillåt AutoMod-meddelanden",
-                    description: "Tillåt meddelanden som skickas av AutoMod att passera ofiltrerat."
+                    description: "Tillåt att meddelanden som skickas av AutoMod kringgår filtrering."
                 },
                 hideBlockedUserReplies: {
                     label: "Dölj blockerade användarsvar",
-                    description: "Dölj meddelanden från blockerade användare i trådar som du tidigare har deltagit i."
+                    description: "Dölj meddelanden från blockerade användare i trådar om du har deltagit i tråden."
                 },
                 defaultHideUsers: {
-                    label: "Standardanvändare gömmer sig",
-                    description: "Om det är aktiverat är meddelanden från blockerade användare helt dolda och meddelanden från användar-ID:n i undantagslistan komprimeras istället (standard Discord-beteende). Om det är inaktiverat kommer meddelanden från blockerade användare att komprimeras och meddelanden från användar-ID:n i undantagslistan kommer att vara helt dolda."
+                    label: "Standard Dölj användare",
+                    description: "Om det är aktiverat kommer meddelanden från blockerade användare att vara helt dolda och alla meddelanden från användar-ID:n i åsidosättningslistan kommer att komprimeras (standard Discord-beteende) istället. Om det är inaktiverat kommer meddelanden från blockerade användare att komprimeras och alla meddelanden från användar-ID:n i åsidosättningslistan kommer att döljas helt istället."
                 },
                 overrideUsers: {
-                    label: "Undantagsanvändare",
-                    description: "Kommaseparerad lista med användar-ID:n som ska döljas eller komprimeras, istället för standardbeteendet som valts ovan."
+                    label: "Åsidosätt användare",
+                    description: "Kommaseparerad lista med användar-ID:n som kommer att döljas eller komprimeras istället för standardbeteendet som valts ovan."
                 }
             }
         },
         noBulletPoints: {
             name: "NoBulletPoints",
-            description: "Markdown-punkter (•, -, *) hindrar dig från att skriva (dålig vana)"
+            description: "Hindrar dig från att skriva markdown-punkter (stinkende)"
         },
         noDeepLinks: {
-            name: "Inaktivera DeepLinks",
-            description: "Inaktiverar den irriterande djuplänkningsfunktionen som försöker tvinga fram Discords skrivbordsapp"
+            name: "DisableDeepLinks",
+            description: "Inaktiverar Discords redundanta djuplänkningsfunktion som försöker tvinga dig att använda deras skrivbordsapp"
         },
         noDeleteSafety: {
             name: "NoDeleteSafety",
-            description: "Tar bort \"skriv servernamn\"-kravet när en server tas bort",
+            description: "Tar bort kravet \"ange servernamn\" när en server tas bort",
             option: {
                 confirmModal: {
-                    label: "Bekräftelsefönster",
-                    description: "\"Är du säker på att du vill ta bort den här servern?\" Visa bekräftelsefönster?"
+                    label: "Bekräfta Modal",
+                    description: "Bör en modal \"Är du säker på att du vill ta bort\" visas?"
                 }
             },
             modal: {
                 title: "Ta bort server?",
-                body: "Det kommer att vara permanent, om det inte redan var uppenbart.",
-                confirm: "Sil",
+                body: "Det är permanent, om det inte var uppenbart.",
+                confirm: "Radera",
                 cancel: "Avboka"
             }
         },
         noDevtoolsWarning: {
             name: "NoDevtoolsWarning",
-            description: "Inaktiverar varningsbannern 'LET'S HIT' på konsolen. Som en bieffekt hindrar den också Discord från att dölja sin token, vilket förhindrar slumpmässiga utloggningar."
+            description: "Inaktiverar \"HOLD UP\"-bannern i konsolen. Som en bieffekt förhindrar även Discord från att dölja din token, vilket förhindrar slumpmässiga utloggningar."
         },
         noF1: {
-            name: "Nr F1",
-            description: "F1 inaktiverar hjälpgenvägen."
+            name: "NoF1",
+            description: "Inaktiverar F1 hjälpbindning."
         },
         noMaskedUrlPaste: {
             name: "NoMaskedUrlPaste",
-            description: "När en länk klistras in med text markerad förhindrar det att länken klistras in som en maskerad URL."
+            description: "Att klistra in en länk samtidigt som text markeras kommer inte att klistras in som en maskerad URL"
         },
         noMirroredCamera: {
             name: "NoMirroredCamera",
-            description: "Det hindrar kameran från att spegla skärmen."
+            description: "Förhindrar att kameran speglas på din skärm"
         },
         noModalAnimation: {
             name: "NoModalAnimation",
-            description: "Inaktiverar öppnings-/stängningsanimationer i alla modala fönster."
+            description: "Tar bort den 300 ms långa animationen när modaler öppnas eller stänger"
         },
         noMosaic: {
-            name: "Ingen mosaik",
-            description: "Tar bort Discords visuella mosaiklayout.",
+            name: "NoMosaic",
+            description: "Tar bort Discord-bildmosaik",
             option: {
                 inlineVideo: {
                     label: "Inline video",
-                    description: "Spela upp videor utan looping modal."
+                    description: "Spela upp videor utan karusellmodal"
                 }
             }
         },
         noNitroUpsell: {
             name: "NoNitroUpsell",
-            description: "Tar bort ALLA Nitro-försäljningsmeddelanden från Discord genom att lura kunden att tro att du äger Nitro."
+            description: "Tar bort ALLA Discords Nitro-uppförsäljningar genom att lura klienten att tro att du har Nitro."
         },
         noOnboarding: {
-            name: "Ingen Onboarding",
-            description: "Det möjliggör snabbare inloggning genom att hoppa över Discords serveranslutningsprocess."
+            name: "NoOnboarding",
+            description: "Går förbi Discords introduktionsprocess för snabbare serverinträde."
         },
         noOnboardingDelay: {
             name: "NoOnboardingDelay",
-            description: "Förbigår långsam och irriterande serveranslutningsfördröjning."
+            description: "Hoppar över den långsamma och irriterande förseningen ombord"
         },
         noPendingCount: {
             name: "NoPendingCount",
-            description: "Tar bort antalet aviseringar för inkommande vänförfrågningar, meddelandeförfrågningar och Nitro-erbjudanden.",
+            description: "Tar bort pingantalet för inkommande vänförfrågningar, meddelandeförfrågningar och Nitro-erbjudanden.",
             option: {
                 hideFriendRequestsCount: {
                     label: "Dölj antalet vänförfrågningar",
@@ -7144,126 +7144,126 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Dölj antalet meddelandeförfrågningar"
                 },
                 hidePremiumOffersCount: {
-                    label: "Dölj antal nitroerbjudanden",
-                    description: "Dölj antal nitroerbjudanden"
+                    label: "Dölj premiumerbjudanden räknas",
+                    description: "Dölj Nitro-erbjudanden räknas"
                 }
             }
         },
         noProfileThemes: {
             name: "NoProfileThemes",
-            description: "Det tar bort Nitro-profilteman helt för alla utom dig själv."
+            description: "Tar helt bort Nitro-profilteman från alla utom dig själv."
         },
         noPushToTalk: {
             name: "NoPushToTalk",
-            description: "Förbigår push-to-talk-kravet för röstaktivitet på kanaler som kräver det."
+            description: "Förbigår push-to-talk-kravet för röstaktivitet i kanaler som upprätthåller det."
         },
         noReplyMention: {
             name: "NoReplyMention",
-            description: "Inaktiverar svarspingar som standard.",
+            description: "Inaktiverar svarspingar som standard",
             option: {
                 userList: {
                     label: "Användarlista",
-                    description: "Lista över användare som kommer att tillåtas eller undantas från pingning (måste avgränsas med kommatecken eller mellanslag)"
+                    description: "Lista över användare att tillåta eller undanta pingar för (avgränsade med kommatecken eller mellanslag)"
                 },
                 roleList: {
                     label: "Rolllista",
-                    description: "Lista över roller som tillåter eller undantar ping (måste avgränsas med kommatecken eller mellanslag)"
+                    description: "Lista över roller att tillåta eller undanta pingar för (avgränsade med kommatecken eller mellanslag)"
                 },
                 shouldPingListed: {
-                    label: "Pinglistad",
+                    label: "Bör pinglistas",
                     description: "Beteende",
-                    dontPing: "Pingar listade användare/roller",
-                    onlyPing: "Pinga endast listade användare/roller"
+                    dontPing: "Pinga inte de angivna användarna/rollerna",
+                    onlyPing: "Pinga bara de angivna användarna/rollerna"
                 },
                 inverseShiftReply: {
-                    label: "Reverse Shift Response Beteende",
-                    description: "Vänder om Discords skiftsvarsbeteende (nämner användaren när skiftsvar är aktiverat)"
+                    label: "Omvänt skiftsvar",
+                    description: "Invertera Discords skiftsvarsbeteende (aktivera för att få skiftsvar att nämna användare)"
                 }
             }
         },
         normalizeMessageLinks: {
             name: "NormalizeMessageLinks",
-            description: "Tar bort kanariefågel/ptb-prefix från meddelandelänkar."
+            description: "Ta bort kanariefågel/ptb från meddelandelänkar"
         },
         noRoleHeaders: {
             name: "NoRoleHeaders",
-            description: "Vi är alla lika!! Tar bort rolltitlar från medlemslistan."
+            description: "Vi är alla lika!! Tar bort rollrubrikerna i medlemslistan."
         },
         noRPC: {
             name: "NoRPC",
-            description: "Discord inaktiverar rik närvaro."
+            description: "Inaktiverar Discord Rich Presence"
         },
         noServerEmojis: {
-            name: "Från ServerEmojis",
-            description: "Servern visar inte emojis i autoslutförandemenyn.",
+            name: "NoServerEmojis",
+            description: "Visa inte server-emojis i autoslutförandemenyn.",
             option: {
                 shownEmojis: {
-                    label: "Emojis visas",
+                    label: "Visade emojis",
                     description: "Välj vilka emojis som ska visas i menyn för autoslutförande",
-                    onlyUnicode: "Endast Unicode-emojis",
-                    currentServer: "Unicode-emojis och emojis på den aktuella servern",
+                    onlyUnicode: "Endast unicode-emojis",
+                    currentServer: "Unicode-emojis och server-emojis från nuvarande server",
                     all: "Unicode-emojis och alla server-emojis (Discord-standard)"
                 }
             }
         },
         noSystemBadge: {
-            name: "Inget systemmärke",
-            description: "Inaktiverar det olästa meddelandemärket i aktivitetsfältet och i systemfältet."
+            name: "NoSystemBadge",
+            description: "Inaktiverar aktivitetsfältet och systemfältets olästa antal märke."
         },
         notificationTitle: {
             name: "NotificationTitle",
-            description: "Gör skrivbordsaviseringar mer informativa."
+            description: "Gör skrivbordsaviseringar mer informativa"
         },
         notificationVolume: {
-            name: "Aviseringsvolym",
-            description: "Ställ in anpassad volym för Discord-aviseringar.",
+            name: "NotificationVolume",
+            description: "Ställ in anpassad volym för Discord-aviseringar",
             option: {
                 notificationVolume: {
-                    label: "Aviseringsljud",
+                    label: "Aviseringsvolym",
                     description: "Aviseringsvolym"
                 }
             }
         },
         noTypingAnimation: {
             name: "NoTypingAnimation",
-            description: "Inaktiverar skrivanimationen i chattar."
+            description: "Inaktiverar skrivanimationen i chatten"
         },
         noUnblockToJump: {
             name: "NoUnblockToJump",
-            description: "Det låter dig hoppa över meddelanden från blockerade eller ignorerade användare (och möjligen spammare) utan att avblockera dem."
+            description: "Låter dig hoppa till meddelanden från blockerade eller ignorerade användare och troliga spammare utan att avblockera dem."
         },
         onePingPerDM: {
             name: "OnePingPerDM",
-            description: "Även om en användare skickar olästa meddelanden i följd i DM, får du bara en ljudavisering.",
+            description: "Om olästa meddelanden skickas av en användare i DM flera gånger kommer du bara att få en ljudping.",
             option: {
                 channelToAffect: {
-                    label: "Kanaltyp som ska påverkas",
-                    description: "Välj vilken typ av DM som plugin-programmet kommer att påverka",
+                    label: "Kanal att påverka",
+                    description: "Välj vilken typ av DM som pluginet ska påverka",
                     both: "Både",
                     user: "Användar-DM",
                     group: "Grupp DM"
                 },
                 allowMentions: {
-                    label: "@AllowMentions",
-                    description: "Få ljudaviseringar för @omnämnanden"
+                    label: "Tillåt omnämnanden",
+                    description: "Ta emot ljudpingningar för @omnämnanden"
                 },
                 allowEveryone: {
-                    label: "Tillåt @alla",
-                    description: "Få ljudaviseringar för @alla och @här i grupp-DM"
+                    label: "Tillåt alla",
+                    description: "Ta emot ljudpingningar för @alla och @här i grupp-DM"
                 },
                 ignoreUsers: {
-                    label: "Användare att ignorera",
-                    description: "Användar-ID för att ALDRIG begränsa aviseringar (separera med komma + mellanslag)"
+                    label: "Ignorera användare",
+                    description: "Användar-ID:n (komma + blanksteg) vars ping ALDRIG bör strypas"
                 },
                 alwaysPlaySound: {
                     label: "Spela alltid ljud",
-                    description: "Spela upp ljud även om aviseringsljudet är inaktiverat"
+                    description: "Spela upp meddelandeaviseringsljudet även när det är inaktiverat"
                 }
             }
         },
         openInApp: {
             name: "OpenInApp",
-            description: "Öppnar länkar i relevanta applikationer istället för webbläsaren",
+            description: "Öppna länkar i sina respektive appar istället för din webbläsare",
             option: {
                 spotify: {
                     label: "Spotify",
@@ -7287,7 +7287,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 vrcx: {
                     label: "VRChat",
-                    description: "Öppna VRChat-länkar i VRChat-appen"
+                    description: "Öppna VRChat-länkar i VRCX-appen"
                 }
             },
             notification: {
@@ -7296,19 +7296,19 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         overrideForumDefaults: {
             name: "OverrideForumDefaults",
-            description: "Låter dig åsidosätta standard forumlayout/sorteringsordning. Du kan fortfarande göra ändringar kanal för kanal.",
+            description: "Låter dig åsidosätta standard forumlayout/sorteringsordning. Du kan fortfarande ändra det per kanal",
             option: {
                 defaultLayout: {
-                    label: "Standardlayout",
-                    description: "Välj vilken layout som ska användas som standard",
+                    label: "Standardtaggar",
+                    description: "Vilken layout som ska användas som standard",
                     list: "Lista",
                     gallery: "Galleri"
                 },
                 defaultSortOrder: {
                     label: "Standard sorteringsordning",
-                    description: "Välj vilken sorteringsordning som ska användas som standard",
-                    recentlyActive: "Senast aktiv",
-                    datePosted: "Postat datum"
+                    description: "Vilken sorteringsordning som ska användas som standard",
+                    recentlyActive: "Nyligen aktiv",
+                    datePosted: "Upplagt datum"
                 }
             }
         },
@@ -7318,7 +7318,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 superIntensePartyMode: {
                     label: "Superintensivt partyläge",
-                    description: "Partitäthet",
+                    description: "Festintensitet",
                     normal: "Normal",
                     better: "Bättre",
                     projectX: "Projekt X"
@@ -7326,38 +7326,38 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         pauseInvitesForever: {
-            name: "Pausa InvitesForever",
-            description: "Det tar tillbaka alternativet \"pausa inbjudningar på obestämd tid\" som Discord dumt tog bort.",
+            name: "PauseInvitesForever",
+            description: "Återställer alternativet att pausa inbjudningar på obestämd tid som Discord överflödigt tog bort.",
             pauseIndefinitely: "Pausa på obestämd tid"
         },
         permissionFreeWill: {
             name: "PermissionFreeWill",
-            description: "Inaktiverar begränsningar på klientsidan i kanalbehörighetshantering.",
+            description: "Inaktiverar klientsidans begränsningar för kanalbehörighetshantering.",
             option: {
                 lockout: {
-                    label: "dödläge",
-                    description: "Förbigå kraschskydd för behörighet ('Är du säker på att du vill göra det här?')"
+                    label: "Lockout",
+                    description: "Förbigå skyddet av behörighetslåset ('Ganska säker på att du inte vill göra det här')"
                 },
                 onboarding: {
-                    label: "Startkrav",
-                    description: "Förbigå onboardingkrav som kan göra servern inkompatibel ('Denna ändring kan göra din server inkompatibel [...]')"
+                    label: "Onboarding",
+                    description: "Gå förbi introduktionskraven ('Att göra den här ändringen kommer att göra din server inkompatibel [...]')"
                 }
             }
         },
         permissionsViewer: {
             name: "PermissionsViewer",
-            description: "Låter dig se de behörigheter en användare eller kanal har och rollerna för en server.",
+            description: "Visa behörigheter en användare eller kanal har och rollerna för en server",
             view: "Visa behörigheter",
             option: {
                 permissionsSortOrder: {
-                    label: "Behörighet Sorteringsordning",
-                    description: "Sorteringsmetod som används för att bestämma hur en roll ger en specifik behörighet till en användare",
+                    label: "Behörigheter Sorteringsordning",
+                    description: "Sorteringsmetoden som används för att definiera vilken roll som ger en användare en viss behörighet",
                     highest: "Högsta roll",
                     lowest: "Lägsta roll"
                 }
             },
             icon: {
-                denied: "avvisades",
+                denied: "Nekad",
                 allowed: "Tillåten",
                 notOverwritten: "Ej överskriven"
             },
@@ -7368,10 +7368,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 title: "Behörigheter",
                 noPermissions: "Inga behörigheter att visa!",
                 owner: "ägare",
-                grantedBy: "Tolerant",
+                grantedBy: "Beviljas av",
                 serverOwner: "Serverägare",
                 ownerRole: "Ägare",
-                sortingBy: "{{metod}} sorteras med prioritet",
+                sortingBy: "Sorterar efter {{method}}",
                 highest: "Högsta roll",
                 lowest: "Lägsta roll",
                 details: "Rolldetaljer"
@@ -7379,16 +7379,16 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         petpet: {
             name: "PetPet",
-            description: "Lägger till /petpet-kommandot för att skapa petpet-gif från valfri bild",
+            description: "Lägger till ett /petpet snedstreck kommando för att skapa headpet GIFs från vilken bild som helst",
             command: {
                 petpet: {
-                    description: "Skapa en petpet-gif. Du kan endast ange ett av bildalternativen",
-                    delay: "Fördröjning mellan varje bildruta. Standard är 20.",
-                    resolution: "Upplösning för gif. Standard är 120. Om du anger ett galet nummer och Discord fryser är det ditt fel.",
+                    description: "Skapa en petpet GIF. Du kan bara ange ett av bildalternativen",
+                    delay: "Fördröjningen mellan varje bildruta. Standard är 20.",
+                    resolution: "Upplösning för GIF. Standard är 120. Om du anger ett vansinnigt nummer och det fryser Discord är det ditt fel.",
                     image: "Bildbilaga att använda",
-                    url: "URL för att hämta bilden",
-                    user: "Användaren vars avatar kommer att användas som bild",
-                    noServerPfp: "Använd normal avatar istället för serverspecifik när du använder alternativet \"användare\".",
+                    url: "URL att hämta bild från",
+                    user: "Användare vars avatar ska användas som bild",
+                    noServerPfp: "Använd den vanliga avataren istället för den serverspecifika när du använder alternativet \"användare\".",
                     error: {
                         noImage: "Ingen bild specificerad!",
                         delayTooLow: "Förseningen måste vara minst 20.",
@@ -7396,37 +7396,37 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             error: {
-                uploadNotImage: "Den uppladdade filen är inte en bild",
+                uploadNotImage: "Ladda upp är inte en bild",
                 fetchUserFailed: "Det gick inte att hämta användaren. Kontrollera konsolen för mer information.",
                 fetchImageFailed: "Ett fel uppstod när {{url}} laddades. Kontrollera konsolen för mer information."
             }
         },
         pictureInPicture: {
             name: "PictureInPicture",
-            description: "Lägger till bild-i-bild-funktion till videor (bredvid knappen Ladda ner)",
-            tooltip: "Växla bild i bild",
+            description: "Lägger till bild-i-bild till videor (bredvid knappen Ladda ner)",
+            tooltip: "Växla bild-i-bild",
             option: {
                 loop: {
                     label: "Slinga",
-                    description: "Om PiP-video ska slingras"
+                    description: "Om du ska göra PiP-videoslingan eller inte"
                 }
             }
         },
         pinDMs: {
             name: "PinDMs",
-            description: "Låter dig fästa privata kanaler (DM) till toppen av din DM-lista. Du kan högerklicka på DM för att fästa/ta bort eller ändra ordningen på DM.",
+            description: "Låter dig fästa privata kanaler till toppen av din DM-lista. Högerklicka på DM om du vill fästa/lossa eller ändra ordning på nålar",
             context: {
                 category: {
-                    label: "DM kategorimeny",
+                    label: "Pin DMs kategorimeny",
                     edit: "Redigera kategori",
                     up: "Flytta upp",
                     down: "Flytta ner",
                     delete: "Ta bort kategori",
-                    unnamed: "anonym"
+                    unnamed: "oj oj"
                 },
                 pin: {
-                    label: "DM Sabitle",
-                    addCategory: "Kategori Äckligt"
+                    label: "Pin DM",
+                    addCategory: "Lägg till kategori"
                 },
                 unPin: {
                     label: "Lossa DM",
@@ -7435,17 +7435,17 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 pinOrder: {
-                    label: "Fastställande av order",
+                    label: "Pinbeställning",
                     description: "I vilken ordning ska fästade DM:n visas?",
-                    lastMessage: "Senaste meddelandedatum",
-                    custom: "Privat (ändra ordning genom att högerklicka på kanaler)"
+                    lastMessage: "Senaste meddelandet",
+                    custom: "Anpassad (högerklicka på kanaler för att ändra ordning)"
                 },
                 canCollapseDmSection: {
-                    label: "Hopfällbar fast sektion",
-                    description: "Gör okategoriserade DM-avsnitt hopfällbart"
+                    label: "Hopfällbar fäst sektion",
+                    description: "Tillåt okategoriserade DM-avsnitt att vara hopfällbara"
                 },
                 dmSectionCollapsed: {
-                    label: "DM-sektionen minskad",
+                    label: "DM-sektionen har kollapsat",
                     description: "Komprimera DM-avsnittet"
                 },
                 userBasedCategoryList: {
@@ -7458,7 +7458,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     pin: "Pin Kategori",
                     edit: "Redigera kategori",
                     new: "Ny kategori",
-                    name: "Namn",
+                    name: "Name",
                     color: "Färg",
                     save: "Spara",
                     create: "Skapa"
@@ -7467,45 +7467,45 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         pingNotifications: {
             name: "PingNotifications",
-            description: "Anpassningsbara aviseringar och förbättrad omnämningsformatering",
+            description: "Anpassningsbara aviseringar med förbättrad omnämningsformatering",
             option: {
                 friends: {
                     label: "Vänner",
-                    description: "Få aviseringar när dina vänner skickar meddelanden på servrar"
+                    description: "Meddela när vänner skickar meddelanden på servrar"
                 },
                 mentions: {
                     label: "Omnämnanden",
-                    description: "Få aviseringar när någon @nämner dig direkt"
+                    description: "Meddela när någon @nämner dig direkt"
                 },
                 dms: {
-                    label: "DM'ler",
-                    description: "Få aviseringar för direktmeddelanden (DM)"
+                    label: "DM",
+                    description: "Avisera för direktmeddelanden (DM)"
                 },
                 showInActive: {
-                    label: "Visa på aktiva kanaler",
-                    description: "Visa aviseringar även för för närvarande aktiva kanaler"
+                    label: "Visa i aktiv",
+                    description: "Visa aviseringar även för aktiv kanal"
                 },
                 ignoreMuted: {
                     label: "Ignorera tyst",
-                    description: "Förbigå aviseringar från tysta servrar, kanaler eller användare"
+                    description: "Hoppa över aviseringar från avstängda servrar, kanaler eller användare"
                 }
             },
-            unknown: "okänd",
+            unknown: "Okänd",
             dm: "DM",
             groupDM: "Grupp DM",
-            title: "{{username}} på kanalen {{channelName}}"
+            title: "{{username}} i {{channelName}}"
         },
         pinIcon: {
             name: "PinIcon",
-            description: "Lägger till en nålikon till fästa meddelanden."
+            description: "Lägger till en nålikon till fästa meddelanden"
         },
         plainFolderIcon: {
             name: "PlainFolderIcon",
-            description: "Det visar inte små serverikoner i mappar."
+            description: "Visa inte de små guild-ikonerna i mappar"
         },
         platformIndicators: {
-            name: "Plattformsindikatorer",
-            description: "Lägger till plattformsindikatorer (Desktop, Mobile, Web...) till användare.",
+            name: "PlatformIndicators",
+            description: "Lägger till plattformsindikatorer (Desktop, Mobile, Web...) till användare",
             embeddedTooltip: "Trösta",
             vrTooltip: "VR",
             option: {
@@ -7514,41 +7514,41 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Visa indikatorer i medlemslistan"
                 },
                 badges: {
-                    label: "märken",
-                    description: "Visa indikatorer som märken på användarprofiler"
+                    label: "Märken",
+                    description: "Visa indikatorer i användarprofiler som märken"
                 },
                 messages: {
                     label: "Meddelanden",
                     description: "Visa indikatorer i meddelanden"
                 },
                 colorMobileIndicator: {
-                    label: "Färglägg din mobilskärm",
-                    description: "Avgör om mobilindikatorn har användarstatusfärgen eller inte."
+                    label: "Färg mobil indikator",
+                    description: "Om mobilindikatorn ska matcha färgen på användarstatusen."
                 },
                 showBots: {
                     label: "Visa bots",
-                    description: "Bestämmer om plattformsindikatorer ska visas i bots"
+                    description: "Om plattformsindikatorer ska visas på bots"
                 }
             }
         },
         platformSpoofer: {
             name: "PlatformSpoofer",
-            description: "Simulerar vilken plattform eller enhet du än befinner dig på",
-            about: "Vi kan inte garantera att detta tillägg skyddar dig från att bli varnad eller förbjuden.",
+            description: "Förfalska vilken plattform eller enhet du är på",
+            about: "Vi kan inte garantera att detta plugin inte får dig varnad eller förbjuden.",
             platform: {
                 desktop: "Discord-klient",
                 web: "Discord webben",
                 ios: "Discord iOS",
                 android: "Discord Android",
-                xbox: "Inbäddad Discord",
-                playstation: "Inbäddad Discord",
+                xbox: "Discord inbäddad",
+                playstation: "Discord inbäddad",
                 vr: "VR"
             },
             option: {
                 platform: {
                     label: "Plattform",
-                    description: "Vilken plattform vill du framstå som?",
-                    desktop: "skrivbordet",
+                    description: "Vilken plattform man ska dyka upp som",
+                    desktop: "Skrivbord",
                     web: "Web",
                     android: "Android",
                     ios: "iOS",
@@ -7559,13 +7559,13 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         plexcordToolbox: {
-            name: "Plexcord Toolbox",
-            description: "Lägger till en knapp i appfältet som är värd för Plexcord-snabbåtgärder.",
+            name: "PlexcordToolbox",
+            description: "Lägger till en knapp i AppBar som innehåller Plexcord snabba åtgärder",
             tooltip: "Plexcord verktygslåda",
             context: {
                 openLog: "Öppna meddelandeloggen",
                 enableQuickCSS: "Aktivera QuickCSS",
-                openQuickCSS: "Öppna QuickCSS",
+                openQuickCSS: "Redigera QuickCSS",
                 openSettings: "Öppna Inställningar",
                 manageThemes: "Hantera teman"
             },
@@ -7578,54 +7578,54 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         polishWording: {
             name: "PolishWording",
-            description: "Det gör mindre ändringar för att dina meddelanden ska se snyggare ut och ha bättre grammatik. Kolla in inställningarna",
+            description: "Justerar dina meddelanden för att få dem att se snyggare ut och ha bättre grammatik. Se inställningar",
             option: {
                 quickDisable: {
                     label: "Snabb inaktivering",
-                    description: "Snabb avaktivering. Stänger av meddelanderedigering utan att behöva starta om appen."
+                    description: "Snabb inaktivering. Stänger av meddelandeändring utan att klienten behöver laddas om."
                 },
                 blockedWords: {
                     label: "Blockerade ord",
-                    description: "Ord som inte kommer att skrivas med versaler (separera med kommatecken)."
+                    description: "Ord som inte kommer att skrivas med versaler (kommaseparerade)."
                 },
                 fixApostrophes: {
                     label: "Fixa apostroferna",
-                    description: "Ser till att förkortningar innehåller apostrof."
+                    description: "Se till att sammandragningar innehåller apostrof."
                 },
                 expandContractions: {
-                    label: "Öppna förkortningar",
-                    description: "Den konverterar förkortade ord till deras explicita form (som Don't -> Don't)."
+                    label: "Expandera sammandragningar",
+                    description: "Expandera sammandragningar"
                 },
                 fixCapitalization: {
-                    label: "Redigera versaler",
-                    description: "Tillåter meningar att börja med versaler."
+                    label: "Fixa versaler",
+                    description: "Skriv meningar med versaler."
                 },
                 fixPunctuation: {
-                    label: "Korrekt interpunktion",
-                    description: "Redigerar mellanslag runt skiljetecken."
+                    label: "Fixa interpunktion",
+                    description: "Fixa mellanrum runt skiljetecken."
                 },
                 fixPunctuationFrequency: {
-                    label: "Interpunktion Frekvens",
-                    description: "Procentandel av frekvensen av att sätta punkt i slutet av meningar (denna funktion kan störa vissa personer).",
+                    label: "Fixa interpunktionfrekvens",
+                    description: "Procentuell periodfrekvens (detta irriterar i hög grad vissa människor).",
                 }
             }
         },
         previewMessage: {
             name: "PreviewMessage",
-            description: "Det låter dig förhandsgranska ditt meddelande innan du skickar det.",
+            description: "Låter dig förhandsgranska ditt meddelande innan du skickar det.",
             tooltip: "Förhandsgranska meddelande"
         },
         profileSets: {
-            name: "Profiluppsättningar",
-            description: "Det låter dig spara profilförinställningar och ladda dem via profilsektionen i Inställningar.",
+            name: "ProfileSets",
+            description: "Låter dig spara och ladda olika profilförinställningar via profilsektionen i Inställningar.",
             toast: {
-                importFailed: "Det gick inte att importera profilförinställningar. Filen kan vara ogiltig.",
+                importFailed: "Det gick inte att importera profiluppsättningar. Filen kan vara ogiltig.",
             },
             option: {
                 avatarSize: {
                     label: "Avatarstorlek",
-                    description: "Avatarstorlek i listan med profilförinställningar"
-                },
+                    description: "Avatarstorlek i förinställd lista"
+                }
             },
             modal: {
                 override: "Åsidosätta",
@@ -7647,260 +7647,260 @@ const translations: MatchStructure<typeof enTranslations> = {
                 save: "Spara profil",
                 cancelSearch: "Avbryt sökning",
                 search: "Söka",
-                random: "slumpmässig",
+                random: "Slumpmässig",
                 import: "Importera",
                 exportAll: "Exportera alla"
             }
         },
         questify: {
-            name: "Fråga",
-            description: "Förbättra din uppdragsupplevelse med en rad funktioner eller inaktivera dem helt om de inte är vad du vill ha.",
+            name: "Questify",
+            description: "Förbättra din Quest-upplevelse med en uppsättning funktioner, eller inaktivera dem helt om de inte är din grej.",
             quests: "Uppdrag",
             context: {
                 quest: {
-                    label: "Meny för uppgiftsknapp",
-                    ignore: "Mark Ignorera alla",
-                    reset: "Återställ ignoreringslistan",
-                    fetch: "Hämta uppgifter",
-                    markAsIgnored: "Markera som Ignorera",
-                    unmarkAsIgnored: "Ta bort Ignorera",
-                    stopAuto: "Stoppa AutoComplete",
-                    copyQuestID: "Kopiera uppgifts-ID",
-                    startAuto: "Starta AutoComplete"
+                    label: "Quest-knappsmeny",
+                    ignore: "Markera alla ignorerade",
+                    reset: "Återställ ignorerad lista",
+                    fetch: "Hämta uppdrag",
+                    markAsIgnored: "Markera som ignorerad",
+                    unmarkAsIgnored: "Avmarkera som ignorerad",
+                    stopAuto: "Stoppa Auto-Complete",
+                    copyQuestID: "Kopiera Quest ID",
+                    startAuto: "Starta Auto-Complete"
                 }
             },
             settings: {
                 questButton: {
-                    title: "Uppgiftsknapp",
-                    description: "Visa en Quest-knapp med en valfri indikator för outtagna uppdrag i serverlistan.",
+                    title: "Quest-knappen",
+                    description: "Visa en Quest-knapp i serverlistan med en valfri indikator för uppdrag utan anspråk.",
                     leftClick: "Vänsterklicka Åtgärd",
                     middleClick: "Mellanklickåtgärd",
                     rightClick: "Högerklicka Åtgärd",
-                    visibility: "Knapp synlighet",
-                    unclaimedIndicator: "Oönskad indikator",
+                    visibility: "Knapp Synlighet",
+                    unclaimedIndicator: "Indikator för ohävd",
                     badgeColor: "Badge färg",
-                    rewardDisplay: "Prisvisning",
-                    includedRewardTypes: "Typer av belöningar ingår",
-                    includedRewardTypesDesc: "När du spelar knappsynlighet, märkesantal och varningsljud, räknas endast uppdrag med dessa belöningstyper som outtagna.",
-                    selectRewardTypes: "Välj belöningstyper att inkludera i outtagna räkningar...",
-                    noRewardType: "Det finns ingen uppgiftsfunktion som stöds med detta namn.",
+                    rewardDisplay: "Belöningsvisning",
+                    includedRewardTypes: "Inkluderade belöningstyper",
+                    includedRewardTypesDesc: "Räkna endast uppdrag med dessa belöningstyper som outtagna när man bestämmer knappsynlighet, märkesantal och när man spelar upp varningsljudet.",
+                    selectRewardTypes: "Välj vilka belöningstyper som ska inkluderas i antalet outtagna...",
+                    noRewardType: "Det finns ingen Quest-funktion med det namnet som stöds.",
                     default: "Standard",
                     disable: "Inaktivera"
                 },
                 questFeatures: {
-                    title: "Uppgiftsfunktioner",
-                    description: "Ändra specifika aktivitetsegenskaper.",
-                    popupWarning: "Alternativet {{disablePopup}} kommer att ignoreras för slutförda uppdrag och spårning av uppdragets framsteg.",
-                    videoQuestInfo: "Alternativet {{completeVideo}} väntar så länge videouppgiften pågår och markerar den automatiskt som slutförd.",
-                    gameQuestInfo: "På samma sätt kommer alternativet {{completeGame}} att vänta under speluppgiftens varaktighet och automatiskt markera det som slutfört. Det här alternativet stöds endast i den officiella skrivbordsklienten.",
-                    manualStartWarning: "Du måste starta uppgifter manuellt. Det första klicket startar Uppgifter i bakgrunden. För videouppgifter öppnar efterföljande klick videomodalen som vanligt. För att avbryta uppdrag kan du öppna snabbmenyn i uppdragsrutan och välja {{stopAuto}}.",
-                    tosWarning: "Att använda något av dessa alternativ strider mot Discords användarvillkor. Använd på egen risk.",
-                    selectFeatures: "Välj vilka aktivitetsegenskaper som ska ändras.",
-                    disablePopup: "Inaktivera Task Popup på kontopanelen",
-                    completeVideo: "Slutför videouppgifter i bakgrunden",
-                    completeGame: "Slutför speluppgifter i bakgrunden",
-                    stopAuto: "Stoppa AutoComplete"
+                    title: "Quest funktioner",
+                    description: "Ändra specifika Quest-funktioner.",
+                    popupWarning: "Alternativet {{disablePopup}} kommer att ignoreras för slutförda uppdrag och spårning av Quest-förlopp.",
+                    videoQuestInfo: "Alternativet {{completeVideo}} väntar så länge videouppdraget pågår och markerar det som avslutat automatiskt.",
+                    gameQuestInfo: "På samma sätt kommer alternativet {{completeGame}} att vänta under speluppdraget och markera det som avslutat automatiskt. Det här alternativet stöds endast på den officiella skrivbordsklienten.",
+                    manualStartWarning: "Du måste fortfarande starta uppdragen manuellt. Det första klicket startar uppdragen i bakgrunden. För videouppdrag kommer efterföljande klick att öppna videomodalen som vanligt. För att avbryta uppdragen kan du öppna snabbmenyn på uppdragsrutan och välja {{stopAuto}}.",
+                    tosWarning: "Att använda något av dessa alternativ är emot Discords ToS. Användning på egen risk.",
+                    selectFeatures: "Välj vilka Quest-funktioner som ska ändras.",
+                    disablePopup: "Inaktivera Quest Popup Above Account Panel",
+                    completeVideo: "Slutför videouppdrag i bakgrunden",
+                    completeGame: "Slutför speluppdrag i bakgrunden",
+                    stopAuto: "Stoppa Auto-Complete"
                 },
                 restyleQuests: {
-                    title: "Omformatera uppgifter",
-                    description: "Markera Uppgifter med valfria temafärger för synlighet.",
-                    precedenceNote: "Begärda och utgångna aktivitetsstilar kommer att ha företräde även om uppgiften ignoreras.",
-                    gradientStyle: "Gradient Stili",
-                    assetPreload: "Asset Bootloader",
-                    unclaimed: "Oombedd",
-                    claimed: "Begärde",
-                    ignored: "ignoreras",
+                    title: "Styla om uppdrag",
+                    description: "Markera uppdrag med valfria temafärger för synlighet.",
+                    precedenceNote: "Anspråkade och utgångna Quest-stilar kommer att ha företräde även om en Quest ignoreras.",
+                    gradientStyle: "Gradientstil",
+                    assetPreload: "Asset Preload",
+                    unclaimed: "Ohämtad",
+                    claimed: "Påstod",
+                    ignored: "Ignorerade",
                     expired: "Utgått",
-                    intenseGradient: "Tät omarbetad gradient",
-                    defaultGradient: "Standard omarbetad gradient",
+                    intenseGradient: "Intensiv Restyle Gradient",
+                    defaultGradient: "Standard omstilsgradient",
                     blackGradient: "Subtil svart gradient",
                     noGradient: "Ingen gradient",
-                    loadAllAssets: "Ladda alla uppgiftstillgångar vid sidladdning",
-                    loadDuringScroll: "Ladda aktivitetstillgångar under sidrullning"
+                    loadAllAssets: "Ladda alla Quest-tillgångar vid sidladdning",
+                    loadDuringScroll: "Ladda Quest-tillgångar under sidrullning"
                 },
                 reorderQuests: {
-                    title: "Ordna om uppgifter",
-                    description: "Sortera uppgifter efter deras status. Gäller när sorteringsalternativet \"Questify\" är valt på uppdragssidan.",
-                    formatNote: "Den kommaseparerade listan måste innehålla allt av följande: {{items}}.",
-                    placeholder: "Du måste lägga till UNDERLAGET, KRÄVAT, IGNORERAD, UPPGIFT alla",
+                    title: "Ordna om uppdrag",
+                    description: "Sortera uppdragen efter deras status. Tillämpas när sorteringsalternativet \"Questify\" är valt på Quest-sidan.",
+                    formatNote: "Kommaseparerad lista måste innehålla alla: {{items}}.",
+                    placeholder: "Du måste inkludera allt AVSÄTTAT, KRÄVAT, IGNORERAD, UTGÅTT",
                     invalidFormat: "Ogiltigt format.",
-                    unclaimedSubsort: "Unclaimed Subrank",
-                    claimedSubsort: "Anspråk på Subrank",
-                    ignoredSubsort: "Ignorerad underordning",
-                    expiredSubsort: "Utgått underrankning",
+                    unclaimedSubsort: "Unclaimed Subsort",
+                    claimedSubsort: "Påstådd underordnad",
+                    ignoredSubsort: "Ignorerad underordnad",
+                    expiredSubsort: "Utgått underordnad",
                     addedNewest: "Tillagd (nyast)",
-                    addedOldest: "Tillägg (äldst)",
+                    addedOldest: "Tillagd (äldst)",
                     expiredRecent: "Utgått (senast)",
-                    expiredLeast: "Utgått (åtminstone senast)",
-                    expiringSoon: "Utgår (närmast)",
-                    expiringLate: "Går ut (senast)",
-                    claimedRecent: "Begärt (senast)",
-                    claimedLeast: "Begärt (åtminstone senast)",
-                    ignoredQuestProfile: "Ignorerad uppgiftsprofil",
+                    expiredLeast: "Utgått (senast nyligen)",
+                    expiringSoon: "Utgår (snarast)",
+                    expiringLate: "Utgår (senaste)",
+                    claimedRecent: "Gjorde anspråk (senast)",
+                    claimedLeast: "Anspråk på (senast senaste)",
+                    ignoredQuestProfile: "Ignorerad Quest-profil",
                     sharedProfile: "Delad: Alla konton på denna kundandel ignoreras.",
                     privateProfile: "Privat: Alla konton på denna klient har separata ignoreringar.",
                     rememberSort: "Kom ihåg Sorteringsval",
                     rememberFilter: "Kom ihåg filterval",
                     yes: "Ja",
                     no: "Inga",
-                    rememberNote: "Det här sorterings- och filtervalet hänvisar till de inbyggda sorterings- och filteralternativen på aktivitetssidan. Ovanstående anpassade sortering gäller endast när sorteringsalternativet \"Questify\" är valt på Quest-sidan. Om återställningen är inaktiverad återställs sorterings- eller filteralternativen varje gång du öppnar uppgiftssidan."
+                    rememberNote: "Detta sorterings- och filterval hänvisar till de inbyggda sorterings- och filteralternativen på Quest-sidan. Den anpassade sorteringen ovan tillämpas endast när sorteringsalternativet \"Questify\" är valt på Quest-sidan. Om att komma ihåg är inaktiverat kommer sorterings- eller filteralternativen att återställas varje gång du öppnar Quest-sidan."
                 },
                 fetchingQuests: {
-                    title: "Hämta uppgifter",
-                    description: "Konfigurera hur ofta uppgifter hämtas från Discord och ställ in varningar för nya uppgifter.",
-                    defaultBehavior: "Som standard tar Discord bara upp Tasks när de är installerade och du besöker Tasks-sidan. Detta betyder att utan ett hämtningsintervall definierat nedan, kommer detta plugin inte att meddelas om nya uppdrag som läggs till under dagen.",
-                    requirement: "Detta beror på om Quest-knappen är aktiv och inställd på {{unclaimed}}, eller inställd på {{alltid}} och indikatorerna för unclaimed {{pill}}, {{badge}} eller {{both}} är aktiverade. Annars finns det inget behov av att hämta uppdrag med jämna mellanrum.",
-                    blockWarning: "Dessutom, om {{fetchingQuests}} är blockerad i inställningen {{questFeatures}}, kommer detta inte att fungera.",
-                    fetchInterval: "Hämta räckvidd",
+                    title: "Hämta uppdrag",
+                    description: "Konfigurera hur ofta du vill hämta uppdrag från Discord och ställ in varningar för nya uppdrag.",
+                    defaultBehavior: "Som standard hämtar Discord endast uppdrag vid laddning och när man besöker uppdragssidan. Detta innebär att utan ett hämtningsintervall definierat nedan, kommer detta plugin att bli omedvetet om nya uppdrag som läggs till under dagen.",
+                    requirement: "Detta förlitar sig på att Quest-knappen är aktiverad och inställd på antingen {{unclaimed}}, eller inställd på {{always}} med indikatorerna {{pill}}, {{badge}} eller {{both}} som inte har gjorts anspråk på aktiverade. Annars finns det ingen anledning att regelbundet hämta uppdrag.",
+                    blockWarning: "Dessutom, om {{fetchingQuests}} är blockerad i {{questFeatures}}-inställningen, kommer detta inte att fungera.",
+                    fetchInterval: "Hämtningsintervall",
                     alertSound: "Varningsljud",
                     intervalPlaceholder: "Välj eller skriv ett intervall mellan 30 minuter och 12 timmar.",
-                    intervalFeedback: "Intervallerna bör vara mellan 30 minuter och 12 timmar.",
-                    soundPlaceholder: "Välj ett ljud eller ange en anpassad ljudadress.",
-                    soundFeedback: "Ljudet hittades inte eller så kommer webbadressen inte från en domän som stöds.",
+                    intervalFeedback: "Intervaller måste vara mellan 30 minuter och 12 timmar.",
+                    soundPlaceholder: "Välj ett ljud eller ange en anpassad ljud-URL.",
+                    soundFeedback: "Ljudet hittades inte, eller så kommer webbadressen inte från en domän som stöds.",
                     disabled: "Inaktiverad",
-                    minutes: "En minut",
-                    minute: "En minut",
-                    hours: "Ögonblick",
-                    hour: "Ögonblick",
+                    minutes: "Minuter",
+                    minute: "Minut",
+                    hours: "Timmar",
+                    hour: "Timme",
                     thirtyMinutes: "30 minuter",
-                    oneHour: "1 ögonblick",
-                    threeHours: "3 ögonblick",
-                    sixHours: "6 ögonblick",
-                    twelveHours: "12 ögonblick",
+                    oneHour: "1 timme",
+                    threeHours: "3 timmar",
+                    sixHours: "6 timmar",
+                    twelveHours: "12 timmar",
                     customSound: "ANPASSAT LJUD"
                 },
                 disableOptions: {
                     everything: "Inaktivera allt",
-                    discovery: "Inaktivera fliken Utforska",
-                    dms: "Inaktivera fliken Uppgifter i DM",
-                    fetching: "Inaktivera uppgiftshämtning",
+                    discovery: "Inaktivera Discovery-fliken",
+                    dms: "Inaktivera uppdragsfliken i DM",
+                    fetching: "Inaktivera hämtning av uppdrag",
                     popup: "Inaktivera Popup Above Account Panel",
-                    sponsored: "Inaktivera sponsrad banner på uppgiftssidan",
+                    sponsored: "Inaktivera sponsrad banner på uppdragssidan",
                     badge: "Inaktivera märke på användarprofiler",
-                    inventory: "Inaktivera meddelande om transport av presentlager",
-                    friendsList: "Vänlista Aktiv kampanj för närvarande",
-                    membersList: "Medlemslista Active Playing Icons",
-                    gameQuests: "Slutför spel-/aktivitetsutmaningar i bakgrunden",
-                    videoQuests: "Slutför videotittande uppgifter i bakgrunden",
-                    achievementQuests: "Slutför aktivitetsuppgifter i bakgrunden",
-                    mobileDesktop: "Gör mobila uppgifter kompatibla med skrivbordet",
-                    notifyOnComplete: "Meddela mig när uppgiften är klar"
+                    inventory: "Inaktivera meddelande om flytt av presentlager",
+                    friendsList: "Vänlista Aktiv nu-kampanj",
+                    membersList: "Medlemslista aktivt spelar ikoner",
+                    gameQuests: "Slutför spel-/aktivitetsuppdrag i bakgrunden",
+                    videoQuests: "Slutför titta på videouppdrag i bakgrunden",
+                    achievementQuests: "Slutför uppgiften i aktivitetsuppdrag i bakgrunden",
+                    mobileDesktop: "Gör Mobile Quests Desktop-kompatibel",
+                    notifyOnComplete: "Meddela när uppdraget är slutfört"
                 },
                 options: {
                     always: "Alltid",
-                    unclaimed: "Oombedd",
+                    unclaimed: "Ohämtad",
                     never: "Aldrig",
-                    pill: "Hap",
+                    pill: "Piller",
                     badge: "Emblem",
-                    both: "Båda två",
+                    both: "Både",
                     none: "Ingen",
                     openQuests: "Öppna uppdrag",
                     contextMenu: "Snabbmeny",
                     pluginSettings: "Plugin-inställningar",
                     nothing: "Ingenting",
-                    orbs: "sfärer",
+                    orbs: "Orbs",
                     nitroCodes: "Nitrokoder",
                     rewardCodes: "Belöningskoder",
                     inGameItems: "Föremål i spelet",
-                    profileCollectibles: "Profilsamlingar"
+                    profileCollectibles: "Profil Samlarföremål"
                 }
             },
             option: {
                 disableQuests: {
-                    label: "Inaktivera uppgifter",
-                    description: "Välj vilka aktivitetsfunktioner som ska inaktiveras."
+                    label: "Inaktivera uppdrag",
+                    description: "Välj vilka Quest-funktioner som ska inaktiveras."
                 },
                 disableQuestsEverything: {
                     label: "Inaktivera allt",
-                    description: "Inaktivera alla Task-funktioner."
+                    description: "Inaktivera alla Quest-funktioner."
                 },
                 disableQuestsFetchingQuests: {
-                    label: "Inaktivera uppgiftshämtning",
-                    description: "Inaktivera uppgiftshämtning från Discord."
+                    label: "Inaktivera hämtning av uppdrag",
+                    description: "Inaktivera hämtning av uppdrag från Discord."
                 },
                 disableQuestsDirectMessagesTab: {
-                    label: "Inaktivera Task Tab i DM",
-                    description: "Inaktivera fliken Uppgift på sidan Direktmeddelanden."
+                    label: "Inaktivera uppdragsfliken i DM",
+                    description: "Inaktivera Quest-fliken på sidan Direktmeddelanden."
                 },
                 disableQuestsDiscoveryTab: {
-                    label: "Inaktivera fliken Utforska",
-                    description: "Inaktivera fliken Quest på sidan Utforska."
+                    label: "Inaktivera Discovery-fliken",
+                    description: "Inaktivera Quest-fliken på Discovery-sidan."
                 },
                 disableQuestsPageSponsoredBanner: {
-                    label: "Inaktivera sponsrad banner på uppgiftssidan",
-                    description: "Inaktivera den sponsrade bannern på sidan Uppgifter."
+                    label: "Inaktivera sponsrad banner på uppdragssidan",
+                    description: "Inaktivera den sponsrade bannern på Quest-sidan."
                 },
                 disableQuestsPopupAboveAccountPanel: {
-                    label: "Inaktivera popup på kontopanelen",
-                    description: "Inaktivera popup-fönstret Uppgift högst upp på din kontopanel."
+                    label: "Inaktivera Popup Above Account Panel",
+                    description: "Inaktivera Quest-popupen ovanför din kontopanel."
                 },
                 disableQuestsBadgeOnUserProfiles: {
                     label: "Inaktivera märke på användarprofiler",
-                    description: "Inaktivera uppgiftsmärket på användarprofiler."
+                    description: "Inaktivera Quest-märket på användarprofiler."
                 },
                 disableQuestsGiftInventoryRelocationNotice: {
                     label: "Inaktivera meddelande om flytt av presentlager",
-                    description: "Presentinventering Inaktivera meddelande om uppdragsflyttning."
+                    description: "Inaktivera presentinventeringen Quest omlokaliseringsmeddelande."
                 },
                 disableFriendsListActiveNowPromotion: {
-                    label: "Inaktivera kampanj för vänlistan för närvarande aktiv",
-                    description: "Inaktivera Quest-kampanj för spel som spelas av vänner."
+                    label: "Inaktivera kampanj för vänlistan Active Now",
+                    description: "Inaktivera marknadsföringen av uppdrag för spel som spelas av vänner."
                 },
                 disableMembersListActivelyPlayingIcons: {
-                    label: "Inaktivera Active Play-ikoner i medlemslistan",
-                    description: "Inaktivera aktivt spelikoner i medlemslistan."
+                    label: "Inaktivera ikoner för aktivt spelande medlemslista",
+                    description: "Inaktivera de aktivt spelade ikonerna i medlemslistan."
                 },
                 makeMobileQuestsDesktopCompatible: {
-                    label: "Gör Mobile Tasks Desktop-kompatibel",
-                    description: "Gör uppgifter endast för mobila enheter kompatibla med datorer."
+                    label: "Gör Mobile Quests Desktop-kompatibel",
+                    description: "Gör mobiluppdrag kompatibla med datorer."
                 },
                 completeVideoQuestsInBackground: {
-                    label: "Slutför videouppgifter i bakgrunden",
-                    description: "Slutför videouppdrag i bakgrunden när videotiden har gått."
+                    label: "Kompletta videouppdrag i bakgrunden",
+                    description: "Slutför videouppdrag i bakgrunden efter att videons längd har passerat."
                 },
                 completeGameQuestsInBackground: {
                     label: "Slutför speluppdrag i bakgrunden",
-                    description: "Slutför speluppdrag i bakgrunden efter att speltiden har gått."
+                    description: "Slutför speluppdrag i bakgrunden efter att speltiden har passerat."
                 },
                 completeAchievementQuestsInBackground: {
-                    label: "Slutför aktivitetsuppgifter i bakgrunden",
-                    description: "Slutför aktivitetsutmaningar i bakgrunden."
+                    label: "Slutför uppgiften i aktivitetsuppdrag i bakgrunden",
+                    description: "Fullständig prestation i aktivitetsuppdrag i bakgrunden."
                 },
                 notifyOnQuestComplete: {
-                    label: "Meddela mig när uppgiften är klar",
-                    description: "Visa meddelande när en uppgift slutförs automatiskt."
+                    label: "Meddela när uppdraget är slutfört",
+                    description: "Visa ett meddelande när ett uppdrag slutförs automatiskt."
                 },
                 questButton: {
-                    label: "Uppgiftsknapp",
+                    label: "Quest-knappen",
                     description: "Visa en Quest-knapp i serverlistan."
                 },
                 questButtonDisplay: {
-                    label: "Uppgiftsknappens utseende",
-                    description: "Vilken visningstyp som ska användas för knappen Uppgift i serverlistan."
+                    label: "Quest-knappdisplay",
+                    description: "Vilken visningstyp som ska användas för Quest-knappen i serverlistan."
                 },
                 questRewardIncludeRewardCode: {
                     label: "Inkludera belöningskoder",
-                    description: "Inkludera uppdrag med belöningskoder när du tittar på antalet uppdrag."
+                    description: "Inkludera uppdrag med belöningskoder när du visar antal uppdrag."
                 },
                 questRewardIncludeNitroCode: {
                     label: "Inkludera nitrokoder",
-                    description: "Inkludera Nitro-kodade uppdrag när du tittar på uppdragen."
+                    description: "Inkludera uppdrag med nitrokoder när du visar antal uppdrag."
                 },
                 questRewardIncludeInGame: {
                     label: "Inkludera belöningar i spelet",
-                    description: "Inkludera uppdrag med belöningar i spelet när du tittar på uppdragen."
+                    description: "Inkludera uppdrag med belöningar i spelet när du visar antal uppdrag."
                 },
                 questRewardIncludeCollectibles: {
-                    label: "Inkludera samlingar",
-                    description: "Inkludera uppdrag med samlarobjekt när du tittar på antalet uppdrag."
+                    label: "Inkludera samlarföremål",
+                    description: "Inkludera uppdrag med samlarobjekt när du visar antalet uppdrag."
                 },
                 questRewardIncludeOrbs: {
-                    label: "Inkludera sfärer",
-                    description: "Inkludera Globe-vinnande uppdrag när du tittar på antalet uppdrag."
+                    label: "Inkludera klot",
+                    description: "Inkludera uppdrag med klot när du visar antal uppdrag."
                 },
                 questButtonUnclaimed: {
-                    label: "Quest-knapp Indikator för ohämtad",
-                    description: "Vilken visningstyp som ska användas för den outtagna indikatorn på knappen Uppgift i serverlistan."
+                    label: "Quest-knapp Indikator för oupphämtad",
+                    description: "Vilken visningstyp som ska användas för den outtagna indikatorn på Quest-knappen i serverlistan."
                 },
                 questButtonBadgeColor: {
                     label: "Quest Button Badge Färg",
@@ -7908,170 +7908,170 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 questButtonLeftClickAction: {
                     label: "Vänsterklicka Åtgärd",
-                    description: "Åtgärd som ska vidtas när du vänsterklickar på knappen Uppgift i serverlistan."
+                    description: "Åtgärden som ska utföras när du vänsterklickar på Quest-knappen i serverlistan."
                 },
                 questButtonMiddleClickAction: {
                     label: "Mellanklickåtgärd",
-                    description: "Åtgärd som ska vidtas när du mittklickar på knappen Uppgift i serverlistan."
+                    description: "Åtgärden som ska utföras när du mittklickar på Quest-knappen i serverlistan."
                 },
                 questButtonRightClickAction: {
                     label: "Högerklicka Åtgärd",
-                    description: "Åtgärd som ska vidtas när du högerklickar på knappen Uppgift i serverlistan."
+                    description: "Åtgärden som ska utföras när du högerklickar på Quest-knappen i serverlistan."
                 },
                 fetchingQuests: {
-                    label: "Hämta uppgifter",
-                    description: "Ta med Task from Discord."
+                    label: "Hämta uppdrag",
+                    description: "Hämta uppdrag från Discord."
                 },
                 fetchingQuestsInterval: {
-                    label: "Quest Fetch Range",
-                    description: "Intervall (i sekunder) för att hämta uppgifter från Discord."
+                    label: "Intervall för hämtning av uppdrag",
+                    description: "Intervallet i sekunder för att hämta uppdrag från Discord."
                 },
                 fetchingQuestsAlert: {
-                    label: "Quest Fetch Alert",
-                    description: "Ljudet som kommer att spelas när nya uppdrag upptäcks."
+                    label: "Varning för att hämta uppdrag",
+                    description: "Ljudet att spela när nya uppdrag upptäcks."
                 },
                 fetchingQuestsAlertVolume: {
-                    label: "Quest Fetch Alert Volym",
-                    description: "Volymen på ljudet som kommer att spelas när nya uppdrag upptäcks."
+                    label: "Hämtar quests varningsvolym",
+                    description: "Volymen på varningsljudet när nya uppdrag upptäcks."
                 },
                 restyleQuests: {
-                    label: "Omformatera uppgifter",
-                    description: "Anpassa utseendet på Task-rutor på sidan Tasks."
+                    label: "Styla om uppdrag",
+                    description: "Anpassa utseendet på Quest-brickorna på sidan Uppdrag."
                 },
                 restyleQuestsUnclaimed: {
-                    label: "Omformatera uppgifter - oönskad",
-                    description: "Färgen på uppgiftsrutor som inte gjorts anspråk på på sidan Uppgifter."
+                    label: "Restyle quests Unclaimed",
+                    description: "Färgen på outtagna Quest-brickor på uppdragssidan."
                 },
                 restyleQuestsClaimed: {
-                    label: "Omformatera uppgifter - begärs",
-                    description: "Färgen på uppgiftsrutor som gjorts anspråk på på sidan Uppgifter."
+                    label: "Restyle-uppdrag begärda",
+                    description: "Färgen på questbrickor som gjorts anspråk på på uppdragssidan."
                 },
                 restyleQuestsIgnored: {
-                    label: "Formatera om uppgifter - ignoreras",
-                    description: "Färgen på ignorerade uppgiftsrutor på sidan Uppgifter."
+                    label: "Restyle-uppdrag ignorerade",
+                    description: "Färgen på ignorerade Quest-brickor på uppdragssidan."
                 },
                 restyleQuestsExpired: {
-                    label: "Formatera om uppgifter - utgången",
-                    description: "Färgen på utgångna uppgiftsrutor på sidan Uppgifter."
+                    label: "Restyle-uppdrag har löpt ut",
+                    description: "Färgen på utgångna Quest-brickor på uppdragssidan."
                 },
                 restyleQuestsGradient: {
-                    label: "Omformatera uppgifter - Gradient",
-                    description: "Gradientstil som används i uppgiftsbrickor."
+                    label: "Restyle Quests Gradient",
+                    description: "Stil för gradienten som används i Quest-brickorna."
                 },
                 restyleQuestsPreload: {
-                    label: "Formatera om uppgifter - Bootloader",
-                    description: "Testa att förinläsa tillgångar för uppgiftsrutor."
+                    label: "Restyle quests Preload",
+                    description: "Försök att förladda tillgångarna för Quest-brickorna."
                 },
                 reorderQuests: {
-                    label: "Ordna om uppgifter",
-                    description: "Sortera uppgifter efter deras status. Lämna tomt för standardsortering. Den kommaseparerade listan måste innehålla allt av följande: UNDERLAGET, KRÄVAT, IGNORERAD, UTGÅTT."
+                    label: "Ordna om uppdrag",
+                    description: "Sortera uppdragen efter deras status. Lämna tomt för standardsortering. Kommaseparerad lista måste innehålla alla: EJ KRÄVAT, KRÄVAT, IGNORERAD, UTGÅTT."
                 },
                 unclaimedSubsort: {
-                    label: "Unclaimed Subrank",
-                    description: "Undersorteringsmetod för outtagna uppgifter."
+                    label: "Unclaimed Subsort",
+                    description: "Subsorteringsmetod för uppdrag utan anspråk."
                 },
                 claimedSubsort: {
-                    label: "Anspråk på Subrank",
-                    description: "Undersorteringsmetod för begärda uppgifter."
+                    label: "Påstådd underordnad",
+                    description: "Subsorteringsmetod för påstådda uppdrag."
                 },
                 ignoredSubsort: {
-                    label: "Ignorerad underordning",
-                    description: "Undersorteringsmetod för ignorerade uppgifter."
+                    label: "Ignorerad underordnad",
+                    description: "Subsorteringsmetod för ignorerade uppdrag."
                 },
                 expiredSubsort: {
-                    label: "Utgått underrankning",
-                    description: "Nedsorteringsmetod för utgångna uppgifter."
+                    label: "Utgått underordnad",
+                    description: "Subsorteringsmetod för utgångna uppdrag."
                 },
                 unclaimedUnignoredQuests: {
-                    label: "Obegärda ej ignorerade uppgifter",
-                    description: "Håller reda på antalet outtagna och ej ignorerade uppgifter."
+                    label: "Obekräftade och ignorerade uppdrag",
+                    description: "Spårar antalet outtagna och ej ignorerade uppdrag."
                 },
                 onQuestsPage: {
-                    label: "På sidan Uppgifter",
-                    description: "Om användaren för närvarande är på sidan Uppgifter."
+                    label: "På uppdragssidan",
+                    description: "Om användaren för närvarande är på sidan Uppdrag."
                 },
                 triggerQuestsRerender: {
-                    label: "Utlösande uppdrag Återrendera",
-                    description: "Utlösa en ny rendering av sidan Uppgifter genom att ändra den här inställningen."
+                    label: "Utlösa uppdrag Återrendera",
+                    description: "Utlösa en återgivning av uppdragssidan genom att växla mellan den här inställningen."
                 },
                 ignoredQuestProfile: {
-                    label: "Ignorerad uppgiftsprofil",
-                    description: "Profilen som används för Ignorerade uppgifter."
+                    label: "Ignorerad Quest-profil",
+                    description: "Profilen som används för ignorerade uppdrag."
                 },
                 rememberQuestPageSort: {
-                    label: "Kom ihåg Quest Page Sortering",
-                    description: "Kom ihåg den senast använda sekvensen på sidan Uppgifter."
+                    label: "Kom ihåg Quest Page Sort",
+                    description: "Kom ihåg den senast använda sorteringen på uppdragssidan."
                 },
                 rememberQuestPageFilters: {
-                    label: "Kom ihåg filter för uppgiftssidor",
-                    description: "Kom ihåg senast använda filter på sidan Uppgifter."
+                    label: "Kom ihåg Quest Page Filter",
+                    description: "Kom ihåg de senast använda filtren på sidan Uppdrag."
                 },
                 lastQuestPageSort: {
-                    label: "Senaste Quest Page Ranking",
-                    description: "Kom ihåg den senast använda sekvensen på sidan Uppgifter."
+                    label: "Sidsortering för sista uppdrag",
+                    description: "Kom ihåg den senast använda sorteringen på uppdragssidan."
                 },
                 lastQuestPageFilters: {
-                    label: "Senaste filter för uppgiftssidor",
-                    description: "Kom ihåg senast använda filter på sidan Uppgifter."
+                    label: "Filter för sista uppdragssidan",
+                    description: "Kom ihåg de senast använda filtren på sidan Uppdrag."
                 },
                 ignoredQuestIDs: {
-                    label: "Ignorerade uppgifts-ID:n",
-                    description: "En rad ignorerade uppgifts-ID:n."
+                    label: "Ignorerade uppdrags-ID:n",
+                    description: "En uppsättning uppdrags-ID:n som ignoreras."
                 },
                 resumeQuestIDs: {
-                    label: "Pågående uppgifts-ID",
-                    description: "Uppsättning av uppgifts-ID:n som autoslutförs i bakgrunden."
+                    label: "Återuppta uppdrags-ID:n",
+                    description: "En rad uppdrags-ID:n som automatiskt slutförs i bakgrunden."
                 }
             },
             button: {
                 questInProgressWithTime: "Slutför ({{remainTime}})",
                 completing: "Slutför",
-                resume: "Devam And (~{{remainTime}})",
+                resume: "Återuppta (~{{remainTime}})",
                 complete: "Slutför {{remainTime}}",
-                completeImmediate: "Komplett (omedelbart)",
-                completed: "avslutad"
+                completeImmediate: "Komplett (Omedelbart)",
+                completed: "Avslutad"
             },
             reward: {
-                orbs: "{{orbQuantity}} Orbs için {{completingText}}.",
+                orbs: "{{completingText}} för {{orbQuantity}} Orbs.",
                 article: "{{completingText}} för {{itemName}}.",
                 unrecognized: "{{completingText}} för en okänd belöningstyp."
             },
             notification: {
                 completed: {
-                    title: "Jobbet är gjort",
-                    body: "Uppdraget {{questName}} slutfört."
+                    title: "Uppdraget avslutat",
+                    body: "{{questName}}-uppdraget har slutförts."
                 }
             }
         },
         questionMarkReplacement: {
             name: "QuestionMarkReplacement",
-            description: "Om meddelandet endast består av frågetecken ersätter det alla frågetecken med den valda strängen.",
+            description: "Ersätt alla frågetecken med vald sträng, om meddelandet endast innehåller frågetecken.",
             option: {
                 replace: {
-                    label: "Ändra",
+                    label: "Ersätta",
                     description: "Byt ut med"
                 }
             }
         },
         quickMention: {
             name: "QuickMention",
-            description: "Lägger till en snabbomnämningsknapp i meddelandefältet.",
-            tooltip: "Snabbsatsning"
+            description: "Lägger till en snabbomnämningsknapp i meddelandefältet",
+            tooltip: "Snabbt omnämnande"
         },
         quickReply: {
-            name: "Snabbsvar",
-            description: "Svara (ctrl + upp/ner) och redigera (ctrl + shift + upp/ner) meddelanden med snabbtangenter.",
+            name: "QuickReply",
+            description: "Svara på (Ctrl+Upp/Ner) och redigera (Ctrl+Skift+Upp/Ner) meddelanden via tangentbindningar",
             option: {
                 shouldMention: {
-                    label: "Ska jag nämna",
-                    description: "Pinga som svar som standard",
+                    label: "Bör nämna",
+                    description: "Pinga svar som standard",
                     noReplyMentionPlugin: "Följ NoReplyMention-plugin (om aktiverat)",
-                    enabled: "Effektiv",
+                    enabled: "Aktiverad",
                     disabled: "Inaktiverad"
                 },
                 ignoreBlockedAndIgnored: {
-                    label: "Ignorera Blockerad och Ignorerad",
-                    description: "Ignorera meddelanden från blockerade/ignorerade användare när du surfar"
+                    label: "Ignorera blockerad och ignorerad",
+                    description: "Ignorera meddelanden från blockerade/ignorerade användare när du navigerar"
                 }
             }
         },
@@ -8079,115 +8079,115 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "QuickThemeSwitcher",
             description: "Växla snabbt mellan teman med kortkommandon.",
             about: {
-                title: "Snabbtangenter",
-                description: "Använd Ctrl/Cmd+Skift+piltangenterna för att navigera (vänster/höger: Bläddra mellan teman, Upp: Aktivera, Ned: Inaktivera).",
-                reload: "Tryck på Ctrl/Cmd+Skift+Alt för att uppdatera temalistan."
+                title: "Bindningar",
+                description: "Använd Ctrl/Cmd+Skift+pilarna för att navigera (vänster/höger: växla teman, Upp: aktivera, Ned: inaktivera).",
+                reload: "Tryck på Ctrl/Cmd+Skift+Alt för att ladda om temalistan."
             },
             modal: {
-                added: "{{count}} nya teman har lagts till",
-                removed: "{{count}} teman har tagits bort",
-                reloaded: "{{themeCount}} tema laddades om",
-                addedLocal: "Lade till {{count}} lokala teman",
-                removedLocal: "{{count}} inbyggt tema har tagits bort",
+                added: "Lade till {{count}} tema{{s}}",
+                removed: "Tog bort {{count}} tema{{s}}",
+                reloaded: "Omladdade {{themeCount}} teman",
+                addedLocal: "Lade till {{count}} lokalt tema{{s}}",
+                removedLocal: "Tog bort {{count}} lokalt tema{{s}}",
             },
             option: {
                 includeLocal: {
-                    label: "Inkludera inhemska teman",
-                    description: "Inkluderar inbyggda teman på din enhet i listan"
+                    label: "Inkludera lokalt",
+                    description: "Inkludera lokala teman"
                 },
                 includeOnline: {
-                    label: "Inkludera onlineteman",
-                    description: "Inkluderar onlineteman i listan"
+                    label: "Inkludera online",
+                    description: "Inkludera onlineteman"
                 },
                 sortOrder: {
-                    label: "Sortera efter",
+                    label: "Sorteringsordning",
                     description: "Sorteringsmetod",
-                    asc: "A'dan Z'ye",
-                    desc: "Z'den A'ya",
-                    recent: "I Son"
+                    asc: "A-Z",
+                    desc: "Z-A",
+                    recent: "Ny"
                 },
                 autoRefresh: {
                     label: "Automatisk uppdatering",
-                    description: "Uppdaterar automatiskt temalistan när ändringar upptäcks"
+                    description: "Uppdatera temalistan automatiskt när ändringar upptäcks"
                 },
                 showNotifications: {
                     label: "Visa aviseringar",
-                    description: "Visar aviseringar när teman läggs till eller tas bort"
+                    description: "Visa aviseringar när teman läggs till/tar bort"
                 }
             }
         },
         quoter: {
-            name: "Citat",
-            description: "Låter dig skapa en inspirerande citatbild från ett meddelande",
+            name: "Quoter",
+            description: "Lägger till möjligheten att skapa en inspirerande citatbild från ett meddelande",
             context: {
-                quote: "Citat"
+                quote: "Citationstecken"
             },
             modal: {
-                title: "4K'da Yakala",
-                grayscale: "Svart-Vit",
+                title: "Fånga dem i 4k",
+                grayscale: "Gråskala",
                 export: "Exportera",
                 send: "Skicka",
-                saveAsGIF: "Spara som GIF",
-                saveDescription: "Sparar/skicka bild som GIF istället för PNG",
+                saveAsGIF: "Save as GIF",
+                saveDescription: "Sparar/skickas bilden som en GIF istället för en PNG",
                 showWatermark: "Visa vattenstämpel",
-                watermarkText: "Filigran Metni (max. 32 tecken)"
+                watermarkText: "Vattenstämpeltext (max 32 tecken)"
             },
             option: {
                 quoteFont: {
                     label: "Citat teckensnitt",
                     description: "Teckensnitt för citattext (författare/användarnamn använder alltid M PLUS Rounded 1c)",
-                    mPlusRounded: "M PLUS Rundad 1c",
+                    mPlusRounded: "M PLUS Rounded 1c",
                     openSans: "Öppna Sans",
                     momoSignature: "Momo signatur",
                     lora: "Lora",
                     merriWeather: "Merriweather"
                 },
                 watermark: {
-                    label: "filigran",
-                    description: "Anpassad vattenstämpeltext (max. 32 tecken)"
+                    label: "Vattenstämpel",
+                    description: "Anpassad vattenstämpeltext (max 32 tecken)"
                 },
                 grayscale: {
-                    label: "Svart-Vit",
-                    description: "Aktivera svartvitt som standard"
+                    label: "Gråskala",
+                    description: "Aktivera gråskala som standard"
                 },
                 showWatermark: {
                     label: "Visa vattenstämpel",
                     description: "Visa vattenstämpel som standard"
                 },
                 saveAsGif: {
-                    label: "Spara som GIF",
+                    label: "Spara som gif",
                     description: "Spara som GIF som standard"
                 }
             }
         },
         randomVoice: {
             name: "RandomVoice",
-            description: "Lägger till en slumpmässig kopplingsknapp för röstsamtal bredvid tystnadsknappen.",
+            description: "Lägger till en knapp nära Mute-knappen för att gå med i ett slumpmässigt röstsamtal.",
             tooltip: "Slumpmässig röst",
             context: {
-                label: "ljudkonditionering",
-                amountLabel: "ANTAL ANVÄNDARE",
-                spacesLabel: "VAKANS",
-                voiceLabel: "SES LİMİTİ",
-                selfLabel: "DINA EGNA INSTÄLLNINGAR",
+                label: "Rösttillståndsmodifierare",
+                amountLabel: "ANVÄNDARBELOPP",
+                spacesLabel: "UTRYMMEN KVAR",
+                voiceLabel: "RÖSTGRÄNS",
+                selfLabel: "SJÄLVINSTÄLLNINGAR",
                 select: {
-                    servers: "Välj Server",
+                    servers: "Välj servrar",
                     list: "Välj Lista",
                     filters: "Välj Filter",
-                    amount: "Antal användare",
-                    userAmount: "{{amount}} användare",
+                    amount: "Användarbelopp",
+                    userAmount: "{{amount}} användare{{s}}",
                     parameters: "Parametrar",
-                    moreThan: "mer än",
-                    lessThan: "Mindre än så",
-                    equalTo: "lika med",
-                    spaces: "Vakans",
-                    voice: "Dess gränser"
+                    moreThan: "Mer än",
+                    lessThan: "Mindre än",
+                    equalTo: "Lika med",
+                    spaces: "Utrymmen kvar",
+                    voice: "Röstbegränsning"
                 },
                 filter: {
-                    muted: "på tyst",
-                    deafened: "dövad",
+                    muted: "Dämpad",
+                    deafened: "Dövad",
                     camera: "Kamera",
-                    stream: "Broadcasting",
+                    stream: "Strömma",
                     includeFilters: "Inkludera filter",
                     avoidFilters: "Undvik filter"
                 },
@@ -8195,158 +8195,158 @@ const translations: MatchStructure<typeof enTranslations> = {
                     list: "Återställ lista"
                 },
                 voice: {
-                    label: "Ljudinställningar",
+                    label: "Röstalternativ",
                     auto: {
                         mute: "Auto Mute",
                         deafen: "Auto Deafen",
-                        camera: "Automatisk kamera",
-                        stream: "Automatisk sändning",
-                        leaveWhenEmpty: "Lämna när du är ledig",
+                        camera: "Autokamera",
+                        stream: "Automatisk strömning",
+                        leaveWhenEmpty: "Lämna när det är tomt",
                         navigate: "Automatisk navigering",
-                        stage: "Undvik scenkanaler",
-                        afk: "Undvik AFK-kanaler"
+                        stage: "Undvik Stage",
+                        afk: "Undvik AFK"
                     }
                 },
                 invalid: {
-                    server: "ogiltig server"
+                    server: "Ogiltig server"
                 }
             },
             option: {
                 userAmountOperation: {
-                    label: "Antal användare transaktion",
-                    description: "Välj en åtgärd för antalet användare"
+                    label: "Användarbeloppshantering",
+                    description: "Välj en operation för antalet användare"
                 },
                 userAmount: {
-                    label: "Antal användare",
+                    label: "Användarbelopp",
                     description: "Välj antal användare"
                 },
                 spacesLeftOperation: {
-                    label: "Vakansprocess",
-                    description: "Välj en åtgärd för maximalt antal användare"
+                    label: "Mellanslag kvar Operation",
+                    description: "Välj en operation för det maximala antalet användare"
                 },
                 spacesLeft: {
-                    label: "Vakans",
-                    description: "Välj mängd ledigt utrymme"
+                    label: "Utrymmen kvar",
+                    description: "Välj antal maxanvändare"
                 },
                 vcLimitOperation: {
-                    label: "Ljudkanalgränsfunktion",
-                    description: "Välj en åtgärd för ljudkanalgränsen."
+                    label: "Begränsning av röstkanal",
+                    description: "Välj en operation för röstkanalen."
                 },
                 vcLimit: {
-                    label: "Ljudkanalgräns",
-                    description: "Välj en ljudkanalgräns"
+                    label: "Röstkanalgräns",
+                    description: "Välj en röstkanalgräns"
                 },
                 servers: {
                     label: "Servrar",
-                    description: "Servrar att inkludera"
+                    description: "Servrar som ingår"
                 },
                 autoNavigate: {
                     label: "Automatisk navigering",
-                    description: "Den går automatiskt till ljudkanalen."
+                    description: "Navigerar automatiskt till röstkanalen."
                 },
                 autoCamera: {
-                    label: "Automatisk kamera",
+                    label: "Autokamera",
                     description: "Slår på kameran automatiskt"
                 },
                 autoStream: {
-                    label: "Automatisk sändning",
-                    description: "Startar automatiskt sändning"
+                    label: "Automatisk strömning",
+                    description: "Slår på stream automatiskt"
                 },
                 selfMute: {
                     label: "Auto Mute",
-                    description: "Den tystar automatiskt din mikrofon när du går med i ljudkanalen."
+                    description: "Stänger automatiskt av din mikrofon när du går med i en röstkanal."
                 },
                 selfDeafen: {
                     label: "Auto Deafen",
-                    description: "Det dövar dig automatiskt när du går med i röstkanalen."
+                    description: "Dövar automatiskt ditt ljud när du går med i en röstkanal."
                 },
                 leaveEmpty: {
-                    label: "Lämna när du är ledig",
-                    description: "När röstkanalen blir tom hittar den slumpmässigt ett annat samtal."
+                    label: "Lämna när det är tomt",
+                    description: "Hittar ett slumpmässigt samtal när röstchatten är tom."
                 },
                 avoidStages: {
-                    label: "Undvik scenkanaler",
-                    description: "Undviker att ansluta till ljudkanaler av scentyp."
+                    label: "Undvik Stage",
+                    description: "Undviker att gå med i scenröstkanaler."
                 },
                 avoidAfk: {
-                    label: "Undvik AFK-kanaler",
-                    description: "AFK undviker att gå med i ljudkanaler."
+                    label: "Undvik AFK",
+                    description: "Undviker att gå med i AFK röstkanaler."
                 },
                 video: {
                     label: "Video",
-                    description: "Söker efter användare vars kameror är på"
+                    description: "Söker efter användare med deras video på"
                 },
                 stream: {
-                    label: "Broadcasting",
-                    description: "Söker efter användare som sänder"
+                    label: "Strömma",
+                    description: "Söker efter användare som streamar"
                 },
                 mute: {
-                    label: "på tyst",
+                    label: "Stum",
                     description: "Söker efter användare som är avstängda"
                 },
                 deafen: {
-                    label: "dövad",
-                    description: "Söker efter dövade användare"
+                    label: "Döva",
+                    description: "Söker efter användare som är döva"
                 },
                 includeStates: {
                     label: "Inkludera filter",
-                    description: "Tillåter inkludering av specifika användartillstånd"
+                    description: "Möjlighet att inkludera stater"
                 },
                 avoidStates: {
                     label: "Undvik filter",
-                    description: "Tillåter att vissa användarsituationer undviks"
+                    description: "Möjlighet att undvika stater"
                 }
             },
             alert: {
-                failed: "En ljudkanal hittades inte!"
+                failed: "Det gick inte att hitta en röstkanal!"
             }
         },
         reactErrorDecoder: {
             name: "ReactErrorDecoder",
-            description: "React konverterar felkoder till meddelanden som kan läsas av människor."
+            description: "Avkodar Reagera felkoder till meddelanden som kan läsas av människor."
         },
         readAllNotificationsButton: {
             name: "ReadAllNotificationsButton",
-            description: "Lägger till en knapp på meddelandepanelen för att markera alla aviseringar som lästa med ett enda klick.",
+            description: "Läs alla serveraviseringar med ett enda knapptryck!",
             button: "Läs alla"
         },
         recentDMSwitcher: {
-            name: "Senaste DMSwitcher",
-            description: "Växla mellan nyligen använda DM:er med Ctrl+Tab (Ctrl+Skift+Tab vänder om)",
+            name: "RecentDMSwitcher",
+            description: "Ctrl+Tabb mellan senast använda DM:er (Ctrl+Skift+Tabb bakåt)",
             option: {
                 visualStyle: {
-                    label: "Görsel Stil",
-                    description: "Visuell indikatorstil som visas vid byte",
-                    overlay: "Lager (Alt+Tab-stil)",
-                    toast: "Avisering (statusmeddelande)",
-                    off: "Stängd"
+                    label: "Visuell stil",
+                    description: "Visuell indikatorstil under cykling",
+                    overlay: "Överlagring (Alt+Tab-stil)",
+                    toast: "Toast (statusmeddelande)",
+                    off: "Av"
                 },
                 overlayMode: {
-                    label: "Lagerläge",
-                    description: "Lagerinnehåll",
-                    row: "Senaste konversationsraden",
-                    current: "endast tillgänglig",
+                    label: "Överlagringsläge",
+                    description: "Överlagringsinnehåll",
+                    row: "Rad av senaste",
+                    current: "Endast aktuell",
                 },
                 amountOfUsers: {
                     label: "Antal användare",
-                    description: "Antal användare att visa på lagret"
+                    description: "Antal användare som ska visas i överlagring"
                 },
                 overlayRowLength: {
-                    label: "Layer Rad Längd",
-                    description: "Antalet senaste DM som ska visas i raden"
+                    label: "Överlagringsradlängd",
+                    description: "Antalet senaste DM som ska visas i rad"
                 },
                 overlayShowAvatars: {
-                    label: "Visa lagerprofilbilder",
-                    description: "Visar användarprofilbilder på lagret"
+                    label: "Överlägg Visa avatarer",
+                    description: "Visa användaravatarer i överlägg"
                 },
                 toastDurationMs: {
-                    label: "Aviseringstid (ms)",
-                    description: "Visa profilbilder på lager"
+                    label: "Toastlängd (ms)",
+                    description: "Statusmeddelandets varaktighet"
                 },
                 clearRdms: {
                     label: "Rensa RDMS-listan",
-                    description: "Testverktyg: Rensar RDM-listan",
-                    toast: "RDMS-historiken har rensats",
+                    description: "Testverktyg: Rensa RDM-listan",
+                    toast: "Rensad RMDS-historik",
                     button: "Rensa RDM-historik"
                 }
             },
@@ -8355,7 +8355,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 dm: "DM",
                 group: "Grupp DM",
                 channel: "Kanal",
-                switchingTo: "Byter till {{name}}"
+                switchingTo: "Byter till: {{name}}"
             }
         },
         relationshipNotifier: {
@@ -8363,20 +8363,20 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Meddelar dig när en vän, gruppchatt eller server tar bort dig.",
             option: {
                 notices: {
-                    label: "Aviseringar",
-                    description: "Visa en avisering högst upp på skärmen när den tas bort (använd den här om du inte vill missa några aviseringar)."
+                    label: "Notiser",
+                    description: "Visa även en notis högst upp på skärmen när den tas bort (använd detta om du inte vill missa några aviseringar)."
                 },
                 offlineRemovals: {
                     label: "Offlineborttagningar",
-                    description: "Skicka ett meddelande om du har tagits bort när du är offline när du öppnar Discord."
+                    description: "Meddela dig när du startar Discord om du togs bort när du var offline."
                 },
                 friends: {
                     label: "Vänner",
-                    description: "Meddela mig när en vän tar bort dig från sin lista"
+                    description: "Meddela när en vän tar bort dig"
                 },
                 friendRequestCancels: {
-                    label: "Avbokningar av vänförfrågan",
-                    description: "Meddela mig när en vänförfrågan avbryts"
+                    label: "Vänförfrågan avbryts",
+                    description: "Meddela när en vänförfrågan avbryts"
                 },
                 servers: {
                     label: "Servrar",
@@ -8384,127 +8384,127 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 groups: {
                     label: "Grupper",
-                    description: "Meddela mig när den tas bort från en gruppchatt"
+                    description: "Meddela när du tas bort från en gruppchatt"
                 }
             },
             notification: {
-                removedFriend: "{{user}} blev vän med dig.",
-                cancelledFriendRequest: "En vänförfrågan skickad av {{user}} har avbrutits.",
-                removedFromServer: "Du har tagits bort från {{server}}.",
-                removedFromGroup: "Du har tagits bort från {{grupp}}.",
-                noLongerGroup: "Du är inte längre i {{grupp}}.",
-                noLongerServer: "Du är inte längre på {{server}}.",
+                removedFriend: "{{user}} tog bort dig som vän.",
+                cancelledFriendRequest: "En vänförfrågan från {{user}} har tagits bort.",
+                removedFromServer: "Du har tagits bort från servern {{server}}.",
+                removedFromGroup: "Du togs bort från gruppen {{group}}.",
+                noLongerGroup: "Du är inte längre i gruppen {{group}}.",
+                noLongerServer: "Du är inte längre på servern {{server}}.",
                 noLongerFriend: "Du är inte längre vän med {{user}}.",
-                friendRequestRevoked: "Vänförfrågan som skickades av {{user}} har dragits tillbaka.",
-                ok: "ok"
+                friendRequestRevoked: "Vänförfrågan från {{user}} har återkallats.",
+                ok: "OK"
             }
         },
         remix: {
             name: "Remix",
-            description: "Lägger till ett \"Remix\"-alternativ till högerklicksmenyn för filsändningsknappen. Detta öppnar en bild i en enkel bildredigerare och ger dig möjlighet att skicka den redigerade bilden direkt till chatten.",
+            description: "Lägger till ett \"Remix\"-alternativ till högerklicksmenyn på filuppladdningsknappen. Detta alternativ öppnar en bild i en enkel bildredigerare och låter dig skicka den redigerade bilden direkt till chatten.",
             label: "Remix",
             button: {
                 send: "Skicka",
-                close: "Kvartal",
+                close: "Nära",
                 brush: "Borsta",
-                erase: "Duster",
+                erase: "Radera",
                 crop: "Beskära",
                 shape: "Form",
-                reset: "återställa",
-                clear: "rensa"
+                reset: "Återställa",
+                clear: "Rensa"
             },
             editor: {
                 choose: "Välj en bild",
-                browse: "Gozat",
+                browse: "Bläddra",
                 rectangle: "Rektangel",
                 ellipse: "Ellips",
                 line: "Linje",
-                arrow: "Ok",
-                fill: "fylla"
+                arrow: "Pil",
+                fill: "Fylla"
             }
         },
         repeatMessages: {
             name: "RepeatMessages",
-            description: "Det låter dig snabbt skicka meddelanden igen. Om du håller ned Skift-tangenten medan du klickar på Upprepa, skickas det som ett svar på meddelandet.",
+            description: "Låter dig upprepa meddelanden snabbt. Om du håller ned Skift medan du klickar på alternativet Upprepa, kommer det att svara på meddelandet.",
             button: "Upprepa (klicka) / Upprepa och svara (Skift + klick)",
             context: {
-                repeat: "upprepa",
+                repeat: "Upprepa",
                 repeatAndReply: "Upprepa och svara"
             }
         },
         replaceGoogleSearch: {
-            name: "Ersätt GoogleSearch",
-            description: "Den ersätter Google-sökning med olika sökmotorer.",
+            name: "ReplaceGoogleSearch",
+            description: "Ersätter Google-sökningen med olika motorer.",
             option: {
                 customEngineName: {
                     label: "Anpassat motornamn",
-                    description: "Namn på anpassad sökmotor"
+                    description: "Namn på den anpassade sökmotorn"
                 },
                 customEngineURL: {
                     label: "URL för anpassad motor",
-                    description: "Din sökmotors URL"
+                    description: "Webbadressen till din motor"
                 },
                 replacementEngine: {
-                    label: "Backup sökmotor",
-                    description: "Ersätter reservsökmotorn med en specifik sökmotor (istället för att lägga till en meny)",
-                    off: "Stängd",
-                    custom: "Specialmotor",
+                    label: "Ersättningsmotor",
+                    description: "Ersätt med en specifik sökmotor istället för att lägga till en meny",
+                    off: "Av",
+                    custom: "Anpassad motor",
                 }
             },
             context: {
-                label: "Metni Ara",
-                searchWith: "{{name}} Aras hus"
+                label: "Sök text",
+                searchWith: "Sök med {{name}}"
             }
         },
         replyPingControl: {
             name: "ReplyPingControl",
-            description: "Låter dig styra att alltid eller aldrig pinga på meddelandesvar, inkluderar även vitlista",
+            description: "Styr om du alltid eller aldrig ska bli pingad på meddelandesvar, med en vitlistasfunktion",
             option: {
                 alwaysPingOnReply: {
-                    label: "Svara alltid Ping",
-                    description: "Få ett ping varje gång någon svarar på dina meddelanden"
+                    label: "Pinga alltid på svar",
+                    description: "Blir alltid pingad när någon svarar på dina meddelanden"
                 },
                 replyPingWhitelist: {
-                    label: "Svar Ping vitlista",
-                    description: "Ange ID:n för de användare du alltid vill få en svarsping från, separerade med kommatecken."
+                    label: "Svara Ping Whitelist",
+                    description: "Kommaseparerad lista med användar-ID att alltid ta emot svarspingar från"
                 }
             }
         },
         replyTimestamp: {
             name: "ReplyTimestamp",
-            description: "Visar tidsstämpel i förhandsgranskningar av besvarade meddelanden"
+            description: "Visar en tidsstämpel på förhandsgranskningar av besvarade meddelanden"
         },
         revealAllSpoilers: {
             name: "RevealAllSpoilers",
-            description: "Ctrl-klicka på en spoiler för att visa alla spoilers i ett meddelande, Ctrl+Shift för att visa alla spoilers i hela chatten"
+            description: "Avslöja alla spoilers i ett meddelande genom att Ctrl-klicka på en spoiler, eller i chatten med Ctrl+Skift-klicka"
         },
         reverseImageSearch: {
             name: "ReverseImageSearch",
-            description: "Lägger till alternativ för omvänd bildsökning i högerklicksmenyer för bilder",
+            description: "Lägger till ImageSearch till bildkontextmenyer",
             context: {
                 label: "Sök bild",
                 all: "Sök alla"
             }
         },
         reviewDB: {
-            name: "RecensionDB",
-            description: "Betygsätt andra användare (lägger till en ny inställningssektion i profiler)",
+            name: "ReviewDB",
+            description: "Recensera andra användare (lägger till ett nytt avsnitt i profiler)",
             notification: {
-                newReview: "Det finns nya recensioner på din profil!",
+                newReview: "Du har nya recensioner på din profil!",
                 auth: {
-                    error: "Ett fel uppstod under auktoriseringen",
+                    error: "Ett fel uppstod under auktorisering",
                     successfully: "Inloggad framgångsrikt!",
-                    failed: "Auktorisering misslyckades",
+                    failed: "Det gick inte att auktorisera",
                     review: "Vänligen auktorisera att lägga till en recension.",
-                    opening: "Auktoriseringsfönstret öppnas...",
-                    need: "Du behöver tillstånd för att utvärdera!"
+                    opening: "Öppnar auktoriseringsfönster...",
+                    need: "Du måste auktorisera för att granska användare!"
                 },
                 error: {
-                    fast: "Du gör förfrågningar för snabbt. Vänta några sekunder och försök igen.",
-                    fetching: "Ett fel uppstod vid hämtning av recensioner.",
+                    fast: "Du skickar förfrågningar för snabbt. Vänta några sekunder och försök igen.",
+                    fetching: "Ett fel uppstod när recensioner skulle hämtas.",
                     action: {
-                        failed: "Användaren {{action}} kunde inte nås",
-                        success: "Användaren lyckades {{action}}"
+                        failed: "Det gick inte att använda {{action}}",
+                        success: "{{action}}ad användare framgångsrikt"
                     }
                 }
             },
@@ -8512,52 +8512,52 @@ const translations: MatchStructure<typeof enTranslations> = {
                 delete: {
                     title: "Är du säker?",
                     description: "Vill du verkligen ta bort den här recensionen?",
-                    confirm: "Sil",
-                    cancel: "Avboka",
-                    error: "Du måste logga in för att ta bort recensioner.",
+                    confirm: "Radera",
+                    cancel: "Strunt i det",
+                    error: "Du måste vara inloggad för att ta bort recensioner.",
                 },
                 report: {
                     title: "Är du säker?",
                     description: "Vill du verkligen rapportera den här recensionen?",
-                    confirm: "Förklaring",
-                    cancel: "Avboka",
-                    error: "Du måste vara inloggad för att skriva recensioner.",
+                    confirm: "Rapportera",
+                    cancel: "Strunt i det",
+                    error: "Du måste vara inloggad för att rapportera recensioner.",
                 },
                 block: {
                     title: "Är du säker?",
-                    description: "Vill du verkligen blockera den här användaren? Du kommer inte längre att se deras recensioner.",
-                    confirm: "blockera",
-                    cancel: "Avboka",
+                    description: "Vill du verkligen blockera den här användaren? Du kommer inte att se deras recensioner längre.",
+                    confirm: "Blockera",
+                    cancel: "Strunt i det",
                     error: "Du måste vara inloggad för att blockera användare.",
                 },
                 blocked: {
                     title: "Blockerade användare",
-                    auth: "Du är inte inloggad på ReviewDB.",
+                    auth: "Du är inte inloggad på ReviewDB!",
                     noBlocked: "Inga användare är blockerade.",
-                    fetch: "Ett fel uppstod när blockerade användare skulle hämtas"
+                    fetch: "Ett fel uppstod vid hämtning av blockerade användare."
                 },
                 reviews: {
-                    title: "Användares recensioner",
-                    noUser: "Det verkar som om ingen har recenserat den här användaren ännu. Du kan bli den första!",
-                    noServer: "Det verkar som om ingen har recenserat den här servern ännu. Du kan bli den första!"
+                    title: "s recensioner",
+                    noUser: "Det verkar som om ingen har recenserat den här användaren ännu. Du kan vara den första!",
+                    noServer: "Det verkar som om ingen har recenserat den här servern ännu. Du kan vara den första!"
                 }
             },
             button: {
-                appeal: "Invändning",
-                ok: "ok",
-                more: "Mer",
-                reply: "Svara till @{{användare}}",
+                appeal: "Överklagande",
+                ok: "OK",
+                more: "Läs mer",
+                reply: "Svara till @{{user}}",
                 update: "Uppdatera recension för @{{user}}",
-                review: "Recensera @{{användare}}"
+                review: "Recensera @{{user}}"
             },
             context: {
-                view: "Se recensioner",
-                blocked: "Du blockerade den här användaren",
+                view: "Visa recensioner",
+                blocked: "Du har blockerat denna användare",
                 delete: "Ta bort recension",
                 report: "Rapportgranskning",
                 block: "Blockera användare",
                 unblock: "Avblockera användare",
-                reply: "Svara på recension"
+                reply: "Svara Recension"
             },
             option: {
                 authorize: {
@@ -8565,12 +8565,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     button: "Auktorisera med ReviewDB"
                 },
                 notifyReviews: {
-                    label: "Bedömningsmeddelande",
-                    description: "Meddela nya recensioner vid start"
+                    label: "Meddela recensioner",
+                    description: "Meddela om nya recensioner vid start"
                 },
                 showWarning: {
                     label: "Visa varning",
-                    description: "Visa respektfull varning ovanför rubriken"
+                    description: "Visa en varning för att vara respektfull högst upp på recensionerlistan"
                 },
                 hideTimestamps: {
                     label: "Dölj tidsstämplar",
@@ -8578,126 +8578,126 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 hideBlockedUsers: {
                     label: "Dölj blockerade användare",
-                    description: "Dölj recensioner från användare som du har blockerat"
+                    description: "Dölj recensioner från blockerade användare"
                 },
                 buttons: {
                     label: "Knappar",
                     manageBlocked: "Hantera blockerade användare",
                     support: "Stöd ReviewDB utveckling",
                     website: "ReviewDB webbplats",
-                    server: "ReviewDB Support Server"
+                    server: "ReviewDB Supportserver"
                 }
             }
         },
         richMagnetLinks: {
             name: "RichMagnetLinks",
-            description: "Behandlar magnetlänkar som meddelandelänkar (med förhandsgranskning)",
+            description: "Återger magnetlänkar som meddelandelänkar",
             unknown: "okänt filnamn"
         },
         roleColorEverywhere: {
-            name: "RollColorEverywhere",
-            description: "Visar den översta rollfärgen när det är möjligt",
+            name: "RoleColorEverywhere",
+            description: "Lägger till den översta rollfärgen var som helst",
             option: {
                 chatMentions: {
-                    label: "Chatt omnämnanden",
-                    description: "Visa rollfärger i chattomnämnanden (inklusive meddelanderutan)"
+                    label: "Chattomnämnanden",
+                    description: "Visa rollfärger i chattomnämnanden (inklusive i meddelanderutan)"
                 },
                 memberList: {
                     label: "Medlemslista",
-                    description: "Visa rollfärger i medlemslistans rolltitlar"
+                    description: "Visa rollfärger i medlemslistans rollrubriker"
                 },
                 voiceUsers: {
                     label: "Röstanvändare",
                     description: "Visa rollfärger i användarlistan för röstchatt"
                 },
                 reactorsList: {
-                    label: "Lista över reaktorer",
-                    description: "Visa rollfärger i användarlistan med emoji-reaktioner"
+                    label: "Reaktorlista",
+                    description: "Visa rollfärger i reaktorlistan"
                 },
                 pollResults: {
-                    label: "Undersökningsresultat",
-                    description: "Visa rollfärger i enkätresultat"
+                    label: "Omröstningsresultat",
+                    description: "Visa rollfärger i omröstningsresultaten"
                 },
                 colorChatMessages: {
-                    label: "Färglägg dina chattmeddelanden",
-                    description: "Färglägg chattmeddelanden enligt författarens rollfärg"
+                    label: "Färgchattmeddelanden",
+                    description: "Färgchattmeddelanden baserat på författarens rollfärg"
                 },
                 messageSaturation: {
                     label: "Meddelande Mättnad",
-                    description: "Meddelandes färgintensitet"
+                    description: "Intensiteten av meddelandefärgning"
                 }
             }
         },
         rpcEditor: {
             name: "RPCEditor",
-            description: "Redigera eventuellt innehåll och typ av Rich Presence",
+            description: "Redigera typen och innehållet för eventuell Rich Presence",
             option: {
                 replacedAppIds: {
-                    label: "Ändrade applikationsidentiteter (ID:n)",
+                    label: "Ersatta app-ID:n",
                 }
             },
             modal: {
                 tutorial: {
-                    title: "ID för aktuella händelser",
-                    noRunning: "Inga löpande evenemang",
+                    title: "ID för aktuella aktiviteter",
+                    noRunning: "Inga löpaktiviteter",
                     available: "Tillgängliga variabler",
-                    variableText: "I alla fält (förutom inläggets URL) kan du lägga in variabler som automatiskt kommer att ersättas med deras ursprungliga innehåll:",
+                    variableText: "I alla fält (förutom stream-URL) kan du lägga in variabler som automatiskt kommer att ersättas av deras ursprungliga innehåll:",
                     more: "Mer information",
                     details: {
-                        leave: "För att lämna ett fält som det är, lämna det tomt.",
-                        set: "Skriv \"null\" för att dölja ett fält i statusindikatorn.",
-                        reload: "Du kan behöva starta om Discord för att ändringarna ska gälla."
+                        leave: "Lämna ett fält tomt för att lämna det som det är.",
+                        set: "Ställ in ett fält på \"null\" för att dölja det på närvaron.",
+                        reload: "Du kan behöva ladda om Discord för att ändringar ska gälla."
                     }
                 },
                 settings: {
                     applyEdits: "Tillämpa redigeringar i appen",
-                    addNewApp: "Lägg till ny app",
+                    addNewApp: "Lägg till ny applikation",
                     appId: "Applikations-ID",
                     invalidAppId: "Ogiltigt app-ID",
-                    newActivityType: "Ny händelsetyp",
+                    newActivityType: "Ny aktivitetstyp",
                     activityTypes: {
-                        playing: "spelar",
-                        watching: "tittar på",
-                        listening: "lyssnande",
-                        competing: "racing",
-                        streaming: "på luft"
+                        playing: "Spelar",
+                        watching: "Tittar på",
+                        listening: "Lyssnande",
+                        competing: "Tävlande",
+                        streaming: "Streaming"
                     },
-                    streamUrl: "Strömmande webbadress (måste vara YouTube eller Twitch)",
-                    invalidStreamUrl: "Ogiltig webbadress för inlägget",
-                    newName: "nytt namn",
-                    newDetails: "nya detaljer",
-                    newState: "ny situation",
-                    largeImage: "stor bild",
-                    smallImage: "clipart",
+                    streamUrl: "Stream URL (måste vara YouTube eller Twitch)",
+                    invalidStreamUrl: "Ogiltig webbadress för stream",
+                    newName: "Nytt namn",
+                    newDetails: "Nya detaljer",
+                    newState: "Ny stat",
+                    largeImage: "Stor bild",
+                    smallImage: "Liten bild",
                     text: "Text",
                     url: "URL",
                     firstLine: "(första raden)",
                     secondLine: "(andra raden)",
                     thirdLine: "(tredje raden)",
                     alsoThirdLine: "(även tredje raden)",
-                    hideAssets: "Dölj bilder (stora och små bilder)",
+                    hideAssets: "Dölj tillgångar (stora och små bilder)",
                     hideTimestamps: "Dölj tidsstämplar"
                 }
             },
         },
         rpcStats: {
             name: "RPCStats",
-            description: "Visar statistik om din aktivitet som en rik närvaro",
+            description: "Visar statistik om din aktivitet som en RPC",
             option: {
                 assetURL: {
-                    label: "Görsel URL'si",
-                    description: "Bilden som ska användas för RPC. Om det lämnas tomt kommer din profilbild att användas"
+                    label: "Tillgångens URL",
+                    description: "Bilden som ska användas för din RPC. Din profilbild används om den lämnas tom"
                 },
                 rpcTitle: {
-                    label: "RPC-huvud",
+                    label: "RPC-titel",
                     description: "Titeln på din RPC"
                 },
                 statDisplay: {
-                    label: "Visa statistik",
-                    description: "Vad ska RPC visa? (Du har förmodligen bara en rad tillåten)",
-                    today: "Antal meddelanden skickade idag",
-                    alltime: "Antal meddelanden som skickas hela tiden",
-                    listened: "Veckans mest lyssnade album"
+                    label: "Statisk display",
+                    description: "Vad ska RPC visa? (Du kan bara ha en rad, det är jag ganska säker på)",
+                    today: "Antalet meddelanden som skickats idag",
+                    alltime: "Antalet meddelanden som skickas hela tiden",
+                    listened: "Ditt mest lyssnade album för veckan"
                 },
                 lastFMApiKey: {
                     label: "Last.fm API-nyckel",
@@ -8709,67 +8709,67 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 albumCoverImage: {
                     label: "Albumomslagsbild",
-                    description: "Använd skivomslag som RPC-bild? (Om Last.fm-skärm är vald)"
+                    description: "Bör skivomslagsbilden användas som RPC-bild? (Om du har valt Last.fm-skärmen)"
                 },
                 lastFMStatFormat: {
-                    label: "Last.fm statistikformat",
-                    description: "Hur ska Last.fm-statistiken formateras? $album ersätts med albumnamnet, $artist ersätts med artistnamnet"
+                    label: "Last.fm Stat-format",
+                    description: "Hur ska Last.fm-statistiken formateras? $album ersätts med albumnamnet och $artist ersätts med artistnamnet"
                 }
             },
-            noInfo: "Ingen information just nu :(",
+            noInfo: "Ingen info just nu :(",
             messagesToday: "Meddelanden skickade idag: {{count}}",
             messagesAllTime: "Meddelanden skickade hela tiden: {{count}}"
         },
         saveFavoriteGIFs: {
-            name: "SparaFavoritGIF",
-            description: "Exporterar favorit-GIF-länkar",
+            name: "SaveFavouritedGIFs",
+            description: "Exportera favorit-GIF-URL:er",
             toolbox: "Spara favorit-GIF-filer",
             title: "Spara favorit-GIF-filer",
             command: {
                 savegifs: {
-                    description: "Sparar alla favorit-GIF-länkar till en textfil"
+                    description: "Spara alla favorit-GIF-URL:er i en textfil"
                 },
                 saveworkinggifs: {
-                    description: "Testar alla dina favorit-GIF-filer och sparar bara de som fortfarande fungerar"
+                    description: "Testa alla favorit-GIF:er och spara bara de som fortfarande fungerar"
                 }
             },
             option: {
                 showToolboxButton: {
                     label: "Visa verktygslåda-knapp",
-                    description: "Visar knappen \"Spara favorit-GIF\" i Plexcord Toolbox (kräver omstart)"
+                    description: "Visa knappen \"Spara favorit-GIF\" i Plexcord Toolbox (kräver omladdning)"
                 }
             },
             toast: {
-                save: "GIF-filer har sparats som {{filename}}",
-                failed: "GIF-filer kunde inte sparas",
-                no: "Favorit GIF hittades inte!",
-                testing: "{{count}} GIF-filer testas, detta kan ta lite tid...",
+                save: "Sparade GIF-filer som {{filename}}",
+                failed: "Det gick inte att spara GIF-filer",
+                no: "Inga favorit-GIF-filer hittades!",
+                testing: "Testar {{count}} GIF, detta kan ta en stund...",
                 noneWorking: "Ingen av dina sparade GIF-filer verkar fungera.",
-                saved: "{{broken}} potentiellt trasiga GIF-filer filtrerades bort. {{saved}} fungerande GIF-filer har sparats."
+                saved: "Filtrerade {{broken}} möjligen trasiga GIF-filer. Sparade {{saved}} fungerande GIF-filer."
             }
         },
         scheduledMessages: {
-            name: "Schemalagda meddelanden",
-            description: "Schemalägg att meddelanden ska skickas vid en viss tidpunkt eller efter en viss fördröjning.",
+            name: "ScheduledMessages",
+            description: "Schemalägg att meddelanden ska skickas vid en viss tidpunkt eller efter en fördröjning.",
             toolbox: {
                 toggle: "Visa schemalagda meddelanden"
             },
             option: {
                 maxMessagesPerMinute: {
-                    label: "Maximalt antal meddelanden per minut",
-                    description: "Det maximala antalet schemalagda meddelanden som kan skickas på en kanal under samma minut."
+                    label: "Max meddelanden per minut",
+                    description: "Max schemalagda meddelanden per kanal som kan avfyras under samma minut."
                 },
                 checkIntervalSeconds: {
                     label: "Kontrollintervall (sekunder)",
-                    description: "Hur ofta insticksprogrammet kontrollerar om det finns meddelanden att skicka."
+                    description: "Hur ofta insticksprogrammet söker efter meddelanden att skicka."
                 },
                 showNotifications: {
                     label: "Visa aviseringar",
-                    description: "Visar avisering (toast) när meddelanden skickas."
+                    description: "Visa toastaviseringar när meddelanden skickas."
                 },
                 showPhantomMessages: {
-                    label: "Visa spökmeddelanden",
-                    description: "Visar schemalagda meddelanden som spökmeddelanden (tillfälliga) i chatten."
+                    label: "Visa fantommeddelanden",
+                    description: "Visa schemalagda meddelanden som fantommeddelanden i chatten."
                 }
             },
             channelType: {
@@ -8780,74 +8780,74 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             toast: {
                 messageSent: "Schemalagt meddelande skickat till {{channel}}",
-                messageFailed: "Schemalagt meddelande kunde inte skickas",
-                maxMessagesReached: "Maximal gräns på {{max}} meddelanden per minut och kanal har nåtts",
-                messageScheduled: "Meddelande planerat!",
+                messageFailed: "Det gick inte att skicka schemalagt meddelande",
+                maxMessagesReached: "Maximalt antal {{max}} meddelanden per kanal och minut nått",
+                messageScheduled: "Meddelande schemalagt!",
                 messageRemoved: "Schemalagt meddelande har tagits bort",
                 allCleared: "Alla schemalagda meddelanden raderades"
             },
             button: {
-                tooltipOn: "Planeringsläge PÅ (klicka för att inaktivera, högerklicka för lista)",
-                tooltipOff: "Planeringsläge AV (klicka för att aktivera, högerklicka för lista)"
+                tooltipOn: "Schemaläge PÅ (klicka för att inaktivera, högerklicka för lista)",
+                tooltipOff: "Schemaläge AV (klicka för att aktivera, högerklicka för lista)"
             },
             accessory: {
-                scheduledFor: "Schemalagt till {{date}} {{timeLeft}}",
+                scheduledFor: "Schemalagt till {date}{timeLeft}",
                 remaining: {
-                    days: "{{days}}g {{hours}}s kvar",
-                    hours: "{{hours}}s {{minutes}}minut kvar",
-                    minutes: "{{minutes}}min kvar"
+                    days: "{{days}}d {{hours}}h kvar",
+                    hours: "{{hours}}h {{minutes}}m kvar",
+                    minutes: "{{minutes}}m kvar"
                 }
             },
             scheduleModal: {
-                title: "Planmeddelande",
-                schedulingFor: "Planerad kanal: {{channel}}",
-                scheduleType: "Planeringstyp",
+                title: "Schemalägg meddelande",
+                schedulingFor: "Schemaläggning för: {{channel}}",
+                scheduleType: "Schematyp",
                 delay: "Dröjsmål",
                 specificTime: "Specifik tid",
                 delayMinutes: "Fördröjning (minuter)",
                 dateTime: "Datum och tid",
                 error: {
-                    invalidDelay: "Vänligen ange en giltig fördröjningstid (minst 1 minut)",
+                    invalidDelay: "Ange en giltig fördröjning (minst 1 minut)",
                     invalidDateTime: "Välj ett framtida datum och tid"
                 },
-                schedule: "Planerad",
+                schedule: "Schema",
                 cancel: "Avboka"
             },
             viewModal: {
                 title: "Schemalagda meddelanden",
                 clearAll: "Rensa alla",
                 noMessages: "Inga schemalagda meddelanden",
-                delete: "Sil",
-                close: "Kvartal"
+                delete: "Radera",
+                close: "Nära"
             }
         },
         searchFix: {
             name: "SearchFix",
-            description: "Det irriterande \"Vi tappade förstoringsglaset!\" fixar felet.",
-            notPerfect: "Den här korrigeringen är inte perfekt, så du kan behöva ladda om sökfältet för att åtgärda problemen.",
-            paragraph1: "Discord tillåter endast en maximal offset på 5000 (vilket är det som orsakar förstoringsfelet).",
-            paragraph2: "Det betyder att du kan se exakt 5000 meddelanden i det förflutna och 5000 meddelanden i framtiden (sorterade efter äldsta).",
-            paragraph3: "Denna plugin växlar till den motsatta sorteringsmetoden för att kringgå Discords begränsning,",
-            paragraph4: "men om det finns ett stort sökresultat och du försöker visa ett meddelande som inte kan nås med någon av sorteringsmetoderna,",
-            paragraph5: "plugin-programmet visar endast offset 0 (nyaste eller äldsta meddelandet beroende på sorteringsmetod)."
+            description: "Åtgärdar det irriterande \"Vi tappade förstoringsglaset!\" fel.",
+            notPerfect: "Den här korrigeringen är inte perfekt, så du kan behöva ladda om sökfältet för att åtgärda problem.",
+            paragraph1: "Discord tillåter bara en maxoffset på 5000 (det är detta som orsakar förstoringsglasfelet).",
+            paragraph2: "Det betyder att du bara kan se exakt 5 000 meddelanden i det förflutna och 5 000 meddelanden i framtiden (när du sorterar efter gamla).",
+            paragraph3: "Detta plugin hoppar bara till den motsatta sorteringsmetoden för att försöka komma runt Discords begränsning,",
+            paragraph4: "men om det finns ett stort sökresultat och du försöker se ett meddelande som inte går att få tag på med båda sorteringsmetoderna,",
+            paragraph5: "insticksprogrammet kommer helt enkelt att visa offset 0 (antingen det senaste eller äldsta meddelandet beroende på sorteringsmetoden)."
         },
         secretRingToneEnabler: {
             name: "SecretRingToneEnabler",
-            description: "Discord spelar alltid upp den hemliga versionen av ringsignalen (förutom för speciella ringsignalhändelser)",
+            description: "Spela alltid den hemliga versionen av Discord-ringsignalen (förutom under speciella ringsignalhändelser)",
             option: {
                 onlySnow: {
                     label: "Endast under Snow Ringtone Event",
-                    description: "Spela endast Snow Halation Theme"
+                    description: "Spela bara Snow Halation Theme"
                 }
             }
         },
         summaries: {
-            name: "Sammanfattningar",
-            description: "Aktiverar Discords experimentella sammanfattningar-funktion på alla servrar och visar AI-genererade sammanfattningar av konversationer",
+            name: "Summaries",
+            description: "Aktiverar Discords experimentella sammanfattningar-funktion på varje server och visar AI-genererade sammanfattningar av konversationer",
             option: {
                 summaryExpiryThresholdDays: {
-                    label: "Sammanfattning raderingströskel (dagar)",
-                    description: "Antalet dagar ett sammandrag är giltigt innan det tas bort. Observera att max 50 sammanfattningar lagras per kanal"
+                    label: "Sammanfattning utgångströskel (dagar)",
+                    description: "Tiden i dagar innan en sammanfattning tas bort. Observera att endast upp till 50 sammanfattningar sparas per kanal"
                 }
             }
         },
@@ -8856,58 +8856,58 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Lägger till den aktuella kanalen i popup-fönstret för vidarebefordran"
         },
         sendTimestamps: {
-            name: "Skicka tidsstämplar",
-            description: "Skicka enkelt tidsstämplar med chatbox-knapp och textgenvägar. Läs den utökade beskrivningen!",
+            name: "SendTimestamps",
+            description: "Skicka tidsstämplar enkelt via chatbox-knapp och textgenvägar. Läs den utökade beskrivningen!",
             sample: {
-                paragraph1: "För att snabbt skicka tidsstämplar, lägg till tidsstämplar i formatet `HH:MM` (inklusive citationstecken!) till ditt meddelande",
-                paragraph2: "Se exempel nedan.\nOm du behöver något mer specifikt, använd datumknappen i chattfältet!",
+                paragraph1: "För att snabbt skicka tidsstämplar, inkludera tidsstämplar formaterade som `HH:MM` (inklusive backticks!) i ditt meddelande",
+                paragraph2: "Se nedan för exempel.\nOm du behöver något mer specifikt, använd datumknappen i chattfältet!",
                 examples: "Exempel:"
             },
             modal: {
                 title: "Tidsstämpelväljare",
-                light: "Öppna",
+                light: "Ljus",
                 dark: "Mörk",
                 format: "Tidsstämpelformat",
                 preview: "Förhandsvisning",
-                insert: "Tillägga",
-                insertTimestamp: "Lägg till tidsstämpel"
+                insert: "Infoga",
+                insertTimestamp: "Infoga tidsstämpel"
             },
             option: {
                 replaceMessageContents: {
-                    label: "Ändra meddelandeinnehåll",
-                    description: "Ändra tidsstämplar i meddelandeinnehåll"
+                    label: "Ersätt meddelandeinnehåll",
+                    description: "Byt ut tidsstämplar i meddelandeinnehåll"
                 }
             }
         },
         serverInfo: {
             name: "ServerInfo",
-            description: "Låter dig visa information om en server",
+            description: "Låter dig se information om en server",
             context: {
-                serverInfo: "Serverinformation"
+                serverInfo: "Server info"
             },
             option: {
                 sorting: {
-                    label: "Arrangemang",
-                    description: "Användarnamn eller visningsnamn om tillämpligt",
+                    label: "Sortering",
+                    description: "Användarnamn eller, om tillämpligt, Visningsnamn",
                     username: "Användarnamn",
                     displayname: "Visningsnamn",
-                    none: "Sortering"
+                    none: "Sortera inte"
                 }
             },
             modal: {
                 tab: {
-                    serverInfo: "Serverinformation",
+                    serverInfo: "Server info",
                     friends: "Vänner",
-                    mutualUsers: "Vanliga användare",
+                    mutualUsers: "Ömsesidiga användare",
                     blockedUsers: "Blockerade användare",
                     ignoredUsers: "Ignorerade användare"
                 },
                 owner: "Serverägare",
                 loading: "Belastning...",
-                createdAt: "Skapandedatum",
-                joinedAt: "Anslutningsdatum",
-                vanityLink: "Speciell inbjudningslänk",
-                preferredLocale: "Önskad region",
+                createdAt: "Skapad på",
+                joinedAt: "Anslöt sig till",
+                vanityLink: "Vanity Link",
+                preferredLocale: "Önskad plats",
                 verification: {
                     level: "Verifieringsnivå",
                     none: "Ingen",
@@ -8923,130 +8923,130 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         serverListIndicators: {
             name: "ServerListIndicators",
-            description: "Lägger till antal onlinevänner eller antal servrar till serverlistan",
-            friends: "Vän",
-            servers: "Presentatör",
+            description: "Lägg till antal vänner online eller serverantal i serverlistan",
+            friends: "Vänner",
+            servers: "Servrar",
             option: {
                 mode: {
-                    label: "Mod",
+                    label: "Läge",
                     description: "Läge att visa i serverlistan",
-                    friend: "Endast antal vänner online",
-                    server: "Endast antal servrar",
-                    both: "Antal både server- och onlinevänner"
+                    friend: "Endast vänner online räknas",
+                    server: "Endast server räknas",
+                    both: "Både server och onlinevän räknas"
                 },
                 useCompact: {
-                    label: "Kompakt Modu Kullan",
-                    description: "Gör att förklaringen endast visas med text"
+                    label: "Använd kompaktläge",
+                    description: "Får indikatorn att visas med endast text"
                 }
             }
         },
         serverSearch: {
             name: "ServerSearch",
-            description: "Navigera dina servrar bättre med snabbsökningsknappen",
-            tooltip: "Vi köper"
+            description: "Navigera bättre på dina servrar med en snabbsökningsknapp",
+            tooltip: "Söka"
         },
         shikiCodeblocks: {
             name: "ShikiCodeblocks",
-            description: "Tar med VSCode-stil kodblock som drivs av Shiki till Discord",
+            description: "Tar med VS Code-stil kodblock till Discord, drivs av Shiki",
             option: {
                 theme: {
-                    label: "Han",
+                    label: "Tema",
                     description: "Standardteman"
                 },
                 customTheme: {
                     label: "Anpassat tema",
-                    description: "Länk till ett anpassat VSCode-tema",
+                    description: "En länk till ett anpassat VS-kodtema",
                     mustURL: "Måste vara en giltig webbadress",
                     mustJSON: "Måste vara en JSON-fil"
                 },
                 tryHljs: {
-                    label: "Backup till Hljs",
-                    description: "Använd den ljusare standardfärgen och -temat för Discord.",
+                    label: "Fallback till Hljs",
+                    description: "Använd den mer lätta standardmarkeringen och temat Discord.",
                     never: "Aldrig",
-                    secondary: "Välj Shiki framför Highlight.js",
-                    primary: "Välj Highlight.js framför Shiki",
+                    secondary: "Föredrar Shiki istället för Highlight.js",
+                    primary: "Föredrar Highlight.js istället för Shiki",
                     always: "Alltid"
                 },
                 useDevIcon: {
                     label: "Använd Devicon för språkikoner",
-                    description: "Hur man visar språkikoner i kodblock",
+                    description: "Hur man visar språkikoner på kodblock",
                     disabled: "Inaktiverad",
                     colorless: "Färglös",
-                    colored: "Färgrik"
+                    colored: "Färgad"
                 },
                 bgOpacity: {
                     label: "Bakgrund Opacitet",
-                    description: "bakgrundens opacitet"
+                    description: "Bakgrundens opacitet"
                 }
             },
             button: {
-                copy: "kopiera",
+                copy: "Kopiera",
                 copied: "Kopierade!"
             }
         },
         showAllMessageButtons: {
             name: "ShowAllMessageButtons",
-            description: "Den visar alltid alla meddelandeknappar, oavsett om du trycker på Shift-tangenten eller inte.",
+            description: "Visa alltid alla meddelandeknappar oavsett om du håller ned skifttangenten eller inte.",
             option: {
                 noShiftDelete: {
-                    label: "Ta bort utan skift",
-                    description: "Tar bort behovet av att trycka på skifttangenten för att radera ett meddelande."
+                    label: "Ingen Shift Delete",
+                    description: "Ta bort kravet på att hålla shift för att radera ett meddelande."
                 },
                 noShiftPin: {
-                    label: "Fixering utan Shift",
-                    description: "Tar bort behovet av att trycka på shift-tangenten för att fästa ett meddelande."
+                    label: "Ingen Shift Pin",
+                    description: "Ta bort kravet på att hålla shift för att fästa ett meddelande."
                 }
             }
         },
         showBadgesInChat: {
             name: "ShowBadgesInChat",
-            description: "Visar märken bredvid meddelandeförfattarens namn i chatten.",
+            description: "Visar meddelandeförfattarens märken bredvid namnet i chatten.",
             option: {
                 showPlexcordDonor: {
-                    label: "Visa ditt Plexcord-donatormärke",
+                    label: "Visa Plexcord Donator Badge",
                     description: "Aktivera för att visa Plexcord Donor-märken i chatten."
                 },
                 plexcordDonorPosition: {
-                    label: "Plats för Plexcord Donor Badge",
-                    description: "Placering av Plexcord Donor-märken."
+                    label: "Plexcord Donator Badge Position",
+                    description: "Placeringen av Plexcord Donor-märken."
                 },
                 showPlexcordContributor: {
                     label: "Visa Plexcord Contributor Badge",
                     description: "Aktivera för att visa Plexcord Contributor-märken i chatten."
                 },
                 plexcordContributorPosition: {
-                    label: "Plats för Plexcord Contributor Badge",
-                    description: "Plats för Plexcord Contributor-märken."
+                    label: "Position för Plexcord Contributor Badge",
+                    description: "Placeringen av Plexcord Contributor-märkena."
                 },
                 showDiscordProfile: {
                     label: "Visa Discord-profilmärket",
                     description: "Aktivera för att visa Discord-profilmärken i chatten."
                 },
                 discordProfilePosition: {
-                    label: "Plats för Discord-profilmärket",
-                    description: "Plats för Discord-profilmärken."
+                    label: "Discord profilmärkesposition",
+                    description: "Placeringen av Discord-profilmärkena."
                 },
                 showDiscordNitro: {
                     label: "Visa Discord Nitro-märket",
                     description: "Aktivera för att visa Discord Nitro-märken i chatten."
                 },
                 discordNitroPosition: {
-                    label: "Discord Nitro Badge Location",
-                    description: "Placering av Discord Nitro-märken."
+                    label: "Discord Nitro Badge Position",
+                    description: "Placeringen av Discord Nitro-märkena."
                 },
                 badgeSettings: {
                     label: "Märkeinställningar",
-                    description: "Konfigurera platserna för andra märken som visas i chatten.",
-                    modal: "Dra för att ändra ordning på märken; Klicka för att aktivera/avaktivera en specifik märkestyp."
+                    description: "Konfigurera positionen för andra märken som visas i chatten.",
+                    modal: "Dra märkena för att ordna om dem; du kan klicka för att aktivera/inaktivera en specifik märkestyp."
                 }
             },
             badge: {
-                plexcord: "Plexcord supportermärke",
-                contributor: "Plexcord-deltagaremärke",
-                discordProfile: "Discord profil rozetleri (HypeSquad, Discord Staff, Active Developer vb.)",
-                nitro: "nitromärke",
+                plexcord: "Plexcord donatormärke",
+                contributor: "Plexcord-medarbetarmärke",
+                discordProfile: "Discord profilmärken (HypeSquad, Discord Staff, Active Developer, etc.)",
+                nitro: "Nitro märke",
                 staff: "Discord Personal",
-                partner: "Partnerserverägare",
+                partner: "Partnerad serverägare",
                 events: "HypeSquad-evenemang",
                 bravery: "HypeSquad Bravery",
                 brilliance: "HypeSquad Brilliance",
@@ -9054,10 +9054,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bugHunter: "Discord Bug Hunter",
                 earlyVerifiedBotDeveloper: "Tidig verifierad botutvecklare",
                 earlySupporter: "Tidig supporter",
-                moderatorProgram: "Utexaminerad moderatorprogram"
+                moderatorProgram: "Moderatorprogram Alumner"
             },
             modal: {
-                plexcordContributor: "Plexcord-deltagare",
+                plexcordContributor: "Plexcord-bidragsgivare",
                 discordNitro: "Discord Nitro",
                 basic: "Grundläggande",
                 classic: "Klassisk"
@@ -9065,61 +9065,61 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         showConnections: {
             name: "ShowConnections",
-            description: "Visar länkade konton i användarens popup-kort",
+            description: "Visa anslutna konton i användarens popout-fönster",
             option: {
                 iconSize: {
                     label: "Ikonstorlek",
                     description: "Ikonstorlek (px)"
                 },
                 iconSpacing: {
-                    label: "Ikon utrymme",
-                    description: "ikonens marginal",
+                    label: "Ikonavstånd",
+                    description: "Ikon marginal",
                     compact: "Kompakt",
-                    cozy: "Bekväm",
-                    roomy: "Bred"
+                    cozy: "Mysig",
+                    roomy: "Rymlig"
                 }
             }
         },
         showHiddenChannels: {
-            name: "Visa dolda kanaler",
-            description: "Visar kanaler som du inte har behörighet att komma åt.",
-            tooltip: "Hemlig kanal",
+            name: "ShowHiddenChannels",
+            description: "Visa kanaler som du inte har tillgång till.",
+            tooltip: "Dold kanal",
             option: {
                 channelStyle: {
                     label: "Kanalstil",
                     description: "Stilen som används för att visa dolda kanaler.",
                     classic: "Klassisk",
-                    muted: "Tyst",
-                    showUnreads: "Visa oläst",
-                    mutedWithUnreads: "Visa tystad och oläst"
+                    muted: "Dämpad",
+                    showUnreads: "Visa olästa",
+                    mutedWithUnreads: "Avstängd och Visa olästa"
                 },
                 showMode: {
-                    label: "Visningsläge",
+                    label: "Visa läge",
                     description: "Läget som används för att visa dolda kanaler.",
-                    lock: "Enkel stil med låsikon",
+                    lock: "Vanlig stil med låsikon istället",
                     hidden: "Dämpad stil med dold ögonikon till höger",
                     lockIconRight: "Låsikon till höger"
                 },
                 defaultAllowedUsersAndRolesDropdownState: {
-                    label: "Standardstatus för behöriga användare och roller",
-                    description: "Om menyn för tillåtna användare och roller kommer att vara öppen som standard i privata kanaler"
+                    label: "Standardtillstånd för tillåtna användare och roller",
+                    description: "Om rullgardinsmenyn för tillåtna användare och roller på dolda kanaler ska vara öppen som standard"
                 }
             },
             channelType: {
                 text: "text",
                 announcement: "meddelande",
                 forum: "forum",
-                voice: "ses",
-                stage: "scen"
+                voice: "röst",
+                stage: "etapp"
             },
             sortOrder: {
-                latestActivity: "Senaste evenemanget",
+                latestActivity: "Senaste aktiviteten",
                 creationDate: "Skapandedatum"
             },
             forumLayout: {
                 default: "Inte inställt",
                 list: "Listvy",
-                grid: "gallerivy"
+                grid: "Gallerivy"
             },
             videoQuality: {
                 auto: "Automatisk",
@@ -9128,56 +9128,56 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 hidden: "dold",
                 locked: "låst",
-                threads: "ämnen",
+                threads: "trådar",
                 posts: "inlägg",
                 messages: "meddelanden",
                 post: "posta",
                 message: "meddelande",
                 unknown: "okänd",
                 permissionDetails: "Tillståndsinformation",
-                thisIsA: "Det här är en {{status}} {{channelType}} kanal",
-                canNotSee: "Du kan inte se {{type}}-delen av den här kanalen.",
-                guidelines: "Men du kan se deras instruktioner:",
-                lastCreated: "Senast skapad {{type}}:",
-                lastPin: "Senaste inlägg fäst:",
+                thisIsA: "Detta är en {{status}} {{channelType}} kanal",
+                canNotSee: "Du kan inte se {{type}} för den här kanalen.",
+                guidelines: "Däremot kan du se dess riktlinjer:",
+                lastCreated: "Senast skapade {{type}}:",
+                lastPin: "Pin för senaste meddelande:",
                 threadSlowmode: "Standardtråd långsamt läge:",
                 slowmode: "Långsamt läge:",
                 bitrate: "Bithastighet:",
                 region: "Område:",
                 automatic: "Automatisk",
                 videoQuality: "Videokvalitetsläge:",
-                inactiveArchiveDuration: "Standardinaktivitetsperiod före arkivering {{typ}}",
+                inactiveArchiveDuration: "Standardinaktivitetslängd före arkivering {{type}}",
                 defaultLayout: "Standardlayout:",
-                defaultSort: "Standardsortering:",
+                defaultSort: "Standard sorteringsordning:",
                 defaultReaction: "Standard reaktion emoji:",
-                requireTag: "Det är obligatoriskt att sätta en tagg för inlägg i detta forum.",
+                requireTag: "Inlägg på detta forum kräver en tagg för att ställas in.",
                 availableTags: "Tillgängliga taggar:",
                 allowedUsersAndRoles: "Tillåtna användare och roller:",
-                hideAllowedUsersAndRoles: "Dölj behöriga användare och roller",
-                viewAllowedUsersAndRoles: "Visa behöriga användare och roller"
+                hideAllowedUsersAndRoles: "Dölj tillåtna användare och roller",
+                viewAllowedUsersAndRoles: "Visa tillåtna användare och roller"
             }
         },
         showHiddenThings: {
             name: "ShowHiddenThings",
-            description: "Den visar olika dolda och endast moderatorer oavsett behörighet.",
+            description: "Visar olika dolda & endast moderator saker oavsett behörigheter.",
             option: {
                 showTimeouts: {
-                    label: "Visa medlemstimeout i chatten",
+                    label: "Visa tidsgränser för medlemmar i chatten",
                     description: "Visa tidsgräns för medlemmar i chatten."
                 },
                 showInvitesPaused: {
-                    label: "Visa information om pausade inbjudningar",
-                    description: "Visa att inbjudningar är pausade i serverlistan."
+                    label: "Visa inbjudningar pausade",
+                    description: "Visa verktygstipset för pausade inbjudningar i serverlistan."
                 },
                 showModView: {
                     label: "Visa modvy",
-                    description: "Visa medlemsläge visa snabbmenyalternativ på alla servrar."
+                    description: "Visa kontextmenyalternativet för medlemsmodvyn på alla servrar."
                 }
             }
         },
         showMessageEmbeds: {
             name: "ShowMessageEmbeds",
-            description: "Lägger till alternativet visa inbäddning i snabbmenyn för länkar som inte har inbäddade",
+            description: "Lägger till ett snabbmenyalternativ för att visa inbäddningar för länkar som inte har en",
             context: {
                 embed: {
                     show: "Visa Bädda in",
@@ -9185,8 +9185,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             error: {
-                failed: "Det gick inte att hämta inbäddningen",
-                noEmbed: "Det gick inte att bädda in"
+                failed: "Det gick inte att bädda in",
+                noEmbed: "Inga inbäddningar hittades"
             }
         },
         showMeYourName: {
@@ -9205,131 +9205,131 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Omnämnanden",
                     description: "Visa anpassat namnformat i omnämnanden."
                 },
+                typingIndicator: {
+                    label: "Skrivningsindikator",
+                    description: "Visa det första tillgängliga namnet i ditt anpassade namnformat i skrivindikatorn."
+                },
                 memberList: {
                     label: "Medlemslista",
                     description: "Visa det första tillgängliga namnet i ditt anpassade namnformat i medlemslistan."
                 },
-                typingIndicator: {
-                    label: "Skrivindikator",
-                    description: "Visa det första tillgängliga namnet i ditt anpassade namnformat i skrivindikatorn."
-                },
                 profilePopout: {
-                    label: "Profil popup-kort",
-                    description: "Visa det första tillgängliga namnet i ditt anpassade namnformat i popup-kort för profiler."
+                    label: "Profil Popout",
+                    description: "Visa det första tillgängliga namnet i ditt anpassade namnformat i profilfönster."
                 },
                 voiceChannels: {
-                    label: "Ljudkanaler",
-                    description: "Visa det första tillgängliga namnet i ditt anpassade namnformat på ljudkanaler."
+                    label: "Röstkanaler",
+                    description: "Visa det första tillgängliga namnet i ditt anpassade namnformat i röstkanaler."
                 },
                 reactions: {
                     label: "Reaktioner",
-                    description: "Visa det första tillgängliga namnet i ditt anpassade namnformat i react-verktygstips och visa hela namnet i react-popups."
+                    description: "Visa det första tillgängliga namnet i ditt anpassade namnformat i reaktionsverktygstips och det fullständiga namnet i reaktionsfönster."
                 },
                 discriminators: {
-                    label: "Visa Parsers",
-                    description: "Lägg till parser till botanvändarnamn. Parsers har tagits bort för vanliga användare, men används fortfarande för bots. Som standard motsvarar en bots användarnamn en användares globala namn, och därför kan flera botar ha samma användarnamn. Att lägga till parsers gör dem unika igen."
+                    label: "Diskriminatorer",
+                    description: "Lägg till diskriminatorer till användarnamn för bots. Diskriminatorer fasades ut för användare, men används fortfarande för bots. Som standard motsvarar en bots användarnamn en användares globala namn, därför kan flera botar ha samma användarnamn. Att lägga till diskriminatorer gör dem unika igen."
                 },
                 hideDefaultAtSign: {
-                    label: "Hide Default @ Sign",
-                    description: "Dölj standardsymbolen '@' i början av namnet i omnämnanden och svar. Gäller endast om relevant funktion är aktiverad."
+                    label: "Dölj standard vid tecken",
+                    description: "Dölj standardsymbolen '@' före namnet i omnämnanden och svar. Tillämpas endast om någon av funktionerna är aktiverade."
                 },
                 truncateAllNamesWithStreamerMode: {
-                    label: "Förkorta alla namn i utgivarläge",
-                    description: "Förkorta alla namn i sändningsläge, inte bara användarnamn."
+                    label: "Trunkera alla namn med Streamer-läge",
+                    description: "Trunkera alla namn, inte bara användarnamn, i Streamer-läge."
                 },
                 removeDuplicates: {
                     label: "Ta bort dubbletter",
-                    description: "Om två av namnen är lika, ta bort dubbletterna och lämna bara de unika."
+                    description: "Om något av namnen är likvärdiga, ta bort dem och lämna bara de unika namnen."
                 },
                 ignoreFonts: {
                     label: "Ignorera teckensnitt",
-                    description: "För andra, tredje och fjärde namn, använd GG SANS, och ignorera användarens anpassade teckensnitt."
+                    description: "För andra, tredje och fjärde namn, använd gg sans oavsett användarens anpassade teckensnitt."
                 },
                 ignoreGradients: {
                     label: "Ignorera övertoningar",
-                    description: "För icke-primära namn, om rollen har en gradient och följande färg är inställd på 'Role+-#', använd primärfärgen istället för hela gradienten, och om det finns en nitroeffekt, ignorera den helt."
+                    description: "För de icke-primära namnen, om rollen har en gradient och färgen nedan är inställd på 'Role+-#', använd primärfärgen istället för hela gradienten, och om den har en Nitro-effekt, ignorera den helt."
                 },
                 animateGradients: {
-                    label: "Gör övertoningar animerade",
-                    description: "Visa animering om andra, tredje och fjärde namn har en rollgradient. Inaktiverad om \"Ignorera övertoningar\" är aktiverat eller reducerad rörelse är på."
+                    label: "Animera övertoningar",
+                    description: "För andra, tredje och fjärde namn, om rollen har en gradient, animera den. Detta inaktiveras av \"Ignorera övertoningar\" och minskad rörelse."
                 },
                 nameSeparator: {
                     label: "Namnavskiljare",
-                    description: "Separator att använda mellan namn. Standard är ett blanksteg."
+                    description: "Avgränsaren att använda mellan namn. Standard är ett enda mellanslag."
                 },
                 friendNameOnlyInDirectMessages: {
-                    label: "Vännens namn Visa endast i privata meddelanden",
-                    description: "Visa endast vänners namn i privata meddelanden, inte på servrar."
+                    label: "Vännamn endast i direktmeddelanden",
+                    description: "Visa endast kompisnamn när du är i DM, och inte på servrar."
                 },
                 customNameOnlyInDirectMessages: {
-                    label: "Anpassat namn Visa endast i privata meddelanden",
-                    description: "Visa anpassade namn endast i privata meddelanden, inte på servrar."
+                    label: "Anpassat namn endast i direktmeddelanden",
+                    description: "Visa endast anpassade namn i DM och inte på servrar."
                 },
                 includedNames: {
                     label: "Inkluderade namn",
-                    description: "Ordningen i vilken användarnamn, visningsnamn, smeknamn och vännamn visas. Använd dessa platshållare: {user}, {display}, {nick}, {friend}. Om ett namn inte är tillgängligt kan du skriva de alternativ som ska användas, separerade med kommatecken: {vän, smeknamn, display}. Du kan lägga till tre prefix och tre suffix för varje namn."
+                    description: "Ordningen för att visa användarnamn, visningsnamn, smeknamn och vännamn. Använd följande platshållare: {user}, {display}, {nick}, {friend}. Du kan tillhandahålla flera namnalternativ att använda som reservdelar om ett inte är tillgängligt genom att separera dem med kommatecken som sådana: {vän, smeknamn, display}. Du kan ha upp till tre prefix och tre suffix per namn."
                 },
                 customNameColor: {
                     label: "Anpassad namnfärg",
-                    description: "Färgen som ska användas för det anpassade namnet du tilldelar användaren, om det inte är det första som visas. Den accepterar alla giltiga CSS-indata. Använd \"Roll\" för att hålla reda på användarens överordnade rollfärger, nitroeffektfärger eller IRCColors-färg (om aktiverad). Använd 'Role+-#' för att justera ljusstyrkan med denna procentandel (t.ex. 'Role+15')"
+                    description: "Färgen som ska användas för det anpassade namnet du tilldelade en användare om det inte är det första som visas. Accepterar alla giltiga CSS-indata. Använd \"Roll\" för att följa användarens huvudrollsfärger, nitroeffektfärger eller IRCColors-färg om aktiverat. Använd 'Role+-#' för att justera ljusstyrkan med den procentandelen (t.ex. 'Role+15')"
                 },
                 friendNameColor: {
                     label: "Vän namn färg",
-                    description: "Färgen som ska användas när kompisens namn inte är det förnamn som visas. Den accepterar alla giltiga CSS-indata. Använd \"Roll\" för att hålla reda på användarens överordnade rollfärger, nitroeffektfärger eller IRCColors-färg (om aktiverad). Använd 'Role+-#' för att justera ljusstyrkan med denna procentandel (t.ex. 'Role+15')"
+                    description: "Färgen som ska användas för en väns smeknamn om det inte är det första som visas. Accepterar alla giltiga CSS-indata. Använd \"Roll\" för att följa användarens huvudrollsfärger, nitroeffektfärger eller IRCColors-färg om aktiverat. Använd 'Role+-#' för att justera ljusstyrkan med den procentandelen (t.ex. 'Role+15')"
                 },
                 nicknameColor: {
                     label: "Smeknamn färg",
-                    description: "Färgen som ska användas när smeknamnet inte är det förnamn som visas. Den accepterar alla giltiga CSS-indata. Använd \"Roll\" för att hålla reda på användarens överordnade rollfärger, nitroeffektfärger eller IRCColors-färg (om aktiverad). Använd 'Role+-#' för att justera ljusstyrkan med denna procentandel (t.ex. 'Role+15')"
+                    description: "Färgen som ska användas för smeknamnet om det inte är det första som visas. Accepterar alla giltiga CSS-indata. Använd \"Roll\" för att följa användarens huvudrollsfärger, nitroeffektfärger eller IRCColors-färg om aktiverat. Använd 'Role+-#' för att justera ljusstyrkan med den procentandelen (t.ex. 'Role+15')"
                 },
                 displayNameColor: {
                     label: "Visningsnamn Färg",
-                    description: "Färgen som ska användas när visningsnamnet inte är det första visade namnet. Den accepterar alla giltiga CSS-indata. Använd \"Roll\" för att hålla reda på användarens överordnade rollfärger, nitroeffektfärger eller IRCColors-färg (om aktiverad). Använd 'Role+-#' för att justera ljusstyrkan med denna procentandel (t.ex. 'Role+15')"
+                    description: "Färgen som ska användas för visningsnamnet om det inte är den första som visas. Accepterar alla giltiga CSS-indata. Använd \"Roll\" för att följa användarens huvudrollsfärger, nitroeffektfärger eller IRCColors-färg om aktiverat. Använd 'Role+-#' för att justera ljusstyrkan med den procentandelen (t.ex. 'Role+15')"
                 },
                 usernameColor: {
                     label: "Användarnamn Färg",
-                    description: "Färgen som ska användas när användarnamnet inte är det förnamn som visas. Den accepterar alla giltiga CSS-indata. Använd \"Roll\" för att hålla reda på användarens överordnade rollfärger, nitroeffektfärger eller IRCColors-färg (om aktiverad). Använd 'Role+-#' för att justera ljusstyrkan med denna procentandel (t.ex. 'Role+15')"
+                    description: "Färgen som ska användas för användarnamnet om det inte är det första som visas. Accepterar alla giltiga CSS-indata. Använd \"Roll\" för att följa användarens huvudrollsfärger, nitroeffektfärger eller IRCColors-färg om aktiverat. Använd 'Role+-#' för att justera ljusstyrkan med den procentandelen (t.ex. 'Role+15')"
                 },
                 triggerNameRerender: {
-                    label: "Utlösa namnregenerering",
-                    description: "Om du ändrar denna inställning utlöses namnet som återskapas."
+                    label: "Utlösa namnåtergivning",
+                    description: "Utlösa en namnåtergivning genom att växla den här inställningen."
                 }
             },
             modal: {
                 change: {
-                    title: "Ändra SMYN-användarnamn",
+                    title: "Ändra SMYN smeknamn"
                 },
                 add: {
                     title: "Lägg till SMYN smeknamn"
                 },
-                setCustom: "Ange ett anpassat SMYN smeknamn för denna användare. Använd genom att ange {custom} i SMYN-mallinställningar.",
+                setCustom: "Ange ett anpassat SMYN smeknamn för denna användare. Använd det genom att ange {custom} i SMYN-mallinställningarna.",
                 nickname: "Smeknamn SMYN",
                 reset: "Återställ SMYN smeknamn",
                 cancel: "Avboka"
             }
         },
-        showResourceChannels: {
-            name: "ShowResourceChannels",
-            description: "Visar kanaler dolda bakom serverresurser i kanallistan"
-        },
-        showSongName: {
-            name: "ShowSongName",
-            description: "Visar låtnamn istället för artist för Spotify-evenemang"
-        },
         showTimeoutDuration: {
             name: "ShowTimeoutDuration",
-            description: "Anger hur länge en användare kommer att ha timeout i timeoutikonens verktygstips eller bredvid den",
+            description: "Visar hur mycket längre en användares timeout kommer att pågå, antingen i timeout-ikonens verktygstips eller bredvid den",
             option: {
                 displayStyle: {
                     label: "Visa stil",
-                    description: "Så här ser du timeoutperiod",
-                    tooltip: "I Verktygstips",
+                    description: "Hur man visar tidsgränsens varaktighet",
+                    tooltip: "I verktygstipset",
                     inline: "Bredvid timeout-ikonen"
                 }
             }
         },
+        showResourceChannels: {
+            name: "ShowResourceChannels",
+            description: "Visar kanalerna som är gömda bakom serverresurserna i kanallistan"
+        },
+        showSongName: {
+            name: "ShowSongName",
+            description: "Visar låtnamn istället för artist för Spotify-aktivitet"
+        },
         sidebarChat: {
             name: "SidebarChat",
-            description: "Öppna en annan kanal eller DM som en sidofält eller popup",
+            description: "Öppna en annan kanal eller ett DM som sidofält eller som popout",
             toolbox: {
                 label: "Öppna Föregående chatt"
             },
@@ -9338,43 +9338,43 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             modal: {
                 switch: "Byt kanal",
-                popout: "Öppna Chatt som popup",
-                close: "Stäng Sidopanelchatt"
+                popout: "Popout-chatt",
+                close: "Stäng sidofältchatt"
             },
             option: {
                 persistSidebar: {
-                    label: "Gör Sidebar Chat permanent",
-                    description: "Gör det möjligt för sidofältschatten att förbli öppen när Discord startas om"
+                    label: "Fortsätt chatten i sidofältet",
+                    description: "Håll sidofältschatten öppen under omstarter av Discord"
                 },
                 patchCommunity: {
-                    label: "Applicera Community Patch",
-                    description: "Lappar objekt på communityservrar, som kanalbläddraren eller fliken Medlemmar."
+                    label: "Patch Community",
+                    description: "Lagra funktioner som kanalbläddraren eller fliken Medlemmar som communityservrar har."
                 }
             }
         },
         signature: {
-            name: "Signatur",
-            description: "Automatisk signatur/slut på meddelandetext",
+            name: "Signature",
+            description: "Automatiserat fingeravtryck/sluttext",
             option: {
                 name: {
-                    label: "Signatur",
-                    description: "Signaturtext som ska läggas till i slutet av dina meddelanden"
+                    label: "Namn",
+                    description: "Signaturen som kommer att läggas till i slutet av dina meddelanden"
                 },
                 textHeader: {
-                    label: "Text Titel",
-                    description: "Titel som ska läggas till i början av texten"
+                    label: "Texthuvud",
+                    description: "Vilken rubrik att förorda text med"
                 },
                 showIcon: {
                     label: "Visa ikon",
-                    description: "Visa en ikon i chattfältet för att slå på och av plugin-programmet"
+                    description: "Visa en ikon för att växla plugin-programmet i chattfältet"
                 },
                 contextMenu: {
                     label: "Snabbmeny",
-                    description: "Lägg till alternativ för att växla funktionalitet på snabbmenyn för chatt-inloggning"
+                    description: "Lägg till alternativ för att växla funktionalitet i chattinmatningskontextmenyn"
                 },
                 isEnabled: {
-                    label: "Effektiv",
-                    description: "Växla funktion"
+                    label: "är aktiverad",
+                    description: "Växla funktionalitet"
                 }
             },
             tooltip: {
@@ -9386,28 +9386,28 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             command: {
                 signature: {
-                    name: "Signatur",
-                    description: "Slå på och av din signatur",
-                    toogle: "Ändra din signatur (standardbeteende: ändra)",
+                    name: "Signature",
+                    description: "Växla din signatur",
+                    toogle: "Växla din signatur (standard är växla)",
                     enabled: "Signatur aktiverad",
-                    disabled: "Signaturen är inaktiverad"
+                    disabled: "Signatur inaktiverad"
                 }
             }
         },
         silentMessageToggle: {
             name: "SilentMessageToggle",
-            description: "Lägger till en knapp i chattfältet för att slå på och av tyst meddelandesändning.",
+            description: "Lägger till en knapp i chattfältet för att växla mellan att skicka ett tyst meddelande.",
             option: {
                 persistState: {
-                    label: "Gör status permanent",
-                    description: "Bestäm hur växlingsstatusen för tyst meddelande ska fortsätta",
-                    none: "Det ska inte vara permanent (det ska återställas när kanalen byts)",
-                    channels: "Gör det beständigt över kanaler",
-                    restarts: "Fortsätt över kanalerna och Discord startar om"
+                    label: "Fortsätt tillstånd",
+                    description: "Hur man behåller växlingsläget för tyst meddelande",
+                    none: "Fortsätt inte (återställ vid kanalbyte)",
+                    channels: "Fortsätt mellan kanalerna",
+                    restarts: "Fortsätt mellan kanaler och starta om"
                 },
                 autoDisable: {
                     label: "Autoavaktivera",
-                    description: "Inaktivera automatiskt funktionen igen efter att ha skickat ett tyst meddelande"
+                    description: "Inaktivera automatiskt det tysta meddelandet igen efter att ha skickat ett"
                 }
             },
             tooltip: {
@@ -9423,15 +9423,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     name: "SilentTyping",
                     description: "Dölj din skrivindikator från chatten.",
                     toggle: {
-                        name: "växla",
-                        description: "Växla funktionen globalt, per kanal eller per server.",
+                        name: "toggle",
+                        description: "Växla funktionalitet globalt, för kanalen eller för guilden.",
                         global: "Global",
                         channel: "Kanal",
-                        guild: "Presentatör"
+                        guild: "Gille"
                     },
                     chatBarIndicator: {
                         name: "chatBarIndicator",
-                        description: "Dölj andra användares skrivindikatorer från toppen av chattfältet."
+                        description: "Dölj andra användares skrivindikatorer ovanför chattfältet."
                     },
                     membersListIndicator: {
                         name: "membersListIndicator",
@@ -9439,104 +9439,104 @@ const translations: MatchStructure<typeof enTranslations> = {
                     },
                     chatIcon: {
                         name: "chatIcon",
-                        description: "Visa en ikon i chattfältet för att snabbt slå på och av plugin-programmet."
+                        description: "Visa en ikon i chattfältet för att växla plugin-programmet när du är på språng."
                     },
                     chatContextMenu: {
                         name: "chatContextMenu",
-                        description: "Lägg till en rullgardinsmeny i chattkontextmenyn för att snabbt ändra plugininställningar."
+                        description: "Visa en rullgardinsmeny i chattens snabbmeny för att växla plugin-inställningar när du är på språng."
                     },
                     defaultHidden: {
-                        name: "defaultDold",
-                        description: "Bestämmer om skrivinformationen i DM/kanaler/servrar kommer att döljas som standard."
+                        name: "defaultHidden",
+                        description: "Huruvida man ska dölja att skriva i DM/kanaler/skrån som standard eller inte."
                     }
                 }
             },
             content: {
                 updated: "Inställningarna för tyst skrivning har uppdaterats.",
-                noChanges: "Inga ändringar gjordes i inställningarna för tyst skrivning."
+                noChanges: "Inga ändringar har gjorts i inställningarna för tyst skrivning."
             },
             tooltip: {
-                hidden: "Det står Hidden ({{location}})",
+                hidden: "Skriver dold ({{location}})",
                 visible: "Skriver synligt ({{location}})",
-                global: "Att skriva synligt (globalt)"
+                global: "Skriver synligt (globalt)"
             },
             option: {
                 enabledGlobally: {
-                    label: "Globalt aktiv",
-                    description: "Slå på/av din egen skrivindikator globalt."
+                    label: "Aktiverad globalt",
+                    description: "Växla funktionalitet för din egen skrivindikator globalt."
                 },
                 hideChatBoxTypingIndicators: {
                     label: "Dölj indikatorer för att skriva chattruta",
-                    description: "Dölj skrivindikatorer överst i andra användares chattrutor."
+                    description: "Dölj andra användares skrivindikatorer ovanför chattfältet."
                 },
                 hideMembersListTypingIndicators: {
-                    label: "Göm medlemslista Skrivindikatorer",
-                    description: "Dölj skrivindikatorer i andra användares medlemslista."
+                    label: "Göm indikatorer för att skriva in medlemslistan",
+                    description: "Dölj andra användares skrivindikatorer från medlemslistan."
                 },
                 chatIcon: {
                     label: "Chattikon",
-                    description: "Visa en ikon i chattfältet för att snabbt byta plugin."
+                    description: "Visa en ikon i chattfältet för att ändra plugin-programmet när du är på språng."
                 },
                 chatIconLeftClickAction: {
                     label: "Chattikon Vänsterklick Åtgärd",
-                    description: "Bestäm vad du ska göra när du vänsterklickar på chattikonen.",
-                    global: "Ändra global skrivstatus",
-                    channel: "Ändra skrivstatus för kanal",
-                    guild: "Ändra skrivning till serverstatus",
+                    description: "Vad du ska göra när du vänsterklickar på chattikonen.",
+                    global: "Växla mellan att skriva globalt",
+                    channel: "Växla mellan att skriva för kanal",
+                    guild: "Växla Skrivning för Guild",
                     settings: "Öppna Plugin-inställningar"
                 },
                 chatIconMiddleClickAction: {
                     label: "Chattikon Mellanklick Åtgärd",
-                    description: "Bestäm vad du ska göra när du mittklickar på chattikonen.",
-                    global: "Ändra global skrivstatus",
-                    channel: "Ändra skrivstatus för kanal",
-                    guild: "Ändra skrivning till serverstatus",
+                    description: "Vad du ska göra när du mittklickar på chattikonen.",
+                    global: "Växla mellan att skriva globalt",
+                    channel: "Växla mellan att skriva för kanal",
+                    guild: "Växla Skrivning för Guild",
                     settings: "Öppna Plugin-inställningar"
                 },
                 chatIconRightClickAction: {
                     label: "Chattikon Högerklicka Åtgärd",
-                    description: "Bestäm vad du ska göra när du högerklickar på chattikonen.",
-                    global: "Ändra global skrivstatus",
-                    channel: "Ändra skrivstatus för kanal",
-                    guild: "Ändra skrivning till serverstatus",
+                    description: "Vad du ska göra när du högerklickar på chattikonen.",
+                    global: "Växla mellan att skriva globalt",
+                    channel: "Växla mellan att skriva för kanal",
+                    guild: "Växla Skrivning för Guild",
                     settings: "Öppna Plugin-inställningar"
                 },
                 chatContextMenu: {
                     label: "Chatkontextmeny",
-                    description: "Lägg till en rullgardinsmeny i chattkontextmenyn för att snabbt ändra plugininställningar."
+                    description: "Visa en rullgardinsmeny i chattens sammanhangsberoende meny för att ändra plugininställningar när du är på språng."
                 },
                 defaultHidden: {
                     label: "Standard Dold",
-                    description: "Om den är aktiverad kommer din indikator att döljas för andra användare på alla DM/kanaler/servrar som inte finns med i listan \"Inaktiverade platser\" nedan. Om den är inaktiverad kommer din indikator att visas på platser som inte ingår i listan \"Aktiva platser\"."
+                    description: "Om det är aktiverat, kommer plugin-programmet att dölja ditt skrivande från andra i alla DM/kanaler/guilds som inte är listade i \"Inaktiverade platser\" nedan. Om insticksprogrammet är inaktiverat kommer insticksprogrammet att visa dina skrivningar för andra för alla DM/kanaler/skrån som inte är listade i \"Aktiverade platser\" nedan."
                 },
                 enabledLocations: {
-                    label: "Aktiva platser",
-                    description: "Aktivera funktionen för dessa ID:n. Den accepterar kommaseparerade DM-ID:n, kanal-ID:n och server-ID:n. Används endast om \"Default Private\" är inaktiverat."
+                    label: "Aktiverade platser",
+                    description: "Aktivera funktionalitet för dessa ID:n. Accepterar en kommaseparerad lista med DM-ID, kanal-ID och guild-ID. Används endast om 'Default Hidden' är inaktiverat."
                 },
                 disabledLocations: {
                     label: "Inaktiverade platser",
-                    description: "Inaktivera funktionen för dessa ID:n. Den accepterar kommaseparerade DM-ID:n, kanal-ID:n och server-ID:n. Används endast om \"Default Private\" är aktiverat."
+                    description: "Inaktivera funktionalitet för dessa ID:n. Accepterar en kommaseparerad lista med DM-ID, kanal-ID och guild-ID. Används endast om 'Default Hidden' är aktiverat."
                 }
             }
         },
         snowfall: {
-            name: "Snöfall",
+            name: "Snowfall",
             description: "Låt det snöa på Discord!",
             about: {
                 title: "Information",
-                paragraph: "Detta plugin lägger till en snöfallseffekt med jultema över Discord-gränssnittet. Du kan ändra snötypen från inställningarna nedan.",
-                note: "OBS: Även om det här plugin-programmet inte påverkar prestanda mer än ett genomsnittligt Plexcord-plugin-program på de flesta datorer, kan det orsaka viss fördröjning på low-end-system."
+                paragraph: "Detta plugin lägger till en julaktig snöfallseffekt ovanpå Discords gränssnitt. Du kan ändra typ av snö i inställningarna nedan.",
+                note: "OBS: Även om det här plugin-programmet på de flesta datorer inte påverkar prestandan mer än ditt genomsnittliga Plexcord-tillägg, kan det orsaka en viss fördröjning på lägre system."
             },
             option: {
                 typeOfSnow: {
-                    label: "biltyp",
-                    description: "Ändrar typen av snö som visas (påverkar prestandan).",
-                    solid: "Enfärgad (högsta prestanda)",
-                    text: "Metin (Medium Performance)",
-                    emoji: "Visuellt (minst prestanda)"
+                    label: "Typ av snö",
+                    description: "Ändra typen av snö som visas (påverkar prestandan).",
+                    solid: "Solid (högsta prestanda)",
+                    text: "Text (medellång prestanda)",
+                    emoji: "Bild (lägsta prestanda)"
                 },
                 maxSize: {
-                    label: "Maximal storlek",
+                    label: "Max storlek",
                     description: "Maximal snöflingastorlek"
                 },
                 speed: {
@@ -9544,100 +9544,100 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Snöfallshastighet (högre = snabbare fall)"
                 },
                 flakesPerSecond: {
-                    label: "Snöflingor per sekund",
-                    description: "Mängd snöflingor som faller per sekund (högre = kraftigare nederbörd)"
+                    label: "Flingor per sekund",
+                    description: "Snöflingor per sekund (högre = tätare snöfall)"
                 }
             }
         },
         sortFriendRequests: {
             name: "SortFriendRequests",
-            description: "Sorterar vänförfrågningar efter mottagna datum",
-            tooltip: "Tillagd – {{date}}",
+            description: "Sorterar vänförfrågningar efter mottagningsdatum",
+            tooltip: "Tillagd — {{date}}",
             option: {
                 showDates: {
                     label: "Visa datum",
-                    description: "Visa datum i vänförfrågningar"
+                    description: "Visa datum på vänförfrågningar"
                 }
             }
         },
         soundBoardLogger: {
             name: "SoundBoardLogger",
-            description: "Spelar in alla soundboardljud som spelas i röstchatt och låter dig ladda ner dem",
+            description: "Loggar alla soundboards som spelas i en röstchatt och låter dig ladda ner dem",
             tooltip: "Öppna SoundBoard Log",
             option: {
                 savedIds: {
                     label: "Sparade Soundboard-ID:n",
-                    description: "Mängden soundboard-ID du vill spara åt gången (0 låter dig spara obegränsat)",
+                    description: "Mängden soundboard-ID:n du vill spara åt gången (0 låter dig spara oändligt)",
                     notNumber: "Värdet är inte ett tal.",
                     cantDecimal: "Värdet får inte vara ett decimaltal.",
                     cantNegative: "Värdet får inte vara ett negativt tal.",
-                    heading: "Mängden soundboard-ID du vill spara åt gången (0 låter dig spara obegränsat)",
-                    warning: "Varning! Om du ställer in numret till ett lägre värde återställs loggarna!",
+                    heading: "Mängden soundboard-ID:n du vill spara åt gången (0 låter dig spara oändligt)",
+                    warning: "Varning! Om du ställer in numret till ett lägre värde återställs loggen!",
                     placeholder: "Ange ett nummer"
                 },
                 fileType: {
                     label: "Filtyp",
-                    description: "Formatet du vill spara din fil i"
+                    description: "Formatet som du vill spara din fil i"
                 },
                 openLogs: {
                     label: "Öppna Loggar",
-                    description: "Visa loggar",
+                    description: "Visa loggarna",
                     button: "Öppna Loggar"
                 },
                 soundVolume: {
-                    label: "Ljudnivå",
-                    description: "Volym av på/av ljud (0 inaktiverar)"
+                    label: "Ljudvolym",
+                    description: "Hur högt växlingsljudet är (0 för att inaktivera)"
                 },
                 iconLocation: {
                     label: "Ikon Plats",
-                    description: "Välj var SoundBoard Log-ikonen visas (kräver omstart)",
+                    description: "Välj var SoundBoard Log-ikonen ska visas (kräver omstart)",
                     toolbar: "Verktygsfält",
-                    chatInput: "Chatt Logga in"
+                    chatInput: "Chatt input"
                 }
             },
             modal: {
                 title: "Soundboard-loggar",
-                loading: "Ljuden laddas...",
-                noLogs: "Inget ljud har spelats in ännu. Gå med i en röstchatt för att logga!",
+                loading: "Laddar ljud...",
+                noLogs: "Inga ljud loggade än. Gå med i en röstchatt för att börja logga!",
                 clearLogs: "Rensa loggar",
-                played: "Spelat {{time}} gånger",
+                played: "Spelat {{time}} tid{{s}}",
                 last: "Senast spelad:",
-                also: "Han stal också:",
+                also: "Spelade även:",
                 download: "Ladda ner",
                 copyId: "Kopiera ID",
                 copied: "ID kopierat till urklipp!",
                 playSound: "Spela ljud",
-                moreUsers: "Andra använde det här ljudet också...",
+                moreUsers: "Andra använde det här ljudet...",
                 volume: "Soundboard volym"
             }
         },
         splitLargeMessages: {
             name: "SplitLargeMessages",
-            description: "Delar upp stora meddelanden i flera meddelanden för att passa Discords meddelandegräns.",
+            description: "Delar upp stora meddelanden i flera för att passa Discords meddelandegräns.",
             option: {
                 maxLength: {
                     label: "Maximal meddelandelängd",
-                    description: "Den maximala längden ett meddelande kan ha innan det delas. Ställ in på 0 för automatisk detektering."
+                    description: "Maximal längd på ett meddelande innan det delas. Ställ in på 0 för att automatiskt upptäcka."
                 },
                 disableFileConversion: {
                     label: "Inaktivera filkonvertering",
-                    description: "Om det är aktiverat inaktiverar du filkonvertering för stora meddelanden."
+                    description: "Om sant, inaktiverar filkonvertering för stora meddelanden."
                 },
                 sendDelay: {
-                    label: "Leveransförsening",
-                    description: "Väntetid i sekunder mellan varje spår."
+                    label: "Skicka fördröjning",
+                    description: "Fördröjning mellan varje bit i sekunder."
                 },
                 hardSplit: {
-                    label: "Solid partition",
-                    description: "Om det är aktiverat delas det från det sista tecknet istället för ett mellanslag/nyrad."
+                    label: "Hård Split",
+                    description: "Om sant, delas på det sista tecknet istället för det sista mellanslag/nyrad."
                 },
                 splitInSlowmode: {
                     label: "Dela i långsamt läge",
-                    description: "Dela meddelanden om långsamt läge är aktiverat på kanalen?"
+                    description: "Ska meddelanden delas om kanalen har aktiverat långsamt läge?"
                 },
                 slowmodeMax: {
-                    label: "Långsamt läge Max",
-                    description: "Maximal tillåtna tid för långsamt läge vid delning i långsamt läge."
+                    label: "Slowmode Max",
+                    description: "Maximal slowmodetid vid delning i slowmode."
                 }
             }
         },
@@ -9645,14 +9645,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "SpotifyActivityToggle",
             description: "Lägger till en växlingsknapp för synlighet av Spotify-aktivitet.",
             tooltip: {
-                enable: "Öppna Spotify-aktivitet",
+                enable: "Slå på Spotify-aktivitet",
                 disable: "Stäng av Spotify-aktivitet"
             },
             option: {
                 location: {
-                    label: "Kvinnor",
-                    description: "Var ska du visa Spotify på/av-knappen",
-                    panel: "Bredvid Mute/Mute",
+                    label: "Plats",
+                    description: "Var ska du visa Spotify-växlingsknappen",
+                    panel: "Bredvid Mute/Deafen",
                     toolbox: "Plexcord verktygslåda"
                 },
                 activityStatus: {
@@ -9663,56 +9663,56 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         spotifyCrack: {
             name: "SpotifyCrack",
-            description: "Tillåter gratis samlyssning, blockerar automatisk paus i röstchatt och håller Spotify-aktivitet spelad när den är inaktiv",
+            description: "Lyssna gratis med, ingen automatisk paus i röstchatt och gör att aktiviteten kan fortsätta spela i tomgång",
             option: {
                 noSpotifyAutoPause: {
-                    label: "Stäng av Spotify Auto-paus",
-                    description: "Inaktivera Spotifys autopaus."
+                    label: "Ingen Spotify Auto-paus",
+                    description: "Inaktivera automatisk paus i Spotify."
                 },
                 keepSpotifyActivityOnIdle: {
-                    label: "Återuppta Spotify-aktivitet när du är inaktiv",
-                    description: "Tillåter Spotify-aktivitet att fortsätta spela när den är inaktiv"
+                    label: "Håll Spotify-aktivitet på inaktiv",
+                    description: "Fortsätt spela Spotify-aktivitet på tomgång"
                 }
             }
         },
         spotifyShareCommands: {
-            name: "SpotifyShare-kommandon",
-            description: "Dela din nuvarande Spotify-låt, album eller artist med snedstreckkommandon (/spår, /album, /artist)",
+            name: "SpotifyShareCommands",
+            description: "Dela ditt nuvarande Spotify-spår, album eller artist via snedstreck-kommando (/spår, /album, /artist)",
             command: {
                 makeCommand: {
                     description: "Dela din nuvarande Spotify {{type}} i chatten",
-                    track: "Du lyssnar inte på någon låt på Spotify.",
-                    find: "Låten gick inte att hitta på Spotify."
+                    track: "Du lyssnar inte på något spår på Spotify.",
+                    find: "Det gick inte att hitta spåret på Spotify."
                 }
             }
         },
         startupTimings: {
-            name: "StartupTimes",
+            name: "StartupTimings",
             description: "Lägger till starttider i menyn Inställningar",
             modal: {
                 title: "Starttider",
-                ended: "Titta på sluttid:",
-                start: "Början",
-                interval: "december",
+                ended: "Spårningen slutade kl.",
+                start: "Start",
+                interval: "Intervall",
                 delta: "Delta",
-                event: "Olay",
-                serverTrace: "Serverövervakning",
+                event: "Händelse",
+                serverTrace: "Serverspårning",
                 loading: "Belastning..."
             }
         },
         statusNotifications: {
-            name: "Statusmeddelanden",
+            name: "StatusNotifications",
             description: "Lägger till aviseringar för statusändringar",
             loading: "Belastning...",
             option: {
                 notificationsSound: {
                     label: "Aviseringsljud",
-                    description: "Spela aviseringsljud för statusaviseringar?"
+                    description: "Spela ett aviseringsljud för statusaviseringar?"
                 },
                 usersList: {
                     label: "Användarlista",
-                    description: "Användare ska meddelas när statusändringar inträffar",
-                    empty: "Inga användare övervakade. Du kan lägga till en användare genom att högerklicka på dem och använda alternativet \"Statusmeddelanden\"."
+                    description: "Lista över användare att meddela om statusändring",
+                    empty: "Inga användare spåras. Högerklicka på en användare och välj \"Statusmeddelanden\" för att lägga till dem."
                 }
             },
             context: {
@@ -9720,63 +9720,63 @@ const translations: MatchStructure<typeof enTranslations> = {
                 notifications: "Aviseringar",
                 type: {
                     all: "Alla",
-                    online: "online",
-                    offline: "off-line",
+                    online: "Online",
+                    offline: "Off-line",
                     none: "Ingen"
                 }
             },
             notification: {
                 unknownUser: "Användare",
-                title: "Statusmeddelanden",
+                title: "Statusmeddelanden"
             },
             status: {
-                online: "online",
-                idle: "på tomgång",
+                online: "Online",
+                idle: "På tomgång",
                 dnd: "Stör ej",
-                offline: "off-line",
+                offline: "Off-line",
             },
         },
         statusPresets: {
             name: "StatusPresets",
-            description: "Låter dig spara dina statusar och ändra dem senare",
+            description: "Låter dig komma ihåg dina statusar och ställa in dem senare",
             button: {
-                remember: "Kom ihåg Status",
+                remember: "Kom ihåg Status"
             },
             context: {
                 edit: "Redigera anpassade förinställningar",
-                set: "Ställ in undantag"
+                set: "Ställ in anpassad status"
             },
             notification: {
-                successfully: "Status har sparats"
+                successfully: "Statusen har sparats"
             }
         },
         steamStatusSync: {
             name: "SteamStatusSync",
-            description: "Synkronisera din status med Steam! (Online, Borta, Osynlig eller Offline.)",
+            description: "Synkronisera din status till Steam! (Online, Borta, Osynlig eller Offline.)",
             option: {
                 onlineStatus: {
                     label: "Onlinestatus",
-                    description: "Steam-status medan Discord Online"
+                    description: "Steam-status när du är online"
                 },
                 idleStatus: {
                     label: "Inaktiv status",
-                    description: "Steam-status när Discord är inaktiv"
+                    description: "Steam-status när inaktiv"
                 },
                 dndStatus: {
                     label: "Stör ej-status",
-                    description: "Steam-status medan Discord Stör ej"
+                    description: "Steam-status när på Stör ej"
                 },
                 invisibleStatus: {
                     label: "Osynlig status",
-                    description: "Steam-status medan Discord Invisible"
+                    description: "Steam-status när den är på Invisible"
                 },
                 goInvisibleIfActivityIsHidden: {
-                    label: "Bli osynlig om evenemanget är privat",
+                    label: "Bli osynlig om aktivitet är dold",
                     description: "Ställ in Steam-status till Invisible när Discord-aktivitet är dold"
                 }
             },
             status: {
-                online: "online",
+                online: "Online",
                 away: "Bort",
                 invisible: "Osynlig",
                 offline: "Offline (koppla från Steam Chat)",
@@ -9785,15 +9785,15 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         stickerBlocker: {
             name: "StickerBlocker",
-            description: "Låter dig förhindra att klistermärken visas.",
+            description: "Låter dig blockera klistermärken från att visas.",
             option: {
                 showGif: {
                     label: "Visa GIF",
-                    description: "Om man ska visa en cool katt-GIF."
+                    description: "Om man ska visa en snygg katt GIF."
                 },
                 showMessage: {
                     label: "Visa meddelande",
-                    description: "Om ett meddelande ska visas som anger vilket ID som är blockerat"
+                    description: "Om ett meddelande ska visa vilket ID som blockerades"
                 },
                 showButton: {
                     label: "Visa knapp",
@@ -9801,7 +9801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 blockedStickers: {
                     label: "Blockerade klistermärken",
-                    description: "Lista över blockerade dekal-ID:n (redigera inte om du inte vet vad du gör)"
+                    description: "Listan över blockerade dekal-ID:n (redigera inte om du inte vet vad du gör)"
                 }
             },
             modal: {
@@ -9815,63 +9815,63 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         stickerPaste: {
             name: "StickerPaste",
-            description: "När du väljer en dekal i dekalväljaren lägger den till den i chattrutan istället för att skicka den direkt"
+            description: "Gör att man väljer ett klistermärke i klistermärkesväljaren att det infogas i chattboxen istället för att skicka det direkt"
         },
         streamerModeOnStream: {
             name: "StreamerModeOnStream",
-            description: "Aktiverar automatiskt streamerläge när du börjar sända på Discord"
+            description: "Aktiverar automatiskt Streamer-läge när du börjar streama i Discord"
         },
         streamingCodecDisabler: {
             name: "StreamingCodecDisabler",
-            description: "Inaktiverar önskade streaming-codecs",
+            description: "Inaktivera codecs för strömning av ditt val",
             option: {
                 disableAv1Codec: {
                     label: "Inaktivera AV1 Codec",
-                    description: "Förhindrar att Discord överväger att använda AV1 för streaming."
+                    description: "Förhindra att Discord överväger att använda AV1 för streaming."
                 },
                 disableH265Codec: {
                     label: "Inaktivera H265 Codec",
-                    description: "Hindrar Discord från att överväga att använda H265 för streaming."
+                    description: "Förhindra att Discord överväger att använda H265 för streaming."
                 },
                 disableH264Codec: {
                     label: "Inaktivera H264 Codec",
-                    description: "Hindrar Discord från att överväga att använda H264 för streaming."
+                    description: "Förhindra att Discord överväger att använda H264 för streaming."
                 }
             }
         },
         superReactionTweaks: {
             name: "SuperReactionTweaks",
-            description: "Anpassa gränsen för superreaktioner som spelas samtidigt och använd superreaktion som standard",
+            description: "Anpassa gränsen för Superreaktioner som spelas på en gång, och Superreaktion som standard",
             option: {
                 superReactByDefault: {
-                    label: "Superreaktiv som standard",
-                    description: "Reaktionsväljaren använder superreaktioner som standard"
+                    label: "Superreagera som standard",
+                    description: "Reaktionsväljaren kommer som standard till Superreaktioner"
                 },
                 unlimitedSuperReactionPlaying: {
-                    label: "Obegränsade superreaktionsspelningar",
-                    description: "Tar bort superreaktionsgränsen vid samtidig uppspelning"
+                    label: "Obegränsade superreaktioner som spelar",
+                    description: "Ta bort gränsen för Superreaktioner som spelas på en gång"
                 },
                 superReactionPlayingLimit: {
-                    label: "Uppspelningsgräns för superreaktion",
-                    description: "Maximalt antal superreaktioner att spela samtidigt. 0 inaktiverar Superreaktioner från att spela"
+                    label: "Superreaktioner Spelgräns",
+                    description: "Max superreaktioner att spela på en gång. Ställ in på 0 för att inaktivera uppspelning av Superreaktioner"
                 }
             }
         },
         textReplace: {
             name: "TextReplace",
-            description: "Ändra texten i dina meddelanden. Du kan hitta färdiga regler i #textreplace-rules-kanalen på Plexcord-servern",
+            description: "Byt ut text i dina meddelanden. Du kan hitta färdiga regler i #textreplace-rules-kanalen i Plexcords server",
             option: {
                 replace: {
-                    label: "Ändra",
-                    string: "Använder vanlig text",
+                    label: "Ersätta",
+                    string: "Använder String",
                     regex: "Använder Regex",
-                    myMessages: "Tillämpa på dina egna meddelanden (synliga för alla)",
-                    othersMessages: "Tillämpa på andras meddelanden (synligt endast för dig)",
+                    myMessages: "Tillämpa på dina meddelanden (synligt för alla)",
+                    othersMessages: "Tillämpa på andras meddelanden (endast synligt för dig)",
                     allMessages: "Tillämpa på alla meddelanden"
                 },
                 stringRules: {
-                    label: "Regler för vanlig text",
-                    description: "Textersättningsregler som använder klartextmatchning."
+                    label: "Strängregler",
+                    description: "Regler för att ersätta text med strängmatchning."
                 },
                 regexRules: {
                     label: "Regex regler",
@@ -9879,23 +9879,23 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             modal: {
-                title: "Testa reglerna",
-                find: "Bul",
-                replace: "Ändra",
-                includes: "Bara om den innehåller",
+                title: "Testregler",
+                find: "Hitta",
+                replace: "Ersätta",
+                includes: "Endast om det ingår",
                 type: "Skriv ett meddelande",
                 applied: "Meddelande med tillämpade regler"
             }
         },
         themeAttributes: {
-            name: "Temaattribut",
+            name: "ThemeAttributes",
             description: "Lägger till dataattribut till olika element för temaändamål"
         },
         timezones: {
-            name: "Tidszoner",
-            description: "Visar användares lokala tid i profiler och meddelandetrådar",
+            name: "Timezones",
+            description: "Visar lokal tid för användare i profiler och meddelanderubriker",
             button: {
-                wantToSave: "Vill du spara din tidszon i databasen? Klicka här för att ställa in.",
+                wantToSave: "Vill du spara din tidszon i databasen? Klicka här för att ställa in den.",
                 yourLocalTimezone: "(Din lokala tidszon)"
             },
             context: {
@@ -9903,13 +9903,13 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             toast: {
                 refresh: {
-                    successfully: "Tidszoner har förnyats framgångsrikt!",
+                    successfully: "Tidszoner har uppdaterats!",
                     failed: "Tidszoner kunde inte uppdateras!",
-                    failedTo: "Tidszoner kunde inte uppdateras."
+                    failedTo: "Det gick inte att uppdatera tidszoner."
                 },
                 update: {
                     successfully: "Tidszonen har uppdaterats!",
-                    failed: "Tidszonen kunde inte ställas in."
+                    failed: "Det gick inte att ställa in tidszon."
                 },
                 delete: {
                     successfully: "Tidszonen har raderats!",
@@ -9922,24 +9922,24 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             toolbox: {
                 set: "Ställ in databastidszon",
-                refresh: "Uppdatera databasens tidszoner"
+                refresh: "Uppdatera databastidszoner"
             },
             option: {
                 showOwnTimezone: {
-                    label: "Visa din tidszon",
-                    description: "Visar din tidszon i din profil och meddelandetrådar"
+                    label: "Visa egen tidszon",
+                    description: "Visa din egen tidszon i profiler och meddelanderubriker"
                 },
                 twentyFourHourTime: {
-                    label: "24-timmarsformat",
+                    label: "24-timmars tid",
                     description: "Visa tid i 24-timmarsformat"
                 },
                 showTimezoneInfo: {
                     label: "Visa tidszonsinformation",
-                    description: "Visa tidszonsinformation förutom klockan"
+                    description: "Visa tidszonsinformation bredvid tiden"
                 },
                 showMessageHeaderTime: {
-                    label: "Visa meddelandetiteltid",
-                    description: "Visa tid i meddelandetrådar"
+                    label: "Visa meddelandehuvudtid",
+                    description: "Visa tid i meddelanderubriker"
                 },
                 showProfileTime: {
                     label: "Visa profiltid",
@@ -9947,15 +9947,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 useDatabase: {
                     label: "Använd databasens tidszon",
-                    description: "Använd databas för att få användarens tidszoner"
+                    description: "Aktivera databas för att få användarens tidszoner"
                 },
                 preferDatabaseOverLocal: {
                     label: "Föredrar databas framför lokal",
-                    description: "Föredrar databas framför lokal lagring över tidszoner"
+                    description: "Föredrar databas framför lokal lagring för tidszoner"
                 },
                 databaseUrl: {
                     label: "Databas URL",
-                    description: "URL för tidszonens databasserver"
+                    description: "URL:en för tidszondatabasservern"
                 },
                 setDatabaseTimezone: {
                     label: "Ställ in databastidszon",
@@ -9964,12 +9964,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 resetDatabaseTimezone: {
                     label: "Återställ databasens tidszon",
-                    description: "Återställ din tidszon i databasen",
+                    description: "Återställ din tidszon på databasen",
                     failed: "Det gick inte att återställa databasens tidszon"
                 },
                 askedTimezone: {
-                    label: "Tidszon frågad",
-                    description: "Indikerar om användaren uppmanas att ange sin tidszon"
+                    label: "Frågade tidszon",
+                    description: "Om användaren har blivit ombedd att ställa in sin tidszon"
                 }
             },
             modal: {
@@ -9982,61 +9982,61 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         toastNotifications: {
             name: "ToastNotifications",
-            description: "Visar ett toastmeddelande när du får ett direktmeddelande.",
+            description: "Visa ett toastmeddelande när du får ett direktmeddelande.",
             notification: {
-                call: "Började en sökning med dig!",
+                call: "Började ett samtal med dig!",
                 recipient: {
                     add: "{{target}} lades till i gruppen av {{actor}}.",
                     remove: "{{target}} togs bort från gruppen av {{actor}}.",
-                    left: "Han lämnade gruppen."
+                    left: "Lämnade gruppen."
                 },
                 channel: {
                     change: {
-                        name: "Kanalens namn har ändrats till {{name}}.",
-                        icon: "Kanalikonen har ändrats."
+                        name: "Changed the channel name to {{name}}.",
+                        icon: "Ändrade kanalikonen."
                     },
                     pinned: "Fäste ett meddelande."
                 },
                 sent: {
-                    embed: "Han skickade en inbäddning.",
-                    sticker: "Han skickade ett klistermärke.",
-                    attachment: "Fil:"
+                    embed: "Skickade en inbäddning.",
+                    sticker: "Skickade ett klistermärke.",
+                    attachment: "Fastsättning:"
                 },
-                redacted: "Meddelandeinnehållet har dolts.",
+                redacted: "Meddelandeinnehållet har redigerats.",
                 friend: {
                     accept: "{{user}} är nu din vän",
-                    acceptBody: "Nu kan du skicka ett direktmeddelande till honom.",
-                    request: "{{user}} skickade en vänförfrågan till dig.",
-                    requestBody: "Du kan acceptera eller avvisa detta från fliken Vänner."
+                    acceptBody: "Du kan nu skicka ett meddelande till dem direkt.",
+                    request: "{{user}} har skickat en vänförfrågan till dig.",
+                    requestBody: "Du kan acceptera eller avböja det på fliken Vänner."
                 },
                 example: {
                     title: "Exempelmeddelande",
-                    body: "Detta är ett exempel på meddelandetext."
+                    body: "Detta är ett exempel på anmälningsorgan."
                 }
             },
             modal: {
-                dismiss: "Stäng avisering",
-                attachments: "{{attachments}} filer har skickats."
+                dismiss: "Avvisa meddelande",
+                attachments: "{{attachments}} bilaga{{s}} {{were}} har skickats."
             },
             option: {
                 position: {
-                    label: "Kvinnor",
-                    description: "Plats för Toast-meddelande",
+                    label: "Placera",
+                    description: "Placeringen av toastmeddelandet",
                     topRight: "Överst till höger",
                     topLeft: "Överst till vänster",
                     bottomRight: "Nederst till höger",
-                    bottomLeft: "Sol Alt"
+                    bottomLeft: "Längst ner till vänster"
                 },
                 timeout: {
-                    label: "Stängningstid",
-                    description: "Hur många sekunder ska aviseringar visas"
+                    label: "Timeout",
+                    description: "Tid i sekunder aviseringar kommer att visas för"
                 },
                 opacity: {
                     label: "Opacitet",
-                    description: "Opacitet för Toast-meddelande"
+                    description: "Opaciteten för toastmeddelandet"
                 },
                 determineServerNotifications: {
-                    label: "Ställ in servermeddelanden",
+                    label: "Bestäm servermeddelanden",
                     description: "Bestäm om du vill visa aviseringar baserat på serveraviseringsinställningar"
                 },
                 directMessages: {
@@ -10045,84 +10045,84 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 groupMessages: {
                     label: "Gruppmeddelanden",
-                    description: "Visa avisering för gruppmeddelanden"
+                    description: "Visa aviseringar för gruppmeddelanden"
                 },
                 friendServerNotifications: {
                     label: "Vän- och servermeddelanden",
-                    description: "Visa aviseringar när vänner skickar meddelanden på offentliga servrar"
+                    description: "Visa aviseringar när vänner skickar meddelanden på servrar som de delar med dig"
                 },
                 friendActivity: {
-                    label: "Vänhändelse",
-                    description: "Visa aviseringar för att lägga till vänner eller ta emot vänförfrågningar"
+                    label: "Vänaktivitet",
+                    description: "Visa aviseringar för att lägga till någon eller ta emot en vänförfrågan"
                 },
                 notifyFor: {
-                    label: "Kanaler för att ta emot aviseringar",
-                    description: "Ange kanal-ID:n för att få aviseringar (separera med kommatecken)"
+                    label: "Meddela för",
+                    description: "Skapa en lista med kanal-ID:n att ta emot aviseringar från (separera med kommatecken)"
                 },
                 ignoreUsers: {
-                    label: "Användare att ignorera",
-                    description: "Ange användar-ID vars meddelanden kommer att ignoreras (avgränsade med kommatecken)"
+                    label: "Ignorera användare",
+                    description: "Skapa en lista med användar-ID att ignorera alla deras aviseringar från (separera med kommatecken)"
                 },
                 exampleButton: {
-                    label: "Provknapp",
-                    description: "Visa ett exempel på notis om rostat bröd.",
+                    label: "Exempelknapp",
+                    description: "Visa ett exempel på avisering om rostat bröd.",
                     show: "Visa exempelmeddelande"
                 }
             }
         },
         toggleVideoBind: {
             name: "ToggleVideoBind",
-            description: "Lägger till en anpassningsbar snabbtangent för att slå på och stänga av din webbkamera.",
+            description: "Lägger till en anpassningsbar bindning för att växla webbkamera.",
             option: {
                 keyBind: {
-                    label: "Snabbtangent",
-                    description: "Knappen som slår på och av webbkameran när den trycks ned."
+                    label: "Keybind",
+                    description: "Nyckeln för att växla webbkamera när den trycks ned."
                 },
                 reqCtrl: {
-                    label: "Ctrl Gerekli",
-                    description: "Tvinga ned Ctrl-tangenten."
+                    label: "Kräv Ctrl",
+                    description: "Kräv att kontroll hålls."
                 },
                 reqShift: {
-                    label: "Skift krävs",
-                    description: "Tvinga ned Skift-tangenten."
+                    label: "Kräv Shift",
+                    description: "Kräv att Shift hålls."
                 },
                 reqAlt: {
-                    label: "Sub Obligatorisk",
-                    description: "Tvinga ned Alt-tangenten."
+                    label: "Kräv Alt",
+                    description: "Kräv att Alt hålls."
                 }
             }
         },
         translate: {
-            name: "Översätta",
+            name: "Translate",
             description: "Översätt meddelanden med Google Translate eller DeepL",
             tooltip: {
-                label: "Konvertera"
+                label: "Översätta"
             },
             context: {
-                translate: "Konvertera",
-                open: "Öppna översättningsfönstret",
+                translate: "Översätta",
+                open: "Öppna Translate Modal",
                 auto: "Automatisk översättning aktiverad"
             },
             option: {
                 receivedInput: {
                     label: "Mottagen input",
-                    description: "Språket som de mottagna meddelandena kommer att översättas till"
+                    description: "Språk som mottagna meddelanden ska översättas från"
                 },
                 receivedOutput: {
                     label: "Mottagen utdata",
-                    description: "Vilket språk kommer de mottagna meddelandena att översättas till?"
+                    description: "Språk som mottagna meddelanden ska översättas till"
                 },
                 sentInput: {
-                    label: "Inskickad input",
-                    description: "Språket som dina egna meddelanden kommer att översättas till"
+                    label: "Skickat ingång",
+                    description: "Språk som dina egna meddelanden ska översättas från"
                 },
                 sentOutput: {
                     label: "Skickat utdata",
-                    description: "Vilket språk dina egna meddelanden kommer att översättas till"
+                    description: "Språk som dina egna meddelanden ska översättas till"
                 },
                 service: {
                     label: "Översättningstjänst",
-                    description: "DeepL Pro kräver en betald API-nyckel",
+                    description: "DeepL kräver en betald API-nyckel från DeepL Pro",
                     descriptionWeb: "Översättningstjänst (stöds inte på webben!)",
                     google: "Google Översätt",
                     deepl: "DeepL gratis",
@@ -10131,45 +10131,45 @@ const translations: MatchStructure<typeof enTranslations> = {
                 deeplApiKey: {
                     label: "DeepL API-nyckel",
                     description: "DeepL API-nyckel",
-                    placeholder: "Få din API-nyckel på https://deepl.com/your-account"
+                    placeholder: "Få din API-nyckel från https://deepl.com/your-account"
                 },
                 autoTranslate: {
                     label: "Automatisk översättning",
-                    description: "Den översätter automatiskt dina meddelanden innan de skickas. Du kan också skifta eller högerklicka på översättningsknappen för att slå på eller av den här funktionen."
+                    description: "Översätt dina meddelanden automatiskt innan de skickas. Du kan också skifta/högerklicka på översättknappen för att växla mellan detta"
                 },
                 showAutoTranslateTooltip: {
-                    label: "Visa beskrivning av automatisk översättning",
-                    description: "Visa en beskrivning i chattfältets knapp när ett meddelande översätts automatiskt"
+                    label: "Visa verktygstips för automatisk översättning",
+                    description: "Visa ett verktygstips på ChatBar-knappen när ett meddelande automatiskt översätts"
                 }
             },
             modal: {
-                title: "Översättning",
+                title: "Översätta",
                 select: "Välj ett språk",
                 auto: "Automatisk översättning",
-                dismiss: "Kvartal",
-                translated: "Översatt från {{from}}",
+                dismiss: "Avfärda",
+                translated: "översatt från {{from}}",
                 failed: {
-                    to: "Översättning av {{text}} misslyckades",
-                    connect: "DeepL API-anslutning misslyckades:"
+                    to: "Det gick inte att översätta {{text}}",
+                    connect: "Det gick inte att ansluta till DeepL API:"
                 },
-                wrong: "Något gick fel. Om problemet kvarstår, kontrollera konsolen eller be om hjälp från supportservern.",
+                wrong: "Något gick fel. Om problemet kvarstår, kontrollera konsolen eller be om hjälp på supportservern.",
                 deepl: {
-                    api: "DeepL API-kvot har överskridits. Byter till Google Translate.",
-                    apiKey: "DeepL API-nyckel är inte inställd. Återgår till Google.",
+                    api: "DeepL API-kvot har överskridits. Faller tillbaka till Google Translate.",
+                    apiKey: "DeepL API-nyckel är inte inställd. Återställer till Google",
                     auth: "Ogiltig DeepL API-nyckel eller version"
                 },
                 autoTranslateEnabled: {
-                    title: "Plexcord Auto Translation aktiverad",
-                    body: "Du har precis aktiverat Automatisk översättning! Alla meddelanden du skickar kommer att översättas automatiskt innan de skickas.",
+                    title: "Plexcord Auto-Translate aktiverad",
+                    body: "Du har precis aktiverat Auto-Translate! Alla meddelanden kommer automatiskt att översättas innan de skickas.",
                     confirm: "Inaktivera automatisk översättning",
                     cancel: "Jag förstår",
-                    secondaryConfirm: "Visa det inte igen"
+                    secondaryConfirm: "Visa inte igen"
                 }
             }
         },
         typingIndicator: {
             name: "TypingIndicator",
-            description: "Lägger till en indikator när någon skriver i en kanal.",
+            description: "Lägger till en indikator om någon skriver på en kanal.",
             option: {
                 includeCurrentChannel: {
                     label: "Inkludera aktuell kanal",
@@ -10188,42 +10188,42 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Om skrivindikatorn ska visas för blockerade användare."
                 },
                 indicatorMode: {
-                    label: "Visningsläge",
-                    description: "Hur visar man indikatorn?",
+                    label: "Indikatorläge",
+                    description: "Hur ska indikatorn visas?",
                     both: "Avatarer och animerade prickar",
-                    dots: "animerade prickar",
-                    avatars: "avatarer"
+                    dots: "Animerade prickar",
+                    avatars: "Avatarer"
                 }
             }
         },
         typingTweaks: {
             name: "TypingTweaks",
-            description: "Visar avatarer och rollfärger i skrivindikatorn",
+            description: "Visa avatarer och rollfärger i skrivindikatorn",
             option: {
                 showAvatars: {
                     label: "Visa flera användare",
-                    description: "Visa avatarer i skrivindikator"
+                    description: "Visa avatarer i skrivindikatorn"
                 },
                 showRoleColors: {
                     label: "Visa rollfärger",
-                    description: "Visa rollfärger i skrivindikator"
+                    description: "Visa rollfärger i skrivindikatorn"
                 },
                 alternativeFormatting: {
-                    label: "Alternativt format",
-                    description: "Visa ett mer användbart meddelande när mer än en person skriver"
+                    label: "Alternativ formatering",
+                    description: "Visa ett mer användbart meddelande när flera användare skriver"
                 },
                 amITyping: {
-                    label: "Skriver jag?",
-                    description: "Visar om andra har sett vad du skrev"
+                    label: "Skriver jag",
+                    description: "Visar dig om andra kan se dig skriva"
                 }
             },
             others: {
-                areTyping: "och {{count}} personer till skriver..."
+                areTyping: "och {{count}} andra skriver..."
             }
         },
         unindent: {
-            name: "Oindrag",
-            description: "Tar bort inledande indrag i kodblock"
+            name: "Unindent",
+            description: "Trimmar ledande indrag från kodblock"
         },
         unitConverter: {
             name: "UnitConverter",
@@ -10232,22 +10232,22 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 myUnits: {
                     label: "Mina enheter",
-                    description: "De enheter du använder och vill omvandlas till. Standard: imperial",
-                    imperial: "Imperium",
+                    description: "De enheter du använder och vill ha saker omvandlade till. Standard till Imperial",
+                    imperial: "Kejserlig",
                     metric: "Metrisk"
                 }
             },
             button: {
-                dismiss: "Kvartal"
+                dismiss: "Avfärda"
             }
         },
         unlimitedAccounts: {
-            name: "Obegränsade konton",
+            name: "UnlimitedAccounts",
             description: "Ökar antalet konton du kan lägga till.",
             option: {
                 maxAccounts: {
-                    label: "Maximalt konto",
-                    description: "Antal konton som kan läggas till, ange 0 för obegränsat"
+                    label: "Max konton",
+                    description: "Antal konton som kan läggas till, eller 0 utan gräns"
                 }
             }
         },
@@ -10262,84 +10262,84 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         unsuppressEmbeds: {
-            name: "UnsuppressBädda in",
-            description: "Låter dig ta bort inbäddat innehåll i meddelanden",
+            name: "UnsuppressEmbeds",
+            description: "Låter dig ta bort inbäddningar i meddelanden",
             context: {
-                unsuppress: "Ta bort inbäddningsundertryckning",
-                suppress: "Skriv ut Bädda in"
+                unsuppress: "Ta bort Bädda in",
+                suppress: "Undertryck inbäddning"
             }
         },
         uselessInfo: {
             name: "UselessInfo",
-            description: "Visar slumpmässig värdelös information inom Discord; genvägar och intervallinställningar kan göras.",
+            description: "Visar slumpmässig värdelös information inom Discord; genvägar och avstånd är justerbara.",
             recording: "Inspelning...",
-            record: "Spara",
+            record: "Spela in",
             option: {
                 delay: {
-                    label: "Aviseringsintervall",
-                    description: "Aviseringsintervall (i minuter)"
+                    label: "Meddelandeintervall",
+                    description: "Aviseringsvisningsintervall i minuter"
                 },
                 historyHotkey: {
                     label: "Genväg till Historikpanelen",
-                    description: "Snabbtangent för att öppna historik över tidigare visad information"
+                    description: "Snabbtangent för att visa en historik över tidigare visade fakta"
                 },
                 randomFactHotkey: {
-                    label: "Slumpmässig informationsgenväg",
-                    description: "Snabbtangent för att öppna panelen med slumpmässig information"
+                    label: "Slumpmässig faktagenväg",
+                    description: "Snabbtangent för att öppna den slumpmässiga faktapanelen"
                 },
                 sameFact: {
-                    label: "Undvik att upprepa samma information",
-                    description: "Förhindrar att samma information visas flera gånger utan att visa all information"
+                    label: "Undvik att visa samma föremål",
+                    description: "Undvik att visa samma fakta flera gånger tills alla fakta har visats"
                 },
                 lastNFacts: {
-                    label: "Senaste informationen får inte upprepas",
-                    description: "Senaste antalet delar av information som inte ska visas igen (0 = alla gånger)"
+                    label: "Hur många senaste att undvika",
+                    description: "Antal senast visade fakta för att undvika att upprepas (0 = genom tiderna)"
                 }
             },
             modal: {
                 title: "UselessInfo",
                 history: {
-                    none: "Ingen information ännu. Använd genvägen eller vänta.",
+                    none: "Inga fakta än. Använd genvägen eller vänta.",
                     source: "Källa"
                 },
                 showRandom: "Visa slumpmässigt",
-                close: "Kvartal"
+                close: "Nära"
             },
             notification: {
                 title: "Visste du det?"
             }
         },
         userMessagesPronouns: {
-            name: "UserMessagesPronomen",
+            name: "UserMessagesPronouns",
             description: "Visar användarpronomen i meddelanderubriker",
             option: {
                 pronounsFormat: {
-                    label: "Pronomen Form",
-                    description: "Hur pronomen visas i chatten",
-                    lowercase: "Gemensamt bokstäver",
-                    capitalized: "första stor bokstav"
+                    label: "Pronomen Format",
+                    description: "Formatet för pronomen som ska visas i chatten",
+                    lowercase: "Små bokstäver",
+                    capitalized: "Versal"
                 },
                 showSelf: {
-                    label: "Visa dig själv",
-                    description: "Växla visning av dina egna pronomen på eller av"
+                    label: "Visa själv",
+                    description: "Aktivera eller inaktivera visning av pronomen för dig själv"
                 }
             }
         },
         userVoiceShow: {
             name: "UserVoiceShow",
-            description: "Visar en indikator när en användare är på röstkanalen",
+            description: "Visar en indikator när en användare är i en röstkanal",
             option: {
                 showInUserProfileModal: {
-                    label: "Visa i användarprofil",
-                    description: "Visa röstkanalindikator bredvid namnet i användarprofilen"
+                    label: "Visa i användarprofil Modal",
+                    description: "Visa en användares röstkanalindikator i deras profil bredvid namnet"
                 },
                 showInMemberList: {
                     label: "Visa i medlemslistan",
-                    description: "Visa röstkanalindikator i medlems- och DM-listan"
+                    description: "Visa en användares röstkanalindikator i medlems- och DM-listan"
                 },
                 showInMessages: {
                     label: "Visa i meddelanden",
-                    description: "Visa röstkanalindikator i meddelanden"
+                    description: "Visa en användares röstkanalindikator i meddelanden"
                 }
             },
             modal: {
@@ -10350,17 +10350,17 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         uSRBG: {
-            name: "USBG",
-            description: "Visar användarbanners från USBBG så att alla kan använda banners utan Nitro",
+            name: "USRBG",
+            description: "Visar användarbanners från USBBG, vilket gör att alla kan få en banner utan Nitro",
             option: {
                 nitroFirst: {
                     label: "Nitro först",
-                    description: "Om det finns både Nitro- och USBBG-banner, bestäm vilken du ska använda",
-                    nitro: "Nitro Banner",
+                    description: "Banner att använda om både Nitro- och USBG-banner finns",
+                    nitro: "Nitro banner",
                     usrbg: "USBG-banner"
                 },
                 voiceBackground: {
-                    label: "Ljudbakgrund",
+                    label: "Röst bakgrund",
                     description: "Använd USBBG-banner som bakgrund för röstchatt"
                 }
             },
@@ -10368,20 +10368,20 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         validReply: {
             name: "ValidReply",
-            description: "Åtgärdar felet \"Det gick inte att läsa in meddelandet\" när du håller muspekaren över svar"
+            description: "Fixar \"Meddelandet kunde inte laddas\" när du håller muspekaren över svaret"
         },
         validUser: {
             name: "ValidUser",
-            description: "Åtgärdar omnämnanden som visas som \"@unknown-user\" för okända användare (håll muspekaren över omnämnande för att fixa)",
+            description: "Åtgärda omnämnanden för okända användare som visas som \"@okänd-användare\" (håll muspekaren över ett omnämnande för att fixa det)",
             badges: {
                 discordBugHunter: "Discord Bug Hunter",
-                moderatorProgramsAlumni: "Utexaminerad av moderatorprogram",
+                moderatorProgramsAlumni: "Moderatorprogram Alumner",
                 discordStaff: "Discord Personal",
                 hypeSquadEvents: "HypeSquad-evenemang",
-                bravery: "HypeSquad Cesaret",
-                brilliance: "HypeSquad-ljusstyrka",
-                balance: "HypeSquad Denge",
-                partneredServerOwner: "Co-Server Ägare",
+                bravery: "HypeSquad Bravery",
+                brilliance: "HypeSquad Brilliance",
+                balance: "HypeSquad-balans",
+                partneredServerOwner: "Partnerad serverägare",
                 nitro: "Discord Nitro",
                 earlySupporter: "Tidig supporter",
                 earlyVerifiedBotDeveloper: "Tidig verifierad botutvecklare"
@@ -10389,77 +10389,77 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         voiceChatDoubleClick: {
             name: "VoiceChatDoubleClick",
-            description: "Låter dig gå med i röstchattar genom att dubbelklicka istället för att enkelklicka"
+            description: "Gå med i röstchatt via dubbelklick istället för enkelklick"
         },
         vcNarrator: {
-            name: "VCNberättare",
-            description: "Meddelar via berättaren när användare går med i, lämnar eller flyttar röstkanaler",
+            name: "VCNarrator",
+            description: "Meddelar när användare går med i, lämnar eller flyttar röstkanaler via berättaren",
             option: {
                 voice: {
-                    label: "Ses"
+                    label: "Röst"
                 },
                 volume: {
-                    label: "Ljudnivå",
-                    description: "Berättarröstnivå"
+                    label: "Volym",
+                    description: "Berättarvolym"
                 },
                 rate: {
                     label: "Hastighet",
-                    description: "Berättarens talhastighet"
+                    description: "Berättarhastighet"
                 },
                 sayOwnName: {
-                    label: "Säg ditt namn",
-                    description: "Om berättaren kommer att säga ditt namn"
+                    label: "Säg eget namn",
+                    description: "Säg eget namn"
                 },
                 latinOnly: {
                     label: "Endast latin",
-                    description: "Rensa icke-latinska tecken i namn innan du läser"
+                    description: "Ta bort icke-latinska tecken från namn innan du säger dem"
                 },
                 joinMessage: {
-                    label: "Anslutande meddelande",
+                    label: "Gå med i meddelandet",
                     description: "Gå med i meddelandet"
                 },
                 leaveMessage: {
-                    label: "Avskedsbesked",
-                    description: "lämna meddelande"
+                    label: "Lämna meddelande",
+                    description: "Lämna meddelande"
                 },
                 moveMessage: {
-                    label: "Rörligt meddelande",
-                    description: "rörligt meddelande"
+                    label: "Flytta meddelande",
+                    description: "Flytta meddelande"
                 },
                 muteMessage: {
                     label: "Stäng av meddelande",
-                    description: "Stäng av meddelandet (endast dig själv för tillfället)"
+                    description: "Ljud av meddelande (endast jag själv för tillfället)"
                 },
                 unmuteMessage: {
                     label: "Slå på ljudet för meddelande",
-                    description: "Slå på ljudet av meddelandet (endast dig själv för tillfället)"
+                    description: "Slå på ljudet för meddelande (endast jag själv för tillfället)"
                 },
                 deafenMessage: {
-                    label: "Öronbedövande meddelande",
-                    description: "Öronbedövande meddelande (bara du själv för nu)"
+                    label: "Döva meddelande",
+                    description: "Deafen Message (endast jag själv för tillfället)"
                 },
                 undeafenMessage: {
-                    label: "Öronbedövande meddelande",
-                    description: "Öronbedövande meddelande (bara du själv för nu)"
+                    label: "Undeafen meddelande",
+                    description: "Undeafen Message (endast jag själv för tillfället)"
                 }
             },
             modal: {
-                title: "Spela upp Sample Sounds",
-                voiceTitle: "Ses",
-                voice: "Välj ett ljud",
-                languageTitle: "Dil",
+                title: "Spela exempelljud",
+                voiceTitle: "Röst",
+                voice: "Välj en röst",
+                languageTitle: "Språk",
                 language: "Välj ett språk",
-                noVoice: "Berättarröst hittades inte.",
-                linuxNote: "Installera speech-dispatcher eller espeak och kör Discord med parametern --enable-speech-dispatcher",
-                someNarrator: "Testa att installera några röster från ditt operativsystems Skärmläsarinställningar",
-                dontHaveEnglish: "Du har inte laddat upp något engelskt ljud, så berättaren kan låta konstigt",
-                customiseMessages: "Du kan anpassa de talade meddelandena nedan. Om du lämnar det tomt kan du inaktivera vissa meddelanden",
-                placeholdersInfo: "Anpassade platshållare {{USER}}, {{DISPLAY_NAME}}, {{NICKNAME}} och {{CHANNEL}} ersätts med användarens namn (tomt om du är själv), visningsnamn, smeknamn på servern respektive kanalnamn"
+                noVoice: "Inga berättarröster hittades.",
+                linuxNote: "Installera speech-dispatcher eller espeak och kör Discord med flaggan --enable-speech-dispatcher",
+                someNarrator: "Testa att installera några i Skärmläsarens inställningar i ditt operativsystem",
+                dontHaveEnglish: "Du har inga engelska röster installerade, så berättaren kan låta konstig",
+                customiseMessages: "Du kan anpassa de talade meddelandena nedan. Du kan inaktivera specifika meddelanden genom att ställa in dem på ingenting",
+                placeholdersInfo: "De speciella platshållarna {{USER}}, {{DISPLAY_NAME}}, {{NICKNAME}} och {{CHANNEL}} kommer att ersättas med användarens namn (ingenting om det är du själv), användarens visningsnamn, användarens smeknamn på aktuell server respektive kanalens namn"
             }
         },
         viewIcons: {
             name: "ViewIcons",
-            description: "Gör avatar- och bannerbilder i användarprofiler klickbara; Lägger till Visa Avatar/Banner-alternativ till användar-, server- och gruppkanalens snabbmeny.",
+            description: "Gör avatarer och banners i användarprofiler klickbara, lägger till Visa Avatar/Banner-poster i användar-, server- och gruppkanalens snabbmeny.",
             context: {
                 view: {
                     avatar: "Visa Avatar",
@@ -10471,196 +10471,196 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 format: {
                     label: "Formatera",
-                    description: "Välj det bildformat som ska användas för icke-rörliga bilder. Animerade bilder använder alltid .gif-formatet"
+                    description: "Välj det bildformat som ska användas för icke-animerade bilder. Animerade bilder kommer alltid att använda .gif"
                 },
                 imgSize: {
                     label: "Bildstorlek",
-                    description: "Bildstorlek att använda"
+                    description: "Bildstorleken som ska användas"
                 }
             }
         },
         viewRaw: {
             name: "ViewRaw",
-            description: "Kopiera och visa råinnehåll/data från alla meddelanden, kanaler eller server",
+            description: "Kopiera och se råinnehållet/data från alla meddelanden, kanaler eller guilder",
             context: {
-                copyLeft: "Kopiera rådata (vänsterklick) / Visa rådata (högerklick)",
-                copyRight: "Kopiera rådata (högerklick) / Visa rådata (vänsterklick)",
-                view: "Visa rådata"
+                copyLeft: "Kopiera Raw (vänsterklick) / Visa Raw (högerklick)",
+                copyRight: "Kopiera Raw (högerklick) / Visa Raw (vänsterklick)",
+                view: "Visa Raw"
             },
             option: {
                 popoverButton: {
-                    label: "Popup-menyknapp",
+                    label: "Popover-knapp",
                     description: "Visa en knapp i meddelandets popover för att se meddelandets råa innehåll/data."
                 },
                 clickMethod: {
                     label: "Klicka på Metod",
-                    description: "Ändra den klickmetod som ska användas för att se råinnehållet/datan i ett meddelande.",
-                    left: "Vänsterklicka för att se råinnehåll.",
-                    right: "Högerklicka för att se råinnehåll."
+                    description: "Ändra knappen för att visa råinnehållet/data för alla meddelanden.",
+                    left: "Vänsterklicka för att se det råa innehållet.",
+                    right: "Högerklicka för att se det råa innehållet."
                 }
             },
             modal: {
-                title: "Ham Veri",
+                title: "Visa Raw",
                 content: "Innehåll",
-                data: "{{typ}} Veri",
-                copied: "{{type}} data har kopierats till urklipp!",
-                copy: "Kopiera {{typ}} JSON",
+                data: "{{type}} Data",
+                copied: "{{type}} data kopierad till urklipp!",
+                copy: "Kopiera {{type}} JSON",
                 copiedContent: "Innehållet har kopierats till urklipp!",
                 copyContent: "Kopiera råinnehåll"
             },
             types: {
                 message: "Meddelande",
                 channel: "Kanal",
-                guild: "Presentatör",
+                guild: "Gille",
                 role: "Roll",
                 user: "Användare"
             }
         },
         voiceButtons: {
-            name: "Röstknappar",
-            description: "DM, stäng av eller döv snabbt alla användare från röstsamtalspanelen.",
+            name: "VoiceButtons",
+            description: "DM, stäng av eller döv snabbt alla användare direkt från röstsamtalspanelen.",
             option: {
                 showChatButton: {
                     label: "Visa chattknapp",
-                    description: "Om chattknappen ska visas eller inte"
+                    description: "Om du vill visa chattknappen"
                 },
                 showMuteButton: {
                     label: "Visa Mute-knappen",
-                    description: "Om ljudavstängningsknappen ska visas"
+                    description: "Om du vill visa mute-knappen"
                 },
                 showDeafenButton: {
-                    label: "Visa dövknapp",
-                    description: "Om man ska visa dövknappen"
+                    label: "Visa Deafen-knappen",
+                    description: "Om du vill visa döva-knappen"
                 },
                 muteSoundboard: {
-                    label: "Soundboard'u Sessize Al",
-                    description: "När du klickar på öronbedövande knappen slår den på och av användarens soundboard."
+                    label: "Stäng av Soundboard",
+                    description: "Växlar deras soundboard när du klickar på knappen Döva."
                 },
                 disableVideo: {
                     label: "Inaktivera video",
-                    description: "När du klickar på öronbedövande knappen slår den på och av användarens video."
+                    description: "Växlar deras video när du klickar på knappen Döva."
                 },
                 useServer: {
                     label: "Använd server",
-                    description: "Använder serverdämpning/öronbedövande istället för lokal om du har tillstånd."
+                    description: "Använd server mute/deafen istället för lokal när du har tillstånd."
                 },
                 serverSelf: {
-                    label: "Stäng av dig själv på servern",
-                    description: "Mute/deafener dämpar eller dövar dig själv på servern när den används."
+                    label: "Server själv",
+                    description: "Döva / Döva dig själv på servern när du använder mute/deafen."
                 },
                 showButtonsSelf: {
-                    label: "Visa knappar för dig själv",
-                    description: "Om du vill visa knappar för din egen användare. Den har samma funktion; DM-panelen öppnas och tystar/dövar dig själv.",
+                    label: "Visa knappar på själv",
+                    description: "Oavsett om du vill visa knappar för din egen användare. Samma funktionalitet som andra knapp(ar) förutom att den öppnar DMs-panelen och tystar/dövar för dig själv när du klickar på knapp(ar).",
                     display: "Visa",
-                    hide: "dölja",
-                    disable: "Inaktiverad"
+                    hide: "Dölja",
+                    disable: "Inaktivera"
                 },
                 whichNameToShow: {
-                    label: "Vilket namn ska visas?",
-                    description: "Visa användarnamn, globalt namn eller båda i verktygstips?",
+                    label: "Vilket namn som ska visas",
+                    description: "Välj om du vill visa smeknamn eller användarnamn i verktygstipset.",
                     global: "Globalt namn",
                     username: "Användarnamn",
                     both: "Både"
                 },
                 buttonPosition: {
-                    label: "Knappens plats",
+                    label: "Knappens position",
                     description: "Välj var knapparna ska visas.",
-                    left: "Sol",
+                    left: "Vänster",
                     right: "Rätt",
                 }
             },
             tooltip: {
-                navigate: "Gå till DM",
-                open: "Öppna DM med {{användarnamn}}",
+                navigate: "Navigera till DM",
+                open: "Öppna DM med {{username}}",
                 yourself: "själv",
-                serverMute: "Ljud av på servern",
-                serverDeafen: "Döv på server",
+                serverMute: "Ljud av servern",
+                serverDeafen: "Server Deafen",
                 mute: "Stum",
-                deafen: "döva",
+                deafen: "Döva",
                 unmute: "Slå på ljudet",
-                undeafen: "Ta bort från öronbedövande",
-                serverUnmute: "Slå på ljudet på servern",
-                serverUndeafen: "Ta bort öronbedövande på servern"
+                undeafen: "Odöva",
+                serverUnmute: "Slå på ljudet för servern",
+                serverUndeafen: "Server Undeafen"
             }
         },
         voiceChannelLog: {
             name: "VoiceChannelLog",
-            description: "Spelar in vem som går med och lämnar ljudkanaler",
+            description: "Loggar vem som går med och lämnar röstkanaler",
             context: {
-                view: "Visa kanalloggar"
+                view: "Visa kanallogg"
             },
             modal: {
-                joined: "Gick med i kanalen <#{{channel}}>",
-                left: "Vänster kanal <#{{channel}}>",
-                movedTo: "Flyttad till <#{{channel}}> kanal",
+                joined: "Gick med i <#{{channel}}>",
+                left: "Vänster <#{{channel}}>",
+                movedTo: "Flyttade till <#{{channel}}>",
                 movedFrom: "Flyttade från <#{{channel}}>",
-                noLogs: "Det finns inga loggar att visa.",
-                logs: "{{channel}} loggar"
+                noLogs: "Inga loggar att visa.",
+                logs: "{{channel}} logs"
             },
             option: {
                 mode: {
-                    label: "Mod",
-                    description: "Hur man visar ljudkanallogg",
+                    label: "Läge",
+                    description: "Hur man visar röstkanalloggen",
                     menu: "Loggmeny",
-                    associated: "Logga direkt till relevant chattkanal",
-                    both: "Logga in på både chattkanalen och loggmenyn"
+                    associated: "Logga till associerad chatt direkt",
+                    both: "Logga till chatt och loggmeny"
                 },
                 voiceChannelChatSelf: {
-                    label: "Röstkanalchatt (dig själv)",
-                    description: "Logga din egen röstkanalaktivitet i röstkanaler"
+                    label: "Röstkanal Chat Self",
+                    description: "Logga dina egna röstkanalhändelser i röstkanalerna"
                 },
                 voiceChannelChatSilent: {
-                    label: "Tyst röstkanalchatt",
-                    description: "Gå med/lämna/flytta meddelanden är avstängda i röstkanalchattar"
+                    label: "Röstkanal Chatt Tyst",
+                    description: "Gå med/lämna/flytta meddelanden i röstkanalchattar kommer att vara tysta"
                 },
                 voiceChannelChatSilentSelf: {
-                    label: "Tyst röstkanalchatt (dig själv)",
-                    description: "Om du är på en röstkanal kommer meddelanden att gå med/lämna/flytta att vara tysta"
+                    label: "Röstkanal Chatt Tyst själv",
+                    description: "Gå med/lämna/flytta meddelanden i röstkanalchattar kommer att vara tysta om du är i röstkanalen"
                 },
                 ignoreBlockedUsers: {
                     label: "Ignorera blockerade användare",
-                    description: "Loggar användare som du har blockerat"
+                    description: "Logga inte blockerade användare"
                 }
             }
         },
         voiceChatUtilities: {
             name: "VoiceChatUtilities",
-            description: "Denna plugin låter dig utföra flera åtgärder (flytta, tysta, koppla ur, etc.) på en hel kanal (ursprungligen genom dutake)",
+            description: "Denna plugin låter dig utföra flera åtgärder på en hel kanal (flytta, tysta, koppla ur, etc.) (ursprungligen genom dutake)",
             option: {
                 waitAfter: {
                     label: "Vänta efter åtgärd",
-                    description: "Antal API-transaktioner som ska göras innan du väntar (för att undvika hastighetsgräns)"
+                    description: "Antal API-åtgärder som ska utföras innan du väntar (för att undvika hastighetsgränser)"
                 },
                 waitSeconds: {
-                    label: "Väntetid",
-                    description: "Tid att vänta mellan varje operation (i sekunder)"
+                    label: "Vänta sekunder",
+                    description: "Tid att vänta mellan varje åtgärd (i sekunder)"
                 }
             },
             context: {
-                voiceTools: "Ljudverktyg",
-                mentionAll: "Tagga alla användare",
+                voiceTools: "Röstverktyg",
+                mentionAll: "Nämn alla användare",
                 disconnectAll: "Koppla bort alla",
-                muteAll: "Stäng av ljudet för alla",
+                muteAll: "Stäng av alla",
                 unmuteAll: "Slå på ljudet för alla",
-                deafenAll: "Döva Alla",
-                undeafenAll: "Gå ut utan att döva alla",
+                deafenAll: "Döva alla",
+                undeafenAll: "Undeafen Alla",
                 moveAll: "Flytta alla"
             }
         },
         voiceDownload: {
-            name: "Röstnedladdning",
-            description: "Lägger till nedladdningsalternativ till röstmeddelanden. (Öppnar en ny webbläsarflik)",
+            name: "VoiceDownload",
+            description: "Lägger till en nedladdning till röstmeddelanden. (Öppnar en ny webbläsarflik)",
             context: {
-                download: "Ladda ner röstbrevlåda"
+                download: "Ladda ner röstmeddelande"
             }
         },
         voiceMessages: {
-            name: "Röstmeddelanden",
-            description: "Det låter dig skicka röstmeddelanden precis som på mobilen. För att göra detta, högerklicka på uppladdningsknappen och välj \"Skicka röstmeddelande\".",
+            name: "VoiceMessages",
+            description: "Låter dig skicka röstmeddelanden som på mobilen. För att göra det, högerklicka på uppladdningsknappen och klicka på Skicka röstmeddelande.",
             option: {
                 noiseSuppression: {
-                    label: "Brusreducering",
-                    description: "Brusreducering"
+                    label: "Brusdämpning",
+                    description: "Brusdämpning"
                 },
                 echoCancellation: {
                     label: "Eko-avstängning",
@@ -10669,51 +10669,51 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             notification: {
                 failed: {
-                    upload: "Röstbrevlådan kunde inte laddas.",
+                    upload: "Det gick inte att ladda upp röstmeddelande.",
                     start: "Det gick inte att starta inspelningen.",
-                    finish: "Registreringen kunde inte slutföras."
+                    finish: "Det gick inte att slutföra inspelningen."
                 }
             },
             context: {
                 sendVoiceMessage: "Skicka röstmeddelande",
-                missingPermissions: "(Tillstånd saknas)"
+                missingPermissions: "(Behörigheter saknas)"
             },
             modal: {
                 record: "Spela in röstmeddelande",
                 upload: "Ladda upp fil",
                 preview: "Förhandsvisning",
-                failed: "Den valda ljudfilen kunde inte tolkas:",
-                oggOpus: "Röstmeddelanden måste vara i OggOpus-format för att kunna spelas upp på iOS. Den här filen kan inte spelas upp på iOS eftersom den är i formatet {{type}}.",
-                fix: "För att fixa detta, konvertera först filen till OggOpus-format. Du kan till exempel använda {{link}}.",
-                sending: "Skickar röstmeddelande... Vänta.",
-                stop: "stoppa inspelningen",
-                start: "börja spela in",
-                resume: "Återuppta registreringen",
+                failed: "Det gick inte att tolka den valda ljudfilen:",
+                oggOpus: "Röstmeddelanden måste vara OggOpus för att kunna spelas på iOS. Den här filen är {{type}} så den kommer inte att kunna spelas upp på iOS.",
+                fix: "För att fixa det, konvertera det först till OggOpus, till exempel med hjälp av {{link}}",
+                sending: "Skickar nu röstmeddelande... Ha tålamod.",
+                stop: "Sluta spela in",
+                start: "Börja spela in",
+                resume: "Återuppta inspelningen",
                 pause: "Pausa inspelningen",
-                recording: "REGISTRERING PÅGÅR",
-                send: "Skicka"
+                recording: "INSPELNING",
+                send: "Skicka",
             }
         },
         volumeBooster: {
             name: "VolumeBooster",
-            description: "Låter dig öka användar- och sändningsvolymen över standardmax",
+            description: "Låter dig ställa in användar- och streamvolymen över standardmax",
             option: {
                 multiplier: {
                     label: "Multiplikator",
-                    description: "Ljudmultiplikator"
+                    description: "Volymmultiplikator"
                 }
             }
         },
         wallpaperFree: {
-            name: "Tapeter gratis",
-            description: "En nyinspelning av det gamla DM-tapetexperimentet; Ställ in bakgrundsbild för valfri kanal, användare eller server.",
+            name: "WallpaperFree",
+            description: "Rekreation av det gamla DM tapetexperimentet; Ställ in en bakgrundsbild för valfri kanal, användare eller server.",
             option: {
                 globalDefault: {
-                    label: "Allmän standard",
+                    label: "Global standard",
                     description: "Ställ in en global standardbakgrund för alla kanaler."
                 },
                 stylingTips: {
-                    label: "Stiltips"
+                    label: "Styling tips"
                 }
             },
             context: {
@@ -10721,110 +10721,110 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeWallpaper: "Ta bort tapeter"
             },
             modal: {
-                set: "ställa in tapeter",
-                image: "Bild URL",
+                set: "Ställ in tapeter",
+                image: "Bildens URL",
                 cancel: "Avboka",
                 apply: "Tillämpas",
                 global: {
-                    set: "Ställ in en offentlig bakgrund",
+                    set: "Ställ in en global bakgrund",
                     remove: "Ta bort global standardbakgrund",
                     reset: "Återställ bakgrundsdata"
                 },
                 web: {
-                    info: "Du kan använda lokala filer genom att lägga dem i plexcord-temakatalogen och använda webbadressen plexcord:///themes/filename.ext.",
+                    info: "Du kan använda lokala filer genom att ha dem i Plexcords temakatalog och använda URL:en plexcord:///themes/filename.ext",
                     open: "Öppna temakatalogen",
                     quickCSS: "Öppna QuickCSS"
                 }
             }
         },
         webContextMenus: {
-            name: "WebContextMenys",
-            description: "Lägger till snabbmenyer som saknas i webbversionen av Discord: Länkar och bilder (Kopiera eller Öppna länk/Bild), Textområde (Kopiera, Klipp ut, Klistra in, Stavningskontroll)",
+            name: "WebContextMenus",
+            description: "Lägger till snabbmenyer som saknas i webbversionen av Discord: Länkar och bilder (Kopiera/Öppna länk/Bild), Textområde (Kopiera, Klipp ut, Klistra in, Stavningskontroll)",
             option: {
                 addBack: {
                     label: "Lägg tillbaka",
-                    description: "Lägg tillbaka Discord-kontextmenyer för bilder, länkar och chattfält"
+                    description: "Lägg tillbaka Discord-kontextmenyerna för bilder, länkar och chattinmatningsfältet"
                 }
             }
         },
         webKeybinds: {
             name: "WebKeybinds",
-            description: "Den lägger till snabbtangenterna som saknas i webbversionen av Discord: ctrl+t, ctrl+shift+t, ctrl+tab, ctrl+shift+tab, ctrl+1-9, ctrl+,. Det fungerar bokstavligen bara på Plextron/Legcord, inte i webbläsaren."
+            description: "Återlägger nyckelbindningar som saknas i webbversionen av Discord: Ctrl+T, Ctrl+Skift+T, Ctrl+Tab, Ctrl+Skift+Tab, Ctrl+1-9, Ctrl+,. Fungerar endast fullt ut på Plextron/Legcord, inte i din webbläsare"
         },
         webScreenShareFixes: {
             name: "WebScreenShareFixes",
-            description: "Tar bort bithastighetsgränsen på 2500 kbps för skärmdelning på Chromium- och Plextron-klienter.",
+            description: "Tar bort 2500 kbps bithastighetstak på Chromium- och Plextron-klienter.",
             option: {
                 experimentalAV1Support: {
                     label: "Experimentell AV1-stöd",
-                    description: "Aktiverar AV1-codec-stöd. Oändliga laddningsströmmar kan orsaka problem som"
+                    description: "Aktivera stöd för AV1-codec. Kan orsaka problem som oändligt ladda strömmar"
                 }
             }
         },
         whoReacted: {
-            name: "Vem reagerade",
-            description: "Visar avatarer för användare som reagerar på ett meddelande",
+            name: "WhoReacted",
+            description: "Återger avatarerna för användare som reagerade på ett meddelande",
             option: {
                 avatarClick: {
                     label: "Avatar Klicka",
-                    description: "Växla klickbarhet för avatarer i reaktioner"
+                    description: "Växla klickande avatarer i reaktioner"
                 }
             }
         },
         whosWatching: {
-            name: "Vem tittar på",
-            description: "Se användare som tittar på din sändning genom att hålla muspekaren över skärmdelningsikonen",
+            name: "WhosWatching",
+            description: "Håll muspekaren över skärmdelningsikonen för att se vilka användare som tittar på din stream",
             modal: {
-                noSpectator: "ingen publik"
+                noSpectator: "Inga åskådare"
             },
             option: {
                 showPanel: {
                     label: "Visa panel",
-                    description: "Visa tittare under skärmdelningspanelen"
+                    description: "Visa åskådarna under skärmdelningspanelen"
                 }
             }
         },
         writeUpperCase: {
             name: "WriteUpperCase",
-            description: "Konverterar den första bokstaven i varje mening till versaler i meddelandeposter.",
+            description: "Ändrar den första bokstaven i varje mening i meddelandeinmatningar till versaler",
             option: {
                 blockedWords: {
                     label: "Blockerade ord",
-                    description: "Uttryck som inte ska skrivas med versaler (separera med kommatecken)"
+                    description: "Strängar som inte ska skrivas med versaler (separera med komma)"
                 }
             }
         },
         xSOverlay: {
-            name: "XSOöverlägg",
-            description: "Skickar Discord-aviseringar till XSOverlay för enkel visning i VR",
+            name: "XSOverlay",
+            description: "Vidarebefordrar Discord-aviseringar till XSOverlay, för enkel visning i VR",
             notification: {
                 call: {
-                    title: "{{user}} letar efter dig.",
-                    content: "inkommande samtal"
+                    title: "{{user}} ringer dig.",
+                    content: "Inkommande samtal"
                 },
                 message: {
                     reply: "(svar)",
                     embed: "[bädda in]",
-                    onlyEmbed: "skickat meddelande inbäddning(ar)",
+                    onlyEmbed: "Skickat meddelande inbäddning(ar)",
                     sticker: "[dekal]",
-                    onlySticker: "skickade ett klistermärke",
+                    onlySticker: "Skickade ett klistermärke",
                     image: "bild",
-                    attachment: "jag"
+                    attachment: "fastsättning"
                 },
                 test: {
-                    title: "Plexcord och dyk!",
-                    content: "Detta är ett testmeddelande! explodera",
+                    title: "Hej från Plexcord!",
+                    content: "Detta är ett testmeddelande! *Explodera*",
                     button: "Skicka testavisering"
                 }
             },
             option: {
                 webSocketPort: {
-                    label: "WebSocket Portu",
-                    description: "WebSocket portu"
+                    label: "WebSocket-port",
+                    description: "WebSocket-port"
                 },
                 preferUDP: {
-                    label: "UDP Tercih Et",
-                    description: "Om du använder äldre versioner av XSOverlay och inte kan ansluta via WebSocket, aktivera det. Den här inställningen ignoreras på webben."
+                    label: "Föredrar UDP",
+                    description: "Aktivera om du använder en äldre version av XSOverlay som inte kan ansluta via WebSockets. Den här inställningen ignoreras på webben."
                 },
                 botNotifications: {
                     label: "Botmeddelanden",
@@ -10836,10 +10836,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 dmNotifications: {
                     label: "DM-aviseringar",
-                    description: "Tillåt aviseringar om privata meddelanden"
+                    description: "Tillåt direktmeddelandeaviseringar"
                 },
                 groupDmNotifications: {
-                    label: "Grupp DM-aviseringar",
+                    label: "Grupp DM-meddelanden",
                     description: "Tillåt grupp-DM-aviseringar"
                 },
                 callNotifications: {
@@ -10847,12 +10847,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Tillåt samtalsaviseringar"
                 },
                 pingColor: {
-                    label: "Ping Rengi",
-                    description: "Användartaggningsfärg"
+                    label: "Ping färg",
+                    description: "Användaren nämner färg"
                 },
                 channelPingColor: {
-                    label: "Färgping-kanal",
-                    description: "Kanalmärkningsfärg"
+                    label: "Kanalping-färg",
+                    description: "Kanal nämna färg"
                 },
                 soundPath: {
                     label: "Ljudväg",
@@ -10863,25 +10863,25 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Aviseringslängd (sekunder)"
                 },
                 lengthBasedTimeout: {
-                    label: "Meddelandelängd baserad varaktighet",
-                    description: "Förläng varaktigheten enligt meddelandelängden"
+                    label: "Längdbaserad timeout",
+                    description: "Förläng varaktigheten med meddelandelängd"
                 },
                 opacity: {
                     label: "Opacitet",
                     description: "Opacitet för meddelanden"
                 },
                 volume: {
-                    label: "Ses",
-                    description: "ljudnivå"
+                    label: "Volym",
+                    description: "Volym"
                 }
             }
         },
         youtubeAdblock: {
-            name: "YouTube Adblock",
-            description: "Blockerar annonser på YouTube-inbäddningar och WatchTogether-aktivitet med AdGuard"
+            name: "YouTubeAdblock",
+            description: "Blockera annonser i YouTube-inbäddningar och aktiviteten Titta tillsammans via AdGuard"
         },
         youtubeDescription: {
-            name: "YouTube-beskrivning",
+            name: "YouTubeDescription",
             description: "Lägger till beskrivningar till YouTube-videoinbäddningar"
         }
     }

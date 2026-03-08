@@ -24,66 +24,66 @@ const translations: MatchStructure<typeof enTranslations> = {
         title: "設定",
         language: {
             selector: {
-                label: "ディル",
+                label: "言語",
                 description: "Plexcord の優先言語を選択します。",
                 placeholder: "言語の選択"
             }
         },
         location: {
             label: "設定場所",
-            description: "Plexcord は設定セクションを配置する場所を決定します",
-            top: "頂上へ",
+            description: "Plexcord設定セクションを配置する場所",
+            top: "一番上にある",
             nitro: {
-                above: "ニトロセクションの上に",
+                above: "ニトロセクションの上",
                 below: "ニトロセクションの下"
             },
             activity: {
-                above: "上記イベント設定",
-                below: "イベント設定の下で"
+                above: "上記のアクティビティ設定",
+                below: "アクティビティ設定の下"
             },
-            bottom: "高いところに"
+            bottom: "一番下に"
         },
         switches: {
             useQuickCss: {
                 label: "カスタムCSSを有効にする",
-                description: "QuickCSS エディターからカスタム CSS を読み込みます。 これにより、Discord の外観を独自のスタイルでカスタマイズできます。"
+                description: "QuickCSS エディターからカスタム CSS を読み込みます。これにより、Discord の外観を独自のスタイルでカスタマイズできます。"
             },
             enableReactDevtools: {
                 label: "React 開発者ツールを有効にする",
-                description: "React Developer Tools 拡張機能を有効にして、Discord の React コンポーネントをデバッグします。 プラグイン開発に役立ちます。"
+                description: "Discord の React コンポーネントをデバッグするために React Developer Tools 拡張機能を有効にします。プラグイン開発に役立ちます。"
             },
             mainWindowFrameless: {
                 label: "メインウィンドウフレームを無効にする",
-                description: "見た目をすっきりさせるために、ローカルの窓枠を取り外します。 タイトル バー領域をドラッグすることでウィンドウを移動できます。"
+                description: "ネイティブのウィンドウフレームを取り外して、すっきりとした外観にします。タイトル バー領域をドラッグすることでウィンドウを移動できます。"
             },
             frameless: {
                 label: "ウィンドウフレームを無効にする",
-                description: "見た目をすっきりさせるために、ローカルの窓枠を取り外します。 タイトル バー領域をドラッグすることでウィンドウを移動できます。"
+                description: "ネイティブのウィンドウフレームを取り外して、すっきりとした外観にします。タイトル バー領域をドラッグすることでウィンドウを移動できます。"
             },
             winNativeTitleBar: {
                 label: "Discordのカスタムタイトルバーの代わりにWindowsのネイティブタイトルバーを使用する",
-                description: "Discord のカスタム タイトル バーを標準の Windows タイトル バーに置き換えます。 これにより、一部のウィンドウ管理ツールとの互換性が向上する可能性があります。"
+                description: "Discord のカスタム タイトル バーを標準の Windows タイトル バーに置き換えます。これにより、一部のウィンドウ管理ツールとの互換性が向上する可能性があります。"
             },
             transparent: {
                 label: "ウィンドウの透明性を有効にする",
-                description: "Discordのウィンドウを透明にします。 透明性をサポートするテーマが必要です。そうでない場合は何も行われません。",
-                isWindows: "これにより、ウィンドウのサイズ変更が停止され、ウィンドウを画面の端にスナップできなくなります。",
-                notWindows: "これにより、ウィンドウのサイズが変更されなくなります。"
+                description: "Discordのウィンドウを透明にします。透明性をサポートするテーマが必要です。そうでない場合は何も行われません。",
+                isWindows: "これにより、ウィンドウのサイズ変更ができなくなり、ウィンドウを画面の端にスナップできなくなります。",
+                notWindows: "これにより、ウィンドウのサイズ変更ができなくなります。"
             },
             winCtrlQ: {
-                label: "Ctrl+Q ショートカットを保存して Discord を閉じる (Alt+F4 の代替)",
-                description: "Discordを閉じるためのキーボードショートカットとしてCtrl+Qを追加します。 これにより、アプリケーションをすばやく閉じるための Alt+F4 の代替手段が提供されます。"
+                label: "Ctrl+QをDiscordを閉じるショートカットとして登録（Alt+F4の代替）",
+                description: "Discordを閉じるためのキーボードショートカットとしてCtrl+Qを追加します。これにより、アプリケーションをすばやく閉じるための Alt+F4 の代替手段が提供されます。"
             },
             disableMinSize: {
                 label: "最小ウィンドウ サイズを無効にする",
-                description: "Discord ウィンドウのサイズをデフォルトの最小サイズよりも小さくできるようにします。 ウィンドウ マネージャーや小さな画面を並べて表示する場合に便利です。"
+                description: "Discord ウィンドウのサイズをデフォルトの最小サイズよりも小さくできるようにします。ウィンドウ マネージャーや小さな画面を並べて表示する場合に便利です。"
             }
         },
         quickActions: {
-            title: "クイックトランザクション",
-            description: "頻繁に使用する一般的な操作。 これらのショートカットを使用すると、メニューを移動することなく、頻繁に使用する機能にすばやくアクセスできます。",
+            title: "クイックアクション",
+            description: "実行する必要がある一般的なアクション。これらのショートカットを使用すると、メニューを移動することなく、頻繁に使用する機能にすばやくアクセスできます。",
             notificationLog: "通知ログ",
-            editQuickCSS: "クイックCSS編集",
+            editQuickCSS: "QuickCSSを編集する",
             relaunchDiscord: "Discordを再起動する",
             openSettingsFolder: "設定フォルダーを開く",
             viewSourceCode: "ソースコードを表示"
@@ -92,8 +92,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             donations: {
                 title: "寄付",
                 subtitle: "寄付していただきありがとうございます!",
-                description: "@mutanplex にメッセージを送信することで、いつでも自分の権限を管理できます。",
-                button: "寄付",
+                description: "@mutanplex にメッセージを送信することで、いつでも特典を管理できます。",
+                button: "寄付する",
                 invite: "Discordに参加してください",
                 invalid: "招待リンクが無効または期限切れです。"
             },
@@ -103,37 +103,37 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             contributions: {
                 title: "貢献",
-                subtitle: "ご貢献いただきありがとうございます!",
-                description: "Plexcord に貢献すると、クールなバッジが手に入ります。",
+                subtitle: "ご協力いただきありがとうございます!",
+                description: "Plexcord に貢献したので、クールな新しいバッジが手に入りました。",
                 buttonTitle: "あなたが貢献したものを見る"
             }
         },
         settingsSection: {
             title: "設定",
-            description: "Plexcord が Discord と統合して動作する方法を構成します。 これらの設定は、Discord クライアントの外観と動作に影響します。",
+            description: "Plexcord がどのように動作し、Discord と統合するかを構成します。これらの設定は、Discord クライアントの外観と動作に影響します。",
             hintParts: {
-                prefix: "{{pluginLink}} 設定を構成することで、この設定セクションが Discord 設定メニューのどこに表示されるかをカスタマイズできます。",
+                prefix: "{{pluginLink}} を構成することで、Discord の設定メニュー内でこの設定セクションが表示される場所をカスタマイズできます。",
                 linkText: "設定プラグイン"
             }
         },
         notifications: {
             title: "通知",
-            description: "Plexcord が通知を処理する方法を構成します。 アラートをいつどのように受信するかをカスタマイズしたり、過去の通知の履歴を表示したりできます。",
+            description: "Plexcord が通知を処理する方法を構成します。アラートをいつどのように受信するかをカスタマイズしたり、過去の通知の履歴を表示したりできます。",
             settings: "通知設定",
-            viewLog: "通知履歴の表示",
+            viewLog: "通知ログの表示",
             permissions: {
                 denied: {
                     title: "デスクトップ通知の許可が拒否されました",
-                    label: "通知権限を拒否しました。 デスクトップ通知は機能しません。"
+                    label: "通知のアクセス許可を拒否しました。デスクトップ通知は機能しません。"
                 }
             },
             style: {
                 label: "通知スタイル",
-                description: "一部のプラグインでは通知が表示される場合があります。 これらには 2 つのスタイルがあります。",
+                description: "一部のプラグインでは通知が表示される場合があります。これらには 2 つのスタイルがあります。",
                 plexcord: "プレックスコードの通知",
                 plexcordDesc: "これらはアプリ内通知です",
                 desktop: "デスクトップ通知",
-                desktopDesc: "ローカル デスクトップ通知 (ping を受信したときなど)",
+                desktopDesc: "ネイティブ デスクトップ通知 (ping を受信したときなど)",
                 onlyWhenNotFocused: "Discord がフォーカスされていない場合にのみデスクトップ通知を使用する",
                 always: {
                     desktop: "常にデスクトップ通知を使用する",
@@ -144,73 +144,73 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "通知位置",
                 right: {
                     bottom: "右下",
-                    top: "右上"
+                    top: "右上",
                 },
                 left: {
                     bottom: "左下",
-                    top: "左上"
+                    top: "左上",
                 }
             },
             missed: {
                 label: "見逃した通知の数",
-                description: "Discord に再び注目すると、見逃した通知に関する通知がポップアップ表示されます。",
-                whileYou: "あなたがいない間",
-                count: "{{count}} 件の通知を受信しました{{s}}",
-                s: " "
+                description: "Discordに再度フォーカスすると、見逃した数を示す通知がポップアップ表示されます",
+                whileYou: "あなたがいない間に",
+                count: "{{count}} 通知{{s}} を受け取りました",
+                s: "s"
             },
             timeout: {
                 label: "通知タイムアウト",
-                description: "通知が自動的に消えるまでの画面上に表示される時間 (秒単位)"
+                description: "通知が自動的に消えるまで画面に表示される時間 (秒単位)"
             },
             logLimit: {
                 label: "通知ログの制限",
-                description: "通知ログに保存される通知の最大数。 通知ログを無効にする場合は {{disable}} に設定し、古い通知を自動的に削除しない場合は {{unlimited}} に設定します"
+                description: "古い通知が削除されるまでにログに保持する通知の最大数。通知ログを無効にするには {{disable}} に設定し、古い通知を自動的に削除しないようにするには {{unlimited}} に設定します。"
             },
             opacity: {
-                label: "不透明度",
-                description: "アプリ内通知の不透明性"
+                label: "通知の不透明度",
+                description: "アプリ内通知の不透明度"
             },
             maxNotifications: {
-                label: "最大の通知",
-                description: "同時に表示する通知の最大数"
+                label: "最大通知数",
+                description: "一度に表示される通知の最大数"
             },
             behavior: {
                 label: "通知の動作",
             },
             disableInStreamerMode: {
-                label: "ブロードキャスターモードで無効にする",
-                description: "ブロードキャスターモード中に通知を無効にする"
+                label: "ストリーマーモードで無効にする",
+                description: "ストリーマーモード中に通知を無効にする"
             },
             renderImages: {
-                label: "画像の処理",
+                label: "レンダリング画像",
                 description: "通知に画像をレンダリングする"
             },
             streamingTreatment: {
-                label: "ブロードキャスターモードの動作",
-                description: "画面共有時の通知の処理方法",
+                label: "ストリーミング処理",
+                description: "画面共有中に通知を処理する方法",
                 normal: "通常 - 通知を通常どおり表示します",
-                noContent: "コンテンツなし - 通知本文を非表示にする",
-                ignore: "無視 – 通知をまったく表示しません"
+                noContent: "コンテンツなし - 通知本文を非表示にします",
+                ignore: "無視 - 通知をまったく表示しません"
             },
         },
         macVibrancy: {
-            title: "ウィンドウのちらつきスタイル (再起動が必要)",
-            description: "macOS ウィンドウのちらつき効果をカスタマイズします。 これは、Discord ウィンドウのぼかしと透明度のスタイルを制御します。 変更を有効にするには再起動が必要です。",
-            placeholder: "ウィンドウのちらつきスタイル",
+            title: "ウィンドウの鮮やかさのスタイル (再起動が必要)",
+            description: "macOS ウィンドウの鮮やかさ効果をカスタマイズします。これは、Discord ウィンドウのぼかしと透明度のスタイルを制御します。変更を有効にするには再起動が必要です。",
+            placeholder: "窓の活気に満ちたスタイル",
             style: {
-                no: "揺れない",
-                underPage: "ページの下 (ウィンドウの色合い)",
+                no: "活気がない",
+                underPage: "ページ下 (ウィンドウの色合い)",
                 content: "コンテンツ",
                 window: "ウィンドウ",
-                selection: "投票する",
+                selection: "選択",
                 titlebar: "タイトルバー",
-                header: "タイトル",
+                header: "ヘッダ",
                 sidebar: "サイドバー",
                 tooltip: "ツールチップ",
                 menu: "メニュー",
-                popover: "ポップアップウィンドウ",
-                fullscreenUI: "フルスクリーン UI (透明ですが少し鈍い)",
-                hud: "HUD (最も透明)"
+                popover: "ポップオーバー",
+                fullscreenUI: "フルスクリーン UI (透明ですがわずかにぼやけています)",
+                hud: "HUD (最も透明度の高い)"
             }
         }
     },
@@ -223,41 +223,41 @@ const translations: MatchStructure<typeof enTranslations> = {
         restart: {
             apply: "変更を適用するには再起動してください。",
             required: "再起動が必要です!",
-            description: "新しいプラグインと設定を適用するには、今すぐ再起動してください",
+            description: "新しいプラグインとその設定を適用するには、今すぐ再起動してください",
             following: "次のプラグインは再起動が必要です。",
-            fully: "一部のプラグインは完全に無効にするために再起動が必要です。",
-            would: "再開しますか?",
-            remainingCount: "他 {{count}} 個",
+            remainingCount: "{{count}} 詳細",
+            fully: "一部のプラグインは完全に無効にするために再起動が必要です",
+            would: "今すぐ再開しますか?",
             resetDefault: "デフォルト設定にリセットする",
-            failed: "依存関係の初期化に失敗しました:",
+            failed: "依存関係を開始できませんでした:",
             button: {
                 restart: "再起動",
-                later: "それから！",
+                later: "後で！",
                 now: "今すぐ再起動してください",
                 cancel: "キャンセル",
-                disableWarning: "アラートを無効にする",
+                disableWarning: "警告を永久に無効にする",
                 disableAll: "すべて無効にする",
                 reset: "リセット",
-                close: "四半期"
+                close: "近い"
             }
         },
         contributor: {
             contributed: "貢献した",
             modal: {
-                contributionsInfo: "プラグインの開発による {{userName}} {{contributionCount}} {{continuedLink}}。",
-                noContributions: "{{userName}} はまだプラグインを開発していません。 おそらく、さまざまな方法で {{contributedLink}} が行われる可能性があります。"
+                contributionsInfo: "{{userName}} には {{continuedLink}} ～ {{contributionCount}} プラグイン{{s}} があります。",
+                noContributions: "{{userName}} はプラグインを作成していません。彼らはおそらく別の方法で{{contributedLink}}するでしょう!"
             }
         },
         infoModal: {
-            description: "歯車または情報アイコンを押すと、プラグインに関する詳細情報を取得できます。",
-            settingsInfo: "歯車付きのプラグインには設定を変更できます。",
+            description: "歯車または情報アイコンを押すと、プラグインに関する詳細情報が表示されます",
+            settingsInfo: "歯車付きのプラグインには、変更できる設定があります。",
             disableAll: "すべてのプラグインを無効にする"
         },
         error: {
             invalidInput: "無効な入力が提供されました",
-            stopping: "{{plugin}} プラグインの停止中に問題が発生しました",
-            starting: "{{plugin}} プラグインの初期化中に問題が発生しました",
-            startDependency: "依存関係の初期化中に問題が発生しました: {{failures}}",
+            stopping: "プラグイン {{plugin}} の停止中にエラーが発生しました",
+            starting: "プラグイン {{plugin}} の起動中にエラーが発生しました",
+            startDependency: "依存関係の開始中にエラーが発生しました: {{failures}}",
             infoRender: "このプラグインのカスタム情報コンポーネントのレンダリング中にエラーが発生しました"
         },
         placeholder: {
@@ -268,30 +268,30 @@ const translations: MatchStructure<typeof enTranslations> = {
         excluded: {
             desktop: "Discord デスクトップ アプリまたは Plextron",
             discordDesktop: "Discord デスクトップアプリ",
-            plextron: "プレクストロンのアプリケーション",
+            plextron: "プレクストロンアプリ",
             web: "Plextron アプリと Web バージョンの Discord",
             dev: "Plexcordの開発者版"
         },
         search: {
-            looking: "これがあなたが探しているものですか",
-            onlyAvailable: "ここでしか手に入らない→",
-            noCriteria: "検索条件に一致するプラグインは見つかりませんでした"
+            looking: "探していますか",
+            onlyAvailable: "でのみ利用可能",
+            noCriteria: "検索条件を満たすプラグインはありません。"
         },
         required: {
             title: "必要なプラグイン",
-            this: "このプラグインは、Plexcord が動作するために必要です。",
-            by: "このプラグインは、以下を機能させるために必要です。"
+            this: "このプラグインは、Plexcord が機能するために必要です。",
+            by: "このプラグインは次の場合に必要です。"
         },
         dangerModal: {
             title: "危険な行為",
             disablePlugins: "プラグインを無効にする",
             disableText: "すべて無効にする",
-            irreversible: "このアクションは取り消しできません。",
-            enableBack: "続行してもよろしいですか?後で再度アクティブ化することができます。",
-            undone: "この操作は元に戻すことができません。 本気ですか？",
-            resetDescription: "{{pluginName}} プラグイン設定をデフォルト値にリセットしようとしています。",
+            irreversible: "この行為は取り消しできません。",
+            enableBack: "続行してもよろしいですか?後でいつでも有効に戻すことができます。",
+            undone: "この操作は元に戻すことができません。本気ですか？",
+            resetDescription: "{{pluginName}} のすべての設定をデフォルト値にリセットしようとしています。",
             disable: "{{enabledPlugins}} プラグインを無効にしようとしています。",
-            confirmReset: "確認してリセットする",
+            confirmReset: "リセットの確認",
             cancel: "キャンセル",
             resetSettings: "設定をリセットする",
             resetText: "リセット"
@@ -300,45 +300,45 @@ const translations: MatchStructure<typeof enTranslations> = {
             label: "フィルター",
             placeholder: "プラグインを検索...",
             option: {
-                all: "全て",
-                enabled: "アクティブ",
-                disabled: "無効",
-                new: "新しい",
-                userplugins: "ユーザープラグイン",
-                api: "APIプラグイン"
+                all: "すべて表示",
+                enabled: "有効表示",
+                disabled: "無効を表示",
+                new: "新規表示",
+                userplugins: "ユーザープラグインを表示",
+                api: "APIプラグインを表示"
             }
         },
         pluginModal: {
-            noSettings: "このプラグインには変更できる設定がありません。",
+            noSettings: "このプラグインには設定はありません。",
             authors: "著者",
             settings: "設定",
-            successfulReset: "{{plugin}} プラグインの設定は正常にリセットされました。",
-            enabledStock: "アクティブストックアドオン",
-            totalStock: "合計ストックアドオン",
-            enabledUser: "アクティブなユーザープラグイン",
-            totalUser: "ユーザーアドオンの合計",
+            successfulReset: "{{plugin}} の設定がリセットされました。",
+            enabledStock: "有効なストックプラグイン",
+            totalStock: "合計ストックプラグイン",
+            enabledUser: "有効なユーザープラグイン",
+            totalUser: "総ユーザープラグイン数",
             info: "さらに詳しい情報を見る",
             source: "ソースコードを表示する"
         },
         metadata: {
             api: {
                 description: {
-                    memberListDecorators: "メンバーリストにデコレーターを追加するための API (サーバーと DM の両方)",
-                    messageAccessories: "メッセージに小道具を追加するための API",
-                    messageDecorations: "投稿にデコレータを追加する API",
-                    chatInputButtons: "チャットエントリにボタンを追加するAPI",
+                    memberListDecorators: "デコレーターをメンバーリストに追加するための API (サーバーと DM の両方)",
+                    messageAccessories: "メッセージにアクセサリーを追加するための API",
+                    messageDecorations: "メッセージに装飾を追加するための API",
+                    chatInputButtons: "チャット入力にボタンを追加する API",
                     commands: "コマンドを使用するものに必要な API",
-                    contextMenu: "コンテキストメニューから項目を追加/削除するためのAPI",
-                    dynamicImageModal: "画像モーダルを開くときに幅または高さをスキップできます。",
-                    menuItemDemangler: "Discord のメニュー項目を読みやすくします",
-                    messageEvents: "メッセージ イベントを使用するものに必要な API",
-                    messagePopover: "メッセージポップアップにボタンを追加するAPI",
-                    messageUpdater: "メッセージを更新および再処理するための API",
-                    nicknameIcons: "プロフィールのユーザー名にアイコンを追加する API",
-                    notices: "通知の自動消去を修正",
+                    contextMenu: "コンテキスト メニューに項目を追加したり、コンテキスト メニューから項目を削除したりするための API。",
+                    dynamicImageModal: "画像モーダルを開くときに幅または高さのいずれかを省略できるようにします",
+                    menuItemDemangler: "Demangles Discord のメニュー項目モジュール",
+                    messageEvents: "メッセージイベントを使用するものに必要な API",
+                    messagePopover: "メッセージポップオーバーにボタンを追加するAPI",
+                    messageUpdater: "メッセージを更新および再レンダリングするための API",
+                    nicknameIcons: "プロフィール内のニックネームにアイコンを追加する API",
+                    notices: "通知が自動的に無視される問題を修正",
                     serverList: "サーバーリストを変更するプラグインに必要な API",
-                    userSettings: "Discordのユーザー設定、グループ、名前を明らかにするパッチ",
-                    audioPlayer: "Discord の内部オーディオ ファイルまたは外部オーディオ リンクを再生するための API。",
+                    userSettings: "Discord の UserSettings にパッチを適用して、グループと名前を公開します。",
+                    audioPlayer: "内部 Discord オーディオ ファイルまたは外部オーディオ リンクを再生するための API。",
                     userArea: "ユーザーエリアパネルにボタンを追加するためのAPI。"
                 },
                 chatButtons: {
@@ -350,27 +350,27 @@ const translations: MatchStructure<typeof enTranslations> = {
             badges: {
                 description: "ユーザーにバッジを追加するための API",
                 contributor: {
-                    plexcord: "プレックスコード参加者",
-                    vencord: "ヴェンコード参加者",
+                    plexcord: "Plexcord の貢献者",
+                    vencord: "Vencord の貢献者",
                     userPlugin: "ユーザープラグインの貢献者"
                 },
                 context: {
                     title: "バッジのオプション",
                     copy: {
-                        name: "バッジ名をコピー",
-                        link: "バッジの画像リンクをコピー"
+                        name: "Copy Badge Name",
+                        link: "バッジ画像リンクをコピー"
                     },
                     refetch: {
-                        button: "バッジを更新する",
-                        success: "バッジが無事に更新されました！"
+                        button: "バッジの再取得",
+                        success: "バッジが正常に再取得されました!"
                     }
                 },
                 modal: {
-                    title: "プレックスコードサポーター",
-                    special: "このバッジは、Plexcord の寄付者に対する特別な特典です。",
-                    description: "ドナーになって Plexcord の開発をサポートすることをご検討ください。 これは私たちにとって非常に貴重なものになります!!"
+                    title: "プレックスコードドナー",
+                    special: "このバッジは、Plexcord 寄付者向けの特別な特典です",
+                    description: "ドナーとなって Plexcord の開発をサポートすることをご検討ください。それは大きな意味があるでしょう！"
                 }
-            }
+            },
         },
         uiElements: {
             manage: "UI要素の管理",
@@ -378,90 +378,90 @@ const translations: MatchStructure<typeof enTranslations> = {
             section: {
                 chatbar: {
                     title: "チャットバーのボタン",
-                    description: "これらはチャットエントリバーの右側にあるボタンです"
+                    description: "これらはチャット入力バーの右側にあるボタンです"
                 },
                 messagePopover: {
-                    title: "メッセージポップアップボタン",
+                    title: "メッセージポップオーバーボタン",
                     description: "これらは、メッセージの上にマウスを置くと右側に表示されるフローティング ボタンです。"
                 }
             },
-            button: "有効化されたプラグインのボタンがここに表示されます。"
+            button: "有効なプラグインのボタンがここに表示されます。"
         }
     },
 
     patchHelper: {
-        title: "パッチアシスタント",
-        description: "Plexcord プラグインのパッチの作成に役立つ開発者ツール。",
+        title: "パッチヘルパー",
+        description: "Plexcord プラグインのパッチの作成を支援する開発者ツール。",
         fullPatch: {
-            label: "タム・ヤマ",
-            description: "完全な JSON パッチをここに貼り付けてフィールドに値を入力します"
+            label: "フルパッチ",
+            description: "完全な JSON パッチをここに貼り付けてフィールドに記入します"
         },
-        find: "ブル",
+        find: "探す",
         match: "マッチ",
-        replacement: "変化",
+        replacement: "交換",
         preview: "プレビュー",
         generatedCode: "生成されたコード",
         group: "グループ",
-        diff: "違い",
+        diff: "差分",
         module: "モジュール",
-        compile: "デルレ",
+        compile: "コンパイル",
         compiled: "コンパイルに成功しました",
         copy: {
             clipboard: "クリップボードにコピー",
             codeblock: "コードブロックとしてコピー"
         },
         error: {
-            noMatch: "一致するものが見つかりませんでした。 おそらくそのモジュールは遅延読み込みされているのでしょう。",
-            multipleMatch: "一致するものが複数見つかりました。 より具体的な検索パターンを使用してください。",
-            noFind: "「検索」フィールドはありません。",
-            noReplacement: "「変更」フィールドはありません。",
-            invalidReplacement: "置換フィールドが無効です",
-            replacementMatch: "「replacement.match」フィールドは存在しません",
-            replacementReplace: "「replacement.replace」フィールドが存在しません",
-            replacementMustFunction: "置換は関数でなければなりません"
+            noMatch: "一致するものが見つかりませんでした。このモジュールは遅延ロードされている可能性がありますか?",
+            multipleMatch: "複数の一致が見つかりました。より具体的な検索パターンを使用してください。",
+            noFind: "「検索」フィールドがありません。",
+            noReplacement: "「置換」フィールドがありません。",
+            invalidReplacement: "「置換」フィールドが無効です",
+            replacementMatch: "「replacement.match」フィールドがありません",
+            replacementReplace: "「replacement.replace」フィールドがありません",
+            replacementMustFunction: "「置換」は関数である必要があります"
         },
         cheatSheet: {
             title: "チートシート",
-            identifiers: "識別子 (変数名、クラス名など) に一致するカスタム正規表現エスケープ シーケンス",
-            dollar: "$を追加します",
-            entireMatch: "すべての一致を追加します",
-            beforeMatch: "一致の前に部分文字列を追加します",
-            afterMatch: "一致の後に部分文字列を追加します",
-            nthGroup: "n 番目のキャプチャ グループ ($1、$2...) を追加します。",
-            pluginInstance: "プラグインインスタンスを追加します"
+            identifiers: "識別子 (変数名、クラス名など) に一致する特別な正規表現エスケープ シーケンス",
+            dollar: "$を挿入",
+            entireMatch: "一致部分全体を挿入します",
+            beforeMatch: "一致の前に部分文字列を挿入します",
+            afterMatch: "一致の後に部分文字列を挿入します",
+            nthGroup: "n 番目のキャプチャ グループ ($1、$2...) を挿入します。",
+            pluginInstance: "プラグインインスタンスを挿入する"
         },
         replacementEval: {
-            label: "機能としてのプロセスの置き換え",
-            description: "これが有効な場合、「置換」は関数として扱われます。"
+            label: "置換を関数として扱う",
+            description: "これが有効な場合、「置換」は関数として評価されます。"
         }
     },
 
     sync: {
         title: "バックアップと復元",
         warning: "警告",
-        warningText: "設定ファイルをインポートすると、現在の設定が上書きされます。 現在の構成を保持したい場合は、必ず最初にバックアップをエクスポートしてください。",
-        description: "Plexcord 設定を JSON ファイルとしてインポートおよびエクスポートできます。 このようにして、設定を別のデバイスに簡単に移動したり、Plexcord または Discord を再インストールした後に設定を復元したりできます。",
-        successful: "設定は正常にインポートされました。 変更を有効にするには、アプリを再起動してください。",
+        warningText: "設定ファイルをインポートすると、現在の設定が上書きされます。現在の構成を保持したい場合は、必ず最初にバックアップをエクスポートしてください。",
+        description: "Plexcord 設定を JSON ファイルとしてインポートおよびエクスポートできます。これにより、設定を別のデバイスに簡単に転送したり、Plexcord または Discord を再インストールした後に設定を復元したりすることができます。",
+        successful: "設定が正常にインポートされました。変更を適用するには再起動してください。",
         error: {
             failure: "設定のインポートに失敗しました: {{error}}",
             failedExport: "設定のエクスポートに失敗しました。コンソールを確認してください",
-            invalid: "無効な設定です。 これは本当に Plexcord Tuning ファイルですか?",
-            tooLarge: "データストアが大きすぎるため、バックアップから除外されました。 必要に応じて、「データストアのエクスポート」機能を使用します。",
-            clearSomeDate: "データストアは巨大です。 プラグイン データをいくつか削除して、もう一度試してください。"
+            invalid: "無効な設定です。これは Plexcord 設定ファイルですか?",
+            tooLarge: "データストアが大きすぎます - バックアップから除外されました。必要に応じて「データストアのエクスポート」を使用します。",
+            clearSomeDate: "データストアが大きすぎます。プラグイン データをいくつか削除して、もう一度試してください。"
         },
         settings: {
-            text: "バックアップには何が入っているのでしょうか？",
+            text: "バックアップには何が含まれますか?",
             quickcss: "カスタムQuickCSS",
             theme: "テーマリンク",
             plugins: "プラグイン設定",
-            datastores: "アドオン リポジトリ (タイムゾーンや IRememberYou など)"
+            datastores: "プラグイン データストア (タイム ゾーンや IRememberYou など)"
         },
         import: {
             title: "インポート設定",
-            description: "構成を復元するには、以前にエクスポートした設定ファイルを選択します。 これにより、現在の設定がすべてバックアップの設定に置き換えられます。",
+            description: "以前にエクスポートした設定ファイルを選択して、構成を復元します。これにより、現在の設定がすべてバックアップの設定に置き換えられます。",
             all: "すべての設定をインポート",
-            plugins: "エクレンティ・イチェ・アクタル",
-            css: "QuickCSS の詳細",
+            plugins: "プラグインのインポート",
+            css: "QuickCSSをインポートする",
             datastore: "データストアのインポート"
         },
         export: {
@@ -478,36 +478,36 @@ const translations: MatchStructure<typeof enTranslations> = {
         text: "雲",
         title: "設定の同期",
         override: "クラウド同期",
-        description: "Plexcord の設定をクラウドに同期します。 これにより、手動でインポート/エクスポートを行わなくても、複数のデバイス間で構成を一貫して維持できます。",
-        switchDescription: "有効にすると、設定がクラウドに同期されます。 次のアクションを使用して手動で同期できます。",
+        description: "Plexcord の設定をクラウドに同期します。これにより、手動でインポート/エクスポートしなくても、複数のデバイス間で構成の一貫性を簡単に保つことができます。",
+        switchDescription: "有効にすると、設定をクラウドとの間で同期できます。手動で同期するには、以下のアクションを使用します。",
         settings: "クラウド設定",
-        successful: "設定はクラウドに正常に同期されました。",
-        updated: "設定が更新されました!変更を完全に有効にするには、ここをクリックして再起動してください。",
+        successful: "設定をクラウドに同期！",
+        updated: "設定が更新されました!ここをクリックして再起動し、変更を完全に適用してください。",
         deleted: "設定がクラウドから削除されました!",
         integration: {
             title: "クラウド統合",
-            description: "Plexcord のクラウド統合により、複数のデバイスと Discord インストール間で設定を同期できます。 データは安全に保存され、いつでも簡単に復元できます。",
+            description: "Plexcord のクラウド統合により、複数のデバイスと Discord インストール間で設定を同期できます。データは安全に保管されており、いつでも簡単に復元できます。",
         },
-        reauth: "別のクライアントでクラウド統合が有効になっていることに気付きました。 制限があるため、続行するには再認証する必要があります。 ここをクリックして設定ページに移動し、続行してください。",
+        reauth: "別のクライアントでクラウド統合が有効になっていることがわかりました。制限があるため、引き続き使用するには再認証する必要があります。ここをクリックして設定ページに移動してください。",
         error: {
             setup: "セットアップに失敗しました (OAuth 構成を取得できませんでした)。",
-            secret: "セットアップに失敗しました (秘密キーが返されませんでした)。",
-            string: "インストールに失敗しました ({{error}})。",
-            connect: "このアカウントは Plexcord クラウド アプリに接続されていないため、クラウド同期は無効になっています。 このアカウントを再度有効にするには、クラウド設定で接続します。 (注: 設定は別途保存されます)",
-            noSettings: "クラウドに設定が見つかりません。",
+            secret: "セットアップが失敗しました (シークレットが返されません)。",
+            string: "セットアップに失敗しました ({{error}})。",
+            connect: "このアカウントは Plexcord Cloud App に接続されていないため、クラウド同期は無効になりました。クラウド設定でこのアカウントを接続すると、再度有効にすることができます。 (注: 設定は別に保存されます)",
+            noSettings: "クラウドには設定はありません。",
             uptodate: "設定は最新です。",
             localNewer: "ローカル設定はクラウド設定よりも新しいです。",
-            delete: "設定の削除に失敗しました ({{error}})。",
+            delete: "設定を削除できませんでした ({{error}})。",
             api: {
                 returned: {
-                    delete: "設定の削除に失敗しました (API が {{status}} を返しました)。",
+                    delete: "設定を削除できませんでした (API が {{status}} を返しました)。",
                     to: "設定をクラウドに同期できませんでした (API が {{status}} を返しました)。",
                     from: "クラウドから設定を同期できませんでした (API が {{status}} を返しました)。"
                 }
             },
             synchronize: {
                 to: "設定をクラウドに同期できませんでした ({{error}})。",
-                from: "設定をクラウドから同期できませんでした ({{error}})。"
+                from: "クラウドから設定を同期できませんでした ({{error}})。"
             }
         },
         warning: {
@@ -515,7 +515,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         danger: {
             title: "危険地帯",
-            description: "クラウド内のすべてのデータを完全に削除します。 この操作は元に戻すことができず、同期された設定とクラウド インフラストラクチャに保存されているその他のデータがすべて削除されます。",
+            description: "すべてのデータをクラウドから完全に削除します。この操作は元に戻すことができず、すべての同期された設定とクラウド バックエンドに保存されているその他のデータが削除されます。",
             delete: {
                 account: {
                     title: "クラウドアカウントの削除",
@@ -527,125 +527,125 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         notification: {
             title: "クラウド統合",
-            enabled: "クラウド統合が有効になりました",
-            host: "ドメイン {{host}} が権限リストに追加されました。 変更を有効にするには、アプリケーションを再起動します。",
+            enabled: "クラウド統合が有効です",
+            host: "{{host}} がホワイトリストに追加されました。変更を有効にするには、アプリを再起動してください。",
             erase: {
-                successful: "クラウドデータは正常に削除されました",
-                failed: "すべてのデータを削除できませんでした (API が {{status}} を返しました)。サポートにお問い合わせください。"
+                successful: "クラウドデータは正常に消去されました",
+                failed: "すべてのデータの消去に失敗しました (API {{status}} が返されました)。サポートにお問い合わせください。"
             }
         },
         button: {
             to: "クラウドに同期する",
             from: "クラウドから同期",
-            fromDescription: "これにより、現在の設定がクラウドの設定で上書きされます。 賢く利用しましょう！",
+            fromDescription: "これにより、ローカル設定がクラウド上の設定で上書きされます。賢く利用しましょう！",
             delete: "クラウドデータの削除",
             enable: "クラウド統合を有効にする",
             reauthorize: "再認証",
             confirm: "今すぐ再起動してください",
-            later: "それから！"
+            later: "後で！"
         },
-        privacy: "あなたのプライバシーを保護します",
+        privacy: "あなたのプライバシーを尊重します",
         source: "ソースコード",
-        overview: "Plexcord にはクラウド統合が備わっており、デバイス間で設定を同期するなどの利点があります。 これらの {{privacy}} と {{source}} は AGPL 3.0 ライセンスで提供されているため、独自のサーバーでホストできます。",
-        authorization: "クラウドに接続して設定を同期します。 クラウド統合をまだ設定していない場合は、認証を求められます。",
+        overview: "Plexcord には、デバイス間で設定を同期するなどの機能を追加するクラウド統合が付属しています。これは {{privacy}}、{{source}} は AGPL 3.0 ライセンスを取得しているため、自分でホストできます。",
+        authorization: "設定を同期するためにクラウド バックエンドに接続します。クラウド統合をまだ設定していない場合は、認証が要求されます。",
         backend: {
-            title: "クラウドプロバイダー",
-            description: "設定をクラウドに保存する方法を選択します。 デフォルトでは Plexcord Cloud が使用されますが、必要に応じて独自のセルフホスト型クラウド サービスを構成することもできます。",
+            title: "クラウドバックエンド",
+            description: "設定をクラウドに保存する方法を選択します。デフォルトでは、Plexcord Cloud が使用されますが、独自のセルフホスト型クラウド サービスに接続することもできます。",
             invalid: "無効な URL"
         },
         sync: {
             title: "このデバイスの同期ルール",
-            description: "この設定は、このデバイスとクラウドの間で設定を同期する方法を決定します。 変更を両方向に転送できるようにすることも、片側をメイン ソースとして選択することもできます。",
+            description: "この設定は、このデバイスとクラウドの間で設定を移動する方法を制御します。変更を双方向に流すことも、真実の主な情報源として 1 か所を選択することもできます。",
             direction: {
-                both: "双方向同期 (変更は両方向に転送されます)",
+                both: "双方向同期 (変更は双方向に行われます)",
                 push: "このデバイスはソースです (アップロードのみ)",
-                pull: "クラウドソース（ダウンロードのみ）",
-                manual: "自動同期（以下のボタンによる手動同期のみ）"
+                pull: "クラウドがソース (ダウンロードのみ)",
+                manual: "自動的に同期しません (下のボタンを使用した手動同期のみ)"
             }
         }
     },
 
     changelog: {
-        text: "変更メモ",
-        title: "変更メモ",
+        text: "変更ログ",
+        title: "変更ログ",
         description: "Plexcord の最新の変更と更新はここで見つけることができます。",
-        by: "ライター",
-        check: "倉庫をチェックする",
-        uptodate: "現在",
+        by: "による",
+        check: "リポジトリのチェック",
+        uptodate: "最新の",
         update: "アップデート",
-        noMessage: "メッセージはありません",
+        noMessage: "メッセージなし",
         unknown: "未知",
         updatedPlugins: "更新されたプラグイン",
         newSettings: "新しい設定",
         newSettingTooltip: "{{plugin}} の新しい設定",
         loading: "読み込み中...",
-        repoUptodate: "倉庫は最新です",
-        fetch: "倉庫から持ち込む",
-        clear: "すべてのメモをクリア",
+        repoUptodate: "リポジトリは最新です",
+        fetch: "リポジトリからフェッチ",
+        clear: "すべてのログをクリア",
         internet: "インターネットに接続していることを確認して、もう一度試してください。",
         recent: "最近の変更点",
-        codeChanges: "コード変更 {{count}} 件の新しいコミット",
-        updateLogs: "{{count}} 更新メモ",
-        noCommit: "現在のバージョンからのフォワード コミットは見つかりませんでした。 「リポジトリから取得」をクリックして新しい変更を確認します。",
-        previous: "以前の更新セッションに加えて、履歴とプラグインの変更をコミットします。",
+        codeChanges: "コードの変更 {{count}} 新しいコミット{{s}}",
+        updateLogs: "ログの更新 ({{count}})",
+        noCommit: "現在のバージョンより前に利用できるコミットはありません。 「リポジトリから取得」をクリックして新しい変更を確認します。",
+        previous: "以前の更新セッションとそのコミット履歴およびプラグインの変更。",
         modal: {
-            description: "Plexcord に対する最新の変更を表示します。 このプロセスでは、リポジトリから直接コミットを取得することで、最新情報が表示されます。",
-            repository: "デポ",
-            failed: "受信に失敗しました - コンソールを確認してください",
-            current: "利用可能：",
-            hide: "メモを隠す",
-            show: "メモを表示",
+            description: "Plexcord に対する最新の変更を表示します。これにより、リポジトリから直接コミットが取得され、最新情報が表示されます。",
+            repository: "リポジトリ",
+            failed: "取得に失敗しました - コンソールを確認してください",
+            current: "現在：",
+            hide: "ログを非表示にする",
+            show: "ログを表示する",
             fetch: {
-                title: "変化をもたらす",
-                description: "リポジトリ内の新しいコミット、プラグインの更新、コードの変更を確認します。 これにより、現在のバージョンと最新バージョンが比較され、新機能が表示されます。",
-                newCommit: "これらは、前回のリリース以降の新しいコミットとプラグインの更新です。 どの機能が追加されたか、どのバグが修正されたか、どのプラグインが更新されたかを確認できます。",
-                confirm: "できる",
+                title: "変更のフェッチ",
+                description: "リポジトリに新しいコミット、プラグインの更新、コードの変更がないか確認してください。これにより、現在のバージョンと利用可能な最新バージョンが比較され、新機能が表示されます。",
+                newCommit: "これらは、最後のバージョン以降の新しいコミットとプラグインの更新です。どの機能が追加されたか、バグが修正されたか、どのプラグインが更新を受け取ったかを確認できます。",
+                confirm: "フェッチ",
             }
         },
         commit: {
-            available: "コミットが利用可能",
+            available: "利用可能なコミット",
             no: "新しいコミットはありません",
             new: "新しいプラグイン",
             updated: "更新されたプラグイン",
             settings: "新しい設定"
         },
         toast: {
-            already: "リポジトリはすでに最新です",
-            found: "リポジトリから {{count}} 個の新しいコミットが見つかりました",
+            already: "リポジトリはすでに最新のものです",
+            found: "リポジトリから {{count}} 新しい commit{{s}} が見つかりました",
             local: "リポジトリはローカル コピーで最新です",
-            failed: "倉庫から持ち出せませんでした:(",
-            cleared: "すべてのメモがクリアされました",
-            logCleared: "ノートがクリアされました",
-            yourLatest: "前回の更新で保存されたコミット"
+            failed: "リポジトリからの取得に失敗しました:(",
+            cleared: "すべてのログがクリアされました",
+            logCleared: "ログがクリアされました",
+            yourLatest: "最新のアップデートからログに記録されたコミット"
         },
         alert: {
             clear: {
-                title: "すべてのメモをクリア",
-                body: "すべてのメモをクリアしてもよろしいですか?この操作は元に戻すことができません。",
+                title: "すべてのログをクリア",
+                body: "すべてのログをクリアしてもよろしいですか?これを元に戻すことはできません。",
                 confirm: "すべてクリア",
                 confirmColor: "危険",
                 cancel: "キャンセル"
             },
             log: {
                 title: "ログをクリアする",
-                body: "このログを消去してもよろしいですか?この操作は元に戻すことができません。",
+                body: "このログを消去してもよろしいですか?これを元に戻すことはできません。",
                 confirm: "ログをクリアする",
                 confirmColor: "危険",
                 cancel: "キャンセル"
             }
         },
-        newPlugins: "{{count}} 個の新しいプラグイン",
+        newPlugins: "{{count}} 新しいプラグイン{{s}}",
         following: "最近のアップデートで次のプラグインが追加されました。",
-        more: "+{{count}} 個の新しいプラグイン"
+        more: "+{{count}} その他のプラグイン"
     },
 
     csp: {
         restart: "この変更を適用するには再起動が必要です",
         blocked: {
             resources: "ブロックされたリソース",
-            disallowed: "一部の画像、スタイル、フォントは、未承認のドメインからのものであるためブロックされています。",
-            recommended: "GitHub または Imgur に移動することを強くお勧めします。 ただし、ドメインを完全に信頼する場合は、ドメインを許可することもできます。",
-            afterAllow: "スペースに権限を付与した後、変更を適用するには、{{プラットフォーム}} を完全にシャットダウンして (システム トレイ/タスク マネージャーから) 再起動する必要があります。",
+            disallowed: "一部の画像、スタイル、フォントは、許可されていないドメインからのものであるためブロックされました。",
+            recommended: "GitHub または Imgur に移動することを強くお勧めします。ただし、ドメインを完全に信頼している場合は、ドメインを許可することもできます。",
+            afterAllow: "ドメインを許可した後、(トレイ/タスク マネージャーから) 完全に閉じ、{{platform}} を再起動して変更を適用する必要があります。",
             allow: "許可する",
             url: "ブロックされた URL"
         },
@@ -655,112 +655,112 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         wants: {
             caller: "{{callerName}} は {{domain}} への接続を許可したいと考えています",
-            detail: "{{domain}} を認識せず、完全に信頼できない場合は、このリクエストをキャンセルしてください。",
+            detail: "{{domain}} を認識し、完全に信頼していない場合は、このリクエストをキャンセルする必要があります。",
             restart: "変更を有効にするには、{{appName}} を完全に閉じて再起動する必要があります。",
             type: {
-                images: "写真",
+                images: "画像",
                 styles: "CSS とテーマ",
                 fonts: "フォント"
             },
-            content: "次のタイプのコンテンツは、{{domain}} からのアップロードが許可されます。",
-            understand: "私は {{domain}} を完全に信頼しており、リンクを許可するリスクを理解しています。",
+            content: "次のタイプのコンテンツは {{domain}} からロードできます。",
+            understand: "私は {{domain}} を完全に信頼しており、接続を許可するリスクを理解しています。",
             button: {
                 cancel: "キャンセル",
                 allow: "許可する"
             },
-            title: "ドメイン名の権限"
+            title: "ホストの権限"
         }
     },
 
     themes: {
         title: "テーマ",
         management: "テーマ管理",
-        description: "テーマを使用して Discord の外観をカスタマイズします。 ローカルの .css ファイルを追加するか、URL からテーマを直接インストールします。 歯車アイコンの付いたテーマには、変更できるカスタマイズ可能な設定があります。",
+        description: "テーマを使用して Discord の外観をカスタマイズします。ローカルの .css ファイルを追加するか、URL からテーマを直接読み込みます。歯車アイコンが付いたテーマには、変更できるカスタマイズ可能な設定があります。",
         local: "ローカルテーマ",
         new: "新しい",
         pinned: "固定された",
         stylus: "スタイラスエクステンション",
-        bd: "より良いDiscordのテーマ",
-        github: "ギットハブ",
-        download: "テーマをお探しですか? {{bd}} をチェックするか、{{github}} で検索してください。 BetterDiscord からダウンロードする場合は、「ダウンロード」ボタンをクリックし、テーマ フォルダーに .theme.css ファイルを配置します。",
+        bd: "より良いDiscordテーマ",
+        github: "GitHub",
+        download: "テーマをお探しですか? {{bd}} をチェックするか、{{github}} で検索してください。 BetterDiscord からダウンロードする場合は、「ダウンロード」をクリックして、.theme.css ファイルをテーマフォルダーに配置します。",
         add: "追加",
         reset: "設定をデフォルトにリセットする",
-        notCSS: "CSSファイルではありません。 必ず生のリンクを使用してください。",
+        notCSS: "CSSファイルではありません。生のリンクを使用することを忘れないでください。",
         okay: "わかった！",
-        checking: "検査中です…",
+        checking: "チェック中...",
         valid: "有効！",
         upload: "テーマをアップロードする",
         openFolder: "テーマフォルダーを開く",
-        loadMissing: "不足しているテーマをインストールする",
+        loadMissing: "不足しているテーマをロードする",
         editQuickCSS: "QuickCSSを編集する",
         editClient: "クライアントテーマの編集",
         website: "ウェブサイトを開く",
         discord: "ディスコードサーバー",
         downloadTheme: "ダウンロード",
         refresh: "リフレッシュ",
-        delete: "シル",
+        delete: "消去",
         unknown: {
             title: "未知",
             author: "作者不明",
-            theme: "ディスコードのテーマ"
+            theme: "不協和音のテーマ"
         },
-        required: "次のプラグインは必須ですが、アクティブになっていません:",
+        required: "次のプラグインは必須ですが、有効になっていません:",
         homepage: "ホームページ",
         support: "サポート",
         online: {
             title: "オンラインテーマ",
-            description: "テーマをローカル ファイルではなく URL から直接インストールします。 オンライン テーマは、ソースが変更されると自動的に更新されます。 そのため、手動でダウンロードしなくても常に最新バージョンを入手できます。",
+            description: "テーマをローカル ファイルではなく URL から直接読み込みます。オンライン テーマはソースが変更されると自動更新されるため、手動でダウンロードしなくても常に最新バージョンを入手できます。",
             enable: "オンラインテーマを有効にする",
-            enableDescription: "オンラインテーマのアップロードを切り替えます。 無効にすると、すべてのオンライン テーマがオフになり、新しいオンライン テーマを追加できなくなります。"
+            enableDescription: "オンラインテーマの読み込みを切り替えます。無効にすると、すべてのオンライン テーマがオフになり、新しいテーマを追加できなくなります。"
         },
         quickActions: {
-            title: "クイックトランザクション",
-            description: "テーマを管理するためのショートカット。 テーマ フォルダーを開いて新しいテーマを追加したり、QuickCSS を使用してスタイルを簡単に編集したり、変更後にテーマをリロードしたりできます。"
+            title: "クイックアクション",
+            description: "テーマを管理するためのショートカット。テーマ フォルダーを開いて新しいテーマを追加したり、QuickCSS を使用してスタイルを簡単に調整したり、変更後にテーマをリロードしたりできます。"
         },
         error: {
-            userscript: "ユーザースクリプトのテーマはサポートされていません。",
-            stylus: "代わりに、{{stylus}} を使用してテーマをインストールできます。",
+            userscript: "テーマはユーザースクリプトではサポートされていません。",
+            stylus: "代わりに、{{stylus}}! を使用してテーマをインストールできます。",
             expired: "リンクが無効または期限切れです",
-            text: "平："
+            text: "エラー："
         },
         copy: {
             url: "URLをコピー",
             copied: "テーマの URL をコピーしました!",
             settings: "テーマ設定をコピーする",
-            copiedSettings: "テーマの設定がクリップボードにコピーされました。"
+            copiedSettings: "テーマ設定をクリップボードにコピーしました。"
         },
         paste: {
             settings: "テーマ設定を貼り付ける",
             empty: "クリップボードが空です。",
             invalid: "クリップボードに有効な設定データがありません。",
-            pasted: "テーマ設定はクリップボードから貼り付けられました。"
+            pasted: "クリップボードからテーマ設定を貼り付けました。"
         },
         settings: {
-            for: "{{テーマ名}} の設定",
+            for: "{{themeName}} の設定",
         },
         installed: {
             title: "インストールされているテーマ",
-            description: "ここでテーマを管理します。 ローカル テーマはテーマ フォルダーからロードされ、オンライン テーマは URL からロードされます。 歯車アイコンが付いたテーマにはカスタマイズ可能な設定があります。",
-            count: "{{count}} 個のテーマがインストールされています (ローカルでは {{localCount}}、オンラインでは {{onlineCount}}) {{enabledCount}} が有効になっています",
-            search: "テーマさえも…",
-            loading: "テーマを読み込み中...",
-            none: "まだテーマがインストールされていません。 まず、テーマ ファイルをテーマ フォルダーに追加するか、上からオンライン テーマを追加します。",
-            noCriteria: "検索条件またはフィルター条件に一致するテーマは見つかりませんでした。"
+            description: "ここでテーマを管理します。ローカル テーマはテーマ フォルダーからロードされ、オンライン テーマは URL からロードされます。歯車アイコンが付いたテーマにはカスタマイズ可能な設定があります。",
+            count: "{{count}} テーマ{{s}} がインストールされています ({{localCount}} ローカル、{{onlineCount}} オンライン) · {{enabledCount}} が有効です",
+            search: "テーマを検索...",
+            loading: "テーマを読み込んでいます...",
+            none: "まだテーマがインストールされていません。開始するには、テーマ ファイルをテーマ フォルダーに追加するか、上にオンライン テーマを追加します。",
+            noCriteria: "検索条件またはフィルター条件に一致するテーマはありません。"
         },
         filter: {
             all: "すべて表示",
             online: "オンラインテーマ",
             local: "ローカルテーマ",
-            enabled: "効果的",
+            enabled: "有効",
             disabled: "無効"
         },
         notification: {
             refresh: {
-                title: "テーマのリニューアル",
+                title: "テーマが更新されました",
                 error: "テーマの更新に失敗しました"
             },
             failed: {
-                download: "インディリレメディのテーマ"
+                download: "テーマのダウンロードに失敗しました"
             }
         }
     },
@@ -770,66 +770,66 @@ const translations: MatchStructure<typeof enTranslations> = {
         settings: "アップデーターの設定",
         updates: "アップデート",
         updated: "更新されました！",
-        restart: "ここをクリックして再起動してください",
-        repaired: "プレックスコード修理しました！",
+        restart: "再開するにはここをクリックしてください",
+        repaired: "プレックスコード修理完了しました！",
         ok: "わかりました",
         preferences: {
             title: "設定を更新する",
-            description: "Plexcord がどのように更新され続けるかを確認してください。 バックグラウンドで自動的に更新するか、新しい更新が利用可能になったときに通知を受け取るかを選択できます。",
+            description: "Plexcord 自体を最新の状態に保つ方法を制御します。バックグラウンドで自動的に更新するか、新しい更新が利用可能になったときに通知を受け取るかを選択できます。",
         },
         github: {
-            local: "ローカル コピーにはリモート リポジトリよりも新しいレコードがあります。 これは通常、ローカルに変更を加えたときに発生します。 更新する前に、それらを保持するかリセットしてください。"
+            local: "ローカル コピーには、リモート リポジトリよりも新しいコミットがあります。これは通常、ローカルに変更を加えたときに発生します。更新する前に、それらを隠しておくかリセットしてください。"
         },
         error: {
-            check: "アップデートの確認中に問題が発生しました。 詳細については、コンソールを参照してください。",
-            occurred: "エラーが発生しました",
-            retrieve: "更新情報の取得で問題が発生しました - コンソールを確認してください",
-            title: "いやー！",
-            tryAgain: "エラーが発生しました。 もう一度試すか、詳細についてはコンソールを参照してください。",
-            command: "{{path}} コマンドが見つかりません。 これをダウンロードするか、もう一度試してください。",
-            code: "コード{{コード}}。 詳細については、コンソールを参照してください。",
-            running: "{{cmd}} の実行中に問題が発生しました: {{error}}",
-            failed: "これも失敗しました:( インストーラーを使用して更新または再インストールしてみてください。"
+            check: "アップデートの確認に失敗しました。詳細についてはコンソールを確認してください",
+            occurred: "不明なエラーが発生しました",
+            retrieve: "取得に失敗しました - コンソールを確認してください",
+            title: "おっと！",
+            tryAgain: "不明なエラーが発生しました。もう一度試すか、コンソールで詳細を確認してください。",
+            command: "コマンド {{path}} が見つかりません。インストールしてもう一度お試しください。",
+            code: "コード{{code}}。詳細については、コンソールを参照してください。",
+            running: "{{cmd}} の実行中にエラーが発生しました: {{error}}",
+            failed: "それも失敗しました:( インストーラーを使用して更新または再インストールしてみてください。"
         },
-        available: "1 件のアップデートが利用可能",
-        updateAvailable: "Plexcord のアップデートが利用可能になりました!",
+        available: "1件の更新があります",
+        updateAvailable: "Plexcord のアップデートが利用可能です。",
         click: "アップデートを表示するにはここをクリックしてください",
-        available_plural: "{{count}} 件のアップデートが利用可能",
-        current: "現在！",
+        available_plural: "{{count}} アップデートがあります",
+        current: "最新の！",
         successful: {
-            title: "アップデートが成功しました!",
-            body: "正常に更新されました。 変更を保存するには再起動してください。",
+            title: "アップデート成功！",
+            body: "正常に更新されました。変更を適用するために今すぐ再起動しますか?",
             button: {
                 confirm: "再起動",
                 cancel: "今じゃない！",
                 update: "今すぐアップデート",
                 check: "アップデートをチェックする"
             },
-            noFound: "アップデートが見つかりませんでした"
+            noFound: "更新が見つかりませんでした"
         },
         automatically: {
             label: "自動更新",
-            description: "Plexcord は確認なしにアップデートを自動的にダウンロードしてインストールします"
+            description: "確認プロンプトを表示せずに Plexcord を自動的に更新する"
         },
         notify: {
-            label: "自動アップデート通知を表示する",
-            description: "Plexcord が自動的に更新されるときに通知を表示する"
+            label: "自動更新が完了したら通知を受け取る",
+            description: "Plexcord が自動的に更新されるときに通知を表示します"
         },
-        repo: "デポ",
-        repoDescription: "これは、Plexcord が更新を受け取る GitHub リポジトリです。",
+        repo: "リポ",
+        repoDescription: "これは、Plexcord が更新を取得する GitHub リポジトリです。",
         loading: "読み込み中...",
     },
 
     components: {
         error: {
             title: "なんてこった！",
-            render: "このコンポーネントのレンダリング中にエラーが発生しました。 詳細については、以下およびコンソールで確認してください。"
+            render: "このコンポーネントのレンダリング中にエラーが発生しました。詳細については、以下およびコンソールで確認できます。"
         },
         componentFailed: {
-            message: "ああ！ このページはレンダリングできませんでした。 ただし、この問題を修正する可能性のあるアップデートが利用可能です。 今すぐ更新して再起動しますか?"
+            message: "ああ、ああ！このページのレンダリングに失敗しました。ただし、それを修正する可能性のあるアップデートが利用可能です。今すぐ更新して再起動しますか?"
         },
         quickCSS: {
-            title: "QuickCSSエディターを開く",
+            title: "QuickCSS エディターを開く",
             message: "QuickCSS エディターはバックグラウンドで開いたままです。",
             detail: "Discordを閉じてもよろしいですか?これにより、QuickCSS エディターも閉じられます。",
             cancel: "キャンセル",
@@ -851,29 +851,29 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "通知ログ",
             clear: "通知ログをクリアする",
             sure: "本気ですか？",
-            permamently: "{{count}} 件の通知は完全に削除されます。 この操作は元に戻すことができません。",
+            permamently: "これにより、{{count}} 通知{{s}} が完全に削除されます。この操作は元に戻すことができません。",
             button: {
-                confirm: "わかりました",
-                cancel: "キャンセル"
+                confirm: "やってみろ！",
+                cancel: "どうでも"
             }
         }
     },
 
     memberlist: {
         error: {
-            render: "{{key}} メンバー リスト デコレータのレンダリング中にエラーが発生しました"
+            render: "{{key}} メンバー リスト デコレータのレンダリングに失敗しました"
         }
     },
 
     message: {
         accessory: {
             error: {
-                render: "{{key}} メッセージ アクセサリのレンダリング中にエラーが発生しました"
+                render: "{{key}} メッセージ アクセサリのレンダリングに失敗しました"
             }
         },
         decoration: {
             error: {
-                render: "{{key}} メッセージ装飾のレンダリング中にエラーが発生しました"
+                render: "{{key}} メッセージ装飾のレンダリングに失敗しました"
             }
         }
     },
@@ -888,50 +888,50 @@ const translations: MatchStructure<typeof enTranslations> = {
         unit: {
             year: "年",
             years: "年",
-            month: "は",
-            months: "は",
+            month: "月",
+            months: "月",
             week: "週",
             weeks: "週",
             day: "日",
             days: "日",
-            hour: "一瞬",
-            hours: "一瞬",
+            hour: "時間",
+            hours: "時間",
             minute: "分",
             minutes: "分",
             second: "2番",
-            seconds: "2番",
-            ago: "前に",
-            s: " "
+            seconds: "秒",
+            ago: "前",
+            s: "s"
         }
     },
 
     plugin: {
         noTrack: {
-            name: "ノートラック",
-            description: "Discord のトラッキング (分析/「科学」)、メトリクス、および Sentry クラッシュ レポートを無効にします",
+            name: "NoTrack",
+            description: "Discord のトラッキング (分析/「科学」)、メトリクス、Sentry クラッシュ レポートを無効にする",
             option: {
                 disableAnalytics: {
-                    label: "分析を閉じる",
-                    description: "Discord の追跡 (分析/「科学」) 指標と Sentry クラッシュ レポートを無効にする"
+                    label: "分析を無効にする",
+                    description: "Discord のトラッキング (分析/「科学」)、メトリクス、Sentry クラッシュ レポートを無効にする"
                 }
             }
         },
         settings: {
-            name: "設定",
-            description: "設定インターフェイスとデバッグ情報を追加します",
+            name: "Settings",
+            description: "設定 UI とデバッグ情報を追加",
             option: {
                 language: {
-                    label: "ディル",
+                    label: "言語",
                     description: "Plexcord の優先言語を選択します。"
                 },
                 settingsLocation: {
                     label: "設定場所",
-                    description: "Plexcord は設定セクションを配置する場所を決定します"
+                    description: "Plexcord 設定セクションが配置される場所を決定します。"
                 }
             }
         },
         supportHelper: {
-            name: "サポートアシスタント",
+            name: "Support Helper",
             description: "お客様へのサポートの提供に役立ちます",
             commands: {
                 description: {
@@ -941,19 +941,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             modals: {
                 outdated: {
-                    title: "待って！",
-                    body: "古いバージョンの Plexcord を使用しています。 おそらく、あなたの問題はすでに解決されています。",
-                    footer: "サポートを求める前にアップデートしてください。",
+                    title: "持続する！",
+                    body: "古いバージョンの Plexcord を使用しています。おそらく、問題はすでに解決されています。",
+                    footer: "サポートを求める前に、まずアップデートしてください。",
                     button: {
-                        cancel: "アップデートを参照",
+                        cancel: "アップデートを見る",
                         confirm: "今すぐ更新して再起動してください",
                         secondaryConfirm: "自分が何をしているのかわかっている、または更新できない"
                     }
                 },
                 updater: {
-                    title: "待って！",
-                    body: "外部で更新されたバージョンの Plexcord を使用しています。このバージョンに対するサポートは提供されていません。",
-                    footer: "{{公式}}するか、サポートについてはパッケージプロバイダーにお問い合わせください。",
+                    title: "持続する！",
+                    body: "外部で更新された Plexcord バージョンを使用していますが、当社ではサポートを提供していません。",
+                    footer: "{{officially}} に切り替えるか、代わりにパッケージのメンテナにサポートを依頼してください。",
                     officially: "正式にサポートされているバージョンの Plexcord",
                     button: {
                         cancel: "キャンセル",
@@ -961,52 +961,52 @@ const translations: MatchStructure<typeof enTranslations> = {
                         now: "今すぐアップデート"
                     },
                     toast: {
-                        success: "成功！ 再起動中...",
+                        success: "成功！再起動中...",
                         already: "すでに最新です！",
                         failed: "更新に失敗しました:("
                     }
                 },
                 custom: {
-                    title: "待って！",
-                    header: "Plexcord の独自バージョンを使用しています。このバージョンに対するサポートは提供されていません。",
-                    body: "私たちは {{officialBuild}} のサポートのみを提供します。 {{switch}} するか、自分で問題に対処してください。",
-                    footer: "この規則を無視した場合、サポートを受ける権利は剥奪されます。",
-                    official: "公式リリース",
-                    switch: "正式バージョンにアップグレードする",
+                    title: "持続する！",
+                    header: "Plexcord のカスタム ビルドを使用していますが、サポートは提供されていません。",
+                    body: "{{officialBuild}} のサポートのみを提供します。 {{switch}} するか、自分で問題を解決してください。",
+                    footer: "このルールを無視した場合、サポートを受けることが禁止されます。",
+                    official: "公式ビルド",
+                    switch: "公式ビルドに切り替える",
                     button: {
-                        confirm: "わかりました",
-                        secondaryConfirm: "二度と見せないでください"
+                        confirm: "理解した",
+                        secondaryConfirm: "二度と表示しないでください"
                     }
                 }
             },
             button: {
                 debug: "/plexcord-debug を実行します",
                 plugins: "/plexcord-plugins を実行します",
-                snippet: "コードスニペットを実行する"
+                snippet: "スニペットの実行"
             },
             toast: {
                 success: "成功！",
-                failed: "コード スニペットを実行できませんでした:(",
-                failedOpenInvite: "招待状を開けませんでした。コンソールを確認してください:(",
-                upload: "プラグインリストが正常にロードされました。",
-                failedUpload: "プラグインリストファイルをロードできませんでした。 もう一度試してください。",
-                unableGenerate: "プラグインリストの作成に失敗しました。"
+                failed: "スニペットの実行に失敗しました:(",
+                failedOpenInvite: "招待を開けませんでした。コンソールを確認してください:(",
+                upload: "プラグインリストが正常にアップロードされました。",
+                failedUpload: "プラグインリストファイルのアップロードに失敗しました。もう一度試してください。",
+                unableGenerate: "プラグインリストの生成に失敗しました。"
             },
             dm: {
-                warning: "サポートを求めて Plexcord プラグイン開発者にプライベート メッセージを送信しないでください。{{br}}代わりに、{{support}} サーバー: {{channel}} に参加して、Plexcord サポート チャネルを使用できます。"
+                warning: "Plexcord プラグイン開発者にサポートを求めるプライベート メッセージを送信しないでください。{{br}}代わりに、{{support}} サーバーに参加して、Plexcord サポート チャネル {{channel}} を使用できます。"
             },
             alert: {
-                title: "警告: プラグインが多すぎます",
-                paragraph1: "100 を超えるプラグインがアクティブ化されていることがわかりました。",
-                paragraph2: "プラグインの数によってはサポートを受けられない場合があります。",
-                paragraph3: "あなたの問題は、プラグインの競合によって引き起こされている可能性が高くなります。",
-                paragraph4: "問題を解決するには、一部のプラグインを無効にすることを検討してください。",
+                title: "警告: プラグイン数が多い",
+                paragraph1: "100 を超えるプラグインが有効になっています。",
+                paragraph2: "プラグインの数が膨大であるため、サポートを受けられない場合があります。",
+                paragraph3: "あなたの問題は、プラグインの競合によって引き起こされている可能性があります。",
+                paragraph4: "トラブルシューティングのために一部のプラグインを無効にすることを検討してください。",
                 paragraph5: "プラグイン リストはテキスト ファイルとして送信されます。",
             }
         },
         accountPanelServerProfile: {
-            name: "アカウントパネルサーバープロファイル",
-            description: "アカウントパネルを左クリックし、右クリックしてサーバープロファイルを表示します",
+            name: "AccountPanelServerProfile",
+            description: "左下のアカウントパネルを右クリックして、現在のサーバーのプロフィールを表示します",
             option: {
                 prioritizeServerProfile: {
                     label: "サーバープロファイルの優先順位付け",
@@ -1020,76 +1020,76 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         altKrispSwitch: {
-            name: "Altクリスプスイッチ",
-            description: "ノイズ キャンセリング ポップアップを、Krisp と標準ではなく、なしと Krisp の間で切り替えます。"
+            name: "AltKrispSwitch",
+            description: "ノイズ抑制ポップアウトを、Krisp と標準ではなく、なしと Krisp の間で切り替えます。"
         },
         alwaysAnimate: {
-            name: "常にアニメーション化する",
-            description: "アニメーション化できるものはすべてアニメーション化します。",
+            name: "AlwaysAnimate",
+            description: "アニメーション化できるものはすべてアニメーション化します",
             option: {
                 icons: {
                     label: "アイコン",
-                    description: "サーバーアイコン、アバター、装飾などをいつでもアニメーション化できます。"
+                    description: "サーバーアイコン、アバター、装飾などを常にアニメーション化します"
                 },
                 statusEmojis: {
                     label: "ステータス絵文字",
-                    description: "ステータス絵文字を常に活気づけます。"
+                    description: "ステータス絵文字を常にアニメーション化する"
                 },
                 serverBanners: {
                     label: "サーバーバナー",
-                    description: "サーバーのバナーは常にアニメーション化します。"
+                    description: "サーバーバナーを常にアニメーション化する"
                 },
                 nameplates: {
                     label: "銘板",
-                    description: "ネームプレートは常にアニメーション化します。"
+                    description: "ネームプレートを常にアニメーション化する"
                 },
                 roleGradients: {
-                    label: "役割の移行",
-                    description: "ロールの色の遷移を常にアニメーション化します。"
+                    label: "役割の勾配",
+                    description: "ロールのグラデーションを常にアニメーション化する"
                 }
             }
         },
         alwaysExpandProfiles: {
-            name: "常にプロファイルを展開する",
-            description: "常にユーザープロファイルを展開して開きます"
+            name: "AlwaysExpandProfiles",
+            description: "プロファイルのポップアウトを常に完全なモーダルに展開します"
         },
         alwaysExpandRoles: {
-            name: "AlwaysExpand役割",
-            description: "プロファイルポップアップで常に役割リストを展開します",
+            name: "AlwaysExpandRoles",
+            description: "プロファイルのポップアウトで常に役割リストを展開します",
             option: {
                 hideArrow: {
                     label: "矢印を隠す",
-                    description: "矢印を非表示にする"
+                    description: "矢印を隠す"
                 }
             }
         },
         animalese: {
-            name: "アニマリーズ",
-            description: "送信されるすべてのメッセージに対して動物の音声を再生します (多くのメッセージを再生します)",
+            name: "Animalese",
+            description: "メッセージが送信されるたびにどうぶつの森の動物の言葉を再生します (よく吠えます)",
             option: {
                 volume: {
-                    label: "騒音レベル",
-                    description: "動物的な声の大きさ"
+                    label: "音量",
+                    description: "動物の鳴き声の音量"
                 },
                 speed: {
                     label: "スピード",
-                    description: "動物的な声の速さ"
+                    description: "動物の鳴き声のスピード"
                 },
                 pitch: {
-                    label: "トン",
-                    description: "トーンマルチプライヤ"
+                    label: "ピッチ",
+                    description: "ピッチマルチプライヤ"
                 },
                 messageLengthLimit: {
                     label: "メッセージの長さの制限",
                     description: "処理するメッセージの最大長"
                 },
                 processOwnMessages: {
-                    label: "独自のメッセージを処理する",
-                    description: "自分のメッセージを音声化することも可能"
+                    label: "自分のメッセージを処理する",
+                    description: "自分のメッセージも yap できるようにする"
                 },
                 soundQuality: {
                     label: "音質",
-                    description: "使える音質",
+                    description: "使用する音質",
                     high: "高い",
                     med: "中くらい",
                     low: "低い",
@@ -1098,44 +1098,44 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         alwaysTrust: {
-            name: "常に信頼する",
-            description: "悪意のあるドメインと不審なファイルのポップアップを削除します",
+            name: "AlwaysTrust",
+            description: "迷惑な信頼できないドメインと疑わしいファイルのポップアップを削除します",
             option: {
                 domain: {
-                    label: "ドメイン名",
-                    description: "「悪意のあるドメイン」ポップアップを削除します"
+                    label: "ドメイン",
+                    description: "リンクを開いたときに信頼できないドメインのポップアップを削除する"
                 },
                 file: {
                     label: "ファイル",
-                    description: "「潜在的に危険な」ダウンロードポップアップを削除"
+                    description: "リンクを開いたときに「危険な可能性があるダウンロード」ポップアップを削除する"
                 },
                 noDeleteSafety: {
-                    label: "削除セキュリティなし",
-                    description: "サーバーを削除するときにサーバー名の入力が不要になります。"
+                    label: "削除の安全性はありません",
+                    description: "サーバーを削除する際のサーバー名の入力要件を削除します。"
                 },
                 confirmModal: {
-                    label: "確認ポップアップ",
-                    description: "「この取引を確認してもよろしいですか?」ポップアップを削除します"
+                    label: "モーダルの確認",
+                    description: "「削除してもよろしいですか」モーダルを表示する必要がありますか?"
                 }
             },
             alert: {
                 title: "サーバーを削除しますか?",
-                body: "このプロセスは永続的なものです。明らかでない場合は明記してください。",
-                confirm: "シル",
+                body: "それが明らかでないとしても、それは永続的です。",
+                confirm: "消去",
                 cancel: "キャンセル"
             }
         },
         anonymiseFileNames: {
-            name: "ファイル名の匿名化",
-            description: "アップロードされたファイル名を匿名化します。",
+            name: "AnonymiseFileNames",
+            description: "アップロードされたファイル名を匿名化する",
             option: {
                 anonymiseByDefault: {
                     label: "デフォルトで匿名化する",
-                    description: "デフォルトでファイル名を匿名化します。 必要に応じて、ファイルアップロードポップアップで無効にすることができます。"
+                    description: "デフォルトでファイル名を匿名化します。必要に応じて、アップロード ポップアップでこれを無効にすることができます。"
                 },
                 spoilerMessages: {
                     label: "ネタバレメッセージ",
-                    description: "ネタバレとしてマークされたファイルの名前を匿名化します。"
+                    description: "ネタバレとしてマークされたファイル名を匿名化します。"
                 },
                 method: {
                     label: "方法",
@@ -1145,50 +1145,50 @@ const translations: MatchStructure<typeof enTranslations> = {
                     timestamp: "タイムスタンプ"
                 },
                 randomisedLength: {
-                    label: "ランダム化の長さ",
+                    label: "ランダム化された長さ",
                     description: "ランダムな文字長"
                 },
                 consistent: {
-                    label: "一貫した匿名化",
-                    description: "一貫した匿名化のための秘密鍵"
+                    label: "一貫性のある",
+                    description: "一貫した匿名化の秘密"
                 }
             },
             using: {
-                anonymous: "匿名のファイル名が使用されます",
-                spoiler: "通常のファイル名が使用されます"
+                anonymous: "匿名ファイル名の使用",
+                spoiler: "通常のファイル名を使用する"
             },
             spoiler: {
-                description: "ファイルのスポイラーをオンまたはオフにする",
-                toggle: "ファイルのスポイラーをオンまたはオフにします (デフォルトはオン)",
-                enabled: "スポイラーが作動しました！",
-                disabled: "ネタバレは禁止です！"
+                description: "ファイルのスポイラーを切り替えます",
+                toggle: "ファイルのスポイラーを切り替えます (デフォルトはオン)",
+                enabled: "スポイラー有効！",
+                disabled: "スポイラーは無効です！"
             }
         },
         appleMusic: {
-            name: "Apple Musicのリッチなプレゼンス",
-            description: "Apple Music は視聴ステータスを Discord リッチ プレゼンスとして表示します",
-            about: "カスタマイズ可能なイベント形式文字列の場合、いくつかのカスタム文字列を使用してトラック データをイベントに追加できます。 {{name}} はトラック名に、{{artist}} はアーティスト名に、{{album}} はアルバム名に置き換えられます。",
+            name: "AppleMusicRichPresence",
+            description: "Apple Music に Discord のリッチなプレゼンスを！",
+            about: "カスタマイズ可能なアクティビティ形式文字列の場合、いくつかの特別な文字列を使用して、アクティビティにトラック データを含めることができます。 {{name}} はトラック名に置き換えられます。 {{artist}} はアーティストの名前に置き換えられます。 {{album}} はアルバム名に置き換えられます。",
             button: {
-                listen: "Apple Music のディンル",
+                listen: "Apple Musicで聴く",
                 songLink: "ソングリンクで見る"
             },
             option: {
                 activityType: {
                     label: "アクティビティの種類",
-                    description: "どのようなアクティビティが表示されるか",
+                    description: "どのような種類のアクティビティですか",
                     listening: "リスニング",
-                    playing: "遊んでいる"
+                    playing: "遊ぶ"
                 },
                 statusDisplayType: {
                     label: "ステータス表示の種類",
-                    description: "メンバーリストにトラック/アーティスト名を表示",
-                    off: "表示しない (一般的なリスニングメッセージを表示します)",
+                    description: "メンバーリストに曲名/アーティスト名を表示",
+                    off: "Don't show (shows generic listening message)",
                     artist: "アーティスト名を表示",
                     track: "トラック名を表示"
                 },
                 refreshInterval: {
                     label: "リフレッシュ間隔",
-                    description: "イベント更新間隔(秒)"
+                    description: "アクティビティの更新間隔 (秒)"
                 },
                 enableTimestamps: {
                     label: "タイムスタンプを有効にする",
@@ -1200,65 +1200,65 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 nameString: {
                     label: "名前文字列",
-                    description: "イベント名の形式文字列"
+                    description: "アクティビティ名の形式文字列"
                 },
                 detailsString: {
                     label: "詳細文字列",
-                    description: "イベント詳細の形式文字列"
+                    description: "アクティビティ詳細の形式文字列"
                 },
                 stateString: {
-                    label: "ステータス文字列",
-                    description: "イベントステータスの形式文字列"
+                    label: "状態文字列",
+                    description: "アクティビティ状態の形式文字列"
                 },
                 largeImageType: {
                     label: "大画像タイプ",
-                    description: "イベントアセット大きな画像タイプ",
-                    album: "アルバムのカバーアート",
-                    artist: "アーティストの絵",
+                    description: "アクティビティアセットの大きな画像タイプ",
+                    album: "アルバムアートワーク",
+                    artist: "アーティストのアートワーク",
                     disabled: "無効"
                 },
                 largeTextString: {
                     label: "大きなテキスト文字列",
-                    description: "イベントエンティティの大きなテキスト形式の文字列"
+                    description: "アクティビティアセットの大きなテキスト形式の文字列"
                 },
                 smallImageType: {
-                    label: "サムネイルの種類",
-                    description: "イベントアセットのサムネイルタイプ",
+                    label: "小さい画像タイプ",
+                    description: "アクティビティアセットの小さい画像タイプ",
                     album: "Apple Musicのロゴ",
-                    artist: "アーティストの絵",
+                    artist: "アーティストのアートワーク",
                     disabled: "無効"
                 },
                 smallTextString: {
                     label: "小さなテキスト文字列",
-                    description: "イベントエンティティの小さなテキスト形式の文字列"
+                    description: "アクティビティアセットの小さなテキスト形式の文字列"
                 }
             }
         },
         arRpc: {
-            name: "WebRichPresence (arRPC)",
-            description: "Discord Web で RPC を有効にする arRPC クライアント プラグイン (実験的)",
+            name: "WebRichPresence(arRPC)",
+            description: "Discord Web で RPC を有効にする arRPC のクライアント プラグイン (実験的)",
             use: {
                 title: "arRPCの使い方",
-                enable: "{{link}} をクリックしてサーバーを実行し、プラグインをアクティブ化します。",
-                link: "GitHub リポジトリの指示に従います"
+                enable: "{{link}} を使用してサーバーを実行し、プラグインを有効にします。",
+                link: "GitHub リポジトリの指示に従ってください"
             },
             toast: {
                 connected: "arRPC に接続されています",
-                failed: "arRPC に接続できませんでした。機能していますか?",
-                retry: "もう一度やり直してください"
+                failed: "arRPC への接続に失敗しました。arRPC は実行されていますか?",
+                retry: "リトライ"
             }
         },
         atSomeone: {
-            name: "誰かで",
-            description: "ランダムな人を @someone でタグ付けできます"
+            name: "AtSomeone",
+            description: "@someone を使用すると、誰かをランダムにメンションできます"
         },
         autoDNDWhilePlaying: {
-            name: "再生中に自動停止",
-            description: "ゲームの起動時にオンラインステータス (オンライン、アイドル、応答不可) を自動的に更新します",
+            name: "AutoDndWhilePlaying",
+            description: "ゲームの起動時にオンラインステータス (オンライン、アイドル、中断) を自動的に更新します",
             option: {
                 statusToSet: {
                     label: "設定するステータス",
-                    description: "ゲーム開始時に設定するステータス",
+                    description: "ゲーム起動時に設定するステータス",
                     online: "オンライン",
                     dnd: "邪魔しないでください",
                     idle: "アイドル状態",
@@ -1266,37 +1266,37 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 excludeInvisible: {
                     label: "非表示を除外する",
-                    description: "ステータスが非表示に設定されている場合にステータスが自動的に変更されるのを防ぐ"
+                    description: "ステータスが非表示に設定されている間、ステータスが自動的に変更されないようにする"
                 }
             }
         },
         autoZipper: {
-            name: "オートジッパー",
-            description: "指定したファイルタイプとフォルダーを Discord にアップロードする前に自動的に圧縮します。",
+            name: "AutoZipper",
+            description: "Discord にアップロードする前に、指定したファイルの種類とフォルダーを自動的に圧縮します",
             option: {
                 extensions: {
                     label: "拡張機能",
-                    description: "自動的に圧縮されるファイル拡張子のカンマ区切りのリスト (例: .psd、.blend、.exe、.dmg)"
+                    description: "自動圧縮するファイル拡張子のカンマ区切りリスト (例: .psd、.blend、.exe、.dmg)"
                 }
             }
         },
         bannersEverywhere: {
-            name: "どこにでもあるバナー",
+            name: "BannersEverywhere",
             description: "メンバーリストにバナーを表示します",
             option: {
                 animate: {
-                    label: "アニメーション",
-                    description: "バナーをアニメーション化する"
+                    label: "アニメイト",
+                    description: "アニメーションバナー"
                 },
                 preferNameplate: {
-                    label: "ネームプレートを選ぶ",
-                    description: "バナーの代わりにネームプレートを選択してください"
+                    label: "ネームプレートを好む",
+                    description: "バナーよりネームプレートを好む"
                 }
             }
         },
         betterActivities: {
-            name: "より良いアクティビティ",
-            description: "メンバーリストにアクティビティアイコンを表示し、すべてのイベントを表示できるようにします",
+            name: "BetterActivities",
+            description: "メンバーリストにアクティビティアイコンを表示し、すべてのアクティビティを表示できるようにします",
             option: {
                 memberList: {
                     label: "メンバー一覧",
@@ -1304,56 +1304,56 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 iconSize: {
                     label: "アイコンのサイズ",
-                    description: "イベントアイコンのサイズ"
+                    description: "アクティビティアイコンのサイズ"
                 },
                 specialFirst: {
                     label: "スペシャルファースト",
-                    description: "特別なイベントを最初に表示します (現在は Spotify と Twitch)"
+                    description: "特別なアクティビティを最初に表示します (現在は Spotify と Twitch)"
                 },
                 renderGifs: {
-                    label: "GIF'yer 作ってください",
+                    label: "GIFのレンダリング",
                     description: "GIF のレンダリングを許可する"
                 },
                 removeGameActivityStatus: {
-                    label: "ゲーム状態の削除",
-                    description: "ゲームステータスアイコンとステータスを削除する"
+                    label: "「ゲームアクティビティ」ステータスの削除",
+                    description: "ゲームアクティビティのアイコンとステータスを削除する"
                 },
                 userPopout: {
-                    label: "ユーザーポップアップ",
-                    description: "プロフィールのポップアップ/サイドバーにすべてのアクティビティを表示"
+                    label: "ユーザーポップアウト",
+                    description: "プロフィールのポップアウト/サイドバーにすべてのアクティビティを表示します"
                 },
                 hideTooltip: {
                     label: "ツールチップを非表示にする",
                     description: "各地で活動を隠している"
                 },
                 allActivitiesStyle: {
-                    label: "すべてのイベントのスタイル",
-                    description: "すべてのイベントのスタイルを表示",
+                    label: "すべてのアクティビティのスタイル",
+                    description: "すべてのアクティビティを表示するスタイル",
                     list: "リスト",
-                    carousel: "スライダー",
-                    left: "ソル",
+                    carousel: "カルーセル",
+                    left: "左",
                     right: "右"
                 }
             }
         },
         betterAudioPlayer: {
             name: "BetterAudioPlayer",
-            description: "スペクトログラフとオシロスコープのビジュアライザーをオーディオ添付プレーヤーに追加します",
+            description: "スペクトログラフとオシロスコープのビジュアライザをオーディオ添付ファイル プレーヤーに追加します",
             option: {
                 oscilloscope: {
                     label: "オシロスコープ",
-                    description: "スコープビジュアライザを有効にする"
+                    description: "オシロスコープビジュアライザを有効にする"
                 },
                 spectrograph: {
                     label: "分光器",
-                    description: "スペクトログラフビジュアライザを有効にする"
+                    description: "スペクトログラフビジュアライザーを有効にする"
                 },
                 oscilloscopeSolidColor: {
                     label: "オシロスコープ ソリッドカラー",
-                    description: "範囲にグラデーションの代わりに単色を使用する"
+                    description: "オシロスコープにはグラデーションの代わりに単色を使用します"
                 },
                 oscilloscopeColor: {
-                    label: "連技オシロスコープ",
+                    label: "オシロスコープの色",
                     description: "単色が有効な場合のオシロスコープの色"
                 },
                 spectrographSolidColor: {
@@ -1365,98 +1365,98 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "単色が有効な場合の分光器の色"
                 },
                 forceMoveBelow: {
-                    label: "強制的に一番下に移動",
-                    description: "ビジュアライザをボリューム コントロールの下に強制的に移動します"
+                    label: "強制的に下に移動",
+                    description: "ビジュアライザーをオーディオ コントロールの下に強制的に配置します。"
                 }
             },
             toast: {
-                invalidColorFormat: "{{settingKey}} のカラー形式が無効です。「R、G、B」または「#RRGGBB」形式であることを確認してください"
+                invalidColorFormat: "{{settingKey}} のカラー形式が無効です。'R、G、B' または '#RRGGBB' の形式であることを確認してください。"
             }
         },
         betterBanReasons: {
-            name: "ベターバンの理由",
-            description: "Discord の禁止ウィンドウで使用するカスタム理由を作成したり、デフォルトでオプションの代わりにテキスト入力を表示したりできます。",
+            name: "BetterBanReasons",
+            description: "Discord の禁止モーダルで使用するカスタム理由を作成したり、オプションの代わりにデフォルトでテキスト入力を表示したりできます。",
             option: {
                 reasons: {
                     label: "理由",
-                    description: "あなたの特別な理由"
+                    description: "独自の理由"
                 },
                 isTextInputDefault: {
-                    label: "デフォルトのテキスト入力",
-                    description: "デフォルトでは、選択メニューの代わりにテキスト入力が表示されます。 (「その他」をクリックするのと同じ)"
+                    label: "テキスト入力はデフォルトですか",
+                    description: "デフォルトでは、選択メニューの代わりにテキスト入力が表示されます。 (「その他」オプションをクリックするのと同じです)"
                 }
             },
             title: "理由",
-            placeholder: "どこから",
+            placeholder: "理由",
             add: "別の理由を追加"
         },
         betterBlockedUsers: {
             name: "BetterBlockedUsers",
-            description: "ブロックされたユーザーのリストを検索し、設定で名前を選択できるようにすることができます。",
+            description: "ブロックされたユーザーのリストを検索でき、設定で名前を選択できるようになります。",
             placeholder: "ユーザーを検索..."
         },
         betterCommands: {
-            name: "より良いコマンド",
-            description: "さまざまな改善によりコマンド システムが強化されます。",
+            name: "BetterCommands",
+            description: "さまざまな改善によりコマンド システムを強化します。",
             option: {
                 autoFillArguments: {
                     label: "自動入力引数",
-                    description: "必要な引数だけでなく、すべての引数をコマンドに自動的に入力します。"
+                    description: "コマンドに必要な引数だけではなくすべての引数を自動的に入力します"
                 },
                 allowNewlinesInCommands: {
                     label: "コマンドで改行を許可する",
-                    description: "コマンドエントリで改行を許可する (CTRL + Shift + Enter)"
+                    description: "コマンド入力で改行を許可します (CTRL + Shift + Enter)"
                 }
             },
             command: {
                 refresh: {
-                    description: "Discord はアプリのコマンドをネイティブに更新します",
-                    user: "特定のユーザーが更新を試行する",
-                    refreshing: "アプリケーションコマンドが更新されています...",
+                    description: "Discord アプリケーションのコマンドをローカルで更新します",
+                    user: "特定のユーザーが更新を試みる",
+                    refreshing: "アプリケーション コマンドを更新しています...",
                     refreshed: "コマンドは正常に更新されました。",
-                    failed: "コマンドの更新に失敗しました。 詳細についてはコンソールを確認してください。"
+                    failed: "コマンドの更新に失敗しました。詳細についてはコンソールを確認してください。"
                 }
             }
         },
         betterFolders: {
-            name: "ベターフォルダー",
-            description: "カスタム サイドバーにサーバー フォルダーを表示し、フォルダー関連の改善を追加します。",
+            name: "BetterFolders",
+            description: "サーバーフォルダーを専用のサイドバーに表示し、フォルダー関連の改善を追加します。",
             option: {
                 sidebar: {
                     label: "サイドバー",
-                    description: "カスタムサイドバーのフォルダー内のサーバーを表示"
+                    description: "専用サイドバーのフォルダーからサーバーを表示します"
                 },
                 sidebarAnim: {
                     label: "サイドバーのアニメーション",
-                    description: "フォルダーのサイドバーを開くときにアニメーションを使用する"
+                    description: "フォルダーのサイドバーを開くアニメーション"
                 },
                 closeAllFolders: {
                     label: "すべてのフォルダーを閉じる",
-                    description: "フォルダー内にないサーバーが選択されている場合は、すべてのフォルダーを閉じます"
+                    description: "フォルダーにないサーバーを選択する場合はすべてのフォルダーを閉じる"
                 },
                 closeAllHomeButton: {
-                    label: "ホームボタンですべてを閉じる",
-                    description: "ホームボタンをクリックするとすべてのフォルダーが閉じます"
+                    label: "すべて閉じるホームボタン",
+                    description: "ホームボタンをクリックしたときにすべてのフォルダーを閉じる"
                 },
                 closeOthers: {
                     label: "その他を閉じる",
-                    description: "フォルダーを開いているときに他のフォルダーを閉じる"
+                    description: "フォルダーを開くときに他のフォルダーを閉じる"
                 },
                 closeServerFolder: {
                     label: "サーバーフォルダーを閉じる",
-                    description: "フォルダー内のサーバーが選択されている場合はフォルダーを閉じる"
+                    description: "フォルダー内のサーバーを選択する場合はフォルダーを閉じます"
                 },
                 forceOpen: {
                     label: "強制オープン",
-                    description: "フォルダーのサーバーに切り替えたときにフォルダーを強制的に開く"
+                    description: "フォルダーのサーバーに切り替えるときにフォルダーを強制的に開く"
                 },
                 keepIcons: {
-                    label: "アイコンを保護する",
-                    description: "BetterFolders サイドバーでメイン サーバー バー フォルダーが開いているときに、メイン サーバー バー フォルダーにサーバー アイコンを表示し続ける"
+                    label: "アイコンを維持する",
+                    description: "BetterFolders サイドバーで開かれているプラ​​イマリ ギルド バー フォルダーにギルド アイコンを表示し続ける"
                 },
                 showFolderIcon: {
                     label: "フォルダーアイコンを表示",
-                    description: "BetterFolders サイドバーのフォルダー サーバーの上にフォルダー アイコンを表示する",
+                    description: "BetterFolders サイドバーのフォルダー ギルドの上にフォルダー アイコンを表示します",
                     never: "一度もない",
                     always: "いつも",
                     moreThanOne: "複数のフォルダーを展開した場合"
@@ -1465,52 +1465,52 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         betterGifAltText: {
             name: "BetterGifAltText",
-            description: "GIF の代替テキストを単なる「GIF」から GIF タグ/ファイル名を含むように変更します。"
+            description: "GIF の代替テキストを単なる「GIF」から GIF タグ/ファイル名を含むものに変更します"
         },
         betterGifPicker: {
             name: "BetterGifPicker",
             description: "GIF ピッカーがデフォルトでお気に入りのカテゴリを開くようにします",
             option: {
                 keepOpen: {
-                    label: "セレクターを開いたままにする",
-                    description: "GIF を選択した後も GIF ピッカーを開いたままにできるようにします"
+                    label: "開いたままにしておきます",
+                    description: "GIF を選択した後も GIF ピッカーを開いたままにします"
                 }
             }
         },
         betterInvites: {
-            name: "より良い招待状",
-            description: "招待者の有効期限を確認し、招待者のプロフィールを表示し、参加する前にサーバーをプレビューします (名前をクリックします)。",
+            name: "BetterInvites",
+            description: "招待の有効期限を確認し、招待者のプロフィールを表示し、名前をクリックして参加する前にサーバーをプレビューします。",
             render: {
-                tip: "この招待状は {{time}} 後に期限切れになります",
-                header: "{{name}} があなたを {{server}} に招待しました",
-                never: "一度もない"
+                tip: "この招待の有効期限は{{time}}です",
+                header: "{{name}} さんが {{server}} に招待しました",
+                never: "期限切れではない"
             }
         },
         betterNotesBox: {
-            name: "ベターノートボックス",
-            description: "メモを非表示にするかスペルチェックを無効にする (設定で設定!!)",
+            name: "BetterNotesBox",
+            description: "メモを非表示にするかスペルチェックを無効にする (設定で構成します!!)",
             option: {
                 hide: {
-                    label: "メモを隠す",
-                    description: "ユーザーポップアップのメモボックスを非表示にする"
+                    label: "メモを非表示にする",
+                    description: "ユーザーポップアウトのメモボックスを非表示にする"
                 },
                 noSpellCheck: {
-                    label: "スペルチェックをオフにする",
+                    label: "スペルチェックなし",
                     description: "ノートのスペルチェックを無効にする"
                 }
             }
         },
         betterPlusReacts: {
             name: "BetterPlusReacts",
-            description: ":emoji: の前のプラス記号の数は、絵文字が追加されるメッセージを示します"
+            description: ":emoji: の前のプラスの量は、追加するメッセージです"
         },
         betterRoleContext: {
-            name: "より良い役割コンテキスト",
-            description: "ユーザープロファイルの役割を右クリックしたときに役割の色のコピー/役割の編集/役割アイコンを表示するオプションを追加します",
+            name: "BetterRoleContext",
+            description: "ユーザープロファイルで役割を右クリックしたときに、役割の色のコピー/役割の編集/役割アイコンを表示するオプションを追加します",
             option: {
                 roleIconFileFormat: {
                     label: "役割アイコンのファイル形式",
-                    description: "ロールアイコンを表示するときに使用するファイル形式"
+                    description: "役割アイコンを表示するときに使用するファイル形式"
                 }
             },
             context: {
@@ -1520,22 +1520,22 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         betterRoleDot: {
-            name: "ベターロールドット",
-            description: "RoleDot (アクセシビリティ設定) をクリックすると、役割の色がコピーされます。 また、RoleDot と色の名前を同時に使用することもできます。",
+            name: "BetterRoleDot",
+            description: "RoleDot (アクセシビリティ設定) クリックで役割の色をコピーします。また、RoleDot と色付きの名前の両方を同時に使用することもできます。",
             option: {
                 bothStyles: {
-                    label: "ここでイキ・スティル",
-                    description: "ロールポイントと色付きの名前の両方を表示"
+                    label: "両方のスタイル",
+                    description: "役割のドット名と色付きの名前の両方を表示"
                 },
                 copyRoleColorInProfilePopout: {
-                    label: "プロファイルポップアップで役割の色のコピー",
-                    description: "プロファイルポップアップで役割のドットをクリックして役割の色のコピーを許可します"
+                    label: "プロファイル ポップアウトの役割の色のコピー",
+                    description: "プロファイルのポップアウトで役割のドットをクリックして役割の色をコピーできるようにします"
                 }
             }
         },
         betterSessions: {
-            name: "より良いセッション",
-            description: "セッション (デバイス) メニューを強化します。 これにより、正確なタイムスタンプを確認したり、各セッションに一意の名前を付けたり、新しいセッションに関する通知を受け取ったりすることができます。",
+            name: "BetterSessions",
+            description: "セッション (デバイス) メニューを強化します。正確なタイムスタンプを表示し、各セッションにカスタム名を付け、新しいセッションに関する通知を受け取ることができます。",
             new: "新しい",
             newSessions: "新しいセッション:",
             rename: "名前を変更する",
@@ -1546,29 +1546,29 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 backgroundCheck: {
                     label: "身元調査",
-                    description: "バックグラウンドで新しいセッションを確認し、検出された場合は通知を表示します"
+                    description: "バックグラウンドで新しいセッションをチェックし、検出された場合は通知を表示します"
                 },
                 checkInterval: {
-                    label: "制御範囲",
+                    label: "チェック間隔",
                     description: "バックグラウンドで新しいセッションを確認する頻度 (有効な場合) (分単位)"
                 }
             }
         },
         betterSettings: {
-            name: "より良い設定",
-            description: "設定メニューを開くエクスペリエンスが向上しました",
+            name: "BetterSettings",
+            description: "設定メニューを開くエクスペリエンスが向上します",
             option: {
                 disableFade: {
-                    label: "トランジション効果を無効にする",
+                    label: "フェードを無効にする",
                     description: "クロスフェードアニメーションを無効にする"
                 },
                 organizeMenu: {
-                    label: "編集メニュー",
-                    description: "設定により、歯車アイコン メニューがカテゴリに分割されます"
+                    label: "メニューの整理",
+                    description: "設定の歯車コンテキスト メニューをカテゴリに整理します"
                 },
                 eagerLoad: {
-                    label: "高速読み込み",
-                    description: "メニューを最初に開いたときの読み込みラグを解消します。"
+                    label: "熱心なロード",
+                    description: "初めてメニューを開いたときの読み込み遅延を解消します。"
                 }
             },
             alert: {
@@ -1579,97 +1579,97 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         betterUploadButton: {
-            name: "より良いアップロードボタン",
-            description: "ワンクリックでインストール、右クリックでメニューを開く"
+            name: "BetterUploadButton",
+            description: "シングルクリックでアップロード、右クリックでメニューを開く"
         },
         biggerStreamPreview: {
-            name: "BiggerStreamプレビュー",
-            description: "このプラグインを使用すると、ブロードキャストのプレビューを拡大できます",
+            name: "BiggerStreamPreview",
+            description: "このプラグインを使用すると、ストリームのプレビューを拡大できます",
             context: {
-                viewPreview: "リリースプレビューを参照"
+                viewPreview: "ストリームのプレビューを表示する"
             }
         },
         blockKeywords: {
-            name: "ブロックキーワード",
-            description: "送信ユーザーがブロックされたかのように、特定のユーザー定義キーワードを含むメッセージをブロックします。",
+            name: "BlockKeywords",
+            description: "特定のユーザー定義キーワードを含むメッセージを、メッセージを送信したユーザーがブロックされたかのようにブロックします。",
             option: {
                 blockedWords: {
                     label: "ブロックされた単語",
                     description: "ブロックする単語のカンマ区切りリスト"
                 },
                 useRegex: {
-                    label: "正規品 クラン",
+                    label: "正規表現を使用する",
                     description: "メッセージの内容を確認するときに各値を正規表現として使用する (上級)"
                 },
                 caseSensitive: {
                     label: "大文字と小文字を区別",
-                    description: "大文字と小文字を区別した検索を使用しますか?"
+                    description: "大文字と小文字を区別した検索を使用するかどうか"
                 },
                 ignoreBlockedMessages: {
                     label: "ブロックされたメッセージを無視する",
-                    description: "新しいメッセージバー (最近のメッセージ) を完全に無視します。"
+                    description: "(最近の) 新規メッセージバーを完全に無視します"
                 }
             }
         },
         blockKrisp: {
-            name: "ブロッククリスプ",
-            description: "Krisp のインストールを妨げます"
+            name: "BlockKrisp",
+            description: "Krisp のロードを防止する"
         },
         blurNSFW: {
-            name: "ぼかしNSFW",
-            description: "カーソルを合わせるまで、NSFW チャンネルの添付ファイルをぼかします",
+            name: "BlurNSFW",
+            description: "NSFW チャンネルの添付ファイルをホバーするまでぼかします",
             option: {
                 blurAmount: {
                     label: "ぼかし量",
-                    description: "ぼかしの量 (ピクセル単位)"
+                    description: "ぼかし量 (ピクセル単位)"
                 },
                 blurAllChannels: {
                     label: "すべてのチャンネルをぼかす",
-                    description: "すべてのチャンネル（NSFW だけでなく）の添付ファイルをぼかします"
+                    description: "すべてのチャンネル (NSFW だけでなく) で添付ファイルをぼかします"
                 }
             }
         },
         bypassPinPrompt: {
-            name: "バイパスピンプロンプト",
-            description: "ピン機能を使用するときにピンのプロンプトをスキップします"
+            name: "BypassPinPrompt",
+            description: "PIN 機能を使用する場合は、PIN プロンプトをバイパスします。"
         },
         bypassStatus: {
-            name: "バイパスステータス",
-            description: "おやすみモード中も特定のソースからの通知を受け取ります。 ユーザー/チャネル/サーバーを右クリックすると、おやすみモードをバイパスできます。",
+            name: "BypassStatus",
+            description: "おやすみモードでも特定のソースから通知を受け取ります。ユーザー/チャネル/ギルドを右クリックして、サイレントモードをバイパスするように設定します。",
             context: {
-                remove: "ステータススキップを削除",
-                add: "ステータススキップの追加"
+                remove: "ステータスバイパスの削除",
+                add: "ステータスバイパスの追加"
             },
             option: {
                 guilds: {
-                    label: "サーバー",
-                    description: "ホップを許可されたサーバー (サーバー上の任意の場所に ping が送信されたときに通知を受信)",
+                    label: "ギルド",
+                    description: "バイパスするギルド (ギルド内のどこかに ping が送信されると通知されます)",
                     placeholder: "カンマで区切る"
                 },
                 channels: {
                     label: "チャンネル",
-                    description: "スキップが許可されているチャネル (そのチャネルで ping が送信されると通知を受け取ります)",
+                    description: "バイパスするチャネル (そのチャネルで ping が送信されると通知されます)",
                     placeholder: "カンマで区切る"
                 },
                 users: {
                     label: "ユーザー",
-                    description: "スキップを許可されたユーザー (DM で送信されたすべてのメッセージの通知を受け取る)",
+                    description: "バイパスを許可するユーザー (DM で送信されたすべてのメッセージについて通知される)",
                     placeholder: "カンマで区切る"
                 },
                 allowOutsideOfDms: {
-                    label: "外部DMを許可する",
-                    description: "選択したユーザーが非 DM ステータスをスキップできるようにします (チャネル/サーバーのスキップと同様に機能しますが、選択したユーザーが送信したすべてのメッセージに適用されます)"
+                    label: "DM 以外を許可する",
+                    description: "選択したユーザーが DM 以外のステータスをバイパスできるようにします (チャネル/ギルドのバイパスのように機能しますが、選択したユーザーによって送信されたすべてのメッセージが対象です)"
                 },
                 notificationSound: {
                     label: "通知音",
-                    description: "通知音を再生するかどうかを決定します"
+                    description: "通知音を鳴らすかどうか"
                 },
                 respectSilentPings: {
                     label: "サイレント ping を尊重する",
-                    description: "サイレント ping を尊重します (@silent/通知を抑制)"
+                    description: "サイレント ping を尊重する (@silent / 通知を抑制)"
                 },
                 statusToUse: {
-                    label: "使用事例",
+                    label: "使用ステータス",
                     description: "ホワイトリストに使用するステータス",
                     online: "オンライン",
                     idle: "アイドル状態",
@@ -1679,18 +1679,18 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         cakeDay: {
-            name: "ケーキデイ",
+            name: "CakeDay",
             description: "ユーザーの誕生日を追跡し、ケーキのアイコンで表示します",
             context: {
                 label: "誕生日",
                 setBirthday: "誕生日を設定する",
-                clearBirthday: "誕生日の削除",
+                clearBirthday: "誕生日をクリア",
                 current: "現在："
             },
             option: {
                 chat: {
                     label: "チャット",
-                    description: "チャット内のユーザー名の横に円アイコンを表示する"
+                    description: "チャット内のユーザー名の横にケーキのアイコンを表示する"
                 },
                 memberList: {
                     label: "メンバー一覧",
@@ -1716,28 +1716,28 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 memberList: {
                     label: "メンバー一覧",
-                    description: "メンバーリストには"
+                    description: "メンバーリストにある"
                 }
             },
             toast: {
                 success: "誕生日の設定が成功しました！",
-                invalid: "誕生日の形式が無効です! DD/MMのみ受け付けます。",
-                cleared: "誕生日が正常に削除されました。"
+                invalid: "誕生日の形式が無効です。 DD/MMのみ受け付けます。",
+                cleared: "誕生日も無事クリアしました！"
             },
             notification: {
-                title: "🎂 今日は誕生日です！",
-                body: "今日は {{username}} の誕生日です!"
+                title: "🎂 今日は誕生日！",
+                body: "今日は{{username}}の誕生日です!"
             },
             modal: {
-                title: "{{username}} の誕生日を設定する",
-                description: "誕生日を DD/MM 形式で入力してください (例: 25/12)",
-                placeholder: "イーグル 25/12",
+                title: "{{username}} の誕生日を設定",
+                description: "誕生日を DD/MM 形式で入力します (例: 25/12)",
+                placeholder: "例えば12/25",
                 current: "現在の誕生日:",
                 set: "誕生日を設定する",
                 cancel: "キャンセル",
-                birthday: "今日は私の誕生日です！ 🎂",
+                birthday: "私の誕生日です！ 🎂",
                 saved: "保存された誕生日",
-                savedDesc: "誕生日はまだ記録されていません。 ユーザーを右クリックして誕生日を追加します。",
+                savedDesc: "誕生日はまだ保存されていません。ユーザーを右クリックして誕生日を追加します。",
                 today: "今日",
                 remove: "取り除く",
                 loading: "読み込み中...",
@@ -1746,50 +1746,50 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         callTimer: {
-            name: "コールタイマー",
+            name: "CallTimer",
             description: "すべての音声通話で通話タイマーを表示します",
             option: {
                 format: {
                     label: "形式",
                     description: "コンパクトまたは人間が読める形式",
-                    human: "30g 23秒 00日 42秒"
+                    human: "30日23時00分42秒"
                 },
                 allCallTimers: {
                     label: "すべての通話タイマー",
-                    description: "サーバー上のすべてのユーザーの通話タイマーを表示する"
+                    description: "サーバー内のすべてのユーザーの通話タイマーを表示する"
                 },
                 showWithoutHover: {
-                    label: "ホバリングなしで表示",
-                    description: "ホバーしなくても常にタイマーを表示"
+                    label: "ホバーなしで表示",
+                    description: "ホバーしなくても常にタイマーを表示します"
                 },
                 showRoleColor: {
                     label: "役割の色を表示",
-                    description: "ユーザーの役割の色で表示 (ShowRoleColor プラグインが有効な場合)"
+                    description: "ユーザーのロールカラーで表示 (ShowRoleColor プラグインが有効な場合)"
                 },
                 trackSelf: {
-                    label: "自分自身に従ってください",
-                    description: "自分のタイマーも表示"
+                    label: "自分自身を追跡する",
+                    description: "自分のタイマーも表示します"
                 },
                 showSeconds: {
                     label: "秒を表示",
-                    description: "タイマーにも秒を表示"
+                    description: "タイマーの秒数を表示します"
                 },
                 watchLargeGuilds: {
-                    label: "ビッグサーバーを監視する",
-                    description: "大規模サーバー上のユーザーを追跡します。 アクティブな音声ユーザーが多数いる大規模なサーバーを使用している場合、これにより遅延が発生する可能性があります。 最大 2000 人のアクティブ音声ユーザーでテストしましたが、問題は発生しませんでした。"
+                    label: "大規模ギルドを監視する",
+                    description: "大規模なギルドのユーザーを追跡します。アクティブな音声ユーザーがいる多数の大規模ギルドに所属している場合、これにより遅延が発生する可能性があります。最大 2000 人のアクティブな音声ユーザーでテストしましたが、問題はありませんでした。"
                 },
                 fixUI: {
-                    label: "ユーザーインターフェースの修正",
-                    description: "場合によっては、タイマーがユーザー インターフェイスを破壊する可能性があります。 このオプションを有効にすることでこれを修正できます。"
+                    label: "UIの修正",
+                    description: "場合によっては、タイマーがユーザー インターフェイスを破壊する可能性があります。それを修正するには、このオプションを有効にしてください。"
                 }
             }
         },
         channelBadges: {
-            name: "チャンネルバッジ",
-            description: "タイプに基づいてチャンネルにバッジを追加します",
+            name: "ChannelBadges",
+            description: "タイプに基づいてバッジをチャンネルに追加します",
             badge: {
                 private: "このチャンネルはロックされています。",
-                nsfw: "このチャンネルは NSFW とマークされています。",
+                nsfw: "このチャンネルは NSFW としてマークされています。",
                 rules: "このチャネルはサーバー ルール チャネルです。"
             },
             option: {
@@ -1803,27 +1803,27 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 showVoiceBadge: {
                     label: "音声バッジを表示",
-                    description: "オーディオバッジを表示"
+                    description: "音声バッジを表示"
                 },
                 showCategoryBadge: {
                     label: "カテゴリバッジを表示",
                     description: "カテゴリバッジを表示"
                 },
                 showDirectoryBadge: {
-                    label: "インデックスバッジを表示",
-                    description: "インデックスバッジを表示"
+                    label: "ディレクトリバッジを表示",
+                    description: "ディレクトリバッジを表示"
                 },
                 showAnnouncementThreadBadge: {
-                    label: "アナウンストピックバッジを表示",
-                    description: "お知らせトピックバッジを表示する"
+                    label: "アナウンススレッドバッジを表示",
+                    description: "アナウンススレッドバッジを表示"
                 },
                 showPublicThreadBadge: {
-                    label: "一般トピックのバッジを表示",
-                    description: "パブリックトピックバッジを表示"
+                    label: "公開スレッドバッジを表示",
+                    description: "公開スレッドバッジを表示"
                 },
                 showPrivateThreadBadge: {
-                    label: "特別なトピックのバッジを表示",
-                    description: "カスタムトピックバッジを表示"
+                    label: "プライベートスレッドバッジを表示",
+                    description: "プライベートスレッドバッジを表示"
                 },
                 showStageBadge: {
                     label: "ショーステージバッジ",
@@ -1831,7 +1831,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 showAnnouncementBadge: {
                     label: "アナウンスバッジを表示",
-                    description: "アナウンスバッジを表示する"
+                    description: "アナウンスバッジを表示"
                 },
                 showForumBadge: {
                     label: "フォーラムバッジを表示",
@@ -1842,12 +1842,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "メディアバッジを表示"
                 },
                 showNSFWBadge: {
-                    label: "NSFWバッジを見せましょう",
+                    label: "NSFWバッジを表示",
                     description: "NSFWバッジを表示"
                 },
                 showLockedBadge: {
                     label: "ロックされたバッジを表示",
-                    description: "ロックされたバッジを表示する"
+                    description: "ロックされたバッジを表示"
                 },
                 showRulesBadge: {
                     label: "ルールバッジを表示",
@@ -1863,9 +1863,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     default: "文章"
                 },
                 voiceBadgeLabel: {
-                    label: "サウンドバッジラベル",
-                    description: "オーディオバッジラベル",
-                    default: "セス"
+                    label: "ボイスバッジラベル",
+                    description: "音声バッジラベル",
+                    default: "声"
                 },
                 categoryBadgeLabel: {
                     label: "カテゴリバッジラベル",
@@ -1873,34 +1873,34 @@ const translations: MatchStructure<typeof enTranslations> = {
                     default: "カテゴリ"
                 },
                 announcementBadgeLabel: {
-                    label: "アナウンスバッジラベル",
-                    description: "お知らせバッジラベル",
-                    default: "ハーバー"
+                    label: "アナウンススレッドバッジラベル",
+                    description: "お知らせスレッドバッジラベル",
+                    default: "ニュース"
                 },
                 announcementThreadBadgeLabel: {
-                    label: "お知らせトピックバッジラベル",
-                    description: "お知らせトピックのバッジ ラベル",
-                    default: "ニューストピック"
+                    label: "アナウンススレッドバッジラベル",
+                    description: "お知らせスレッドバッジラベル",
+                    default: "ニューススレッド"
                 },
                 publicThreadBadgeLabel: {
-                    label: "一般的なトピックのバッジ ラベル",
-                    description: "一般的なトピックのバッジ ラベル",
-                    default: "主題"
+                    label: "公開スレッドバッジラベル",
+                    description: "公開スレッドバッジラベル",
+                    default: "糸"
                 },
                 privateThreadBadgeLabel: {
-                    label: "特別なトピックのバッジラベル",
-                    description: "カスタムトピックバッジラベル",
-                    default: "特別なトピック"
+                    label: "プライベートスレッドバッジラベル",
+                    description: "プライベートスレッドバッジラベル",
+                    default: "プライベートスレッド"
                 },
                 stageBadgeLabel: {
                     label: "ステージバッジラベル",
                     description: "ステージバッジラベル",
-                    default: "シーン"
+                    default: "ステージ"
                 },
                 directoryBadgeLabel: {
-                    label: "インデックスバッジラベル",
-                    description: "インデックスバッジラベル",
-                    default: "索引"
+                    label: "ディレクトリバッジラベル",
+                    description: "ディレクトリバッジラベル",
+                    default: "ディレクトリ"
                 },
                 forumBadgeLabel: {
                     label: "フォーラムバッジラベル",
@@ -1918,8 +1918,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     default: "NSFW"
                 },
                 lockedBadgeLabel: {
-                    label: "ロックバッジタグ",
-                    description: "ロックバッジタグ",
+                    label: "ロックされたバッジのラベル",
+                    description: "ロックされたバッジのラベル",
                     default: "ロックされています"
                 },
                 rulesBadgeLabel: {
@@ -1929,7 +1929,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 unknownBadgeLabel: {
                     label: "不明なバッジのラベル",
-                    description: "不明なバッジ ラベル",
+                    description: "不明なバッジのラベル",
                     default: "未知"
                 },
                 textBadgeColor: {
@@ -1937,36 +1937,36 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "テキストバッジの色"
                 },
                 voiceBadgeColor: {
-                    label: "オーディオバッジの色",
-                    description: "サウンドバッジの色"
+                    label: "ボイスバッジの色",
+                    description: "ボイスバッジの色"
                 },
                 categoryBadgeColor: {
                     label: "カテゴリバッジの色",
                     description: "カテゴリバッジの色"
                 },
                 announcementBadgeColor: {
-                    label: "アナウンスバッジの色",
-                    description: "アナウンスバッジの色"
+                    label: "お知らせスレッドバッジの色",
+                    description: "お知らせスレッドバッジの色"
                 },
                 announcementThreadBadgeColor: {
-                    label: "お知らせの件名バッジの色",
-                    description: "お知らせトピックバッジの色"
+                    label: "お知らせスレッドバッジの色",
+                    description: "お知らせスレッドバッジの色"
                 },
                 publicThreadBadgeColor: {
-                    label: "一般的なスレッドバッジの色",
-                    description: "一般的なトピックのバッジの色"
+                    label: "公開スレッドバッジの色",
+                    description: "公開スレッドのバッジの色"
                 },
                 privateThreadBadgeColor: {
-                    label: "特別なトピックのバッジの色",
-                    description: "カスタムトピックバッジの色"
+                    label: "プライベートスレッドバッジの色",
+                    description: "プライベートスレッドのバッジの色"
                 },
                 stageBadgeColor: {
                     label: "ステージバッジの色",
                     description: "ステージバッジの色"
                 },
                 directoryBadgeColor: {
-                    label: "インデックスバッジの色",
-                    description: "インデックスバッジの色"
+                    label: "ディレクトリバッジの色",
+                    description: "ディレクトリバッジの色"
                 },
                 forumBadgeColor: {
                     label: "フォーラムバッジの色",
@@ -1995,14 +1995,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             badges: {
                 text: "文章",
-                voice: "セス",
+                voice: "声",
                 category: "カテゴリ",
-                announcement: "ハーバー",
-                announcementThread: "ニューストピック",
-                publicThread: "主題",
-                privateThread: "特別なトピック",
-                stage: "シーン",
-                directory: "索引",
+                announcement: "ニュース",
+                announcementThread: "ニューススレッド",
+                publicThread: "糸",
+                privateThread: "プライベートスレッド",
+                stage: "ステージ",
+                directory: "ディレクトリ",
                 forum: "フォーラム",
                 media: "メディア",
                 nsfw: "NSFW",
@@ -2012,44 +2012,44 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             tooltip: {
                 locked: "このチャンネルはロックされています。",
-                nsfw: "このチャンネルは NSFW とマークされています。"
+                nsfw: "このチャンネルは NSFW としてマークされています。"
             }
         },
         channelTabs: {
-            name: "チャンネルタブ",
-            description: "頻繁にアクセスするチャンネルをブラウザのようにタブにグループ化します",
+            name: "ChannelTabs",
+            description: "よくアクセスするチャネルをブラウザのようにタブにグループ化します",
             open: "新しいタブで開く",
             animation: {
                 title: "アニメーションコントロール",
-                description: "チャンネル タブの特定のアニメーションを有効または無効にします。 各オプションは個別にオンまたはオフにできます。",
+                description: "チャンネル タブの特定のアニメーションを有効または無効にします。各オプションは個別に切り替えることができます。",
                 placeholder: "有効にするアニメーションを選択してください...",
-                tabHover: "タブホバー効果 (削除 + スケール)",
+                tabHover: "タブホバー効果 (リフト + スケール)",
                 tabSelection: "選択したタブのリフト アニメーション",
                 tabDragDrop: "タブ ドラッグ アンド ドロップ (ゴースト + 並べ替え)",
-                tabEnterExit: "タブイン/タブアウトスクロール (作成 + 閉じる)",
-                tabIconPop: "アイコンポップ (選挙数の増加)",
-                closeRotation: "閉じるボタン 戻る",
-                plusPulse: "プラスボタンのパルス効果",
-                mentionGlow: "メンションバッジの輝き",
+                tabEnterExit: "タブの開始/終了スライド (作成 + 閉じる)",
+                tabIconPop: "選択範囲にアイコンをポップ (アイコンの拡大)",
+                closeRotation: "閉じるボタンの回転",
+                plusPulse: "プラスボタンパルス",
+                mentionGlow: "メンションバッジのグロー",
                 compactExpand: "コンパクトモードの拡張",
                 selectedBorder: "選択したタブの青い枠線",
                 selectedBackground: "選択したタブの背景色",
                 tabShadows: "タブの影の効果",
-                tabRepositioning: "タブの位置変更 (ソフト トランジション)",
+                tabRepositioning: "タブの位置変更 (スムーズな位置変更)",
                 resizeHandle: "サイズ変更ハンドルフェード",
-                questActivate: "アクティブ デューティの勾配"
+                questActivate: "アクティブクエストグラデーション"
             },
             bookmark: {
-                label: "イェル・イミ",
+                label: "ブックマーク",
                 unknown: "不明なユーザー",
                 folder: "フォルダ",
                 add: "ブックマークに追加",
                 edit: "ブックマークの編集",
-                delete: "イェル・イミニ・シル",
+                delete: "ブックマークの削除",
                 remove: "ブックマークから削除",
                 removeFolder: "フォルダーからブックマークを削除",
                 loading: "ブックマークを読み込んでいます...",
-                noBookmarks: "ブックマークがありません。 開いているタブを追加したり、右クリックして非表示にしたりできます。",
+                noBookmarks: "ブックマークはありません。開いているタブを追加したり、右クリックしてこれを非表示にしたりできます",
                 quests: "クエスト",
                 messageRequests: "メッセージリクエスト",
                 friends: "友達",
@@ -2063,7 +2063,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             button: {
                 save: "保存",
-                delete: "シル",
+                delete: "消去",
                 cancel: "キャンセル"
             },
             context: {
@@ -2084,17 +2084,17 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             error: {
-                noLogin: "アカウントにログインしていませんか?"
+                noLogin: "ログインしているアカウントがありませんか?"
             },
             modal: {
                 add: {
                     title: "ブックマークをフォルダに追加",
                     select: "フォルダーを選択してください",
-                    create: "新規作成"
+                    create: "作成する"
                 },
                 edit: {
                     title: "ブックマークの編集",
-                    name: "ブックマーク名",
+                    name: "Bookmark Name",
                     folder: "フォルダーの色"
                 },
                 delete: {
@@ -2104,11 +2104,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 onStartup: {
-                    label: "最初は",
-                    description: "起動時にタブをどうするかを選択します",
-                    nothing: "何もしない（友達タブを開く）",
+                    label: "起動時",
+                    description: "起動時のタブをどうするか",
+                    nothing: "何もしない（友達タブで開く）",
                     remember: "前回のセッションのタブを記憶する",
-                    open: "特定のタブを開く"
+                    open: "特定のタブのセットで開く"
                 },
                 tabSet: {
                     label: "タブセット"
@@ -2118,255 +2118,255 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "DM にはユーザー名の代わりに表示名を使用する"
                 },
                 showStatusIndicators: {
-                    label: "ステータスインジケーターを表示する",
+                    label: "ステータスインジケーターの表示",
                     description: "DM のステータス インジケーターを表示する"
                 },
                 showBookmarkBar: {
                     label: "ブックマークバーを表示"
                 },
                 bookmarkNotificationDot: {
-                    label: "ブックマーク通知ポイント",
+                    label: "ブックマーク通知ドット",
                     description: "ブックマークの通知ドットを表示する"
                 },
                 widerTabsAndBookmarks: {
-                    label: "大きなタブとブックマーク",
-                    description: "大きなモニターでタブとブックマークを展開"
+                    label: "幅の広いタブとブックマーク",
+                    description: "大きなモニター用にタブとブックマークの長さを延長します。"
                 },
                 tabWidthScale: {
                     label: "タブ幅スケール",
-                    description: "タブ幅スケール (パーセンテージ) – タブの端をドラッグして調整可能"
+                    description: "タブ幅スケール (パーセンテージ) - タブの端をドラッグして調整可能"
                 },
                 renderAllTabs: {
-                    label: "すべてのタブをメモリ内に保持する",
-                    description: "すべてのタブをメモリ内に保持し、タブ間の切り替えを高速化します (スクロールと状態はキャッシュされます)。"
+                    label: "すべてのタブをレンダリングする",
+                    description: "切り替えを高速化するためにすべてのタブをメモリにキャッシュしたままにします (スクロール位置と状態をキャッシュします)。"
                 },
                 switchToExistingTab: {
                     label: "既存のタブに切り替える",
-                    description: "閲覧しているチャンネルのタブがすでにある場合は、それに切り替えます"
+                    description: "移動先のチャンネルにタブがすでに存在する場合は、タブに切り替えます"
                 },
                 createNewTabIfNotExists: {
-                    label: "タブがない場合は作成してください",
-                    description: "チャンネルのタブがない場合は、新しいタブを作成します"
+                    label: "タブが存在しない場合は新しいタブを作成",
+                    description: "移動先のチャンネルに新しいタブが存在しない場合は、新しいタブを作成します"
                 },
                 enableRapidNavigation: {
-                    label: "クイックナビゲーションを有効にする",
-                    description: "チャンネルをすばやく変更すると、新しいタブではなく現在のタブが変更されます。"
+                    label: "高速ナビゲーションを有効にする",
+                    description: "迅速なナビゲーション動作を有効にする - チャネル間を迅速に移動すると、新しいタブを作成するのではなく、現在のタブが置き換えられます。"
                 },
                 rapidNavigationThreshold: {
                     label: "高速ナビゲーションのしきい値",
-                    description: "ミリ秒単位の時間間隔。 この期間中に新しいチャネルが開かれると、既存のタブが変更されます。"
+                    description: "迅速なナビゲーションのための時間枠 (ミリ秒単位)。この期間内では、新しいチャネルが作成されるのではなく、新しいチャネルが現在のタブを置き換えます。"
                 },
                 tabBarPosition: {
                     label: "タブバーの位置",
                     description: "タブバーの位置",
                     top: "トップ",
-                    bottom: "代替"
+                    bottom: "底"
                 },
                 enableNumberKeySwitching: {
-                    label: "数字キーでタブを切り替える",
-                    description: "1 ～ 9 キーによるタブ切り替えを有効にする"
+                    label: "数字キー切り替えを有効にする",
+                    description: "数字キー (1 ～ 9) を有効にしてタブを切り替えます"
                 },
                 numberKeySwitchCount: {
-                    label: "数字キーのタブ番号",
+                    label: "数字キースイッチの数",
                     description: "数字キー (1 ～ 9) でアクセスできるタブの数"
                 },
                 enableCloseTabShortcut: {
-                    label: "タブを閉じるショートカット",
+                    label: "タブを閉じるショートカットを有効にする",
                     description: "タブを閉じるキーボード ショートカットを有効にする"
                 },
                 enableNewTabShortcut: {
-                    label: "新しいタブのショートカット",
-                    description: "新しいタブを開くショートカットを有効にする"
+                    label: "新しいタブのショートカットを有効にする",
+                    description: "新しいタブのキーボード ショートカットを有効にする"
                 },
                 enableTabCycleShortcut: {
-                    label: "タブループのショートカット",
-                    description: "タブ間を切り替えるためのショートカットを有効にする"
+                    label: "タブサイクルショートカットを有効にする",
+                    description: "タブ循環キーボード ショートカットを有効にする"
                 },
                 keybindsSection: {
-                    label: "キーボードショートカット",
-                    description: "ボタンをクリックし、目的のキーの組み合わせを押します。 CTRL、SHIFT、ALT などの修飾子がサポートされています。",
+                    label: "キーバインド",
+                    description: "ボタンをクリックして、希望のキーの組み合わせを押します。 CTRL、SHIFT、ALT などの修飾子がサポートされています。",
                     title: "キーボードショートカット",
                     reset: "すべてをデフォルトにリセット",
                     closeTab: {
                         label: "タブを閉じる",
-                        description: "現在のタブを閉じるキーボード ショートカット"
+                        description: "現在アクティブなタブをキーボードで操作する"
                     },
                     newTab: {
                         label: "新しいタブ",
-                        description: "現在のチャンネルで新しいタブを開くためのキーボード ショートカット"
+                        description: "現在のチャンネルで新しいタブを開きます"
                     },
                     cycleTabsForward: {
-                        label: "前方タブループ",
-                        description: "次のタブに移動するショートカット (最初のタブに移動)"
+                        label: "タブを前に循環",
+                        description: "次のタブに切り替えます (最初のタブに戻ります)"
                     },
                     cycleTabsBackward: {
-                        label: "バックバウンスループ",
-                        description: "前のタブに移動するショートカット (最後のタブに移動)"
+                        label: "タブを後方に循環",
+                        description: "前のタブに切り替えます (最後に戻ります)"
                     }
                 },
                 closeTabKeybind: {
-                    label: "タブを閉じるショートカット",
-                    description: "現在のタブを閉じるショートカット"
+                    label: "タブを閉じるキーバインド",
+                    description: "現在のタブを閉じるキーボード ショートカット"
                 },
                 newTabKeybind: {
-                    label: "新しいタブのショートカット",
-                    description: "新しいタブを開くショートカット"
+                    label: "新しいタブのキーバインド",
+                    description: "新しいタブを開くためのキーボード ショートカット"
                 },
                 cycleTabForwardKeybind: {
-                    label: "前方タブループ",
-                    description: "次のタブに移動するショートカット"
+                    label: "サイクルタブの進むキーバインド",
+                    description: "次のタブに切り替えるキーボード ショートカット"
                 },
                 cycleTabBackwardKeybind: {
-                    label: "バックバウンスループ",
-                    description: "前のタブに移動するショートカット"
+                    label: "サイクルタブの後方キーバインド",
+                    description: "前のタブに戻るキーボード ショートカット"
                 },
                 showTabNumbers: {
                     label: "タブ番号を表示",
-                    description: "タブに番号バッジを表示してショートカットを表示します"
+                    description: "キーボード ショートカットを示すためにタブに番号付きバッジを表示します"
                 },
                 tabNumberPosition: {
                     label: "タブ番号の位置",
-                    description: "タブ上の番号バッジの位置",
-                    left: "左 (プレアイコン)",
-                    right: "右（投稿内容）"
+                    description: "タブ上の番号付きバッジを表示する場所",
+                    left: "左側（アイコンの前）",
+                    right: "右側（コンテンツ後）"
                 },
                 animations: {
                     label: "アニメーション"
                 },
                 animationHover: {
-                    label: "ホバーアニメーション",
-                    description: "ホバリング中のリフト効果と拡大効果を有効にする"
+                    label: "ホバー時のアニメーション",
+                    description: "ホバーリフトとスケール効果を有効にする"
                 },
                 animationSelection: {
-                    label: "選択アニメーション",
-                    description: "選択時にライト/フレームアニメーションを有効にする"
+                    label: "選択部分のアニメーション",
+                    description: "選択アニメーションを有効にする (境界線のグロー、リフト)"
                 },
                 animationDragDrop: {
-                    label: "ドラッグアンドドロップアニメーション",
-                    description: "ドラッグ中のゴースト効果を有効にする"
+                    label: "ドラッグアンドドロップによるアニメーション",
+                    description: "ドラッグ アンド ドロップのゴースト効果を有効にする"
                 },
                 animationEnterExit: {
-                    label: "入退場アニメーション",
-                    description: "タブの作成時/閉じる時のスクロールアニメーション"
+                    label: "入退出時のアニメーション",
+                    description: "タブの作成/スライドを閉じるアニメーションを有効にする"
                 },
                 animationIconPop: {
-                    label: "アイコンポップアニメーション",
-                    description: "選択中にアイコンの成長アニメーションを有効にする"
+                    label: "アイコンポップのアニメーション",
+                    description: "選択時にアイコンの拡大アニメーションを有効にする"
                 },
                 animationCloseRotation: {
-                    label: "キルボタンリターン",
-                    description: "シャットダウンアイコンにスピンアニメーションを追加"
+                    label: "近回転時のアニメーション",
+                    description: "閉じるボタンの回転アニメーションを有効にする"
                 },
                 animationPlusPulse: {
-                    label: "プラスボタンパルス",
-                    description: "新しいタブボタンのパルスアニメーションを有効にする"
+                    label: "プラスボタンパルスのアニメーション",
+                    description: "プラスボタンのパルスアニメーションを有効にする"
                 },
                 animationMentionGlow: {
-                    label: "スパークルについて言及する",
-                    description: "メンションバッジで赤く光るアニメーションを有効にする"
+                    label: "グローについてのアニメーション",
+                    description: "メンション時に赤色の点滅を有効にする"
                 },
                 animationCompactExpand: {
-                    label: "コンパクト展開アニメーション",
-                    description: "コンパクトタブのスムーズな拡張を可能にする"
+                    label: "コンパクト/エキスパンドのアニメーション",
+                    description: "コンパクトなタブのスムーズな拡張を可能にする"
                 },
                 animationSelectedBorder: {
-                    label: "選択したタブの境界線のアニメーション",
-                    description: "選択したタブの境界線とグロースタイルのアニメーションを有効にする"
+                    label: "選択した境界線のアニメーション",
+                    description: "選択したタブの境界線とグローのスタイルを有効にする"
                 },
                 animationSelectedBackground: {
-                    label: "選択したタブの背景アニメーション",
-                    description: "選択したタブの背景色のアニメーションによる変更を有効にする"
+                    label: "選択した背景のアニメーション",
+                    description: "選択したタブの背景色の変更を有効にする"
                 },
                 animationTabShadows: {
                     label: "タブの影のアニメーション",
                     description: "タブの影効果を有効にする"
                 },
                 animationTabPositioning: {
-                    label: "タブの位置決めアニメーション",
-                    description: "タブ切り替え時のスムーズな遷移アニメーション"
+                    label: "アニメーションタブの配置",
+                    description: "タブの位置を移動するときにスムーズな遷移を有効にする"
                 },
                 animationResizeHandle: {
-                    label: "アニメーションのサイズ変更",
+                    label: "アニメーションのサイズ変更ハンドル",
                     description: "サイズ変更ハンドルのフェード アニメーションを有効にする"
                 },
                 animationQuestsActive: {
-                    label: "アクティブなアニメーション",
-                    description: "タスクがアクティブなときにタブでグラデーションアニメーションを有効にする"
+                    label: "アニメーションクエストがアクティブです",
+                    description: "クエストがアクティブに実行されているときに「クエスト」タブでグラデーションアニメーションを有効にする"
                 },
                 compactAutoExpandSelected: {
-                    label: "選択時に自動展開",
-                    description: "選択するとコンパクトタブを自動展開します"
+                    label: "コンパクト自動拡張が選択されました",
+                    description: "選択するとコンパクトタブが自動的に展開され、完全なチャンネル名が表示されます"
                 },
                 compactAutoExpandOnHover: {
-                    label: "ホバー時に自動展開",
-                    description: "ホバー時にコンパクトタブを自動展開"
+                    label: "ホバー時のコンパクトな自動展開",
+                    description: "カーソルを合わせるとコンパクトなタブが自動的に展開され、完全なチャンネル名が表示されます"
                 },
                 openInNewTabAutoSwitch: {
-                    label: "新しいタブで開くと自動で切り替わる",
-                    description: "新しいタブが開くと自動的にタブに切り替わります"
+                    label: "新しいタブで開く自動切り替え",
+                    description: "「新しいタブで開く」コンテキストメニューから開いた新しいタブに自動的に切り替えます"
                 },
                 bookmarksIndependentFromTabs: {
-                    label: "ブックマークの独立性",
-                    description: "ブックマークはタブ バーに影響を与えずに個別に移動します"
+                    label: "タブから独立したブックマーク",
+                    description: "ブックマークはアクティブなタブ バーに影響を与えずに個別に移動します。"
                 },
                 showResizeHandle: {
                     label: "サイズ変更ハンドルを表示",
-                    description: "タブの幅を調整するためのハンドルを表示します"
+                    description: "タブの上にマウスを置くとサイズ変更ハンドルを表示してタブの幅を調整します"
                 },
                 openNewTabsInCompactMode: {
-                    label: "新しいタブをコンパクトに開く",
-                    description: "新しく開いたタブはデフォルトでコンパクト モードで開きます"
+                    label: "コンパクト モードで新しいタブを開く",
+                    description: "新しく作成されたすべてのタブをデフォルトでコンパクト モードで開く"
                 },
                 newTabButtonBehavior: {
                     label: "新しいタブボタンの動作",
-                    description: "新しいタブ (+) ボタンは右側に固定されるのではなく、タブに従います。"
+                    description: "新しいタブ (+) ボタンは右側に固定されたままではなく、タブに従います"
                 },
                 oneTabPerServer: {
-                    label: "サーバーごとに単一のタブ",
-                    description: "サーバーのホップは 1 つだけとします。 新しいチャンネルを開いたときに同じタブを使用する"
+                    label: "サーバーごとに 1 つのタブ",
+                    description: "サーバーごとに 1 つのタブに制限されるため、そのサーバーで新しいチャネルを開くと既存のタブが使用されます。"
                 },
                 maxOpenTabs: {
                     label: "開いているタブの最大数",
-                    description: "同時に開くことができるタブの最大数 (0 = 無制限)"
+                    description: "開いているタブの最大数 (0 = 無制限)"
                 }
             },
             tabs: {
-                startup: "ホームタブ",
-                currently: "現在開いているタブを設定する"
+                startup: "起動タブ",
+                currently: "現在開いているタブに設定します"
             },
             toast: {
                 notRestoring: "KeepCurrentChannel が有効になっているためタブが復元されない",
                 failed: {
-                    restore: "タブを復元できませんでした",
+                    restore: "タブの復元に失敗しました",
                     saved: "保存したタブの読み込みに失敗しました"
                 }
             }
         },
         characterCounter: {
-            name: "キャラクターカウンター",
+            name: "CharacterCounter",
             description: "メッセージボックスに文字カウンターを表示します",
             option: {
                 colorEffects: {
                     label: "色の効果",
-                    description: "文字数制限に近づいたときに色の効果をオンまたはオフにする"
+                    description: "文字数制限に近づくためのカラー効果をオンまたはオフにします"
                 }
             }
         },
         cleanChannelGroups: {
             name: "CleanChannelGroups",
-            description: "未読のメッセージがある場合でも、折りたたまれたカテゴリ内のすべてのチャネルが非表示になるだけです。"
+            description: "未読メッセージがある場合でも、折りたたまれたカテゴリ内のすべてのチャネルを非表示にします。"
         },
         cleanChannelName: {
-            name: "クリーンチャンネル名",
-            description: "チャンネル名からすべての絵文字と愚かな装飾を削除します"
+            name: "CleanChannelName",
+            description: "チャンネル名からすべての絵文字と装飾を削除する"
         },
         clearURLs: {
-            name: "URL のクリア",
-            description: "送信した URL からトラッキング要素を自動的に削除します"
+            name: "ClearURLs",
+            description: "送信した URL から追跡要素を自動的に削除します"
         },
         clickableRoles: {
-            name: "クリック可能な役割",
-            description: "ユーザー プロファイルとメンバー リストで役割をクリックすると、メンバーがどの役割を持っているかを確認できます。",
+            name: "ClickableRoles",
+            description: "ユーザー プロファイルとメンバー リストのロールをクリックして、どのメンバーがそのロールを持っているかを確認します。",
             modal: {
                 loading: "メンバーを読み込んでいます...",
                 noMembers: "メンバーが見つかりませんでした。",
@@ -2374,13 +2374,13 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         clientSideBlock: {
-            name: "クライアントサイドブロック",
-            description: "ほぼすべてのコンテンツをローカルですべてのユーザーから非表示にすることができます",
+            name: "ClientSideBlock",
+            description: "ほぼすべてのコンテンツをローカルであらゆるユーザーから非表示にすることができます",
             replying: "ブロックされたメッセージに返信する",
             option: {
                 hideVc: {
-                    label: "音声チャンネルから隠す",
-                    description: "ブロックされたユーザーが含まれる音声チャネルを非表示にする"
+                    label: "音声チャンネルを非表示にする",
+                    description: "ブロックされたユーザーが含まれる音声チャネルを非表示にします。"
                 },
                 usersToBlock: {
                     label: "ブロックするユーザー",
@@ -2388,35 +2388,35 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 hideBlockedUsers: {
                     label: "ブロックされたユーザーを非表示にする",
-                    description: "ブロックされたユーザーをどこでも完全に非表示にします"
+                    description: "ブロックされたユーザーもどこにでも非表示にする必要があります"
                 },
                 hideBlockedMessages: {
                     label: "ブロックされたメッセージを非表示にする",
-                    description: "ブロックされたユーザーからのメッセージを完全に非表示にします (古い noblockedmessages プラグインと同じ)"
+                    description: "ブロックされたユーザーからのメッセージを完全に非表示にする必要がありますか (古い noblockedmessages プラグインと同じ)"
                 },
                 hideEmptyRoles: {
-                    label: "空席の役割を非表示にする",
-                    description: "すべてのメンバーがブロックされている場合は役割タイトルを非表示にする"
+                    label: "空の役割を非表示にする",
+                    description: "すべてのメンバーがブロックされている場合、ロールヘッダーを非表示にする必要がありますか"
                 },
                 blockedReplyDisplay: {
-                    label: "ブロックされた応答ビュー",
-                    description: "非表示にした相手に返信するときにメッセージの代わりに表示されるもの",
-                    displayText: "非表示のメッセージへの返信を示すテキストを表示する",
-                    hideReply: "何も見せないでください"
+                    label: "ブロックされた返信の表示",
+                    description: "あなたが非表示にした人に誰かが返信したときに、メッセージの代わりに何を表示する必要がありますか",
+                    displayText: "非表示のメッセージに返信されたことを示すテキストを表示する",
+                    hideReply: "文字通り何もない"
                 },
                 guildBlackList: {
-                    label: "サーバーのブラックリスト",
-                    description: "機能が無効になるサーバーID"
+                    label: "ギルドブラックリスト",
+                    description: "機能を無効にするギルド ID"
                 },
                 guildWhiteList: {
-                    label: "サーバーのホワイトリスト",
-                    description: "機能が有効になるサーバー ID"
+                    label: "ギルドのホワイトリスト",
+                    description: "機能を有効にするギルド ID"
                 }
             }
         },
         clientTheme: {
-            name: "クライアントのテーマ",
-            description: "古いクライアントテーマの実験のリメイク。 Discord クライアントテーマに色を追加する",
+            name: "ClientTheme",
+            description: "古いクライアントテーマの実験の再作成。 Discord クライアントテーマに色を追加する",
             title: "テーマカラー",
             add: "Discord クライアントテーマに色を追加する",
             option: {
@@ -2429,42 +2429,42 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             error: {
                 modal: {
-                    title: "テーマの見栄えが悪くなります。",
+                    title: "テーマの見栄えが良くありません。",
                     contrast: "選択した色はテキストとのコントラストが良くありません",
                     nitro: "Nitro テーマはサポートされていません",
-                    switch: "{{oppositeTheme}} モードに切り替えます",
+                    switch: "{{oppositeTheme}} モードに切り替える",
                     disable: "ニトロテーマを無効にする",
                     reset: "テーマカラーをリセット"
                 }
             }
         },
         clipsEnhancements: {
-            name: "クリップの機能強化",
+            name: "ClipsEnhancements",
             description: "クリップ FPS と期間のオプションをさらに追加し、さらに RPC タグを追加します。",
-            minutes: "ちょっと",
+            minutes: "分",
             option: {
                 richPresenceTagging: {
                     label: "リッチプレゼンスのタグ付け",
-                    description: "いつクリップに既存のリッチ プレゼンスをタグ付けする必要がありますか?",
+                    description: "いつクリップに現在のリッチ プレゼンスをタグ付けする必要がありますか?",
                     always: "いつも",
-                    only: "イベント名の先頭または末尾が一致した場合のみ",
+                    only: "アクティビティ名の先頭または末尾が一致する場合のみ",
                     never: "一度もない"
                 },
                 enableScreenshotKeybind: {
-                    label: "スクリーンショットホットキーを有効にする",
-                    description: "スクリーンショットのホットキー機能を有効にする"
+                    label: "スクリーンショットのキーバインドを有効にする",
+                    description: "スクリーンショットのキーバインド機能を有効にする"
                 },
                 enableVoiceOnlyClips: {
-                    label: "オーディオクリップのみを有効にする",
-                    description: "オーディオのみのクリップを有効にする (ビデオなしのオーディオ)"
+                    label: "音声のみのクリップを有効にする",
+                    description: "音声のみのクリップ (ビデオなしのオーディオ) を有効にする"
                 },
                 enableAdvancedSignals: {
                     label: "高度な信号を有効にする",
-                    description: "高度なクリップ信号を有効にする (自動クリップトリガー)"
+                    description: "高度なクリップ信号を有効にする (自動クリップ トリガー)"
                 },
                 ignorePlatformRestriction: {
-                    label: "プラットフォームの制限を無視する",
-                    description: "プラットフォーム固有のクリッピングを許可します (保存エラーが発生する可能性があります)"
+                    label: "プラットフォーム制限を無視する",
+                    description: "プラットフォーム制限クリッピングを許可する (保存エラーが発生する可能性があります)"
                 },
                 clipsLink: {
                     label: "クリップリンク",
@@ -2473,39 +2473,39 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         colorSighted: {
-            name: "色覚者",
-            description: "2015 ～ 2017 年の Discord と同様に、色盲に優しいアイコンを状況から削除します。"
+            name: "ColorSighted",
+            description: "2015 ～ 2017 年の Discord と同様に、色盲に優しいアイコンをステータスから削除します"
         },
         commandPalette: {
-            name: "コマンドパレット",
-            description: "キーボードを使用してインターフェイスを移動できるようになります。",
+            name: "CommandPalette",
+            description: "キーボードを使用して UI を操作できます。",
             action: {
                 command: {
                     label: "コマンドの実行",
-                    description: "ID を指定して別のパレット コマンドを実行します。 識別子がわからない場合は、セレクターを使用してください。"
+                    description: "ID を使用して別のパレット コマンドにエイリアスを付けます。識別子が不明な場合はピッカーを使用してください。"
                 },
                 settings: {
                     label: "設定ページを開く",
-                    description: "Discordの設定ページに直接移動します。 チューザーからページを選択します。"
+                    description: "Discord の設定ページに直接ジャンプします。ピッカーからページを選択します。"
                 },
                 url: {
                     label: "URLを開く",
-                    description: "リンクを開きます。 互換性を最大限に高めるには、https:// リンクを使用してください。"
+                    description: "リンクを開きます。互換性を最大限に高めるには、https:// リンクを使用してください。"
                 },
                 macro: {
                     label: "マクロの実行",
-                    description: "一連のコマンドを順番に実行します。 セレクターを介してステップを追加します。"
+                    description: "一連のコマンドを順番に実行します。ピッカーを使用してステップを追加します。"
                 }
             },
             category: {
-                auto: "自動 (デフォルトのレイアウトを使用)",
+                auto: "自動 (デフォルトの配置を使用)",
                 default: {
-                    label: "クイックトランザクション",
+                    label: "クイックアクション",
                     description: "一般的な Plexcord のショートカット"
                 },
                 plugins: {
                     label: "プラグイン",
-                    description: "Plexcord プラグインを有効、無効、および構成します。",
+                    description: "Plexcord プラグインの有効化、無効化、および構成",
                     enable: {
                         label: "プラグインを有効にする"
                     },
@@ -2527,7 +2527,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 context: {
                     label: "現在のコンテキスト",
-                    description: "選択したチャネルとサーバーのアクション"
+                    description: "選択したチャンネルとギルドのアクション"
                 },
                 updates: {
                     label: "アップデート",
@@ -2535,26 +2535,26 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 discordSettings: {
                     label: "Discordの設定",
-                    description: "Discord設定ページに移動します"
+                    description: "Discord設定ページにジャンプします"
                 },
                 custom: {
-                    label: "特別なコマンド",
-                    description: "ユーザー定義のコマンド パレット エントリ"
+                    label: "カスタムコマンド",
+                    description: "ユーザー定義のコマンドパレットエントリ"
                 },
                 sessions: {
                     label: "セッションツール",
-                    description: "Discord セッションを管理するためのツール"
+                    description: "Discord セッションを管理するためのユーティリティ"
                 },
                 guilds: {
-                    label: "サーバー",
-                    description: "サーバーにすばやく移動します"
+                    label: "ギルド",
+                    description: "ギルドに素早く移動"
                 },
                 friends: {
                     label: "友達",
-                    description: "急いで友達のところへ行きましょう"
+                    description: "友達にすばやく移動"
                 },
                 action: {
-                    label: "アクション",
+                    label: "アクション"
                 }
             },
             builtIn: {
@@ -2565,73 +2565,73 @@ const translations: MatchStructure<typeof enTranslations> = {
                     }
                 },
                 reload: {
-                    label: "Discordを再インストールする",
+                    label: "ディスコードをリロードする",
                     description: "現在の Discord ウィンドウをリロードします"
                 }
             },
             command: {
-                enable: "{{プラグイン名}}を有効にする",
-                enabled: "{{pluginName}} が有効になりました",
-                disable: "{{プラグイン名}}を無効にする",
-                disabled: "{{pluginName}} が無効になりました",
-                failed: "コマンドは失敗しました:",
-                toggleFailed: "{{pluginName}} を変更できませんでした。",
-                pluginSettings: "{{pluginName}} の設定",
-                untitled: "匿名コマンド",
+                enable: "{{pluginName}} を有効にする",
+                enabled: "{{pluginName}}を有効にしました",
+                disable: "{{pluginName}} を無効にする",
+                disabled: "無効 {{pluginName}}",
+                failed: "コマンドが失敗しました:",
+                toggleFailed: "{{pluginName}} を切り替えることができませんでした。",
+                pluginSettings: "{{pluginName}} 設定",
+                untitled: "無題のコマンド",
                 new: "新しいコマンド",
                 error: {
-                    enter: "コマンドIDを入力するか、以下を選択してください。",
+                    enter: "コマンド ID を入力するか、以下から 1 つを選択します。",
                     noCommand: "この ID に一致するコマンドはありません。"
                 },
                 discord: {
                     account: "マイアカウントを開く",
-                    privacy: "データとプライバシーをオープンにする",
-                    notifications: "通知をオンにする",
-                    voice: "オーディオとビデオをオンにする",
+                    privacy: "オープンデータとプライバシー",
+                    notifications: "通知を開く",
+                    voice: "音声とビデオを開く",
                     text: "テキストと画像を開く",
-                    appearance: "ビューを開く",
+                    appearance: "オープンな外観",
                     accessibility: "オープンなアクセシビリティ",
-                    keybinds: "キーバインドをオンにする",
-                    advanced: "詳細設定を開く",
+                    keybinds: "キーバインドを開く",
+                    advanced: "アドバンストを開く",
                 },
                 updates: {
                     check: {
                         label: "アップデートをチェックする",
                         description: "Plexcord のアップデートを確認する",
-                        one: "アップデートが利用可能です",
-                        multiple: "{{count}} 件のアップデートが利用可能",
-                        none: "更新はありません",
+                        one: "利用可能なアップデートが 1 つあります",
+                        multiple: "{{count}} アップデートが利用可能です",
+                        none: "利用可能なアップデートはありません",
                         failed: "アップデートの確認に失敗しました。"
                     },
                     changelog: {
                         label: "変更ログの表示",
-                        description: "Plexcord が変更ログを開く"
+                        description: "Plexcord変更ログを開きます"
                     }
                 },
                 read: {
                     mark: {
-                        label: "{{channelLabel}} 既読としてマーク"
+                        label: "{{channelLabel}} をマークして読み取り"
                     }
                 },
                 pin: {
                     open: {
-                        label: "{{channelLabel}} ピンをオンにする"
+                        label: "{{channelLabel}} のピンを開く"
                     },
                     toggle: {
-                        label: "最後のコマンドの固定を切り替え"
+                        label: "最後のコマンドでピンを切り替えます"
                     }
                 },
                 channel: {
                     mute: {
-                        label: "{{channelLabel}} ススター",
-                        oneHour: "チャンネル {{channelLabel}} を 1 時間ミュートします",
-                        untilTomorrow: "明日までチャンネル {{channelLabel}} をミュートします",
+                        label: "{{channelLabel}} をミュート",
+                        oneHour: "{{channelLabel}} を 1 時間ミュートします",
+                        untilTomorrow: "明日まで{{channelLabel}}をミュートします",
                     },
                     unmute: {
-                        label: "{{channelLabel}}のミュートを解除する",
+                        label: "{{channelLabel}} のミュートを解除",
                     },
                     reopen: {
-                        label: "最後に閉じたDMを再開する"
+                        label: "最後に閉じたDMを再開します"
                     },
                     dm: {
                         open: {
@@ -2641,15 +2641,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 guild: {
                     settings: {
-                        label: "{{guildLabel}}の設定を開きます"
+                        label: "{{guildLabel}} の設定を開く"
                     },
                     navigate: {
-                        label: "{{guildLabel}}サーバーに移動します"
+                        label: "{{guildLabel}} に移動します"
                     }
                 },
                 session: {
-                    thirtyMinutesDnd: "30 分間邪魔しないでください",
-                    oneHourDnd: "1 時間の邪魔しないでください",
+                    thirtyMinutesDnd: "30分間のサイレントモードを設定します",
+                    oneHourDnd: "1時間のサイレントモードを設定します",
                     cancelStatusReset: "キャンセルステータスタイマー"
                 },
                 status: {
@@ -2661,30 +2661,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                     }
                 },
                 toggle: {
-                    streamer: "ストリーマーモードの切り替え",
+                    streamer: "Toggle Streamer Mode",
                     mute: "セルフミュートの切り替え",
-                    deafen: "自動聴覚障害の切り替え",
+                    deafen: "Toggle Self Deafen",
                 },
                 notification: {
                     clear: {
-                        label: "デスクトップ通知をクリアする"
+                        label: "Clear Desktop Notifications"
                     }
                 },
                 palette: {
                     settings: {
                         label: "コマンドパレット設定を開く",
-                        description: "コマンドパレットプラグインの設定"
+                        description: "コマンド パレット プラグインを構成する"
                     }
                 },
                 recent: {
                     label: "最近のコマンドを表示",
-                    description: "最近実行したコマンドを表示します",
+                    description: "最後に実行されたコマンドを表示します",
                     rerun: "最後のコマンドを再実行する"
                 },
                 plugin: {
                     reload: {
-                        label: "すべてのプラグインを再インストールする",
-                        description: "すべてのアクティブなプラグインを即座に再ロードしようとします"
+                        label: "すべてのプラグインをリロードする",
+                        description: "有効になっているすべてのプラグインをホットリロードしようとします"
                     },
                     enable: {
                         label: "すべてのプラグインを有効にする"
@@ -2710,7 +2710,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             modal: {
-                searchPlaceholder: "コマンドを検索する",
+                searchPlaceholder: "検索コマンド",
                 noCommand: "コマンドが見つかりません",
                 add: {
                     title: "コマンドの追加"
@@ -2722,10 +2722,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     palette: {
                         label: "コマンドパレット",
                         placeholder: "コマンドを入力してください",
-                        filtering: "{{タグ}}によるフィルタリング",
+                        filtering: "{{tags}} によるフィルタリング",
                         noCommand: "コマンドが見つかりません",
                         pin: "ピンコマンド",
-                        unpin: "固定を解除する"
+                        unpin: "固定解除コマンド"
                     },
                     target: {
                         label: "対象コマンドID",
@@ -2733,13 +2733,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                         choose: "コマンドの選択"
                     },
                     custom: {
-                        label: "特別なコマンド",
-                        description: "1) コマンドに名前を付けます · 2) オプションの説明/キーワード/タグ/カテゴリを追加します · 3) アクションを選択し、詳細を入力します (エイリアスとマクロの ID は既存のパレット コマンドと一致する必要があります)。",
+                        label: "カスタムコマンド",
+                        description: "1) コマンドに名前を付けます · 2) オプションの説明/キーワード/タグ/カテゴリを追加します · 3) アクションを選択し、その詳細を入力します (ID はエイリアスとマクロの既存のパレット コマンドと一致する必要があります)。",
                         auto: "自動 (デフォルト)",
                         expand: "拡大する",
                         collapse: "崩壊",
                         collapsed: {
-                            label: "チケット",
+                            label: "ラベル",
                             description: "表示名",
                             advanced: {
                                 hide: "詳細オプションを非表示にする",
@@ -2747,7 +2747,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                             },
                             subtitle: {
                                 label: "説明",
-                                placeholder: "オプションの小見出し"
+                                placeholder: "オプションのサブタイトル"
                             },
                             keywords: {
                                 label: "キーワード",
@@ -2786,7 +2786,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 macro: {
                     sequence: {
-                        label: "スクリプト",
+                        label: "コマンドシーケンス",
                         placeholder: "コマンド-a、コマンド-b"
                     },
                     addStep: "ステップの追加",
@@ -2800,132 +2800,132 @@ const translations: MatchStructure<typeof enTranslations> = {
                 invisible: "見えない"
             },
             tag: {
-                core: "ヒマワリの種",
-                navigation: "散策",
-                utility: "車両",
+                core: "コア",
+                navigation: "ナビゲーション",
+                utility: "ユーティリティ",
                 developer: "開発者",
                 customization: "カスタマイズ",
                 plugins: "プラグイン",
                 session: "セッション",
                 context: "コンテクスト",
-                custom: "特別",
-                guilds: "サーバー",
+                custom: "カスタム",
+                guilds: "ギルド",
                 friends: "友達",
                 other: "他の"
             },
             toast: {
                 chat: {
                     button: {
-                        unableToFind: "チャット ボタン「{{label}}」が見つかりません。",
+                        unableToFind: "「{{label}}」チャット ボタンが見つかりません。",
                         failedToTrigger: "{{label}} をトリガーできませんでした。",
-                        activated: "{{label}} が有効化されています。"
+                        activated: "{{label}} がアクティブになりました。"
                     }
                 },
                 channel: {
                     mute: {
-                        unavailable: "チャンネルミュートコントロールは利用不可",
-                        muted: "チャンネルは沈黙されました。",
-                        unmuted: "チャンネルはミュートされています。",
+                        unavailable: "チャンネルミュートコントロールは使用不可",
+                        muted: "ミュートされたチャンネル。",
+                        unmuted: "ミュート解除されたチャンネル。",
                         failed: "チャンネルのミュート状態を更新できませんでした。"
                     },
                     dm: {
-                        no: "このセッションでは DM のクローズは記録されていません。",
+                        no: "このセッションは記録された DM クローズはありませんでした。",
                         reOpened: "前回閉じていたDMを再開しました。",
-                        noAvailable: "DMはご利用できなくなりました。"
+                        noAvailable: "DMは利用できなくなりました。"
                     }
                 },
                 command: {
                     loop: "マクロ実行中にコマンドループが検出されました。",
-                    notFound: "{{commandId}} コマンドが見つかりませんでした。",
+                    notFound: "コマンド {{commandId}} が見つかりません。",
                     unsupported: "サポートされていないカスタム コマンド アクションです。",
-                    failedToRun: "{{label}}の実行に失敗しました。",
-                    notMetadata: "コマンド パレット プラグインのメタデータは利用できません。"
+                    failedToRun: "{{label}} の実行に失敗しました。",
+                    notMetadata: "コマンド パレット プラグインのメタデータが利用できません。"
                 },
                 guild: {
                     mute: {
-                        unavailable: "サーバーのミュート制御は使用できません",
-                        muted: "サーバーは沈黙しました。",
-                        unmuted: "サーバーのミュートが解除されました。",
-                        failed: "サーバーのミュート状態を更新できませんでした。"
+                        unavailable: "ギルドのミュート制御は利用できません",
+                        muted: "沈黙のギルド。",
+                        unmuted: "ミュートされていないギルド。",
+                        failed: "ギルドのミュート状態を更新できませんでした。"
                     },
                     settings: {
-                        unable: "サーバー設定を開けません。",
+                        unable: "ギルド設定を開けません。",
                     }
                 },
                 panel: {
                     pin: {
-                        unable: "固定パネルは開けられません。",
+                        unable: "ピンパネルを開けません。",
                     }
                 },
                 status: {
                     reset: {
-                        canceled: "予定されていたステータスリセットは中止されました。",
-                        unableToChange: "現時点ではステータスを変更することはできません。",
-                        reverted: "ステータスは {{status}} として返されます。",
-                        dnd: "{{duration}}分間は「おやすみ」にしてください。"
+                        canceled: "スケジュールされたステータスのリセットがキャンセルされました。",
+                        unableToChange: "現在ステータスを変更できません。",
+                        reverted: "ステータスが {{status}} に戻りました。",
+                        dnd: "{{duration}}分間は邪魔しないでください。"
                     },
                     change: {
-                        unableToChange: "現時点ではステータスを変更することはできません。",
-                        changed: "ステータスが {{status}} に変更されました。"
+                        unableToChange: "現在ステータスを変更できません。",
+                        changed: "ステータスが{{status}}に変更されました。"
                     }
                 },
                 read: {
-                    marked: "{{channelLabel}} は既読としてマークされています。",
+                    marked: "{{channelLabel}} を既読としてマークしました。",
                     failed: "チャネルを既読としてマークできませんでした。"
                 },
                 route: {
-                    unable: "{{宛先}}を開けません。",
+                    unable: "{{destination}}を開けません。",
                 },
                 notification: {
-                    cleared: "すべての通知がクリアされました。",
+                    cleared: "すべての通知をクリアしました。",
                     failed: "通知をクリアできませんでした。",
                     notSupported: "通知の消去はサポートされていません。"
                 },
                 streamerMode: {
-                    enabled: "ブロードキャスターモードが有効になっています。",
-                    disabled: "ブロードキャスターモードは無効になっています。",
+                    enabled: "ストリーマーモードが有効になりました。",
+                    disabled: "ストリーマーモードが無効になっています。",
                 },
                 voice: {
                     micToggle: {
-                        muted: "マイクは沈黙されました。",
-                        unmuted: "マイクがオンになっています。"
+                        muted: "マイクがミュートになっています。",
+                        unmuted: "マイクのミュートが解除されています。"
                     },
                     deafenToggle: {
-                        deafened: "あなたは今、聴覚障害者です。",
-                        undeafened: "あなたはもう聴覚障害者ではありません。"
+                        deafened: "あなたは今、耳が聞こえなくなっています。",
+                        undeafened: "あなたはもう耳が聞こえなくなりました。"
                     }
                 },
                 quickCSS: {
-                    enabled: "高速CSSが有効になっています。",
-                    disabled: "高速CSSは無効になっています。"
+                    enabled: "クイックCSSが有効になりました。",
+                    disabled: "クイックCSSが無効になっています。"
                 },
                 transparentity: {
-                    enabled: "ウィンドウの透明度が有効になっています。",
+                    enabled: "ウィンドウの透明度が有効になりました。",
                     disabled: "ウィンドウの透明度が無効になっています。"
                 },
                 plugin: {
                     disabled: {
                         label: "{{pluginName}} は無効になっています。",
-                        disable: "{{pluginName}} は無効になっています。 このアクションを使用するには、プラグインを有効にしてください。"
+                        disable: "{{pluginName}} は無効になっています。プラグインがこのアクションを使用できるようにします。"
                     },
                     required: {
-                        label: "{{pluginName}} を再インストールするには再起動が必要です。"
+                        label: "{{pluginName}} をリロードするには再起動が必要です。"
                     },
                     stop: {
                         failed: "{{pluginName}} を停止できませんでした。"
                     },
                     restart: {
-                        failed: "{{pluginName}} を再起動できませんでした。"
+                        failed: "{{pluginName}} の再起動に失敗しました。"
                     },
                     reload: {
-                        label: "{{pluginName}} がリロードされました。",
-                        noPlugin: "プラグインは再インストールされませんでした。",
-                        reloaded: "{{count}} 個のプラグインが再インストールされました。"
+                        label: "{{pluginName}} をリロードしました。",
+                        noPlugin: "プラグインはリロードされませんでした。",
+                        reloaded: "{{count}} プラグイン{{s}} をリロードしました。"
                     },
                     toggle: {
-                        enabled: "{{changed}} プラグインが有効になりました。",
-                        disabled: "{{changed}} プラグインは無効になっています。",
-                        noChanged: "プラグインのステータスは変更されていません。"
+                        enabled: "{{changed}} プラグイン{{s}} を有効にしました。",
+                        disabled: "{{changed}} プラグイン{{s}} を無効にしました。",
+                        noChanged: "状態が変更されたプラグインはありません。"
                     },
                     run: {
                         failed: {
@@ -2941,7 +2941,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     direct: "ダイレクトメッセージ"
                 },
                 guild: {
-                    current: "現在のサーバー",
+                    current: "現在のギルド",
                 }
             },
             option: {
@@ -2953,44 +2953,44 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 visualStyle: {
                     label: "ビジュアルスタイル",
-                    description: "パレットビュー",
+                    description: "パレットの外観",
                     classic: "クラシック",
-                    polished: "ポリッシュ（モダン）"
+                    polished: "ポリッシュ"
                 },
                 showTags: {
                     label: "タグを表示",
-                    description: "コマンドのラベルを表示する"
+                    description: "コマンドのタグチップを表示"
                 },
                 enableTagFilter: {
                     label: "タグフィルターを有効にする",
-                    description: "タグフィルターバーを表示"
+                    description: "タグフィルターバーを表示する"
                 },
                 customCommands: {
-                    label: "特別なコマンド",
+                    label: "カスタムコマンド",
                     description: "カスタム コマンド パレット エントリを管理する"
                 }
             },
             template: {
                 alias: {
-                    label: "ニックネームコマンド",
-                    description: "既存のコマンドを反映します"
+                    label: "エイリアスコマンド",
+                    description: "既存のコマンドをミラーリングする"
                 },
                 settings: {
                     label: "設定",
                     description: "Discord設定を開く"
                 },
                 url: {
-                    label: "繋がり",
-                    description: "外部URLを開きます"
+                    label: "リンク",
+                    description: "外部URLを開く"
                 },
                 macro: {
                     label: "マクロ",
-                    description: "一連のコマンドを実行します"
+                    description: "一連のコマンドを実行する"
                 }
             }
         },
         consoleJanitor: {
-            name: "コンソール管理人",
+            name: "ConsoleJanitor",
             description: "煩わしいコンソールメッセージ/エラーを無効にします",
             option: {
                 disableLoggers: {
@@ -2999,44 +2999,44 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 disableSpotifyLogger: {
                     label: "Spotify ロガーを無効にする",
-                    description: "アカウント情報やアクセスキーを漏洩するSpotifyロガーを無効にする"
+                    description: "アカウント情報やアクセストークンが漏洩するSpotifyロガーを無効にする"
                 },
                 whitelistedLoggers: {
                     label: "ホワイトリストに登録されたロガー",
-                    description: "他のロガーが非表示であっても許可されるロガーのセミコロン (;) で区切られたリスト"
+                    description: "他のロガーが非表示になっている場合でも許可する、セミコロン (;) で区切られたロガーのリスト"
                 },
                 allowLevel: {
-                    label: "許容レベル",
-                    description: "これらのタイプのロガーを常に許可する",
+                    label: "許可レベル",
+                    description: "これらのタイプのロガーを常に許可します",
                     filter: "フィルタリスト"
                 }
             }
         },
         consoleShortcuts: {
-            name: "コンソールのショートカット",
-            description: "ウィンドウ上のさまざまな項目に対する短いショートカットを追加します。 リストに対して `shortcutList` を実行します。"
+            name: "Console Shortcuts",
+            description: "ウィンドウ上のさまざまなものに短いエイリアスを追加します。リストに対して `shortcutList` を実行します。"
         },
         contentWarning: {
-            name: "コンテンツ警告",
-            description: "デフォルトで特定のトリガーワードをぼかすことができます。 ぼやけたコンテンツをクリックすると、表示されるようになります。",
+            name: "ContentWarning",
+            description: "デフォルトでぼかされる特定のトリガーワードを指定できます。ぼやけたコンテンツをクリックすると、そのコンテンツが表示されます。",
             option: {
                 flagged: {
-                    label: "マーク",
-                    flagged: "マークされた単語",
+                    label: "フラグ付き",
+                    flagged: "フラグ付きの単語",
                     placeholder: "言葉"
                 },
                 onClick: {
-                    label: "それをクリックしてください",
-                    description: "マウスオーバー時だけでなく、クリック時にコンテンツを表示する"
+                    label: "クリック時",
+                    description: "ホバーではなくクリック時にのみトリガーコンテンツを表示します"
                 }
             }
         },
         copyEmojiMarkdown: {
-            name: "絵文字マークダウンをコピー",
-            description: "絵文字をフォーマットされたテキストとしてコピーできます (<a:blob_pwease:1402403381900742737>)",
+            name: "CopyEmojiMarkdown",
+            description: "絵文字を書式設定された文字列としてコピーできます (<a:blob_pwease:1402403381900742737>)",
             option: {
                 copyUnicode: {
-                    label: "Unicode コピー",
+                    label: "Unicode をコピーする",
                     description: "デフォルトの絵文字の :name: の代わりに生の Unicode 文字をコピーします (👽)"
                 }
             },
@@ -3044,36 +3044,36 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copy: "絵文字マークダウンをコピー"
             },
             toast: {
-                success: "成功！ 絵文字のマークダウンがコピーされました。"
+                success: "成功！絵文字マークダウンをコピーしました。"
             }
         },
         copyFileContents: {
-            name: "ファイルの内容をコピー",
-            description: "テキストファイルの添付ファイルに内容をコピーするボタンを追加します",
+            name: "CopyFileContents",
+            description: "テキストファイルの添付ファイルに内容をコピーするためのボタンを追加します",
             copied: "コピーしました！",
             large: "ファイルが大きすぎてコピーできません。",
             copyFileContents: "ファイルの内容をコピーする"
         },
         copyProfileColors: {
-            name: "プロファイルの色をコピー",
-            description: "ユーザーのプロフィールのグラデーションカラーをクリップボードにコピーするプラグイン。",
+            name: "CopyProfileColors",
+            description: "人のプロフィールのグラデーションカラーをクリップボードにコピーするプラグイン。",
             copy: "プロファイルの色のコピー",
             toast: {
                 noColor: "プロファイルの色が見つかりません!",
                 copied: "プロファイルの色がクリップボードにコピーされました。",
-                error: "プロファイルカラーのコピー中にエラーが発生しました!"
+                error: "プロファイルの色のコピー中にエラーが発生しました!"
             }
         },
         copyStatusUrls: {
-            name: "ステータスURLのコピー",
-            description: "右クリックしてユーザーのステータス URL をコピーします",
+            name: "CopyStatusUrls",
+            description: "ユーザーのステータス URL を右クリックしてコピーします",
             toast: {
-                copied: "URLをコピーしました",
+                copied: "コピーしたURL",
                 error: "URL のコピー中にエラーが発生しました。詳細についてはコンソールを確認してください"
             }
         },
         copyStickerLinks: {
-            name: "ステッカーリンクのコピー",
+            name: "CopyStickerLinks",
             description: "ステッカーのリンクをコピーして開く機能を追加します",
             context: {
                 copy: "リンクをコピー",
@@ -3084,72 +3084,72 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         copyUserMention: {
-            name: "ユーザーメンションのコピー",
-            description: "ユーザーのメンションをコピーするためのボタンをユーザーのコンテキスト メニューに追加します。 ValidUser で最適に動作します。",
+            name: "CopyUserMention",
+            description: "ユーザーのコンテキスト メニューにユーザーのメンションをコピーするボタンを追加します。ValidUser で最適に機能します。",
             context: {
                 copy: "ユーザーメンションをコピー"
             }
         },
         copyUserURLs: {
-            name: "ユーザーURLのコピー",
+            name: "CopyUserURLs",
             description: "ユーザーのコンテキスト メニューに「ユーザー URL をコピー」オプションを追加します。",
             context: {
                 copy: "ユーザーのURLをコピー"
             }
         },
         crashHandler: {
-            name: "クラッシュハンドラ",
-            description: "再起動せずにクラッシュを管理し、可能であれば回復するためのヘルパー プラグイン",
+            name: "CrashHandler",
+            description: "再起動せずにクラッシュを処理し、場合によっては回復するためのユーティリティ プラグイン",
             option: {
                 attemptToPreventCrashes: {
-                    label: "クラッシュを防ぐように努めてください",
-                    description: "Discord のクラッシュを防ぎたいですか?"
+                    label: "クラッシュを防ぐ試み",
+                    description: "Discord のクラッシュを防ぐかどうか。"
                 },
                 attemptToNavigateToHome: {
-                    label: "ホームページへのリダイレクトを試みます",
-                    description: "クラッシュ後の回復でメインタブへのリダイレクトを試みます。"
+                    label: "ホームに移動しようとします",
+                    description: "クラッシュリカバリ時にホームタブへの移動を試行するかどうか。"
                 }
             },
             toast: {
                 crashed: {
                     title: "Discordがクラッシュしました！",
-                    body: "おっと :( Discord は短期間に 2 回クラッシュしました。回復は試行されません。ここをクリックしてサポート サーバーに参加してください。",
-                    update: "いや、Discord がクラッシュしたばかりです…しかし朗報です。この問題を解決できる Plexcord アップデートがあります。 今すぐ更新しますか?",
-                    recover: "回復しようとしています... ここをクリックしてサポートサーバーに参加してください!",
+                    body: "Awn :( Discord は 2 回急速にクラッシュしましたが、回復しようとしませんでした。ここをクリックしてサポート サーバーに参加してください!",
+                    update: "ああ、Discord がクラッシュしました...しかし良いニュースです。この問題を修正する可能性のある Plexcord アップデートが利用可能です。今すぐ更新しますか?",
+                    recover: "回復を試みています... ここをクリックしてサポート サーバーに参加してください!",
                     invalid: "招待リンクが無効または期限切れです。"
                 }
             }
         },
         ctrlEnterSend: {
-            name: "CtrlEnter送信",
+            name: "CtrlEnterSend",
             description: "Ctrl+Enter を使用してメッセージを送信します (カスタマイズ可能)",
             option: {
                 submitRule: {
-                    label: "投稿ルール",
-                    description: "メッセージの送信方法",
+                    label: "ルールの送信",
+                    description: "メッセージを送る方法",
                     ctrlEnter: "Ctrl+Enter (Enter または Shift+Enter で改行) (macOS では cmd+Enter)",
                     shiftEnter: "Shift+Enter (改行の場合は Enter)",
                     enter: "Enter (Shift+Enter で改行、Discord のデフォルト)"
                 },
                 sendMessageInTheMiddleOfACodeBlock: {
                     label: "コードブロックの途中でメッセージを送信する",
-                    description: "コードブロックの途中でメッセージを送信する"
+                    description: "コードブロックの途中でメッセージを送信するかどうか"
                 }
             }
         },
         cursorBuddy: {
-            name: "カーソルバディ",
+            name: "CursorBuddy",
             description: "カーソルに追従するスプライトを追加します。",
             modal: {
                 furColor: "毛皮の色",
-                outlineColor: "アナハト・レンギ"
+                outlineColor: "輪郭の色"
             },
             option: {
                 buddy: {
                     label: "バディ",
-                    description: "カーソルフレンドを選択してください",
-                    oneko: "良い",
-                    fathorse: "太った馬"
+                    description: "カーソルバディを選択してください",
+                    oneko: "オネコ",
+                    fathorse: "ファタスホース"
                 },
                 speed: {
                     label: "スピード",
@@ -3157,50 +3157,50 @@ const translations: MatchStructure<typeof enTranslations> = {
                     invalid: "速度は0より大きくなければなりません"
                 },
                 fps: {
-                    label: "フレームレート (FPS)",
-                    description: "あなたのバディのフレームレート",
+                    label: "フレームレート",
+                    description: "相棒のフレームレート",
                     invalid: "フレームレートは0より大きくなければなりません"
                 },
                 onekoSection: {
-                    label: "良い"
+                    label: "オネコ"
                 },
                 furColor: {
                     label: "毛皮の色",
-                    description: "oneko のファーの 16 進カラー"
+                    description: "Oneko のファーの六角カラー"
                 },
                 outlineColor: {
-                    label: "アナハト・レンギ",
+                    label: "輪郭の色",
                     description: "Oneko のアウトライン 16 進カラー"
                 },
                 fathorseSection: {
-                    label: "太った馬"
+                    label: "ファタスホース"
                 },
                 size: {
-                    label: "寸法",
+                    label: "サイズ",
                     description: "太った馬の大きさ",
                     invalid: "サイズは0より大きくなければなりません"
                 },
                 fade: {
-                    label: "色褪せ",
-                    description: "カーソルが近づいたときに馬がフェードするかどうか"
+                    label: "フェード",
+                    description: "カーソルが近くにあるときに馬がフェードする場合"
                 },
                 freeroam: {
-                    label: "フリーローミング",
-                    description: "馬がアイドル状態のときに自由に歩き回ることができるかどうか"
+                    label: "フリーローム",
+                    description: "馬がアイドル状態のときに自由に歩き回るべきかどうか"
                 },
                 shake: {
-                    label: "解任",
-                    description: "馬が歩いているときに窓を振るかどうか"
+                    label: "シェイク",
+                    description: "馬が歩いているときに窓を揺らしたら"
                 }
             }
         },
         customFolderIcons: {
-            name: "カスタムフォルダーアイコン",
-            description: "任意の png を使用してフォルダー アイコンをカスタマイズします",
+            name: "CustomFolderIcons",
+            description: "任意の PNG を使用してフォルダー アイコンをカスタマイズ",
             option: {
                 solidIcon: {
-                    label: "フラットアイコン",
-                    description: "画像の背景には無地の背景を使用します"
+                    label: "実線のアイコン",
+                    description: "画像の背景に無地の背景を使用する"
                 },
                 folderIcons: {
                     label: "フォルダーアイコン",
@@ -3210,63 +3210,63 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 change: "フォルダーアイコンのサイズを変更する",
                 save: "保存",
-                unset: "取り除く",
+                unset: "設定を解除する",
                 set: "新しいアイコンを設定する",
-                hover: "フォルダーを更新するように設定した後、フォルダーの上にマウスを移動する必要がある場合があります。"
+                hover: "設定後にフォルダーを更新するには、フォルダーの上にマウスを移動する必要がある場合があります。"
             }
         },
         customIdle: {
-            name: "カスタムアイドル",
-            description: "Discordがアイドルモードになる（または自動アイドルモードを無効にする）までの時間を設定できます。",
-            backOnline: "おかえり！ ボタンをクリックしてオンラインにアクセスします。 [X] をクリックすると、リロードされるまでアイドル状態になります。",
+            name: "CustomIdle",
+            description: "Discordがアイドル状態になるまでの時間を設定できます（または自動アイドルを無効にします）。",
+            backOnline: "おかえり！ボタンをクリックしてオンラインにアクセスします。 [X] をクリックすると、リロードするまでアイドル状態になります。",
             exit: "アイドル状態を終了",
             option: {
                 idleTimeout: {
                     label: "アイドルタイムアウト",
-                    description: "Discord がアイドル モードになるまでの分数 (自動アイドル モードを無効にする場合は 0)"
+                    description: "Discord がアイドル状態になるまでの分数 (自動アイドルを無効にする場合は 0)"
                 },
                 remainInIdle: {
-                    label: "アイドル状態を保つ",
+                    label: "アイドル状態のままにする",
                     description: "Discord に戻ったら、オンラインにすることを確認するまでアイドル状態のままにしてください"
                 }
             }
         },
         customRPC: {
-            name: "カスタムRPC",
-            description: "完全にカスタマイズ可能なリッチ プレゼンスを Discord プロフィールに追加します",
+            name: "CustomRPC",
+            description: "完全にカスタマイズ可能なリッチ プレゼンス (ゲーム ステータス) を Discord プロフィールに追加します",
             goTo: "{{portal}} に移動してアプリケーションを作成し、アプリケーション ID を取得します。",
-            upload: "[リッチ プレゼンス] タブから画像をアップロードして画像キーを取得します。",
-            image: "画像リンクを使用したい場合は、画像をダウンロードして {{imgur}} にアップロードし、画像を右クリックして [画像アドレスをコピー] を使用してリンクを取得します。",
-            button: "自分のプロフィールには自分のボタンは表示されませんが、他の人には通常どおりに表示されます。",
-            font: "一部の奇妙な Unicode 文字 ('𝖇ö𝖞𝖑𝖊 𝖞𝖆𝖟ı𝖑𝖆𝖗') は、リッチ プレゼンスが表示されない原因となる場合があります。代わりに通常の文字を使用してみてください。",
+            upload: "[リッチ プレゼンス] タブで画像をアップロードして画像キーを取得します。",
+            image: "画像リンクを使用したい場合は、画像をダウンロードして {{imgur}} に再アップロードし、画像を右クリックして [画像アドレスをコピー] を選択して画像リンクを取得します。",
+            button: "自分のプロフィールには自分のボタンは表示されませんが、他の人には問題なく表示されます。",
+            font: "一部の奇妙な Unicode テキスト (「フォント」 𝖑𝖎𝖐𝖊 𝖙𝖍𝖎𝖘) によってリッチ プレゼンスが表示されない可能性があります。代わりに通常の文字を使用してみてください。",
             placeholder: "値を入力してください",
             select: "オプションを選択してください",
             error: {
-                appIdInvalid: "アプリケーション ID は有効な数値ではありません。",
-                notice: "警告",
-                sharing: "イベント共有が有効になっていないため、他の人はあなたのプライベート リッチ プレゼンスを見ることができません。",
-                enable: "活性化",
-                validStream: "投稿リンクは有効な URL である必要があります。",
+                appIdInvalid: "アプリ ID は有効な番号である必要があります。",
+                notice: "知らせ",
+                sharing: "アクティビティの共有が有効になっていないため、ユーザーはカスタム リッチ プレゼンスを見ることができません。",
+                enable: "有効にする",
+                validStream: "ストリーミング リンクは有効な URL である必要があります。",
                 mustBeURL: "有効な URL である必要があります。",
-                streamCharacters: "投稿リンクは 512 文字以下にする必要があります。",
-                dontUse: "Discord リンクは使用しないでください。 代わりに Imgur 画像リンクを使用してください。",
-                imgur: "Imgur リンクは画像に直接リンクする必要があります (例: https://i.imgur.com/...)。 画像を右クリックし、「画像アドレスをコピー」をクリックします。",
-                tenor: "Tenor リンクは画像に直接リンクする必要があります (例: https://media.tenor.com/...)。 GIFを右クリックし、「画像アドレスをコピー」をクリックします。",
+                streamCharacters: "ストリーミング リンクは 512 文字以下にする必要があります。",
+                dontUse: "Discord リンクは使用しないでください。代わりに Imgur 画像リンクを使用してください。",
+                imgur: "Imgur リンクは画像への直接リンクである必要があります (例: https://i.imgur.com/...)。画像を右クリックし、「画像アドレスをコピー」をクリックします",
+                tenor: "Tenor リンクは画像への直接リンクである必要があります (例: https://media.tenor.com/...)。 GIFを右クリックし、「画像アドレスをコピー」をクリックします。",
                 required: "この項目は必須です。",
-                tooLong: "{{maxLength}} 文字を超えてはなりません。",
-                mustBeNumber: "数字でなければなりません。",
+                tooLong: "{{maxLength}} 文字以下にする必要があります。",
+                mustBeNumber: "数値である必要があります。",
                 mustBePositive: "正の数である必要があります。",
-                startTimeInvalid: "開始時間は 0 より大きくなければなりません。",
-                endTimeInvalid: "終了時刻は 0 より大きくなければなりません。"
+                startTimeInvalid: "開始タイムスタンプは 0 より大きくなければなりません。",
+                endTimeInvalid: "終了タイムスタンプは 0 より大きくなければなりません。"
             },
             option: {
                 appId: {
-                    label: "アプリケーションID",
-                    description: "アプリID (必須)"
+                    label: "アプリID",
+                    description: "アプリケーションID (必須)"
                 },
                 appName: {
-                    label: "アプリケーション名",
-                    description: "アプリ名 (必須)"
+                    label: "アプリ名",
+                    description: "アプリケーション名 (必須)"
                 },
                 details: {
                     label: "詳細",
@@ -3274,213 +3274,213 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 detailsURL: {
                     label: "詳細URL",
-                    description: "詳細については、クリック可能な URL"
+                    description: "詳細のクリック可能な URL"
                 },
                 state: {
-                    label: "デュラム",
-                    description: "ステータス（2行目）"
+                    label: "州",
+                    description: "状態 (2 行目)"
                 },
                 stateURL: {
-                    label: "ステータスURL",
-                    description: "クリック可能なステータスの URL"
+                    label: "州の URL",
+                    description: "クリック可能な URL の状態"
                 },
                 partySize: {
-                    label: "グループの規模",
-                    description: "現在のグループ サイズ (最大グループ サイズと組み合わせて使用​​する必要があります)"
+                    label: "パーティーの規模",
+                    description: "現在のパーティー サイズ (最大パーティー サイズと一緒に使用する必要があります)"
                 },
                 partyMax: {
-                    label: "最大グループサイズ",
-                    description: "最大グループ サイズ (現在のグループ サイズと併用する必要があります)"
+                    label: "最大パーティー人数",
+                    description: "最大パーティー サイズ (現在のパーティー サイズと一緒に使用する必要があります)"
                 },
                 type: {
-                    label: "イベントの種類",
-                    description: "イベントの種類",
-                    playing: "遊んでいる",
-                    streaming: "放送",
+                    label: "アクティビティの種類",
+                    description: "アクティビティの種類",
+                    playing: "遊ぶ",
+                    streaming: "ストリーミング",
                     listening: "リスニング",
                     watching: "見てる",
-                    competing: "レーシング"
+                    competing: "競争する"
                 },
                 streamLink: {
-                    label: "リンクを投稿する",
-                    description: "Twitch.tv または Youtube.com へのリンク (ブロードキャスト イベント タイプのみ)"
+                    label: "ストリームリンク",
+                    description: "Twitch.tv または YouTube.com リンク (ストリーミング アクティビティ タイプのみ)"
                 },
                 timestampMode: {
                     label: "タイムスタンプモード",
                     description: "タイムスタンプが示すもの",
                     none: "なし",
-                    sinceDiscordOpen: "Discordがオープンしてから",
-                    sameAsCurrentTime: "現在の時刻と同じ（24時間経ってもリセットされません）",
-                    custom: "スペシャルタイム"
+                    sinceDiscordOpen: "Discordオープンしてから",
+                    sameAsCurrentTime: "現在の時刻と同じ (24 時間経過してもリセットされない)",
+                    custom: "カスタム時間"
                 },
                 startTime: {
                     label: "開始時間 (ミリ秒単位)",
-                    description: "開始タイムスタンプ (カスタム時間モードのみ)"
+                    description: "ミリ秒単位の開始タイムスタンプ (カスタム タイムスタンプ モードのみ)"
                 },
                 endTime: {
                     label: "終了時刻 (ミリ秒単位)",
-                    description: "終了タイムスタンプ (カスタム時間モードのみ)"
+                    description: "ミリ秒単位の終了タイムスタンプ (カスタム タイムスタンプ モードのみ)"
                 },
                 imageBig: {
-                    label: "ビッグビジュアルキー",
-                    description: "大きなビジュアル キー ([リッチ プレゼンス] タブにインストールする必要があります)"
+                    label: "大きい画像キー",
+                    description: "大きな画像キー ([リッチ プレゼンス] タブでアップロードする必要があります)"
                 },
                 imageBigTooltip: {
-                    label: "大きな視覚的手がかり",
-                    description: "大きな画像の上にマウスを置くと表示されるヒント"
+                    label: "画像の大きなツールチップ",
+                    description: "大きな画像のツールチップ"
                 },
                 imageBigURL: {
                     label: "大きい画像のURL",
                     description: "大きな画像をクリックできる URL"
                 },
                 imageSmall: {
-                    label: "小さなビジュアルスイッチ",
-                    description: "小さなビジュアル キー ([リッチ プレゼンス] タブにインストールする必要があります)"
+                    label: "小さい画像キー",
+                    description: "小さな画像キー ([リッチ プレゼンス] タブでアップロードする必要があります)"
                 },
                 imageSmallTooltip: {
-                    label: "ちょっとした視覚的手がかり",
-                    description: "サムネイル画像にマウスを移動すると表示されるヒント"
+                    label: "画像の小さなツールチップ",
+                    description: "小さな画像ツールチップ"
                 },
                 imageSmallURL: {
-                    label: "サムネイル画像のURL",
+                    label: "小さい画像の URL",
                     description: "小さい画像のクリック可能な URL"
                 },
                 buttonOneText: {
-                    label: "ブトン 1 メトニ",
-                    description: "ボタン1メットニ"
+                    label: "ボタン 1 のテキスト",
+                    description: "ボタン 1 のテキスト"
                 },
                 buttonOneURL: {
                     label: "ボタン1のURL",
-                    description: "ボタン1の接続"
+                    description: "ボタン1のURL"
                 },
                 buttonTwoText: {
-                    label: "ブトン 2 メトニ",
-                    description: "ボタン 2 メットニ"
+                    label: "ボタン 2 のテキスト",
+                    description: "ボタン 2 のテキスト"
                 },
                 buttonTwoURL: {
                     label: "ボタン2のURL",
-                    description: "ボタン2の接続"
+                    description: "ボタン2のURL"
                 }
             }
         },
         customSounds: {
-            name: "カスタムサウンド",
+            name: "CustomSounds",
             description: "Discordのサウンドをカスタマイズします。",
-            search: "音を探す",
+            search: "検索音",
             placeholder: "名前またはIDで検索",
-            import: "イチェ・アクター",
+            import: "輸入",
             export: "輸出",
             reset: "すべてリセット",
             debug: "デバッグ",
             toast: {
-                error: "カスタムオーディオファイルの読み込みエラー",
-                exported: "{{count}} 個の設定がエクスポートされました (オーディオ ファイルは含まれません)",
+                error: "カスタムサウンドファイルの読み込みエラー",
+                exported: "エクスポートされた {{count}} 設定 (オーディオ ファイルは含まれません)",
                 imported: "設定が正常にインポートされました",
-                importError: "設定のインポート中にエラーが発生しました。 詳細についてはコンソールを確認してください。",
-                reset: "すべてのサウンドが正常にリセットされました。",
-                overrideDescription: "{{soundName}} のサウンドが変更されました",
+                importError: "設定のインポート中にエラーが発生しました。詳細についてはコンソールを確認してください。",
+                reset: "すべてのオーバーライドが正常にリセットされました。",
+                overrideDescription: "{{soundName}} のオーバーライド",
                 previewSound: "サウンドの再生中にエラーが発生しました。",
-                playing: "カスタムサウンドが再生できませんでした。 ファイルが壊れている可能性があります。",
-                invalidFile: "プレビュー用のカスタムオーディオファイルがありません",
+                playing: "カスタムサウンドの再生中にエラーが発生しました。ファイルが破損している可能性があります。",
+                invalidFile: "プレビューできるカスタム サウンド ファイルがありません",
                 uploaded: "ファイルが正常にアップロードされました: {{fileName}}",
                 uploadedError: "ファイルのアップロード中にエラーが発生しました: {{error}}",
-                invalidExtension: "無効なファイルタイプです。 音声ファイルをアップロードしてください。",
-                uploading: "ファイルをロード中...",
+                invalidExtension: "無効なファイルタイプです。音声ファイルをアップロードしてください。",
+                uploading: "ファイルをアップロードしています...",
                 deleted: "ファイルは正常に削除されました",
                 deleteError: "ファイルの削除中にエラーが発生しました。",
-                loadingError: "カスタムオーディオファイルの読み込みエラー"
+                loadingError: "カスタムサウンドファイルの読み込みエラー"
             },
             button: {
                 preview: "プレビュー",
-                stop: "流れ",
-                volume: "セス",
-                soundSource: "オーディオソース",
-                customFile: "スペシャルファイル",
+                stop: "停止",
+                volume: "音量",
+                soundSource: "音源",
+                customFile: "カスタムファイル",
                 uploadNew: "新規アップロード",
                 delete: "選択したファイルを削除"
             },
             option: {
                 default: "デフォルト",
-                custom: "特別",
+                custom: "カスタム",
                 select: "ファイルを選択してください..."
             },
             type: {
-                activityEnd: "イベントは終了しました",
-                activityLaunch: "イベント開始",
-                activityUserJoin: "イベントに参加したユーザー",
-                activityUserLeft: "ユーザーがイベントから退席しました",
+                activityEnd: "アクティビティ終了",
+                activityLaunch: "アクティビティの開始",
+                activityUserJoin: "アクティビティユーザーの参加",
+                activityUserLeft: "ユーザーが残したアクティビティ",
                 asmrMessage: "ASMRメッセージ",
                 bitMessage: "ビットメッセージ",
                 bopMessage: "バップメッセージ",
-                callCalling: "検索中です",
+                callCalling: "電話をかける",
                 callRinging: "電話の呼び出し音",
                 clipError: "クリップエラー",
-                clipSave: "クリップを保存しました",
+                clipSave: "クリップの保存",
                 ddrDown: "DDR ダウン",
-                ddrLeft: "DDRソル",
+                ddrLeft: "DDR左",
                 ddrRight: "DDR右",
                 ddrUp: "DDRアップ",
-                deafen: "耳が聞こえない",
-                discodo: "ディスク",
-                disconnect: "切断されました",
+                deafen: "聴覚障害者",
+                discodo: "ディスコド",
+                disconnect: "切断する",
                 duckyMessage: "ダッキーのメッセージ",
-                hangStatusSelect: "サスペンドステータスの選択",
-                highfiveClap: "ハイタッチの拍手",
-                highfiveWhistle: "ハイタッチホイッスル",
-                humanMan: "人間",
+                hangStatusSelect: "ハングステータス選択",
+                highfiveClap: "ハイタッチクラップ",
+                highfiveWhistle: "ハイファイブホイッスル",
+                humanMan: "人間の男",
                 lofiMessage: "LoFi メッセージ",
                 mention1: "メンション 1 (@role)",
                 mention2: "メンション 2 (@everyone)",
                 mention3: "メンション 3 (@ここ)",
                 message1: "メッセージ 1 (一般)",
-                message2: "メッセージ 2 (サーバー上の応答)",
+                message2: "メッセージ 2 (サーバーで応答)",
                 message3: "メッセージ 3 (DM およびグループ DM)",
                 mute: "ミュート",
-                overlayUnlock: "レイヤーのロックが解除されました",
+                overlayUnlock: "オーバーレイのロック解除",
                 poggermodeAchievement: "ポガーモードの実績",
                 poggermodeApplause: "ポガーモードの拍手",
                 poggermodeEnabled: "ポガーモードが有効になりました",
                 poggermodeMessage: "ポガーモードメッセージ",
-                pttStart: "PTT を開始する",
+                pttStart: "PTTスタート",
                 pttStop: "PTTストップ",
                 reconnect: "再接続",
-                robotMan: "ロボット・アダム",
-                stageWaiting: "待機シーン",
-                streamEnded: "放送終了",
-                streamStarted: "放送開始",
-                streamUserJoined: "ユーザーがブロードキャストに参加しました",
-                streamUserLeft: "ユーザーがブロードキャストから退出した",
+                robotMan: "ロボットマン",
+                stageWaiting: "ステージ待機中",
+                streamEnded: "ストリームが終了しました",
+                streamStarted: "ストリームが開始されました",
+                streamUserJoined: "ストリームユーザーが参加しました",
+                streamUserLeft: "ストリームユーザーが退席しました",
                 success: "成功",
-                undeafen: "耳をつんざく音を取り除く",
-                unmute: "沈黙を取り除く",
-                userJoin: "ユーザーが参加しました",
-                userLeave: "ユーザー左",
+                undeafen: "聴覚障害者",
+                unmute: "ミュートを解除する",
+                userJoin: "ユーザー参加",
+                userLeave: "ユーザー休暇",
                 userMoved: "ユーザーが移動されました",
-                vibingWumpus: "ウンパスが立ち往生している"
+                vibingWumpus: "ヴァイビング・ワンパス"
             }
         },
         customTimestamps: {
-            name: "カスタムタイムスタンプ",
+            name: "CustomTimestamps",
             description: "メッセージとツールチップのカスタム タイムスタンプ",
             demo: {
-                cozy: "クリックするとカジュアル形式に切り替わります",
-                compact: "クリックするとコンパクト形式に切り替わります",
+                cozy: "クリックすると Cozy 形式に切り替わります",
+                compact: "クリックしてコンパクト形式に切り替えます",
                 lastWeek: "このメッセージは先週送信されました",
                 hover: "タイムスタンプの上にマウスを置くと、ツールチップの形式が表示されます",
-                edit: "以下のフォーマットを編集してください。ここでライブ更新を確認してください"
+                edit: "ここでライブアップデートを確認するには、以下の形式を編集してください"
             },
             modal: {
                 title: "使用方法:",
                 moment: "Moment.js のフォーマットに関するドキュメント",
-                hint: "さらに、エントリでは以下を使用できます。",
-                calendar: "たとえば、動的な日付フォーマットを有効にします。",
+                hint: "さらに、入力でこれらを使用できます。",
+                calendar: "次のような動的な日付フォーマットを有効にします。",
                 today: "今日",
                 yesterday: "昨日",
-                relative: "次のような時間を与えます:",
+                relative: "次のような時間を与えます",
                 relativeTime: "4時間前",
                 preview: "プレビュー",
                 format: "カレンダー形式",
-                howTo: "上記のタイムスタンプで使用される場合に [calendar] 値をフォーマットする方法は次のとおりです。"
+                howTo: "上記のタイムスタンプで使用される場合に [calendar] 値をフォーマットする方法。"
             },
             option: {
                 formats: {
@@ -3488,103 +3488,103 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "タイムスタンプ形式をカスタマイズする",
                 },
                 cozyFormat: {
-                    label: "リリーフモッド",
-                    description: "メッセージのリラックスモードに使用する時刻形式"
+                    label: "コージーモード",
+                    description: "コージー モードのメッセージで使用する時刻形式"
                 },
                 compactFormat: {
-                    label: "コンパクトモッド",
-                    description: "コンパクト モードおよびメッセージ上にマウスを移動するときに使用する時刻形式"
+                    label: "コンパクトモード",
+                    description: "コンパクト モードでの時刻形式とメッセージの上にマウスを置くと"
                 },
                 tooltipFormat: {
                     label: "ツールチップ",
                     description: "ツールチップで使用する時刻形式"
                 },
                 ariaLabelFormat: {
-                    label: "アリアラベル",
-                    description: "Aria タグで使用する時間形式"
+                    label: "アリアレーベル",
+                    description: "aria ラベルで使用する時間形式"
                 },
                 sameDayFormat: {
                     label: "同日",
                     description: "今日の[カレンダー]形式",
-                    default: "[ブグン] HH:mm:ss"
+                    default: "[今日の時刻] HH:mm:ss"
                 },
                 lastDayFormat: {
-                    label: "昨日",
+                    label: "最終日",
                     description: "[カレンダー] 昨日の形式",
-                    default: "[細い] HH:mm:ss"
+                    default: "[昨日の時間] HH:mm:ss"
                 },
                 lastWeekFormat: {
                     label: "先週",
                     description: "[カレンダー] 先週の形式"
                 },
                 sameElseFormat: {
-                    label: "年上の",
+                    label: "それ以外の古いもの",
                     description: "[カレンダー] 古い日付の形式"
                 }
             }
         },
         customUserColors: {
-            name: "カスタムユーザーカラー",
+            name: "CustomUserColors",
             description: "どこにいても、任意のユーザーにカスタム カラーを追加できます。 testingTweaks および roleColorEverywhere と併用することを強くお勧めします",
             option: {
                 dmList: {
                     label: "DMリスト",
-                    description: "特別な色が割り当てられたユーザーの名前は、DM リストで色付けされます。"
+                    description: "カスタムカラーが定義されているユーザーは、DM リストで自分の名前が色付きで表示されます。"
                 },
                 colorInServers: {
-                    label: "サーバー上の色",
-                    description: "サーバーでも名前の色を変更する必要がありますか?"
+                    label: "サーバーのカラー",
+                    description: "サーバー内で名前の色を変更する必要がある場合"
                 }
             },
             context: {
-                setColor: "色の調整"
+                setColor: "色の設定"
             },
             modal: {
                 custom: "カスタムカラー",
-                pick: "色を選ぶ",
-                delete: "レコードの削除",
+                pick: "色を選択してください",
+                delete: "エントリの削除",
                 save: "保存"
             }
         },
         dearrow: {
-            name: "デアロー",
-            description: "Dearrow を利用して、YouTube の埋め込みタイトルとサムネイルをセンセーショナルにしないようにします",
+            name: "DeArrow",
+            description: "DeArrow を利用して、YouTube の埋め込みタイトルとサムネイルをセンセーショナルなものにします。",
             option: {
                 hideButton: {
                     label: "非表示ボタン",
-                    description: "YouTube の埋め込みから Dearrow ボタンを非表示にします"
+                    description: "YouTube の埋め込みから矢印解除ボタンを非表示にします"
                 },
                 replaceElements: {
-                    label: "項目の変更",
+                    label: "要素を置換する",
                     description: "埋め込みのどの要素を置き換えるかを選択してください",
                     everything: "すべて（タイトルとサムネイル）",
                     title: "タイトル",
                     thumbnail: "サムネイル"
                 },
                 dearrowByDefault: {
-                    label: "デフォルトでディアロー",
-                    description: "ビデオを自動的に削除します"
+                    label: "デフォルトで矢印を解除",
+                    description: "ビデオを自動的に DeArrow"
                 }
             },
             tooltip: {
-                dearrowed: "Dearrow はこの埋め込みに適用されました。クリックして復元します",
-                dearrow: "クリックして適用します。"
+                dearrowed: "この埋め込みは DeArrowed されています。クリックして復元します",
+                dearrow: "クリックして矢印を解除"
             }
         },
         declutter: {
-            name: "整理整頓",
-            description: "プロフィール効果、ショップタブ、パワーアップなどの必須ではない UI 要素を削除して、Discord をクリーンアップします。",
+            name: "Declutter",
+            description: "プロフィール効果、ショップタブ、ブーストなどの必須ではない UI 要素を削除して、Discord をクリーンアップします。",
             option: {
                 userProfileHeader: {
                     label: "ユーザープロフィール"
                 },
                 removeNameplate: {
                     label: "銘板を外す",
-                    description: "銘板を外します。"
+                    description: "銘板を取り外します。"
                 },
                 removeProfileEffect: {
                     label: "プロファイル効果の削除",
-                    description: "プロファイルを開いたときに表示されるアニメーション効果を削除します。"
+                    description: "オープニング時のプロフィールアニメーション効果を削除します。"
                 },
                 removeClanTag: {
                     label: "クランタグを削除する",
@@ -3592,99 +3592,99 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 alwaysShowUsername: {
                     label: "常にユーザー名を表示",
-                    description: "ステータスではなく常にユーザー名が表示されます。"
+                    description: "ステータスではなく常にユーザー名を表示します。"
                 },
                 accessibilityNotice: {
-                    label: "アクセシビリティに関する警告",
-                    description: "Discord には、アクセシビリティ設定にユーザー名スタイルのオプションがすでに組み込まれています。"
+                    label: "アクセシビリティに関する通知",
+                    description: "Discordにはすでにアクセシビリティ設定にユーザー名スタイルのオプションが組み込まれています。"
                 },
                 friendsListHeader: {
-                    label: "フレンド/DMリストの上"
+                    label: "友達/DM リストの上"
                 },
                 removeShopAboveDM: {
-                    label: "DMリスト上のストアを削除",
-                    description: "DM リストの上にあるストア ボタンを削除します。"
+                    label: "DM の上のショップを削除",
+                    description: "DM リストの上にあるショップを削除します。"
                 },
                 removeQuestsAboveDM: {
-                    label: "DMリストからタスクを削除",
-                    description: "DM リストの上にあるタスク ボタンを削除します。"
+                    label: "DM 上のクエストを削除する",
+                    description: "DM リストの上にあるクエストを削除します。"
                 },
                 miscHeader: {
-                    label: "様々な"
+                    label: "その他"
                 },
                 removeServerBoostInfo: {
                     label: "サーバーブースト情報の削除",
-                    description: "チャネルリストの先頭にあるサーバー強化情報を削除します。"
+                    description: "チャンネルリストの上にあるサーバーブースト情報を削除します。"
                 },
                 removeBillingSettings: {
-                    label: "支払い設定を削除する",
-                    description: "支払い（請求書）設定を削除します。"
+                    label: "請求設定を削除する",
+                    description: "課金設定を削除します。"
                 },
                 removeGiftButton: {
                     label: "ギフトボタンを削除",
-                    description: "ギフト送信ボタンを削除します。"
+                    description: "プレゼントボタンを外します。"
                 },
                 removeUnavailableEmojiPicker: {
                     label: "使用できない絵文字ピッカーを削除する",
-                    description: "絵文字ピッカーでアクセスできないカテゴリを削除します。"
+                    description: "使用できないカテゴリを絵文字ピッカーから削除します。"
                 },
                 removeAudioMenus: {
-                    label: "サウンドメニューの削除",
-                    description: "ミュートボタンと聴覚障害者ボタンの横にある矢印メニューを削除します。"
+                    label: "オーディオメニューの削除",
+                    description: "ミュートボタンと耳をつんざくボタンの横にあるメニューを削除します。"
                 },
                 removeButtonTooltips: {
-                    label: "ボタンのヒントを削除する",
-                    description: "ボタンに表示されるツールチップを削除します。"
+                    label: "ボタンのツールチップを削除",
+                    description: "ボタンのツールチップを削除します。"
                 }
             }
         },
         decodeBase64: {
             name: "DecodeBase64",
-            description: "メッセージの Base64 コンテンツをデコードし、デコードされたコンテンツをコピーします。",
+            description: "任意のメッセージの Base64 コンテンツをデコードし、デコードされたコンテンツをコピーします。",
             right: {
-                decode: "解決済みのコピー (左クリック) / Base64 解決済み (右クリック)",
-                copy: "Base64 デコード (左クリック) / デコードされたコピー (右クリック)"
+                decode: "デコードされたコピー (左クリック) / Base64 デコード (右クリック)",
+                copy: "Base64 をデコード (左クリック) / デコードされたコピー (右クリック)"
             },
             option: {
                 clickMethod: {
                     label: "クリック方法",
-                    description: "ボタンの動作を変更して、メッセージの Base64 コンテンツをデコードします。",
+                    description: "ボタンを変更して、メッセージの Base64 コンテンツをデコードします。",
                     left: "左クリックして Base64 コンテンツをデコードします。",
                     right: "右クリックして Base64 コンテンツをデコードします。"
                 }
             },
             modal: {
                 title: "デコードされたBase64コンテンツ",
-                content: "溶解内容",
-                copy: "解決済みコンテンツ {{index}} をコピー",
-                copied: "解決された内容がクリップボードにコピーされました。"
+                content: "デコードされたコンテンツ",
+                copy: "デコードされたコンテンツをコピー {{index}}",
+                copied: "デコードされたコンテンツがクリップボードにコピーされました。"
             }
         },
         decor: {
-            name: "装飾",
+            name: "Decor",
             description: "独自のカスタム アバター装飾を作成して使用するか、プリセットからお気に入りを選択します。",
             presetPart: "{{name}} プリセットの一部",
             createdBy: "作成者: {{author}}",
             copy: "プリセットIDをコピー",
             file: "ファイル",
             your: {
-                title: "装飾",
-                subtitle: "右クリックすると独自の装飾を削除できます。"
+                title: "あなたの装飾",
+                subtitle: "独自の装飾を右クリックして削除できます。"
             },
             option: {
                 changeDecoration: {
-                    label: "装飾の変更",
+                    label: "装飾を変更する",
                     description: "アバターの装飾を変更するには、装飾を有効にしてクライアントを再起動します。",
-                    also: "{{プロフィール}} ページから装飾デコレーションにアクセスすることもできます。",
+                    also: "{{profiles}} ページから Decor デコレーションにアクセスすることもできます。",
                     profiles: "プロフィール"
                 },
                 baseUrl: {
                     label: "ベース URL",
-                    description: "Dekor API URL"
+                    description: "装飾APIのURL"
                 },
                 agreedToGuidelines: {
-                    label: "ルールに同意しました",
-                    description: "受け入れられるルール"
+                    label: "ガイドラインへの同意",
+                    description: "ガイドラインに同意しました"
                 }
             },
             context: {
@@ -3695,100 +3695,100 @@ const translations: MatchStructure<typeof enTranslations> = {
             alert: {
                 delete: {
                     title: "装飾の削除",
-                    body: "{{decoration}} 装飾を削除してもよろしいですか?",
-                    confirm: "シル",
+                    body: "{{decoration}} を削除してもよろしいですか?",
+                    confirm: "消去",
                     cancel: "キャンセル"
                 },
                 logout: {
-                    title: "サインアウト",
-                    body: "Dekor からログアウトしてもよろしいですか?",
-                    confirm: "サインアウト",
+                    title: "ログアウト",
+                    body: "Decor からログアウトしてもよろしいですか?",
+                    confirm: "ログアウト",
                     cancel: "キャンセル"
                 }
             },
             button: {
-                change: "装飾の変更",
+                change: "装飾を変更する",
                 remove: "装飾を削除する",
                 apply: "適用する",
                 cancel: "キャンセル",
                 browse: "ブラウズ",
                 submit: "レビューのために送信する",
-                continue: "デヴァム・エット",
+                continue: "続く",
                 back: "戻る"
             },
             tooltip: {
-                pendingReview: "すでに審査中の装飾品があります",
+                pendingReview: "審査待ちの装飾がすでにあります",
                 pending: "審査待ち"
             },
             join: {
-                tooltip: "Decor の Discord サーバーに参加して、デコレーションを確認し、新しいプリセットがリリースされたときに通知を受け取ります",
+                tooltip: "Decor の Discord サーバーに参加して、デコレーションのレビューや新しいプリセットがリリースされたときに通知を受け取ります",
                 button: "ディスコードサーバー"
             },
             create: {
-                title: "オーナメントの作成",
-                notViolate: "送信する前に、装飾が {{ガイドライン}} に違反していないことを確認してください。",
-                guidelines: "ルール",
-                file: "ファイルは APNG または PNG である必要があります。",
+                title: "装飾の作成",
+                notViolate: "装飾を送信する前に、装飾が {{guidelines}} に違反していないことを確認してください。",
+                guidelines: "ガイドライン",
+                file: "ファイルはAPNGまたはPNGである必要があります。",
                 fileHolder: "ファイルを選択してください",
-                name: "この装飾品を指す場合は、この名前が使用されます。",
+                name: "This name will be used when referring to this decoration.",
                 nameHolder: "コンパニオンキューブ",
-                nameTitle: "広告"
+                nameTitle: "名前"
             },
             help: {
-                update: "{{server}} に参加して、ダイレクト メッセージがデコレーションのレビューに関する最新情報を受け取ることを許可してください。",
-                server: "デコルンディスコード"
+                update: "デコレーションのレビューに関する最新情報を受け取るには、{{server}} に参加し、ダイレクト メッセージを許可してください。",
+                server: "Decor の Discord サーバー"
             },
             guidelines: {
-                hold: "待って",
-                suspended: "装飾を送信すると、{{ガイドライン}}に同意したことになります。 これらの規則を読まない場合、将来さらに装飾を作成する権利が停止される可能性があります。",
-                guidelines: "ルール"
+                hold: "持続する",
+                suspended: "装飾を送信すると、{{guidelines}} に同意したことになります。これらのガイドラインを読まない場合、今後、アカウントが追加のデコレーションの作成を停止される可能性があります。",
+                guidelines: "ガイドライン"
             }
         },
         demonstration: {
-            name: "デモンストレーション",
+            name: "Demonstration",
             description: "テーマのスクリーンショットを撮るためのプラグイン - 画像とテキストを識別する検閲者。",
             toolbox: {
-                toggle: "検閲された"
+                toggle: "デモを切り替えます"
             },
-            keycode: "ホットキーを変更するには、{{keycode}} を確認してください。",
-            this: "この車両の",
+            keycode: "キーコードを変更するには、{{keycode}} をチェックしてください。",
+            this: "このツール",
             okay: "わかった！",
             option: {
                 keyBind: {
-                    label: "ホットキー",
-                    description: "押すとテーマのオンとオフを切り替えるボタン"
+                    label: "Key Bind",
+                    description: "押すとテーマを切り替えるキー"
                 },
                 soundVolume: {
-                    label: "騒音レベル",
-                    description: "オン/オフ音の音量 (0 = オフ)"
+                    label: "音量",
+                    description: "トグル音の大きさ (0 で無効)"
                 },
                 showConfirmationModal: {
-                    label: "確認ウィンドウを表示する",
-                    description: "ウィンドウを表示してショートカットを思い出させる"
+                    label: "確認モーダルを表示",
+                    description: "ショートカットを思い出させるためにモーダルを表示する"
                 }
             },
             switch: {
                 note: "この設定は後で再度有効にすることができます",
-                disable: "確認ウィンドウを無効にしますか?"
+                disable: "モーダルを無効にしますか?"
             },
-            shortcut: "これにより、すべてのテキストが検閲されます。 これを無効にするショートカットを覚えておいてください。"
+            shortcut: "これにより、すべてのテキストが検閲されます。これを無効にするには、次のショートカットを覚えておいてください。"
         },
         devCompanion: {
-            name: "開発コンパニオン",
-            description: "開発者アシスタントプラグイン。 何かが動作していない、または奇妙な動作をしている (おそらくバグ) を見つけた場合は、タグ付けするか dm して、MutanPlex に報告してください。ありがとうございます。",
+            name: "DevCompanion",
+            description: "Dev Companion プラグイン。動作しないものや奇妙な動作 (おそらくバグ) がある場合は、ping または DM で MutanPlex に報告してください。ありがとう！",
             reconnect: "再接続",
             option: {
                 notifyOnAutoConnect: {
                     label: "自動接続時に通知する",
-                    description: "Dev Companion が自動的に接続するときに通知を表示しますか?"
+                    description: "Dev Companion が自動的に接続したときに通知するかどうか。"
                 },
                 usePatchedModule: {
-                    label: "パッチモジュールを使用する",
-                    description: "削除リクエストの場合は、元のモジュールではなく、パッチが適用された既存のモジュール (パッチが適用されている場合) で応答します。"
+                    label: "パッチ適用されたモジュールを使用する",
+                    description: "抽出リクエストでは、元のモジュールではなく、現在のパッチが適用されたモジュール (パッチが適用されている場合) を返信します。"
                 },
                 reloadAfterToggle: {
-                    label: "再インストール後",
-                    description: "プラグインの無効化/有効化コマンドを受信した後、再インストールします。"
+                    label: "切り替え後のリロード",
+                    description: "「プラグインの無効化/有効化」コマンドを受信した後、リロードします。"
                 }
             },
             toast: {
@@ -3796,34 +3796,34 @@ const translations: MatchStructure<typeof enTranslations> = {
                 connected: "WebSocketに接続されています",
                 disconnected: "開発コンパニオンが切断されました",
                 error: "開発コンパニオンエラー",
-                reload: "再インストールが必要です",
-                failed: "依存関係の初期化に失敗しました: {{failures}}",
-                close: "四半期",
-                stopping: "{{plugin}} プラグインの停止中にエラーが発生しました",
-                starting: "{{plugin}} プラグインの初期化中にエラーが発生しました",
+                reload: "リロードが必要です",
+                failed: "依存関係を開始できませんでした: {{failures}}",
+                close: "近い",
+                stopping: "プラグイン {{plugin}} の停止中にエラーが発生しました",
+                starting: "プラグイン {{plugin}} の起動中にエラーが発生しました",
                 noMessage: "エラーメッセージなし",
-                noReason: "理由が提供されない"
+                noReason: "理由は示されていません"
             }
         },
         disableCallIdle: {
-            name: "CallIdle を無効にする",
-            description: "3 分後に DM 音声通話から自動的に追い出され、AFK 音声チャネルに移動されるのを無効にします。"
+            name: "DisableCallIdle",
+            description: "3 分後に DM 音声通話から自動的に除外され、AFK 音声チャネルに移動されることを無効にします。"
         },
         disableCameras: {
-            name: "カメラを無効にする",
+            name: "DisableCameras",
             description: "デフォルトで通話中のカメラを無効にします"
         },
         discordDevBanner: {
-            name: "DiscordDevバナー",
-            description: "ビルド ID 情報を表示する Discord 開発者バナーを有効にします。",
-            about: "Discord 開発者バナー形式。 次の変数を使用できます。",
+            name: "DiscordDevBanner",
+            description: "ビルド ID を表示する Discord 開発者バナーを有効にします",
+            about: "Discord 開発者バナーの形式。次の変数を使用できます。",
             preview: "プレビュー:",
             empty: "形式を空にすることはできません。",
             variables: {
                 discord: {
                     title: "Discord変数",
                     icon: "不和アイコン",
-                    banner: "開発者バナーアイコン",
+                    banner: "開発バナーアイコン",
                     channel: "Discord ビルド チャネル (例: Stable)",
                     build: "Discord のビルド番号 (例: 123456)",
                     hash: "Discord ビルド ハッシュ (例: 123456)"
@@ -3831,20 +3831,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                 plexcord: {
                     title: "プレックスコード変数",
                     icon: "プレックスコードのアイコン",
-                    name: "プレックスコード名",
+                    name: "Name of Plexcord",
                     version: "Plexcord のバージョン (例: 1.0.0)",
-                    hash: "Plexcord 構造ハッシュ (例: 123456)",
-                    platform: "Plexcord が実行されるプラットフォーム (例: Dev Build)"
+                    hash: "Plexcord ビルド ハッシュ (例: 123456)",
+                    platform: "Plexcord が実行されているプラ​​ットフォーム (例: Dev Build)"
                 },
                 plextron: {
-                    title: "Plextron のカスタム変数",
-                    hashShort: "Plextron の短い構造ハッシュ (例: 123456789)",
-                    platformType: "Plextron が実行されるプラットフォームの種類 (例: Dev Build)"
+                    title: "Plextron 固有の変数",
+                    hashShort: "Plextron ビルド ハッシュ (例: 123456789)",
+                    platformType: "Plextron が実行されているプラ​​ットフォーム (例: Dev Build)"
                 },
                 client: {
                     title: "クライアント変数",
                     icon: "デスクトップアイコン",
-                    name: "クライアント名 (例: Discord Canary)",
+                    name: "The name of the client (e.g. Discord Canary)",
                     version: "クライアントのバージョン (例: 1.0.0)",
                 },
                 electron: {
@@ -3864,12 +3864,12 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         dontFilterMe: {
-            name: "ドントフィルターミー",
-            description: "メッセージに自動モデレーションの準備完了リストにある用語が含まれている場合に警告します",
+            name: "DontFilterMe",
+            description: "メッセージに AutoMod プリセット リスト内の用語が含まれている場合に警告します",
             alert: {
-                title: "ちょっと待って！",
-                content: "メッセージには、自動モデレーション準備リストにある用語が含まれています。 (用語「{{トリガー}}」)",
-                content2: "あなたのメッセージはサーバーモデレーターによってブロックされ、処理される可能性が高くなります。",
+                title: "持続する！",
+                content: "メッセージには、AutoMod プリセット リストの用語 (用語: '{{trigger}}') が含まれています。",
+                content2: "メッセージがブロックされ、サーバーのモデレーターによって管理される可能性が高くなります。",
                 confirm: "とにかく送信する",
                 cancel: "キャンセル"
             }
@@ -3879,97 +3879,97 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "相対タイムスタンプは常に切り捨てられるため、7.6y は 8y ではなく 7y になります。"
         },
         dragFavoriteEmotes: {
-            name: "ドラッグお気に入りエモート",
-            description: "ドラッグアンドドロップ機能を追加して、お気に入りの絵文字の順序を変更します"
+            name: "DragFavoriteEmotes",
+            description: "お気に入りのエモートにドラッグ アンド ドロップ機能を追加します"
         },
         dragify: {
-            name: "ドラッグする",
-            description: "ユーザー、チャネル、またはプレゼンターをチャットにドラッグ アンド ドロップして、メンションまたは招待を追加します。",
+            name: "Dragify",
+            description: "ユーザー、チャネル、サーバーをチャットにドロップして、メンションや招待を挿入します。",
             option: {
                 userOutput: {
                     label: "ユーザー出力",
-                    description: "ユーザードロップアウト出力。",
-                    mention: "言及しないでください",
-                    id: "ユーザー ID (ID)"
+                    description: "ユーザードロップ出力。",
+                    mention: "言及",
+                    id: "ユーザーID"
                 },
                 channelOutput: {
                     label: "チャンネル出力",
-                    description: "チャンネルリリース出力。",
+                    description: "チャンネルドロップ出力。",
                     mention: "#channel メンション",
-                    link: "チャンネル接続",
+                    link: "チャンネルリンク",
                 },
                 inviteExpireAfter: {
-                    label: "招待期間",
-                    description: "招待リンクの有効期間。",
+                    label: "招待の有効期限は次のとおりです",
+                    description: "招待の有効期限",
                     never: "一度もない",
                     thirtyMinutes: "30分",
-                    oneHour: "1 瞬間",
-                    sixHours: "6 瞬間",
-                    twelveHours: "12 モーメント",
+                    oneHour: "1時間",
+                    sixHours: "6時間",
+                    twelveHours: "12時間",
                     oneDay: "1日",
                     sevenDays: "7日間"
                 },
                 inviteMaxUses: {
-                    label: "最大使用回数",
-                    description: "招待状の最大使用制限。",
+                    label: "最大使用量を招待する",
+                    description: "招待の最大使用量",
                     noLimit: "制限なし",
-                    one: "1 使い方",
-                    five: "5 使用方法",
-                    ten: "10 使用法",
-                    twentyFive: "25 使用法",
+                    one: "1 用途",
+                    five: "5つの用途",
+                    ten: "10 の用途",
+                    twentyFive: "25 の用途",
                     fifty: "50 の用途",
                     hundred: "100回の使用"
                 },
                 inviteTemporaryMembership: {
-                    label: "一時的なメンバーシップの提供",
-                    description: "招待された人に一時的なメンバーシップを付与します。",
+                    label: "一時的なメンバーシップを招待する",
+                    description: "一時的なメンバーシップを付与します。",
                 },
                 reuseExistingInvites: {
-                    label: "既存の招待状を再利用する",
-                    description: "新しい招待状を作成するのではなく、既存の招待状を使用します。"
+                    label: "既存の招待を再利用",
+                    description: "新しい招待を作成する代わりに、既存の招待を再利用します。"
                 },
                 allowChatBodyDrop: {
-                    label: "チャット本文へのドロップを許可する",
-                    description: "テキストをチャットエリアに直接ドロップして追加できます。"
+                    label: "チャット本文のドロップを許可する",
+                    description: "メインのチャット本文にドロップしてテキストを挿入できるようにします。"
                 }
             },
             toast: {
                 failed: {
-                    drop: "Dragify は操作を実行できませんでした。",
+                    drop: "Dragify がドロップの処理に失敗しました。",
                 },
                 invite: {
                     created: "招待状が作成されました。",
                     unable: "招待状を作成できません。",
-                    noChannel: "招待を作成できるチャネルがありません。",
+                    noChannel: "招待できるチャンネルがありません。",
                 }
             },
             ghost: {
                 user: "ユーザー",
-                server: "プレゼンター",
+                server: "サーバ",
                 dm: "ダイレクトメッセージ",
                 badge: {
                     channel: "チャネル",
-                    thread: "タイトル",
-                    voice: "セス",
+                    thread: "糸",
+                    voice: "声",
                     forum: "フォーラム",
                     media: "メディア",
                     announcement: "発表",
                     dm: "DMで",
                     user: "ユーザー",
-                    server: "プレゼンター"
+                    server: "サーバ"
                 }
             }
         },
         elementHighlighter: {
-            name: "要素ハイライター",
-            description: "アイテムを簡単に強調表示して検査できます。",
+            name: "ElementHighlighter",
+            description: "要素を簡単に強調表示して検査します。",
             modal: {
                 recording: "録音中...",
                 reset: "リセット"
             },
             option: {
                 keybind: {
-                    label: "キーの割り当て",
+                    label: "キーバインド",
                     description: "ハイライトの切り替え"
                 },
                 showClasses: {
@@ -3982,116 +3982,116 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 showFont: {
                     label: "フォントを表示",
-                    description: "計算されたフォントファミリーとサイズを表示します"
+                    description: "計算されたフォントファミリーとフォントサイズを表示します"
                 },
                 showPadding: {
                     label: "パディングを表示",
-                    description: "要素の内部間隔の値を表示します"
+                    description: "要素のパディング値を表示する"
                 },
                 showMargin: {
-                    label: "外側のマージンを表示",
-                    description: "要素の外部空間の値を表示します"
+                    label: "余白を表示",
+                    description: "要素のマージン値を表示します"
                 },
                 showBorderRadius: {
-                    label: "エッジの丸みを表示",
+                    label: "境界線の半径を表示",
                     description: "要素の境界半径の値を表示します"
                 },
                 showPosition: {
-                    label: "場所を表示",
-                    description: "要素の CSS 位置タイプと Z インデックス値を表示します。"
+                    label: "位置を表示",
+                    description: "要素の CSS 位置タイプと Z インデックスを表示します。"
                 },
                 showDisplay: {
-                    label: "ビューを表示",
-                    description: "要素のビュー タイプとそのフレックスまたはグリッド プロパティを表示します。"
+                    label: "表示を表示",
+                    description: "要素の表示タイプをフレックスまたはグリッドのプロパティとともに表示します"
                 }
             },
             toast: {
                 copied: {
-                    color: "カラーがクリップボードにコピーされました!",
+                    color: "カラーをクリップボードにコピーしました!",
                 }
             }
         },
         exitSounds: {
-            name: "終了音",
-            description: "オーディオ チャンネルから離れると、オーディオ パネルからサウンドが再生されます。",
-            button: "グローバル出力サウンドとして設定",
+            name: "ExitSounds",
+            description: "音声を切断するとサウンドボードサウンドを再生します。",
+            button: "グローバル終了音として設定",
             toast: {
-                failedToPlay: "キリスト、いや！ 何か問題が発生しました。"
+                failedToPlay: "おっと！何か問題が発生しました。"
             },
             option: {
                 soundGuildId: {
-                    label: "音声サーバー ID (ID)",
-                    description: "オーディオが存在するサーバーを選択します。",
+                    label: "サウンドギルドID",
+                    description: "サウンドを含むサーバーを選択します。",
                     placeholder: "サーバーを選択してください..."
                 },
                 soundId: {
-                    label: "音声アイデンティティ (ID)",
+                    label: "サウンドID",
                     description: "再生したいサウンドのIDを入力します。",
-                    placeholder: "音声IDを入力してください..."
+                    placeholder: "サウンド ID を入力してください..."
                 }
             }
         },
         experiments: {
-            name: "実験",
-            description: "Discord の実験やその他の開発者専用機能へのアクセスを提供します。",
+            name: "Experiments",
+            description: "Discord の実験やその他の開発専用機能へのアクセスを有効にします。",
             modal: {
                 about: {
                     title: "詳細情報",
-                    body: "{{key}} を使用して Discord の開発者ツールを開くことができます"
+                    body: "{{key}} 経由で Discord の DevTools を開くことができます"
                 },
                 warning: {
-                    title: "注意！！",
-                    body: "実験は未リリースの Discord 機能です。 これらは機能しない可能性があり、クライアントが壊れたり、アカウントが無効になったりする可能性もあります。",
-                    notReponsible: "実験は、何をしようとしているのかわかっている場合にのみ使用してください。 Plexcord は、実験を有効にすることによって発生する可能性のある損害に対して責任を負いません。",
-                    useAtOwnRisk: "実験が何をするのかわからない場合は、無視してください。 彼らが何をしているかは私たちに聞かないでください。おそらく私たちも知りません。",
+                    title: "持続する！！",
+                    body: "実験は未リリースの Discord 機能です。これらは機能しなかったり、クライアントが壊れたり、アカウントが無効になったりする可能性があります。",
+                    notReponsible: "実験は、何をしようとしているのかわかっている場合にのみ使用してください。 Plexcord は、実験を有効にしたことによって生じた損害に対して責任を負いません。",
+                    useAtOwnRisk: "実験が何をするのかわからない場合は、無視してください。実験が何をするのかについても私たちに尋ねないでください。おそらく私たちには分かりません。",
                     serverSideFeatures: "いいえ、「クライアントに送信」ボックスをチェックするなどのサーバー側の機能は使用できません。"
                 }
             },
             option: {
                 toolbarDevMenu: {
-                    label: "ツールバーの開発者メニュー",
-                    description: "ヘルプ (?) ツールバー ボタン (チャットの右上) を Discord の開発者メニューに置き換えます。"
+                    label: "ツールバーの開発メニュー",
+                    description: "ヘルプ (?) ツールバー ボタン (チャットの右上) を Discord の開発者メニューに変更します。"
                 }
             }
         },
         exportMessages: {
-            name: "メッセージのエクスポート",
-            description: "単一のメッセージ、ユーザーのすべてのメッセージ、またはチャネルのすべてのメッセージなど、メッセージをファイルにエクスポートできます。",
+            name: "ExportMessages",
+            description: "単一のメッセージ、ユーザーからのすべてのメッセージ、またはすべてのチャネル メッセージなど、メッセージをファイルにエクスポートできます。",
             option: {
                 maxMessages: {
                     label: "最大メッセージ数",
-                    description: "転送するメッセージの最大数 (0 = 無制限)"
+                    description: "エクスポートするメッセージの最大数 (0 = 無制限)"
                 },
                 includeAttachments: {
                     label: "添付ファイルを含める",
-                    description: "転送に添付ファイル情報を含める"
+                    description: "エクスポートに添付ファイル情報を含める"
                 },
                 includeEmbeds: {
-                    label: "エンベドレリ・ダヒルら",
-                    description: "転送に埋め込み情報を含める"
+                    label: "埋め込みを含める",
+                    description: "エクスポートに埋め込み情報を含める"
                 },
                 includeReactions: {
                     label: "リアクションを含める",
-                    description: "転送に反応情報を含める"
+                    description: "エクスポートに反応情報を含める"
                 },
                 includeComponents: {
                     label: "コンポーネントを含める",
-                    description: "インポートにコンポーネント情報を含める"
+                    description: "エクスポートにコンポーネント情報を含める"
                 }
             },
             message: {
-                invalid: "無効なメッセージ - 作成者がいません",
+                invalid: "無効なメッセージ — 作成者がいません",
                 unknownUser: "不明なユーザー",
                 botEmbed: "ボット埋め込みメッセージ",
                 attachments: "添付ファイル",
                 unknown: "未知",
                 noUrl: "URLがありません",
-                embeds: "埋め込み者",
+                embeds: "埋め込む",
                 title: "タイトル",
                 description: "説明",
                 url: "URL",
-                footer: "アルトビルギ",
-                author: "ライター",
+                footer: "フッター",
+                author: "著者",
                 fields: "フィールド",
                 components: "コンポーネント",
                 component: "成分",
@@ -4099,8 +4099,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 reactions: "反応",
                 errorFormatting: "フォーマットエラーメッセージ",
                 unknownError: "不明なエラー",
-                header: "{{titlePrefix}} {{displayName}}、{{channelName}} カナリンダ",
-                from: "メッセージ -",
+                header: "{{titlePrefix}} {{displayName}} で {{channelName}}",
+                from: "からのメッセージ",
                 direct: "ダイレクトメッセージ",
                 exported: "輸出日",
                 total: "総メッセージ数"
@@ -4112,12 +4112,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 noMessages: {
                     title: "メッセージのエクスポート",
-                    notFoundUser: "このユーザーへのメッセージは見つかりませんでした",
+                    notFoundUser: "このチャンネルではこのユーザーからのメッセージが見つかりませんでした",
                     notFoundChannel: "このチャンネルにはメッセージが見つかりませんでした"
                 },
                 failed: {
                     title: "メッセージのエクスポート",
-                    body: "メッセージのエクスポート中にエラーが発生しました"
+                    body: "メッセージのエクスポートに失敗しました"
                 },
                 userNotFound: {
                     title: "メッセージのエクスポート",
@@ -4132,374 +4132,374 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             context: {
                 exportMessage: "このメッセージをエクスポート",
-                exportAll: "{{user}} のすべてのメッセージをエクスポートする",
+                exportAll: "{{user}} からのすべてのメッセージをエクスポートする",
                 user: "ユーザー",
-                exportAllChannel: "チャネルのすべてのメッセージをエクスポート"
+                exportAllChannel: "すべてのチャネルメッセージをエクスポート"
             }
         },
         expressionCloner: {
             name: "ExpressionCloner",
-            description: "絵文字とステッカーを自分のサーバーに複製できます (右クリック)",
+            description: "エモートとステッカーを自分のサーバーに複製できます (右クリック)",
             modal: {
-                title: "固有名詞",
+                title: "カスタム名",
                 invalidName: "名前は 2 ～ 32 文字で、英数字のみを含む必要があります。"
             },
             toast: {
-                success: "{{name}} は {{guild}} サーバーに正常にクローン作成されました。",
+                success: "{{name}} から {{guild}} へのクローンが正常に作成されました。",
                 yourServer: "あなたのサーバー",
                 failed: "クローン作成に失敗しました:",
                 console: "何か問題が発生しました (コンソールを確認してください!)"
             },
             context: {
-                clone: "{{type}} クローン",
-                cloneName: "{{data}} クローン"
+                clone: "クローン{{type}}",
+                cloneName: "クローン{{data}}"
             }
         },
         f8break: {
-            name: "F8ブレイク",
-            description: "DevTools (+ ブレークポイント) が開いているときに F8 を押すと、クライアントが一時停止します。"
+            name: "F8Break",
+            description: "DevTools (+ ブレークポイント) を開いた状態で F8 を押すと、クライアントが一時停止します。"
         },
         fakeNitro: {
-            name: "フェイクニトロ",
-            description: "偽の絵文字/ステッカーを送信したり、ニトロテーマを使用したり、ニトロ品質でストリーミングしたりできます",
+            name: "FakeNitro",
+            description: "偽の絵文字/ステッカーの送信、Nitro テーマの使用、Nitro 品質でのストリーミングが可能になります",
             option: {
                 enableEmojiBypass: {
-                    label: "絵文字スキップを有効にする",
-                    description: "偽の絵文字の送信を許可します (カスタム絵文字を使用する権限の欠如も回避します)"
+                    label: "絵文字バイパスを有効にする",
+                    description: "偽の絵文字の送信を許可します (カスタム絵文字を使用するための不足している権限もバイパスします)"
                 },
                 emojiSize: {
                     label: "絵文字のサイズ",
-                    description: "絵文字を送信するときに使用するサイズ"
+                    description: "送信時の絵文字のサイズ"
                 },
                 transformEmojis: {
                     label: "絵文字を変換する",
-                    description: "偽の絵文字を本物の絵文字に変換するかどうかを決定します"
+                    description: "偽の絵文字を本物の絵文字に変換するかどうか"
                 },
                 enableStickerBypass: {
-                    label: "ステッカースキップを有効にする",
-                    description: "偽のステッカーの送信を許可します (ステッカーの使用許可の欠如も回避します)"
+                    label: "ステッカーのバイパスを有効にする",
+                    description: "偽のステッカーの送信を許可します (ステッカーを使用するための不足している許可も回避します)"
                 },
                 stickerSize: {
                     label: "ステッカーのサイズ",
-                    description: "ステッカーを送るときに使用するサイズ"
+                    description: "送信時のステッカーのサイズ"
                 },
                 transformStickers: {
-                    label: "ステッカーを変換する",
-                    description: "偽のステッカーを本物のステッカーに変換するかどうかを決定します"
+                    label: "変身ステッカー",
+                    description: "偽のステッカーを本物のステッカーに変換するかどうか"
                 },
                 transformCompoundSentence: {
                     label: "複合文の変換",
-                    description: "複文内の偽の絵文字とステッカー (偽の絵文字やステッカーのリンク以外のコンテンツを含む文) を変換するかどうかを決定します。"
+                    description: "偽のステッカーと絵文字を複文（偽の絵文字やステッカーのリンクだけではなく、より多くの内容を含む文）で変換するかどうか"
                 },
                 enableStreamQualityBypass: {
-                    label: "ブロードキャスト品質スキップを有効にする",
-                    description: "ニトロ品質でのストリーミングが可能"
+                    label: "ストリーム品質バイパスを有効にする",
+                    description: "Nitro 品質でのストリーミングを許可する"
                 },
                 useStickerHyperLinks: {
-                    label: "ステッカーブリッジを使用する",
-                    description: "偽のステッカーを送信するときにハイパーリンクを使用するかどうかを決定します"
+                    label: "ステッカーのハイパーリンクを使用する",
+                    description: "偽のステッカーを送信するときにハイパーリンクを使用するかどうか"
                 },
                 useEmojiHyperLinks: {
-                    label: "絵文字ブリッジを使用する",
-                    description: "偽の絵文字を送信するときにハイパーリンクを使用するかどうかを決定します"
+                    label: "絵文字のハイパーリンクを使用する",
+                    description: "偽の絵文字を送信するときにハイパーリンクを使用するかどうか"
                 },
                 hyperLinkText: {
-                    label: "ハイパーテキスト",
-                    description: "ハイパーリンクで使用するテキスト。 {{NAME}} は絵文字/ステッカーの名前に置き換えられます。"
+                    label: "ハイパーリンクテキスト",
+                    description: "ハイパーリンクに使用するテキスト。 {{NAME}} は絵文字/ステッカー名に置き換えられます。"
                 },
                 disableEmbedPermissionCheck: {
                     label: "埋め込み権限チェックを無効にする",
-                    description: "偽の絵文字やステッカーを送信するときに埋め込み許可チェックを無効にするかどうかを決定します"
+                    description: "偽の絵文字やステッカーを送信するときに埋め込み許可チェックを無効にするかどうか"
                 }
             },
             modal: {
-                sticker: "これはFakeNitroステッカーで、あなただけの本物のステッカーのように見えます。 プラグインを使用していない人向けのリンクとして表示されます。",
-                emoji: "これはFakeNitro絵文字で、あなただけの本物の絵文字のように見えます。 プラグインを使用していない人向けのリンクとして表示されます。"
+                sticker: "これは FakeNitro ステッカーで、あなただけの本物のステッカーのようにレンダリングされます。プラグインを使用していないユーザーへのリンクとして表示されます。",
+                emoji: "これは FakeNitro 絵文字で、あなただけのために本物の絵文字のようにレンダリングされます。プラグインを使用していないユーザーへのリンクとして表示されます。"
             },
             alert: {
                 notice: {
-                    title: "注意！",
-                    body: "FakeNitro 絵文字またはステッカーを含むメッセージを送信/編集しようとしていますが、このチャンネルにリンクを埋め込む権限がありません。 このメッセージを送信してもよろしいですか? FakeNitro アイテムはリンクとしてのみ表示されます。",
-                    footer: "この警告は FakeNitro 設定で無効にすることができます",
+                    title: "持続する！",
+                    body: "FakeNitro 絵文字またはステッカーを含むメッセージを送信/編集しようとしています。ただし、現在のチャンネルにリンクを埋め込む権限がありません。このメッセージを送信してもよろしいですか? FakeNitro アイテムはリンクとしてのみ表示されます。",
+                    footer: "このアラートはFakeNitro設定で無効にすることができます",
                     confirm: "とにかく送信する",
                     cancel: "キャンセル",
-                    secondaryConfirm: "二度と見せないでください"
+                    secondaryConfirm: "二度と表示しないでください"
                 },
                 apngSticker: {
-                    title: "注意！",
-                    body: "このメッセージにはアニメーションの FakeNitro ステッカーが含まれており、このチャンネルにファイルを追加する権限がないため、送信できません。 続行するにはステッカーを剥がす必要があります。"
+                    title: "持続する！",
+                    body: "このメッセージにはアニメーションの FakeNitro ステッカーが含まれており、現在のチャンネルにファイルを添付する権限がないため、送信できません。ステッカーを剥がしてからお進みください。"
                 }
             }
         },
         fakeProfileThemes: {
-            name: "偽のプロフィールのテーマ",
-            description: "プロフィールのテーマを提供します。 目に見えない 3y3 コーディングのおかげで、バイオンに隠れた色が追加されます。",
+            name: "FakeProfileThemes",
+            description: "目に見えない 3y3 エンコーディングのおかげでプロフィールの色を非表示にすることでプロフィールのテーマを設定できるようになります",
             button: {
-                copy: "3y3コピー"
+                copy: "3y3をコピー"
             },
             modal: {
-                usage: "使用",
+                usage: "使用法",
                 preview: "プレビュー",
-                intro: "このプラグインを有効にすると、互換性のあるプラグインを使用している他の人のプロフィールにカスタム カラーが表示されるようになります。",
+                intro: "このプラグインを有効にすると、互換性のあるプラグインを使用している他の人のプロフィールにカスタムカラーが表示されるようになります。",
                 setColor: "独自の色を設定するには:",
-                step1: "• 以下のカラーピッカーを使用して色を選択してください",
-                step2: "• [{{コピー}}]ボタンをクリックします",
-                step3: "• 非表示のテキストを about セクションの任意の場所に貼り付けます",
+                step1: "• 以下のカラーピッカーを使用して色を選択します",
+                step2: "• [{{copy}}] ボタンをクリックします。",
+                step3: "• 非表示のテキストを自己紹介の任意の場所に貼り付けます",
                 pickers: "カラーピッカー",
                 primary: "主要な",
-                accent: "強調"
+                accent: "アクセント"
             },
             option: {
                 nitroFirst: {
                     label: "ニトロファースト",
-                    description: "両方が使用可能な場合のデフォルトのカラー ソース",
+                    description: "両方が存在する場合のデフォルトのカラー ソース",
                     nitro: "ニトロカラー",
-                    fake: "偽の色"
+                    fake: "フェイクカラー"
                 }
             }
         },
         fakeProfileThemesAndEffects: {
-            name: "偽のプロフィールテーマと効果",
-            description: "プロフィールテーマとプロフィール効果を追加できます。 目に見えない 3y3 コーディングのおかげで、隠れた色と効果がバイオに追加されます。",
+            name: "FakeProfileThemesAndEffects",
+            description: "目に見えない 3y3 エンコーディングのおかげでプロフィールの色と効果を非表示にすることで、プロフィールのテーマとプロフィール効果を許可します",
             option: {
                 prioritizeNitro: {
                     label: "ニトロを優先する",
-                    description: "優先順位を付けるリソース",
+                    description: "優先するソース",
                     nitro: "ニトロ",
                     aboutMe: "私について"
                 },
                 hideBuilder: {
-                    label: "クリエイターを隠す",
-                    description: "ユーザー プロファイルおよびサーバー プロファイル設定ページで FPTE Creator を非表示にする"
+                    label: "ビルダーを隠す",
+                    description: "ユーザー プロファイルおよびサーバー プロファイル設定ページで FPTE Builder を非表示にする"
                 }
             },
             modal: {
                 primary: "主要な",
-                accent: "強調",
+                accent: "アクセント",
                 effect: "効果",
                 usage: {
-                    title: "使用",
+                    title: "使用法",
                     intro: "このプラグインを有効にすると、このプラグインを使用している他の人のプロフィールにカスタム テーマの色と効果が表示されます。",
                     setColor: "独自の色と効果を設定するには:",
-                    step1: "プロファイル設定に移動します",
-                    step2: "FPTE Creator を使用してプロファイルのテーマの色と効果を選択する",
-                    step3: "{{コピー}}ボタンをクリックします",
-                    step4: "プロフィール内の任意の場所に非表示のテキストを貼り付けます"
+                    step1: "プロフィール設定に移動します",
+                    step2: "FPTE Builder を使用してプロフィールのテーマの色と効果を選択します",
+                    step3: "{{copy}} ボタンをクリックします",
+                    step4: "非表示のテキストを自己紹介の任意の場所に貼り付けます"
                 }
             },
             toast: {
                 copied: "FPTE がクリップボードにコピーされました。",
-                empty: "FPTE ジェネレーターは空です。 コピーするものは何もありません！"
+                empty: "FPTE Builder is empty; nothing to copy!"
             },
             button: {
-                copyFPTE: "FPTEコピー",
+                copyFPTE: "FPTEをコピー",
                 reset: "リセット",
-                preview: "FPTE クリエイター プレビュー",
-                buildBackwards: "下位互換性のある FPTE を作成する",
-                moreCharacters: "さらに多くのキャラクターが使用されます"
+                preview: "FPTE ビルダー プレビュー",
+                buildBackwards: "下位互換性のある FPTE を構築する",
+                moreCharacters: "もっと文字を使います"
             }
         },
         fastDeleteChannels: {
-            name: "高速削除チャネル",
+            name: "FastDeleteChannels",
             description: "チャンネルを削除するためのゴミ箱アイコンを追加します",
             option: {
                 keyBind: {
-                    label: "ホットキー",
-                    description: "ゴミ箱の開閉に使用する鍵です。"
+                    label: "キーバインド",
+                    description: "押すとゴミ箱を切り替えるキー。"
                 },
                 reqCtrl: {
-                    label: "Ctrlキーが必要です",
-                    description: "ゴミ箱を開くには Ctrl キーを押し続ける必要があります。"
+                    label: "制御が必要",
+                    description: "Control キーを押し続ける必要があります。"
                 },
                 reqShift: {
-                    label: "Shift キーが必要です",
-                    description: "ゴミ箱を開くには、Shift キーを押し続ける必要があります。"
+                    label: "シフトが必要",
+                    description: "Shift キーを押し続ける必要があります。"
                 },
                 reqAlt: {
-                    label: "Alt キーが必要です",
-                    description: "ゴミ箱を開くには、Alt キーを押し続ける必要があります。"
+                    label: "Alt が必要",
+                    description: "Alt キーを押し続ける必要があります。"
                 }
             }
         },
         favoriteEmojiFirst: {
-            name: "好きな絵文字最初",
-            description: "お気に入りの絵文字が絵文字オートコンプリート リストの先頭に表示され、絵文字のニックネームも提供されます。",
+            name: "FavouriteEmojiFirst",
+            description: "お気に入りの絵文字を絵文字オートコンプリートの最初に配置し、絵文字のエイリアスも提供します。",
             option: {
                 aliases: {
-                    label: "ニックネーム",
-                    description: "絵文字のニックネームを管理します。"
+                    label: "別名",
+                    description: "絵文字のエイリアスを管理します。"
                 },
                 clearAll: {
                     label: "すべてクリア",
-                    description: "すべてのニックネームを削除します。"
+                    description: "すべてのエイリアスを削除します。"
                 }
             },
             modal: {
                 clear: {
                     title: "すべてのエイリアスを削除",
-                    description: "これにより、保存した絵文字のニックネームが削除されます。",
-                    confirm: "すべてのニックネームを削除する"
+                    description: "これにより、保存したすべての絵文字エイリアスが削除されます。",
+                    confirm: "すべてのエイリアスを削除する"
                 },
                 set: {
-                    title: "ニックネームを設定する",
-                    description: "{{emoji}} のニックネームを設定します",
-                    placeholder: "ニックネーム、例: 'ハッピー'",
+                    title: "エイリアスの設定",
+                    description: "{{emoji}} のエイリアスを設定する",
+                    placeholder: "エイリアス、例: 'ハッピー'",
                     save: "保存",
-                    error: "重複したニックネーム"
+                    error: "重複したエイリアス"
                 }
             },
             toast: {
-                set: "{{emoji}} に設定されたニックネーム",
-                clearAll: "すべての絵文字ニックネームが削除されました",
+                set: "{{emoji}} に設定されたエイリアス",
+                clearAll: "すべての絵文字エイリアスを削除しました",
                 failedDeleted: "エイリアスの削除に失敗しました",
-                removed: "{{alias}} のエイリアスが削除されました",
+                removed: "削除されたエイリアス: {{alias}}",
                 failedRemove: "エイリアスの削除に失敗しました",
-                duplicate: "重複したニックネーム",
-                failedSave: "ニックネームが登録できませんでした"
+                duplicate: "重複したエイリアス",
+                failedSave: "エイリアスの保存に失敗しました。"
             },
             button: {
-                edit: "ニックネームの編集",
-                set: "ニックネームを設定する"
+                edit: "エイリアスの編集",
+                set: "エイリアスの設定"
             }
         },
         favoriteGifSearch: {
-            name: "お気に入りGif検索",
+            name: "FavouriteGifSearch",
             description: "お気に入りの GIF に検索バーを追加します。",
             placeholder: "お気に入りのGIFを検索",
             option: {
                 searchOption: {
                     label: "検索オプション",
-                    description: "URLのどの部分を検索したいのか",
-                    url: "すべてのURL",
+                    description: "URLの検索したい部分",
+                    url: "URL全体",
                     path: "パスのみ (/somegif.gif)",
-                    hostandpath: "ホストとパス (tenor.com somegif.gif)"
+                    hostandpath: "ホストとパス (tenor.com somgif.gif)"
                 }
             }
         },
         favouriteAnything: {
-            name: "お気に入り何でも",
+            name: "FavouriteAnything",
             description: "任意の画像をお気に入りに追加"
         },
         fileDownloadButton: {
-            name: "ファイルダウンロードボタン",
+            name: "FileDownloadButton",
             description: "ファイルの右上隅にダウンロード ボタンを追加します"
         },
         findReply: {
-            name: "返信を見つける",
-            description: "チャネル内のメッセージに対する最も古い返信にジャンプします (過去の会話を追跡しやすくなります)。",
+            name: "FindReply",
+            description: "チャネル内のメッセージに対する最も古い返信にジャンプします (過去の会話をより簡単に追跡できます)。",
             context: {
-                jump: "回答に進む"
+                jump: "返信にジャンプ"
             },
             toast: {
-                navigate: "下部パネルを使用して回答を参照してください。",
-                container: "コンテナ要素が見つかりません。",
-                couldntFind: "応答メッセージが見つかりませんでした。"
+                navigate: "下部パネルを使用して、返信間を移動します。",
+                container: "コンテナ要素が見つかりませんでした。",
+                couldntFind: "返信メッセージが見つかりませんでした。"
             },
             option: {
                 includePings: {
-                    label: "言及を含める",
-                    description: "また、作成者に直接送信されたメッセージも検索します。"
+                    label: "Ping を含める",
+                    description: "作成者に直接 @ 送信されたメッセージも検索します"
                 },
                 includeAuthor: {
                     label: "著者を含める",
-                    description: "特定の投稿に対する返信だけでなく、投稿者全般に対する返信も検索します"
+                    description: "また、その正確なメッセージだけでなく、作成者に返信するメッセージ全般も検索します。"
                 },
                 hideButtonIfNoReply: {
-                    label: "応答がない場合はボタンを非表示にする",
-                    description: "メッセージに対する応答がない場合はボタンを非表示にします"
+                    label: "Hide Button If No Reply",
+                    description: "メッセージに返信がない場合はボタンを非表示にします"
                 }
             }
         },
         fixCodeblockGap: {
-            name: "コードブロックギャップを修正",
-            description: "コードのブロックとその下のテキストの間のスペースを削除します。"
+            name: "FixCodeblockGap",
+            description: "コードブロックとその下のテキストの間のギャップを削除します"
         },
         fixFileExtensions: {
-            name: "ファイル拡張子の修正",
+            name: "FixFileExtensions",
             description: "可能であれば、互換性のあるサポートされている形式に名前を変更してファイル拡張子を修正します"
         },
         fixImagesQuality: {
-            name: "画像の修正品質",
-            description: "オリジナルのソースの使用を強制することで画像の品質を向上させます",
+            name: "FixImagesQuality",
+            description: "オリジナルのソースを強制的に使用することで画像の品質を向上させます",
             option: {
                 originalImagesInChat: {
-                    label: "チャットで元の画像を表示する",
-                    description: "チャットでは元の画像も表示します。 警告: 上記の警告をお読みください"
+                    label: "チャット内の元の画像",
+                    description: "チャットにもオリジナル画像を読み込みます。警告: 上記の注意事項をお読みください"
                 }
             },
             modal: {
                 about: {
                     title: "デフォルトの動作は次のとおりです。",
-                    body: "&mdash;最適化されたフル解像度の画像がチャットにロードされます。",
-                    body2: "&mdash;画像ウィンドウ (画像モーダル) に、元の画像がロードされます。",
+                    body: "— チャットでは、最適化されたフル解像度の画像がロードされます。",
+                    body2: "— 画像モーダルでは、元の画像がロードされます。",
                     body3: "チャットで元の画像を有効にすることもできますが、次の注意点に注意してください。",
-                    warning: "&mdash;チャット内のアニメーション画像 (GIF、WebP など) は、アプリケーションにフォーカスがある場合でも、常にアニメーション化されます。",
-                    warning2: "&mdash;パフォーマンス上の問題が発生する可能性があります。"
+                    warning: "&mdash; Animated images (GIF, WebP, etc.) in chat will always animate, regardless of whether the app is focused.",
+                    warning2: "— 遅延が発生する可能性があります。",
                 }
             }
         },
         fixSpotifyEmbeds: {
-            name: "Spotify埋め込みを修正する",
-            description: "Spotify の埋め込み音が大きすぎるのを修正し、音量をカスタマイズできるようにします",
+            name: "FixSpotifyEmbeds",
+            description: "Fixes Spotify embeds being incredibly loud by letting you customise the volume",
             option: {
                 volume: {
-                    label: "騒音レベル",
-                    description: "Spotify 埋め込み用に調整する音量パーセンテージ。 10%を超えると高すぎる"
+                    label: "音量",
+                    description: "Spotify 埋め込みに設定する音量 %。 10%を超えるとかなりうるさいです"
                 }
             }
         },
         fixYoutubeEmbeds: {
-            name: "YouTubeの埋め込みを修正する",
-            description: "Discord での YouTube 動画の視聴のブロックをバイパスします (UMG などによる)"
+            name: "FixYoutubeEmbeds",
+            description: "Discord での表示がブロックされている YouTube 動画 (UMG など) をバイパスします。"
         },
         followUser: {
-            name: "ユーザーをフォローする",
-            description: "ユーザーのコンテキスト メニューにフォロー オプションを追加します。 常に同じ音声チャンネルを使用できるようにします",
-            indicatorTooltip: "{{user}} がフォローされています (クリックして手動でトリガーし、右クリックしてフォローを解除します)",
+            name: "FollowUser",
+            description: "ユーザーのコンテキスト メニューに [フォロー] オプションを追加して、常に同じ VC 内に表示されるようにします。",
+            indicatorTooltip: "{{user}} をフォローしています (クリックして手動でトリガーし、右クリックしてフォローを解除します)",
             unknownUser: "不明なユーザー",
             option: {
                 executeOnFollow: {
-                    label: "フォローすると適用される",
-                    description: "ユーザーをフォローするときは、同じ音声チャネルを使用していることを確認してください"
+                    label: "フォロー時に実行",
+                    description: "ユーザーをフォローするときは必ず同じ VC にいることを確認してください"
                 },
                 onlyManualTrigger: {
                     label: "手動トリガーのみ",
-                    description: "インジケーターがクリックされた場合のみトリガー"
+                    description: "インジケーターのクリック時にのみトリガーします"
                 },
                 followLeave: {
-                    label: "フォローされた場合",
-                    description: "フォローしたユーザーが離れるときは自分も離れる"
+                    label: "フォローする",
+                    description: "フォローしたユーザーが離脱した場合も離脱します"
                 },
                 autoMoveBack: {
                     label: "自動で戻る",
-                    description: "移動すると、フォローしているユーザーの音声チャンネルに自動的に戻ります"
+                    description: "移動すると、フォローしているユーザーのVCに自動的に戻ります"
                 },
                 followUserId: {
-                    label: "フォローしたユーザーID",
+                    label: "ユーザーIDをフォローする",
                     description: "フォローしたユーザーID"
                 },
                 channelFull: {
                     label: "チャンネルがいっぱい",
-                    description: "チャンネルがもういっぱいでない場合は、そこに移動してみてください"
+                    description: "チャンネルがいっぱいでなくなったら、そのチャンネルに移動しようとします"
                 }
             },
             toast: {
                 channelFull: "チャンネルがいっぱいです",
-                newVc: "フォローしているユーザーが新しい音声チャンネルに切り替えました",
-                insufficientPermissions: "音声チャネルに入るには十分な権限がありません",
+                newVc: "ユーザーをフォローして新しい音声チャネルにアクセスしました",
+                insufficientPermissions: "音声チャネルに入る権限が不十分です",
                 sameVc: "あなたはすでに同じチャンネルにいます",
-                disconnect: "ユーザーのフォローを解除し、切断されました",
-                notFollowing: "フォローしていたユーザーは退会しましたが、あなたはフォローを解除しませんでした",
+                disconnect: "ユーザーをフォローしたままにしました。切断された",
+                notFollowing: "ユーザーをフォローしましたが、切断には従いませんでした",
                 notVc: "フォローされているユーザーは音声チャンネルに参加していません"
             },
             context: {
-                follow: "フォローする",
-                unfollow: "フォローを解除する"
+                follow: "ユーザーをフォローする",
+                unfollow: "ユーザーのフォローを解除する"
             }
         },
         fontLoader: {
-            name: "フォントローダー",
-            description: "Google Fonts経由で任意のフォントをインストールします",
+            name: "FontLoader",
+            description: "Google Fontsから任意のフォントを読み込みます",
             option: {
                 selectedFont: {
                     label: "選択したフォント",
@@ -4507,7 +4507,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 fontSearch: {
                     label: "フォント検索",
-                    description: "Google Fonts経由でフォントを検索して選択します"
+                    description: "Google Fontsを検索して選択します"
                 },
                 applyOnCodeBlocks: {
                     label: "コードブロックに適用する",
@@ -4519,149 +4519,149 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             modal: {
                 settings: {
-                    title: "Google Fonts'ta Ara",
-                    description: "適用するフォントを選択してください",
+                    title: "Google フォントを検索",
+                    description: "フォントを選択して適用します",
                     placeholder: "フォントを検索...",
-                    previewText: "パジャマを着た患者はすぐに油まみれの運転手を信頼した",
-                    authors: "{{著者}} 著"
+                    previewText: "素早い茶色のキツネが怠惰な犬を飛び越える",
+                    authors: "{{authors}} 著"
                 }
             }
         },
         forceOwnerCrown: {
-            name: "フォースオーナークラウン",
-            description: "サーバーが大きい場合でも、ユーザー名の横にサーバー所有者の王冠が強制的に表示されます。"
+            name: "ForceOwnerCrown",
+            description: "サーバーが大きい場合でも、ユーザー名の横に所有者の王冠を強制的に表示します。"
         },
         forwardAnywhere: {
-            name: "どこでも進む",
-            description: "転送が失敗した場合、メッセージは通常のメッセージとして送信されます。 NSFW コンテンツの送信も可能になります。",
+            name: "ForwardAnywhere",
+            description: "転送が失敗した場合は、通常のメッセージとして送信します。 NSFW 転送も許可します",
             option: {
                 forwardPreface: {
-                    label: "転送プレフィックス",
-                    description: "送信メッセージの先頭にどのステートメントを追加する必要がありますか?"
+                    label: "前書き",
+                    description: "転送されるコンテンツの先頭に何を付ける必要があるか"
                 }
             },
             context: {
                 attachments: "添付ファイル",
-                forwarded: "転送元:"
+                forwarded: "から転送されました"
             }
         },
         freaky: {
-            name: "気まぐれな",
-            description: "/freaky コマンドを使用すると、奇妙なフォントでメッセージを送信できます。",
+            name: "Freaky",
+            description: "/freaky コマンドを使用して、奇妙なフォントでメッセージを送信できるようにします。",
             command: {
-                freaky: "それは奇妙でした。",
-                message: "奇妙なフォントでメッセージを送信する"
+                freaky: "それはおかしいです。",
+                message: "メッセージを奇抜なものにする"
             },
             option: {
                 addFreakyEnding: {
-                    label: "奇妙なエンディングを追加する",
+                    label: "気まぐれなエンディングを追加",
                     description: "最後に👅または❤️を追加します"
                 }
             }
         },
         frequentQuickSwitcher: {
-            name: "頻繁に使用するクイックスイッチャー",
-            description: "クイック スイッチ ウィンドウ内の結果を、最も頻繁に使用するチャンネルに置き換えてフィルターします。"
+            name: "Frequent Quick Switcher",
+            description: "クイック スイッチャーの結果を書き換えてフィルタリングし、最も頻繁に使用されるチャネルにします。"
         },
         friendCloud: {
-            name: "フレンドクラウド",
-            description: "/friendcloud コマンドを追加して、最も頻繁にやり取りするユーザーを視覚化します。",
+            name: "FriendCloud",
+            description: "/friendcloud コマンドを追加して、最も頻繁にやり取りするユーザーを視覚化します",
             command: {
                 friendcloud: {
                     description: "友達のクラウドを視覚化する",
                     count: "表示するユーザーの数",
-                    mustHigher: "数値は 1 以上である必要があります。",
-                    noAffinities: "近接データが見つかりません。 [プライバシー設定](<https://support.discord.com/hc/en-us/articles/21864805694999-Data-used-to- Improvement-Discord>) を確認してください。",
-                    noValid: "プロキシ内に有効なユーザーが見つかりません。 [プライバシー設定](<https://support.discord.com/hc/en-us/articles/21864805694999-Data-used-to- Improvement-Discord>) を確認してください。",
-                    genFailed: "画像を作成できませんでした:c"
+                    mustHigher: "カウントは 1 以上である必要があります。",
+                    noAffinities: "アフィニティが見つかりません。 [プライバシー設定](<https://support.discord.com/hc/en-us/articles/21864805694999-Data-used-to- Improvement-Discord>) を確認してください。",
+                    noValid: "アフィニティに有効なユーザーが見つかりません。 [プライバシー設定](<https://support.discord.com/hc/en-us/articles/21864805694999-Data-used-to- Improvement-Discord>) を確認してください。",
+                    genFailed: "画像を生成できませんでした:c"
                 }
             }
         },
         friendCodes: {
-            name: "フレンドコード",
+            name: "FriendCodes",
             description: "フレンドコードを生成して簡単に友達を追加",
             card: {
-                expires: "有効期限: <t:{{expiration}}:R> • {{uses}}/{{maxUses}} の使用量",
+                expires: "期限切れ <t:{{expiration}}:R> • {{uses}}/{{maxUses}} は使用します",
                 copy: "コピー",
                 copied: "コピーしました！",
-                codes: "あなたのフレンドシップコード",
-                count: "フレンドコード - {{招待}}",
-                create: "フレンドシップコードを生成する",
-                revoke: "フレンドコードをすべてキャンセルする",
+                codes: "あなたのフレンドコード",
+                count: "フレンドコード - {{invites}}",
+                create: "フレンドコードを作成する",
+                revoke: "すべてのフレンドコードを取り消す",
                 loading: "読み込み中...",
                 dontHave: "フレンドコードがありません。"
             }
         },
         friendInvites: {
-            name: "友達が招待する",
+            name: "FriendInvites",
             description: "スラッシュ コマンド (/create 友人招待、/view 友人招待、/revoke 友人招待) を使用して友人招待リンクを作成および管理します。",
             command: {
                 create: {
                     description: "友達の招待リンクを生成します。",
-                    message: "discord.gg/{{code}}`\n・有効期限: <t:{{expiration}}:R>\n・最大使用量: {{uses}}"
+                    message: "discord.gg/{{code}}`\n· 期限切れ <t:{{expiration}}:R>\n· 最大使用回数: {{uses}}"
                 },
                 view: {
-                    description: "作成されたすべての友達招待リンクを表示します。",
-                    message: "_discord.gg/{{code}}_\n· 有効期限: <t:{{expiration}}:R> \n· 使用回数: {{uses}}/{{maxUses}}",
-                    noInvites: "有効な友達招待リンクがありません。"
+                    description: "生成されたすべての友達招待のリストを表示します。",
+                    message: "_discord.gg/{{code}}_ \n· 有効期限: <t:{{expiration}}:R> \n· 使用回数: {{uses}}/{{maxUses}}",
+                    noInvites: "アクティブな友達の招待はありません。"
                 },
                 revoke: {
-                    description: "作成された友達招待リンクをキャンセルします。",
-                    message: "友達の招待リンクはすべてキャンセルされました。"
+                    description: "生成されたすべての友達の招待を取り消します。",
+                    message: "友達の招待はすべて取り消されました。"
                 }
             }
         },
         friendshipRanks: {
-            name: "友情ランク",
-            description: "ユーザーと友達になってからの期間を示すバッジを追加します。",
+            name: "FriendshipRanks",
+            description: "ユーザーとの友達期間を示すバッジを追加します",
             badge: {
                 sprout: {
-                    name: "スプラウト",
-                    description: "あなたの友情はまさに花開いたばかりです。"
+                    name: "Sprout",
+                    description: "あなたの友情はまだ始まったばかりです"
                 },
                 blooming: {
-                    name: "咲く",
-                    description: "あなたの友情はさらに深まります！ (1ヶ月)"
+                    name: "Blooming",
+                    description: "あなたの友情はそこまで来ています！ (1ヶ月)"
                 },
                 burning: {
-                    name: "燃える",
-                    description: "あなたの友情は最高潮に達しました。 (3ヶ月)"
+                    name: "Burning",
+                    description: "あなたの友情は終末速度に達しました (3 か月)"
                 },
                 fighter: {
-                    name: "ファイター",
-                    description: "あなたの友情は強いです。 (6ヶ月)"
+                    name: "Fighter",
+                    description: "あなたの友情は強いです（6か月）"
                 },
                 star: {
-                    name: "星",
-                    description: "あなたの友情は長い間続いています。 (1年)"
+                    name: "Star",
+                    description: "あなたの友情はしばらく（1年間）続いています"
                 },
                 royal: {
-                    name: "結果",
-                    description: "あなたの友情はあらゆる困難を乗り越えてきました - 2 年間!"
+                    name: "Royal",
+                    description: "あなたの友情は濃いときも薄いときもあり、丸 2 年間でした。"
                 },
                 besties: {
-                    name: "親友",
-                    description: "どうやってこれを達成しますか？ (5年)"
+                    name: "Besties",
+                    description: "これをどうやって管理するのでしょうか？ (5年)"
                 }
             }
         },
         friendsSince: {
-            name: "友達以来",
-            description: "ユーザーがポップアップ内の誰かと友達であることを示します。",
-            section: "デートの日付"
+            name: "FriendsSince",
+            description: "ユーザー ポップアウトにいつ誰かと友達になったかが表示されます",
+            section: "以来の友達"
         },
         friendTags: {
-            name: "友達タグ",
-            description: "& で検索を開始すると、クイック ジャンプ メニューでカスタム タグでフィルタリングできます。",
+            name: "FriendTags",
+            description: "& で検索を開始すると、クイック スイッチャーでカスタム タグでフィルタリングできます。",
             modal: {
-                name: "名前",
-                users: "ユーザー (カンマで区切る)",
+                name: "Name",
+                users: "ユーザー (カンマ区切り)",
                 userlist: "ユーザーリスト (削除するユーザーをクリックします)",
                 remove: "取り除く",
                 add: "追加",
-                tag: "チケット",
-                removeFrom: "以下から削除します:",
-                addTo: "に追加："
+                tag: "タグ",
+                removeFrom: "から削除",
+                addTo: "に追加"
             },
             option: {
                 tagConfiguration: {
@@ -4671,84 +4671,84 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         fullSearchContext: {
-            name: "フルサーチコンテキスト",
-            description: "これにより、メッセージ検索結果のメッセージ コンテキスト メニューに、期待されるすべてのオプションが表示されます。"
+            name: "FullSearchContext",
+            description: "メッセージ検索結果のメッセージ コンテキスト メニューに、期待されるすべてのオプションが含まれるようにします。"
         },
         fullUserInChatbox: {
-            name: "チャットボックス内のフルユーザー",
-            description: "チャット ボックスのユーザー タグを左/右クリックするなどの追加機能を追加します。"
+            name: "FullUserInChatbox",
+            description: "チャットボックス内のユーザーのメンションに、左/右クリックなどの機能が追加されます。"
         },
         fullVCPFP: {
-            name: "フルVCPFP",
-            description: "アバターがボイスチャットボックス全体をカバーできるようにします。",
+            name: "FullVCPFP",
+            description: "アバターが VC タイル全体を占めるようにします",
             option: {
                 useServerProfileAvatars: {
                     label: "サーバープロファイルアバターを使用する",
-                    description: "音声チャット ボックスでプレゼンター プロフィール アバターを使用します (利用可能な場合)"
+                    description: "利用可能な場合は、ギルド音声チャネルでサーバー プロファイル アバターを使用します。"
                 }
             }
         },
         gameActivityToggle: {
-            name: "ゲームアクティビティトグル",
-            description: "ユーザー ポップアップにスイッチを追加して、ゲーム アクティビティを表示または非表示にします。",
-            tooltip: "ゲームイベントの変更",
+            name: "GameActivityToggle",
+            description: "ゲームアクティビティを表示/非表示にするためのトグルをユーザーポップアウトに追加します",
+            tooltip: "ゲームアクティビティの切り替え",
             gameActivity: {
-                enabled: "ゲームイベントが有効になりました",
-                disabled: "ゲームイベントが無効になっています"
+                enabled: "ゲームアクティビティが有効になりました",
+                disabled: "ゲームアクティビティが無効になっています"
             },
             option: {
                 oldIcon: {
-                    label: "古代のアイコン",
-                    description: "Discord アイコンを再設計する前に古いアイコン スタイルを使用する"
+                    label: "古いアイコン",
+                    description: "Discord アイコンの再設計前の古いアイコン スタイルを使用する"
                 },
                 location: {
-                    label: "女性",
-                    description: "ゲームイベントキーを表示する場所",
-                    panel: "ミュート/マイクオフの隣",
-                    toolbox: "ツールボックスの Plexcord"
+                    label: "位置",
+                    description: "ゲームアクティビティトグルボタンを表示する場所",
+                    panel: "ミュート/聴覚障害者の隣",
+                    toolbox: "Plexcord ツールボックス"
                 }
             }
         },
         ghosted: {
-            name: "ゴースト化",
-            description: "DMに返事をしていない人の隣にはかわいい幽霊が現れます。",
+            name: "Ghosted",
+            description: "DMに返事をしないとかわいいオバケが現れる",
             modal: {
                 title: "ゴースト化されたユーザー",
                 no: "ゴースト化されたユーザーは存在しない",
-                unghost: "幽霊を取り除く",
+                unghost: "幽霊でない",
                 unknown: "未知",
-                unnamedGroup: "匿名グループ",
+                unnamedGroup: "名前のないグループ",
                 unknownUser: "不明なユーザー",
                 clearAll: "すべてクリア",
-                noGhost: "ここには幽霊なんていないよ！",
+                noGhost: "ここには幽霊はいないよ！",
                 clear: "クリア"
             },
             option: {
                 showIndicator: {
                     label: "インジケーターを表示",
-                    description: "サーバーリストの先頭にゴーストカウンターを表示します。"
+                    description: "サーバーリストの上部にゴーストカウンターを表示します"
                 },
                 showDmIcons: {
                     label: "DMアイコンを表示",
-                    description: "個々の DM の横にゴースト アイコンを表示します。"
+                    description: "個々の DM の横にゴースト アイコンを表示する"
                 },
                 ignoreGroupDms: {
                     label: "グループDMを無視する",
-                    description: "すべてのグループ メッセージをゴースト リストから除外します。"
+                    description: "すべてのグループ DM をゴースティングから除外する"
                 },
                 exemptedChannels: {
-                    label: "除外チャンネル",
-                    description: "ゴーストリストに含まれないチャネル ID (ID) のカンマ区切りリスト (DM チャネルを右クリックして ID をコピーします)。"
+                    label: "免除されるチャンネル",
+                    description: "ゴースティングを除外するチャネル ID のカンマ区切りリスト (DM チャネルを右クリックして ID をコピーします)"
                 },
                 ignoreBots: {
                     label: "ボットを無視する",
-                    description: "ボットからのDMは無視します。"
+                    description: "ボットからのDMを無視する"
                 }
             }
         },
         gifCollections: {
-            name: "GIFコレクション",
-            description: "GIF コレクションを作成できます。",
+            name: "GifCollection",
+            description: "GIF のコレクションを作成できます",
             context: {
                 copyImageLink: "画像リンクをコピー",
                 copyUrl: "URLをコピー",
@@ -4759,27 +4759,27 @@ const translations: MatchStructure<typeof enTranslations> = {
                     create: "コレクションの作成",
                     remove: "取り除く",
                     information: "コレクション情報",
-                    name: "名前",
-                    gifs: "平手打ち",
+                    name: "Name",
+                    gifs: "GIF",
                     created: "作成日",
-                    updated: "最終更新",
-                    close: "四半期",
+                    updated: "最終更新日",
+                    close: "近い",
                     rename: "名前を変更する",
                     move: "コレクションに移動",
-                    select: "移動するコレクションを選択してください"
+                    select: "アイテムの移動先のコレクションを選択してください"
                 },
                 gif: {
                     information: "情報",
-                    added: "追加日",
+                    added: "追加日時",
                     width: "幅",
                     height: "身長",
-                    close: "四半期"
+                    close: "近い"
                 }
             },
             option: {
                 itemPrefix: {
                     label: "項目の接頭辞",
-                    description: "GIF要素のプレフィックス"
+                    description: "GIF アイテムのプレフィックス"
                 },
                 collectionPrefix: {
                     label: "コレクションのプレフィックス",
@@ -4790,44 +4790,44 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "コレクションのみを表示"
                 },
                 stopWarnings: {
-                    label: "アラートの停止",
+                    label: "停止警告",
                     description: "削除警告を停止する"
                 },
                 showCopyImageLink: {
-                    label: "画像リンクのコピー オプションを表示",
-                    description: "コンテキスト メニューに {{copyImageLink}} を表示する"
+                    label: "画像のコピーリンクを表示",
+                    description: "コンテキスト メニューに {{copyImageLink}} オプションを表示する"
                 },
                 preventDuplicates: {
-                    label: "再発を防ぐ",
-                    description: "同じ GIF がコレクションに複数回追加されないようにする"
+                    label: "重複の防止",
+                    description: "同じ GIF をコレクションに複数回追加しないようにする"
                 },
                 defaultEmptyCollectionImage: {
                     label: "デフォルトの空のコレクション画像",
-                    description: "コレクションに画像/GIF がない場合に表示する画像/GIF"
+                    description: "コレクションに画像/GIF がない場合に表示される画像/GIF"
                 },
                 collectionsSortType: {
                     label: "コレクションの並べ替えタイプ",
-                    description: "コレクションのソートタイプ"
+                    description: "コレクションの並べ替えの種類"
                 },
                 collectionsSortOrder: {
                     label: "コレクションの並べ替え順序",
-                    description: "コレクションの並べ替え順序"
+                    description: "コレクションのソート順序"
                 },
                 collectionsSort: {
                     label: "コレクションの並べ替え",
                     description: "コレクションの並べ替え方法を決定する",
                     title: "コレクションの並べ替え",
-                    sortDescription: "コレクションごとに並べ替えを選択してください",
+                    sortDescription: "コレクションの並べ替え基準を選択してください",
                     sortBy: "並べ替え",
-                    name: "名前",
+                    name: "Name",
                     creationDate: "作成日",
                     modifiedDate: "変更日",
-                    ascending: "成長する",
-                    descending: "減少中"
+                    ascending: "上昇",
+                    descending: "降順"
                 },
                 importGifs: {
                     label: "GIFをインポートする",
-                    description: "コレクションをインポートする",
+                    description: "コレクションのインポート",
                     button: "コレクションのインポート"
                 },
                 exportGifs: {
@@ -4844,18 +4844,18 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 copied: "画像リンクがクリップボードにコピーされました!",
                 urlCopied: "URL がクリップボードにコピーされました!",
-                already: "このコレクションはすでに存在します",
-                alreadyCollection: "このGIFはすでにコレクションに存在します"
+                already: "そのコレクションはすでに存在します",
+                alreadyCollection: "そのGIFはすでにそのコレクションにあります"
             },
             modal: {
                 create: {
                     title: "コレクションの作成",
-                    name: "コレクション名",
+                    name: "Collection Name",
                     create: "作成する"
                 },
                 rename: {
                     title: "コレクションの名前を変更",
-                    name: "新しいコレクション名",
+                    name: "New Collection Name",
                     warning: "名前は 24 文字以下にする必要があります",
                     rename: "名前を変更する"
                 }
@@ -4863,90 +4863,90 @@ const translations: MatchStructure<typeof enTranslations> = {
             alert: {
                 import: {
                     title: "本気ですか？",
-                    body: "コレクションをインポートすると、既存のコレクションが上書きされます。",
-                    confirm: "イチェ・アクター",
-                    cancel: "キャンセル"
+                    body: "コレクションをインポートすると、現在のコレクションが上書きされます。",
+                    confirm: "輸入",
+                    cancel: "どうでも"
                 },
                 reset: {
                     title: "本気ですか？",
                     body: "コレクションをリセットすると、すべてのコレクションが削除されます。",
                     confirm: "リセット",
-                    cancel: "キャンセル"
+                    cancel: "どうでも"
                 },
                 delete: {
                     title: "本気ですか？",
                     deleteBody: "本当にこのコレクションを削除してもよろしいですか?",
                     removeBody: "本当にこの項目を削除してもよろしいですか?",
-                    confirm: "シル",
+                    confirm: "消去",
                     remove: "取り除く",
-                    cancel: "キャンセル"
+                    cancel: "どうでも"
                 }
             }
         },
         gifPaste: {
-            name: "GIFペースト",
-            description: "GIF をチャット ボックスに直接貼り付けることができます。"
+            name: "GifPaste",
+            description: "GIF をチャット ボックスに直接貼り付けることができます"
         },
         gifRoulette: {
-            name: "GIFルーレット",
-            description: "お気に入りからランダムな GIF を送信するコマンドを追加します。 サーバー所有者をタグ付けできる確率は 10% です。",
+            name: "GifRoulette",
+            description: "お気に入りからランダムな GIF を送信するコマンドを追加します。10 分の 1 の確率でサーバーの所有者に ping を送信します。",
             command: {
                 gifRoulette: {
-                    description: "運試しにランダムな GIF を送信してください"
+                    description: "運命を誘惑してGIFを送る"
                 }
             },
             option: {
                 pingOwnerChance: {
-                    label: "サーバー所有者にタグを付けるチャンス",
-                    description: "サーバー所有者をタグ付けする確率を 10 分の 1 に設定します (すごい!)"
+                    label: "Ping オーナー チャンス",
+                    description: "10 分の 1 の確率でギルドのオーナーに ping を送信する必要があるかどうか (ああ、だめだ)"
                 }
             }
         },
         gitHubRepos: {
-            name: "GitHubリポジトリ",
-            description: "ユーザーのプロフィールにパブリック GitHub リポジトリを表示します。",
+            name: "GitHubRepos",
+            description: "ユーザーのプロファイルにパブリック GitHub リポジトリを表示します",
             loading: "リポジトリをロードしています...",
             option: {
                 showStars: {
-                    label: "スターを見せて",
-                    description: "ウェアハウスのスターを表示する"
+                    label: "ショースター",
+                    description: "リポジトリのスターを表示"
                 },
                 showLanguage: {
                     label: "言語を表示",
-                    description: "リポジトリの主なプログラミング言語を表示します"
+                    description: "リポジトリの主言語を表示"
                 },
                 showInMiniProfile: {
                     label: "ミニプロフィールで表示",
-                    description: "ミニプロファイルウィンドウにリポジトリを表示"
+                    description: "ミニプロファイルポップアウトにリポジトリを表示"
                 },
                 showRepositoryTab: {
                     label: "「リポジトリ」タブを表示",
-                    description: "プロファイルモーダルにリポジトリタブを表示します（有効になっている場合、リンク上のボタンを非表示にします）"
+                    description: "プロファイルモーダルに「リポジトリ」タブを表示 (有効にすると接続のボタンが非表示になります)"
                 }
             },
             error: {
-                error: "平",
-                render: "エラー: GithubRepos を表示できませんでした"
+                error: "エラー",
+                render: "エラー: GitHubRepos のレンダリングに失敗しました"
             },
             button: {
                 show: "GitHub リポジトリを表示する",
                 repositories: "GitHub リポジトリ",
                 more: "もっと見る",
-                only: "最高の {{length}}/{{total}} のみを表示しています"
+                only: "上位 {{length}}/{{total}} のみを表示"
             },
             modal: {
                 title: "{{user}} の GitHub リポジトリ",
-                repository: "デポ",
+                repository: "リポジトリ",
                 description: "説明",
-                language: "ディル",
+                language: "言語",
                 stars: "星",
                 viewOnGitHub: "GitHub で見る",
-                close: "四半期"
+                close: "近い"
             }
         },
         googleThat: {
-            name: "Googleそれ",
-            description: "インターネット検索接続を送信できるコマンドを追加します。",
+            name: "GoogleThat",
+            description: "インターネット検索リンクを送信するコマンドを追加します",
             command: {
                 googleThat: {
                     description: "検索エンジンのリンクを送信する",
@@ -4955,49 +4955,49 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 hyperlink: {
-                    label: "橋",
-                    description: "送信されたリンクがクエリ タグを含むハイパーリンクとして送信されるかどうか"
+                    label: "ハイパーリンク",
+                    description: "送信されたリンクがクエリをラベルとしてハイパーリンクするかどうか"
                 },
                 embed: {
-                    label: "埋め込みコンテンツ",
-                    description: "送信されたリンクを埋め込みコンテンツとして表示するかどうか"
+                    label: "埋め込む",
+                    description: "送信されたリンクが埋め込みをレンダリングする必要があるかどうか"
                 },
                 defaultEngine: {
-                    label: "デフォルトの検索エンジン",
+                    label: "デフォルトのエンジン",
                     description: "使用する検索エンジン"
                 },
                 customEngineURL: {
-                    label: "カスタム検索エンジンの URL",
-                    description: "使用したい検索エンジンのURL"
+                    label: "カスタムエンジンのURL",
+                    description: "使用したいエンジンのURL"
                 }
             }
         },
         greetStickerPicker: {
-            name: "グリートステッカーピッカー",
-            description: "「手を振って挨拶してください！」ボタンを右クリックすると、ランダムなウェルカム ステッカーの代わりに必要なウェルカム ステッカーを使用できます。",
+            name: "GreetStickerPicker",
+            description: "「手を振ってこんにちは!」を右クリックすると、ランダムなステッカーだけでなく、任意の挨拶ステッカーを使用できるようになります。ボタン",
             mode: {
-                greet: "こんにちは",
+                greet: "挨拶する",
                 message: "メッセージ"
             },
             option: {
                 greetMode: {
-                    label: "挨拶モード",
-                    description: "挨拶モードを選択します",
-                    greet: "挨拶（挨拶は3回までしか送信できません）",
-                    message: "メッセージ（無制限にグリーティングを送信できます）"
+                    label: "グリーティングモード",
+                    description: "挨拶モードを選択する",
+                    greet: "挨拶（挨拶は3回まで）",
+                    message: "メッセージ（スパムを歓迎できます）"
                 }
             },
             context: {
-                label: "グリーティングステッカーセレクター",
-                mode: "挨拶モード",
-                stickers: "グリーティングステッカー",
-                multi: "複数の挨拶",
-                send: "こんにちは送信"
+                label: "挨拶ステッカーピッカー",
+                mode: "グリーティングモード",
+                stickers: "挨拶スタンプ",
+                multi: "邪悪なマルチグリーティング",
+                send: "挨拶を送る"
             }
         },
         guildPickerDumper: {
-            name: "ギルドピッカーダンパー",
-            description: "サーバーの絵文字とステッカーをエクスポートおよびダウンロードできるコンテキスト メニューを追加します。",
+            name: "GuildPickerDumper",
+            description: "サーバーの絵文字とステッカーをダンプおよびダウンロードするためのコンテキスト メニュー。",
             context: {
                 download: {
                     emoji: "絵文字をダウンロード",
@@ -5006,47 +5006,47 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         guildTagSettings: {
-            name: "ギルドタグ設定",
-            description: "サーバー タグの非表示やタグを使用するためのプロンプトの無効化など、サーバー タグ設定を追加します。",
+            name: "GuildTagSettings",
+            description: "ギルドタグを非表示にしたり、ギルドタグを採用するためのプロンプトを無効にしたりするなど、ギルドタグの設定をいくつか追加します。",
             option: {
                 hideTags: {
                     label: "タグを非表示にする",
-                    description: "サーバータグを非表示にする"
+                    description: "タグを非表示にする"
                 },
                 disableAdoptTagPrompt: {
-                    label: "タグを閉じるクレームの警告",
-                    description: "サーバータグを使用（要求）するためのプロンプトを無効にします"
+                    label: "タグの採用プロンプトを無効にする",
+                    description: "タグを採用するためのプロンプトを無効にする"
                 }
             }
         },
         hideChatButtons: {
-            name: "チャットボタンを非表示にする",
-            description: "チャットボタンを非表示にできます。",
+            name: "HideChatButtons",
+            description: "チャットボタンを非表示にできる",
             tooltip: {
-                close: "四半期",
-                open: "お腹がすいた"
+                close: "近い",
+                open: "開ける"
             },
             option: {
                 color: {
                     label: "色",
-                    description: "オンにすると赤色で表示されます"
+                    description: "開口部を赤く染める"
                 },
                 open: {
                     label: "開ける",
-                    description: "デフォルトでオン"
+                    description: "デフォルトで開かれる"
                 }
             }
         },
         hideMedia: {
-            name: "メディアを隠す",
-            description: "マウスを移動すると表示されるボタンを使用して、特定のメッセージの添付ファイルや埋め込みコンテンツを非表示にすることができます。",
+            name: "HideMedia",
+            description: "ホバー ボタンを使用して個々のメッセージの添付ファイルと埋め込みを非表示にする",
             show: "メディアを表示する",
             hide: "メディアを隠す",
             hidden: "メディア非表示"
         },
         hideMessages: {
-            name: "メッセージを隠す",
-            description: "再起動するまでメッセージを一時的に非表示にします。",
+            name: "HideMessages",
+            description: "再起動するまでメッセージを一時的に非表示にするプラグイン。",
             button: {
                 hide: "隠れる"
             },
@@ -5058,28 +5058,28 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         hideServers: {
-            name: "サーバーを非表示にする",
+            name: "HideServers",
             description: "サーバーリストからサーバーを非表示にします",
             context: {
                 hide: "サーバーを非表示にする",
-                unhide: "サーバーを表示",
+                unhide: "サーバーの再表示",
                 folder: {
                     hide: "フォルダーを隠す",
-                    unhide: "フォルダーを表示"
+                    unhide: "フォルダを再表示する"
                 }
             },
             option: {
                 showIndicator: {
-                    label: "インジケーターを表示する",
-                    description: "リスト内の非表示のサーバーを表示するには、下部にあるメニューを表示します"
+                    label: "インジケーターを表示",
+                    description: "リストの下部にあるサーバーを再表示するためのメニューを表示します"
                 },
                 guildsList: {
-                    label: "サーバーリスト",
+                    label: "ギルドリスト",
                     description: "隠しサーバーを削除する"
                 },
                 resetHidden: {
-                    label: "隠しサーバーをリセットする",
-                    description: "リストからすべての非表示サーバーを削除します",
+                    label: "非表示をリセット",
+                    description: "リストからすべての非表示ギルドを削除します",
                     button: "隠しサーバーをリセットする"
                 }
             },
@@ -5089,14 +5089,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 remove: "取り除く",
                 folder: "フォルダ",
                 removeAll: "すべて削除",
-                guilds: "サーバー",
+                guilds: "ギルド",
                 noHiddenServers: "隠しサーバーはありません"
             }
         },
         holyNotes: {
-            name: "ホーリーノート",
+            name: "HolyNotes",
             description: "Holy Notes ではメッセージを保存できます",
-            main: "良い",
+            main: "主要",
             button: {
                 tooltip: "ホーリーノート",
                 save: "メモの保存",
@@ -5110,45 +5110,45 @@ const translations: MatchStructure<typeof enTranslations> = {
                 create: "ノートブックの作成",
                 copyText: "テキストをコピーする",
                 copyAttachment: "添付ファイルの URL をコピー",
-                deleteNote: "ノトゥ・シル",
+                deleteNote: "メモの削除",
                 moveNote: "ノートの移動",
                 moveTo: "{{key}} に移動",
                 copyId: "IDをコピーする"
             },
             modal: {
                 error: {
-                    generic: "成績の処理中にエラーが発生しました。 詳細についてはコンソールを確認してください。",
-                    easter: "メモが見つかりませんでした。 共感バナナはあなたとともにあります。",
-                    empty: "このノートブックにはメモが保存されていません。"
+                    generic: "メモの解析中にエラーが発生しました。詳細についてはコンソールを確認してください。",
+                    easter: "メモは見つかりませんでした。共感バナナはあなたのためにここにいます。",
+                    empty: "このノートブックにはメモが保存されていませんでした。"
                 },
                 help: {
                     title: "ヘルプ",
                     description: "ホーリーノートの使い方を学ぶ",
                     addingNotes: "メモを追加する",
-                    addingNotesText: "メモを追加するには、メッセージを右クリックし、[メモ メッセージ] をポイントして、メモを追加するノートブックを選択します。",
+                    addingNotesText: "メモを追加するには、メッセージを右クリックし、[メッセージのメモ] 項目の上にマウスを置き、メッセージをメモしたいノートブック名のボタンをクリックします。",
                     prototype: "プロトタイプ",
-                    noteMessage: "「メモメッセージ」ボタンをワンクリックすると、デフォルトでメイン台帳にメッセージが追加されます。",
-                    deletingNotes: "シルメではありません",
-                    deletingNotesText: "メモを削除するには、右クリックして「メモの削除」を選択するか、キーボードの「DELETE」キーを押したままメモをクリックします。",
+                    noteMessage: "[メッセージにメモ] ボタンをクリックすると、デフォルトでメインにメモが送信されます。",
+                    deletingNotes: "メモを削除する",
+                    deletingNotesText: "注: ノートを右クリックして「ノートの削除」を押すか、キーボードの「DELETE」キーを押したままノートをクリックすることができます。まるで魔法のようです！",
                     movingNotes: "メモの移動",
-                    movingNotesText: "メモを移動するには、右クリックして、「メモの移動」オプションから移動するノートブックを選択します。",
-                    jumpToMessage: "メッセージに移動",
-                    jumpToMessageText: "メモが属するメッセージに移動するには、メモを右クリックして [メッセージに移動] を選択します。"
+                    movingNotesText: "メモを移動するには、メモを右クリックし、「メモの移動」項目の上にマウスを置き、メモの移動先のノートブックに対応するボタンをクリックします。",
+                    jumpToMessage: "メッセージへジャンプ",
+                    jumpToMessageText: "メモが元々あった場所にジャンプするには、メモを右クリックして [メッセージにジャンプ] をクリックします。"
                 },
                 notebook: {
                     title: "ノート",
                     search: "メッセージを検索...",
                     options: "並べ替えオプション",
                     label: "ソートメニュー",
-                    filteredOf: "{{filteredCount}}/{{noteCount}} ではありません",
-                    note: "{{noteCount}} ではありません",
+                    filteredOf: "{{filteredCount}}/{{noteCount}} メモ{{s}}",
+                    note: "{{noteCount}} 注{{s}}",
                     ada: "昇順 / 追加日",
                     amd: "昇順 / メッセージ日付",
-                    dda: "降順/追加日",
+                    dda: "降順 / 追加日",
                     dmd: "降順 / メッセージ日付",
                     change: "並べ替えの変更",
-                    ascending: "成長する",
-                    descending: "減少中",
+                    ascending: "上昇",
+                    descending: "降順",
                     dateAdded: "追加日",
                     messageDate: "メッセージの日付"
                 },
@@ -5158,24 +5158,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                     placeholder: "ノートブック名"
                 },
                 delete: {
-                    title: "{{notebookName}} シリンシン ミ?",
-                    description: "{{noteCount}} 個のメモが完全に削除されます",
-                    button: "シル"
+                    title: "{{notebookName}} を削除しますか?",
+                    description: "{{noteCount}} 注{{s}} は完全に削除されます",
+                    button: "消去"
                 },
                 tabs: {
                     label: "ノートブックのタブ"
                 }
             },
             toast: {
-                saved: "メッセージは {{notebook}} に正常に追加されました。",
-                deleted: "メモは {{notebook}} から正常に削除されました。",
-                moved: "ノートは {{from}} ノートブックから {{to}} ノートブックに正常に移動されました。",
-                exists: "{{notebookName}} という名前のノートブックはすでに存在します。",
+                saved: "{{notebook}} にメッセージが正常に追加されました",
+                deleted: "{{notebook}} からメモが正常に削除されました",
+                moved: "メモを {{from}} から {{to}} に正常に移動しました。",
+                exists: "ノートブック {{notebookName}} はすでに存在します。",
                 created: "{{notebookName}} が正常に作成されました。",
-                deletedNotebook: "{{notebookName}} は正常に削除されました。",
-                refreshed: "アバターは正常に更新されました。",
+                deletedNotebook: "{{notebookName}} が正常に削除されました。",
+                refreshed: "アバターが正常に更新されました。",
                 deletedAll: "すべてのメモが正常に削除されました。",
-                imported: "メモは正常にインポートされました。",
+                imported: "メモが正常にインポートされました。",
                 invalid: "メモのインポートに失敗しました。"
             },
             toolbox: {
@@ -5183,11 +5183,11 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         homeTyping: {
-            name: "ホームタイピング",
-            description: "誰かがあなたの DM に書き込みをしている場合、ホーム ボタンが書き込みインジケーターに変わります。"
+            name: "HomeTyping",
+            description: "DM内の誰かが入力している場合、ホームボタンを入力インジケーターに変更します。"
         },
         iconViewer: {
-            name: "アイコンビューア",
+            name: "IconViewer",
             description: "すべてのアイコンをプレビューするための新しいタブを設定に追加します。",
             toolbox: "アイコンタブを開く",
             iconFinder: "アイコンファインダー",
@@ -5197,7 +5197,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 list: {
                     copy: "アイコン名とCSS変数をコピーする",
                     download: "さまざまな形式 (SVG、PNG、GIF など) でアイコンをダウンロードします。",
-                    premade: "プラグイン用に既製のアイコンの結果をコピーします",
+                    premade: "プラグイン用に見つかった既製のアイコンをコピーします",
                     find: "関数コンテキストによるアイコンの検索",
                     search: "色名を右クリックして色を検索します",
                     special: "特別な感謝"
@@ -5206,10 +5206,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 icon: {
                     options: "アイコンのオプション",
-                    log: "コンソールへの出力 (ログ)",
+                    log: "コンソールにログを記録する",
                     save: "名前を付けて保存...",
-                    rightClick: "置き換えるアイコンを右クリックします",
-                    usage: "使用",
+                    rightClick: "アイコンを右クリックして変更します",
+                    usage: "使用法",
                     click: "クリックしてコピー",
                     copied: "コピーしました！",
                     actions: "アクション"
@@ -5217,7 +5217,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             modal: {
                 label: "関数コンテキストによる検索",
-                search: "{{count}} 個のシンボル内を検索します...",
+                search: "{{count}} アイコンを検索...",
                 function: "関数",
                 iconViewer: {
                     colors: "アイコンビューアの色",
@@ -5226,33 +5226,33 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         idleAutoRestart: {
-            name: "アイドル自動再起動",
-            description: "一定時間アイドル状態になるとアプリが自動的に再起動されますが、オーディオ チャネルを使用している場合は再起動が防止されます。",
+            name: "IdleAutoRestart",
+            description: "設定可能な時間アイドル状態になった後、クライアントを自動的に再起動しますが、VC 内での再起動は回避されます。",
             option: {
                 isEnabled: {
-                    label: "効果的",
+                    label: "有効です",
                     description: "アイドル後の自動再起動を有効にする"
                 },
                 idleMinutes: {
-                    label: "アイドル時間 (分)",
-                    description: "再起動するまでの非アクティブな時間 (オーディオ チャネルではない)"
+                    label: "アイドル時間（分）",
+                    description: "再起動するまでの非アクティブな時間 (VC を使用していない場合)"
                 }
             },
             toolbox: {
-                disable: "自動再起動を無効にする",
-                enable: "自動再起動を有効にする"
+                disable: "アイドル時の自動再起動を無効にする",
+                enable: "アイドル時の自動再起動を有効にする"
             }
         },
         ignoreActivities: {
-            name: "アクティビティを無視する",
-            description: "イベントがその状態にのみ表示されるのを防ぎます。 [保存されたゲーム] タブと [イベント] タブでどれを無視するかを指定することも、以下の一般設定を使用することもできます。",
+            name: "IgnoreActivities",
+            description: "アクティビティがステータスにのみ表示されるのを無視します。 [登録済みのゲームとアクティビティ] タブからどのゲームを特に無視するかを設定するか、以下の一般設定を使用できます。",
             modal: {
                 import: {
-                    title: "CustomRPC プラグインのアプリ ID をフィルター リストにインポートします"
+                    title: "CustomRPC プラグインのアプリケーション ID をフィルター リストにインポートします"
                 },
                 filter: {
                     title: "フィルタリスト",
-                    description: "フィルターするイベント ID のカンマ区切りリスト (特定の RPC イベントおよび CustomRPC をフィルターする場合に便利)"
+                    description: "フィルタリングするアクティビティ ID のカンマ区切りリスト (特定の RPC アクティビティおよび CustomRPC をフィルタリングする場合に便利)"
                 }
             },
             toast: {
@@ -5266,115 +5266,115 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 importCustomRPC: {
-                    label: "CustomRPC'yi もっと見る"
+                    label: "CustomRPC のインポート"
                 },
                 listMode: {
                     label: "リストモード",
-                    description: "フィルタリストの適用方法を選択します",
-                    blacklist: "ブラックリスト (リストにあるもののみを無視します)",
-                    whitelist: "ホワイトリスト (リストにあるもの以外はすべて無視)"
+                    description: "フィルターリストの適用方法を選択します",
+                    blacklist: "ブラックリスト (リストにあるもののみを無視)",
+                    whitelist: "ホワイトリスト (リストにあるもの以外をすべて無視します)"
                 },
                 idList: {
                     label: "IDリスト"
                 },
                 ignorePlaying: {
-                    label: "再生内容を無視する",
-                    description: "再生されたイベントをすべて無視します (通常はゲーム イベントと RPC イベント)"
+                    label: "再生を無視する",
+                    description: "すべての再生アクティビティを無視します (これらは通常、ゲームおよび RPC アクティビティです)"
                 },
                 ignoreStreaming: {
-                    label: "投稿を無視する",
-                    description: "すべてのブロードキャスト イベントを無視する"
+                    label: "ストリーミングを無視する",
+                    description: "すべてのストリーミング アクティビティを無視する"
                 },
                 ignoreListening: {
-                    label: "リスナーを無視する",
-                    description: "すべてのリスニング イベント (通常は Spotify イベント) を無視します。"
+                    label: "リスニングを無視する",
+                    description: "すべてのリスニングアクティビティを無視します (これらは通常 Spotify アクティビティです)"
                 },
                 ignoreWatching: {
-                    label: "閲覧済みを無視",
-                    description: "すべての追跡イベントを無視する"
+                    label: "監視を無視する",
+                    description: "すべての監視アクティビティを無視する"
                 },
                 ignoreCompeting: {
-                    label: "競争イベントを無視する",
-                    description: "すべての競合 (競争) イベントを無視します (通常はカスタム ゲーム イベント)"
+                    label: "競合を無視する",
+                    description: "競合するアクティビティをすべて無視します (これらは通常、特別なゲーム アクティビティです)"
                 },
                 ignoredActivities: {
-                    label: "無視されたイベント"
+                    label: "無視されたアクティビティ"
                 }
             }
         },
         ignoreCalls: {
-            name: "通話を無視する",
+            name: "IgnoreCalls",
             description: "特定のユーザーまたは DM グループからの通話を無視できます。",
             option: {
                 permanentlyIgnoredUsers: {
                     label: "永久に無視されたユーザー",
-                    description: "永久に無視すべきユーザー ID (virgül + boşluk)"
+                    description: "永久に無視する必要があるユーザー ID (カンマ + スペース)"
                 }
             },
             button: {
-                ignore: "ヨクサイ",
-                temporarilyIgnore: "一時的に無視する",
-                permanentlyIgnore: "永久に無視"
+                ignore: "無視する",
+                temporarilyIgnore: "通話を一時的に無視する",
+                permanentlyIgnore: "通話を永久に無視する"
             }
         },
         iLoveSpam: {
-            name: "アイラブスパム",
-            description: "「潜在的なスパマー」からのメッセージを隠す。"
+            name: "ILoveSpam",
+            description: "「スパマーの可能性がある」からのメッセージを隠さないでください"
         },
         imageFilename: {
-            name: "画像ファイル名",
-            description: "画像や GIF の上にマウスを移動すると、ツールチップとしてファイル名が表示されます。",
+            name: "ImageFilename",
+            description: "画像や GIF の上にマウスを移動すると、そのファイル名がツールチップとして表示されます",
             option: {
                 showFullUrl: {
                     label: "完全な URL を表示",
-                    description: "ファイル名だけではなく、画像の完全な URL が表示されます。 GIF には通常、意味のあるファイル名がないため、GIF では常に有効になります。"
+                    description: "ファイル名だけではなく、画像の完全な URL を表示します。 GIF には通常、意味のあるファイル名がないため、GIF に対しては常に有効になります。"
                 }
             }
         },
         imageLink: {
-            name: "画像リンク",
-            description: "メッセージ内に画像リンクしかない場合でも、ビジュアルリンクが非表示になることはありません。"
+            name: "ImageLink",
+            description: "たとえそれが唯一のコンテンツであっても、メッセージ内の画像リンクを非表示にしないでください"
         },
         imageZoom: {
-            name: "画像ズーム",
-            description: "画像や GIF を拡大したり、画像のメタデータを表示したりできます。 マウス ホイールを使用してズームインし、Shift + マウス ホイールを使用してレンズの半径を拡大します。",
+            name: "ImageZoom",
+            description: "画像や GIF にズームインしたり、画像のメタデータを表示したりできます。スクロール ホイールを使用してズームインし、Shift + スクロール ホイールを使用してレンズの半径を拡大します。",
             option: {
                 saveZoomValues: {
                     label: "ズーム値の保存",
-                    description: "ズームとレンズサイズの値を保存するかどうかを決定します"
+                    description: "ズームとレンズサイズの値を保存するかどうか"
                 },
                 invertScroll: {
-                    label: "逆スクロール",
-                    description: "マウスのスクロール方向を反転します"
+                    label: "反転スクロール",
+                    description: "スクロールを反転する"
                 },
                 nearestNeighbour: {
                     label: "最近隣",
-                    description: "画像をスケーリングするときに最近傍補間を使用します"
+                    description: "画像をスケーリングするときに最近傍補間を使用する"
                 },
                 square: {
-                    label: "守る",
-                    description: "レンズを四角形に変える"
+                    label: "四角",
+                    description: "レンズを四角くする"
                 },
                 zoom: {
                     label: "ズーム",
-                    description: "レンズのズーム比"
+                    description: "レンズのズーム"
                 },
                 size: {
-                    label: "寸法",
-                    description: "レンズ半径/サイズ"
+                    label: "サイズ",
+                    description: "レンズの半径・サイズ"
                 },
                 zoomSpeed: {
                     label: "ズーム速度",
-                    description: "ズーム/レンズサイズの変化の速度を決定します"
+                    description: "ズーム/レンズサイズの変化の速さ"
                 },
                 showMetadata: {
                     label: "メタデータの表示",
-                    description: "選択した画像をダブルクリックするとメタデータが表示されます"
+                    description: "選択した画像をダブルクリックすると画像メタデータを表示します"
                 }
             },
             context: {
                 square: "スクエアレンズ",
-                nearest: "ピクセル化された拡大",
+                nearest: "最近隣",
                 zoom: "ズーム",
                 size: "レンズサイズ",
                 zoomSpeed: "ズーム速度",
@@ -5382,46 +5382,46 @@ const translations: MatchStructure<typeof enTranslations> = {
                 view: "メタデータの表示",
                 loading: "読み込み中...",
                 unknown: "未知",
-                sizeHTML: "寸法",
+                sizeHTML: "サイズ",
                 dimensions: "寸法",
                 filename: "ファイル名"
             }
         },
         imgToGif: {
             name: "ImgToGif",
-            description: "任意の画像を GIF に変換する /imgtogif コマンドを追加します",
+            description: "任意の画像から GIF を作成する /imgtogif スラッシュ コマンドを追加します",
             command: {
                 imgToGif: {
                     description: "画像をGIFに変換できます",
-                    image: "使用するビジュアルアタッチメント",
+                    image: "使用する画像添付ファイル",
                     width: "GIFの幅",
                     height: "GIFの高さ"
                 }
             },
             error: {
                 noImage: "画像が指定されていません!",
-                notImage: "アップロードされたファイルは画像ではありません"
+                notImage: "アップロードは画像ではありません"
             }
         },
         implicitRelationships: {
-            name: "暗黙的な関係",
-            description: "「友達」タブに間接的な関係が表示されます。",
+            name: "ImplicitRelationships",
+            description: "[友達] タブに暗黙の関係が表示されます。",
             option: {
                 sortByAffinity: {
-                    label: "近さで並べ替え",
-                    description: "間接的な関係をあなたへの近さによって並べ替えるかどうかを決定します。"
+                    label: "アフィニティで並べ替え",
+                    description: "暗黙の関係を自分との親和性によって並べ替えるかどうか。"
                 }
             },
-            implicit: "間接的"
+            implicit: "暗黙"
         },
         inRole: {
-            name: "役割内",
-            description: "ロールのコンテキスト メニューまたは /inrole コマンドを使用して、ロールに属しているユーザーを確認します (プラグイン情報を参照してください)。",
+            name: "InRole",
+            description: "ロールのコンテキスト メニューまたは /inrole コマンドを使用して、ロールに誰が所属しているかを確認します (プラグイン情報を参照してください)。",
             command: {
                 inrole: {
-                    description: "誰が役割を果たしているかを確認する",
+                    description: "誰が役割を担っているかを知る",
                     role: "役割",
-                    noGuild: "サーバー上にいることを確認してください。"
+                    noGuild: "サーバー内にいることを確認してください。"
                 }
             },
             context: {
@@ -5430,44 +5430,44 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 about: {
                     title: "制限事項",
-                    description: "サーバーに対するモデレーション権限がなく、サーバーが大規模 (メンバーが 100 人を超える) 場合、プラグインは次のように制限される可能性があります。",
+                    description: "サーバー上で MOD 権限がなく、サーバーが大規模 (メンバーが 100 人を超える) 場合、プラグインは次のように制限される可能性があります。",
                     list: {
                         one: "オフラインメンバーは表示されません",
-                        two: "デフォルトでは、最大 100 人のメンバーがリストされます。 さらにメンバーを表示するには、メンバー リストを下にスクロールします。",
-                        three: "ただし、友達はステータスに関係なく常に表示されます。"
+                        two: "デフォルトでは最大 100 人のメンバーがリストされます。さらに取得するには、メンバー リストを下にスクロールしてさらにメンバーを読み込みます。",
+                        three: "ただし、フレンドはステータスに関係なく常に表示されます。"
                     }
                 },
                 member: {
-                    title: "役割を担うメンバー",
-                    noMembers: "この役割を持つオンライン キャッシュされたメンバーは見つかりませんでした。 より多くのユーザーをキャッシュするには、メンバー リストを下にスクロールしてみてください。"
+                    title: "役割メンバー",
+                    noMembers: "そのロールを持つオンライン キャッシュされたメンバーが見つからなかったようです。より多くのユーザーをキャッシュするには、メンバー リストを下にスクロールしてみてください。"
                 }
             }
         },
         instantScreenshare: {
-            name: "インスタントスクリーンシェア",
-            description: "オーディオ チャネルに参加すると、デスクトップ ソース、ウィンドウ、ビデオ入力デバイス (カメラ、キャプチャ カード) をサポートして、即座に画面を共有できます。",
+            name: "InstantScreenshare",
+            description: "デスクトップ ソース、ウィンドウ、ビデオ入力デバイス (カメラ、キャプチャ カード) をサポートし、音声チャンネルに参加すると即座に画面共有します。",
             modal: {
                 linux: {
                     title: "Linuxの場合",
-                    body: "Wayland を使用している場合は、画面共有オプションのみがオンになります。",
-                    bodyTwo: "X11 では機能する場合と機能しない場合があります。 :shrug:"
+                    body: "Wayland の場合、画面共有の選択のみがポップアップ表示されます。",
+                    bodyTwo: "X11 の場合、機能する場合と機能しない場合があります。:shrug:"
                 },
                 videoDevices: {
                     title: "ビデオ入力デバイス",
-                    body: "設定で有効にすると、カメラとキャプチャ カード (Elgato HD60X など) をサポートします。"
+                    body: "設定で有効にすると、カメラとキャプチャ カード (Elgato HD60X など) をサポートします"
                 },
                 regardingSound: {
                     title: "サウンドとプレビューの設定について",
-                    body: "Discord がストリームをプレビューし、音声を有効にするかどうかを決定するために使用するのと同じ設定を使用します。"
+                    body: "Discord が設定および使用する設定を使用して、ストリームのプレビューとサウンドを有効にするかどうかを決定します。"
                 }
             },
             option: {
                 streamMedia: {
-                    label: "リリース予定のメディアソース",
-                    description: "見つからない場合は、メイン画面にリセットされます。",
+                    label: "ストリーミングするメディア ソース",
+                    description: "見つからない場合はメイン画面にリセットします",
                     loading: "メディア ソースを読み込んでいます...",
                     none: "メディア ソースが見つかりません",
-                    placeholder: "公開するメディア ソースを選択してください"
+                    placeholder: "ストリーミングするメディア ソースを選択してください"
                 },
                 includeVideoDevices: {
                     label: "ビデオデバイスを含める",
@@ -5479,19 +5479,19 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 autoDeafen: {
                     label: "自動聴覚障害者",
-                    description: "音声チャンネルに参加すると自動的に耳が聞こえなくなります (ミュートにもなります)"
+                    description: "音声チャンネルに参加すると自動的に耳が聞こえなくなります（ミュートにもなります）"
                 },
                 instantScreenshare: {
                     label: "インスタント画面共有",
-                    description: "自動画面共有機能を有効にします"
+                    description: "自動画面共有機能を有効にする"
                 },
                 keybindScreenshare: {
-                    label: "ホットキーを使用した画面共有",
-                    description: "Discordのホットキー設定のホットキーで画面を共有します"
+                    label: "キーバインド画面共有",
+                    description: "Discordのキーバインド設定でのキーバインドによる画面共有"
                 },
                 focusDiscord: {
-                    label: "Discordを中心に",
-                    description: "Discordにフォーカスがある場合にのみキーバインドによる画面共有を開始します"
+                    label: "フォーカスディスコード",
+                    description: "Discord がフォーカスされている場合にのみキーバインドで画面共有を開始します"
                 },
                 toolboxManagement: {
                     label: "ツールボックス管理",
@@ -5501,22 +5501,22 @@ const translations: MatchStructure<typeof enTranslations> = {
             toolbox: {
                 label: "インスタント画面共有",
                 toast: "インスタント画面共有 {{state}}",
-                enabled: "効果的",
+                enabled: "有効",
                 disabled: "無効"
             }
         },
         invisibleChat: {
-            name: "見えないチャット",
-            description: "疑惑を抱かずにメッセージを暗号化しましょう。",
+            name: "InvisibleChat",
+            description: "疑わしい方法でメッセージを暗号化してください。",
             option: {
                 savedPasswords: {
                     label: "保存されたパスワード",
-                    description: "保存されたパスワード (カンマ区切り)"
+                    description: "保存されたパスワード (「,」で区切る)"
                 }
             },
             button: {
                 encrypt: "メッセージの暗号化",
-                decrypt: "メッセージを解読する",
+                decrypt: "メッセージを復号化する",
                 hidden: "隠しメッセージインジケーター (InvisibleChat)"
             },
             tooltip: {
@@ -5524,44 +5524,44 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             embed: {
                 title: "復号化されたメッセージ",
-                footer: "InvisibleChat 経由で送信"
+                footer: "InvisibleChat で送信"
             },
             modal: {
                 encrypt: {
                     title: "メッセージの暗号化",
-                    secret: "秘密のメッセージ",
+                    secret: "秘密",
                     cover: "表紙（2文字以上!!）",
                     password: "パスワード",
-                    dontUseCover: "カバーを使う",
+                    dontUseCover: "カバーは使わないでください",
                     send: "送信",
                     cancel: "キャンセル"
                 },
                 decrypt: {
-                    title: "メッセージを解読する",
+                    title: "メッセージを復号化する",
                     with: "暗号化されたメッセージ",
                     password: "パスワード",
-                    decrypt: "解読する",
+                    decrypt: "復号化",
                     cancel: "キャンセル"
                 }
             }
         },
         inviteDefaults: {
-            name: "招待デフォルト",
-            description: "サーバーへの招待を作成するときにデフォルト値を編集できます。",
+            name: "InviteDefaults",
+            description: "サーバー招待を作成するときにデフォルト値を編集できます。",
             option: {
                 inviteDuration: {
                     label: "招待期間",
                     description: "サーバー招待のデフォルトの期間",
                     thirtyMinutes: "30分",
-                    oneHour: "1 瞬間",
-                    sixHours: "6 瞬間",
-                    twelveHours: "12 モーメント",
+                    oneHour: "1時間",
+                    sixHours: "6時間",
+                    twelveHours: "12時間",
                     oneDay: "1日",
                     sevenDays: "7日間",
-                    forever: "不定"
+                    forever: "永遠に"
                 },
                 maxUses: {
-                    label: "最大使用量",
+                    label: "最大使用回数",
                     description: "サーバー招待のデフォルトの最大使用量",
                     unlimited: "無制限",
                     one: "1",
@@ -5573,39 +5573,39 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 temporaryMembership: {
                     label: "一時会員",
-                    description: "サーバー招待のデフォルトの一時メンバーシップ設定"
+                    description: "サーバー招待用のデフォルトの一時メンバーシップ"
                 }
             }
         },
         ircColors: {
             name: "IrcColors",
-            description: "IRC クライアントと同様に、チャット内のユーザー名の色を一意にします。",
+            description: "IRC クライアントのように、チャット内のユーザー名の色を一意にします",
             option: {
                 lightness: {
-                    label: "明るい",
-                    description: "明るさの比率 (%)。 色が明るすぎる、または暗すぎると思われる場合は、変更してください。"
+                    label: "軽さ",
+                    description: "明度 (%)。色が明るすぎたり暗すぎたりする場合は変更してください"
                 },
                 memberListColors: {
                     label: "メンバーリストの色",
-                    description: "メンバーリストの役割の色を変更します。"
+                    description: "メンバーリストの役割の色を置き換える"
                 },
                 applyColorOnlyToUsersWithoutColor: {
-                    label: "色を持たないユーザーにのみ適用",
-                    description: "色が事前定義されていないユーザーに色を適用します。"
+                    label: "色を持たないユーザーにのみ色を適用する",
+                    description: "事前定義された色を持たないユーザーにのみ色を適用する"
                 },
                 applyColorOnlyInDms: {
-                    label: "プライベートメッセージのみで適用",
-                    description: "プライベートメッセージにのみ色を適用します。 サーバー上のアプリケーション。"
+                    label: "DM にのみカラーを適用する",
+                    description: "色を適用するのはダイレクト メッセージのみです。サーバーに色を適用しないでください。"
                 }
             }
         },
         iRememberYou: {
-            name: "私はあなたのことを覚えています",
-            description: "通信相手全員 (サーバーを含む) をローカルに記録し、損失を防ぎます。",
+            name: "IRememberYou",
+            description: "紛失した場合に備えて、通信していたすべてのユーザー (サーバーを含む) をローカルに保存します。",
             section: {
-                description: "あなたが言及したサーバーの所有者、返信したサーバー、(サーバー所有者*) のメンバー、またはあなたが使用しているサーバーのメンバーのリストが表示されます。",
-                empty: "現在空です。",
-                tooltip: "{{user}} が {{updatedAtContent}} で更新されました",
+                description: "あなたがメンションまたは返信したユーザー、またはあなたが所属するサーバーを所有しているユーザー (サーバー所有者*)、またはギルドのメンバーのリストを提供します。",
+                empty: "今は空いています。",
+                tooltip: "{{user}}、{{updatedAtContent}} に更新",
                 owner: "サーバー所有者",
                 iRememberYou: "私はあなたのことを覚えています"
             },
@@ -5616,38 +5616,38 @@ const translations: MatchStructure<typeof enTranslations> = {
                 view: "プロフィールを見る"
             },
             modal: {
-                title: "レギュレータ",
-                filter: "タグ、ユーザー名、ID によるフィルター",
+                title: "エディタ",
+                filter: "タグ、ユーザー名、IDによるフィルタリング",
                 button: {
-                    validate: "確認して保存する",
+                    validate: "検証して保存する",
                     cancel: "キャンセル",
                     openEditor: "エディタを開く",
-                    resetData: "データのリセット",
+                    resetData: "ストレージをリセットする",
                     sure: "本気ですか？"
                 }
             }
         },
         jumpTo: {
             name: "JumpTo",
-            description: "チャネルまたはプライベート メッセージの先頭または末尾にジャンプするオプションを右クリック メニューに追加します。",
+            description: "チャンネル/DM の先頭または末尾にジャンプするコンテキスト メニュー オプションを追加します。",
             context: {
-                top: "最初の投稿に移動",
-                bottom: "最後の投稿に移動",
-                noMessages: "このチャネルではこのユーザーからのメッセージが見つかりませんでした。",
-                searchFailed: "メッセージの検索中にエラーが発生しました。"
+                top: "最初のメッセージにジャンプ",
+                bottom: "最新のメッセージにジャンプ",
+                noMessages: "このチャンネルではこのユーザーからのメッセージが見つかりませんでした。",
+                searchFailed: "メッセージの検索に失敗しました。"
             }
         },
         keepCurrentChannel: {
-            name: "現在のチャンネルを維持",
-            description: "アカウントを切り替えたり、Discord を読み込んだりすると、元のチャンネルに戻ろうとします。"
+            name: "KeepCurrentChannel",
+            description: "アカウントを切り替えるか、Discord を読み込む前に、以前のチャンネルに移動してみてください。"
         },
         keyboardSounds: {
-            name: "キーボード音",
-            description: "キーボードで入力するときは OperaGX または osu!効果音を追加します。",
+            name: "KeyboardSounds",
+            description: "OperaGX または osu! を追加します。キーボードを入力するときの効果音。",
             option: {
                 volume: {
-                    label: "騒音レベル",
-                    description: "キーボードの音の大きさ"
+                    label: "音量",
+                    description: "鍵盤音の音量"
                 },
                 soundPack: {
                     label: "サウンドパック",
@@ -5658,19 +5658,19 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         keywordNotify: {
-            name: "キーワード通知",
-            description: "特定のキーワードまたは正規表現に一致するメッセージに関する通知を送信します。",
+            name: "KeywordNotify",
+            description: "指定されたメッセージが特定のキーワードまたは正規表現に一致する場合に通知を送信します",
             idHolder: "ID",
             keywordEntry: "キーワード入力",
             regexHolder: "例|正規表現",
-            ignoreCase: "大文字と小文字を区別しない",
+            ignoreCase: "大文字と小文字を無視する",
             whiteblackLabel: "ホワイトリスト/ブラックリスト",
             tab: {
                 title: "キーワード",
                 clearAll: "すべてクリア"
             },
             button: {
-                addId: "IDエクル",
+                addId: "IDの追加",
                 addKeyword: "キーワードエントリの追加"
             },
             listTypeSelector: {
@@ -5684,8 +5684,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "ボットからのメッセージを無視する"
                 },
                 amountToKeep: {
-                    label: "貯蓄額",
-                    description: "ログに保存するメッセージの数"
+                    label: "保管量",
+                    description: "ログに保存するメッセージの量"
                 },
                 keywords: {
                     label: "キーワード",
@@ -5694,21 +5694,21 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         lastOnline: {
-            name: "ラストオンライン",
-            description: "DM リスト、サーバー、およびグループ DM メンバー リストのユーザー名の下に、最後のオンライン インジケーターを追加します。",
+            name: "LastOnline",
+            description: "DM リスト、ギルド、GDM メンバー リストのユーザー名の下に最後のオンライン インジケーターを追加します",
             unit: {
                 d: "日",
-                h: "一瞬",
+                h: "時間",
                 m: "分"
             },
-            online: "{{formattedTime}} は以前はオンラインでした"
+            online: "{{formattedTime}}前にオンライン"
         },
         listenBrainzRPC: {
             name: "ListenBrainzRPC",
-            description: "ListenBrainz は、リッチなプレゼンスを実現する小さなプラグインです。",
+            description: "ListenBrainz のリッチなプレゼンスのための小さなプラグイン",
             about: {
                 title: "MusicBrainz APIについて",
-                description: "MusicBrainz API には API キーは必要ありませんが、{{link}} が必要です。 ほとんどのユーザーは、1 つの電子メール アドレスで十分です。",
+                description: "MusicBrainz API には API キーは必要ありませんが、{{link}} が必要です。ほとんどの場合、電子メール アドレスで十分です。",
                 userAgent: "意味のあるユーザーエージェント文字列"
             },
             option: {
@@ -5718,96 +5718,96 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 mbContact: {
                     label: "MB連絡先",
-                    description: "ListenBrainz の連絡先情報"
+                    description: "ListenBrainz の連絡先"
                 },
                 shareUsername: {
                     label: "ユーザー名を共有する",
-                    description: "ListenBrainz プロフィール リンクを表示 (他のユーザーにのみ表示)"
+                    description: "ListenBrainz プロフィールへのリンクを表示 (他のユーザーにのみ表示される場合があります)"
                 },
                 shareSong: {
-                    label: "曲をシェアする",
-                    description: "ListenBrainz 上の現在の曲へのリンクを表示します (他のユーザーにのみ表示されます)"
+                    label: "ソングをシェアする",
+                    description: "ListenBrainz 上の現在の曲へのリンクを表示します (他のユーザーにのみ表示される場合があります)"
                 },
                 hideWithSpotify: {
-                    label: "Spotify がアクティブな間は非表示にする",
-                    description: "Spotify が実行中の場合、ListenBrainz ステータスを非表示にする"
+                    label: "Spotify で隠す",
+                    description: "Spotify が実行中の場合、ListenBrainz の存在を非表示にする"
                 },
                 hideWithActivity: {
-                    label: "他のイベントがある場合は非表示にする",
-                    description: "別のステータスがある場合は、ListenBrainz ステータスを非表示にします"
+                    label: "アクティビティで隠す",
+                    description: "他のプレゼンスがある場合は、ListenBrainz のプレゼンスを非表示にします"
                 },
                 useTimeBar: {
                     label: "タイムバーを使用する",
-                    description: "トラックの継続時間をタイムバーとして表示 (リスニングステータスを使用する必要があります)"
+                    description: "トラックの継続時間を使用してタイムバーを表示します (リスニングステータスを使用する必要があります)"
                 },
                 statusName: {
                     label: "ステータス名",
-                    description: "例外テキスト"
+                    description: "カスタムステータステキスト"
                 },
                 nameFormat: {
                     label: "名前の形式",
-                    description: "ステータス名に曲名とアーティスト名を表示する方法",
-                    custom: "カスタムステータステキストを使用する",
-                    artistSong: "「アーティスト - 曲」形式を使用する",
-                    songArtist: "「曲 - アーティスト」形式を使用する",
-                    artistOnly: "アーティスト名だけを使用してください",
-                    songOnly: "曲名だけを使用してください",
-                    albumName: "アルバム名を使用します (曲にアルバムがない場合は例外テキストを返します)"
+                    description: "ステータス名に曲名とアーティスト名を表示",
+                    custom: "カスタムステータス名を使用する",
+                    artistSong: "「アーティスト - 曲」の形式を使用します",
+                    songArtist: "「曲 - アーティスト」形式を使用します",
+                    artistOnly: "アーティスト名のみを使用する",
+                    songOnly: "曲名のみを使用する",
+                    albumName: "アルバム名を使用します (曲にアルバムがない場合はカスタム ステータス テキストに戻ります)"
                 },
                 useListeningStatus: {
                     label: "リスニングステータスを使用する",
-                    description: "「再生中」ではなく「リスニング」ステータスを表示する"
+                    description: "「再生中」ではなく「視聴中」ステータスを表示する"
                 },
                 missingArt: {
-                    label: "カバー画像がありません",
+                    label: "欠けている芸術",
                     description: "アルバムまたはアルバムアートが見つからない場合",
                     listenbrainzLogo: "大きな ListenBrainz ロゴを使用する",
                     generic: "一般的なプレースホルダーを使用する"
                 },
                 useLogo: {
-                    label: "クランのロゴ",
-                    description: "アルバム カバーに ListenBrainz ロゴを表示する"
+                    label: "ロゴを使用する",
+                    description: "アルバム アートに ListenBrainz ロゴを表示する"
                 }
             }
         },
         loadingQuotes: {
-            name: "引用の読み込み中",
-            description: "Discordの読み込み引用符を変更します",
+            name: "LoadingQuotes",
+            description: "Discordの読み込み中の引用符を置き換える",
             option: {
                 replaceEvents: {
-                    label: "変更イベント",
+                    label: "イベントの置換",
                     description: "このプラグインは、特別なイベントをテーマにした引用を含むイベント中にも適用する必要がありますか? （例：ハロウィン）"
                 },
                 enablePluginPresetQuotes: {
-                    label: "プラグインの引用を有効にする",
-                    description: "このプラグインによって作成された引用を有効にする"
+                    label: "プラグインのプリセット引用符を有効にする",
+                    description: "このプラグインによってプリセットされた引用符を有効にする"
                 },
                 enableDiscordPresetQuotes: {
-                    label: "Discord の引用を有効にする",
-                    description: "Discord の定型引用を有効にする (イベント中のイベント引用を含む)"
+                    label: "Discord のプリセット引用符を有効にする",
+                    description: "Discord のプリセット引用符を有効にする (イベント中のイベント引用文を含む)"
                 },
                 additionalQuotes: {
                     label: "追加の見積もり",
-                    description: "追加で表示される特殊引用符は、次の区切り文字で区切られます。"
+                    description: "追加のカスタム引用符が表示される可能性があり、以下の区切り文字で区切られます。"
                 },
                 additionalQuotesDelimiter: {
-                    label: "追加の引用符の区切り文字",
+                    label: "追加の引用符区切り文字",
                     description: "追加の引用符の区切り文字"
                 }
             }
         },
         loginWithQR: {
-            name: "QRでログイン",
-            description: "モバイルと同じように、ログイン QR コードをスキャンすると、別のデバイスでログインできます。",
+            name: "LoginWithQR",
+            description: "モバイルと同じように、ログイン QR コードをスキャンして別のデバイスにログインできます。",
             option: {
                 scanQr: {
                     label: "QRコードをスキャン",
                     description: "QRコードをスキャンしてください",
-                    notEnabled: "プラグインをアクティブ化し、クライアントを再起動してログイン QR コードをスキャンします。"
+                    notEnabled: "プラグインを有効にしてクライアントを再起動し、ログイン QR コードをスキャンします"
                 }
             },
-            neverScan: "別のユーザーまたはアプリからのログイン QR コードを決してスキャンしないでください。",
-            hold: "長押しして入力を確認します",
+            neverScan: "別のユーザーまたはアプリケーションからのログイン QR コードを決してスキャンしないでください。",
+            hold: "長押ししてログインを確認する",
             scanning: "走査...",
             stopScanning: "スキャンを停止する",
             usingWebcam: "Webカメラを使用してスキャンする",
@@ -5815,7 +5815,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             orPaste: "または、クリップボードから画像を貼り付けます。"
         },
         mediaPlaybackSpeed: {
-            name: "メディア再生速度",
+            name: "MediaPlaybackSpeed",
             description: "メディア埋め込みの (デフォルト) 再生速度を変更できます。",
             playbackSpeed: "再生速度",
             context: {
@@ -5823,7 +5823,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 defaultVoiceMessageSpeed: {
-                    label: "デフォルトのボイスメール速度",
+                    label: "デフォルトの音声メッセージ速度",
                     description: "音声メッセージ"
                 },
                 defaultVideoSpeed: {
@@ -5831,118 +5831,118 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "動画"
                 },
                 defaultAudioSpeed: {
-                    label: "デフォルトのオーディオレート",
-                    description: "オーディオファイル"
+                    label: "デフォルトの音声速度",
+                    description: "オーディオ"
                 }
             }
         },
         memberCount: {
-            name: "メンバー数",
-            description: "サーバー上のオンライン メンバーの数、合計メンバー、および音声チャネルのユーザーの数をメンバー リストとツールチップに表示します。",
+            name: "MemberCount",
+            description: "オンライン メンバー、合計メンバー、サーバー上の音声チャネルのユーザーの数をメンバー リストとツールチップに表示します。",
             option: {
                 toolTip: {
                     label: "ツールチップ",
-                    description: "サーバーのツールチップにメンバー数を表示"
+                    description: "サーバーのツールチップにメンバー数を表示する"
                 },
                 memberList: {
                     label: "メンバー一覧",
-                    description: "メンバーリストの上部にメンバー数を表示する"
+                    description: "メンバーリストのヘッダーにメンバー数を表示する"
                 },
                 voiceActivity: {
                     label: "音声アクティビティ",
                     description: "音声チャネルのユーザー数を表示する"
                 }
             },
-            onlineThisChannel: "{{formattedOnlineCount}} はこのチャンネルでオンラインです",
-            totalMembers: "サーバー上の合計メンバー数は {{formattedTotalCount}} です",
-            totalVoice: "{{formattedVoiceCount}} 音声チャンネルのメンバー"
+            onlineThisChannel: "{{formattedOnlineCount}} このチャンネルでオンライン",
+            totalMembers: "{{formattedTotalCount}} サーバー メンバーの合計",
+            totalVoice: "{{formattedVoiceCount}} メンバーの声"
         },
         mentionAvatars: {
-            name: "アバターについての言及",
-            description: "メンション内にユーザーのアバターとロールのアイコンを表示します。",
+            name: "MentionAvatars",
+            description: "メンション内にユーザーのアバターとロールのアイコンを表示します",
             option: {
                 showAtSymbol: {
-                    label: "@アイコンを表示",
-                    description: "ユーザーのメンションに @ 記号を表示するかどうかを決定します。"
+                    label: "@シンボルを表示",
+                    description: "ユーザーのメンションに @ 記号を表示するかどうか"
                 }
             }
         },
         meow: {
-            name: "ニャー",
-            description: "チャットでニャーと鳴くボタンをチャットバーに追加します。",
+            name: "Meow",
+            description: "チャットでニャーと鳴くチャットバーボタンを追加します",
             button: {
-                meow: "ミヤフ"
+                meow: "ニャー"
             }
         },
         messageBurst: {
-            name: "メッセージバースト",
-            description: "他の誰かが先にメッセージを送信していない限り、一定期間内に送信されたメッセージが以前のメッセージとマージされます。",
+            name: "MessageBurst",
+            description: "以前にメッセージを送信した人がいない場合、一定期間内に送信されたメッセージを以前に送信したメッセージと結合します。",
             option: {
                 timePeriod: {
-                    label: "時間範囲",
-                    description: "マージ時間 (秒単位)。"
+                    label: "期間",
+                    description: "バーストの継続時間 (秒単位)。"
                 },
                 shouldMergeWithAttachment: {
-                    label: "アタッチメントと組み合わせる",
-                    description: "最後のメッセージに添付ファイル (ファイル/画像) がある場合、メッセージをマージする必要がありますか?"
+                    label: "添付ファイルと結合する",
+                    description: "最後のメッセージに添付ファイルがある場合、メッセージをマージする必要がありますか?"
                 },
                 useSpace: {
                     label: "スペースを使用する",
-                    description: "結合時に新しい行に移動するのではなく、メッセージ間にスペースを追加するかどうか。"
+                    description: "結合するときにメッセージ間に改行の代わりにスペースを追加するかどうか。"
                 }
             }
         },
         messageClickActions: {
-            name: "メッセージクリックアクション",
-            description: "Backspace キーを押しながらクリックすると削除でき、ダブルクリックすると編集または返信できます。",
+            name: "MessageClickActions",
+            description: "Backspace キーを押しながらクリックして削除し、ダブルクリックして編集/返信します",
             option: {
                 singleClickAction: {
-                    label: "ワンクリックアクション",
-                    description: "シングルクリックアクション (自分のメッセージに対する)"
+                    label: "シングルクリックアクション",
+                    description: "シングルクリック時のアクション (メッセージ)"
                 },
                 singleClickModifier: {
-                    label: "ワンクリックモディファイア",
-                    description: "ワンクリックアクションに必要な修飾子 (独自のメッセージ内)"
+                    label: "シングルクリックモディファイア",
+                    description: "シングルクリックアクション (メッセージ) に必要な修飾子"
                 },
                 singleClickOthersAction: {
-                    label: "ワンクリックアクション（その他）",
-                    description: "シングルクリックアクション (他の人のメッセージに対する)"
+                    label: "シングルクリックアクション（その他）",
+                    description: "シングルクリック時のアクション (他人のメッセージ)"
                 },
                 singleClickOthersModifier: {
-                    label: "ワンクリックモディファイア（その他）",
-                    description: "シングルクリックアクションに必要な修飾子 (他の人の投稿内)"
+                    label: "シングルクリックモディファイア（その他）",
+                    description: "シングルクリックアクションに必要な修飾子 (他の人のメッセージ)"
                 },
                 doubleClickAction: {
                     label: "ダブルクリックアクション",
-                    description: "自分のメッセージに対するダブルクリックアクション"
+                    description: "ダブルクリック時のアクション (メッセージ)"
                 },
                 doubleClickOthersAction: {
                     label: "ダブルクリックアクション（その他）",
-                    description: "他の人のメッセージに対するダブルタップアクション"
+                    description: "ダブルクリック時の動作（他人のメッセージ）"
                 },
                 doubleClickModifier: {
                     label: "ダブルクリック修飾子",
                     description: "ダブルクリックアクションには修飾子が必要です"
                 },
                 tripleClickAction: {
-                    label: "3 回クリックするアクション",
-                    description: "3回のクリックアクション"
+                    label: "トリプルクリックアクション",
+                    description: "トリプルクリック時のアクション"
                 },
                 tripleClickModifier: {
-                    label: "スリークリックモディファイア",
-                    description: "3 つのクリック アクションには修飾子が必要です"
+                    label: "トリプルクリックモディファイア",
+                    description: "トリプルクリックアクションには修飾子が必要です"
                 },
                 reactEmoji: {
-                    label: "リアクション絵文字",
-                    description: "リアクションアクションに使用する絵文字"
+                    label: "絵文字に反応する",
+                    description: "反応アクションに使用する絵文字"
                 },
                 addAdditionalReacts: {
                     label: "追加の反応を追加する",
                     description: "設定済みのリアクション絵文字も追加します"
                 },
                 additionalReactEmojis: {
-                    label: "追加のリアクション絵文字",
-                    description: "リアクションアクションを使用するときに追加する追加の絵文字 (カンマ/エンターで区切られ、最大 {{count}})"
+                    label: "追加の React 絵文字",
+                    description: "React アクションを使用するときに追加する追加の絵文字 (カンマ/改行区切り、最大 {{count}})"
                 },
                 disableInDms: {
                     label: "DMで無効にする",
@@ -5957,29 +5957,29 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "ダブル/トリプルクリックを区別するためのタイムアウト (ミリ秒)"
                 },
                 doubleClickHoldThreshold: {
-                    label: "ダブルクリック保持のしきい値",
-                    description: "ダブルクリック操作の最大保持時間 (ミリ秒)。 テキストの選択をより長く保持できるようにします"
+                    label: "ダブルクリックホールドのしきい値",
+                    description: "ダブルクリック操作の最大保持時間 (ミリ秒)。長押しするとテキストの選択が可能になります"
                 },
                 deferDoubleClickForTriple: {
-                    label: "ダブルクリックをトリプルクリックまで遅らせる",
-                    description: "ダブルクリックを遅らせてトリプルクリックアクションを許可します (オフの場合、トリプルクリックは無効になります)"
+                    label: "ダブルクリックを延期してトリプルにする",
+                    description: "ダブルクリックを遅らせてトリプルクリック操作を許可します (オフの場合はトリプルクリックが無効になります)"
                 },
                 selectionHoldTimeout: {
                     label: "選択保持タイムアウト",
                     description: "テキスト選択を許可するタイムアウト (ミリ秒)"
                 },
                 quoteWithReply: {
-                    label: "引用で返信",
+                    label: "返信付き引用",
                     description: "引用する場合はメッセージにも返信してください"
                 },
                 useSelectionForQuote: {
                     label: "選択範囲を引用に使用する",
-                    description: "引用する場合は、選択したテキストを使用します (利用可能な場合)"
+                    description: "引用する場合、可能な場合は選択したテキストを使用します"
                 }
             },
             actions: {
                 none: "なし",
-                delete: "シル",
+                delete: "消去",
                 copyLink: "リンクをコピー",
                 copyID: "IDをコピーする",
                 copyContent: "コンテンツをコピーする",
@@ -5987,32 +5987,32 @@ const translations: MatchStructure<typeof enTranslations> = {
                 edit: "編集",
                 reply: "返事",
                 react: "反応する",
-                openThread: "オープントピック",
-                openTab: "タブで開く",
+                openThread: "オープンスレッド",
+                openTab: "タブを開く",
                 quote: "引用",
-                pin: "ピン留めする"
+                pin: "ピン"
             },
             missingPermissions: {
                 react: "反応できません: 権限がありません",
-                pin: "修正できません: 権限がありません",
+                pin: "ピン留めできません: 権限がありません",
             },
-            cannotQuote: "このメッセージ タイプは引用符で囲むことができません",
+            cannotQuote: "このメッセージ タイプは引用できません",
             copy: {
                 messageId: "メッセージIDがコピーされました!",
-                messageContent: "メッセージ内容がコピーされました!",
-                userId: "ユーザーIDがコピーされました！"
+                messageContent: "メッセージの内容がコピーされました!",
+                userId: "ユーザーIDがコピーされました!"
             },
             linkCopied: "リンクがコピーされました!"
         },
         messageColors: {
-            name: "メッセージ色",
-            description: "メッセージ内のカラーコード (#FF0042 など) を表示します。",
+            name: "MessageColors",
+            description: "メッセージ内に#FF0042のようなカラーコードを表示します",
             option: {
                 renderType: {
-                    label: "可視化タイプ",
-                    description: "色の表示方法を決定します",
+                    label: "レンダータイプ",
+                    description: "色のレンダリング方法",
                     textColor: "文字の色",
-                    block: "隣のブロック",
+                    block: "近くのブロック",
                     backgroundColor: "背景色"
                 },
                 enableShortHexCodes: {
@@ -6021,20 +6021,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 blockView: {
                     label: "ブロックビュータイプ",
-                    description: "カラーブロックの表示方法を決定します",
+                    description: "カラーブロックの表示方法",
                     right: "右側",
-                    left: "左",
+                    left: "左側",
                     both: "両側"
                 }
             }
         },
         messageFetchTimer: {
-            name: "メッセージフェッチタイマー",
-            description: "現在のチャンネルのメッセージが読み込まれるまでにかかる時間を示します。",
+            name: "MessageFetchTimer",
+            description: "現在のチャネルのメッセージをフェッチするのにかかった時間を示します。",
             option: {
                 showIcon: {
                     label: "アイコンを表示",
-                    description: "メッセージバーに読み込み時間アイコンを表示"
+                    description: "メッセージバーにフェッチ時間アイコンを表示"
                 },
                 showMs: {
                     label: "ミリ秒を表示",
@@ -6045,34 +6045,34 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "アイコンの色 (CSS カラー値)"
                 }
             },
-            loaded: "メッセージは {{time}} ミリ秒 ({{timeAgo}}) で読み込まれました",
-            day: "数日前",
-            hour: "数時間前",
-            minute: "数分前",
-            justNow: "今"
+            loaded: "{{time}}ms ({{timeAgo}}) でロードされたメッセージ",
+            day: "{{s}}日前",
+            hour: "{{s}}時間前",
+            minute: "分{{s}}前",
+            justNow: "ちょうど今"
         },
         messageLatency: {
-            name: "メッセージ遅延",
-            description: "送信に n 秒以上かかるメッセージのインジケーターを追加します。",
+            name: "MessageLatency",
+            description: "送信に n 秒以上かかったメッセージのインジケーターを表示します",
             day: "日",
             days: "日",
-            hour: "一瞬",
-            hours: "一瞬",
+            hour: "時間",
+            hours: "時間",
             minute: "分",
             minutes: "分",
             second: "2番",
-            seconds: "2番",
+            seconds: "秒",
             millisecond: "ミリ秒",
             milliseconds: "ミリ秒",
-            and: "ve",
-            oldKotlinDetected: "ユーザーは古い Discord Android クライアントを使用している疑いがあります。",
-            ahead: "このユーザーの時間は {{delta}} 進んでいます。",
+            and: "そして",
+            oldKotlinDetected: "ユーザーは古い Discord Android クライアントを使用していると思われます。",
+            ahead: "このユーザーの時計は{{delta}}進んでいます。",
             delay: "このメッセージは {{delta}} 遅れて送信されました。",
             delayedMessage: "遅延メッセージ",
-            oldAndroidClient: "従来の Discord Android クライアント",
+            oldAndroidClient: "古い Discord Android クライアント",
             option: {
                 latency: {
-                    label: "遅れ",
+                    label: "レイテンシ",
                     description: "遅延インジケーターのしきい値 (秒)"
                 },
                 detectDiscordKotlin: {
@@ -6084,35 +6084,35 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "ミリ秒を表示"
                 },
                 ignoreSelf: {
-                    label: "自分を無視する",
-                    description: "独自のメッセージにインジケーターを追加する"
+                    label: "自分自身を無視する",
+                    description: "自分のメッセージにインジケーターを追加しないでください"
                 }
             }
         },
         messageLinkEmbeds: {
-            name: "メッセージリンク埋め込み",
-            description: "別のメッセージへのリンクを含むメッセージにプレビューを追加します。",
+            name: "MessageLinkEmbeds",
+            description: "別のメッセージにリンクするメッセージにプレビューを追加します",
             option: {
                 messageBackgroundColor: {
                     label: "メッセージの背景色",
                     description: "リッチ埋め込みのメッセージの背景色"
                 },
                 automodEmbeds: {
-                    label: "オートモッド埋葬",
-                    description: "リッチ埋め込みの代わりに automod 埋め込みを使用します (サイズは小さいですが、含まれる情報は少なくなります)",
+                    label: "Automod の埋め込み",
+                    description: "リッチ埋め込みの代わりに automod 埋め込みを使用します (サイズは小さいですが情報が少ないです)",
                     always: "常に automod 埋め込みを使用する",
-                    prefer: "Automod 埋め込みを優先しますが、一部のコンテンツが表示できない場合はリッチ埋め込みを使用してください",
+                    prefer: "automod 埋め込みを優先しますが、一部のコンテンツを表示できない場合はリッチ埋め込みを使用してください",
                     never: "automod の埋め込みは絶対に使用しないでください"
                 },
                 listMode: {
                     label: "リストモード",
-                    description: "ID リストをブラックリストとして使用するかホワイトリストとして使用するかを決定します",
+                    description: "IDリストをブラックリストとして使用するかホワイトリストとして使用するか",
                     blacklist: "ブラックリスト",
                     whitelist: "ホワイトリスト"
                 },
                 idList: {
                     label: "IDリスト",
-                    description: "ブラックリストまたはホワイトリストに追加するサーバー/チャネル/ユーザー ID (カンマ区切り)"
+                    description: "ブラックリストまたはホワイトリストに登録するギルド/チャネル/ユーザー ID (カンマで区切る)"
                 },
                 clearMessageCache: {
                     label: "メッセージキャッシュのクリア",
@@ -6120,116 +6120,116 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             noContent: {
-                noAttachments: "コンテンツがありません {{count}} 個の埋め込みメッセージ",
-                noEmbeds: "コンテンツがありません {{count}} 追加",
-                both: "コンテンツなし、添付ファイル {{attachments}} 個、埋め込みメッセージ {{embeds}} 個"
+                noAttachments: "コンテンツなし {{count}} 埋め込み{{s}}",
+                noEmbeds: "コンテンツなし{{count}}添付{{s}}",
+                both: "コンテンツなし、{{attachments}} 添付{{attachmentsS}} および {{embeds}} 埋め込み{{embedsS}}"
             },
-            dm: "プライベートメッセージ",
-            groupDm: "グループメッセージ",
-            server: "プレゼンター"
+            dm: "ダイレクトメッセージ",
+            groupDm: "グループDM",
+            server: "サーバ"
         },
         messageLinkTooltip: {
-            name: "メッセージリンクツールチップ",
-            description: "メッセージ リンク、返信、転送されたメッセージの上にマウスを置くと、ツールヒントとメッセージ プレビューが追加されます。",
+            name: "MessageLinkTooltip",
+            description: "メッセージ リンク、返信、転送されたメッセージの上にマウスを移動すると、メッセージ プレビューを含むツールチップが追加されます。",
             loading: "読み込み中...",
             option: {
                 onLink: {
                     label: "リンク上",
-                    description: "メッセージリンクの上にマウスを置くとツールチップが表示されます"
+                    description: "メッセージリンクの上にマウスを置いたときにツールチップを表示する"
                 },
                 onReply: {
-                    label: "応答時",
-                    description: "メッセージの返信にカーソルを合わせるとツールチップを表示します"
+                    label: "返信時",
+                    description: "メッセージの返信の上にマウスを置くとツールチップを表示します"
                 },
                 onForward: {
-                    label: "送信されるメッセージについて",
+                    label: "前進時",
                     description: "転送されたメッセージの上にマウスを置くとツールチップを表示します"
                 },
                 display: {
-                    label: "外観",
-                    description: "外観スタイル",
+                    label: "画面",
+                    description: "表示スタイル",
                     auto: "メッセージと同じ",
                     compact: "コンパクト",
-                    cozy: "快適"
+                    cozy: "居心地の良い"
                 }
             }
         },
         messageLogger: {
-            name: "メッセージロガー",
-            description: "削除および編集したメッセージを一時的に保存します。",
+            name: "MessageLogger",
+            description: "削除および編集されたメッセージを一時的にログに記録します。",
             removeMessage: "メッセージ履歴の削除",
             removeMessageTemporary: "メッセージの削除 (一時的)",
             clearMessageLog: "メッセージログのクリア",
             modal: {
                 edit: {
                     title: "メッセージ編集履歴",
-                    tooltip: "この編集状況は保存されていないため表示できません。"
+                    tooltip: "この編集状態はログに記録されていないため、表示できません。"
                 }
             },
             option: {
                 deleteStyle: {
-                    label: "スタイルの消去",
-                    description: "削除されたメッセージの表示スタイル",
+                    label: "スタイルの削除",
+                    description: "削除されたメッセージのスタイル",
                     text: "赤文字",
-                    overlay: "赤いコーティング"
+                    overlay: "赤いオーバーレイ"
                 },
                 logDeletes: {
-                    label: "削除済みを保存",
-                    description: "削除されたメッセージを保存するかどうかを決定します"
+                    label: "ログの削除",
+                    description: "削除されたメッセージをログに記録するかどうか"
                 },
                 collapseDeleted: {
                     label: "削除されたものを折りたたむ",
-                    description: "ブロックされたメッセージと同様に削除されたメッセージを絞り込む"
+                    description: "ブロックされたメッセージと同様に、削除されたメッセージを折りたたむかどうか"
                 },
                 logEdits: {
-                    label: "編集済みを保存",
-                    description: "編集したメッセージを保存するかどうかを決定します"
+                    label: "ログ編集",
+                    description: "編集したメッセージをログに記録するかどうか"
                 },
                 inlineEdits: {
                     label: "インライン編集",
-                    description: "メッセージコンテンツの一部として編集履歴を表示する"
+                    description: "メッセージ内容の一部として編集履歴を表示するかどうか"
                 },
                 ignoreBots: {
                     label: "ボットを無視する",
-                    description: "ボットから送信されたメッセージを無視する"
+                    description: "ボットによるメッセージを無視するかどうか"
                 },
                 ignoreSelf: {
-                    label: "自分を無視する",
-                    description: "自分自身のメッセージを無視する"
+                    label: "自分自身を無視する",
+                    description: "自分でメッセージを無視するかどうか"
                 },
                 ignoreUsers: {
                     label: "ユーザーを無視する",
-                    description: "無視するユーザー ID のカンマ区切りリスト"
+                    description: "無視するユーザー ID のカンマ区切りのリスト"
                 },
                 ignoreChannels: {
                     label: "チャンネルを無視する",
                     description: "無視するチャネル ID のカンマ区切りリスト"
                 },
                 ignoreGuilds: {
-                    label: "サーバーを無視する",
-                    description: "無視するサーバー ID のカンマ区切りリスト"
+                    label: "ギルドを無視する",
+                    description: "無視するギルド ID のカンマ区切りリスト"
                 },
                 showEditDiffs: {
-                    label: "編集の差異を表示",
-                    description: "編集されたメッセージのバージョン間の違いを表示する"
+                    label: "編集の差分を表示",
+                    description: "編集されたメッセージのバージョン間の視覚的な違いを表示する"
                 },
                 separatedDiffs: {
-                    label: "分割された差異",
-                    description: "追加と削除を相違点に分けて表示することで、より読みやすいビューを提供します。"
+                    label: "分離された差分",
+                    description: "差分をより読みやすくするために、diff で追加と削除を分離します。"
                 }
             }
         },
         messageLoggerEnhanced: {
-            name: "メッセージロガー強化版",
-            description: "追加機能により MessageLogger プラグインが強化されます。",
-            updateImageCacheDir: "ビジュアル キャッシュ ディレクトリが正常に更新されました。",
-            updateLogsDir: "ログ ディレクトリは正常に更新されました。",
-            failedUpdate: "ディレクトリを更新できませんでした。",
+            name: "MessageLoggerEnhanced",
+            description: "追加機能により MessageLogger プラグインを強化します。",
+            updateImageCacheDir: "画像キャッシュ ディレクトリが正常に更新されました。",
+            updateLogsDir: "ログ ディレクトリが正常に更新されました。",
+            failedUpdate: "ディレクトリの更新に失敗しました。",
             blacklist: "ブラックリスト",
             whitelist: "ホワイトリスト",
-            failedToRemove: "メッセージを削除できませんでした",
-            successfullyImported: "ログは正常にインポートされました。",
-            errorImportingLogs: "ログのインポート中にエラーが発生しました。 詳細については、コンソールを確認してください。",
+            failedToRemove: "メッセージの削除に失敗しました",
+            successfullyImported: "ログが正常にインポートされました",
+            errorImportingLogs: "ログのインポート中にエラーが発生しました。詳細についてはコンソールを確認してください",
             importing: "インポート中...",
             importLogs: "インポートログ",
             exporting: "エクスポート中...",
@@ -6250,8 +6250,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 cleared: "メッセージ ログ データベースとキャッシュがクリアされました。"
             },
             context: {
-                title: "メッセージログ",
-                jumpToMessage: "メッセージに移動",
+                title: "メッセージロガー",
+                jumpToMessage: "メッセージへジャンプ",
                 openUserProfile: "ユーザープロフィールを開く",
                 copyContent: "コンテンツをコピーする",
                 copyUserId: "ユーザーIDをコピーする",
@@ -6259,9 +6259,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 copyChannelId: "チャンネルIDをコピー",
                 copyServerId: "サーバーIDのコピー",
                 deleteLog: "ログの削除",
-                fromUsernameDm: "{{username}} の DM から",
-                fromGroupDm: "{{channelName}} グループの DM",
-                fromServerChannel: "サーバー {{serverName}} のチャンネル {{channelName}} から",
+                fromUsernameDm: "{{username}} の DM より",
+                fromGroupDm: "{{channelName}}グループDMより",
+                fromServerChannel: "{{channelName}} から {{serverName}}",
                 moveTypeTo: "{{type}} を {{destination}} に移動",
                 removeTypeFrom: "{{list}} から {{type}} を削除します",
                 openLogsFor: "{{name}} のログを開く",
@@ -6276,7 +6276,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 moveServerToBlacklist: "サーバーをブラックリストに移動",
                 moveServerToWhitelist: "サーバーをホワイトリストに移動",
                 addUserToBlacklist: "ユーザーをブラックリストに追加",
-                addUserToWhitelist: "ユーザーをホワイトリストに追加",
+                addUserToWhitelist: "ホワイトリストにユーザーを追加",
                 removeUserFromBlacklist: "ブラックリストからユーザーを削除",
                 removeUserFromWhitelist: "ホワイトリストからユーザーを削除",
                 moveUserToBlacklist: "ユーザーをブラックリストに移動",
@@ -6289,29 +6289,29 @@ const translations: MatchStructure<typeof enTranslations> = {
                 moveChannelToWhitelist: "チャンネルをホワイトリストに移動"
             },
             type: {
-                server: "プレゼンター",
+                server: "サーバ",
                 user: "ユーザー",
                 channel: "チャネル"
             },
             button: {
                 chooseFolder: "フォルダーの選択",
-                browse: "ゴザット",
+                browse: "ブラウズ",
                 clearLogs: "すべてのログをクリア",
                 clearVisibleLogs: "表示されているログをクリアする",
-                sortOldest: "古いものから新しいものへ並べ替える",
-                sortNewest: "新しい順に並べ替える",
+                sortOldest: "古いものから順に並べ替え",
+                sortNewest: "新しい順に並べ替え",
                 loadMore: "もっと読み込む",
-                noResults: "{{tab}} タブに結果がありません",
-                tryOtherTabs: "{{nextTab}} または {{lastTab}} タブをお試しください",
+                noResults: "{{tab}} に結果がありません",
+                tryOtherTabs: "{{nextTab}} または {{lastTab}} を試してみてください",
                 importLogs: "インポートログ"
             },
             modal: {
                 title: "メッセージのフィルタリング",
                 deleted: "削除されました",
-                edited: "整頓された",
-                ghostPing: "目に見えない Ping",
-                empty: "空いてるね",
-                importLogs: "ML Enhanced では、ログが IndexedDB に保存されるようになりました。 古いログをログ ディレクトリからインポートする必要があります。 インポートしても既存のログは変更されません。"
+                edited: "編集済み",
+                ghostPing: "ゴーストが鳴った",
+                empty: "空っぽだね",
+                importLogs: "ML Enhanced はログを Indexeddb に保存するようになりました。古いログをログ ディレクトリからインポートする必要があります。インポートしても既存のログは上書きされません"
             },
             clear: {
                 title: "ログをクリアする",
@@ -6322,135 +6322,135 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 saveMessages: {
                     label: "メッセージを保存する",
-                    description: "削除および編集したメッセージを保存するかどうかを決定します。"
+                    description: "削除および編集したメッセージを保存するかどうか。"
                 },
                 saveImages: {
                     label: "画像の保存",
-                    description: "削除した添付ファイルを保存します。"
+                    description: "削除された添付ファイルを保存します。"
                 },
                 sortNewest: {
-                    label: "新しい順に並べ替える",
+                    label: "新しい順に並べ替え",
                     description: "ログを最新順に並べ替えます。"
                 },
                 cacheMessagesFromServers: {
                     label: "サーバーからのメッセージをキャッシュする",
-                    description: "通常、ロガーはホワイトリストに登録された ID と DM のみを記録しますが、このオプションを有効にすると、すべてのサーバー上のメッセージも記録されます。 ただし、これはキャッシュ制限を超える可能性があり、一部のメッセージがスキップされる可能性があります。"
+                    description: "通常、メッセージ ロガーはホワイトリストに登録された ID と DM からのみログを記録します。これを有効にすると、すべてのサーバーからのメッセージもログに記録されることになります。これによりキャッシュが制限を超え、一部のメッセージが失われる可能性があることに注意してください。多数のサーバーを使用している場合、メッセージがログに記録される可能性が大幅に増加する可能性があり、その結果、メッセージ レコードが大きくなり、無関係なメッセージが含まれる可能性があります。"
                 },
                 ignoreBots: {
                     label: "ボットを無視する",
-                    description: "ボットメッセージを無視します。"
+                    description: "ボットによるメッセージを無視するかどうか"
                 },
                 ignoreWebhooks: {
-                    label: "Webhooklarıヨクサイ",
-                    description: "Webhook メッセージを無視します。"
+                    label: "Webhook を無視する",
+                    description: "Webhook によるメッセージを無視するかどうか"
                 },
                 ignoreSelf: {
-                    label: "自分を無視する",
-                    description: "自分自身のメッセージは無視してください。"
+                    label: "自分自身を無視する",
+                    description: "自分でメッセージを無視するかどうか"
                 },
                 ignoreMutedGuilds: {
-                    label: "ミュートされたサーバーを無視する",
-                    description: "ミュートされたサーバー上のメッセージは記録されません。 ただし、ホワイトリストに登録されたユーザー/チャネルは引き続き記録されます。"
+                    label: "ミュートされたギルドを無視する",
+                    description: "ミュートされたギルド内のメッセージは記録されません。ミュートされたギルドのホワイトリストに登録されたユーザー/チャンネルは引き続きログに記録されます。"
                 },
                 ignoreMutedCategories: {
                     label: "ミュートされたカテゴリを無視する",
-                    description: "ミュートされたカテゴリに属する​​チャンネルのメッセージは録音されません。"
+                    description: "ミュートされたカテゴリに属する​​チャネル内のメッセージはログに記録されません。ミュートされたギルドのホワイトリストに登録されたユーザー/チャンネルは引き続きログに記録されます。"
                 },
                 ignoreMutedChannels: {
                     label: "ミュートされたチャンネルを無視する",
-                    description: "ミュートされたチャンネルのメッセージは録音されません。"
+                    description: "ミュートされたチャンネルのメッセージは記録されません。ミュートされたギルドのホワイトリストに登録されたユーザー/チャンネルは引き続きログに記録されます。"
                 },
                 alwaysLogDirectMessages: {
-                    label: "DMは必ず保存する",
-                    description: "ダイレクトメッセージは必ず保存してください。"
+                    label: "ダイレクトメッセージを常に記録する",
+                    description: "DMを常に記録する"
                 },
                 alwaysLogCurrentChannel: {
-                    label: "現在のチャンネルを常に保存する",
-                    description: "現在のチャンネルを常に保存します。 ブラックリストに登録されたチャンネル/ユーザーは除外されます。"
+                    label: "現在のチャンネルを常にログに記録する",
+                    description: "現在選択されているチャンネルを常にログに記録します。ブラックリストに登録されたチャネル/ユーザーは引き続き無視されます。"
                 },
                 permanentlyRemoveLogByDefault: {
                     label: "デフォルトでログを完全に削除",
-                    description: "MessageLogger のメイン コンテキスト メニューでは、メッセージ ログから削除するオプションはデフォルトで完全に削除されています。"
+                    description: "Base MessageLogger のログ削除ボタンはログを完全に削除します"
                 },
                 hideMessageFromMessageLoggers: {
-                    label: "ロガーからのメッセージを非表示にする",
-                    description: "有効にすると、他のロガーからのメッセージを非表示にするコンテキスト メニュー オプションが追加されます。 安全ではない可能性がありますので、ご自身の責任でご使用ください。"
+                    label: "メッセージロガーからのメッセージを非表示にする",
+                    description: "有効にすると、コンテキスト メニュー ボタンがメッセージに追加され、他のロガーによってメッセージが記録されることなくメッセージを削除できるようになります。安全ではない可能性がありますので、ご自身の責任でご使用ください。"
                 },
                 showLogsButton: {
                     label: "「ログを表示」ボタン",
-                    description: "ツールバーの表示/非表示を切り替えます。"
+                    description: "ツールボックスを表示するかどうかを切り替えます"
                 },
                 showWhereMessageIsFrom: {
-                    label: "メッセージのソースを表示",
-                    description: "メッセージのチャネル/作成者およびサーバー名を表示します。"
+                    label: "メッセージの送信元を表示",
+                    description: "メッセージチャネル/作成者名とサーバー名を表示します"
                 },
                 messagesToDisplayAtOnceInLogs: {
-                    label: "ログに同時に表示するメッセージの数",
-                    description: "一度にログに表示するメッセージの数と、さらにメッセージが読み込まれるときに追加されるメッセージの量を決定します。"
+                    label: "ログに一度に表示するメッセージ",
+                    description: "ログに一度に表示するメッセージの数と、ログにさらにメッセージを読み込むときに読み込むメッセージの数。"
                 },
                 hideMessageFromMessageLoggersDeletedMessage: {
-                    label: "メッセージロガーから隠されるメッセージコンテンツ",
-                    description: "メッセージロガーから非表示にするときにメッセージを置き換えるコンテンツが使用されます。"
+                    label: "メッセージロガーからメッセージを非表示にする 削除されたメッセージ",
+                    description: "メッセージ ロガーからのメッセージを非表示にする機能を使用する場合に、メッセージを置き換えるメッセージのコンテンツ。"
                 },
                 messageLimit: {
                     label: "メッセージ制限",
-                    description: "保存するメッセージの最大数。 制限を超えると、古いメッセージは削除されます。 0 = 無制限。"
+                    description: "保存するメッセージの最大数。制限に達すると、古いメッセージは削除されます。 0は制限がないことを意味します"
                 },
                 attachmentSizeLimitInMegabytes: {
-                    label: "添付ファイルのサイズ制限 (MB)",
-                    description: "保存する添付ファイルの最大サイズ (MB 単位)。 この値より大きい添付ファイルは保存されません。"
+                    label: "添付ファイルのサイズ制限（メガバイト単位）",
+                    description: "保存する添付ファイルの最大サイズ (メガバイト単位)。このサイズを超える添付ファイルは保存されません。"
                 },
                 attachmentFileExtensions: {
-                    label: "追加のファイル拡張子",
-                    description: "保存するファイル拡張子のカンマ区切りのリスト。 空白のままにすると、すべての添付ファイルが保存されます。"
+                    label: "添付ファイルの拡張子",
+                    description: "保存するファイル拡張子のカンマ区切りリスト。このリストにないファイル拡張子を持つ添付ファイルは保存されません。すべての添付ファイルを保存するには、空のままにします。"
                 },
                 cacheLimit: {
                     label: "キャッシュ制限",
-                    description: "キャッシュに保持するメッセージの最大数。 制限を超えると、古いメッセージは削除されます。"
+                    description: "キャッシュに保持するメッセージの最大数。制限に達すると、古いメッセージは削除されます。"
                 },
                 timeBasedCleanupMinutes: {
-                    label: "時間ベースの分単位のクリーニング",
-                    description: "メッセージ制限を超えた古いメッセージの時間ベースのクリーニングが実行される分間隔。"
+                    label: "時間ベースのクリーンアップ時間（分）",
+                    description: "メッセージ制限を超えた古いメッセージの時間ベースのクリーンアップを実行する間隔 (分単位)。"
                 },
                 preserveCurrentChannel: {
-                    label: "現在のチャンネルを維持する",
-                    description: "有効にすると、現在選択しているチャネルのメッセージは時間ベースのクリーニングの影響を受けません。"
+                    label: "現在のチャンネルを保持",
+                    description: "有効にすると、現在選択しているチャネルのメッセージは時間ベースのクリーンアップの影響を受けません。"
                 },
                 whitelistedIds: {
-                    label: "ホワイトリストID",
+                    label: "ホワイトリストに登録されたID",
                     description: "ホワイトリストに登録されたサーバー、チャネル、またはユーザー ID。"
                 },
                 blacklistedIds: {
-                    label: "ブラックリストID",
+                    label: "ブラックリストに登録されたID",
                     description: "ブラックリストに登録されたサーバー、チャネル、またはユーザー ID。"
                 },
                 imageCacheDir: {
-                    label: "ビジュアルキャッシュディレクトリ",
-                    description: "保存した画像のディレクトリを選択します。"
+                    label: "画像キャッシュディレクトリ",
+                    description: "保存した画像ディレクトリを選択"
                 },
                 logsDir: {
-                    label: "ログインデックス",
-                    description: "ログを保存するディレクトリを選択します。"
+                    label: "ログディレクトリ",
+                    description: "ログディレクトリの選択"
                 },
                 importLogs: {
                     label: "インポートログ",
-                    description: "ファイルからログをインポートします。"
+                    description: "ファイルからログをインポート"
                 },
                 exportLogs: {
                     label: "ログのエクスポート",
-                    description: "IndexedDB からログをエクスポートします。"
+                    description: "IndexedDB からログをエクスポートする"
                 },
                 openLogs: {
                     label: "ログを開く",
-                    description: "ログを開きます。"
+                    description: "ログを開く"
                 },
                 openImageCacheFolder: {
-                    label: "ビジュアルキャッシュフォルダーを開く",
-                    description: "ビジュアルキャッシュディレクトリを開きます。"
+                    label: "画像キャッシュフォルダーを開く",
+                    description: "画像キャッシュディレクトリを開きます"
                 },
                 clearLogs: {
                     label: "ログをクリアする",
-                    description: "ログをクリアします。",
+                    description: "ログをクリアする",
                     title: "ログをクリアする",
                     body: "すべてのログをクリアしてもよろしいですか?",
                     confirmText: "クリア",
@@ -6459,37 +6459,37 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         messageNotifier: {
-            name: "メッセージ通知者",
-            description: "選択したユーザーがメッセージを送信したときに通知を受け取る",
-            dm: "プライベートメッセージ",
+            name: "MessageNotifier",
+            description: "選択したユーザーがメッセージを送信したときにトーストを取得する",
+            dm: "彼らのDM",
             option: {
                 users: {
                     label: "ユーザー",
-                    description: "メッセージ通知を受信するユーザー ID のカンマ区切りリスト",
+                    description: "メッセージトーストを取得するユーザー ID のカンマ区切りリスト",
                     invalidId: "{{id}} は有効なユーザー ID ではありません"
                 }
             },
             notification: {
-                title: "{{username}} がメッセージを送信しました",
-                body: "クリックして {{locationName}} に移動します"
+                title: "{{username}} さんがメッセージを送信しました",
+                body: "クリックすると{{locationName}}にジャンプします"
             }
         },
         messageTags: {
-            name: "メッセージタグ",
-            description: "メッセージを保存し、簡単なコマンドで使用できます。",
-            notExist: "タグ **{{タグ名}}** は使用できなくなりました。 Discordを再起動して修正してください:)",
-            alreadyExist: "**{{タグ名}}** という名前のタグはすでに存在します。",
-            sentTag: "**{{タグ名}}** タグが送信されました。",
-            successCreate: "**{{タグ名}}** タグが正常に作成されました。",
+            name: "MessageTags",
+            description: "メッセージを保存し、簡単なコマンドで使用できるようにします。",
+            notExist: "**{{tagname}}** タグはもう存在しません。修正するには Discord をリロードしてください:)",
+            alreadyExist: "**{{tagname}}** という名前のタグはすでに存在します。",
+            sentTag: "タグ **{{tagname}}** が送信されました。",
+            successCreate: "タグ **{{tagname}}** が作成されました。",
             allTags: "すべてのタグ:",
-            noTags: "UPS！ まだタグがありません。タグを作成するには /tag create を使用してください。",
-            noDeleteTag: "**{{tagname}}** という名前のタグが見つからなかったため、削除できません。",
-            successDelete: "タグ**{{name}}**は正常に削除されました。",
+            noTags: "おっと！まだタグがありません。/tag create を使用してタグを作成してください。",
+            noDeleteTag: "タグ **{{tagname}}** は存在しないため、削除できません。",
+            successDelete: "タグ **{{name}}** が正常に削除されました。",
             tagPreview: "**{{name}}** という名前のタグは存在しません。",
             option: {
                 clyde: {
-                    label: "クライドの投稿メッセージ",
-                    description: "有効にすると、タグが使用されたときに Clyde が一時メッセージを送信します。"
+                    label: "送信時のクライドメッセージ",
+                    description: "有効にすると、タグが使用されたときに Clyde が一時的なメッセージを送信します。"
                 },
                 tagsList: {
                     label: "タグリスト",
@@ -6498,152 +6498,152 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             command: {
                 tags: {
-                    description: "独自のタグを管理する",
+                    description: "すべてのタグを自分で管理",
                     option: {
                         create: {
-                            description: "新しいラベルを作成する",
-                            name: "応答をトリガーするタグの名前",
-                            message: "このハッシュタグを使用すると送信されるメッセージ"
+                            description: "新しいタグを作成する",
+                            name: "The name of the tag to trigger the response",
+                            message: "このタグを使用するときに送信するメッセージ"
                         },
                         list: {
-                            description: "すべてのタグをリストする"
+                            description: "自分のタグをすべてリストする"
                         },
                         delete: {
-                            description: "タグを削除する",
-                            name: "削除するタグの名前"
+                            description: "自分からタグを削除する",
+                            name: "The name of the tag to remove"
                         },
                         preview: {
                             description: "タグを公開せずにプレビューする",
-                            name: "プレビューするタグの名前"
+                            name: "The name of the tag to preview"
                         }
                     }
                 }
             }
         },
         micLoopbackTester: {
-            name: "マイクループバックテスター",
-            description: "ユーザーパネルにマイクループテストアイコンを追加",
-            button: "マイクのテストサイクル"
+            name: "MicLoopbackTester",
+            description: "ユーザーパネルにマイクループバックテストアイコンを追加",
+            button: "マイクテストループバック"
         },
         middleClickTweaks: {
             name: "MiddleClickTweaks",
-            description: "貼り付けやリンクを開くなど、さまざまな中クリック (マウス ホイール) の改善。",
+            description: "貼り付けやリンクを開くなど、さまざまな中クリックの調整。",
             option: {
                 openScope: {
-                    label: "スコープを開く",
-                    description: "これにより、これらのコンテンツ タイプが中クリックされたときに開かなくなります。",
+                    label: "オープンスコープ",
+                    description: "これらのコンテンツ タイプを中クリックしても開かないようにします。",
                     links: "リンク",
                     media: "メディア",
                     linksAndMedia: "リンクとメディア",
                     none: "なし"
                 },
                 pasteScope: {
-                    label: "結合範囲",
-                    description: "場合によっては、中クリックすると貼り付けができなくなります。",
-                    always: "中クリックによる貼り付けを常にブロックする",
-                    focus: "テキスト領域がフォーカスされていない場合のみブロックする",
+                    label: "スコープの貼り付け",
+                    description: "このような状況では、中クリックによる貼り付けを防止します。",
+                    always: "中クリックによる貼り付けを常に禁止する",
+                    focus: "テキスト領域にフォーカスがない場合のみ防止する",
                 },
                 pasteThreshold: {
-                    label: "結合閾値",
-                    description: "中クリックした後、貼り付けが再び有効になるまでに必要なミリ秒。"
+                    label: "貼り付けのしきい値",
+                    description: "中クリックした後、貼り付けが再び有効になるまでのミリ秒。"
                 }
             }
         },
         moreCommands: {
-            name: "その他のコマンド",
+            name: "MoreCommands",
             description: "エコー、レニー、モックなど",
             command: {
                 echo: {
-                    description: "Clyde としてメッセージを送信します (ローカル)"
+                    description: "Clyde としてメッセージを送信します (ローカルで)"
                 },
                 lenny: {
-                    description: "レニーの顔を送信します"
+                    description: "レニーフェイスを送る"
                 },
                 mock: {
-                    description: "人をからかう (mOcK PeOpLe)"
+                    description: "モックピープル"
                 },
                 wordcount: {
-                    description: "メッセージ内の単語数を計算します",
+                    description: "メッセージ内の単語数をカウントします",
                     response: "メッセージには {{count}} 語が含まれています。"
                 },
                 flipcoin: {
-                    description: "コインを投げて結果を返す",
-                    heads: "書き込み",
-                    tails: "トゥーラ",
-                    response: "お金 {{result}} が届きました。"
+                    description: "コインを投げて表または裏を返します",
+                    heads: "ヘッズ",
+                    tails: "テイルス",
+                    response: "コインは{{result}}に着地しました。"
                 },
                 ask: {
-                    description: "はい/いいえの質問と回答",
+                    description: "はい/いいえの質問をして答えを得る",
                     yes: "はい",
                     no: "いいえ",
                     maybe: "多分",
-                    askAgain: "後でもう一度尋ねる",
+                    askAgain: "後でもう一度質問する",
                     definitelyNot: "絶対に違います",
-                    itIsCertain: "まったくそのとおりです"
+                    itIsCertain: "それは確かです"
                 },
                 randomanimal: {
-                    description: "ランダムな動物画像を返します",
+                    description: "ランダムな動物の写真を入手する",
                     animal: "あなたの動物を選んでください",
                     cat: "猫",
                     dog: "犬",
-                    response: "申し訳ありませんが、現時点では動物の画像を取得できません"
+                    response: "申し訳ありませんが、現在動物の写真を取得できませんでした"
                 },
                 randomnumber: {
                     description: "2 つの値の間の乱数を生成します",
-                    min: "最小",
+                    min: "最小値",
                     max: "最大値",
                     response: "{{min}} から {{max}} までの乱数: {{number}}"
                 },
                 choose: {
-                    description: "与えられた選択肢の中からランダムに 1 つを選択します",
-                    option: "オプションのカンマ区切りリスト",
-                    response: "私の選択: {{選択}}"
+                    description: "提供されたオプションからランダムに選択します",
+                    option: "カンマ区切りの選択肢リスト",
+                    response: "私が選択するのは: {{choice}}"
                 },
                 systeminfo: {
                     description: "システム情報を表示します",
                     platform: "プラットフォーム",
                     deviceType: "デバイスの種類",
-                    mobile: "モービル",
+                    mobile: "携帯",
                     desktop: "デスクトップ",
-                    browser: "スキャナー",
+                    browser: "ブラウザ",
                     cpuCores: "CPUコア",
                     memory: "メモリ",
                     screen: "画面",
-                    languages: "ディル",
-                    network: "白",
+                    languages: "言語",
+                    network: "ネットワーク",
                     online: "オンライン",
                     offline: "オフライン",
-                    failedToFetch: "システム情報を取得できませんでした",
+                    failedToFetch: "システム情報の取得に失敗しました",
                     unknown: "未知"
                 },
                 getuptime: {
-                    description: "クライアントの稼働時間を表示します",
-                    response: "**クライアント稼働時間**: {{稼働時間}} 分"
+                    description: "クライアントの稼働時間を取得します",
+                    response: "**クライアント稼働時間**: {{uptime}} 分"
                 },
                 gettime: {
-                    description: "現在の時刻を表示します",
-                    response: "現在時刻: {{time}}"
+                    description: "現在時刻を取得します",
+                    response: "現在の時刻は{{time}}です"
                 },
                 transform: {
-                    description: "指定されたオプションに従ってテキストを変換します",
+                    description: "指定されたオプションを使用してテキストを変換します",
                     transformation: {
-                        description: "テキストに適用する変換のタイプ",
+                        description: "テキストに適用する変換",
                         lowercase: "テキストを小文字に変換する",
                         uppercase: "テキストを大文字に変換する",
-                        localeLowercase: "テキストをネイティブの小文字に変換する",
-                        localeUppercase: "テキストをネイティブの大文字に変換する",
-                        same: "そのままにしておきます"
+                        localeLowercase: "テキストをロケールの小文字に変換する",
+                        localeUppercase: "テキストをロケールの大文字に変換する",
+                        same: "そのままでいてください"
                     },
-                    repeat: "何回繰り返されるのでしょうか？",
+                    repeat: "何回繰り返すか",
                     reverse: "テキストを反転するかどうか",
                     normalize: {
-                        description: "テキストの正規化形式",
-                        nfc: "正規化フォーマットC（NFC）",
+                        description: "テキスト正規化フォーム",
+                        nfc: "正規化フォーム C (NFC)",
                         nfd: "正規化形式 D (NFD)",
-                        nfkc: "正規化フォーマット KC (NFKC)",
-                        nfkd: "正規化フォーマット KD (NFKD)"
+                        nfkc: "正規化形式 KC (NFKC)",
+                        nfkd: "正規化形式 KD (NFKD)"
                     },
-                    text: "変換するテキスト"
+                    text: "このテキストを変換します"
                 }
             }
         },
@@ -6652,28 +6652,28 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "Discordに顔文字を追加します。 ヽ(´▽`)/"
         },
         moreQuickReactions: {
-            name: "もっとクイックリアクション",
-            description: "メッセージコンテキストメニューのクイックレスポンスボタンを改善しました。",
+            name: "MoreQuickReactions",
+            description: "メッセージコンテキストメニューのクイックリアクションボタンを改善しました。",
             option: {
                 reactionCount: {
                     label: "反応数",
-                    description: "表示するリアクションの数 (0 ～ 42)"
+                    description: "反応数 (0-42)"
                 },
                 frequentEmojis: {
-                    label: "よく使われる絵文字",
+                    label: "よく使う絵文字",
                     description: "お気に入りの絵文字の代わりによく使う絵文字を使用する"
                 },
                 rows: {
-                    label: "彼らは売っています",
-                    description: "表示するクイックリアクションの行数"
+                    label: "行",
+                    description: "表示するクイックリアクションの列"
                 },
                 columns: {
                     label: "コラム",
-                    description: "表示するクイックリアクションの列数"
+                    description: "クイックリアクションのコラムを表示"
                 },
                 compactMode: {
-                    label: "コンパクトモッド",
-                    description: "ボタンは元のサイズの 75% に拡大縮小され、内側の絵文字は 125% に拡大されます。 絵文字は元のサイズの 93.75% になります。 少なくとも 5 列を使用することをお勧めします"
+                    label: "コンパクトモード",
+                    description: "ボタンを元のスケールの 75% に拡大縮小し、内側の絵文字を 125% のスケールに拡大します。絵文字は元のサイズの 93.75% になります。少なくとも 5 つの列を含めることをお勧めします"
                 },
                 scroll: {
                     label: "スクロール",
@@ -6682,85 +6682,85 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         moreUserTags: {
-            name: "その他のユーザータグ",
-            description: "Webhook とモデレーションロール (所有者、管理者など) のタグを追加します。",
+            name: "MoreUserTags",
+            description: "Webhook とモデレートロール (所有者、管理者など) のタグを追加します。",
             tag: {
                 webhook: {
                     name: "Webhook",
                     description: "このユーザーは Webhook です"
                 },
                 owner: {
-                    name: "所有者",
-                    description: "サーバーの所有者"
+                    name: "Owner",
+                    description: "サーバーを所有しています"
                 },
                 admin: {
-                    name: "管理者",
+                    name: "Admin",
                     description: "管理者権限がある"
                 },
                 staff: {
-                    name: "正式",
-                    description: "サーバー、チャネル、またはロールを管理できる"
+                    name: "Staff",
+                    description: "サーバー、チャネル、または役割を管理できます"
                 },
                 mod: {
-                    name: "モジュール",
-                    description: "メッセージを管理したり、連絡先をキック/禁止したりできます"
+                    name: "Mod",
+                    description: "メッセージを管理したり、ユーザーをキック/禁止したりできます"
                 },
                 vcmod: {
-                    name: "Modを参照",
+                    name: "VC Mod",
                     description: "ボイスチャットを管理できる"
                 },
                 chatmod: {
-                    name: "チャットモード",
+                    name: "Chat Mod",
                     description: "メッセージを管理できる"
                 }
             },
             modal: {
                 example: "例",
-                tag: "チケット",
-                customTextPlaceholder: "ラベル上のテキスト (デフォルト: {{displayName}})",
+                tag: "タグ",
+                customTextPlaceholder: "タグ上のテキスト (デフォルト: {{displayName}})",
                 messages: "メッセージに表示",
                 memberList: "メンバーリストとプロフィールに表示"
             },
             option: {
                 dontShowForBots: {
                     label: "ボットには表示しない",
-                    description: "ボットの追加タグを表示します (Webhook を除く)"
+                    description: "ボットの余分なタグを表示しない (Webhook を除く)"
                 },
                 dontShowBotTag: {
-                    label: "ボットタグを表示",
-                    description: "余分なタグのみを表示 / [APP] を非表示"
+                    label: "ボットタグを表示しない",
+                    description: "ボットの追加タグのみを表示 / [APP] テキストを非表示"
                 },
                 showWebhookTagFully: {
-                    label: "Webhook タグ全体を表示",
-                    description: "フォローされているチャネルに完全な Webhook タグを表示します (アナウンスなど)"
+                    label: "Webhook タグを完全に表示する",
+                    description: "お知らせなどのフォローされているチャネルに Webhook タグを表示します"
                 },
                 tagSettings: {
                     label: "タグ設定",
-                    description: "満たされる"
+                    description: "私を満たしてください"
                 }
             }
         },
         morse: {
-            name: "モールス信号",
-            description: "モールス信号に、またはモールス信号から変換するコマンド。",
+            name: "Morse",
+            description: "モールス信号との間で変換するスラッシュ コマンド。",
             command: {
                 morse: {
-                    description: "モールス信号への、またはモールス信号からの変換",
+                    description: "モールス信号への、またはモールス信号からの翻訳",
                     message: "変換するテキスト"
                 }
             }
         },
         moyai: {
-            name: "もやい",
+            name: "Moyai",
             description: "🗿🗿🗿🗿🗿🗿🗿🗿",
             option: {
                 volume: {
                     label: "音量",
-                    description: "🗿🗿🗿ボリューム"
+                    description: "🗿🗿🗿のボリューム"
                 },
                 quality: {
                     label: "品質",
-                    description: "🗿🗿🗿品質",
+                    description: "🗿🗿🗿の品質",
                     normal: "普通",
                     hd: "HD"
                 },
@@ -6779,7 +6779,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         musicControls: {
-            name: "音楽コントロール",
+            name: "MusicControls",
             description: "複数のサービスの音楽コントロールと歌詞",
             option: {
                 SpotifySectionTitle: {
@@ -6795,11 +6795,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 useSpotifyUris: {
                     label: "Spotify URI を使用する",
-                    description: "Spotify は URL ではなく URI を開きます。 Spotify がインストールされている場合にのみ機能し、すべてのプラットフォームで機能するとは限りません"
+                    description: "Spotify URL ではなく Spotify URI を開きます。 Spotify がインストールされている場合にのみ機能し、すべてのプラットフォームでは機能しない可能性があります"
                 },
                 previousButtonRestartsTrack: {
-                    label: "「前へ」ボタンで曲を再開します",
-                    description: "再生時間が 3 秒を超える場合は、前へボタンを押すと、現在の曲を最初から開始します。"
+                    label: "「戻る」ボタンでトラックを再開します",
+                    description: "再生時間が 3 秒を超える場合、前ボタンを押すと現在再生中のトラックを再開します"
                 },
                 TidalSectionTitle: {
                     label: "潮汐"
@@ -6814,14 +6814,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 YtmSectionTitle: {
                     label: "YouTube ミュージック",
-                    description: "この設定には {{app}} が必要です"
+                    description: "これらの設定には {{app}} が必要です"
                 },
                 showYoutubeMusicControls: {
                     label: "YouTube ミュージック コントロールを表示する",
                     description: "YouTube Music の音楽コントロールを表示する"
                 },
                 YoutubeMusicApiUrl: {
-                    label: "YouTube Music API URL の",
+                    label: "YouTube ミュージック API URL",
                     description: "使用している YouTube Music API サーバーの URL"
                 },
                 hoverControls: {
@@ -6829,53 +6829,53 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "ホバー時にコントロールを表示"
                 },
                 ShowMusicNoteOnNoLyrics: {
-                    label: "歌詞がない場合はノートを表示",
-                    description: "歌詞が見つからない場合にメモアイコンを表示する"
+                    label: "歌詞のない音符を表示",
+                    description: "歌詞が見つからない場合に音符アイコンを表示する"
                 },
                 LyricsPosition: {
-                    label: "歌詞の場所",
-                    description: "歌詞パネルの場所",
+                    label: "歌詞の位置",
+                    description: "歌詞パネルの位置",
                     above: "上記のプレーヤー",
                     below: "プレーヤーの下"
                 },
                 LyricsProvider: {
                     label: "歌詞プロバイダー",
-                    description: "歌詞の出典",
+                    description: "歌詞の取得元",
                     spotify: "Spotify（ミュージックマッチ）",
                     LRCLIB: "LRCLIB"
                 },
                 TranslateTo: {
-                    label: "あなたの言語に翻訳してください",
-                    description: "歌詞を翻訳する — これを変更すると、既存の翻訳がクリアされます",
-                    cleared: "翻訳がクリーンになりました"
+                    label: "翻訳先",
+                    description: "歌詞を翻訳する - これを変更すると、既存の翻訳がクリアされます",
+                    cleared: "翻訳がクリアされました"
                 },
                 LyricsConversion: {
                     label: "歌詞変換",
-                    description: "歌詞を自動的に翻訳またはローマ字化する",
+                    description: "歌詞を自動翻訳またはローマ字化",
                     none: "なし",
-                    translate: "変換する",
-                    romanize: "ローマ字化して"
+                    translate: "翻訳する",
+                    romanize: "ロマニ語"
                 },
                 FallbackProvider: {
-                    label: "バックアッププロバイダー",
-                    description: "1 つの歌詞プロバイダーが失敗した場合は、別の歌詞プロバイダーを試してください"
+                    label: "フォールバックプロバイダー",
+                    description: "歌詞プロバイダーが失敗した場合は、他のプロバイダーを試してください"
                 },
                 ShowFailedToasts: {
-                    label: "失敗通知を表示する",
-                    description: "歌詞の読み込みに失敗した場合に通知を表示する"
+                    label: "失敗したトーストを表示する",
+                    description: "歌詞の読み込みに失敗した場合にトーストを表示する"
                 },
                 PurgeLyricsCache: {
-                    label: "歌詞キャッシュのクリア",
-                    description: "キャッシュされた歌詞と翻訳をすべて削除します",
-                    button: "キャッシュのクリア",
-                    cacheLyricsPurged: "歌詞キャッシュがクリアされました"
+                    label: "歌詞キャッシュをパージ",
+                    description: "キャッシュされた歌詞と翻訳をすべてクリアします",
+                    button: "キャッシュのパージ",
+                    cacheLyricsPurged: "歌詞キャッシュがパージされました"
                 }
             },
             context: {
                 spotify: {
                     label: "Spotify の歌詞メニュー",
                     type: "Spotify {{type}} メニュー",
-                    copy: "{{type}} の名前をコピー",
+                    copy: "{{type}} 名をコピー",
                     link: "{{type}} リンクをコピー",
                     open: "Spotify で {{type}} を開きます",
                     album: "Spotify のアルバムメニュー"
@@ -6884,49 +6884,49 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "タイダル歌詞メニュー",
                     lyrics: "タイダルの歌詞",
                     type: "潮汐 {{name}} メニュー",
-                    copy: "名前をコピー {{name}}",
-                    open: "Tidal で {{name}} を開く",
+                    copy: "{{name}} 名をコピー",
+                    open: "タイダルで{{name}}を開く",
                     album: "潮汐アルバムメニュー"
                 },
                 ytm: {
-                    type: "YouTube Music {{name}} メニュー",
-                    copy: "名前をコピー {{name}}",
-                    open: "{{name}} の YouTube Music の機能",
+                    type: "YouTube ミュージック {{name}} メニュー",
+                    copy: "{{name}} 名をコピー",
+                    open: "YouTube Music で {{name}} を開きます",
                     album: "YouTube ミュージック アルバム メニュー",
                     muted: "ミュート"
                 },
                 lyrics: {
                     provider: "歌詞プロバイダー",
-                    saved: "記録された",
-                    notFound: "同期歌詞が見つかりません"
+                    saved: "保存されました",
+                    notFound: "同期された歌詞が見つかりませんでした"
                 },
                 copy: {
                     currentLyrics: "現在の歌詞をコピーする"
                 }
             },
             alert: {
-                lyricCopied: "歌詞がクリップボードにコピーされました!",
-                noLyrics: "歌詞はありません",
-                noLyricsTo: "{{翻訳済み}} の歌詞はありません",
-                translate: "翻訳",
-                romanize: "ローマ字化しないでください",
-                lyricsFetchFailed: "歌詞が見つかりませんでした",
-                failedToFetchLyrics: "{{翻訳済み}} を取得できませんでした",
+                lyricCopied: "歌詞をクリップボードにコピーしました!",
+                noLyrics: "歌詞なし",
+                noLyricsTo: "{{translated}} には歌詞がありません",
+                translate: "翻訳する",
+                romanize: "ローマ字",
+                lyricsFetchFailed: "歌詞の取得に失敗しました",
+                failedToFetchLyrics: "{{translated}} の取得に失敗しました",
                 translation: "翻訳",
-                romanization: "ローマ字",
-                failedToFetchTranslation: "{{翻訳済み}}の歌詞の翻訳を取得できませんでした"
+                romanization: "ローマ字化",
+                failedToFetchTranslation: "{{translated}} 歌詞の取得に失敗しました"
             },
             modal: {
                 install: {
                     title: "インストール方法",
-                    install: "{{link}} ここからインストールし、TidaLuna 設定 → アドオン ストア → @vmohammad/api のインストールに移動します",
-                    tidaluna: "ルナなし"
+                    install: "ここから {{link}} をインストールし、TidalLuna 設定 → プラグイン ストア → @vmohammad/api のインストールに移動します。",
+                    tidaluna: "ティダルナ"
                 },
                 player: {
-                    noPlaying: "再生中のトラックがありません",
+                    noPlaying: "トラックが再生されていません",
                     artist: "アーティスト：",
                     album: "アルバム：",
-                    noLyrics: "歌詞が見つかりません:(",
+                    noLyrics: "歌詞はありません:(",
                     progress: "進捗",
                     totalDuration: "合計所要時間"
                 },
@@ -6950,47 +6950,47 @@ const translations: MatchStructure<typeof enTranslations> = {
                 none: "なし"
             },
             error: {
-                failed: "ウィンドウの作成に失敗しました:(",
-                checkConsole: "コンソールにエラーがないか確認してください",
-                invalidUrlCustomApi: "カスタム API サーバーの URL 形式が無効です"
+                failed: "モーダルのレンダリングに失敗しました:(",
+                checkConsole: "コンソールでエラーを確認してください",
+                invalidUrlCustomApi: "カスタム API サーバー URL の URL 形式が無効です"
             }
         },
         mutualGroupDMs: {
-            name: "相互グループDM",
-            description: "プロフィールに共有グループDMを表示します",
-            no: "共通グループなし",
-            mutualGroup: "{{count}} 個の共通グループ",
+            name: "MutualGroupDMs",
+            description: "プロフィールに相互グループDMを表示します",
+            no: "相互グループなし",
+            mutualGroup: "{{count}} 相互グループ{{s}}",
             members: "メンバー",
-            noGroup: "公開グループDMはありません",
-            header: "共通グループ"
+            noGroup: "共通のグループDMはありません",
+            header: "相互グループ"
         },
         neverPausePreviews: {
-            name: "決して一時停止しないプレビュー",
-            description: "アプリがフォーカスを失った場合でも、通話中/PiP プレビュー (画面共有、ブロードキャストなど) が一時停止されないようにします。",
-            about: "このアドオンにより、Discord は通常よりも多くのリソースを消費します。"
+            name: "NeverPausePreviews",
+            description: "クライアントがフォーカスを失った場合でも、通話中/PiP プレビュー (画面共有、ストリームなど) が一時停止しないようにします。",
+            about: "このプラグインにより、Discord は通常より多くのリソースを使用します"
         },
         newGuildSettings: {
-            name: "新しいギルド設定",
-            description: "新しいサーバーに参加するときに、自動的にミュートし、その他のさまざまな設定を変更します",
+            name: "NewGuildSettings",
+            description: "新しいサーバーを自動的にミュートし、参加時にその他のさまざまな設定を変更します",
             context: {
-                apply: "新しいサーバー設定を適用する"
+                apply: "新しいギルド設定を適用する"
             },
             option: {
                 guild: {
-                    label: "ミュートサーバー",
-                    description: "サーバーを自動的にミュートする"
+                    label: "ミュートギルド",
+                    description: "ギルドを自動的にミュートする"
                 },
                 messages: {
                     label: "サーバー通知設定",
                     description: "サーバー通知設定",
                     all: "すべてのメッセージ",
                     mentions: "@メンションのみ",
-                    nothing: "なし",
+                    nothing: "何もない",
                     default: "サーバーのデフォルト"
                 },
                 everyone: {
                     label: "@everyone と @here を抑制します",
-                    description: "@everyone と @here の通知を抑制する"
+                    description: "@everyone と @here を抑制します"
                 },
                 role: {
                     label: "すべてのロールの @メンションを抑制する",
@@ -7009,34 +7009,34 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "すべてのチャンネルを自動的に表示する"
                 },
                 mobilePush: {
-                    label: "モバイル通知をミュートする",
-                    description: "モバイル通知を自動的に無音にする"
+                    label: "モバイルプッシュ通知をミュートする",
+                    description: "モバイルプッシュ通知を自動的にミュートする"
                 },
                 voiceChannels: {
                     label: "音声チャンネル",
-                    description: "音声チャンネル内の名前を自動的に非表示にする"
+                    description: "音声チャンネルの名前を自動的に非表示にする"
                 }
             }
         },
         newPluginsManager: {
-            name: "新しいプラグインマネージャー",
-            description: "新しいプラグインが Plexcord に追加されたときに通知してくれる便利なツール",
+            name: "NewPluginsManager",
+            description: "新しいプラグインが Plexcord に追加されたときに通知するユーティリティ",
             modal: {
                 title: "新しいプラグインと設定",
-                description: "前回の訪問以降、新しいプラグインと設定が追加されました。 以下の新しく追加された内容を確認してください。",
-                tooltip: "このセッションは終了します",
-                dontShowAgain: "二度と見せないでください",
-                restartRequired: "次のプラグインは再起動が必要です",
+                description: "前回の訪問以降、新しいプラグインと設定が追加されました。以下の新しく追加された内容を確認してください。",
+                tooltip: "このセッションを終了します",
+                dontShowAgain: "これを二度と表示しないでください",
+                restartRequired: "変更を適用するには再起動が必要です",
                 restart: "再起動",
-                continue: "デヴァム・エット"
+                continue: "続く"
             }
         },
         noAppsAllowed: {
-            name: "許可されたアプリはありません",
-            description: "ボットの Bot タグを戻します"
+            name: "NoAppsAllowed",
+            description: "ボットのタグを元の形式に戻します"
         },
         noBlockedMessages: {
-            name: "ブロックされたメッセージがありません",
+            name: "NoBlockedMessages",
             description: "ブロック/無視されたすべてのメッセージをチャットから完全に非表示にします",
             option: {
                 alsoHideIgnoredUsers: {
@@ -7045,95 +7045,95 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 disableNotifications: {
                     label: "通知を無効にする",
-                    description: "ブロックされたユーザーの新着メッセージ通知を非表示にします。 「デフォルト ユーザーの非表示」機能が有効であり、通知をトリガーしたユーザーが「例外ユーザー」リストに含まれていない場合は、次のことが常に適用されます。"
+                    description: "ブロックされたユーザーの新着メッセージ通知を非表示にします。以下で「デフォルトの非表示ユーザー」が有効になっており、通知をトリガーしたユーザーが「ユーザーの上書き」で除外されていない場合は、常に true になります。"
                 },
                 allowAutoModMessages: {
                     label: "AutoMod メッセージを許可する",
-                    description: "AutoMod によって送信されたメッセージがフィルタリングされずに通過できるようにします。"
+                    description: "AutoMod によって送信されるメッセージがフィルタリングをバイパスできるようにします。"
                 },
                 hideBlockedUserReplies: {
                     label: "ブロックされたユーザーの返信を非表示にする",
-                    description: "以前に参加したことのあるスレッドでブロックされたユーザーからのメッセージを非表示にします。"
+                    description: "スレッドに参加している場合は、ブロックされたユーザーからのメッセージをスレッド内で非表示にします。"
                 },
                 defaultHideUsers: {
-                    label: "デフォルトのユーザーの非表示",
-                    description: "有効にすると、ブロックされたユーザーからのメッセージは完全に非表示になり、代わりに例外リスト内のユーザー ID からのメッセージが折りたたまれます (デフォルトの Discord の動作)。 無効にすると、ブロックされたユーザーからのメッセージは折りたたまれ、例外リスト内のユーザー ID からのメッセージは完全に非表示になります。"
+                    label: "デフォルトの非表示ユーザー",
+                    description: "有効にすると、ブロックされたユーザーからのメッセージは完全に非表示になり、代わりにオーバーライド リスト内のユーザー ID からのメッセージは折りたたまれます (デフォルトの Discord の動作)。無効にすると、ブロックされたユーザーからのメッセージは折りたたまれ、上書きリスト内のユーザー ID からのメッセージは完全に非表示になります。"
                 },
                 overrideUsers: {
-                    label: "例外ユーザー",
-                    description: "上記で選択したデフォルトの動作の代わりに、非表示または折りたたむユーザー ID のカンマ区切りのリスト。"
+                    label: "ユーザーを上書きする",
+                    description: "上記で選択したデフォルトの動作の代わりに非表示または折りたたまれるユーザー ID のカンマ区切りのリスト。"
                 }
             }
         },
         noBulletPoints: {
-            name: "箇条書きなし",
-            description: "マークダウンの箇条書き (•、-、*) は書くことを妨げます (悪い習慣)"
+            name: "NoBulletPoints",
+            description: "マークダウンの箇条書きを入力しなくなります (臭い)"
         },
         noDeepLinks: {
-            name: "ディープリンクを無効にする",
-            description: "Discordのデスクトップアプリを強制的に開こうとする迷惑なディープリンク機能を無効にします"
+            name: "DisableDeepLinks",
+            description: "デスクトップアプリの使用を強制しようとする Discord の冗長ディープリンク機能を無効にします"
         },
         noDeleteSafety: {
-            name: "いいえ削除安全性",
+            name: "NoDeleteSafety",
             description: "サーバーを削除する際の「サーバー名の入力」要件を削除します。",
             option: {
                 confirmModal: {
-                    label: "確認ウィンドウ",
-                    description: "「このサーバーを削除してもよろしいですか?」確認ウィンドウを表示しますか?"
+                    label: "モーダルの確認",
+                    description: "「削除してもよろしいですか」モーダルを表示する必要がありますか?"
                 }
             },
             modal: {
                 title: "サーバーを削除しますか?",
-                body: "それがまだ明らかではなかったとしても、それは永続的になります。",
-                confirm: "シル",
+                body: "それが明らかでないとしても、それは永続的です。",
+                confirm: "消去",
                 cancel: "キャンセル"
             }
         },
         noDevtoolsWarning: {
-            name: "いいえ開発ツール警告",
-            description: "コンソール上の「LET'S HIT」警告バナーを無効にします。 副作用として、Discord がトークンを隠すことも防止され、ランダムなログアウトが防止されます。"
+            name: "NoDevtoolsWarning",
+            description: "コンソールの「HOLD UP」バナーを無効にします。副作用として、Discord がトークンを非表示にすることも防止され、ランダムなログアウトが防止されます。"
         },
         noF1: {
-            name: "F1号",
-            description: "F1 キーを押すと、ヘルプ ショートカットが無効になります。"
+            name: "NoF1",
+            description: "F1 ヘルプ バインドを無効にします。"
         },
         noMaskedUrlPaste: {
             name: "NoMaskedUrlPaste",
-            description: "テキストを選択した状態でリンクを貼り付けると、リンクがマスクされた URL として貼り付けられなくなります。"
+            description: "テキストを選択した状態でリンクを貼り付けても、マスクされた URL として貼り付けられません。"
         },
         noMirroredCamera: {
-            name: "いいえミラーカメラ",
-            description: "カメラが画面をミラーリングするのを防ぎます。"
+            name: "NoMirroredCamera",
+            description: "カメラが画面にミラーリングされないようにします"
         },
         noModalAnimation: {
-            name: "いいえモーダルアニメーション",
-            description: "すべてのモーダル ウィンドウで開閉アニメーションを無効にします。"
+            name: "NoModalAnimation",
+            description: "モーダルを開いたり閉じたりするときの 300 ミリ秒の長さのアニメーションを削除します。"
         },
         noMosaic: {
-            name: "ノーモザイク",
-            description: "Discordのビジュアルモザイクレイアウトを削除します。",
+            name: "NoMosaic",
+            description: "Discordの画像モザイクを削除します",
             option: {
                 inlineVideo: {
                     label: "インラインビデオ",
-                    description: "モーダルをループせずにビデオを再生します。"
+                    description: "カルーセルモーダルなしでビデオを再生する"
                 }
             }
         },
         noNitroUpsell: {
-            name: "ニトロアップセルなし",
-            description: "クライアントを騙して、あなたが Nitro を所有していると思わせることで、Discord からすべての Nitro セール通知を削除します。"
+            name: "NoNitroUpsell",
+            description: "クライアントをだまして、Nitro を持っていると思わせることで、Discord の Nitro アップセルをすべて削除します。"
         },
         noOnboarding: {
-            name: "いいえオンボーディング",
-            description: "Discordのサーバー参加プロセスをスキップすることで、より高速なログインが可能になります。"
+            name: "NoOnboarding",
+            description: "Discord のオンボーディング プロセスをバイパスして、サーバーへのエントリを迅速化します。"
         },
         noOnboardingDelay: {
-            name: "オンボーディング遅延なし",
-            description: "遅くて煩わしいサーバー参加遅延を回避します。"
+            name: "NoOnboardingDelay",
+            description: "遅くて煩わしいオンボーディングの遅延を回避します"
         },
         noPendingCount: {
-            name: "保留中の数",
-            description: "友達リクエスト、メッセージリクエスト、Nitro オファーの受信に関する通知の数を削除します。",
+            name: "NoPendingCount",
+            description: "受信した友達リクエスト、メッセージリクエスト、Nitro オファーの ping カウントを削除します。",
             option: {
                 hideFriendRequestsCount: {
                     label: "友達リクエスト数を非表示にする",
@@ -7141,129 +7141,129 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 hideMessageRequestsCount: {
                     label: "メッセージリクエスト数を非表示にする",
-                    description: "メッセージリクエストの数を非表示にする"
+                    description: "メッセージリクエスト数を非表示にする"
                 },
                 hidePremiumOffersCount: {
-                    label: "Nitro オファー数を非表示にする",
-                    description: "ニトロオファーの数を非表示にする"
+                    label: "プレミアムオファー数を非表示にする",
+                    description: "Nitro オファー数を非表示にする"
                 }
             }
         },
         noProfileThemes: {
-            name: "プロファイルテーマなし",
-            description: "自分以外の全員の Nitro プロフィール テーマを完全に削除します。"
+            name: "NoProfileThemes",
+            description: "自分以外の全員から Nitro プロフィールのテーマを完全に削除します。"
         },
         noPushToTalk: {
-            name: "プッシュトゥトークなし",
-            description: "プッシュツートークを必要とするチャネルでの音声アクティビティのプッシュツートーク要件をバイパスします。"
+            name: "NoPushToTalk",
+            description: "プッシュツートーク要件を強制するチャネルでの音声アクティビティに対するプッシュツートーク要件をバイパスします。"
         },
         noReplyMention: {
-            name: "返信なし",
-            description: "デフォルトで応答 ping を無効にします。",
+            name: "NoReplyMention",
+            description: "デフォルトで応答 ping を無効にします",
             option: {
                 userList: {
                     label: "ユーザーリスト",
-                    description: "ping を許可または免除されるユーザーのリスト (カンマまたはスペースで区切る必要があります)"
+                    description: "ping を許可または除外するユーザーのリスト (カンマまたはスペースで区切る)"
                 },
                 roleList: {
                     label: "役割リスト",
-                    description: "ping を許可または免除するロールのリスト (カンマまたはスペースで区切る必要があります)"
+                    description: "ping を許可または除外する役割のリスト (カンマまたはスペースで区切る)"
                 },
                 shouldPingListed: {
-                    label: "Ping リストに登録済み",
+                    label: "Ping をリストに掲載する必要がある",
                     description: "行動",
-                    dontPing: "リストされたユーザー/ロールに ping を送信する",
-                    onlyPing: "リストされたユーザー/ロールのみに ping を実行する"
+                    dontPing: "リストされたユーザー/ロールに ping を実行しないでください",
+                    onlyPing: "リストされたユーザー/ロールのみに ping を実行します"
                 },
                 inverseShiftReply: {
-                    label: "逆シフト応答動作",
-                    description: "Discord のシフト返信動作を逆転します (有効にするとシフト返信時にユーザーに言及します)"
+                    label: "逆シフト応答",
+                    description: "Discordのシフト返信動作を反転します（シフト返信にユーザーをメンションできるようにします）"
                 }
             }
         },
         normalizeMessageLinks: {
-            name: "メッセージリンクの正規化",
-            description: "メッセージ リンクから Canary/ptb プレフィックスを削除します。"
+            name: "NormalizeMessageLinks",
+            description: "メッセージ リンクから Canary/ptb を削除する"
         },
         noRoleHeaders: {
-            name: "役割ヘッダーなし",
-            description: "私たちは皆平等です!!メンバーリストからロールタイトルを削除します。"
+            name: "NoRoleHeaders",
+            description: "私たちは皆平等です!!メンバーリストのロールヘッダーを削除します。"
         },
         noRPC: {
             name: "NoRPC",
-            description: "Discord はリッチ プレゼンスを無効にします。"
+            description: "Discord リッチ プレゼンスを無効にする"
         },
         noServerEmojis: {
-            name: "FromServer絵文字",
-            description: "サーバーはオートコンプリート メニューに絵文字を表示しません。",
+            name: "NoServerEmojis",
+            description: "オートコンプリート メニューにサーバー絵文字を表示しないでください。",
             option: {
                 shownEmojis: {
                     label: "表示される絵文字",
                     description: "オートコンプリート メニューに表示する絵文字を選択します",
                     onlyUnicode: "Unicode 絵文字のみ",
-                    currentServer: "Unicode 絵文字と現在のサーバー上の絵文字",
+                    currentServer: "Unicode 絵文字と現在のサーバーのサーバー絵文字",
                     all: "Unicode 絵文字とすべてのサーバー絵文字 (Discord のデフォルト)"
                 }
             }
         },
         noSystemBadge: {
-            name: "システムバッジなし",
-            description: "タスクバーとシステムトレイの未読通知バッジを無効にします。"
+            name: "NoSystemBadge",
+            description: "タスクバーとシステムトレイの未読カウントバッジを無効にします。"
         },
         notificationTitle: {
-            name: "通知タイトル",
-            description: "デスクトップ通知をより有益なものにします。"
+            name: "NotificationTitle",
+            description: "デスクトップ通知をより有益なものにする"
         },
         notificationVolume: {
-            name: "通知ボリューム",
-            description: "Discord の通知のカスタム音量を設定します。",
+            name: "NotificationVolume",
+            description: "Discord通知のカスタム音量を設定する",
             option: {
                 notificationVolume: {
-                    label: "通知音",
+                    label: "通知量",
                     description: "通知量"
                 }
             }
         },
         noTypingAnimation: {
-            name: "タイピングなしアニメーション",
-            description: "チャットでの入力アニメーションを無効にします。"
+            name: "NoTypingAnimation",
+            description: "チャットでの入力アニメーションを無効にします"
         },
         noUnblockToJump: {
-            name: "いいえUnblockToJump",
-            description: "これにより、ブロックまたは無視されたユーザー (および場合によってはスパマー) からのメッセージを、ブロックを解除せずにスキップできます。"
+            name: "NoUnblockToJump",
+            description: "ブロックまたは無視されたユーザー、およびスパマーの可能性があるユーザーのブロックを解除せずに、そのメッセージにジャンプできます。"
         },
         onePingPerDM: {
             name: "OnePingPerDM",
-            description: "ユーザーが DM で連続して未読メッセージを送信した場合でも、音声通知は 1 回だけ受信されます。",
+            description: "未読メッセージがユーザーによって DM で複数回送信された場合、音声 ping は 1 回だけ受信されます。",
             option: {
                 channelToAffect: {
-                    label: "影響を受けるチャネルの種類",
-                    description: "プラグインが影響する DM のタイプを選択します",
+                    label: "影響を与えるチャネル",
+                    description: "プラグインが影響を与える DM のタイプを選択します",
                     both: "両方",
                     user: "ユーザーDM",
                     group: "グループDM"
                 },
                 allowMentions: {
-                    label: "@AllowMentions",
-                    description: "@メンションの音声通知を受け取る"
+                    label: "メンションを許可する",
+                    description: "@メンションの音声 ping を受信する"
                 },
                 allowEveryone: {
-                    label: "@Everyone を許可する",
-                    description: "グループDMで@everyoneと@hereの音声通知を受け取る"
+                    label: "全員に許可",
+                    description: "グループ DM で @everyone と @here への音声 ping を受信します"
                 },
                 ignoreUsers: {
-                    label: "無視するユーザー",
-                    description: "通知を決して制限しないユーザー ID (カンマ + スペースで区切る)"
+                    label: "ユーザーを無視する",
+                    description: "ping を決して抑制しないユーザー ID (カンマ + スペース)"
                 },
                 alwaysPlaySound: {
                     label: "常にサウンドを再生する",
-                    description: "通知音が無効になっていても音を鳴らす"
+                    description: "無効になっている場合でもメッセージ通知音を再生する"
                 }
             }
         },
         openInApp: {
-            name: "アプリ内で開く",
-            description: "ブラウザの代わりに関連アプリケーションでリンクを開きます",
+            name: "OpenInApp",
+            description: "ブラウザではなく、それぞれのアプリでリンクを開きます",
             option: {
                 spotify: {
                     label: "スポティファイ",
@@ -7287,7 +7287,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 vrcx: {
                     label: "VRChat",
-                    description: "VRChat アプリで VRChat リンクを開く"
+                    description: "VRCX アプリで VRChat リンクを開く"
                 }
             },
             notification: {
@@ -7295,30 +7295,30 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         overrideForumDefaults: {
-            name: "フォーラムのデフォルトを上書きする",
-            description: "デフォルトのフォーラムのレイアウト/並べ替え順序を上書きできます。 引き続きチャネルごとに変更を加えることができます。",
+            name: "OverrideForumDefaults",
+            description: "デフォルトのフォーラムのレイアウト/並べ替え順序を上書きできます。チャンネルごとに変更することもできます",
             option: {
                 defaultLayout: {
-                    label: "デフォルトのレイアウト",
-                    description: "デフォルトとして使用するレイアウトを選択します",
+                    label: "デフォルトのタグ",
+                    description: "どのレイアウトをデフォルトとして使用するか",
                     list: "リスト",
                     gallery: "ギャラリー"
                 },
                 defaultSortOrder: {
                     label: "デフォルトの並べ替え順序",
-                    description: "デフォルトで使用する並べ替え順序を選択します",
-                    recentlyActive: "最終アクティブ",
+                    description: "デフォルトとして使用する並べ替え順序",
+                    recentlyActive: "最近アクティブ",
                     datePosted: "投稿日"
                 }
             }
         },
         partyMode: {
-            name: "パーティーモード",
-            description: "パーティーは決して終わらないので、パーティーモードを使用しましょう✨",
+            name: "PartyMode",
+            description: "パーティーは決して終わらないので、パーティーモードを使用できるようになります✨",
             option: {
                 superIntensePartyMode: {
                     label: "超激しいパーティーモード",
-                    description: "パーティーの密度",
+                    description: "パーティーの熱気",
                     normal: "普通",
                     better: "より良い",
                     projectX: "プロジェクトX"
@@ -7326,32 +7326,32 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         pauseInvitesForever: {
-            name: "一時停止招待永遠に",
-            description: "Discordが愚かにも削除した「招待を無期限に一時停止する」オプションが復活します。",
+            name: "PauseInvitesForever",
+            description: "Discord が重複して削除した招待を無期限に一時停止するオプションを復活させます。",
             pauseIndefinitely: "無期限に一時停止する"
         },
         permissionFreeWill: {
-            name: "許可自由意志",
-            description: "チャネル権限管理におけるクライアント側の制限を無効にします。",
+            name: "PermissionFreeWill",
+            description: "チャネル権限管理のクライアント側の制限を無効にします。",
             option: {
                 lockout: {
-                    label: "デッドロック",
-                    description: "アクセス許可のクラッシュ保護をバイパスします (「本当にこれを実行しますか?」)"
+                    label: "ロックアウト",
+                    description: "アクセス許可のロックアウト防止をバイパスします (「これを実行したくないのは確かです」)"
                 },
                 onboarding: {
-                    label: "開始要件",
-                    description: "サーバーとの互換性がなくなる可能性があるオンボーディング要件をバイパスします (「この変更により、サーバーとの互換性がなくなる可能性があります [...]」)"
+                    label: "オンボーディング",
+                    description: "オンボーディング要件をバイパスします (「この変更を行うとサーバーとの互換性がなくなります [...]」)"
                 }
             }
         },
         permissionsViewer: {
-            name: "権限ビューア",
-            description: "ユーザーまたはチャネルが持つ権限とサーバーの役割を表示できます。",
+            name: "PermissionsViewer",
+            description: "ユーザーまたはチャネルが持つ権限とサーバーの役割を表示します。",
             view: "権限の表示",
             option: {
                 permissionsSortOrder: {
                     label: "権限のソート順",
-                    description: "ロールがユーザーに特定の権限を付与する方法を決定するために使用される並べ替え方法",
+                    description: "どのロールがユーザーに特定の権限を付与するかを定義するために使用されるソート方法",
                     highest: "最高の役割",
                     lowest: "最下位の役割"
                 }
@@ -7368,65 +7368,65 @@ const translations: MatchStructure<typeof enTranslations> = {
                 title: "権限",
                 noPermissions: "表示する権限がありません!",
                 owner: "所有者",
-                grantedBy: "寛容",
+                grantedBy: "付与者",
                 serverOwner: "サーバー所有者",
                 ownerRole: "所有者",
-                sortingBy: "{{method}} は優先順位に従って並べ替えられます",
+                sortingBy: "{{method}} による並べ替え",
                 highest: "最高の役割",
                 lowest: "最下位の役割",
                 details: "役割の詳細"
             }
         },
         petpet: {
-            name: "ペットペット",
-            description: "任意の画像から petpet gif を作成する /petpet コマンドを追加します",
+            name: "PetPet",
+            description: "/petpet スラッシュ コマンドを追加して、任意の画像からヘッドペット GIF を作成します",
             command: {
                 petpet: {
-                    description: "ペットペットGIFを作成します。 画像オプションのうち 1 つだけを指定できます",
-                    delay: "各フレーム間の遅延。 デフォルトは 20 です。",
-                    resolution: "gifの解像度。 デフォルトは 120 です。おかしな数字を入力して Discord がフリーズした場合、それはあなたのせいです。",
+                    description: "ペットペットGIFを作成します。画像オプションのうち 1 つだけを指定できます",
+                    delay: "各フレーム間の遅延。デフォルトは 20 です。",
+                    resolution: "GIFの解像度。デフォルトは 120 です。非常識な数値を入力して Discord がフリーズした場合、それはあなたの責任です。",
                     image: "使用する画像添付ファイル",
-                    url: "画像を取得するURL",
+                    url: "画像を取得する URL",
                     user: "アバターを画像として使用するユーザー",
                     noServerPfp: "「ユーザー」オプションを使用する場合は、サーバー固有のアバターではなく通常のアバターを使用します",
                     error: {
-                        noImage: "画像の指定がありません！",
+                        noImage: "画像が指定されていません!",
                         delayTooLow: "遅延は少なくとも 20 でなければなりません。",
                     }
                 }
             },
             error: {
-                uploadNotImage: "アップロードされたファイルは画像ではありません",
-                fetchUserFailed: "ユーザーの取得に失敗しました。 詳細については、コンソールを確認してください。",
-                fetchImageFailed: "{{url}} の読み込み中にエラーが発生しました。 詳細については、コンソールを確認してください。"
+                uploadNotImage: "アップロードは画像ではありません",
+                fetchUserFailed: "ユーザーの取得に失敗しました。詳細については、コンソールを確認してください。",
+                fetchImageFailed: "{{url}} のロード中にエラーが発生しました。詳細については、コンソールを確認してください。"
             }
         },
         pictureInPicture: {
-            name: "ピクチャー・イン・ピクチャー",
-            description: "動画にピクチャインピクチャ機能を追加します（ダウンロードボタンの隣）",
-            tooltip: "ピクチャーインピクチャーの切り替え",
+            name: "PictureInPicture",
+            description: "ビデオにピクチャー・イン・ピクチャーを追加します (ダウンロード ボタンの横)",
+            tooltip: "ピクチャインピクチャの切り替え",
             option: {
                 loop: {
                     label: "ループ",
-                    description: "PiPビデオをループするかどうか"
+                    description: "PiPビデオをループさせるかどうか"
                 }
             }
         },
         pinDMs: {
-            name: "PinDM",
-            description: "プライベート チャネル (DM) を DM リストの先頭に固定できます。 DM を右クリックして、DM を固定/削除したり、順序を変更したりできます。",
+            name: "PinDMs",
+            description: "プライベート チャネルを DM リストの先頭に固定できます。ピンの固定/固定解除、またはピンの順序を変更するには、DM を右クリックします",
             context: {
                 category: {
-                    label: "DMカテゴリーメニュー",
+                    label: "ピンDMカテゴリーメニュー",
                     edit: "カテゴリの編集",
                     up: "上に移動",
                     down: "下に移動",
                     delete: "カテゴリの削除",
-                    unnamed: "匿名"
+                    unnamed: "ああ、ああ"
                 },
                 pin: {
-                    label: "DMサビトル",
-                    addCategory: "カテゴリー 気持ち悪い"
+                    label: "ピンDM",
+                    addCategory: "カテゴリを追加"
                 },
                 unPin: {
                     label: "DMの固定を解除",
@@ -7435,17 +7435,17 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 pinOrder: {
-                    label: "順序を固定する",
-                    description: "固定された DM はどのような順序で表示されますか?",
-                    lastMessage: "最後のメッセージの日付まで",
-                    custom: "プライベート (チャンネルを右クリックして順序を変更)"
+                    label: "ピンの順序",
+                    description: "固定DMはどの順番で表示されるべきですか？",
+                    lastMessage: "最新のメッセージ",
+                    custom: "カスタム (チャンネルを右クリックして並べ替えます)"
                 },
                 canCollapseDmSection: {
                     label: "折りたたみ可能な固定セクション",
-                    description: "未分類の DM セクションを折りたたみ可能にする"
+                    description: "カテゴリ化されていない DM セクションを折りたたみ可能にする"
                 },
                 dmSectionCollapsed: {
-                    label: "DMセクションの絞り込み",
+                    label: "DM セクションの崩壊",
                     description: "DMセクションを折りたたむ"
                 },
                 userBasedCategoryList: {
@@ -7457,8 +7457,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 category: {
                     pin: "ピンのカテゴリ",
                     edit: "カテゴリの編集",
-                    new: "新しいカテゴリー",
-                    name: "名前",
+                    new: "新しいカテゴリ",
+                    name: "Name",
                     color: "色",
                     save: "保存",
                     create: "作成する"
@@ -7466,88 +7466,88 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         pingNotifications: {
-            name: "Ping通知",
-            description: "カスタマイズ可能な通知と改善されたメンションの形式",
+            name: "PingNotifications",
+            description: "改善されたメンション形式によるカスタマイズ可能な通知",
             option: {
                 friends: {
                     label: "友達",
-                    description: "友達がサーバーにメッセージを送信したときに通知を受け取る"
+                    description: "友達がサーバーにメッセージを送信したときに通知する"
                 },
                 mentions: {
                     label: "言及",
-                    description: "誰かがあなたに直接 @メンションしたときに通知を受け取る"
+                    description: "誰かがあなたに直接 @メンションしたときに通知する"
                 },
                 dms: {
-                    label: "DM'ler",
-                    description: "ダイレクトメッセージ（DM）の通知を受け取る"
+                    label: "DM",
+                    description: "ダイレクト メッセージ (DM) の通知"
                 },
                 showInActive: {
-                    label: "アクティブなチャンネルに表示",
+                    label: "アクティブに表示",
                     description: "現在アクティブなチャンネルでも通知を表示する"
                 },
                 ignoreMuted: {
                     label: "ミュートを無視する",
-                    description: "ミュートされたサーバー、チャネル、またはユーザーからの通知をバイパスします"
+                    description: "ミュートされたサーバー、チャネル、またはユーザーからの通知をスキップする"
                 }
             },
             unknown: "未知",
             dm: "DM",
             groupDM: "グループDM",
-            title: "チャンネル {{channelName}} の {{username}}"
+            title: "{{username}} の {{channelName}}"
         },
         pinIcon: {
-            name: "ピンアイコン",
-            description: "ピン留めされたメッセージにピンアイコンを追加します。"
+            name: "PinIcon",
+            description: "ピン留めされたメッセージにピンアイコンを追加します"
         },
         plainFolderIcon: {
-            name: "プレーンフォルダーアイコン",
-            description: "フォルダー内の小さなサーバー アイコンは表示されません。"
+            name: "PlainFolderIcon",
+            description: "フォルダ内の小さなギルドアイコンを表示しない"
         },
         platformIndicators: {
-            name: "プラットフォームインジケーター",
-            description: "プラットフォーム インジケーター (デスクトップ、モバイル、Web...) をユーザーに追加します。",
+            name: "PlatformIndicators",
+            description: "プラットフォームインジケーター (デスクトップ、モバイル、Web...) をユーザーに追加します",
             embeddedTooltip: "コンソール",
             vrTooltip: "VR",
             option: {
                 list: {
                     label: "リスト",
-                    description: "メンバーリストにインジケーターを表示"
+                    description: "メンバーリストにインジケーターを表示する"
                 },
                 badges: {
                     label: "バッジ",
-                    description: "ユーザープロフィールにインジケーターをバッジとして表示する"
+                    description: "ユーザープロフィールのインジケーターをバッジとして表示する"
                 },
                 messages: {
                     label: "メッセージ",
                     description: "メッセージ内にインジケーターを表示する"
                 },
                 colorMobileIndicator: {
-                    label: "モバイルディスプレイに色を付ける",
-                    description: "モバイル インジケーターがユーザー ステータスの色を取るかどうかを決定します。"
+                    label: "カラーモバイルインジケーター",
+                    description: "モバイルインジケーターをユーザーステータスの色と一致させるかどうか。"
                 },
                 showBots: {
                     label: "ボットを表示する",
-                    description: "ボットにプラットフォーム インジケーターを表示するかどうかを決定します"
+                    description: "ボットにプラットフォームインジケーターを表示するかどうか"
                 }
             }
         },
         platformSpoofer: {
-            name: "プラットフォームスプーファー",
-            description: "使用しているプラ​​ットフォームやデバイスをシミュレートします",
-            about: "このアドオンが警告や禁止からあなたを守ることを保証することはできません。",
+            name: "PlatformSpoofer",
+            description: "使用しているプラ​​ットフォームまたはデバイスを偽装する",
+            about: "このプラグインが警告や禁止を受けないことを保証することはできません。",
             platform: {
                 desktop: "Discordクライアント",
                 web: "ディスコードウェブ",
-                ios: "ディスコードiOS",
+                ios: "ディスコード iOS",
                 android: "ディスコードアンドロイド",
-                xbox: "埋め込み型不和",
-                playstation: "埋め込み型不和",
+                xbox: "Discord 埋め込み",
+                playstation: "Discord 埋め込み",
                 vr: "VR"
             },
             option: {
                 platform: {
                     label: "プラットフォーム",
-                    description: "どのプラットフォームで登場したいですか?",
+                    description: "どのプラットフォームとして表示されるか",
                     desktop: "デスクトップ",
                     web: "ウェブ",
                     android: "アンドロイド",
@@ -7559,79 +7559,79 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         plexcordToolbox: {
-            name: "Plexcordツールボックス",
-            description: "Plexcord のクイック アクションをホストするボタンをアプリ バーに追加します。",
+            name: "PlexcordToolbox",
+            description: "Plexcord のクイック アクションを収容するボタンを AppBar に追加します",
             tooltip: "Plexcord ツールボックス",
             context: {
                 openLog: "通知ログを開く",
                 enableQuickCSS: "QuickCSSを有効にする",
-                openQuickCSS: "QuickCSSを開く",
+                openQuickCSS: "QuickCSSを編集する",
                 openSettings: "設定を開く",
                 manageThemes: "テーマの管理"
             },
             option: {
                 showPluginMenu: {
                     label: "プラグインメニューを表示",
-                    description: "Plexcord ツールボックスにプラグイン メニューを表示"
+                    description: "Plexcord ツールボックスにプラグイン メニューを表示する"
                 }
             }
         },
         polishWording: {
-            name: "ポーランド語の言葉遣い",
-            description: "メッセージの見栄えを良くし、文法を改善するために若干の編集が加えられます。 設定を確認してください",
+            name: "PolishWording",
+            description: "メッセージを調整して、見た目を良くし、文法を改善します。設定を参照",
             option: {
                 quickDisable: {
                     label: "クイック無効化",
-                    description: "素早い無効化。 アプリを再起動せずにメッセージ編集をオフにします。"
+                    description: "すぐに無効にします。クライアントのリロードを必要とせずにメッセージの変更をオフにします。"
                 },
                 blockedWords: {
                     label: "ブロックされた単語",
-                    description: "大文字にならない単語 (カンマで区切る)。"
+                    description: "大文字にならない単語 (カンマ区切り)。"
                 },
                 fixApostrophes: {
                     label: "アポストロフィを修正",
-                    description: "略語にはアポストロフィが含まれていることを確認してください。"
+                    description: "短縮形にはアポストロフィが含まれていることを確認してください。"
                 },
                 expandContractions: {
-                    label: "オープン略語",
-                    description: "省略された単語を明示的な形式に変換します (Don't -> Do not など)。"
+                    label: "拡張収縮",
+                    description: "拡張収縮"
                 },
                 fixCapitalization: {
-                    label: "大文字の編集",
-                    description: "文章を大文字で始めることができます。"
+                    label: "大文字を修正する",
+                    description: "文章を大文字にします。"
                 },
                 fixPunctuation: {
-                    label: "正しい句読点",
-                    description: "句読点の周囲のスペースを編集します。"
+                    label: "句読点を修正する",
+                    description: "句読点の周囲のスペースを修正します。"
                 },
                 fixPunctuationFrequency: {
-                    label: "句読点の頻度",
-                    description: "文末にピリオドを付ける頻度の割合 (この機能が気になる人もいるかもしれません)。",
+                    label: "句読点の頻度を修正する",
+                    description: "期間頻度のパーセンテージ (これは一部の人にとって非常に迷惑です)。",
                 }
             }
         },
         previewMessage: {
-            name: "プレビューメッセージ",
+            name: "PreviewMessage",
             description: "メッセージを送信する前にプレビューできます。",
             tooltip: "プレビューメッセージ"
         },
         profileSets: {
-            name: "プロファイルセット",
-            description: "プロファイル プリセットを保存し、設定のプロファイル セクションからロードすることができます。",
+            name: "ProfileSets",
+            description: "[設定] の [プロファイル] セクションから、さまざまなプロファイル プリセットを保存およびロードできます。",
             toast: {
-                importFailed: "プロファイル プリセットのインポートに失敗しました。 ファイルが無効である可能性があります。",
+                importFailed: "プロファイル セットのインポートに失敗しました。ファイルが無効である可能性があります。",
             },
             option: {
                 avatarSize: {
                     label: "アバターのサイズ",
-                    description: "プロファイルプリセットリストのアバターサイズ"
-                },
+                    description: "プリセットリストのアバターサイズ"
+                }
             },
             modal: {
                 override: "オーバーライド",
                 merge: "マージ",
                 cancel: "キャンセル",
-                timestamp: "{{formattedDate}}、時刻: {{formattedTime}}",
+                timestamp: "{{formattedDate}}、{{formattedTime}}",
                 rename: "名前を変更する",
                 update: "アップデート",
                 moveUp: "上に移動",
@@ -7639,7 +7639,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 moveTo: "1ページ目に移動",
                 delete: "消去",
                 importProfiles: "プロファイルのインポート",
-                importText: "このセクションには {{existingCount}} 個の既存のプロファイルがあります。 それらを上書きしますか、それともインポートされたプロファイルとマージしますか?",
+                importText: "このセクションには {{existingCount}} 個の既存のプロファイルがあります。それらを上書きしますか、それともインポートされたプロファイルとマージしますか?",
                 heading: "保存されたプロファイル",
                 searchProfiles: "プロフィールを検索...",
                 profileName: "プロファイル名",
@@ -7653,254 +7653,254 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         questify: {
-            name: "クエストファイ",
-            description: "さまざまな機能を使用してミッション エクスペリエンスを向上させたり、必要でない場合は完全に無効にしたりできます。",
+            name: "Questify",
+            description: "一連の機能を使用して Quest エクスペリエンスを強化することも、気に入らない場合は完全に無効にすることもできます。",
             quests: "クエスト",
             context: {
                 quest: {
-                    label: "タスクボタンメニュー",
-                    ignore: "「すべて無視」をマークする",
-                    reset: "無視リストをリセット",
-                    fetch: "タスクのフェッチ",
-                    markAsIgnored: "無視としてマーク",
-                    unmarkAsIgnored: "無視を削除",
+                    label: "クエストボタンメニュー",
+                    ignore: "すべて無視のマークを付ける",
+                    reset: "無視されたリストをリセット",
+                    fetch: "クエストの取得",
+                    markAsIgnored: "無視としてマークする",
+                    unmarkAsIgnored: "無視のマークを解除する",
                     stopAuto: "オートコンプリートを停止する",
-                    copyQuestID: "タスクIDのコピー",
-                    startAuto: "オートコンプリートを開始する"
+                    copyQuestID: "クエストIDをコピー",
+                    startAuto: "オートコンプリートの開始"
                 }
             },
             settings: {
                 questButton: {
-                    title: "タスクボタン",
-                    description: "サーバーリスト内の未請求のクエストのオプションのインジケーターを備えたクエストボタンを表示します。",
+                    title: "クエストボタン",
+                    description: "サーバーリストにクエストボタンを表示し、未取得のクエストのオプションのインジケーターを表示します。",
                     leftClick: "左クリックアクション",
                     middleClick: "中クリックアクション",
                     rightClick: "右クリックアクション",
                     visibility: "ボタンの可視性",
-                    unclaimedIndicator: "迷惑インジケーター",
+                    unclaimedIndicator: "未請求インジケーター",
                     badgeColor: "バッジの色",
-                    rewardDisplay: "賞品の展示",
+                    rewardDisplay: "報酬表示",
                     includedRewardTypes: "含まれる報酬の種類",
-                    includedRewardTypesDesc: "ボタンの可視性、バッジの数、アラート音を再生するときは、これらの報酬タイプのクエストのみを未請求としてカウントします。",
-                    selectRewardTypes: "未請求のカウントに含める報酬タイプを選択してください...",
-                    noRewardType: "この名前でサポートされているタスク機能はありません。",
+                    includedRewardTypesDesc: "ボタンの可視性、バッジの数を決定するとき、および警告音を再生するときに、これらの報酬タイプのクエストのみを未請求としてカウントします。",
+                    selectRewardTypes: "未請求数に含める報酬タイプを選択してください...",
+                    noRewardType: "その名前でサポートされている Quest 機能はありません。",
                     default: "デフォルト",
                     disable: "無効にする"
                 },
                 questFeatures: {
-                    title: "タスクの機能",
-                    description: "特定のタスクのプロパティを変更します。",
-                    popupWarning: "{{disablePopup}} オプションは、完了したクエストとクエストの進行状況の追跡では無視されます。",
-                    videoQuestInfo: "{{completeVideo}} オプションは、ビデオ タスクの継続時間まで待機し、自動的に完了としてマークされます。",
-                    gameQuestInfo: "同様に、{{completeGame}} オプションは、ゲーム タスクの期間を待機し、自動的に完了としてマークされます。 このオプションは、公式デスクトップ クライアントでのみサポートされています。",
-                    manualStartWarning: "タスクは手動で開始する必要があります。 最初のクリックでバックグラウンドでタスクが起動します。 ビデオ タスクの場合、その後クリックすると通常どおりビデオ モーダルが開きます。 ミッションをキャンセルするには、ミッション タイルのコンテキスト メニューを開いて、{{stopAuto}} を選択します。",
-                    tosWarning: "これらのオプションの使用は、Discord の利用規約に違反します。 ご自身の責任でご使用ください。",
-                    selectFeatures: "変更するタスクのプロパティを選択します。",
-                    disablePopup: "アカウントパネルでタスクポップアップを無効にする",
-                    completeVideo: "バックグラウンドでビデオタスクを完了する",
-                    completeGame: "バックグラウンドでゲームプレイタスクを完了する",
+                    title: "クエストの特徴",
+                    description: "特定の Quest 機能を変更します。",
+                    popupWarning: "{{disablePopup}} オプションは、完了したクエストおよびクエストの進行状況の追跡では無視されます。",
+                    videoQuestInfo: "{{completeVideo}} オプションは、ビデオ クエストの継続時間の間待機し、自動的に完了としてマークします。",
+                    gameQuestInfo: "同様に、{{completeGame}} オプションは、ゲーム クエストの継続時間の間待機し、自動的に完了としてマークされます。このオプションは、公式デスクトップ クライアントでのみサポートされます。",
+                    manualStartWarning: "クエストは依然として手動で開始する必要があります。最初のクリックでクエストがバックグラウンドで開始されます。ビデオ クエストの場合、その後クリックすると通常どおりビデオ モーダルが開きます。クエストを中止するには、クエスト タイルのコンテキスト メニューを開いて {{stopAuto}} を選択します。",
+                    tosWarning: "これらのオプションのいずれかを使用することは、Discord の ToS に違反します。ご自身の責任でご使用ください。",
+                    selectFeatures: "変更する Quest 機能を選択します。",
+                    disablePopup: "アカウントパネル上のクエストポップアップを無効にする",
+                    completeVideo: "バックグラウンドでビデオクエストを完了する",
+                    completeGame: "バックグラウンドでゲームのクエストを完了する",
                     stopAuto: "オートコンプリートを停止する"
                 },
                 restyleQuests: {
-                    title: "再フォーマットタスク",
-                    description: "オプションのテーマカラーを使用してタスクを強調表示し、見やすくします。",
-                    precedenceNote: "タスクが無視された場合でも、要求されたタスク スタイルと期限切れのタスク スタイルが優先されます。",
-                    gradientStyle: "グラデーションスティリ",
-                    assetPreload: "アセットブートローダー",
-                    unclaimed: "要求されていない",
-                    claimed: "リクエスト済み",
+                    title: "リスタイルクエスト",
+                    description: "オプションのテーマカラーを使用してクエストを強調表示し、見やすくします。",
+                    precedenceNote: "クエストが無視された場合でも、要求済みおよび期限切れのクエスト スタイルが優先されます。",
+                    gradientStyle: "グラデーションスタイル",
+                    assetPreload: "アセットのプリロード",
+                    unclaimed: "未請求",
+                    claimed: "主張した",
                     ignored: "無視されました",
                     expired: "期限切れ",
-                    intenseGradient: "密なリキャスト勾配",
-                    defaultGradient: "デフォルトのリキャスト グラデーション",
+                    intenseGradient: "激しいリスタイルグラデーション",
+                    defaultGradient: "デフォルトの再スタイルグラデーション",
                     blackGradient: "微妙な黒のグラデーション",
                     noGradient: "グラデーションなし",
-                    loadAllAssets: "ページ読み込み時にすべてのタスク アセットを読み込みます",
-                    loadDuringScroll: "ページスクロール中にタスクアセットをロードする"
+                    loadAllAssets: "ページ読み込み時にすべての Quest アセットを読み込みます",
+                    loadDuringScroll: "ページスクロール中にクエストアセットをロードする"
                 },
                 reorderQuests: {
-                    title: "タスクの並べ替え",
-                    description: "ステータスに応じてタスクを並べ替えます。 クエスト ページで「クエスト化」並べ替えオプションが選択されている場合に適用されます。",
-                    formatNote: "カンマ区切りのリストには、{{items}} をすべて含める必要があります。",
-                    placeholder: "UNCLAIMED、CLAIMED、IGNORED、EXPIRED をすべて追加する必要があります",
+                    title: "クエストを並べ替える",
+                    description: "クエストをステータスごとに並べ替えます。 Quest ページで「Questify」並べ替えオプションが選択されている場合に適用されます。",
+                    formatNote: "カンマ区切りのリストには、{{items}} のすべてが含まれている必要があります。",
+                    placeholder: "UNCLAIMED、CLAIMED、IGNORED、EXPIRED をすべて含める必要があります",
                     invalidFormat: "無効な形式です。",
-                    unclaimedSubsort: "未請求のサブランク",
-                    claimedSubsort: "主張されたサブランク",
-                    ignoredSubsort: "無視されたサブオーダー",
-                    expiredSubsort: "期限切れのサブランク",
+                    unclaimedSubsort: "未請求のサブソート",
+                    claimedSubsort: "主張されたサブソート",
+                    ignoredSubsort: "無視されたサブソート",
+                    expiredSubsort: "期限切れのサブソート",
                     addedNewest: "追加（最新）",
-                    addedOldest: "追加（最も古い）",
-                    expiredRecent: "期限切れ(最新)",
-                    expiredLeast: "期限切れ (少なくとも最新のもの)",
-                    expiringSoon: "期限切れ（最も近い）",
-                    expiringLate: "有効期限切れ (最新)",
-                    claimedRecent: "リクエスト済み(最新)",
-                    claimedLeast: "リクエスト済み (少なくとも最新のもの)",
-                    ignoredQuestProfile: "無視されたタスクプロファイル",
+                    addedOldest: "追加されました（最も古いもの）",
+                    expiredRecent: "期限切れ (最新)",
+                    expiredLeast: "期限切れ (最も古いもの)",
+                    expiringSoon: "有効期限が切れます (最短)",
+                    expiringLate: "期限切れ(最新)",
+                    claimedRecent: "申請済み (最新)",
+                    claimedLeast: "申請済み (最も最近のもの)",
+                    ignoredQuestProfile: "無視されたクエストプロファイル",
                     sharedProfile: "共有: このクライアント共有上のすべてのアカウントは無視されます。",
                     privateProfile: "プライベート: このクライアントのすべてのアカウントには個別の無視があります。",
                     rememberSort: "並べ替えの選択を記憶する",
-                    rememberFilter: "フィルター選択を記憶する",
+                    rememberFilter: "フィルターの選択を記憶する",
                     yes: "はい",
                     no: "いいえ",
-                    rememberNote: "この並べ替えとフィルターの選択は、[タスク] ページの組み込みの並べ替えとフィルターのオプションを参照します。 上記のカスタム並べ替えは、Quest ページで「Questify」並べ替えオプションが選択されている場合にのみ適用されます。 呼び出しが無効になっている場合、並べ替えまたはフィルターのオプションは、[タスク] ページを開くたびにリセットされます。"
+                    rememberNote: "この並べ替えとフィルターの選択は、Quest ページの組み込みの並べ替えとフィルター オプションを参照します。上記のカスタム並べ替えは、Quest ページで「Questify」並べ替えオプションが選択されている場合にのみ適用されます。記憶が無効になっている場合、並べ替えまたはフィルターのオプションはクエスト ページを開くたびにリセットされます。"
                 },
                 fetchingQuests: {
-                    title: "タスクの取得",
-                    description: "Discord からタスクを取得する頻度を設定し、新しいタスクのアラートを設定します。",
-                    defaultBehavior: "デフォルトでは、Discord はタスクがインストールされていて、タスク ページにアクセスした場合にのみタスクを表示します。 これは、以下で定義されている取得間隔がなければ、このプラグインは 1 日を通して新しいクエストが追加されたことを通知されないことを意味します。",
-                    requirement: "これは、クエスト ボタンがアクティブで {{unclaimed}} に設定されているか、または {{always}} に設定されていて未請求の {{pill}}、{{badge}}、または {{both}} インジケーターが有効になっているかどうかによって異なります。 それ以外の場合は、定期的にクエストを取得する必要はありません。",
-                    blockWarning: "また、{{fetchingQuests}} が {{questFunctions}} 設定でブロックされている場合、これは機能しません。",
-                    fetchInterval: "フェッチ範囲",
+                    title: "クエストの取得",
+                    description: "Discord からクエストを取得する頻度を設定し、新しいクエストのアラートを設定します。",
+                    defaultBehavior: "デフォルトでは、Discord はロード時およびクエスト ページにアクセスしたときにのみクエストを取得します。これは、以下で定義されている取得間隔がないと、このプラグインは 1 日を通じて追加された新しいクエストを認識できなくなることを意味します。",
+                    requirement: "これは、クエスト ボタンが有効になって {{unclaimed}} に設定されるか、未請求の {{pill}}、{{badge}}、または {{both}} インジケーターが有効になって {{always}} に設定されるかどうかに依存します。それ以外の場合、クエストを定期的に取得する理由はありません。",
+                    blockWarning: "また、{{questFeatures}} 設定で {{fetchingQuests}} がブロックされている場合、これは機能しません。",
+                    fetchInterval: "フェッチ間隔",
                     alertSound: "警告音",
                     intervalPlaceholder: "30 分から 12 時間までの間隔を選択または入力します。",
                     intervalFeedback: "間隔は 30 分から 12 時間の間である必要があります。",
                     soundPlaceholder: "サウンドを選択するか、カスタム サウンド URL を指定します。",
-                    soundFeedback: "音声が見つからないか、URL がサポートされているドメインからのものではありません。",
+                    soundFeedback: "サウンドが見つからないか、URL がサポートされているドメインからのものではありません。",
                     disabled: "無効",
-                    minutes: "ちょっと",
-                    minute: "ちょっと",
-                    hours: "一瞬",
-                    hour: "一瞬",
+                    minutes: "分",
+                    minute: "分",
+                    hours: "営業時間",
+                    hour: "時間",
                     thirtyMinutes: "30分",
-                    oneHour: "1 瞬間",
-                    threeHours: "3 瞬間",
-                    sixHours: "6 瞬間",
-                    twelveHours: "12 モーメント",
+                    oneHour: "1時間",
+                    threeHours: "3時間",
+                    sixHours: "6時間",
+                    twelveHours: "12時間",
                     customSound: "カスタムサウンド"
                 },
                 disableOptions: {
                     everything: "すべてを無効にする",
-                    discovery: "「探索」タブを無効にする",
-                    dms: "DM の [タスク] タブを無効にする",
-                    fetching: "タスクの取得を無効にする",
+                    discovery: "「検出」タブを無効にする",
+                    dms: "DMの「クエスト」タブを無効にする",
+                    fetching: "クエストの取得を無効にする",
                     popup: "アカウントパネル上のポップアップを無効にする",
-                    sponsored: "タスクページでスポンサー付きバナーを無効にする",
+                    sponsored: "クエストページのスポンサーバナーを無効にする",
                     badge: "ユーザープロファイルのバッジを無効にする",
-                    inventory: "ギフトインベントリの転送通知を無効にする",
-                    friendsList: "現在アクティブなプロモーションの友達リスト",
-                    membersList: "メンバーリストのアクティブなプレイアイコン",
-                    gameQuests: "バックグラウンドでゲーム/アクティビティのチャレンジを完了する",
-                    videoQuests: "バックグラウンドでビデオ視聴タスクを完了する",
-                    achievementQuests: "バックグラウンドでアクティビティタスクを完了する",
-                    mobileDesktop: "モバイルタスクをデスクトップと互換性のあるものにする",
-                    notifyOnComplete: "タスクが完了したら通知する"
+                    inventory: "ギフト在庫の移動通知を無効にする",
+                    friendsList: "友達リストがアクティブになりましたプロモーション",
+                    membersList: "メンバーリストのアクティブプレイアイコン",
+                    gameQuests: "バックグラウンドでゲーム/アクティビティ クエストを完了する",
+                    videoQuests: "バックグラウンドでビデオ視聴クエストを完了する",
+                    achievementQuests: "バックグラウンドでアクティビティクエストのタスクを完了する",
+                    mobileDesktop: "モバイルクエストをデスクトップ互換にする",
+                    notifyOnComplete: "クエスト完了時に通知する"
                 },
                 options: {
                     always: "いつも",
-                    unclaimed: "要求されていない",
+                    unclaimed: "未請求",
                     never: "一度もない",
-                    pill: "ハプ",
+                    pill: "ピル",
                     badge: "バッジ",
-                    both: "二人とも",
+                    both: "両方",
                     none: "なし",
                     openQuests: "オープンクエスト",
                     contextMenu: "コンテキストメニュー",
                     pluginSettings: "プラグイン設定",
                     nothing: "何もない",
-                    orbs: "球体",
+                    orbs: "オーブ",
                     nitroCodes: "ニトロコード",
                     rewardCodes: "報酬コード",
                     inGameItems: "ゲーム内アイテム",
-                    profileCollectibles: "プロフィールコレクション"
+                    profileCollectibles: "プロフィール 収集品"
                 }
             },
             option: {
                 disableQuests: {
-                    label: "タスクを無効にする",
-                    description: "どのタスク機能を無効にするかを選択します。"
+                    label: "クエストを無効にする",
+                    description: "どの Quest 機能を無効にするかを選択します。"
                 },
                 disableQuestsEverything: {
                     label: "すべてを無効にする",
-                    description: "すべてのタスク機能を無効にします。"
+                    description: "すべての Quest 機能を無効にします。"
                 },
                 disableQuestsFetchingQuests: {
-                    label: "タスクの取得を無効にする",
-                    description: "Discordからのタスクの取得を無効にします。"
+                    label: "クエストの取得を無効にする",
+                    description: "Discordからのクエストの取得を無効にします。"
                 },
                 disableQuestsDirectMessagesTab: {
-                    label: "DM のタスクタブを無効にする",
-                    description: "[ダイレクト メッセージ] ページの [タスク] タブを無効にします。"
+                    label: "DMの「クエスト」タブを無効にする",
+                    description: "[ダイレクト メッセージ] ページの [クエスト] タブを無効にします。"
                 },
                 disableQuestsDiscoveryTab: {
-                    label: "「探索」タブを無効にする",
-                    description: "「探索」ページの「クエスト」タブを無効にします。"
+                    label: "「検出」タブを無効にする",
+                    description: "Discovery ページの Quest タブを無効にします。"
                 },
                 disableQuestsPageSponsoredBanner: {
-                    label: "タスクページでスポンサー付きバナーを無効にする",
-                    description: "「タスク」ページのスポンサー付きバナーを無効にします。"
+                    label: "クエストページのスポンサーバナーを無効にする",
+                    description: "クエスト ページのスポンサー バナーを無効にします。"
                 },
                 disableQuestsPopupAboveAccountPanel: {
-                    label: "アカウントパネルのポップアップを無効にする",
-                    description: "アカウントパネルの上部にあるタスクポップアップを無効にします。"
+                    label: "アカウントパネル上のポップアップを無効にする",
+                    description: "アカウントパネルの上にある Quest ポップアップを無効にします。"
                 },
                 disableQuestsBadgeOnUserProfiles: {
                     label: "ユーザープロファイルのバッジを無効にする",
-                    description: "ユーザー プロファイルのタスク バッジを無効にします。"
+                    description: "ユーザー プロファイルの Quest バッジを無効にします。"
                 },
                 disableQuestsGiftInventoryRelocationNotice: {
-                    label: "ギフトの在庫移動通知を無効にする",
-                    description: "ギフトの在庫 クエストの移動通知を無効にします。"
+                    label: "ギフト在庫の移動通知を無効にする",
+                    description: "ギフトの在庫クエストの移転通知を無効にします。"
                 },
                 disableFriendsListActiveNowPromotion: {
                     label: "現在アクティブな友達リストのプロモーションを無効にする",
-                    description: "友達がプレイするゲームのクエスト プロモーションを無効にします。"
+                    description: "友達がプレイするゲームのクエストのプロモーションを無効にします。"
                 },
                 disableMembersListActivelyPlayingIcons: {
                     label: "メンバーリストのアクティブプレイアイコンを無効にする",
-                    description: "メンバーリストのアクティブプレイアイコンを無効にします。"
+                    description: "メンバーリストでアクティブに再生中のアイコンを無効にします。"
                 },
                 makeMobileQuestsDesktopCompatible: {
-                    label: "モバイルタスクをデスクトップと互換性のあるものにする",
-                    description: "モバイル専用タスクをデスクトップと互換性のあるものにします。"
+                    label: "モバイルクエストをデスクトップ互換にする",
+                    description: "モバイル専用のクエストをデスクトップと互換性のあるものにします。"
                 },
                 completeVideoQuestsInBackground: {
-                    label: "バックグラウンドでビデオタスクを完了する",
-                    description: "ビデオ時間が経過した後、バックグラウンドでビデオ ミッションを完了します。"
+                    label: "バックグラウンドでビデオクエストを完了する",
+                    description: "ビデオの時間が経過した後、バックグラウンドでビデオ クエストを完了します。"
                 },
                 completeGameQuestsInBackground: {
-                    label: "バックグラウンドでゲームミッションを完了する",
-                    description: "ゲーム時間が経過した後、バックグラウンドでゲームミッションを完了します。"
+                    label: "バックグラウンドでゲームクエストを完了する",
+                    description: "ゲーム時間が経過した後、バックグラウンドでゲーム クエストを完了します。"
                 },
                 completeAchievementQuestsInBackground: {
-                    label: "バックグラウンドでアクティビティタスクを完了する",
-                    description: "バックグラウンドでアクティビティ チャレンジを完了します。"
+                    label: "バックグラウンドでアクティビティクエストのタスクを完了する",
+                    description: "バックグラウンドでアクティビティクエストの実績を完了します。"
                 },
                 notifyOnQuestComplete: {
-                    label: "タスクが完了したら通知する",
-                    description: "タスクが自動的に完了したときに通知を表示します。"
+                    label: "クエスト完了時に通知",
+                    description: "クエストが自動的に完了したときに通知を表示します。"
                 },
                 questButton: {
-                    label: "タスクボタン",
+                    label: "クエストボタン",
                     description: "サーバーリストにクエストボタンを表示します。"
                 },
                 questButtonDisplay: {
-                    label: "タスクボタンの外観",
-                    description: "サーバーリストのタスクボタンに使用する表示タイプ。"
+                    label: "クエストボタン表示",
+                    description: "サーバーリストのクエストボタンに使用する表示タイプ。"
                 },
                 questRewardIncludeRewardCode: {
                     label: "特典コードを含める",
-                    description: "クエスト数を表示するときに、報酬コードのあるクエストを含めます。"
+                    description: "クエスト数を表示するときに、報酬コードを含むクエストを含めます。"
                 },
                 questRewardIncludeNitroCode: {
                     label: "Nitro コードを含める",
-                    description: "ミッション数を表示するときに、Nitro コード化されたミッションを含めます。"
+                    description: "クエスト数を表示するときに、Nitro コードを含むクエストを含めます。"
                 },
                 questRewardIncludeInGame: {
                     label: "ゲーム内報酬を含める",
-                    description: "ミッション数を表示するときに、ゲーム内報酬のあるミッションを含めます。"
+                    description: "クエスト数を表示するときに、ゲーム内報酬のあるクエストを含めます。"
                 },
                 questRewardIncludeCollectibles: {
-                    label: "コレクションを含める",
-                    description: "クエスト数を表示するときに、収集アイテムのあるクエストも含めます。"
+                    label: "収集品を含める",
+                    description: "クエスト数を表示する場合、収集品のあるクエストも含めます。"
                 },
                 questRewardIncludeOrbs: {
-                    label: "球を含める",
-                    description: "クエスト数を表示するときに、グローブ賞を受賞したクエストも含めます。"
+                    label: "オーブを含める",
+                    description: "クエスト数を表示する際に、オーブのあるクエストも含めます。"
                 },
                 questButtonUnclaimed: {
                     label: "クエストボタン未請求インジケーター",
-                    description: "サーバー リストの [タスク] ボタンの未要求インジケーターに使用する表示タイプ。"
+                    description: "サーバーリストのクエストボタンの未請求インジケーターに使用する表示タイプ。"
                 },
                 questButtonBadgeColor: {
                     label: "クエスト缶バッジの色",
@@ -7908,229 +7908,229 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 questButtonLeftClickAction: {
                     label: "左クリックアクション",
-                    description: "サーバーリストの「タスク」ボタンを左クリックしたときに実行されるアクション。"
+                    description: "サーバーリストのQuestボタンを左クリックしたときに実行されるアクション。"
                 },
                 questButtonMiddleClickAction: {
                     label: "中クリックアクション",
-                    description: "サーバーリストのタスクボタンを中クリックしたときに実行されるアクション。"
+                    description: "サーバーリストのQuestボタンを中クリックしたときに実行されるアクション。"
                 },
                 questButtonRightClickAction: {
                     label: "右クリックアクション",
-                    description: "サーバーリストの「タスク」ボタンを右クリックしたときに実行されるアクション。"
+                    description: "サーバーリストのQuestボタンを右クリックしたときに実行されるアクション。"
                 },
                 fetchingQuests: {
-                    label: "タスクの取得",
-                    description: "Discordからタスクを持ってきます。"
+                    label: "クエストの取得",
+                    description: "Discordからクエストを取得します。"
                 },
                 fetchingQuestsInterval: {
-                    label: "クエストフェッチ範囲",
-                    description: "Discord からタスクを取得する間隔 (秒単位)。"
+                    label: "クエストの取得間隔",
+                    description: "Discord からクエストを取得する間隔 (秒単位)。"
                 },
                 fetchingQuestsAlert: {
-                    label: "クエストフェッチアラート",
-                    description: "新しいミッションが検出されたときに再生されるサウンド。"
+                    label: "クエストアラートを取得しています",
+                    description: "新しいクエストが検出されたときに再生されるサウンド。"
                 },
                 fetchingQuestsAlertVolume: {
-                    label: "クエストフェッチアラートボリューム",
-                    description: "新しいミッションが検出されたときに再生される音の音量。"
+                    label: "クエストアラートの音量を取得しています",
+                    description: "新しいクエストを検出したときのアラート音の音量。"
                 },
                 restyleQuests: {
-                    label: "再フォーマットタスク",
-                    description: "[タスク] ページのタスク タイルの外観をカスタマイズします。"
+                    label: "リスタイルクエスト",
+                    description: "クエスト ページのクエスト タイルの外観をカスタマイズします。"
                 },
                 restyleQuestsUnclaimed: {
-                    label: "再フォーマットタスク - 要求されていない",
-                    description: "[タスク] ページの未請求のタスク タイルの色。"
+                    label: "リスタイルクエスト未取得",
+                    description: "クエスト ページの未取得のクエスト タイルの色。"
                 },
                 restyleQuestsClaimed: {
-                    label: "再フォーマットタスク - リクエスト済み",
-                    description: "[タスク] ページで要求されたタスク タイルの色。"
+                    label: "要求されたリスタイルクエスト",
+                    description: "クエスト ページで要求されたクエスト タイルの色。"
                 },
                 restyleQuestsIgnored: {
-                    label: "再フォーマットタスク - 無視",
-                    description: "[タスク] ページで無視されたタスク タイルの色。"
+                    label: "クエストの再スタイルは無視されました",
+                    description: "クエスト ページで無視されるクエスト タイルの色。"
                 },
                 restyleQuestsExpired: {
-                    label: "再フォーマットタスク - 期限切れ",
-                    description: "[タスク] ページの期限切れのタスク タイルの色。"
+                    label: "リスタイルクエストの有効期限が切れました",
+                    description: "クエスト ページの期限切れのクエスト タイルの色。"
                 },
                 restyleQuestsGradient: {
-                    label: "再フォーマットタスク - グラデーション",
-                    description: "タスクタイルで使用されるグラデーションスタイル。"
+                    label: "クエストのグラデーションを変更する",
+                    description: "クエスト タイルで使用されるグラデーションのスタイル。"
                 },
                 restyleQuestsPreload: {
-                    label: "再フォーマットタスク - ブートローダー",
-                    description: "タスク タイルのアセットをプリロードしてみてください。"
+                    label: "リスタイルクエストプリロード",
+                    description: "Quest タイルのアセットをプリロードしてみます。"
                 },
                 reorderQuests: {
-                    label: "タスクの並べ替え",
-                    description: "ステータスに応じてタスクを並べ替えます。 デフォルトの並べ替えの場合は空白のままにします。 カンマ区切りのリストには、UNCLAIMED、CLAIMED、IGNORED、EXPIRED をすべて含める必要があります。"
+                    label: "クエストを並べ替える",
+                    description: "クエストをステータスごとに並べ替えます。デフォルトの並べ替えの場合は空のままにします。カンマ区切りのリストには、UNCLAIMED、CLAIMED、IGNORED、EXPIRED のすべてが含まれている必要があります。"
                 },
                 unclaimedSubsort: {
-                    label: "未請求のサブランク",
-                    description: "請求されていないタスクのサブソート方法。"
+                    label: "未請求のサブソート",
+                    description: "未請求のクエストのサブソート方法。"
                 },
                 claimedSubsort: {
-                    label: "主張されたサブランク",
-                    description: "リクエストされたタスクのサブソート方法。"
+                    label: "主張されたサブソート",
+                    description: "要求されたクエストのサブソート方法。"
                 },
                 ignoredSubsort: {
-                    label: "無視されたサブオーダー",
-                    description: "無視されたタスクのサブソート方法。"
+                    label: "無視されたサブソート",
+                    description: "無視されたクエストのサブソート方法。"
                 },
                 expiredSubsort: {
-                    label: "期限切れのサブランク",
-                    description: "期限切れのタスクのダウンソート方法。"
+                    label: "期限切れのサブソート",
+                    description: "期限切れのクエストのサブソート方法。"
                 },
                 unclaimedUnignoredQuests: {
-                    label: "要求されていない無視されないタスク",
-                    description: "要求されていないタスクおよび無視されていないタスクの数を追跡します。"
+                    label: "要求されていない未無視のクエスト",
+                    description: "未請求および無視されていないクエストの数を追跡します。"
                 },
                 onQuestsPage: {
-                    label: "タスクページで",
-                    description: "ユーザーが現在「タスク」ページにいるかどうか。"
+                    label: "クエストページ上",
+                    description: "ユーザーが現在クエスト ページにいるかどうか。"
                 },
                 triggerQuestsRerender: {
-                    label: "クエストの再レンダリングのトリガー",
-                    description: "この設定を変更すると、[タスク] ページの再レンダリングがトリガーされます。"
+                    label: "トリガークエストの再レンダリング",
+                    description: "この設定を切り替えることで、クエスト ページの再レンダリングをトリガーします。"
                 },
                 ignoredQuestProfile: {
-                    label: "無視されたタスクプロファイル",
-                    description: "無視されたタスクに使用されるプロファイル。"
+                    label: "無視されたクエストプロファイル",
+                    description: "無視されたクエストに使用されるプロファイル。"
                 },
                 rememberQuestPageSort: {
-                    label: "クエストページの並べ替えを記憶する",
-                    description: "「タスク」ページで最後に使用したシーケンスを覚えておいてください。"
+                    label: "クエストページの並べ替えを記憶",
+                    description: "クエスト ページで最後に使用した並べ替えを覚えておいてください。"
                 },
                 rememberQuestPageFilters: {
-                    label: "タスクページフィルターを記憶する",
-                    description: "[タスク] ページで最後に使用したフィルターを記憶します。"
+                    label: "クエストページフィルターを記憶する",
+                    description: "クエスト ページで最後に使用したフィルターを覚えておいてください。"
                 },
                 lastQuestPageSort: {
-                    label: "最新クエストページランキング",
-                    description: "「タスク」ページで最後に使用したシーケンスを覚えておいてください。"
+                    label: "ラストクエストページの並び替え",
+                    description: "クエスト ページで最後に使用した並べ替えを覚えておいてください。"
                 },
                 lastQuestPageFilters: {
-                    label: "最新のタスクページフィルター",
-                    description: "[タスク] ページで最後に使用したフィルターを記憶します。"
+                    label: "最後のクエストページのフィルター",
+                    description: "クエスト ページで最後に使用したフィルターを覚えておいてください。"
                 },
                 ignoredQuestIDs: {
-                    label: "無視されたタスクID",
-                    description: "無視されたタスク ID の配列。"
+                    label: "無視されたクエストID",
+                    description: "無視されるクエスト ID の配列。"
                 },
                 resumeQuestIDs: {
-                    label: "進行中のタスクID",
-                    description: "バックグラウンドで自動完了するタスク ID の配列。"
+                    label: "クエストIDを再開する",
+                    description: "バックグラウンドで自動完了されるクエスト ID の配列。"
                 }
             },
             button: {
-                questInProgressWithTime: "完了中 ({{remainTime}})",
+                questInProgressWithTime: "完了しました ({{remainTime}})",
                 completing: "完了中",
-                resume: "デヴァムと (~{{remainTime}})",
-                complete: "{{remainTime}}を完了します",
-                completeImmediate: "完了（即時）",
+                resume: "履歴書 (~{{remainTime}})",
+                complete: "{{remainTime}} を完了してください",
+                completeImmediate: "完了 (即時)",
                 completed: "完了しました"
             },
             reward: {
-                orbs: "{{orbQuantity}} 個のオーブが {{completingText}} に表示されます。",
-                article: "{{itemName}} の {{completingText}}。",
-                unrecognized: "認識できない報酬タイプの場合は {{completingText}}。"
+                orbs: "{{completingText}} は {{orbQuantity}} オーブです。",
+                article: "{{completingText}} は {{itemName}} です。",
+                unrecognized: "{{completingText}} 認識されない報酬タイプ。"
             },
             notification: {
                 completed: {
-                    title: "仕事は終わりました",
-                    body: "{{questName}}のクエストが完了しました。"
+                    title: "クエスト完了",
+                    body: "{{questName}} クエストは完了しました。"
                 }
             }
         },
         questionMarkReplacement: {
-            name: "クエスチョンマークの置換",
-            description: "メッセージが疑問符のみで構成されている場合は、すべての疑問符が選択した文字列で置き換えられます。",
+            name: "QuestionMarkReplacement",
+            description: "メッセージに疑問符のみが含まれている場合は、すべての疑問符を選択した文字列に置き換えます。",
             option: {
                 replace: {
-                    label: "変化",
+                    label: "交換する",
                     description: "と置き換えます"
                 }
             }
         },
         quickMention: {
-            name: "クイックメンション",
-            description: "メッセージ アクション バーにクイック メンション ボタンを追加します。",
-            tooltip: "クイックベット"
+            name: "QuickMention",
+            description: "メッセージアクションバーにクイックメンションボタンを追加します",
+            tooltip: "クイックメンション"
         },
         quickReply: {
-            name: "クイックリプライ",
-            description: "ホットキーを使用してメッセージに返信 (Ctrl + 上/下) し、メッセージを編集 (CTRL + SHIFT + 上/下) します。",
+            name: "QuickReply",
+            description: "キーバインド経由でメッセージに返信 (Ctrl+上/下) し、メッセージを編集 (Ctrl+Shift+上/下)",
             option: {
                 shouldMention: {
-                    label: "言及すべきか",
-                    description: "デフォルトで ping 応答",
+                    label: "言及すべき",
+                    description: "デフォルトでの ping 応答",
                     noReplyMentionPlugin: "NoReplyMention プラグインをフォローする (有効な場合)",
-                    enabled: "効果的",
+                    enabled: "有効",
                     disabled: "無効"
                 },
                 ignoreBlockedAndIgnored: {
                     label: "ブロックされて無視される",
-                    description: "ブラウジング中にブロック/無視されたユーザーからのメッセージを無視する"
+                    description: "ナビゲート時にブロック/無視されたユーザーによるメッセージを無視する"
                 }
             }
         },
         quickThemeSwitcher: {
-            name: "クイックテーマスイッチャー",
+            name: "QuickThemeSwitcher",
             description: "キーボード ショートカットを使用してテーマをすばやく切り替えます。",
             about: {
-                title: "ホットキー",
-                description: "Ctrl/Cmd+Shift+矢印キーを使用して移動します (左/右: テーマ間を循環、上: 有効、下: 無効)。",
-                reload: "Ctrl/Cmd+Shift+Alt を押してテーマのリストを更新します。"
+                title: "バインディング",
+                description: "Ctrl/Cmd+Shift+矢印を使用して移動します (左/右: サイクルテーマ、上: 有効、下: 無効)。",
+                reload: "Ctrl/Cmd+Shift+Alt を押して、テーマ リストを再読み込みします。"
             },
             modal: {
-                added: "{{count}} 個の新しいテーマが追加されました",
-                removed: "{{count}} 個のテーマが削除されました",
-                reloaded: "{{themeCount}} テーマがリロードされました",
-                addedLocal: "{{count}} 個のローカル テーマを追加しました",
-                removedLocal: "{{count}} 個のネイティブ テーマが削除されました",
+                added: "{{count}} テーマ{{s}} を追加しました",
+                removed: "{{count}} テーマ{{s}} を削除しました",
+                reloaded: "{{themeCount}} テーマをリロードしました",
+                addedLocal: "{{count}} ローカル テーマ{{s}} を追加しました",
+                removedLocal: "{{count}} ローカル テーマ{{s}} を削除しました",
             },
             option: {
                 includeLocal: {
-                    label: "ネイティブテーマを含める",
-                    description: "デバイス上のネイティブ テーマをリストに含めます"
+                    label: "ローカルを含む",
+                    description: "ローカルなテーマを含める"
                 },
                 includeOnline: {
-                    label: "オンラインテーマを含める",
-                    description: "リストにオンラインテーマが含まれています"
+                    label: "オンラインを含める",
+                    description: "オンラインテーマを含める"
                 },
                 sortOrder: {
-                    label: "並べ替え",
-                    description: "選別方法",
-                    asc: "アダン・ゼイエ",
-                    desc: "ズデン・アヤ",
-                    recent: "インソン"
+                    label: "並べ替え順序",
+                    description: "ソート方法",
+                    asc: "A-Z",
+                    desc: "Z-A",
+                    recent: "最近の"
                 },
                 autoRefresh: {
                     label: "自動更新",
-                    description: "変更が検出されるとテーマリストを自動的に更新します"
+                    description: "変更が検出されたときにテーマリストを自動更新する"
                 },
                 showNotifications: {
                     label: "通知を表示する",
-                    description: "テーマが追加または削除されたときに通知を表示します"
+                    description: "テーマが追加/削除されたときに通知を表示する"
                 }
             }
         },
         quoter: {
-            name: "引用者",
-            description: "メッセージからインスピレーションを与える引用画像を作成できます",
+            name: "Quoter",
+            description: "メッセージからインスピレーションを与える引用画像を作成する機能を追加します",
             context: {
                 quote: "引用"
             },
             modal: {
-                title: "4Kダ ヤカラ",
-                grayscale: "黒白",
+                title: "4K で捕まえましょう",
+                grayscale: "グレースケール",
                 export: "輸出",
                 send: "送信",
                 saveAsGIF: "GIFとして保存",
                 saveDescription: "画像を PNG ではなく GIF として保存/送信します",
                 showWatermark: "ウォーターマークを表示",
-                watermarkText: "フィリグラン メトニ (最大 32 文字)"
+                watermarkText: "透かしテキスト (最大 32 文字)"
             },
             option: {
                 quoteFont: {
@@ -8143,51 +8143,51 @@ const translations: MatchStructure<typeof enTranslations> = {
                     merriWeather: "メリウェザー"
                 },
                 watermark: {
-                    label: "フィリグリー",
+                    label: "透かし",
                     description: "カスタム透かしテキスト (最大 32 文字)"
                 },
                 grayscale: {
-                    label: "黒白",
-                    description: "デフォルトで白黒を有効にする"
+                    label: "グレースケール",
+                    description: "デフォルトでグレースケールを有効にする"
                 },
                 showWatermark: {
                     label: "ウォーターマークを表示",
                     description: "デフォルトでウォーターマークを表示する"
                 },
                 saveAsGif: {
-                    label: "GIFとして保存",
+                    label: "GIF として保存",
                     description: "デフォルトでGIFとして保存"
                 }
             }
         },
         randomVoice: {
-            name: "ランダムボイス",
-            description: "ミュート ボタンの隣にランダムな音声通話参加ボタンを追加します。",
+            name: "RandomVoice",
+            description: "ランダムな音声通話に参加するためのボタンを [ミュート] ボタンの近くに追加します。",
             tooltip: "ランダムボイス",
             context: {
-                label: "サウンドコンディショナー",
-                amountLabel: "ユーザー数",
-                spacesLabel: "空室",
-                voiceLabel: "SES リミティ",
-                selfLabel: "独自の設定",
+                label: "音声状態修飾子",
+                amountLabel: "ユーザー金額",
+                spacesLabel: "残りスペースあり",
+                voiceLabel: "音声制限",
+                selfLabel: "自己設定",
                 select: {
                     servers: "サーバーの選択",
                     list: "リストの選択",
                     filters: "フィルターの選択",
-                    amount: "ユーザー数",
-                    userAmount: "{{金額}} ユーザー",
+                    amount: "ユーザー金額",
+                    userAmount: "{{amount}} ユーザー{{s}}",
                     parameters: "パラメータ",
                     moreThan: "より多い",
-                    lessThan: "それ未満",
+                    lessThan: "未満",
                     equalTo: "に等しい",
-                    spaces: "欠員",
-                    voice: "その限界"
+                    spaces: "残りスペース",
+                    voice: "音声制限"
                 },
                 filter: {
-                    muted: "サイレントで",
-                    deafened: "耳が聞こえなくなった",
+                    muted: "ミュート",
+                    deafened: "耳が聞こえない",
                     camera: "カメラ",
-                    stream: "放送",
+                    stream: "ストリーム",
                     includeFilters: "フィルターを含める",
                     avoidFilters: "フィルターを避ける"
                 },
@@ -8195,16 +8195,16 @@ const translations: MatchStructure<typeof enTranslations> = {
                     list: "リストのリセット"
                 },
                 voice: {
-                    label: "サウンド設定",
+                    label: "音声オプション",
                     auto: {
                         mute: "オートミュート",
                         deafen: "自動聴覚障害者",
-                        camera: "自動カメラ",
-                        stream: "自動ブロードキャスト",
-                        leaveWhenEmpty: "暇なときに出発",
+                        camera: "オートカメラ",
+                        stream: "自動ストリーム",
+                        leaveWhenEmpty: "空になったら出発",
                         navigate: "自動ナビゲート",
-                        stage: "ステージチャンネルを避ける",
-                        afk: "AFK チャネルを避ける"
+                        stage: "回避ステージ",
+                        afk: "AFKを避ける"
                     }
                 },
                 invalid: {
@@ -8213,140 +8213,140 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 userAmountOperation: {
-                    label: "ユーザー数トランザクション",
-                    description: "ユーザー数に応じたアクションを選択してください"
+                    label: "ユーザー量の操作",
+                    description: "ユーザー数の操作を選択します"
                 },
                 userAmount: {
-                    label: "ユーザー数",
+                    label: "ユーザー金額",
                     description: "ユーザー数を選択してください"
                 },
                 spacesLeftOperation: {
-                    label: "欠員のプロセス",
-                    description: "最大ユーザー数に対するアクションを選択してください"
+                    label: "スペース残量操作",
+                    description: "最大ユーザー数に対する操作を選択してください"
                 },
                 spacesLeft: {
-                    label: "欠員",
-                    description: "空き容量の選択"
+                    label: "残りスペース",
+                    description: "最大ユーザー数を選択してください"
                 },
                 vcLimitOperation: {
-                    label: "オーディオチャンネル制限の動作",
-                    description: "オーディオチャンネル制限のアクションを選択します。"
+                    label: "音声チャンネル制限動作",
+                    description: "音声チャンネルの動作を選択します。"
                 },
                 vcLimit: {
-                    label: "オーディオチャンネル制限",
-                    description: "オーディオチャンネル制限を選択してください"
+                    label: "音声チャンネルの制限",
+                    description: "音声チャネル制限を選択します"
                 },
                 servers: {
                     label: "サーバー",
-                    description: "含めるサーバー"
+                    description: "含まれるサーバー"
                 },
                 autoNavigate: {
-                    label: "オートナビゲーション",
-                    description: "自動的にオーディオチャンネルに移動します。"
+                    label: "自動ナビゲート",
+                    description: "音声チャンネルに自動的に移動します。"
                 },
                 autoCamera: {
-                    label: "自動カメラ",
+                    label: "オートカメラ",
                     description: "カメラを自動的にオンにします"
                 },
                 autoStream: {
-                    label: "自動ブロードキャスト",
-                    description: "自動的に放送を開始します"
+                    label: "自動ストリーム",
+                    description: "ストリームを自動的にオンにする"
                 },
                 selfMute: {
                     label: "オートミュート",
-                    description: "オーディオチャンネルに参加すると、マイクが自動的にミュートされます。"
+                    description: "音声チャンネルに参加すると、マイクが自動的にミュートになります。"
                 },
                 selfDeafen: {
                     label: "自動聴覚障害者",
-                    description: "音声チャンネルに参加すると、自動的に耳が聞こえなくなります。"
+                    description: "音声チャンネルに参加すると、自動的に音声が聞こえなくなります。"
                 },
                 leaveEmpty: {
-                    label: "暇なときに出発",
-                    description: "音声チャネルが空になると、別の通話がランダムに検索されます。"
+                    label: "空になったら出発",
+                    description: "ボイスチャットが空のときにランダムな通話を検索します。"
                 },
                 avoidStages: {
-                    label: "ステージチャンネルを避ける",
-                    description: "ステージタイプのオーディオチャンネルへの参加を回避します。"
+                    label: "回避ステージ",
+                    description: "ステージ音声チャンネルへの参加を回避します。"
                 },
                 avoidAfk: {
-                    label: "AFK チャネルを避ける",
-                    description: "AFK はオーディオ チャネルへの参加を回避します。"
+                    label: "AFKを避ける",
+                    description: "AFK 音声チャネルへの参加を回避します。"
                 },
                 video: {
                     label: "ビデオ",
-                    description: "カメラがオンになっているユーザーを検索します"
+                    description: "ビデオをオンにしたユーザーを検索します"
                 },
                 stream: {
-                    label: "放送",
-                    description: "ブロードキャストを行っているユーザーを検索します"
+                    label: "ストリーム",
+                    description: "ストリーミングしているユーザーを検索します"
                 },
                 mute: {
-                    label: "サイレントで",
+                    label: "ミュート",
                     description: "ミュートされているユーザーを検索します"
                 },
                 deafen: {
-                    label: "耳が聞こえなくなった",
-                    description: "聴覚障害のあるユーザーの検索"
+                    label: "聴覚障害者",
+                    description: "聴覚障害のあるユーザーを検索します"
                 },
                 includeStates: {
                     label: "フィルターを含める",
-                    description: "特定のユーザー状態を含めることができます"
+                    description: "州を含めるオプション"
                 },
                 avoidStates: {
                     label: "フィルターを避ける",
-                    description: "特定のユーザー状況を回避できるようにします"
+                    description: "状態を回避するオプション"
                 }
             },
             alert: {
-                failed: "オーディオ チャンネルが見つかりませんでした。"
+                failed: "ボイスチャンネルが見つかりませんでした!"
             }
         },
         reactErrorDecoder: {
             name: "ReactErrorDecoder",
-            description: "React はエラー コードを人間が読めるメッセージに変換します。"
+            description: "React エラー コードを人間が読めるメッセージにデコードします。"
         },
         readAllNotificationsButton: {
-            name: "すべての通知を読むボタン",
-            description: "通知パネルにボタンを追加して、1 回のクリックですべての通知を既読としてマークします。",
+            name: "ReadAllNotificationsButton",
+            description: "ボタンを 1 回クリックするだけで、すべてのサーバー通知を読むことができます。",
             button: "すべて読む"
         },
         recentDMSwitcher: {
-            name: "最近のDMSwitcher",
-            description: "Ctrl+Tab で最近使用した DM を切り替える (Ctrl+Shift+Tab は逆)",
+            name: "RecentDMSwitcher",
+            description: "最近使用した DM 間の Ctrl+Tab (Ctrl+Shift+Tab 逆)",
             option: {
                 visualStyle: {
                     label: "ビジュアルスタイル",
-                    description: "切り替え時に表示される視覚的なインジケーターのスタイル",
-                    overlay: "レイヤー (Alt+Tab スタイル)",
-                    toast: "通知（ステータスメッセージ）",
-                    off: "閉店"
+                    description: "サイクリング中の視覚的なインジケーターのスタイル",
+                    overlay: "オーバーレイ (Alt+Tab スタイル)",
+                    toast: "トースト（ステータスメッセージ）",
+                    off: "オフ"
                 },
                 overlayMode: {
-                    label: "レイヤーモード",
-                    description: "レイヤーコンテンツ",
-                    row: "最近の会話ライン",
-                    current: "のみ利用可能",
+                    label: "オーバーレイモード",
+                    description: "オーバーレイコンテンツ",
+                    row: "最近の行",
+                    current: "現在のみ",
                 },
                 amountOfUsers: {
                     label: "ユーザー数",
-                    description: "レイヤーに表示するユーザーの数"
+                    description: "オーバーレイに表示するユーザーの数"
                 },
                 overlayRowLength: {
-                    label: "レイヤーの行の長さ",
-                    description: "行に表示する最近の DM の数"
+                    label: "オーバーレイ行の長さ",
+                    description: "連続して表示する最近の DM の数"
                 },
                 overlayShowAvatars: {
-                    label: "レイヤープロファイル画像を表示",
-                    description: "レイヤー上にユーザープロフィール画像を表示します"
+                    label: "オーバーレイ表示アバター",
+                    description: "ユーザーのアバターをオーバーレイで表示する"
                 },
                 toastDurationMs: {
-                    label: "通知時間 (ミリ秒)",
-                    description: "レイヤーにプロフィール画像を表示"
+                    label: "トースト時間 (ミリ秒)",
+                    description: "ステータスメッセージの長さ"
                 },
                 clearRdms: {
                     label: "RDMSリストのクリア",
-                    description: "テストツール: RDM リストをクリアします。",
-                    toast: "RDMS履歴がクリアされました",
+                    description: "テスト ユーティリティ: RDM リストのクリア",
+                    toast: "RMDS履歴をクリアしました",
                     button: "RDM 履歴のクリア"
                 }
             },
@@ -8363,16 +8363,16 @@ const translations: MatchStructure<typeof enTranslations> = {
             description: "友達、グループチャット、またはサーバーがあなたを削除したときに通知します。",
             option: {
                 notices: {
-                    label: "通知",
-                    description: "削除されたときに画面の上部に通知を表示します (通知を見逃したくない場合はこれを使用します)。"
+                    label: "お知らせ",
+                    description: "また、削除されたときに画面の上部に通知を表示します (通知を見逃したくない場合はこれを使用します)。"
                 },
                 offlineRemovals: {
                     label: "オフラインでの削除",
-                    description: "オフライン中に Discord を開いたときに削除された場合に通知を送信します。"
+                    description: "オフライン中に削除された場合は、Discord の起動時に通知されます。"
                 },
                 friends: {
                     label: "友達",
-                    description: "友達があなたをリストから削除したときに通知を受け取る"
+                    description: "友達があなたを削除したときに通知する"
                 },
                 friendRequestCancels: {
                     label: "友達リクエストのキャンセル",
@@ -8384,30 +8384,30 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 groups: {
                     label: "グループ",
-                    description: "グループチャットから削除されたときに通知を受け取る"
+                    description: "グループチャットから削除されたときに通知する"
                 }
             },
             notification: {
-                removedFriend: "{{user}} さんがあなたの友達を解除しました。",
-                cancelledFriendRequest: "{{user}} から送信された友達リクエストはキャンセルされました。",
-                removedFromServer: "あなたは {{server}} から削除されました。",
-                removedFromGroup: "あなたは {{グループ}} から削除されました。",
-                noLongerGroup: "あなたはもう {{group}} に所属していません。",
-                noLongerServer: "あなたはもう {{server}} にはいません。",
+                removedFriend: "{{user}} さんがあなたを友達から削除しました。",
+                cancelledFriendRequest: "{{user}} からの友達リクエストは削除されました。",
+                removedFromServer: "あなたはサーバー {{server}} から削除されました。",
+                removedFromGroup: "あなたはグループ {{group}} から削除されました。",
+                noLongerGroup: "あなたはグループ {{group}} にはもう属していません。",
+                noLongerServer: "あなたはもうサーバー {{server}} にはいません。",
                 noLongerFriend: "あなたはもう {{user}} とは友達ではありません。",
-                friendRequestRevoked: "{{user}} から送信された友達リクエストは取り下げられました。",
+                friendRequestRevoked: "{{user}} からの友達リクエストは取り消されました。",
                 ok: "わかりました"
             }
         },
         remix: {
-            name: "リミックス",
-            description: "ファイル送信ボタンの右クリックメニューに「リミックス」オプションを追加します。 これにより、単純な画像エディターで画像が開き、編集した画像をチャットに直接送信するオプションが表示されます。",
+            name: "Remix",
+            description: "ファイルアップロードボタンの右クリックメニューに「リミックス」オプションを追加します。このオプションを使用すると、単純な画像エディタで画像が開き、編集した画像をチャットに直接送信できるようになります。",
             label: "リミックス",
             button: {
                 send: "送信",
-                close: "四半期",
+                close: "近い",
                 brush: "ブラシ",
-                erase: "ダスター",
+                erase: "消去",
                 crop: "作物",
                 shape: "形",
                 reset: "リセット",
@@ -8415,17 +8415,17 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             editor: {
                 choose: "画像を選択してください",
-                browse: "ゴザット",
+                browse: "ブラウズ",
                 rectangle: "矩形",
                 ellipse: "楕円",
                 line: "ライン",
-                arrow: "わかりました",
+                arrow: "矢印",
                 fill: "埋める"
             }
         },
         repeatMessages: {
-            name: "繰り返しメッセージ",
-            description: "これにより、メッセージをすばやく再送信できます。 Shift キーを押しながら「繰り返し」をクリックすると、メッセージへの返信として送信されます。",
+            name: "RepeatMessages",
+            description: "メッセージをすばやく繰り返すことができます。 Shift キーを押したまま「Repeat」オプションをクリックすると、メッセージに返信します。",
             button: "繰り返し (クリック) / 繰り返して返信 (Shift + クリック)",
             context: {
                 repeat: "繰り返す",
@@ -8433,8 +8433,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         replaceGoogleSearch: {
-            name: "GoogleSearch を置き換える",
-            description: "Google 検索をさまざまな検索エンジンに置き換えます。",
+            name: "ReplaceGoogleSearch",
+            description: "Google 検索を別のエンジンに置き換えます。",
             option: {
                 customEngineName: {
                     label: "カスタムエンジン名",
@@ -8442,53 +8442,53 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 customEngineURL: {
                     label: "カスタムエンジンのURL",
-                    description: "検索エンジンの URL"
+                    description: "エンジンの URL"
                 },
                 replacementEngine: {
-                    label: "バックアップ検索エンジン",
-                    description: "(メニューを追加する代わりに) バックアップ検索エンジンを特定の検索エンジンに置き換えます。",
-                    off: "閉店",
-                    custom: "特殊エンジン",
+                    label: "交換用エンジン",
+                    description: "メニューを追加する代わりに、特定の検索エンジンに置き換えます",
+                    off: "オフ",
+                    custom: "カスタムエンジン",
                 }
             },
             context: {
-                label: "メトニ・アラ",
-                searchWith: "{{name}} アラの家"
+                label: "検索テキスト",
+                searchWith: "{{name}} で検索"
             }
         },
         replyPingControl: {
             name: "ReplyPingControl",
-            description: "メッセージ返信時に常に ping を実行するか、まったく実行しないかを制御できます。ホワイトリスト機能も含まれています",
+            description: "ホワイトリスト機能を使用して、メッセージ返信時に常に ping を受信するかどうかを制御します",
             option: {
                 alwaysPingOnReply: {
-                    label: "常に Ping に返信する",
-                    description: "誰かがあなたのメッセージに返信するたびに ping を受け取る"
+                    label: "応答時に常に ping を送信する",
+                    description: "誰かがあなたのメッセージに返信すると、常に ping が送信されます"
                 },
                 replyPingWhitelist: {
-                    label: "応答 Ping ホワイトリスト",
-                    description: "応答 ping を常に受信したいユーザーの ID をカンマで区切って入力します。"
+                    label: "返信 Ping ホワイトリスト",
+                    description: "常に応答 ping を受信するユーザー ID のカンマ区切りリスト"
                 }
             }
         },
         replyTimestamp: {
-            name: "返信タイムスタンプ",
+            name: "ReplyTimestamp",
             description: "返信メッセージのプレビューにタイムスタンプを表示します"
         },
         revealAllSpoilers: {
-            name: "すべてを明らかにするスポイラー",
-            description: "Ctrl キーを押しながらスポイラーをクリックするとメッセージ内のすべてのスポイラーが表示され、Ctrl + Shift キーを押すとチャット全体のすべてのスポイラーが表示されます。"
+            name: "RevealAllSpoilers",
+            description: "メッセージ内のすべてのネタバレを表示するには、Ctrl キーを押しながらスポイラーをクリックするか、チャット内で Ctrl + Shift キーを押しながらクリックします"
         },
         reverseImageSearch: {
-            name: "逆画像検索",
-            description: "画像の右クリック メニューに画像の逆検索オプションを追加します",
+            name: "ReverseImageSearch",
+            description: "ImageSearch を画像コンテキスト メニューに追加します",
             context: {
                 label: "画像検索",
                 all: "すべて検索"
             }
         },
         reviewDB: {
-            name: "レビューDB",
-            description: "他のユーザーを評価します (プロフィールに新しい設定セクションを追加します)",
+            name: "ReviewDB",
+            description: "他のユーザーをレビューする (プロフィールに新しいセクションを追加します)",
             notification: {
                 newReview: "あなたのプロフィールに新しいレビューがあります!",
                 auth: {
@@ -8496,15 +8496,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                     successfully: "ログインに成功しました!",
                     failed: "認証に失敗しました",
                     review: "レビューを追加することを許可してください。",
-                    opening: "認証ウィンドウが開きます...",
-                    need: "評価するには権限が必要です!"
+                    opening: "認証ウィンドウを開いています...",
+                    need: "ユーザーをレビューするには承認が必要です。"
                 },
                 error: {
-                    fast: "要求が早すぎます。 数秒待ってからもう一度試してください。",
+                    fast: "リクエストの送信が速すぎます。数秒待ってからもう一度試してください。",
                     fetching: "レビューの取得中にエラーが発生しました。",
                     action: {
-                        failed: "ユーザー {{action}} に連絡できませんでした",
-                        success: "ユーザーは正常に {{action}} に成功しました"
+                        failed: "{{action}} ユーザーへのアクセスに失敗しました",
+                        success: "ユーザーを正常に{{action}}しました"
                     }
                 }
             },
@@ -8512,43 +8512,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                 delete: {
                     title: "本気ですか？",
                     description: "本当にこのレビューを削除してもよろしいですか?",
-                    confirm: "シル",
-                    cancel: "キャンセル",
+                    confirm: "消去",
+                    cancel: "どうでも",
                     error: "レビューを削除するにはログインする必要があります。",
                 },
                 report: {
                     title: "本気ですか？",
                     description: "本当にこのレビューを報告してもよろしいですか?",
-                    confirm: "宣言",
-                    cancel: "キャンセル",
-                    error: "レビューを投稿するにはログインする必要があります。",
+                    confirm: "報告",
+                    cancel: "どうでも",
+                    error: "レビューを報告するにはログインする必要があります。",
                 },
                 block: {
                     title: "本気ですか？",
-                    description: "本当にこのユーザーをブロックしますか?彼らのレビューは表示されなくなります。",
+                    description: "本当にこのユーザーをブロックしますか?彼らのレビューはもう表示されません。",
                     confirm: "ブロック",
-                    cancel: "キャンセル",
+                    cancel: "どうでも",
                     error: "ユーザーをブロックするにはログインする必要があります。",
                 },
                 blocked: {
                     title: "ブロックされたユーザー",
                     auth: "ReviewDB にログインしていません。",
                     noBlocked: "ブロックされているユーザーはいません。",
-                    fetch: "ブロックされたユーザーの取得中にエラーが発生しました"
+                    fetch: "ブロックされたユーザーを取得中にエラーが発生しました。"
                 },
                 reviews: {
-                    title: "ユーザーのレビュー",
-                    noUser: "このユーザーはまだ誰もレビューしていないようです。 あなたも最初になれます!",
-                    noServer: "このサーバーはまだ誰もレビューしていないようです。 あなたも最初になれます!"
+                    title: "さんのレビュー",
+                    noUser: "まだ誰もこのユーザーをレビューしていないようです。あなたがその最初の人になれるかもしれません!",
+                    noServer: "まだ誰もこのサーバーをレビューしていないようです。あなたがその最初の人になれるかもしれません!"
                 }
             },
             button: {
-                appeal: "異議",
+                appeal: "訴える",
                 ok: "わかりました",
-                more: "もっと",
-                reply: "@{{user}} に返信します",
+                more: "続きを読む",
+                reply: "@{{user}} に返信",
                 update: "@{{user}} のレビューを更新",
-                review: "@{{user}} をレビューします"
+                review: "@{{user}} をレビューしてください"
             },
             context: {
                 view: "レビューを見る",
@@ -8557,7 +8557,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 report: "レポートレビュー",
                 block: "ユーザーをブロックする",
                 unblock: "ユーザーのブロックを解除する",
-                reply: "レビューに返信"
+                reply: "返信レビュー"
             },
             option: {
                 authorize: {
@@ -8565,12 +8565,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     button: "ReviewDB で承認する"
                 },
                 notifyReviews: {
-                    label: "評価通知",
+                    label: "レビューを通知する",
                     description: "起動時に新しいレビューを通知する"
                 },
                 showWarning: {
                     label: "警告を表示",
-                    description: "ルーブリックの上に敬意を持って警告を表示する"
+                    description: "レビューリストの先頭に敬意を払うよう警告を表示する"
                 },
                 hideTimestamps: {
                     label: "タイムスタンプを非表示にする",
@@ -8578,49 +8578,49 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 hideBlockedUsers: {
                     label: "ブロックされたユーザーを非表示にする",
-                    description: "ブロックしたユーザーからのレビューを非表示にする"
+                    description: "ブロックされたユーザーのレビューを非表示にする"
                 },
                 buttons: {
                     label: "ボタン",
                     manageBlocked: "ブロックされたユーザーの管理",
                     support: "ReviewDB 開発のサポート",
                     website: "ReviewDB Web サイト",
-                    server: "ReviewDB サポート サーバー"
+                    server: "ReviewDB サポートサーバー"
                 }
             }
         },
         richMagnetLinks: {
-            name: "リッチマグネットリンク",
-            description: "マグネット リンクをメッセージ リンクのように扱います (プレビューあり)",
+            name: "RichMagnetLinks",
+            description: "マグネット リンクをメッセージ リンクのようにレンダリングします",
             unknown: "不明なファイル名"
         },
         roleColorEverywhere: {
-            name: "役割どこでも色",
-            description: "可能な限り最上位の役割の色を表示します",
+            name: "RoleColorEverywhere",
+            description: "可能な限りトップロールの色を追加します",
             option: {
                 chatMentions: {
                     label: "チャットのメンション",
-                    description: "チャットのメンションに役割の色を表示する (メッセージ ボックスを含む)"
+                    description: "チャットのメンション (メッセージ ボックスを含む) で役割の色を表示する"
                 },
                 memberList: {
                     label: "メンバー一覧",
-                    description: "メンバーリストの役割タイトルに役割の色を表示する"
+                    description: "メンバーリストのロールヘッダーにロールの色を表示する"
                 },
                 voiceUsers: {
                     label: "音声ユーザー",
                     description: "ボイスチャットユーザーリストに役割の色を表示する"
                 },
                 reactorsList: {
-                    label: "リアクター一覧",
-                    description: "ユーザーリストの役割の色を絵文字リアクションで表示する"
+                    label: "リアクターリスト",
+                    description: "リアクター リストにロールの色を表示する"
                 },
                 pollResults: {
-                    label: "調査結果",
-                    description: "アンケート結果に役割の色を表示する"
+                    label: "投票結果",
+                    description: "投票結果に役割の色を表示する"
                 },
                 colorChatMessages: {
-                    label: "チャットメッセージに色を付ける",
-                    description: "作成者の役割の色に応じてチャット メッセージを色分けする"
+                    label: "カラーチャットメッセージ",
+                    description: "作成者の役割の色に基づいてチャット メッセージを色分けする"
                 },
                 messageSaturation: {
                     label: "メッセージの飽和",
@@ -8629,72 +8629,72 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         rpcEditor: {
-            name: "RPCエディター",
-            description: "リッチ プレゼンスのコンテンツとタイプを編集します",
+            name: "RPCEditor",
+            description: "リッチ プレゼンスのタイプとコンテンツを編集する",
             option: {
                 replacedAppIds: {
-                    label: "変更されたアプリケーション ID (ID)",
+                    label: "置き換えられたアプリID",
                 }
             },
             modal: {
                 tutorial: {
-                    title: "現在実行中のイベントのID",
-                    noRunning: "実行中のイベントはありません",
+                    title: "現在実行中のアクティビティの ID",
+                    noRunning: "ランニングアクティビティはありません",
                     available: "利用可能な変数",
-                    variableText: "すべてのフィールド (投稿 URL を除く) に、元のコンテンツに自動的に置き換えられる変数を入力できます。",
+                    variableText: "すべてのフィールド (ストリーム URL を除く) に、元のコンテンツに自動的に置き換えられる変数を入力できます。",
                     more: "さらに詳しく",
                     details: {
-                        leave: "フィールドをそのままにする場合は、空白のままにします。",
-                        set: "ステータス インジケーターのフィールドを非表示にするには、「null」と入力します。",
-                        reload: "変更を適用するには、Discord を再起動する必要がある場合があります。"
+                        leave: "フィールドを空のままにして、そのままにしておきます。",
+                        set: "プレゼンス上でフィールドを非表示にするには、フィールドを「null」に設定します。",
+                        reload: "変更を適用するには、Discord をリロードする必要がある場合があります。"
                     }
                 },
                 settings: {
-                    applyEdits: "編集内容をアプリに適用する",
-                    addNewApp: "新しいアプリを追加",
+                    applyEdits: "編集をアプリに適用する",
+                    addNewApp: "新しいアプリケーションを追加する",
                     appId: "アプリケーションID",
                     invalidAppId: "無効なアプリケーション ID",
-                    newActivityType: "新しいイベントタイプ",
+                    newActivityType: "新しいアクティビティタイプ",
                     activityTypes: {
-                        playing: "遊んでいる",
+                        playing: "遊ぶ",
                         watching: "見てる",
                         listening: "リスニング",
-                        competing: "レーシング",
-                        streaming: "オンエア"
+                        competing: "競争する",
+                        streaming: "ストリーミング"
                     },
                     streamUrl: "ストリーム URL (YouTube または Twitch である必要があります)",
-                    invalidStreamUrl: "投稿URLが無効です",
+                    invalidStreamUrl: "無効なストリーム URL",
                     newName: "新しい名前",
                     newDetails: "新しい詳細",
-                    newState: "新しい状況",
-                    largeImage: "全体像",
-                    smallImage: "クリップアート",
+                    newState: "新しい状態",
+                    largeImage: "大きな画像",
+                    smallImage: "小さい画像",
                     text: "文章",
                     url: "URL",
                     firstLine: "(最初の行)",
                     secondLine: "(2行目)",
                     thirdLine: "(3行目)",
                     alsoThirdLine: "(3行目も)",
-                    hideAssets: "画像を非表示にする (大きい画像と小さい画像)",
+                    hideAssets: "アセットを非表示にする (大きい画像と小さい画像)",
                     hideTimestamps: "タイムスタンプを非表示にする"
                 }
             },
         },
         rpcStats: {
-            name: "RPC統計",
-            description: "アクティビティに関する統計をリッチ プレゼンスとして表示します",
+            name: "RPCStats",
+            description: "RPC としてのアクティビティに関する統計を表示します。",
             option: {
                 assetURL: {
-                    label: "ビジュアル URL",
-                    description: "RPC に使用されるイメージ。 空白のままにすると、プロフィール写真が使用されます"
+                    label: "アセットの URL",
+                    description: "RPC に使用するイメージ。空白のままにした場合、プロフィール写真が使用されます"
                 },
                 rpcTitle: {
-                    label: "RPCヘッダー",
+                    label: "RPC タイトル",
                     description: "RPC のタイトル"
                 },
                 statDisplay: {
-                    label: "統計の表示",
-                    description: "RPC では何を表示する必要がありますか? (おそらく 1 行しか許可されていません)",
+                    label: "ステータス表示",
+                    description: "RPC では何を表示する必要がありますか? (一行しか入れられません、確かに)",
                     today: "今日送信されたメッセージの量",
                     alltime: "常時送信されるメッセージの量",
                     listened: "今週最も聴かれたアルバム"
@@ -8709,11 +8709,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 albumCoverImage: {
                     label: "アルバムカバー画像",
-                    description: "アルバム カバーを RPC イメージとして使用しますか? (Last.fm表示を選択した場合)"
+                    description: "アルバムのカバー画像を RPC イメージとして使用する必要がありますか? (Last.fm 表示を選択している場合)"
                 },
                 lastFMStatFormat: {
                     label: "Last.fm 統計フォーマット",
-                    description: "Last.fm 統計はどのようにフォーマットすればよいですか? $album はアルバム名に置き換えられ、$artist はアーティスト名に置き換えられます。"
+                    description: "Last.fm 統計はどのようにフォーマットすべきですか? $album はアルバム名に置き換えられ、$artist はアーティスト名に置き換えられます。"
                 }
             },
             noInfo: "今のところ情報はありません:(",
@@ -8721,55 +8721,55 @@ const translations: MatchStructure<typeof enTranslations> = {
             messagesAllTime: "常に送信されるメッセージ: {{count}}"
         },
         saveFavoriteGIFs: {
-            name: "お気に入りのGIFを保存",
-            description: "お気に入りの GIF リンクをエクスポートします",
+            name: "SaveFavouritedGIFs",
+            description: "お気に入りの GIF URL をエクスポート",
             toolbox: "お気に入りのGIFを保存する",
             title: "お気に入りのGIFを保存する",
             command: {
                 savegifs: {
-                    description: "お気に入りの GIF リンクをすべてテキスト ファイルに保存します"
+                    description: "お気に入りの GIF URL をすべてテキスト ファイルに保存します"
                 },
                 saveworkinggifs: {
-                    description: "お気に入りの GIF をすべてテストし、まだ機能するものだけを保存します"
+                    description: "お気に入りの GIF をすべてテストし、まだ動作しているものだけを保存します"
                 }
             },
             option: {
                 showToolboxButton: {
                     label: "ツールボックスボタンを表示",
-                    description: "Plexcord ツールボックスに「お気に入り GIF を保存」ボタンを表示します (再起動が必要です)"
+                    description: "Plexcord ツールボックスに「お気に入りの GIF を保存」ボタンを表示 (再読み込みが必要)"
                 }
             },
             toast: {
-                save: "GIF は {{filename}} として正常に保存されました",
-                failed: "GIFを保存できませんでした",
-                no: "お気に入りのGIFが見つかりません!",
-                testing: "{{count}} 個の GIF がテスト中です。しばらく時間がかかる可能性があります...",
+                save: "GIF が {{filename}} として正常に保存されました",
+                failed: "GIFの保存に失敗しました",
+                no: "お気に入りの GIF が見つかりませんでした。",
+                testing: "{{count}} GIF をテストしています。これには少し時間がかかる場合があります...",
                 noneWorking: "保存した GIF はどれも機能していないようです。",
-                saved: "{{broken}} 個の壊れている可能性のある GIF が除外されました。 {{saved}} 個の作業用 GIF が保存されました。"
+                saved: "壊れている可能性のある {{broken}} GIF をフィルタリングしました。 {{saved}} 個の動作 GIF を保存しました。"
             }
         },
         scheduledMessages: {
-            name: "スケジュールされたメッセージ",
-            description: "特定の時刻または一定の遅延後にメッセージが送信されるようにスケジュールします。",
+            name: "ScheduledMessages",
+            description: "メッセージが特定の時間に送信されるか、遅延して送信されるようにスケジュールを設定します。",
             toolbox: {
                 toggle: "スケジュールされたメッセージを表示する"
             },
             option: {
                 maxMessagesPerMinute: {
                     label: "1 分あたりの最大メッセージ数",
-                    description: "同じ分間にチャネル上で送信できるスケジュールされたメッセージの最大数。"
+                    description: "同じ分間に送信できる、チャネルごとのスケジュールされたメッセージの最大数。"
                 },
                 checkIntervalSeconds: {
-                    label: "制御間隔(秒)",
-                    description: "プラグインが送信するメッセージがあるかどうかを確認する頻度。"
+                    label: "チェック間隔(秒)",
+                    description: "プラグインが送信するメッセージをチェックする頻度。"
                 },
                 showNotifications: {
                     label: "通知を表示する",
-                    description: "メッセージが送信されたときに通知 (トースト) を表示します。"
+                    description: "メッセージが送信されたときにトースト通知を表示します。"
                 },
                 showPhantomMessages: {
-                    label: "ゴーストメッセージを表示する",
-                    description: "スケジュールされたメッセージをチャット内にゴースト (一時) メッセージとして表示します。"
+                    label: "ファントムメッセージを表示する",
+                    description: "スケジュールされたメッセージをチャットにファントム メッセージとして表示します。"
                 }
             },
             channelType: {
@@ -8780,60 +8780,60 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             toast: {
                 messageSent: "スケジュールされたメッセージが {{channel}} に送信されました",
-                messageFailed: "スケジュールされたメッセージを送信できませんでした",
-                maxMessagesReached: "チャネルごとに 1 分あたり {{max}} メッセージの最大制限に達しました",
-                messageScheduled: "メッセージ企画中！",
+                messageFailed: "スケジュールされたメッセージの送信に失敗しました",
+                maxMessagesReached: "チャネルあたり 1 分あたりの最大 {{max}} メッセージに達しました",
+                messageScheduled: "メッセージ予定あり！",
                 messageRemoved: "スケジュールされたメッセージが削除されました",
                 allCleared: "スケジュールされたメッセージはすべてクリアされました"
             },
             button: {
-                tooltipOn: "計画モードがオン (クリックして無効にし、右クリックしてリストを表示)",
-                tooltipOff: "計画モード オフ (クリックして有効にし、右クリックしてリストを表示)"
+                tooltipOn: "スケジュール モード オン (クリックして無効にし、右クリックしてリストを表示)",
+                tooltipOff: "スケジュール モード オフ (クリックして有効にし、右クリックしてリストを表示)"
             },
             accessory: {
-                scheduledFor: "{{date}} {{timeLeft}}に予定されています",
+                scheduledFor: "{date}{timeLeft}に予定されています",
                 remaining: {
-                    days: "残り {{日}}g {{時間}}秒",
-                    hours: "残り {{時間}}秒 {{分}}分",
-                    minutes: "残り {{ minutes}} 分"
+                    days: "残り {{days}}d {{hours}}h",
+                    hours: "残り {{hours}}h {{minutes}}m",
+                    minutes: "残り{{minutes}}分"
                 }
             },
             scheduleModal: {
-                title: "企画メッセージ",
-                schedulingFor: "予定されているチャンネル: {{channel}}",
-                scheduleType: "企画タイプ",
+                title: "スケジュールメッセージ",
+                schedulingFor: "スケジュール: {{channel}}",
+                scheduleType: "スケジュールの種類",
                 delay: "遅れ",
                 specificTime: "特定の時間",
                 delayMinutes: "遅延 (分)",
-                dateTime: "日時",
+                dateTime: "日付と時刻",
                 error: {
-                    invalidDelay: "有効な遅延時間を入力してください (最低 1 分)",
+                    invalidDelay: "有効な遅延を入力してください (最低 1 分)",
                     invalidDateTime: "将来の日付と時刻を選択してください"
                 },
-                schedule: "計画済み",
+                schedule: "スケジュール",
                 cancel: "キャンセル"
             },
             viewModal: {
                 title: "スケジュールされたメッセージ",
                 clearAll: "すべてクリア",
                 noMessages: "スケジュールされたメッセージはありません",
-                delete: "シル",
-                close: "四半期"
+                delete: "消去",
+                close: "近い"
             }
         },
         searchFix: {
-            name: "検索修正",
-            description: "「虫眼鏡を落としてしまった！」という迷惑な話。 エラーを修正します。",
+            name: "SearchFix",
+            description: "「虫眼鏡を落としてしまいました!」という迷惑な問題を修正します。エラー。",
             notPerfect: "この修正は完全ではないため、問題を修正するには検索バーを再読み込みする必要がある場合があります。",
-            paragraph1: "Discord では最大オフセット 5000 のみが許可されています (これが拡大鏡エラーの原因です)。",
-            paragraph2: "これは、過去の 5000 件のメッセージと将来の 5000 件のメッセージを表示できることを意味します (古い順に並べ替えられます)。",
-            paragraph3: "このプラグインは、Discord の制限を回避するために逆の並べ替え方法に切り替えます。",
-            paragraph4: "ただし、大量の検索結果があり、どちらの並べ替え方法でも到達できないメッセージを表示しようとすると、",
-            paragraph5: "プラグインはオフセット 0 (ソート方法に応じて最も新しいメッセージまたは最も古いメッセージ) のみを表示します。"
+            paragraph1: "Discord では最大オフセット 5000 のみが許可されています (これが虫眼鏡エラーの原因です)。",
+            paragraph2: "これは、過去のメッセージ 5,000 件と、将来のメッセージ 5,000 件のみを表示できることを意味します (古い順に並べ替える場合)。",
+            paragraph3: "このプラグインは、Discord の制限を回避するために反対の並べ替え方法にジャンプするだけです。",
+            paragraph4: "ただし、大規模な検索結果があり、両方の並べ替え方法では取得できないメッセージを表示しようとすると、",
+            paragraph5: "プラグインは単にオフセット 0 (ソート方法に応じて最新または最も古いメッセージ) を表示します。"
         },
         secretRingToneEnabler: {
             name: "SecretRingToneEnabler",
-            description: "Discord は常にシークレット バージョンの着信音を再生します (特別な着信音イベントを除く)。",
+            description: "Discord 着信音のシークレット バージョンを常に再生します (特別な着信音イベント中を除く)。",
             option: {
                 onlySnow: {
                     label: "雪着信音イベント期間中のみ",
@@ -8842,72 +8842,72 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         summaries: {
-            name: "概要",
+            name: "Summaries",
             description: "すべてのサーバーで Discord の実験的な概要機能を有効にし、AI が生成した会話の概要を表示します",
             option: {
                 summaryExpiryThresholdDays: {
-                    label: "概要削除のしきい値 (日)",
-                    description: "ダイジェストが削除されるまでの有効日数。 チャンネルごとに最大 50 件のサマリーが保存されることに注意してください。"
+                    label: "概要有効期限しきい値 (日)",
+                    description: "概要が削除されるまでの日数。チャンネルごとに最大 50 件のサマリーのみが保持されることに注意してください"
                 }
             }
         },
         selfForward: {
-            name: "セルフフォワード",
-            description: "現在のチャンネルを転送リストのポップアップに追加します"
+            name: "SelfForward",
+            description: "現在のチャンネルをフォワードリストポップアップに追加します"
         },
         sendTimestamps: {
-            name: "タイムスタンプの送信",
-            description: "チャット ボックス ボタンとテキスト ショートカットを使用してタイムスタンプを簡単に送信できます。 詳細な説明を読んでください。",
+            name: "SendTimestamps",
+            description: "チャット ボックス ボタンとテキスト ショートカットを使用してタイムスタンプを簡単に送信します。詳細な説明を読んでください。",
             sample: {
-                paragraph1: "時間のみのタイムスタンプをすばやく送信するには、「HH:MM」形式 (バッククオートを含む) でタイムスタンプをメッセージに追加します。",
-                paragraph2: "以下の例を参照してください。\nより具体的な内容が必要な場合は、チャット バーの [日付] ボタンを使用してください。",
+                paragraph1: "時間のみのタイムスタンプをすばやく送信するには、メッセージに「HH:MM」形式のタイムスタンプ (バッククォートを含む!) を含めます。",
+                paragraph2: "以下の例を参照してください。\nさらに具体的な内容が必要な場合は、チャット バーの [日付] ボタンを使用してください。",
                 examples: "例:"
             },
             modal: {
                 title: "タイムスタンプピッカー",
-                light: "開ける",
+                light: "ライト",
                 dark: "暗い",
                 format: "タイムスタンプの形式",
                 preview: "プレビュー",
-                insert: "追加",
-                insertTimestamp: "タイムスタンプの追加"
+                insert: "入れる",
+                insertTimestamp: "タイムスタンプの挿入"
             },
             option: {
                 replaceMessageContents: {
-                    label: "メッセージ内容の変更",
-                    description: "メッセージコンテンツのタイムスタンプを変更する"
+                    label: "メッセージの内容を置き換える",
+                    description: "メッセージ内容のタイムスタンプを置き換える"
                 }
             }
         },
         serverInfo: {
-            name: "サーバー情報",
+            name: "ServerInfo",
             description: "サーバーに関する情報を表示できます",
             context: {
                 serverInfo: "サーバー情報"
             },
             option: {
                 sorting: {
-                    label: "配置",
-                    description: "ユーザー名または表示名 (該当する場合)",
+                    label: "仕分け",
+                    description: "ユーザー名、または該当する場合は表示名",
                     username: "ユーザー名",
                     displayname: "表示名",
-                    none: "仕分け"
+                    none: "並べ替えないでください"
                 }
             },
             modal: {
                 tab: {
                     serverInfo: "サーバー情報",
                     friends: "友達",
-                    mutualUsers: "一般ユーザー",
+                    mutualUsers: "相互ユーザー",
                     blockedUsers: "ブロックされたユーザー",
                     ignoredUsers: "無視されたユーザー"
                 },
                 owner: "サーバー所有者",
                 loading: "読み込み中...",
                 createdAt: "作成日",
-                joinedAt: "入社日",
-                vanityLink: "特別招待リンク",
-                preferredLocale: "優先地域",
+                joinedAt: "に参加しました",
+                vanityLink: "バニティリンク",
+                preferredLocale: "優先ロケール",
                 verification: {
                     level: "検証レベル",
                     none: "なし",
@@ -8918,53 +8918,53 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 serverBoosts: "サーバーブースト",
                 channels: "チャンネル",
-                roles: "ローラー"
+                roles: "役割"
             }
         },
         serverListIndicators: {
-            name: "サーバーリストインジケーター",
-            description: "オンライン友達の数またはサーバーの数をサーバーリストに追加します",
+            name: "ServerListIndicators",
+            description: "サーバーリストにオンラインフレンド数またはサーバー数を追加します",
             friends: "友達",
-            servers: "プレゼンター",
+            servers: "サーバー",
             option: {
                 mode: {
-                    label: "モジュール",
+                    label: "モード",
                     description: "サーバー一覧に表示するモード",
-                    friend: "オンラインのみの友達の数",
-                    server: "サーバーの数のみ",
-                    both: "サーバーとオンラインフレンドの両方の数"
+                    friend: "オンラインの友達のみカウント",
+                    server: "サーバー数のみ",
+                    both: "サーバーとオンラインの友達の両方の数"
                 },
                 useCompact: {
-                    label: "コンパクトなモデュ・クラン",
-                    description: "凡例をテキストのみで表示します"
+                    label: "コンパクトモードを使用する",
+                    description: "インジケーターをテキストのみで表示します"
                 }
             }
         },
         serverSearch: {
-            name: "サーバーサーチ",
-            description: "クイック検索ボタンを使用してサーバーをより適切にナビゲートします",
-            tooltip: "私たちは買う"
+            name: "ServerSearch",
+            description: "クイック検索ボタンでサーバーをより適切にナビゲートします",
+            tooltip: "検索"
         },
         shikiCodeblocks: {
-            name: "シキコードブロック",
-            description: "Shiki を利用した VSCode スタイルのコード ブロックを Discord に導入します",
+            name: "ShikiCodeblocks",
+            description: "Shiki を利用して、VS Code スタイルのコードブロックを Discord に導入します",
             option: {
                 theme: {
-                    label: "彼",
+                    label: "テーマ",
                     description: "デフォルトのテーマ"
                 },
                 customTheme: {
                     label: "カスタムテーマ",
-                    description: "カスタム VSCode テーマへのリンク",
+                    description: "カスタム VS Code テーマへのリンク",
                     mustURL: "有効な URL である必要があります",
                     mustJSON: "JSON ファイルである必要があります"
                 },
                 tryHljs: {
-                    label: "Hljs へのバックアップ",
-                    description: "明るいデフォルトの Discord 着色剤とテーマを使用します。",
+                    label: "Hljs へのフォールバック",
+                    description: "より軽量なデフォルトの Discord ハイライターとテーマを使用します。",
                     never: "一度もない",
-                    secondary: "Highlight.js ではなく Shiki を選択してください",
-                    primary: "Shiki ではなく Highlight.js を選択してください",
+                    secondary: "Highlight.js ではなく Shiki を好む",
+                    primary: "Shiki ではなく Highlight.js を好む",
                     always: "いつも"
                 },
                 useDevIcon: {
@@ -8972,7 +8972,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "コードブロックに言語アイコンを表示する方法",
                     disabled: "無効",
                     colorless: "無色",
-                    colored: "カラフル"
+                    colored: "色付き"
                 },
                 bgOpacity: {
                     label: "背景の不透明度",
@@ -8985,65 +8985,65 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         showAllMessageButtons: {
-            name: "すべてのメッセージボタンを表示",
-            description: "Shift キーを押すかどうかに関係なく、常にすべてのメッセージ ボタンが表示されます。",
+            name: "ShowAllMessageButtons",
+            description: "Shift キーを押しているかどうかに関係なく、常にすべてのメッセージ ボタンを表示します。",
             option: {
                 noShiftDelete: {
-                    label: "シフトせずに削除",
-                    description: "メッセージを削除するために Shift キーを押す必要がなくなります。"
+                    label: "シフト削除なし",
+                    description: "メッセージを削除するためにシフトを押し続ける要件を削除します。"
                 },
                 noShiftPin: {
-                    label: "シフトせずに固定する",
-                    description: "メッセージを固定するために Shift キーを押す必要がなくなります。"
+                    label: "シフトピンなし",
+                    description: "メッセージを固定するためにシフトを押し続ける要件を削除します。"
                 }
             }
         },
         showBadgesInChat: {
-            name: "チャットでバッジを表示",
-            description: "チャット内のメッセージ作成者の名前の横にバッジを表示します。",
+            name: "ShowBadgesInChat",
+            description: "チャット内の名前の横にメッセージ作成者のバッジを表示します。",
             option: {
                 showPlexcordDonor: {
-                    label: "Plexcord の寄付者バッジを提示してください",
+                    label: "Plexcord 寄付者バッジを表示する",
                     description: "チャットで Plexcord 寄付者バッジを表示できるようにします。"
                 },
                 plexcordDonorPosition: {
-                    label: "Plexcord 寄付者バッジの場所",
-                    description: "Plexcord 寄付者バッジの場所。"
+                    label: "Plexcord ドナー バッジの位置",
+                    description: "Plexcord の寄付者バッジの位置。"
                 },
                 showPlexcordContributor: {
                     label: "Plexcord 貢献者バッジを表示する",
                     description: "チャットに Plexcord 貢献者バッジを表示できるようにします。"
                 },
                 plexcordContributorPosition: {
-                    label: "Plexcord 貢献者バッジの場所",
-                    description: "Plexcord 貢献者バッジの場所。"
+                    label: "Plexcord 貢献者バッジの位置",
+                    description: "Plexcord の貢献者バッジの位置。"
                 },
                 showDiscordProfile: {
                     label: "Discord プロフィールバッジを表示",
                     description: "チャットに Discord プロフィールバッジを表示できるようにします。"
                 },
                 discordProfilePosition: {
-                    label: "Discord プロフィールバッジの場所",
-                    description: "Discord プロフィールバッジの場所。"
+                    label: "Discord プロフィールバッジの位置",
+                    description: "Discord プロフィールバッジの位置。"
                 },
                 showDiscordNitro: {
                     label: "Discord Nitro バッジを表示",
                     description: "チャットに Discord Nitro バッジを表示できるようにします。"
                 },
                 discordNitroPosition: {
-                    label: "Discord Nitro バッジの場所",
-                    description: "Discord Nitro バッジの場所。"
+                    label: "Discord Nitro バッジの位置",
+                    description: "Discord Nitro バッジの位置。"
                 },
                 badgeSettings: {
                     label: "バッジの設定",
-                    description: "チャットに表示される他のバッジの位置を構成します。",
-                    modal: "ドラッグしてバッジを並べ替えます。 クリックして、特定のバッジ タイプを有効または無効にします。"
+                    description: "チャットに表示される他のバッジの位置を設定します。",
+                    modal: "バッジをドラッグして順序を変更します。クリックして特定のバッジ タイプを有効または無効にできます。"
                 }
             },
             badge: {
-                plexcord: "Plexcord サポーターバッジ",
-                contributor: "Plexcord 参加者バッジ",
-                discordProfile: "Discord プロフィール rozetleri (HypeSquad、Discord Staff、Active Developer vb.)",
+                plexcord: "プレックスコードの寄付者バッジ",
+                contributor: "Plexcord 貢献者バッジ",
+                discordProfile: "Discord プロフィール バッジ (HypeSquad、Discord Staff、Active Developer など)",
                 nitro: "ニトロバッジ",
                 staff: "ディスコードスタッフ",
                 partner: "パートナーサーバーの所有者",
@@ -9054,66 +9054,66 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bugHunter: "Discord バグハンター",
                 earlyVerifiedBotDeveloper: "初期の認証済みボット開発者",
                 earlySupporter: "アーリーサポーター",
-                moderatorProgram: "モデレータープログラム卒業生"
+                moderatorProgram: "モデレーター プログラムの卒業生"
             },
             modal: {
-                plexcordContributor: "プレックスコード参加者",
+                plexcordContributor: "Plexcord の貢献者",
                 discordNitro: "ディスコードニトロ",
                 basic: "基本",
                 classic: "クラシック"
             }
         },
         showConnections: {
-            name: "接続を表示する",
-            description: "リンクされたアカウントをユーザーのポップアップ カードに表示します",
+            name: "ShowConnections",
+            description: "接続されているアカウントをユーザーのポップアウトに表示する",
             option: {
                 iconSize: {
                     label: "アイコンのサイズ",
                     description: "アイコンのサイズ (px)"
                 },
                 iconSpacing: {
-                    label: "アイコンスペース",
+                    label: "アイコンの間隔",
                     description: "アイコンの余白",
                     compact: "コンパクト",
-                    cozy: "快適",
-                    roomy: "広い"
+                    cozy: "居心地の良い",
+                    roomy: "広々"
                 }
             }
         },
         showHiddenChannels: {
-            name: "非表示のチャンネルを表示",
-            description: "アクセス権限のないチャンネルを表示します。",
-            tooltip: "秘密のチャンネル",
+            name: "ShowHiddenChannels",
+            description: "表示するアクセス権がないチャンネルを表示します。",
+            tooltip: "隠しチャンネル",
             option: {
                 channelStyle: {
                     label: "チャンネルスタイル",
                     description: "非表示のチャンネルを表示するために使用されるスタイル。",
                     classic: "クラシック",
-                    muted: "静けさ",
+                    muted: "ミュート",
                     showUnreads: "未読を表示",
-                    mutedWithUnreads: "ミュートおよび未読を表示"
+                    mutedWithUnreads: "ミュートして未読を表示"
                 },
                 showMode: {
-                    label: "表示モード",
+                    label: "ショーモード",
                     description: "非表示のチャンネルを表示するために使用されるモード。",
-                    lock: "ロックアイコンを備えたシンプルなスタイル",
+                    lock: "代わりにロックアイコンを使用したプレーンなスタイル",
                     hidden: "右側に目のアイコンが隠れた落ち着いたスタイル",
                     lockIconRight: "右側のロックアイコン"
                 },
                 defaultAllowedUsersAndRolesDropdownState: {
-                    label: "デフォルトの許可されたユーザーとロールのドロップダウンステータス",
-                    description: "許可されたユーザーとロールのメニューをプライベート チャネルでデフォルトで開くかどうか"
+                    label: "デフォルトの許可されたユーザーとロールのドロップダウン状態",
+                    description: "非表示チャネルの許可されたユーザーとロールのドロップダウンをデフォルトで開くかどうか"
                 }
             },
             channelType: {
                 text: "文章",
                 announcement: "発表",
                 forum: "フォーラム",
-                voice: "セス",
-                stage: "シーン"
+                voice: "声",
+                stage: "ステージ"
             },
             sortOrder: {
-                latestActivity: "最新のイベント",
+                latestActivity: "最新の活動",
                 creationDate: "作成日"
             },
             forumLayout: {
@@ -9128,56 +9128,56 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 hidden: "隠れた",
                 locked: "ロックされた",
-                threads: "トピックス",
+                threads: "スレッド",
                 posts: "投稿",
                 messages: "メッセージ",
                 post: "役職",
                 message: "メッセージ",
                 unknown: "未知",
-                permissionDetails: "許可の詳細",
+                permissionDetails: "権限の詳細",
                 thisIsA: "これは {{status}} {{channelType}} チャンネルです",
-                canNotSee: "このチャンネルの {{type}} 部分は表示されません。",
-                guidelines: "しかし、彼らの指示を見ることができます:",
-                lastCreated: "最後に作成された {{type}}:",
-                lastPin: "最後に固定された投稿:",
-                threadSlowmode: "デフォルトのスレッド低速モード:",
-                slowmode: "低速モード:",
+                canNotSee: "このチャンネルの {{type}} は表示されません。",
+                guidelines: "ただし、そのガイドラインが表示される場合があります。",
+                lastCreated: "最後に作成された{{type}}:",
+                lastPin: "最後のメッセージピン:",
+                threadSlowmode: "デフォルトのスレッドスローモード:",
+                slowmode: "スローモード:",
                 bitrate: "ビットレート:",
-                region: "エリア：",
+                region: "地域：",
                 automatic: "自動",
                 videoQuality: "ビデオ品質モード:",
                 inactiveArchiveDuration: "{{type}} をアーカイブするまでのデフォルトの非アクティブ期間",
                 defaultLayout: "デフォルトのレイアウト:",
-                defaultSort: "デフォルトの並べ替え:",
+                defaultSort: "デフォルトの並べ替え順序:",
                 defaultReaction: "デフォルトのリアクション絵文字:",
-                requireTag: "このフォーラムへの投稿にはタグの設定が必須です。",
+                requireTag: "このフォーラムへの投稿にはタグの設定が必要です。",
                 availableTags: "利用可能なタグ:",
-                allowedUsersAndRoles: "許可されたユーザーと役割:",
+                allowedUsersAndRoles: "許可されるユーザーと役割:",
                 hideAllowedUsersAndRoles: "許可されたユーザーとロールを非表示にする",
-                viewAllowedUsersAndRoles: "許可されたユーザーとロールの表示"
+                viewAllowedUsersAndRoles: "許可されたユーザーとロールを表示する"
             }
         },
         showHiddenThings: {
-            name: "表示隠されたもの",
-            description: "権限に関係なく、さまざまな非表示のものやモデレータのみのものを表示します。",
+            name: "ShowHiddenThings",
+            description: "権限に関係なく、さまざまな非表示およびモデレーター専用のものを表示します。",
             option: {
                 showTimeouts: {
-                    label: "チャットでメンバーのタイムアウトを表示",
+                    label: "チャットでメンバーのタイムアウトを表示する",
                     description: "チャットにメンバーのタイムアウト アイコンを表示します。"
                 },
                 showInvitesPaused: {
-                    label: "一時停止中の招待状の情報を表示",
-                    description: "サーバー リストで招待が一時停止されていることを示します。"
+                    label: "一時停止中の招待を表示",
+                    description: "サーバーリストに一時停止中の招待のツールチップを表示します。"
                 },
                 showModView: {
                     label: "Mod ビューを表示",
-                    description: "すべてのサーバーでメンバー モード ビューのコンテキスト メニュー オプションを表示します。"
+                    description: "すべてのサーバーでメンバー MOD ビューのコンテキスト メニュー項目を表示します。"
                 }
             }
         },
         showMessageEmbeds: {
-            name: "表示メッセージ埋め込み",
-            description: "埋め込みのないリンクのコンテキスト メニューに埋め込み表示オプションを追加します",
+            name: "ShowMessageEmbeds",
+            description: "コンテキスト メニュー オプションを追加して、埋め込みがないリンクに埋め込みを表示します。",
             context: {
                 embed: {
                     show: "埋め込みを表示",
@@ -9185,13 +9185,13 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             error: {
-                failed: "埋め込みを取得できませんでした",
+                failed: "埋め込みの取得に失敗しました",
                 noEmbed: "埋め込みが見つかりません"
             }
         },
         showMeYourName: {
-            name: "あなたの名前を見せてください",
-            description: "チャット内のカスタム ニックネーム、友人ニックネーム、サーバー ニックネーム、表示名、ユーザー名の順列を表示します。",
+            name: "ShowMeYourName",
+            description: "カスタム ニックネーム、友人ニックネーム、サーバー ニックネーム、表示名、ユーザー名の組み合わせをチャットに表示します。",
             option: {
                 messages: {
                     label: "メッセージ",
@@ -9199,137 +9199,137 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 replies: {
                     label: "返信",
-                    description: "返信内のカスタム名の形式を表示します。"
+                    description: "返信にカスタム名の形式を表示します。"
                 },
                 mentions: {
                     label: "言及",
                     description: "メンションにカスタム名の形式を表示します。"
                 },
+                typingIndicator: {
+                    label: "タイピングインジケーター",
+                    description: "カスタム名形式でリストされている最初に使用可能な名前を入力インジケーターに表示します。"
+                },
                 memberList: {
                     label: "メンバー一覧",
-                    description: "メンバーリストのカスタム名形式でリストされている最初の利用可能な名前を表示します。"
-                },
-                typingIndicator: {
-                    label: "インジケーターの書き込み",
-                    description: "カスタム名形式でリストされている最初の使用可能な名前を入力インジケーターに表示します。"
+                    description: "カスタム名形式でリストされている最初に使用可能な名前をメンバー リストに表示します。"
                 },
                 profilePopout: {
-                    label: "プロフィールポップアップカード",
-                    description: "プロフィール ポップアップ カードに、カスタム名形式でリストされている最初の利用可能な名前を表示します。"
+                    label: "プロフィールのポップアウト",
+                    description: "プロファイルのポップアウトに、カスタム名形式でリストされている最初に使用可能な名前を表示します。"
                 },
                 voiceChannels: {
-                    label: "オーディオチャンネル",
-                    description: "オーディオ チャネルのカスタム名形式でリストされている最初の利用可能な名前を表示します。"
+                    label: "音声チャンネル",
+                    description: "音声チャネルのカスタム名形式でリストされている最初に使用可能な名前を表示します。"
                 },
                 reactions: {
                     label: "反応",
-                    description: "カスタム名形式でリストされている最初に使用可能な名前を反応ツールチップに表示し、反応ポップアップにフルネームを表示します。"
+                    description: "カスタム名形式でリストされた最初の利用可能な名前をリアクション ツールチップに表示し、フルネームをリアクション ポップアウトに表示します。"
                 },
                 discriminators: {
-                    label: "パーサーの表示",
-                    description: "ボットのユーザー名にパーサーを追加します。 パーサーは通常のユーザーに対しては削除されましたが、ボットには依然として使用されています。 デフォルトでは、ボットのユーザー名はユーザーのグローバル名と同等であるため、複数のボットが同じユーザー名を持つことができます。 パーサーを追加すると、パーサーは再び一意になります。"
+                    label: "識別子",
+                    description: "ボットのユーザー名に識別子を追加します。識別子はユーザーに対しては非推奨になりましたが、ボットには依然として使用されています。デフォルトでは、ボットのユーザー名はユーザーのグローバル名と同等であるため、複数のボットが同じユーザー名を持つことができます。識別子を追加すると、再び一意になります。"
                 },
                 hideDefaultAtSign: {
-                    label: "デフォルトの @ 記号を非表示にする",
-                    description: "メンションや返信で名前の先頭にあるデフォルトの「@」記号を非表示にします。 関連する機能が有効になっている場合にのみ適用されます。"
+                    label: "デフォルトのアットマークを非表示にする",
+                    description: "メンションや返信で名前の前にあるデフォルトの「@」記号を非表示にします。いずれかの機能が有効になっている場合にのみ適用されます。"
                 },
                 truncateAllNamesWithStreamerMode: {
-                    label: "パブリッシャーモードですべての名前を短縮する",
-                    description: "ブロードキャスター モードでは、ユーザー名だけでなくすべての名前を短縮します。"
+                    label: "ストリーマー モードですべての名前を切り詰める",
+                    description: "ストリーマー モードでは、ユーザー名だけでなくすべての名前が切り詰められます。"
                 },
                 removeDuplicates: {
                     label: "重複の削除",
-                    description: "名前のうち 2 つが同じ場合は、重複した名前を削除し、一意の名前だけを残します。"
+                    description: "いずれかの名前が同等である場合は、それらを削除し、一意の名前だけを残します。"
                 },
                 ignoreFonts: {
                     label: "フォントを無視する",
-                    description: "2 番目、3 番目、および 4 番目の名前には、ユーザーのカスタム フォントを無視して GG SANS を使用します。"
+                    description: "2 番目、3 番目、および 4 番目の名前には、ユーザーのカスタム フォントに関係なく、gg sans を使用します。"
                 },
                 ignoreGradients: {
                     label: "グラデーションを無視する",
-                    description: "プライマリ以外の名前の場合、ロールにグラデーションがあり、次の色が「Role+-#」に設定されている場合は、グラデーション全体の代わりにプライマリ カラーを使用し、ニトロ効果がある場合は完全に無視します。"
+                    description: "プライマリ以外の名前の場合、ロールにグラデーションがあり、下の色が「Role+-#」に設定されている場合は、グラデーション全体の代わりにプライマリ カラーを使用し、ニトロ効果がある場合は完全に無視します。"
                 },
                 animateGradients: {
                     label: "グラデーションをアニメーション化する",
-                    description: "2 番目、3 番目、4 番目の名前に役割のグラデーションがある場合、アニメーションを表示します。 「グラデーションを無視」が有効になっている場合、またはモーションの軽減がオンになっている場合は無効になります。"
+                    description: "2 番目、3 番目、および 4 番目の名前の場合、ロールにグラデーションがある場合はアニメーション化します。これは「グラデーションを無視」することで無効になり、モーションが減少します。"
                 },
                 nameSeparator: {
                     label: "名前の区切り文字",
-                    description: "名前の間に使用する区切り文字。 デフォルトは単一のスペースです。"
+                    description: "名前の間に使用する区切り文字。デフォルトは単一のスペースです。"
                 },
                 friendNameOnlyInDirectMessages: {
-                    label: "友達の名前はプライベートメッセージにのみ表示されます",
-                    description: "友達の名前はプライベート メッセージにのみ表示され、サーバーには表示されません。"
+                    label: "ダイレクトメッセージでのみ友達名",
+                    description: "DM 内の場合のみ友人名を表示し、サーバー内では表示しません。"
                 },
                 customNameOnlyInDirectMessages: {
-                    label: "プライベートメッセージにのみカスタム名が表示される",
-                    description: "カスタム名はプライベート メッセージにのみ表示され、サーバーには表示されません。"
+                    label: "ダイレクトメッセージのみのカスタム名",
+                    description: "カスタム名は DM 内でのみ表示され、サーバー内では表示されません。"
                 },
                 includedNames: {
                     label: "含まれる名前",
-                    description: "ユーザー名、表示名、ニックネーム、友人名が表示される順序。 次のプレースホルダーを使用します: {user}、{display}、{nick}、{friend}。 名前が使用できない場合は、使用する代替名をカンマで区切って書くことができます: {friend, nick, display}。 各名前に 3 つのプレフィックスと 3 つのサフィックスを追加できます。"
+                    description: "ユーザー名、表示名、ニックネーム、フレンド名の表示順序。次のプレースホルダーを使用します: {user}、{display}、{nick}、{friend}。 {friend, nick, display} のようにカンマで区切ることにより、1 つが使用できない場合にフォールバックとして使用する複数の名前オプションを指定できます。名前ごとに最大 3 つの接頭辞と 3 つの接尾辞を付けることができます。"
                 },
                 customNameColor: {
                     label: "カスタム名の色",
-                    description: "最初に表示されるものでない場合に、ユーザーに割り当てるカスタム名に使用する色。 有効な CSS 入力を受け入れます。 「Role」を使用して、ユーザーの親ロールの色、ニトロ効果の色、または IRCColors カラー (有効な場合) を追跡します。 このパーセンテージで明るさを調整するには、「Role+-#」を使用します (例: 「Role+15」)"
+                    description: "ユーザーに割り当てたカスタム名が最初に表示されない場合に使用する色。有効な CSS 入力を受け入れます。 「Role」を使用して、ユーザーの最上位の役割の色、ニトロ効果の色、または有効になっている場合は IRCColors の色に従います。 'Role+-#' を使用して、その割合で明るさを調整します (例: 'Role+15')"
                 },
                 friendNameColor: {
                     label: "友達の名前の色",
-                    description: "友人の名前が表示される名前以外の場合に使用する色。 有効な CSS 入力を受け入れます。 「Role」を使用して、ユーザーの親ロールの色、ニトロ効果の色、または IRCColors カラー (有効な場合) を追跡します。 このパーセンテージで明るさを調整するには、「Role+-#」を使用します (例: 「Role+15」)"
+                    description: "友人のニックネームが最初に表示されない場合に使用する色。有効な CSS 入力を受け入れます。 「Role」を使用して、ユーザーの最上位の役割の色、ニトロ効果の色、または有効になっている場合は IRCColors の色に従います。 'Role+-#' を使用して、その割合で明るさを調整します (例: 'Role+15')"
                 },
                 nicknameColor: {
                     label: "ニックネームの色",
-                    description: "ニックネームが表示される名前ではない場合に使用する色。 有効な CSS 入力を受け入れます。 「Role」を使用して、ユーザーの親ロールの色、ニトロ効果の色、または IRCColors カラー (有効な場合) を追跡します。 このパーセンテージで明るさを調整するには、「Role+-#」を使用します (例: 「Role+15」)"
+                    description: "ニックネームが最初に表示されない場合にニックネームに使用する色。有効な CSS 入力を受け入れます。 「Role」を使用して、ユーザーの最上位の役割の色、ニトロ効果の色、または有効になっている場合は IRCColors の色に従います。 'Role+-#' を使用して、その割合で明るさを調整します (例: 'Role+15')"
                 },
                 displayNameColor: {
                     label: "表示名の色",
-                    description: "表示名が最初に表示される名前ではない場合に使用する色。 有効な CSS 入力を受け入れます。 「Role」を使用して、ユーザーの親ロールの色、ニトロ効果の色、または IRCColors カラー (有効な場合) を追跡します。 このパーセンテージで明るさを調整するには、「Role+-#」を使用します (例: 「Role+15」)"
+                    description: "最初に表示されるものではない場合に表示名に使用する色。有効な CSS 入力を受け入れます。 「Role」を使用して、ユーザーの最上位の役割の色、ニトロ効果の色、または有効になっている場合は IRCColors の色に従います。 'Role+-#' を使用して、その割合で明るさを調整します (例: 'Role+15')"
                 },
                 usernameColor: {
                     label: "ユーザー名の色",
-                    description: "ユーザー名が最初に表示される名前ではない場合に使用する色。 有効な CSS 入力を受け入れます。 「Role」を使用して、ユーザーの親ロールの色、ニトロ効果の色、または IRCColors カラー (有効な場合) を追跡します。 このパーセンテージで明るさを調整するには、「Role+-#」を使用します (例: 「Role+15」)"
+                    description: "ユーザー名が最初に表示されない場合にユーザー名に使用する色。有効な CSS 入力を受け入れます。 「Role」を使用して、ユーザーの最上位の役割の色、ニトロ効果の色、または有効になっている場合は IRCColors の色に従います。 'Role+-#' を使用して、その割合で明るさを調整します (例: 'Role+15')"
                 },
                 triggerNameRerender: {
-                    label: "トリガー名の再生成",
-                    description: "この設定を変更すると、名前が再生成されます。"
+                    label: "トリガー名の再表示",
+                    description: "この設定を切り替えることで、名前の再レンダリングをトリガーします。"
                 }
             },
             modal: {
                 change: {
-                    title: "SMYN ユーザー名の変更",
+                    title: "SMYNニックネームを変更する"
                 },
                 add: {
                     title: "SMYNニックネームを追加"
                 },
-                setCustom: "このユーザーのカスタム SMYN ニックネームを設定します。 SMYNテンプレートの設定で{custom}を指定して使用します。",
+                setCustom: "このユーザーのカスタム SMYN ニックネームを設定します。 SMYNテンプレートの設定で{custom}を指定してご利用ください。",
                 nickname: "SMYN ニックネーム",
                 reset: "SMYNニックネームをリセット",
                 cancel: "キャンセル"
             }
         },
-        showResourceChannels: {
-            name: "リソースチャンネルの表示",
-            description: "チャンネルリストのサーバーリソースの背後に隠れているチャンネルを表示します"
-        },
-        showSongName: {
-            name: "表示曲名",
-            description: "Spotify イベントのアーティストの代わりに曲名を表示します"
-        },
         showTimeoutDuration: {
             name: "ShowTimeoutDuration",
-            description: "ユーザーがタイムアウトする時間をタイムアウト アイコン ツールチップまたはその横に示します",
+            description: "ユーザーのタイムアウトがどれくらい続くかをタイムアウト アイコンのツールチップまたはその横に表示します",
             option: {
                 displayStyle: {
                     label: "表示スタイル",
-                    description: "タイムアウト期間の表示方法",
+                    description: "タイムアウト時間を表示する方法",
                     tooltip: "ツールチップ内",
                     inline: "タイムアウトアイコンの横にある"
                 }
             }
         },
+        showResourceChannels: {
+            name: "ShowResourceChannels",
+            description: "チャネルリストのサーバーリソースの背後に隠れているチャネルを表示します"
+        },
+        showSongName: {
+            name: "ShowSongName",
+            description: "Spotify アクティビティのアーティストの代わりに曲名を表示します"
+        },
         sidebarChat: {
-            name: "サイドバーチャット",
-            description: "別のチャネルまたは DM をサイドバーまたはポップアップとして開きます",
+            name: "SidebarChat",
+            description: "別のチャネルまたは DM をサイドバーまたはポップアウトとして開きます",
             toolbox: {
                 label: "前のチャットを開く"
             },
@@ -9337,44 +9337,44 @@ const translations: MatchStructure<typeof enTranslations> = {
                 label: "サイドバーチャットを開く"
             },
             modal: {
-                switch: "チャンネルを変更する",
-                popout: "チャットをポップアップとして開く",
+                switch: "チャンネルを切り替える",
+                popout: "ポップアウトチャット",
                 close: "サイドバーチャットを閉じる"
             },
             option: {
                 persistSidebar: {
-                    label: "サイドバーチャットを永続化する",
-                    description: "Discordの再起動時にサイドバーチャットを開いたままにできるようにします"
+                    label: "サイドバーチャットを維持する",
+                    description: "Discordを再起動してもサイドバーチャットを開いたままにします"
                 },
                 patchCommunity: {
-                    label: "コミュニティパッチを適用する",
-                    description: "チャネル ブラウザや [メンバー] タブなど、コミュニティ サーバー上のアイテムにパッチを適用します。"
+                    label: "パッチコミュニティ",
+                    description: "コミュニティ サーバーが備えているチャネル ブラウザやメンバー タブなどの機能にパッチを適用します。"
                 }
             }
         },
         signature: {
-            name: "サイン",
-            description: "自動署名/メッセージテキストの末尾",
+            name: "Signature",
+            description: "自動フィンガープリント/終了テキスト",
             option: {
                 name: {
-                    label: "サイン",
-                    description: "メッセージの最後に追加される署名テキスト"
+                    label: "名前",
+                    description: "メッセージの最後に追加される署名"
                 },
                 textHeader: {
-                    label: "テキストタイトル",
-                    description: "本文の先頭に追加するタイトル"
+                    label: "テキストヘッダー",
+                    description: "テキストの先頭に付けるヘッダー"
                 },
                 showIcon: {
                     label: "アイコンを表示",
-                    description: "チャットバーにアイコンを表示してプラグインをオンまたはオフにします"
+                    description: "プラグインを切り替えるためのアイコンをチャットバーに表示します"
                 },
                 contextMenu: {
                     label: "コンテキストメニュー",
-                    description: "チャットログインコンテキストメニューの機能を切り替えるオプションを追加"
+                    description: "チャット入力コンテキスト メニューの機能を切り替えるオプションを追加"
                 },
                 isEnabled: {
-                    label: "効果的",
-                    description: "トグル機能"
+                    label: "有効です",
+                    description: "機能の切り替え"
                 }
             },
             tooltip: {
@@ -9386,28 +9386,28 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             command: {
                 signature: {
-                    name: "サイン",
-                    description: "署名のオンとオフを切り替える",
-                    toogle: "署名を変更します (デフォルトの動作: 変更)",
+                    name: "Signature",
+                    description: "署名を切り替えます",
+                    toogle: "署名を切り替えます (デフォルトは切り替えです)",
                     enabled: "署名が有効です",
                     disabled: "署名が無効になっています"
                 }
             }
         },
         silentMessageToggle: {
-            name: "サイレントメッセージ切り替え",
-            description: "チャット バーにボタンを追加して、サイレント メッセージの送信をオンまたはオフにします。",
+            name: "SilentMessageToggle",
+            description: "チャット バーにボタンを追加して、サイレント メッセージの送信を切り替えます。",
             option: {
                 persistState: {
-                    label: "ステータスを永続化する",
-                    description: "サイレント メッセージの切り替えステータスを維持する方法を決定する",
-                    none: "永続的であってはなりません (チャンネルが変更されるとリセットされる必要があります)。",
-                    channels: "チャネル間で永続化する",
-                    restarts: "チャネル間で持続し、Discord が再起動される"
+                    label: "状態を維持する",
+                    description: "サイレント メッセージのトグル状態を維持する方法",
+                    none: "持続しない（チャンネル変更時にリセット）",
+                    channels: "チャネル間で持続する",
+                    restarts: "チャネルと再起動の間で持続する"
                 },
                 autoDisable: {
                     label: "自動無効化",
-                    description: "無言メッセージを送信した後、機能を再び自動的に無効にする"
+                    description: "サイレント メッセージの送信後に再びサイレント メッセージのトグルを自動的に無効にする"
                 }
             },
             tooltip: {
@@ -9416,124 +9416,124 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         silentTyping: {
-            name: "サイレントタイピング",
+            name: "SilentTyping",
             description: "チャットから入力インジケーターを非表示にします。",
             command: {
                 silentTyping: {
-                    name: "サイレントタイピング",
+                    name: "SilentTyping",
                     description: "チャットから入力インジケーターを非表示にします。",
                     toggle: {
-                        name: "トグル",
-                        description: "機能をグローバルに、チャネルごと、またはサーバーごとに切り替えます。",
+                        name: "toggle",
+                        description: "機能をグローバル、チャネル、またはギルドごとに切り替えます。",
                         global: "グローバル",
                         channel: "チャネル",
-                        guild: "プレゼンター"
+                        guild: "ギルド"
                     },
                     chatBarIndicator: {
-                        name: "チャットバーインジケーター",
-                        description: "他のユーザーの入力インジケーターをチャット バーの上部から非表示にします。"
+                        name: "chatBarIndicator",
+                        description: "他のユーザーの入力インジケーターをチャット バーの上から非表示にします。"
                     },
                     membersListIndicator: {
-                        name: "メンバーリストインジケーター",
+                        name: "membersListIndicator",
                         description: "他のユーザーの入力インジケーターをメンバー リストから非表示にします。"
                     },
                     chatIcon: {
-                        name: "チャットアイコン",
-                        description: "チャット バーにアイコンを表示すると、プラグインのオンとオフをすばやく切り替えることができます。"
+                        name: "chatIcon",
+                        description: "外出先でプラグインを切り替えるためのアイコンをチャット バーに表示します。"
                     },
                     chatContextMenu: {
-                        name: "チャットコンテキストメニュー",
-                        description: "プラグイン設定をすばやく変更するには、チャット コンテキスト メニューにドロップダウン メニューを追加します。"
+                        name: "chatContextMenu",
+                        description: "チャット コンテキスト メニューにドロップダウンを表示して、外出先でプラグイン設定を切り替えます。"
                     },
                     defaultHidden: {
-                        name: "デフォルト非表示",
-                        description: "DM/チャネル/サーバー内の書き込み情報をデフォルトで非表示にするかどうかを決定します。"
+                        name: "defaultHidden",
+                        description: "DM/チャンネル/ギルドでの入力をデフォルトで非表示にするかどうか。"
                     }
                 }
             },
             content: {
                 updated: "サイレントタイピング設定が更新されました。",
-                noChanges: "サイレントタイピング設定には変更は加えられませんでした。"
+                noChanges: "サイレント タイピングの設定は変更されません。"
             },
             tooltip: {
-                hidden: "非表示 ({{location}}) と表示されます",
-                visible: "書き込み可能 ({{location}})",
-                global: "書き込み可視 (グローバル)"
+                hidden: "非表示の入力 ({{location}})",
+                visible: "入力が表示される ({{location}})",
+                global: "入力の表示 (グローバル)"
             },
             option: {
                 enabledGlobally: {
-                    label: "グローバルに活躍",
-                    description: "独自の書き込みインジケーターをグローバルにオン/オフにします。"
+                    label: "グローバルに有効化",
+                    description: "独自の入力インジケーターの機能をグローバルに切り替えます。"
                 },
                 hideChatBoxTypingIndicators: {
-                    label: "チャット ボックス書き込みインジケーターを非表示にする",
-                    description: "他のユーザーのチャット ボックスの上部にある入力インジケーターを非表示にします。"
+                    label: "チャット ボックスの入力インジケーターを非表示にする",
+                    description: "他のユーザーの入力インジケーターをチャット バーの上から非表示にします。"
                 },
                 hideMembersListTypingIndicators: {
-                    label: "メンバーリストの書き込みインジケーターを非表示にする",
-                    description: "他のユーザーのメンバーリストで入力インジケーターを非表示にします。"
+                    label: "メンバーリストの入力インジケーターを非表示にする",
+                    description: "他のユーザーの入力インジケーターをメンバー リストから非表示にします。"
                 },
                 chatIcon: {
                     label: "チャットアイコン",
-                    description: "チャットバーにアイコンを表示すると、プラグインをすばやく切り替えることができます。"
+                    description: "外出先でプラグインを変更するためのアイコンをチャット バーに表示します。"
                 },
                 chatIconLeftClickAction: {
                     label: "チャットアイコンの左クリックアクション",
-                    description: "チャット アイコンを左クリックしたときの動作を決定します。",
-                    global: "グローバル書き込みステータスの変更",
-                    channel: "チャネルの書き込みステータスの変更",
-                    guild: "サーバーへの書き込みステータスの変更",
+                    description: "チャットアイコンを左クリックした場合の対処方法。",
+                    global: "グローバルな入力の切り替え",
+                    channel: "チャンネルの入力を切り替えます",
+                    guild: "ギルドの入力の切り替え",
                     settings: "プラグイン設定を開く"
                 },
                 chatIconMiddleClickAction: {
                     label: "チャットアイコンの中クリックアクション",
-                    description: "チャット アイコンを中クリックしたときの動作を決定します。",
-                    global: "グローバル書き込みステータスの変更",
-                    channel: "チャネルの書き込みステータスの変更",
-                    guild: "サーバーへの書き込みステータスの変更",
+                    description: "チャットアイコンを中クリックしたときの動作。",
+                    global: "グローバルな入力の切り替え",
+                    channel: "チャンネルの入力を切り替えます",
+                    guild: "ギルドの入力の切り替え",
                     settings: "プラグイン設定を開く"
                 },
                 chatIconRightClickAction: {
                     label: "チャットアイコンの右クリックアクション",
-                    description: "チャット アイコンを右クリックしたときの動作を決定します。",
-                    global: "グローバル書き込みステータスの変更",
-                    channel: "チャネルの書き込みステータスの変更",
-                    guild: "サーバーへの書き込みステータスの変更",
+                    description: "チャットアイコンを右クリックした場合の対処方法。",
+                    global: "グローバルな入力の切り替え",
+                    channel: "チャンネルの入力を切り替えます",
+                    guild: "ギルドの入力の切り替え",
                     settings: "プラグイン設定を開く"
                 },
                 chatContextMenu: {
                     label: "チャットコンテキストメニュー",
-                    description: "プラグイン設定をすばやく変更するには、チャット コンテキスト メニューにドロップダウン メニューを追加します。"
+                    description: "チャット コンテキスト メニューにドロップダウンを表示して、外出先でプラグイン設定を変更します。"
                 },
                 defaultHidden: {
                     label: "デフォルトの非表示",
-                    description: "有効にすると、以下の「無効な場所」リストにリストされていないすべての DM/チャネル/サーバー上の他のユーザーからインジケーターが非表示になります。 無効にすると、インジケーターは「アクティブな場所」リストに含まれていない場所に表示されます。"
+                    description: "有効にすると、プラグインは、以下の「無効な場所」にリストされていない DM/チャネル/ギルドで他のユーザーから入力を隠します。無効にすると、プラグインは、以下の「有効な場所」にリストされていない DM/チャンネル/ギルドの入力内容を他の人に表示します。"
                 },
                 enabledLocations: {
-                    label: "アクティブな場所",
-                    description: "これらのIDに対して機能を有効にします。 カンマ区切りの DM ID、チャネル ID、サーバー ID を受け入れます。 「デフォルトのプライベート」が無効になっている場合にのみ使用されます。"
+                    label: "有効な場所",
+                    description: "これらの ID の機能を有効にします。 DM ID、チャネル ID、ギルド ID のカンマ区切りリストを受け入れます。 「デフォルトの非表示」が無効になっている場合にのみ使用されます。"
                 },
                 disabledLocations: {
                     label: "無効な場所",
-                    description: "これらのIDの機能を無効にします。 カンマ区切りの DM ID、チャネル ID、サーバー ID を受け入れます。 「デフォルトのプライベート」が有効な場合にのみ使用されます。"
+                    description: "これらの ID の機能を無効にします。 DM ID、チャネル ID、ギルド ID のカンマ区切りリストを受け入れます。 「デフォルトの非表示」が有効な場合にのみ使用されます。"
                 }
             }
         },
         snowfall: {
-            name: "降雪",
+            name: "Snowfall",
             description: "Discordに雪を降らせましょう！",
             about: {
                 title: "情報",
-                paragraph: "このプラグインは、Discord インターフェースにクリスマスをテーマにした降雪効果を追加します。 以下の設定から雪の種類を変更できます。",
-                note: "注: このプラグインは、ほとんどのコンピュータで平均的な Plexcord プラグインよりもパフォーマンスに大きな影響を与えませんが、ローエンド システムでは多少の遅延が発生する可能性があります。"
+                paragraph: "このプラグインは、Discord のインターフェース上にクリスマスらしい降雪効果を追加します。以下の設定で雪の種類を変更できます。",
+                note: "注: ほとんどのコンピュータでは、このプラグインは平均的な Plexcord 拡張機能以上のパフォーマンスには影響しませんが、ローエンド システムでは多少の遅れが生じる可能性があります。"
             },
             option: {
                 typeOfSnow: {
-                    label: "車の種類",
+                    label: "雪の種類",
                     description: "表示される雪の種類を変更します (パフォーマンスに影響します)。",
-                    solid: "ソリッドカラー (最高パフォーマンス)",
-                    text: "メチン（中性能）",
-                    emoji: "ビジュアル (最低パフォーマンス)"
+                    solid: "ソリッド (最高のパフォーマンス)",
+                    text: "テキスト (中程度のパフォーマンス)",
+                    emoji: "画像 (最低パフォーマンス)"
                 },
                 maxSize: {
                     label: "最大サイズ",
@@ -9541,18 +9541,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 speed: {
                     label: "スピード",
-                    description: "降雪率 (高い = より早く降る)"
+                    description: "降雪速度 (高い = より速く降る)"
                 },
                 flakesPerSecond: {
-                    label: "1 秒あたりの雪の結晶数",
-                    description: "1 秒あたりに降る雪の結晶の量 (多い = 降水量が多い)"
+                    label: "1秒あたりのフレーク数",
+                    description: "1 秒あたりの雪の結晶数 (高い = 降雪の密度が高くなります)"
                 }
             }
         },
         sortFriendRequests: {
-            name: "友達リクエストの並べ替え",
+            name: "SortFriendRequests",
             description: "友達リクエストを受信日順に並べ替えます",
-            tooltip: "追加しました — {{日付}}",
+            tooltip: "追加しました — {{date}}",
             option: {
                 showDates: {
                     label: "ショーの日付",
@@ -9561,18 +9561,18 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         soundBoardLogger: {
-            name: "サウンドボードロガー",
-            description: "ボイスチャットで再生されるすべてのサウンドボードサウンドを録音し、ダウンロードできるようにします",
+            name: "SoundBoardLogger",
+            description: "ボイスチャットで再生されるすべてのサウンドボードをログに記録し、ダウンロードできるようにします。",
             tooltip: "サウンドボードログを開く",
             option: {
                 savedIds: {
                     label: "保存されたサウンドボード ID",
-                    description: "一度に保存したいサウンドボード ID の量 (0 では無制限に保存できます)",
+                    description: "一度に保存したいサウンドボード ID の数 (0 を指定すると無限に保存できます)",
                     notNumber: "値は数値ではありません。",
                     cantDecimal: "値を 10 進数にすることはできません。",
                     cantNegative: "値を負の数にすることはできません。",
-                    heading: "一度に保存したいサウンドボード ID の量 (0 では無制限に保存できます)",
-                    warning: "警告！ 数値をより低い値に設定すると、ログがリセットされます。",
+                    heading: "一度に保存したいサウンドボード ID の数 (0 を指定すると無限に保存できます)",
+                    warning: "警告！数値をより低い値に設定すると、ログがリセットされます。",
                     placeholder: "数字を入力してください"
                 },
                 fileType: {
@@ -9585,74 +9585,74 @@ const translations: MatchStructure<typeof enTranslations> = {
                     button: "ログを開く"
                 },
                 soundVolume: {
-                    label: "騒音レベル",
-                    description: "オン/オフ音の音量(0無効)"
+                    label: "音量",
+                    description: "トグル音の大きさ (0 で無効)"
                 },
                 iconLocation: {
                     label: "アイコンの場所",
-                    description: "SoundBoard Log アイコンが表示される場所を選択します (再起動が必要です)",
+                    description: "サウンドボードログアイコンを表示する場所を選択します (再起動が必要です)",
                     toolbar: "ツールバー",
-                    chatInput: "チャットログイン"
+                    chatInput: "チャット入力"
                 }
             },
             modal: {
                 title: "サウンドボードのログ",
                 loading: "サウンドを読み込んでいます...",
-                noLogs: "音声はまだ録音されていません。 ボイスチャットに参加してログを取得しましょう！",
+                noLogs: "まだサウンドが記録されていません。ボイスチャットに参加してログインを始めましょう！",
                 clearLogs: "ログをクリアする",
-                played: "{{time}} 回再生しました",
+                played: "{{time}} 時間{{s}} プレイしました",
                 last: "最後にプレイした:",
-                also: "彼は次のものも盗みました。",
+                also: "こちらもプレイ：",
                 download: "ダウンロード",
                 copyId: "IDをコピーする",
                 copied: "ID がクリップボードにコピーされました!",
                 playSound: "サウンドを再生する",
-                moreUsers: "他の人もこの音を使っていました...",
+                moreUsers: "他の人もこのサウンドを使用していました...",
                 volume: "響板の音量"
             }
         },
         splitLargeMessages: {
-            name: "分割大メッセージ",
-            description: "Discord のメッセージ制限に合わせて、大きなメッセージを複数のメッセージに分割します。",
+            name: "SplitLargeMessages",
+            description: "Discord のメッセージ制限に合わせて、大きなメッセージを複数に分割します。",
             option: {
                 maxLength: {
                     label: "最大メッセージ長",
-                    description: "分割されるまでのメッセージの最大長。 自動検出するには 0 に設定します。"
+                    description: "分割される前のメッセージの最大長。自動検出するには 0 に設定します。"
                 },
                 disableFileConversion: {
                     label: "ファイル変換を無効にする",
-                    description: "有効にすると、大きなメッセージのファイル変換が無効になります。"
+                    description: "true の場合、大きなメッセージのファイル変換が無効になります。"
                 },
                 sendDelay: {
-                    label: "配送の遅延",
-                    description: "各トラック間の待機時間 (秒単位)。"
+                    label: "送信遅延",
+                    description: "各チャンク間の遅延 (秒単位)。"
                 },
                 hardSplit: {
-                    label: "ソリッドパーティション",
-                    description: "有効にすると、スペース/改行の代わりに最後の文字から分割されます。"
+                    label: "ハードスプリット",
+                    description: "true の場合、最後のスペース/改行ではなく最後の文字で分割されます。"
                 },
                 splitInSlowmode: {
                     label: "スローモードでの分割",
-                    description: "チャンネルで低速モードが有効になっている場合、メッセージを分割しますか?"
+                    description: "チャネルでスローモードが有効になっている場合、メッセージを分割する必要がありますか?"
                 },
                 slowmodeMax: {
-                    label: "低速モードの最大値",
-                    description: "スローモードで分割する場合に許容される最大スローモード時間。"
+                    label: "スローモードマックス",
+                    description: "スローモードで分割する場合の最大スローモード時間。"
                 }
             }
         },
         spotifyActivityToggle: {
-            name: "Spotifyアクティビティトグル",
+            name: "SpotifyActivityToggle",
             description: "Spotify アクティビティの可視性の切り替えボタンを追加します。",
             tooltip: {
-                enable: "Spotify アクティビティを開く",
+                enable: "Spotify アクティビティをオンにする",
                 disable: "Spotify アクティビティをオフにする"
             },
             option: {
                 location: {
-                    label: "女性",
-                    description: "Spotify のオン/オフ ボタンを表示する場所",
-                    panel: "ミュート/ミュートの隣",
+                    label: "位置",
+                    description: "Spotify トグルボタンを表示する場所",
+                    panel: "ミュート/聴覚障害者の隣",
                     toolbox: "Plexcord ツールボックス"
                 },
                 activityStatus: {
@@ -9662,46 +9662,46 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         spotifyCrack: {
-            name: "Spotify クラック",
-            description: "無料の共同リスニングを許可し、ボイスチャットの自動一時停止をブロックし、アイドル時に Spotify アクティビティを再生し続けることができます。",
+            name: "SpotifyCrack",
+            description: "一緒に自由に聴くことができ、ボイスチャットでの自動一時停止はなく、アイドル状態でもアクティビティの再生を継続できます。",
             option: {
                 noSpotifyAutoPause: {
-                    label: "Spotify の自動一時停止をオフにする",
+                    label: "Spotify の自動一時停止なし",
                     description: "Spotify の自動一時停止を無効にします。"
                 },
                 keepSpotifyActivityOnIdle: {
-                    label: "アイドル中に Spotify アクティビティを再開する",
-                    description: "アイドル状態でも Spotify アクティビティの再生を継続できるようにします"
+                    label: "Spotify アクティビティをアイドル状態に保つ",
+                    description: "アイドリング時に Spotify アクティビティを再生し続ける"
                 }
             }
         },
         spotifyShareCommands: {
-            name: "Spotify 共有コマンド",
-            description: "スラッシュコマンド (/track、/album、/artist) を使用して、現在の Spotify の曲、アルバム、またはアーティストを共有します。",
+            name: "SpotifyShareCommands",
+            description: "スラッシュコマンド (/track、/album、/artist) を使用して、現在の Spotify トラック、アルバム、またはアーティストを共有します。",
             command: {
                 makeCommand: {
                     description: "現在の Spotify {{type}} をチャットで共有します",
                     track: "Spotify で曲を聴いていません。",
-                    find: "この曲は Spotify で見つかりませんでした。"
+                    find: "Spotify でトラックが見つかりませんでした。"
                 }
             }
         },
         startupTimings: {
-            name: "起動タイミング",
-            description: "設定メニューに開始タイミングを追加",
+            name: "StartupTimings",
+            description: "設定メニューに起動タイミングを追加",
             modal: {
-                title: "開始タイミング",
-                ended: "視聴終了時間:",
-                start: "始まり",
-                interval: "12月",
+                title: "起動タイミング",
+                ended: "トレースは次の時点で終了しました:",
+                start: "始める",
+                interval: "間隔",
                 delta: "デルタ",
-                event: "オーレイ",
-                serverTrace: "サーバー監視",
+                event: "イベント",
+                serverTrace: "サーバートレース",
                 loading: "読み込み中..."
             }
         },
         statusNotifications: {
-            name: "ステータス通知",
+            name: "StatusNotifications",
             description: "ステータス変更の通知を追加します",
             loading: "読み込み中...",
             option: {
@@ -9711,8 +9711,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 usersList: {
                     label: "ユーザーリスト",
-                    description: "ステータスの変化が発生したときにユーザーに通知を受ける",
-                    empty: "監視されているユーザーはいません。 ユーザーを追加するには、ユーザーを右クリックし、[ステータス通知] オプションを使用します。"
+                    description: "ステータス変更を通知するユーザーのリスト",
+                    empty: "ユーザーは追跡されていません。ユーザーを右クリックし、「ステータス通知」を選択して追加します。"
                 }
             },
             context: {
@@ -9727,7 +9727,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             notification: {
                 unknownUser: "ユーザー",
-                title: "ステータス通知",
+                title: "ステータス通知"
             },
             status: {
                 online: "オンライン",
@@ -9737,41 +9737,41 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
         },
         statusPresets: {
-            name: "ステータスプリセット",
-            description: "ステータスを保存して後で再調整できます",
+            name: "StatusPresets",
+            description: "ステータスを記憶し、後で設定できます",
             button: {
-                remember: "ステータスを記憶",
+                remember: "ステータスを記憶"
             },
             context: {
                 edit: "カスタムプリセットの編集",
-                set: "例外を設定する"
+                set: "カスタムステータスの設定"
             },
             notification: {
-                successfully: "ステータスが正常に保存されました"
+                successfully: "正常に保存されたステータス"
             }
         },
         steamStatusSync: {
-            name: "Steamステータス同期",
-            description: "Steam とステータスを同期しましょう! (オンライン、外出先、非表示、またはオフライン。)",
+            name: "SteamStatusSync",
+            description: "ステータスを Steam に同期しましょう! (オンライン、外出中、非表示、またはオフライン。)",
             option: {
                 onlineStatus: {
                     label: "オンラインステータス",
-                    description: "Discordオンライン中のSteamステータス"
+                    description: "オンライン時の Steam ステータス"
                 },
                 idleStatus: {
                     label: "アイドルステータス",
-                    description: "Discord がアイドル状態のときの Steam ステータス"
+                    description: "アイドル時の蒸気ステータス"
                 },
                 dndStatus: {
                     label: "ステータスを邪魔しないでください",
-                    description: "Discord のサイレント中の Steam ステータス"
+                    description: "おやすみモード時の Steam ステータス"
                 },
                 invisibleStatus: {
                     label: "目に見えないステータス",
-                    description: "Discord 非表示時の Steam ステータス"
+                    description: "非表示時の蒸気ステータス"
                 },
                 goInvisibleIfActivityIsHidden: {
-                    label: "イベントが非公開の場合は非表示になります",
+                    label: "アクティビティが非表示の場合は非表示にする",
                     description: "Discord アクティビティが非表示の場合に Steam ステータスを非表示に設定する"
                 }
             },
@@ -9779,21 +9779,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                 online: "オンライン",
                 away: "離れて",
                 invisible: "見えない",
-                offline: "オフライン (Steam チャットから切断)",
+                offline: "オフライン (Steam チャットを切断)",
                 disabled: "無効"
             }
         },
         stickerBlocker: {
-            name: "ステッカーブロッカー",
-            description: "ステッカーを表示させないようにすることができます。",
+            name: "StickerBlocker",
+            description: "ステッカーの表示をブロックできます。",
             option: {
                 showGif: {
                     label: "GIFを表示",
-                    description: "かっこいい猫のGIFを表示するかどうか。"
+                    description: "おしゃれな猫のGIFを表示するかどうか。"
                 },
                 showMessage: {
                     label: "メッセージを表示",
-                    description: "どのIDがブロックされているかを示すメッセージを表示するかどうか"
+                    description: "どのIDがブロックされたかを詳細に示すメッセージを表示するかどうか"
                 },
                 showButton: {
                     label: "ボタンを表示",
@@ -9806,7 +9806,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             modal: {
                 blocked: "ブロックされたステッカー。 ID: {{id}} 名前: {{name}}",
-                unblock: "{{name}}のブロックを解除する"
+                unblock: "{{name}} のブロックを解除する"
             },
             context: {
                 blockSticker: "ブロックステッカー",
@@ -9814,16 +9814,16 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         stickerPaste: {
-            name: "ステッカーペースト",
-            description: "ステッカー チューザーでステッカーを選択すると、すぐに送信されるのではなく、チャット ボックスに追加されます。"
+            name: "StickerPaste",
+            description: "ステッカーピッカーでステッカーを選択すると、すぐに送信するのではなく、チャットボックスに挿入されます。"
         },
         streamerModeOnStream: {
-            name: "ストリーマーモードオンストリーム",
-            description: "Discordでブロードキャストを開始するとストリーマーモードが自動的に有効になります"
+            name: "StreamerModeOnStream",
+            description: "Discordでストリーミングを開始するとストリーマーモードが自動的に有効になります"
         },
         streamingCodecDisabler: {
-            name: "ストリーミングコーデック無効化",
-            description: "必要なストリーミング コーデックを無効にします",
+            name: "StreamingCodecDisabler",
+            description: "選択したストリーミングのコーデックを無効にする",
             option: {
                 disableAv1Codec: {
                     label: "AV1 コーデックを無効にする",
@@ -9831,7 +9831,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 disableH265Codec: {
                     label: "H265 コーデックを無効にする",
-                    description: "Discord がストリーミングに H265 の使用を検討しないようにします。"
+                    description: "Discord がストリーミングに H265 を使用することを検討しないようにします。"
                 },
                 disableH264Codec: {
                     label: "H264 コーデックを無効にする",
@@ -9840,38 +9840,38 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         superReactionTweaks: {
-            name: "スーパーリアクションの調整",
-            description: "同時に再生されるスーパー リアクションの制限をカスタマイズし、デフォルトでスーパー リアクションを使用します",
+            name: "SuperReactionTweaks",
+            description: "一度に再生するスーパー リアクションの制限をカスタマイズし、デフォルトでスーパー リアクションを実行します",
             option: {
                 superReactByDefault: {
-                    label: "デフォルトでスーパーリアクティブ",
-                    description: "リアクションピッカーはデフォルトでスーパーリアクションを使用します"
+                    label: "デフォルトでスーパーリアクト",
+                    description: "リアクションピッカーはデフォルトでスーパーリアクションになります"
                 },
                 unlimitedSuperReactionPlaying: {
-                    label: "無制限のスーパーリアクションプレイ",
-                    description: "スーパーリアクションの同時再生制限を解除"
+                    label: "無制限のスーパーリアクションをプレイ",
+                    description: "スーパーリアクションの同時プレイ制限を解除"
                 },
                 superReactionPlayingLimit: {
-                    label: "スーパーリアクション再生制限",
-                    description: "同時に再生できるスーパーリアクションの最大数。 0 はスーパーリアクションの再生を無効にします"
+                    label: "スーパーリアクションのプレイ制限",
+                    description: "一度に最大のスーパーリアクションをプレイできます。スーパー リアクションの再生を無効にするには 0 に設定します。"
                 }
             }
         },
         textReplace: {
-            name: "テキスト置換",
-            description: "メッセージ内のテキストを変更します。 既製のルールは、Plexcord サーバーの #textreplace-rules チャネルで見つけることができます。",
+            name: "TextReplace",
+            description: "メッセージ内のテキストを置き換えます。事前に作成されたルールは、Plexcord サーバーの #textreplace-rules チャネルで見つけることができます。",
             option: {
                 replace: {
-                    label: "変化",
-                    string: "プレーンテキストの使用",
+                    label: "交換する",
+                    string: "文字列の使用",
                     regex: "正規表現の使用",
-                    myMessages: "自分のメッセージに適用します (全員に表示されます)",
+                    myMessages: "メッセージに適用します (全員に表示されます)",
                     othersMessages: "他の人のメッセージに適用します (自分だけに表示されます)",
                     allMessages: "すべてのメッセージに適用"
                 },
                 stringRules: {
-                    label: "プレーンテキストのルール",
-                    description: "平文マッチングを使用したテキスト置換ルール。"
+                    label: "文字列のルール",
+                    description: "文字列マッチングを使用してテキストを置換するためのルール。"
                 },
                 regexRules: {
                     label: "正規表現ルール",
@@ -9879,24 +9879,24 @@ const translations: MatchStructure<typeof enTranslations> = {
                 }
             },
             modal: {
-                title: "ルールをテストする",
-                find: "ブル",
-                replace: "変化",
-                includes: "含まれている場合のみ",
-                type: "メッセージを書く",
+                title: "テストルール",
+                find: "探す",
+                replace: "交換する",
+                includes: "が含まれる場合のみ",
+                type: "メッセージを入力してください",
                 applied: "ルールが適用されたメッセージ"
             }
         },
         themeAttributes: {
-            name: "テーマの属性",
-            description: "テーマ設定の目的でさまざまな要素にデータ属性を追加します"
+            name: "ThemeAttributes",
+            description: "テーマを設定するためにさまざまな要素にデータ属性を追加します"
         },
         timezones: {
-            name: "タイムゾーン",
-            description: "プロフィールとメッセージスレッドにユーザーの現地時間を表示します",
+            name: "Timezones",
+            description: "プロフィールとメッセージヘッダーにユーザーの現地時間を表示します",
             button: {
-                wantToSave: "タイムゾーンをデータベースに保存しますか?ここをクリックして設定してください。",
-                yourLocalTimezone: "(あなたの現地のタイムゾーン)"
+                wantToSave: "タイムゾーンをデータベースに保存したいですか?ここをクリックして設定してください。",
+                yourLocalTimezone: "(あなたのローカルタイムゾーン)"
             },
             context: {
                 set: "ローカルタイムゾーンの設定"
@@ -9905,11 +9905,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 refresh: {
                     successfully: "タイムゾーンが正常に更新されました。",
                     failed: "タイムゾーンを更新できませんでした。",
-                    failedTo: "タイムゾーンを更新できませんでした。"
+                    failedTo: "タイムゾーンの更新に失敗しました。"
                 },
                 update: {
                     successfully: "タイムゾーンが正常に更新されました。",
-                    failed: "タイムゾーンを設定できませんでした。"
+                    failed: "タイムゾーンの設定に失敗しました。"
                 },
                 delete: {
                     successfully: "タイムゾーンが正常に削除されました。",
@@ -9926,20 +9926,20 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             option: {
                 showOwnTimezone: {
-                    label: "タイムゾーンを表示する",
-                    description: "プロフィールとメッセージスレッドにタイムゾーンを表示します"
+                    label: "自分のタイムゾーンを表示",
+                    description: "プロフィールとメッセージヘッダーに独自のタイムゾーンを表示する"
                 },
                 twentyFourHourTime: {
-                    label: "24 時間形式",
+                    label: "24時間制",
                     description: "24時間形式での上映時間"
                 },
                 showTimezoneInfo: {
-                    label: "タイムゾーン情報を表示する",
-                    description: "時計に加えてタイムゾーン情報を表示する"
+                    label: "タイムゾーン情報を表示",
+                    description: "時間の横にタイムゾーン情報を表示"
                 },
                 showMessageHeaderTime: {
-                    label: "メッセージタイトルの表示時間",
-                    description: "メッセージスレッドの表示時間"
+                    label: "メッセージヘッダー時間を表示",
+                    description: "メッセージヘッダーに時間を表示する"
                 },
                 showProfileTime: {
                     label: "プロファイル時間を表示する",
@@ -9947,11 +9947,11 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 useDatabase: {
                     label: "データベースのタイムゾーンを使用する",
-                    description: "データベースを使用してユーザーのタイムゾーンを取得する"
+                    description: "ユーザーのタイムゾーンを取得するためにデータベースを有効にする"
                 },
                 preferDatabaseOverLocal: {
                     label: "ローカルよりデータベースを優先する",
-                    description: "タイムゾーンを超えてローカル ストレージよりデータベースを優先する"
+                    description: "タイムゾーンについてはローカル ストレージよりもデータベースを優先する"
                 },
                 databaseUrl: {
                     label: "データベースのURL",
@@ -9968,8 +9968,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     failed: "データベースのタイムゾーンをリセットできませんでした"
                 },
                 askedTimezone: {
-                    label: "タイムゾーンを尋ねる",
-                    description: "ユーザーにタイムゾーンの入力を求めるプロンプトが表示されるかどうかを示します"
+                    label: "質問されたタイムゾーン",
+                    description: "ユーザーがタイムゾーンを設定するように求められたかどうか"
                 }
             },
             modal: {
@@ -9981,62 +9981,62 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         toastNotifications: {
-            name: "トースト通知",
-            description: "ダイレクトメッセージを受信したときにトースト通知を表示します。",
+            name: "ToastNotifications",
+            description: "ダイレクトメッセージを受信するたびにトースト通知を表示します。",
             notification: {
-                call: "あなたと一緒に検索を始めました！",
+                call: "あなたと通話を開始しました!",
                 recipient: {
                     add: "{{target}} は {{actor}} によってグループに追加されました。",
                     remove: "{{target}} は {{actor}} によってグループから削除されました。",
-                    left: "彼はグループを去りました。"
+                    left: "グループを離れました。"
                 },
                 channel: {
                     change: {
-                        name: "チャンネル名が {{name}} に変更されました。",
-                        icon: "チャンネルアイコンが変更されました。"
+                        name: "Changed the channel name to {{name}}.",
+                        icon: "チャンネルアイコンを変更しました。"
                     },
                     pinned: "メッセージを固定しました。"
                 },
                 sent: {
-                    embed: "彼は埋め込みを送信しました。",
-                    sticker: "彼はステッカーを送りました。",
-                    attachment: "ファイル："
+                    embed: "埋め込みを送信しました。",
+                    sticker: "ステッカーを送りました。",
+                    attachment: "添付ファイル:"
                 },
-                redacted: "メッセージの内容は非表示になりました。",
+                redacted: "メッセージの内容は編集されました。",
                 friend: {
                     accept: "{{user}} があなたの友達になりました",
-                    acceptBody: "これで、彼にダイレクト メッセージを送信できるようになりました。",
+                    acceptBody: "直接メッセージを送信できるようになりました。",
                     request: "{{user}} さんがあなたに友達リクエストを送信しました。",
-                    requestBody: "[友達] タブからこれを承認または拒否できます。"
+                    requestBody: "[友達]タブで承認または拒否できます。"
                 },
                 example: {
-                    title: "サンプル通知",
-                    body: "これは通知文のサンプルです。"
+                    title: "通知例",
+                    body: "これは通知本文の例です。"
                 }
             },
             modal: {
                 dismiss: "通知を閉じる",
-                attachments: "{{attachments}} ファイルが送信されました。"
+                attachments: "{{attachments}} 添付ファイル{{s}} {{were}} が送信されました。"
             },
             option: {
                 position: {
-                    label: "女性",
-                    description: "トースト通知の場所",
+                    label: "位置",
+                    description: "トースト通知の位置",
                     topRight: "右上",
                     topLeft: "左上",
                     bottomRight: "右下",
-                    bottomLeft: "ソル・アルト"
+                    bottomLeft: "左下"
                 },
                 timeout: {
-                    label: "閉店時間",
-                    description: "通知を表示する秒数"
+                    label: "タイムアウト",
+                    description: "通知が表示される秒数"
                 },
                 opacity: {
                     label: "不透明度",
                     description: "トースト通知の不透明度"
                 },
                 determineServerNotifications: {
-                    label: "サーバー通知を設定する",
+                    label: "サーバー通知の決定",
                     description: "サーバー通知設定に基づいて通知を表示するかどうかを決定します"
                 },
                 directMessages: {
@@ -10049,80 +10049,80 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 friendServerNotifications: {
                     label: "フレンドとサーバーの通知",
-                    description: "友達がパブリックサーバーにメッセージを送信したときに通知を表示する"
+                    description: "友達があなたと共有しているサーバーにメッセージを送信したときに通知を表示する"
                 },
                 friendActivity: {
-                    label: "フレンドイベント",
-                    description: "友達の追加または友達リクエストの受信に関する通知を表示する"
+                    label: "友達のアクティビティ",
+                    description: "誰かの追加または友達リクエストの受信に関する通知を表示する"
                 },
                 notifyFor: {
-                    label: "通知を受信するチャネル",
-                    description: "通知を受信するチャネル ID を入力します (カンマで区切ります)。"
+                    label: "通知対象",
+                    description: "通知を受信するチャネル ID のリストを作成します (カンマで区切ります)。"
                 },
                 ignoreUsers: {
-                    label: "無視するユーザー",
-                    description: "通知を無視するユーザー ID を入力します (カンマで区切ります)。"
+                    label: "ユーザーを無視する",
+                    description: "すべての通知を無視するユーザー ID のリストを作成します (カンマで区切ります)。"
                 },
                 exampleButton: {
-                    label: "サンプルボタン",
+                    label: "ボタンの例",
                     description: "トースト通知の例を示します。",
-                    show: "サンプル通知を表示"
+                    show: "通知の例を表示"
                 }
             }
         },
         toggleVideoBind: {
-            name: "ビデオバインドの切り替え",
-            description: "ウェブカメラをオンまたはオフにするカスタマイズ可能なホットキーを追加します。",
+            name: "ToggleVideoBind",
+            description: "Webカメラを切り替えるためのカスタマイズ可能なバインドを追加します。",
             option: {
                 keyBind: {
-                    label: "ホットキー",
-                    description: "押すとウェブカメラのオンとオフを切り替えるボタン。"
+                    label: "キーバインド",
+                    description: "押すとウェブカメラを切り替えるキー。"
                 },
                 reqCtrl: {
-                    label: "Ctrl ゲレクリ",
-                    description: "Ctrl キーを強制的に押します。"
+                    label: "Ctrl キーが必要",
+                    description: "コントロールを保持する必要があります。"
                 },
                 reqShift: {
-                    label: "シフト必須",
-                    description: "Shift キーを強制的に押します。"
+                    label: "シフトが必要",
+                    description: "シフトを保持する必要があります。"
                 },
                 reqAlt: {
-                    label: "サブ必須",
-                    description: "Alt キーを強制的に押します。"
+                    label: "Alt が必要",
+                    description: "Alt キーを押し続ける必要があります。"
                 }
             }
         },
         translate: {
-            name: "翻訳する",
+            name: "Translate",
             description: "Google 翻訳または DeepL でメッセージを翻訳する",
             tooltip: {
-                label: "変換する"
+                label: "翻訳する"
             },
             context: {
-                translate: "変換する",
-                open: "翻訳ウィンドウを開く",
+                translate: "翻訳する",
+                open: "翻訳モーダルを開く",
                 auto: "自動翻訳が有効になっています"
             },
             option: {
                 receivedInput: {
                     label: "受信した入力",
-                    description: "受信したメッセージが翻訳される言語"
+                    description: "受信したメッセージの翻訳元の言語"
                 },
                 receivedOutput: {
                     label: "受信出力",
-                    description: "受信したメッセージは何語に翻訳されますか?"
+                    description: "受信したメッセージを翻訳する言語"
                 },
                 sentInput: {
-                    label: "提出された入力",
-                    description: "あなた自身のメッセージが翻訳される言語"
+                    label: "送信された入力",
+                    description: "自分のメッセージを翻訳する言語"
                 },
                 sentOutput: {
                     label: "送信された出力",
-                    description: "自分のメッセージがどの言語に翻訳されるか"
+                    description: "自分のメッセージを翻訳する言語"
                 },
                 service: {
                     label: "翻訳サービス",
-                    description: "DeepL Pro には有料の API キーが必要です",
+                    description: "DeepL には DeepL Pro からの有料 API キーが必要です",
                     descriptionWeb: "翻訳サービス (Web ではサポートされていません!)",
                     google: "Google翻訳",
                     deepl: "DeepL 無料",
@@ -10131,45 +10131,45 @@ const translations: MatchStructure<typeof enTranslations> = {
                 deeplApiKey: {
                     label: "DeepL APIキー",
                     description: "DeepL APIキー",
-                    placeholder: "https://deepl.com/your-account で API キーを取得します。"
+                    placeholder: "https://deepl.com/your-account から API キーを取得します。"
                 },
                 autoTranslate: {
                     label: "自動翻訳",
-                    description: "メッセージを送信する前に自動的に翻訳します。 翻訳ボタンをシフトまたは右クリックして、この機能をオンまたはオフにすることもできます。"
+                    description: "メッセージを送信する前に自動的に翻訳します。翻訳ボタンをシフト/右クリックしてこれを切り替えることもできます。"
                 },
                 showAutoTranslateTooltip: {
-                    label: "自動翻訳の説明を表示",
-                    description: "メッセージが自動翻訳されるときにチャットバーボタンに説明を表示します"
+                    label: "自動翻訳ツールチップを表示",
+                    description: "メッセージが自動的に翻訳されるたびに、ChatBar ボタンにツールチップを表示します"
                 }
             },
             modal: {
-                title: "翻訳",
+                title: "翻訳する",
                 select: "言語を選択してください",
                 auto: "自動翻訳",
-                dismiss: "四半期",
-                translated: "{{から}} から翻訳",
+                dismiss: "却下する",
+                translated: "{{from}} から翻訳",
                 failed: {
-                    to: "{{text}} の翻訳に失敗しました",
-                    connect: "DeepL API 接続に失敗しました:"
+                    to: "{{text}} を翻訳できませんでした",
+                    connect: "DeepL API への接続に失敗しました:"
                 },
-                wrong: "何か問題が発生しました。 問題が解決しない場合は、コンソールを確認するか、サポート サーバーに支援を求めてください。",
+                wrong: "何か問題が発生しました。この問題が解決しない場合は、コンソールを確認するか、サポート サーバーに助けを求めてください。",
                 deepl: {
-                    api: "DeepL API クォータを超過しました。 Google翻訳に切り替えます。",
-                    apiKey: "DeepL APIキーが設定されていません。 Google に戻ります。",
-                    auth: "DeepL API キーまたはバージョンが無効です"
+                    api: "DeepL API クォータを超過しました。 Google 翻訳に戻ります。",
+                    apiKey: "DeepL APIキーが設定されていません。 Google にリセットする",
+                    auth: "無効な DeepL API キーまたはバージョン"
                 },
                 autoTranslateEnabled: {
                     title: "Plexcord 自動翻訳が有効になっています",
-                    body: "自動翻訳を有効にしました。 送信するすべてのメッセージは、送信前に自動的に翻訳されます。",
+                    body: "自動翻訳を有効にしました。すべてのメッセージは送信前に自動的に翻訳されます。",
                     confirm: "自動翻訳を無効にする",
-                    cancel: "わかりました",
-                    secondaryConfirm: "二度と見せないでください"
+                    cancel: "わかった",
+                    secondaryConfirm: "二度と表示しないでください"
                 }
             }
         },
         typingIndicator: {
-            name: "タイピングインジケーター",
-            description: "誰かがチャンネルに入力しているときにインジケーターを追加します。",
+            name: "TypingIndicator",
+            description: "誰かがチャンネルに入力しているかどうかを示すインジケーターを追加します。",
             option: {
                 includeCurrentChannel: {
                     label: "現在のチャンネルを含める",
@@ -10188,71 +10188,71 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "ブロックされたユーザーに入力インジケーターを表示するかどうか。"
                 },
                 indicatorMode: {
-                    label: "表示モード",
-                    description: "インジケーターを表示するにはどうすればよいですか?",
+                    label: "インジケーターモード",
+                    description: "インジケーターはどのように表示されるべきですか?",
                     both: "アバターとアニメーションドット",
-                    dots: "アニメーション化されたドット",
+                    dots: "アニメーションドット",
                     avatars: "アバター"
                 }
             }
         },
         typingTweaks: {
-            name: "タイピングの調整",
-            description: "入力インジケーターにアバターと役割の色を表示します",
+            name: "TypingTweaks",
+            description: "入力インジケーターにアバターと役割の色を表示する",
             option: {
                 showAvatars: {
                     label: "複数のユーザーを表示",
-                    description: "入力インジケーターにアバターを表示"
+                    description: "入力インジケーターにアバターを表示する"
                 },
                 showRoleColors: {
                     label: "役割の色を表示",
                     description: "入力インジケーターに役割の色を表示する"
                 },
                 alternativeFormatting: {
-                    label: "代替フォーマット",
-                    description: "複数の人が入力しているときに、より有用なメッセージを表示する"
+                    label: "代替書式設定",
+                    description: "複数のユーザーが入力しているときに、より有用なメッセージを表示する"
                 },
                 amITyping: {
-                    label: "私は書いていますか?",
-                    description: "あなたが書いたものを他の人が見たかどうかを示します"
+                    label: "タイピングしていますか",
+                    description: "あなたが入力しているところを他の人に見られるかどうかを示します"
                 }
             },
             others: {
-                areTyping: "さらに {{count}} 人が書いています..."
+                areTyping: "{{count}} 他の人が入力中です..."
             }
         },
         unindent: {
-            name: "インデントを解除する",
-            description: "コードブロックの先頭のインデントを削除します"
+            name: "Unindent",
+            description: "コードブロックから先頭のインデントを削除します"
         },
         unitConverter: {
-            name: "単位コンバータ",
+            name: "UnitConverter",
             description: "メートル単位をインペリアル単位に、またはその逆に変換します",
             tooltip: "単位の変換",
             option: {
                 myUnits: {
                     label: "私のユニット",
-                    description: "使用し、変換したい単位。 デフォルト: インペリアル",
-                    imperial: "帝国",
+                    description: "あなたが使用し、変換したい単位。デフォルトはインペリアルです",
+                    imperial: "インペリアル",
                     metric: "メトリック"
                 }
             },
             button: {
-                dismiss: "四半期"
+                dismiss: "却下する"
             }
         },
         unlimitedAccounts: {
-            name: "無制限のアカウント",
+            name: "UnlimitedAccounts",
             description: "追加できるアカウントの数が増えます。",
             option: {
                 maxAccounts: {
                     label: "最大アカウント数",
-                    description: "追加できるアカウントの数。無制限の場合は 0 を入力します"
+                    description: "追加できるアカウントの数、または制限なしの場合は 0"
                 }
             }
         },
         unlockedAvatarZoom: {
-            name: "ロック解除アバターズーム",
+            name: "UnlockedAvatarZoom",
             description: "アバターを変更するときに、画像トリミングツールでさらにズームインできるようになります",
             option: {
                 zoomMultiplier: {
@@ -10262,204 +10262,204 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         unsuppressEmbeds: {
-            name: "埋め込みの抑制を解除する",
-            description: "メッセージ内の埋め込みコンテンツの抑制を解除できます。",
+            name: "UnsuppressEmbeds",
+            description: "メッセージへの埋め込みの抑制を解除できます",
             context: {
-                unsuppress: "埋め込み抑制を解除する",
-                suppress: "印刷の埋め込み"
+                unsuppress: "埋め込みの抑制を解除",
+                suppress: "埋め込みを抑制"
             }
         },
         uselessInfo: {
-            name: "役に立たない情報",
-            description: "Discord内で役に立たない情報をランダムに表示します。 ショートカットや間隔設定が可能です。",
+            name: "UselessInfo",
+            description: "Shows random useless information within Discord; shortcuts and spacing are adjustable.",
             recording: "録音中...",
-            record: "保存",
+            record: "記録",
             option: {
                 delay: {
                     label: "通知間隔",
-                    description: "通知表示間隔（分）"
+                    description: "通知の表示間隔（分）"
                 },
                 historyHotkey: {
                     label: "履歴パネルのショートカット",
-                    description: "以前に表示された情報の履歴を開くホットキー"
+                    description: "以前に表示されたファクトの履歴を表示するホットキー"
                 },
                 randomFactHotkey: {
-                    label: "ランダム情報のショートカット",
-                    description: "ランダムな情報パネルを開くホットキー"
+                    label: "ランダムファクトのショートカット",
+                    description: "ランダムファクトパネルを開くホットキー"
                 },
                 sameFact: {
-                    label: "同じ情報の繰り返しを避ける",
-                    description: "すべての情報を表示せずに、同じ情報が複数回表示されることを防ぎます。"
+                    label: "同じ項目を表示しないようにする",
+                    description: "すべての事実が表示されるまで、同じ事実を複数回表示しないようにします。"
                 },
                 lastNFacts: {
-                    label: "繰り返さない最新情報",
-                    description: "再表示すべきではない最後の情報の数 (0 = 常に)"
+                    label: "どれだけ最近のことを避けるべきか",
+                    description: "繰り返しを避けるために最近表示されたファクトの数 (0 = 常時)"
                 }
             },
             modal: {
                 title: "役に立たない情報",
                 history: {
-                    none: "まだ情報はありません。 ショートカットを使用するか、お待ちください。",
+                    none: "まだ事実はありません。ショートカットを使用するか、お待ちください。",
                     source: "ソース"
                 },
                 showRandom: "ランダムに表示",
-                close: "四半期"
+                close: "近い"
             },
             notification: {
                 title: "知っていましたか？"
             }
         },
         userMessagesPronouns: {
-            name: "ユーザーメッセージ代名詞",
+            name: "UserMessagesPronouns",
             description: "メッセージヘッダーにユーザー代名詞を表示します",
             option: {
                 pronounsFormat: {
                     label: "代名詞の形式",
-                    description: "チャットでの代名詞の表示方法",
+                    description: "チャットに表示される代名詞の形式",
                     lowercase: "小文字",
-                    capitalized: "最初の大文字"
+                    capitalized: "大文字で表記"
                 },
                 showSelf: {
-                    label: "自分自身を見せてください",
-                    description: "独自の代名詞の表示のオンとオフを切り替えます"
+                    label: "自己を示す",
+                    description: "自分自身の代名詞の表示を有効または無効にする"
                 }
             }
         },
         userVoiceShow: {
-            name: "ユーザーボイスショー",
-            description: "ユーザーが音声チャネルに接続しているときにインジケーターを表示します",
+            name: "UserVoiceShow",
+            description: "ユーザーが音声チャネルにいるときにインジケーターを表示します",
             option: {
                 showInUserProfileModal: {
-                    label: "ユーザープロフィールに表示",
-                    description: "ユーザープロフィールの名前の横に音声チャンネルインジケーターを表示する"
+                    label: "ユーザープロファイルモーダルに表示",
+                    description: "ユーザーのプロフィールの名前の横にボイス チャンネル インジケーターを表示します"
                 },
                 showInMemberList: {
                     label: "メンバーリストに表示",
-                    description: "メンバーとDMリストにボイスチャンネルインジケーターを表示"
+                    description: "メンバーとDMのリストにユーザーのボイスチャンネルインジケーターを表示します"
                 },
                 showInMessages: {
                     label: "メッセージに表示",
-                    description: "メッセージに音声チャンネルインジケーターを表示する"
+                    description: "メッセージにユーザーのボイス チャネル インジケーターを表示する"
                 }
             },
             modal: {
                 inVoiceChat: "ボイスチャット中"
             },
             notification: {
-                cannotJoin: "ユーザーの音声チャンネルに参加できません。"
+                cannotJoin: "ユーザーのボイスチャンネルに参加できません。"
             }
         },
         uSRBG: {
             name: "USRBG",
-            description: "USRBG からユーザー バナーを表示するため、Nitro なしで誰でもバナーを使用できます",
+            description: "USRBG からユーザー バナーを表示し、Nitro なしで誰でもバナーを取得できるようにします",
             option: {
                 nitroFirst: {
                     label: "ニトロファースト",
-                    description: "Nitro バナーと USRBG バナーの両方が存在する場合、どちらを使用するかを決定します",
+                    description: "Nitro バナーと USRBG バナーの両方が存在する場合に使用するバナー",
                     nitro: "ニトロバナー",
                     usrbg: "USRBG バナー"
                 },
                 voiceBackground: {
-                    label: "オーディオの背景",
+                    label: "音声の背景",
                     description: "USRBG バナーをボイスチャットの背景として使用する"
                 }
             },
             button: "独自の USRBG バナーを入手"
         },
         validReply: {
-            name: "有効な返信",
-            description: "返信にカーソルを合わせると「メッセージの読み込みに失敗しました」エラーが修正されました"
+            name: "ValidReply",
+            description: "返信にカーソルを合わせたときの「メッセージを読み込めませんでした」を修正"
         },
         validUser: {
-            name: "有効なユーザー",
-            description: "不明なユーザーに対して「@unknown-user」として表示されるメンションを修正します (修正するにはメンションの上にカーソルを置きます)",
+            name: "ValidUser",
+            description: "「@unknown-user」として表示される不明なユーザーのメンションを修正します (メンションにカーソルを合わせると修正されます)",
             badges: {
                 discordBugHunter: "Discord バグハンター",
-                moderatorProgramsAlumni: "モデレータープログラム卒業生",
+                moderatorProgramsAlumni: "モデレータープログラムの卒業生",
                 discordStaff: "ディスコードスタッフ",
                 hypeSquadEvents: "ハイプスクワッドイベント",
-                bravery: "HypeSquad チェザレ",
-                brilliance: "HypeSquad の明るさ",
-                balance: "HypeSquad デンジ",
-                partneredServerOwner: "共同サーバー所有者",
+                bravery: "HypeSquad の勇気",
+                brilliance: "HypeSquad の輝き",
+                balance: "HypeSquad バランス",
+                partneredServerOwner: "パートナーサーバーの所有者",
                 nitro: "ディスコードニトロ",
                 earlySupporter: "アーリーサポーター",
                 earlyVerifiedBotDeveloper: "初期の認証済みボット開発者"
             }
         },
         voiceChatDoubleClick: {
-            name: "ボイスチャットダブルクリック",
-            description: "シングルクリックではなくダブルクリックしてボイスチャットに参加できるようになります"
+            name: "VoiceChatDoubleClick",
+            description: "シングルクリックではなくダブルクリックでボイスチャットに参加"
         },
         vcNarrator: {
-            name: "VCナレーター",
-            description: "ユーザーが音声チャンネルに参加、脱退、または移動するとナレーターによってアナウンスされます",
+            name: "VCNarrator",
+            description: "ユーザーが音声チャンネルに参加、脱退、または移動したときをナレーター経由で通知します",
             option: {
                 voice: {
-                    label: "セス"
+                    label: "声"
                 },
                 volume: {
-                    label: "騒音レベル",
-                    description: "ナレーターの声レベル"
+                    label: "音量",
+                    description: "ナレーターの音量"
                 },
                 rate: {
-                    label: "スピード",
-                    description: "ナレーターの話す速度"
+                    label: "レート",
+                    description: "ナレーターの速度"
                 },
                 sayOwnName: {
-                    label: "あなたの名前を言ってください",
-                    description: "ナレーターがあなたの名前を言うかどうか"
+                    label: "自分の名前を言う",
+                    description: "自分の名前を言う"
                 },
                 latinOnly: {
                     label: "ラテン語のみ",
-                    description: "読む前に名前に含まれる非ラテン文字を消去してください"
+                    description: "名前を言う前に名前から非ラテン文字を削除する"
                 },
                 joinMessage: {
-                    label: "参加メッセージ",
-                    description: "参加メッセージ"
+                    label: "メッセージに参加",
+                    description: "メッセージに参加"
                 },
                 leaveMessage: {
-                    label: "別れのメッセージ",
+                    label: "メッセージを残す",
                     description: "メッセージを残す"
                 },
                 moveMessage: {
-                    label: "感動的なメッセージ",
-                    description: "感動的なメッセージ"
+                    label: "メッセージの移動",
+                    description: "メッセージの移動"
                 },
                 muteMessage: {
                     label: "メッセージをミュートする",
-                    description: "メッセージをミュートします (今のところ自分だけ)"
+                    description: "メッセージをミュート（今のところ自分のみ）"
                 },
                 unmuteMessage: {
                     label: "メッセージのミュートを解除する",
-                    description: "メッセージのミュートを解除します (今のところ自分だけ)"
+                    description: "メッセージのミュートを解除 (今のところ自分のみ)"
                 },
                 deafenMessage: {
-                    label: "耳をつんざくようなメッセージ",
-                    description: "耳をつんざくようなメッセージ (今は自分だけ)"
+                    label: "聴覚障害者のメッセージ",
+                    description: "Deafen Message (今のところ自分のみ)"
                 },
                 undeafenMessage: {
-                    label: "耳をつんざくようなメッセージ",
-                    description: "耳をつんざくようなメッセージ (今は自分だけ)"
+                    label: "聴覚障害者のメッセージ",
+                    description: "Undeafen Message (今のところ自分のみ)"
                 }
             },
             modal: {
                 title: "サンプルサウンドを再生する",
-                voiceTitle: "セス",
-                voice: "サウンドを選択してください",
-                languageTitle: "ディル",
+                voiceTitle: "声",
+                voice: "音声を選択してください",
+                languageTitle: "言語",
                 language: "言語を選択してください",
-                noVoice: "ナレーターの音声が見つかりません。",
-                linuxNote: "speech-dispatcher または espeak をインストールし、--enable-speech-dispatcher パラメーターを指定して Discord を実行します",
-                someNarrator: "オペレーティング システムのナレーター設定から音声をインストールしてみてください",
-                dontHaveEnglish: "英語の音声をアップロードしていないため、ナレーターが奇妙に聞こえる可能性があります",
-                customiseMessages: "以下の音声メッセージをカスタマイズできます。 空白のままにすると、特定のメッセージを無効にすることができます",
-                placeholdersInfo: "カスタム プレースホルダー {{USER}}、{{DISPLAY_NAME}}、{{NICKNAME}}、および {{CHANNEL}} は、それぞれユーザー名 (自分の場合は空白)、表示名、サーバー上のニックネーム、およびチャンネル名に置き換えられます。"
+                noVoice: "ナレーターの音声が見つかりませんでした。",
+                linuxNote: "speech-dispatcher または espeak をインストールし、--enable-speech-dispatcher フラグを指定して Discord を実行します",
+                someNarrator: "オペレーティング システムのナレーター設定にいくつかインストールしてみてください。",
+                dontHaveEnglish: "英語の音声がインストールされていないため、ナレーターが奇妙に聞こえる可能性があります",
+                customiseMessages: "以下の音声メッセージをカスタマイズできます。特定のメッセージを何も設定しないことで無効にすることができます",
+                placeholdersInfo: "特別なプレースホルダー {{USER}}、{{DISPLAY_NAME}}、{{NICKNAME}}、{{CHANNEL}} は、それぞれユーザー名 (自分の場合は何もありません)、ユーザーの表示名、現在のサーバー上のユーザーのニックネーム、およびチャネル名に置き換えられます。"
             }
         },
         viewIcons: {
-            name: "ビューアイコン",
-            description: "ユーザープロフィール内のアバター画像とバナー画像をクリック可能にします。 ユーザー、サーバー、およびグループ チャネルのコンテキスト メニューにアバター/バナーの表示オプションを追加します。",
+            name: "ViewIcons",
+            description: "ユーザー プロファイルのアバターとバナーをクリックできるようにし、ユーザー、サーバー、およびグループ チャネルのコンテキスト メニューに [アバター/バナーの表示] エントリを追加します。",
             context: {
                 view: {
                     avatar: "アバターを見る",
@@ -10471,7 +10471,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 format: {
                     label: "形式",
-                    description: "動きのない画像に使用する画像形式を選択します。 アニメーション画像は常に .gif 形式を使用します"
+                    description: "アニメーション以外の画像に使用する画像形式を選択します。アニメーション画像には常に .gif が使用されます"
                 },
                 imgSize: {
                     label: "画像サイズ",
@@ -10480,29 +10480,29 @@ const translations: MatchStructure<typeof enTranslations> = {
             }
         },
         viewRaw: {
-            name: "生で見る",
-            description: "メッセージ、チャネル、サーバーの生のコンテンツ/データをコピーして表示する",
+            name: "ViewRaw",
+            description: "メッセージ、チャネル、ギルドの生のコンテンツ/データをコピーして表示します",
             context: {
-                copyLeft: "Raw データのコピー (左クリック) / Raw データの表示 (右クリック)",
-                copyRight: "Raw データのコピー (右クリック) / Raw データの表示 (左クリック)",
-                view: "生データを表示する"
+                copyLeft: "Raw をコピー (左クリック) / Raw を表示 (右クリック)",
+                copyRight: "Raw をコピー (右クリック) / Raw を表示 (左クリック)",
+                view: "生で見る"
             },
             option: {
                 popoverButton: {
-                    label: "ポップアップメニューボタン",
+                    label: "ポップオーバーボタン",
                     description: "メッセージの生のコンテンツ/データを表示するためのボタンをメッセージ ポップオーバーに表示します。"
                 },
                 clickMethod: {
                     label: "クリック方法",
-                    description: "メッセージの生のコンテンツ/データを表示するために使用するクリック方法を変更します。",
+                    description: "ボタンを変更して、メッセージの生のコンテンツ/データを表示します。",
                     left: "左クリックして生のコンテンツを表示します。",
                     right: "右クリックして生のコンテンツを表示します。"
                 }
             },
             modal: {
-                title: "ハム・ヴェリ",
+                title: "生で見る",
                 content: "コンテンツ",
-                data: "{{タイプ}} ベリ",
+                data: "{{type}} データ",
                 copied: "{{type}} データがクリップボードにコピーされました!",
                 copy: "{{type}} JSON をコピー",
                 copiedContent: "コンテンツがクリップボードにコピーされました!",
@@ -10511,14 +10511,14 @@ const translations: MatchStructure<typeof enTranslations> = {
             types: {
                 message: "メッセージ",
                 channel: "チャネル",
-                guild: "プレゼンター",
+                guild: "ギルド",
                 role: "役割",
                 user: "ユーザー"
             }
         },
         voiceButtons: {
-            name: "音声ボタン",
-            description: "音声通話パネルからユーザーをすばやく DM、ミュート、または聴覚障害者にします。",
+            name: "VoiceButtons",
+            description: "音声通話パネルから直接、ユーザーをすばやく DM、ミュート、または聴覚障害者にします。",
             option: {
                 showChatButton: {
                     label: "チャットボタンを表示",
@@ -10529,35 +10529,35 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "ミュートボタンを表示するかどうか"
                 },
                 showDeafenButton: {
-                    label: "聴覚障害者ボタンを表示",
-                    description: "聴覚障害者ボタンを表示するかどうか"
+                    label: "耳をつんざくボタンを表示",
+                    description: "耳をつんざくボタンを表示するかどうか"
                 },
                 muteSoundboard: {
-                    label: "サウンドボードウ・セサイズ・アル",
-                    description: "耳をつんざくボタンをクリックすると、ユーザーのサウンドボードがオンまたはオフになります。"
+                    label: "サウンドボードをミュートする",
+                    description: "「Deafen」ボタンをクリックすると、サウンドボードが切り替わります。"
                 },
                 disableVideo: {
                     label: "ビデオを無効にする",
-                    description: "耳をつんざくボタンをクリックすると、ユーザーのビデオがオンまたはオフになります。"
+                    description: "「Deafen」ボタンをクリックするとビデオが切り替わります。"
                 },
                 useServer: {
                     label: "サーバーを使用する",
-                    description: "許可がある場合は、ローカルの代わりにサーバーのミュート/聴覚障害を使用します。"
+                    description: "許可がある場合は、ローカルの代わりにサーバーのミュート/聴覚障害者を使用してください。"
                 },
                 serverSelf: {
-                    label: "サーバー上で自分自身をミュートする",
-                    description: "ミュート/聴覚障害者は、使用するとサーバー上で自分自身をミュートまたは聴覚障害者にします。"
+                    label: "サーバーセルフ",
+                    description: "聴覚障害者 / ミュート/聴覚障害者を使用する場合、サーバー上で自分自身をミュートします。"
                 },
                 showButtonsSelf: {
-                    label: "自分用にボタンを表示する",
-                    description: "自分のユーザーにボタンを表示するかどうか。 同じ機能があります。 DM パネルが開き、自分自身をミュート/耳を聞こえなくします。",
-                    display: "見せる",
+                    label: "自分自身にボタンを表示",
+                    description: "自分のユーザーのボタンを表示するかどうか。他のボタンと同じ機能ですが、ボタンをクリックすると DM パネルが開き、ミュート/耳が聞こえなくなります。",
+                    display: "画面",
                     hide: "隠れる",
-                    disable: "無効"
+                    disable: "無効にする"
                 },
                 whichNameToShow: {
-                    label: "どの名前を表示する必要がありますか?",
-                    description: "ツールチップにユーザー名、グローバル名、またはその両方を表示しますか?",
+                    label: "どの名前を表示するか",
+                    description: "ツールチップにニックネームまたはユーザー名を表示するかどうかを選択します。",
                     global: "グローバル名",
                     username: "ユーザー名",
                     both: "両方"
@@ -10565,102 +10565,102 @@ const translations: MatchStructure<typeof enTranslations> = {
                 buttonPosition: {
                     label: "ボタンの位置",
                     description: "ボタンを表示する場所を選択します。",
-                    left: "ソル",
+                    left: "左",
                     right: "右",
                 }
             },
             tooltip: {
                 navigate: "DMに移動",
-                open: "{{username}} で DM を開きます",
+                open: "{{username}} で DM を開く",
                 yourself: "あなた自身",
-                serverMute: "サーバーでミュート",
-                serverDeafen: "サーバーの聴覚障害者",
+                serverMute: "サーバーミュート",
+                serverDeafen: "サーバー聴覚障害者",
                 mute: "ミュート",
-                deafen: "耳が聞こえない",
+                deafen: "聴覚障害者",
                 unmute: "ミュートを解除する",
-                undeafen: "耳をつんざく状態から取り除く",
-                serverUnmute: "サーバーでミュートを解除する",
-                serverUndeafen: "サーバー上の耳障りな音を削除する"
+                undeafen: "聴覚障害者",
+                serverUnmute: "サーバーのミュート解除",
+                serverUndeafen: "サーバーアンデアフェン"
             }
         },
         voiceChannelLog: {
-            name: "ボイスチャネルログ",
-            description: "オーディオチャンネルに誰が参加、誰が脱退したかを記録します",
+            name: "VoiceChannelLog",
+            description: "Logs who joins and leaves voice channels",
             context: {
-                view: "チャンネルログの表示"
+                view: "View Channel Log"
             },
             modal: {
-                joined: "<#{{channel}}> チャンネルに参加しました",
-                left: "左チャンネル <#{{channel}}>",
-                movedTo: "<#{{channel}}> チャンネルに移動しました",
-                movedFrom: "<#{{channel}}> から移動しました",
+                joined: "Joined <#{{channel}}>",
+                left: "左<#{{channel}}>",
+                movedTo: "Moved to <#{{channel}}>",
+                movedFrom: "<#{{channel}}> から移動",
                 noLogs: "表示するログはありません。",
-                logs: "{{チャンネル}} ログ"
+                logs: "{{channel}} ログ"
             },
             option: {
                 mode: {
-                    label: "モジュール",
-                    description: "オーディオチャンネルログを表示する方法",
+                    label: "モード",
+                    description: "音声チャンネルのログを表示する方法",
                     menu: "ログメニュー",
-                    associated: "関連するチャット チャネルに直接ログインします。",
-                    both: "チャット チャネルとログ メニューの両方にログインします。"
+                    associated: "関連するチャットに直接ログに記録する",
+                    both: "チャットへのログとログメニュー"
                 },
                 voiceChannelChatSelf: {
-                    label: "ボイス チャネル チャット (自分自身)",
-                    description: "自分の音声チャネルのアクティビティを音声チャネルに記録します"
+                    label: "ボイスチャンネルチャットセルフ",
+                    description: "独自の音声チャネル イベントを音声チャネルに記録します。"
                 },
                 voiceChannelChatSilent: {
-                    label: "無音ボイスチャンネルチャット",
-                    description: "ボイス チャネル チャットでは参加/退席/移動メッセージがミュートされます"
+                    label: "ボイスチャンネルチャットサイレント",
+                    description: "ボイス チャネル チャットでのメッセージへの参加/退出/移動は沈黙します。"
                 },
                 voiceChannelChatSilentSelf: {
-                    label: "無音ボイスチャンネルチャット（自分）",
-                    description: "音声チャネルを使用している場合、メッセージへの参加/脱退/移動は無音になります"
+                    label: "ボイスチャンネルチャットサイレントセルフ",
+                    description: "音声チャネルにいる場合、音声チャネルでのメッセージへの参加/退出/移動は無音になります"
                 },
                 ignoreBlockedUsers: {
                     label: "ブロックされたユーザーを無視する",
-                    description: "ブロックしたユーザーのログ記録"
+                    description: "ブロックされたユーザーをログに記録しない"
                 }
             }
         },
         voiceChatUtilities: {
-            name: "ボイスチャットユーティリティ",
-            description: "このプラグインを使用すると、チャンネル全体で複数のアクション (移動、ミュート、切断など) を実行できます (オリジナルは dutake による)",
+            name: "VoiceChatUtilities",
+            description: "このプラグインを使用すると、チャンネル全体で複数のアクション (移動、ミュート、切断など) を実行できます (オリジナルは dutake)",
             option: {
                 waitAfter: {
                     label: "アクション後に待機する",
-                    description: "待機する前に行われる API トランザクションの数 (レート制限を回避するため)"
+                    description: "待機する前に実行する API アクションの量 (レート制限を回避するため)"
                 },
                 waitSeconds: {
-                    label: "待ち時間",
-                    description: "各操作間の待機時間 (秒単位)"
+                    label: "数秒待ってください",
+                    description: "各アクション間の待機時間 (秒単位)"
                 }
             },
             context: {
-                voiceTools: "オーディオツール",
-                mentionAll: "すべてのユーザーにタグを付ける",
-                disconnectAll: "全員の接続を解除する",
-                muteAll: "全員をミュート",
-                unmuteAll: "全員のミュートを解除する",
-                deafenAll: "聴覚障害者全員",
-                undeafenAll: "全員の耳をつんざくことなく出て行け",
-                moveAll: "みんなを動かす"
+                voiceTools: "音声ツール",
+                mentionAll: "すべてのユーザーに言及する",
+                disconnectAll: "すべて切断",
+                muteAll: "すべてミュート",
+                unmuteAll: "すべてのミュートを解除",
+                deafenAll: "耳をつんざくすべて",
+                undeafenAll: "すべての聴覚を失わせる",
+                moveAll: "すべて移動"
             }
         },
         voiceDownload: {
-            name: "音声ダウンロード",
-            description: "音声メッセージにダウンロード オプションを追加します。 (新しいブラウザタブが開きます)",
+            name: "VoiceDownload",
+            description: "音声メッセージにダウンロードを追加します。 (新しいブラウザタブが開きます)",
             context: {
-                download: "ボイスメールをダウンロードする"
+                download: "音声メッセージをダウンロードする"
             }
         },
         voiceMessages: {
-            name: "ボイスメッセージ",
-            description: "携帯電話と同じように音声メッセージを送信できます。 これを行うには、アップロード ボタンを右クリックし、[ボイス メッセージの送信] を選択します。",
+            name: "VoiceMessages",
+            description: "携帯電話と同じように音声メッセージを送信できます。これを行うには、アップロード ボタンを右クリックし、[ボイス メッセージの送信] をクリックします。",
             option: {
                 noiseSuppression: {
-                    label: "ノイズキャンセリング",
-                    description: "ノイズキャンセリング"
+                    label: "ノイズ対策",
+                    description: "ノイズ対策"
                 },
                 echoCancellation: {
                     label: "エコーキャンセル",
@@ -10669,51 +10669,51 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             notification: {
                 failed: {
-                    upload: "ボイスメールを読み込めませんでした。",
+                    upload: "音声メッセージのアップロードに失敗しました。",
                     start: "記録の開始に失敗しました。",
-                    finish: "登録を完了できませんでした。"
+                    finish: "録音を終了できませんでした。"
                 }
             },
             context: {
                 sendVoiceMessage: "音声メッセージを送信する",
-                missingPermissions: "(許可がありません)"
+                missingPermissions: "(権限がありません)"
             },
             modal: {
                 record: "音声メッセージを録音する",
                 upload: "ファイルをアップロードする",
                 preview: "プレビュー",
-                failed: "選択した音声ファイルを解析できませんでした:",
-                oggOpus: "iOS で再生するには、音声メッセージは OggOpus 形式である必要があります。 このファイルは {{type}} 形式であるため、iOS では再生できません。",
-                fix: "これを修正するには、まずファイルを OggOpus 形式に変換します。 たとえば、{{link}} を使用できます。",
-                sending: "ボイスメールを送信中...お待ちください。",
+                failed: "選択した音声ファイルの解析に失敗しました:",
+                oggOpus: "ボイス メッセージを iOS で再生するには、OggOpus である必要があります。このファイルは {{type}} であるため、iOS では再生できません。",
+                fix: "これを修正するには、まず {{link}} を使用して OggOpus に変換します。",
+                sending: "音声メッセージを送信中です...しばらくお待ちください。",
                 stop: "録音を停止する",
                 start: "録音を開始する",
-                resume: "登録を再開する",
+                resume: "録音を再開する",
                 pause: "録音を一時停止する",
-                recording: "登録中です",
-                send: "送信"
+                recording: "録音",
+                send: "送信",
             }
         },
         volumeBooster: {
-            name: "ボリュームブースター",
-            description: "ユーザーおよびブロードキャストの音量をデフォルトの最大値を超えて増やすことができます",
+            name: "VolumeBooster",
+            description: "ユーザーとストリームの音量をデフォルトの最大値を超えて設定できます",
             option: {
                 multiplier: {
                     label: "乗数",
-                    description: "サウンドマルチプライヤー"
+                    description: "ボリュームマルチプライヤー"
                 }
             }
         },
         wallpaperFree: {
-            name: "壁紙無料",
-            description: "古い DM 壁紙実験のリメイク。 任意のチャネル、ユーザー、またはサーバーの背景画像を設定します。",
+            name: "WallpaperFree",
+            description: "古い DM 壁紙実験の再現。任意のチャネル、ユーザー、またはサーバーの背景画像を設定します。",
             option: {
                 globalDefault: {
-                    label: "一般的なデフォルト",
+                    label: "グローバルデフォルト",
                     description: "すべてのチャンネルにグローバルなデフォルトの壁紙を設定します。"
                 },
                 stylingTips: {
-                    label: "スタイルのヒント"
+                    label: "スタイリングのヒント"
                 }
             },
             context: {
@@ -10722,98 +10722,98 @@ const translations: MatchStructure<typeof enTranslations> = {
             },
             modal: {
                 set: "壁紙を設定する",
-                image: "画像URL",
+                image: "画像のURL",
                 cancel: "キャンセル",
                 apply: "適用する",
                 global: {
-                    set: "公開壁紙を設定する",
+                    set: "グローバル壁紙を設定する",
                     remove: "グローバルのデフォルト壁紙を削除する",
                     reset: "壁紙データをリセットする"
                 },
                 web: {
-                    info: "ローカル ファイルを使用するには、ローカル ファイルを plexcord テーマ ディレクトリに置き、URL plexcord:///themes/filename.ext を使用します。",
+                    info: "ローカル ファイルを使用するには、ローカル ファイルを Plexcord テーマ ディレクトリに置き、URL plexcord:///themes/filename.ext を使用します。",
                     open: "テーマディレクトリを開く",
                     quickCSS: "QuickCSSを開く"
                 }
             }
         },
         webContextMenus: {
-            name: "Webコンテキストメニュー",
-            description: "Web バージョンの Discord にはないバック コンテキスト メニューを追加します: リンクと画像 (リンク/画像をコピーまたは開く)、テキスト領域 (コピー、切り取り、貼り付け、スペル チェック)",
+            name: "WebContextMenus",
+            description: "Web バージョンの Discord にはないコンテキスト メニューを再追加します: リンクと画像 (コピー/リンク/画像を開く)、テキスト領域 (コピー、切り取り、貼り付け、スペル チェック)",
             option: {
                 addBack: {
                     label: "戻るを追加",
-                    description: "画像、リンク、チャットエントリバーの Discord コンテキストメニューを追加し直す"
+                    description: "画像、リンク、チャット入力バーの Discord コンテキスト メニューを再び追加します"
                 }
             }
         },
         webKeybinds: {
-            name: "Webキーバインド",
-            description: "Web バージョンの Discord にはないホットキーを追加します: ctrl+t、ctrl+shift+t、ctrl+tab、ctrl+shift+tab、ctrl+1-9、ctrl+、。 文字通り、Plextron/Legcord 上でのみ動作し、ブラウザ内では動作しません。"
+            name: "WebKeybinds",
+            description: "Web バージョンの Discord に欠落しているキーバインドを再追加します: Ctrl+T、Ctrl+Shift+T、Ctrl+Tab、Ctrl+Shift+Tab、Ctrl+1-9、Ctrl+、。ブラウザ内ではなく、Plextron/Legcord 上でのみ完全に動作します"
         },
         webScreenShareFixes: {
-            name: "WebScreenShareの修正",
-            description: "Chromium および Plextron クライアントの 2500 kbps 画面共有ビットレート制限を削除します。",
+            name: "WebScreenShareFixes",
+            description: "Chromium および Plextron クライアントの 2500kbps ビットレートの上限を削除します。",
             option: {
                 experimentalAV1Support: {
                     label: "実験的な AV1 サポート",
-                    description: "AV1 コーデックのサポートを有効にします。 無限の読み込みストリームは次のような問題を引き起こす可能性があります。"
+                    description: "AV1 コーデックのサポートを有効にします。ストリームの無限ロードなどの問題が発生する可能性があります"
                 }
             }
         },
         whoReacted: {
-            name: "誰が反応したのか",
-            description: "メッセージに反応するユーザーのアバターを表示します",
+            name: "WhoReacted",
+            description: "メッセージに反応したユーザーのアバターをレンダリングします",
             option: {
                 avatarClick: {
                     label: "アバタークリック",
-                    description: "リアクションにおけるアバターのクリック可能性を切り替えます"
+                    description: "リアクションでのアバターのクリックを切り替えます"
                 }
             }
         },
         whosWatching: {
-            name: "誰が見てる",
-            description: "画面共有アイコンの上にマウスを置くと、ブロードキャストを視聴しているユーザーが表示されます",
+            name: "WhosWatching",
+            description: "画面共有アイコンにカーソルを合わせると、どのユーザーがストリームを視聴しているかが表示されます",
             modal: {
                 noSpectator: "無観客"
             },
             option: {
                 showPanel: {
                     label: "パネルを表示",
-                    description: "画面共有パネルの下に視聴者を表示する"
+                    description: "画面共有パネルの下に観客を表示"
                 }
             }
         },
         writeUpperCase: {
-            name: "大文字で書く",
-            description: "メッセージエントリの各文の最初の文字を大文字に変換します。",
+            name: "WriteUpperCase",
+            description: "メッセージ入力の各文の最初の文字を大文字に変更します",
             option: {
                 blockedWords: {
                     label: "ブロックされた単語",
-                    description: "大文字で始めるべきではない式 (カンマで区切る)"
+                    description: "大文字にしない文字列 (カンマで区切る)"
                 }
             }
         },
         xSOverlay: {
-            name: "XSオーバーレイ",
-            description: "Discord 通知を XSOverlay にプッシュして VR で簡単に表示できるようにします",
+            name: "XSOverlay",
+            description: "Discord の通知を XSOverlay に転送し、VR で簡単に表示できるようにします。",
             notification: {
                 call: {
-                    title: "{{user}} があなたを探しています。",
+                    title: "{{user}} があなたに電話しています。",
                     content: "着信"
                 },
                 message: {
-                    reply: "（応答）",
+                    reply: "（返事）",
                     embed: "[埋め込む]",
-                    onlyEmbed: "送信されたメッセージの埋め込み",
+                    onlyEmbed: "送信済みメッセージの埋め込み",
                     sticker: "[ステッカー]",
                     onlySticker: "ステッカーを送りました",
-                    image: "写真",
-                    attachment: "私"
+                    image: "画像",
+                    attachment: "アタッチメント"
                 },
                 test: {
-                    title: "プレックスコードでダイブ！",
-                    content: "テストのお知らせです！ 爆発する",
+                    title: "プレックスコードからこんにちは！",
+                    content: "テストのお知らせです！ *爆発*",
                     button: "テスト通知を送信する"
                 }
             },
@@ -10823,8 +10823,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "WebSocketポート"
                 },
                 preferUDP: {
-                    label: "UDP テルシエ",
-                    description: "古いバージョンの XSOverlay を使用していて WebSocket 経由で接続できない場合は、WebSocket を有効にしてください。 この設定は Web では無視されます。"
+                    label: "UDP を優先する",
+                    description: "WebSocket 経由で接続できない XSOverlay の古いビルドを使用している場合に有効にします。この設定は Web では無視されます。"
                 },
                 botNotifications: {
                     label: "ボット通知",
@@ -10836,7 +10836,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 dmNotifications: {
                     label: "DM通知",
-                    description: "プライベートメッセージ通知を許可する"
+                    description: "ダイレクトメッセージ通知を許可する"
                 },
                 groupDmNotifications: {
                     label: "グループDM通知",
@@ -10847,12 +10847,12 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "通話通知を許可する"
                 },
                 pingColor: {
-                    label: "平仁儀",
-                    description: "ユーザータグの色"
+                    label: "ピンカラー",
+                    description: "ユーザー言及の色"
                 },
                 channelPingColor: {
-                    label: "カラーピングチャンネル",
-                    description: "チャンネルのラベルの色"
+                    label: "チャンネル Ping カラー",
+                    description: "チャンネルメンションの色"
                 },
                 soundPath: {
                     label: "サウンドパス",
@@ -10863,7 +10863,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "通知期間 (秒)"
                 },
                 lengthBasedTimeout: {
-                    label: "メッセージ長ベースの継続時間",
+                    label: "長さベースのタイムアウト",
                     description: "メッセージの長さに応じて継続時間を延長する"
                 },
                 opacity: {
@@ -10871,17 +10871,17 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "通知の不透明度"
                 },
                 volume: {
-                    label: "セス",
-                    description: "騒音レベル"
+                    label: "音量",
+                    description: "音量"
                 }
             }
         },
         youtubeAdblock: {
-            name: "YouTube広告ブロック",
-            description: "YouTube の埋め込み広告と WatchTogether アクティビティを AdGuard でブロックします"
+            name: "YouTubeAdblock",
+            description: "YouTube の埋め込み広告と、AdGuard 経由で一緒に見るアクティビティをブロックします"
         },
         youtubeDescription: {
-            name: "YouTube説明",
+            name: "YouTubeDescription",
             description: "YouTube ビデオの埋め込みに説明を追加します"
         }
     }
