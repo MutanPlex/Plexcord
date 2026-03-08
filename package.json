@@ -90,7 +90,7 @@
         "typescript-eslint": "^8.54.0",
         "typescript-transform-paths": "^3.5.6"
     },
-    "packageManager": "pnpm@10.30.0",
+    "packageManager": "pnpm@10.31.0",
     "pnpm": {
         "patchedDependencies": {
             "@types/less@3.0.8": "patches/@types__less@3.0.8.patch"
@@ -115,7 +115,7 @@
             "@types/react": "19.2.7",
             "@types/react-dom": "19.2.3",
             "jszip": "^3.10.1",
-            "dompurify": "^3.3.0",
+            "dompurify": "^3.3.2",
             "@eslint/plugin-kit@<0.3.4": ">=0.3.4",
             "@isaacs/brace-expansion": ">=6.0.0",
             "minimatch": ">=10.2.3",
