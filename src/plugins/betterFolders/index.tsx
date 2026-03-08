@@ -632,7 +632,7 @@ export default definePlugin({
         if (!Array.isArray(children)) return baseClassName;
 
         return children.some(child => child?.type === "folder")
-            ? `${baseClassName} vc-betterFolders-nested-parent-list`
+            ? `${baseClassName} pc-betterFolders-nested-parent-list`
             : baseClassName;
     },
 

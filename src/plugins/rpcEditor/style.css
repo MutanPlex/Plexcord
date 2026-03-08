@@ -1,14 +1,14 @@
-.vc-rpceditor-horizontal {
+.pc-rpceditor-horizontal {
     display: flex;
     justify-content: space-evenly;
 
 }
 
-.vc-rpceditor-horizontal div {
+.pc-rpceditor-horizontal div {
     flex: 1;
 }
 
 
-.vc-rpceditor-horizontal div:first-child {
+.pc-rpceditor-horizontal div:first-child {
     padding-right: 5px;
 }

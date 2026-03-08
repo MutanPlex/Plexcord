@@ -69,7 +69,7 @@ export function ReactEmojiSetting({ setValue }: IPluginOptionComponentProps) {
         <div>
             <Heading>Select Emoji For Reactions</Heading>
             <div
-                className="vc-message-click-actions-primary-emoji-picker"
+                className="pc-message-click-actions-primary-emoji-picker"
                 onClick={event => event.stopPropagation()}
                 onMouseDown={event => event.stopPropagation()}
             >

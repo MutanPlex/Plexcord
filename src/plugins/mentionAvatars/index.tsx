@@ -88,12 +88,12 @@ export default definePlugin({
             <span
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
-                className="vc-mentionAvatars-container"
+                className="pc-mentionAvatars-container"
             >
                 {user && (
                     <img
                         src={user.getAvatarURL(SelectedGuildStore.getGuildId(), 16, isHovering)}
-                        className="vc-mentionAvatars-icon"
+                        className="pc-mentionAvatars-icon"
                         style={{ borderRadius: "50%" }}
                     />
                 )}
