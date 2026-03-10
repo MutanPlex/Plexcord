@@ -4743,6 +4743,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreBots: {
                     label: "Botları Yoksay",
                     description: "Botlardan gelen DM'leri görmezden gelir."
+                },
+                maxInactiveTimeMs: {
+                    label: "Maksimum Etkin Olmayan Süre",
+                    description: "Bu zaman dilimi içinde etkin olan sadece hayalet DM'leri",
+                    no: "Sınır yok",
+                    oneHour: "1 saat",
+                    oneDay: "1 gün",
+                    oneWeek: "1 hafta",
+                    oneMonth: "1 ay"
                 }
             }
         },

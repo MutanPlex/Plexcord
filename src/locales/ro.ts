@@ -4743,6 +4743,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreBots: {
                     label: "Ignoră boții",
                     description: "Ignoră mesajele directe de la boți"
+                },
+                maxInactiveTimeMs: {
+                    label: "Timp inactiv maxim",
+                    description: "Doar DM-urile de fantomă active în acest interval de timp",
+                    no: "Fără limită",
+                    oneHour: "1 oră",
+                    oneDay: "1 zi",
+                    oneWeek: "1 săptămână",
+                    oneMonth: "1 luna"
                 }
             }
         },

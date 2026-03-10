@@ -4743,6 +4743,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreBots: {
                     label: "忽略機器人",
                     description: "忽略來自機器人的私訊"
+                },
+                maxInactiveTimeMs: {
+                    label: "最大非活動時間",
+                    description: "僅顯示在此時間範圍內活躍的幽靈私訊",
+                    no: "無限制",
+                    oneHour: "1 小時",
+                    oneDay: "1 天",
+                    oneWeek: "1 週",
+                    oneMonth: "1 月"
                 }
             }
         },
@@ -4759,7 +4768,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     create: "創作收藏",
                     remove: "消除",
                     information: "收藏資訊",
-                    name: "Name",
+                    name: "名稱",
                     gifs: "動圖",
                     created: "創建於",
                     updated: "最後更新",
@@ -4819,7 +4828,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "對集合進行排序",
                     sortDescription: "為您的收藏選擇排序標準",
                     sortBy: "排序方式",
-                    name: "Name",
+                    name: "名稱",
                     creationDate: "建立日期",
                     modifiedDate: "修改日期",
                     ascending: "升序",

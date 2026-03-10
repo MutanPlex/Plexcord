@@ -4743,6 +4743,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreBots: {
                     label: "忽略机器人",
                     description: "忽略来自机器人的私信"
+                },
+                maxInactiveTimeMs: {
+                    label: "最大非活动时间",
+                    description: "仅显示在此时间段内活跃的匿名私信",
+                    no: "无限制",
+                    oneHour: "1 小时",
+                    oneDay: "1 天",
+                    oneWeek: "1 周",
+                    oneMonth: "1 个月"
                 }
             }
         },

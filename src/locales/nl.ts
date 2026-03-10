@@ -4743,6 +4743,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreBots: {
                     label: "Negeer bots",
                     description: "Negeer DM's van bots"
+                },
+                maxInactiveTimeMs: {
+                    label: "Maximale inactieve tijd",
+                    description: "Toon alleen ghost DMs die binnen dit tijdsbestek actief waren",
+                    no: "Geen limiet",
+                    oneHour: "1 uur",
+                    oneDay: "1 dag",
+                    oneWeek: "1 week",
+                    oneMonth: "1 maand"
                 }
             }
         },
@@ -4759,7 +4768,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     create: "Verzameling maken",
                     remove: "Verwijderen",
                     information: "Verzamelinformatie",
-                    name: "Name",
+                    name: "Naam",
                     gifs: "GIF's",
                     created: "Gemaakt op",
                     updated: "Laatst bijgewerkt",

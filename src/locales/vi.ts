@@ -4743,6 +4743,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreBots: {
                     label: "Bỏ qua Bot",
                     description: "Bỏ qua DM từ bot"
+                },
+                maxInactiveTimeMs: {
+                    label: "Thời gian hoạt động tối đa",
+                    description: "Chỉ các DM ma hoạt động trong khoảng thời gian này",
+                    no: "Không giới hạn",
+                    oneHour: "1 giờ",
+                    oneDay: "1 ngày",
+                    oneWeek: "1 tuần",
+                    oneMonth: "1 tháng"
                 }
             }
         },

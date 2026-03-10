@@ -4743,6 +4743,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreBots: {
                     label: "ボットを無視する",
                     description: "ボットからのDMを無視する"
+                },
+                maxInactiveTimeMs: {
+                    label: "最大非アクティブ時間",
+                    description: "この時間内にアクティブなゴースト DM のみを表示",
+                    no: "制限なし",
+                    oneHour: "1時間",
+                    oneDay: "1日",
+                    oneWeek: "1週間",
+                    oneMonth: "1ヶ月"
                 }
             }
         },
@@ -4759,7 +4768,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     create: "コレクションの作成",
                     remove: "取り除く",
                     information: "コレクション情報",
-                    name: "Name",
+                    name: "名前",
                     gifs: "GIF",
                     created: "作成日",
                     updated: "最終更新日",

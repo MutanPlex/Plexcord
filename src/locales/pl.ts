@@ -4743,6 +4743,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreBots: {
                     label: "Ignoruj boty",
                     description: "Ignoruj PW od botów"
+                },
+                maxInactiveTimeMs: {
+                    label: "Maksymalny czas nieaktywności",
+                    description: "Wyświetlaj tylko duchy aktywne w tym czasie",
+                    no: "Brak limitu",
+                    oneHour: "1 godzina",
+                    oneDay: "1 dzień",
+                    oneWeek: "1 tydzień",
+                    oneMonth: "1 miesiąc"
                 }
             }
         },

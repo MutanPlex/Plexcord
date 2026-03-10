@@ -59,6 +59,19 @@ export const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false
+    },
+    maxInactiveTimeMs: {
+        label: () => t(plugin.ghosted.option.maxInactiveTimeMs.label),
+        description: () => t(plugin.ghosted.option.maxInactiveTimeMs.description),
+        type: OptionType.SELECT,
+        options: [
+            { label: () => t(plugin.ghosted.option.maxInactiveTimeMs.no), value: 0, default: true },
+            { label: () => t(plugin.ghosted.option.maxInactiveTimeMs.oneHour), value: 60 * 60 * 1000 },
+            { label: () => t(plugin.ghosted.option.maxInactiveTimeMs.oneDay), value: 24 * 60 * 60 * 1000 },
+            { label: () => t(plugin.ghosted.option.maxInactiveTimeMs.oneWeek), value: 7 * 24 * 60 * 60 * 1000 },
+            { label: () => t(plugin.ghosted.option.maxInactiveTimeMs.oneMonth), value: 30 * 24 * 60 * 60 * 1000 },
+        ],
+        restartNeeded: false
     }
 });
 

@@ -4743,6 +4743,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreBots: {
                     label: "봇 무시",
                     description: "봇의 DM 무시"
+                },
+                maxInactiveTimeMs: {
+                    label: "최대 비활성 시간",
+                    description: "이 시간 내에서 활성화된 고스트 DM만 표시",
+                    no: "제한 없음",
+                    oneHour: "1시간",
+                    oneDay: "1일",
+                    oneWeek: "1주일",
+                    oneMonth: "1개월"
                 }
             }
         },
@@ -4759,7 +4768,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     create: "컬렉션 만들기",
                     remove: "제거하다",
                     information: "수집정보",
-                    name: "Name",
+                    name: "이름",
                     gifs: "GIF",
                     created: "생성 날짜",
                     updated: "마지막 업데이트",
@@ -4819,7 +4828,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "컬렉션 정렬",
                     sortDescription: "컬렉션의 정렬 기준을 선택하세요",
                     sortBy: "정렬 기준",
-                    name: "Name",
+                    name: "이름",
                     creationDate: "생성 날짜",
                     modifiedDate: "수정된 날짜",
                     ascending: "오름차순",
@@ -4850,12 +4859,12 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 create: {
                     title: "컬렉션 만들기",
-                    name: "Collection Name",
+                    name: "컬렉션 이름",
                     create: "만들다"
                 },
                 rename: {
                     title: "컬렉션 이름 바꾸기",
-                    name: "New Collection Name",
+                    name: "새 컬렉션 이름",
                     warning: "이름은 24자를 초과할 수 없습니다.",
                     rename: "이름 바꾸기"
                 }

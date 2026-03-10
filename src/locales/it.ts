@@ -4743,6 +4743,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreBots: {
                     label: "Ignora Bot",
                     description: "Ignora i DM provenienti dai bot"
+                },
+                maxInactiveTimeMs: {
+                    label: "Tempo Massimo di Inattività",
+                    description: "Mostra i DM fantasma solo se sono stati attivi entro questo periodo",
+                    no: "Nessun limite",
+                    oneHour: "1 ora",
+                    oneDay: "1 giorno",
+                    oneWeek: "1 settimana",
+                    oneMonth: "1 mese"
                 }
             }
         },

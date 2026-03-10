@@ -4743,6 +4743,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreBots: {
                     label: "Ignorera bots",
                     description: "Ignorera DM från bots"
+                },
+                maxInactiveTimeMs: {
+                    label: "Maximal inaktiv tid",
+                    description: "Endast spöke-DM:ar som är aktiva inom denna tidsram",
+                    no: "Ingen gräns",
+                    oneHour: "1 timme",
+                    oneDay: "1 dag",
+                    oneWeek: "1 vecka",
+                    oneMonth: "1 månad"
                 }
             }
         },
