@@ -124,19 +124,20 @@ export async function authorizeCloud() {
                 const res = await fetch(location, {
                     headers: { Accept: "application/json" }
                 });
-                const { secret } = await res.json();
-                if (secret) {
-                    logger.info("Authorized with secret");
-                    await setAuthorization(secret);
+                const data = await res.json();
+                if (data.secret) {
+                    logger.info("Authorized with cloud");
+                    await setAuthorization(data.secret);
                     showNotification({
                         title: t(cloud.notification.title),
                         body: t(cloud.notification.enabled)
                     });
                     Settings.cloud.authenticated = true;
                 } else {
+                    logger.error("OAuth callback returned no secret", data);
                     showNotification({
                         title: t(cloud.notification.title),
-                        body: t(cloud.error.secret)
+                        body: data.error ? t(data.error.string, { error: data.error }) : t(cloud.error.secret)
                     });
                     Settings.cloud.authenticated = false;
                 }

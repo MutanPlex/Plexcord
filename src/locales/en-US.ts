@@ -499,7 +499,8 @@ const translations = {
                 returned: {
                     delete: "Could not delete settings (API returned {{status}}).",
                     to: "Could not synchronize settings to cloud (API returned {{status}}).",
-                    from: "Could not synchronize settings from the cloud (API returned {{status}})."
+                    from: "Could not synchronize settings from the cloud (API returned {{status}}).",
+                    manifest: "Could not fetch manifest for deletion (API returned {{status}})."
                 }
             },
             synchronize: {

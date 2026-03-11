@@ -36,10 +36,10 @@ const enum LayoutType {
     SELECT = 15,
     RADIO = 16,
     NAVIGATOR = 17,
-    CUSTOM = 18
+    CUSTOM = 19
 }
 
-const LayoutTypes: typeof LayoutType = findByPropsLazy("SECTION", "SIDEBAR_ITEM", "PANEL");
+const LayoutTypes: typeof LayoutType = findByPropsLazy("SECTION", "SIDEBAR_ITEM", "PANEL", "CUSTOM");
 
 const enum SectionType {
     HEADER = "HEADER",
@@ -182,15 +182,21 @@ export default definePlugin({
             key: key + "_panel",
             type: LayoutTypes.PANEL,
             useTitle: () => panelTitle,
-            buildLayout: () => [],
-            StronglyDiscouragedCustomComponent: () => <Component />,
-            render: () => <Component />,
+            buildLayout: () => [{
+                type: LayoutTypes.CATEGORY,
+                key: key + "_category",
+                buildLayout: () => [{
+                    type: LayoutTypes.CUSTOM,
+                    key: key + "_custom",
+                    Component: Component,
+                    useSearchTerms: () => [title]
+                }]
+            }]
         };
 
         return {
             key,
             type: LayoutTypes.SIDEBAR_ITEM,
-            legacySearchKey: title.toUpperCase(),
             useTitle: () => title,
             icon: () => <Icon width={20} height={20} />,
             buildLayout: () => [panel]
