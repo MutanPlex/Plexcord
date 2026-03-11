@@ -502,7 +502,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 returned: {
                     delete: "Impossible de supprimer les paramètres (L'API a renvoyé {{status}}).",
                     to: "Impossible de synchroniser vers le cloud (L'API a renvoyé {{status}}).",
-                    from: "Impossible de synchroniser depuis le cloud (L'API a renvoyé {{status}})."
+                    from: "Impossible de synchroniser depuis le cloud (L'API a renvoyé {{status}}).",
+                    manifest: "Impossible de récupérer le manifeste pour suppression (l’API a renvoyé {{status}})."
                 }
             },
             synchronize: {

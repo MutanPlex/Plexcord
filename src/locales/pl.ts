@@ -502,7 +502,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 returned: {
                     delete: "Nie udało się usunąć ustawień (API zwróciło status {{status}}).",
                     to: "Nie udało się zsynchronizować ustawień z chmurą (API zwróciło status {{status}}).",
-                    from: "Nie udało się pobrać ustawień z chmury (API zwróciło status {{status}})."
+                    from: "Nie udało się pobrać ustawień z chmury (API zwróciło status {{status}}).",
+                    manifest: "Nie można pobrać manifestu do usunięcia (API zwróciło {{status}})."
                 }
             },
             synchronize: {

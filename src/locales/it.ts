@@ -502,7 +502,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 returned: {
                     delete: "Errore API eliminazione ({{status}}).",
                     to: "Errore API sincronizzazione al cloud ({{status}}).",
-                    from: "Errore API sincronizzazione dal cloud ({{status}})."
+                    from: "Errore API sincronizzazione dal cloud ({{status}}).",
+                    manifest: "Impossibile recuperare il manifest per l'eliminazione (l'API ha restituito {{status}})."
                 }
             },
             synchronize: {

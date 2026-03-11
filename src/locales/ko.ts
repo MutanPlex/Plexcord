@@ -502,7 +502,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 returned: {
                     delete: "설정을 삭제할 수 없습니다(API가 {{status}}을 반환함).",
                     to: "설정을 클라우드에 동기화할 수 없습니다(API가 {{status}}을 반환함).",
-                    from: "클라우드에서 설정을 동기화할 수 없습니다(API가 {{status}}을 반환함)."
+                    from: "클라우드에서 설정을 동기화할 수 없습니다(API가 {{status}}을 반환함).",
+                    manifest: "삭제를 위한 매니페스트를 가져올 수 없습니다 (API가 {{status}}를 반환했습니다)."
                 }
             },
             synchronize: {

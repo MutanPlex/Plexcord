@@ -502,7 +502,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 returned: {
                     delete: "No se pudieron eliminar los ajustes (la API devolvió {{status}}).",
                     to: "No se pudieron sincronizar los ajustes a la nube (la API devolvió {{status}}).",
-                    from: "No se pudieron sincronizar los ajustes desde la nube (la API devolvió {{status}})."
+                    from: "No se pudieron sincronizar los ajustes desde la nube (la API devolvió {{status}}).",
+                    manifest: "No se pudo obtener el manifiesto para su eliminación (la API devolvió {{status}})."
                 }
             },
             synchronize: {

@@ -502,7 +502,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 returned: {
                     delete: "Kan instellingen niet verwijderen (API retourneert {{status}}).",
                     to: "Kan instellingen niet synchroniseren met de cloud (API retourneert {{status}}).",
-                    from: "Kan instellingen uit de cloud niet synchroniseren (API retourneert {{status}})."
+                    from: "Kan instellingen uit de cloud niet synchroniseren (API retourneert {{status}}).",
+                    manifest: "Kan manifest voor verwijdering niet ophalen (API gaf {{status}} terug)."
                 }
             },
             synchronize: {

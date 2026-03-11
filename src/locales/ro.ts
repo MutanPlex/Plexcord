@@ -502,7 +502,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 returned: {
                     delete: "Nu s-au putut șterge setările (API-ul a returnat {{status}}).",
                     to: "Nu s-au putut sincroniza setările în cloud (API-ul a returnat {{status}}).",
-                    from: "Nu s-au putut sincroniza setările din cloud (API-ul a returnat {{status}})."
+                    from: "Nu s-au putut sincroniza setările din cloud (API-ul a returnat {{status}}).",
+                    manifest: "Nu s-a putut prelua manifestul pentru ștergere (API a returnat {{status}})."
                 }
             },
             synchronize: {

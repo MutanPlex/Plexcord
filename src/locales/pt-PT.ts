@@ -502,7 +502,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 returned: {
                     delete: "Não foi possível eliminar as definições (A API retornou {{status}}).",
                     to: "Não foi possível sincronizar as definições para a nuvem (A API retornou {{status}}).",
-                    from: "Não foi possível sincronizar as definições da nuvem (A API retornou {{status}})."
+                    from: "Não foi possível sincronizar as definições da nuvem (A API retornou {{status}}).",
+                    manifest: "Não foi possível obter o manifesto para eliminação (a API devolveu {{status}})."
                 }
             },
             synchronize: {

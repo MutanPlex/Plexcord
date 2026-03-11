@@ -502,7 +502,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 returned: {
                     delete: "Ayarlar silinemedi (API {{status}} döndü).",
                     to: "Ayarlar buluta senkronize edilemedi (API {{status}} döndü).",
-                    from: "Ayarlar buluttan senkronize edilemedi (API {{status}} döndü)."
+                    from: "Ayarlar buluttan senkronize edilemedi (API {{status}} döndü).",
+                    manifest: "Silme işlemi için manifest alınamadı (API {{status}} döndürdü)."
                 }
             },
             synchronize: {

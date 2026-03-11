@@ -502,7 +502,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 returned: {
                     delete: "Không thể xóa cài đặt (API trả về {{status}}).",
                     to: "Không thể đồng bộ hóa cài đặt với đám mây (API trả về {{status}}).",
-                    from: "Không thể đồng bộ hóa cài đặt từ đám mây (API trả về {{status}})."
+                    from: "Không thể đồng bộ hóa cài đặt từ đám mây (API trả về {{status}}).",
+                    manifest: "Không thể lấy bản kê để xóa (API trả về {{status}})."
                 }
             },
             synchronize: {

@@ -502,7 +502,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 returned: {
                     delete: "Einstellungen konnten nicht gelöscht werden (API gab {{status}} zurück).",
                     to: "Einstellungen konnten nicht mit der Cloud synchronisiert werden (API gab {{status}} zurück).",
-                    from: "Einstellungen konnten nicht aus der Cloud geladen werden (API gab {{status}} zurück)."
+                    from: "Einstellungen konnten nicht aus der Cloud geladen werden (API gab {{status}} zurück).",
+                    manifest: "Manifest zum Löschen konnte nicht abgerufen werden (API gab {{status}} zurück)."
                 }
             },
             synchronize: {

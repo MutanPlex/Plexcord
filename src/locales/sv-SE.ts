@@ -502,7 +502,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 returned: {
                     delete: "Kunde inte ta bort inställningar (API returnerade {{status}}).",
                     to: "Kunde inte synkronisera inställningar till molnet (API returnerade {{status}}).",
-                    from: "Kunde inte synkronisera inställningar från molnet (API returnerade {{status}})."
+                    from: "Kunde inte synkronisera inställningar från molnet (API returnerade {{status}}).",
+                    manifest: "Kunde inte hämta manifest för borttagning (API returnerade {{status}})."
                 }
             },
             synchronize: {

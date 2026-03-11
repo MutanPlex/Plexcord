@@ -502,7 +502,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 returned: {
                     delete: "設定を削除できませんでした (API が {{status}} を返しました)。",
                     to: "設定をクラウドに同期できませんでした (API が {{status}} を返しました)。",
-                    from: "クラウドから設定を同期できませんでした (API が {{status}} を返しました)。"
+                    from: "クラウドから設定を同期できませんでした (API が {{status}} を返しました)。",
+                    manifest: "削除用のマニフェストを取得できませんでした（API は {{status}} を返しました）。"
                 }
             },
             synchronize: {

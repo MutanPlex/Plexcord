@@ -502,7 +502,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 returned: {
                     delete: "无法删除设置（API 返回 {{status}}）。",
                     to: "无法将设置同步到云（API 返回 {{status}}）。",
-                    from: "无法从云同步设置（API 返回 {{status}}）。"
+                    from: "无法从云同步设置（API 返回 {{status}}）。",
+                    manifest: "无法获取用于删除的清单（API 返回 {{status}}）。"
                 }
             },
             synchronize: {

@@ -502,7 +502,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 returned: {
                     delete: "Could not delete settings (API returned {{status}}).",
                     to: "Could not synchronise settings to cloud (API returned {{status}}).",
-                    from: "Could not synchronise settings from the cloud (API returned {{status}})."
+                    from: "Could not synchronise settings from the cloud (API returned {{status}}).",
+                    manifest: "Kunne ikke hente manifest til sletning (API returnerede {{status}})."
                 }
             },
             synchronize: {

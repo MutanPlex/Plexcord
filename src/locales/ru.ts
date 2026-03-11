@@ -502,7 +502,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                 returned: {
                     delete: "Не удалось удалить настройки (API вернул {{status}}).",
                     to: "Не удалось синхронизировать настройки с облаком (API вернул {{status}}).",
-                    from: "Не удалось получить настройки из облака (API вернул {{status}})."
+                    from: "Не удалось получить настройки из облака (API вернул {{status}}).",
+                    manifest: "Не удалось получить манифест для удаления (API вернул {{status}})."
                 }
             },
             synchronize: {
