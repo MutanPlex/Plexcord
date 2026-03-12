@@ -105,9 +105,11 @@ export const settings = definePluginSettings({
         component: () => (
             <section>
                 <Heading>{t(plugin.musicControls.option.YtmSectionTitle.label)}</Heading>
-                {t(plugin.musicControls.option.YtmSectionTitle.description, {
-                    app: <MaskedLink href="https://github.com/pear-devs/pear-desktop">Pear Desktop</MaskedLink>
-                })}
+                <Paragraph>
+                    {t(plugin.musicControls.option.YtmSectionTitle.description, {
+                        app: <MaskedLink href="https://github.com/pear-devs/pear-desktop">Pear Desktop</MaskedLink>
+                    })}
+                </Paragraph>
             </section>
         )
     },
