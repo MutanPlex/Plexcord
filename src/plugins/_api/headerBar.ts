@@ -17,8 +17,8 @@ export default definePlugin({
         {
             find: '?"BACK_FORWARD_NAVIGATION":',
             replacement: {
-                match: /canShowReminder:.+?\}\),/,
-                replace: "$& Plexcord.Api.HeaderBar._addHeaderBarButtons(),"
+                match: /\i&&\(0,\i\.jsxs?\)\(\i\.\i,\{\.{3}"RECENTS"===\i\?\i:\{\}\}\)/,
+                replace: "Plexcord.Api.HeaderBar._addHeaderBarButtons(),$&"
             }
         },
         {
