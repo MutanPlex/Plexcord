@@ -9872,8 +9872,10 @@ const translations = {
             option: {
                 replace: {
                     label: "Replace",
-                    string: "Using String",
-                    regex: "Using Regex",
+                    string: "Simple Replacements",
+                    stringDescription: "Simple find and replace rules. For example, find 'brb' and replace it with 'be right back'",
+                    regex: "Regex Replacements",
+                    regexDescription: "More powerful replacements using Regular Expressions. This section is for advanced users. If you don't understand it, just ignore it",
                     myMessages: "Apply to your messages (visible to everyone)",
                     othersMessages: "Apply to others' messages (only visible to you)",
                     allMessages: "Apply to all messages"
@@ -9890,11 +9892,19 @@ const translations = {
             modal: {
                 title: "Test Rules",
                 find: "Find",
+                findRegex: "The regex pattern",
+                findText: "The text to replace",
                 replace: "Replace",
+                replaceDescription: "The text to replace the found text with",
                 includes: "Only if includes",
+                includesDescription: "This rule will only be applied if the message includes this text. This is optional",
                 type: "Type a message",
-                applied: "Message with rules applied"
-            }
+                applied: "Message with rules applied",
+                delete: "Delete Rule",
+                add: "Add Rule",
+                empty: "Empty Rule",
+                rule: "Rule"
+            },
         },
         themeAttributes: {
             name: "ThemeAttributes",

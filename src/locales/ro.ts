@@ -9873,8 +9873,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 replace: {
                     label: "Înlocuire",
-                    string: "Folosind text simplu",
-                    regex: "Folosind Regex (Expresii regulate)",
+                    string: "Înlocuiri simple",
+                    stringDescription: "Reguli simple de căutare și înlocuire. De exemplu, găsește 'brb' și înlocuiește-l cu 'be right back'",
+                    regex: "Înlocuiri Regex",
+                    regexDescription: "Înlocuiri mai avansate folosind expresii regulate. Această secțiune este pentru utilizatori avansați. Dacă nu înțelegi, ignor-o pur și simplu",
                     myMessages: "Aplică mesajelor tale (vizibil pentru toți)",
                     othersMessages: "Aplică mesajelor altora (vizibil doar pentru tine)",
                     allMessages: "Aplică tuturor mesajelor"
@@ -9891,10 +9893,18 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 title: "Testează regulile",
                 find: "Caută",
+                findRegex: "Model regex",
+                findText: "Text de înlocuit",
                 replace: "Înlocuiește",
+                replaceDescription: "Textul care va înlocui textul găsit",
                 includes: "Doar dacă include",
+                includesDescription: "Această regulă va fi aplicată doar dacă mesajul include acest text. Este opțional",
                 type: "Scrie un mesaj",
-                applied: "Mesajul cu regulile aplicate"
+                applied: "Mesaj cu reguli aplicate",
+                delete: "Șterge regula",
+                add: "Adaugă regula",
+                empty: "Regulă goală",
+                rule: "Regulă",
             }
         },
         themeAttributes: {

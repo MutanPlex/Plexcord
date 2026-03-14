@@ -9873,8 +9873,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 replace: {
                     label: "Замена",
-                    string: "Обычная строка",
-                    regex: "Регулярное выражение (Regex)",
+                    string: "Простые замены",
+                    stringDescription: "Простые правила поиска и замены. Например, найти 'brb' и заменить на 'be right back'",
+                    regex: "Замены с Regex",
+                    regexDescription: "Более мощные замены с использованием регулярных выражений. Этот раздел предназначен для продвинутых пользователей. Если вы не понимаете, просто игнорируйте его",
                     myMessages: "К моим сообщениям (видно всем)",
                     othersMessages: "К чужим сообщениям (видно только вам)",
                     allMessages: "Ко всем сообщениям"
@@ -9891,10 +9893,18 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 title: "Тестирование правил",
                 find: "Найти",
+                findRegex: "Шаблон regex",
+                findText: "Текст для замены",
                 replace: "Заменить",
+                replaceDescription: "Текст, который заменит найденный текст",
                 includes: "Только если содержит",
+                includesDescription: "Это правило будет применяться только если сообщение содержит этот текст. Это необязательно",
                 type: "Введите сообщение",
-                applied: "Результат применения правил"
+                applied: "Сообщение с применёнными правилами",
+                delete: "Удалить правило",
+                add: "Добавить правило",
+                empty: "Пустое правило",
+                rule: "Правило",
             }
         },
         themeAttributes: {

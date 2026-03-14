@@ -9873,8 +9873,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 replace: {
                     label: "Substituir",
-                    string: "Usando Texto (String)",
-                    regex: "Usando Regex",
+                    string: "Substituições simples",
+                    stringDescription: "Regras simples de localizar e substituir. Por exemplo, encontrar 'brb' e substituir por 'be right back'",
+                    regex: "Substituições com Regex",
+                    regexDescription: "Substituições mais avançadas usando expressões regulares. Esta secção é para utilizadores avançados. Se não perceber, simplesmente ignore",
                     myMessages: "Aplicar às tuas mensagens (visível para todos)",
                     othersMessages: "Aplicar às mensagens de outros (apenas visível para ti)",
                     allMessages: "Aplicar a todas as mensagens"
@@ -9891,10 +9893,18 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 title: "Testar Regras",
                 find: "Procurar",
+                findRegex: "Padrão regex",
+                findText: "Texto a substituir",
                 replace: "Substituir",
+                replaceDescription: "O texto que substituirá o texto encontrado",
                 includes: "Apenas se incluir",
-                type: "Digita uma mensagem",
-                applied: "Mensagem com regras aplicadas"
+                includesDescription: "Esta regra só será aplicada se a mensagem incluir este texto. Isto é opcional",
+                type: "Escreva uma mensagem",
+                applied: "Mensagem com regras aplicadas",
+                delete: "Eliminar regra",
+                add: "Adicionar regra",
+                empty: "Regra vazia",
+                rule: "Regra",
             }
         },
         themeAttributes: {

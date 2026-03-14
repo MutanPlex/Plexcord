@@ -9873,8 +9873,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 replace: {
                     label: "Ersätta",
-                    string: "Använder String",
-                    regex: "Använder Regex",
+                    string: "Enkla ersättningar",
+                    stringDescription: "Enkla regler för sök och ersätt. Till exempel: hitta 'brb' och ersätt det med 'be right back'",
+                    regex: "Regex-ersättningar",
+                    regexDescription: "Mer kraftfulla ersättningar med reguljära uttryck. Den här sektionen är för avancerade användare. Om du inte förstår det kan du ignorera det",
                     myMessages: "Tillämpa på dina meddelanden (synligt för alla)",
                     othersMessages: "Tillämpa på andras meddelanden (endast synligt för dig)",
                     allMessages: "Tillämpa på alla meddelanden"
@@ -9891,10 +9893,18 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 title: "Testregler",
                 find: "Hitta",
-                replace: "Ersätta",
-                includes: "Endast om det ingår",
+                findRegex: "Regex-mönster",
+                findText: "Text att ersätta",
+                replace: "Ersätt",
+                replaceDescription: "Texten som ska ersätta den hittade texten",
+                includes: "Endast om innehåller",
+                includesDescription: "Denna regel tillämpas endast om meddelandet innehåller denna text. Detta är valfritt",
                 type: "Skriv ett meddelande",
-                applied: "Meddelande med tillämpade regler"
+                applied: "Meddelande med regler tillämpade",
+                delete: "Ta bort regel",
+                add: "Lägg till regel",
+                empty: "Tom regel",
+                rule: "Regel",
             }
         },
         themeAttributes: {

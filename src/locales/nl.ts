@@ -9873,8 +9873,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 replace: {
                     label: "Vervangen",
-                    string: "Met behulp van String",
-                    regex: "Regex gebruiken",
+                    string: "Eenvoudige vervangingen",
+                    stringDescription: "Eenvoudige zoek-en-vervang regels. Bijvoorbeeld: zoek 'brb' en vervang het door 'be right back'",
+                    regex: "Regex-vervangingen",
+                    regexDescription: "Krachtigere vervangingen met reguliere expressies. Deze sectie is voor gevorderde gebruikers. Als je het niet begrijpt, kun je het negeren",
                     myMessages: "Toepassen op uw berichten (voor iedereen zichtbaar)",
                     othersMessages: "Toepassen op berichten van anderen (alleen zichtbaar voor jou)",
                     allMessages: "Toepassen op alle berichten"
@@ -9891,10 +9893,18 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 title: "Testregels",
                 find: "Vinden",
+                findRegex: "Regex-patroon",
+                findText: "Tekst om te vervangen",
                 replace: "Vervangen",
-                includes: "Alleen als inclusief",
+                replaceDescription: "De tekst die de gevonden tekst zal vervangen",
+                includes: "Alleen als bevat",
+                includesDescription: "Deze regel wordt alleen toegepast als het bericht deze tekst bevat. Dit is optioneel",
                 type: "Typ een bericht",
-                applied: "Bericht waarop regels zijn toegepast"
+                applied: "Bericht met toegepaste regels",
+                delete: "Regel verwijderen",
+                add: "Regel toevoegen",
+                empty: "Lege regel",
+                rule: "Regel",
             }
         },
         themeAttributes: {

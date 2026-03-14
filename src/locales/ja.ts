@@ -9873,8 +9873,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 replace: {
                     label: "交換する",
-                    string: "文字列の使用",
-                    regex: "正規表現の使用",
+                    string: "シンプル置換",
+                    stringDescription: "シンプルな検索と置換のルールです。例えば 'brb' を見つけて 'be right back' に置き換えます",
+                    regex: "Regex 置換",
+                    regexDescription: "正規表現を使用したより高度な置換です。このセクションは上級ユーザー向けです。理解できない場合は無視してください",
                     myMessages: "メッセージに適用します (全員に表示されます)",
                     othersMessages: "他の人のメッセージに適用します (自分だけに表示されます)",
                     allMessages: "すべてのメッセージに適用"
@@ -9891,10 +9893,18 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 title: "テストルール",
                 find: "探す",
-                replace: "交換する",
-                includes: "が含まれる場合のみ",
-                type: "メッセージを入力してください",
-                applied: "ルールが適用されたメッセージ"
+                findRegex: "Regex パターン",
+                findText: "置き換えるテキスト",
+                replace: "置き換え",
+                replaceDescription: "見つかったテキストを置き換えるテキスト",
+                includes: "含まれている場合のみ",
+                includesDescription: "このルールはメッセージにこのテキストが含まれている場合のみ適用されます。これは任意です",
+                type: "メッセージを入力",
+                applied: "ルールが適用されたメッセージ",
+                delete: "ルールを削除",
+                add: "ルールを追加",
+                empty: "空のルール",
+                rule: "ルール",
             }
         },
         themeAttributes: {

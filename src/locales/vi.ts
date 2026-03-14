@@ -9873,8 +9873,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 replace: {
                     label: "Thay thế",
-                    string: "Sử dụng chuỗi",
-                    regex: "Sử dụng Regex",
+                    string: "Thay thế đơn giản",
+                    stringDescription: "Các quy tắc tìm và thay thế đơn giản. Ví dụ: tìm 'brb' và thay thế bằng 'be right back'",
+                    regex: "Thay thế Regex",
+                    regexDescription: "Các thay thế mạnh mẽ hơn باستخدام biểu thức chính quy. Phần này dành cho người dùng nâng cao. Nếu bạn không hiểu, hãy bỏ qua",
                     myMessages: "Áp dụng cho tin nhắn của bạn (hiển thị cho mọi người)",
                     othersMessages: "Áp dụng cho tin nhắn của người khác (chỉ hiển thị với bạn)",
                     allMessages: "Áp dụng cho tất cả tin nhắn"
@@ -9891,10 +9893,18 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 title: "Quy tắc kiểm tra",
                 find: "Tìm thấy",
+                findRegex: "Mẫu regex",
+                findText: "Văn bản cần thay thế",
                 replace: "Thay thế",
-                includes: "Chỉ khi bao gồm",
-                type: "Nhập tin nhắn",
-                applied: "Tin nhắn có áp dụng quy tắc"
+                replaceDescription: "Văn bản sẽ thay thế văn bản đã tìm thấy",
+                includes: "Chỉ nếu bao gồm",
+                includesDescription: "Quy tắc này chỉ được áp dụng nếu tin nhắn chứa văn bản này. Đây là tùy chọn",
+                type: "Nhập một tin nhắn",
+                applied: "Tin nhắn đã áp dụng quy tắc",
+                delete: "Xóa quy tắc",
+                add: "Thêm quy tắc",
+                empty: "Quy tắc trống",
+                rule: "Quy tắc",
             }
         },
         themeAttributes: {

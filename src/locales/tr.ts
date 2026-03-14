@@ -9873,8 +9873,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 replace: {
                     label: "Değiştir",
-                    string: "Düz Metin Kullanarak",
-                    regex: "Regex Kullanarak",
+                    string: "Basit Değiştirmeler",
+                    stringDescription: "Basit bul ve değiştir kuralları. Örneğin, 'brb'yi bul ve 'be right back' ile değiştir",
+                    regex: "Regex Değiştirmeleri",
+                    regexDescription: "Düzenli İfadeler (Regular Expressions) kullanarak daha güçlü değiştirmeler. Bu bölüm ileri seviye kullanıcılar içindir. Anlamıyorsanız görmezden gelebilirsiniz",
                     myMessages: "Kendi mesajlarınıza uygula (herkes tarafından görünür)",
                     othersMessages: "Başkalarının mesajlarına uygula (yalnızca size görünür)",
                     allMessages: "Tüm mesajlara uygula"
@@ -9891,10 +9893,18 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 title: "Kuralları Test Et",
                 find: "Bul",
+                findRegex: "Regex deseni",
+                findText: "Değiştirilecek metin",
                 replace: "Değiştir",
+                replaceDescription: "Bulunan metnin yerine konulacak metin",
                 includes: "Yalnızca içeriyorsa",
-                type: "Bir mesaj yazın",
-                applied: "Kurallar uygulanmış mesaj"
+                includesDescription: "Bu kural yalnızca mesaj bu metni içeriyorsa uygulanır. Bu isteğe bağlıdır",
+                type: "Bir mesaj yaz",
+                applied: "Kurallar uygulanmış mesaj",
+                delete: "Kuralı Sil",
+                add: "Kural Ekle",
+                empty: "Boş Kural",
+                rule: "Kural",
             }
         },
         themeAttributes: {

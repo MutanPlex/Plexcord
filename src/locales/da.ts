@@ -9873,8 +9873,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 replace: {
                     label: "Erstat",
-                    string: "Brug streng (string)",
-                    regex: "Brug Regex",
+                    string: "Simple udskiftninger",
+                    stringDescription: "Simple find-og-erstat-regler. For eksempel: find 'brb' og erstat det med 'be right back'.",
+                    regex: "Regex-udskiftninger",
+                    regexDescription: "Mere avancerede udskiftninger ved hjælp af regulære udtryk (Regular Expressions). Denne sektion er for avancerede brugere. Hvis du ikke forstår det, kan du bare ignorere det.",
                     myMessages: "Anvend på dine beskeder (synligt for alle)",
                     othersMessages: "Anvend på andres beskeder (kun synligt for dig)",
                     allMessages: "Anvend på alle beskeder"
@@ -9891,10 +9893,18 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 title: "Test regler",
                 find: "Find",
-                replace: "Erstat med",
-                includes: "Kun hvis den indeholder",
+                findRegex: "Regex-mønster",
+                findText: "Tekst der skal erstattes",
+                replace: "Erstat",
+                replaceDescription: "Teksten der skal erstatte den fundne tekst",
+                includes: "Kun hvis indeholder",
+                includesDescription: "Denne regel anvendes kun hvis beskeden indeholder denne tekst. Dette er valgfrit",
                 type: "Skriv en besked",
-                applied: "Besked med regler anvendt"
+                applied: "Besked med regler anvendt",
+                delete: "Slet regel",
+                add: "Tilføj regel",
+                empty: "Tom regel",
+                rule: "Regel",
             }
         },
         themeAttributes: {

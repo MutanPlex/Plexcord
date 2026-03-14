@@ -9873,8 +9873,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 replace: {
                     label: "바꾸다",
-                    string: "문자열 사용",
-                    regex: "정규식 사용",
+                    string: "간단한 치환",
+                    stringDescription: "간단한 찾기 및 바꾸기 규칙입니다. 예: 'brb'를 찾아 'be right back'으로 바꾸기",
+                    regex: "Regex 치환",
+                    regexDescription: "정규식을 사용한 더 강력한 치환입니다. 이 섹션은 고급 사용자용입니다. 이해하지 못하면 무시해도 됩니다",
                     myMessages: "메시지에 적용(모든 사람에게 표시)",
                     othersMessages: "다른 사람의 메시지에 적용(나에게만 표시됨)",
                     allMessages: "모든 메시지에 적용"
@@ -9891,10 +9893,18 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 title: "테스트 규칙",
                 find: "찾다",
-                replace: "바꾸다",
-                includes: "포함하는 경우에만",
-                type: "메시지를 입력하세요",
-                applied: "규칙이 적용된 메시지"
+                findRegex: "Regex 패턴",
+                findText: "바꿀 텍스트",
+                replace: "바꾸기",
+                replaceDescription: "찾은 텍스트를 대체할 텍스트",
+                includes: "포함된 경우에만",
+                includesDescription: "메시지에 이 텍스트가 포함된 경우에만 이 규칙이 적용됩니다. 선택 사항입니다",
+                type: "메시지 입력",
+                applied: "규칙이 적용된 메시지",
+                delete: "규칙 삭제",
+                add: "규칙 추가",
+                empty: "빈 규칙",
+                rule: "규칙",
             }
         },
         themeAttributes: {

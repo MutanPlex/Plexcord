@@ -9873,8 +9873,10 @@ const translations: MatchStructure<typeof enTranslations> = {
             option: {
                 replace: {
                     label: "代替",
-                    string: "使用字串",
-                    regex: "使用正規表示式",
+                    string: "簡單替換",
+                    stringDescription: "簡單的尋找與取代規則。例如，尋找 'brb' 並將其替換為 'be right back'",
+                    regex: "Regex 替換",
+                    regexDescription: "使用正則表達式進行更強大的替換。本部分適用於進階使用者。如果你不理解，可以直接忽略",
                     myMessages: "應用於您的訊息（所有人都可見）",
                     othersMessages: "套用於其他人的訊息（僅對您可見）",
                     allMessages: "適用於所有訊息"
@@ -9891,10 +9893,18 @@ const translations: MatchStructure<typeof enTranslations> = {
             modal: {
                 title: "測試規則",
                 find: "尋找",
-                replace: "代替",
+                findRegex: "Regex 模式",
+                findText: "要取代的文字",
+                replace: "取代",
+                replaceDescription: "用來取代找到文字的內容",
                 includes: "僅當包含",
-                type: "輸入訊息",
-                applied: "應用規則的訊息"
+                includesDescription: "只有當訊息包含此文字時才會套用此規則。這是可選的",
+                type: "輸入一則訊息",
+                applied: "已套用規則的訊息",
+                delete: "刪除規則",
+                add: "新增規則",
+                empty: "空規則",
+                rule: "規則",
             }
         },
         themeAttributes: {

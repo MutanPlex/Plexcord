@@ -1,0 +1,23 @@
+.pc-expandable-card {
+    color: var(--text-default);
+}
+
+.pc-expandable-card-header {
+    display: flex;
+    cursor: pointer;
+    padding: .75em 1em;
+    margin: 4px;
+    border-radius: var(--radius-xs);
+
+    .pc-expandable-card[data-expanded="true"] & {
+        background: var(--card-secondary-bg);
+    }
+}
+
+.pc-expandable-card-icon {
+    margin-left: auto;
+}
+
+.pc-expandable-card-content {
+    padding: 0.5em 1em;
+}
