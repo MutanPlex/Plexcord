@@ -87,11 +87,12 @@ export function useBookmarks(userId: string): UseBookmark {
                 ...bookmarks
             });
         },
-        addFolder() {
+        addFolder(name, iconColor, iconName) {
             if (!bookmarks) return;
             const length = bookmarks[userId].push({
-                name: t(plugin.channelTabs.bookmark.folder),
-                iconColor: bookmarkFolderColors.Black,
+                name: name?.trim() || t(plugin.channelTabs.bookmark.folder),
+                iconColor: iconColor ?? bookmarkFolderColors.Black,
+                iconName,
                 bookmarks: []
             });
 
@@ -111,12 +112,21 @@ export function useBookmarks(userId: string): UseBookmark {
         },
         deleteBookmark(index, folderIndex) {
             if (!bookmarks) return;
-            if (index < 0 || index > (bookmarks[userId].length - 1))
-                return logger.error("Attempted to delete bookmark at index " + index, bookmarks);
+            if (typeof folderIndex === "number") {
+                const folder = bookmarks[userId][folderIndex];
+                if (!isBookmarkFolder(folder))
+                    return logger.error("Attempted to delete bookmark from non-folder " + folderIndex, bookmarks);
 
-            if (typeof folderIndex === "number")
-                (bookmarks[userId][folderIndex] as BookmarkFolder).bookmarks.splice(index, 1);
-            else bookmarks[userId].splice(index, 1);
+                if (index < 0 || index > (folder.bookmarks.length - 1))
+                    return logger.error("Attempted to delete bookmark at index " + index, bookmarks);
+
+                folder.bookmarks.splice(index, 1);
+            } else {
+                if (index < 0 || index > (bookmarks[userId].length - 1))
+                    return logger.error("Attempted to delete bookmark at index " + index, bookmarks);
+
+                bookmarks[userId].splice(index, 1);
+            }
 
             setBookmarks({
                 ...bookmarks
