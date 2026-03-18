@@ -35,10 +35,10 @@ export default definePlugin({
             name: "create friend invite",
             description: () => t(plugin.friendInvites.command.create.description),
             inputType: ApplicationCommandInputType.BUILT_IN,
-            execute: async (args, ctx) => {
+            execute: async (args, { channel }) => {
                 const invite = await FriendInvites.createFriendInvite();
 
-                sendBotMessage(ctx.channel.id, {
+                sendBotMessage(channel.id, {
                     author: {
                         username: "Plexcord"
                     },
@@ -54,7 +54,7 @@ export default definePlugin({
             name: "view friend invites",
             description: () => t(plugin.friendInvites.command.view.description),
             inputType: ApplicationCommandInputType.BUILT_IN,
-            execute: async (_, ctx) => {
+            execute: async (_, { channel }) => {
                 const invites = await FriendInvites.getAllFriendInvites();
                 const friendInviteList = invites.map(i =>
                     t(plugin.friendInvites.command.view.message, {
@@ -65,7 +65,7 @@ export default definePlugin({
                     })
                 );
 
-                sendBotMessage(ctx.channel.id, {
+                sendBotMessage(channel.id, {
                     author: {
                         username: "Plexcord"
                     },
@@ -77,10 +77,10 @@ export default definePlugin({
             name: "revoke friend invites",
             description: () => t(plugin.friendInvites.command.revoke.description),
             inputType: ApplicationCommandInputType.BUILT_IN,
-            execute: async (_, ctx) => {
+            execute: async (_, { channel }) => {
                 await FriendInvites.revokeFriendInvites();
 
-                sendBotMessage(ctx.channel.id, {
+                sendBotMessage(channel.id, {
                     author: {
                         username: "Plexcord"
                     },

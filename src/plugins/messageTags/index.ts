@@ -118,12 +118,12 @@ export default definePlugin({
                     required: true
                 }
             ],
-            execute: async (args, ctx) => {
+            execute: async (args, { channel }) => {
                 const name: string = findOption(args, "tag-name", "");
                 const message: string = findOption(args, "message", "");
 
                 if (getTag(name))
-                    return sendBotMessage(ctx.channel.id, {
+                    return sendBotMessage(channel.id, {
                         author: { username: "Plexcord" },
                         content: `${EMOTE} ${t(plugin.messageTags.alreadyExist, { tagname: name })}`
                     });
@@ -136,7 +136,7 @@ export default definePlugin({
                 createTagCommand(tag);
                 addTag(tag);
 
-                sendBotMessage(ctx.channel.id, {
+                sendBotMessage(channel.id, {
                     author: { username: "Plexcord" },
                     content: `${EMOTE} ${t(plugin.messageTags.successCreate, { tagname: name })}`
                 });
@@ -147,8 +147,8 @@ export default definePlugin({
             description: () => t(plugin.messageTags.command.tags.option.list.description),
             inputType: ApplicationCommandInputType.BUILT_IN,
             options: [],
-            execute: async (_, ctx) => {
-                sendBotMessage(ctx.channel.id, {
+            execute: async (_, { channel }) => {
+                sendBotMessage(channel.id, {
                     author: { username: "Plexcord" },
                     embeds: [
                         {
@@ -176,11 +176,11 @@ export default definePlugin({
                     required: true
                 }
             ],
-            execute: async (args, ctx) => {
+            execute: async (args, { channel }) => {
                 const name: string = findOption(args, "tag-name", "");
 
                 if (!getTag(name))
-                    return sendBotMessage(ctx.channel.id, {
+                    return sendBotMessage(channel.id, {
                         author: { username: "Plexcord" },
                         content: `${EMOTE} ${t(plugin.messageTags.noDeleteTag, { tagname: name })}`
                     });
@@ -188,7 +188,7 @@ export default definePlugin({
                 unregisterCommand(name);
                 removeTag(name);
 
-                sendBotMessage(ctx.channel.id, {
+                sendBotMessage(channel.id, {
                     author: { username: "Plexcord" },
                     content: `${EMOTE} ${t(plugin.messageTags.successDelete, { name })}`
                 });
@@ -206,17 +206,17 @@ export default definePlugin({
                     required: true
                 }
             ],
-            execute: async (args, ctx) => {
+            execute: async (args, { channel }) => {
                 const name: string = findOption(args, "tag-name", "");
                 const tag = getTag(name);
 
                 if (!tag)
-                    return sendBotMessage(ctx.channel.id, {
+                    return sendBotMessage(channel.id, {
                         author: { username: "Plexcord" },
                         content: `${EMOTE} ${t(plugin.messageTags.tagPreview, { name })}`
                     });
 
-                sendBotMessage(ctx.channel.id, {
+                sendBotMessage(channel.id, {
                     content: tag.message.replaceAll("\\n", "\n")
                 });
             }

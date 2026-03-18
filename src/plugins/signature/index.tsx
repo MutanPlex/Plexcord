@@ -162,9 +162,9 @@ export default definePlugin({
                 type: ApplicationCommandOptionType.BOOLEAN,
             },
         ],
-        execute: async (args, ctx) => {
+        execute: async (args, { channel }) => {
             settings.store.isEnabled = !!findOption(args, "value", !settings.store.isEnabled);
-            sendBotMessage(ctx.channel.id, {
+            sendBotMessage(channel.id, {
                 author: {
                     username: "Plexcord",
                 },

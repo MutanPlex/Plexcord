@@ -400,7 +400,7 @@ export default definePlugin({
             }
         ],
 
-        execute: async (args, ctx) => {
+        execute: async (args, { channel }) => {
             let updated = false;
             const location = findOption(args, "toggle");
 
@@ -410,7 +410,7 @@ export default definePlugin({
                 if (location === "global") {
                     toggleGlobal();
                 } else {
-                    const locationId = location === "guild" ? ctx.channel.guild_id : ctx.channel.id;
+                    const locationId = location === "guild" ? channel.guild_id : channel.id;
                     toggleLocation(locationId, getEffectiveList(), settings.store.defaultHidden);
                 }
             }
@@ -436,7 +436,7 @@ export default definePlugin({
                 settings.store.defaultHidden = !!updateDefaultHidden;
             }
 
-            sendBotMessage(ctx.channel.id, {
+            sendBotMessage(channel.id, {
                 content: updated ? t(plugin.silentTyping.content.updated) : t(plugin.silentTyping.content.noChanges),
             });
         },

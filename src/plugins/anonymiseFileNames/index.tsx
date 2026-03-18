@@ -66,7 +66,7 @@ const settings = definePluginSettings({
         label: () => t(plugin.anonymiseFileNames.option.randomisedLength.label),
         description: () => t(plugin.anonymiseFileNames.option.randomisedLength.description),
         type: OptionType.NUMBER,
-        default: 7,
+        default: 10,
         disabled: () => settings.store.method !== Methods.Random,
     },
     consistent: {
@@ -141,7 +141,7 @@ export default definePlugin({
         const newFilename = (() => {
             switch (settings.store.method) {
                 case Methods.Random:
-                    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                    const chars = "ABCDEFabcdef0123456789";
                     const returnedName = Array.from(
                         { length: settings.store.randomisedLength },
                         () => chars[Math.floor(Math.random() * chars.length)]
@@ -169,10 +169,10 @@ export default definePlugin({
                 type: ApplicationCommandOptionType.BOOLEAN,
             },
         ],
-        execute: async (args, ctx) => {
+        execute: async (args, { channel }) => {
             settings.store.spoilerMessages = !!findOption(args, "value", !settings.store.spoilerMessages);
 
-            sendBotMessage(ctx.channel.id, {
+            sendBotMessage(channel.id, {
                 author: {
                     username: "Plexcord"
                 },

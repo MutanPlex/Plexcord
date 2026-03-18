@@ -21,7 +21,7 @@ import { plugin, t } from "@api/i18n";
 import { Paragraph } from "@components/Paragraph";
 import { Auth, authorize } from "@plugins/reviewDB/auth";
 import { Review, ReviewType } from "@plugins/reviewDB/entities";
-import { addReview, getReviews, Response, REVIEWS_PER_PAGE } from "@plugins/reviewDB/reviewDbApi";
+import { addReview, getReviews, REVIEWS_PER_PAGE, UserReviewsData } from "@plugins/reviewDB/reviewDbApi";
 import { settings } from "@plugins/reviewDB/settings";
 import { cl, showToast } from "@plugins/reviewDB/utils";
 import { useAwaiter, useForceUpdater } from "@utils/react";
@@ -42,7 +42,7 @@ interface UserProps {
 }
 
 interface Props extends UserProps {
-    onFetchReviews(data: Response): void;
+    onFetchReviews(data: UserReviewsData): void;
     refetchSignal?: unknown;
     showInput?: boolean;
     page?: number;

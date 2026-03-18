@@ -96,7 +96,7 @@
 .pc-command-palette-search input {
     flex: 1;
     background: transparent;
-    color: var(--text-normal);
+    color: var(--text-default);
     font-size: 16px;
     padding: 12px 0;
     outline: none;
@@ -187,7 +187,7 @@
     font-family: inherit;
     cursor: pointer;
     outline: none;
-    color: var(--text-normal);
+    color: var(--text-default);
 }
 
 .pc-command-palette-item:focus-visible {
@@ -510,7 +510,7 @@
 .pc-command-palette-style-classic .pc-command-palette-back {
     background: rgb(54 57 63);
     border-color: rgb(30 33 36);
-    color: var(--text-normal);
+    color: var(--text-default);
 }
 
 .pc-command-palette-style-classic .pc-command-palette-back:hover,
@@ -545,7 +545,7 @@
 .pc-command-palette-style-classic .pc-command-palette-tag-button.pc-command-palette-active {
     background: rgb(var(--brand-experiment-500-rgb, 88 101 242) / 18%);
     border-color: rgb(var(--brand-experiment-500-rgb, 88 101 242) / 65%);
-    color: var(--text-normal);
+    color: var(--text-default);
 }
 
 .pc-command-palette-style-classic .pc-command-palette-tag-count,
@@ -555,7 +555,7 @@
 
 .pc-command-palette-style-classic .pc-command-palette-tag-button.pc-command-palette-active .pc-command-palette-tag-count,
 .pc-command-palette-style-classic .pc-command-palette-tag-button.pc-command-palette-active .pc-command-palette-tag-hotkey {
-    color: var(--text-normal);
+    color: var(--text-default);
 }
 
 .pc-command-palette-style-classic .pc-command-palette-tag-indicator {
@@ -651,7 +651,7 @@
 
 .pc-command-palette-style-classic .pc-command-palette-item:not(:is(.pc-command-palette-danger, .pc-command-palette-chosen, .pc-command-palette-selected)):hover .pc-command-palette-item-content,
 .pc-command-palette-style-classic .pc-command-palette-item:not(:is(.pc-command-palette-danger, .pc-command-palette-chosen, .pc-command-palette-selected)):focus-visible .pc-command-palette-item-content {
-    color: var(--text-normal);
+    color: var(--text-default);
 }
 
 .pc-command-palette-style-classic .pc-command-palette-item.pc-command-palette-pinned:is(:hover, :focus-visible)::before {
@@ -675,7 +675,7 @@
 
 .pc-command-palette-style-classic .pc-command-palette-item.pc-command-palette-selected .pc-command-palette-tag-chip,
 .pc-command-palette-style-classic .pc-command-palette-item.pc-command-palette-chosen .pc-command-palette-tag-chip {
-    color: var(--text-normal);
+    color: var(--text-default);
     border-color: rgb(255 255 255 / 22%);
     background: rgb(255 255 255 / 12%);
 }
