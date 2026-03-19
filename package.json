@@ -52,6 +52,7 @@
         "monaco-editor": "^0.55.1",
         "nanoid": "^5.1.6",
         "native-file-system-adapter": "^3.0.1",
+        "p-limit": "^7.3.0",
         "usercss-meta": "^0.12.0",
         "virtual-merge": "^1.0.2",
         "zip-local": "^0.3.5"

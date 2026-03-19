@@ -83,6 +83,7 @@ export type BaseTextProps<Tag extends TextTag = "div"> = ComponentPropsWithoutRe
     selectable?: boolean;
     lineClamp?: number;
     tabularNumbers?: boolean;
+    defaultColor?: boolean;
 };
 
 export function BaseText<T extends TextTag = "div">(props: BaseTextProps<T>): ReactNode {
@@ -91,6 +92,7 @@ export function BaseText<T extends TextTag = "div">(props: BaseTextProps<T>): Re
         weight = "normal",
         color,
         tag: Tag = "div",
+        defaultColor = true,
         selectable = false,
         lineClamp,
         tabularNumbers = false,
@@ -108,6 +110,7 @@ export function BaseText<T extends TextTag = "div">(props: BaseTextProps<T>): Re
                 lineClamp === 1 && textCls("line-clamp-1"),
                 lineClamp != null && lineClamp > 1 && textCls("line-clamp"),
                 tabularNumbers && textCls("tabular-numbers"),
+                defaultColor && textCls("defaultColor"),
                 className
             )}
             style={{
