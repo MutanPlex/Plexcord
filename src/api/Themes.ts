@@ -22,7 +22,7 @@ import { ThemeStore } from "@plexcord/discord-types";
 import { createAndAppendStyle } from "@utils/css";
 import { PopoutWindowStore } from "@webpack/common";
 
-import { plexcordRootNode, userStyleRootNode } from "./Styles";
+import { coreStyleRootNode, managedStyleRootNode, plexcordRootNode, userStyleRootNode } from "./Styles";
 
 let style: HTMLStyleElement;
 let themesStyle: HTMLStyleElement;
@@ -83,14 +83,23 @@ async function initThemes() {
 
 function applyToPopout(popoutWindow: Window | undefined, key: string) {
     if (!popoutWindow?.document) return;
-    // skip game overlay cuz it needs to stay transparent, themes broke it
-    if (key === "DISCORD_OutOfProcessOverlay") return;
 
     const doc = popoutWindow.document;
 
     doc.querySelector("plexcord-root")?.remove();
 
-    doc.documentElement.appendChild(plexcordRootNode.cloneNode(true));
+    const clonedRoot = plexcordRootNode.cloneNode(false) as HTMLElement;
+
+    clonedRoot.append(
+        coreStyleRootNode.cloneNode(true),
+        managedStyleRootNode.cloneNode(true)
+    );
+
+    if (key !== "DISCORD_OutOfProcessOverlay") {
+        clonedRoot.append(userStyleRootNode.cloneNode(true));
+    }
+
+    doc.documentElement.appendChild(clonedRoot);
 }
 
 function updatePopoutWindows() {

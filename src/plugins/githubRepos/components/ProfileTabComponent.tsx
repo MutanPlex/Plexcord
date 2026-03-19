@@ -7,7 +7,6 @@
 
 import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
-import { Button, TextButton } from "@components/Button";
 import { fetchReposByUserId, fetchReposByUsername, fetchUserInfo, GitHubUserInfo } from "@plugins/githubRepos/githubApi";
 import { GitHubRepo } from "@plugins/githubRepos/types";
 import { openModal } from "@utils/modal";
@@ -17,12 +16,11 @@ import { cl, settings } from "..";
 import { RepoCard } from "./RepoCard";
 import { ReposModal } from "./ReposModal";
 
-export function GitHubReposComponent({ id, theme, variant = "popout" }: { id: string, theme: string; variant?: "popout" | "tab"; }) {
+export function ProfileTabComponent({ id }: { id: string, theme: string; }) {
     const [repos, setRepos] = useState<GitHubRepo[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [userInfo, setUserInfo] = useState<GitHubUserInfo | null>(null);
-    const [returnJustButton, setReturnJustButton] = useState(false);
 
     const openReposModal = () => {
         if (!userInfo) return;
@@ -66,8 +64,6 @@ export function GitHubReposComponent({ id, theme, variant = "popout" }: { id: st
 
                 const githubId = githubConnection.id;
 
-                if (!settings.store.showInMiniProfile && variant !== "tab") setReturnJustButton(true);
-
                 // Try to fetch by ID first, fall back to username
                 const reposById = await fetchReposByUserId(githubId);
                 if (reposById) {
@@ -101,56 +97,26 @@ export function GitHubReposComponent({ id, theme, variant = "popout" }: { id: st
 
     if (!repos.length) return null;
 
-    if (returnJustButton) {
-        return (
-            <Button
-                className={cl("button")}
-                size="small"
-                variant="secondary"
-                onClick={openReposModal}
-            >
-                {t(plugin.gitHubRepos.button.show)}
-            </Button>
-        );
-    }
-
-    const topRepos = variant === "tab" ? repos : repos.slice(0, 4);
-
     return (
-        <div className={variant === "tab" ? `${cl("container")} ${cl("tab")}` : cl("container")}>
+        <div className={cl("container", "tab")}>
             <BaseText size="xs" weight="semibold" className={cl("header")}>
                 {t(plugin.gitHubRepos.button.repositories)}
                 {userInfo && (
                     <span className={cl("count")}>
-                        {variant === "tab"
-                            ? ` (${repos.length})`
-                            : ` ${t(plugin.gitHubRepos.button.only, { length: topRepos.length, total: userInfo.totalRepos })}`
-                        }
+                        {` (${repos.length})`}
                     </span>
                 )}
             </BaseText>
             <div className={cl("list")}>
-                {topRepos.map(repo => (
+                {repos.map(repo => (
                     <RepoCard
                         key={repo.id}
                         repo={repo}
                         showStars={settings.store.showStars}
                         showLanguage={settings.store.showLanguage}
-                        variant={variant}
                     />))
                 }
             </div>
-            {variant !== "tab" && (
-                <div className={cl("footer")}>
-                    <TextButton
-                        className={cl("show-more")}
-                        color="secondary"
-                        onClick={openReposModal}
-                    >
-                        {t(plugin.gitHubRepos.button.more)}
-                    </TextButton>
-                </div>
-            )}
         </div>
     );
 }
