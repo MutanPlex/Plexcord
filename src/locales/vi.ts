@@ -2125,6 +2125,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showBookmarkBar: {
                     label: "Hiển thị thanh dấu trang"
                 },
+                persistUnreadCountFallback: {
+                    label: "Lưu fallback số chưa đọc",
+                    description: "Lưu các fallback huy hiệu chưa đọc qua các lần tải lại cho tab và dấu trang"
+                },
                 bookmarkNotificationDot: {
                     label: "Dấu chấm thông báo đánh dấu",
                     description: "Hiển thị dấu chấm thông báo cho dấu trang"
@@ -3114,9 +3118,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 crashed: {
                     title: "Discord đã bị hỏng!",
-                    body: "Awn :( Discord đã gặp sự cố nhanh chóng hai lần, không thể khôi phục. Nhấp vào đây để tham gia máy chủ hỗ trợ của chúng tôi!",
+                    body: "Awn :( Discord đã gặp sự cố nhanh chóng hai lần, không thể khôi phục.",
                     update: "Uh ồ, Discord vừa gặp sự cố... nhưng tin tốt là đã có bản cập nhật Plexcord có thể khắc phục sự cố này! Bạn có muốn cập nhật ngay bây giờ không?",
-                    recover: "Đang cố gắng khôi phục... Nhấp vào đây để tham gia máy chủ hỗ trợ của chúng tôi!",
+                    recover: "Đang cố gắng khôi phục...",
                     invalid: "Liên kết mời không hợp lệ hoặc đã hết hạn."
                 }
             }
@@ -4681,13 +4685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Làm cho hình đại diện chiếm toàn bộ ô VC",
-            option: {
-                useServerProfileAvatars: {
-                    label: "Sử dụng Avatar hồ sơ máy chủ",
-                    description: "Sử dụng hình đại diện hồ sơ máy chủ trong các kênh thoại của bang hội khi có sẵn."
-                }
-            }
+            description: "Làm cho hình đại diện chiếm toàn bộ ô VC"
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
@@ -8597,6 +8595,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     website: "Trang web ReviewDB",
                     server: "Máy chủ hỗ trợ ReviewDB"
                 }
+            },
+            profile: {
+                optedOut: "Người dùng đã từ chối",
+                noReviews: "Chưa có đánh giá"
             }
         },
         richMagnetLinks: {

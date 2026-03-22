@@ -2125,6 +2125,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showBookmarkBar: {
                     label: "Lesezeichenleiste anzeigen"
                 },
+                persistUnreadCountFallback: {
+                    label: "Fallback für ungelesene Anzahl beibehalten",
+                    description: "Fallbacks für ungelesene Abzeichen über Neuladungen hinweg für Tabs und Lesezeichen beibehalten"
+                },
                 bookmarkNotificationDot: {
                     label: "Lesezeichen Benachrichtigungspunkt",
                     description: "Benachrichtigungspunkt für Lesezeichen anzeigen"
@@ -3114,9 +3118,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 crashed: {
                     title: "Discord ist abgestürzt!",
-                    body: "Oje :( Discord ist zweimal kurz hintereinander abgestürzt. Wiederherstellung abgebrochen. Klicke hier für Support!",
+                    body: "Oje :( Discord ist zweimal kurz hintereinander abgestürzt.",
                     update: "Hoppla, Discord ist abgestürzt... aber es gibt ein Plexcord-Update, das dies beheben könnte! Jetzt aktualisieren?",
-                    recover: "Versuche Wiederherstellung... Klicke hier für Support!",
+                    recover: "Versuche Wiederherstellung...",
                     invalid: "Ungültiger oder abgelaufener Einladungslink."
                 }
             }
@@ -4681,13 +4685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Lässt Avatare die gesamte Kachel im Sprachkanal (VC) ausfüllen",
-            option: {
-                useServerProfileAvatars: {
-                    label: "Server-Profil-Avatare nutzen",
-                    description: "Nutzt Server-Profil-Avatare in Sprachkanälen, falls verfügbar."
-                }
-            }
+            description: "Lässt Avatare die gesamte Kachel im Sprachkanal (VC) ausfüllen"
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
@@ -8597,6 +8595,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     website: "ReviewDB-Webseite",
                     server: "ReviewDB-Supportserver"
                 }
+            },
+            profile: {
+                optedOut: "Benutzer hat sich abgemeldet",
+                noReviews: "Noch keine Bewertungen"
             }
         },
         richMagnetLinks: {

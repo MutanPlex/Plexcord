@@ -2125,6 +2125,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showBookmarkBar: {
                     label: "ブックマークバーを表示"
                 },
+                persistUnreadCountFallback: {
+                    label: "未読数フォールバックを保持",
+                    description: "タブとブックマークの未読バッジのフォールバックをリロード間で保持する"
+                },
                 bookmarkNotificationDot: {
                     label: "ブックマーク通知ドット",
                     description: "ブックマークの通知ドットを表示する"
@@ -3114,9 +3118,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 crashed: {
                     title: "Discordがクラッシュしました！",
-                    body: "Awn :( Discord は 2 回急速にクラッシュしましたが、回復しようとしませんでした。ここをクリックしてサポート サーバーに参加してください!",
+                    body: "Awn :( Discord は 2 回急速にクラッシュしましたが、回復しようとしませんでした",
                     update: "ああ、Discord がクラッシュしました...しかし良いニュースです。この問題を修正する可能性のある Plexcord アップデートが利用可能です。今すぐ更新しますか?",
-                    recover: "回復を試みています... ここをクリックしてサポート サーバーに参加してください!",
+                    recover: "回復を試みています...",
                     invalid: "招待リンクが無効または期限切れです。"
                 }
             }
@@ -4681,13 +4685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "アバターが VC タイル全体を占めるようにします",
-            option: {
-                useServerProfileAvatars: {
-                    label: "サーバープロファイルアバターを使用する",
-                    description: "利用可能な場合は、ギルド音声チャネルでサーバー プロファイル アバターを使用します。"
-                }
-            }
+            description: "アバターが VC タイル全体を占めるようにします"
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
@@ -8597,6 +8595,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     website: "ReviewDB Web サイト",
                     server: "ReviewDB サポートサーバー"
                 }
+            },
+            profile: {
+                optedOut: "ユーザーがオプトアウトしました",
+                noReviews: "まだレビューがありません"
             }
         },
         richMagnetLinks: {

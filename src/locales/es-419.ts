@@ -2125,6 +2125,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showBookmarkBar: {
                     label: "Mostrar barra de marcadores"
                 },
+                persistUnreadCountFallback: {
+                    label: "Persistir respaldo de conteo no leído",
+                    description: "Mantener los respaldos de insignias no leídas entre recargas para pestañas y marcadores"
+                },
                 bookmarkNotificationDot: {
                     label: "Punto de notificación en marcadores",
                     description: "Mostrar un punto de notificación en los marcadores con actividad pendiente"
@@ -3114,9 +3118,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 crashed: {
                     title: "¡Discord se ha cerrado inesperadamente!",
-                    body: "Awn :( Discord ha fallado dos veces seguidas. ¡Haz clic aquí para unirte al soporte!",
+                    body: "Awn :( Discord ha fallado dos veces seguidas.",
                     update: "¡Buenas noticias! Hay una actualización de Plexcord que podría solucionar este error. ¿Actualizar ahora?",
-                    recover: "Intentando recuperar... Haz clic aquí para unirte al servidor de soporte.",
+                    recover: "Intentando recuperar...",
                     invalid: "Enlace de invitación no válido o expirado."
                 }
             }
@@ -4681,13 +4685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Hace que los avatares ocupen todo el recuadro del canal de voz",
-            option: {
-                useServerProfileAvatars: {
-                    label: "Usar avatares de perfil de servidor",
-                    description: "Usar los avatares de perfil del servidor en los canales de voz cuando estén disponibles."
-                }
-            }
+            description: "Hace que los avatares ocupen todo el recuadro del canal de voz"
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
@@ -8597,6 +8595,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     website: "Sitio web de ReviewDB",
                     server: "Servidor de soporte de ReviewDB"
                 }
+            },
+            profile: {
+                optedOut: "Usuario rechazó",
+                noReviews: "Sin reseñas aún"
             }
         },
         richMagnetLinks: {

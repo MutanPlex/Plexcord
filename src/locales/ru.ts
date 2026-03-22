@@ -2125,6 +2125,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showBookmarkBar: {
                     label: "Показывать панель закладок"
                 },
+                persistUnreadCountFallback: {
+                    label: "Сохранять резерв счётчика непрочитанных",
+                    description: "Сохранять резервные значения значков непрочитанного между перезагрузками для вкладок и закладок"
+                },
                 bookmarkNotificationDot: {
                     label: "Точка уведомления закладок",
                     description: "Показывать индикатор уведомлений для закладок"
@@ -3114,9 +3118,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 crashed: {
                     title: "Discord вылетел!",
-                    body: "Ой :( Discord вылетел дважды подряд, восстановление не производится. Нажмите здесь, чтобы зайти на наш сервер поддержки!",
+                    body: "Ой :( Discord вылетел дважды подряд, восстановление не производится.",
                     update: "Discord вылетел... Но есть хорошие новости: доступно обновление Plexcord, которое может это исправить! Обновить сейчас?",
-                    recover: "Попытка восстановления... Нажмите здесь для связи с поддержкой!",
+                    recover: "Попытка восстановления...",
                     invalid: "Ссылка на приглашение недействительна."
                 }
             }
@@ -4681,13 +4685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Заставляет аватары занимать всю плитку в голосовом канале.",
-            option: {
-                useServerProfileAvatars: {
-                    label: "Использовать аватары профиля сервера",
-                    description: "Показывать серверные аватары в голосовых каналах гильдии, если они доступны."
-                }
-            }
+            description: "Заставляет аватары занимать всю плитку в голосовом канале."
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
@@ -8597,6 +8595,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     website: "Сайт ReviewDB",
                     server: "Сервер поддержки"
                 }
+            },
+            profile: {
+                optedOut: "Пользователь отказался",
+                noReviews: "Отзывов нет"
             }
         },
         richMagnetLinks: {

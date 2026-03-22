@@ -2125,6 +2125,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showBookmarkBar: {
                     label: "顯示書籤列"
                 },
+                persistUnreadCountFallback: {
+                    label: "持久化未讀計數備援",
+                    description: "在重新載入之間為分頁和書籤保留未讀徽章備援"
+                },
                 bookmarkNotificationDot: {
                     label: "書籤通知點",
                     description: "顯示書籤的通知點"
@@ -3114,9 +3118,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 crashed: {
                     title: "不和諧已經崩潰了！",
-                    body: "Awn :( Discord 已快速崩潰兩次，且未嘗試恢復。點擊此處加入我們的支援伺服器！",
+                    body: "Awn :( Discord 已快速崩潰兩次，且未嘗試恢復",
                     update: "呃哦，Discord 剛剛崩潰了……但好消息是，有一個 Plexcord 更新可以解決這個問題！您想現在更新嗎？",
-                    recover: "正在嘗試恢復...點擊此處加入我們的支援伺服器！",
+                    recover: "正在嘗試恢復...",
                     invalid: "邀請連結無效或過期。"
                 }
             }
@@ -4681,13 +4685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "使頭像佔據整個 VC 區塊",
-            option: {
-                useServerProfileAvatars: {
-                    label: "使用伺服器設定檔頭像",
-                    description: "如果可用，請在公會語音頻道中使用伺服器設定檔頭像。"
-                }
-            }
+            description: "使頭像佔據整個 VC 區塊"
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
@@ -8597,6 +8595,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     website: "評論資料庫網站",
                     server: "ReviewDB 支援伺服器"
                 }
+            },
+            profile: {
+                optedOut: "使用者已選擇退出",
+                noReviews: "暫無評論"
             }
         },
         richMagnetLinks: {

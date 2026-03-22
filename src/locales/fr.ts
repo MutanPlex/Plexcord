@@ -2125,6 +2125,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showBookmarkBar: {
                     label: "Afficher la barre de signets"
                 },
+                persistUnreadCountFallback: {
+                    label: "Conserver le fallback du nombre non lu",
+                    description: "Conserver les fallbacks des badges non lus entre les rechargements pour les onglets et les favoris"
+                },
                 bookmarkNotificationDot: {
                     label: "Point de notification de signet",
                     description: "Afficher un point de notification pour les signets"
@@ -3114,9 +3118,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 crashed: {
                     title: "Discord a planté !",
-                    body: "Zut :( Discord a planté deux fois de suite, récupération non tentée. Cliquez ici pour rejoindre notre serveur de support !",
+                    body: "Zut :( Discord a planté deux fois de suite, récupération non tentée.",
                     update: "Oh oh, Discord vient de planter... mais bonne nouvelle, une mise à jour Plexcord est disponible et pourrait régler le problème ! Voulez-vous mettre à jour ?",
-                    recover: "Tentative de récupération... Cliquez ici pour rejoindre notre serveur de support !",
+                    recover: "Tentative de récupération...",
                     invalid: "Lien d'invitation invalide ou expiré."
                 }
             }
@@ -4681,13 +4685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Fait en sorte que les avatars occupent toute la case dans les salons vocaux",
-            option: {
-                useServerProfileAvatars: {
-                    label: "Utiliser les avatars de profil de serveur",
-                    description: "Utilise les avatars spécifiques aux serveurs dans les salons vocaux si disponible."
-                }
-            }
+            description: "Fait en sorte que les avatars occupent toute la case dans les salons vocaux"
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
@@ -8597,6 +8595,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     website: "Site ReviewDB",
                     server: "Serveur Support ReviewDB"
                 }
+            },
+            profile: {
+                optedOut: "Utilisateur désactivé",
+                noReviews: "Pas d'avis encore"
             }
         },
         richMagnetLinks: {

@@ -2125,6 +2125,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showBookmarkBar: {
                     label: "Mostrar barra de marcadores"
                 },
+                persistUnreadCountFallback: {
+                    label: "Persistir respaldo de conteo no leído",
+                    description: "Mantener los respaldos de insignias no leídas entre recargas para pestañas y marcadores"
+                },
                 bookmarkNotificationDot: {
                     label: "Punto de notificación en marcadores",
                     description: "Muestra un punto de notificación para los marcadores"
@@ -3114,9 +3118,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 crashed: {
                     title: "¡Discord se ha bloqueado!",
-                    body: "Vaya :( Discord ha fallado varias veces seguidas. ¡Haz clic para unirte al soporte!",
+                    body: "Vaya :( Discord ha fallado varias veces seguidas.",
                     update: "Discord ha fallado... ¡pero hay una actualización de Plexcord que podría arreglarlo!",
-                    recover: "Intentando recuperar... ¡Haz clic aquí para unirte al soporte!",
+                    recover: "Intentando recuperar...",
                     invalid: "Enlace de invitación no válido o caducado."
                 }
             }
@@ -4681,13 +4685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Hace que los avatares ocupen todo el recuadro en los canales de voz",
-            option: {
-                useServerProfileAvatars: {
-                    label: "Usar avatares de perfil de servidor",
-                    description: "Usa los avatares de servidor en los canales de voz de la guild cuando estén disponibles."
-                }
-            }
+            description: "Hace que los avatares ocupen todo el recuadro en los canales de voz"
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
@@ -8597,6 +8595,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     website: "Sitio web de ReviewDB",
                     server: "Servidor de soporte de ReviewDB"
                 }
+            },
+            profile: {
+                optedOut: "Usuario rechazó",
+                noReviews: "Sin reseñas aún"
             }
         },
         richMagnetLinks: {

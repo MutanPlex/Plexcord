@@ -2122,6 +2122,10 @@ const translations = {
                 showBookmarkBar: {
                     label: "Show Bookmark Bar"
                 },
+                persistUnreadCountFallback: {
+                    label: "Persist Unread Count Fallback",
+                    description: "Persist unread badge fallbacks across reloads for tabs and bookmarks"
+                },
                 bookmarkNotificationDot: {
                     label: "Bookmark Notification Dot",
                     description: "Show notification dot for bookmarks"
@@ -3112,9 +3116,9 @@ const translations = {
             toast: {
                 crashed: {
                     title: "Discord has crashed!",
-                    body: "Awn :( Discord has crashed two times rapidly, not attempting to recover. Click here to join our support server!",
+                    body: "Awn :( Discord has crashed two times rapidly, not attempting to recover.",
                     update: "Uh oh, Discord has just crashed... but good news, there is a Plexcord update available that might fix this issue! Would you like to update now?",
-                    recover: "Attempting to recover... Click here to join our support server!",
+                    recover: "Attempting to recover...",
                     invalid: "Invalid or expired invite link."
                 }
             }
@@ -4679,13 +4683,7 @@ const translations = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Makes avatars take up the entire vc tile",
-            option: {
-                useServerProfileAvatars: {
-                    label: "Use Server Profile Avatars",
-                    description: "Use server profile avatars in guild voice channels when available."
-                }
-            }
+            description: "Makes avatars take up the entire vc tile"
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
@@ -8595,6 +8593,10 @@ const translations = {
                     website: "ReviewDB website",
                     server: "ReviewDB Support server"
                 }
+            },
+            profile: {
+                optedOut: "User opted out",
+                noReviews: "No reviews yet"
             }
         },
         richMagnetLinks: {

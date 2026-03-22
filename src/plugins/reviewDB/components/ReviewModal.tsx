@@ -46,7 +46,7 @@ function Modal({ modalProps, modalKey, discordId, name, type }: { modalProps: an
             <ModalRoot {...modalProps} size={ModalSize.MEDIUM}>
                 <ModalHeader>
                     <BaseText size="lg" weight="semibold" className={cl("modal-header")}>
-                        {name}{t(plugin.reviewDB.modal.reviews.title)}
+                        {name} {t(plugin.reviewDB.modal.reviews.title)}
                         {!!reviewCount && <span> ({reviewCount} Reviews)</span>}
                     </BaseText>
                     <ModalCloseButton onClick={modalProps.onClose} />

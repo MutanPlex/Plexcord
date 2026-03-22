@@ -2125,6 +2125,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showBookmarkBar: {
                     label: "Yer İmi Çubuğunu Göster"
                 },
+                persistUnreadCountFallback: {
+                    label: "Okunmamış Sayı Yedeğini Kalıcı Yap",
+                    description: "Sekmeler ve yer imleri için okunmamış rozet yedeklerini yeniden yüklemeler arasında koru"
+                },
                 bookmarkNotificationDot: {
                     label: "Yer İmi Bildirim Noktası",
                     description: "Yer imleri için bildirim noktası göster"
@@ -3114,9 +3118,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 crashed: {
                     title: "Discord çöktü!",
-                    body: "Tüh :( Discord kısa sürede iki kez çöktü, kurtarma denemesi yapılmayacak. Buraya tıkla ve destek sunucusuna katıl!",
+                    body: "Tüh :( Discord kısa sürede iki kez çöktü, kurtarma denemesi yapılmayacak.",
                     update: "Ah hayır, Discord yeni çöktü... ama güzel haber, bu sorunu düzeltebilecek bir Plexcord güncellemesi mevcut! Şimdi güncellemek ister misiniz?",
-                    recover: "Kurtarılmaya çalışılıyor... Buraya tıklayın ve destek sunucusuna katılın!",
+                    recover: "Kurtarılmaya çalışılıyor...",
                     invalid: "Geçersiz veya süresi geçmiş davet bağlantısı."
                 }
             }
@@ -4681,13 +4685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Avatarların sesli sohbet kutucuğunun tamamını kaplamasını sağlar.",
-            option: {
-                useServerProfileAvatars: {
-                    label: "Sunucu Profil Avatarlarını Kullan",
-                    description: "Sesli sohbet kutucuklarında sunucu profil avatarlarını kullanır (varsa)"
-                }
-            }
+            description: "Avatarların sesli sohbet kutucuğunun tamamını kaplamasını sağlar."
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
@@ -8597,6 +8595,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     website: "ReviewDB websitesi",
                     server: "ReviewDB Destek Sunucusu"
                 }
+            },
+            profile: {
+                optedOut: "Kullanıcı çıkış yaptı",
+                noReviews: "Henüz inceleme yok"
             }
         },
         richMagnetLinks: {

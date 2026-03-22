@@ -2125,6 +2125,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showBookmarkBar: {
                     label: "Afișare bară semne de carte"
                 },
+                persistUnreadCountFallback: {
+                    label: "Persistă fallback pentru numărul necitit",
+                    description: "Păstrează fallback-urile badge-urilor necitite între reîncărcări dla file și marcaje"
+                },
                 bookmarkNotificationDot: {
                     label: "Punct notificare semne de carte",
                     description: "Afișează punctul de notificare pentru semne de carte"
@@ -3114,9 +3118,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 crashed: {
                     title: "Discord s-a blocat!",
-                    body: "Of :( Discord s-a blocat de două ori rapid, nu se mai încearcă recuperarea. Click aici pentru a te alătura serverului nostru de suport!",
+                    body: "Of :( Discord s-a blocat de două ori rapid, nu se mai încearcă recuperarea.",
                     update: "O nu, Discord tocmai s-a blocat... dar vestea bună este că există o actualizare Plexcord disponibilă care ar putea rezolva problema! Dorești să actualizezi acum?",
-                    recover: "Se încearcă recuperarea... Click aici pentru a te alătura serverului nostru de suport!",
+                    recover: "Se încearcă recuperarea...",
                     invalid: "Link de invitație invalid sau expirat."
                 }
             }
@@ -4681,13 +4685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Face ca avatarele să ocupe întreaga celulă a canalului vocal",
-            option: {
-                useServerProfileAvatars: {
-                    label: "Folosește avatarele din profilul serverului",
-                    description: "Folosește avatarele de profil specifice serverului în canalele vocale ale serverului, atunci când sunt disponibile."
-                }
-            }
+            description: "Face ca avatarele să ocupe întreaga celulă a canalului vocal"
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
@@ -8597,6 +8595,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     website: "Site-ul ReviewDB",
                     server: "Serverul de suport ReviewDB"
                 }
+            },
+            profile: {
+                optedOut: "Utilizatorul a refuzat",
+                noReviews: "Nicio recenzie încă"
             }
         },
         richMagnetLinks: {

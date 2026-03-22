@@ -2125,6 +2125,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showBookmarkBar: {
                     label: "북마크바 표시"
                 },
+                persistUnreadCountFallback: {
+                    label: "읽지 않음 수 대체값 유지",
+                    description: "탭과 북마크에 대해 다시 로드 간 읽지 않음 배지 대체값을 유지"
+                },
                 bookmarkNotificationDot: {
                     label: "북마크 알림 점",
                     description: "북마크에 알림 점 표시"
@@ -3114,9 +3118,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 crashed: {
                     title: "디스코드가 충돌했습니다!",
-                    body: "Awn :( Discord는 복구를 시도하지 않고 두 번 빠르게 충돌했습니다. 지원 서버에 참여하려면 여기를 클릭하세요!",
+                    body: "Awn :( Discord는 복구를 시도하지 않고 두 번 빠르게 충돌했습니다.",
                     update: "아, 방금 Discord가 충돌했습니다... 하지만 좋은 소식은 이 문제를 해결할 수 있는 Plexcord 업데이트가 있다는 것입니다! 지금 업데이트하시겠습니까?",
-                    recover: "복구를 시도하는 중... 지원 서버에 참여하려면 여기를 클릭하세요!",
+                    recover: "복구를 시도하는 중...",
                     invalid: "초대 링크가 잘못되었거나 만료되었습니다."
                 }
             }
@@ -4681,13 +4685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "아바타가 전체 VC 타일을 차지하게 만듭니다.",
-            option: {
-                useServerProfileAvatars: {
-                    label: "서버 프로필 아바타 사용",
-                    description: "가능한 경우 길드 음성 채널에서 서버 프로필 아바타를 사용하세요."
-                }
-            }
+            description: "아바타가 전체 VC 타일을 차지하게 만듭니다."
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
@@ -8597,6 +8595,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     website: "리뷰DB 웹사이트",
                     server: "ReviewDB 지원 서버"
                 }
+            },
+            profile: {
+                optedOut: "사용자가 거부했습니다",
+                noReviews: "아직 리뷰가 없습니다"
             }
         },
         richMagnetLinks: {

@@ -2125,6 +2125,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showBookmarkBar: {
                     label: "Показувати панель закладок"
                 },
+                persistUnreadCountFallback: {
+                    label: "Зберігати резерв лічильника непрочитаних",
+                    description: "Зберігати резервні значення значків непрочитаного між перезавантаженнями для вкладок і закладок"
+                },
                 bookmarkNotificationDot: {
                     label: "Крапка сповіщення закладок",
                     description: "Показувати крапку сповіщення для закладок"
@@ -3114,9 +3118,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 crashed: {
                     title: "Discord зазнав збою!",
-                    body: "Ой :( Discord вилетів кілька разів поспіль. Натисніть тут, щоб зайти на наш сервер підтримки!",
+                    body: "Ой :( Discord вилетів кілька разів поспіль.",
                     update: "Доступне оновлення Plexcord, яке може виправити цю помилку! Оновитися зараз?",
-                    recover: "Спроба відновлення... Натисніть тут для підтримки!",
+                    recover: "Спроба відновлення...",
                     invalid: "Посилання на запрошення недійсне або прострочене."
                 }
             }
@@ -4681,13 +4685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Робить аватарки такими, що займають всю плитку в голосовому каналі",
-            option: {
-                useServerProfileAvatars: {
-                    label: "Аватари профілів сервера",
-                    description: "Використовувати аватари профілів конкретних серверів, якщо вони доступні."
-                }
-            }
+            description: "Робить аватарки такими, що займають всю плитку в голосовому каналі"
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
@@ -8597,6 +8595,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     website: "Сайт ReviewDB",
                     server: "Сервер підтримки ReviewDB"
                 }
+            },
+            profile: {
+                optedOut: "Користувач відмовився",
+                noReviews: "Немає відгуків"
             }
         },
         richMagnetLinks: {

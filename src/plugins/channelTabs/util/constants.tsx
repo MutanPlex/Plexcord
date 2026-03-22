@@ -173,7 +173,8 @@ export const settings = definePluginSettings({
         default: true
     },
     persistUnreadCountFallback: {
-        description: "Persist unread badge fallbacks across reloads for tabs and bookmarks",
+        label: () => t(plugin.channelTabs.option.persistUnreadCountFallback.label),
+        description: () => t(plugin.channelTabs.option.persistUnreadCountFallback.description),
         type: OptionType.BOOLEAN,
         default: true,
         restartNeeded: false

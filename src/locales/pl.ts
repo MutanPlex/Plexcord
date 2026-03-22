@@ -2125,6 +2125,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showBookmarkBar: {
                     label: "Pokaż pasek zakładek"
                 },
+                persistUnreadCountFallback: {
+                    label: "Zachowaj zapas liczby nieprzeczytanych",
+                    description: "Zachowuj zapasowe wartości odznak nieprzeczytanych między przeładowaniami dla kart i zakładek"
+                },
                 bookmarkNotificationDot: {
                     label: "Kropka powiadomienia zakładek",
                     description: "Pokaż kropkę powiadomienia dla zakładek"
@@ -3114,9 +3118,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 crashed: {
                     title: "Discord uległ awarii!",
-                    body: "Ojej :( Discord uległ awarii dwa razy pod rząd, nie próbuję odzyskać sprawności. Kliknij tutaj, aby dołączyć do serwera wsparcia!",
+                    body: "Ojej :( Discord uległ awarii dwa razy pod rząd, nie próbuję odzyskać sprawności.",
                     update: "O nie, Discord właśnie uległ awarii... ale mamy dobre wieści! Dostępna jest aktualizacja Plexcord, która może naprawić ten problem. Czy chcesz ją teraz zainstalować?",
-                    recover: "Próba odzyskiwania sprawności... Kliknij tutaj, aby dołączyć do serwera wsparcia!",
+                    recover: "Próba odzyskiwania sprawności...",
                     invalid: "Nieprawidłowy lub wygasły link do zaproszenia."
                 }
             }
@@ -4681,13 +4685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Sprawia, że awatary zajmują cały kafel kanału głosowego",
-            option: {
-                useServerProfileAvatars: {
-                    label: "Używaj awatarów profilu serwera",
-                    description: "Używaj awatarów z profilu serwera na kanałach głosowych gildii, jeśli są dostępne."
-                }
-            }
+            description: "Sprawia, że awatary zajmują cały kafel kanału głosowego"
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
@@ -8597,6 +8595,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     website: "Strona ReviewDB",
                     server: "Serwer wsparcia ReviewDB"
                 }
+            },
+            profile: {
+                optedOut: "Użytkownik zrezygnował",
+                noReviews: "Brak recenzji"
             }
         },
         richMagnetLinks: {

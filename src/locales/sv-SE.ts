@@ -2125,6 +2125,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showBookmarkBar: {
                     label: "Visa bokmärkesfältet"
                 },
+                persistUnreadCountFallback: {
+                    label: "Behåll reserv för oläst antal",
+                    description: "Behåll reservvärden för olästa märken mellan omladdningar för flikar och bokmärken"
+                },
                 bookmarkNotificationDot: {
                     label: "Bokmärke Notification Dot",
                     description: "Visa meddelandeprick för bokmärken"
@@ -3114,9 +3118,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 crashed: {
                     title: "Discord har kraschat!",
-                    body: "Awn :( Discord har kraschat två gånger snabbt, försöker inte återhämta sig. Klicka här för att gå med i vår supportserver!",
+                    body: "Awn :( Discord har kraschat två gånger snabbt, försöker inte återhämta sig.",
                     update: "Åh, Discord har precis kraschat... men goda nyheter, det finns en Plexcord-uppdatering tillgänglig som kan fixa det här problemet! Vill du uppdatera nu?",
-                    recover: "Försöker återställa... Klicka här för att gå med i vår supportserver!",
+                    recover: "Försöker återställa...",
                     invalid: "Ogiltig eller utgången inbjudningslänk."
                 }
             }
@@ -4681,13 +4685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Får avatarer att ta upp hela VC-brickan",
-            option: {
-                useServerProfileAvatars: {
-                    label: "Använd serverprofilavatarer",
-                    description: "Använd serverprofilavatarer i guild-röstkanaler när de är tillgängliga."
-                }
-            }
+            description: "Får avatarer att ta upp hela VC-brickan"
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
@@ -8597,6 +8595,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     website: "ReviewDB webbplats",
                     server: "ReviewDB Supportserver"
                 }
+            },
+            profile: {
+                optedOut: "Användare valde att hoppa av",
+                noReviews: "Inga recensioner ännu"
             }
         },
         richMagnetLinks: {

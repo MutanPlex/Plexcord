@@ -2125,6 +2125,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showBookmarkBar: {
                     label: "Vis bogmærkelinje"
                 },
+                persistUnreadCountFallback: {
+                    label: "Bevar fallback for ulæst antal",
+                    description: "Bevar fallback for ulæste badges mellem genindlæsninger for faner og bogmærker"
+                },
                 bookmarkNotificationDot: {
                     label: "Bogmærke-notifikationsprik",
                     description: "Vis notifikationsprik på bogmærker"
@@ -3114,9 +3118,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 crashed: {
                     title: "Discord er gået ned!",
-                    body: "Øv :( Discord er gået ned to gange hurtigt efter hinanden, forsøger ikke at gendanne. Klik her for at komme til vores support-server!",
+                    body: "Øv :( Discord er gået ned to gange hurtigt efter hinanden, forsøger ikke at gendanne.",
                     update: "Åh nej, Discord er lige gået ned... men gode nyheder, der er en Plexcord-opdatering tilgængelig, som måske løser problemet! Vil du opdatere nu?",
-                    recover: "Forsøger at gendanne... Klik her for at komme til vores support-server!",
+                    recover: "Forsøger at gendanne...",
                     invalid: "Ugyldigt eller udløbet invitationslink."
                 }
             }
@@ -4681,13 +4685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Sørger for at avatarer optager hele pladsen i en stemmekanals-flise",
-            option: {
-                useServerProfileAvatars: {
-                    label: "Brug serverprofil-avatarer",
-                    description: "Brug serverprofil-avatarer i stemmekanaler, når de er tilgængelige."
-                }
-            }
+            description: "Sørger for at avatarer optager hele pladsen i en stemmekanals-flise"
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
@@ -8597,6 +8595,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     website: "ReviewDB hjemmeside",
                     server: "ReviewDB Support-server"
                 }
+            },
+            profile: {
+                optedOut: "Bruger fravalgt",
+                noReviews: "Ingen anmeldelser endnu"
             }
         },
         richMagnetLinks: {

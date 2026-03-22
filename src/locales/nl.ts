@@ -2125,6 +2125,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showBookmarkBar: {
                     label: "Bladwijzerbalk tonen"
                 },
+                persistUnreadCountFallback: {
+                    label: "Behåll reserv för oläst antal",
+                    description: "Behåll reservvärden för olästa märken mellan omladdningar för flikar och bokmärken"
+                },
                 bookmarkNotificationDot: {
                     label: "Bladwijzermeldingspunt",
                     description: "Toon meldingspunt voor bladwijzers"
@@ -3114,9 +3118,9 @@ const translations: MatchStructure<typeof enTranslations> = {
             toast: {
                 crashed: {
                     title: "Onenigheid is gecrasht!",
-                    body: "Awn :( Discord is twee keer snel gecrasht en heeft niet geprobeerd te herstellen. Klik hier om lid te worden van onze ondersteuningsserver!",
+                    body: "Awn :( Discord is twee keer snel gecrasht en heeft niet geprobeerd te herstellen.",
                     update: "Oh, Discord is zojuist gecrasht... maar goed nieuws: er is een Plexcord-update beschikbaar die dit probleem mogelijk oplost! Wil je nu updaten?",
-                    recover: "Proberen te herstellen... Klik hier om lid te worden van onze ondersteuningsserver!",
+                    recover: "Proberen te herstellen...",
                     invalid: "Ongeldige of verlopen uitnodigingslink."
                 }
             }
@@ -4681,13 +4685,7 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         fullVCPFP: {
             name: "FullVCPFP",
-            description: "Zorgt ervoor dat avatars de volledige VC-tegel in beslag nemen",
-            option: {
-                useServerProfileAvatars: {
-                    label: "Gebruik serverprofielavatars",
-                    description: "Gebruik serverprofielavatars in gildestemkanalen indien beschikbaar."
-                }
-            }
+            description: "Zorgt ervoor dat avatars de volledige VC-tegel in beslag nemen"
         },
         gameActivityToggle: {
             name: "GameActivityToggle",
@@ -8597,6 +8595,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     website: "ReviewDB-website",
                     server: "ReviewDB-ondersteuningsserver"
                 }
+            },
+            profile: {
+                optedOut: "Gebruiker geweigerd",
+                noReviews: "Nog geen recensies"
             }
         },
         richMagnetLinks: {
