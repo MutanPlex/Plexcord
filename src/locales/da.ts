@@ -4923,10 +4923,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Vis sprog",
                     description: "Vis repositories primære programmeringssprog"
                 },
-                showInMiniProfile: {
-                    label: "Vis i mini-profil",
-                    description: "Vis repositories i den lille profil-popout"
-                },
                 showRepositoryTab: {
                     label: "Vis Repository-fane",
                     description: "Vis repository-fanen i profil-vinduet (skjuler knappen i forbindelser, når aktiveret)"

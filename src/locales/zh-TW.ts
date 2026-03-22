@@ -4923,10 +4923,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "顯示語言",
                     description: "顯示儲存庫主要語言"
                 },
-                showInMiniProfile: {
-                    label: "在迷你檔案中顯示",
-                    description: "在迷你設定檔彈出視窗中顯示儲存庫"
-                },
                 showRepositoryTab: {
                     label: "顯示儲存庫選項卡",
                     description: "在設定檔模式中顯示儲存庫標籤（啟用時隱藏連線中的按鈕）"

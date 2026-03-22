@@ -4921,10 +4921,6 @@ const translations = {
                     label: "Show Language",
                     description: "Show repository primary language"
                 },
-                showInMiniProfile: {
-                    label: "Show in Mini Profile",
-                    description: "Show repositories in the mini profile popout"
-                },
                 showRepositoryTab: {
                     label: "Show Repository Tab",
                     description: "Show repositories tab in profile modal (hides button in connections when enabled)"

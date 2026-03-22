@@ -4923,10 +4923,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Pokaż język",
                     description: "Pokaż główny język repozytorium"
                 },
-                showInMiniProfile: {
-                    label: "Pokaż w małym profilu",
-                    description: "Pokaż repozytoria w oknie podręcznym profilu"
-                },
                 showRepositoryTab: {
                     label: "Pokaż kartę repozytoriów",
                     description: "Pokaż kartę repozytoriów w modalnym oknie profilu (ukrywa przycisk w połączeniach, gdy włączone)"

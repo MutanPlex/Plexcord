@@ -4923,10 +4923,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Toon taal",
                     description: "Toon de primaire taal van de repository"
                 },
-                showInMiniProfile: {
-                    label: "Weergeven in miniprofiel",
-                    description: "Toon opslagplaatsen in het pop-upvenster voor miniprofielen"
-                },
                 showRepositoryTab: {
                     label: "Tabblad Repository weergeven",
                     description: "Tabblad opslagplaatsen weergeven in profielmodaal (verbergt knop in verbindingen indien ingeschakeld)"

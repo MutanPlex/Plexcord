@@ -4923,10 +4923,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Arată limbajul",
                     description: "Afișează limbajul principal al depozitului"
                 },
-                showInMiniProfile: {
-                    label: "Arată în mini-profil",
-                    description: "Afișează depozitele în popout-ul mini-profilului"
-                },
                 showRepositoryTab: {
                     label: "Arată fila Depozite",
                     description: "Afișează fila de depozite în fereastra modală a profilului (ascunde butonul din conexiuni când este activat)"

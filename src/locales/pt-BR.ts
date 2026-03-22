@@ -4923,10 +4923,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Mostrar Linguagem",
                     description: "Mostra a linguagem principal do repositório"
                 },
-                showInMiniProfile: {
-                    label: "Mostrar no Mini Perfil",
-                    description: "Mostra os repositórios no popout de mini perfil"
-                },
                 showRepositoryTab: {
                     label: "Mostrar Aba de Repositórios",
                     description: "Mostra a aba de repositórios no modal de perfil (oculta o botão em conexões quando ativado)"

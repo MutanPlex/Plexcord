@@ -4923,10 +4923,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Показувати мову",
                     description: "Показувати основну мову програмування"
                 },
-                showInMiniProfile: {
-                    label: "Показувати в міні-профілі",
-                    description: "Показувати репозиторії у маленькому вікні профілю"
-                },
                 showRepositoryTab: {
                     label: "Вкладка репозиторіїв",
                     description: "Додати окрему вкладку в профілі"

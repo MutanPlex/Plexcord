@@ -4923,10 +4923,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Dili Göster",
                     description: "Depoların ana programlama dilini göster"
                 },
-                showInMiniProfile: {
-                    label: "Mini Profilde Göster",
-                    description: "Depoları mini profil penceresinde göster"
-                },
                 showRepositoryTab: {
                     label: "Depo Sekmesini Göster",
                     description: "Profil modalında depo sekmesini göster (etkinleştirildiğinde bağlantılardaki düğmeyi gizler)"

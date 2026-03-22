@@ -4923,10 +4923,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Hiển thị ngôn ngữ",
                     description: "Hiển thị ngôn ngữ chính của kho lưu trữ"
                 },
-                showInMiniProfile: {
-                    label: "Hiển thị trong Hồ sơ nhỏ",
-                    description: "Hiển thị các kho lưu trữ trong cửa sổ bật lên hồ sơ nhỏ"
-                },
                 showRepositoryTab: {
                     label: "Hiển thị tab kho lưu trữ",
                     description: "Hiển thị tab kho lưu trữ trong chế độ hồ sơ (ẩn nút trong các kết nối khi được bật)"

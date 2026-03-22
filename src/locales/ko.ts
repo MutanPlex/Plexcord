@@ -4923,10 +4923,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "언어 표시",
                     description: "저장소 기본 언어 표시"
                 },
-                showInMiniProfile: {
-                    label: "미니 프로필에 표시",
-                    description: "미니 프로필 팝업에 저장소 표시"
-                },
                 showRepositoryTab: {
                     label: "저장소 탭 표시",
                     description: "프로필 모달에 저장소 탭 표시(활성화된 경우 연결에서 버튼을 숨김)"

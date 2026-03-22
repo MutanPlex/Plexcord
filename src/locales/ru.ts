@@ -4923,10 +4923,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Показывать язык",
                     description: "Отображать основной язык программирования"
                 },
-                showInMiniProfile: {
-                    label: "Мини-профиль",
-                    description: "Показывать репозитории в кратком профиле"
-                },
                 showRepositoryTab: {
                     label: "Вкладка репозиториев",
                     description: "Добавить отдельную вкладку в модальное окно профиля"

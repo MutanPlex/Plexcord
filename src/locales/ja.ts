@@ -4923,10 +4923,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "言語を表示",
                     description: "リポジトリの主言語を表示"
                 },
-                showInMiniProfile: {
-                    label: "ミニプロフィールで表示",
-                    description: "ミニプロファイルポップアウトにリポジトリを表示"
-                },
                 showRepositoryTab: {
                     label: "「リポジトリ」タブを表示",
                     description: "プロファイルモーダルに「リポジトリ」タブを表示 (有効にすると接続のボタンが非表示になります)"

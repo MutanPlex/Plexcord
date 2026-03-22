@@ -4923,10 +4923,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "显示语言",
                     description: "显示存储库主要语言"
                 },
-                showInMiniProfile: {
-                    label: "在迷你档案中显示",
-                    description: "在迷你配置文件弹出窗口中显示存储库"
-                },
                 showRepositoryTab: {
                     label: "显示存储库选项卡",
                     description: "在配置文件模式中显示存储库选项卡（启用时隐藏连接中的按钮）"

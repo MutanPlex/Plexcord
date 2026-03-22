@@ -4923,10 +4923,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Visa språk",
                     description: "Visa förvarets primära språk"
                 },
-                showInMiniProfile: {
-                    label: "Visa i miniprofil",
-                    description: "Visa förråd i miniprofilens popout"
-                },
                 showRepositoryTab: {
                     label: "Visa arkivfliken",
                     description: "Visa arkivfliken i profilmodal (döljer knappen i anslutningar när den är aktiverad)"
