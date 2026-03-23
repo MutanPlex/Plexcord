@@ -2060,12 +2060,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "Nitro",
                 icymi: "ICYMI",
                 activity: "Активність",
-                specialPage: "Спеціальна сторінка"
+                specialPage: "Спеціальна сторінка",
+                searchPlaceholder: "Пошук закладок",
             },
             button: {
                 save: "Зберегти",
                 delete: "Видалити",
-                cancel: "Скасувати"
+                cancel: "Скасувати",
+                reset: "Скинути",
+                close: "Закрити",
             },
             context: {
                 label: "Контекстне меню ChannelTabs",
@@ -2075,6 +2078,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bookmarkBar: "Панель закладок",
                 openAll: "Відкрити всі в закладках",
                 openNew: "Відкрити в новій вкладці",
+                folderMenu: "Меню папки закладок",
                 close: {
                     tab: "Закрити вкладку",
                     otherTabs: "Закрити інші вкладки",
@@ -2092,6 +2096,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Додати закладку до папки",
                     select: "Виберіть папку",
                     create: "Створити нову"
+                },
+                folderIcon: {
+                    title: "Вибрати іконку папки",
+                    preview: "Попередній перегляд",
+                    iconColor: "Колір іконки",
+                    search: "Пошук",
+                    searchPlaceholder: "Пошук {{count}} іконок...",
+                    folderName: "Назва папки",
+                    folderColor: "Колір папки",
+                    folderIcon: "Іконка папки",
+                    chooseIcon: "Вибрати іконку",
+                    useDefaultIcon: "Використовувати іконку за замовчуванням"
                 },
                 edit: {
                     title: "Редагувати закладку",
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Натисніть кнопку та введіть бажану комбінацію. Підтримуються CTRL, SHIFT та ALT.",
                     title: "Клавіатурні скорочення",
                     reset: "Скинути все до стандартних",
+                    shortcutDisabled: "Це поєднання клавіш наразі вимкнене",
+                    pressKey: "Натисніть будь-яку клавішу...",
+                    conflictError: "Це поєднання клавіш уже використовується: {{key}}",
                     closeTab: {
                         label: "Закрити вкладку",
                         description: "Закрити поточну активну вкладку"

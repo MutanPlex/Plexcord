@@ -134,7 +134,7 @@ function BookmarkFolderOpenMenu(props: BookmarkProps) {
         <Menu.Menu
             navId="bookmark-folder-menu"
             onClose={() => FluxDispatcher.dispatch({ type: "CONTEXT_MENU_CLOSE" })}
-            aria-label="Bookmark Folder Menu"
+            aria-label={t(plugin.channelTabs.context.folderMenu)}
         >
             {bookmark.bookmarks.map((b, i) => (
                 <Menu.MenuItem
@@ -754,7 +754,7 @@ export default function BookmarkContainer(props: BasicChannelTabsProps & { userI
                         style={{ width: "100%" }}
                         value={searchQuery}
                         onChange={setSearchQuery}
-                        placeholder="Search bookmarks"
+                        placeholder={t(plugin.channelTabs.bookmark.searchPlaceholder)}
                         onBlur={() => {
                             if (!searchQuery.trim()) setIsSearchOpen(false);
                         }}
@@ -768,7 +768,7 @@ export default function BookmarkContainer(props: BasicChannelTabsProps & { userI
                         }}
                     />
                 </div>
-                <Tooltip text="Search bookmarks" position="left">
+                <Tooltip text={t(plugin.channelTabs.bookmark.searchPlaceholder)} position="left">
                     {p => <button
                         className={classes(cl("button"), cl("bookmark-search-button"))}
                         {...p}

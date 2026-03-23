@@ -2060,17 +2060,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "Nitro",
                 icymi: "ICYMI (Au cas où)",
                 activity: "Activité",
-                specialPage: "Page spéciale"
+                specialPage: "Page spéciale",
+                searchPlaceholder: "Rechercher des signets"
             },
             button: {
                 save: "Enregistrer",
                 delete: "Supprimer",
-                cancel: "Annuler"
+                cancel: "Annuler",
+                reset: "Réinitialiser",
+                close: "Fermer"
             },
             context: {
                 label: "Menu contextuel ChannelTabs",
                 bookmark: "Menu contextuel signet ChannelTabs",
                 tab: "Menu contextuel onglet ChannelTabs",
+                folderMenu: "Menu du dossier de signets",
                 compact: "Compact",
                 bookmarkBar: "Barre de signets",
                 openAll: "Ouvrir tout dans les signets",
@@ -2101,6 +2105,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 delete: {
                     title: "Êtes-vous sûr ?",
                     description: "Supprimer un dossier de signets supprimera également tous les signets qu'il contient."
+                },
+                folderIcon: {
+                    title: "Choisir l'icône du dossier",
+                    preview: "Aperçu",
+                    iconColor: "Couleur de l'icône",
+                    search: "Rechercher",
+                    searchPlaceholder: "Rechercher parmi {{count}} icônes...",
+                    folderName: "Nom du dossier",
+                    folderColor: "Couleur du dossier",
+                    folderIcon: "Icône du dossier",
+                    chooseIcon: "Choisir une icône",
+                    useDefaultIcon: "Utiliser l'icône par défaut"
                 }
             },
             option: {
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Cliquez sur un bouton et appuyez sur la combinaison de touches souhaitée. CTRL, SHIFT et ALT sont supportés.",
                     title: "Raccourcis clavier",
                     reset: "Réinitialiser tout par défaut",
+                    shortcutDisabled: "Ce raccourci est actuellement désactivé",
+                    pressKey: "Appuyez sur n'importe quelle touche...",
+                    conflictError: "Ce raccourci est déjà utilisé par : {{key}}",
                     closeTab: {
                         label: "Fermer l'onglet",
                         description: "Clavier pour fermer l'onglet actif"

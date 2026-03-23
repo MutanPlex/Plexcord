@@ -2048,6 +2048,7 @@ const translations = {
                 removeFolder: "Remove Bookmark from Folder",
                 loading: "Loading bookmarks...",
                 noBookmarks: "You have no bookmarks. You can add an open tab or hide this by right clicking it",
+                searchPlaceholder: "Search bookmarks",
                 quests: "Quests",
                 messageRequests: "Message Requests",
                 friends: "Friends",
@@ -2062,12 +2063,15 @@ const translations = {
             button: {
                 save: "Save",
                 delete: "Delete",
-                cancel: "Cancel"
+                cancel: "Cancel",
+                reset: "Reset",
+                close: "Close"
             },
             context: {
                 label: "ChannelTabs Context Menu",
                 bookmark: "ChannelTabs Bookmark Context Menu",
                 tab: "ChannelTabs Tab Context Menu",
+                folderMenu: "Bookmark Folder Menu",
                 compact: "Compact",
                 bookmarkBar: "Bookmark Bar",
                 openAll: "Open All in Bookmarks",
@@ -2098,6 +2102,18 @@ const translations = {
                 delete: {
                     title: "Are you sure?",
                     description: "Deleting a bookmark folder will also delete all bookmarks within it."
+                },
+                folderIcon: {
+                    title: "Choose Folder Icon",
+                    preview: "Preview",
+                    iconColor: "Icon Color",
+                    search: "Search",
+                    searchPlaceholder: "Search {{count}} icons...",
+                    folderName: "Folder Name",
+                    folderColor: "Folder Color",
+                    folderIcon: "Folder Icon",
+                    chooseIcon: "Choose Icon",
+                    useDefaultIcon: "Use Default Icon"
                 }
             },
             option: {
@@ -2189,6 +2205,9 @@ const translations = {
                     description: "Click a button and press your desired key combination. Modifiers like CTRL, SHIFT, and ALT are supported.",
                     title: "Keyboard shortcuts",
                     reset: "Reset All to Default",
+                    shortcutDisabled: "This shortcut is currently disabled",
+                    pressKey: "Press any key...",
+                    conflictError: "This keybind is already used by: {{key}}",
                     closeTab: {
                         label: "Close Tab",
                         description: "Keyboard the currently active tab"

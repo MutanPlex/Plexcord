@@ -2060,12 +2060,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "硝基",
                 icymi: "伊西米",
                 activity: "活動",
-                specialPage: "特別頁面"
+                specialPage: "特別頁面",
+                searchPlaceholder: "搜尋書籤",
             },
             button: {
                 save: "節省",
                 delete: "刪除",
-                cancel: "取消"
+                cancel: "取消",
+                reset: "重設",
+                close: "關閉",
             },
             context: {
                 label: "ChannelTabs 上下文選單",
@@ -2075,6 +2078,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bookmarkBar: "書籤欄",
                 openAll: "打開書籤中的全部內容",
                 openNew: "在新標籤中開啟",
+                folderMenu: "書籤資料夾選單",
                 close: {
                     tab: "關閉選項卡",
                     otherTabs: "關閉其他選項卡",
@@ -2092,6 +2096,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "新增書籤到資料夾",
                     select: "選擇一個資料夾",
                     create: "創建一個"
+                },
+                folderIcon: {
+                    title: "選擇資料夾圖示",
+                    preview: "預覽",
+                    iconColor: "圖示顏色",
+                    search: "搜尋",
+                    searchPlaceholder: "搜尋 {{count}} 個圖示...",
+                    folderName: "資料夾名稱",
+                    folderColor: "資料夾顏色",
+                    folderIcon: "資料夾圖示",
+                    chooseIcon: "選擇圖示",
+                    useDefaultIcon: "使用預設圖示"
                 },
                 edit: {
                     title: "編輯書籤",
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "點擊按鈕並按下所需的組合鍵。支援 CTRL、SHIFT 和 ALT 等修飾符。",
                     title: "鍵盤快速鍵",
                     reset: "全部重設為預設值",
+                    shortcutDisabled: "此快捷鍵目前已停用",
+                    pressKey: "請按任意鍵...",
+                    conflictError: "此按鍵綁定已被使用：{{key}}",
                     closeTab: {
                         label: "關閉選項卡",
                         description: "使用鍵盤輸入目前活動標籤"

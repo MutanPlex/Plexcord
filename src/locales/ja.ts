@@ -2060,12 +2060,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "ニトロ",
                 icymi: "アイシミ",
                 activity: "活動",
-                specialPage: "スペシャルページ"
+                specialPage: "スペシャルページ",
+                searchPlaceholder: "ブックマークを検索",
             },
             button: {
                 save: "保存",
                 delete: "消去",
-                cancel: "キャンセル"
+                cancel: "キャンセル",
+                reset: "リセット",
+                close: "閉じる",
             },
             context: {
                 label: "チャンネルタブのコンテキストメニュー",
@@ -2075,6 +2078,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bookmarkBar: "ブックマークバー",
                 openAll: "ブックマーク内のすべてを開く",
                 openNew: "新しいタブで開く",
+                folderMenu: "ブックマークフォルダメニュー",
                 close: {
                     tab: "タブを閉じる",
                     otherTabs: "他のタブを閉じる",
@@ -2088,6 +2092,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 noLogin: "ログインしているアカウントがありませんか?"
             },
             modal: {
+                folderIcon: {
+                    title: "フォルダーアイコンを選択",
+                    preview: "プレビュー",
+                    iconColor: "アイコンの色",
+                    search: "検索",
+                    searchPlaceholder: "{{count}} 個のアイコンを検索...",
+                    folderName: "フォルダー名",
+                    folderColor: "フォルダーの色",
+                    folderIcon: "フォルダーアイコン",
+                    chooseIcon: "アイコンを選択",
+                    useDefaultIcon: "デフォルトアイコンを使用"
+                },
                 add: {
                     title: "ブックマークをフォルダに追加",
                     select: "フォルダーを選択してください",
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "ボタンをクリックして、希望のキーの組み合わせを押します。 CTRL、SHIFT、ALT などの修飾子がサポートされています。",
                     title: "キーボードショートカット",
                     reset: "すべてをデフォルトにリセット",
+                    shortcutDisabled: "このショートカットは現在無効です",
+                    pressKey: "任意のキーを押してください...",
+                    conflictError: "このキー割り当てはすでに使用されています: {{key}}",
                     closeTab: {
                         label: "タブを閉じる",
                         description: "現在アクティブなタブをキーボードで操作する"

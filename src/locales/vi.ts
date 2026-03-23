@@ -2060,12 +2060,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "Nitơ",
                 icymi: "ICYMI",
                 activity: "Hoạt động",
-                specialPage: "Trang đặc biệt"
+                specialPage: "Trang đặc biệt",
+                searchPlaceholder: "Tìm kiếm dấu trang",
             },
             button: {
                 save: "Cứu",
                 delete: "Xóa bỏ",
-                cancel: "Hủy bỏ"
+                cancel: "Hủy bỏ",
+                reset: "Đặt lại",
+                close: "Đóng",
             },
             context: {
                 label: "Menu ngữ cảnh của ChannelTabs",
@@ -2075,6 +2078,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bookmarkBar: "Thanh dấu trang",
                 openAll: "Mở tất cả trong dấu trang",
                 openNew: "Mở trong tab mới",
+                folderMenu: "Menu thư mục dấu trang",
                 close: {
                     tab: "Đóng tab",
                     otherTabs: "Đóng các tab khác",
@@ -2092,6 +2096,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Thêm dấu trang vào thư mục",
                     select: "Chọn một thư mục",
                     create: "Tạo một cái"
+                },
+                folderIcon: {
+                    title: "Chọn biểu tượng thư mục",
+                    preview: "Xem trước",
+                    iconColor: "Màu biểu tượng",
+                    search: "Tìm kiếm",
+                    searchPlaceholder: "Tìm kiếm {{count}} biểu tượng...",
+                    folderName: "Tên thư mục",
+                    folderColor: "Màu thư mục",
+                    folderIcon: "Biểu tượng thư mục",
+                    chooseIcon: "Chọn biểu tượng",
+                    useDefaultIcon: "Sử dụng biểu tượng mặc định"
                 },
                 edit: {
                     title: "Chỉnh sửa dấu trang",
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Nhấp vào nút và nhấn tổ hợp phím mong muốn của bạn. Các công cụ sửa đổi như CTRL, SHIFT và ALT được hỗ trợ.",
                     title: "Phím tắt",
                     reset: "Đặt lại tất cả về mặc định",
+                    shortcutDisabled: "Phím tắt này hiện đang bị vô hiệu hóa",
+                    pressKey: "Nhấn bất kỳ phím nào...",
+                    conflictError: "Phím này đã được sử dụng bởi: {{key}}",
                     closeTab: {
                         label: "Đóng tab",
                         description: "Bàn phím tab hiện đang hoạt động"

@@ -111,7 +111,7 @@ function FolderChipPreview({ name, color, iconName }: { name: string; color: str
             padding: "6px 10px"
         }}>
             <FolderGlyph color={color} iconName={iconName} />
-            <BaseText size="sm">{name.trim() || "Folder"}</BaseText>
+            <BaseText size="sm">{name.trim() || t(plugin.channelTabs.bookmark.folder)}</BaseText>
         </div>
     );
 }
@@ -137,12 +137,12 @@ function FolderIconPickerModal({ modalProps, modalKey, name, color, iconName, on
     return (
         <ModalRoot {...modalProps}>
             <ModalHeader>
-                <BaseText size="lg" weight="semibold">Choose Folder Icon</BaseText>
+                <BaseText size="lg" weight="semibold">{t(plugin.channelTabs.modal.folderIcon.title)}</BaseText>
             </ModalHeader>
             <ModalContent>
-                <Heading className={Margins.top16}>Preview</Heading>
+                <Heading className={Margins.top16}>{t(plugin.channelTabs.modal.folderIcon.preview)}</Heading>
                 <FolderChipPreview name={name} color={localColor} iconName={iconName} />
-                <Heading className={Margins.top16}>Icon Color</Heading>
+                <Heading className={Margins.top16}>{t(plugin.channelTabs.modal.folderIcon.iconColor)}</Heading>
                 <div className={Margins.top8}>
                     <ColorPicker
                         color={colorToInt(localColor)}
@@ -154,10 +154,10 @@ function FolderIconPickerModal({ modalProps, modalKey, name, color, iconName, on
                         showEyeDropper={false}
                     />
                 </div>
-                <Heading className={Margins.top16}>Search</Heading>
+                <Heading className={Margins.top16}>{t(plugin.channelTabs.modal.folderIcon.search)}</Heading>
                 <TextInput
                     value={search}
-                    placeholder={`Search ${iconNames.length} icons...`}
+                    placeholder={t(plugin.channelTabs.modal.folderIcon.searchPlaceholder, { count: iconNames.length })}
                     onChange={setSearch}
                 />
                 <div style={{
@@ -199,7 +199,7 @@ function FolderIconPickerModal({ modalProps, modalKey, name, color, iconName, on
                     color="transparent"
                     variant="none"
                     onClick={() => closeModal(modalKey)}
-                >Close</Button>
+                >{t(plugin.channelTabs.button.close)}</Button>
             </ModalFooter>
         </ModalRoot>
     );
@@ -223,13 +223,13 @@ function FolderAppearanceFields({
     placeholder?: string;
 }) {
     return <>
-        <Heading className={Margins.top16}>Folder Name</Heading>
+        <Heading className={Margins.top16}>{t(plugin.channelTabs.modal.folderIcon.folderName)}</Heading>
         <TextInput
             value={name === placeholder ? undefined : name}
             placeholder={placeholder}
             onChange={setName}
         />
-        <Heading className={Margins.top16}>Folder Color</Heading>
+        <Heading className={Margins.top16}>{t(plugin.channelTabs.modal.folderIcon.folderColor)}</Heading>
         <div className={Margins.top8}>
             <ColorPicker
                 color={colorToInt(color)}
@@ -237,7 +237,7 @@ function FolderAppearanceFields({
                 showEyeDropper={false}
             />
         </div>
-        <Heading className={Margins.top16}>Folder Icon</Heading>
+        <Heading className={Margins.top16}>{t(plugin.channelTabs.modal.folderIcon.folderIcon)}</Heading>
         <FolderChipPreview name={name} color={color} iconName={iconName} />
         <Button
             className={Margins.top8}
@@ -254,13 +254,13 @@ function FolderAppearanceFields({
                     />
                 ));
             }}
-        >Choose Icon</Button>
+        >{t(plugin.channelTabs.modal.folderIcon.chooseIcon)}</Button>
         {iconName && <Button
             className={Margins.top8}
             color="transparent"
             variant="none"
             onClick={() => setIconName(undefined)}
-        >Use Default Icon</Button>}
+        >{t(plugin.channelTabs.modal.folderIcon.useDefaultIcon)}</Button>}
     </>;
 }
 

@@ -2060,12 +2060,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "Nitro",
                 icymi: "ICYMI",
                 activity: "Активность",
-                specialPage: "Спецстраница"
+                specialPage: "Спецстраница",
+                searchPlaceholder: "Поиск закладок",
             },
             button: {
                 save: "Сохранить",
                 delete: "Удалить",
-                cancel: "Отмена"
+                cancel: "Отмена",
+                reset: "Сброс",
+                close: "Закрыть",
             },
             context: {
                 label: "Контекстное меню ChannelTabs",
@@ -2075,6 +2078,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bookmarkBar: "Панель закладок",
                 openAll: "Открыть все закладки",
                 openNew: "Открыть в новой вкладке",
+                folderMenu: "Меню папки закладок",
                 close: {
                     tab: "Закрыть вкладку",
                     otherTabs: "Закрыть другие вкладки",
@@ -2092,6 +2096,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "Добавить закладку в папку",
                     select: "Выберите папку",
                     create: "Создать новую"
+                },
+                folderIcon: {
+                    title: "Выбрать иконку папки",
+                    preview: "Предпросмотр",
+                    iconColor: "Цвет иконки",
+                    search: "Поиск",
+                    searchPlaceholder: "Поиск {{count}} иконок...",
+                    folderName: "Название папки",
+                    folderColor: "Цвет папки",
+                    folderIcon: "Иконка папки",
+                    chooseIcon: "Выбрать иконку",
+                    useDefaultIcon: "Использовать иконку по умолчанию"
                 },
                 edit: {
                     title: "Изменить закладку",
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Нажмите кнопку и введите желаемую комбинацию клавиш. Поддерживаются CTRL, SHIFT и ALT.",
                     title: "Клавиатурные сокращения",
                     reset: "Сбросить всё",
+                    shortcutDisabled: "Это сочетание клавиш в настоящее время отключено",
+                    pressKey: "Нажмите любую клавишу...",
+                    conflictError: "Это сочетание клавиш уже используется: {{key}}",
                     closeTab: {
                         label: "Закрыть вкладку",
                         description: "Закрыть текущую активную вкладку"

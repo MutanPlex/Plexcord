@@ -2060,17 +2060,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "Nitro",
                 icymi: "ICYMI",
                 activity: "Aktivitet",
-                specialPage: "Specialsida"
+                specialPage: "Specialsida",
+                searchPlaceholder: "Sök bokmärken"
             },
             button: {
                 save: "Spara",
                 delete: "Radera",
-                cancel: "Avboka"
+                cancel: "Avboka",
+                reset: "Återställ",
+                close: "Stäng"
             },
             context: {
                 label: "ChannelTabs Kontextmeny",
                 bookmark: "Kanalflikar Bokmärkeskontextmeny",
                 tab: "Kanalflikar Fliken Kontextmeny",
+                folderMenu: "Bokmärkesmapp Meny",
                 compact: "Kompakt",
                 bookmarkBar: "Bokmärkesfältet",
                 openAll: "Öppna Alla i Bokmärken",
@@ -2101,6 +2105,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 delete: {
                     title: "Är du säker?",
                     description: "Om du tar bort en bokmärkesmapp raderas också alla bokmärken i den."
+                },
+                folderIcon: {
+                    title: "Välj Mappikon",
+                    preview: "Förhandsvisning",
+                    iconColor: "Ikonfärg",
+                    search: "Sök",
+                    searchPlaceholder: "Sök {{count}} ikoner...",
+                    folderName: "Mappnamn",
+                    folderColor: "Mappfärg",
+                    folderIcon: "Mappikon",
+                    chooseIcon: "Välj Ikon",
+                    useDefaultIcon: "Använd Standardikon"
                 }
             },
             option: {
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Klicka på en knapp och tryck på önskad tangentkombination. Modifierare som CTRL, SHIFT och ALT stöds.",
                     title: "Kortkommandon",
                     reset: "Återställ alla till standard",
+                    shortcutDisabled: "Denna genväg är för närvarande inaktiverad",
+                    pressKey: "Tryck på valfri tangent...",
+                    conflictError: "Denna genväg används redan av: {{key}}",
                     closeTab: {
                         label: "Stäng flik",
                         description: "Tangentbord den för närvarande aktiva fliken"

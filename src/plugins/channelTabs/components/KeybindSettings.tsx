@@ -76,7 +76,7 @@ function KeybindInput({ label, description, settingKey, enabledKey }: KeybindInp
             );
 
             if (conflictKey) {
-                setError(`This keybind is already used by: ${conflictKey[0]}`);
+                setError(t(plugin.channelTabs.option.keybindsSection.conflictError, { key: conflictKey[0] }));
                 setTimeout(() => setError(null), 3000);
                 setIsListening(false);
                 return;
@@ -124,7 +124,7 @@ function KeybindInput({ label, description, settingKey, enabledKey }: KeybindInp
                 </Paragraph>
                 {!isEnabled && (
                     <Paragraph size="xs" weight="normal" style={{ color: "var(--text-feedback-critical)" }}>
-                        This shortcut is currently disabled
+                        {t(plugin.channelTabs.option.keybindsSection.shortcutDisabled)}
                     </Paragraph>
                 )}
                 {error && (
@@ -140,7 +140,7 @@ function KeybindInput({ label, description, settingKey, enabledKey }: KeybindInp
                     onClick={() => setIsListening(true)}
                     disabled={!isEnabled}
                 >
-                    {isListening ? "Press any key..." : formatKeybind(currentKeybind)}
+                    {isListening ? t(plugin.channelTabs.option.keybindsSection.pressKey) : formatKeybind(currentKeybind)}
                 </button>
                 <Button
                     size="small"
@@ -148,7 +148,7 @@ function KeybindInput({ label, description, settingKey, enabledKey }: KeybindInp
                     onClick={handleReset}
                     disabled={!isEnabled}
                 >
-                    Reset
+                    {t(plugin.channelTabs.button.reset)}
                 </Button>
             </div>
         </div>

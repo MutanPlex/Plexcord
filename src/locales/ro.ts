@@ -2060,17 +2060,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "Nitro",
                 icymi: "ICYMI",
                 activity: "Activitate",
-                specialPage: "Pagină specială"
+                specialPage: "Pagină specială",
+                searchPlaceholder: "Caută semne de carte"
             },
             button: {
                 save: "Salvează",
                 delete: "Șterge",
-                cancel: "Anulează"
+                cancel: "Anulează",
+                reset: "Resetează",
+                close: "Închide"
             },
             context: {
                 label: "Meniu contextual ChannelTabs",
                 bookmark: "Meniu contextual semne de carte ChannelTabs",
                 tab: "Meniu contextual file ChannelTabs",
+                folderMenu: "Meniu dosar semne de carte",
                 compact: "Compact",
                 bookmarkBar: "Bară semne de carte",
                 openAll: "Deschide toate din semne de carte",
@@ -2101,6 +2105,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 delete: {
                     title: "Ești sigur?",
                     description: "Ștergerea unui dosar de semne de carte va șterge și toate semnele de carte din interiorul acestuia."
+                },
+                folderIcon: {
+                    title: "Alege Pictogramă Dosar",
+                    preview: "Previzualizare",
+                    iconColor: "Culoare Pictogramă",
+                    search: "Caută",
+                    searchPlaceholder: "Caută {{count}} pictograme...",
+                    folderName: "Nume Dosar",
+                    folderColor: "Culoare Dosar",
+                    folderIcon: "Pictogramă Dosar",
+                    chooseIcon: "Alege Pictogramă",
+                    useDefaultIcon: "Folosește Pictogramă Implicită"
                 }
             },
             option: {
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Apasă un buton și apasă combinația de taste dorită. Sunt acceptate tastele de modificare precum CTRL, SHIFT și ALT.",
                     title: "Scurtături tastatură",
                     reset: "Resetează tot la valorile implicite",
+                    shortcutDisabled: "Această scurtătură este momentan dezactivată",
+                    pressKey: "Apasă orice tastă...",
+                    conflictError: "Această scurtătură este deja folosită de: {{key}}",
                     closeTab: {
                         label: "Închide fila",
                         description: "Închide fila activă curent prin tastatură"

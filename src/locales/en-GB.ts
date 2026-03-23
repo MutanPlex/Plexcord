@@ -2060,12 +2060,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "Nitro",
                 icymi: "ICYMI",
                 activity: "Activity",
-                specialPage: "Special Page"
+                specialPage: "Special Page",
+                searchPlaceholder: "Search bookmarks",
             },
             button: {
                 save: "Save",
                 delete: "Delete",
-                cancel: "Cancel"
+                cancel: "Cancel",
+                reset: "Reset",
+                close: "Close"
             },
             context: {
                 label: "ChannelTabs Context Menu",
@@ -2075,6 +2078,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bookmarkBar: "Bookmark Bar",
                 openAll: "Open All in Bookmarks",
                 openNew: "Open in New Tab",
+                folderMenu: "Bookmark Folder Menu",
                 close: {
                     tab: "Close Tab",
                     otherTabs: "Close Other Tabs",
@@ -2101,6 +2105,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 delete: {
                     title: "Are you sure?",
                     description: "Deleting a bookmark folder will also delete all bookmarks within it."
+                },
+                folderIcon: {
+                    title: "Choose Folder Icon",
+                    preview: "Preview",
+                    iconColor: "Icon Color",
+                    search: "Search",
+                    searchPlaceholder: "Search {{count}} icons...",
+                    folderName: "Folder Name",
+                    folderColor: "Folder Color",
+                    folderIcon: "Folder Icon",
+                    chooseIcon: "Choose Icon",
+                    useDefaultIcon: "Use Default Icon"
                 }
             },
             option: {
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Click a button and press your desired key combination. Modifiers like CTRL, SHIFT, and ALT are supported.",
                     title: "Keyboard shortcuts",
                     reset: "Reset All to Default",
+                    shortcutDisabled: "This shortcut is currently disabled",
+                    pressKey: "Press any key...",
+                    conflictError: "This keybind is already used by: {{key}}",
                     closeTab: {
                         label: "Close Tab",
                         description: "Keyboard the currently active tab"

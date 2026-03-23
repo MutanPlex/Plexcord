@@ -2060,17 +2060,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "Nitro",
                 icymi: "ICYMI",
                 activity: "Activiteit",
-                specialPage: "Speciale pagina"
+                specialPage: "Speciale pagina",
+                searchPlaceholder: "Zoek bladwijzers"
             },
             button: {
                 save: "Redden",
                 delete: "Verwijderen",
-                cancel: "Annuleren"
+                cancel: "Annuleren",
+                reset: "Resetten",
+                close: "Sluiten"
             },
             context: {
                 label: "KanaalTabbladen Contextmenu",
                 bookmark: "KanaalTabbladen Bladwijzer Contextmenu",
                 tab: "KanaalTabs Tabblad Contextmenu",
+                folderMenu: "Bladwijzermap Menu",
                 compact: "Compact",
                 bookmarkBar: "Bladwijzerbalk",
                 openAll: "Open Alles in Bladwijzers",
@@ -2101,6 +2105,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 delete: {
                     title: "Weet je het zeker?",
                     description: "Als u een bladwijzermap verwijdert, worden ook alle bladwijzers daarin verwijderd."
+                },
+                folderIcon: {
+                    title: "Kies Mappictogram",
+                    preview: "Voorbeeld",
+                    iconColor: "Pictogramkleur",
+                    search: "Zoeken",
+                    searchPlaceholder: "Zoek {{count}} pictogrammen...",
+                    folderName: "Mapnaam",
+                    folderColor: "Mapkleur",
+                    folderIcon: "Mappictogram",
+                    chooseIcon: "Kies Pictogram",
+                    useDefaultIcon: "Gebruik Standaardpictogram"
                 }
             },
             option: {
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Klik op een knop en druk op de gewenste toetsencombinatie. Modifiers zoals CTRL, SHIFT en ALT worden ondersteund.",
                     title: "Sneltoetsen",
                     reset: "Alles terugzetten naar standaard",
+                    shortcutDisabled: "Deze snelkoppeling is momenteel uitgeschakeld",
+                    pressKey: "Druk op een willekeurige toets...",
+                    conflictError: "Deze snelkoppeling wordt al gebruikt door: {{key}}",
                     closeTab: {
                         label: "Tabblad sluiten",
                         description: "Toetsenbord het momenteel actieve tabblad"

@@ -2060,17 +2060,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "Nitro",
                 icymi: "ICYMI",
                 activity: "Actividad",
-                specialPage: "Página especial"
+                specialPage: "Página especial",
+                searchPlaceholder: "Buscar marcadores"
             },
             button: {
                 save: "Guardar",
                 delete: "Eliminar",
-                cancel: "Cancelar"
+                cancel: "Cancelar",
+                reset: "Restablecer",
+                close: "Cerrar"
             },
             context: {
                 label: "Menú contextual de ChannelTabs",
                 bookmark: "Menú de marcadores",
                 tab: "Menú de pestañas",
+                folderMenu: "Menú de carpeta de marcadores",
                 compact: "Compacto",
                 bookmarkBar: "Barra de marcadores",
                 openAll: "Abrir todos los marcadores",
@@ -2101,6 +2105,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 delete: {
                     title: "¿Estás seguro?",
                     description: "Eliminar una carpeta de marcadores también eliminará todos los marcadores dentro de ella."
+                },
+                folderIcon: {
+                    title: "Elegir icono de carpeta",
+                    preview: "Vista previa",
+                    iconColor: "Color del icono",
+                    search: "Buscar",
+                    searchPlaceholder: "Buscar {{count}} iconos...",
+                    folderName: "Nombre de la carpeta",
+                    folderColor: "Color de la carpeta",
+                    folderIcon: "Icono de la carpeta",
+                    chooseIcon: "Elegir icono",
+                    useDefaultIcon: "Usar icono predeterminado"
                 }
             },
             option: {
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Haz clic en un botón y presiona la combinación deseada. Se admiten modificadores como CTRL, SHIFT y ALT.",
                     title: "Atajos de teclado",
                     reset: "Restablecer todos los valores",
+                    shortcutDisabled: "Este atajo está actualmente desactivado",
+                    pressKey: "Presiona cualquier tecla...",
+                    conflictError: "Este atajo ya está en uso por: {{key}}",
                     closeTab: {
                         label: "Cerrar pestaña",
                         description: "Cerrar la pestaña que está activa actualmente"

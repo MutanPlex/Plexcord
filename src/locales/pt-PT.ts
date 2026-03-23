@@ -2060,17 +2060,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "Nitro",
                 icymi: "ICYMI",
                 activity: "Atividade",
-                specialPage: "Página Especial"
+                specialPage: "Página Especial",
+                searchPlaceholder: "Pesquisar marcadores"
             },
             button: {
                 save: "Guardar",
                 delete: "Eliminar",
-                cancel: "Cancelar"
+                cancel: "Cancelar",
+                reset: "Repor",
+                close: "Fechar"
             },
             context: {
                 label: "Menu de Contexto do ChannelTabs",
                 bookmark: "Menu de Contexto de Marcadores do ChannelTabs",
                 tab: "Menu de Contexto de Separadores do ChannelTabs",
+                folderMenu: "Menu de Pasta de Marcadores",
                 compact: "Compacto",
                 bookmarkBar: "Barra de Marcadores",
                 openAll: "Abrir Tudo nos Marcadores",
@@ -2101,6 +2105,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 delete: {
                     title: "Tem a certeza?",
                     description: "Eliminar uma pasta de marcadores também eliminará todos os marcadores dentro dela."
+                },
+                folderIcon: {
+                    title: "Escolher Ícone da Pasta",
+                    preview: "Pré-visualização",
+                    iconColor: "Cor do Ícone",
+                    search: "Pesquisar",
+                    searchPlaceholder: "Pesquisar {{count}} ícones...",
+                    folderName: "Nome da Pasta",
+                    folderColor: "Cor da Pasta",
+                    folderIcon: "Ícone da Pasta",
+                    chooseIcon: "Escolher Ícone",
+                    useDefaultIcon: "Utilizar Ícone Padrão"
                 }
             },
             option: {
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Clique num botão e pressione a combinação de teclas desejada. Modificadores como CTRL, SHIFT e ALT são suportados.",
                     title: "Atalhos de teclado",
                     reset: "Repor Todos para o Padrão",
+                    shortcutDisabled: "Este atalho está atualmente desativado",
+                    pressKey: "Pressione qualquer tecla...",
+                    conflictError: "Este atalho já está a ser utilizado por: {{key}}",
                     closeTab: {
                         label: "Fechar Separador",
                         description: "Fechar o separador atualmente ativo"

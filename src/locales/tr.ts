@@ -2051,6 +2051,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 removeFolder: "Yer İmini Klasörden Kaldır",
                 loading: "Yer imleri yükleniyor...",
                 noBookmarks: "Hiç yer iminiz yok. Açık bir sekmeyi ekleyebilir ya da sağ tıklayarak bunu gizleyebilirsiniz.",
+                searchPlaceholder: "Yer imlerinde ara",
                 quests: "Görevler",
                 messageRequests: "Mesaj İstekleri",
                 friends: "Arkadaşlar",
@@ -2065,12 +2066,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             button: {
                 save: "Kaydet",
                 delete: "Sil",
-                cancel: "İptal"
+                cancel: "İptal",
+                reset: "Sıfırla",
+                close: "Kapat"
             },
             context: {
                 label: "ChannelTabs Bağlam Menüsü",
                 bookmark: "ChannelTabs Yer İmi Bağlam Menüsü",
                 tab: "ChannelTabs Sekme Bağlam Menüsü",
+                folderMenu: "Yer İmi Klasör Menüsü",
                 compact: "Kompakt",
                 bookmarkBar: "Yer İmi Çubuğu",
                 openAll: "Tümünü Yer İmlerinde Aç",
@@ -2101,6 +2105,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 delete: {
                     title: "Emin misiniz?",
                     description: "Bir yer imi klasörünü silmek, içindeki tüm yer imlerini de siler."
+                },
+                folderIcon: {
+                    title: "Klasör İkonu Seç",
+                    preview: "Önizleme",
+                    iconColor: "İkon Rengi",
+                    search: "Ara",
+                    searchPlaceholder: "{{count}} ikon içinde ara...",
+                    folderName: "Klasör Adı",
+                    folderColor: "Klasör Rengi",
+                    folderIcon: "Klasör İkonu",
+                    chooseIcon: "İkon Seç",
+                    useDefaultIcon: "Varsayılan İkonu Kullan"
                 }
             },
             option: {
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Bir düğmeye tıklayın ve istediğiniz tuş kombinasyonunu basın. CTRL, SHIFT ve ALT gibi değiştiriciler desteklenir.",
                     title: "Klavye Kısayolları",
                     reset: "Tümünü Varsayılana Sıfırla",
+                    shortcutDisabled: "Bu kısayol şu anda devre dışı",
+                    pressKey: "Herhangi bir tuşa basın...",
+                    conflictError: "Bu tuş kombinasyonu zaten kullanılıyor: {{key}}",
                     closeTab: {
                         label: "Sekmeyi Kapat",
                         description: "Geçerli sekmeyi kapatmak için klavye kısayolu"

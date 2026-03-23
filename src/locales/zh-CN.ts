@@ -2060,12 +2060,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "硝基",
                 icymi: "伊西米",
                 activity: "活动",
-                specialPage: "特别页面"
+                specialPage: "特别页面",
+                searchPlaceholder: "搜索书签",
             },
             button: {
                 save: "节省",
                 delete: "删除",
-                cancel: "取消"
+                cancel: "取消",
+                reset: "重置",
+                close: "关闭",
             },
             context: {
                 label: "ChannelTabs 上下文菜单",
@@ -2075,6 +2078,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bookmarkBar: "书签栏",
                 openAll: "打开书签中的全部内容",
                 openNew: "在新标签中打开",
+                folderMenu: "书签文件夹菜单",
                 close: {
                     tab: "关闭选项卡",
                     otherTabs: "关闭其他选项卡",
@@ -2092,6 +2096,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "添加书签到文件夹",
                     select: "选择一个文件夹",
                     create: "创建一个"
+                },
+                folderIcon: {
+                    title: "选择文件夹图标",
+                    preview: "预览",
+                    iconColor: "图标颜色",
+                    search: "搜索",
+                    searchPlaceholder: "搜索 {{count}} 个图标...",
+                    folderName: "文件夹名称",
+                    folderColor: "文件夹颜色",
+                    folderIcon: "文件夹图标",
+                    chooseIcon: "选择图标",
+                    useDefaultIcon: "使用默认图标"
                 },
                 edit: {
                     title: "编辑书签",
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "单击按钮并按所需的组合键。支持 CTRL、SHIFT 和 ALT 等修饰符。",
                     title: "键盘快捷键",
                     reset: "全部重置为默认值",
+                    shortcutDisabled: "该快捷键当前已被禁用",
+                    pressKey: "按任意键...",
+                    conflictError: "该按键绑定已被使用：{{key}}",
                     closeTab: {
                         label: "关闭选项卡",
                         description: "使用键盘输入当前活动选项卡"

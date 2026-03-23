@@ -2060,17 +2060,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "Nitro",
                 icymi: "ICYMI",
                 activity: "Aktivität",
-                specialPage: "Spezialseite"
+                specialPage: "Spezialseite",
+                searchPlaceholder: "Lesezeichen durchsuchen"
             },
             button: {
                 save: "Speichern",
                 delete: "Löschen",
-                cancel: "Abbrechen"
+                cancel: "Abbrechen",
+                reset: "Zurücksetzen",
+                close: "Schließen"
             },
             context: {
                 label: "ChannelTabs Kontextmenü",
                 bookmark: "ChannelTabs Lesezeichen Kontextmenü",
                 tab: "ChannelTabs Tab Kontextmenü",
+                folderMenu: "Lesezeichenordner Menü",
                 compact: "Kompakt",
                 bookmarkBar: "Lesezeichenleiste",
                 openAll: "Alle Lesezeichen öffnen",
@@ -2101,6 +2105,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 delete: {
                     title: "Bist du sicher?",
                     description: "Das Löschen eines Lesezeichenordners löscht auch alle darin enthaltenen Lesezeichen."
+                },
+                folderIcon: {
+                    title: "Ordnersymbol wählen",
+                    preview: "Vorschau",
+                    iconColor: "Symbolfarbe",
+                    search: "Suchen",
+                    searchPlaceholder: "{{count}} Symbole durchsuchen...",
+                    folderName: "Ordnername",
+                    folderColor: "Ordnerfarbe",
+                    folderIcon: "Ordnersymbol",
+                    chooseIcon: "Symbol wählen",
+                    useDefaultIcon: "Standardsymbol verwenden"
                 }
             },
             option: {
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Klicke auf einen Button und drücke die gewünschte Tastenkombination. Modifikatoren wie STRG, UMSCHALT und ALT werden unterstützt.",
                     title: "Tastatur-Shortcuts",
                     reset: "Alle auf Standard zurücksetzen",
+                    shortcutDisabled: "Diese Verknüpfung ist derzeit deaktiviert",
+                    pressKey: "Beliebige Taste drücken...",
+                    conflictError: "Diese Tastenkombination wird bereits verwendet von: {{key}}",
                     closeTab: {
                         label: "Tab schließen",
                         description: "Schließt den aktuell aktiven Tab"

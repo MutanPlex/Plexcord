@@ -2060,17 +2060,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "Nitro",
                 icymi: "ICYMI",
                 activity: "Attività",
-                specialPage: "Pagina Speciale"
+                specialPage: "Pagina Speciale",
+                searchPlaceholder: "Cerca segnalibri"
             },
             button: {
                 save: "Salva",
                 delete: "Elimina",
-                cancel: "Annulla"
+                cancel: "Annulla",
+                reset: "Ripristina",
+                close: "Chiudi"
             },
             context: {
                 label: "Menu Contestuale ChannelTabs",
                 bookmark: "Menu Contestuale Segnalibri ChannelTabs",
                 tab: "Menu Contestuale Schede ChannelTabs",
+                folderMenu: "Menu Cartella Segnalibri",
                 compact: "Compatto",
                 bookmarkBar: "Barra dei Segnalibri",
                 openAll: "Apri Tutto nei Segnalibri",
@@ -2101,6 +2105,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 delete: {
                     title: "Sei sicuro?",
                     description: "Eliminando una cartella di segnalibri eliminerai anche tutti i segnalibri al suo interno."
+                },
+                folderIcon: {
+                    title: "Scegli Icona Cartella",
+                    preview: "Anteprima",
+                    iconColor: "Colore Icona",
+                    search: "Cerca",
+                    searchPlaceholder: "Cerca {{count}} icone...",
+                    folderName: "Nome Cartella",
+                    folderColor: "Colore Cartella",
+                    folderIcon: "Icona Cartella",
+                    chooseIcon: "Scegli Icona",
+                    useDefaultIcon: "Usa Icona Predefinita"
                 }
             },
             option: {
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Clicca un pulsante e premi la combinazione di tasti desiderata. Sono supportati i modificatori come CTRL, SHIFT e ALT.",
                     title: "Scorciatoie da tastiera",
                     reset: "Ripristina Tutto",
+                    shortcutDisabled: "Questa scorciatoia è attualmente disabilitata",
+                    pressKey: "Premi un tasto qualsiasi...",
+                    conflictError: "Questa scorciatoia è già utilizzata da: {{key}}",
                     closeTab: {
                         label: "Chiudi Scheda",
                         description: "Chiude la scheda attualmente attiva"

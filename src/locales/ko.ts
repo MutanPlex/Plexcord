@@ -2060,12 +2060,15 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "니트로",
                 icymi: "아이씨미",
                 activity: "활동",
-                specialPage: "특별 페이지"
+                specialPage: "특별 페이지",
+                searchPlaceholder: "북마크 검색",
             },
             button: {
                 save: "구하다",
                 delete: "삭제",
-                cancel: "취소"
+                cancel: "취소",
+                reset: "재설정",
+                close: "닫기",
             },
             context: {
                 label: "ChannelTabs 상황에 맞는 메뉴",
@@ -2075,6 +2078,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 bookmarkBar: "북마크바",
                 openAll: "북마크에서 모두 열기",
                 openNew: "새 탭에서 열기",
+                folderMenu: "북마크 폴더 메뉴",
                 close: {
                     tab: "탭 닫기",
                     otherTabs: "다른 탭 닫기",
@@ -2092,6 +2096,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                     title: "폴더에 북마크 추가",
                     select: "폴더 선택",
                     create: "하나 만들기"
+                },
+                folderIcon: {
+                    title: "폴더 아이콘 선택",
+                    preview: "미리보기",
+                    iconColor: "아이콘 색상",
+                    search: "검색",
+                    searchPlaceholder: "{{count}}개 아이콘 검색...",
+                    folderName: "폴더 이름",
+                    folderColor: "폴더 색상",
+                    folderIcon: "폴더 아이콘",
+                    chooseIcon: "아이콘 선택",
+                    useDefaultIcon: "기본 아이콘 사용"
                 },
                 edit: {
                     title: "북마크 편집",
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "버튼을 클릭하고 원하는 키 조합을 누르세요. CTRL, SHIFT, ALT와 같은 수정자가 지원됩니다.",
                     title: "키보드 단축키",
                     reset: "모두 기본값으로 재설정",
+                    shortcutDisabled: "이 단축키는 현재 비활성화되어 있습니다",
+                    pressKey: "아무 키나 누르세요...",
+                    conflictError: "이 키 바인딩은 이미 사용 중입니다: {{key}}",
                     closeTab: {
                         label: "탭 닫기",
                         description: "키보드 현재 활성 탭"

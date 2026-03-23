@@ -2060,17 +2060,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "Nitro",
                 icymi: "ICYMI",
                 activity: "Aktivitet",
-                specialPage: "Speciel side"
+                specialPage: "Speciel side",
+                searchPlaceholder: "Søg i bogmærker"
             },
             button: {
                 save: "Gem",
                 delete: "Slet",
-                cancel: "Annuller"
+                cancel: "Annuller",
+                reset: "Nulstil",
+                close: "Luk"
             },
             context: {
                 label: "ChannelTabs Kontextmenu",
                 bookmark: "ChannelTabs Bogmærke Kontextmenu",
                 tab: "ChannelTabs Fane Kontextmenu",
+                folderMenu: "Bogmærkemappe Menu",
                 compact: "Kompakt",
                 bookmarkBar: "Bogmærkelinje",
                 openAll: "Åbn alle i bogmærker",
@@ -2101,6 +2105,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 delete: {
                     title: "Er du sikker?",
                     description: "Sletning af en bogmærkemappe vil også slette alle bogmærker i den."
+                },
+                folderIcon: {
+                    title: "Vælg Mappeikon",
+                    preview: "Forhåndsvisning",
+                    iconColor: "Ikonfarve",
+                    search: "Søg",
+                    searchPlaceholder: "Søg i {{count}} ikoner...",
+                    folderName: "Mappenavn",
+                    folderColor: "Mappefarve",
+                    folderIcon: "Mappeikon",
+                    chooseIcon: "Vælg Ikon",
+                    useDefaultIcon: "Brug Standardikon"
                 }
             },
             option: {
@@ -2192,6 +2208,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Klik på en knap og tryk på din ønskede tastekombination. Modifikatorer som CTRL, SHIFT og ALT understøttes.",
                     title: "Tastaturgenveje",
                     reset: "Nulstil alle til standard",
+                    shortcutDisabled: "Denne genvej er i øjeblikket deaktiveret",
+                    pressKey: "Tryk på en vilkårlig tast...",
+                    conflictError: "Denne genvej bruges allerede af: {{key}}",
                     closeTab: {
                         label: "Luk fane",
                         description: "Luk den nuværende aktive fane"

@@ -2060,17 +2060,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "Nitro",
                 icymi: "ICYMI",
                 activity: "Aktywność",
-                specialPage: "Strona specjalna"
+                specialPage: "Strona specjalna",
+                searchPlaceholder: "Szukaj zakładek"
             },
             button: {
                 save: "Zapisz",
                 delete: "Usuń",
-                cancel: "Anuluj"
+                cancel: "Anuluj",
+                reset: "Resetuj",
+                close: "Zamknij"
             },
             context: {
                 label: "Menu kontekstowe ChannelTabs",
                 bookmark: "Menu zakładki ChannelTabs",
                 tab: "Menu karty ChannelTabs",
+                folderMenu: "Menu folderu zakładek",
                 compact: "Kompaktowy",
                 bookmarkBar: "Pasek zakładek",
                 openAll: "Otwórz wszystko w zakładkach",
@@ -2101,6 +2105,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 delete: {
                     title: "Czy na pewno?",
                     description: "Usunięcie folderu zakładek spowoduje również usunięcie wszystkich zakładek wewnątrz niego."
+                },
+                folderIcon: {
+                    title: "Wybierz Ikonę Folderu",
+                    preview: "Podgląd",
+                    iconColor: "Kolor Ikony",
+                    search: "Szukaj",
+                    searchPlaceholder: "Przeszukaj {{count}} ikon...",
+                    folderName: "Nazwa Folderu",
+                    folderColor: "Kolor Folderu",
+                    folderIcon: "Ikona Folderu",
+                    chooseIcon: "Wybierz Ikonę",
+                    useDefaultIcon: "Użyj Domyślnej Ikony"
                 }
             },
             option: {
@@ -2208,6 +2224,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Skonfiguruj niestandardowe kombinacje klawiszy.",
                     title: "Skróty klawiszowe",
                     reset: "Resetuj wszystko",
+                    shortcutDisabled: "Ten skrót jest obecnie wyłączony",
+                    pressKey: "Naciśnij dowolny klawisz...",
+                    conflictError: "Ten skrót jest już używany przez: {{key}}",
                     closeTab: {
                         label: "Zamknij kartę",
                         description: "Zamknij aktywną kartę"

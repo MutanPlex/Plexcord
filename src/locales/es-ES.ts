@@ -2060,17 +2060,21 @@ const translations: MatchStructure<typeof enTranslations> = {
                 nitro: "Nitro",
                 icymi: "ICYMI",
                 activity: "Actividad",
-                specialPage: "Página especial"
+                specialPage: "Página especial",
+                searchPlaceholder: "Buscar marcadores"
             },
             button: {
                 save: "Guardar",
                 delete: "Eliminar",
-                cancel: "Cancelar"
+                cancel: "Cancelar",
+                reset: "Restablecer",
+                close: "Cerrar"
             },
             context: {
                 label: "Menú contextual de ChannelTabs",
                 bookmark: "Menú de marcadores de ChannelTabs",
                 tab: "Menú de pestañas de ChannelTabs",
+                folderMenu: "Menú de carpeta de marcadores",
                 compact: "Compacto",
                 bookmarkBar: "Barra de marcadores",
                 openAll: "Abrir todo en marcadores",
@@ -2101,6 +2105,18 @@ const translations: MatchStructure<typeof enTranslations> = {
                 delete: {
                     title: "¿Estás seguro?",
                     description: "Al eliminar una carpeta de marcadores también se eliminarán todos los marcadores que contenga."
+                },
+                folderIcon: {
+                    title: "Elegir icono de carpeta",
+                    preview: "Vista previa",
+                    iconColor: "Color del icono",
+                    search: "Buscar",
+                    searchPlaceholder: "Buscar {{count}} iconos...",
+                    folderName: "Nombre de la carpeta",
+                    folderColor: "Color de la carpeta",
+                    folderIcon: "Icono de la carpeta",
+                    chooseIcon: "Elegir icono",
+                    useDefaultIcon: "Usar icono predeterminado"
                 }
             },
             option: {
@@ -2208,6 +2224,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Atajos de teclado configurables",
                     title: "Atajos de teclado",
                     reset: "Restablecer todo",
+                    shortcutDisabled: "Este atajo está actualmente desactivado",
+                    pressKey: "Presiona cualquier tecla...",
+                    conflictError: "Este atajo ya está en uso por: {{key}}",
                     closeTab: {
                         label: "Cerrar pestaña",
                         description: "Cierra la pestaña activa"
