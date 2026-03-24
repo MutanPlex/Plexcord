@@ -8,7 +8,7 @@
 import "./VoiceChannelLogEntryComponent.css";
 
 import { Channel } from "@plexcord/discord-types";
-import { VoiceChannelLogEntry } from "@plugins/voiceChannelLog.dev/logs";
+import { VoiceChannelLogEntry } from "@plugins/voiceChannelLog/logs";
 import { classes } from "@utils/misc";
 import { React, Timestamp, Tooltip, UserStore } from "@webpack/common";
 import { Util } from "Plexcord";

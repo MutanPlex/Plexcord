@@ -8,7 +8,7 @@
 import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import { Channel } from "@plexcord/discord-types";
-import { getVcLogs, vcLogSubscribe } from "@plugins/voiceChannelLog.dev/logs";
+import { getVcLogs, vcLogSubscribe } from "@plugins/voiceChannelLog/logs";
 import { classes } from "@utils/misc";
 import { ModalCloseButton, ModalContent, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
 import { findStoreLazy } from "@webpack";

@@ -61,14 +61,14 @@ export default definePlugin({
         }
     ],
 
-    renderProfileCollections: ErrorBoundary.wrap((props: { user: User; displayProfile?: any; }) => {
+    renderProfileCollection: (props: { user: User; displayProfile?: any; }) => {
         return (
             <ProfilePopoutComponent
                 {...props}
                 id={props.user.id}
             />
         );
-    }, { noop: true }),
+    },
     renderProfileRepositoriesTab: ErrorBoundary.wrap((props: { user: User; displayProfile?: any; }) => {
         return (
             <ProfileTabComponent
