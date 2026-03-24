@@ -6801,7 +6801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MusicControls",
             description: "多种服务的音乐控制和歌词",
             option: {
-                SpotifySectionTitle: {
+                spotifySectionTitle: {
                     label: "Spotify"
                 },
                 showSpotifyControls: {
@@ -6820,7 +6820,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "上一个按钮重新启动曲目",
                     description: "如果播放时间 >3 秒，则按上一个按钮重新启动当前播放的曲目"
                 },
-                TidalSectionTitle: {
+                tidalSectionTitle: {
                     label: "潮汐"
                 },
                 showTidalControls: {
@@ -6847,43 +6847,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "悬停控件",
                     description: "悬停时显示控件"
                 },
-                ShowMusicNoteOnNoLyrics: {
+                showMusicNoteOnNoLyrics: {
                     label: "在没有歌词的情况下显示音符",
                     description: "未找到歌词时显示音符图标"
                 },
-                LyricsPosition: {
+                lyricsPosition: {
                     label: "歌词位置",
                     description: "歌词面板的位置",
                     above: "以上玩家",
                     below: "以下玩家"
                 },
-                LyricsProvider: {
+                lyricsProvider: {
                     label: "歌词提供者",
                     description: "歌词从哪里获取",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
-                TranslateTo: {
+                translateTo: {
                     label: "翻译为",
                     description: "将歌词翻译为 - 更改此项将清除现有翻译",
                     cleared: "翻译已清除"
                 },
-                LyricsConversion: {
+                lyricsConversion: {
                     label: "歌词转换",
                     description: "自动翻译或罗马化歌词",
                     none: "没有任何",
                     translate: "翻译",
                     romanize: "罗马化"
                 },
-                FallbackProvider: {
+                fallbackProvider: {
                     label: "后备提供者",
                     description: "当歌词提供程序失败时，尝试其他提供程序"
                 },
-                ShowFailedToasts: {
+                showFailedToasts: {
                     label: "显示失败的 Toast",
                     description: "歌词加载失败时显示祝酒词"
                 },
-                PurgeLyricsCache: {
+                purgeLyricsCache: {
                     label: "清除歌词缓存",
                     description: "清除所有缓存的歌词和翻译",
                     button: "清除缓存",

@@ -6801,7 +6801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MusicControls",
             description: "Birden fazla servis için Müzik Kontrolleri ve Şarkı Sözleri",
             option: {
-                SpotifySectionTitle: {
+                spotifySectionTitle: {
                     label: "Spotify"
                 },
                 showSpotifyControls: {
@@ -6820,7 +6820,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Önceki Tuşu Şarkıyı Yeniden Başlatsın",
                     description: "Oynatma süresi 3 saniyeden fazlaysa önceki tuşuna basıldığında mevcut şarkıyı baştan başlatır"
                 },
-                TidalSectionTitle: {
+                tidalSectionTitle: {
                     label: "Tidal"
                 },
                 showTidalControls: {
@@ -6847,43 +6847,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Üzerine Gelince Kontroller",
                     description: "Fareyle üzerine gelince kontrolleri göster"
                 },
-                ShowMusicNoteOnNoLyrics: {
+                showMusicNoteOnNoLyrics: {
                     label: "Şarkı Sözü Yoksa Nota Göster",
                     description: "Şarkı sözü bulunamadığında nota simgesi göster"
                 },
-                LyricsPosition: {
+                lyricsPosition: {
                     label: "Şarkı Sözü Konumu",
                     description: "Şarkı sözü panelinin konumu",
                     above: "Oynatıcı(lar)ın Üstünde",
                     below: "Oynatıcı(lar)ın Altında"
                 },
-                LyricsProvider: {
+                lyricsProvider: {
                     label: "Şarkı Sözü Sağlayıcısı",
                     description: "Şarkı sözlerinin alındığı kaynak",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
-                TranslateTo: {
+                translateTo: {
                     label: "Diline Çevir",
                     description: "Şarkı sözlerini çevir — Bunu değiştirmek mevcut çevirileri temizler",
                     cleared: "Çeviri Temizlendi"
                 },
-                LyricsConversion: {
+                lyricsConversion: {
                     label: "Şarkı Sözü Dönüştürme",
                     description: "Şarkı sözlerini otomatik olarak çevir veya romanize et",
                     none: "Hiçbiri",
                     translate: "Çevir",
                     romanize: "Romanize Et"
                 },
-                FallbackProvider: {
+                fallbackProvider: {
                     label: "Yedek Sağlayıcı",
                     description: "Bir şarkı sözü sağlayıcısı başarısız olursa diğerini dene"
                 },
-                ShowFailedToasts: {
+                showFailedToasts: {
                     label: "Başarısız Bildirimlerini Göster",
                     description: "Şarkı sözleri yüklenemediğinde bildirim göster"
                 },
-                PurgeLyricsCache: {
+                purgeLyricsCache: {
                     label: "Şarkı Sözü Önbelleğini Temizle",
                     description: "Tüm önbelleğe alınmış şarkı sözlerini ve çevirileri sil",
                     button: "Önbelleği Temizle",

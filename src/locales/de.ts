@@ -6801,7 +6801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MusicControls",
             description: "Musiksteuerung und Songtexte für mehrere Dienste.",
             option: {
-                SpotifySectionTitle: {
+                spotifySectionTitle: {
                     label: "Spotify"
                 },
                 showSpotifyControls: {
@@ -6820,7 +6820,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Zurück-Button startet Track neu",
                     description: "Startet den aktuellen Track neu, wenn er länger als 3s läuft"
                 },
-                TidalSectionTitle: {
+                tidalSectionTitle: {
                     label: "Tidal"
                 },
                 showTidalControls: {
@@ -6847,43 +6847,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Hover-Steuerung",
                     description: "Steuerung nur beim Drüberfahren anzeigen"
                 },
-                ShowMusicNoteOnNoLyrics: {
+                showMusicNoteOnNoLyrics: {
                     label: "Musiknote bei fehlenden Lyrics",
                     description: "Icon anzeigen, wenn keine Songtexte gefunden wurden"
                 },
-                LyricsPosition: {
+                lyricsPosition: {
                     label: "Position der Lyrics",
                     description: "Position des Songtext-Panels",
                     above: "Über dem Player",
                     below: "Unter dem Player"
                 },
-                LyricsProvider: {
+                lyricsProvider: {
                     label: "Songtext-Anbieter",
                     description: "Woher die Songtexte geladen werden",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
-                TranslateTo: {
+                translateTo: {
                     label: "Übersetzen in",
                     description: "Songtexte übersetzen in - Ändern löscht bestehende Übersetzungen",
                     cleared: "Übersetzung gelöscht"
                 },
-                LyricsConversion: {
+                lyricsConversion: {
                     label: "Songtext-Konvertierung",
                     description: "Songtexte automatisch übersetzen oder romanisieren (Umschrift)",
                     none: "Keine",
                     translate: "Übersetzen",
                     romanize: "Romanisieren"
                 },
-                FallbackProvider: {
+                fallbackProvider: {
                     label: "Ausweich-Anbieter",
                     description: "Andere Anbieter versuchen, wenn einer fehlschlägt"
                 },
-                ShowFailedToasts: {
+                showFailedToasts: {
                     label: "Fehlermeldungen anzeigen",
                     description: "Benachrichtigung zeigen, wenn Lyrics nicht geladen werden konnten"
                 },
-                PurgeLyricsCache: {
+                purgeLyricsCache: {
                     label: "Songtext-Cache leeren",
                     description: "Alle zwischengespeicherten Lyrics und Übersetzungen löschen",
                     button: "Cache leeren",

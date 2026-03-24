@@ -6801,7 +6801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MusicControls",
             description: "Sterowanie muzyką i teksty piosenek dla wielu usług",
             option: {
-                SpotifySectionTitle: {
+                spotifySectionTitle: {
                     label: "Spotify"
                 },
                 showSpotifyControls: {
@@ -6820,7 +6820,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Poprzedni przycisk restartuje utwór",
                     description: "Restartuj utwór zamiast cofać, jeśli upłynęło >3s"
                 },
-                TidalSectionTitle: {
+                tidalSectionTitle: {
                     label: "Tidal"
                 },
                 showTidalControls: {
@@ -6847,43 +6847,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Sterowanie po najechaniu",
                     description: "Pokazuj przyciski sterowania tylko po najechaniu myszą"
                 },
-                ShowMusicNoteOnNoLyrics: {
+                showMusicNoteOnNoLyrics: {
                     label: "Ikona nuty przy braku tekstu",
                     description: "Pokaż ikonę nuty, gdy nie znaleziono tekstu piosenki"
                 },
-                LyricsPosition: {
+                lyricsPosition: {
                     label: "Pozycja tekstów",
                     description: "Gdzie wyświetlać panel z tekstem",
                     above: "Nad odtwarzaczem",
                     below: "Pod odtwarzaczem"
                 },
-                LyricsProvider: {
+                lyricsProvider: {
                     label: "Dostawca tekstów",
                     description: "Skąd pobierać teksty piosenek",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
-                TranslateTo: {
+                translateTo: {
                     label: "Tłumacz na",
                     description: "Na jaki język tłumaczyć teksty - zmiana wyczyści obecne tłumaczenia",
                     cleared: "Tłumaczenie wyczyszczone"
                 },
-                LyricsConversion: {
+                lyricsConversion: {
                     label: "Konwersja tekstów",
                     description: "Automatyczne tłumaczenie lub romanizacja (zapis łaciński)",
                     none: "Brak",
                     translate: "Tłumacz",
                     romanize: "Romanizuj"
                 },
-                FallbackProvider: {
+                fallbackProvider: {
                     label: "Dostawca zapasowy",
                     description: "Jeśli główny dostawca zawiedzie, spróbuj innych"
                 },
-                ShowFailedToasts: {
+                showFailedToasts: {
                     label: "Powiadomienia o błędach",
                     description: "Pokazuj powiadomienia, gdy nie uda się załadować tekstu"
                 },
-                PurgeLyricsCache: {
+                purgeLyricsCache: {
                     label: "Wyczyść cache tekstów",
                     description: "Usuń wszystkie zapisane teksty i tłumaczenia",
                     button: "Wyczyść Cache",

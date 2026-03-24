@@ -6801,7 +6801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MusicControls",
             description: "Musikstyring og sangtekster for flere tjenester",
             option: {
-                SpotifySectionTitle: {
+                spotifySectionTitle: {
                     label: "Spotify"
                 },
                 showSpotifyControls: {
@@ -6820,7 +6820,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Forrige-knap genstarter sang",
                     description: "Genstart nuværende sang ved tryk på 'forrige', hvis der er spillet >3 sekunder"
                 },
-                TidalSectionTitle: {
+                tidalSectionTitle: {
                     label: "Tidal"
                 },
                 showTidalControls: {
@@ -6847,43 +6847,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Vis ved hover",
                     description: "Vis knapper når musen holdes over"
                 },
-                ShowMusicNoteOnNoLyrics: {
+                showMusicNoteOnNoLyrics: {
                     label: "Vis node ved manglende tekst",
                     description: "Vis et node-ikon når der ikke findes sangtekster"
                 },
-                LyricsPosition: {
+                lyricsPosition: {
                     label: "Placering af tekst",
                     description: "Hvor sangtekst-panelet skal vises",
                     above: "Over afspilleren",
                     below: "Under afspilleren"
                 },
-                LyricsProvider: {
+                lyricsProvider: {
                     label: "Sangtekst-udbyder",
                     description: "Hvor sangtekster hentes fra",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
-                TranslateTo: {
+                translateTo: {
                     label: "Oversæt til",
                     description: "Oversæt sangtekster til dette sprog",
                     cleared: "Oversættelse ryddet"
                 },
-                LyricsConversion: {
+                lyricsConversion: {
                     label: "Tekst-konvertering",
                     description: "Oversæt eller romaniser sangtekster automatisk",
                     none: "Ingen",
                     translate: "Oversæt",
                     romanize: "Romaniser"
                 },
-                FallbackProvider: {
+                fallbackProvider: {
                     label: "Fallback-udbyder",
                     description: "Prøv andre kilder, hvis den primære fejler"
                 },
-                ShowFailedToasts: {
+                showFailedToasts: {
                     label: "Vis fejl-beskeder",
                     description: "Vis beskeder når sangtekster ikke kan indlæses"
                 },
-                PurgeLyricsCache: {
+                purgeLyricsCache: {
                     label: "Ryd sangtekst-cache",
                     description: "Slet alle gemte sangtekster og oversættelser",
                     button: "Ryd cache",

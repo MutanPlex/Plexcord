@@ -6801,7 +6801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MusicControls",
             description: "여러 서비스에 대한 음악 컨트롤 및 가사",
             option: {
-                SpotifySectionTitle: {
+                spotifySectionTitle: {
                     label: "스포티파이"
                 },
                 showSpotifyControls: {
@@ -6820,7 +6820,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "이전 버튼으로 트랙을 다시 시작합니다.",
                     description: "재생 시간이 3초를 초과하는 경우 이전 버튼을 누르면 현재 재생 중인 트랙을 다시 시작합니다."
                 },
-                TidalSectionTitle: {
+                tidalSectionTitle: {
                     label: "갯벌"
                 },
                 showTidalControls: {
@@ -6847,43 +6847,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "호버 컨트롤",
                     description: "마우스를 올리면 컨트롤 표시"
                 },
-                ShowMusicNoteOnNoLyrics: {
+                showMusicNoteOnNoLyrics: {
                     label: "가사 없음에 음표 표시",
                     description: "가사를 찾을 수 없을 때 음표 아이콘 표시"
                 },
-                LyricsPosition: {
+                lyricsPosition: {
                     label: "가사 위치",
                     description: "가사 패널의 위치",
                     above: "플레이어 위",
                     below: "아래 플레이어"
                 },
-                LyricsProvider: {
+                lyricsProvider: {
                     label: "가사 제공자",
                     description: "가사를 가져오는 위치",
                     spotify: "스포티파이(Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
-                TranslateTo: {
+                translateTo: {
                     label: "번역 대상",
                     description: "가사 번역 - 이를 변경하면 기존 번역이 삭제됩니다.",
                     cleared: "번역이 삭제됨"
                 },
-                LyricsConversion: {
+                lyricsConversion: {
                     label: "가사 변환",
                     description: "가사 자동 번역 또는 로마자 표기",
                     none: "없음",
                     translate: "번역하다",
                     romanize: "로마화하다"
                 },
-                FallbackProvider: {
+                fallbackProvider: {
                     label: "대체 공급자",
                     description: "가사 제공업체가 실패하면 다른 제공업체를 사용해 보세요."
                 },
-                ShowFailedToasts: {
+                showFailedToasts: {
                     label: "실패한 토스트 표시",
                     description: "가사가 로드되지 않으면 토스트 표시"
                 },
-                PurgeLyricsCache: {
+                purgeLyricsCache: {
                     label: "퍼지 가사 캐시",
                     description: "캐시된 가사 및 번역 모두 지우기",
                     button: "캐시 제거",

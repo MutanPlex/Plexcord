@@ -20,15 +20,15 @@ const CopyIcon = findComponentByCodeLazy(" 1-.5.5H10a6");
 function getProviderLabel(provider: Provider): string {
     switch (provider) {
         case Provider.Spotify:
-            return t(plugin.musicControls.option.LyricsProvider.spotify);
+            return t(plugin.musicControls.option.lyricsProvider.spotify);
         case Provider.Lrclib:
-            return t(plugin.musicControls.option.LyricsProvider.LRCLIB);
+            return t(plugin.musicControls.option.lyricsProvider.LRCLIB);
         case Provider.Translated:
-            return t(plugin.musicControls.option.LyricsConversion.translate);
+            return t(plugin.musicControls.option.lyricsConversion.translate);
         case Provider.Romanized:
-            return t(plugin.musicControls.option.LyricsConversion.romanize);
+            return t(plugin.musicControls.option.lyricsConversion.romanize);
         case Provider.None:
-            return t(plugin.musicControls.option.LyricsConversion.none);
+            return t(plugin.musicControls.option.lyricsConversion.none);
         default:
             return provider;
     }

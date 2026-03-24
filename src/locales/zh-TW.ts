@@ -6801,7 +6801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MusicControls",
             description: "多種服務的音樂控制和歌詞",
             option: {
-                SpotifySectionTitle: {
+                spotifySectionTitle: {
                     label: "Spotify"
                 },
                 showSpotifyControls: {
@@ -6820,7 +6820,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "上一個按鈕重新啟動曲目",
                     description: "如果播放時間 >3 秒，則按下上一個按鈕重新啟動目前播放的曲目"
                 },
-                TidalSectionTitle: {
+                tidalSectionTitle: {
                     label: "潮汐"
                 },
                 showTidalControls: {
@@ -6847,43 +6847,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "懸停控件",
                     description: "懸停時顯示控件"
                 },
-                ShowMusicNoteOnNoLyrics: {
+                showMusicNoteOnNoLyrics: {
                     label: "在沒有歌詞的情況下顯示音符",
                     description: "未找到歌詞時顯示音符圖標"
                 },
-                LyricsPosition: {
+                lyricsPosition: {
                     label: "歌詞位置",
                     description: "歌詞面板的位置",
                     above: "以上玩家",
                     below: "以下玩家"
                 },
-                LyricsProvider: {
+                lyricsProvider: {
                     label: "歌詞提供者",
                     description: "歌詞從哪裡獲取",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
-                TranslateTo: {
+                translateTo: {
                     label: "翻譯為",
                     description: "將歌詞翻譯為 - 更改此項目將清除現有翻譯",
                     cleared: "翻譯已清除"
                 },
-                LyricsConversion: {
+                lyricsConversion: {
                     label: "歌詞轉換",
                     description: "自動翻譯或羅馬化歌詞",
                     none: "沒有任何",
                     translate: "翻譯",
                     romanize: "羅馬化"
                 },
-                FallbackProvider: {
+                fallbackProvider: {
                     label: "後備提供者",
                     description: "當歌詞提供者失敗時，嘗試其他提供程序"
                 },
-                ShowFailedToasts: {
+                showFailedToasts: {
                     label: "顯示失敗的 Toast",
                     description: "歌詞載入失敗時顯示祝酒詞"
                 },
-                PurgeLyricsCache: {
+                purgeLyricsCache: {
                     label: "清除歌詞快取",
                     description: "清除所有快取的歌詞和翻譯",
                     button: "清除快取",

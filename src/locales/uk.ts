@@ -6801,7 +6801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MusicControls",
             description: "Керування музикою та тексти пісень для різних сервісів",
             option: {
-                SpotifySectionTitle: {
+                spotifySectionTitle: {
                     label: "Spotify"
                 },
                 showSpotifyControls: {
@@ -6820,7 +6820,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Кнопка 'Назад' перезапускає трек",
                     description: "Перезапускати поточний трек при натисканні кнопки 'Назад', якщо час відтворення >3с"
                 },
-                TidalSectionTitle: {
+                tidalSectionTitle: {
                     label: "Tidal"
                 },
                 showTidalControls: {
@@ -6847,43 +6847,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Керування при наведенні",
                     description: "Показувати кнопки керування при наведенні курсору"
                 },
-                ShowMusicNoteOnNoLyrics: {
+                showMusicNoteOnNoLyrics: {
                     label: "Нота, якщо немає тексту",
                     description: "Показувати іконку музичної ноти, якщо текст пісні не знайдено"
                 },
-                LyricsPosition: {
+                lyricsPosition: {
                     label: "Позиція тексту",
                     description: "Розташування панелі з текстом пісні",
                     above: "Над плеєром(ами)",
                     below: "Під плеєром(ами)"
                 },
-                LyricsProvider: {
+                lyricsProvider: {
                     label: "Джерело текстів",
                     description: "Звідки завантажуються тексти пісень",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
-                TranslateTo: {
+                translateTo: {
                     label: "Перекласти на",
                     description: "Мова для перекладу тексту — зміна очистить існуючі переклади",
                     cleared: "Переклад очищено"
                 },
-                LyricsConversion: {
+                lyricsConversion: {
                     label: "Конвертація тексту",
                     description: "Автоматично перекладати або романізувати тексти",
                     none: "Нічого",
                     translate: "Переклад",
                     romanize: "Романізація"
                 },
-                FallbackProvider: {
+                fallbackProvider: {
                     label: "Резервне джерело",
                     description: "Якщо основне джерело не спрацює, спробувати інші"
                 },
-                ShowFailedToasts: {
+                showFailedToasts: {
                     label: "Сповіщення про помилки",
                     description: "Показувати спливаючі вікна, якщо текст не вдалося завантажити"
                 },
-                PurgeLyricsCache: {
+                purgeLyricsCache: {
                     label: "Очистити кеш текстів",
                     description: "Видалити всі збережені тексти та переклади",
                     button: "Очистити кеш",

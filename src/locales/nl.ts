@@ -6801,7 +6801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MusicControls",
             description: "Muziekbediening en songteksten voor meerdere services",
             option: {
-                SpotifySectionTitle: {
+                spotifySectionTitle: {
                     label: "Spotify"
                 },
                 showSpotifyControls: {
@@ -6820,7 +6820,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Knop Vorige Start nummer opnieuw",
                     description: "Herstart het momenteel afgespeelde nummer door op de vorige knop te drukken als de speeltijd >3s is"
                 },
-                TidalSectionTitle: {
+                tidalSectionTitle: {
                     label: "Getijden"
                 },
                 showTidalControls: {
@@ -6847,43 +6847,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Zweefbediening",
                     description: "Toon bedieningselementen bij zweven"
                 },
-                ShowMusicNoteOnNoLyrics: {
+                showMusicNoteOnNoLyrics: {
                     label: "Muzieknoot weergeven zonder songteksten",
                     description: "Toon een muzieknootpictogram als er geen songteksten zijn gevonden"
                 },
-                LyricsPosition: {
+                lyricsPosition: {
                     label: "Songtekst Positie",
                     description: "Positie van het songtekstpaneel",
                     above: "Bovenstaande speler(s)",
                     below: "Hieronder speler(s)"
                 },
-                LyricsProvider: {
+                lyricsProvider: {
                     label: "Aanbieder van songteksten",
                     description: "Waar de songtekst vandaan komt",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
-                TranslateTo: {
+                translateTo: {
                     label: "Vertalen naar",
                     description: "Vertaal songteksten naar - Als u dit wijzigt, worden bestaande vertalingen gewist",
                     cleared: "Vertaling gewist"
                 },
-                LyricsConversion: {
+                lyricsConversion: {
                     label: "Conversie van songteksten",
                     description: "Automatisch teksten vertalen of romaniseren",
                     none: "Geen",
                     translate: "Vertalen",
                     romanize: "Romaniseren"
                 },
-                FallbackProvider: {
+                fallbackProvider: {
                     label: "Terugvalaanbieder",
                     description: "Als een songtekstprovider faalt, probeer dan andere providers"
                 },
-                ShowFailedToasts: {
+                showFailedToasts: {
                     label: "Mislukte toastjes weergeven",
                     description: "Toon toast als de songtekst niet kan worden geladen"
                 },
-                PurgeLyricsCache: {
+                purgeLyricsCache: {
                     label: "Leeg de songtekstcache",
                     description: "Wis alle in de cache opgeslagen teksten en vertalingen",
                     button: "Cache leegmaken",

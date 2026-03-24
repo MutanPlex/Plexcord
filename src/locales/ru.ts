@@ -6801,7 +6801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MusicControls",
             description: "Управление музыкой и тексты песен для различных сервисов.",
             option: {
-                SpotifySectionTitle: {
+                spotifySectionTitle: {
                     label: "Spotify"
                 },
                 showSpotifyControls: {
@@ -6820,7 +6820,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Перезапуск трека",
                     description: "Кнопка 'Назад' перезапускает текущий трек, если он играет дольше 3с"
                 },
-                TidalSectionTitle: {
+                tidalSectionTitle: {
                     label: "Tidal"
                 },
                 showTidalControls: {
@@ -6847,43 +6847,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Показ при наведении",
                     description: "Показывать кнопки управления только при наведении курсора"
                 },
-                ShowMusicNoteOnNoLyrics: {
+                showMusicNoteOnNoLyrics: {
                     label: "Иконка при отсутствии текста",
                     description: "Показывать значок ноты, если текст песни не найден"
                 },
-                LyricsPosition: {
+                lyricsPosition: {
                     label: "Позиция текста",
                     description: "Где отображать панель с текстом",
                     above: "Над плеером",
                     below: "Под плеером"
                 },
-                LyricsProvider: {
+                lyricsProvider: {
                     label: "Источник текстов",
                     description: "Сервис для получения текстов песен",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
-                TranslateTo: {
+                translateTo: {
                     label: "Переводить на",
                     description: "Язык для перевода текста (смена языка очистит текущие переводы)",
                     cleared: "Переводы очищены"
                 },
-                LyricsConversion: {
+                lyricsConversion: {
                     label: "Конвертация текста",
                     description: "Автоматический перевод или романизация",
                     none: "Нет",
                     translate: "Перевод",
                     romanize: "Романизация (транслит)"
                 },
-                FallbackProvider: {
+                fallbackProvider: {
                     label: "Резервный источник",
                     description: "Если основной сервис не нашел текст, пробовать другие"
                 },
-                ShowFailedToasts: {
+                showFailedToasts: {
                     label: "Уведомления об ошибках",
                     description: "Показывать всплывающее сообщение, если текст не загрузился"
                 },
-                PurgeLyricsCache: {
+                purgeLyricsCache: {
                     label: "Очистить кеш текстов",
                     description: "Удалить все сохраненные тексты песен и переводы",
                     button: "Очистить кеш",

@@ -9,6 +9,7 @@ import "./style.css";
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
+import { ErrorBoundary } from "@components/index";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
@@ -34,12 +35,12 @@ export default definePlugin({
     replacement: [
         {
             match: /(textValue:.{0,50}channelId:\i\.id\}\),)\i/,
-            replace: "$1$self.getCharCounter(arguments[0].textValue)"
+            replace: "$1$self.renderCharCounter(arguments[0].textValue)"
         }
     ],
 
-    getCharCounter(text: string) {
-        const premiumType = (UserStore.getCurrentUser().premiumType ?? 0);
+    renderCharCounter: ErrorBoundary.wrap(text => {
+        const premiumType = (UserStore.getCurrentUser()?.premiumType ?? 0);
         const charMax = premiumType === 2 ? 4000 : 2000;
         const { length } = text;
 
@@ -58,5 +59,5 @@ export default definePlugin({
                 <span className={cl("max")} >{charMax}</span>
             </div>
         );
-    }
+    }, { noop: true })
 });

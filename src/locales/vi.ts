@@ -6801,7 +6801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MusicControls",
             description: "Điều khiển nhạc và lời bài hát cho nhiều dịch vụ",
             option: {
-                SpotifySectionTitle: {
+                spotifySectionTitle: {
                     label: "Spotify"
                 },
                 showSpotifyControls: {
@@ -6820,7 +6820,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Nút trước Khởi động lại theo dõi",
                     description: "Khởi động lại bản nhạc hiện đang phát khi nhấn nút trước đó nếu thời gian phát >3 giây"
                 },
-                TidalSectionTitle: {
+                tidalSectionTitle: {
                     label: "Thủy triều"
                 },
                 showTidalControls: {
@@ -6847,43 +6847,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Điều khiển di chuột",
                     description: "Hiển thị điều khiển khi di chuột"
                 },
-                ShowMusicNoteOnNoLyrics: {
+                showMusicNoteOnNoLyrics: {
                     label: "Hiển thị nốt nhạc trên No Lyrics",
                     description: "Hiển thị biểu tượng nốt nhạc khi không tìm thấy lời bài hát"
                 },
-                LyricsPosition: {
+                lyricsPosition: {
                     label: "Vị trí lời bài hát",
                     description: "Vị trí của bảng lời bài hát",
                     above: "(Những) Người chơi ở trên",
                     below: "(Những) người chơi bên dưới"
                 },
-                LyricsProvider: {
+                lyricsProvider: {
                     label: "Nhà cung cấp lời bài hát",
                     description: "Lời bài hát được lấy từ đâu",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
-                TranslateTo: {
+                translateTo: {
                     label: "Dịch sang",
                     description: "Dịch lời bài hát sang - Thay đổi điều này sẽ xóa các bản dịch hiện có",
                     cleared: "Đã xóa bản dịch"
                 },
-                LyricsConversion: {
+                lyricsConversion: {
                     label: "Chuyển đổi lời bài hát",
                     description: "Tự động dịch hoặc La-tinh hóa lời bài hát",
                     none: "Không có",
                     translate: "Dịch",
                     romanize: "La Mã hóa"
                 },
-                FallbackProvider: {
+                fallbackProvider: {
                     label: "Nhà cung cấp dự phòng",
                     description: "Khi nhà cung cấp lời bài hát không thành công, hãy thử các nhà cung cấp khác"
                 },
-                ShowFailedToasts: {
+                showFailedToasts: {
                     label: "Hiển thị lời chúc mừng không thành công",
                     description: "Hiển thị nâng ly khi lời bài hát không tải được"
                 },
-                PurgeLyricsCache: {
+                purgeLyricsCache: {
                     label: "Xóa bộ nhớ đệm lời bài hát",
                     description: "Xóa tất cả lời bài hát và bản dịch được lưu trong bộ nhớ đệm",
                     button: "Xóa bộ nhớ đệm",

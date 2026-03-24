@@ -6801,7 +6801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MusicControls",
             description: "Controale muzicale și versuri pentru multiple servicii",
             option: {
-                SpotifySectionTitle: {
+                spotifySectionTitle: {
                     label: "Spotify"
                 },
                 showSpotifyControls: {
@@ -6820,7 +6820,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Butonul Înapoi repornește piesa",
                     description: "Repornește piesa curentă la apăsarea butonului 'înapoi' dacă timpul scurs este >3s"
                 },
-                TidalSectionTitle: {
+                tidalSectionTitle: {
                     label: "Tidal"
                 },
                 showTidalControls: {
@@ -6847,43 +6847,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Controale la hover",
                     description: "Arată controalele doar când treci cu mouse-ul peste"
                 },
-                ShowMusicNoteOnNoLyrics: {
+                showMusicNoteOnNoLyrics: {
                     label: "Arată notă muzicală când nu există versuri",
                     description: "Afișează o pictogramă cu o notă muzicală când nu sunt găsite versuri"
                 },
-                LyricsPosition: {
+                lyricsPosition: {
                     label: "Poziție versuri",
                     description: "Poziția panoului cu versuri",
                     above: "Deasupra player-ului",
                     below: "Sub player"
                 },
-                LyricsProvider: {
+                lyricsProvider: {
                     label: "Furnizor versuri",
                     description: "Sursa de unde sunt preluate versurile",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
-                TranslateTo: {
+                translateTo: {
                     label: "Tradu în",
                     description: "Tradu versurile în limba selectată - Schimbarea acestei setări va șterge traducerile existente",
                     cleared: "Traducere ștearsă"
                 },
-                LyricsConversion: {
+                lyricsConversion: {
                     label: "Conversie versuri",
                     description: "Tradu sau romanizează automat versurile",
                     none: "Niciuna",
                     translate: "Tradu",
                     romanize: "Romanizează (Romanise)"
                 },
-                FallbackProvider: {
+                fallbackProvider: {
                     label: "Furnizor de rezervă",
                     description: "Când un furnizor de versuri eșuează, încearcă alți furnizori"
                 },
-                ShowFailedToasts: {
+                showFailedToasts: {
                     label: "Arată notificări la eșec",
                     description: "Afișează notificări (toasts) când versurile nu pot fi încărcate"
                 },
-                PurgeLyricsCache: {
+                purgeLyricsCache: {
                     label: "Golește cache versuri",
                     description: "Șterge toate versurile și traducerile salvate în cache",
                     button: "Golește Cache",

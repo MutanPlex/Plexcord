@@ -6801,7 +6801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MusicControls",
             description: "Musikkontroller och texter för flera tjänster",
             option: {
-                SpotifySectionTitle: {
+                spotifySectionTitle: {
                     label: "Spotify"
                 },
                 showSpotifyControls: {
@@ -6820,7 +6820,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Föregående knapp Startar om spår",
                     description: "Starta om det spår som spelas när du trycker på föregående knapp om speltiden är >3s"
                 },
-                TidalSectionTitle: {
+                tidalSectionTitle: {
                     label: "Tidvattens"
                 },
                 showTidalControls: {
@@ -6847,43 +6847,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Hover kontroller",
                     description: "Visa kontroller när du håller muspekaren"
                 },
-                ShowMusicNoteOnNoLyrics: {
+                showMusicNoteOnNoLyrics: {
                     label: "Show Music Note On No Lyrics",
                     description: "Visa en notikon när ingen text hittas"
                 },
-                LyricsPosition: {
+                lyricsPosition: {
                     label: "Lyrics Position",
                     description: "Placering av textpanelen",
                     above: "Ovan spelare",
                     below: "Nedanstående spelare"
                 },
-                LyricsProvider: {
+                lyricsProvider: {
                     label: "Textleverantör",
                     description: "Där texterna hämtas ifrån",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
-                TranslateTo: {
+                translateTo: {
                     label: "Översätt till",
                     description: "Översätt texter till - Om du ändrar detta rensas befintliga översättningar",
                     cleared: "Översättning rensad"
                 },
-                LyricsConversion: {
+                lyricsConversion: {
                     label: "Textkonvertering",
                     description: "Översätt eller romanisera texter automatiskt",
                     none: "Ingen",
                     translate: "Översätta",
                     romanize: "romanisera"
                 },
-                FallbackProvider: {
+                fallbackProvider: {
                     label: "Reservleverantör",
                     description: "När en textleverantör misslyckas, prova andra leverantörer"
                 },
-                ShowFailedToasts: {
+                showFailedToasts: {
                     label: "Visa misslyckade skålar",
                     description: "Visa skålar när texterna inte laddas"
                 },
-                PurgeLyricsCache: {
+                purgeLyricsCache: {
                     label: "Rensa textcache",
                     description: "Rensa alla cachade texter och översättningar",
                     button: "Rensa cache",

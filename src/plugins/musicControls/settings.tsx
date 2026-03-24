@@ -42,11 +42,11 @@ function InstallInstructions() {
 }
 
 export const settings = definePluginSettings({
-    SpotifySectionTitle: {
+    spotifySectionTitle: {
         type: OptionType.COMPONENT,
         component: () => (
             <section>
-                <Heading>{t(plugin.musicControls.option.SpotifySectionTitle.label)}</Heading>
+                <Heading>{t(plugin.musicControls.option.spotifySectionTitle.label)}</Heading>
             </section>
         )
     },
@@ -75,11 +75,11 @@ export const settings = definePluginSettings({
         default: true
     },
 
-    TidalSectionTitle: {
+    tidalSectionTitle: {
         type: OptionType.COMPONENT,
         component: () => (
             <section>
-                <Heading>{t(plugin.musicControls.option.TidalSectionTitle.label)}</Heading>
+                <Heading>{t(plugin.musicControls.option.tidalSectionTitle.label)}</Heading>
             </section>
         )
     },
@@ -99,41 +99,6 @@ export const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: false,
     },
-
-    YtmSectionTitle: {
-        type: OptionType.COMPONENT,
-        component: () => (
-            <section>
-                <Heading>{t(plugin.musicControls.option.YtmSectionTitle.label)}</Heading>
-                <Paragraph>
-                    {t(plugin.musicControls.option.YtmSectionTitle.description, {
-                        app: <MaskedLink href="https://github.com/pear-devs/pear-desktop">Pear Desktop</MaskedLink>
-                    })}
-                </Paragraph>
-            </section>
-        )
-    },
-    showYoutubeMusicControls: {
-        label: () => t(plugin.musicControls.option.showYoutubeMusicControls.label),
-        description: () => t(plugin.musicControls.option.showYoutubeMusicControls.description),
-        type: OptionType.BOOLEAN,
-        default: false
-    },
-    YoutubeMusicApiUrl: {
-        label: () => t(plugin.musicControls.option.YoutubeMusicApiUrl.label),
-        description: () => t(plugin.musicControls.option.YoutubeMusicApiUrl.description),
-        type: OptionType.STRING,
-        default: "http://localhost:26538",
-        placeholder: "http://localhost:26538",
-        onChange: (value: string) => {
-            if (URL.canParse(value)) {
-                settings.store.YoutubeMusicApiUrl = value;
-            } else {
-                showToast(t(plugin.musicControls.error.invalidUrlCustomApi) + ": " + value, Toasts.Type.FAILURE);
-                settings.store.YoutubeMusicApiUrl = settings.def.YoutubeMusicApiUrl.default;
-            }
-        }
-    },
     hoverControls: {
         label: () => t(plugin.musicControls.option.hoverControls.label),
         description: () => t(plugin.musicControls.option.hoverControls.description),
@@ -141,85 +106,85 @@ export const settings = definePluginSettings({
         default: false,
         onChange: v => toggleHoverControls(v)
     },
-    ShowMusicNoteOnNoLyrics: {
-        label: () => t(plugin.musicControls.option.ShowMusicNoteOnNoLyrics.label),
-        description: () => t(plugin.musicControls.option.ShowMusicNoteOnNoLyrics.description),
+    showMusicNoteOnNoLyrics: {
+        label: () => t(plugin.musicControls.option.showMusicNoteOnNoLyrics.label),
+        description: () => t(plugin.musicControls.option.showMusicNoteOnNoLyrics.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
-    LyricsPosition: {
-        label: () => t(plugin.musicControls.option.LyricsPosition.label),
-        description: () => t(plugin.musicControls.option.LyricsPosition.description),
+    lyricsPosition: {
+        label: () => t(plugin.musicControls.option.lyricsPosition.label),
+        description: () => t(plugin.musicControls.option.lyricsPosition.description),
         type: OptionType.SELECT,
         get options() {
             return [
-                { value: "above", label: () => t(plugin.musicControls.option.LyricsPosition.above), },
-                { value: "below", label: () => t(plugin.musicControls.option.LyricsPosition.below), default: true },
+                { value: "above", label: () => t(plugin.musicControls.option.lyricsPosition.above), },
+                { value: "below", label: () => t(plugin.musicControls.option.lyricsPosition.below), default: true },
             ];
         },
     },
-    LyricsProvider: {
-        label: () => t(plugin.musicControls.option.LyricsProvider.label),
-        description: () => t(plugin.musicControls.option.LyricsProvider.description),
+    lyricsProvider: {
+        label: () => t(plugin.musicControls.option.lyricsProvider.label),
+        description: () => t(plugin.musicControls.option.lyricsProvider.description),
         type: OptionType.SELECT,
         get options() {
             return [
-                { value: Provider.Spotify, label: () => t(plugin.musicControls.option.LyricsProvider.spotify), default: true },
-                { value: Provider.Lrclib, label: () => t(plugin.musicControls.option.LyricsProvider.LRCLIB) },
+                { value: Provider.Spotify, label: () => t(plugin.musicControls.option.lyricsProvider.spotify), default: true },
+                { value: Provider.Lrclib, label: () => t(plugin.musicControls.option.lyricsProvider.LRCLIB) },
             ];
         },
     },
-    TranslateTo: {
-        label: () => t(plugin.musicControls.option.TranslateTo.label),
-        description: () => t(plugin.musicControls.option.TranslateTo.description),
+    translateTo: {
+        label: () => t(plugin.musicControls.option.translateTo.label),
+        description: () => t(plugin.musicControls.option.translateTo.description),
         type: OptionType.SELECT,
         options: languages,
         onChange: async () => {
             await removeTranslations();
-            showToast(t(plugin.musicControls.option.TranslateTo.cleared), Toasts.Type.SUCCESS);
+            showToast(t(plugin.musicControls.option.translateTo.cleared), Toasts.Type.SUCCESS);
         }
     },
-    LyricsConversion: {
-        label: () => t(plugin.musicControls.option.LyricsConversion.label),
-        description: () => t(plugin.musicControls.option.LyricsConversion.description),
+    lyricsConversion: {
+        label: () => t(plugin.musicControls.option.lyricsConversion.label),
+        description: () => t(plugin.musicControls.option.lyricsConversion.description),
         type: OptionType.SELECT,
         options: [
-            { value: Provider.None, label: () => t(plugin.musicControls.option.LyricsConversion.none), default: true },
-            { value: Provider.Translated, label: () => t(plugin.musicControls.option.LyricsConversion.translate) },
-            { value: Provider.Romanized, label: () => t(plugin.musicControls.option.LyricsConversion.romanize) },
+            { value: Provider.None, label: () => t(plugin.musicControls.option.lyricsConversion.none), default: true },
+            { value: Provider.Translated, label: () => t(plugin.musicControls.option.lyricsConversion.translate) },
+            { value: Provider.Romanized, label: () => t(plugin.musicControls.option.lyricsConversion.romanize) },
         ],
     },
-    FallbackProvider: {
-        label: () => t(plugin.musicControls.option.FallbackProvider.label),
-        description: () => t(plugin.musicControls.option.FallbackProvider.description),
+    fallbackProvider: {
+        label: () => t(plugin.musicControls.option.fallbackProvider.label),
+        description: () => t(plugin.musicControls.option.fallbackProvider.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
-    ShowFailedToasts: {
-        label: () => t(plugin.musicControls.option.ShowFailedToasts.label),
-        description: () => t(plugin.musicControls.option.ShowFailedToasts.description),
+    showFailedToasts: {
+        label: () => t(plugin.musicControls.option.showFailedToasts.label),
+        description: () => t(plugin.musicControls.option.showFailedToasts.description),
         type: OptionType.BOOLEAN,
         default: true,
     },
-    LyricDelay: {
+    lyricDelay: {
         description: "",
         type: OptionType.SLIDER,
         default: 0,
         ...sliderOptions
     },
-    PurgeLyricsCache: {
-        label: () => t(plugin.musicControls.option.PurgeLyricsCache.label),
-        description: () => t(plugin.musicControls.option.PurgeLyricsCache.description),
+    purgeLyricsCache: {
+        label: () => t(plugin.musicControls.option.purgeLyricsCache.label),
+        description: () => t(plugin.musicControls.option.purgeLyricsCache.description),
         type: OptionType.COMPONENT,
         component: () => (
             <Button
                 variant="dangerPrimary"
                 onClick={() => {
                     clearLyricsCache();
-                    showToast(t(plugin.musicControls.option.PurgeLyricsCache.cacheLyricsPurged), Toasts.Type.SUCCESS);
+                    showToast(t(plugin.musicControls.option.purgeLyricsCache.cacheLyricsPurged), Toasts.Type.SUCCESS);
                 }}
             >
-                {t(plugin.musicControls.option.PurgeLyricsCache.button)}
+                {t(plugin.musicControls.option.purgeLyricsCache.button)}
             </Button>
         ),
     },

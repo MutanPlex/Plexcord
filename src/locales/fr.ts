@@ -6801,7 +6801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MusicControls",
             description: "Contrôles musicaux et paroles pour plusieurs services",
             option: {
-                SpotifySectionTitle: {
+                spotifySectionTitle: {
                     label: "Spotify"
                 },
                 showSpotifyControls: {
@@ -6820,7 +6820,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Bouton Précédent redémarre",
                     description: "Relancer le morceau actuel si lu depuis >3s"
                 },
-                TidalSectionTitle: {
+                tidalSectionTitle: {
                     label: "Tidal"
                 },
                 showTidalControls: {
@@ -6847,43 +6847,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Contrôles au survol",
                     description: "Afficher seulement lors du survol"
                 },
-                ShowMusicNoteOnNoLyrics: {
+                showMusicNoteOnNoLyrics: {
                     label: "Icône si pas de paroles",
                     description: "Afficher une note de musique si aucune parole n'est trouvée"
                 },
-                LyricsPosition: {
+                lyricsPosition: {
                     label: "Position des paroles",
                     description: "Emplacement du panneau",
                     above: "Au-dessus du lecteur",
                     below: "En-dessous du lecteur"
                 },
-                LyricsProvider: {
+                lyricsProvider: {
                     label: "Source des paroles",
                     description: "D'où proviennent les paroles",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
-                TranslateTo: {
+                translateTo: {
                     label: "Traduire vers",
                     description: "Langue de traduction (videra les traductions existantes)",
                     cleared: "Traduction réinitialisée"
                 },
-                LyricsConversion: {
+                lyricsConversion: {
                     label: "Conversion des paroles",
                     description: "Traduire veya romaniser automatiquement",
                     none: "Aucune",
                     translate: "Traduire",
                     romanize: "Romaniser"
                 },
-                FallbackProvider: {
+                fallbackProvider: {
                     label: "Source de secours",
                     description: "Essayer d'autres sources si la principale échoue"
                 },
-                ShowFailedToasts: {
+                showFailedToasts: {
                     label: "Toasts d'erreur",
                     description: "Afficher un toast si le chargement échoue"
                 },
-                PurgeLyricsCache: {
+                purgeLyricsCache: {
                     label: "Vider le cache des paroles",
                     description: "Effacer tout le cache et les traductions",
                     button: "Purger le cache",

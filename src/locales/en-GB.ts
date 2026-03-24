@@ -6801,7 +6801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MusicControls",
             description: "Music Controls and Lyrics for multiple services",
             option: {
-                SpotifySectionTitle: {
+                spotifySectionTitle: {
                     label: "Spotify"
                 },
                 showSpotifyControls: {
@@ -6820,7 +6820,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Previous Button Restarts Track",
                     description: "Restart currently playing track when pressing the previous button if playtime is >3s"
                 },
-                TidalSectionTitle: {
+                tidalSectionTitle: {
                     label: "Tidal"
                 },
                 showTidalControls: {
@@ -6847,43 +6847,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Hover Controls",
                     description: "Show controls on hover"
                 },
-                ShowMusicNoteOnNoLyrics: {
+                showMusicNoteOnNoLyrics: {
                     label: "Show Music Note On No Lyrics",
                     description: "Show a music note icon when no lyrics are found"
                 },
-                LyricsPosition: {
+                lyricsPosition: {
                     label: "Lyrics Position",
                     description: "Position of the lyrics panel",
                     above: "Above Player(s)",
                     below: "Below Player(s)"
                 },
-                LyricsProvider: {
+                lyricsProvider: {
                     label: "Lyrics Provider",
                     description: "Where lyrics are fetched from",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
-                TranslateTo: {
+                translateTo: {
                     label: "Translate To",
                     description: "Translate lyrics to - Changing this will clear existing translations",
                     cleared: "Translation Cleared"
                 },
-                LyricsConversion: {
+                lyricsConversion: {
                     label: "Lyrics Conversion",
                     description: "Automatically translate or romanise lyrics",
                     none: "None",
                     translate: "Translate",
                     romanize: "Romanise"
                 },
-                FallbackProvider: {
+                fallbackProvider: {
                     label: "Fallback Provider",
                     description: "When a lyrics provider fails, try other providers"
                 },
-                ShowFailedToasts: {
+                showFailedToasts: {
                     label: "Show Failed Toasts",
                     description: "Show toasts when lyrics fail to load"
                 },
-                PurgeLyricsCache: {
+                purgeLyricsCache: {
                     label: "Purge Lyrics Cache",
                     description: "Clear all cached lyrics and translations",
                     button: "Purge Cache",

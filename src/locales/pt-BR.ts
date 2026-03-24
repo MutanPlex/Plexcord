@@ -6801,7 +6801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MusicControls",
             description: "Controles de Música e Letras para múltiplos serviços",
             option: {
-                SpotifySectionTitle: {
+                spotifySectionTitle: {
                     label: "Spotify"
                 },
                 showSpotifyControls: {
@@ -6820,7 +6820,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Botão Voltar Reinicia a Faixa",
                     description: "Reinicia a faixa atual ao pressionar o botão voltar se o tempo de reprodução for >3s"
                 },
-                TidalSectionTitle: {
+                tidalSectionTitle: {
                     label: "Tidal"
                 },
                 showTidalControls: {
@@ -6847,43 +6847,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Controles ao passar o mouse",
                     description: "Mostrar controles ao passar o mouse"
                 },
-                ShowMusicNoteOnNoLyrics: {
+                showMusicNoteOnNoLyrics: {
                     label: "Mostrar Nota Musical se Não Houver Letra",
                     description: "Mostra um ícone de nota musical quando nenhuma letra for encontrada"
                 },
-                LyricsPosition: {
+                lyricsPosition: {
                     label: "Posição das Letras",
                     description: "Posição do painel de letras",
                     above: "Acima do(s) Player(s)",
                     below: "Abaixo do(s) Player(s)"
                 },
-                LyricsProvider: {
+                lyricsProvider: {
                     label: "Provedor de Letras",
                     description: "De onde as letras são buscadas",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
                 },
-                TranslateTo: {
+                translateTo: {
                     label: "Traduzir Para",
                     description: "Traduzir letras para - Alterar isso limpará as traduções existentes",
                     cleared: "Tradução Limpa"
                 },
-                LyricsConversion: {
+                lyricsConversion: {
                     label: "Conversão de Letras",
                     description: "Traduzir ou romanizar letras automaticamente",
                     none: "Nenhuma",
                     translate: "Traduzir",
                     romanize: "Romanizar"
                 },
-                FallbackProvider: {
+                fallbackProvider: {
                     label: "Provedor Substituto",
                     description: "Quando um provedor falhar, tentar outros provedores"
                 },
-                ShowFailedToasts: {
+                showFailedToasts: {
                     label: "Mostrar Alertas de Falha",
                     description: "Mostra alertas quando as letras falham ao carregar"
                 },
-                PurgeLyricsCache: {
+                purgeLyricsCache: {
                     label: "Limpar Cache de Letras",
                     description: "Limpa todas as letras e traduções em cache",
                     button: "Limpar Cache",

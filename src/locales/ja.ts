@@ -6801,7 +6801,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "MusicControls",
             description: "複数のサービスの音楽コントロールと歌詞",
             option: {
-                SpotifySectionTitle: {
+                spotifySectionTitle: {
                     label: "スポティファイ"
                 },
                 showSpotifyControls: {
@@ -6820,7 +6820,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "「戻る」ボタンでトラックを再開します",
                     description: "再生時間が 3 秒を超える場合、前ボタンを押すと現在再生中のトラックを再開します"
                 },
-                TidalSectionTitle: {
+                tidalSectionTitle: {
                     label: "潮汐"
                 },
                 showTidalControls: {
@@ -6847,43 +6847,43 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "ホバーコントロール",
                     description: "ホバー時にコントロールを表示"
                 },
-                ShowMusicNoteOnNoLyrics: {
+                showMusicNoteOnNoLyrics: {
                     label: "歌詞のない音符を表示",
                     description: "歌詞が見つからない場合に音符アイコンを表示する"
                 },
-                LyricsPosition: {
+                lyricsPosition: {
                     label: "歌詞の位置",
                     description: "歌詞パネルの位置",
                     above: "上記のプレーヤー",
                     below: "プレーヤーの下"
                 },
-                LyricsProvider: {
+                lyricsProvider: {
                     label: "歌詞プロバイダー",
                     description: "歌詞の取得元",
                     spotify: "Spotify（ミュージックマッチ）",
                     LRCLIB: "LRCLIB"
                 },
-                TranslateTo: {
+                translateTo: {
                     label: "翻訳先",
                     description: "歌詞を翻訳する - これを変更すると、既存の翻訳がクリアされます",
                     cleared: "翻訳がクリアされました"
                 },
-                LyricsConversion: {
+                lyricsConversion: {
                     label: "歌詞変換",
                     description: "歌詞を自動翻訳またはローマ字化",
                     none: "なし",
                     translate: "翻訳する",
                     romanize: "ロマニ語"
                 },
-                FallbackProvider: {
+                fallbackProvider: {
                     label: "フォールバックプロバイダー",
                     description: "歌詞プロバイダーが失敗した場合は、他のプロバイダーを試してください"
                 },
-                ShowFailedToasts: {
+                showFailedToasts: {
                     label: "失敗したトーストを表示する",
                     description: "歌詞の読み込みに失敗した場合にトーストを表示する"
                 },
-                PurgeLyricsCache: {
+                purgeLyricsCache: {
                     label: "歌詞キャッシュをパージ",
                     description: "キャッシュされた歌詞と翻訳をすべてクリアします",
                     button: "キャッシュのパージ",
