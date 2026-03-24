@@ -5032,10 +5032,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GuildTagSettings",
             description: "ギルドタグを非表示にしたり、ギルドタグを採用するためのプロンプトを無効にしたりするなど、ギルドタグの設定をいくつか追加します。",
             option: {
-                hideTags: {
-                    label: "タグを非表示にする",
-                    description: "タグを非表示にする"
-                },
                 disableAdoptTagPrompt: {
                     label: "タグの採用プロンプトを無効にする",
                     description: "タグを採用するためのプロンプトを無効にする"

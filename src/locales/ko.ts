@@ -5032,10 +5032,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GuildTagSettings",
             description: "길드 태그를 숨기거나 채택하라는 메시지를 비활성화하는 등 길드 태그에 대한 일부 설정을 추가합니다.",
             option: {
-                hideTags: {
-                    label: "태그 숨기기",
-                    description: "태그 숨기기"
-                },
                 disableAdoptTagPrompt: {
                     label: "태그 프롬프트 채택 비활성화",
                     description: "태그 채택 프롬프트 비활성화"

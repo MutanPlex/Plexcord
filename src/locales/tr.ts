@@ -5032,10 +5032,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GuildTagSettings",
             description: "Sunucu etiketlerini gizlemek veya etiket kullanma istemini devre dışı bırakmak gibi sunucu etiketi ayarları ekler.",
             option: {
-                hideTags: {
-                    label: "Etiketleri Gizle",
-                    description: "Sunucu etiketlerini görünmez yapar"
-                },
                 disableAdoptTagPrompt: {
                     label: "Etiket Sahiplenme Uyarısını Kapat",
                     description: "Sunucu etiketini kullanmanız (sahiplenmeniz) için çıkan istemi devre dışı bırakır"

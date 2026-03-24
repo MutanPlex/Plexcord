@@ -5032,10 +5032,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GuildTagSettings",
             description: "Voegt enkele instellingen toe voor gildetags, zoals het verbergen ervan of het uitschakelen van de prompt om ze over te nemen.",
             option: {
-                hideTags: {
-                    label: "Tags verbergen",
-                    description: "Tags verbergen"
-                },
                 disableAdoptTagPrompt: {
                     label: "Schakel Tag-prompt overnemen uit",
                     description: "Schakel de prompt om tags over te nemen uit"

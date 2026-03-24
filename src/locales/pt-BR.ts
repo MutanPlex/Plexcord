@@ -5032,10 +5032,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GuildTagSettings",
             description: "Adiciona algumas configurações para tags de servidor, como ocultá-las ou desativar o aviso para adotá-las.",
             option: {
-                hideTags: {
-                    label: "Ocultar Tags",
-                    description: "Ocultar as tags"
-                },
                 disableAdoptTagPrompt: {
                     label: "Desativar Aviso de Adoção de Tag",
                     description: "Desativa o aviso para adotar tags"

@@ -5032,10 +5032,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GuildTagSettings",
             description: "Lägger till vissa inställningar för guild-taggar, som att dölja dem eller inaktivera uppmaningen att använda dem.",
             option: {
-                hideTags: {
-                    label: "Dölj taggar",
-                    description: "Dölj taggar"
-                },
                 disableAdoptTagPrompt: {
                     label: "Inaktivera Adopt Tag Prompt",
                     description: "Inaktivera uppmaningen att anta taggar"

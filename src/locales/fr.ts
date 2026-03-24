@@ -5032,10 +5032,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GuildTagSettings",
             description: "Paramètres pour les tags de guilde, comme les masquer ou désactiver l'invite à les adopter.",
             option: {
-                hideTags: {
-                    label: "Masquer les tags",
-                    description: "Masque les tags de guilde"
-                },
                 disableAdoptTagPrompt: {
                     label: "Désactiver l'invite de tag",
                     description: "Désactive la fenêtre demandant d'adopter un tag"

@@ -5032,10 +5032,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GuildTagSettings",
             description: "添加了一些公会标签的设置，例如隐藏它们或禁用提示采用它们。",
             option: {
-                hideTags: {
-                    label: "隐藏标签",
-                    description: "隐藏标签"
-                },
                 disableAdoptTagPrompt: {
                     label: "禁用采用标签提示",
                     description: "禁用采用标签的提示"

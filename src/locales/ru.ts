@@ -5032,10 +5032,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GuildTagSettings",
             description: "Настройки для тегов серверов, например, скрытие их или отключение предложений их установить.",
             option: {
-                hideTags: {
-                    label: "Скрыть теги",
-                    description: "Не показывать теги"
-                },
                 disableAdoptTagPrompt: {
                     label: "Отключить предложение тега",
                     description: "Убрать всплывающее окно с предложением установить тег сервера"

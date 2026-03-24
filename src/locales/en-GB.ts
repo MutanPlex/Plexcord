@@ -5032,10 +5032,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GuildTagSettings",
             description: "Adds some settings for guild tags, such as hiding them or disabling the prompt to adopt them.",
             option: {
-                hideTags: {
-                    label: "Hide Tags",
-                    description: "Hide tags"
-                },
                 disableAdoptTagPrompt: {
                     label: "Disable Adopt Tag Prompt",
                     description: "Disable the prompt to adopt tags"

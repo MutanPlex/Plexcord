@@ -5032,10 +5032,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GuildTagSettings",
             description: "Dodaje ustawienia dla tagów gildii, takie jak ich ukrywanie lub wyłączanie prośby o ich przyjęcie.",
             option: {
-                hideTags: {
-                    label: "Ukryj tagi",
-                    description: "Ukryj tagi"
-                },
                 disableAdoptTagPrompt: {
                     label: "Wyłącz monit o przyjęcie tagu",
                     description: "Wyłącz prośbę o przyjęcie tagów"

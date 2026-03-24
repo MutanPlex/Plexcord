@@ -5032,10 +5032,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GuildTagSettings",
             description: "Налаштування тегів гільдій (серверів), наприклад, приховування або вимкнення запиту на їх прийняття.",
             option: {
-                hideTags: {
-                    label: "Приховати теги",
-                    description: "Приховувати теги"
-                },
                 disableAdoptTagPrompt: {
                     label: "Вимкнути запит тегів",
                     description: "Не показувати пропозиції прийняти тег"

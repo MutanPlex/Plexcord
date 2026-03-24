@@ -5032,10 +5032,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GuildTagSettings",
             description: "Añade ajustes para las etiquetas de servidor, como ocultarlas o desactivar el aviso para adoptarlas.",
             option: {
-                hideTags: {
-                    label: "Ocultar etiquetas",
-                    description: "Ocultar etiquetas"
-                },
                 disableAdoptTagPrompt: {
                     label: "Desactivar aviso de adopción",
                     description: "Desactivar el aviso para adoptar etiquetas"

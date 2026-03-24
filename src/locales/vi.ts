@@ -5032,10 +5032,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GuildTagSettings",
             description: "Thêm một số cài đặt cho thẻ bang hội, chẳng hạn như ẩn chúng hoặc tắt lời nhắc chấp nhận chúng.",
             option: {
-                hideTags: {
-                    label: "Ẩn thẻ",
-                    description: "Ẩn thẻ"
-                },
                 disableAdoptTagPrompt: {
                     label: "Vô hiệu hóa lời nhắc thẻ thông qua",
                     description: "Tắt lời nhắc chấp nhận thẻ"

@@ -5032,10 +5032,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GuildTagSettings",
             description: "Fügt Einstellungen für Server-Tags hinzu, wie z. B. das Ausblenden dieser oder das Deaktivieren der Aufforderung, sie zu übernehmen.",
             option: {
-                hideTags: {
-                    label: "Tags ausblenden",
-                    description: "Blendet Tags aus"
-                },
                 disableAdoptTagPrompt: {
                     label: "Aufforderung zum Übernehmen deaktivieren",
                     description: "Deaktiviert die Aufforderung, Tags zu übernehmen"

@@ -5032,10 +5032,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GuildTagSettings",
             description: "Tilføjer indstillinger for server-tags, såsom at skjule dem eller deaktivere anmodninger om at bruge dem.",
             option: {
-                hideTags: {
-                    label: "Skjul tags",
-                    description: "Skjul tags"
-                },
                 disableAdoptTagPrompt: {
                     label: "Deaktiver 'Adopt Tag' anmodning",
                     description: "Deaktiver anmodningen om at bruge tags"

@@ -7,23 +7,10 @@
 
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
-import { disableStyle, enableStyle } from "@api/Styles";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin, { OptionType } from "@utils/types";
 
-import clanBadges from "./styles.css?managed";
-
 const settings = definePluginSettings({
-    hideTags: {
-        label: () => t(plugin.guildTagSettings.option.hideTags.label),
-        description: () => t(plugin.guildTagSettings.option.hideTags.description),
-        type: OptionType.BOOLEAN,
-        default: false,
-        onChange: value => {
-            if (value) enableStyle(clanBadges);
-            else disableStyle(clanBadges);
-        }
-    },
     disableAdoptTagPrompt: {
         label: () => t(plugin.guildTagSettings.option.disableAdoptTagPrompt.label),
         description: () => t(plugin.guildTagSettings.option.disableAdoptTagPrompt.description),
@@ -47,11 +34,5 @@ export default definePlugin({
             },
             predicate: () => settings.store.disableAdoptTagPrompt
         }
-    ],
-    start() {
-        if (settings.store.hideTags) enableStyle(clanBadges);
-    },
-    stop() {
-        if (settings.store.hideTags) disableStyle(clanBadges);
-    }
+    ]
 });

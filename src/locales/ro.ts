@@ -5032,10 +5032,6 @@ const translations: MatchStructure<typeof enTranslations> = {
             name: "GuildTagSettings",
             description: "Adaugă setări pentru etichetele serverului, cum ar fi ascunderea acestora sau dezactivarea invitației de a le adopta.",
             option: {
-                hideTags: {
-                    label: "Ascunde etichetele",
-                    description: "Ascunde etichetele"
-                },
                 disableAdoptTagPrompt: {
                     label: "Dezactivează invitația de adoptare",
                     description: "Dezactivează mesajul care te invită să adopți etichetele"
