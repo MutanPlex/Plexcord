@@ -18,7 +18,7 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { Message } from "@plexcord/discord-types";
+import { ErrorBoundary } from "@components/index";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 import { findComponentByCodeLazy } from "@webpack";
@@ -34,11 +34,11 @@ export default definePlugin({
             find: "isUnsupported})",
             replacement: {
                 match: /WITH_CONTENT\}\)/,
-                replace: "$&,$self.PinnedIcon(arguments[0].message)"
+                replace: "$&,$self.renderPinIcon(arguments[0].message)"
             }
         }
     ],
-    PinnedIcon({ pinned }: Message) {
-        return pinned ? (<PinIcon size="xs" style={{ position: "absolute", right: "0", top: "0" }} />) : null;
-    }
+    renderPinIcon: ErrorBoundary.wrap(message => {
+        return message?.pinned ? (<PinIcon size="xs" style={{ position: "absolute", right: "0", top: "0" }} />) : null;
+    }, { noop: true })
 });
