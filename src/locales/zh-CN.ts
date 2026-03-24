@@ -4941,10 +4941,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showLanguage: {
                     label: "显示语言",
                     description: "显示存储库主要语言"
-                },
-                showRepositoryTab: {
-                    label: "显示存储库选项卡",
-                    description: "在配置文件模式中显示存储库选项卡（启用时隐藏连接中的按钮）"
                 }
             },
             error: {

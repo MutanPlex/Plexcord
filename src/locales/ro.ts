@@ -4941,10 +4941,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showLanguage: {
                     label: "Arată limbajul",
                     description: "Afișează limbajul principal al depozitului"
-                },
-                showRepositoryTab: {
-                    label: "Arată fila Depozite",
-                    description: "Afișează fila de depozite în fereastra modală a profilului (ascunde butonul din conexiuni când este activat)"
                 }
             },
             error: {

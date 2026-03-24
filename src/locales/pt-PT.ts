@@ -4941,10 +4941,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showLanguage: {
                     label: "Mostrar Linguagem",
                     description: "Mostra a linguagem principal do repositório"
-                },
-                showRepositoryTab: {
-                    label: "Mostrar Separador de Repositórios",
-                    description: "Mostra o separador de repositórios na janela do perfil (oculta o botão em conexões quando ativado)"
                 }
             },
             error: {

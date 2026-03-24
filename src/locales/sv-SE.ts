@@ -4941,10 +4941,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showLanguage: {
                     label: "Visa språk",
                     description: "Visa förvarets primära språk"
-                },
-                showRepositoryTab: {
-                    label: "Visa arkivfliken",
-                    description: "Visa arkivfliken i profilmodal (döljer knappen i anslutningar när den är aktiverad)"
                 }
             },
             error: {

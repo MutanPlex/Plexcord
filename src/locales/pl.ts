@@ -4941,10 +4941,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showLanguage: {
                     label: "Pokaż język",
                     description: "Pokaż główny język repozytorium"
-                },
-                showRepositoryTab: {
-                    label: "Pokaż kartę repozytoriów",
-                    description: "Pokaż kartę repozytoriów w modalnym oknie profilu (ukrywa przycisk w połączeniach, gdy włączone)"
                 }
             },
             error: {

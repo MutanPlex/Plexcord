@@ -36,6 +36,7 @@ import * as $Notices from "./Notices";
 import * as $Notifications from "./Notifications";
 import * as $UserArea from "./UserArea";
 export * as PluginManager from "./PluginManager";
+import * as $ProfileCollections from "./ProfileCollections";
 import * as $ServerList from "./ServerList";
 import * as $Settings from "./Settings";
 import * as $Styles from "./Styles";
@@ -178,3 +179,8 @@ export const UserArea = $UserArea;
  * LocaleLoader for managing plugin translations
  */
 export { definePluginLocales, LocaleLoader } from "./LocaleLoader";
+
+/**
+ * An API allowing you to add other collections where discords game collection is.
+ */
+export const ProfileCollections = $ProfileCollections;

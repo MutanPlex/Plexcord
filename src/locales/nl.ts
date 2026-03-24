@@ -4941,10 +4941,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showLanguage: {
                     label: "Toon taal",
                     description: "Toon de primaire taal van de repository"
-                },
-                showRepositoryTab: {
-                    label: "Tabblad Repository weergeven",
-                    description: "Tabblad opslagplaatsen weergeven in profielmodaal (verbergt knop in verbindingen indien ingeschakeld)"
                 }
             },
             error: {

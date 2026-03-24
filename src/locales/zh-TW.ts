@@ -4941,10 +4941,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showLanguage: {
                     label: "顯示語言",
                     description: "顯示儲存庫主要語言"
-                },
-                showRepositoryTab: {
-                    label: "顯示儲存庫選項卡",
-                    description: "在設定檔模式中顯示儲存庫標籤（啟用時隱藏連線中的按鈕）"
                 }
             },
             error: {

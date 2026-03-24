@@ -4941,10 +4941,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showLanguage: {
                     label: "Vis sprog",
                     description: "Vis repositories primære programmeringssprog"
-                },
-                showRepositoryTab: {
-                    label: "Vis Repository-fane",
-                    description: "Vis repository-fanen i profil-vinduet (skjuler knappen i forbindelser, når aktiveret)"
                 }
             },
             error: {

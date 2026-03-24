@@ -4941,10 +4941,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showLanguage: {
                     label: "Sprache anzeigen",
                     description: "Zeigt die Hauptsprache des Repositories an"
-                },
-                showRepositoryTab: {
-                    label: "Repository-Tab anzeigen",
-                    description: "Zeigt den Repository-Tab im Profil-Modal an (blendet den Button in den Verbindungen aus, wenn aktiviert)"
                 }
             },
             error: {

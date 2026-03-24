@@ -4941,10 +4941,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showLanguage: {
                     label: "Hiển thị ngôn ngữ",
                     description: "Hiển thị ngôn ngữ chính của kho lưu trữ"
-                },
-                showRepositoryTab: {
-                    label: "Hiển thị tab kho lưu trữ",
-                    description: "Hiển thị tab kho lưu trữ trong chế độ hồ sơ (ẩn nút trong các kết nối khi được bật)"
                 }
             },
             error: {

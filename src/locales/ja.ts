@@ -4941,10 +4941,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showLanguage: {
                     label: "言語を表示",
                     description: "リポジトリの主言語を表示"
-                },
-                showRepositoryTab: {
-                    label: "「リポジトリ」タブを表示",
-                    description: "プロファイルモーダルに「リポジトリ」タブを表示 (有効にすると接続のボタンが非表示になります)"
                 }
             },
             error: {

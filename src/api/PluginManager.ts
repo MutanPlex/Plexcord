@@ -34,6 +34,7 @@ import { Logger } from "@utils/Logger";
 export { Plugins as plugins };
 import { addAudioProcessor, removeAudioProcessor } from "@api/AudioPlayer";
 import { addChannelToolbarButton, addHeaderBarButton, removeChannelToolbarButton, removeHeaderBarButton } from "@api/HeaderBar";
+import { addProfileCollection, removeProfileCollection } from "@api/ProfileCollections";
 import { addUserAreaButton, removeUserAreaButton } from "@api/UserArea";
 import { onlyOnce } from "@utils/onlyOnce";
 import { canonicalizeFind, canonicalizeReplacement } from "@utils/patches";
@@ -203,7 +204,7 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
         onBeforeMessageEdit, onBeforeMessageSend, onMessageClick,
         chatBarButton, renderMemberListDecorator, renderMessageAccessory, renderMessageDecoration, messagePopoverButton,
         // Custom
-        renderNicknameIcon, headerBarButton, audioProcessor, userAreaButton
+        renderNicknameIcon, headerBarButton, audioProcessor, userAreaButton, renderProfileCollections
     } = p;
     const pluginName = getName(name);
 
@@ -271,6 +272,7 @@ export const startPlugin = traceFunction("startPlugin", function startPlugin(p: 
     if (audioProcessor) addAudioProcessor(pluginName, audioProcessor);
     if (userAreaButton) addUserAreaButton(pluginName, userAreaButton.render, userAreaButton.priority);
     if (messagePopoverButton) addMessagePopoverButton(pluginName, messagePopoverButton.render, messagePopoverButton.icon);
+    if (renderProfileCollections) addProfileCollection(pluginName, renderProfileCollections, userAreaButton?.priority);
 
     return true;
 }, p => `startPlugin ${getName(p.name)}`);
@@ -281,7 +283,7 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
         onBeforeMessageEdit, onBeforeMessageSend, onMessageClick,
         chatBarButton, renderMemberListDecorator, renderMessageAccessory, renderMessageDecoration, messagePopoverButton,
         // Custom
-        renderNicknameIcon, headerBarButton, audioProcessor, userAreaButton
+        renderNicknameIcon, headerBarButton, audioProcessor, userAreaButton, renderProfileCollections
     } = p;
     const pluginName = getName(name);
 
@@ -347,6 +349,7 @@ export const stopPlugin = traceFunction("stopPlugin", function stopPlugin(p: Plu
     if (audioProcessor) removeAudioProcessor(pluginName);
     if (userAreaButton) removeUserAreaButton(pluginName);
     if (messagePopoverButton) removeMessagePopoverButton(pluginName);
+    if (renderProfileCollections) removeProfileCollection(pluginName);
 
     return true;
 }, p => `stopPlugin ${getName(p.name)}`);
@@ -359,7 +362,7 @@ export const initPluginManager = onlyOnce(function init() {
         "onBeforeMessageEdit", "onBeforeMessageSend", "onMessageClick",
         "renderChatBarButton", "renderMemberListDecorator", "renderMessageAccessory", "renderMessageDecoration", "renderMessagePopoverButton",
         // Custom
-        "renderNicknameIcon"
+        "renderNicknameIcon", "renderProfileCollections"
     ];
 
     const neededApiPlugins = new Set<string>();
@@ -401,6 +404,7 @@ export const initPluginManager = onlyOnce(function init() {
         if (p.headerBarButton) neededApiPlugins.add("HeaderBarAPI");
         if (p.audioProcessor) neededApiPlugins.add("AudioPlayerAPI");
         if (p.userAreaButton) neededApiPlugins.add("UserAreaAPI");
+        if (p.renderProfileCollections) neededApiPlugins.add("ProfileCollectionsAPI");
 
         for (const key of pluginKeysToBind) {
             p[key] &&= p[key].bind(p) as any;

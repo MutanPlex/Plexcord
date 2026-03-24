@@ -4941,10 +4941,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 showLanguage: {
                     label: "Показувати мову",
                     description: "Показувати основну мову програмування"
-                },
-                showRepositoryTab: {
-                    label: "Вкладка репозиторіїв",
-                    description: "Додати окрему вкладку в профілі"
                 }
             },
             error: {
