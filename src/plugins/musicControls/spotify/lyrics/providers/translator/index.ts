@@ -77,7 +77,7 @@ async function processLyrics(
 }
 
 async function translateLyrics(lyrics: SyncedLyric[]) {
-    return await processLyrics(lyrics, settings.store.TranslateTo, false);
+    return await processLyrics(lyrics, settings.store.translateTo, false);
 }
 
 async function romanizeLyrics(lyrics: SyncedLyric[]) {
