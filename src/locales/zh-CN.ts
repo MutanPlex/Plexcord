@@ -339,7 +339,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     serverList: "修改服务器列表的插件需要API",
                     userSettings: "修补 Discord 的 UserSettings 以公开他们的组和名称。",
                     audioPlayer: "用于播放内部 Discord 音频文件或外部音频链接的 API。",
-                    userArea: "用于向用户区域面板添加按钮的 API。"
+                    userArea: "用于向用户区域面板添加按钮的 API。",
+                    profileCollections: "用于将集合添加到用户个人资料面板的 API，例如 Discord 的游戏收藏。"
                 },
                 chatButtons: {
                     context: {

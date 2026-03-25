@@ -339,7 +339,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     serverList: "サーバーリストを変更するプラグインに必要な API",
                     userSettings: "Discord の UserSettings にパッチを適用して、グループと名前を公開します。",
                     audioPlayer: "内部 Discord オーディオ ファイルまたは外部オーディオ リンクを再生するための API。",
-                    userArea: "ユーザーエリアパネルにボタンを追加するためのAPI。"
+                    userArea: "ユーザーエリアパネルにボタンを追加するためのAPI。",
+                    profileCollections: "Discordのゲームコレクションのように、ユーザープロフィールパネルにコレクションを追加するためのAPI。"
                 },
                 chatButtons: {
                     context: {

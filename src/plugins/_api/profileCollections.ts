@@ -5,13 +5,14 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { Devs } from "@utils/constants";
+import { plugins, t } from "@api/i18n";
+import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";
 
 export default definePlugin({
     name: "ProfileCollectionsAPI",
-    description: "API to add collections to the user profile panel like discords game collection.",
-    authors: [Devs.thororen],
+    description: () => t(plugins.metadata.api.description.profileCollections),
+    authors: [Devs.thororen, PcDevs.MutanPlex],
     patches: [
         {
             find: /\.POPOUT,onClose:\i}\),nicknameIcons:.+?\.isProvisional/,

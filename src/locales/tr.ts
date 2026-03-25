@@ -339,7 +339,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     serverList: "Sunucu listesini değiştiren eklentiler için gerekli API",
                     userSettings: "Discord'un kullanıcı ayarlarını, grupları ve isimleri ortaya çıkarmak için yamalar",
                     audioPlayer: "Discord'un dahili ses dosyalarını veya harici ses bağlantılarını oynatmak için API.",
-                    userArea: "Kullanıcı alanı paneline düğmeler eklemek için API."
+                    userArea: "Kullanıcı alanı paneline düğmeler eklemek için API.",
+                    profileCollections: "Discord'un oyun koleksiyonu gibi kullanıcı profil paneline koleksiyonlar eklemek için API."
                 },
                 chatButtons: {
                     context: {

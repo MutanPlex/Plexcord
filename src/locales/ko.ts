@@ -339,7 +339,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     serverList: "서버 목록을 수정하는 플러그인에 필요한 API",
                     userSettings: "Discord의 UserSettings를 패치하여 그룹과 이름을 노출합니다.",
                     audioPlayer: "내부 Discord 오디오 파일 또는 외부 오디오 링크를 재생하는 API입니다.",
-                    userArea: "사용자 영역 패널에 버튼을 추가하는 API입니다."
+                    userArea: "사용자 영역 패널에 버튼을 추가하는 API입니다.",
+                    profileCollections: "Discord의 게임 컬렉션처럼 사용자 프로필 패널에 컬렉션을 추가하기 위한 API."
                 },
                 chatButtons: {
                     context: {

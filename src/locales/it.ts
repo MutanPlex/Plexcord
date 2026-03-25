@@ -339,7 +339,8 @@ const translations: MatchStructure<typeof enTranslations> = {
                     serverList: "API richiesta per i plugin che modificano la lista server",
                     userSettings: "Patch per UserSettings di Discord.",
                     audioPlayer: "API per riprodurre file audio interni o esterni.",
-                    userArea: "API per aggiungere pulsanti al pannello utente."
+                    userArea: "API per aggiungere pulsanti al pannello utente.",
+                    profileCollections: "API per aggiungere raccolte al pannello del profilo utente, come la collezione di giochi di Discord."
                 },
                 chatButtons: {
                     context: {
