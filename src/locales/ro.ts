@@ -6829,6 +6829,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Arată versuri Tidal",
                     description: "Afișează versurile pentru Tidal"
                 },
+                websocketURL: {
+                    label: "URL Websocket",
+                    description: "Valoarea implicită este ws://localhost:24123"
+                },
                 YtmSectionTitle: {
                     label: "YouTube Music",
                     description: "{{app}} este necesar pentru aceste setări"

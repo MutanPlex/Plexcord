@@ -140,6 +140,13 @@ export const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: false,
     },
+    websocketURL: {
+        label: () => t(plugin.musicControls.option.websocketURL.label),
+        description: () => t(plugin.musicControls.option.websocketURL.description),
+        type: OptionType.STRING,
+        default: "ws://localhost:24123",
+        restartNeeded: true,
+    },
     hoverControls: {
         label: () => t(plugin.musicControls.option.hoverControls.label),
         description: () => t(plugin.musicControls.option.hoverControls.description),

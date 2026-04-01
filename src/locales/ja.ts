@@ -6829,6 +6829,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "タイダルの歌詞を表示",
                     description: "タイダルの歌詞を表示"
                 },
+                websocketURL: {
+                    label: "Websocket URL",
+                    description: "デフォルトは ws://localhost:24123 です"
+                },
                 YtmSectionTitle: {
                     label: "YouTube ミュージック",
                     description: "これらの設定には {{app}} が必要です"

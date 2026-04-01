@@ -6829,6 +6829,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Mostra Testi Tidal",
                     description: "Mostra i testi per Tidal"
                 },
+                websocketURL: {
+                    label: "URL Websocket",
+                    description: "Il valore predefinito è ws://localhost:24123"
+                },
                 YtmSectionTitle: {
                     label: "YouTube Music",
                     description: "È richiesto {{app}} per queste impostazioni"

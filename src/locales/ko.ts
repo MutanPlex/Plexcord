@@ -6829,6 +6829,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "쇼 타이달(Show Tidal) 가사",
                     description: "Tidal의 가사 표시"
                 },
+                websocketURL: {
+                    label: "Websocket URL",
+                    description: "기본값은 ws://localhost:24123입니다"
+                },
                 YtmSectionTitle: {
                     label: "유튜브 뮤직",
                     description: "이 설정에는 {{app}}이 필요합니다"

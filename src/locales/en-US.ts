@@ -6827,6 +6827,10 @@ const translations = {
                     label: "Show Tidal Lyrics",
                     description: "Show lyrics for Tidal"
                 },
+                websocketURL: {
+                    label: "Websocket URL",
+                    description: "Default is ws://localhost:24123"
+                },
                 YtmSectionTitle: {
                     label: "YouTube Music",
                     description: "{{app}} is required for these settings"

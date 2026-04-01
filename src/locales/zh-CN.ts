@@ -6829,6 +6829,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "显示潮汐歌词",
                     description: "显示潮汐的歌词"
                 },
+                websocketURL: {
+                    label: "Websocket 地址",
+                    description: "默认值为 ws://localhost:24123"
+                },
                 YtmSectionTitle: {
                     label: "YouTube 音乐",
                     description: "这些设置需要 {{app}}"

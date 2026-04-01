@@ -6829,6 +6829,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Hiển thị lời bài hát thủy triều",
                     description: "Hiển thị lời bài hát Tidal"
                 },
+                websocketURL: {
+                    label: "URL Websocket",
+                    description: "Mặc định là ws://localhost:24123"
+                },
                 YtmSectionTitle: {
                     label: "YouTube Âm nhạc",
                     description: "{{app}} là bắt buộc đối với các cài đặt này"
