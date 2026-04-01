@@ -1365,10 +1365,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 spectrographColor: {
                     label: "Culoare Spectrograf",
                     description: "Culoarea spectrografului când culoarea solidă este activată"
-                },
-                forceMoveBelow: {
-                    label: "Forțează Mutarea Jos",
-                    description: "Forțează vizualizatorul să apară sub butoanele audio"
                 }
             },
             toast: {
@@ -6176,6 +6172,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             removeMessage: "Elimină istoricul mesajului",
             removeMessageTemporary: "Elimină mesajul (Temporar)",
             clearMessageLog: "Șterge jurnalul de mesaje",
+            showDiff: "Arată diferențele",
             modal: {
                 edit: {
                     title: "Istoric editare mesaj",
@@ -6212,6 +6209,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreSelf: {
                     label: "Ignoră-te pe tine",
                     description: "Dacă să ignore propriile mesaje"
+                },
+                ignoreSelfEdits: {
+                    label: "Ignoră editările proprii",
+                    description: "Dacă să fie ignorate editările făcute de tine"
                 },
                 ignoreUsers: {
                     label: "Ignoră utilizatorii",
@@ -6859,6 +6860,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Sursa de unde sunt preluate versurile",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
+                },
+                spotifyLyricsApiUrl: {
+                    label: "URL API Versuri Spotify",
+                    description: "URL-ul de bază al API-ului pentru versuri Spotify."
                 },
                 translateTo: {
                     label: "Tradu în",
@@ -8193,6 +8198,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     amount: "Număr utilizatori",
                     userAmount: "{{amount}} utilizator(i)",
                     parameters: "Parametri",
+                    selectAll: "Selectează tot",
+                    reset: "Resetează",
+                    stateFilters: "Filtre de stare",
                     moreThan: "Mai mult de",
                     lessThan: "Mai puțin de",
                     equalTo: "Egal cu",
@@ -8212,6 +8220,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 voice: {
                     label: "Opțiuni voce",
+                    joinSettings: "Setări de aderare",
                     auto: {
                         mute: "Mute automat",
                         deafen: "Deafen automat",
@@ -8279,6 +8288,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 leaveEmpty: {
                     label: "Părăsește dacă e gol",
                     description: "Caută alt apel dacă cel curent este gol."
+                },
+                prioritizeFriends: {
+                    label: "Prioritizează prietenii",
+                    description: "Preferă canalele în care se află prietenii tăi, atunci când este posibil."
                 },
                 avoidStages: {
                     label: "Evită canalele Stage",

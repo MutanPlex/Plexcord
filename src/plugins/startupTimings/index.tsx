@@ -44,6 +44,5 @@ export default definePlugin({
     },
     stop() {
         removeFromArray(SettingsPlugin.customEntries, e => e.key === "plexcord_startup_timings");
-        removeFromArray(SettingsPlugin.settingsSectionMap, entry => entry[1] === "plexcord_startup_timings");
     },
 });

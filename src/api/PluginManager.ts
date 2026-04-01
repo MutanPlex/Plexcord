@@ -360,7 +360,7 @@ export const initPluginManager = onlyOnce(function init() {
 
     const pluginKeysToBind: Array<keyof PluginDef & `${"on" | "render"}${string}`> = [
         "onBeforeMessageEdit", "onBeforeMessageSend", "onMessageClick",
-        "renderChatBarButton", "renderMemberListDecorator", "renderMessageAccessory", "renderMessageDecoration", "renderMessagePopoverButton",
+        "renderMemberListDecorator", "renderMessageAccessory", "renderMessageDecoration",
         // Custom
         "renderNicknameIcon", "renderProfileCollection"
     ];

@@ -1365,10 +1365,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 spectrographColor: {
                     label: "Spektrograf Rengi",
                     description: "Düz renk etkinleştirildiğinde spektrografın rengi"
-                },
-                forceMoveBelow: {
-                    label: "Alta Taşımaya Zorla",
-                    description: "Görselleştiriciyi ses kontrollerinin altına zorla taşı"
                 }
             },
             toast: {
@@ -6176,6 +6172,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             removeMessage: "Mesaj Geçmişini Kaldır",
             removeMessageTemporary: "Mesajı Kaldır (Geçici)",
             clearMessageLog: "Mesaj Günlüğünü Temizle",
+            showDiff: "Farkı Göster",
             modal: {
                 edit: {
                     title: "Mesaj Düzenleme Geçmişi",
@@ -6212,6 +6209,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreSelf: {
                     label: "Kendimi Yoksay",
                     description: "Kendi mesajlarını yoksay"
+                },
+                ignoreSelfEdits: {
+                    label: "Kendi Düzenlemelerini Yoksay",
+                    description: "Kendi yaptığınız düzenlemelerin yoksayılıp yoksayılmayacağı"
                 },
                 ignoreUsers: {
                     label: "Kullanıcıları Yoksay",
@@ -6859,6 +6860,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Şarkı sözlerinin alındığı kaynak",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
+                },
+                spotifyLyricsApiUrl: {
+                    label: "Spotify Şarkı Sözü API URL'si",
+                    description: "Spotify şarkı sözü API temel URL'si."
                 },
                 translateTo: {
                     label: "Diline Çevir",
@@ -8193,6 +8198,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     amount: "Kullanıcı Sayısı",
                     userAmount: "{{amount}} kullanıcı",
                     parameters: "Parametreler",
+                    selectAll: "Tümünü Seç",
+                    reset: "Sıfırla",
+                    stateFilters: "Durum Filtreleri",
                     moreThan: "Şundan fazla",
                     lessThan: "Şundan az",
                     equalTo: "Şuna eşit",
@@ -8212,6 +8220,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 voice: {
                     label: "Ses Ayarları",
+                    joinSettings: "Katılım Ayarları",
                     auto: {
                         mute: "Otomatik Sessize Al",
                         deafen: "Otomatik Sağırlaştır",
@@ -8279,6 +8288,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 leaveEmpty: {
                     label: "Boş Olunca Ayrıl",
                     description: "Sesli kanal boşaldığında rastgele başka bir çağrı bulur."
+                },
+                prioritizeFriends: {
+                    label: "Arkadaşlara Öncelik Ver",
+                    description: "Mümkün olduğunda arkadaşlarınızın bulunduğu kanalları tercih eder."
                 },
                 avoidStages: {
                     label: "Sahne Kanallarından Kaçın",

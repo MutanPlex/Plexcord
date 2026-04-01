@@ -68,13 +68,11 @@ export default definePlugin({
             Icon: QrCodeIcon
         });
 
-        SettingsPlugin.settingsSectionMap.push(["PlexcordLoginWithQR", "plexcord_login_with_qr"]);
         preload();
     },
 
     stop() {
         removeFromArray(SettingsPlugin.customEntries, e => e.key === "plexcord_login_with_qr");
-        removeFromArray(SettingsPlugin.settingsSectionMap, entry => entry[1] === "plexcord_login_with_qr");
         unload();
     },
 });

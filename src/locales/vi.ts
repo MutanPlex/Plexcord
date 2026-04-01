@@ -1365,10 +1365,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 spectrographColor: {
                     label: "Màu quang phổ",
                     description: "Màu của máy quang phổ khi bật màu đồng nhất"
-                },
-                forceMoveBelow: {
-                    label: "Buộc di chuyển xuống dưới",
-                    description: "Buộc trình hiển thị ở bên dưới bộ điều khiển âm thanh"
                 }
             },
             toast: {
@@ -6176,6 +6172,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             removeMessage: "Xóa lịch sử tin nhắn",
             removeMessageTemporary: "Xóa tin nhắn (Tạm thời)",
             clearMessageLog: "Xóa nhật ký tin nhắn",
+            showDiff: "Hiển thị khác biệt",
             modal: {
                 edit: {
                     title: "Lịch sử chỉnh sửa tin nhắn",
@@ -6212,6 +6209,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreSelf: {
                     label: "Bỏ qua bản thân",
                     description: "Có nên tự mình bỏ qua tin nhắn hay không"
+                },
+                ignoreSelfEdits: {
+                    label: "Bỏ qua các chỉnh sửa của chính mình",
+                    description: "Có bỏ qua các chỉnh sửa do chính bạn thực hiện hay không"
                 },
                 ignoreUsers: {
                     label: "Bỏ qua người dùng",
@@ -6859,6 +6860,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Lời bài hát được lấy từ đâu",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
+                },
+                spotifyLyricsApiUrl: {
+                    label: "URL API lời bài hát Spotify",
+                    description: "URL cơ sở của API lời bài hát Spotify."
                 },
                 translateTo: {
                     label: "Dịch sang",
@@ -8193,6 +8198,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     amount: "Số lượng người dùng",
                     userAmount: "{{amount}} người dùng{{s}}",
                     parameters: "Thông số",
+                    selectAll: "Chọn tất cả",
+                    reset: "Đặt lại",
+                    stateFilters: "Bộ lọc trạng thái",
                     moreThan: "Hơn",
                     lessThan: "Ít hơn",
                     equalTo: "bằng với",
@@ -8212,6 +8220,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 voice: {
                     label: "Tùy chọn giọng nói",
+                    joinSettings: "Cài đặt tham gia",
                     auto: {
                         mute: "Tự động tắt tiếng",
                         deafen: "Tự động điếc",
@@ -8279,6 +8288,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 leaveEmpty: {
                     label: "Để lại khi trống rỗng",
                     description: "Tìm một cuộc gọi ngẫu nhiên khi cuộc trò chuyện thoại trống."
+                },
+                prioritizeFriends: {
+                    label: "Ưu tiên bạn bè",
+                    description: "Ưu tiên các kênh có bạn bè của bạn khi có thể."
                 },
                 avoidStages: {
                     label: "Tránh sân khấu",

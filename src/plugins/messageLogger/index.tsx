@@ -332,7 +332,7 @@ export function parseEditContent(content: string, message: Message, previousCont
     });
 }
 
-const settings = definePluginSettings({
+export const settings = definePluginSettings({
     deleteStyle: {
         label: () => t(plugin.messageLogger.option.deleteStyle.label),
         description: () => t(plugin.messageLogger.option.deleteStyle.description),
@@ -381,6 +381,12 @@ const settings = definePluginSettings({
         type: OptionType.BOOLEAN,
         default: false,
     },
+    ignoreSelfEdits: {
+        label: () => t(plugin.messageLogger.option.ignoreSelfEdits.label),
+        description: () => t(plugin.messageLogger.option.ignoreSelfEdits.description),
+        type: OptionType.BOOLEAN,
+        default: false,
+    },
     ignoreUsers: {
         label: () => t(plugin.messageLogger.option.ignoreUsers.label),
         description: () => t(plugin.messageLogger.option.ignoreUsers.description),
@@ -423,6 +429,11 @@ const settings = definePluginSettings({
     separatedDiffs: {
         disabled() {
             return !this.store.showEditDiffs;
+        },
+    },
+    ignoreSelfEdits: {
+        disabled() {
+            return this.store.ignoreSelf;
         },
     },
 });
@@ -607,6 +618,7 @@ export default definePlugin({
             const {
                 ignoreBots,
                 ignoreSelf,
+                ignoreSelfEdits,
                 ignoreUsers,
                 ignoreChannels,
                 ignoreGuilds,
@@ -618,6 +630,7 @@ export default definePlugin({
             return (
                 (ignoreBots && message.author?.bot) ||
                 (ignoreSelf && message.author?.id === myId) ||
+                (ignoreSelfEdits && isEdit && message.author?.id === myId) ||
                 ignoreUsers.includes(message.author?.id) ||
                 ignoreChannels.includes(message.channel_id) ||
                 ignoreChannels.includes(ChannelStore.getChannel(message.channel_id)?.parent_id) ||

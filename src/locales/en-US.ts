@@ -1362,10 +1362,6 @@ const translations = {
                 spectrographColor: {
                     label: "Spectrograph Color",
                     description: "Color of the spectrograph when solid color is enabled"
-                },
-                forceMoveBelow: {
-                    label: "Force Move Below",
-                    description: "Force the visualizer to be below the audio controls"
                 }
             },
             toast: {
@@ -6174,6 +6170,7 @@ const translations = {
             removeMessage: "Remove Message History",
             removeMessageTemporary: "Remove Message (Temporary)",
             clearMessageLog: "Clear Message Log",
+            showDiff: "Show Diff",
             modal: {
                 edit: {
                     title: "Message Edit History",
@@ -6210,6 +6207,10 @@ const translations = {
                 ignoreSelf: {
                     label: "Ignore Self",
                     description: "Whether to ignore messages by yourself"
+                },
+                ignoreSelfEdits: {
+                    label: "Ignore Self Edits",
+                    description: "Whether to ignore edits by yourself"
                 },
                 ignoreUsers: {
                     label: "Ignore Users",
@@ -6857,6 +6858,10 @@ const translations = {
                     description: "Where lyrics are fetched from",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
+                },
+                spotifyLyricsApiUrl: {
+                    label: "Spotify Lyrics API URL",
+                    description: "Spotify lyrics API base URL."
                 },
                 translateTo: {
                     label: "Translate To",
@@ -8191,6 +8196,9 @@ const translations = {
                     amount: "User Amount",
                     userAmount: "{{amount}} user{{s}}",
                     parameters: "Parameters",
+                    selectAll: "Select All",
+                    reset: "Reset",
+                    stateFilters: "State Filters",
                     moreThan: "More than",
                     lessThan: "Less than",
                     equalTo: "Equal to",
@@ -8210,6 +8218,7 @@ const translations = {
                 },
                 voice: {
                     label: "Voice Options",
+                    joinSettings: "Join Settings",
                     auto: {
                         mute: "Auto Mute",
                         deafen: "Auto Deafen",
@@ -8277,6 +8286,10 @@ const translations = {
                 leaveEmpty: {
                     label: "Leave When Empty",
                     description: "Finds a random-call, when the voice chat is empty."
+                },
+                prioritizeFriends: {
+                    label: "Prioritize Friends",
+                    description: "Prefer channels with your friends in them when possible."
                 },
                 avoidStages: {
                     label: "Avoid Stage",

@@ -38,11 +38,8 @@ export default definePlugin({
             Component: IconsTab,
             Icon: MagnifyingGlassIcon
         });
-
-        SettingsPlugin.settingsSectionMap.push(["PlexcordDiscordIcons", "plexcord_icon_viewer"]);
     },
     stop() {
         removeFromArray(SettingsPlugin.customEntries, e => e.key === "plexcord_icon_viewer");
-        removeFromArray(SettingsPlugin.settingsSectionMap, entry => entry[1] === "plexcord_icon_viewer");
     },
 });

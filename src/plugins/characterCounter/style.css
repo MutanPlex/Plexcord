@@ -1,16 +1,15 @@
-.pc-char-counter-counter {
+.pc-charCounter-counter {
     font-size: 12px;
     color: var(--text-muted);
     position: absolute;
     bottom: 4px;
-    right: 6px;
+    right: 11px;
     pointer-events: none;
     z-index: 2;
     background: transparent;
     transition: color 0.3s ease;
-    margin-right: 5px;
 }
 
-.pc-char-counter-counter .pc-char-counter-count {
+.pc-charCounter-count {
     transition: color 0.3s ease;
 }

@@ -169,7 +169,7 @@ export default definePlugin({
         },
         {
             // Profile banner animation effect
-            find: "bannerAdjustment,noBorderRadius",
+            find: "bannerAdjustment,isHovering",
             replacement: {
                 match: /\i=\i=>\{(?=.{0,50}\.useReducedMotion\))/,
                 replace: "$&return null;"

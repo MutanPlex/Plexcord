@@ -1365,10 +1365,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 spectrographColor: {
                     label: "Kolor spektrografu",
                     description: "Kolor spektrografu, gdy jednolity kolor jest włączony"
-                },
-                forceMoveBelow: {
-                    label: "Wymuś przeniesienie pod spód",
-                    description: "Wymuś wyświetlanie wizualizacji poniżej kontrolek audio"
                 }
             },
             toast: {
@@ -6176,6 +6172,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             removeMessage: "Usuń historię wiadomości",
             removeMessageTemporary: "Usuń wiadomość (tymczasowo)",
             clearMessageLog: "Wyczyść log wiadomości",
+            showDiff: "Pokaż różnice",
             modal: {
                 edit: {
                     title: "Historia edycji wiadomości",
@@ -6212,6 +6209,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreSelf: {
                     label: "Ignoruj siebie",
                     description: "Czy ignorować własne wiadomości"
+                },
+                ignoreSelfEdits: {
+                    label: "Ignoruj własne edycje",
+                    description: "Czy ignorować edycje dokonane przez ciebie"
                 },
                 ignoreUsers: {
                     label: "Ignoruj użytkowników",
@@ -6859,6 +6860,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Skąd pobierać teksty piosenek",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
+                },
+                spotifyLyricsApiUrl: {
+                    label: "URL interfejsu API tekstów Spotify",
+                    description: "Podstawowy adres URL API tekstów Spotify."
                 },
                 translateTo: {
                     label: "Tłumacz na",
@@ -8193,6 +8198,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     amount: "Liczba użytkowników",
                     userAmount: "{{amount}} użytkownik(ów)",
                     parameters: "Parametry",
+                    selectAll: "Wybierz wszystkie",
+                    reset: "Resetuj",
+                    stateFilters: "Filtry stanu",
                     moreThan: "Więcej niż",
                     lessThan: "Mniej niż",
                     equalTo: "Równe",
@@ -8212,6 +8220,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 voice: {
                     label: "Opcje głosowe",
+                    joinSettings: "Ustawienia dołączenia",
                     auto: {
                         mute: "Auto-wyciszenie",
                         deafen: "Auto-ogłuszenie",
@@ -8279,6 +8288,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 leaveEmpty: {
                     label: "Opuść gdy pusty",
                     description: "Szuka nowego kanału, gdy obecny stanie się pusty."
+                },
+                prioritizeFriends: {
+                    label: "Priorytetyzuj znajomych",
+                    description: "Jeśli bu to możliwe, preferuj kanały, na których są Twoi znajomi."
                 },
                 avoidStages: {
                     label: "Unikaj kanałów Stage",

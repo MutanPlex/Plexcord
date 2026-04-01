@@ -1365,10 +1365,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 spectrographColor: {
                     label: "Spectrograaf kleur",
                     description: "Kleur van de spectrograaf wanneer effen kleur is ingeschakeld"
-                },
-                forceMoveBelow: {
-                    label: "Forceer beweging naar beneden",
-                    description: "Forceer de visualiser om zich onder de audiobediening te bevinden"
                 }
             },
             toast: {
@@ -6176,6 +6172,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             removeMessage: "Berichtgeschiedenis verwijderen",
             removeMessageTemporary: "Bericht verwijderen (tijdelijk)",
             clearMessageLog: "Berichtenlog wissen",
+            showDiff: "Verschillen tonen",
             modal: {
                 edit: {
                     title: "Berichtbewerkingsgeschiedenis",
@@ -6212,6 +6209,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreSelf: {
                     label: "Negeer jezelf",
                     description: "Of u berichten zelf moet negeren"
+                },
+                ignoreSelfEdits: {
+                    label: "Eigen bewerkingen negeren",
+                    description: "Of bewerkingen door jezelf genegeerd moeten worden"
                 },
                 ignoreUsers: {
                     label: "Negeer gebruikers",
@@ -6859,6 +6860,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Waar de songtekst vandaan komt",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
+                },
+                spotifyLyricsApiUrl: {
+                    label: "Spotify Lyrics API-URL",
+                    description: "Spotify lyrics API basis-URL."
                 },
                 translateTo: {
                     label: "Vertalen naar",
@@ -8193,6 +8198,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     amount: "Gebruikersbedrag",
                     userAmount: "{{amount}} gebruiker{{s}}",
                     parameters: "Parameters",
+                    selectAll: "Alles selecteren",
+                    reset: "Opnieuw instellen",
+                    stateFilters: "Statusfilters",
                     moreThan: "Meer dan",
                     lessThan: "Minder dan",
                     equalTo: "Gelijk aan",
@@ -8212,6 +8220,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 voice: {
                     label: "Stemopties",
+                    joinSettings: "Deelname-instellingen",
                     auto: {
                         mute: "Automatisch dempen",
                         deafen: "Auto doof",
@@ -8279,6 +8288,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 leaveEmpty: {
                     label: "Verlaten wanneer leeg",
                     description: "Vindt een willekeurige oproep wanneer de voicechat leeg is."
+                },
+                prioritizeFriends: {
+                    label: "Vrienden prioriteren",
+                    description: "Geef indien mogelijk de voorkeur aan kanalen waar je vrienden in zitten."
                 },
                 avoidStages: {
                     label: "Vermijd fase",

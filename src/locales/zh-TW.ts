@@ -1365,10 +1365,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 spectrographColor: {
                     label: "光譜儀顏色",
                     description: "啟用純色時光譜儀的顏色"
-                },
-                forceMoveBelow: {
-                    label: "強制向下方移動",
-                    description: "強制可視化器位於音訊控制下方"
                 }
             },
             toast: {
@@ -6176,6 +6172,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             removeMessage: "刪除訊息歷史記錄",
             removeMessageTemporary: "刪除訊息（暫時）",
             clearMessageLog: "清除訊息日誌",
+            showDiff: "顯示差異",
             modal: {
                 edit: {
                     title: "留言編輯歷史",
@@ -6212,6 +6209,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreSelf: {
                     label: "忽略自我",
                     description: "是否自行忽略訊息"
+                },
+                ignoreSelfEdits: {
+                    label: "忽略自身編輯",
+                    description: "是否忽略您自己的編輯"
                 },
                 ignoreUsers: {
                     label: "忽略用戶",
@@ -6859,6 +6860,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "歌詞從哪裡獲取",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
+                },
+                spotifyLyricsApiUrl: {
+                    label: "Spotify 歌詞 API 網址",
+                    description: "Spotify 歌詞 API 基礎網址。"
                 },
                 translateTo: {
                     label: "翻譯為",
@@ -8193,6 +8198,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     amount: "使用者數量",
                     userAmount: "{{amount}} 使用者{{s}}",
                     parameters: "參數",
+                    selectAll: "全選",
+                    reset: "重置",
+                    stateFilters: "狀態過濾器",
                     moreThan: "多於",
                     lessThan: "少於",
                     equalTo: "等於",
@@ -8212,6 +8220,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 voice: {
                     label: "語音選項",
+                    joinSettings: "加入設定",
                     auto: {
                         mute: "自動靜音",
                         deafen: "自動隔音",
@@ -8279,6 +8288,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 leaveEmpty: {
                     label: "空時離開",
                     description: "當語音聊天為空時尋找隨機通話。"
+                },
+                prioritizeFriends: {
+                    label: "好友優先",
+                    description: "儘可能優先選擇有好友在內的頻道。"
                 },
                 avoidStages: {
                     label: "迴避階段",

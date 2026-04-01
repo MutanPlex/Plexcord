@@ -1365,10 +1365,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 spectrographColor: {
                     label: "분광기 색상",
                     description: "단색이 활성화된 경우 분광기의 색상"
-                },
-                forceMoveBelow: {
-                    label: "아래로 강제 이동",
-                    description: "시각화 장치를 오디오 컨트롤 아래에 강제로 배치"
                 }
             },
             toast: {
@@ -6176,6 +6172,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             removeMessage: "메시지 기록 제거",
             removeMessageTemporary: "메시지 제거(임시)",
             clearMessageLog: "메시지 로그 지우기",
+            showDiff: "차이 표시",
             modal: {
                 edit: {
                     title: "메시지 편집 기록",
@@ -6212,6 +6209,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreSelf: {
                     label: "자기 무시",
                     description: "메시지를 직접 무시할지 여부"
+                },
+                ignoreSelfEdits: {
+                    label: "자신의 편집 무시",
+                    description: "자신이 직접 편집한 내용을 무시할지 여부"
                 },
                 ignoreUsers: {
                     label: "사용자 무시",
@@ -6859,6 +6860,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "가사를 가져오는 위치",
                     spotify: "스포티파이(Musixmatch)",
                     LRCLIB: "LRCLIB"
+                },
+                spotifyLyricsApiUrl: {
+                    label: "Spotify 가사 API URL",
+                    description: "Spotify 가사 API 기본 URL입니다."
                 },
                 translateTo: {
                     label: "번역 대상",
@@ -8193,6 +8198,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     amount: "사용자 금액",
                     userAmount: "{{amount}} 사용자{{s}}",
                     parameters: "매개변수",
+                    selectAll: "모두 선택",
+                    reset: "재설정",
+                    stateFilters: "상태 필터",
                     moreThan: "이상",
                     lessThan: "미만",
                     equalTo: "같음",
@@ -8212,6 +8220,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 voice: {
                     label: "음성 옵션",
+                    joinSettings: "참여 설정",
                     auto: {
                         mute: "자동 음소거",
                         deafen: "자동 귀머거리",
@@ -8279,6 +8288,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 leaveEmpty: {
                     label: "비었을 때 떠나기",
                     description: "음성채팅이 비어있을 때 무작위로 전화를 찾습니다."
+                },
+                prioritizeFriends: {
+                    label: "친구 우선순위 설정",
+                    description: "가능한 경우 친구가 있는 채널을 선호합니다."
                 },
                 avoidStages: {
                     label: "스테이지를 피하세요",

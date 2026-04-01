@@ -1365,10 +1365,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 spectrographColor: {
                     label: "分光器の色",
                     description: "単色が有効な場合の分光器の色"
-                },
-                forceMoveBelow: {
-                    label: "強制的に下に移動",
-                    description: "ビジュアライザーをオーディオ コントロールの下に強制的に配置します。"
                 }
             },
             toast: {
@@ -6176,6 +6172,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             removeMessage: "メッセージ履歴の削除",
             removeMessageTemporary: "メッセージの削除 (一時的)",
             clearMessageLog: "メッセージログのクリア",
+            showDiff: "差分を表示",
             modal: {
                 edit: {
                     title: "メッセージ編集履歴",
@@ -6212,6 +6209,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreSelf: {
                     label: "自分自身を無視する",
                     description: "自分でメッセージを無視するかどうか"
+                },
+                ignoreSelfEdits: {
+                    label: "自分の編集を無視する",
+                    description: "自分自身による編集を無視するかどうか"
                 },
                 ignoreUsers: {
                     label: "ユーザーを無視する",
@@ -6859,6 +6860,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "歌詞の取得元",
                     spotify: "Spotify（ミュージックマッチ）",
                     LRCLIB: "LRCLIB"
+                },
+                spotifyLyricsApiUrl: {
+                    label: "Spotify 歌詞 API URL",
+                    description: "Spotify 歌詞 API のベース URL。"
                 },
                 translateTo: {
                     label: "翻訳先",
@@ -8193,6 +8198,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     amount: "ユーザー金額",
                     userAmount: "{{amount}} ユーザー{{s}}",
                     parameters: "パラメータ",
+                    selectAll: "すべて選択",
+                    reset: "リセット",
+                    stateFilters: "状態フィルター",
                     moreThan: "より多い",
                     lessThan: "未満",
                     equalTo: "に等しい",
@@ -8212,6 +8220,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 voice: {
                     label: "音声オプション",
+                    joinSettings: "参加設定",
                     auto: {
                         mute: "オートミュート",
                         deafen: "自動聴覚障害者",
@@ -8279,6 +8288,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 leaveEmpty: {
                     label: "空になったら出発",
                     description: "ボイスチャットが空のときにランダムな通話を検索します。"
+                },
+                prioritizeFriends: {
+                    label: "フレンドを優先",
+                    description: "可能な限り、フレンドがいるチャンネルを優先します。"
                 },
                 avoidStages: {
                     label: "回避ステージ",

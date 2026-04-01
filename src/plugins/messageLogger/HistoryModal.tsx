@@ -8,6 +8,7 @@
 import { plugin, t } from "@api/i18n";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
+import { FormSwitch } from "@components/FormSwitch";
 import { TooltipContainer } from "@components/TooltipContainer";
 import { classNameFactory } from "@utils/css";
 import { Margins } from "@utils/margins";
@@ -16,7 +17,7 @@ import { ModalCloseButton, ModalContent, ModalHeader, ModalProps, ModalRoot, Mod
 import { findCssClassesLazy } from "@webpack";
 import { TabBar, Timestamp, useState } from "@webpack/common";
 
-import { parseEditContent } from ".";
+import { parseEditContent, settings } from ".";
 
 const CodeContainerClasses = findCssClassesLazy("markup", "codeContainer");
 const MiscClasses = findCssClassesLazy("messageContent", "markupRtl");
@@ -36,6 +37,7 @@ export function openHistoryModal(message: any) {
 
 export function HistoryModal({ modalProps, message }: { modalProps: ModalProps; message: any; }) {
     const [currentTab, setCurrentTab] = useState(message.editHistory.length);
+    const [showDiff, setShowDiff] = useState(settings.store.showEditDiffs);
     const timestamps = [message.firstEditTimestamp, ...message.editHistory.map(m => m.timestamp)];
     const contents = [...message.editHistory.map(m => m.content), message.content];
 
@@ -47,6 +49,7 @@ export function HistoryModal({ modalProps, message }: { modalProps: ModalProps; 
             </ModalHeader>
 
             <ModalContent className={cl("contents")}>
+                <FormSwitch title={t(plugin.messageLogger.showDiff)} value={showDiff} onChange={setShowDiff} />
                 <TabBar
                     type="top"
                     look="brand"
@@ -88,7 +91,7 @@ export function HistoryModal({ modalProps, message }: { modalProps: ModalProps; 
                 </TabBar>
 
                 <div className={classes(CodeContainerClasses.markup, MiscClasses.messageContent, Margins.top20)}>
-                    {parseEditContent(contents[currentTab], message, currentTab === contents.length - 1 ? undefined : contents[contents.length - 1])}
+                    {parseEditContent(contents[currentTab], message, showDiff ? currentTab === contents.length - 1 ? undefined : contents[contents.length - 1] : undefined)}
                 </div>
             </ModalContent>
         </ModalRoot>

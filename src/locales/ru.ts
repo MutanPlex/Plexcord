@@ -1365,10 +1365,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 spectrographColor: {
                     label: "Цвет спектрографа",
                     description: "Цвет спектрографа при включенном сплошном цвете"
-                },
-                forceMoveBelow: {
-                    label: "Принудительно вниз",
-                    description: "Размещать визуализатор строго под элементами управления аудио"
                 }
             },
             toast: {
@@ -6176,6 +6172,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             removeMessage: "Удалить историю сообщения",
             removeMessageTemporary: "Убрать сообщение (временно)",
             clearMessageLog: "Очистить лог сообщений",
+            showDiff: "Показать различия",
             modal: {
                 edit: {
                     title: "История редактирования",
@@ -6212,6 +6209,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreSelf: {
                     label: "Игнорировать себя",
                     description: "Не отслеживать свои сообщения"
+                },
+                ignoreSelfEdits: {
+                    label: "Игнорировать собственные правки",
+                    description: "Игнорировать ли правки, сделанные вами"
                 },
                 ignoreUsers: {
                     label: "Игнорировать пользователей",
@@ -6859,6 +6860,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Сервис для получения текстов песен",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
+                },
+                spotifyLyricsApiUrl: {
+                    label: "URL API текстов песен Spotify",
+                    description: "Базовый URL API текстов песен Spotify."
                 },
                 translateTo: {
                     label: "Переводить на",
@@ -8193,6 +8198,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     amount: "Кол-во людей",
                     userAmount: "Человек: {{amount}}",
                     parameters: "Параметры",
+                    selectAll: "Выбрать все",
+                    reset: "Сбросить",
+                    stateFilters: "Фильтры состояния",
                     moreThan: "Больше чем",
                     lessThan: "Меньше чем",
                     equalTo: "Равно",
@@ -8212,6 +8220,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 voice: {
                     label: "Опции голоса",
+                    joinSettings: "Настройки присоединения",
                     auto: {
                         mute: "Авто-мут",
                         deafen: "Авто-деф",
@@ -8279,6 +8288,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 leaveEmpty: {
                     label: "Выйти если пусто",
                     description: "Искать новый канал, если в текущем никого не осталось."
+                },
+                prioritizeFriends: {
+                    label: "Приоритет друзьям",
+                    description: "По возможности отдавать предпочтение каналам, в которых находятся ваши друзья."
                 },
                 avoidStages: {
                     label: "Избегать трибуны",

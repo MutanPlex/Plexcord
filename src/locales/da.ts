@@ -1365,10 +1365,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 spectrographColor: {
                     label: "Spektrograf-farve",
                     description: "Farve på spektrografen når ensfarvet er aktiveret"
-                },
-                forceMoveBelow: {
-                    label: "Tving placering under",
-                    description: "Tving visualiseringsværktøjet til at være under lydstyringen"
                 }
             },
             toast: {
@@ -6176,6 +6172,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             removeMessage: "Fjern beskedhistorik",
             removeMessageTemporary: "Fjern besked (Midlertidigt)",
             clearMessageLog: "Ryd beskedlog",
+            showDiff: "Vis forskelle",
             modal: {
                 edit: {
                     title: "Historik for redigering",
@@ -6212,6 +6209,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreSelf: {
                     label: "Ignorer dig selv",
                     description: "Om dine egne beskeder skal ignoreres"
+                },
+                ignoreSelfEdits: {
+                    label: "Ignorer egne redigeringer",
+                    description: "Om redigeringer foretaget af dig selv skal ignoreres"
                 },
                 ignoreUsers: {
                     label: "Ignorer brugere",
@@ -6859,6 +6860,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Hvor sangtekster hentes fra",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
+                },
+                spotifyLyricsApiUrl: {
+                    label: "Spotify Lyrics API-URL",
+                    description: "Spotify lyrics API-basis-URL."
                 },
                 translateTo: {
                     label: "Oversæt til",
@@ -8193,6 +8198,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     amount: "Antal brugere",
                     userAmount: "{{amount}} bruger{{s}}",
                     parameters: "Parametre",
+                    selectAll: "Vælg alt",
+                    reset: "Nulstil",
+                    stateFilters: "Tilstand filtre",
                     moreThan: "Mere end",
                     lessThan: "Mindre end",
                     equalTo: "Lig med",
@@ -8212,6 +8220,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 voice: {
                     label: "Stemme-indstillinger",
+                    joinSettings: "Deltag indstillinger",
                     auto: {
                         mute: "Auto Mute",
                         deafen: "Auto Deafen",
@@ -8279,6 +8288,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 leaveEmpty: {
                     label: "Forlad når tom",
                     description: "Finder et nyt tilfældigt opkald, hvis rummet er tomt."
+                },
+                prioritizeFriends: {
+                    label: "Prioriter venner",
+                    description: "Foretræk kanaler med dine venner i, når det er muligt."
                 },
                 avoidStages: {
                     label: "Undgå Stage",

@@ -112,24 +112,12 @@ const pluginSettings = definePluginSettings({
     },
 });
 
-const settingsSectionMap: [string, string][] = [
-    ["PlexcordSettings", "plexcord_main_panel"],
-    ["PlexcordPlugins", "plexcord_plugins_panel"],
-    ["PlexcordThemes", "plexcord_themes_panel"],
-    ["PlexcordUpdater", "plexcord_updater_panel"],
-    ["PlexcordChangelog", "plexcord_changelog_panel"],
-    ["PlexcordCloud", "plexcord_cloud_panel"],
-    ["PlexcordBackupAndRestore", "plexcord_backup_restore_panel"],
-    ["PlexcordPatchHelper", "plexcord_patch_helper_panel"]
-];
-
 export default definePlugin({
     name: "Settings",
     description: () => t(plugin.settings.description),
     authors: [Devs.Ven, Devs.Megu, PcDevs.MutanPlex],
     required: true,
     settings: pluginSettings,
-    settingsSectionMap,
 
     patches: [
         {
@@ -187,10 +175,6 @@ export default definePlugin({
             icon: () => <Icon width={20} height={20} />,
             buildLayout: () => [panel]
         };
-    },
-
-    getSettingsSectionMappings() {
-        return settingsSectionMap;
     },
 
     buildLayout(originalLayoutBuilder: SettingsLayoutBuilder) {

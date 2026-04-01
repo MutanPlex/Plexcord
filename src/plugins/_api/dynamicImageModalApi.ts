@@ -16,7 +16,6 @@ export default definePlugin({
 
     patches: [
         {
-            // TODO: bundler compat
             find: ".renderLinkComponent",
             replacement: {
                 // widthAndHeightPassed = w != null && w !== 0 && h == null || h === 0

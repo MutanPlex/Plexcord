@@ -15,7 +15,7 @@ import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
 import { UserStore } from "@webpack/common";
 
-const cl = classNameFactory("pc-char-counter-");
+const cl = classNameFactory("pc-charCounter-");
 
 const settings = definePluginSettings({
     colorEffects: {
@@ -26,38 +26,51 @@ const settings = definePluginSettings({
     },
 });
 
+function getCounterColor(percentage: number) {
+    if (!settings.store.colorEffects) return "var(--primary-330)";
+    if (percentage < 50) return "var(--text-muted)";
+    if (percentage < 75) return "var(--yellow-330)";
+    if (percentage < 90) return "var(--orange-330)";
+    return "var(--red-360)";
+}
+
 export default definePlugin({
     name: "CharacterCounter",
     description: () => t(plugin.characterCounter.description),
     authors: [PcDevs.creations, PcDevs.Panniku, Devs.thororen, PcDevs.MutanPlex],
     settings,
-
-    replacement: [
+    patches: [
         {
-            match: /(textValue:.{0,50}channelId:\i\.id\}\),)\i/,
-            replace: "$1$self.renderCharCounter(arguments[0].textValue)"
+            find: ".CREATE_FORUM_POST||",
+            replacement: [
+                {
+                    match: /(?<=textValue:(\i),editorHeight:\i,channelId:\i\.id\}\)),\i/,
+                    replace: ",$self.renderCharCounter({text:$1})"
+                }
+            ]
+        },
+        {
+            find: "#{intl::PREMIUM_MESSAGE_LENGTH_UPSELL_TOOLTIP}",
+            replacement: {
+                match: /return \i\?\i\(\):\i\(\)(?<=#{intl::PREMIUM_MESSAGE_LENGTH_UPSELL_TOOLTIP_WITHOUT_LINK}.{0,200}?)/,
+                replace: "return null"
+            }
         }
     ],
 
-    renderCharCounter: ErrorBoundary.wrap(text => {
-        const premiumType = (UserStore.getCurrentUser()?.premiumType ?? 0);
+    renderCharCounter: ErrorBoundary.wrap(({ text }: { text: string; }) => {
+        if (!text.length) return null;
+
+        const premiumType = UserStore.getCurrentUser().premiumType ?? 0;
         const charMax = premiumType === 2 ? 4000 : 2000;
-        const { length } = text;
 
-        let color = "var(--primary-330)";
-        if (settings.store.colorEffects) {
-            const percentage = (length / charMax) * 100;
-            if (percentage < 50) color = "var(--text-muted)";
-            else if (percentage < 75) color = "var(--yellow-330)";
-            else if (percentage < 90) color = "var(--orange-330)";
-            else color = "var(--red-360)";
-        }
+        const color = getCounterColor((text.length / charMax) * 100);
 
-        if (!length) return null;
         return (
             <div className={cl("counter")} style={{ color }}>
-                <span className={cl("count")} >{length}</span>/
-                <span className={cl("max")} >{charMax}</span>
+                <span className={cl("count")}>{text.length}</span>
+                /
+                <span className={cl("max")}>{charMax}</span>
             </div>
         );
     }, { noop: true })

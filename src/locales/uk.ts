@@ -1365,10 +1365,6 @@ const translations: MatchStructure<typeof enTranslations> = {
                 spectrographColor: {
                     label: "Колір спектрографа",
                     description: "Колір спектрографа, якщо увімкнено суцільний колір"
-                },
-                forceMoveBelow: {
-                    label: "Примусово змістити вниз",
-                    description: "Примусово розміщувати візуалізатор під елементами керування аудіо"
                 }
             },
             toast: {
@@ -6176,6 +6172,7 @@ const translations: MatchStructure<typeof enTranslations> = {
             removeMessage: "Видалити історію повідомлення",
             removeMessageTemporary: "Видалити повідомлення (Тимчасово)",
             clearMessageLog: "Очистити лог",
+            showDiff: "Показати різницю",
             modal: {
                 edit: {
                     title: "Історія редагування",
@@ -6212,6 +6209,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 ignoreSelf: {
                     label: "Ігнорувати себе",
                     description: "Чи ігнорувати власні повідомлення"
+                },
+                ignoreSelfEdits: {
+                    label: "Ігнорувати власні редагування",
+                    description: "Чи ігнорувати редагування, зроблені вами"
                 },
                 ignoreUsers: {
                     label: "Ігнорувати користувачів",
@@ -6859,6 +6860,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                     description: "Звідки завантажуються тексти пісень",
                     spotify: "Spotify (Musixmatch)",
                     LRCLIB: "LRCLIB"
+                },
+                spotifyLyricsApiUrl: {
+                    label: "URL-адреса API текстів пісень Spotify",
+                    description: "Базова URL-адреса API текстів пісень Spotify."
                 },
                 translateTo: {
                     label: "Перекласти на",
@@ -8193,6 +8198,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                     amount: "Кількість користувачів",
                     userAmount: "{{amount}} користувач(ів)",
                     parameters: "Параметри",
+                    selectAll: "Вибрати все",
+                    reset: "Скинути",
+                    stateFilters: "Фільтри стану",
                     moreThan: "Більше ніж",
                     lessThan: "Менше ніж",
                     equalTo: "Дорівнює",
@@ -8212,6 +8220,7 @@ const translations: MatchStructure<typeof enTranslations> = {
                 },
                 voice: {
                     label: "Опції голосу",
+                    joinSettings: "Налаштування приєднання",
                     auto: {
                         mute: "Авто-вимк. мікрофона",
                         deafen: "Авто-вимк. звуку",
@@ -8279,6 +8288,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 leaveEmpty: {
                     label: "Вийти, якщо порожньо",
                     description: "Шукати інший дзвінок, якщо канал став порожнім."
+                },
+                prioritizeFriends: {
+                    label: "Пріоритет друзям",
+                    description: "За можливості віддавати перевагу каналам, де перебувають ваші друзі."
                 },
                 avoidStages: {
                     label: "Уникати трибун",
