@@ -156,7 +156,6 @@ function applyDefaultSettings(guildId: string | null) {
 export default definePlugin({
     name: "NewGuildSettings",
     description: () => t(plugin.newGuildSettings.description),
-    tags: ["MuteNewGuild", "mute", "server"],
     authors: [Devs.Glitch, Devs.Nuckyz, Devs.carince, Devs.Mopi, Devs.GabiRP],
 
     contextMenus: {

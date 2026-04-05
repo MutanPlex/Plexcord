@@ -46,7 +46,6 @@ function disableInvites(guildId: string) {
 export default definePlugin({
     name: "PauseInvitesForever",
     description: () => t(plugin.pauseInvitesForever.description),
-    tags: ["DisableInvitesForever"],
     authors: [Devs.Dolfies, Devs.amia],
 
     patches: [

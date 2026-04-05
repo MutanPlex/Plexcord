@@ -4399,7 +4399,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         favouriteAnything: {
             name: "FavouriteAnything",
-            description: "Herhangi bir resmi favorile"
+            description: "Herhangi bir resmi favorile",
+            noFiles: "Aramanızla eşleşen dosya yok.",
+            searchPlaceholder: "Dosya ara",
+            media: "Medya",
+            demoText: "Bir dosyayı favorilere eklemek için yıldıza tıklayın.\nFavori dosyalarınız burada görünecek!",
+            fetchError: "{filename} alınamadı",
+            uploadError: "{filename} yüklenemedi"
         },
         fileDownloadButton: {
             name: "FileDownloadButton",

@@ -4399,7 +4399,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         favouriteAnything: {
             name: "FavouriteAnything",
-            description: "Adaugă la favorite orice imagine"
+            description: "Adaugă la favorite orice imagine",
+            noFiles: "Niciun fișier nu corespunde căutării tale.",
+            searchPlaceholder: "Caută fișiere",
+            media: "Media",
+            demoText: "Apasă pe stea pentru a adăuga un fișier la favorite.\nFișierele favorite vor apărea aici!",
+            fetchError: "Nu s-a putut obține {filename}",
+            uploadError: "Nu s-a putut încărca {filename}"
         },
         fileDownloadButton: {
             name: "FileDownloadButton",

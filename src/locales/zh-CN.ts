@@ -4399,7 +4399,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         favouriteAnything: {
             name: "FavouriteAnything",
-            description: "收藏任何图像"
+            description: "收藏任何图像",
+            noFiles: "没有与您的搜索匹配的文件。",
+            searchPlaceholder: "搜索文件",
+            media: "媒体",
+            demoText: "点击星标来收藏文件。\n收藏的文件将显示在这里！",
+            fetchError: "无法获取 {filename}",
+            uploadError: "无法上传 {filename}"
         },
         fileDownloadButton: {
             name: "FileDownloadButton",

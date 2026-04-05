@@ -73,7 +73,6 @@ export default definePlugin({
     name: "HideServers",
     description: () => t(plugin.hideServers.description),
     authors: [PcDevs.bep, PcDevs.MutanPlex],
-    tags: ["guild", "server", "hide", "folder"],
     dependencies: ["ServerListAPI"],
 
     contextMenus: {

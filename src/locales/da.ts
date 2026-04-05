@@ -4399,7 +4399,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         favouriteAnything: {
             name: "FavouriteAnything",
-            description: "Gør ethvert billede til en favorit"
+            description: "Gør ethvert billede til en favorit",
+            noFiles: "Ingen filer matcher din søgning.",
+            searchPlaceholder: "Søg filer",
+            media: "Medier",
+            demoText: "Klik på stjernen for at gøre en fil til favorit.\nFavoritfiler vil vises her!",
+            fetchError: "Kunne ikke hente {filename}",
+            uploadError: "Kunne ikke uploade {filename}"
         },
         fileDownloadButton: {
             name: "FileDownloadButton",

@@ -4399,7 +4399,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         favouriteAnything: {
             name: "FavouriteAnything",
-            description: "Permet de mettre n'importe quelle image en favori"
+            description: "Permet de mettre n'importe quelle image en favori",
+            noFiles: "Aucun fichier ne correspond à votre recherche.",
+            searchPlaceholder: "Rechercher des fichiers",
+            media: "Médias",
+            demoText: "Cliquez sur l'étoile pour ajouter un fichier aux favoris.\nLes fichiers favoris apparaîtront ici !",
+            fetchError: "Impossible de récupérer {filename}",
+            uploadError: "Impossible de télécharger {filename}"
         },
         fileDownloadButton: {
             name: "FileDownloadButton",

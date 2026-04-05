@@ -4397,7 +4397,13 @@ const translations = {
         },
         favouriteAnything: {
             name: "FavouriteAnything",
-            description: "Favourite any image"
+            description: "Favourite any image, video, or file attachment",
+            noFiles: "No files match your search.",
+            searchPlaceholder: "Search files",
+            media: "Media",
+            demoText: "Click the star to favourite a file.\nFavourite files will show up here!",
+            fetchError: "Couldn't fetch {filename}",
+            uploadError: "Couldn't upload {filename}"
         },
         fileDownloadButton: {
             name: "FileDownloadButton",

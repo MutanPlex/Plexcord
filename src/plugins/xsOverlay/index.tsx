@@ -204,7 +204,6 @@ export default definePlugin({
     name: "XSOverlay",
     description: () => t(plugin.xSOverlay.description),
     authors: [Devs.Nyako],
-    tags: ["vr", "notify"],
     reporterTestable: ReporterTestable.None,
     settings,
 

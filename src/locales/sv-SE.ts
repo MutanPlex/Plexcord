@@ -4399,7 +4399,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         favouriteAnything: {
             name: "FavouriteAnything",
-            description: "Favorita vilken bild som helst"
+            description: "Favorita vilken bild som helst",
+            noFiles: "Inga filer matchar din sökning.",
+            searchPlaceholder: "Sök filer",
+            media: "Media",
+            demoText: "Klicka på stjärnan för att favoritmarkera en fil.\nFavoritfiler visas här!",
+            fetchError: "Kunde inte hämta {filename}",
+            uploadError: "Kunde inte ladda upp {filename}"
         },
         fileDownloadButton: {
             name: "FileDownloadButton",

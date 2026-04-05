@@ -4399,7 +4399,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         favouriteAnything: {
             name: "FavouriteAnything",
-            description: "어떤 이미지든 즐겨찾기에 추가"
+            description: "어떤 이미지든 즐겨찾기에 추가",
+            noFiles: "검색과 일치하는 파일이 없습니다.",
+            searchPlaceholder: "파일 검색",
+            media: "미디어",
+            demoText: "별을 클릭하여 파일을 즐겨찾기에 추가하세요.\n즐겨찾기한 파일이 여기에 표시됩니다!",
+            fetchError: "{filename}을(를) 가져올 수 없습니다",
+            uploadError: "{filename}을(를) 업로드할 수 없습니다"
         },
         fileDownloadButton: {
             name: "FileDownloadButton",

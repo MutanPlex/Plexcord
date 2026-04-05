@@ -4399,7 +4399,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         favouriteAnything: {
             name: "FavouriteAnything",
-            description: "Favoriet elke afbeelding"
+            description: "Favoriet elke afbeelding",
+            noFiles: "Geen bestanden gevonden die overeenkomen met je zoekopdracht.",
+            searchPlaceholder: "Bestanden zoeken",
+            media: "Media",
+            demoText: "Klik op de ster om een bestand toe te voegen aan favorieten.\nFavoriete bestanden verschijnen hier!",
+            fetchError: "Kon {filename} niet ophalen",
+            uploadError: "Kon {filename} niet uploaden"
         },
         fileDownloadButton: {
             name: "FileDownloadButton",

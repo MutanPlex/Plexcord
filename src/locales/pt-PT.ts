@@ -4399,7 +4399,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         favouriteAnything: {
             name: "FavouriteAnything",
-            description: "Permite marcar qualquer imagem como favorita"
+            description: "Permite marcar qualquer imagem como favorita",
+            noFiles: "Nenhum ficheiro corresponde à sua pesquisa.",
+            searchPlaceholder: "Pesquisar ficheiros",
+            media: "Média",
+            demoText: "Clique na estrela para adicionar um ficheiro aos favoritos.\nOs ficheiros favoritos aparecerão aqui!",
+            fetchError: "Não foi possível obter {filename}",
+            uploadError: "Não foi possível carregar {filename}"
         },
         fileDownloadButton: {
             name: "FileDownloadButton",

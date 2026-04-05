@@ -420,11 +420,11 @@ export async function addScheduledMessage(
 export async function updateScheduledMessageTime(id: string, scheduledTime: number): Promise<{ success: boolean; error?: string; }> {
     const message = scheduledMessages.find(entry => entry.id === id);
     if (!message) {
-        return { success: false, error: "Scheduled message not found" };
+        return { success: false, error: t(plugin.scheduledMessages.viewModal.noMessages) };
     }
 
     if (scheduledTime <= Date.now()) {
-        return { success: false, error: "Please select a future date and time" };
+        return { success: false, error: t(plugin.scheduledMessages.scheduleModal.error.invalidDateTime) };
     }
 
     const minuteStart = Math.floor(scheduledTime / 60000) * 60000;
@@ -436,7 +436,7 @@ export async function updateScheduledMessageTime(id: string, scheduledTime: numb
     ).length;
 
     if (count >= settings.store.maxMessagesPerMinute) {
-        return { success: false, error: `Maximum of ${settings.store.maxMessagesPerMinute} messages per channel per minute reached` };
+        return { success: false, error: t(plugin.scheduledMessages.toast.maxMessagesReached, { max: settings.store.maxMessagesPerMinute }) };
     }
 
     removePhantomMessage(message);
@@ -450,13 +450,13 @@ export async function updateScheduledMessageTime(id: string, scheduledTime: numb
 export async function sendScheduledMessageNow(id: string): Promise<{ success: boolean; error?: string; }> {
     const message = scheduledMessages.find(entry => entry.id === id);
     if (!message) {
-        return { success: false, error: "Scheduled message not found" };
+        return { success: false, error: t(plugin.scheduledMessages.viewModal.noMessages) };
     }
 
     await removeScheduledMessage(id);
     const sent = await sendScheduledMessage(message);
     if (!sent) {
-        return { success: false, error: "Failed to send scheduled message" };
+        return { success: false, error: t(plugin.scheduledMessages.toast.messageFailed) };
     }
 
     return { success: true };

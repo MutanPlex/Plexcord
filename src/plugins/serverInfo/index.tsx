@@ -55,7 +55,6 @@ export default definePlugin({
     description: () => t(plugin.serverInfo.description),
     authors: [Devs.Ven, Devs.Nuckyz, PcDevs.Z1xus],
     dependencies: ["DynamicImageModalAPI"],
-    tags: ["guild", "info", "ServerProfile"],
 
     contextMenus: {
         "guild-context": Patch,

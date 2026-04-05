@@ -197,13 +197,13 @@ function TextReplace({ title, description, rulesArray, isRegex = false }: TextRe
                                     />
                                     <TextRow
                                         label={t(plugin.textReplace.modal.replace)}
-                                        description="The text to replace the found text with"
+                                        description={t(plugin.textReplace.modal.replaceDescription)}
                                         value={rule.replace}
                                         onChange={e => onChange(e, index, "replace")}
                                     />
                                     <TextRow
                                         label={t(plugin.textReplace.modal.includes)}
-                                        description="The text that must be included for the rule to apply"
+                                        description={t(plugin.textReplace.modal.includesDescription)}
                                         value={rule.onlyIfIncludes}
                                         onChange={e => onChange(e, index, "onlyIfIncludes")}
                                     />

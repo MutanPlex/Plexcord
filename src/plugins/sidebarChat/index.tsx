@@ -145,8 +145,8 @@ export default definePlugin({
             group: true,
             replacement: [
                 {
-                    match: /\.CHANNEL\(\i\.id.{0,25}\)\(\)\);/,
-                    replace: "$&const pc_SidebarChat=$self.renderSidebar();"
+                    match: /if\(null!=.{0,50}ROLE_SUBSCRIPTIONS/,
+                    replace: "const pc_SidebarChat=$self.renderSidebar();$&"
                 },
                 {
                     match: /return(\(0,\i\.jsxs?\)\(\i\.\i,{}\))}/,

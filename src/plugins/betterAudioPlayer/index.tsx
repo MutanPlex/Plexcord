@@ -14,7 +14,7 @@ import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
 import { ColorUtils, React, showToast, Toasts } from "@webpack/common";
 
-const cl = classNameFactory("vc-better-audio-player-");
+const cl = classNameFactory("pc-better-audio-player-");
 const CORS_PROXY = "https://cors.keiran0.workers.dev?url=";
 const MAX_FILE_SIZE = 12e6;
 

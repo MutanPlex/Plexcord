@@ -105,7 +105,6 @@ export default definePlugin({
     name: "ReverseImageSearch",
     description: () => t(plugin.reverseImageSearch.description),
     authors: [Devs.Ven, Devs.Nuckyz],
-    tags: ["ImageUtilities"],
 
     patches: [
         {

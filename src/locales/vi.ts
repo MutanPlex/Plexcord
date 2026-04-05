@@ -4399,7 +4399,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         favouriteAnything: {
             name: "FavouriteAnything",
-            description: "Yêu thích bất kỳ hình ảnh"
+            description: "Yêu thích bất kỳ hình ảnh",
+            noFiles: "Không có tệp nào khớp với tìm kiếm của bạn.",
+            searchPlaceholder: "Tìm kiếm tệp",
+            media: "Phương tiện",
+            demoText: "Nhấp vào ngôi sao để thêm tệp vào yêu thích.\nCác tệp yêu thích sẽ hiển thị ở đây!",
+            fetchError: "Không thể tải {filename}",
+            uploadError: "Không thể tải lên {filename}"
         },
         fileDownloadButton: {
             name: "FileDownloadButton",

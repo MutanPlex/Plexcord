@@ -44,13 +44,7 @@ export const settings = definePluginSettings({
                 value: "metric"
             }
         ]
-    },
-    // invert: {
-    //     type: OptionType.BOOLEAN,
-    //     default: false,
-    //     // is there a better way to word this?
-    //     description: "If this option is set, ignore the units you set and invert every conversion."
-    // }
+    }
 });
 export default definePlugin({
     name: "UnitConverter",

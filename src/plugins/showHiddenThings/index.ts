@@ -51,7 +51,6 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "ShowHiddenThings",
     description: () => t(plugin.showHiddenThings.description),
-    tags: ["ShowTimeouts", "ShowInvitesPaused", "ShowModView", "DisableDiscoveryFilters"],
     authors: [Devs.Dolfies],
     settings,
 

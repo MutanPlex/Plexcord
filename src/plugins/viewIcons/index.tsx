@@ -183,7 +183,6 @@ export default definePlugin({
     name: "ViewIcons",
     description: () => t(plugin.viewIcons.description),
     authors: [Devs.Ven, Devs.TheKodeToad, Devs.Nuckyz, Devs.nyx],
-    tags: ["ImageUtilities"],
     dependencies: ["DynamicImageModalAPI"],
     settings,
 

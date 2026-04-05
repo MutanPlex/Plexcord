@@ -4399,7 +4399,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         favouriteAnything: {
             name: "FavouriteAnything",
-            description: "Позволяет добавлять в избранное любые изображения."
+            description: "Позволяет добавлять в избранное любые изображения.",
+            noFiles: "Нет файлов, соответствующих вашему запросу.",
+            searchPlaceholder: "Поиск файлов",
+            media: "Медиа",
+            demoText: "Нажмите на звездочку, чтобы добавить файл в избранное.\nИзбранные файлы будут отображаться здесь!",
+            fetchError: "Не удалось получить {filename}",
+            uploadError: "Не удалось загрузить {filename}"
         },
         fileDownloadButton: {
             name: "FileDownloadButton",

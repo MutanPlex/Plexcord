@@ -110,7 +110,7 @@ function VoiceSetting() {
     const { voice } = settings.use(["voice"]);
 
     if (!voices.length)
-        return <Paragraph>No voices found.</Paragraph>;
+        return <Paragraph>{t(plugin.vcNarrator.modal.noVoice)}</Paragraph>;
 
     // espeak on Linux has a ridiculous amount of voices (26k for me).
     // If there are more than 20 voices, we split it up into two pickers, one for language, then one with only the voices for that language.
@@ -122,7 +122,7 @@ function VoiceSetting() {
 export function VoiceSettingSection() {
     return (
         <section>
-            <Heading>Voice</Heading>
+            <Heading>{t(plugin.vcNarrator.modal.voiceTitle)}</Heading>
             <VoiceSetting />
         </section>
     );

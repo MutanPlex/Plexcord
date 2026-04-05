@@ -4399,7 +4399,13 @@ const translations: MatchStructure<typeof enTranslations> = {
         },
         favouriteAnything: {
             name: "FavouriteAnything",
-            description: "任意の画像をお気に入りに追加"
+            description: "任意の画像をお気に入りに追加",
+            noFiles: "検索に一致するファイルがありません。",
+            searchPlaceholder: "ファイルを検索",
+            media: "メディア",
+            demoText: "星をクリックしてファイルをお気に入りに追加します。\nお気に入りのファイルがここに表示されます！",
+            fetchError: "{filename}を取得できませんでした",
+            uploadError: "{filename}をアップロードできませんでした"
         },
         fileDownloadButton: {
             name: "FileDownloadButton",

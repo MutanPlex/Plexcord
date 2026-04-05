@@ -410,7 +410,6 @@ const expressionPickerPatch: NavContextMenuPatchCallback = (children, props: { t
 export default definePlugin({
     name: "ExpressionCloner",
     description: () => t(plugin.expressionCloner.description),
-    tags: ["StickerCloner", "EmoteCloner", "EmojiCloner"],
     authors: [Devs.Ven, Devs.Nuckyz],
 
     contextMenus: {
