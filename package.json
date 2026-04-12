@@ -121,7 +121,7 @@
             "@eslint/plugin-kit@<0.3.4": ">=0.3.4",
             "@isaacs/brace-expansion": ">=6.0.0",
             "minimatch": ">=10.2.3",
-            "basic-ftp": ">=5.1.1",
+            "basic-ftp": ">=5.2.2",
             "flatted": ">=3.4.0",
             "picomatch@>=4.0.0<4.0.4": ">=4.0.4",
             "picomatch@<2.3.2": ">=2.3.2",

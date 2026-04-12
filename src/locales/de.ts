@@ -9891,6 +9891,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disableH264Codec: {
                     label: "H264 Codec deaktivieren",
                     description: "Verhindert, dass Discord H264 für das Streaming nutzt."
+                },
+                disableVP8Codec: {
+                    label: "VP8 Codec deaktivieren",
+                    description: "Verhindert, dass Discord VP8 für das Streaming nutzt."
+                },
+                disableVP9Codec: {
+                    label: "VP9 Codec deaktivieren",
+                    description: "Verhindert, dass Discord VP9 für das Streaming nutzt."
                 }
             }
         },

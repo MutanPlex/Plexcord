@@ -9891,6 +9891,14 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disableH264Codec: {
                     label: "停用 H264 編解碼器",
                     description: "防止 Discord 考慮使用 H264 進行串流傳輸。"
+                },
+                disableVP8Codec: {
+                    label: "停用 VP8 編解碼器",
+                    description: "防止 Discord 考慮使用 VP8 進行串流傳輸。"
+                },
+                disableVP9Codec: {
+                    label: "停用 VP9 編解碼器",
+                    description: "防止 Discord 考慮使用 VP9 進行串流傳輸。"
                 }
             }
         },

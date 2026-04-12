@@ -9889,6 +9889,14 @@ const translations = {
                 disableH264Codec: {
                     label: "Disable H264 Codec",
                     description: "Make Discord not consider using H264 for streaming."
+                },
+                disableVP8Codec: {
+                    label: "Disable VP8 Codec",
+                    description: "Make Discord not consider using VP8 for streaming."
+                },
+                disableVP9Codec: {
+                    label: "Disable VP9 Codec",
+                    description: "Make Discord not consider using VP9 for streaming."
                 }
             }
         },
