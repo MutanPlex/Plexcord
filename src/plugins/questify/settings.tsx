@@ -688,6 +688,7 @@ function DisableQuestsSetting(): JSX.Element {
         disableFriendsListActiveNowPromotion,
         disableMembersListActivelyPlayingIcon,
         makeMobileQuestsDesktopCompatible,
+        completeVideoQuestsQuicker,
         completeVideoQuestsInBackground,
         completeGameQuestsInBackground,
         completeAchievementQuestsInBackground,
@@ -704,6 +705,7 @@ function DisableQuestsSetting(): JSX.Element {
         "disableFriendsListActiveNowPromotion",
         "disableMembersListActivelyPlayingIcon",
         "makeMobileQuestsDesktopCompatible",
+        "completeVideoQuestsQuicker",
         "completeVideoQuestsInBackground",
         "completeGameQuestsInBackground",
         "completeAchievementQuestsInBackground",
@@ -724,6 +726,7 @@ function DisableQuestsSetting(): JSX.Element {
         { label: t(plugin.questify.settings.disableOptions.gameQuests), value: "game-quests-background", selected: completeGameQuestsInBackground, type: "modification" },
         { label: t(plugin.questify.settings.disableOptions.videoQuests), value: "video-quests-background", selected: completeVideoQuestsInBackground, type: "modification" },
         { label: t(plugin.questify.settings.disableOptions.achievementQuests), value: "achievement-quests-background", selected: completeAchievementQuestsInBackground, type: "modification" },
+        { label: "Complete Watch Video Quests Quicker", value: "video-quests-quicker", selected: completeVideoQuestsQuicker, type: "modification" },
         { label: t(plugin.questify.settings.disableOptions.mobileDesktop), value: "mobile-desktop-compatible", selected: makeMobileQuestsDesktopCompatible, type: "modification" },
         { label: t(plugin.questify.settings.disableOptions.notifyOnComplete), value: "notify-on-complete", selected: notifyOnQuestComplete, type: "modification" },
     ];
@@ -755,6 +758,7 @@ function DisableQuestsSetting(): JSX.Element {
         settings.store.disableFriendsListActiveNowPromotion = enabled.includes("friends-list");
         settings.store.disableMembersListActivelyPlayingIcon = enabled.includes("members-list");
         settings.store.completeGameQuestsInBackground = enabled.includes("game-quests-background");
+        settings.store.completeVideoQuestsQuicker = enabled.includes("video-quests-quicker");
         settings.store.completeVideoQuestsInBackground = enabled.includes("video-quests-background");
         settings.store.completeAchievementQuestsInBackground = enabled.includes("achievement-quests-background");
         settings.store.makeMobileQuestsDesktopCompatible = enabled.includes("mobile-desktop-compatible");
@@ -828,6 +832,10 @@ function DisableQuestsSetting(): JSX.Element {
                         {t(plugin.questify.settings.questFeatures.manualStartWarning, {
                             stopAuto: <span className={q("inline-code-block")}>{t(plugin.questify.settings.questFeatures.stopAuto)}</span>
                         })}
+                        <br /><br />
+                        The <span className={q("inline-code-block")}>Complete Video Quests Quicker</span> option
+                        uses Discord's progress leeway and elapsed enrollment time for Video Quests. When disabled, Video
+                        Quests wait for the full duration at 1x speed, which may appear less suspicious to their systems.
                         <br /><br />
                         {t(plugin.questify.settings.questFeatures.tosWarning)}
                     </Paragraph>
@@ -1711,6 +1719,15 @@ export const settings = definePluginSettings({
         description: () => t(plugin.questify.option.makeMobileQuestsDesktopCompatible.description),
         default: true,
         hidden: true
+    },
+    completeVideoQuestsQuicker: {
+        type: OptionType.BOOLEAN,
+        description: "Use Discord's progress leeway and elapsed enrollment time for Video Quest auto-completion.",
+        default: false,
+        hidden: true,
+        onChange: () => {
+            rerenderQuests();
+        }
     },
     completeVideoQuestsInBackground: {
         type: OptionType.BOOLEAN,

@@ -25,7 +25,6 @@ import { ChannelStore, moment, UserStore } from "@webpack/common";
 
 import { DEFAULT_IMAGE_CACHE_DIR } from "./constants";
 import { DISCORD_EPOCH } from "./index";
-import { memoize } from "./memoize";
 
 const MessageClass: any = findLazy(m => m?.prototype?.isEdited);
 const AuthorClass = findLazy(m => m?.prototype?.getAvatarURL);
@@ -94,7 +93,7 @@ export const mapTimestamp = (m: any) => {
     return m;
 };
 
-export const messageJsonToMessageClass = memoize((log: { message: LoggedMessageJSON; }) => {
+export const messageJsonToMessageClass = (log: { message: LoggedMessageJSON; }) => {
     // console.time("message populate");
     if (!log?.message) return null;
 
@@ -124,7 +123,7 @@ export const messageJsonToMessageClass = memoize((log: { message: LoggedMessageJ
 
     // console.timeEnd("message populate");
     return message;
-});
+};
 
 export function parseJSON(json?: string | null) {
     try {

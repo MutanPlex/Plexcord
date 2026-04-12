@@ -32,3 +32,15 @@ export function RenameButton({ session, state }: { session: SessionInfo["session
         </Button>
     );
 }
+
+export function NewButton() {
+    return (
+        <Button
+            variant="dangerPrimary"
+            size="min"
+            className="pc-betterSessions-new-btn"
+        >
+            {t(plugin.betterSessions.new)}
+        </Button>
+    );
+}

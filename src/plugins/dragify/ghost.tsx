@@ -8,7 +8,6 @@
 import ErrorBoundary from "@components/ErrorBoundary";
 import { classNameFactory } from "@utils/css";
 import { classes } from "@utils/misc";
-import { findComponentByCodeLazy } from "@webpack";
 import { createRoot, React, useEffect, useState, useStateFromStores, VoiceStateStore } from "@webpack/common";
 
 export type GhostState = {
@@ -24,15 +23,6 @@ export type GhostState = {
     entityId?: string;
     exiting: boolean;
 };
-
-const ScreenArrowIcon = findComponentByCodeLazy("3V5Zm16") as React.ComponentType<{
-    className?: string;
-    width?: number;
-    height?: number;
-    size?: number;
-    color?: string;
-    colorClass?: string;
-}>;
 
 const cl = classNameFactory("pc-dragify-");
 
@@ -185,12 +175,7 @@ const DragGhost = () => {
                                 : <VoiceStateIcon className={cl("voice-icon")} />)
                             : null}
                         {state.kind === "user" && inVoice && isStreaming
-                            ? <ScreenArrowIcon
-                                className={classes(cl("voice-icon"), cl("voice-icon-stream"))}
-                                size={14}
-                                width={14}
-                                height={14}
-                            />
+                            ? <StreamIcon className={classes(cl("voice-icon"), cl("voice-icon-stream"))} />
                             : null}
                     </div>
                     {state.subtitle && <div className={cl("subtitle")}>{state.subtitle}</div>}
@@ -200,6 +185,24 @@ const DragGhost = () => {
         </div>
     );
 };
+
+function StreamIcon({ className, size = 14 }: { className?: string; size?: number; }) {
+    return (
+        <svg
+            className={className}
+            xmlns="http://www.w3.org/2000/svg"
+            width={size}
+            height={size}
+            fill="none"
+            viewBox="0 0 24 24"
+        >
+            <path
+                fill="currentColor"
+                d="M4 5a3 3 0 0 0-3 3v7a3 3 0 0 0 3 3h4.59l-1.3 2.3a1 1 0 1 0 1.74.98L10.84 18h2.32l1.81 3.28a1 1 0 1 0 1.74-.98L15.41 18H20a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H4Zm0 2h16a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Zm6 2.57c0-.8.89-1.27 1.54-.82l3.22 2.23a1 1 0 0 1 0 1.64l-3.22 2.23A1 1 0 0 1 10 14.03V9.57Z"
+            />
+        </svg>
+    );
+}
 
 function VoiceStateIcon({ className, size = 14 }: { className?: string; size?: number; }) {
     return (
