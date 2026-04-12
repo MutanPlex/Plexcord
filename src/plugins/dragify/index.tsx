@@ -155,7 +155,7 @@ const settings = definePluginSettings({
 });
 
 export default definePlugin({
-    name: () => t(plugin.dragify.name),
+    name: "Dragify",
     description: () => t(plugin.dragify.description),
     authors: [PcDevs.justjxke],
     settings,
