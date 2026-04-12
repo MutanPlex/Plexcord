@@ -23,7 +23,7 @@ import { Settings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import ErrorBoundary from "@components/ErrorBoundary";
 import type { Channel, RoleOrUserPermission } from "@plexcord/discord-types";
-import { ChannelFlags, ChannelType, ForumLayout, PermissionOverwriteType, VideoQualityMode } from "@plexcord/discord-types/enums";
+import { ChannelFlags, ChannelType, ForumLayout, VideoQualityMode } from "@plexcord/discord-types/enums";
 import PermissionsViewerPlugin from "@plugins/permissionsViewer";
 import openRolesAndUsersPermissionsModal from "@plugins/permissionsViewer/components/RolesAndUsersPermissions";
 import { sortPermissionOverwrites } from "@plugins/permissionsViewer/utils";
@@ -112,7 +112,7 @@ function HiddenChannelLockScreen({ channel }: { channel: Channel; }) {
     useEffect(() => {
         const membersToFetch: Array<string> = [];
 
-        const guildOwnerId = GuildStore.getGuild(guild_id).ownerId;
+        const guildOwnerId = GuildStore.getGuild(guild_id)?.ownerId;
         if (!GuildMemberStore.getMember(guild_id, guildOwnerId)) membersToFetch.push(guildOwnerId);
 
         Object.values(permissionOverwrites).forEach(({ type, id: userId }) => {
@@ -131,7 +131,7 @@ function HiddenChannelLockScreen({ channel }: { channel: Channel; }) {
 
         if (Settings.plugins.PermissionsViewer.enabled) {
             setPermissions(sortPermissionOverwrites(Object.values(permissionOverwrites).map(overwrite => ({
-                type: overwrite.type as PermissionOverwriteType,
+                type: overwrite.type,
                 id: overwrite.id,
                 overwriteAllow: overwrite.allow,
                 overwriteDeny: overwrite.deny

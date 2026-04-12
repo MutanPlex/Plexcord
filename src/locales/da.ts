@@ -701,6 +701,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         downloadTheme: "Download",
         refresh: "Refresh",
         delete: "Delete",
+        activation: {
+            title: "Temaaktivering",
+            always: "Altid aktiv",
+            lightOnly: "Kun lyst tema",
+            darkOnly: "Kun mørkt tema"
+        },
+        actions: {
+            pin: "Fastgør",
+            unpin: "Frigør",
+            editSettings: "Rediger indstillinger"
+        },
         unknown: {
             title: "Unknown",
             author: "Unknown Author",
@@ -713,7 +724,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "Online Themes",
             description: "Load themes directly from URLs instead of local files. Online themes auto-update when the source changes, so you always have the latest version without manual downloads.",
             enable: "Enable Online Themes",
-            enableDescription: "Toggle online theme loading. When disabled, all online themes will be turned off and you won't be able to add new ones."
+            enableDescription: "Toggle online theme loading. When disabled, all online themes will be turned off and you won't be able to add new ones.",
+            placeholder: "https://eksempel.dk/tema.css"
         },
         quickActions: {
             title: "Quick Actions",

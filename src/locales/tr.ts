@@ -701,6 +701,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         downloadTheme: "İndir",
         refresh: "Yenile",
         delete: "Sil",
+        activation: {
+            title: "Tema etkinleştirme",
+            always: "Her zaman açık",
+            lightOnly: "Sadece açık tema",
+            darkOnly: "Sadece koyu tema"
+        },
+        actions: {
+            pin: "Sabitle",
+            unpin: "Sabitlemeyi kaldır",
+            editSettings: "Ayarları düzenle"
+        },
         unknown: {
             title: "Bilinmiyor",
             author: "Bilinmeyen Yazar",
@@ -713,7 +724,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "Çevrimiçi Temalar",
             description: "Temaları yerel dosyalar yerine doğrudan URL’lerden yükleyin. Çevrimiçi temalar, kaynak değiştiğinde otomatik olarak güncellenir; böylece manuel indirme yapmadan her zaman en güncel sürümü kullanırsınız.",
             enable: "Çevrimiçi Temaları Etkinleştir",
-            enableDescription: "Çevrimiçi tema yüklemeyi aç/kapat. Devre dışı bırakıldığında tüm çevrimiçi temalar kapatılır ve yeni çevrimiçi tema ekleyemezsiniz."
+            enableDescription: "Çevrimiçi tema yüklemeyi aç/kapat. Devre dışı bırakıldığında tüm çevrimiçi temalar kapatılır ve yeni çevrimiçi tema ekleyemezsiniz.",
+            placeholder: "https://ornek.com/tema.css"
         },
         quickActions: {
             title: "Hızlı İşlemler",

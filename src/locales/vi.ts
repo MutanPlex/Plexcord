@@ -701,6 +701,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         downloadTheme: "Tải xuống",
         refresh: "Làm cho khỏe lại",
         delete: "Xóa bỏ",
+        activation: {
+            title: "Kích hoạt chủ đề",
+            always: "Luôn bật",
+            lightOnly: "Chỉ giao diện sáng",
+            darkOnly: "Chỉ giao diện tối"
+        },
+        actions: {
+            pin: "Ghim",
+            unpin: "Bỏ ghim",
+            editSettings: "Chỉnh sửa cài đặt"
+        },
         unknown: {
             title: "Không xác định",
             author: "Tác giả không xác định",
@@ -713,7 +724,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "Chủ đề trực tuyến",
             description: "Tải chủ đề trực tiếp từ URL thay vì tệp cục bộ. Các chủ đề trực tuyến tự động cập nhật khi nguồn thay đổi, do đó bạn luôn có phiên bản mới nhất mà không cần tải xuống thủ công.",
             enable: "Kích hoạt chủ đề trực tuyến",
-            enableDescription: "Chuyển đổi tải chủ đề trực tuyến. Khi bị tắt, tất cả chủ đề trực tuyến sẽ bị tắt và bạn sẽ không thể thêm chủ đề mới."
+            enableDescription: "Chuyển đổi tải chủ đề trực tuyến. Khi bị tắt, tất cả chủ đề trực tuyến sẽ bị tắt và bạn sẽ không thể thêm chủ đề mới.",
+            placeholder: "https://vidu.vn/theme.css"
         },
         quickActions: {
             title: "Thao tác nhanh",

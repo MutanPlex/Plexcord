@@ -166,7 +166,7 @@ export const enum MessageType {
      * Rendered Content: "{author} just boosted the server{content ? " {content} times"}! {guild} has achieved Level 2! "
      * Deletable: true
      *
-     *  @remarks Discord API calls this GUILD_BOOST_TIER_2
+     * @remarks Discord API calls this GUILD_BOOST_TIER_2
      */
     PREMIUM_GUILD_SUBSCRIPTION_TIER_2 = 10,
     /**
@@ -369,12 +369,12 @@ export const enum MessageType {
      */
     GUILD_APPLICATION_PREMIUM_SUBSCRIPTION = 32,
     /**
-    * A message sent when an integration is added to a private channel
-    *
-    * Value: 33
-    * Name: PRIVATE_CHANNEL_INTEGRATION_ADDED
-    * Deletable: true
-    */
+     * A message sent when an integration is added to a private channel
+     *
+     * Value: 33
+     * Name: PRIVATE_CHANNEL_INTEGRATION_ADDED
+     * Deletable: true
+     */
     PRIVATE_CHANNEL_INTEGRATION_ADDED = 33,
     /**
      * A message sent when an integration is removed from a private channel

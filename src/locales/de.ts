@@ -701,6 +701,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         downloadTheme: "Herunterladen",
         refresh: "Aktualisieren",
         delete: "Löschen",
+        activation: {
+            title: "Themenaktivierung",
+            always: "Immer aktiv",
+            lightOnly: "Nur helles Design",
+            darkOnly: "Nur dunkles Design"
+        },
+        actions: {
+            pin: "Anheften",
+            unpin: "Lösen",
+            editSettings: "Einstellungen bearbeiten"
+        },
         unknown: {
             title: "Unbekannt",
             author: "Unbekannter Autor",
@@ -713,7 +724,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "Online-Themes",
             description: "Lade Themes direkt von URLs statt aus lokalen Dateien. Online-Themes aktualisieren sich automatisch, wenn sich die Quelle ändert, sodass du immer die neueste Version hast.",
             enable: "Online-Themes aktivieren",
-            enableDescription: "Schalte das Laden von Online-Themes um. Wenn deaktiviert, werden alle Online-Themes abgeschaltet und du kannst keine neuen hinzufügen."
+            enableDescription: "Schalte das Laden von Online-Themes um. Wenn deaktiviert, werden alle Online-Themes abgeschaltet und du kannst keine neuen hinzufügen.",
+            placeholder: "https://beispiel.de/thema.css"
         },
         quickActions: {
             title: "Schnellaktionen",

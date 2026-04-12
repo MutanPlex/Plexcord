@@ -701,6 +701,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         downloadTheme: "Downloaden",
         refresh: "Vernieuwen",
         delete: "Verwijderen",
+        activation: {
+            title: "Thema-activatie",
+            always: "Altijd aan",
+            lightOnly: "Alleen licht thema",
+            darkOnly: "Alleen donker thema"
+        },
+        actions: {
+            pin: "Vastzetten",
+            unpin: "Losmaken",
+            editSettings: "Instellingen bewerken"
+        },
         unknown: {
             title: "Onbekend",
             author: "Onbekende auteur",
@@ -713,7 +724,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "Online-thema's",
             description: "Laad thema's rechtstreeks vanuit URL's in plaats van lokale bestanden. Online thema's worden automatisch bijgewerkt wanneer de bron verandert, zodat u altijd over de nieuwste versie beschikt zonder handmatige downloads.",
             enable: "Online thema's inschakelen",
-            enableDescription: "Schakel het online laden van thema's in of uit. Indien uitgeschakeld, worden alle online thema's uitgeschakeld en kunt u geen nieuwe thema's toevoegen."
+            enableDescription: "Schakel het online laden van thema's in of uit. Indien uitgeschakeld, worden alle online thema's uitgeschakeld en kunt u geen nieuwe thema's toevoegen.",
+            placeholder: "https://voorbeeld.nl/thema.css"
         },
         quickActions: {
             title: "Snelle acties",

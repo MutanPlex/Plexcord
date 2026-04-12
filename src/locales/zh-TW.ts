@@ -701,6 +701,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         downloadTheme: "下載",
         refresh: "重新整理",
         delete: "刪除",
+        activation: {
+            title: "主題啟用",
+            always: "始終啟用",
+            lightOnly: "僅淺色主題",
+            darkOnly: "僅深色主題"
+        },
+        actions: {
+            pin: "釘選",
+            unpin: "取消釘選",
+            editSettings: "編輯設定"
+        },
         unknown: {
             title: "未知",
             author: "作者未知",
@@ -713,7 +724,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "線上主題",
             description: "直接從 URL 而不是本機文件載入主題。當來源變更時，線上主題會自動更新，因此您始終擁有最新版本，無需手動下載。",
             enable: "啟用線上主題",
-            enableDescription: "切換線上主題載入。停用後，所有線上主題將關閉，並且您將無法新增主題。"
+            enableDescription: "切換線上主題載入。停用後，所有線上主題將關閉，並且您將無法新增主題。",
+            placeholder: "https://範例.tw/theme.css"
         },
         quickActions: {
             title: "快速行動",

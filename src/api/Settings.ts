@@ -29,6 +29,8 @@ import i18n from "./i18n";
 
 const logger = new Logger("Settings");
 
+export type ThemeActivationMode = "always" | "light" | "dark";
+
 export interface SettingsPluginUiElement {
     enabled: boolean;
     // TODO
@@ -50,6 +52,7 @@ export interface Settings {
     enableOnlineThemes: boolean;
     pinnedThemes: string[];
     themeNames: Record<string, string>;
+    themeActivationModes: Partial<Record<string, ThemeActivationMode>>;
     enableReactDevtools: boolean;
     themeLinks: string[];
     mainWindowFrameless: boolean;
@@ -131,6 +134,7 @@ const DefaultSettings: Settings = {
     enableOnlineThemes: true,
     pinnedThemes: [],
     themeNames: {},
+    themeActivationModes: {},
     enableReactDevtools: false,
     mainWindowFrameless: false,
     frameless: false,

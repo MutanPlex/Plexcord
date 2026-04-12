@@ -701,6 +701,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         downloadTheme: "Descarcă",
         refresh: "Reîmprospătează",
         delete: "Șterge",
+        activation: {
+            title: "Activare temă",
+            always: "Mereu activ",
+            lightOnly: "Doar temă deschisă",
+            darkOnly: "Doar temă închisă"
+        },
+        actions: {
+            pin: "Fixează",
+            unpin: "Anulează fixarea",
+            editSettings: "Editează setările"
+        },
         unknown: {
             title: "Necunoscut",
             author: "Autor Necunoscut",
@@ -713,7 +724,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "Teme Online",
             description: "Încarcă teme direct din URL-uri în loc de fișiere locale. Temele online se actualizează automat când sursa se modifică.",
             enable: "Activează Temele Online",
-            enableDescription: "Comută încărcarea temelor online. Când este dezactivat, toate temele online vor fi oprite."
+            enableDescription: "Comută încărcarea temelor online. Când este dezactivat, toate temele online vor fi oprite.",
+            placeholder: "https://exemplu.ro/tema.css"
         },
         quickActions: {
             title: "Acțiuni Rapide",

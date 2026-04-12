@@ -1,5 +1,4 @@
 import { ActivityLabelType, ApplicationFlags, ApplicationType, CarouselItemType, LinkedGameType, OrientationLockState } from "../../enums";
-
 import { Guild } from "./Guild";
 import { User } from "./User";
 
@@ -31,6 +30,7 @@ export interface EmbeddedActivityConfig {
     blocked_locales: string[];
     supported_locales: string[];
 }
+
 export interface ApplicationExecutable {
     os: "win32" | "darwin" | "linux";
     name: string;

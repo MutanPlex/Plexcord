@@ -701,6 +701,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         downloadTheme: "다운로드",
         refresh: "새로 고치다",
         delete: "삭제",
+        activation: {
+            title: "테마 활성화",
+            always: "항상 활성화",
+            lightOnly: "라이트 테마만",
+            darkOnly: "다크 테마만"
+        },
+        actions: {
+            pin: "고정",
+            unpin: "고정 해제",
+            editSettings: "설정 수정"
+        },
         unknown: {
             title: "알려지지 않은",
             author: "알 수 없는 작성자",
@@ -713,7 +724,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "온라인 테마",
             description: "로컬 파일 대신 URL에서 직접 테마를 로드하세요. 소스가 변경되면 온라인 테마가 자동으로 업데이트되므로 수동으로 다운로드할 필요 없이 항상 최신 버전을 사용할 수 있습니다.",
             enable: "온라인 테마 활성화",
-            enableDescription: "온라인 테마 로딩을 전환합니다. 비활성화하면 모든 온라인 테마가 꺼지고 새 테마를 추가할 수 없습니다."
+            enableDescription: "온라인 테마 로딩을 전환합니다. 비활성화하면 모든 온라인 테마가 꺼지고 새 테마를 추가할 수 없습니다.",
+            placeholder: "https://예시.kr/theme.css"
         },
         quickActions: {
             title: "빠른 작업",

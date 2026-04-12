@@ -701,6 +701,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         downloadTheme: "Télécharger",
         refresh: "Actualiser",
         delete: "Supprimer",
+        activation: {
+            title: "Activation du thème",
+            always: "Toujours actif",
+            lightOnly: "Thème clair uniquement",
+            darkOnly: "Thème sombre uniquement"
+        },
+        actions: {
+            pin: "Épingler",
+            unpin: "Désépingler",
+            editSettings: "Modifier les paramètres"
+        },
         unknown: {
             title: "Inconnu",
             author: "Auteur inconnu",
@@ -713,7 +724,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "Thèmes en ligne",
             description: "Chargez des thèmes directement depuis des URLs. Ils se mettent à jour automatiquement.",
             enable: "Activer les thèmes en ligne",
-            enableDescription: "Activer/Désactiver le chargement des thèmes en ligne."
+            enableDescription: "Activer/Désactiver le chargement des thèmes en ligne.",
+            placeholder: "https://exemple.com/theme.css"
         },
         quickActions: {
             title: "Actions rapides",

@@ -701,6 +701,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         downloadTheme: "Ladda ner",
         refresh: "Uppdatera",
         delete: "Radera",
+        activation: {
+            title: "Temaaktivering",
+            always: "Alltid på",
+            lightOnly: "Endast ljust tema",
+            darkOnly: "Endast mörkt tema"
+        },
+        actions: {
+            pin: "Fäst",
+            unpin: "Lossa",
+            editSettings: "Redigera inställningar"
+        },
         unknown: {
             title: "Okänd",
             author: "Okänd författare",
@@ -713,7 +724,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "Onlineteman",
             description: "Ladda teman direkt från webbadresser istället för lokala filer. Onlineteman uppdateras automatiskt när källan ändras, så att du alltid har den senaste versionen utan manuella nedladdningar.",
             enable: "Aktivera onlineteman",
-            enableDescription: "Växla inläsning av onlinetema. När det är inaktiverat kommer alla onlineteman att stängas av och du kommer inte att kunna lägga till nya."
+            enableDescription: "Växla inläsning av onlinetema. När det är inaktiverat kommer alla onlineteman att stängas av och du kommer inte att kunna lägga till nya.",
+            placeholder: "https://exempel.se/tema.css"
         },
         quickActions: {
             title: "Snabba åtgärder",

@@ -701,6 +701,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         downloadTheme: "Завантажити",
         refresh: "Оновити",
         delete: "Видалити",
+        activation: {
+            title: "Активація теми",
+            always: "Завжди увімкнено",
+            lightOnly: "Лише світла тема",
+            darkOnly: "Лише темна тема"
+        },
+        actions: {
+            pin: "Закріпити",
+            unpin: "Відкріпити",
+            editSettings: "Редагувати налаштування"
+        },
         unknown: {
             title: "Невідомо",
             author: "Невідомий автор",
@@ -713,7 +724,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "Онлайн-теми",
             description: "Завантажуйте теми безпосередньо за URL-адресами замість локальних файлів. Онлайн-теми оновлюються автоматично при зміні джерела.",
             enable: "Увімкнути онлайн-теми",
-            enableDescription: "Перемкнути завантаження онлайн-тем. Якщо вимкнено, всі онлайн-теми будуть вимкнені, і ви не зможете додавати нові."
+            enableDescription: "Перемкнути завантаження онлайн-тем. Якщо вимкнено, всі онлайн-теми будуть вимкнені, і ви не зможете додавати нові.",
+            placeholder: "https://приклад.ua/tema.css"
         },
         quickActions: {
             title: "Швидкі дії",

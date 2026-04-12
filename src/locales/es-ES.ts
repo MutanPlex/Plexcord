@@ -701,6 +701,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         downloadTheme: "Descargar",
         refresh: "Actualizar",
         delete: "Eliminar",
+        activation: {
+            title: "Activación del tema",
+            always: "Siempre activo",
+            lightOnly: "Solo tema claro",
+            darkOnly: "Solo tema oscuro"
+        },
+        actions: {
+            pin: "Fijar",
+            unpin: "Desfijar",
+            editSettings: "Editar ajustes"
+        },
         unknown: {
             title: "Desconocido",
             author: "Autor desconocido",
@@ -713,7 +724,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "Temas en línea",
             description: "Carga temas directamente desde URLs en lugar de archivos locales. Los temas en línea se auto-actualizan cuando el origen cambia, así siempre tendrás la última versión sin descargas manuales.",
             enable: "Activar temas en línea",
-            enableDescription: "Activa o desactiva la carga de temas en línea. Cuando está desactivado, todos los temas en línea se apagarán y no podrás añadir nuevos."
+            enableDescription: "Activa o desactiva la carga de temas en línea. Cuando está desactivado, todos los temas en línea se apagarán y no podrás añadir nuevos.",
+            placeholder: "https://ejemplo.com/tema.css"
         },
         quickActions: {
             title: "Acciones rápidas",

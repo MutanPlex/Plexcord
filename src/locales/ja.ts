@@ -701,6 +701,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         downloadTheme: "ダウンロード",
         refresh: "リフレッシュ",
         delete: "消去",
+        activation: {
+            title: "テーマの有効化",
+            always: "常に有効",
+            lightOnly: "ライトテーマのみ",
+            darkOnly: "ダークテーマのみ"
+        },
+        actions: {
+            pin: "固定",
+            unpin: "固定解除",
+            editSettings: "設定を編集"
+        },
         unknown: {
             title: "未知",
             author: "作者不明",
@@ -713,7 +724,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "オンラインテーマ",
             description: "テーマをローカル ファイルではなく URL から直接読み込みます。オンライン テーマはソースが変更されると自動更新されるため、手動でダウンロードしなくても常に最新バージョンを入手できます。",
             enable: "オンラインテーマを有効にする",
-            enableDescription: "オンラインテーマの読み込みを切り替えます。無効にすると、すべてのオンライン テーマがオフになり、新しいテーマを追加できなくなります。"
+            enableDescription: "オンラインテーマの読み込みを切り替えます。無効にすると、すべてのオンライン テーマがオフになり、新しいテーマを追加できなくなります。",
+            placeholder: "https://例.jp/theme.css"
         },
         quickActions: {
             title: "クイックアクション",

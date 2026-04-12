@@ -701,6 +701,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         downloadTheme: "Scarica",
         refresh: "Aggiorna",
         delete: "Elimina",
+        activation: {
+            title: "Attivazione tema",
+            always: "Sempre attivo",
+            lightOnly: "Solo tema chiaro",
+            darkOnly: "Solo tema scuro"
+        },
+        actions: {
+            pin: "Fissa",
+            unpin: "Rimuovi fissaggio",
+            editSettings: "Modifica impostazioni"
+        },
         unknown: {
             title: "Sconosciuto",
             author: "Autore Sconosciuto",
@@ -713,7 +724,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "Temi Online",
             description: "Carica temi da URL. Si aggiornano automaticamente alla fonte.",
             enable: "Abilita Temi Online",
-            enableDescription: "Attiva il caricamento dei temi online."
+            enableDescription: "Attiva il caricamento dei temi online.",
+            placeholder: "https://esempio.com/tema.css"
         },
         quickActions: {
             title: "Azioni Rapide",

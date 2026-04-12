@@ -20,14 +20,11 @@
 import { NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
 import { ScreenshareIcon } from "@components/Icons";
-import { Channel, User } from "@plexcord/discord-types";
+import { ApplicationStream, Channel, Stream, User } from "@plexcord/discord-types";
 import { Devs } from "@utils/constants";
 import { openImageModal } from "@utils/discord";
 import definePlugin from "@utils/types";
-import { Menu } from "@webpack/common";
-
-import { ApplicationStreamingStore, ApplicationStreamPreviewStore } from "./webpack/stores";
-import { ApplicationStream, Stream } from "./webpack/types/stores";
+import { ApplicationStreamingStore, ApplicationStreamPreviewStore, Menu } from "@webpack/common";
 
 export interface UserContextProps {
     channel: Channel,

@@ -795,7 +795,7 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     },
     Synth: {
         name: "synthxcx",
-        id: 934393331562205195n
+        id: 1116836557396119613n
     },
     x3rt: {
         name: "x3rt",

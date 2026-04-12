@@ -701,6 +701,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         downloadTheme: "Скачать",
         refresh: "Обновить",
         delete: "Удалить",
+        activation: {
+            title: "Активация темы",
+            always: "Всегда включено",
+            lightOnly: "Только светлая тема",
+            darkOnly: "Только тёмная тема"
+        },
+        actions: {
+            pin: "Закрепить",
+            unpin: "Открепить",
+            editSettings: "Редактировать настройки"
+        },
         unknown: {
             title: "Неизвестно",
             author: "Неизвестный автор",
@@ -713,7 +724,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "Онлайн темы",
             description: "Загружайте темы напрямую по URL. Они обновляются автоматически при изменении источника.",
             enable: "Включить онлайн темы",
-            enableDescription: "Переключить загрузку онлайн тем. Если отключено, все онлайн темы будут выключены."
+            enableDescription: "Переключить загрузку онлайн тем. Если отключено, все онлайн темы будут выключены.",
+            placeholder: "https://пример.рф/тема.css"
         },
         quickActions: {
             title: "Быстрые действия",

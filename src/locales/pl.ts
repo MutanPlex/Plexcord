@@ -701,6 +701,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         downloadTheme: "Pobierz",
         refresh: "Odśwież",
         delete: "Usuń",
+        activation: {
+            title: "Aktywacja motywu",
+            always: "Zawsze włączone",
+            lightOnly: "Tylko jasny motyw",
+            darkOnly: "Tylko ciemny motyw"
+        },
+        actions: {
+            pin: "Przypnij",
+            unpin: "Odepnij",
+            editSettings: "Edytuj ustawienia"
+        },
         unknown: {
             title: "Nieznany",
             author: "Nieznany autor",
@@ -713,7 +724,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "Motywy online",
             description: "Ładuj motywy bezpośrednio z adresów URL zamiast plików lokalnych. Motywy online aktualizują się automatycznie, gdy źródło ulegnie zmianie, dzięki czemu zawsze masz najnowszą wersję bez ręcznego pobierania.",
             enable: "Włącz motywy online",
-            enableDescription: "Przełącz ładowanie motywów online. Gdy ta opcja jest wyłączona, wszystkie motywy online zostaną wyłączone i nie będzie można dodać nowych."
+            enableDescription: "Przełącz ładowanie motywów online. Gdy ta opcja jest wyłączona, wszystkie motywy online zostaną wyłączone i nie będzie można dodać nowych.",
+            placeholder: "https://przyklad.pl/motyw.css"
         },
         quickActions: {
             title: "Szybkie akcje",

@@ -698,7 +698,17 @@ const translations = {
         downloadTheme: "Download",
         refresh: "Refresh",
         delete: "Delete",
-        unknown: {
+        activation: {
+            title: "Theme activation",
+            always: "Always on",
+            lightOnly: "Light only",
+            darkOnly: "Dark only"
+        },
+        actions: {
+            pin: "Pin",
+            unpin: "Unpin",
+            editSettings: "Edit Settings"
+        }, unknown: {
             title: "Unknown",
             author: "Unknown Author",
             theme: "A Discord Theme"
@@ -710,7 +720,8 @@ const translations = {
             title: "Online Themes",
             description: "Load themes directly from URLs instead of local files. Online themes auto-update when the source changes, so you always have the latest version without manual downloads.",
             enable: "Enable Online Themes",
-            enableDescription: "Toggle online theme loading. When disabled, all online themes will be turned off and you won't be able to add new ones."
+            enableDescription: "Toggle online theme loading. When disabled, all online themes will be turned off and you won't be able to add new ones.",
+            placeholder: "https://example.com/theme.css"
         },
         quickActions: {
             title: "Quick Actions",

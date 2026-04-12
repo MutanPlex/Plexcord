@@ -701,6 +701,17 @@ const translations: MatchStructure<typeof enTranslations> = {
         downloadTheme: "下载",
         refresh: "刷新",
         delete: "删除",
+        activation: {
+            title: "主题激活",
+            always: "始终开启",
+            lightOnly: "仅浅色主题",
+            darkOnly: "仅深色主题"
+        },
+        actions: {
+            pin: "固定",
+            unpin: "取消固定",
+            editSettings: "编辑设置"
+        },
         unknown: {
             title: "未知",
             author: "作者未知",
@@ -713,7 +724,8 @@ const translations: MatchStructure<typeof enTranslations> = {
             title: "在线主题",
             description: "直接从 URL 而不是本地文件加载主题。当来源更改时，在线主题会自动更新，因此您始终拥有最新版本，无需手动下载。",
             enable: "启用在线主题",
-            enableDescription: "切换在线主题加载。禁用后，所有在线主题将被关闭，并且您将无法添加新主题。"
+            enableDescription: "切换在线主题加载。禁用后，所有在线主题将被关闭，并且您将无法添加新主题。",
+            placeholder: "https://示例.cn/theme.css"
         },
         quickActions: {
             title: "快速行动",
