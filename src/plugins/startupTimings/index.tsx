@@ -39,8 +39,6 @@ export default definePlugin({
             Component: StartupTimingPage,
             Icon: ClockIcon
         });
-
-        SettingsPlugin.settingsSectionMap.push(["PlexcordStartupTimings", "plexcord_startup_timings"]);
     },
     stop() {
         removeFromArray(SettingsPlugin.customEntries, e => e.key === "plexcord_startup_timings");

@@ -12,7 +12,8 @@ import { findByCodeLazy } from "@webpack";
 import { ColorPicker, useMemo } from "@webpack/common";
 
 // TinyColor is completely unmangled and it's duplicated in two modules! Fun!
-const TinyColor: tinycolor.Constructor = findByCodeLazy("this._gradientType=");
+type TinyColorConstructor = (color: string) => { toHex(): string; };
+const TinyColor = findByCodeLazy("this._gradientType=") as unknown as TinyColorConstructor;
 
 const cl = classNameFactory("pc-usercss-settings-color-");
 

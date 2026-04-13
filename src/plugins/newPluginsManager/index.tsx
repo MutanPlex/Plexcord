@@ -6,8 +6,8 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { KNOWN_PLUGINS_LEGACY_DATA_KEY, KNOWN_SETTINGS_DATA_KEY } from "@plugins/newPluginsManager/knownSettings";
 import * as KnownSettings from "@plugins/newPluginsManager/knownSettings";
+import { KNOWN_PLUGINS_LEGACY_DATA_KEY, KNOWN_SETTINGS_DATA_KEY } from "@plugins/newPluginsManager/knownSettings";
 import { openNewPluginsModal } from "@plugins/newPluginsManager/NewPluginsModal";
 import { Devs, PcDevs } from "@utils/constants";
 import definePlugin from "@utils/types";

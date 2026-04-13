@@ -5,8 +5,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { createStore } from "@api/DataStore";
 import * as DataStore from "@api/DataStore";
+import { createStore } from "@api/DataStore";
 import { plugin, t } from "@api/i18n";
 import { Toasts } from "@webpack/common";
 
