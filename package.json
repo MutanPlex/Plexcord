@@ -59,13 +59,13 @@
         "zip-local": "^0.3.5"
     },
     "devDependencies": {
-        "@electron/asar": "^4.0.1",
+        "@electron/asar": "^4.2.0",
         "@plexcord/discord-types": "link:packages\\discord-types",
         "@stylistic/eslint-plugin": "^5.10.0",
         "@types/chrome": "^0.1.40",
         "@types/lodash": "^4.17.24",
-        "@types/node": "^24.10.1",
-        "@types/react": "19.2.6",
+        "@types/node": "^25.6.0",
+        "@types/react": "19.2.14",
         "@types/react-dom": "19.2.3",
         "@types/yazl": "^3.3.1",
         "diff": "^8.0.4",
@@ -95,7 +95,8 @@
     "packageManager": "pnpm@10.32.1",
     "pnpm": {
         "patchedDependencies": {
-            "@types/less@3.0.8": "patches/@types__less@3.0.8.patch"
+            "@types/less@3.0.8": "patches/@types__less@3.0.8.patch",
+            "standalone-electron-types@34.2.0": "patches/standalone-electron-types@34.2.0.patch"
         },
         "peerDependencyRules": {
             "ignoreMissing": [
@@ -114,7 +115,7 @@
             "esbuild"
         ],
         "overrides": {
-            "@types/react": "19.2.7",
+            "@types/react": "19.2.14",
             "@types/react-dom": "19.2.3",
             "jszip": "^3.10.1",
             "dompurify": "^3.3.2",

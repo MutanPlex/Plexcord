@@ -1,0 +1,15 @@
+diff --git a/electron.d.ts b/electron.d.ts
+--- a/electron.d.ts
++++ b/electron.d.ts
+@@ -24330,10 +24330,10 @@
+     /**
+      * A `boolean` that controls whether or not deprecation warnings are printed to
+      * `stderr`. Setting this to `true` will silence deprecation warnings. This
+      * property is used instead of the `--no-deprecation` command line flag.
+      */
+-    noDeprecation: boolean;
++    noDeprecation?: boolean;
+     /**
+      * A `Electron.ParentPort` property if this is a `UtilityProcess` (or `null`
+      * otherwise) allowing communication with the parent process.
+      */

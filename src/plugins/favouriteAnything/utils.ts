@@ -98,7 +98,7 @@ export const defs = defineItems({
 });
 
 // TODO: make thumbnails prettier
-const fallbackThumbnail = new URL("https://images-ext-1.discordapp.net/external/pGTJg3YdSHpyGTltH4vZUKEyQoNzf5mtqbSJs7I4ebc/https/equicord.org/assets/plugins/favoriteAnything/invalid.png");
+const fallbackThumbnail = new URL("https://raw.githubusercontent.com/MutanPlex/random-files/refs/heads/main/invalid.jpg");
 
 export async function getThumbnailUrl(data: string, width: number, height: number): Promise<URL | null> {
     try {
