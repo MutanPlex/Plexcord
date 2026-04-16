@@ -305,7 +305,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabled: "Hiển thị bị vô hiệu hóa",
                 new: "Hiển thị mới",
                 userplugins: "Hiển thị plugin của người dùng",
-                api: "Hiển thị plugin API"
+                api: "Hiển thị plugin API",
+                type: "Lọc theo loại",
+                tags: "Lọc theo thẻ"
             }
         },
         pluginModal: {
@@ -6474,6 +6476,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportLogs: {
                     label: "Xuất nhật ký",
                     description: "Xuất nhật ký từ IndexedDB"
+                },
+                clearLogsOnRestart: {
+                    label: "Xóa nhật ký khi khởi động lại",
+                    description: "Xóa nhật ký khi Discord khởi động lại."
                 },
                 openLogs: {
                     label: "Nhật ký mở",

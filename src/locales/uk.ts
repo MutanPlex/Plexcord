@@ -305,7 +305,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabled: "Показати вимкнені",
                 new: "Показати нові",
                 userplugins: "Показати плагіни користувача",
-                api: "Показати API плагіни"
+                api: "Показати API плагіни",
+                type: "Фільтр за типом",
+                tags: "Фільтр за тегами"
             }
         },
         pluginModal: {
@@ -6474,6 +6476,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportLogs: {
                     label: "Експортувати логи",
                     description: "Експорт логів з IndexedDB."
+                },
+                clearLogsOnRestart: {
+                    label: "Очищення логів при перезапуску",
+                    description: "Очищає логи під час перезапуску Discord."
                 },
                 openLogs: {
                     label: "Відкрити логи",

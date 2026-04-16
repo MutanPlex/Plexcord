@@ -302,7 +302,9 @@ const translations = {
                 disabled: "Show Disabled",
                 new: "Show New",
                 userplugins: "Show User Plugins",
-                api: "Show API Plugins"
+                api: "Show API Plugins",
+                type: "Filter by Type",
+                tags: "Filter by Tags"
             }
         },
         pluginModal: {
@@ -6471,6 +6473,10 @@ const translations = {
                 exportLogs: {
                     label: "Export Logs",
                     description: "Export Logs From IndexedDB"
+                },
+                clearLogsOnRestart: {
+                    label: "Clear Logs on Restart",
+                    description: "Clear logs when Discord restarts."
                 },
                 openLogs: {
                     label: "Open Logs",

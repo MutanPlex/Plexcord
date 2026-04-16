@@ -96,13 +96,26 @@ export function promisifyRequest<T = undefined>(
 }
 
 export function createStore(dbName: string, storeName: string): UseStore {
-    const request = indexedDB.open(dbName);
+    const memoryStore = getMemoryStore(dbName, storeName);
+
+    if (typeof indexedDB === "undefined") {
+        handleFailure(new Error("indexedDB is not available"));
+        return async (_txMode, callback) => callback(memoryStore);
+    }
+
+    let request: IDBOpenDBRequest;
+    try {
+        request = indexedDB.open(dbName);
+    } catch (error) {
+        handleFailure(error);
+        return async (_txMode, callback) => callback(memoryStore);
+    }
+
     request.onupgradeneeded = () => request.result.createObjectStore(storeName);
     const dbp = promisifyRequest(request).catch(error => {
         handleFailure(error);
         return null;
     });
-    const memoryStore = getMemoryStore(dbName, storeName);
 
     return async (txMode, callback) => {
         const db = await dbp;

@@ -44,7 +44,7 @@ export interface MLIDB extends DBSchema {
 }
 
 const logger = new Logger("MessageLoggerEnhanced");
-let db: IDBPDatabase<MLIDB> | null = null;
+let database: IDBPDatabase<MLIDB> | null = null;
 let dbPromise: Promise<IDBPDatabase<MLIDB> | null> | null = null;
 let loggedFailure = false;
 export const cachedMessages = new Map<string, LoggedMessageJSON>();
@@ -56,27 +56,37 @@ function handleDbFailure(error: unknown) {
 }
 
 async function ensureDb() {
-    if (db) return db;
+    if (database) return database;
     if (!dbPromise) {
-        dbPromise = openDB<MLIDB>(DB_NAME, DB_VERSION, {
-            upgrade(database) {
-                const messageStore = database.createObjectStore("messages", { keyPath: "message_id" });
-                messageStore.createIndex("by_channel_id", "channel_id");
-                messageStore.createIndex("by_status", "status");
-                messageStore.createIndex("by_timestamp", "message.timestamp");
-                messageStore.createIndex("by_timestamp_and_message_id", ["channel_id", "message.timestamp"]);
+        if (typeof indexedDB === "undefined") {
+            handleDbFailure(new Error("indexedDB is not available"));
+            dbPromise = Promise.resolve(null);
+        } else {
+            try {
+                dbPromise = openDB<MLIDB>(DB_NAME, DB_VERSION, {
+                    upgrade(database) {
+                        const messageStore = database.createObjectStore("messages", { keyPath: "message_id" });
+                        messageStore.createIndex("by_channel_id", "channel_id");
+                        messageStore.createIndex("by_status", "status");
+                        messageStore.createIndex("by_timestamp", "message.timestamp");
+                        messageStore.createIndex("by_timestamp_and_message_id", ["channel_id", "message.timestamp"]);
+                    }
+                }).then(db => {
+                    database = db;
+                    return db;
+                }).catch(error => {
+                    handleDbFailure(error);
+                    return null;
+                });
+            } catch (error) {
+                handleDbFailure(error);
+                dbPromise = Promise.resolve(null);
             }
-        }).then(database => {
-            db = database;
-            return database;
-        }).catch(error => {
-            handleDbFailure(error);
-            return null;
-        });
+        }
     }
 
-    db = await dbPromise;
-    return db;
+    database = await dbPromise;
+    return database;
 }
 
 async function withDb<T>(fallback: T, callback: (database: IDBPDatabase<MLIDB>) => Promise<T>): Promise<T> {
@@ -90,6 +100,15 @@ async function withDb<T>(fallback: T, callback: (database: IDBPDatabase<MLIDB>) 
         return fallback;
     }
 }
+
+type DbCountArgs = Parameters<IDBPDatabase<MLIDB>["count"]>;
+
+export const db = {
+    count: (...args: DbCountArgs) => {
+        const fallback = args.length === 1 ? cachedMessages.size : 0;
+        return withDb(fallback, database => database.count(...args));
+    },
+};
 
 async function cacheRecords(records: DBMessageRecord[], cacheAttachmentBlobs = true) {
     for (const r of records) {
@@ -117,6 +136,7 @@ async function cacheRecord(record?: DBMessageRecord | null) {
 }
 
 export async function initIDB() {
+    if (db) return;
     await ensureDb();
 }
 void initIDB();
@@ -127,7 +147,6 @@ export async function hasMessageIDB(message_id: string) {
 }
 
 export async function countMessagesIDB() {
-    if (!db) return cachedMessages.size;
     return db.count("messages");
 }
 
@@ -160,13 +179,14 @@ export async function getOldestMessagesIDB(limit: number) {
 }
 
 export async function* iterateAllMessagesIDB(batchSize = 100) {
-    if (!db && !(await ensureDb())) return;
+    const database = await ensureDb();
+    if (!database) return;
 
     let lastId: string | undefined;
     while (true) {
         const batch: DBMessageRecord[] = [];
 
-        const tx = db!.transaction("messages");
+        const tx = database.transaction("messages");
         const range = lastId ? IDBKeyRange.lowerBound(lastId, true) : undefined;
         let cursor = await tx.store.openCursor(range);
 
@@ -254,6 +274,7 @@ export async function getMessagesByChannelAndAfterTimestampIDB(channel_id: strin
 
 export async function addMessageIDB(message: LoggedMessageJSON, status: DBMessageStatus) {
     stripTransientRenderState(message);
+    if (!db) await initIDB();
 
     cachedMessages.set(message.id, message);
 
@@ -304,13 +325,15 @@ export async function deleteMessagesBulkIDB(message_ids: string[]) {
     });
 }
 
-export async function clearMessagesIDB() {
+export async function clearMessagesIDB(showToast = true) {
     cachedMessages.clear();
-    return withDb(void 0, database => database.clear("messages")).then(() => {
-        Toasts.show({
-            type: Toasts.Type.MESSAGE,
-            message: t(plugin.messageLoggerEnhanced.alert.cleared),
-            id: Toasts.genId()
-        });
+    await withDb(void 0, database => database.clear("messages"));
+
+    if (!showToast) return;
+
+    Toasts.show({
+        type: Toasts.Type.MESSAGE,
+        message: t(plugin.messageLoggerEnhanced.alert.cleared),
+        id: Toasts.genId()
     });
 }

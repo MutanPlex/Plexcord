@@ -305,7 +305,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabled: "显示禁用",
                 new: "显示新内容",
                 userplugins: "显示用户插件",
-                api: "显示 API 插件"
+                api: "显示 API 插件",
+                type: "按类型筛选",
+                tags: "按标签筛选"
             }
         },
         pluginModal: {
@@ -6474,6 +6476,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportLogs: {
                     label: "导出日志",
                     description: "从 IndexedDB 导出日志"
+                },
+                clearLogsOnRestart: {
+                    label: "重启时清除日志",
+                    description: "Discord 重启时清除日志。"
                 },
                 openLogs: {
                     label: "打开日志",

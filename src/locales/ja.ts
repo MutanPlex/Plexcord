@@ -305,7 +305,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabled: "無効を表示",
                 new: "新規表示",
                 userplugins: "ユーザープラグインを表示",
-                api: "APIプラグインを表示"
+                api: "APIプラグインを表示",
+                type: "種類でフィルター",
+                tags: "タグでフィルター"
             }
         },
         pluginModal: {
@@ -6474,6 +6476,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportLogs: {
                     label: "ログのエクスポート",
                     description: "IndexedDB からログをエクスポートする"
+                },
+                clearLogsOnRestart: {
+                    label: "再起動時にログをクリア",
+                    description: "Discord再起動時にログをクリアします。"
                 },
                 openLogs: {
                     label: "ログを開く",

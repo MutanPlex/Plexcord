@@ -12,8 +12,8 @@ import { Flex } from "@components/Flex";
 import { InfoIcon } from "@components/Icons";
 import { Link } from "@components/index";
 import { User } from "@plexcord/discord-types";
-import { clearMessagesIDB, DBMessageRecord, deleteMessageIDB, deleteMessagesBulkIDB } from "@plugins/messageLoggerEnhanced/db";
-import { cl, settings } from "@plugins/messageLoggerEnhanced/index";
+import { DBMessageRecord, deleteMessageIDB, deleteMessagesBulkIDB } from "@plugins/messageLoggerEnhanced/db";
+import { cl, clearLogs, settings } from "@plugins/messageLoggerEnhanced/index";
 import { LoggedMessage, LoggedMessageJSON } from "@plugins/messageLoggerEnhanced/types";
 import { messageJsonToMessageClass } from "@plugins/messageLoggerEnhanced/utils";
 import { importLogs } from "@plugins/messageLoggerEnhanced/utils/settingsUtils";
@@ -149,7 +149,7 @@ export function LogsModal({ modalProps, initalQuery }: Props) {
                         confirmVariant: "critical-primary",
                         cancelText: t(plugin.messageLoggerEnhanced.alert.clearLogs.cancel),
                         onConfirm: async () => {
-                            await clearMessagesIDB();
+                            await clearLogs();
                             reset();
                         }
 

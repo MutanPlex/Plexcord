@@ -305,7 +305,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabled: "비활성화됨 표시",
                 new: "새로운 표시",
                 userplugins: "사용자 플러그인 표시",
-                api: "API 플러그인 표시"
+                api: "API 플러그인 표시",
+                type: "유형별 필터",
+                tags: "태그별 필터"
             }
         },
         pluginModal: {
@@ -6474,6 +6476,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportLogs: {
                     label: "로그 내보내기",
                     description: "IndexedDB에서 로그 내보내기"
+                },
+                clearLogsOnRestart: {
+                    label: "재시작 시 로그 삭제",
+                    description: "Discord가 재시작될 때 로그를 삭제합니다."
                 },
                 openLogs: {
                     label: "오픈 로그",

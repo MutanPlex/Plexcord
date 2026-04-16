@@ -305,7 +305,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabled: "Visa inaktiverad",
                 new: "Visa ny",
                 userplugins: "Visa användarinsticksprogram",
-                api: "Visa API-plugins"
+                api: "Visa API-plugins",
+                type: "Filtrera efter typ",
+                tags: "Filtrera efter taggar"
             }
         },
         pluginModal: {
@@ -6474,6 +6476,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportLogs: {
                     label: "Exportera loggar",
                     description: "Exportera loggar från IndexedDB"
+                },
+                clearLogsOnRestart: {
+                    label: "Rensa loggar vid omstart",
+                    description: "Rensar loggar när Discord startar om."
                 },
                 openLogs: {
                     label: "Öppna Loggar",

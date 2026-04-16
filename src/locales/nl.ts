@@ -305,7 +305,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabled: "Toon uitgeschakeld",
                 new: "Toon Nieuw",
                 userplugins: "Toon gebruikersplug-ins",
-                api: "Toon API-plug-ins"
+                api: "Toon API-plug-ins",
+                type: "Filter op type",
+                tags: "Filter op tags"
             }
         },
         pluginModal: {
@@ -6474,6 +6476,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportLogs: {
                     label: "Logboeken exporteren",
                     description: "Logboeken exporteren vanuit IndexedDB"
+                },
+                clearLogsOnRestart: {
+                    label: "Logs wissen bij herstart",
+                    description: "Wist logs wanneer Discord opnieuw opstart."
                 },
                 openLogs: {
                     label: "Logboeken openen",

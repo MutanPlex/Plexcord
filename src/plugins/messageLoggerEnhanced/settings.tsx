@@ -13,10 +13,9 @@ import { OptionType } from "@utils/types";
 import { Alerts, useState } from "@webpack/common";
 import { Settings } from "Plexcord";
 
-import { Native } from ".";
+import { clearLogs, Native } from ".";
 import { ImageCacheDir, LogsDir } from "./components/FolderSelectInput";
 import { openLogModal } from "./components/LogsModal";
-import { clearMessagesIDB } from "./db";
 import { blockedExts } from "./list";
 import { DEFAULT_IMAGE_CACHE_DIR } from "./utils/constants";
 import { exportLogs, importLogs } from "./utils/settingsUtils";
@@ -292,6 +291,14 @@ export const settings = definePluginSettings({
         component: ExportLogsButton
     },
 
+    clearLogsOnRestart: {
+        label: () => t(plugin.messageLoggerEnhanced.option.clearLogsOnRestart.label),
+        description: () => t(plugin.messageLoggerEnhanced.option.clearLogsOnRestart.description),
+        type: OptionType.BOOLEAN,
+        default: false,
+        restartNeeded: true,
+    },
+
     openLogs: {
         label: () => t(plugin.messageLoggerEnhanced.option.openLogs.label),
         description: () => t(plugin.messageLoggerEnhanced.option.openLogs.description),
@@ -333,7 +340,7 @@ export const settings = definePluginSettings({
                     confirmText: t(plugin.messageLoggerEnhanced.option.clearLogs.confirmText),
                     cancelText: t(plugin.messageLoggerEnhanced.option.clearLogs.cancel),
                     onConfirm: async () => {
-                        await clearMessagesIDB();
+                        await clearLogs();
                     },
                 })}
             >

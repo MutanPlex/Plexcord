@@ -18,14 +18,14 @@
 */
 
 import { plugin, t } from "@api/i18n";
-import { addMessagesBulkIDB, clearMessagesIDB, iterateAllMessagesIDB } from "@plugins/messageLoggerEnhanced/db";
+import { addMessagesBulkIDB, iterateAllMessagesIDB } from "@plugins/messageLoggerEnhanced/db";
 import { LoggedMessageJSON } from "@plugins/messageLoggerEnhanced/types";
 import JSONParser from "@streamparser/json/jsonparser.js";
 import { chooseFile as chooseFileWeb } from "@utils/web";
 import { Toasts } from "@webpack/common";
 import { showSaveFilePicker } from "native-file-system-adapter";
 
-import { Native } from "..";
+import { clearLogs, Native } from "..";
 
 export async function importLogs() {
     try {
@@ -36,7 +36,7 @@ export async function importLogs() {
 
         for await (const logItems of iterateLogItems()) {
             if (!cleared) {
-                await clearMessagesIDB();
+                await clearLogs(false);
                 cleared = true;
             }
 

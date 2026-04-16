@@ -27,158 +27,158 @@ let refreshingUrls = false;
 let oldTrendingCat: Category[] | null = null;
 
 export default definePlugin({
-        name: "GifCollections",
-        description: () => t(plugin.gifCollections.description),
-        authors: [Devs.Aria, PcDevs.creations, PcDevs.MutanPlex],
+    name: "GifCollections",
+    description: () => t(plugin.gifCollections.description),
+    authors: [Devs.Aria, PcDevs.creations, PcDevs.MutanPlex],
 
-        settings,
-        contextMenus: {
-                message: addCollectionContextMenuPatch,
-        },
+    settings,
+    contextMenus: {
+        message: addCollectionContextMenuPatch,
+    },
 
-        patches: [
+    patches: [
+        {
+            find: "renderCategoryExtras",
+            replacement: [
                 {
-                        find: "renderCategoryExtras",
-                        replacement: [
-                                {
-                                        match: /(render\(\){)(.{1,50}getItemGrid)/,
-                                        replace: "$1;$self.insertCollections(this);$2",
-                                },
-                                {
-                                        match: /("span",\{className:\i\.\i,children:)(\i)/,
-                                        replace: "$1$self.hidePrefix($2),",
-                                },
-                        ],
+                    match: /(render\(\){)(.{1,50}getItemGrid)/,
+                    replace: "$1;$self.insertCollections(this);$2",
                 },
                 {
-                        find: "renderEmptyFavorite",
-                        replacement: {
-                                match: /render\(\){.{1,500}onClick:this\.handleClick,/,
-                                replace: "$&onContextMenu: (e) => $self.collectionContextMenu(e, this),",
-                        },
+                    match: /("span",\{className:\i\.\i,children:)(\i)/,
+                    replace: "$1$self.hidePrefix($2),",
                 },
-                {
-                        find: "renderHeaderContent()",
-                        replacement: {
-                                match: /(renderContent\(\){)(.{1,50}resultItems)/,
-                                replace: "$1$self.renderContent(this);$2",
-                        },
-                },
-                {
-                        find: "type:\"GIF_PICKER_QUERY\"",
-                        replacement: {
-                                match: /(function \i\(.{1,10}\){)(.{1,100}.GIFS_SEARCH,query:)/,
-                                replace: "$1if($self.shouldStopFetch(arguments[0])) return;$2",
-                        },
-                },
-        ],
-
-        start() {
-                void refreshCacheCollection();
-                GIF_COLLECTION_PREFIX = settings.store.collectionPrefix;
-                GIF_ITEM_PREFIX = settings.store.itemPrefix;
+            ],
         },
-
-        sortedCollections(): Collection[] {
-                const sorted = [...cache_collections];
-                const sortType = settings.store.collectionsSortType;
-                const sortOrder = settings.store.collectionsSortOrder === "asc" ? 1 : -1;
-
-                return sorted.sort((a, b) => {
-                        switch (sortType) {
-                                case SortingOptions.NAME:
-                                        return a.name.localeCompare(b.name) * sortOrder;
-                                case SortingOptions.CREATION_DATE:
-                                        return ((a.createdAt ?? 0) - (b.createdAt ?? 0)) * sortOrder;
-                                case SortingOptions.MODIFIED_DATE:
-                                        return ((a.lastUpdated ?? 0) - (b.lastUpdated ?? 0)) * sortOrder;
-                                default:
-                                        return 0;
-                        }
-                });
+        {
+            find: "renderEmptyFavorite",
+            replacement: {
+                match: /render\(\){.{1,500}onClick:this\.handleClick,/,
+                replace: "$&onContextMenu: (e) => $self.collectionContextMenu(e, this),",
+            },
         },
-
-        renderContent(instance: GifPickerInstance) {
-                if (!instance.props.query.startsWith(GIF_COLLECTION_PREFIX)) return;
-
-                const collection = cache_collections.find(c => c.name === instance.props.query);
-                if (!collection) return;
-
-                instance.props.resultItems = collection.gifs.map(g => ({
-                        id: g.id,
-                        format: getFormat(g.src),
-                        src: g.src,
-                        url: g.url,
-                        width: g.width,
-                        height: g.height,
-                })).reverse();
-
-                const expiredGifs = collection.gifs.filter(g => g.src && g.url && (isCdnUrlExpired(g.src) || isCdnUrlExpired(g.url)));
-                if (expiredGifs.length === 0) return;
-
-                const allUrls = [...new Set<string>(
-                        expiredGifs.flatMap(g => [g.src, g.url].filter((u): u is string => !!u && isCdnUrlExpired(u)))
-                )];
-
-                if (!refreshingUrls) void this.refreshExpiredUrls(allUrls, expiredGifs, instance.props.query);
+        {
+            find: "renderHeaderContent()",
+            replacement: {
+                match: /(renderContent\(\){)(.{1,50}resultItems)/,
+                replace: "$1$self.renderContent(this);$2",
+            },
         },
+        {
+            find: "type:\"GIF_PICKER_QUERY\"",
+            replacement: {
+                match: /(function \i\(.{1,10}\){)(.{1,100}.GIFS_SEARCH,query:)/,
+                replace: "$1if($self.shouldStopFetch(arguments[0])) return;$2",
+            },
+        },
+    ],
 
-        async refreshExpiredUrls(urls: string[], expiredGifs: Gif[], query: string) {
-                refreshingUrls = true;
+    start() {
+        void refreshCacheCollection();
+        GIF_COLLECTION_PREFIX = settings.store.collectionPrefix;
+        GIF_ITEM_PREFIX = settings.store.itemPrefix;
+    },
 
-                try {
-                        const fullMap: Record<string, string> = {};
+    sortedCollections(): Collection[] {
+        const sorted = [...cache_collections];
+        const sortType = settings.store.collectionsSortType;
+        const sortOrder = settings.store.collectionsSortOrder === "asc" ? 1 : -1;
 
-                        for (let i = 0; i < urls.length; i += 50) {
-                                const result = await batchRefreshAttachmentUrls(urls.slice(i, i + 50));
-                                Object.assign(fullMap, result);
-                        }
+        return sorted.sort((a, b) => {
+            switch (sortType) {
+                case SortingOptions.NAME:
+                    return a.name.localeCompare(b.name) * sortOrder;
+                case SortingOptions.CREATION_DATE:
+                    return ((a.createdAt ?? 0) - (b.createdAt ?? 0)) * sortOrder;
+                case SortingOptions.MODIFIED_DATE:
+                    return ((a.lastUpdated ?? 0) - (b.lastUpdated ?? 0)) * sortOrder;
+                default:
+                    return 0;
+            }
+        });
+    },
 
-                        if (!Object.keys(fullMap).length) return;
+    renderContent(instance: GifPickerInstance) {
+        if (!instance.props.query.startsWith(GIF_COLLECTION_PREFIX)) return;
 
-                        let anyUpdated = false;
-                        for (const gif of expiredGifs) {
-                                const newSrc = fullMap[gif.src] ?? gif.src;
-                                const newUrl = fullMap[gif.url] ?? gif.url;
+        const collection = cache_collections.find(c => c.name === instance.props.query);
+        if (!collection) return;
 
-                                if (newSrc !== gif.src || newUrl !== gif.url) {
-                                        await updateGif(gif.id, { ...gif, src: newSrc, url: newUrl });
-                                        anyUpdated = true;
-                                }
-                        }
+        instance.props.resultItems = collection.gifs.map(g => ({
+            id: g.id,
+            format: getFormat(g.src),
+            src: g.src,
+            url: g.url,
+            width: g.width,
+            height: g.height,
+        })).reverse();
 
-                        if (!anyUpdated) return;
+        const expiredGifs = collection.gifs.filter(g => g.src && g.url && (isCdnUrlExpired(g.src) || isCdnUrlExpired(g.url)));
+        if (expiredGifs.length === 0) return;
 
-                        FluxDispatcher.dispatch({ type: "GIF_PICKER_QUERY", query: "" });
-                        FluxDispatcher.dispatch({ type: "GIF_PICKER_QUERY", query });
-                } finally {
-                        refreshingUrls = false;
+        const allUrls = [...new Set<string>(
+            expiredGifs.flatMap(g => [g.src, g.url].filter((u): u is string => !!u && isCdnUrlExpired(u)))
+        )];
+
+        if (!refreshingUrls) void this.refreshExpiredUrls(allUrls, expiredGifs, instance.props.query);
+    },
+
+    async refreshExpiredUrls(urls: string[], expiredGifs: Gif[], query: string) {
+        refreshingUrls = true;
+
+        try {
+            const fullMap: Record<string, string> = {};
+
+            for (let i = 0; i < urls.length; i += 50) {
+                const result = await batchRefreshAttachmentUrls(urls.slice(i, i + 50));
+                Object.assign(fullMap, result);
+            }
+
+            if (!Object.keys(fullMap).length) return;
+
+            let anyUpdated = false;
+            for (const gif of expiredGifs) {
+                const newSrc = fullMap[gif.src] ?? gif.src;
+                const newUrl = fullMap[gif.url] ?? gif.url;
+
+                if (newSrc !== gif.src || newUrl !== gif.url) {
+                    await updateGif(gif.id, { ...gif, src: newSrc, url: newUrl });
+                    anyUpdated = true;
                 }
-        },
+            }
 
-        hidePrefix: stripPrefix,
+            if (!anyUpdated) return;
 
-        insertCollections(instance: GifPickerInstance) {
-                try {
-                        if (instance.props.trendingCategories.length && instance.props.trendingCategories[0].type === "Trending") {
-                                oldTrendingCat = instance.props.trendingCategories;
-                        }
+            FluxDispatcher.dispatch({ type: "GIF_PICKER_QUERY", query: "" });
+            FluxDispatcher.dispatch({ type: "GIF_PICKER_QUERY", query });
+        } finally {
+            refreshingUrls = false;
+        }
+    },
 
-                        if (settings.store.onlyShowCollections) {
-                                instance.props.trendingCategories = [...this.sortedCollections(), ...instance.props.favorites];
-                        } else if (oldTrendingCat != null) {
-                                instance.props.trendingCategories = [...this.sortedCollections(), ...oldTrendingCat];
-                        }
-                } catch (err) {
-                        logger.error("Failed to insert collections", err);
-                }
-        },
+    hidePrefix: stripPrefix,
 
-        shouldStopFetch(query: string) {
-                return query.startsWith(GIF_COLLECTION_PREFIX) && cache_collections.some(c => c.name === query);
-        },
+    insertCollections(instance: GifPickerInstance) {
+        try {
+            if (instance.props.trendingCategories.length && instance.props.trendingCategories[0].type === "Trending") {
+                oldTrendingCat = instance.props.trendingCategories;
+            }
 
-        collectionContextMenu(e: React.MouseEvent, instance: GifPickerInstance) {
-                return buildGifPickerContextMenu(e, instance.props.item, GIF_COLLECTION_PREFIX, GIF_ITEM_PREFIX, instance);
-        },
+            if (settings.store.onlyShowCollections) {
+                instance.props.trendingCategories = this.sortedCollections();
+            } else if (oldTrendingCat != null) {
+                instance.props.trendingCategories = [...this.sortedCollections(), ...oldTrendingCat];
+            }
+        } catch (err) {
+            logger.error("Failed to insert collections", err);
+        }
+    },
+
+    shouldStopFetch(query: string) {
+        return query.startsWith(GIF_COLLECTION_PREFIX) && cache_collections.some(c => c.name === query);
+    },
+
+    collectionContextMenu(e: React.MouseEvent, instance: GifPickerInstance) {
+        return buildGifPickerContextMenu(e, instance.props.item, GIF_COLLECTION_PREFIX, GIF_ITEM_PREFIX, instance);
+    },
 });

@@ -305,7 +305,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabled: "Devre Dışı Olanlar",
                 new: "Yeniler",
                 userplugins: "Kullanıcı Eklentileri",
-                api: "API Eklentileri"
+                api: "API Eklentileri",
+                type: "Türe Göre Filtrele",
+                tags: "Etiketlere Göre Filtrele"
             }
         },
         pluginModal: {
@@ -6474,6 +6476,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportLogs: {
                     label: "Günlükleri Dışa Aktar",
                     description: "Günlükleri IndexedDB'den dışa aktar."
+                },
+                clearLogsOnRestart: {
+                    label: "Yeniden Başlatmada Logları Temizle",
+                    description: "Discord yeniden başlatıldığında logları temizler."
                 },
                 openLogs: {
                     label: "Günlükleri Aç",

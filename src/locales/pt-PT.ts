@@ -305,7 +305,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabled: "Mostrar Desativados",
                 new: "Mostrar Novos",
                 userplugins: "Mostrar Plugins de Utilizador",
-                api: "Mostrar Plugins de API"
+                api: "Mostrar Plugins de API",
+                type: "Filtrar por tipo",
+                tags: "Filtrar por etiquetas"
             }
         },
         pluginModal: {
@@ -6474,6 +6476,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportLogs: {
                     label: "Exportar Registos",
                     description: "Exportar registos do IndexedDB"
+                },
+                clearLogsOnRestart: {
+                    label: "Limpar registos ao reiniciar",
+                    description: "Limpa os registos quando o Discord reinicia."
                 },
                 openLogs: {
                     label: "Abrir Registos",

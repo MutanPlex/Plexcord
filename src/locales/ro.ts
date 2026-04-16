@@ -305,7 +305,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabled: "Arată Dezactivate",
                 new: "Arată Noi",
                 userplugins: "Arată Plugin-uri Utilizator",
-                api: "Arată Plugin-uri API"
+                api: "Arată Plugin-uri API",
+                type: "Filtrare după tip",
+                tags: "Filtrare după etichete"
             }
         },
         pluginModal: {
@@ -6474,6 +6476,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportLogs: {
                     label: "Exportă jurnale",
                     description: "Exportă jurnalele din IndexedDB"
+                },
+                clearLogsOnRestart: {
+                    label: "Șterge jurnalele la repornire",
+                    description: "Șterge jurnalele când Discord repornește."
                 },
                 openLogs: {
                     label: "Deschide jurnalele",

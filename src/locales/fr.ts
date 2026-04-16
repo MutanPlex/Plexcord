@@ -305,7 +305,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabled: "Afficher désactivés",
                 new: "Afficher les nouveaux",
                 userplugins: "Afficher plugins utilisateur",
-                api: "Afficher les plugins API"
+                api: "Afficher les plugins API",
+                type: "Filtrer par type",
+                tags: "Filtrer par étiquettes"
             }
         },
         pluginModal: {
@@ -6474,6 +6476,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportLogs: {
                     label: "Exporter les journaux",
                     description: "Exporter les journaux depuis IndexedDB."
+                },
+                clearLogsOnRestart: {
+                    label: "Effacer les journaux au redémarrage",
+                    description: "Efface les journaux lorsque Discord redémarre."
                 },
                 openLogs: {
                     label: "Ouvrir les journaux",

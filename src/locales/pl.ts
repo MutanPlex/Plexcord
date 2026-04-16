@@ -305,7 +305,9 @@ const translations: MatchStructure<typeof enTranslations> = {
                 disabled: "Pokaż wyłączone",
                 new: "Pokaż nowe",
                 userplugins: "Pokaż wtyczki użytkownika",
-                api: "Pokaż wtyczki API"
+                api: "Pokaż wtyczki API",
+                type: "Filtruj według typu",
+                tags: "Filtruj według tagów"
             }
         },
         pluginModal: {
@@ -6474,6 +6476,10 @@ const translations: MatchStructure<typeof enTranslations> = {
                 exportLogs: {
                     label: "Eksportuj logi",
                     description: "Eksportuj logi z bazy IndexedDB"
+                },
+                clearLogsOnRestart: {
+                    label: "Wyczyść logi przy ponownym uruchomieniu",
+                    description: "Czyści logi podczas ponownego uruchomienia Discorda."
                 },
                 openLogs: {
                     label: "Otwórz logi",
