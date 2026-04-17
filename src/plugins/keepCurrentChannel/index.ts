@@ -46,6 +46,7 @@ export default definePlugin({
     name: "KeepCurrentChannel",
     description: () => t(plugin.keepCurrentChannel.description),
     authors: [Devs.Nuckyz],
+    tags: ["utility"],
 
     patches: [
         {

@@ -23,12 +23,23 @@ import { Devs } from "@utils/constants";
 import { Logger } from "@utils/Logger";
 import definePlugin, { OptionType } from "@utils/types";
 import { Constants, FluxDispatcher, GuildStore, RelationshipStore, SnowflakeUtils, UserAffinitiesStore, UserStore } from "@webpack/common";
-import { Settings } from "Plexcord";
+
+const settings = definePluginSettings({
+    sortByAffinity: {
+        label: () => t(plugin.implicitRelationships.option.sortByAffinity.label),
+        description: () => t(plugin.implicitRelationships.option.sortByAffinity.description),
+        type: OptionType.BOOLEAN,
+        default: true,
+        restartNeeded: true
+    },
+});
 
 export default definePlugin({
     name: "ImplicitRelationships",
     description: () => t(plugin.implicitRelationships.description),
     authors: [Devs.Dolfies],
+    tags: ["friends", "organisation", "utility"],
+    settings,
 
     patches: [
         // Counts header
@@ -76,7 +87,7 @@ export default definePlugin({
         {
             find: "getRelationshipCounts(){",
             replacement: {
-                predicate: () => Settings.plugins.ImplicitRelationships.sortByAffinity,
+                predicate: () => settings.store.sortByAffinity,
                 match: /\}\)\.sortBy\((.+?)\)\.value\(\)/,
                 replace: "}).sortBy(row => $self.wrapSort(($1), row)).value()"
             }
@@ -105,17 +116,6 @@ export default definePlugin({
             },
         }
     ],
-    settings: definePluginSettings(
-        {
-            sortByAffinity: {
-                label: () => t(plugin.implicitRelationships.option.sortByAffinity.label),
-                description: () => t(plugin.implicitRelationships.option.sortByAffinity.description),
-                type: OptionType.BOOLEAN,
-                default: true,
-                restartNeeded: true
-            },
-        }
-    ),
 
     wrapSort(comparator: Function, row: any) {
         return row.type === 5

@@ -30,6 +30,7 @@ export default definePlugin({
     name: "GifCollections",
     description: () => t(plugin.gifCollections.description),
     authors: [Devs.Aria, PcDevs.creations, PcDevs.MutanPlex],
+    tags: ["media", "chat", "organisation"],
 
     settings,
     contextMenus: {

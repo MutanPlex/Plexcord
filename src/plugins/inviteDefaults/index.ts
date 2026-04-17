@@ -51,6 +51,7 @@ export default definePlugin({
     name: "InviteDefaults",
     description: () => t(plugin.inviteDefaults.description),
     authors: [PcDevs.VillainsRule],
+    tags: ["servers", "utility"],
     settings,
 
     patches: [

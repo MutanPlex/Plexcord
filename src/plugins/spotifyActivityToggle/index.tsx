@@ -88,6 +88,7 @@ export default definePlugin({
     name: "SpotifyActivityToggle",
     description: () => t(plugin.spotifyActivityToggle.description),
     authors: [Devs.thororen],
+    tags: ["media", "activity", "privacy"],
     settings,
 
     userAreaButton: {

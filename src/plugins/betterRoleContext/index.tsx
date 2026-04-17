@@ -96,6 +96,8 @@ export default definePlugin({
     authors: [Devs.Ven, Devs.goodbee],
     dependencies: ["UserSettingsAPI"],
 
+    tags: ["roles", "servers"],
+
     settings,
 
     start() {

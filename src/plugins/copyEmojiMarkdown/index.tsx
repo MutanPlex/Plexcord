@@ -55,6 +55,7 @@ export default definePlugin({
     name: "CopyEmojiMarkdown",
     description: () => t(plugin.copyEmojiMarkdown.description),
     authors: [Devs.HappyEnderman, Devs.Vishnya],
+    tags: ["emotes", "chat", "utility"],
     settings,
 
     contextMenus: {

@@ -15,6 +15,7 @@ export default definePlugin({
     name: "AtSomeone",
     description: () => t(plugin.atSomeone.description),
     authors: [Devs.Joona, PcDevs.MutanPlex],
+    tags: ["chat", "fun"],
 
     patches: [
         {

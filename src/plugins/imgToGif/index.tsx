@@ -77,6 +77,7 @@ export default definePlugin({
     name: "ImgToGif",
     description: () => t(plugin.imgToGif.description),
     authors: [PcDevs.zyqunix, PcDevs.MutanPlex],
+    tags: ["media", "commands", "utility"],
 
     commands: [
         {

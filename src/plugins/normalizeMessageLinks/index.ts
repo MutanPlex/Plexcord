@@ -13,6 +13,7 @@ export default definePlugin({
     name: "NormalizeMessageLinks",
     description: () => t(plugin.normalizeMessageLinks.description),
     authors: [Devs.bb010g],
+    tags: ["chat", "utility"],
 
     patches: [
         {

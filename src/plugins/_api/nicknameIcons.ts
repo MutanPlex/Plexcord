@@ -13,6 +13,7 @@ export default definePlugin({
     name: "NicknameIconsAPI",
     description: () => t(plugins.metadata.api.description.nicknameIcons),
     authors: [Devs.Nuckyz],
+    tags: ["appearance", "utility"],
 
     patches: [
         {

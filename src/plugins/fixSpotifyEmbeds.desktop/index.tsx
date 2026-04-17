@@ -26,5 +26,6 @@ export default definePlugin({
     name: "FixSpotifyEmbeds",
     description: () => t(plugin.fixSpotifyEmbeds.description),
     authors: [Devs.Ven],
+    tags: ["media", "utility", "customisation"],
     settings
 });

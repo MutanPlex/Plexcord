@@ -46,6 +46,7 @@ export default definePlugin({
     name: "LoginWithQR",
     description: () => t(plugin.loginWithQR.description),
     authors: [PcDevs.nexpid, PcDevs.MutanPlex],
+    tags: ["utility"],
     settings,
 
     patches: [

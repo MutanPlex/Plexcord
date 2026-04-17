@@ -90,6 +90,7 @@ export default definePlugin({
     name: "MessageTags",
     description: () => t(plugin.messageTags.description),
     authors: [Devs.Luna],
+    tags: ["commands", "chat", "organisation"],
     settings,
 
     async start() {

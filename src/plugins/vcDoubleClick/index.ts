@@ -31,6 +31,7 @@ export default definePlugin({
     name: "VoiceChatDoubleClick",
     description: () => t(plugin.voiceChatDoubleClick.description),
     authors: [Devs.Ven, Devs.D3SOX, Devs.sadan],
+    tags: ["voice", "servers", "utility"],
 
     patches: [
         ...[

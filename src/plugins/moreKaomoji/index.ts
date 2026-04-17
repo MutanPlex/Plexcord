@@ -26,6 +26,7 @@ export default definePlugin({
     name: "MoreKaomoji",
     description: () => t(plugin.moreKaomoji.description),
     authors: [Devs.JacobTm, PcDevs.MutanPlex],
+    tags: ["commands", "emotes", "fun"],
 
     commands: [
         { name: "dissatisfaction", description: " ＞﹏＜" },

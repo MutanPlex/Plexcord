@@ -24,6 +24,7 @@ export default definePlugin({
     name: "BetterGifPicker",
     description: () => t(plugin.betterGifPicker.description),
     authors: [Devs.Samwich],
+    tags: ["chat", "media"],
     settings,
 
     patches: [

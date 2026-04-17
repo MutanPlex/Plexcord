@@ -157,6 +157,7 @@ export default definePlugin({
     name: "StatusPresets",
     description: () => t(plugin.statusPresets.description),
     authors: [Devs.iamme],
+    tags: ["customisation", "utility"],
     settings: settings,
     dependencies: ["UserSettingsAPI"],
 

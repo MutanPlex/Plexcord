@@ -104,6 +104,7 @@ export default definePlugin({
     name: "InvisibleChat",
     description: () => t(plugin.invisibleChat.description),
     authors: [Devs.SammCheese],
+    tags: ["privacy", "chat", "utility"],
     dependencies: ["MessageUpdaterAPI", "MessagePopoverAPI", "ChatInputButtonAPI"],
     reporterTestable: ReporterTestable.Patches,
     settings,

@@ -57,6 +57,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "SortFriendsRequests",
     authors: [Devs.Megu, PcDevs.CallMeGii],
+    tags: ["friends", "organisation", "utility"],
     description: () => t(plugin.sortFriendRequests.description),
     settings,
 

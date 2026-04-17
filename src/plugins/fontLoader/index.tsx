@@ -205,6 +205,7 @@ export default definePlugin({
     name: "FontLoader",
     description: () => t(plugin.fontLoader.description),
     authors: [PcDevs.vmohammad, PcDevs.MutanPlex],
+    tags: ["appearance", "customisation"],
     settings,
 
     async start() {

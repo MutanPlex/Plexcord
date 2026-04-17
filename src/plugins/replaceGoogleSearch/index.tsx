@@ -136,6 +136,7 @@ export default definePlugin({
     name: "ReplaceGoogleSearch",
     description: () => t(plugin.replaceGoogleSearch.description),
     authors: [Devs.Moxxie, Devs.Ethan],
+    tags: ["privacy", "utility"],
 
     settings,
 

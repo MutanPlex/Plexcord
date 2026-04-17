@@ -64,6 +64,7 @@ export default definePlugin({
     name: "StreamingCodecDisabler",
     description: () => t(plugin.streamingCodecDisabler.description),
     authors: [PcDevs.davidkra230],
+    tags: ["voice", "utility"],
     settings,
 
     patches: [

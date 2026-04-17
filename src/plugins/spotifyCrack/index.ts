@@ -43,6 +43,7 @@ export default definePlugin({
     name: "SpotifyCrack",
     description: () => t(plugin.spotifyCrack.description),
     authors: [Devs.Cyn, Devs.Nuckyz],
+    tags: ["media", "activity", "utility"],
     settings,
 
     patches: [

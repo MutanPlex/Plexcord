@@ -922,6 +922,29 @@ const translations: MatchStructure<typeof enTranslations> = {
     },
 
     plugin: {
+        tags: {
+            accessibility: "Доступность",
+            activity: "Активность",
+            appearance: "Внешний вид",
+            chat: "Чат",
+            commands: "Команды",
+            console: "Консоль",
+            customisation: "Настройка",
+            developers: "Разработчики",
+            emotes: "Эмоции",
+            friends: "Друзья",
+            fun: "Развлечения",
+            media: "Медиа",
+            notifications: "Уведомления",
+            organisation: "Организация",
+            privacy: "Конфиденциальность",
+            reactions: "Реакции",
+            roles: "Роли",
+            servers: "Серверы",
+            shortcuts: "Сочетания клавиш",
+            utility: "Утилиты",
+            voice: "Голос"
+        },
         noTrack: {
             name: "NoTrack",
             description: "Отключить слежку Discord (аналитику/'science'), метрики и отчеты об ошибках Sentry",

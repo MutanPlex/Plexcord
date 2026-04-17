@@ -44,6 +44,7 @@ export default definePlugin({
     name: "BetterRoleDot",
     description: () => t(plugin.betterRoleDot.description),
     authors: [Devs.Ven, Devs.AutumnVN],
+    tags: ["roles", "appearance"],
     settings,
 
     patches: [

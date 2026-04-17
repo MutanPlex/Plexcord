@@ -16,6 +16,7 @@ export default definePlugin({
     name: "NewPluginsManager",
     description: () => t(plugin.newPluginsManager.description),
     authors: [Devs.Sqaaakoi, PcDevs.MutanPlex],
+    tags: ["utility", "developers"],
 
     enabledByDefault: true,
     flux: {

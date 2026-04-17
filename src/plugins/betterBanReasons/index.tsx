@@ -79,6 +79,7 @@ export default definePlugin({
     name: "BetterBanReasons",
     description: () => t(plugin.betterBanReasons.description),
     authors: [Devs.Inbestigator, PcDevs.MutanPlex],
+    tags: ["servers", "utility"],
 
     patches: [
         {

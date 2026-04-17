@@ -25,6 +25,7 @@ export default definePlugin({
     name: "BetterUploadButton",
     description: () => t(plugin.betterUploadButton.description),
     authors: [Devs.fawn, Devs.Ven],
+    tags: ["chat", "utility"],
 
     patches: [
         {

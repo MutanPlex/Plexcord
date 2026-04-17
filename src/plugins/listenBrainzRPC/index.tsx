@@ -173,6 +173,7 @@ export default definePlugin({
     name: "ListenBrainzRPC",
     description: () => t(plugin.listenBrainzRPC.description),
     authors: [PcDevs.qouesm],
+    tags: ["activity", "media"],
 
     settingsAboutComponent: () => (
         <>

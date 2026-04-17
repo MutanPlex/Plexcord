@@ -156,6 +156,7 @@ export default definePlugin({
     name: "FriendshipRanks",
     description: () => t(plugin.friendshipRanks.description),
     authors: [Devs.Samwich, PcDevs.MutanPlex],
+    tags: ["friends", "appearance", "fun"],
     localeUnsubscribe: null as (() => void) | null,
 
     start() {

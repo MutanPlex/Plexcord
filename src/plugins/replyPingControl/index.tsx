@@ -32,6 +32,7 @@ export default definePlugin({
     name: "ReplyPingControl",
     description: () => t(plugin.replyPingControl.description),
     authors: [Devs.ant0n, PcDevs.MrDiamond, PcDevs.MutanPlex],
+    tags: ["chat", "notifications", "utility"],
     settings,
 
     patches: [{

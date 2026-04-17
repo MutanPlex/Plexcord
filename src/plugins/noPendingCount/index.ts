@@ -53,6 +53,7 @@ export default definePlugin({
     name: "NoPendingCount",
     description: () => t(plugin.noPendingCount.description),
     authors: [Devs.amia],
+    tags: ["notifications", "friends", "appearance"],
     settings: settings,
 
     // Functions used to determine the top left count indicator can be found in the single module that calls getUnacknowledgedOffers(...)

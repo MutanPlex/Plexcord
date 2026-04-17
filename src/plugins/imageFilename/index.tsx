@@ -25,6 +25,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "ImageFilename",
     authors: [Devs.Ven],
+    tags: ["media", "utility"],
     description: () => t(plugin.imageFilename.description),
     settings,
 

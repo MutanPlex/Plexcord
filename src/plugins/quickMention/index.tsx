@@ -43,6 +43,7 @@ export default definePlugin({
     name: "QuickMention",
     authors: [Devs.kemo],
     description: () => t(plugin.quickMention.description),
+    tags: ["chat", "utility"],
 
     messagePopoverButton: {
         icon: Icon,

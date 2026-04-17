@@ -66,6 +66,7 @@ export default definePlugin({
     name: "IrcColors",
     description: () => t(plugin.ircColors.description),
     authors: [Devs.Grzesiek11, Devs.jamesbt365],
+    tags: ["chat", "appearance", "customisation"],
     settings,
 
     patches: [

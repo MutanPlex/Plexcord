@@ -128,6 +128,7 @@ export default definePlugin({
     name: "CustomTimestamps",
     description: () => t(plugin.customTimestamps.description),
     authors: [Devs.Rini, PcDevs.nvhhr, PcDevs.Suffocate, Devs.Obsidian],
+    tags: ["chat", "customisation"],
     settings,
 
     settingsAboutComponent: () => (

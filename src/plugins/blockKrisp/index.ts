@@ -13,6 +13,7 @@ export default definePlugin({
     name: "BlockKrisp",
     description: () => t(plugin.blockKrisp.description),
     authors: [Devs.D3SOX],
+    tags: ["voice"],
 
     patches: [
         // Block loading modules on Desktop

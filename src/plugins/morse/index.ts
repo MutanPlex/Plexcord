@@ -50,6 +50,7 @@ export default definePlugin({
     name: "Morse",
     description: () => t(plugin.morse.description),
     authors: [PcDevs.zyqunix],
+    tags: ["commands", "fun"],
 
     commands: [
         {

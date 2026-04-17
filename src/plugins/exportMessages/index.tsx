@@ -438,6 +438,7 @@ export default definePlugin({
     name: "ExportMessages",
     description: () => t(plugin.exportMessages.description),
     authors: [PcDevs.MutanPlex],
+    tags: ["chat", "utility"],
     settings,
 
     contextMenus: {

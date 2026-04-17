@@ -27,6 +27,7 @@ export default definePlugin({
     name: "MessageDecorationsAPI",
     description: () => t(plugins.metadata.api.description.messageDecorations),
     authors: [Devs.TheSun],
+    tags: ["chat", "appearance", "utility"],
     managedStyle,
 
     patches: [

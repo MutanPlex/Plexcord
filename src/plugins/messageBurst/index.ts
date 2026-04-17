@@ -72,6 +72,7 @@ export default definePlugin({
     name: "MessageBurst",
     description: () => t(plugin.messageBurst.description),
     authors: [PcDevs.port22exposed, PcDevs.MutanPlex],
+    tags: ["chat", "utility"],
     settings,
     onBeforeMessageSend(channelId, message) {
         const messages = MessageStore.getMessages(channelId)._map;

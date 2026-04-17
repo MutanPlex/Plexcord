@@ -13,6 +13,7 @@ export default definePlugin({
     name: "DisableCameras",
     description: () => t(plugin.disableCameras.description),
     authors: [Devs.Joona],
+    tags: ["voice", "privacy"],
 
     patches: [
         {

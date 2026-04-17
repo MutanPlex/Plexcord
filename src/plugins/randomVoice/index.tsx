@@ -697,6 +697,7 @@ export default definePlugin({
     name: "RandomVoice",
     description: () => t(plugin.randomVoice.description),
     authors: [PcDevs.xijexo, PcDevs.omaw, Devs.thororen],
+    tags: ["voice", "servers", "utility"],
     settings,
 
     userAreaButton: {

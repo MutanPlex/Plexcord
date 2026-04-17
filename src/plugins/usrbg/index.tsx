@@ -59,6 +59,7 @@ export default definePlugin({
     name: "USRBG",
     description: () => t(plugin.uSRBG.description),
     authors: [Devs.AutumnVN, Devs.katlyn, Devs.pylix, Devs.TheKodeToad, PcDevs.MutanPlex],
+    tags: ["appearance", "customisation"],
     settings,
 
     patches: [

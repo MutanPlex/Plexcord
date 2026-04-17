@@ -19,6 +19,7 @@ export default definePlugin({
     name: "BetterActivities",
     description: () => t(plugin.betterActivities.description),
     authors: [Devs.D3SOX, Devs.Arjix, Devs.AutumnVN, Devs.thororen],
+    tags: ["activity"],
     settings,
 
     patchActivityList,

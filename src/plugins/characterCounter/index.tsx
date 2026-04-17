@@ -38,6 +38,7 @@ export default definePlugin({
     name: "CharacterCounter",
     description: () => t(plugin.characterCounter.description),
     authors: [PcDevs.creations, PcDevs.Panniku, Devs.thororen, PcDevs.MutanPlex],
+    tags: ["chat", "utility"],
     settings,
     patches: [
         {

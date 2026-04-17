@@ -21,6 +21,7 @@ export default definePlugin({
     name: "HomeTyping",
     description: () => t(plugin.homeTyping.description),
     authors: [Devs.Samwich, PcDevs.MutanPlex],
+    tags: ["chat", "friends", "utility"],
 
     TypingIcon() {
         return <ThreeDots className={cl("dots")} dotRadius={3} themed={true} />;

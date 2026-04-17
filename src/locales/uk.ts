@@ -922,6 +922,29 @@ const translations: MatchStructure<typeof enTranslations> = {
     },
 
     plugin: {
+        tags: {
+            accessibility: "Доступність",
+            activity: "Активність",
+            appearance: "Вигляд",
+            chat: "Чат",
+            commands: "Команди",
+            console: "Консоль",
+            customisation: "Налаштування",
+            developers: "Розробники",
+            emotes: "Емоції",
+            friends: "Друзі",
+            fun: "Розваги",
+            media: "Медіа",
+            notifications: "Сповіщення",
+            organisation: "Організація",
+            privacy: "Конфіденційність",
+            reactions: "Реакції",
+            roles: "Ролі",
+            servers: "Сервери",
+            shortcuts: "Ярлики",
+            utility: "Утиліти",
+            voice: "Голос"
+        },
         noTrack: {
             name: "NoTrack",
             description: "Вимкнути відстеження Discord (аналітику/'science'), метрики та звіти про збої Sentry",

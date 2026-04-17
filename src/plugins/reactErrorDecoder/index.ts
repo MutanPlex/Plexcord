@@ -28,6 +28,7 @@ export default definePlugin({
     name: "ReactErrorDecoder",
     description: () => t(plugin.reactErrorDecoder.description),
     authors: [Devs.Cyn, Devs.maisymoe],
+    tags: ["developers", "console", "utility"],
 
     patches: [
         {

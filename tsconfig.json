@@ -26,6 +26,7 @@
             "@main/*": ["./main/*"],
             "@api/*": ["./api/*"],
             "@components/*": ["./components/*"],
+            "@debug/*": ["./debug/*"],
             "@utils/*": ["./utils/*"],
             "@plugins/*": ["./plugins/*"],
             "@shared/*": ["./shared/*"],
@@ -34,6 +35,7 @@
             "@webpack": ["./webpack/webpack"],
             "@webpack/patcher": ["./webpack/patchWebpack"],
             "@webpack/wreq.d": ["./webpack/wreq.d"],
+            "@webpack/types": ["./webpack/types"],
         },
         "plugins": [
             // Transform paths in output .d.ts files (Include this line if you output declarations files)

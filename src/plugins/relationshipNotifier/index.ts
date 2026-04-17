@@ -29,6 +29,7 @@ export default definePlugin({
     name: "RelationshipNotifier",
     description: () => t(plugin.relationshipNotifier.description),
     authors: [Devs.nick],
+    tags: ["friends", "notifications", "utility"],
     settings,
 
     patches: [

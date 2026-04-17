@@ -61,6 +61,8 @@ export default definePlugin({
     description: () => t(plugin.betterSessions.description),
     authors: [Devs.amia],
 
+    tags: ["privacy", "notifications"],
+
     settings: settings,
 
     patches: [

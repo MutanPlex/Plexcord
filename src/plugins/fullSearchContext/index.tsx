@@ -82,6 +82,7 @@ export default definePlugin({
     name: "FullSearchContext",
     description: () => t(plugin.fullSearchContext.description),
     authors: [Devs.Ven, Devs.Aria],
+    tags: ["chat", "utility"],
 
     patches: [{
         find: "onClick:this.handleMessageClick,",

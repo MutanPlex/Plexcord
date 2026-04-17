@@ -156,6 +156,7 @@ export default definePlugin({
     name: "GreetStickerPicker",
     description: () => t(plugin.greetStickerPicker.description),
     authors: [Devs.Ven],
+    tags: ["chat", "emotes", "fun"],
     settings,
 
     patches: [

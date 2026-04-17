@@ -36,6 +36,7 @@ export default definePlugin({
     name: "UnlimitedAccounts",
     description: () => t(plugin.unlimitedAccounts.description),
     authors: [Devs.thororen, PcDevs.MutanPlex],
+    tags: ["utility"],
     settings,
 
     patches: [

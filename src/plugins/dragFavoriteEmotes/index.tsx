@@ -35,6 +35,7 @@ export default definePlugin({
     name: "DragFavoriteEmotes",
     description: () => t(plugin.dragFavoriteEmotes.description),
     authors: [PcDevs.PWall, PcDevs.MutanPlex],
+    tags: ["emotes", "chat", "utility"],
 
     patches: [
         {

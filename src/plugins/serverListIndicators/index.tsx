@@ -140,6 +140,7 @@ export default definePlugin({
     name: "ServerListIndicators",
     description: () => t(plugin.serverListIndicators.description),
     authors: [Devs.dzshn, PcDevs.Panniku],
+    tags: ["friends", "servers", "utility"],
     dependencies: ["ServerListAPI"],
     settings,
 

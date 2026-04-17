@@ -13,6 +13,7 @@ export default definePlugin({
     name: "NoRoleHeaders",
     description: () => t(plugin.noRoleHeaders.description),
     authors: [Devs.Samwich],
+    tags: ["roles", "servers", "appearance"],
     patches: [
         {
             find: "this.updateMaxContentFeedRowSeen()",

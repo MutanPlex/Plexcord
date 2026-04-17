@@ -54,6 +54,7 @@ export default definePlugin({
     name: "MediaPlaybackSpeed",
     description: () => t(plugin.mediaPlaybackSpeed.description),
     authors: [Devs.D3SOX, PcDevs.MutanPlex],
+    tags: ["media", "utility"],
     settings,
 
     patches: [

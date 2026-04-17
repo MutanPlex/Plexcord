@@ -27,6 +27,7 @@ export default definePlugin({
     name: "PlainFolderIcon",
     description: () => t(plugin.plainFolderIcon.description),
     authors: [Devs.botato],
+    tags: ["appearance", "customisation", "servers"],
 
     patches: [
         {

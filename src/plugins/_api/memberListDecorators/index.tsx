@@ -27,6 +27,7 @@ export default definePlugin({
     name: "MemberListDecoratorsAPI",
     description: () => t(plugins.metadata.api.description.memberListDecorators),
     authors: [Devs.TheSun, Devs.Ven],
+    tags: ["servers", "appearance", "utility"],
     managedStyle,
 
     patches: [

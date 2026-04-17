@@ -13,6 +13,7 @@ export default definePlugin({
     name: "NoPushToTalk",
     description: () => t(plugin.noPushToTalk.description),
     authors: [PcDevs.omaw, PcDevs.MutanPlex],
+    tags: ["voice", "utility"],
     patches: [
         {
             find: "PermissionVADStore",

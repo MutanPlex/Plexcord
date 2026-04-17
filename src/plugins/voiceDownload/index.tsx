@@ -15,6 +15,7 @@ export default definePlugin({
     name: "VoiceDownload",
     description: () => t(plugin.voiceDownload.description),
     authors: [Devs.puv],
+    tags: ["voice", "media", "utility"],
 
     patches: [
         {

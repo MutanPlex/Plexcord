@@ -115,6 +115,7 @@ export default definePlugin({
     name: "ConsoleJanitor",
     description: () => t(plugin.consoleJanitor.description),
     authors: [Devs.Nuckyz, Devs.sadan, PcDevs.MutanPlex],
+    tags: ["console", "developers"],
     settings,
 
     startAt: StartAt.Init,

@@ -113,6 +113,7 @@ export default definePlugin({
     name: "DecodeBase64",
     description: () => t(plugin.decodeBase64.description),
     authors: [PcDevs.ThePirateStoner, PcDevs.MutanPlex],
+    tags: ["chat", "utility", "developers"],
     settings,
 
     messagePopoverButton: {

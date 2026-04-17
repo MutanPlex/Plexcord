@@ -13,6 +13,7 @@ export default definePlugin({
     name: "ImageLink",
     description: () => t(plugin.imageLink.description),
     authors: [Devs.Kyuuhachi, Devs.Sqaaakoi],
+    tags: ["media", "utility"],
 
     patches: [
         {

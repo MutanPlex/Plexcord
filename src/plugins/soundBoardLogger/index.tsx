@@ -32,6 +32,7 @@ function SoundBoardLoggerButton() {
 export default definePlugin({
     name: "SoundBoardLogger",
     authors: [Devs.Moxxie, PcDevs.Fres, Devs.thororen, PcDevs.MutanPlex],
+    tags: ["voice", "utility"],
     description: () => t(plugin.soundBoardLogger.description),
     dependencies: ["HeaderBarAPI", "AudioPlayerAPI", "ChatInputButtonAPI"],
 

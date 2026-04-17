@@ -73,6 +73,7 @@ export default definePlugin({
     name: "HideServers",
     description: () => t(plugin.hideServers.description),
     authors: [PcDevs.bep, PcDevs.MutanPlex],
+    tags: ["servers", "privacy", "organisation", "utility"],
     dependencies: ["ServerListAPI"],
 
     contextMenus: {

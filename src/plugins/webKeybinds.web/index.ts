@@ -29,6 +29,7 @@ export default definePlugin({
     name: "WebKeybinds",
     description: () => t(plugin.webKeybinds.description),
     authors: [Devs.Ven],
+    tags: ["shortcuts", "utility"],
     enabledByDefault: true,
 
     onKey(e: KeyboardEvent) {

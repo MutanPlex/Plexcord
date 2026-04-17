@@ -27,6 +27,7 @@ import { settings } from "./settings";
 export default definePlugin({
     name: "UserMessagesPronouns",
     authors: [Devs.Tyman, Devs.TheKodeToad, Devs.Ven, Devs.Elvyra],
+    tags: ["chat", "friends", "appearance"],
     description: () => t(plugin.userMessagesPronouns.description),
     settings,
 

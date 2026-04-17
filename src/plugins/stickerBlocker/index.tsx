@@ -138,6 +138,7 @@ export default definePlugin({
     name: "StickerBlocker",
     description: () => t(plugin.stickerBlocker.description),
     authors: [Devs.Samwich],
+    tags: ["emotes", "chat", "utility"],
 
     patches: [
         {

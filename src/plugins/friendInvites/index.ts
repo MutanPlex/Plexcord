@@ -29,6 +29,7 @@ export default definePlugin({
     name: "FriendInvites",
     description: () => t(plugin.friendInvites.description),
     authors: [Devs.afn, Devs.Dziurwa],
+    tags: ["friends", "commands", "utility"],
 
     commands: [
         {

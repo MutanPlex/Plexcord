@@ -149,6 +149,7 @@ export default definePlugin({
     name: "ClickableRoles",
     description: () => t(plugin.clickableRoles.description),
     authors: [Devs.prism],
+    tags: ["roles", "servers", "utility"],
 
     patches: [
         {

@@ -288,6 +288,7 @@ export default definePlugin({
     description: () => t(plugin.supportHelper.description),
     required: true,
     authors: [Devs.Ven, PcDevs.MutanPlex],
+    tags: ["utility", "developers"],
     dependencies: ["UserSettingsAPI"],
     settings,
 

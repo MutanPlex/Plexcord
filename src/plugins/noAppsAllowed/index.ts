@@ -13,6 +13,7 @@ export default definePlugin({
     name: "NoAppsAllowed",
     description: () => t(plugin.noAppsAllowed.description),
     authors: [PcDevs.meowabyte, PcDevs.MutanPlex],
+    tags: ["appearance", "chat"],
     patches: [
         {
             find: '"#{intl::APP_TAG::hash}":',

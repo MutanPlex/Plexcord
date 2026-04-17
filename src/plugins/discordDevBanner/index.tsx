@@ -17,6 +17,7 @@ export default definePlugin({
     name: "DiscordDevBanner",
     description: () => t(plugin.discordDevBanner.description),
     authors: [PcDevs.KrystalSkull, Devs.thororen, PcDevs.MutanPlex],
+    tags: ["developers", "appearance"],
     settings,
     patches: [
         {

@@ -139,6 +139,7 @@ export default definePlugin({
     name: "Demonstration",
     description: () => t(plugin.demonstration.description),
     authors: [Devs.Samwich, PcDevs.Panniku, PcDevs.MutanPlex],
+    tags: ["appearance", "customisation", "utility"],
     dependencies: ["AudioPlayerAPI"],
     settings,
 

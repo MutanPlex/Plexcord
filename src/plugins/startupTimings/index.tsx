@@ -30,6 +30,7 @@ export default definePlugin({
     name: "StartupTimings",
     description: () => t(plugin.startupTimings.description),
     authors: [Devs.Megu],
+    tags: ["developers", "utility"],
 
     start() {
 

@@ -17,6 +17,7 @@ export default definePlugin({
     name: "CustomFolderIcons",
     description: () => t(plugin.customFolderIcons.description),
     authors: [Devs.sadan],
+    tags: ["customisation", "appearance", "organisation", "servers"],
     settings,
 
     patches: [

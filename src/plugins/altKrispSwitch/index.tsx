@@ -13,6 +13,7 @@ export default definePlugin({
     name: "AltKrispSwitch",
     description: () => t(plugin.altKrispSwitch.description),
     authors: [Devs.newwares],
+    tags: ["voice"],
 
     patches: [
         {

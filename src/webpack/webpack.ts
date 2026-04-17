@@ -17,6 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import { traceFunction } from "@debug/Tracer";
 import { FluxStore } from "@plexcord/discord-types";
 import { ModuleExports, ModuleFactory, WebpackRequire } from "@plexcord/discord-types/webpack";
 import { makeLazy, proxyLazy } from "@utils/lazy";
@@ -25,7 +26,6 @@ import { Logger } from "@utils/Logger";
 import { canonicalizeMatch } from "@utils/patches";
 import { escapeRegExp } from "@utils/text";
 
-import { traceFunction } from "../debug/Tracer";
 import type { AnyModuleFactory, AnyWebpackRequire } from "./types";
 
 const logger = new Logger("Webpack");

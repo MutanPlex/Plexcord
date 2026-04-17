@@ -66,6 +66,7 @@ export default definePlugin({
     name: "Translate",
     description: () => t(plugin.translate.description),
     authors: [Devs.Ven, Devs.AshtonMemer],
+    tags: ["chat", "utility"],
     dependencies: ["ChatInputButtonAPI", "MessagePopoverAPI"],
     settings,
 

@@ -18,6 +18,7 @@ export default definePlugin({
     name: "UserAreaAPI",
     description: () => t(plugins.metadata.api.description.userArea),
     authors: [Devs.prism],
+    tags: ["appearance", "utility"],
 
     patches: [
         {

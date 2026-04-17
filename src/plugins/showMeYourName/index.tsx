@@ -1094,6 +1094,7 @@ export default definePlugin({
     name: "ShowMeYourName",
     description: () => t(plugin.showMeYourName.description),
     authors: [Devs.Rini, Devs.TheKodeToad, PcDevs.Etorix, Devs.sadan, PcDevs.MutanPlex],
+    tags: ["customisation", "appearance", "chat", "friends"],
     settings,
 
     UserStore,
@@ -1161,7 +1162,7 @@ export default definePlugin({
             // Attach the group ID to their messages to allow animating gradients within a group.
             find: "CUSTOM_GIFT?\"\":",
             replacement: {
-                match: /(isHovered:(\i).{0,1300}?\(\i,\i,\i\);)(let \i=\i.id===\i)/,
+                match: /(isHovered:(\i).{0,1300})(let \i=\i.id===\i,\i=)/,
                 replace: "$1arguments[0].message.showMeYourNameGroupId=!!arguments[0].groupId?`g-${arguments[0].groupId}`:null;$self.handleHoveringMessage(arguments[0].message,$2);$3"
             },
         },

@@ -78,6 +78,7 @@ export default definePlugin({
     name: "Remix",
     description: () => t(plugin.remix.description),
     authors: [PcDevs.MrDiamond, PcDevs.meowabyte],
+    tags: ["media", "fun", "utility"],
 
     contextMenus: {
         "channel-attach": UploadContextMenuPatch,

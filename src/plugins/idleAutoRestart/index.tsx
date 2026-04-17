@@ -41,6 +41,7 @@ export default definePlugin({
     name: "IdleAutoRestart",
     description: () => t(plugin.idleAutoRestart.description),
     authors: [PcDevs.SteelTech, PcDevs.MutanPlex],
+    tags: ["utility"],
     settings,
 
     toolboxActions: () => ({

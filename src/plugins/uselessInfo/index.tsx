@@ -580,6 +580,7 @@ export default definePlugin({
     name: "UselessInfo",
     description: () => t(plugin.uselessInfo.description),
     authors: [PcDevs.He4vuc],
+    tags: ["fun", "notifications", "shortcuts"],
     settings,
 
     async start() {

@@ -14,6 +14,7 @@ export default definePlugin({
     name: "CleanChannelName",
     description: () => t(plugin.cleanChannelName.description),
     authors: [Devs.AutumnVN, PcDevs.MutanPlex],
+    tags: ["servers", "appearance"],
 
     patches: [
         {

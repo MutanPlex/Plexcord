@@ -32,6 +32,7 @@ export default definePlugin({
     name: "PermissionFreeWill",
     description: () => t(plugin.permissionFreeWill.description),
     authors: [Devs.lewisakura],
+    tags: ["servers", "roles", "utility"],
 
     patches: [
         // Permission lockout, just set the check to true

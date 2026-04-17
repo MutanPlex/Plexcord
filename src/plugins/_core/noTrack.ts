@@ -38,6 +38,7 @@ export default definePlugin({
     name: "NoTrack",
     description: () => t(plugin.noTrack.description),
     authors: [Devs.Cyn, Devs.Ven, Devs.Nuckyz, Devs.Arrow, PcDevs.MutanPlex],
+    tags: ["privacy", "utility"],
     required: true,
     settings,
 

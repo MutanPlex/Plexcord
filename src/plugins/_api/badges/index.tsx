@@ -138,6 +138,7 @@ export default definePlugin({
     name: "BadgeAPI",
     description: () => t(plugins.metadata.badges.description),
     authors: [Devs.Megu, Devs.Ven, Devs.TheSun, PcDevs.MutanPlex],
+    tags: ["appearance", "utility"],
     required: true,
 
     patches: [

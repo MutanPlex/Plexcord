@@ -25,6 +25,7 @@ export default definePlugin({
     name: "NoUnblockToJump",
     description: () => t(plugin.noUnblockToJump.description),
     authors: [Devs.dzshn],
+    tags: ["chat", "utility", "privacy"],
 
     patches: [
         {

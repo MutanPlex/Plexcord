@@ -169,6 +169,8 @@ export default definePlugin({
     authors: [Devs.Inbestigator],
     dependencies: ["AudioPlayerAPI"],
 
+    tags: ["notifications", "chat"],
+
     flux: {
         async MESSAGE_CREATE({ message, guildId, channelId }: IMessageCreate): Promise<void> {
             try {

@@ -24,6 +24,7 @@ export default definePlugin({
     name: "UnlockedAvatarZoom",
     description: () => t(plugin.unlockedAvatarZoom.description),
     authors: [Devs.nakoyasha],
+    tags: ["appearance", "customisation", "utility"],
     settings,
 
     patches: [

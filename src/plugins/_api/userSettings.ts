@@ -25,6 +25,7 @@ export default definePlugin({
     name: "UserSettingsAPI",
     description: () => t(plugins.metadata.api.description.userSettings),
     authors: [Devs.Nuckyz],
+    tags: ["utility", "developers"],
 
     patches: [
         {

@@ -40,6 +40,7 @@ export default definePlugin({
     name: "GitHubRepos",
     description: () => t(plugin.gitHubRepos.description),
     authors: [PcDevs.talhakf, PcDevs.Panniku, PcDevs.benjii, PcDevs.MutanPlex],
+    tags: ["developers", "appearance", "utility"],
     settings,
 
     patches: [

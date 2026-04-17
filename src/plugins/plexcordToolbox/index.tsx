@@ -78,6 +78,7 @@ export default definePlugin({
     name: "PlexcordToolbox",
     description: () => t(plugin.plexcordToolbox.description),
     authors: [Devs.Ven, Devs.AutumnVN, PcDevs.MutanPlex],
+    tags: ["utility", "developers"],
     dependencies: ["HeaderBarAPI"],
 
     settings,

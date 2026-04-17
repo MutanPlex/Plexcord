@@ -81,6 +81,7 @@ export default definePlugin({
     name: "WebContextMenus",
     description: () => t(plugin.webContextMenus.description),
     authors: [Devs.Ven],
+    tags: ["utility", "chat", "media"],
     enabledByDefault: true,
     required: IS_PLEXTRON,
 

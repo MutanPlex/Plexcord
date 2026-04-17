@@ -23,6 +23,7 @@ export default definePlugin({
     name: "NotificationTitle",
     description: () => t(plugin.notificationTitle.description),
     authors: [Devs.Kyuuhachi, PcDevs.MutanPlex],
+    tags: ["notifications", "chat", "utility"],
 
     patches: [
         {

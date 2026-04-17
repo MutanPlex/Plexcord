@@ -13,6 +13,7 @@ export default definePlugin({
     name: "WebScreenShareFixes",
     description: () => t(plugin.webScreenShareFixes.description),
     authors: [Devs.Kaitlyn],
+    tags: ["voice", "utility"],
     enabledByDefault: true,
 
     patches: [

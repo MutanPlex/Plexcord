@@ -43,6 +43,7 @@ export default definePlugin({
     name: "CtrlEnterSend",
     description: () => t(plugin.ctrlEnterSend.description),
     authors: [Devs.UlyssesZhan],
+    tags: ["chat", "shortcuts"],
     settings,
 
     patches: [

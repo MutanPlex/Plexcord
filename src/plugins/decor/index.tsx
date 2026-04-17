@@ -30,6 +30,7 @@ export default definePlugin({
     name: "Decor",
     description: () => t(plugin.decor.description),
     authors: [Devs.FieryFlames],
+    tags: ["appearance", "customisation"],
 
     patches: [
         // Patch MediaResolver to return correct URL for Decor avatar decorations

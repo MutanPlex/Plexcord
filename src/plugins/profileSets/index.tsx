@@ -33,6 +33,7 @@ export default definePlugin({
     name: "ProfileSets",
     description: () => t(plugin.profileSets.description),
     authors: [PcDevs.omaw, PcDevs.justjxke],
+    tags: ["appearance", "customisation", "utility"],
     settings,
     patches: [
         {

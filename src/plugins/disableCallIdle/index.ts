@@ -25,6 +25,7 @@ export default definePlugin({
     name: "DisableCallIdle",
     description: () => t(plugin.disableCallIdle.description),
     authors: [Devs.Nuckyz],
+    tags: ["voice", "utility"],
 
     patches: [
         {

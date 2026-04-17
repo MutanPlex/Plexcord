@@ -65,6 +65,7 @@ export default definePlugin({
     name: "CrashHandler",
     description: () => t(plugin.crashHandler.description),
     authors: [Devs.Nuckyz],
+    tags: ["utility"],
     enabledByDefault: true,
     settings,
 

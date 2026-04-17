@@ -166,6 +166,7 @@ export default definePlugin({
     name: "ShowConnections",
     description: () => t(plugin.showConnections.description),
     authors: [Devs.TheKodeToad],
+    tags: ["friends", "appearance", "utility"],
     settings,
 
     patches: [

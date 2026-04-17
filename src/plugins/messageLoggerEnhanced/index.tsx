@@ -294,6 +294,7 @@ export default definePlugin({
     name: "MessageLoggerEnhanced",
     authors: [Devs.Aria, PcDevs.MutanPlex],
     description: () => t(plugin.messageLoggerEnhanced.description),
+    tags: ["chat", "utility", "developers"],
     dependencies: ["HeaderBarAPI", "MessageLogger"],
     patches: [
         {

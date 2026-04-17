@@ -97,6 +97,7 @@ export default definePlugin({
     name: "IgnoreCalls",
     description: () => t(plugin.ignoreCalls.description),
     authors: [PcDevs.TheArmagan, Devs.thororen],
+    tags: ["voice", "notifications", "privacy", "utility"],
     settings,
 
     patches: [

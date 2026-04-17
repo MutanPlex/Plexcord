@@ -14,6 +14,7 @@ export default definePlugin({
     name: "BetterPlusReacts",
     description: () => t(plugin.betterPlusReacts.description),
     authors: [Devs.Joona],
+    tags: ["reactions", "chat"],
 
     patches: [
         {

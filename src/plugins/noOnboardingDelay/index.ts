@@ -25,6 +25,7 @@ export default definePlugin({
     name: "NoOnboardingDelay",
     description: () => t(plugin.noOnboardingDelay.description),
     authors: [Devs.nekohaxx],
+    tags: ["servers", "utility"],
 
     patches: [
         {

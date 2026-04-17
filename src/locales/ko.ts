@@ -922,6 +922,29 @@ const translations: MatchStructure<typeof enTranslations> = {
     },
 
     plugin: {
+        tags: {
+            accessibility: "접근성",
+            activity: "활동",
+            appearance: "외관",
+            chat: "채팅",
+            commands: "명령",
+            console: "콘솔",
+            customisation: "사용자 지정",
+            developers: "개발자",
+            emotes: "이모트",
+            friends: "친구",
+            fun: "재미",
+            media: "미디어",
+            notifications: "알림",
+            organisation: "정리",
+            privacy: "개인정보",
+            reactions: "반응",
+            roles: "역할",
+            servers: "서버",
+            shortcuts: "단축키",
+            utility: "유틸리티",
+            voice: "음성"
+        },
         noTrack: {
             name: "NoTrack",
             description: "Discord의 추적(분석/'과학'), 측정항목 및 Sentry 충돌 보고를 비활성화합니다.",

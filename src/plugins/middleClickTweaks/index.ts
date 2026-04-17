@@ -104,6 +104,7 @@ export default definePlugin({
     name: "MiddleClickTweaks",
     description: () => t(plugin.middleClickTweaks.description),
     authors: [PcDevs.Etorix, PcDevs.korzi, PcDevs.MutanPlex],
+    tags: ["shortcuts", "utility"],
     settings,
 
     isPastingDisabled(isInput: boolean) {

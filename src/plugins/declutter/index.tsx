@@ -156,6 +156,7 @@ export default definePlugin({
     name: "Declutter",
     description: () => t(plugin.declutter.description),
     authors: [PcDevs.Leon135, Devs.prism, Devs.Kyuuhachi],
+    tags: ["appearance", "customisation", "accessibility"],
     settings,
     patches: [
         {

@@ -29,6 +29,7 @@ export default definePlugin({
     name: "GifPaste",
     description: () => t(plugin.gifPaste.description),
     authors: [Devs.Ven, PcDevs.MutanPlex],
+    tags: ["chat", "media", "utility"],
 
     patches: [{
         find: "handleSelectGIF=",

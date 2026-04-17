@@ -72,6 +72,7 @@ export default definePlugin({
     name: "ReviewDB",
     description: () => t(plugin.reviewDB.description),
     authors: [Devs.mantikafasi, Devs.Ven],
+    tags: ["servers", "friends", "utility"],
 
     settings,
     contextMenus: {

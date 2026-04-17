@@ -21,6 +21,7 @@ export default definePlugin({
     name: "BetterBlockedUsers",
     description: () => t(plugin.betterBlockedUsers.description),
     authors: [PcDevs.TheArmagan, PcDevs.MutanPlex],
+    tags: ["privacy", "friends"],
 
     patches: [
         {

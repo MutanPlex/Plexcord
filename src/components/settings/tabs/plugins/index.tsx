@@ -20,7 +20,7 @@
 import "./styles.css";
 
 import * as DataStore from "@api/DataStore";
-import i18n, { plugins, settings, SUPPORTED_LANGUAGES, t, useTranslation } from "@api/i18n";
+import i18n, { plugin, plugins, settings, SUPPORTED_LANGUAGES, t, useTranslation } from "@api/i18n";
 import { isPluginEnabled, stopPlugin } from "@api/PluginManager";
 import { Settings, useSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
@@ -39,7 +39,8 @@ import { Logger } from "@utils/Logger";
 import { Margins } from "@utils/margins";
 import { classes } from "@utils/misc";
 import { useAwaiter, useCleanupEffect } from "@utils/react";
-import { Alerts, lodash, Parser, React, Select, TextInput, Toasts, Tooltip, useMemo, useState } from "@webpack/common";
+import { PluginTag, PluginTagList } from "@utils/types";
+import { Alerts, lodash, Parser, React, SearchableSelect, Select, TextInput, Toasts, Tooltip, useMemo, useRef, useState } from "@webpack/common";
 import { JSX } from "react";
 
 import Plugins, { ExcludedPlugins, PluginMeta } from "~plugins"; // Avoid circular dependency
@@ -191,7 +192,8 @@ function ExcludedPluginsList({ search }: { search: string; }) {
 
 function PluginSettings() {
     const settings = useSettings();
-    const changes = useMemo(() => new ChangeList<string>(), []);
+    const changeRef = useRef<ChangeList<string>>(null);
+    const changes = changeRef.current ??= new ChangeList<string>();
 
     useCleanupEffect(() => {
         if (changes.hasChanges)
@@ -235,14 +237,13 @@ function PluginSettings() {
 
     const hasUserPlugins = useMemo(() => !IS_STANDALONE && Object.values(PluginMeta).some(m => m.userPlugin), []);
 
-    const [searchValue, setSearchValue] = useState({ value: "", status: SearchStatus.ALL });
+    const [searchValue, setSearchValue] = useState({ value: "", tags: [] as PluginTag[], status: SearchStatus.ALL });
 
     const search = searchValue.value.toLowerCase();
     const onSearch = (query: string) => setSearchValue(prev => ({ ...prev, value: query }));
-    const onStatusChange = (status: SearchStatus) => setSearchValue(prev => ({ ...prev, status }));
 
     const pluginFilter = (plugin: typeof Plugins[keyof typeof Plugins]) => {
-        const { status } = searchValue;
+        const { status, tags } = searchValue;
         const pluginName = getName(plugin.name);
         const enabled = isPluginEnabled(pluginName);
 
@@ -264,6 +265,8 @@ function PluginSettings() {
                 break;
         }
 
+        if (tags.length && tags.some(t => !plugin.tags?.includes(t))) return false;
+
         if (!search.length) return true;
 
         const displayDesc = plugin.displayDescription;
@@ -276,7 +279,7 @@ function PluginSettings() {
         return (
             pluginName.toLowerCase().includes(search) ||
             description.toLowerCase().includes(search) ||
-            plugin.tags?.some(t => t.toLowerCase().includes(search)) ||
+            plugin.searchTerms?.some(t => t.toLowerCase().includes(search)) ||
             resolvedDisplayDesc.toLowerCase().includes(search)
         );
     };
@@ -404,29 +407,43 @@ function PluginSettings() {
                 {t(plugins.filters.label)}
             </HeadingTertiary>
 
-            <div className={classes(Margins.bottom20, cl("filter-controls"))}>
-                <ErrorBoundary noop>
-                    <TextInput autoFocus value={searchValue.value} placeholder={t(plugins.filters.placeholder)} onChange={onSearch} />
-                </ErrorBoundary>
-                <div>
-                    <ErrorBoundary noop>
-                        <Select
-                            options={[
-                                { label: t(plugins.filters.option.all), value: SearchStatus.ALL, default: true },
-                                { label: t(plugins.filters.option.enabled), value: SearchStatus.ENABLED },
-                                { label: t(plugins.filters.option.disabled), value: SearchStatus.DISABLED },
-                                { label: t(plugins.filters.option.new), value: SearchStatus.NEW },
-                                hasUserPlugins && { label: t(plugins.filters.option.userplugins), value: SearchStatus.USER_PLUGINS },
-                                IS_DEV && { label: t(plugins.filters.option.api), value: SearchStatus.API_PLUGINS },
-                            ].filter(isTruthy)}
-                            serialize={String}
-                            select={onStatusChange}
-                            isSelected={v => v === searchValue.status}
-                            closeOnSelect={true}
-                        />
-                    </ErrorBoundary>
+            <ErrorBoundary noop>
+                <TextInput
+                    inputClassName={cl("filter-control")}
+                    placeholder={t(plugins.filters.placeholder)}
+                    value={searchValue.value}
+                    onChange={onSearch}
+                    autoFocus
+                />
+            </ErrorBoundary>
+
+            <ErrorBoundary noop>
+                <div className={classes(Margins.bottom20, Margins.top20, cl("filter-controls"))}>
+                    <Select
+                        options={[
+                            { label: t(plugins.filters.option.all), value: SearchStatus.ALL, default: true },
+                            { label: t(plugins.filters.option.enabled), value: SearchStatus.ENABLED },
+                            { label: t(plugins.filters.option.disabled), value: SearchStatus.DISABLED },
+                            { label: t(plugins.filters.option.new), value: SearchStatus.NEW },
+                            hasUserPlugins && { label: t(plugins.filters.option.userplugins), value: SearchStatus.USER_PLUGINS },
+                            IS_DEV && { label: t(plugins.filters.option.api), value: SearchStatus.API_PLUGINS },
+                        ].filter(isTruthy)}
+                        serialize={String}
+                        select={status => setSearchValue(prev => ({ ...prev, status }))}
+                        isSelected={v => v === searchValue.status}
+                        closeOnSelect={true}
+                        placeholder={t(plugins.filters.option.tags)}
+                    />
+                    <SearchableSelect
+                        options={PluginTagList.map(tag => ({ label: t(plugin.tags[tag]), value: tag }))}
+                        value={searchValue.tags}
+                        onChange={tags => setSearchValue(prev => ({ ...prev, tags }))}
+                        closeOnSelect={false}
+                        placeholder={t(plugins.filters.option.tags)}
+                        multi
+                    />
                 </div>
-            </div>
+            </ErrorBoundary>
 
             <HeadingTertiary className={Margins.top20}>{t(plugins.title)}</HeadingTertiary>
 

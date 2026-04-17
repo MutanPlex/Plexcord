@@ -83,6 +83,7 @@ export default definePlugin({
     name: "BetterSettings",
     description: () => t(plugin.betterSettings.description),
     authors: [Devs.Kyuuhachi],
+    tags: ["utility", "organisation"],
     settings,
 
     start() {

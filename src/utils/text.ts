@@ -201,7 +201,6 @@ export function toInlineCode(s: string) {
     return "``" + ZWSP + s.replaceAll("`", ZWSP + "`" + ZWSP) + ZWSP + "``";
 }
 
-const regExpEscape = (RegExp as unknown as { escape?: (s: string) => string; }).escape;
-export const escapeRegExp: (s: string) => string = regExpEscape ?? function (s: string) {
+export const escapeRegExp: (s: string) => string = RegExp.escape ?? function (s: string) {
     return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 };

@@ -43,6 +43,7 @@ export default definePlugin({
     description: () => t(plugin.searchFix.description),
     settingsAboutComponent: () => settingsComponent(),
     authors: [PcDevs.Jaxx, PcDevs.MutanPlex],
+    tags: ["chat", "utility"],
 
     patches: [
         {

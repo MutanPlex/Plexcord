@@ -286,6 +286,7 @@ export default definePlugin({
     name: "BetterAudioPlayer",
     description: () => t(plugin.betterAudioPlayer.description),
     authors: [PcDevs.creations],
+    tags: ["media"],
     settings,
     patches: [
         {

@@ -29,6 +29,7 @@ export default definePlugin({
     name: "RevealAllSpoilers",
     description: () => t(plugin.revealAllSpoilers.description),
     authors: [Devs.whqwert],
+    tags: ["chat", "utility"],
 
     patches: [
         {

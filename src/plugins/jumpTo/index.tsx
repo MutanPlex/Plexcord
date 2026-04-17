@@ -130,6 +130,7 @@ export default definePlugin({
     name: "JumpTo",
     description: () => t(plugin.jumpTo.description),
     authors: [Devs.Samwich, Devs.thororen],
+    tags: ["chat", "shortcuts", "utility"],
     contextMenus: {
         "channel-context": ChannelMenuPatch,
         "gdm-context": ChannelMenuPatch,

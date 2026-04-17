@@ -42,6 +42,7 @@ export default definePlugin({
     name: "ShowAllMessageButtons",
     description: () => t(plugin.showAllMessageButtons.description),
     authors: [Devs.Nuckyz, PcDevs.mochienya],
+    tags: ["chat", "utility"],
     settings,
 
     patches: [

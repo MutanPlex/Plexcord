@@ -13,6 +13,7 @@ export default definePlugin({
     name: "BypassPinPrompt",
     description: () => t(plugin.bypassPinPrompt.description),
     authors: [Devs.thororen],
+    tags: ["chat", "utility"],
     patches: [
         ...[
             'source:"message-actions"',

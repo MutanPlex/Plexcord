@@ -146,6 +146,7 @@ export default definePlugin({
     name: "VcNarrator",
     description: () => t(plugin.vcNarrator.description),
     authors: [Devs.Ven],
+    tags: ["voice", "accessibility", "utility"],
     reporterTestable: ReporterTestable.None,
     settings,
 

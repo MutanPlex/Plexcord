@@ -57,6 +57,7 @@ export default definePlugin({
     name: "UserVoiceShow",
     description: () => t(plugin.userVoiceShow.description),
     authors: [Devs.Nuckyz, Devs.LordElias, PcDevs.omaw],
+    tags: ["voice", "servers", "friends", "utility"],
     dependencies: ["NicknameIconsAPI", "MemberListDecoratorsAPI", "MessageDecorationsAPI"],
     settings,
 

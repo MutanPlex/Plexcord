@@ -77,6 +77,7 @@ export default definePlugin({
     name: "BlockKeywords",
     description: () => t(plugin.blockKeywords.description),
     authors: [PcDevs.catcraft, PcDevs.MutanPlex],
+    tags: ["privacy", "chat"],
 
     patches: [
         {

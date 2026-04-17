@@ -175,6 +175,7 @@ export default definePlugin({
     name: "SendTimestamps",
     description: () => t(plugin.sendTimestamps.description),
     authors: [Devs.Ven, Devs.Tyler, Devs.Grzesiek11],
+    tags: ["chat", "utility"],
     settings,
 
     chatBarButton: {

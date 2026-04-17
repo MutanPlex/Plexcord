@@ -100,6 +100,7 @@ export default definePlugin({
     name: "PingNotifications",
     description: () => t(plugin.pingNotifications.description),
     authors: [PcDevs.smuki, PcDevs.MutanPlex],
+    tags: ["notifications", "chat", "utility"],
     settings,
 
     flux: {

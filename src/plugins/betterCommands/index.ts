@@ -38,6 +38,7 @@ export default definePlugin({
     name: "BetterCommands",
     description: () => t(plugin.betterCommands.description),
     authors: [Devs.thororen],
+    tags: ["commands"],
     settings,
 
     patches: [

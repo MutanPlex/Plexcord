@@ -25,6 +25,7 @@ export default definePlugin({
     name: "ILoveSpam",
     description: () => t(plugin.iLoveSpam.description),
     authors: [Devs.botato, Devs.Nyako],
+    tags: ["chat", "fun", "utility"],
 
     patches: [
         {

@@ -172,6 +172,7 @@ export default definePlugin({
     name: "AppleMusicRichPresence",
     description: () => t(plugin.appleMusic.description),
     authors: [Devs.RyanCaoDev],
+    tags: ["activity", "media"],
     hidden: !IS_MAC,
     reporterTestable: ReporterTestable.None,
 

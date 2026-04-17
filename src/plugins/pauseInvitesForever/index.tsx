@@ -47,6 +47,7 @@ export default definePlugin({
     name: "PauseInvitesForever",
     description: () => t(plugin.pauseInvitesForever.description),
     authors: [Devs.Dolfies, Devs.amia],
+    tags: ["servers", "utility"],
 
     patches: [
         {

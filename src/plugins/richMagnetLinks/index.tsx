@@ -15,6 +15,7 @@ export default definePlugin({
     name: "RichMagnetLinks",
     description: () => t(plugin.richMagnetLinks.description),
     authors: [PcDevs.cassie, PcDevs.mochienya, PcDevs.MutanPlex],
+    tags: ["chat", "utility"],
 
     patches: [
         {

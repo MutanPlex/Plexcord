@@ -56,6 +56,7 @@ export default definePlugin({
     name: "Summaries",
     description: () => t(plugin.summaries.description),
     authors: [Devs.mantikafasi],
+    tags: ["chat", "servers", "utility"],
     settings,
 
     patches: [

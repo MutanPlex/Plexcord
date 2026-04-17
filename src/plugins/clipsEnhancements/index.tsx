@@ -81,6 +81,7 @@ export default definePlugin({
     name: "ClipsEnhancements",
     description: () => t(plugin.clipsEnhancements.description),
     authors: [Devs.niko],
+    tags: ["media", "activity"],
 
     settings,
     patches: [

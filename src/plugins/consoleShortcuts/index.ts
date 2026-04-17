@@ -18,6 +18,7 @@
 */
 
 import { plugin, t } from "@api/i18n";
+import { loadLazyChunks } from "@debug/loadLazyChunks";
 import { Devs } from "@utils/constants";
 import { getCurrentChannel, getCurrentGuild } from "@utils/discord";
 import { runtimeHashMessageKey } from "@utils/intlHash";
@@ -30,7 +31,6 @@ import definePlugin, { PluginNative, StartAt } from "@utils/types";
 import * as Webpack from "@webpack";
 import { extract, filters, findAll, findModuleId, search } from "@webpack";
 import * as Common from "@webpack/common";
-import { loadLazyChunks } from "debug/loadLazyChunks";
 import type { ComponentType } from "react";
 
 const DESKTOP_ONLY = (f: string) => () => {
@@ -245,6 +245,7 @@ export default definePlugin({
     name: "ConsoleShortcuts",
     description: () => t(plugin.consoleShortcuts.description),
     authors: [Devs.Ven],
+    tags: ["console", "developers"],
     startAt: StartAt.Init,
 
     patches: [

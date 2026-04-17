@@ -104,6 +104,7 @@ export default definePlugin({
     name: "FindReply",
     description: () => t(plugin.findReply.description),
     authors: [Devs.newwares],
+    tags: ["chat", "utility"],
     dependencies: ["MessagePopoverAPI"],
     settings,
 

@@ -70,6 +70,7 @@ export default definePlugin({
     name: "InstantScreenshare",
     description: () => t(plugin.instantScreenshare.description),
     authors: [Devs.HAHALOSAH, Devs.thororen, PcDevs.mart],
+    tags: ["voice", "media", "shortcuts", "utility"],
     dependencies: ["PlexcordToolbox"],
     autoStartStream,
     settings,

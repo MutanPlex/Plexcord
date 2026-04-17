@@ -323,6 +323,7 @@ export default definePlugin({
     name: "KeywordNotify",
     authors: [PcDevs.camila314, PcDevs.x3rt],
     description: () => t(plugin.keywordNotify.description),
+    tags: ["notifications", "chat", "utility"],
     settings,
 
     patches: [

@@ -25,6 +25,7 @@ export default definePlugin({
     name: "NoRPC",
     description: () => t(plugin.noRPC.description),
     authors: [Devs.Cyn],
+    tags: ["activity", "privacy", "utility"],
 
     patches: [
         {

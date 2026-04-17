@@ -13,6 +13,7 @@ export default definePlugin({
     name: "ShowSongName",
     description: () => t(plugin.showSongName.description),
     authors: [Devs.prism, PcDevs.MutanPlex],
+    tags: ["activity", "media", "utility"],
 
     patches: [{
         find: '.join(", ");return{text:',

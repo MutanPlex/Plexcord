@@ -122,6 +122,7 @@ function ChatBadges({ author }: { author: User; }) {
 export default definePlugin({
     name: "ShowBadgesInChat",
     authors: [Devs.Inbestigator, PcDevs.KrystalSkull, PcDevs.MutanPlex],
+    tags: ["chat", "appearance", "utility"],
     description: () => t(plugin.showBadgesInChat.description),
     settings,
 

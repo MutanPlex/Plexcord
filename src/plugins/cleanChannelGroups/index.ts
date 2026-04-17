@@ -13,6 +13,7 @@ export default definePlugin({
     name: "CleanChannelGroups",
     description: () => t(plugin.cleanChannelGroups.description),
     authors: [PcDevs.justjxke, PcDevs.MutanPlex],
+    tags: ["servers", "organisation"],
     patches: [
         {
             find: '"placeholder-channel-id"',

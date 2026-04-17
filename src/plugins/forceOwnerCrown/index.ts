@@ -27,6 +27,7 @@ export default definePlugin({
     name: "ForceOwnerCrown",
     description: () => t(plugin.forceOwnerCrown.description),
     authors: [Devs.D3SOX, Devs.Nickyux],
+    tags: ["servers", "appearance"],
 
     patches: [
         {

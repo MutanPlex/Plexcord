@@ -24,6 +24,7 @@ export default definePlugin({
     name: "NoMosaic",
     authors: [Devs.AutumnVN],
     description: () => t(plugin.noMosaic.description),
+    tags: ["appearance", "media", "chat"],
     settings,
 
     patches: [

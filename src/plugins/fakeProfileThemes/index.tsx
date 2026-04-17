@@ -195,6 +195,7 @@ export default definePlugin({
     name: "FakeProfileThemes",
     description: () => t(plugin.fakeProfileThemes.description),
     authors: [Devs.Alyxia, Devs.Remty],
+    tags: ["appearance", "customisation"],
 
     patches: [
         {

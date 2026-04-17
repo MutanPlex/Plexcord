@@ -78,6 +78,7 @@ export default definePlugin({
     name: "CopyStickerLinks",
     description: () => t(plugin.copyStickerLinks.description),
     authors: [Devs.Ven, Devs.Byeoon],
+    tags: ["emotes", "media", "utility"],
 
     contextMenus: {
         "message": messageContextMenuPatch,

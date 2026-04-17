@@ -127,6 +127,7 @@ export default definePlugin({
     name: "Signature",
     description: () => t(plugin.signature.description),
     authors: [Devs.Ven, Devs.Rini, Devs.ImBanana, PcDevs.KrystalSkull, PcDevs.MutanPlex],
+    tags: ["chat", "customisation", "utility"],
     dependencies: ["MessageEventsAPI", "ChatInputButtonAPI"],
 
     chatBarButton: {

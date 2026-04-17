@@ -40,6 +40,7 @@ export default definePlugin({
     name: "StreamerModeOnStream",
     description: () => t(plugin.streamerModeOnStream.description),
     authors: [Devs.IcedMarina],
+    tags: ["privacy", "activity", "utility"],
 
     flux: {
         STREAM_CREATE: d => toggleStreamerMode(d, true),

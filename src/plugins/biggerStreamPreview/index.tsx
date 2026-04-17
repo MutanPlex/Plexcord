@@ -92,6 +92,7 @@ export default definePlugin({
     name: "BiggerStreamPreview",
     description: () => t(plugin.biggerStreamPreview.description),
     authors: [Devs.phil],
+    tags: ["media"],
 
     contextMenus: {
         "user-context": userContextPatch,

@@ -105,6 +105,7 @@ export default definePlugin({
     name: "CustomUserColors",
     description: () => t(plugin.customUserColors.description),
     authors: [PcDevs.mochienya, PcDevs.MutanPlex],
+    tags: ["appearance", "customisation", "chat"],
     contextMenus: {
         "user-context": userContextMenuPatch,
         "gdm-context": channelContextMenuPatch,

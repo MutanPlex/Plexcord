@@ -154,6 +154,7 @@ export default definePlugin({
     name: "CallTimer",
     description: () => t(plugin.callTimer.description),
     authors: [Devs.D3SOX, PcDevs.Max, PcDevs.MutanPlex],
+    tags: ["voice", "utility"],
     settings,
     managedStyle: alignedChatInputFix,
 

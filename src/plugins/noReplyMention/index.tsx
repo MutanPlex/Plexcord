@@ -67,6 +67,7 @@ export default definePlugin({
     name: "NoReplyMention",
     description: () => t(plugin.noReplyMention.description),
     authors: [Devs.DustyAngel47, Devs.rae, Devs.pylix, Devs.outfoxxed],
+    tags: ["chat", "notifications", "utility"],
     settings,
 
     shouldMention(message: Message, isHoldingShift: boolean) {

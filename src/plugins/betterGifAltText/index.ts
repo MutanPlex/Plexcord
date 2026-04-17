@@ -25,6 +25,7 @@ export default definePlugin({
     name: "BetterGifAltText",
     description: () => t(plugin.betterGifAltText.description),
     authors: [Devs.Ven],
+    tags: ["accessibility"],
 
     patches: [
         {

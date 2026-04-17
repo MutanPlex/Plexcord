@@ -25,6 +25,7 @@ export default definePlugin({
     name: "MessageUpdaterAPI",
     description: () => t(plugins.metadata.api.description.messageUpdater),
     authors: [Devs.Nuckyz],
+    tags: ["chat", "utility"],
 
     patches: [
         {

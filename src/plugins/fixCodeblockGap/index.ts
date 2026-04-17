@@ -25,6 +25,7 @@ export default definePlugin({
     name: "FixCodeblockGap",
     description: () => t(plugin.fixCodeblockGap.description),
     authors: [Devs.Grzesiek11],
+    tags: ["chat", "appearance", "utility"],
 
     patches: [
         {

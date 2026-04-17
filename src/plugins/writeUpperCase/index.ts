@@ -39,6 +39,7 @@ export default definePlugin({
     name: "WriteUpperCase",
     description: () => t(plugin.writeUpperCase.description),
     authors: [Devs.Samwich, PcDevs.KrystalSkull],
+    tags: ["chat", "utility"],
     settings,
 
     start() {

@@ -364,6 +364,11 @@
     border-bottom-right-radius: 8px;
 }
 
+/* Prevent completion confetti from covering quest buttons */
+div[id^="quest-tile-"] div[class^="confetti__"] {
+    pointer-events: none;
+}
+
 .questify-sub-inline-group [class*="swatch"]:nth-child(1) {
     width: 38px;
     min-width: 38px;

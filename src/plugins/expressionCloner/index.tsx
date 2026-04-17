@@ -232,7 +232,7 @@ function CloneModal({ data }: { data: Sticker | Emoji; }) {
         <>
             <Heading className={Margins.top20}>{t(plugin.expressionCloner.modal.title)}</Heading>
             <CheckedTextInput
-                value={name}
+                initialValue={name}
                 onChange={v => {
                     data.name = v;
                     setName(v);
@@ -411,6 +411,7 @@ export default definePlugin({
     name: "ExpressionCloner",
     description: () => t(plugin.expressionCloner.description),
     authors: [Devs.Ven, Devs.Nuckyz],
+    tags: ["emotes", "servers", "utility"],
 
     contextMenus: {
         "message": messageContextMenuPatch,

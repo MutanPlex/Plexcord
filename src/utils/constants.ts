@@ -457,8 +457,8 @@ export const Devs = /* #__PURE__*/ Object.freeze({
         name: "Kyuuhachi",
         id: 236588665420251137n
     },
-    nin0dev: {
-        name: "nin0dev",
+    nin0: {
+        name: "nin0",
         id: 1395533040914141235n
     },
     Elvyra: {
@@ -976,11 +976,7 @@ export const PcDevs = /* #__PURE__*/ Object.freeze({
     estiwen: {
         name: "estiwen",
         id: 1332150572362760234n
-    },
-    nin0dev: {
-        name: "nin0dev",
-        id: 1395533040914141235n
-    },
+    }
 } satisfies Record<string, PcDev>);
 
 export const PcDevsById = /* #__PURE__*/ (() =>

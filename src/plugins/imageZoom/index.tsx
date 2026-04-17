@@ -327,6 +327,7 @@ export default definePlugin({
     name: "ImageZoom",
     description: () => t(plugin.imageZoom.description),
     authors: [Devs.Aria, PcDevs.Campfire],
+    tags: ["media", "utility", "accessibility"],
     managedStyle,
 
     patches: [

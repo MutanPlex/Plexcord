@@ -54,6 +54,7 @@ export default definePlugin({
     name: "DevCompanion",
     description: () => t(plugin.devCompanion.description),
     authors: [Devs.Ven, Devs.sadan],
+    tags: ["developers", "console", "utility"],
     reporterTestable: ReporterTestable.None,
     isModified: true,
     settings,

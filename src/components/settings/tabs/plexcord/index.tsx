@@ -42,7 +42,7 @@ const COZY_CONTRIB_IMAGE = "https://cdn.discordapp.com/emojis/102653307095587233
 const DONOR_BACKGROUND_IMAGE = "https://media.discordapp.net/stickers/1311070116305436712.png?size=2048";
 const CONTRIB_BACKGROUND_IMAGE = "https://media.discordapp.net/stickers/1311070166481895484.png?size=2048";
 
-import BadgeAPI from "plugins/_api/badges";
+import BadgeAPI from "@plugins/_api/badges";
 
 const cl = classNameFactory("pc-plexcord-tab-");
 

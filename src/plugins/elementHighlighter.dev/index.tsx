@@ -461,6 +461,7 @@ export default definePlugin({
     name: "ElementHighlighter",
     description: () => t(plugin.elementHighlighter.description),
     authors: [Devs.prism, PcDevs.MutanPlex],
+    tags: ["developers", "utility"],
     settings,
 
     start() {

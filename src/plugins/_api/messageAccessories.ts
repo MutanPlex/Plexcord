@@ -25,6 +25,7 @@ export default definePlugin({
     name: "MessageAccessoriesAPI",
     description: () => t(plugins.metadata.api.description.messageAccessories),
     authors: [Devs.Cyn],
+    tags: ["chat", "utility"],
 
     patches: [
         {

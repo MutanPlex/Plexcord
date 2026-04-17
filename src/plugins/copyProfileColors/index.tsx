@@ -92,6 +92,7 @@ export default definePlugin({
     name: "CopyProfileColors",
     description: () => t(plugin.copyProfileColors.description),
     authors: [PcDevs.Crxa, PcDevs.Cortex],
+    tags: ["appearance", "customisation", "utility"],
     contextMenus: {
         "user-context": userContextMenuPatch,
         "user-profile-actions": userContextMenuPatch

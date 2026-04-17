@@ -44,6 +44,7 @@ export default definePlugin({
     name: "BetterNotesBox",
     description: () => t(plugin.betterNotesBox.description),
     authors: [Devs.Ven],
+    tags: ["friends", "utility"],
     settings,
 
     patches: [

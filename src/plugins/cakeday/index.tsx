@@ -502,6 +502,7 @@ export default definePlugin({
     name: "CakeDay",
     description: () => t(plugin.cakeDay.description),
     authors: [PcDevs.MutanPlex],
+    tags: ["friends", "notifications", "fun"],
     settings,
 
     contextMenus: {

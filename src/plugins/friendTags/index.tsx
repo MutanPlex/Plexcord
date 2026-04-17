@@ -214,6 +214,7 @@ export default definePlugin({
     name: "FriendTags",
     description: () => t(plugin.friendTags.description),
     authors: [Devs.Samwich, PcDevs.MutanPlex],
+    tags: ["friends", "organisation", "shortcuts"],
     settings,
     contextMenus: {
         "user-context": userPatch

@@ -87,6 +87,7 @@ export default definePlugin({
     name: "RoleColorEverywhere",
     description: () => t(plugin.roleColorEverywhere.description),
     authors: [Devs.KingFish, Devs.lewisakura, Devs.AutumnVN, Devs.Kyuuhachi, Devs.jamesbt365, PcDevs.MutanPlex],
+    tags: ["appearance", "roles", "servers"],
     settings,
 
     patches: [

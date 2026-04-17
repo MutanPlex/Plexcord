@@ -158,6 +158,7 @@ export default definePlugin({
     name: "Dragify",
     description: () => t(plugin.dragify.description),
     authors: [PcDevs.justjxke],
+    tags: ["chat", "utility", "shortcuts"],
     settings,
 
     patches: [

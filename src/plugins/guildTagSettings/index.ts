@@ -24,6 +24,7 @@ export default definePlugin({
     name: "GuildTagSettings",
     description: () => t(plugin.guildTagSettings.description),
     authors: [Devs.thororen, PcDevs.MutanPlex],
+    tags: ["servers", "utility"],
     settings,
     patches: [
         {

@@ -133,6 +133,7 @@ export default definePlugin({
     name: "RepeatMessages",
     description: () => t(plugin.repeatMessages.description),
     authors: [PcDevs.Tolgchu, Devs.thororen],
+    tags: ["chat", "utility"],
     dependencies: ["MessagePopoverAPI"],
 
     contextMenus: {

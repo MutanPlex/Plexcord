@@ -54,6 +54,7 @@ export default definePlugin({
     name: "ServerInfo",
     description: () => t(plugin.serverInfo.description),
     authors: [Devs.Ven, Devs.Nuckyz, PcDevs.Z1xus],
+    tags: ["servers", "utility"],
     dependencies: ["DynamicImageModalAPI"],
 
     contextMenus: {

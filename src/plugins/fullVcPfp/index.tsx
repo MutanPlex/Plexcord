@@ -17,6 +17,7 @@ export default definePlugin({
     name: "FullVCPFP",
     description: () => t(plugin.fullVCPFP.description),
     authors: [PcDevs.mochienya, PcDevs.MutanPlex],
+    tags: ["voice", "appearance", "customisation"],
 
     patches: [
         {

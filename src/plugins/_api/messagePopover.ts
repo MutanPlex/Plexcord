@@ -25,6 +25,7 @@ export default definePlugin({
     name: "MessagePopoverAPI",
     description: () => t(plugins.metadata.api.description.messagePopover),
     authors: [Devs.KingFish, Devs.Ven, Devs.Nuckyz],
+    tags: ["chat", "utility"],
 
     patches: [
         {

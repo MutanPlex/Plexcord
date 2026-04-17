@@ -397,6 +397,7 @@ export default definePlugin({
     name: "StatusNotifications",
     description: () => t(plugin.statusNotifications.description),
     authors: [PcDevs.MutanPlex],
+    tags: ["notifications", "friends", "utility"],
     settings,
 
     async start() {

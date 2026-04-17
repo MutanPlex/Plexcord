@@ -181,6 +181,7 @@ export default definePlugin({
     name: "RPCStats",
     description: () => t(plugin.rpcStats.description),
     authors: [Devs.Samwich],
+    tags: ["activity", "utility"],
     async start() {
         updateData();
 

@@ -25,6 +25,7 @@ export default definePlugin({
     name: "NoticesAPI",
     description: () => t(plugins.metadata.api.description.notices),
     authors: [Devs.Ven],
+    tags: ["notifications", "utility"],
     required: true,
 
     patches: [

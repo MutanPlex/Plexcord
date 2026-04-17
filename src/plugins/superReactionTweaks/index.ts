@@ -42,6 +42,7 @@ export default definePlugin({
     name: "SuperReactionTweaks",
     description: () => t(plugin.superReactionTweaks.description),
     authors: [Devs.FieryFlames, Devs.ant0n],
+    tags: ["reactions", "fun", "utility"],
 
     patches: [
         {

@@ -24,6 +24,7 @@ export default definePlugin({
     name: "SecretRingToneEnabler",
     description: () => t(plugin.secretRingToneEnabler.description),
     authors: [Devs.AndrewDLO, Devs.FieryFlames, Devs.RamziAH],
+    tags: ["voice", "fun"],
     settings,
 
     patches: [

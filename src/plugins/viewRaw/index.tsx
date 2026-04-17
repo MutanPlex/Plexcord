@@ -194,6 +194,7 @@ export default definePlugin({
     name: "ViewRaw",
     description: () => t(plugin.viewRaw.description),
     authors: [Devs.KingFish, Devs.Ven, Devs.rad, Devs.ImLvna],
+    tags: ["developers", "chat", "utility"],
     dependencies: ["MessagePopoverAPI"],
     settings,
 

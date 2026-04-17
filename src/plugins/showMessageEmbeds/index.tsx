@@ -196,6 +196,7 @@ export default definePlugin({
     name: "ShowMessageEmbeds",
     description: () => t(plugin.showMessageEmbeds.description),
     authors: [PcDevs.Suffocate],
+    tags: ["chat", "media", "utility"],
 
     patches: [
         {

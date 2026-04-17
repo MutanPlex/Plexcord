@@ -12,6 +12,7 @@ export default definePlugin({
     name: "NoBulletPoints",
     description: () => t(plugin.noBulletPoints.description),
     authors: [Devs.Samwich],
+    tags: ["chat", "utility"],
     onBeforeMessageSend(channelId, msg) {
         msg.content = textProcessing(msg.content);
     },

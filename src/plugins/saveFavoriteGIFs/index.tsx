@@ -119,6 +119,7 @@ export default definePlugin({
     name: "SaveFavoriteGIFs",
     description: () => t(plugin.saveFavoriteGIFs.description),
     authors: [Devs.thororen, PcDevs.MutanPlex],
+    tags: ["media", "commands", "utility"],
     settings,
     commands: [
         {

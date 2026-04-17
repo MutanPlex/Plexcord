@@ -74,6 +74,7 @@ export default definePlugin({
     name: "PinDMs",
     description: () => t(plugin.pinDMs.description),
     authors: [Devs.Ven, Devs.Aria],
+    tags: ["friends", "organisation", "utility"],
     settings,
     contextMenus,
 

@@ -74,6 +74,7 @@ export default definePlugin({
     name: "AccountPanelServerProfile",
     description: () => t(plugin.accountPanelServerProfile.description),
     authors: [Devs.Nuckyz, Devs.relitrix],
+    tags: ["servers", "utility"],
     settings,
 
     patches: [
@@ -82,7 +83,7 @@ export default definePlugin({
             group: true,
             replacement: [
                 {
-                    match: /(\.AVATAR,children:.+?renderPopout:(\i)=>){(.+?)}(?=,position)(?<=currentUser:(\i).+?)/,
+                    match: /(\.AVATAR,children:.+?renderPopout:\(?(\i)(?:,\i\))?=>){(.+?)}(?=,position)(?<=currentUser:(\i).+?)/,
                     replace: (_, rest, popoutProps, originalPopout, currentUser) => `${rest}$self.UserProfile({popoutProps:${popoutProps},currentUser:${currentUser},originalRenderPopout:()=>{${originalPopout}}})`
                 },
                 {

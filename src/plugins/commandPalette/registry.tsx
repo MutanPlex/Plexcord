@@ -8,7 +8,7 @@
 import { plugin, t } from "@api/i18n";
 import { DataStore } from "@api/index";
 import { isPluginEnabled, plugins, startPlugin, stopPlugin } from "@api/PluginManager";
-import { SettingsStore } from "@api/Settings";
+import { Settings, SettingsStore } from "@api/Settings";
 import { getUserSettingLazy } from "@api/UserSettings";
 import { openPluginModal } from "@components/settings/tabs";
 import { Guild } from "@plexcord/discord-types";
@@ -17,7 +17,6 @@ import type { Plugin } from "@utils/types";
 import { changes, checkForUpdates } from "@utils/updater";
 import { findByPropsLazy, findStoreLazy } from "@webpack";
 import { ChannelActionCreators, ChannelRouter, ChannelStore, ComponentDispatch, FluxDispatcher, GuildStore, MediaEngineStore, NavigationRouter, React, ReadStateUtils, RelationshipStore, SelectedChannelStore, SelectedGuildStore, SettingsRouter, StreamerModeStore, Toasts, useEffect, UserStore, VoiceActions } from "@webpack/common";
-import { Settings } from "Plexcord";
 import type { FC, ReactElement, ReactNode } from "react";
 
 import commandPalette from ".";

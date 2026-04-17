@@ -343,6 +343,7 @@ export default definePlugin({
     name: "RecentDMSwitcher",
     description: () => t(plugin.recentDMSwitcher.description),
     authors: [PcDevs.mmeta, PcDevs.MutanPlex],
+    tags: ["friends", "shortcuts", "utility"],
     settings,
 
     flux: {

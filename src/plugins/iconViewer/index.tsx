@@ -22,6 +22,7 @@ export default definePlugin({
     name: "IconViewer",
     description: () => t(plugin.iconViewer.description),
     authors: [PcDevs.iamme, PcDevs.MutanPlex],
+    tags: ["media", "utility", "appearance"],
     dependencies: ["Settings"],
     startAt: StartAt.WebpackReady,
 

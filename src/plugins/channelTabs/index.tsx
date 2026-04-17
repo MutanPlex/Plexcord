@@ -49,6 +49,7 @@ export default definePlugin({
     name: "ChannelTabs",
     description: () => t(plugin.channelTabs.description),
     authors: [Devs.TheSun, Devs.TheKodeToad, PcDevs.keifufu, Devs.Nickyux, PcDevs.DiabeloDEV, PcDevs.MutanPlex],
+    tags: ["organisation", "utility", "shortcuts"],
     dependencies: ["ContextMenuAPI"],
     contextMenus: {
         "channel-mention-context": contextMenuPatch,

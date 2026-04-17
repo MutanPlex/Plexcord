@@ -34,7 +34,8 @@ import { TidalPlayer } from "./tidal/TidalPlayer";
 export default definePlugin({
     name: "MusicControls",
     description: () => t(plugin.musicControls.description),
-    authors: [Devs.Ven, Devs.afn, Devs.KraXen72, Devs.Av32000, Devs.nin0dev, Devs.thororen, PcDevs.vmohammad, Devs.Joona],
+    authors: [Devs.Ven, Devs.afn, Devs.KraXen72, Devs.Av32000, Devs.nin0, Devs.thororen, PcDevs.vmohammad, Devs.Joona],
+    tags: ["media", "utility"],
     settings,
 
     patches: [

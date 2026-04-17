@@ -397,6 +397,7 @@ export default definePlugin({
     name: "CustomSounds",
     description: () => t(plugin.customSounds.description),
     authors: [Devs.ScattrdBlade, Devs.TheKodeToad, PcDevs.MutanPlex],
+    tags: ["media", "customisation"],
     settings,
     startAt: StartAt.Init,
     audioProcessor: getCustomSoundURL,

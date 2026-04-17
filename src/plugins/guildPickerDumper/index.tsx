@@ -98,6 +98,7 @@ export default definePlugin({
     name: "GuildPickerDumper",
     description: () => t(plugin.guildPickerDumper.description),
     authors: [PcDevs.Cortex, Devs.Samwich, PcDevs.Synth, Devs.thororen],
+    tags: ["servers", "utility", "developers"],
 
     contextMenus: {
         "guild-context": Patch,

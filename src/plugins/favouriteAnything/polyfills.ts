@@ -45,12 +45,12 @@ interface Uint8ArrayConstructorExtended extends Uint8ArrayConstructor {
     ): Uint8ArrayExtended<ArrayBuffer>;
 }
 
-function supportsToBase64(array: Uint8Array): boolean {
-    return "toBase64" in array && typeof (array as any).toBase64 === "function";
+function supportsToBase64(array: Uint8Array<ArrayBufferLike>): boolean {
+    return "toBase64" in array && typeof array.toBase64 === "function";
 }
 
-function supportsFromBase64(ctor: Uint8ArrayConstructor): boolean {
-    return "fromBase64" in ctor && typeof (ctor as any).fromBase64 === "function";
+function supportsFromBase64(ctor: Uint8ArrayConstructor): ctor is Uint8ArrayConstructorExtended {
+    return "fromBase64" in ctor && typeof ctor.fromBase64 === "function";
 }
 
 const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
@@ -58,7 +58,7 @@ const map = new Map(chars.split("").map((c, i) => [c, i]));
 
 export function uint8ArrayToBase64(arr: Uint8Array): string {
     if (supportsToBase64(arr)) {
-        return (arr as Uint8ArrayExtended).toBase64({ alphabet: "base64url", omitPadding: true });
+        return arr.toBase64({ alphabet: "base64url", omitPadding: true });
     }
 
     if ("detached" in arr.buffer && arr.buffer.detached) {
@@ -122,7 +122,7 @@ function skipAsciiWhitespace(string: string, index: number): number {
 
 export function base64ToUint8Array(string: string): Uint8Array {
     if (supportsFromBase64(Uint8Array)) {
-        return (Uint8Array as unknown as Uint8ArrayConstructorExtended).fromBase64(string, { alphabet: "base64url" });
+        return Uint8Array.fromBase64(string, { alphabet: "base64url" });
     }
 
     const bytes: number[] = [];

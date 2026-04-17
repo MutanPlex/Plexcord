@@ -25,6 +25,7 @@ export default definePlugin({
     name: "ColorSighted",
     description: () => t(plugin.colorSighted.description),
     authors: [Devs.lewisakura],
+    tags: ["appearance"],
 
     patches: [
         {

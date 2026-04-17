@@ -13,6 +13,7 @@ export default definePlugin({
     name: "NoTypingAnimation",
     description: () => t(plugin.noTypingAnimation.description),
     authors: [Devs.AutumnVN],
+    tags: ["chat", "appearance", "utility"],
 
     patches: [
         {

@@ -74,6 +74,7 @@ export default definePlugin({
     name: "PolishWording",
     description: () => t(plugin.polishWording.description),
     authors: [Devs.Samwich, PcDevs.WKoA],
+    tags: ["chat", "utility"],
     onBeforeMessageSend: presendObject,
     settings,
 });

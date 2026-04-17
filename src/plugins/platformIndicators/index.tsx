@@ -204,6 +204,7 @@ export default definePlugin({
     name: "PlatformIndicators",
     description: () => t(plugin.platformIndicators.description),
     authors: [Devs.kemo, Devs.TheSun, Devs.Nuckyz, Devs.Ven],
+    tags: ["friends", "appearance", "utility"],
     dependencies: ["MessageDecorationsAPI", "MemberListDecoratorsAPI"],
     settings,
 

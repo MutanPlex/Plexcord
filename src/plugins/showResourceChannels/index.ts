@@ -13,6 +13,7 @@ export default definePlugin({
     name: "ShowResourceChannels",
     description: () => t(plugin.showResourceChannels.description),
     authors: [PcDevs.VillainsRule, PcDevs.MutanPlex],
+    tags: ["servers", "utility"],
 
     patches: [{
         find: ".GUILD_DIRECTORY:null",

@@ -62,6 +62,7 @@ export default definePlugin({
     name: "DontFilterMe",
     description: () => t(plugin.dontFilterMe.description),
     authors: [Devs.Samwich],
+    tags: ["chat", "privacy"],
     dependencies: ["MessageEventsAPI"],
 
     start() {

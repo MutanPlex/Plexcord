@@ -156,6 +156,7 @@ export default definePlugin({
     name: "Ghosted",
     description: () => t(plugin.ghosted.description),
     authors: [PcDevs.vei, Devs.sadan, PcDevs.justjxke, PcDevs.iamme, PcDevs.MutanPlex],
+    tags: ["friends", "privacy", "utility"],
     settings,
     dependencies: ["AudioPlayerAPI", "ServerListAPI"],
     contextMenus: {

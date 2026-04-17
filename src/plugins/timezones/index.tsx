@@ -270,6 +270,7 @@ const userContextMenuPatch: NavContextMenuPatchCallback = (children, { user }: {
 export default definePlugin({
     name: "Timezones",
     authors: [Devs.Aria, PcDevs.creations],
+    tags: ["friends", "chat", "utility"],
     description: () => t(plugin.timezones.description),
     contextMenus: {
         "user-context": userContextMenuPatch

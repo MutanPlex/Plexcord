@@ -50,6 +50,7 @@ export default definePlugin({
     name: "CopyUserMention",
     description: () => t(plugin.copyUserMention.description),
     authors: [PcDevs.Cortex, Devs.castdrian],
+    tags: ["chat", "utility"],
 
     contextMenus: {
         "user-context": UserContextMenuPatch

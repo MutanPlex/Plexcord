@@ -157,6 +157,7 @@ export default definePlugin({
     name: "NewGuildSettings",
     description: () => t(plugin.newGuildSettings.description),
     authors: [Devs.Glitch, Devs.Nuckyz, Devs.carince, Devs.Mopi, Devs.GabiRP],
+    tags: ["servers", "utility", "customisation"],
 
     contextMenus: {
         "guild-context": makeContextMenuPatch(false),

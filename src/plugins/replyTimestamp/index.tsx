@@ -61,6 +61,7 @@ export default definePlugin({
     name: "ReplyTimestamp",
     description: () => t(plugin.replyTimestamp.description),
     authors: [Devs.Kyuuhachi],
+    tags: ["chat", "appearance", "utility"],
 
     patches: [
         {

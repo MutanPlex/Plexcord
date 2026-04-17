@@ -32,6 +32,7 @@ export default definePlugin({
     name: "MessageLatency",
     description: () => t(plugin.messageLatency.description),
     authors: [Devs.arHSM],
+    tags: ["developers", "chat", "utility"],
 
     settings: definePluginSettings({
         latency: {

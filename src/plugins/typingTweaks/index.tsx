@@ -121,6 +121,7 @@ export default definePlugin({
     name: "TypingTweaks",
     description: () => t(plugin.typingTweaks.description),
     authors: [Devs.zt, Devs.sadan, PcDevs.MrDiamond, PcDevs.MutanPlex],
+    tags: ["chat", "appearance", "utility"],
     settings,
 
     managedStyle,

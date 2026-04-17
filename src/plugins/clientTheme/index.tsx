@@ -33,6 +33,7 @@ export default definePlugin({
     name: "ClientTheme",
     description: () => t(plugin.clientTheme.description),
     authors: [Devs.Nuckyz, PcDevs.MutanPlex],
+    tags: ["customisation", "appearance"],
     settings,
 
     startAt: StartAt.DOMContentLoaded,

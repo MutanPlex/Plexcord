@@ -12,6 +12,7 @@ export default definePlugin({
     name: "HeaderBarAPI",
     description: "API to add buttons to the header bar.",
     authors: [Devs.prism],
+    tags: ["appearance", "utility"],
 
     patches: [
         {

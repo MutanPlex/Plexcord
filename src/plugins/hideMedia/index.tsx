@@ -55,6 +55,7 @@ export default definePlugin({
     name: "HideMedia",
     description: () => t(plugin.hideMedia.description),
     authors: [Devs.Ven],
+    tags: ["media", "privacy", "chat", "utility"],
     dependencies: ["MessageUpdaterAPI"],
 
     patches: [{

@@ -13,6 +13,7 @@ export default definePlugin({
     name: "SelfForward",
     description: () => t(plugin.selfForward.description),
     authors: [PcDevs.VillainsRule],
+    tags: ["chat", "utility"],
 
     patches: [
         {

@@ -29,6 +29,7 @@ export default definePlugin({
     name: "ForwardAnywhere",
     description: () => t(plugin.forwardAnywhere.description),
     authors: [Devs.thororen, PcDevs.MutanPlex],
+    tags: ["chat", "utility"],
     settings,
     patches: [
         {

@@ -176,6 +176,7 @@ export default definePlugin({
     name: "Dearrow",
     description: () => t(plugin.dearrow.description),
     authors: [Devs.Ven],
+    tags: ["media", "utility"],
     settings,
 
     embedDidMount,

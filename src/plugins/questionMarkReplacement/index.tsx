@@ -34,6 +34,7 @@ export default definePlugin({
     name: "QuestionMarkReplacement",
     description: () => t(plugin.questionMarkReplacement.description),
     authors: [Devs.nyx, PcDevs.MutanPlex],
+    tags: ["chat", "fun"],
     settings,
 
     start() {

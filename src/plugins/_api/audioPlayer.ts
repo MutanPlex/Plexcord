@@ -14,6 +14,7 @@ export default definePlugin({
     name: "AudioPlayerAPI",
     description: () => t(plugins.metadata.api.description.audioPlayer),
     authors: [PcDevs.Etorix],
+    tags: ["media", "utility"],
     AudioType,
     playAudio,
 

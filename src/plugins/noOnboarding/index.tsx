@@ -14,6 +14,7 @@ export default definePlugin({
     name: "NoOnboarding",
     description: () => t(plugin.noOnboarding.description),
     authors: [PcDevs.omaw, Devs.Glitch],
+    tags: ["servers", "utility"],
 
     patches: [
         {

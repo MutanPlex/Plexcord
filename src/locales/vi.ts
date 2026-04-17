@@ -922,6 +922,29 @@ const translations: MatchStructure<typeof enTranslations> = {
     },
 
     plugin: {
+        tags: {
+            accessibility: "Khả năng truy cập",
+            activity: "Hoạt động",
+            appearance: "Giao diện",
+            chat: "Trò chuyện",
+            commands: "Lệnh",
+            console: "Bảng điều khiển",
+            customisation: "Tùy chỉnh",
+            developers: "Nhà phát triển",
+            emotes: "Biểu cảm",
+            friends: "Bạn bè",
+            fun: "Vui chơi",
+            media: "Phương tiện",
+            notifications: "Thông báo",
+            organisation: "Tổ chức",
+            privacy: "Quyền riêng tư",
+            reactions: "Phản ứng",
+            roles: "Vai trò",
+            servers: "Máy chủ",
+            shortcuts: "Phím tắt",
+            utility: "Tiện ích",
+            voice: "Giọng nói"
+        },
         noTrack: {
             name: "NoTrack",
             description: "Tắt tính năng theo dõi của Discord (phân tích/'khoa học'), số liệu và báo cáo sự cố Sentry",

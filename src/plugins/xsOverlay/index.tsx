@@ -204,6 +204,7 @@ export default definePlugin({
     name: "XSOverlay",
     description: () => t(plugin.xSOverlay.description),
     authors: [Devs.Nyako],
+    tags: ["notifications", "chat", "voice", "utility"],
     reporterTestable: ReporterTestable.None,
     settings,
 

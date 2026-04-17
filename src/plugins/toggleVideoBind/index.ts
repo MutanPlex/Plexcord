@@ -66,6 +66,7 @@ export default definePlugin({
     name: "ToggleVideoBind",
     description: () => t(plugin.toggleVideoBind.description),
     authors: [PcDevs.mochienya],
+    tags: ["voice", "shortcuts", "utility"],
     settings,
 
     start() {

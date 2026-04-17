@@ -66,6 +66,7 @@ export default definePlugin({
     name: "LoadingQuotes",
     description: () => t(plugin.loadingQuotes.description),
     authors: [Devs.Ven, Devs.KraXen72, Devs.UlyssesZhan],
+    tags: ["customisation", "fun"],
     settings,
 
     patches: [

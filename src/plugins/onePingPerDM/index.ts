@@ -56,6 +56,7 @@ export default definePlugin({
     name: "OnePingPerDM",
     description: () => t(plugin.onePingPerDM.description),
     authors: [Devs.ProffDea],
+    tags: ["notifications", "friends", "utility"],
     settings,
 
     patches: [

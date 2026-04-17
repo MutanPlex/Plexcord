@@ -37,7 +37,7 @@ const UserUtils = findByPropsLazy("getGlobalName");
 const ProfileListClasses = findCssClassesLazy("empty", "textContainer", "connectionIcon");
 const TabBarClasses = findCssClassesLazy("tabPanelScroller", "tabBarPanel");
 const MutualsListClasses = findCssClassesLazy("row", "icon", "name", "details");
-const ExpandableList = findComponentByCodeLazy('action:"PRESS_SECTION"', "section");
+const ExpandableList = findComponentByCodeLazy('action:"PRESS_SECTION"', '"section"');
 
 function getGroupDMName(channel: Channel) {
     return channel.name ||
@@ -89,6 +89,7 @@ export default definePlugin({
     name: "MutualGroupDMs",
     description: () => t(plugin.mutualGroupDMs.description),
     authors: [Devs.amia],
+    tags: ["friends", "utility"],
 
     patches: [
         // User Profile Modal

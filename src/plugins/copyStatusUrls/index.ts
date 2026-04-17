@@ -26,6 +26,7 @@ export default definePlugin({
     name: "CopyStatusUrls",
     description: () => t(plugin.copyStatusUrls.description),
     authors: [Devs.sadan],
+    tags: ["activity", "utility"],
 
     patches: [
         {

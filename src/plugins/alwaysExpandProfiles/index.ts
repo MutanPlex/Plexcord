@@ -14,6 +14,7 @@ export default definePlugin({
     name: "AlwaysExpandProfiles",
     description: () => t(plugin.alwaysExpandProfiles.description),
     authors: [PcDevs.MutanPlex, Devs.thororen],
+    tags: ["friends"],
 
     patches: [
         {

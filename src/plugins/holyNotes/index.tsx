@@ -74,6 +74,7 @@ export default definePlugin({
     name: "HolyNotes",
     description: () => t(plugin.holyNotes.description),
     authors: [PcDevs.Wolfie, PcDevs.MutanPlex],
+    tags: ["organisation", "chat", "utility"],
     dependencies: ["HeaderBarAPI", "MessagePopoverAPI", "ChatInputButtonAPI"],
 
     headerBarButton: {

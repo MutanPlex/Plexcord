@@ -308,6 +308,7 @@ export default definePlugin({
     name: "TextReplace",
     description: () => t(plugin.textReplace.description),
     authors: [Devs.AutumnVN, Devs.TheKodeToad, PcDevs.Etorix],
+    tags: ["chat", "customisation", "utility"],
 
     settings,
     modifyIncomingMessage,

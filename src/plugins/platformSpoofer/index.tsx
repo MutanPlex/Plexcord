@@ -56,6 +56,7 @@ export default definePlugin({
     name: "PlatformSpoofer",
     description: () => t(plugin.platformSpoofer.description),
     authors: [PcDevs.Drag, PcDevs.MutanPlex, PcDevs.He4vuc],
+    tags: ["privacy", "utility"],
     settingsAboutComponent: () => <>
         <Paragraph className="plugin-warning">
             {t(plugin.platformSpoofer.about)}

@@ -922,6 +922,29 @@ const translations: MatchStructure<typeof enTranslations> = {
     },
 
     plugin: {
+        tags: {
+            accessibility: "无障碍",
+            activity: "活动",
+            appearance: "外观",
+            chat: "聊天",
+            commands: "命令",
+            console: "控制台",
+            customisation: "自定义",
+            developers: "开发者",
+            emotes: "表情",
+            friends: "好友",
+            fun: "娱乐",
+            media: "媒体",
+            notifications: "通知",
+            organisation: "组织",
+            privacy: "隐私",
+            reactions: "反应",
+            roles: "角色",
+            servers: "服务器",
+            shortcuts: "快捷方式",
+            utility: "工具",
+            voice: "语音"
+        },
         noTrack: {
             name: "NoTrack",
             description: "禁用 Discord 的跟踪（分析/“科学”）、指标和 Sentry 崩溃报告",

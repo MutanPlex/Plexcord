@@ -14,6 +14,7 @@ export default definePlugin({
     name: "NeverPausePreviews",
     description: () => t(plugin.neverPausePreviews.description),
     authors: [PcDevs.vappstar, PcDevs.MutanPlex],
+    tags: ["media", "utility"],
     settingsAboutComponent: () => (
         <Notice.Warning>
             {t(plugin.neverPausePreviews.about)}

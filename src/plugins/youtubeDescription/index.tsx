@@ -18,6 +18,7 @@ export default definePlugin({
     name: "YoutubeDescription",
     description: () => t(plugin.youtubeDescription.description),
     authors: [Devs.arHSM, PcDevs.MutanPlex],
+    tags: ["media", "chat", "utility"],
 
     patches: [
         {

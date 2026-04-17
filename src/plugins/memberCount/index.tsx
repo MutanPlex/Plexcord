@@ -68,6 +68,7 @@ export default definePlugin({
     name: "MemberCount",
     description: () => t(plugin.memberCount.description),
     authors: [Devs.Ven, Devs.Commandtechno, Devs.Apexo],
+    tags: ["servers", "utility"],
     settings,
 
     patches: [

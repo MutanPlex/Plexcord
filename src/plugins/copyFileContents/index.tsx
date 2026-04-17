@@ -25,6 +25,7 @@ export default definePlugin({
     name: "CopyFileContents",
     description: () => t(plugin.copyFileContents.description),
     authors: [Devs.Obsidian, Devs.Nuckyz, PcDevs.MutanPlex],
+    tags: ["utility"],
 
     patches: [
         {

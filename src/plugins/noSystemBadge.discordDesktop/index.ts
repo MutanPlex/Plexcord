@@ -25,6 +25,7 @@ export default definePlugin({
     name: "NoSystemBadge",
     description: () => t(plugin.noSystemBadge.description),
     authors: [Devs.rushii],
+    tags: ["notifications", "utility"],
 
     patches: [
         {

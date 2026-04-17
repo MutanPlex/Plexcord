@@ -143,6 +143,7 @@ export default definePlugin({
     name: "KeyboardSounds",
     description: () => t(plugin.keyboardSounds.description),
     authors: [Devs.HypedDomi, PcDevs.Etorix],
+    tags: ["fun", "media"],
     dependencies: ["AudioPlayerAPI"],
     settings,
 

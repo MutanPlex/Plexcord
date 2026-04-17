@@ -19,6 +19,7 @@ export default definePlugin({
     name: "VoiceButtons",
     description: () => t(plugin.voiceButtons.description),
     authors: [PcDevs.nicola02nb, PcDevs.omaw],
+    tags: ["voice", "utility"],
     settings,
 
     patches: [

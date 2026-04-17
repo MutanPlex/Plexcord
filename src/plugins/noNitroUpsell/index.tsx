@@ -14,6 +14,7 @@ export default definePlugin({
     name: "NoNitroUpsell",
     description: () => t(plugin.noNitroUpsell.description),
     authors: [Devs.thororen, PcDevs.MutanPlex],
+    tags: ["customisation", "utility"],
 
     flux: {
         CONNECTION_OPEN() {

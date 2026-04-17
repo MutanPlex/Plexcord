@@ -122,6 +122,7 @@ export default definePlugin({
     name: "PreviewMessage",
     description: () => t(plugin.previewMessage.description),
     authors: [Devs.Aria],
+    tags: ["chat", "utility"],
 
     // start early to ensure we're the first plugin to add our button
     // This makes the popping in less awkward

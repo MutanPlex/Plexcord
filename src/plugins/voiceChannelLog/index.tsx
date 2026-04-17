@@ -116,6 +116,7 @@ export default definePlugin({
     name: "VoiceChannelLog",
     description: () => t(plugin.voiceChannelLog.description),
     authors: [Devs.Sqaaakoi, Devs.thororen, PcDevs.nyx],
+    tags: ["voice", "servers", "utility"],
     settings,
 
     contextMenus: {

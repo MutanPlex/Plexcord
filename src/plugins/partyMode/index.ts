@@ -48,6 +48,7 @@ export default definePlugin({
     name: "PartyMode",
     description: () => t(plugin.partyMode.description),
     authors: [Devs.UwUDev],
+    tags: ["fun", "appearance"],
     reporterTestable: ReporterTestable.None,
     settings,
 

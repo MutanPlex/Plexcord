@@ -49,6 +49,7 @@ export default definePlugin({
     name: "BannersEverywhere",
     description: () => t(plugin.bannersEverywhere.description),
     authors: [Devs.ImLvna, Devs.AutumnVN, PcDevs.MutanPlex],
+    tags: ["appearance"],
     settings,
 
     patches: [

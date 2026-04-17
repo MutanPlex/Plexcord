@@ -13,6 +13,7 @@ export default definePlugin({
     name: "ProfileCollectionsAPI",
     description: () => t(plugins.metadata.api.description.profileCollections),
     authors: [Devs.thororen, PcDevs.MutanPlex],
+    tags: ["appearance", "friends", "utility"],
     patches: [
         {
             find: /\.POPOUT,onClose:\i}\),nicknameIcons:.+?\.isProvisional/,

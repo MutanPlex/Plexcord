@@ -125,6 +125,7 @@ export default definePlugin({
     name: "SplitLargeMessages",
     description: () => t(plugin.splitLargeMessages.description),
     authors: [PcDevs.Reycko],
+    tags: ["chat", "utility"],
     dependencies: ["MessageEventsAPI"],
     settings,
 

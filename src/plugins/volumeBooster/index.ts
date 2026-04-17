@@ -54,6 +54,7 @@ export default definePlugin({
     name: "VolumeBooster",
     authors: [Devs.Nuckyz, Devs.sadan],
     description: () => t(plugin.volumeBooster.description),
+    tags: ["voice", "media", "utility"],
     settings,
 
     patches: [

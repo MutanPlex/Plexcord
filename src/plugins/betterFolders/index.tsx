@@ -266,6 +266,7 @@ export default definePlugin({
     name: "BetterFolders",
     description: () => t(plugin.betterFolders.description),
     authors: [Devs.juby, Devs.AutumnVN, Devs.Nuckyz],
+    tags: ["servers", "organisation"],
     settings,
     start() {
         settings.store.nestedFolders = getNestedFolderMap();

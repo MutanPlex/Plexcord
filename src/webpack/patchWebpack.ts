@@ -6,14 +6,14 @@
  */
 
 import { Settings } from "@api/Settings";
+import { reporterData } from "@debug/reporterData";
+import { traceFunctionWithResults } from "@debug/Tracer";
 import { WebpackRequire } from "@plexcord/discord-types/webpack";
 import { makeLazy } from "@utils/lazy";
 import { Logger } from "@utils/Logger";
 import { interpolateIfDefined } from "@utils/misc";
 import { Patch, PatchReplacement } from "@utils/types";
-import { reporterData } from "debug/reporterData";
 
-import { traceFunctionWithResults } from "../debug/Tracer";
 import { AnyModuleFactory, AnyWebpackRequire, MaybePatchedModuleFactory, PatchedModuleFactory } from "./types";
 import { _blacklistBadModules, _initWebpack, factoryListeners, findModuleFactory, moduleListeners, waitForSubscriptions, wreq } from "./webpack";
 

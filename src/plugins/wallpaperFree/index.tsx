@@ -36,6 +36,7 @@ export default definePlugin({
     name: "WallpaperFree",
     description: () => t(plugin.wallpaperFree.description),
     authors: [Devs.Joona],
+    tags: ["appearance", "customisation", "utility"],
 
     patches: [
         {

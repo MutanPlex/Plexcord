@@ -1106,6 +1106,7 @@ export default definePlugin({
     name: "FavoriteEmojiFirst",
     authors: [Devs.Aria, Devs.Ven, PcDevs.justjxke, PcDevs.MutanPlex],
     description: () => t(plugin.favoriteEmojiFirst.description),
+    tags: ["emotes", "chat", "utility"],
     settings,
     contextMenus: {
         "expression-picker": expressionPickerPatch,

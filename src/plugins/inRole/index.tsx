@@ -36,7 +36,8 @@ function getMembersInRole(roleId: string, guildId: string) {
 export default definePlugin({
     name: "InRole",
     description: () => t(plugin.inRole.description),
-    authors: [Devs.nin0dev],
+    authors: [Devs.nin0],
+    tags: ["roles", "servers", "commands", "utility"],
     dependencies: ["UserSettingsAPI"],
 
     start() {

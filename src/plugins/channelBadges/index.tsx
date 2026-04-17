@@ -123,6 +123,7 @@ export default definePlugin({
     name: "ChannelBadges",
     description: () => t(plugin.channelBadges.description),
     authors: [PcDevs.creations],
+    tags: ["servers", "organisation", "appearance"],
     settings,
 
     async start() {

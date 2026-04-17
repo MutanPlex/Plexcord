@@ -92,6 +92,7 @@ export default definePlugin({
     name: "WhoReacted",
     description: () => t(plugin.whoReacted.description),
     authors: [Devs.Ven, Devs.KannaDev, Devs.newwares],
+    tags: ["chat", "reactions", "utility"],
     settings,
 
     patches: [

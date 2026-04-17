@@ -93,6 +93,7 @@ export default definePlugin({
     name: "ScheduledMessages",
     description: () => t(plugin.scheduledMessages.description),
     authors: [PcDevs.mmeta, Devs.prism, PcDevs.MutanPlex],
+    tags: ["chat", "organisation", "utility"],
     settings,
 
     flux: {

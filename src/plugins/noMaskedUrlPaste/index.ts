@@ -13,6 +13,7 @@ export default definePlugin({
     name: "NoMaskedUrlPaste",
     authors: [Devs.CatNoir],
     description: () => t(plugin.noMaskedUrlPaste.description),
+    tags: ["chat", "privacy", "utility"],
 
     patches: [
         {

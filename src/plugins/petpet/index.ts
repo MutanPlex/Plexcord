@@ -111,6 +111,7 @@ export default definePlugin({
     name: "PetPet",
     description: () => t(plugin.petpet.description),
     authors: [Devs.Ven],
+    tags: ["fun", "chat", "media"],
 
     commands: [
         {

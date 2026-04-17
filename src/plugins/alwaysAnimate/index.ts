@@ -64,6 +64,7 @@ export default definePlugin({
     name: "AlwaysAnimate",
     description: () => t(plugin.alwaysAnimate.description),
     authors: [Devs.FieryFlames],
+    tags: ["appearance"],
     settings,
 
     patches: [

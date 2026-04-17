@@ -179,6 +179,7 @@ export default definePlugin({
     name: "VoiceChatUtilities",
     description: () => t(plugin.voiceChatUtilities.description),
     authors: [Devs.D3SOX, PcDevs.MutanPlex],
+    tags: ["voice", "servers", "utility"],
     settings,
 
     contextMenus: {

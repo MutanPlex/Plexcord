@@ -25,6 +25,7 @@ export default definePlugin({
     name: "NoDevtoolsWarning",
     description: () => t(plugin.noDevtoolsWarning.description),
     authors: [Devs.Ven],
+    tags: ["developers", "console", "utility"],
 
     patches: [{
         find: "setDevtoolsCallbacks",

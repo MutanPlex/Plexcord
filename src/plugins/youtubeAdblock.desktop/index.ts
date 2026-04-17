@@ -14,4 +14,5 @@ export default definePlugin({
     name: "YoutubeAdblock",
     description: () => t(plugin.youtubeAdblock.description),
     authors: [Devs.ImLvna, Devs.Ven],
+    tags: ["media", "privacy", "utility"],
 });

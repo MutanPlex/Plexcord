@@ -137,6 +137,7 @@ const handleToggle = () => {
 export default definePlugin({
     name: "SidebarChat",
     authors: [Devs.Joona],
+    tags: ["chat", "utility"],
     description: () => t(plugin.sidebarChat.description),
 
     patches: [

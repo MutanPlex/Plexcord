@@ -98,6 +98,7 @@ export default definePlugin({
     name: "Moyai",
     authors: [Devs.Megu, Devs.Nuckyz],
     description: () => t(plugin.moyai.description),
+    tags: ["fun", "chat", "emotes"],
     settings,
 
     flux: {

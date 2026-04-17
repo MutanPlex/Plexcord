@@ -922,6 +922,29 @@ const translations: MatchStructure<typeof enTranslations> = {
     },
 
     plugin: {
+        tags: {
+            accessibility: "Acessibilidade",
+            activity: "Atividade",
+            appearance: "Aspeto",
+            chat: "Chat",
+            commands: "Comandos",
+            console: "Consola",
+            customisation: "Personalização",
+            developers: "Programadores",
+            emotes: "Emotes",
+            friends: "Amigos",
+            fun: "Diversão",
+            media: "Multimédia",
+            notifications: "Notificações",
+            organisation: "Organização",
+            privacy: "Privacidade",
+            reactions: "Reações",
+            roles: "Funções",
+            servers: "Servidores",
+            shortcuts: "Atalhos",
+            utility: "Utilitário",
+            voice: "Voz"
+        },
         noTrack: {
             name: "NoTrack",
             description: "Desativa o rastreio do Discord (analytics/'science'), métricas e relatórios de erro do Sentry",

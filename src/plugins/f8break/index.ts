@@ -25,6 +25,7 @@ export default definePlugin({
     name: "F8Break",
     description: () => t(plugin.f8break.description),
     authors: [Devs.lewisakura],
+    tags: ["developers", "utility"],
 
     start() {
         window.addEventListener("keydown", this.event);

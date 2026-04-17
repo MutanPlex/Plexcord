@@ -69,6 +69,7 @@ export default definePlugin({
     name: "Quoter",
     description: () => t(plugin.quoter.description),
     authors: [Devs.Samwich, Devs.thororen, PcDevs.MutanPlex, PcDevs.neoarz, Devs.prism],
+    tags: ["chat", "media", "fun"],
     settings,
 
     contextMenus: {

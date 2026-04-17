@@ -154,6 +154,7 @@ export default definePlugin({
     name: "MessageFetchTimer",
     description: () => t(plugin.messageFetchTimer.description),
     authors: [PcDevs.GroupXyz],
+    tags: ["developers", "chat", "utility"],
     dependencies: ["ChatInputButtonAPI"],
     settings,
 

@@ -13,6 +13,7 @@ export default definePlugin({
     name: "DisableDeepLinks",
     description: () => t(plugin.noDeepLinks.description),
     authors: [Devs.Ven],
+    tags: ["privacy", "utility"],
     required: true,
 
     noop: () => { },

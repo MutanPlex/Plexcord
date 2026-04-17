@@ -26,6 +26,7 @@ export default definePlugin({
     name: "NoProfileThemes",
     description: () => t(plugin.noProfileThemes.description),
     authors: [Devs.TheKodeToad],
+    tags: ["appearance", "privacy"],
 
     patches: [
         {

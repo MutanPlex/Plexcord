@@ -109,6 +109,7 @@ export default definePlugin({
     name: "ExitSounds",
     description: () => t(plugin.exitSounds.description),
     authors: [Devs.prism, PcDevs.MutanPlex],
+    tags: ["voice", "media"],
     dependencies: ["AudioPlayerAPI"],
     settings,
 

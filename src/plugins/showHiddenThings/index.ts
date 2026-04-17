@@ -52,6 +52,7 @@ export default definePlugin({
     name: "ShowHiddenThings",
     description: () => t(plugin.showHiddenThings.description),
     authors: [Devs.Dolfies],
+    tags: ["servers", "roles", "utility"],
     settings,
 
     patches: [

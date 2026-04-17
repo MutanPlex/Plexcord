@@ -12,6 +12,7 @@ import definePlugin from "@utils/types";
 export default definePlugin({
     name: "DynamicImageModalAPI",
     authors: [Devs.sadan, Devs.Nuckyz],
+    tags: ["media", "utility"],
     description: () => t(plugins.metadata.api.description.dynamicImageModal),
 
     patches: [

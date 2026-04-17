@@ -40,6 +40,7 @@ export default definePlugin({
     name: "MoreUserTags",
     description: () => t(plugin.moreUserTags.description),
     authors: [Devs.Cyn, Devs.TheSun, Devs.RyanCaoDev, PcDevs.MutanPlex, Devs.LordElias, Devs.AutumnVN, PcDevs.Hen],
+    tags: ["organisation", "friends", "appearance"],
     dependencies: ["MemberListDecoratorsAPI", "NicknameIconsAPI", "MessageDecorationsAPI"],
     settings,
 

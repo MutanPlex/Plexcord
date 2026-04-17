@@ -95,6 +95,7 @@ export default definePlugin({
     name: "NoBlockedMessages",
     description: () => t(plugin.noBlockedMessages.description),
     authors: [Devs.rushii, Devs.Samu, Devs.jamesbt365, PcDevs.MutanPlex],
+    tags: ["privacy", "chat", "utility"],
     settings,
 
     patches: [

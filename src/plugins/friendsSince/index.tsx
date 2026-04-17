@@ -26,6 +26,7 @@ export default definePlugin({
     name: "FriendsSince",
     description: () => t(plugin.friendsSince.description),
     authors: [Devs.Elvyra, Devs.Antti],
+    tags: ["friends", "utility"],
 
     patches: [
         // DM User Sidebar

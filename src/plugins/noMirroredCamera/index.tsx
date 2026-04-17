@@ -13,6 +13,7 @@ export default definePlugin({
     name: "NoMirroredCamera",
     description: () => t(plugin.noMirroredCamera.description),
     authors: [Devs.nyx, PcDevs.MutanPlex],
+    tags: ["voice", "utility"],
 
     patches: [
         // When focused on voice channel or group chat voice call

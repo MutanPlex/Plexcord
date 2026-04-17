@@ -305,6 +305,7 @@ export default definePlugin({
     name: "SilentTyping",
     description: () => t(plugin.silentTyping.description),
     authors: [Devs.Ven, Devs.Rini, Devs.ImBanana, PcDevs.Etorix],
+    tags: ["privacy", "chat", "utility"],
     dependencies: ["ChatInputButtonAPI"],
     settings,
 

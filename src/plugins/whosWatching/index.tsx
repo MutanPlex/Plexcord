@@ -86,6 +86,7 @@ export default definePlugin({
     name: "WhosWatching",
     description: () => t(plugin.whosWatching.description),
     authors: [PcDevs.Fres, PcDevs.MutanPlex, Devs.thororen],
+    tags: ["voice", "activity", "utility"],
     settings,
 
     patches: [

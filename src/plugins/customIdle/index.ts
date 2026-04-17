@@ -34,6 +34,7 @@ export default definePlugin({
     name: "CustomIdle",
     description: () => t(plugin.customIdle.description),
     authors: [Devs.newwares],
+    tags: ["activity", "utility"],
     settings,
 
     patches: [

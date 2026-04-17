@@ -28,6 +28,7 @@ const requiredFirstCharacters = ["r", "h", "#"].flatMap(v => [v, v.toUpperCase()
 export default definePlugin({
     authors: [PcDevs.Hen, PcDevs.MutanPlex],
     description: () => t(plugin.messageColors.description),
+    tags: ["appearance", "chat", "customisation"],
     name: "MessageColors",
     settings,
 

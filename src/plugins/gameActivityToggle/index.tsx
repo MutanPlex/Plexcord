@@ -102,6 +102,7 @@ export default definePlugin({
     name: "GameActivityToggle",
     description: () => t(plugin.gameActivityToggle.description),
     authors: [Devs.Nuckyz, Devs.RuukuLada],
+    tags: ["activity", "utility"],
     dependencies: ["UserSettingsAPI"],
     settings,
 

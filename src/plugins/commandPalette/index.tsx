@@ -232,6 +232,7 @@ export default definePlugin({
     name: "CommandPalette",
     description: () => t(plugin.commandPalette.description),
     authors: [Devs.Ethan, PcDevs.justjxke, PcDevs.MutanPlex],
+    tags: ["commands", "shortcuts", "utility"],
     settings,
 
     patches: [

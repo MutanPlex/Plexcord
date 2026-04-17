@@ -25,6 +25,7 @@ export default definePlugin({
     name: "NoF1",
     description: () => t(plugin.noF1.description),
     authors: [Devs.Cyn],
+    tags: ["shortcuts", "utility"],
 
     patches: [
         {

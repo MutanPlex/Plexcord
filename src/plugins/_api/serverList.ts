@@ -25,6 +25,7 @@ export default definePlugin({
     name: "ServerListAPI",
     description: () => t(plugins.metadata.api.description.serverList),
     authors: [Devs.kemo],
+    tags: ["servers", "utility"],
 
     patches: [
         {

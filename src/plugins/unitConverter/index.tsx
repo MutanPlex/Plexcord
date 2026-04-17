@@ -50,6 +50,7 @@ export default definePlugin({
     name: "UnitConverter",
     description: () => t(plugin.unitConverter.description),
     authors: [Devs.sadan],
+    tags: ["chat", "utility"],
     dependencies: ["MessagePopoverAPI"],
     renderMessageAccessory: props => <ConverterAccessory message={props.message} />,
 

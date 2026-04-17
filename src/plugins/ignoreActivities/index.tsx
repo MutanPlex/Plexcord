@@ -243,6 +243,7 @@ function isActivityTypeIgnored(type: number, id?: string) {
 export default definePlugin({
     name: "IgnoreActivities",
     authors: [Devs.Nuckyz, Devs.Kylie],
+    tags: ["activity", "privacy", "utility"],
     description: () => t(plugin.ignoreActivities.description),
     dependencies: ["UserSettingsAPI"],
     settings,

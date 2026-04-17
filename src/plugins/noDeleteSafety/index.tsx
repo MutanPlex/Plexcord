@@ -34,6 +34,7 @@ export default definePlugin({
     name: "NoDeleteSafety",
     description: () => t(plugin.noDeleteSafety.description),
     authors: [Devs.Samwich],
+    tags: ["servers", "utility"],
     settings,
 
     async HandleGuildDeleteModal(server) {

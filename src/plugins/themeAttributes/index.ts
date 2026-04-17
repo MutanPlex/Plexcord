@@ -16,6 +16,7 @@ export default definePlugin({
     name: "ThemeAttributes",
     description: () => t(plugin.themeAttributes.description),
     authors: [Devs.Ven, Devs.Board],
+    tags: ["appearance", "developers"],
 
     patches: [
         // Add data-tab-id to all tab bar items

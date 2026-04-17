@@ -42,6 +42,7 @@ export default definePlugin({
     name: "WebRichPresence (arRPC)",
     description: () => t(plugin.arRpc.description),
     authors: [Devs.Ducko],
+    tags: ["activity"],
     reporterTestable: ReporterTestable.None,
     hidden: IS_PLEXTRON || "legcord" in window,
 

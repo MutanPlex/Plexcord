@@ -60,6 +60,7 @@ export default definePlugin({
     name: "MoreQuickReactions",
     description: () => t(plugin.moreQuickReactions.description),
     authors: [Devs.Ven, Devs.Sqaaakoi, PcDevs.MutanPlex],
+    tags: ["reactions", "emotes", "chat"],
     settings,
 
     patches: [

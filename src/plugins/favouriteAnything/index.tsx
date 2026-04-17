@@ -7,7 +7,7 @@
 
 import { plugin, t } from "@api/i18n";
 import { Embed } from "@plexcord/discord-types";
-import { PcDevs } from "@utils/constants";
+import { Devs, PcDevs } from "@utils/constants";
 import { getIntlMessage } from "@utils/discord";
 import definePlugin from "@utils/types";
 import { proxyLazyWebpack } from "@webpack";
@@ -27,7 +27,8 @@ export const AttachmentContext = proxyLazyWebpack(() => React.createContext<null
 export default definePlugin({
     name: "FavouriteAnything",
     description: () => t(plugin.favouriteAnything.description),
-    authors: [PcDevs.nin0dev, PcDevs.davri, PcDevs.MutanPlex],
+    authors: [Devs.nin0, PcDevs.davri, PcDevs.MutanPlex],
+    tags: ["media", "utility"],
     managedStyle,
     patches: [
         // EMBEDS

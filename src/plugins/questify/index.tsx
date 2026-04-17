@@ -1349,6 +1349,7 @@ export default definePlugin({
     name: "Questify",
     description: () => t(plugin.questify.description),
     authors: [PcDevs.Etorix],
+    tags: ["activity", "servers", "utility"],
     dependencies: ["AudioPlayerAPI", "ServerListAPI"],
     startAt: StartAt.Init, // Needed in order to beat Read All Messages to inserting above the server list.
     settings,

@@ -598,6 +598,7 @@ export default definePlugin({
     name: "MessageClickActions",
     description: () => t(plugin.messageClickActions.description),
     authors: [Devs.Ven, PcDevs.keircn, PcDevs.omaw, PcDevs.MutanPlex],
+    tags: ["chat", "shortcuts", "utility"],
 
     settings,
 

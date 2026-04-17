@@ -165,6 +165,7 @@ export default definePlugin({
     name: "PermissionsViewer",
     description: () => t(plugin.permissionsViewer.description),
     authors: [Devs.Nuckyz, Devs.Ven],
+    tags: ["roles", "servers", "utility"],
     settings,
 
     patches: [

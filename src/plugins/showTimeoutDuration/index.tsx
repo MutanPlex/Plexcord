@@ -73,6 +73,7 @@ export default definePlugin({
     name: "ShowTimeoutDuration",
     description: () => t(plugin.showTimeoutDuration.description),
     authors: [Devs.Ven, Devs.Sqaaakoi],
+    tags: ["servers", "roles", "utility"],
     settings,
 
     patches: [

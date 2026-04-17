@@ -240,6 +240,7 @@ export default definePlugin({
     name: "FollowUser",
     description: () => t(plugin.followUser.description),
     authors: [Devs.D3SOX, PcDevs.MutanPlex],
+    tags: ["voice", "friends", "utility"],
     dependencies: ["HeaderBarAPI"],
     settings,
 

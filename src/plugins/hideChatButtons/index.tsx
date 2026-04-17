@@ -89,6 +89,7 @@ export default definePlugin({
     description: () => t(plugin.hideChatButtons.description),
     settings: settings,
     authors: [Devs.iamme, PcDevs.MutanPlex],
+    tags: ["chat", "appearance", "customisation"],
 
     patches: [
         {

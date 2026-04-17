@@ -24,6 +24,7 @@ import definePlugin from "@utils/types";
 export default definePlugin({
     name: "CommandsAPI",
     authors: [Devs.Arjix],
+    tags: ["commands", "utility"],
     description: () => t(plugins.metadata.api.description.commands),
 
     patches: [

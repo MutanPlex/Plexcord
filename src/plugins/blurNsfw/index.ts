@@ -60,6 +60,7 @@ export default definePlugin({
     name: "BlurNSFW",
     description: () => t(plugin.blurNSFW.description),
     authors: [Devs.Ven],
+    tags: ["privacy", "media"],
     settings,
 
     patches: [

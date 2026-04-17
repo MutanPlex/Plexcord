@@ -116,6 +116,7 @@ export default definePlugin({
     name: "Settings",
     description: () => t(plugin.settings.description),
     authors: [Devs.Ven, Devs.Megu, PcDevs.MutanPlex],
+    tags: ["utility", "developers"],
     required: true,
     settings: pluginSettings,
 

@@ -12,5 +12,6 @@ import definePlugin from "@utils/types";
 export default definePlugin({
     name: "FixYoutubeEmbeds",
     description: () => t(plugin.fixYoutubeEmbeds.description),
-    authors: [Devs.coolelectronics]
+    authors: [Devs.coolelectronics],
+    tags: ["media", "utility"]
 });

@@ -85,6 +85,7 @@ export default definePlugin({
     name: "OpenInApp",
     description: () => t(plugin.openInApp.description),
     authors: [Devs.Ven, Devs.surgedevs],
+    tags: ["utility", "media", "activity"],
     settings: pluginSettings,
 
     patches: [

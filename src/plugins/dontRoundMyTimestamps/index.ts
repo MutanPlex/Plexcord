@@ -26,6 +26,7 @@ export default definePlugin({
     name: "DontRoundMyTimestamps",
     description: () => t(plugin.dontRoundMyTimestamps.description),
     authors: [Devs.Lexi],
+    tags: ["chat", "utility"],
 
     start() {
         moment.relativeTimeRounding(Math.floor);

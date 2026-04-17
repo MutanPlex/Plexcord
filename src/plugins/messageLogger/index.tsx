@@ -442,6 +442,7 @@ export default definePlugin({
     name: "MessageLogger",
     description: () => t(plugin.messageLogger.description),
     authors: [Devs.rushii, Devs.Ven, Devs.AutumnVN, Devs.Nickyux, Devs.Kyuuhachi, PcDevs.justjxke],
+    tags: ["chat", "utility", "developers"],
     dependencies: ["MessageUpdaterAPI"],
     settings,
 

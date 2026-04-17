@@ -81,6 +81,7 @@ export default definePlugin({
     name: "FastDeleteChannels",
     description: () => t(plugin.fastDeleteChannels.description),
     authors: [Devs.thororen],
+    tags: ["servers", "utility", "shortcuts"],
     settings,
 
     patches: [

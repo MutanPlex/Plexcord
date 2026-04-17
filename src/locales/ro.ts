@@ -922,6 +922,29 @@ const translations: MatchStructure<typeof enTranslations> = {
     },
 
     plugin: {
+        tags: {
+            accessibility: "Accesibilitate",
+            activity: "Activitate",
+            appearance: "Aspect",
+            chat: "Chat",
+            commands: "Comenzi",
+            console: "Consolă",
+            customisation: "Personalizare",
+            developers: "Dezvoltatori",
+            emotes: "Emoții",
+            friends: "Prieteni",
+            fun: "Distracție",
+            media: "Media",
+            notifications: "Notificări",
+            organisation: "Organizare",
+            privacy: "Confidențialitate",
+            reactions: "Reacții",
+            roles: "Roluri",
+            servers: "Servere",
+            shortcuts: "Scurtături",
+            utility: "Utilitate",
+            voice: "Voce"
+        },
         noTrack: {
             name: "NoTrack",
             description: "Dezactivează urmărirea Discord (analytics/'science'), metricile și raportarea erorilor Sentry",

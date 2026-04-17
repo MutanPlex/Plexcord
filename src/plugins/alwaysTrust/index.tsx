@@ -67,6 +67,7 @@ export default definePlugin({
     name: "AlwaysTrust",
     description: () => t(plugin.alwaysTrust.description),
     authors: [Devs.zt, Devs.Trwy],
+    tags: ["privacy", "servers"],
     settings,
 
     patches: [

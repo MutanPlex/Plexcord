@@ -922,6 +922,29 @@ const translations: MatchStructure<typeof enTranslations> = {
     },
 
     plugin: {
+        tags: {
+            accessibility: "Erişilebilirlik",
+            activity: "Etkinlik",
+            appearance: "Görünüm",
+            chat: "Sohbet",
+            commands: "Komutlar",
+            console: "Konsol",
+            customisation: "Özelleştirme",
+            developers: "Geliştiriciler",
+            emotes: "İfadeler",
+            friends: "Arkadaşlar",
+            fun: "Eğlence",
+            media: "Medya",
+            notifications: "Bildirimler",
+            organisation: "Organizasyon",
+            privacy: "Gizlilik",
+            reactions: "Tepkiler",
+            roles: "Roller",
+            servers: "Sunucular",
+            shortcuts: "Kısayollar",
+            utility: "Araçlar",
+            voice: "Ses"
+        },
         noTrack: {
             name: "NoTrack",
             description: "Discord'un takip sistemini (analitik/'science'), metriklerini ve Sentry çökme raporlamasını devre dışı bırakır",

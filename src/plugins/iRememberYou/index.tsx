@@ -22,6 +22,7 @@ export default definePlugin({
     name: "IRememberYou",
     description: () => t(plugin.iRememberYou.description),
     authors: [PcDevs.zoodogood, PcDevs.keircn, PcDevs.MutanPlex],
+    tags: ["friends", "organisation", "utility"],
     dependencies: ["MessageEventsAPI"],
     patches: [],
 

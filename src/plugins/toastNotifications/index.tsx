@@ -165,6 +165,7 @@ export default definePlugin({
     name: "ToastNotifications",
     description: () => t(plugin.toastNotifications.description),
     authors: [PcDevs.Skully, Devs.Ethan, PcDevs.Buzzy],
+    tags: ["notifications", "chat", "friends"],
     settings,
 
     flux: {

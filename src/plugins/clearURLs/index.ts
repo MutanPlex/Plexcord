@@ -51,6 +51,7 @@ export default definePlugin({
     name: "ClearURLs",
     description: () => t(plugin.clearURLs.description),
     authors: [Devs.adryd, Devs.thororen, PcDevs.MutanPlex],
+    tags: ["privacy", "chat"],
 
     rules: [] as RuleSet[],
 

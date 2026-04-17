@@ -922,6 +922,29 @@ const translations: MatchStructure<typeof enTranslations> = {
     },
 
     plugin: {
+        tags: {
+            accessibility: "アクセシビリティ",
+            activity: "アクティビティ",
+            appearance: "外観",
+            chat: "チャット",
+            commands: "コマンド",
+            console: "コンソール",
+            customisation: "カスタマイズ",
+            developers: "開発者",
+            emotes: "エモート",
+            friends: "フレンド",
+            fun: "楽しさ",
+            media: "メディア",
+            notifications: "通知",
+            organisation: "整理",
+            privacy: "プライバシー",
+            reactions: "リアクション",
+            roles: "ロール",
+            servers: "サーバー",
+            shortcuts: "ショートカット",
+            utility: "ユーティリティ",
+            voice: "音声"
+        },
         noTrack: {
             name: "NoTrack",
             description: "Discord のトラッキング (分析/「科学」)、メトリクス、Sentry クラッシュ レポートを無効にする",

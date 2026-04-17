@@ -25,6 +25,7 @@ export default definePlugin({
     name: "NotificationVolume",
     description: () => t(plugin.notificationVolume.description),
     authors: [Devs.philipbry],
+    tags: ["notifications", "utility"],
     settings,
 
     patches: [

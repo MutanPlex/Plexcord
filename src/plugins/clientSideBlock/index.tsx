@@ -156,6 +156,7 @@ export default definePlugin({
     name: "ClientSideBlock",
     description: () => t(plugin.clientSideBlock.description),
     authors: [Devs.Samwich, PcDevs.MutanPlex, PcDevs.KamiRu],
+    tags: ["privacy", "friends", "chat"],
     settings,
 
     activeNowView,

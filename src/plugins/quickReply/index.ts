@@ -64,6 +64,7 @@ export default definePlugin({
     name: "QuickReply",
     description: () => t(plugin.quickReply.description),
     authors: [Devs.fawn, Devs.Ven, Devs.pylix],
+    tags: ["chat", "shortcuts", "utility"],
     settings,
 
     start() {

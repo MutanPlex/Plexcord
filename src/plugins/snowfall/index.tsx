@@ -458,6 +458,7 @@ export default definePlugin({
     name: "Snowfall",
     description: () => t(plugin.snowfall.description),
     authors: [PcDevs.ZcraftElite, PcDevs.square, PcDevs.MutanPlex],
+    tags: ["fun", "appearance"],
 
     settingsAboutComponent: () => (
         <>

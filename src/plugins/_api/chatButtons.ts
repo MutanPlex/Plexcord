@@ -13,6 +13,7 @@ export default definePlugin({
     name: "ChatInputButtonAPI",
     description: () => t(plugins.metadata.api.description.chatInputButtons),
     authors: [Devs.Ven],
+    tags: ["chat", "utility"],
 
     patches: [
         {

@@ -43,6 +43,7 @@ export default definePlugin({
     name: "FriendCloud",
     description: () => t(plugin.friendCloud.description),
     authors: [PcDevs.Fafa, PcDevs.MutanPlex],
+    tags: ["friends", "fun", "commands"],
     commands: [
         {
             inputType: ApplicationCommandInputType.BUILT_IN,

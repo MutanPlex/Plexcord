@@ -25,6 +25,7 @@ export default definePlugin({
     name: "MessageEventsAPI",
     description: () => t(plugins.metadata.api.description.messageEvents),
     authors: [Devs.Arjix, Devs.hunt, Devs.Ven],
+    tags: ["chat", "developers", "utility"],
 
     patches: [
         {

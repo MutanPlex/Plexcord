@@ -52,6 +52,7 @@ export default definePlugin({
     name: "MentionAvatars",
     description: () => t(plugin.mentionAvatars.description),
     authors: [Devs.Ven, Devs.SerStars],
+    tags: ["appearance", "chat"],
 
     patches: [{
         find: ".USER_MENTION)",

@@ -372,6 +372,7 @@ export default definePlugin({
     name: "MessageLinkEmbeds",
     description: () => t(plugin.messageLinkEmbeds.description),
     authors: [Devs.TheSun, Devs.Ven, Devs.RyanCaoDev],
+    tags: ["chat", "utility"],
     dependencies: ["MessageAccessoriesAPI", "MessageUpdaterAPI", "UserSettingsAPI"],
     settings,
 

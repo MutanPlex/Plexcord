@@ -13,6 +13,7 @@ export default definePlugin({
     name: "FileDownloadButton",
     description: () => t(plugin.fileDownloadButton.description),
     authors: [PcDevs.MutanPlex],
+    tags: ["media", "utility"],
 
     patches: [
         {

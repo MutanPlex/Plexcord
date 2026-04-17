@@ -26,6 +26,7 @@ export default definePlugin({
     name: "Unindent",
     description: () => t(plugin.unindent.description),
     authors: [Devs.Ven],
+    tags: ["chat", "developers", "utility"],
 
     patches: [
         {

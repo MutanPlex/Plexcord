@@ -88,6 +88,7 @@ export default definePlugin({
     name: "ShowHiddenChannels",
     description: () => t(plugin.showHiddenChannels.description),
     authors: [Devs.BigDuck, Devs.AverageReactEnjoyer, Devs.D3SOX, Devs.Ven, Devs.Nuckyz, Devs.Nickyux, Devs.dzshn],
+    tags: ["servers", "utility"],
     settings,
 
     patches: [

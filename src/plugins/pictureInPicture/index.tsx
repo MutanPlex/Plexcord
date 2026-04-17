@@ -28,6 +28,7 @@ export default definePlugin({
     name: "PictureInPicture",
     description: () => t(plugin.pictureInPicture.description),
     authors: [Devs.Lumap],
+    tags: ["media", "utility"],
 
     settings,
     patches: [

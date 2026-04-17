@@ -28,6 +28,7 @@ export default definePlugin({
     name: "PinIcon",
     description: () => t(plugin.pinIcon.description),
     authors: [Devs.iamme, PcDevs.MutanPlex],
+    tags: ["chat", "appearance"],
 
     patches: [
         {

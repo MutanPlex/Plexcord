@@ -36,6 +36,7 @@ export default definePlugin({
     name: "AlwaysExpandRoles",
     description: () => t(plugin.alwaysExpandRoles.description),
     authors: [Devs.surgedevs],
+    tags: ["roles"],
     settings,
 
     patches: [

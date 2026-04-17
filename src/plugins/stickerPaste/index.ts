@@ -13,6 +13,7 @@ export default definePlugin({
     name: "StickerPaste",
     description: () => t(plugin.stickerPaste.description),
     authors: [Devs.ImBanana],
+    tags: ["emotes", "chat", "utility"],
 
     patches: [
         {

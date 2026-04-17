@@ -194,6 +194,7 @@ export default definePlugin({
     name: "FakeNitro",
     authors: [Devs.Arjix, Devs.D3SOX, Devs.Ven, Devs.fawn, Devs.captain, Devs.Nuckyz, Devs.AutumnVN, Devs.sadan],
     description: () => t(plugin.fakeNitro.description),
+    tags: ["emotes", "appearance", "media", "chat"],
     dependencies: ["MessageEventsAPI"],
     settings,
 

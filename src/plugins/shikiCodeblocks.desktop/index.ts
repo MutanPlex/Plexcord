@@ -36,6 +36,7 @@ export default definePlugin({
     name: "ShikiCodeblocks",
     description: () => t(plugin.shikiCodeblocks.description),
     authors: [Devs.Vap],
+    tags: ["chat", "developers", "appearance"],
     reporterTestable: ReporterTestable.Patches,
     settings,
 

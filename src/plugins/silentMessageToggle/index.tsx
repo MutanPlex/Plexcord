@@ -114,6 +114,7 @@ export default definePlugin({
     name: "SilentMessageToggle",
     description: () => t(plugin.silentMessageToggle.description),
     authors: [Devs.Nuckyz, Devs.CatNoir],
+    tags: ["chat", "utility"],
     settings,
 
     chatBarButton: {

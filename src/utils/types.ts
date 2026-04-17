@@ -47,6 +47,56 @@ export function makeRange(start: number, end: number, step = 1) {
     return ranges;
 }
 
+export const PluginTags = {
+    accessibility: "accessibility",
+    activity: "activity",
+    appearance: "appearance",
+    chat: "chat",
+    commands: "commands",
+    console: "console",
+    customisation: "customisation",
+    developers: "developers",
+    emotes: "emotes",
+    friends: "friends",
+    fun: "fun",
+    media: "media",
+    notifications: "notifications",
+    organisation: "organisation",
+    privacy: "privacy",
+    reactions: "reactions",
+    roles: "roles",
+    servers: "servers",
+    shortcuts: "shortcuts",
+    utility: "utility",
+    voice: "voice"
+} as const;
+
+export const PluginTagList = [
+    PluginTags.accessibility,
+    PluginTags.activity,
+    PluginTags.appearance,
+    PluginTags.chat,
+    PluginTags.commands,
+    PluginTags.console,
+    PluginTags.customisation,
+    PluginTags.developers,
+    PluginTags.emotes,
+    PluginTags.friends,
+    PluginTags.fun,
+    PluginTags.media,
+    PluginTags.notifications,
+    PluginTags.organisation,
+    PluginTags.privacy,
+    PluginTags.reactions,
+    PluginTags.roles,
+    PluginTags.servers,
+    PluginTags.shortcuts,
+    PluginTags.utility,
+    PluginTags.voice,
+] as const;
+
+export type PluginTag = typeof PluginTagList[number];
+
 export type ReplaceFn = (match: string, ...groups: string[]) => string;
 
 export interface PatchReplacement {
@@ -107,6 +157,9 @@ export interface PluginDef {
     name: string | (() => string);
     description: string | (() => string);
     displayDescription?: string | (() => string);
+    /** Additional search terms that will bring up your plugin */
+    searchTerms?: string[];
+    tags?: PluginTag[];
     authors: PluginAuthor[];
     start?(): void;
     stop?(): void;
@@ -185,8 +238,6 @@ export interface PluginDef {
      *
      */
     toolboxActions?: Record<string, () => void | Promise<void>> | (() => Record<string, () => void | Promise<void>> | ReactNode);
-
-    tags?: string[];
 
     /**
      * Managed style to automatically enable and disable when the plugin is enabled or disabled

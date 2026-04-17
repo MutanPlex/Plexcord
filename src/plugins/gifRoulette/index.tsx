@@ -42,6 +42,7 @@ export default definePlugin({
     name: "GifRoulette",
     description: () => t(plugin.gifRoulette.description),
     authors: [Devs.Samwich, PcDevs.MutanPlex],
+    tags: ["media", "fun", "commands"],
     settings,
     commands: [
         {

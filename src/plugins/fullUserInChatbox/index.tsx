@@ -26,6 +26,7 @@ export default definePlugin({
     name: "FullUserInChatbox",
     description: () => t(plugin.fullUserInChatbox.description),
     authors: [Devs.sadan],
+    tags: ["chat", "utility"],
 
     patches: [
         {

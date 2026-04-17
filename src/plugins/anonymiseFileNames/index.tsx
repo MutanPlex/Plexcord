@@ -82,6 +82,7 @@ export default definePlugin({
     name: "AnonymiseFileNames",
     authors: [Devs.fawn],
     description: () => t(plugin.anonymiseFileNames.description),
+    tags: ["privacy", "chat"],
     settings,
 
     patches: [

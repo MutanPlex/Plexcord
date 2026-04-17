@@ -69,6 +69,7 @@ export default definePlugin({
     name: "ReadAllNotificationsButton",
     description: () => t(plugin.readAllNotificationsButton.description),
     authors: [Devs.kemo],
+    tags: ["notifications", "servers", "utility"],
     dependencies: ["ServerListAPI"],
 
     renderReadAllButton: ErrorBoundary.wrap(ReadAllButton, { noop: true }),

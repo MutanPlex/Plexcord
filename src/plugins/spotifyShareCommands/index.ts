@@ -107,6 +107,7 @@ export default definePlugin({
     name: "SpotifyShareCommands",
     description: () => t(plugin.spotifyShareCommands.description),
     authors: [Devs.katlyn],
+    tags: ["media", "commands", "utility"],
 
     commands: [
         makeCommand("track", track => `https://open.spotify.com/track/${track.id}`),

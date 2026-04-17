@@ -87,6 +87,7 @@ export default definePlugin({
     name: "FavoriteGifSearch",
     description: () => t(plugin.favoriteGifSearch.description),
     authors: [Devs.Aria],
+    tags: ["media", "chat", "utility"],
 
     patches: [
         {

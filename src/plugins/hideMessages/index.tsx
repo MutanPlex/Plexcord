@@ -53,6 +53,7 @@ export default definePlugin({
     name: "HideMessages",
     description: () => t(plugin.hideMessages.description),
     authors: [PcDevs.yash],
+    tags: ["privacy", "chat", "utility"],
     contextMenus: {
         "message": messageCtxPatch
     },

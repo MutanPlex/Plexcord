@@ -250,6 +250,7 @@ export default definePlugin({
     name: "QuickThemeSwitcher",
     description: () => t(plugin.quickThemeSwitcher.description),
     authors: [Devs.prism],
+    tags: ["appearance", "customisation", "shortcuts"],
     settings,
     startAt: StartAt.DOMContentLoaded,
     settingsAboutComponent: () => (

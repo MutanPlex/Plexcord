@@ -82,6 +82,7 @@ export default definePlugin({
     name: "GoogleThat",
     description: () => t(plugin.googleThat.description),
     authors: [Devs.Samwich, PcDevs.KrystalSkull, PcDevs.MutanPlex],
+    tags: ["commands", "utility", "chat"],
     settings,
 
     commands: [

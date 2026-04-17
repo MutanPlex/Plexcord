@@ -34,6 +34,7 @@ export default definePlugin({
     name: "MoreCommands",
     description: () => t(plugin.moreCommands.description),
     authors: [Devs.Arjix, Devs.Samu, PcDevs.zyqunix],
+    tags: ["commands", "fun"],
 
     commands: [
         {

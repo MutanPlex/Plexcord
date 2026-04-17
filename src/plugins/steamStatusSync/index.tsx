@@ -93,6 +93,7 @@ export default definePlugin({
     name: "SteamStatusSync",
     description: () => t(plugin.steamStatusSync.description),
     authors: [PcDevs.niko],
+    tags: ["activity", "utility"],
 
     settings,
 

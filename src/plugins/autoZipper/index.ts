@@ -213,6 +213,7 @@ export default definePlugin({
     name: "AutoZipper",
     description: () => t(plugin.autoZipper.description),
     authors: [PcDevs.SSnowly],
+    tags: ["utility", "chat"],
     settings,
 
     start() {

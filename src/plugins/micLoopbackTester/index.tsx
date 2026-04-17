@@ -118,6 +118,7 @@ export default definePlugin({
     name: "MicLoopbackTester",
     description: () => t(plugin.micLoopbackTester.description),
     authors: [PcDevs.benjii],
+    tags: ["voice", "utility"],
     dependencies: ["UserSettingsAPI", "UserAreaAPI"],
     userAreaButton: {
         icon: MicLoopbackIcon,

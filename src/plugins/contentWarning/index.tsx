@@ -155,6 +155,7 @@ export default definePlugin({
     name: "ContentWarning",
     description: () => t(plugin.contentWarning.description),
     authors: [PcDevs.camila314],
+    tags: ["chat", "privacy"],
     settings,
 
     patches: [

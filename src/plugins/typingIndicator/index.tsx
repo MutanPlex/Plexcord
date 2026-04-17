@@ -174,6 +174,7 @@ export default definePlugin({
     name: "TypingIndicator",
     description: () => t(plugin.typingIndicator.description),
     authors: [Devs.Nuckyz, Devs.fawn, Devs.Sqaaakoi],
+    tags: ["chat", "utility"],
     settings,
 
     patches: [

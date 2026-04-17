@@ -177,6 +177,7 @@ export default definePlugin({
     name: "ValidUser",
     description: () => t(plugin.validUser.description),
     authors: [Devs.Ven, Devs.Dolfies],
+    tags: ["chat", "utility"],
 
     patches: [
         {

@@ -69,6 +69,7 @@ export default definePlugin({
     name: "MessageLinkTooltip",
     description: () => t(plugin.messageLinkTooltip.description),
     authors: [Devs.Kyuuhachi, PcDevs.MutanPlex],
+    tags: ["chat", "utility"],
     settings,
 
     patches: [

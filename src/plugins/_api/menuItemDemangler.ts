@@ -28,6 +28,7 @@ export default definePlugin({
     name: "MenuItemDemanglerAPI",
     description: () => t(plugins.metadata.api.description.menuItemDemangler),
     authors: [Devs.Ven],
+    tags: ["developers", "utility"],
     required: true,
 
     patches: [

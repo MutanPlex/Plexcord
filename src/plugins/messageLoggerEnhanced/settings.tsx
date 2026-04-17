@@ -6,12 +6,11 @@
  */
 
 import { plugin, t } from "@api/i18n";
-import { definePluginSettings } from "@api/Settings";
+import { definePluginSettings, Settings } from "@api/Settings";
 import { Button } from "@components/Button";
 import ErrorBoundary from "@components/ErrorBoundary";
 import { OptionType } from "@utils/types";
 import { Alerts, useState } from "@webpack/common";
-import { Settings } from "Plexcord";
 
 import { clearLogs, Native } from ".";
 import { ImageCacheDir, LogsDir } from "./components/FolderSelectInput";

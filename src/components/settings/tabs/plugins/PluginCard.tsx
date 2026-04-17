@@ -8,11 +8,11 @@
 import { plugins, t } from "@api/i18n";
 import { showNotice } from "@api/Notices";
 import { isPluginEnabled, pluginRequiresRestart, startDependenciesRecursive, startPlugin, stopPlugin } from "@api/PluginManager";
+import { Settings } from "@api/Settings";
 import { CogWheel, InfoIcon } from "@components/Icons";
 import { AddonCard } from "@components/settings/AddonCard";
 import { OptionType, Plugin } from "@utils/types";
 import { React, showToast, Toasts } from "@webpack/common";
-import { Settings } from "Plexcord";
 
 import { cl, logger } from ".";
 import { openPluginModal } from "./PluginModal";

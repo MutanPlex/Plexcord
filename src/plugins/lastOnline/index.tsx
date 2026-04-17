@@ -52,6 +52,7 @@ export default definePlugin({
     name: "LastOnline",
     description: () => t(plugin.lastOnline.description),
     authors: [PcDevs.MutanPlex, PcDevs.Nick],
+    tags: ["friends", "utility"],
 
     flux: {
         PRESENCE_UPDATES({ updates }) {

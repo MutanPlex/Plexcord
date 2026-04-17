@@ -20,7 +20,7 @@
 import "./PluginModal.css";
 
 import { generateId } from "@api/Commands";
-import { plugins, t, useForceUpdateOnLocaleChange } from "@api/i18n";
+import { plugin as pluginI18n, plugins, t, useForceUpdateOnLocaleChange } from "@api/i18n";
 import { useSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
 import { Button } from "@components/Button";
@@ -35,7 +35,7 @@ import { proxyLazy } from "@utils/lazy";
 import { Margins } from "@utils/margins";
 import { classes, isObjectEmpty } from "@utils/misc";
 import { CloseButton, ModalContent, ModalFooter, ModalHeader, ModalProps, ModalRoot, ModalSize, openModal } from "@utils/modal";
-import { OptionType, Plugin } from "@utils/types";
+import { OptionType, Plugin, PluginTag } from "@utils/types";
 import { findComponentByCodeLazy, findCssClassesLazy } from "@webpack";
 import { Clickable, FluxDispatcher, React, Toasts, Tooltip, useEffect, useMemo, UserStore, UserSummaryItem, UserUtils, useState } from "@webpack/common";
 import { Constructor } from "type-fest";
@@ -77,6 +77,16 @@ export function makeDummyUser(user: { username: string; id?: string; avatar?: st
     });
 
     return newUser;
+}
+
+function PluginTags({ tags }: { tags: PluginTag[]; }) {
+    return (
+        <div className={cl("tags")}>
+            {tags.map(tag => (
+                <div key={tag} className={cl("tag")}>{t(pluginI18n.tags[tag])}</div>
+            ))}
+        </div>
+    );
 }
 
 export default function PluginModal({ plugin, onRestartNeeded, onClose, transitionState }: PluginModalProps) {
@@ -180,6 +190,7 @@ export default function PluginModal({ plugin, onRestartNeeded, onClose, transiti
                 <div className={cl("header-content")}>
                     <BaseText size="lg" weight="semibold" className={cl("title")}>{displayName}</BaseText>
                     <BaseText size="sm" className={cl("description")}>{displayDescription}</BaseText>
+                    {!!plugin.tags?.length && <PluginTags tags={plugin.tags} />}
                     {!!plugin.settingsAboutComponent && (
                         <div className={Margins.top8}>
                             <ErrorBoundary message={t(plugins.error.infoRender)}>

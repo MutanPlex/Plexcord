@@ -96,7 +96,7 @@ export function ReplaceSettings({ appIds, update, save }: SettingsProps) {
                         }
                         <Heading className={`${Margins.top8} ${Margins.bottom8}`}>{t(plugin.rpcEditor.modal.settings.appId)}</Heading>
                         <CheckedTextInput
-                            value={setting.appId}
+                            initialValue={setting.appId}
                             onChange={async v => {
                                 onChange(v, i, "appId");
                             }}
@@ -127,7 +127,7 @@ export function ReplaceSettings({ appIds, update, save }: SettingsProps) {
                                     <>
                                         <Heading className={`${Margins.top8} ${Margins.bottom8}`}>{t(plugin.rpcEditor.modal.settings.streamUrl)}</Heading>
                                         <CheckedTextInput
-                                            value={setting.newStreamUrl}
+                                            initialValue={setting.newStreamUrl}
                                             onChange={async v => {
                                                 onChange(v, i, "newStreamUrl");
                                             }}

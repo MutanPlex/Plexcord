@@ -59,6 +59,7 @@ export default definePlugin({
         Devs.Nuckyz,
         PcDevs.MutanPlex
     ],
+    tags: ["developers", "utility"],
     settings,
 
     patches: [

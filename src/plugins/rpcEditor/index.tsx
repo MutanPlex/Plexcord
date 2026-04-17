@@ -76,7 +76,8 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "RPCEditor",
     description: () => t(plugin.rpcEditor.description),
-    authors: [Devs.Nyako, Devs.nin0dev],
+    authors: [Devs.Nyako, Devs.nin0],
+    tags: ["activity", "customisation", "utility"],
     patches: [
         {
             find: '"LocalActivityStore"',

@@ -49,6 +49,7 @@ export default definePlugin({
     name: "CopyUserURLs",
     description: () => t(plugin.copyUserURLs.description),
     authors: [Devs.castdrian],
+    tags: ["friends", "utility"],
 
     contextMenus: {
         "user-context": UserContextMenuPatch

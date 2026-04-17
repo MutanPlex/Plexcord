@@ -201,6 +201,7 @@ export default definePlugin({
     name: "Animalese",
     description: () => t(plugin.animalese.description),
     authors: [PcDevs.ryanamay, PcDevs.Mocha, PcDevs.MutanPlex],
+    tags: ["fun", "voice", "chat"],
     settings,
 
     flux: {

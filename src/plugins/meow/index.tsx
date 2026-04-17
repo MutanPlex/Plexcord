@@ -59,6 +59,7 @@ export default definePlugin({
     description: () => t(plugin.meow.description),
     dependencies: ["ChatInputButtonAPI"],
     authors: [Devs.Samwich, PcDevs.MutanPlex],
+    tags: ["fun", "chat", "media"],
 
     chatBarButton: {
         icon: MeowIcon,

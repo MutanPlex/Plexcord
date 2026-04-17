@@ -25,6 +25,7 @@ export default definePlugin({
     name: "ContextMenuAPI",
     description: () => t(plugins.metadata.api.description.contextMenu),
     authors: [Devs.Nuckyz, Devs.Ven, Devs.Kyuuhachi],
+    tags: ["utility", "developers"],
     required: true,
 
     patches: [

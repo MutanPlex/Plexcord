@@ -278,6 +278,7 @@ export default definePlugin({
     name: "VoiceMessages",
     description: () => t(plugin.voiceMessages.description),
     authors: [Devs.Ven, Devs.Vap, Devs.Nickyux, PcDevs.Z1xus],
+    tags: ["voice", "chat", "media", "utility"],
     settings,
 
     contextMenus: {

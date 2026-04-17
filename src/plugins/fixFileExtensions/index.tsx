@@ -31,6 +31,7 @@ export default definePlugin({
     name: "FixFileExtensions",
     description: () => t(plugin.fixFileExtensions.description),
     authors: [Devs.thororen, PcDevs.MutanPlex],
+    tags: ["media", "utility"],
     reporterTestable: ReporterTestable.None,
 
     patches: [

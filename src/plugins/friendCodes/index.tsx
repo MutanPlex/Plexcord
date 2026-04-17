@@ -15,6 +15,7 @@ export default definePlugin({
     name: "FriendCodes",
     description: () => t(plugin.friendCodes.description),
     authors: [Devs.HypedDomi, PcDevs.MutanPlex],
+    tags: ["friends", "utility"],
     patches: [
         {
             find: "#{intl::ADD_FRIEND})}),(",

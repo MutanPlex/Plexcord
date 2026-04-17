@@ -35,6 +35,7 @@ export default definePlugin({
     name: "OverrideForumDefaults",
     description: () => t(plugin.overrideForumDefaults.description),
     authors: [Devs.Inbestigator],
+    tags: ["servers", "organisation", "utility"],
 
     patches: [
         {

@@ -218,7 +218,8 @@ export async function setRpc(disable?: boolean) {
 export default definePlugin({
     name: "CustomRPC",
     description: () => t(plugin.customRPC.description),
-    authors: [Devs.captain, Devs.AutumnVN, Devs.nin0dev],
+    authors: [Devs.captain, Devs.AutumnVN, Devs.nin0],
+    tags: ["activity", "customisation"],
     dependencies: ["UserSettingsAPI"],
     // This plugin's patch is not important for functionality, so don't require a restart
     requiresRestart: false,

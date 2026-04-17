@@ -41,6 +41,7 @@ export default definePlugin({
     name: "MessageNotifier",
     description: () => t(plugin.messageNotifier.description),
     authors: [PcDevs.cassie, PcDevs.mochienya, PcDevs.MutanPlex],
+    tags: ["notifications", "chat"],
     settings,
 
     flux: {

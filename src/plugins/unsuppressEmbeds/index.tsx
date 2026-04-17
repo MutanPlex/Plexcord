@@ -64,6 +64,7 @@ export default definePlugin({
     name: "UnsuppressEmbeds",
     description: () => t(plugin.unsuppressEmbeds.description),
     authors: [Devs.rad, Devs.HypedDomi],
+    tags: ["chat", "media", "utility"],
 
     contextMenus: {
         "message": messageContextMenuPatch

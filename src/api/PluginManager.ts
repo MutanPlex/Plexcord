@@ -36,6 +36,7 @@ import { addAudioProcessor, removeAudioProcessor } from "@api/AudioPlayer";
 import { addChannelToolbarButton, addHeaderBarButton, removeChannelToolbarButton, removeHeaderBarButton } from "@api/HeaderBar";
 import { addProfileCollection, removeProfileCollection } from "@api/ProfileCollections";
 import { addUserAreaButton, removeUserAreaButton } from "@api/UserArea";
+import { traceFunction } from "@debug/Tracer";
 import { onlyOnce } from "@utils/onlyOnce";
 import { canonicalizeFind, canonicalizeReplacement } from "@utils/patches";
 import { Patch, Plugin, PluginDef, ReporterTestable, StartAt } from "@utils/types";
@@ -43,8 +44,6 @@ import { FluxDispatcher } from "@webpack/common";
 import { patches } from "@webpack/patcher";
 
 import Plugins from "~plugins";
-
-import { traceFunction } from "../debug/Tracer";
 
 const logger = new Logger("PluginManager", "#a6d189");
 

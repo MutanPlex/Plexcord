@@ -13,6 +13,7 @@ export default definePlugin({
     name: "NoModalAnimation",
     description: () => t(plugin.noModalAnimation.description),
     authors: [Devs.AutumnVN, PcDevs.MutanPlex],
+    tags: ["appearance", "accessibility", "utility"],
 
     patches: [
         {

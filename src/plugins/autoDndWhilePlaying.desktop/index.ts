@@ -52,6 +52,7 @@ export default definePlugin({
     name: "AutoDNDWhilePlaying",
     description: () => t(plugin.autoDNDWhilePlaying.description),
     authors: [Devs.thororen, PcDevs.MutanPlex],
+    tags: ["activity", "notifications"],
     settings,
 
     flux: {

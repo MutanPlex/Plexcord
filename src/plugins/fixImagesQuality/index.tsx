@@ -28,6 +28,7 @@ export default definePlugin({
     name: "FixImagesQuality",
     description: () => t(plugin.fixImagesQuality.description),
     authors: [Devs.Nuckyz, Devs.Ven],
+    tags: ["media", "utility"],
     settings,
 
     patches: [

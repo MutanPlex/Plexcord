@@ -29,6 +29,7 @@ export default definePlugin({
     name: "NoServerEmojis",
     description: () => t(plugin.noServerEmojis.description),
     authors: [Devs.UlyssesZhan],
+    tags: ["emotes", "chat", "utility"],
     settings,
 
     patches: [

@@ -40,6 +40,7 @@ export default definePlugin({
     name: "FrequentQuickSwitcher",
     description: () => t(plugin.frequentQuickSwitcher.description),
     authors: [Devs.Samwich],
+    tags: ["organisation", "shortcuts", "utility"],
     generateSearchResults: generateSearchResults,
 
     patches: [

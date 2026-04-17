@@ -43,6 +43,7 @@ export default definePlugin({
     name: "Freaky",
     description: () => t(plugin.freaky.description),
     authors: [PcDevs.nyx, PcDevs.MutanPlex],
+    tags: ["chat", "fun", "commands"],
     settings,
 
     commands: [

@@ -37,6 +37,7 @@ export default definePlugin({
     name: "BetterInvites",
     description: () => t(plugin.betterInvites.description),
     authors: [Devs.iamme, PcDevs.MutanPlex, Devs.thororen],
+    tags: ["servers"],
 
     patches: [
         {

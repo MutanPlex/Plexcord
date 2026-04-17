@@ -36,6 +36,7 @@ export default definePlugin({
     name: "ValidReply",
     description: () => t(plugin.validReply.description),
     authors: [Devs.newwares],
+    tags: ["chat", "utility"],
 
     patches: [
         {
