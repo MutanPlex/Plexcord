@@ -17,6 +17,12 @@ A powerful, lightweight Discord client modification that enhances your Discord e
 
 ---
 
+Hey everyone! I’m stepping away from the keyboard for a while to fulfill my mandatory military service. This means updates will be on pause for a bit.
+
+If you find a bug and wonder "Where is the dev?", I’m probably at roll call or on guard duty. I’ll tackle all issues and new features one by one once I'm back. Thanks for your patience and understanding! 🫡
+
+---
+
 ## ✨ Features
 
 ### 🚀 Easy Installation & Setup
