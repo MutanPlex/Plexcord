@@ -9420,9 +9420,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "打开侧边栏聊天"
             },
+            channelTitle: {
+                chat: "聊天",
+                dm: "私信"
+            },
             modal: {
                 switch: "切换频道",
                 popout: "弹出聊天窗口",
+                popoutClose: "关闭弹出聊天窗口",
+                popoutFor: "为 {{channel}} 弹出聊天窗口",
                 close: "关闭侧边栏聊天"
             },
             option: {
@@ -9430,9 +9436,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "保留侧边栏聊天",
                     description: "在 Discord 重新启动时保持侧边栏聊天处于打开状态"
                 },
+                persistPopoutWindows: {
+                    label: "保留弹出聊天窗口",
+                    description: "Discord 重新启动后恢复已打开的弹出聊天窗口"
+                },
+                popoutAlwaysOnTop: {
+                    label: "弹出窗口置顶",
+                    description: "使弹出聊天窗口始终保持在其他窗口之上。"
+                },
                 patchCommunity: {
                     label: "补丁社区",
                     description: "修补社区服务器具有的频道浏览器或成员选项卡等功能。"
+                },
+                persistedPopoutWindowIds: {
+                    description: "已保留的弹出聊天频道 ID。"
                 }
             }
         },

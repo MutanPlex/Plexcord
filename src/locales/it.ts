@@ -9420,9 +9420,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Apri Chat Laterale"
             },
+            channelTitle: {
+                chat: "Chat",
+                dm: "DM"
+            },
             modal: {
                 switch: "Cambia canali",
                 popout: "Finestra esterna",
+                popoutClose: "Chiudi finestra esterna",
+                popoutFor: "Finestra esterna per {{channel}}",
                 close: "Chiudi chat laterale"
             },
             option: {
@@ -9430,9 +9436,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Persisti Chat Laterale",
                     description: "Mantieni la chat laterale aperta al riavvio di Discord"
                 },
+                persistPopoutWindows: {
+                    label: "Persisti finestre esterne",
+                    description: "Ripristina le finestre esterne aperte dopo il riavvio di Discord"
+                },
+                popoutAlwaysOnTop: {
+                    label: "Sempre in primo piano",
+                    description: "Mantieni le finestre esterne di chat sopra tutte le altre."
+                },
                 patchCommunity: {
                     label: "Patch Community",
                     description: "Applica modifiche a funzioni come 'Sfoglia Canali' o il tab 'Membri' dei server community."
+                },
+                persistedPopoutWindowIds: {
+                    description: "ID dei canali delle finestre esterne persistite."
                 }
             }
         },

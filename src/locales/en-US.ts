@@ -9418,9 +9418,15 @@ const translations = {
             context: {
                 label: "Open Sidebar Chat"
             },
+            channelTitle: {
+                chat: "Chat",
+                dm: "DM"
+            },
             modal: {
                 switch: "Switch channels",
                 popout: "Popout chat",
+                popoutClose: "Close popout chat",
+                popoutFor: "Popout chat for {{channel}}",
                 close: "Close sidebar chat"
             },
             option: {
@@ -9428,9 +9434,20 @@ const translations = {
                     label: "Persist Sidebar Chat",
                     description: "Keep the sidebar chat open across Discord restarts"
                 },
+                persistPopoutWindows: {
+                    label: "Persist Popout Chats",
+                    description: "Restore open popout chats after Discord restarts"
+                },
+                popoutAlwaysOnTop: {
+                    label: "Popout Always on Top",
+                    description: "Keep popout chat windows above all others."
+                },
                 patchCommunity: {
                     label: "Patch Community",
                     description: "Patch things like the Channel Browser or Members tab that community servers have."
+                },
+                persistedPopoutWindowIds: {
+                    description: "Persisted popout chat channel IDs."
                 }
             }
         },

@@ -37,6 +37,7 @@ import { openDonorModal } from "./modals";
 const CONTRIBUTOR_BADGE = "https://cdn.discordapp.com/emojis/1092089799109775453.png?size=64";
 const PLEXCORD_BADGE = "https://cdn.discordapp.com/emojis/1357527217332031508.webp?size=64";
 const ContributorBadge: ProfileBadge = {
+    id: "vencord_contributor",
     get description() {
         return t(plugins.metadata.badges.contributor.vencord);
     },
@@ -47,6 +48,7 @@ const ContributorBadge: ProfileBadge = {
 };
 
 const PlexcordBadge: ProfileBadge = {
+    id: "plexcord_contributor",
     get description() {
         return t(plugins.metadata.badges.contributor.plexcord);
     },
@@ -57,6 +59,7 @@ const PlexcordBadge: ProfileBadge = {
 };
 
 const UserPluginContributorBadge: ProfileBadge = {
+    id: "user_plugin_contributor",
     get description() {
         return t(plugins.metadata.badges.contributor.userPlugin);
     },
@@ -104,7 +107,7 @@ async function loadAllBadges(noCache = false) {
 
 let intervalId: any;
 
-export function BadgeContextMenu({ badge }: { badge: ProfileBadge & BadgeUserArgs; }) {
+export function BadgeContextMenu({ badge }: { badge: Omit<ProfileBadge, "id"> & BadgeUserArgs; }) {
     return (
         <Menu.Menu
             navId="pc-badge-context"
@@ -227,7 +230,8 @@ export default definePlugin({
     },
 
     getDonorBadges(userId: string) {
-        return DonorBadges[userId]?.map(badge => ({
+        return DonorBadges[userId]?.map((badge, idx) => ({
+            id: `plexcord_donor_badge_${idx}`,
             iconSrc: badge.badge,
             description: badge.tooltip,
             position: BadgePosition.START,

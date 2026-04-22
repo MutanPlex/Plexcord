@@ -9420,9 +9420,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Deschide chat în bara laterală"
             },
+            channelTitle: {
+                chat: "Chat",
+                dm: "DM"
+            },
             modal: {
                 switch: "Schimbă canalele",
                 popout: "Fereastră separată chat",
+                popoutClose: "Închide fereastra popout",
+                popoutFor: "Fereastră popout pentru {{channel}}",
                 close: "Închide chat-ul lateral"
             },
             option: {
@@ -9430,9 +9436,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Menține chat-ul lateral",
                     description: "Păstrează chat-ul lateral deschis după repornirea Discord"
                 },
+                persistPopoutWindows: {
+                    label: "Păstrează ferestrele popout",
+                    description: "Restaurează ferestrele popout deschise după repornirea Discord"
+                },
+                popoutAlwaysOnTop: {
+                    label: "Popout mereu deasupra",
+                    description: "Păstrează ferestrele popout de chat deasupra tuturor celorlalte."
+                },
                 patchCommunity: {
                     label: "Patch comunitate",
                     description: "Patch pentru funcții precum Channel Browser sau fila Members de pe serverele de comunitate."
+                },
+                persistedPopoutWindowIds: {
+                    description: "ID-urile canalelor pentru ferestrele popout persistate."
                 }
             }
         },

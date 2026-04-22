@@ -9420,9 +9420,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "사이드바 채팅 열기"
             },
+            channelTitle: {
+                chat: "채팅",
+                dm: "DM"
+            },
             modal: {
                 switch: "채널 전환",
                 popout: "팝아웃 채팅",
+                popoutClose: "팝아웃 채팅 닫기",
+                popoutFor: "{{channel}} 팝아웃 채팅 열기",
                 close: "사이드바 채팅 닫기"
             },
             option: {
@@ -9430,9 +9436,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "사이드바 채팅 지속",
                     description: "Discord를 다시 시작해도 사이드바 채팅을 열어두세요"
                 },
+                persistPopoutWindows: {
+                    label: "팝아웃 채팅 유지",
+                    description: "Discord를 다시 시작한 후 열려 있던 팝아웃 채팅을 복원합니다"
+                },
+                popoutAlwaysOnTop: {
+                    label: "항상 위에 표시",
+                    description: "팝아웃 채팅 창을 다른 모든 창 위에 표시합니다."
+                },
                 patchCommunity: {
                     label: "패치 커뮤니티",
                     description: "커뮤니티 서버에 있는 채널 브라우저 또는 회원 탭과 같은 패치 기능입니다."
+                },
+                persistedPopoutWindowIds: {
+                    description: "유지되는 팝아웃 채팅 채널 ID."
                 }
             }
         },

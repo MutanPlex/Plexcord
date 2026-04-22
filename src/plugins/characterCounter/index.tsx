@@ -13,9 +13,11 @@ import { ErrorBoundary } from "@components/index";
 import { Devs, PcDevs } from "@utils/constants";
 import { classNameFactory } from "@utils/css";
 import definePlugin, { OptionType } from "@utils/types";
-import { UserStore } from "@webpack/common";
+import { findByPropsLazy } from "@webpack";
+import { useEffect, UserStore, useState } from "@webpack/common";
 
 const cl = classNameFactory("pc-charCounter-");
+const SlateUtils = findByPropsLazy("getSelectedText");
 
 const settings = definePluginSettings({
     colorEffects: {
@@ -45,8 +47,8 @@ export default definePlugin({
             find: ".CREATE_FORUM_POST||",
             replacement: [
                 {
-                    match: /(?<=textValue:(\i),editorHeight:\i,channelId:\i\.id\}\)),\i/,
-                    replace: ",$self.renderCharCounter({text:$1})"
+                    match: /(?<=,editorRef:(\i),.{0,200}textValue:(\i),editorHeight:\i,channelId:\i\.id\}\)),\i/,
+                    replace: ",$self.renderCharCounter({editorRef:$1,text:$2})"
                 }
             ]
         },
@@ -59,16 +61,33 @@ export default definePlugin({
         }
     ],
 
-    renderCharCounter: ErrorBoundary.wrap(({ text }: { text: string; }) => {
-        if (!text.length) return null;
+    renderCharCounter: ErrorBoundary.wrap(({ editorRef, text }: { text: string; editorRef: any; }) => {
+        const [selectedCount, setSelectedCount] = useState(0);
+        const showSelected = selectedCount > 0 && (editorRef?.current?.state?.focused ?? false);
 
+        useEffect(() => {
+            const listener = () => {
+                if (!editorRef?.current) return setSelectedCount(0);
+
+                setTimeout(() => setSelectedCount(SlateUtils.getSelectedText(editorRef.current.getSlateEditor())?.length ?? 0), 50);
+            };
+
+            document.addEventListener("selectionchange", listener);
+            return () => document.removeEventListener("selectionchange", listener);
+        }, []);
+
+        if (!text.length) return null;
         const premiumType = UserStore.getCurrentUser().premiumType ?? 0;
         const charMax = premiumType === 2 ? 4000 : 2000;
-
         const color = getCounterColor((text.length / charMax) * 100);
-
         return (
             <div className={cl("counter")} style={{ color }}>
+                {showSelected && (
+                    <>
+                        <span className={cl("selected")}>{selectedCount}</span>
+                        /
+                    </>
+                )}
                 <span className={cl("count")}>{text.length}</span>
                 /
                 <span className={cl("max")}>{charMax}</span>

@@ -9420,9 +9420,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Abrir Chat na Barra Lateral"
             },
+            channelTitle: {
+                chat: "Chat",
+                dm: "DM"
+            },
             modal: {
                 switch: "Mudar de canal",
                 popout: "Chat em popout",
+                popoutClose: "Fechar chat em popout",
+                popoutFor: "Chat em popout para {{channel}}",
                 close: "Fechar chat lateral"
             },
             option: {
@@ -9430,9 +9436,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Persistir Chat Lateral",
                     description: "Manter o chat lateral aberto mesmo após reiniciar o Discord"
                 },
+                persistPopoutWindows: {
+                    label: "Persistir Chats em Popout",
+                    description: "Restaurar chats em popout abertos após reiniciar o Discord"
+                },
+                popoutAlwaysOnTop: {
+                    label: "Popout Sempre no Topo",
+                    description: "Manter janelas de chat em popout acima de todas as outras."
+                },
                 patchCommunity: {
                     label: "Corrigir Comunidade",
                     description: "Corrige funcionalidades como o Navegador de Canais ou o separador de Membros que os servidores de comunidade possuem."
+                },
+                persistedPopoutWindowIds: {
+                    description: "IDs de canal de chats em popout persistidos."
                 }
             }
         },

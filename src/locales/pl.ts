@@ -9420,9 +9420,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Otwórz w pasku bocznym"
             },
+            channelTitle: {
+                chat: "Czat",
+                dm: "PW"
+            },
             modal: {
                 switch: "Zmień kanały",
                 popout: "Otwórz w nowym oknie",
+                popoutClose: "Zamknij okno",
+                popoutFor: "Otwórz w nowym oknie dla {{channel}}",
                 close: "Zamknij pasek boczny"
             },
             option: {
@@ -9430,9 +9436,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Zapamiętaj pasek boczny",
                     description: "Zachowaj otwarty pasek boczny po restarcie Discorda"
                 },
+                persistPopoutWindows: {
+                    label: "Zapamiętaj okna",
+                    description: "Przywracaj otwarte okna czatów po restarcie Discorda"
+                },
+                popoutAlwaysOnTop: {
+                    label: "Zawsze na wierzchu",
+                    description: "Utrzymuj okna czatów ponad wszystkimi innymi."
+                },
                 patchCommunity: {
                     label: "Poprawki społeczności",
                     description: "Naprawia funkcje takie jak Przeglądarka Kanałów na serwerach społecznościowych."
+                },
+                persistedPopoutWindowIds: {
+                    description: "Identyfikatory kanałów zapisanych okien czatów."
                 }
             }
         },

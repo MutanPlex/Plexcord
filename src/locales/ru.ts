@@ -9420,9 +9420,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Открыть в боковой панели"
             },
+            channelTitle: {
+                chat: "Чат",
+                dm: "ЛС"
+            },
             modal: {
                 switch: "Переключить каналы",
                 popout: "Открыть в окне",
+                popoutClose: "Закрыть окно",
+                popoutFor: "Открыть в окне для {{channel}}",
                 close: "Закрыть боковую панель"
             },
             option: {
@@ -9430,9 +9436,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Сохранять состояние",
                     description: "Оставлять боковой чат открытым после перезапуска Discord"
                 },
+                persistPopoutWindows: {
+                    label: "Сохранять окна чатов",
+                    description: "Восстанавливать открытые окна чатов после перезапуска Discord"
+                },
+                popoutAlwaysOnTop: {
+                    label: "Всегда поверх других",
+                    description: "Держать окна чатов поверх всех остальных."
+                },
                 patchCommunity: {
                     label: "Исправление сообществ",
                     description: "Исправляет работу функций (обзор каналов, вкладка участников) в сообществах при использовании плагина."
+                },
+                persistedPopoutWindowIds: {
+                    description: "ID каналов для сохранённых окон чатов."
                 }
             }
         },

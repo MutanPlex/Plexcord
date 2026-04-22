@@ -9420,9 +9420,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Ouvrir dans le chat latéral"
             },
+            channelTitle: {
+                chat: "Chat",
+                dm: "MP"
+            },
             modal: {
                 switch: "Changer de salon",
                 popout: "Fenêtre externe",
+                popoutClose: "Fermer la fenêtre externe",
+                popoutFor: "Fenêtre externe pour {{channel}}",
                 close: "Fermer le chat latéral"
             },
             option: {
@@ -9430,9 +9436,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Persister le chat latéral",
                     description: "Garder le chat latéral ouvert après le redémarrage de Discord."
                 },
+                persistPopoutWindows: {
+                    label: "Persister les fenêtres externes",
+                    description: "Restaure les fenêtres externes ouvertes après le redémarrage de Discord."
+                },
+                popoutAlwaysOnTop: {
+                    label: "Toujours au premier plan",
+                    description: "Garder les fenêtres externes au-dessus de toutes les autres."
+                },
                 patchCommunity: {
                     label: "Patch Communauté",
                     description: "Corrige les fonctionnalités comme l'explorateur de salons ou l'onglet membres sur les serveurs communautaires."
+                },
+                persistedPopoutWindowIds: {
+                    description: "IDs de salons des fenêtres externes persistées."
                 }
             }
         },

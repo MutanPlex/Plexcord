@@ -9420,9 +9420,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Відкрити чат у бічній панелі"
             },
+            channelTitle: {
+                chat: "Чат",
+                dm: "ПП"
+            },
             modal: {
                 switch: "Змінити канали",
                 popout: "Відкрити в окремому вікні",
+                popoutClose: "Закрити окреме вікно",
+                popoutFor: "Відкрити в окремому вікні для {{channel}}",
                 close: "Закрити бічний чат"
             },
             option: {
@@ -9430,9 +9436,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Зберігати бічний чат",
                     description: "Залишати бічний чат відкритим після перезапуску Discord"
                 },
+                persistPopoutWindows: {
+                    label: "Зберігати окремі вікна",
+                    description: "Відновлювати відкриті окремі вікна після перезапуску Discord"
+                },
+                popoutAlwaysOnTop: {
+                    label: "Завжди поверх інших",
+                    description: "Тримати окремі вікна чату поверх усіх інших."
+                },
                 patchCommunity: {
                     label: "Виправлення функцій спільнот",
                     description: "Виправляє такі функції, як Огляд каналів або вкладка Учасників для спільнот."
+                },
+                persistedPopoutWindowIds: {
+                    description: "ID каналів для збережених окремих вікон чату."
                 }
             }
         },

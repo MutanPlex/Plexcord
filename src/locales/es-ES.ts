@@ -9420,9 +9420,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Abrir en barra lateral"
             },
+            channelTitle: {
+                chat: "Chat",
+                dm: "MD"
+            },
             modal: {
                 switch: "Cambiar canales",
                 popout: "Ventana emergente",
+                popoutClose: "Cerrar ventana emergente",
+                popoutFor: "Ventana emergente para {{channel}}",
                 close: "Cerrar chat lateral"
             },
             option: {
@@ -9430,9 +9436,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Mantener barra lateral",
                     description: "Mantiene el chat lateral abierto al reiniciar Discord."
                 },
+                persistPopoutWindows: {
+                    label: "Mantener ventanas emergentes",
+                    description: "Restaura las ventanas emergentes abiertas al reiniciar Discord."
+                },
+                popoutAlwaysOnTop: {
+                    label: "Siempre encima",
+                    description: "Mantiene las ventanas emergentes por encima de todas las demás."
+                },
                 patchCommunity: {
                     label: "Parchear comunidad",
                     description: "Parchea funciones como el Buscador de canales en servidores de comunidad."
+                },
+                persistedPopoutWindowIds: {
+                    description: "IDs de canal de las ventanas emergentes persistidas."
                 }
             }
         },

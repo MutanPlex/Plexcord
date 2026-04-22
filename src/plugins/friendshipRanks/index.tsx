@@ -125,8 +125,9 @@ function shouldShowBadge(userId: string, requirement: number, index: number) {
 
 function getBadgesToApply() {
     const ranks = getRanks();
-    const badgesToApply: ProfileBadge[] = ranks.map((rank, index) => {
+    return ranks.map((rank, index) => {
         return ({
+            id: `friendship_ranks_badge_${index}`,
             description: rank.title,
             iconSrc: rank.iconSrc,
             position: BadgePosition.END,
@@ -140,8 +141,6 @@ function getBadgesToApply() {
             }
         });
     });
-
-    return badgesToApply;
 }
 
 let currentBadges: ProfileBadge[] = [];

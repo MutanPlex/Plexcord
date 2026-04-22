@@ -9420,9 +9420,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Åbn i sidebjælke"
             },
+            channelTitle: {
+                chat: "Chat",
+                dm: "DM"
+            },
             modal: {
                 switch: "Skift kanaler",
                 popout: "Åbn i nyt vindue",
+                popoutClose: "Luk chatvindue",
+                popoutFor: "Åbn i nyt vindue for {{channel}}",
                 close: "Luk sidebjælke"
             },
             option: {
@@ -9430,9 +9436,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Husk sidebjælke",
                     description: "Behold sidebjælken åben efter genstart af Discord"
                 },
+                persistPopoutWindows: {
+                    label: "Husk chatvinduer",
+                    description: "Gendan åbne chatvinduer efter genstart af Discord"
+                },
+                popoutAlwaysOnTop: {
+                    label: "Altid øverst",
+                    description: "Hold chatvinduer oven på alle andre vinduer."
+                },
                 patchCommunity: {
                     label: "Patch Community",
                     description: "Retter fejl i Community-funktioner som Channel Browser eller Medlems-fanen."
+                },
+                persistedPopoutWindowIds: {
+                    description: "Gemte popout-chat kanal-id'er."
                 }
             }
         },

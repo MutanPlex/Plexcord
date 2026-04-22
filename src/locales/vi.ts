@@ -9420,9 +9420,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Mở trò chuyện thanh bên"
             },
+            channelTitle: {
+                chat: "Trò chuyện",
+                dm: "DM"
+            },
             modal: {
                 switch: "Chuyển kênh",
                 popout: "Trò chuyện bật ra",
+                popoutClose: "Đóng trò chuyện bật ra",
+                popoutFor: "Trò chuyện bật ra cho {{channel}}",
                 close: "Đóng trò chuyện ở thanh bên"
             },
             option: {
@@ -9430,9 +9436,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Trò chuyện trên thanh bên liên tục",
                     description: "Giữ cuộc trò chuyện ở thanh bên luôn mở khi Discord khởi động lại"
                 },
+                persistPopoutWindows: {
+                    label: "Duy trì trò chuyện bật ra",
+                    description: "Khôi phục các trò chuyện bật ra đang mở sau khi Discord khởi động lại"
+                },
+                popoutAlwaysOnTop: {
+                    label: "Luôn ở trên cùng",
+                    description: "Giữ các cửa sổ trò chuyện bật ra ở trên tất cả các cửa sổ khác."
+                },
                 patchCommunity: {
                     label: "Cộng đồng vá lỗi",
                     description: "Các tính năng vá lỗi như tab Trình duyệt kênh hoặc Thành viên mà máy chủ cộng đồng có."
+                },
+                persistedPopoutWindowIds: {
+                    description: "ID kênh của các trò chuyện bật ra đã lưu."
                 }
             }
         },

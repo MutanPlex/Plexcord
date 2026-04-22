@@ -9,7 +9,7 @@ import { definePluginSettings } from "@api/Settings";
 import { Flux as TFlux } from "@plexcord/discord-types";
 import { proxyLazy } from "@utils/lazy";
 import { OptionType } from "@utils/types";
-import { ChannelActionCreators, Flux as FluxWP, FluxDispatcher } from "@webpack/common";
+import { ChannelActionCreators, Flux as FluxWP, FluxDispatcher, PopoutActions, PopoutWindowStore } from "@webpack/common";
 interface IFlux extends TFlux {
     PersistedStore: TFlux["Store"];
 }
@@ -20,6 +20,35 @@ export const settings = definePluginSettings({
         description: () => t(plugin.sidebarChat.option.persistSidebar.description),
         type: OptionType.BOOLEAN,
         default: true,
+    },
+    persistPopoutWindows: {
+        label: () => t(plugin.sidebarChat.option.persistPopoutWindows.label),
+        type: OptionType.BOOLEAN,
+        description: () => t(plugin.sidebarChat.option.persistPopoutWindows.description),
+        default: true,
+        onChange: value => {
+            if (!value) {
+                settings.store.persistedPopoutWindowIds = [];
+                return;
+            }
+
+            syncPersistedPopoutWindows();
+        }
+    },
+    persistedPopoutWindowIds: {
+        type: OptionType.CUSTOM,
+        description: () => t(plugin.sidebarChat.option.persistedPopoutWindowIds.description),
+        default: [] as string[],
+        hidden: true
+    },
+    popoutAlwaysOnTop: {
+        label: () => t(plugin.sidebarChat.option.popoutAlwaysOnTop.label),
+        type: OptionType.BOOLEAN,
+        description: () => t(plugin.sidebarChat.option.popoutAlwaysOnTop.description),
+        default: true,
+        onChange: value => {
+            setAlwaysOnTopForOpenPopouts(value);
+        }
     },
     patchCommunity: {
         label: () => t(plugin.sidebarChat.option.patchCommunity.label),
@@ -90,3 +119,40 @@ export const SidebarStore = proxyLazy(() => {
 
     return store;
 });
+
+const WINDOW_PREFIX = "DISCORD_PC_SC-";
+
+export function getPopoutWindowKey(channelId: string) {
+    return `${WINDOW_PREFIX}${channelId}`;
+}
+
+export function getOpenPopoutWindowKeys() {
+    return PopoutWindowStore.getWindowKeys().filter(key => key.startsWith(WINDOW_PREFIX));
+}
+
+export function isPopoutWindowOpen(channelId: string) {
+    return PopoutWindowStore.getWindowOpen(getPopoutWindowKey(channelId));
+}
+
+export function getPersistedPopoutChannelIds() {
+    return settings.store.persistedPopoutWindowIds ?? [];
+}
+
+export function getOpenPopoutChannelIds() {
+    return getOpenPopoutWindowKeys().map(key => key.slice(WINDOW_PREFIX.length));
+}
+
+export function syncPersistedPopoutWindows() {
+    if (!settings.store.persistPopoutWindows) {
+        settings.store.persistedPopoutWindowIds = [];
+        return;
+    }
+
+    settings.store.persistedPopoutWindowIds = getOpenPopoutChannelIds();
+}
+
+export function setAlwaysOnTopForOpenPopouts(value: boolean) {
+    for (const windowKey of getOpenPopoutWindowKeys()) {
+        PopoutActions.setAlwaysOnTop(windowKey, value);
+    }
+}

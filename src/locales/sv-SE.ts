@@ -9420,9 +9420,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Öppna Sidebar Chat"
             },
+            channelTitle: {
+                chat: "Chatt",
+                dm: "DM"
+            },
             modal: {
                 switch: "Byt kanal",
                 popout: "Popout-chatt",
+                popoutClose: "Stäng popout-chatt",
+                popoutFor: "Popout-chatt för {{channel}}",
                 close: "Stäng sidofältchatt"
             },
             option: {
@@ -9430,9 +9436,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Fortsätt chatten i sidofältet",
                     description: "Håll sidofältschatten öppen under omstarter av Discord"
                 },
+                persistPopoutWindows: {
+                    label: "Behåll popout-chattar",
+                    description: "Återställ öppna popout-chattar efter omstart av Discord"
+                },
+                popoutAlwaysOnTop: {
+                    label: "Popout alltid överst",
+                    description: "Håll popout-chattfönster ovanför alla andra."
+                },
                 patchCommunity: {
                     label: "Patch Community",
                     description: "Lagra funktioner som kanalbläddraren eller fliken Medlemmar som communityservrar har."
+                },
+                persistedPopoutWindowIds: {
+                    description: "Sparade kanal-ID:n för popout-chattar."
                 }
             }
         },

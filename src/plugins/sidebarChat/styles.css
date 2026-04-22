@@ -5,3 +5,12 @@
 .pc-sidebar-chat-popout {
     align-items: stretch;
 }
+
+.pc-sidebar-chat-window {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    min-width: 0;
+    overflow: hidden;
+    width: 100%;
+}

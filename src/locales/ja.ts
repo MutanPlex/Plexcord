@@ -9420,9 +9420,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "サイドバーチャットを開く"
             },
+            channelTitle: {
+                chat: "チャット",
+                dm: "DM"
+            },
             modal: {
                 switch: "チャンネルを切り替える",
                 popout: "ポップアウトチャット",
+                popoutClose: "ポップアウトチャットを閉じる",
+                popoutFor: "「{{channel}}」をポップアウトチャットで開く",
                 close: "サイドバーチャットを閉じる"
             },
             option: {
@@ -9430,9 +9436,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "サイドバーチャットを維持する",
                     description: "Discordを再起動してもサイドバーチャットを開いたままにします"
                 },
+                persistPopoutWindows: {
+                    label: "ポップアウトを保持する",
+                    description: "Discord の再起動後に開いていたポップアウトチャットを復元します"
+                },
+                popoutAlwaysOnTop: {
+                    label: "常に最前面",
+                    description: "ポップアウトチャットのウィンドウを常に他のウィンドウより前面に表示します。"
+                },
                 patchCommunity: {
                     label: "パッチコミュニティ",
                     description: "コミュニティ サーバーが備えているチャネル ブラウザやメンバー タブなどの機能にパッチを適用します。"
+                },
+                persistedPopoutWindowIds: {
+                    description: "保持するポップアウトチャットのチャンネル ID。"
                 }
             }
         },

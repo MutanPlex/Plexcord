@@ -9420,9 +9420,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "In Seitenleiste öffnen"
             },
+            channelTitle: {
+                chat: "Chat",
+                dm: "DM"
+            },
             modal: {
                 switch: "Kanäle wechseln",
                 popout: "Chat auslagern (Popout)",
+                popoutClose: "Popout-Chat schließen",
+                popoutFor: "Chat auslagern (Popout) für {{channel}}",
                 close: "Seitenleisten-Chat schließen"
             },
             option: {
@@ -9430,9 +9436,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Seitenleiste beibehalten",
                     description: "Hält den Seitenleisten-Chat auch nach einem Discord-Neustart offen."
                 },
+                persistPopoutWindows: {
+                    label: "Popout-Chats beibehalten",
+                    description: "Stellt offene Popout-Chats nach einem Discord-Neustart wieder her."
+                },
+                popoutAlwaysOnTop: {
+                    label: "Popouts immer im Vordergrund",
+                    description: "Hält Popout-Chat-Fenster über allen anderen Fenstern."
+                },
                 patchCommunity: {
                     label: "Community-Patch",
                     description: "Patcht Funktionen wie den Kanal-Browser oder Mitglieder-Tab auf Community-Servern."
+                },
+                persistedPopoutWindowIds: {
+                    description: "Persistierte Popout-Chat-Kanal-IDs."
                 }
             }
         },

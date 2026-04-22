@@ -43,6 +43,7 @@ function shouldShowBirthdayBadge(info: BadgeUserArgs) {
 }
 
 const birthdayBadge: ProfileBadge = {
+    id: "birthday_badge",
     component: getBirthdayBadgeComponent,
     shouldShow: shouldShowBirthdayBadge,
 };

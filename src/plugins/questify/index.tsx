@@ -1387,14 +1387,6 @@ export default definePlugin({
 
     patches: [
         {
-            // Hides the notice in the gift inventory that Quests have been relocated to the Discovery tab.
-            find: "quests-wumpus-hikes-mountain-transparent-background",
-            replacement: {
-                match: /return(?=\(0,\i.\i\)\("div",{className:)/,
-                replace: "return $self.shouldHideGiftInventoryRelocationNotice()?null:"
-            }
-        },
-        {
             // Hides Quests tab in the Discovery page.
             find: "GLOBAL_DISCOVERY_SIDEBAR},",
             replacement: [
@@ -1416,16 +1408,20 @@ export default definePlugin({
         },
         {
             // Hides the sponsored banner on the Quests page.
-            find: "{isInDiscoverQuestHomeTab:",
+            find: "resetSortingFiltering(),requestAnimationFrame",
             group: true,
             replacement: [
                 {
-                    match: /(?<=scrollToQuest\(\i\)\}\)\},\[\]\);)/,
+                    match: /(?=let{topLevelRoute)/,
                     replace: "const shouldHideSponsoredQuestBanner=$self.shouldHideSponsoredQuestBanner();"
                 },
                 {
-                    match: /(?<=return null;if\(\i)(\).{0,30}?null!=\i)/,
-                    replace: "&&!shouldHideSponsoredQuestBanner$1&&!shouldHideSponsoredQuestBanner"
+                    match: /(?<=\{onAssetLoad:\i,onQuestCtaClick:\i)(?=\}\),)/,
+                    replace: ",shouldHideSponsoredQuestBanner"
+                },
+                {
+                    match: /(?<=(\i),isLoading:(\i)}=\(0,\i.\i\)\(\);)/,
+                    replace: "if(arguments[0].shouldHideSponsoredQuestBanner){$1=null;$2=false;};"
                 }
             ]
         },
@@ -1816,7 +1812,7 @@ export default definePlugin({
                 },
                 {
                     match: /(?<="primary",onClick:)(\i)/,
-                    replace: "()=>{!$self.processQuestForAutoComplete(arguments[0].quest,true)&&$1}"
+                    replace: "()=>{!$self.processQuestForAutoComplete(arguments[0].quest,true)&&$1()}"
                 }
             ]
         },
@@ -1831,7 +1827,7 @@ export default definePlugin({
         {
             // Sets intervals to progress Play Game Quests in the background.
             // Triggers if a Quest has already been started but was interrupted, such as by a reload.
-            find: "WATCH_VIDEO,skipEnrollmentCheck:!0})",
+            find: "),handleOpenExternalLink:",
             group: true,
             replacement: [
                 {
@@ -2003,7 +1999,7 @@ export default definePlugin({
 
             clearInterval(intervalData.progressTimeout);
             clearTimeout(intervalData.rerenderTimeout);
-            activeQuestIntervals.delete(questId);
         });
+        activeQuestIntervals.clear();
     }
 });

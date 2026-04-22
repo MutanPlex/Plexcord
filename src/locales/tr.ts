@@ -9420,9 +9420,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Kenar Çubuğu Sohbetini Aç"
             },
+            channelTitle: {
+                chat: "Sohbet",
+                dm: "DM"
+            },
             modal: {
                 switch: "Kanalları Değiştir",
                 popout: "Sohbeti Açılır Pencere Olarak Aç",
+                popoutClose: "Açılır Pencere Sohbetini Kapat",
+                popoutFor: "{{channel}} için Sohbeti Açılır Pencere Olarak Aç",
                 close: "Kenar Çubuğu Sohbetini Kapat"
             },
             option: {
@@ -9430,9 +9436,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Kenar Çubuğu Sohbetini Kalıcı Yap",
                     description: "Discord yeniden başlatıldığında kenar çubuğu sohbetinin açık kalmasını sağlar"
                 },
+                persistPopoutWindows: {
+                    label: "Açılır Pencere Sohbetlerini Kalıcı Yap",
+                    description: "Discord yeniden başlatıldığında açık açılır pencere sohbetlerini geri yükler"
+                },
+                popoutAlwaysOnTop: {
+                    label: "Açılır Pencere Sohbetlerini Üstte Tut",
+                    description: "Açılır pencere sohbet pencerelerini diğer tüm pencerelerin üzerinde tutar."
+                },
                 patchCommunity: {
                     label: "Community Yamasını Uygula",
                     description: "Topluluk sunucularındaki Kanal Tarayıcı veya Üyeler sekmesi gibi öğeleri yamalar."
+                },
+                persistedPopoutWindowIds: {
+                    description: "Kalıcı açılır pencere sohbet kanal ID'leri."
                 }
             }
         },

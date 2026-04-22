@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { NavContextMenuPatchCallback } from "@api/ContextMenu";
+import { findGroupChildrenByChildId, NavContextMenuPatchCallback } from "@api/ContextMenu";
 import { plugin, t } from "@api/i18n";
 import { definePluginSettings } from "@api/Settings";
 import { BaseText } from "@components/BaseText";
@@ -131,42 +131,35 @@ const settings = definePluginSettings({
             { label: () => t(plugin.viewRaw.option.clickMethod.left), value: "Left", default: true },
             { label: () => t(plugin.viewRaw.option.clickMethod.right), value: "Right" }
         ]
+    },
+    messageContextMenu: {
+        description: "Show in message context menu",
+        type: OptionType.BOOLEAN,
+        default: false
     }
 });
 
 function MakeContextCallback(name: "Guild" | "Role" | "User" | "Channel" | "Message"): NavContextMenuPatchCallback {
     return (children, props) => {
-        let value = props[name.toLowerCase()];
+        const value = props[name.toLowerCase()];
         if (!value) return;
         if (props.label === getIntlMessage("CHANNEL_ACTIONS_MENU_LABEL")) return; // random shit like notification settings
+        const isMessage = name === "Message";
+        if (isMessage && !settings.store.messageContextMenu) return;
 
-        const lastChild = children.at(-1);
-        let sliceIndex = -1;
-        if (lastChild?.props?.children?.length > 0) {
-            if (lastChild?.props.children[0]?.key?.startsWith("devmode-copy-id")) {
-                children = lastChild?.props.children;
-                sliceIndex = 0;
-            }
-        } else if (lastChild?.props?.children?.key?.startsWith("devmode-copy-id")) {
-            const p = lastChild.props;
-            if (!Array.isArray(p.children))
-                p.children = [p.children];
+        // typescript parser goes crazy if this is inline
+        const id = `pc-view-${name.toLowerCase()}-raw`;
+        const action = isMessage
+            ? () => openViewRawModalMessage(value)
+            : () => openViewRawModal(JSON.stringify(value, null, 4), name);
 
-            children = p.children;
-            sliceIndex = 0;
-        }
+        const devContainer = findGroupChildrenByChildId(`devmode-copy-id-${value.id}`, children);
 
-        let messageContent = undefined;
-        if (name === "Message") {
-            value = cleanMessage(value as Message);
-            messageContent = value.content;
-        }
-
-        children.splice(sliceIndex, 0,
+        (devContainer ?? children).splice(-1, 0,
             <Menu.MenuItem
-                id={`pc-view-${name.toLowerCase()}-raw`}
+                id={id}
                 label={t(plugin.viewRaw.context.view)}
-                action={() => openViewRawModal(JSON.stringify(value, null, 4), name, messageContent)}
+                action={action}
                 icon={CopyIcon}
             />
         );

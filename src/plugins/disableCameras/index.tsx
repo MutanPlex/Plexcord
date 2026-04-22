@@ -17,7 +17,7 @@ export default definePlugin({
 
     patches: [
         {
-            find: ".identifyStartTime));",
+            find: ".identifyStartTime))",
             replacement: {
                 match: /\i\.self_video\|\|!1/g,
                 replace: "false"

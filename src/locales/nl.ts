@@ -9420,9 +9420,15 @@ const translations: MatchStructure<typeof enTranslations> = {
             context: {
                 label: "Open zijbalkchat"
             },
+            channelTitle: {
+                chat: "Chat",
+                dm: "DM"
+            },
             modal: {
                 switch: "Schakel tussen kanalen",
                 popout: "Pop-out-chat",
+                popoutClose: "Pop-out-chat sluiten",
+                popoutFor: "Pop-out-chat voor {{channel}}",
                 close: "Sluit de zijbalkchat"
             },
             option: {
@@ -9430,9 +9436,20 @@ const translations: MatchStructure<typeof enTranslations> = {
                     label: "Blijf zijbalkchat houden",
                     description: "Houd de zijbalkchat open tijdens het opnieuw opstarten van Discord"
                 },
+                persistPopoutWindows: {
+                    label: "Pop-out-chats behouden",
+                    description: "Herstel geopende pop-out-chats na het opnieuw opstarten van Discord"
+                },
+                popoutAlwaysOnTop: {
+                    label: "Altijd op de voorgrond",
+                    description: "Houd pop-out-chatvensters boven alle andere vensters."
+                },
                 patchCommunity: {
                     label: "Patch-gemeenschap",
                     description: "Patch functies zoals de Kanaalbrowser of het tabblad Leden die communityservers hebben."
+                },
+                persistedPopoutWindowIds: {
+                    description: "Opgeslagen kanaal-ID's voor pop-out-chats."
                 }
             }
         },

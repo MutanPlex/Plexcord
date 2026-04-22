@@ -13,3 +13,7 @@
 .pc-charCounter-count {
     transition: color 0.3s ease;
 }
+
+.pc-charCounter-selected {
+    color: #4285F4
+}
