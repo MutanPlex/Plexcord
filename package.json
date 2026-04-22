@@ -1,7 +1,7 @@
 {
     "name": "plexcord",
     "private": "true",
-    "version": "1.21.3",
+    "version": "1.21.4",
     "description": "Taking Discord to the Next Level!",
     "homepage": "https://github.com/MutanPlex/Plexcord#readme",
     "bugs": {
@@ -92,7 +92,7 @@
         "typescript-eslint": "^8.58.1",
         "typescript-transform-paths": "^3.5.6"
     },
-    "packageManager": "pnpm@10.32.1",
+    "packageManager": "pnpm@10.33.1",
     "pnpm": {
         "patchedDependencies": {
             "@types/less@3.0.8": "patches/@types__less@3.0.8.patch",
@@ -118,7 +118,7 @@
             "@types/react": "19.2.14",
             "@types/react-dom": "19.2.3",
             "jszip": "^3.10.1",
-            "dompurify": "^3.3.2",
+            "dompurify": "^3.4.0",
             "@eslint/plugin-kit@<0.3.4": ">=0.3.4",
             "@isaacs/brace-expansion": ">=6.0.0",
             "minimatch": ">=10.2.3",

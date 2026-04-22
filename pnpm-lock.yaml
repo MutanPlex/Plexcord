@@ -8,7 +8,7 @@ overrides:
   '@types/react': 19.2.14
   '@types/react-dom': 19.2.3
   jszip: ^3.10.1
-  dompurify: ^3.3.2
+  dompurify: ^3.4.0
   '@eslint/plugin-kit@<0.3.4': '>=0.3.4'
   '@isaacs/brace-expansion': '>=6.0.0'
   minimatch: '>=10.2.3'
@@ -1186,9 +1186,8 @@ packages:
     resolution: {integrity: sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==}
     engines: {node: '>=0.10.0'}
 
-  dompurify@3.3.2:
-    resolution: {integrity: sha512-6obghkliLdmKa56xdbLOpUZ43pAR6xFy1uOrxBaIDjT+yaRuuybLjGS9eVBoSR/UPU5fq3OXClEHLJNGvbxKpQ==}
-    engines: {node: '>=20'}
+  dompurify@3.4.1:
+    resolution: {integrity: sha512-JahakDAIg1gyOm7dlgWSDjV4n7Ip2PKR55NIT6jrMfIgLFgWo81vdr1/QGqWtFNRqXP9UV71oVePtjqS2ebnPw==}
 
   dot-case@3.0.4:
     resolution: {integrity: sha512-Kv5nKlh6yRrdrGvxeJ2e5y2eRUpkUosIW4A2AS38zwSz27zu7ufDwQPi5Jhs3XAlGNetl3bmnGhQsMtkKJnj3w==}
@@ -3478,7 +3477,7 @@ snapshots:
     dependencies:
       esutils: 2.0.3
 
-  dompurify@3.3.2:
+  dompurify@3.4.1:
     optionalDependencies:
       '@types/trusted-types': 2.0.7
 
@@ -4450,7 +4449,7 @@ snapshots:
 
   monaco-editor@0.55.1:
     dependencies:
-      dompurify: 3.3.2
+      dompurify: 3.4.1
       marked: 14.0.0
 
   ms@2.1.3: {}
