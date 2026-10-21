@@ -13,6 +13,7 @@ type PolicyMap = Record<string, string[]>;
 export const ConnectSrc = ["connect-src"];
 export const ImageSrc = [...ConnectSrc, "img-src", "media-src"];
 export const CssSrc = ["style-src", "font-src"];
+export const ConnectAndCssSrc = [...ConnectSrc, ...CssSrc];
 export const ImageAndMediaSrc = [...ImageSrc, "media-src"];
 export const ImageAndCssSrc = [...ImageSrc, ...CssSrc];
 export const ImageScriptsAndCssSrc = [...ImageAndCssSrc, "script-src", "worker-src"];
@@ -39,9 +40,9 @@ export const CspPolicies: PolicyMap = {
     "*.githack.com": ImageAndCssSrc, // githack (namely raw.githack.com), used by some themes
     "jsdelivr.net": ImageAndCssSrc, // jsDelivr, used by very few themes
 
-    "fonts.google.com": CssSrc, // Google Fonts, used by many themes
-    "fonts.googleapis.com": CssSrc, // Google Fonts, used by many themes
-    "fonts.gstatic.com": CssSrc, // Google Fonts, used by many themes
+    "fonts.google.com": ConnectAndCssSrc, // Google Fonts, used by many themes
+    "fonts.googleapis.com": ConnectAndCssSrc, // Google Fonts, used by many themes
+    "fonts.gstatic.com": ConnectAndCssSrc, // Google Fonts, used by many themes
 
     "i.imgur.com": ImageSrc, // Imgur, used by some themes
     "i.ibb.co": ImageSrc, // ImgBB, used by some themes

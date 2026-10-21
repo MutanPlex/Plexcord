@@ -178,6 +178,7 @@ const UserContext: NavContextMenuPatchCallback = (children, { user }: UserContex
                 label={label}
                 action={() => toggleFollow(user.id)}
                 icon={props => Icon(isFollowed, props)}
+                leadingAccessory={{ type: "icon", icon: props => Icon(isFollowed, props) }}
             />
         </Menu.MenuGroup>
     ));
