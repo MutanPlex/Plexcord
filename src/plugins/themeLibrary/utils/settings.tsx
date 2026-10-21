@@ -18,7 +18,7 @@ import { Button, showToast } from "@webpack/common";
 
 import { authorizeUser, deauthorizeUser } from "./auth";
 
-const cl = classNameFactory("vce-");
+const cl = classNameFactory("pce-");
 
 export const settings = definePluginSettings({
     hideWarningCard: {
@@ -70,7 +70,7 @@ export const settings = definePluginSettings({
                     <HeadingSecondary style={{ marginTop: 8, marginBottom: 8 }}>{t(plugin.themeLibrary.text.themeRemoval)}</HeadingSecondary>
                     <Paragraph style={{ marginTop: 0, marginBottom: 8 }}> {t(plugin.themeLibrary.text.allThemeAuthorsAre)}</Paragraph>
                     <div className={cl("button-grid")}>
-                        <Button onClick={() => PlexcordNative.native.openExternal("https://github.com/Faf4a/plugins/issues/new?labels=removal&projects=&template=request_removal.yml&title=Theme+Removal")}>
+                        <Button onClick={() => PlexcordNative.native.openExternal("https://github.com/Plexcord/themes.plexcord.club/issues/new?labels=removal&projects=&template=request_removal.yml&title=Theme+Removal")}>
                             {t(plugin.themeLibrary.text.requestRemoval)} <OpenExternalIcon height={16} width={16} />
                         </Button>
                     </div>

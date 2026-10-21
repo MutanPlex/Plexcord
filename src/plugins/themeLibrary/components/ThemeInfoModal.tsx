@@ -91,7 +91,7 @@ export const ThemeInfoModal: React.FC<ThemeInfoModalProps> = ({ author, theme, .
                                     <Paragraph style={{ padding: "8px" }}>
                                         <div style={{ display: "flex", flexDirection: "column" }}>
                                             <p>{t(plugin.themeLibrary.text.aThemeWithThe)} <b>{t(plugin.themeLibrary.text.alreadyExists)}</b> {t(plugin.themeLibrary.text.inYourThemesDirectory)}</p>
-                                            <div className="vce-overwrite-modal">
+                                            <div className="pce-overwrite-modal">
                                                 <code style={{ wordWrap: "break-word" }}>
                                                     {fileName}
                                                 </code>
@@ -217,7 +217,7 @@ export const ThemeInfoModal: React.FC<ThemeInfoModalProps> = ({ author, theme, .
                             <Heading style={{ marginTop: "10px" }}>{t(plugin.themeLibrary.text.tags)}</Heading>
                             <Paragraph>
                                 {tags.map(tag => (
-                                    <span className="vce-theme-info-tag" key={"vce-theme-info-tag"}>
+                                    <span className="pce-theme-info-tag" key={"pce-theme-info-tag"}>
                                         {tag}
                                     </span>
                                 ))}
