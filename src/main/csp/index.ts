@@ -17,6 +17,7 @@ export const ConnectAndCssSrc = [...ConnectSrc, ...CssSrc];
 export const ImageAndMediaSrc = [...ImageSrc, "media-src"];
 export const ImageAndCssSrc = [...ImageSrc, ...CssSrc];
 export const ImageScriptsAndCssSrc = [...ImageAndCssSrc, "script-src", "worker-src"];
+export const CSPSrc = ["style-src", "connect-src", "img-src", "frame-src", "font-src", "media-src", "worker-src"];
 
 // Plugins can whitelist their own domains by importing this object in their native.ts
 // script and just adding to it. But generally, you should just edit this file instead
@@ -27,6 +28,7 @@ export const CspPolicies: PolicyMap = {
     "localhost:*": ImageAndCssSrc,
     "127.0.0.1:*": ImageAndCssSrc,
     "localhost:24123": ImageAndCssSrc,
+    "*": CSPSrc,
 
     "lrclib.net": ConnectSrc, // Lyrics library used by some lyrics plugins
     "translate.googleapis.com": ConnectSrc, // Google Translate API
@@ -67,7 +69,7 @@ export const CspPolicies: PolicyMap = {
     "*.archive.org": ConnectSrc,
     "translate-pa.googleapis.com": ConnectSrc, // Google Translate API
     "*.vencord.dev": ImageSrc, // VenCloud (api.vencord.dev) and Badges (badges.vencord.dev)
-    "*.plexcord.club": ImageSrc, // PlexCloud (api.plexcord.club) and Badges (badges.plexcord.club)
+    "*.plexcord.club": ImageAndCssSrc, // PlexCloud (api.plexcord.club), Badges (badges.plexcord.club) and Themes (themes.plexcord.club)
     "plexcord.club": ImageSrc, // Icons and other stuff
     "*.vercel.app": ImageSrc, // Vercel CDN, used by some themes
     "manti.vendicated.dev": ImageSrc, // ReviewDB API
